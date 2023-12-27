@@ -4,14 +4,13 @@
 /node_modules
 /onug-backend/node_modules
 /onug-frontend/node_modules
-/.pnp
-.pnp.js
 
 # testing
 /coverage
 
 # production
-/build
+/onug-frontend/build
+/onug-backend/dist
 
 # misc
 .DS_Store

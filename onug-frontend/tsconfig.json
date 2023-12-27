@@ -10,7 +10,6 @@
       "@data/*": ["src/data/*"],
       "@layouts/*": ["src/layouts/*"],
       "@store/*": ["src/store/*"],
-      "@texts/*": ["src/utils/actionUtils/*"],
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]
     },

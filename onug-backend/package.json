@@ -4,9 +4,10 @@
   "description": "One Night Ultimate Werewolf - Backend",
   "author": "Rika",
   "license": "MIT",
-  "main": "server.js",
+  "main": "server.ts",
   "scripts": {
-    "start": "node server.js"
+    "start": "node ./dist/server.js",
+    "build": "tsc"
   },
   "engines": {
     "node": ">=14.0.0"
@@ -14,5 +15,13 @@
   "keywords": [
     "one-night-ultimate-werewolf",
     "backend"
-  ]
+  ],
+  "devDependencies": {
+    "@types/node": "^20.10.5",
+    "@types/uuid": "^9.0.7",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "uuid": "^9.0.1"
+  }
 }
