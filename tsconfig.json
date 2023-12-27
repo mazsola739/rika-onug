@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "baseUrl": "./src",
+    "paths": {
+      "@App/*": ["src/App/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@constant/*": ["src/constant/*"],
+      "@data/*": ["src/data/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@store/*": ["src/store/*"],
+      "@texts/*": ["src/utils/actionUtils/*"],
+      "@types/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"]
+    },
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": true,
+    "module": "es6",
+    "moduleResolution": "node",
+    "downlevelIteration": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react-jsx"
+  },
+  "include": ["src", "src/declaration.d.ts"],
+  "exclude": ["node_modules", "src/**/*.spec.ts"]
+}
