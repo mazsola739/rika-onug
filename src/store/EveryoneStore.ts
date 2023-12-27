@@ -1,8 +1,8 @@
 import { BASE_TIME, everyone } from 'constant'
 import { RoleActionType } from 'types'
-import { duskPhaseStore } from './DuskPhaseStore'
-import { twilightPhaseStore } from './TwilightPhaseStore'
-import { nightPhaseStore } from './NightPhaseStore'
+import { duskPhaseStore } from './phaseStores/DuskPhaseStore'
+import { twilightPhaseStore } from './phaseStores/TwilightPhaseStore'
+import { nightPhaseStore } from './phaseStores/NightPhaseStore'
 import { actionStoreUtils } from 'utils'
 import { selectedDeckStore } from 'store'
 

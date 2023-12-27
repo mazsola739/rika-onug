@@ -1,0 +1,8 @@
+.div1 { 
+    grid-area: 1 / 1 / 2 / 6;
+    display: flex; 
+}
+.div2 { 
+    grid-area: 2 / 1 / 4 / 5; 
+    display: flex; 
+}

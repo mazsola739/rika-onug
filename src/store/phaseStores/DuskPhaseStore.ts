@@ -1,5 +1,5 @@
 import { ActionCardType, RoleActionType } from 'types'
-import * as ActionStores from './ActionStore'
+import * as ActionStores from '../actionStores'
 import { selectedDeckStore } from 'store'
 import { actionStoreUtils } from 'utils'
 
