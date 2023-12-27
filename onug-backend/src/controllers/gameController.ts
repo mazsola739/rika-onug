@@ -7,7 +7,7 @@ const cards: Card[] = [];
 
 export const createRoom = (selectedCardIds: number[]): Room => {
   const id = uuidv4();
-  const maxPlayers = selectedCardIds.length;
+  const maxPlayers = selectedCardIds.length; //TODO not from length
   const selectedCards = cards.filter((card) => selectedCardIds.includes(card.id));
   const room: Room = {
     id,
