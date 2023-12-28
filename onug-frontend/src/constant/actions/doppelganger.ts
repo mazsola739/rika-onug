@@ -1,6 +1,6 @@
 //TODO
 
-export const doppelganger = {
+export const doppelganger: Record<string, string> = {
   doppelganger_wake_text:
     "DOPPELGANGER, wake up and look at another player's card. You are now that role. If your new role has a night action, do it now.",
   doppelganger_close_text: 'DOPPELGANGER, close your eyes.',

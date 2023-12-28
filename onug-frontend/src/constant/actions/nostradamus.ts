@@ -1,4 +1,4 @@
-export const nostradamus = {
+export const nostradamus: Record<string, string> = {
   nostradamus_wake_text:
     "NOSTRADAMUS, wake up and look at up to three cards. If you see any role that isn't on the villager team, stop. The last card you look at is the team you are on. Tap that card in the app.",
   nostradamus_close_text: 'NOSTRADAMUS, close your eyes.',

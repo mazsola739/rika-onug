@@ -1,4 +1,4 @@
-export const roles = {
+export const roles: Record<string, string> = {
   role_alien: 'ALIEN',
   role_aliens: 'ALIENS',
   role_alphawolf: 'ALPHA WOLF',

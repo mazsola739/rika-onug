@@ -1,4 +1,4 @@
-export const leader = {
+export const leader: Record<string, string> = {
   leader_wake_text:
     'LEADER, wake up. ALIENS, stick out a thumb-like appendage.',
   leader_alienthumbaway_text: 'ALIENS, put your thumb-like appendage away.',

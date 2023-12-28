@@ -1,4 +1,4 @@
-export const voodoolou = {
+export const voodoolou: Record<string, string> = {
   voodoolou_wake_1_text:
     'VOODOO LOU, wake up. You may do that voodoo that you do by looking at one of the center cards.',
   voodoolou_wake_2_text:

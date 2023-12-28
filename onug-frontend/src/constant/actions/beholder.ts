@@ -1,4 +1,4 @@
-export const beholder = {
+export const beholder: Record<string, string> = {
   beholder_seer_wake_text:
     "BEHOLDER, wake up. SEER, stick out your thumb. BEHOLDER, you may view the Seer's card.",
   beholder_apprenticeseer_wake_text:

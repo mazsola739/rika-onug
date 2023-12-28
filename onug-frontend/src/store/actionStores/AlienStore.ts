@@ -10,7 +10,7 @@ import { cowStore } from './CowStore'
 import { actionStoreUtils } from 'utils'
 import { selectedDeckStore } from 'store'
 
-const { isCardSelectedById, generateTimedAction, pickRandomPlayers } =
+const { generateTimedAction, isCardSelectedById, pickRandomPlayers } =
   actionStoreUtils
 
 class AlienStore {

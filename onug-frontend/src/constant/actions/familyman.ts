@@ -1,4 +1,4 @@
-export const familyman_wake = {
+export const familyman_wake: Record<string, string> = {
   familyman_1pleft_text:
     'FAMILY MAN, wake up and look at the player to your left.',
   familyman_1pright_text:
@@ -21,7 +21,7 @@ export const familyman_wake = {
     'FAMILY MAN, wake up and look at two players on each side of you.',
 }
 
-export const familyman_close = {
+export const familyman_close: Record<string, string> = {
   familyman_is_end_text:
     'He is now part of your family. Keep him and yourself alive in order to win. FAMILY MAN, close your eyes.',
   familyman_are_end_text:

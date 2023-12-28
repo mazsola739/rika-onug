@@ -5,8 +5,8 @@ import { actionStoreUtils } from 'utils'
 
 const {
   generateTimedAction,
-  isCardSelectedById,
   getRandomPsychicActionAndText,
+  isCardSelectedById,
 } = actionStoreUtils
 
 class PsychicStore {

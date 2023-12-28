@@ -1,9 +1,9 @@
-export const empath = {
+export const empath: Record<string, string> = {
   empath_wake_text: 'EMPATH, wake up.',
   empath_close_text: 'Everyone, put your hands away. EMPATH, close your eyes.',
 }
 
-export const random_empath = {
+export const random_empath: Record<string, string> = {
   empath_action1_text:
     'keep your eyes closed and point in the direction of the player you think is the Empath.',
   empath_action2_text:

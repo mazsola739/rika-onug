@@ -1,4 +1,4 @@
-export const time = {
+export const time: Record<string, string> = {
   timertext_prefix: '(PAUSE for ',
   timertext_postfix: ' seconds)',
   timerscreen_label_1_text: 'TIME',

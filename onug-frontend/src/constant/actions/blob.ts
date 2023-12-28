@@ -1,10 +1,10 @@
-export const blob = {
+export const blob: Record<string, string> = {
   blob_is_end_text:
     'is now part of the Blob. Keep them and yourself alive in order to win.',
   blob_are_end_text:
     'are now part of the Blob. Keep them and yourself alive in order to win.',
 }
-export const random_blob = {
+export const random_blob: Record<string, string> = {
   blob_1pleft_text: 'BLOB, the player to your left',
   blob_1pright_text: 'BLOB, the player to your right',
   blob_eachside_text: 'BLOB, one player on each side of you',

@@ -3,7 +3,7 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-const { getRandomKeyFromObject, generateTimedAction, isCardSelectedById } =
+const { generateTimedAction, getRandomKeyFromObject, isCardSelectedById } =
   actionStoreUtils
 
 class ExposerStore {

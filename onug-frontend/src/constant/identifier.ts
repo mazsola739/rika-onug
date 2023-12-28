@@ -1,4 +1,4 @@
-export const identifier = {
+export const identifier: Record<string, string> = {
   identifier_everyone_text: 'Everyone',
   identifier_oddplayers_text: 'Odd Players',
   identifier_evenplayers_text: 'Even Players',
@@ -22,7 +22,7 @@ export const identifier = {
   identifier_yourself_text: 'Yourself',
 }
 
-export const identifier_player = {
+export const identifier_player: Record<string, string> = {
   identifier_player1_text: 'Player 1',
   identifier_player2_text: 'Player 2',
   identifier_player3_text: 'Player 3',

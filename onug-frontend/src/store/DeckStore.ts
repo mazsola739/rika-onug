@@ -9,8 +9,8 @@ const {
   createEmptyToken,
   getFilteredCardsForTeam,
   getOrderedTeams,
-  filterByExpansions,
   findById,
+  filterByExpansions,
 } = deckStoreUtils
 
 const { hero, village } = team

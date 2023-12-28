@@ -7,15 +7,15 @@ import { roles } from 'constant'
 
 const {
   containsById,
-  selectCard,
   deselectCard,
   determineTotalPlayers,
   handleAlphaWolf,
   handleTemptress,
+  hasSpecificRolesInDeck,
+  isMirrorManOrCopycatSelected,
   prohibitDeselectingSupervillain,
   prohibitDeselectingWerewolf,
-  isMirrorManOrCopycatSelected,
-  hasSpecificRolesInDeck,
+  selectCard,
 } = selectedDeckUtils
 
 class SelectedDeckStore {

@@ -4,7 +4,7 @@ import { zerbgroobStore } from './ZerbandgroobStore'
 import { selectedDeckStore } from 'store'
 import { actionStoreUtils } from 'utils'
 
-const { generateTimedAction, areAllCardsSelectedById, isCardSelectedById } =
+const { areAllCardsSelectedById, generateTimedAction, isCardSelectedById } =
   actionStoreUtils
 
 class LeaderStore {

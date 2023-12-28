@@ -1,4 +1,4 @@
-export const ripple = {
+export const ripple: Record<string, string> = {
   ripple_intro_text: 'There has been a ripple in the space-time continuum!',
 }
 

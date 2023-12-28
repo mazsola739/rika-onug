@@ -3,7 +3,7 @@ import * as ActionStores from '../actionStores'
 import { selectedDeckStore } from 'store'
 import { actionStoreUtils } from 'utils'
 
-const { isCardSelectedById, addRoleActions, areAnyCardsSelectedById } =
+const { addRoleActions, areAnyCardsSelectedById, isCardSelectedById } =
   actionStoreUtils
 
 class DuskPhaseStore {

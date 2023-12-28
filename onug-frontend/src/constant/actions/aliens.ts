@@ -1,11 +1,11 @@
-export const aliens = {
+export const aliens: Record<string, string> = {
   alien_wake_text: 'ALIENS, wake up and look around for other aliens.',
   alien_close_text: 'ALIENS, close your eyes.',
 
   alien_thumbaway_text: 'ALIENS, put your thumb away.',
 }
 
-export const random_aliens = {
+export const random_aliens: Record<string, string> = {
   alien_view_text: 'Each alien may secretly view a card from',
   alien_allview_text: 'All aliens together may view a card from',
   alien_stare_text: 'Just stare at each other',

@@ -1,4 +1,4 @@
-export const easteregg = {
+export const easteregg: Record<string, string> = {
   easteregg_really_text:
     'Really? You selected ALL the roles? I have better things to do, and you probably do too. Well, whatever, here you go.',
 

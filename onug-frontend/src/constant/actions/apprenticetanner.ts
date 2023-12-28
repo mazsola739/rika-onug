@@ -1,4 +1,4 @@
-export const apprenticetanner = {
+export const apprenticetanner: Record<string, string> = {
   apprenticetanner_wake_text:
     'APPRENTICE TANNER, wake up. Tanner, stick out your thumb so the Apprentice Tanner can see who you are.',
   tanner_thumbaway_text: 'Tanner, put your thumb away.',

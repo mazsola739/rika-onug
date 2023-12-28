@@ -1,9 +1,9 @@
-export const oracle = {
+export const oracle: Record<string, string> = {
   oracle_wake_text: 'ORACLE, wake up and answer the following question:',
   oracle_close_text: 'ORACLE, close your eyes.',
 }
 
-export const random_oracle = {
+export const random_oracle: Record<string, Record<string, string>> = {
   random_oracle_aliens: {
     oracle_alienteam_text: 'Would you like to join the Alien team?',
 

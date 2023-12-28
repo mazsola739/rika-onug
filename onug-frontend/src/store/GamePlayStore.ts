@@ -10,8 +10,8 @@ import { RoleActionType } from 'types'
 
 import { actionStoreUtils, gamePlayStoreUtils } from 'utils'
 
-const { getRandomJoke, generateTimedAction } = actionStoreUtils
-export const { addBasicAction } = gamePlayStoreUtils
+const { generateTimedAction, getRandomJoke } = actionStoreUtils
+const { addBasicAction } = gamePlayStoreUtils
 
 class GamePlayStore {
   actionTime: number

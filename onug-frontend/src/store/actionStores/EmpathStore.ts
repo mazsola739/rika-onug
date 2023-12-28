@@ -12,7 +12,7 @@ import { actionStoreUtils } from 'utils'
 
 //TODO review
 
-const { generateTimedAction, pickRandomPlayers, isCardSelectedById } =
+const { generateTimedAction, isCardSelectedById, pickRandomPlayers } =
   actionStoreUtils
 
 class EmpathStore {

@@ -10,7 +10,7 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-const { isCardSelectedById, areAnyCardsSelectedById, generateTimedAction } =
+const { areAnyCardsSelectedById, generateTimedAction, isCardSelectedById } =
   actionStoreUtils
 
 class DoppelgangerStore {

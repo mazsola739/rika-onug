@@ -1,4 +1,4 @@
-export const werewolves = {
+export const werewolves: Record<string, string> = {
   werewolves_wake_text: 'WEREWOLVES, wake up and look for other werewolves.',
   dreamwolf_wake_text:
     'WEREWOLVES, except for the Dreamwolf, wake up and look for other werewolves. Dreamwolf, stick out your thumb.',

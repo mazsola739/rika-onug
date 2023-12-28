@@ -6,9 +6,9 @@ import { alienIds, supervillainIds, wolfIds } from 'constant'
 
 const {
   addRoleActions,
+  areAllCardsSelectedById,
   areAnyCardsSelectedById,
   isCardSelectedById,
-  areAllCardsSelectedById,
 } = actionStoreUtils
 
 class NightPhaseStore {

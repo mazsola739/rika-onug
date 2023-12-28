@@ -1,5 +1,4 @@
-import { BASE_TIME, doppelganger } from 'constant'
-import { renfield } from 'constant/actions/renfield'
+import { BASE_TIME, doppelganger, renfield } from 'constant'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'

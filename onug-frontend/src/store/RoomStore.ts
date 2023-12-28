@@ -4,7 +4,7 @@ import { selectedDeckStore } from 'store'
 import { supervillainIdsToCheck, wolfIdsToCheck } from 'constant'
 import { roomStoreUtils } from 'utils'
 
-const { getRandomItemFromArray, filterCardsByIds } = roomStoreUtils
+const { filterCardsByIds, getRandomItemFromArray } = roomStoreUtils
 
 export class RoomStore {
   constructor() {

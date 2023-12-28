@@ -1,9 +1,9 @@
-export const madscientist = {
+export const madscientist: Record<string, string> = {
   madscientist_wake_text: 'MAD SCIENTIST,',
   madscientist_close_text: "you'll only win if you get caught.",
 }
 
-export const random_madscientist_intro = {
+export const random_madscientist_intro: Record<string, string> = {
   madscientist_intro_1_text:
     'Your experiment to meld a Three Musketeers bar with frozen yogurt has gone horribly wrong.',
   madscientist_intro_2_text: 'You zigged when you should have zagged.',
@@ -31,7 +31,7 @@ export const random_madscientist_intro = {
     'Your high powered magnet ray wiped your hard drive.',
 }
 
-export const random_madscientist_therefore = {
+export const random_madscientist_therefore: Record<string, string> = {
   madscientist_therefore_1_text: 'As a result,',
   madscientist_therefore_2_text: 'And now,',
   madscientist_therefore_3_text: 'Not just coincidentally,',
@@ -39,7 +39,7 @@ export const random_madscientist_therefore = {
   madscientist_therefore_5_text: 'Because your actions have consequences,',
 }
 
-export const random_madscientist_result = {
+export const random_madscientist_result: Record<string, string> = {
   madscientist_result_1_text: 'the world will end in seventeen minutes.',
   madscientist_result_2_text: "you've morphed into a giant mustached weevil.",
   madscientist_result_3_text:
@@ -60,7 +60,7 @@ export const random_madscientist_result = {
     "that little plastic thing, on the end of everyone's shoelaces, has come undone.",
 }
 
-export const random_madscientist_transition = {
+export const random_madscientist_transition: Record<string, string> = {
   madscientist_transition_1_text: 'Racked with guilt, now',
   madscientist_transition_2_text: 'As you cry into your soup, you realize that',
   madscientist_transition_3_text: 'Utterly confused by this turn of events,',

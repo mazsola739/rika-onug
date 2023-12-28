@@ -1,4 +1,4 @@
-export const auraseer = {
+export const auraseer: Record<string, string> = {
   auraseer_wake_text:
     'AURA SEER, wake up. Anyone who has already moved any card, or looked at any card, stick out your thumb.',
   auraseer_marks_wake_text:

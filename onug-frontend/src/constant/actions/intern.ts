@@ -1,4 +1,4 @@
-export const intern = {
+export const intern: Record<string, string> = {
   intern_wake_1_text:
     'INTERN, wake up. MAD SCIENTIST, stick out your thumb so the Intern can see who you are so she can help you in your quest to get caught.',
   intern_wake_2_text:

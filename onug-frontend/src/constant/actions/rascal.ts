@@ -1,4 +1,4 @@
-export const rascal = {
+export const rascal: Record<string, string> = {
   rascal_wake_text: 'RASCAL, wake up.',
   rascal_close_text: 'RASCAL, close your eyes.',
 
@@ -8,7 +8,7 @@ export const rascal = {
     'giving your card to that player. View your new card - you are now that role, but you will not wake up if that role is called later in the night.',
 }
 
-export const random_rascal = {
+export const random_rascal: Record<string, string> = {
   rascal_idiot_text:
     "You may move everyone's card but your own to the right, or move everyone's card but your own to the left.",
   rascal_troublemaker_text: 'You may exchange cards between',

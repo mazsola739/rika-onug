@@ -1,4 +1,4 @@
-export const roleretriever = {
+export const roleretriever: Record<string, string> = {
   roleretriever_wake_1_text:
     "ROLE RETRIEVER, wake up. That's a good boy! You may steal a card from any other player, replacing it with your original card.",
   roleretriever_wake_2_text:

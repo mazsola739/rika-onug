@@ -1,4 +1,4 @@
-export const paranormalinvestigator = {
+export const paranormalinvestigator: Record<string, string> = {
   paranormalinvestigator_wake_text:
     "PARANORMAL INVESTIGATOR, wake up. You may look at up to two cards of other players. If you see a role that isn't on the villager team, you are now the role you viewed - but you will not wake up if that role is called.",
   paranormalinvestigator_duskwake_text:

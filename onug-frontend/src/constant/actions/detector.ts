@@ -1,4 +1,4 @@
-export const detector = {
+export const detector: Record<string, string> = {
   detector_wake_text:
     "DETECTOR, wake up and engage your High Voltage Detection Field. You may look at one other player's card or two of the center cards.",
   detector_close_text:

@@ -4,7 +4,7 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-const { formatActionTimeText, isCardSelectedById, areAnyCardsSelectedById } =
+const { areAnyCardsSelectedById, formatActionTimeText, isCardSelectedById } =
   actionStoreUtils
 
 class SupervillainStore {

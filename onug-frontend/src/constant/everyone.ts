@@ -1,4 +1,4 @@
-export const everyone = {
+export const everyone: Record<string, string> = {
   epic_intro_text: 'Prepare for an epic battle!',
   everyone_start_card_text: 'EVERYONE, secretly view your Card.',
   everyone_close_text: 'EVERYONE, close your eyes.',

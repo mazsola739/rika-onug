@@ -9,20 +9,6 @@ const createEmptyToken = (): TokenType => {
   return emptyToken
 }
 
-const getOrderedTeams = (teamArray: string[]): string[] => {
-  return teamArray.sort(
-    (a, b) => teams[a as keyof TeamsType] - teams[b as keyof TeamsType]
-  )
-}
-
-const getFilteredCardsForTeam = (
-  team: string,
-  deck: CardType[]
-): CardType[] => {
-  const validTeams = team === 'village' ? ['hero', 'village'] : [team]
-  return deck.filter((card) => validTeams.includes(card.team))
-}
-
 const findById = <T extends { id: number }>(
   list: T[],
   id: number
@@ -35,6 +21,20 @@ const filterByExpansions = <T extends { expansion: string }>(
   expansions: string[]
 ): T[] => {
   return list.filter((item) => expansions.includes(item.expansion))
+}
+
+const getFilteredCardsForTeam = (
+  team: string,
+  deck: CardType[]
+): CardType[] => {
+  const validTeams = team === 'village' ? ['hero', 'village'] : [team]
+  return deck.filter((card) => validTeams.includes(card.team))
+}
+
+const getOrderedTeams = (teamArray: string[]): string[] => {
+  return teamArray.sort(
+    (a, b) => teams[a as keyof TeamsType] - teams[b as keyof TeamsType]
+  )
 }
 
 export const deckStoreUtils = {

@@ -1,4 +1,4 @@
-export const rules_role = {
+export const rules_role: Record<string, string> = {
   rules_alien:
     'Wake and look for the other aliens and then do the action as instructed by the app.',
   rules_alphawolf:

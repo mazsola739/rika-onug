@@ -1,4 +1,4 @@
-export const assassins = {
+export const assassins: Record<string, string> = {
   assassin_wake_text:
     'ASSASSIN, wake up and place the Mark of the Assassin in front of any player.',
   assassin_close_text: 'ASSASSIN, close your eyes.',

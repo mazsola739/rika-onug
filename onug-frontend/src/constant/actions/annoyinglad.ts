@@ -1,4 +1,4 @@
-export const annoyinglad = {
+export const annoyinglad: Record<string, string> = {
   annoyinglad_wake_text:
     'ANNOYING LAD, wake up and annoy one of your neighbors by tapping their nearest shoulder several times.',
   annoyinglad_close_text:

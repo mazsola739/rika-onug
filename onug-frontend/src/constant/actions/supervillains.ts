@@ -1,4 +1,4 @@
-export const supervillains = {
+export const supervillains: Record<string, string> = {
   supervillain_wake_text: 'SUPER VILLAIN, wake up!',
   supervillain_close_text:
     "SUPER VILLAIN, close your eyes and whatever you do, don't get caught!",

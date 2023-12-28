@@ -1,4 +1,4 @@
-export const selfawarenessgirl = {
+export const selfawarenessgirl: Record<string, string> = {
   selfawarenessgirl_wake_text:
     "SELF-AWARENESS GIRL, wake up and look at your own card to see if you've changed in any way.",
   selfawarenessgirl_close_text:
