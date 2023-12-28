@@ -6,8 +6,7 @@
   "license": "MIT",
   "main": "server.js",
   "scripts": {
-    "start": "node ./src/server.js",
-    "build": "tsc"
+    "start": "node ./src/server.js"
   },
   "engines": {
     "node": ">=14.0.0"
