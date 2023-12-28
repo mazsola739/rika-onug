@@ -8,6 +8,18 @@
 	"item": [
 		{
 			"name": "localhost:7654 - create room",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);",
+							"postman.setEnvironmentVariable(\"roomId\", jsonData.roomId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
 					"content-type": true
@@ -57,7 +69,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"route\": \"join-room\"\n}"
+					"raw": "{\n    \"route\": \"join-room\",\n    \"roomId\": \"{{roomId}}\"\n}"
 				},
 				"url": {
 					"raw": "localhost:7654/",

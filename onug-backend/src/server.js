@@ -11,23 +11,23 @@ const app = express()
 const PORT = 7654
 
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended: true }))
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
     const {body} = req
     const {route} = body
 
     let response
     if (route === 'create-room')
-        response = createRoomController(createEventFromRequest(body))
+        response = await createRoomController(createEventFromRequest(body))
     else if (route === 'join-room')
-        response = joinRoomController(createEventFromRequest(body))
+        response = await joinRoomController(createEventFromRequest(body))
     else if (route === 'action')
-        response = actionController(createEventFromRequest(body))
+        response = await actionController(createEventFromRequest(body))
     else if (route === 'hydrate')
-        response = hydrateController(createEventFromRequest(body))
+        response = await hydrateController(createEventFromRequest(body))
     else if (route === 'ready')
-        response = readyController(createEventFromRequest(body))
+        response = await readyController(createEventFromRequest(body))
     else
         response = errorController(createEventFromRequest(body))
 

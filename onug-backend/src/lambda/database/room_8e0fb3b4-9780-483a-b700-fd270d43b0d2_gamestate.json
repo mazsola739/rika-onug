@@ -1,0 +1,19 @@
+{
+    "roomId": "8e0fb3b4-9780-483a-b700-fd270d43b0d2",
+    "selectedCards": [
+        1,
+        2,
+        3,
+        4
+    ],
+    "actions": [],
+    "actionLog": [],
+    "players": [
+        {
+            "name": "Stinkbuns Spottygold",
+            "admin": true
+        }
+    ],
+    "turn": 0,
+    "closed": false
+}
