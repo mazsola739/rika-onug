@@ -1,0 +1,208 @@
+{
+	"info": {
+		"_postman_id": "72a9b86d-11f2-4178-907e-029bdcbdbfe8",
+		"name": "onug",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26669986"
+	},
+	"item": [
+		{
+			"name": "localhost:7654 - create room",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"route\": \"create-room\",\n    \"cards\": [1,2,3,4]\n}"
+				},
+				"url": {
+					"raw": "localhost:7654/",
+					"host": [
+						"localhost"
+					],
+					"port": "7654",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:7654 - join-room",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"route\": \"join-room\"\n}"
+				},
+				"url": {
+					"raw": "localhost:7654/",
+					"host": [
+						"localhost"
+					],
+					"port": "7654",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:7654 - action",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"route\": \"action\"\n}"
+				},
+				"url": {
+					"raw": "localhost:7654/",
+					"host": [
+						"localhost"
+					],
+					"port": "7654",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:7654 - hydrate",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"route\": \"hydrate\"\n}"
+				},
+				"url": {
+					"raw": "localhost:7654/",
+					"host": [
+						"localhost"
+					],
+					"port": "7654",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:7654 - ready",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"route\": \"ready\"\n}"
+				},
+				"url": {
+					"raw": "localhost:7654/",
+					"host": [
+						"localhost"
+					],
+					"port": "7654",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:7654 - invalid create room",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"route\": \"create-room\",\n    \"cards\": [1,2,3,4,4]\n}"
+				},
+				"url": {
+					"raw": "localhost:7654/",
+					"host": [
+						"localhost"
+					],
+					"port": "7654",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

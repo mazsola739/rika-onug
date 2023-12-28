@@ -1,0 +1,22 @@
+const {createRoomController} = require("../create-room/handler")
+const {joinRoomController} = require("../join-room/handler");
+const {actionController} = require("../action/handler");
+const {hydrateController} = require("../hydrate/handler");
+const {readyController} = require("../ready/handler");
+
+exports.handler = async (event, context, cb) => {
+    const {body: {route}} = event
+
+    if (route === 'create-room')
+        return createRoomController(event, context, cb)
+    else if (route === 'join-room')
+        return joinRoomController(event, context, cb)
+    else if (route === 'action')
+        return actionController(event, context, cb)
+    else if (route === 'hydrate')
+        return hydrateController(event, context, cb)
+    else if (route === 'ready')
+        return readyController(event, context, cb)
+
+    return
+}
