@@ -18,7 +18,6 @@ export interface TokenType {
 
 export interface ActionCardType {
   id: number
-  display_name: string
   team: string
   wake_up_time: string
   expansion: string

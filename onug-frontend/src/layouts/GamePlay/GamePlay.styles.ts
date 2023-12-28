@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
 
-export const StyledGameScreen = styled.section`
+export const StyledGamePlay = styled.section`
   background-color: transparent;
 `

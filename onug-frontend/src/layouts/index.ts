@@ -1,3 +1,3 @@
-export * from './GameScreen/GameScreen'
+export * from './GamePlay/GamePlay'
 export * from './Main/Main'
-export * from './TableScreen/TableScreen'
+export * from './Room/Room'

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const StyledTableScreen = styled.section`
+export const StyledRoom = styled.section`
   display: flex;
   flex-direction: column;
 `

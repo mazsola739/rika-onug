@@ -1,89 +1,84 @@
+import { expansion, rules_artifact } from 'constant'
 import { TokenType } from 'types'
 
 export const artifacts: TokenType[] = [
   {
     id: 100,
-    expansion: 'onud',
+    expansion: expansion.daybreak,
     card_name: 'shield',
-    rules:
-      'Shiled given by Sentinel. A card with a Shield Token on it cannot be looked at or moved.',
+    rules: rules_artifact.rules_shield,
   },
   {
     id: 101,
-    expansion: 'onud',
+    expansion: expansion.daybreak,
     card_name: 'claw_of_the_werewolf',
-    rules: 'The Claw of the Werewolf makes the player who has it a Werewolf. ',
+    rules: rules_artifact.rules_werewolf,
   },
   {
     id: 102,
-    expansion: 'onud',
+    expansion: expansion.daybreak,
     card_name: 'brand_of_the_villager',
-    rules: 'The Brand of the Villager makes the player who has it a Villager.',
+    rules: rules_artifact.rules_villager,
   },
   {
     id: 103,
-    expansion: 'onud',
+    expansion: expansion.daybreak,
     card_name: 'cudgel_of_the_tanner',
-    rules: 'The Cudgel of the Tanner makes the player who has it a Tanner.',
+    rules: rules_artifact.rules_tanner,
   },
   {
     id: 104,
-    expansion: 'onud',
+    expansion: expansion.daybreak,
     card_name: 'void_of_nothingness',
-    rules: 'The Void of Nothingness does nothing. ',
+    rules: rules_artifact.rules_nothingness,
   },
   {
     id: 105,
-    expansion: 'onud',
+    expansion: expansion.daybreak,
     card_name: 'mask_of_muting',
-    rules:
-      'The Mask of Muting makes the player who has it be unable to talk for the rest of the game.',
+    rules: rules_artifact.rules_muting,
   },
   {
     id: 106,
-    expansion: 'onud',
+    expansion: expansion.daybreak,
     card_name: 'shroud_of_shame',
-    rules:
-      'The Shroud of Shame makes the player who has it face away from the table/playing area. Can talk and attempt to vote',
+    rules: rules_artifact.rules_shame,
   },
   {
     id: 107,
-    expansion: 'onub',
+    expansion: expansion.bonusroles,
     card_name: 'bow_of_the_hunter',
-    rules: 'The Bow of the Hunter makes the player who has it a Hunter.',
+    rules: rules_artifact.rules_hunter,
   },
   {
     id: 108,
-    expansion: 'onub',
+    expansion: expansion.bonusroles,
     card_name: 'cloak_of_the_prince',
-    rules: 'The Cloak of the Prince makes the player who has it a Prince.',
+    rules: rules_artifact.rules_prince,
   },
   {
     id: 109,
-    expansion: 'onub',
+    expansion: expansion.bonusroles,
     card_name: 'sword_of_the_bodyguard',
-    rules:
-      'The Sword of the Bodyguard makes the player who has it a Bodyguard.',
+    rules: rules_artifact.rules_bodyguard,
   },
   {
     id: 110,
-    expansion: 'onub',
+    expansion: expansion.bonusroles,
     card_name: 'mist_of_the_vampire',
-    rules:
-      'The Mist of the Vampire makes the player who has it a Vampire and win with the Vampires.',
+    rules: rules_artifact.rules_vampire,
   },
   {
     id: 111,
-    expansion: 'onub',
+    expansion: expansion.bonusroles,
     card_name: 'dagger_of_the_traitor',
-    rules:
-      'The Dagger of the Traitor turns a player who has it a Traitor who wants to kill someone on their team',
+    rules: rules_artifact.rules_traitor,
   },
   {
     id: 112,
-    expansion: 'onub',
+    expansion: expansion.bonusroles,
     card_name: 'alien_artifact',
-    rules: 'The Alien Artifact makes the player who has it an Alien.',
+    rules: rules_artifact.rules_alien,
   },
   /*   {
     id: 0,

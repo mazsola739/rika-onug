@@ -1,6 +1,7 @@
 export const easteregg = {
   easteregg_really_text:
     'Really? You selected ALL the roles? I have better things to do, and you probably do too. Well, whatever, here you go.',
+
   easteregg_nobadguys_text_1:
     "Hold the phone! No bad guys chosen? It's a night of pure innocence and rainbows. What happened to the dark side?",
   easteregg_nobadguys_text_2:

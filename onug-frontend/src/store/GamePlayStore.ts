@@ -1,74 +1,82 @@
-import { makeAutoObservable } from 'mobx'
-import { CardType } from 'types'
-import { supervillainIdsToCheck, wolfIdsToCheck } from 'constant'
+import { BASE_TIME, everyone } from 'constant'
+import { RoleActionType } from 'types'
+import { duskPhaseStore } from './phaseStores/DuskPhaseStore'
+import { twilightPhaseStore } from './phaseStores/TwilightPhaseStore'
+import { nightPhaseStore } from './phaseStores/NightPhaseStore'
+import { actionStoreUtils } from 'utils'
 import { selectedDeckStore } from 'store'
 
-export class GamePlayStore {
-  constructor() {
-    makeAutoObservable(this)
+const { getRandomJoke, generateTimedAction } = actionStoreUtils
+
+class GamePlayStore {
+  actionTime: number
+  votingTime: number
+
+  constructor(actionTime = 10, votingTime = 240) {
+    this.actionTime = actionTime
+    this.votingTime = votingTime
   }
 
-  get selectedCards(): CardType[] {
-    return selectedDeckStore.selectedCards
+  get hasDusk(): boolean {
+    return selectedDeckStore.hasDusk()
   }
 
-  get hasAlphaWolf(): boolean {
-    return this.selectedCards.some((card) => card.id === 17)
+  get isEpicBattle(): boolean {
+    return selectedDeckStore.isEpicBattle()
   }
 
-  get hasTemptress(): boolean {
-    return this.selectedCards.some((card) => card.id === 69)
+  generateActions(): RoleActionType[] {
+    const gamePlayActions: RoleActionType[] = []
+    this.addEpicBattleIntro(gamePlayActions)
+    this.addStartingActions(gamePlayActions)
+    this.addPhaseActions(gamePlayActions)
+    this.addJokeAndVoting(gamePlayActions)
+    return gamePlayActions
   }
 
-  shuffleCards(cards: CardType[]): CardType[] {
-    for (let i = cards.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
-      ;[cards[i], cards[j]] = [cards[j], cards[i]]
+  addEpicBattleIntro(actions: RoleActionType[]): void {
+    if (this.isEpicBattle) {
+      actions.push({ text: everyone.epic_intro_text, time: BASE_TIME })
     }
-    return cards
   }
 
-  distributeCards(): {
-    centerCards: CardType[]
-    playerCards: CardType[]
-    chosenWolf?: CardType
-    chosenSuperVillain?: CardType
-  } {
-    let cards = [...this.selectedCards] // Copy to avoid mutations
+  addStartingActions(actions: RoleActionType[]): void {
+    actions.push(
+      { text: everyone.everyone_start_card_text, time: BASE_TIME },
+      generateTimedAction(this.actionTime),
+      { text: everyone.everyone_close_text, time: BASE_TIME }
+    )
+  }
 
-    let chosenWolf: CardType
-    if (this.hasAlphaWolf) {
-      const availableWolves = cards.filter((card) =>
-        wolfIdsToCheck.includes(card.id)
+  addPhaseActions(actions: RoleActionType[]): void {
+    actions.push(
+      ...twilightPhaseStore.generateActions(),
+      ...duskPhaseStore.generateActions()
+    )
+
+    if (this.hasDusk) {
+      actions.push(
+        { text: everyone.everyone_wake_dusk_text, time: BASE_TIME },
+        generateTimedAction(this.actionTime),
+        { text: everyone.everyone_close_text, time: BASE_TIME }
       )
-      chosenWolf =
-        availableWolves[Math.floor(Math.random() * availableWolves.length)]
-      cards = cards.filter((card) => card !== chosenWolf)
     }
 
-    let chosenSuperVillain: CardType
-    if (this.hasTemptress) {
-      const availableSuperVillains = cards.filter((card) =>
-        supervillainIdsToCheck.includes(card.id)
-      )
-      chosenSuperVillain =
-        availableSuperVillains[
-          Math.floor(Math.random() * availableSuperVillains.length)
-        ]
-      cards = cards.filter((card) => card !== chosenSuperVillain)
-    }
+    actions.push(...nightPhaseStore.generateActions())
+  }
 
-    const shuffledCards = this.shuffleCards(cards)
-
-    const centerCards = shuffledCards.slice(0, 3)
-    const playerCards = shuffledCards.slice(3)
-
-    return {
-      centerCards,
-      playerCards,
-      chosenWolf,
-      chosenSuperVillain,
-    }
+  addJokeAndVoting(actions: RoleActionType[]): void {
+    actions.push(
+      { text: getRandomJoke(), time: BASE_TIME },
+      {
+        text: this.hasDusk
+          ? everyone.everyone_move_mark_text
+          : everyone.everyone_move_card_text,
+        time: BASE_TIME,
+      },
+      { text: everyone.everyone_wake_text, time: BASE_TIME + this.votingTime },
+      { text: everyone.everyone_vote_text, time: BASE_TIME }
+    )
   }
 }
 

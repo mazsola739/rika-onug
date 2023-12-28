@@ -1,5 +1,5 @@
 import { CardList, TokenList } from 'components'
-import { TableScreen } from 'layouts'
+import { Room } from 'layouts'
 import { observer } from 'mobx-react-lite'
 import { useMemo } from 'react'
 import { selectedDeckStore } from 'store'
@@ -25,7 +25,7 @@ export const Main = observer(({ deckStore }: MainProps) => {
   return (
     <StyledMain>
       {selectedDeckStore.isGameStarted ? (
-        <TableScreen />
+        <Room />
       ) : (
         <>
           {orderedTeams.map((teamName) => (

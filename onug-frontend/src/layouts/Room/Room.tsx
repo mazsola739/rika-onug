@@ -1,18 +1,14 @@
 import { GameCard } from 'components'
 import { observer } from 'mobx-react-lite'
-import { gamePlayStore } from 'store'
-import {
-  StyledTableScreen,
-  PlayersCards,
-  CenterCards,
-} from './TableScreen.styles'
+import { roomStore } from 'store'
+import { StyledRoom, PlayersCards, CenterCards } from './Room.styles'
 
-export const TableScreen = observer(() => {
+export const Room = observer(() => {
   const { playerCards, centerCards, chosenWolf, chosenSuperVillain } =
-    gamePlayStore.distributeCards()
+    roomStore.distributeCards()
 
   return (
-    <StyledTableScreen>
+    <StyledRoom>
       <PlayersCards>
         {playerCards.map((card, i) => (
           <GameCard
@@ -55,6 +51,6 @@ export const TableScreen = observer(() => {
           />
         </CenterCards>
       )}
-    </StyledTableScreen>
+    </StyledRoom>
   )
 })

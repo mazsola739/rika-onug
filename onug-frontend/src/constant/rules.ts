@@ -1,4 +1,4 @@
-export const rules = {
+export const rules_role = {
   rules_alien:
     'Wake and look for the other aliens and then do the action as instructed by the app.',
   rules_alphawolf:
@@ -138,4 +138,48 @@ export const rules = {
     "View a center card and exchange it with any other player's card.",
   rules_zerb:
     'Wake with the other aliens, then wake again to look for Groob, you win, if Groob is killed.',
+}
+
+export const rules_mark = {
+  rules_vampire:
+    'The Mark of The Vampire is a Mark given by the Vampires, if you have it you are on the Vampire team and win with the Vampires.',
+  rules_fear:
+    'The Mark of Fear is a Mark given by The Count to any non-vampire player, if you have it you cannot wake up and do your night action',
+  rules_bat:
+    'The Mark Of The Bat is a mark given by Renfield to himself and it does nothing',
+  rules_disease:
+    'The Mark of the Disease is a Mark given by the Diseased to one of their neighbors. If you have it and anyone points at you they lose even if their team won.',
+  rules_love:
+    'The Mark of Love is a Mark given by the Cupid to two players. If a player with a mark of love is killed, the other player with a mark of love also dies.',
+  rules_traitor:
+    'The Mark of the Traitor is a Mark given by the Instigator to any player, that player now wins, if anyone on his team is killed.',
+  rules_clarity:
+    'The Mark of Clarity has no effect and the mark given out to each player at the start of the game, it is also given by the Priest to himself and any other player',
+  rules_assassin:
+    'The Mark of the Assassin is a mark given by the Assassin to any player. If you have it, the Assassin will win if you are killed',
+}
+
+export const rules_artifact = {
+  rules_shield:
+    'Shiled given by Sentinel. A card with a Shield Token on it cannot be looked at or moved.',
+  rules_werewolf:
+    'The Claw of the Werewolf makes the player who has it a Werewolf.',
+  rules_villager:
+    'The Brand of the Villager makes the player who has it a Villager.',
+  rules_tanner:
+    'The Cudgel of the Tanner makes the player who has it a Tanner.',
+  rules_nothingness: 'The Void of Nothingness does nothing.',
+  rules_muting:
+    'The Mask of Muting makes the player who has it be unable to talk for the rest of the game.',
+  rules_shame:
+    'The Shroud of Shame makes the player who has it face away from the table/playing area. Can talk and attempt to vote',
+  rules_hunter: 'The Bow of the Hunter makes the player who has it a Hunter.',
+  rules_prince: 'The Cloak of the Prince makes the player who has it a Prince.',
+  rules_bodyguard:
+    'The Sword of the Bodyguard makes the player who has it a Bodyguard.',
+  rules_vampire:
+    'The Mist of the Vampire makes the player who has it a Vampire and win with the Vampires.',
+  rules_traitor:
+    'The Dagger of the Traitor turns a player who has it a Traitor who wants to kill someone on their team',
+  rules_alien: 'The Alien Artifact makes the player who has it an Alien.',
 }
