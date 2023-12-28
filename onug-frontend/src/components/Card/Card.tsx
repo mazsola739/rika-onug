@@ -10,7 +10,6 @@ export const Card = observer(({ id, card_name, display_name }: CardProps) => {
   )
 
   const handleCardClick = useCallback(() => {
-    // Toggle the card selection
     selectedDeckStore.toggleCardSelection({
       id,
       card_name,
@@ -22,12 +21,10 @@ export const Card = observer(({ id, card_name, display_name }: CardProps) => {
       order: 0,
     })
 
-    // Update the play deck with selected cards
     selectedDeckStore.updatePlayDeckWithSelectedCards(
       selectedDeckStore.selectedCards
     )
 
-    // Show the detailed card info when clicked
     deckStore.toggleInfo(id, 'card')
   }, [id, card_name, display_name])
 

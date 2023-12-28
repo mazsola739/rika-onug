@@ -9,6 +9,6 @@ export const StyledFooter = styled.footer`
   background-color: transparent;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 `

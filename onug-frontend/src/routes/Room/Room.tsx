@@ -1,20 +1,21 @@
-import { Footer, GameCard, Header } from 'components'
-import { observer } from 'mobx-react-lite'
-import { gamePlayStore, roomStore, selectedDeckStore } from 'store'
 import {
-  StyledRoom,
-  PlayersCards,
-  CenterCards,
-  PauseButton,
-  StopButton,
-  StyledFooterButtons,
-  StartButton,
-} from './Room.styles'
-import { buttons } from 'constant'
+  Button,
+  Footer,
+  FooterButtons,
+  GameCard,
+  Header,
+  LinkButton,
+} from 'components'
+import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import { buttons } from 'constant'
+import { gamePlayStore, roomStore, selectedDeckStore } from 'store' // Direct store imports
+import { StyledRoom, PlayersCards, CenterCards } from './Room.styles'
 
-const FooterButtons = observer(() => {
+export const Room = observer(() => {
+  const { playerCards, centerCards, chosenWolf, chosenSuperVillain } =
+    roomStore.distributeCards()
+
   const handlePauseGame = useCallback(() => {
     gamePlayStore.togglePauseStatus()
   }, [])
@@ -27,30 +28,9 @@ const FooterButtons = observer(() => {
     console.log('Game started', buttons.start_button_label)
   }, [])
 
-  return (
-    <StyledFooterButtons>
-      <PauseButton onClick={handlePauseGame}>
-        {gamePlayStore.isGamePaused
-          ? buttons.pause_button_alt_label
-          : buttons.pause_button_label}
-      </PauseButton>
-      <Link to="/">
-        <StopButton onClick={handleStopGame}>
-          {buttons.stop_button_label}
-        </StopButton>
-      </Link>
-      <Link to="/gameplay">
-        <StartButton onClick={handleStartGame}>
-          {buttons.start_game_label}
-        </StartButton>
-      </Link>
-    </StyledFooterButtons>
-  )
-})
-
-export const Room = observer(() => {
-  const { playerCards, centerCards, chosenWolf, chosenSuperVillain } =
-    roomStore.distributeCards()
+  const buttonText = gamePlayStore.isGamePaused
+    ? buttons.pause_button_alt_label
+    : buttons.pause_button_label
 
   return (
     <>
@@ -102,7 +82,25 @@ export const Room = observer(() => {
         )}
       </StyledRoom>
       <Footer>
-        <FooterButtons />
+        <FooterButtons>
+          <Button
+            onClick={handlePauseGame}
+            buttontext={buttonText}
+            backgroundColor="#ff9800"
+          />
+          <LinkButton
+            linkTo="/"
+            onClick={handleStopGame}
+            buttontext={buttons.stop_button_label}
+            backgroundColor="#f44336"
+          />
+          <LinkButton
+            linkTo="/gameplay"
+            onClick={handleStartGame}
+            buttontext={buttons.start_game_label}
+            backgroundColor="#8e44ad"
+          />
+        </FooterButtons>
       </Footer>
     </>
   )
