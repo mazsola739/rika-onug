@@ -9,16 +9,11 @@ export const App = observer(() => {
     <StyledApp>
       <Router>
         <Routes>
-          {/* Home Route */}
           <Route path="/" element={<Home deckStore={deckStore} />} />
-
-          {/* Room with ID Route */}
           <Route path="/room" element={<Room />} />
-
-          {/* Settings Route */}
           <Route path="/gameplay" element={<GamePlay />} />
 
-          {/* 404 Not Found Route (optional) */}
+          {/* 404 Not Found Route    */}
           {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </Router>
