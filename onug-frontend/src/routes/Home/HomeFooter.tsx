@@ -6,10 +6,11 @@ import {
   SelectedCardList,
 } from 'components'
 import { buttons } from 'constant'
+import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
 import { gamePlayStore, deckStore, selectedDeckStore } from 'store'
 
-export const HomeFooter = () => {
+export const HomeFooter = observer(() => {
   const handleResetGame = useCallback(() => {
     gamePlayStore.resetGame()
   }, [])
@@ -43,4 +44,4 @@ export const HomeFooter = () => {
       <SelectedCardList />
     </Footer>
   )
-}
+})

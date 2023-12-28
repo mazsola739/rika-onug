@@ -5,8 +5,13 @@ export const Button = ({
   backgroundColor,
   buttontext,
   onClick,
+  disabled,
 }: ButtonProps) => (
-  <StyledButton onClick={onClick} backgroundColor={backgroundColor}>
+  <StyledButton
+    onClick={onClick}
+    backgroundColor={backgroundColor}
+    disabled={disabled}
+  >
     {buttontext}
   </StyledButton>
 )

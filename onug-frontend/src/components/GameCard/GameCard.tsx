@@ -4,7 +4,7 @@ import { GameCardProps } from './GameCard.types'
 import { useState } from 'react'
 
 export const GameCard = observer(
-  ({ card_name, display_name, player_number, isCenter }: GameCardProps) => {
+  ({ card_name, player_number, isCenter }: GameCardProps) => {
     const [isFlipped, setIsFlipped] = useState(false)
 
     const handleClick = () => {
@@ -19,7 +19,7 @@ export const GameCard = observer(
               ? require(`../../assets/cards/${card_name}.png`)
               : require('../../assets/backgrounds/card_back.png')
           }
-          alt={display_name}
+          alt={card_name}
         />
         {!isCenter && (
           <TokenImage

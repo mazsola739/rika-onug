@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { CardType } from 'types'
+import { CardType, PlayerType } from 'types'
 import { selectedDeckStore } from 'store'
 import { supervillainIdsToCheck, wolfIdsToCheck } from 'constant'
 import { roomStoreUtils } from 'utils'
@@ -7,6 +7,8 @@ import { roomStoreUtils } from 'utils'
 const { filterCardsByIds, getRandomItemFromArray } = roomStoreUtils
 
 export class RoomStore {
+  players: PlayerType[] = []
+
   constructor() {
     makeAutoObservable(this)
   }

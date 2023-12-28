@@ -1,11 +1,11 @@
-import { CardList, Filter, Header, TokenList } from 'components'
+import { CardList, TokenList } from 'components'
+import { team } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useMemo } from 'react'
-import { StyledLogo, Main, StyledRuleInfo } from './Home.styles'
+import { Main } from './Home.styles'
 import { HomeProps } from './Home.types'
-import { team } from 'constant'
-import { logo_en_1 } from 'assets'
 import { HomeFooter } from './HomeFooter'
+import { HomeHeader } from './HomeHeader'
 
 export const Home = observer(({ deckStore }: HomeProps) => {
   const { deck } = deckStore
@@ -30,11 +30,7 @@ export const Home = observer(({ deckStore }: HomeProps) => {
 
   return (
     <>
-      <Header>
-        <StyledLogo src={logo_en_1} alt="header" />
-        <Filter />
-        <StyledRuleInfo />
-      </Header>
+      <HomeHeader />
       <Main>
         {orderedTeams.map((teamName) => (
           <CardList

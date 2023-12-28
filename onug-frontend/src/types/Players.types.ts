@@ -4,6 +4,7 @@ export type StartingCardType = {
   artifact: string
   shield: boolean
   mark: string
+  rules: string
 }
 
 export type ChangedCardType = {
@@ -20,6 +21,8 @@ export type EndOfGameType = {
 }
 
 export type PlayerType = {
+  player_name: string
+  avatar: string
   starting_card: StartingCardType
   gameplay_changes: ChangedCardType[]
   end_of_game: EndOfGameType

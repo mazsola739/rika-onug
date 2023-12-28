@@ -1,46 +1,14 @@
-import {
-  Footer,
-  FooterButtons,
-  Button,
-  LinkButton,
-  SelectedCardList,
-} from 'components'
-import { buttons } from 'constant'
-import { useCallback } from 'react'
-import { gamePlayStore, deckStore, selectedDeckStore } from 'store'
+import { logo_en_1 } from 'assets'
+import { Header, Filter } from 'components'
+import { observer } from 'mobx-react-lite'
+import { StyledLogo, StyledRuleInfo } from './Home.styles'
 
-export const HomeFooter = () => {
-  const handleResetGame = useCallback(() => {
-    gamePlayStore.resetGame()
-  }, [])
-
-  const handleStartGame = useCallback(() => {
-    gamePlayStore.toggleGameStatus()
-    deckStore.resetDetailedCardInfo()
-  }, [])
-
-  const totalPlayers = selectedDeckStore.totalPlayers
-  const buttonText = totalPlayers
-    ? `${buttons.play_game_text}${totalPlayers}`
-    : buttons.play_game_text
-
+export const HomeHeader = observer(() => {
   return (
-    <Footer>
-      <FooterButtons>
-        <Button
-          onClick={handleResetGame}
-          buttontext={buttons.reset_game_label}
-          backgroundColor="#007bff"
-        />
-        <LinkButton
-          linkTo="/room"
-          onClick={handleStartGame}
-          disabled={!selectedDeckStore.totalPlayers}
-          buttontext={buttonText}
-          backgroundColor="#28a745"
-        />
-      </FooterButtons>
-      <SelectedCardList />
-    </Footer>
+    <Header>
+      <StyledLogo src={logo_en_1} alt="header" />
+      <Filter />
+      <StyledRuleInfo />
+    </Header>
   )
-}
+})
