@@ -1,7 +1,10 @@
 import { makeAutoObservable } from 'mobx'
 import { CardType } from 'types'
-import { supervillainIdsToCheck, wolfIdsToCheck } from 'constant'
 import { selectedDeckStore } from 'store'
+import { supervillainIdsToCheck, wolfIdsToCheck } from 'constant'
+import { roomStoreUtils } from 'utils'
+
+const { getRandomItemFromArray, filterCardsByIds } = roomStoreUtils
 
 export class RoomStore {
   constructor() {
@@ -34,29 +37,19 @@ export class RoomStore {
     chosenWolf?: CardType
     chosenSuperVillain?: CardType
   } {
-    let cards = [...this.selectedCards] // Copy to avoid mutations
+    let cards = [...this.selectedCards]
 
-    let chosenWolf: CardType
-    if (this.hasAlphaWolf) {
-      const availableWolves = cards.filter((card) =>
-        wolfIdsToCheck.includes(card.id)
-      )
-      chosenWolf =
-        availableWolves[Math.floor(Math.random() * availableWolves.length)]
-      cards = cards.filter((card) => card !== chosenWolf)
-    }
+    const chosenWolf = this.hasAlphaWolf
+      ? getRandomItemFromArray(filterCardsByIds(cards, wolfIdsToCheck))
+      : undefined
 
-    let chosenSuperVillain: CardType
-    if (this.hasTemptress) {
-      const availableSuperVillains = cards.filter((card) =>
-        supervillainIdsToCheck.includes(card.id)
-      )
-      chosenSuperVillain =
-        availableSuperVillains[
-          Math.floor(Math.random() * availableSuperVillains.length)
-        ]
+    const chosenSuperVillain = this.hasTemptress
+      ? getRandomItemFromArray(filterCardsByIds(cards, supervillainIdsToCheck))
+      : undefined
+
+    if (chosenWolf) cards = cards.filter((card) => card !== chosenWolf)
+    if (chosenSuperVillain)
       cards = cards.filter((card) => card !== chosenSuperVillain)
-    }
 
     const shuffledCards = this.shuffleCards(cards)
 

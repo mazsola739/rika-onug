@@ -3,8 +3,8 @@ import { Player } from "./Player";
 
 export interface Room {
     id: string;
-    players: Player[];
-    maxPlayers: number;
+    players: Player[]; 
+    maxPlayers: number; //frontend
     selectedCards: Card[];
   }
   

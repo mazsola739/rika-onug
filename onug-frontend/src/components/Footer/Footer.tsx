@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { buttons } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { deckStore, selectedDeckStore } from 'store'
+import { deckStore, gamePlayStore, selectedDeckStore } from 'store'
 import {
   StyledFooterButtons,
   StartButton,
@@ -39,7 +39,9 @@ const SelectedCard = ({ src, alt, id }: SelectedCardProps & { id: number }) => {
 }
 
 const SelectedCardList = observer(() => {
-  const { selectedCards, isGameStopped } = selectedDeckStore
+  const { isGameStopped } = gamePlayStore
+  const { selectedCards } = selectedDeckStore
+
   return (
     <StyledSelectedCardList>
       {isGameStopped &&
@@ -56,30 +58,30 @@ const SelectedCardList = observer(() => {
 })
 
 const FooterButtons = observer(() => {
-  const isGameStarted = selectedDeckStore.isGameStarted
+  const isGameStarted = gamePlayStore.isGameStarted
 
   const handleResetGame = useCallback(() => {
-    selectedDeckStore.resetGame()
+    gamePlayStore.resetGame()
   }, [])
 
   const handleStartGame = useCallback(() => {
-    selectedDeckStore.toggleGameStatus()
+    gamePlayStore.toggleGameStatus()
     deckStore.resetDetailedCardInfo()
-  }, [selectedDeckStore, deckStore])
+  }, [gamePlayStore, deckStore])
 
   const handlePauseGame = useCallback(() => {
-    selectedDeckStore.togglePauseStatus()
+    gamePlayStore.togglePauseStatus()
   }, [])
 
   const handleStopGame = useCallback(() => {
-    selectedDeckStore.toggleGameStatus()
+    gamePlayStore.toggleGameStatus()
   }, [selectedDeckStore])
 
   if (isGameStarted) {
     return (
       <StyledFooterButtons>
         <PauseButton onClick={handlePauseGame}>
-          {selectedDeckStore.isGamePaused
+          {gamePlayStore.isGamePaused
             ? buttons.pause_button_alt_label
             : buttons.pause_button_label}
         </PauseButton>

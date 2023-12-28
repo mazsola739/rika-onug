@@ -2,17 +2,19 @@ import { CardList, TokenList } from 'components'
 import { Room } from 'layouts'
 import { observer } from 'mobx-react-lite'
 import { useMemo } from 'react'
-import { selectedDeckStore } from 'store'
+import { gamePlayStore } from 'store'
 import { StyledMain } from './Main.styles'
 import { MainProps } from './Main.types'
+import { team } from 'constant'
 
 export const Main = observer(({ deckStore }: MainProps) => {
   const { deck } = deckStore
+  const { hero, village } = team
 
   const teamArray = [
     ...new Set(
       deck.map((card) =>
-        card.team === 'hero' || card.team === 'village' ? 'village' : card.team
+        card.team === hero || card.team === village ? village : card.team
       )
     ),
   ]
@@ -24,7 +26,7 @@ export const Main = observer(({ deckStore }: MainProps) => {
 
   return (
     <StyledMain>
-      {selectedDeckStore.isGameStarted ? (
+      {gamePlayStore.isGameStarted ? (
         <Room />
       ) : (
         <>

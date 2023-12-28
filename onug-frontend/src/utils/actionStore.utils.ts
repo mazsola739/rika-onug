@@ -29,7 +29,7 @@ const addRoleActions = <T extends RoleActionStoreType>(
   store: T,
   condition: boolean,
   actions: RoleActionType[]
-) => {
+): void => {
   if (condition) {
     actions.push(...store.generateActions())
   }

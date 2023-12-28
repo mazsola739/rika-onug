@@ -7,12 +7,12 @@ import {
   StyledHeader,
 } from './Header.styles'
 import { observer } from 'mobx-react-lite'
-import { selectedDeckStore, deckStore } from 'store'
+import { gamePlayStore, deckStore } from 'store'
 
 const Logo = () => <StyledLogo src={logo_en_1} alt="header" />
 
 const RuleInfo = observer(() => {
-  const { isGameStopped } = selectedDeckStore
+  const { isGameStopped } = gamePlayStore
   const detailedCardInfo = deckStore.getDetailedCardInfo()
   const detailedTokenInfo = deckStore.getDetailedTokenInfo()
 

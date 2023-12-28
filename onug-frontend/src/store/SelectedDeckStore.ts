@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { ActionCardType, CardType } from 'types'
+import { CardType, ActionCardType } from 'types'
 import { selectedDeckUtils } from 'utils'
 import { deckStore } from 'store'
 import { actionCards } from 'data'
@@ -7,23 +7,21 @@ import { roles } from 'constant'
 
 const {
   containsById,
+  selectCard,
   deselectCard,
   determineTotalPlayers,
   handleAlphaWolf,
   handleTemptress,
-  isMirrorManOrCopycatSelected,
   prohibitDeselectingSupervillain,
   prohibitDeselectingWerewolf,
-  selectCard,
+  isMirrorManOrCopycatSelected,
+  hasSpecificRolesInDeck,
 } = selectedDeckUtils
 
 class SelectedDeckStore {
   selectedCards: CardType[] = []
   actionCards: ActionCardType[] = actionCards
   gamePlayDeck: ActionCardType[] = []
-  isGameStarted = false
-  isGameStopped = true
-  isGamePaused = false
   MAX_ALLOWED_PLAYERS = 12
 
   constructor() {
@@ -39,25 +37,18 @@ class SelectedDeckStore {
   }
 
   toggleCardSelection(card: CardType): void {
-    const cardAlreadySelected = containsById(this.selectedCards, card.id)
-    const isMirrorManOrCopycatAlreadySelected = isMirrorManOrCopycatSelected(
-      this.selectedCards
-    )
+    const isSpecialCard =
+      card.display_name === roles.role_mirrorman ||
+      card.display_name === roles.role_copycat
 
-    if (
-      (card.display_name === roles.role_mirrorman ||
-        card.display_name === roles.role_copycat) &&
-      isMirrorManOrCopycatAlreadySelected
-    ) {
-      const existingCard = this.selectedCards.find(
+    if (isSpecialCard && this.isMirrorManOrCopycatSelected()) {
+      const existingSpecialCard = this.selectedCards.find(
         (card) =>
           card.display_name === roles.role_mirrorman ||
           card.display_name === roles.role_copycat
       )
-      existingCard && this.handleDeselectCard(existingCard)
-    }
-
-    if (cardAlreadySelected) {
+      existingSpecialCard && this.handleDeselectCard(existingSpecialCard)
+    } else if (containsById(this.selectedCards, card.id)) {
       this.handleDeselectCard(card)
     } else if (this.totalPlayers < this.MAX_ALLOWED_PLAYERS) {
       this.handleSelectCard(card)
@@ -71,9 +62,27 @@ class SelectedDeckStore {
     deckStore.resetDetailedCardInfo()
   }
 
-  toggleGameStatus(): void {
-    this.isGameStarted = !this.isGameStarted
-    this.isGameStopped = !this.isGameStopped
+  updatePlayDeckWithSelectedCards(selectedCards: CardType[]): void {
+    const selectedCardIds = selectedCards.map((card) => card.id)
+
+    const selectedActionCards = this.actionCards.filter((actionCard) =>
+      selectedCardIds.includes(actionCard.id)
+    )
+
+    const uniqueCardIds = new Set([
+      ...selectedCardIds,
+      ...selectedActionCards.map((card) => card.id),
+    ])
+
+    const uniqueCards = Array.from(uniqueCardIds)
+      .map((id) => this.actionCards.find((actionCard) => actionCard.id === id))
+      .filter(Boolean) as ActionCardType[]
+
+    this.gamePlayDeck = uniqueCards
+  }
+
+  isMirrorManOrCopycatSelected(): boolean {
+    return isMirrorManOrCopycatSelected(this.selectedCards)
   }
 
   handleSelectCard(card: CardType): void {
@@ -99,36 +108,6 @@ class SelectedDeckStore {
     }
   }
 
-  resetGame(): void {
-    this.selectedCards = []
-    this.isGameStarted = false
-    this.isGameStopped = true
-    deckStore.resetDetailedCardInfo()
-  }
-
-  togglePauseStatus(): void {
-    this.isGamePaused = !this.isGamePaused
-  }
-
-  updatePlayDeckWithSelectedCards(selectedCards: CardType[]): void {
-    const selectedCardIds = selectedCards.map((card) => card.id)
-
-    const selectedActionCards = this.actionCards.filter((actionCard) =>
-      selectedCardIds.includes(actionCard.id)
-    )
-
-    const uniqueCardIds = new Set([
-      ...selectedCardIds,
-      ...selectedActionCards.map((card) => card.id),
-    ])
-
-    const uniqueCards = Array.from(uniqueCardIds)
-      .map((id) => this.actionCards.find((actionCard) => actionCard.id === id))
-      .filter(Boolean) as ActionCardType[]
-
-    this.gamePlayDeck = uniqueCards
-  }
-
   addCardToPlayDeck(card: CardType): void {
     if (!this.gamePlayDeck.some((playCard) => playCard.id === card.id)) {
       this.gamePlayDeck.push(card)
@@ -147,16 +126,7 @@ class SelectedDeckStore {
 
   isEpicBattle(): boolean {
     const evils = ['vampire', 'alien', 'werewolf', 'supervillain']
-    for (const team of evils) {
-      const hasCardForTeam = this.gamePlayDeck.some(
-        (card) => card.team === team
-      )
-      if (!hasCardForTeam) {
-        return false
-      }
-    }
-
-    return true
+    return hasSpecificRolesInDeck(this.gamePlayDeck, evils)
   }
 }
 

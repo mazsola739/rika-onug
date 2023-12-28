@@ -1,20 +1,29 @@
+import { makeAutoObservable } from 'mobx'
+import {
+  duskPhaseStore,
+  nightPhaseStore,
+  selectedDeckStore,
+  twilightPhaseStore,
+} from 'store'
 import { BASE_TIME, everyone } from 'constant'
 import { RoleActionType } from 'types'
-import { duskPhaseStore } from './phaseStores/DuskPhaseStore'
-import { twilightPhaseStore } from './phaseStores/TwilightPhaseStore'
-import { nightPhaseStore } from './phaseStores/NightPhaseStore'
-import { actionStoreUtils } from 'utils'
-import { selectedDeckStore } from 'store'
+
+import { actionStoreUtils, gamePlayStoreUtils } from 'utils'
 
 const { getRandomJoke, generateTimedAction } = actionStoreUtils
+export const { addBasicAction } = gamePlayStoreUtils
 
 class GamePlayStore {
   actionTime: number
   votingTime: number
+  isGameStarted = false
+  isGameStopped = true
+  isGamePaused = false
 
   constructor(actionTime = 10, votingTime = 240) {
     this.actionTime = actionTime
     this.votingTime = votingTime
+    makeAutoObservable(this)
   }
 
   get hasDusk(): boolean {
@@ -34,18 +43,31 @@ class GamePlayStore {
     return gamePlayActions
   }
 
+  toggleGameStatus(): void {
+    this.isGameStarted = !this.isGameStarted
+    this.isGameStopped = !this.isGameStopped
+  }
+
+  resetGame(): void {
+    selectedDeckStore.resetSelection()
+    this.isGameStarted = false
+    this.isGameStopped = true
+  }
+
+  togglePauseStatus(): void {
+    this.isGamePaused = !this.isGamePaused
+  }
+
   addEpicBattleIntro(actions: RoleActionType[]): void {
     if (this.isEpicBattle) {
-      actions.push({ text: everyone.epic_intro_text, time: BASE_TIME })
+      addBasicAction(actions, everyone.epic_intro_text, BASE_TIME)
     }
   }
 
   addStartingActions(actions: RoleActionType[]): void {
-    actions.push(
-      { text: everyone.everyone_start_card_text, time: BASE_TIME },
-      generateTimedAction(this.actionTime),
-      { text: everyone.everyone_close_text, time: BASE_TIME }
-    )
+    addBasicAction(actions, everyone.everyone_start_card_text, BASE_TIME)
+    actions.push(generateTimedAction(this.actionTime))
+    addBasicAction(actions, everyone.everyone_close_text, BASE_TIME)
   }
 
   addPhaseActions(actions: RoleActionType[]): void {
@@ -55,28 +77,26 @@ class GamePlayStore {
     )
 
     if (this.hasDusk) {
-      actions.push(
-        { text: everyone.everyone_wake_dusk_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
-        { text: everyone.everyone_close_text, time: BASE_TIME }
-      )
+      addBasicAction(actions, everyone.everyone_wake_dusk_text, BASE_TIME)
+      actions.push(generateTimedAction(this.actionTime))
+      addBasicAction(actions, everyone.everyone_close_text, BASE_TIME)
     }
 
     actions.push(...nightPhaseStore.generateActions())
   }
 
   addJokeAndVoting(actions: RoleActionType[]): void {
-    actions.push(
-      { text: getRandomJoke(), time: BASE_TIME },
-      {
-        text: this.hasDusk
-          ? everyone.everyone_move_mark_text
-          : everyone.everyone_move_card_text,
-        time: BASE_TIME,
-      },
-      { text: everyone.everyone_wake_text, time: BASE_TIME + this.votingTime },
-      { text: everyone.everyone_vote_text, time: BASE_TIME }
+    addBasicAction(actions, getRandomJoke(), BASE_TIME)
+    const moveText = this.hasDusk
+      ? everyone.everyone_move_mark_text
+      : everyone.everyone_move_card_text
+    addBasicAction(actions, moveText, BASE_TIME)
+    addBasicAction(
+      actions,
+      everyone.everyone_wake_text,
+      BASE_TIME + this.votingTime
     )
+    addBasicAction(actions, everyone.everyone_vote_text, BASE_TIME)
   }
 }
 

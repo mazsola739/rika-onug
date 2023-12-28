@@ -17,3 +17,29 @@ export interface ExpansionsType {
   onus: 'Super Villians'
   onub: 'Bonus Roles'
 }
+
+export interface WakeType {
+  day: 'day'
+  twilight: 'twilight'
+  dusk: 'dusk'
+  night: 'night'
+}
+
+export interface ExpansionType {
+  werewolf: 'onuw'
+  daybreak: 'onud'
+  vampire: 'onuv'
+  alien: 'onua'
+  supervillains: 'onus'
+  bonusroles: 'onub'
+}
+
+export interface TeamType {
+  village: 'village'
+  hero: 'hero'
+  own: 'own'
+  werewolf: 'werewolf'
+  vampire: 'vampire'
+  alien: 'alien'
+  villain: 'villain'
+}

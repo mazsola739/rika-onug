@@ -23,9 +23,25 @@ const getFilteredCardsForTeam = (
   return deck.filter((card) => validTeams.includes(card.team))
 }
 
+const findById = <T extends { id: number }>(
+  list: T[],
+  id: number
+): T | undefined => {
+  return list.find((item) => item.id === id)
+}
+
+const filterByExpansions = <T extends { expansion: string }>(
+  list: T[],
+  expansions: string[]
+): T[] => {
+  return list.filter((item) => expansions.includes(item.expansion))
+}
+
 export const deckStoreUtils = {
   createEmptyCard,
   createEmptyToken,
   getFilteredCardsForTeam,
   getOrderedTeams,
+  findById,
+  filterByExpansions,
 }
