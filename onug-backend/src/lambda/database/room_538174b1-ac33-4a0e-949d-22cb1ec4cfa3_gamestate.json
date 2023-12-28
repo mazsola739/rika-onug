@@ -1,0 +1,63 @@
+{
+    "roomId": "538174b1-ac33-4a0e-949d-22cb1ec4cfa3",
+    "selectedCards": [
+        1,
+        2,
+        3,
+        4
+    ],
+    "actions": [],
+    "actionLog": [],
+    "players": [
+        {
+            "name": "Doodle Loodle",
+            "admin": true
+        },
+        {
+            "name": "Werewolfy",
+            "admin": false
+        },
+        {
+            "name": "Dick Sack",
+            "admin": false
+        },
+        {
+            "name": "Bur-a-boo Noodleborn",
+            "admin": false
+        },
+        {
+            "name": "Stinkbuns Spottygold",
+            "admin": false
+        },
+        {
+            "name": "Justin Case",
+            "admin": false
+        },
+        {
+            "name": "Kribidy Dibidy Doo",
+            "admin": false
+        },
+        {
+            "name": "Sniffwax Pukeseed",
+            "admin": false
+        },
+        {
+            "name": "Stinkroid Noodleshine",
+            "admin": false
+        },
+        {
+            "name": "Witchenious Craftenber",
+            "admin": false
+        },
+        {
+            "name": "Flapberry Fudgewhistle",
+            "admin": false
+        },
+        {
+            "name": "Horacle the Oracle",
+            "admin": false
+        }
+    ],
+    "turn": 0,
+    "closed": false
+}
