@@ -1,6 +1,5 @@
 export * from './Card/Card'
 export * from './CardList/CardList'
-export * from './Carousel/Carousel'
 export * from './Filter/Filter'
 export * from './Footer/Footer'
 export * from './GameCard/GameCard'

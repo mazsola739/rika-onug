@@ -1,12 +1,12 @@
-export interface RoleActionType {
+export type RoleActionType = {
   text: string
   time: number
 }
 
-export interface RoleActionStoreType {
+export type RoleActionStoreType = {
   generateActions(): RoleActionType[]
 }
 
-export interface ConjunctionType {
+export type ConjunctionType = {
   conjunction: 'and' | 'or'
 } //TODO

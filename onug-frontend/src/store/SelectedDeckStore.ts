@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { CardType, ActionCardType } from 'types'
 import { selectedDeckUtils } from 'utils'
 import { deckStore } from 'store'
-import { actionCards } from 'data'
+import { actioncards } from 'data'
 import { roles } from 'constant'
 
 const {
@@ -20,7 +20,7 @@ const {
 
 class SelectedDeckStore {
   selectedCards: CardType[] = []
-  actionCards: ActionCardType[] = actionCards
+  actionCards: ActionCardType[] = actioncards
   gamePlayDeck: ActionCardType[] = []
   MAX_ALLOWED_PLAYERS = 12
 

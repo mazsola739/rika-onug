@@ -1,4 +1,4 @@
-export interface StartingCardType {
+export type StartingCardType = {
   name: string
   team: string
   artifact: string
@@ -6,7 +6,7 @@ export interface StartingCardType {
   mark: string
 }
 
-export interface ChangedCardType {
+export type ChangedCardType = {
   new_name: string
   new_team: string
   new_artifact: string
@@ -14,12 +14,12 @@ export interface ChangedCardType {
   new_mark: string
 }
 
-export interface EndOfGameType {
+export type EndOfGameType = {
   votes: number
   pointed_at_who: string
 }
 
-export interface PlayerType {
+export type PlayerType = {
   starting_card: StartingCardType
   gameplay_changes: ChangedCardType[]
   end_of_game: EndOfGameType

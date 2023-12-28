@@ -1,4 +1,4 @@
-export interface CardType {
+export type CardType = {
   id: number
   expansion: string
   display_name: string
@@ -9,14 +9,14 @@ export interface CardType {
   rules: string
 }
 
-export interface TokenType {
+export type TokenType = {
   id: number
   expansion: string
   card_name: string
   rules: string
 }
 
-export interface ActionCardType {
+export type ActionCardType = {
   id: number
   team: string
   wake_up_time: string

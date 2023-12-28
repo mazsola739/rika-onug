@@ -1,7 +1,7 @@
 import { expansion, team, wake } from 'constant'
 import { ActionCardType } from 'types'
 
-export const actionCards: ActionCardType[] = [
+export const actioncards: ActionCardType[] = [
   {
     id: 50,
     team: team.village,

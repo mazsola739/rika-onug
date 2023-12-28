@@ -1,4 +1,4 @@
-export interface TeamsType {
+export type TeamsType = {
   village: number
   hero: number
   own: number
@@ -8,7 +8,7 @@ export interface TeamsType {
   villain: number
 }
 
-export interface ExpansionsType {
+export type ExpansionsType = {
   [key: string]: string
   onuw: 'Werewolf'
   onud: 'Daybreak'
@@ -18,14 +18,14 @@ export interface ExpansionsType {
   onub: 'Bonus Roles'
 }
 
-export interface WakeType {
+export type WakeType = {
   day: 'day'
   twilight: 'twilight'
   dusk: 'dusk'
   night: 'night'
 }
 
-export interface ExpansionType {
+export type ExpansionType = {
   werewolf: 'onuw'
   daybreak: 'onud'
   vampire: 'onuv'
@@ -34,7 +34,7 @@ export interface ExpansionType {
   bonusroles: 'onub'
 }
 
-export interface TeamType {
+export type TeamType = {
   village: 'village'
   hero: 'hero'
   own: 'own'
