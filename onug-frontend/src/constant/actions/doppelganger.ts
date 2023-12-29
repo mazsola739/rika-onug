@@ -1,4 +1,4 @@
-//TODO
+//TODO supervillains + heroes
 
 export const doppelganger: Record<string, string> = {
   doppelganger_wake_text:

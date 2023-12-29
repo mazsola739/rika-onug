@@ -4,6 +4,7 @@ export const nostradamus: Record<string, string> = {
   nostradamus_close_text: 'NOSTRADAMUS, close your eyes.',
 
   nostradamus_teamstart_text: 'Nostradamus is on the ',
+
   nostradamus_team_alien_text: 'Alien team.',
   nostradamus_team_werewolf_text: 'Werewolf team;',
   nostradamus_team_vampire_text: 'Vampire team.',

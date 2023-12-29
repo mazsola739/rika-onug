@@ -4,8 +4,6 @@ import { actionStoreUtils } from 'utils'
 
 const { generateTimedAction } = actionStoreUtils
 
-//todo if copycat & doppelgänger ?
-
 class MirrormanStore {
   actionTime: number
 

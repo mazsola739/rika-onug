@@ -3,7 +3,12 @@ import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
 //todo randomization
-type OracleActionKeys = keyof typeof random_orac
+
+type OracleKeys = keyof typeof random_oracle
+
+const ANSWER = 'yes' //todo delete
+const NUMBER = 1 //todo delete
+
 const { generateTimedAction, getRandomKeyFromObject } = actionStoreUtils
 
 class OracleStore {
@@ -16,68 +21,89 @@ class OracleStore {
   generateActions(): RoleActionType[] {
     const oracleActions: RoleActionType[] = []
 
-    const firstActionKey: OracleActionKeys = getRandomKeyFromObject(random_orac)
-    const getAction =
-      random_oracle[firstActionKey as keyof typeof random_oracle]
+    /*    const actionKey: OracleKeys = getRandomKeyFromObject(
+      random_orac
+    ) as OracleKeys
 
-    const transformToDesiredFormat = (
-      data: Record<string, string>
+     const getRandomAction = (): RoleActionType[] => {
+      const actionObject = random_oracle[actionKey]
+      const actionKeys = Object.keys(actionObject)
+      const firstElement =
+        actionObject[actionKeys[0] as keyof typeof actionObject]
+      const result: RoleActionType = {
+        text: firstElement,
+        time: BASE_TIME,
+      }
+
+      return [result]
+    }
+
+    const getRandomOracleAction = (
+      answer: string | number
     ): RoleActionType[] => {
-      const transformedData: RoleActionType[] = []
+      const actionObject = random_oracle[randomActionKey]
+      const actionKeys = Object.keys(actionObject)
+      const firstElementKey = actionKeys[0]
 
-      for (const key in data) {
-        if (Object.prototype.hasOwnProperty.call(data, key)) {
-          transformedData.push({ text: data[key], time: BASE_TIME })
+      if (firstElementKey === 'answer_yes' || firstElementKey === 'answer_no') {
+        const answerKey = answer === 'yes' ? 'answer_yes' : 'answer_no'
+        const possibleAnswers = actionObject[answerKey]
+        const possibleAnswersKeys = Object.keys(possibleAnswers)
+        const randomAnswerKey =
+          possibleAnswersKeys[
+            Math.floor(Math.random() * possibleAnswersKeys.length)
+          ]
+        const randomYesNoAnswer = possibleAnswers[randomAnswerKey]
+        return [{ text: randomYesNoAnswer, time: BASE_TIME }]
+      }
+
+      if (
+        firstElementKey === 'oracle_evenodd_odd_text' ||
+        firstElementKey === 'oracle_evenodd_even_text'
+      ) {
+        return [
+          {
+            text: random_oracle.random_oracle_evenodd[
+              `oracle_evenodd_${answer}_text`
+            ],
+            time: BASE_TIME,
+          },
+        ]
+      }
+
+      if (
+        firstElementKey === 'oracle_guessnumber_success_text' ||
+        firstElementKey === 'oracle_guessnumber_failure_text'
+      ) {
+        const randomNumber = Math.floor(Math.random() * 10) + 1 // Random number between 1 to 10
+        if (randomNumber === answer) {
+          return [
+            {
+              text: random_oracle.random_oracle_number
+                .oracle_guessnumber_success_text,
+              time: BASE_TIME,
+            },
+          ]
+        } else {
+          return [
+            {
+              text: random_oracle.random_oracle_number
+                .oracle_guessnumber_failure_text,
+              time: BASE_TIME,
+            },
+          ]
         }
       }
 
-      return transformedData
-    }
-
-    const actions: RoleActionType[] = []
-
-    switch (firstActionKey) {
-      case 'random_oracle_aliensen':
-        actions.push(...transformToDesiredFormat(getAction))
-        break
-      case 'random_oracle_werewolf':
-        actions.push(...transformToDesiredFormat(getAction))
-        break
-      case 'random_oracle_vampire':
-        actions.push(...transformToDesiredFormat(getAction))
-        break
-      case 'random_oracle_aliensenexchange':
-        actions.push(...transformToDesiredFormat(getAction))
-        break
-      case 'random_oracle_exchange':
-        actions.push(...transformToDesiredFormat(getAction))
-        break
-      case 'random_oracle_center':
-        actions.push(...transformToDesiredFormat(getAction))
-        break
-      case 'random_oracle_ripple':
-        actions.push(...transformToDesiredFormat(getAction))
-        break
-      case 'random_oracle_evenodd':
-        actions.push(...transformToDesiredFormat(getAction))
-        break
-      case 'random_oracle_playernum':
-        actions.push(...transformToDesiredFormat(getAction))
-        break
-      case 'random_oracle_number':
-        actions.push(...transformToDesiredFormat(getAction))
-        break
-      default:
-        actions.push(...transformToDesiredFormat(getAction))
-        break
-    }
+      throw new Error('Unhandled action key')
+    } */
 
     oracleActions.push(
       {
         text: oracle.oracle_wake_text,
         time: BASE_TIME,
       },
-      ...actions,
+      /*     ...randomAction, */
       generateTimedAction(this.actionTime),
       {
         text: oracle.oracle_close_text,

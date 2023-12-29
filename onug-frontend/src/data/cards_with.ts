@@ -542,7 +542,7 @@ export const cards: CardType[] = [
     order: 20,
     rules: rules_role.rules_zerb,
   },
-  /* {
+  {
     id: 55,
     expansion: expansion.supervillains,
     display_name: roles.role_annoyinglad,
@@ -551,7 +551,7 @@ export const cards: CardType[] = [
     card_name: 'onus_annoying_lad',
     order: 40,
     rules: rules_role.rules_annoylad,
-  }, 
+  },
   {
     id: 56,
     expansion: expansion.supervillains,
@@ -701,7 +701,7 @@ export const cards: CardType[] = [
     card_name: 'onus_voodoo_lou',
     order: 52,
     rules: rules_role.rules_voodoolou,
-  },*/
+  },
   {
     id: 71,
     expansion: expansion.bonusroles,
@@ -752,7 +752,7 @@ export const cards: CardType[] = [
     order: 80,
     rules: rules_role.rules_cursed,
   },
-  /*  {
+  {
     id: 76,
     expansion: expansion.bonusroles,
     display_name: roles.role_defenderer,
@@ -761,7 +761,7 @@ export const cards: CardType[] = [
     card_name: 'onub_defender_er',
     order: 83,
     rules: rules_role.rules_defenderer,
-  }, */
+  },
   {
     id: 77,
     expansion: expansion.bonusroles,
@@ -772,7 +772,7 @@ export const cards: CardType[] = [
     order: 68,
     rules: rules_role.rules_emapth,
   },
-  /*  {
+  {
     id: 78,
     expansion: expansion.bonusroles,
     display_name: roles.role_familyman,
@@ -791,7 +791,7 @@ export const cards: CardType[] = [
     card_name: 'onub_innocent_bystander',
     order: 86,
     rules: rules_role.rules_innocentbystander,
-  },*/
+  },
   {
     id: 80,
     expansion: expansion.bonusroles,
@@ -812,7 +812,7 @@ export const cards: CardType[] = [
     order: 79,
     rules: rules_role.rules_prince,
   },
-  /*  {
+  {
     id: 82,
     expansion: expansion.bonusroles,
     display_name: roles.role_ricochetrhino,
@@ -821,7 +821,7 @@ export const cards: CardType[] = [
     card_name: 'onub_ricochet_rhino',
     order: 82,
     rules: rules_role.rules_rhino,
-  }, */
+  },
   {
     id: 83,
     expansion: expansion.bonusroles,
@@ -832,7 +832,7 @@ export const cards: CardType[] = [
     order: 62,
     rules: rules_role.rules_squire,
   },
-  /*  {
+  {
     id: 84,
     expansion: expansion.bonusroles,
     display_name: roles.role_thesponge,
@@ -841,7 +841,7 @@ export const cards: CardType[] = [
     card_name: 'onub_the_sponge',
     order: 81,
     rules: rules_role.rules_thesponge,
-  }, */
+  },
   {
     id: 85,
     expansion: expansion.bonusroles,
@@ -852,7 +852,7 @@ export const cards: CardType[] = [
     order: 39,
     rules: rules_role.rules_thing,
   },
-  /*  {
+  {
     id: 86,
     expansion: expansion.bonusroles,
     display_name: roles.role_windywendy,
@@ -861,7 +861,7 @@ export const cards: CardType[] = [
     card_name: 'onub_windy_wendy',
     order: 84,
     rules: rules_role.rules_windywendy,
-  }, */
+  },
 
   /* {
         id: 87,

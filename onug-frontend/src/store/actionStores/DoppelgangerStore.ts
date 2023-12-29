@@ -10,6 +10,8 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
+//TODO supervillains + heroes
+
 const { areAnyCardsSelectedById, generateTimedAction, isCardSelectedById } =
   actionStoreUtils
 

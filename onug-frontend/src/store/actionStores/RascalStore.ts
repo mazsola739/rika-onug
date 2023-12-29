@@ -13,7 +13,7 @@ import { actionStoreUtils } from 'utils'
 
 const { generateTimedAction, isCardSelectedById } = actionStoreUtils
 
-//TODO refactor
+//TODO review
 
 class RascalStore {
   actionTime: number
