@@ -6,6 +6,7 @@ import { useMemo } from 'react'
 export const RoomHeader = observer(() => {
   const randomcard = Math.floor(Math.random() * cards.length) + 1
   const card_name = cards[randomcard].card_name
+  const card_display = cards[randomcard].display_name
   const card_rules = cards[randomcard].rules
 
   const cardSrc = useMemo(
@@ -30,7 +31,9 @@ export const RoomHeader = observer(() => {
       >
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <img src={cardSrc} alt={card_name} style={{ width: '100px' }} />
-          <p>{card_rules}</p>
+          <p>
+            {card_display}: {card_rules}
+          </p>
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <img

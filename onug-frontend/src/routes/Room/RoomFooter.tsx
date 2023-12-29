@@ -2,7 +2,7 @@ import { Button, Footer, FooterButtons, LinkButton } from 'components'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
 import { buttons } from 'constant'
-import { gamePlayStore, selectedDeckStore } from 'store' // Direct store imports
+import { gamePlayStore, selectedDeckStore } from 'store'
 
 export const RoomFooter = observer(() => {
   const handlePauseGame = useCallback(() => {

@@ -1,5 +1,6 @@
 export type StartingCardType = {
-  name: string
+  card_name: string
+  display_name: string
   team: string
   artifact: string
   shield: boolean

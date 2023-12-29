@@ -1,31 +1,30 @@
 import { selectedDeckStore } from 'store'
 import { StyledSelectedCard } from './SelectedCard.styles'
 import { SelectedCardProps } from './SelectedCard.types'
+import { observer } from 'mobx-react-lite'
 
-export const SelectedCard = ({
-  src,
-  alt,
-  id,
-}: SelectedCardProps & { id: number }) => {
-  const handleDeselect = () => {
-    selectedDeckStore.toggleCardSelection({
-      id,
-      display_name: alt,
-      expansion: '',
-      team: '',
-      wake_up_time: '',
-      card_name: '',
-      order: 0,
-      rules: '',
-    })
+export const SelectedCard = observer(
+  ({ src, alt, id }: SelectedCardProps & { id: number }) => {
+    const handleDeselect = () => {
+      selectedDeckStore.toggleCardSelection({
+        id,
+        display_name: alt,
+        expansion: '',
+        team: '',
+        wake_up_time: '',
+        card_name: '',
+        order: 0,
+        rules: '',
+      })
+    }
+
+    return (
+      <StyledSelectedCard
+        key={alt}
+        src={src}
+        alt={alt}
+        onClick={handleDeselect}
+      />
+    )
   }
-
-  return (
-    <StyledSelectedCard
-      key={alt}
-      src={src}
-      alt={alt}
-      onClick={handleDeselect}
-    />
-  )
-}
+)
