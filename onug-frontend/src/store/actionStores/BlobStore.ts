@@ -1,10 +1,15 @@
 import { random_blob, blob, BASE_TIME } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
 const { getRandomKeyFromObject } = actionStoreUtils
 
 class BlobStore {
+  constructor() {
+    makeAutoObservable(this)
+  }
+
   generateActions(): RoleActionType[] {
     const blobActions: RoleActionType[] = []
 

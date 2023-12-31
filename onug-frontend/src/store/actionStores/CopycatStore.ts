@@ -1,14 +1,13 @@
-import { BASE_TIME, copycat } from 'constant'
+import { copycat, BASE_TIME, ACTION_TIME } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
 const { generateTimedAction } = actionStoreUtils
 
 class CopycatStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   generateActions(): RoleActionType[] {
@@ -19,7 +18,7 @@ class CopycatStore {
         text: copycat.copycat_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       {
         text: copycat.copycat_close_text,
         time: BASE_TIME,

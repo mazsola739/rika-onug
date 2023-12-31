@@ -30,9 +30,6 @@ const areAnyCardsSelectedById = (
 ): boolean =>
   cardIds.some((cardId) => isCardSelectedById(selectedCards, cardId))
 
-const formatActionTimeText = (actionTime: number): string =>
-  `${time.timertext_prefix}${actionTime}${time.timertext_postfix}`
-
 const generateTimedAction = (actionTime: number): RoleActionType => ({
   text: `${time.timertext_prefix}${actionTime}${time.timertext_postfix}`,
   time: actionTime,
@@ -96,7 +93,6 @@ export const actionStoreUtils = {
   addRoleActions,
   areAllCardsSelectedById,
   areAnyCardsSelectedById,
-  formatActionTimeText,
   generateTimedAction,
   getRandomIndexFromArray,
   getRandomJoke,

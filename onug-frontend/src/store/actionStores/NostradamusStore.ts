@@ -1,4 +1,19 @@
-import { BASE_TIME, nostradamus } from 'constant'
+import {
+  alienTeam,
+  wolfTeam,
+  vampireTeam,
+  assassinTeam,
+  tannerTeam,
+  syntheticTeam,
+  blobTeam,
+  morticianTeam,
+  apprenticeassassinTeam,
+  doppelgangerTeam,
+  nostradamus,
+  BASE_TIME,
+  ACTION_TIME,
+} from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
@@ -7,10 +22,8 @@ const { generateTimedAction } = actionStoreUtils
 const ID = 0 //TODO delete
 
 class NostradamusStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   generateActions(): RoleActionType[] {
@@ -18,16 +31,16 @@ class NostradamusStore {
 
     const getTeamText = (id: number) => {
       const teams = {
-        alien: [42, 43, 47, 54, 74],
-        werewolf: [7, 15, 16, 17, 21, 22, 83],
-        vampire: [38, 39, 40, 41],
-        assassin: [29],
-        tanner: [10, 71],
-        synthetic: [53],
-        blob: [44],
-        mortician: [49],
-        apprenticeassassin: [28],
-        doppelganger: [1],
+        alien: alienTeam,
+        werewolf: wolfTeam,
+        vampire: vampireTeam,
+        assassin: assassinTeam,
+        tanner: tannerTeam,
+        synthetic: syntheticTeam,
+        blob: blobTeam,
+        mortician: morticianTeam,
+        apprenticeassassin: apprenticeassassinTeam,
+        doppelganger: doppelgangerTeam,
       }
 
       for (const [team, criteria] of Object.entries(teams)) {
@@ -44,7 +57,7 @@ class NostradamusStore {
         text: nostradamus.nostradamus_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       {
         text: nostradamus.nostradamus_teamstart_text,
         time: BASE_TIME,

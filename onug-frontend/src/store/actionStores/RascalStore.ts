@@ -1,12 +1,14 @@
 import {
-  rascal,
   random_rascal,
-  identifier,
-  rascalStoreAnyOneKeys,
-  rascalStoreAnyTwoKeys,
+  rascal,
   BASE_TIME,
+  rascalStoreAnyTwoKeys,
+  rascalStoreAnyOneKeys,
+  identifier,
+  ACTION_TIME,
   doppelganger,
 } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -16,10 +18,8 @@ const { generateTimedAction, isCardSelectedById } = actionStoreUtils
 //TODO review
 
 class RascalStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -76,7 +76,7 @@ class RascalStore {
       }
     }
 
-    rascalActions.push(generateTimedAction(this.actionTime), {
+    rascalActions.push(generateTimedAction(ACTION_TIME), {
       text: rascal.rascal_close_text,
       time: BASE_TIME,
     })
@@ -122,7 +122,7 @@ class RascalStore {
     }
 
     if (isCardSelectedById(this.deck, 1)) {
-      rascalActions.push(generateTimedAction(this.actionTime), {
+      rascalActions.push(generateTimedAction(ACTION_TIME), {
         text: doppelganger.doppelganger_close_text,
         time: BASE_TIME,
       })

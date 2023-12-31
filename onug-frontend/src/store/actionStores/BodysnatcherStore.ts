@@ -1,20 +1,20 @@
 import {
-  BASE_TIME,
+  random_bodysnatcher,
   bodysnatcher,
+  BASE_TIME,
   bodysnatcherStoreKeys,
   identifier,
-  random_bodysnatcher,
+  ACTION_TIME,
 } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
 const { generateTimedAction } = actionStoreUtils
 
 class BodysnatcherStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   generateActions(): RoleActionType[] {
@@ -53,7 +53,7 @@ class BodysnatcherStore {
       }
     }
 
-    bodysnatcherActions.push(generateTimedAction(this.actionTime), {
+    bodysnatcherActions.push(generateTimedAction(ACTION_TIME), {
       text: bodysnatcher.bodysnatcher_close_text,
       time: BASE_TIME,
     })

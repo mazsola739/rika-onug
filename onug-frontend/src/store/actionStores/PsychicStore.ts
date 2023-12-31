@@ -1,4 +1,5 @@
-import { BASE_TIME, doppelganger, psychic } from 'constant'
+import { psychic, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -10,10 +11,8 @@ const {
 } = actionStoreUtils
 
 class PsychicStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -32,7 +31,7 @@ class PsychicStore {
       { text: psychic.psychic_wake_text, time: BASE_TIME },
       { text: randomPsychicActionText, time: BASE_TIME },
       { text: chosenPsychicText, time: BASE_TIME },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       { text: psychic.psychic_close_text, time: BASE_TIME }
     )
 
@@ -46,7 +45,7 @@ class PsychicStore {
         { text: doppelganger.doppelganger_psychic_wake_text, time: BASE_TIME },
         { text: randomDoppelgangerActionText, time: BASE_TIME },
         { text: chosenDoppelgangerText, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }

@@ -1,4 +1,5 @@
-import { BASE_TIME, doppelganger, squire } from 'constant'
+import { squire, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -6,10 +7,8 @@ import { actionStoreUtils } from 'utils'
 const { generateTimedAction, isCardSelectedById } = actionStoreUtils
 
 class SquireStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -24,7 +23,7 @@ class SquireStore {
         text: squire.squire_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       {
         text: squire.squire_close_text,
         time: BASE_TIME,
@@ -38,7 +37,7 @@ class SquireStore {
           text: doppelganger.doppelganger_squire_wake_text,
           time: BASE_TIME,
         },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }

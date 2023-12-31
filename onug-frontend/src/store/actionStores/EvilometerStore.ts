@@ -1,14 +1,13 @@
-import { BASE_TIME, evilometer } from 'constant'
+import { evilometer, BASE_TIME, ACTION_TIME } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
 const { generateTimedAction } = actionStoreUtils
 
 class EvilometerStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   generateActions(): RoleActionType[] {
@@ -19,7 +18,7 @@ class EvilometerStore {
         text: evilometer.evilometer_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       {
         text: evilometer.evilometer_close_text,
         time: BASE_TIME,

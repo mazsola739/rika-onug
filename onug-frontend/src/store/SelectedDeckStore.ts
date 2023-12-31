@@ -3,7 +3,7 @@ import { CardType, ActionCardType } from 'types'
 import { selectedDeckUtils } from 'utils'
 import { deckStore } from 'store'
 import { actioncards } from 'data'
-import { roles } from 'constant'
+import { alienIds, roles } from 'constant'
 
 const {
   containsById,
@@ -127,6 +127,10 @@ class SelectedDeckStore {
   isEpicBattle(): boolean {
     const evils = ['vampire', 'alien', 'werewolf', 'supervillain']
     return hasSpecificRolesInDeck(this.gamePlayDeck, evils)
+  }
+
+  shouldStartRipple(): boolean {
+    return this.selectedCards.some((card) => alienIds.includes(card.id))
   }
 }
 

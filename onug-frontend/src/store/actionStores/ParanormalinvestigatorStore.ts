@@ -1,4 +1,5 @@
-import { BASE_TIME, paranormalinvestigator } from 'constant'
+import { paranormalinvestigator, BASE_TIME, ACTION_TIME } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -6,10 +7,8 @@ import { actionStoreUtils } from 'utils'
 const { generateTimedAction } = actionStoreUtils
 
 class ParanormalinvestigatorStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get hasDusk(): boolean {
@@ -26,7 +25,7 @@ class ParanormalinvestigatorStore {
           : paranormalinvestigator.paranormalinvestigator_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       {
         text: paranormalinvestigator.paranormalinvestigator_close_text,
         time: BASE_TIME,

@@ -1,14 +1,13 @@
-import { BASE_TIME, familyman_close, familyman_wake } from 'constant'
+import { familyman_wake, familyman_close, BASE_TIME } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
 const { getRandomKeyFromObject } = actionStoreUtils
 
 class FamilymanStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   generateActions(): RoleActionType[] {

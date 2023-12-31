@@ -1,4 +1,5 @@
-import { BASE_TIME, auraseer, doppelganger } from 'constant'
+import { auraseer, doppelganger, BASE_TIME, ACTION_TIME } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -6,10 +7,8 @@ import { actionStoreUtils } from 'utils'
 const { generateTimedAction, isCardSelectedById } = actionStoreUtils
 
 class AuraseerStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get hasDusk(): boolean {
@@ -36,7 +35,7 @@ class AuraseerStore {
         text: auraseerWakeText,
         time: BASE_TIME,
       },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       {
         text: auraseer.auraseer_close_text,
         time: BASE_TIME,
@@ -50,7 +49,7 @@ class AuraseerStore {
           text: doppelgangerWakeText,
           time: BASE_TIME,
         },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
 
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )

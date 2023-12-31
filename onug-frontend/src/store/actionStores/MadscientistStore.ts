@@ -1,18 +1,17 @@
 import {
   madscientist,
+  BASE_TIME,
   random_madscientist_intro,
   random_madscientist_therefore,
   random_madscientist_result,
   random_madscientist_transition,
-  BASE_TIME,
 } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
 
 class MadscientistStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   generateActions(): RoleActionType[] {

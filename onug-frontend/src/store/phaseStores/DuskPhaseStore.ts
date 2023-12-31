@@ -2,17 +2,14 @@ import { ActionCardType, RoleActionType } from 'types'
 import * as ActionStores from '../actionStores'
 import { selectedDeckStore } from 'store'
 import { actionStoreUtils } from 'utils'
+import { makeAutoObservable } from 'mobx'
 
 const { addRoleActions, areAnyCardsSelectedById, isCardSelectedById } =
   actionStoreUtils
 
 class DuskPhaseStore {
-  actionTime: number
-  votingTime: number
-
-  constructor(actionTime = 10, votingTime = 240) {
-    this.actionTime = actionTime
-    this.votingTime = votingTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {

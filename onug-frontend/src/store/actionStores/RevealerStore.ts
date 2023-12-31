@@ -1,4 +1,5 @@
-import { BASE_TIME, doppelganger, revealer } from 'constant'
+import { revealer, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -6,10 +7,8 @@ import { actionStoreUtils } from 'utils'
 const { generateTimedAction, isCardSelectedById } = actionStoreUtils
 
 class RevealerStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -24,7 +23,7 @@ class RevealerStore {
         text: revealer.revealer_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       {
         text: revealer.revealer_close_text,
         time: BASE_TIME,
@@ -38,7 +37,7 @@ class RevealerStore {
           text: doppelganger.doppelganger_revealer_wake_text,
           time: BASE_TIME,
         },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }

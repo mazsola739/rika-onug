@@ -1,15 +1,14 @@
-import { BASE_TIME, werewolves, wolfIds } from 'constant'
+import { wolfIds, werewolves, BASE_TIME, ACTION_TIME } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-const { formatActionTimeText, isCardSelectedById } = actionStoreUtils
+const { generateTimedAction, isCardSelectedById } = actionStoreUtils
 
 class WerewolfStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -36,7 +35,7 @@ class WerewolfStore {
     if (this.countWolvesInGame() <= 4) {
       werewolfActions.push(
         { text: werewolves.werewolves_lonewolf_text, time: BASE_TIME },
-        { text: formatActionTimeText(this.actionTime), time: this.actionTime }
+        generateTimedAction(ACTION_TIME)
       )
     }
 

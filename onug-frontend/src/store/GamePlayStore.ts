@@ -2,10 +2,11 @@ import { makeAutoObservable } from 'mobx'
 import {
   duskPhaseStore,
   nightPhaseStore,
+  ripplePhaseStore,
   selectedDeckStore,
   twilightPhaseStore,
 } from 'store'
-import { BASE_TIME, everyone } from 'constant'
+import { ACTION_TIME, BASE_TIME, VOTING_TIME, everyone } from 'constant'
 import { RoleActionType } from 'types'
 
 import { actionStoreUtils, gamePlayStoreUtils } from 'utils'
@@ -14,15 +15,11 @@ const { generateTimedAction, getRandomJoke } = actionStoreUtils
 const { addBasicAction } = gamePlayStoreUtils
 
 class GamePlayStore {
-  actionTime: number
-  votingTime: number
   isGameStarted = false
   isGameStopped = true
   isGamePaused = false
 
-  constructor(actionTime = 10, votingTime = 240) {
-    this.actionTime = actionTime
-    this.votingTime = votingTime
+  constructor() {
     makeAutoObservable(this)
   }
 
@@ -34,11 +31,18 @@ class GamePlayStore {
     return selectedDeckStore.isEpicBattle()
   }
 
+  get shouldStartRipple(): boolean {
+    return selectedDeckStore.shouldStartRipple()
+  }
+
   generateActions(): RoleActionType[] {
     const gamePlayActions: RoleActionType[] = []
     this.addEpicBattleIntro(gamePlayActions)
     this.addStartingActions(gamePlayActions)
     this.addPhaseActions(gamePlayActions)
+    if (this.shouldStartRipple) {
+      this.addRipplePhaseActions(gamePlayActions)
+    }
     this.addJokeAndVoting(gamePlayActions)
     return gamePlayActions
   }
@@ -66,7 +70,7 @@ class GamePlayStore {
 
   addStartingActions(actions: RoleActionType[]): void {
     addBasicAction(actions, everyone.everyone_start_card_text, BASE_TIME)
-    actions.push(generateTimedAction(this.actionTime))
+    actions.push(generateTimedAction(ACTION_TIME))
     addBasicAction(actions, everyone.everyone_close_text, BASE_TIME)
   }
 
@@ -78,11 +82,15 @@ class GamePlayStore {
 
     if (this.hasDusk) {
       addBasicAction(actions, everyone.everyone_wake_dusk_text, BASE_TIME)
-      actions.push(generateTimedAction(this.actionTime))
+      actions.push(generateTimedAction(ACTION_TIME))
       addBasicAction(actions, everyone.everyone_close_text, BASE_TIME)
     }
 
     actions.push(...nightPhaseStore.generateActions())
+  }
+
+  addRipplePhaseActions(actions: RoleActionType[]): void {
+    actions.push(...ripplePhaseStore.generateActions())
   }
 
   addJokeAndVoting(actions: RoleActionType[]): void {
@@ -94,7 +102,7 @@ class GamePlayStore {
     addBasicAction(
       actions,
       everyone.everyone_wake_text,
-      BASE_TIME + this.votingTime
+      BASE_TIME + VOTING_TIME
     )
     addBasicAction(actions, everyone.everyone_vote_text, BASE_TIME)
   }

@@ -1,4 +1,11 @@
-import { BASE_TIME, oracle, random_orac, random_oracle } from 'constant'
+import {
+  random_orac,
+  random_oracle,
+  BASE_TIME,
+  ACTION_TIME,
+  oracle,
+} from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -19,10 +26,8 @@ const {
 } = actionStoreUtils
 
 class OracleStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   generateActions(): RoleActionType[] {
@@ -35,7 +40,7 @@ class OracleStore {
 
     const randomOracleAction: RoleActionType[] = [
       { text: randomActionIntro, time: BASE_TIME },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
     ]
 
     const player = (answerPlayer: number) => {

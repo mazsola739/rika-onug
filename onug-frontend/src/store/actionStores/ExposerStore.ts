@@ -1,4 +1,11 @@
-import { random_exposer, exposer, BASE_TIME, doppelganger } from 'constant'
+import {
+  random_exposer,
+  exposer,
+  BASE_TIME,
+  ACTION_TIME,
+  doppelganger,
+} from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -7,10 +14,8 @@ const { generateTimedAction, getRandomKeyFromObject, isCardSelectedById } =
   actionStoreUtils
 
 class ExposerStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -31,7 +36,7 @@ class ExposerStore {
         ],
         time: BASE_TIME,
       },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       { text: exposer.exposer_close_text, time: BASE_TIME }
     )
 
@@ -48,7 +53,7 @@ class ExposerStore {
           ],
           time: BASE_TIME,
         },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }

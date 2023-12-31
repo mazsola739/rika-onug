@@ -1,4 +1,5 @@
-import { BASE_TIME, doppelganger, renfield } from 'constant'
+import { renfield, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -6,10 +7,8 @@ import { actionStoreUtils } from 'utils'
 const { generateTimedAction, isCardSelectedById } = actionStoreUtils
 
 class RenfieldStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -24,7 +23,7 @@ class RenfieldStore {
         text: renfield.renfield_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       {
         text: renfield.renfield_close_text,
         time: BASE_TIME,
@@ -35,7 +34,7 @@ class RenfieldStore {
     if (isCardSelectedById(this.deck, 1)) {
       renfieldActions.push(
         { text: doppelganger.doppelganger_renfield_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }

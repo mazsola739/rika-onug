@@ -1,11 +1,13 @@
 import {
   random_mortician,
-  mortician,
-  BASE_TIME,
-  doppelganger,
   morticianStoreAllKeys,
   identifier,
+  mortician,
+  BASE_TIME,
+  ACTION_TIME,
+  doppelganger,
 } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -14,10 +16,8 @@ const { getRandomKeyFromObject, generateTimedAction, isCardSelectedById } =
   actionStoreUtils
 
 class MorticianStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -75,7 +75,7 @@ class MorticianStore {
       })
     }
 
-    morticiansActions.push(generateTimedAction(this.actionTime), {
+    morticiansActions.push(generateTimedAction(ACTION_TIME), {
       text: mortician.mortician_close_text,
       time: BASE_TIME,
     })
@@ -104,7 +104,7 @@ class MorticianStore {
         })
       }
 
-      morticiansActions.push(generateTimedAction(this.actionTime), {
+      morticiansActions.push(generateTimedAction(ACTION_TIME), {
         text: doppelganger.doppelganger_close_text,
         time: BASE_TIME,
       })

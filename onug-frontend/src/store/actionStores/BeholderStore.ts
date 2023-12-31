@@ -1,4 +1,5 @@
-import { BASE_TIME, beholder, doppelganger } from 'constant'
+import { beholder, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -8,10 +9,8 @@ import { actionStoreUtils } from 'utils'
 const { generateTimedAction, isCardSelectedById } = actionStoreUtils
 
 class BeholderStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -28,7 +27,7 @@ class BeholderStore {
     ) {
       beholderActions.push(
         { text: beholder.beholder_seer_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime)
+        generateTimedAction(ACTION_TIME)
       )
 
       //Doppelganger
@@ -42,7 +41,7 @@ class BeholderStore {
             text: doppelganger.doppelganger_beholder_seer_wake_text,
             time: BASE_TIME,
           },
-          generateTimedAction(this.actionTime),
+          generateTimedAction(ACTION_TIME),
           {
             text: beholder.beholder_seer_thumbaway_text,
             time: BASE_TIME,
@@ -70,7 +69,7 @@ class BeholderStore {
     ) {
       beholderActions.push(
         { text: beholder.beholder_apprenticeseer_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime)
+        generateTimedAction(ACTION_TIME)
       )
 
       //Doppelganger
@@ -84,7 +83,7 @@ class BeholderStore {
             text: doppelganger.doppelganger_beholder_apprenticeseer_wake_text,
             time: BASE_TIME,
           },
-          generateTimedAction(this.actionTime),
+          generateTimedAction(ACTION_TIME),
           {
             text: beholder.beholder_apprenticeseer_thumbaway_text,
             time: BASE_TIME,
@@ -112,7 +111,7 @@ class BeholderStore {
           text: beholder.beholder_seer_apprenticeseer_wake_text,
           time: BASE_TIME,
         },
-        generateTimedAction(this.actionTime)
+        generateTimedAction(ACTION_TIME)
       )
 
       //Doppelganger
@@ -126,7 +125,7 @@ class BeholderStore {
             text: doppelganger.doppelganger_beholder_seer_apprenticeseer_wake_text,
             time: BASE_TIME,
           },
-          generateTimedAction(this.actionTime),
+          generateTimedAction(ACTION_TIME),
           {
             text: beholder.beholder_seer_apprenticeseer_thumbaway_text,
             time: BASE_TIME,

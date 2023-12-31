@@ -1,17 +1,16 @@
-import { BASE_TIME, doppelganger, leader } from 'constant'
-import { ActionCardType, RoleActionType } from 'types'
-import { zerbgroobStore } from './ZerbandgroobStore'
+import { leader, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
+import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
+import { zerbgroobStore } from './ZerbandgroobStore'
 
 const { areAllCardsSelectedById, generateTimedAction, isCardSelectedById } =
   actionStoreUtils
 
 class LeaderStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -26,7 +25,7 @@ class LeaderStore {
         text: leader.leader_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
 
       ...(areAllCardsSelectedById(this.deck, [47, 54])
         ? zerbgroobStore.generateActions()
@@ -41,12 +40,12 @@ class LeaderStore {
     if (isCardSelectedById(this.deck, 1)) {
       leaderActions.push(
         { text: doppelganger.doppelganger_leader_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         areAllCardsSelectedById(this.deck, [47, 54]) && {
           text: doppelganger.doppelganger_leader_zerbgroob_text,
           time: BASE_TIME,
         },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }

@@ -3,6 +3,7 @@ import * as ActionStores from '../actionStores'
 import { selectedDeckStore } from 'store'
 import { actionStoreUtils } from 'utils'
 import { alienIds, supervillainIds, wolfIds } from 'constant'
+import { makeAutoObservable } from 'mobx'
 
 const {
   addRoleActions,
@@ -11,13 +12,11 @@ const {
   isCardSelectedById,
 } = actionStoreUtils
 
-class NightPhaseStore {
-  actionTime: number
-  votingTime: number
+//todo voting time
 
-  constructor(actionTime = 10, votingTime = 240) {
-    this.actionTime = actionTime
-    this.votingTime = votingTime
+class NightPhaseStore {
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {

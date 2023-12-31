@@ -1,11 +1,13 @@
 import {
-  empath,
   empathStoreAllKeys,
-  random_empath,
   identifier,
+  random_empath,
+  empath,
   BASE_TIME,
+  ACTION_TIME,
   doppelganger,
 } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -16,10 +18,8 @@ const { generateTimedAction, isCardSelectedById, pickRandomPlayers } =
   actionStoreUtils
 
 class EmpathStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -69,7 +69,7 @@ class EmpathStore {
       { text: empath.empath_wake_text, time: BASE_TIME },
       { text: chosenEmpathText, time: BASE_TIME },
       { text: randomEmpathActionText, time: BASE_TIME },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       { text: empath.empath_close_text, time: BASE_TIME }
     )
 
@@ -79,7 +79,7 @@ class EmpathStore {
         { text: doppelganger.doppelganger_empath_wake_text, time: BASE_TIME },
         { text: chosenDoppelgangerText, time: BASE_TIME },
         { text: randomDoppelgangerActionText, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_empath_close_text, time: BASE_TIME }
       )
     }

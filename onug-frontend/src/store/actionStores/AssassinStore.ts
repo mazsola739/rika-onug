@@ -1,4 +1,5 @@
-import { BASE_TIME, assassins, doppelganger } from 'constant'
+import { assassins, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -13,10 +14,8 @@ const {
 } = actionStoreUtils
 
 class AssassinStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -33,10 +32,10 @@ class AssassinStore {
     ) {
       assassinActions.push(
         { text: assassins.assassin_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: assassins.assassin_close_text, time: BASE_TIME },
         { text: doppelganger.doppelganger_assassin_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }
@@ -48,7 +47,7 @@ class AssassinStore {
     ) {
       assassinActions.push(
         { text: assassins.assassin_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: assassins.assassin_close_text, time: BASE_TIME }
       )
     }
@@ -60,13 +59,13 @@ class AssassinStore {
     ) {
       assassinActions.push(
         { text: assassins.apprenticeassassin_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: assassins.apprenticeassassin_close_text, time: BASE_TIME },
         {
           text: doppelganger.doppelganger_apprenticeassassin_wake_text,
           time: BASE_TIME,
         },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }
@@ -78,7 +77,7 @@ class AssassinStore {
     ) {
       assassinActions.push(
         { text: assassins.apprenticeassassin_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: assassins.apprenticeassassin_close_text, time: BASE_TIME }
       )
     }
@@ -87,12 +86,12 @@ class AssassinStore {
     if (areAllCardsSelectedById(this.deck, [1, 28, 29])) {
       assassinActions.push(
         { text: assassins.assassin_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         {
           text: assassins.apprenticeassassin_assassin_wake_text,
           time: BASE_TIME,
         },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         {
           text: assassins.apprenticeassassin_close_text,
           time: BASE_TIME,
@@ -101,14 +100,14 @@ class AssassinStore {
           text: doppelganger.doppelganger_apprenticeassassin_assassin_wake_text,
           time: BASE_TIME,
         },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME },
         { text: assassins.assassin_close_text, time: BASE_TIME },
         {
           text: doppelganger.doppelganger_assassin_wake_text,
           time: BASE_TIME,
         },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }
@@ -120,12 +119,12 @@ class AssassinStore {
     ) {
       assassinActions.push(
         { text: assassins.assassin_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         {
           text: assassins.apprenticeassassin_assassin_wake_text,
           time: BASE_TIME,
         },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         {
           text: assassins.assassin_and_apprenticeassassin_close_text,
           time: BASE_TIME,

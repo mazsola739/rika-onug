@@ -1,4 +1,5 @@
-import { BASE_TIME, intern } from 'constant'
+import { intern, BASE_TIME, ACTION_TIME } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -6,10 +7,8 @@ import { actionStoreUtils } from 'utils'
 const { generateTimedAction, isCardSelectedById } = actionStoreUtils
 
 class InternStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -22,7 +21,7 @@ class InternStore {
     if (isCardSelectedById(this.deck, 63)) {
       internActions.push(
         { text: intern.intern_wake_1_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: intern.intern_wake_2_text, time: BASE_TIME }
       )
     } else {

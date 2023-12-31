@@ -1,4 +1,5 @@
-import { BASE_TIME, cow, doppelganger } from 'constant'
+import { cow, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -6,10 +7,8 @@ import { actionStoreUtils } from 'utils'
 const { generateTimedAction, isCardSelectedById } = actionStoreUtils
 
 class CowStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -21,7 +20,7 @@ class CowStore {
 
     cowActions.push(
       { text: cow.cow_fistout_text, time: BASE_TIME },
-      generateTimedAction(this.actionTime),
+      generateTimedAction(ACTION_TIME),
       { text: cow.cow_fistaway_text, time: BASE_TIME }
     )
 
@@ -29,7 +28,7 @@ class CowStore {
     if (isCardSelectedById(this.deck, 1)) {
       cowActions.push(
         { text: doppelganger.doppelganger_cow_wake_text, time: BASE_TIME },
-        generateTimedAction(this.actionTime),
+        generateTimedAction(ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }

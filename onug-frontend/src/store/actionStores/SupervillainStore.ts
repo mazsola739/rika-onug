@@ -1,17 +1,16 @@
-import { BASE_TIME, supervillains } from 'constant'
-import { evilometerStore } from 'store'
+import { supervillains, BASE_TIME, ACTION_TIME } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
+import { evilometerStore } from './EvilometerStore'
 
-const { areAnyCardsSelectedById, formatActionTimeText, isCardSelectedById } =
+const { areAnyCardsSelectedById, generateTimedAction, isCardSelectedById } =
   actionStoreUtils
 
 class SupervillainStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -54,10 +53,7 @@ class SupervillainStore {
       supervillainActions.push(...evilometerStore.generateActions())
     }
 
-    supervillainActions.push({
-      text: formatActionTimeText(this.actionTime),
-      time: this.actionTime,
-    })
+    supervillainActions.push(generateTimedAction(ACTION_TIME))
     supervillainActions.push({ text: closeText, time: BASE_TIME })
 
     return supervillainActions

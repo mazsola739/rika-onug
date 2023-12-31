@@ -1,11 +1,13 @@
 import {
-  BASE_TIME,
-  doppelganger,
   doppelgangerActionsIds,
   doppelganger_nightaction,
-  minion,
   roles,
+  doppelganger,
+  BASE_TIME,
+  ACTION_TIME,
+  minion,
 } from 'constant'
+import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -16,10 +18,8 @@ const { areAnyCardsSelectedById, generateTimedAction, isCardSelectedById } =
   actionStoreUtils
 
 class DoppelgangerStore {
-  actionTime: number
-
-  constructor(actionTime = 10) {
-    this.actionTime = actionTime
+  constructor() {
+    makeAutoObservable(this)
   }
 
   get deck(): ActionCardType[] {
@@ -62,7 +62,7 @@ class DoppelgangerStore {
       ...(isCardSelectedById(this.deck, 7)
         ? [
             { text: doppelganger.doppelganger_minion_text, time: BASE_TIME },
-            generateTimedAction(this.actionTime),
+            generateTimedAction(ACTION_TIME),
             { text: minion.werewolves_thumb_away_text, time: BASE_TIME },
           ]
         : []),

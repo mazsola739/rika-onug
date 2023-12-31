@@ -2,10 +2,15 @@ import { ActionCardType, RoleActionType } from 'types'
 import * as ActionStores from '../actionStores'
 import { actionStoreUtils } from 'utils'
 import { selectedDeckStore } from 'store'
+import { makeAutoObservable } from 'mobx'
 
 const { addRoleActions, isCardSelectedById } = actionStoreUtils
 
 class TwilightPhaseStore {
+  constructor() {
+    makeAutoObservable(this)
+  }
+
   get deck(): ActionCardType[] {
     return selectedDeckStore.gamePlayDeck
   }
