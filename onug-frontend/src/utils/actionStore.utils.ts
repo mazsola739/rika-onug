@@ -38,12 +38,19 @@ const generateTimedAction = (actionTime: number): RoleActionType => ({
   time: actionTime,
 })
 
+const getRandomIndexFromArray = (arr: string[]): number => {
+  return Math.floor(Math.random() * arr.length)
+}
+
 const getRandomJoke = (): string => joke[getRandomKeyFromObject(joke)]
 
 const getRandomKeyFromObject = <T>(obj: T): keyof T => {
   const keys = Object.keys(obj)
   return keys[Math.floor(Math.random() * keys.length)] as keyof T
 }
+
+const getRandomNumber = (min: number, max: number): number =>
+  Math.floor(Math.random() * (max - min + 1)) + min
 
 const getRandomPsychicActionAndText = (): {
   actionText: string
@@ -91,8 +98,10 @@ export const actionStoreUtils = {
   areAnyCardsSelectedById,
   formatActionTimeText,
   generateTimedAction,
+  getRandomIndexFromArray,
   getRandomJoke,
   getRandomKeyFromObject,
+  getRandomNumber,
   getRandomPsychicActionAndText,
   isCardSelectedById,
   pickRandomPlayers,

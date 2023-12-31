@@ -24,10 +24,10 @@ export const random_ripp: Record<string, string> = {
 }
 
 export const random_orac: Record<string, string> = {
-  random_oracle_aliensen: 'Alien Team',
+  random_oracle_aliens: 'Alien Team',
   random_oracle_werewolf: 'Werewolf Team',
   random_oracle_vampire: 'Vampire Team',
-  random_oracle_aliensenexchange: 'Alien Exchange',
+  random_oracle_alienexchange: 'Alien Exchange',
   random_oracle_exchange: 'Exchange',
   random_oracle_center: 'Center',
   random_oracle_ripple: 'Ripple',

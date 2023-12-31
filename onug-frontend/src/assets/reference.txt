@@ -1,6 +1,6 @@
 NO SUPEVILLAINS/HEROES HERE
 
-When playing with Artifacts, role-changing Artifacts (like the Claw of the Werewolf) always override a player’s card and Mark. For instance, the Cudgel of the Tanner Artifact overrides the Mark of the Vampire (which overrode the team of that player’s original card), making that player a Tanner and not a Vampire.
+When playing with  Artifacts, role-changing Artifacts (like the Claw of the Werewolf) always override a player’s card and Mark. For instance, the Cudgel of the Tanner Artifact overrides the Mark of the Vampire (which overrode the team of that player’s original card), making that player a Tanner and not a Vampire.
 
 
 Village Team: 

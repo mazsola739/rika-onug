@@ -10,6 +10,8 @@ import { cowStore } from './CowStore'
 import { actionStoreUtils } from 'utils'
 import { selectedDeckStore } from 'store'
 
+//TODO oracle effect
+
 const { generateTimedAction, isCardSelectedById, pickRandomPlayers } =
   actionStoreUtils
 

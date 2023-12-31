@@ -7,7 +7,7 @@ const filterCardsByIds = (
   return cards.filter((card) => idsToCheck.includes(card.id))
 }
 
-const getRandomItemFromArray = <T>(array: T[]): T | undefined => {
+const getRandomItemFromArray = <T>(array: T[]): T => {
   return array[Math.floor(Math.random() * array.length)]
 }
 
