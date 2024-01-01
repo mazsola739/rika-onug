@@ -1,11 +1,4 @@
-import {
-  identifier,
-  identifier_player,
-  joke,
-  psychicStoreKeys,
-  random_psychic,
-  time,
-} from 'constant'
+import { identifier_player, joke, time } from 'constant'
 import { ActionCardType, RoleActionStoreType, RoleActionType } from 'types'
 
 const addRoleActions = <T extends RoleActionStoreType>(
@@ -35,6 +28,11 @@ const generateTimedAction = (actionTime: number): RoleActionType => ({
   time: actionTime,
 })
 
+export const getRandomElementFromArray = <T>(arr: T[]): T => {
+  const randomIndex = Math.floor(Math.random() * arr.length)
+  return arr[randomIndex]
+}
+
 const getRandomIndexFromArray = (arr: string[]): number => {
   return Math.floor(Math.random() * arr.length)
 }
@@ -46,24 +44,13 @@ const getRandomKeyFromObject = <T>(obj: T): keyof T => {
   return keys[Math.floor(Math.random() * keys.length)] as keyof T
 }
 
+const getRandomValueFromObject = <T>(obj: Record<string, T>): T => {
+  const randomKey = getRandomKeyFromObject(obj)
+  return obj[randomKey]
+}
+
 const getRandomNumber = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min + 1)) + min
-
-const getRandomPsychicActionAndText = (): {
-  actionText: string
-  chosenText: string
-} => {
-  const randomActionKey =
-    Object.keys(random_psychic)[
-      Math.floor(Math.random() * Object.keys(random_psychic).length)
-    ]
-  const actionText =
-    random_psychic[randomActionKey as keyof typeof random_psychic]
-  const chosenKey =
-    psychicStoreKeys[Math.floor(Math.random() * psychicStoreKeys.length)]
-  const chosenText = identifier[chosenKey as keyof typeof identifier]
-  return { actionText, chosenText }
-}
 
 const isCardSelectedById = (
   selectedCards: ActionCardType[],
@@ -94,11 +81,12 @@ export const actionStoreUtils = {
   areAllCardsSelectedById,
   areAnyCardsSelectedById,
   generateTimedAction,
+  getRandomElementFromArray,
   getRandomIndexFromArray,
   getRandomJoke,
   getRandomKeyFromObject,
+  getRandomValueFromObject,
   getRandomNumber,
-  getRandomPsychicActionAndText,
   isCardSelectedById,
   pickRandomPlayers,
 }

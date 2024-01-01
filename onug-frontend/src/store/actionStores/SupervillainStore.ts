@@ -53,8 +53,10 @@ class SupervillainStore {
       supervillainActions.push(...evilometerStore.generateActions())
     }
 
-    supervillainActions.push(generateTimedAction(ACTION_TIME))
-    supervillainActions.push({ text: closeText, time: BASE_TIME })
+    supervillainActions.push(generateTimedAction(2 * ACTION_TIME), {
+      text: closeText,
+      time: BASE_TIME,
+    })
 
     return supervillainActions
   }

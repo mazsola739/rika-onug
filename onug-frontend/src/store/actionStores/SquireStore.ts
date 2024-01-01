@@ -23,7 +23,7 @@ class SquireStore {
         text: squire.squire_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(ACTION_TIME),
+      generateTimedAction(2 * ACTION_TIME),
       {
         text: squire.squire_close_text,
         time: BASE_TIME,
@@ -37,7 +37,7 @@ class SquireStore {
           text: doppelganger.doppelganger_squire_wake_text,
           time: BASE_TIME,
         },
-        generateTimedAction(ACTION_TIME),
+        generateTimedAction(2 * ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }

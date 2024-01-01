@@ -1,14 +1,19 @@
-import { psychic, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
+import {
+  psychic,
+  BASE_TIME,
+  ACTION_TIME,
+  doppelganger,
+  identifier,
+  psychicStoreKeys,
+  random_psychic,
+} from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-const {
-  generateTimedAction,
-  getRandomPsychicActionAndText,
-  isCardSelectedById,
-} = actionStoreUtils
+const { generateTimedAction, getRandomKeyFromObject, isCardSelectedById } =
+  actionStoreUtils
 
 class PsychicStore {
   constructor() {
@@ -21,6 +26,18 @@ class PsychicStore {
 
   generateActions(): RoleActionType[] {
     const psychicActions: RoleActionType[] = []
+
+    const getRandomPsychicActionAndText = (): {
+      actionText: string
+      chosenText: string
+    } => {
+      const randomActionKey = getRandomKeyFromObject(random_psychic)
+      const actionText =
+        random_psychic[randomActionKey as keyof typeof random_psychic]
+      const chosenKey = getRandomKeyFromObject(psychicStoreKeys)
+      const chosenText = identifier[chosenKey as keyof typeof identifier]
+      return { actionText, chosenText }
+    }
 
     const {
       actionText: randomPsychicActionText,

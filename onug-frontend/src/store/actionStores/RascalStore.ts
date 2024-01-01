@@ -13,7 +13,8 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-const { generateTimedAction, isCardSelectedById } = actionStoreUtils
+const { getRandomKeyFromObject, generateTimedAction, isCardSelectedById } =
+  actionStoreUtils
 
 //TODO review
 
@@ -29,15 +30,9 @@ class RascalStore {
   generateActions(): RoleActionType[] {
     const rascalActions: RoleActionType[] = []
 
-    const randomRascalActionKey =
-      Object.keys(random_rascal)[
-        Math.floor(Math.random() * Object.keys(random_rascal).length)
-      ]
+    const randomRascalActionKey = getRandomKeyFromObject(random_rascal)
 
-    const randomDoppelgangerActionKey =
-      Object.keys(random_rascal)[
-        Math.floor(Math.random() * Object.keys(random_rascal).length)
-      ]
+    const randomDoppelgangerActionKey = getRandomKeyFromObject(random_rascal)
 
     rascalActions.push(
       { text: rascal.rascal_wake_text, time: BASE_TIME },

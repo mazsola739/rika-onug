@@ -4,8 +4,6 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-//TODO review
-
 const {
   generateTimedAction,
   isCardSelectedById,

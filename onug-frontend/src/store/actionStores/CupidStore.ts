@@ -18,7 +18,7 @@ class CupidStore {
         text: cupid.cupid_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(ACTION_TIME),
+      generateTimedAction(2 * ACTION_TIME),
       {
         text: cupid.cupid_close_text,
         time: BASE_TIME,

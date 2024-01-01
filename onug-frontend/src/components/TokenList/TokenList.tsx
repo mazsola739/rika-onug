@@ -10,8 +10,11 @@ import {
 export const TokenList = observer(() => {
   const { artifacts, marks } = deckStore
 
-  const handleTokenClick = (tokenId: number) => {
-    deckStore.toggleInfo(tokenId, 'token')
+  const handleTokenClick = (
+    tokenId: number,
+    tokenType: 'artifact' | 'mark'
+  ) => {
+    deckStore.toggleInfo(tokenId, tokenType)
   }
 
   return (
@@ -23,7 +26,7 @@ export const TokenList = observer(() => {
             key={artifact.id}
             src={require(`../../assets/tokens/${artifact.card_name}.png`)}
             alt={artifact.card_name}
-            onClick={() => handleTokenClick(artifact.id)}
+            onClick={() => handleTokenClick(artifact.id, 'artifact')}
           />
         ))}
       </TokenListGrid>
@@ -34,7 +37,7 @@ export const TokenList = observer(() => {
             key={mark.id}
             src={require(`../../assets/tokens/${mark.card_name}.png`)}
             alt={mark.card_name}
-            onClick={() => handleTokenClick(mark.id)}
+            onClick={() => handleTokenClick(mark.id, 'mark')}
           />
         ))}
       </TokenListGrid>

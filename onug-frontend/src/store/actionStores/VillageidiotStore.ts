@@ -18,7 +18,7 @@ class VillageidiotStore {
         text: villageidiot.villageidiot_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(ACTION_TIME),
+      generateTimedAction(2 * ACTION_TIME),
       {
         text: villageidiot.villageidiot_close_text,
         time: BASE_TIME,

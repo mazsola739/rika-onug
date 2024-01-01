@@ -23,7 +23,7 @@ class MarksmanStore {
         text: marksman.marksman_wake_text,
         time: BASE_TIME,
       },
-      generateTimedAction(ACTION_TIME),
+      generateTimedAction(2 * ACTION_TIME),
       {
         text: marksman.marksman_close_text,
         time: BASE_TIME,
@@ -34,7 +34,7 @@ class MarksmanStore {
     if (isCardSelectedById(this.deck, 1)) {
       marksmanActions.push(
         { text: doppelganger.doppelganger_marksman_wake_text, time: BASE_TIME },
-        generateTimedAction(ACTION_TIME),
+        generateTimedAction(2 * ACTION_TIME),
         { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
       )
     }

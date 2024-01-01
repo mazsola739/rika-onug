@@ -10,7 +10,7 @@ import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-const { generateTimedAction } = actionStoreUtils
+const { getRandomKeyFromObject, generateTimedAction } = actionStoreUtils
 
 class BodysnatcherStore {
   constructor() {
@@ -19,10 +19,7 @@ class BodysnatcherStore {
 
   generateActions(): RoleActionType[] {
     const bodysnatcherActions: RoleActionType[] = []
-    const randomActionKey =
-      Object.keys(random_bodysnatcher)[
-        Math.floor(Math.random() * Object.keys(random_bodysnatcher).length)
-      ]
+    const randomActionKey = getRandomKeyFromObject(random_bodysnatcher)
     const randomActionText =
       random_bodysnatcher[randomActionKey as keyof typeof random_bodysnatcher]
 

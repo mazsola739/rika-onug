@@ -140,7 +140,7 @@ export const rules_role: Record<string, string> = {
     'Wake with the other aliens, then wake again to look for Groob, you win, if Groob is killed.',
 }
 
-export const rules_mark = {
+export const rules_mark: Record<string, string> = {
   rules_vampire:
     'The Mark of The Vampire is a Mark given by the Vampires, if you have it you are on the Vampire team and win with the Vampires.',
   rules_fear:
@@ -159,7 +159,7 @@ export const rules_mark = {
     'The Mark of the Assassin is a mark given by the Assassin to any player. If you have it, the Assassin will win if you are killed',
 }
 
-export const rules_artifact = {
+export const rules_artifact: Record<string, string> = {
   rules_shield:
     'Shiled given by Sentinel. A card with a Shield Token on it cannot be looked at or moved.',
   rules_werewolf:

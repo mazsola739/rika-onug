@@ -52,6 +52,7 @@ class DoppelgangerStore {
         text: `${doppelganger.doppelganger_verbose_intro_text} ${displayText} ${doppelganger.doppelganger_verbose_outro_text}`,
         time: BASE_TIME,
       },
+      generateTimedAction(2 * ACTION_TIME),
     ]
 
     doppelgangerActions.push(

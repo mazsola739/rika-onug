@@ -3,49 +3,49 @@ import { TokenType } from 'types'
 
 export const marks: TokenType[] = [
   {
-    id: 113,
+    id: 300,
     expansion: expansion.vampire,
     card_name: 'mark_of_vampire',
     rules: rules_mark.rules_vampire,
   },
   {
-    id: 114,
+    id: 301,
     expansion: expansion.vampire,
     card_name: 'mark_of_fear',
     rules: rules_mark.rules_fear,
   },
   {
-    id: 115,
+    id: 302,
     expansion: expansion.vampire,
     card_name: 'mark_of_the_bat',
     rules: rules_mark.rules_bat,
   },
   {
-    id: 116,
+    id: 303,
     expansion: expansion.vampire,
     card_name: 'mark_of_disease',
     rules: rules_mark.rules_disease,
   },
   {
-    id: 117,
+    id: 304,
     expansion: expansion.vampire,
     card_name: 'mark_of_love',
     rules: rules_mark.rules_love,
   },
   {
-    id: 118,
+    id: 305,
     expansion: expansion.vampire,
     card_name: 'mark_of_traitor',
     rules: rules_mark.rules_traitor,
   },
   {
-    id: 119,
+    id: 306,
     expansion: expansion.vampire,
     card_name: 'mark_of_clarity',
     rules: rules_mark.rules_clarity,
   },
   {
-    id: 120,
+    id: 307,
     expansion: expansion.vampire,
     card_name: 'mark_of_assassin',
     rules: rules_mark.rules_assassin,

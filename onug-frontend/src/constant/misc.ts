@@ -120,11 +120,13 @@ export const alienStoreAnyKeys: string[] = [
   'identifier_anyodd_text',
   'activePlayers',
 ]
+
 export const alienStoreAllKeys: string[] = [
   'identifier_everyone_text',
   'identifier_oddplayers_text',
   'identifier_evenplayers_text',
 ]
+
 export const bodysnatcherStoreKeys: string[] = [
   'identifier_any_text',
   'identifier_anyeven_text',
@@ -133,6 +135,7 @@ export const bodysnatcherStoreKeys: string[] = [
   'identifier_rightneighbor_text',
   'identifier_bothneighbors_text',
 ]
+
 export const empathStoreAllKeys: string[] = [
   'identifier_everyone_text',
   'identifier_oddplayers_text',
@@ -145,6 +148,11 @@ export const morticianStoreAllKeys: string[] = [
   'identifier_rightneighbor_text',
   'identifier_oneneighbor_text',
   'identifier_yourself_text',
+]
+
+export const oracleResultKeys = [
+  'oracle_viewplayer_result_text',
+  'oracle_viewplayer_result2_text',
 ]
 
 export const psychicStoreKeys: string[] = [

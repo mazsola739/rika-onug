@@ -4,8 +4,6 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-//TODO review
-
 const { generateTimedAction, isCardSelectedById } = actionStoreUtils
 
 class BeholderStore {
@@ -27,7 +25,7 @@ class BeholderStore {
     ) {
       beholderActions.push(
         { text: beholder.beholder_seer_wake_text, time: BASE_TIME },
-        generateTimedAction(ACTION_TIME)
+        generateTimedAction(2 * ACTION_TIME)
       )
 
       //Doppelganger
@@ -41,7 +39,7 @@ class BeholderStore {
             text: doppelganger.doppelganger_beholder_seer_wake_text,
             time: BASE_TIME,
           },
-          generateTimedAction(ACTION_TIME),
+          generateTimedAction(2 * ACTION_TIME),
           {
             text: beholder.beholder_seer_thumbaway_text,
             time: BASE_TIME,
@@ -69,7 +67,7 @@ class BeholderStore {
     ) {
       beholderActions.push(
         { text: beholder.beholder_apprenticeseer_wake_text, time: BASE_TIME },
-        generateTimedAction(ACTION_TIME)
+        generateTimedAction(2 * ACTION_TIME)
       )
 
       //Doppelganger
@@ -83,7 +81,7 @@ class BeholderStore {
             text: doppelganger.doppelganger_beholder_apprenticeseer_wake_text,
             time: BASE_TIME,
           },
-          generateTimedAction(ACTION_TIME),
+          generateTimedAction(2 * ACTION_TIME),
           {
             text: beholder.beholder_apprenticeseer_thumbaway_text,
             time: BASE_TIME,
@@ -111,7 +109,7 @@ class BeholderStore {
           text: beholder.beholder_seer_apprenticeseer_wake_text,
           time: BASE_TIME,
         },
-        generateTimedAction(ACTION_TIME)
+        generateTimedAction(2 * ACTION_TIME)
       )
 
       //Doppelganger
@@ -125,7 +123,7 @@ class BeholderStore {
             text: doppelganger.doppelganger_beholder_seer_apprenticeseer_wake_text,
             time: BASE_TIME,
           },
-          generateTimedAction(ACTION_TIME),
+          generateTimedAction(2 * ACTION_TIME),
           {
             text: beholder.beholder_seer_apprenticeseer_thumbaway_text,
             time: BASE_TIME,

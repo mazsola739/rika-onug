@@ -9,4 +9,4 @@ export type RoleActionStoreType = {
 
 export type ConjunctionType = {
   conjunction: 'and' | 'or'
-}
+} //TODO ?

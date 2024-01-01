@@ -17,6 +17,8 @@ import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
+//TODO nostradamus doppelganger?
+
 const { generateTimedAction } = actionStoreUtils
 
 const ID = 0 //TODO delete

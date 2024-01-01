@@ -10,7 +10,7 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-const { generateTimedAction, getRandomKeyFromObject, isCardSelectedById } =
+const { generateTimedAction, getRandomValueFromObject, isCardSelectedById } =
   actionStoreUtils
 
 class ExposerStore {
@@ -25,15 +25,13 @@ class ExposerStore {
   generateActions(): RoleActionType[] {
     const exposerActions: RoleActionType[] = []
 
-    const randomExposerActionKey = getRandomKeyFromObject(random_exposer)
-    const randomDoppelgangerActionKey = getRandomKeyFromObject(random_exposer)
+    const randomExposerAction = getRandomValueFromObject(random_exposer)
+    const randomDoppelgangerAction = getRandomValueFromObject(random_exposer)
 
     exposerActions.push(
       { text: exposer.exposer_wake_text, time: BASE_TIME },
       {
-        text: random_exposer[
-          randomExposerActionKey as keyof typeof random_exposer
-        ],
+        text: randomExposerAction,
         time: BASE_TIME,
       },
       generateTimedAction(ACTION_TIME),
@@ -48,9 +46,7 @@ class ExposerStore {
           time: BASE_TIME,
         },
         {
-          text: random_exposer[
-            randomDoppelgangerActionKey as keyof typeof random_exposer
-          ],
+          text: randomDoppelgangerAction,
           time: BASE_TIME,
         },
         generateTimedAction(ACTION_TIME),

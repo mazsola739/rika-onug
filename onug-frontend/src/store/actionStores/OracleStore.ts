@@ -4,6 +4,7 @@ import {
   BASE_TIME,
   ACTION_TIME,
   oracle,
+  oracleResultKeys,
 } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
@@ -20,6 +21,7 @@ const PLAYER = 1 //todo delete
 
 const {
   generateTimedAction,
+  getRandomElementFromArray,
   getRandomIndexFromArray,
   getRandomKeyFromObject,
   getRandomNumber,
@@ -46,13 +48,7 @@ class OracleStore {
     const player = (answerPlayer: number) => {
       const totalPlayers = selectedDeckStore.totalPlayers
 
-      const resultKeys = [
-        'oracle_viewplayer_result_text',
-        'oracle_viewplayer_result2_text',
-      ]
-
-      const randomAnswerKey =
-        resultKeys[Math.floor(Math.random() * resultKeys.length)]
+      const randomAnswerKey = getRandomElementFromArray(oracleResultKeys)
 
       const randomText =
         random_oracle.random_oracle_playernum[

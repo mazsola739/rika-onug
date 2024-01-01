@@ -104,12 +104,17 @@ class DeckStore {
     this.detailedCardInfo = this.createEmptyCard()
   }
 
-  toggleInfo(id: number, type: 'card' | 'token'): void {
+  toggleInfo(id: number, type: 'card' | 'artifact' | 'mark'): void {
+    console.log('Toggling info for ID:', id, 'of type:', type)
     if (type === 'card' && this.detailedCardInfo.id === id) {
       this.resetDetailedCardInfo()
       return
     }
-    if (type === 'token' && this.detailedTokenInfo.id === id) {
+    if (type === 'artifact' && this.detailedTokenInfo.id === id) {
+      this.resetDetailedTokenInfo()
+      return
+    }
+    if (type === 'mark' && this.detailedTokenInfo.id === id) {
       this.resetDetailedTokenInfo()
       return
     }
@@ -118,8 +123,12 @@ class DeckStore {
       const newCardInfo = this.getCardById(id)
       this.detailedCardInfo = newCardInfo || this.createEmptyCard()
       this.resetDetailedTokenInfo()
-    } else {
-      const newTokenInfo = this.getMarkById(id) || this.getArtifactById(id)
+    } else if (type === 'artifact') {
+      const newTokenInfo = this.getArtifactById(id)
+      this.detailedTokenInfo = newTokenInfo || this.createEmptyToken()
+      this.resetDetailedCardInfo()
+    } else if (type === 'mark') {
+      const newTokenInfo = this.getMarkById(id)
       this.detailedTokenInfo = newTokenInfo || this.createEmptyToken()
       this.resetDetailedCardInfo()
     }
