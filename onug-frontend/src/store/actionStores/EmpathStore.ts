@@ -16,9 +16,9 @@ import { actionStoreUtils } from 'utils'
 
 const {
   generateTimedAction,
-  getRandomElementFromArray,
   getRandomValueFromObject,
   isCardSelectedById,
+  pickRandomElementFromArray,
   pickRandomPlayers,
 } = actionStoreUtils
 
@@ -35,7 +35,7 @@ class EmpathStore {
     const empathActions: RoleActionType[] = []
 
     const randomEmpathInteractionKey =
-      getRandomElementFromArray(empathStoreAllKeys)
+      pickRandomElementFromArray(empathStoreAllKeys)
     const chosenEmpathText =
       identifier[randomEmpathInteractionKey as keyof typeof identifier] ||
       (randomEmpathInteractionKey === 'activePlayers'
@@ -45,7 +45,7 @@ class EmpathStore {
 
     // Doppelganger
     const randomDoppelgangerInteractionKey =
-      getRandomElementFromArray(empathStoreAllKeys)
+      pickRandomElementFromArray(empathStoreAllKeys)
     const chosenDoppelgangerText =
       identifier[randomDoppelgangerInteractionKey as keyof typeof identifier] ||
       (randomDoppelgangerInteractionKey === 'activePlayers'

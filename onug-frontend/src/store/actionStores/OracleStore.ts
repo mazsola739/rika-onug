@@ -21,10 +21,10 @@ const PLAYER = 1 //todo delete
 
 const {
   generateTimedAction,
-  getRandomElementFromArray,
   getRandomIndexFromArray,
-  getRandomKeyFromObject,
   getRandomNumber,
+  pickRandomElementFromArray,
+  pickRandomKey,
 } = actionStoreUtils
 
 class OracleStore {
@@ -35,7 +35,7 @@ class OracleStore {
   generateActions(): RoleActionType[] {
     const oracleActions: RoleActionType[] = []
 
-    const randomOracKey = getRandomKeyFromObject(random_orac)
+    const randomOracKey = pickRandomKey(random_orac)
     const randomNumber = getRandomNumber(1, 10)
     const randomAction = random_oracle[randomOracKey]
     const randomActionIntro = Object.values(randomAction)[0]
@@ -48,7 +48,7 @@ class OracleStore {
     const player = (answerPlayer: number) => {
       const totalPlayers = selectedDeckStore.totalPlayers
 
-      const randomAnswerKey = getRandomElementFromArray(oracleResultKeys)
+      const randomAnswerKey = pickRandomElementFromArray(oracleResultKeys)
 
       const randomText =
         random_oracle.random_oracle_playernum[

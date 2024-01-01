@@ -6,7 +6,7 @@ import { actionStoreUtils } from 'utils'
 
 //TODO
 
-const { getRandomKeyFromObject } = actionStoreUtils
+const { pickRandomKey } = actionStoreUtils
 const {
   random_ripple_1minute,
   random_ripple_repeat,
@@ -42,7 +42,7 @@ class RipplePhaseStore {
   generateActions(): RoleActionType[] {
     const rippleActions: RoleActionType[] = []
 
-    const randomActionKey = getRandomKeyFromObject(random_ripp)
+    const randomActionKey = pickRandomKey(random_ripp)
 
     console.log(randomActionKey)
 

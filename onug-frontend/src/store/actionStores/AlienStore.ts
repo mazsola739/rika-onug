@@ -17,10 +17,10 @@ import { cowStore } from './CowStore'
 //TODO shorten timer
 
 const {
-  getRandomElementFromArray,
-  getRandomKeyFromObject,
   generateTimedAction,
   isCardSelectedById,
+  pickRandomElementFromArray,
+  pickRandomKey,
   pickRandomPlayers,
 } = actionStoreUtils
 
@@ -39,41 +39,42 @@ class AlienStore {
 
   generateActions(): RoleActionType[] {
     const alienActions: RoleActionType[] = []
-    const randomAlienActions: RoleActionType[] = []
-    const randomActionKey = getRandomKeyFromObject(random_aliens)
+    const chosenAlienActions: RoleActionType[] = []
 
-    if (randomActionKey.includes('view')) {
-      const playerIdentifierKey = getRandomElementFromArray(alienStoreAnyKeys)
-      const playerIdentifierText: string =
-        playerIdentifierKey === 'activePlayers'
+    const chosenAlienActionKey = pickRandomKey(random_aliens)
+
+    if (chosenAlienActionKey.includes('view')) {
+      const identifierKey = pickRandomElementFromArray(alienStoreAnyKeys)
+      const playerText: string =
+        identifierKey === 'activePlayers'
           ? pickRandomPlayers(this.totalPlayers, 'or')
-          : identifier[playerIdentifierKey]
+          : identifier[identifierKey]
 
-      randomAlienActions.push(
-        { text: random_aliens[randomActionKey], time: BASE_TIME },
-        { text: playerIdentifierText, time: BASE_TIME }
+      chosenAlienActions.push(
+        { text: random_aliens[chosenAlienActionKey], time: BASE_TIME },
+        { text: playerText, time: BASE_TIME }
       )
     } else if (
-      randomActionKey.includes('newalien') ||
-      randomActionKey.includes('alienhelper')
+      chosenAlienActionKey.includes('newalien') ||
+      chosenAlienActionKey.includes('alienhelper')
     ) {
-      const playerIdentifierKey = getRandomElementFromArray(alienStoreAllKeys)
-      const playerIdentifierText: string = identifier[playerIdentifierKey]
+      const playerKey = pickRandomElementFromArray(alienStoreAllKeys)
+      const playerText: string = identifier[playerKey]
 
-      randomAlienActions.push(
-        { text: playerIdentifierText, time: BASE_TIME },
-        { text: random_aliens[randomActionKey], time: BASE_TIME }
+      chosenAlienActions.push(
+        { text: playerText, time: BASE_TIME },
+        { text: random_aliens[chosenAlienActionKey], time: BASE_TIME }
       )
     } else {
-      randomAlienActions.push({
-        text: random_aliens[randomActionKey],
+      chosenAlienActions.push({
+        text: random_aliens[chosenAlienActionKey],
         time: BASE_TIME,
       })
     }
 
     alienActions.push(
       { text: aliens.alien_wake_text, time: BASE_TIME },
-      ...randomAlienActions,
+      ...chosenAlienActions,
       generateTimedAction(ACTION_TIME),
       ...(isCardSelectedById(this.deck, 45) ? cowStore.generateActions() : []),
       { text: aliens.alien_close_text, time: BASE_TIME }

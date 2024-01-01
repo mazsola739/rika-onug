@@ -40,12 +40,12 @@ class DoppelgangerStore {
 
     const displayNames = roleKeys.map((key) => roles[key as keyof typeof roles])
 
-    let displayText = ''
-    if (displayNames.length > 0) {
-      displayText = displayNames.join(
-        ` ${doppelganger.doppelganger_verbose_or_text} `
-      )
-    }
+    const displayText =
+      displayNames.length > 0
+        ? `${displayNames.join(
+            ` ${doppelganger.doppelganger_verbose_or_text} `
+          )}`
+        : ''
 
     const verboseText: RoleActionType[] = [
       {

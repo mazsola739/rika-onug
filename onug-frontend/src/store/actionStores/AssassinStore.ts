@@ -5,10 +5,10 @@ import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
 const {
+  areAllCardsSelectedById,
+  areAnyCardsSelectedById,
   generateTimedAction,
   isCardSelectedById,
-  areAnyCardsSelectedById,
-  areAllCardsSelectedById,
 } = actionStoreUtils
 
 class AssassinStore {

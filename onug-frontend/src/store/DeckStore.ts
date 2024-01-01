@@ -105,7 +105,6 @@ class DeckStore {
   }
 
   toggleInfo(id: number, type: 'card' | 'artifact' | 'mark'): void {
-    console.log('Toggling info for ID:', id, 'of type:', type)
     if (type === 'card' && this.detailedCardInfo.id === id) {
       this.resetDetailedCardInfo()
       return

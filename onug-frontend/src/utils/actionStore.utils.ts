@@ -28,34 +28,34 @@ const generateTimedAction = (actionTime: number): RoleActionType => ({
   time: actionTime,
 })
 
-export const getRandomElementFromArray = <T>(arr: T[]): T => {
-  const randomIndex = Math.floor(Math.random() * arr.length)
-  return arr[randomIndex]
-}
-
 const getRandomIndexFromArray = (arr: string[]): number => {
   return Math.floor(Math.random() * arr.length)
 }
 
-const getRandomJoke = (): string => joke[getRandomKeyFromObject(joke)]
-
-const getRandomKeyFromObject = <T>(obj: T): keyof T => {
-  const keys = Object.keys(obj)
-  return keys[Math.floor(Math.random() * keys.length)] as keyof T
-}
-
-const getRandomValueFromObject = <T>(obj: Record<string, T>): T => {
-  const randomKey = getRandomKeyFromObject(obj)
-  return obj[randomKey]
-}
+const getRandomJoke = (): string => joke[pickRandomKey(joke)]
 
 const getRandomNumber = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min + 1)) + min
+
+const getRandomValueFromObject = <T>(obj: Record<string, T>): T => {
+  const randomKey = pickRandomKey(obj)
+  return obj[randomKey]
+}
 
 const isCardSelectedById = (
   selectedCards: ActionCardType[],
   cardId: number
 ): boolean => selectedCards.some((card) => card.id === cardId)
+
+export const pickRandomElementFromArray = <T>(arr: T[]): T => {
+  const randomIndex = Math.floor(Math.random() * arr.length)
+  return arr[randomIndex]
+}
+
+const pickRandomKey = <T>(obj: T): keyof T => {
+  const keys = Object.keys(obj)
+  return keys[Math.floor(Math.random() * keys.length)] as keyof T
+}
 
 const pickRandomPlayers = (numPlayers: number, conjunction: string): string => {
   const identifiers = Array.from(
@@ -81,12 +81,12 @@ export const actionStoreUtils = {
   areAllCardsSelectedById,
   areAnyCardsSelectedById,
   generateTimedAction,
-  getRandomElementFromArray,
   getRandomIndexFromArray,
   getRandomJoke,
-  getRandomKeyFromObject,
-  getRandomValueFromObject,
   getRandomNumber,
+  getRandomValueFromObject,
   isCardSelectedById,
+  pickRandomElementFromArray,
+  pickRandomKey,
   pickRandomPlayers,
 }

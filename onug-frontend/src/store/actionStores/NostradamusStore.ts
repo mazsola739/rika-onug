@@ -1,18 +1,4 @@
-import {
-  alienTeam,
-  wolfTeam,
-  vampireTeam,
-  assassinTeam,
-  tannerTeam,
-  syntheticTeam,
-  blobTeam,
-  morticianTeam,
-  apprenticeassassinTeam,
-  doppelgangerTeam,
-  nostradamus,
-  BASE_TIME,
-  ACTION_TIME,
-} from 'constant'
+import { nostradamus, BASE_TIME, ACTION_TIME, nostradamusTeam } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
@@ -32,20 +18,7 @@ class NostradamusStore {
     const nostradamusActions: RoleActionType[] = []
 
     const getTeamText = (id: number) => {
-      const teams = {
-        alien: alienTeam,
-        werewolf: wolfTeam,
-        vampire: vampireTeam,
-        assassin: assassinTeam,
-        tanner: tannerTeam,
-        synthetic: syntheticTeam,
-        blob: blobTeam,
-        mortician: morticianTeam,
-        apprenticeassassin: apprenticeassassinTeam,
-        doppelganger: doppelgangerTeam,
-      }
-
-      for (const [team, criteria] of Object.entries(teams)) {
+      for (const [team, criteria] of Object.entries(nostradamusTeam)) {
         if (criteria.includes(Number(id))) {
           return `nostradamus.nostradamus_team_${team}_text`
         }

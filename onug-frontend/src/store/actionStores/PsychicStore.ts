@@ -12,7 +12,7 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-const { generateTimedAction, getRandomKeyFromObject, isCardSelectedById } =
+const { generateTimedAction, pickRandomKey, isCardSelectedById } =
   actionStoreUtils
 
 class PsychicStore {
@@ -31,10 +31,10 @@ class PsychicStore {
       actionText: string
       chosenText: string
     } => {
-      const randomActionKey = getRandomKeyFromObject(random_psychic)
+      const randomActionKey = pickRandomKey(random_psychic)
       const actionText =
         random_psychic[randomActionKey as keyof typeof random_psychic]
-      const chosenKey = getRandomKeyFromObject(psychicStoreKeys)
+      const chosenKey = pickRandomKey(psychicStoreKeys)
       const chosenText = identifier[chosenKey as keyof typeof identifier]
       return { actionText, chosenText }
     }
