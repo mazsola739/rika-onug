@@ -10,6 +10,7 @@ import { ACTION_TIME, BASE_TIME, VOTING_TIME, everyone } from 'constant'
 import { RoleActionType } from 'types'
 
 import { actionStoreUtils, gamePlayStoreUtils } from 'utils'
+import { rippleNightPhaseStore } from './phaseStores/RippleNightPhaseStore'
 
 const { generateTimedAction, getRandomJoke } = actionStoreUtils
 const { addBasicAction } = gamePlayStoreUtils
@@ -35,6 +36,10 @@ class GamePlayStore {
     return selectedDeckStore.shouldStartRipple()
   }
 
+  get isRepeat(): boolean {
+    return ripplePhaseStore.isRepeat
+  }
+
   generateActions(): RoleActionType[] {
     const gamePlayActions: RoleActionType[] = []
     this.addEpicBattleIntro(gamePlayActions)
@@ -42,6 +47,9 @@ class GamePlayStore {
     this.addPhaseActions(gamePlayActions)
     if (this.shouldStartRipple) {
       this.addRipplePhaseActions(gamePlayActions)
+    }
+    if (this.isRepeat) {
+      this.addRippleNightPhaseActions(gamePlayActions)
     }
     this.addJokeAndVoting(gamePlayActions)
     return gamePlayActions
@@ -91,6 +99,10 @@ class GamePlayStore {
 
   addRipplePhaseActions(actions: RoleActionType[]): void {
     actions.push(...ripplePhaseStore.generateActions())
+  }
+
+  addRippleNightPhaseActions(actions: RoleActionType[]): void {
+    actions.push(...rippleNightPhaseStore.generateActions())
   }
 
   addJokeAndVoting(actions: RoleActionType[]): void {

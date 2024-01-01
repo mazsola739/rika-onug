@@ -1,5 +1,3 @@
-//TODO
-
 export const random_ripp: Record<string, string> = {
   random_ripple_1minute: '1 Minute',
   random_ripple_repeat: 'Repeat',

@@ -21,10 +21,12 @@ const {
   isCardSelectedById,
   pickRandomElementFromArray,
   pickRandomKey,
-  pickRandomPlayers,
+  pickRandomUpTo3Players,
 } = actionStoreUtils
 
 class AlienStore {
+  isNewAlienOrHelper = false
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -47,7 +49,7 @@ class AlienStore {
       const identifierKey = pickRandomElementFromArray(alienStoreAnyKeys)
       const playerText: string =
         identifierKey === 'activePlayers'
-          ? pickRandomPlayers(this.totalPlayers, 'or')
+          ? pickRandomUpTo3Players(this.totalPlayers, 'or')
           : identifier[identifierKey]
 
       chosenAlienActions.push(
@@ -58,6 +60,7 @@ class AlienStore {
       chosenAlienActionKey.includes('newalien') ||
       chosenAlienActionKey.includes('alienhelper')
     ) {
+      this.isNewAlienOrHelper = true
       const playerKey = pickRandomElementFromArray(alienStoreAllKeys)
       const playerText: string = identifier[playerKey]
 

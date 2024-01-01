@@ -19,7 +19,7 @@ const {
   getRandomValueFromObject,
   isCardSelectedById,
   pickRandomElementFromArray,
-  pickRandomPlayers,
+  pickRandomUpTo3Players,
 } = actionStoreUtils
 
 class EmpathStore {
@@ -39,7 +39,7 @@ class EmpathStore {
     const chosenEmpathText =
       identifier[randomEmpathInteractionKey as keyof typeof identifier] ||
       (randomEmpathInteractionKey === 'activePlayers'
-        ? pickRandomPlayers(selectedDeckStore.totalPlayers, 'and')
+        ? pickRandomUpTo3Players(selectedDeckStore.totalPlayers, 'and')
         : randomEmpathInteractionKey)
     const randomEmpathActionText = getRandomValueFromObject(random_empath)
 
@@ -49,7 +49,7 @@ class EmpathStore {
     const chosenDoppelgangerText =
       identifier[randomDoppelgangerInteractionKey as keyof typeof identifier] ||
       (randomDoppelgangerInteractionKey === 'activePlayers'
-        ? pickRandomPlayers(selectedDeckStore.totalPlayers, 'and')
+        ? pickRandomUpTo3Players(selectedDeckStore.totalPlayers, 'and')
         : randomDoppelgangerInteractionKey)
     const randomDoppelgangerActionText = getRandomValueFromObject(random_empath)
 

@@ -12,8 +12,6 @@ const {
   isCardSelectedById,
 } = actionStoreUtils
 
-//todo voting time
-
 class NightPhaseStore {
   constructor() {
     makeAutoObservable(this)

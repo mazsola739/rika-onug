@@ -12,8 +12,12 @@ import { selectedDeckStore } from 'store/SelectedDeckStore'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-const { pickRandomKey, generateTimedAction, isCardSelectedById } =
-  actionStoreUtils
+const {
+  pickRandomKey,
+  generateTimedAction,
+  isCardSelectedById,
+  pickRandomElementFromArray,
+} = actionStoreUtils
 
 class MorticianStore {
   constructor() {
@@ -27,12 +31,7 @@ class MorticianStore {
   generateActions(): RoleActionType[] {
     const morticiansActions: RoleActionType[] = []
 
-    const getRandomMorticianKey = () =>
-      morticianStoreAllKeys[
-        Math.floor(Math.random() * morticianStoreAllKeys.length)
-      ]
-
-    const chosenMorticianKey = getRandomMorticianKey()
+    const chosenMorticianKey = pickRandomElementFromArray(morticianStoreAllKeys)
     const chosenMorticianText =
       identifier[chosenMorticianKey as keyof typeof identifier]
 
@@ -74,8 +73,7 @@ class MorticianStore {
 
     //Doppelganger
     if (isCardSelectedById(this.deck, 1)) {
-      const randomDoppelgangerActionKey =
-        pickRandomKey(random_mortician)
+      const randomDoppelgangerActionKey = pickRandomKey(random_mortician)
       switch (randomDoppelgangerActionKey) {
         case 'mortician_1card_text':
           pushAction(

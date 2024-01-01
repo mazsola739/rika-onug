@@ -10,3 +10,9 @@ export type RoleActionStoreType = {
 export type ConjunctionType = {
   conjunction: 'and' | 'or'
 } //TODO ?
+
+export type RepeatroleType = {
+  name: string
+  isExist: boolean
+  specialCondition?: () => boolean
+}

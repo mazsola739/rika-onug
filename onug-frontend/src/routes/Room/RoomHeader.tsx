@@ -1,10 +1,13 @@
 import { Header } from 'components'
+import { identifier_player } from 'constant'
 import { cards } from 'data'
 import { observer } from 'mobx-react-lite'
 import { useMemo } from 'react'
+import { actionStoreUtils } from 'utils'
 
 export const RoomHeader = observer(() => {
-  const randomcard = Math.floor(Math.random() * cards.length) + 1
+  const { getRandomNumber } = actionStoreUtils
+  const randomcard = getRandomNumber(1, cards.length)
   const card_name = cards[randomcard].card_name
   const card_display = cards[randomcard].display_name
   const card_rules = cards[randomcard].rules
@@ -13,10 +16,11 @@ export const RoomHeader = observer(() => {
     () => require(`../../assets/cards/${card_name}.png`),
     [card_name]
   )
-  const randomnumber = Math.floor(Math.random() * 20) + 1
+  const randomAvatarNumber = getRandomNumber(1, 20)
+  const randomPlayerNumber = getRandomNumber(1, 12)
   const avatarSrc = useMemo(
-    () => require(`../../assets/avatars/avatar_${randomnumber}.jpg`),
-    [randomnumber]
+    () => require(`../../assets/avatars/avatar_${randomAvatarNumber}.jpg`),
+    [randomAvatarNumber]
   )
 
   return (
@@ -38,10 +42,10 @@ export const RoomHeader = observer(() => {
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <img
             src={avatarSrc}
-            alt={`${randomnumber}`}
+            alt={`${randomAvatarNumber}`}
             style={{ width: '80px', height: '80px' }}
           />
-          <p>Player {randomnumber}</p>
+          <p>{`${identifier_player}.identifier_player${randomPlayerNumber}_text`}</p>
         </div>
       </div>
     </Header>

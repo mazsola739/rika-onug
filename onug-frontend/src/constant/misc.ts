@@ -181,3 +181,31 @@ export const rascalStoreAnyTwoKeys: string[] = [
   'identifier_2leftneighbors_text',
   'identifier_2rightneighbors_text',
 ]
+
+export const rippleStoreAnyKeys: string[] = [
+  'identifier_any_text',
+  'identifier_anyeven_text',
+  'identifier_anyodd_text',
+  'activePlayers',
+]
+
+export const rippleStoreAllKeys: string[] = [
+  'identifier_everyone_text',
+  'identifier_oddplayers_text',
+  'identifier_evenplayers_text',
+  'activePlayers',
+]
+
+export const rippleNeighborKeys: string[] = [
+  'identifier_leftneighbor_text',
+  'identifier_rightneighbor_text',
+  'identifier_oneneighbor_text',
+  'identifier_yourself_text',
+]
+
+export const rippleCenterAnyKeys: string[] = [
+  'identifier_any_text',
+  'identifier_anyeven_text',
+  'identifier_anyodd_text',
+  'identifier_center_text',
+]
