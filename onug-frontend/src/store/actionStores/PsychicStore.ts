@@ -12,8 +12,12 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-const { generateTimedAction, pickRandomKey, isCardSelectedById } =
-  actionStoreUtils
+const {
+  generateTimedAction,
+  pickRandomElementFromArray,
+  pickRandomKey,
+  isCardSelectedById,
+} = actionStoreUtils
 
 class PsychicStore {
   constructor() {
@@ -29,19 +33,21 @@ class PsychicStore {
 
     const getRandomPsychicActionAndText = (): {
       actionText: string
-      chosenText: string
+      randomIdentifierValue: string
     } => {
       const randomActionKey = pickRandomKey(random_psychic)
       const actionText =
         random_psychic[randomActionKey as keyof typeof random_psychic]
-      const chosenKey = pickRandomKey(psychicStoreKeys)
-      const chosenText = identifier[chosenKey as keyof typeof identifier]
-      return { actionText, chosenText }
+      const randomIdentifierKey = pickRandomElementFromArray(psychicStoreKeys)
+      const randomIdentifierValue =
+        identifier[randomIdentifierKey as keyof typeof identifier]
+
+      return { actionText, randomIdentifierValue }
     }
 
     const {
       actionText: randomPsychicActionText,
-      chosenText: chosenPsychicText,
+      randomIdentifierValue: chosenPsychicText,
     } = getRandomPsychicActionAndText()
 
     psychicActions.push(
@@ -56,7 +62,7 @@ class PsychicStore {
     if (isCardSelectedById(this.deck, 1)) {
       const {
         actionText: randomDoppelgangerActionText,
-        chosenText: chosenDoppelgangerText,
+        randomIdentifierValue: chosenDoppelgangerText,
       } = getRandomPsychicActionAndText()
       psychicActions.push(
         { text: doppelganger.doppelganger_psychic_wake_text, time: BASE_TIME },
