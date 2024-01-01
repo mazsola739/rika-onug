@@ -33,7 +33,9 @@ const generateTimedAction = (actionTime: number): RoleActionType => ({
   time: actionTime,
 })
 
-const getRandomIndexFromArray = (arr: string[] | RepeatroleType[]): number => {
+const getRandomIndexFromArray = (
+  arr: string[] | RepeatroleType[] | ActionCardType[]
+): number => {
   return Math.floor(Math.random() * arr.length)
 }
 
@@ -110,7 +112,32 @@ const pickRandomUpTo3Players = (
     : selectedPlayers.join(` ${conjunction} `)
 }
 
-const shouldPushRandomly = () => Math.random() < 0.5
+const shuffleArray = (cards: ActionCardType[]): ActionCardType[] => {
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[cards[i], cards[j]] = [cards[j], cards[i]]
+  }
+  return cards
+}
+
+const shuffleAndSplitDeck = (deck: ActionCardType[]): ActionCardType[] => {
+  const shuffledDeck = shuffleArray([...deck])
+  const rippleDeck: ActionCardType[] = []
+
+  const randomIndex = getRandomIndexFromArray(shuffledDeck)
+  rippleDeck.push(shuffledDeck.splice(randomIndex, 1)[0])
+
+  while (shuffledDeck.length > 0) {
+    const randomIndex = getRandomIndexFromArray(shuffledDeck)
+    if (Math.random() < 0.5) {
+      rippleDeck.push(shuffledDeck.splice(randomIndex, 1)[0])
+    } else {
+      shuffledDeck.splice(randomIndex, 1)
+    }
+  }
+
+  return rippleDeck
+}
 
 export const actionStoreUtils = {
   addRoleActions,
@@ -129,5 +156,5 @@ export const actionStoreUtils = {
   pickRandomElementFromArray,
   pickRandomKey,
   pickRandomUpTo3Players,
-  shouldPushRandomly,
+  shuffleAndSplitDeck,
 }

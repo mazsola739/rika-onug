@@ -1,6 +1,6 @@
 import { ActionCardType, RoleActionType } from 'types'
 import * as ActionStores from '../actionStores'
-import { selectedDeckStore } from 'store'
+import { ripplePhaseStore } from 'store'
 import { actionStoreUtils } from 'utils'
 import { alienIds, supervillainIds, wolfIds } from 'constant'
 import { makeAutoObservable } from 'mobx'
@@ -10,7 +10,6 @@ const {
   areAllCardsSelectedById,
   areAnyCardsSelectedById,
   isCardSelectedById,
-  shouldPushRandomly,
 } = actionStoreUtils
 
 class RippleNightPhaseStore {
@@ -19,11 +18,13 @@ class RippleNightPhaseStore {
   }
 
   get rippleDeck(): ActionCardType[] {
-    return selectedDeckStore.gamePlayDeck.filter(() => shouldPushRandomly())
+    return ripplePhaseStore.rippleDeck()
   }
 
   generateActions(): RoleActionType[] {
     const rippleNightPhaseActions: RoleActionType[] = []
+
+    console.log(this.rippleDeck.map((card) => card.card_name))
 
     addRoleActions(
       ActionStores.alienStore,

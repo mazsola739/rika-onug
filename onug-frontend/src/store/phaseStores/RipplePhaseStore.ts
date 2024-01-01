@@ -29,6 +29,7 @@ const {
   pickRandomElementFromArray,
   pickRandomKey,
   pickRandomUpTo3Players,
+  shuffleAndSplitDeck,
 } = actionStoreUtils
 const {
   random_ripple_1minute,
@@ -52,9 +53,9 @@ const {
   random_ripple_iamalien,
 } = ripples
 
-class RipplePhaseStore {
-  isRepeat = false
+const randomActionKey = pickRandomKey(random_ripp)
 
+class RipplePhaseStore {
   constructor() {
     makeAutoObservable(this)
   }
@@ -67,10 +68,14 @@ class RipplePhaseStore {
     return selectedDeckStore.totalPlayers
   }
 
+  rippleDeck(): ActionCardType[] {
+    const newdeck = [...this.deck]
+    return shuffleAndSplitDeck(newdeck)
+  }
+
   generateActions(): RoleActionType[] {
     const rippleActions: RoleActionType[] = []
 
-    const randomActionKey = pickRandomKey(random_ripp)
     const random1Player = pickRandom1Player(this.totalPlayers)
     const random2Players = pickRandom2Players(this.totalPlayers)
     const randomRippleAllKey = pickRandomElementFromArray(rippleStoreAllKeys)
@@ -113,7 +118,6 @@ class RipplePhaseStore {
       }
 
       if (randomActionKey === 'random_ripple_repeat') {
-        this.isRepeat = true
         rippleActions.push(
           {
             text: random_ripple_repeat.ripple_repeat_text,
@@ -127,7 +131,6 @@ class RipplePhaseStore {
       }
 
       if (randomActionKey === 'random_ripple_repeat1p') {
-        this.isRepeat = true
         rippleActions.push(
           {
             text: random_ripple_repeat1p.ripple_repeat_text,
@@ -509,8 +512,11 @@ class RipplePhaseStore {
     return rippleActions
   }
 
-  get getIsRepeat() {
-    return this.isRepeat
+  isRepeat(): boolean {
+    return (
+      randomActionKey === 'random_ripple_repeat' ||
+      randomActionKey === 'random_ripple_repeat1p'
+    )
   }
 }
 

@@ -37,7 +37,7 @@ class GamePlayStore {
   }
 
   get isRepeat(): boolean {
-    return ripplePhaseStore.isRepeat
+    return ripplePhaseStore.isRepeat()
   }
 
   generateActions(): RoleActionType[] {
