@@ -22,7 +22,3 @@ export const TokenListGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 5px 5px;
 `
-
-export const TokenImage = styled.img`
-  width: 100px;
-`

@@ -39,7 +39,7 @@ const getRandomIndexFromArray = (
   return Math.floor(Math.random() * arr.length)
 }
 
-const getRandomJoke = (): string => joke[pickRandomKey(joke)]
+const getRandomJoke = (): string => `JOKE: ${joke[pickRandomKey(joke)]}`
 
 const getRandomNumber = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min + 1)) + min

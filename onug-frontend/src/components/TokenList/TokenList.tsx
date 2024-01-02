@@ -4,8 +4,8 @@ import {
   StyledTokenList,
   TokenListTitle,
   TokenListGrid,
-  TokenImage,
 } from './TokenList.styles'
+import { TokenImage } from 'components'
 
 export const TokenList = observer(() => {
   const { artifacts, marks } = deckStore
@@ -24,8 +24,7 @@ export const TokenList = observer(() => {
         {artifacts.map((artifact) => (
           <TokenImage
             key={artifact.id}
-            src={require(`../../assets/tokens/${artifact.card_name}.png`)}
-            alt={artifact.card_name}
+            tokenName={artifact.token_name}
             onClick={() => handleTokenClick(artifact.id, 'artifact')}
           />
         ))}
@@ -35,8 +34,7 @@ export const TokenList = observer(() => {
         {marks.map((mark) => (
           <TokenImage
             key={mark.id}
-            src={require(`../../assets/tokens/${mark.card_name}.png`)}
-            alt={mark.card_name}
+            tokenName={mark.token_name}
             onClick={() => handleTokenClick(mark.id, 'mark')}
           />
         ))}

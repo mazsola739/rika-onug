@@ -3,7 +3,6 @@ export { default as second_votes } from './2nd_votes.png'
 
 export { default as artifact_back } from './artifact_back.png'
 export { default as mark_back } from './mark_back.png'
-export { default as marks_place } from './marks_place.png'
 
 export { default as shield } from './shield.png'
 

@@ -15,6 +15,8 @@ import { rippleNightPhaseStore } from './phaseStores/RippleNightPhaseStore'
 const { generateTimedAction, getRandomJoke } = actionStoreUtils
 const { addBasicAction } = gamePlayStoreUtils
 
+//TODO EASTEREGG
+
 class GamePlayStore {
   isGameStarted = false
   isGameStopped = true
@@ -42,6 +44,7 @@ class GamePlayStore {
 
   generateActions(): RoleActionType[] {
     const gamePlayActions: RoleActionType[] = []
+
     this.addEpicBattleIntro(gamePlayActions)
     this.addStartingActions(gamePlayActions)
     this.addPhaseActions(gamePlayActions)
@@ -52,6 +55,7 @@ class GamePlayStore {
       this.addRippleNightPhaseActions(gamePlayActions)
     }
     this.addJokeAndVoting(gamePlayActions)
+
     return gamePlayActions
   }
 

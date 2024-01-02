@@ -1,6 +1,8 @@
 export { default as mark } from './mark.png'
 export { default as markoflove } from './markoflove.png'
 export { default as movecard } from './movecard.png'
+export { default as card_background } from './card_background.png'
+export { default as mark_background } from './mark_background.png'
 
 export { default as onua_alien } from './onua_alien.png'
 export { default as onud_alpha_wolf } from './onud_alpha_wolf.png'

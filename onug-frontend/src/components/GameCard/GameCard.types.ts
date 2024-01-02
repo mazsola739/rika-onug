@@ -3,3 +3,7 @@ export interface GameCardProps {
   player_number: number
   isCenter: boolean
 }
+
+export interface StyledGameCardProps {
+  backgroundImage: string
+}

@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
 import { buttons } from 'constant'
 import { gamePlayStore, selectedDeckStore } from 'store'
+import { Messages } from './Room.styles'
 
 export const RoomFooter = observer(() => {
   const handlePauseGame = useCallback(() => {
@@ -42,6 +43,7 @@ export const RoomFooter = observer(() => {
           backgroundColor="#8e44ad"
         />
       </FooterButtons>
+      <Messages>Player 1 logged in</Messages>
     </Footer>
   )
 })

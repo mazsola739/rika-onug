@@ -15,8 +15,6 @@ import { alienStore, selectedDeckStore } from 'store'
 import { ActionCardType, RepeatroleType, RoleActionType } from 'types'
 import { actionStoreUtils } from 'utils'
 
-//TODO REPEAT (whos)
-
 const {
   areAllCardsSelectedById,
   areAnyCardsSelectedById,

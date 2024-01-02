@@ -24,8 +24,6 @@ class RippleNightPhaseStore {
   generateActions(): RoleActionType[] {
     const rippleNightPhaseActions: RoleActionType[] = []
 
-    console.log(this.rippleDeck.map((card) => card.card_name))
-
     addRoleActions(
       ActionStores.alienStore,
       areAnyCardsSelectedById(this.rippleDeck, alienIds),

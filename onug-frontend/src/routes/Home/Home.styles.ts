@@ -5,8 +5,8 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 200px;
-  bottom: 100px;
+  top: 170px;
+  bottom: 90px;
   left: 0px;
   right: 0px;
   overflow-y: auto;

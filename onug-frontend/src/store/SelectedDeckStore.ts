@@ -1,9 +1,16 @@
 import { makeAutoObservable } from 'mobx'
-import { CardType, ActionCardType } from 'types'
-import { selectedDeckUtils } from 'utils'
+import { CardType, ActionCardType, MarkType } from 'types'
+import { actionStoreUtils, selectedDeckUtils } from 'utils'
 import { deckStore } from 'store'
-import { actioncards } from 'data'
-import { alienIds, roles } from 'constant'
+import { actionMarks, actioncards } from 'data'
+import {
+  alienIds,
+  assassinIds,
+  evils,
+  hasMarkIds,
+  roles,
+  vampireIds,
+} from 'constant'
 
 const {
   containsById,
@@ -17,12 +24,14 @@ const {
   prohibitDeselectingWerewolf,
   selectCard,
 } = selectedDeckUtils
+const { areAnyCardsSelectedById, isCardSelectedById } = actionStoreUtils
 
 class SelectedDeckStore {
   selectedCards: CardType[] = []
   actionCards: ActionCardType[] = actioncards
   gamePlayDeck: ActionCardType[] = []
   MAX_ALLOWED_PLAYERS = 12
+  selectedMarks: MarkType[] = actionMarks
 
   constructor() {
     makeAutoObservable(this)
@@ -55,11 +64,13 @@ class SelectedDeckStore {
     }
 
     deckStore.resetDetailedCardInfo()
+    this.updateMarksInDeckStatus()
   }
 
   resetSelection(): void {
     this.selectedCards = []
     deckStore.resetDetailedCardInfo()
+    this.updateMarksInDeckStatus()
   }
 
   updatePlayDeckWithSelectedCards(selectedCards: CardType[]): void {
@@ -124,13 +135,55 @@ class SelectedDeckStore {
     return this.gamePlayDeck.some((card) => card.wake_up_time === 'dusk')
   }
 
+  hasMarks(): boolean {
+    return areAnyCardsSelectedById(this.gamePlayDeck, hasMarkIds)
+  }
+
   isEpicBattle(): boolean {
-    const evils = ['vampire', 'alien', 'werewolf', 'supervillain']
     return hasSpecificRolesInDeck(this.gamePlayDeck, evils)
   }
 
   shouldStartRipple(): boolean {
     return this.selectedCards.some((card) => alienIds.includes(card.id))
+  }
+
+  updateMarksInDeckStatus(): void {
+    this.selectedMarks.forEach((mark) => {
+      switch (mark.token_name) {
+        case 'mark_of_vampire':
+          mark.isInDeck = areAnyCardsSelectedById(
+            this.selectedCards,
+            vampireIds
+          )
+          break
+        case 'mark_of_fear':
+          mark.isInDeck = isCardSelectedById(this.selectedCards, 39)
+          break
+        case 'mark_of_the_bat':
+          mark.isInDeck = isCardSelectedById(this.selectedCards, 38)
+          break
+        case 'mark_of_disease':
+          mark.isInDeck = isCardSelectedById(this.selectedCards, 32)
+          break
+        case 'mark_of_love':
+          mark.isInDeck = isCardSelectedById(this.selectedCards, 31)
+          break
+        case 'mark_of_traitor':
+          mark.isInDeck = isCardSelectedById(this.selectedCards, 34)
+          break
+        case 'mark_of_clarity':
+          mark.isInDeck = isCardSelectedById(this.selectedCards, 37)
+          break
+        case 'mark_of_assassin':
+          mark.isInDeck = areAnyCardsSelectedById(
+            this.selectedCards,
+            assassinIds
+          )
+          break
+        default:
+          break
+      }
+    })
   }
 }
 

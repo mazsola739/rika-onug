@@ -52,7 +52,7 @@ export const emptyCard: CardType = {
 
 export const emptyToken: TokenType = {
   id: 0,
-  card_name: '',
+  token_name: '',
   rules: '',
   expansion: '',
 }
@@ -209,3 +209,5 @@ export const rippleCenterAnyKeys: string[] = [
   'identifier_anyodd_text',
   'identifier_center_text',
 ]
+
+export const evils = ['vampire', 'alien', 'werewolf', 'supervillain']

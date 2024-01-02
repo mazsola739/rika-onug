@@ -9,13 +9,6 @@ export type CardType = {
   rules: string
 }
 
-export type TokenType = {
-  id: number
-  expansion: string
-  card_name: string
-  rules: string
-}
-
 export type ActionCardType = {
   id: number
   team: string

@@ -1,9 +1,4 @@
 export const random_ripp: Record<string, string> = {
-  random_ripple_repeat: 'Repeat',
-  random_ripple_repeat1p: 'Repeat 1P',
-}
-
-/* export const random_ripp: Record<string, string> = {
   random_ripple_1minute: '1 Minute',
   random_ripple_repeat: 'Repeat',
   random_ripple_repeat1p: 'Repeat 1P',
@@ -25,7 +20,7 @@ export const random_ripp: Record<string, string> = {
   random_ripple_repeatrole: 'Repeat Role',
   random_ripple_iamalien: 'I Am Alien',
 }
- */
+
 export const random_orac: Record<string, string> = {
   random_oracle_aliens: 'Alien Team',
   random_oracle_werewolf: 'Werewolf Team',
