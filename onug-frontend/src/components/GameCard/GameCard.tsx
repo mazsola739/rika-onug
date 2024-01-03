@@ -1,50 +1,47 @@
 import { observer } from 'mobx-react-lite'
 import { StyledGameCard, TokenImage, Tokens } from './GameCard.styles'
 import { GameCardProps } from './GameCard.types'
-import { useState } from 'react'
+import { roomStore } from 'store'
 
-export const GameCard = observer(
-  ({ card_name, player_number, isCenter }: GameCardProps) => {
-    const [isFlipped, setIsFlipped] = useState(false)
+export const GameCard = observer(({ player, isCenter }: GameCardProps) => {
+  const { hasMarks } = roomStore
 
-    const handleClick = () => {
-      setIsFlipped(!isFlipped)
-    }
-
-    return (
-      <StyledGameCard
-        backgroundImage={
-          isFlipped
-            ? require(`../../assets/cards/${card_name}.png`)
-            : require('../../assets/cards/card_background.png')
-        }
-        onClick={handleClick}
-      >
-        {!isCenter && (
-          <Tokens>
-            {/* Player number */}
-            <TokenImage
-              src={require(`../../assets/players/player_${player_number}.png`)}
-              alt={`player_${player_number}`}
-            />
-            {/* Shield */}
+  return (
+    <StyledGameCard
+      backgroundImage={require('../../assets/cards/card_background.png')}
+    >
+      {!isCenter && (
+        <Tokens>
+          {/* Player number */}
+          <TokenImage
+            src={require(
+              `../../assets/players/player_${player.player_number}.png`
+            )}
+            alt={`player_${player.player_number}`}
+          />
+          {/* Shield */}
+          {player.player_card.shield && (
             <TokenImage
               src={require(`../../assets/tokens/shield.png`)}
-              alt={`player_${player_number}`}
+              alt={`player_${player.player_number}`}
             />
-            {/* Artifact */}
+          )}
+          {/* Artifact */}
+          {player.player_card.artifact.length > 0 && (
             <TokenImage
               src={require(`../../assets/tokens/artifact_back.png`)}
-              alt={`player_${player_number}`}
+              alt={`player_${player.player_number}`}
             />
-            {/* Mark */}
+          )}
+          {/* Mark */}
+          {hasMarks && (
             <TokenImage
               src={require(`../../assets/tokens/mark_back.png`)}
-              alt={`player_${player_number}`}
+              alt={`player_${player.player_number}`}
             />
-          </Tokens>
-        )}
-      </StyledGameCard>
-    )
-  }
-)
+          )}
+        </Tokens>
+      )}
+    </StyledGameCard>
+  )
+})

@@ -1,8 +1,7 @@
+import { CardType } from 'types'
+
 export interface CardProps {
-  card_name: string
-  display_name: string
-  rules: string
-  id: number
+  card: CardType
 }
 
 export interface StyledCardProps {

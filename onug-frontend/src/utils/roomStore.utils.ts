@@ -1,5 +1,9 @@
 import { CardType } from 'types'
 
+const checkCardPresence = (cards: CardType[], cardId: number): boolean => {
+  return cards.some((card) => card.id === cardId)
+}
+
 const filterCardsByIds = (
   cards: CardType[],
   idsToCheck: number[]
@@ -12,6 +16,7 @@ const getRandomItemFromArray = <T>(array: T[]): T => {
 }
 
 export const roomStoreUtils = {
+  checkCardPresence,
   filterCardsByIds,
   getRandomItemFromArray,
 }

@@ -3,4 +3,5 @@ export interface GameTokenProps {
   tokenName: string
   isInDeck: boolean
   display_name: string
+  hasDoppelganger: boolean
 }

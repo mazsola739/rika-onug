@@ -1,113 +1,46 @@
-import { GameCard, GameToken } from 'components'
 import { observer } from 'mobx-react-lite'
 import { roomStore, selectedDeckStore } from 'store'
-import {
-  StyledRoom,
-  PlayersCards,
-  CenterCards,
-  Marks,
-  CardContainer,
-  CardTitle,
-  CenterCardContainer,
-  Shield,
-} from './Room.styles'
+import { StyledRoom, CenterCardContainer, Shield } from './Room.styles'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
 import { artifacts } from 'data'
+import { roomUtils } from './Room.utils'
 
 export const Room = observer(() => {
-  const { playerCards, centerCards, chosenWolf, chosenSuperVillain } =
+  const {
+    renderPlayers,
+    renderCenterCard,
+    renderCenterExtraCard,
+    renderMarks,
+    renderArtifacts,
+    getRandomPlayer,
+  } = roomUtils
+  const { centerCards, chosenWolf, chosenSuperVillain } =
     roomStore.distributeCards()
-
+  const { hasSentinel, hasMarks, hasDoppelganger, hasCurator, players } =
+    roomStore
   const selectedMarks = selectedDeckStore.selectedMarks
+
+  const randomPlayer = getRandomPlayer(players) //todo delete
 
   return (
     <>
-      <RoomHeader />
+      <RoomHeader player={randomPlayer} />
       <StyledRoom>
-        <CardContainer>
-          <PlayersCards>
-            {playerCards.map((card, i) => (
-              <GameCard
-                key={card.id}
-                card_name={card.card_name}
-                player_number={i + 1}
-                isCenter={false}
-              />
-            ))}
-          </PlayersCards>
-        </CardContainer>
+        {renderPlayers(players)}
         <CenterCardContainer>
-          {/* Shield */}
-          <Shield
-            src={require(`../../assets/tokens/shield.png`)}
-            alt="shield"
-          />
-          {chosenWolf && (
-            <CardContainer>
-              <CardTitle>Werewolf</CardTitle>
-              <CenterCards>
-                <GameCard
-                  card_name={chosenWolf.card_name}
-                  player_number={1}
-                  isCenter={true}
-                />
-              </CenterCards>
-            </CardContainer>
+          {hasSentinel && (
+            <Shield
+              src={require(`../../assets/tokens/shield.png`)}
+              alt="shield"
+            />
           )}
-          <CardContainer>
-            <CardTitle>Center</CardTitle>
-            <CenterCards>
-              {centerCards.map((card, i) => (
-                <GameCard
-                  key={card.id}
-                  card_name={card.card_name}
-                  player_number={i + 1}
-                  isCenter={true}
-                />
-              ))}
-            </CenterCards>
-          </CardContainer>
-          {chosenSuperVillain && (
-            <CardContainer>
-              <CardTitle>Villain</CardTitle>
-              <CenterCards>
-                <GameCard
-                  card_name={chosenSuperVillain.card_name}
-                  player_number={1}
-                  isCenter={true}
-                />
-              </CenterCards>
-            </CardContainer>
-          )}
+          {chosenWolf && renderCenterExtraCard('Werewolf')}
+          {renderCenterCard('Center', centerCards)}
+          {chosenSuperVillain && renderCenterExtraCard('Villain')}
         </CenterCardContainer>
-        <Marks>
-          {selectedMarks.map((mark) => {
-            return (
-              <GameToken
-                key={mark.id}
-                tokenName={mark.token_name}
-                isInDeck={mark.isInDeck}
-                display_name={mark.display_name}
-              />
-            )
-          })}
-        </Marks>
-        <Marks>
-          {artifacts.map(
-            (artifact, i) =>
-              artifact.token_name !== 'shield' && (
-                <img
-                  key={i}
-                  style={{ width: '60px' }}
-                  src={require(
-                    `../../assets/tokens/${artifact.token_name}.png`
-                  )}
-                  alt={artifact.token_name}
-                />
-              )
-          )}
-        </Marks>
+        {hasMarks && renderMarks(selectedMarks, hasDoppelganger)}
+        {hasCurator && renderArtifacts(artifacts)}
       </StyledRoom>
       <RoomFooter />
     </>

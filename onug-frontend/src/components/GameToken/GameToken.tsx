@@ -8,12 +8,11 @@ import {
 } from './GameToken.styles'
 import { useMemo } from 'react'
 
-//TODO DOPPELGANGER
-
 export const GameToken: React.FC<GameTokenProps> = ({
   tokenName,
   display_name,
   isInDeck,
+  hasDoppelganger,
 }) => {
   const imageSrc = useMemo(
     () =>
@@ -27,9 +26,11 @@ export const GameToken: React.FC<GameTokenProps> = ({
         <TokenImage src={imageSrc} alt={tokenName} />
         <TokenName>{display_name}</TokenName>
       </Marks>
-      <DopplegangerMarks>
-        <TokenImage src={imageSrc} alt={tokenName} />
-      </DopplegangerMarks>
+      {hasDoppelganger && (
+        <DopplegangerMarks>
+          <TokenImage src={imageSrc} alt={tokenName} />
+        </DopplegangerMarks>
+      )}
     </StyledGameToken>
   )
 }

@@ -15,7 +15,7 @@ export const CardList = observer(({ team, cards }: CardListProps) => {
       <CardListTitle>{`${teamName} TEAM`}</CardListTitle>
       <CardListGrid>
         {teamMembers.map((card) => (
-          <Card key={card.id} {...card} />
+          <Card key={card.id} card={card} />
         ))}
       </CardListGrid>
     </StyledCardList>

@@ -1,6 +1,7 @@
+import { PlayerType } from 'types'
+
 export interface GameCardProps {
-  card_name: string
-  player_number: number
+  player?: PlayerType
   isCenter: boolean
 }
 

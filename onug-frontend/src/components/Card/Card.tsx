@@ -4,7 +4,17 @@ import { StyledCard, CardImage, CardName } from './Card.styles'
 import { CardProps } from './Card.types'
 import { useCallback, useMemo } from 'react'
 
-export const Card = observer(({ id, card_name, display_name }: CardProps) => {
+export const Card = observer(({ card }: CardProps) => {
+  const {
+    id,
+    card_name,
+    display_name,
+    rules,
+    expansion,
+    team,
+    wake_up_time,
+    order,
+  } = card
   const isSelected = selectedDeckStore.selectedCards.some(
     (card) => card.id === id
   )
@@ -14,11 +24,11 @@ export const Card = observer(({ id, card_name, display_name }: CardProps) => {
       id,
       card_name,
       display_name,
-      rules: '',
-      expansion: '',
-      team: '',
-      wake_up_time: '',
-      order: 0,
+      rules,
+      expansion,
+      team,
+      wake_up_time,
+      order,
     })
 
     selectedDeckStore.updatePlayDeckWithSelectedCards(
@@ -26,7 +36,7 @@ export const Card = observer(({ id, card_name, display_name }: CardProps) => {
     )
 
     deckStore.toggleInfo(id, 'card')
-  }, [id, card_name, display_name])
+  }, [id, card_name, display_name, rules, expansion, team, wake_up_time, order])
 
   const imageSrc = useMemo(
     () => require(`../../assets/cards/${card_name}.png`),

@@ -3,14 +3,7 @@ import { CardType, ActionCardType, MarkType } from 'types'
 import { actionStoreUtils, selectedDeckUtils } from 'utils'
 import { deckStore } from 'store'
 import { actionMarks, actioncards } from 'data'
-import {
-  alienIds,
-  assassinIds,
-  evils,
-  hasMarkIds,
-  roles,
-  vampireIds,
-} from 'constant'
+import { alienIds, assassinIds, evils, roles, vampireIds } from 'constant'
 
 const {
   containsById,
@@ -133,10 +126,6 @@ class SelectedDeckStore {
 
   hasDusk(): boolean {
     return this.gamePlayDeck.some((card) => card.wake_up_time === 'dusk')
-  }
-
-  hasMarks(): boolean {
-    return areAnyCardsSelectedById(this.gamePlayDeck, hasMarkIds)
   }
 
   isEpicBattle(): boolean {

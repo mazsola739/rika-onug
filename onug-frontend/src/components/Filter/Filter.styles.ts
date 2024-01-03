@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { FilterButtonProps } from './Filter.types'
 
-// Define styles for desktop (or larger screens)
 const desktopStyles = `
   font-size: 16px;
   font-family: 'Josefin Sans', sans-serif;
@@ -10,7 +9,6 @@ const desktopStyles = `
   height: 50px;
 `
 
-// Define styles for mobile
 const mobileStyles = `
   font-size: 10px;
   padding: 5px;

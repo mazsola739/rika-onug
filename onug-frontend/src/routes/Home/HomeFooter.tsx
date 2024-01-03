@@ -8,7 +8,7 @@ import {
 import { buttons } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
-import { gamePlayStore, deckStore, selectedDeckStore } from 'store'
+import { gamePlayStore, deckStore, selectedDeckStore, roomStore } from 'store'
 
 export const HomeFooter = observer(() => {
   const handleResetGame = useCallback(() => {
@@ -16,6 +16,8 @@ export const HomeFooter = observer(() => {
   }, [])
 
   const handleStartGame = useCallback(() => {
+    roomStore.createPlayers()
+    roomStore.storeCenterCards()
     gamePlayStore.toggleGameStatus()
     deckStore.resetDetailedCardInfo()
   }, [])

@@ -1,5 +1,4 @@
 import { Button, Header } from 'components'
-import { identifier_player } from 'constant'
 import { observer } from 'mobx-react-lite'
 import {
   CardInformation,
@@ -11,12 +10,9 @@ import {
   YourCardRule,
   YourName,
 } from './Room.styles'
-import { cards } from 'data'
+import { RoomHeaderProps } from './Room.types'
 
-export const RoomHeader = observer(() => {
-  const card = cards[0]
-  const playerName = identifier_player.identifier_player1_text
-
+export const RoomHeader = observer(({ player }: RoomHeaderProps) => {
   const handleClick = () => {
     console.log('Im ready')
   }
@@ -26,18 +22,22 @@ export const RoomHeader = observer(() => {
       <StyledRoomHeader>
         <CardInformation>
           <YourCard
-            src={require(`../../assets/cards/${card.card_name}.png`)}
-            alt={card.card_name}
+            src={require(
+              `../../assets/cards/${player.player_card.card_name}.png`
+            )}
+            alt={player.player_card.display_name}
           />
-          <YourCardRule>{`${card.display_name}: ${card.rules}`}</YourCardRule>
+          <YourCardRule>{`${player.player_card.display_name}: ${player.player_card.rules}`}</YourCardRule>
         </CardInformation>
         <PlayerInfo>
           <YourAvatar
-            src={require(`../../assets/players/selected_player_1.png`)}
-            alt={`${playerName}`}
+            src={require(
+              `../../assets/players/selected_player_${player.player_number}.png`
+            )}
+            alt={player.player_name}
           />
           <Player>
-            <YourName>{playerName}</YourName>
+            <YourName>{player.player_name}</YourName>
             <Button
               onClick={handleClick}
               backgroundColor="#28a745"

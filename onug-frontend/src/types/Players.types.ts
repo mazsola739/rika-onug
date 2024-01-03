@@ -1,15 +1,16 @@
-export type StartingCardType = {
+export type PlayerCardType = {
   card_name: string
-  display_name: string
   team: string
   artifact: string
   shield: boolean
   mark: string
+
+  display_name: string
   rules: string
 }
 
-export type ChangedCardType = {
-  new_name: string
+export type GameplayChangesType = {
+  new_card_name: string
   new_team: string
   new_artifact: string
   new_shield: boolean
@@ -17,14 +18,14 @@ export type ChangedCardType = {
 }
 
 export type EndOfGameType = {
-  votes: number
-  pointed_at_who: string
+  received_votes: string[]
+  given_votes: string[]
 }
 
 export type PlayerType = {
   player_name: string
-  avatar: string
-  starting_card: StartingCardType
-  gameplay_changes: ChangedCardType[]
+  player_number: number
+  player_card: PlayerCardType
+  gameplay_changes: GameplayChangesType[]
   end_of_game: EndOfGameType
 }
