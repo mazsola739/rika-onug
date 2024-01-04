@@ -17,11 +17,13 @@ class RobberStore {
       {
         text: robber.robber_wake_text,
         time: BASE_TIME,
+        image: 'onuw_robber',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: robber.robber_close_text,
         time: BASE_TIME,
+        image: 'onuw_robber',
       }
     )
 

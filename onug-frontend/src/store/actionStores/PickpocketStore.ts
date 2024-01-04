@@ -22,11 +22,13 @@ class PickpocketStore {
       {
         text: pickpocket.pickpocket_wake_text,
         time: BASE_TIME,
+        image: 'onuv_pickpocket',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: pickpocket.pickpocket_close_text,
         time: BASE_TIME,
+        image: 'onuv_pickpocket',
       }
     )
 
@@ -36,9 +38,14 @@ class PickpocketStore {
         {
           text: doppelganger.doppelganger_pickpocket_wake_text,
           time: BASE_TIME,
+          image: 'onuw_doppelganger',
         },
         generateTimedAction(ACTION_TIME),
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
 

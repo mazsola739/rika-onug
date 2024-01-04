@@ -22,11 +22,13 @@ class CuratorStore {
       {
         text: curator.curator_wake_text,
         time: BASE_TIME,
+        image: 'onud_curator',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: curator.curator_close_text,
         time: BASE_TIME,
+        image: 'onud_curator',
       }
     )
 
@@ -36,9 +38,14 @@ class CuratorStore {
         {
           text: doppelganger.doppelganger_curator_wake_text,
           time: BASE_TIME,
+          image: 'onuw_doppelganger',
         },
         generateTimedAction(ACTION_TIME),
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
 

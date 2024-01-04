@@ -17,11 +17,13 @@ class LoverStore {
       {
         text: lovers.lovers_wake_text,
         time: BASE_TIME,
+        image: 'markoflove',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: lovers.lovers_close_text,
         time: BASE_TIME,
+        image: 'markoflove',
       }
     )
 

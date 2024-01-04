@@ -53,8 +53,12 @@ class AlienStore {
           : identifier[identifierKey]
 
       chosenAlienActions.push(
-        { text: random_aliens[chosenAlienActionKey], time: BASE_TIME },
-        { text: playerText, time: BASE_TIME }
+        {
+          text: random_aliens[chosenAlienActionKey],
+          time: BASE_TIME,
+          image: 'onua_alien',
+        },
+        { text: playerText, time: BASE_TIME, image: 'onua_alien' }
       )
     } else if (
       chosenAlienActionKey.includes('newalien') ||
@@ -65,22 +69,36 @@ class AlienStore {
       const playerText: string = identifier[playerKey]
 
       chosenAlienActions.push(
-        { text: playerText, time: BASE_TIME },
-        { text: random_aliens[chosenAlienActionKey], time: BASE_TIME }
+        { text: playerText, time: BASE_TIME, image: 'onua_alien' },
+        {
+          text: random_aliens[chosenAlienActionKey],
+          time: BASE_TIME,
+          image: 'onua_alien',
+        }
       )
     } else {
       chosenAlienActions.push({
         text: random_aliens[chosenAlienActionKey],
         time: BASE_TIME,
+        image: 'onua_alien',
       })
     }
 
     alienActions.push(
-      { text: aliens.alien_wake_text, time: BASE_TIME },
+      { text: aliens.alien_wake_text, time: BASE_TIME, image: 'onua_alien' },
       ...chosenAlienActions,
-      generateTimedAction(ACTION_TIME),
+
+      generateTimedAction(ACTION_TIME)
+    )
+    this.isNewAlienOrHelper &&
+      alienActions.push({
+        text: aliens.alien_fistaway_text,
+        time: BASE_TIME,
+        image: 'onua_alien',
+      })
+    alienActions.push(
       ...(isCardSelectedById(this.deck, 45) ? cowStore.generateActions() : []),
-      { text: aliens.alien_close_text, time: BASE_TIME }
+      { text: aliens.alien_close_text, time: BASE_TIME, image: 'onua_alien' }
     )
 
     return alienActions

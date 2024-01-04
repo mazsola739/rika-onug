@@ -30,11 +30,19 @@ class WerewolfStore {
       ? werewolves.dreamwolf_wake_text
       : werewolves.werewolves_wake_text
 
-    werewolfActions.push({ text: werewolfWakeText, time: BASE_TIME })
+    werewolfActions.push({
+      text: werewolfWakeText,
+      time: BASE_TIME,
+      image: 'onuw_werewolf',
+    })
 
     if (this.countWolvesInGame() <= 4) {
       werewolfActions.push(
-        { text: werewolves.werewolves_lonewolf_text, time: BASE_TIME },
+        {
+          text: werewolves.werewolves_lonewolf_text,
+          time: BASE_TIME,
+          image: 'onuw_werewolf',
+        },
         generateTimedAction(ACTION_TIME)
       )
     }
@@ -43,12 +51,14 @@ class WerewolfStore {
       werewolfActions.push({
         text: werewolves.dreamwolf_close_text,
         time: BASE_TIME,
+        image: 'onud_dream_wolf',
       })
     }
 
     werewolfActions.push({
       text: werewolves.werewolves_close_text,
       time: BASE_TIME,
+      image: 'onuw_werewolf',
     })
 
     return werewolfActions

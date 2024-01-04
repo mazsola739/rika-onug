@@ -24,7 +24,11 @@ class BeholderStore {
       !isCardSelectedById(this.deck, 18)
     ) {
       beholderActions.push(
-        { text: beholder.beholder_seer_wake_text, time: BASE_TIME },
+        {
+          text: beholder.beholder_seer_wake_text,
+          time: BASE_TIME,
+          image: 'onub_beholder',
+        },
         generateTimedAction(2 * ACTION_TIME)
       )
 
@@ -34,27 +38,36 @@ class BeholderStore {
           {
             text: beholder.beholder_close_text,
             time: BASE_TIME,
+            image: 'onuw_doppelganger',
           },
           {
             text: doppelganger.doppelganger_beholder_seer_wake_text,
             time: BASE_TIME,
+            image: 'onuw_doppelganger',
           },
           generateTimedAction(2 * ACTION_TIME),
           {
             text: beholder.beholder_seer_thumbaway_text,
             time: BASE_TIME,
+            image: 'onus_seer',
           },
-          { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+          {
+            text: doppelganger.doppelganger_close_text,
+            time: BASE_TIME,
+            image: 'onuw_doppelganger',
+          }
         )
       } else {
         beholderActions.push(
           {
             text: beholder.beholder_seer_thumbaway_text,
             time: BASE_TIME,
+            image: 'onus_seer',
           },
           {
             text: beholder.beholder_close_text,
             time: BASE_TIME,
+            image: 'onuw_doppelganger',
           }
         )
       }
@@ -66,7 +79,11 @@ class BeholderStore {
       !isCardSelectedById(this.deck, 9)
     ) {
       beholderActions.push(
-        { text: beholder.beholder_apprenticeseer_wake_text, time: BASE_TIME },
+        {
+          text: beholder.beholder_apprenticeseer_wake_text,
+          time: BASE_TIME,
+          image: 'onub_beholder',
+        },
         generateTimedAction(2 * ACTION_TIME)
       )
 
@@ -76,27 +93,36 @@ class BeholderStore {
           {
             text: beholder.beholder_close_text,
             time: BASE_TIME,
+            image: 'onuw_doppelganger',
           },
           {
             text: doppelganger.doppelganger_beholder_apprenticeseer_wake_text,
             time: BASE_TIME,
+            image: 'onuw_doppelganger',
           },
           generateTimedAction(2 * ACTION_TIME),
           {
             text: beholder.beholder_apprenticeseer_thumbaway_text,
             time: BASE_TIME,
+            image: 'onud_apprentice_seer',
           },
-          { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+          {
+            text: doppelganger.doppelganger_close_text,
+            time: BASE_TIME,
+            image: 'onuw_doppelganger',
+          }
         )
       } else {
         beholderActions.push(
           {
             text: beholder.beholder_apprenticeseer_thumbaway_text,
             time: BASE_TIME,
+            image: 'onud_apprentice_seer',
           },
           {
             text: beholder.beholder_close_text,
             time: BASE_TIME,
+            image: 'onub_beholder',
           }
         )
       }
@@ -108,6 +134,7 @@ class BeholderStore {
         {
           text: beholder.beholder_seer_apprenticeseer_wake_text,
           time: BASE_TIME,
+          image: 'onuw_doppelganger',
         },
         generateTimedAction(2 * ACTION_TIME)
       )
@@ -118,27 +145,36 @@ class BeholderStore {
           {
             text: beholder.beholder_close_text,
             time: BASE_TIME,
+            image: 'onub_beholder',
           },
           {
             text: doppelganger.doppelganger_beholder_seer_apprenticeseer_wake_text,
             time: BASE_TIME,
+            image: 'onuw_doppelganger',
           },
           generateTimedAction(2 * ACTION_TIME),
           {
             text: beholder.beholder_seer_apprenticeseer_thumbaway_text,
             time: BASE_TIME,
+            image: 'onus_seer',
           },
-          { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+          {
+            text: doppelganger.doppelganger_close_text,
+            time: BASE_TIME,
+            image: 'onuw_doppelganger',
+          }
         )
       } else {
         beholderActions.push(
           {
             text: beholder.beholder_seer_apprenticeseer_thumbaway_text,
             time: BASE_TIME,
+            image: 'onus_seer',
           },
           {
             text: beholder.beholder_close_text,
             time: BASE_TIME,
+            image: 'onub_beholder',
           }
         )
       }

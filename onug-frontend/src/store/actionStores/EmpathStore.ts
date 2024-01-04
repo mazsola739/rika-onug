@@ -54,21 +54,37 @@ class EmpathStore {
     const randomDoppelgangerActionText = getRandomValueFromObject(random_empath)
 
     empathActions.push(
-      { text: empath.empath_wake_text, time: BASE_TIME },
-      { text: chosenEmpathText, time: BASE_TIME },
-      { text: randomEmpathActionText, time: BASE_TIME },
+      { text: empath.empath_wake_text, time: BASE_TIME, image: 'onub_empath' },
+      { text: chosenEmpathText, time: BASE_TIME, image: 'onub_empath' },
+      { text: randomEmpathActionText, time: BASE_TIME, image: 'onub_empath' },
       generateTimedAction(ACTION_TIME),
-      { text: empath.empath_close_text, time: BASE_TIME }
+      { text: empath.empath_close_text, time: BASE_TIME, image: 'onub_empath' }
     )
 
     //Doppelganger
     if (isCardSelectedById(this.deck, 1)) {
       empathActions.push(
-        { text: doppelganger.doppelganger_empath_wake_text, time: BASE_TIME },
-        { text: chosenDoppelgangerText, time: BASE_TIME },
-        { text: randomDoppelgangerActionText, time: BASE_TIME },
+        {
+          text: doppelganger.doppelganger_empath_wake_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        },
+        {
+          text: chosenDoppelgangerText,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        },
+        {
+          text: randomDoppelgangerActionText,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        },
         generateTimedAction(ACTION_TIME),
-        { text: doppelganger.doppelganger_empath_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_empath_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
 

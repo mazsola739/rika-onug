@@ -44,6 +44,8 @@ export const RoomFooter = observer(() => {
         />
       </FooterButtons>
       <Messages>Player 1 logged in</Messages>
+      <br />
+      <Messages>Player 2 ready</Messages>
     </Footer>
   )
 })

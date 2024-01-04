@@ -106,12 +106,14 @@ class RipplePhaseStore {
       rippleActions.push({
         text: `RIPPLE: ${ripple.ripple_intro_text}`,
         time: BASE_TIME,
+        image: '',
       })
 
       if (randomActionKey === 'random_ripple_1minute') {
         rippleActions.push({
           text: random_ripple_1minute.ripple_1minute_text,
           time: BASE_TIME,
+          image: '',
         })
       }
 
@@ -120,10 +122,12 @@ class RipplePhaseStore {
           {
             text: random_ripple_repeat.ripple_repeat_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_repeat.ripple_repeat_2_text,
             time: BASE_TIME,
+            image: '',
           }
         )
       }
@@ -133,18 +137,22 @@ class RipplePhaseStore {
           {
             text: random_ripple_repeat1p.ripple_repeat_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_repeat1p.ripple_repeat_2_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random1Player,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_repeat1p.ripple_openeyes_text,
             time: BASE_TIME,
+            image: '',
           }
         )
       }
@@ -154,10 +162,12 @@ class RipplePhaseStore {
           {
             text: chosenRippleAllText,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_insomniac.ripple_insomniac_text,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(ACTION_TIME)
         )
@@ -168,10 +178,12 @@ class RipplePhaseStore {
           {
             text: chosenRippleAllText,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_nospeak.ripple_nospeak_text,
             time: BASE_TIME,
+            image: '',
           }
         )
       }
@@ -181,10 +193,12 @@ class RipplePhaseStore {
           {
             text: chosenRippleAllText,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_faceaway.ripple_faceaway_text,
             time: BASE_TIME,
+            image: '',
           }
         )
       }
@@ -194,18 +208,22 @@ class RipplePhaseStore {
           {
             text: random1Player,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_troublemaker.ripple_troublemaker_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random2Players,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_troublemaker.ripple_troublemaker_end_text,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(ACTION_TIME)
         )
@@ -216,18 +234,22 @@ class RipplePhaseStore {
           {
             text: random1Player,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_steal.ripple_robber_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: chosenRippleAnyText,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_steal.ripple_robber_end_text,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(ACTION_TIME)
         )
@@ -238,14 +260,17 @@ class RipplePhaseStore {
           {
             text: random1Player,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_witch.ripple_witch_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: chosenRippleAnyText,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(ACTION_TIME)
         )
@@ -256,14 +281,17 @@ class RipplePhaseStore {
           {
             text: random1Player,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_view1.ripple_view1_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: chosenRippleAnyText,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(ACTION_TIME)
         )
@@ -274,14 +302,17 @@ class RipplePhaseStore {
           {
             text: random1Player,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_view2.ripple_view2_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: chosenRippleAnyText,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(ACTION_TIME)
         )
@@ -292,18 +323,22 @@ class RipplePhaseStore {
           {
             text: random1Player,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_reveal.ripple_revealer_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: chosenRippleNeighborText,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_reveal.ripple_revealer_end_text,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(ACTION_TIME)
         )
@@ -318,14 +353,17 @@ class RipplePhaseStore {
           {
             text: random2Players,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_dualview[interactionText],
             time: BASE_TIME,
+            image: '',
           },
           {
             text: randomRippleCenterAnyText,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(ACTION_TIME)
         )
@@ -336,10 +374,12 @@ class RipplePhaseStore {
           {
             text: chosenRippleAllText,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_twovote.ripple_doublevote_text,
             time: BASE_TIME,
+            image: '',
           }
         )
       }
@@ -353,31 +393,38 @@ class RipplePhaseStore {
           {
             text: `${randomPlayer1} and ${randomPlayer2}`,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_shuffle.ripple_dualshuffle1_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: randomPlayer1,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(ACTION_TIME),
           {
             text: randomPlayer1,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_shuffle.ripple_dualshuffle2_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: randomPlayer2,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_shuffle.ripple_dualshuffle3_text,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(ACTION_TIME)
         )
@@ -388,18 +435,22 @@ class RipplePhaseStore {
           {
             text: random1Player,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_drunk.ripple_drunk_text,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: chosenRippleAnyText,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_drunk.ripple_drunk_end_text,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(ACTION_TIME)
         )
@@ -409,6 +460,7 @@ class RipplePhaseStore {
         rippleActions.push({
           text: random_ripple_voteapp.ripple_app_text,
           time: BASE_TIME,
+          image: '',
         })
       }
 
@@ -484,10 +536,12 @@ class RipplePhaseStore {
           {
             text: roleText,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_repeatrole.ripple_repeatrole_text,
             time: BASE_TIME,
+            image: '',
           },
           generateTimedAction(2 * ACTION_TIME)
         )
@@ -498,10 +552,12 @@ class RipplePhaseStore {
           {
             text: chosenRippleAllText,
             time: BASE_TIME,
+            image: '',
           },
           {
             text: random_ripple_iamalien.ripple_iamalien_text,
             time: BASE_TIME,
+            image: '',
           }
         )
       }

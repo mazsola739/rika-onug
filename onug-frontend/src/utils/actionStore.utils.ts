@@ -31,6 +31,7 @@ const areAnyCardsSelectedById = (
 const generateTimedAction = (actionTime: number): RoleActionType => ({
   text: `${time.timertext_prefix}${actionTime}${time.timertext_postfix}`,
   time: actionTime,
+  image: 'TIMER',
 })
 
 const getRandomIndexFromArray = (

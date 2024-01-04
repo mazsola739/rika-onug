@@ -29,13 +29,22 @@ class ExposerStore {
     const randomDoppelgangerAction = getRandomValueFromObject(random_exposer)
 
     exposerActions.push(
-      { text: exposer.exposer_wake_text, time: BASE_TIME },
+      {
+        text: exposer.exposer_wake_text,
+        time: BASE_TIME,
+        image: 'onua_exposer',
+      },
       {
         text: randomExposerAction,
         time: BASE_TIME,
+        image: 'onua_exposer',
       },
       generateTimedAction(ACTION_TIME),
-      { text: exposer.exposer_close_text, time: BASE_TIME }
+      {
+        text: exposer.exposer_close_text,
+        time: BASE_TIME,
+        image: 'onua_exposer',
+      }
     )
 
     //Doppelganger
@@ -44,13 +53,19 @@ class ExposerStore {
         {
           text: doppelganger.doppelganger_exposer_wake_text,
           time: BASE_TIME,
+          image: 'onuw_doppelganger',
         },
         {
           text: randomDoppelgangerAction,
           time: BASE_TIME,
+          image: 'onuw_doppelganger',
         },
         generateTimedAction(ACTION_TIME),
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
     return exposerActions

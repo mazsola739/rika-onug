@@ -27,10 +27,12 @@ class FamilymanStore {
       {
         text: familyman_wake[firstActionKey as keyof typeof familyman_wake],
         time: BASE_TIME,
+        image: 'onub_family_man',
       },
       {
         text: getSecondActionText(firstActionKey),
         time: BASE_TIME,
+        image: 'onub_family_man',
       }
     )
 

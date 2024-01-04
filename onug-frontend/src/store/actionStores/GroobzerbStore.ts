@@ -17,11 +17,13 @@ class GroobzerbStore {
       {
         text: groobzerb.groobzerb_wake_text,
         time: BASE_TIME,
+        image: 'onua_groob_alien',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: groobzerb.groobzerb_close_text,
         time: BASE_TIME,
+        image: 'onua_groob_alien',
       }
     )
 

@@ -29,12 +29,28 @@ class AssassinStore {
       !isCardSelectedById(this.deck, 28)
     ) {
       assassinActions.push(
-        { text: assassins.assassin_wake_text, time: BASE_TIME },
+        {
+          text: assassins.assassin_wake_text,
+          time: BASE_TIME,
+          image: 'onuv_assassin',
+        },
         generateTimedAction(ACTION_TIME),
-        { text: assassins.assassin_close_text, time: BASE_TIME },
-        { text: doppelganger.doppelganger_assassin_wake_text, time: BASE_TIME },
+        {
+          text: assassins.assassin_close_text,
+          time: BASE_TIME,
+          image: 'onuv_assassin',
+        },
+        {
+          text: doppelganger.doppelganger_assassin_wake_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        },
         generateTimedAction(ACTION_TIME),
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
 
@@ -44,9 +60,17 @@ class AssassinStore {
       !areAnyCardsSelectedById(this.deck, [1, 28])
     ) {
       assassinActions.push(
-        { text: assassins.assassin_wake_text, time: BASE_TIME },
+        {
+          text: assassins.assassin_wake_text,
+          time: BASE_TIME,
+          image: 'onuv_assassin',
+        },
         generateTimedAction(ACTION_TIME),
-        { text: assassins.assassin_close_text, time: BASE_TIME }
+        {
+          text: assassins.assassin_close_text,
+          time: BASE_TIME,
+          image: 'onuv_assassin',
+        }
       )
     }
 
@@ -56,15 +80,28 @@ class AssassinStore {
       !isCardSelectedById(this.deck, 29)
     ) {
       assassinActions.push(
-        { text: assassins.apprenticeassassin_wake_text, time: BASE_TIME },
+        {
+          text: assassins.apprenticeassassin_wake_text,
+          time: BASE_TIME,
+          image: 'onuv_apprentice_assassin',
+        },
         generateTimedAction(ACTION_TIME),
-        { text: assassins.apprenticeassassin_close_text, time: BASE_TIME },
+        {
+          text: assassins.apprenticeassassin_close_text,
+          time: BASE_TIME,
+          image: 'onuv_apprentice_assassin',
+        },
         {
           text: doppelganger.doppelganger_apprenticeassassin_wake_text,
           time: BASE_TIME,
+          image: 'onuw_doppelganger',
         },
         generateTimedAction(ACTION_TIME),
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
 
@@ -74,39 +111,67 @@ class AssassinStore {
       !areAnyCardsSelectedById(this.deck, [1, 29])
     ) {
       assassinActions.push(
-        { text: assassins.apprenticeassassin_wake_text, time: BASE_TIME },
+        {
+          text: assassins.apprenticeassassin_wake_text,
+          time: BASE_TIME,
+          image: 'onuv_apprentice_assassin',
+        },
         generateTimedAction(ACTION_TIME),
-        { text: assassins.apprenticeassassin_close_text, time: BASE_TIME }
+        {
+          text: assassins.apprenticeassassin_close_text,
+          time: BASE_TIME,
+          image: 'onuv_apprentice_assassin',
+        }
       )
     }
 
     //Doppelganger && id 28 & 29 is active
     if (areAllCardsSelectedById(this.deck, [1, 28, 29])) {
       assassinActions.push(
-        { text: assassins.assassin_wake_text, time: BASE_TIME },
+        {
+          text: assassins.assassin_wake_text,
+          time: BASE_TIME,
+          image: 'onuv_assassin',
+        },
         generateTimedAction(ACTION_TIME),
         {
           text: assassins.apprenticeassassin_assassin_wake_text,
           time: BASE_TIME,
+          image: 'onuv_assassin',
         },
         generateTimedAction(ACTION_TIME),
         {
           text: assassins.apprenticeassassin_close_text,
           time: BASE_TIME,
+          image: 'onuv_apprentice_assassin',
         },
         {
           text: doppelganger.doppelganger_apprenticeassassin_assassin_wake_text,
           time: BASE_TIME,
+          image: 'onuw_doppelganger',
         },
         generateTimedAction(ACTION_TIME),
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME },
-        { text: assassins.assassin_close_text, time: BASE_TIME },
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        },
+        {
+          text: assassins.assassin_close_text,
+          time: BASE_TIME,
+          image: 'onuv_assassin',
+        },
         {
           text: doppelganger.doppelganger_assassin_wake_text,
           time: BASE_TIME,
+          image: 'onuv_assassin',
         },
         generateTimedAction(ACTION_TIME),
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
 
@@ -116,16 +181,22 @@ class AssassinStore {
       !isCardSelectedById(this.deck, 1)
     ) {
       assassinActions.push(
-        { text: assassins.assassin_wake_text, time: BASE_TIME },
+        {
+          text: assassins.assassin_wake_text,
+          time: BASE_TIME,
+          image: 'onuv_assassin',
+        },
         generateTimedAction(ACTION_TIME),
         {
           text: assassins.apprenticeassassin_assassin_wake_text,
           time: BASE_TIME,
+          image: 'onuv_assassin',
         },
         generateTimedAction(ACTION_TIME),
         {
           text: assassins.assassin_and_apprenticeassassin_close_text,
           time: BASE_TIME,
+          image: 'onuv_assassin',
         }
       )
     }

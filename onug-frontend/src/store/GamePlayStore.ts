@@ -76,14 +76,24 @@ class GamePlayStore {
 
   addEpicBattleIntro(actions: RoleActionType[]): void {
     if (this.isEpicBattle) {
-      addBasicAction(actions, everyone.epic_intro_text, BASE_TIME)
+      addBasicAction(actions, everyone.epic_intro_text, BASE_TIME, '')
     }
   }
 
   addStartingActions(actions: RoleActionType[]): void {
-    addBasicAction(actions, everyone.everyone_start_card_text, BASE_TIME)
+    addBasicAction(
+      actions,
+      everyone.everyone_start_card_text,
+      BASE_TIME,
+      'card_background'
+    )
     actions.push(generateTimedAction(ACTION_TIME))
-    addBasicAction(actions, everyone.everyone_close_text, BASE_TIME)
+    addBasicAction(
+      actions,
+      everyone.everyone_close_text,
+      BASE_TIME,
+      'card_background'
+    )
   }
 
   addPhaseActions(actions: RoleActionType[]): void {
@@ -93,9 +103,19 @@ class GamePlayStore {
     )
 
     if (this.hasDusk) {
-      addBasicAction(actions, everyone.everyone_wake_dusk_text, BASE_TIME)
+      addBasicAction(
+        actions,
+        everyone.everyone_wake_dusk_text,
+        BASE_TIME,
+        'mark_background'
+      )
       actions.push(generateTimedAction(ACTION_TIME))
-      addBasicAction(actions, everyone.everyone_close_text, BASE_TIME)
+      addBasicAction(
+        actions,
+        everyone.everyone_close_text,
+        BASE_TIME,
+        'mark_background'
+      )
     }
 
     actions.push(...nightPhaseStore.generateActions())
@@ -110,17 +130,18 @@ class GamePlayStore {
   }
 
   addJokeAndVoting(actions: RoleActionType[]): void {
-    addBasicAction(actions, getRandomJoke(), BASE_TIME)
+    addBasicAction(actions, getRandomJoke(), BASE_TIME, '')
     const moveText = this.hasDusk
       ? everyone.everyone_move_mark_text
       : everyone.everyone_move_card_text
-    addBasicAction(actions, moveText, BASE_TIME)
+    addBasicAction(actions, moveText, BASE_TIME, 'movecard')
     addBasicAction(
       actions,
       everyone.everyone_wake_text,
-      BASE_TIME + VOTING_TIME
+      BASE_TIME + VOTING_TIME,
+      ''
     )
-    addBasicAction(actions, everyone.everyone_vote_text, BASE_TIME)
+    addBasicAction(actions, everyone.everyone_vote_text, BASE_TIME, '')
   }
 }
 

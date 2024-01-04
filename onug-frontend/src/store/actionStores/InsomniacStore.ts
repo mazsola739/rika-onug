@@ -22,11 +22,13 @@ class InsomniacStore {
       {
         text: insomniac.insomniac_wake_text,
         time: BASE_TIME,
+        image: 'onuw_insomniac',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: insomniac.insomniac_close_text,
         time: BASE_TIME,
+        image: 'onuw_insomniac',
       }
     )
 
@@ -36,9 +38,14 @@ class InsomniacStore {
         {
           text: doppelganger.doppelganger_insomniac_wake_text,
           time: BASE_TIME,
+          image: 'onuw_doppelganger',
         },
         generateTimedAction(ACTION_TIME),
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
 

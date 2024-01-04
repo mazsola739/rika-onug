@@ -22,20 +22,30 @@ class PriestStore {
       {
         text: priest.priest_wake_text,
         time: BASE_TIME,
+        image: 'onuv_priest',
       },
       generateTimedAction(2 * ACTION_TIME),
       {
         text: priest.priest_close_text,
         time: BASE_TIME,
+        image: 'onuv_priest',
       }
     )
 
     //Doppelganger
     if (isCardSelectedById(this.deck, 1)) {
       priestActions.push(
-        { text: doppelganger.doppelganger_priest_wake_text, time: BASE_TIME },
+        {
+          text: doppelganger.doppelganger_priest_wake_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        },
         generateTimedAction(2 * ACTION_TIME),
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
 

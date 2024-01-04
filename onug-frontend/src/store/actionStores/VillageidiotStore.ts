@@ -17,11 +17,13 @@ class VillageidiotStore {
       {
         text: villageidiot.villageidiot_wake_text,
         time: BASE_TIME,
+        image: 'onud_village_idiot',
       },
       generateTimedAction(2 * ACTION_TIME),
       {
         text: villageidiot.villageidiot_close_text,
         time: BASE_TIME,
+        image: 'onud_village_idiot',
       }
     )
 

@@ -17,11 +17,13 @@ class AlphawolfStore {
       {
         text: alphawolf.alphawolf_wake_text,
         time: BASE_TIME,
+        image: 'onud_alpha_wolf',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: alphawolf.alphawolf_close_text,
         time: BASE_TIME,
+        image: 'onud_alpha_wolf',
       }
     )
 

@@ -35,12 +35,13 @@ class RascalStore {
     const randomDoppelgangerActionKey = pickRandomKey(random_rascal)
 
     rascalActions.push(
-      { text: rascal.rascal_wake_text, time: BASE_TIME },
+      { text: rascal.rascal_wake_text, time: BASE_TIME, image: 'onua_rascal' },
       {
         text: random_rascal[
           randomRascalActionKey as keyof typeof random_rascal
         ],
         time: BASE_TIME,
+        image: 'onua_rascal',
       }
     )
 
@@ -64,27 +65,41 @@ class RascalStore {
         identifierKeys[Math.floor(Math.random() * identifierKeys.length)]
       const selectedIdentifierValue =
         identifier[selectedIdentifierKey as keyof typeof identifier]
-      rascalActions.push({ text: selectedIdentifierValue, time: BASE_TIME })
+      rascalActions.push({
+        text: selectedIdentifierValue,
+        time: BASE_TIME,
+        image: 'onua_rascal',
+      })
 
       if (endText) {
-        rascalActions.push({ text: endText, time: BASE_TIME })
+        rascalActions.push({
+          text: endText,
+          time: BASE_TIME,
+          image: 'onua_rascal',
+        })
       }
     }
 
     rascalActions.push(generateTimedAction(ACTION_TIME), {
       text: rascal.rascal_close_text,
       time: BASE_TIME,
+      image: 'onua_rascal',
     })
 
     //Doppelganger
     if (isCardSelectedById(this.deck, 1)) {
       rascalActions.push(
-        { text: doppelganger.doppelganger_rascal_wake_text, time: BASE_TIME },
+        {
+          text: doppelganger.doppelganger_rascal_wake_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        },
         {
           text: random_rascal[
             randomDoppelgangerActionKey as keyof typeof random_rascal
           ],
           time: BASE_TIME,
+          image: 'onuw_doppelganger',
         }
       )
     }
@@ -109,10 +124,18 @@ class RascalStore {
         identifierKeys[Math.floor(Math.random() * identifierKeys.length)]
       const selectedIdentifierValue =
         identifier[selectedIdentifierKey as keyof typeof identifier]
-      rascalActions.push({ text: selectedIdentifierValue, time: BASE_TIME })
+      rascalActions.push({
+        text: selectedIdentifierValue,
+        time: BASE_TIME,
+        image: 'onuw_doppelganger',
+      })
 
       if (endText) {
-        rascalActions.push({ text: endText, time: BASE_TIME })
+        rascalActions.push({
+          text: endText,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        })
       }
     }
 
@@ -120,6 +143,7 @@ class RascalStore {
       rascalActions.push(generateTimedAction(ACTION_TIME), {
         text: doppelganger.doppelganger_close_text,
         time: BASE_TIME,
+        image: 'onuw_doppelganger',
       })
     }
 

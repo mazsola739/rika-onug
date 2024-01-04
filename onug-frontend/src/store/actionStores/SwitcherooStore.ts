@@ -17,11 +17,13 @@ class SwitcherooStore {
       {
         text: switcheroo.switcheroo_wake_text,
         time: BASE_TIME,
+        image: 'onus_switcheroo',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: switcheroo.switcheroo_close_text,
         time: BASE_TIME,
+        image: 'onus_switcheroo',
       }
     )
 

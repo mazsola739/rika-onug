@@ -17,11 +17,13 @@ class CopycatStore {
       {
         text: copycat.copycat_wake_text,
         time: BASE_TIME,
+        image: 'onuv_copycat',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: copycat.copycat_close_text,
         time: BASE_TIME,
+        image: 'onuv_copycat',
       }
     )
 

@@ -35,40 +35,70 @@ class MorticianStore {
     const chosenMorticianText =
       identifier[chosenMorticianKey as keyof typeof identifier]
 
-    const pushAction = (actionText: string, extraActionText?: string) => {
-      morticiansActions.push({ text: actionText, time: BASE_TIME })
+    const pushMorticianAction = (
+      actionText: string,
+      extraActionText?: string
+    ) => {
+      morticiansActions.push({
+        text: actionText,
+        time: BASE_TIME,
+        image: 'onua_mortician',
+      })
       if (extraActionText) {
-        morticiansActions.push({ text: extraActionText, time: BASE_TIME })
+        morticiansActions.push({
+          text: extraActionText,
+          time: BASE_TIME,
+          image: 'onua_mortician',
+        })
+      }
+    }
+    const pushDoppelgangerMorticianAction = (
+      actionText: string,
+      extraActionText?: string
+    ) => {
+      morticiansActions.push({
+        text: actionText,
+        time: BASE_TIME,
+        image: 'onuw_doppelganger',
+      })
+      if (extraActionText) {
+        morticiansActions.push({
+          text: extraActionText,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        })
       }
     }
 
     morticiansActions.push({
       text: mortician.mortician_wake_text,
       time: BASE_TIME,
+      image: 'onua_mortician',
     })
 
     const randomMorticianActionKey = pickRandomKey(random_mortician)
     switch (randomMorticianActionKey) {
       case 'mortician_1card_text':
-        pushAction(
+        pushMorticianAction(
           random_mortician[randomMorticianActionKey],
           chosenMorticianText
         )
         break
       case 'mortician_2cards_text':
-        pushAction(
+        pushMorticianAction(
           random_mortician[randomMorticianActionKey],
           identifier.identifier_bothneighbors_text
         )
         break
       case 'mortician_pretend_text':
-        pushAction(random_mortician[randomMorticianActionKey])
+        pushMorticianAction(random_mortician[randomMorticianActionKey])
         break
     }
 
     morticiansActions.push(generateTimedAction(ACTION_TIME), {
       text: mortician.mortician_close_text,
       time: BASE_TIME,
+      image: 'onua_mortician',
     })
 
     //Doppelganger
@@ -76,25 +106,28 @@ class MorticianStore {
       const randomDoppelgangerActionKey = pickRandomKey(random_mortician)
       switch (randomDoppelgangerActionKey) {
         case 'mortician_1card_text':
-          pushAction(
+          pushDoppelgangerMorticianAction(
             random_mortician[randomDoppelgangerActionKey],
             chosenMorticianText
           )
           break
         case 'mortician_2cards_text':
-          pushAction(
+          pushDoppelgangerMorticianAction(
             random_mortician[randomDoppelgangerActionKey],
             identifier.identifier_bothneighbors_text
           )
           break
         case 'mortician_pretend_text':
-          pushAction(random_mortician[randomDoppelgangerActionKey])
+          pushDoppelgangerMorticianAction(
+            random_mortician[randomDoppelgangerActionKey]
+          )
           break
       }
 
       morticiansActions.push(generateTimedAction(ACTION_TIME), {
         text: doppelganger.doppelganger_close_text,
         time: BASE_TIME,
+        image: 'onuw_doppelganger',
       })
     }
 

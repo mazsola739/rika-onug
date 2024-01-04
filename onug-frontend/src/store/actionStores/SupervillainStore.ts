@@ -31,7 +31,7 @@ class SupervillainStore {
       ? supervillains.supervillain_close_text
       : supervillains.supervillains_close_text
 
-    supervillainActions.push({ text: wakeText, time: BASE_TIME })
+    supervillainActions.push({ text: wakeText, time: BASE_TIME, image: '' }) //! ???????
 
     const cardsToCheck = [69, 57, 65]
     const correspondingTexts = [
@@ -39,12 +39,18 @@ class SupervillainStore {
       supervillains.drpeeker_wake_text,
       supervillains.rapscallion_wake_text,
     ]
+    const correspondingImages = [
+      'onus_temptress',
+      'onus_dr_peeker',
+      'onus_rapscallion',
+    ]
 
     cardsToCheck.forEach((cardId, index) => {
       if (isCardSelectedById(this.deck, cardId)) {
         supervillainActions.push({
           text: correspondingTexts[index],
           time: BASE_TIME,
+          image: correspondingImages[index],
         })
       }
     })
@@ -56,7 +62,8 @@ class SupervillainStore {
     supervillainActions.push(generateTimedAction(2 * ACTION_TIME), {
       text: closeText,
       time: BASE_TIME,
-    })
+      image: '',
+    }) //! ???????
 
     return supervillainActions
   }

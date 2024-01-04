@@ -22,11 +22,13 @@ class SquireStore {
       {
         text: squire.squire_wake_text,
         time: BASE_TIME,
+        image: 'onub_squire',
       },
       generateTimedAction(2 * ACTION_TIME),
       {
         text: squire.squire_close_text,
         time: BASE_TIME,
+        image: 'onub_squire',
       }
     )
 
@@ -36,15 +38,21 @@ class SquireStore {
         {
           text: doppelganger.doppelganger_squire_wake_text,
           time: BASE_TIME,
+          image: 'onuw_doppelganger',
         },
         generateTimedAction(2 * ACTION_TIME),
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
 
     squireActions.push({
       text: squire.squire_thumbaway_text,
       time: BASE_TIME,
+      image: 'onuw_werewolf',
     })
 
     return squireActions

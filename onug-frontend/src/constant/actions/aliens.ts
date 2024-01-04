@@ -2,7 +2,7 @@ export const aliens: Record<string, string> = {
   alien_wake_text: 'ALIENS, wake up and look around for other aliens.',
   alien_close_text: 'ALIENS, close your eyes.',
 
-  alien_thumbaway_text: 'ALIENS, put your thumb away.',
+  alien_fistaway_text: 'EVERYONE, put your fist away.',
 }
 
 export const random_aliens: Record<string, string> = {

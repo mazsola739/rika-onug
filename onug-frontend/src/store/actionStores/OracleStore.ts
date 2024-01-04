@@ -41,7 +41,7 @@ class OracleStore {
     const randomActionIntro = Object.values(randomAction)[0]
 
     const randomOracleAction: RoleActionType[] = [
-      { text: randomActionIntro, time: BASE_TIME },
+      { text: randomActionIntro, time: BASE_TIME, image: 'onua_oracle' },
       generateTimedAction(ACTION_TIME),
     ]
 
@@ -55,14 +55,21 @@ class OracleStore {
           randomAnswerKey as keyof typeof random_oracle.random_oracle_playernum
         ]
 
-      const answer = [{ text: randomText, time: BASE_TIME }]
+      const answer = [
+        { text: randomText, time: BASE_TIME, image: 'onua_oracle' },
+      ]
 
       if (randomAnswerKey === 'oracle_viewplayer_result_text') {
-        return answer.push({ text: `Player ${answerPlayer}`, time: BASE_TIME })
+        return answer.push({
+          text: `Player ${answerPlayer}`,
+          time: BASE_TIME,
+          image: 'onua_oracle',
+        })
       } else if (randomAnswerKey === 'oracle_viewplayer_result2_text') {
         return answer.push({
           text: `Player ${getRandomNumber(1, totalPlayers)}`,
           time: BASE_TIME,
+          image: 'onua_oracle',
         })
       }
 
@@ -74,6 +81,7 @@ class OracleStore {
         {
           text: randomAction[`oracle_evenodd_${answerEvenOdd}_text`],
           time: BASE_TIME,
+          image: 'onua_oracle',
         },
       ]
 
@@ -88,7 +96,8 @@ class OracleStore {
               ? 'oracle_guessnumber_success_text'
               : 'oracle_guessnumber_failure_text'
           ],
-          time: 5,
+          time: BASE_TIME,
+          image: 'onua_oracle',
         },
       ]
 
@@ -114,6 +123,7 @@ class OracleStore {
         {
           text: randomAction[answerKey as keyof typeof randomAction],
           time: BASE_TIME,
+          image: 'onua_oracle',
         },
       ]
 
@@ -134,11 +144,13 @@ class OracleStore {
       {
         text: oracle.oracle_wake_text,
         time: BASE_TIME,
+        image: 'onua_oracle',
       },
       ...randomOracleAction,
       {
         text: oracle.oracle_close_text,
         time: BASE_TIME,
+        image: 'onua_oracle',
       }
     )
 

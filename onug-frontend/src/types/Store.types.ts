@@ -1,6 +1,7 @@
 export type RoleActionType = {
   text: string
   time: number
+  image: string
 }
 
 export type RoleActionStoreType = {

@@ -51,11 +51,19 @@ class PsychicStore {
     } = getRandomPsychicActionAndText()
 
     psychicActions.push(
-      { text: psychic.psychic_wake_text, time: BASE_TIME },
-      { text: randomPsychicActionText, time: BASE_TIME },
-      { text: chosenPsychicText, time: BASE_TIME },
+      {
+        text: psychic.psychic_wake_text,
+        time: BASE_TIME,
+        image: 'onua_psychic',
+      },
+      { text: randomPsychicActionText, time: BASE_TIME, image: 'onua_psychic' },
+      { text: chosenPsychicText, time: BASE_TIME, image: 'onua_psychic' },
       generateTimedAction(ACTION_TIME),
-      { text: psychic.psychic_close_text, time: BASE_TIME }
+      {
+        text: psychic.psychic_close_text,
+        time: BASE_TIME,
+        image: 'onua_psychic',
+      }
     )
 
     // Doppelganger
@@ -65,11 +73,27 @@ class PsychicStore {
         randomIdentifierValue: chosenDoppelgangerText,
       } = getRandomPsychicActionAndText()
       psychicActions.push(
-        { text: doppelganger.doppelganger_psychic_wake_text, time: BASE_TIME },
-        { text: randomDoppelgangerActionText, time: BASE_TIME },
-        { text: chosenDoppelgangerText, time: BASE_TIME },
+        {
+          text: doppelganger.doppelganger_psychic_wake_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        },
+        {
+          text: randomDoppelgangerActionText,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        },
+        {
+          text: chosenDoppelgangerText,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        },
         generateTimedAction(ACTION_TIME),
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
 

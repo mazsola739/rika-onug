@@ -27,11 +27,13 @@ class VampireStore {
       {
         text: vampires.vampire_wake_text,
         time: BASE_TIME,
+        image: 'onuv_vampire',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: vampireCloseText,
         time: BASE_TIME,
+        image: 'onuv_vampire',
       }
     )
 

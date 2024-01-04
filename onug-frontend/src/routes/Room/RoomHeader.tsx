@@ -13,8 +13,30 @@ import {
 import { RoomHeaderProps } from './Room.types'
 
 export const RoomHeader = observer(({ player }: RoomHeaderProps) => {
-  const handleClick = () => {
+  /*   const handleClick = () => {
     console.log('Im ready')
+  } */
+
+  const handleClick = async () => {
+    try {
+      const requestBody = {
+        route: 'ready',
+      }
+
+      const response = await fetch('http://localhost:7654/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      })
+
+      const responseData = await response.json()
+
+      console.log('Response from backend:', responseData)
+    } catch (error) {
+      console.error('Error sending ready request:', error)
+    }
   }
 
   return (

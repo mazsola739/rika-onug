@@ -3,9 +3,10 @@ import { RoleActionType } from 'types'
 const addBasicAction = (
   actions: RoleActionType[],
   text: string,
-  time: number
+  time: number,
+  image: string
 ): void => {
-  actions.push({ text, time })
+  actions.push({ text, time, image })
 }
 
 export const gamePlayStoreUtils = {

@@ -51,23 +51,40 @@ class DoppelgangerStore {
       {
         text: `${doppelganger.doppelganger_verbose_intro_text} ${displayText} ${doppelganger.doppelganger_verbose_outro_text}`,
         time: BASE_TIME,
+        image: 'onuw_doppelganger',
       },
       generateTimedAction(2 * ACTION_TIME),
     ]
 
     doppelgangerActions.push(
-      { text: doppelganger.doppelganger_wake_text, time: BASE_TIME },
+      {
+        text: doppelganger.doppelganger_wake_text,
+        time: BASE_TIME,
+        image: 'onuw_doppelganger',
+      },
       ...(areAnyCardsSelectedById(this.deck, doppelgangerActionsIds)
         ? verboseText
         : []),
       ...(isCardSelectedById(this.deck, 7)
         ? [
-            { text: doppelganger.doppelganger_minion_text, time: BASE_TIME },
+            {
+              text: doppelganger.doppelganger_minion_text,
+              time: BASE_TIME,
+              image: 'onuw_doppelganger',
+            },
             generateTimedAction(ACTION_TIME),
-            { text: minion.werewolves_thumb_away_text, time: BASE_TIME },
+            {
+              text: minion.werewolves_thumb_away_text,
+              time: BASE_TIME,
+              image: 'onuw_werewolf',
+            },
           ]
         : []),
-      { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+      {
+        text: doppelganger.doppelganger_close_text,
+        time: BASE_TIME,
+        image: 'onuw_doppelganger',
+      }
     )
 
     return doppelgangerActions

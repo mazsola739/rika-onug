@@ -31,19 +31,23 @@ class NostradamusStore {
       {
         text: nostradamus.nostradamus_wake_text,
         time: BASE_TIME,
+        image: 'onub_nostradamus',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: nostradamus.nostradamus_teamstart_text,
         time: BASE_TIME,
+        image: 'onub_nostradamus',
       },
       {
         text: getTeamText(ID),
         time: BASE_TIME,
+        image: 'onub_nostradamus',
       },
       {
         text: nostradamus.nostradamus_close_text,
         time: BASE_TIME,
+        image: 'onub_nostradamus',
       }
     )
 

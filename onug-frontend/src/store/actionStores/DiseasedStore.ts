@@ -17,11 +17,13 @@ class DiseasedStore {
       {
         text: diseased.diseased_wake_text,
         time: BASE_TIME,
+        image: 'onuv_diseased',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: diseased.diseased_close_text,
         time: BASE_TIME,
+        image: 'onuv_diseased',
       }
     )
 

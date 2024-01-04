@@ -27,10 +27,12 @@ class BlobStore {
       {
         text: random_blob[firstActionKey as keyof typeof random_blob],
         time: BASE_TIME,
+        image: 'onua_blob',
       },
       {
         text: getSecondActionText(firstActionKey),
         time: BASE_TIME,
+        image: 'onua_blob',
       }
     )
 

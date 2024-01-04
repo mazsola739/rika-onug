@@ -26,6 +26,7 @@ class BodysnatcherStore {
     bodysnatcherActions.push({
       text: bodysnatcher.bodysnatcher_wake_text,
       time: BASE_TIME,
+      image: 'onud_bodyguard',
     })
 
     if (randomActionKey === 'bodysnatcher_steal_text') {
@@ -36,16 +37,21 @@ class BodysnatcherStore {
       const chosenText = identifier[chosenKey as keyof typeof identifier]
 
       bodysnatcherActions.push(
-        { text: randomActionText, time: BASE_TIME },
-        { text: chosenText, time: BASE_TIME }
+        { text: randomActionText, time: BASE_TIME, image: 'onud_bodyguard' },
+        { text: chosenText, time: BASE_TIME, image: 'onud_bodyguard' }
       )
     } else {
-      bodysnatcherActions.push({ text: randomActionText, time: BASE_TIME })
+      bodysnatcherActions.push({
+        text: randomActionText,
+        time: BASE_TIME,
+        image: 'onud_bodyguard',
+      })
 
       if (randomActionKey !== 'bodysnatcher_pretend_text') {
         bodysnatcherActions.push({
           text: bodysnatcher.bodysnatcher_end_text,
           time: BASE_TIME,
+          image: 'onud_bodyguard',
         })
       }
     }
@@ -53,6 +59,7 @@ class BodysnatcherStore {
     bodysnatcherActions.push(generateTimedAction(ACTION_TIME), {
       text: bodysnatcher.bodysnatcher_close_text,
       time: BASE_TIME,
+      image: 'onud_bodyguard',
     })
 
     return bodysnatcherActions

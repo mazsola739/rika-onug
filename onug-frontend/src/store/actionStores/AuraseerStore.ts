@@ -34,11 +34,13 @@ class AuraseerStore {
       {
         text: auraseerWakeText,
         time: BASE_TIME,
+        image: 'onub_aura_seer',
       },
       generateTimedAction(ACTION_TIME),
       {
         text: auraseer.auraseer_close_text,
         time: BASE_TIME,
+        image: 'onub_aura_seer',
       }
     )
 
@@ -48,16 +50,22 @@ class AuraseerStore {
         {
           text: doppelgangerWakeText,
           time: BASE_TIME,
+          image: 'onuw_doppelganger',
         },
         generateTimedAction(ACTION_TIME),
 
-        { text: doppelganger.doppelganger_close_text, time: BASE_TIME }
+        {
+          text: doppelganger.doppelganger_close_text,
+          time: BASE_TIME,
+          image: 'onuw_doppelganger',
+        }
       )
     }
 
     auraseerActions.push({
       text: auraseer.auraseer_thumbsaway_text,
       time: BASE_TIME,
+      image: 'onub_aura_seer',
     })
 
     return auraseerActions
