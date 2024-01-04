@@ -1,9 +1,17 @@
+import { debug } from 'console'
 import { roles, supervillainIdsToCheck, wolfIdsToCheck } from 'constant'
 import { cards } from 'data'
 import { ActionCardType, CardType } from 'types'
 
 const ALPHA_WOLF_DEFAULT_ID = 15
 const TEMPTRESS_DEFAULT_ID = 60
+
+const getCardById = (deck: CardType[], cardId: number): CardType => {
+  return deck.find((card) => {
+    console.log(card)
+    return card.id === cardId
+  })
+}
 
 const containsById = (selectedCards: CardType[], cardId: number): boolean =>
   selectedCards.some((card) => card.id === cardId)
@@ -135,4 +143,5 @@ export const selectedDeckUtils = {
   prohibitDeselectingSupervillain,
   prohibitDeselectingWerewolf,
   selectCard,
+  getCardById,
 }

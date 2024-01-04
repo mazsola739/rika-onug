@@ -4,6 +4,7 @@ import { gamePlayStore, selectedDeckStore } from 'store'
 import { Footer, FooterButtons, Header, LinkButton } from 'components'
 import { buttons } from 'constant'
 import { useCallback } from 'react'
+import { GamePlayHeader } from './GamePlayHeader'
 /* import { useEffect, useState } from 'react'
 import { useTimer } from 'hooks/useTimer' */
 
@@ -42,7 +43,7 @@ export const GamePlay = observer(() => {
   return (
     <>
       <Header>
-        <p>header</p>
+        <GamePlayHeader />
       </Header>
       <StyledGamePlay>
         <pre>

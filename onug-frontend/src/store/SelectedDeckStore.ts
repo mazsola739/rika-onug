@@ -16,6 +16,7 @@ const {
   prohibitDeselectingSupervillain,
   prohibitDeselectingWerewolf,
   selectCard,
+  getCardById,
 } = selectedDeckUtils
 const { areAnyCardsSelectedById, isCardSelectedById } = actionStoreUtils
 
@@ -25,9 +26,14 @@ class SelectedDeckStore {
   gamePlayDeck: ActionCardType[] = []
   MAX_ALLOWED_PLAYERS = 12
   selectedMarks: MarkType[] = actionMarks
+  selectedCardIds: number[] = []
 
   constructor() {
     makeAutoObservable(this)
+  }
+
+  get deck(): CardType[] {
+    return deckStore.deck
   }
 
   get totalCharacters(): number {
@@ -112,6 +118,13 @@ class SelectedDeckStore {
     }
   }
 
+  updateSelectedCards(cardIds: number[]): void {
+    this.selectedCards = []
+    cardIds.forEach((cardId) => {
+      this.handleSelectCard(getCardById(this.deck, cardId))
+    })
+  }
+
   addCardToPlayDeck(card: CardType): void {
     if (!this.gamePlayDeck.some((playCard) => playCard.id === card.id)) {
       this.gamePlayDeck.push(card)
@@ -173,6 +186,10 @@ class SelectedDeckStore {
           break
       }
     })
+  }
+
+  addCardIdsToArray(): number[] {
+    return this.selectedCards.map((card) => this.selectedCardIds.push(card.id))
   }
 }
 

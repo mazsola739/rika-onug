@@ -12,3 +12,14 @@ export const StyledGamePlay = styled.main`
   overflow-y: auto;
   overflow-x: hidden;
 `
+
+//HEADER
+export const StyledGamePlayHeader = styled.div`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  font-family: 'Josefin Sans', sans-serif;
+`
+
+export const GamePlayText = styled.span``

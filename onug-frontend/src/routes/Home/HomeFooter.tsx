@@ -15,11 +15,32 @@ export const HomeFooter = observer(() => {
     gamePlayStore.resetGame()
   }, [])
 
-  const handleStartGame = useCallback(() => {
+  const handleStartGame = useCallback(async () => {
     roomStore.createPlayers()
     roomStore.storeCenterCards()
     gamePlayStore.toggleGameStatus()
     deckStore.resetDetailedCardInfo()
+    selectedDeckStore.addCardIdsToArray()
+    try {
+      const requestBody = {
+        route: 'create-room',
+        cards: selectedDeckStore.selectedCardIds,
+      }
+
+      const response = await fetch('http://localhost:7654/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      })
+
+      const responseData = await response.json()
+
+      console.log('Response from backend:', responseData)
+    } catch (error) {
+      console.error('Error sending ready request:', error)
+    }
   }, [])
 
   const totalPlayers = selectedDeckStore.totalPlayers

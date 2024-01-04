@@ -1,0 +1,23 @@
+{
+    "roomId": "80bfaf65-2f89-486e-a94c-708b37584c62",
+    "selectedCards": [
+        37,
+        25,
+        45,
+        11,
+        31,
+        74,
+        34,
+        27
+    ],
+    "actions": [],
+    "actionLog": [],
+    "players": [
+        {
+            "name": "Dick Sack",
+            "admin": true
+        }
+    ],
+    "turn": 0,
+    "closed": false
+}

@@ -1,4 +1,4 @@
-const {generateSuccessResponse} = require("../../util/response-generator");
+const {generateSuccessResponse} = require("../../../util/response-generator");
 const readyController = async (event) => {
     console.log(`Ready endpoint triggered with event: ${JSON.stringify(event)}`)
 

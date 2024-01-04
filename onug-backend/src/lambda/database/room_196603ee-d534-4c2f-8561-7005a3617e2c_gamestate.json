@@ -1,10 +1,10 @@
 {
     "roomId": "196603ee-d534-4c2f-8561-7005a3617e2c",
     "selectedCards": [
-        1,
-        2,
         3,
-        4
+        4,
+        2,
+        12
     ],
     "actions": [],
     "actionLog": [],

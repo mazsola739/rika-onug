@@ -81,19 +81,9 @@ class GamePlayStore {
   }
 
   addStartingActions(actions: RoleActionType[]): void {
-    addBasicAction(
-      actions,
-      everyone.everyone_start_card_text,
-      BASE_TIME,
-      'card_background'
-    )
+    addBasicAction(actions, everyone.everyone_start_card_text, BASE_TIME, '')
     actions.push(generateTimedAction(ACTION_TIME))
-    addBasicAction(
-      actions,
-      everyone.everyone_close_text,
-      BASE_TIME,
-      'card_background'
-    )
+    addBasicAction(actions, everyone.everyone_close_text, BASE_TIME, '')
   }
 
   addPhaseActions(actions: RoleActionType[]): void {
