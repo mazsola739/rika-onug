@@ -1,73 +1,32 @@
-import { Button, Header } from 'components'
+import { logo_en_1 } from 'assets'
+import { Header, Filter } from 'components'
 import { observer } from 'mobx-react-lite'
-import {
-  CardInformation,
-  Player,
-  PlayerInfo,
-  StyledRoomHeader,
-  YourAvatar,
-  YourCard,
-  YourCardRule,
-  YourName,
-} from './Room.styles'
-import { RoomHeaderProps } from './Room.types'
+import { RuleInfoDescription, StyledLogo, StyledRuleInfo } from './Room.styles'
+import { gamePlayStore, deckStore } from 'store'
 
-export const RoomHeader = observer(({ player }: RoomHeaderProps) => {
-  /*   const handleClick = () => {
-    console.log('Im ready')
-  } */
+const RuleInfo = observer(() => {
+  const { isGameStopped } = gamePlayStore
+  const detailedCardInfo = deckStore.getDetailedCardInfo()
+  const detailedTokenInfo = deckStore.getDetailedTokenInfo()
 
-  const handleClick = async () => {
-    try {
-      const requestBody = {
-        route: 'ready',
-      }
-
-      const response = await fetch('http://localhost:7654/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      })
-
-      const responseData = await response.json()
-
-      console.log('Response from backend:', responseData)
-    } catch (error) {
-      console.error('Error sending ready request:', error)
-    }
-  }
+  const displayInfo =
+    detailedCardInfo.id !== 0 ? detailedCardInfo.rules : detailedTokenInfo.rules
 
   return (
+    <StyledRuleInfo>
+      {isGameStopped && displayInfo && (
+        <RuleInfoDescription>{displayInfo}</RuleInfoDescription>
+      )}
+    </StyledRuleInfo>
+  )
+})
+
+export const RoomHeader = observer(() => {
+  return (
     <Header>
-      <StyledRoomHeader>
-        <CardInformation>
-          <YourCard
-            src={require(
-              `../../assets/cards/${player.player_card.card_name}.png`
-            )}
-            alt={player.player_card.display_name}
-          />
-          <YourCardRule>{`${player.player_card.display_name}: ${player.player_card.rules}`}</YourCardRule>
-        </CardInformation>
-        <PlayerInfo>
-          <YourAvatar
-            src={require(
-              `../../assets/players/selected_player_${player.player_number}.png`
-            )}
-            alt={player.player_name}
-          />
-          <Player>
-            <YourName>{player.player_name}</YourName>
-            <Button
-              onClick={handleClick}
-              backgroundColor="#28a745"
-              buttontext="Ready?"
-            />
-          </Player>
-        </PlayerInfo>
-      </StyledRoomHeader>
+      <StyledLogo src={logo_en_1} alt="header" />
+      <Filter />
+      <RuleInfo />
     </Header>
   )
 })

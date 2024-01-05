@@ -1,51 +1,75 @@
-import { Button, Footer, FooterButtons, LinkButton } from 'components'
+import {
+  Footer,
+  FooterButtons,
+  Button,
+  LinkButton,
+  SelectedCardList,
+} from 'components'
+import { buttons } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
-import { buttons } from 'constant'
-import { gamePlayStore, selectedDeckStore } from 'store'
-import { Messages } from './Room.styles'
+import {
+  gamePlayStore,
+  deckStore,
+  selectedDeckStore,
+  gameTableStore,
+} from 'store'
 
 export const RoomFooter = observer(() => {
-  const handlePauseGame = useCallback(() => {
-    gamePlayStore.togglePauseStatus()
+  const handleResetGame = useCallback(() => {
+    gamePlayStore.resetGame()
   }, [])
 
-  const handleStopGame = useCallback(() => {
+  const handleStartGame = useCallback(async () => {
+    gameTableStore.createPlayers()
+    gameTableStore.storeCenterCards()
     gamePlayStore.toggleGameStatus()
-  }, [selectedDeckStore])
+    deckStore.resetDetailedCardInfo()
+    selectedDeckStore.addCardIdsToArray()
+    try {
+      const requestBody = {
+        route: 'create-room',
+        cards: selectedDeckStore.selectedCardIds,
+      }
 
-  const handleStartGame = useCallback(() => {
-    console.log('Game started', buttons.start_button_label)
+      const response = await fetch('http://localhost:7654/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      })
+
+      const responseData = await response.json()
+
+      console.log('Response from backend:', responseData)
+    } catch (error) {
+      console.error('Error sending ready request:', error)
+    }
   }, [])
 
-  const buttonText = gamePlayStore.isGamePaused
-    ? buttons.pause_button_alt_label
-    : buttons.pause_button_label
+  const totalPlayers = selectedDeckStore.totalPlayers
+  const buttonText = totalPlayers
+    ? `${buttons.play_game_text}${totalPlayers}`
+    : buttons.play_game_text
 
   return (
     <Footer>
       <FooterButtons>
         <Button
-          onClick={handlePauseGame}
-          buttontext={buttonText}
-          backgroundColor="#ff9800"
+          onClick={handleResetGame}
+          buttontext={buttons.reset_game_label}
+          backgroundColor="#007bff"
         />
         <LinkButton
-          linkTo="/"
-          onClick={handleStopGame}
-          buttontext={buttons.stop_button_label}
-          backgroundColor="#f44336"
-        />
-        <LinkButton
-          linkTo="/gameplay"
+          linkTo="/room"
           onClick={handleStartGame}
-          buttontext={buttons.start_game_label}
-          backgroundColor="#8e44ad"
+          disabled={!selectedDeckStore.totalPlayers}
+          buttontext={buttonText}
+          backgroundColor="#28a745"
         />
       </FooterButtons>
-      <Messages>Player 1 logged in</Messages>
-      <br />
-      <Messages>Player 2 ready</Messages>
+      <SelectedCardList />
     </Footer>
   )
 })

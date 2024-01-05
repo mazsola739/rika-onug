@@ -1,4 +1,4 @@
-import { identifier_player, joke, roles, time } from 'constant'
+import { identifier_player, roles, time } from 'constant'
 import {
   ActionCardType,
   RepeatroleType,
@@ -39,8 +39,6 @@ const getRandomIndexFromArray = (
 ): number => {
   return Math.floor(Math.random() * arr.length)
 }
-
-const getRandomJoke = (): string => `JOKE: ${joke[pickRandomKey(joke)]}`
 
 const getRandomNumber = (min: number, max: number): number =>
   Math.floor(Math.random() * (max - min + 1)) + min
@@ -146,7 +144,6 @@ export const actionStoreUtils = {
   areAnyCardsSelectedById,
   generateTimedAction,
   getRandomIndexFromArray,
-  getRandomJoke,
   getRandomNumber,
   getRandomRoleDisplayName,
   getRandomValueFromObject,

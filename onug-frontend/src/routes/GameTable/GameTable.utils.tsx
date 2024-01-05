@@ -5,7 +5,7 @@ import {
   CardTitle,
   CenterCards,
   Marks,
-} from './Room.styles'
+} from './GameTable.styles'
 import { CardType, MarkType, PlayerType, TokenType } from 'types'
 
 const renderPlayers = (players: PlayerType[]) => (
@@ -73,7 +73,7 @@ const getRandomPlayer = (players: PlayerType[]): PlayerType => {
   return players[randomIndex]
 }
 
-export const roomUtils = {
+export const gameTableUtils = {
   renderPlayers,
   renderCenterCard,
   renderCenterExtraCard,

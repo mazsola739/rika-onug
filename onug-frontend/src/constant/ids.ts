@@ -2,6 +2,8 @@ export const doppelgangerActionsIds: number[] = [
   9, 8, 11, 2, 25, 17, 22, 18, 23, 27, 26, 32, 31, 34, 85,
 ]
 
+//69 57 65 60 58 63 62 55 56 66 70 68 67 78 59
+
 export const hasMarkIds: number[] = [28, 29, 31, 32, 34, 37, 38, 39, 40, 41]
 
 export const alienTeam: number[] = [42, 43, 47, 54, 74]
@@ -22,3 +24,6 @@ export const vampireIds: number[] = [39, 40, 41]
 export const supervillainIds: number[] = [57, 60, 65, 69]
 export const supervillainIdsToCheck: number[] = [57, 60, 65]
 export const assassinIds: number[] = [28, 29]
+
+export const alphaWolfId = 15
+export const temptressId = 60

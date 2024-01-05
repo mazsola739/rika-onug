@@ -1,5 +1,5 @@
 const { validate } = require("uuid");
-const { repository } = require("../../repository")
+const { repository } = require("../repository")
 
 const { readGameState } = repository
 

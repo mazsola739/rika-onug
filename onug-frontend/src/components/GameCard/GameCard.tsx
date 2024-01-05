@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react-lite'
 import { StyledGameCard, TokenImage, Tokens } from './GameCard.styles'
 import { GameCardProps } from './GameCard.types'
-import { roomStore } from 'store'
+import { gameTableStore } from 'store'
 
 export const GameCard = observer(({ player, isCenter }: GameCardProps) => {
-  const { hasMarks } = roomStore
+  const { hasMarks } = gameTableStore
 
   return (
     <StyledGameCard

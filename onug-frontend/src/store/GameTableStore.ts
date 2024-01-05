@@ -7,13 +7,13 @@ import {
   supervillainIdsToCheck,
   wolfIdsToCheck,
 } from 'constant'
-import { actionStoreUtils, roomStoreUtils } from 'utils'
+import { actionStoreUtils, gameTableStoreUtils } from 'utils'
 
 const { checkCardPresence, filterCardsByIds, getRandomItemFromArray } =
-  roomStoreUtils
+  gameTableStoreUtils
 const { areAnyCardsSelectedById } = actionStoreUtils
 
-export class RoomStore {
+export class GameTableStore {
   players: PlayerType[] = []
   centerCards: CenterCardType
 
@@ -152,5 +152,5 @@ export class RoomStore {
   }
 }
 
-export default RoomStore
-export const roomStore = new RoomStore()
+export default GameTableStore
+export const gameTableStore = new GameTableStore()

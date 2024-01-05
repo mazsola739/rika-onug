@@ -1,3 +1,6 @@
 export * from './GamePlay/GamePlay'
-export * from './Home/Home'
+export * from './GameTable/GameTable'
+export * from './Lobby/Lobby'
 export * from './Room/Room'
+export * from './Settings/Settings'
+export * from './Voting/Voting'

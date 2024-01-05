@@ -1,6 +1,6 @@
 export * from './DeckStore'
 export * from './SelectedDeckStore'
-export * from './RoomStore'
+export * from './GameTableStore'
 export * from './PlayerStore'
 
 export * from './phaseStores'

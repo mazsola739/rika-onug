@@ -1,5 +1,5 @@
-import { PlayerType } from 'types'
+import DeckStore from 'store/DeckStore'
 
-export interface RoomHeaderProps {
-  player: PlayerType
+export interface RoomProps {
+  deckStore: DeckStore
 }

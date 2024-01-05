@@ -1,10 +1,12 @@
-import { debug } from 'console'
-import { roles, supervillainIdsToCheck, wolfIdsToCheck } from 'constant'
+import {
+  alphaWolfId,
+  temptressId,
+  roles,
+  supervillainIdsToCheck,
+  wolfIdsToCheck,
+} from 'constant'
 import { cards } from 'data'
 import { ActionCardType, CardType } from 'types'
-
-const ALPHA_WOLF_DEFAULT_ID = 15
-const TEMPTRESS_DEFAULT_ID = 60
 
 const getCardById = (deck: CardType[], cardId: number): CardType => {
   return deck.find((card) => {
@@ -64,7 +66,7 @@ const determineTotalPlayers = (
 }
 
 const handleAlphaWolf = (selectedCards: CardType[]): void => {
-  handleCard(selectedCards, wolfIdsToCheck, ALPHA_WOLF_DEFAULT_ID)
+  handleCard(selectedCards, wolfIdsToCheck, alphaWolfId)
 }
 
 const handleCard = (
@@ -79,7 +81,7 @@ const handleCard = (
 }
 
 const handleTemptress = (selectedCards: CardType[]): void => {
-  handleCard(selectedCards, supervillainIdsToCheck, TEMPTRESS_DEFAULT_ID)
+  handleCard(selectedCards, supervillainIdsToCheck, temptressId)
 }
 
 const hasSpecificRolesInDeck = (

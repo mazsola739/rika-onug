@@ -1,47 +1,78 @@
+import { CardList, TokenList } from 'components'
+import { team } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { roomStore, selectedDeckStore } from 'store'
-import { StyledRoom, CenterCardContainer, Shield } from './Room.styles'
+import { useEffect, useMemo } from 'react'
+import { Main } from './Room.styles'
+import { RoomProps } from './Room.types'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
-import { artifacts } from 'data'
-import { roomUtils } from './Room.utils'
+import { selectedDeckStore } from 'store'
 
-export const Room = observer(() => {
-  const {
-    renderPlayers,
-    renderCenterCard,
-    renderCenterExtraCard,
-    renderMarks,
-    renderArtifacts,
-    getRandomPlayer,
-  } = roomUtils
-  const { centerCards, chosenWolf, chosenSuperVillain } =
-    roomStore.distributeCards()
-  const { hasSentinel, hasMarks, hasDoppelganger, hasCurator, players } =
-    roomStore
-  const selectedMarks = selectedDeckStore.selectedMarks
+export const Room = observer(({ deckStore }: RoomProps) => {
+  const { deck } = deckStore
 
-  const randomPlayer = getRandomPlayer(players) //todo delete
+  useEffect(() => {
+    const timer = setInterval(async () => {
+      try {
+        const requestBody = {
+          route: 'hydrate-select',
+          roomId: '196603ee-d534-4c2f-8561-7005a3617e2c',
+        }
+
+        const response = await fetch('http://localhost:7654/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestBody),
+        })
+
+        const responseData = await response.json()
+        selectedDeckStore.updateSelectedCards(
+          responseData.gameState.selectedCards
+        )
+        console.log('Response from backend:', responseData)
+      } catch (error) {
+        console.error('Error sending ready request:', error)
+      }
+    }, 5000)
+
+    return () => {
+      clearInterval(timer)
+    }
+  }, [])
+
+  const teamArray = useMemo(
+    () => [
+      ...new Set(
+        deck.map((card) =>
+          card.team === team.hero || card.team === team.village
+            ? team.village
+            : card.team
+        )
+      ),
+    ],
+    [deck]
+  )
+
+  const orderedTeams = useMemo(
+    () => deckStore.getOrderedTeams(teamArray),
+    [deckStore, teamArray]
+  )
 
   return (
     <>
-      <RoomHeader player={randomPlayer} />
-      <StyledRoom>
-        {renderPlayers(players)}
-        <CenterCardContainer>
-          {hasSentinel && (
-            <Shield
-              src={require(`../../assets/tokens/shield.png`)}
-              alt="shield"
-            />
-          )}
-          {chosenWolf && renderCenterExtraCard('Werewolf')}
-          {renderCenterCard('Center', centerCards)}
-          {chosenSuperVillain && renderCenterExtraCard('Villain')}
-        </CenterCardContainer>
-        {hasMarks && renderMarks(selectedMarks, hasDoppelganger)}
-        {hasCurator && renderArtifacts(artifacts)}
-      </StyledRoom>
+      <RoomHeader />
+      <Main>
+        {orderedTeams.map((teamName) => (
+          <CardList
+            key={teamName}
+            team={teamName}
+            cards={deckStore.getFilteredCardsForTeam(teamName)}
+          />
+        ))}
+        <TokenList />
+      </Main>
       <RoomFooter />
     </>
   )

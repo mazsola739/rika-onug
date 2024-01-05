@@ -12,8 +12,8 @@ import { RoleActionType } from 'types'
 import { actionStoreUtils, gamePlayStoreUtils } from 'utils'
 import { rippleNightPhaseStore } from './phaseStores/RippleNightPhaseStore'
 
-const { generateTimedAction, getRandomJoke } = actionStoreUtils
-const { addBasicAction } = gamePlayStoreUtils
+const { generateTimedAction } = actionStoreUtils
+const { addBasicAction, getRandomJoke } = gamePlayStoreUtils
 
 //TODO EASTEREGG
 
