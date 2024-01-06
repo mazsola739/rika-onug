@@ -1,7 +1,7 @@
-export * from './DeckStore'
+export * from './LobbyStore'
+export * from './RoomStore'
 export * from './SelectedDeckStore'
 export * from './GameTableStore'
-export * from './LobbyStore'
 export * from './PlayerStore'
 
 export * from './phaseStores'

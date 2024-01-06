@@ -1,5 +1,5 @@
-import DeckStore from 'store/DeckStore'
+import RoomStore from 'store/RoomStore'
 
 export interface RoomProps {
-  deckStore: DeckStore
+  roomStore: RoomStore
 }

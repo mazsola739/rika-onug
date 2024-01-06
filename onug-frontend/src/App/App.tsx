@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { Lobby, Room, GameTable, GamePlay, Voting, Settings } from 'routes'
-import { deckStore } from 'store'
+import { roomStore } from 'store'
 import { StyledApp } from './App.styles'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ export const App = observer(() => {
           <Route path="/lobby" element={<Lobby />} />
           <Route
             path="/room/:room_id"
-            element={<Room deckStore={deckStore} />}
+            element={<Room roomStore={roomStore} />}
           />
           <Route path="/gametable/:id" element={<GameTable />} />
           <Route path="/gameplay/:id" element={<GamePlay />} />

@@ -1,12 +1,12 @@
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
-import { deckStore } from 'store'
+import { roomStore } from 'store'
 import { StyledFilter } from './Filter.styles'
 import { expansions } from 'constant'
 import { FilterButtons } from './FilterButtons'
 
 export const Filter = observer(() => {
-  const { selectedExpansions, toggleExpansionSelection } = deckStore
+  const { selectedExpansions, toggleExpansionSelection } = roomStore
   const expansionNames = Object.values(expansions)
 
   const handleToggleExpansion = useCallback(

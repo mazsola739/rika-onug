@@ -37,7 +37,7 @@ const getOrderedTeams = (teamArray: string[]): string[] => {
   )
 }
 
-export const deckStoreUtils = {
+export const roomStoreUtils = {
   createEmptyCard,
   createEmptyToken,
   getFilteredCardsForTeam,

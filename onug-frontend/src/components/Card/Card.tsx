@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { selectedDeckStore, deckStore } from 'store'
+import { selectedDeckStore, roomStore } from 'store'
 import { StyledCard, CardImage, CardName } from './Card.styles'
 import { CardProps } from './Card.types'
 import { useCallback, useMemo } from 'react'
@@ -36,7 +36,7 @@ export const Card = observer(({ card, room_id }: CardProps) => {
       selectedDeckStore.selectedCards
     )
     selectedDeckStore.sendCardSelectionToBackend(id, room_id)
-    deckStore.toggleInfo(id, 'card')
+    roomStore.toggleInfo(id, 'card')
   }, [id, card_name, display_name, rules, expansion, team, wake_up_time, order])
 
   const imageSrc = useMemo(

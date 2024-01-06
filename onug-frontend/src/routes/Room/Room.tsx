@@ -9,8 +9,8 @@ import { RoomHeader } from './RoomHeader'
 import { selectedDeckStore } from 'store'
 import { useParams } from 'react-router-dom'
 
-export const Room = observer(({ deckStore }: RoomProps) => {
-  const { deck } = deckStore
+export const Room = observer(({ roomStore }: RoomProps) => {
+  const { deck } = roomStore
 
   const { room_id } = useParams()
 
@@ -67,8 +67,8 @@ export const Room = observer(({ deckStore }: RoomProps) => {
   )
 
   const orderedTeams = useMemo(
-    () => deckStore.getOrderedTeams(teamArray),
-    [deckStore, teamArray]
+    () => roomStore.getOrderedTeams(teamArray),
+    [roomStore, teamArray]
   )
 
   return (
@@ -79,7 +79,7 @@ export const Room = observer(({ deckStore }: RoomProps) => {
           <CardList
             key={teamName}
             team={teamName}
-            cards={deckStore.getFilteredCardsForTeam(teamName)}
+            cards={roomStore.getFilteredCardsForTeam(teamName)}
             room_id={room_id}
           />
         ))}

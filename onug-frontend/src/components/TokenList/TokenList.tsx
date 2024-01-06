@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { deckStore } from 'store'
+import { roomStore } from 'store'
 import {
   StyledTokenList,
   TokenListTitle,
@@ -8,13 +8,13 @@ import {
 import { TokenImage } from 'components'
 
 export const TokenList = observer(() => {
-  const { artifacts, marks } = deckStore
+  const { artifacts, marks } = roomStore
 
   const handleTokenClick = (
     tokenId: number,
     tokenType: 'artifact' | 'mark'
   ) => {
-    deckStore.toggleInfo(tokenId, tokenType)
+    roomStore.toggleInfo(tokenId, tokenType)
   }
 
   return (

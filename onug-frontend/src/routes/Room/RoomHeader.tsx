@@ -2,12 +2,12 @@ import { logo_en_1 } from 'assets'
 import { Header, Filter } from 'components'
 import { observer } from 'mobx-react-lite'
 import { RuleInfoDescription, StyledLogo, StyledRuleInfo } from './Room.styles'
-import { gamePlayStore, deckStore } from 'store'
+import { gamePlayStore, roomStore } from 'store'
 
 const RuleInfo = observer(() => {
   const { isGameStopped } = gamePlayStore
-  const detailedCardInfo = deckStore.getDetailedCardInfo()
-  const detailedTokenInfo = deckStore.getDetailedTokenInfo()
+  const detailedCardInfo = roomStore.getDetailedCardInfo()
+  const detailedTokenInfo = roomStore.getDetailedTokenInfo()
 
   const displayInfo =
     detailedCardInfo.id !== 0 ? detailedCardInfo.rules : detailedTokenInfo.rules

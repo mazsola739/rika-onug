@@ -1,9 +1,9 @@
 import { makeAutoObservable } from 'mobx'
 import { CardType, ActionCardType, MarkType } from 'types'
 import { actionStoreUtils, selectedDeckUtils } from 'utils'
-import { deckStore } from 'store'
 import { actionMarks, actioncards } from 'data'
 import { alienIds, assassinIds, evils, roles, vampireIds } from 'constant'
+import { roomStore } from 'store'
 
 const {
   containsById,
@@ -33,7 +33,7 @@ class SelectedDeckStore {
   }
 
   get deck(): CardType[] {
-    return deckStore.deck
+    return roomStore.deck
   }
 
   get totalCharacters(): number {
@@ -75,13 +75,13 @@ class SelectedDeckStore {
       this.handleSelectCard(card)
     }
 
-    deckStore.resetDetailedCardInfo()
+    roomStore.resetDetailedCardInfo()
     this.updateMarksInDeckStatus()
   }
 
   resetSelection(): void {
     this.selectedCards = []
-    deckStore.resetDetailedCardInfo()
+    roomStore.resetDetailedCardInfo()
     this.updateMarksInDeckStatus()
   }
 
