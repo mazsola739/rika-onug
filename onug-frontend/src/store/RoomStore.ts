@@ -3,24 +3,16 @@ import { cards, artifacts, marks } from 'data'
 import { makeAutoObservable, reaction } from 'mobx'
 import { CardType, TokenType } from 'types'
 import { roomStoreUtils } from 'utils'
+import { deckStore } from './DeckStore'
 
-const {
-  createEmptyCard,
-  createEmptyToken,
-  getFilteredCardsForTeam,
-  getOrderedTeams,
-  findById,
-  filterByExpansions,
-} = roomStoreUtils
+const { getFilteredCardsForTeam, getOrderedTeams, filterByExpansions } =
+  roomStoreUtils
 
 const { hero, village } = team
 
 class RoomStore {
-  deck: CardType[] = cards
-  marks: TokenType[] = marks
-  artifacts: TokenType[] = artifacts
-  detailedCardInfo: CardType = this.createEmptyCard()
-  detailedTokenInfo: TokenType = this.createEmptyToken()
+  detailedCardInfo: CardType = deckStore.createEmptyCard()
+  detailedTokenInfo: TokenType = deckStore.createEmptyToken()
   selectedExpansions: string[] = Object.keys(expansions)
 
   constructor() {
@@ -35,36 +27,16 @@ class RoomStore {
     this.setDetailedTokenInfo = this.setDetailedTokenInfo.bind(this)
   }
 
-  createEmptyCard(): CardType {
-    return createEmptyCard()
-  }
-
-  createEmptyToken(): TokenType {
-    return createEmptyToken()
-  }
-
-  getCardById(cardId: number): CardType {
-    return findById(this.deck, cardId) || this.createEmptyCard()
-  }
-
-  getArtifactById(tokenId: number): TokenType {
-    return findById(this.artifacts, tokenId) || this.createEmptyToken()
-  }
-
-  getMarkById(tokenId: number): TokenType {
-    return findById(this.marks, tokenId) || this.createEmptyToken()
-  }
-
   setDetailedTokenInfo(tokenId: number): void {
     const token =
-      this.getMarkById(tokenId) ||
-      this.getArtifactById(tokenId) ||
-      this.createEmptyToken()
+      deckStore.getMarkById(tokenId) ||
+      deckStore.getArtifactById(tokenId) ||
+      deckStore.createEmptyToken()
     this.detailedTokenInfo = token
   }
 
   resetDetailedTokenInfo(): void {
-    this.detailedTokenInfo = this.createEmptyToken()
+    this.detailedTokenInfo = deckStore.createEmptyToken()
   }
 
   getOrderedTeams(teamArray: string[]): string[] {
@@ -72,7 +44,7 @@ class RoomStore {
   }
 
   getFilteredCardsForTeam(team: string): CardType[] {
-    return getFilteredCardsForTeam(team, this.deck)
+    return getFilteredCardsForTeam(team, deckStore.deck)
   }
 
   getTeamMembers(cards: CardType[]): CardType[] {
@@ -101,7 +73,7 @@ class RoomStore {
   }
 
   resetDetailedCardInfo(): void {
-    this.detailedCardInfo = this.createEmptyCard()
+    this.detailedCardInfo = deckStore.createEmptyCard()
   }
 
   toggleInfo(id: number, type: 'card' | 'artifact' | 'mark'): void {
@@ -119,24 +91,24 @@ class RoomStore {
     }
 
     if (type === 'card') {
-      const newCardInfo = this.getCardById(id)
-      this.detailedCardInfo = newCardInfo || this.createEmptyCard()
+      const newCardInfo = deckStore.getCardById(id)
+      this.detailedCardInfo = newCardInfo || deckStore.createEmptyCard()
       this.resetDetailedTokenInfo()
     } else if (type === 'artifact') {
-      const newTokenInfo = this.getArtifactById(id)
-      this.detailedTokenInfo = newTokenInfo || this.createEmptyToken()
+      const newTokenInfo = deckStore.getArtifactById(id)
+      this.detailedTokenInfo = newTokenInfo || deckStore.createEmptyToken()
       this.resetDetailedCardInfo()
     } else if (type === 'mark') {
-      const newTokenInfo = this.getMarkById(id)
-      this.detailedTokenInfo = newTokenInfo || this.createEmptyToken()
+      const newTokenInfo = deckStore.getMarkById(id)
+      this.detailedTokenInfo = newTokenInfo || deckStore.createEmptyToken()
       this.resetDetailedCardInfo()
     }
   }
 
   filterByExpansions(expansions: string[] = []): void {
-    this.deck = filterByExpansions(cards, expansions)
-    this.artifacts = filterByExpansions(artifacts, expansions)
-    this.marks = filterByExpansions(marks, expansions)
+    deckStore.deck = filterByExpansions(cards, expansions)
+    deckStore.artifacts = filterByExpansions(artifacts, expansions)
+    deckStore.marks = filterByExpansions(marks, expansions)
   }
 
   toggleExpansionSelection(expansion: string): void {

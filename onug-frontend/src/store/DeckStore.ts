@@ -1,8 +1,37 @@
+import { cards, marks, artifacts } from 'data'
 import { makeAutoObservable } from 'mobx'
+import { CardType, TokenType } from 'types'
+import { deckStoreUtils } from 'utils'
+
+const { createEmptyCard, createEmptyToken, findById } = deckStoreUtils
 
 class DeckStore {
+  deck: CardType[] = cards
+  marks: TokenType[] = marks
+  artifacts: TokenType[] = artifacts
+
   constructor() {
     makeAutoObservable(this)
+  }
+
+  createEmptyCard(): CardType {
+    return createEmptyCard()
+  }
+
+  createEmptyToken(): TokenType {
+    return createEmptyToken()
+  }
+
+  getCardById(cardId: number): CardType {
+    return findById(this.deck, cardId) || this.createEmptyCard()
+  }
+
+  getArtifactById(tokenId: number): TokenType {
+    return findById(this.artifacts, tokenId) || this.createEmptyToken()
+  }
+
+  getMarkById(tokenId: number): TokenType {
+    return findById(this.marks, tokenId) || this.createEmptyToken()
   }
 }
 

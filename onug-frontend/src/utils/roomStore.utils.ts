@@ -1,20 +1,5 @@
-import { emptyCard, emptyToken, teams } from 'constant'
-import { CardType, TokenType, TeamsType } from 'types'
-
-const createEmptyCard = (): CardType => {
-  return emptyCard
-}
-
-const createEmptyToken = (): TokenType => {
-  return emptyToken
-}
-
-const findById = <T extends { id: number }>(
-  list: T[],
-  id: number
-): T | undefined => {
-  return list.find((item) => item.id === id)
-}
+import { teams } from 'constant'
+import { CardType, TeamsType } from 'types'
 
 const filterByExpansions = <T extends { expansion: string }>(
   list: T[],
@@ -38,10 +23,7 @@ const getOrderedTeams = (teamArray: string[]): string[] => {
 }
 
 export const roomStoreUtils = {
-  createEmptyCard,
-  createEmptyToken,
   getFilteredCardsForTeam,
   getOrderedTeams,
-  findById,
   filterByExpansions,
 }

@@ -4,6 +4,7 @@ import { actionStoreUtils, selectedDeckUtils } from 'utils'
 import { actionMarks, actioncards } from 'data'
 import { alienIds, assassinIds, evils, roles, vampireIds } from 'constant'
 import { roomStore } from 'store'
+import { deckStore } from './DeckStore'
 
 const {
   containsById,
@@ -33,7 +34,7 @@ class SelectedDeckStore {
   }
 
   get deck(): CardType[] {
-    return roomStore.deck
+    return deckStore.deck
   }
 
   get totalCharacters(): number {

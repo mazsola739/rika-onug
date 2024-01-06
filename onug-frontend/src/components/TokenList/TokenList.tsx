@@ -1,14 +1,14 @@
+import { TokenImage } from 'components'
 import { observer } from 'mobx-react-lite'
-import { roomStore } from 'store'
+import { deckStore, roomStore } from 'store'
 import {
   StyledTokenList,
   TokenListTitle,
   TokenListGrid,
 } from './TokenList.styles'
-import { TokenImage } from 'components'
 
 export const TokenList = observer(() => {
-  const { artifacts, marks } = roomStore
+  const { artifacts, marks } = deckStore
 
   const handleTokenClick = (
     tokenId: number,

@@ -2,15 +2,15 @@ import { CardList, TokenList } from 'components'
 import { team } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useMemo } from 'react'
+import { useParams } from 'react-router-dom'
+import { deckStore, selectedDeckStore } from 'store'
 import { Main } from './Room.styles'
 import { RoomProps } from './Room.types'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
-import { selectedDeckStore } from 'store'
-import { useParams } from 'react-router-dom'
 
 export const Room = observer(({ roomStore }: RoomProps) => {
-  const { deck } = roomStore
+  const { deck } = deckStore
 
   const { room_id } = useParams()
 
@@ -85,7 +85,8 @@ export const Room = observer(({ roomStore }: RoomProps) => {
         ))}
         <TokenList />
       </Main>
-      <RoomFooter />
+      <RoomFooter room_id={room_id} player_name={'Player 1'} />
     </>
   )
 })
+//TODO PLAYER 1

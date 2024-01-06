@@ -9,3 +9,7 @@ export interface StyledLobbyProps {
   buttonText?: string
   onClick: () => void
 }
+
+export interface PropsNoName {
+  color: string
+}

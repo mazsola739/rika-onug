@@ -74,7 +74,9 @@ const handleCard = (
   defaultCardId: number
 ) => {
   if (!containsByIds(selectedCards, idsToCheck)) {
-    const cardToAdd = cards.find((c) => c.id === defaultCardId) as CardType
+    const cardToAdd = cards.find(
+      (card) => card.id === defaultCardId
+    ) as CardType
     selectCard(selectedCards, cardToAdd)
   }
 }

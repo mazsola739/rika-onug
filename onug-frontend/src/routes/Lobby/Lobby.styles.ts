@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { StyledLobbyProps } from './Lobby.types'
+import { PropsNoName, StyledLobbyProps } from './Lobby.types'
 
 export const StyledLobby = styled.div`
   background-color: transparent;
@@ -62,3 +62,33 @@ const generateRainbowColor = (index: number) => {
   transform: none;
   position: relative;
 } */
+
+export const Slaves = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 900;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`
+//every code need a lowphas :)
+export const LowPhas = styled.div<PropsNoName>`
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ color }) => color};
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+`
