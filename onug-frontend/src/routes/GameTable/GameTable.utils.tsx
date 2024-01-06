@@ -44,7 +44,7 @@ const renderMarks = (selectedMarks: MarkType[], hasDoppelganger: boolean) => (
       <GameToken
         key={mark.id}
         tokenName={mark.token_name}
-        isInDeck={mark.isInDeck}
+        isInDeck={mark.is_in_deck}
         display_name={mark.display_name}
         hasDoppelganger={hasDoppelganger}
       />

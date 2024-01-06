@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { CardType, ActionCardType, MarkType } from 'types'
 import { actionStoreUtils, selectedDeckUtils } from 'utils'
-import { actionMarks, actioncards } from 'data'
+import { action_marks, action_cards } from 'data'
 import { alienIds, assassinIds, evils, roles, vampireIds } from 'constant'
 import { roomStore } from 'store'
 import { deckStore } from './DeckStore'
@@ -23,10 +23,10 @@ const { areAnyCardsSelectedById, isCardSelectedById } = actionStoreUtils
 
 class SelectedDeckStore {
   selectedCards: CardType[] = []
-  actionCards: ActionCardType[] = actioncards
+  actionCards: ActionCardType[] = action_cards
   gamePlayDeck: ActionCardType[] = []
   MAX_ALLOWED_PLAYERS = 12
-  selectedMarks: MarkType[] = actionMarks
+  selectedMarks: MarkType[] = action_marks
   selectedCardIds: number[] = []
 
   constructor() {
@@ -173,31 +173,31 @@ class SelectedDeckStore {
     this.selectedMarks.forEach((mark) => {
       switch (mark.token_name) {
         case 'mark_of_vampire':
-          mark.isInDeck = areAnyCardsSelectedById(
+          mark.is_in_deck = areAnyCardsSelectedById(
             this.selectedCards,
             vampireIds
           )
           break
         case 'mark_of_fear':
-          mark.isInDeck = isCardSelectedById(this.selectedCards, 39)
+          mark.is_in_deck = isCardSelectedById(this.selectedCards, 39)
           break
         case 'mark_of_the_bat':
-          mark.isInDeck = isCardSelectedById(this.selectedCards, 38)
+          mark.is_in_deck = isCardSelectedById(this.selectedCards, 38)
           break
         case 'mark_of_disease':
-          mark.isInDeck = isCardSelectedById(this.selectedCards, 32)
+          mark.is_in_deck = isCardSelectedById(this.selectedCards, 32)
           break
         case 'mark_of_love':
-          mark.isInDeck = isCardSelectedById(this.selectedCards, 31)
+          mark.is_in_deck = isCardSelectedById(this.selectedCards, 31)
           break
         case 'mark_of_traitor':
-          mark.isInDeck = isCardSelectedById(this.selectedCards, 34)
+          mark.is_in_deck = isCardSelectedById(this.selectedCards, 34)
           break
         case 'mark_of_clarity':
-          mark.isInDeck = isCardSelectedById(this.selectedCards, 37)
+          mark.is_in_deck = isCardSelectedById(this.selectedCards, 37)
           break
         case 'mark_of_assassin':
-          mark.isInDeck = areAnyCardsSelectedById(
+          mark.is_in_deck = areAnyCardsSelectedById(
             this.selectedCards,
             assassinIds
           )

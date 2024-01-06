@@ -1,5 +1,5 @@
-export * from './actioncards'
-export * from './actionMarks'
+export * from './action_cards'
+export * from './action_marks'
 export * from './artifacts'
 export * from './cards'
 export * from './marks'
