@@ -14,7 +14,7 @@
 					"script": {
 						"exec": [
 							"var jsonData = JSON.parse(responseBody);",
-							"postman.setEnvironmentVariable(\"roomId\", jsonData.roomId);"
+							"postman.setEnvironmentVariable(\"room_id\", jsonData.room_id);"
 						],
 						"type": "text/javascript"
 					}
@@ -69,7 +69,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"route\": \"join-room\",\n    \"roomId\": \"{{roomId}}\"\n}"
+					"raw": "{\n    \"route\": \"join-room\",\n    \"room_id\": \"{{room_id}}\"\n}"
 				},
 				"url": {
 					"raw": "localhost:7654/",

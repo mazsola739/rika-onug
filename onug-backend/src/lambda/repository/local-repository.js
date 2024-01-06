@@ -2,7 +2,7 @@ const { writeFileSync } = require("fs");
 const { readFile } = require("fs/promises");
 const upsertRoomState = async (state) => {
   console.log("upsertRoomState");
-  const filePath = `${__dirname}/../database/room_${state.roomId}_gamestate.json`;
+  const filePath = `${__dirname}/../database/room_${state.room_id}_gamestate.json`;
   const roomState = JSON.stringify(state, null, 4);
   const options = { flag: "w" };
   try {
@@ -13,9 +13,9 @@ const upsertRoomState = async (state) => {
   }
 };
 
-const readGameState = async (roomId) => {
+const readGameState = async (room_id) => {
   console.log("read game state");
-  const filePath = `${__dirname}/../database/room_${roomId}_gamestate.json`;
+  const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`;
   const options = { encoding: "utf8" };
   try {
     const data = await readFile(filePath, options);

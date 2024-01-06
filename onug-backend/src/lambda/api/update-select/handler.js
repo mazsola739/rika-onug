@@ -1,36 +1,29 @@
-const { generateSuccessResponse } = require("../../../util/response-generator");
+const { generateSuccessResponse, generateErrorResponse } = require("../../../util/response-generator");
 const { validateRoom } = require("../../common/validator");
-const { repository } = require("../../repository")
+const { repository } = require("../../repository");
 
-const { upsertRoomState } = repository
+const { upsertRoomState } = repository;
+
 const updateSelectController = async (event) => {
-  console.log(
-    `Update-select endpoint triggered with event: ${JSON.stringify(event)}`
-  );
+  let { room_id, update } = event.body;
+  const { action, card_id } = update;
 
-  let { roomId, update } = event.body;
+  const [roomIdValid, gameState, errors] = await validateRoom(room_id);
 
-  const { action } = update;
-
-  const [roomIdValid, gameState, errors] = await validateRoom(roomId);
   if (!roomIdValid) return generateErrorResponse(errors);
 
+  const newGameState = { ...gameState };
+
   if (action === "CARD_SELECT") {
-    const newGameState = { ...gameState };
-    const { cardId } = update;
-    newGameState.selectedCards = selectCard(newGameState.selectedCards, cardId);
-    upsertRoomState(newGameState);
+    newGameState.selected_cards = selectCard(newGameState.selected_cards, card_id);
+  } else if (action === "CARD_DESELECT") {
+    newGameState.selected_cards = deselectCard(newGameState.selected_cards, card_id);
   }
 
-  if (action === "CARD_DESELECT") {
-    const newGameState = { ...gameState };
-    const { cardId } = update;
-    deselectCard(newGameState.selectedCards, cardId);
-    upsertRoomState(newGameState);
-  }
+  upsertRoomState(newGameState);
 
   return generateSuccessResponse({
-    message: `successfully updated`,
+    message: `Successfully updated`,
   });
 };
 
@@ -38,13 +31,13 @@ const selectCard = (selectedCardIds, cardId) => {
   selectedCardIds.push(cardId);
   return Array.from(new Set(selectedCardIds));
 };
+
 const deselectCard = (selectedCardIds, cardId) => {
-  const index = selectedCardIds.findIndex(
-    (selectedCardId) => selectedCardId === cardId
-  );
+  const index = selectedCardIds.findIndex((selectedCardId) => selectedCardId === cardId);
   if (index !== -1) {
     selectedCardIds.splice(index, 1);
   }
+  return selectedCardIds;
 };
 
 module.exports = {

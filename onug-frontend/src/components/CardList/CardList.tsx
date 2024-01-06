@@ -4,7 +4,7 @@ import { deckStore } from 'store'
 import { StyledCardList, CardListTitle, CardListGrid } from './CardList.styles'
 import { CardListProps } from './CardList.types'
 
-export const CardList = observer(({ team, cards }: CardListProps) => {
+export const CardList = observer(({ team, cards, room_id }: CardListProps) => {
   const { getTeamMembers, getTeamName } = deckStore
 
   const teamMembers = getTeamMembers(cards)
@@ -15,7 +15,7 @@ export const CardList = observer(({ team, cards }: CardListProps) => {
       <CardListTitle>{`${teamName} TEAM`}</CardListTitle>
       <CardListGrid>
         {teamMembers.map((card) => (
-          <Card key={card.id} card={card} />
+          <Card key={card.id} card={card} room_id={room_id} />
         ))}
       </CardListGrid>
     </StyledCardList>

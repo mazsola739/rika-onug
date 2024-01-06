@@ -44,6 +44,19 @@ class SelectedDeckStore {
     return determineTotalPlayers(this.totalCharacters, this.selectedCards)
   }
 
+  isSelected(cardId: number): boolean {
+    return this.selectedCardIds.includes(cardId)
+  }
+
+  toggleCardSelectionStatus(cardId: number): void {
+    const index = this.selectedCardIds.indexOf(cardId)
+    if (index > -1) {
+      this.selectedCardIds.splice(index, 1)
+    } else {
+      this.selectedCardIds.push(cardId)
+    }
+  }
+
   toggleCardSelection(card: CardType): void {
     const isSpecialCard =
       card.display_name === roles.role_mirrorman ||
@@ -190,6 +203,40 @@ class SelectedDeckStore {
 
   addCardIdsToArray(): number[] {
     return this.selectedCards.map((card) => this.selectedCardIds.push(card.id))
+  }
+
+  async sendCardSelectionToBackend(cardId: number, roomId: string) {
+    const cardStatus = this.isSelected(cardId) ? 'CARD_SELECT' : 'CARD_DESELECT'
+
+    const requestBody = {
+      route: 'update-select',
+      room_id: roomId,
+      update: {
+        action: cardStatus,
+        card_id: cardId,
+      },
+    }
+
+    try {
+      const response = await fetch('http://localhost:7654/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      })
+
+      const data = await response.json()
+      if (data.success) {
+        console.log('Successfully updated in backend:', data.message)
+      } else {
+        console.error('Backend error:', data.error)
+        throw new Error('Backend error: ' + data.error)
+      }
+    } catch (error) {
+      console.error('Error sending card selection to backend:', error)
+      throw new Error('Network error: Unable to connect to the server')
+    }
   }
 }
 

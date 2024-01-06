@@ -1,0 +1,215 @@
+[
+  {
+    "room_id": "archives",
+    "room_name": "Archives",
+    "selected_cards": [],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  },
+  {
+    "room_id": "armory",
+    "room_name": "Armory",
+    "selected_cards": [],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  },
+  {
+    "room_id": "dynamite_room",
+    "room_name": "Dynamite Room",
+    "selected_cards": [],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  },
+  {
+    "room_id": "foyer",
+    "room_name": "Foyer",
+    "selected_cards": [
+      25,
+      15,
+      17,
+      22,
+      18,
+      23,
+      27,
+      11,
+      24
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  },
+  {
+    "room_id": "great_hall",
+    "room_name": "Great Hall",
+    "selected_cards": [
+      15,
+      16,
+      9,
+      8,
+      11,
+      83,
+      73,
+      76
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  },
+  {
+    "room_id": "guest_bedroom",
+    "room_name": "Guest Bedroom",
+    "selected_cards": [
+      41,
+      40,
+      32,
+      34,
+      29,
+      35,
+      36,
+      33
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  },
+  {
+    "room_id": "kitchen",
+    "room_name": "Kitchen",
+    "selected_cards": [
+      50,
+      42,
+      53,
+      45,
+      52,
+      46,
+      77,
+      44
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  },
+  {
+    "room_id": "observatory",
+    "room_name": "Observatory",
+    "selected_cards": [
+      15,
+      22,
+      5,
+      6,
+      9,
+      23,
+      8,
+      27,
+      11,
+      24,
+      20,
+      25,
+      10
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  },
+  {
+    "room_id": "parlor",
+    "room_name": "Parlor",
+    "selected_cards": [
+      15,
+      16,
+      7,
+      71,
+      18,
+      10,
+      80,
+      27,
+      11,
+      72,
+      20,
+      71,
+      19
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  },
+  {
+    "room_id": "secret_passage",
+    "room_name": "Secret Passage",
+    "selected_cards": [
+      50,
+      30,
+      42,
+      53,
+      15,
+      22,
+      85,
+      9,
+      27,
+      11,
+      33,
+      4,
+      20
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  },
+  {
+    "room_id": "sitting_room",
+    "room_name": "Sitting Room",
+    "selected_cards": [
+      25,
+      53,
+      47,
+      54,
+      48,
+      51,
+      27,
+      52,
+      46,
+      20,
+      44,
+      49,
+      74
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  },
+  {
+    "room_id": "study",
+    "room_name": "Study",
+    "selected_cards": [],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+  }
+]

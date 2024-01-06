@@ -1,5 +1,4 @@
 const express = require("express");
-const { createRoomController } = require("./lambda/api/create-room/handler");
 const { createEventFromRequest } = require("./util/express-lambda-converter");
 const { joinRoomController } = require("./lambda/api/join-room/handler");
 const { actionController } = require("./lambda/action/handler");
@@ -8,6 +7,7 @@ const { readyController } = require("./lambda/api/ready/handler");
 const { errorController } = require("./lambda/api/error/handler");
 const { hydrateSelectController } = require("./lambda/api/hydrate-select/handler");
 const { updateSelectController } = require("./lambda/api/update-select/handler");
+const { roomsController } = require("./lambda/api/rooms/handler");
 
 const app = express();
 const PORT = 7654;
@@ -27,9 +27,7 @@ app.post("/", async (req, res) => {
   const { route } = body;
 
   let response;
-  if (route === "create-room")
-    response = await createRoomController(createEventFromRequest(body));
-  else if (route === "join-room")
+  if (route === "join-room")
     response = await joinRoomController(createEventFromRequest(body));
   else if (route === "action")
     response = await actionController(createEventFromRequest(body));
@@ -41,6 +39,8 @@ app.post("/", async (req, res) => {
     response = await updateSelectController(createEventFromRequest(body));
   else if (route === "ready")
     response = await readyController(createEventFromRequest(body));
+  else if (route === "rooms")
+    response = await roomsController(createEventFromRequest(body));
   else response = errorController(createEventFromRequest(body));
 
   res.status(response.statusCode);

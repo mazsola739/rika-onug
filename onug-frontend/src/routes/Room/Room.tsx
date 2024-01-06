@@ -7,16 +7,19 @@ import { RoomProps } from './Room.types'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
 import { selectedDeckStore } from 'store'
+import { useParams } from 'react-router-dom'
 
 export const Room = observer(({ deckStore }: RoomProps) => {
   const { deck } = deckStore
+
+  const { room_id } = useParams()
 
   useEffect(() => {
     const timer = setInterval(async () => {
       try {
         const requestBody = {
           route: 'hydrate-select',
-          roomId: '196603ee-d534-4c2f-8561-7005a3617e2c',
+          room_id: room_id,
         }
 
         const response = await fetch('http://localhost:7654/', {
@@ -28,9 +31,17 @@ export const Room = observer(({ deckStore }: RoomProps) => {
         })
 
         const responseData = await response.json()
-        selectedDeckStore.updateSelectedCards(
-          responseData.gameState.selectedCards
-        )
+
+        if (responseData.gameState && responseData.gameState.selected_cards) {
+          selectedDeckStore.updateSelectedCards(
+            responseData.gameState.selected_cards
+          )
+        } else {
+          console.error(
+            'gameState or selected_cards is undefined in the response'
+          )
+        }
+
         console.log('Response from backend:', responseData)
       } catch (error) {
         console.error('Error sending ready request:', error)
@@ -40,7 +51,7 @@ export const Room = observer(({ deckStore }: RoomProps) => {
     return () => {
       clearInterval(timer)
     }
-  }, [])
+  }, [room_id])
 
   const teamArray = useMemo(
     () => [
@@ -69,6 +80,7 @@ export const Room = observer(({ deckStore }: RoomProps) => {
             key={teamName}
             team={teamName}
             cards={deckStore.getFilteredCardsForTeam(teamName)}
+            room_id={room_id}
           />
         ))}
         <TokenList />

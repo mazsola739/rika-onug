@@ -4,7 +4,7 @@ import { StyledCard, CardImage, CardName } from './Card.styles'
 import { CardProps } from './Card.types'
 import { useCallback, useMemo } from 'react'
 
-export const Card = observer(({ card }: CardProps) => {
+export const Card = observer(({ card, room_id }: CardProps) => {
   const {
     id,
     card_name,
@@ -20,6 +20,7 @@ export const Card = observer(({ card }: CardProps) => {
   )
 
   const handleCardClick = useCallback(() => {
+    selectedDeckStore.toggleCardSelectionStatus(id)
     selectedDeckStore.toggleCardSelection({
       id,
       card_name,
@@ -34,7 +35,7 @@ export const Card = observer(({ card }: CardProps) => {
     selectedDeckStore.updatePlayDeckWithSelectedCards(
       selectedDeckStore.selectedCards
     )
-
+    selectedDeckStore.sendCardSelectionToBackend(id, room_id)
     deckStore.toggleInfo(id, 'card')
   }, [id, card_name, display_name, rules, expansion, team, wake_up_time, order])
 

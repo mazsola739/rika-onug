@@ -8,9 +8,9 @@ const hydrateSelectController = async (event) => {
     `Hydrate-select endpoint triggered with event: ${JSON.stringify(event)}`
   ); */
 
-  let { roomId } = event.body;
+  let { room_id } = event.body;
 
-  const gameState = await readGameState(roomId);
+  const gameState = await readGameState(room_id);
 
   return generateSuccessResponse({
     gameState,

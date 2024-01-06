@@ -10,7 +10,6 @@ import { ActionCardType, CardType } from 'types'
 
 const getCardById = (deck: CardType[], cardId: number): CardType => {
   return deck.find((card) => {
-    console.log(card)
     return card.id === cardId
   })
 }
