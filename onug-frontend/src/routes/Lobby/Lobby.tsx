@@ -44,8 +44,6 @@ export const Lobby: React.FC = observer(() => {
 
       if (responseData.success) {
         navigate(`/room/${roomId}`)
-      } else {
-        console.error('Failed to join room:', responseData.message)
       }
     } catch (error) {
       console.error('Error joining room:', error)

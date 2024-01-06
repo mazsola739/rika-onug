@@ -1,20 +1,10 @@
-import { action, makeAutoObservable, observable } from 'mobx'
-
-interface Room {
-  room_id: string
-  room_name: string
-  selectedCards: number[]
-  actions: string[]
-  action_log: string[]
-  players: string[]
-  turn: number
-  closed: boolean
-}
+import { action, makeAutoObservable } from 'mobx'
+import { RoomType } from 'types'
 
 class LobbyStore {
-  rooms: Room[] = []
+  rooms: RoomType[] = []
   errorMessage: string | null = null
-  @observable isLoading = false
+  isLoading = false
 
   constructor() {
     makeAutoObservable(this)

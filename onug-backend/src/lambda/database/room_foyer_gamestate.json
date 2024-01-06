@@ -14,7 +14,43 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": [
+        {
+            "name": "Player 2",
+            "admin": true
+        },
+        {
+            "name": "Player 4",
+            "admin": false
+        },
+        {
+            "name": "Player 5",
+            "admin": false
+        },
+        {
+            "name": "Player 3",
+            "admin": false
+        },
+        {
+            "name": "Player 6",
+            "admin": false
+        },
+        {
+            "name": "Player 7",
+            "admin": false
+        },
+        {
+            "name": "Player 1",
+            "admin": false
+        }
+    ],
     "turn": 0,
-    "closed": false
+    "closed": false,
+    "availableNames": [
+        "Player 8",
+        "Player 9",
+        "Player 10",
+        "Player 11",
+        "Player 12"
+    ]
 }
