@@ -6,7 +6,7 @@ const { upsertRoomState } = repository;
 
 const updateSelectController = async (event) => {
   let { room_id, update } = event.body;
-  const { action, card_id } = update;
+  const { action, card_id, cardIds } = update;
 
   const [roomIdValid, gameState, errors] = await validateRoom(room_id);
 
@@ -18,11 +18,14 @@ const updateSelectController = async (event) => {
     newGameState.selected_cards = selectCard(newGameState.selected_cards, card_id);
   } else if (action === "CARD_DESELECT") {
     newGameState.selected_cards = deselectCard(newGameState.selected_cards, card_id);
+  } else if  (action === "CARDS_UPDATE") {
+    newGameState.selected_cards = cardIds;
   }
 
   upsertRoomState(newGameState);
 
   return generateSuccessResponse({
+    success: true,
     message: `Successfully updated`,
   });
 };
@@ -42,4 +45,4 @@ const deselectCard = (selectedCardIds, cardId) => {
 
 module.exports = {
   updateSelectController,
-};
+}

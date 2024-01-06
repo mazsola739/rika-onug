@@ -12,6 +12,7 @@ exports.handler = async (event, context, cb) => {
   } = event;
 
   if (route === "join-room")           return joinRoomController(event, context, cb);
+  else if (route === "leave-room")     return leaveRoomController(event, context, cb);
   else if (route === "action")         return actionController(event, context, cb);
   else if (route === "hydrate")        return hydrateController(event, context, cb);
   else if (route === "hydrate-select") return hydrateSelectController(event, context, cb);

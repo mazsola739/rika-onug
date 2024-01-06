@@ -8,6 +8,7 @@ const { errorController } = require("./lambda/api/error/handler");
 const { hydrateSelectController } = require("./lambda/api/hydrate-select/handler");
 const { updateSelectController } = require("./lambda/api/update-select/handler");
 const { roomsController } = require("./lambda/api/rooms/handler");
+const { leaveRoomController } = require("./lambda/api/leave-room/handler");
 
 const app = express();
 const PORT = 7654;
@@ -29,6 +30,8 @@ app.post("/", async (req, res) => {
   let response;
   if (route === "join-room")
     response = await joinRoomController(createEventFromRequest(body));
+  else if (route === "leave-room")
+    response = await leaveRoomController(createEventFromRequest(body));
   else if (route === "action")
     response = await actionController(createEventFromRequest(body));
   else if (route === "hydrate")

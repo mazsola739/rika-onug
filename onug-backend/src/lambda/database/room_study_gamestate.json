@@ -1,0 +1,26 @@
+{
+    "room_id": "study",
+    "room_name": "Study",
+    "selected_cards": [
+        11,
+        14,
+        3,
+        26,
+        72,
+        19,
+        81,
+        33,
+        52,
+        75,
+        13,
+        12,
+        36,
+        27,
+        8
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [],
+    "turn": 0,
+    "closed": false
+}

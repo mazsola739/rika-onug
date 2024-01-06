@@ -1,16 +1,15 @@
-const path = require("path");
-const fs = require("fs");
-const filePath = path.join(__dirname, "../../../data/rooms.json");
+const roomsData = require("../../../data/rooms.json");
 const {
   generateSuccessResponse,
   generateErrorResponse,
 } = require("../../../util/response-generator");
 const validator = require("../../common/validator");
-const { validateRoom } = validator;
 const { repository } = require("../../repository");
 
+const { validateRoom } = validator;
 const { upsertRoomState } = repository;
 
+const availablePlayerNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const names = [
   "Player 1",
   "Player 2",
@@ -26,30 +25,32 @@ const names = [
   "Player 12",
 ];
 
-let nextAvailableNameIndex = 0;
+const getAvailableName = () => {
+  if (nextAvailableNameIndex < names.length) {
+    const playerName = names[nextAvailableNameIndex];
+    nextAvailableNameIndex++;
+    return playerName;
+  }
+  return null;
+};
 
 const joinRoomController = async (event) => {
-  console.log(
-    `Join-room endpoint triggered with event: ${JSON.stringify(event)}`
-  );
-
-  const { room_id, player_name } = event.body;
-
-  const roomsData = JSON.parse(fs.readFileSync(filePath, "utf8"));
-
+  const { room_id } = event.body;
   const roomIndex = roomsData.findIndex((room) => room.room_id === room_id);
 
   if (roomIndex === -1) {
     const roomDataFromJson = roomsData.find((room) => room.room_id === room_id);
-    
     if (roomDataFromJson) {
+      const initialPlayerName = getAvailableName();
+      if (!initialPlayerName) {
+        return generateErrorResponse({
+          message: "No available player names.",
+        });
+      }
       roomsData.push({
         ...roomDataFromJson,
-        players: [{ name: player_name, admin: true }],
+        players: [{ name: initialPlayerName, admin: true }],
       });
-
-      fs.writeFileSync(filePath, JSON.stringify(roomsData, null, 2), 'utf8');
-      
       return generateSuccessResponse({
         message: "New room created and joined",
         room_id,
@@ -62,15 +63,13 @@ const joinRoomController = async (event) => {
   }
 
   const room = roomsData[roomIndex];
-
   const [roomIdValid, gameState, errors] = await validateRoom(room_id);
 
   if (!roomIdValid) {
     generateErrorResponse(errors);
-
     await upsertRoomState({
       room_id: room_id,
-      room_name: room.room_name, 
+      room_name: room.room_name,
       selected_cards: room.selected_cards,
       actions: [],
       action_log: [],
@@ -85,23 +84,20 @@ const joinRoomController = async (event) => {
     });
   }
 
-  const playerId = names[nextAvailableNameIndex];
-  nextAvailableNameIndex = (nextAvailableNameIndex + 1) % names.length;
-
-  const nextPlayerNumber = gameState.players.length + 1;
-
+  const playerId = getAvailableName();
   const newGameState = { ...gameState };
   newGameState.players.push({
     name: playerId,
-    admin: nextPlayerNumber === 1,
+    admin: newGameState.players.length === 0,
   });
 
   await upsertRoomState(newGameState);
 
   return generateSuccessResponse({
+    success: true,
     message: "Successfully joined",
     room_id,
-    player_id: player_name,
+    player_id: playerId,
   });
 };
 

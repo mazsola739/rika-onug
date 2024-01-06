@@ -131,6 +131,12 @@ class SelectedDeckStore {
     }
   }
 
+  revertCardUpdateOnFrontEnd(cardId: number): void {
+    if (this.isSelected(cardId))
+      this.handleDeselectCard(getCardById(this.deck, cardId))
+    else this.handleSelectCard(getCardById(this.deck, cardId))
+  }
+
   updateSelectedCards(cardIds: number[]): void {
     this.selectedCards = []
     cardIds.forEach((cardId) => {
@@ -230,12 +236,14 @@ class SelectedDeckStore {
       if (data.success) {
         console.log('Successfully updated in backend:', data.message)
       } else {
-        console.error('Backend error:', data.error)
-        throw new Error('Backend error: ' + data.error)
+        console.error(
+          "Couldn't update gamestate on backend with the [de]selected card"
+        )
+        this.revertCardUpdateOnFrontEnd(cardId)
       }
     } catch (error) {
       console.error('Error sending card selection to backend:', error)
-      throw new Error('Network error: Unable to connect to the server')
+      this.revertCardUpdateOnFrontEnd(cardId)
     }
   }
 }

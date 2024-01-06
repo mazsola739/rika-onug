@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from 'mobx'
+import { action, makeAutoObservable, observable } from 'mobx'
 
 interface Room {
   room_id: string
@@ -14,7 +14,7 @@ interface Room {
 class LobbyStore {
   rooms: Room[] = []
   errorMessage: string | null = null
-  isLoading = false
+  @observable isLoading = false
 
   constructor() {
     makeAutoObservable(this)

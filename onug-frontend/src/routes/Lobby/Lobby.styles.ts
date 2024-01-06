@@ -3,33 +3,34 @@ import { StyledLobbyProps } from './Lobby.types'
 
 export const StyledLobby = styled.div`
   background-color: transparent;
-  display: grid;
-  grid-template-columns: repeat(3, 180px);
-  grid-template-rows: repeat(4, 120px);
-  gap: 16px;
-  margin: auto;
+  position: relative;
+  width: 100%;
   height: 100%;
-  align-items: center;
-  justify-items: center;
-  justify-content: center;
-  align-content: center;
+  margin: auto;
 `
 
 export const StyledRoomButton = styled.button<StyledLobbyProps>`
-  background: ${({ index }) => generatePastelRainbowColor(index)};
+  background: ${({ index }) => generateRainbowColor(index)};
+  border: 5px solid ${({ index }) => generateRainbowColor(index)};
   color: black;
   font-family: 'Josefin Sans', sans-serif;
   text-transform: uppercase;
-  font-size: 16px;
-  width: 150px;
-  height: 100px;
-  border: none;
-  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 900;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
   cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%)
+    rotate(${({ index }) => index * (360 / 12)}deg) translate(250px)
+    rotate(-${({ index }) => index * (360 / 12)}deg);
   transition: background-color 0.3s;
 
   &:hover {
-    background: ${({ index }) => darken(generatePastelRainbowColor(index), 15)};
+    border: 5px solid ${({ index }) => darken(generateRainbowColor(index), 20)};
   }
 `
 
@@ -46,9 +47,18 @@ const darken = (color: string, amount: number): string => {
   return `hsl(${hue}, ${saturation}%, ${newLightness}%)`
 }
 
-const generatePastelRainbowColor = (index: number) => {
+const generateRainbowColor = (index: number) => {
   const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
-  const lightness = 70
+  const lightness = 55
   const hue = hues[index % hues.length]
   return `hsl(${hue}, 100%, ${lightness}%)`
 }
+
+/* @media (max-width: 768px) {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin: 10px;
+  transform: none;
+  position: relative;
+} */

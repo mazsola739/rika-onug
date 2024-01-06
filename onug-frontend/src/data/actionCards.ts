@@ -248,13 +248,6 @@ export const actioncards: ActionCardType[] = [
     card_name: 'onuv_diseased',
   },
   {
-    id: 71,
-    team: team.own,
-    wake_up_time: wake.night,
-    expansion: expansion.bonusroles,
-    card_name: 'onub_apprentice_tanner',
-  },
-  {
     id: 10,
     team: team.own,
     wake_up_time: wake.day,
