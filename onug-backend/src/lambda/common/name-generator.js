@@ -1,23 +1,5 @@
-const names = [
-  "Justin Case",
-  "Dick Sack",
-  "Flapberry Fudgewhistle",
-  "Stinkroid Noodleshine",
-  "Bur-a-boo Noodleborn",
-  "Sniffwax Pukeseed",
-  "Doodle Loodle",
-  "Stinkbuns Spottygold",
-  "Werewolfy",
-  "Witchenious Craftenber",
-  "Horacle the Oracle",
-  "Kribidy Dibidy Doo",
-];
-const randomPlayerName = (players = []) => {
-  const namesAlreadyExistsInGameState = players.map((player) => player.name);
-  const diffNames = names.filter(
-    (name) => !namesAlreadyExistsInGameState.includes(name)
-  );
-  return diffNames[~~(Math.random() * diffNames.length)];
+const randomPlayerName = (names = []) => {
+  return names[~~(Math.random() * names.length)];
 };
 
 module.exports = {

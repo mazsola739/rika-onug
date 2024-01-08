@@ -10,7 +10,7 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { actionStoreUtils, utils } from 'utils'
 import { cowStore } from './CowStore'
 
 //TODO oracle effect
@@ -20,9 +20,9 @@ const {
   generateTimedAction,
   isCardSelectedById,
   pickRandomElementFromArray,
-  pickRandomKey,
   pickRandomUpTo3Players,
 } = actionStoreUtils
+const { pickRandomKey } = utils
 
 class AlienStore {
   isNewAlienOrHelper = false

@@ -9,7 +9,7 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { actionStoreUtils, utils } from 'utils'
 
 //todo random_oracle_alienexchange effect on aliens
 //todo random_oracle_ripple effect on ripple
@@ -24,8 +24,8 @@ const {
   getRandomIndexFromArray,
   getRandomNumber,
   pickRandomElementFromArray,
-  pickRandomKey,
 } = actionStoreUtils
+const { pickRandomKey } = utils
 
 class OracleStore {
   constructor() {

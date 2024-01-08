@@ -8,19 +8,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Dragon",
+      "Phoenix",
+      "Griffin",
+      "Mermaid",
+      "Unicorn",
+      "Cyclops",
+      "Troll",
+      "Chimera",
+      "Goblin",
+      "Minotaur",
+      "Fairy",
+      "Djinn"
     ]
   },
   {
@@ -32,19 +32,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Forrest Gump",
+      "Indiana Jones",
+      "James Bond",
+      "Captain Jack Sparrow",
+      "Ellen Ripley",
+      "Neo",
+      "Sarah Connor",
+      "Hannibal Lecter",
+      "Sherlock Holmes",
+      "E.T.",
+      "Katniss Everdeen",
+      "James T. Kirk"
     ]
   },
   {
@@ -56,19 +56,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Superman",
+      "Batman",
+      "Wonder Woman",
+      "Loki",
+      "Spider-Man",
+      "Iron Man",
+      "Thor",
+      "Aquaman",
+      "Deadpool",
+      "Wolverine",
+      "Groot",
+      "Thanos"
     ]
   },
   {
@@ -90,19 +90,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Harry Potter",
+      "Hermione Granger",
+      "Ron Weasley",
+      "Severus Snape",
+      "Albus Dumbledore",
+      "Lord Voldemort",
+      "Draco Malfoy",
+      "Neville Longbottom",
+      "Ginny Weasley",
+      "Dobby",
+      "Dolores Umbridge",
+      "Rubeus Hagrid"
     ]
   },
   {
@@ -123,19 +123,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Zeus",
+      "Poseidon",
+      "Hera",
+      "Athena",
+      "Artemis",
+      "Aphrodite",
+      "Persephone",
+      "Hephaestus",
+      "Dionysus",
+      "Hades",
+      "Helios",
+      "Prometheus"
     ]
   },
   {
@@ -156,19 +156,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Frodo",
+      "Samwise",
+      "Gandalf",
+      "Aragorn",
+      "Legolas",
+      "Gimli",
+      "Pippin",
+      "Galadriel",
+      "Sauron",
+      "Bilbo",
+      "Gollum",
+      "Saruman"
     ]
   },
   {
@@ -189,19 +189,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Jon Snow",
+      "Daenerys Targaryen",
+      "Tyrion Lannister",
+      "Arya Stark",
+      "Khal Drogo",
+      "Varys",
+      "Petyr Baelish",
+      "Cersei Lannister",
+      "Sansa Stark",
+      "Jorah Mormont",
+      "Theon Greyjoy",
+      "Samwell Tarly"
     ]
   },
   {
@@ -227,19 +227,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Maleficent",
+      "Ursula",
+      "Cruella de Vil",
+      "Jafar",
+      "Captain Hook",
+      "Gaston",
+      "Evil Queen",
+      "Queen of Hearts",
+      "Mother Gothel",
+      "Queen Narissa",
+      "Prince Hans",
+      "Shere Khan"
     ]
   },
   {
@@ -265,19 +265,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Snow White",
+      "Cinderella",
+      "Aurora",
+      "Ariel",
+      "Belle",
+      "Jasmine",
+      "Pocahontas",
+      "Mulan",
+      "Rapunzel",
+      "Anna",
+      "Elsa",
+      "Giselle"
     ]
   },
   {
@@ -303,19 +303,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Luke Skywalker",
+      "Princess Leia Organa",
+      "Han Solo",
+      "Darth Vader",
+      "Obi-Wan Kenobi",
+      "Yoda",
+      "Chewbacca",
+      "R2-D2",
+      "C-3PO",
+      "Emperor Palpatine",
+      "Lando Calrissian",
+      "Boba Fett"
     ]
   },
   {
@@ -341,19 +341,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Peter Parker",
+      "Tony Stark",
+      "Steve Rogers",
+      "Bruce Banner",
+      "Natasha Romanoff",
+      "Wade Wilson",
+      "T'Challa",
+      "Carol Danvers",
+      "Bucky Barnes",
+      "Stephen Strange",
+      "Wanda Maximoff",
+      "Matt Murdock"
     ]
   },
   {
@@ -365,19 +365,19 @@
     "players": [],
     "turn": 0,
     "closed": false,
-    "availableNames": [
-      "Player 1",
-      "Player 2",
-      "Player 3",
-      "Player 4",
-      "Player 5",
-      "Player 6",
-      "Player 7",
-      "Player 8",
-      "Player 9",
-      "Player 10",
-      "Player 11",
-      "Player 12"
+    "available_names": [
+      "Clark Kent",
+      "Bruce Wayne",
+      "Diana Prince",
+      "Barry Allen",
+      "Arthur Curry",
+      "Selina Kyle",
+      "Edward Nygma",
+      "Harvey Dent",
+      "Lex Luthor",
+      "Harley Quinn",
+      "The Joker",
+      "Dick Grayson"
     ]
   }
 ]

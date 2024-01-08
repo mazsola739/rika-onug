@@ -1,8 +1,8 @@
 import { joke } from 'constant'
 import { RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { utils } from 'utils'
 
-const { pickRandomKey } = actionStoreUtils
+const { pickRandomKey } = utils
 
 const addBasicAction = (
   actions: RoleActionType[],

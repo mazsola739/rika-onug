@@ -1,9 +1,9 @@
 import { familyman_wake, familyman_close, BASE_TIME } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { utils } from 'utils'
 
-const { pickRandomKey } = actionStoreUtils
+const { pickRandomKey } = utils
 
 class FamilymanStore {
   constructor() {

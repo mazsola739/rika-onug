@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { CardType, ActionCardType, MarkType } from 'types'
-import { actionStoreUtils, selectedDeckUtils } from 'utils'
+import { actionStoreUtils, selectedDeckUtils, utils } from 'utils'
 import { action_marks, action_cards } from 'data'
 import { alienIds, assassinIds, evils, roles, vampireIds } from 'constant'
 import { roomStore } from 'store'
@@ -17,9 +17,9 @@ const {
   prohibitDeselectingSupervillain,
   prohibitDeselectingWerewolf,
   selectCard,
-  getCardById,
 } = selectedDeckUtils
 const { areAnyCardsSelectedById, isCardSelectedById } = actionStoreUtils
+const { findById } = utils
 
 class SelectedDeckStore {
   selectedCards: CardType[] = []
@@ -134,14 +134,14 @@ class SelectedDeckStore {
 
   revertCardUpdateOnFrontEnd(cardId: number): void {
     if (this.isSelected(cardId))
-      this.handleDeselectCard(getCardById(this.deck, cardId))
-    else this.handleSelectCard(getCardById(this.deck, cardId))
+      this.handleDeselectCard(findById(this.deck, cardId))
+    else this.handleSelectCard(findById(this.deck, cardId))
   }
 
   updateSelectedCards(cardIds: number[]): void {
     this.selectedCards = []
     cardIds.forEach((cardId) => {
-      this.handleSelectCard(getCardById(this.deck, cardId))
+      this.handleSelectCard(findById(this.deck, cardId))
     })
   }
 

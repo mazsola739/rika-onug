@@ -8,12 +8,6 @@ import {
 import { cards } from 'data'
 import { ActionCardType, CardType } from 'types'
 
-const getCardById = (deck: CardType[], cardId: number): CardType => {
-  return deck.find((card) => {
-    return card.id === cardId
-  })
-}
-
 const containsById = (selectedCards: CardType[], cardId: number): boolean =>
   selectedCards.some((card) => card.id === cardId)
 
@@ -146,5 +140,4 @@ export const selectedDeckUtils = {
   prohibitDeselectingSupervillain,
   prohibitDeselectingWerewolf,
   selectCard,
-  getCardById,
 }

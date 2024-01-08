@@ -8,9 +8,10 @@ import {
 } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { actionStoreUtils, utils } from 'utils'
 
-const { generateTimedAction, pickRandomKey } = actionStoreUtils
+const { generateTimedAction } = actionStoreUtils
+const { pickRandomKey } = utils
 
 class BodysnatcherStore {
   constructor() {

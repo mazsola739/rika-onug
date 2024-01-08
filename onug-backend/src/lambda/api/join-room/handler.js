@@ -3,6 +3,7 @@ const {
   generateSuccessResponse,
   generateErrorResponse,
 } = require("../../../util/response-generator");
+const { randomPlayerName } = require("../../common/name-generator");
 const validator = require("../../common/validator");
 const { validateRoom } = validator;
 const { repository } = require("../../repository");
@@ -13,7 +14,7 @@ const joinRoomController = async (event) => {
 
   const { room_id } = event.body;
   const roomIndex = roomsData.findIndex((room) => room.room_id === room_id);
-  
+
   if (roomIndex === -1) {
     return generateErrorResponse({ message: "Room does not exist." });
   }
@@ -22,12 +23,11 @@ const joinRoomController = async (event) => {
   const [roomIdValid, gameState] = await validateRoom(room_id);
 
   if (!roomIdValid) {
-    if (room.availableNames.length === 0) {
+    if (room.available_names.length === 0) {
       return generateErrorResponse({ message: "No more available names. Room is full." });
     }
-    
-    room.availableNames.sort((a, b) => parseInt(a.split(' ')[1]) - parseInt(b.split(' ')[1]));
-    const initialPlayerName = room.availableNames.shift();
+
+    const playerName = randomPlayerName(room.available_names);
 
     const newRoomState = {
       room_id: room_id,
@@ -35,10 +35,10 @@ const joinRoomController = async (event) => {
       selected_cards: room.selected_cards,
       actions: [],
       action_log: [],
-      players: [{ name: initialPlayerName, admin: true }],
+      players: [{ name: playerName, admin: true }],
       turn: 0,
       closed: false,
-      availableNames: room.availableNames,
+      available_names: room.available_names.filter(name => name !== playerName),
     };
 
     await upsertRoomState(newRoomState);
@@ -47,22 +47,22 @@ const joinRoomController = async (event) => {
       success: true,
       message: "New room created and joined",
       room_id,
-      player_id: initialPlayerName,
+      player_id: playerName,
     });
   }
 
-  if (room.availableNames.length === 0) {
+  if (room.available_names.length === 0) {
     return generateErrorResponse({ message: "No more available names. Room is full." });
   }
 
-  gameState.availableNames.sort((a, b) => parseInt(a.split(' ')[1]) - parseInt(b.split(' ')[1]));
+  const nextAvailableName = randomPlayerName(gameState.available_names);
 
-  const nextAvailableName = gameState.availableNames.shift();
-  
   gameState.players.push({
     name: nextAvailableName,
     admin: gameState.players.length === 0,
   });
+
+  gameState.available_names = gameState.available_names.filter(name => name !== nextAvailableName);
 
   await upsertRoomState(gameState);
 

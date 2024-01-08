@@ -1,3 +1,4 @@
+const roomsData = require("../../../data/rooms.json");
 const {
   generateSuccessResponse,
   generateErrorResponse,
@@ -8,8 +9,6 @@ const { repository } = require("../../repository");
 const { upsertRoomState } = repository;
 
 const leaveRoomController = async (event) => {
-  console.log(`Leave-room endpoint triggered with event: ${JSON.stringify(event)}`);
-
   const { room_id, player_name } = event.body;
 
   const [roomIdValid, gameState, errors] = await validateRoom(room_id);
@@ -23,19 +22,27 @@ const leaveRoomController = async (event) => {
   if (playerIndex === -1) {
     return generateErrorResponse({ message: 'Player not found in the room.' });
   }
+
   if (gameState.players[playerIndex].admin && gameState.players.length > 1) {
     gameState.players[1].admin = true;
   }
 
   const removedPlayer = gameState.players.splice(playerIndex, 1)[0];
 
-  gameState.availableNames.push(removedPlayer.name);
+  gameState.available_names.push(removedPlayer.name);
 
-  gameState.availableNames.sort((a, b) => {
-    const numA = parseInt(a.split(' ')[1]);
-    const numB = parseInt(b.split(' ')[1]);
-    return numA - numB;
-  });
+  if (gameState.players.length === 0) {
+    const defaultRoom = roomsData.find(room => room.room_id === room_id);
+    if (defaultRoom) {
+      gameState.selected_cards = defaultRoom.selected_cards;
+      gameState.actions = [];
+      gameState.action_log = [];
+      gameState.players = [];
+      gameState.turn = 0;
+      gameState.closed = false;
+      gameState.available_names = [...defaultRoom.available_names];
+    }
+  }
 
   await upsertRoomState(gameState);
 

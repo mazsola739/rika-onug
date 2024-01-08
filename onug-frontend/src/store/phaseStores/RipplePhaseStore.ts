@@ -13,7 +13,7 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { alienStore, selectedDeckStore } from 'store'
 import { ActionCardType, RepeatroleType, RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { actionStoreUtils, utils } from 'utils'
 
 const {
   areAllCardsSelectedById,
@@ -25,10 +25,10 @@ const {
   pickRandom2Players,
   pickRandomArray2Players,
   pickRandomElementFromArray,
-  pickRandomKey,
   pickRandomUpTo3Players,
   shuffleAndSplitDeck,
 } = actionStoreUtils
+const { pickRandomKey } = utils
 const {
   random_ripple_1minute,
   random_ripple_repeat,

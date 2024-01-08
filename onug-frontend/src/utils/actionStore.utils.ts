@@ -5,6 +5,9 @@ import {
   RoleActionStoreType,
   RoleActionType,
 } from 'types'
+import { utils } from 'utils'
+
+const { pickRandomKey } = utils
 
 const addRoleActions = <T extends RoleActionStoreType>(
   store: T,
@@ -89,11 +92,6 @@ const pickRandomElementFromArray = <T>(arr: T[]): T => {
   return arr[randomIndex]
 }
 
-const pickRandomKey = <T>(obj: T): keyof T => {
-  const keys = Object.keys(obj)
-  return keys[Math.floor(Math.random() * keys.length)] as keyof T
-}
-
 const pickRandomUpTo3Players = (
   numPlayers: number,
   conjunction: string
@@ -152,7 +150,6 @@ export const actionStoreUtils = {
   pickRandom2Players,
   pickRandomArray2Players,
   pickRandomElementFromArray,
-  pickRandomKey,
   pickRandomUpTo3Players,
   shuffleAndSplitDeck,
 }

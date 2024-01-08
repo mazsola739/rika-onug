@@ -61,7 +61,7 @@ export const Lobby: React.FC = observer(() => {
   return (
     <StyledLobby>
       {/*       <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>
-        Ludwig Castle
+        Castle of Mad King Ludwig
       </h1> */}
       {lobbyStore.rooms.map((room, index) => (
         <Link to={`/room/${room.room_id}`} key={room.room_id}>

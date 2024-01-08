@@ -11,11 +11,10 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { actionStoreUtils, utils } from 'utils'
 
-const { pickRandomKey, generateTimedAction, isCardSelectedById } =
-  actionStoreUtils
-
+const { generateTimedAction, isCardSelectedById } = actionStoreUtils
+const { pickRandomKey } = utils
 //TODO review
 
 class RascalStore {

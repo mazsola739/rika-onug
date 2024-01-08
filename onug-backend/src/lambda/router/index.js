@@ -1,5 +1,5 @@
 const { joinRoomController } = require("../join-room/handler");
-const { actionController } = require("../action/handler");
+const { actionController } = require("../../action/handler");
 const { hydrateController } = require("../hydrate/handler");
 const { readyController } = require("../ready/handler");
 const { hydrateSelectController } = require("../hydrate-select/handler");

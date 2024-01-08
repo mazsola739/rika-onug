@@ -1,9 +1,10 @@
 import { cards, marks, artifacts } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardType, TokenType } from 'types'
-import { deckStoreUtils } from 'utils'
+import { deckStoreUtils, utils } from 'utils'
 
-const { createEmptyCard, createEmptyToken, findById } = deckStoreUtils
+const { createEmptyCard, createEmptyToken } = deckStoreUtils
+const { findById } = utils
 
 class DeckStore {
   deck: CardType[] = cards
