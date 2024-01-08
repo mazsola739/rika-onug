@@ -10,17 +10,17 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { actionStoreUtils, utils } from 'utils'
 
 //TODO review
 
 const {
   generateTimedAction,
   getRandomValueFromObject,
-  isCardSelectedById,
   pickRandomElementFromArray,
   pickRandomUpTo3Players,
 } = actionStoreUtils
+const { isCardSelectedById } = utils
 
 class EmpathStore {
   constructor() {

@@ -1,10 +1,11 @@
 import { ActionCardType, RoleActionType } from 'types'
 import * as ActionStores from '../actionStores'
-import { actionStoreUtils } from 'utils'
+import { actionStoreUtils, utils } from 'utils'
 import { selectedDeckStore } from 'store'
 import { makeAutoObservable } from 'mobx'
 
-const { addRoleActions, isCardSelectedById } = actionStoreUtils
+const { addRoleActions } = actionStoreUtils
+const { isCardSelectedById } = utils
 
 class TwilightPhaseStore {
   constructor() {

@@ -19,18 +19,6 @@ const addRoleActions = <T extends RoleActionStoreType>(
   }
 }
 
-const areAllCardsSelectedById = (
-  selectedCards: ActionCardType[],
-  cardIds: number[]
-): boolean =>
-  cardIds.every((cardId) => isCardSelectedById(selectedCards, cardId))
-
-const areAnyCardsSelectedById = (
-  selectedCards: ActionCardType[],
-  cardIds: number[]
-): boolean =>
-  cardIds.some((cardId) => isCardSelectedById(selectedCards, cardId))
-
 const generateTimedAction = (actionTime: number): RoleActionType => ({
   text: `${time.timertext_prefix}${actionTime}${time.timertext_postfix}`,
   time: actionTime,
@@ -56,11 +44,6 @@ const getRandomValueFromObject = <T>(obj: Record<string, T>): T => {
   const randomKey = pickRandomKey(obj)
   return obj[randomKey]
 }
-
-const isCardSelectedById = (
-  selectedCards: ActionCardType[],
-  cardId: number
-): boolean => selectedCards.some((card) => card.id === cardId)
 
 const shufflePlayers = (numPlayers: number): string[] => {
   const identifiers = Array.from(
@@ -138,14 +121,11 @@ const shuffleAndSplitDeck = (deck: ActionCardType[]): ActionCardType[] => {
 
 export const actionStoreUtils = {
   addRoleActions,
-  areAllCardsSelectedById,
-  areAnyCardsSelectedById,
   generateTimedAction,
   getRandomIndexFromArray,
   getRandomNumber,
   getRandomRoleDisplayName,
   getRandomValueFromObject,
-  isCardSelectedById,
   pickRandom1Player,
   pickRandom2Players,
   pickRandomArray2Players,

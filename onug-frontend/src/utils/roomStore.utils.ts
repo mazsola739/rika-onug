@@ -4,9 +4,7 @@ import { CardType, TeamsType } from 'types'
 const filterByExpansions = <T extends { expansion: string }>(
   list: T[],
   expansions: string[]
-): T[] => {
-  return list.filter((item) => expansions.includes(item.expansion))
-}
+): T[] => list.filter((item) => expansions.includes(item.expansion))
 
 const getFilteredCardsForTeam = (
   team: string,
@@ -16,11 +14,10 @@ const getFilteredCardsForTeam = (
   return deck.filter((card) => validTeams.includes(card.team))
 }
 
-const getOrderedTeams = (teamArray: string[]): string[] => {
-  return teamArray.sort(
+const getOrderedTeams = (teamArray: string[]): string[] =>
+  teamArray.sort(
     (a, b) => teams[a as keyof TeamsType] - teams[b as keyof TeamsType]
   )
-}
 
 export const roomStoreUtils = {
   getFilteredCardsForTeam,

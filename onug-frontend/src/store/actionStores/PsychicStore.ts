@@ -12,9 +12,8 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils, utils } from 'utils'
 
-const { generateTimedAction, pickRandomElementFromArray, isCardSelectedById } =
-  actionStoreUtils
-const { pickRandomKey } = utils
+const { generateTimedAction, pickRandomElementFromArray } = actionStoreUtils
+const { isCardSelectedById, pickRandomKey } = utils
 
 class PsychicStore {
   constructor() {

@@ -10,12 +10,12 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { actionStoreUtils, utils } from 'utils'
 
 //TODO supervillains + heroes
 
-const { areAnyCardsSelectedById, generateTimedAction, isCardSelectedById } =
-  actionStoreUtils
+const { generateTimedAction } = actionStoreUtils
+const { areAnyCardsSelectedById, isCardSelectedById } = utils
 
 class DoppelgangerStore {
   constructor() {

@@ -2,9 +2,10 @@ import { renfield, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { actionStoreUtils, utils } from 'utils'
 
-const { generateTimedAction, isCardSelectedById } = actionStoreUtils
+const { generateTimedAction } = actionStoreUtils
+const { isCardSelectedById } = utils
 
 class RenfieldStore {
   constructor() {

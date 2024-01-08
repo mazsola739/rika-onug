@@ -1,16 +1,13 @@
 import { ActionCardType, RoleActionType } from 'types'
 import * as ActionStores from '../actionStores'
 import { ripplePhaseStore } from 'store'
-import { actionStoreUtils } from 'utils'
+import { actionStoreUtils, utils } from 'utils'
 import { alienIds, supervillainIds, wolfIds } from 'constant'
 import { makeAutoObservable } from 'mobx'
 
-const {
-  addRoleActions,
-  areAllCardsSelectedById,
-  areAnyCardsSelectedById,
-  isCardSelectedById,
-} = actionStoreUtils
+const { addRoleActions } = actionStoreUtils
+const { areAllCardsSelectedById, areAnyCardsSelectedById, isCardSelectedById } =
+  utils
 
 class RippleNightPhaseStore {
   constructor() {

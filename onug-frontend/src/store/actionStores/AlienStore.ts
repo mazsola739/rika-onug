@@ -18,11 +18,10 @@ import { cowStore } from './CowStore'
 
 const {
   generateTimedAction,
-  isCardSelectedById,
   pickRandomElementFromArray,
   pickRandomUpTo3Players,
 } = actionStoreUtils
-const { pickRandomKey } = utils
+const { isCardSelectedById, pickRandomKey } = utils
 
 class AlienStore {
   isNewAlienOrHelper = false

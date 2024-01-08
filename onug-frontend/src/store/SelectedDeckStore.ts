@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { CardType, ActionCardType, MarkType } from 'types'
-import { actionStoreUtils, selectedDeckUtils, utils } from 'utils'
+import { selectedDeckUtils, utils } from 'utils'
 import { action_marks, action_cards } from 'data'
 import { alienIds, assassinIds, evils, roles, vampireIds } from 'constant'
 import { roomStore } from 'store'
@@ -18,8 +18,7 @@ const {
   prohibitDeselectingWerewolf,
   selectCard,
 } = selectedDeckUtils
-const { areAnyCardsSelectedById, isCardSelectedById } = actionStoreUtils
-const { findById } = utils
+const { areAnyCardsSelectedById, findById, isCardSelectedById } = utils
 
 class SelectedDeckStore {
   selectedCards: CardType[] = []

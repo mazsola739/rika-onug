@@ -13,8 +13,8 @@ import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils, utils } from 'utils'
 
-const { generateTimedAction, isCardSelectedById } = actionStoreUtils
-const { pickRandomKey } = utils
+const { generateTimedAction } = actionStoreUtils
+const { isCardSelectedById, pickRandomKey } = utils
 //TODO review
 
 class RascalStore {

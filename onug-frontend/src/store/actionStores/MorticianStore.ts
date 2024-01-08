@@ -12,9 +12,8 @@ import { selectedDeckStore } from 'store/SelectedDeckStore'
 import { ActionCardType, RoleActionType } from 'types'
 import { actionStoreUtils, utils } from 'utils'
 
-const { generateTimedAction, isCardSelectedById, pickRandomElementFromArray } =
-  actionStoreUtils
-const { pickRandomKey } = utils
+const { generateTimedAction, pickRandomElementFromArray } = actionStoreUtils
+const { isCardSelectedById, pickRandomKey } = utils
 
 class MorticianStore {
   constructor() {

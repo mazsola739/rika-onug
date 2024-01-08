@@ -7,11 +7,11 @@ import {
   supervillainIdsToCheck,
   wolfIdsToCheck,
 } from 'constant'
-import { actionStoreUtils, gameTableStoreUtils } from 'utils'
+import { utils, gameTableStoreUtils } from 'utils'
 
 const { checkCardPresence, filterCardsByIds, getRandomItemFromArray } =
   gameTableStoreUtils
-const { areAnyCardsSelectedById } = actionStoreUtils
+const { areAnyCardsSelectedById } = utils
 
 export class GameTableStore {
   players: PlayerType[] = []

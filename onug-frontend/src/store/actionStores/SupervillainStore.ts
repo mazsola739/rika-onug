@@ -2,11 +2,11 @@ import { supervillains, BASE_TIME, ACTION_TIME } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { actionStoreUtils, utils } from 'utils'
 import { evilometerStore } from './EvilometerStore'
 
-const { areAnyCardsSelectedById, generateTimedAction, isCardSelectedById } =
-  actionStoreUtils
+const { generateTimedAction } = actionStoreUtils
+const { areAnyCardsSelectedById, isCardSelectedById } = utils
 
 class SupervillainStore {
   constructor() {
