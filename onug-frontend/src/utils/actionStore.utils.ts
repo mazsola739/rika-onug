@@ -7,7 +7,7 @@ import {
 } from 'types'
 import { utils } from 'utils'
 
-const { getRandomNumber, selectRandomKey } = utils
+const { getRandomNumber, selectRandomKey, shuffleCardsArray } = utils
 
 const addRoleActionsBasedOnCondition = <T extends RoleActionStoreType>(
   store: T,
@@ -56,14 +56,6 @@ const pickRandomUpToThreePlayers = (
   return selectedPlayers.length >= 3
     ? `${selectedPlayers.slice(0, -1).join(', ')}, ${selectedPlayers.slice(-1)}`
     : selectedPlayers.join(` ${conjunction} `)
-}
-
-const shuffleCardsArray = (cards: ActionCardType[]): ActionCardType[] => {
-  for (let i = cards.length - 1; i > 0; i--) {
-    const j = ~~(Math.random() * (i + 1))
-    ;[cards[i], cards[j]] = [cards[j], cards[i]]
-  }
-  return cards
 }
 
 const shuffleAndSplitDeck = (deck: ActionCardType[]): ActionCardType[] => {

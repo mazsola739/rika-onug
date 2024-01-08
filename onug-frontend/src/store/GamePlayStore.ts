@@ -14,8 +14,6 @@ import { rippleNightPhaseStore } from './phaseStores/RippleNightPhaseStore'
 const { addBasicAction, getRandomJoke } = gamePlayStoreUtils
 const { generateTimedAction } = utils
 
-//TODO EASTEREGG
-
 class GamePlayStore {
   isGameStarted = false
   isGameStopped = true

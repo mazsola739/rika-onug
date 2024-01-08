@@ -10,7 +10,8 @@ import {
 import { utils, gameTableStoreUtils } from 'utils'
 
 const { checkCardPresence, filterCardsByIds } = gameTableStoreUtils
-const { areAnyCardSelectedById, getRandomItemFromArray } = utils
+const { areAnyCardSelectedById, getRandomItemFromArray, shuffleCardsArray } =
+  utils
 
 export class GameTableStore {
   players: PlayerType[] = []
@@ -52,14 +53,6 @@ export class GameTableStore {
     return areAnyCardSelectedById(this.selectedCards, hasMarkIds)
   }
 
-  shuffleCards(cards: CardType[]): CardType[] {
-    for (let i = cards.length - 1; i > 0; i--) {
-      const j = ~~(Math.random() * (i + 1))
-      ;[cards[i], cards[j]] = [cards[j], cards[i]]
-    }
-    return cards
-  }
-
   distributeCards(): {
     centerCards: CardType[]
     playerCards: CardType[]
@@ -80,7 +73,7 @@ export class GameTableStore {
     if (chosenSupervillain)
       cards = cards.filter((card) => card !== chosenSupervillain)
 
-    const shuffledCards = this.shuffleCards(cards)
+    const shuffledCards = shuffleCardsArray(cards)
 
     const centerCards = shuffledCards.slice(0, 3)
     const playerCards = shuffledCards.slice(3)

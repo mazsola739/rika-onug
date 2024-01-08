@@ -42,6 +42,14 @@ const selectRandomKey = <T>(obj: T): keyof T => {
   return keys[getRandomNumber(0, keys.length - 1)] as keyof T
 }
 
+const shuffleCardsArray = <T>(cards: T[]): T[] => {
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = ~~(Math.random() * (i + 1))
+    ;[cards[i], cards[j]] = [cards[j], cards[i]]
+  }
+  return cards
+}
+
 export const utils = {
   areAllCardsSelectedById,
   areAnyCardSelectedById,
@@ -51,4 +59,5 @@ export const utils = {
   getRandomItemFromArray,
   getRandomNumber,
   selectRandomKey,
+  shuffleCardsArray,
 }
