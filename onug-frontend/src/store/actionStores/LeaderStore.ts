@@ -2,11 +2,11 @@ import { leader, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils, utils } from 'utils'
+import { utils } from 'utils'
 import { zerbgroobStore } from './ZerbandgroobStore'
 
-const { generateTimedAction } = actionStoreUtils
-const { areAllCardsSelectedById, isCardSelectedById } = utils
+const { areAllCardsSelectedById, generateTimedAction, isCardSelectedById } =
+  utils
 
 class LeaderStore {
   constructor() {

@@ -4,8 +4,8 @@ import { selectedDeckStore } from 'store'
 import { actionStoreUtils, utils } from 'utils'
 import { makeAutoObservable } from 'mobx'
 
-const { addRoleActions } = actionStoreUtils
-const { areAnyCardsSelectedById, isCardSelectedById } = utils
+const { addRoleActionsBasedOnCondition } = actionStoreUtils
+const { areAnyCardSelectedById, isCardSelectedById } = utils
 
 class DuskPhaseStore {
   constructor() {
@@ -19,44 +19,44 @@ class DuskPhaseStore {
   generateActions(): RoleActionType[] {
     const duskPhaseActions: RoleActionType[] = []
 
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.vampireStore,
-      areAnyCardsSelectedById(this.deck, [41, 40, 39]),
+      areAnyCardSelectedById(this.deck, [41, 40, 39]),
       duskPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.thecountStore,
       isCardSelectedById(this.deck, 39),
       duskPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.renfieldStore,
       isCardSelectedById(this.deck, 38),
       duskPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.diseasedStore,
       isCardSelectedById(this.deck, 32),
       duskPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.cupidStore,
       isCardSelectedById(this.deck, 31),
       duskPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.instigatorStore,
       isCardSelectedById(this.deck, 34),
       duskPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.priestStore,
       isCardSelectedById(this.deck, 37),
       duskPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.assassinStore,
-      areAnyCardsSelectedById(this.deck, [29, 28]),
+      areAnyCardSelectedById(this.deck, [29, 28]),
       duskPhaseActions
     )
 

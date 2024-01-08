@@ -2,7 +2,7 @@ import { joke } from 'constant'
 import { RoleActionType } from 'types'
 import { utils } from 'utils'
 
-const { pickRandomKey } = utils
+const { selectRandomKey } = utils
 
 const addBasicAction = (
   actions: RoleActionType[],
@@ -13,7 +13,7 @@ const addBasicAction = (
   actions.push({ text, time, image })
 }
 
-const getRandomJoke = (): string => `JOKE: ${joke[pickRandomKey(joke)]}`
+const getRandomJoke = (): string => `JOKE: ${joke[selectRandomKey(joke)]}`
 
 export const gamePlayStoreUtils = {
   addBasicAction,

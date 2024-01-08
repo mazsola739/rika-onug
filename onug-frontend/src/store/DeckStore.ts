@@ -4,7 +4,7 @@ import { CardType, TokenType } from 'types'
 import { deckStoreUtils, utils } from 'utils'
 
 const { createEmptyCard, createEmptyToken } = deckStoreUtils
-const { findById } = utils
+const { findCardById } = utils
 
 class DeckStore {
   deck: CardType[] = cards
@@ -24,15 +24,15 @@ class DeckStore {
   }
 
   getCardById(cardId: number): CardType {
-    return findById(this.deck, cardId) || this.createEmptyCard()
+    return findCardById(this.deck, cardId) || this.createEmptyCard()
   }
 
   getArtifactById(tokenId: number): TokenType {
-    return findById(this.artifacts, tokenId) || this.createEmptyToken()
+    return findCardById(this.artifacts, tokenId) || this.createEmptyToken()
   }
 
   getMarkById(tokenId: number): TokenType {
-    return findById(this.marks, tokenId) || this.createEmptyToken()
+    return findCardById(this.marks, tokenId) || this.createEmptyToken()
   }
 }
 

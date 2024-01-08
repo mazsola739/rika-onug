@@ -7,6 +7,9 @@ import {
   Marks,
 } from './GameTable.styles'
 import { CardType, MarkType, PlayerType, TokenType } from 'types'
+import { utils } from 'utils'
+
+const { getRandomNumber } = utils
 
 const renderPlayers = (players: PlayerType[]) => (
   <CardContainer>
@@ -69,7 +72,7 @@ const renderArtifacts = (artifacts: TokenType[]) => (
 )
 
 const getRandomPlayer = (players: PlayerType[]): PlayerType => {
-  const randomIndex = Math.floor(Math.random() * players.length)
+  const randomIndex = getRandomNumber(0, players.length - 1)
   return players[randomIndex]
 }
 

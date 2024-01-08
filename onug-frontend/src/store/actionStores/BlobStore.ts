@@ -3,7 +3,7 @@ import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
 import { utils } from 'utils'
 
-const { pickRandomKey } = utils
+const { selectRandomKey } = utils
 
 class BlobStore {
   constructor() {
@@ -13,7 +13,7 @@ class BlobStore {
   generateActions(): RoleActionType[] {
     const blobActions: RoleActionType[] = []
 
-    const firstActionKey = pickRandomKey(random_blob)
+    const firstActionKey = selectRandomKey(random_blob)
 
     const getSecondActionText = (key: string): string => {
       if (key.includes('1p')) {

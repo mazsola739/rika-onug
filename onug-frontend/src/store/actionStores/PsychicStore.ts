@@ -10,10 +10,14 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils, utils } from 'utils'
+import { utils } from 'utils'
 
-const { generateTimedAction, pickRandomElementFromArray } = actionStoreUtils
-const { isCardSelectedById, pickRandomKey } = utils
+const {
+  generateTimedAction,
+  isCardSelectedById,
+  getRandomItemFromArray,
+  selectRandomKey,
+} = utils
 
 class PsychicStore {
   constructor() {
@@ -31,10 +35,10 @@ class PsychicStore {
       actionText: string
       randomIdentifierValue: string
     } => {
-      const randomActionKey = pickRandomKey(random_psychic)
+      const randomActionKey = selectRandomKey(random_psychic)
       const actionText =
         random_psychic[randomActionKey as keyof typeof random_psychic]
-      const randomIdentifierKey = pickRandomElementFromArray(psychicStoreKeys)
+      const randomIdentifierKey = getRandomItemFromArray(psychicStoreKeys)
       const randomIdentifierValue =
         identifier[randomIdentifierKey as keyof typeof identifier]
 

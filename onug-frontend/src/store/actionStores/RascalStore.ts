@@ -11,10 +11,14 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils, utils } from 'utils'
+import { utils } from 'utils'
 
-const { generateTimedAction } = actionStoreUtils
-const { isCardSelectedById, pickRandomKey } = utils
+const {
+  generateTimedAction,
+  isCardSelectedById,
+  getRandomNumber,
+  selectRandomKey,
+} = utils
 //TODO review
 
 class RascalStore {
@@ -29,9 +33,9 @@ class RascalStore {
   generateActions(): RoleActionType[] {
     const rascalActions: RoleActionType[] = []
 
-    const randomRascalActionKey = pickRandomKey(random_rascal)
+    const randomRascalActionKey = selectRandomKey(random_rascal)
 
-    const randomDoppelgangerActionKey = pickRandomKey(random_rascal)
+    const randomDoppelgangerActionKey = selectRandomKey(random_rascal)
 
     rascalActions.push(
       { text: rascal.rascal_wake_text, time: BASE_TIME, image: 'onua_rascal' },
@@ -61,7 +65,7 @@ class RascalStore {
       }
 
       const selectedIdentifierKey =
-        identifierKeys[Math.floor(Math.random() * identifierKeys.length)]
+        identifierKeys[getRandomNumber(0, identifierKeys.length - 1)]
       const selectedIdentifierValue =
         identifier[selectedIdentifierKey as keyof typeof identifier]
       rascalActions.push({
@@ -120,7 +124,7 @@ class RascalStore {
       }
 
       const selectedIdentifierKey =
-        identifierKeys[Math.floor(Math.random() * identifierKeys.length)]
+        identifierKeys[getRandomNumber(0, identifierKeys.length - 1)]
       const selectedIdentifierValue =
         identifier[selectedIdentifierKey as keyof typeof identifier]
       rascalActions.push({

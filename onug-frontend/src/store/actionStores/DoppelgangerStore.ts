@@ -10,12 +10,12 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils, utils } from 'utils'
+import { utils } from 'utils'
 
 //TODO supervillains + heroes
 
-const { generateTimedAction } = actionStoreUtils
-const { areAnyCardsSelectedById, isCardSelectedById } = utils
+const { areAnyCardSelectedById, generateTimedAction, isCardSelectedById } =
+  utils
 
 class DoppelgangerStore {
   constructor() {
@@ -62,7 +62,7 @@ class DoppelgangerStore {
         time: BASE_TIME,
         image: 'onuw_doppelganger',
       },
-      ...(areAnyCardsSelectedById(this.deck, doppelgangerActionsIds)
+      ...(areAnyCardSelectedById(this.deck, doppelgangerActionsIds)
         ? verboseText
         : []),
       ...(isCardSelectedById(this.deck, 7)

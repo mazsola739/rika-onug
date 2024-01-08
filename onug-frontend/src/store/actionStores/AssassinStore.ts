@@ -2,11 +2,14 @@ import { assassins, BASE_TIME, ACTION_TIME, doppelganger } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils, utils } from 'utils'
+import { utils } from 'utils'
 
-const { generateTimedAction } = actionStoreUtils
-const { areAllCardsSelectedById, areAnyCardsSelectedById, isCardSelectedById } =
-  utils
+const {
+  areAllCardsSelectedById,
+  areAnyCardSelectedById,
+  generateTimedAction,
+  isCardSelectedById,
+} = utils
 
 class AssassinStore {
   constructor() {
@@ -54,7 +57,7 @@ class AssassinStore {
     // Only ID 29 is active
     if (
       isCardSelectedById(this.deck, 29) &&
-      !areAnyCardsSelectedById(this.deck, [1, 28])
+      !areAnyCardSelectedById(this.deck, [1, 28])
     ) {
       assassinActions.push(
         {
@@ -105,7 +108,7 @@ class AssassinStore {
     // Only ID 28 is active
     if (
       isCardSelectedById(this.deck, 28) &&
-      !areAnyCardsSelectedById(this.deck, [1, 29])
+      !areAnyCardSelectedById(this.deck, [1, 29])
     ) {
       assassinActions.push(
         {

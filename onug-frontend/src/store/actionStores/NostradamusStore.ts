@@ -1,11 +1,11 @@
 import { nostradamus, BASE_TIME, ACTION_TIME, nostradamusTeam } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { utils } from 'utils'
 
 //TODO nostradamus doppelganger?
 
-const { generateTimedAction } = actionStoreUtils
+const { generateTimedAction } = utils
 
 const ID = 0 //TODO delete
 

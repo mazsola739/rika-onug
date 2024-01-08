@@ -4,7 +4,7 @@ import { actionStoreUtils, utils } from 'utils'
 import { selectedDeckStore } from 'store'
 import { makeAutoObservable } from 'mobx'
 
-const { addRoleActions } = actionStoreUtils
+const { addRoleActionsBasedOnCondition } = actionStoreUtils
 const { isCardSelectedById } = utils
 
 class TwilightPhaseStore {
@@ -19,22 +19,22 @@ class TwilightPhaseStore {
   generateActions(): RoleActionType[] {
     const twilightActionsPhase: RoleActionType[] = []
 
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.oracleStore,
       isCardSelectedById(this.deck, 50),
       twilightActionsPhase
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.copycatStore,
       isCardSelectedById(this.deck, 30),
       twilightActionsPhase
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.mirrormanStore,
       isCardSelectedById(this.deck, 64),
       twilightActionsPhase
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.doppelgangerStore,
       isCardSelectedById(this.deck, 1),
       twilightActionsPhase

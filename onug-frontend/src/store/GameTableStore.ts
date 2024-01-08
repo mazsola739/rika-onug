@@ -9,9 +9,8 @@ import {
 } from 'constant'
 import { utils, gameTableStoreUtils } from 'utils'
 
-const { checkCardPresence, filterCardsByIds, getRandomItemFromArray } =
-  gameTableStoreUtils
-const { areAnyCardsSelectedById } = utils
+const { checkCardPresence, filterCardsByIds } = gameTableStoreUtils
+const { areAnyCardSelectedById, getRandomItemFromArray } = utils
 
 export class GameTableStore {
   players: PlayerType[] = []
@@ -50,12 +49,12 @@ export class GameTableStore {
   }
 
   get hasMarks(): boolean {
-    return areAnyCardsSelectedById(this.selectedCards, hasMarkIds)
+    return areAnyCardSelectedById(this.selectedCards, hasMarkIds)
   }
 
   shuffleCards(cards: CardType[]): CardType[] {
     for (let i = cards.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1))
+      const j = ~~(Math.random() * (i + 1))
       ;[cards[i], cards[j]] = [cards[j], cards[i]]
     }
     return cards

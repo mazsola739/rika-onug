@@ -18,7 +18,7 @@ const {
   prohibitDeselectingWerewolf,
   selectCard,
 } = selectedDeckUtils
-const { areAnyCardsSelectedById, findById, isCardSelectedById } = utils
+const { areAnyCardSelectedById, findCardById, isCardSelectedById } = utils
 
 class SelectedDeckStore {
   selectedCards: CardType[] = []
@@ -133,14 +133,14 @@ class SelectedDeckStore {
 
   revertCardUpdateOnFrontEnd(cardId: number): void {
     if (this.isSelected(cardId))
-      this.handleDeselectCard(findById(this.deck, cardId))
-    else this.handleSelectCard(findById(this.deck, cardId))
+      this.handleDeselectCard(findCardById(this.deck, cardId))
+    else this.handleSelectCard(findCardById(this.deck, cardId))
   }
 
   updateSelectedCards(cardIds: number[]): void {
     this.selectedCards = []
     cardIds.forEach((cardId) => {
-      this.handleSelectCard(findById(this.deck, cardId))
+      this.handleSelectCard(findCardById(this.deck, cardId))
     })
   }
 
@@ -172,7 +172,7 @@ class SelectedDeckStore {
     this.selectedMarks.forEach((mark) => {
       switch (mark.token_name) {
         case 'mark_of_vampire':
-          mark.is_in_deck = areAnyCardsSelectedById(
+          mark.is_in_deck = areAnyCardSelectedById(
             this.selectedCards,
             vampireIds
           )
@@ -196,7 +196,7 @@ class SelectedDeckStore {
           mark.is_in_deck = isCardSelectedById(this.selectedCards, 37)
           break
         case 'mark_of_assassin':
-          mark.is_in_deck = areAnyCardsSelectedById(
+          mark.is_in_deck = areAnyCardSelectedById(
             this.selectedCards,
             assassinIds
           )

@@ -14,13 +14,10 @@ import { actionStoreUtils, utils } from 'utils'
 
 //TODO review
 
-const {
-  generateTimedAction,
-  getRandomValueFromObject,
-  pickRandomElementFromArray,
-  pickRandomUpTo3Players,
-} = actionStoreUtils
-const { isCardSelectedById } = utils
+const { getRandomValueFromObject, pickRandomUpToThreePlayers } =
+  actionStoreUtils
+const { generateTimedAction, isCardSelectedById, getRandomItemFromArray } =
+  utils
 
 class EmpathStore {
   constructor() {
@@ -35,21 +32,21 @@ class EmpathStore {
     const empathActions: RoleActionType[] = []
 
     const randomEmpathInteractionKey =
-      pickRandomElementFromArray(empathStoreAllKeys)
+      getRandomItemFromArray(empathStoreAllKeys)
     const chosenEmpathText =
       identifier[randomEmpathInteractionKey as keyof typeof identifier] ||
       (randomEmpathInteractionKey === 'activePlayers'
-        ? pickRandomUpTo3Players(selectedDeckStore.totalPlayers, 'and')
+        ? pickRandomUpToThreePlayers(selectedDeckStore.totalPlayers, 'and')
         : randomEmpathInteractionKey)
     const randomEmpathActionText = getRandomValueFromObject(random_empath)
 
     // Doppelganger
     const randomDoppelgangerInteractionKey =
-      pickRandomElementFromArray(empathStoreAllKeys)
+      getRandomItemFromArray(empathStoreAllKeys)
     const chosenDoppelgangerText =
       identifier[randomDoppelgangerInteractionKey as keyof typeof identifier] ||
       (randomDoppelgangerInteractionKey === 'activePlayers'
-        ? pickRandomUpTo3Players(selectedDeckStore.totalPlayers, 'and')
+        ? pickRandomUpToThreePlayers(selectedDeckStore.totalPlayers, 'and')
         : randomDoppelgangerInteractionKey)
     const randomDoppelgangerActionText = getRandomValueFromObject(random_empath)
 

@@ -16,12 +16,13 @@ import { cowStore } from './CowStore'
 //TODO oracle effect
 //TODO shorten timer
 
+const { pickRandomUpToThreePlayers } = actionStoreUtils
 const {
   generateTimedAction,
-  pickRandomElementFromArray,
-  pickRandomUpTo3Players,
-} = actionStoreUtils
-const { isCardSelectedById, pickRandomKey } = utils
+  isCardSelectedById,
+  getRandomItemFromArray,
+  selectRandomKey,
+} = utils
 
 class AlienStore {
   isNewAlienOrHelper = false
@@ -42,13 +43,13 @@ class AlienStore {
     const alienActions: RoleActionType[] = []
     const chosenAlienActions: RoleActionType[] = []
 
-    const chosenAlienActionKey = pickRandomKey(random_aliens)
+    const chosenAlienActionKey = selectRandomKey(random_aliens)
 
     if (chosenAlienActionKey.includes('view')) {
-      const identifierKey = pickRandomElementFromArray(alienStoreAnyKeys)
+      const identifierKey = getRandomItemFromArray(alienStoreAnyKeys)
       const playerText: string =
         identifierKey === 'activePlayers'
-          ? pickRandomUpTo3Players(this.totalPlayers, 'or')
+          ? pickRandomUpToThreePlayers(this.totalPlayers, 'or')
           : identifier[identifierKey]
 
       chosenAlienActions.push(
@@ -64,7 +65,7 @@ class AlienStore {
       chosenAlienActionKey.includes('alienhelper')
     ) {
       this.isNewAlienOrHelper = true
-      const playerKey = pickRandomElementFromArray(alienStoreAllKeys)
+      const playerKey = getRandomItemFromArray(alienStoreAllKeys)
       const playerText: string = identifier[playerKey]
 
       chosenAlienActions.push(

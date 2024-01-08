@@ -5,8 +5,8 @@ import { actionStoreUtils, utils } from 'utils'
 import { alienIds, supervillainIds, wolfIds } from 'constant'
 import { makeAutoObservable } from 'mobx'
 
-const { addRoleActions } = actionStoreUtils
-const { areAllCardsSelectedById, areAnyCardsSelectedById, isCardSelectedById } =
+const { addRoleActionsBasedOnCondition } = actionStoreUtils
+const { areAllCardsSelectedById, areAnyCardSelectedById, isCardSelectedById } =
   utils
 
 class RippleNightPhaseStore {
@@ -21,230 +21,230 @@ class RippleNightPhaseStore {
   generateActions(): RoleActionType[] {
     const rippleNightPhaseActions: RoleActionType[] = []
 
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.alienStore,
-      areAnyCardsSelectedById(this.rippleDeck, alienIds),
+      areAnyCardSelectedById(this.rippleDeck, alienIds),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.groobzerbStore,
       areAllCardsSelectedById(this.rippleDeck, [47, 54]),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.bodysnatcherStore,
       isCardSelectedById(this.rippleDeck, 74),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.supervillainStore,
-      (areAnyCardsSelectedById(this.rippleDeck, [57, 65, 69]) &&
+      (areAnyCardSelectedById(this.rippleDeck, [57, 65, 69]) &&
         (isCardSelectedById(this.rippleDeck, 60) ||
-          areAnyCardsSelectedById(this.rippleDeck, [58]))) ||
-        (areAnyCardsSelectedById(this.rippleDeck, supervillainIds) &&
+          areAnyCardSelectedById(this.rippleDeck, [58]))) ||
+        (areAnyCardSelectedById(this.rippleDeck, supervillainIds) &&
           isCardSelectedById(this.rippleDeck, 58)),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.werewolfStore,
-      areAnyCardsSelectedById(this.rippleDeck, wolfIds),
+      areAnyCardSelectedById(this.rippleDeck, wolfIds),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.alphawolfStore,
       isCardSelectedById(this.rippleDeck, 17),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.mysticwolfStore,
       isCardSelectedById(this.rippleDeck, 22),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.minionStore,
       isCardSelectedById(this.rippleDeck, 32) &&
-        areAnyCardsSelectedById(this.rippleDeck, wolfIds),
+        areAnyCardSelectedById(this.rippleDeck, wolfIds),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.apprenticetannerStore,
       areAllCardsSelectedById(this.rippleDeck, [71, 10]),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.leaderStore,
       isCardSelectedById(this.rippleDeck, 48) &&
-        areAnyCardsSelectedById(this.rippleDeck, alienIds),
+        areAnyCardSelectedById(this.rippleDeck, alienIds),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.madscientistStore,
       isCardSelectedById(this.rippleDeck, 63),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.internStore,
       isCardSelectedById(this.rippleDeck, 62),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.masonStore,
       areAllCardsSelectedById(this.rippleDeck, [5, 6]),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.thingStore,
       isCardSelectedById(this.rippleDeck, 85),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.annoyingladStore,
       isCardSelectedById(this.rippleDeck, 55),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.seerStore,
       isCardSelectedById(this.rippleDeck, 9),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.apprenticeseerStore,
       isCardSelectedById(this.rippleDeck, 18),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.paranormalinvestigatorStore,
       isCardSelectedById(this.rippleDeck, 23),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.marksmanStore,
       isCardSelectedById(this.rippleDeck, 35),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.nostradamusStore,
       isCardSelectedById(this.rippleDeck, 80),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.psychicStore,
       isCardSelectedById(this.rippleDeck, 51),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.detectorStore,
       isCardSelectedById(this.rippleDeck, 56),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.robberStore,
       isCardSelectedById(this.rippleDeck, 8),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.witchStore,
       isCardSelectedById(this.rippleDeck, 27),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.pickpocketStore,
       isCardSelectedById(this.rippleDeck, 36),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.roleretrieverStore,
       isCardSelectedById(this.rippleDeck, 66),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.voodoolouStore,
       isCardSelectedById(this.rippleDeck, 70),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.troublemakerStore,
       isCardSelectedById(this.rippleDeck, 11),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.villageidiotStore,
       isCardSelectedById(this.rippleDeck, 26),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.auraseerStore,
       isCardSelectedById(this.rippleDeck, 72),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.gremlinStore,
       isCardSelectedById(this.rippleDeck, 33),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.rascalStore,
       isCardSelectedById(this.rippleDeck, 52),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.switcherooStore,
       isCardSelectedById(this.rippleDeck, 68),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.drunkStore,
       isCardSelectedById(this.rippleDeck, 2),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.insomniacStore,
       isCardSelectedById(this.rippleDeck, 4),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.selfawarenessgirlStore,
       isCardSelectedById(this.rippleDeck, 67),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.squireStore,
       isCardSelectedById(this.rippleDeck, 83) &&
-        areAnyCardsSelectedById(this.rippleDeck, wolfIds),
+        areAnyCardSelectedById(this.rippleDeck, wolfIds),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.familymanStore,
       isCardSelectedById(this.rippleDeck, 78),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.beholderStore,
       isCardSelectedById(this.rippleDeck, 73) &&
-        areAnyCardsSelectedById(this.rippleDeck, [9, 18]),
+        areAnyCardSelectedById(this.rippleDeck, [9, 18]),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.revealerStore,
       isCardSelectedById(this.rippleDeck, 24),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.exposerStore,
       isCardSelectedById(this.rippleDeck, 46),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.flipperStore,
       isCardSelectedById(this.rippleDeck, 59),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.empathStore,
       isCardSelectedById(this.rippleDeck, 77),
       rippleNightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.morticiansStore,
       isCardSelectedById(this.rippleDeck, 49),
       rippleNightPhaseActions

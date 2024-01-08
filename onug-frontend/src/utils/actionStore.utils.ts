@@ -1,4 +1,4 @@
-import { identifier_player, roles, time } from 'constant'
+import { identifier_player, roles } from 'constant'
 import {
   ActionCardType,
   RepeatroleType,
@@ -7,9 +7,9 @@ import {
 } from 'types'
 import { utils } from 'utils'
 
-const { pickRandomKey } = utils
+const { getRandomNumber, selectRandomKey } = utils
 
-const addRoleActions = <T extends RoleActionStoreType>(
+const addRoleActionsBasedOnCondition = <T extends RoleActionStoreType>(
   store: T,
   condition: boolean,
   actions: RoleActionType[]
@@ -19,30 +19,71 @@ const addRoleActions = <T extends RoleActionStoreType>(
   }
 }
 
-const generateTimedAction = (actionTime: number): RoleActionType => ({
-  text: `${time.timertext_prefix}${actionTime}${time.timertext_postfix}`,
-  time: actionTime,
-  image: '',
-})
-
-const getRandomIndexFromArray = (
-  arr: string[] | RepeatroleType[] | ActionCardType[]
-): number => {
-  return Math.floor(Math.random() * arr.length)
-}
-
-const getRandomNumber = (min: number, max: number): number =>
-  Math.floor(Math.random() * (max - min + 1)) + min
-
-const getRandomRoleDisplayName = (array: RepeatroleType[]): string => {
-  const randomIndex = getRandomIndexFromArray(array)
-  const roleName = array[randomIndex].name
-  return roles[roleName]
-}
+const getRandomRoleDisplayName = (array: RepeatroleType[]): string =>
+  roles[array[getRandomNumber(0, array.length - 1)].name]
 
 const getRandomValueFromObject = <T>(obj: Record<string, T>): T => {
-  const randomKey = pickRandomKey(obj)
+  const randomKey = selectRandomKey(obj)
   return obj[randomKey]
+}
+
+const pickRandomOnePlayer = (numPlayers: number): string => {
+  const shuffledPlayers = shufflePlayers(numPlayers)
+  return shuffledPlayers[0]
+}
+
+const pickRandomTwoPlayers = (numPlayers: number): string => {
+  const shuffledPlayers = shufflePlayers(numPlayers)
+  const selectedPlayers = shuffledPlayers.slice(0, 2)
+  return selectedPlayers.join(' and ')
+}
+
+const pickRandomTwoPlayersArray = (numPlayers: number): string[] => {
+  const shuffledPlayers = shufflePlayers(numPlayers)
+  return shuffledPlayers.slice(0, 2)
+}
+
+const pickRandomUpToThreePlayers = (
+  numPlayers: number,
+  conjunction: string
+): string => {
+  const shuffledPlayers = shufflePlayers(numPlayers)
+  const selectedPlayers = shuffledPlayers.slice(
+    0,
+    Math.min(3, shuffledPlayers.length)
+  )
+
+  return selectedPlayers.length >= 3
+    ? `${selectedPlayers.slice(0, -1).join(', ')}, ${selectedPlayers.slice(-1)}`
+    : selectedPlayers.join(` ${conjunction} `)
+}
+
+const shuffleCardsArray = (cards: ActionCardType[]): ActionCardType[] => {
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = ~~(Math.random() * (i + 1))
+    ;[cards[i], cards[j]] = [cards[j], cards[i]]
+  }
+  return cards
+}
+
+const shuffleAndSplitDeck = (deck: ActionCardType[]): ActionCardType[] => {
+  const shuffledDeck = shuffleCardsArray([...deck])
+  const rippleDeck: ActionCardType[] = []
+
+  rippleDeck.push(
+    shuffledDeck.splice(getRandomNumber(0, shuffledDeck.length - 1), 1)[0]
+  )
+
+  while (shuffledDeck.length > 0) {
+    const randomIndex = getRandomNumber(0, shuffledDeck.length - 1)
+    if (Math.random() < 0.5) {
+      rippleDeck.push(shuffledDeck.splice(randomIndex, 1)[0])
+    } else {
+      shuffledDeck.splice(randomIndex, 1)
+    }
+  }
+
+  return rippleDeck
 }
 
 const shufflePlayers = (numPlayers: number): string[] => {
@@ -54,82 +95,13 @@ const shufflePlayers = (numPlayers: number): string[] => {
   return [...identifiers].sort(() => 0.5 - Math.random())
 }
 
-const pickRandom1Player = (numPlayers: number): string => {
-  const shuffledPlayers = shufflePlayers(numPlayers)
-  return shuffledPlayers[0]
-}
-
-const pickRandom2Players = (numPlayers: number): string => {
-  const shuffledPlayers = shufflePlayers(numPlayers)
-  const selectedPlayers = shuffledPlayers.slice(0, 2)
-  return selectedPlayers.join(' and ')
-}
-
-const pickRandomArray2Players = (numPlayers: number): string[] => {
-  const shuffledPlayers = shufflePlayers(numPlayers)
-  return shuffledPlayers.slice(0, 2)
-}
-
-const pickRandomElementFromArray = <T>(arr: T[]): T => {
-  const randomIndex = Math.floor(Math.random() * arr.length)
-  return arr[randomIndex]
-}
-
-const pickRandomUpTo3Players = (
-  numPlayers: number,
-  conjunction: string
-): string => {
-  const shuffledPlayers = shufflePlayers(numPlayers)
-  const selectedPlayers = shuffledPlayers.slice(
-    0,
-    Math.min(3, shuffledPlayers.length)
-  )
-
-  return selectedPlayers.length >= 3
-    ? `${selectedPlayers.slice(0, -2).join(', ')}, ${selectedPlayers
-        .slice(-2)
-        .join(` ${conjunction} `)}`
-    : selectedPlayers.join(` ${conjunction} `)
-}
-
-const shuffleArray = (cards: ActionCardType[]): ActionCardType[] => {
-  for (let i = cards.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[cards[i], cards[j]] = [cards[j], cards[i]]
-  }
-  return cards
-}
-
-const shuffleAndSplitDeck = (deck: ActionCardType[]): ActionCardType[] => {
-  const shuffledDeck = shuffleArray([...deck])
-  const rippleDeck: ActionCardType[] = []
-
-  const randomIndex = getRandomIndexFromArray(shuffledDeck)
-  rippleDeck.push(shuffledDeck.splice(randomIndex, 1)[0])
-
-  while (shuffledDeck.length > 0) {
-    const randomIndex = getRandomIndexFromArray(shuffledDeck)
-    if (Math.random() < 0.5) {
-      rippleDeck.push(shuffledDeck.splice(randomIndex, 1)[0])
-    } else {
-      shuffledDeck.splice(randomIndex, 1)
-    }
-  }
-
-  return rippleDeck
-}
-
 export const actionStoreUtils = {
-  addRoleActions,
-  generateTimedAction,
-  getRandomIndexFromArray,
-  getRandomNumber,
+  addRoleActionsBasedOnCondition,
   getRandomRoleDisplayName,
   getRandomValueFromObject,
-  pickRandom1Player,
-  pickRandom2Players,
-  pickRandomArray2Players,
-  pickRandomElementFromArray,
-  pickRandomUpTo3Players,
+  pickRandomOnePlayer,
+  pickRandomTwoPlayers,
+  pickRandomTwoPlayersArray,
+  pickRandomUpToThreePlayers,
   shuffleAndSplitDeck,
 }

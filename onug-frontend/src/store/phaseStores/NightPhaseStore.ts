@@ -5,8 +5,8 @@ import { actionStoreUtils, utils } from 'utils'
 import { alienIds, supervillainIds, wolfIds } from 'constant'
 import { makeAutoObservable } from 'mobx'
 
-const { addRoleActions } = actionStoreUtils
-const { areAllCardsSelectedById, areAnyCardsSelectedById, isCardSelectedById } =
+const { addRoleActionsBasedOnCondition } = actionStoreUtils
+const { areAllCardsSelectedById, areAnyCardSelectedById, isCardSelectedById } =
   utils
 
 class NightPhaseStore {
@@ -21,250 +21,250 @@ class NightPhaseStore {
   generateActions(): RoleActionType[] {
     const nightPhaseActions: RoleActionType[] = []
 
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.loverStore,
       isCardSelectedById(this.deck, 31),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.sentinelStore,
       isCardSelectedById(this.deck, 25),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.alienStore,
-      areAnyCardsSelectedById(this.deck, alienIds),
+      areAnyCardSelectedById(this.deck, alienIds),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.groobzerbStore,
       areAllCardsSelectedById(this.deck, [47, 54]),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.bodysnatcherStore,
       isCardSelectedById(this.deck, 74),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.supervillainStore,
-      (areAnyCardsSelectedById(this.deck, [57, 65, 69]) &&
+      (areAnyCardSelectedById(this.deck, [57, 65, 69]) &&
         (isCardSelectedById(this.deck, 60) ||
-          areAnyCardsSelectedById(this.deck, [58]))) ||
-        (areAnyCardsSelectedById(this.deck, supervillainIds) &&
+          areAnyCardSelectedById(this.deck, [58]))) ||
+        (areAnyCardSelectedById(this.deck, supervillainIds) &&
           isCardSelectedById(this.deck, 58)),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.werewolfStore,
-      areAnyCardsSelectedById(this.deck, wolfIds),
+      areAnyCardSelectedById(this.deck, wolfIds),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.alphawolfStore,
       isCardSelectedById(this.deck, 17),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.mysticwolfStore,
       isCardSelectedById(this.deck, 22),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.minionStore,
       isCardSelectedById(this.deck, 32) &&
-        areAnyCardsSelectedById(this.deck, wolfIds),
+        areAnyCardSelectedById(this.deck, wolfIds),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.apprenticetannerStore,
       areAllCardsSelectedById(this.deck, [71, 10]),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.leaderStore,
       isCardSelectedById(this.deck, 48) &&
-        areAnyCardsSelectedById(this.deck, alienIds),
+        areAnyCardSelectedById(this.deck, alienIds),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.madscientistStore,
       isCardSelectedById(this.deck, 63),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.internStore,
       isCardSelectedById(this.deck, 62),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.masonStore,
       areAllCardsSelectedById(this.deck, [5, 6]),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.thingStore,
       isCardSelectedById(this.deck, 85),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.annoyingladStore,
       isCardSelectedById(this.deck, 55),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.seerStore,
       isCardSelectedById(this.deck, 9),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.apprenticeseerStore,
       isCardSelectedById(this.deck, 18),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.paranormalinvestigatorStore,
       isCardSelectedById(this.deck, 23),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.marksmanStore,
       isCardSelectedById(this.deck, 35),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.nostradamusStore,
       isCardSelectedById(this.deck, 80),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.psychicStore,
       isCardSelectedById(this.deck, 51),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.detectorStore,
       isCardSelectedById(this.deck, 56),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.robberStore,
       isCardSelectedById(this.deck, 8),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.witchStore,
       isCardSelectedById(this.deck, 27),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.pickpocketStore,
       isCardSelectedById(this.deck, 36),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.roleretrieverStore,
       isCardSelectedById(this.deck, 66),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.voodoolouStore,
       isCardSelectedById(this.deck, 70),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.troublemakerStore,
       isCardSelectedById(this.deck, 11),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.villageidiotStore,
       isCardSelectedById(this.deck, 26),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.auraseerStore,
       isCardSelectedById(this.deck, 72),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.gremlinStore,
       isCardSelectedById(this.deck, 33),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.rascalStore,
       isCardSelectedById(this.deck, 52),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.switcherooStore,
       isCardSelectedById(this.deck, 68),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.drunkStore,
       isCardSelectedById(this.deck, 2),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.insomniacStore,
       isCardSelectedById(this.deck, 4),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.selfawarenessgirlStore,
       isCardSelectedById(this.deck, 67),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.squireStore,
       isCardSelectedById(this.deck, 83) &&
-        areAnyCardsSelectedById(this.deck, wolfIds),
+        areAnyCardSelectedById(this.deck, wolfIds),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.familymanStore,
       isCardSelectedById(this.deck, 78),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.beholderStore,
       isCardSelectedById(this.deck, 73) &&
-        areAnyCardsSelectedById(this.deck, [9, 18]),
+        areAnyCardSelectedById(this.deck, [9, 18]),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.revealerStore,
       isCardSelectedById(this.deck, 24),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.exposerStore,
       isCardSelectedById(this.deck, 46),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.flipperStore,
       isCardSelectedById(this.deck, 59),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.empathStore,
       isCardSelectedById(this.deck, 77),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.curatorStore,
       isCardSelectedById(this.deck, 20),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.blobStore,
       isCardSelectedById(this.deck, 44),
       nightPhaseActions
     )
-    addRoleActions(
+    addRoleActionsBasedOnCondition(
       ActionStores.morticiansStore,
       isCardSelectedById(this.deck, 49),
       nightPhaseActions

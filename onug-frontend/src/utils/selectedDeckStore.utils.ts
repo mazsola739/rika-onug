@@ -18,13 +18,10 @@ const containsByCriteria = (
   selectedCards: CardType[],
   criteria: ((card: CardType) => boolean) | number | string[]
 ): boolean => {
-  if (typeof criteria === 'function') {
-    return selectedCards.some(criteria)
-  } else if (Array.isArray(criteria)) {
+  if (typeof criteria === 'function') return selectedCards.some(criteria)
+  if (Array.isArray(criteria))
     return criteria.some((c) => containsByName(selectedCards, c))
-  } else {
-    return containsById(selectedCards, criteria as number)
-  }
+  return containsById(selectedCards, criteria as number)
 }
 
 const containsByName = (selectedCards: CardType[], cardName: string): boolean =>
@@ -34,9 +31,7 @@ const deselectCard = (selectedCards: CardType[], card: CardType): void => {
   const index = selectedCards.findIndex(
     (selectedCard) => selectedCard.id === card.id
   )
-  if (index !== -1) {
-    selectedCards.splice(index, 1)
-  }
+  if (index !== -1) selectedCards.splice(index, 1)
 }
 
 const determineTotalPlayers = (
@@ -47,26 +42,18 @@ const determineTotalPlayers = (
   const hasTemptress = containsByName(selectedCards, roles.role_temptress)
 
   let totalPlayers
-  if (hasAlphaWolf && hasTemptress) {
-    totalPlayers = totalCharacters - 5
-  } else if (hasAlphaWolf || hasTemptress) {
-    totalPlayers = totalCharacters - 4
-  } else {
-    totalPlayers = totalCharacters - 3
-  }
+  if (hasAlphaWolf && hasTemptress) totalPlayers = totalCharacters - 5
+  else if (hasAlphaWolf || hasTemptress) totalPlayers = totalCharacters - 4
+  else totalPlayers = totalCharacters - 3
 
   return Math.max(totalPlayers, 0)
 }
 
-const handleAlphaWolf = (selectedCards: CardType[]): void => {
-  handleCard(selectedCards, wolfIdsToCheck, alphaWolfId)
-}
-
-const handleCard = (
+const handleCardByRole = (
   selectedCards: CardType[],
   idsToCheck: number[],
   defaultCardId: number
-) => {
+): void => {
   if (!containsByIds(selectedCards, idsToCheck)) {
     const cardToAdd = cards.find(
       (card) => card.id === defaultCardId
@@ -75,25 +62,20 @@ const handleCard = (
   }
 }
 
-const handleTemptress = (selectedCards: CardType[]): void => {
-  handleCard(selectedCards, supervillainIdsToCheck, temptressId)
-}
+const handleAlphaWolf = (selectedCards: CardType[]): void =>
+  handleCardByRole(selectedCards, wolfIdsToCheck, alphaWolfId)
+
+const handleTemptress = (selectedCards: CardType[]): void =>
+  handleCardByRole(selectedCards, supervillainIdsToCheck, temptressId)
 
 const hasSpecificRolesInDeck = (
   gamePlayDeck: ActionCardType[],
   rolesToCheck: string[]
-): boolean => {
-  return rolesToCheck.every((role) =>
-    gamePlayDeck.some((card) => card.team === role)
-  )
-}
+): boolean =>
+  rolesToCheck.every((role) => gamePlayDeck.some((card) => card.team === role))
 
-const isMirrorManOrCopycatSelected = (selectedCards: CardType[]): boolean => {
-  return containsByCriteria(selectedCards, [
-    roles.role_mirrorman,
-    roles.role_copycat,
-  ])
-}
+const isMirrorManOrCopycatSelected = (selectedCards: CardType[]): boolean =>
+  containsByCriteria(selectedCards, [roles.role_mirrorman, roles.role_copycat])
 
 const prohibitDeselectingSupervillain = (
   selectedCards: CardType[],

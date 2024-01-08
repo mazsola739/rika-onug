@@ -10,10 +10,14 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store/SelectedDeckStore'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils, utils } from 'utils'
+import { utils } from 'utils'
 
-const { generateTimedAction, pickRandomElementFromArray } = actionStoreUtils
-const { isCardSelectedById, pickRandomKey } = utils
+const {
+  generateTimedAction,
+  isCardSelectedById,
+  getRandomItemFromArray,
+  selectRandomKey,
+} = utils
 
 class MorticianStore {
   constructor() {
@@ -27,7 +31,7 @@ class MorticianStore {
   generateActions(): RoleActionType[] {
     const morticiansActions: RoleActionType[] = []
 
-    const chosenMorticianKey = pickRandomElementFromArray(morticianStoreAllKeys)
+    const chosenMorticianKey = getRandomItemFromArray(morticianStoreAllKeys)
     const chosenMorticianText =
       identifier[chosenMorticianKey as keyof typeof identifier]
 
@@ -72,7 +76,7 @@ class MorticianStore {
       image: 'onua_mortician',
     })
 
-    const randomMorticianActionKey = pickRandomKey(random_mortician)
+    const randomMorticianActionKey = selectRandomKey(random_mortician)
     switch (randomMorticianActionKey) {
       case 'mortician_1card_text':
         pushMorticianAction(
@@ -99,7 +103,7 @@ class MorticianStore {
 
     //Doppelganger
     if (isCardSelectedById(this.deck, 1)) {
-      const randomDoppelgangerActionKey = pickRandomKey(random_mortician)
+      const randomDoppelgangerActionKey = selectRandomKey(random_mortician)
       switch (randomDoppelgangerActionKey) {
         case 'mortician_1card_text':
           pushDoppelgangerMorticianAction(

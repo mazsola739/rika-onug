@@ -9,7 +9,7 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { RoleActionType } from 'types'
-import { actionStoreUtils, utils } from 'utils'
+import { utils } from 'utils'
 
 //todo random_oracle_alienexchange effect on aliens
 //todo random_oracle_ripple effect on ripple
@@ -21,11 +21,10 @@ const PLAYER = 1 //todo delete
 
 const {
   generateTimedAction,
-  getRandomIndexFromArray,
+  getRandomItemFromArray,
   getRandomNumber,
-  pickRandomElementFromArray,
-} = actionStoreUtils
-const { pickRandomKey } = utils
+  selectRandomKey,
+} = utils
 
 class OracleStore {
   constructor() {
@@ -35,7 +34,7 @@ class OracleStore {
   generateActions(): RoleActionType[] {
     const oracleActions: RoleActionType[] = []
 
-    const randomOracKey = pickRandomKey(random_orac)
+    const randomOracKey = selectRandomKey(random_orac)
     const randomNumber = getRandomNumber(1, 10)
     const randomAction = random_oracle[randomOracKey]
     const randomActionIntro = Object.values(randomAction)[0]
@@ -48,7 +47,7 @@ class OracleStore {
     const player = (answerPlayer: number) => {
       const totalPlayers = selectedDeckStore.totalPlayers
 
-      const randomAnswerKey = pickRandomElementFromArray(oracleResultKeys)
+      const randomAnswerKey = getRandomItemFromArray(oracleResultKeys)
 
       const randomText =
         random_oracle.random_oracle_playernum[
@@ -111,12 +110,12 @@ class OracleStore {
         const yesAnswers = Object.keys(randomAction).filter((key) =>
           key.includes('yes')
         )
-        answerKey = yesAnswers[getRandomIndexFromArray(yesAnswers)]
+        answerKey = yesAnswers[getRandomNumber(0, yesAnswers.length - 1)]
       } else {
         const noAnswers = Object.keys(randomAction).filter((key) =>
           key.includes('no')
         )
-        answerKey = noAnswers[getRandomIndexFromArray(noAnswers)]
+        answerKey = noAnswers[getRandomNumber(0, noAnswers.length - 1)]
       }
 
       const answer = [

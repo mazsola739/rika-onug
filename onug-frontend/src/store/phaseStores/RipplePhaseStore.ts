@@ -16,20 +16,20 @@ import { ActionCardType, RepeatroleType, RoleActionType } from 'types'
 import { actionStoreUtils, utils } from 'utils'
 
 const {
-  generateTimedAction,
   getRandomRoleDisplayName,
-  pickRandom1Player,
-  pickRandom2Players,
-  pickRandomArray2Players,
-  pickRandomElementFromArray,
-  pickRandomUpTo3Players,
+  pickRandomOnePlayer,
+  pickRandomTwoPlayers,
+  pickRandomTwoPlayersArray,
+  pickRandomUpToThreePlayers,
   shuffleAndSplitDeck,
 } = actionStoreUtils
 const {
   areAllCardsSelectedById,
-  areAnyCardsSelectedById,
+  areAnyCardSelectedById,
+  generateTimedAction,
+  getRandomItemFromArray,
   isCardSelectedById,
-  pickRandomKey,
+  selectRandomKey,
 } = utils
 const {
   random_ripple_1minute,
@@ -53,7 +53,7 @@ const {
   random_ripple_iamalien,
 } = ripples
 
-const randomActionKey = pickRandomKey(random_ripp)
+const randomActionKey = selectRandomKey(random_ripp)
 
 class RipplePhaseStore {
   constructor() {
@@ -76,29 +76,27 @@ class RipplePhaseStore {
   generateActions(): RoleActionType[] {
     const rippleActions: RoleActionType[] = []
 
-    const random1Player = pickRandom1Player(this.totalPlayers)
-    const random2Players = pickRandom2Players(this.totalPlayers)
-    const randomRippleAllKey = pickRandomElementFromArray(rippleStoreAllKeys)
+    const random1Player = pickRandomOnePlayer(this.totalPlayers)
+    const random2Players = pickRandomTwoPlayers(this.totalPlayers)
+    const randomRippleAllKey = getRandomItemFromArray(rippleStoreAllKeys)
     const chosenRippleAllText =
       identifier[randomRippleAllKey as keyof typeof identifier] ||
       (randomRippleAllKey === 'activePlayers'
-        ? pickRandomUpTo3Players(selectedDeckStore.totalPlayers, 'and')
+        ? pickRandomUpToThreePlayers(selectedDeckStore.totalPlayers, 'and')
         : randomRippleAllKey)
 
-    const randomRippleAnyKey = pickRandomElementFromArray(rippleStoreAnyKeys)
+    const randomRippleAnyKey = getRandomItemFromArray(rippleStoreAnyKeys)
     const chosenRippleAnyText =
       identifier[randomRippleAnyKey as keyof typeof identifier] ||
       (randomRippleAnyKey === 'activePlayers'
-        ? pickRandomUpTo3Players(selectedDeckStore.totalPlayers, 'or')
+        ? pickRandomUpToThreePlayers(selectedDeckStore.totalPlayers, 'or')
         : randomRippleAnyKey)
 
-    const randomRippleNeighborKey =
-      pickRandomElementFromArray(rippleNeighborKeys)
+    const randomRippleNeighborKey = getRandomItemFromArray(rippleNeighborKeys)
     const chosenRippleNeighborText =
       identifier[randomRippleNeighborKey as keyof typeof identifier]
 
-    const randomRippleCenterAnyKey =
-      pickRandomElementFromArray(rippleCenterAnyKeys)
+    const randomRippleCenterAnyKey = getRandomItemFromArray(rippleCenterAnyKeys)
     const randomRippleCenterAnyText: string =
       identifier[randomRippleCenterAnyKey]
 
@@ -347,7 +345,7 @@ class RipplePhaseStore {
       }
 
       if (randomActionKey === 'random_ripple_dualview') {
-        const interactionText = pickRandomElementFromArray([
+        const interactionText = getRandomItemFromArray([
           'ripple_dualseer_text',
           'ripple_view2_text',
         ])
@@ -387,7 +385,9 @@ class RipplePhaseStore {
       }
 
       if (randomActionKey === 'random_ripple_shuffle') {
-        const randomShuffle2Players = pickRandomArray2Players(this.totalPlayers)
+        const randomShuffle2Players = pickRandomTwoPlayersArray(
+          this.totalPlayers
+        )
         const randomPlayer1 = randomShuffle2Players[0]
         const randomPlayer2 = randomShuffle2Players[1]
 
@@ -470,7 +470,7 @@ class RipplePhaseStore {
         const repeatrole: RepeatroleType[] = [
           {
             name: 'role_aliens',
-            isExist: areAnyCardsSelectedById(
+            isExist: areAnyCardSelectedById(
               this.deck,
               [42, 43, 47, 53, 54, 74]
             ),
@@ -527,7 +527,7 @@ class RipplePhaseStore {
           },
           {
             name: 'role_werewolves',
-            isExist: areAnyCardsSelectedById(this.deck, [15, 16, 17, 22, 21]),
+            isExist: areAnyCardSelectedById(this.deck, [15, 16, 17, 22, 21]),
           },
           { name: 'role_witch', isExist: isCardSelectedById(this.deck, 27) },
         ]

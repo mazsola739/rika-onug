@@ -2,11 +2,11 @@ import { supervillains, BASE_TIME, ACTION_TIME } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils, utils } from 'utils'
+import { utils } from 'utils'
 import { evilometerStore } from './EvilometerStore'
 
-const { generateTimedAction } = actionStoreUtils
-const { areAnyCardsSelectedById, isCardSelectedById } = utils
+const { areAnyCardSelectedById, generateTimedAction, isCardSelectedById } =
+  utils
 
 class SupervillainStore {
   constructor() {
@@ -22,7 +22,7 @@ class SupervillainStore {
 
     const isHenchmanAlone =
       isCardSelectedById(this.deck, 60) &&
-      !areAnyCardsSelectedById(this.deck, [57, 65, 69])
+      !areAnyCardSelectedById(this.deck, [57, 65, 69])
 
     const wakeText = isHenchmanAlone
       ? supervillains.supervillain_wake_text

@@ -7,10 +7,9 @@ import {
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { ActionCardType, RoleActionType } from 'types'
-import { actionStoreUtils, utils } from 'utils'
+import { utils } from 'utils'
 
-const { generateTimedAction } = actionStoreUtils
-const { isCardSelectedById } = utils
+const { generateTimedAction, isCardSelectedById } = utils
 
 class ApprenticetannerStore {
   constructor() {

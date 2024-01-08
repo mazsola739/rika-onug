@@ -2,9 +2,9 @@ import { paranormalinvestigator, BASE_TIME, ACTION_TIME } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
 import { RoleActionType } from 'types'
-import { actionStoreUtils } from 'utils'
+import { utils } from 'utils'
 
-const { generateTimedAction } = actionStoreUtils
+const { generateTimedAction } = utils
 
 class ParanormalinvestigatorStore {
   constructor() {
