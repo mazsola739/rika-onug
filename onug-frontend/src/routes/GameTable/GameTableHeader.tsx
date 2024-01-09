@@ -11,31 +11,15 @@ import {
   YourName,
 } from './GameTable.styles'
 import { RoomHeaderProps } from './GameTable.types'
+import { sendReadyRequest } from 'api'
 
 export const GameTableHeader = observer(({ player }: RoomHeaderProps) => {
-  /*   const handleClick = () => {
-    console.log('Im ready')
-  } */
-
   const handleClick = async () => {
     try {
-      const requestBody = {
-        route: 'ready',
-      }
-
-      const response = await fetch('http://localhost:7654/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      })
-
-      const responseData = await response.json()
-
+      const responseData = await sendReadyRequest()
       console.log('Response from backend:', responseData)
     } catch (error) {
-      console.error('Error sending ready request:', error)
+      console.error(error.message)
     }
   }
 

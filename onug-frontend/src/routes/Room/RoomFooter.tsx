@@ -11,6 +11,7 @@ import { useCallback } from 'react'
 import { gamePlayStore, roomStore, selectedDeckStore } from 'store'
 import { RoomFooterProps } from './Room.types'
 import { useNavigate } from 'react-router-dom'
+import { leaveRoomRequest } from 'api'
 
 export const RoomFooter = observer(
   ({ room_id, player_name }: RoomFooterProps) => {
@@ -22,29 +23,17 @@ export const RoomFooter = observer(
 
     const handleLeaveRoom = useCallback(async () => {
       try {
-        const requestBody = {
-          route: 'leave-room',
-          room_id: room_id,
-          player_name: player_name,
-        }
-
-        const response = await fetch('http://localhost:7654/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestBody),
-        })
-
-        const responseData = await response.json()
+        const responseData = await leaveRoomRequest(room_id, player_name)
 
         if (responseData.success) {
           navigate('/lobby')
+        } else {
+          console.error('Failed to leave room:', responseData.error)
         }
       } catch (error) {
-        console.error('Error leaving room:', error)
+        console.error(error.message)
       }
-    }, [navigate, room_id])
+    }, [navigate, room_id, player_name])
 
     const handleStartGame = useCallback(() => {
       gamePlayStore.toggleGameStatus()

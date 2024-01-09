@@ -1,3 +1,6 @@
+const jwt = require('jsonwebtoken');
+const { v4: uuidv4 } = require('uuid');
+const SECRET_KEY = uuidv4();
 const roomsData = require("../../../data/rooms.json");
 const {
   generateSuccessResponse,
@@ -22,12 +25,12 @@ const joinRoomController = async (event) => {
   const room = roomsData[roomIndex];
   const [roomIdValid, gameState] = await validateRoom(room_id);
 
+  let playerName;
   if (!roomIdValid) {
     if (room.available_names.length === 0) {
       return generateErrorResponse({ message: "No more available names. Room is full." });
     }
-
-    const playerName = randomPlayerName(room.available_names);
+    playerName = randomPlayerName(room.available_names);
 
     const newRoomState = {
       room_id: room_id,
@@ -42,36 +45,38 @@ const joinRoomController = async (event) => {
     };
 
     await upsertRoomState(newRoomState);
+  } else {
+    if (room.available_names.length === 0) {
+      return generateErrorResponse({ message: "No more available names. Room is full." });
+    }
 
-    return generateSuccessResponse({
-      success: true,
-      message: "New room created and joined",
-      room_id,
-      player_id: playerName,
+    playerName = randomPlayerName(gameState.available_names);
+
+    gameState.players.push({
+      name: playerName,
+      admin: gameState.players.length === 0,
     });
+
+    gameState.available_names = gameState.available_names.filter(name => name !== playerName);
+
+    await upsertRoomState(gameState);
   }
 
-  if (room.available_names.length === 0) {
-    return generateErrorResponse({ message: "No more available names. Room is full." });
-  }
+  const playerToken = jwt.sign({ player_id: playerName, room_id: room_id }, SECRET_KEY, { expiresIn: '1h' });
 
-  const nextAvailableName = randomPlayerName(gameState.available_names);
-
-  gameState.players.push({
-    name: nextAvailableName,
-    admin: gameState.players.length === 0,
-  });
-
-  gameState.available_names = gameState.available_names.filter(name => name !== nextAvailableName);
-
-  await upsertRoomState(gameState);
-
-  return generateSuccessResponse({
+  const response = generateSuccessResponse({
     success: true,
     message: "Successfully joined",
     room_id,
-    player_id: nextAvailableName,
+    player_id: playerName,
   });
+
+  response.headers = {
+    'Set-Cookie': `playerToken=${playerToken}; HttpOnly; Path=/; Max-Age=3600`,
+    ...response.headers,
+  };
+
+  return response;
 };
 
 module.exports = {

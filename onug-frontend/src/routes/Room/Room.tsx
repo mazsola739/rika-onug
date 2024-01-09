@@ -8,6 +8,7 @@ import { Main } from './Room.styles'
 import { RoomProps } from './Room.types'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
+import { hydrateSelectRequest } from 'api'
 
 export const Room = observer(({ roomStore }: RoomProps) => {
   const { deck } = deckStore
@@ -17,20 +18,7 @@ export const Room = observer(({ roomStore }: RoomProps) => {
   useEffect(() => {
     const timer = setInterval(async () => {
       try {
-        const requestBody = {
-          route: 'hydrate-select',
-          room_id: room_id,
-        }
-
-        const response = await fetch('http://localhost:7654/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(requestBody),
-        })
-
-        const responseData = await response.json()
+        const responseData = await hydrateSelectRequest(room_id)
 
         if (responseData.gameState && responseData.gameState.selected_cards) {
           selectedDeckStore.updateSelectedCards(
@@ -44,7 +32,7 @@ export const Room = observer(({ roomStore }: RoomProps) => {
 
         console.log('Response from backend:', responseData)
       } catch (error) {
-        console.error('Error sending ready request:', error)
+        console.error('Error sending ready request:', error.message)
       }
     }, 5000)
 

@@ -5,6 +5,7 @@ import { lobbyStore } from 'store'
 import { useNavigate } from 'react-router-dom'
 import { StyledLobbyProps } from './Lobby.types'
 import { Link } from 'react-router-dom'
+import { joinRoomRequest } from 'api'
 
 const RoomButton: React.FC<StyledLobbyProps> = ({
   buttonText,
@@ -27,26 +28,16 @@ export const Lobby: React.FC = observer(() => {
 
   const handleJoinRoom = async (roomId: string) => {
     try {
-      const requestBody = {
-        route: 'join-room',
-        room_id: roomId,
-      }
-
-      const response = await fetch('http://localhost:7654/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      })
-
-      const responseData = await response.json()
+      const responseData = await joinRoomRequest(roomId)
+      console.log(responseData)
 
       if (responseData.success) {
         navigate(`/room/${roomId}`)
+      } else {
+        console.error('Failed to join room:', responseData.error)
       }
     } catch (error) {
-      console.error('Error joining room:', error)
+      console.error(error.message)
     }
   }
 
