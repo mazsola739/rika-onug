@@ -55,5 +55,6 @@
   },
   "description": "One Night Ultimate Werewolf - Frontend",
   "author": "Rika",
-  "license": "MIT"
+  "license": "MIT",
+  "proxy": "http://localhost:7654"
 }

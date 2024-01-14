@@ -10,5 +10,8 @@
   },
   "description": "One Night Ultimate Werewolf",
   "author": "Rika",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "react-use-websocket": "3.0.0"
+  }
 }

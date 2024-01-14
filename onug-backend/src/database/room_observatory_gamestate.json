@@ -1,0 +1,42 @@
+{
+    "room_id": "observatory",
+    "room_name": "Observatory",
+    "selected_cards": [
+        15,
+        22,
+        5,
+        6,
+        9,
+        23,
+        8,
+        27,
+        11,
+        24,
+        20,
+        25,
+        10
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [
+        {
+            "name": "Queen of Hearts",
+            "admin": true
+        }
+    ],
+    "turn": 0,
+    "closed": false,
+    "available_names": [
+        "Maleficent",
+        "Ursula",
+        "Cruella de Vil",
+        "Jafar",
+        "Captain Hook",
+        "Gaston",
+        "Evil Queen",
+        "Mother Gothel",
+        "Queen Narissa",
+        "Prince Hans",
+        "Shere Khan"
+    ]
+}

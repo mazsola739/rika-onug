@@ -2,7 +2,8 @@ import { observer } from 'mobx-react-lite'
 import { selectedDeckStore, roomStore } from 'store'
 import { StyledCard, CardImage, CardName } from './Card.styles'
 import { CardProps } from './Card.types'
-import { useCallback, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
+import useWebSocket from 'react-use-websocket'
 
 export const Card = observer(({ card, room_id }: CardProps) => {
   const {
@@ -18,6 +19,7 @@ export const Card = observer(({ card, room_id }: CardProps) => {
   const isSelected = selectedDeckStore.selectedCards.some(
     (card) => card.id === id
   )
+  const sendJsonMessage = roomStore.getSendJsonMessage()
 
   const handleCardClick = useCallback(() => {
     selectedDeckStore.toggleCardSelectionStatus(id)
@@ -35,7 +37,8 @@ export const Card = observer(({ card, room_id }: CardProps) => {
     selectedDeckStore.updatePlayDeckWithSelectedCards(
       selectedDeckStore.selectedCards
     )
-    selectedDeckStore.sendCardSelectionToBackend(id, room_id)
+    //selectedDeckStore.sendCardSelectionToBackend(id, room_id)
+    sendJsonMessage({ id, room_id })
     roomStore.toggleInfo(id, 'card')
   }, [id, card_name, display_name, rules, expansion, team, wake_up_time, order])
 

@@ -14,6 +14,7 @@ class RoomStore {
   detailedCardInfo: CardType = deckStore.createEmptyCard()
   detailedTokenInfo: TokenType = deckStore.createEmptyToken()
   selectedExpansions: string[] = Object.keys(expansions)
+  sendJsonMessage: (jsonMessage: unknown, keep?: boolean) => void = null
 
   constructor() {
     makeAutoObservable(this)
@@ -25,6 +26,16 @@ class RoomStore {
 
     this.toggleExpansionSelection = this.toggleExpansionSelection.bind(this)
     this.setDetailedTokenInfo = this.setDetailedTokenInfo.bind(this)
+  }
+
+  setSendJsonMessage(
+    sendJsonMessage: (jsonMessage: unknown, keep?: boolean) => void
+  ): void {
+    this.sendJsonMessage = sendJsonMessage
+  }
+
+  getSendJsonMessage(): (jsonMessage: unknown, keep?: boolean) => void {
+    return this.sendJsonMessage
   }
 
   setDetailedTokenInfo(tokenId: number): void {

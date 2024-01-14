@@ -13,13 +13,7 @@ class LobbyStore {
   @action async fetchRooms() {
     this.isLoading = true
     try {
-      const response = await fetch('http://localhost:7654/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ route: 'rooms' }),
-      })
+      const response = await fetch('/api/rooms')
 
       const data = await response.json()
       if (data.message === 'Successfully fetched') {

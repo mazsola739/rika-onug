@@ -1,12 +1,12 @@
 export const joinRoomRequest = async (roomId: string) => {
   try {
     const requestBody = {
-      route: 'join-room',
       room_id: roomId,
     }
 
-    const response = await fetch('http://localhost:7654/', {
+    const response = await fetch('/api/join-room', {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },

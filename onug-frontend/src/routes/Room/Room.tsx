@@ -1,45 +1,30 @@
 import { CardList, TokenList } from 'components'
 import { team } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { useEffect, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { deckStore, selectedDeckStore } from 'store'
+import { deckStore } from 'store'
 import { Main } from './Room.styles'
 import { RoomProps } from './Room.types'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
-import { hydrateSelectRequest } from 'api'
+import useWebSocket, { ReadyState } from 'react-use-websocket'
 
 export const Room = observer(({ roomStore }: RoomProps) => {
   const { deck } = deckStore
-
   const { room_id } = useParams()
 
-  useEffect(() => {
-    const timer = setInterval(async () => {
-      try {
-        const responseData = await hydrateSelectRequest(room_id)
+  const [socketUrl] = useState('ws://localhost:7655/')
+  const { readyState, sendJsonMessage } = useWebSocket(socketUrl)
+  roomStore.setSendJsonMessage(sendJsonMessage)
 
-        if (responseData.gameState && responseData.gameState.selected_cards) {
-          selectedDeckStore.updateSelectedCards(
-            responseData.gameState.selected_cards
-          )
-        } else {
-          console.error(
-            'gameState or selected_cards is undefined in the response'
-          )
-        }
-
-        console.log('Response from backend:', responseData)
-      } catch (error) {
-        console.error('Error sending ready request:', error.message)
-      }
-    }, 5000)
-
-    return () => {
-      clearInterval(timer)
-    }
-  }, [room_id])
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: 'Connecting',
+    [ReadyState.OPEN]: 'Open',
+    [ReadyState.CLOSING]: 'Closing',
+    [ReadyState.CLOSED]: 'Closed',
+    [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
+  }[readyState]
 
   const teamArray = useMemo(
     () => [
@@ -63,6 +48,7 @@ export const Room = observer(({ roomStore }: RoomProps) => {
     <>
       <RoomHeader />
       <Main>
+        <span>The WebSocket is currently {connectionStatus}</span>
         {orderedTeams.map((teamName) => (
           <CardList
             key={teamName}
