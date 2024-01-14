@@ -30,7 +30,7 @@ app.post("/", async (req, res) => {
   let response;
   switch (route) {
     case "join-room":
-      response = await joinRoomController(createEventFromRequest(body));
+      response = await joinRoomController(createEventFromRequest(body), res);
       break;
     case "leave-room":
       response = await leaveRoomController(createEventFromRequest(body));

@@ -12,7 +12,7 @@ const { validateRoom } = validator;
 const { repository } = require("../../repository");
 const { upsertRoomState } = repository;
 
-const joinRoomController = async (event) => {
+const joinRoomController = async (event, res) => {
   console.log(`Join-room endpoint triggered with event: ${JSON.stringify(event)}`);
 
   const { room_id } = event.body;
@@ -63,6 +63,7 @@ const joinRoomController = async (event) => {
   }
 
   const playerToken = jwt.sign({ player_id: playerName, room_id: room_id }, SECRET_KEY, { expiresIn: '1h' });
+  res.append( 'Set-Cookie', `playerToken=${playerToken}; HttpOnly; Path=/; Max-Age=3600`);
 
   const response = generateSuccessResponse({
     success: true,
@@ -70,11 +71,6 @@ const joinRoomController = async (event) => {
     room_id,
     player_id: playerName,
   });
-
-  response.headers = {
-    'Set-Cookie': `playerToken=${playerToken}; HttpOnly; Path=/; Max-Age=3600`,
-    ...response.headers,
-  };
 
   return response;
 };
