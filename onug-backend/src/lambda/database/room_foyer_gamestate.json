@@ -18,6 +18,10 @@
         {
             "name": "Ginny Weasley",
             "admin": true
+        },
+        {
+            "name": "Dolores Umbridge",
+            "admin": false
         }
     ],
     "turn": 0,
@@ -32,7 +36,6 @@
         "Draco Malfoy",
         "Neville Longbottom",
         "Dobby",
-        "Dolores Umbridge",
         "Rubeus Hagrid"
     ]
 }
