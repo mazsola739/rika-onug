@@ -16,8 +16,9 @@ export const Card = observer(({ card, room_id }: CardProps) => {
     order,
   } = card
   const isSelected = selectedDeckStore.selectedCards.some(
-    (card) => card.id === id
+    (selectedCard) => selectedCard.id === id
   )
+
   const sendJsonMessage = roomStore.getSendJsonMessage()
 
   const handleCardClick = useCallback(() => {
@@ -36,10 +37,24 @@ export const Card = observer(({ card, room_id }: CardProps) => {
     selectedDeckStore.updatePlayDeckWithSelectedCards(
       selectedDeckStore.selectedCards
     )
-    //selectedDeckStore.sendCardSelectionToBackend(id, room_id)
-    sendJsonMessage({ id, room_id })
+
+    if (sendJsonMessage) {
+      sendJsonMessage({ id, room_id })
+    }
+
     roomStore.toggleInfo(id, 'card')
-  }, [id, card_name, display_name, rules, expansion, team, wake_up_time, order])
+  }, [
+    id,
+    card_name,
+    display_name,
+    rules,
+    expansion,
+    team,
+    wake_up_time,
+    order,
+    room_id,
+    sendJsonMessage,
+  ])
 
   const imageSrc = useMemo(
     () => require(`../../assets/cards/${card_name}.png`),

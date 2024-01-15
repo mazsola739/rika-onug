@@ -5,6 +5,8 @@ import { CardType, TokenType } from 'types'
 import { roomStoreUtils } from 'utils'
 import { deckStore } from './DeckStore'
 
+type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
+
 const { getFilteredCardsForTeam, getOrderedTeams, filterByExpansions } =
   roomStoreUtils
 
@@ -14,7 +16,7 @@ class RoomStore {
   detailedCardInfo: CardType = deckStore.createEmptyCard()
   detailedTokenInfo: TokenType = deckStore.createEmptyToken()
   selectedExpansions: string[] = Object.keys(expansions)
-  sendJsonMessage: (jsonMessage: unknown, keep?: boolean) => void = null
+  sendJsonMessage: SendJsonMessageType<unknown> | null = null
 
   constructor() {
     makeAutoObservable(this)

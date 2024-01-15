@@ -1,7 +1,7 @@
 import { CardList, TokenList } from 'components'
 import { team } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { deckStore } from 'store'
 import { Main } from './Room.styles'
@@ -16,7 +16,12 @@ export const Room = observer(({ roomStore }: RoomProps) => {
 
   const [socketUrl] = useState('ws://localhost:7655/')
   const { readyState, sendJsonMessage } = useWebSocket(socketUrl)
-  roomStore.setSendJsonMessage(sendJsonMessage)
+
+  useEffect(() => {
+    if (sendJsonMessage) {
+      roomStore.setSendJsonMessage(sendJsonMessage)
+    }
+  }, [sendJsonMessage, roomStore])
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',
