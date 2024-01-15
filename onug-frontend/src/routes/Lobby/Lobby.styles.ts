@@ -9,6 +9,17 @@ export const StyledLobby = styled.div`
   margin: auto;
 `
 
+export const LobbyTitle = styled.h1`
+  transform: translateX(-50%);
+  top: 5%;
+  left: 50%;
+  position: absolute;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Josefin Sans', sans-serif;
+  color: white;
+`
+
 export const StyledRoomButton = styled.button<StyledLobbyProps>`
   background: ${({ index }) => generateRainbowColor(index)};
   border: 5px solid ${({ index }) => generateRainbowColor(index)};

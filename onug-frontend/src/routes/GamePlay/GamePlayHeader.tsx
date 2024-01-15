@@ -1,8 +1,8 @@
-import { GamePlayImage } from 'components'
+import { GamePlayCard } from 'components'
 import { observer } from 'mobx-react-lite'
-import { GamePlayText, StyledGamePlayHeader } from './GamePlay.styles'
+import { useState, useEffect } from 'react'
 import { gamePlayStore } from 'store'
-import { useEffect, useState } from 'react'
+import { StyledGamePlayHeader, GamePlayText } from './GamePlay.styles'
 
 export const GamePlayHeader = observer(() => {
   const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0)
@@ -28,7 +28,7 @@ export const GamePlayHeader = observer(() => {
   return (
     <StyledGamePlayHeader>
       {everyone[currentScenarioIndex].image.length > 0 && (
-        <GamePlayImage image={everyone[currentScenarioIndex].image} />
+        <GamePlayCard image={everyone[currentScenarioIndex].image} />
       )}
       <GamePlayText>{everyone[currentScenarioIndex].text}</GamePlayText>
     </StyledGamePlayHeader>

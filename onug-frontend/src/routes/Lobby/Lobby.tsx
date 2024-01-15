@@ -1,6 +1,12 @@
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
-import { Slaves, StyledLobby, LowPhas, StyledRoomButton } from './Lobby.styles'
+import {
+  Slaves,
+  StyledLobby,
+  LowPhas,
+  StyledRoomButton,
+  LobbyTitle,
+} from './Lobby.styles'
 import { lobbyStore } from 'store'
 import { useNavigate } from 'react-router-dom'
 import { StyledLobbyProps } from './Lobby.types'
@@ -48,12 +54,10 @@ export const Lobby: React.FC = observer(() => {
   if (lobbyStore.errorMessage) {
     return <div>{lobbyStore.errorMessage}</div>
   }
-  //TODO title
+
   return (
     <StyledLobby>
-      {/*       <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>
-        Castle of Mad King Ludwig
-      </h1> */}
+      <LobbyTitle>Castle of Mad King Ludwig</LobbyTitle>
       {lobbyStore.rooms.map((room, index) => (
         <Link to={`/room/${room.room_id}`} key={room.room_id}>
           <RoomButton

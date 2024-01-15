@@ -15,13 +15,24 @@ export const Room = observer(({ roomStore }: RoomProps) => {
   const { room_id } = useParams()
 
   const [socketUrl] = useState('ws://localhost:7655/')
-  const { readyState, sendJsonMessage } = useWebSocket(socketUrl)
+  const { readyState, sendJsonMessage, lastJsonMessage } =
+    useWebSocket(socketUrl)
 
   useEffect(() => {
     if (sendJsonMessage) {
       roomStore.setSendJsonMessage(sendJsonMessage)
     }
-  }, [sendJsonMessage, roomStore])
+    if (lastJsonMessage?.type !== 'KEEP-ALIVE') {
+      if (lastJsonMessage?.type === 'AUTH') {
+        sessionStorage.setItem('token', lastJsonMessage.token)
+      }
+      console.log(lastJsonMessage)
+    }
+  }, [sendJsonMessage, roomStore, lastJsonMessage])
+
+  useEffect(() => {
+    sendJsonMessage({ type: 'NEWBIE' })
+  }, [])
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',

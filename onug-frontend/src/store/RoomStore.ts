@@ -1,15 +1,12 @@
-import { expansions, team } from 'constant'
-import { cards, artifacts, marks } from 'data'
 import { makeAutoObservable, reaction } from 'mobx'
-import { CardType, TokenType } from 'types'
+import { CardType, SendJsonMessageType, TokenType } from 'types'
 import { roomStoreUtils } from 'utils'
 import { deckStore } from './DeckStore'
-
-type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
+import { expansions, team } from 'constant'
+import { cards, artifacts, marks } from 'data'
 
 const { getFilteredCardsForTeam, getOrderedTeams, filterByExpansions } =
   roomStoreUtils
-
 const { hero, village } = team
 
 class RoomStore {

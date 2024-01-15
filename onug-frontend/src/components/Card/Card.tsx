@@ -39,7 +39,15 @@ export const Card = observer(({ card, room_id }: CardProps) => {
     )
 
     if (sendJsonMessage) {
-      sendJsonMessage({ id, room_id })
+      const token = sessionStorage.getItem('token')
+      const action = isSelected ? 'CARD_DESELECT' : 'CARD_SELECT'
+      sendJsonMessage({
+        type: 'UPDATE-SELECT',
+        card_id: id,
+        room_id,
+        token,
+        action,
+      })
     }
 
     roomStore.toggleInfo(id, 'card')

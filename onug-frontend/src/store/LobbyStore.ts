@@ -1,3 +1,4 @@
+import { roomsRequest } from 'api'
 import { action, makeAutoObservable } from 'mobx'
 import { RoomType } from 'types'
 
@@ -10,19 +11,13 @@ class LobbyStore {
     makeAutoObservable(this)
   }
 
-  @action async fetchRooms() {
+  @action
+  async fetchRooms() {
     this.isLoading = true
     try {
-      const response = await fetch('/api/rooms')
-
-      const data = await response.json()
-      if (data.message === 'Successfully fetched') {
-        this.rooms = data.data
-      } else {
-        this.errorMessage = 'Failed to fetch rooms'
-      }
+      this.rooms = await roomsRequest()
     } catch (error) {
-      this.errorMessage = 'An error occurred while fetching rooms'
+      this.errorMessage = error.message
     } finally {
       this.isLoading = false
     }

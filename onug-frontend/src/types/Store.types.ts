@@ -24,3 +24,5 @@ export type RepeatroleType = {
   isExist: boolean
   specialCondition?: () => boolean
 }
+
+export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void

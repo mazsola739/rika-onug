@@ -8,9 +8,9 @@
 When you create a new endpoint, please update both the server.js
 
 ## env variables
-- REPOSITORY_TYPE
+- ONUG_REPOSITORY_TYPE
   - default: local
-  - possible values: 's3', 'local'
+  - possible values: 's3', 'local', 'memory'
 will be only set in production (on AWS lambda), to use the aws-sdk s3 read / write methods instead of local fs read/write. 
 - ONUG_LOG_LEVEL
   - default: INFO

@@ -4,11 +4,12 @@
     "baseUrl": "./src",
     "paths": {
       "@App/*": ["src/App/*"],
+      "@api/*": ["src/api/*"],
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@constant/*": ["src/constant/*"],
       "@data/*": ["src/data/*"],
-      "@layouts/*": ["src/layouts/*"],
+      "@routes/*": ["src/routes/*"],
       "@store/*": ["src/store/*"],
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]
