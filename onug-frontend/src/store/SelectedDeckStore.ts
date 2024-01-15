@@ -212,10 +212,9 @@ class SelectedDeckStore {
   }
 
   async sendCardSelectionToBackend(cardId: number, roomId: string) {
-    const cardStatus = this.isSelected(cardId) ? 'CARD_SELECT' : 'CARD_DESELECT'
+    const cardStatus = this.isSelected(cardId) ? 'CARD_DESELECT' : 'CARD_SELECT'
 
     const requestBody = {
-      route: 'update-select',
       room_id: roomId,
       update: {
         action: cardStatus,
@@ -224,8 +223,10 @@ class SelectedDeckStore {
     }
 
     try {
-      const response = await fetch('http://localhost:7654/', {
+      const response = await fetch('/api/update-select', {
         method: 'POST',
+        redirect: 'follow',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },

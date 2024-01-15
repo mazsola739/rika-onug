@@ -1,12 +1,11 @@
 export const leaveRoomRequest = async (roomId: string, playerName: string) => {
   try {
     const requestBody = {
-      route: 'leave-room',
       room_id: roomId,
       player_name: playerName,
     }
 
-    const response = await fetch('http://localhost:7654/', {
+    const response = await fetch('/api/leave-room', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -1,0 +1,60 @@
+{
+    "room_id": "parlor",
+    "room_name": "Parlor",
+    "selected_cards": [
+        50,
+        30,
+        64,
+        1,
+        45,
+        31,
+        37,
+        5,
+        48,
+        34,
+        6,
+        25,
+        9,
+        18,
+        23,
+        35
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [
+        {
+            "name": "Ariel",
+            "admin": true
+        },
+        {
+            "name": "Anna",
+            "admin": false
+        },
+        {
+            "name": "Snow White",
+            "admin": false
+        },
+        {
+            "name": "Giselle",
+            "admin": false
+        },
+        {
+            "name": "Elsa",
+            "admin": false
+        },
+        {
+            "name": "Jasmine",
+            "admin": false
+        }
+    ],
+    "turn": 0,
+    "closed": false,
+    "available_names": [
+        "Cinderella",
+        "Aurora",
+        "Belle",
+        "Pocahontas",
+        "Mulan",
+        "Rapunzel"
+    ]
+}

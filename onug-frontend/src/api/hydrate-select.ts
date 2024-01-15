@@ -1,11 +1,10 @@
 export const hydrateSelectRequest = async (roomId: string) => {
   try {
     const requestBody = {
-      route: 'hydrate-select',
       room_id: roomId,
     }
 
-    const response = await fetch('http://localhost:7654/', {
+    const response = await fetch('/api/hydrate-select', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

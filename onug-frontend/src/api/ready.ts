@@ -1,10 +1,8 @@
 export const sendReadyRequest = async () => {
   try {
-    const requestBody = {
-      route: 'ready',
-    }
+    const requestBody = {}
 
-    const response = await fetch('http://localhost:7654/', {
+    const response = await fetch('http://localhost:7654/ready', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

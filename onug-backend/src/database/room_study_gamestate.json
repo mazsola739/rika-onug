@@ -1,0 +1,42 @@
+{
+    "room_id": "study",
+    "room_name": "Study",
+    "selected_cards": [
+        9,
+        37,
+        6,
+        45,
+        32,
+        1,
+        64
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [
+        {
+            "name": "Barry Allen",
+            "admin": true
+        },
+        {
+            "name": "Clark Kent",
+            "admin": false
+        },
+        {
+            "name": "Edward Nygma",
+            "admin": false
+        }
+    ],
+    "turn": 0,
+    "closed": false,
+    "available_names": [
+        "Bruce Wayne",
+        "Diana Prince",
+        "Arthur Curry",
+        "Selina Kyle",
+        "Harvey Dent",
+        "Lex Luthor",
+        "Harley Quinn",
+        "The Joker",
+        "Dick Grayson"
+    ]
+}
