@@ -2,8 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { selectedDeckStore, roomStore } from 'store'
 import { StyledCard, CardImage, CardName } from './Card.styles'
 import { CardProps } from './Card.types'
-import { useCallback, useMemo, useState } from 'react'
-import useWebSocket from 'react-use-websocket'
+import { useCallback, useMemo } from 'react'
 
 export const Card = observer(({ card, room_id }: CardProps) => {
   const {
