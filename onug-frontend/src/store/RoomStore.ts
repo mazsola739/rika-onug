@@ -28,14 +28,14 @@ class RoomStore {
     this.setDetailedTokenInfo = this.setDetailedTokenInfo.bind(this)
   }
 
-  setSendJsonMessage(
-    sendJsonMessage: (jsonMessage: unknown, keep?: boolean) => void
+  setSendJsonMessage<T>(
+    sendJsonMessage: (jsonMessage: T, keep?: boolean) => void
   ): void {
     this.sendJsonMessage = sendJsonMessage
   }
 
-  getSendJsonMessage(): (jsonMessage: unknown, keep?: boolean) => void {
-    return this.sendJsonMessage
+  getSendJsonMessage<T>(): (jsonMessage: T, keep?: boolean) => void {
+    return this.sendJsonMessage as (jsonMessage: T, keep?: boolean) => void
   }
 
   setDetailedTokenInfo(tokenId: number): void {
