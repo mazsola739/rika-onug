@@ -15,12 +15,9 @@
     "action_log": [],
     "players": [
         {
-            "name": "Gandalf",
-            "admin": true
-        },
-        {
-            "name": "Gollum",
-            "admin": false
+            "name": "Saruman",
+            "admin": true,
+            "token": "c51725d6-8323-47da-9cf2-f4c6a882b949"
         }
     ],
     "turn": 0,
@@ -28,6 +25,7 @@
     "available_names": [
         "Frodo",
         "Samwise",
+        "Gandalf",
         "Aragorn",
         "Legolas",
         "Gimli",
@@ -35,6 +33,6 @@
         "Galadriel",
         "Sauron",
         "Bilbo",
-        "Saruman"
+        "Gollum"
     ]
 }

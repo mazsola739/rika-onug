@@ -1,53 +1,28 @@
 {
     "room_id": "dynamite_room",
     "room_name": "Dynamite Room",
-    "selected_cards": [
-        64,
-        1,
-        32,
-        31,
-        5,
-        48,
-        58,
-        45
-    ],
+    "selected_cards": [],
     "actions": [],
     "action_log": [],
     "players": [
         {
-            "name": "Spider-Man",
-            "admin": true
-        },
-        {
-            "name": "Batman",
-            "admin": false
-        },
-        {
-            "name": "Iron Man",
-            "admin": false
-        },
-        {
-            "name": "Deadpool",
-            "admin": false
-        },
-        {
-            "name": "Wolverine",
-            "admin": false,
-            "token": "62695ade-7827-4952-aa1a-8b7ae1dccfae"
-        },
-        {
-            "name": "Thor",
-            "admin": false,
-            "token": "0890f81e-c442-4e69-ad33-20caaaad2558"
+            "name": "Wonder Woman",
+            "admin": true,
+            "token": "25e9cae4-0acc-4a2e-9d31-043fbd69ba16"
         }
     ],
     "turn": 0,
     "closed": false,
     "available_names": [
         "Superman",
-        "Wonder Woman",
+        "Batman",
         "Loki",
+        "Spider-Man",
+        "Iron Man",
+        "Thor",
         "Aquaman",
+        "Deadpool",
+        "Wolverine",
         "Groot",
         "Thanos"
     ]

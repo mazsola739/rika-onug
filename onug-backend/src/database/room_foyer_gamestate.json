@@ -14,13 +14,18 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": [
+        {
+            "name": "Ron Weasley",
+            "admin": true,
+            "token": "42376aba-7a25-4e59-9db6-992bbf841049"
+        }
+    ],
     "turn": 0,
     "closed": false,
     "available_names": [
         "Harry Potter",
         "Hermione Granger",
-        "Ron Weasley",
         "Severus Snape",
         "Albus Dumbledore",
         "Lord Voldemort",

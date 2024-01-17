@@ -20,13 +20,9 @@
     "action_log": [],
     "players": [
         {
-            "name": "Queen of Hearts",
-            "admin": true
-        },
-        {
-            "name": "Gaston",
-            "admin": false,
-            "token": "7a3b1546-7c4d-413e-8470-930628749343"
+            "name": "Queen Narissa",
+            "admin": true,
+            "token": "78d9ebaf-fb48-454a-85af-d41b09e21517"
         }
     ],
     "turn": 0,
@@ -37,9 +33,10 @@
         "Cruella de Vil",
         "Jafar",
         "Captain Hook",
+        "Gaston",
         "Evil Queen",
+        "Queen of Hearts",
         "Mother Gothel",
-        "Queen Narissa",
         "Prince Hans",
         "Shere Khan"
     ]

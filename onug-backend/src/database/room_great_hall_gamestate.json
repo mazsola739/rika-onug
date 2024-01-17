@@ -15,18 +15,18 @@
     "action_log": [],
     "players": [
         {
-            "name": "Artemis",
+            "name": "Zeus",
             "admin": true,
-            "token": "4614c97f-2972-46f6-b0a5-35671d1f75ad"
+            "token": "0d91be65-d0ad-4dd0-a068-823f994da708"
         }
     ],
     "turn": 0,
     "closed": false,
     "available_names": [
-        "Zeus",
         "Poseidon",
         "Hera",
         "Athena",
+        "Artemis",
         "Aphrodite",
         "Persephone",
         "Hephaestus",

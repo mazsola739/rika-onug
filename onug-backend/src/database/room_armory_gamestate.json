@@ -1,71 +1,33 @@
 {
     "room_id": "armory",
     "room_name": "Armory",
-    "selected_cards": [
-        18,
-        23,
-        35,
-        51,
-        11,
-        70,
-        5,
-        48,
-        58,
-        45,
-        86,
-        13,
-        67,
-        12,
-        84,
-        16
-    ],
+    "selected_cards": [],
     "actions": [],
     "action_log": [],
     "players": [
         {
-            "name": "Indiana Jones",
-            "admin": true
-        },
-        {
-            "name": "James T. Kirk",
-            "admin": false
-        },
-        {
-            "name": "Sarah Connor",
-            "admin": false
-        },
-        {
-            "name": "Sherlock Holmes",
-            "admin": false
-        },
-        {
-            "name": "Hannibal Lecter",
-            "admin": false
-        },
-        {
             "name": "James Bond",
-            "admin": false
-        },
-        {
-            "name": "Captain Jack Sparrow",
-            "admin": false
-        },
-        {
-            "name": "Ellen Ripley",
-            "admin": false,
-            "token": "3ed32e2a-94db-414e-9d47-77ad9117ab61"
+            "admin": true,
+            "token": "7dc16d5b-61c1-40fc-9d75-351961da2117"
         },
         {
             "name": "E.T.",
             "admin": false,
-            "token": "90f0998f-6fe5-4403-b6f1-977df0a4c8d1"
+            "token": "796dfcf6-5a58-42ab-b904-54e044192c06"
         }
     ],
     "turn": 0,
     "closed": false,
     "available_names": [
         "Forrest Gump",
+        "Indiana Jones",
+        "Captain Jack Sparrow",
+        "Ellen Ripley",
         "Neo",
-        "Katniss Everdeen"
+        "Sarah Connor",
+        "Hannibal Lecter",
+        "Sherlock Holmes",
+        "Katniss Everdeen",
+        "James T. Kirk"
     ]
 }
