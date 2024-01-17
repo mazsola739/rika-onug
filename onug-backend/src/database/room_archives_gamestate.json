@@ -8,7 +8,14 @@
         37,
         51,
         25,
-        68
+        68,
+        1,
+        48,
+        58,
+        5,
+        32,
+        18,
+        64
     ],
     "actions": [],
     "action_log": [],
@@ -24,19 +31,46 @@
         {
             "name": "Phoenix",
             "admin": false
+        },
+        {
+            "name": "Mermaid",
+            "admin": false
+        },
+        {
+            "name": "Fairy",
+            "admin": false
+        },
+        {
+            "name": "Minotaur",
+            "admin": false
+        },
+        {
+            "name": "Djinn",
+            "admin": false
+        },
+        {
+            "name": "Unicorn",
+            "admin": false
+        },
+        {
+            "name": "Dragon",
+            "admin": false,
+            "token": "372e5fd3-db1e-421c-9064-cc26cf226030"
+        },
+        {
+            "name": "Troll",
+            "admin": false,
+            "token": "4697d7d1-ebd4-4e4f-8546-5185c5f4c0b7"
+        },
+        {
+            "name": "Cyclops",
+            "admin": false,
+            "token": "8da8abff-0298-479e-aa82-1cb7bd4928d6"
         }
     ],
     "turn": 0,
     "closed": false,
     "available_names": [
-        "Dragon",
-        "Mermaid",
-        "Unicorn",
-        "Cyclops",
-        "Troll",
-        "Goblin",
-        "Minotaur",
-        "Fairy",
-        "Djinn"
+        "Goblin"
     ]
 }

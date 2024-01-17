@@ -17,7 +17,6 @@ export const GameTable = observer(() => {
     renderCenterExtraCard,
     renderMarks,
     renderArtifacts,
-    getRandomPlayer,
   } = gameTableUtils
   const { centerCards, chosenWolf, chosenSuperVillain } =
     gameTableStore.distributeCards()
@@ -25,11 +24,9 @@ export const GameTable = observer(() => {
     gameTableStore
   const selectedMarks = selectedDeckStore.selectedMarks
 
-  const randomPlayer = getRandomPlayer(players) //todo delete
-
   return (
     <>
-      <GameTableHeader player={randomPlayer} />
+      <GameTableHeader />
       <StyledGameTable>
         {renderPlayers(players)}
         <CenterCardContainer>

@@ -22,6 +22,11 @@
         {
             "name": "Queen of Hearts",
             "admin": true
+        },
+        {
+            "name": "Gaston",
+            "admin": false,
+            "token": "7a3b1546-7c4d-413e-8470-930628749343"
         }
     ],
     "turn": 0,
@@ -32,7 +37,6 @@
         "Cruella de Vil",
         "Jafar",
         "Captain Hook",
-        "Gaston",
         "Evil Queen",
         "Mother Gothel",
         "Queen Narissa",

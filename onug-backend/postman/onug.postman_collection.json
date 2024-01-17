@@ -242,7 +242,7 @@
 			"response": []
 		},
 		{
-			"name": "localhost:7654 - update-select",
+			"name": "localhost:7654 - UPDATE_SELECT",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {
 					"content-type": true
@@ -262,14 +262,14 @@
 					"raw": "{\n    \"room_id\": \"parlor\",\n    \"update\": {\n        \"action\": \"CARD_SELECT\",\n        \"card_id\": 4\n    }\n}"
 				},
 				"url": {
-					"raw": "localhost:7654/api/update-select",
+					"raw": "localhost:7654/api/UPDATE_SELECT",
 					"host": [
 						"localhost"
 					],
 					"port": "7654",
 					"path": [
 						"api",
-						"update-select"
+						"UPDATE_SELECT"
 					]
 				}
 			},

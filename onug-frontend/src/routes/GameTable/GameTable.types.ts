@@ -1,5 +1,5 @@
-import { PlayerType } from 'types'
+/*import { PlayerType } from 'types'
 
-export interface RoomHeaderProps {
+ export interface RoomHeaderProps {
   player: PlayerType
-}
+} */

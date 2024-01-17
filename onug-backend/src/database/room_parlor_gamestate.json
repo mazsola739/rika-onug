@@ -45,6 +45,10 @@
         {
             "name": "Jasmine",
             "admin": false
+        },
+        {
+            "name": "Pocahontas",
+            "admin": false
         }
     ],
     "turn": 0,
@@ -53,7 +57,6 @@
         "Cinderella",
         "Aurora",
         "Belle",
-        "Pocahontas",
         "Mulan",
         "Rapunzel"
     ]

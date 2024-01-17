@@ -6,10 +6,10 @@ const { logTrace, logInfo, logDebug } = require('../log')
 const { upsertRoomState } = repository
 
 exports.updateSelect = async (req, res) => {
-  logTrace(`update-select endpoint triggered with request body: ${JSON.stringify(req.body)}`)
-  logInfo(`UPDATE-SELECT TOKEN cookie: ${JSON.stringify(req.cookies.token)}`)
+  logTrace(`UPDATE_SELECT endpoint triggered with request body: ${JSON.stringify(req.body)}`)
+  logInfo(`UPDATE_SELECT TOKEN cookie: ${JSON.stringify(req.cookies.token)}`)
 
-  logDebug(`update-select endpoint triggered with request body: ${JSON.stringify(req.body)}`)
+  logDebug(`UPDATE_SELECT endpoint triggered with request body: ${JSON.stringify(req.body)}`)
 
   const { body } = req
   const { room_id, update } = body

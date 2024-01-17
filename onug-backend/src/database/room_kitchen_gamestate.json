@@ -33,6 +33,14 @@
         {
             "name": "Daenerys Targaryen",
             "admin": false
+        },
+        {
+            "name": "Theon Greyjoy",
+            "admin": false
+        },
+        {
+            "name": "Jorah Mormont",
+            "admin": false
         }
     ],
     "turn": 0,
@@ -44,8 +52,6 @@
         "Khal Drogo",
         "Varys",
         "Sansa Stark",
-        "Jorah Mormont",
-        "Theon Greyjoy",
         "Samwell Tarly"
     ]
 }

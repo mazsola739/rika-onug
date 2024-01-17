@@ -1,0 +1,38 @@
+{
+    "room_id": "great_hall",
+    "room_name": "Great Hall",
+    "selected_cards": [
+        15,
+        16,
+        9,
+        8,
+        11,
+        83,
+        73,
+        76
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": [
+        {
+            "name": "Artemis",
+            "admin": true,
+            "token": "4614c97f-2972-46f6-b0a5-35671d1f75ad"
+        }
+    ],
+    "turn": 0,
+    "closed": false,
+    "available_names": [
+        "Zeus",
+        "Poseidon",
+        "Hera",
+        "Athena",
+        "Aphrodite",
+        "Persephone",
+        "Hephaestus",
+        "Dionysus",
+        "Hades",
+        "Helios",
+        "Prometheus"
+    ]
+}

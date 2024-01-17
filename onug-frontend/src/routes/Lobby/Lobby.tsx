@@ -1,12 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
-import {
-  Slaves,
-  StyledLobby,
-  LowPhas,
-  StyledRoomButton,
-  LobbyTitle,
-} from './Lobby.styles'
+import { Slaves, StyledLobby, LowPhas, StyledRoomButton } from './Lobby.styles'
 import { lobbyStore } from 'store'
 import { useNavigate } from 'react-router-dom'
 import { StyledLobbyProps } from './Lobby.types'
@@ -32,32 +26,31 @@ export const Lobby: React.FC = observer(() => {
     lobbyStore.fetchRooms()
   }, [])
 
-  const handleJoinRoom = async (roomId: string) => {
+  const handleJoinRoom = async (room_id: string) => {
     try {
-      const responseData = await joinRoomRequest(roomId)
+      const responseData = await joinRoomRequest(room_id)
       console.log(responseData)
 
       if (responseData.success) {
-        navigate(`/room/${roomId}`)
+        sessionStorage.setItem('token', responseData.token)
+        sessionStorage.setItem('player_name', responseData.player_name)
+        sessionStorage.setItem('room_id', responseData.room_id)
+
+        navigate(`/room/${room_id}`)
       } else {
-        console.error('Failed to join room:', responseData.error)
+        console.error(`Failed to join room ${room_id}: ${responseData.error}`)
       }
     } catch (error) {
-      console.error(error.message)
+      console.error(`Error joining room ${room_id}: ${error.message}`)
     }
   }
 
-  if (lobbyStore.isLoading) {
-    return <div>Loading...</div>
-  }
-
-  if (lobbyStore.errorMessage) {
-    return <div>{lobbyStore.errorMessage}</div>
-  }
-
-  return (
+  return lobbyStore.isLoading ? (
+    <div>Loading...</div>
+  ) : lobbyStore.errorMessage ? (
+    <div>{lobbyStore.errorMessage}</div>
+  ) : (
     <StyledLobby>
-      <LobbyTitle>Castle of Mad King Ludwig</LobbyTitle>
       {lobbyStore.rooms.map((room, index) => (
         <Link to={`/room/${room.room_id}`} key={room.room_id}>
           <RoomButton

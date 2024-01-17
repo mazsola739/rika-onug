@@ -1,10 +1,10 @@
-export const leaveRoomRequest = async (roomId: string, playerName: string) => {
+export const leaveRoomRequest = async () => {
+  const requestBody = {
+    room_id: sessionStorage.getItem('room_id'),
+    player_name: sessionStorage.getItem('player_name'),
+    token: sessionStorage.getItem('token'),
+  }
   try {
-    const requestBody = {
-      room_id: roomId,
-      player_name: playerName,
-    }
-
     const response = await fetch('/api/leave-room', {
       method: 'POST',
       headers: {

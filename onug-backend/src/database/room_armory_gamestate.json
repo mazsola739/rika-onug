@@ -1,7 +1,24 @@
 {
     "room_id": "armory",
     "room_name": "Armory",
-    "selected_cards": [],
+    "selected_cards": [
+        18,
+        23,
+        35,
+        51,
+        11,
+        70,
+        5,
+        48,
+        58,
+        45,
+        86,
+        13,
+        67,
+        12,
+        84,
+        16
+    ],
     "actions": [],
     "action_log": [],
     "players": [
@@ -16,19 +33,39 @@
         {
             "name": "Sarah Connor",
             "admin": false
+        },
+        {
+            "name": "Sherlock Holmes",
+            "admin": false
+        },
+        {
+            "name": "Hannibal Lecter",
+            "admin": false
+        },
+        {
+            "name": "James Bond",
+            "admin": false
+        },
+        {
+            "name": "Captain Jack Sparrow",
+            "admin": false
+        },
+        {
+            "name": "Ellen Ripley",
+            "admin": false,
+            "token": "3ed32e2a-94db-414e-9d47-77ad9117ab61"
+        },
+        {
+            "name": "E.T.",
+            "admin": false,
+            "token": "90f0998f-6fe5-4403-b6f1-977df0a4c8d1"
         }
     ],
     "turn": 0,
     "closed": false,
     "available_names": [
         "Forrest Gump",
-        "James Bond",
-        "Captain Jack Sparrow",
-        "Ellen Ripley",
         "Neo",
-        "Hannibal Lecter",
-        "Sherlock Holmes",
-        "E.T.",
         "Katniss Everdeen"
     ]
 }

@@ -5,7 +5,7 @@ import {
   LinkButton,
   SelectedCardList,
 } from 'components'
-import { buttons } from 'constant'
+import { PLAY_GAME, buttons } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
 import { gamePlayStore, roomStore, selectedDeckStore } from 'store'
@@ -23,7 +23,7 @@ export const RoomFooter = observer(
 
     const handleLeaveRoom = useCallback(async () => {
       try {
-        const responseData = await leaveRoomRequest(room_id, player_name)
+        const responseData = await leaveRoomRequest()
 
         if (responseData.success) {
           navigate('/lobby')
@@ -33,9 +33,15 @@ export const RoomFooter = observer(
       } catch (error) {
         console.error(error.message)
       }
-    }, [navigate, room_id, player_name])
+    }, [navigate])
 
     const handleStartGame = useCallback(() => {
+      const sendJsonMessage = roomStore.getSendJsonMessage()
+      sendJsonMessage({
+        type: PLAY_GAME,
+        room_id,
+        token: sessionStorage.getItem('token'),
+      })
       gamePlayStore.toggleGameStatus()
       roomStore.resetDetailedCardInfo()
       selectedDeckStore.addCardIdsToArray()

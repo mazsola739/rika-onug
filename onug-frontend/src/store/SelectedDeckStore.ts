@@ -2,7 +2,15 @@ import { makeAutoObservable } from 'mobx'
 import { CardType, ActionCardType, MarkType } from 'types'
 import { selectedDeckUtils, utils } from 'utils'
 import { action_marks, action_cards } from 'data'
-import { alienIds, assassinIds, evils, roles, vampireIds } from 'constant'
+import {
+  CARD_DESELECT,
+  CARD_SELECT,
+  alienIds,
+  assassinIds,
+  evils,
+  roles,
+  vampireIds,
+} from 'constant'
 import { roomStore } from 'store'
 import { deckStore } from './DeckStore'
 
@@ -212,7 +220,7 @@ class SelectedDeckStore {
   }
 
   async sendCardSelectionToBackend(cardId: number, roomId: string) {
-    const cardStatus = this.isSelected(cardId) ? 'CARD_DESELECT' : 'CARD_SELECT'
+    const cardStatus = this.isSelected(cardId) ? CARD_DESELECT : CARD_SELECT
 
     const requestBody = {
       room_id: roomId,
@@ -223,7 +231,7 @@ class SelectedDeckStore {
     }
 
     try {
-      const response = await fetch('/api/update-select', {
+      const response = await fetch('/api/UPDATE_SELECT', {
         method: 'POST',
         redirect: 'follow',
         credentials: 'include',

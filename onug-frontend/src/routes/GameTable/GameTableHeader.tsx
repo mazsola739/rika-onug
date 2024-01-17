@@ -10,10 +10,10 @@ import {
   YourCardRule,
   YourName,
 } from './GameTable.styles'
-import { RoomHeaderProps } from './GameTable.types'
 import { sendReadyRequest } from 'api'
+import { expansion, roles, team, wake, rules_role } from 'constant'
 
-export const GameTableHeader = observer(({ player }: RoomHeaderProps) => {
+export const GameTableHeader = observer(() => {
   const handleClick = async () => {
     try {
       const responseData = await sendReadyRequest()
@@ -21,6 +21,21 @@ export const GameTableHeader = observer(({ player }: RoomHeaderProps) => {
     } catch (error) {
       console.error(error.message)
     }
+  }
+
+  const player = {
+    player_card: {
+      id: 7,
+      expansion: expansion.werewolf,
+      display_name: roles.role_minion,
+      team: team.werewolf,
+      wake_up_time: wake.night,
+      card_name: 'onuw_minion',
+      order: 32,
+      rules: rules_role.rules_minion,
+    },
+    player_name: 'Valaki',
+    player_number: 1,
   }
 
   return (

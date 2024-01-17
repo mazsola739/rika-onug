@@ -1,5 +1,5 @@
 import { CardList, TokenList } from 'components'
-import { team } from 'constant'
+import { AUTH, KEEP_ALIVE, team } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -22,17 +22,14 @@ export const Room = observer(({ roomStore }: RoomProps) => {
     if (sendJsonMessage) {
       roomStore.setSendJsonMessage(sendJsonMessage)
     }
-    if (lastJsonMessage?.type !== 'KEEP-ALIVE') {
-      if (lastJsonMessage?.type === 'AUTH') {
+
+    if (lastJsonMessage?.type !== KEEP_ALIVE) {
+      if (lastJsonMessage?.type === AUTH) {
         sessionStorage.setItem('token', lastJsonMessage.token)
       }
       console.log(lastJsonMessage)
     }
   }, [sendJsonMessage, roomStore, lastJsonMessage])
-
-  useEffect(() => {
-    sendJsonMessage({ type: 'NEWBIE' })
-  }, [])
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',

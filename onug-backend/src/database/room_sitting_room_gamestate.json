@@ -29,20 +29,30 @@
         {
             "name": "Wade Wilson",
             "admin": false
+        },
+        {
+            "name": "Tony Stark",
+            "admin": false
+        },
+        {
+            "name": "Wanda Maximoff",
+            "admin": false
+        },
+        {
+            "name": "Bucky Barnes",
+            "admin": false,
+            "token": "3e5e7585-2531-463b-be80-ae8e50cdd73d"
         }
     ],
     "turn": 0,
     "closed": false,
     "available_names": [
         "Peter Parker",
-        "Tony Stark",
         "Steve Rogers",
         "Bruce Banner",
         "Natasha Romanoff",
         "Carol Danvers",
-        "Bucky Barnes",
         "Stephen Strange",
-        "Wanda Maximoff",
         "Matt Murdock"
     ]
 }
