@@ -18,13 +18,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [
-        {
-            "name": "Matt Murdock",
-            "admin": true,
-            "token": "874d03dc-2b73-4869-afd9-a6c1baedd57b"
-        }
-    ],
+    "players": [],
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -38,6 +32,7 @@
         "Carol Danvers",
         "Bucky Barnes",
         "Stephen Strange",
-        "Wanda Maximoff"
+        "Wanda Maximoff",
+        "Matt Murdock"
     ]
 }

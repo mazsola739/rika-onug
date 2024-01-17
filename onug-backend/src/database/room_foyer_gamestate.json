@@ -14,40 +14,19 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [
-        {
-            "name": "Ron Weasley",
-            "admin": true,
-            "token": "42376aba-7a25-4e59-9db6-992bbf841049"
-        },
-        {
-            "name": "Draco Malfoy",
-            "admin": false,
-            "token": "bfb4afa8-8b7d-49ec-bdb9-53421b1dbcf7"
-        },
-        {
-            "name": "Harry Potter",
-            "admin": false,
-            "token": "e27a5942-11cf-4a06-ae9f-3b02fa930ef5"
-        },
-        {
-            "name": "Severus Snape",
-            "admin": false,
-            "token": "bf253bb5-0635-4a5f-9d55-75c41b777010"
-        },
-        {
-            "name": "Ginny Weasley",
-            "admin": false,
-            "token": "46c1c78a-c39d-4e76-88a7-b02e47466581"
-        }
-    ],
+    "players": [],
     "turn": 0,
     "closed": false,
     "available_names": [
+        "Harry Potter",
         "Hermione Granger",
+        "Ron Weasley",
+        "Severus Snape",
         "Albus Dumbledore",
         "Lord Voldemort",
+        "Draco Malfoy",
         "Neville Longbottom",
+        "Ginny Weasley",
         "Dobby",
         "Dolores Umbridge",
         "Rubeus Hagrid"

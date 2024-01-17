@@ -1,7 +1,7 @@
 import { CardList, TokenList } from 'components'
 import { HYDRATE_SELECT, team } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { deckStore, selectedDeckStore } from 'store'
 import { Main } from './Room.styles'
@@ -13,14 +13,14 @@ export const Room = observer(({ roomStore }: RoomProps) => {
   const { deck } = deckStore
   const { room_id } = useParams()
   const [firstTime, setFirstTime] = useState(true)
+  const intervalIdRef = useRef(null)
 
   const sendJsonMessage = roomStore.getSendJsonMessage()
   const lastJsonMessage = roomStore.getLastJsonMessage()
 
-  useEffect(() => {
-    if (sendJsonMessage && firstTime) {
-      setFirstTime(false)
-      setInterval(
+  const startHydrateSelectInterval = useCallback(
+    (sendJsonMessage: (arg0: { type: string; room_id: string }) => void) => {
+      intervalIdRef.current = setInterval(
         () =>
           sendJsonMessage({
             type: HYDRATE_SELECT,
@@ -28,8 +28,20 @@ export const Room = observer(({ roomStore }: RoomProps) => {
           }),
         1000
       )
+    },
+    []
+  )
+
+  useEffect(() => {
+    if (sendJsonMessage && firstTime) {
+      setFirstTime(false)
+      startHydrateSelectInterval(sendJsonMessage)
     }
-  }, [sendJsonMessage, firstTime])
+  }, [sendJsonMessage, firstTime, intervalIdRef.current])
+
+  useEffect(() => {
+    return () => clearInterval(intervalIdRef.current)
+  }, [])
 
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_SELECT) {

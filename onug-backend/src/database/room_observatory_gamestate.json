@@ -18,13 +18,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [
-        {
-            "name": "Queen Narissa",
-            "admin": true,
-            "token": "78d9ebaf-fb48-454a-85af-d41b09e21517"
-        }
-    ],
+    "players": [],
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -37,6 +31,7 @@
         "Evil Queen",
         "Queen of Hearts",
         "Mother Gothel",
+        "Queen Narissa",
         "Prince Hans",
         "Shere Khan"
     ]

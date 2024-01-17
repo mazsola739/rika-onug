@@ -13,13 +13,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [
-        {
-            "name": "Varys",
-            "admin": true,
-            "token": "a6632b95-b0d4-46dd-9edf-340f77a1e29e"
-        }
-    ],
+    "players": [],
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -28,6 +22,7 @@
         "Tyrion Lannister",
         "Arya Stark",
         "Khal Drogo",
+        "Varys",
         "Petyr Baelish",
         "Cersei Lannister",
         "Sansa Stark",

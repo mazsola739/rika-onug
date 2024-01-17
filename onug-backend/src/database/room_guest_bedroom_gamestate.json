@@ -13,13 +13,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [
-        {
-            "name": "Saruman",
-            "admin": true,
-            "token": "c51725d6-8323-47da-9cf2-f4c6a882b949"
-        }
-    ],
+    "players": [],
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -33,6 +27,7 @@
         "Galadriel",
         "Sauron",
         "Bilbo",
-        "Gollum"
+        "Gollum",
+        "Saruman"
     ]
 }

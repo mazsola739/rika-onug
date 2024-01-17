@@ -4,7 +4,6 @@ const { validateRoom } = require("../validator");
 
 exports.hydrateSelect = async (ws, message) => {
   const { room_id } = message;
-  logTrace(`Game started in room: ${room_id}`);
   const [roomIdValid, gameState, errors] = await validateRoom(room_id);
 
   if (!roomIdValid)

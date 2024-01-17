@@ -4,6 +4,7 @@ const { v4: uuidv4 } = require("uuid");
 const { validateRoom } = require("../validator");
 const { determineTotalPlayers, selectCard, deselectCard } = require("../utils");
 const { repository } = require("../repository");
+const { upsertRoomState } = repository;
 const {
   KEEP_ALIVE,
   UPDATE_SELECT,
@@ -11,10 +12,12 @@ const {
   CARD_DESELECT,
   PLAY_GAME,
   HYDRATE_SELECT,
+  RESET,
 } = require("../constant/ws");
 const { playGame } = require("./play-game");
 const { hydrateSelect } = require("./hydrate-select");
-const { upsertRoomState } = repository;
+const { reset } = require("./reset");
+
 
 exports.websocketServer = (port) => {
   const wss = new WebSocket.WebSocketServer({ port });
@@ -83,6 +86,7 @@ exports.websocketServer = (port) => {
         );
       }
       if (message.type === PLAY_GAME) return playGame(ws, message)
+      if (message.type === RESET) return reset(ws, message)
       if (message.type === HYDRATE_SELECT) return hydrateSelect(ws, message)
     });
   });

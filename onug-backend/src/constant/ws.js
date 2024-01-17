@@ -1,6 +1,7 @@
 exports.KEEP_ALIVE = 'KEEP_ALIVE'
 exports.UPDATE_SELECT = 'UPDATE_SELECT'
 exports.PLAY_GAME = 'PLAY_GAME'
+exports.RESET = 'RESET'
 exports.AUTH = 'AUTH'
 exports.CARD_DESELECT = 'CARD_DESELECT'
 exports.CARD_SELECT = 'CARD_SELECT'

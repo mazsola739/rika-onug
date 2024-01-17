@@ -13,16 +13,11 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [
-        {
-            "name": "Zeus",
-            "admin": true,
-            "token": "0d91be65-d0ad-4dd0-a068-823f994da708"
-        }
-    ],
+    "players": [],
     "turn": 0,
     "closed": false,
     "available_names": [
+        "Zeus",
         "Poseidon",
         "Hera",
         "Athena",
