@@ -29,7 +29,13 @@ export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
 export type WsJsonMessage = {
   type?: string
+  message?: string
+  error?: string //TODO backend
+  errors?: string[]
+  room_id?: string
+  player_name?: string
   selected_cards?: number[]
+  success?: boolean
 }
 
 export type WsCommunicationsBridgeType<T> = {

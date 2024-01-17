@@ -5,48 +5,54 @@ import {
   LinkButton,
   SelectedCardList,
 } from 'components'
-import { PLAY_GAME, RESET, buttons } from 'constant'
+import { LEAVE_ROOM, PLAY_GAME, RESET, buttons } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { gamePlayStore, roomStore, selectedDeckStore } from 'store'
 import { useNavigate } from 'react-router-dom'
-import { leaveRoomRequest } from 'api'
 
 export const RoomFooter = observer(() => {
   const navigate = useNavigate()
-
+  const lastJsonMessage = roomStore.getLastJsonMessage()
   const room_id = sessionStorage.getItem('room_id')
+  const token = sessionStorage.getItem('token')
+  const sendJsonMessage = roomStore.getSendJsonMessage()
+
+  useEffect(() => {
+    console.log(lastJsonMessage.type)
+    if (lastJsonMessage?.type === LEAVE_ROOM) {
+      if (lastJsonMessage.success) {
+        sessionStorage.setItem('room_id', '')
+        sessionStorage.setItem('player_name', '')
+        navigate('/lobby')
+      } else {
+        console.error(lastJsonMessage.errors)
+      }
+    }
+  }, [lastJsonMessage])
 
   const handleResetGame = useCallback(() => {
-    const sendJsonMessage = roomStore.getSendJsonMessage()
     sendJsonMessage({
       type: RESET,
       room_id,
-      token: sessionStorage.getItem('token'),
+      token,
     })
     gamePlayStore.resetGame()
   }, [])
 
-  const handleLeaveRoom = useCallback(async () => {
-    try {
-      const responseData = await leaveRoomRequest()
-
-      if (responseData.success) {
-        navigate('/lobby')
-      } else {
-        console.error('Failed to leave room:', responseData.error)
-      }
-    } catch (error) {
-      console.error(error.message)
-    }
-  }, [navigate])
+  const handleLeaveRoom = () => {
+    sendJsonMessage({
+      type: LEAVE_ROOM,
+      room_id,
+      token,
+    })
+  }
 
   const handleStartGame = useCallback(() => {
-    const sendJsonMessage = roomStore.getSendJsonMessage()
     sendJsonMessage({
       type: PLAY_GAME,
       room_id,
-      token: sessionStorage.getItem('token'),
+      token,
     })
     gamePlayStore.toggleGameStatus()
     roomStore.resetDetailedCardInfo()
@@ -67,14 +73,13 @@ export const RoomFooter = observer(() => {
           backgroundColor="#007bff"
         />
         <LinkButton
-          linkTo={`/gametable/${room_id}`}
+          linkTo={`/gametable/${room_id}`} //TODO
           onClick={handleStartGame}
           disabled={!selectedDeckStore.totalPlayers}
           buttontext={buttonText}
           backgroundColor="#28a745"
         />
-        <LinkButton
-          linkTo="/lobby"
+        <Button
           onClick={handleLeaveRoom}
           buttontext="LEAVE ROOM"
           backgroundColor="#dc3545"

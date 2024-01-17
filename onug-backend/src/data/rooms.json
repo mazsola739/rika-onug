@@ -5,7 +5,7 @@
     "selected_cards": [],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -29,7 +29,7 @@
     "selected_cards": [],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -53,7 +53,7 @@
     "selected_cards": [],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -87,7 +87,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -120,7 +120,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -153,7 +153,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -186,7 +186,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -224,7 +224,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -262,7 +262,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -300,7 +300,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -338,7 +338,7 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -362,7 +362,7 @@
     "selected_cards": [],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [

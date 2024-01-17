@@ -1,11 +1,10 @@
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { Slaves, StyledLobby, LowPhas, StyledRoomButton } from './Lobby.styles'
-import { lobbyStore } from 'store'
+import { lobbyStore, roomStore } from 'store'
 import { useNavigate } from 'react-router-dom'
 import { StyledLobbyProps } from './Lobby.types'
-import { Link } from 'react-router-dom'
-import { joinRoomRequest } from 'api'
+import { JOIN_ROOM } from 'constant'
 
 const RoomButton: React.FC<StyledLobbyProps> = ({
   buttonText,
@@ -21,28 +20,34 @@ const RoomButton: React.FC<StyledLobbyProps> = ({
 
 export const Lobby: React.FC = observer(() => {
   const navigate = useNavigate()
+  const lastJsonMessage = roomStore.getLastJsonMessage()
+
+  useEffect(() => {
+    console.log(lastJsonMessage.type)
+    if (lastJsonMessage?.type === JOIN_ROOM) {
+      if (lastJsonMessage.success) {
+        const { room_id, player_name } = lastJsonMessage
+        sessionStorage.setItem('room_id', room_id)
+        sessionStorage.setItem('player_name', player_name)
+
+        navigate(`/room/${room_id}`)
+      } else {
+        console.error(lastJsonMessage.error, lastJsonMessage.errors) //TODO backend error to errors
+      }
+    }
+  }, [lastJsonMessage])
 
   useEffect(() => {
     lobbyStore.fetchRooms()
   }, [])
 
-  const handleJoinRoom = async (room_id: string) => {
-    try {
-      const responseData = await joinRoomRequest(room_id)
-      console.log(responseData)
-
-      if (responseData.success) {
-        sessionStorage.setItem('token', responseData.token)
-        sessionStorage.setItem('player_name', responseData.player_name)
-        sessionStorage.setItem('room_id', responseData.room_id)
-
-        navigate(`/room/${room_id}`)
-      } else {
-        console.error(`Failed to join room ${room_id}: ${responseData.error}`)
-      }
-    } catch (error) {
-      console.error(`Error joining room ${room_id}: ${error.message}`)
-    }
+  const handleJoinRoom = (room_id: string) => {
+    const sendJsonMessage = roomStore.getSendJsonMessage()
+    sendJsonMessage({
+      type: JOIN_ROOM,
+      room_id,
+      token: sessionStorage.getItem('token'),
+    })
   }
 
   return lobbyStore.isLoading ? (
@@ -52,13 +57,12 @@ export const Lobby: React.FC = observer(() => {
   ) : (
     <StyledLobby>
       {lobbyStore.rooms.map((room, index) => (
-        <Link to={`/room/${room.room_id}`} key={room.room_id}>
-          <RoomButton
-            onClick={() => handleJoinRoom(room.room_id)}
-            index={index}
-            buttonText={room.room_name}
-          />
-        </Link>
+        <RoomButton
+          key={room.room_id}
+          onClick={() => handleJoinRoom(room.room_id)}
+          index={index}
+          buttonText={room.room_name}
+        />
       ))}
       <Slaves>
         <LowPhas color="white" style={{ transform: 'translate(125%, -100%)' }}>

@@ -13,18 +13,13 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [
-        {
-            "name": "Homelander",
-            "admin": true,
-            "token": "83f6e3c4-867b-43a9-bec8-035885e0e031"
-        }
-    ],
+    "players": {},
     "turn": 0,
     "closed": false,
     "available_names": [
         "Billy Butcher",
         "Hughie Campbell",
+        "Homelander",
         "Starlight",
         "The Deep",
         "Queen Maeve",

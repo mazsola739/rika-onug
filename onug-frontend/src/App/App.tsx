@@ -5,26 +5,31 @@ import { StyledApp } from './App.styles'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { useEffect, useState } from 'react'
-import { AUTH, KEEP_ALIVE } from 'constant'
+import { KEEP_ALIVE, NEWBIE } from 'constant'
 
 export const App = observer(() => {
+  const [firstTime, setFirstTime] = useState(true)
   const [socketUrl] = useState('ws://localhost:7655/')
   const { readyState, sendJsonMessage, lastJsonMessage } =
     useWebSocket(socketUrl)
 
   useEffect(() => {
-    if (sendJsonMessage) {
+    const token = sessionStorage.getItem('token')
+
+    if (sendJsonMessage && firstTime) {
+      setFirstTime(false)
+      sendJsonMessage({ type: NEWBIE, token })
       roomStore.setSendJsonMessage(sendJsonMessage)
     }
     if (lastJsonMessage) {
       roomStore.setLastJsonMessage(lastJsonMessage)
     }
     if (lastJsonMessage?.type !== KEEP_ALIVE) {
-      if (lastJsonMessage?.type === AUTH) {
+      if (lastJsonMessage?.type === NEWBIE) {
         sessionStorage.setItem('token', lastJsonMessage.token)
       }
     }
-  }, [sendJsonMessage, roomStore, lastJsonMessage])
+  }, [sendJsonMessage, roomStore, lastJsonMessage, firstTime])
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',

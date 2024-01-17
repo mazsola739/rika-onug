@@ -1,7 +1,6 @@
 const { repository } = require('../repository')
-const { logWarn } = require('../log')
-
 const { readGameState } = repository
+const { logWarn } = require('../log')
 
 const roomIds = [
   'foyer', 'archives', 'armory', 'dynamite_room', 'great_hall',
