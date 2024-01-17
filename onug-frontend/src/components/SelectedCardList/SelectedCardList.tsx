@@ -9,12 +9,7 @@ export const SelectedCardList = observer(() => {
   return (
     <StyledSelectedCardList>
       {selectedCards.map((card) => (
-        <SelectedCard
-          key={card.id}
-          src={require(`../../assets/cards/${card.card_name}.png`)}
-          alt={card.display_name}
-          id={card.id}
-        />
+        <SelectedCard key={card.id} card={card} />
       ))}
     </StyledSelectedCardList>
   )

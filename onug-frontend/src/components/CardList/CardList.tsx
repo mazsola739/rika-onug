@@ -4,7 +4,7 @@ import { roomStore } from 'store'
 import { StyledCardList, CardListTitle, CardListGrid } from './CardList.styles'
 import { CardListProps } from './CardList.types'
 
-export const CardList = observer(({ team, cards, room_id }: CardListProps) => {
+export const CardList = observer(({ team, cards }: CardListProps) => {
   const { getTeamMembers, getTeamName } = roomStore
 
   const teamMembers = getTeamMembers(cards)
@@ -15,7 +15,7 @@ export const CardList = observer(({ team, cards, room_id }: CardListProps) => {
       <CardListTitle>{`${teamName} TEAM`}</CardListTitle>
       <CardListGrid>
         {teamMembers.map((card) => (
-          <Card key={card.id} card={card} room_id={room_id} />
+          <Card key={card.id} card={card} />
         ))}
       </CardListGrid>
     </StyledCardList>

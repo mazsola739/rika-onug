@@ -76,7 +76,6 @@ export const Room = observer(({ roomStore }: RoomProps) => {
             key={teamName}
             team={teamName}
             cards={roomStore.getFilteredCardsForTeam(teamName)}
-            room_id={room_id}
           />
         ))}
         <TokenList />

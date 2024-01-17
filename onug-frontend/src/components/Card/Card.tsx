@@ -5,7 +5,7 @@ import { CardProps } from './Card.types'
 import { useCallback, useMemo } from 'react'
 import { UPDATE_SELECT } from 'constant'
 
-export const Card = observer(({ card, room_id }: CardProps) => {
+export const Card = observer(({ card }: CardProps) => {
   const {
     id,
     card_name,
@@ -21,6 +21,7 @@ export const Card = observer(({ card, room_id }: CardProps) => {
   )
 
   const sendJsonMessage = roomStore.getSendJsonMessage()
+  const room_id = sessionStorage.getItem('room_id')
 
   const handleCardClick = useCallback(() => {
     selectedDeckStore.toggleCardSelectionStatus(id)

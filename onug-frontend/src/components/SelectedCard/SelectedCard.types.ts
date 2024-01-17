@@ -1,5 +1,5 @@
+import { CardType } from 'types'
+
 export interface SelectedCardProps {
-  src: string
-  alt: string
-  id: number
+  card: CardType
 }
