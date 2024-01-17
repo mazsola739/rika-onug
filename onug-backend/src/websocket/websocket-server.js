@@ -10,8 +10,10 @@ const {
   CARD_SELECT,
   CARD_DESELECT,
   PLAY_GAME,
+  HYDRATE_SELECT,
 } = require("../constant/ws");
 const { playGame } = require("./play-game");
+const { hydrateSelect } = require("./hydrate-select");
 const { upsertRoomState } = repository;
 
 exports.websocketServer = (port) => {
@@ -81,6 +83,7 @@ exports.websocketServer = (port) => {
         );
       }
       if (message.type === PLAY_GAME) return playGame(ws, message)
+      if (message.type === HYDRATE_SELECT) return hydrateSelect(ws, message)
     });
   });
 };

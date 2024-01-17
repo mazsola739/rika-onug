@@ -26,3 +26,14 @@ export type RepeatroleType = {
 }
 
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
+
+export type WsJsonMessage = {
+  type?: string
+  selected_cards?: number[]
+}
+
+export type WsCommunicationsBridgeType<T> = {
+  //TODO
+  sendJsonMessage: SendJsonMessageType<T>
+  lastJsonMessage: string
+}

@@ -9,6 +9,11 @@
             "name": "Wonder Woman",
             "admin": true,
             "token": "25e9cae4-0acc-4a2e-9d31-043fbd69ba16"
+        },
+        {
+            "name": "Deadpool",
+            "admin": false,
+            "token": "fa39d114-d983-441f-a01e-f7c82d23fe38"
         }
     ],
     "turn": 0,
@@ -21,7 +26,6 @@
         "Iron Man",
         "Thor",
         "Aquaman",
-        "Deadpool",
         "Wolverine",
         "Groot",
         "Thanos"

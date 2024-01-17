@@ -3,10 +3,40 @@ import { Lobby, Room, GameTable, GamePlay, Voting, Settings } from 'routes'
 import { roomStore } from 'store'
 import { StyledApp } from './App.styles'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import useWebSocket, { ReadyState } from 'react-use-websocket'
+import { useEffect, useState } from 'react'
+import { AUTH, KEEP_ALIVE } from 'constant'
 
 export const App = observer(() => {
+  const [socketUrl] = useState('ws://localhost:7655/')
+  const { readyState, sendJsonMessage, lastJsonMessage } =
+    useWebSocket(socketUrl)
+
+  useEffect(() => {
+    if (sendJsonMessage) {
+      roomStore.setSendJsonMessage(sendJsonMessage)
+    }
+    if (lastJsonMessage) {
+      roomStore.setLastJsonMessage(lastJsonMessage)
+    }
+    if (lastJsonMessage?.type !== KEEP_ALIVE) {
+      if (lastJsonMessage?.type === AUTH) {
+        sessionStorage.setItem('token', lastJsonMessage.token)
+      }
+    }
+  }, [sendJsonMessage, roomStore, lastJsonMessage])
+
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: 'Connecting',
+    [ReadyState.OPEN]: 'Open',
+    [ReadyState.CLOSING]: 'Closing',
+    [ReadyState.CLOSED]: 'Closed',
+    [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
+  }[readyState]
+
   return (
     <StyledApp>
+      <span>The WebSocket is currently {connectionStatus}</span>
       <Router>
         <Routes>
           <Route path="/" element={<Lobby />} />
@@ -15,10 +45,10 @@ export const App = observer(() => {
             path="/room/:room_id"
             element={<Room roomStore={roomStore} />}
           />
-          <Route path="/gametable/:id" element={<GameTable />} />
-          <Route path="/gameplay/:id" element={<GamePlay />} />
-          <Route path="/voting/:id" element={<Voting />} />
-          <Route path="/settings/:id" element={<Settings />} />
+          <Route path="/gametable/:room_id" element={<GameTable />} />
+          <Route path="/gameplay/:room_id" element={<GamePlay />} />
+          <Route path="/voting/:room_id" element={<Voting />} />
+          <Route path="/settings/:room_id" element={<Settings />} />
           {/* 404 Not Found Route    */}
           {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>

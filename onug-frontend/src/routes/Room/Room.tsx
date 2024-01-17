@@ -1,43 +1,41 @@
 import { CardList, TokenList } from 'components'
-import { AUTH, KEEP_ALIVE, team } from 'constant'
+import { HYDRATE_SELECT, team } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { deckStore } from 'store'
+import { deckStore, selectedDeckStore } from 'store'
 import { Main } from './Room.styles'
 import { RoomProps } from './Room.types'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
-import useWebSocket, { ReadyState } from 'react-use-websocket'
 
 export const Room = observer(({ roomStore }: RoomProps) => {
   const { deck } = deckStore
   const { room_id } = useParams()
+  const [firstTime, setFirstTime] = useState(true)
 
-  const [socketUrl] = useState('ws://localhost:7655/')
-  const { readyState, sendJsonMessage, lastJsonMessage } =
-    useWebSocket(socketUrl)
+  const sendJsonMessage = roomStore.getSendJsonMessage()
+  const lastJsonMessage = roomStore.getLastJsonMessage()
 
   useEffect(() => {
-    if (sendJsonMessage) {
-      roomStore.setSendJsonMessage(sendJsonMessage)
+    if (sendJsonMessage && firstTime) {
+      setFirstTime(false)
+      setInterval(
+        () =>
+          sendJsonMessage({
+            type: HYDRATE_SELECT,
+            room_id: sessionStorage.getItem('room_id'),
+          }),
+        1000
+      )
     }
+  }, [sendJsonMessage, firstTime])
 
-    if (lastJsonMessage?.type !== KEEP_ALIVE) {
-      if (lastJsonMessage?.type === AUTH) {
-        sessionStorage.setItem('token', lastJsonMessage.token)
-      }
-      console.log(lastJsonMessage)
+  useEffect(() => {
+    if (lastJsonMessage?.type === HYDRATE_SELECT) {
+      selectedDeckStore.setSelectedCard(lastJsonMessage.selected_cards)
     }
-  }, [sendJsonMessage, roomStore, lastJsonMessage])
-
-  const connectionStatus = {
-    [ReadyState.CONNECTING]: 'Connecting',
-    [ReadyState.OPEN]: 'Open',
-    [ReadyState.CLOSING]: 'Closing',
-    [ReadyState.CLOSED]: 'Closed',
-    [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
-  }[readyState]
+  }, [sendJsonMessage, lastJsonMessage])
 
   const teamArray = useMemo(
     () => [
@@ -61,7 +59,6 @@ export const Room = observer(({ roomStore }: RoomProps) => {
     <>
       <RoomHeader />
       <Main>
-        <span>The WebSocket is currently {connectionStatus}</span>
         {orderedTeams.map((teamName) => (
           <CardList
             key={teamName}

@@ -56,6 +56,11 @@ class SelectedDeckStore {
     return this.selectedCardIds.includes(cardId)
   }
 
+  setSelectedCard(cardIds: number[]): void {
+    this.selectedCards = cardIds.map((cardId) => deckStore.getCardById(cardId))
+    this.selectedCardIds = cardIds
+  }
+
   toggleCardSelectionStatus(cardId: number): void {
     const index = this.selectedCardIds.indexOf(cardId)
     if (index > -1) {

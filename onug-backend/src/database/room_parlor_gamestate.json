@@ -2,19 +2,20 @@
     "room_id": "parlor",
     "room_name": "Parlor",
     "selected_cards": [
-        15,
-        16,
         7,
-        71,
-        18,
-        10,
         80,
-        27,
         11,
         72,
         20,
         75,
-        21
+        21,
+        18,
+        30,
+        32,
+        45,
+        25,
+        37,
+        58
     ],
     "actions": [],
     "action_log": [],
@@ -23,6 +24,21 @@
             "name": "Snow White",
             "admin": true,
             "token": "48d32593-d8aa-424b-bcbe-fdbace1f7b46"
+        },
+        {
+            "name": "Jasmine",
+            "admin": false,
+            "token": "78dbc77f-7279-47a7-a8cf-85e8c6102404"
+        },
+        {
+            "name": "Anna",
+            "admin": false,
+            "token": "cead7aa6-27b9-4151-a76d-7a57d84cef1d"
+        },
+        {
+            "name": "Mulan",
+            "admin": false,
+            "token": "533aea10-82e3-4688-9653-1a56abf96cd3"
         }
     ],
     "turn": 0,
@@ -32,11 +48,8 @@
         "Aurora",
         "Ariel",
         "Belle",
-        "Jasmine",
         "Pocahontas",
-        "Mulan",
         "Rapunzel",
-        "Anna",
         "Elsa",
         "Giselle"
     ]

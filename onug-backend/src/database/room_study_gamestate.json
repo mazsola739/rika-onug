@@ -9,13 +9,17 @@
             "name": "Barry Allen",
             "admin": true,
             "token": "cd814f42-c117-4be2-96a4-9ff77a936163"
+        },
+        {
+            "name": "Bruce Wayne",
+            "admin": false,
+            "token": "330b9d39-a716-4206-9892-959f8ae3d866"
         }
     ],
     "turn": 0,
     "closed": false,
     "available_names": [
         "Clark Kent",
-        "Bruce Wayne",
         "Diana Prince",
         "Arthur Curry",
         "Selina Kyle",
