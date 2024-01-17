@@ -3,18 +3,29 @@
     "room_name": "Foyer",
     "selected_cards": [
         25,
-        15,
-        17,
-        22,
-        18,
         23,
-        27,
         11,
-        24
+        24,
+        5,
+        6,
+        1,
+        32
     ],
     "actions": [],
     "action_log": [],
-    "players": {},
+    "players": {
+        "1e288c87-b661-47a6-bc7e-607e4e50727e": {
+            "name": "Dobby",
+            "admin": true,
+            "stage": "Table",
+            "player_card": 18
+        },
+        "7e798c54-a05f-4308-bcd5-f0cc0d4808ac": {
+            "name": "Rubeus Hagrid",
+            "admin": false,
+            "stage": "Room"
+        }
+    },
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -27,8 +38,14 @@
         "Draco Malfoy",
         "Neville Longbottom",
         "Ginny Weasley",
-        "Dobby",
-        "Dolores Umbridge",
-        "Rubeus Hagrid"
-    ]
+        "Dolores Umbridge"
+    ],
+    "center_cards": {
+        "base": [
+            22,
+            24,
+            27
+        ],
+        "chosenWolfId": 15
+    }
 }

@@ -1,10 +1,4 @@
-import {
-  Footer,
-  FooterButtons,
-  Button,
-  LinkButton,
-  SelectedCardList,
-} from 'components'
+import { Footer, FooterButtons, Button, SelectedCardList } from 'components'
 import { LEAVE_ROOM, PLAY_GAME, RESET, buttons } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback, useEffect } from 'react'
@@ -16,10 +10,8 @@ export const RoomFooter = observer(() => {
   const lastJsonMessage = roomStore.getLastJsonMessage()
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
-  const sendJsonMessage = roomStore.getSendJsonMessage()
 
   useEffect(() => {
-    console.log(lastJsonMessage.type)
     if (lastJsonMessage?.type === LEAVE_ROOM) {
       if (lastJsonMessage.success) {
         sessionStorage.setItem('room_id', '')
@@ -31,7 +23,18 @@ export const RoomFooter = observer(() => {
     }
   }, [lastJsonMessage])
 
+  useEffect(() => {
+    if (lastJsonMessage?.type === PLAY_GAME) {
+      if (lastJsonMessage.success) {
+        navigate(`/gametable/${room_id}`)
+      } else {
+        console.error(lastJsonMessage.errors)
+      }
+    }
+  }, [lastJsonMessage])
+
   const handleResetGame = useCallback(() => {
+    const sendJsonMessage = roomStore.getSendJsonMessage()
     sendJsonMessage({
       type: RESET,
       room_id,
@@ -41,6 +44,7 @@ export const RoomFooter = observer(() => {
   }, [])
 
   const handleLeaveRoom = () => {
+    const sendJsonMessage = roomStore.getSendJsonMessage()
     sendJsonMessage({
       type: LEAVE_ROOM,
       room_id,
@@ -49,6 +53,7 @@ export const RoomFooter = observer(() => {
   }
 
   const handleStartGame = useCallback(() => {
+    const sendJsonMessage = roomStore.getSendJsonMessage()
     sendJsonMessage({
       type: PLAY_GAME,
       room_id,
@@ -72,8 +77,7 @@ export const RoomFooter = observer(() => {
           buttontext={buttons.reset_game_label}
           backgroundColor="#007bff"
         />
-        <LinkButton
-          linkTo={`/gametable/${room_id}`} //TODO
+        <Button
           onClick={handleStartGame}
           disabled={!selectedDeckStore.totalPlayers}
           buttontext={buttonText}

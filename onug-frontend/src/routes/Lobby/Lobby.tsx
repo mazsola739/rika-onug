@@ -23,7 +23,6 @@ export const Lobby: React.FC = observer(() => {
   const lastJsonMessage = roomStore.getLastJsonMessage()
 
   useEffect(() => {
-    console.log(lastJsonMessage.type)
     if (lastJsonMessage?.type === JOIN_ROOM) {
       if (lastJsonMessage.success) {
         const { room_id, player_name } = lastJsonMessage
