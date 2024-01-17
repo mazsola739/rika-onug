@@ -13,21 +13,26 @@
     ],
     "actions": [],
     "action_log": [],
-    "players": [],
+    "players": [
+        {
+            "name": "Homelander",
+            "admin": true,
+            "token": "83f6e3c4-867b-43a9-bec8-035885e0e031"
+        }
+    ],
     "turn": 0,
     "closed": false,
     "available_names": [
-        "Zeus",
-        "Poseidon",
-        "Hera",
-        "Athena",
-        "Artemis",
-        "Aphrodite",
-        "Persephone",
-        "Hephaestus",
-        "Dionysus",
-        "Hades",
-        "Helios",
-        "Prometheus"
+        "Billy Butcher",
+        "Hughie Campbell",
+        "Starlight",
+        "The Deep",
+        "Queen Maeve",
+        "Cate Dunlap",
+        "Sam Riordan",
+        "Emma Meyer",
+        "Andre Anderson",
+        "Jordan Li",
+        "Marie Moreau"
     ]
 }

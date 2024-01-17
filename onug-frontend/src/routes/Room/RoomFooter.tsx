@@ -9,12 +9,13 @@ import { PLAY_GAME, RESET, buttons } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
 import { gamePlayStore, roomStore, selectedDeckStore } from 'store'
-import { RoomFooterProps } from './Room.types'
 import { useNavigate } from 'react-router-dom'
 import { leaveRoomRequest } from 'api'
 
-export const RoomFooter = observer(({ room_id }: RoomFooterProps) => {
+export const RoomFooter = observer(() => {
   const navigate = useNavigate()
+
+  const room_id = sessionStorage.getItem('room_id')
 
   const handleResetGame = useCallback(() => {
     const sendJsonMessage = roomStore.getSendJsonMessage()

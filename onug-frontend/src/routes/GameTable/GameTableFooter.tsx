@@ -1,4 +1,4 @@
-import { Button, Footer, FooterButtons, LinkButton } from 'components'
+import { Footer, FooterButtons, LinkButton } from 'components'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
 import { buttons } from 'constant'
@@ -6,9 +6,7 @@ import { gamePlayStore, selectedDeckStore } from 'store'
 import { Messages } from './GameTable.styles'
 
 export const GameTableFooter = observer(() => {
-  const handlePauseGame = useCallback(() => {
-    gamePlayStore.togglePauseStatus()
-  }, [])
+  const room_id = sessionStorage.getItem('room_id')
 
   const handleStopGame = useCallback(() => {
     gamePlayStore.toggleGameStatus()
@@ -18,26 +16,17 @@ export const GameTableFooter = observer(() => {
     console.log('Game started', buttons.start_button_label)
   }, [])
 
-  const buttonText = gamePlayStore.isGamePaused
-    ? buttons.pause_button_alt_label
-    : buttons.pause_button_label
-
   return (
     <Footer>
       <FooterButtons>
-        <Button
-          onClick={handlePauseGame}
-          buttontext={buttonText}
-          backgroundColor="#ff9800"
-        />
         <LinkButton
-          linkTo="/"
+          linkTo={`/room/${room_id}`}
           onClick={handleStopGame}
           buttontext={buttons.stop_button_label}
           backgroundColor="#f44336"
         />
         <LinkButton
-          linkTo="/gameplay"
+          linkTo={`/gameplay/${room_id}`}
           onClick={handleStartGame}
           buttontext={buttons.start_game_label}
           backgroundColor="#8e44ad"

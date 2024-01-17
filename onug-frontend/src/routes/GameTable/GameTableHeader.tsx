@@ -22,6 +22,7 @@ export const GameTableHeader = observer(() => {
       console.error(error.message)
     }
   }
+  const player_name = sessionStorage.getItem('player_name')
 
   const player = {
     player_card: {
@@ -34,7 +35,7 @@ export const GameTableHeader = observer(() => {
       order: 32,
       rules: rules_role.rules_minion,
     },
-    player_name: 'Valaki',
+    player_name,
     player_number: 1,
   }
 

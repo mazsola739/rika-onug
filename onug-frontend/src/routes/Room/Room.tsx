@@ -80,7 +80,7 @@ export const Room = observer(({ roomStore }: RoomProps) => {
         ))}
         <TokenList />
       </Main>
-      <RoomFooter room_id={room_id} player_name={'Ron Weasley'} />
+      <RoomFooter />
     </>
   )
 })
