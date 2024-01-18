@@ -69,8 +69,16 @@ export const Card = observer(({ card }: CardProps) => {
     [card_name]
   )
 
+  const testId = `${display_name.replace(/ /g, '-')}--${
+    isSelected ? 'selected' : 'not-selected'
+  }`
+
   return (
-    <StyledCard isSelected={isSelected} onClick={handleCardClick}>
+    <StyledCard
+      isSelected={isSelected}
+      onClick={handleCardClick}
+      data-testid={testId}
+    >
       <CardImage src={imageSrc} alt={display_name} isSelected={isSelected} />
       <CardName isSelected={isSelected}>{display_name}</CardName>
     </StyledCard>

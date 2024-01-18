@@ -1,0 +1,12 @@
+{
+  "name": "onug-e2e",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start:card-select-tests": "node ./src/card-select-tests.js"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.16.0"
+  }
+}

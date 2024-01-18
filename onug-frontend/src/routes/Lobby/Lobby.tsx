@@ -4,15 +4,17 @@ import { Slaves, StyledLobby, LowPhas, StyledRoomButton } from './Lobby.styles'
 import { lobbyStore, wsStore } from 'store'
 import { useNavigate } from 'react-router-dom'
 import { StyledLobbyProps } from './Lobby.types'
-import { HYDRATE_LOBBY, JOIN_ROOM } from 'constant'
+import { HYDRATE_LOBBY, JOIN_ROOM, STAGES } from 'constant'
 
 const RoomButton: React.FC<StyledLobbyProps> = ({
   buttonText,
   onClick,
   index,
 }) => {
+  const testId = buttonText.replace(/ /g, '-')
+
   return (
-    <StyledRoomButton index={index} onClick={onClick}>
+    <StyledRoomButton index={index} onClick={onClick} data-testid={testId}>
       {buttonText}
     </StyledRoomButton>
   )
@@ -29,7 +31,7 @@ export const Lobby: React.FC = observer(() => {
       setFirstTime(false)
       sendJsonMessage({
         type: HYDRATE_LOBBY,
-        stage: 'Lobby',
+        stage: STAGES.LOBBY,
       })
     }
   }, [sendJsonMessage, firstTime])

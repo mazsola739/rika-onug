@@ -9,6 +9,7 @@ const {
   NEWBIE,
   JOIN_ROOM,
   LEAVE_ROOM,
+  LEAVE_TABLE,
 } = require("../constant/ws")
 const { playGame } = require("./play-game")
 const { hydrateRoom } = require("./hydrate-room")
@@ -17,6 +18,7 @@ const { updateRoom } = require("./update-room")
 const { newbie } = require("./newbie")
 const { joinRoom } = require("./join-room")
 const { leaveRoom } = require("./leave-room")
+const { leaveTable } = require("./leave-table")
 
 
 exports.websocketServer = (port) => {
@@ -44,6 +46,7 @@ exports.websocketServer = (port) => {
       if (message.type === LEAVE_ROOM) return leaveRoom(ws, message)
       if (message.type === UPDATE_ROOM) return updateRoom(message)
       if (message.type === PLAY_GAME) return playGame(ws, message)
+      if (message.type === LEAVE_TABLE) return leaveTable(ws, message)
       if (message.type === RESET) return reset(message)
       if (message.type === HYDRATE_ROOM) return hydrateRoom(ws, message)
     })

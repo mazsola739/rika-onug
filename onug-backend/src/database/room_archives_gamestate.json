@@ -1,0 +1,39 @@
+{
+    "room_id": "archives",
+    "room_name": "Archives",
+    "selected_cards": [
+        1,
+        32,
+        31,
+        34,
+        37
+    ],
+    "actions": [],
+    "action_log": [],
+    "players": {
+        "0cc99177-d63d-4aa9-aab3-d3c013dd902c": {
+            "name": "Minotaur",
+            "admin": true,
+            "stage": "ROOM"
+        },
+        "d9fa4de7-656d-46d8-9fb0-ba812bb35f36": {
+            "name": "Cyclops",
+            "admin": false,
+            "stage": "ROOM"
+        }
+    },
+    "turn": 0,
+    "closed": false,
+    "available_names": [
+        "Dragon",
+        "Phoenix",
+        "Griffin",
+        "Mermaid",
+        "Unicorn",
+        "Troll",
+        "Chimera",
+        "Goblin",
+        "Fairy",
+        "Djinn"
+    ]
+}

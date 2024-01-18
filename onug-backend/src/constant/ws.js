@@ -4,6 +4,7 @@ exports.AUTH               = "AUTH"
 
 exports.JOIN_ROOM          = "JOIN_ROOM"
 exports.LEAVE_ROOM         = "LEAVE_ROOM"
+exports.LEAVE_TABLE        = "LEAVE_TABLE"
 
 exports.ARRIVE_LOBBY       = "ARRIVE_LOBBY"
 exports.ARRIVE_ROOM        = "ARRIVE_ROOM"
