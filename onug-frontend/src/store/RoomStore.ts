@@ -1,5 +1,5 @@
 import { makeAutoObservable, reaction } from 'mobx'
-import { CardType, SendJsonMessageType, TokenType, WsJsonMessage } from 'types'
+import { CardType, TokenType } from 'types'
 import { roomStoreUtils } from 'utils'
 import { deckStore } from './DeckStore'
 import { expansions, team } from 'constant'
@@ -13,12 +13,6 @@ class RoomStore {
   detailedCardInfo: CardType = deckStore.createEmptyCard()
   detailedTokenInfo: TokenType = deckStore.createEmptyToken()
   selectedExpansions: string[] = Object.keys(expansions)
-  sendJsonMessage: SendJsonMessageType<unknown> | null = null
-  lastJsonMessage: WsJsonMessage = {}
-  wsCommunicationsBridge = {
-    sendJsonMessage: this.sendJsonMessage,
-    lastJsonMessage: this.lastJsonMessage,
-  }
 
   constructor() {
     makeAutoObservable(this)
@@ -30,28 +24,6 @@ class RoomStore {
 
     this.toggleExpansionSelection = this.toggleExpansionSelection.bind(this)
     this.setDetailedTokenInfo = this.setDetailedTokenInfo.bind(this)
-  }
-
-  setSendJsonMessage<T>(
-    sendJsonMessage: (jsonMessage: T, keep?: boolean) => void
-  ): void {
-    this.sendJsonMessage = sendJsonMessage
-  }
-
-  getSendJsonMessage<T>(): (jsonMessage: T, keep?: boolean) => void {
-    return this.sendJsonMessage as (jsonMessage: T, keep?: boolean) => void
-  }
-
-  setLastJsonMessage(lastJsonMessage: WsJsonMessage) {
-    this.lastJsonMessage = lastJsonMessage
-  }
-
-  getLastJsonMessage(): WsJsonMessage {
-    return this.lastJsonMessage
-  }
-
-  getWsCommunicationsBridge() {
-    return this.wsCommunicationsBridge
   }
 
   setDetailedTokenInfo(tokenId: number): void {

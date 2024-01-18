@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { selectedDeckStore, roomStore } from 'store'
+import { selectedDeckStore, roomStore, wsStore } from 'store'
 import { StyledCard, CardImage, CardName } from './Card.styles'
 import { CardProps } from './Card.types'
 import { useCallback, useMemo } from 'react'
@@ -20,7 +20,7 @@ export const Card = observer(({ card }: CardProps) => {
     (selectedCard) => selectedCard.id === id
   )
 
-  const sendJsonMessage = roomStore.getSendJsonMessage()
+  const sendJsonMessage = wsStore.getSendJsonMessage()
   const room_id = sessionStorage.getItem('room_id')
 
   const handleCardClick = useCallback(() => {

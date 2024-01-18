@@ -1,3 +1,5 @@
+export * from './WsStore'
+
 export * from './LobbyStore'
 export * from './DeckStore'
 export * from './RoomStore'

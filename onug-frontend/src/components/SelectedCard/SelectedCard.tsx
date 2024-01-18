@@ -1,4 +1,4 @@
-import { roomStore, selectedDeckStore } from 'store'
+import { roomStore, selectedDeckStore, wsStore } from 'store'
 import { StyledSelectedCard } from './SelectedCard.styles'
 import { SelectedCardProps } from './SelectedCard.types'
 import { observer } from 'mobx-react-lite'
@@ -21,7 +21,7 @@ export const SelectedCard = observer(({ card }: SelectedCardProps) => {
     (selectedCard) => selectedCard.id === id
   )
 
-  const sendJsonMessage = roomStore.getSendJsonMessage()
+  const sendJsonMessage = wsStore.getSendJsonMessage()
 
   const room_id = sessionStorage.getItem('room_id')
 

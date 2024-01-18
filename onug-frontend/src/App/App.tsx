@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { Lobby, Room, GameTable, GamePlay, Voting, Settings } from 'routes'
-import { roomStore } from 'store'
+import { wsStore } from 'store'
 import { StyledApp } from './App.styles'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
@@ -19,17 +19,17 @@ export const App = observer(() => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       sendJsonMessage({ type: NEWBIE, token })
-      roomStore.setSendJsonMessage(sendJsonMessage)
+      wsStore.setSendJsonMessage(sendJsonMessage)
     }
     if (lastJsonMessage) {
-      roomStore.setLastJsonMessage(lastJsonMessage)
+      wsStore.setLastJsonMessage(lastJsonMessage)
     }
     if (lastJsonMessage?.type !== KEEP_ALIVE) {
       if (lastJsonMessage?.type === NEWBIE) {
         sessionStorage.setItem('token', lastJsonMessage.token)
       }
     }
-  }, [sendJsonMessage, roomStore, lastJsonMessage, firstTime])
+  }, [sendJsonMessage, wsStore, lastJsonMessage, firstTime])
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',
@@ -46,10 +46,7 @@ export const App = observer(() => {
         <Routes>
           <Route path="/" element={<Lobby />} />
           <Route path="/lobby" element={<Lobby />} />
-          <Route
-            path="/room/:room_id"
-            element={<Room roomStore={roomStore} />}
-          />
+          <Route path="/room/:room_id" element={<Room />} />
           <Route path="/gametable/:room_id" element={<GameTable />} />
           <Route path="/gameplay/:room_id" element={<GamePlay />} />
           <Route path="/voting/:room_id" element={<Voting />} />

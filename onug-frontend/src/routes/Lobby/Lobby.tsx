@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { useEffect } from 'react'
 import { Slaves, StyledLobby, LowPhas, StyledRoomButton } from './Lobby.styles'
-import { lobbyStore, roomStore } from 'store'
+import { lobbyStore, wsStore } from 'store'
 import { useNavigate } from 'react-router-dom'
 import { StyledLobbyProps } from './Lobby.types'
 import { JOIN_ROOM } from 'constant'
@@ -20,7 +20,7 @@ const RoomButton: React.FC<StyledLobbyProps> = ({
 
 export const Lobby: React.FC = observer(() => {
   const navigate = useNavigate()
-  const lastJsonMessage = roomStore.getLastJsonMessage()
+  const lastJsonMessage = wsStore.getLastJsonMessage()
 
   useEffect(() => {
     if (lastJsonMessage?.type === JOIN_ROOM) {
@@ -41,7 +41,7 @@ export const Lobby: React.FC = observer(() => {
   }, [])
 
   const handleJoinRoom = (room_id: string) => {
-    const sendJsonMessage = roomStore.getSendJsonMessage()
+    const sendJsonMessage = wsStore.getSendJsonMessage()
     sendJsonMessage({
       type: JOIN_ROOM,
       room_id,

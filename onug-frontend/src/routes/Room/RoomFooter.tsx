@@ -2,12 +2,12 @@ import { Footer, FooterButtons, Button, SelectedCardList } from 'components'
 import { LEAVE_ROOM, PLAY_GAME, RESET, buttons } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback, useEffect } from 'react'
-import { gamePlayStore, roomStore, selectedDeckStore } from 'store'
+import { gamePlayStore, roomStore, selectedDeckStore, wsStore } from 'store'
 import { useNavigate } from 'react-router-dom'
 
 export const RoomFooter = observer(() => {
   const navigate = useNavigate()
-  const lastJsonMessage = roomStore.getLastJsonMessage()
+  const lastJsonMessage = wsStore.getLastJsonMessage()
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
 
@@ -34,7 +34,7 @@ export const RoomFooter = observer(() => {
   }, [lastJsonMessage])
 
   const handleResetGame = useCallback(() => {
-    const sendJsonMessage = roomStore.getSendJsonMessage()
+    const sendJsonMessage = wsStore.getSendJsonMessage()
     sendJsonMessage({
       type: RESET,
       room_id,
@@ -44,7 +44,7 @@ export const RoomFooter = observer(() => {
   }, [])
 
   const handleLeaveRoom = () => {
-    const sendJsonMessage = roomStore.getSendJsonMessage()
+    const sendJsonMessage = wsStore.getSendJsonMessage()
     sendJsonMessage({
       type: LEAVE_ROOM,
       room_id,
@@ -53,7 +53,7 @@ export const RoomFooter = observer(() => {
   }
 
   const handleStartGame = useCallback(() => {
-    const sendJsonMessage = roomStore.getSendJsonMessage()
+    const sendJsonMessage = wsStore.getSendJsonMessage()
     sendJsonMessage({
       type: PLAY_GAME,
       room_id,
