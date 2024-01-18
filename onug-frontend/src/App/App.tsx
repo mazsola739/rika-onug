@@ -7,7 +7,7 @@ import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { useEffect, useState } from 'react'
 import { KEEP_ALIVE, NEWBIE } from 'constant'
 
-export const App = observer(() => {
+export const App: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
   const pathname = window.location.pathname
   const { setRedirectPath } = wsStore

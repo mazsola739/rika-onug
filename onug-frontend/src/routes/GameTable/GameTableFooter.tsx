@@ -6,7 +6,7 @@ import { gamePlayStore, selectedDeckStore } from 'store'
 import { Messages } from './GameTable.styles'
 import { useNavigate } from 'react-router-dom'
 
-export const GameTableFooter = observer(() => {
+export const GameTableFooter: React.FC = observer(() => {
   const navigate = useNavigate()
   const room_id = sessionStorage.getItem('room_id')
 

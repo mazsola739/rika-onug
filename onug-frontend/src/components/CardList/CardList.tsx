@@ -4,7 +4,7 @@ import { roomStore } from 'store'
 import { StyledCardList, CardListTitle, CardListGrid } from './CardList.styles'
 import { CardListProps } from './CardList.types'
 
-export const CardList = observer(({ team, cards }: CardListProps) => {
+export const CardList: React.FC<CardListProps> = observer(({ team, cards }) => {
   const { getTeamMembers, getTeamName } = roomStore
 
   const teamMembers = getTeamMembers(cards)

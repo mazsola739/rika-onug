@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { gamePlayStore } from 'store'
 import { StyledGamePlayHeader, GamePlayText } from './GamePlay.styles'
 
-export const GamePlayHeader = observer(() => {
+export const GamePlayHeader: React.FC = observer(() => {
   const [currentScenarioIndex, setCurrentScenarioIndex] = useState(0)
 
   const everyone = gamePlayStore.generateActions()

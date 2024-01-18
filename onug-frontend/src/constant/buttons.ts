@@ -18,7 +18,7 @@ export const buttons: Record<string, string> = {
   pause_button_label: 'PAUSE',
   pause_button_alt_label: 'RESUME',
   stop_button_label: 'STOP',
-  votenow_button_label: 'Vote Now!',
+  votenow_button_label: 'VOTE NOW!',
   reset_game_label: 'RESET',
   play_game_text: 'PLAY ',
   start_game_label: 'START',

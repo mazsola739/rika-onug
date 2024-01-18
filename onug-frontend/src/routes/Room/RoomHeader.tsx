@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite'
 import { RuleInfoDescription, StyledLogo, StyledRuleInfo } from './Room.styles'
 import { gamePlayStore, roomStore } from 'store'
 
-const RuleInfo = observer(() => {
+const RuleInfo: React.FC = observer(() => {
   const { isGameStopped } = gamePlayStore
   const detailedCardInfo = roomStore.getDetailedCardInfo()
   const detailedTokenInfo = roomStore.getDetailedTokenInfo()
@@ -21,7 +21,7 @@ const RuleInfo = observer(() => {
   )
 })
 
-export const RoomHeader = observer(() => {
+export const RoomHeader: React.FC = observer(() => {
   return (
     <Header>
       <StyledLogo src={logo_en_1} alt="header" />

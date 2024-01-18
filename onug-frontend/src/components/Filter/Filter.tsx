@@ -5,7 +5,7 @@ import { StyledFilter } from './Filter.styles'
 import { expansions } from 'constant'
 import { FilterButtons } from './FilterButtons'
 
-export const Filter = observer(() => {
+export const Filter: React.FC = observer(() => {
   const { selectedExpansions, toggleExpansionSelection } = roomStore
   const expansionNames = Object.values(expansions)
 

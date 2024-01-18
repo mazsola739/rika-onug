@@ -12,7 +12,7 @@ import { gameTableUtils } from './GameTable.utils'
 import { useEffect, useState } from 'react'
 import { ARRIVE_GAME_TABLE, HYDRATE_GAME_TABLE, STAGES } from 'constant'
 
-export const GameTable = observer(() => {
+export const GameTable: React.FC = observer(() => {
   const {
     renderPlayers,
     renderCenterCard,

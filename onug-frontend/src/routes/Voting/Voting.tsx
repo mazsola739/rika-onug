@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
 
-export const Voting = observer(() => {
+export const Voting: React.FC = observer(() => {
   return <>voting</>
 })

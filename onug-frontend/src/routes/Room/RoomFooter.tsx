@@ -5,7 +5,7 @@ import { useCallback, useEffect } from 'react'
 import { gamePlayStore, roomStore, selectedDeckStore, wsStore } from 'store'
 import { useNavigate } from 'react-router-dom'
 
-export const RoomFooter = observer(() => {
+export const RoomFooter: React.FC = observer(() => {
   const navigate = useNavigate()
   const { lastJsonMessage } = wsStore.getWsCommunicationsBridge()
   const room_id = sessionStorage.getItem('room_id')

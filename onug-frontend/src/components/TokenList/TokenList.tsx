@@ -7,7 +7,7 @@ import {
   TokenListGrid,
 } from './TokenList.styles'
 
-export const TokenList = observer(() => {
+export const TokenList: React.FC = observer(() => {
   const { artifacts, marks } = deckStore
 
   const handleTokenClick = (

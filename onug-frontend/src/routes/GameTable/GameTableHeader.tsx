@@ -14,7 +14,7 @@ import { sendReadyRequest } from 'api'
 import { utils } from 'utils'
 import { deckStore } from 'store'
 
-export const GameTableHeader = observer(() => {
+export const GameTableHeader: React.FC = observer(() => {
   const handleClick = async () => {
     try {
       const responseData = await sendReadyRequest()

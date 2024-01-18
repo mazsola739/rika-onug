@@ -8,7 +8,7 @@ import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
 import { useNavigate } from 'react-router-dom'
 
-export const Room = observer(() => {
+export const Room: React.FC = observer(() => {
   const { deck } = deckStore
   const [firstTime, setFirstTime] = useState(true)
 

@@ -5,7 +5,7 @@ import { CardProps } from './Card.types'
 import { useCallback, useMemo } from 'react'
 import { UPDATE_ROOM } from 'constant'
 
-export const Card = observer(({ card }: CardProps) => {
+export const Card: React.FC<CardProps> = observer(({ card }) => {
   const {
     id,
     card_name,

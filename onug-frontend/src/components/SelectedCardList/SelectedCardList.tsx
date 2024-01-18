@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { selectedDeckStore } from 'store'
 import { StyledSelectedCardList } from './SelectedCardList.styles'
 
-export const SelectedCardList = observer(() => {
+export const SelectedCardList: React.FC = observer(() => {
   const { selectedCards } = selectedDeckStore
 
   return (

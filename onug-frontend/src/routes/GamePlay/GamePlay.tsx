@@ -7,7 +7,7 @@ import { useCallback } from 'react'
 import { GamePlayHeader } from './GamePlayHeader'
 import { useNavigate } from 'react-router-dom'
 
-export const GamePlay = observer(() => {
+export const GamePlay: React.FC = observer(() => {
   const navigate = useNavigate()
   const room_id = sessionStorage.getItem('room_id')
   const everyone = gamePlayStore.generateActions()
