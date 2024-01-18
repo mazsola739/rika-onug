@@ -10,7 +10,7 @@ import { GameTableHeader } from './GameTableHeader'
 import { artifacts } from 'data'
 import { gameTableUtils } from './GameTable.utils'
 import { useEffect, useState } from 'react'
-import { ARRIVE_GAME_TABLE, HYDRATE_GAME_TABLE } from 'constant'
+import { ARRIVE_GAME_TABLE, HYDRATE_GAME_TABLE, STAGES } from 'constant'
 
 export const GameTable = observer(() => {
   const {
@@ -36,7 +36,7 @@ export const GameTable = observer(() => {
       setFirstTime(false)
       sendJsonMessage({
         type: ARRIVE_GAME_TABLE,
-        stage: 'Table',
+        stage: STAGES.GAME_TABLE,
         room_id: sessionStorage.getItem('room_id'),
       })
     }
