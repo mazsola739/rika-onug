@@ -9,14 +9,27 @@ import { KEEP_ALIVE, NEWBIE } from 'constant'
 
 export const App = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
+  const pathname = window.location.pathname
+  const { setRedirectPath } = wsStore
   const [socketUrl] = useState('ws://localhost:7655/')
-  const { readyState, sendJsonMessage, lastJsonMessage } =
-    useWebSocket(socketUrl)
+  const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket(
+    socketUrl,
+    {
+      onOpen: () => setFirstTime(true),
+      shouldReconnect: () => true,
+    }
+  )
 
   useEffect(() => {
     const token = sessionStorage.getItem('token')
 
-    if (sendJsonMessage && firstTime) {
+    if (firstTime && !['/', '/lobby'].includes(pathname)) {
+      setRedirectPath('/lobby')
+    } else if (
+      sendJsonMessage &&
+      firstTime &&
+      ['/', '/lobby'].includes(pathname)
+    ) {
       setFirstTime(false)
       sendJsonMessage({ type: NEWBIE, token })
       wsStore.setSendJsonMessage(sendJsonMessage)
@@ -29,7 +42,7 @@ export const App = observer(() => {
         sessionStorage.setItem('token', lastJsonMessage.token)
       }
     }
-  }, [sendJsonMessage, wsStore, lastJsonMessage, firstTime])
+  }, [sendJsonMessage, wsStore, lastJsonMessage, firstTime, setRedirectPath])
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',

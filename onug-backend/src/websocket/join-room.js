@@ -49,7 +49,7 @@ exports.joinRoom = async (ws, message) => {
       actions: [],
       action_log: [],
       players: {
-        [token]: { name: player_name, admin: true, stage: STAGES.room },
+        [token]: { name: player_name, admin: true, stage: STAGES.ROOM },
       },
       turn: 0,
       closed: false,
@@ -75,7 +75,7 @@ exports.joinRoom = async (ws, message) => {
     gameState.players[token] = {
       name: player_name,
       admin: gameState.players.length === 0,
-      stage: STAGES.room,
+      stage: STAGES.ROOM,
     };
 
     gameState.available_names = gameState.available_names.filter(

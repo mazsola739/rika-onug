@@ -4,14 +4,17 @@ import { SendJsonMessageType, WsJsonMessage } from 'types'
 class WsStore {
   sendJsonMessage: SendJsonMessageType<unknown> | null = null
   lastJsonMessage: WsJsonMessage = {}
+  redirectPath: string
 
   constructor() {
     makeObservable(this, {
       sendJsonMessage: observable,
       lastJsonMessage: observable,
+      redirectPath: observable,
       setSendJsonMessage: action,
       setLastJsonMessage: action,
       getWsCommunicationsBridge: action,
+      setRedirectPath: action,
     })
   }
 
@@ -32,6 +35,10 @@ class WsStore {
         return wsStore.lastJsonMessage
       },
     }
+  }
+
+  setRedirectPath(redirectPath: string) {
+    wsStore.redirectPath = redirectPath
   }
 }
 

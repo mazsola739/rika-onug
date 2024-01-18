@@ -6,6 +6,7 @@ import { deckStore, roomStore, selectedDeckStore, wsStore } from 'store'
 import { Main } from './Room.styles'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
+import { useNavigate } from 'react-router-dom'
 
 export const Room = observer(() => {
   const { deck } = deckStore
@@ -13,6 +14,8 @@ export const Room = observer(() => {
 
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
+  const navigate = useNavigate()
+  const { redirectPath, setRedirectPath } = wsStore
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -30,6 +33,13 @@ export const Room = observer(() => {
       selectedDeckStore.setSelectedCard(lastJsonMessage.selected_cards)
     }
   }, [sendJsonMessage, lastJsonMessage])
+
+  useEffect(() => {
+    if (redirectPath && redirectPath !== window.location.pathname) {
+      setTimeout(() => navigate(redirectPath), 0)
+      setRedirectPath(undefined)
+    }
+  }, [redirectPath, setRedirectPath])
 
   const teamArray = useMemo(
     () => [

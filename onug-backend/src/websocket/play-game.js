@@ -33,7 +33,7 @@ exports.playGame = async (ws, message) => {
   playerTokens.forEach((token, index) => {
     newRoomState.players[token] = {
       ...gameState.players[token],
-      stage: STAGES.table,
+      stage: STAGES.GAME_TABLE,
       player_card: playerCards[index],
       player_number: index + 1,
     };

@@ -1,6 +1,6 @@
 exports.STAGES = {
-  room: "Room",
-  table: "Table",
-  play: "Play",
-  vote: "Vote",
+  ROOM: "ROOM",
+  GAME_TABLE: "GAME_TABLE",
+  GAME_PLAY: "GAME_PLAY",
+  GAME_VOTE: "GAME_VOTE",
 };
