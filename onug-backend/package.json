@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "server.js",
   "scripts": {
-    "start": "cross-env ONUG_REPOSITORY_TYPE=local ONUG_LOG_LEVEL=INFO node ./src/server.js"
+    "start": "cross-env ONUG_REPOSITORY_TYPE=local ONUG_LOG_LEVEL=DEBUG node ./src/server.js"
   },
   "engines": {
     "node": ">=14.0.0"

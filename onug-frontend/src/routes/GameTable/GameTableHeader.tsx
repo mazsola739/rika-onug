@@ -11,7 +11,8 @@ import {
   YourName,
 } from './GameTable.styles'
 import { sendReadyRequest } from 'api'
-import { expansion, roles, team, wake, rules_role } from 'constant'
+import { utils } from 'utils'
+import { deckStore } from 'store'
 
 export const GameTableHeader = observer(() => {
   const handleClick = async () => {
@@ -22,21 +23,16 @@ export const GameTableHeader = observer(() => {
       console.error(error.message)
     }
   }
+  const { findCardById } = utils
+
   const player_name = sessionStorage.getItem('player_name')
+  const player_number = sessionStorage.getItem('player_number')
+  const player_card_id = sessionStorage.getItem('player_card_id')
 
   const player = {
-    player_card: {
-      id: 7,
-      expansion: expansion.werewolf,
-      display_name: roles.role_minion,
-      team: team.werewolf,
-      wake_up_time: wake.night,
-      card_name: 'onuw_minion',
-      order: 32,
-      rules: rules_role.rules_minion,
-    },
+    player_card: findCardById(deckStore.deck, +player_card_id),
     player_name,
-    player_number: 1,
+    player_number: +player_number,
   }
 
   return (

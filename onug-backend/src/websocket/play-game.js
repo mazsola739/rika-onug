@@ -4,6 +4,7 @@ const { validateRoom } = require("../validator");
 const { repository } = require("../repository");
 const { STAGES } = require("../constant/stage");
 const { distributeCards } = require("../utils/card");
+const { broadcastPlayGame } = require("./connections");
 const { upsertRoomState } = repository;
 
 exports.playGame = async (ws, message) => {
@@ -34,20 +35,12 @@ exports.playGame = async (ws, message) => {
       ...gameState.players[token],
       stage: STAGES.table,
       player_card: playerCards[index],
+      player_number: index + 1,
     };
   });
 
   // TODO validate player
   await upsertRoomState(newRoomState);
 
-  const playGame = JSON.stringify({
-    type: PLAY_GAME,
-    success: true,
-    room_id: gameState.room_id,
-    selected_cards: gameState.selected_cards,
-    player_name: player.name,
-    player_card_id: newRoomState.players[token].player_card,
-  });
-  logTrace(`sending message to client, play game: ${playGame}`);
-  return ws.send(playGame);
+  return broadcastPlayGame(newRoomState);
 };

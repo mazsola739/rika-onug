@@ -6,6 +6,8 @@ export type WsJsonMessage = {
   errors?: string[]
   room_id?: string
   player_name?: string
+  player_card_id?: string
+  player_number?: string
   selected_cards?: number[]
   success?: boolean
 }

@@ -7,6 +7,7 @@ const { repository } = require("../repository");
 const { upsertRoomState } = repository;
 const { logTrace } = require("../log");
 const { STAGES } = require("../constant/stage");
+const { addUserToRoom } = require("./connections");
 
 exports.joinRoom = async (ws, message) => {
   logTrace(`join-room requested with ${JSON.stringify(message)}`);
@@ -83,6 +84,8 @@ exports.joinRoom = async (ws, message) => {
 
     await upsertRoomState(gameState);
   }
+
+  addUserToRoom(ws, token, room_id)
 
   return ws.send(
     JSON.stringify({

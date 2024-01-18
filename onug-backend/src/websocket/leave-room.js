@@ -3,6 +3,7 @@ const { repository } = require("../repository");
 const { upsertRoomState, readGameState } = repository;
 const { logTrace } = require("../log");
 const { LEAVE_ROOM } = require("../constant/ws");
+const { removeUserFromRoom } = require("./connections");
 
 exports.leaveRoom = async (ws, message) => {
   logTrace(`leave-room requested with ${JSON.stringify(message)}`);
@@ -47,6 +48,7 @@ exports.leaveRoom = async (ws, message) => {
 
   await upsertRoomState(gameState);
 
+  removeUserFromRoom(token, room_id)
   return ws.send(
     JSON.stringify({
       type: LEAVE_ROOM,

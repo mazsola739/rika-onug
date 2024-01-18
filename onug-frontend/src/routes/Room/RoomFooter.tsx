@@ -26,6 +26,9 @@ export const RoomFooter = observer(() => {
   useEffect(() => {
     if (lastJsonMessage?.type === PLAY_GAME) {
       if (lastJsonMessage.success) {
+        sessionStorage.setItem('player_card_id', lastJsonMessage.player_card_id)
+        sessionStorage.setItem('player_number', lastJsonMessage.player_number)
+
         navigate(`/gametable/${room_id}`)
       } else {
         console.error(lastJsonMessage.errors)
