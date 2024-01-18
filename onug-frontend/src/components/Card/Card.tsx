@@ -3,7 +3,7 @@ import { selectedDeckStore, roomStore, wsStore } from 'store'
 import { StyledCard, CardImage, CardName } from './Card.styles'
 import { CardProps } from './Card.types'
 import { useCallback, useMemo } from 'react'
-import { UPDATE_SELECT } from 'constant'
+import { UPDATE_ROOM } from 'constant'
 
 export const Card = observer(({ card }: CardProps) => {
   const {
@@ -42,13 +42,11 @@ export const Card = observer(({ card }: CardProps) => {
 
     if (sendJsonMessage) {
       const token = sessionStorage.getItem('token')
-      const action = isSelected ? 'CARD_DESELECT' : 'CARD_SELECT'
       sendJsonMessage({
-        type: UPDATE_SELECT,
+        type: UPDATE_ROOM,
         card_id: id,
         room_id,
         token,
-        action,
       })
     }
 

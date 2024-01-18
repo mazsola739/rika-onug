@@ -29,6 +29,10 @@ export const RoomFooter = observer(() => {
         sessionStorage.setItem('player_card_id', lastJsonMessage.player_card_id)
         sessionStorage.setItem('player_number', lastJsonMessage.player_number)
 
+        // TODO check if everything works around here
+        gamePlayStore.toggleGameStatus()
+        roomStore.resetDetailedCardInfo()
+        selectedDeckStore.addCardIdsToArray()
         navigate(`/gametable/${room_id}`)
       } else {
         console.error(lastJsonMessage.errors)
@@ -62,9 +66,6 @@ export const RoomFooter = observer(() => {
       room_id,
       token,
     })
-    gamePlayStore.toggleGameStatus()
-    roomStore.resetDetailedCardInfo()
-    selectedDeckStore.addCardIdsToArray()
   }, [])
 
   const totalPlayers = selectedDeckStore.totalPlayers

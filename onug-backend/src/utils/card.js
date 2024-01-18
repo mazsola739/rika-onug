@@ -1,18 +1,18 @@
 const { wolfIdsToCheck, supervillainIdsToCheck } = require("../constant/ids")
 
-const selectCard = (selectedCardIds, cardId) => {
-    selectedCardIds.push(cardId)
-    return Array.from(new Set(selectedCardIds))
-}
-
-const deselectCard = (selectedCardIds, cardId) => {
+const toogleCard = (selectedCardIds, cardId) => {
+  if (selectedCardIds.includes(cardId)) {
     const index = selectedCardIds.findIndex(
-        (selectedCardId) => selectedCardId === cardId
+      (selectedCardId) => selectedCardId === cardId
     )
     if (index !== -1) {
         selectedCardIds.splice(index, 1)
     }
     return selectedCardIds
+  } else {
+      selectedCardIds.push(cardId)
+      return Array.from(new Set(selectedCardIds))
+  }
 }
 
 const shuffle = (selectedCardIds) => {
@@ -57,8 +57,7 @@ const distributeCards = (selectedCardIds) => {
   }
 
   module.exports = {
-    selectCard,
-    deselectCard,
+    toogleCard,
     distributeCards
   }
   

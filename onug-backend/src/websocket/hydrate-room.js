@@ -1,18 +1,18 @@
-const { HYDRATE_SELECT } = require("../constant/ws");
+const { HYDRATE_ROOM } = require("../constant/ws");
 const { logTrace } = require("../log");
 const { validateRoom } = require("../validator");
 
-exports.hydrateSelect = async (ws, message) => {
+exports.hydrateRoom = async (ws, message) => {
   const { room_id } = message;
   const [roomIdValid, gameState, errors] = await validateRoom(room_id);
 
   if (!roomIdValid)
     return ws.send(
-      JSON.stringify({ type: HYDRATE_SELECT, success: false, errors })
+      JSON.stringify({ type: HYDRATE_ROOM, success: false, errors })
     );
 
   const hydrateSelect = JSON.stringify({
-    type: HYDRATE_SELECT,
+    type: HYDRATE_ROOM,
     success: true,
     room_id: gameState.room_id,
     selected_cards: gameState.selected_cards,

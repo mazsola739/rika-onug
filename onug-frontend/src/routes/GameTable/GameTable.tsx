@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { gameTableStore, selectedDeckStore } from 'store'
+import { gameTableStore, selectedDeckStore, wsStore } from 'store'
 import {
   StyledGameTable,
   CenterCardContainer,
@@ -9,6 +9,8 @@ import { GameTableFooter } from './GameTableFooter'
 import { GameTableHeader } from './GameTableHeader'
 import { artifacts } from 'data'
 import { gameTableUtils } from './GameTable.utils'
+import { useEffect, useState } from 'react'
+import { ARRIVE_GAME_TABLE, HYDRATE_GAME_TABLE } from 'constant'
 
 export const GameTable = observer(() => {
   const {
@@ -23,6 +25,28 @@ export const GameTable = observer(() => {
   const { hasSentinel, hasMarks, hasDoppelganger, hasCurator, players } =
     gameTableStore
   const selectedMarks = selectedDeckStore.selectedMarks
+
+  const [firstTime, setFirstTime] = useState(true)
+
+  const { sendJsonMessage, lastJsonMessage } =
+    wsStore.getWsCommunicationsBridge()
+
+  useEffect(() => {
+    if (sendJsonMessage && firstTime) {
+      setFirstTime(false)
+      sendJsonMessage({
+        type: ARRIVE_GAME_TABLE,
+        stage: 'Table',
+        room_id: sessionStorage.getItem('room_id'),
+      })
+    }
+  }, [sendJsonMessage, firstTime])
+
+  useEffect(() => {
+    if (lastJsonMessage?.type === HYDRATE_GAME_TABLE) {
+      console.log(lastJsonMessage) //TODO hook
+    }
+  }, [sendJsonMessage, lastJsonMessage])
 
   return (
     <>

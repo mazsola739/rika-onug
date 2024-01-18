@@ -2,15 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { CardType, ActionCardType, MarkType } from 'types'
 import { selectedDeckUtils, utils } from 'utils'
 import { action_marks, action_cards } from 'data'
-import {
-  CARD_DESELECT,
-  CARD_SELECT,
-  alienIds,
-  assassinIds,
-  evils,
-  roles,
-  vampireIds,
-} from 'constant'
+import { alienIds, assassinIds, evils, roles, vampireIds } from 'constant'
 import { roomStore } from 'store'
 import { deckStore } from './DeckStore'
 
@@ -222,43 +214,6 @@ class SelectedDeckStore {
 
   addCardIdsToArray(): number[] {
     return this.selectedCards.map((card) => this.selectedCardIds.push(card.id))
-  }
-
-  async sendCardSelectionToBackend(cardId: number, roomId: string) {
-    const cardStatus = this.isSelected(cardId) ? CARD_DESELECT : CARD_SELECT
-
-    const requestBody = {
-      room_id: roomId,
-      update: {
-        action: cardStatus,
-        card_id: cardId,
-      },
-    }
-
-    try {
-      const response = await fetch('/api/UPDATE_SELECT', {
-        method: 'POST',
-        redirect: 'follow',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      })
-
-      const data = await response.json()
-      if (data.success) {
-        console.log('Successfully updated in backend:', data.message)
-      } else {
-        console.error(
-          "Couldn't update gamestate on backend with the [de]selected card"
-        )
-        this.revertCardUpdateOnFrontEnd(cardId)
-      }
-    } catch (error) {
-      console.error('Error sending card selection to backend:', error)
-      this.revertCardUpdateOnFrontEnd(cardId)
-    }
   }
 }
 

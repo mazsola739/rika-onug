@@ -3,7 +3,7 @@ import { StyledSelectedCard } from './SelectedCard.styles'
 import { SelectedCardProps } from './SelectedCard.types'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
-import { UPDATE_SELECT } from 'constant'
+import { UPDATE_ROOM } from 'constant'
 
 export const SelectedCard = observer(({ card }: SelectedCardProps) => {
   const {
@@ -46,7 +46,7 @@ export const SelectedCard = observer(({ card }: SelectedCardProps) => {
       const token = sessionStorage.getItem('token')
       const action = isSelected ? 'CARD_DESELECT' : 'CARD_SELECT'
       sendJsonMessage({
-        type: UPDATE_SELECT,
+        type: UPDATE_ROOM,
         card_id: id,
         room_id,
         token,

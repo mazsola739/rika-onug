@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react-lite'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Slaves, StyledLobby, LowPhas, StyledRoomButton } from './Lobby.styles'
 import { lobbyStore, wsStore } from 'store'
 import { useNavigate } from 'react-router-dom'
 import { StyledLobbyProps } from './Lobby.types'
-import { JOIN_ROOM } from 'constant'
+import { HYDRATE_LOBBY, JOIN_ROOM } from 'constant'
 
 const RoomButton: React.FC<StyledLobbyProps> = ({
   buttonText,
@@ -20,7 +20,25 @@ const RoomButton: React.FC<StyledLobbyProps> = ({
 
 export const Lobby: React.FC = observer(() => {
   const navigate = useNavigate()
-  const { lastJsonMessage } = wsStore.getWsCommunicationsBridge()
+  const { lastJsonMessage, sendJsonMessage } =
+    wsStore.getWsCommunicationsBridge()
+  const [firstTime, setFirstTime] = useState(true)
+
+  useEffect(() => {
+    if (sendJsonMessage && firstTime) {
+      setFirstTime(false)
+      sendJsonMessage({
+        type: HYDRATE_LOBBY,
+        stage: 'Lobby',
+      })
+    }
+  }, [sendJsonMessage, firstTime])
+
+  useEffect(() => {
+    if (lastJsonMessage?.type === HYDRATE_LOBBY) {
+      console.log(lastJsonMessage) //TODO hook
+    }
+  }, [sendJsonMessage, lastJsonMessage])
 
   useEffect(() => {
     if (lastJsonMessage?.type === JOIN_ROOM) {
