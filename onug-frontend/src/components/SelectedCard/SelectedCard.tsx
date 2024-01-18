@@ -21,7 +21,7 @@ export const SelectedCard = observer(({ card }: SelectedCardProps) => {
     (selectedCard) => selectedCard.id === id
   )
 
-  const sendJsonMessage = wsStore.getSendJsonMessage()
+  const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
 
   const room_id = sessionStorage.getItem('room_id')
 

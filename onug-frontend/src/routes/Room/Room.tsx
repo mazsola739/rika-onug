@@ -2,7 +2,6 @@ import { CardList, TokenList } from 'components'
 import { HYDRATE_SELECT, team } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { useParams } from 'react-router-dom'
 import { deckStore, roomStore, selectedDeckStore, wsStore } from 'store'
 import { Main } from './Room.styles'
 import { RoomFooter } from './RoomFooter'
@@ -10,12 +9,11 @@ import { RoomHeader } from './RoomHeader'
 
 export const Room = observer(() => {
   const { deck } = deckStore
-  const { room_id } = useParams()
   const [firstTime, setFirstTime] = useState(true)
   const intervalIdRef = useRef(null)
 
-  const sendJsonMessage = wsStore.getSendJsonMessage()
-  const lastJsonMessage = wsStore.getLastJsonMessage()
+  const { sendJsonMessage, lastJsonMessage } =
+    wsStore.getWsCommunicationsBridge()
 
   const startHydrateSelectInterval = useCallback(
     (sendJsonMessage: (arg0: { type: string; room_id: string }) => void) => {

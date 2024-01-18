@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const RoomFooter = observer(() => {
   const navigate = useNavigate()
-  const lastJsonMessage = wsStore.getLastJsonMessage()
+  const { lastJsonMessage } = wsStore.getWsCommunicationsBridge()
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
 
@@ -34,7 +34,7 @@ export const RoomFooter = observer(() => {
   }, [lastJsonMessage])
 
   const handleResetGame = useCallback(() => {
-    const sendJsonMessage = wsStore.getSendJsonMessage()
+    const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
     sendJsonMessage({
       type: RESET,
       room_id,
@@ -44,7 +44,7 @@ export const RoomFooter = observer(() => {
   }, [])
 
   const handleLeaveRoom = () => {
-    const sendJsonMessage = wsStore.getSendJsonMessage()
+    const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
     sendJsonMessage({
       type: LEAVE_ROOM,
       room_id,
@@ -53,7 +53,7 @@ export const RoomFooter = observer(() => {
   }
 
   const handleStartGame = useCallback(() => {
-    const sendJsonMessage = wsStore.getSendJsonMessage()
+    const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
     sendJsonMessage({
       type: PLAY_GAME,
       room_id,

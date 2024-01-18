@@ -1,12 +1,11 @@
 const { wolfIdsToCheck, supervillainIdsToCheck } = require("../constant/ids")
-const { logInfo } = require("../log")
 
-exports.selectCard = (selectedCardIds, cardId) => {
+const selectCard = (selectedCardIds, cardId) => {
     selectedCardIds.push(cardId)
     return Array.from(new Set(selectedCardIds))
 }
 
-exports.deselectCard = (selectedCardIds, cardId) => {
+const deselectCard = (selectedCardIds, cardId) => {
     const index = selectedCardIds.findIndex(
         (selectedCardId) => selectedCardId === cardId
     )
@@ -30,7 +29,7 @@ const hasTemptress = (selectedCardIds) => selectedCardIds.includes(69)
 const getRandomNumber = (min, max) =>  ~~(Math.random() * (max - min + 1)) + min
 const getRandomItemFromArray = (array) => array[getRandomNumber(0, array.length - 1)]
 
-exports.distributeCards = (selectedCardIds) => {
+const distributeCards = (selectedCardIds) => {
     let cardIds = [...selectedCardIds]
 
     const chosenWolfId = hasAlphaWolf(selectedCardIds)
@@ -56,3 +55,10 @@ exports.distributeCards = (selectedCardIds) => {
       chosenSupervillainId,
     }
   }
+
+  module.exports = {
+    selectCard,
+    deselectCard,
+    distributeCards
+  }
+  

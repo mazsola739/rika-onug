@@ -20,7 +20,7 @@ const RoomButton: React.FC<StyledLobbyProps> = ({
 
 export const Lobby: React.FC = observer(() => {
   const navigate = useNavigate()
-  const lastJsonMessage = wsStore.getLastJsonMessage()
+  const { lastJsonMessage } = wsStore.getWsCommunicationsBridge()
 
   useEffect(() => {
     if (lastJsonMessage?.type === JOIN_ROOM) {
@@ -31,7 +31,7 @@ export const Lobby: React.FC = observer(() => {
 
         navigate(`/room/${room_id}`)
       } else {
-        console.error(lastJsonMessage.error, lastJsonMessage.errors) //TODO backend error to errors
+        console.error(lastJsonMessage.errors)
       }
     }
   }, [lastJsonMessage])
@@ -41,7 +41,7 @@ export const Lobby: React.FC = observer(() => {
   }, [])
 
   const handleJoinRoom = (room_id: string) => {
-    const sendJsonMessage = wsStore.getSendJsonMessage()
+    const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
     sendJsonMessage({
       type: JOIN_ROOM,
       room_id,
