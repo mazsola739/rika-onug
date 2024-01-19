@@ -1,0 +1,24 @@
+{
+    "room_id": "archives",
+    "room_name": "Archives",
+    "selected_cards": [],
+    "actions": [],
+    "action_log": [],
+    "stage": "ROOM",
+    "players": {},
+    "turn": 0,
+    "closed": false,
+    "available_names": [
+        "Dragon",
+        "Phoenix",
+        "Mermaid",
+        "Unicorn",
+        "Cyclops",
+        "Troll",
+        "Chimera",
+        "Goblin",
+        "Minotaur",
+        "Fairy",
+        "Djinn"
+    ]
+}

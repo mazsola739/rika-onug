@@ -42,6 +42,8 @@ export const God: React.FC = observer(() => {
   const [response, setResponse] = useState({
     serverResponse: 'will be populated here',
   })
+  const [roomId, setRoomId] = useState('')
+  const [token, setToken] = useState('')
 
   const checkGameStates = async () => {
     const res = await fetch('/god/check-game-states')
@@ -49,8 +51,12 @@ export const God: React.FC = observer(() => {
     setResponse(json)
   }
 
-  const checkGameStateByRoomId = () => {
-    console.log('Click')
+  const checkGameStateByRoomId = async () => {
+    const res = await fetch(
+      `/god/check-game-state-by-room-id?room_id=${roomId}`
+    )
+    const json = await res.json()
+    setResponse(json)
   }
 
   const deleteAllGameStates = async () => {
@@ -59,8 +65,12 @@ export const God: React.FC = observer(() => {
     setResponse(json)
   }
 
-  const deleteAllGameStateByRoomId = () => {
-    console.log('Click')
+  const deleteGameStateByRoomId = async () => {
+    const res = await fetch(
+      `/god/delete-game-state-by-room-id?room_id=${roomId}`
+    )
+    const json = await res.json()
+    setResponse(json)
   }
 
   const checkConnections = async () => {
@@ -69,12 +79,16 @@ export const God: React.FC = observer(() => {
     setResponse(json)
   }
 
-  const removePlayerByToken = () => {
-    console.log('Click')
+  const removePlayerByToken = async () => {
+    const res = await fetch(`/god/delete-player-by-token?token=${token}`)
+    const json = await res.json()
+    setResponse(json)
   }
 
-  const removeAllPlayers = () => {
-    console.log('Click')
+  const removeAllPlayers = async () => {
+    const res = await fetch('/god/delete-all-players')
+    const json = await res.json()
+    setResponse(json)
   }
 
   const broadcastToAll = () => {
@@ -101,11 +115,23 @@ export const God: React.FC = observer(() => {
           <FormContainer>
             <InputContainer>
               <Label htmlFor="room_id">{LABEL_ROOM_ID}</Label>
-              <Input type="text" id="room_id" name="room_id" />
+              <Input
+                type="text"
+                id="room_id"
+                name="room_id"
+                value={roomId}
+                onChange={(e) => setRoomId(e.target.value)}
+              />
             </InputContainer>
             <InputContainer>
               <Label htmlFor="token">{LABEL_TOKEN}</Label>
-              <Input type="text" id="token" name="token" />
+              <Input
+                type="text"
+                id="token"
+                name="token"
+                value={token}
+                onChange={(e) => setToken(e.target.value)}
+              />
             </InputContainer>
           </FormContainer>
           <ButtonsContainer>
@@ -116,7 +142,7 @@ export const God: React.FC = observer(() => {
             <Button onClick={deleteAllGameStates}>
               {DELETE_ALL_GAME_STATES}
             </Button>
-            <Button onClick={deleteAllGameStateByRoomId}>
+            <Button onClick={deleteGameStateByRoomId}>
               {DELETE_GAME_STATE_BY_ROOM_ID}
             </Button>
           </ButtonsContainer>

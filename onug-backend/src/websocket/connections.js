@@ -3,7 +3,8 @@ const roomNames = require('../data/room_names.json')
 const { logDebug } = require('../log')
 
 const websocketServerConnectionsPerRoom = {}
-roomNames.forEach(roomName => websocketServerConnectionsPerRoom[roomName] = {})
+const initWebSocketConnections = () => roomNames.forEach(roomName => websocketServerConnectionsPerRoom[roomName] = {})
+initWebSocketConnections()
 
 const addUserToRoom = (ws, token, room_id) => {
     logDebug(`user added to ws connections: [${room_id}][${token}]`)
@@ -43,6 +44,7 @@ const broadcastPlayGame = (gameState) => {
 }
 
 module.exports = {
+    initWebSocketConnections,
     addUserToRoom,
     removeUserFromRoom,
     broadcast,

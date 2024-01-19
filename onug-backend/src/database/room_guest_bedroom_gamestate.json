@@ -1,0 +1,33 @@
+{
+    "room_id": "guest_bedroom",
+    "room_name": "Guest Bedroom",
+    "selected_cards": [
+        41,
+        40,
+        32,
+        34,
+        29,
+        35,
+        36,
+        33
+    ],
+    "actions": [],
+    "action_log": [],
+    "stage": "ROOM",
+    "players": {},
+    "turn": 0,
+    "closed": false,
+    "available_names": [
+        "Frodo",
+        "Samwise",
+        "Gandalf",
+        "Aragorn",
+        "Legolas",
+        "Gimli",
+        "Pippin",
+        "Sauron",
+        "Bilbo",
+        "Gollum",
+        "Saruman"
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "room_id": "parlor",
+    "room_name": "Parlor",
+    "selected_cards": [
+        15,
+        16,
+        7,
+        71,
+        18,
+        10,
+        80,
+        27,
+        11,
+        72,
+        20,
+        75,
+        21
+    ],
+    "actions": [],
+    "action_log": [],
+    "stage": "ROOM",
+    "players": {},
+    "turn": 0,
+    "closed": false,
+    "available_names": [
+        "Aurora",
+        "Ariel",
+        "Belle",
+        "Mulan",
+        "Anna",
+        "Elsa"
+    ]
+}

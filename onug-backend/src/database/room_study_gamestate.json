@@ -1,0 +1,23 @@
+{
+    "room_id": "study",
+    "room_name": "Study",
+    "selected_cards": [],
+    "actions": [],
+    "action_log": [],
+    "stage": "ROOM",
+    "players": {},
+    "turn": 0,
+    "closed": false,
+    "available_names": [
+        "Clark Kent",
+        "Bruce Wayne",
+        "Diana Prince",
+        "Barry Allen",
+        "Arthur Curry",
+        "Selina Kyle",
+        "Harvey Dent",
+        "Lex Luthor",
+        "Harley Quinn",
+        "The Joker"
+    ]
+}
