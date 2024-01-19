@@ -1,9 +1,7 @@
 const WebSocket = require("ws")
 const { logTrace, logError } = require("../log")
 const {
-  KEEP_ALIVE,
   UPDATE_ROOM,
-  PLAY_GAME,
   READY,
   RESET,
   NEWBIE,
@@ -12,8 +10,9 @@ const {
   LEAVE_TABLE,
   ARRIVE_GAME_TABLE,
   ARRIVE_ROOM,
+  START_GAME,
+  TO_GAME_TABLE,
 } = require("../constant/ws")
-const { playGame } = require("./play-game")
 const { hydrateRoom } = require("./hydrate-room")
 const { reset } = require("./reset")
 const { updateRoom } = require("./update-room")
@@ -23,6 +22,8 @@ const { leaveRoom } = require("./leave-room")
 const { leaveTable } = require("./leave-table")
 const { ready } = require("./ready")
 const { hydrateGameTable } = require("./hydrate-game-table")
+const { startGame } = require('./start-game')
+const { toGameTable } = require('./to-game-table')
 
 
 exports.websocketServer = (port) => {
@@ -49,12 +50,13 @@ exports.websocketServer = (port) => {
       if (message.type === JOIN_ROOM) return joinRoom(ws, message)
       if (message.type === LEAVE_ROOM) return leaveRoom(ws, message)
       if (message.type === UPDATE_ROOM) return updateRoom(message)
-      if (message.type === PLAY_GAME) return playGame(ws, message)
+      if (message.type === TO_GAME_TABLE) return toGameTable(ws, message)
       if (message.type === LEAVE_TABLE) return leaveTable(ws, message)
       if (message.type === RESET) return reset(message)
       if (message.type === ARRIVE_ROOM) return hydrateRoom(ws, message)
       if (message.type === ARRIVE_GAME_TABLE) return hydrateGameTable(ws, message)
       if (message.type === READY) return ready(message)
+      if (message.type === START_GAME) return startGame(message)
     })
   })
 }

@@ -1,5 +1,13 @@
 import { CardList, TokenList } from 'components'
-import { ARRIVE_ROOM, HYDRATE_ROOM, STAGES, team } from 'constant'
+import {
+  ARRIVE_ROOM,
+  HYDRATE_ROOM,
+  LEAVE_ROOM,
+  TO_GAME_TABLE,
+  REDIRECT,
+  STAGES,
+  team,
+} from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useMemo, useState } from 'react'
 import { deckStore, roomStore, selectedDeckStore, wsStore } from 'store'
@@ -15,12 +23,11 @@ export const Room: React.FC = observer(() => {
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
   const navigate = useNavigate()
-  const { redirectPath, setRedirectPath } = wsStore
 
   useEffect(() => {
-    if (sendJsonMessage && firstTime) {
+    if (firstTime) {
       setFirstTime(false)
-      sendJsonMessage({
+      sendJsonMessage?.({
         type: ARRIVE_ROOM,
         stage: STAGES.ROOM,
         room_id: sessionStorage.getItem('room_id'),
@@ -29,17 +36,37 @@ export const Room: React.FC = observer(() => {
   }, [sendJsonMessage, firstTime])
 
   useEffect(() => {
-    if (lastJsonMessage?.type === HYDRATE_ROOM && lastJsonMessage.success) {
+    if (lastJsonMessage?.type === HYDRATE_ROOM && lastJsonMessage?.success) {
       selectedDeckStore.setSelectedCard(lastJsonMessage.selected_cards)
     }
-  }, [sendJsonMessage, lastJsonMessage])
 
-  useEffect(() => {
-    if (redirectPath && redirectPath !== window.location.pathname) {
-      setTimeout(() => navigate(redirectPath), 0)
-      setRedirectPath(undefined)
+    if (lastJsonMessage?.type === REDIRECT) {
+      navigate(lastJsonMessage.path)
     }
-  }, [redirectPath, setRedirectPath])
+
+    if (lastJsonMessage?.type === LEAVE_ROOM) {
+      if (lastJsonMessage.success) {
+        sessionStorage.setItem('room_id', '')
+        sessionStorage.setItem('player_name', '')
+        navigate('/lobby')
+      } else {
+        console.error(lastJsonMessage.errors)
+      }
+    }
+
+    if (lastJsonMessage?.type === TO_GAME_TABLE) {
+      if (lastJsonMessage.success) {
+        sessionStorage.setItem('player_card_id', lastJsonMessage.player_card_id)
+        sessionStorage.setItem('player_number', lastJsonMessage.player_number)
+
+        roomStore.resetDetailedCardInfo()
+        selectedDeckStore.addCardIdsToArray()
+        navigate(`/gametable/${lastJsonMessage.room_id}`)
+      } else {
+        console.error(lastJsonMessage.errors)
+      }
+    }
+  }, [lastJsonMessage])
 
   const teamArray = useMemo(
     () => [

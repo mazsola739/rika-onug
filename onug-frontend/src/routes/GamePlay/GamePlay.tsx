@@ -17,7 +17,6 @@ export const GamePlay: React.FC = observer(() => {
   }, [])
 
   const handleStopGame = useCallback(() => {
-    gamePlayStore.toggleGameStatus()
     navigate(`/room/${room_id}`)
   }, [selectedDeckStore])
 

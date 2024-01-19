@@ -40,15 +40,13 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
       selectedDeckStore.selectedCards
     )
 
-    if (sendJsonMessage) {
-      const token = sessionStorage.getItem('token')
-      sendJsonMessage({
-        type: UPDATE_ROOM,
-        card_id: id,
-        room_id,
-        token,
-      })
-    }
+    const token = sessionStorage.getItem('token')
+    sendJsonMessage?.({
+      type: UPDATE_ROOM,
+      card_id: id,
+      room_id,
+      token,
+    })
 
     roomStore.toggleInfo(id, 'card')
   }, [

@@ -13,6 +13,7 @@ import {
 import { utils } from 'utils'
 import { deckStore, wsStore } from 'store'
 import { READY } from 'constant'
+import { useCallback } from 'react'
 
 export const GameTableHeader: React.FC = observer(() => {
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
@@ -30,13 +31,13 @@ export const GameTableHeader: React.FC = observer(() => {
     player_number: +player_number,
   }
 
-  const handleClick = async () => {
-    sendJsonMessage({
+  const handleClick = useCallback(() => {
+    sendJsonMessage?.({
       type: READY,
       token,
       room_id,
     })
-  }
+  }, [sendJsonMessage])
 
   return (
     <Header>

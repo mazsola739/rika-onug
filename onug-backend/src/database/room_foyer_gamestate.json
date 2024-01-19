@@ -1,0 +1,70 @@
+{
+    "room_id": "foyer",
+    "room_name": "Foyer",
+    "selected_cards": [
+        25,
+        15,
+        17,
+        22,
+        18,
+        23,
+        27,
+        11,
+        24,
+        35,
+        2
+    ],
+    "actions": [],
+    "action_log": [],
+    "stage": "GAME_PLAY",
+    "players": {
+        "48774905-fdb2-4bef-9273-870f216bce9a": {
+            "name": "Rubeus Hagrid",
+            "admin": true,
+            "ready": false,
+            "player_card": 27,
+            "player_number": 1
+        },
+        "1509c37e-11a6-4509-b7d0-636073cc7ad1": {
+            "name": "Ron Weasley",
+            "admin": false,
+            "ready": false,
+            "player_card": 25,
+            "player_number": 2
+        },
+        "e1672888-6c86-4533-84bb-25982b44538d": {
+            "name": "Severus Snape",
+            "admin": false,
+            "ready": true,
+            "player_card": 24,
+            "player_number": 3
+        },
+        "8865b243-338a-473b-973d-4403fad5fb14": {
+            "name": "Albus Dumbledore",
+            "admin": false,
+            "ready": false,
+            "player_card": 23,
+            "player_number": 4
+        }
+    },
+    "turn": 0,
+    "closed": false,
+    "available_names": [
+        "Harry Potter",
+        "Hermione Granger",
+        "Lord Voldemort",
+        "Draco Malfoy",
+        "Neville Longbottom",
+        "Ginny Weasley",
+        "Dobby",
+        "Dolores Umbridge"
+    ],
+    "center_cards": {
+        "base": [
+            35,
+            22,
+            2
+        ],
+        "chosenWolfId": 15
+    }
+}

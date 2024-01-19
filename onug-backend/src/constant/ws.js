@@ -20,8 +20,9 @@ exports.HYDRATE_GAME_VOTE  = "HYDRATE_GAME_VOTE"
 
 exports.UPDATE_ROOM        = "UPDATE_ROOM"
 exports.RESET              = "RESET"
-exports.PLAY_GAME          = "PLAY_GAME"
+exports.TO_GAME_TABLE      = "TO_GAME_TABLE"
 exports.UPDATE_GAME_TABLE  = "UPDATE_GAME_TABLE"
 
 exports.REDIRECT           = "REDIRECT"
 exports.READY              = "READY"
+exports.START_GAME         = "START_GAME"

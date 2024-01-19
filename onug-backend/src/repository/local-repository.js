@@ -10,7 +10,7 @@ const upsertRoomState = async (state) => {
   const options = { flag: "w" }
   try {
     writeFileSync(filePath, roomState, options)
-    logTrace("room udpated")
+    logTrace("room updated")
   } catch (e) {
     logError(e)
   }

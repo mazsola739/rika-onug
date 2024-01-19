@@ -49,7 +49,7 @@ class BeholderStore {
           {
             text: beholder.beholder_seer_thumbaway_text,
             time: BASE_TIME,
-            image: 'onus_seer',
+            image: 'onuw_seer',
           },
           {
             text: doppelganger.doppelganger_close_text,
@@ -62,7 +62,7 @@ class BeholderStore {
           {
             text: beholder.beholder_seer_thumbaway_text,
             time: BASE_TIME,
-            image: 'onus_seer',
+            image: 'onuw_seer',
           },
           {
             text: beholder.beholder_close_text,
@@ -156,7 +156,7 @@ class BeholderStore {
           {
             text: beholder.beholder_seer_apprenticeseer_thumbaway_text,
             time: BASE_TIME,
-            image: 'onus_seer',
+            image: 'onuw_seer',
           },
           {
             text: doppelganger.doppelganger_close_text,
@@ -169,7 +169,7 @@ class BeholderStore {
           {
             text: beholder.beholder_seer_apprenticeseer_thumbaway_text,
             time: BASE_TIME,
-            image: 'onus_seer',
+            image: 'onuw_seer',
           },
           {
             text: beholder.beholder_close_text,

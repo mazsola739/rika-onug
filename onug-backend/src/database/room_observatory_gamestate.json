@@ -18,11 +18,27 @@
     ],
     "actions": [],
     "action_log": [],
-    "stage": "ROOM",
-    "players": {},
+    "stage": "GAME_PLAY",
+    "players": {
+        "39a60ab8-c1d9-4026-b584-bbcd17ee4a09": {
+            "name": "Shere Khan",
+            "admin": false,
+            "ready": false,
+            "player_card": 24,
+            "player_number": 1
+        },
+        "682b3928-f826-49ec-a964-0ecf0f66fd87": {
+            "name": "Maleficent",
+            "admin": false,
+            "ready": false,
+            "player_card": 8,
+            "player_number": 2
+        }
+    },
     "turn": 0,
     "closed": false,
     "available_names": [
+        "Ursula",
         "Cruella de Vil",
         "Jafar",
         "Captain Hook",
@@ -31,7 +47,13 @@
         "Queen of Hearts",
         "Mother Gothel",
         "Queen Narissa",
-        "Prince Hans",
-        "Shere Khan"
-    ]
+        "Prince Hans"
+    ],
+    "center_cards": {
+        "base": [
+            27,
+            6,
+            10
+        ]
+    }
 }

@@ -17,11 +17,12 @@ export const HYDRATE_GAME_VOTE = 'HYDRATE_GAME_VOTE'
 
 export const UPDATE_ROOM = 'UPDATE_ROOM'
 export const RESET = 'RESET'
-export const PLAY_GAME = 'PLAY_GAME'
+export const TO_GAME_TABLE = 'TO_GAME_TABLE'
 export const LEAVE_TABLE = 'LEAVE_TABLE'
 export const UPDATE_GAME_TABLE = 'UPDATE_GAME_TABLE'
 export const READY = 'READY'
 export const REDIRECT = 'REDIRECT'
+export const START_GAME = 'START_GAME'
 
 export const STAGES = {
   LOBBY: 'LOBBY',

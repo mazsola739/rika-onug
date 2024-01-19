@@ -13,6 +13,9 @@
 /onug-frontend/build
 /onug-backend/dist
 
+# logs
+/onug-backend/logs
+
 # misc
 .DS_Store
 .env.local

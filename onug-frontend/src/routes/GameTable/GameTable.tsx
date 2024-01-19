@@ -10,7 +10,13 @@ import { GameTableHeader } from './GameTableHeader'
 import { artifacts } from 'data'
 import { gameTableUtils } from './GameTable.utils'
 import { useEffect, useState } from 'react'
-import { ARRIVE_GAME_TABLE, HYDRATE_GAME_TABLE, STAGES } from 'constant'
+import {
+  ARRIVE_GAME_TABLE,
+  HYDRATE_GAME_TABLE,
+  REDIRECT,
+  STAGES,
+} from 'constant'
+import { useNavigate } from 'react-router-dom'
 
 export const GameTable: React.FC = observer(() => {
   const {
@@ -20,6 +26,7 @@ export const GameTable: React.FC = observer(() => {
     renderMarks,
     renderArtifacts,
   } = gameTableUtils
+  // TODO REMOVE FE shuffled cards completely, use data from BE
   const { centerCards, chosenWolf, chosenSuperVillain } =
     gameTableStore.distributeCards()
   const { hasSentinel, hasMarks, hasDoppelganger, hasCurator, players } =
@@ -30,11 +37,12 @@ export const GameTable: React.FC = observer(() => {
 
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    if (sendJsonMessage && firstTime) {
+    if (firstTime) {
       setFirstTime(false)
-      sendJsonMessage({
+      sendJsonMessage?.({
         type: ARRIVE_GAME_TABLE,
         stage: STAGES.GAME_TABLE,
         room_id: sessionStorage.getItem('room_id'),
@@ -46,7 +54,11 @@ export const GameTable: React.FC = observer(() => {
     if (lastJsonMessage?.type === HYDRATE_GAME_TABLE) {
       console.log(lastJsonMessage) //TODO hook
     }
-  }, [sendJsonMessage, lastJsonMessage])
+
+    if (lastJsonMessage?.type === REDIRECT) {
+      navigate(lastJsonMessage.path)
+    }
+  }, [lastJsonMessage])
 
   return (
     <>

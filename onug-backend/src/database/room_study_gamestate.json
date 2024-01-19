@@ -1,11 +1,30 @@
 {
     "room_id": "study",
     "room_name": "Study",
-    "selected_cards": [],
+    "selected_cards": [
+        1,
+        58,
+        64,
+        30
+    ],
     "actions": [],
     "action_log": [],
-    "stage": "ROOM",
-    "players": {},
+    "stage": "GAME_TABLE",
+    "players": {
+        "a464d452-09cf-49fe-9ca0-fabdab2518c9": {
+            "name": "The Joker",
+            "admin": false,
+            "ready": false,
+            "player_card": 64,
+            "player_number": 1
+        },
+        "d543692f-138f-4487-a1c3-f99f2401a07c": {
+            "name": "Lex Luthor",
+            "admin": false,
+            "ready": false,
+            "player_number": 2
+        }
+    },
     "turn": 0,
     "closed": false,
     "available_names": [
@@ -16,8 +35,13 @@
         "Arthur Curry",
         "Selina Kyle",
         "Harvey Dent",
-        "Lex Luthor",
-        "Harley Quinn",
-        "The Joker"
-    ]
+        "Harley Quinn"
+    ],
+    "center_cards": {
+        "base": [
+            58,
+            30,
+            1
+        ]
+    }
 }

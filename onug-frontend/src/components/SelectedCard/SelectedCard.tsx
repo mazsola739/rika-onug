@@ -43,17 +43,15 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
         selectedDeckStore.selectedCards
       )
 
-      if (sendJsonMessage) {
-        const token = sessionStorage.getItem('token')
-        const action = isSelected ? 'CARD_DESELECT' : 'CARD_SELECT'
-        sendJsonMessage({
-          type: UPDATE_ROOM,
-          card_id: id,
-          room_id,
-          token,
-          action,
-        })
-      }
+      const token = sessionStorage.getItem('token')
+      const action = isSelected ? 'CARD_DESELECT' : 'CARD_SELECT'
+      sendJsonMessage?.({
+        type: UPDATE_ROOM,
+        card_id: id,
+        room_id,
+        token,
+        action,
+      })
 
       roomStore.toggleInfo(id, 'card')
     }, [

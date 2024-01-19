@@ -1,4 +1,4 @@
-const { PLAY_GAME } = require('../constant/ws')
+const { TO_GAME_TABLE } = require('../constant/ws')
 const roomNames = require('../data/room_names.json')
 const { logDebug } = require('../log')
 
@@ -31,7 +31,7 @@ const broadcastPlayGame = (gameState) => {
     
     Object.entries(websocketServerConnectionsPerRoom[room_id]).forEach(([token, ws]) => {
         const playGame = JSON.stringify({
-            type: PLAY_GAME,
+            type: TO_GAME_TABLE,
             success: true,
             room_id,
             selected_cards,

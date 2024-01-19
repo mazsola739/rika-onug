@@ -6,10 +6,11 @@
   "license": "MIT",
   "main": "server.js",
   "scripts": {
-    "start": "cross-env ONUG_REPOSITORY_TYPE=local ONUG_LOG_LEVEL=TRACE node ./src/server.js"
+    "start": "cross-env ONUG_REPOSITORY_TYPE=local ONUG_LOG_LEVEL=WARN node ./src/server.js",
+    "test": "node --test --experimental-test-coverage"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=20.0.0"
   },
   "keywords": [
     "one-night-ultimate-werewolf",

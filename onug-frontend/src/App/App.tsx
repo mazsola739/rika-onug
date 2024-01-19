@@ -5,12 +5,12 @@ import { StyledApp } from './App.styles'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { useEffect, useState } from 'react'
-import { KEEP_ALIVE, NEWBIE } from 'constant'
+import { NEWBIE } from 'constant'
 
 export const App: React.FC = observer(() => {
-  const [firstTime, setFirstTime] = useState(true)
-  const pathname = window.location.pathname
-  const { setRedirectPath } = wsStore
+  // firstTime initialized with false, since it will be really initialized with the onOpen ws event to true, to
+  // avoid double NEWBIE call
+  const [firstTime, setFirstTime] = useState(false)
   const [socketUrl] = useState('ws://localhost:7655/')
   const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket(
     socketUrl,
@@ -21,28 +21,20 @@ export const App: React.FC = observer(() => {
   )
 
   useEffect(() => {
-    const token = sessionStorage.getItem('token')
-
-    if (firstTime && !['/', '/lobby'].includes(pathname)) {
-      setRedirectPath('/lobby')
-    } else if (
-      sendJsonMessage &&
-      firstTime &&
-      ['/', '/lobby'].includes(pathname)
-    ) {
+    if (firstTime) {
       setFirstTime(false)
-      sendJsonMessage({ type: NEWBIE, token })
+      const token = sessionStorage.getItem('token')
+      sendJsonMessage?.({ type: NEWBIE, token })
       wsStore.setSendJsonMessage(sendJsonMessage)
     }
     if (lastJsonMessage) {
       wsStore.setLastJsonMessage(lastJsonMessage)
     }
-    if (lastJsonMessage?.type !== KEEP_ALIVE) {
-      if (lastJsonMessage?.type === NEWBIE) {
-        sessionStorage.setItem('token', lastJsonMessage.token)
-      }
+
+    if (lastJsonMessage?.type === NEWBIE) {
+      sessionStorage.setItem('token', lastJsonMessage.token)
     }
-  }, [sendJsonMessage, wsStore, lastJsonMessage, firstTime, setRedirectPath])
+  }, [wsStore, sendJsonMessage, lastJsonMessage, firstTime])
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: 'Connecting',

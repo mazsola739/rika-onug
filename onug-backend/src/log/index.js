@@ -1,3 +1,5 @@
+const { appendFile } = require("fs/promises")
+
 const LOG_LEVELS = {
     'ERROR': 'ERROR',
     'WARN' : 'WARN',
@@ -6,8 +8,7 @@ const LOG_LEVELS = {
     'TRACE': 'TRACE',
 }
 const LOG_LEVEL = process.env.ONUG_LOG_LEVEL || LOG_LEVELS.INFO
-
-console.log(`Log level is set to ${LOG_LEVEL}`)
+const logFilePath = `${__dirname}/../../logs/log_${Date.now()}.txt`
 
 const isLogLevelEnabled = (logLevel) => {
     switch (logLevel) {
@@ -24,11 +25,23 @@ const isLogLevelEnabled = (logLevel) => {
 }
 
 const logTimestamp = () => new Date().toISOString()
-const logError = message => isLogLevelEnabled(LOG_LEVELS.ERROR) && console.error(`${logTimestamp()}: [ERROR] ${message}`)
-const logWarn  = message => isLogLevelEnabled(LOG_LEVELS.WARN) && console.warn(`${logTimestamp()}: [WARN] ${message}`)
-const logInfo  = message => isLogLevelEnabled(LOG_LEVELS.INFO) && console.info(`${logTimestamp()}: [INFO] ${message}`)
-const logDebug = message => isLogLevelEnabled(LOG_LEVELS.DEBUG) && console.info(`${logTimestamp()}: [DEBUG] ${message}`)
-const logTrace = message => isLogLevelEnabled(LOG_LEVELS.TRACE) && console.info(`${logTimestamp()}: [TRACE] ${message}`)
+
+const writeToLogFile = async (message, logLevel) => {
+    let content = `${logTimestamp()}: ${logLevel} ${message}
+`
+    await appendFile(logFilePath, content, (err) => {
+        return console.error(err)
+    })
+}
+
+const logError = message => writeToLogFile(message, '[ERROR]') && isLogLevelEnabled(LOG_LEVELS.ERROR) && console.error(`${logTimestamp()}: [ERROR] ${message}`)
+const logWarn  = message => writeToLogFile(message, '[WARN]') && isLogLevelEnabled(LOG_LEVELS.WARN) && console.warn(`${logTimestamp()}: [WARN] ${message}`)
+const logInfo  = message => writeToLogFile(message, '[INFO]') && isLogLevelEnabled(LOG_LEVELS.INFO) && console.info(`${logTimestamp()}: [INFO] ${message}`)
+const logDebug = message => writeToLogFile(message, '[DEBUG]') && isLogLevelEnabled(LOG_LEVELS.DEBUG) && console.info(`${logTimestamp()}: [DEBUG] ${message}`)
+const logTrace = message => writeToLogFile(message, '[TRACE]') && isLogLevelEnabled(LOG_LEVELS.TRACE) && console.info(`${logTimestamp()}: [TRACE] ${message}`)
+
+logDebug(`logFilePath ${logFilePath}`)
+logDebug(`Log level is set to ${LOG_LEVEL}`)
 
 module.exports = {
     logError,

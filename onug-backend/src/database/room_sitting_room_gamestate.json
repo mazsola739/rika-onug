@@ -14,16 +14,24 @@
         20,
         44,
         49,
-        74
+        74,
+        64,
+        30,
+        31
     ],
     "actions": [],
     "action_log": [],
     "stage": "ROOM",
-    "players": {},
+    "players": {
+        "d332462e-73d3-44b6-ad30-310773b97516": {
+            "name": "Peter Parker",
+            "admin": false,
+            "ready": false
+        }
+    },
     "turn": 0,
     "closed": false,
     "available_names": [
-        "Peter Parker",
         "Bruce Banner",
         "Natasha Romanoff",
         "Wade Wilson",

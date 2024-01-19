@@ -4,7 +4,7 @@ import { Slaves, StyledLobby, LowPhas, StyledRoomButton } from './Lobby.styles'
 import { lobbyStore, wsStore } from 'store'
 import { useNavigate } from 'react-router-dom'
 import { StyledLobbyProps } from './Lobby.types'
-import { HYDRATE_LOBBY, JOIN_ROOM, STAGES } from 'constant'
+import { HYDRATE_LOBBY, JOIN_ROOM, REDIRECT, STAGES } from 'constant'
 
 const RoomButton: React.FC<StyledLobbyProps> = ({
   buttonText,
@@ -27,9 +27,9 @@ export const Lobby: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
 
   useEffect(() => {
-    if (sendJsonMessage && firstTime) {
+    if (firstTime) {
       setFirstTime(false)
-      sendJsonMessage({
+      sendJsonMessage?.({
         type: HYDRATE_LOBBY,
         stage: STAGES.LOBBY,
       })
@@ -38,11 +38,13 @@ export const Lobby: React.FC = observer(() => {
 
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_LOBBY) {
-      console.log(lastJsonMessage) //TODO hook
+      console.log(lastJsonMessage)
     }
-  }, [sendJsonMessage, lastJsonMessage])
 
-  useEffect(() => {
+    if (lastJsonMessage?.type === REDIRECT) {
+      navigate(lastJsonMessage.path)
+    }
+
     if (lastJsonMessage?.type === JOIN_ROOM) {
       if (lastJsonMessage.success) {
         const { room_id, player_name } = lastJsonMessage
@@ -54,15 +56,16 @@ export const Lobby: React.FC = observer(() => {
         console.error(lastJsonMessage.errors)
       }
     }
-  }, [lastJsonMessage])
+  }, [sendJsonMessage, lastJsonMessage])
 
   useEffect(() => {
-    lobbyStore.fetchRooms()
+    lobbyStore.fetchRooms().then(() => {
+      /* do nothing */
+    })
   }, [])
 
   const handleJoinRoom = (room_id: string) => {
-    const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
-    sendJsonMessage({
+    sendJsonMessage?.({
       type: JOIN_ROOM,
       room_id,
       token: sessionStorage.getItem('token'),

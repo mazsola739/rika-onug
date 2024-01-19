@@ -1,72 +1,39 @@
 import { Footer, FooterButtons, Button, SelectedCardList } from 'components'
-import { LEAVE_ROOM, PLAY_GAME, RESET, buttons } from 'constant'
+import { LEAVE_ROOM, TO_GAME_TABLE, RESET, buttons } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { useCallback, useEffect } from 'react'
-import { gamePlayStore, roomStore, selectedDeckStore, wsStore } from 'store'
-import { useNavigate } from 'react-router-dom'
+import { useCallback } from 'react'
+import { gamePlayStore, selectedDeckStore, wsStore } from 'store'
 
 export const RoomFooter: React.FC = observer(() => {
-  const navigate = useNavigate()
-  const { lastJsonMessage } = wsStore.getWsCommunicationsBridge()
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
+  const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
 
-  useEffect(() => {
-    if (lastJsonMessage?.type === LEAVE_ROOM) {
-      if (lastJsonMessage.success) {
-        sessionStorage.setItem('room_id', '')
-        sessionStorage.setItem('player_name', '')
-        navigate('/lobby')
-      } else {
-        console.error(lastJsonMessage.errors)
-      }
-    }
-  }, [lastJsonMessage])
-
-  useEffect(() => {
-    if (lastJsonMessage?.type === PLAY_GAME) {
-      if (lastJsonMessage.success) {
-        sessionStorage.setItem('player_card_id', lastJsonMessage.player_card_id)
-        sessionStorage.setItem('player_number', lastJsonMessage.player_number)
-
-        // TODO check if everything works around here
-        gamePlayStore.toggleGameStatus()
-        roomStore.resetDetailedCardInfo()
-        selectedDeckStore.addCardIdsToArray()
-        navigate(`/gametable/${room_id}`)
-      } else {
-        console.error(lastJsonMessage.errors)
-      }
-    }
-  }, [lastJsonMessage])
-
+  // TODO these clickhandlers could be merged into one clickhandler which get one more information the type
   const handleResetGame = useCallback(() => {
-    const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
-    sendJsonMessage({
+    sendJsonMessage?.({
       type: RESET,
       room_id,
       token,
     })
     gamePlayStore.resetGame()
-  }, [])
+  }, [sendJsonMessage])
 
-  const handleLeaveRoom = () => {
-    const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
-    sendJsonMessage({
+  const handleLeaveRoom = useCallback(() => {
+    sendJsonMessage?.({
       type: LEAVE_ROOM,
       room_id,
       token,
     })
-  }
+  }, [sendJsonMessage])
 
-  const handleStartGame = useCallback(() => {
-    const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
-    sendJsonMessage({
-      type: PLAY_GAME,
+  const handleToGameTable = useCallback(() => {
+    sendJsonMessage?.({
+      type: TO_GAME_TABLE,
       room_id,
       token,
     })
-  }, [])
+  }, [sendJsonMessage])
 
   const totalPlayers = selectedDeckStore.totalPlayers
   const buttonText = totalPlayers
@@ -82,7 +49,7 @@ export const RoomFooter: React.FC = observer(() => {
           backgroundColor="#007bff"
         />
         <Button
-          onClick={handleStartGame}
+          onClick={handleToGameTable}
           disabled={!selectedDeckStore.totalPlayers}
           buttontext={buttonText}
           backgroundColor="#28a745"
