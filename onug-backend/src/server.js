@@ -5,8 +5,9 @@ const cookieParser = require('cookie-parser')
 const {
     pageNotFoundError, internalServerError, apiRouter,
 } = require("./api")
-const { logDebug, logInfo, logTrace, logError } = require('./log')
+const { logDebug } = require('./log')
 const { websocketServer } = require('./websocket')
+const { godRouter } = require("./god")
 
 
 const app = express()
@@ -26,7 +27,7 @@ app.use(cors({
 
 // API routing
 app.use('/api', apiRouter)
-
+app.use('/god', godRouter)
 
 // Error handling
 app.use(pageNotFoundError)

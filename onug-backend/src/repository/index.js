@@ -5,5 +5,5 @@ const { logDebug } = require('../log')
 logDebug(`Choosen repository type: ${repositoryType}`)
 
 module.exports = {
-    repository,
-  }
+  repository,
+}

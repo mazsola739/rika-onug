@@ -1,6 +1,7 @@
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
 export type WsJsonMessage = {
+  path?: string
   type?: string
   message?: string
   errors?: string[]

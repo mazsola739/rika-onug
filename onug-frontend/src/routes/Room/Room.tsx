@@ -1,5 +1,5 @@
 import { CardList, TokenList } from 'components'
-import { HYDRATE_ROOM, STAGES, team } from 'constant'
+import { ARRIVE_ROOM, HYDRATE_ROOM, STAGES, team } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useMemo, useState } from 'react'
 import { deckStore, roomStore, selectedDeckStore, wsStore } from 'store'
@@ -21,7 +21,7 @@ export const Room: React.FC = observer(() => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       sendJsonMessage({
-        type: HYDRATE_ROOM,
+        type: ARRIVE_ROOM,
         stage: STAGES.ROOM,
         room_id: sessionStorage.getItem('room_id'),
       })

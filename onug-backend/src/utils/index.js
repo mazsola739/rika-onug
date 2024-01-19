@@ -1,7 +1,8 @@
 const { toogleCard } = require('./card')
-const { determineTotalPlayers } = require('./player')
+const { determineTotalPlayers, getPlayersReadyState } = require('./player')
 const { randomPlayerName } = require('./name-generator')
 const { sanitize, truncate } = require('./sanitizer')
+const { isGameTableClosed } = require('./game-state')
 
 module.exports = {
     toogleCard,
@@ -9,4 +10,6 @@ module.exports = {
     randomPlayerName,
     sanitize,
     truncate,
+    isGameTableClosed,
+    getPlayersReadyState,
 }

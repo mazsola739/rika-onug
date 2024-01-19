@@ -47,4 +47,5 @@ module.exports = {
     removeUserFromRoom,
     broadcast,
     broadcastPlayGame,
+    websocketServerConnectionsPerRoom,
 }

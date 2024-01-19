@@ -1,7 +1,7 @@
 const { repository } = require("../repository")
 const { upsertRoomState, readGameState } = repository
 const { logTrace } = require("../log")
-const { LEAVE_TABLE } = require("../constant/ws")
+const { LEAVE_TABLE, HYDRATE_GAME_TABLE, REDIRECT } = require("../constant/ws")
 const { broadcast } = require("./connections")
 const { STAGES } = require("../constant/stage")
 
@@ -16,7 +16,7 @@ exports.leaveTable = async (ws, message) => {
   if (!player) {
     return ws.send(
       JSON.stringify({
-        type: LEAVE_TABLE,
+        type: HYDRATE_GAME_TABLE,
         success: false,
         errors: ["Player not found at the table."],
       })
@@ -25,13 +25,13 @@ exports.leaveTable = async (ws, message) => {
 
   const newGameState = {
     ...gameState,
+    stage: STAGES.ROOM,
   }
   delete newGameState.center_cards
   const playerTokens = Object.keys(newGameState.players)
-  playerTokens.forEach((token, index) => {
+  playerTokens.forEach((token) => {
     newGameState.players[token] = {
       ...newGameState.players[token],
-      stage: STAGES.ROOM,
     }
     delete newGameState.players[token].player_card
     delete newGameState.players[token].player_number
@@ -39,5 +39,5 @@ exports.leaveTable = async (ws, message) => {
 
   await upsertRoomState(newGameState)
 
-  return broadcast(room_id, { type: LEAVE_TABLE, success: true })
+  return broadcast(room_id, { type: REDIRECT, path: `/room/${room_id}` })
 }

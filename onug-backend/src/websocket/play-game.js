@@ -22,6 +22,7 @@ exports.playGame = async (ws, message) => {
 
   const newRoomState = {
     ...gameState,
+    stage: STAGES.GAME_TABLE,
     center_cards: {
       base: centerCards,
       chosenWolfId,
@@ -33,7 +34,6 @@ exports.playGame = async (ws, message) => {
   playerTokens.forEach((token, index) => {
     newRoomState.players[token] = {
       ...gameState.players[token],
-      stage: STAGES.GAME_TABLE,
       player_card: playerCards[index],
       player_number: index + 1,
     };

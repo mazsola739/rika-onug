@@ -13,3 +13,16 @@ exports.determineTotalPlayers = (totalCharacters, selectedCards) => {
 
     return Math.max(totalPlayers, 0)
 }
+
+exports.getPlayersReadyState = (gameState) => {
+    const playerTokens = Object.keys(gameState.players)
+    const ready = []
+    const notReady = []
+
+    playerTokens.forEach( token => {
+        gameState.players[token].ready
+        ? ready.push(gameState.players[token].player_number)
+        : notReady.push(gameState.players[token].player_number)
+      })
+    return {ready, notReady}
+}

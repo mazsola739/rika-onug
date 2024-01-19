@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { Lobby, Room, GameTable, GamePlay, Voting, Settings } from 'routes'
+import { Lobby, Room, GameTable, GamePlay, Voting, Settings, God } from 'routes'
 import { wsStore } from 'store'
 import { StyledApp } from './App.styles'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -64,6 +64,7 @@ export const App: React.FC = observer(() => {
           <Route path="/gameplay/:room_id" element={<GamePlay />} />
           <Route path="/voting/:room_id" element={<Voting />} />
           <Route path="/settings/:room_id" element={<Settings />} />
+          <Route path="/god" element={<God />} />
           {/* 404 Not Found Route    */}
           {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>

@@ -10,21 +10,16 @@ import {
   YourCardRule,
   YourName,
 } from './GameTable.styles'
-import { sendReadyRequest } from 'api'
 import { utils } from 'utils'
-import { deckStore } from 'store'
+import { deckStore, wsStore } from 'store'
+import { READY } from 'constant'
 
 export const GameTableHeader: React.FC = observer(() => {
-  const handleClick = async () => {
-    try {
-      const responseData = await sendReadyRequest()
-      console.log('Response from backend:', responseData)
-    } catch (error) {
-      console.error(error.message)
-    }
-  }
+  const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
   const { findCardById } = utils
 
+  const token = sessionStorage.getItem('token')
+  const room_id = sessionStorage.getItem('room_id')
   const player_name = sessionStorage.getItem('player_name')
   const player_number = sessionStorage.getItem('player_number')
   const player_card_id = sessionStorage.getItem('player_card_id')
@@ -33,6 +28,14 @@ export const GameTableHeader: React.FC = observer(() => {
     player_card: findCardById(deckStore.deck, +player_card_id),
     player_name,
     player_number: +player_number,
+  }
+
+  const handleClick = async () => {
+    sendJsonMessage({
+      type: READY,
+      token,
+      room_id,
+    })
   }
 
   return (

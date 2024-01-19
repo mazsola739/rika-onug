@@ -1,19 +1,39 @@
 import { Footer, FooterButtons, Button } from 'components'
 import { observer } from 'mobx-react-lite'
-import { useCallback } from 'react'
-import { buttons } from 'constant'
-import { gamePlayStore, selectedDeckStore } from 'store'
+import { useCallback, useEffect } from 'react'
+import { HYDRATE_GAME_PLAY, LEAVE_TABLE, REDIRECT, buttons } from 'constant'
+import { gamePlayStore, selectedDeckStore, wsStore } from 'store'
 import { Messages } from './GameTable.styles'
 import { useNavigate } from 'react-router-dom'
 
 export const GameTableFooter: React.FC = observer(() => {
+  const { sendJsonMessage, lastJsonMessage } =
+    wsStore.getWsCommunicationsBridge()
+
   const navigate = useNavigate()
   const room_id = sessionStorage.getItem('room_id')
+  const token = sessionStorage.getItem('token')
+
+  useEffect(() => {
+    if (
+      lastJsonMessage?.type === HYDRATE_GAME_PLAY &&
+      lastJsonMessage.success
+    ) {
+      console.log(`TODO handle hydrate ready state: ${lastJsonMessage}`)
+    }
+
+    if (lastJsonMessage?.type === REDIRECT) {
+      gamePlayStore.toggleGameStatus()
+      navigate(lastJsonMessage.path)
+    }
+  }, [sendJsonMessage, lastJsonMessage])
 
   const handleStopGame = useCallback(() => {
-    gamePlayStore.toggleGameStatus()
-
-    navigate(`/room/${room_id}`)
+    sendJsonMessage({
+      type: LEAVE_TABLE,
+      room_id,
+      token,
+    })
   }, [selectedDeckStore])
 
   const handleStartGame = useCallback(() => {

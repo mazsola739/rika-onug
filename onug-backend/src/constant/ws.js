@@ -22,3 +22,6 @@ exports.UPDATE_ROOM        = "UPDATE_ROOM"
 exports.RESET              = "RESET"
 exports.PLAY_GAME          = "PLAY_GAME"
 exports.UPDATE_GAME_TABLE  = "UPDATE_GAME_TABLE"
+
+exports.REDIRECT           = "REDIRECT"
+exports.READY              = "READY"

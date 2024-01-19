@@ -11,12 +11,12 @@ exports.hydrateRoom = async (ws, message) => {
       JSON.stringify({ type: HYDRATE_ROOM, success: false, errors })
     );
 
-  const hydrateSelect = JSON.stringify({
+  const hydrateRoom = JSON.stringify({
     type: HYDRATE_ROOM,
     success: true,
     room_id: gameState.room_id,
     selected_cards: gameState.selected_cards,
   });
-  logTrace(`sending message to client, hydrate select: ${hydrateSelect}`);
-  return ws.send(hydrateSelect);
+  logTrace(`sending message to client, hydrate room: ${hydrateRoom}`);
+  return ws.send(hydrateRoom);
 };

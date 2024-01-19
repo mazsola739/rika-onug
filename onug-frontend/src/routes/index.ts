@@ -1,5 +1,6 @@
 export * from './GamePlay/GamePlay'
 export * from './GameTable/GameTable'
+export * from './God/God'
 export * from './Lobby/Lobby'
 export * from './Room/Room'
 export * from './Settings/Settings'

@@ -4,6 +4,7 @@
     "room_name": "Archives",
     "selected_cards": [],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,
@@ -28,6 +29,7 @@
     "room_name": "Armory",
     "selected_cards": [],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,
@@ -52,6 +54,7 @@
     "room_name": "Dynamite Room",
     "selected_cards": [],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,
@@ -86,6 +89,7 @@
       24
     ],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,
@@ -119,6 +123,7 @@
       76
     ],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,
@@ -152,6 +157,7 @@
       33
     ],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,
@@ -185,6 +191,7 @@
       44
     ],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,
@@ -223,6 +230,7 @@
       10
     ],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,
@@ -261,6 +269,7 @@
       21
     ],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,
@@ -299,6 +308,7 @@
       20
     ],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,
@@ -337,6 +347,7 @@
       74
     ],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,
@@ -361,6 +372,7 @@
     "room_name": "Study",
     "selected_cards": [],
     "actions": [],
+    "stage": "LOBBY",
     "action_log": [],
     "players": {},
     "turn": 0,

@@ -48,8 +48,9 @@ exports.joinRoom = async (ws, message) => {
       selected_cards: room.selected_cards,
       actions: [],
       action_log: [],
+      stage: STAGES.ROOM,
       players: {
-        [token]: { name: player_name, admin: true, stage: STAGES.ROOM },
+        [token]: { name: player_name, admin: true, ready: false },
       },
       turn: 0,
       closed: false,
@@ -75,7 +76,7 @@ exports.joinRoom = async (ws, message) => {
     gameState.players[token] = {
       name: player_name,
       admin: gameState.players.length === 0,
-      stage: STAGES.ROOM,
+      ready: false,
     };
 
     gameState.available_names = gameState.available_names.filter(
