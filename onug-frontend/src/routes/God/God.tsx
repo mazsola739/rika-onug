@@ -43,26 +43,54 @@ export const God: React.FC = observer(() => {
     serverResponse: 'will be populated here',
   })
 
-  const clickHandler = () => {
-    console.log('Click')
-  }
-
-  const checkGamesStates = async () => {
+  const checkGameStates = async () => {
     const res = await fetch('/god/check-game-states')
     const json = await res.json()
     setResponse(json)
   }
 
-  const deleteAllGamesStates = async () => {
+  const checkGameStateByRoomId = () => {
+    console.log('Click')
+  }
+
+  const deleteAllGameStates = async () => {
     const res = await fetch('/god/delete-all-game-states')
     const json = await res.json()
     setResponse(json)
+  }
+
+  const deleteAllGameStateByRoomId = () => {
+    console.log('Click')
   }
 
   const checkConnections = async () => {
     const res = await fetch('/god/check-connections')
     const json = await res.json()
     setResponse(json)
+  }
+
+  const removePlayerByToken = () => {
+    console.log('Click')
+  }
+
+  const removeAllPlayers = () => {
+    console.log('Click')
+  }
+
+  const broadcastToAll = () => {
+    console.log('Click')
+  }
+
+  const broadcastToAllInRoom = () => {
+    console.log('Click')
+  }
+
+  const sendMessageToPlayer = () => {
+    console.log('Click')
+  }
+
+  const listOnugEnvVars = () => {
+    console.log('Click')
   }
 
   return (
@@ -81,14 +109,14 @@ export const God: React.FC = observer(() => {
             </InputContainer>
           </FormContainer>
           <ButtonsContainer>
-            <Button onClick={checkGamesStates}>{CHECK_GAME_STATES}</Button>
-            <Button onClick={clickHandler}>
+            <Button onClick={checkGameStates}>{CHECK_GAME_STATES}</Button>
+            <Button onClick={checkGameStateByRoomId}>
               {CHECK_GAME_STATE_BY_ROOM_ID}
             </Button>
-            <Button onClick={deleteAllGamesStates}>
+            <Button onClick={deleteAllGameStates}>
               {DELETE_ALL_GAME_STATES}
             </Button>
-            <Button onClick={clickHandler}>
+            <Button onClick={deleteAllGameStateByRoomId}>
               {DELETE_GAME_STATE_BY_ROOM_ID}
             </Button>
           </ButtonsContainer>
@@ -98,18 +126,24 @@ export const God: React.FC = observer(() => {
           <GodTitle>{WS}</GodTitle>
           <ButtonsContainer>
             <Button onClick={checkConnections}>{CHECK_CONNECTIONS}</Button>
-            <Button onClick={clickHandler}>{REMOVE_PLAYER_BY_TOKEN}</Button>
-            <Button onClick={clickHandler}>{REMOVE_ALL_PLAYERS}</Button>
-            <Button onClick={clickHandler}>{BROADCAST_TO_ALL}</Button>
-            <Button onClick={clickHandler}>{BROADCAST_TO_ALL_IN_ROOM}</Button>
-            <Button onClick={clickHandler}>{SEND_MESSAGE_TO_PLAYER}</Button>
+            <Button onClick={removePlayerByToken}>
+              {REMOVE_PLAYER_BY_TOKEN}
+            </Button>
+            <Button onClick={removeAllPlayers}>{REMOVE_ALL_PLAYERS}</Button>
+            <Button onClick={broadcastToAll}>{BROADCAST_TO_ALL}</Button>
+            <Button onClick={broadcastToAllInRoom}>
+              {BROADCAST_TO_ALL_IN_ROOM}
+            </Button>
+            <Button onClick={sendMessageToPlayer}>
+              {SEND_MESSAGE_TO_PLAYER}
+            </Button>
           </ButtonsContainer>
         </WSContainer>
 
         <MetaContainer>
           <GodTitle>{META}</GodTitle>
           <ButtonsContainer>
-            <Button onClick={clickHandler}>{LIST_ONUG_ENV_VARS}</Button>
+            <Button onClick={listOnugEnvVars}>{LIST_ONUG_ENV_VARS}</Button>
           </ButtonsContainer>
         </MetaContainer>
       </LeftSide>
