@@ -4,11 +4,6 @@ import { GamePlayCardProps } from './GamePlayCard.types'
 
 export const GamePlayCard: React.FC<GamePlayCardProps> = observer(
   ({ image }) => {
-    return (
-      <StyledGamePlayCard
-        src={require(`../../assets/cards/${image}.png`)}
-        alt={image}
-      />
-    )
+    return <StyledGamePlayCard src={`/assets/cards/${image}.png`} alt={image} />
   }
 )

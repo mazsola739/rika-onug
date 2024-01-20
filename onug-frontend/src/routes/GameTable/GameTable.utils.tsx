@@ -63,7 +63,7 @@ const renderArtifacts = (artifacts: TokenType[]) => (
           <img
             key={i}
             style={{ width: '60px' }}
-            src={require(`../../assets/tokens/${artifact.token_name}.png`)}
+            src={`/assets/tokens/${artifact.token_name}.png`}
             alt={artifact.token_name}
           />
         )

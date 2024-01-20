@@ -1,28 +1,15 @@
 {
     "room_id": "study",
     "room_name": "Study",
-    "selected_cards": [
-        1,
-        58,
-        64,
-        30
-    ],
+    "selected_cards": [],
     "actions": [],
     "action_log": [],
-    "stage": "GAME_TABLE",
+    "stage": "ROOM",
     "players": {
-        "a464d452-09cf-49fe-9ca0-fabdab2518c9": {
-            "name": "The Joker",
-            "admin": false,
-            "ready": false,
-            "player_card": 64,
-            "player_number": 1
-        },
-        "d543692f-138f-4487-a1c3-f99f2401a07c": {
-            "name": "Lex Luthor",
-            "admin": false,
-            "ready": false,
-            "player_number": 2
+        "a6c89472-7fb1-4315-a4a6-ae468febebdf": {
+            "name": "Dick Grayson",
+            "admin": true,
+            "ready": false
         }
     },
     "turn": 0,
@@ -34,14 +21,10 @@
         "Barry Allen",
         "Arthur Curry",
         "Selina Kyle",
+        "Edward Nygma",
         "Harvey Dent",
-        "Harley Quinn"
-    ],
-    "center_cards": {
-        "base": [
-            58,
-            30,
-            1
-        ]
-    }
+        "Lex Luthor",
+        "Harley Quinn",
+        "The Joker"
+    ]
 }

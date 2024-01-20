@@ -2,40 +2,47 @@
     "room_id": "archives",
     "room_name": "Archives",
     "selected_cards": [
-        37,
-        56,
+        1,
+        9,
+        18,
+        23,
         51,
-        75,
-        68,
-        17,
-        16
+        64,
+        72,
+        52
     ],
     "actions": [],
     "action_log": [],
-    "stage": "ROOM",
+    "stage": "GAME_PLAY",
     "players": {
-        "7c431d75-27e6-4baf-824f-d76d0e38ac1d": {
-            "name": "Djinn",
-            "admin": false,
-            "ready": false
-        },
-        "41760bd0-6622-4e47-8cee-6c2bedb7fa3c": {
-            "name": "Phoenix",
-            "admin": false,
-            "ready": false
+        "48640a5f-9e7e-4eff-a220-f330d12eed23": {
+            "name": "Minotaur",
+            "admin": true,
+            "ready": false,
+            "player_card": 64,
+            "player_number": 1
         }
     },
     "turn": 0,
     "closed": false,
     "available_names": [
         "Dragon",
+        "Phoenix",
+        "Griffin",
         "Mermaid",
         "Unicorn",
         "Cyclops",
         "Troll",
         "Chimera",
         "Goblin",
-        "Minotaur",
-        "Fairy"
-    ]
+        "Fairy",
+        "Djinn"
+    ],
+    "center_cards": {
+        "base": [
+            72,
+            52,
+            9
+        ]
+    }
 }

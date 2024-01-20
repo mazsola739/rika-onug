@@ -1,7 +1,7 @@
-import { logo_en_1 } from 'assets'
-import { Header, Filter } from 'components'
+import React from 'react'
+import { Header } from 'components'
 import { observer } from 'mobx-react-lite'
-import { RuleInfoDescription, StyledLogo, StyledRuleInfo } from './Room.styles'
+import { RuleImage, RuleInfoDescription, StyledRuleInfo } from './Room.styles'
 import { gamePlayStore, roomStore } from 'store'
 
 const RuleInfo: React.FC = observer(() => {
@@ -11,11 +11,18 @@ const RuleInfo: React.FC = observer(() => {
 
   const displayInfo =
     detailedCardInfo.id !== 0 ? detailedCardInfo.rules : detailedTokenInfo.rules
+  const imgSrc =
+    detailedCardInfo.id !== 0
+      ? `/assets/cards/${detailedCardInfo.card_name}.png`
+      : `/assets/tokens/${detailedTokenInfo.token_name}.png`
 
   return (
     <StyledRuleInfo>
       {isGameStopped && displayInfo && (
-        <RuleInfoDescription>{displayInfo}</RuleInfoDescription>
+        <>
+          <RuleImage src={imgSrc} alt="info" />
+          <RuleInfoDescription>{displayInfo}</RuleInfoDescription>
+        </>
       )}
     </StyledRuleInfo>
   )
@@ -24,8 +31,6 @@ const RuleInfo: React.FC = observer(() => {
 export const RoomHeader: React.FC = observer(() => {
   return (
     <Header>
-      <StyledLogo src={logo_en_1} alt="header" />
-      <Filter />
       <RuleInfo />
     </Header>
   )

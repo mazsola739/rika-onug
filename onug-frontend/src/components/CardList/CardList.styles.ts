@@ -10,11 +10,10 @@ export const CardListTitle = styled.p`
   font-family: 'Josefin Sans', sans-serif;
   font-weight: bold;
   color: black;
-  margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding-bottom: 10px;
   text-align: center;
+  margin: 0px 0px 10px;
 `
 
 export const CardListGrid = styled.div`

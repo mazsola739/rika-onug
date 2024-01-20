@@ -1,15 +1,13 @@
 import { observer } from 'mobx-react-lite'
 import { Lobby, Room, GameTable, GamePlay, Voting, God } from 'routes'
 import { wsStore } from 'store'
-import { StyledApp } from './App.styles'
+import { ConnectionStatusIcon, StyledApp } from './App.styles'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { NEWBIE } from 'constant'
 
 export const App: React.FC = observer(() => {
-  // firstTime initialized with false, since it will be really initialized with the onOpen ws event to true, to
-  // avoid double NEWBIE call
   const [firstTime, setFirstTime] = useState(false)
   const [socketUrl] = useState('ws://localhost:7655/')
   const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket(
@@ -37,16 +35,21 @@ export const App: React.FC = observer(() => {
   }, [wsStore, sendJsonMessage, lastJsonMessage, firstTime])
 
   const connectionStatus = {
-    [ReadyState.CONNECTING]: 'Connecting',
-    [ReadyState.OPEN]: 'Open',
-    [ReadyState.CLOSING]: 'Closing',
-    [ReadyState.CLOSED]: 'Closed',
-    [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
+    [ReadyState.CONNECTING]: 'connecting',
+    [ReadyState.OPEN]: 'open',
+    [ReadyState.CLOSING]: 'closing',
+    [ReadyState.CLOSED]: 'closed',
+    [ReadyState.UNINSTANTIATED]: 'uninstantiated',
   }[readyState]
+
+  const imageSrc = useMemo(
+    () => `/assets/icons/${connectionStatus}.svg`,
+    [connectionStatus]
+  )
 
   return (
     <StyledApp>
-      <span>The WebSocket is currently {connectionStatus}</span>
+      <ConnectionStatusIcon src={imageSrc} alt={connectionStatus} />
       <Router>
         <Routes>
           <Route path="/" element={<Lobby />} />

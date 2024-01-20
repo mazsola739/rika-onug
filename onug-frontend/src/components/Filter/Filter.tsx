@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
 import { roomStore } from 'store'
-import { StyledFilter } from './Filter.styles'
 import { expansions } from 'constant'
 import { FilterButtons } from './FilterButtons'
 
@@ -15,12 +14,10 @@ export const Filter: React.FC = observer(() => {
   )
 
   return (
-    <StyledFilter>
-      <FilterButtons
-        expansionNames={expansionNames}
-        selectedExpansions={selectedExpansions}
-        onToggleExpansion={handleToggleExpansion}
-      />
-    </StyledFilter>
+    <FilterButtons
+      expansionNames={expansionNames}
+      selectedExpansions={selectedExpansions}
+      onToggleExpansion={handleToggleExpansion}
+    />
   )
 })

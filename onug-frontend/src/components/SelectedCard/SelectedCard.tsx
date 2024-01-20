@@ -69,7 +69,7 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
 
     return (
       <StyledSelectedCard
-        src={require(`../../assets/cards/${card.card_name}.png`)}
+        src={`/assets/cards/${card.card_name}.png`}
         alt={card.display_name}
         key={card.id}
         onClick={handleDeselect}

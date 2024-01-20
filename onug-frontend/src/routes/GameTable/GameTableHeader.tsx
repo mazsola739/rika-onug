@@ -44,18 +44,14 @@ export const GameTableHeader: React.FC = observer(() => {
       <StyledGameTableHeader>
         <CardInformation>
           <YourCard
-            src={require(
-              `../../assets/cards/${player.player_card.card_name}.png`
-            )}
+            src={`/assets/cards/${player.player_card.card_name}.png`}
             alt={player.player_card.display_name}
           />
           <YourCardRule>{`${player.player_card.display_name}: ${player.player_card.rules}`}</YourCardRule>
         </CardInformation>
         <PlayerInfo>
           <YourAvatar
-            src={require(
-              `../../assets/players/selected_player_${player.player_number}.png`
-            )}
+            src={`/assets/players/selected_player_${player.player_number}.png`}
             alt={player.player_name}
           />
           <Player>

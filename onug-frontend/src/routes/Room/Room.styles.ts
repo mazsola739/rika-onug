@@ -5,23 +5,24 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 170px;
+  top: 180px;
   bottom: 90px;
-  left: 0px;
+  left: 130px;
   right: 0px;
   overflow-y: auto;
   overflow-x: hidden;
-`
-
-export const StyledLogo = styled.img`
-  height: 50px;
-  width: 248px;
 `
 
 export const StyledRuleInfo = styled.div`
   background: transparent;
   display: flex;
   flex-direction: row;
+  position: absolute;
+  left: 140px;
+`
+
+export const RuleImage = styled.img`
+  width: 100px;
 `
 
 export const RuleInfoDescription = styled.p`

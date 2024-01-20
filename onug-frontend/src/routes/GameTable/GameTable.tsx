@@ -67,10 +67,7 @@ export const GameTable: React.FC = observer(() => {
         {renderPlayers(players)}
         <CenterCardContainer>
           {hasSentinel && (
-            <Shield
-              src={require(`../../assets/tokens/shield.png`)}
-              alt="shield"
-            />
+            <Shield src={`/assets/tokens/shield.png`} alt="shield" />
           )}
           {chosenWolf && renderCenterExtraCard('Werewolf')}
           {renderCenterCard('Center', centerCards)}

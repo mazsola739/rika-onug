@@ -15,8 +15,7 @@ export const GameToken: React.FC<GameTokenProps> = ({
   hasDoppelganger,
 }) => {
   const imageSrc = useMemo(
-    () =>
-      require(`../../assets/tokens/${isInDeck ? tokenName : 'mark_back'}.png`),
+    () => `/assets/tokens/${isInDeck ? tokenName : 'mark_back'}.png`,
     [tokenName]
   )
 

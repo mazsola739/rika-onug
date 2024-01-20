@@ -62,10 +62,7 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
     sendJsonMessage,
   ])
 
-  const imageSrc = useMemo(
-    () => require(`../../assets/cards/${card_name}.png`),
-    [card_name]
-  )
+  const imageSrc = useMemo(() => `/assets/cards/${card_name}.png`, [card_name])
 
   const testId = `${display_name.replace(/ /g, '-')}--${
     isSelected ? 'selected' : 'not-selected'

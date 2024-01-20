@@ -1,4 +1,4 @@
-import { CardList, TokenList } from 'components'
+import { CardList, Filter, TokenList } from 'components'
 import {
   ARRIVE_ROOM,
   HYDRATE_ROOM,
@@ -89,6 +89,7 @@ export const Room: React.FC = observer(() => {
   return (
     <>
       <RoomHeader />
+      <Filter />
       <Main>
         {orderedTeams.map((teamName) => (
           <CardList

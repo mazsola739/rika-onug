@@ -9,7 +9,7 @@ export const StyledGameTable = styled.main`
   gap: 5px;
   background-color: transparent;
   position: absolute;
-  top: 170px;
+  top: 180px;
   bottom: 90px;
   left: 0px;
   right: 0px;
