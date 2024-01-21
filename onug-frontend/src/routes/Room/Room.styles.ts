@@ -18,6 +18,7 @@ export const Hello = styled.div`
   display: flex;
   flex-direction: row;
   font-family: 'Josefin Sans', sans-serif;
+  font-size: 18px;
   left: 0;
   padding: 10px;
   position: absolute;
@@ -25,6 +26,7 @@ export const Hello = styled.div`
 `
 
 export const StyledRuleInfo = styled.div`
+  align-items: center;
   background: transparent;
   display: flex;
   flex-direction: row;
@@ -33,11 +35,13 @@ export const StyledRuleInfo = styled.div`
 `
 
 export const RuleImage = styled.img`
+  border: 1px solid white;
+  border-radius: 50%;
   width: 100px;
 `
 
 export const RuleInfoDescription = styled.p`
-  color: white;
+  color: black;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;
   margin: 0;

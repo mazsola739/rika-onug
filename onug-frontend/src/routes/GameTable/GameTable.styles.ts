@@ -75,7 +75,10 @@ export const CenterCardContainer = styled.div`
   gap: 5px;
 `
 
-export const CardTitle = styled.div``
+export const CardTitle = styled.div`
+  color: black;
+  font-family: 'Josefin Sans', sans-serif;
+`
 
 export const Shield = styled.img`
   height: 50px;
@@ -126,6 +129,7 @@ export const PlayerAvatar = styled.img`
 `
 
 export const PlayerName = styled.span`
+  color: black;
   margin: auto 0;
   text-align: left;
 `

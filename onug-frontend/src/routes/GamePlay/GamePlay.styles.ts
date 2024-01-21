@@ -23,5 +23,5 @@ export const StyledGamePlayHeader = styled.div`
 `
 
 export const GamePlayText = styled.span`
-  color: white;
+  color: black;
 `

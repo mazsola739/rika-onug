@@ -6,7 +6,7 @@ export const StyledCard = styled.div<StyledCardProps>`
   background-color: ${({ isSelected }) =>
     isSelected ? 'rgba(0, 0, 0, 0.3)' : 'transparent'};
   border: ${({ isSelected }) =>
-    isSelected ? '3px solid yellow' : '3px solid transparent'};
+    isSelected ? '2px solid yellow' : '2px solid transparent'};
   display: flex;
   flex-direction: column;
   height: 90px;

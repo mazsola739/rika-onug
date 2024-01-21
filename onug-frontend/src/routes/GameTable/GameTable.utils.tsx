@@ -15,7 +15,7 @@ import { CardType, MarkType, PlayersType, TokenType } from 'types'
 const renderPlayers = (players: PlayersType[]) => (
   <Players>
     {players.map(({ player_name, ready, player_number }) => (
-      <Player>
+      <Player key={player_number}>
         <PlayerReadyNumber
           ready={ready}
           src={

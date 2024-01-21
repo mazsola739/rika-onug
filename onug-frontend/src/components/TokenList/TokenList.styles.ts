@@ -6,7 +6,7 @@ export const StyledTokenList = styled.section`
 `
 
 export const TokenListTitle = styled.p`
-  color: white;
+  color: black;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 24px;
   font-weight: bold;
