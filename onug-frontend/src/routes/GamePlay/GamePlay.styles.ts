@@ -4,13 +4,13 @@ export const StyledGamePlay = styled.main`
   background-color: transparent;
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
+  overflow-y: auto;
   position: absolute;
   top: 120px;
   bottom: 90px;
   left: 0px;
   right: 0px;
-  overflow-y: auto;
-  overflow-x: hidden;
 `
 
 //HEADER

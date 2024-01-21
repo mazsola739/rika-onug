@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 
 export const StyledFooterButtons = styled.div`
-  width: 100%;
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
+  justify-content: center;
+  width: 100%;
 `

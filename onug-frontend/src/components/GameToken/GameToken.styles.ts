@@ -6,9 +6,6 @@ export const StyledGameToken = styled.div`
 `
 
 export const Marks = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 0 10px;
   background: linear-gradient(
     to bottom,
     transparent 0%,
@@ -16,11 +13,12 @@ export const Marks = styled.div`
     #000000 40%,
     #000000 100%
   );
-`
-export const DopplegangerMarks = styled.div`
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  padding: 0 10px;
+`
+
+export const DopplegangerMarks = styled.div`
   background: linear-gradient(
     to bottom,
     #000000 0%,
@@ -28,6 +26,9 @@ export const DopplegangerMarks = styled.div`
     transparent 50%,
     transparent 100%
   );
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 `
 
 export const TokenImage = styled.img`
@@ -36,7 +37,7 @@ export const TokenImage = styled.img`
 
 export const TokenName = styled.span`
   color: #5e17eb;
-  text-align: center;
   font-family: 'Josefin Sans', sans-serif;
   padding: 10px 0;
+  text-align: center;
 `

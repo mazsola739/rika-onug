@@ -6,18 +6,18 @@ export const StyledCardList = styled.section`
 `
 
 export const CardListTitle = styled.p`
-  font-size: 24px;
-  font-family: 'Josefin Sans', sans-serif;
-  font-weight: bold;
   color: black;
-  text-transform: uppercase;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 24px;
+  font-weight: bold;
   letter-spacing: 1px;
-  text-align: center;
   margin: 0px 0px 10px;
+  text-align: center;
+  text-transform: uppercase;
 `
 
 export const CardListGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
 `

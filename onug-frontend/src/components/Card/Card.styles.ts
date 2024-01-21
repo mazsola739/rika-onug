@@ -2,47 +2,38 @@ import styled from '@emotion/styled'
 import { StyledCardProps } from './Card.types'
 
 export const StyledCard = styled.div<StyledCardProps>`
-  position: relative;
-
-  border: 1px solid #000000;
+  align-items: center;
+  background-color: ${({ isSelected }) =>
+    isSelected ? 'rgba(0, 0, 0, 0.3)' : 'transparent'};
+  border: ${({ isSelected }) =>
+    isSelected ? '3px solid yellow' : '3px solid transparent'};
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  width: 90px;
   height: 90px;
+  justify-content: flex-start;
   overflow: hidden;
-
-  ${({ isSelected }) =>
-    isSelected
-      ? `
-      border: 3px solid yellow;
-      background-color: rgba(0, 0, 0, 0.3);
-      `
-      : `
-      border: 3px solid transparent;
-      background-color: transparent;
-      `}
+  position: relative;
+  width: 90px;
 `
 
 export const CardImage = styled.img<{ isSelected?: boolean }>`
-  width: 90px;
   opacity: ${({ isSelected }) => (isSelected ? '1' : '0.6')};
+  width: 90px;
   z-index: 1;
 `
 
 export const CardName = styled.span<StyledCardProps>`
+  background-color: transparent;
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  left: 50%;
+  opacity: ${({ isSelected }) => (isSelected ? '1' : '0.4')};
+  padding: 0 5px;
   position: absolute;
   text-align: center;
   top: 85%;
-  left: 50%;
   transform: translate(-50%, -50%);
-  background-color: transparent;
-  color: white;
-  opacity: ${({ isSelected }) => (isSelected ? '1' : '0.4')};
-  font-size: 10px;
-  font-weight: 500;
-  font-family: 'Josefin Sans', sans-serif;
-  padding: 0 5px;
   z-index: 2;
 `

@@ -2,23 +2,23 @@ import styled from '@emotion/styled'
 
 export const Main = styled.main`
   background-color: transparent;
+  bottom: 90px;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 120px;
-  bottom: 90px;
   left: 130px;
-  right: 0px;
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: auto;
+  position: absolute;
+  right: 0px;
+  top: 120px;
 `
 
 export const StyledRuleInfo = styled.div`
   background: transparent;
   display: flex;
   flex-direction: row;
-  position: absolute;
   left: 140px;
+  position: absolute;
 `
 
 export const RuleImage = styled.img`
@@ -26,11 +26,11 @@ export const RuleImage = styled.img`
 `
 
 export const RuleInfoDescription = styled.p`
+  color: black;
+  font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;
   font-weight: 400;
-  font-family: 'Josefin Sans', sans-serif;
   margin: 0;
   padding: 5px;
   text-align: left;
-  color: black;
 `

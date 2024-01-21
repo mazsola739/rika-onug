@@ -5,22 +5,29 @@ import {
   CardTitle,
   CenterCards,
   Marks,
+  Players,
+  PlayerReadyName,
 } from './GameTable.styles'
 import { CardType, MarkType, PlayersType, TokenType } from 'types'
 
 const renderPlayers = (players: PlayersType[]) => (
+  <Players>
+    {players.map(({ player_name, ready }) => (
+      <PlayerReadyName ready={ready}>{player_name}</PlayerReadyName>
+    ))}
+  </Players>
+)
+
+const renderPlayerCards = (players: PlayersType[]) => (
   <CardContainer>
     <PlayersCards>
-      {players.map(({ player_number, ready, player_name }) => (
-        <>
-          <GameCard
-            key={player_number}
-            player_number={player_number}
-            ready={ready}
-            isCenter={false}
-          />
-          <span>{player_name}</span>
-        </>
+      {players.map(({ player_number, ready }) => (
+        <GameCard
+          key={player_number}
+          player_number={player_number}
+          ready={ready}
+          isCenter={false}
+        />
       ))}
     </PlayersCards>
   </CardContainer>
@@ -78,6 +85,7 @@ const renderArtifacts = (artifacts: TokenType[]) => (
 
 export const gameTableUtils = {
   renderPlayers,
+  renderPlayerCards,
   renderCenterCard,
   renderCenterExtraCard,
   renderMarks,

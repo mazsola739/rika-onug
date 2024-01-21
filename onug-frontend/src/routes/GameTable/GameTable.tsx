@@ -32,6 +32,7 @@ const { findCardById } = utils
 export const GameTable: React.FC = observer(() => {
   const {
     renderPlayers,
+    renderPlayerCards,
     renderCenterCard,
     renderCenterExtraCard,
     renderMarks,
@@ -98,7 +99,7 @@ export const GameTable: React.FC = observer(() => {
     <>
       <GameTableHeader />
       <StyledGameTable>
-        {players && renderPlayers(players)}
+        {players && renderPlayerCards(players)}
         <CenterCardContainer>
           {hasSentinel && (
             <Shield src={`/assets/tokens/shield.png`} alt="shield" />
@@ -110,6 +111,7 @@ export const GameTable: React.FC = observer(() => {
         {hasMarks && renderMarks(selectedMarks, hasDoppelganger)}
         {hasCurator && renderArtifacts(artifacts)}
       </StyledGameTable>
+      {players && renderPlayers(players)}
       <GameTableFooter />
     </>
   )

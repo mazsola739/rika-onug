@@ -1,14 +1,14 @@
 import styled from '@emotion/styled'
 
 export const StyledFooter = styled.footer`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 90px;
+  align-items: center;
   background-color: transparent;
+  bottom: 0;
   display: flex;
   flex-direction: column;
+  height: 90px;
   justify-content: center;
-  align-items: center;
+  left: 0;
+  position: absolute;
+  right: 0;
 `

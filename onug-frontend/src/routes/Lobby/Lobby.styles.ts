@@ -3,31 +3,30 @@ import { PropsNoName, StyledLobbyProps } from './Lobby.types'
 
 export const StyledLobby = styled.div`
   background-color: transparent;
-  position: relative;
-  width: 100%;
   height: 100%;
   margin: auto;
+  position: relative;
+  width: 100%;
 `
 
 export const StyledRoomButton = styled.button<StyledLobbyProps>`
   background: ${({ index }) => generateRainbowColor(index)};
   border: 5px solid ${({ index }) => generateRainbowColor(index)};
+  border-radius: 50%;
   color: black;
+  cursor: pointer;
   font-family: 'Josefin Sans', sans-serif;
-  text-transform: uppercase;
   font-size: 14px;
   font-weight: 900;
-  width: 120px;
   height: 120px;
-  border-radius: 50%;
-  cursor: pointer;
   position: absolute;
+  text-transform: uppercase;
   top: 50%;
-  left: 50%;
   transform: translate(-50%, -50%)
     rotate(${({ index }) => index * (360 / 12)}deg) translate(250px)
     rotate(-${({ index }) => index * (360 / 12)}deg);
   transition: background-color 0.3s;
+  width: 120px;
 
   &:hover {
     border: 5px solid ${({ index }) => darken(generateRainbowColor(index), 20)};
@@ -54,41 +53,33 @@ const generateRainbowColor = (index: number) => {
   return `hsl(${hue}, 100%, ${lightness}%)`
 }
 
-/* @media (max-width: 768px) {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin: 10px;
-  transform: none;
-  position: relative;
-} */
-
 export const Slaves = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  align-items: center;
+  border-radius: 50%;
+  display: flex;
   font-family: 'Josefin Sans', sans-serif;
-  text-transform: uppercase;
   font-size: 14px;
   font-weight: 900;
-  width: 400px;
   height: 400px;
-  border-radius: 50%;
-  display: flex;
   justify-content: space-between;
-  align-items: center;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-transform: uppercase;
+  width: 400px;
 `
+
 //every code need a lowphas :)
 export const LowPhas = styled.div<PropsNoName>`
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
   align-items: center;
   background-color: ${({ color }) => color};
+  border-radius: 50%;
+  color: black;
+  display: flex;
   font-size: 12px;
   font-weight: bold;
-  color: black;
+  height: 120px;
+  justify-content: center;
+  width: 120px;
 `
