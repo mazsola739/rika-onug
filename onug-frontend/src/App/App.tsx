@@ -58,7 +58,7 @@ export const App: React.FC = observer(() => {
           <Route path="/room/:room_id" element={<Room />} />
           <Route path="/gametable/:room_id" element={<GameTable />} />
           <Route path="/gameplay/:room_id" element={<GamePlay />} />
-          <Route path="/voting/:room_id" element={<Voting />} />
+          <Route path="/voting" element={<Voting />} />
           <Route path="/god" element={<God />} />
           {/* 404 Not Found Route    */}
           {/* <Route path="*" element={<NotFound />} /> */}
