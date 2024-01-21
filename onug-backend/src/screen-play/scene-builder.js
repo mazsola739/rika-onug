@@ -23,13 +23,13 @@ const generateScenes = (selected_cards) => {
       scene: doppelganger.doppelganger_wake_text,
       actionTimeType: DOUBLE,
     })
-  }
-  if (selected_cards.includes(1) && selected_cards.includes(7)) {
-    // doppleganger + minion
+    if (selected_cards.includes(7)) { //TODO check wolf ids
+    // doppleganger + minion 
     sceneWithActionTimes.push({
       scene: doppelganger.doppelganger_minion_text,
       actionTimeType: SIMPLE,
     })
+  }
   }
   if (selected_cards.includes(15) || selected_cards.includes(16)) {
     // at least one werevolf is in selected cards
@@ -38,8 +38,8 @@ const generateScenes = (selected_cards) => {
       actionTimeType: SIMPLE,
     })
   }
-  if (selected_cards.includes(7)) {
-    // minion
+  if (selected_cards.includes(7)) { //TODO check wolf ids
+    // minion 
     sceneWithActionTimes.push({
       scene: minion.minion_wake_text,
       actionTimeType: SIMPLE,
