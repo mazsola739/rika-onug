@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
 export const StyledApp = styled.div`
+  background: hsla(190, 100%, 50%, 1);
   background: radial-gradient(
     circle,
     hsla(190, 100%, 50%, 1) 0%,
