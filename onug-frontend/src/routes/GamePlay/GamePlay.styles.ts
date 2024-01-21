@@ -22,4 +22,6 @@ export const StyledGamePlayHeader = styled.div`
   font-family: 'Josefin Sans', sans-serif;
 `
 
-export const GamePlayText = styled.span``
+export const GamePlayText = styled.span`
+  color: white;
+`

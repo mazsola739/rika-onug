@@ -1,3 +1,5 @@
+//const { everyone } = require("./everyone")
+
 // T W I L L I G H T 
 //const { oracle } = require("./oracle") 50
 //const { copycat } = require("./copycat") 30

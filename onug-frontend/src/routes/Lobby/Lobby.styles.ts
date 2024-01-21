@@ -70,7 +70,6 @@ export const Slaves = styled.div`
   width: 400px;
 `
 
-//every code need a lowphas :)
 export const LowPhas = styled.div<PropsNoName>`
   align-items: center;
   background-color: ${({ color }) => color};
