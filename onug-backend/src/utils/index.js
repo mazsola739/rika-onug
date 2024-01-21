@@ -1,12 +1,18 @@
 const {
-  toogleCard,
+  toggleCard,
   getCardById,
   distributeCards,
   includesAny,
   isCardSelectedById,
   includesAll,
   masonsInPlay,
+  werewolvesInPlay,
   getCardPositionNamesForPlayers,
+  getWerewolfCardPositionNamesForPlayers,
+  multipleWerewolvesAtPlay,
+  getCenterCardPositions,
+  getMasonCardPositionNamesForPlayers,
+  getAllPositions,
 } = require("./card")
 const { determineTotalPlayers, getBoard, cardIdToTokenBuilder } = require("./player")
 const { randomPlayerName } = require("./name-generator")
@@ -15,7 +21,7 @@ const { isGameTableClosed, isGamePlayStopped } = require("./game-state")
 const { buildSceneForCardId } = require("./scene")
 
 module.exports = {
-  toogleCard,
+  toggleCard,
   determineTotalPlayers,
   randomPlayerName,
   sanitize,
@@ -30,6 +36,12 @@ module.exports = {
   isCardSelectedById,
   includesAll,
   masonsInPlay,
+  werewolvesInPlay,
   cardIdToTokenBuilder,
   getCardPositionNamesForPlayers,
+  getWerewolfCardPositionNamesForPlayers,
+  multipleWerewolvesAtPlay,
+  getCenterCardPositions,
+  getMasonCardPositionNamesForPlayers,
+  getAllPositions,
 }

@@ -28,17 +28,19 @@ const broadcast = (room_id, jsonMessage) => {
 }
 
 const sendInteractionSceneToPlayer = (gameState) => {
-    const interactionScene = gameState.interactionScenes?.[gameState.scene_number]
+    const interactionScenes = gameState.interactionScenes?.[gameState.scene_number]
     const wsInRoom = websocketServerConnectionsPerRoom?.[gameState.room_id]
-    wsInRoom?.[interactionScene.token]?.send(JSON.stringify(interactionScene))
+    interactionScenes.forEach(interactionScene => {
+        logTrace(`interactionScene.sent: ${interactionScene.sent}`)
+        !interactionScene.sent && wsInRoom?.[interactionScene.token]?.send(JSON.stringify(interactionScene))
+    })
 }
 
 module.exports = {
+    websocketServerConnectionsPerRoom,
     initWebSocketConnections,
     addUserToRoom,
     removeUserFromRoom,
     broadcast,
-    websocketServerConnectionsPerRoom,
-    initWebSocketConnections,
     sendInteractionSceneToPlayer,
 }
