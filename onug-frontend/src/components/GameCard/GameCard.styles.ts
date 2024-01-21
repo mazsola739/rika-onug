@@ -7,12 +7,8 @@ export const StyledGameCard = styled.div<StyledGameCardProps>`
   background-position: center;
   background-repeat: no-repeat;
   background-size: calc(100% - 10px) calc(100% - 10px);
-  cursor: pointer;
   display: flex;
   flex-direction: column;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 10px;
-  font-weight: 500;
   height: 120px;
   justify-content: center;
   width: 90px;

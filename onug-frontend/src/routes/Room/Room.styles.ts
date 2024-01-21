@@ -13,6 +13,17 @@ export const Main = styled.main`
   top: 120px;
 `
 
+export const Hello = styled.div`
+  color: white;
+  display: flex;
+  flex-direction: row;
+  font-family: 'Josefin Sans', sans-serif;
+  left: 0;
+  padding: 10px;
+  position: absolute;
+  width: 120px;
+`
+
 export const StyledRuleInfo = styled.div`
   background: transparent;
   display: flex;
