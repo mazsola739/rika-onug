@@ -21,23 +21,44 @@ export const StyledGameTable = styled.main`
 export const Players = styled.div`
   display: flex;
   flex-direction: column;
-  height: 55%;
-  padding: 8px 10px;
+  gap: 5px;
   position: fixed;
   right: 0;
+  top: 245px;
+  width: 280px;
+`
+
+export const Player = styled.div`
+  align-items: center;
+  display: flex;
+  font-family: 'Josefin Sans', sans-serif;
+  flex-direction: row;
+  gap: 5px;
+`
+
+export const PlayerReadyNumber = styled.img<ReadyType>`
+  height: 25px;
+  width: 25px;
+  ${({ ready }) =>
+    ready
+      ? `
+        opacity: 0.6;
+      `
+      : `
+        opacity: 0.6;
+      `}
 `
 
 export const PlayerReadyName = styled.span<ReadyType>`
   ${({ ready }) =>
     ready
       ? `
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 3px solid yellow;
-  `
+        color: black;
+      `
       : `
-    background-color: transparent;
-    border: 3px solid transparent;
-  `}
+        color: black;
+        opacity: 0.6;
+      `}
 `
 
 export const CardContainer = styled.div`
@@ -68,7 +89,7 @@ export const PlayersCards = styled.div`
   gap: 10px;
   justify-content: center;
   height: 120px;
-  width: 90px;
+  width: 100%;
 `
 
 export const CenterCards = styled.div`
@@ -85,7 +106,6 @@ export const Marks = styled.div`
 `
 
 //HEADER
-
 export const StyledGameTableHeader = styled.div`
   display: flex;
   font-family: 'Josefin Sans', sans-serif;
@@ -94,7 +114,7 @@ export const StyledGameTableHeader = styled.div`
 `
 
 export const PlayerInfo = styled.div`
-  align-items: left;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
   width: 100px;
@@ -107,7 +127,7 @@ export const PlayerAvatar = styled.img`
 
 export const PlayerName = styled.span`
   margin: auto 0;
-  padding-left: 10px;
+  text-align: left;
 `
 
 export const PlayerCardInformation = styled.div`

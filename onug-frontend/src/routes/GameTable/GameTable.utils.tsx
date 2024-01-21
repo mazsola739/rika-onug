@@ -7,13 +7,28 @@ import {
   Marks,
   Players,
   PlayerReadyName,
+  PlayerReadyNumber,
+  Player,
 } from './GameTable.styles'
 import { CardType, MarkType, PlayersType, TokenType } from 'types'
 
 const renderPlayers = (players: PlayersType[]) => (
   <Players>
-    {players.map(({ player_name, ready }) => (
-      <PlayerReadyName ready={ready}>{player_name}</PlayerReadyName>
+    {players.map(({ player_name, ready, player_number }) => (
+      <Player>
+        <PlayerReadyNumber
+          ready={ready}
+          src={
+            ready
+              ? `/assets/players/selected_player_${player_number}.png`
+              : `/assets/players/player_${player_number}.png`
+          }
+          alt={`player_${player_number}`}
+        />
+        <PlayerReadyName ready={ready}>
+          {player_name} is {ready ? 'ready' : 'not ready'}
+        </PlayerReadyName>
+      </Player>
     ))}
   </Players>
 )

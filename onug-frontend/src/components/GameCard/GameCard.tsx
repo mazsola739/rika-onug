@@ -20,27 +20,13 @@ export const GameCard: React.FC<GameCardProps> = observer(
               }
               alt={`player_${player_number}`}
             />
-            {/* Shield */}
-            {/*     {player.player_card.shield && (
-              <TokenImage
-                src={`/assets/tokens/shield.png`}
-                alt={`player_${player_number}`}
-              />
-            )} */}
-            {/* Artifact */}
-            {/*       {player.player_card.artifact.length > 0 && (
-              <TokenImage
-                src={`/assets/tokens/artifact_back.png`}
-                alt={`player_${player_number}`}
-              />
-            )} */}
             {/* Mark */}
-            {/*        {hasMarks && (
+            {hasMarks && (
               <TokenImage
                 src={`/assets/tokens/mark_back.png`}
                 alt={`player_${player_number}`}
               />
-            )} */}
+            )}
           </Tokens>
         )}
       </StyledGameCard>
