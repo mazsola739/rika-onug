@@ -16,7 +16,44 @@ will be only set in production (on AWS lambda), to use the aws-sdk s3 read / wri
   - default: INFO
   - possible values 'ERROR', 'WARN', 'INFO', 'DEBUG', 'TRACE'
   only use logError, logWarn, etc... methods instead of console log and set the log level on what level you would like to see in the console
-## 
+
+## folder
+
+### screen-play
+for everything related to actually playing the game
+
+### websocket
+for everything related webscoket connections
+websocket-server.js is the entry point (webscoket router)
+connections.js manages connections per room and holds all the references of ws for users. Also handles broadcasting to all users (in a room)
+all other files are actual 'endpoint', routed by message type
+
+### validators
+for everything related to validating players, cards, gamestates, etc...
+
+### utils
+other useful utility functions separated by domain (card, player, date-time, etc...)
+
+### repository
+for everything related to database management, every database update, delete, read should be called from this layer. Currently handling the gamestate alltogether.
+
+### log
+logging utility, handles console logs and writing to log files (under onug-backend/logs)
+
+### god
+admin rooter - for admin functionalities for rooms, ws connections, etc...
+
+### database
+local json based database for gamestates
+
+### data
+init dataset for cards, rooms, etc...
+
+### constants
+
+### api
+shrinking api router for REST endpoints (everything moving to ws instead)
+
 
 ## postman collections
 - under /postman you can find the related postman collections, to trigger the backend with different pre-setup request bodies.

@@ -1,6 +1,6 @@
-const { TO_GAME_TABLE } = require('../constant/ws')
+const { DEAL } = require('../constant/ws')
 const roomNames = require('../data/room_names.json')
-const { logDebug } = require('../log')
+const { logDebug, logTrace } = require('../log')
 
 const websocketServerConnectionsPerRoom = {}
 const initWebSocketConnections = () => roomNames.forEach(roomName => websocketServerConnectionsPerRoom[roomName] = {})
@@ -17,21 +17,25 @@ const removeUserFromRoom = (token, room_id) => {
 }
 
 const broadcast = (room_id, jsonMessage) => {
+    if (!websocketServerConnectionsPerRoom?.[room_id]) return
+
     logDebug(`broadcast to all users in room [${room_id}] with message [${JSON.stringify(jsonMessage)}]`)
-    logDebug(`active connections in room [${room_id}]: [${JSON.stringify(Object.keys(websocketServerConnectionsPerRoom[room_id]))}]`)
+    logTrace(`active connections in room [${room_id}]: [${JSON.stringify(Object.keys(websocketServerConnectionsPerRoom?.[room_id]))}]`)
     Object.values(websocketServerConnectionsPerRoom[room_id]).forEach(ws => {
         ws.send(JSON.stringify(jsonMessage))
     })
 }
 
-const broadcastPlayGame = (gameState) => {
+const broadcastDealCards = (gameState) => {
     const { room_id, selected_cards, players } = gameState
+    if (!websocketServerConnectionsPerRoom?.[room_id]) return
+
     logDebug(`broadcast play game to all users in room [${room_id}]`)
-    logDebug(`active connections in room [${room_id}]: [${JSON.stringify(Object.keys(websocketServerConnectionsPerRoom[room_id]))}]`)
+    logTrace(`active connections in room [${room_id}]: [${JSON.stringify(Object.keys(websocketServerConnectionsPerRoom?.[room_id]))}]`)
     
     Object.entries(websocketServerConnectionsPerRoom[room_id]).forEach(([token, ws]) => {
         const playGame = JSON.stringify({
-            type: TO_GAME_TABLE,
+            type: DEAL,
             success: true,
             room_id,
             selected_cards,
@@ -48,6 +52,6 @@ module.exports = {
     addUserToRoom,
     removeUserFromRoom,
     broadcast,
-    broadcastPlayGame,
+    broadcastDealCards,
     websocketServerConnectionsPerRoom,
 }

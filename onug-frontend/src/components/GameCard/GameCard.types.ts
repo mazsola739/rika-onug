@@ -1,7 +1,6 @@
-import { PlayerType } from 'types'
-
 export interface GameCardProps {
-  player?: PlayerType
+  player_number?: number
+  ready?: boolean
   isCenter: boolean
 }
 

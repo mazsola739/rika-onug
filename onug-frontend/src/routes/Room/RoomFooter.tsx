@@ -1,5 +1,5 @@
 import { Footer, FooterButtons, Button, SelectedCardList } from 'components'
-import { LEAVE_ROOM, TO_GAME_TABLE, RESET, buttons } from 'constant'
+import { LEAVE_ROOM, DEAL, RESET, buttons } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
 import { gamePlayStore, selectedDeckStore, wsStore } from 'store'
@@ -29,7 +29,7 @@ export const RoomFooter: React.FC = observer(() => {
 
   const handleToGameTable = useCallback(() => {
     sendJsonMessage?.({
-      type: TO_GAME_TABLE,
+      type: DEAL,
       room_id,
       token,
     })
@@ -37,8 +37,8 @@ export const RoomFooter: React.FC = observer(() => {
 
   const totalPlayers = selectedDeckStore.totalPlayers
   const buttonText = totalPlayers
-    ? `${buttons.play_game_text}${totalPlayers}`
-    : buttons.play_game_text
+    ? `${buttons.deal_text} FOR ${totalPlayers}`
+    : buttons.deal_text
 
   return (
     <Footer>

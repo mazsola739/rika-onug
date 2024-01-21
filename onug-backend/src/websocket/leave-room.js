@@ -39,7 +39,7 @@ exports.leaveRoom = async (ws, message) => {
       gameState.actions = [];
       gameState.action_log = [];
       gameState.players = {};
-      gameState.turn = 0;
+      gameState.scene = 0;
       gameState.closed = false;
       gameState.available_names = [...defaultRoom.available_names];
       delete gameState.center_cards;

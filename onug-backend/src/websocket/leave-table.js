@@ -35,6 +35,7 @@ exports.leaveTable = async (ws, message) => {
     }
     delete newGameState.players[token].player_card
     delete newGameState.players[token].player_number
+    newGameState.players[token].ready = false
   })
 
   await upsertRoomState(newGameState)

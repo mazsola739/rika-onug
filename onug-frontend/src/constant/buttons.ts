@@ -20,6 +20,9 @@ export const buttons: Record<string, string> = {
   stop_button_label: 'STOP',
   votenow_button_label: 'VOTE NOW!',
   reset_game_label: 'RESET',
-  play_game_text: 'PLAY ',
+  play_game_text: 'PLAY',
+  deal_text: 'DEAL ',
   start_game_label: 'START',
+  ready_label: 'READY?',
+  im_ready_label: "I'M READY!",
 }

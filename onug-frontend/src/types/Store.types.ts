@@ -8,8 +8,9 @@ export type WsJsonMessage = {
   room_id?: string
   stage?: string
   player_name?: string
-  player_card_id?: string
-  player_number?: string
+  player_card_id?: number
+  player_number?: number
+  board?: { players: PlayersType[] }
   selected_cards?: number[]
   success?: boolean
 }
@@ -39,4 +40,10 @@ export type RepeatroleType = {
   name: string
   isExist: boolean
   specialCondition?: () => boolean
+}
+
+export type PlayersType = {
+  player_name: string
+  player_number: number
+  ready: boolean
 }

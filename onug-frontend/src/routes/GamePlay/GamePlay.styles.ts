@@ -5,7 +5,7 @@ export const StyledGamePlay = styled.main`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 180px;
+  top: 120px;
   bottom: 90px;
   left: 0px;
   right: 0px;

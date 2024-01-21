@@ -1,7 +1,0 @@
-export * from './avatars/avatarIndex'
-export * from './backgrounds/backgroundIndex'
-export * from './cards/cardIndex'
-export * from './icons/iconIndex'
-export * from './logos/logoIndex'
-export * from './players/playerIndex'
-export * from './tokens/tokenIndex'

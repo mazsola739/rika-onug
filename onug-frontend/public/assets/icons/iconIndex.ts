@@ -1,5 +1,0 @@
-export { default as closed } from './closed.svg'
-export { default as closing } from './closing.svg'
-export { default as connecting } from './connecting.svg'
-export { default as open } from './open.svg'
-export { default as uninstantiated } from './uninstantiated.svg'

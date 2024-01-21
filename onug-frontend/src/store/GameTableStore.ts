@@ -1,12 +1,7 @@
 import { makeAutoObservable } from 'mobx'
-import { CardType, CenterCardType, PlayerType } from 'types'
+import { CardType, CenterCardType, PlayersType } from 'types'
 import { selectedDeckStore } from 'store'
-import {
-  hasMarkIds,
-  identifier_player,
-  supervillainIdsToCheck,
-  wolfIdsToCheck,
-} from 'constant'
+import { hasMarkIds, supervillainIdsToCheck, wolfIdsToCheck } from 'constant'
 import { utils, gameTableStoreUtils } from 'utils'
 
 const { checkCardPresence, filterCardsByIds } = gameTableStoreUtils
@@ -14,11 +9,13 @@ const { areAnyCardSelectedById, getRandomItemFromArray, shuffleCardsArray } =
   utils
 
 export class GameTableStore {
-  players: PlayerType[] = []
   centerCards: CenterCardType
+  players: PlayersType[]
 
   constructor() {
     makeAutoObservable(this)
+
+    this.setPlayers = this.setPlayers.bind(this)
   }
 
   get totalPlayers(): number {
@@ -53,6 +50,10 @@ export class GameTableStore {
     return areAnyCardSelectedById(this.selectedCards, hasMarkIds)
   }
 
+  setPlayers(players: PlayersType[]): void {
+    this.players = players
+  }
+
   distributeCards(): {
     centerCards: CardType[]
     playerCards: CardType[]
@@ -83,63 +84,6 @@ export class GameTableStore {
       playerCards,
       chosenWolf,
       chosenSuperVillain: chosenSupervillain,
-    }
-  }
-
-  createPlayers(): void {
-    this.players = []
-
-    const { playerCards } = this.distributeCards()
-
-    for (let i = 0; i < this.totalPlayers; i++) {
-      const card = playerCards[i]
-      const key = `identifier_player${i + 1}_text`
-      const player: PlayerType = {
-        player_name: identifier_player[key],
-        player_number: i + 1,
-        player_card: {
-          card_name: card.card_name,
-          display_name: card.display_name,
-          team: card.team,
-          artifact: '',
-          shield: false,
-          mark: this.hasMarks ? 'mark_of_clarity' : '',
-          rules: card.rules,
-        },
-        gameplay_changes: [],
-        end_of_game: {
-          received_votes: [],
-          given_votes: [],
-        },
-      }
-
-      this.players.push(player)
-
-      this.players.forEach((player) => {
-        const changes = {
-          new_card_name: player.player_card.card_name,
-          new_team: player.player_card.team,
-          new_artifact: player.player_card.artifact,
-          new_shield: player.player_card.shield,
-          new_mark: player.player_card.mark,
-        }
-        player.gameplay_changes.push(changes)
-      })
-    }
-  }
-
-  storeCenterCards(): void {
-    const { centerCards, chosenWolf, chosenSuperVillain } =
-      this.distributeCards()
-
-    this.centerCards = {
-      wolf_card: chosenWolf ? { ...chosenWolf } : null,
-      center_cards: {
-        left: centerCards[0],
-        middle: centerCards[1],
-        right: centerCards[2],
-      },
-      villain_card: chosenSuperVillain ? { ...chosenSuperVillain } : null,
     }
   }
 }

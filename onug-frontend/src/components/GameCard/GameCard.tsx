@@ -4,7 +4,7 @@ import { GameCardProps } from './GameCard.types'
 import { gameTableStore } from 'store'
 
 export const GameCard: React.FC<GameCardProps> = observer(
-  ({ player, isCenter }) => {
+  ({ player_number, isCenter, ready }) => {
     const { hasMarks } = gameTableStore
 
     return (
@@ -13,30 +13,34 @@ export const GameCard: React.FC<GameCardProps> = observer(
           <Tokens>
             {/* Player number */}
             <TokenImage
-              src={`/assets/players/player_${player.player_number}.png`}
-              alt={`player_${player.player_number}`}
+              src={
+                ready
+                  ? `/assets/players/selected_player_${player_number}.png`
+                  : `/assets/players/player_${player_number}.png`
+              }
+              alt={`player_${player_number}`}
             />
             {/* Shield */}
-            {player.player_card.shield && (
+            {/*     {player.player_card.shield && (
               <TokenImage
                 src={`/assets/tokens/shield.png`}
-                alt={`player_${player.player_number}`}
+                alt={`player_${player_number}`}
               />
-            )}
+            )} */}
             {/* Artifact */}
-            {player.player_card.artifact.length > 0 && (
+            {/*       {player.player_card.artifact.length > 0 && (
               <TokenImage
                 src={`/assets/tokens/artifact_back.png`}
-                alt={`player_${player.player_number}`}
+                alt={`player_${player_number}`}
               />
-            )}
+            )} */}
             {/* Mark */}
-            {hasMarks && (
+            {/*        {hasMarks && (
               <TokenImage
                 src={`/assets/tokens/mark_back.png`}
-                alt={`player_${player.player_number}`}
+                alt={`player_${player_number}`}
               />
-            )}
+            )} */}
           </Tokens>
         )}
       </StyledGameCard>

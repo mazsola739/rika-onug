@@ -2,12 +2,19 @@
   {
     "room_id": "archives",
     "room_name": "Archives",
-    "selected_cards": [],
+    "selected_cards": [
+      1,
+      15,
+      16,
+      2,
+      4,
+      6
+    ],
     "actions": [],
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Dragon",
@@ -32,7 +39,7 @@
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Forrest Gump",
@@ -57,7 +64,7 @@
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Superman",
@@ -92,7 +99,7 @@
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Harry Potter",
@@ -126,7 +133,7 @@
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Billy Butcher",
@@ -160,7 +167,7 @@
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Frodo",
@@ -194,7 +201,7 @@
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Jon Snow",
@@ -233,7 +240,7 @@
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Maleficent",
@@ -272,7 +279,7 @@
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Snow White",
@@ -311,7 +318,7 @@
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Luke Skywalker",
@@ -350,7 +357,7 @@
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Peter Parker",
@@ -375,7 +382,7 @@
     "stage": "LOBBY",
     "action_log": [],
     "players": {},
-    "turn": 0,
+    "scene": 0,
     "closed": false,
     "available_names": [
       "Clark Kent",

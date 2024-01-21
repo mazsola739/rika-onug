@@ -5,7 +5,7 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 180px;
+  top: 120px;
   bottom: 90px;
   left: 130px;
   right: 0px;
@@ -26,10 +26,11 @@ export const RuleImage = styled.img`
 `
 
 export const RuleInfoDescription = styled.p`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
   font-family: 'Josefin Sans', sans-serif;
   margin: 0;
   padding: 5px;
+  text-align: left;
   color: black;
 `

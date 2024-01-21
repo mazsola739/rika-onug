@@ -19,5 +19,5 @@ export const CardListTitle = styled.p`
 export const CardListGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 5px 5px;
+  gap: 5px;
 `

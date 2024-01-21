@@ -1,18 +1,17 @@
 import { makeAutoObservable } from 'mobx'
-import { gameTableStore } from 'store'
-import { CenterCardType, PlayerType } from 'types'
+import { PlayerType } from 'types'
 
-export class PlayerStore {
+class PlayerStore {
+  player: PlayerType
+
   constructor() {
     makeAutoObservable(this)
+
+    this.setPlayer = this.setPlayer.bind(this)
   }
 
-  get players(): PlayerType[] {
-    return gameTableStore.players
-  }
-
-  get centerCards(): CenterCardType {
-    return gameTableStore.centerCards
+  setPlayer(player: PlayerType): void {
+    this.player = player
   }
 }
 

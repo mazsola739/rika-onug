@@ -52,7 +52,7 @@ exports.joinRoom = async (ws, message) => {
       players: {
         [token]: { name: player_name, admin: true, ready: false },
       },
-      turn: 0,
+      scene: 0,
       closed: false,
       available_names: room.available_names.filter(
         (name) => name !== player_name

@@ -27,7 +27,7 @@ export const Lobby: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
 
   useEffect(() => {
-    if (firstTime) {
+    if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       sendJsonMessage?.({
         type: HYDRATE_LOBBY,

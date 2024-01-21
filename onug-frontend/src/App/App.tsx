@@ -5,7 +5,7 @@ import { ConnectionStatusIcon, StyledApp } from './App.styles'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { useEffect, useMemo, useState } from 'react'
-import { NEWBIE } from 'constant'
+import { NEWBIE, RELOAD } from 'constant'
 
 export const App: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(false)
@@ -19,17 +19,18 @@ export const App: React.FC = observer(() => {
   )
 
   useEffect(() => {
-    if (firstTime) {
+    if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       const token = sessionStorage.getItem('token')
       sendJsonMessage?.({ type: NEWBIE, token })
+      sendJsonMessage?.({ type: RELOAD, token })
       wsStore.setSendJsonMessage(sendJsonMessage)
     }
     if (lastJsonMessage) {
       wsStore.setLastJsonMessage(lastJsonMessage)
     }
 
-    if (lastJsonMessage?.type === NEWBIE) {
+    if (lastJsonMessage?.type === NEWBIE && lastJsonMessage?.update) {
       sessionStorage.setItem('token', lastJsonMessage.token)
     }
   }, [wsStore, sendJsonMessage, lastJsonMessage, firstTime])

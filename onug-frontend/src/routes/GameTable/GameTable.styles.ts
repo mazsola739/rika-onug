@@ -9,7 +9,7 @@ export const StyledGameTable = styled.main`
   gap: 5px;
   background-color: transparent;
   position: absolute;
-  top: 180px;
+  top: 120px;
   bottom: 90px;
   left: 0px;
   right: 0px;
@@ -40,9 +40,11 @@ export const Shield = styled.img`
 
 export const PlayersCards = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
+  width: 90px;
+  height: 120px;
   gap: 10px;
 `
 
@@ -65,53 +67,41 @@ export const StyledGameTableHeader = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-family: 'Josefin Sans', sans-serif;
-`
-
-export const CardInformation = styled.div`
-  display: flex;
-  flex-direction: row;
-`
-
-export const YourCard = styled.img`
-  width: 100px;
-`
-
-export const YourCardRule = styled.span`
-  padding-left: 10px;
-  padding-top: 10px;
-`
-
-export const Player = styled.div`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   font-family: 'Josefin Sans', sans-serif;
 `
 
 export const PlayerInfo = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-left: 60px;
+  flex-direction: column;
+  align-items: left;
+  width: 100px;
 `
 
-export const YourAvatar = styled.img`
-  width: 40px;
-  height: 40px;
+export const PlayerAvatar = styled.img`
+  width: 50px;
+  height: 50px;
 `
 
-export const YourName = styled.span`
+export const PlayerName = styled.span`
   padding-left: 10px;
   margin: auto 0;
+`
+
+export const PlayerCardInformation = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+export const PlayerCard = styled.img`
+  width: 100px;
+`
+
+export const PlayerCardRule = styled.span`
+  padding-left: 10px;
+  padding-top: 10px;
 `
 
 //FOOTER
 
 export const GameTableFooter = styled.div``
-
-export const Messages = styled.div``

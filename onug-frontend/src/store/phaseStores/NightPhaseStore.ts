@@ -72,7 +72,7 @@ class NightPhaseStore {
     )
     addRoleActionsBasedOnCondition(
       ActionStores.minionStore,
-      isCardSelectedById(this.deck, 32) &&
+      isCardSelectedById(this.deck, 7) &&
         areAnyCardSelectedById(this.deck, wolfIds),
       nightPhaseActions
     )

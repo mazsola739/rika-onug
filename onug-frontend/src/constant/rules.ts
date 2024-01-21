@@ -47,7 +47,7 @@ export const rules_role: Record<string, string> = {
     'Observe some of the players point at other players as instructed by the app.',
   rules_evilometer:
     'Is a hero who detects nearby supervillains by having her fist tapped if a supervillain is sitting next to her.',
-  rules_exposer: 'Turn 1, 2 or three cards face up as instructed by the app',
+  rules_exposer: 'Turn 1, 2 or 3 cards face up as instructed by the app',
   rules_familyman:
     'Wins if everyone in his family, including himself does not get caught each night, different players are added to his family, family man can win if any other team wins.',
   rules_flipper:

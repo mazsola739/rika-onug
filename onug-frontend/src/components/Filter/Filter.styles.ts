@@ -17,7 +17,7 @@ export const StyledFilterButton = styled.button<FilterButtonProps>`
   font-family: 'Josefin Sans', sans-serif;
   padding: 10px;
   width: 120px;
-  height: 60px;
+  height: 50px;
 `
 
 export const StyledFilterButtons = styled.div`

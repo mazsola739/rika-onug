@@ -5,6 +5,8 @@ const { repository } = require("../repository")
 const { STAGES } = require("../constant/stage")
 const { broadcast } = require("./connections")
 const { upsertRoomState } = repository
+const { SIMPLE } = require('../constant/actionTimeType')
+const { startGamePlay, sceneBuilder } = require("../screen-play")
 
 exports.startGame = async (message) => {
   const { room_id, token } = message
@@ -14,17 +16,27 @@ exports.startGame = async (message) => {
   if (!roomIdValid)
     return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
 
-  const newRoomState = {
+  const startTime = Date.now()
+  let newGameState = {
     ...gameState,
     stage: STAGES.GAME_PLAY,
+    startTime,
+    cumSumPlayedMs: 0,
+    actionTimeTypeForScene: [SIMPLE],
+    actionTime: 6, // TODO get it from settings
+    scenes: ['EVERYONE, keep your eyes wide open.']
   }
 
+  newGameState = sceneBuilder(newGameState)
+
+  logTrace(`Game started by player [${token}], in room [${room_id}], with startTime: [${startTime}]`)
   // TODO validate player
-  await upsertRoomState(newRoomState)
+  await upsertRoomState(newGameState)
 
   const startGame = {
     type: REDIRECT,
     path: `/gameplay/${room_id}`
   }
+  startGamePlay(gameState.room_id)
   return broadcast(room_id, startGame)
 }

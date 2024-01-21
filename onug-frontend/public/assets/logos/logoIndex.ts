@@ -1,6 +1,0 @@
-export { default as glowing_logo } from './glowing_logo.png'
-export { default as icon } from './icon.jpg'
-export { default as logo_en_1 } from './logo_en_1.png'
-export { default as logo_en_2 } from './logo_en_2.png'
-export { default as logo_en } from './logo_en.png'
-export { default as white } from './white.png'

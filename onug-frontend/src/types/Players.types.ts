@@ -1,3 +1,5 @@
+import { CardType } from './Card.types'
+
 export type PlayerCardType = {
   card_name: string
   team: string
@@ -25,7 +27,6 @@ export type EndOfGameType = {
 export type PlayerType = {
   player_name: string
   player_number: number
-  player_card: PlayerCardType
-  gameplay_changes: GameplayChangesType[]
-  end_of_game: EndOfGameType
+  player_card_id: number
+  player_card: CardType
 }

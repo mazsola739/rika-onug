@@ -1,24 +1,69 @@
 import { observer } from 'mobx-react-lite'
 import { StyledGamePlay } from './GamePlay.styles'
-import { gamePlayStore, selectedDeckStore } from 'store'
+import { gamePlayStore, wsStore } from 'store'
 import { Button, Footer, FooterButtons, Header } from 'components'
-import { buttons } from 'constant'
-import { useCallback } from 'react'
+import {
+  ARRIVE_GAME_PLAY,
+  HYDRATE_GAME_PLAY,
+  PAUSE_GAME,
+  REDIRECT,
+  STAGES,
+  STOP_GAME,
+  buttons,
+} from 'constant'
+import { useCallback, useEffect, useState } from 'react'
 import { GamePlayHeader } from './GamePlayHeader'
 import { useNavigate } from 'react-router-dom'
 
 export const GamePlay: React.FC = observer(() => {
   const navigate = useNavigate()
   const room_id = sessionStorage.getItem('room_id')
+  const token = sessionStorage.getItem('token')
   const everyone = gamePlayStore.generateActions()
+  const [firstTime, setFirstTime] = useState(true)
+  const { sendJsonMessage, lastJsonMessage } =
+    wsStore.getWsCommunicationsBridge()
+
+  useEffect(() => {
+    if (sendJsonMessage && firstTime) {
+      setFirstTime(false)
+      sendJsonMessage?.({
+        type: ARRIVE_GAME_PLAY,
+        stage: STAGES.GAME_PLAY,
+        room_id: sessionStorage.getItem('room_id'),
+        token,
+      })
+    }
+  }, [sendJsonMessage, firstTime])
+
+  useEffect(() => {
+    if (
+      lastJsonMessage?.type === HYDRATE_GAME_PLAY &&
+      lastJsonMessage?.success
+    ) {
+      console.log(lastJsonMessage)
+    }
+
+    if (lastJsonMessage?.type === REDIRECT) {
+      navigate(lastJsonMessage.path)
+    }
+  }, [lastJsonMessage])
 
   const handlePauseGame = useCallback(() => {
-    gamePlayStore.togglePauseStatus()
+    sendJsonMessage?.({
+      type: PAUSE_GAME,
+      room_id,
+      token,
+    })
   }, [])
 
   const handleStopGame = useCallback(() => {
-    navigate(`/room/${room_id}`)
-  }, [selectedDeckStore])
+    sendJsonMessage?.({
+      type: STOP_GAME,
+      room_id,
+      token,
+    })
+  }, [sendJsonMessage])
 
   const buttonText = gamePlayStore.isGamePaused
     ? buttons.pause_button_alt_label

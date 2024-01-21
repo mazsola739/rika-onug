@@ -1,4 +1,5 @@
 export const NEWBIE = 'NEWBIE'
+export const RELOAD = 'RELOAD'
 export const KEEP_ALIVE = 'KEEP_ALIVE'
 export const JOIN_ROOM = 'JOIN_ROOM'
 export const LEAVE_ROOM = 'LEAVE_ROOM'
@@ -17,12 +18,15 @@ export const HYDRATE_GAME_VOTE = 'HYDRATE_GAME_VOTE'
 
 export const UPDATE_ROOM = 'UPDATE_ROOM'
 export const RESET = 'RESET'
-export const TO_GAME_TABLE = 'TO_GAME_TABLE'
+export const DEAL = 'DEAL'
+export const HYDRATE_READY = 'HYDRATE_READY'
 export const LEAVE_TABLE = 'LEAVE_TABLE'
 export const UPDATE_GAME_TABLE = 'UPDATE_GAME_TABLE'
 export const READY = 'READY'
 export const REDIRECT = 'REDIRECT'
 export const START_GAME = 'START_GAME'
+export const STOP_GAME = 'STOP_GAME'
+export const PAUSE_GAME = 'PAUSE_GAME'
 
 export const STAGES = {
   LOBBY: 'LOBBY',

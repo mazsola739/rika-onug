@@ -62,7 +62,7 @@ class RippleNightPhaseStore {
     )
     addRoleActionsBasedOnCondition(
       ActionStores.minionStore,
-      isCardSelectedById(this.rippleDeck, 32) &&
+      isCardSelectedById(this.rippleDeck, 7) &&
         areAnyCardSelectedById(this.rippleDeck, wolfIds),
       rippleNightPhaseActions
     )

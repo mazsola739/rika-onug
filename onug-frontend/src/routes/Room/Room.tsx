@@ -3,7 +3,6 @@ import {
   ARRIVE_ROOM,
   HYDRATE_ROOM,
   LEAVE_ROOM,
-  TO_GAME_TABLE,
   REDIRECT,
   STAGES,
   team,
@@ -25,11 +24,12 @@ export const Room: React.FC = observer(() => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (firstTime) {
+    if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       sendJsonMessage?.({
         type: ARRIVE_ROOM,
         stage: STAGES.ROOM,
+        token: sessionStorage.getItem('token'),
         room_id: sessionStorage.getItem('room_id'),
       })
     }
@@ -53,20 +53,7 @@ export const Room: React.FC = observer(() => {
         console.error(lastJsonMessage.errors)
       }
     }
-
-    if (lastJsonMessage?.type === TO_GAME_TABLE) {
-      if (lastJsonMessage.success) {
-        sessionStorage.setItem('player_card_id', lastJsonMessage.player_card_id)
-        sessionStorage.setItem('player_number', lastJsonMessage.player_number)
-
-        roomStore.resetDetailedCardInfo()
-        selectedDeckStore.addCardIdsToArray()
-        navigate(`/gametable/${lastJsonMessage.room_id}`)
-      } else {
-        console.error(lastJsonMessage.errors)
-      }
-    }
-  }, [lastJsonMessage])
+  }, [lastJsonMessage, navigate])
 
   const teamArray = useMemo(
     () => [

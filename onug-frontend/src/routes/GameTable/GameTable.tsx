@@ -1,22 +1,33 @@
-import { observer } from 'mobx-react-lite'
-import { gameTableStore, selectedDeckStore, wsStore } from 'store'
-import {
-  StyledGameTable,
-  CenterCardContainer,
-  Shield,
-} from './GameTable.styles'
-import { GameTableFooter } from './GameTableFooter'
-import { GameTableHeader } from './GameTableHeader'
-import { artifacts } from 'data'
-import { gameTableUtils } from './GameTable.utils'
-import { useEffect, useState } from 'react'
 import {
   ARRIVE_GAME_TABLE,
   HYDRATE_GAME_TABLE,
+  HYDRATE_READY,
   REDIRECT,
   STAGES,
 } from 'constant'
+import { artifacts } from 'data'
+import { observer } from 'mobx-react-lite'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import {
+  gameTableStore,
+  playerStore,
+  roomStore,
+  selectedDeckStore,
+  wsStore,
+  deckStore,
+} from 'store'
+import { utils } from 'utils'
+import {
+  CenterCardContainer,
+  Shield,
+  StyledGameTable,
+} from './GameTable.styles'
+import { gameTableUtils } from './GameTable.utils'
+import { GameTableFooter } from './GameTableFooter'
+import { GameTableHeader } from './GameTableHeader'
+
+const { findCardById } = utils
 
 export const GameTable: React.FC = observer(() => {
   const {
@@ -29,22 +40,26 @@ export const GameTable: React.FC = observer(() => {
   // TODO REMOVE FE shuffled cards completely, use data from BE
   const { centerCards, chosenWolf, chosenSuperVillain } =
     gameTableStore.distributeCards()
-  const { hasSentinel, hasMarks, hasDoppelganger, hasCurator, players } =
-    gameTableStore
+  const { hasSentinel, hasMarks, hasDoppelganger, hasCurator } = gameTableStore
   const selectedMarks = selectedDeckStore.selectedMarks
+  const token = sessionStorage.getItem('token')
 
   const [firstTime, setFirstTime] = useState(true)
 
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
+  const { setPlayer } = playerStore
+  const { setPlayers } = gameTableStore
+
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (firstTime) {
+    if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       sendJsonMessage?.({
         type: ARRIVE_GAME_TABLE,
         stage: STAGES.GAME_TABLE,
+        token,
         room_id: sessionStorage.getItem('room_id'),
       })
     }
@@ -52,19 +67,38 @@ export const GameTable: React.FC = observer(() => {
 
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_GAME_TABLE) {
-      console.log(lastJsonMessage) //TODO hook
+      setPlayer({
+        player_card_id: lastJsonMessage.player_card_id,
+        player_name: lastJsonMessage.player_name,
+        player_number: lastJsonMessage.player_number,
+        player_card: findCardById(
+          deckStore.deck,
+          lastJsonMessage.player_card_id
+        ),
+      })
+      setPlayers(lastJsonMessage.board.players)
+      roomStore.resetDetailedCardInfo()
+      selectedDeckStore.addCardIdsToArray()
+      console.log(lastJsonMessage) //TODO ready not ready updates from lastJsonMessage
+    }
+
+    if (lastJsonMessage?.type === HYDRATE_READY) {
+      setPlayers(lastJsonMessage.board.players)
+      console.log(lastJsonMessage) //TODO here handle only ready not ready updates from lastJsonMessage
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [lastJsonMessage])
+  }, [lastJsonMessage, setPlayer, deckStore])
+
+  const players = gameTableStore.players
 
   return (
     <>
       <GameTableHeader />
       <StyledGameTable>
-        {renderPlayers(players)}
+        {players && renderPlayers(players)}
         <CenterCardContainer>
           {hasSentinel && (
             <Shield src={`/assets/tokens/shield.png`} alt="shield" />

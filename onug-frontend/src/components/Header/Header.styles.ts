@@ -9,7 +9,7 @@ export const StyledHeader = styled.header`
   position: absolute;
   top: 0;
   left: 0;
-  height: 160px;
+  height: 100px;
   right: 0;
   overflow: hidden;
   padding: 10px;

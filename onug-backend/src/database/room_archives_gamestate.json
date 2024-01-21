@@ -3,30 +3,27 @@
     "room_name": "Archives",
     "selected_cards": [
         1,
-        9,
-        18,
-        23,
-        51,
-        64,
-        72,
-        52
+        15,
+        16,
+        2,
+        4,
+        6
     ],
     "actions": [],
     "action_log": [],
     "stage": "GAME_PLAY",
     "players": {
-        "48640a5f-9e7e-4eff-a220-f330d12eed23": {
-            "name": "Minotaur",
-            "admin": true,
+        "2e63d6c5-c253-4c48-b4a0-57e00a3d8c4b": {
+            "name": "Dragon",
+            "admin": false,
             "ready": false,
-            "player_card": 64,
+            "player_card": 15,
             "player_number": 1
         }
     },
-    "turn": 0,
+    "scene": 1,
     "closed": false,
     "available_names": [
-        "Dragon",
         "Phoenix",
         "Griffin",
         "Mermaid",
@@ -35,14 +32,47 @@
         "Troll",
         "Chimera",
         "Goblin",
+        "Minotaur",
         "Fairy",
         "Djinn"
     ],
+    "cumSumPlayedMs": 6000,
+    "actionTimeTypeForScene": [
+        "SIMPLE"
+    ],
+    "actionTime": 6,
+    "scenes": [
+        {
+            "scene": "DOPPELGANGER, wake up and look at another player's card. You are now that role. If your new role has a night action, do it now.",
+            "actionTimeType": "DOUBLE"
+        },
+        {
+            "scene": "WEREWOLVES, wake up and look for other werewolves.",
+            "actionTimeType": "SIMPLE"
+        },
+        {
+            "scene": "MASONS, wake up and look for the other Mason.",
+            "actionTimeType": "SIMPLE"
+        },
+        {
+            "scene": "DRUNK, wake up, and exchange your card with a card from the center.",
+            "actionTimeType": "SIMPLE"
+        },
+        {
+            "scene": "INSOMNIAC, wake up and look at your card.",
+            "actionTimeType": "SIMPLE"
+        },
+        {
+            "scene": "Time is up. Everyone, 3, 2, 1... VOTE!",
+            "actionTimeType": "SIMPLE"
+        }
+    ],
+    "startTime": 1705795654527,
     "center_cards": {
         "base": [
-            72,
-            52,
-            9
+            16,
+            2,
+            6
         ]
     }
 }

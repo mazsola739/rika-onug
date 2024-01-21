@@ -6,16 +6,21 @@ import {
   CenterCards,
   Marks,
 } from './GameTable.styles'
-import { CardType, MarkType, PlayerType, TokenType } from 'types'
-import { utils } from 'utils'
+import { CardType, MarkType, PlayersType, TokenType } from 'types'
 
-const { getRandomNumber } = utils
-
-const renderPlayers = (players: PlayerType[]) => (
+const renderPlayers = (players: PlayersType[]) => (
   <CardContainer>
     <PlayersCards>
-      {players.map((player) => (
-        <GameCard key={player.player_number} player={player} isCenter={false} />
+      {players.map(({ player_number, ready, player_name }) => (
+        <>
+          <GameCard
+            key={player_number}
+            player_number={player_number}
+            ready={ready}
+            isCenter={false}
+          />
+          <span>{player_name}</span>
+        </>
       ))}
     </PlayersCards>
   </CardContainer>
@@ -71,16 +76,10 @@ const renderArtifacts = (artifacts: TokenType[]) => (
   </Marks>
 )
 
-const getRandomPlayer = (players: PlayerType[]): PlayerType => {
-  const randomIndex = getRandomNumber(0, players.length - 1)
-  return players[randomIndex]
-}
-
 export const gameTableUtils = {
   renderPlayers,
   renderCenterCard,
   renderCenterExtraCard,
   renderMarks,
   renderArtifacts,
-  getRandomPlayer,
 }
