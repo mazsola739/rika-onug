@@ -7,7 +7,7 @@ exports.reload = (ws, message) => {
     const { token } = message
 
     if (token && ws.token && ws.token === token) {
-      logTrace('refreshing websocket reference for token [${token}]')
+      logTrace(`refreshing websocket reference for token [${token}]`)
 
       const room_ids = Object.keys(websocketServerConnectionsPerRoom)
       room_ids.forEach(room_id => {

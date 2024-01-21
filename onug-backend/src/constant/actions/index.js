@@ -25,7 +25,7 @@ const { doppelganger } = require("./doppelganger") //1
 //const { groobzerb } = require("./groobzerb") 47, 54
 //const { bodysnatcher } = require("./bodysnatcher") 74
 //const { supervillains } = require("./supervillains") 57, 60, 65, 69
-const { werewolves } = require("./werewolves") //15, 16, 17, 22, 21
+const { werewolf } = require("./werewolf") //15, 16, 17, 22, 21
 //const { alphawolf } = require("./alphawolf") 15
 //const { mysticwolf } = require("./mysticwolf") 22
 const { minion } = require("./minion") //7
@@ -33,7 +33,7 @@ const { minion } = require("./minion") //7
 //const { leader } = require("./leader") 48
 //const { madscientist } = require("./madscientist") 63
 //const { intern } = require("./intern") 62
-const { masons } = require("./masons") //5, 6
+const { mason } = require("./mason") //5, 6
 //const { thing } = require("./thing") 85
 //const { annoyinglad } = require("./annoyinglad") 55
 const { seer } = require("./seer") //9
@@ -70,9 +70,9 @@ const { insomniac } = require("./insomniac") //4
 
 module.exports = {
   doppelganger,
-  werewolves,
+  werewolf,
   minion,
-  masons,
+  mason,
   seer,
   robber,
   troublemaker,

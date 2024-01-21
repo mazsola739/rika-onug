@@ -5,6 +5,7 @@ const { repository } = require("../repository");
 const { STAGES } = require("../constant/stage");
 const { distributeCards } = require("../utils/card");
 const { broadcast } = require("./connections");
+const { cardIdToTokenBuilder } = require("../utils");
 const { upsertRoomState } = repository;
 
 exports.deal = async (ws, message) => {
@@ -20,7 +21,7 @@ exports.deal = async (ws, message) => {
   const { centerCards, playerCards, chosenWolfId, chosenSupervillainId } =
     distributeCards(gameState.selected_cards);
 
-  const newRoomState = {
+  const newGameState = {
     ...gameState,
     stage: STAGES.GAME_TABLE,
     center_cards: {
@@ -32,15 +33,22 @@ exports.deal = async (ws, message) => {
   const playerTokens = Object.keys(gameState.players);
 
   playerTokens.forEach((token, index) => {
-    newRoomState.players[token] = {
+    newGameState.players[token] = {
       ...gameState.players[token],
-      player_card: playerCards[index],
+      player_start_card_id: playerCards[index].id,
+      card: {
+        start_card: playerCards[index],
+        known_card: playerCards[index],
+        actual_card: playerCards[index],
+        cardEvents: [`${playerCards[index].display_name} was dealt to player.`],
+      },
       player_number: index + 1,
     };
+    newGameState.cards[cardIdToTokenBuilder(playerCards[index].id)] = token
   });
 
   // TODO validate player
-  await upsertRoomState(newRoomState);
+  await upsertRoomState(newGameState);
 
   const redirectToGameTable = {
     type: REDIRECT,

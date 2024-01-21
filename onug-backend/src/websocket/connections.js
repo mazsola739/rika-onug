@@ -21,30 +21,16 @@ const broadcast = (room_id, jsonMessage) => {
 
     logDebug(`broadcast to all users in room [${room_id}] with message [${JSON.stringify(jsonMessage)}]`)
     logTrace(`active connections in room [${room_id}]: [${JSON.stringify(Object.keys(websocketServerConnectionsPerRoom?.[room_id]))}]`)
+
     Object.values(websocketServerConnectionsPerRoom[room_id]).forEach(ws => {
         ws.send(JSON.stringify(jsonMessage))
     })
 }
 
-const broadcastDealCards = (gameState) => {
-    const { room_id, selected_cards, players } = gameState
-    if (!websocketServerConnectionsPerRoom?.[room_id]) return
-
-    logDebug(`broadcast play game to all users in room [${room_id}]`)
-    logTrace(`active connections in room [${room_id}]: [${JSON.stringify(Object.keys(websocketServerConnectionsPerRoom?.[room_id]))}]`)
-    
-    Object.entries(websocketServerConnectionsPerRoom[room_id]).forEach(([token, ws]) => {
-        const playGame = JSON.stringify({
-            type: DEAL,
-            success: true,
-            room_id,
-            selected_cards,
-            player_name: players[token].name,
-            player_card_id: players[token].player_card,
-            player_number: players[token].player_number,
-        });
-        ws.send(playGame)
-    })
+const sendInteractionSceneToPlayer = (gameState) => {
+    const interactionScene = gameState.interactionScenes?.[gameState.scene_number]
+    const wsInRoom = websocketServerConnectionsPerRoom?.[gameState.room_id]
+    wsInRoom?.[interactionScene.token]?.send(JSON.stringify(interactionScene))
 }
 
 module.exports = {
@@ -52,6 +38,7 @@ module.exports = {
     addUserToRoom,
     removeUserFromRoom,
     broadcast,
-    broadcastDealCards,
     websocketServerConnectionsPerRoom,
+    initWebSocketConnections,
+    sendInteractionSceneToPlayer,
 }

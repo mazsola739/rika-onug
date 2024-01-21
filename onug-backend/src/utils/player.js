@@ -29,3 +29,6 @@ exports.getBoard = (gameState) => {
     players: playersPublic,
   }
 }
+
+
+exports.cardIdToTokenBuilder = id => `card_id_${id}_to_token`

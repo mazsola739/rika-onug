@@ -35,8 +35,8 @@ const writeToLogFile = async (message, logLevel) => {
 }
 
 const logError = message => writeToLogFile(message, '[ERROR]') && isLogLevelEnabled(LOG_LEVELS.ERROR) && console.error(`${logTimestamp()}: [ERROR] ${message}`)
-const logWarn  = message => writeToLogFile(message, '[WARN]') && isLogLevelEnabled(LOG_LEVELS.WARN) && console.warn(`${logTimestamp()}: [WARN] ${message}`)
-const logInfo  = message => writeToLogFile(message, '[INFO]') && isLogLevelEnabled(LOG_LEVELS.INFO) && console.info(`${logTimestamp()}: [INFO] ${message}`)
+const logWarn  = message => writeToLogFile(message, '[WARN]')  && isLogLevelEnabled(LOG_LEVELS.WARN)  && console.warn(`${logTimestamp()}: [WARN] ${message}`)
+const logInfo  = message => writeToLogFile(message, '[INFO]')  && isLogLevelEnabled(LOG_LEVELS.INFO)  && console.info(`${logTimestamp()}: [INFO] ${message}`)
 const logDebug = message => writeToLogFile(message, '[DEBUG]') && isLogLevelEnabled(LOG_LEVELS.DEBUG) && console.info(`${logTimestamp()}: [DEBUG] ${message}`)
 const logTrace = message => writeToLogFile(message, '[TRACE]') && isLogLevelEnabled(LOG_LEVELS.TRACE) && console.info(`${logTimestamp()}: [TRACE] ${message}`)
 

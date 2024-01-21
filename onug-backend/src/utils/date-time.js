@@ -1,8 +1,8 @@
 const { SIMPLE, DOUBLE } = require("../constant/actionTimeType")
 
 exports.getActionTime = gameState => {
-    if (gameState.actionTimeTypeForScene === SIMPLE) return gameState.actionTime
-    if (gameState.actionTimeTypeForScene === DOUBLE) return gameState.actionTime * 2
+    if (gameState.scenes[gameState.scene_number].actionTimeType === SIMPLE) return gameState.actionTime
+    if (gameState.scenes[gameState.scene_number].actionTimeType === DOUBLE) return gameState.actionTime * 2
     return gameState.actionTime
 }
 

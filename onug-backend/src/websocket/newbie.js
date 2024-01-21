@@ -1,7 +1,6 @@
 const { NEWBIE, REDIRECT } = require("../constant/ws")
 const { v4: uuidv4, validate } = require("uuid")
 const { logInfo } = require("../log")
-const { websocketServerConnectionsPerRoom } = require("./connections")
 
 exports.newbie = (ws, message) => {
   const { token } = message //TODO handle rejoin, user has valid token
@@ -15,7 +14,7 @@ exports.newbie = (ws, message) => {
     return ws.send(
       JSON.stringify({ type: REDIRECT, path: '/lobby' })
     )
-    websocketServerConnectionsPerRoom
+  
      // TODO maybe? from gamestate, after redirected to lobby, redirect to the right path
   }
 

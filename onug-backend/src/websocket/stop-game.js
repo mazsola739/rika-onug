@@ -26,7 +26,8 @@ exports.stopGame = async (message) => {
     newGameState.players[token] = {
       ...newGameState.players[token],
     }
-    delete newGameState.players[token].player_card
+    delete newGameState.players[token].player_start_card_id
+    delete newGameState.players[token].card
     delete newGameState.players[token].player_number
     newGameState.players[token].ready = false
   })

@@ -11,6 +11,7 @@ const { startGamePlay, sceneBuilder } = require("../screen-play")
 exports.startGame = async (message) => {
   const { room_id, token } = message
   logTrace(`Everybody is ready, game started in: ${room_id}`)
+  // TODO different room validator, should prevent multiple game starts
   const [roomIdValid, gameState, errors] = await validateRoom(room_id)
 
   if (!roomIdValid)
@@ -22,9 +23,7 @@ exports.startGame = async (message) => {
     stage: STAGES.GAME_PLAY,
     startTime,
     cumSumPlayedMs: 0,
-    actionTimeTypeForScene: [SIMPLE],
     actionTime: 6, // TODO get it from settings
-    scenes: ['EVERYONE, keep your eyes wide open.']
   }
 
   newGameState = sceneBuilder(newGameState)

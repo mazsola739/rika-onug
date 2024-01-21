@@ -1,96 +1,35 @@
-const { SIMPLE, DOUBLE } = require("../constant/actionTimeType")
-const {
-  doppelganger,
-  werewolves,
-  minion,
-  masons,
-  seer,
-  robber,
-  troublemaker,
-  drunk,
-  insomniac,
-} = require("../constant/actions")
+const { SIMPLE } = require("../constant/actionTimeType")
 const { logTrace } = require("../log")
+const { buildSceneForCardId, includesAny, includesAll, masonsInPlay } = require("../utils")
 
 const generateScenes = (selected_cards) => {
   logTrace(`generate scenes for selected cards: [${selected_cards}]`)
   sceneWithActionTimes = []
   cardIdToPlayerToken = {}
   
-  if (selected_cards.includes(1)) {
-    // doppleganger
-    sceneWithActionTimes.push({
-      scene: doppelganger.doppelganger_wake_text,
-      actionTimeType: DOUBLE,
-    })
-    if (selected_cards.includes(7)) { //TODO check wolf ids
-    // doppleganger + minion 
-    sceneWithActionTimes.push({
-      scene: doppelganger.doppelganger_minion_text,
-      actionTimeType: SIMPLE,
-    })
-  }
-  }
-  if (selected_cards.includes(15) || selected_cards.includes(16)) {
-    // at least one werevolf is in selected cards
-    sceneWithActionTimes.push({
-      scene: werewolves.werewolves_wake_text,
-      actionTimeType: SIMPLE,
-    })
-  }
-  if (selected_cards.includes(7)) { //TODO check wolf ids
-    // minion 
-    sceneWithActionTimes.push({
-      scene: minion.minion_wake_text,
-      actionTimeType: SIMPLE,
-    })
-  }
-  if (
-    (selected_cards.includes(5) && selected_cards.includes(6)) ||
-    ((selected_cards.includes(5) || selected_cards.includes(6)) &&
-      selected_cards.includes(1))
-  ) {
-    // two mason (possible, with doppleganger)
-    sceneWithActionTimes.push({
-      scene: masons.mason_wake_text,
-      actionTimeType: SIMPLE,
-    })
-  }
-  if (selected_cards.includes(9)) {
-    // seer
-    sceneWithActionTimes.push({
-      scene: seer.seer_wake_text,
-      actionTimeType: SIMPLE,
-    })
-  }
-  if (selected_cards.includes(8)) {
-    // robber
-    sceneWithActionTimes.push({
-      scene: robber.robber_wake_text,
-      actionTimeType: SIMPLE,
-    })
-  }
-  if (selected_cards.includes(11)) {
-    // troublemaker
-    sceneWithActionTimes.push({
-      scene: troublemaker.troublemaker_wake_text,
-      actionTimeType: SIMPLE,
-    })
-  }
-  if (selected_cards.includes(2)) {
-    // drunk
-    sceneWithActionTimes.push({
-      scene: drunk.drunk_wake_text,
-      actionTimeType: SIMPLE,
-    })
-  }
-  if (selected_cards.includes(4)) {
-    // insomniac
-    sceneWithActionTimes.push({
-      scene: insomniac.insomniac_wake_text,
-      actionTimeType: SIMPLE,
-    })
-  }
+  // doppleganger
+  if (selected_cards.includes(1))                    sceneWithActionTimes.push(buildSceneForCardId(1))
+  // doppleganger + minion 
+  //TODO check wolf ids
+  if (includesAll(selected_cards, [1, 7]))           sceneWithActionTimes.push(buildSceneForCardId(1, {sceneTextKey: 'doppelganger_minion_text'}))
+  // at least one werevolf is in selected cards
+  if (includesAny(selected_cards, [15, 16]))         sceneWithActionTimes.push(buildSceneForCardId(15))
+  // minion
+  // TODO check wolf ids
+  if (selected_cards.includes(7))                    sceneWithActionTimes.push(buildSceneForCardId(7))
+  // two mason (possible, with doppleganger)
+  if (masonsInPlay(selected_cards))                  sceneWithActionTimes.push(buildSceneForCardId(5))
+  // seer
+  if (selected_cards.includes(9))                    sceneWithActionTimes.push(buildSceneForCardId(9))
+  // robber
+  if (selected_cards.includes(8))                    sceneWithActionTimes.push(buildSceneForCardId(8))
+  // troublemaker
+  if (selected_cards.includes(11))                   sceneWithActionTimes.push(buildSceneForCardId(11))
+  // drunk
+  if (selected_cards.includes(2))                    sceneWithActionTimes.push(buildSceneForCardId(2))
+  // insomniac
+  if (selected_cards.includes(4))                    sceneWithActionTimes.push(buildSceneForCardId(4))
+
   sceneWithActionTimes.push({
     scene: "Time is up. Everyone, 3, 2, 1... VOTE!",
     actionTimeType: SIMPLE,
@@ -101,15 +40,8 @@ const generateScenes = (selected_cards) => {
 }
 
 exports.sceneBuilder = (gameState) => {
-    logTrace(`insomniac: [${JSON.stringify(insomniac)}]`)
-    logTrace(`doppelganger: [${JSON.stringify(doppelganger)}]`)
-    logTrace(`werewolves: [${JSON.stringify(werewolves)}]`)
   const scenes = generateScenes(gameState.selected_cards)
-  
-  // TODO move out to interactionSceneBuilder
-  Object.entries(gameState.players).forEach(([token, player]) => {
-    cardIdToPlayerToken[player.card_id] = token
-  })
+  logTrace(`generated scenes: ${JSON.stringify(scenes, null, 4)}`)
 
   gameState.scenes = scenes
   return gameState

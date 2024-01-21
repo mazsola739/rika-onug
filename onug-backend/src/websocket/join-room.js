@@ -42,24 +42,19 @@ exports.joinRoom = async (ws, message) => {
     }
     player_name = randomPlayerName(room.available_names);
 
-    const newRoomState = {
-      room_id,
-      room_name: room.room_name,
+    const newGameState = {
+      ...room,
       selected_cards: room.selected_cards,
-      actions: [],
-      action_log: [],
       stage: STAGES.ROOM,
       players: {
         [token]: { name: player_name, admin: true, ready: false },
       },
-      scene: 0,
-      closed: false,
       available_names: room.available_names.filter(
         (name) => name !== player_name
       ),
     };
 
-    await upsertRoomState(newRoomState);
+    await upsertRoomState(newGameState);
   } else {
     if (room.available_names.length === 0) {
       return ws.send(
