@@ -31,6 +31,7 @@ const { findCardById } = utils
 
 export const GameTable: React.FC = observer(() => {
   const {
+    renderOwnCard,
     renderPlayers,
     renderPlayerCards,
     renderCenterCard,
@@ -94,10 +95,12 @@ export const GameTable: React.FC = observer(() => {
   }, [lastJsonMessage, setPlayer, deckStore])
 
   const players = gameTableStore.players
+  const player = playerStore.player
 
   return (
     <>
       <GameTableHeader />
+      {player && renderOwnCard(player)}
       <StyledGameTable>
         {players && renderPlayerCards(players)}
         <CenterCardContainer>

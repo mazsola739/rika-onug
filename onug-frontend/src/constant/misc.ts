@@ -2,6 +2,7 @@ import {
   CardType,
   ExpansionType,
   ExpansionsType,
+  TeamNames as TeamNamesTypes,
   TeamType,
   TeamsType,
   TokenType,
@@ -37,6 +38,25 @@ export const expansions: ExpansionsType = {
   onua: 'Alien',
   onus: 'Super Villians',
   onub: 'Bonus Roles',
+}
+
+export const teamNames: TeamNamesTypes = {
+  werewolf: 'Werewolf',
+  vampire: 'Vampire',
+  alien: 'Alien',
+  villain: 'Villain',
+  villager: 'Villager',
+  hero: 'Heroes',
+  synthetic: 'Synthetic',
+  tanner: 'Tanner',
+  assassin: 'Assassin',
+  apprenticeassassin: 'Apprentice Assassin',
+  blob: 'Blob',
+  mortician: 'Mortician',
+  nostradamus: 'Nostradamus',
+  mad: 'Mad',
+  family: 'Family',
+  traitor: 'Traitor',
 }
 
 export const emptyCard: CardType = {

@@ -30,7 +30,9 @@ export const GameTableHeader: React.FC = observer(() => {
               src={`/assets/cards/${player.player_card.card_name}.png`}
               alt={player.player_card.display_name}
             />
-            <PlayerCardRule>{`${player.player_card.display_name}: ${player.player_card.rules}`}</PlayerCardRule>
+            <PlayerCardRule>
+              {`${player.player_card.display_name}: ${player.player_card.rules}`}
+            </PlayerCardRule>
           </PlayerCardInformation>
         </StyledGameTableHeader>
       )}

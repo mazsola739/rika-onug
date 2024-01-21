@@ -18,6 +18,25 @@ export type ExpansionsType = {
   onub: 'Bonus Roles'
 }
 
+export type TeamNames = {
+  werewolf: string
+  vampire: string
+  alien: string
+  villain: string
+  villager: string
+  hero: string
+  synthetic: string
+  tanner: string
+  assassin: string
+  apprenticeassassin: string
+  blob: string
+  mortician: string
+  nostradamus: string
+  mad: string
+  family: string
+  traitor: string
+}
+
 export type WakeType = {
   day: 'day'
   twilight: 'twilight'

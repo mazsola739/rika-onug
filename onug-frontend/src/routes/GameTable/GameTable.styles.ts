@@ -18,6 +18,30 @@ export const StyledGameTable = styled.main`
   top: 120px;
 `
 
+export const OwnKnownCardContainer = styled.div`
+  align-content: center;
+  align-items: center;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  position: absolute;
+  left: 20px;
+  bottom: 100px;
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 10px;
+`
+
+export const OwnKnownCardText = styled.span`
+  font-family: 'Josefin Sans', sans-serif;
+  color: white;
+`
+
+export const OwnKnownCardImage = styled.img`
+  width: 120px;
+`
+
 export const Players = styled.div`
   display: flex;
   flex-direction: column;
@@ -32,6 +56,7 @@ export const Player = styled.div`
   align-items: center;
   display: flex;
   font-family: 'Josefin Sans', sans-serif;
+  color: white;
   flex-direction: row;
   gap: 5px;
 `
@@ -53,10 +78,10 @@ export const PlayerReadyName = styled.span<ReadyType>`
   ${({ ready }) =>
     ready
       ? `
-        color: black;
+        color: white;
       `
       : `
-        color: black;
+        color: white;
         opacity: 0.6;
       `}
 `
@@ -76,7 +101,7 @@ export const CenterCardContainer = styled.div`
 `
 
 export const CardTitle = styled.div`
-  color: black;
+  color: white;
   font-family: 'Josefin Sans', sans-serif;
 `
 
@@ -112,6 +137,7 @@ export const Marks = styled.div`
 export const StyledGameTableHeader = styled.div`
   display: flex;
   font-family: 'Josefin Sans', sans-serif;
+  color: white;
   height: 100%;
   justify-content: flex-start;
 `
@@ -121,6 +147,8 @@ export const PlayerInfo = styled.div`
   display: flex;
   flex-direction: column;
   width: 100px;
+  padding: 10px;
+  align-items: center;
 `
 
 export const PlayerAvatar = styled.img`
@@ -129,9 +157,9 @@ export const PlayerAvatar = styled.img`
 `
 
 export const PlayerName = styled.span`
-  color: black;
   margin: auto 0;
   text-align: left;
+  color: white;
 `
 
 export const PlayerCardInformation = styled.div`
@@ -144,10 +172,14 @@ export const PlayerCard = styled.img`
 `
 
 export const PlayerCardRule = styled.span`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   padding-left: 10px;
   padding-top: 10px;
+  text-align: start;
 `
 
 //FOOTER
-
 export const GameTableFooter = styled.div``

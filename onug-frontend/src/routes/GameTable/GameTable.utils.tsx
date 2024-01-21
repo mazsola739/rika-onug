@@ -9,8 +9,27 @@ import {
   PlayerReadyName,
   PlayerReadyNumber,
   Player,
+  OwnKnownCardContainer,
+  OwnKnownCardImage,
+  OwnKnownCardText,
 } from './GameTable.styles'
-import { CardType, MarkType, PlayersType, TokenType } from 'types'
+import { CardType, MarkType, PlayerType, PlayersType, TokenType } from 'types'
+
+//TODO information from backend
+const renderOwnCard = (player: PlayerType) => (
+  <OwnKnownCardContainer>
+    <OwnKnownCardText>
+      Player {player.player_number} : {player.player_name}
+    </OwnKnownCardText>
+    <OwnKnownCardImage
+      src={`/assets/cards/${player.player_card.card_name}.png`}
+      alt={player.player_card.display_name}
+    ></OwnKnownCardImage>
+    <OwnKnownCardText>Team: {player.player_card.team}</OwnKnownCardText>
+    <OwnKnownCardText>Role: {player.player_card.display_name}</OwnKnownCardText>
+    <OwnKnownCardText>Token: Mark of Clarity</OwnKnownCardText>
+  </OwnKnownCardContainer>
+)
 
 const renderPlayers = (players: PlayersType[]) => (
   <Players>
@@ -99,6 +118,7 @@ const renderArtifacts = (artifacts: TokenType[]) => (
 )
 
 export const gameTableUtils = {
+  renderOwnCard,
   renderPlayers,
   renderPlayerCards,
   renderCenterCard,

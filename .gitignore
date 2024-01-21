@@ -14,7 +14,7 @@
 /onug-backend/dist
 
 # logs
-/onug-backend/logs
+/onug-backend/logs/*.txt
 
 # misc
 .DS_Store
@@ -22,7 +22,7 @@
 .env.development.local
 .env.test.local
 .env.production.local
-/onug-backend/src/database
+/onug-backend/src/database/*.json
 
 npm-debug.log*
 yarn-debug.log*
