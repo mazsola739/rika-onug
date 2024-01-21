@@ -1,9 +1,13 @@
 import styled from '@emotion/styled'
-const backgroundImage = '/assets/backgrounds/background_new.png'
 
 export const StyledApp = styled.div`
-  background: transparent url(${backgroundImage}) center center/cover no-repeat;
-  background-size: 100% 100%;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 35%,
+    rgba(0, 212, 255, 1) 100%
+  );
   text-align: center;
   height: 100vh;
 `

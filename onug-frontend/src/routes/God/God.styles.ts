@@ -2,7 +2,8 @@ import styled from '@emotion/styled'
 
 const primaryColor = '#00FFFF'
 const secondaryColor = '#00BFFF'
-const textColor = '#222'
+const textColor = 'white'
+const buttonTextColor = 'black'
 
 export const StyledGod = styled.div`
   display: flex;
@@ -89,7 +90,7 @@ export const Button = styled.button`
   background-color: ${primaryColor};
   border: none;
   border-radius: 5px;
-  color: ${textColor};
+  color: ${buttonTextColor};
   cursor: pointer;
   font-family: 'Josefin Sans', sans-serif;
   padding: 5px;

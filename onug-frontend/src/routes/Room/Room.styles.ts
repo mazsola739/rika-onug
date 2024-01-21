@@ -26,11 +26,11 @@ export const RuleImage = styled.img`
 `
 
 export const RuleInfoDescription = styled.p`
-  color: black;
+  color: white;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;
-  font-weight: 400;
   margin: 0;
   padding: 5px;
   text-align: left;
+  width: 40%;
 `

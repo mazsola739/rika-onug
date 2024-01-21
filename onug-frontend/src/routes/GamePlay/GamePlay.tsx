@@ -19,7 +19,6 @@ export const GamePlay: React.FC = observer(() => {
   const navigate = useNavigate()
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
-  const everyone = gamePlayStore.generateActions()
   const [firstTime, setFirstTime] = useState(true)
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
@@ -74,12 +73,7 @@ export const GamePlay: React.FC = observer(() => {
       <Header>
         <GamePlayHeader />
       </Header>
-      <StyledGamePlay>
-        <pre>
-          {`    ${everyone.map((card) => card.text).join(`   
-    `)}`}
-        </pre>
-      </StyledGamePlay>
+      <StyledGamePlay>here comes the table</StyledGamePlay>
       <Footer>
         <FooterButtons>
           <Button

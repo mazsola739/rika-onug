@@ -26,4 +26,5 @@ export const StyledFilterButtons = styled.div`
   justify-content: space-between;
   padding: 8px 10px;
   position: fixed;
+  top: 120px;
 `
