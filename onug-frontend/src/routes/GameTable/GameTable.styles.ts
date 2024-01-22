@@ -21,7 +21,7 @@ export const StyledGameTable = styled.main`
 export const OwnKnownCardContainer = styled.div`
   align-content: center;
   align-items: center;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -43,13 +43,16 @@ export const OwnKnownCardImage = styled.img`
 `
 
 export const Players = styled.div`
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 5px;
   position: fixed;
-  right: 0;
+  right: 20px;
   top: 245px;
-  width: 280px;
+  width: 260px;
 `
 
 export const Player = styled.div`
@@ -64,26 +67,12 @@ export const Player = styled.div`
 export const PlayerReadyNumber = styled.img<ReadyType>`
   height: 25px;
   width: 25px;
-  ${({ ready }) =>
-    ready
-      ? `
-        opacity: 0.6;
-      `
-      : `
-        opacity: 0.6;
-      `}
+  opacity: ${({ ready }) => (ready ? 0.6 : 1)};
 `
 
 export const PlayerReadyName = styled.span<ReadyType>`
-  ${({ ready }) =>
-    ready
-      ? `
-        color: white;
-      `
-      : `
-        color: white;
-        opacity: 0.6;
-      `}
+  color: ${({ ready }) => (ready ? 'white' : 'rgba(255, 255, 255, 0.6)')};
+  opacity: ${({ ready }) => (ready ? 1 : 0.6)};
 `
 
 export const CardContainer = styled.div`

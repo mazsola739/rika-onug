@@ -22,6 +22,7 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
 
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
   const room_id = sessionStorage.getItem('room_id')
+  const token = sessionStorage.getItem('token')
 
   const handleCardClick = useCallback(() => {
     selectedDeckStore.toggleCardSelectionStatus(id)
@@ -40,7 +41,6 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
       selectedDeckStore.selectedCards
     )
 
-    const token = sessionStorage.getItem('token')
     sendJsonMessage?.({
       type: UPDATE_ROOM,
       card_id: id,

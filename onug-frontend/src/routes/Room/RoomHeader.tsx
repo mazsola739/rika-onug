@@ -34,18 +34,17 @@ const RuleInfo: React.FC = observer(() => {
 })
 
 export const RoomHeader: React.FC = observer(() => {
-  const name = sessionStorage.getItem('player_name')
-  const room = (
-    sessionStorage.getItem('room_id').charAt(0).toUpperCase() +
-    sessionStorage.getItem('room_id').slice(1)
-  )
+  const player_name = sessionStorage.getItem('player_name')
+  const room_id = sessionStorage.getItem('room_id')
+
+  const room = (room_id.charAt(0).toUpperCase() + room_id.slice(1))
     .replace('_', ' ')
     .replace('room', '')
 
   return (
     <Header>
       <Hello>
-        Welcome {name} in {room} room!
+        Welcome {player_name} in {room} room!
       </Hello>
       <RuleInfo />
     </Header>

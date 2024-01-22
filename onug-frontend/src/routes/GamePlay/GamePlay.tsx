@@ -17,11 +17,12 @@ import { useNavigate } from 'react-router-dom'
 
 export const GamePlay: React.FC = observer(() => {
   const navigate = useNavigate()
+  const { sendJsonMessage, lastJsonMessage } =
+    wsStore.getWsCommunicationsBridge()
+
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
   const [firstTime, setFirstTime] = useState(true)
-  const { sendJsonMessage, lastJsonMessage } =
-    wsStore.getWsCommunicationsBridge()
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -29,7 +30,7 @@ export const GamePlay: React.FC = observer(() => {
       sendJsonMessage?.({
         type: ARRIVE_GAME_PLAY,
         stage: STAGES.GAME_PLAY,
-        room_id: sessionStorage.getItem('room_id'),
+        room_id,
         token,
       })
     }

@@ -16,12 +16,13 @@ import { RoomHeader } from './RoomHeader'
 import { useNavigate } from 'react-router-dom'
 
 export const Room: React.FC = observer(() => {
-  const { deck } = deckStore
-  const [firstTime, setFirstTime] = useState(true)
-
+  const navigate = useNavigate()
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
-  const navigate = useNavigate()
+  const { deck } = deckStore
+  const [firstTime, setFirstTime] = useState(true)
+  const room_id = sessionStorage.getItem('room_id')
+  const token = sessionStorage.getItem('token')
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -29,8 +30,8 @@ export const Room: React.FC = observer(() => {
       sendJsonMessage?.({
         type: ARRIVE_ROOM,
         stage: STAGES.ROOM,
-        token: sessionStorage.getItem('token'),
-        room_id: sessionStorage.getItem('room_id'),
+        token,
+        room_id,
       })
     }
   }, [sendJsonMessage, firstTime])

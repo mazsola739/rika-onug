@@ -2,9 +2,9 @@ import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
 import { Slaves, StyledLobby, LowPhas, StyledRoomButton } from './Lobby.styles'
 import { lobbyStore, wsStore } from 'store'
-import { useNavigate } from 'react-router-dom'
 import { StyledLobbyProps } from './Lobby.types'
 import { HYDRATE_LOBBY, JOIN_ROOM, REDIRECT, STAGES } from 'constant'
+import { useNavigate } from 'react-router-dom'
 
 const RoomButton: React.FC<StyledLobbyProps> = ({
   buttonText,
@@ -25,6 +25,7 @@ export const Lobby: React.FC = observer(() => {
   const { lastJsonMessage, sendJsonMessage } =
     wsStore.getWsCommunicationsBridge()
   const [firstTime, setFirstTime] = useState(true)
+  const token = sessionStorage.getItem('token')
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -68,7 +69,7 @@ export const Lobby: React.FC = observer(() => {
     sendJsonMessage?.({
       type: JOIN_ROOM,
       room_id,
-      token: sessionStorage.getItem('token'),
+      token,
     })
   }
 

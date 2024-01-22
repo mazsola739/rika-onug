@@ -7,7 +7,6 @@ import { wsStore } from 'store'
 export const GameTableFooter: React.FC = observer(() => {
   const [ready, setReady] = useState(false)
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
-
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
 

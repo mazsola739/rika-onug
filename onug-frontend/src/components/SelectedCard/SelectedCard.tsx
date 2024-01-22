@@ -17,14 +17,13 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
       wake_up_time,
       order,
     } = card
-
     const isSelected = selectedDeckStore.selectedCards.some(
       (selectedCard) => selectedCard.id === id
     )
-
-    const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
-
     const room_id = sessionStorage.getItem('room_id')
+    const token = sessionStorage.getItem('token')
+    const action = isSelected ? 'CARD_DESELECT' : 'CARD_SELECT'
+    const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
 
     const handleDeselect = useCallback(() => {
       selectedDeckStore.toggleCardSelectionStatus(id)
@@ -43,8 +42,6 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
         selectedDeckStore.selectedCards
       )
 
-      const token = sessionStorage.getItem('token')
-      const action = isSelected ? 'CARD_DESELECT' : 'CARD_SELECT'
       sendJsonMessage?.({
         type: UPDATE_ROOM,
         card_id: id,

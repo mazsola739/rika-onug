@@ -8,14 +8,13 @@ import {
 import { artifacts } from 'data'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import {
   gameTableStore,
   playerStore,
   roomStore,
   selectedDeckStore,
-  wsStore,
   deckStore,
+  wsStore,
 } from 'store'
 import { utils } from 'utils'
 import {
@@ -26,34 +25,32 @@ import {
 import { gameTableUtils } from './GameTable.utils'
 import { GameTableFooter } from './GameTableFooter'
 import { GameTableHeader } from './GameTableHeader'
+import { useNavigate } from 'react-router-dom'
 
 const { findCardById } = utils
+const {
+  renderOwnCard,
+  renderPlayers,
+  renderPlayerCards,
+  renderCenterCard,
+  renderCenterExtraCard,
+  renderMarks,
+  renderArtifacts,
+} = gameTableUtils
 
 export const GameTable: React.FC = observer(() => {
-  const {
-    renderOwnCard,
-    renderPlayers,
-    renderPlayerCards,
-    renderCenterCard,
-    renderCenterExtraCard,
-    renderMarks,
-    renderArtifacts,
-  } = gameTableUtils
   // TODO REMOVE FE shuffled cards completely, use data from BE
   const { centerCards, chosenWolf, chosenSuperVillain } =
     gameTableStore.distributeCards()
   const { hasSentinel, hasMarks, hasDoppelganger, hasCurator } = gameTableStore
   const selectedMarks = selectedDeckStore.selectedMarks
+  const navigate = useNavigate()
   const token = sessionStorage.getItem('token')
-
   const [firstTime, setFirstTime] = useState(true)
-
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
   const { setPlayer } = playerStore
   const { setPlayers } = gameTableStore
-
-  const navigate = useNavigate()
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
