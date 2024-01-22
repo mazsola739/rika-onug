@@ -1,0 +1,358 @@
+{
+  "EVERYONE_CARD": {
+    "id": ["selected_cards"],
+    "img": ".png",
+    "type": ["SHOW_OWN_CARD"]
+  },
+  "ORACLE": {
+    "id": [50],
+    "img": "/assets/cards/onua_oracle.png",
+    "type": ["CHOOSE_YES_NO", "CHOOSE_CENTER_CARD", "SWAP_OWN_CARD", "SHOW_OWN_CARD", "SHOW_CENTER_CARD", "CHOOSE_EVEN_ODD", "CHOOSE_NUMBER", "SHOW_PLAYER_CARD", "GUESS_NUMBER", "UPDATE_PLAYER"]
+  },
+  "COPYCAT": {
+    "id": [30],
+    "img": "/assets/cards/onuv_copycat.png",
+    "type": ["CHOOSE_CENTER_CARD", "SHOW_CENTER_CARD", "UPDATE_PLAYER"]
+  },
+  "MIRROR_MAN": {
+    "id": [64],
+    "img": "/assets/cards/onus_mirror_man.png",
+    "type": ["CHOOSE_CENTER_CARD", "SHOW_CENTER_CARD", "UPDATE_PLAYER"]
+  },
+  "DOPPELGANGER": {
+    "id": [1],
+    "img": "/assets/cards/onuw_doppelganger.png",
+    "type": ["CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_ANOTHER_PLAYER_CARD", "UPDATE_PLAYER", "SENTINEL", "ALPHA_WOLF", "MYSTICWOLF", "SEER", "APPRENTICE_SEER", "PARANORMAL_INVESTIGATOR", "ROBBER", "WITCH", "TROUBLEMAKER", "VILLAGE_IDIOT", "DRUNK", "DISEASED", "CUPID", "INSTIGATOR", "THING", "MINION", "ANNOYING_LAD", "DETECTOR", "ROLE_RETRIEVER", "VOODOO_LOU", "SWITCHEROO"]
+  },
+  "VAMPIRES": {
+    "id": [41, 40, 39, "1"],
+    "img": "/assets/cards/onuv_vampire.png",
+    "type": ["SHOW_VAMPIRE_CARD", "SHOW_OWN_VAMPIRE_CARD", "CHOOSE_NONVAMPIRE_PLAYER_MARK", "SWAP_MARK_OF_VAMPIRE"]
+  },
+  "THE_COUNT": {
+    "id": [39, "1"],
+    "img": "/assets/cards/onuv_the_count.png",
+    "type": ["CHOOSE_NONVAMPIRE_PLAYER_MARK", "SWAP_MARK_OF_FEAR"]
+  },
+  "RENFIELD": {
+    "id": [38, "1"],
+    "img": "/assets/cards/onuv_renfield.png",
+    "type": ["SHOW_VAMPIRE_PLAYER_THUMB", "SHOW_PLAYER_MARK_OF_VAMPIRE", "CHOOSE_OWN_MARK", "SWAP_MARK_OF_THE_BAT"]
+  },
+  "DISEASED": {
+    "id": [32],
+    "img": "/assets/cards/onuv_diseased.png",
+    "type": ["CHOOSE_ANY_NEIGHBOR_MARK", "SWAP_MARK_OF_DISEASE"]
+  },
+  "CUPID": {
+    "id": [31],
+    "img": "/assets/cards/onuv_cupid.png",
+    "type": ["CHOOSE_ANY_PLAYER_MARK", "SWAP_MARK_OF_LOVE", "CHOOSE_ANY_PLAYER_MARK", "SWAP_MARK_OF_LOVE"]
+  },
+  "INSTIGATOR": {
+    "id": [34],
+    "img": "/assets/cards/onuv_instigator.png",
+    "type": ["MAY_CHOOSE_ANY_PLAYER_MARK", "SWAP_MARK_OF_THE_TRAITOR"]
+  },
+  "PRIEST": {
+    "id": [37, "1"],
+    "img": "/assets/cards/onuv_priest.png",
+    "type": ["CHOOSE_OWN_MARK", "SWAP_MARK_OF_CLARITY", "MAY_CHOOSE_ANOTHER_PLAYER_MARK", "SWAP_MARK_OF_CLARITY"]
+  },
+  "ASSASSIN": {
+    "id": [29, "1"],
+    "img": "/assets/cards/onuv_assassin.png",
+    "type": ["CHOOSE_ANY_PLAYER_MARK", "SWAP_MARK_OF_THE_ASSASSIN", "SHOW_APPRENTICEASSASSIN_CARD"]
+  },
+  "APPRENTICE_ASSASSIN": {
+    "id": [28, "1"],
+    "img": "/assets/cards/onuv_apprentice_assassin.png",
+    "type": ["SHOW_ASSASSIN_CARD", "MAY_CHOOSE_ANOTHER_PLAYER_MARK", "SWAP_MARK_OF_THE_ASSASSIN"]
+  },
+  "EVERYONE_MARK": {
+    "id": ["selected_cards"],
+    "img": ".png",
+    "type": ["SHOW_OWN_MARK"]
+  },
+  "LOVERS": {
+    "id": ["mark_of_lover"],
+    "img": "/assets/tokens/mark_of_love.png",
+    "type": ["SHOW_PLAYER_MARK_OF_LOVE", "SHOW_OWN_MARK_OF_LOVE"]
+  },
+  "SENTINEL": {
+    "id": [25],
+    "img": "/assets/cards/onud_sentinel.png",
+    "type": ["MAY_CHOOSE_ANY_PLAYER_CARD", "PLACE_SHIELD"]
+  },
+  "ALIENS": {
+    "id": [42, 43, 47, 54, 53, "1"],
+    "img": "/assets/cards/onua_alien.png",
+    "type": ["SHOW_ALIEN_CARD", "SHOW_OWN_ALIEN_CARD", "MAY_CHOOSE_ANY_PLAYER_CARD", "MAY_CHOOSE_ANY_EVEN_PLAYER_CARD", "MAY_CHOOSE_ANY_ODD_PLAYER_CARD", "SWAP_OWN_CARD", "SHOW_PLAYER_CARD", "SHOW_PLAYER_COW_CARD"]
+  },
+  "COW": {
+    "id": [45, "1"],
+    "img": "/assets/cards/onua_cow.png",
+    "type": ["SHOW_OWN_COW"]
+  },
+  "GROOB_ZERB": {
+    "id": [47, 54, "1"],
+    "img": "/assets/cards/onua_groob_alien.png",
+    "type": ["SHOW_GROOB&ZERB_CARD", "SHOW_OWN_GROOB&ZERB_CARD"]
+  },
+  "LEADER": {
+    "id": [48, "1"],
+    "img": "/assets/cards/onua_leader.png",
+    "type": ["SHOW_ALIEN_PLAYER_THUMB", "HIDE_ALIEN_PLAYER_THUMB", "SHOW_ZERB&GROOB_PLAYER_THUMB"]
+  },
+  "BODY_SNATCHER": {
+    "id": [74, "1"],
+    "img": "/assets/cards/onub_body_snatcher.png",
+    "type": ["CHOOSE_NONALIEN_PLAYER_CARD", "SWAP_OWN_CARD", "SHOW_OWN_CARD", "CHOOSE_CENTER_CARD"]
+  },
+  "SUPER_VILLAINS": {
+    "id": [57, 69, 65, 60, "1"],
+    "img": "/assets/cards/onus_henchman_7.png",
+    "type": ["SHOW_VILLAIN_CARD", "SHOW_OWN_VILLAIN_CARD", "SHOW_PLAYER_EVILOMETER_CARD"]
+  },
+  "TEMPTRESS": {
+    "id": [69, "1"],
+    "img": "/assets/cards/onus_temptress.png",
+    "type": ["CHOOSE_CENTER_VILLAIN_CARD", "CHOOSE_NONVILLAIN_PLAYER_CARD", "SWAP_PLAYER_CARD"]
+  },
+  "DR_PEEKER": {
+    "id": [57, "1"],
+    "img": "/assets/cards/onus_dr_peeker.png",
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_PLAYER_CARD"]
+  },
+  "RAPSCALLION": {
+    "id": [65, "1"],
+    "img": "/assets/cards/onus_rapscallion.png",
+    "type": ["MAY_CHOOSE_CENTER_CARD", "SHOW_CENTER_CARD"]
+  },
+  "EVILOMETER": {
+    "id": [58, "1"],
+    "img": "/assets/cards/onus_evilometer.png",
+    "type": ["SHOW_OWN_EVILOMETER"]
+  },
+  "WEREWOLVES": {
+    "id": [15, 16, 17, 22, "1"],
+    "img": "/assets/cards/onuw_werewolf.png",
+    "type": ["SHOW_WOLF_CARD", "SHOW_OWN_WOLF_CARD"]
+  },
+  "DREAMWOLF": {
+    "id": [21, "1"],
+    "img": "/assets/cards/onud_dream_wolf.png",
+    "type": ["SHOW_OWN_DREAMWOLF"]
+  },
+  "ALPHA_WOLF": {
+    "id": [17],
+    "img": "/assets/cards/onud_alpha_wolf.png",
+    "type": ["CHOOSE_CENTER_WOLF_CARD", "CHOOSE_NONWOLF_PLAYER_CARD", "SWAP_PLAYER_CARD"]
+  },
+  "MYSTICWOLF": {
+    "id": [22],
+    "img": "/assets/cards/onud_mystic_wolf.png",
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_PLAYER_CARD"]
+  },
+  "MINION": {
+    "id": [7],
+    "img": "/assets/cards/onuw_minion.png",
+    "type": ["SHOW_WOLF_PLAYER_THUMB"]
+  },
+  "APPRENTICE_TANNER": {
+    "id": [71, "1"],
+    "img": "/assets/cards/onub_apprentice_tanner.png",
+    "type": ["SHOW_PLAYER_TANNER_CARD"]
+  },
+  "TANNER": {
+    "id": [10, "1"],
+    "img": "/assets/cards/onuw_tanner.png",
+    "type": ["SHOW_OWN_TANNER"]
+  },
+  "MAD_SCIENTIST": {
+    "id": [63],
+    "img": "/assets/cards/onus_mad_scientist.png",
+    "type": ["SHOW_OWN_MAD_SCIENTIST"]
+  },
+  "INTERN": {
+    "id": [62, "1"],
+    "img": "/assets/cards/onus_intern.png",
+    "type": ["SHOW_PLAYER_MAD_SCIENTIST_CARD"]
+  },
+  "MASONS": {
+    "id": [5, 6, "1"],
+    "img": "/assets/cards/onuw_mason.png",
+    "type": ["SHOW_OTHER_MASON_CARD", "SHOW_OWN_MASON_CARD"]
+  },
+  "THING": {
+    "id": [85],
+    "img": "/assets/cards/onub_thing.png",
+    "type": ["CHOOSE_ANY_NEIGHBOR_CARD"]
+  },
+  "ANNOYING_LAD": {
+    "id": [55],
+    "img": "/assets/cards/onus_annoying_lad.png",
+    "type": ["CHOOSE_ANY_NEIGHBOR_CARD"]
+  },
+  "SEER": {
+    "id": [9],
+    "img": "/assets/cards/onuw_seer.png",
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_PLAYER_CARD", "MAY_CHOOSE_CENTER_CARD", "SHOW_CENTER_CARD"]
+  },
+  "APPRENTICE_SEER": {
+    "id": [18],
+    "img": "/assets/cards/onud_apprentice_seer.png",
+    "type": ["MAY_CHOOSE_CENTER_CARD", "SHOW_CENTER_CARD"]
+  },
+  "PARANORMAL_INVESTIGATOR": {
+    "id": [23],
+    "img": "/assets/cards/onud_paranormal_investigator.png",
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_PLAYER_CARD", "UPDATE_PLAYER"]
+  },
+  "MARKSMAN": {
+    "id": [35, "1"],
+    "img": "/assets/cards/onuv_marksman.png",
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_ANOTHER_PLAYER_CARD", "MAY_CHOOSE_ANOTHER_PLAYER_MARK", "SHOW_ANOTHER_PLAYER_MARK"]
+  },
+  "NOSTRADAMUS": {
+    "id": [80, "1"],
+    "img": "/assets/cards/onub_nostradamus.png",
+    "type": ["CHOOSE_ANY_CARD", "UPDATE_PLAYER"]
+  },
+  "PSYCHIC": {
+    "id": [51],
+    "img": "/assets/cards/onua_psychic.png",
+    "type": ["MAY_CHOOSE_ANY_EVEN_PLAYER_CARD", "MAY_CHOOSE_ANY_ODD_PLAYER_CARD"]
+  },
+  "DETECTOR": {
+    "id": [56],
+    "img": "/assets/cards/onus_detector.png",
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_PLAYER_CARD", "MAY_CHOOSE_CENTER_CARD", "SHOW_CENTER_CARD"]
+  },
+  "ROBBER": {
+    "id": [8],
+    "img": "/assets/cards/onuw_robber.png",
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SWAP_OWN_CARD", "SHOW_OWN_CARD", "UPDATE_PLAYER"]
+  },
+  "WITCH": {
+    "id": [27],
+    "img": "/assets/cards/onud_witch.png",
+    "type": ["MAY_CHOOSE_CENTER_CARD", "SHOW_CENTER_CARD", "CHOOSE_ANY_PLAYER_CARD", "SWAP_CENTER_CARD"]
+  },
+  "PICKPOCKET": {
+    "id": [36, "1"],
+    "img": "/assets/cards/onuv_pickpocket.png",
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_MARK", "SWAP_OWN_MARK", "SHOW_OWN_MARK", "UPDATE_PLAYER"]
+  },
+  "ROLE_RETRIEVER": {
+    "id": [66],
+    "img": "/assets/cards/onus_role_retriever.png",
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SWAP_OWN_CARD", "SHOW_OWN_CARD", "UPDATE_PLAYER"]
+  },
+  "VOODOO_LOU": {
+    "id": [70],
+    "img": "/assets/cards/onus_voodoo_lou.png",
+    "type": ["MAY_CHOOSE_CENTER_CARD", "CHOOSE_ANY_PLAYER_CARD", "SWAP_CENTER_CARD"]
+  },
+  "TROUBLEMAKER": {
+    "id": [11],
+    "img": "/assets/cards/onuw_troublemaker.png",
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SWAP_PLAYER_CARD"]
+  },
+  "VILLAGE_IDIOT": {
+    "id": [26],
+    "img": "/assets/cards/onud_village_idiot.png",
+    "type": ["MAY_CHOOSE_DIRECTION"]
+  },
+  "AURA_SEER": {
+    "id": [72, "1"],
+    "img": "/assets/cards/onub_aura_seer.png",
+    "type": ["SHOW_PLAYER_THUMB"]
+  },
+  "GREMLIN": {
+    "id": [33, "1"],
+    "img": "/assets/cards/onuv_gremlin.png",
+    "type": ["MAY_CHOOSE_ANY_PLAYER_CARD", "CHOOSE_ANY_PLAYER_CARD", "SWAP_PLAYER_CARD", "MAY_CHOOSE_ANY_PLAYER_MARK", "CHOOSE_ANY_PLAYER_MARK", "SWAP_PLAYER_MARK"]
+  },
+  "RASCAL": {
+    "id": [52, "1"],
+    "img": "/assets/cards/onua_rascal.png",
+    "type": ["MAY_CHOOSE_DIRECTION", "MAY_CHOOSE_ANY_LOWER_PLAYER_CARD", "MAY_CHOOSE_ANY_HIGHER_PLAYER_CARD", "MAY_CHOOSE_ANY_ODD_PLAYER_CARD", "MAY_CHOOSE_ANY_EVEN_PLAYER_CARD", "MAY_CHOOSE_ANY_CARD", "MAY_CHOOSE_ANY_NEIGHBOR_CARD", "MAY_CHOOSE_LEFT_NEIGHBOR_CARD", "MAY_CHOOSE_RIGHT_NEIGHBOR_CARD", "CHOOSE_ANY_LOWER_PLAYER_CARD", "CHOOSE_ANY_HIGHER_PLAYER_CARD", "CHOOSE_ANY_ODD_PLAYER_CARD", "CHOOSE_ANY_EVEN_PLAYER_CARD", "CHOOSE_ANY_CARD", "CHOOSE_ANY_NEIGHBOR_CARD", "CHOOSE_LEFT_NEIGHBOR_CARD", "CHOOSE_RIGHT_NEIGHBOR_CARD", "SWAP_PLAYER_CARD", "SWAP_OWN_CARD"]
+  },
+  "SWITCHEROO": {
+    "id": [68],
+    "img": "/assets/cards/onus_switcheroo.png",
+    "type": ["CHOOSE_ANOTHER_PLAYER_CARD", "SWAP_PLAYER_CARD"]
+  },
+  "DRUNK": {
+    "id": [2],
+    "img": "/assets/cards/onuw_drunk.png",
+    "type": ["CHOOSE_CENTER_CARD", "SWAP_OWN_CARD"]
+  },
+  "INSOMNIAC": {
+    "id": [4, "1"],
+    "img": "/assets/cards/onuw_insomniac.png",
+    "type": ["SHOW_OWN_CARD", "UPDATE_PLAYER"]
+  },
+  "SELF-AWARENESS_GIRL": {
+    "id": [67, "1"],
+    "img": "/assets/cards/onus_self_awareness_girl.png",
+    "type": ["SHOW_OWN_CARD", "UPDATE_PLAYER"]
+  },
+  "SQUIRE": {
+    "id": [83, "1"],
+    "img": "/assets/cards/onub_squire.png",
+    "type": ["SHOW_WOLF_PLAYER_THUMB", "MAY_CHOOSE_WOLF_PLAYER_CARD", "SHOW_PLAYER_CARD"]
+  },
+  "BEHOLDER": {
+    "id": [73, "1"],
+    "img": "/assets/cards/onub_beholder.png",
+    "type": ["SHOW_SEER_PLAYER_THUMB", "SHOW_APPRENTICE_SEER_PLAYER_THUMB", "MAY_CHOOSE_SEER_PLAYER_CARD", "MAY_CHOOSE_APPRENTICE_SEER_PLAYER_CARD", "SHOW_PLAYER_CARD"]
+  },
+  "REVEALER": {
+    "id": [24, "1"],
+    "img": "/assets/cards/onud_revealer.png",
+    "type": ["MAY_TURN_ANOTHER_PLAYER_CARD"]
+  },
+  "EXPOSER": {
+    "id": [46, "1"],
+    "img": "/assets/cards/onua_exposer.png",
+    "type": ["TURN_CENTER_CARD"]
+  },
+  "FLIPPER": {
+    "id": [59, "1"],
+    "img": "/assets/cards/onus_flipper.png",
+    "type": ["MAY_TURN_ANOTHER_PLAYER_CARD"]
+  },
+  "EMPATH": {
+    "id": [77, "1"],
+    "img": "/assets/cards/onub_empath.png",
+    "type": ["SHOW_VOTES"]
+  },
+  "EVERYONE_EMPATH": {
+    "id": ["selected_cards"],
+    "img": "/assets/cards/onub_empath.png",
+    "type": ["CHOOSE_ANY_PLAYER_CARD"]
+  },
+  "CURATOR": {
+    "id": [20, "1"],
+    "img": "/assets/cards/onud_curator.png",
+    "type": ["MAY_CHOOSE_CENTER_ARTIFACT", "CHOOSE_ANY_PLAYER_CARD", "PLACE_ARTIFACT"]
+  },
+  "BLOB": {
+    "id": [44, "1"],
+    "img": "/assets/cards/onua_blob.png",
+    "type": ["SHOW_PLAYER_THUMB"]
+  },
+  "MORTICIAN": {
+    "id": [49, "1"],
+    "img": "/assets/cards/onua_mortician.png",
+    "type": ["MAY_CHOOSE_ANY_NEIGHBOR_CARD", "SHOW_PLAYER_CARD", "MAY_CHOOSE_NEIGHBOR_CARD"]
+  },
+  "FAMILY_MAN": {
+    "id": [78, "1"],
+    "img": "/assets/cards/onub_family_man.png",
+    "type": ["SHOW_PLAYER_CARD"]
+  }
+}
+//TODO CHECK IF ALL POSSIBLE HERE RASCAL

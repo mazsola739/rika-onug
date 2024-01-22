@@ -12,18 +12,18 @@ const generateScenes = (selected_cards) => {
     scene_name: 'night_starts',
   })
 
-  if (selected_cards.includes(1))                    sceneWithActionTimes.push(buildSceneForCardId({card_ids: [1],      scene_name: 'doppleganger'}))
+  if (selected_cards.includes(1))            sceneWithActionTimes.push(buildSceneForCardId({card_ids: [1],      scene_name: 'doppleganger'}))
   //TODO check wolf ids
   if (includesAll(selected_cards, [1, 7]))   sceneWithActionTimes.push(buildSceneForCardId({card_ids: [1],      scene_name: 'doppleganger+minion', sceneTextKey: 'doppelganger_minion_text'}))
-  if (werewolvesInPlay(selected_cards))                    sceneWithActionTimes.push(buildSceneForCardId({card_ids: [15, 16], scene_name: 'werewolf'}))
+  if (werewolvesInPlay(selected_cards))      sceneWithActionTimes.push(buildSceneForCardId({card_ids: [15, 16], scene_name: 'werewolf'}))
   // TODO check wolf ids
-  if (selected_cards.includes(7))                    sceneWithActionTimes.push(buildSceneForCardId({card_ids: [7],      scene_name: 'minion'}))
-  if (masonsInPlay(selected_cards))                        sceneWithActionTimes.push(buildSceneForCardId({card_ids: [5, 6],   scene_name: 'mason'}))
-  if (selected_cards.includes(9))                    sceneWithActionTimes.push(buildSceneForCardId({card_ids: [9],      scene_name: 'seer'}))
-  if (selected_cards.includes(8))                    sceneWithActionTimes.push(buildSceneForCardId({card_ids: [8],      scene_name: 'robber'}))
-  if (selected_cards.includes(11))                   sceneWithActionTimes.push(buildSceneForCardId({card_ids: [11],     scene_name: 'troublemaker'}))
-  if (selected_cards.includes(2))                    sceneWithActionTimes.push(buildSceneForCardId({card_ids: [2],      scene_name: 'drunk'}))
-  if (selected_cards.includes(4))                    sceneWithActionTimes.push(buildSceneForCardId({card_ids: [4],      scene_name: 'insomniac'}))
+  if (selected_cards.includes(7))            sceneWithActionTimes.push(buildSceneForCardId({card_ids: [7],      scene_name: 'minion'}))
+  if (masonsInPlay(selected_cards))          sceneWithActionTimes.push(buildSceneForCardId({card_ids: [5, 6],   scene_name: 'mason'}))
+  if (selected_cards.includes(9))            sceneWithActionTimes.push(buildSceneForCardId({card_ids: [9],      scene_name: 'seer'}))
+  if (selected_cards.includes(8))            sceneWithActionTimes.push(buildSceneForCardId({card_ids: [8],      scene_name: 'robber'}))
+  if (selected_cards.includes(11))           sceneWithActionTimes.push(buildSceneForCardId({card_ids: [11],     scene_name: 'troublemaker'}))
+  if (selected_cards.includes(2))            sceneWithActionTimes.push(buildSceneForCardId({card_ids: [2],      scene_name: 'drunk'}))
+  if (selected_cards.includes(4))            sceneWithActionTimes.push(buildSceneForCardId({card_ids: [4],      scene_name: 'insomniac'}))
 
   sceneWithActionTimes.push({
     scene: "Time is up. Everyone, 3, 2, 1... VOTE!",

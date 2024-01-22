@@ -49,4 +49,6 @@ export const teamsById = {
   madTeam: [62, 63],
   familyTeam: [78],
   traitorTeam: ['mark_of_traitor', 'dagger_of_the_traitor'],
+  loverTeam: ['mark_of_love', 'mark_of_love'],
+  diseasedTeam: ['mark_of_disease'],
 }

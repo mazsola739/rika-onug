@@ -197,7 +197,7 @@
     "wake_up_time": "night",
     "card_name": "onud_curator",
     "order": 69,
-    "rules": "View a player's card during the night."
+    "rules": "Give any player an artifact which might change their team or cause them to do something unusual."
   },
   {
     "id": 21,
@@ -207,7 +207,7 @@
     "wake_up_time": "day",
     "card_name": "onud_dream_wolf",
     "order": 77,
-    "rules": "Appears as a villager to seers, but wakes with werewolves."
+    "rules": "You are on the werewolf team, but instead of waking up with them, you just stick out your thumb.'"
   },
   {
     "id": 22,
@@ -217,7 +217,7 @@
     "wake_up_time": "night",
     "card_name": "onud_mystic_wolf",
     "order": 31,
-    "rules": "Identify another mystic wolf and other werewolves."
+    "rules": "Wake with the other werewolves, then wake again and view any other player's card."
   },
   {
     "id": 23,
@@ -227,7 +227,7 @@
     "wake_up_time": "night",
     "card_name": "onud_paranormal_investigator",
     "order": 43,
-    "rules": "Choose a player; learn if they are a mystic or dream wolf."
+    "rules": "View up to two cards, if you see a card that isn't a villager, stop viewing and you are now that role."
   },
   {
     "id": 24,
@@ -237,7 +237,7 @@
     "wake_up_time": "night",
     "card_name": "onud_revealer",
     "order": 65,
-    "rules": "Select a player; learn if they're on the werewolf team."
+    "rules": "Turn any other player's card face up and leave it face up unless you see a card that isn't on the village team."
   },
   {
     "id": 25,
@@ -247,7 +247,7 @@
     "wake_up_time": "night",
     "card_name": "onud_sentinel",
     "order": 15,
-    "rules": "Guard a player; prevent them from being killed."
+    "rules": "Give any other player's card, a shield token, that card cannot be moved or viewed."
   },
   {
     "id": 26,
@@ -257,7 +257,7 @@
     "wake_up_time": "night",
     "card_name": "onud_village_idiot",
     "order": 54,
-    "rules": "When you die, reveal your role. No one dies tonight."
+    "rules": "Move all cards except yours one space to the left or to the right."
   },
   {
     "id": 27,
@@ -267,7 +267,7 @@
     "wake_up_time": "night",
     "card_name": "onud_witch",
     "order": 49,
-    "rules": "Once per game, save or eliminate a player."
+    "rules": "View a center card and exchange it with any other player's card."
   },
   {
     "id": 28,
@@ -277,7 +277,7 @@
     "wake_up_time": "dusk",
     "card_name": "onuv_apprentice_assassin",
     "order": 14,
-    "rules": "Select a player; if they are an assassin, you join them."
+    "rules": "You win, if the assassin is killed. If the assassin is not in front of any player, you are the assassin."
   },
   {
     "id": 29,
@@ -287,7 +287,7 @@
     "wake_up_time": "dusk",
     "card_name": "onuv_assassin",
     "order": 13,
-    "rules": "Select a player to eliminate during the night."
+    "rules": "Give a player the mark of the assassin, you win, if that player is killed."
   },
   {
     "id": 30,
@@ -297,7 +297,7 @@
     "wake_up_time": "twilight",
     "card_name": "onuv_copycat",
     "order": 2,
-    "rules": "Wake with the other players, and choose a role to copy."
+    "rules": "View one center card. You are that role and we'll wake up when that role is called."
   },
   {
     "id": 31,
@@ -307,7 +307,7 @@
     "wake_up_time": "dusk",
     "card_name": "onuv_cupid",
     "order": 10,
-    "rules": "Choose two players to fall in love. If one dies, the other dies too."
+    "rules": "Give any two players a mark of love. If a player with a mark of love is killed, the other player with a mark of love also dies."
   },
   {
     "id": 32,
@@ -317,7 +317,7 @@
     "wake_up_time": "dusk",
     "card_name": "onuv_diseased",
     "order": 9,
-    "rules": "You are diseased; if pointed at by a werewolf, you become one."
+    "rules": "Give one of your neighbors a mark of disease. If anyone points at you or the player with the mark of disease, they lose even if their team won."
   },
   {
     "id": 33,
@@ -327,7 +327,7 @@
     "wake_up_time": "night",
     "card_name": "onuv_gremlin",
     "order": 56,
-    "rules": "Switch marks between two players."
+    "rules": "Switch marks or cards between any two players."
   },
   {
     "id": 34,
@@ -337,7 +337,7 @@
     "wake_up_time": "dusk",
     "card_name": "onuv_instigator",
     "order": 11,
-    "rules": "Choose a player; if they die, you win."
+    "rules": "Give any other player the mark of the traitor, that player now wins, if anyone on his team is killed."
   },
   {
     "id": 35,
@@ -347,7 +347,7 @@
     "wake_up_time": "night",
     "card_name": "onuv_marksman",
     "order": 44,
-    "rules": "Look at one player's card and another player's mark."
+    "rules": "View the mark of one player and the card of another player."
   },
   {
     "id": 36,
@@ -357,7 +357,7 @@
     "wake_up_time": "night",
     "card_name": "onuv_pickpocket",
     "order": 50,
-    "rules": "Exchange your mark with another player's mark."
+    "rules": "Exchange your mark with the mark from another player and view your new mark."
   },
   {
     "id": 37,
@@ -367,7 +367,7 @@
     "wake_up_time": "dusk",
     "card_name": "onuv_priest",
     "order": 12,
-    "rules": "Give yourself and another player a mark of clarity."
+    "rules": "Give yourself and one other player a mark of clarity."
   },
   {
     "id": 38,
@@ -377,7 +377,7 @@
     "wake_up_time": "dusk",
     "card_name": "onuv_renfield",
     "order": 8,
-    "rules": "Serve the master, help vampires identify each other."
+    "rules": "You know who the vampires are. You are not a vampire, but you are on their team and win with them even if you are killed."
   },
   {
     "id": 39,
@@ -387,7 +387,7 @@
     "wake_up_time": "dusk",
     "card_name": "onuv_the_count",
     "order": 7,
-    "rules": "Identify other vampires, win if all vampires survive."
+    "rules": "Wake with the other vampires, wake again to give a player the mark of fear, which prevents them from waking and using their night action."
   },
   {
     "id": 40,
@@ -397,7 +397,7 @@
     "wake_up_time": "dusk",
     "card_name": "onuv_the_master",
     "order": 6,
-    "rules": "Is the leader of the vampires, waking up every dusk to convert another player into a vampire."
+    "rules": "Wake with the other vampires. If all the vampires point at you during the vote, you can't be killed."
   },
   {
     "id": 41,
@@ -407,7 +407,7 @@
     "wake_up_time": "dusk",
     "card_name": "onuv_vampire",
     "order": 5,
-    "rules": "A vampire who wakes up at dusk to help convert another player into a vampire."
+    "rules": "Look for the other vampires and turn another player into a vampire. You win if no vampires are killed."
   },
   {
     "id": 42,
@@ -417,7 +417,7 @@
     "wake_up_time": "night",
     "card_name": "onua_alien",
     "order": 16,
-    "rules": "An alien who wakes up at night to attempt to convert other players into aliens."
+    "rules": "Wake and look for the other aliens and then do the action as instructed by the app."
   },
   {
     "id": 43,
@@ -427,7 +427,7 @@
     "wake_up_time": "night",
     "card_name": "onua_alien",
     "order": 17,
-    "rules": "Another alien who also wakes up at night to attempt to convert other players into aliens."
+    "rules": "Wake and look for the other aliens and then do the action as instructed by the app."
   },
   {
     "id": 44,
@@ -437,7 +437,7 @@
     "wake_up_time": "night",
     "card_name": "onua_blob",
     "order": 70,
-    "rules": "A unique entity that can absorb other players and take on their roles."
+    "rules": "Keep all players that are part of the blob, alive."
   },
   {
     "id": 45,
@@ -447,7 +447,7 @@
     "wake_up_time": "night",
     "card_name": "onua_cow",
     "order": 22,
-    "rules": "A harmless creature with no special abilities."
+    "rules": "If your fist is tapped, that means at least one of your neighbors is an alien."
   },
   {
     "id": 46,
@@ -457,7 +457,7 @@
     "wake_up_time": "night",
     "card_name": "onua_exposer",
     "order": 66,
-    "rules": "Can expose a player's true role during the night."
+    "rules": "Turn 1, 2 or 3 cards face up as instructed by the app"
   },
   {
     "id": 47,
@@ -467,7 +467,7 @@
     "wake_up_time": "night",
     "card_name": "onua_groob_alien",
     "order": 19,
-    "rules": "A specific type of alien with its own unique abilities."
+    "rules": "Wake with the other aliens, then wake again to look for Zerb. You win if Zerb is killed."
   },
   {
     "id": 48,
@@ -477,7 +477,7 @@
     "wake_up_time": "night",
     "card_name": "onua_leader",
     "order": 34,
-    "rules": "The leader of the village, with the ability to make important decisions."
+    "rules": "You know who the aliens are. If both Zerb and Groob are in the game, you can only win if neither one of them dies."
   },
   {
     "id": 49,
@@ -487,7 +487,7 @@
     "wake_up_time": "night",
     "card_name": "onua_mortician",
     "order": 71,
-    "rules": "Can determine the role of a player who has been eliminated."
+    "rules": "You win if either of your neighbors is killed."
   },
   {
     "id": 50,
@@ -497,7 +497,7 @@
     "wake_up_time": "twilight",
     "card_name": "onua_oracle",
     "order": 1,
-    "rules": "Is a wise villager who may look at one player's card or two of the center cards. After doing so, must say if that player is a hero, a villain, or an alien."
+    "rules": "Answer the app."
   },
   {
     "id": 51,
@@ -507,7 +507,7 @@
     "wake_up_time": "night",
     "card_name": "onua_psychic",
     "order": 46,
-    "rules": "Is a villager who gets to see the role of one player of his choice every night."
+    "rules": "View cards as instructed by the app."
   },
   {
     "id": 52,
@@ -517,7 +517,7 @@
     "wake_up_time": "night",
     "card_name": "onua_rascal",
     "order": 57,
-    "rules": "Is a sneaky villager who may take one action card of his choice and use it once during the game."
+    "rules": "Exchange cards between two players as instructed by the app."
   },
   {
     "id": 53,
@@ -527,7 +527,7 @@
     "wake_up_time": "night",
     "card_name": "onua_synthetic_alien",
     "order": 18,
-    "rules": "Is an alien who looks like a hero to the other players, but his team wins if all the heroes are eliminated."
+    "rules": "Wake with the other aliens. You win and everyone else loses if you are killed."
   },
   {
     "id": 54,
@@ -537,7 +537,7 @@
     "wake_up_time": "night",
     "card_name": "onua_zerb_alien",
     "order": 20,
-    "rules": "Is a dangerous alien who may eliminate another player every other night."
+    "rules": "Wake with the other aliens, then wake again to look for Groob, you win, if Groob is killed."
   },
   {
     "id": 55,
@@ -547,7 +547,7 @@
     "wake_up_time": "night",
     "card_name": "onus_annoying_lad",
     "order": 40,
-    "rules": "Is a noisy hero who wakes up and distracts a player of his choice, preventing that player from performing his action."
+    "rules": "Is a hero who taps the shoulder of one of his neighbors several times until it gets well annoying."
   },
   {
     "id": 56,
@@ -557,7 +557,7 @@
     "wake_up_time": "night",
     "card_name": "onus_detector",
     "order": 47,
-    "rules": "Is a hero who may look at one other player's card and see their team affiliation."
+    "rules": "Is a hero who may view any other player's card or two of the center cards."
   },
   {
     "id": 57,
@@ -567,7 +567,7 @@
     "wake_up_time": "night",
     "card_name": "onus_dr_peeker",
     "order": 24,
-    "rules": "Is a villain who gets to see the role of one player every night, but does not get to see their team."
+    "rules": "Wakes up with the other supervillains and then may view one other player's card."
   },
   {
     "id": 58,
@@ -577,7 +577,7 @@
     "wake_up_time": "night",
     "card_name": "onus_evilometer",
     "order": 27,
-    "rules": "Is a hero who may point to any player during the day, and if that player is a villain, they must reveal themselves."
+    "rules": "Is a hero who detects nearby supervillains by having her fist tapped if a supervillain is sitting next to her."
   },
   {
     "id": 59,
@@ -587,7 +587,7 @@
     "wake_up_time": "night",
     "card_name": "onus_flipper",
     "order": 67,
-    "rules": "Is a hero who can change his own card with another player's card once during the game."
+    "rules": "Is a hero who flips any card face up. If that card is not a hero,he flips it back over, face down."
   },
   {
     "id": 60,
@@ -707,7 +707,7 @@
     "wake_up_time": "night",
     "card_name": "onub_apprentice_tanner",
     "order": 33,
-    "rules": "If there is no tenner, you win only if you are killed."
+    "rules": "If there is no tanner, you win only if you are killed."
   },
   {
     "id": 72,

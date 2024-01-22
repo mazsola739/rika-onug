@@ -8,7 +8,7 @@ export const rules_role: Record<string, string> = {
   rules_appassassin:
     'You win, if the assassin is killed. If the assassin is not in front of any player, you are the assassin.',
   rules_appseer: 'View one center card.',
-  rules_apptanner: 'If there is no tenner, you win only if you are killed.',
+  rules_apptanner: 'If there is no tanner, you win only if you are killed.',
   rules_assassin:
     'Give a player the mark of the assassin, you win, if that player is killed.',
   rules_auraseer: 'You know, who has moved or viewed a card',
@@ -43,7 +43,7 @@ export const rules_role: Record<string, string> = {
     "Wakes up with the other supervillains and then may view one other player's card.",
   rules_drunk:
     'Exchange your card with a card from the center, but do not look at your new card.',
-  rules_emapth:
+  rules_empath:
     'Observe some of the players point at other players as instructed by the app.',
   rules_evilometer:
     'Is a hero who detects nearby supervillains by having her fist tapped if a supervillain is sitting next to her.',
@@ -51,7 +51,7 @@ export const rules_role: Record<string, string> = {
   rules_familyman:
     'Wins if everyone in his family, including himself does not get caught each night, different players are added to his family, family man can win if any other team wins.',
   rules_flipper:
-    'Is a hero who flips any card face up. If that card is not a hero,he flips it back over,face down.',
+    'Is a hero who flips any card face up. If that card is not a hero, he flips it back over, face down.',
   rules_gremlin: 'Switch marks or cards between any two players.',
   rules_groob:
     'Wake with the other aliens, then wake again to look for Zerb. You win if Zerb is killed.',
@@ -133,7 +133,7 @@ export const rules_role: Record<string, string> = {
   rules_werewolf:
     'Wake and look for the other werewolves. You win if no werewolves are killed.',
   rules_windywendy:
-    'Is a hero unless a super villain points at her,in which case,she decides to become a villain and joins the villain team.',
+    'Is a hero unless a super villain points at her, in which case, she decides to become a villain and joins the villain team.',
   rules_witch:
     "View a center card and exchange it with any other player's card.",
   rules_zerb:

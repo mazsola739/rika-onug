@@ -24,11 +24,14 @@
 #### N I G H T
 - Marks of Love
 - Sentinel
-    - No Dusk Roles Doppelgänger (Do Sentinel, Alpha Wolf, Mystic Wolf, Seer, Apprentice Seer, P.I., Robber, Witch, Troublemaker, Village Idiot, Drunk, Thing, Minion, Annoying Lad, Detector, Role Retriever, Voodoo Lou or Switcheroo now).
 - Aliens (Alien, Zerb, Groob, Body Snatcher, Synthetic Alien, their Doppelgängers)
     - Cow
         - Doppelgänger Cow
 - Groob + Zerb + Doppelgänger Groob + Doppelgänger Zerb
+- Leader
+    - Groob + Zerb + Doppelgänger Groob + Doppelgänger Zerb
+    - Doppelgänger Leader
+        - Groob + Zerb + Doppelgänger Groob + Doppelgänger Zerb
 - Body Snatcher
     - Doppelgänger Body Snatcher
 - Super Villains (Temptress, Dr. Peeker, Rapscallion, Henchman #7, their Doppelgangers)
@@ -49,8 +52,6 @@
 - Mad Scientist (flavour text)
 - Intern
     - Doppelgänger Intern
-- Leader
-    - Doppelgänger Leader
 - Masons + Doppelgänger Mason
 - Thing (that goes bump in the night)
 - Annoying Lad

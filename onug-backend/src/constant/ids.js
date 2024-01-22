@@ -37,6 +37,8 @@ exports.teamsById = {
   werewolfTeam: [7, 15, 16, 17, 21, 22, 83],
   vampireTeam: [38, 39, 40, 41],
   alienTeam: [42, 43, 47, 53, 54, 74],
+  groobTeam: [47],
+  zerbTeam:  [54],
   villainTeam: [57, 60, 65, 69],
   villagerTeam: [
     50, 30, 1, 32, 31, 34, 37, 25, 45, 48, 5, 6, 85, 9, 18, 23, 35, 80, 51, 8,

@@ -3,7 +3,7 @@ exports.oracle = {
   oracle_close_text: 'ORACLE, close your eyes.',
 }
 
-exports.random_oracle: Record<string, Record<string, string>> = {
+exports.random_oracle = {
   random_oracle_aliens: {
     oracle_alienteam_text: 'Would you like to join the Alien team?',
 
