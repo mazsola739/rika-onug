@@ -1,3 +1,4 @@
+//TODO CHECK IF ALL POSSIBLE HERE: RASCAL, ALIENS
 {
   "EVERYONE_CARD": {
     "id": ["selected_cards"],
@@ -355,4 +356,3 @@
     "type": ["SHOW_PLAYER_CARD"]
   }
 }
-//TODO CHECK IF ALL POSSIBLE HERE RASCAL
