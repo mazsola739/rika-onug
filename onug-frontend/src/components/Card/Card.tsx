@@ -16,13 +16,18 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
     wake_up_time,
     order,
   } = card
+
+  const room_id = sessionStorage.getItem('room_id')
+  const token = sessionStorage.getItem('token')
+
+  const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
   const isSelected = selectedDeckStore.selectedCards.some(
     (selectedCard) => selectedCard.id === id
   )
 
-  const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
-  const room_id = sessionStorage.getItem('room_id')
-  const token = sessionStorage.getItem('token')
+  const testId = `${display_name.replace(/ /g, '-')}--${
+    isSelected ? 'selected' : 'not-selected'
+  }`
 
   const handleCardClick = useCallback(() => {
     selectedDeckStore.toggleCardSelectionStatus(id)
@@ -63,10 +68,6 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
   ])
 
   const imageSrc = useMemo(() => `/assets/cards/${card_name}.png`, [card_name])
-
-  const testId = `${display_name.replace(/ /g, '-')}--${
-    isSelected ? 'selected' : 'not-selected'
-  }`
 
   return (
     <StyledCard

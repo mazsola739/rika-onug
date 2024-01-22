@@ -1,7 +1,6 @@
 export * from './RoomStore'
 export * from './PlayerStore'
 export * from './WsStore'
-export * from './SessionStore'
 export * from './DeckStore'
 export * from './SelectedDeckStore'
 

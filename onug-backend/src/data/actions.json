@@ -8,22 +8,22 @@
   "ORACLE": {
     "id": [50],
     "img": "/assets/cards/onua_oracle.png",
-    "type": ["CHOOSE_YES_NO", "CHOOSE_CENTER_CARD", "SWAP_OWN_CARD", "SHOW_OWN_CARD", "SHOW_CENTER_CARD", "CHOOSE_EVEN_ODD", "CHOOSE_NUMBER", "SHOW_PLAYER_CARD", "GUESS_NUMBER", "UPDATE_PLAYER"]
+    "type": ["CHOOSE_YES_NO", "CHOOSE_CENTER_CARD", "SWAP_OWN_CARD", "SHOW_OWN_CARD", "SHOW_CENTER_CARD", "CHOOSE_EVEN_ODD", "CHOOSE_NUMBER", "SHOW_PLAYER_CARD", "GUESS_NUMBER"]
   },
   "COPYCAT": {
     "id": [30],
     "img": "/assets/cards/onuv_copycat.png",
-    "type": ["CHOOSE_CENTER_CARD", "SHOW_CENTER_CARD", "UPDATE_PLAYER"]
+    "type": ["CHOOSE_CENTER_CARD", "SHOW_CENTER_CARD"]
   },
   "MIRROR_MAN": {
     "id": [64],
     "img": "/assets/cards/onus_mirror_man.png",
-    "type": ["CHOOSE_CENTER_CARD", "SHOW_CENTER_CARD", "UPDATE_PLAYER"]
+    "type": ["CHOOSE_CENTER_CARD", "SHOW_CENTER_CARD"]
   },
   "DOPPELGANGER": {
     "id": [1],
     "img": "/assets/cards/onuw_doppelganger.png",
-    "type": ["CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_ANOTHER_PLAYER_CARD", "UPDATE_PLAYER", "SENTINEL", "ALPHA_WOLF", "MYSTICWOLF", "SEER", "APPRENTICE_SEER", "PARANORMAL_INVESTIGATOR", "ROBBER", "WITCH", "TROUBLEMAKER", "VILLAGE_IDIOT", "DRUNK", "DISEASED", "CUPID", "INSTIGATOR", "THING", "MINION", "ANNOYING_LAD", "DETECTOR", "ROLE_RETRIEVER", "VOODOO_LOU", "SWITCHEROO"]
+    "type": ["CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_ANOTHER_PLAYER_CARD", "SENTINEL", "ALPHA_WOLF", "MYSTICWOLF", "SEER", "APPRENTICE_SEER", "PARANORMAL_INVESTIGATOR", "ROBBER", "WITCH", "TROUBLEMAKER", "VILLAGE_IDIOT", "DRUNK", "DISEASED", "CUPID", "INSTIGATOR", "THING", "ANNOYING_LAD", "DETECTOR", "ROLE_RETRIEVER", "VOODOO_LOU", "SWITCHEROO"]
   },
   "VAMPIRES": {
     "id": [41, 40, 39, "1"],
@@ -156,7 +156,7 @@
     "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_PLAYER_CARD"]
   },
   "MINION": {
-    "id": [7],
+    "id": [7, "1"],
     "img": "/assets/cards/onuw_minion.png",
     "type": ["SHOW_WOLF_PLAYER_THUMB"]
   },
@@ -208,7 +208,7 @@
   "PARANORMAL_INVESTIGATOR": {
     "id": [23],
     "img": "/assets/cards/onud_paranormal_investigator.png",
-    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_PLAYER_CARD", "UPDATE_PLAYER"]
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SHOW_PLAYER_CARD"]
   },
   "MARKSMAN": {
     "id": [35, "1"],
@@ -218,7 +218,7 @@
   "NOSTRADAMUS": {
     "id": [80, "1"],
     "img": "/assets/cards/onub_nostradamus.png",
-    "type": ["CHOOSE_ANY_CARD", "UPDATE_PLAYER"]
+    "type": ["CHOOSE_ANY_CARD"]
   },
   "PSYCHIC": {
     "id": [51],
@@ -233,7 +233,7 @@
   "ROBBER": {
     "id": [8],
     "img": "/assets/cards/onuw_robber.png",
-    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SWAP_OWN_CARD", "SHOW_OWN_CARD", "UPDATE_PLAYER"]
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SWAP_OWN_CARD", "SHOW_OWN_CARD"]
   },
   "WITCH": {
     "id": [27],
@@ -243,12 +243,12 @@
   "PICKPOCKET": {
     "id": [36, "1"],
     "img": "/assets/cards/onuv_pickpocket.png",
-    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_MARK", "SWAP_OWN_MARK", "SHOW_OWN_MARK", "UPDATE_PLAYER"]
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_MARK", "SWAP_OWN_MARK", "SHOW_OWN_MARK"]
   },
   "ROLE_RETRIEVER": {
     "id": [66],
     "img": "/assets/cards/onus_role_retriever.png",
-    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SWAP_OWN_CARD", "SHOW_OWN_CARD", "UPDATE_PLAYER"]
+    "type": ["MAY_CHOOSE_ANOTHER_PLAYER_CARD", "SWAP_OWN_CARD", "SHOW_OWN_CARD"]
   },
   "VOODOO_LOU": {
     "id": [70],
@@ -293,12 +293,12 @@
   "INSOMNIAC": {
     "id": [4, "1"],
     "img": "/assets/cards/onuw_insomniac.png",
-    "type": ["SHOW_OWN_CARD", "UPDATE_PLAYER"]
+    "type": ["SHOW_OWN_CARD"]
   },
   "SELF-AWARENESS_GIRL": {
     "id": [67, "1"],
     "img": "/assets/cards/onus_self_awareness_girl.png",
-    "type": ["SHOW_OWN_CARD", "UPDATE_PLAYER"]
+    "type": ["SHOW_OWN_CARD"]
   },
   "SQUIRE": {
     "id": [83, "1"],

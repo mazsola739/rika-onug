@@ -8,6 +8,7 @@ import { autorun } from 'mobx'
 export const FilterButton: React.FC<FilterButtonProps> = observer(
   ({ expansion, onClick, isSelected: propIsSelected }) => {
     const [isSelected, setIsSelected] = useState(propIsSelected)
+
     const shortName = roomStore.getExpansionShortName(expansion)
 
     const handleClick = useCallback(() => {
