@@ -21,11 +21,13 @@ const RoomButton: React.FC<StyledLobbyProps> = ({
 }
 
 export const Lobby: React.FC = observer(() => {
+  const [firstTime, setFirstTime] = useState(true)
   const navigate = useNavigate()
+
+  const token = sessionStorage.getItem('token')
+
   const { lastJsonMessage, sendJsonMessage } =
     wsStore.getWsCommunicationsBridge()
-  const [firstTime, setFirstTime] = useState(true)
-  const token = sessionStorage.getItem('token')
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {

@@ -6,6 +6,7 @@ import { votingUtils } from './Voting.utils'
 
 export const Voting: React.FC = observer(() => {
   const { renderPlayers, renderPlayerCards } = votingUtils
+
   const players = [
     {
       player_name: 'Wolverine',

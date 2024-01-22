@@ -39,18 +39,22 @@ const {
 } = gameTableUtils
 
 export const GameTable: React.FC = observer(() => {
+  const [firstTime, setFirstTime] = useState(true)
+  const navigate = useNavigate()
+
+  const token = sessionStorage.getItem('token')
+
   // TODO REMOVE FE shuffled cards completely, use data from BE
   const { centerCards, chosenWolf, chosenSuperVillain } =
     gameTableStore.distributeCards()
   const { hasSentinel, hasMarks, hasDoppelganger, hasCurator } = gameTableStore
   const selectedMarks = selectedDeckStore.selectedMarks
-  const navigate = useNavigate()
-  const token = sessionStorage.getItem('token')
-  const [firstTime, setFirstTime] = useState(true)
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
   const { setPlayer } = playerStore
   const { setPlayers } = gameTableStore
+  const players = gameTableStore.players
+  const player = playerStore.player
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -90,9 +94,6 @@ export const GameTable: React.FC = observer(() => {
       navigate(lastJsonMessage.path)
     }
   }, [lastJsonMessage, setPlayer, deckStore])
-
-  const players = gameTableStore.players
-  const player = playerStore.player
 
   return (
     <>

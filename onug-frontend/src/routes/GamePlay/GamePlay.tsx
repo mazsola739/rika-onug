@@ -16,13 +16,17 @@ import { GamePlayHeader } from './GamePlayHeader'
 import { useNavigate } from 'react-router-dom'
 
 export const GamePlay: React.FC = observer(() => {
+  const [firstTime, setFirstTime] = useState(true)
   const navigate = useNavigate()
+
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
 
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
-  const [firstTime, setFirstTime] = useState(true)
+  const buttonText = gamePlayStore.isGamePaused
+    ? buttons.pause_button_alt_label
+    : buttons.pause_button_label
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -64,10 +68,6 @@ export const GamePlay: React.FC = observer(() => {
       token,
     })
   }, [sendJsonMessage])
-
-  const buttonText = gamePlayStore.isGamePaused
-    ? buttons.pause_button_alt_label
-    : buttons.pause_button_label
 
   return (
     <>

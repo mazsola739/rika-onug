@@ -10,9 +10,10 @@ import {
 import { gamePlayStore, roomStore } from 'store'
 
 const RuleInfo: React.FC = observer(() => {
-  const { isGameStopped } = gamePlayStore
   const detailedCardInfo = roomStore.getDetailedCardInfo()
   const detailedTokenInfo = roomStore.getDetailedTokenInfo()
+
+  const { isGameStopped } = gamePlayStore
 
   const displayInfo =
     detailedCardInfo.id !== 0 ? detailedCardInfo.rules : detailedTokenInfo.rules
@@ -36,7 +37,6 @@ const RuleInfo: React.FC = observer(() => {
 export const RoomHeader: React.FC = observer(() => {
   const player_name = sessionStorage.getItem('player_name')
   const room_id = sessionStorage.getItem('room_id')
-
   const room = (room_id.charAt(0).toUpperCase() + room_id.slice(1))
     .replace('_', ' ')
     .replace('room', '')

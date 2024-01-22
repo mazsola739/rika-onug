@@ -7,7 +7,13 @@ import { gamePlayStore, selectedDeckStore, wsStore } from 'store'
 export const RoomFooter: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
+
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
+  const totalPlayers = selectedDeckStore.totalPlayers
+
+  const buttonText = totalPlayers
+    ? `${buttons.deal_text} FOR ${totalPlayers}`
+    : buttons.deal_text
 
   // TODO these clickhandlers could be merged into one clickhandler which get one more information the type
   const handleResetGame = useCallback(() => {
@@ -34,11 +40,6 @@ export const RoomFooter: React.FC = observer(() => {
       token,
     })
   }, [sendJsonMessage])
-
-  const totalPlayers = selectedDeckStore.totalPlayers
-  const buttonText = totalPlayers
-    ? `${buttons.deal_text} FOR ${totalPlayers}`
-    : buttons.deal_text
 
   return (
     <Footer>
