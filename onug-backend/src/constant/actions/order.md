@@ -3,7 +3,7 @@
 - Oracle
 - Copycat
 - Mirror Man
-- Doppelgänger (Do Sentinel, Alpha Wolf, Mystic Wolf, Seer, Apprentice Seer, P.I., Robber, Witch, Troublemaker, Village Idiot, Drunk, Diseased, Cupid, Instigator, Thing, Minion, Annoying Lad, Detector, Role Retriever, Voodoo Lou or Switcheroo now).
+- Doppelgänger (Do Sentinel, Alpha Wolf, Mystic Wolf, Seer, Apprentice Seer, P.I., Robber, Witch, Troublemaker, Village Idiot, Drunk, Diseased, Cupid, Instigator, Thing, Annoying Lad, Detector, Role Retriever, Voodoo Lou or Switcheroo now).
 
 #### D U S K
 - Vampires (Vampire, The Count, The Master, their Doppelgängers)
@@ -36,11 +36,8 @@
     - Doppelgänger Body Snatcher
 - Super Villains (Temptress, Dr. Peeker, Rapscallion, Henchman #7, their Doppelgangers)
     - Temptress
-    - Doppelgänger Temptress
     - Dr. Peeker
-    - Doppelgänger Dr. Peeker
     - Rapscallion
-    - Doppelgänger Rapscallion
     - Evilometer
     - Doppelgänger Evilometer
 - Werewolves (Werewolf, Alpha Wolf, Mystic Wolf, Dream Wolf, their Doppelgängers)
@@ -106,7 +103,7 @@
 
 #### N E V E R
 
-These roles never wake up
+These roles never 
 - Villager
 - Hunter
 - Tanner
@@ -196,7 +193,7 @@ These roles never wake up
 
 #### N E V E R
 
-These roles never wake up
+These roles never 
 - Villager
 - Hunter
 - Tanner

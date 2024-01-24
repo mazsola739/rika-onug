@@ -1,9 +1,9 @@
 import { ActionCardType, RoleActionType } from 'types'
 import * as ActionStores from '../actionStores'
-import { ripplePhaseStore } from 'store'
 import { actionStoreUtils, utils } from 'utils'
 import { alienIds, supervillainIds, wolfIds } from 'constant'
 import { makeAutoObservable } from 'mobx'
+import { ripplePhaseStore } from './RipplePhaseStore'
 
 const { addRoleActionsBasedOnCondition } = actionStoreUtils
 const { areAllCardsSelectedById, areAnyCardSelectedById, isCardSelectedById } =

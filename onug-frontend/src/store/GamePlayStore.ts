@@ -1,15 +1,15 @@
 import { makeAutoObservable } from 'mobx'
-import {
-  duskPhaseStore,
-  nightPhaseStore,
-  ripplePhaseStore,
-  selectedDeckStore,
-  twilightPhaseStore,
-} from 'store'
+import { selectedDeckStore } from 'store'
 import { ACTION_TIME, BASE_TIME, VOTING_TIME, everyone } from 'constant'
 import { RoleActionType } from 'types'
 import { utils, gamePlayStoreUtils } from 'utils'
 import { rippleNightPhaseStore } from './phaseStores/RippleNightPhaseStore'
+import {
+  ripplePhaseStore,
+  twilightPhaseStore,
+  duskPhaseStore,
+  nightPhaseStore,
+} from './phaseStores'
 
 const { addBasicAction, getRandomJoke } = gamePlayStoreUtils
 const { generateTimedAction } = utils

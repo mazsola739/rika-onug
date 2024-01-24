@@ -1,5 +1,5 @@
 import {
-  doppelgangerActionsIds,
+  doppelgangerInstantActionsIds,
   doppelganger_nightaction,
   roles,
   doppelganger,
@@ -29,7 +29,7 @@ class DoppelgangerStore {
   generateActions(): RoleActionType[] {
     const doppelgangerActions: RoleActionType[] = []
 
-    const roleKeys = doppelgangerActionsIds
+    const roleKeys = doppelgangerInstantActionsIds
       .filter((id) => this.deck.some((card) => card.id === id))
       .flatMap(
         (id) =>
@@ -62,7 +62,7 @@ class DoppelgangerStore {
         time: BASE_TIME,
         image: 'onuw_doppelganger',
       },
-      ...(areAnyCardSelectedById(this.deck, doppelgangerActionsIds)
+      ...(areAnyCardSelectedById(this.deck, doppelgangerInstantActionsIds)
         ? verboseText
         : []),
       ...(isCardSelectedById(this.deck, 7)

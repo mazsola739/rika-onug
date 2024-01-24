@@ -11,7 +11,8 @@ import {
   ACTION_TIME,
 } from 'constant'
 import { makeAutoObservable } from 'mobx'
-import { alienStore, selectedDeckStore } from 'store'
+import { selectedDeckStore } from 'store'
+import { alienStore } from 'store/actionStores'
 import { ActionCardType, RepeatroleType, RoleActionType } from 'types'
 import { actionStoreUtils, utils } from 'utils'
 
