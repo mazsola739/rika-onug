@@ -1,0 +1,326 @@
+{
+  "twilight": [
+    {
+      "role_name": "EVERYONE_CARD",
+      "order_id": 1
+    },
+    {
+      "role_name": "ORACLE",
+      "order_id": 2
+    },
+    {
+      "role_name": "COPYCAT",
+      "order_id": 3
+    },
+    {
+      "role_name": "MIRROR MAN",
+      "order_id": 4
+    },
+    {
+      "role_name": "DOPPELGÄNGER",
+      "order_id": 5
+    }
+  ],
+  "dusk": [
+    {
+      "role_name": "VAMPIRES",
+      "order_id": 6
+    },
+    {
+      "role_name": "THE_COUNT",
+      "order_id": 7
+    },
+    {
+      "role_name": "RENFIELD",
+      "order_id": 8
+    },
+    {
+      "role_name": "DISEASED",
+      "order_id": 9
+    },
+    {
+      "role_name": "CUPID",
+      "order_id": 10
+    },
+    {
+      "role_name": "INSTIGATOR",
+      "order_id": 11
+    },
+    {
+      "role_name": "PRIEST",
+      "order_id": 12
+    },
+    {
+      "role_name": "ASSASSIN",
+      "order_id": 13
+    },
+    {
+      "role_name": "APPRENTICE_ASSASSIN",
+      "order_id": 14
+    },
+    {
+      "role_name": "EVERYONE_MARK",
+      "order_id": 15
+    }
+  ],
+  "night": [
+    {
+      "role_name": "LOVERS",
+      "order_id": 16
+    },
+    {
+      "role_name": "SENTINEL",
+      "order_id": 17
+    },
+    {
+      "role_name": "ALIENS",
+      "order_id": 18
+    },
+    {
+      "role_name": "COW",
+      "order_id": 19
+    },
+    {
+      "role_name": "GROOB_ZERB",
+      "order_id": 20
+    },
+    {
+      "role_name": "SUPER_VILLAINS",
+      "order_id": 21
+    },
+    {
+      "role_name": "TEMPTRESS",
+      "order_id": 22
+    },
+    {
+      "role_name": "DR_PEEKER",
+      "order_id": 23
+    },
+    {
+      "role_name": "RAPSCALLION",
+      "order_id": 24
+    },
+    {
+      "role_name": "EVILOMETER",
+      "order_id": 25
+    },
+    {
+      "role_name": "WEREWOLVES",
+      "order_id": 26
+    },
+    {
+      "role_name": "ALPHA_WOLF",
+      "order_id": 27
+    },
+    {
+      "role_name": "MYSTIC_WOLF",
+      "order_id": 28
+    },
+    {
+      "role_name": "MINION",
+      "order_id": 29
+    },
+    {
+      "role_name": "APPRENTICE_TANNER",
+      "order_id": 30
+    },
+    {
+      "role_name": "MAD_SCIENTIST",
+      "order_id": 31
+    },
+    {
+      "role_name": "INTERN",
+      "order_id": 32
+    },
+    {
+      "role_name": "LEADER",
+      "order_id": 33
+    },
+    {
+      "role_name": "MASON",
+      "order_id": 34
+    },
+    {
+      "role_name": "THING",
+      "order_id": 35
+    },
+    {
+      "role_name": "ANNOYING_LAD",
+      "order_id": 36
+    },
+    {
+      "role_name": "SEER",
+      "order_id": 37
+    },
+    {
+      "role_name": "APPRENTICE_SEER",
+      "order_id": 38
+    },
+    {
+      "role_name": "PARANORMAL_INVESTIGATOR",
+      "order_id": 39
+    },
+    {
+      "role_name": "MARKSMAN",
+      "order_id": 40
+    },
+    {
+      "role_name": "NOSTRADAMUS",
+      "order_id": 41
+    },
+    {
+      "role_name": "PSYCHIC",
+      "order_id": 42
+    },
+    {
+      "role_name": "DETECTOR",
+      "order_id": 43
+    },
+    {
+      "role_name": "ROBBER",
+      "order_id": 44
+    },
+    {
+      "role_name": "WITCH",
+      "order_id": 45
+    },
+    {
+      "role_name": "PICKPOCKET",
+      "order_id": 46
+    },
+    {
+      "role_name": "ROLE_RETRIEVER",
+      "order_id": 47
+    },
+    {
+      "role_name": "VOODOO_LOU",
+      "order_id": 48
+    },
+    {
+      "role_name": "TROUBLEMAKER",
+      "order_id": 49
+    },
+    {
+      "role_name": "VILLAGE_IDIOT",
+      "order_id": 50
+    },
+    {
+      "role_name": "AURA_SEER",
+      "order_id": 51
+    },
+    {
+      "role_name": "GREMLIN",
+      "order_id": 52
+    },
+    {
+      "role_name": "RASCAL",
+      "order_id": 53
+    },
+    {
+      "role_name": "SWITCHEROO",
+      "order_id": 54
+    },
+    {
+      "role_name": "DRUNK",
+      "order_id": 55
+    },
+    {
+      "role_name": "INSOMNIAC",
+      "order_id": 56
+    },
+    {
+      "role_name": "SELF-AWARENESS_GIRL",
+      "order_id": 57
+    },
+    {
+      "role_name": "SQUIRE",
+      "order_id": 58
+    },
+    {
+      "role_name": "BEHOLDER",
+      "order_id": 59
+    },
+    {
+      "role_name": "REVEALER",
+      "order_id": 60
+    },
+    {
+      "role_name": "EXPOSER",
+      "order_id": 61
+    },
+    {
+      "role_name": "FLIPPER",
+      "order_id": 62
+    },
+    {
+      "role_name": "EMPATH",
+      "order_id": 63
+    },
+    {
+      "role_name": "CURATOR",
+      "order_id": 64
+    },
+    {
+      "role_name": "BLOB",
+      "order_id": 65
+    },
+    {
+      "role_name": "MORTICIAN",
+      "order_id": 66
+    },
+    {
+      "role_name": "FAMILY_MAN",
+      "order_id": 67
+    }
+  ],
+  "never": [
+    {
+      "role_name": "VILLAGER",
+      "order_id": 68
+    },
+    {
+      "role_name": "HUNTER",
+      "order_id": 69
+    },
+    {
+      "role_name": "TANNER",
+      "order_id": 70
+    },
+    {
+      "role_name": "BODYGUARD",
+      "order_id": 71
+    },
+    {
+      "role_name": "PRINCE",
+      "order_id": 72
+    },
+    {
+      "role_name": "CURSED",
+      "order_id": 73
+    },
+    {
+      "role_name": "MAD_SCIENTIST",
+      "order_id": 74
+    },
+    {
+      "role_name": "INNOCENT_BYSTANDER",
+      "order_id": 75
+    },
+    {
+      "role_name": "THE_SPONGE",
+      "order_id": 76
+    },
+    {
+      "role_name": "RICOCHET_RHINO",
+      "order_id": 77
+    },
+    {
+      "role_name": "DEFENDER-ER",
+      "order_id": 78
+    },
+    {
+      "role_name": "WINDY_WENDY",
+      "order_id": 79
+    }
+  ]
+}

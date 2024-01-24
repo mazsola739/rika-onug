@@ -1,11 +1,11 @@
 //TODO check _kickoff2_text
 
-exports.aliens = "alien_kickoff_text"
+exports.aliens = "alien_kickoff_text" //show aline cards
 exports.random_aliens = [
   "alien_view_text", //alienAnyKeys - selected - show it  - update known if own selected
   "alien_allview_text", //alienAnyKeys random selected - selected - may show - update known & actual if own selected & viewed
   "alien_stare_text", //alien cards - no update
-  "alien_left_text", //swap card from right side alien - show new alien card secretly - update aliens known & actual card 
+  "alien_left_text", //swap card from right side alien - show new alien card secretly - update aliens known & actual card
   "alien_right_text", //swap card from left side alien - show new alien card secretly - update aliens known & actual card
   "alien_show_text", //actual character cards show public - update alines known & actual card
   "alien_timer_text", //vote time halfing - no update
@@ -13,15 +13,15 @@ exports.random_aliens = [
   "alien_alienhelper_text", //alienAllKeys  random selected - show to this player alien cards - update player known & actual new team alien helper
 ]
 exports.alienAnyKeys = [
-  'identifier_any_text',
-  'identifier_anyeven_text',
-  'identifier_anyodd_text',
-  'activePlayers', //up to 3 random players example: identifier_player1_text with 'or'
+  "identifier_any_text",
+  "identifier_anyeven_text",
+  "identifier_anyodd_text",
+  "activePlayers", //up to 3 random players example: identifier_player1_text with 'or'
 ]
 exports.alienAllKeys = [
-  'identifier_everyone_text',
-  'identifier_oddplayers_text',
-  'identifier_evenplayers_text',
+  "identifier_everyone_text",
+  "identifier_oddplayers_text",
+  "identifier_evenplayers_text",
 ]
 
 exports.alphawolf = "alphawolf_kickoff_text" //wolf center card swap to any non werewolf card - update wolf center actual card & selected player actual card
@@ -41,10 +41,9 @@ exports.auraseer_mark = "auraseer_mark_kickoff_text" //doppelganger! show select
 
 exports.beholder_seer = "beholder_seer_kickoff_text" //doppelganger! show seer thumb, may choose seer card, show selected card - no update expect if it was own known
 exports.beholder_apprenticeseer = "beholder_apprenticeseer_kickoff_text" //doppelganger! show apprentice seer thumb, may choose apprentice seer card, show selected card - no update expect if it was own known
-exports.beholder_seer_apprenticeseer =
-  "beholder_seer_apprenticeseer_kickoff_text" //doppelganger! show seer and apprentice seer thumb, may choose apprentice seer and seer cards, show selected cards - no update expect if it was own known
+exports.beholder_seer_apprenticeseer = "beholder_seer_apprenticeseer_kickoff_text" //doppelganger! show seer and apprentice seer thumb, may choose apprentice seer and seer cards, show selected cards - no update expect if it was own known
 
-exports.random_blob_kickoff_text = [
+exports.random_blob_kickoff_text = [ //randomize text, show selected card in focus? - update selected players actual team
   "blob_1pleft_text",
   "blob_1pright_text",
   "blob_eachside_text",
@@ -55,21 +54,21 @@ exports.random_blob_kickoff_text = [
   "blob_4pleft_text",
   "blob_4pright_text",
   "blob_2eachside_text",
-] //randomize text, show selected card in focus? - update selected players actual team
+] 
 exports.blob = ["blob_is_end_text", "blob_are_end_text"]
 
 exports.bodysnatcher = ["bodysnatcher_kickoff_text", "bodysnatcher_end_text"] //doppelganger!
 exports.random_bodysnatcher = [
-  "bodysnatcher_steal_text", //bodysnatcherKeys -swap and show selected,  - update known & actual card team
+  "bodysnatcher_steal_text", //bodysnatcherKeys - select card, swap and show selected,  - update known & actual card team
   "bodysnatcher_center_text", //select center card swap and show,  - update known & actual card team
 ]
-exports.bodysnatcherKeys  = [
-  'identifier_any_text',
-  'identifier_anyeven_text',
-  'identifier_anyodd_text',
-  'identifier_leftneighbor_text',
-  'identifier_rightneighbor_text',
-  'identifier_bothneighbors_text',
+exports.bodysnatcherKeys = [
+  "identifier_any_text",
+  "identifier_anyeven_text",
+  "identifier_anyodd_text",
+  "identifier_leftneighbor_text",
+  "identifier_rightneighbor_text",
+  "identifier_bothneighbors_text",
 ]
 
 exports.copycat = "copycat_kickoff_text" //select center card - update player known & actual role and team
@@ -106,8 +105,8 @@ exports.doppelganger_bodysnatcher = "doppelganger_bodysnatcher_kickoff_text" //i
 exports.doppelganger_evilometer = "doppelganger_evilometer_kickoff_text" //id 58 egyszerre
 exports.doppelganger_minion = "doppelganger_minion_kickoff_text" //id: 7 egyszerre
 exports.doppelganger_apprenticetanner = "doppelganger_apprenticetanner_kickoff_text" //id: 71 egyszerre
-exports.doppelganger_intern_madscientist ="doppelganger_intern_madscientist_kickoff_text" //id 62 egyszerre
-exports.doppelganger_intern ="doppelganger_intern_kickoff_text" //id 62 & 63 egyszerre
+exports.doppelganger_intern_madscientist = "doppelganger_intern_madscientist_kickoff_text" //id 62 egyszerre
+exports.doppelganger_intern = "doppelganger_intern_kickoff_text" //id 62 & 63 egyszerre
 exports.doppelganger_marksman = "doppelganger_marksman_kickoff_text" //id: 35 egyszerre
 exports.doppelganger_psychic = "doppelganger_psychic_kickoff_text" //id: 51 után
 exports.doppelganger_pickpocket = "doppelganger_pickpocket_kickoff_text" //id: 36 után
@@ -130,16 +129,16 @@ exports.doppelganger_curator = "doppelganger_curator_kickoff_text" //id: 20 utá
 exports.doppelganger_mortician = "doppelganger_mortician_kickoff_text" //id: 49 után
 exports.doppelganger_familyman = "doppelganger_familyman_kickoff_text" //id 78 egyszerre
 
-exports.drpeeker = "drpeeker_kickoff_text" //egyszerre többi gonosz! may view any other player - send message about the actions to super villains
+exports.drpeeker = "drpeeker_kickoff_text" //egyszerre többi gonosszal! may view any other player - send message about the actions to super villains
 
-exports.drunk = "drunk_kickoff_text" //swap card any other player - update actual cards
+exports.drunk = "drunk_kickoff_text" //swap your card with any other player - update actual cards
 
-exports.empath = "empath_kickoff_text"  //doppelganger! - show vote result - no update
+exports.empath = "empath_kickoff_text" //doppelganger! - show vote result - no update
 exports.empathAllKeys = [
-  'identifier_everyone_text',
-  'identifier_oddplayers_text',
-  'identifier_evenplayers_text',
-  'activePlayers', //up to 3 random players example: identifier_player1_text with 'and'
+  "identifier_everyone_text",
+  "identifier_oddplayers_text",
+  "identifier_evenplayers_text",
+  "activePlayers", //up to 3 random players example: identifier_player1_text with 'and'
 ]
 exports.random_empath = [
   "empath_action1_text",
@@ -163,19 +162,19 @@ exports.everyone = [
   "everyone_card_text", //show players card - update known informations
   "everyone_vote_text",
   "everyone_mark_text", //show players mark - update known informations
-  'everyone_artifact_text' //show to the player(s) their artifact(s)
+  "everyone_artifact_text", //show to the player(s) their artifact(s)
 ]
 
 exports.evilometer = "evilometer_kickoff_text" //doppelganger! show her evilometer card and send message to her - no update
 
-exports.exposer = "exposer_kickoff_text" //doppelganger! select center cards, dont hide (only from this moment to the next players when their turn comes) - no update expect if it was own known 
+exports.exposer = "exposer_kickoff_text" //doppelganger! select center cards, dont hide (only from this moment to the next players when their turn comes) - no update expect if it was own known
 exports.random_exposer = [
   "exposer_flip1_text",
   "exposer_flip2_text",
   "exposer_flip3_text",
 ]
 
-exports.familyman_kickoff = [  //doppelganger! random selected players, show focus, update players actual team
+exports.familyman_kickoff = [ //doppelganger! random selected players, show focus, update players actual team
   "familyman_1pleft_text",
   "familyman_1pright_text",
   "familyman_eachside_text",
@@ -202,10 +201,10 @@ exports.instigator = "instigator_kickoff_text" //choose any player mark swap wit
 exports.intern = "intern_kickoff_alone_text" //doppelganger! - no update
 exports.intern_madscientist = "intern_kickoff_text" //doppelganger! - no update
 
-exports.leader = "leader_kickoff_text" //doppelganger! show aline cards - no update  //TODO simplify text?
+exports.leader = "leader_kickoff_text" //doppelganger! show aline cards - no update
 exports.leader_zerbgroob = "leader_zerbgroob_text" //doppelganger! show zerb and groob cards - no update
 
-exports.lovers = "lovers_kickoff_text"  //show lovers - no update
+exports.lovers = "lovers_kickoff_text" //show lovers - no update
 
 exports.madscientist = ["madscientist_kickoff_text", "madscientist_close_text"] //no update
 exports.random_madscientist_intro = [
@@ -272,40 +271,47 @@ exports.marksman = "marksman_kickoff_text" //doppelganger!
 
 exports.masons = "masons_kickoff_text" //look for other masons - no update
 
-exports.minion = "minion_kickoff_text" //doppelganger! show wolf thumbs no update
+exports.minion = "minion_kickoff_text" //doppelganger! show wolf cards - no update
 
 exports.mirrorman = "mirrorman_kickoff_text" //select center card - update player known & actual role and team
 
-exports.mortician = "mortician_kickoff_text"  //doppelganger! show 1 or 2 neighbor cards - no update
+exports.mortician = "mortician_kickoff_text" //doppelganger! show 1 or 2 neighbor cards - no update
 exports.random_mortician = ["mortician_1card_text", "mortician_2cards_text"]
 
 exports.mysticwolf = "mysticwolf_kickoff_text" //select another player, show selected card - no update
 
-exports.nostradamus = [
+exports.nostradamus = [ //start look up to 3 cards, if card team non-villager or non-hero stop view, if 3rd still villager or hero, tell to everyone new team
   "nostradamus_kickoff_text",
-  "nostradamus_team_kickoff_text",
+  "nostradamus_teamstart_text",
   "nostradamus_team_alien_text",
   "nostradamus_team_werewolf_text",
   "nostradamus_team_vampire_text",
+  "nostradamus_team_villain_text",
+  "nostradamus_team_villager_text",
+  "nostradamus_team_hero_text",
   "nostradamus_team_assassin_text",
+  "nostradamus_team_apprenticeassassin_text",
   "nostradamus_team_tanner_text",
   "nostradamus_team_synthetic_text",
   "nostradamus_team_blob_text",
+  "nostradamus_team_family_text",
   "nostradamus_team_mortician_text",
-  "nostradamus_team_apprenticeassassin_text",
-  "nostradamus_team_villager_text",
+  "nostradamus_team_mad_text",
   "nostradamus_team_doppelganger_text",
 ]
 
 exports.oracle = "oracle_kickoff_text"
 exports.random_oracle = [
-  "random_oracle_aliens",
-  "random_oracle_werewolf",
-  "random_oracle_vampire",
-  "random_oracle_alienexchange",
-  "random_oracle_exchange",
-  "random_oracle_center",
-  "random_oracle_ripple",
+  "random_oracle_aliens", //yes no question - update if alien team
+  "random_oracle_werewolf", //yes no question - update if werewolf team
+  "random_oracle_vampire", //yes no question - update if vampire team
+  "random_oracle_alienexchange", //yes no, if yes: make sure aliens get card exchange action! (swap now?), if no make sure they not gets exchange action - no update
+  "random_oracle_exchange", //yes no, if yes select center card and swap, - update known and actual card
+  "random_oracle_center", //YES NO, if yes select up to 3 cards from center, show - no update
+  "random_oracle_ripple", //yes no, make sure ripple or not from answer - no update
+  "random_oracle_evenodd", //tell everyone if oracle even or odd number
+  "random_oracle_playernum", //choose player number, and show the selected player
+  "random_oracle_number" //guess number
 ]
 exports.random_oracle_aliens = [
   "oracle_alienteam_text",
@@ -368,17 +374,17 @@ exports.random_oracle_number = [
   "oracle_guessnumber_failure_text",
 ]
 
-exports.paranormalinvestigator = "paranormalinvestigator_kickoff_text"
+exports.paranormalinvestigator = "paranormalinvestigator_kickoff_text" //may view up to 2 another players card, if non-villager or non-hero stop - update known card role, actual card role
 
-exports.pickpocket = "pickpocket_kickoff_text" //doppelganger!
+exports.pickpocket = "pickpocket_kickoff_text" //doppelganger! may select another player, swap own mark with selected, show new mark - update known and actual player info
 
 exports.priest = "priest_kickoff_text" //doppelganger! swap hes mark to mark of clarity, may choose another player to swap mark of clarity - update actual player information and own known
 
 exports.psychic = "psychic_kickoff_text" //doppelganger! select 1 or 2 cards even or odd players - no update expect if it was own known
 exports.random_psychic = ["psychic_view1_text", "psychic_view2_text"]
-exports.psychicKeys = ['identifier_anyeven_text', 'identifier_anyodd_text']
+exports.psychicKeys = ["identifier_anyeven_text", "identifier_anyodd_text"]
 
-exports.rapscallion = "rapscallion_kickoff_text" //choose center card, show selected card - no update expect if it was own known
+exports.rapscallion = "rapscallion_kickoff_text" //egyszerre többi gonosszal! choose center card, show selected card - no update expect if it was own known
 
 exports.rascal = [ //doppelganger!
   "rascal_kickoff_text",
@@ -387,23 +393,43 @@ exports.rascal = [ //doppelganger!
   "rascal_robberend_text",
 ]
 exports.random_rascal = [
-  "rascal_idiot_text",
-  "rascal_troublemaker_text",
-  "rascal_witch_text",
-  "rascal_drunk_text",
-  "rascal_robber_text",
+  "rascal_idiot_text", //may village idiot action
+  "rascal_troublemaker_text", //rascalAnyTwoKeys may pick 2 players suggested by game - update selected players actual cards
+  "rascal_witch_text", //rascalAnyOneKeys may view card suggested position - update expect if own know
+  "rascal_drunk_text", //rascalAnyOneKeys must change card - update selected and own actual cards
+  "rascal_robber_text", //rascalAnyOneKeys may swap card with suggested players, show new card - update own known and actual, and selected player actual
+]
+exports.rascalAnyOneKeys = [
+  'identifier_higher_text',
+  'identifier_lower_text',
+  'identifier_any_text',
+  'identifier_anyeven_text',
+  'identifier_anyodd_text',
+  'identifier_oneneighbor_text',
+  'identifier_center_text',
+  'identifier_leftneighbor_text',
+  'identifier_rightneighbor_text',
+]
+exports.rascalAnyTwoKeys = [
+  'identifier_any2_text',
+  'identifier_any2even_text',
+  'identifier_any2odd_text',
+  'identifier_any2higher_text',
+  'identifier_any2lower_text',
+  'identifier_2leftneighbors_text',
+  'identifier_2rightneighbors_text',
 ]
 
-exports.renfield = "renfield_kickoff_text" //doppelganger! show vampires, swap own mark with mark of bat - update known and actual player info
+exports.renfield = "renfield_kickoff_text" //doppelganger! show vampires, show mark of vampire, swap own mark with mark of bat - update known and actual player info
 
 exports.revealer = "revealer_kickoff_text" //doppelganger! select any other player card, flip, flip it back if its non-villager (from this moment dont hide from players whos doin thier action) - update board card
 
 exports.ripple = "ripple_intro_text"
 exports.ripple_random = [
-  "random_ripple_1minute",
-  "random_ripple_repeat",
-  "random_ripple_repeat1p",
-  "random_ripple_insomniac",
+  "random_ripple_1minute", //vote time only 1 minute
+  "random_ripple_repeat", //repeat the night with 1 person see everything
+  "random_ripple_repeat1p", //repeat the night action for 1 player
+  "random_ripple_insomniac", //selected players 
   "random_ripple_nospeak",
   "random_ripple_faceaway",
   "random_ripple_troublemaker",
@@ -453,38 +479,61 @@ exports.random_ripple_drunk = ["ripple_drunk_text", "ripple_drunk_end_text"]
 exports.random_ripple_voteapp = "ripple_app_text"
 exports.random_ripple_repeatrole = "ripple_repeatrole_text"
 exports.random_ripple_iamalien = "ripple_iamalien_text"
+exports.rippleAnyKeys = [
+  'identifier_any_text',
+  'identifier_anyeven_text',
+  'identifier_anyodd_text',
+  'activePlayers',
+]
+exports.rippleAllKeys = [
+  'identifier_everyone_text',
+  'identifier_oddplayers_text',
+  'identifier_evenplayers_text',
+  'activePlayers',
+]
+exports.rippleNeighborKeys = [
+  'identifier_leftneighbor_text',
+  'identifier_rightneighbor_text',
+  'identifier_oneneighbor_text',
+  'identifier_yourself_text',
+]
+exports.rippleCenterAnyKeys = [
+  'identifier_any_text',
+  'identifier_anyeven_text',
+  'identifier_anyodd_text',
+  'identifier_center_text',
+]
 
-exports.robber = "robber_kickoff_text"
+exports.robber = "robber_kickoff_text" //may select another player, swap card, view own card - update own actual and known card, selected actual card
 
-exports.roleretriever = "roleretriever_kickoff_text"
+exports.roleretriever = "roleretriever_kickoff_text" //may select another player, swap card, view own card - update own actual and known card, selected actual card
 
-exports.seer = "seer_kickoff_text"
+exports.seer = "seer_kickoff_text" //may select another player card or 2 center card, show selected card(s) - no update expect if own known
 
-exports.selfawarenessgirl = "selfawarenessgirl_kickoff_text" //doppelganger!
+exports.selfawarenessgirl = "selfawarenessgirl_kickoff_text" //doppelganger! show own card - update known and actual card if need
 
 exports.sentinel = "sentinel_kickoff_text" //may place shield on any other player - from this point check known card shield if player wakes up, and disable this player's card from any view or move action
 
-exports.squire = "squire_kickoff_text" //doppelganger!
+exports.squire = "squire_kickoff_text" //doppelganger! show werewolves cards, may view the selected wolf cards - no update, expect of own known
 
-exports.supervillains = "supervillains_kickoff_text"
+exports.supervillains = "supervillains_kickoff_text"  //show known supervillains cards - no update
 
-exports.switcheroo = "switcheroo_kickoff_text"
+exports.switcheroo = "switcheroo_kickoff_text" //may select 2 another players - update selected actual cards
 
-exports.temptress = "temptress_kickoff_text"
+exports.temptress = "temptress_kickoff_text" //egyszerre többi gonosszal! select villain center card, select any non villain card , swap. - upade selected actual cards
 
-exports.thecount = "thecount_kickoff_text" //doppelganger!
+exports.thecount = "thecount_kickoff_text" //doppelganger! select any non-vampire player place mark of fear - update selected player actual info (make sure if its at a player he cant do action from mark-check point)
 
-exports.thing = "thing_kickoff_text"
+exports.thing = "thing_kickoff_text" //left or right neigbor player sending message to selected player - no update
 
-exports.troublemaker = "troublemaker_kickoff_text"
+exports.troublemaker = "troublemaker_kickoff_text" //may select another 2 player, swap cards, - update selected actual cards
 
-exports.vampires = "vampires_kickoff_text" 
+exports.vampires = "vampires_kickoff_text" //show vampire cards, vote for non vampire player who gets mark of vampire - update selected player actual infos
 
 exports.villageidiot = "villageidiot_kickoff_text" //choose direction to move everyone's card - update players actual cards
 
 exports.voodoolou = "voodoolou_kickoff_text" //may choose any center card, swap with any player card - update selected card
 
-exports.werewolf = "werewolf_kickoff_text" //may choose any center card, swap with any player card - update selected card
 exports.werewolves = "werewolves_kickoff_text" //show player wolf cards, may choose any center card, swap with any player card - update selected card
 exports.werewolves_dreamwolf = "werewolves_dreamwolf_kickoff_text" //show player wolf cards, dreamwolf thumb, may choose any center card, swap with any player card - update selected card
 
