@@ -6,16 +6,8 @@ import { useCallback, useMemo } from 'react'
 import { UPDATE_ROOM } from 'constant'
 
 export const Card: React.FC<CardProps> = observer(({ card }) => {
-  const {
-    id,
-    card_name,
-    display_name,
-    rules,
-    expansion,
-    team,
-    wake_up_time,
-    order,
-  } = card
+  const { id, card_name, display_name, rules, expansion, team, wake_up_time } =
+    card
 
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
@@ -39,7 +31,6 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
       expansion,
       team,
       wake_up_time,
-      order,
     })
 
     selectedDeckStore.updatePlayDeckWithSelectedCards(
@@ -62,7 +53,6 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
     expansion,
     team,
     wake_up_time,
-    order,
     room_id,
     sendJsonMessage,
   ])

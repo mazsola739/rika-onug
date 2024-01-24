@@ -5,7 +5,6 @@ export type CardType = {
   team: string
   wake_up_time: string
   card_name: string
-  order: number
   rules: string
 }
 

@@ -67,7 +67,6 @@ export const emptyCard: CardType = {
   expansion: '',
   team: '',
   wake_up_time: '',
-  order: 0,
 }
 
 export const emptyToken: TokenType = {

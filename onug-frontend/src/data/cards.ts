@@ -9,7 +9,6 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.twilight,
     card_name: 'onuw_doppelganger',
-    order: 4,
     rules: rules_role.rules_doppelganger,
   },
   {
@@ -19,7 +18,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onuw_drunk',
-    order: 59,
+
     rules: rules_role.rules_drunk,
   },
   {
@@ -29,7 +28,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.day,
     card_name: 'onuw_hunter',
-    order: 75,
+
     rules: rules_role.rules_hunter,
   },
   {
@@ -39,7 +38,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onuw_insomniac',
-    order: 60,
+
     rules: rules_role.rules_insomniac,
   },
   {
@@ -49,7 +48,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onuw_mason',
-    order: 37,
+
     rules: rules_role.rules_mason,
   },
   {
@@ -59,7 +58,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onuw_mason',
-    order: 38,
+
     rules: rules_role.rules_mason,
   },
   {
@@ -69,7 +68,7 @@ export const cards: CardType[] = [
     team: team.werewolf,
     wake_up_time: wake.night,
     card_name: 'onuw_minion',
-    order: 32,
+
     rules: rules_role.rules_minion,
   },
   {
@@ -79,7 +78,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onuw_robber',
-    order: 48,
+
     rules: rules_role.rules_robber,
   },
   {
@@ -89,7 +88,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onuw_seer',
-    order: 41,
+
     rules: rules_role.rules_seer,
   },
   {
@@ -99,7 +98,7 @@ export const cards: CardType[] = [
     team: team.own,
     wake_up_time: wake.day,
     card_name: 'onuw_tanner',
-    order: 76,
+
     rules: rules_role.rules_tanner,
   },
   {
@@ -109,7 +108,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onuw_troublemaker',
-    order: 53,
+
     rules: rules_role.rules_troublemaker,
   },
   {
@@ -119,7 +118,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.day,
     card_name: 'onuw_villager',
-    order: 72,
+
     rules: rules_role.rules_villager,
   },
   {
@@ -129,7 +128,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.day,
     card_name: 'onuw_villager',
-    order: 73,
+
     rules: rules_role.rules_villager,
   },
   {
@@ -139,7 +138,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.day,
     card_name: 'onuw_villager',
-    order: 74,
+
     rules: rules_role.rules_villager,
   },
   {
@@ -149,7 +148,7 @@ export const cards: CardType[] = [
     team: team.werewolf,
     wake_up_time: wake.night,
     card_name: 'onuw_werewolf',
-    order: 28,
+
     rules: rules_role.rules_werewolf,
   },
   {
@@ -159,7 +158,7 @@ export const cards: CardType[] = [
     team: team.werewolf,
     wake_up_time: wake.night,
     card_name: 'onuw_werewolf',
-    order: 29,
+
     rules: rules_role.rules_werewolf,
   },
   {
@@ -169,7 +168,7 @@ export const cards: CardType[] = [
     team: team.werewolf,
     wake_up_time: wake.night,
     card_name: 'onud_alpha_wolf',
-    order: 30,
+
     rules: rules_role.rules_alphawolf,
   },
   {
@@ -179,7 +178,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onud_apprentice_seer',
-    order: 42,
+
     rules: rules_role.rules_appseer,
   },
   {
@@ -189,7 +188,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.day,
     card_name: 'onud_bodyguard',
-    order: 78,
+
     rules: rules_role.rules_bodyguard,
   },
   {
@@ -199,7 +198,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onud_curator',
-    order: 69,
+
     rules: rules_role.rules_curator,
   },
   {
@@ -209,7 +208,7 @@ export const cards: CardType[] = [
     team: team.werewolf,
     wake_up_time: wake.day,
     card_name: 'onud_dream_wolf',
-    order: 77,
+
     rules: rules_role.rules_dreamwolf,
   },
   {
@@ -219,7 +218,7 @@ export const cards: CardType[] = [
     team: team.werewolf,
     wake_up_time: wake.night,
     card_name: 'onud_mystic_wolf',
-    order: 31,
+
     rules: rules_role.rules_mysticwolf,
   },
   {
@@ -229,7 +228,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onud_paranormal_investigator',
-    order: 43,
+
     rules: rules_role.rules_pi,
   },
   {
@@ -239,7 +238,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onud_revealer',
-    order: 65,
+
     rules: rules_role.rules_revealer,
   },
   {
@@ -249,7 +248,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onud_sentinel',
-    order: 15,
+
     rules: rules_role.rules_sentinel,
   },
   {
@@ -259,7 +258,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onud_village_idiot',
-    order: 54,
+
     rules: rules_role.rules_vidiot,
   },
   {
@@ -269,7 +268,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onud_witch',
-    order: 49,
+
     rules: rules_role.rules_witch,
   },
   {
@@ -279,7 +278,7 @@ export const cards: CardType[] = [
     team: team.own,
     wake_up_time: wake.dusk,
     card_name: 'onuv_apprentice_assassin',
-    order: 14,
+
     rules: rules_role.rules_appassassin,
   },
   {
@@ -289,7 +288,7 @@ export const cards: CardType[] = [
     team: team.own,
     wake_up_time: wake.dusk,
     card_name: 'onuv_assassin',
-    order: 13,
+
     rules: rules_role.rules_assassin,
   },
   {
@@ -299,7 +298,6 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.twilight,
     card_name: 'onuv_copycat',
-    order: 2,
     rules: rules_role.rules_copycat,
   },
   {
@@ -309,7 +307,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.dusk,
     card_name: 'onuv_cupid',
-    order: 10,
+
     rules: rules_role.rules_cupid,
   },
   {
@@ -319,7 +317,6 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.dusk,
     card_name: 'onuv_diseased',
-    order: 9,
     rules: rules_role.rules_diseased,
   },
   {
@@ -329,7 +326,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onuv_gremlin',
-    order: 56,
+
     rules: rules_role.rules_gremlin,
   },
   {
@@ -339,7 +336,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.dusk,
     card_name: 'onuv_instigator',
-    order: 11,
+
     rules: rules_role.rules_instigator,
   },
   {
@@ -349,7 +346,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onuv_marksman',
-    order: 44,
+
     rules: rules_role.rules_marksman,
   },
   {
@@ -359,7 +356,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onuv_pickpocket',
-    order: 50,
+
     rules: rules_role.rules_pickpocketing,
   },
   {
@@ -369,7 +366,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.dusk,
     card_name: 'onuv_priest',
-    order: 12,
+
     rules: rules_role.rules_priest,
   },
   {
@@ -379,7 +376,6 @@ export const cards: CardType[] = [
     team: team.vampire,
     wake_up_time: wake.dusk,
     card_name: 'onuv_renfield',
-    order: 8,
     rules: rules_role.rules_renfield,
   },
   {
@@ -389,7 +385,6 @@ export const cards: CardType[] = [
     team: team.vampire,
     wake_up_time: wake.dusk,
     card_name: 'onuv_the_count',
-    order: 7,
     rules: rules_role.rules_count,
   },
   {
@@ -399,7 +394,6 @@ export const cards: CardType[] = [
     team: team.vampire,
     wake_up_time: wake.dusk,
     card_name: 'onuv_the_master',
-    order: 6,
     rules: rules_role.rules_master,
   },
   {
@@ -409,7 +403,6 @@ export const cards: CardType[] = [
     team: team.vampire,
     wake_up_time: wake.dusk,
     card_name: 'onuv_vampire',
-    order: 5,
     rules: rules_role.rules_vampire,
   },
   {
@@ -419,7 +412,7 @@ export const cards: CardType[] = [
     team: team.alien,
     wake_up_time: wake.night,
     card_name: 'onua_alien',
-    order: 16,
+
     rules: rules_role.rules_alien,
   },
   {
@@ -429,7 +422,7 @@ export const cards: CardType[] = [
     team: team.alien,
     wake_up_time: wake.night,
     card_name: 'onua_alien',
-    order: 17,
+
     rules: rules_role.rules_alien,
   },
   {
@@ -439,7 +432,7 @@ export const cards: CardType[] = [
     team: team.own,
     wake_up_time: wake.night,
     card_name: 'onua_blob',
-    order: 70,
+
     rules: rules_role.rules_blob,
   },
   {
@@ -449,7 +442,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onua_cow',
-    order: 22,
+
     rules: rules_role.rules_cow,
   },
   {
@@ -459,7 +452,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onua_exposer',
-    order: 66,
+
     rules: rules_role.rules_exposer,
   },
   {
@@ -469,7 +462,7 @@ export const cards: CardType[] = [
     team: team.alien,
     wake_up_time: wake.night,
     card_name: 'onua_groob_alien',
-    order: 19,
+
     rules: rules_role.rules_groob,
   },
   {
@@ -479,7 +472,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onua_leader',
-    order: 34,
+
     rules: rules_role.rules_leader,
   },
   {
@@ -489,7 +482,7 @@ export const cards: CardType[] = [
     team: team.own,
     wake_up_time: wake.night,
     card_name: 'onua_mortician',
-    order: 71,
+
     rules: rules_role.rules_mortician,
   },
   {
@@ -499,7 +492,6 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.twilight,
     card_name: 'onua_oracle',
-    order: 1,
     rules: rules_role.rules_oracle,
   },
   {
@@ -509,7 +501,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onua_psychic',
-    order: 46,
+
     rules: rules_role.rules_psychic,
   },
   {
@@ -519,7 +511,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onua_rascal',
-    order: 57,
+
     rules: rules_role.rules_rascal,
   },
   {
@@ -529,7 +521,7 @@ export const cards: CardType[] = [
     team: team.own,
     wake_up_time: wake.night,
     card_name: 'onua_synthetic_alien',
-    order: 18,
+
     rules: rules_role.rules_synthetic,
   },
   {
@@ -539,7 +531,7 @@ export const cards: CardType[] = [
     team: team.alien,
     wake_up_time: wake.night,
     card_name: 'onua_zerb_alien',
-    order: 20,
+
     rules: rules_role.rules_zerb,
   },
   {
@@ -549,7 +541,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.night,
     card_name: 'onus_annoying_lad',
-    order: 40,
+
     rules: rules_role.rules_annoylad,
   },
   {
@@ -559,7 +551,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.night,
     card_name: 'onus_detector',
-    order: 47,
+
     rules: rules_role.rules_detector,
   },
   {
@@ -569,7 +561,7 @@ export const cards: CardType[] = [
     team: team.villain,
     wake_up_time: wake.night,
     card_name: 'onus_dr_peeker',
-    order: 24,
+
     rules: rules_role.rules_drpeeker,
   },
   {
@@ -579,7 +571,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.night,
     card_name: 'onus_evilometer',
-    order: 27,
+
     rules: rules_role.rules_evilometer,
   },
   {
@@ -589,7 +581,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.night,
     card_name: 'onus_flipper',
-    order: 67,
+
     rules: rules_role.rules_flipper,
   },
   {
@@ -599,7 +591,7 @@ export const cards: CardType[] = [
     team: team.villain,
     wake_up_time: wake.night,
     card_name: 'onus_henchman_7',
-    order: 26,
+
     rules: rules_role.rules_henchman,
   },
   {
@@ -609,7 +601,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.day,
     card_name: 'onus_innocent_bystander',
-    order: 85,
+
     rules: rules_role.rules_innocentbystander,
   },
   {
@@ -619,7 +611,7 @@ export const cards: CardType[] = [
     team: team.own,
     wake_up_time: wake.night,
     card_name: 'onus_intern',
-    order: 36,
+
     rules: rules_role.rules_intern,
   },
   {
@@ -629,7 +621,7 @@ export const cards: CardType[] = [
     team: team.own,
     wake_up_time: wake.day,
     card_name: 'onus_mad_scientist',
-    order: 35,
+
     rules: rules_role.rules_madscientist,
   },
   {
@@ -639,7 +631,6 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.twilight,
     card_name: 'onus_mirror_man',
-    order: 3,
     rules: rules_role.rules_mirrorman,
   },
   {
@@ -649,7 +640,7 @@ export const cards: CardType[] = [
     team: team.villain,
     wake_up_time: wake.night,
     card_name: 'onus_rapscallion',
-    order: 25,
+
     rules: rules_role.rules_rapscallion,
   },
   {
@@ -659,7 +650,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.night,
     card_name: 'onus_role_retriever',
-    order: 51,
+
     rules: rules_role.rules_roleretriever,
   },
   {
@@ -669,7 +660,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.night,
     card_name: 'onus_self_awareness_girl',
-    order: 61,
+
     rules: rules_role.rules_selfag,
   },
   {
@@ -679,7 +670,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.night,
     card_name: 'onus_switcheroo',
-    order: 58,
+
     rules: rules_role.rules_switcheroo,
   },
   {
@@ -689,7 +680,7 @@ export const cards: CardType[] = [
     team: team.villain,
     wake_up_time: wake.night,
     card_name: 'onus_temptress',
-    order: 23,
+
     rules: rules_role.rules_temptress,
   },
   {
@@ -699,7 +690,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.night,
     card_name: 'onus_voodoo_lou',
-    order: 52,
+
     rules: rules_role.rules_voodoolou,
   },
   {
@@ -709,7 +700,7 @@ export const cards: CardType[] = [
     team: team.own,
     wake_up_time: wake.night,
     card_name: 'onub_apprentice_tanner',
-    order: 33,
+
     rules: rules_role.rules_apptanner,
   },
   {
@@ -719,7 +710,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onub_aura_seer',
-    order: 55,
+
     rules: rules_role.rules_auraseer,
   },
   {
@@ -729,7 +720,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onub_beholder',
-    order: 64,
+
     rules: rules_role.rules_beholder,
   },
   {
@@ -739,7 +730,7 @@ export const cards: CardType[] = [
     team: team.alien,
     wake_up_time: wake.night,
     card_name: 'onub_body_snatcher',
-    order: 21,
+
     rules: rules_role.rules_bodysnatcher,
   },
   {
@@ -749,7 +740,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.day,
     card_name: 'onub_cursed',
-    order: 80,
+
     rules: rules_role.rules_cursed,
   },
   {
@@ -759,7 +750,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.day,
     card_name: 'onub_defender_er',
-    order: 83,
+
     rules: rules_role.rules_defenderer,
   },
   {
@@ -769,7 +760,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onub_empath',
-    order: 68,
+
     rules: rules_role.rules_emapth,
   },
   {
@@ -779,7 +770,7 @@ export const cards: CardType[] = [
     team: team.own,
     wake_up_time: wake.night,
     card_name: 'onub_family_man',
-    order: 63,
+
     rules: rules_role.rules_familyman,
   },
   {
@@ -789,7 +780,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.day,
     card_name: 'onub_innocent_bystander',
-    order: 86,
+
     rules: rules_role.rules_innocentbystander,
   },
   {
@@ -799,7 +790,7 @@ export const cards: CardType[] = [
     team: team.own,
     wake_up_time: wake.night,
     card_name: 'onub_nostradamus',
-    order: 45,
+
     rules: rules_role.rules_nostradamus,
   },
   {
@@ -809,7 +800,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.day,
     card_name: 'onub_prince',
-    order: 79,
+
     rules: rules_role.rules_prince,
   },
   {
@@ -819,7 +810,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.day,
     card_name: 'onub_ricochet_rhino',
-    order: 82,
+
     rules: rules_role.rules_rhino,
   },
   {
@@ -829,7 +820,7 @@ export const cards: CardType[] = [
     team: team.werewolf,
     wake_up_time: wake.night,
     card_name: 'onub_squire',
-    order: 62,
+
     rules: rules_role.rules_squire,
   },
   {
@@ -839,7 +830,7 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.day,
     card_name: 'onub_the_sponge',
-    order: 81,
+
     rules: rules_role.rules_thesponge,
   },
   {
@@ -849,7 +840,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onub_thing',
-    order: 39,
+
     rules: rules_role.rules_thing,
   },
   {
@@ -859,17 +850,17 @@ export const cards: CardType[] = [
     team: team.hero,
     wake_up_time: wake.day,
     card_name: 'onub_windy_wendy',
-    order: 84,
+
     rules: rules_role.rules_windywendy,
   },
 
   /* {
-        id: 87,
-        expansion: '',
-        display_name: '',
-        team: '',
-        wake_up_time: '',
-        card_name: '',
-        order: 1
+id: 87,
+expansion: '',
+display_name: '',
+team: '',
+wake_up_time: '',
+card_name: '',
+ 1
     }, */
 ]

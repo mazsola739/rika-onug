@@ -47,7 +47,9 @@ class RoomStore {
   }
 
   getTeamMembers(cards: CardType[]): CardType[] {
-    return cards.slice().sort((a, b) => a.order - b.order)
+    return cards
+      .slice()
+      .sort((a, b) => a.display_name.localeCompare(b.display_name))
   }
 
   getTeamName(cards: CardType[], team: string): string {

@@ -15,7 +15,6 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
       expansion,
       team,
       wake_up_time,
-      order,
     } = card
     const isSelected = selectedDeckStore.selectedCards.some(
       (selectedCard) => selectedCard.id === id
@@ -35,7 +34,6 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
         expansion,
         team,
         wake_up_time,
-        order,
       })
 
       selectedDeckStore.updatePlayDeckWithSelectedCards(
@@ -59,7 +57,6 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
       expansion,
       team,
       wake_up_time,
-      order,
       room_id,
       sendJsonMessage,
     ])
