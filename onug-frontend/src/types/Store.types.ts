@@ -46,4 +46,9 @@ export type PlayersType = {
   player_name: string
   player_number: number
   ready: boolean
+  card: {
+    known_card: {
+      id: number
+    }
+  }
 }

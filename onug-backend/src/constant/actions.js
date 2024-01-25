@@ -1,4 +1,21 @@
 //TODO check _kickoff2_text
+//TODO easteregg
+//todo joke
+
+exports.identifier_player  = [
+  "identifier_player1_text",
+  "identifier_player2_text",
+  "identifier_player3_text",
+  "identifier_player4_text",
+  "identifier_player5_text",
+  "identifier_player6_text",
+  "identifier_player7_text",
+  "identifier_player8_text",
+  "identifier_player9_text",
+  "identifier_player10_text",
+  "identifier_player11_text",
+  "identifier_player12_text",
+]
 
 exports.aliens = "alien_kickoff_text" //show aline cards
 exports.random_aliens = [
@@ -538,3 +555,62 @@ exports.werewolves = "werewolves_kickoff_text" //show player wolf cards, may cho
 exports.werewolves_dreamwolf = "werewolves_dreamwolf_kickoff_text" //show player wolf cards, dreamwolf thumb, may choose any center card, swap with any player card - update selected card
 
 exports.witch = "witch_kickoff_text" //may choose any center card, swap with any player card - update selected card
+
+
+
+
+exports.easteregg = [
+  "easteregg_really_text",
+
+  "easteregg_nobadguys_text_1",
+  "easteregg_nobadguys_text_2",
+  "easteregg_nobadguys_text_3",
+  "easteregg_nobadguys_text_4",
+  "easteregg_nobadguys_text_5",
+  "easteregg_nobadguys_text_6",
+  "easteregg_nobadguys_text_7",
+  "easteregg_nobadguys_text_8",
+  "easteregg_nobadguys_text_9",
+  "easteregg_nobadguys_text_10",
+
+  "easteregg_nogoodguys_text_1",
+  "easteregg_nogoodguys_text_2",
+  "easteregg_nogoodguys_text_3",
+  "easteregg_nogoodguys_text_4",
+  "easteregg_nogoodguys_text_5",
+  "easteregg_nogoodguys_text_6",
+  "easteregg_nogoodguys_text_7",
+  "easteregg_nogoodguys_text_8",
+  "easteregg_nogoodguys_text_9",
+  "easteregg_nogoodguys_text_10"
+]
+exports.joke = [
+  "joke_1_text",
+  "joke_2_text",
+  "joke_3_text",
+  "joke_4_text",
+  "joke_5_text",
+  "joke_6_text",
+  "joke_7_text",
+  "joke_8_text",
+  "joke_9_text",
+  "joke_10_text",
+  "joke_11_text",
+  "joke_12_text",
+  "joke_13_text",
+  "joke_14_text",
+  "joke_15_text",
+  "joke_16_text",
+  "joke_17_text",
+  "joke_18_text",
+  "joke_19_text",
+  "joke_20_text",
+]
+exports.time = [
+  "timertext_prefix",
+  "timertext_postfix",
+  "timerscreen_label_1_text",
+  "timerscreen_label_2_text",
+  "one_minwar_text",
+  "thirty_secwar_text",
+]

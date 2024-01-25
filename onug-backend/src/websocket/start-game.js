@@ -5,7 +5,6 @@ const { repository } = require("../repository")
 const { STAGES } = require("../constant/stage")
 const { broadcast } = require("./connections")
 const { upsertRoomState } = repository
-const { SIMPLE } = require('../constant/actionTimeType')
 const { startGamePlay, sceneBuilder } = require("../screen-play")
 
 exports.startGame = async (message) => {
@@ -23,7 +22,6 @@ exports.startGame = async (message) => {
     stage: STAGES.GAME_PLAY,
     startTime,
     cumSumPlayedMs: 0,
-    actionTime: 6, // TODO get it from settings
   }
 
   newGameState = sceneBuilder(newGameState)

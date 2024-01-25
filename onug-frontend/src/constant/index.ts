@@ -1,4 +1,4 @@
-export * from './actions'
+export * from './narrations'
 
 export * from './misc'
 

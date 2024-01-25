@@ -13,7 +13,6 @@
 =>  BACKEND & FRONTEND: timer finish, (if player failed do their action, send a message about missed opportunity,) 
     BACKEND: reset, and move to next action, repeat steps  */
 
-    
 /* Storage plan:
 {
   flipped: [{position: card_id}]
@@ -49,14 +48,9 @@ send to backend: "answer" with selected position list
 send to frontend: confirm action if need in message to the selected player(s) and/or show the result (example: show selected card secretly)
 */
 
-
-const { sceneBuilder } = require('./scene-builder')
-const { interactionProvider } = require('./interaction-provider')
 const { startGamePlay, stopGamePlay } = require('./game-play')
 
 module.exports = {
-    sceneBuilder,
-    interactionProvider,
     startGamePlay,
     stopGamePlay,
 }

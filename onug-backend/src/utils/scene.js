@@ -1,5 +1,4 @@
 const actions = require("../constant/actions")
-const { SIMPLE } = require("../constant/actionTimeType")
 const { logTrace } = require("../log")
 const { getCardById } = require("./card")
 
@@ -18,6 +17,5 @@ exports.buildSceneForCardId = ({card_ids, scene_name, sceneTextKey}) => {
         scene,
         scene_name: scene_name,
         scene_card_ids: card_ids,
-        actionTimeType: SIMPLE,
     }
 }

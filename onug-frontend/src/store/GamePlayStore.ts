@@ -3,13 +3,6 @@ import { selectedDeckStore } from 'store'
 import { ACTION_TIME, BASE_TIME, VOTING_TIME, everyone } from 'constant'
 import { RoleActionType } from 'types'
 import { utils, gamePlayStoreUtils } from 'utils'
-import { rippleNightPhaseStore } from './phaseStores/RippleNightPhaseStore'
-import {
-  ripplePhaseStore,
-  twilightPhaseStore,
-  duskPhaseStore,
-  nightPhaseStore,
-} from './phaseStores'
 
 const { addBasicAction, getRandomJoke } = gamePlayStoreUtils
 const { generateTimedAction } = utils
@@ -35,22 +28,11 @@ class GamePlayStore {
     return selectedDeckStore.shouldStartRipple()
   }
 
-  get isRepeat(): boolean {
-    return ripplePhaseStore.isRepeat()
-  }
-
   generateActions(): RoleActionType[] {
     const gamePlayActions: RoleActionType[] = []
 
     this.addEpicBattleIntro(gamePlayActions)
     this.addStartingActions(gamePlayActions)
-    this.addPhaseActions(gamePlayActions)
-    if (this.shouldStartRipple) {
-      this.addRipplePhaseActions(gamePlayActions)
-    }
-    if (this.isRepeat) {
-      this.addRippleNightPhaseActions(gamePlayActions)
-    }
     this.addJokeAndVoting(gamePlayActions)
 
     return gamePlayActions
@@ -81,39 +63,6 @@ class GamePlayStore {
     addBasicAction(actions, everyone.everyone_start_card_text, BASE_TIME, '')
     actions.push(generateTimedAction(ACTION_TIME))
     addBasicAction(actions, everyone.everyone_close_text, BASE_TIME, '')
-  }
-
-  addPhaseActions(actions: RoleActionType[]): void {
-    actions.push(
-      ...twilightPhaseStore.generateActions(),
-      ...duskPhaseStore.generateActions()
-    )
-
-    if (this.hasDusk) {
-      addBasicAction(
-        actions,
-        everyone.everyone_wake_dusk_text,
-        BASE_TIME,
-        'mark_background'
-      )
-      actions.push(generateTimedAction(ACTION_TIME))
-      addBasicAction(
-        actions,
-        everyone.everyone_close_text,
-        BASE_TIME,
-        'mark_background'
-      )
-    }
-
-    actions.push(...nightPhaseStore.generateActions())
-  }
-
-  addRipplePhaseActions(actions: RoleActionType[]): void {
-    actions.push(...ripplePhaseStore.generateActions())
-  }
-
-  addRippleNightPhaseActions(actions: RoleActionType[]): void {
-    actions.push(...rippleNightPhaseStore.generateActions())
   }
 
   addJokeAndVoting(actions: RoleActionType[]): void {
