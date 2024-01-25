@@ -54,3 +54,77 @@ module.exports = {
     startGamePlay,
     stopGamePlay,
 }
+
+/* TWILIGHT   
+oracleStore isCardSelectedById( 50)
+copycatStore isCardSelectedById( 30)
+mirrormanStore isCardSelectedById( 64)
+doppelgangerStore isCardSelectedById( 1)*/
+
+/* DUSK    
+vampire areAnyCardSelectedById([41, 40, 39]
+    thecount isCardSelectedById(39
+    renfield isCardSelectedById(38
+    diseased isCardSelectedById(32
+    cupid isCardSelectedById(31
+    instigator isCardSelectedById(34
+    priest isCardSelectedById(37
+    assassin areAnyCardSelectedById([29, 28] */
+
+/* NIGHT     
+loverStore isCardSelectedById(31)
+sentinelStore isCardSelectedById(25)
+alienStore areAnyCardSelectedById(alienIds)
+groobzerbStore areAllCardsSelectedById([47, 54])
+bodysnatcherStore isCardSelectedById(74)
+supervillainStore (areAnyCardSelectedById([57, 65, 69]) &&
+        (isCardSelectedById(60) ||
+          areAnyCardSelectedById([58]))) ||
+        (areAnyCardSelectedById(supervillainIds) &&
+          isCardSelectedById(58))
+werewolfStore areAnyCardSelectedById(wolfIds)
+alphawolfStore isCardSelectedById(17)
+mysticwolfStore isCardSelectedById(22)
+minionStore isCardSelectedById(7) &&
+        areAnyCardSelectedById(wolfIds)
+apprenticetannerStore areAllCardsSelectedById([71, 10])
+leaderStore isCardSelectedById(48) &&
+        areAnyCardSelectedById(alienIds)
+madscientistStore isCardSelectedById(63)
+internStore isCardSelectedById(62)
+masonStore areAllCardsSelectedById([5, 6])
+thingStore isCardSelectedById(85)
+annoyingladStore isCardSelectedById(55)
+seerStore isCardSelectedById(9)
+apprenticeseerStore isCardSelectedById(18)
+paranormalinvestigatorStore isCardSelectedById(23)
+marksmanStore isCardSelectedById(35)
+nostradamusStore isCardSelectedById(80)
+psychicStore isCardSelectedById(51)
+detectorStore isCardSelectedById(56)
+robberStore isCardSelectedById(8)
+witchStore isCardSelectedById(27)
+pickpocketStore isCardSelectedById(36)
+roleretrieverStore isCardSelectedById(66)
+voodoolouStore isCardSelectedById(70)
+troublemakerStore isCardSelectedById(11)
+villageidiotStore isCardSelectedById(26)
+auraseerStore isCardSelectedById(72)
+gremlinStore isCardSelectedById(33)
+rascalStore isCardSelectedById(52)
+switcherooStore isCardSelectedById(68)
+drunkStore isCardSelectedById(2)
+insomniacStore isCardSelectedById(4)
+selfawarenessgirlStore isCardSelectedById(67)
+squireStore isCardSelectedById(83) &&
+        areAnyCardSelectedById(wolfIds)
+familymanStore isCardSelectedById(78)
+beholderStore isCardSelectedById(73) &&
+        areAnyCardSelectedById([9, 18])
+revealerStore isCardSelectedById(24)
+exposerStore isCardSelectedById(46)
+flipperStore isCardSelectedById(59)
+empathStore isCardSelectedById(77)
+curatorStore isCardSelectedById(20)
+blobStore isCardSelectedById(44)
+morticiansStore isCardSelectedById(49) */

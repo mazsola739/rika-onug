@@ -45,13 +45,16 @@ exports.alphawolf = "alphawolf_kickoff_text" //wolf center card swap to any non 
 
 exports.annoyinglad = "annoyinglad_kickoff_text" //left or right neigbor player sending message to selected player - no update
 
+//TODO rename consts
+exports.apprenticeassassin = "apprenticeassassin_alone_text" //doppelganger! may any player mark swap with Mark of the Assassin - update selected player actual mark
+exports.assassin_apprenticeassassin = "apprenticeassassin_kickoff_text" //doppelganger! show assassin or may any player mark swap with Mark of the Assassin - update selected player actual mark
+
 exports.apprenticeseer = "apprenticeseer_kickoff_text" //may select 1 center card - show selected card - no update expect if it was own known
 
 exports.apprenticetanner = "apprenticetanner_kickoff_text" //doppelganger! show Tanner and Doppelganger-Tanner - no update
 
+//TODO check
 exports.assassin = "assassin_kickoff_text" //doppelganger! any player mark swap with Mark of the Assassin - update selected player actual mark
-exports.apprenticeassassin = "apprenticeassassin_kickoff_text" //doppelganger! may any player mark swap with Mark of the Assassin - update selected player actual mark
-exports.assassin_apprenticeassassin = "assassin_apprenticeassassin_kickoff_text" //doppelganger! show assassin or may any player mark swap with Mark of the Assassin - update selected player actual mark
 
 exports.auraseer = "auraseer_kickoff_text" //doppelganger! show selected player thumb -  no update
 exports.auraseer_mark = "auraseer_mark_kickoff_text" //doppelganger! show selected player thumbs - no update
@@ -174,6 +177,7 @@ exports.random_empath = [
   "empath_action14_text",
 ]
 
+//TODO EVERYONE texts
 exports.everyone = [
   "everyone_epic_intro_text", //at lease 2 type evil team: werewolves, aliens, vampires, super villains
   "everyone_card_text", //show players card - update known informations
@@ -284,7 +288,7 @@ exports.random_madscientist_transition = [
   "madscientist_transition_21_text",
 ]
 
-exports.marksman = "marksman_kickoff_text" //doppelganger!
+exports.marksman = "marksman_kickoff_text" //doppelganger! may select a mark and may select a card from another player (cant be same player)  - no update expect if own known
 
 exports.masons = "masons_kickoff_text" //look for other masons - no update
 

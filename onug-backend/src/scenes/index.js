@@ -1,5 +1,4 @@
 /*  T W I L L I G H T  */
-const { cardselection } = require("./cardselection")
 const { everyonecard } = require("./everyonecard")
 const { oracle } = require("./oracle")
 const { copycat } = require("./copycat")
@@ -92,7 +91,6 @@ module.exports = {
   beholder,
   bodysnatcher,
   blob,
-  cardselection,
   copycat,
   cow,
   cupid,
