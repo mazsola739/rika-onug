@@ -1,50 +1,34 @@
 [
     {
         "id": 1,
-        "expansion": "onuv",
-        "token_name": "mark_of_vampire",
-        "rules": "The Mark of The Vampire is a Mark given by the Vampires, if you have it you are on the Vampire team and win with the Vampires."
+        "token_name": "mark_of_vampire"
     },
     {
         "id": 2,
-        "expansion": "onuv",
-        "token_name": "mark_of_fear",
-        "rules": "The Mark of Fear is a Mark given by The Count to any non-vampire player, if you have it you cannot wake up and do your night action"
+        "token_name": "mark_of_fear"
     },
     {
         "id": 3,
-        "expansion": "onuv",
-        "token_name": "mark_of_the_bat",
-        "rules": "The Mark Of The Bat is a mark given by Renfield to himself and it does nothing"
+        "token_name": "mark_of_the_bat"
     },
     {
         "id": 34,
-        "expansion": "onuv",
-        "token_name": "mark_of_disease",
-        "rules": "The Mark of the Disease is a Mark given by the Diseased to one of their neighbors. If you have it and anyone points at you they lose even if their team won."
+        "token_name": "mark_of_disease"
     },
     {
         "id": 5,
-        "expansion": "onuv",
-        "token_name": "mark_of_love",
-        "rules": "The Mark of Love is a Mark given by the Cupid to two players. If a player with a mark of love is killed, the other player with a mark of love also dies."
+        "token_name": "mark_of_love"
     },
     {
         "id": 6,
-        "expansion": "onuv",
-        "token_name": "mark_of_traitor",
-        "rules": "The Mark of the Traitor is a Mark given by the Instigator to any player, that player now wins, if anyone on his team is killed."
+        "token_name": "mark_of_traitor"
     },
     {
         "id": 7,
-        "expansion": "onuv",
-        "token_name": "mark_of_clarity",
-        "rules": "The Mark of Clarity has no effect and the mark given out to each player at the start of the game, it is also given by the Priest to himself and any other player"
+        "token_name": "mark_of_clarity"
     },
     {
         "id": 8,
-        "expansion": "onuv",
-        "token_name": "mark_of_assassin",
-        "rules": "The Mark of the Assassin is a mark given by the Assassin to any player. If you have it, the Assassin will win if you are killed"
+        "token_name": "mark_of_assassin"
     }
 ]

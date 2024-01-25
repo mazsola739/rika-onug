@@ -2,7 +2,7 @@
   {
     "room_id": "archives",
     "room_name": "Archives",
-    "cards": {},
+    "stage": "LOBBY",
     "selected_cards": [
       1,
       15,
@@ -15,14 +15,6 @@
       8,
       11
     ],
-    "actions": [],
-    "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
     "available_names": [
       "Dragon",
       "Phoenix",
@@ -36,21 +28,30 @@
       "Minotaur",
       "Fairy",
       "Djinn"
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   },
   {
     "room_id": "armory",
     "room_name": "Armory",
-    "cards": {},
-    "selected_cards": [],
-    "actions": [],
     "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
+    "selected_cards": [],
     "available_names": [
       "Forrest Gump",
       "Indiana Jones",
@@ -64,21 +65,30 @@
       "E.T.",
       "Katniss Everdeen",
       "James T. Kirk"
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   },
   {
     "room_id": "dynamite_room",
     "room_name": "Dynamite Room",
-    "cards": {},
-    "selected_cards": [],
-    "actions": [],
     "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
+    "selected_cards": [],
     "available_names": [
       "Superman",
       "Batman",
@@ -92,12 +102,29 @@
       "Wolverine",
       "Groot",
       "Thanos"
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   },
   {
     "room_id": "foyer",
     "room_name": "Foyer",
-    "cards": {},
+    "stage": "LOBBY",
     "selected_cards": [
       25,
       15,
@@ -109,14 +136,6 @@
       11,
       24
     ],
-    "actions": [],
-    "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
     "available_names": [
       "Harry Potter",
       "Hermione Granger",
@@ -130,12 +149,29 @@
       "Dobby",
       "Dolores Umbridge",
       "Rubeus Hagrid"
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   },
   {
     "room_id": "great_hall",
     "room_name": "Great Hall",
-    "cards": {},
+    "stage": "LOBBY",
     "selected_cards": [
       15,
       16,
@@ -146,14 +182,6 @@
       73,
       76
     ],
-    "actions": [],
-    "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
     "available_names": [
       "Billy Butcher",
       "Hughie Campbell",
@@ -167,12 +195,29 @@
       "Andre Anderson",
       "Jordan Li",
       "Marie Moreau"
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   },
   {
     "room_id": "guest_bedroom",
     "room_name": "Guest Bedroom",
-    "cards": {},
+    "stage": "LOBBY",
     "selected_cards": [
       41,
       40,
@@ -183,14 +228,6 @@
       36,
       33
     ],
-    "actions": [],
-    "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
     "available_names": [
       "Frodo",
       "Samwise",
@@ -204,12 +241,29 @@
       "Bilbo",
       "Gollum",
       "Saruman"
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   },
   {
     "room_id": "kitchen",
     "room_name": "Kitchen",
-    "cards": {},
+    "stage": "LOBBY",
     "selected_cards": [
       50,
       42,
@@ -220,14 +274,6 @@
       77,
       44
     ],
-    "actions": [],
-    "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
     "available_names": [
       "Jon Snow",
       "Daenerys Targaryen",
@@ -241,12 +287,29 @@
       "Jorah Mormont",
       "Theon Greyjoy",
       "Samwell Tarly"
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   },
   {
     "room_id": "observatory",
     "room_name": "Observatory",
-    "cards": {},
+    "stage": "LOBBY",
     "selected_cards": [
       15,
       22,
@@ -262,14 +325,6 @@
       25,
       10
     ],
-    "actions": [],
-    "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
     "available_names": [
       "Maleficent",
       "Ursula",
@@ -283,12 +338,29 @@
       "Queen Narissa",
       "Prince Hans",
       "Shere Khan"
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   },
   {
     "room_id": "parlor",
     "room_name": "Parlor",
-    "cards": {},
+    "stage": "LOBBY",
     "selected_cards": [
       15,
       16,
@@ -304,14 +376,6 @@
       75,
       21
     ],
-    "actions": [],
-    "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
     "available_names": [
       "Chuck Norris",
       "Keanu Reeves",
@@ -325,12 +389,29 @@
       "Rick Astley",
       "The Rock ",
       "Gordon Ramsay "
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   },
   {
     "room_id": "secret_passage",
     "room_name": "Secret Passage",
-    "cards": {},
+    "stage": "LOBBY",
     "selected_cards": [
       50,
       30,
@@ -346,14 +427,6 @@
       4,
       20
     ],
-    "actions": [],
-    "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
     "available_names": [
       "Luke Skywalker",
       "Princess Leia Organa",
@@ -367,12 +440,29 @@
       "Emperor Palpatine",
       "Lando Calrissian",
       "Boba Fett"
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   },
   {
     "room_id": "sitting_room",
     "room_name": "Sitting Room",
-    "cards": {},
+    "stage": "LOBBY",
     "selected_cards": [
       25,
       53,
@@ -388,14 +478,6 @@
       49,
       74
     ],
-    "actions": [],
-    "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
     "available_names": [
       "Peter Parker",
       "Tony Stark",
@@ -409,21 +491,30 @@
       "Stephen Strange",
       "Wanda Maximoff",
       "Matt Murdock"
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   },
   {
     "room_id": "study",
     "room_name": "Study",
-    "cards": {},
-    "selected_cards": [],
-    "actions": [],
     "stage": "LOBBY",
-    "action_log": [],
-    "players": {},
-    "scene_number": 0,
-    "scenes": [],
-    "interactionScenes": [],
-    "closed": false,
+    "selected_cards": [],
     "available_names": [
       "Clark Kent",
       "Bruce Wayne",
@@ -437,6 +528,23 @@
       "Harley Quinn",
       "The Joker",
       "Dick Grayson"
+    ],
+    "players": {},
+    "center_cards": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": [
+      {
+        "scene_name": "CARD_SELECTION",
+        "scene_number": 0
+      }
     ]
   }
 ]

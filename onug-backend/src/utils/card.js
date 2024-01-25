@@ -1,7 +1,7 @@
 const { wolfIdsToCheck, supervillainIdsToCheck } = require("../constant/ids")
 const cards = require('../data/cards.json')
 
-const toggleCard = (selectedCardIds, cardId) => {
+const toggleCard = (selectedCardIds, cardId) => { //TODO ALPHA WOLF AND TEMPTRESS, COPYCAT/MIRROR MAN
     if (selectedCardIds.includes(cardId)) {
         const index = selectedCardIds.findIndex(
             (selectedCardId) => selectedCardId === cardId,

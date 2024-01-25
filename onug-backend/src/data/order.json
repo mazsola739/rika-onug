@@ -1,326 +1,304 @@
 {
   "twilight": [
     {
-      "role_name": "EVERYONE_CARD",
-      "order_id": 1
+      "scene_name": "CARD_SELECTION",
+      "scene_number": 0
     },
     {
-      "role_name": "ORACLE",
-      "order_id": 2
+      "scene_name": "EVERYONE_CARD",
+      "scene_number": 1
     },
     {
-      "role_name": "COPYCAT",
-      "order_id": 3
+      "scene_name": "ORACLE",
+      "scene_number": 2
     },
     {
-      "role_name": "MIRROR MAN",
-      "order_id": 4
+      "scene_name": "COPYCAT",
+      "scene_number": 3
     },
     {
-      "role_name": "DOPPELGÄNGER",
-      "order_id": 5
+      "scene_name": "MIRROR_MAN",
+      "scene_number": 4
+    },
+    {
+      "scene_name": "DOPPELGÄNGER",
+      "scene_number": 5
     }
   ],
   "dusk": [
     {
-      "role_name": "VAMPIRES",
-      "order_id": 6
+      "scene_name": "VAMPIRES",
+      "scene_number": 6
     },
     {
-      "role_name": "THE_COUNT",
-      "order_id": 7
+      "scene_name": "THE_COUNT",
+      "scene_number": 7
     },
     {
-      "role_name": "RENFIELD",
-      "order_id": 8
+      "scene_name": "RENFIELD",
+      "scene_number": 8
     },
     {
-      "role_name": "DISEASED",
-      "order_id": 9
+      "scene_name": "DISEASED",
+      "scene_number": 9
     },
     {
-      "role_name": "CUPID",
-      "order_id": 10
+      "scene_name": "CUPID",
+      "scene_number": 10
     },
     {
-      "role_name": "INSTIGATOR",
-      "order_id": 11
+      "scene_name": "INSTIGATOR",
+      "scene_number": 11
     },
     {
-      "role_name": "PRIEST",
-      "order_id": 12
+      "scene_name": "PRIEST",
+      "scene_number": 12
     },
     {
-      "role_name": "ASSASSIN",
-      "order_id": 13
+      "scene_name": "ASSASSIN",
+      "scene_number": 13
     },
     {
-      "role_name": "APPRENTICE_ASSASSIN",
-      "order_id": 14
+      "scene_name": "APPRENTICE_ASSASSIN",
+      "scene_number": 14
     },
     {
-      "role_name": "EVERYONE_MARK",
-      "order_id": 15
+      "scene_name": "EVERYONE_MARK",
+      "scene_number": 15
     }
   ],
   "night": [
     {
-      "role_name": "LOVERS",
-      "order_id": 16
+      "scene_name": "LOVERS",
+      "scene_number": 16
     },
     {
-      "role_name": "SENTINEL",
-      "order_id": 17
+      "scene_name": "SENTINEL",
+      "scene_number": 17
     },
     {
-      "role_name": "ALIENS",
-      "order_id": 18
+      "scene_name": "ALIENS",
+      "scene_number": 18
     },
     {
-      "role_name": "COW",
-      "order_id": 19
+      "scene_name": "COW",
+      "scene_number": 19
     },
     {
-      "role_name": "GROOB_ZERB",
-      "order_id": 20
+      "scene_name": "GROOB_ZERB",
+      "scene_number": 20
     },
     {
-      "role_name": "SUPER_VILLAINS",
-      "order_id": 21
+      "scene_name": "LEADER",
+      "scene_number": 21
     },
     {
-      "role_name": "TEMPTRESS",
-      "order_id": 22
+      "scene_name": "BODY_SNATCHER",
+      "scene_number": 22
     },
     {
-      "role_name": "DR_PEEKER",
-      "order_id": 23
+      "scene_name": "SUPER_VILLAINS",
+      "scene_number": 23
     },
     {
-      "role_name": "RAPSCALLION",
-      "order_id": 24
+      "scene_name": "TEMPTRESS",
+      "scene_number": 24
     },
     {
-      "role_name": "EVILOMETER",
-      "order_id": 25
+      "scene_name": "DR_PEEKER",
+      "scene_number": 25
     },
     {
-      "role_name": "WEREWOLVES",
-      "order_id": 26
+      "scene_name": "RAPSCALLION",
+      "scene_number": 26
     },
     {
-      "role_name": "ALPHA_WOLF",
-      "order_id": 27
+      "scene_name": "EVILOMETER",
+      "scene_number": 27
     },
     {
-      "role_name": "MYSTIC_WOLF",
-      "order_id": 28
+      "scene_name": "WEREWOLVES",
+      "scene_number": 28
     },
     {
-      "role_name": "MINION",
-      "order_id": 29
+      "scene_name": "ALPHA_WOLF",
+      "scene_number": 29
     },
     {
-      "role_name": "APPRENTICE_TANNER",
-      "order_id": 30
+      "scene_name": "MYSTIC_WOLF",
+      "scene_number": 30
     },
     {
-      "role_name": "MAD_SCIENTIST",
-      "order_id": 31
+      "scene_name": "MINION",
+      "scene_number": 31
     },
     {
-      "role_name": "INTERN",
-      "order_id": 32
+      "scene_name": "APPRENTICE_TANNER",
+      "scene_number": 32
     },
     {
-      "role_name": "LEADER",
-      "order_id": 33
+      "scene_name": "MAD_SCIENTIST",
+      "scene_number": 33
     },
     {
-      "role_name": "MASON",
-      "order_id": 34
+      "scene_name": "INTERN",
+      "scene_number": 34
     },
     {
-      "role_name": "THING",
-      "order_id": 35
+      "scene_name": "MASONS",
+      "scene_number": 35
     },
     {
-      "role_name": "ANNOYING_LAD",
-      "order_id": 36
+      "scene_name": "THING",
+      "scene_number": 36
     },
     {
-      "role_name": "SEER",
-      "order_id": 37
+      "scene_name": "ANNOYING_LAD",
+      "scene_number": 37
     },
     {
-      "role_name": "APPRENTICE_SEER",
-      "order_id": 38
+      "scene_name": "SEER",
+      "scene_number": 38
     },
     {
-      "role_name": "PARANORMAL_INVESTIGATOR",
-      "order_id": 39
+      "scene_name": "APPRENTICE_SEER",
+      "scene_number": 39
     },
     {
-      "role_name": "MARKSMAN",
-      "order_id": 40
+      "scene_name": "PARANORMAL_INVESTIGATOR",
+      "scene_number": 40
     },
     {
-      "role_name": "NOSTRADAMUS",
-      "order_id": 41
+      "scene_name": "MARKSMAN",
+      "scene_number": 41
     },
     {
-      "role_name": "PSYCHIC",
-      "order_id": 42
+      "scene_name": "NOSTRADAMUS",
+      "scene_number": 42
     },
     {
-      "role_name": "DETECTOR",
-      "order_id": 43
+      "scene_name": "PSYCHIC",
+      "scene_number": 43
     },
     {
-      "role_name": "ROBBER",
-      "order_id": 44
+      "scene_name": "DETECTOR",
+      "scene_number": 44
     },
     {
-      "role_name": "WITCH",
-      "order_id": 45
+      "scene_name": "ROBBER",
+      "scene_number": 45
     },
     {
-      "role_name": "PICKPOCKET",
-      "order_id": 46
+      "scene_name": "WITCH",
+      "scene_number": 46
     },
     {
-      "role_name": "ROLE_RETRIEVER",
-      "order_id": 47
+      "scene_name": "PICKPOCKET",
+      "scene_number": 47
     },
     {
-      "role_name": "VOODOO_LOU",
-      "order_id": 48
+      "scene_name": "ROLE_RETRIEVER",
+      "scene_number": 48
     },
     {
-      "role_name": "TROUBLEMAKER",
-      "order_id": 49
+      "scene_name": "VOODOO_LOU",
+      "scene_number": 49
     },
     {
-      "role_name": "VILLAGE_IDIOT",
-      "order_id": 50
+      "scene_name": "TROUBLEMAKER",
+      "scene_number": 50
     },
     {
-      "role_name": "AURA_SEER",
-      "order_id": 51
+      "scene_name": "VILLAGE_IDIOT",
+      "scene_number": 51
     },
     {
-      "role_name": "GREMLIN",
-      "order_id": 52
+      "scene_name": "AURA_SEER",
+      "scene_number": 52
     },
     {
-      "role_name": "RASCAL",
-      "order_id": 53
+      "scene_name": "GREMLIN",
+      "scene_number": 53
     },
     {
-      "role_name": "SWITCHEROO",
-      "order_id": 54
+      "scene_name": "RASCAL",
+      "scene_number": 54
     },
     {
-      "role_name": "DRUNK",
-      "order_id": 55
+      "scene_name": "SWITCHEROO",
+      "scene_number": 55
     },
     {
-      "role_name": "INSOMNIAC",
-      "order_id": 56
+      "scene_name": "DRUNK",
+      "scene_number": 56
     },
     {
-      "role_name": "SELF-AWARENESS_GIRL",
-      "order_id": 57
+      "scene_name": "INSOMNIAC",
+      "scene_number": 57
     },
     {
-      "role_name": "SQUIRE",
-      "order_id": 58
+      "scene_name": "SELF-AWARENESS_GIRL",
+      "scene_number": 58
     },
     {
-      "role_name": "BEHOLDER",
-      "order_id": 59
+      "scene_name": "SQUIRE",
+      "scene_number": 59
     },
     {
-      "role_name": "REVEALER",
-      "order_id": 60
+      "scene_name": "BEHOLDER",
+      "scene_number": 60
     },
     {
-      "role_name": "EXPOSER",
-      "order_id": 61
+      "scene_name": "REVEALER",
+      "scene_number": 61
     },
     {
-      "role_name": "FLIPPER",
-      "order_id": 62
+      "scene_name": "EXPOSER",
+      "scene_number": 62
     },
     {
-      "role_name": "EMPATH",
-      "order_id": 63
+      "scene_name": "FLIPPER",
+      "scene_number": 63
     },
     {
-      "role_name": "CURATOR",
-      "order_id": 64
+      "scene_name": "EMPATH",
+      "scene_number": 64
     },
     {
-      "role_name": "BLOB",
-      "order_id": 65
+      "scene_name": "CURATOR",
+      "scene_number": 65
     },
     {
-      "role_name": "MORTICIAN",
-      "order_id": 66
+      "scene_name": "BLOB",
+      "scene_number": 66
     },
     {
-      "role_name": "FAMILY_MAN",
-      "order_id": 67
+      "scene_name": "MORTICIAN",
+      "scene_number": 67
+    },
+    {
+      "scene_name": "FAMILY_MAN",
+      "scene_number": 68
     }
   ],
-  "never": [
+  "ripple": [
     {
-      "role_name": "VILLAGER",
-      "order_id": 68
+      "scene_name": "RIPPLE",
+      "scene_number": 69
+    }
+  ],
+  "day": [
+    {
+      "scene_name": "INVESTIGATION",
+      "scene_number": 70
     },
     {
-      "role_name": "HUNTER",
-      "order_id": 69
+      "scene_name": "VOTE",
+      "scene_number": 71
     },
     {
-      "role_name": "TANNER",
-      "order_id": 70
-    },
-    {
-      "role_name": "BODYGUARD",
-      "order_id": 71
-    },
-    {
-      "role_name": "PRINCE",
-      "order_id": 72
-    },
-    {
-      "role_name": "CURSED",
-      "order_id": 73
-    },
-    {
-      "role_name": "MAD_SCIENTIST",
-      "order_id": 74
-    },
-    {
-      "role_name": "INNOCENT_BYSTANDER",
-      "order_id": 75
-    },
-    {
-      "role_name": "THE_SPONGE",
-      "order_id": 76
-    },
-    {
-      "role_name": "RICOCHET_RHINO",
-      "order_id": 77
-    },
-    {
-      "role_name": "DEFENDER-ER",
-      "order_id": 78
-    },
-    {
-      "role_name": "WINDY_WENDY",
-      "order_id": 79
+      "scene_name": "WINNERS",
+      "scene_number": 72
     }
   ]
 }

@@ -16,39 +16,30 @@
     
 /* Storage plan:
 {
+  flipped: [{position: card_id}]
+  artifact: [{position: true?}]
+  shield: [{position: true?}]
   player_1: {
-      start card: {
-        card role and team, 
-        player role and team, 
-        mark of clarity, 
-        artifact false, 
-        shield false
-      },
+      card_history: [{sceen: 0, id: }]
       known card: {
-        card role and team, 
-        player role and team, 
-        mark, 
-        artifact, 
-        shield
+        id:
+        card: {role: , team: }, 
+        player: {role: , team: }, 
+        mark: 
       },
       actual card: {
-        card role and team, 
-        player role and team, 
-        mark, 
-        artifact, 
-        shield
+        id:
+        card: {role: , team: }, 
+        player: {role: , team: }, 
+        mark: 
       },
     }
   },
 
-  {
-    center_left: {
-      start card: {
-        card role and team, 
-      },
-      actual card: {
-        card role and team, 
-      }
+  center_cards: {
+    center_left: {                         //center_wolf, center_villain, center_middle, center_right
+      id
+      card: {role: , team: },
     }
 } */
 

@@ -1,776 +1,604 @@
 [
   {
     "id": 1,
-    "expansion": "onuw",
-    "display_name": "DOPPELGANGER",
-    "team": "village",
-    "wake_up_time": "twilight",
-    "card_name": "onuw_doppelganger",
-    "rules": "Look at any other player's card. You are now that role, in addition to the player with that role card."
+    "card": {
+      "role": "DOPPELGANGER",
+      "team": "village"
+    }
   },
   {
     "id": 2,
-    "expansion": "onuw",
-    "display_name": "DRUNK",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onuw_drunk",
-    "rules": "Exchange your card with a card from the center, but do not look at your new card."
+    "card": {
+      "role": "DRUNK",
+      "team": "village"
+    }
   },
   {
     "id": 3,
-    "expansion": "onuw",
-    "display_name": "HUNTER",
-    "team": "village",
-    "wake_up_time": "day",
-    "card_name": "onuw_hunter",
-    "rules": "If you get the most votes, the player you are pointing at is also killed."
+    "card": {
+      "role": "HUNTER",
+      "team": "village"
+    }
   },
   {
     "id": 4,
-    "expansion": "onuw",
-    "display_name": "INSOMNIAC",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onuw_insomniac",
-    "rules": "View your own card."
+    "card": {
+      "role": "INSOMNIAC",
+      "team": "village"
+    }
   },
   {
     "id": 5,
-    "expansion": "onuw",
-    "display_name": "MASON",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onuw_mason",
-    "rules": "Wake and look for the other mason."
+    "card": {
+      "role": "MASON",
+      "team": "village"
+    }
   },
   {
     "id": 6,
-    "expansion": "onuw",
-    "display_name": "MASON",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onuw_mason",
-    "rules": "Wake and look for the other mason."
+    "card": {
+      "role": "MASON",
+      "team": "village"
+    }
   },
   {
     "id": 7,
-    "expansion": "onuw",
-    "display_name": "MINION",
-    "team": "werewolf",
-    "wake_up_time": "night",
-    "card_name": "onuw_minion",
-    "rules": "You know who the werewolves are. You win if no werewolves are killed, even if you are killed."
+    "card": {
+      "role": "MINION",
+      "team": "werewolf"
+    }
   },
   {
     "id": 8,
-    "expansion": "onuw",
-    "display_name": "ROBBER",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onuw_robber",
-    "rules": "Exchange your card with another player's card and view your new card."
+    "card": {
+      "role": "ROBBER",
+      "team": "village"
+    }
   },
   {
     "id": 9,
-    "expansion": "onuw",
-    "display_name": "SEER",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onuw_seer",
-    "rules": "View either two of the center cards or one card from any other player."
+    "card": {
+      "role": "SEER",
+      "team": "village"
+    }
   },
   {
     "id": 10,
-    "expansion": "onuw",
-    "display_name": "TANNER",
-    "team": "own",
-    "wake_up_time": "day",
-    "card_name": "onuw_tanner",
-    "rules": "You win and everyone else loses if you are killed."
+    "card": {
+      "role": "TANNER",
+      "team": "tanner"
+    }
   },
   {
     "id": 11,
-    "expansion": "onuw",
-    "display_name": "TROUBLEMAKER",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onuw_troublemaker",
-    "rules": "Exchange cards between any two other players."
+    "card": {
+      "role": "TROUBLEMAKER",
+      "team": "village"
+    }
   },
   {
     "id": 12,
-    "expansion": "onuw",
-    "display_name": "VILLAGER",
-    "team": "village",
-    "wake_up_time": "day",
-    "card_name": "onuw_villager",
-    "rules": "Figure out who the bad guys are and make sure one of them is killed."
+    "card": {
+      "role": "VILLAGER",
+      "team": "village"
+    }
   },
   {
     "id": 13,
-    "expansion": "onuw",
-    "display_name": "VILLAGER",
-    "team": "village",
-    "wake_up_time": "day",
-    "card_name": "onuw_villager",
-    "rules": "Figure out who the bad guys are and make sure one of them is killed."
+    "card": {
+      "role": "VILLAGER",
+      "team": "village"
+    }
   },
   {
     "id": 14,
-    "expansion": "onuw",
-    "display_name": "VILLAGER",
-    "team": "village",
-    "wake_up_time": "day",
-    "card_name": "onuw_villager",
-    "rules": "Figure out who the bad guys are and make sure one of them is killed."
+    "card": {
+      "role": "VILLAGER",
+      "team": "village"
+    }
   },
   {
     "id": 15,
-    "expansion": "onuw",
-    "display_name": "WEREWOLF",
-    "team": "werewolf",
-    "wake_up_time": "night",
-    "card_name": "onuw_werewolf",
-    "rules": "Wake and look for the other werewolves. You win if no werewolves are killed."
+    "card": {
+      "role": "WEREWOLF",
+      "team": "werewolf"
+    }
   },
   {
     "id": 16,
-    "expansion": "onuw",
-    "display_name": "WEREWOLF",
-    "team": "werewolf",
-    "wake_up_time": "night",
-    "card_name": "onuw_werewolf",
-    "rules": "Wake and look for the other werewolves. You win if no werewolves are killed."
+    "card": {
+      "role": "WEREWOLF",
+      "team": "werewolf"
+    }
   },
   {
     "id": 17,
-    "expansion": "onud",
-    "display_name": "ALPHA WOLF",
-    "team": "werewolf",
-    "wake_up_time": "night",
-    "card_name": "onud_alpha_wolf",
-    "rules": "Wake with the other werewolves, then wake again and give the center werewolf card to a non-werewolf player."
+    "card": {
+      "role": "ALPHA_WOLF",
+      "team": "werewolf"
+    }
   },
   {
     "id": 18,
-    "expansion": "onud",
-    "display_name": "APPRENTICE SEER",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onud_apprentice_seer",
-    "rules": "View one center card."
+    "card": {
+      "role": "APPRENTICE_SEER",
+      "team": "village"
+    }
   },
   {
     "id": 19,
-    "expansion": "onud",
-    "display_name": "BODYGUARD",
-    "team": "village",
-    "wake_up_time": "day",
-    "card_name": "onud_bodyguard",
-    "rules": "The player you point at can't be killed."
+    "card": {
+      "role": "BODYGUARD",
+      "team": "village"
+    }
   },
   {
     "id": 20,
-    "expansion": "onud",
-    "display_name": "CURATOR",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onud_curator",
-    "rules": "Give any player an artifact which might change their team or cause them to do something unusual."
+    "card": {
+      "role": "CURATOR",
+      "team": "village"
+    }
   },
   {
     "id": 21,
-    "expansion": "onud",
-    "display_name": "DREAMWOLF",
-    "team": "werewolf",
-    "wake_up_time": "day",
-    "card_name": "onud_dream_wolf",
-    "rules": "You are on the werewolf team, but instead of waking up with them, you just stick out your thumb.'"
+    "card": {
+      "role": "DREAMWOLF",
+      "team": "werewolf"
+    }
   },
   {
     "id": 22,
-    "expansion": "onud",
-    "display_name": "MYSTICWOLF",
-    "team": "werewolf",
-    "wake_up_time": "night",
-    "card_name": "onud_mystic_wolf",
-    "rules": "Wake with the other werewolves, then wake again and view any other player's card."
+    "card": {
+      "role": "MYSTICWOLF",
+      "team": "werewolf"
+    }
   },
   {
     "id": 23,
-    "expansion": "onud",
-    "display_name": "PARANORMAL INVESTIGATOR",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onud_paranormal_investigator",
-    "rules": "View up to two cards, if you see a card that isn't a villager, stop viewing and you are now that role."
+    "card": {
+      "role": "PARANORMAL_INVESTIGATOR",
+      "team": "village"
+    }
   },
   {
     "id": 24,
-    "expansion": "onud",
-    "display_name": "REVEALER",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onud_revealer",
-    "rules": "Turn any other player's card face up and leave it face up unless you see a card that isn't on the village team."
+    "card": {
+      "role": "REVEALER",
+      "team": "village"
+    }
   },
   {
     "id": 25,
-    "expansion": "onud",
-    "display_name": "SENTINEL",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onud_sentinel",
-    "rules": "Give any other player's card, a shield token, that card cannot be moved or viewed."
+    "card": {
+      "role": "SENTINEL",
+      "team": "village"
+    }
   },
   {
     "id": 26,
-    "expansion": "onud",
-    "display_name": "VILLAGE IDIOT",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onud_village_idiot",
-    "rules": "Move all cards except yours one space to the left or to the right."
+    "card": {
+      "role": "VILLAGE_IDIOT",
+      "team": "village"
+    }
   },
   {
     "id": 27,
-    "expansion": "onud",
-    "display_name": "WITCH",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onud_witch",
-    "rules": "View a center card and exchange it with any other player's card."
+    "card": {
+      "role": "WITCH",
+      "team": "village"
+    }
   },
   {
     "id": 28,
-    "expansion": "onuv",
-    "display_name": "APPRENTICE ASSASSIN",
-    "team": "own",
-    "wake_up_time": "dusk",
-    "card_name": "onuv_apprentice_assassin",
-    "rules": "You win, if the assassin is killed. If the assassin is not in front of any player, you are the assassin."
+    "card": {
+      "role": "APPRENTICE_ASSASSIN",
+      "team": "apprentice assassin"
+    }
   },
   {
     "id": 29,
-    "expansion": "onuv",
-    "display_name": "ASSASSIN",
-    "team": "own",
-    "wake_up_time": "dusk",
-    "card_name": "onuv_assassin",
-    "rules": "Give a player the mark of the assassin, you win, if that player is killed."
+    "card": {
+      "role": "ASSASSIN",
+      "team": "assassin"
+    }
   },
   {
     "id": 30,
-    "expansion": "onuv",
-    "display_name": "COPYCAT",
-    "team": "village",
-    "wake_up_time": "twilight",
-    "card_name": "onuv_copycat",
-    "rules": "View one center card. You are that role and we'll wake up when that role is called."
+    "card": {
+      "role": "COPYCAT",
+      "team": "village"
+    }
   },
   {
     "id": 31,
-    "expansion": "onuv",
-    "display_name": "CUPID",
-    "team": "village",
-    "wake_up_time": "dusk",
-    "card_name": "onuv_cupid",
-    "rules": "Give any two players a mark of love. If a player with a mark of love is killed, the other player with a mark of love also dies."
+    "card": {
+      "role": "CUPID",
+      "team": "village"
+    }
   },
   {
     "id": 32,
-    "expansion": "onuv",
-    "display_name": "DISEASED",
-    "team": "village",
-    "wake_up_time": "dusk",
-    "card_name": "onuv_diseased",
-    "rules": "Give one of your neighbors a mark of disease. If anyone points at you or the player with the mark of disease, they lose even if their team won."
+    "card": {
+      "role": "DISEASED",
+      "team": "village"
+    }
   },
   {
     "id": 33,
-    "expansion": "onuv",
-    "display_name": "GREMLIN",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onuv_gremlin",
-    "rules": "Switch marks or cards between any two players."
+    "card": {
+      "role": "GREMLIN",
+      "team": "village"
+    }
   },
   {
     "id": 34,
-    "expansion": "onuv",
-    "display_name": "INSTIGATOR",
-    "team": "village",
-    "wake_up_time": "dusk",
-    "card_name": "onuv_instigator",
-    "rules": "Give any other player the mark of the traitor, that player now wins, if anyone on his team is killed."
+    "card": {
+      "role": "INSTIGATOR",
+      "team": "village"
+    }
   },
   {
     "id": 35,
-    "expansion": "onuv",
-    "display_name": "MARKSMAN",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onuv_marksman",
-    "rules": "View the mark of one player and the card of another player."
+    "card": {
+      "role": "MARKSMAN",
+      "team": "village"
+    }
   },
   {
     "id": 36,
-    "expansion": "onuv",
-    "display_name": "PICKPOCKET",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onuv_pickpocket",
-    "rules": "Exchange your mark with the mark from another player and view your new mark."
+    "card": {
+      "role": "PICKPOCKET",
+      "team": "village"
+    }
   },
   {
     "id": 37,
-    "expansion": "onuv",
-    "display_name": "PRIEST",
-    "team": "village",
-    "wake_up_time": "dusk",
-    "card_name": "onuv_priest",
-    "rules": "Give yourself and one other player a mark of clarity."
+    "card": {
+      "role": "PRIEST",
+      "team": "village"
+    }
   },
   {
     "id": 38,
-    "expansion": "onuv",
-    "display_name": "RENFIELD",
-    "team": "vampire",
-    "wake_up_time": "dusk",
-    "card_name": "onuv_renfield",
-    "rules": "You know who the vampires are. You are not a vampire, but you are on their team and win with them even if you are killed."
+    "card": {
+      "role": "RENFIELD",
+      "team": "vampire"
+    }
   },
   {
     "id": 39,
-    "expansion": "onuv",
-    "display_name": "THE COUNT",
-    "team": "vampire",
-    "wake_up_time": "dusk",
-    "card_name": "onuv_the_count",
-    "rules": "Wake with the other vampires, wake again to give a player the mark of fear, which prevents them from waking and using their night action."
+    "card": {
+      "role": "THE_COUNT",
+      "team": "vampire"
+    }
   },
   {
     "id": 40,
-    "expansion": "onuv",
-    "display_name": "THE MASTER",
-    "team": "vampire",
-    "wake_up_time": "dusk",
-    "card_name": "onuv_the_master",
-    "rules": "Wake with the other vampires. If all the vampires point at you during the vote, you can't be killed."
+    "card": {
+      "role": "THE_MASTER",
+      "team": "vampire"
+    }
   },
   {
     "id": 41,
-    "expansion": "onuv",
-    "display_name": "VAMPIRE",
-    "team": "vampire",
-    "wake_up_time": "dusk",
-    "card_name": "onuv_vampire",
-    "rules": "Look for the other vampires and turn another player into a vampire. You win if no vampires are killed."
+    "card": {
+      "role": "VAMPIRE",
+      "team": "vampire"
+    }
   },
   {
     "id": 42,
-    "expansion": "onua",
-    "display_name": "ALIEN",
-    "team": "alien",
-    "wake_up_time": "night",
-    "card_name": "onua_alien",
-    "rules": "Wake and look for the other aliens and then do the action as instructed by the app."
+    "card": {
+      "role": "ALIEN",
+      "team": "alien"
+    }
   },
   {
     "id": 43,
-    "expansion": "onua",
-    "display_name": "ALIEN",
-    "team": "alien",
-    "wake_up_time": "night",
-    "card_name": "onua_alien",
-    "rules": "Wake and look for the other aliens and then do the action as instructed by the app."
+    "card": {
+      "role": "ALIEN",
+      "team": "alien"
+    }
   },
   {
     "id": 44,
-    "expansion": "onua",
-    "display_name": "BLOB",
-    "team": "own",
-    "wake_up_time": "night",
-    "card_name": "onua_blob",
-    "rules": "Keep all players that are part of the blob, alive."
+    "card": {
+      "role": "BLOB",
+      "team": "blob"
+    }
   },
   {
     "id": 45,
-    "expansion": "onua",
-    "display_name": "COW",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onua_cow",
-    "rules": "If your fist is tapped, that means at least one of your neighbors is an alien."
+    "card": {
+      "role": "COW",
+      "team": "village"
+    }
   },
   {
     "id": 46,
-    "expansion": "onua",
-    "display_name": "EXPOSER",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onua_exposer",
-    "rules": "Turn 1, 2 or 3 cards face up as instructed by the app"
+    "card": {
+      "role": "EXPOSER",
+      "team": "village"
+    }
   },
   {
     "id": 47,
-    "expansion": "onua",
-    "display_name": "GROOB ALIEN",
-    "team": "alien",
-    "wake_up_time": "night",
-    "card_name": "onua_groob_alien",
-    "rules": "Wake with the other aliens, then wake again to look for Zerb. You win if Zerb is killed."
+    "card": {
+      "role": "GROOB",
+      "team": "groob"
+    }
   },
   {
     "id": 48,
-    "expansion": "onua",
-    "display_name": "LEADER",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onua_leader",
-    "rules": "You know who the aliens are. If both Zerb and Groob are in the game, you can only win if neither one of them dies."
+    "card": {
+      "role": "LEADER",
+      "team": "village"
+    }
   },
   {
     "id": 49,
-    "expansion": "onua",
-    "display_name": "MORTICIAN",
-    "team": "own",
-    "wake_up_time": "night",
-    "card_name": "onua_mortician",
-    "rules": "You win if either of your neighbors is killed."
+    "card": {
+      "role": "MORTICIAN",
+      "team": "mortician"
+    }
   },
   {
     "id": 50,
-    "expansion": "onua",
-    "display_name": "ORACLE",
-    "team": "village",
-    "wake_up_time": "twilight",
-    "card_name": "onua_oracle",
-    "rules": "Answer the app."
+    "card": {
+      "role": "ORACLE",
+      "team": "village"
+    }
   },
   {
     "id": 51,
-    "expansion": "onua",
-    "display_name": "PSYCHIC",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onua_psychic",
-    "rules": "View cards as instructed by the app."
+    "card": {
+      "role": "PSYCHIC",
+      "team": "village"
+    }
   },
   {
     "id": 52,
-    "expansion": "onua",
-    "display_name": "RASCAL",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onua_rascal",
-    "rules": "Exchange cards between two players as instructed by the app."
+    "card": {
+      "role": "RASCAL",
+      "team": "village"
+    }
   },
   {
     "id": 53,
-    "expansion": "onua",
-    "display_name": "SYNTHETIC ALIEN",
-    "team": "own",
-    "wake_up_time": "night",
-    "card_name": "onua_synthetic_alien",
-    "rules": "Wake with the other aliens. You win and everyone else loses if you are killed."
+    "card": {
+      "role": "SYNTHETIC_ALIEN",
+      "team": "synthetic"
+    }
   },
   {
     "id": 54,
-    "expansion": "onua",
-    "display_name": "ZERB ALIEN",
-    "team": "alien",
-    "wake_up_time": "night",
-    "card_name": "onua_zerb_alien",
-    "rules": "Wake with the other aliens, then wake again to look for Groob, you win, if Groob is killed."
+    "card": {
+      "role": "ZERB",
+      "team": "zerb"
+    }
   },
   {
     "id": 55,
-    "expansion": "onus",
-    "display_name": "ANNOYING LAD",
-    "team": "hero",
-    "wake_up_time": "night",
-    "card_name": "onus_annoying_lad",
-    "rules": "Is a hero who taps the shoulder of one of his neighbors several times until it gets well annoying."
+    "card": {
+      "role": "ANNOYING_LAD",
+      "team": "hero"
+    }
   },
   {
     "id": 56,
-    "expansion": "onus",
-    "display_name": "DETECTOR",
-    "team": "hero",
-    "wake_up_time": "night",
-    "card_name": "onus_detector",
-    "rules": "Is a hero who may view any other player's card or two of the center cards."
+    "card": {
+      "role": "DETECTOR",
+      "team": "hero"
+    }
   },
   {
     "id": 57,
-    "expansion": "onus",
-    "display_name": "DR. PEEKER",
-    "team": "villain",
-    "wake_up_time": "night",
-    "card_name": "onus_dr_peeker",
-    "rules": "Wakes up with the other supervillains and then may view one other player's card."
+    "card": {
+      "role": "DR_PEEKER",
+      "team": "villain"
+    }
   },
   {
     "id": 58,
-    "expansion": "onus",
-    "display_name": "EVILOMETER",
-    "team": "hero",
-    "wake_up_time": "night",
-    "card_name": "onus_evilometer",
-    "rules": "Is a hero who detects nearby supervillains by having her fist tapped if a supervillain is sitting next to her."
+    "card": {
+      "role": "EVILOMETER",
+      "team": "hero"
+    }
   },
   {
     "id": 59,
-    "expansion": "onus",
-    "display_name": "FLIPPER",
-    "team": "hero",
-    "wake_up_time": "night",
-    "card_name": "onus_flipper",
-    "rules": "Is a hero who flips any card face up. If that card is not a hero,he flips it back over, face down."
+    "card": {
+      "role": "FLIPPER",
+      "team": "hero"
+    }
   },
   {
     "id": 60,
-    "expansion": "onus",
-    "display_name": "HENCHMAN #7",
-    "team": "villain",
-    "wake_up_time": "night",
-    "card_name": "onus_henchman_7",
-    "rules": "Is a super villain who wakes up with the other super villains, but doesn't get to do anything special at that time."
+    "card": {
+      "role": "HENCHMAN",
+      "team": "villain"
+    }
   },
   {
     "id": 61,
-    "expansion": "onus",
-    "display_name": "INNOCENT BYSTANDER",
-    "team": "hero",
-    "wake_up_time": "day",
-    "card_name": "onus_innocent_bystander",
-    "rules": "Isn't a hero, but he wins, if the heroes find a super villain as for him, really being innocent, that's up for debate."
+    "card": {
+      "role": "INNOCENT_BYSTANDER",
+      "team": "hero"
+    }
   },
   {
     "id": 62,
-    "expansion": "onus",
-    "display_name": "INTERN",
-    "team": "own",
-    "wake_up_time": "night",
-    "card_name": "onus_intern",
-    "rules": "Knows who the mad scientist is and wins, If the mad scientist gets caught, if there is no mad scientist in the game, the intern must get caught in order to win."
+    "card": {
+      "role": "INTERN",
+      "team": "mad"
+    }
   },
   {
     "id": 63,
-    "expansion": "onus",
-    "display_name": "MAD SCIENTIST",
-    "team": "own",
-    "wake_up_time": "day",
-    "card_name": "onus_mad_scientist",
-    "rules": "Did something terrible and will only win if he gets caught, if the mad scientist gets caught, all the heroes and super villains lose."
+    "card": {
+      "role": "MAD_SCIENTIST",
+      "team": "mad"
+    }
   },
   {
     "id": 64,
-    "expansion": "onus",
-    "display_name": "MIRROR MAN",
-    "team": "hero",
-    "wake_up_time": "twilight",
-    "card_name": "onus_mirror_man",
-    "rules": "Starts as a hero, but then he looks at one of the center cards and becomes that role for the rest of the game. Waking up when that role is called."
+    "card": {
+      "role": "MIRROR_MAN",
+      "team": "hero"
+    }
   },
   {
     "id": 65,
-    "expansion": "onus",
-    "display_name": "RAPSCALLION",
-    "team": "villain",
-    "wake_up_time": "night",
-    "card_name": "onus_rapscallion",
-    "rules": "Wakes up with the other super villains and then may view one of the center cards."
+    "card": {
+      "role": "RAPSCALLION",
+      "team": "villain"
+    }
   },
   {
     "id": 66,
-    "expansion": "onus",
-    "display_name": "ROLE RETRIEVER",
-    "team": "hero",
-    "wake_up_time": "night",
-    "card_name": "onus_role_retriever",
-    "rules": "Is a canine hero who exchanges his roll card for the card of another player and then looks at his new card. He does not wake up later in the night if that role is called."
+    "card": {
+      "role": "ROLE_RETRIEVER",
+      "team": "hero"
+    }
   },
   {
     "id": 67,
-    "expansion": "onus",
-    "display_name": "SELF-AWARENESS GIRL",
-    "team": "hero",
-    "wake_up_time": "night",
-    "card_name": "onus_self_awareness_girl",
-    "rules": "Is a hero who may view her own card to see if it is changed."
+    "card": {
+      "role": "SELF-AWARENESS_GIRL",
+      "team": "hero"
+    }
   },
   {
     "id": 68,
-    "expansion": "onus",
-    "display_name": "SWITCHEROO",
-    "team": "hero",
-    "wake_up_time": "night",
-    "card_name": "onus_switcheroo",
-    "rules": "Is a hero who may switch cards between two other players but may not look at either card."
+    "card": {
+      "role": "SWITCHEROO",
+      "team": "hero"
+    }
   },
   {
     "id": 69,
-    "expansion": "onus",
-    "display_name": "TEMPTRESS",
-    "team": "villain",
-    "wake_up_time": "night",
-    "card_name": "onus_temptress",
-    "rules": "Wakes up with the others super villains and then may turn any player who is not a super villain into a villain by exchanging his card with the new villain card."
+    "card": {
+      "role": "TEMPTRESS",
+      "team": "villain"
+    }
   },
   {
     "id": 70,
-    "expansion": "onus",
-    "display_name": "VOODOO LOU",
-    "team": "hero",
-    "wake_up_time": "night",
-    "card_name": "onus_voodoo_lou",
-    "rules": "He is a hero who may view a center card. And if he does, he must exchange that card with any player's card."
+    "card": {
+      "role": "VOODOO_LOU",
+      "team": "hero"
+    }
   },
   {
     "id": 71,
-    "expansion": "onub",
-    "display_name": "APPRENTICE TANNER",
-    "team": "own",
-    "wake_up_time": "night",
-    "card_name": "onub_apprentice_tanner",
-    "rules": "If there is no tanner, you win only if you are killed."
+    "card": {
+      "role": "APPRENTICE_TANNER",
+      "team": "tanner"
+    }
   },
   {
     "id": 72,
-    "expansion": "onub",
-    "display_name": "AURA SEER",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onub_aura_seer",
-    "rules": "You know, who has moved or viewed a card"
+    "card": {
+      "role": "AURA_SEER",
+      "team": "village"
+    }
   },
   {
     "id": 73,
-    "expansion": "onub",
-    "display_name": "BEHOLDER",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onub_beholder",
-    "rules": "You know who the seer is and view her card to see if she is still the seer."
+    "card": {
+      "role": "BEHOLDER",
+      "team": "village"
+    }
   },
   {
     "id": 74,
-    "expansion": "onub",
-    "display_name": "BODY SNATCHER",
-    "team": "alien",
-    "wake_up_time": "night",
-    "card_name": "onub_body_snatcher",
-    "rules": "Wake with the other aliens, then wake again and exchange your card with another card as instructed by the app view your new card, which is now an alien and on the alien team."
+    "card": {
+      "role": "BODY_SNATCHER",
+      "team": "alien"
+    }
   },
   {
     "id": 75,
-    "expansion": "onub",
-    "display_name": "CURSED",
-    "team": "village",
-    "wake_up_time": "day",
-    "card_name": "onub_cursed",
-    "rules": "If a werewolf points at you, you become a werewolf."
+    "card": {
+      "role": "CURSED",
+      "team": "village"
+    }
   },
   {
     "id": 76,
-    "expansion": "onub",
-    "display_name": "DEFENDERER",
-    "team": "hero",
-    "wake_up_time": "day",
-    "card_name": "onub_defender_er",
-    "rules": "Prevents the player she is pointing at from being caught. Those pointing fingers are ignored and the player who isn't being pointed at by the defender with the most fingers pointed at them is caught instead."
+    "card": {
+      "role": "DEFENDERER",
+      "team": "hero"
+    }
   },
   {
     "id": 77,
-    "expansion": "onub",
-    "display_name": "EMPATH",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onub_empath",
-    "rules": "Observe some of the players point at other players as instructed by the app."
+    "card": {
+      "role": "EMPATH",
+      "team": "village"
+    }
   },
   {
     "id": 78,
-    "expansion": "onub",
-    "display_name": "FAMILY MAN",
-    "team": "own",
-    "wake_up_time": "night",
-    "card_name": "onub_family_man",
-    "rules": "Wins if everyone in his family, including himself does not get caught each night, different players are added to his family, family man can win if any other team wins."
+    "card": {
+      "role": "FAMILY_MAN",
+      "team": "family"
+    }
   },
   {
     "id": 79,
-    "expansion": "onub",
-    "display_name": "INNOCENT BYSTANDER",
-    "team": "hero",
-    "wake_up_time": "day",
-    "card_name": "onub_innocent_bystander",
-    "rules": "Isn't a hero, but he wins, if the heroes find a super villain as for him, really being innocent, that's up for debate."
+    "card": {
+      "role": "INNOCENT_BYSTANDER",
+      "team": "hero"
+    }
   },
   {
     "id": 80,
-    "expansion": "onub",
-    "display_name": "NOSTRADAMUS",
-    "team": "own",
-    "wake_up_time": "night",
-    "card_name": "onub_nostradamus",
-    "rules": "View up to three cards. If you see a card that isn't a villager stop viewing and tell the app what card you viewed."
+    "card": {
+      "role": "NOSTRADAMUS",
+      "team": "nostradamus"
+    }
   },
   {
     "id": 81,
-    "expansion": "onub",
-    "display_name": "PRINCE",
-    "team": "village",
-    "wake_up_time": "day",
-    "card_name": "onub_prince",
-    "rules": "You cannot be killed."
+    "card": {
+      "role": "PRINCE",
+      "team": "village"
+    }
   },
   {
     "id": 82,
-    "expansion": "onub",
-    "display_name": "RICOCHET RHINO",
-    "team": "hero",
-    "wake_up_time": "day",
-    "card_name": "onub_ricochet_rhino",
-    "rules": "Is on the hero team. If ricochet Rhino has the most players pointing at him, the player he is pointing at is caught instead of him."
+    "card": {
+      "role": "RICOCHET_RHINO",
+      "team": "hero"
+    }
   },
   {
     "id": 83,
-    "expansion": "onub",
-    "display_name": "SQUIRE",
-    "team": "werewolf",
-    "wake_up_time": "night",
-    "card_name": "onub_squire",
-    "rules": "You know who the werewolves are and check their cards to make sure they are still werewolves."
+    "card": {
+      "role": "SQUIRE",
+      "team": "werewolf"
+    }
   },
   {
     "id": 84,
-    "expansion": "onub",
-    "display_name": "THE SPONGE",
-    "team": "hero",
-    "wake_up_time": "day",
-    "card_name": "onub_the_sponge",
-    "rules": "Is a hero who can't be caught, because he's all spongy. Instead the player with the second most fingers pointing at them is caught."
+    "card": {
+      "role": "THE_SPONGE",
+      "team": "hero"
+    }
   },
   {
     "id": 85,
-    "expansion": "onub",
-    "display_name": "THING",
-    "team": "village",
-    "wake_up_time": "night",
-    "card_name": "onub_thing",
-    "rules": "Tap one of your neighbors."
+    "card": {
+      "role": "THING",
+      "team": "village"
+    }
   },
   {
     "id": 86,
-    "expansion": "onub",
-    "display_name": "WINDY WENDY",
-    "team": "hero",
-    "wake_up_time": "day",
-    "card_name": "onub_windy_wendy",
-    "rules": "Is a hero unless a super villain points at her, in which case, she decides to become a villain and joins the villain team."
+    "card": {
+      "role": "WINDY_WENDY",
+      "team": "hero"
+    }
   }
 ]

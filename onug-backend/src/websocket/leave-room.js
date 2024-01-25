@@ -36,8 +36,6 @@ exports.leaveRoom = async (ws, message) => {
     const defaultRoom = roomsData.find((room) => room.room_id === room_id);
     if (defaultRoom) {
       gameState.selected_cards = defaultRoom.selected_cards;
-      gameState.actions = [];
-      gameState.action_log = [];
       gameState.players = {};
       gameState.scene_number = 0;
       gameState.closed = false;

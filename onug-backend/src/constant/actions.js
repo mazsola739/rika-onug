@@ -94,7 +94,7 @@ exports.doppelganger = [
 ]
 exports.doppelganger_thecount = "doppelganger_thecount_kickoff_text" //id: 39 után
 exports.doppelganger_renfield = "doppelganger_renfield_kickoff_text" //id: 38 egyszerre
-exports.doppelganger_priest = "doppelganger_priest_kickoff_text" //id: 37 egyszerre
+exports.doppelganger_priest = "doppelganger_priest_kickoff_text" //id: 37 egyszerre !!!if no [28, 29, 31, 32, 34, 38, 39, 40, 41], then no need to
 exports.doppelganger_assassin = "doppelganger_assassin_kickoff_text" //id: 29 után
 exports.doppelganger_apprenticeassassin_assassin = "doppelganger_apprenticeassassin_assassin_kickoff_text" //id: 28 & 29 után
 exports.doppelganger_apprenticeassassin = "doppelganger_apprenticeassassin_kickoff_text" //id: 28 után
@@ -378,7 +378,7 @@ exports.paranormalinvestigator = "paranormalinvestigator_kickoff_text" //may vie
 
 exports.pickpocket = "pickpocket_kickoff_text" //doppelganger! may select another player, swap own mark with selected, show new mark - update known and actual player info
 
-exports.priest = "priest_kickoff_text" //doppelganger! swap hes mark to mark of clarity, may choose another player to swap mark of clarity - update actual player information and own known
+exports.priest = "priest_kickoff_text" //if no [28, 29, 31, 32, 34, 38, 39, 40, 41], then no need to start doppelganger! swap hes mark to mark of clarity, may choose another player to swap mark of clarity - update actual player information and own known
 
 exports.psychic = "psychic_kickoff_text" //doppelganger! select 1 or 2 cards even or odd players - no update expect if it was own known
 exports.random_psychic = ["psychic_view1_text", "psychic_view2_text"]
