@@ -13,7 +13,7 @@ exports.familyman_kickoff = [ //doppelganger! random selected players, show focu
 exports.familyman_close = ["familyman_is_end_text", "familyman_are_end_text"]
 
 
-exports.familyman = {}
+exports.familyman = () => []
 
 /*   generateActions(): RoleActionType[] {
     const familymanActions: RoleActionType[] = []

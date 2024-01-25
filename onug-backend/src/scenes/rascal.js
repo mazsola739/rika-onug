@@ -32,7 +32,7 @@ exports.rascalAnyTwoKeys = [
   'identifier_2rightneighbors_text',
 ]
 
-exports.rascal = {}
+exports.rascal = () => []
 
 /*   generateActions(): RoleActionType[] {
     const rascalActions: RoleActionType[] = []

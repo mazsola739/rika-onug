@@ -2,7 +2,7 @@ exports.intern = "intern_kickoff_alone_text" //doppelganger! - no update
 exports.intern_madscientist = "intern_kickoff_text" //doppelganger! - no update
 
 
-exports.intern = {}
+exports.intern = () => []
 
 
 /*   generateActions(): RoleActionType[] {

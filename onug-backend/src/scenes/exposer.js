@@ -6,7 +6,7 @@ exports.random_exposer = [
 ]
 
 
-exports.exposer = {}
+exports.exposer = () => []
 
 /*   generateActions(): RoleActionType[] {
     const exposerActions: RoleActionType[] = []

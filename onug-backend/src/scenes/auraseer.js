@@ -1,7 +1,7 @@
 const auraseer = "auraseer_kickoff_text"
 const auraseer_mark = "auraseer_mark_kickoff_text"
-
-exports.auraseer = {}
+//TODO
+exports.auraseer = () => []
 
 
 /* generateActions(): RoleActionType[] {

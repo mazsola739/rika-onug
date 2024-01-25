@@ -1,7 +1,7 @@
 exports.assassin = "assassin_kickoff_text" //doppelganger! any player mark swap with Mark of the Assassin - update selected player actual mark
+//TODO
 
-
-exports.assassin = {}
+exports.assassin = () => []
 
 
 /* generateActions(): RoleActionType[] {

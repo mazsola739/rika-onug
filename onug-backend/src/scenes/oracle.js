@@ -72,7 +72,7 @@ exports.random_oracle_number = [
   "oracle_guessnumber_failure_text",
 ]
 
-exports.oracle = {}
+exports.oracle = () => []
 
 /*   generateActions(): RoleActionType[] {
     const oracleActions: RoleActionType[] = []

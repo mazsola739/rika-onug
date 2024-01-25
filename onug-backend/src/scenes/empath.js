@@ -22,7 +22,7 @@ exports.random_empath = [
   "empath_action14_text",
 ]
 
-exports.empath = {}
+exports.empath = () => []
 
 /* generateActions(): RoleActionType[] {
     const empathActions: RoleActionType[] = []

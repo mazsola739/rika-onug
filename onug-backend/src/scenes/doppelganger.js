@@ -45,7 +45,7 @@ exports.doppelganger = [
   exports.doppelganger_familyman = "doppelganger_familyman_kickoff_text" //id 78 egyszerre
   
 
-exports.doppelganger = {}
+exports.doppelganger = () => []
 
 
 

@@ -78,7 +78,7 @@ exports.rippleCenterAnyKeys = [
   'identifier_center_text',
 ]
 
-exports.ripple = {}
+exports.ripple = () => []
 
 
 /*   rippleDeck(): ActionCardType[] {

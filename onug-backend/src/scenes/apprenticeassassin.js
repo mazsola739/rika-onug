@@ -1,7 +1,8 @@
 exports.apprenticeassassin = "apprenticeassassin_alone_text" //doppelganger! may any player mark swap with Mark of the Assassin - update selected player actual mark
 exports.assassin_apprenticeassassin = "apprenticeassassin_kickoff_text" //doppelganger! show assassin or may any player mark swap with Mark of the Assassin - update selected player actual mark
+//TODO
 
-exports.apprenticeassassin = {}
+exports.apprenticeassassin = () => []
 
 
  /*     generateActions(): RoleActionType[] {

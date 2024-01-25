@@ -1,7 +1,7 @@
 exports.mortician = "mortician_kickoff_text" //doppelganger! show 1 or 2 neighbor cards - no update
 exports.random_mortician = ["mortician_1card_text", "mortician_2cards_text"]
 
-exports.mortician = {}
+exports.mortician = () => []
 
 /* generateActions(): RoleActionType[] {
     const morticiansActions: RoleActionType[] = []

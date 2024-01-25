@@ -12,7 +12,7 @@ const random_blob_kickoff_text = [
 ] 
 const blob = ["blob_is_end_text", "blob_are_end_text"]
 
-exports.blob = {}
+exports.blob = () => []
 
 /* generateActions(): RoleActionType[] {
     const blobActions: RoleActionType[] = []

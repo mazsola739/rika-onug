@@ -1,7 +1,7 @@
 exports.werewolves = "werewolves_kickoff_text" //show player wolf cards, may choose any center card, swap with any player card - update selected card
 exports.werewolves_dreamwolf = "werewolves_dreamwolf_kickoff_text" //show player wolf cards, dreamwolf thumb, may choose any center card, swap with any player card - update selected card
  
-exports.werewolves = {}
+exports.werewolves = () => []
 
 
 /*   generateActions(): RoleActionType[] {

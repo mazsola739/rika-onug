@@ -2,7 +2,7 @@ exports.leader = "leader_kickoff_text" //doppelganger! show aline cards - no upd
 exports.leader_zerbgroob = "leader_zerbgroob_text" //doppelganger! show zerb and groob cards - no update
 
 
-exports.leader = {}
+exports.leader = () => []
 
 
 /*   generateActions(): RoleActionType[] {

@@ -12,7 +12,7 @@ const bodysnatcherKeys = [
   "identifier_bothneighbors_text",
 ]
 
-exports.bodysnatcher = {}
+exports.bodysnatcher = () => []
 
 /* generateActions(): RoleActionType[] {
     const bodysnatcherActions: RoleActionType[] = []

@@ -1,8 +1,8 @@
 const beholder_seer = "beholder_seer_kickoff_text" 
 const beholder_apprenticeseer = "beholder_apprenticeseer_kickoff_text" 
 const beholder_seer_apprenticeseer = "beholder_seer_apprenticeseer_kickoff_text" 
-
-exports.beholder = {}
+//TODO
+exports.beholder = () => []
 
 /* generateActions(): RoleActionType[] {
     const beholderActions: RoleActionType[] = []

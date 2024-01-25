@@ -19,7 +19,7 @@ exports.nostradamus = [ //start look up to 3 cards, if card team non-villager or
 ]
 
 
-exports.nostradamus = {}
+exports.nostradamus = () => []
 
 /*   generateActions(): RoleActionType[] {
     const nostradamusActions: RoleActionType[] = []

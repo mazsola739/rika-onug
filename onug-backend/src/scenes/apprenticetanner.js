@@ -1,6 +1,8 @@
-const apprenticetanner = "apprenticetanner_kickoff_text"
+const apprenticetanner = ["apprenticetanner_kickoff_text" , "apprenticetanner_kickoff2_text"]
 
-exports.apprenticetanner = {}
+exports.apprenticetanner = (selected_cards) => {
+  const selected_cards = 
+}
 
 /* generateActions(): RoleActionType[] {
     const apprenticetannerActions: RoleActionType[] = []

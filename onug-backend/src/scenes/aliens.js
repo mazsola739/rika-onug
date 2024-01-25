@@ -22,9 +22,9 @@ const alienAllKeys = [
   "identifier_evenplayers_text",
 ]
 
-exports.aliens = {}
+exports.aliens = () => []
 
-
+//TODO
 /* generateActions(): RoleActionType[] {
     const alienActions: RoleActionType[] = []
     const chosenAlienActions: RoleActionType[] = []

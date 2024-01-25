@@ -59,7 +59,7 @@ exports.random_madscientist_transition = [
   "madscientist_transition_21_text",
 ]
 
-exports.madscientist = {}
+exports.madscientist = () => []
 
 /*   generateActions(): RoleActionType[] {
     const madscientistActions: RoleActionType[] = []

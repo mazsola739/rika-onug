@@ -79,7 +79,6 @@ const { ripple } = require("./ripple")
 TODO
 
 module.exports = {
-  alienexchange,
   aliens,
   alphawolf,
   annoyinglad,

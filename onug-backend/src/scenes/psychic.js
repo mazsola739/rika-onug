@@ -4,7 +4,7 @@ exports.psychicKeys = ["identifier_anyeven_text", "identifier_anyodd_text"]
 
 
 
-exports.psychic = {}
+exports.psychic = () => []
 
 /*   generateActions(): RoleActionType[] {
     const psychicActions: RoleActionType[] = []
