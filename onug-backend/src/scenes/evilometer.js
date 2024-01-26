@@ -1,1 +1,6 @@
-exports.evilometer = () => ["evilometer_kickoff_text"]
+exports.evilometer = (hasDoppelganger) => [
+  hasDoppelganger
+    ? "doppelganger_evilometer_kickoff_text"
+    : "evilometer_kickoff_text",
+  "evilometer_kickoff2_text",
+]

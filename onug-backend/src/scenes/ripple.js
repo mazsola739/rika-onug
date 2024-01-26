@@ -77,8 +77,22 @@ exports.rippleCenterAnyKeys = [
   'identifier_anyodd_text',
   'identifier_center_text',
 ]
+const identifier_player  = [
+  "identifier_player1_text",
+  "identifier_player2_text",
+  "identifier_player3_text",
+  "identifier_player4_text",
+  "identifier_player5_text",
+  "identifier_player6_text",
+  "identifier_player7_text",
+  "identifier_player8_text",
+  "identifier_player9_text",
+  "identifier_player10_text",
+  "identifier_player11_text",
+  "identifier_player12_text",
+]
 
-exports.ripple = () => []
+exports.ripple = () => [] //TODO
 
 
 /*   rippleDeck(): ActionCardType[] {

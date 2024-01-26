@@ -17,17 +17,17 @@ exports.identifier_player  = [
   "identifier_player12_text",
 ]
 
-exports.aliens = "alien_kickoff_text" //show aline cards
+exports.aliens = "aliens_kickoff_text" //show aline cards
 exports.random_aliens = [
-  "alien_view_text", //alienAnyKeys - selected - show it  - update known if own selected
-  "alien_allview_text", //alienAnyKeys random selected - selected - may show - update known & actual if own selected & viewed
-  "alien_stare_text", //alien cards - no update
-  "alien_left_text", //swap card from right side alien - show new alien card secretly - update aliens known & actual card
-  "alien_right_text", //swap card from left side alien - show new alien card secretly - update aliens known & actual card
-  "alien_show_text", //actual character cards show public - update alines known & actual card
-  "alien_timer_text", //vote time halfing - no update
-  "alien_newalien_text", //alienAllKeys random selected - show to this player alien cards - update known & actual selected card team
-  "alien_alienhelper_text", //alienAllKeys  random selected - show to this player alien cards - update player known & actual new team alien helper
+  "aliens_view_text", //alienAnyKeys - selected - show it  - update known if own selected
+  "aliens_allview_text", //alienAnyKeys random selected - selected - may show - update known & actual if own selected & viewed
+  "aliens_stare_text", //alien cards - no update
+  "aliens_left_text", //swap card from right side alien - show new alien card secretly - update aliens known & actual card
+  "aliens_right_text", //swap card from left side alien - show new alien card secretly - update aliens known & actual card
+  "aliens_show_text", //actual character cards show public - update alines known & actual card
+  "aliens_timer_text", //vote time halfing - no update
+  "aliens_newalien_text", //alienAllKeys random selected - show to this player alien cards - update known & actual selected card team
+  "aliens_alienhelper_text", //alienAllKeys  random selected - show to this player alien cards - update player known & actual new team alien helper
 ]
 exports.alienAnyKeys = [
   "identifier_any_text",
@@ -114,7 +114,7 @@ exports.doppelganger = [
 ]
 exports.doppelganger_thecount = "doppelganger_thecount_kickoff_text" //id: 39 után
 exports.doppelganger_renfield = "doppelganger_renfield_kickoff_text" //id: 38 egyszerre
-exports.doppelganger_priest = "doppelganger_priest_kickoff_text" //id: 37 egyszerre !!!if no [28, 29, 31, 32, 34, 38, 39, 40, 41], then no need to
+exports.doppelganger_priest = "doppelganger_priest_kickoff_text" //id: 37  if no [28, 29, 31, 32, 34, 38, 39, 40, 41], then no need to
 exports.doppelganger_assassin = "doppelganger_assassin_kickoff_text" //id: 29 után
 exports.doppelganger_apprenticeassassin_assassin = "doppelganger_apprenticeassassin_assassin_kickoff_text" //id: 28 & 29 után
 exports.doppelganger_apprenticeassassin = "doppelganger_apprenticeassassin_kickoff_text" //id: 28 után
@@ -397,7 +397,7 @@ exports.random_oracle_number = [
 
 exports.paranormalinvestigator = "paranormalinvestigator_kickoff_text" //may view up to 2 another players card, if non-villager or non-hero stop - update known card role, actual card role
 
-exports.pickpocket = "pickpocket_kickoff_text" //doppelganger! may select another player, swap own mark with selected, show new mark - update known and actual player info
+exports.pickpocket = "pickpocket_kickoff_text" // may select another player, swap own mark with selected, show new mark - update known and actual player info
 
 exports.priest = "priest_kickoff_text" //if no [28, 29, 31, 32, 34, 38, 39, 40, 41], then no need to start doppelganger! swap hes mark to mark of clarity, may choose another player to swap mark of clarity - update actual player information and own known
 
@@ -543,7 +543,7 @@ exports.switcheroo = "switcheroo_kickoff_text" //may select 2 another players - 
 
 exports.temptress = "temptress_kickoff_text" //egyszerre többi gonosszal! select villain center card, select any non villain card , swap. - upade selected actual cards
 
-exports.thecount = "thecount_kickoff_text" //doppelganger! select any non-vampire player place mark of fear - update selected player actual info (make sure if its at a player he cant do action from mark-check point)
+exports.thecount = "thecount_kickoff_text" // select any non-vampire player place mark of fear - update selected player actual info (make sure if its at a player he cant do action from mark-check point)
 
 exports.thing = "thing_kickoff_text" //left or right neigbor player sending message to selected player - no update
 

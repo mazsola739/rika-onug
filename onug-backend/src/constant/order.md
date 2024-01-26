@@ -18,8 +18,7 @@
 
 #### N I G H T
 - Marks of Love
-- Sentinel                        !!!!!mark of fear check from this point 
-                                  !!!!!shield check (shield only protect card, not mark)
+- Sentinel !!!!!mark of fear check from this point shield check (shield only protect card, not mark)
 - Aliens + Synthetic Alien
     - Cow
 - Groob + Zerb

@@ -9,276 +9,344 @@
       "scene_number": 1
     },
     {
-      "scene_name": "ORACLE",
+      "scene_name": "ORACLE_QUESTION",
       "scene_number": 2
     },
     {
-      "scene_name": "COPYCAT",
+      "scene_name": "ORACLE_REACTION",
       "scene_number": 3
     },
     {
-      "scene_name": "MIRROR_MAN",
+      "scene_name": "COPYCAT",
       "scene_number": 4
     },
     {
-      "scene_name": "DOPPELGÄNGER",
+      "scene_name": "MIRROR_MAN",
       "scene_number": 5
+    },
+    {
+      "scene_name": "DOPPELGÄNGER",
+      "scene_number": 6
+    },
+    {
+      "scene_name": "DOPPELGÄNGER_INSTANT_ACTION",
+      "scene_number": 7
     }
   ],
   "dusk": [
     {
       "scene_name": "VAMPIRES",
-      "scene_number": 6
-    },
-    {
-      "scene_name": "THE_COUNT",
-      "scene_number": 7
-    },
-    {
-      "scene_name": "RENFIELD",
       "scene_number": 8
     },
     {
-      "scene_name": "DISEASED",
+      "scene_name": "THE_COUNT",
       "scene_number": 9
     },
     {
-      "scene_name": "CUPID",
+      "scene_name": "DOPPELGÄNGER_THE_COUNT",
       "scene_number": 10
     },
     {
-      "scene_name": "INSTIGATOR",
+      "scene_name": "RENFIELD",
       "scene_number": 11
     },
     {
-      "scene_name": "PRIEST",
+      "scene_name": "DISEASED",
       "scene_number": 12
     },
     {
-      "scene_name": "ASSASSIN",
+      "scene_name": "CUPID",
       "scene_number": 13
     },
     {
-      "scene_name": "APPRENTICE_ASSASSIN",
+      "scene_name": "INSTIGATOR",
       "scene_number": 14
     },
     {
-      "scene_name": "EVERYONE_MARK",
+      "scene_name": "PRIEST",
       "scene_number": 15
+    },
+    {
+      "scene_name": "DOPPELGÄNGER_PRIEST",
+      "scene_number": 16
+    },
+    {
+      "scene_name": "ASSASSIN",
+      "scene_number": 17
+    },
+    {
+      "scene_name": "DOPPELGÄNGER_ASSASSIN",
+      "scene_number": 18
+    },
+    {
+      "scene_name": "APPRENTICE_ASSASSIN",
+      "scene_number": 19
+    },
+    {
+      "scene_name": "DOPPELGÄNGER_APPRENTICE_ASSASSIN",
+      "scene_number": 20
+    },
+    {
+      "scene_name": "EVERYONE_MARK",
+      "scene_number": 21
     }
   ],
   "night": [
     {
       "scene_name": "LOVERS",
-      "scene_number": 16
-    },
-    {
-      "scene_name": "SENTINEL",
-      "scene_number": 17
-    },
-    {
-      "scene_name": "ALIENS",
-      "scene_number": 18
-    },
-    {
-      "scene_name": "COW",
-      "scene_number": 19
-    },
-    {
-      "scene_name": "GROOB_ZERB",
-      "scene_number": 20
-    },
-    {
-      "scene_name": "LEADER",
-      "scene_number": 21
-    },
-    {
-      "scene_name": "BODY_SNATCHER",
       "scene_number": 22
     },
     {
-      "scene_name": "SUPER_VILLAINS",
-      "scene_number": 23
-    },
-    {
-      "scene_name": "TEMPTRESS",
+      "scene_name": "SENTINEL",
       "scene_number": 24
     },
     {
-      "scene_name": "DR_PEEKER",
+      "scene_name": "ALIENS",
       "scene_number": 25
     },
     {
-      "scene_name": "RAPSCALLION",
+      "scene_name": "COW",
       "scene_number": 26
     },
     {
-      "scene_name": "EVILOMETER",
+      "scene_name": "GROOB_ZERB",
       "scene_number": 27
     },
     {
-      "scene_name": "WEREWOLVES",
+      "scene_name": "LEADER",
       "scene_number": 28
     },
     {
-      "scene_name": "ALPHA_WOLF",
+      "scene_name": "LEADER_ZERB_GROOB",
       "scene_number": 29
     },
     {
-      "scene_name": "MYSTIC_WOLF",
+      "scene_name": "BODY_SNATCHER",
       "scene_number": 30
     },
     {
-      "scene_name": "MINION",
+      "scene_name": "DOPPELGÄNGER_BODY_SNATCHER",
       "scene_number": 31
     },
     {
-      "scene_name": "APPRENTICE_TANNER",
+      "scene_name": "SUPER_VILLAINS",
       "scene_number": 32
     },
     {
-      "scene_name": "MAD_SCIENTIST",
+      "scene_name": "TEMPTRESS",
       "scene_number": 33
     },
     {
-      "scene_name": "INTERN",
+      "scene_name": "DR_PEEKER",
       "scene_number": 34
     },
     {
-      "scene_name": "MASONS",
+      "scene_name": "RAPSCALLION",
       "scene_number": 35
     },
     {
-      "scene_name": "THING",
+      "scene_name": "EVILOMETER",
       "scene_number": 36
     },
     {
-      "scene_name": "ANNOYING_LAD",
+      "scene_name": "WEREWOLVES",
       "scene_number": 37
     },
     {
-      "scene_name": "SEER",
+      "scene_name": "ALPHA_WOLF",
       "scene_number": 38
     },
     {
-      "scene_name": "APPRENTICE_SEER",
+      "scene_name": "MYSTIC_WOLF",
       "scene_number": 39
     },
     {
-      "scene_name": "PARANORMAL_INVESTIGATOR",
+      "scene_name": "MINION",
       "scene_number": 40
     },
     {
-      "scene_name": "MARKSMAN",
+      "scene_name": "APPRENTICE_TANNER",
       "scene_number": 41
     },
     {
-      "scene_name": "NOSTRADAMUS",
+      "scene_name": "MAD_SCIENTIST",
       "scene_number": 42
     },
     {
-      "scene_name": "PSYCHIC",
+      "scene_name": "INTERN",
       "scene_number": 43
     },
     {
-      "scene_name": "DETECTOR",
+      "scene_name": "MASONS",
       "scene_number": 44
     },
     {
-      "scene_name": "ROBBER",
+      "scene_name": "THING",
       "scene_number": 45
     },
     {
-      "scene_name": "WITCH",
+      "scene_name": "ANNOYING_LAD",
       "scene_number": 46
     },
     {
-      "scene_name": "PICKPOCKET",
+      "scene_name": "SEER",
       "scene_number": 47
     },
     {
-      "scene_name": "ROLE_RETRIEVER",
+      "scene_name": "APPRENTICE_SEER",
       "scene_number": 48
     },
     {
-      "scene_name": "VOODOO_LOU",
+      "scene_name": "PARANORMAL_INVESTIGATOR",
       "scene_number": 49
     },
     {
-      "scene_name": "TROUBLEMAKER",
+      "scene_name": "MARKSMAN",
       "scene_number": 50
     },
     {
-      "scene_name": "VILLAGE_IDIOT",
+      "scene_name": "NOSTRADAMUS",
       "scene_number": 51
     },
     {
-      "scene_name": "AURA_SEER",
+      "scene_name": "NOSTRADAMUS_REACTION",
       "scene_number": 52
     },
     {
-      "scene_name": "GREMLIN",
+      "scene_name": "PSYCHIC",
       "scene_number": 53
     },
     {
-      "scene_name": "RASCAL",
+      "scene_name": "DOPPELGÄNGER_PSYCHIC",
       "scene_number": 54
     },
     {
-      "scene_name": "SWITCHEROO",
+      "scene_name": "DETECTOR",
       "scene_number": 55
     },
     {
-      "scene_name": "DRUNK",
+      "scene_name": "ROBBER",
       "scene_number": 56
     },
     {
-      "scene_name": "INSOMNIAC",
+      "scene_name": "WITCH",
       "scene_number": 57
     },
     {
-      "scene_name": "SELF-AWARENESS_GIRL",
+      "scene_name": "PICKPOCKET",
       "scene_number": 58
     },
     {
-      "scene_name": "SQUIRE",
+      "scene_name": "ROLE_RETRIEVER",
       "scene_number": 59
     },
     {
-      "scene_name": "BEHOLDER",
+      "scene_name": "VOODOO_LOU",
       "scene_number": 60
     },
     {
-      "scene_name": "REVEALER",
+      "scene_name": "TROUBLEMAKER",
       "scene_number": 61
     },
     {
-      "scene_name": "EXPOSER",
+      "scene_name": "VILLAGE_IDIOT",
       "scene_number": 62
     },
     {
-      "scene_name": "FLIPPER",
+      "scene_name": "AURA_SEER",
       "scene_number": 63
     },
     {
-      "scene_name": "EMPATH",
+      "scene_name": "GREMLIN",
       "scene_number": 64
     },
     {
-      "scene_name": "CURATOR",
+      "scene_name": "RASCAL",
       "scene_number": 65
     },
     {
-      "scene_name": "BLOB",
+      "scene_name": "DOPPELGÄNGER_RASCAL",
       "scene_number": 66
     },
     {
-      "scene_name": "MORTICIAN",
+      "scene_name": "SWITCHEROO",
       "scene_number": 67
     },
     {
-      "scene_name": "FAMILY_MAN",
+      "scene_name": "DRUNK",
       "scene_number": 68
+    },
+    {
+      "scene_name": "INSOMNIAC",
+      "scene_number": 68
+    },
+    {
+      "scene_name": "SELF_AWARENESS_GIRL",
+      "scene_number": 69
+    },
+    {
+      "scene_name": "SQUIRE",
+      "scene_number": 70
+    },
+    {
+      "scene_name": "BEHOLDER",
+      "scene_number": 71
+    },
+    {
+      "scene_name": "REVEALER",
+      "scene_number": 72
+    },
+    {
+      "scene_name": "DOPPELGÄNGER_REVEALER",
+      "scene_number": 73
+    },
+    {
+      "scene_name": "EXPOSER",
+      "scene_number": 74
+    },
+    {
+      "scene_name": "DOPPELGÄNGER_EXPOSER",
+      "scene_number": 75
+    },
+    {
+      "scene_name": "FLIPPER",
+      "scene_number": 76
+    },
+    {
+      "scene_name": "DOPPELGÄNGER_FLIPPER",
+      "scene_number": 77
+    },
+    {
+      "scene_name": "EMPATH",
+      "scene_number": 78
+    },
+    {
+      "scene_name": "DOPPELGÄNGER_EMPATH",
+      "scene_number": 79
+    },
+    {
+      "scene_name": "CURATOR",
+      "scene_number": 80
+    },
+    {
+      "scene_name": "DOPPELGÄNGER_CURATOR",
+      "scene_number": 81
+    },
+    {
+      "scene_name": "BLOB",
+      "scene_number": 82
+    },
+    {
+      "scene_name": "MORTICIAN",
+      "scene_number": 83
+    },
+    {
+      "scene_name": "DOPPELGÄNGER_MORTICIAN",
+      "scene_number": 84
+    },
+    {
+      "scene_name": "FAMILY_MAN",
+      "scene_number": 85
     }
   ],
   "ripple": [

@@ -464,7 +464,7 @@
   {
     "id": 67,
     "card": {
-      "role": "SELF-AWARENESS_GIRL",
+      "role": "SELF_AWARENESS_GIRL",
       "team": "hero"
     }
   },

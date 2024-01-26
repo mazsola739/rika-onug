@@ -1,20 +1,21 @@
-const aliens = "alien_kickoff_text" 
+const { pickRandomUpToThreePlayers } = require("./utils")
+
 const random_aliens = [
-  "alien_view_text", 
-  "alien_allview_text", 
-  "alien_stare_text",
-  "alien_left_text",
-  "alien_right_text", 
-  "alien_show_text", 
-  "alien_timer_text", 
-  "alien_newalien_text", 
-  "alien_alienhelper_text", 
+  "aliens_view_text",
+  "aliens_allview_text",
+  "aliens_stare_text",
+  "aliens_left_text",
+  "aliens_right_text",
+  "aliens_show_text",
+  "aliens_timer_text",
+  "aliens_newalien_text",
+  "aliens_alienhelper_text",
 ]
 const alienAnyKeys = [
   "identifier_any_text",
   "identifier_anyeven_text",
   "identifier_anyodd_text",
-  "activePlayers", 
+  "activePlayers",
 ]
 const alienAllKeys = [
   "identifier_everyone_text",
@@ -22,70 +23,30 @@ const alienAllKeys = [
   "identifier_evenplayers_text",
 ]
 
-exports.aliens = () => []
+exports.aliens = (totalPlayers) => {
+  const result = ["aliens_kickoff_text"]
+  const randomInstructions = getRandomItemFromArray(random_aliens)
 
-//TODO
-/* generateActions(): RoleActionType[] {
-    const alienActions: RoleActionType[] = []
-    const chosenAlienActions: RoleActionType[] = []
+  result[1] = randomInstructions
 
-    const chosenAlienActionKey = selectRandomKey(random_aliens)
-
-    if (chosenAlienActionKey.includes('view')) {
-      const identifierKey = getRandomItemFromArray(alienStoreAnyKeys)
-      const playerText: string =
-        identifierKey === 'activePlayers'
-          ? pickRandomUpToThreePlayers(totalPlayers, 'or')
-          : identifier[identifierKey]
-
-      chosenAlienActions.push(
-        {
-          text: random_aliens[chosenAlienActionKey],
-          time: BASE_TIME,
-          image: 'onua_alien',
-        },
-        { text: playerText, time: BASE_TIME, image: 'onua_alien' }
+  if (randomInstructions.includes("view")) {
+    let randomAnyIdentifier = getRandomItemFromArray(alienAnyKeys)
+    if (randomAnyIdentifier === "activePlayers") {
+      randomAnyIdentifier = pickRandomUpToThreePlayers(
+        totalPlayers,
+        "conjunction_or"
       )
-    } else if (
-      chosenAlienActionKey.includes('newalien') ||
-      chosenAlienActionKey.includes('alienhelper')
-    ) {
-      this.isNewAlienOrHelper = true
-      const playerKey = getRandomItemFromArray(alienStoreAllKeys)
-      const playerText: string = identifier[playerKey]
-
-      chosenAlienActions.push(
-        { text: playerText, time: BASE_TIME, image: 'onua_alien' },
-        {
-          text: random_aliens[chosenAlienActionKey],
-          time: BASE_TIME,
-          image: 'onua_alien',
-        }
-      )
-    } else {
-      chosenAlienActions.push({
-        text: random_aliens[chosenAlienActionKey],
-        time: BASE_TIME,
-        image: 'onua_alien',
-      })
     }
+    result[2] = randomAnyIdentifier
+  }
 
-    alienActions.push(
-      { text: aliens.alien_wake_text, time: BASE_TIME, image: 'onua_alien' },
-      ...chosenAlienActions,
+  if (
+    randomInstructions === "aliens_newalien_text" ||
+    randomInstructions === "aliens_alienhelper_text"
+  ) {
+    const randomAllIdentifier = getRandomItemFromArray(alienAllKeys)
+    result[2] = randomAllIdentifier
+  }
 
-      generateTimedAction(ACTION_TIME)
-    )
-    this.isNewAlienOrHelper &&
-      alienActions.push({
-        text: aliens.alien_fistaway_text,
-        time: BASE_TIME,
-        image: 'onua_alien',
-      })
-    alienActions.push(
-      ...(isCardSelectedById(selected cards, 45) ? cowStore.generateActions() : []),
-      { text: aliens.alien_close_text, time: BASE_TIME, image: 'onua_alien' }
-    )
-
-    return alienActions
-  } */
+  return result
+}

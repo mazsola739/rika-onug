@@ -110,6 +110,7 @@ export const GameTable: React.FC = observer(() => {
           {chosenSuperVillain && renderCenterExtraCard('Villain')}
         </CenterCardContainer>
         {hasMarks && renderMarks(selectedMarks, hasDoppelganger)}
+        {/* //TODO redesign */}
         {hasCurator && renderArtifacts(artifacts)}
       </StyledGameTable>
       {players && renderPlayers(players)}

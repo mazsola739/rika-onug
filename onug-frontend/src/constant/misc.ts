@@ -133,6 +133,9 @@ export const nostradamusTeam: Record<string, number[]> = {
   doppelganger: doppelgangerTeam,
 }
 
+export const conjunction_and = 'and'
+export const conjunction_or = 'or'
+
 export const alienStoreAnyKeys: string[] = [
   'identifier_any_text',
   'identifier_anyeven_text',

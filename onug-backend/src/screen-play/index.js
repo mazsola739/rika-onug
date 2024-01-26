@@ -76,6 +76,8 @@ loverStore isCardSelectedById(31)
 sentinelStore isCardSelectedById(25)
 alienStore areAnyCardSelectedById(alienIds)
 groobzerbStore areAllCardsSelectedById([47, 54])
+leaderStore isCardSelectedById(48) &&
+        areAnyCardSelectedById(alienIds)
 bodysnatcherStore isCardSelectedById(74)
 supervillainStore (areAnyCardSelectedById([57, 65, 69]) &&
         (isCardSelectedById(60) ||
@@ -88,8 +90,6 @@ mysticwolfStore isCardSelectedById(22)
 minionStore isCardSelectedById(7) &&
         areAnyCardSelectedById(wolfIds)
 apprenticetannerStore areAllCardsSelectedById([71, 10])
-leaderStore isCardSelectedById(48) &&
-        areAnyCardSelectedById(alienIds)
 madscientistStore isCardSelectedById(63)
 internStore isCardSelectedById(62)
 masonStore areAllCardsSelectedById([5, 6])
@@ -118,7 +118,6 @@ insomniacStore isCardSelectedById(4)
 selfawarenessgirlStore isCardSelectedById(67)
 squireStore isCardSelectedById(83) &&
         areAnyCardSelectedById(wolfIds)
-familymanStore isCardSelectedById(78)
 beholderStore isCardSelectedById(73) &&
         areAnyCardSelectedById([9, 18])
 revealerStore isCardSelectedById(24)
@@ -127,4 +126,5 @@ flipperStore isCardSelectedById(59)
 empathStore isCardSelectedById(77)
 curatorStore isCardSelectedById(20)
 blobStore isCardSelectedById(44)
-morticiansStore isCardSelectedById(49) */
+morticiansStore isCardSelectedById(49)
+familymanStore isCardSelectedById(78) */
