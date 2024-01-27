@@ -1,12 +1,11 @@
 import { makeAutoObservable } from 'mobx'
 import { CardType, CenterCardType, PlayersType } from 'types'
 import { selectedDeckStore } from 'store'
-import { hasMarkIds, supervillainIdsToCheck, wolfIdsToCheck } from 'constant'
+import { hasMarkIds } from 'constant'
 import { utils, gameTableStoreUtils } from 'utils'
 
-const { checkCardPresence, filterCardsByIds } = gameTableStoreUtils
-const { areAnyCardSelectedById, getRandomItemFromArray, shuffleCardsArray } =
-  utils
+const { checkCardPresence } = gameTableStoreUtils
+const { areAnyCardSelectedById } = utils
 
 export class GameTableStore {
   centerCards: CenterCardType
@@ -52,39 +51,6 @@ export class GameTableStore {
 
   setPlayers(players: PlayersType[]): void {
     this.players = players
-  }
-
-  distributeCards(): {
-    centerCards: CardType[]
-    playerCards: CardType[]
-    chosenWolf?: CardType
-    chosenSuperVillain?: CardType
-  } {
-    let cards = [...this.selectedCards]
-
-    const chosenWolf = this.hasAlphaWolf
-      ? getRandomItemFromArray(filterCardsByIds(cards, wolfIdsToCheck))
-      : undefined
-
-    const chosenSupervillain = this.hasTemptress
-      ? getRandomItemFromArray(filterCardsByIds(cards, supervillainIdsToCheck))
-      : undefined
-
-    if (chosenWolf) cards = cards.filter((card) => card !== chosenWolf)
-    if (chosenSupervillain)
-      cards = cards.filter((card) => card !== chosenSupervillain)
-
-    const shuffledCards = shuffleCardsArray(cards)
-
-    const centerCards = shuffledCards.slice(0, 3)
-    const playerCards = shuffledCards.slice(3)
-
-    return {
-      centerCards,
-      playerCards,
-      chosenWolf,
-      chosenSuperVillain: chosenSupervillain,
-    }
   }
 }
 

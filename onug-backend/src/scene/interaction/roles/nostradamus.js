@@ -1,1 +1,1 @@
-exports.nostradamus = {}
+exports.nostradamus = () => {}

@@ -1,1 +1,1 @@
-exports.supervillains = {}
+exports.supervillains = () => {}

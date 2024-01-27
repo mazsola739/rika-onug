@@ -1,1 +1,1 @@
-exports.auraseer = {}
+exports.auraseer = () => {}

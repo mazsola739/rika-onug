@@ -1,1 +1,1 @@
-exports.marksman = {}
+exports.marksman = () => {}

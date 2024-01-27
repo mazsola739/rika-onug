@@ -1,1 +1,2 @@
-exports.oracle = {}
+exports.oracle_question = () => {}
+exports.oracle_reaction = () => {}

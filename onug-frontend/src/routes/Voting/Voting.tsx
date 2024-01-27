@@ -13,9 +13,7 @@ export const Voting: React.FC = observer(() => {
       player_number: 1,
       ready: false,
       card: {
-        known_card: {
-          id: 1,
-        },
+        id: 1,
       },
     },
   ]

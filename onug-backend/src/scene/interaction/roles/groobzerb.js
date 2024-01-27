@@ -1,1 +1,1 @@
-exports.groobzerb = {}
+exports.groobzerb = () => {}

@@ -1,2 +1,2 @@
-exports.ripple = {}
+exports.ripple = () => {}
 

@@ -1,1 +1,1 @@
-exports.paranormalinvestigator = {}
+exports.paranormalinvestigator = () => {}

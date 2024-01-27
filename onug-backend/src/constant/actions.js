@@ -1,4 +1,3 @@
-//TODO check _kickoff2_text
 //TODO easteregg
 //todo joke
 

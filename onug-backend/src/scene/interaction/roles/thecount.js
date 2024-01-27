@@ -1,1 +1,1 @@
-exports.thecount = {}
+exports.thecount = () => {}

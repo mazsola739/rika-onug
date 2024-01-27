@@ -1,1 +1,1 @@
-exports.werewolves = {}
+exports.werewolves = () => {}

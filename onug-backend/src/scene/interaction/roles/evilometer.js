@@ -1,1 +1,1 @@
-exports.evilometer = {}
+exports.evilometer = () => {}

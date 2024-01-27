@@ -1,1 +1,1 @@
-exports.blob = {}
+exports.blob = () => {}

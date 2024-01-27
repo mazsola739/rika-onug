@@ -1,1 +1,1 @@
-exports.drpeeker = {}
+exports.drpeeker = () => {}

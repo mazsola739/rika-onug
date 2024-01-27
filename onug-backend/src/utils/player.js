@@ -1,3 +1,5 @@
+const { logTrace } = require("../log")
+
 exports.determineTotalPlayers = (totalCharacters, selectedCards) => {
   const hasAlphaWolf = selectedCards.includes(17)
   const hasTemptress = selectedCards.includes(69)
@@ -25,10 +27,11 @@ exports.getBoard = (gameState) => {
     }
   })
 
+  const newWolfCard = gameState.newWolfCard
+  const newVillainCard = gameState.newVillainCard
+
   return {
     players: playersPublic,
   }
 }
 
-
-exports.cardIdToTokenBuilder = id => `card_id_${id}_to_token`

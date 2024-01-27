@@ -13,7 +13,7 @@ import {
   OwnKnownCardImage,
   OwnKnownCardText,
 } from './GameTable.styles'
-import { CardType, MarkType, PlayerType, PlayersType, TokenType } from 'types'
+import { MarkType, PlayerType, PlayersType, TokenType } from 'types'
 
 //TODO information from backend
 const renderOwnCard = (player: PlayerType) => (
@@ -67,13 +67,13 @@ const renderPlayerCards = (players: PlayersType[]) => (
   </CardContainer>
 )
 
-const renderCenterCard = (title: string, cards: CardType[]) => (
+const renderCenterCard = (title: string) => (
   <CardContainer>
     <CardTitle>{title}</CardTitle>
     <CenterCards>
-      {cards.map((card, i) => (
-        <GameCard key={i} isCenter={true} />
-      ))}
+      <GameCard isCenter={true} />
+      <GameCard isCenter={true} />
+      <GameCard isCenter={true} />
     </CenterCards>
   </CardContainer>
 )

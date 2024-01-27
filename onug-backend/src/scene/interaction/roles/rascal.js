@@ -1,1 +1,1 @@
-exports.rascal = {}
+exports.rascal = () => {}

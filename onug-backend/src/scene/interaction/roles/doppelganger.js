@@ -1,2 +1,2 @@
-exports.doppelganger = {}
+exports.doppelganger = () => {}
   

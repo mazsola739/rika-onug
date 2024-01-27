@@ -1,1 +1,1 @@
-exports.familyman = {}
+exports.familyman = () => {}

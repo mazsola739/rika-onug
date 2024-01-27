@@ -1,1 +1,1 @@
-exports.cardselection = {}
+exports.cardselection = () => {}

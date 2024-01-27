@@ -1,1 +1,1 @@
-exports.pickpocket = {}
+exports.pickpocket = () => {}

@@ -1,1 +1,1 @@
-exports.masons = {}
+exports.masons = () => {}

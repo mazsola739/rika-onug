@@ -1,1 +1,1 @@
-exports.assassin = {}
+exports.assassin = () => {}

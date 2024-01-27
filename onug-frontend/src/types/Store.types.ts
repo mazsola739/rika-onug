@@ -47,8 +47,6 @@ export type PlayersType = {
   player_number: number
   ready: boolean
   card: {
-    known_card: {
-      id: number
-    }
+    id: number
   }
 }

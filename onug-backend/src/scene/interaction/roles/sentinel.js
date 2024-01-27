@@ -1,1 +1,1 @@
-exports.sentinel = {}
+exports.sentinel = () => {}

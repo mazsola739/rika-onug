@@ -1,1 +1,1 @@
-exports.flipper = {}
+exports.flipper = () => {}

@@ -1,1 +1,1 @@
-exports.gremlin = {}
+exports.gremlin = () => {}

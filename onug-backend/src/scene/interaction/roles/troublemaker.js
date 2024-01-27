@@ -1,1 +1,1 @@
-exports.troublemaker = {}
+exports.troublemaker = () => {}

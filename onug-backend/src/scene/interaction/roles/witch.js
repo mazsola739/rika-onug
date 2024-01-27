@@ -1,1 +1,1 @@
-exports.witch = {}
+exports.witch = () => {}

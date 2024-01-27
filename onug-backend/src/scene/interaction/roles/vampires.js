@@ -1,1 +1,1 @@
-exports.vampires = {}
+exports.vampires = () => {}

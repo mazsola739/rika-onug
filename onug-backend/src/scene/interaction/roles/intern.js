@@ -1,1 +1,1 @@
-exports.intern = {}
+exports.intern = () => {}

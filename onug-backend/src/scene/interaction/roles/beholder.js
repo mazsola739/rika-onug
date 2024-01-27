@@ -1,1 +1,1 @@
-exports.beholder = {}
+exports.beholder = () => {}

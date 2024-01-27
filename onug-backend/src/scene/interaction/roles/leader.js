@@ -1,1 +1,1 @@
-exports.leader = {}
+exports.leader = () => {}

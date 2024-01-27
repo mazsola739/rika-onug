@@ -1,1 +1,1 @@
-exports.voodoolou = {}
+exports.voodoolou = () => {}

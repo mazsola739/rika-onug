@@ -1,1 +1,1 @@
-exports.diseased = {}
+exports.diseased = () => {}

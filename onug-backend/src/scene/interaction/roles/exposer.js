@@ -1,1 +1,1 @@
-exports.exposer = {}
+exports.exposer = () => {}

@@ -1,1 +1,1 @@
-exports.priest = {}
+exports.priest = () => {}

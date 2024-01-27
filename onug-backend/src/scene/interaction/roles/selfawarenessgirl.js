@@ -1,1 +1,1 @@
-exports.selfawarenessgirl = {}
+exports.selfawarenessgirl = () => {}

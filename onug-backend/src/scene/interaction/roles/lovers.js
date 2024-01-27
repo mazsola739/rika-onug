@@ -1,1 +1,1 @@
-exports.lovers = {}
+exports.lovers = () => {}

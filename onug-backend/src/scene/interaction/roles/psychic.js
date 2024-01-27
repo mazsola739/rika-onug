@@ -1,1 +1,1 @@
-exports.psychic = {}
+exports.psychic = () => {}

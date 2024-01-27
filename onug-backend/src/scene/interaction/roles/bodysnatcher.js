@@ -1,1 +1,1 @@
-exports.bodysnatcher = {}
+exports.bodysnatcher = () => {}

@@ -1,1 +1,1 @@
-exports.switcheroo = {}
+exports.switcheroo = () => {}

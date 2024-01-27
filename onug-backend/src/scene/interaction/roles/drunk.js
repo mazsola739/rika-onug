@@ -1,1 +1,1 @@
-exports.drunk = {}
+exports.drunk = () => {}

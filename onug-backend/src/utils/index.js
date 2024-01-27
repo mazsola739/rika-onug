@@ -14,7 +14,7 @@ const {
   getMasonCardPositionNamesForPlayers,
   getAllPositions,
 } = require("./card")
-const { determineTotalPlayers, getBoard, cardIdToTokenBuilder } = require("./player")
+const { determineTotalPlayers, getBoard } = require("./player")
 const { randomPlayerName } = require("./name-generator")
 const { sanitize, truncate } = require("./sanitizer")
 const { isGameTableClosed, isGamePlayStopped } = require("./game-state")
@@ -37,7 +37,6 @@ module.exports = {
   includesAll,
   masonsInPlay,
   werewolvesInPlay,
-  cardIdToTokenBuilder,
   getCardPositionNamesForPlayers,
   getWerewolfCardPositionNamesForPlayers,
   multipleWerewolvesAtPlay,

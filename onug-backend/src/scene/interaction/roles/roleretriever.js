@@ -1,1 +1,1 @@
-exports.roleretriever = {}
+exports.roleretriever = () => {}

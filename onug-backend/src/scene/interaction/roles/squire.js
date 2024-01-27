@@ -1,1 +1,1 @@
-exports.squire = {}
+exports.squire = () => {}

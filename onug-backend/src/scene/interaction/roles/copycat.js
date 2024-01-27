@@ -1,1 +1,1 @@
-exports.copycat = {}
+exports.copycat = () => {}

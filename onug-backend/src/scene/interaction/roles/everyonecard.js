@@ -1,1 +1,1 @@
-exports.everyonecard = {}
+exports.everyonecard = () => {}

@@ -44,13 +44,18 @@ export const GameTable: React.FC = observer(() => {
 
   const token = sessionStorage.getItem('token')
 
-  // TODO REMOVE FE shuffled cards completely, use data from BE
-  const { centerCards, chosenWolf, chosenSuperVillain } =
-    gameTableStore.distributeCards()
-  const { hasSentinel, hasMarks, hasDoppelganger, hasCurator } = gameTableStore
+  const {
+    hasSentinel,
+    hasMarks,
+    hasDoppelganger,
+    hasCurator,
+    hasAlphaWolf,
+    hasTemptress,
+  } = gameTableStore
   const selectedMarks = selectedDeckStore.selectedMarks
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
+
   const { setPlayer } = playerStore
   const { setPlayers } = gameTableStore
   const players = gameTableStore.players
@@ -105,9 +110,9 @@ export const GameTable: React.FC = observer(() => {
           {hasSentinel && (
             <Shield src={`/assets/tokens/shield.png`} alt="shield" />
           )}
-          {chosenWolf && renderCenterExtraCard('Werewolf')}
-          {renderCenterCard('Center', centerCards)}
-          {chosenSuperVillain && renderCenterExtraCard('Villain')}
+          {hasAlphaWolf && renderCenterExtraCard('Werewolf')}
+          {renderCenterCard('Center')}
+          {hasTemptress && renderCenterExtraCard('Villain')}
         </CenterCardContainer>
         {hasMarks && renderMarks(selectedMarks, hasDoppelganger)}
         {/* //TODO redesign */}

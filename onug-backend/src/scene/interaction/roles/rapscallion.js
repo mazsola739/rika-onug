@@ -1,1 +1,1 @@
-exports.rapscallion = {}
+exports.rapscallion = () => {}

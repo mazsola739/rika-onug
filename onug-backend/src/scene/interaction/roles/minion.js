@@ -1,1 +1,1 @@
-exports.minion = {}
+exports.minion = () => {}

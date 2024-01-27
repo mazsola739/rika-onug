@@ -1,1 +1,1 @@
-exports.mortician = {}
+exports.mortician = () => {}

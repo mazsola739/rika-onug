@@ -1,1 +1,1 @@
-exports.seer = {}
+exports.seer = () => {}

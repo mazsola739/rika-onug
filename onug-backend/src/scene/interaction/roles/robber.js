@@ -1,1 +1,1 @@
-exports.robber = {}
+exports.robber = () => {}

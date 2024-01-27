@@ -1,1 +1,1 @@
-exports.revealer = {}
+exports.revealer = () => {}

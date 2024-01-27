@@ -1,1 +1,1 @@
-exports.madscientist = {}
+exports.madscientist = () => {}

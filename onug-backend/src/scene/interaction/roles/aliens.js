@@ -1,1 +1,1 @@
-exports.aliens = {}
+exports.aliens = () => {}

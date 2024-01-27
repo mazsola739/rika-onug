@@ -1,1 +1,1 @@
-exports.empath = {}
+exports.empath = () => {}

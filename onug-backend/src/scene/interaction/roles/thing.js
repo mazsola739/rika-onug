@@ -1,1 +1,1 @@
-exports.thing = {}
+exports.thing = () => {}

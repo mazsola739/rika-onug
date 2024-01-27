@@ -1,1 +1,1 @@
-exports.instigator = {}
+exports.instigator = () => {}

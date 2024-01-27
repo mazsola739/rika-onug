@@ -1,1 +1,1 @@
-exports.mysticwolf = {}
+exports.mysticwolf = () => {}

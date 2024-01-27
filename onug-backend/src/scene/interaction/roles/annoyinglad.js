@@ -1,1 +1,1 @@
-exports.annoyinglad = {}
+exports.annoyinglad = () => {}

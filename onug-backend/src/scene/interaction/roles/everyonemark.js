@@ -1,1 +1,1 @@
-exports.everyonemark = {}
+exports.everyonemark = () => {}

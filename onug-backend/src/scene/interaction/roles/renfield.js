@@ -1,1 +1,1 @@
-exports.renfield = {}
+exports.renfield = () => {}

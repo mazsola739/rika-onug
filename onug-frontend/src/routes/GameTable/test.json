@@ -1,0 +1,15 @@
+{
+    "type": "HYDRATE_GAME_TABLE",
+    "player_name": "Bruce Wayne",
+    "player_card_id": 5,
+    "player_number": 1,
+    "board": {
+        "players": [
+            {
+                "player_number": 1,
+                "player_name": "Bruce Wayne",
+                "ready": false
+            }
+        ]
+    }
+}

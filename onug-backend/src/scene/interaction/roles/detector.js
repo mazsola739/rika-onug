@@ -1,1 +1,1 @@
-exports.detector = {}
+exports.detector = () => {}

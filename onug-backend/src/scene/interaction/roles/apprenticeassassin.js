@@ -1,1 +1,1 @@
-exports.apprenticeassassin = {}
+exports.apprenticeassassin = () => {}

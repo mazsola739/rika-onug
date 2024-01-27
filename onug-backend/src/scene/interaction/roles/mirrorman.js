@@ -1,1 +1,1 @@
-exports.mirrorman = {}
+exports.mirrorman = () => {}

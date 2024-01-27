@@ -1,1 +1,1 @@
-exports.villageidiot = {}
+exports.villageidiot = () => {}

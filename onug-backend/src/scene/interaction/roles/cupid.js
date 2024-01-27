@@ -1,1 +1,1 @@
-exports.cupid = {}
+exports.cupid = () => {}

@@ -20,7 +20,7 @@ exports.hydrateGameTable = async (ws, message) => {
       JSON.stringify({
         type: HYDRATE_GAME_TABLE,
         player_name: playersByToken[token]?.name,
-        player_card_id: playersByToken[token]?.card?.known_card?.id,
+        player_card_id: playersByToken[token]?.card?.id,
         player_number: playersByToken[token]?.player_number,
         board: getBoard(gameState)
       })
