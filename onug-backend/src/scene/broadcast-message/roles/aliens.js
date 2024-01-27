@@ -1,4 +1,4 @@
-const { pickRandomUpToThreePlayers } = require("./utils")
+const { pickRandomUpToThreePlayers } = require("../utils")
 
 const random_aliens = [
   "aliens_view_text",

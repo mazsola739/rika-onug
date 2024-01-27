@@ -53,6 +53,35 @@ exports.random_ripple_drunk = ["ripple_drunk_text", "ripple_drunk_end_text"]
 exports.random_ripple_voteapp = "ripple_app_text"
 exports.random_ripple_repeatrole = "ripple_repeatrole_text"
 exports.random_ripple_iamalien = "ripple_iamalien_text"
+/* 
+export const rippleStoreAnyKeys: string[] = [
+  'identifier_any_text',
+  'identifier_anyeven_text',
+  'identifier_anyodd_text',
+  'activePlayers',
+]
+
+export const rippleStoreAllKeys: string[] = [
+  'identifier_everyone_text',
+  'identifier_oddplayers_text',
+  'identifier_evenplayers_text',
+  'activePlayers',
+]
+
+export const rippleNeighborKeys: string[] = [
+  'identifier_leftneighbor_text',
+  'identifier_rightneighbor_text',
+  'identifier_oneneighbor_text',
+  'identifier_yourself_text',
+]
+
+export const rippleCenterAnyKeys: string[] = [
+  'identifier_any_text',
+  'identifier_anyeven_text',
+  'identifier_anyodd_text',
+  'identifier_center_text',
+]
+ */
 exports.rippleAnyKeys = [
   'identifier_any_text',
   'identifier_anyeven_text',
@@ -95,7 +124,30 @@ const identifier_player  = [
 exports.ripple = () => [] //TODO
 
 
-/*   rippleDeck(): ActionCardType[] {
+/*   
+
+const shuffleAndSplitDeck = (deck: ActionCardType[]): ActionCardType[] => {
+  const shuffledDeck = shuffleCardsArray([...deck])
+  const rippleDeck: ActionCardType[] = []
+
+  rippleDeck.push(
+    shuffledDeck.splice(getRandomNumber(0, shuffledDeck.length - 1), 1)[0]
+  )
+
+  while (shuffledDeck.length > 0) {
+    const randomIndex = getRandomNumber(0, shuffledDeck.length - 1)
+    if (Math.random() < 0.5) {
+      rippleDeck.push(shuffledDeck.splice(randomIndex, 1)[0])
+    } else {
+      shuffledDeck.splice(randomIndex, 1)
+    }
+  }
+
+  return rippleDeck
+}
+
+
+rippleDeck(): ActionCardType[] {
     const newdeck = [...this.deck]
     return shuffleAndSplitDeck(newdeck)
   }

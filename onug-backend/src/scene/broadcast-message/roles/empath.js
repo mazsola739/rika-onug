@@ -1,7 +1,7 @@
 const {
   getRandomItemFromArray,
   pickRandomUpToThreePlayers,
-} = require("./utils");
+} = require("../utils");
 
 const empathAllKeys = [
   "identifier_everyone_text",

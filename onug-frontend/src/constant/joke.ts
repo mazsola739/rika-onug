@@ -1,3 +1,5 @@
+//TODO joke
+
 export const joke: Record<string, string> = {
   joke_1_text: '3... 2... 1... Vote! Just kidding.',
   joke_2_text: 'Be afraid, be very afraid.',

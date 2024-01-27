@@ -4,7 +4,6 @@ export * from './misc'
 
 export * from './buttons'
 export * from './easteregg'
-export * from './everyone'
 export * from './gametime'
 export * from './identifier'
 export * from './ids'

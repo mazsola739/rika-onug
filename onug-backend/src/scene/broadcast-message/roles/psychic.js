@@ -1,4 +1,4 @@
-const { getRandomItemFromArray } = require("./utils")
+const { getRandomItemFromArray } = require("../utils")
 
 const random_psychic = ["psychic_view1_text", "psychic_view2_text"]
 const psychicKeys = ["identifier_anyeven_text", "identifier_anyodd_text"]

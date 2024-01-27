@@ -1,11 +1,4 @@
-const { getRandomItemFromArray } = require("./utils")
-
-exports.rascal = [
-  "rascal_kickoff_text",
-  "rascal_witchend_text",
-  "rascal_drunkend_text",
-  "rascal_robberend_text",
-]
+const { getRandomItemFromArray } = require("../utils")
 
 const random_rascal = [
   "rascal_idiot_text",
@@ -14,7 +7,6 @@ const random_rascal = [
   "rascal_drunk_text",
   "rascal_robber_text",
 ]
-
 const rascalAnyOneKeys = [
   "identifier_higher_text",
   "identifier_lower_text",
@@ -26,7 +18,6 @@ const rascalAnyOneKeys = [
   "identifier_leftneighbor_text",
   "identifier_rightneighbor_text",
 ]
-
 const rascalAnyTwoKeys = [
   "identifier_any2_text",
   "identifier_any2even_text",

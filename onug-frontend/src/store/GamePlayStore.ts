@@ -1,11 +1,5 @@
 import { makeAutoObservable } from 'mobx'
 import { selectedDeckStore } from 'store'
-import { ACTION_TIME, BASE_TIME, VOTING_TIME, everyone } from 'constant'
-import { RoleActionType } from 'types'
-import { utils, gamePlayStoreUtils } from 'utils'
-
-const { addBasicAction, getRandomJoke } = gamePlayStoreUtils
-const { generateTimedAction } = utils
 
 class GamePlayStore {
   isGameStarted = false
@@ -28,7 +22,7 @@ class GamePlayStore {
     return selectedDeckStore.shouldStartRipple()
   }
 
-  generateActions(): RoleActionType[] {
+  /*   generateActions(): RoleActionType[] {
     const gamePlayActions: RoleActionType[] = []
 
     this.addEpicBattleIntro(gamePlayActions)
@@ -36,7 +30,7 @@ class GamePlayStore {
     this.addJokeAndVoting(gamePlayActions)
 
     return gamePlayActions
-  }
+  } */
 
   toggleGameStatus(): void {
     this.isGameStarted = !this.isGameStarted
@@ -53,7 +47,7 @@ class GamePlayStore {
     this.isGamePaused = !this.isGamePaused
   }
 
-  addEpicBattleIntro(actions: RoleActionType[]): void {
+  /*   addEpicBattleIntro(actions: RoleActionType[]): void {
     if (this.isEpicBattle) {
       addBasicAction(actions, everyone.epic_intro_text, BASE_TIME, '')
     }
@@ -78,7 +72,7 @@ class GamePlayStore {
       ''
     )
     addBasicAction(actions, everyone.everyone_vote_text, BASE_TIME, '')
-  }
+  } */
 }
 
 export default GamePlayStore

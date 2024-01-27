@@ -1,4 +1,4 @@
-const { getRandomItemFromArray } = require("./utils")
+const { getRandomItemFromArray } = require("../utils")
 
 const randomBodysnatcher = [
   "bodysnatcher_steal_text",

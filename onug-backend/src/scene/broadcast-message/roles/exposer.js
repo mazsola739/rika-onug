@@ -1,4 +1,4 @@
-const { getRandomItemFromArray } = require("./utils")
+const { getRandomItemFromArray } = require("../utils")
 
 const randomExposer = [
   "exposer_flip1_text",
