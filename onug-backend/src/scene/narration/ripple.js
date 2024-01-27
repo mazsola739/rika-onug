@@ -123,9 +123,6 @@ const identifier_player  = [
 
 exports.ripple = () => [] //TODO
 
-
-/*   
-
 const shuffleAndSplitDeck = (deck: ActionCardType[]): ActionCardType[] => {
   const shuffledDeck = shuffleCardsArray([...deck])
   const rippleDeck: ActionCardType[] = []
@@ -145,8 +142,7 @@ const shuffleAndSplitDeck = (deck: ActionCardType[]): ActionCardType[] => {
 
   return rippleDeck
 }
-
-
+/*   
 rippleDeck(): ActionCardType[] {
     const newdeck = [...this.deck]
     return shuffleAndSplitDeck(newdeck)

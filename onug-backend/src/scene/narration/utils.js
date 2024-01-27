@@ -5,6 +5,9 @@ const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
 exports.getRandomItemFromArray = (array) =>
   array[getRandomNumber(0, array.length - 1)]
 
+  
+exports.hasRole = (selectedCards, roleId) =>  selectedCards.includes(roleId)
+
 exports.containsAllIds = (selectedCardIds, roleIds) =>
   roleIds.every((cardId) => selectedCardIds.includes(cardId))
 

@@ -237,68 +237,76 @@
       "scene_number": 58
     },
     {
-      "scene_title": "ROLE_RETRIEVER",
+      "scene_title": "DOPPELGÄNGER_PICKPOCKET",
       "scene_number": 59
     },
     {
-      "scene_title": "VOODOO_LOU",
+      "scene_title": "ROLE_RETRIEVER",
       "scene_number": 60
     },
     {
-      "scene_title": "TROUBLEMAKER",
+      "scene_title": "VOODOO_LOU",
       "scene_number": 61
     },
     {
-      "scene_title": "VILLAGE_IDIOT",
+      "scene_title": "TROUBLEMAKER",
       "scene_number": 62
     },
     {
-      "scene_title": "AURA_SEER",
+      "scene_title": "VILLAGE_IDIOT",
       "scene_number": 63
     },
     {
-      "scene_title": "GREMLIN",
+      "scene_title": "AURA_SEER",
       "scene_number": 64
     },
     {
-      "scene_title": "RASCAL",
+      "scene_title": "GREMLIN",
       "scene_number": 65
     },
     {
-      "scene_title": "DOPPELGÄNGER_RASCAL",
+      "scene_title": "DOPPELGÄNGER_GREMLIN",
       "scene_number": 66
     },
     {
-      "scene_title": "SWITCHEROO",
+      "scene_title": "RASCAL",
       "scene_number": 67
     },
     {
-      "scene_title": "DRUNK",
+      "scene_title": "DOPPELGÄNGER_RASCAL",
       "scene_number": 68
     },
     {
-      "scene_title": "INSOMNIAC",
-      "scene_number": 68
-    },
-    {
-      "scene_title": "SELF_AWARENESS_GIRL",
+      "scene_title": "SWITCHEROO",
       "scene_number": 69
     },
     {
-      "scene_title": "SQUIRE",
+      "scene_title": "DRUNK",
       "scene_number": 70
     },
     {
-      "scene_title": "BEHOLDER",
+      "scene_title": "INSOMNIAC",
       "scene_number": 71
     },
     {
-      "scene_title": "REVEALER",
+      "scene_title": "SELF_AWARENESS_GIRL",
       "scene_number": 72
     },
     {
-      "scene_title": "DOPPELGÄNGER_REVEALER",
+      "scene_title": "SQUIRE",
       "scene_number": 73
+    },
+    {
+      "scene_title": "BEHOLDER",
+      "scene_number": 74
+    },
+    {
+      "scene_title": "REVEALER",
+      "scene_number": 75
+    },
+    {
+      "scene_title": "DOPPELGÄNGER_REVEALER",
+      "scene_number": 76
     },
     {
       "scene_title": "EXPOSER",
@@ -352,21 +360,21 @@
   "ripple": [
     {
       "scene_title": "RIPPLE",
-      "scene_number": 69
+      "scene_number": 86
     }
   ],
   "day": [
     {
       "scene_title": "INVESTIGATION",
-      "scene_number": 70
+      "scene_number": 87
     },
     {
       "scene_title": "VOTE",
-      "scene_number": 71
+      "scene_number": 88
     },
     {
       "scene_title": "WINNERS",
-      "scene_number": 72
+      "scene_number": 89
     }
   ]
 }

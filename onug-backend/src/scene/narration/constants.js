@@ -1,5 +1,5 @@
 
-exports.roles = {
+exports.instantRoleIds = {
   17: "role_alphawolf",
   55: "role_annoyinglad",
   18: "role_apprenticeseer",
