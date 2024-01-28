@@ -1,6 +1,5 @@
 import { GameTokenProps } from './GameToken.types'
 import {
-  DopplegangerMarks,
   Marks,
   StyledGameToken,
   TokenImage,
@@ -11,13 +10,8 @@ import { useMemo } from 'react'
 export const GameToken: React.FC<GameTokenProps> = ({
   tokenName,
   display_name,
-  isInDeck,
-  hasDoppelganger,
 }) => {
-  const imageSrc = useMemo(
-    () => `/assets/tokens/${isInDeck ? tokenName : 'mark_back'}.png`,
-    [tokenName]
-  )
+  const imageSrc = useMemo(() => `/assets/tokens/${tokenName}.png`, [tokenName])
 
   return (
     <StyledGameToken>
@@ -25,11 +19,6 @@ export const GameToken: React.FC<GameTokenProps> = ({
         <TokenImage src={imageSrc} alt={tokenName} />
         <TokenName>{display_name}</TokenName>
       </Marks>
-      {hasDoppelganger && (
-        <DopplegangerMarks>
-          <TokenImage src={imageSrc} alt={tokenName} />
-        </DopplegangerMarks>
-      )}
     </StyledGameToken>
   )
 }

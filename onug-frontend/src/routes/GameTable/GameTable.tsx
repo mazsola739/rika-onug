@@ -44,14 +44,8 @@ export const GameTable: React.FC = observer(() => {
 
   const token = sessionStorage.getItem('token')
 
-  const {
-    hasSentinel,
-    hasMarks,
-    hasDoppelganger,
-    hasCurator,
-    hasAlphaWolf,
-    hasTemptress,
-  } = gameTableStore
+  const { hasSentinel, hasMarks, hasCurator, hasAlphaWolf, hasTemptress } =
+    gameTableStore
   const selectedMarks = selectedDeckStore.selectedMarks
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
@@ -87,12 +81,12 @@ export const GameTable: React.FC = observer(() => {
       setPlayers(lastJsonMessage.board.players)
       roomStore.resetDetailedCardInfo()
       selectedDeckStore.addCardIdsToArray()
-      console.log(lastJsonMessage) //TODO ready not ready updates from lastJsonMessage
+      console.log(lastJsonMessage)
     }
 
     if (lastJsonMessage?.type === HYDRATE_READY) {
       setPlayers(lastJsonMessage.board.players)
-      console.log(lastJsonMessage) //TODO here handle only ready not ready updates from lastJsonMessage
+      console.log(lastJsonMessage)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
@@ -114,8 +108,7 @@ export const GameTable: React.FC = observer(() => {
           {renderCenterCard('Center')}
           {hasTemptress && renderCenterExtraCard('Villain')}
         </CenterCardContainer>
-        {hasMarks && renderMarks(selectedMarks, hasDoppelganger)}
-        {/* //TODO redesign */}
+        {hasMarks && renderMarks(selectedMarks)}
         {hasCurator && renderArtifacts(artifacts)}
       </StyledGameTable>
       {players && renderPlayers(players)}

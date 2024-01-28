@@ -32,6 +32,7 @@ export const GameTableHeader: React.FC = observer(() => {
             />
             <PlayerCardRule>
               {`${player.player_card.display_name}: ${player.player_card.rules}`}
+              {/*TODO wining condition */}
             </PlayerCardRule>
           </PlayerCardInformation>
         </StyledGameTableHeader>

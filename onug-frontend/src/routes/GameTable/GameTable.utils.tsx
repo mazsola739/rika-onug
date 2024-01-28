@@ -15,7 +15,6 @@ import {
 } from './GameTable.styles'
 import { MarkType, PlayerType, PlayersType, TokenType } from 'types'
 
-//TODO information from backend
 const renderOwnCard = (player: PlayerType) => (
   <OwnKnownCardContainer>
     <OwnKnownCardText>
@@ -27,7 +26,6 @@ const renderOwnCard = (player: PlayerType) => (
     ></OwnKnownCardImage>
     <OwnKnownCardText>Team: {player.player_card.team}</OwnKnownCardText>
     <OwnKnownCardText>Role: {player.player_card.display_name}</OwnKnownCardText>
-    <OwnKnownCardText>Token: Mark of Clarity</OwnKnownCardText>
   </OwnKnownCardContainer>
 )
 
@@ -87,17 +85,18 @@ const renderCenterExtraCard = (title: string) => (
   </CardContainer>
 )
 
-const renderMarks = (selectedMarks: MarkType[], hasDoppelganger: boolean) => (
+const renderMarks = (selectedMarks: MarkType[]) => (
   <Marks>
-    {selectedMarks.map((mark) => (
-      <GameToken
-        key={mark.id}
-        tokenName={mark.token_name}
-        isInDeck={mark.is_in_deck}
-        display_name={mark.display_name}
-        hasDoppelganger={hasDoppelganger}
-      />
-    ))}
+    {selectedMarks.map(
+      (mark) =>
+        mark.is_in_deck && (
+          <GameToken
+            key={mark.id}
+            tokenName={mark.token_name}
+            display_name={mark.display_name}
+          />
+        )
+    )}
   </Marks>
 )
 

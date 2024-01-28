@@ -1,4 +1,8 @@
-exports.alphawolf = () => {
+//wolf center card swap to any non werewolf card - update wolf center card & selected player card
+
+exports.alphawolf = () => {};
+
+exports.alphawolf_request = () => {
   const playerCards = collectKnownCardInfo(gameState.players);
   const werewolvesIds = [15, 16, 17, 21, 22];
 
@@ -20,8 +24,11 @@ exports.alphawolf = () => {
 
   return {
     selectable_players: findNonWerewolfPlayers(),
-    selectable_centers: "center_wolf_card",
   };
 };
-
-exports.alphawolf = "alphawolf_kickoff_text"; //wolf center card swap to any non werewolf card - update wolf center actual card & selected player actual card
+exports.alphawolf_result = (selectedPlayer) => {
+  //save into card hitory: scene, role player, selected player?
+  //save new player card
+  //save new wolfcard
+  //send message to the role player successfully changed
+};

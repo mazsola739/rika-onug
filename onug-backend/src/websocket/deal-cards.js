@@ -134,10 +134,13 @@ exports.dealCards = async (ws, message) => {
   playerTokens.forEach((token, index) => {
     newGameState.players[token] = {
       ...gameState.players[token],
-      card:  createPlayerCard(playerCards[index], selectedCards),
+      card: {
+        known_card:  createGameStateCardForm(playerCards[index], selectedCards),
+        actual_card: createGameStateCardForm(playerCards[index], selectedCards),
+      },
       player_number: index + 1,
-    };
-  });
+    }
+  })
 
   await upsertRoomState(newGameState);
 
