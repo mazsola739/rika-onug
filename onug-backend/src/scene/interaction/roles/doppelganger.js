@@ -1,7 +1,8 @@
-const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
+const { collectCardInfo, getPlayersByCardIds } = require("../utils");
 
-exports.doppelganger = () => {const playerCards = collectCardInfo(gameState.players);
-    const doppelgangerPlayer = getPlayersByRoleIds(playerCards, [1])
-  
-    return doppelgangerPlayer}
-  
+exports.doppelganger = () => {
+  const playerCards = collectCardInfo(gameState.players);
+  const doppelgangerPlayer = getPlayersByCardIds(playerCards, [1]);
+
+  return doppelgangerPlayer;
+};

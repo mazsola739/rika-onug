@@ -56,3 +56,18 @@ exports.getPlayersByCardIds = (players, cardIds) => {
 
   return matchingPlayers;
 };
+
+exports.getPlayersWithMarkOfLove = (players) => {
+  const matchingPlayers = [];
+
+  for (const playerId in players) {
+    if (Object.hasOwnProperty.call(players, playerId)) {
+      const mark_id = players[playerId].card.mark_id;
+      if (mark_id === "mark_of_love") {
+        matchingPlayers.push(playerId);
+      }
+    }
+  }
+
+  return matchingPlayers;
+};

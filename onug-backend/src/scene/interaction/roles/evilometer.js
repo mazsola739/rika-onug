@@ -1,3 +1,8 @@
 const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
-//TODO doppelganger
-exports.evilometer = () => {}
+
+exports.evilometer = () => {
+  const playerCards = collectCardInfo(gameState.players);
+  const evilometerPlayer = getPlayersByRoleIds(playerCards, [58]);
+
+  return evilometerPlayer;
+};

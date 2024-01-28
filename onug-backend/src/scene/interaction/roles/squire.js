@@ -1,3 +1,8 @@
 const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
-//TODO doppelganger
-exports.squire = () => {}
+
+exports.squire = () => {
+  const playerCards = collectCardInfo(gameState.players);
+  const squirePlayer = getPlayersByRoleIds(playerCards, [83]);
+
+  return squirePlayer;
+};

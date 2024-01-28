@@ -1,3 +1,8 @@
-const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
+const { collectCardInfo, getPlayersByCardIds } = require("../utils");
 //TODO doppelganger instant action
-exports.rapscallion = () => {}
+exports.rapscallion = () => {
+  const playerCards = collectCardInfo(gameState.players);
+  const rapscallionPlayer = getPlayersByCardIds(playerCards, [65]);
+
+  return rapscallionPlayer;
+};

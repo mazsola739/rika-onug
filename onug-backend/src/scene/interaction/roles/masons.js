@@ -1,3 +1,9 @@
+const { masonIds } = require("../constants");
 const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
-//TODO doppelganger
-exports.masons = () => {}
+
+exports.masons = () => {
+    const playerCards = collectCardInfo(gameState.players);
+    const masonPlayer = getPlayersByRoleIds(playerCards, [masonIds]);
+  
+    return masonPlayer;
+}

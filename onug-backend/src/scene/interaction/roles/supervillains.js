@@ -1,3 +1,9 @@
+const { superVillainsIds } = require("../constants");
 const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
-//TODO Doppelganger
-exports.supervillains = () => {}
+
+exports.supervillains = () => {
+  const playerCards = collectCardInfo(gameState.players);
+  const supervillainsPlayer = getPlayersByRoleIds(playerCards, [superVillainsIds]);
+
+  return supervillainsPlayer;
+};

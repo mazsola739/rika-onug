@@ -1,3 +1,8 @@
-const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
+const { collectCardInfo, getPlayersByCardIds } = require("../utils");
 //TODO doppelganger instant action
-exports.seer = () => {}
+exports.seer = () => {
+  const playerCards = collectCardInfo(gameState.players);
+  const seerPlayer = getPlayersByCardIds(playerCards, [9]);
+
+  return seerPlayer;
+};

@@ -1,3 +1,8 @@
-const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
-//TODO doppelganger same result as madscientist
-exports.madscientist = () => {}
+const { collectCardInfo, getPlayersByCardIds } = require("../utils");
+
+exports.madscientist = () => {
+  const playerCards = collectCardInfo(gameState.players);
+  const madscientistPlayer = getPlayersByCardIds(playerCards, [62]);
+
+  return madscientistPlayer;
+};

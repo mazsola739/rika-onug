@@ -1,3 +1,9 @@
+const { vampireIds } = require("../constants");
 const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
-//TODO doppelganger 
-exports.vampires = () => {}
+
+exports.vampires = () => {
+  const playerCards = collectCardInfo(gameState.players);
+  const vampirePlayer = getPlayersByRoleIds(playerCards, [vampireIds]);
+
+  return vampirePlayer;
+};
