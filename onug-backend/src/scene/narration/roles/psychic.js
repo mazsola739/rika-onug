@@ -1,5 +1,7 @@
 const { getRandomItemFromArray } = require("../utils")
 
+//TODO save wich interaction!
+
 const random_psychic = ["psychic_view1_text", "psychic_view2_text"]
 const psychicKeys = ["identifier_anyeven_text", "identifier_anyodd_text"]
 

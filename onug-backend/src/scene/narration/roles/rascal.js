@@ -1,5 +1,7 @@
 const { getRandomItemFromArray } = require("../utils")
 
+//TODO save wich interaction!
+
 const random_rascal = [
   "rascal_idiot_text",
   "rascal_troublemaker_text",

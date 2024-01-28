@@ -1,3 +1,6 @@
+//todo save interaction identifiers for this: aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
+
+
 const { roles } = require("./roles");
 const {
   getRolesNames,

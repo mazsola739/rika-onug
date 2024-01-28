@@ -1,3 +1,5 @@
+//TODO save wich interaction!
+
 const randomFamilyman = [
   "familyman_1pleft_text",
   "familyman_1pright_text",

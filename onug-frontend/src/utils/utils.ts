@@ -1,11 +1,4 @@
-import { time } from 'constant'
-import { ActionCardType, RoleActionType } from 'types'
-
-const areAllCardsSelectedById = (
-  selectedCards: ActionCardType[],
-  cardIds: number[]
-): boolean =>
-  cardIds.every((cardId) => isCardSelectedById(selectedCards, cardId))
+import { ActionCardType, CardType } from 'types'
 
 const areAnyCardSelectedById = (
   selectedCards: ActionCardType[],
@@ -20,44 +13,17 @@ const findCardById = <T extends { id: number }>(
   return list.find((item) => item.id === id)
 }
 
-const generateTimedAction = (actionTime: number): RoleActionType => ({
-  text: `${time.timertext_prefix}${actionTime}${time.timertext_postfix}`,
-  time: actionTime,
-  image: '',
-})
-
 const isCardSelectedById = (
   selectedCards: ActionCardType[],
   cardId: number
 ): boolean => selectedCards.some((card) => card.id === cardId)
 
-const getRandomItemFromArray = <T>(array: T[]): T =>
-  array[getRandomNumber(0, array.length - 1)]
-
-const getRandomNumber = (min: number, max: number): number =>
-  ~~(Math.random() * (max - min + 1)) + min
-
-const selectRandomKey = <T>(obj: T): keyof T => {
-  const keys = Object.keys(obj)
-  return keys[getRandomNumber(0, keys.length - 1)] as keyof T
-}
-
-const shuffleCardsArray = <T>(cards: T[]): T[] => {
-  for (let i = cards.length - 1; i > 0; i--) {
-    const j = ~~(Math.random() * (i + 1))
-    ;[cards[i], cards[j]] = [cards[j], cards[i]]
-  }
-  return cards
-}
+const checkCardPresence = (cards: CardType[], cardId: number): boolean =>
+  cards.some((card) => card.id === cardId)
 
 export const utils = {
-  areAllCardsSelectedById,
   areAnyCardSelectedById,
   findCardById,
-  generateTimedAction,
   isCardSelectedById,
-  getRandomItemFromArray,
-  getRandomNumber,
-  selectRandomKey,
-  shuffleCardsArray,
+  checkCardPresence,
 }

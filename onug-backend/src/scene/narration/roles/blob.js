@@ -1,3 +1,5 @@
+//TODO save wich interaction!
+
 const randomBlobKickoffText = [
   "blob_1pleft_text",
   "blob_1pright_text",

@@ -13,34 +13,6 @@
 =>  BACKEND & FRONTEND: timer finish, (if player failed do their action, send a message about missed opportunity,) 
     BACKEND: reset, and move to next action, repeat steps  */
 
-/* Storage plan:
-{
-  flipped: [{position: card_id}]
-  artifact: [{position: true?}]
-  shield: [{position: true?}]
-  player_1: {
-      card_history: [{sceen: 0, id: }]
-      known card: {
-        id:
-        card: {role: , team: }, 
-        player: {role: , team: }, 
-        mark: 
-      },
-      actual card: {
-        id:
-        card: {role: , team: }, 
-        player: {role: , team: }, 
-        mark: 
-      },
-    }
-  },
-
-  center_cards: {
-    center_left: {                         //center_wolf, center_villain, center_middle, center_right
-      id
-      card: {role: , team: },
-    }
-} */
 
 /* Communication plan
 send to frontend: broadcast to everyone, message to the selected player(s), "question" and position list to their action (selectable or visible positions), 

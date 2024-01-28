@@ -1,3 +1,5 @@
+import { CardType } from './Card.types'
+
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
 export type WsJsonMessage = {
@@ -19,27 +21,7 @@ export type RoomType = {
   room_id: string
   room_name: string
   selectedCards: number[]
-  actions: string[]
-  action_log: string[]
   players: string[]
-  turn: number
-  closed: boolean
-}
-
-export type RoleActionType = {
-  text: string
-  time: number
-  image: string
-}
-
-export type RoleActionStoreType = {
-  generateActions(): RoleActionType[]
-}
-
-export type RepeatroleType = {
-  name: string
-  isExist: boolean
-  specialCondition?: () => boolean
 }
 
 export type PlayersType = {
@@ -49,4 +31,11 @@ export type PlayersType = {
   card: {
     id: number
   }
+}
+
+export type PlayerType = {
+  player_name: string
+  player_number: number
+  player_card_id: number
+  player_card: CardType
 }

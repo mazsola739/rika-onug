@@ -1,3 +1,5 @@
+//TODO save wich interaction!
+
 const random_mortician = ["mortician_1card_text", "mortician_2cards_text"]
 
 const morticianAllKeys = [

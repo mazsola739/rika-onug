@@ -1,3 +1,5 @@
+//TODO save wich interaction!
+
 const random_oracle_question = [
   "oracle_alienteam_text",
   "oracle_werewolfteam_text",

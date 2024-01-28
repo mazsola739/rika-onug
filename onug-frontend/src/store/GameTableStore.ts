@@ -2,10 +2,9 @@ import { makeAutoObservable } from 'mobx'
 import { CardType, PlayersType } from 'types'
 import { selectedDeckStore } from 'store'
 import { hasMarkIds } from 'constant'
-import { utils, gameTableStoreUtils } from 'utils'
+import { utils } from 'utils'
 
-const { checkCardPresence } = gameTableStoreUtils
-const { areAnyCardSelectedById } = utils
+const { areAnyCardSelectedById, checkCardPresence } = utils
 
 export class GameTableStore {
   players: PlayersType[]

@@ -1,5 +1,7 @@
 const { pickRandomUpToThreePlayers } = require("../utils")
 
+//TODO save wich interaction!
+
 const random_aliens = [
   "aliens_view_text",
   "aliens_allview_text",

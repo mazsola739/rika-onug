@@ -1,5 +1,7 @@
 const { getRandomItemFromArray } = require("../utils")
 
+//TODO save wich interaction!
+
 const randomBodysnatcher = [
   "bodysnatcher_steal_text",
   "bodysnatcher_center_text",

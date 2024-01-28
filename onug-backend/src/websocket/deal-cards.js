@@ -79,28 +79,51 @@ const dealCardIds = (selectedCardIds) => {
 
 const createPlayerCard = (card, selected_cards) => {
   if (!card || typeof card !== "object" || !card.id) {
-    return { id: 0, role: "", role_id: 0, team: "", mark: false };
+    return { id: 0, role: "", role_id: 0, team: "", mark: false, mark_id: "" };
   }
 
-  return {
-    id: card.id,
-    role: card.role,
-    role_id: card.id,
-    team: card.team,
-    mark: hasMark(selected_cards),
-  };
+  const hasPlayerMark = hasMark(selected_cards)
+
+  if (hasPlayerMark) {
+    return {
+      id: card.id,
+      role: card.role,
+      role_id: card.id,
+      team: card.team,
+      mark: hasMark,
+      mark_id: "mark_of_clarity",
+    };
+  } else {
+    return {
+      id: card.id,
+      role: card.role,
+      role_id: card.id,
+      team: card.team,
+      mark: hasMark,
+    };
+  }
 };
 
 const createPositionCard = (card, selected_cards) => {
   if (!card || typeof card !== "object" || !card.id) {
-    return { id: 0, role: "", team: "" };
+    return { id: 0, role: "", team: "", mark_id: "" };
   }
-
-  return {
-    id: card.id,
-    role: card.role,
-    team: card.team,
-  };
+ const hasPlayerMark = hasMark(selected_cards)
+  
+  if (hasPlayerMark) {
+    return {
+      id: card.id,
+      role: card.role,
+      team: card.team,
+      mark_id: "mark_of_clarity",
+    };
+  } else {
+    return {
+      id: card.id,
+      role: card.role,
+      team: card.team,
+    };
+  }
 };
 
 exports.dealCards = async (ws, message) => {
