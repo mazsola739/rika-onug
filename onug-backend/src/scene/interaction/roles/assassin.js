@@ -1,8 +1,8 @@
-const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
+const { collectCardInfo, getPlayersByCardIds } = require("../utils");
 //TODO doppelganger
 exports.assassin = () => {
     const playerCards = collectCardInfo(gameState.players);
-    const assassininPlayer = getPlayersByRoleIds(playerCards, [29]);
+    const assassininPlayer = getPlayersByCardIds(playerCards, [29]);
   
     return assassininPlayer;
 }

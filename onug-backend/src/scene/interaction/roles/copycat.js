@@ -1,7 +1,7 @@
-const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
-//NO DOPPELGANGER
+const { collectCardInfo, getPlayersByCardIds } = require("../utils");
+
 exports.copycat = () => {
     const playerCards = collectCardInfo(gameState.players);
-    const copycatPlayer = getPlayersByRoleIds(playerCards, [30])
+    const copycatPlayer = getPlayersByCardIds(playerCards, [30])
   
     return copycatPlayer}

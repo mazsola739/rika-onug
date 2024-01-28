@@ -1,14 +1,13 @@
 //wolf center card swap to any non werewolf card - update wolf center card & selected player card
 //TODO doppelganger instant action
-const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
+const { collectCardInfo, getPlayersByCardIds } = require("../utils");
 
 exports.alphawolf = () => {
   const playerCards = collectCardInfo(gameState.players);
-  const alphaWolfPlayer = getPlayersByRoleIds(playerCards, [17])
+  const alphaWolfPlayer = getPlayersByCardIds(playerCards, [17])
 
   return alphaWolfPlayer
 };
-
 
 const alphawolf_request = () => {
   const playerCards = collectCardInfo(gameState.players);

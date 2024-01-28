@@ -1,8 +1,9 @@
+const { alienIds } = require("../constants");
 const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
-// TODO doppelganger
+
 exports.aliens = () => {
     const playerCards = collectCardInfo(gameState.players);
-    const alienPlayer = getPlayersByRoleIds(playerCards, [71]); //TODO
+    const alienPlayer = getPlayersByRoleIds(playerCards, [alienIds]);
   
     return alienPlayer;
 }

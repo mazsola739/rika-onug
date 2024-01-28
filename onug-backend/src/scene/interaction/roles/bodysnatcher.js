@@ -1,8 +1,8 @@
-const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
-//TODO doppelganger
+const { collectCardInfo, getPlayersByCardIds } = require("../utils");
+//TODO doppelganger seperated
 exports.bodysnatcher = () => {
     const playerCards = collectCardInfo(gameState.players);
-    const bodysnatcherPlayer = getPlayersByRoleIds(playerCards, [74])
+    const bodysnatcherPlayer = getPlayersByCardIds(playerCards, [74])
   
     return bodysnatcherPlayer
 }
