@@ -14,6 +14,9 @@ import {
 export const GameTableHeader: React.FC = observer(() => {
   const { player } = playerStore
 
+  //Todo wining condition
+  //TODO Add role tokens
+
   return (
     <Header>
       {player && (
@@ -32,7 +35,6 @@ export const GameTableHeader: React.FC = observer(() => {
             />
             <PlayerCardRule>
               {`${player.player_card.display_name}: ${player.player_card.rules}`}
-              {/*TODO wining condition */}
             </PlayerCardRule>
           </PlayerCardInformation>
         </StyledGameTableHeader>

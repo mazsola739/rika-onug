@@ -27,7 +27,7 @@ exports.leaveTable = async (ws, message) => {
     ...gameState,
     stage: STAGES.ROOM,
   }
-  delete newGameState.center_cards
+  delete newGameState.card_positions
   const playerTokens = Object.keys(newGameState.players)
   playerTokens.forEach((token) => {
     newGameState.players[token] = {

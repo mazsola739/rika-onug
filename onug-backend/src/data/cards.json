@@ -1,604 +1,432 @@
 [
   {
     "id": 1,
-    "card": {
-      "role": "DOPPELGANGER",
-      "team": "village"
-    }
+    "role": "DOPPELGANGER",
+    "team": "village"
   },
   {
     "id": 2,
-    "card": {
-      "role": "DRUNK",
-      "team": "village"
-    }
+    "role": "DRUNK",
+    "team": "village"
   },
   {
     "id": 3,
-    "card": {
-      "role": "HUNTER",
-      "team": "village"
-    }
+    "role": "HUNTER",
+    "team": "village"
   },
   {
     "id": 4,
-    "card": {
-      "role": "INSOMNIAC",
-      "team": "village"
-    }
+    "role": "INSOMNIAC",
+    "team": "village"
   },
   {
     "id": 5,
-    "card": {
-      "role": "MASON",
-      "team": "village"
-    }
+    "role": "MASON",
+    "team": "village"
   },
   {
     "id": 6,
-    "card": {
-      "role": "MASON",
-      "team": "village"
-    }
+    "role": "MASON",
+    "team": "village"
   },
   {
     "id": 7,
-    "card": {
-      "role": "MINION",
-      "team": "werewolf"
-    }
+    "role": "MINION",
+    "team": "werewolf"
   },
   {
     "id": 8,
-    "card": {
-      "role": "ROBBER",
-      "team": "village"
-    }
+    "role": "ROBBER",
+    "team": "village"
   },
   {
     "id": 9,
-    "card": {
-      "role": "SEER",
-      "team": "village"
-    }
+    "role": "SEER",
+    "team": "village"
   },
   {
     "id": 10,
-    "card": {
-      "role": "TANNER",
-      "team": "tanner"
-    }
+    "role": "TANNER",
+    "team": "tanner"
   },
   {
     "id": 11,
-    "card": {
-      "role": "TROUBLEMAKER",
-      "team": "village"
-    }
+    "role": "TROUBLEMAKER",
+    "team": "village"
   },
   {
     "id": 12,
-    "card": {
-      "role": "VILLAGER",
-      "team": "village"
-    }
+    "role": "VILLAGER",
+    "team": "village"
   },
   {
     "id": 13,
-    "card": {
-      "role": "VILLAGER",
-      "team": "village"
-    }
+    "role": "VILLAGER",
+    "team": "village"
   },
   {
     "id": 14,
-    "card": {
-      "role": "VILLAGER",
-      "team": "village"
-    }
+    "role": "VILLAGER",
+    "team": "village"
   },
   {
     "id": 15,
-    "card": {
-      "role": "WEREWOLF",
-      "team": "werewolf"
-    }
+    "role": "WEREWOLF",
+    "team": "werewolf"
   },
   {
     "id": 16,
-    "card": {
-      "role": "WEREWOLF",
-      "team": "werewolf"
-    }
+    "role": "WEREWOLF",
+    "team": "werewolf"
   },
   {
     "id": 17,
-    "card": {
-      "role": "ALPHA_WOLF",
-      "team": "werewolf"
-    }
+    "role": "ALPHA_WOLF",
+    "team": "werewolf"
   },
   {
     "id": 18,
-    "card": {
-      "role": "APPRENTICE_SEER",
-      "team": "village"
-    }
+    "role": "APPRENTICE_SEER",
+    "team": "village"
   },
   {
     "id": 19,
-    "card": {
-      "role": "BODYGUARD",
-      "team": "village"
-    }
+    "role": "BODYGUARD",
+    "team": "village"
   },
   {
     "id": 20,
-    "card": {
-      "role": "CURATOR",
-      "team": "village"
-    }
+    "role": "CURATOR",
+    "team": "village"
   },
   {
     "id": 21,
-    "card": {
-      "role": "DREAMWOLF",
-      "team": "werewolf"
-    }
+    "role": "DREAMWOLF",
+    "team": "werewolf"
   },
   {
     "id": 22,
-    "card": {
-      "role": "MYSTICWOLF",
-      "team": "werewolf"
-    }
+    "role": "MYSTICWOLF",
+    "team": "werewolf"
   },
   {
     "id": 23,
-    "card": {
-      "role": "PARANORMAL_INVESTIGATOR",
-      "team": "village"
-    }
+    "role": "PARANORMAL_INVESTIGATOR",
+    "team": "village"
   },
   {
     "id": 24,
-    "card": {
-      "role": "REVEALER",
-      "team": "village"
-    }
+    "role": "REVEALER",
+    "team": "village"
   },
   {
     "id": 25,
-    "card": {
-      "role": "SENTINEL",
-      "team": "village"
-    }
+    "role": "SENTINEL",
+    "team": "village"
   },
   {
     "id": 26,
-    "card": {
-      "role": "VILLAGE_IDIOT",
-      "team": "village"
-    }
+    "role": "VILLAGE_IDIOT",
+    "team": "village"
   },
   {
     "id": 27,
-    "card": {
-      "role": "WITCH",
-      "team": "village"
-    }
+    "role": "WITCH",
+    "team": "village"
   },
   {
     "id": 28,
-    "card": {
-      "role": "APPRENTICE_ASSASSIN",
-      "team": "apprentice assassin"
-    }
+    "role": "APPRENTICE_ASSASSIN",
+    "team": "apprentice assassin"
   },
   {
     "id": 29,
-    "card": {
-      "role": "ASSASSIN",
-      "team": "assassin"
-    }
+    "role": "ASSASSIN",
+    "team": "assassin"
   },
   {
     "id": 30,
-    "card": {
-      "role": "COPYCAT",
-      "team": "village"
-    }
+    "role": "COPYCAT",
+    "team": "village"
   },
   {
     "id": 31,
-    "card": {
-      "role": "CUPID",
-      "team": "village"
-    }
+    "role": "CUPID",
+    "team": "village"
   },
   {
     "id": 32,
-    "card": {
-      "role": "DISEASED",
-      "team": "village"
-    }
+    "role": "DISEASED",
+    "team": "village"
   },
   {
     "id": 33,
-    "card": {
-      "role": "GREMLIN",
-      "team": "village"
-    }
+    "role": "GREMLIN",
+    "team": "village"
   },
   {
     "id": 34,
-    "card": {
-      "role": "INSTIGATOR",
-      "team": "village"
-    }
+    "role": "INSTIGATOR",
+    "team": "village"
   },
   {
     "id": 35,
-    "card": {
-      "role": "MARKSMAN",
-      "team": "village"
-    }
+    "role": "MARKSMAN",
+    "team": "village"
   },
   {
     "id": 36,
-    "card": {
-      "role": "PICKPOCKET",
-      "team": "village"
-    }
+    "role": "PICKPOCKET",
+    "team": "village"
   },
   {
     "id": 37,
-    "card": {
-      "role": "PRIEST",
-      "team": "village"
-    }
+    "role": "PRIEST",
+    "team": "village"
   },
   {
     "id": 38,
-    "card": {
-      "role": "RENFIELD",
-      "team": "vampire"
-    }
+    "role": "RENFIELD",
+    "team": "vampire"
   },
   {
     "id": 39,
-    "card": {
-      "role": "THE_COUNT",
-      "team": "vampire"
-    }
+    "role": "THE_COUNT",
+    "team": "vampire"
   },
   {
     "id": 40,
-    "card": {
-      "role": "THE_MASTER",
-      "team": "vampire"
-    }
+    "role": "THE_MASTER",
+    "team": "vampire"
   },
   {
     "id": 41,
-    "card": {
-      "role": "VAMPIRE",
-      "team": "vampire"
-    }
+    "role": "VAMPIRE",
+    "team": "vampire"
   },
   {
     "id": 42,
-    "card": {
-      "role": "ALIEN",
-      "team": "alien"
-    }
+    "role": "ALIEN",
+    "team": "alien"
   },
   {
     "id": 43,
-    "card": {
-      "role": "ALIEN",
-      "team": "alien"
-    }
+    "role": "ALIEN",
+    "team": "alien"
   },
   {
     "id": 44,
-    "card": {
-      "role": "BLOB",
-      "team": "blob"
-    }
+    "role": "BLOB",
+    "team": "blob"
   },
   {
     "id": 45,
-    "card": {
-      "role": "COW",
-      "team": "village"
-    }
+    "role": "COW",
+    "team": "village"
   },
   {
     "id": 46,
-    "card": {
-      "role": "EXPOSER",
-      "team": "village"
-    }
+    "role": "EXPOSER",
+    "team": "village"
   },
   {
     "id": 47,
-    "card": {
-      "role": "GROOB",
-      "team": "groob"
-    }
+    "role": "GROOB",
+    "team": "groob"
   },
   {
     "id": 48,
-    "card": {
-      "role": "LEADER",
-      "team": "village"
-    }
+    "role": "LEADER",
+    "team": "village"
   },
   {
     "id": 49,
-    "card": {
-      "role": "MORTICIAN",
-      "team": "mortician"
-    }
+    "role": "MORTICIAN",
+    "team": "mortician"
   },
   {
     "id": 50,
-    "card": {
-      "role": "ORACLE",
-      "team": "village"
-    }
+    "role": "ORACLE",
+    "team": "village"
   },
   {
     "id": 51,
-    "card": {
-      "role": "PSYCHIC",
-      "team": "village"
-    }
+    "role": "PSYCHIC",
+    "team": "village"
   },
   {
     "id": 52,
-    "card": {
-      "role": "RASCAL",
-      "team": "village"
-    }
+    "role": "RASCAL",
+    "team": "village"
   },
   {
     "id": 53,
-    "card": {
-      "role": "SYNTHETIC_ALIEN",
-      "team": "synthetic"
-    }
+    "role": "SYNTHETIC_ALIEN",
+    "team": "synthetic"
   },
   {
     "id": 54,
-    "card": {
-      "role": "ZERB",
-      "team": "zerb"
-    }
+    "role": "ZERB",
+    "team": "zerb"
   },
   {
     "id": 55,
-    "card": {
-      "role": "ANNOYING_LAD",
-      "team": "hero"
-    }
+    "role": "ANNOYING_LAD",
+    "team": "hero"
   },
   {
     "id": 56,
-    "card": {
-      "role": "DETECTOR",
-      "team": "hero"
-    }
+    "role": "DETECTOR",
+    "team": "hero"
   },
   {
     "id": 57,
-    "card": {
-      "role": "DR_PEEKER",
-      "team": "villain"
-    }
+    "role": "DR_PEEKER",
+    "team": "villain"
   },
   {
     "id": 58,
-    "card": {
-      "role": "EVILOMETER",
-      "team": "hero"
-    }
+    "role": "EVILOMETER",
+    "team": "hero"
   },
   {
     "id": 59,
-    "card": {
-      "role": "FLIPPER",
-      "team": "hero"
-    }
+    "role": "FLIPPER",
+    "team": "hero"
   },
   {
     "id": 60,
-    "card": {
-      "role": "HENCHMAN",
-      "team": "villain"
-    }
+    "role": "HENCHMAN",
+    "team": "villain"
   },
   {
     "id": 61,
-    "card": {
-      "role": "INNOCENT_BYSTANDER",
-      "team": "hero"
-    }
+    "role": "INNOCENT_BYSTANDER",
+    "team": "hero"
   },
   {
     "id": 62,
-    "card": {
-      "role": "INTERN",
-      "team": "mad"
-    }
+    "role": "INTERN",
+    "team": "mad"
   },
   {
     "id": 63,
-    "card": {
-      "role": "MAD_SCIENTIST",
-      "team": "mad"
-    }
+    "role": "MAD_SCIENTIST",
+    "team": "mad"
   },
   {
     "id": 64,
-    "card": {
-      "role": "MIRROR_MAN",
-      "team": "hero"
-    }
+    "role": "MIRROR_MAN",
+    "team": "hero"
   },
   {
     "id": 65,
-    "card": {
-      "role": "RAPSCALLION",
-      "team": "villain"
-    }
+    "role": "RAPSCALLION",
+    "team": "villain"
   },
   {
     "id": 66,
-    "card": {
-      "role": "ROLE_RETRIEVER",
-      "team": "hero"
-    }
+    "role": "ROLE_RETRIEVER",
+    "team": "hero"
   },
   {
     "id": 67,
-    "card": {
-      "role": "SELF_AWARENESS_GIRL",
-      "team": "hero"
-    }
+    "role": "SELF_AWARENESS_GIRL",
+    "team": "hero"
   },
   {
     "id": 68,
-    "card": {
-      "role": "SWITCHEROO",
-      "team": "hero"
-    }
+    "role": "SWITCHEROO",
+    "team": "hero"
   },
   {
     "id": 69,
-    "card": {
-      "role": "TEMPTRESS",
-      "team": "villain"
-    }
+    "role": "TEMPTRESS",
+    "team": "villain"
   },
   {
     "id": 70,
-    "card": {
-      "role": "VOODOO_LOU",
-      "team": "hero"
-    }
+    "role": "VOODOO_LOU",
+    "team": "hero"
   },
   {
     "id": 71,
-    "card": {
-      "role": "APPRENTICE_TANNER",
-      "team": "tanner"
-    }
+    "role": "APPRENTICE_TANNER",
+    "team": "tanner"
   },
   {
     "id": 72,
-    "card": {
-      "role": "AURA_SEER",
-      "team": "village"
-    }
+    "role": "AURA_SEER",
+    "team": "village"
   },
   {
     "id": 73,
-    "card": {
-      "role": "BEHOLDER",
-      "team": "village"
-    }
+    "role": "BEHOLDER",
+    "team": "village"
   },
   {
     "id": 74,
-    "card": {
-      "role": "BODY_SNATCHER",
-      "team": "alien"
-    }
+    "role": "BODY_SNATCHER",
+    "team": "alien"
   },
   {
     "id": 75,
-    "card": {
-      "role": "CURSED",
-      "team": "village"
-    }
+    "role": "CURSED",
+    "team": "village"
   },
   {
     "id": 76,
-    "card": {
-      "role": "DEFENDERER",
-      "team": "hero"
-    }
+    "role": "DEFENDERER",
+    "team": "hero"
   },
   {
     "id": 77,
-    "card": {
-      "role": "EMPATH",
-      "team": "village"
-    }
+    "role": "EMPATH",
+    "team": "village"
   },
   {
     "id": 78,
-    "card": {
-      "role": "FAMILY_MAN",
-      "team": "family"
-    }
+    "role": "FAMILY_MAN",
+    "team": "family"
   },
   {
     "id": 79,
-    "card": {
-      "role": "INNOCENT_BYSTANDER",
-      "team": "hero"
-    }
+    "role": "INNOCENT_BYSTANDER",
+    "team": "hero"
   },
   {
     "id": 80,
-    "card": {
-      "role": "NOSTRADAMUS",
-      "team": "nostradamus"
-    }
+    "role": "NOSTRADAMUS",
+    "team": "nostradamus"
   },
   {
     "id": 81,
-    "card": {
-      "role": "PRINCE",
-      "team": "village"
-    }
+    "role": "PRINCE",
+    "team": "village"
   },
   {
     "id": 82,
-    "card": {
-      "role": "RICOCHET_RHINO",
-      "team": "hero"
-    }
+    "role": "RICOCHET_RHINO",
+    "team": "hero"
   },
   {
     "id": 83,
-    "card": {
-      "role": "SQUIRE",
-      "team": "werewolf"
-    }
+    "role": "SQUIRE",
+    "team": "werewolf"
   },
   {
     "id": 84,
-    "card": {
-      "role": "THE_SPONGE",
-      "team": "hero"
-    }
+    "role": "THE_SPONGE",
+    "team": "hero"
   },
   {
     "id": 85,
-    "card": {
-      "role": "THING",
-      "team": "village"
-    }
+    "role": "THING",
+    "team": "village"
   },
   {
     "id": 86,
-    "card": {
-      "role": "WINDY_WENDY",
-      "team": "hero"
-    }
+    "role": "WINDY_WENDY",
+    "team": "hero"
   }
 ]

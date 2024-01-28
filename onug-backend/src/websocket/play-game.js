@@ -17,16 +17,24 @@ exports.playGame = async (ws, message) => {
 
   const player = gameState.players[token];
 
-  const { centerCards, playerCards, chosenWolfId, chosenSupervillainId } =
-    distributeCards(gameState.selected_cards);
+  const {
+    playerCards,
+    leftCard,
+    middleCard,
+    rightCard,
+    newWolfCard,
+    newVillainCard,
+  } = dealCardIds(selectedCards); //todo check
 
   const newRoomState = {
     ...gameState,
     stage: STAGES.GAME_TABLE,
-    center_cards: {
-      base: centerCards,
-      chosenWolfId,
-      chosenSupervillainId,
+    card_positions: {
+      center_left_card: leftCard,
+      center_middle_car: middleCard,
+      center_right_card: rightCard,
+      center_wolf_card: newWolfCard,
+      center_villain_card: newVillainCard,
     },
   };
   const playerTokens = Object.keys(gameState.players);

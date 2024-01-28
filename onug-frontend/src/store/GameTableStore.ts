@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { CardType, CenterCardType, PlayersType } from 'types'
+import { CardType, PlayersType } from 'types'
 import { selectedDeckStore } from 'store'
 import { hasMarkIds } from 'constant'
 import { utils, gameTableStoreUtils } from 'utils'
@@ -8,7 +8,6 @@ const { checkCardPresence } = gameTableStoreUtils
 const { areAnyCardSelectedById } = utils
 
 export class GameTableStore {
-  centerCards: CenterCardType
   players: PlayersType[]
 
   constructor() {

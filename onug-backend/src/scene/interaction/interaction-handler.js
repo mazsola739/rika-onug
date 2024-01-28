@@ -4,6 +4,8 @@ exports.interactionHandler = (gameState) => {
   const sceneTitle = gameState.sceneTitle;
   const selectedCards = gameState.selected_cards;
 
+  //TODO player cards to get who has wich role
+
   const conditions = {
     hasOracle: hasRole(selectedCards, 50),
     hasCopycat: hasRole(selectedCards, 30),

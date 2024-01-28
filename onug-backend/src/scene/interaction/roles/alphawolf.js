@@ -1,9 +1,17 @@
 //wolf center card swap to any non werewolf card - update wolf center card & selected player card
+//TODO doppelganger instant action
+const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
 
-exports.alphawolf = () => {};
+exports.alphawolf = () => {
+  const playerCards = collectCardInfo(gameState.players);
+  const alphaWolfPlayer = getPlayersByRoleIds(playerCards, [17])
 
-exports.alphawolf_request = () => {
-  const playerCards = collectKnownCardInfo(gameState.players);
+  return alphaWolfPlayer
+};
+
+
+const alphawolf_request = () => {
+  const playerCards = collectCardInfo(gameState.players);
   const werewolvesIds = [15, 16, 17, 21, 22];
 
   const findNonWerewolfPlayers = () => {
@@ -11,9 +19,9 @@ exports.alphawolf_request = () => {
 
     for (const playerNumber in playerCards) {
       if (Object.hasOwnProperty.call(playerCards, playerNumber)) {
-        const cardID = playerCards[playerNumber];
+        const cardId = playerCards[playerNumber];
 
-        if (!werewolvesIds.includes(cardID)) {
+        if (!werewolvesIds.includes(cardId)) {
           nonWerewolfPlayers.push(playerNumber);
         }
       }
@@ -26,9 +34,10 @@ exports.alphawolf_request = () => {
     selectable_players: findNonWerewolfPlayers(),
   };
 };
-exports.alphawolf_result = (selectedPlayer) => {
-  //save into card hitory: scene, role player, selected player?
-  //save new player card
-  //save new wolfcard
-  //send message to the role player successfully changed
+
+const alphawolf_result = (selectedPlayer) => {
+  //? save into card hitory: scene, role player, selected player
+  //!save new player card
+  //!save new wolfcard
+  //*send message to the role player successfully changed
 };

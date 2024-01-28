@@ -1,4 +1,11 @@
-exports.annoyinglad = () => {}
+const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
+//TODO doppelganger instant action
+exports.annoyinglad = () => {
+    const playerCards = collectCardInfo(gameState.players);
+    const annoyingladPlayer = getPlayersByRoleIds(playerCards, [55])
+  
+    return annoyingladPlayer
+}
 
 exports.annoyinglad_request = () => {}
 

@@ -40,7 +40,7 @@ exports.leaveRoom = async (ws, message) => {
       gameState.scene_number = 0;
       gameState.closed = false;
       gameState.available_names = [...defaultRoom.available_names];
-      delete gameState.center_cards;
+      delete gameState.card_positions;
     }
   }
 

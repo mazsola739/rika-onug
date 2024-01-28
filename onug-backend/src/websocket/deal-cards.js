@@ -60,12 +60,18 @@ const dealCardIds = (selectedCardIds) => {
 
   const playerCards = playerCardIds.map((id) => getCardById(id));
   const centerCards = centerCardIds.map((id) => getCardById(id));
+
+  const leftCard = centerCards[0];
+  const middleCard = centerCards[1];
+  const rightCard = centerCards[2];
   const newWolfCard = getCardById(newWolfCardId);
   const newVillainCard = getCardById(newVillainCardId);
 
   return {
     playerCards,
-    centerCards,
+    leftCard,
+    middleCard,
+    rightCard,
     newWolfCard,
     newVillainCard,
   };
@@ -73,30 +79,27 @@ const dealCardIds = (selectedCardIds) => {
 
 const createPlayerCard = (card, selected_cards) => {
   if (!card || typeof card !== "object" || !card.id) {
-    return { id: 0, card: { role: "", team: "", mark: false } };
+    return { id: 0, role: "", role_id: 0, team: "", mark: false };
   }
 
   return {
     id: card.id,
-    card: {
-      role: card.display_name,
-      team: card.team,
-      mark: hasMark(selected_cards),
-    },
+    role: card.role,
+    role_id: card.id,
+    team: card.team,
+    mark: hasMark(selected_cards),
   };
 };
 
-const createCenterCard = (card, selected_cards) => {
+const createPositionCard = (card, selected_cards) => {
   if (!card || typeof card !== "object" || !card.id) {
-    return { id: 0, card: { role: "", team: "" } };
+    return { id: 0, role: "", team: "" };
   }
 
   return {
     id: card.id,
-    card: {
-      role: card.display_name,
-      team: card.team,
-    },
+    role: card.role,
+    team: card.team,
   };
 };
 
@@ -110,22 +113,31 @@ exports.dealCards = async (ws, message) => {
 
   const selectedCards = gameState.selected_cards;
 
-  const { playerCards, centerCards, newWolfCard, newVillainCard } =
-    dealCardIds(selectedCards);
-
-  const leftCard = centerCards[0];
-  const middleCard = centerCards[1];
-  const rightCard = centerCards[2];
+  const {
+    playerCards,
+    leftCard,
+    middleCard,
+    rightCard,
+    newWolfCard,
+    newVillainCard,
+  } = dealCardIds(selectedCards);
 
   const newGameState = {
     ...gameState,
     stage: STAGES.GAME_TABLE,
-    center_cards: {
-      center_left_card:    createCenterCard(leftCard, selectedCards),
-      center_middle_car:   createCenterCard(middleCard, selectedCards),
-      center_right_card:   createCenterCard(rightCard, selectedCards),
-      center_wolf_card:    createCenterCard(newWolfCard, selectedCards),
-      center_villain_card: createCenterCard(newVillainCard, selectedCards),
+    card_positions: {
+      center_left_card: createPositionCard(leftCard, selectedCards),
+      center_middle_card: createPositionCard(middleCard, selectedCards),
+      center_right_card: createPositionCard(rightCard, selectedCards),
+      center_wolf_card: createPositionCard(newWolfCard, selectedCards),
+      center_villain_card: createPositionCard(newVillainCard, selectedCards),
+      ...playerCards.reduce((positions, playerCard, index) => {
+        positions[`player_${index + 1}_card`] = createPositionCard(
+          playerCard,
+          selectedCards
+        );
+        return positions;
+      }, {}),
     },
   };
 
@@ -134,13 +146,10 @@ exports.dealCards = async (ws, message) => {
   playerTokens.forEach((token, index) => {
     newGameState.players[token] = {
       ...gameState.players[token],
-      card: {
-        known_card:  createGameStateCardForm(playerCards[index], selectedCards),
-        actual_card: createGameStateCardForm(playerCards[index], selectedCards),
-      },
+      card: createPlayerCard(playerCards[index], selectedCards),
       player_number: index + 1,
-    }
-  })
+    };
+  });
 
   await upsertRoomState(newGameState);
 
