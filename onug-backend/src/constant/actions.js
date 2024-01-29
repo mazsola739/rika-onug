@@ -40,6 +40,9 @@ exports.alienAllKeys = [
   "identifier_evenplayers_text",
 ]
 
+exports.alphawolf = "alphawolf_kickoff_text" //wolf center card swap to any non werewolf card - update wolf center actual card & selected player actual card
+
+exports.annoyinglad = "annoyinglad_kickoff_text" //left or right neigbor player sending message to selected player - no update
 
 //TODO rename consts
 exports.apprenticeassassin = "apprenticeassassin_alone_text" //doppelganger! may any player mark swap with Mark of the Assassin - update selected player actual mark

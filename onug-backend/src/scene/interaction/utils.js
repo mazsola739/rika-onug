@@ -1,73 +1,69 @@
-exports.collectCardInfo = (players) => {
-  const playerCardId = {};
-
-  for (const playerId in players) {
-    if (Object.hasOwnProperty.call(players, playerId)) {
-      const player = players[playerId];
-      const playerNumber = player.player_number;
-      const cardId = player.card.id;
-      const roleCardId = player.card.role_id;
-
-      playerCardId[`player_${playerNumber}_card`] = cardId;
-    }
+exports.getPlayerCardIds = players => {
+  const result = [];
+  for (const token in players) {
+    const player = players[token];
+    result.push({ [player]: player.card.id });
   }
-
-  return playerCardId;
+  return result;
 };
 
-exports.findNonMatchingElements = (array1, array2) => {
-  const nonMatchingElements = [];
-
-  for (const element of array1) {
-    if (!array2.includes(element)) {
-      nonMatchingElements.push(element);
-    }
+exports.getPlayerRoleIds = players => {
+  const result = [];
+  for (const token in players) {
+    const player = players[token];
+    result.push({ [player]: player.card.role_id });
   }
-
-  return nonMatchingElements;
+  return result;
 };
 
-exports.getPlayersByRoleIds = (players, cardIds) => {
-  const matchingPlayers = [];
-
-  for (const playerId in players) {
-    if (Object.hasOwnProperty.call(players, playerId)) {
-      const roleId = players[playerId].card.id;
-      if (cardIds.includes(roleId)) {
-        matchingPlayers.push(playerId);
+exports.findPlayersByCardIds = (players, cardIds) => {
+  const result = [];
+  for (const token in players) {
+    if (players.hasOwnProperty(token)) {
+      const player = players[token];
+      if (cardIds.includes(player.card.id)) {
+        result.push(token);
       }
     }
   }
-
-  return matchingPlayers;
+  return result;
 };
 
-exports.getPlayersByCardIds = (players, cardIds) => {
-  const matchingPlayers = [];
-
-  for (const playerId in players) {
-    if (Object.hasOwnProperty.call(players, playerId)) {
-      const roleId = players[playerId].card.id;
-      if (cardIds.includes(roleId)) {
-        matchingPlayers.push(playerId);
+exports.findPlayersByRoleIds = (players, roleIds) => {
+  const result = [];
+  for (const token in players) {
+    if (players.hasOwnProperty(token)) {
+      const player = players[token];
+      if (roleIds.includes(player.card.role_id)) {
+        result.push(token);
       }
     }
   }
-
-  return matchingPlayers;
+  return result;
 };
 
-exports.getPlayersWithMarkOfLove = (players) => {
-  const matchingPlayers = [];
+exports.getPlayerNumbersByTokens = (players, tokens) =>
+  tokens.map((token) => players[token].player_number);
 
-  for (const playerId in players) {
-    if (Object.hasOwnProperty.call(players, playerId)) {
-      const mark_id = players[playerId].card.mark_id;
-      if (mark_id === "mark_of_love") {
-        matchingPlayers.push(playerId);
-      }
-    }
-  }
-
-  return matchingPlayers;
+exports.getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
+  const result = [];
+  playerNumbers.forEach((number) => {
+    const key = `player_${number}`;
+    const cardId = cardPositions[key].id;
+    result.push({ [key]: cardId });
+  });
+  return result;
 };
+
+exports.getRolePositions = (playerNumbers, roleId) => {
+  return playerNumbers.map((number) => ({ [`player_${number}`]: roleId }));
+};
+
+exports.getCardIdsByPositions = (cardPositions, selectedPositions) => {
+  const result = [];
+  selectedPositions.forEach((position) => {
+    const cardId = cardPositions[position].id;
+    result.push({ [position]: cardId });
+  });
+  return result;
+ }

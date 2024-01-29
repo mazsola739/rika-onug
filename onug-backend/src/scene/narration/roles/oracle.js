@@ -1,5 +1,7 @@
 //TODO save wich interaction!
 
+const { getRandomItemFromArray } = require("../utils")
+
 const random_oracle_question = [
   "oracle_alienteam_text",
   "oracle_werewolfteam_text",
@@ -65,19 +67,19 @@ exports.oracle_reaction = (question, answer) => {
   if (question === "oracle_evenodd_text") {
     if (answer === "even") {
       return ["oracle_evenodd_even_text"]
-    } else if (answer === "odd") {
+    } else {
       return ["oracle_evenodd_odd_text"]
     }
   } else if (question === "oracle_guessnumber_text") {
     if (answer === "success") {
       return ["oracle_guessnumber_success_text"]
-    } else if (answer === "failure") {
+    } else {
       return ["oracle_guessnumber_failure_text"]
     }
   } else {
     if (answer === "yes") {
       return [getRandomItemFromArray(oracle_responses[question].yes)]
-    } else if (answer === "no") {
+    } else {
       return [getRandomItemFromArray(oracle_responses[question].no)]
     }
   }

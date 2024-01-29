@@ -30,3 +30,5 @@ exports.READY              = "READY"
 exports.START_GAME         = "START_GAME"
 exports.STOP_GAME          = "STOP_GAME"
 exports.ERROR              = "ERROR"
+
+exports.INTERACTION        = "INTERACTION"

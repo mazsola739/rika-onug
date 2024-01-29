@@ -5,6 +5,7 @@ import { Button, Footer, FooterButtons, Header } from 'components'
 import {
   ARRIVE_GAME_PLAY,
   HYDRATE_GAME_PLAY,
+  INTERACTION,
   PAUSE_GAME,
   REDIRECT,
   STAGES,
@@ -69,6 +70,15 @@ export const GamePlay: React.FC = observer(() => {
     })
   }, [sendJsonMessage])
 
+  const handleInteraction = useCallback(() => {
+    sendJsonMessage?.({
+      type: INTERACTION,
+      room_id,
+      token,
+      selected_positions: ['player_2'],
+    })
+  }, [sendJsonMessage])
+
   return (
     <>
       <Header>
@@ -86,6 +96,11 @@ export const GamePlay: React.FC = observer(() => {
             onClick={handleStopGame}
             buttontext={buttons.stop_button_label}
             backgroundColor="#f44336"
+          />
+          <Button
+            onClick={handleInteraction}
+            buttontext={'Nyiiihaaaa'}
+            backgroundColor="#ff00ff"
           />
         </FooterButtons>
       </Footer>

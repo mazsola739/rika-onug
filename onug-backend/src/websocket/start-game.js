@@ -5,7 +5,7 @@ const { repository } = require("../repository")
 const { STAGES } = require("../constant/stage")
 const { broadcast } = require("./connections")
 const { upsertRoomState } = repository
-const { startGamePlay, sceneBuilder } = require("../screen-play")
+const { startGamePlay } = require("../screen-play")
 
 exports.startGame = async (message) => {
   const { room_id, token } = message
@@ -21,10 +21,11 @@ exports.startGame = async (message) => {
     ...gameState,
     stage: STAGES.GAME_PLAY,
     startTime,
-    cumSumPlayedMs: 0,
+    actual_scene: {
+      scene_title: "JOKE",
+      scene_number: 0,
+    }
   }
-
-  newGameState = sceneBuilder(newGameState)
 
   logTrace(`Game started by player [${token}], in room [${room_id}], with startTime: [${startTime}]`)
   // TODO validate player

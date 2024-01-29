@@ -27,7 +27,7 @@ exports.getTeamName = (id) => {
       return key
     }
   }
-  return null
+  return "villager"
 }
 
 const shufflePlayers = (totalPlayers) =>

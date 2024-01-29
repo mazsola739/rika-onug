@@ -68,45 +68,10 @@ const distributeCards = (selectedCardIds) => {
 const getCardById = (card_id) => cards.find((card) => card.id === card_id)
 const isCardSelectedById = (cardIds, cardId) =>
   cardIds.some((id) => id === cardId)
-const includesAny = (cardIds, cardIdsToCheck) =>
-  cardIdsToCheck.some((cardId) => isCardSelectedById(cardIds, cardId))
-const includesAll = (cardIds, cardIdsToCheck) =>
-  cardIdsToCheck.every((cardId) => isCardSelectedById(cardIds, cardId))
-
-const masonsInPlay = (cardIds) =>
-  includesAll(cardIds, [5, 6]) ||
-  (cardIds.includes(1) && includesAny(cardIds, [5, 6]))
-const anyMasonsInPlay = (cardIds) =>
-  includesAny(cardIds, [5, 6]) ||
-  (cardIds.includes(1) && includesAny(cardIds, [5, 6]))
-const werewolvesInPlay = (cardIds) => includesAny(cardIds, [15, 16])
-const multipleWerewolvesAtPlay = (cardIds) => includesAll(cardIds, [15, 16])
-const getCardPositionNamesForPlayers = (gameState, playerToExclude) =>
-  Object.values(gameState.players).flatMap((player) =>
-    player.player_number === playerToExclude ? [] : player.player_number
-  )
-const getWerewolfCardPositionNamesForPlayers = (gameState) =>
-  Object.values(gameState.players).flatMap((player) =>
-    werewolvesInPlay([player.card.id]) ? player.player_number : []
-  )
-const getMasonCardPositionNamesForPlayers = (gameState) =>
-  Object.values(gameState.players).flatMap((player) =>
-    anyMasonsInPlay([player.card.id]) ? player.player_number : []
-  )
-const getCenterCardPositions = () => [1, 2, 3]
-const getAllPositions = (gameState, playerToExclude) => ({
-  center: getCardPositionNamesForPlayers(),
-  players: getCardPositionNamesForPlayers(gameState, playerToExclude),
-})
 
 module.exports = {
   toggleCard,
   distributeCards,
-  getCardPositionNamesForPlayers,
-  masonsInPlay,
-  werewolvesInPlay,
-  includesAll,
-  includesAny,
   isCardSelectedById,
   getCardById,
   getRandomItemFromArray,
@@ -114,9 +79,4 @@ module.exports = {
   hasAlphaWolf,
   hasTemptress,
   getRandomNumber,
-  getWerewolfCardPositionNamesForPlayers,
-  multipleWerewolvesAtPlay,
-  getCenterCardPositions,
-  getMasonCardPositionNamesForPlayers,
-  getAllPositions,
 }

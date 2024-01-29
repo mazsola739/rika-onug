@@ -42,7 +42,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]
@@ -51,7 +51,12 @@
     "room_id": "armory",
     "room_name": "Armory",
     "stage": "LOBBY",
-    "selected_cards": [],
+    "selected_cards": [
+      4,
+      12,
+      14,
+      13
+    ],
     "available_names": [
       "Forrest Gump",
       "Indiana Jones",
@@ -79,7 +84,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]
@@ -116,7 +121,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]
@@ -163,7 +168,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]
@@ -209,7 +214,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]
@@ -255,7 +260,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]
@@ -301,7 +306,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]
@@ -352,7 +357,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]
@@ -403,7 +408,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]
@@ -454,7 +459,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]
@@ -505,7 +510,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]
@@ -542,7 +547,7 @@
     "shield": [],
     "action_history": [
       {
-        "scene_name": "CARD_SELECTION",
+        "scene_name": "JOKE",
         "scene_number": 0
       }
     ]

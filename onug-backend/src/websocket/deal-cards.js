@@ -149,13 +149,13 @@ exports.dealCards = async (ws, message) => {
     ...gameState,
     stage: STAGES.GAME_TABLE,
     card_positions: {
-      center_left_card: createPositionCard(leftCard, selectedCards),
-      center_middle_card: createPositionCard(middleCard, selectedCards),
-      center_right_card: createPositionCard(rightCard, selectedCards),
-      center_wolf_card: createPositionCard(newWolfCard, selectedCards),
-      center_villain_card: createPositionCard(newVillainCard, selectedCards),
+      center_left: createPositionCard(leftCard, selectedCards),
+      center_middle: createPositionCard(middleCard, selectedCards),
+      center_right: createPositionCard(rightCard, selectedCards),
+      center_wolf: createPositionCard(newWolfCard, selectedCards),
+      center_villain: createPositionCard(newVillainCard, selectedCards),
       ...playerCards.reduce((positions, playerCard, index) => {
-        positions[`player_${index + 1}_card`] = createPositionCard(
+        positions[`player_${index + 1}`] = createPositionCard(
           playerCard,
           selectedCards
         );

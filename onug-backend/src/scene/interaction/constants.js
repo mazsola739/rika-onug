@@ -1,4 +1,3 @@
-
 exports.instantRoleIds = {
   17: "role_alphawolf",
   55: "role_annoyinglad",
@@ -25,9 +24,11 @@ exports.instantRoleIds = {
   27: "role_witch",
 }
 exports.doppelgangerInstantActionsIds = [
-  2, 8, 9, 11, 17, 18, 22, 23, 25, 26, 27, 31, 32, 34, 55, 56, 57, 65, 66, 68, 69, 70, 85,
+  2, 8, 9, 11, 17, 18, 22, 23, 25, 26, 27, 31, 32, 34, 55, 56, 57, 65, 66, 68,
+  69, 70, 85,
 ]
-exports.teamIds = { //TODO check all id is here?
+exports.teamIds = {
+  //TODO check all id is here?
   werewolf: [7, 15, 16, 17, 21, 22, 83],
   vampire: [38, 39, 40, 41],
   alien: [42, 43, 47, 53, 54, 74],
@@ -53,5 +54,14 @@ exports.alienIds = [42, 43, 47, 53, 54, 74]
 exports.groobAndZerbIds = [47, 54]
 exports.superVillainsIds = [57, 60, 65, 69]
 exports.werewolvesIds = [15, 16, 17, 22]
+exports.werewolvesAndDreamWolfIds = [15, 16, 17, 21, 22]
 exports.masonIds = [5, 6]
 exports.seerIds = [9, 18]
+
+exports.centerCardPositions = [
+  "center_left",
+  "center_middle",
+  "center_right",
+  "center_wolf",
+  "center_villain",
+]

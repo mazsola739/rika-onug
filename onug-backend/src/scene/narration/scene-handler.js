@@ -1,6 +1,4 @@
 //todo save interaction identifiers for this: aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
-
-
 const { roles } = require("./roles");
 const {
   getRolesNames,
@@ -21,9 +19,12 @@ const {
   seerIds,
   masonIds,
 } = require("./constants");
+const { logError } = require("../../log");
+
+const SCENE_TEXT = 'actual_scene.text'
 
 exports.sceneHandler = (gameState) => {
-    const sceneTitle = gameState.sceneTitle;
+    const sceneTitle = gameState.actual_scene.scene_title;
     const selectedCards = gameState.selected_cards;
     const totalPlayers = gameState.players.length;
 
@@ -67,10 +68,6 @@ exports.sceneHandler = (gameState) => {
       hasIntern: hasRole(selectedCards, 62),
       hasBothMasons: containsAllIds(selectedCards, masonIds),
       hasAnyMason: containsAnyIds(selectedCards, masonIds),
-      haOneMasonAndDoppelganger:
-        conditions.hasDoppelganger && conditions.hasAnyMason,
-      hasMasons:
-        conditions.hasBothMasons || conditions.haOneMasonAndDoppelganger,
       hasThing: hasRole(selectedCards, 85),
       hasAnnoyingLad: hasRole(selectedCards, 55),
       hasSeer: hasRole(selectedCards, 9),
@@ -97,7 +94,6 @@ exports.sceneHandler = (gameState) => {
       hasSelfAwarenessGirl: hasRole(selectedCards, 67),
       hasSquire: hasRole(selectedCards, 83),
       hasSeers: containsAnyIds(selectedCards, seerIds),
-      hasBeholder: hasRole(selectedCards, 73) && conditions.hasSeers,
       hasRevealer: hasRole(selectedCards, 24),
       hasExposer: hasRole(selectedCards, 46),
       hasFlipper: hasRole(selectedCards, 59),
@@ -108,28 +104,45 @@ exports.sceneHandler = (gameState) => {
       hasFamilyMan: hasRole(selectedCards, 78),
     };
 
+    conditions.haOneMasonAndDoppelganger = conditions.hasDoppelganger && conditions.hasAnyMason
+    conditions.hasMasons = conditions.hasBothMasons || conditions.haOneMasonAndDoppelganger
+    conditions.hasBeholder = hasRole(selectedCards, 73) && conditions.hasSeers
+
     switch (sceneTitle) {
       // case "CARD_SELECTION":// (Scene Number 0)
       // case "EVERYONE_CARD":// (Scene Number: 1)
       /*  T W I L L I G H T  */
       case "ORACLE_QUESTION": // (Scene Number: 2)
-        if (conditions.hasOracle) return roles.oracle_question();
-        break;
+        const oq = roles.oracle_question()
+        if (conditions.hasOracle) return {
+          [SCENE_TEXT]: oq,
+          'oracle_question': oq[1]
+        }
+       break
       case "ORACLE_REACTION": // (Scene Number: 3)
-        const oracleQuestion = gameState.oracle_question;
-        const oracleAnswer = gameState.oracle_answer; //TODO make sure always have answer if oracle in selected cards
-        if (conditions.hasOracle && oracleAnswer)
-          return roles.oracle_reaction(oracleQuestion, oracleAnswer);
-        break;
+        const oracleQuestion = gameState.oracle_question
+        const oracleAnswer = gameState.oracle_answer
+        if (conditions.hasOracle) {
+          return {
+            [SCENE_TEXT]: roles.oracle_reaction(oracleQuestion, oracleAnswer),
+          }
+          }
+       break
       case "COPYCAT": // (Scene Number: 4)
-        if (conditions.hasCopycat) return roles.copycat();
-        break;
+        if (conditions.hasCopycat) return {
+          [SCENE_TEXT]: roles.copycat(),
+        }
+       break
       case "MIRROR_MAN": // (Scene Number: 5)
-        if (conditions.hasMirrorMan) return roles.mirrorman();
-        break;
+        if (conditions.hasMirrorMan) return {
+          [SCENE_TEXT]: roles.mirrorman(),
+        }
+       break
       case "DOPPELGÄNGER": // (Scene Number: 6)
-        if (conditions.hasDoppelganger) return roles.doppelganger();
-        break;
+        if (conditions.hasDoppelganger) return {
+          [SCENE_TEXT]: roles.doppelganger(),
+        }
+       break
       case "DOPPELGÄNGER_INSTANT_ACTION": // (Scene Number: 7)
         const instantRoles = getRolesNames(
           selectedCards,
@@ -137,297 +150,459 @@ exports.sceneHandler = (gameState) => {
           instantRoleIds
         );
         if (conditions.hasDoppelganger && conditions.hasInstantAction)
-          return roles.doppelganger_instant_action(instantRoles);
-        break;
-      /*  D U S K */
+          return {
+          [SCENE_TEXT]: roles.doppelganger_instant_action(instantRoles),
+        }
+      /*  D U S K */break
       case "VAMPIRES": // (Scene Number: 8)
-        if (conditions.hasAnyVampire) return roles.vampires();
-        break;
+        if (conditions.hasAnyVampire) return {
+          [SCENE_TEXT]: roles.vampires(),
+        }
+       break
       case "THE_COUNT": // (Scene Number: 9)
-        if (conditions.hasTheCount) return roles.thecount();
-        break;
+        if (conditions.hasTheCount) return {
+          [SCENE_TEXT]: roles.thecount(),
+        }
+       break
       case "DOPPELGÄNGER_THE_COUNT": // (Scene Number: 10)
         if (conditions.hasDoppelganger && conditions.hasTheCount)
-          return roles.doppelganger_thecount();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_thecount(),
+        }
+       break
       case "RENFIELD": // (Scene Number: 11)
         if (conditions.hasRenfield)
-          return roles.renfield(conditions.hasDoppelganger);
-        break;
+          return {
+          [SCENE_TEXT]: roles.renfield(conditions.hasDoppelganger),
+        }
+       break
       case "DISEASED": // (Scene Number: 12)
-        if (conditions.hasDiseased) return roles.diseased();
-        break;
+        if (conditions.hasDiseased) return {
+          [SCENE_TEXT]: roles.diseased(),
+        }
+       break
       case "CUPID": // (Scene Number: 13)
-        if (conditions.hasCupid) return roles.cupid();
-        break;
+        if (conditions.hasCupid) return {
+          [SCENE_TEXT]: roles.cupid(),
+        }
+       break
       case "INSTIGATOR": // (Scene Number: 14)
-        if (conditions.hasInstigator) return roles.instigator();
-        break;
+        if (conditions.hasInstigator) return {
+          [SCENE_TEXT]: roles.instigator(),
+        }
+       break
       case "PRIEST": // (Scene Number: 15)
-        if (conditions.hasPriest) return roles.priest();
-        break;
+        if (conditions.hasPriest) return {
+          [SCENE_TEXT]: roles.priest(),
+        }
+       break
       case "DOPPELGÄNGER_PRIEST": // (Scene Number: 16)
         if (conditions.hasDoppelganger && conditions.hasPriest)
-          return roles.doppelganger_priest();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_priest(),
+        }
+       break
       case "ASSASSIN": // (Scene Number: 17)
-        if (conditions.hasAssassin) return roles.assassin();
-        break;
+        if (conditions.hasAssassin) return {
+          [SCENE_TEXT]: roles.assassin(),
+        }
+       break
       case "DOPPELGÄNGER_ASSASSIN": // (Scene Number: 18)
         if (conditions.hasDoppelganger && conditions.hasAssassin)
-          return roles.doppelganger_assassin();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_assassin(),
+        }
+       break
       case "APPRENTICE_ASSASSIN": // (Scene Number: 19)
         if (conditions.hasApprenticeAssassin)
-          return roles.apprenticeassassin(conditions.hasAssassin);
-        break;
+          return {
+          [SCENE_TEXT]: roles.apprenticeassassin(conditions.hasAssassin),
+        }
+       break
       case "DOPPELGÄNGER_APPRENTICE_ASSASSIN": // (Scene Number: 20)
         if (conditions.hasDoppelganger && conditions.hasApprenticeAssassin)
-          return roles.doppelganger_apprenticeassassin(conditions.hasAssassin);
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_apprenticeassassin(conditions.hasAssassin),
+        }
+       break
       case "EVERYONE_MARK": // (Scene Number: 21)
-        if (conditions.hasMarks) return roles.everyonemark();
-        break;
-      /*  N I G H T */
+        if (conditions.hasMarks) return {
+          [SCENE_TEXT]: roles.everyonemark(),
+        }
+      /*  N I G H T */break
       case "LOVERS": // (Scene Number: 22)
-        if (conditions.hasCupid) return roles.lovers();
-        break;
+        if (conditions.hasCupid) return {
+          [SCENE_TEXT]: roles.lovers(),
+        }
+       break
       case "SENTINEL": // (Scene Number: 24)
-        if (conditions.hasSentinel) return roles.sentinel();
-        break;
+        if (conditions.hasSentinel) return {
+          [SCENE_TEXT]: roles.sentinel(gameState),
+        }
+       break
       case "ALIENS": // (Scene Number: 25)
-        if (conditions.hasAnyAlien) return roles.aliens(totalPlayers);
-        break;
+        if (conditions.hasAnyAlien) return {
+          [SCENE_TEXT]: roles.aliens(totalPlayers),
+        }
+       break
       case "COW": // (Scene Number: 26)
-        if (conditions.hasCow) return roles.cow(conditions.hasDoppelganger);
-        break;
+        if (conditions.hasCow) return {
+          [SCENE_TEXT]: roles.cow(conditions.hasDoppelganger),
+        }
+       break
       case "GROOB_ZERB": // (Scene Number: 27)
         if (conditions.hasGroobAndZerb)
-          return roles.groobzerb(conditions.hasDoppelganger);
-        break;
+          return {
+          [SCENE_TEXT]: roles.groobzerb(conditions.hasDoppelganger),
+        }
+       break
       case "LEADER": // (Scene Number: 28)
         if (conditions.hasLeader && conditions.hasAnyAlien)
-          return roles.leader(conditions.hasDoppelganger);
-        break;
+          return {
+          [SCENE_TEXT]: roles.leader(conditions.hasDoppelganger),
+        }
+       break
       case "LEADER_ZERB_GROOB": // (Scene Number: 29)
         if (conditions.hasLeader && conditions.hasGroobAndZerb)
-          return roles.leader_zerbgroob();
-        break;
+          return {
+          [SCENE_TEXT]: roles.leader_zerbgroob(),
+        }
+       break
       case "BODY_SNATCHER": // (Scene Number: 30)
-        if (conditions.hasBodySnatcher) return roles.bodysnatcher();
-        break;
+        if (conditions.hasBodySnatcher) return {
+          [SCENE_TEXT]: roles.bodysnatcher(),
+        }
+       break
       case "DOPPELGÄNGER_BODY_SNATCHER": // (Scene Number: 31)
         if (conditions.hasDoppelganger && conditions.hasBodySnatcher)
-          return roles.doppelganger_bodysnatcher();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_bodysnatcher(),
+        }
+       break
       case "SUPER_VILLAINS": // (Scene Number: 32)
-        if (conditions.hasAnySuperVillains) return roles.supervillains();
-        break;
+        if (conditions.hasAnySuperVillains) return {
+          [SCENE_TEXT]: roles.supervillains(),
+        }
+       break
       case "TEMPTRESS": // (Scene Number: 33)
-        if (conditions.hasTemptress) return roles.temptress();
-        break;
+        if (conditions.hasTemptress) return {
+          [SCENE_TEXT]: roles.temptress(),
+        }
+       break
       case "DR_PEEKER": // (Scene Number: 34)
-        if (conditions.hasDrPeeker) return roles.drpeeker();
-        break;
+        if (conditions.hasDrPeeker) return {
+          [SCENE_TEXT]: roles.drpeeker(),
+        }
+       break
       case "RAPSCALLION": // (Scene Number: 35)
-        if (conditions.hasRapscallion) return roles.rapscallion();
-        break;
+        if (conditions.hasRapscallion) return {
+          [SCENE_TEXT]: roles.rapscallion(),
+        }
+       break
       case "EVILOMETER": // (Scene Number: 36)
         if (conditions.hasEvilometer)
-          return roles.evilometer(conditions.hasDoppelganger);
-        break;
+          return {
+          [SCENE_TEXT]: roles.evilometer(conditions.hasDoppelganger),
+        }
+       break
       case "WEREWOLVES": // (Scene Number: 37)
         if (conditions.hasAnyWerewolf)
-          return roles.werewolves(conditions.hasDreamWolf);
-        break;
+          return {
+          [SCENE_TEXT]: roles.werewolves(conditions.hasDreamWolf),
+        }
+       break
       case "ALPHA_WOLF": // (Scene Number: 38)
-        if (conditions.hasAlphaWolf) return roles.alphawolf();
-        break;
+        if (conditions.hasAlphaWolf) return {
+          [SCENE_TEXT]: roles.alphawolf(),
+        }
+       break
       case "MYSTIC_WOLF": // (Scene Number: 39)
-        if (conditions.hasMysticWolf) return roles.mysticwolf();
-        break;
+        if (conditions.hasMysticWolf) return {
+          [SCENE_TEXT]: roles.mysticwolf(),
+        }
+       break
       case "MINION": // (Scene Number: 40)
         if (conditions.hasMinion)
-          return roles.minion(conditions.hasDoppelganger);
-        break;
+          return {
+          [SCENE_TEXT]: roles.minion(conditions.hasDoppelganger),
+        }
+       break
       case "APPRENTICE_TANNER": // (Scene Number: 41)
         if (conditions.hasApprenticeTanner && conditions.hasTanner)
-          return roles.apprenticetanner(conditions.hasDoppelganger);
-        break;
+          return {
+          [SCENE_TEXT]: roles.apprenticetanner(conditions.hasDoppelganger),
+        }
+       break
       case "MAD_SCIENTIST": // (Scene Number: 42)
-        if (conditions.hasMadScientist) return roles.madscientist();
-        break;
+        if (conditions.hasMadScientist) return {
+          [SCENE_TEXT]: roles.madscientist(),
+        }
+       break
       case "INTERN": // (Scene Number: 43)
         if (conditions.hasIntern)
-          return roles.intern(
+          return {
+          [SCENE_TEXT]: roles.intern(
             conditions.hasDoppelganger,
             conditions.hasMadScientist
-          );
-        break;
+          ),
+        }
+       break
       case "MASONS": // (Scene Number: 44)
-        if (conditions.hasMasons) return roles.masons();
-        break;
+        if (conditions.hasMasons) return {
+          [SCENE_TEXT]: roles.masons(),
+        }
+       break
       case "THING": // (Scene Number: 45)
-        if (conditions.hasThing) return roles.thing();
-        break;
+        if (conditions.hasThing) return {
+          [SCENE_TEXT]: roles.thing(),
+        }
+       break
       case "ANNOYING_LAD": // (Scene Number: 46)
-        if (conditions.hasAnnoyingLad) return roles.annoyinglad();
-        break;
+        if (conditions.hasAnnoyingLad) return {
+          [SCENE_TEXT]: roles.annoyinglad(),
+        }
+       break
       case "SEER": // (Scene Number: 47)
-        if (conditions.hasSeer) return roles.seer();
-        break;
+        if (conditions.hasSeer) return {
+          [SCENE_TEXT]: roles.seer(),
+        }
+       break
       case "APPRENTICE_SEER": // (Scene Number: 48)
-        if (conditions.hasApprenticeSeer) return roles.apprenticeseer();
-        break;
+        if (conditions.hasApprenticeSeer) return {
+          [SCENE_TEXT]: roles.apprenticeseer(),
+        }
+       break
       case "PARANORMAL_INVESTIGATOR": // (Scene Number: 49)
         if (conditions.hasParanormalInvestigator)
-          return roles.paranormalinvestigator();
-        break;
+          return {
+          [SCENE_TEXT]: roles.paranormalinvestigator(),
+        }
+       break
       case "MARKSMAN": // (Scene Number: 50)
         if (conditions.hasMarksman)
-          return roles.marksman(conditions.hasDoppelganger);
-        break;
+          return {
+          [SCENE_TEXT]: roles.marksman(conditions.hasDoppelganger),
+        }
+       break
       case "NOSTRADAMUS": // (Scene Number: 51)
-        if (conditions.hasNostradamus) return roles.nostradamus();
-        break;
+        if (conditions.hasNostradamus) return {
+          [SCENE_TEXT]: roles.nostradamus(),
+        }
+       break
       case "NOSTRADAMUS_REACTION": // (Scene Number: 52)
-        const nostradamusTeam = getTeamName(lastViewedCardId);
+        const lastViewedCardId = gameState.lastViewedCardId
+        const nostradamusTeam = getTeamName(lastViewedCardId) // TODO it's undefined
         if (conditions.hasNostradamus)
-          return roles.nostradamus_reaction(nostradamusTeam);
-        break;
+          return {
+          [SCENE_TEXT]: roles.nostradamus_reaction(nostradamusTeam),
+        }
+       break
       case "PSYCHIC": // (Scene Number: 53)
-        if (conditions.hasPsychic) return roles.psychic();
-        break;
+        if (conditions.hasPsychic) return {
+          [SCENE_TEXT]: roles.psychic(),
+        }
+       break
       case "DOPPELGÄNGER_PSYCHIC": // (Scene Number: 54)
         if (conditions.hasDoppelganger && conditions.hasPsychic)
-          return roles.doppelganger_psychic();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_psychic(),
+        }
+       break
       case "DETECTOR": // (Scene Number: 55)
-        if (conditions.hasDetector) return roles.detector();
-        break;
+        if (conditions.hasDetector) return {
+          [SCENE_TEXT]: roles.detector(),
+        }
+       break
       case "ROBBER": // (Scene Number: 56)
-        if (conditions.hasRobber) return roles.robber();
-        break;
+        if (conditions.hasRobber) return {
+          [SCENE_TEXT]: roles.robber(),
+        }
+       break
       case "WITCH": // (Scene Number: 57)
-        if (conditions.hasWitch) return roles.witch();
-        break;
+        if (conditions.hasWitch) return {
+          [SCENE_TEXT]: roles.witch(),
+        }
+       break
       case "PICKPOCKET": // (Scene Number: 58)
-        if (conditions.hasPickpocket) return roles.pickpocket();
-        break;
+        if (conditions.hasPickpocket) return {
+          [SCENE_TEXT]: roles.pickpocket(),
+        }
+       break
       case "DOPPELGÄNGER_PICKPOCKET": // (Scene Number: 59)
         if (conditions.hasDoppelganger && conditions.hasPickpocket)
-          return roles.doppelganger_pickpocket();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_pickpocket(),
+        }
+       break
       case "ROLE_RETRIEVER": // (Scene Number: 60)
-        if (conditions.hasRoleRetriever) return roles.roleretriever();
-        break;
+        if (conditions.hasRoleRetriever) return {
+          [SCENE_TEXT]: roles.roleretriever(),
+        }
+       break
       case "VOODOO_LOU": // (Scene Number: 61)
-        if (conditions.hasVoodooLou) return roles.voodoolou();
-        break;
+        if (conditions.hasVoodooLou) return {
+          [SCENE_TEXT]: roles.voodoolou(),
+        }
+       break
       case "TROUBLEMAKER": // (Scene Number: 62)
-        if (conditions.hasTroublemaker) return roles.troublemaker();
-        break;
+        if (conditions.hasTroublemaker) return {
+          [SCENE_TEXT]: roles.troublemaker(),
+        }
+       break
       case "VILLAGE_IDIOT": // (Scene Number: 63)
-        if (conditions.hasVillageIdiot) return roles.villageidiot();
-        break;
+        if (conditions.hasVillageIdiot) return {
+          [SCENE_TEXT]: roles.villageidiot(),
+        }
+       break
       case "AURA_SEER": // (Scene Number: 64)
         if (conditions.hasAuraSeer)
-          return roles.auraseer(
+          return {
+          [SCENE_TEXT]: roles.auraseer(
             conditions.hasDoppelganger,
             conditions.hasMarks
-          );
-        break;
+          ),
+        }
+       break
       case "GREMLIN": // (Scene Number: 65)
-        if (conditions.hasGremlin) return roles.gremlin();
-        break;
+        if (conditions.hasGremlin) return {
+          [SCENE_TEXT]: roles.gremlin(),
+        }
+       break
       case "DOPPELGÄNGER_GREMLIN": // (Scene Number: 66)
         if (conditions.hasDoppelganger && conditions.hasGremlin)
-          return roles.doppelganger_gremlin();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_gremlin(),
+        }
+       break
       case "RASCAL": // (Scene Number: 67)
-        if (conditions.hasRascal) return roles.rascal();
-        break;
+        if (conditions.hasRascal) return {
+          [SCENE_TEXT]: roles.rascal(),
+        }
+       break
       case "DOPPELGÄNGER_RASCAL": // (Scene Number: 68)
         if (conditions.hasDoppelganger && conditions.hasRascal)
-          return roles.doppelganger_rascal();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_rascal(),
+        }
+       break
       case "SWITCHEROO": // (Scene Number: 69)
-        if (conditions.hasSwitcheroo) return roles.switcheroo();
-        break;
+        if (conditions.hasSwitcheroo) return {
+          [SCENE_TEXT]: roles.switcheroo(),
+        }
+       break
       case "DRUNK": // (Scene Number: 70)
-        if (conditions.hasDrunk) return roles.drunk();
-        break;
+        if (conditions.hasDrunk) return {
+          [SCENE_TEXT]: roles.drunk(),
+        }
+       break
       case "INSOMNIAC": // (Scene Number: 71)
         if (conditions.hasInsomniac)
-          return roles.insomniac(conditions.hasDoppelganger);
-        break;
+          return {
+          [SCENE_TEXT]: roles.insomniac(conditions.hasDoppelganger),
+        }
+       break
       case "SELF_AWARENESS_GIRL": // (Scene Number: 72)
         if (conditions.hasSelfAwarenessGirl)
-          return roles.selfawarenessgirl(conditions.hasDoppelganger);
-        break;
+          return {
+          [SCENE_TEXT]: roles.selfawarenessgirl(conditions.hasDoppelganger),
+        }
+       break
       case "SQUIRE": // (Scene Number: 73)
         if (conditions.hasSquire)
-          return roles.squire(conditions.hasDoppelganger);
-        break;
+          return {
+          [SCENE_TEXT]: roles.squire(conditions.hasDoppelganger),
+        }
+       break
       case "BEHOLDER": // (Scene Number: 74)
         if (conditions.hasBeholder)
-          return roles.beholder(
+          return {
+          [SCENE_TEXT]: roles.beholder(
             conditions.hasSeer,
             conditions.hasApprenticeSeer,
             conditions.hasDoppelganger
-          );
-        break;
+          ),
+        }
+       break
       case "REVEALER": // (Scene Number: 75)
-        if (conditions.hasRevealer) return roles.revealer();
-        break;
+        if (conditions.hasRevealer) return {
+          [SCENE_TEXT]: roles.revealer(),
+        }
+       break
       case "DOPPELGÄNGER_REVEALER": // (Scene Number: 76)
         if (conditions.hasDoppelganger && conditions.hasRevealer)
-          return roles.doppelganger_revealer();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_revealer(),
+        }
+       break
       case "EXPOSER": // (Scene Number: 74)
-        if (conditions.hasExposer) return roles.exposer();
-        break;
+        if (conditions.hasExposer) return {
+          [SCENE_TEXT]: roles.exposer(),
+        }
+       break
       case "DOPPELGÄNGER_EXPOSER": // (Scene Number: 75)
         if (conditions.hasDoppelganger && conditions.hasExposer)
-          return roles.doppelganger_exposer();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_exposer(),
+        }
+       break
       case "FLIPPER": // (Scene Number: 76)
-        if (conditions.hasFlipper) return roles.flipper();
-        break;
+        if (conditions.hasFlipper) return {
+          [SCENE_TEXT]: roles.flipper(),
+        }
+       break
       case "DOPPELGÄNGER_FLIPPER": // (Scene Number: 77)
         if (conditions.hasDoppelganger && conditions.hasFlipper)
-          return roles.doppelganger_flipper();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_flipper(),
+        }
+       break
       case "EMPATH": // (Scene Number: 78)
-        if (conditions.hasEmpath) return roles.empath(totalPlayers);
-        break;
+        if (conditions.hasEmpath) return {
+          [SCENE_TEXT]: roles.empath(totalPlayers),
+        }
+       break
       case "DOPPELGÄNGER_EMPATH": // (Scene Number: 79)
         if (conditions.hasDoppelganger && conditions.hasEmpath)
-          return roles.doppelganger_empath(totalPlayers);
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_empath(totalPlayers),
+        }
+       break
       case "CURATOR": // (Scene Number: 80)
-        if (conditions.hasCurator) return roles.curator();
-        break;
+        if (conditions.hasCurator) return {
+          [SCENE_TEXT]: roles.curator(),
+        }
+       break
       case "DOPPELGÄNGER_CURATOR": // (Scene Number: 81)
         if (conditions.hasDoppelganger && conditions.hasCurator)
-          return roles.doppelganger_curator();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_curator(),
+        }
+       break
       case "BLOB": // (Scene Number: 82)
-        if (conditions.hasBlob) return roles.blob();
-        break;
+        if (conditions.hasBlob) return {
+          [SCENE_TEXT]: roles.blob(),
+        }
+       break
       case "MORTICIAN": // (Scene Number: 83)
-        if (conditions.hasMortician) return roles.mortician();
-        break;
+        if (conditions.hasMortician) return {
+          [SCENE_TEXT]: roles.mortician(),
+        }
+       break
       case "DOPPELGÄNGER_MORTICIAN": // (Scene Number: 84)
         if (conditions.hasMortician && conditions.hasDoppelganger)
-          return roles.doppelganger_mortician();
-        break;
+          return {
+          [SCENE_TEXT]: roles.doppelganger_mortician(),
+        }
+       break
       case "FAMILY_MAN": // (Scene Number: 85)
         if (conditions.hasFamilyMan)
-          return roles.familyman(conditions.hasDoppelganger);
+          return {
+          [SCENE_TEXT]: roles.familyman(conditions.hasDoppelganger),
+        }
+        break
       default:
-        return "Unknown scene: " + sceneTitle;
-
+        logError(`SCENE_HANDLER_DEFAULT case: no role found for: sceneTitle ${sceneTitle}`)
+    
       //Ripple Scene:
       /*  RIPPLE":// (Scene Number: 69) */
       //Day Scenes:
@@ -435,4 +610,5 @@ exports.sceneHandler = (gameState) => {
     VOTE":// (Scene Number: 71)
     WINNERS":// (Scene Number: 72) */
     }
+    return {}
   };

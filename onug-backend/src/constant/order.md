@@ -18,7 +18,7 @@
 
 #### N I G H T
 - Marks of Love
-- Sentinel !!!!!mark of fear check from this point shield check (shield only protect card, not mark)
+- Sentinel 
 - Aliens + Synthetic Alien
     - Cow
 - Groob + Zerb
@@ -62,11 +62,11 @@
 - Self-Awareness Girl
 - Squire
 - Beholder
-- Revealer                        !!!!!from this point if card flipped on board
+- Revealer
 - Exposer                              
 - Flipper
 - Empath
-- Curator                         !!!!!artifact visible from this point each time when to some1 who wakes up
+- Curator
 - Blob
 - Mortician
 - Family Man

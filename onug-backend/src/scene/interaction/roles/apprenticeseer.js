@@ -1,4 +1,5 @@
-const { collectCardInfo, getPlayersByCardIds } = require("../utils");
+const { INTERACTION } = require("../../../constant/ws");
+const { logInfo } = require("../../../log");
 //TODO doppelganger instant action
 exports.apprenticeseer = () => {
     const playerCards = collectCardInfo(gameState.players);

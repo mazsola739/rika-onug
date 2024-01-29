@@ -1,40 +1,69 @@
 //wolf center card swap to any non werewolf card - update wolf center card & selected player card
 //TODO doppelganger instant action
-const { collectCardInfo, getPlayersByCardIds } = require("../utils");
+const { INTERACTION } = require("../../../constant/ws");
+const { logInfo } = require("../../../log");
+const { collectCardInfo, getPlayersByCardIds, getPlayersWithMark, findNonWerewolfPlayers, getPlayersWithShield, getPlayersByRoleIds } = require("../utils");
 
-exports.alphawolf = () => {
+exports.alphawolf = gameState => {
+  const role_interactions = []
   const playerCards = collectCardInfo(gameState.players);
-  const alphaWolfPlayer = getPlayersByCardIds(playerCards, [17])
+  const tokens = getPlayersByCardIds(gameState.players, [17])
+  const playersWithMarkOfFear = getPlayersWithMark(gameState.players, "mark_of_fear")
+  const playersWithShield = getPlayersWithShield(gameState.players)
 
-  return alphaWolfPlayer
+
+  tokens.forEach(token => 
+    role_interactions.push({
+      type: INTERACTION,
+      token,
+      mark_of_fear: playersWithMarkOfFear.includes(token),
+      message: "ALPHAWOLF",
+      selectable_players: findNonWerewolfPlayers(playerCards),
+      shield: playersWithShield.includes(token),
+  }))
+
+  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
+
+  return role_interactions
 };
 
-const alphawolf_request = () => {
+/* exports.doppelganger_alphawolf = gameState => {
+  const role_interactions = []
   const playerCards = collectCardInfo(gameState.players);
-  const werewolvesIds = [15, 16, 17, 21, 22];
+  const tokens = getPlayersByRoleIds(gameState.players, [17])
 
-  const findNonWerewolfPlayers = () => {
-    const nonWerewolfPlayers = [];
 
-    for (const playerNumber in playerCards) {
-      if (Object.hasOwnProperty.call(playerCards, playerNumber)) {
-        const cardId = playerCards[playerNumber];
+  tokens.forEach(token => 
+    role_interactions.push({
+      type: INTERACTION,
+      token,
+      mark_of_fear: gameState.mark_of_fear,
+      message: "ALPHAWOLF",
+      selectable_players: findNonWerewolfPlayers(playerCards),
+      shield: gameState.shield,
+  }))
 
-        if (!werewolvesIds.includes(cardId)) {
-          nonWerewolfPlayers.push(playerNumber);
-        }
-      }
-    }
+  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
-    return nonWerewolfPlayers;
-  };
+  return role_interactions
+}; */
 
-  return {
-    selectable_players: findNonWerewolfPlayers(),
-  };
-};
+exports.alphawolf_response = (gameState, selected_positions, ws) => {
+  const newGameState = {...gameState}
+  newGameState.action_history.push({
+    scene_title: "ALPHA_WOLF",
+    scene_number: 37,
+  });
 
-const alphawolf_result = (selectedPlayer) => {
+  [newGameState.card_positions.center_wolf, newGameState.card_positions[selected_positions[0]]] = [newGameState.card_positions[selected_positions[0]], newGameState.card_positions.center_wolf]
+
+  ws.send(JSON.stringify({
+    type: INTERACTION,
+    message: 'SUCCESSFULLY swapped cards',
+  }))
+
+  return newGameState
+
   //? save into card hitory: scene, role player, selected player
   //!save new player card
   //!save new wolfcard

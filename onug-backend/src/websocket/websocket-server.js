@@ -15,6 +15,7 @@ const {
   ARRIVE_GAME_PLAY,
   STOP_GAME,
   RELOAD,
+  INTERACTION,
 } = require("../constant/ws")
 const { hydrateRoom } = require("./hydrate-room")
 const { reset } = require("./reset")
@@ -30,6 +31,7 @@ const { dealCards} = require('./deal-cards')
 const { hydrateGamePlay } = require('./hydrate-game-play')
 const { stopGame } = require("./stop-game")
 const { reload } = require("./reload")
+const { interaction } = require("./interaction")
 
 
 exports.websocketServer = (port) => {
@@ -69,6 +71,7 @@ exports.websocketServer = (port) => {
         if (message.type === START_GAME) return startGame(message)
         if (message.type === ARRIVE_GAME_PLAY) return hydrateGamePlay(ws, message)
         if (message.type === STOP_GAME) return stopGame(message)
+        if (message.type === INTERACTION) return interaction(ws, message)
       })
     })
   } catch (error) {

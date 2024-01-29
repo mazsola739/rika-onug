@@ -3,7 +3,6 @@ const { logTrace } = require("../log");
 const { validateRoom } = require("../validator");
 const { repository } = require("../repository");
 const { STAGES } = require("../constant/stage");
-const { distributeCards } = require("../utils/card");
 const { broadcastPlayGame } = require("./connections");
 const { upsertRoomState } = repository;
 
@@ -30,11 +29,11 @@ exports.playGame = async (ws, message) => {
     ...gameState,
     stage: STAGES.GAME_TABLE,
     card_positions: {
-      center_left_card: leftCard,
-      center_middle_car: middleCard,
-      center_right_card: rightCard,
-      center_wolf_card: newWolfCard,
-      center_villain_card: newVillainCard,
+      center_left: leftCard,
+      center_middle: middleCard,
+      center_right: rightCard,
+      center_wolf: newWolfCard,
+      center_villain: newVillainCard,
     },
   };
   const playerTokens = Object.keys(gameState.players);
