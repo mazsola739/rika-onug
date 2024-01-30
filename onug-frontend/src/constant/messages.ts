@@ -44,7 +44,8 @@ export const interaction_robber =
   "Robber - Swaps his card for any other player's card (not center) which he then looks at"
 export const interaction_robber2 =
   "Robber - Swaps his card for any other player's card (not center) which he then looks at"
-export const interaction_seer = '' //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
+export const interaction_seer =
+  "Seer (2) - Looks at one player's card (not her own) or two cards from the center"
 export const interaction_sentinel = '' //? INFO: Sentinel - Place a Shield token on one player's card; that card (not mark) cannot be looked at or moved
 export const interaction_squire = '' //? INFO: Squire - All Werewolf team (not Minion/Squire) stick up their thumb for him to see, who may look at their cards
 export const interaction_thecount = '' //? INFO: The Count - Gives a non-Vampire the Mark of Fear; this prevents that player from doing their night action

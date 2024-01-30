@@ -15,16 +15,16 @@ const getNextScene = gameState => {
     let newGameState = {...gameState}
 
 /*     const startTime = Date.now() */
-
-    newGameState.actual_scene.scene_number++
 /*     newGameState.action_scene.scene_start_time = startTime */
-    
-    newGameState = narration(gameState)
+    newGameState.actual_scene.scene_number++
+
+    newGameState = narration(newGameState)
     newGameState = interaction(newGameState)
 
-/*     newGameState.role_interactions.forEach(role_interaction => {
+    //TODO fix role actions error
+    newGameState.role_interactions.forEach(role_interaction => {
         websocketServerConnectionsPerRoom[newGameState.room_id][role_interaction.token].send(JSON.stringify(role_interaction))
-    }) */
+    }) 
 
     if (newGameState.actual_scene.scene_title === 'VOTE') {
         newGameState.game_stopped = true

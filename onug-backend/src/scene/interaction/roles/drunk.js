@@ -30,7 +30,7 @@ exports.drunk = gameState => {
 
   logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
-  return gameState;
+  return newGameState;
 };
 
 exports.drunk_response = (gameState, token, selected_positions, ws) => {
