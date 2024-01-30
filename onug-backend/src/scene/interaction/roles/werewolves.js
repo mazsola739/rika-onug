@@ -2,16 +2,16 @@ const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
 const {
   findPlayersByRoleIds,
-  getPlayerNumbersByTokens,
+  getPlayerNumbersWithMatchingTokens,
   getRolePositions,
   getCardIdsByPositions,
 } = require("../utils");
 const { werewolvesIds, centerCardPositions } = require("../constants");
 //TODO DREAMWOLF & werewolf_response
-exports.werewolves = (gameState) => {
+exports.werewolves = gameState => {
   const role_interactions = [];
   const werewolfTokens = findPlayersByRoleIds(gameState.players, werewolvesIds);
-  const werewolfPlayerNumbers = getPlayerNumbersByTokens(
+  const werewolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(
     gameState.players,
     werewolfTokens
   );

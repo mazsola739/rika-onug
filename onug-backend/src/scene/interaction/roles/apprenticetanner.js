@@ -2,15 +2,15 @@ const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
 const {
   findPlayersByRoleIds,
-  getPlayerNumbersByTokens,
+  getPlayerNumbersWithMatchingTokens,
   getRolePositions,
 } = require("../utils");
 
-exports.apprenticetanner = (gameState) => {
+exports.apprenticetanner = gameState => {
   const role_interactions = [];
   const apprenticetannerTokens = findPlayersByRoleIds(gameState.players, [71]);
   const tannerTokens = findPlayersByRoleIds(gameState.players, [10]);
-  const tannerPlayerNumbers = getPlayerNumbersByTokens(
+  const tannerPlayerNumbers = getPlayerNumbersWithMatchingTokens(
     gameState.players,
     tannerTokens
   );

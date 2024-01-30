@@ -1,6 +1,6 @@
 
 //TODO doppelganger instant action
-exports.seer = (gameState) => {
+exports.seer = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

@@ -1,6 +1,6 @@
 
 
-exports.beholder = (gameState) => {
+exports.beholder = gameState => {
     const newGameState = {...gameState}
   
     return newGameState;

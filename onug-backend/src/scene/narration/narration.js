@@ -13,7 +13,7 @@ const scriptOrder = [
 
 //TODO RIPPLE
 
-exports.narration = (gameState) => {
+exports.narration = gameState => {
   const { room_id } = gameState.room_id;
   logTrace(`Narration playing for players in room: ${room_id}`);
 

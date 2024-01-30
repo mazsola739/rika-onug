@@ -23,8 +23,8 @@ const { logError } = require("../../log");
 const NARRATION = 'actual_scene.text'
 
 //! todo save interaction identifiers for this: aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
-
-exports.sceneHandler = (gameState) => {
+//TODO action_history
+exports.sceneHandler = gameState => {
   const sceneTitle = gameState.actual_scene.scene_title;
   const selectedCards = gameState.selected_cards;
   const totalPlayers = gameState.players.length;

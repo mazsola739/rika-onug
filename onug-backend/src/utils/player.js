@@ -16,7 +16,7 @@ exports.determineTotalPlayers = (totalCharacters, selectedCards) => {
   return Math.max(totalPlayers, 0)
 }
 
-exports.getBoard = (gameState) => {
+exports.getBoard = gameState => {
   const playersPrivate = Object.values(gameState.players)
 
   const playersPublic = playersPrivate.map((player) => {

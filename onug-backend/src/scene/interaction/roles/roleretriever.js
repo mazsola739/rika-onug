@@ -1,6 +1,6 @@
 
 //TODO doppelganger instant action
-exports.roleretriever = (gameState) => {
+exports.roleretriever = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

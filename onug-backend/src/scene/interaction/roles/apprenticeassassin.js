@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.apprenticeassassin = (gameState) => {
+exports.apprenticeassassin = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

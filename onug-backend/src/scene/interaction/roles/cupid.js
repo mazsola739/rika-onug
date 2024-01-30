@@ -1,6 +1,6 @@
 
 //TODO doppelganger instant action
-exports.cupid = (gameState) => {
+exports.cupid = gameState => {
     const newGameState = {...gameState}
   
     return newGameState;

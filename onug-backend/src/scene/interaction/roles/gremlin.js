@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.gremlin = () => (gameState) => {
+exports.gremlin = () => gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

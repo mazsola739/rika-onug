@@ -1,6 +1,6 @@
 
 //TODO doppelganger instant action
-exports.sentinel = (gameState) => {
+exports.sentinel = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

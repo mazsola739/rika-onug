@@ -1,6 +1,6 @@
 
 
-exports.auraseer = (gameState) => {
+exports.auraseer = gameState => {
     const newGameState = {...gameState}
   
     return newGameState;

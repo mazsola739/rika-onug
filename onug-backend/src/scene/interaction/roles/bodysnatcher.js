@@ -1,6 +1,6 @@
 
 //TODO doppelganger seperated
-exports.bodysnatcher = (gameState) => {
+exports.bodysnatcher = gameState => {
     const newGameState = {...gameState}
   
     return newGameState;

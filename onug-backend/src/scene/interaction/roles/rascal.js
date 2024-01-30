@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.rascal = (gameState) => {
+exports.rascal = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

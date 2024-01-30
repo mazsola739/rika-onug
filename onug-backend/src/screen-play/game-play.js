@@ -14,17 +14,17 @@ exports.stopGamePlay = () => {
 const getNextScene = gameState => {
     let newGameState = {...gameState}
 
-    const startTime = Date.now()
+/*     const startTime = Date.now() */
 
     newGameState.actual_scene.scene_number++
-    newGameState.action_scene.scene_start_time = startTime
+/*     newGameState.action_scene.scene_start_time = startTime */
     
     newGameState = narration(gameState)
     newGameState = interaction(newGameState)
 
-    newGameState.role_interactions.forEach(role_interaction => {
+/*     newGameState.role_interactions.forEach(role_interaction => {
         websocketServerConnectionsPerRoom[newGameState.room_id][role_interaction.token].send(JSON.stringify(role_interaction))
-    })
+    }) */
 
     if (newGameState.actual_scene.scene_title === 'VOTE') {
         newGameState.game_stopped = true
@@ -43,6 +43,7 @@ const tick = async (room_id) => {
     const gameState = await readGameState(room_id)
     const newGameState = getNextScene(gameState)
 
+    //TODO action_history: need narration & interactions
     newGameState.action_history.push(newGameState.actual_scene)
 
     await upsertRoomState(newGameState)

@@ -1,4 +1,4 @@
-exports.everyonemark = (gameState) => {
+exports.everyonemark = gameState => {
     const newGameState = {...gameState}
   
     return newGameState;

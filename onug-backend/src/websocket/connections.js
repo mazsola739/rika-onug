@@ -27,7 +27,7 @@ const broadcast = (room_id, jsonMessage) => {
     })
 }
 
-const sendInteractionSceneToPlayer = (gameState) => {
+const sendInteractionSceneToPlayer = gameState => {
     const interactionScenes = gameState.interactionScenes?.[gameState.scene_number]
     const wsInRoom = websocketServerConnectionsPerRoom?.[gameState.room_id]
     interactionScenes.forEach(interactionScene => {

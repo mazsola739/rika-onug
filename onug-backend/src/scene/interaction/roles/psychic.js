@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.psychic = (gameState) => {
+exports.psychic = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

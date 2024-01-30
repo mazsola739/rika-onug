@@ -1,4 +1,4 @@
-exports.getPlayerCardIds = players => {
+exports.getPlayerCardIds = (players) => {
   const result = [];
   for (const token in players) {
     const player = players[token];
@@ -7,7 +7,7 @@ exports.getPlayerCardIds = players => {
   return result;
 };
 
-exports.getPlayerRoleIds = players => {
+exports.getPlayerRoleIds = (players) => {
   const result = [];
   for (const token in players) {
     const player = players[token];
@@ -42,8 +42,24 @@ exports.findPlayersByRoleIds = (players, roleIds) => {
   return result;
 };
 
-exports.getPlayerNumbersByTokens = (players, tokens) =>
+exports.findDoppelgangerPlayerByRoleIds = (players, roleIds) => {
+  const result = [];
+  for (const token in players) {
+    if (players.hasOwnProperty(token)) {
+      const player = players[token];
+      if (roleIds.includes(player.card.role_id) && player.card.id === 1) {
+        result.push(token);
+      }
+    }
+  }
+  return result;
+};
+
+exports.getPlayerNumbersWithMatchingTokens = (players, tokens) =>
   tokens.map((token) => players[token].player_number);
+
+exports.getPlayerNumbersWithNonMatchingTokens = (players, tokens) =>
+  Object.keys(players).filter(token => !tokens.includes(token)).map(token => players[token].player_number);
 
 exports.getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
   const result = [];
@@ -66,4 +82,4 @@ exports.getCardIdsByPositions = (cardPositions, selectedPositions) => {
     result.push({ [position]: cardId });
   });
   return result;
- }
+};

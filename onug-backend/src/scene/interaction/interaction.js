@@ -20,7 +20,7 @@ exports.interaction = gameState => {
   }
   */
 
-  logDebug(`__INTERRACTION__ SCENE_NUMBER: ${newGameState.actual_scene.scene_number} role_interaction: ${JSON.stringify(role_interactions, null, 2)}`)
-  
+ /*  logDebug(`__INTERRACTION__ SCENE_NUMBER: ${newGameState.actual_scene.scene_number} role_interaction: ${JSON.stringify(role_interactions, null, 2)}`)
+   */
   return newGameState
 }

@@ -1,31 +1,33 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const {
-  findPlayersByRoleIds,
-  getPlayerNumbersByTokens,
-  getRolePositions,
-} = require("../utils");
+const { findPlayersByRoleIds, getPlayerNumbersWithMatchingTokens } = require("../utils");
 const { masonIds } = require("../constants");
 
-exports.masons = (gameState) => {
+//? INFO: Mason (2) – Wakes up and looks for the other fellow Mason
+exports.masons = gameState => {
+  const newGameState = { ...gameState };
   const role_interactions = [];
-  const masonTokens = findPlayersByRoleIds(gameState.players, masonIds);
-  const masonPlayerNumbers = getPlayerNumbersByTokens(
-    gameState.players,
-    masonTokens
-  );
-  const flippableCards = getRolePositions(masonPlayerNumbers, 5);
 
-  masonTokens.forEach((token) =>
+  const masonTokens = findPlayersByRoleIds(newGameState.players, masonIds);
+  const masonPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, masonTokens);
+
+  const roleHistory = {
+    ...newGameState.actual_scene,
+    card_or_mark_action: false,
+  };
+
+  masonTokens.forEach((token) => {
+    newGameState.players[token].role_history = roleHistory;
+
     role_interactions.push({
       type: INTERACTION,
       token,
-      message: "MASONS",
-      flippable_cards: flippableCards,
-    })
-  );
+      message: "interaction_masons",
+      masons: masonPlayerNumbers,
+    });
+  });
 
   logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`);
 
-  return role_interactions;
+  return newGameState;
 };

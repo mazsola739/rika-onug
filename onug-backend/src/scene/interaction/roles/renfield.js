@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.renfield = (gameState) => {
+exports.renfield = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

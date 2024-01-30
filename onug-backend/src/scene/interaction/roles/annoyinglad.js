@@ -1,6 +1,6 @@
 
 //TODO doppelganger instant action
-exports.annoyinglad = (gameState) => {
+exports.annoyinglad = gameState => {
     const newGameState = {...gameState}
   
     return newGameState;

@@ -32,8 +32,8 @@ const role_interactions = [
     shield: [],
   },
 ]
-
-exports.interactionHandler = (gameState) => {
+//TODO action_history
+exports.interactionHandler = gameState => {
   const sceneTitle = gameState.actual_scene.scene_title
   const selectedCards = gameState.selected_cards
 
@@ -118,7 +118,7 @@ exports.interactionHandler = (gameState) => {
   switch (sceneTitle) {
     // case "JOKE":// (Scene Number 0)
     // case "EPIC_BATTLE":// (Scene Number: 1)
-    /*  T W I L L I G H T */
+    /*  T W I L L I G H T */ /*
     case "ORACLE_QUESTION": // (Scene Number: 2)
       if (conditions.hasOracle) return roles.oracle_question(gameState)
       break
@@ -141,9 +141,9 @@ exports.interactionHandler = (gameState) => {
 
     case "DOPPELGÄNGER_INSTANT_ACTION": // (Scene Number: 7)
       if (conditions.hasDoppelganger && conditions.hasInstantAction) return roles.doppelganger_instant_action(gameState)
-      break
+      break */
 
-    /*  D U S K  */
+    /*  D U S K  */ /*
 
     case "VAMPIRES": // (Scene Number: 8)
       if (conditions.hasAnyVampire) return roles.vampires(gameState)
@@ -199,9 +199,9 @@ exports.interactionHandler = (gameState) => {
 
     case "EVERYONE_MARK": // (Scene Number: 21)
       if (conditions.hasMarks) return roles.everyonemark(gameState)
-      break
+      break */
 
-    /*  N I G H T  */
+    /*  N I G H T  */ /*
 
     case "LOVERS": // (Scene Number: 22)
       if (conditions.hasCupid) return roles.lovers(gameState)
@@ -269,11 +269,11 @@ exports.interactionHandler = (gameState) => {
 
     case "MYSTIC_WOLF": // (Scene Number: 38)
       if (conditions.hasMysticWolf) return roles.mysticwolf(gameState)
-      break
+      break */
 
     case "MINION": // (Scene Number: 39)
       if (conditions.hasMinion) return roles.minion(gameState)
-      break
+      break /*
 
     case "APPRENTICE_TANNER": // (Scene Number: 40)
       if (conditions.hasApprenticeTanner && conditions.hasTanner) return roles.apprenticetanner(gameState)
@@ -285,11 +285,11 @@ exports.interactionHandler = (gameState) => {
 
     case "INTERN": // (Scene Number: 42)
       if (conditions.hasIntern) return roles.intern(gameState)
-      break
+      break */
 
     case "MASONS": // (Scene Number: 43)
       if (conditions.hasMasons) return roles.masons(gameState)
-      break
+      break /*
 
     case "THING": // (Scene Number: 44)
       if (conditions.hasThing) return roles.thing(gameState)
@@ -333,11 +333,11 @@ exports.interactionHandler = (gameState) => {
 
     case "DETECTOR": // (Scene Number: 54)
       if (conditions.hasDetector) return roles.detector(gameState)
-      break
+      break */
 
     case "ROBBER": // (Scene Number: 55)
       if (conditions.hasRobber) return roles.robber(gameState)
-      break
+      break /*
 
     case "WITCH": // (Scene Number: 56)
       if (conditions.hasWitch) return roles.witch(gameState)
@@ -357,11 +357,11 @@ exports.interactionHandler = (gameState) => {
 
     case "VOODOO_LOU": // (Scene Number: 60)
       if (conditions.hasVoodooLou) return roles.voodoolou(gameState)
-      break
+      break */
 
     case "TROUBLEMAKER": // (Scene Number: 61)
       if (conditions.hasTroublemaker) return roles.troublemaker(gameState)
-      break
+      break /*
 
     case "VILLAGE_IDIOT": // (Scene Number: 62)
       if (conditions.hasVillageIdiot) return roles.villageidiot(gameState)
@@ -389,7 +389,7 @@ exports.interactionHandler = (gameState) => {
 
     case "SWITCHEROO": // (Scene Number: 68)
       if (conditions.hasSwitcheroo) return roles.switcheroo(gameState)
-      break
+      break */
 
     case "DRUNK": // (Scene Number: 69)
       if (conditions.hasDrunk) return roles.drunk(gameState)
@@ -401,7 +401,7 @@ exports.interactionHandler = (gameState) => {
 
     case "SELF_AWARENESS_GIRL": // (Scene Number: 71)
       if (conditions.hasSelfAwarenessGirl) return roles.selfawarenessgirl(gameState)
-      break
+      break /*
 
     case "SQUIRE": // (Scene Number: 72)
       if (conditions.hasSquire) return roles.squire(gameState)
@@ -465,7 +465,7 @@ exports.interactionHandler = (gameState) => {
 
     case "FAMILY_MAN": // (Scene Number: 87)
       if (conditions.hasFamilyMan) return roles.familyman(gameState)
-      break
+      break */
 
     default:
       logError("error here")

@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.familyman = (gameState) => {
+exports.familyman = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

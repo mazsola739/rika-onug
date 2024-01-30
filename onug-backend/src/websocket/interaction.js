@@ -32,7 +32,7 @@ exports.interaction = async (ws, message) => {
           "selectable_cards": ""
       }
   ], */
-    const newGameState = werewolves_response(gameState, selected_positions, ws)
+    const newGameState = werewolves_response(gameState, token, selected_positions, ws)
 
     await upsertRoomState(newGameState);
 

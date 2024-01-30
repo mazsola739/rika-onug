@@ -52,11 +52,13 @@
     "room_name": "Armory",
     "stage": "LOBBY",
     "selected_cards": [
+      2,
       4,
-      12,
-      14,
-      13
-    ],
+      8,
+      11,
+      7,
+      15
+  ],
     "available_names": [
       "Forrest Gump",
       "Indiana Jones",

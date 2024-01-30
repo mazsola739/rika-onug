@@ -1,5 +1,5 @@
 
-exports.vampires = (gameState) => {
+exports.vampires = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

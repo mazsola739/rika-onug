@@ -1,6 +1,6 @@
 
 
-exports.mirrorman = (gameState) => {
+exports.mirrorman = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.leader = () => (gameState) => {
+exports.leader = () => gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

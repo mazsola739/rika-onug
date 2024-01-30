@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.thecount = (gameState) => {
+exports.thecount = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.intern = () => (gameState) => {
+exports.intern = () => gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

@@ -1,6 +1,6 @@
 
 
-exports.doppelganger = (gameState) => {
+exports.doppelganger = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

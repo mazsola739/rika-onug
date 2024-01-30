@@ -1,6 +1,6 @@
 
 //TODO doppelganger instant action
-exports.detector = (gameState) => {
+exports.detector = gameState => {
   const newGameState = {...gameState}
 
   return newGameState;

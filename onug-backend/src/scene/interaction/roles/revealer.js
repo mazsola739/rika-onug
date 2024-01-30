@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.revealer = (gameState) => {
+exports.revealer = gameState => {
     const newGameState = {...gameState}
   
     return newGameState;
