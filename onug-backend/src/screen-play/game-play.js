@@ -3,8 +3,7 @@ const { readGameState, upsertRoomState } = repository
 const { broadcast, websocketServerConnectionsPerRoom } = require('../websocket/connections')
 const { HYDRATE_GAME_PLAY } = require('../constant/ws')
 const { logTrace, logInfo } = require('../log')
-const { narration } = require('../scene/narration')
-const { interaction } = require('../scene/interaction')
+const { narration, interaction } = require('../scene')
 
 const tickTime = 1000
 
