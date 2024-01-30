@@ -5,8 +5,8 @@ exports.interaction = gameState => {
   const { room_id } = gameState.room_id
   logTrace(`Interaction handling in room: ${room_id}`)
 
-  const newGameState = {...gameState}
-  
+  const newGameState = interactionHandler(gameState)
+
   /*
   {
     role_players: [token1, token2, token3],
@@ -19,9 +19,6 @@ exports.interaction = gameState => {
     shield: [P1, P2],
   }
   */
-  const role_interactions = interactionHandler(newGameState)
-  
-  newGameState.role_interactions = role_interactions
 
   logDebug(`__INTERRACTION__ SCENE_NUMBER: ${newGameState.actual_scene.scene_number} role_interaction: ${JSON.stringify(role_interactions, null, 2)}`)
   

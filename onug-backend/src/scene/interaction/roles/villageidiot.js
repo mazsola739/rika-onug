@@ -1,8 +1,7 @@
-const { collectCardInfo, getPlayersByCardIds } = require("../utils");
-//TODO doppelganger instant action
-exports.villageidiot = () => {
-  const playerCards = collectCardInfo(gameState.players);
-  const villageidiotPlayer = getPlayersByCardIds(playerCards, [26]);
 
-  return villageidiotPlayer;
+//TODO doppelganger instant action
+exports.villageidiot = (gameState) => {
+  const newGameState = {...gameState}
+
+  return newGameState;
 };

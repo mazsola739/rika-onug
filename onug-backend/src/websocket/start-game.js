@@ -20,10 +20,11 @@ exports.startGame = async (message) => {
   let newGameState = {
     ...gameState,
     stage: STAGES.GAME_PLAY,
-    startTime,
+    game_play_start_time: startTime,
     actual_scene: {
       scene_title: "JOKE",
       scene_number: 0,
+      scene_start_time: startTime,
     }
   }
 

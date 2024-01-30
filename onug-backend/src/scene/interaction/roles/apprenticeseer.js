@@ -1,9 +1,8 @@
-const { INTERACTION } = require("../../../constant/ws");
-const { logInfo } = require("../../../log");
+
 //TODO doppelganger instant action
-exports.apprenticeseer = () => {
-    const playerCards = collectCardInfo(gameState.players);
-    const apprenticeseerinPlayer = getPlayersByCardIds(playerCards, [18]);
+exports.apprenticeseer = (gameState) => {
+    const newGameState = {...gameState}
   
-    return apprenticeseerinPlayer;
-}
+    return newGameState;
+  };
+  

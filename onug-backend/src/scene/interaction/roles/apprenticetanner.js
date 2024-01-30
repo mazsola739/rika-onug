@@ -1,8 +1,31 @@
-const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
+const { INTERACTION } = require("../../../constant/ws");
+const { logInfo } = require("../../../log");
+const {
+  findPlayersByRoleIds,
+  getPlayerNumbersByTokens,
+  getRolePositions,
+} = require("../utils");
 
-exports.apprenticetanner = () => {
-    const playerCards = collectCardInfo(gameState.players);
-    const apprenticetannerinPlayer = getPlayersByRoleIds(playerCards, [71]);
-  
-    return apprenticetannerinPlayer;
-}
+exports.apprenticetanner = (gameState) => {
+  const role_interactions = [];
+  const apprenticetannerTokens = findPlayersByRoleIds(gameState.players, [71]);
+  const tannerTokens = findPlayersByRoleIds(gameState.players, [10]);
+  const tannerPlayerNumbers = getPlayerNumbersByTokens(
+    gameState.players,
+    tannerTokens
+  );
+  const flippableCards = getRolePositions(tannerPlayerNumbers, 10);
+
+  apprenticetannerTokens.forEach((token) =>
+    role_interactions.push({
+      type: INTERACTION,
+      token,
+      message: "APPRENTICE_TANNER",
+      flippable_cards: flippableCards,
+    })
+  );
+
+  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`);
+
+  return role_interactions;
+};

@@ -1,8 +1,7 @@
-const { collectCardInfo, getPlayersByCardIds } = require("../utils");
-//TODO doppelganger
-exports.mortician = () => {
-  const playerCards = collectCardInfo(gameState.players);
-  const morticianPlayer = getPlayersByCardIds(playerCards, [49]);
 
-  return morticianPlayer;
+//TODO doppelganger
+exports.mortician = (gameState) => {
+  const newGameState = {...gameState}
+
+  return newGameState;
 };

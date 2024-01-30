@@ -3,7 +3,7 @@ const { readGameState, upsertRoomState } = repository
 const { broadcast, websocketServerConnectionsPerRoom } = require('../websocket/connections')
 const { HYDRATE_GAME_PLAY } = require('../constant/ws')
 const { logTrace, logInfo } = require('../log')
-const { narration } = require('../scene/narration/narration')
+const { narration } = require('../scene/narration')
 const { interaction } = require('../scene/interaction')
 
 const tickTime = 1000
@@ -15,7 +15,11 @@ exports.stopGamePlay = () => {
 const getNextScene = gameState => {
     let newGameState = {...gameState}
 
-    newGameState.actual_scene.scene_number = newGameState.actual_scene.scene_number + 1
+    const startTime = Date.now()
+
+    newGameState.actual_scene.scene_number++
+    newGameState.action_scene.scene_start_time = startTime
+    
     newGameState = narration(gameState)
     newGameState = interaction(newGameState)
 

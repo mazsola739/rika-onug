@@ -1,8 +1,7 @@
-const { collectCardInfo, getPlayersByCardIds } = require("../utils");
-//TODO doppelganger instant action
-exports.voodoolou = () => {
-  const playerCards = collectCardInfo(gameState.players);
-  const voodoolouPlayer = getPlayersByCardIds(playerCards, [70]);
 
-  return voodoolouPlayer;
+//TODO doppelganger instant action
+exports.voodoolou = (gameState) => {
+  const newGameState = {...gameState}
+
+  return newGameState;
 };

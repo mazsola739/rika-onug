@@ -1,8 +1,8 @@
-const { collectCardInfo, getPlayersByCardIds } = require("../utils");
+
 //TODO doppelganger same result as blob
-exports.blob = () => {
-    const playerCards = collectCardInfo(gameState.players);
-    const blobPlayer = getPlayersByCardIds(playerCards, [44])
+exports.blob = (gameState) => {
+    const newGameState = {...gameState}
   
-    return blobPlayer
-}
+    return newGameState;
+  };
+  

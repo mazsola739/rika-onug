@@ -1,8 +1,8 @@
-const { collectCardInfo, getPlayersByCardIds } = require("../utils");
+
 //TODO doppelganger seperated
-exports.bodysnatcher = () => {
-    const playerCards = collectCardInfo(gameState.players);
-    const bodysnatcherPlayer = getPlayersByCardIds(playerCards, [74])
+exports.bodysnatcher = (gameState) => {
+    const newGameState = {...gameState}
   
-    return bodysnatcherPlayer
-}
+    return newGameState;
+  };
+  

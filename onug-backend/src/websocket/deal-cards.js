@@ -106,7 +106,7 @@ const createPlayerCard = (card, selected_cards) => {
 
 const createPositionCard = (card, selected_cards) => {
   if (!card || typeof card !== "object" || !card.id) {
-    return { id: 0, role: "", team: "", mark_id: "" };
+    return { id: 0, role: "", team: "" };
   }
  const hasPlayerMark = hasMark(selected_cards)
   
@@ -115,7 +115,7 @@ const createPositionCard = (card, selected_cards) => {
       id: card.id,
       role: card.role,
       team: card.team,
-      mark_id: "mark_of_clarity",
+      mark_id: "mark_of_clarity", 
     };
   } else {
     return {

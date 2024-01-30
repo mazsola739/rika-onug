@@ -1,11 +1,11 @@
-const { collectCardInfo, getPlayersByCardIds } = require("../utils");
 
-exports.oracle = () => {
-    const playerCards = collectCardInfo(gameState.players);
-    const oraclePlayer = getPlayersByCardIds(playerCards, [50]);
+
+exports.oracle = (gameState) => {
+    const newGameState = {...gameState}
   
-    return oraclePlayer;
-}
+    return newGameState;
+  };
+  
 
 exports.oracle_question = () => {}
 exports.oracle_reaction = () => {}

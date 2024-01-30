@@ -65,8 +65,6 @@ const { curator, doppelganger_curator } = require("./curator")
 const { blob } = require("./blob")
 const { mortician, doppelganger_mortician } = require("./mortician")
 const { familyman } = require("./familyman")
-//c{ onst } { ripple: require("./ripple")
-
 
 exports.roles = {
   /* T W I L L I G H T  */

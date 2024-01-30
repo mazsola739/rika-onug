@@ -1,8 +1,7 @@
-const { collectCardInfo, getPlayersByCardIds } = require("../utils");
-//TODO doppelganger instant action
-exports.switcheroo = () => {
-  const playerCards = collectCardInfo(gameState.players);
-  const switcherooPlayer = getPlayersByCardIds(playerCards, [68]);
 
-  return switcherooPlayer;
+//TODO doppelganger instant action
+exports.switcheroo = (gameState) => {
+  const newGameState = {...gameState}
+
+  return newGameState;
 };

@@ -7,27 +7,32 @@ const {
 } = require("../utils");
 
 exports.insomniac = (gameState) => {
-  const role_interactions = [];
-  const insomniacTokens = findPlayersByRoleIds(gameState.players, [4]);
+  const newGameState = { ...gameState };
+  const insomniacTokens = findPlayersByRoleIds(newGameState.players, [4]);
   const insomniacPlayerNumbers = getPlayerNumbersByTokens(
-    gameState.players,
+    newGameState.players,
     insomniacTokens
   );
-  const flippableCards = getCardIdsByPlayerNumbers(
-    gameState.card_positions,
+  const showCards = getCardIdsByPlayerNumbers(
+    newGameState.card_positions,
     insomniacPlayerNumbers
   );
 
-  insomniacTokens.forEach((token) =>
+  const roleHistory = {
+    ...newGameState.actual_scene,
+    card_or_mark_action: true,
+  };
+
+  insomniacTokens.forEach((token) => {
     role_interactions.push({
       type: INTERACTION,
       token,
       message: "INSOMNIAC",
-      flippable_cards: flippableCards,
-    })
-  );
+      show_cards: showCards,
+    });
+  });
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
+  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`);
 
-  return role_interactions;
+  return newGameState;
 };

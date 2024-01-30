@@ -1,8 +1,7 @@
-const { collectCardInfo, getPlayersByCardIds } = require("../utils");
 
-exports.madscientist = () => {
-  const playerCards = collectCardInfo(gameState.players);
-  const madscientistPlayer = getPlayersByCardIds(playerCards, [62]);
 
-  return madscientistPlayer;
+exports.madscientist = (gameState) => {
+  const newGameState = {...gameState}
+
+  return newGameState;
 };

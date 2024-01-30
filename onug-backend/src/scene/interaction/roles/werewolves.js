@@ -34,6 +34,8 @@ exports.werewolves = (gameState) => {
 };
 
 exports.werewolves_response = (gameState, selected_positions, ws) => {
+  //TODO centerCardPositions === selected_positions ?
+
   const role_interactions = [];
   const werewolfTokens = findPlayersByRoleIds(gameState.players, werewolvesIds);
   const flippableCards = getCardIdsByPositions(
@@ -66,9 +68,4 @@ exports.werewolves_response = (gameState, selected_positions, ws) => {
   }))
 
   return newGameState
-
-  //? save into card hitory: scene, role player, selected player
-  //!save new player card
-  //!save new wolfcard
-  //*send message to the role player successfully changed
 };
