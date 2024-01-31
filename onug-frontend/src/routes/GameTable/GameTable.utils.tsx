@@ -1,4 +1,4 @@
-import { GameCard, GameToken } from 'components'
+import { GameCard } from 'components'
 import {
   CardContainer,
   PlayersCards,
@@ -90,10 +90,11 @@ const renderMarks = (selectedMarks: MarkType[]) => (
     {selectedMarks.map(
       (mark) =>
         mark.is_in_deck && (
-          <GameToken
+          <img
             key={mark.id}
-            tokenName={mark.token_name}
-            display_name={mark.display_name}
+            style={{ width: '60px' }}
+            src={`/assets/tokens/${mark.token_name}.png`}
+            alt={mark.token_name}
           />
         )
     )}

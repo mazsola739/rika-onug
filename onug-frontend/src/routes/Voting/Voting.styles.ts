@@ -28,7 +28,7 @@ export const Player = styled.div`
   align-items: center;
   display: flex;
   font-family: 'Josefin Sans', sans-serif;
-  color: white;
+  color: #bfefff;
   flex-direction: row;
   gap: 5px;
 `
@@ -40,7 +40,7 @@ export const PlayerNumber = styled.img`
 
 export const PlayerName = styled.span`
   font-family: 'Josefin Sans', sans-serif;
-  color: white;
+  color: #bfefff;
 `
 
 export const CardContainer = styled.div`

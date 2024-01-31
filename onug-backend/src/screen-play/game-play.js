@@ -2,7 +2,7 @@ const { repository } = require("../repository")
 const { readGameState, upsertRoomState } = repository
 const { broadcast, websocketServerConnectionsPerRoom } = require("../websocket/connections")
 const { HYDRATE_GAME_PLAY } = require("../constant/ws")
-const { logTrace } = require("../log")
+const { logTrace, logError } = require("../log")
 const { narration, interaction } = require("../scene")
 
 const tickTime = 1000
@@ -13,14 +13,13 @@ const getNextScene = gameState => {
   let newGameState = { ...gameState }
 
   const startTime = Date.now()
-  newGameState.action_scene.scene_start_time = startTime
+  newGameState.actual_scene.scene_start_time = startTime
 
   newGameState.actual_scene.scene_number++
 
   newGameState = narration(newGameState)
   newGameState = interaction(newGameState)
 
-  //TODO fix role actions error
   newGameState.role_interactions.forEach((role_interaction) => {
     websocketServerConnectionsPerRoom[newGameState.room_id][role_interaction.token].send(JSON.stringify(role_interaction))
   })

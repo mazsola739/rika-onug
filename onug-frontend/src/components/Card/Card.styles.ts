@@ -24,7 +24,7 @@ export const CardImage = styled.img<{ isSelected?: boolean }>`
 
 export const CardName = styled.span<StyledCardProps>`
   background-color: transparent;
-  color: white;
+  color: #bfefff;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 10px;
   font-weight: 500;

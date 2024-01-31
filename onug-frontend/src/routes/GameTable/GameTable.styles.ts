@@ -35,7 +35,7 @@ export const OwnKnownCardContainer = styled.div`
 
 export const OwnKnownCardText = styled.span`
   font-family: 'Josefin Sans', sans-serif;
-  color: white;
+  color: #bfefff;
 `
 
 export const OwnKnownCardImage = styled.img`
@@ -59,7 +59,7 @@ export const Player = styled.div`
   align-items: center;
   display: flex;
   font-family: 'Josefin Sans', sans-serif;
-  color: white;
+  color: #bfefff;
   flex-direction: row;
   gap: 5px;
 `
@@ -90,13 +90,13 @@ export const CenterCardContainer = styled.div`
 `
 
 export const CardTitle = styled.div`
-  color: white;
+  color: #bfefff;
   font-family: 'Josefin Sans', sans-serif;
 `
 
 export const Shield = styled.img`
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
 `
 
 export const PlayersCards = styled.div`
@@ -105,7 +105,7 @@ export const PlayersCards = styled.div`
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
-  height: 120px;
+  height: 160px;
   width: 100%;
 `
 
@@ -120,13 +120,14 @@ export const Marks = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   padding: 10px;
+  max-width: 360px;
 `
 
 //HEADER
 export const StyledGameTableHeader = styled.div`
   display: flex;
   font-family: 'Josefin Sans', sans-serif;
-  color: white;
+  color: #bfefff;
   height: 100%;
   justify-content: flex-start;
 `
@@ -148,7 +149,7 @@ export const PlayerAvatar = styled.img`
 export const PlayerName = styled.span`
   margin: auto 0;
   text-align: left;
-  color: white;
+  color: #bfefff;
 `
 
 export const PlayerCardInformation = styled.div`

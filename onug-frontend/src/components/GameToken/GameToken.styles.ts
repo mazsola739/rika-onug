@@ -16,7 +16,7 @@ export const TokenImage = styled.img`
 `
 
 export const TokenName = styled.span`
-  color: white;
+  color: #bfefff;
   font-family: 'Josefin Sans', sans-serif;
   padding: 10px 0;
   text-align: center;

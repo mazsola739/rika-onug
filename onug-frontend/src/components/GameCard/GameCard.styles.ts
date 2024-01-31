@@ -1,27 +1,29 @@
 import styled from '@emotion/styled'
 import { StyledGameCardProps } from './GameCard.types'
 
-export const StyledGameCard = styled.div<StyledGameCardProps>`
+export const StyledGameCard = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+export const CardBack = styled.div<StyledGameCardProps>`
   align-items: center;
   background-image: ${(props) => `url(${props.backgroundImage})`};
   background-position: center;
   background-repeat: no-repeat;
-  background-size: calc(100% - 10px) calc(100% - 10px);
-  display: flex;
-  flex-direction: column;
+  background-size: 100%;
+  border: 5px 2px solid white;
+  border-radius: 2px;
   height: 120px;
   justify-content: center;
   width: 90px;
 `
 
 export const Tokens = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-content: space-between;
-  gap: 20px;
+  flex-wrap: row;
+  justify-content: center;
+  gap: 2px;
 `
 
 export const TokenImage = styled.img`

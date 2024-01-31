@@ -5,7 +5,8 @@ exports.interaction = gameState => {
   const { room_id } = gameState.room_id
   logTrace(`Interaction handling in room: ${room_id}`)
 
-  const newGameState = {...gameState}
+  let newGameState = {...gameState}
+  newGameState.role_interactions = []
   
   /*
   {
@@ -20,12 +21,9 @@ exports.interaction = gameState => {
   }
   */
 
-  //TODO fix role actions error
-  const role_interactions = interactionHandler(newGameState)
+  newGameState = interactionHandler(newGameState)
   
-  newGameState.role_interactions = role_interactions
-
-  logDebug(`__INTERRACTION__ SCENE_NUMBER: ${newGameState.actual_scene.scene_number} role_interaction: ${JSON.stringify(role_interactions)}`)
+  logDebug(`__INTERRACTION__ SCENE_NUMBER: ${newGameState.actual_scene.scene_number} role_interaction: ${JSON.stringify(newGameState.role_interactions)}`)
   
   return newGameState
 }

@@ -16,7 +16,9 @@ const RuleInfo: React.FC = observer(() => {
   const { isGameStopped } = gamePlayStore
 
   const displayInfo =
-    detailedCardInfo.id !== 0 ? detailedCardInfo.rules : detailedTokenInfo.rules
+    detailedCardInfo.id !== 0
+      ? `${detailedCardInfo.display_name}: ${detailedCardInfo.rules}`
+      : detailedTokenInfo.rules
   const imgSrc =
     detailedCardInfo.id !== 0
       ? `/assets/cards/${detailedCardInfo.card_name}.png`
@@ -37,14 +39,15 @@ const RuleInfo: React.FC = observer(() => {
 export const RoomHeader: React.FC = observer(() => {
   const player_name = sessionStorage.getItem('player_name')
   const room_id = sessionStorage.getItem('room_id')
-  const room = (room_id.charAt(0).toUpperCase() + room_id.slice(1))
-    .replace('_', ' ')
-    .replace('room', '')
+  const room = (room_id.charAt(0).toUpperCase() + room_id.slice(1)).replace(
+    '_',
+    ' '
+  )
 
   return (
     <Header>
       <Hello>
-        Welcome {player_name} in {room} room!
+        {player_name}, welcome in {room}! ^.^
       </Hello>
       <RuleInfo />
     </Header>

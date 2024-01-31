@@ -1,6 +1,6 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
-import { StyledGameCard, TokenImage, Tokens } from './GameCard.styles'
+import { CardBack, StyledGameCard, TokenImage, Tokens } from './GameCard.styles'
 import { GameCardProps } from './GameCard.types'
 import { gameTableStore } from 'store'
 
@@ -9,10 +9,16 @@ export const GameCard: React.FC<GameCardProps> = observer(
     const { hasMarks } = gameTableStore
 
     return (
-      <StyledGameCard backgroundImage={'/assets/cards/card_background.png'}>
-        {!isCenter && (
-          <Tokens>
-            {/* Player number */}
+      <StyledGameCard>
+        <CardBack backgroundImage={'/assets/cards/card_background.png'} />
+        <Tokens>
+          {!isCenter && hasMarks && (
+            <TokenImage
+              src={`/assets/tokens/mark_back.png`}
+              alt={`player_${player_number}`}
+            />
+          )}
+          {!isCenter && (
             <TokenImage
               src={
                 ready
@@ -21,15 +27,8 @@ export const GameCard: React.FC<GameCardProps> = observer(
               }
               alt={`player_${player_number}`}
             />
-            {/* Mark */}
-            {hasMarks && (
-              <TokenImage
-                src={`/assets/tokens/mark_back.png`}
-                alt={`player_${player_number}`}
-              />
-            )}
-          </Tokens>
-        )}
+          )}
+        </Tokens>
       </StyledGameCard>
     )
   }

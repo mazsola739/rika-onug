@@ -11,7 +11,6 @@ export const StyledFilterButton = styled.div<FilterButtonProps>`
   background-size: 100% auto;
   border: ${({ isSelected }) =>
     isSelected ? '1px solid transparent' : '1px solid white'};
-  border-radius: 4px;
   color: white;
   cursor: pointer;
   font-family: 'Josefin Sans', sans-serif;
@@ -21,7 +20,7 @@ export const StyledFilterButton = styled.div<FilterButtonProps>`
   margin: auto;
   opacity: ${({ isSelected }) => (isSelected ? '0.6' : '1')};
   display: flex;
-  width: 120px;
+  width: 118px;
 `
 
 export const StyledFilterButtons = styled.div`

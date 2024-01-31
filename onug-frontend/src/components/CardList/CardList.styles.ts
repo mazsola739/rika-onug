@@ -6,7 +6,7 @@ export const StyledCardList = styled.section`
 `
 
 export const CardListTitle = styled.p`
-  color: black;
+  color: #bfefff;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 24px;
   font-weight: bold;
