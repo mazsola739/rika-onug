@@ -9,5 +9,6 @@ exports.deleteGameStateByRoomId = async (req, res) => {
   const response = await deleteGameStateByRoomId(room_id)
 
   logTrace(`sending back game states: ${JSON.stringify(response)}`)
+  
   return res.send(response)
 }

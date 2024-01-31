@@ -9,12 +9,12 @@ const { startGamePlay } = require("../screen-play")
 
 exports.startGame = async (message) => {
   const { room_id, token } = message
+
   logTrace(`Everybody is ready, game started in: ${room_id}`)
   // TODO different room validator, should prevent multiple game starts
   const [roomIdValid, gameState, errors] = await validateRoom(room_id)
 
-  if (!roomIdValid)
-    return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
+  if (!roomIdValid) return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
 
   const startTime = Date.now()
   let newGameState = {
@@ -36,6 +36,8 @@ exports.startGame = async (message) => {
     type: REDIRECT,
     path: `/gameplay/${room_id}`
   }
+
   startGamePlay(gameState.room_id)
+  
   return broadcast(room_id, startGame)
 }

@@ -8,6 +8,7 @@ exports.checkGameStates = async (req, res) => {
   const gameStates = await readAllGameStates()
 
   logTrace(`sending back game states: ${JSON.stringify(gameStates)}`)
+  
   return res.send({
     gameStates,
   })

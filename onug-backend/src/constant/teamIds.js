@@ -19,4 +19,4 @@ exports.teamIds = {
   nostradamusTeam: [80],
   madTeam: [62, 63],
   familyTeam: [78],
-};
+}

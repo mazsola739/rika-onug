@@ -1,22 +1,7 @@
 const WebSocket = require("ws")
 const { logTrace, logError } = require("../log")
-const {
-  UPDATE_ROOM,
-  READY,
-  RESET,
-  NEWBIE,
-  JOIN_ROOM,
-  LEAVE_ROOM,
-  LEAVE_TABLE,
-  ARRIVE_GAME_TABLE,
-  ARRIVE_ROOM,
-  START_GAME,
-  DEAL,
-  ARRIVE_GAME_PLAY,
-  STOP_GAME,
-  RELOAD,
-  INTERACTION,
-} = require("../constant/ws")
+const { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_GAME_TABLE, ARRIVE_ROOM, START_GAME, 
+  DEAL, ARRIVE_GAME_PLAY, STOP_GAME, RELOAD, INTERACTION } = require("../constant/ws")
 const { hydrateRoom } = require("./hydrate-room")
 const { reset } = require("./reset")
 const { updateRoom } = require("./update-room")

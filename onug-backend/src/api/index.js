@@ -1,13 +1,13 @@
-const express = require('express')
+const express = require("express")
 const router = express.Router()
 
-const { rooms } = require('./rooms')
-const { pageNotFoundError, internalServerError } = require('./error')
+const { rooms } = require("./rooms")
+const { pageNotFoundError, internalServerError } = require("./error")
 
-router.get('/rooms', rooms)
+router.get("/rooms", rooms)
 
 module.exports = {
-    apiRouter: router,
-    pageNotFoundError,
-    internalServerError
+  apiRouter: router,
+  pageNotFoundError,
+  internalServerError,
 }

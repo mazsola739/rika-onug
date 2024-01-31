@@ -3,4 +3,4 @@ exports.STAGES = {
   GAME_TABLE: "GAME_TABLE",
   GAME_PLAY: "GAME_PLAY",
   GAME_VOTE: "GAME_VOTE",
-};
+}

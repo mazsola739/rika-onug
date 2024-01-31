@@ -1,9 +1,4 @@
-const {
-  toggleCard,
-  getCardById,
-  distributeCards,
-  isCardSelectedById,
-} = require("./card")
+const { toggleCard, getCardById, distributeCards, isCardSelectedById } = require("./card")
 const { determineTotalPlayers, getBoard } = require("./player")
 const { randomPlayerName } = require("./name-generator")
 const { sanitize, truncate } = require("./sanitizer")

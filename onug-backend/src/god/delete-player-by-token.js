@@ -9,5 +9,6 @@ exports.deletePlayerByToken = async (req, res) => {
   const response = await deletePlayerByToken(token)
 
   logTrace(`sending back game states: ${JSON.stringify(response)}`)
+  
   return res.send(response)
 }

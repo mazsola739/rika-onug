@@ -1,85 +1,97 @@
 exports.getPlayerCardIds = (players) => {
-  const result = [];
+  const result = []
+
   for (const token in players) {
-    const player = players[token];
-    result.push({ [player]: player.card.id });
+    const player = players[token]
+    result.push({ [player]: player.card.id })
   }
-  return result;
-};
+
+  return result
+}
 
 exports.getPlayerRoleIds = (players) => {
-  const result = [];
+  const result = []
+
   for (const token in players) {
-    const player = players[token];
-    result.push({ [player]: player.card.role_id });
+    const player = players[token]
+    result.push({ [player]: player.card.role_id })
   }
-  return result;
-};
+
+  return result
+}
 
 exports.findPlayersByCardIds = (players, cardIds) => {
-  const result = [];
+  const result = []
+
   for (const token in players) {
     if (players.hasOwnProperty(token)) {
-      const player = players[token];
+      const player = players[token]
       if (cardIds.includes(player.card.id)) {
-        result.push(token);
+        result.push(token)
       }
     }
   }
-  return result;
-};
+
+  return result
+}
 
 exports.findPlayersByRoleIds = (players, roleIds) => {
-  const result = [];
+  const result = []
+
   for (const token in players) {
     if (players.hasOwnProperty(token)) {
-      const player = players[token];
+      const player = players[token]
       if (roleIds.includes(player.card.role_id)) {
-        result.push(token);
+        result.push(token)
       }
     }
   }
-  return result;
-};
+
+  return result
+}
 
 exports.findDoppelgangerPlayerByRoleIds = (players, roleIds) => {
-  const result = [];
+  const result = []
+
   for (const token in players) {
     if (players.hasOwnProperty(token)) {
-      const player = players[token];
+      const player = players[token]
       if (roleIds.includes(player.card.role_id) && player.card.id === 1) {
-        result.push(token);
+        result.push(token)
       }
     }
   }
-  return result;
-};
 
-exports.getPlayerNumbersWithMatchingTokens = (players, tokens) =>
-  tokens.map((token) => players[token].player_number);
+  return result
+}
 
-exports.getPlayerNumbersWithNonMatchingTokens = (players, tokens) =>
-  Object.keys(players).filter(token => !tokens.includes(token)).map(token => players[token].player_number);
+exports.getPlayerNumbersWithMatchingTokens = (players, tokens) => tokens.map((token) => players[token].player_number)
+
+exports.getPlayerNumbersWithNonMatchingTokens = (players, tokens) => Object.keys(players)
+  .filter((token) => !tokens.includes(token))
+  .map((token) => players[token].player_number)
 
 exports.getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
-  const result = [];
-  playerNumbers.forEach((number) => {
-    const key = `player_${number}`;
-    const cardId = cardPositions[key].id;
-    result.push({ [key]: cardId });
-  });
-  return result;
-};
+  const result = []
 
-exports.getRolePositions = (playerNumbers, roleId) => {
-  return playerNumbers.map((number) => ({ [`player_${number}`]: roleId }));
-};
+  playerNumbers.forEach((number) => {
+    const key = `player_${number}`
+    const cardId = cardPositions[key].id
+    result.push({ [key]: cardId })
+  })
+
+  return result
+}
+
+exports.getRolePositions = (playerNumbers, roleId) => playerNumbers.map((number) => ({ [`player_${number}`]: roleId }))
 
 exports.getCardIdsByPositions = (cardPositions, selectedPositions) => {
-  const result = [];
+  const result = []
+
   selectedPositions.forEach((position) => {
-    const cardId = cardPositions[position].id;
-    result.push({ [position]: cardId });
-  });
-  return result;
-};
+    const cardId = cardPositions[position].id
+    result.push({ [position]: cardId })
+  })
+  
+  return result
+}

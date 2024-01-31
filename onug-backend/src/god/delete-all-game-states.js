@@ -10,5 +10,6 @@ exports.deleteAllGameStates = async (req, res) => {
   response.gameStates = gameStates
 
   logTrace(`sending back game states: ${JSON.stringify(response)}`)
+  
   return res.send(response)
 }

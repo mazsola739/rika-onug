@@ -2,11 +2,8 @@ const { repository } = require('../repository')
 const { readGameState } = repository
 const { logWarn } = require('../log')
 
-const roomIds = [
-  'foyer', 'archives', 'armory', 'dynamite_room', 'great_hall',
-  'guest_bedroom', 'kitchen', 'laboratory', 'observatory', 'panic_room',
-  'parlor', 'secret_passage', 'sitting_room', 'staff_quarters', 'study', 'workshop'
-]
+const roomIds = ['foyer', 'archives', 'armory', 'dynamite_room', 'great_hall', 'guest_bedroom', 'kitchen', 'laboratory', 
+'observatory', 'panic_room', 'parlor', 'secret_passage', 'sitting_room', 'staff_quarters', 'study', 'workshop']
 
 exports.validateRoom = async (roomId) => {
   const errors = []
@@ -14,6 +11,7 @@ exports.validateRoom = async (roomId) => {
   const roomIdExists = roomIds.includes(roomId)
   if (!roomIdExists) {
     errors.push('Invalid room id')
+
     return [false, {}, errors]
   }
 

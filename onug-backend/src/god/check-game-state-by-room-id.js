@@ -9,6 +9,7 @@ exports.checkGameStateByRoomId = async (req, res) => {
   const gameStates = await readGameStateByRoomId(room_id)
 
   logTrace(`sending back game states: ${JSON.stringify(gameStates)}`)
+  
   return res.send({
     gameStates,
   })

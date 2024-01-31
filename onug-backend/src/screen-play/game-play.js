@@ -1,76 +1,68 @@
-const { repository } = require('../repository')
+const { repository } = require("../repository")
 const { readGameState, upsertRoomState } = repository
-const { broadcast, websocketServerConnectionsPerRoom } = require('../websocket/connections')
-const { HYDRATE_GAME_PLAY } = require('../constant/ws')
-const { logTrace, logInfo } = require('../log')
-const { narration, interaction } = require('../scene')
+const { broadcast, websocketServerConnectionsPerRoom } = require("../websocket/connections")
+const { HYDRATE_GAME_PLAY } = require("../constant/ws")
+const { logTrace } = require("../log")
+const { narration, interaction } = require("../scene")
 
 const tickTime = 1000
 
-exports.stopGamePlay = () => {
-    logTrace("TODO stop game implementation")
-}
+exports.stopGamePlay = () => logTrace("TODO stop game implementation")
 
 const getNextScene = gameState => {
-    let newGameState = {...gameState}
+  let newGameState = { ...gameState }
 
-/*     const startTime = Date.now() */
-/*     newGameState.action_scene.scene_start_time = startTime */
-    newGameState.actual_scene.scene_number++
+  const startTime = Date.now()
+  newGameState.action_scene.scene_start_time = startTime
 
-    newGameState = narration(newGameState)
-    newGameState = interaction(newGameState)
+  newGameState.actual_scene.scene_number++
 
-    //TODO fix role actions error
-    newGameState.role_interactions.forEach(role_interaction => {
-        websocketServerConnectionsPerRoom[newGameState.room_id][role_interaction.token].send(JSON.stringify(role_interaction))
-    }) 
+  newGameState = narration(newGameState)
+  newGameState = interaction(newGameState)
 
-    if (newGameState.actual_scene.scene_title === 'VOTE') {
-        newGameState.game_stopped = true
-        return newGameState
-    }
+  //TODO fix role actions error
+  newGameState.role_interactions.forEach((role_interaction) => {
+    websocketServerConnectionsPerRoom[newGameState.room_id][role_interaction.token].send(JSON.stringify(role_interaction))
+  })
 
-    if (!newGameState.actual_scene.text) {
-        return getNextScene(newGameState)
-    }
-
+  if (newGameState.actual_scene.scene_title === "VOTE") {
+    newGameState.game_stopped = true
     return newGameState
+  }
+
+  if (!newGameState.actual_scene.text) return getNextScene(newGameState)
+
+  return newGameState
 }
 
 const tick = async (room_id) => {
-    logTrace('tick')
-    const gameState = await readGameState(room_id)
-    const newGameState = getNextScene(gameState)
+  logTrace("tick")
+  const gameState = await readGameState(room_id)
+  const newGameState = getNextScene(gameState)
 
-    //TODO action_history: need narration & interactions
-    newGameState.action_history.push(newGameState.actual_scene)
+  //TODO action_history: need narration & interactions
+  newGameState.action_history.push(newGameState.actual_scene)
 
-    await upsertRoomState(newGameState)
+  await upsertRoomState(newGameState)
 
-    let nextScene = {}
-    if (newGameState.game_stopped) {
-        nextScene = {
-            type: HYDRATE_GAME_PLAY, // TODO decide whether we need to redirect or stay on gameplay for vote
-            actual_scene: newGameState.actual_scene,
-        }
-        logTrace(`broadcast vote scene : ${JSON.stringify(nextScene)}`)
-        broadcast(room_id, nextScene)
-    } else {
-        nextScene = {
-            type: HYDRATE_GAME_PLAY,
-            actual_scene: newGameState.actual_scene,
-        }
-        logTrace(`broadcast next scene : ${JSON.stringify(nextScene)}`)
-        broadcast(room_id, nextScene)
-    
-        setTimeout(() => tick(room_id), tickTime)
+  let nextScene = {}
+  if (newGameState.game_stopped) {
+    nextScene = {
+      type: HYDRATE_GAME_PLAY, // TODO decide whether we need to redirect or stay on gameplay for vote
+      actual_scene: newGameState.actual_scene,
     }
-}
+    logTrace(`broadcast vote scene : ${JSON.stringify(nextScene)}`)
+    broadcast(room_id, nextScene)
+  } else {
+    nextScene = {
+      type: HYDRATE_GAME_PLAY,
+      actual_scene: newGameState.actual_scene,
+    }
+    logTrace(`broadcast next scene : ${JSON.stringify(nextScene)}`)
+    broadcast(room_id, nextScene)
 
-
-exports.startGamePlay = room_id => {
     setTimeout(() => tick(room_id), tickTime)
+  }
 }
 
-
+exports.startGamePlay = room_id => setTimeout(() => tick(room_id), tickTime)

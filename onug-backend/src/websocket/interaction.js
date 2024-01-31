@@ -1,18 +1,21 @@
-const { logDebug, logError } = require("../log");
-const { repository } = require("../repository");
-const { werewolves_response } = require("../scene/interaction/roles/werewolves");
+const { logDebug, logError } = require("../log")
+const { repository } = require("../repository")
+const {
+  werewolves_response,
+} = require("../scene/interaction/roles/werewolves")
 
-const { readGameState, upsertRoomState } = repository;
+const { readGameState, upsertRoomState } = repository
 
 exports.interaction = async (ws, message) => {
   try {
-    logDebug(`Interaction requested with ${JSON.stringify(message)}`);
-    const { room_id, token, selected_positions } = message;
-    const gameState = await readGameState(room_id);
+    logDebug(`Interaction requested with ${JSON.stringify(message)}`)
+
+    const { room_id, token, selected_positions } = message
+    const gameState = await readGameState(room_id)
     // TODO validate client request
 
     // TODO all other roles
-/*     const actual_interaction = gameState.ongoing_interactions.FIND_FIRST(ongoingInteraction => ongoingInteraction.token === token)
+    /*     const actual_interaction = gameState.ongoing_interactions.FIND_FIRST(ongoingInteraction => ongoingInteraction.token === token)
 
     actual_interaction.interaction_type
 
@@ -34,10 +37,8 @@ exports.interaction = async (ws, message) => {
   ], */
     const newGameState = werewolves_response(gameState, token, selected_positions, ws)
 
-    await upsertRoomState(newGameState);
-
+    await upsertRoomState(newGameState)
   } catch (error) {
-    logError(error);
+    logError(error)
   }
-};
- 
+}

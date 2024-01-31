@@ -10,5 +10,6 @@ exports.deleteAllPlayers = async (req, res) => {
   getInitWebSocketConnections()()
 
   logTrace(`sending back game states: ${JSON.stringify(response)}`)
+  
   return res.send(response)
 }

@@ -298,11 +298,11 @@ exports.interactionHandler = gameState => {
 
     case "ANNOYING_LAD": // (Scene Number: 45)
       if (conditions.hasAnnoyingLad) return roles.annoyinglad(newGameState)
-      break
+      break */
 
     case "SEER": // (Scene Number: 46)
       if (conditions.hasSeer) return roles.seer(newGameState)
-      break
+      break /*
 
     case "APPRENTICE_SEER": // (Scene Number: 47)
       if (conditions.hasApprenticeSeer) return roles.apprenticeseer(newGameState)

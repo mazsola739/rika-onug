@@ -24,6 +24,8 @@ exports.alphawolf = gameState => {
       shield: playersWithShield.includes(token),
   }))
 
+  newGameState.role_interactions = role_interactions
+
   logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   return newGameState

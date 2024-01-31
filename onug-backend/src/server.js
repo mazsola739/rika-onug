@@ -2,13 +2,10 @@ const express = require("express")
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 
-const {
-    pageNotFoundError, internalServerError, apiRouter,
-} = require("./api")
+const { pageNotFoundError, internalServerError, apiRouter } = require("./api")
 const { logDebug } = require('./log')
 const { websocketServer } = require('./websocket')
 const { godRouter } = require("./god")
-
 
 const app = express()
 const PORT = 7654
@@ -32,7 +29,6 @@ app.use('/god', godRouter)
 // Error handling
 app.use(pageNotFoundError)
 app.use(internalServerError)
-
 
 app.listen(PORT, () => {
     logDebug(`Server is listening on port: ${PORT}`)

@@ -1,3 +1,11 @@
+
+const { startGamePlay, stopGamePlay } = require('./game-play')
+
+module.exports = {
+    startGamePlay,
+    stopGamePlay,
+}
+
 /*  Screenplay steps
 
 =>  BACKEND: check in selected cards, wich role next, (id or role name?)
@@ -20,12 +28,6 @@ send to backend: "answer" with selected position list
 send to frontend: confirm action if need in message to the selected player(s) and/or show the result (example: show selected card secretly)
 */
 
-const { startGamePlay, stopGamePlay } = require('./game-play')
-
-module.exports = {
-    startGamePlay,
-    stopGamePlay,
-}
 
 /* TWILIGHT   
 oracleStore isCardSelectedById( 50)

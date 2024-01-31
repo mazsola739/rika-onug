@@ -10,7 +10,6 @@ exports.leaveTable = async (ws, message) => {
 
   const { room_id, token } = message
   const gameState = await readGameState(room_id)
-
   const player = gameState.players[token]
 
   if (!player) {
@@ -27,8 +26,11 @@ exports.leaveTable = async (ws, message) => {
     ...gameState,
     stage: STAGES.ROOM,
   }
+
   delete newGameState.card_positions
+
   const playerTokens = Object.keys(newGameState.players)
+  
   playerTokens.forEach((token) => {
     newGameState.players[token] = {
       ...newGameState.players[token],

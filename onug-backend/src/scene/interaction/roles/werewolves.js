@@ -28,6 +28,8 @@ exports.werewolves = gameState => {
     })
   );
 
+  newGameState.role_interactions = role_interactions
+
   logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   return role_interactions;
@@ -66,6 +68,8 @@ exports.werewolves_response = (gameState, selected_positions, ws) => {
     type: INTERACTION,
     message: 'SUCCESSFULLY showed card',
   }))
+
+  newGameState.role_interactions = role_interactions
 
   return newGameState
 };

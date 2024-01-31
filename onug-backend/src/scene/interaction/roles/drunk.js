@@ -28,6 +28,8 @@ exports.drunk = gameState => {
     })
   });
 
+  newGameState.role_interactions = role_interactions
+
   logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   return newGameState;

@@ -28,6 +28,8 @@ exports.robber = gameState => {
     })
   });
 
+  newGameState.role_interactions = role_interactions
+
   logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   return newGameState;
@@ -75,6 +77,8 @@ exports.robber_response = (gameState, token, selected_positions, ws) => {
     type: INTERACTION,
     message: 'SUCCESSFULLY showed card',
   }))
+
+  newGameState.role_interactions = role_interactions
 
   return newGameState
 };

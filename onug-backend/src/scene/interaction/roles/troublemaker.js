@@ -28,6 +28,8 @@ exports.troublemaker = gameState => {
     })
   });
 
+  newGameState.role_interactions = role_interactions
+
   logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   return newGameState;
@@ -58,6 +60,8 @@ exports.troublemaker_response = (gameState, token, selected_positions, ws) => {
     type: INTERACTION,
     message: 'SUCCESSFULLY swapped cards',
   }))
+
+  newGameState.role_interactions = role_interactions
 
   return newGameState
 };

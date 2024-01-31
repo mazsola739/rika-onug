@@ -21,7 +21,7 @@ exports.interaction = gameState => {
   */
 
   //TODO fix role actions error
-  const role_interactions = interactionHandler(newGameState).role_interactions
+  const role_interactions = interactionHandler(newGameState)
   
   newGameState.role_interactions = role_interactions
 

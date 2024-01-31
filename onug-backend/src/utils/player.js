@@ -1,5 +1,3 @@
-const { logTrace } = require("../log")
-
 exports.determineTotalPlayers = (totalCharacters, selectedCards) => {
   const hasAlphaWolf = selectedCards.includes(17)
   const hasTemptress = selectedCards.includes(69)

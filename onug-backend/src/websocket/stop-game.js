@@ -12,16 +12,18 @@ exports.stopGame = async (message) => {
   logTrace(`game stop requested in: ${room_id}`)
   const [roomIdValid, gameState, errors] = await validateRoom(room_id)
 
-  if (!roomIdValid)
-    return broadcast({ type: REDIRECT, path: '/lobby', errors })
+  if (!roomIdValid) return broadcast({ type: REDIRECT, path: '/lobby', errors })
 
   // TODO validate if player is admin and in the room
   const newGameState = {
     ...gameState,
     stage: STAGES.ROOM,
   }
+
   delete newGameState.startTime
+
   const playerTokens = Object.keys(newGameState.players)
+
   playerTokens.forEach((token) => {
     newGameState.players[token] = {
       ...newGameState.players[token],
@@ -39,6 +41,8 @@ exports.stopGame = async (message) => {
     type: REDIRECT,
     path: `/room/${room_id}`
   }
+
   stopGamePlay()
+  
   return broadcast(room_id, stopGame)
 }
