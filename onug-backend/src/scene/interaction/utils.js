@@ -1,4 +1,16 @@
-exports.getPlayerCardIds = (players) => {
+const { werewolvesAndDreamWolfIds } = require("./constants");
+
+exports.hasDoppelganger = players => {
+  for (const token in players) {
+    if (players[token].card.id === 1) {
+      return true;
+    }
+  }
+  
+  return false;
+}
+
+exports.getPlayerCardIds = players => {
   const result = []
 
   for (const token in players) {
@@ -9,7 +21,7 @@ exports.getPlayerCardIds = (players) => {
   return result
 }
 
-exports.getPlayerRoleIds = (players) => {
+exports.getPlayerRoleIds = players => {
   const result = []
 
   for (const token in players) {
@@ -20,7 +32,7 @@ exports.getPlayerRoleIds = (players) => {
   return result
 }
 
-exports.findPlayersByCardIds = (players, cardIds) => {
+exports.getTokensByCardIds = (players, cardIds) => {
   const result = []
 
   for (const token in players) {
@@ -35,7 +47,7 @@ exports.findPlayersByCardIds = (players, cardIds) => {
   return result
 }
 
-exports.findPlayersByRoleIds = (players, roleIds) => {
+exports.getTokensByRoleIds = (players, roleIds) => {
   const result = []
 
   for (const token in players) {
@@ -50,32 +62,79 @@ exports.findPlayersByRoleIds = (players, roleIds) => {
   return result
 }
 
-exports.findDoppelgangerPlayerByRoleIds = (players, roleIds) => {
+exports.getDoppelgangerTokenByRoleIds = (players, roleIds) => {
   const result = []
 
   for (const token in players) {
-    if (players.hasOwnProperty(token)) {
-      const player = players[token]
-      if (roleIds.includes(player.card.role_id) && player.card.id === 1) {
+    if (players[token].card.role_id === 21) {
+      if (roleIds.includes(players[token].card.role_id) && players[token].card.id === 1) {
         result.push(token)
       }
+    }
+  }
+  
+  return result
+}
+
+exports.getDreamWolfPlayerNumberByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    if (players[token].card.role_id === 21) {
+      result.push(`player_${players[token].player_number}`)
+    }
+  }
+  
+  return result
+}
+
+exports.getTannerNumberByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    if (players[token].card.role_id === 10) {
+      result.push(`player_${players[token].player_number}`)
+    }
+  }
+  
+  return result
+}
+
+exports.getDreamWolfPlayerNumberByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    if (players[token].card.role_id === 21) {
+      result.push(`player_${players[token].player_number}`)
+    }
+  }
+  
+  return result
+}
+
+exports.getNonWerewolfPlayerNumbersByRoleIds = (players) => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (!werewolvesAndDreamWolfIds.includes(player.card.role_id)) {
+      result.push(`player_${players[token].player_number}`)
     }
   }
 
   return result
 }
 
-exports.getPlayerNumbersWithMatchingTokens = (players, tokens) => tokens.map((token) => players[token].player_number)
+exports.getPlayerNumbersWithMatchingTokens = (players, tokens) => tokens.map(token => `player_${players[token].player_number}`)
 
 exports.getPlayerNumbersWithNonMatchingTokens = (players, tokens) => Object.keys(players)
   .filter((token) => !tokens.includes(token))
-  .map((token) => players[token].player_number)
+  .map((token) => `player_${players[token].player_number}`)
 
 exports.getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
   const result = []
 
-  playerNumbers.forEach((number) => {
-    const key = `player_${number}`
+  playerNumbers.forEach(key => {
     const cardId = cardPositions[key].id
     result.push({ [key]: cardId })
   })
@@ -83,12 +142,12 @@ exports.getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
   return result
 }
 
-exports.getRolePositions = (playerNumbers, roleId) => playerNumbers.map((number) => ({ [`player_${number}`]: roleId }))
+exports.getRolePositions = (playerNumbers, roleId) => playerNumbers.map(number => ({ [`player_${number}`]: roleId }))
 
 exports.getCardIdsByPositions = (cardPositions, selectedPositions) => {
   const result = []
 
-  selectedPositions.forEach((position) => {
+  selectedPositions.forEach(position => {
     const cardId = cardPositions[position].id
     result.push({ [position]: cardId })
   })

@@ -1,9 +1,7 @@
+const { INTERACTION } = require("../constant/ws")
 const { logDebug, logError } = require("../log")
-const { repository } = require("../repository")
-const {
-  werewolves_response,
-} = require("../scene/interaction/roles/werewolves")
-
+const { roles } = require("../scene/interaction/roles")
+const { repository } = require('../repository')
 const { readGameState, upsertRoomState } = repository
 
 exports.interaction = async (ws, message) => {
@@ -14,31 +12,33 @@ exports.interaction = async (ws, message) => {
     const gameState = await readGameState(room_id)
     // TODO validate client request
 
-    // TODO all other roles
-    /*     const actual_interaction = gameState.ongoing_interactions.FIND_FIRST(ongoingInteraction => ongoingInteraction.token === token)
-
-    actual_interaction.interaction_type
-
-    const generateInteractionResponse = (interaction_type, gameState, selected_positions ws) => {
-      if (!interaction_type) return ws.send(JSON.stringify({VALAMI HIBA ÜZI}))
-      if (actual_interaction.interaction_type === "ALPHA_WOLF") return alphawolf_response(gameState, selected_positions, ws)
-      if (actual_interaction.interaction_type === "WEREWOLF") return werewolves_response(ws, message)
-
-      return ws.send(JSON.stringify({VALAMI HIBA ÜZI}))
-  
-    }
-
-    "ongoing_interactions": [
-      {
-          "token": "player_token",
-          "interaction_type": "ALPHA_WOLF",
-          "selectable_cards": ""
-      }
-  ], */
-    const newGameState = werewolves_response(gameState, token, selected_positions, ws)
+    const newGameState = generateInteractionResponse(gameState, token, selected_positions, ws)
 
     await upsertRoomState(newGameState)
   } catch (error) {
     logError(error)
+    logError(JSON.stringify(error?.stack))
   }
+}
+
+const generateInteractionResponse = (gameState, token, selected_positions, ws) => {
+  const interaction_type = gameState?.players?.[token]?.role_history?.scene_title
+  if (!interaction_type) {
+    ws.send(JSON.stringify({
+      type: INTERACTION,
+      message: 'nope'
+    }))
+    return gameState
+  }
+
+  if (interaction_type === "WEREWOLVES")      return roles.werewolves_response(gameState, token, selected_positions, ws)
+  if (interaction_type === "ALPHA_WOLF")      return roles.alphawolf_response(gameState, token, selected_positions, ws)
+  if (interaction_type === "MYSTIC_WOLF")     return roles.mysticwolf_response(gameState, token, selected_positions, ws)
+  if (interaction_type === "SEER")            return roles.seer_response(gameState, token, selected_positions, ws)
+  if (interaction_type === "APPRENTICE_SEER") return roles.apprenticeseer_response(gameState, token, selected_positions, ws)
+  if (interaction_type === "ROBBER")          return roles.robber_response(gameState, token, selected_positions, ws)
+  if (interaction_type === "TROUBLEMAKER")    return roles.troublemaker_response(gameState, token, selected_positions, ws)
+  if (interaction_type === "DRUNK")           return roles.drunk_response(gameState, token, selected_positions, ws)
+
+  return gameState
 }

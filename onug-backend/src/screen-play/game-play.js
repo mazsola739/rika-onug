@@ -5,8 +5,9 @@ const { HYDRATE_GAME_PLAY } = require("../constant/ws")
 const { logTrace, logError } = require("../log")
 const { narration, interaction } = require("../scene")
 
-const tickTime = 1000
+const tickTime = 3000
 
+//todo here: game_stopped = false
 exports.stopGamePlay = () => logTrace("TODO stop game implementation")
 
 const getNextScene = gameState => {
@@ -29,7 +30,7 @@ const getNextScene = gameState => {
     return newGameState
   }
 
-  if (!newGameState.actual_scene.text) return getNextScene(newGameState)
+  if (!newGameState.actual_scene.narration) return getNextScene(newGameState)
 
   return newGameState
 }
@@ -41,6 +42,15 @@ const tick = async (room_id) => {
 
   //TODO action_history: need narration & interactions
   newGameState.action_history.push(newGameState.actual_scene)
+
+  const actualScene = {
+    scene_number: newGameState.actual_scene.scene_number,
+    scene_start_time: newGameState.actual_scene.scene_start_time,
+    scene_title: newGameState.actual_scene.scene_title,
+    narration: newGameState.actual_scene.narration
+  }
+
+  newGameState.actual_scene = actualScene
 
   await upsertRoomState(newGameState)
 

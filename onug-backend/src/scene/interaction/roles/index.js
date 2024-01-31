@@ -1,13 +1,13 @@
-const { oracle_question, oracle_reaction } = require("./oracle")
-const { copycat } = require("./copycat")
-const { mirrorman } = require("./mirrorman")
-const { doppelganger, doppelganger_instant_action } = require("./doppelganger")
-const { vampires } = require("./vampires")
-const { thecount, doppelganger_thecount } = require("./thecount")
+const { oracle, oracle_reaction } = require("./oracle")
+const { copycat, copycat_reaction} = require("./copycat")
+const { mirrorman, mirrorman_reaction } = require("./mirrorman")
+const { doppelganger, doppelganger_reaction, doppelganger_instant_action } = require("./doppelganger")
+const { vampires, vampires_reaction } = require("./vampires")
+const { thecount, thecount_reaction } = require("./thecount")
 const { renfield } = require("./renfield")
-const { diseased } = require("./diseased")
-const { cupid } = require("./cupid")
-const { instigator } = require("./instigator")
+const { diseased, diseased_reaction } = require("./diseased")
+const { cupid, cupid_reaction } = require("./cupid")
+const { instigator, instigator_reaction } = require("./instigator")
 const { priest, doppelganger_priest } = require("./priest")
 const { assassin, doppelganger_assassin } = require("./assassin")
 const { apprenticeassassin, doppelganger_apprenticeassassin } = require("./apprenticeassassin")
@@ -24,9 +24,9 @@ const { temptress } = require("./temptress")
 const { drpeeker } = require("./drpeeker")
 const { rapscallion } = require("./rapscallion")
 const { evilometer } = require("./evilometer")
-const { werewolves }  = require("./werewolves")
-const { alphawolf } = require("./alphawolf")
-const { mysticwolf } = require("./mysticwolf")
+const { werewolves, werewolves_response }  = require("./werewolves")
+const { alphawolf, alphawolf_response } = require("./alphawolf")
+const { mysticwolf, mysticwolf_response } = require("./mysticwolf")
 const { minion } = require("./minion")
 const { apprenticetanner } = require("./apprenticetanner")
 const { madscientist } = require("./madscientist")
@@ -34,25 +34,25 @@ const { intern } = require("./intern")
 const { masons } = require("./masons")
 const { thing } = require("./thing")
 const { annoyinglad } = require("./annoyinglad")
-const { seer } = require("./seer")
-const { apprenticeseer } = require("./apprenticeseer")
+const { seer, seer_response } = require("./seer")
+const { apprenticeseer, apprenticeseer_response } = require("./apprenticeseer")
 const { paranormalinvestigator } = require("./paranormalinvestigator")
 const { marksman } = require("./marksman")
 const { nostradamus, nostradamus_reaction } = require("./nostradamus")
 const { psychic } = require("./psychic")
 const { detector } = require("./detector")
-const { robber } = require("./robber")
+const { robber, robber_response } = require("./robber")
 const { witch } = require("./witch")
 const { pickpocket, doppelganger_pickpocket } = require("./pickpocket")
 const { roleretriever } = require("./roleretriever")
 const { voodoolou } = require("./voodoolou")
-const { troublemaker } = require("./troublemaker")
+const { troublemaker, troublemaker_response } = require("./troublemaker")
 const { villageidiot } = require("./villageidiot")
 const { auraseer } = require("./auraseer")
 const { gremlin, doppelganger_gremlin } = require("./gremlin")
 const { rascal, doppelganger_rascal } = require("./rascal")
 const { switcheroo } = require("./switcheroo")
-const { drunk } = require("./drunk")
+const { drunk, drunk_response } = require("./drunk")
 const { insomniac } = require("./insomniac")
 const { selfawarenessgirl } = require("./selfawarenessgirl")
 const { squire } = require("./squire")
@@ -68,20 +68,17 @@ const { familyman } = require("./familyman")
 
 exports.roles = {
   /* T W I L L I G H T  */
-  oracle_question,
-  oracle_reaction,
-  copycat,
-  mirrorman,
-  doppelganger,
-  doppelganger_instant_action,
+  oracle, oracle_reaction,
+  copycat, copycat_reaction,
+  mirrorman, mirrorman_reaction,
+  doppelganger, doppelganger_reaction, doppelganger_instant_action,
   /*  D U S K */
-  vampires,
-  thecount,
-  doppelganger_thecount,
+  vampires, vampires_reaction,
+  thecount, thecount_reaction,
   renfield,
-  diseased,
-  cupid,
-  instigator,
+  diseased, diseased_reaction,
+  cupid, cupid_reaction,
+  instigator, instigator_reaction,
   priest,
   doppelganger_priest,
   assassin,
@@ -104,8 +101,11 @@ exports.roles = {
   rapscallion,
   evilometer,
   werewolves,
+  werewolves_response,
   alphawolf,
+  alphawolf_response,
   mysticwolf,
+  mysticwolf_response,
   minion,
   apprenticetanner,
   madscientist,
@@ -114,7 +114,9 @@ exports.roles = {
   thing,
   annoyinglad,
   seer,
+  seer_response,
   apprenticeseer,
+  apprenticeseer_response,
   paranormalinvestigator,
   marksman,
   nostradamus,
@@ -122,12 +124,14 @@ exports.roles = {
   psychic,
   detector,
   robber,
+  robber_response,
   witch,
   pickpocket,
   doppelganger_pickpocket,
   roleretriever,
   voodoolou,
   troublemaker,
+  troublemaker_response,
   villageidiot,
   auraseer,
   gremlin,
@@ -136,6 +140,7 @@ exports.roles = {
   doppelganger_rascal,
   switcheroo,
   drunk,
+  drunk_response,
   insomniac,
   selfawarenessgirl,
   squire,

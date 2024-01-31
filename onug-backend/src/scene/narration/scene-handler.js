@@ -20,7 +20,7 @@ const {
 } = require("./constants");
 const { logError } = require("../../log");
 
-const NARRATION = 'actual_scene.text'
+const NARRATION = 'actual_scene.narration'
 
 //! todo save interaction identifiers for this: aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
 //TODO action_history

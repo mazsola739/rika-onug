@@ -258,7 +258,7 @@ exports.interactionHandler = gameState => {
 
     case "EVILOMETER": // (Scene Number: 35)
       if (conditions.hasEvilometer) return roles.evilometer(newGameState)
-      break
+      break */
 
     case "WEREWOLVES": // (Scene Number: 36)
       if (conditions.hasAnyWerewolf) return roles.werewolves(newGameState)
@@ -270,15 +270,15 @@ exports.interactionHandler = gameState => {
 
     case "MYSTIC_WOLF": // (Scene Number: 38)
       if (conditions.hasMysticWolf) return roles.mysticwolf(newGameState)
-      break */
+      break
 
     case "MINION": // (Scene Number: 39)
       if (conditions.hasMinion) return roles.minion(newGameState)
-      break /*
+      break
 
     case "APPRENTICE_TANNER": // (Scene Number: 40)
       if (conditions.hasApprenticeTanner && conditions.hasTanner) return roles.apprenticetanner(newGameState)
-      break
+      break /*
 
     case "MAD_SCIENTIST": // (Scene Number: 41)
       if (conditions.hasMadScientist) return roles.madscientist(newGameState)
@@ -302,11 +302,11 @@ exports.interactionHandler = gameState => {
 
     case "SEER": // (Scene Number: 46)
       if (conditions.hasSeer) return roles.seer(newGameState)
-      break /*
+      break
 
     case "APPRENTICE_SEER": // (Scene Number: 47)
       if (conditions.hasApprenticeSeer) return roles.apprenticeseer(newGameState)
-      break
+      break /*
 
     case "PARANORMAL_INVESTIGATOR": // (Scene Number: 48)
       if (conditions.hasParanormalInvestigator) return roles.paranormalinvestigator(newGameState)
@@ -469,11 +469,9 @@ exports.interactionHandler = gameState => {
       break */
 
     default:
-      logError("error here")
-
-      /* 
       logError(`INTERACTION_HANDLER_DEFAULT case: no role found for: sceneTitle ${sceneTitle}`)
-
+    
+      /* 
     //Ripple Scene:
       RIPPLE":// (Scene Number: 88) 
     //Day Scenes:

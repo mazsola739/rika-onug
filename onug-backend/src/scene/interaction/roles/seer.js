@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { findPlayersByCardIds, getCardIdsByPositions } = require("../utils");
+const { getTokensByCardIds, getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens } = require("../utils");
 const { centerCardPositions } = require("../constants");
 
 //TODO doppelganger instant action
@@ -9,7 +9,7 @@ exports.seer = gameState => {
   const newGameState = {...gameState}
   const role_interactions = [];
 
-  const seerTokens = findPlayersByCardIds(newGameState.players, [9]);
+  const seerTokens = getTokensByCardIds(newGameState.players, [9]);
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, seerTokens);
 
   const roleHistory = {
@@ -39,21 +39,20 @@ exports.seer = gameState => {
 };
 
 exports.seer_response = (gameState, token, selected_positions, ws) => {
-  //TODO kezelni ha nem egyezik
-  if (selected_positions.every(position => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return
-  
+  let showCards = []
+  if (selected_positions[0].includes("player_") && gameState.players[token].role_history.selectable_player_cards.includes(selected_positions[0])) {
+    showCards = [selected_positions[0]]
+  } else if ([selected_positions[0], selected_positions[1]].includes("center_") && [selected_positions[0], selected_positions[1]].every(position=>gameState.players[token].role_history.selectable_center_cards.includes(position))) {
+    showCards = [selected_positions[0], selected_positions[1]]
+  } else return gameState
+
   const newGameState = {...gameState}
   const role_interactions = [];
 
-  const showCards = getCardIdsByPositions(newGameState.card_positions, selected_positions);
+  showCards = getCardIdsByPositions(newGameState.card_positions, selected_positions);
 
-  const roleHistory = {
-    ...newGameState.actual_scene,
-    show_cards: showCards,
-    card_or_mark_action: true,
-  }
-
-  newGameState.players[token].role_history = roleHistory
+  newGameState.players[token].role_history.show_cards = showCards
+  newGameState.players[token].role_history.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
@@ -65,12 +64,8 @@ exports.seer_response = (gameState, token, selected_positions, ws) => {
   newGameState.role_interactions = role_interactions
 
   logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
- 
-  //TODO action_history
-  newGameState.action_history.push({
-    scene_title: "SEER",
-    scene_number: 46,
-  });
+
+  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card(s) on the next position(s): ${selected_positions.join(', ')}`
 
   ws.send(JSON.stringify({
     type: INTERACTION,

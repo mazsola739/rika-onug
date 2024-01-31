@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { findPlayersByCardIds, getPlayerNumbersWithMatchingTokens, getPlayerNumbersWithNonMatchingTokens } = require("../utils");
+const { getTokensByCardIds, getPlayerNumbersWithMatchingTokens, getPlayerNumbersWithNonMatchingTokens } = require("../utils");
 
 //TODO doppelganger instant action
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
@@ -8,7 +8,7 @@ exports.robber = gameState => {
   const newGameState = {...gameState}
   const role_interactions = [];
 
-  const robberTokens = findPlayersByCardIds(newGameState.players, [8]);
+  const robberTokens = getTokensByCardIds(newGameState.players, [8]);
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, robberTokens);
 
   const roleHistory = {
@@ -17,7 +17,7 @@ exports.robber = gameState => {
     card_or_mark_action: false,
   }
 
-  robberTokens.forEach((token) =>{
+  robberTokens.forEach((token) => {
     newGameState.players[token].role_history = roleHistory
 
     role_interactions.push({
@@ -36,8 +36,7 @@ exports.robber = gameState => {
 };
 
 exports.robber_response = (gameState, token, selected_positions, ws) => {
-  //TODO kezelni ha nem egyezik
-  if (selected_positions.every(position => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return
+  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
   
   const newGameState = {...gameState}
 
@@ -51,34 +50,26 @@ exports.robber_response = (gameState, token, selected_positions, ws) => {
 
   const showCard = getCardIdsByPlayerNumbers(newGameState.card_positions, robberPlayerNumber);
 
-  const roleHistory = {
-    ...newGameState.actual_scene,
+  newGameState.players[token].role_history.show_cards = showCards
+  newGameState.players[token].role_history.card_or_mark_action = true
+
+  role_interactions.push({
+    type: INTERACTION,
+    token,
+    message: "interaction_robber2",
     show_cards: showCard,
-  }
+  })
+  
+  newGameState.role_interactions = role_interactions
 
-  robberTokens.forEach((token) =>{
-    newGameState.players[token].role_history = roleHistory
+  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
-    role_interactions.push({
-      type: INTERACTION,
-      token,
-      message: "interaction_robber2",
-      show_cards: showCard,
-    })
-  });
-
-  //TODO action_history
-  newGameState.action_history.push({
-    scene_title: "ROBBER",
-    scene_number: 55,
-  });
+  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} swapped their card with ${selected_positions[0]} and then viewed their new card`
 
   ws.send(JSON.stringify({
     type: INTERACTION,
-    message: 'SUCCESSFULLY showed card',
+    message: 'SUCCESSFULLY swapped and showed cards',
   }))
-
-  newGameState.role_interactions = role_interactions
 
   return newGameState
 };

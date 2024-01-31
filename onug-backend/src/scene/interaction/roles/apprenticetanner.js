@@ -1,33 +1,36 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const {
-  findPlayersByRoleIds,
-  getPlayerNumbersWithMatchingTokens,
-  getRolePositions,
-} = require("../utils");
+const { getTokensByRoleIds, getTannerNumberByRoleIds } = require("../utils");
 
+//? INFO: Apprentice Tanner - Tanner sticks out his thumb for him to see. Only wins if another Tanner dies. Multiple Apprentice Tanners are on the same team
 exports.apprenticetanner = gameState => {
+  const newGameState = { ...gameState };
   const role_interactions = [];
-  const apprenticetannerTokens = findPlayersByRoleIds(gameState.players, [71]);
-  const tannerTokens = findPlayersByRoleIds(gameState.players, [10]);
-  const tannerPlayerNumbers = getPlayerNumbersWithMatchingTokens(
-    gameState.players,
-    tannerTokens
-  );
-  const flippableCards = getRolePositions(tannerPlayerNumbers, 10);
 
-  apprenticetannerTokens.forEach((token) =>
+  const apprenticetannerTokens = getTokensByRoleIds(newGameState.players, [71]);
+  const tannerPlayerNumbers = getTannerNumberByRoleIds(newGameState.players)
+
+  const roleHistory = {
+    ...newGameState.actual_scene,
+    card_or_mark_action: false,
+  };
+
+  apprenticetannerTokens.forEach((token) => {
+    newGameState.players[token].role_history = roleHistory;
+
     role_interactions.push({
       type: INTERACTION,
       token,
-      message: "APPRENTICE_TANNER",
-      flippable_cards: flippableCards,
-    })
-  );
+      message: "interaction_apprenticetanner",
+      tanner: tannerPlayerNumbers,
+    });
+
+    newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw tanner position(s): player ${tannerPlayerNumbers.join(', ')}`
+  });
 
   newGameState.role_interactions = role_interactions
 
   logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`);
 
-  return role_interactions;
+  return newGameState;
 };

@@ -1,8 +1,6 @@
-
-
-  const { INTERACTION } = require("../../../constant/ws");
+const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { findPlayersByCardIds, getCardIdsByPositions } = require("../utils");
+const { getTokensByCardIds, getCardIdsByPositions } = require("../utils");
 const { centerCardPositions } = require("../constants");
 
 //TODO doppelganger instant action
@@ -11,7 +9,7 @@ exports.apprenticeseer = gameState => {
   const newGameState = {...gameState}
   const role_interactions = [];
 
-  const apprenticeseerTokens = findPlayersByCardIds(newGameState.players, [9]);
+  const apprenticeseerTokens = getTokensByCardIds(newGameState.players, [18]);
  
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -26,8 +24,7 @@ exports.apprenticeseer = gameState => {
       type: INTERACTION,
       token,
       message: "interaction_apprenticeseer",
-      selectable_center_cards: centerCardPositions,
-      selectable_player_cards: selectablePlayerNumbers,
+      selectable_cards: centerCardPositions,
     })
   });
 
@@ -39,45 +36,32 @@ exports.apprenticeseer = gameState => {
 };
 
 exports.apprenticeseer_response = (gameState, token, selected_positions, ws) => {
-  //TODO kezelni ha nem egyezik + kibogozni az ellenőrzést
-  if (selected_positions.every(position => gameState.players[token].role_history.selectable_center_cards.includes(position)) === false 
-  && selected_positions.every(position => gameState.players[token].role_history.selectable_player_cards.includes(position)) === false ) return
+  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false ) return gameState
   
   const newGameState = {...gameState}
   const role_interactions = [];
 
-  const showCards = getCardIdsByPositions(newGameState.card_positions, selected_positions);
+  const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]]);
 
-  const roleHistory = {
-    ...newGameState.actual_scene,
+  newGameState.players[token].role_history.show_cards = showCards
+  newGameState.players[token].role_history.card_or_mark_action = true
+
+  role_interactions.push({
+    type: INTERACTION,
+    token,
+    message: "interaction_apprenticeseer2",
     show_cards: showCards,
-    card_or_mark_action: true,
-  }
-
-  apprenticeseerTokens.forEach((token) =>{
-    newGameState.players[token].role_history = roleHistory
-
-    role_interactions.push({
-      type: INTERACTION,
-      token,
-      message: "interaction_apprenticeseer2",
-      show_cards: showCards,
-    })
-  });
-
+  })
+  
   newGameState.role_interactions = role_interactions
 
   logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
-  //TODO action_history
-  newGameState.action_history.push({
-    scene_title: "SEER",
-    scene_number: 46,
-  });
+  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card on the next position: ${[selected_positions[0]]}`
 
   ws.send(JSON.stringify({
     type: INTERACTION,
-    message: 'SUCCESSFULLY showed cards',
+    message: 'SUCCESSFULLY showed card',
   }))
 
   return newGameState

@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { findPlayersByRoleIds, getPlayerNumbersWithMatchingTokens } = require("../utils");
+const { getTokensByRoleIds, getPlayerNumbersWithMatchingTokens } = require("../utils");
 const { masonIds } = require("../constants");
 
 //? INFO: Mason (2) – Wakes up and looks for the other fellow Mason
@@ -8,7 +8,7 @@ exports.masons = gameState => {
   const newGameState = { ...gameState };
   const role_interactions = [];
 
-  const masonTokens = findPlayersByRoleIds(newGameState.players, masonIds);
+  const masonTokens = getTokensByRoleIds(newGameState.players, masonIds);
   const masonPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, masonTokens);
 
   const roleHistory = {
@@ -25,6 +25,8 @@ exports.masons = gameState => {
       message: "interaction_masons",
       masons: masonPlayerNumbers,
     });
+
+    newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw mason position(s): player ${masonPlayerNumbers.join(', ')}`
   });
 
   newGameState.role_interactions = role_interactions
