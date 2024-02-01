@@ -1,7 +1,7 @@
 const { oracle, oracle_response } = require("./oracle")
 const { copycat, copycat_response} = require("./copycat")
 const { mirrorman, mirrorman_response } = require("./mirrorman")
-const { doppelganger, doppelganger_response, doppelganger_instant_action } = require("./doppelganger")
+const { doppelganger, doppelganger_response } = require("./doppelganger")
 const { vampires, vampires_response } = require("./vampires")
 const { thecount, doppelganger_thecount, thecount_response } = require("./thecount")
 const { renfield } = require("./renfield")
