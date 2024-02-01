@@ -1,46 +1,21 @@
-const { werewolvesAndDreamWolfIds } = require("./constants");
+const { werewolvesAndDreamWolfIds } = require("./constants")
 
 exports.hasDoppelganger = players => {
   for (const token in players) {
     if (players[token].card.id === 1) {
-      return true;
+      return true
     }
   }
   
-  return false;
-}
-
-exports.getPlayerCardIds = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    result.push({ [player]: player.card.id })
-  }
-
-  return result
-}
-
-exports.getPlayerRoleIds = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    result.push({ [player]: player.card.role_id })
-  }
-
-  return result
+  return false
 }
 
 exports.getTokensByCardIds = (players, cardIds) => {
   const result = []
 
   for (const token in players) {
-    if (players.hasOwnProperty(token)) {
-      const player = players[token]
-      if (cardIds.includes(player.card.id)) {
-        result.push(token)
-      }
+    if (cardIds.includes(players[token].card.id)) {
+      result.push(token)
     }
   }
 
@@ -51,11 +26,8 @@ exports.getTokensByRoleIds = (players, roleIds) => {
   const result = []
 
   for (const token in players) {
-    if (players.hasOwnProperty(token)) {
-      const player = players[token]
-      if (roleIds.includes(player.card.role_id)) {
-        result.push(token)
-      }
+    if (roleIds.includes(players[token].card.role_id)) {
+      result.push(token)
     }
   }
 
@@ -66,7 +38,7 @@ exports.getDoppelgangerTokenByRoleIds = (players, roleIds) => {
   const result = []
 
   for (const token in players) {
-    if (players[token].card.role_id === 21) {
+    if (players[token].card.role_id === 1) {
       if (roleIds.includes(players[token].card.role_id) && players[token].card.id === 1) {
         result.push(token)
       }
@@ -127,9 +99,14 @@ exports.getNonWerewolfPlayerNumbersByRoleIds = (players) => {
 
 exports.getPlayerNumbersWithMatchingTokens = (players, tokens) => tokens.map(token => `player_${players[token].player_number}`)
 
-exports.getPlayerNumbersWithNonMatchingTokens = (players, tokens) => Object.keys(players)
-  .filter((token) => !tokens.includes(token))
-  .map((token) => `player_${players[token].player_number}`)
+exports.getPlayerNumbersWithNonMatchingTokens = (players, tokens) => {
+  return Object.keys(players)
+    .filter((token) => {
+      const player = players[token];
+      return !tokens.includes(token) && !(player.card?.shield)
+    })
+    .map((token) => `player_${players[token].player_number}`)
+}
 
 exports.getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
   const result = []
@@ -152,5 +129,40 @@ exports.getCardIdsByPositions = (cardPositions, selectedPositions) => {
     result.push({ [position]: cardId })
   })
   
+  return result
+}
+
+exports.getPlayerTokenByPlayerNumber = (players, player) => {
+  const result = []
+  const playerNumber = player.match(/\d+/)
+
+  for (const token in players) {
+    if (players[token].player_number === playerNumber) {
+      result.push(token)
+    }
+  }
+
+  return result
+};
+
+exports.getPlayerCardIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    result.push({ [player]: player.card.id })
+  }
+
+  return result
+}
+
+exports.getPlayerRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    result.push({ [player]: player.card.role_id })
+  }
+
   return result
 }

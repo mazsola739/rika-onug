@@ -26,6 +26,7 @@ exports.minion = gameState => {
       token,
       message: "interaction_minion",
       werewolf_cards: werewolfPlayerNumbers,
+      shielded_players: newGameState.shield,
     })
 
     newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw werewolf position(s): player ${werewolfPlayerNumbers.join(', ')}`

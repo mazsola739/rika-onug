@@ -19,7 +19,8 @@ export const interaction_cow = '' //? INFO: Cow - Puts hand out in a fist when A
 export const interaction_cupid = '' //? INFO: Cupid - Gives any two players (including herself) a Mark of Love; if one of them dies so does the other
 export const interaction_curator = '' //? INFO: Curator - Gives any player (including himself) a random, unknown Artifact. Cannot give to a Shielded player.
 export const interaction_diseased = '' //? INFO: Diseased - Gives either player to right or left a Mark of Disease; whoever votes for either the marked or player loses
-export const interaction_doppelganger = '' //? INFO: Doppelgänger - Looks at any other player's card and becomes that card. Does that action during but different time
+export const interaction_doppelganger =
+  "Doppelgänger - Looks at any other player's card and becomes that card. Does that action during but different time"
 export const interaction_drunk =
   'Drunk - Swap your card with a card from center but does not look at his new card' //DRUNK
 export const interaction_empath = '' //? INFO: Empath - App asks some other players w/ eyes closed to point at someone. She observes it with her eyes open
@@ -52,7 +53,8 @@ export const interaction_robber2 =
   "Robber - Swaps his card for any other player's card (not center) which he then looks at"
 export const interaction_seer =
   "Seer (2) - Looks at one player's card (not her own) or two cards from the center" //SEER
-export const interaction_sentinel = '' //? INFO: Sentinel - Place a Shield token on one player's card; that card (not mark) cannot be looked at or moved
+export const interaction_sentinel =
+  "Sentinel - Place a Shield token on one player's card; that card (not mark) cannot be looked at or moved"
 export const interaction_squire = '' //? INFO: Squire - All Werewolf team (not Minion/Squire) stick up their thumb for him to see, who may look at their cards
 export const interaction_thecount = '' //? INFO: The Count - Gives a non-Vampire the Mark of Fear; this prevents that player from doing their night action
 export const interaction_themaster = '' //? INFO: The Master - Cannot die if another Vampire votes for him; Go to the next highest voted

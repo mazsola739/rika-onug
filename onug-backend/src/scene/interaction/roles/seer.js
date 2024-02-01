@@ -28,6 +28,7 @@ exports.seer = gameState => {
       message: "interaction_seer",
       selectable_center_cards: centerCardPositions,
       selectable_player_cards: selectablePlayerNumbers,
+      shielded_players: newGameState.shield,
     })
   });
 
@@ -59,6 +60,7 @@ exports.seer_response = (gameState, token, selected_positions, ws) => {
     token,
     message: "interaction_seer2",
     show_cards: showCards,
+    shielded_players: newGameState.shield,
   })
 
   newGameState.role_interactions = role_interactions

@@ -2,6 +2,7 @@ const { writeFileSync } = require("fs")
 const { readFile, unlink } = require("fs/promises")
 const { logError, logTrace } = require("../log")
 const roomNames = require("../data/room_names.json")
+const { websocketServerConnectionsPerRoom } = require("../websocket/connections")
 
 const upsertRoomState = async (state) => {
   logTrace("upsertRoomState")
@@ -135,6 +136,7 @@ const deletePlayerByToken = async (token) => {
         delete newGameState.players[token];
         upsertRoomState(newGameState);
         gameStates[room_id] = newGameState;
+        delete websocketServerConnectionsPerRoom[room_id][token]
       } 
     } catch (e) {
       logTrace(`warn: ${JSON.stringify(e)}`)

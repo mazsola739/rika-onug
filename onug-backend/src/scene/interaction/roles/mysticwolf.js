@@ -25,6 +25,7 @@ exports.mysticwolf = gameState => {
       token,
       message: "interaction_mysticwolf",
       selectable_cards: selectablePlayerNumbers,
+      shielded_players: newGameState.shield,
     })
   });
 
@@ -51,6 +52,7 @@ exports.mysticwolf_response = (gameState, token, selected_positions, ws) => {
     token,
     message: "interaction_mysticwolf2",
     show_cards: showCards,
+    shielded_players: newGameState.shield,
   })
 
   newGameState.role_interactions = role_interactions

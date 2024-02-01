@@ -4,7 +4,7 @@ exports.mirrorman = (gameState) => {
   return newGameState;
 };
 
-exports.mirrorman_reaction = (gameState) => {
+exports.mirrorman_response = (gameState) => {
   const newGameState = { ...gameState };
 
   return newGameState;

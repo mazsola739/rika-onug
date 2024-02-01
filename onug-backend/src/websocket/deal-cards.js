@@ -75,11 +75,14 @@ const dealCardIds = (selectedCardIds) => {
 
 const createPlayerCard = (card, selected_cards) => {
   if (!card || typeof card !== "object" || !card.id)  return { id: 0, role: "", role_id: 0, team: "", mark: false, mark_id: "" }
+ 
+  let playerCard
 
   const hasPlayerMark = hasMark(selected_cards)
+  const hasShield = selected_cards.includes(25)
 
   if (hasPlayerMark) {
-    return {
+    playerCard = {
       id: card.id,
       role: card.role,
       role_id: card.id,
@@ -88,7 +91,7 @@ const createPlayerCard = (card, selected_cards) => {
       mark_id: "mark_of_clarity",
     }
   } else {
-    return {
+    playerCard = {
       id: card.id,
       role: card.role,
       role_id: card.id,
@@ -96,27 +99,42 @@ const createPlayerCard = (card, selected_cards) => {
       mark: hasMark,
     }
   }
+
+  if (hasShield) {
+    playerCard.shield = false
+  }
+
+  return playerCard
 }
 
 const createPositionCard = (card, selected_cards) => {
   if (!card || typeof card !== "object" || !card.id) return { id: 0, role: "", team: "" }
 
+  let positionCard
+
   const hasPlayerMark = hasMark(selected_cards)
+  const hasShield = selected_cards.includes(25)
 
   if (hasPlayerMark) {
-    return {
+    positionCard = {
       id: card.id,
       role: card.role,
       team: card.team,
       mark_id: "mark_of_clarity",
     }
   } else {
-    return {
+    positionCard = {
       id: card.id,
       role: card.role,
       team: card.team,
     }
   }
+  
+  if (hasShield) {
+    positionCard.shield = false
+  }
+
+  return positionCard
 }
 
 exports.dealCards = async (ws, message) => {

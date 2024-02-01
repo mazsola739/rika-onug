@@ -25,6 +25,7 @@ exports.troublemaker = gameState => {
       token,
       message: "interaction_troublemaker",
       selectable_cards: selectablePlayerNumbers,
+      shielded_players: newGameState.shield,
     })
   });
 
@@ -49,7 +50,8 @@ exports.troublemaker_response = (gameState, token, selected_positions, ws) => {
     type: INTERACTION,
     token,
     message: "interaction_troublemaker2",
-    show_cards: selected_positions.slice(0, 2),
+    swapped_cards: selected_positions.slice(0, 2),
+    shielded_players: newGameState.shield,
   })
 
   newGameState.role_interactions = role_interactions

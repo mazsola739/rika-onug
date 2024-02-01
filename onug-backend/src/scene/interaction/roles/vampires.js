@@ -4,7 +4,7 @@ exports.vampires = (gameState) => {
   return newGameState;
 };
 
-exports.vampires_reaction = (gameState) => {
+exports.vampires_response = (gameState) => {
   const newGameState = { ...gameState };
 
   return newGameState;

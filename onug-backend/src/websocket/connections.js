@@ -2,7 +2,7 @@ const roomNames = require("../data/room_names.json")
 const { logDebug, logTrace } = require("../log")
 
 const websocketServerConnectionsPerRoom = {}
-const initWebSocketConnections = () =>roomNames.forEach((roomName) => (websocketServerConnectionsPerRoom[roomName] = {}))
+const initWebSocketConnections = () => roomNames.forEach((roomName) => (websocketServerConnectionsPerRoom[roomName] = {}))
 initWebSocketConnections()
 
 const addUserToRoom = (ws, token, room_id) => {

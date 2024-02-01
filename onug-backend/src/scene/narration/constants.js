@@ -1,13 +1,12 @@
-
 exports.instantRoleIds = {
   17: "role_alphawolf",
   55: "role_annoyinglad",
   18: "role_apprenticeseer",
   31: "role_cupid",
-  55: "role_detector",
+  56: "role_detector",
   32: "role_diseased",
   57: "role_drpeeker",
-  1: "role_drunk",
+  2: "role_drunk",
   34: "role_instigator",
   22: "role_mysticwolf",
   23: "role_paranormalinvestigator",

@@ -13,8 +13,8 @@ export const CardBack = styled.div<StyledGameCardProps>`
   background-repeat: no-repeat;
   background-size: 100%;
   border: 5px 2px solid white;
-  border-radius: 2px;
-  height: 120px;
+  border-radius: 6px;
+  height: 130px;
   justify-content: center;
   width: 90px;
 `

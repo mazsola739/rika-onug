@@ -25,6 +25,7 @@ exports.apprenticeseer = gameState => {
       token,
       message: "interaction_apprenticeseer",
       selectable_cards: centerCardPositions,
+      shielded_players: newGameState.shield,
     })
   });
 
@@ -51,6 +52,7 @@ exports.apprenticeseer_response = (gameState, token, selected_positions, ws) => 
     token,
     message: "interaction_apprenticeseer2",
     show_cards: showCards,
+    shielded_players: newGameState.shield,
   })
   
   newGameState.role_interactions = role_interactions

@@ -18,14 +18,26 @@ exports.robber = gameState => {
   }
 
   robberTokens.forEach((token) => {
-    newGameState.players[token].role_history = roleHistory
+    if (!newGameState.players[token].card.shield) {
+      newGameState.players[token].role_history = roleHistory
 
-    role_interactions.push({
-      type: INTERACTION,
-      token,
-      message: "interaction_robber",
-      selectable_cards: selectablePlayerNumbers,
-    })
+      role_interactions.push({
+        type: INTERACTION,
+        token,
+        message: "interaction_robber",
+        selectable_cards: selectablePlayerNumbers,
+        shielded_players: newGameState.shield,
+      })
+    } else if (newGameState.players[token].card.shield) {
+      role_interactions.push({
+        type: INTERACTION,
+        token,
+        message: "interaction_shielded",
+        shielded_players: newGameState.shield,
+      })
+      
+      newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} has shield, can't swap their card`
+    }
   });
 
   newGameState.role_interactions = role_interactions
@@ -47,7 +59,6 @@ exports.robber_response = (gameState, token, selected_positions, ws) => {
   newGameState.card_positions[selected_positions[0]].id = newGameState.players[token].card.role_id
   newGameState.card_positions[selected_positions[0]].team = newGameState.players[token].card.team
   
-
   const showCard = getCardIdsByPlayerNumbers(newGameState.card_positions, robberPlayerNumber);
 
   newGameState.players[token].role_history.show_cards = showCards
@@ -58,6 +69,7 @@ exports.robber_response = (gameState, token, selected_positions, ws) => {
     token,
     message: "interaction_robber2",
     show_cards: showCard,
+    shielded_players: newGameState.shield,
   })
   
   newGameState.role_interactions = role_interactions

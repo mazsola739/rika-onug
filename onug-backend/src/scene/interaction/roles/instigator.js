@@ -5,7 +5,7 @@ exports.instigator = () => (gameState) => {
   return newGameState;
 };
 
-exports.instigator_reaction = () => (gameState) => {
+exports.instigator_response = () => (gameState) => {
   const newGameState = { ...gameState };
 
   return newGameState;

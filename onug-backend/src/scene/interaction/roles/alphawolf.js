@@ -25,6 +25,7 @@ exports.alphawolf = (gameState) => {
       token,
       message: "interaction_alphawolf",
       selectable_cards: selectablePlayerNumbers,
+      shielded_players: newGameState.shield,
     })
   })
 
@@ -51,6 +52,7 @@ exports.alphawolf_response = (gameState, token, selected_positions, ws) => {
     token,
     message: "interaction_alphawolf2",
     swapped_cards: [selected_positions[0], "center wolf"],
+    shielded_players: newGameState.shield,
   })
   newGameState.role_interactions = role_interactions
 

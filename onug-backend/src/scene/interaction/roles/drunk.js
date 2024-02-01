@@ -25,6 +25,7 @@ exports.drunk = gameState => {
       token,
       message: "interaction_drunk",
       selectable_cards: centerCardPositions,
+      shielded_players: newGameState.shield,
     })
   });
 
@@ -52,6 +53,7 @@ exports.drunk_response = (gameState, token, selected_positions, ws) => {
     token,
     message: "interaction_drunk2",
     swapped_cards: [`player_${newGameState.players[token].player_number}`, `${selected_positions[0]}`],
+    shielded_players: newGameState.shield,
   })
   
   newGameState.role_interactions = role_interactions

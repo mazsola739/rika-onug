@@ -134,7 +134,7 @@ exports.interactionHandler = gameState => {
 
     case "MIRROR_MAN": // (Scene Number: 5)
       if (conditions.hasMirrorMan) return roles.mirrorman(newGameState)
-      break
+      break */
 
     case "DOPPELGÄNGER": // (Scene Number: 6)
       if (conditions.hasDoppelganger) return roles.doppelganger(newGameState)
@@ -142,7 +142,7 @@ exports.interactionHandler = gameState => {
 
     case "DOPPELGÄNGER_INSTANT_ACTION": // (Scene Number: 7)
       if (conditions.hasDoppelganger && conditions.hasInstantAction) return roles.doppelganger_instant_action(newGameState)
-      break */
+      break 
 
     /*  D U S K  */ /*
 
@@ -206,11 +206,11 @@ exports.interactionHandler = gameState => {
 
     case "LOVERS": // (Scene Number: 22)
       if (conditions.hasCupid) return roles.lovers(newGameState)
-      break
+      break */
 
     case "SENTINEL": // (Scene Number: 23) //!SHIELD & MARK_OF_FEAR
       if (conditions.hasSentinel) return roles.sentinel(newGameState)
-      break
+      break /*
 
     case "ALIENS": // (Scene Number: 24)
       if (conditions.hasAnyAlien) return roles.aliens(newGameState)

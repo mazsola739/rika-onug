@@ -24,6 +24,7 @@ exports.masons = gameState => {
       token,
       message: "interaction_masons",
       masons: masonPlayerNumbers,
+      shielded_players: newGameState.shield,
     });
 
     newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw mason position(s): player ${masonPlayerNumbers.join(', ')}`

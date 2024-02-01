@@ -5,7 +5,7 @@ exports.thecount = (gameState) => {
   return newGameState;
 };
 
-exports.thecount_reaction = (gameState) => {
+exports.thecount_response = (gameState) => {
   const newGameState = { ...gameState };
 
   return newGameState;

@@ -21,13 +21,13 @@ export const LeftSide = styled.div`
   flex-direction: column;
   height: 100%;
   padding: 20px;
-  width: 30%;
+  width: 40%;
 `
 
 export const RightSide = styled.div`
   height: 100%;
   padding: 20px;
-  width: 70%;
+  width: 60%;
 `
 
 export const GameStatesContainer = styled.div`
@@ -84,8 +84,8 @@ export const Input = styled.input`
 `
 
 export const ButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 `
 
@@ -96,7 +96,9 @@ export const Button = styled.button`
   color: ${buttonTextColor};
   cursor: pointer;
   font-family: 'Josefin Sans', sans-serif;
-  padding: 5px;
+  font-size: 15px;
+  padding: 2px;
+  text-align: center;
   width: 100%;
 
   &:hover {

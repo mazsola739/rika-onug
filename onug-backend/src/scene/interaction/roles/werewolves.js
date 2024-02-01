@@ -30,6 +30,7 @@ exports.werewolves = gameState => {
       message: "interaction_werewolves",
       werewolves: werewolfPlayerNumbers,
       selectable_cards: loneWolf ? centerCardPositions : [],
+      shielded_players: newGameState.shield,
     });
 
     if (!loneWolf) newGameState.actual_scene.interaction = `The Werewolves saw werewolf position(s): player ${werewolfPlayerNumbers.join(', ')} and dream wolf position(s): player ${dreamWolfPlayerNumber.join(', ')}`
@@ -57,6 +58,7 @@ exports.werewolves_response = (gameState, token, selected_positions, ws) => {
     token,
     message: "interaction_werewolves2",
     show_cards: showCards,
+    shielded_players: newGameState.shield,
   })
 
   newGameState.role_interactions = role_interactions

@@ -5,7 +5,7 @@ exports.cupid = (gameState) => {
   return newGameState;
 };
 
-exports.cupid_reaction = (gameState) => {
+exports.cupid_response = (gameState) => {
   const newGameState = { ...gameState };
 
   return newGameState;

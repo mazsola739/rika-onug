@@ -4,7 +4,7 @@ exports.copycat = (gameState) => {
   return newGameState;
 };
 
-exports.copycat_reaction = (gameState) => {
+exports.copycat_response = (gameState) => {
   const newGameState = { ...gameState };
 
   return newGameState;

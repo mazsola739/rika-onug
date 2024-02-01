@@ -6,4 +6,4 @@ exports.oracle = gameState => {
     return newGameState;
   };
 
-exports.oracle_reaction = () => {}
+exports.oracle_response = () => {}

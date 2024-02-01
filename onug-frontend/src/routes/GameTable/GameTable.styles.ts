@@ -112,6 +112,7 @@ export const PlayersCards = styled.div`
 export const CenterCards = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 2px;
 `
 
 export const Marks = styled.div`
