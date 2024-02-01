@@ -97,21 +97,23 @@ export const GameTable: React.FC = observer(() => {
   return (
     <>
       <GameTableHeader />
-      {player && renderOwnCard(player)}
       <StyledGameTable>
-        {players && renderPlayerCards(players)}
-        <CenterCardContainer>
-          {hasSentinel && (
-            <Shield src={`/assets/tokens/shield.png`} alt="shield" />
-          )}
-          {hasAlphaWolf && renderCenterExtraCard('Werewolf')}
-          {renderCenterCard('Center')}
-          {hasTemptress && renderCenterExtraCard('Villain')}
-        </CenterCardContainer>
-        {hasMarks && renderMarks(selectedMarks)}
+        {player && renderOwnCard(player)}
         {hasCurator && renderArtifacts(artifacts)}
+        <div>
+          {players && renderPlayerCards(players)}
+          <CenterCardContainer>
+            {hasSentinel && (
+              <Shield src={`/assets/tokens/shield.png`} alt="shield" />
+            )}
+            {hasAlphaWolf && renderCenterExtraCard('Werewolf')}
+            {renderCenterCard('Center')}
+            {hasTemptress && renderCenterExtraCard('Villain')}
+          </CenterCardContainer>
+        </div>
+        {hasMarks && renderMarks(selectedMarks)}
+        {players && renderPlayers(players)}
       </StyledGameTable>
-      {players && renderPlayers(players)}
       <GameTableFooter />
     </>
   )

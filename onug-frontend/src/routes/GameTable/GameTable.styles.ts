@@ -3,19 +3,16 @@ import { ReadyType } from './GameTable.types'
 
 //MAIN
 export const StyledGameTable = styled.main`
-  align-content: center;
-  align-items: center;
-  background-color: transparent;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 5px;
+  justify-content: center;
   overflow-x: hidden;
   overflow-y: auto;
   position: absolute;
   bottom: 90px;
-  left: 0px;
-  right: 0px;
   top: 120px;
+  width: 100%;
 `
 
 export const OwnKnownCardContainer = styled.div`
@@ -25,12 +22,12 @@ export const OwnKnownCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
-  position: absolute;
-  left: 20px;
-  bottom: 100px;
   border: 1px solid black;
   border-radius: 4px;
   padding: 10px;
+  justify-content: flex-end;
+  max-height: 200px;
+  margin: 20px;
 `
 
 export const OwnKnownCardText = styled.span`
@@ -49,10 +46,9 @@ export const Players = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
-  position: fixed;
-  right: 20px;
-  top: 245px;
-  width: 260px;
+  min-width: 280px;
+  max-height: 355px;
+  margin: 20px;
 `
 
 export const Player = styled.div`
@@ -79,14 +75,15 @@ export const CardContainer = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
 `
 
 export const CenterCardContainer = styled.div`
   align-items: flex-end;
   display: flex;
   flex-direction: row;
-  gap: 5px;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
 `
 
 export const CardTitle = styled.div`
@@ -95,17 +92,16 @@ export const CardTitle = styled.div`
 `
 
 export const Shield = styled.img`
-  height: 60px;
-  width: 60px;
+  height: 70px;
+  width: 70px;
 `
 
 export const PlayersCards = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 5px;
   justify-content: center;
-  height: 160px;
   width: 100%;
 `
 
@@ -116,12 +112,12 @@ export const CenterCards = styled.div`
 `
 
 export const Marks = styled.div`
+  align-content: flex-start;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: center;
-  padding: 10px;
-  max-width: 360px;
+  gap: 10px;
+  max-width: 130px;
 `
 
 //HEADER

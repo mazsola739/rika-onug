@@ -38,7 +38,7 @@ exports.interactionHandler = gameState => {
   const sceneTitle = gameState.actual_scene.scene_title
   const selectedCards = gameState.selected_cards
 
-  //TODO player cards to get who has wich role
+  //TODO player cards to get who has which role
 
   const conditions = {
     hasOracle:                 hasRole(selectedCards, 50),

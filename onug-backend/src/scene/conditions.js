@@ -1,6 +1,6 @@
 const { containsAnyIds, containsAllIds, hasRole } = require("./utils");
 const { doppelgangerInstantActionsIds, vampireIds, alienIds, groobAndZerbIds, superVillainsIds, werewolvesIds, hasMarkIds, seerIds, masonIds } = require("./constants");
-
+//TODO rethink
 exports.conditions = {
   hasOracle:                 hasRole(selectedCards, 50),
   hasCopycat:                hasRole(selectedCards, 30),

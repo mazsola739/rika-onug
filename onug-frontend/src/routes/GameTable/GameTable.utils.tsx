@@ -92,7 +92,7 @@ const renderMarks = (selectedMarks: MarkType[]) => (
         mark.is_in_deck && (
           <img
             key={mark.id}
-            style={{ width: '60px' }}
+            style={{ width: '60px', height: '60px' }}
             src={`/assets/tokens/${mark.token_name}.png`}
             alt={mark.token_name}
           />
@@ -108,7 +108,7 @@ const renderArtifacts = (artifacts: TokenType[]) => (
         artifact.token_name !== 'shield' && (
           <img
             key={i}
-            style={{ width: '60px' }}
+            style={{ width: '60px', height: '60px' }}
             src={`/assets/tokens/${artifact.token_name}.png`}
             alt={artifact.token_name}
           />
