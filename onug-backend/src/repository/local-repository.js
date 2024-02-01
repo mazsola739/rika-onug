@@ -24,10 +24,9 @@ const readGameState = async (room_id) => {
   try {
     const data = await readFile(filePath, options)
     return JSON.parse(data)
-  } catch (e) {
-    logError(`###>>> READ_GAME_STATE_ERROR
-###>>> ${e}`)
-    return
+  } catch (error) {
+    return logTrace(`###>>> READ_GAME_STATE_ERROR
+###>>> `, error)
   }
 }
 
@@ -40,10 +39,9 @@ const readAllGameStates = async () => {
     const options = { encoding: "utf8" }
     try {
       const rawData = await readFile(filePath, options)
-      const data = JSON.parse(rawData)
-      gameStates[room_id] = data
-    } catch (e) {
-      logTrace(`warn: ${JSON.stringify(e)}`)
+      gameStates[room_id] = JSON.parse(rawData)
+    } catch (error) {
+      logTrace('Could not read all gameStates', error)
       gameStates[room_id] = `No gameState found for room_id: ${room_id}`
     }
   }
@@ -56,12 +54,10 @@ const readGameStateByRoomId = async (room_id) => {
   const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
   const options = { encoding: "utf8" }
   try {
-    gameState
     const rawData = await readFile(filePath, options)
-    const data = JSON.parse(rawData)
-    gameState[room_id] = data
-  } catch (e) {
-    logTrace(`warn: ${JSON.stringify(e)}`)
+    gameState[room_id] = JSON.parse(rawData)
+  } catch (error) {
+    logTrace(`Could not read gameState for room_id ${room_id}`, error)
     gameState[room_id] = `No gameState found for room_id: ${room_id}`
   }
 
@@ -75,8 +71,8 @@ const deleteAllGameStates = async () => {
     const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
     try {
       await unlink(filePath)
-    } catch (e) {
-      logTrace(`warn: ${JSON.stringify(e)}`)
+    } catch (error) {
+      logTrace(`Could not delete gameState for filePath ${filePath}`, error)
     }
   }
   return { status: "gamestates deleted" }
@@ -87,8 +83,8 @@ const deleteGameStateByRoomId = async (room_id) => {
   const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
   try {
     await unlink(filePath)
-  } catch (e) {
-    logTrace(`warn: ${JSON.stringify(e)}`)
+  } catch (error) {
+    logTrace(`Could not delete gameState for filePath ${filePath}`, error)
   }
 
   return { status: "gamestate deleted" }
@@ -108,10 +104,10 @@ const deleteAllPlayers = async () => {
       Object.keys(newGameState.players).forEach(
         (token) => delete newGameState.players[token]
       )
-      upsertRoomState(newGameState)
+      await upsertRoomState(newGameState)
       gameStates[room_id] = newGameState
-    } catch (e) {
-      logTrace(`warn: ${JSON.stringify(e)}`)
+    } catch (error) {
+      logTrace(`Could not delete all players. No gameState found for room_id: ${room_id}`, error)
       gameStates[room_id] = `No gameState found for room_id: ${room_id}`
     }
   }
@@ -134,12 +130,12 @@ const deletePlayerByToken = async (token) => {
 
       if (newGameState.players[token]) {
         delete newGameState.players[token];
-        upsertRoomState(newGameState);
+        await upsertRoomState(newGameState);
         gameStates[room_id] = newGameState;
         delete websocketServerConnectionsPerRoom[room_id][token]
       } 
-    } catch (e) {
-      logTrace(`warn: ${JSON.stringify(e)}`)
+} catch (error) {
+      logTrace(`Could not delete all players. No gameState found for room_id: ${room_id}`, error)
       gameStates[room_id] = `No gameState found for room_id: ${room_id}`
     }
   }

@@ -2,7 +2,7 @@ const { repository } = require("../repository")
 const { readGameState, upsertRoomState } = repository
 const { broadcast, websocketServerConnectionsPerRoom } = require("../websocket/connections")
 const { HYDRATE_GAME_PLAY } = require("../constant/ws")
-const { logTrace, logError } = require("../log")
+const { logTrace } = require("../log")
 const { narration, interaction } = require("../scene")
 
 const tickTime = 3000
@@ -54,7 +54,7 @@ const tick = async (room_id) => {
 
   await upsertRoomState(newGameState)
 
-  let nextScene = {}
+  let nextScene
   if (newGameState.game_stopped) {
     nextScene = {
       type: HYDRATE_GAME_PLAY, // TODO decide whether we need to redirect or stay on gameplay for vote

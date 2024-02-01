@@ -1,16 +1,15 @@
 const roomsData = require("../data/rooms.json")
-const { logTrace, logError } = require("../log")
+const {logTrace, logErrorwithStack} = require("../log")
 
 exports.rooms = (req, res) => {
-  logTrace("Rooms endpoint called")
-
   try {
+    logTrace("Rooms endpoint called")
     return res.send({
       message: "Successfully fetched",
       data: roomsData,
     })
   } catch (error) {
-    logError("Error fetching rooms:", error)
+    logErrorwithStack(error)
     return res.send({
       message: "Failed to fetch rooms",
     })

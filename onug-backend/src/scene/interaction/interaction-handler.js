@@ -1,13 +1,10 @@
 const { logError } = require("../../log")
 const {
-  getRolesNames,
-  getTeamName,
   containsAnyIds,
   containsAllIds,
   hasRole,
 } = require("../narration/utils")
 const {
-  instantRoleIds,
   doppelgangerInstantActionsIds,
   vampireIds,
   alienIds,
@@ -20,18 +17,6 @@ const {
 } = require("./constants")
 const { roles } = require("./roles")
 
-const role_interactions = [
-  {
-    token: "TOKEN",
-    mark_of_fear: false,
-    message: "",
-    selectable_cards: [],
-    flipping_cards: [],
-    flipped: [],
-    artifact: [],
-    shield: [],
-  },
-]
 //TODO action_history
 exports.interactionHandler = gameState => {
   const newGameState = {...gameState}

@@ -1,35 +1,29 @@
 const WebSocket = require("ws")
-const { logTrace, logError } = require("../log")
-const { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_GAME_TABLE, ARRIVE_ROOM, START_GAME, 
-  DEAL, ARRIVE_GAME_PLAY, STOP_GAME, RELOAD, INTERACTION } = require("../constant/ws")
-const { hydrateRoom } = require("./hydrate-room")
-const { reset } = require("./reset")
-const { updateRoom } = require("./update-room")
-const { newbie } = require("./newbie")
-const { joinRoom } = require("./join-room")
-const { leaveRoom } = require("./leave-room")
-const { leaveTable } = require("./leave-table")
-const { ready } = require("./ready")
-const { hydrateGameTable } = require("./hydrate-game-table")
-const { startGame } = require('./start-game')
-const { dealCards} = require('./deal-cards')
-const { hydrateGamePlay } = require('./hydrate-game-play')
-const { stopGame } = require("./stop-game")
-const { reload } = require("./reload")
-const { interaction } = require("./interaction")
-
+const {logTrace, logError, logErrorwithStack} = require("../log")
+const {
+  UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_GAME_TABLE, ARRIVE_ROOM, START_GAME,
+  DEAL, ARRIVE_GAME_PLAY, STOP_GAME, RELOAD, INTERACTION
+} = require("../constant/ws")
+const {hydrateRoom} = require("./hydrate-room")
+const {reset} = require("./reset")
+const {updateRoom} = require("./update-room")
+const {newbie} = require("./newbie")
+const {joinRoom} = require("./join-room")
+const {leaveRoom} = require("./leave-room")
+const {leaveTable} = require("./leave-table")
+const {ready} = require("./ready")
+const {hydrateGameTable} = require("./hydrate-game-table")
+const {startGame} = require('./start-game')
+const {dealCards} = require('./deal-cards')
+const {hydrateGamePlay} = require('./hydrate-game-play')
+const {stopGame} = require("./stop-game")
+const {reload} = require("./reload")
+const {interaction} = require("./interaction")
 
 exports.websocketServer = (port) => {
   try {
-    const wss = new WebSocket.WebSocketServer({ port })
+    const wss = new WebSocket.WebSocketServer({port})
     wss.on("connection", function connection(ws, request, client) {
-  /*     const interval = setInterval(() => {
-        ws.send(
-          JSON.stringify({
-            type: KEEP_ALIVE,
-          })
-        )
-      }, 1000) */
       ws.on("close", () => {
         logTrace("Client disconnected")
       })
@@ -60,6 +54,6 @@ exports.websocketServer = (port) => {
       })
     })
   } catch (error) {
-    logError(error)
+    logErrorwithStack(error)
   }
 }
