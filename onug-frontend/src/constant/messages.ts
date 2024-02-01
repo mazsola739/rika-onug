@@ -28,7 +28,7 @@ export const interaction_exposer = '' //? INFO: Exposer - May flip 0-3 center ca
 export const interaction_gremlin = '' //? INFO: Gremlin - Swap any two player's (even himself) cards or marks (not both)
 export const interaction_groobzerb = '' //? INFO: Groob - Wakes with other aliens. Wakes after to see Zerb. If Zerb is a player at vote, only wins if Zerb dies
 export const interaction_insomniac =
-  "Insomniac - Looks at her own card, but does not gain its power, just the team alliance. Can't if it has a Shield on it" //INSOMNIAC, SELF_AWARNESS_GIRL
+  "Insomniac - Looks at her own card, but does not gain its power, just the team alliance. Can't if it has a Shield on it" //INSOMNIAC, SELF_AWARENESS_GIRL
 export const interaction_instigator = '' //? INFO: Instigator - Give any player (including herself) a Mark of the Traitor; they only win if someone on their team dies
 export const interaction_leader = '' //? INFO: Leader - Aliens must stick out thumb for him to see. if all Aliens vote the Leader, they win, even if an Alien is killed. If Groob and Zerb are in play, he is on his own team wins if they survive
 export const interaction_marksman = '' //? INFO: Marksman - Looks at one other player's card and a different player's mark

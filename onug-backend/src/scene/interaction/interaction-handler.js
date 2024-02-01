@@ -1,21 +1,8 @@
 const { logError } = require("../../log")
-const {
-  containsAnyIds,
-  containsAllIds,
-  hasRole,
-} = require("../narration/utils")
-const {
-  doppelgangerInstantActionsIds,
-  vampireIds,
-  alienIds,
-  groobAndZerbIds,
-  superVillainsIds,
-  werewolvesIds,
-  hasMarkIds,
-  seerIds,
-  masonIds,
-} = require("./constants")
+const { containsAnyIds, containsAllIds, hasRole } = require("../narration/utils")
+const { doppelgangerInstantActionsIds, vampireIds, alienIds, groobAndZerbIds, superVillainsIds, werewolvesIds, hasMarkIds, seerIds, masonIds } = require("./constants")
 const { roles } = require("./roles")
+const { doppelganger_instant_action } = require("./roles/doppelgangerinstantaction")
 
 //TODO action_history
 exports.interactionHandler = gameState => {
@@ -126,7 +113,7 @@ exports.interactionHandler = gameState => {
       break
 
     case "DOPPELGÄNGER_INSTANT_ACTION": // (Scene Number: 7)
-      if (conditions.hasDoppelganger && conditions.hasInstantAction) return roles.doppelganger_instant_action(newGameState)
+      if (conditions.hasDoppelganger && conditions.hasInstantAction) return doppelganger_instant_action(newGameState)
       break 
 
     /*  D U S K  */ /*

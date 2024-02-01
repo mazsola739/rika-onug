@@ -15,6 +15,6 @@ exports.checkGameStateByRoomId = async (req, res) => {
             gameStates,
         })
     } catch (error) {
-        logErrorwithStack(error)
+        logErrorWithStack(error)
     }
 }

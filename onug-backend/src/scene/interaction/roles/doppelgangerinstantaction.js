@@ -1,4 +1,5 @@
-const { roles } = require("./index")
+
+const { roles } = require(".")
 const { INTERACTION } = require("../../../constant/ws")
 const { logInfo } = require("../../../log")
 const { doppelgangerInstantActionsIds, instantRoleIds } = require("../constants")

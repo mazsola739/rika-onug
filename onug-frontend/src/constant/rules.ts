@@ -87,7 +87,7 @@ export const rules_role: Record<string, string> = {
   rules_oracle: 'Answer the app.',
   rules_pi:
     "View up to two cards, if you see a card that isn't a villager, stop viewing and you are now that role.",
-  rules_pickpocketing:
+  rules_pickpocket:
     'Exchange your mark with the mark from another player and view your new mark.',
   rules_priest: 'Give yourself and one other player a mark of clarity.',
   rules_prince: 'You cannot be killed.',
@@ -162,7 +162,7 @@ export const rules_mark: Record<string, string> = {
 
 export const rules_artifact: Record<string, string> = {
   rules_shield:
-    'Shiled given by Sentinel. A card with a Shield Token on it cannot be looked at or moved.',
+    'Shield given by Sentinel. A card with a Shield Token on it cannot be looked at or moved.',
   rules_werewolf:
     'The Claw of the Werewolf makes the player who has it a Werewolf.',
   rules_villager:

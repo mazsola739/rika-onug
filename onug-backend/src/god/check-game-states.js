@@ -1,4 +1,4 @@
-const {logTrace, logErrorwithStack} = require("../log")
+const {logTrace, logErrorWithStack} = require("../log")
 const {repository} = require("../repository")
 const {readAllGameStates} = repository
 
@@ -15,6 +15,6 @@ exports.checkGameStates = async (req, res) => {
     })
   } catch
     (error) {
-    logErrorwithStack(error)
+    logErrorWithStack(error)
   }
 }

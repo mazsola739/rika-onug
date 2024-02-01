@@ -1,4 +1,4 @@
-const {logTrace, logErrorwithStack} = require("../log")
+const {logTrace, logErrorWithStack} = require("../log")
 
 exports.metaListOnugEnv = async (req, res) => {
   try {
@@ -12,6 +12,6 @@ exports.metaListOnugEnv = async (req, res) => {
 
     return res.send(onugEnvs)
   } catch (error) {
-    logErrorwithStack(error)
+    logErrorWithStack(error)
   }
 }

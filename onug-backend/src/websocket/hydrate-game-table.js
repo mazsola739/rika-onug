@@ -1,5 +1,5 @@
 const { HYDRATE_GAME_TABLE, REDIRECT } = require("../constant/ws")
-const { logTrace, logErrorwithStack} = require("../log")
+const { logTrace, logErrorWithStack} = require("../log")
 const { repository } = require('../repository')
 const { isGameTableClosed, getBoard } = require("../utils")
 const { readGameState } = repository
@@ -24,6 +24,6 @@ exports.hydrateGameTable = async (ws, message) => {
       })
     )
   } catch (error) { 
-    logErrorwithStack(error)
+    logErrorWithStack(error)
   }
 }

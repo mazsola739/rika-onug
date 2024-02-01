@@ -13,6 +13,6 @@ exports.deleteGameStateByRoomId = async (req, res) => {
 
     return res.send(response)
   } catch (error) {
-    logErrorwithStack(error)
+    logErrorWithStack(error)
   }
 }

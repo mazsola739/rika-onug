@@ -1,4 +1,4 @@
-const {logTrace, logErrorwithStack} = require("../log")
+const {logTrace, logErrorWithStack} = require("../log")
 const {readdir, unlink} = require("fs/promises")
 
 exports.metaDeleteAllOldLogFiles = async (req, res) => {
@@ -18,6 +18,6 @@ exports.metaDeleteAllOldLogFiles = async (req, res) => {
     return res.send({message: "done", logFiles})
 
   } catch (error) {
-    logErrorwithStack(error)
+    logErrorWithStack(error)
   }
 }

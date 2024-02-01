@@ -1,4 +1,4 @@
-const {logTrace, logErrorwithStack} = require("../log")
+const {logTrace, logErrorWithStack} = require("../log")
 const {repository} = require("../repository")
 const {initWebSocketConnections} = require("../websocket/connections")
 const {deleteAllPlayers} = repository
@@ -14,6 +14,6 @@ exports.deleteAllPlayers = async (req, res) => {
 
     return res.send(response)
   } catch (error) {
-    logErrorwithStack(error)
+    logErrorWithStack(error)
   }
 }

@@ -71,7 +71,7 @@ exports.roles = {
   oracle, oracle_response,
   copycat, copycat_response,
   mirrorman, mirrorman_response,
-  doppelganger, doppelganger_response, doppelganger_instant_action,
+  doppelganger, doppelganger_response, 
   /*  D U S K */
   vampires, vampires_response,
   thecount, doppelganger_thecount, thecount_response,

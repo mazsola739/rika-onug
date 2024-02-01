@@ -324,7 +324,7 @@ export const cards: CardType[] = [
     team: team.village,
     wake_up_time: wake.night,
     card_name: 'onuv_pickpocket',
-    rules: rules_role.rules_pickpocketing,
+    rules: rules_role.rules_pickpocket,
   },
   {
     id: 37,

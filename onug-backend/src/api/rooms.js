@@ -1,5 +1,5 @@
 const roomsData = require("../data/rooms.json")
-const {logTrace, logErrorwithStack} = require("../log")
+const {logTrace, logErrorWithStack} = require("../log")
 
 exports.rooms = (req, res) => {
   try {
@@ -9,7 +9,7 @@ exports.rooms = (req, res) => {
       data: roomsData,
     })
   } catch (error) {
-    logErrorwithStack(error)
+    logErrorWithStack(error)
     return res.send({
       message: "Failed to fetch rooms",
     })

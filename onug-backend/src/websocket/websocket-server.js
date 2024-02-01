@@ -1,5 +1,5 @@
 const WebSocket = require("ws")
-const {logTrace, logError, logErrorwithStack} = require("../log")
+const {logTrace, logError, logErrorWithStack} = require("../log")
 const {
   UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_GAME_TABLE, ARRIVE_ROOM, START_GAME,
   DEAL, ARRIVE_GAME_PLAY, STOP_GAME, RELOAD, INTERACTION
@@ -54,6 +54,6 @@ exports.websocketServer = (port) => {
       })
     })
   } catch (error) {
-    logErrorwithStack(error)
+    logErrorWithStack(error)
   }
 }

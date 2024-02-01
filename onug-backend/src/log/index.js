@@ -34,7 +34,7 @@ const writeToLogFile = async (message) => {
     })
 }
 
-const logErrorwithStack = error => writeToLogFile(`${error}. ${error.stack}`, '[ERROR]') && console.error(`${logTimestamp()}: [ERROR] ${error} ${error.stack}`)
+const logErrorWithStack = error => writeToLogFile(`[ERROR] ${error}. ${error.stack}`) && console.error(`${logTimestamp()}: [ERROR] ${error} ${error.stack}`)
 const logError = (message, items = '') => writeToLogFile(`[ERROR] ${message} ${items && JSON.stringify(items, null, 2)}`)  && console.error(`${logTimestamp()}: [ERROR] ${message} ${JSON.stringify(items, null, 2)}`)
 const logWarn  = (message, items = '') => writeToLogFile(`[WARN]  ${message} ${items && JSON.stringify(items, null, 2)}`)  && isLogLevelEnabled(LOG_LEVELS.WARN)  && console.warn(`${logTimestamp()}: [WARN] ${message} ${items && JSON.stringify(items, null, 2)}`)
 const logInfo  = (message, items = '') => writeToLogFile(`[INFO]  ${message} ${items && JSON.stringify(items, null, 2)}`)  && isLogLevelEnabled(LOG_LEVELS.INFO)  && console.info(`${logTimestamp()}: [INFO] ${message} ${items && JSON.stringify(items, null, 2)}`)
@@ -50,5 +50,5 @@ module.exports = {
     logInfo,
     logDebug,
     logTrace,
-    logErrorwithStack,
+    logErrorWithStack,
 }

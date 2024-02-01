@@ -24,7 +24,7 @@ export const expansions: ExpansionsType = {
   onud: 'Daybreak',
   onuv: 'Vampire',
   onua: 'Alien',
-  onus: 'Super Villians',
+  onus: 'Super Villains',
   onub: 'Bonus Roles',
 }
 

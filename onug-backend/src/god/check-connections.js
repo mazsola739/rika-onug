@@ -1,4 +1,4 @@
-const {logTrace, logErrorwithStack} = require("../log")
+const {logTrace, logErrorWithStack} = require("../log")
 const {websocketServerConnectionsPerRoom} = require("../websocket/connections")
 
 exports.checkConnections = async (req, res) => {
@@ -14,6 +14,6 @@ exports.checkConnections = async (req, res) => {
       connectionsPerRoom,
     })
   } catch (error) {
-    logErrorwithStack(error)
+    logErrorWithStack(error)
   }
 }
