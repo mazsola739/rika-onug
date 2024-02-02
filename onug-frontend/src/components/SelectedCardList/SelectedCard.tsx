@@ -1,9 +1,9 @@
-import { roomStore, selectedDeckStore, wsStore } from 'store'
-import { StyledSelectedCard } from './SelectedCard.styles'
-import { SelectedCardProps } from './SelectedCard.types'
+import { UPDATE_ROOM } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
-import { UPDATE_ROOM } from 'constant'
+import { selectedDeckStore, wsStore, roomStore } from 'store'
+import { SelectedCardProps } from './SelectedCardList.types'
+import { CardImage } from 'components'
 
 export const SelectedCard: React.FC<SelectedCardProps> = observer(
   ({ card }) => {
@@ -62,11 +62,11 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
     ])
 
     return (
-      <StyledSelectedCard
-        src={`/assets/cards/${card.card_name}.png`}
-        alt={card.display_name}
+      <CardImage
+        image={card.card_name}
         key={card.id}
         onClick={handleDeselect}
+        size={45}
       />
     )
   }

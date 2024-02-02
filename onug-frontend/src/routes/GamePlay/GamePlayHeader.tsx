@@ -1,12 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { StyledGamePlayHeader } from './GamePlay.styles'
+import { GamePlayHeaderProps } from './GamePlay.types'
 
-export const GamePlayHeader: React.FC = observer(() => {
-  return (
-    <StyledGamePlayHeader>
-      {/*       <GamePlayCard image={everyone[currentScenarioIndex].image} />
-
-      <GamePlayText>{everyone[currentScenarioIndex].text}</GamePlayText> */}
-    </StyledGamePlayHeader>
-  )
-})
+export const GamePlayHeader: React.FC<GamePlayHeaderProps> = observer(
+  ({ children }) => <StyledGamePlayHeader>{children}</StyledGamePlayHeader>
+)

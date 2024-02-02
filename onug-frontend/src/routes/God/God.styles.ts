@@ -6,8 +6,6 @@ const textColor = 'white'
 const buttonTextColor = 'black'
 
 export const StyledGod = styled.div`
-  background-color: transparent;
-  position: relative;
   margin: auto;
   display: flex;
   flex-direction: row;

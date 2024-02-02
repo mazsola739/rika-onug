@@ -1,17 +1,18 @@
 import styled from '@emotion/styled'
 
-export const StyledCardList = styled.section`
-  background-color: transparent;
-  padding: 10px;
+export const StyledCardList = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 `
 
 export const CardListTitle = styled.p`
-  color: #bfefff;
+  color: white;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 1px;
-  margin: 0px 0px 10px;
+  margin: 10px 0 10px 0;
   text-align: center;
   text-transform: uppercase;
 `

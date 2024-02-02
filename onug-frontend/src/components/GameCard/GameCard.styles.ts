@@ -4,6 +4,7 @@ import { StyledGameCardProps } from './GameCard.types'
 export const StyledGameCard = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 5px;
 `
 
 export const CardBack = styled.div<StyledGameCardProps>`

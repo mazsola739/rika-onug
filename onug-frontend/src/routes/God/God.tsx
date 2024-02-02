@@ -17,6 +17,7 @@ import {
   StyledGod,
   WSContainer,
 } from './God.styles'
+import { Icon } from 'components'
 
 const GAMESTATES = 'GameStates'
 const LABEL_ROOM_ID = 'room_id:'
@@ -121,12 +122,7 @@ export const God: React.FC = observer(() => {
       <LeftSide>
         <GameStatesContainer>
           <GodTitle>
-            <img
-              src={'/assets/icons/shield.svg'}
-              alt="icon"
-              style={{ height: '25px' }}
-            />{' '}
-            {GAMESTATES}
+            <Icon iconName="shield" size={25} fill="red" /> {GAMESTATES}
           </GodTitle>
           <FormContainer>
             <InputContainer>

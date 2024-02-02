@@ -14,7 +14,7 @@ exports.determineTotalPlayers = (totalCharacters, selectedCards) => {
   return Math.max(totalPlayers, 0)
 }
 
-exports.getBoard = gameState => {
+exports.getBoard = (gameState) => {
   const playersPrivate = Object.values(gameState.players)
 
   const playersPublic = playersPrivate.map((player) => {
@@ -24,12 +24,32 @@ exports.getBoard = gameState => {
       ready: player.ready,
     }
   })
+  
+  const cardsOnBoard = Object.keys(gameState?.card_positions).map(
+    (position) => {
+      const card = gameState.card_positions[position]
+      if (card.id > 0) {
+        const mappedCard = { id: card.id }    //! todo fix don't tell real card id!!!!!
+        const flippedCard = gameState.flipped.find(
+          (flippedCard) => flippedCard[position]
+        )
+        if (flippedCard) {
+          mappedCard.id = flippedCard[position]
+        }
+        if (gameState.artifact.includes(position)) {
+          mappedCard.artifact = true
+        }
+        if (gameState.shield.includes(position)) {
+          mappedCard.shield = true
+        }
 
-  const newWolfCard = gameState.newWolfCard
-  const newVillainCard = gameState.newVillainCard
+        return { [position]: mappedCard }
+      }
+    }
+  )
 
   return {
     players: playersPublic,
+    boardCards: cardsOnBoard,
   }
 }
-

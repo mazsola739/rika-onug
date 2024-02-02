@@ -1,34 +1,30 @@
 import styled from '@emotion/styled'
 
-export const Main = styled.main`
-  background-color: transparent;
+export const StyledRoom = styled.div`
+  min-width: 100%;
   bottom: 90px;
   display: flex;
   flex-direction: column;
-  left: 130px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  position: absolute;
-  right: 0px;
-  top: 120px;
 `
 
 export const Hello = styled.div`
-  color: #bfefff;
+  color: white;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 18px;
-  left: 0;
-  padding: 10px;
-  position: absolute;
-  width: 120px;
+  margin: 10px 0 10px 10px;
+  width: 140px;
+  height: 92px;
+  display: flex;
+  text-align: center;
+  align-items: center;
 `
 
 export const StyledRuleInfo = styled.div`
   align-items: center;
-  background: transparent;
   display: flex;
   flex-direction: row;
-  left: 140px;
+  left: 150px;
+  top: 0px;
   padding-right: 10px;
   position: absolute;
 `
@@ -39,10 +35,17 @@ export const RuleImage = styled.img`
 `
 
 export const RuleInfoDescription = styled.p`
-  color: #bfefff;
+  color: white;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;
   margin: 0;
   padding: 5px;
   text-align: left;
+`
+
+export const RoomCardList = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 10px;
 `

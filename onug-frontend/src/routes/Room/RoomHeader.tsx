@@ -47,7 +47,7 @@ export const RoomHeader: React.FC = observer(() => {
   return (
     <Header>
       <Hello>
-        {player_name}, welcome in {room}! ^.^
+        {player_name}, welcome in {room}! 🦄
       </Hello>
       <RuleInfo />
     </Header>

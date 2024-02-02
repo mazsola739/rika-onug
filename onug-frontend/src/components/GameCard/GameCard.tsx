@@ -17,8 +17,8 @@ export const GameCard: React.FC<GameCardProps> = observer(
       <StyledGameCard>
         <CardBack backgroundImage={'/assets/backgrounds/card_back.png'} />
         <Tokens>
-          {!isCenter && hasMarks && <Token tokenName={'mark_back'} size={35} />}
           {!isCenter && <Token tokenName={playerTokenName} size={35} />}
+          {!isCenter && hasMarks && <Token tokenName={'mark_back'} size={35} />}
         </Tokens>
       </StyledGameCard>
     )

@@ -1,4 +1,4 @@
-import { CardList, Filter } from 'components'
+import { CardList, Filter, Main } from 'components'
 import {
   ARRIVE_ROOM,
   HYDRATE_ROOM,
@@ -10,7 +10,7 @@ import {
 import { observer } from 'mobx-react-lite'
 import { useEffect, useMemo, useState } from 'react'
 import { deckStore, roomStore, selectedDeckStore, wsStore } from 'store'
-import { Main } from './Room.styles'
+import { RoomCardList, StyledRoom } from './Room.styles'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
 import { useNavigate } from 'react-router-dom'
@@ -77,19 +77,21 @@ export const Room: React.FC = observer(() => {
   )
 
   return (
-    <>
+    <StyledRoom>
       <RoomHeader />
-      <Filter />
       <Main>
-        {orderedTeams.map((teamName) => (
-          <CardList
-            key={teamName}
-            team={teamName}
-            cards={roomStore.getFilteredCardsForTeam(teamName)}
-          />
-        ))}
+        <Filter />
+        <RoomCardList>
+          {orderedTeams.map((teamName) => (
+            <CardList
+              key={teamName}
+              team={teamName}
+              cards={roomStore.getFilteredCardsForTeam(teamName)}
+            />
+          ))}
+        </RoomCardList>
       </Main>
       <RoomFooter />
-    </>
+    </StyledRoom>
   )
 })

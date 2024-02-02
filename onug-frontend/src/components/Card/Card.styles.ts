@@ -14,22 +14,24 @@ export const StyledCard = styled.div<StyledCardProps>`
   overflow: hidden;
   position: relative;
   width: 90px;
+  transition: 2s;
 `
 
 export const CardImage = styled.img<{ isSelected?: boolean }>`
   opacity: ${({ isSelected }) => (isSelected ? '1' : '0.6')};
+  transition: 2s;
   width: 90px;
   z-index: 1;
 `
 
 export const CardName = styled.span<StyledCardProps>`
-  background-color: transparent;
-  color: #bfefff;
+  color: ${({ isSelected }) =>
+    isSelected ? 'rgba(255,255,255, 1)' : 'rgba(255,255,255, 0.4)'};
   font-family: 'Josefin Sans', sans-serif;
   font-size: 10px;
   font-weight: 500;
   left: 50%;
-  opacity: ${({ isSelected }) => (isSelected ? '1' : '0.4')};
+  transition: 2s;
   padding: 0 5px;
   position: absolute;
   text-align: center;

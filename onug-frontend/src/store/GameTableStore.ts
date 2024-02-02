@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { CardType, PlayersType } from 'types'
+import { BoardCardType, CardType, PlayersType } from 'types'
 import { selectedDeckStore } from 'store'
 import { hasMarkIds } from 'constant'
 import { utils } from 'utils'
@@ -8,11 +8,13 @@ const { areAnyCardSelectedById, checkCardPresence } = utils
 
 export class GameTableStore {
   players: PlayersType[]
+  boardCards: BoardCardType[]
 
   constructor() {
     makeAutoObservable(this)
 
     this.setPlayers = this.setPlayers.bind(this)
+    this.setBoardCards = this.setBoardCards.bind(this)
   }
 
   get totalPlayers(): number {
@@ -49,6 +51,10 @@ export class GameTableStore {
 
   setPlayers(players: PlayersType[]): void {
     this.players = players
+  }
+
+  setBoardCards(boardCards: BoardCardType[]): void {
+    this.boardCards = boardCards
   }
 }
 

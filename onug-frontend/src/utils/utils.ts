@@ -21,9 +21,13 @@ const isCardSelectedById = (
 const checkCardPresence = (cards: CardType[], cardId: number): boolean =>
   cards.some((card) => card.id === cardId)
 
+const capitalize = (string: string) =>
+  string && string[0].toUpperCase() + string.slice(1).toLowerCase()
+
 export const utils = {
   areAnyCardSelectedById,
   findCardById,
   isCardSelectedById,
   checkCardPresence,
+  capitalize,
 }

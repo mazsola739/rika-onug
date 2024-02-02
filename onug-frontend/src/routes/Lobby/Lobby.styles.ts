@@ -1,12 +1,14 @@
 import styled from '@emotion/styled'
-import { PropsNoName, StyledLobbyProps } from './Lobby.types'
+import { StyledLobbyProps } from './Lobby.types'
 
 export const StyledLobby = styled.div`
-  background-color: transparent;
   height: 100%;
   margin: auto;
   position: relative;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 export const StyledRoomButton = styled.button<StyledLobbyProps>`
@@ -22,6 +24,7 @@ export const StyledRoomButton = styled.button<StyledLobbyProps>`
   position: absolute;
   text-transform: uppercase;
   top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%)
     rotate(${({ index }) => index * (360 / 12)}deg) translate(250px)
     rotate(-${({ index }) => index * (360 / 12)}deg);
@@ -52,33 +55,3 @@ const generateRainbowColor = (index: number) => {
   const hue = hues[index % hues.length]
   return `hsl(${hue}, 100%, ${lightness}%)`
 }
-
-export const Slaves = styled.div`
-  align-items: center;
-  border-radius: 50%;
-  display: flex;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 14px;
-  font-weight: 900;
-  height: 400px;
-  justify-content: space-between;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  text-transform: uppercase;
-  width: 400px;
-`
-
-export const LowPhas = styled.div<PropsNoName>`
-  align-items: center;
-  background-color: ${({ color }) => color};
-  border-radius: 50%;
-  color: black;
-  display: flex;
-  font-size: 12px;
-  font-weight: bold;
-  height: 120px;
-  justify-content: center;
-  width: 120px;
-`

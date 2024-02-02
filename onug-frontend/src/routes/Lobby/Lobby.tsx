@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
-import { Slaves, StyledLobby, LowPhas, StyledRoomButton } from './Lobby.styles'
+import { StyledLobby, StyledRoomButton } from './Lobby.styles'
 import { lobbyStore, wsStore } from 'store'
 import { StyledLobbyProps } from './Lobby.types'
 import { HYDRATE_LOBBY, JOIN_ROOM, REDIRECT, STAGES } from 'constant'
@@ -89,29 +89,6 @@ export const Lobby: React.FC = observer(() => {
           buttonText={room.room_name}
         />
       ))}
-      <Slaves>
-        <LowPhas color="white" style={{ transform: 'translate(125%, -100%)' }}>
-          Jeeves
-        </LowPhas>
-
-        <LowPhas
-          color="#A6A39D"
-          style={{
-            transform: 'translate(-75%, 50%)',
-          }}
-        >
-          Alice
-        </LowPhas>
-
-        <LowPhas
-          color="#6F777E"
-          style={{
-            transform: 'translate(-35%, 45%)',
-          }}
-        >
-          Alfred
-        </LowPhas>
-      </Slaves>
     </StyledLobby>
   )
 })

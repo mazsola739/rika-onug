@@ -18,25 +18,21 @@ import {
 } from 'store'
 import { utils } from 'utils'
 import {
-  CenterCardContainer,
-  Shield,
+  GameArea,
+  OwnCardPlace,
+  Ready,
   StyledGameTable,
 } from './GameTable.styles'
 import { gameTableUtils } from './GameTable.utils'
 import { GameTableFooter } from './GameTableFooter'
 import { GameTableHeader } from './GameTableHeader'
 import { useNavigate } from 'react-router-dom'
+import { DealtCards, Main, OwnCard, PlayerList } from 'components'
 
 const { findCardById } = utils
-const {
-  renderOwnCard,
-  renderPlayers,
-  renderPlayerCards,
-  renderCenterCard,
-  renderCenterExtraCard,
-  renderMarks,
-  renderArtifacts,
-} = gameTableUtils
+const { renderMarks, renderArtifacts } = gameTableUtils
+
+//! TODO boardCards!
 
 export const GameTable: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
@@ -58,7 +54,7 @@ export const GameTable: React.FC = observer(() => {
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
-      sendJsonMessage?.({
+      sendJsonMessage({
         type: ARRIVE_GAME_TABLE,
         stage: STAGES.GAME_TABLE,
         token,
@@ -79,42 +75,40 @@ export const GameTable: React.FC = observer(() => {
         ),
       })
       setPlayers(lastJsonMessage.board.players)
+      //TODO setBoardCards here?
       roomStore.resetDetailedCardInfo()
       selectedDeckStore.addCardIdsToArray()
-      console.log(lastJsonMessage)
+      console.log(JSON.stringify(lastJsonMessage.board.players))
     }
 
     if (lastJsonMessage?.type === HYDRATE_READY) {
       setPlayers(lastJsonMessage.board.players)
-      console.log(lastJsonMessage)
+      console.log(JSON.stringify(lastJsonMessage))
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [lastJsonMessage, setPlayer, deckStore])
+  }, [lastJsonMessage, setPlayer, deckStore, navigate])
 
   return (
-    <>
+    <StyledGameTable>
       <GameTableHeader />
-      <StyledGameTable>
-        {player && renderOwnCard(player)}
-        {hasCurator && renderArtifacts(artifacts)}
-        <div>
-          {players && renderPlayerCards(players)}
-          <CenterCardContainer>
-            {hasSentinel && (
-              <Shield src={`/assets/tokens/shield.png`} alt="shield" />
-            )}
-            {hasAlphaWolf && renderCenterExtraCard('Werewolf')}
-            {renderCenterCard('Center')}
-            {hasTemptress && renderCenterExtraCard('Villain')}
-          </CenterCardContainer>
-        </div>
-        {hasMarks && renderMarks(selectedMarks)}
-        {players && renderPlayers(players)}
-      </StyledGameTable>
+      <Main>
+        <OwnCardPlace>{player && <OwnCard player={player} />}</OwnCardPlace>
+        <GameArea>
+          {hasCurator && renderArtifacts(artifacts)}
+          <DealtCards
+            players={players}
+            hasSentinel={hasSentinel}
+            hasAlphaWolf={hasAlphaWolf}
+            hasTemptress={hasTemptress}
+          />
+          {hasMarks && renderMarks(selectedMarks)}
+        </GameArea>
+        <Ready>{players && <PlayerList players={players} />}</Ready>
+      </Main>
       <GameTableFooter />
-    </>
+    </StyledGameTable>
   )
 })

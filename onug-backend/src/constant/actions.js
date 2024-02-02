@@ -442,7 +442,7 @@ exports.rascalAnyTwoKeys = [
 
 exports.renfield = "renfield_kickoff_text" //doppelganger! show vampires, show mark of vampire, swap own mark with mark of bat - update known and actual player info
 
-exports.revealer = "revealer_kickoff_text" //doppelganger! select any other player card, flip, flip it back if its non-villager (from this moment dont hide from players whos doin thier action) - update board card
+exports.revealer = "revealer_kickoff_text" //doppelganger! select any other player card, flip, flip it back if its non-villager (from this moment don't hide from players who's doing their action) - update board card
 
 exports.ripple = "ripple_intro_text"
 exports.ripple_random = [

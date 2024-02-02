@@ -7,4 +7,5 @@ export const StyledSelectedCardList = styled.div`
   padding: 5px;
   white-space: nowrap;
   gap: 4px;
+  justify-content: center;
 `

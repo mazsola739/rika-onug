@@ -1,7 +1,6 @@
 import { observer } from 'mobx-react-lite'
-import { StyledGamePlay } from './GamePlay.styles'
 import { gamePlayStore, wsStore } from 'store'
-import { Button, Footer, FooterButtons, Header } from 'components'
+import { Button, Footer, FooterButtons, Header, Main } from 'components'
 import {
   ARRIVE_GAME_PLAY,
   HYDRATE_GAME_PLAY,
@@ -15,6 +14,7 @@ import {
 import { useCallback, useEffect, useState } from 'react'
 import { GamePlayHeader } from './GamePlayHeader'
 import { useNavigate } from 'react-router-dom'
+import { StyledGamePlay } from './GamePlay.styles'
 
 export const GamePlay: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
@@ -80,11 +80,11 @@ export const GamePlay: React.FC = observer(() => {
   }, [sendJsonMessage])
 
   return (
-    <>
+    <StyledGamePlay>
       <Header>
-        <GamePlayHeader />
+        <GamePlayHeader>header</GamePlayHeader>
       </Header>
-      <StyledGamePlay>here comes the table</StyledGamePlay>
+      <Main>here comes the table</Main>
       <Footer>
         <FooterButtons>
           <Button
@@ -104,6 +104,6 @@ export const GamePlay: React.FC = observer(() => {
           />
         </FooterButtons>
       </Footer>
-    </>
+    </StyledGamePlay>
   )
 })

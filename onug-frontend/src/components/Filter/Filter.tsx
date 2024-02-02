@@ -3,6 +3,7 @@ import { useCallback } from 'react'
 import { roomStore } from 'store'
 import { expansions } from 'constant'
 import { FilterButtons } from './FilterButtons'
+import { StyledFilter } from './Filter.styles'
 
 export const Filter: React.FC = observer(() => {
   const { selectedExpansions, toggleExpansionSelection } = roomStore
@@ -15,10 +16,12 @@ export const Filter: React.FC = observer(() => {
   )
 
   return (
-    <FilterButtons
-      expansionNames={expansionNames}
-      selectedExpansions={selectedExpansions}
-      onToggleExpansion={handleToggleExpansion}
-    />
+    <StyledFilter>
+      <FilterButtons
+        expansionNames={expansionNames}
+        selectedExpansions={selectedExpansions}
+        onToggleExpansion={handleToggleExpansion}
+      />
+    </StyledFilter>
   )
 })

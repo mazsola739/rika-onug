@@ -12,7 +12,7 @@ export type WsJsonMessage = {
   player_name?: string
   player_card_id?: number
   player_number?: number
-  board?: { players: PlayersType[] }
+  board?: { players: PlayersType[]; boardCards: BoardCardType[] }
   selected_cards?: number[]
   success?: boolean
 }
@@ -28,9 +28,12 @@ export type PlayersType = {
   player_name: string
   player_number: number
   ready: boolean
-  card: {
-    id: number
-  }
+}
+
+export type BoardCardType = {
+  id: number
+  artifact: boolean
+  shield: boolean
 }
 
 export type PlayerType = {

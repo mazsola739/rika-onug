@@ -50,7 +50,7 @@ export const roles: Record<string, string> = {
   role_mysticwolf: 'MYSTIC WOLF',
   role_nostradamus: 'NOSTRADAMUS',
   role_oracle: 'ORACLE',
-  role_paranormalinvestigator: 'P.I.',
+  role_paranormalinvestigator: 'PARANORMAL INVESTIGATOR',
   role_pickpocket: 'PICKPOCKET',
   role_priest: 'PRIEST',
   role_prince: 'PRINCE',
