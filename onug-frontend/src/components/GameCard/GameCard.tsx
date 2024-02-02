@@ -1,33 +1,24 @@
 import React from 'react'
 import { observer } from 'mobx-react-lite'
-import { CardBack, StyledGameCard, TokenImage, Tokens } from './GameCard.styles'
+import { CardBack, StyledGameCard, Tokens } from './GameCard.styles'
 import { GameCardProps } from './GameCard.types'
 import { gameTableStore } from 'store'
+import { Token } from 'components'
 
 export const GameCard: React.FC<GameCardProps> = observer(
   ({ player_number, isCenter, ready }) => {
     const { hasMarks } = gameTableStore
 
+    const playerTokenName = ready
+      ? `selected_player_${player_number}`
+      : `player_${player_number}`
+
     return (
       <StyledGameCard>
-        <CardBack backgroundImage={'/assets/cards/card_background.png'} />
+        <CardBack backgroundImage={'/assets/backgrounds/card_back.png'} />
         <Tokens>
-          {!isCenter && hasMarks && (
-            <TokenImage
-              src={`/assets/tokens/mark_back.png`}
-              alt={`player_${player_number}`}
-            />
-          )}
-          {!isCenter && (
-            <TokenImage
-              src={
-                ready
-                  ? `/assets/players/selected_player_${player_number}.png`
-                  : `/assets/players/player_${player_number}.png`
-              }
-              alt={`player_${player_number}`}
-            />
-          )}
+          {!isCenter && hasMarks && <Token tokenName={'mark_back'} size={35} />}
+          {!isCenter && <Token tokenName={playerTokenName} size={35} />}
         </Tokens>
       </StyledGameCard>
     )

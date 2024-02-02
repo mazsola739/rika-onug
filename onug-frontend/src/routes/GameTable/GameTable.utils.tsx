@@ -1,4 +1,4 @@
-import { GameCard } from 'components'
+import { GameCard, Token } from 'components'
 import {
   CardContainer,
   PlayersCards,
@@ -7,7 +7,6 @@ import {
   Marks,
   Players,
   PlayerReadyName,
-  PlayerReadyNumber,
   Player,
   OwnKnownCardContainer,
   OwnKnownCardImage,
@@ -31,22 +30,19 @@ const renderOwnCard = (player: PlayerType) => (
 
 const renderPlayers = (players: PlayersType[]) => (
   <Players>
-    {players.map(({ player_name, ready, player_number }) => (
-      <Player key={player_number}>
-        <PlayerReadyNumber
-          ready={ready}
-          src={
-            ready
-              ? `/assets/players/selected_player_${player_number}.png`
-              : `/assets/players/player_${player_number}.png`
-          }
-          alt={`player_${player_number}`}
-        />
-        <PlayerReadyName ready={ready}>
-          {player_name} is {ready ? 'ready' : 'not ready'}
-        </PlayerReadyName>
-      </Player>
-    ))}
+    {players.map(({ player_name, ready, player_number }) => {
+      const playerTokenName = ready
+        ? `selected_player_${player_number}`
+        : `player_${player_number}`
+      return (
+        <Player key={player_number}>
+          <Token tokenName={playerTokenName} size={25} ready={ready} />
+          <PlayerReadyName ready={ready}>
+            {player_name} is {ready ? 'ready' : 'not ready'}
+          </PlayerReadyName>
+        </Player>
+      )
+    })}
   </Players>
 )
 
@@ -88,14 +84,9 @@ const renderCenterExtraCard = (title: string) => (
 const renderMarks = (selectedMarks: MarkType[]) => (
   <Marks>
     {selectedMarks.map(
-      (mark) =>
+      (mark, index) =>
         mark.is_in_deck && (
-          <img
-            key={mark.id}
-            style={{ width: '60px', height: '60px' }}
-            src={`/assets/tokens/${mark.token_name}.png`}
-            alt={mark.token_name}
-          />
+          <Token key={index} tokenName={`${mark.token_name}`} size={60} />
         )
     )}
   </Marks>
@@ -104,14 +95,9 @@ const renderMarks = (selectedMarks: MarkType[]) => (
 const renderArtifacts = (artifacts: TokenType[]) => (
   <Marks>
     {artifacts.map(
-      (artifact, i) =>
+      (artifact, index) =>
         artifact.token_name !== 'shield' && (
-          <img
-            key={i}
-            style={{ width: '60px', height: '60px' }}
-            src={`/assets/tokens/${artifact.token_name}.png`}
-            alt={artifact.token_name}
-          />
+          <Token key={index} tokenName={`${artifact.token_name}`} size={60} />
         )
     )}
   </Marks>

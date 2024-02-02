@@ -1,7 +1,7 @@
 import { Header } from 'components'
 import { observer } from 'mobx-react-lite'
 import { Main } from './Voting.styles'
-import { VootingFooter } from './VootingFooter'
+import { VotingFooter } from './VotingFooter'
 import { votingUtils } from './Voting.utils'
 
 export const Voting: React.FC = observer(() => {
@@ -25,7 +25,7 @@ export const Voting: React.FC = observer(() => {
         {players && renderPlayers(players)}
         {players && renderPlayerCards(players)}
       </Main>
-      <VootingFooter />
+      <VotingFooter />
     </>
   )
 })

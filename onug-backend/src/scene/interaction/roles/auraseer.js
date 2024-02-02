@@ -8,7 +8,7 @@ exports.auraseer = gameState => {
   
 
 
-/*AURA SEER moved viewved Copycat, Doppelgänger, Rascal, Body Snatcher, Alpha Wolf, Mystic Wolf, Seer, Exposer, 
+/*AURA SEER moved viewed Copycat, Doppelgänger, Rascal, Body Snatcher, Alpha Wolf, Mystic Wolf, Seer, Exposer, 
 Mortician, Psychic, Apprentice Seer, Paranormal Investigator, Marksman, Robber, Witch, 
 Troublemaker, Village Idiot,  Cupid, Any Vampire, Count,  Pickpocket, Priest, Diseased,  
 Insomniac, Instigator, Assassin, Apprentice Assassin(If there is no Assassin) */

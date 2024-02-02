@@ -2,7 +2,7 @@ import { Footer, FooterButtons, Button } from 'components'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
 
-export const VootingFooter: React.FC = observer(() => {
+export const VotingFooter: React.FC = observer(() => {
   const handleStopGame = useCallback(() => {
     console.log('stop')
   }, [])
@@ -14,15 +14,11 @@ export const VootingFooter: React.FC = observer(() => {
   return (
     <Footer>
       <FooterButtons>
-        <Button
-          onClick={handleStopGame}
-          buttontext={'STOP'}
-          backgroundColor="red"
-        />
+        <Button onClick={handleStopGame} buttonText={'STOP'} variant="red" />
         <Button
           onClick={handleVoteNow}
-          buttontext={'VOTE NOW'}
-          backgroundColor="orange"
+          buttonText={'VOTE NOW'}
+          variant="orange"
         />
       </FooterButtons>
     </Footer>

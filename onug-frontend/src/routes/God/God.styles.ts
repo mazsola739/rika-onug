@@ -56,9 +56,10 @@ export const ResponseContainer = styled.div`
   padding: 20px;
 `
 
-export const GodTitle = styled.h2`
+export const GodTitle = styled.h4`
   color: ${textColor};
   margin-bottom: 10px;
+  margin: 5px;
 `
 
 export const FormContainer = styled.div`
@@ -81,6 +82,7 @@ export const Label = styled.label`
 export const Input = styled.input`
   border: 1px solid ${textColor};
   border-radius: 5px;
+  height: 25px;
 `
 
 export const ButtonsContainer = styled.div`
@@ -90,11 +92,14 @@ export const ButtonsContainer = styled.div`
 `
 
 export const Button = styled.button`
+  align-items: center;
   background-color: ${primaryColor};
   border: none;
   border-radius: 5px;
   color: ${buttonTextColor};
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 15px;
   padding: 2px;

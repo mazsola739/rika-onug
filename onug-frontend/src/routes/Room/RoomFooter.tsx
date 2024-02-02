@@ -15,7 +15,7 @@ export const RoomFooter: React.FC = observer(() => {
     ? `${buttons.deal_text} FOR ${totalPlayers}`
     : buttons.deal_text
 
-  // TODO these clickhandlers could be merged into one clickhandler which get one more information the type
+  // TODO these click handlers could be merged into one click handler which get one more information the type
   const handleResetGame = useCallback(() => {
     sendJsonMessage?.({
       type: RESET,
@@ -46,19 +46,19 @@ export const RoomFooter: React.FC = observer(() => {
       <FooterButtons>
         <Button
           onClick={handleResetGame}
-          buttontext={buttons.reset_game_label}
-          backgroundColor="#007bff"
+          buttonText={buttons.reset_game_label}
+          variant="blue"
         />
         <Button
           onClick={handleToGameTable}
           disabled={!selectedDeckStore.totalPlayers}
-          buttontext={buttonText}
-          backgroundColor="#28a745"
+          buttonText={buttonText}
+          variant="green"
         />
         <Button
           onClick={handleLeaveRoom}
-          buttontext="LEAVE ROOM"
-          backgroundColor="#dc3545"
+          buttonText="LEAVE ROOM"
+          variant="crimson"
         />
       </FooterButtons>
       <SelectedCardList />

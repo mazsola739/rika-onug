@@ -4,7 +4,7 @@ export const StyledFooterButtons = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 5px;
   justify-content: center;
   width: 100%;
 `

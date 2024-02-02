@@ -6,7 +6,7 @@ export const StyledGameTable = styled.main`
   display: flex;
   flex-direction: row;
   gap: 5px;
-  justify-content: center;
+  justify-content: space-between;
   overflow-x: hidden;
   overflow-y: auto;
   position: absolute;
@@ -26,8 +26,9 @@ export const OwnKnownCardContainer = styled.div`
   border-radius: 4px;
   padding: 10px;
   justify-content: flex-end;
-  max-height: 200px;
+  max-height: 220px;
   margin: 20px;
+  min-width: 140px;
 `
 
 export const OwnKnownCardText = styled.span`
@@ -58,12 +59,6 @@ export const Player = styled.div`
   color: #bfefff;
   flex-direction: row;
   gap: 5px;
-`
-
-export const PlayerReadyNumber = styled.img<ReadyType>`
-  height: 25px;
-  width: 25px;
-  opacity: ${({ ready }) => (ready ? 0.6 : 1)};
 `
 
 export const PlayerReadyName = styled.span<ReadyType>`
@@ -136,11 +131,6 @@ export const PlayerInfo = styled.div`
   width: 100px;
   padding: 10px;
   align-items: center;
-`
-
-export const PlayerAvatar = styled.img`
-  height: 50px;
-  width: 50px;
 `
 
 export const PlayerName = styled.span`

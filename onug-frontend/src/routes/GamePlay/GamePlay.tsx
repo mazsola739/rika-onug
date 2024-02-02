@@ -89,18 +89,18 @@ export const GamePlay: React.FC = observer(() => {
         <FooterButtons>
           <Button
             onClick={handlePauseGame}
-            buttontext={buttonText}
-            backgroundColor="#ff9800"
+            buttonText={buttonText}
+            variant="orange"
           />
           <Button
             onClick={handleStopGame}
-            buttontext={buttons.stop_button_label}
-            backgroundColor="#f44336"
+            buttonText={buttons.stop_button_label}
+            variant="red"
           />
           <Button
             onClick={handleInteraction}
-            buttontext={'Nyiiihaaaa'}
-            backgroundColor="#ff00ff"
+            buttonText={'Nyiiihaaaa'}
+            variant="magenta"
           />
         </FooterButtons>
       </Footer>

@@ -126,12 +126,7 @@ export const God: React.FC = observer(() => {
               alt="icon"
               style={{ height: '25px' }}
             />{' '}
-            {GAMESTATES}{' '}
-            <img
-              src={'/assets/icons/shield.svg'}
-              alt="icon"
-              style={{ height: '25px' }}
-            />
+            {GAMESTATES}
           </GodTitle>
           <FormContainer>
             <InputContainer>
@@ -141,12 +136,7 @@ export const God: React.FC = observer(() => {
                   alt="icon"
                   style={{ height: '25px' }}
                 />{' '}
-                {LABEL_ROOM_ID}{' '}
-                <img
-                  src={'/assets/icons/artifact.svg'}
-                  alt="icon"
-                  style={{ height: '25px' }}
-                />
+                {LABEL_ROOM_ID}
               </Label>
               <Input
                 type="text"
@@ -163,12 +153,7 @@ export const God: React.FC = observer(() => {
                   alt="icon"
                   style={{ height: '25px' }}
                 />{' '}
-                {LABEL_TOKEN}{' '}
-                <img
-                  src={'/assets/icons/mason.svg'}
-                  alt="icon"
-                  style={{ height: '25px' }}
-                />
+                {LABEL_TOKEN}
               </Label>
               <Input
                 type="text"
@@ -186,12 +171,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {CHECK_GAME_STATES}{' '}
-              <img
-                src={'/assets/icons/alien.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {CHECK_GAME_STATES}
             </Button>
             <Button onClick={checkGameStateByRoomId}>
               <img
@@ -199,12 +179,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {CHECK_GAME_STATE_BY_ROOM_ID}{' '}
-              <img
-                src={'/assets/icons/assassin.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {CHECK_GAME_STATE_BY_ROOM_ID}
             </Button>
             <Button onClick={deleteAllGameStates}>
               <img
@@ -212,12 +187,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {DELETE_ALL_GAME_STATES}{' '}
-              <img
-                src={'/assets/icons/mortician.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {DELETE_ALL_GAME_STATES}
             </Button>
             <Button onClick={deleteGameStateByRoomId}>
               <img
@@ -225,12 +195,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {DELETE_GAME_STATE_BY_ROOM_ID}{' '}
-              <img
-                src={'/assets/icons/dreamwolf.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {DELETE_GAME_STATE_BY_ROOM_ID}
             </Button>
           </ButtonsContainer>
         </GameStatesContainer>
@@ -242,12 +207,7 @@ export const God: React.FC = observer(() => {
               alt="icon"
               style={{ height: '25px' }}
             />{' '}
-            {WS}{' '}
-            <img
-              src={'/assets/icons/family.svg'}
-              alt="icon"
-              style={{ height: '25px' }}
-            />
+            {WS}
           </GodTitle>
           <ButtonsContainer>
             <Button onClick={checkConnections}>
@@ -256,12 +216,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {CHECK_CONNECTIONS}{' '}
-              <img
-                src={'/assets/icons/seer.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {CHECK_CONNECTIONS}
             </Button>
             <Button onClick={removeAllPlayers}>
               <img
@@ -269,12 +224,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {REMOVE_ALL_PLAYERS}{' '}
-              <img
-                src={'/assets/icons/blob.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {REMOVE_ALL_PLAYERS}
             </Button>
             <Button onClick={removePlayerByToken}>
               <img
@@ -282,12 +232,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {REMOVE_PLAYER_BY_TOKEN}{' '}
-              <img
-                src={'/assets/icons/supervillain.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {REMOVE_PLAYER_BY_TOKEN}
             </Button>
             <Button onClick={broadcastToAll}>
               <img
@@ -295,12 +240,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {BROADCAST_TO_ALL}{' '}
-              <img
-                src={'/assets/icons/vampire.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {BROADCAST_TO_ALL}
             </Button>
             <Button onClick={broadcastToAllInRoom}>
               <img
@@ -308,12 +248,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {BROADCAST_TO_ALL_IN_ROOM}{' '}
-              <img
-                src={'/assets/icons/fang.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {BROADCAST_TO_ALL_IN_ROOM}
             </Button>
             <Button onClick={sendMessageToPlayer}>
               <img
@@ -321,12 +256,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {SEND_MESSAGE_TO_PLAYER}{' '}
-              <img
-                src={'/assets/icons/lover.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {SEND_MESSAGE_TO_PLAYER}
             </Button>
           </ButtonsContainer>
         </WSContainer>
@@ -338,12 +268,7 @@ export const God: React.FC = observer(() => {
               alt="icon"
               style={{ height: '25px' }}
             />{' '}
-            {META}{' '}
-            <img
-              src={'/assets/icons/tanner.svg'}
-              alt="icon"
-              style={{ height: '25px' }}
-            />
+            {META}
           </GodTitle>
           <ButtonsContainer>
             <Button onClick={listOnugEnvVars}>
@@ -352,12 +277,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {LIST_ONUG_ENV_VARS}{' '}
-              <img
-                src={'/assets/icons/werewolf.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {LIST_ONUG_ENV_VARS}
             </Button>
             <Button onClick={deleteAllOldLogFiles}>
               <img
@@ -365,12 +285,7 @@ export const God: React.FC = observer(() => {
                 alt="icon"
                 style={{ height: '25px' }}
               />{' '}
-              {DELETE_ALL_OLD_LOG_FILES}{' '}
-              <img
-                src={'/assets/icons/cow.svg'}
-                alt="icon"
-                style={{ height: '25px' }}
-              />
+              {DELETE_ALL_OLD_LOG_FILES}
             </Button>
           </ButtonsContainer>
         </MetaContainer>
@@ -383,12 +298,7 @@ export const God: React.FC = observer(() => {
             alt="icon"
             style={{ height: '25px' }}
           />{' '}
-          {RESPONSE}{' '}
-          <img
-            src={'/assets/icons/interaction.svg'}
-            alt="icon"
-            style={{ height: '25px' }}
-          />
+          {RESPONSE}
         </GodTitle>
         <ResponseContainer>
           <ResponsePre>{`${JSON.stringify(response, null, 4)}`}</ResponsePre>

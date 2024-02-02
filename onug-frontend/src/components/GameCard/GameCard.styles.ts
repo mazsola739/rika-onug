@@ -12,9 +12,9 @@ export const CardBack = styled.div<StyledGameCardProps>`
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
-  border: 5px 2px solid white;
+  border: 3px solid white;
   border-radius: 6px;
-  height: 130px;
+  height: 90px;
   justify-content: center;
   width: 90px;
 `
@@ -24,9 +24,4 @@ export const Tokens = styled.div`
   flex-wrap: row;
   justify-content: center;
   gap: 2px;
-`
-
-export const TokenImage = styled.img`
-  width: 35px;
-  height: 35px;
 `

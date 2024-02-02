@@ -6,4 +6,5 @@ export const StyledSelectedCardList = styled.div`
   overflow-y: auto;
   padding: 5px;
   white-space: nowrap;
+  gap: 4px;
 `

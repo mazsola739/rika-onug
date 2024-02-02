@@ -1,8 +1,7 @@
-import { Header } from 'components'
+import { Header, Token } from 'components'
 import { observer } from 'mobx-react-lite'
 import { playerStore } from 'store'
 import {
-  PlayerAvatar,
   PlayerCard,
   PlayerCardInformation,
   PlayerCardRule,
@@ -22,9 +21,9 @@ export const GameTableHeader: React.FC = observer(() => {
       {player && (
         <StyledGameTableHeader>
           <PlayerInfo>
-            <PlayerAvatar
-              src={`/assets/players/selected_player_${player.player_number}.png`}
-              alt={player.player_name}
+            <Token
+              tokenName={`selected_player_${player.player_number}`}
+              size={50}
             />
             <PlayerName>{player.player_name}</PlayerName>
           </PlayerInfo>

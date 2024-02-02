@@ -42,18 +42,18 @@ export const GameTableFooter: React.FC = observer(() => {
       <FooterButtons>
         <Button
           onClick={handleStopGame}
-          buttontext={buttons.stop_button_label}
-          backgroundColor="#f44336"
+          buttonText={buttons.stop_button_label}
+          variant="red"
         />
         <Button
           onClick={handleStartGame}
-          buttontext={buttons.start_game_label}
-          backgroundColor="#8e44ad"
+          buttonText={buttons.start_game_label}
+          variant="purple"
         />
         <Button
           onClick={handleReady}
-          backgroundColor="#28a745"
-          buttontext={ready ? buttons.im_ready_label : buttons.ready_label}
+          variant="green"
+          buttonText={ready ? buttons.im_ready_label : buttons.ready_label}
         />
       </FooterButtons>
     </Footer>
