@@ -14,14 +14,19 @@ export const StyledCard = styled.div<StyledCardProps>`
   overflow: hidden;
   position: relative;
   width: 90px;
-  transition: 2s;
+  transition: 0.75s;
 `
 
 export const CardImage = styled.img<{ isSelected?: boolean }>`
   opacity: ${({ isSelected }) => (isSelected ? '1' : '0.6')};
-  transition: 2s;
+  transition: 0.75s;
   width: 90px;
   z-index: 1;
+
+  &:hover {
+    transition: 0.75s;
+    transform: scale(1.1);
+  }
 `
 
 export const CardName = styled.span<StyledCardProps>`
@@ -31,7 +36,7 @@ export const CardName = styled.span<StyledCardProps>`
   font-size: 10px;
   font-weight: 500;
   left: 50%;
-  transition: 2s;
+  transition: 0.75s;
   padding: 0 5px;
   position: absolute;
   text-align: center;

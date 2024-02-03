@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { gamePlayStore, gameTableStore, wsStore } from 'store'
+import { gamePlayStore, gameTableStore, playerStore, wsStore } from 'store'
 import {
   Button,
   DealtCards,
@@ -7,6 +7,7 @@ import {
   FooterButtons,
   Header,
   Main,
+  OwnCard,
 } from 'components'
 import {
   ARRIVE_GAME_PLAY,
@@ -29,9 +30,6 @@ export const GamePlay: React.FC = observer(() => {
 
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
-
-  const { hasSentinel, hasAlphaWolf, hasTemptress } = gameTableStore
-  const players = gameTableStore.players
 
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
@@ -89,18 +87,18 @@ export const GamePlay: React.FC = observer(() => {
     })
   }, [sendJsonMessage])
 
+  const boardCards = gameTableStore.boardCards
+  const players = gameTableStore.players
+  const player = playerStore.player
+
   return (
     <StyledGamePlay>
       <Header>
         <GamePlayHeader>header</GamePlayHeader>
       </Header>
       <Main>
-        <DealtCards
-          players={players}
-          hasSentinel={hasSentinel}
-          hasAlphaWolf={hasAlphaWolf}
-          hasTemptress={hasTemptress}
-        />
+        <OwnCard player={player} />
+        <DealtCards boardCards={boardCards} players={players} />
       </Main>
       <Footer>
         <FooterButtons>

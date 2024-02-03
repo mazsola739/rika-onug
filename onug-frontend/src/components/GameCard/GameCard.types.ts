@@ -1,5 +1,6 @@
 export interface GameCardProps {
-  player_number?: number
+  id: number
+  position: string
   ready?: boolean
   isCenter: boolean
 }

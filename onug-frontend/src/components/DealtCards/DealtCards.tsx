@@ -1,22 +1,26 @@
 import { observer } from 'mobx-react-lite'
 import { DealtCardsProps } from './DealtCards.types'
-import { Token } from 'components'
 import { CenterCardContainer, StyledDealtCards } from './DealtCards.styles'
 import { dealtCardsUtils } from './DealtCards.utils'
 
-const { renderPlayerCards, renderCenterExtraCard, renderCenterCard } =
-  dealtCardsUtils
+const { renderPlayerCards, renderCenterCard } = dealtCardsUtils
 
 export const DealtCards: React.FC<DealtCardsProps> = observer(
-  ({ players, hasSentinel, hasAlphaWolf, hasTemptress }) => {
+  ({ boardCards, players }) => {
+    const centerCards = boardCards
+      ? boardCards.filter((item) => item.position.startsWith('center'))
+      : []
+    const playerCards = boardCards
+      ? boardCards.filter((item) => item.position.startsWith('player'))
+      : []
+
+    console.log(players)
+
     return (
       <StyledDealtCards>
-        {players && renderPlayerCards(players)}
+        {renderPlayerCards(playerCards)}
         <CenterCardContainer>
-          {hasSentinel && <Token tokenName="shield" size={70} />}
-          {hasAlphaWolf && renderCenterExtraCard('Werewolf')}
-          {renderCenterCard('Center')}
-          {hasTemptress && renderCenterExtraCard('Villain')}
+          {renderCenterCard(centerCards)}
         </CenterCardContainer>
       </StyledDealtCards>
     )

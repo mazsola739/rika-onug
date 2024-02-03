@@ -4,15 +4,46 @@ const { broadcast, websocketServerConnectionsPerRoom } = require("../websocket/c
 const { HYDRATE_GAME_PLAY } = require("../constant/ws")
 const { logTrace } = require("../log")
 const { narration, interaction } = require("../scene")
+const { STAGES } = require("../constant/stage")
 
 const tickTime = 3000
 
-//todo here: game_stopped = false
-exports.stopGamePlay = () => logTrace("TODO stop game implementation")
+exports.stopGamePlay = gameState => {
+  gameState.game_stopped = true
+  gameState.stage = STAGES.ROOM
+
+  delete gameState.startTime
+  const playerTokens = Object.keys(gameState.players)
+
+  playerTokens.forEach((token) => {
+    gameState.players[token] = {
+      ...gameState.players[token],
+    }
+    delete gameState.players[token].player_start_card_id
+    delete gameState.players[token].card
+    delete gameState.players[token].player_number
+    delete gameState.players[token].role_history
+    gameState.players[token].ready = false
+    
+    delete gameState.card_positions
+    gameState.action_history = [
+      {
+          "scene_name": "JOKE",
+          "scene_number": 0
+      }]
+
+    delete gameState.game_play_start_time
+    delete gameState.actual_scene
+  })
+
+  return gameState
+}
 
 const getNextScene = gameState => {
-  let newGameState = { ...gameState }
+  if (!gameState.actual_scene) return // game already stopped
 
+  let newGameState = { ...gameState }
+  
   const startTime = Date.now()
   newGameState.actual_scene.scene_start_time = startTime
 
@@ -39,6 +70,8 @@ const tick = async (room_id) => {
   logTrace("tick")
   const gameState = await readGameState(room_id)
   const newGameState = getNextScene(gameState)
+
+  if (!newGameState) return // game already stopped
 
   //TODO action_history: need narration & interactions
   newGameState.action_history.push(newGameState.actual_scene)

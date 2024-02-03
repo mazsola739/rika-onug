@@ -40,16 +40,13 @@ export const GameTable: React.FC = observer(() => {
 
   const token = sessionStorage.getItem('token')
 
-  const { hasSentinel, hasMarks, hasCurator, hasAlphaWolf, hasTemptress } =
-    gameTableStore
+  const { hasSentinel, hasMarks, hasCurator } = gameTableStore
   const selectedMarks = selectedDeckStore.selectedMarks
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
 
   const { setPlayer } = playerStore
-  const { setPlayers } = gameTableStore
-  const players = gameTableStore.players
-  const player = playerStore.player
+  const { setPlayers, setBoardCards } = gameTableStore
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -75,21 +72,24 @@ export const GameTable: React.FC = observer(() => {
         ),
       })
       setPlayers(lastJsonMessage.board.players)
-      //TODO setBoardCards here?
+      setBoardCards(lastJsonMessage.board.boardCards)
       roomStore.resetDetailedCardInfo()
       selectedDeckStore.addCardIdsToArray()
-      console.log(JSON.stringify(lastJsonMessage.board.players))
     }
 
     if (lastJsonMessage?.type === HYDRATE_READY) {
       setPlayers(lastJsonMessage.board.players)
-      console.log(JSON.stringify(lastJsonMessage))
+      setBoardCards(lastJsonMessage.board.boardCards)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [lastJsonMessage, setPlayer, deckStore, navigate])
+  }, [lastJsonMessage, setPlayer, setBoardCards, deckStore, navigate])
+
+  const { player } = playerStore
+  const { players } = gameTableStore
+  const { boardCards } = gameTableStore
 
   return (
     <StyledGameTable>
@@ -97,13 +97,9 @@ export const GameTable: React.FC = observer(() => {
       <Main>
         <OwnCardPlace>{player && <OwnCard player={player} />}</OwnCardPlace>
         <GameArea>
-          {hasCurator && renderArtifacts(artifacts)}
-          <DealtCards
-            players={players}
-            hasSentinel={hasSentinel}
-            hasAlphaWolf={hasAlphaWolf}
-            hasTemptress={hasTemptress}
-          />
+          {(hasCurator || hasSentinel) &&
+            renderArtifacts(artifacts, hasCurator, hasSentinel)}
+          <DealtCards players={players} boardCards={boardCards} />
           {hasMarks && renderMarks(selectedMarks)}
         </GameArea>
         <Ready>{players && <PlayerList players={players} />}</Ready>

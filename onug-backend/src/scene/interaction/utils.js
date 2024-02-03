@@ -14,7 +14,7 @@ exports.getTokensByCardIds = (players, cardIds) => {
   const result = []
 
   for (const token in players) {
-    if (cardIds.includes(players[token].card.id)) {
+    if (cardIds.includes(players?.[token]?.card.id)) {
       result.push(token)
     }
   }
@@ -26,7 +26,7 @@ exports.getTokensByRoleIds = (players, roleIds) => {
   const result = []
 
   for (const token in players) {
-    if (roleIds.includes(players[token].card.role_id)) {
+    if (roleIds.includes(players?.[token]?.card?.role_id)) {
       result.push(token)
     }
   }

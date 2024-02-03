@@ -4,46 +4,73 @@ import {
   PlayersCards,
   CardTitle,
   CenterCards,
+  CenterCardContainer,
 } from './DealtCards.styles'
-import { PlayersType } from 'types'
+import { BoardCardType } from 'types'
 
-const renderPlayerCards = (players: PlayersType[]) => (
+const renderPlayerCards = (playerCards: BoardCardType[]) => (
   <CardContainer>
     <PlayersCards>
-      {players.map(({ player_number, ready }) => (
+      {playerCards.map(({ position, card }) => (
         <GameCard
-          key={player_number}
-          player_number={player_number}
-          ready={ready}
+          key={position}
           isCenter={false}
+          id={card.id}
+          position={position}
         />
       ))}
     </PlayersCards>
   </CardContainer>
 )
 
-const renderCenterCard = (title: string) => (
-  <CardContainer>
-    <CardTitle>{title}</CardTitle>
-    <CenterCards>
-      <GameCard isCenter={true} />
-      <GameCard isCenter={true} />
-      <GameCard isCenter={true} />
-    </CenterCards>
-  </CardContainer>
-)
+const renderCenterCard = (centerCards: BoardCardType[]) => {
+  const renderCard = (position: string, title: string) => {
+    const card = centerCards.find((c) => c.position === position)
+    return (
+      card &&
+      card.card.id !== null && (
+        <CardContainer>
+          <CardTitle>{title}</CardTitle>
+          <CenterCards>
+            <GameCard
+              id={card.card.id}
+              position={card.position}
+              isCenter={true}
+            />
+          </CenterCards>
+        </CardContainer>
+      )
+    )
+  }
 
-const renderCenterExtraCard = (title: string) => (
-  <CardContainer>
-    <CardTitle>{title}</CardTitle>
-    <CenterCards>
-      <GameCard isCenter={true} />
-    </CenterCards>
-  </CardContainer>
-)
+  return (
+    <CenterCardContainer>
+      {renderCard('center_wolf', 'Wolf')}
+      <CardContainer>
+        <CardTitle>Center</CardTitle>
+        <CenterCards>
+          {['center_left', 'center_middle', 'center_right'].map((position) => {
+            const card = centerCards.find((c) => c.position === position)
+            return (
+              card &&
+              card.card.id !== null && (
+                <GameCard
+                  key={position}
+                  id={card.card.id}
+                  position={card.position}
+                  isCenter={true}
+                />
+              )
+            )
+          })}
+        </CenterCards>
+      </CardContainer>
+      {renderCard('center_villain', 'Villain')}
+    </CenterCardContainer>
+  )
+}
 
 export const dealtCardsUtils = {
   renderPlayerCards,
   renderCenterCard,
-  renderCenterExtraCard,
 }

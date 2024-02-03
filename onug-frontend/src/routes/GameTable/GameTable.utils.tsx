@@ -13,14 +13,20 @@ const renderMarks = (selectedMarks: MarkType[]) => (
   </Marks>
 )
 
-const renderArtifacts = (artifacts: TokenType[]) => (
+const renderArtifacts = (
+  artifacts: TokenType[],
+  hasCurator: boolean,
+  hasSentinel: boolean
+) => (
   <Marks>
-    {artifacts.map(
-      (artifact, index) =>
-        artifact.token_name !== 'shield' && (
-          <Token key={index} tokenName={artifact.token_name} size={60} />
-        )
-    )}
+    {hasSentinel && <Token tokenName="shield" size={60} />}
+    {hasCurator &&
+      artifacts.map(
+        (artifact, index) =>
+          artifact.token_name !== 'shield' && (
+            <Token key={index} tokenName={artifact.token_name} size={60} />
+          )
+      )}
   </Marks>
 )
 

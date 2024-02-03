@@ -26,14 +26,14 @@ export const StyledButton = styled.button<StyledButtonProps>`
   padding-top: 2px;
   width: 130px;
   height: 35px;
-  transition: 2s;
+  transition: 0.75s;
   &:disabled {
     cursor: not-allowed;
     opacity: 0.6;
   }
 
   &:hover:not(:disabled) {
-    transition: 2s;
+    transition: 0.75s;
     background-color: ${({ variant }) =>
       lightenDarkenColor(
         colorVariants[variant as ColorVariant] || colorVariants.default,

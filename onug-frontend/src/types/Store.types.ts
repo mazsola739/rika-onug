@@ -26,14 +26,13 @@ export type RoomType = {
 
 export type PlayersType = {
   player_name: string
-  player_number: number
+  player_number: string
   ready: boolean
 }
 
 export type BoardCardType = {
-  id: number
-  artifact: boolean
-  shield: boolean
+  position: string
+  card: { id: number; artifact: boolean; shield: boolean }
 }
 
 export type PlayerType = {

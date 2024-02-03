@@ -24,15 +24,27 @@ class DeckStore {
   }
 
   getCardById(cardId: number): CardType {
-    return findCardById(this.deck, cardId) || this.createEmptyCard()
+    if (!this.deck) {
+      return this.createEmptyCard()
+    }
+
+    return findCardById(this.deck, cardId)
   }
 
   getArtifactById(tokenId: number): TokenType {
-    return findCardById(this.artifacts, tokenId) || this.createEmptyToken()
+    if (!this.artifacts) {
+      return this.createEmptyToken()
+    }
+
+    return findCardById(this.artifacts, tokenId)
   }
 
   getMarkById(tokenId: number): TokenType {
-    return findCardById(this.marks, tokenId) || this.createEmptyToken()
+    if (!this.marks) {
+      return this.createEmptyToken()
+    }
+
+    return findCardById(this.marks, tokenId)
   }
 }
 

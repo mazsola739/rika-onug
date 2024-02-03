@@ -2,16 +2,17 @@ import React from 'react'
 import { observer } from 'mobx-react-lite'
 import { CardBack, StyledGameCard, Tokens } from './GameCard.styles'
 import { GameCardProps } from './GameCard.types'
-import { gameTableStore } from 'store'
+import { deckStore, gameTableStore } from 'store'
 import { Token } from 'components'
 
 export const GameCard: React.FC<GameCardProps> = observer(
-  ({ player_number, isCenter, ready }) => {
+  ({ position, id, isCenter, ready }) => {
     const { hasMarks } = gameTableStore
+    const card = id === 0 ? '' : deckStore.getCardById(id)
 
-    const playerTokenName = ready
-      ? `selected_player_${player_number}`
-      : `player_${player_number}`
+    console.log(card)
+
+    const playerTokenName = ready ? `selected_${position}` : position
 
     return (
       <StyledGameCard>

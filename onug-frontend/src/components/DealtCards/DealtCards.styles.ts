@@ -11,8 +11,7 @@ export const CardContainer = styled.div`
 export const CenterCardContainer = styled.div`
   align-items: flex-end;
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
   justify-content: center;
 `

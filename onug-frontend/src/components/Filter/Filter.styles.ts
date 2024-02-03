@@ -28,10 +28,10 @@ export const StyledFilterButton = styled.div<FilterButtonProps>`
   opacity: ${({ isSelected }) => (isSelected ? '0.5' : '0.8')};
   display: flex;
   width: 130px;
-  transition: 1s;
+  transition: 0.75s;
 
   &:hover:not(:disabled) {
-    transition: 2s;
+    transition: 0.75s;
     opacity: 1;
   }
 `

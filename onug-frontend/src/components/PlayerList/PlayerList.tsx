@@ -7,8 +7,8 @@ export const PlayerList: React.FC<PlayerListProps> = observer(({ players }) => (
   <StyledPlayerList>
     {players.map(({ player_name, ready, player_number }) => {
       const playerTokenName = ready
-        ? `selected_player_${player_number}`
-        : `player_${player_number}`
+        ? `selected_${player_number}`
+        : player_number
       return (
         <Player key={player_number}>
           <Token tokenName={playerTokenName} size={25} ready={ready} />

@@ -28,11 +28,13 @@ export const StyledRoomButton = styled.button<StyledLobbyProps>`
   transform: translate(-50%, -50%)
     rotate(${({ index }) => index * (360 / 12)}deg) translate(250px)
     rotate(-${({ index }) => index * (360 / 12)}deg);
-  transition: background-color 0.3s;
+
   width: 120px;
+  transition: 0.75s;
 
   &:hover {
-    border: 5px solid ${({ index }) => darken(generateRainbowColor(index), 20)};
+    transition: 0.75s;
+    background: ${({ index }) => darken(generateRainbowColor(index), 15)};
   }
 `
 
