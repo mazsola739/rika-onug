@@ -20,7 +20,8 @@ exports.updateRoom = async (message) => {
   // TODO validate if player is admin
   newGameState.selected_cards = toggleCard(
     newGameState.selected_cards,
-    card_id
+    card_id,
+    totalPlayers
   )
 
   upsertRoomState(newGameState)
