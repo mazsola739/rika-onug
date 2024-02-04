@@ -6,7 +6,7 @@ import { dealtCardsUtils } from './DealtCards.utils'
 const { renderPlayerCards, renderCenterCard } = dealtCardsUtils
 
 export const DealtCards: React.FC<DealtCardsProps> = observer(
-  ({ boardCards /* players */ }) => {
+  ({ boardCards, players }) => {
     const centerCards = boardCards
       ? boardCards.filter((item) => item.position.startsWith('center'))
       : []
@@ -14,11 +14,9 @@ export const DealtCards: React.FC<DealtCardsProps> = observer(
       ? boardCards.filter((item) => item.position.startsWith('player'))
       : []
 
-    /*    console.log(players) */
-
     return (
       <StyledDealtCards>
-        {renderPlayerCards(playerCards)}
+        {renderPlayerCards(playerCards, players)}
         <CenterCardContainer>
           {renderCenterCard(centerCards)}
         </CenterCardContainer>

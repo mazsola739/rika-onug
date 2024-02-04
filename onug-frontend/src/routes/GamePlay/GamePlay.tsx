@@ -1,14 +1,23 @@
 import { observer } from 'mobx-react-lite'
 import { gameTableStore, narrationStore, playerStore, wsStore } from 'store'
-import { DealtCards, Header, Main, OwnCard } from 'components'
-import { ARRIVE_GAME_PLAY, HYDRATE_GAME_PLAY, REDIRECT, STAGES } from 'constant'
-import { useEffect, useState } from 'react'
+import { Button, DealtCards, Header, Main, OwnCard } from 'components'
+import {
+  ARRIVE_GAME_PLAY,
+  HYDRATE_GAME_PLAY,
+  INTERACTION,
+  REDIRECT,
+  STAGES,
+} from 'constant'
+import { useCallback, useEffect, useState } from 'react'
 import { GamePlayHeader } from './GamePlayHeader'
 import { useNavigate } from 'react-router-dom'
 import {
   GameArea,
+  GamePlayContainer,
   MessageBox,
   OwnCardPlace,
+  PlayerHand,
+  SendButton,
   StyledGamePlay,
 } from './GamePlay.styles'
 import { GamePlayFooter } from './GamePlayFooter'
@@ -35,21 +44,28 @@ export const GamePlay: React.FC = observer(() => {
     }
   }, [sendJsonMessage, firstTime])
 
-  let narration
-
   useEffect(() => {
     if (
       lastJsonMessage?.type === HYDRATE_GAME_PLAY /* &&
       lastJsonMessage?.success */ //TODO success
     ) {
-      narration = lastJsonMessage.actual_scene.narration
       narrationStore.setNarration(lastJsonMessage.actual_scene.narration)
+      narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
   }, [lastJsonMessage])
+
+  const handleInteraction = useCallback(() => {
+    sendJsonMessage?.({
+      type: INTERACTION,
+      room_id,
+      token,
+      selected_positions: ['player_2'],
+    })
+  }, [sendJsonMessage])
 
   const boardCards = gameTableStore.boardCards
   const players = gameTableStore.players
@@ -58,16 +74,29 @@ export const GamePlay: React.FC = observer(() => {
   return (
     <StyledGamePlay>
       <Header>
-        <GamePlayHeader narration={narration} />
+        <GamePlayHeader />
       </Header>
       <Main>
-        <OwnCardPlace>
-          <OwnCard player={player} />
-        </OwnCardPlace>
-        <GameArea>
-          <DealtCards boardCards={boardCards} players={players} />
-        </GameArea>
-        <MessageBox>'chat' here</MessageBox>
+        <GamePlayContainer>
+          <GameArea>
+            <DealtCards boardCards={boardCards} players={players} />
+          </GameArea>
+          <PlayerHand>
+            <OwnCardPlace>
+              <OwnCard player={player} />
+            </OwnCardPlace>
+            <MessageBox>
+              <span>Message</span>
+              <SendButton>
+                <Button
+                  onClick={handleInteraction}
+                  buttonText={'Nyiiihaaaa'}
+                  variant="magenta"
+                />
+              </SendButton>
+            </MessageBox>
+          </PlayerHand>
+        </GamePlayContainer>
       </Main>
       <GamePlayFooter />
     </StyledGamePlay>

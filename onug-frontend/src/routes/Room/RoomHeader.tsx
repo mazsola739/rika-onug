@@ -14,7 +14,7 @@ const RuleInfo: React.FC = observer(() => {
   const detailedTokenInfo = roomStore.getDetailedTokenInfo()
 
   const { isGameStopped } = gamePlayStore
-
+  //todo delete tokens
   const displayInfo =
     detailedCardInfo.id !== 0
       ? `${detailedCardInfo.display_name}: ${detailedCardInfo.rules}`

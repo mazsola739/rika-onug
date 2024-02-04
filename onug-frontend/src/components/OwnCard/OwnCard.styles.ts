@@ -11,9 +11,9 @@ export const OwnCardContainer = styled.div`
   border-radius: 4px;
   padding: 10px;
   justify-content: flex-end;
-  max-height: 240px;
-  margin: 10px;
-  min-width: 160px;
+  max-height: 220px;
+  margin: 0 10px;
+  min-width: 130px;
 `
 
 export const OwnCardText = styled.span`

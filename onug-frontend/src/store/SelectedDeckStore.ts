@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { CardType, ActionCardType, MarkType } from 'types'
 import { selectedDeckUtils, utils } from 'utils'
-import { action_marks, action_cards } from 'data'
+import { action_marks } from 'data'
 import { alienIds, assassinIds, evils, roles, vampireIds } from 'constant'
 import { roomStore } from 'store'
 import { deckStore } from './DeckStore'

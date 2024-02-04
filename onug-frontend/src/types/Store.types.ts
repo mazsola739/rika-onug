@@ -1,4 +1,4 @@
-import { CardType } from './Card.types'
+import { CardType } from './Json.types'
 
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 

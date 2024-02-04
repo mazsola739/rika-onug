@@ -1,4 +1,6 @@
-export const script = [
+import { ScriptType } from 'types'
+
+export const script: ScriptType[] = [
   {
     scene_title: 'JOKE',
     scene_img: '',

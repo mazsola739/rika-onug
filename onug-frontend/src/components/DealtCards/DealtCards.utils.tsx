@@ -6,19 +6,29 @@ import {
   CenterCards,
   CenterCardContainer,
 } from './DealtCards.styles'
-import { BoardCardType } from 'types'
+import { BoardCardType, PlayersType } from 'types'
 
-const renderPlayerCards = (playerCards: BoardCardType[]) => (
+const renderPlayerCards = (
+  playerCards: BoardCardType[],
+  players: PlayersType[]
+) => (
   <CardContainer>
     <PlayersCards>
-      {playerCards.map(({ position, card }) => (
-        <GameCard
-          key={position}
-          isCenter={false}
-          id={card.id}
-          position={position}
-        />
-      ))}
+      {playerCards.map(({ position, card }) => {
+        const player = players.find(
+          (player) => player.player_number === position
+        )
+        const ready = player ? player.ready : false
+        return (
+          <GameCard
+            key={position}
+            isCenter={false}
+            id={card.id}
+            position={position}
+            ready={ready}
+          />
+        )
+      })}
     </PlayersCards>
   </CardContainer>
 )

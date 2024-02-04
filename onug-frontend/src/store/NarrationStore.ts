@@ -1,5 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import * as constants from '../constant'
+import { ScriptType } from 'types'
+import { script } from 'data'
 
 class NarrationStore {
   narration: string[] = []
@@ -34,6 +36,16 @@ class NarrationStore {
     if (!this.title || this.title.length === 0) {
       return ''
     }
+
+    const scene = script.find(
+      (scene: ScriptType) => scene.scene_title === this.title
+    )
+
+    if (!scene || scene.scene_img === '') {
+      return ''
+    }
+
+    return scene.scene_img
   }
 }
 

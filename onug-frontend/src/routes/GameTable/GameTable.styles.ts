@@ -9,7 +9,7 @@ export const StyledGameTable = styled.div`
 `
 
 export const OwnCardPlace = styled.div`
-  min-width: 200px;
+  max-width: 160px;
   display: flex;
   align-items: flex-end;
 `
@@ -48,7 +48,7 @@ export const StyledGameTableHeader = styled.div`
 `
 
 export const PlayerInfo = styled.div`
-  width: 200px;
+  width: 140px;
   height: 102px;
   display: flex;
   flex-direction: column;

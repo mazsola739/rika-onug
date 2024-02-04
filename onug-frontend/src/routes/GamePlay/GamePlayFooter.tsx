@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { gamePlayStore, wsStore } from 'store'
 import { Button, Footer, FooterButtons } from 'components'
-import { INTERACTION, PAUSE_GAME, STOP_GAME, buttons } from 'constant'
+import { PAUSE_GAME, STOP_GAME, buttons } from 'constant'
 import { useCallback } from 'react'
 
 export const GamePlayFooter: React.FC = observer(() => {
@@ -29,15 +29,6 @@ export const GamePlayFooter: React.FC = observer(() => {
     })
   }, [sendJsonMessage])
 
-  const handleInteraction = useCallback(() => {
-    sendJsonMessage?.({
-      type: INTERACTION,
-      room_id,
-      token,
-      selected_positions: ['player_2'],
-    })
-  }, [sendJsonMessage])
-
   return (
     <Footer>
       <FooterButtons>
@@ -50,11 +41,6 @@ export const GamePlayFooter: React.FC = observer(() => {
           onClick={handleStopGame}
           buttonText={buttons.stop_button_label}
           variant="red"
-        />
-        <Button
-          onClick={handleInteraction}
-          buttonText={'Nyiiihaaaa'}
-          variant="magenta"
         />
       </FooterButtons>
     </Footer>

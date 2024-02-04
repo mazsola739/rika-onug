@@ -12,7 +12,7 @@ export const OwnCard: React.FC<OwnCardProps> = observer(({ player }) => (
       Player {player.player_number}:<br />
       {player.player_name}
     </OwnCardText>
-    <CardImage image={player.player_card.card_name} size={120}></CardImage>
+    <CardImage image={player.player_card.card_name} size={100}></CardImage>
     <OwnCardText>Team: {capitalize(player.player_card.team)}</OwnCardText>
     <OwnCardText>
       Role: {capitalize(player.player_card.display_name)}
