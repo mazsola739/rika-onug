@@ -43,6 +43,10 @@ export const Room: React.FC = observer(() => {
       selectedDeckStore.setSelectedCard(lastJsonMessage.selected_cards)
     }
 
+    selectedDeckStore.updatePlayDeckWithSelectedCards(
+      selectedDeckStore.selectedCards
+    )
+
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }

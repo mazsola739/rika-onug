@@ -15,7 +15,7 @@ exports.hydrateRoom = async (ws, message) => {
     selected_cards: gameState.selected_cards,
   })
   
-  logTrace(`sending message to client, hydrate room: ${hydrateRoom}`)
+  logTrace(`sending message to client, hydrate room`, hydrateRoom)
 
   return ws.send(hydrateRoom)
 }
