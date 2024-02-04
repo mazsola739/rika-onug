@@ -77,6 +77,7 @@ class RoomStore {
     this.detailedCardInfo = deckStore.createEmptyCard()
   }
 
+  //TODO
   toggleInfo(id: number, type: 'card' | 'artifact' | 'mark'): void {
     if (type === 'card' && this.detailedCardInfo.id === id) {
       this.resetDetailedCardInfo()

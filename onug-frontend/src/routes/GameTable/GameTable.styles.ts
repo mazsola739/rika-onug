@@ -28,11 +28,13 @@ export const Ready = styled.div`
 `
 
 export const Marks = styled.div`
+  padding: 20px 0;
   align-content: flex-start;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 10px;
+  min-width: 130px;
   max-width: 130px;
 `
 

@@ -28,7 +28,6 @@ class GamePlayStore {
   }
 
   resetGame(): void {
-    selectedDeckStore.resetSelection()
     this.isGameStarted = false
     this.isGameStopped = true
   }

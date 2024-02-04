@@ -36,10 +36,6 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
         wake_up_time,
       })
 
-      selectedDeckStore.updatePlayDeckWithSelectedCards(
-        selectedDeckStore.selectedCards
-      )
-
       sendJsonMessage?.({
         type: UPDATE_ROOM,
         card_id: id,

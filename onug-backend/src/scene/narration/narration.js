@@ -28,9 +28,9 @@ exports.narration = (gameState) => {
   Object.entries(entries).forEach(([key, value]) => {
     _.update(newGameState, key, () => value);
   });
-
+//TODO null?
   if (!entries["actual_scene.narration"]) {
-    newGameState.actual_scene.narration = null;
+    newGameState.actual_scene.narration = null
   }
 
   logDebug(

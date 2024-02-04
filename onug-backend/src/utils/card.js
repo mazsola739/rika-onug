@@ -1,101 +1,103 @@
+const cards = require("../data/cards.json")
 
-const cards = require("../data/cards.json");
-const { logInfo } = require("../log");
-//TODO NOT WORKING perfectly
-const wolfIdsToCheck = [15, 16, 21, 22];
-const supervillainIdsToCheck = [57, 60, 65];
-const alphaWolfId = 17;
-const temptressId = 69;
-const mirrorManId = 64;
-const copycatId = 30;
+const wolfIdsToCheck = [15, 16, 21, 22]
+const supervillainIdsToCheck = [57, 60, 65]
+const alphaWolfId = 17
+const temptressId = 69
+const mirrorManId = 64
+const copycatId = 30
 const specialCardsDefaultToAddLookupMap = {
-  '17': 15,
-  '69': 60,
-} 
-
-const isMirrorManOrCopyCatCardSingleDeselect = (cardId, selectedCards) => cardId === mirrorManId && selectedCards.includes(mirrorManId) || cardId === copycatId  && selectedCards.includes(copycatId)
-const isMirrorManOrCopyCatCardId = cardId => cardId === mirrorManId || cardId === copycatId
+  17: 15,
+  69: 60,
+}
 
 const toggleCard = (selectedCards, cardId, totalPlayers) => {
   let newSelectedCards = [...selectedCards]
 
   if (containsById(selectedCards, cardId)) {
-    newSelectedCards = handleDeselectCard(newSelectedCards, cardId);
+    newSelectedCards = handleDeselectCard(newSelectedCards, cardId)
   } else if (totalPlayers < 12) {
-    newSelectedCards = handleSelectCard(newSelectedCards, cardId);
+    newSelectedCards = handleSelectCard(newSelectedCards, cardId)
   }
   return newSelectedCards
-};
+}
 
-const containsByCriteria = (selectedCards, criteria) => criteria.some((c) => containsById(selectedCards, c));
+const containsByCriteria = (selectedCards, criteria) =>
+  criteria.some((c) => containsById(selectedCards, c))
 
-const containsById = (selectedCards, cardId) => selectedCards.some((id) => id === cardId);
+const containsById = (selectedCards, cardId) =>
+  selectedCards.some((id) => id === cardId)
 
 const handleSelectCard = (selectedCards, cardId) => {
   let newSelectedCards = [...selectedCards]
-  newSelectedCards.push(cardId);
+  newSelectedCards.push(cardId)
 
   if (cardId === alphaWolfId) {
-    handleCardByRole(newSelectedCards, wolfIdsToCheck, alphaWolfId);
+    handleCardByRole(newSelectedCards, wolfIdsToCheck, alphaWolfId)
   } else if (cardId === temptressId) {
-    handleCardByRole(newSelectedCards, supervillainIdsToCheck, temptressId);
-  } else if (cardId === mirrorManId && containsByCriteria(selectedCards, [copycatId])) {
+    handleCardByRole(newSelectedCards, supervillainIdsToCheck, temptressId)
+  } else if (
+    cardId === mirrorManId &&
+    containsByCriteria(selectedCards, [copycatId])
+  ) {
     newSelectedCards = newSelectedCards.filter((id) => id !== copycatId)
-  } else if (cardId === copycatId && containsByCriteria(selectedCards, [mirrorManId])) {
+  } else if (
+    cardId === copycatId &&
+    containsByCriteria(selectedCards, [mirrorManId])
+  ) {
     newSelectedCards = newSelectedCards.filter((id) => id !== mirrorManId)
-  } 
+  }
 
   return newSelectedCards
-};
+}
 
 const handleDeselectCard = (selectedCards, cardId) => {
-  let newSelectedCards = [...selectedCards];
+  let newSelectedCards = [...selectedCards]
   if (prohibitDeselectingWerewolf(selectedCards, cardId)) {
-    handleCardByRole(newSelectedCards, wolfIdsToCheck, alphaWolfId);
+    handleCardByRole(newSelectedCards, wolfIdsToCheck, alphaWolfId)
   } else if (prohibitDeselectingSupervillain(selectedCards, cardId)) {
-    handleCardByRole(newSelectedCards, supervillainIdsToCheck, temptressId);
+    handleCardByRole(newSelectedCards, supervillainIdsToCheck, temptressId)
   } else {
-    newSelectedCards = selectedCards.filter((id) => id !== cardId);
+    newSelectedCards = selectedCards.filter((id) => id !== cardId)
   }
   return newSelectedCards
-};
+}
 
 const handleCardByRole = (selectedCards, idsToCheck, specialCardId) => {
   if (!containsByCriteria(selectedCards, idsToCheck)) {
     const cardToAdd = specialCardsDefaultToAddLookupMap[specialCardId]
-    selectedCards.push(cardToAdd);
+    selectedCards.push(cardToAdd)
   }
-};
+}
 
 const prohibitDeselectingWerewolf = (selectedCards, cardId) => {
   const numberOfSelectedWolfCards = selectedCards.filter((cardId) =>
     wolfIdsToCheck.includes(cardId)
-  ).length;
+  ).length
 
   return (
     numberOfSelectedWolfCards === 1 &&
     containsByCriteria(selectedCards, [alphaWolfId]) &&
     wolfIdsToCheck.includes(cardId)
-  );
-};
+  )
+}
 
 const prohibitDeselectingSupervillain = (selectedCards, card) => {
   const numberOfSelectedVillainCards = selectedCards.filter((id) =>
     supervillainIdsToCheck.includes(id)
-  ).length;
+  ).length
 
   return (
     numberOfSelectedVillainCards === 1 &&
     containsByCriteria(selectedCards, [temptressId]) &&
     supervillainIdsToCheck.includes(card)
-  );
-};
-
+  )
+}
 
 const shuffle = (selectedCardIds) => {
   for (let i = selectedCardIds.length - 1; i > 0; i--) {
     const j = ~~(Math.random() * (i + 1))
-    ;[selectedCardIds[i], selectedCardIds[j]] = [selectedCardIds[j],selectedCardIds[i],]
+    ;[selectedCardIds[i], selectedCardIds[j]] = [selectedCardIds[j], selectedCardIds[i]]
   }
   return selectedCardIds
 }
@@ -141,7 +143,8 @@ const distributeCards = (selectedCardIds) => {
 }
 
 const getCardById = (card_id) => cards.find((card) => card.id === card_id)
-const isCardSelectedById = (cardIds, cardId) => cardIds.some((id) => id === cardId)
+const isCardSelectedById = (cardIds, cardId) =>
+  cardIds.some((id) => id === cardId)
 
 module.exports = {
   toggleCard,

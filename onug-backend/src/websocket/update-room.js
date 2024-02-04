@@ -10,19 +10,18 @@ exports.updateRoom = async (message) => {
   const [roomIdValid, gameState, errors] = await validateRoom(room_id)
 
   if (!roomIdValid) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors })
-
-  const totalPlayers = determineTotalPlayers(gameState.selected_cards.length, gameState.selected_cards)
-
-  if (totalPlayers === 12) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors: ["Cannot have more than 12 players."] })
-
   const newGameState = { ...gameState }
-
+  let totalPlayers = determineTotalPlayers(newGameState.selected_cards.length, newGameState.selected_cards)
   // TODO validate if player is admin
   newGameState.selected_cards = toggleCard(
     newGameState.selected_cards,
     card_id,
     totalPlayers
   )
+
+  totalPlayers = determineTotalPlayers(newGameState.selected_cards.length, newGameState.selected_cards)
+
+  if (totalPlayers > 12) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors: ["Cannot have more than 12 players."] })
 
   upsertRoomState(newGameState)
   

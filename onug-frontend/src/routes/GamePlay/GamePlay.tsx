@@ -1,28 +1,17 @@
 import { observer } from 'mobx-react-lite'
-import { gamePlayStore, gameTableStore, playerStore, wsStore } from 'store'
-import {
-  Button,
-  DealtCards,
-  Footer,
-  FooterButtons,
-  Header,
-  Main,
-  OwnCard,
-} from 'components'
-import {
-  ARRIVE_GAME_PLAY,
-  HYDRATE_GAME_PLAY,
-  INTERACTION,
-  PAUSE_GAME,
-  REDIRECT,
-  STAGES,
-  STOP_GAME,
-  buttons,
-} from 'constant'
-import { useCallback, useEffect, useState } from 'react'
+import { gameTableStore, narrationStore, playerStore, wsStore } from 'store'
+import { DealtCards, Header, Main, OwnCard } from 'components'
+import { ARRIVE_GAME_PLAY, HYDRATE_GAME_PLAY, REDIRECT, STAGES } from 'constant'
+import { useEffect, useState } from 'react'
 import { GamePlayHeader } from './GamePlayHeader'
 import { useNavigate } from 'react-router-dom'
-import { StyledGamePlay } from './GamePlay.styles'
+import {
+  GameArea,
+  MessageBox,
+  OwnCardPlace,
+  StyledGamePlay,
+} from './GamePlay.styles'
+import { GamePlayFooter } from './GamePlayFooter'
 
 export const GamePlay: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
@@ -33,9 +22,6 @@ export const GamePlay: React.FC = observer(() => {
 
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
-  const buttonText = gamePlayStore.isGamePaused
-    ? buttons.pause_button_alt_label
-    : buttons.pause_button_label
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -49,43 +35,21 @@ export const GamePlay: React.FC = observer(() => {
     }
   }, [sendJsonMessage, firstTime])
 
+  let narration
+
   useEffect(() => {
     if (
-      lastJsonMessage?.type === HYDRATE_GAME_PLAY &&
-      lastJsonMessage?.success
+      lastJsonMessage?.type === HYDRATE_GAME_PLAY /* &&
+      lastJsonMessage?.success */ //TODO success
     ) {
-      console.log(lastJsonMessage)
+      narration = lastJsonMessage.actual_scene.narration
+      narrationStore.setNarration(lastJsonMessage.actual_scene.narration)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
   }, [lastJsonMessage])
-
-  const handlePauseGame = useCallback(() => {
-    sendJsonMessage?.({
-      type: PAUSE_GAME,
-      room_id,
-      token,
-    })
-  }, [])
-
-  const handleStopGame = useCallback(() => {
-    sendJsonMessage?.({
-      type: STOP_GAME,
-      room_id,
-      token,
-    })
-  }, [sendJsonMessage])
-
-  const handleInteraction = useCallback(() => {
-    sendJsonMessage?.({
-      type: INTERACTION,
-      room_id,
-      token,
-      selected_positions: ['player_2'],
-    })
-  }, [sendJsonMessage])
 
   const boardCards = gameTableStore.boardCards
   const players = gameTableStore.players
@@ -94,31 +58,18 @@ export const GamePlay: React.FC = observer(() => {
   return (
     <StyledGamePlay>
       <Header>
-        <GamePlayHeader>header</GamePlayHeader>
+        <GamePlayHeader narration={narration} />
       </Header>
       <Main>
-        <OwnCard player={player} />
-        <DealtCards boardCards={boardCards} players={players} />
+        <OwnCardPlace>
+          <OwnCard player={player} />
+        </OwnCardPlace>
+        <GameArea>
+          <DealtCards boardCards={boardCards} players={players} />
+        </GameArea>
+        <MessageBox>'chat' here</MessageBox>
       </Main>
-      <Footer>
-        <FooterButtons>
-          <Button
-            onClick={handlePauseGame}
-            buttonText={buttonText}
-            variant="orange"
-          />
-          <Button
-            onClick={handleStopGame}
-            buttonText={buttons.stop_button_label}
-            variant="red"
-          />
-          <Button
-            onClick={handleInteraction}
-            buttonText={'Nyiiihaaaa'}
-            variant="magenta"
-          />
-        </FooterButtons>
-      </Footer>
+      <GamePlayFooter />
     </StyledGamePlay>
   )
 })

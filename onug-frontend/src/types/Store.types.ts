@@ -15,6 +15,12 @@ export type WsJsonMessage = {
   board?: { players: PlayersType[]; boardCards: BoardCardType[] }
   selected_cards?: number[]
   success?: boolean
+  actual_scene?: {
+    scene_number: number
+    scene_start_time: number
+    scene_title: string
+    narration?: string[]
+  }
 }
 
 export type RoomType = {
