@@ -5,5 +5,5 @@ export const StyledIcon = styled.svg<StyledIconProps>`
   height: ${({ size }) => size}px;
   width: ${({ size }) => size}px;
 
-  fill: ${({ fill }) => fill};
+  fill: currentColor;
 `

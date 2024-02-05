@@ -17,6 +17,7 @@
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "module": "es6",
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "downlevelIteration": true,
     "allowJs": true,

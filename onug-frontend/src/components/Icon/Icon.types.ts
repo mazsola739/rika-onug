@@ -1,10 +1,10 @@
+import { IconType } from 'types'
+
 export interface IconProps {
-  iconName: string
+  iconName: IconType
   size: number
-  fill: string
 }
 
 export interface StyledIconProps {
   size: number
-  fill: string
 }
