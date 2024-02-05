@@ -12,8 +12,8 @@ export const RoomFooter: React.FC = observer(() => {
   const totalPlayers = selectedDeckStore.totalPlayers
 
   const buttonText = totalPlayers
-    ? `${buttons.deal_text} FOR ${totalPlayers}`
-    : buttons.deal_text
+    ? `${buttons.deal_label} FOR ${totalPlayers}`
+    : buttons.deal_label
 
   // TODO these click handlers could be merged into one click handler which get one more information the type
   const handleResetGame = useCallback(() => {

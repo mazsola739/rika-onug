@@ -28,7 +28,7 @@ export const Ready = styled.div`
 `
 
 export const Marks = styled.div`
-  padding: 20px 0;
+  padding: 20px 10px;
   align-content: flex-start;
   display: flex;
   flex-direction: row;

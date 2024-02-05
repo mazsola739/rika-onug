@@ -7,7 +7,7 @@ const renderMarks = (selectedMarks: MarkType[]) => (
     {selectedMarks.map(
       (mark, index) =>
         mark.is_in_deck && (
-          <Token key={index} tokenName={mark.token_name} size={60} />
+          <Token key={index} tokenName={mark.token_name} size={55} />
         )
     )}
   </Marks>
@@ -19,12 +19,12 @@ const renderArtifacts = (
   hasSentinel: boolean
 ) => (
   <Marks>
-    {hasSentinel && <Token tokenName="shield" size={60} />}
+    {hasSentinel && <Token tokenName="shield" size={55} />}
     {hasCurator &&
       artifacts.map(
         (artifact, index) =>
           artifact.token_name !== 'shield' && (
-            <Token key={index} tokenName={artifact.token_name} size={60} />
+            <Token key={index} tokenName={artifact.token_name} size={55} />
           )
       )}
   </Marks>

@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { CardType, ActionCardType, MarkType } from 'types'
 import { selectedDeckUtils, utils } from 'utils'
-import { action_marks } from 'data'
+import { action_marks, action_cards } from 'data'
 import { alienIds, assassinIds, evils, roles, vampireIds } from 'constant'
 import { roomStore } from 'store'
 import { deckStore } from './DeckStore'
@@ -22,6 +22,7 @@ const { areAnyCardSelectedById, findCardById, isCardSelectedById } = utils
 
 class SelectedDeckStore {
   selectedCards: CardType[] = []
+  actionCards: ActionCardType[] = action_cards
   gamePlayDeck: ActionCardType[] = []
   MAX_ALLOWED_PLAYERS = 12
   selectedMarks: MarkType[] = action_marks
@@ -87,6 +88,25 @@ class SelectedDeckStore {
     this.selectedCards = []
     roomStore.resetDetailedCardInfo()
     this.updateMarksInDeckStatus()
+  }
+
+  updatePlayDeckWithSelectedCards(selectedCards: CardType[]): void {
+    const selectedCardIds = selectedCards.map((card) => card.id)
+
+    const selectedActionCards = this.actionCards.filter((actionCard) =>
+      selectedCardIds.includes(actionCard.id)
+    )
+
+    const uniqueCardIds = new Set([
+      ...selectedCardIds,
+      ...selectedActionCards.map((card) => card.id),
+    ])
+
+    const uniqueCards = Array.from(uniqueCardIds)
+      .map((id) => this.actionCards.find((actionCard) => actionCard.id === id))
+      .filter(Boolean) as ActionCardType[]
+
+    this.gamePlayDeck = uniqueCards
   }
 
   isMirrorManOrCopycatSelected(): boolean {

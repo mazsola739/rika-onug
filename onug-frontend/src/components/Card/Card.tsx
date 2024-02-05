@@ -22,21 +22,6 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
   }`
 
   const handleCardClick = useCallback(() => {
-    /*   selectedDeckStore.toggleCardSelectionStatus(id)
-    selectedDeckStore.toggleCardSelection({
-      id,
-      card_name,
-      display_name,
-      rules,
-      expansion,
-      team,
-      wake_up_time,
-    })
-
-    selectedDeckStore.updatePlayDeckWithSelectedCards(
-      selectedDeckStore.selectedCards
-    ) */
-
     sendJsonMessage?.({
       type: UPDATE_ROOM,
       card_id: id,
