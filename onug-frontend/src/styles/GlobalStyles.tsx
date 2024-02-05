@@ -1,14 +1,5 @@
 import { Global, css } from '@emotion/react'
-
-import {
-  fontFamily,
-  fontSize20Pixel,
-  nero,
-  netflixWhite,
-  nightRider,
-  watermelon,
-} from './variables'
-
+//TODO all themes & global styles
 const globalStyles = css`
   *,
   *::before,
@@ -17,17 +8,18 @@ const globalStyles = css`
   }
 
   body {
-    background: linear-gradient(
-        330deg,
-        ${watermelon} -8%,
-        ${nightRider} 50%,
-        ${netflixWhite + '00'} 70%
+    background-image: radial-gradient(
+        circle,
+        hsla(190, 100%, 50%, 0.7) 0%,
+        hsla(240, 86%, 25%, 0.7) 100%
       ),
-      ${nero};
+      url('/assets/backgrounds/cards.png');
+    background-position: center center;
+    background-size: cover;
     background-repeat: no-repeat;
-    color: ${netflixWhite};
-    font-family: ${fontFamily};
-    font-size: ${fontSize20Pixel}px;
+    color: white;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 14px;
     margin: 0;
   }
 `

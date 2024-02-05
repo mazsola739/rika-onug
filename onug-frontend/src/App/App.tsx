@@ -1,11 +1,13 @@
 import { observer } from 'mobx-react-lite'
 import { Lobby, Room, GameTable, GamePlay, Voting, God } from 'routes'
 import { wsStore } from 'store'
-import { ConnectionStatusIcon, StyledApp } from './App.styles'
+import { ConnectionStatus, StyledApp } from './App.styles'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NEWBIE, RELOAD } from 'constant'
+import { Icon } from 'components'
+import { IconType } from 'types'
 
 export const App: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(false)
@@ -35,22 +37,21 @@ export const App: React.FC = observer(() => {
     }
   }, [wsStore, sendJsonMessage, lastJsonMessage, firstTime])
 
-  const connectionStatus = {
+  const iconMapping: { [key: string]: IconType } = {
     [ReadyState.CONNECTING]: 'connecting',
     [ReadyState.OPEN]: 'open',
     [ReadyState.CLOSING]: 'closing',
     [ReadyState.CLOSED]: 'closed',
     [ReadyState.UNINSTANTIATED]: 'uninstantiated',
-  }[readyState]
+  }
 
-  const imageSrc = useMemo(
-    () => `/assets/icons/${connectionStatus}.svg`,
-    [connectionStatus]
-  )
+  const iconName: IconType = iconMapping[readyState]
 
   return (
     <StyledApp>
-      <ConnectionStatusIcon src={imageSrc} alt={connectionStatus} />
+      <ConnectionStatus>
+        <Icon iconName={iconName} size={25} />
+      </ConnectionStatus>
       <Router>
         <Routes>
           <Route path="/" element={<Lobby />} />

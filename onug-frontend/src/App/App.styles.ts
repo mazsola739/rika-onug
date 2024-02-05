@@ -16,9 +16,8 @@ export const StyledApp = styled.div`
   background-repeat: no-repeat;
 `
 
-export const ConnectionStatusIcon = styled.img`
+export const ConnectionStatus = styled.div`
   bottom: 5px;
   position: absolute;
   right: 5px;
-  width: 25px;
 `
