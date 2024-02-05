@@ -1,5 +1,5 @@
 const { validateRoom } = require("../validator")
-const { determineTotalPlayers, toggleCard } = require("../utils")
+const { determineTotalPlayers, toggleCardSelect } = require("../utils")
 const { repository } = require("../repository")
 const { upsertRoomState } = repository
 const { HYDRATE_ROOM } = require("../constant/ws")
@@ -13,7 +13,7 @@ exports.updateRoom = async (message) => {
   const newGameState = { ...gameState }
   let totalPlayers = determineTotalPlayers(newGameState.selected_cards.length, newGameState.selected_cards)
   // TODO validate if player is admin
-  newGameState.selected_cards = toggleCard(
+  newGameState.selected_cards = toggleCardSelect(
     newGameState.selected_cards,
     card_id,
     totalPlayers

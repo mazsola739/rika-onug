@@ -1,47 +1,20 @@
 import { Button, Footer, FooterButtons } from 'components'
 import { observer } from 'mobx-react-lite'
-import { useCallback, useState } from 'react'
-import { buttons, LEAVE_TABLE, READY, START_GAME } from 'constant'
-import { wsStore } from 'store'
+import { buttons } from 'constant'
+import { useClickHandler } from 'hooks'
 
 export const GameTableFooter: React.FC = observer(() => {
-  const [ready, setReady] = useState(false)
-
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
 
-  const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
-
-  const handleStopGame = useCallback(() => {
-    sendJsonMessage?.({
-      type: LEAVE_TABLE,
-      room_id,
-      token,
-    })
-  }, [sendJsonMessage])
-
-  const handleStartGame = useCallback(() => {
-    sendJsonMessage?.({
-      type: START_GAME,
-      room_id,
-      token,
-    })
-  }, [sendJsonMessage])
-
-  const handleReady = useCallback(() => {
-    sendJsonMessage?.({
-      type: READY,
-      token,
-      room_id,
-    })
-    setReady(!ready)
-  }, [sendJsonMessage, setReady, ready])
+  const { handleLeaveTable, handleStartGame, handleReady, ready } =
+    useClickHandler(room_id, token)
 
   return (
     <Footer>
       <FooterButtons>
         <Button
-          onClick={handleStopGame}
+          onClick={handleLeaveTable}
           buttonText={buttons.stop_button_label}
           variant="red"
         />

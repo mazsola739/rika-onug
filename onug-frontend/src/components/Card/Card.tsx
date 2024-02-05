@@ -29,7 +29,7 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
       token,
     })
 
-    roomStore.toggleInfo(id, 'card')
+    roomStore.toggleInfo(id)
   }, [
     id,
     card_name,

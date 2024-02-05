@@ -7,15 +7,7 @@ import { CardImage } from 'components'
 
 export const SelectedCard: React.FC<SelectedCardProps> = observer(
   ({ card }) => {
-    const {
-      id,
-      card_name,
-      display_name,
-      rules,
-      expansion,
-      team,
-      wake_up_time,
-    } = card
+    const { id } = card
     const isSelected = selectedDeckStore.selectedCards.some(
       (selectedCard) => selectedCard.id === id
     )
@@ -26,15 +18,6 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
 
     const handleDeselect = useCallback(() => {
       selectedDeckStore.toggleCardSelectionStatus(id)
-      selectedDeckStore.toggleCardSelection({
-        id,
-        card_name,
-        display_name,
-        rules,
-        expansion,
-        team,
-        wake_up_time,
-      })
 
       sendJsonMessage?.({
         type: UPDATE_ROOM,
@@ -44,18 +27,8 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
         action,
       })
 
-      roomStore.toggleInfo(id, 'card')
-    }, [
-      id,
-      card_name,
-      display_name,
-      rules,
-      expansion,
-      team,
-      wake_up_time,
-      room_id,
-      sendJsonMessage,
-    ])
+      roomStore.toggleInfo(id)
+    }, [id, sendJsonMessage])
 
     return (
       <CardImage

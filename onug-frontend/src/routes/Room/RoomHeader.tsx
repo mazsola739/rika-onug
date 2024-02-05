@@ -11,18 +11,17 @@ import { gamePlayStore, roomStore } from 'store'
 
 const RuleInfo: React.FC = observer(() => {
   const detailedCardInfo = roomStore.getDetailedCardInfo()
-  const detailedTokenInfo = roomStore.getDetailedTokenInfo()
 
   const { isGameStopped } = gamePlayStore
-  //todo delete tokens
+
   const displayInfo =
     detailedCardInfo.id !== 0
       ? `${detailedCardInfo.display_name}: ${detailedCardInfo.rules}`
-      : detailedTokenInfo.rules
+      : ''
   const imgSrc =
     detailedCardInfo.id !== 0
       ? `/assets/cards/${detailedCardInfo.card_name}.png`
-      : `/assets/tokens/${detailedTokenInfo.token_name}.png`
+      : ''
 
   return (
     <StyledRuleInfo>

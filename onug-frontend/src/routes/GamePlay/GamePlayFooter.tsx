@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite'
-import { gamePlayStore, wsStore } from 'store'
+import { gamePlayStore } from 'store'
 import { Button, Footer, FooterButtons } from 'components'
-import { PAUSE_GAME, STOP_GAME, buttons } from 'constant'
-import { useCallback } from 'react'
+import { buttons } from 'constant'
+import { useClickHandler } from 'hooks'
 
 export const GamePlayFooter: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
@@ -11,23 +11,7 @@ export const GamePlayFooter: React.FC = observer(() => {
     ? buttons.pause_button_alt_label
     : buttons.pause_button_label
 
-  const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
-
-  const handlePauseGame = useCallback(() => {
-    sendJsonMessage?.({
-      type: PAUSE_GAME,
-      room_id,
-      token,
-    })
-  }, [])
-
-  const handleStopGame = useCallback(() => {
-    sendJsonMessage?.({
-      type: STOP_GAME,
-      room_id,
-      token,
-    })
-  }, [sendJsonMessage])
+  const { handlePauseGame, handleStopGame } = useClickHandler(room_id, token)
 
   return (
     <Footer>

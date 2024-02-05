@@ -1,14 +1,8 @@
 import { observer } from 'mobx-react-lite'
 import { gameTableStore, narrationStore, playerStore, wsStore } from 'store'
 import { Button, DealtCards, Header, Main, OwnCard } from 'components'
-import {
-  ARRIVE_GAME_PLAY,
-  HYDRATE_GAME_PLAY,
-  INTERACTION,
-  REDIRECT,
-  STAGES,
-} from 'constant'
-import { useCallback, useEffect, useState } from 'react'
+import { ARRIVE_GAME_PLAY, HYDRATE_GAME_PLAY, REDIRECT, STAGES } from 'constant'
+import { useEffect, useState } from 'react'
 import { GamePlayHeader } from './GamePlayHeader'
 import { useNavigate } from 'react-router-dom'
 import {
@@ -21,6 +15,7 @@ import {
   StyledGamePlay,
 } from './GamePlay.styles'
 import { GamePlayFooter } from './GamePlayFooter'
+import { useClickHandler } from 'hooks'
 
 export const GamePlay: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
@@ -58,14 +53,7 @@ export const GamePlay: React.FC = observer(() => {
     }
   }, [lastJsonMessage])
 
-  const handleInteraction = useCallback(() => {
-    sendJsonMessage?.({
-      type: INTERACTION,
-      room_id,
-      token,
-      selected_positions: ['player_2'],
-    })
-  }, [sendJsonMessage])
+  const { handleInteraction } = useClickHandler(room_id, token)
 
   const boardCards = gameTableStore.boardCards
   const players = gameTableStore.players

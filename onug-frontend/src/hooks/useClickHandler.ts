@@ -1,0 +1,151 @@
+import { useCallback, useState } from 'react'
+import {
+  JOIN_ROOM,
+  LEAVE_ROOM,
+  DEAL,
+  RESET,
+  START_GAME,
+  READY,
+  PAUSE_GAME,
+  STOP_GAME,
+  INTERACTION,
+  LEAVE_TABLE,
+  UPDATE_ROOM,
+} from 'constant'
+import { gamePlayStore, selectedDeckStore, wsStore, roomStore } from 'store'
+
+export const useClickHandler = (room_id: string, token: string) => {
+  const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
+
+  const handleJoinRoom = (room_id: string) => {
+    sendJsonMessage?.({
+      type: JOIN_ROOM,
+      room_id,
+      token,
+    })
+  }
+
+  const handleLeaveRoom = useCallback(() => {
+    sendJsonMessage?.({
+      type: LEAVE_ROOM,
+      room_id,
+      token,
+    })
+  }, [sendJsonMessage])
+
+  const handleToGameTable = useCallback(() => {
+    sendJsonMessage?.({
+      type: DEAL,
+      room_id,
+      token,
+    })
+  }, [sendJsonMessage])
+
+  const handleResetGame = useCallback(() => {
+    sendJsonMessage?.({
+      type: RESET,
+      room_id,
+      token,
+    })
+    gamePlayStore.resetGame()
+  }, [sendJsonMessage])
+
+  const handleStartGame = useCallback(() => {
+    sendJsonMessage?.({
+      type: START_GAME,
+      room_id,
+      token,
+    })
+  }, [sendJsonMessage])
+
+  const [ready, setReady] = useState(false)
+
+  const handleReady = useCallback(() => {
+    sendJsonMessage?.({
+      type: READY,
+      token,
+      room_id,
+    })
+    setReady(!ready)
+  }, [sendJsonMessage, setReady, ready])
+
+  const handlePauseGame = useCallback(() => {
+    sendJsonMessage?.({
+      type: PAUSE_GAME,
+      room_id,
+      token,
+    })
+  }, [sendJsonMessage])
+
+  const handleStopGame = useCallback(() => {
+    sendJsonMessage?.({
+      type: STOP_GAME,
+      room_id,
+      token,
+    })
+  }, [sendJsonMessage])
+
+  const handleLeaveTable = useCallback(() => {
+    sendJsonMessage?.({
+      type: LEAVE_TABLE,
+      room_id,
+      token,
+    })
+  }, [sendJsonMessage])
+
+  const handleInteraction = useCallback(() => {
+    sendJsonMessage?.({
+      type: INTERACTION,
+      room_id,
+      token,
+      selected_positions: ['player_2'],
+    })
+  }, [sendJsonMessage])
+
+  const handleDeselect = useCallback(
+    (id: number, action: string) => {
+      selectedDeckStore.toggleCardSelectionStatus(id)
+
+      sendJsonMessage?.({
+        type: UPDATE_ROOM,
+        card_id: id,
+        room_id,
+        token,
+        action,
+      })
+
+      roomStore.toggleInfo(id)
+    },
+    [selectedDeckStore, roomStore, sendJsonMessage]
+  )
+
+  const handleCardClick = useCallback(
+    (id: number) => {
+      sendJsonMessage?.({
+        type: UPDATE_ROOM,
+        card_id: id,
+        room_id,
+        token,
+      })
+
+      roomStore.toggleInfo(id)
+    },
+    [roomStore, sendJsonMessage]
+  )
+
+  return {
+    handleJoinRoom,
+    handleLeaveRoom,
+    handleToGameTable,
+    handleLeaveTable,
+    handleResetGame,
+    handleStartGame,
+    handleReady,
+    handlePauseGame,
+    handleStopGame,
+    handleInteraction,
+    handleDeselect,
+    handleCardClick,
+    ready,
+  }
+}

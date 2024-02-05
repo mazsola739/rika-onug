@@ -24,7 +24,7 @@ exports.random_aliens = [
   "aliens_left_text", //swap card from right side alien - show new alien card secretly - update aliens known & actual card
   "aliens_right_text", //swap card from left side alien - show new alien card secretly - update aliens known & actual card
   "aliens_show_text", //actual character cards show public - update alines known & actual card
-  "aliens_timer_text", //vote time halfing - no update
+  "aliens_timer_text", //vote time half - no update
   "aliens_newalien_text", //alienAllKeys random selected - show to this player alien cards - update known & actual selected card team
   "aliens_alienhelper_text", //alienAllKeys  random selected - show to this player alien cards - update player known & actual new team alien helper
 ]
@@ -42,9 +42,9 @@ exports.alienAllKeys = [
 
 exports.alphawolf = "alphawolf_kickoff_text" //wolf center card swap to any non werewolf card - update wolf center actual card & selected player actual card
 
-exports.annoyinglad = "annoyinglad_kickoff_text" //left or right neigbor player sending message to selected player - no update
+exports.annoyinglad = "annoyinglad_kickoff_text" //left or right neighbor player sending message to selected player - no update
 
-//TODO rename consts
+//TODO rename const
 exports.apprenticeassassin = "apprenticeassassin_alone_text" //doppelganger! may any player mark swap with Mark of the Assassin - update selected player actual mark
 exports.assassin_apprenticeassassin = "apprenticeassassin_kickoff_text" //doppelganger! show assassin or may any player mark swap with Mark of the Assassin - update selected player actual mark
 
@@ -544,7 +544,7 @@ exports.temptress = "temptress_kickoff_text" //egyszerre többi gonosszal! selec
 
 exports.thecount = "thecount_kickoff_text" // select any non-vampire player place mark of fear - update selected player actual info (make sure if its at a player he cant do action from mark-check point)
 
-exports.thing = "thing_kickoff_text" //left or right neigbor player sending message to selected player - no update
+exports.thing = "thing_kickoff_text" //left or right neighbor player sending message to selected player - no update
 
 exports.troublemaker = "troublemaker_kickoff_text" //may select another 2 player, swap cards, - update selected actual cards
 

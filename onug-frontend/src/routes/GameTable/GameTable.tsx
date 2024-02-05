@@ -32,8 +32,6 @@ import { DealtCards, Main, OwnCard, PlayerList } from 'components'
 const { findCardById } = utils
 const { renderMarks, renderArtifacts } = gameTableUtils
 
-//! TODO boardCards!
-
 export const GameTable: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
   const navigate = useNavigate()

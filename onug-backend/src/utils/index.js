@@ -1,4 +1,4 @@
-const { toggleCard, getCardById, distributeCards, isCardSelectedById } = require("./card")
+const { toggleCardSelect, getCardById, distributeCards, isCardSelectedById } = require("./card")
 const { determineTotalPlayers, getBoard } = require("./player")
 const { randomPlayerName } = require("./name-generator")
 const { sanitize, truncate } = require("./sanitizer")
@@ -6,7 +6,7 @@ const { isGameTableClosed, isGamePlayStopped } = require("./game-state")
 const { buildSceneForCardId } = require("./scene")
 
 module.exports = {
-  toggleCard,
+  toggleCardSelect,
   determineTotalPlayers,
   randomPlayerName,
   sanitize,

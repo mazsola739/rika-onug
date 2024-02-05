@@ -11,7 +11,7 @@ const specialCardsDefaultToAddLookupMap = {
   69: 60,
 }
 
-const toggleCard = (selectedCards, cardId, totalPlayers) => {
+const toggleCardSelect = (selectedCards, cardId, totalPlayers) => {
   let newSelectedCards = [...selectedCards]
 
   if (containsById(selectedCards, cardId)) {
@@ -22,8 +22,8 @@ const toggleCard = (selectedCards, cardId, totalPlayers) => {
   return newSelectedCards
 }
 
-const containsByCriteria = (selectedCards, criteria) =>
-  criteria.some((c) => containsById(selectedCards, c))
+const containsByIdsToCheck = (selectedCards, idsToCheck) =>
+  idsToCheck.some((id) => containsById(selectedCards, id))
 
 const containsById = (selectedCards, cardId) =>
   selectedCards.some((id) => id === cardId)
@@ -33,17 +33,17 @@ const handleSelectCard = (selectedCards, cardId) => {
   newSelectedCards.push(cardId)
 
   if (cardId === alphaWolfId) {
-    handleCardByRole(newSelectedCards, wolfIdsToCheck, alphaWolfId)
+    handleCardById(newSelectedCards, wolfIdsToCheck, alphaWolfId)
   } else if (cardId === temptressId) {
-    handleCardByRole(newSelectedCards, supervillainIdsToCheck, temptressId)
+    handleCardById(newSelectedCards, supervillainIdsToCheck, temptressId)
   } else if (
     cardId === mirrorManId &&
-    containsByCriteria(selectedCards, [copycatId])
+    containsByIdsToCheck(selectedCards, [copycatId])
   ) {
     newSelectedCards = newSelectedCards.filter((id) => id !== copycatId)
   } else if (
     cardId === copycatId &&
-    containsByCriteria(selectedCards, [mirrorManId])
+    containsByIdsToCheck(selectedCards, [mirrorManId])
   ) {
     newSelectedCards = newSelectedCards.filter((id) => id !== mirrorManId)
   }
@@ -54,17 +54,17 @@ const handleSelectCard = (selectedCards, cardId) => {
 const handleDeselectCard = (selectedCards, cardId) => {
   let newSelectedCards = [...selectedCards]
   if (prohibitDeselectingWerewolf(selectedCards, cardId)) {
-    handleCardByRole(newSelectedCards, wolfIdsToCheck, alphaWolfId)
+    handleCardById(newSelectedCards, wolfIdsToCheck, alphaWolfId)
   } else if (prohibitDeselectingSupervillain(selectedCards, cardId)) {
-    handleCardByRole(newSelectedCards, supervillainIdsToCheck, temptressId)
+    handleCardById(newSelectedCards, supervillainIdsToCheck, temptressId)
   } else {
     newSelectedCards = selectedCards.filter((id) => id !== cardId)
   }
   return newSelectedCards
 }
 
-const handleCardByRole = (selectedCards, idsToCheck, specialCardId) => {
-  if (!containsByCriteria(selectedCards, idsToCheck)) {
+const handleCardById = (selectedCards, idsToCheck, specialCardId) => {
+  if (!containsByIdsToCheck(selectedCards, idsToCheck)) {
     const cardToAdd = specialCardsDefaultToAddLookupMap[specialCardId]
     selectedCards.push(cardToAdd)
   }
@@ -77,7 +77,7 @@ const prohibitDeselectingWerewolf = (selectedCards, cardId) => {
 
   return (
     numberOfSelectedWolfCards === 1 &&
-    containsByCriteria(selectedCards, [alphaWolfId]) &&
+    containsByIdsToCheck(selectedCards, [alphaWolfId]) &&
     wolfIdsToCheck.includes(cardId)
   )
 }
@@ -89,7 +89,7 @@ const prohibitDeselectingSupervillain = (selectedCards, card) => {
 
   return (
     numberOfSelectedVillainCards === 1 &&
-    containsByCriteria(selectedCards, [temptressId]) &&
+    containsByIdsToCheck(selectedCards, [temptressId]) &&
     supervillainIdsToCheck.includes(card)
   )
 }
@@ -147,7 +147,7 @@ const isCardSelectedById = (cardIds, cardId) =>
   cardIds.some((id) => id === cardId)
 
 module.exports = {
-  toggleCard,
+  toggleCardSelect,
   distributeCards,
   isCardSelectedById,
   getCardById,
