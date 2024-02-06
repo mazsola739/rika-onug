@@ -39,10 +39,11 @@ class GameBoardStore {
 
     this.setPlayer = this.setPlayer.bind(this)
     this.setPlayers = this.setPlayers.bind(this)
-    this.setBoardCards = this.setBoardCards.bind(this)
+    this.setGameTableBoardCards = this.setGameTableBoardCards.bind(this)
     this.setPlayerCards = this.setPlayerCards.bind(this)
     this.setCenterCards = this.setCenterCards.bind(this)
 
+    this.boardCards = []
     this.centerCards = []
     this.playerCards = []
 
@@ -51,18 +52,18 @@ class GameBoardStore {
     this.center_right = { position: 'center_right' }
     this.center_wolf = { position: 'center_wolf' }
     this.center_villain = { position: 'center_villain' }
-    this.player_1 = { position: 'player_1', ready: false }
-    this.player_2 = { position: 'player_2', ready: false }
-    this.player_3 = { position: 'player_3', ready: false }
-    this.player_4 = { position: 'player_4', ready: false }
-    this.player_5 = { position: 'player_5', ready: false }
-    this.player_6 = { position: 'player_6', ready: false }
-    this.player_7 = { position: 'player_7', ready: false }
-    this.player_8 = { position: 'player_8', ready: false }
-    this.player_9 = { position: 'player_9', ready: false }
-    this.player_10 = { position: 'player_10', ready: false }
-    this.player_11 = { position: 'player_11', ready: false }
-    this.player_12 = { position: 'player_12', ready: false }
+    this.player_1 = { position: 'player_1' }
+    this.player_2 = { position: 'player_2' }
+    this.player_3 = { position: 'player_3' }
+    this.player_4 = { position: 'player_4' }
+    this.player_5 = { position: 'player_5' }
+    this.player_6 = { position: 'player_6' }
+    this.player_7 = { position: 'player_7' }
+    this.player_8 = { position: 'player_8' }
+    this.player_9 = { position: 'player_9' }
+    this.player_10 = { position: 'player_10' }
+    this.player_11 = { position: 'player_11' }
+    this.player_12 = { position: 'player_12' }
   }
 
   setPlayer(player: PlayerType): void {
@@ -81,18 +82,14 @@ class GameBoardStore {
     this.players = players
   }
 
-  /*   setBoardCards(boardCards: BoardCardType[]): void {
-    this.boardCards = boardCards
-  }
- */
-  setBoardCards(boardCards: BoardCardType[]): void {
+  setGameTableBoardCards(boardCards: BoardCardType[]): void {
     this.boardCards = boardCards
 
     const playerCards: PositionProperties[] = []
     const centerCards: PositionProperties[] = []
 
     boardCards.forEach((boardCard) => {
-      const { position, card } = boardCard
+      const { position, card, ready } = boardCard
       const positionKey = position as PositionKeys
       if (this[positionKey]) {
         const positionObject = this[positionKey] as PositionProperties
@@ -102,6 +99,7 @@ class GameBoardStore {
             : card.id
         positionObject.artifact = card.artifact
         positionObject.shield = card.shield
+        positionObject.ready = ready
 
         if (position.startsWith('center')) {
           centerCards.push(positionObject)
@@ -111,11 +109,34 @@ class GameBoardStore {
       }
     })
 
-    this.players.forEach((player) => {
-      const positionKey = `player_${player.player_number}` as PositionKeys
-      const position = playerCards.find((card) => card.position === positionKey)
-      if (position) {
-        position.ready = player.ready
+    this.centerCards = centerCards
+    this.playerCards = playerCards
+  }
+
+  setGamePlayBoardCards(boardCards: BoardCardType[]): void {
+    this.boardCards = boardCards
+
+    const playerCards: PositionProperties[] = []
+    const centerCards: PositionProperties[] = []
+
+    boardCards.forEach((boardCard) => {
+      const { position, card, ready } = boardCard
+      const positionKey = position as PositionKeys
+      if (this[positionKey]) {
+        const positionObject = this[positionKey] as PositionProperties
+        positionObject.id =
+          `player_${this.player.player_number}` === positionObject.position
+            ? this.player.player_card_id
+            : card.id
+        positionObject.artifact = card.artifact
+        positionObject.shield = card.shield
+        positionObject.ready = ready
+
+        if (position.startsWith('center')) {
+          centerCards.push(positionObject)
+        } else {
+          playerCards.push(positionObject)
+        }
       }
     })
 

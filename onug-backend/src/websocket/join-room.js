@@ -35,7 +35,7 @@ exports.joinRoom = async (ws, message) => {
       return ws.send(
         JSON.stringify({
           type: JOIN_ROOM,
-          succes: false,
+          success: false,
           errors: ["No more available names. Room is full."],
         })
       )
@@ -61,7 +61,7 @@ exports.joinRoom = async (ws, message) => {
       return ws.send(
         JSON.stringify({
           type: JOIN_ROOM,
-          succes: false,
+          success: false,
           errors: ["No more available names. Room is full."],
         })
       )

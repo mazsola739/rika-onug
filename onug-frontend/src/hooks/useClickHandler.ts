@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback } from 'react'
 import {
   JOIN_ROOM,
   LEAVE_ROOM,
@@ -58,16 +58,13 @@ export const useClickHandler = (room_id: string, token: string) => {
     })
   }, [sendJsonMessage])
 
-  const [ready, setReady] = useState(false)
-
   const handleReady = useCallback(() => {
     sendJsonMessage?.({
       type: READY,
       token,
       room_id,
     })
-    setReady(!ready)
-  }, [sendJsonMessage, setReady, ready])
+  }, [sendJsonMessage])
 
   const handlePauseGame = useCallback(() => {
     sendJsonMessage?.({
@@ -144,6 +141,5 @@ export const useClickHandler = (room_id: string, token: string) => {
     handleInteraction,
     handleDeselect,
     handleCardClick,
-    ready,
   }
 }

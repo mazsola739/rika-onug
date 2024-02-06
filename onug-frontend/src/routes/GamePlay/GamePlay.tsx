@@ -23,6 +23,8 @@ export const GamePlay: React.FC = observer(() => {
 
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
+  const { setGameTableBoardCards } = gameBoardStore
+  const { setNarration, setTitle } = narrationStore
 
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
@@ -44,14 +46,15 @@ export const GamePlay: React.FC = observer(() => {
       lastJsonMessage?.type === HYDRATE_GAME_PLAY /* &&
       lastJsonMessage?.success */ //TODO success
     ) {
-      narrationStore.setNarration(lastJsonMessage.actual_scene.narration)
-      narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
+      setGameTableBoardCards(lastJsonMessage.board.boardCards)
+      setNarration(lastJsonMessage.actual_scene.narration)
+      setTitle(lastJsonMessage.actual_scene.scene_title)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [lastJsonMessage])
+  }, [lastJsonMessage, setGameTableBoardCards, setNarration, setTitle])
 
   const { handleInteraction } = useClickHandler(room_id, token)
 

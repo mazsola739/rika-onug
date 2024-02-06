@@ -1,5 +1,5 @@
 const { toggleCardSelect, getCardById, distributeCards, isCardSelectedById } = require("./card")
-const { determineTotalPlayers, getBoard } = require("./player")
+const { determineTotalPlayers, getGameTableBoard, getGamePlayBoard } = require("./player")
 const { randomPlayerName } = require("./name-generator")
 const { sanitize, truncate } = require("./sanitizer")
 const { isGameTableClosed, isGamePlayStopped } = require("./game-state")
@@ -13,7 +13,8 @@ module.exports = {
   truncate,
   isGameTableClosed,
   isGamePlayStopped,
-  getBoard,
+  getGameTableBoard,
+  getGamePlayBoard,
   buildSceneForCardId,
   getCardById,
   distributeCards,

@@ -7,8 +7,10 @@ export const GameTableFooter: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
 
-  const { handleLeaveTable, handleStartGame, handleReady, ready } =
-    useClickHandler(room_id, token)
+  const { handleLeaveTable, handleStartGame, handleReady } = useClickHandler(
+    room_id,
+    token
+  )
 
   return (
     <Footer>
@@ -26,7 +28,9 @@ export const GameTableFooter: React.FC = observer(() => {
         <Button
           onClick={handleReady}
           variant="green"
-          buttonText={ready ? buttons.im_ready_label : buttons.ready_label}
+          buttonText={
+            /* ready ? buttons.im_ready_label :  */ buttons.ready_label
+          }
         />
       </FooterButtons>
     </Footer>

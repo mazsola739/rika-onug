@@ -94,8 +94,6 @@ class DeckStore {
           return false
       }
     })
-
-    console.log(this.marks)
   }
 }
 

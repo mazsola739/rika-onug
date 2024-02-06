@@ -1,7 +1,7 @@
 const { HYDRATE_READY } = require("../constant/ws")
 const { logDebug, logError } = require("../log")
 const { repository } = require("../repository")
-const { getBoard } = require("../utils")
+const { getGameTableBoard } = require("../utils")
 const { broadcast } = require("./connections")
 const { readGameState, upsertRoomState } = repository
 
@@ -19,12 +19,14 @@ exports.ready = async (message) => {
     newGameState.players[token].ready = !gameState.players[token].ready
 
     logDebug(`gameState.players[token].ready: ${gameState.players[token].ready}`)
-    
+
+    const board = getGameTableBoard(newGameState)
+
     await upsertRoomState(newGameState)
 
     return broadcast(room_id, {
       type: HYDRATE_READY,
-      board: getBoard(newGameState)
+      board: board
     })
   } catch (error) {
     logError(error)

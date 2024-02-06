@@ -6,6 +6,7 @@ const { STAGES } = require("../constant/stage")
 const { broadcast } = require("./connections")
 const { upsertRoomState } = repository
 const { startGamePlay } = require("../screen-play")
+const { getGamePlayBoard } = require("../utils")
 
 exports.startGame = async (message) => {
   const { room_id, token } = message
@@ -29,12 +30,15 @@ exports.startGame = async (message) => {
   }
 
   logTrace(`Game started by player [${token}], in room [${room_id}], with startTime: [${startTime}]`)
+
+  const board = getGamePlayBoard(newGameState)
   // TODO validate player
   await upsertRoomState(newGameState)
 
   const startGame = {
     type: REDIRECT,
-    path: `/gameplay/${room_id}`
+    path: `/gameplay/${room_id}`,
+    board: board
   }
 
   startGamePlay(gameState.room_id)
