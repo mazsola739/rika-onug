@@ -20,8 +20,7 @@ class DeckStore {
   artifacts: TokenType[] = artifacts
   selectedCards: CardType[] = []
   MAX_ALLOWED_PLAYERS = 12
-  selectedMarks: TokenType[] = marks
-  selectedCardIds: number[] = []
+  selectedMarks: TokenType[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -51,75 +50,52 @@ class DeckStore {
     return determineTotalPlayers(this.totalCharacters, this.selectedCards)
   }
 
-  isSelected(cardId: number): boolean {
-    return this.selectedCardIds.includes(cardId)
-  }
-
   setSelectedCard(cardIds: number[]): void {
-    this.selectedCards = cardIds.map((cardId) => deckStore.getCardById(cardId))
-    this.selectedCardIds = cardIds
+    this.selectedCards = cardIds.map((cardId) => this.getCardById(cardId))
+    this.updateSelectedMarks()
   }
 
   resetSelection(): void {
     this.selectedCards = []
     roomStore.resetDetailedCardInfo()
-    this.updateMarksInDeckStatus()
+    this.updateSelectedMarks()
   }
 
   handleSelectCard(card: CardType): void {
     selectCard(this.selectedCards, card)
-    this.updateMarksInDeckStatus()
+    this.updateSelectedMarks()
   }
 
   handleDeselectCard(card: CardType): void {
     deselectCard(this.selectedCards, card)
-    this.updateMarksInDeckStatus()
+    this.updateSelectedMarks()
   }
 
-  updateSelectedCards(cardIds: number[]): void {
-    this.selectedCards = []
-    cardIds.forEach((cardId) => {
-      this.handleSelectCard(findCardById(this.deck, cardId))
-    })
-  }
-
-  updateMarksInDeckStatus(): void {
-    this.selectedMarks.forEach((mark) => {
+  updateSelectedMarks(): void {
+    this.selectedMarks = this.marks.filter((mark) => {
       switch (mark.token_name) {
         case 'mark_of_vampire':
-          mark.is_in_deck = areAnyCardSelectedById(
-            this.selectedCards,
-            vampireIds
-          )
-          break
+          return areAnyCardSelectedById(this.selectedCards, vampireIds)
         case 'mark_of_fear':
-          mark.is_in_deck = isCardSelectedById(this.selectedCards, 39)
-          break
+          return isCardSelectedById(this.selectedCards, 39)
         case 'mark_of_the_bat':
-          mark.is_in_deck = isCardSelectedById(this.selectedCards, 38)
-          break
+          return isCardSelectedById(this.selectedCards, 38)
         case 'mark_of_disease':
-          mark.is_in_deck = isCardSelectedById(this.selectedCards, 32)
-          break
+          return isCardSelectedById(this.selectedCards, 32)
         case 'mark_of_love':
-          mark.is_in_deck = isCardSelectedById(this.selectedCards, 31)
-          break
+          return isCardSelectedById(this.selectedCards, 31)
         case 'mark_of_traitor':
-          mark.is_in_deck = isCardSelectedById(this.selectedCards, 34)
-          break
+          return isCardSelectedById(this.selectedCards, 34)
         case 'mark_of_clarity':
-          mark.is_in_deck = isCardSelectedById(this.selectedCards, 37)
-          break
+          return isCardSelectedById(this.selectedCards, 37)
         case 'mark_of_assassin':
-          mark.is_in_deck = areAnyCardSelectedById(
-            this.selectedCards,
-            assassinIds
-          )
-          break
+          return areAnyCardSelectedById(this.selectedCards, assassinIds)
         default:
-          break
+          return false
       }
     })
+
+    console.log(this.marks)
   }
 }
 

@@ -9,22 +9,18 @@ import {
 import { PositionProperties } from 'types'
 
 const renderPlayerCards = (playerCards: PositionProperties[]) => {
-  console.log(playerCards)
   return (
     <CardContainer>
       <PlayersCards>
-        {playerCards.map(({ position, id, ready }) => {
-          console.log(id)
-          return (
-            <GameCard
-              key={position}
-              isCenter={false}
-              id={id}
-              position={position}
-              ready={ready}
-            />
-          )
-        })}
+        {playerCards.map(({ position, id, ready }) => (
+          <GameCard
+            key={position}
+            isCenter={false}
+            id={id}
+            position={position}
+            ready={ready}
+          />
+        ))}
       </PlayersCards>
     </CardContainer>
   )

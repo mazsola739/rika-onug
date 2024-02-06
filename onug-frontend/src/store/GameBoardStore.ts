@@ -81,6 +81,10 @@ class GameBoardStore {
     this.players = players
   }
 
+  /*   setBoardCards(boardCards: BoardCardType[]): void {
+    this.boardCards = boardCards
+  }
+ */
   setBoardCards(boardCards: BoardCardType[]): void {
     this.boardCards = boardCards
 

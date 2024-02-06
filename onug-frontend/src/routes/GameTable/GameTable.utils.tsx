@@ -4,12 +4,9 @@ import { TokenType } from 'types'
 
 const renderMarks = (selectedMarks: TokenType[]) => (
   <Marks>
-    {selectedMarks.map(
-      (mark, index) =>
-        mark.is_in_deck && (
-          <Token key={index} tokenName={mark.token_name} size={55} />
-        )
-    )}
+    {selectedMarks.map((mark, index) => (
+      <Token key={index} tokenName={mark.token_name} size={55} />
+    ))}
   </Marks>
 )
 

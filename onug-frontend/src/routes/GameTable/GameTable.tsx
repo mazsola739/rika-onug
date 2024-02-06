@@ -38,11 +38,10 @@ export const GameTable: React.FC = observer(() => {
   const token = sessionStorage.getItem('token')
 
   const { hasSentinel, hasMarks, hasCurator } = gameTableStore
-  const selectedMarks = deckStore.selectedMarks
+  const { selectedMarks, deck } = deckStore
+  const { setPlayer, setPlayers, setBoardCards, playerCards } = gameBoardStore
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
-
-  const { setPlayer, setPlayers, setBoardCards } = gameBoardStore
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -62,10 +61,7 @@ export const GameTable: React.FC = observer(() => {
         player_card_id: lastJsonMessage.player_card_id,
         player_name: lastJsonMessage.player_name,
         player_number: lastJsonMessage.player_number,
-        player_card: findCardById(
-          deckStore.deck,
-          lastJsonMessage.player_card_id
-        ),
+        player_card: findCardById(deck, lastJsonMessage.player_card_id),
       })
       setPlayers(lastJsonMessage.board.players)
       setBoardCards(lastJsonMessage.board.boardCards)
@@ -74,22 +70,17 @@ export const GameTable: React.FC = observer(() => {
 
     if (lastJsonMessage?.type === HYDRATE_READY) {
       setPlayers(lastJsonMessage.board.players)
-      setBoardCards(lastJsonMessage.board.boardCards)
+      console.log(playerCards)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [
-    lastJsonMessage,
-    setPlayer,
-    setPlayers,
-    setBoardCards,
-    deckStore,
-    navigate,
-  ])
+  }, [lastJsonMessage, setPlayer, setPlayers, setBoardCards, deck, navigate])
 
   const { player, players } = gameBoardStore
+
+  console.log(selectedMarks)
 
   return (
     <StyledGameTable>

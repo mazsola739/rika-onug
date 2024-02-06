@@ -13,7 +13,6 @@ export type TokenType = {
   expansion: string
   token_name: string
   rules: string
-  is_in_deck?: boolean
 }
 
 export type ScriptType = {

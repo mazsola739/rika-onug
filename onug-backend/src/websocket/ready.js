@@ -24,7 +24,7 @@ exports.ready = async (message) => {
 
     return broadcast(room_id, {
       type: HYDRATE_READY,
-      board: getBoard(gameState)
+      board: getBoard(newGameState)
     })
   } catch (error) {
     logError(error)
