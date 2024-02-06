@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { selectedDeckStore, roomStore, wsStore } from 'store'
+import { deckStore, roomStore, wsStore } from 'store'
 import { StyledCard, CardImage, CardName } from './Card.styles'
 import { CardProps } from './Card.types'
 import { useCallback, useMemo } from 'react'
@@ -13,7 +13,7 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
   const token = sessionStorage.getItem('token')
 
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
-  const isSelected = selectedDeckStore.selectedCards.some(
+  const isSelected = deckStore.selectedCards.some(
     (selectedCard) => selectedCard.id === id
   )
 

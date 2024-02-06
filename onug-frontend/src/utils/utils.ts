@@ -1,7 +1,7 @@
-import { ActionCardType, CardType } from 'types'
+import { CardType } from 'types'
 
 const areAnyCardSelectedById = (
-  selectedCards: ActionCardType[],
+  selectedCards: CardType[],
   cardIds: number[]
 ): boolean =>
   cardIds.some((cardId) => isCardSelectedById(selectedCards, cardId))
@@ -14,7 +14,7 @@ const findCardById = <T extends { id: number }>(
 }
 
 const isCardSelectedById = (
-  selectedCards: ActionCardType[],
+  selectedCards: CardType[],
   cardId: number
 ): boolean => selectedCards.some((card) => card.id === cardId)
 

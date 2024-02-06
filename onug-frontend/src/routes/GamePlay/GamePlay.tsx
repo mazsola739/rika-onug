@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { gameTableStore, narrationStore, playerStore, wsStore } from 'store'
+import { narrationStore, gameBoardStore, wsStore } from 'store'
 import { Button, DealtCards, Header, Main, OwnCard } from 'components'
 import { ARRIVE_GAME_PLAY, HYDRATE_GAME_PLAY, REDIRECT, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
@@ -55,9 +55,7 @@ export const GamePlay: React.FC = observer(() => {
 
   const { handleInteraction } = useClickHandler(room_id, token)
 
-  const boardCards = gameTableStore.boardCards
-  const players = gameTableStore.players
-  const player = playerStore.player
+  const { player } = gameBoardStore
 
   return (
     <StyledGamePlay>
@@ -67,7 +65,7 @@ export const GamePlay: React.FC = observer(() => {
       <Main>
         <GamePlayContainer>
           <GameArea>
-            <DealtCards boardCards={boardCards} players={players} />
+            <DealtCards />
           </GameArea>
           <PlayerHand>
             <OwnCardPlace>

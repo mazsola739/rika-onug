@@ -2,13 +2,13 @@ import { Footer, FooterButtons, Button, SelectedCardList } from 'components'
 import { buttons } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
-import { selectedDeckStore } from 'store'
+import { deckStore } from 'store'
 
 export const RoomFooter: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
 
-  const totalPlayers = selectedDeckStore.totalPlayers
+  const totalPlayers = deckStore.totalPlayers
 
   const buttonText = totalPlayers
     ? `${buttons.deal_label} FOR ${totalPlayers}`
@@ -27,7 +27,7 @@ export const RoomFooter: React.FC = observer(() => {
         />
         <Button
           onClick={handleToGameTable}
-          disabled={!selectedDeckStore.totalPlayers}
+          disabled={!deckStore.totalPlayers}
           buttonText={buttonText}
           variant="green"
         />

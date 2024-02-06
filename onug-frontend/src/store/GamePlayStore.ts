@@ -1,5 +1,4 @@
 import { makeAutoObservable } from 'mobx'
-import { selectedDeckStore } from 'store'
 
 class GamePlayStore {
   isGameStarted = false
@@ -8,18 +7,6 @@ class GamePlayStore {
 
   constructor() {
     makeAutoObservable(this)
-  }
-
-  get hasDusk(): boolean {
-    return selectedDeckStore.hasDusk()
-  }
-
-  get isEpicBattle(): boolean {
-    return selectedDeckStore.isEpicBattle()
-  }
-
-  get shouldStartRipple(): boolean {
-    return selectedDeckStore.shouldStartRipple()
   }
 
   toggleGameStatus(): void {

@@ -9,7 +9,7 @@ import {
 } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useMemo, useState } from 'react'
-import { deckStore, roomStore, selectedDeckStore, wsStore } from 'store'
+import { deckStore, roomStore, wsStore } from 'store'
 import { RoomCardList, StyledRoom } from './Room.styles'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
@@ -40,7 +40,7 @@ export const Room: React.FC = observer(() => {
 
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_ROOM && lastJsonMessage?.success) {
-      selectedDeckStore.setSelectedCard(lastJsonMessage.selected_cards)
+      deckStore.setSelectedCard(lastJsonMessage.selected_cards)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {

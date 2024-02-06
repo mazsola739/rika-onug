@@ -1,8 +1,6 @@
 export * from './WsStore'
 export * from './DeckStore'
-export * from './SelectedDeckStore'
-export * from './DealtCardStore'
-export * from './PlayerStore'
+export * from './GameBoardStore'
 export * from './NarrationStore'
 
 export * from './LobbyStore'

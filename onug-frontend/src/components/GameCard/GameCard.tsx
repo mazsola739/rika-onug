@@ -10,13 +10,16 @@ export const GameCard: React.FC<GameCardProps> = observer(
     const { hasMarks } = gameTableStore
     const card = id === 0 ? '' : deckStore.getCardById(id)
 
-    console.log(card)
-
     const playerTokenName = ready ? `selected_${position}` : position
+    const imgSrc =
+      card && card.id !== 0
+        ? `/assets/cards/${card.card_name}.png`
+        : '/assets/backgrounds/card_back.png'
 
+    console.log(imgSrc)
     return (
       <StyledGameCard>
-        <CardBack backgroundImage={'/assets/backgrounds/card_back.png'} />
+        <CardBack backgroundImage={imgSrc} />
         <Tokens>
           {!isCenter && <Token tokenName={playerTokenName} size={35} />}
           {!isCenter && hasMarks && <Token tokenName={'mark_back'} size={35} />}

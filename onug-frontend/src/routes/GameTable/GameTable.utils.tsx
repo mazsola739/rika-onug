@@ -1,8 +1,8 @@
 import { Token } from 'components'
 import { Marks } from './GameTable.styles'
-import { MarkType, TokenType } from 'types'
+import { TokenType } from 'types'
 
-const renderMarks = (selectedMarks: MarkType[]) => (
+const renderMarks = (selectedMarks: TokenType[]) => (
   <Marks>
     {selectedMarks.map(
       (mark, index) =>

@@ -6,47 +6,40 @@ import {
   CenterCards,
   CenterCardContainer,
 } from './DealtCards.styles'
-import { BoardCardType, PlayersType } from 'types'
+import { PositionProperties } from 'types'
 
-const renderPlayerCards = (
-  playerCards: BoardCardType[],
-  players: PlayersType[]
-) => (
-  <CardContainer>
-    <PlayersCards>
-      {playerCards.map(({ position, card }) => {
-        const player = players.find(
-          (player) => player.player_number === position
-        )
-        const ready = player ? player.ready : false
-        return (
-          <GameCard
-            key={position}
-            isCenter={false}
-            id={card.id}
-            position={position}
-            ready={ready}
-          />
-        )
-      })}
-    </PlayersCards>
-  </CardContainer>
-)
+const renderPlayerCards = (playerCards: PositionProperties[]) => {
+  console.log(playerCards)
+  return (
+    <CardContainer>
+      <PlayersCards>
+        {playerCards.map(({ position, id, ready }) => {
+          console.log(id)
+          return (
+            <GameCard
+              key={position}
+              isCenter={false}
+              id={id}
+              position={position}
+              ready={ready}
+            />
+          )
+        })}
+      </PlayersCards>
+    </CardContainer>
+  )
+}
 
-const renderCenterCard = (centerCards: BoardCardType[]) => {
+const renderCenterCard = (centerCards: PositionProperties[]) => {
   const renderCard = (position: string, title: string) => {
     const card = centerCards.find((c) => c.position === position)
     return (
       card &&
-      card.card.id !== null && (
+      card.id !== null && (
         <CardContainer>
           <CardTitle>{title}</CardTitle>
           <CenterCards>
-            <GameCard
-              id={card.card.id}
-              position={card.position}
-              isCenter={true}
-            />
+            <GameCard id={card.id} position={card.position} isCenter={true} />
           </CenterCards>
         </CardContainer>
       )
@@ -63,10 +56,10 @@ const renderCenterCard = (centerCards: BoardCardType[]) => {
             const card = centerCards.find((c) => c.position === position)
             return (
               card &&
-              card.card.id !== null && (
+              card.id !== null && (
                 <GameCard
                   key={position}
-                  id={card.card.id}
+                  id={card.id}
                   position={card.position}
                   isCenter={true}
                 />

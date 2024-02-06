@@ -1,5 +1,4 @@
 import { expansion, team, wake } from 'constant'
-import { ActionCardType } from 'types'
 
 export const action_card_ids: number[] = [
   50, 30, 64, 1, 7, 41, 40, 39, 38, 32, 31, 34, 37, 29, 28, 25, 42, 43, 53, 47,
@@ -7,6 +6,14 @@ export const action_card_ids: number[] = [
   6, 85, 55, 9, 18, 23, 35, 80, 51, 56, 8, 27, 36, 66, 70, 11, 26, 72, 71, 33,
   52, 68, 2, 4, 67, 83, 78, 73, 24, 46, 59, 77, 20, 44, 49,
 ]
+
+type ActionCardType = {
+  id: number
+  team: string
+  wake_up_time: string
+  expansion: string
+  card_name: string
+}
 
 export const action_cards: ActionCardType[] = [
   {

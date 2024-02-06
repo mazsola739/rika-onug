@@ -1,14 +1,14 @@
 import { UPDATE_ROOM } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
-import { selectedDeckStore, wsStore, roomStore } from 'store'
+import { deckStore, wsStore, roomStore } from 'store'
 import { SelectedCardProps } from './SelectedCardList.types'
 import { CardImage } from 'components'
 
 export const SelectedCard: React.FC<SelectedCardProps> = observer(
   ({ card }) => {
     const { id } = card
-    const isSelected = selectedDeckStore.selectedCards.some(
+    const isSelected = deckStore.selectedCards.some(
       (selectedCard) => selectedCard.id === id
     )
     const room_id = sessionStorage.getItem('room_id')
@@ -17,8 +17,6 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
     const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
 
     const handleDeselect = useCallback(() => {
-      selectedDeckStore.toggleCardSelectionStatus(id)
-
       sendJsonMessage?.({
         type: UPDATE_ROOM,
         card_id: id,

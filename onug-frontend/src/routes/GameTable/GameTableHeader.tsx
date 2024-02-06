@@ -1,6 +1,6 @@
 import { CardImage, Header, Token } from 'components'
 import { observer } from 'mobx-react-lite'
-import { playerStore } from 'store'
+import { gameBoardStore } from 'store'
 import {
   PlayerCardInfo,
   PlayerCardRule,
@@ -10,7 +10,7 @@ import {
 } from './GameTable.styles'
 
 export const GameTableHeader: React.FC = observer(() => {
-  const { player } = playerStore
+  const { player } = gameBoardStore
 
   //Todo wining condition
   //TODO Add role tokens

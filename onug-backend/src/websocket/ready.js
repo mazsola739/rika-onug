@@ -15,6 +15,7 @@ exports.ready = async (message) => {
       ...gameState,
     }
     // TODO validate client request
+
     newGameState.players[token].ready = !gameState.players[token].ready
 
     logDebug(`gameState.players[token].ready: ${gameState.players[token].ready}`)

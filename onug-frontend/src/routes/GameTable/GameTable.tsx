@@ -10,9 +10,8 @@ import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
 import {
   gameTableStore,
-  playerStore,
+  gameBoardStore,
   roomStore,
-  selectedDeckStore,
   deckStore,
   wsStore,
 } from 'store'
@@ -39,12 +38,11 @@ export const GameTable: React.FC = observer(() => {
   const token = sessionStorage.getItem('token')
 
   const { hasSentinel, hasMarks, hasCurator } = gameTableStore
-  const selectedMarks = selectedDeckStore.selectedMarks
+  const selectedMarks = deckStore.selectedMarks
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
 
-  const { setPlayer } = playerStore
-  const { setPlayers, setBoardCards } = gameTableStore
+  const { setPlayer, setPlayers, setBoardCards } = gameBoardStore
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -82,11 +80,16 @@ export const GameTable: React.FC = observer(() => {
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [lastJsonMessage, setPlayer, setBoardCards, deckStore, navigate])
+  }, [
+    lastJsonMessage,
+    setPlayer,
+    setPlayers,
+    setBoardCards,
+    deckStore,
+    navigate,
+  ])
 
-  const { player } = playerStore
-  const { players } = gameTableStore
-  const { boardCards } = gameTableStore
+  const { player, players } = gameBoardStore
 
   return (
     <StyledGameTable>
@@ -96,7 +99,7 @@ export const GameTable: React.FC = observer(() => {
         <GameArea>
           {(hasCurator || hasSentinel) &&
             renderArtifacts(artifacts, hasCurator, hasSentinel)}
-          <DealtCards players={players} boardCards={boardCards} />
+          <DealtCards />
           {hasMarks && renderMarks(selectedMarks)}
         </GameArea>
         <Ready>{players && <PlayerList players={players} />}</Ready>

@@ -30,6 +30,16 @@ export type RoomType = {
   players: string[]
 }
 
+export type PositionType = {
+  position: string
+  id?: number
+  artifact?: boolean
+  shield?: boolean
+  mark?: string
+  selectable?: boolean
+  ready?: boolean
+}
+
 export type PlayersType = {
   player_name: string
   player_number: string
@@ -38,6 +48,7 @@ export type PlayersType = {
 
 export type BoardCardType = {
   position: string
+  ready: boolean
   card: { id: number; artifact: boolean; shield: boolean }
 }
 
@@ -46,4 +57,31 @@ export type PlayerType = {
   player_number: number
   player_card_id: number
   player_card: CardType
+}
+
+export type PositionKeys =
+  | 'center_left'
+  | 'center_middle'
+  | 'center_right'
+  | 'center_wolf'
+  | 'center_villain'
+  | 'player_1'
+  | 'player_2'
+  | 'player_3'
+  | 'player_4'
+  | 'player_5'
+  | 'player_6'
+  | 'player_7'
+  | 'player_8'
+  | 'player_9'
+  | 'player_10'
+  | 'player_11'
+  | 'player_12'
+
+export type PositionProperties = {
+  position: string
+  id?: number
+  artifact?: boolean
+  shield?: boolean
+  ready?: boolean
 }
