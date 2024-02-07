@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import {
-  BoardCardType,
+  GamePlayBoardCardType,
+  GameTableBoardCardType,
   PlayerType,
   PlayersType,
   PositionKeys,
@@ -11,7 +12,8 @@ import {
 class GameBoardStore {
   player: PlayerType
   players: PlayersType[]
-  boardCards: BoardCardType[]
+  gameTableBoardCards: GameTableBoardCardType[]
+  gamePlayBoardCards: GamePlayBoardCardType[]
 
   centerCards: PositionProperties[]
   playerCards: PositionProperties[]
@@ -43,7 +45,8 @@ class GameBoardStore {
     this.setPlayerCards = this.setPlayerCards.bind(this)
     this.setCenterCards = this.setCenterCards.bind(this)
 
-    this.boardCards = []
+    this.gameTableBoardCards = []
+    this.gamePlayBoardCards = []
     this.centerCards = []
     this.playerCards = []
 
@@ -82,14 +85,14 @@ class GameBoardStore {
     this.players = players
   }
 
-  setGameTableBoardCards(boardCards: BoardCardType[]): void {
-    this.boardCards = boardCards
+  setGameTableBoardCards(gameTableBoardCards: GameTableBoardCardType[]): void {
+    this.gameTableBoardCards = gameTableBoardCards
 
     const playerCards: PositionProperties[] = []
     const centerCards: PositionProperties[] = []
 
-    boardCards.forEach((boardCard) => {
-      const { position, card, ready } = boardCard
+    gameTableBoardCards.forEach((gameTableBoardCard) => {
+      const { position, card, ready } = gameTableBoardCard
       const positionKey = position as PositionKeys
       if (this[positionKey]) {
         const positionObject = this[positionKey] as PositionProperties
@@ -97,8 +100,6 @@ class GameBoardStore {
           `player_${this.player.player_number}` === positionObject.position
             ? this.player.player_card_id
             : card.id
-        positionObject.artifact = card.artifact
-        positionObject.shield = card.shield
         positionObject.ready = ready
 
         if (position.startsWith('center')) {
@@ -113,14 +114,14 @@ class GameBoardStore {
     this.playerCards = playerCards
   }
 
-  setGamePlayBoardCards(boardCards: BoardCardType[]): void {
-    this.boardCards = boardCards
+  setGamePlayBoardCards(gamePlayBoardCards: GamePlayBoardCardType[]): void {
+    this.gamePlayBoardCards = gamePlayBoardCards
 
     const playerCards: PositionProperties[] = []
     const centerCards: PositionProperties[] = []
 
-    boardCards.forEach((boardCard) => {
-      const { position, card, ready } = boardCard
+    gamePlayBoardCards.forEach((gamePlayBoardCard) => {
+      const { position, card } = gamePlayBoardCard
       const positionKey = position as PositionKeys
       if (this[positionKey]) {
         const positionObject = this[positionKey] as PositionProperties
@@ -130,7 +131,6 @@ class GameBoardStore {
             : card.id
         positionObject.artifact = card.artifact
         positionObject.shield = card.shield
-        positionObject.ready = ready
 
         if (position.startsWith('center')) {
           centerCards.push(positionObject)

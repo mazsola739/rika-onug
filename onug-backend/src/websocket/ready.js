@@ -26,7 +26,7 @@ exports.ready = async (message) => {
 
     return broadcast(room_id, {
       type: HYDRATE_READY,
-      board: board
+      board
     })
   } catch (error) {
     logError(error)

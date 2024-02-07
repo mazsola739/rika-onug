@@ -42,7 +42,7 @@ exports.getGameTableBoard = (gameState) => {
 
   return {
     players: playersPublic,
-    boardCards: cardsOnBoard,
+    gameTableBoardCards: cardsOnBoard,
   };
 };
 
@@ -67,12 +67,12 @@ exports.getGamePlayBoard = (gameState) => {
 
         return { position, card };
       } else {
-        return { position, card: { id: null }, ready: false };
+        return { position, card: { id: null } };
       }
     }
   );
 
   return {
-    boardCards: cardsOnBoard,
+    gamePlayBoardCards: cardsOnBoard,
   };
 };

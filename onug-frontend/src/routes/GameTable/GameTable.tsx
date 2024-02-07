@@ -64,13 +64,13 @@ export const GameTable: React.FC = observer(() => {
         player_card: findCardById(deck, lastJsonMessage.player_card_id),
       })
       setPlayers(lastJsonMessage.board.players)
-      setGameTableBoardCards(lastJsonMessage.board.boardCards)
+      setGameTableBoardCards(lastJsonMessage.board.gameTableBoardCards)
       roomStore.resetDetailedCardInfo()
     }
 
     if (lastJsonMessage?.type === HYDRATE_READY) {
       setPlayers(lastJsonMessage.board.players)
-      setGameTableBoardCards(lastJsonMessage.board.boardCards)
+      setGameTableBoardCards(lastJsonMessage.board.gameTableBoardCards)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
