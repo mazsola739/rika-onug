@@ -58,7 +58,7 @@ export type GameTableBoardCardType = {
 
 export type GamePlayBoardCardType = {
   position: string
-  card: { id: number; artifact: boolean; shield: boolean }
+  card: { id: number; artifact: boolean; shield: boolean; selectable: boolean }
 }
 
 export type PlayerType = {

@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
-import { narrationStore, gameBoardStore, wsStore } from 'store'
-import { Button, DealtCards, Header, Main, OwnCard } from 'components'
+import { narrationStore, gameBoardStore, wsStore, gamePlayStore } from 'store'
+import { BoardCards, Button, Header, Main, OwnCard } from 'components'
 import { ARRIVE_GAME_PLAY, HYDRATE_GAME_PLAY, REDIRECT, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { GamePlayHeader } from './GamePlayHeader'
@@ -44,17 +44,17 @@ export const GamePlay: React.FC = observer(() => {
       lastJsonMessage?.type === HYDRATE_GAME_PLAY /* &&
       lastJsonMessage?.success */ //TODO success
     ) {
-      console.log(JSON.stringify(lastJsonMessage))
+      console.log(JSON.stringify(lastJsonMessage.actual_scene.scene_start_time))
       narrationStore.setNarration(lastJsonMessage.actual_scene.narration)
       narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
-      /*       gameBoardStore.setGamePlayBoardCards(
-        lastJsonMessage.board.gamePlayBoardCards
-      ) */
+      gamePlayStore.setStartingTime(
+        lastJsonMessage.actual_scene.scene_start_time
+      )
     }
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [lastJsonMessage, narrationStore])
+  }, [lastJsonMessage, narrationStore, gamePlayStore])
 
   const { handleInteraction } = useClickHandler(room_id, token)
 
@@ -68,7 +68,7 @@ export const GamePlay: React.FC = observer(() => {
       <Main>
         <GamePlayContainer>
           <GameArea>
-            <DealtCards />
+            <BoardCards />
           </GameArea>
           <PlayerHand>
             <OwnCardPlace>

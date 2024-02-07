@@ -6,7 +6,7 @@ const { logTrace } = require("../log")
 const { narration, interaction } = require("../scene")
 const { STAGES } = require("../constant/stage")
 
-const tickTime = 3000
+const tickTime = 5000
 
 exports.stopGamePlay = gameState => {
   gameState.game_stopped = true

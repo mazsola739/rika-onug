@@ -12,7 +12,13 @@ import {
   LEAVE_TABLE,
   UPDATE_ROOM,
 } from 'constant'
-import { gamePlayStore, deckStore, wsStore, roomStore } from 'store'
+import {
+  gamePlayStore,
+  deckStore,
+  wsStore,
+  roomStore,
+  gameBoardStore,
+} from 'store'
 
 export const useClickHandler = (room_id: string, token: string) => {
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
@@ -56,7 +62,8 @@ export const useClickHandler = (room_id: string, token: string) => {
       room_id,
       token,
     })
-  }, [sendJsonMessage])
+    gameBoardStore.getGamePlayBoardCards()
+  }, [sendJsonMessage, gameBoardStore])
 
   const handleReady = useCallback(() => {
     sendJsonMessage?.({

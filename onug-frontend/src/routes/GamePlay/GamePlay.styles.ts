@@ -24,14 +24,13 @@ export const Narration = styled.span`
   padding: 10px;
 `
 
-export const Timer = styled.div`
+export const TimerContainer = styled.div`
   min-width: 130px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 42px;
   padding: 10px;
   margin-left: auto;
 `

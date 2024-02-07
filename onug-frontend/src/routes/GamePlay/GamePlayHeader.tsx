@@ -3,21 +3,25 @@ import {
   Narration,
   NarrationImage,
   StyledGamePlayHeader,
-  Timer,
+  TimerContainer,
 } from './GamePlay.styles'
-import { narrationStore } from 'store'
-import { CardImage } from 'components'
+import { gamePlayStore, narrationStore } from 'store'
+import { CardImage, Timer } from 'components'
 
 export const GamePlayHeader: React.FC = observer(() => {
+  const startingTime = gamePlayStore.startingTime
   const narration = narrationStore.getNarrationMessage()
   const img = narrationStore.getNarrationImage()
+
   return (
     <StyledGamePlayHeader>
       <NarrationImage>
         {img.length > 0 && <CardImage image={img} size={100} />}
       </NarrationImage>
       <Narration> {narration}</Narration>
-      <Timer>00:30</Timer>
+      <TimerContainer>
+        <Timer startingTime={startingTime} actionTime={5000} />
+      </TimerContainer>
     </StyledGamePlayHeader>
   )
 })

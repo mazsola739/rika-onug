@@ -44,6 +44,7 @@ class GameBoardStore {
     this.setGameTableBoardCards = this.setGameTableBoardCards.bind(this)
     this.setPlayerCards = this.setPlayerCards.bind(this)
     this.setCenterCards = this.setCenterCards.bind(this)
+    this.getGamePlayBoardCards = this.getGamePlayBoardCards.bind(this)
 
     this.gameTableBoardCards = []
     this.gamePlayBoardCards = []
@@ -114,23 +115,43 @@ class GameBoardStore {
     this.playerCards = playerCards
   }
 
-  setGamePlayBoardCards(gamePlayBoardCards: GamePlayBoardCardType[]): void {
-    this.gamePlayBoardCards = gamePlayBoardCards
-
+  getGamePlayBoardCards(): void {
+    const gamePlayBoardCards: GamePlayBoardCardType[] = []
     const playerCards: PositionProperties[] = []
     const centerCards: PositionProperties[] = []
+
+    this.centerCards.forEach((centerCard) => {
+      const card: GamePlayBoardCardType = {
+        position: centerCard.position,
+        card: {
+          id: centerCard.id === null ? null : 0,
+          artifact: false,
+          shield: false,
+          selectable: false,
+        },
+      }
+      gamePlayBoardCards.push(card)
+    })
+
+    this.playerCards.forEach((playerCard) => {
+      const card: GamePlayBoardCardType = {
+        position: playerCard.position,
+        card: {
+          id: 0,
+          artifact: false,
+          shield: false,
+          selectable: false,
+        },
+      }
+      gamePlayBoardCards.push(card)
+    })
 
     gamePlayBoardCards.forEach((gamePlayBoardCard) => {
       const { position, card } = gamePlayBoardCard
       const positionKey = position as PositionKeys
       if (this[positionKey]) {
         const positionObject = this[positionKey] as PositionProperties
-        positionObject.id =
-          `player_${this.player.player_number}` === positionObject.position
-            ? this.player.player_card_id
-            : card.id
-        positionObject.artifact = card.artifact
-        positionObject.shield = card.shield
+        positionObject.id = card.id
 
         if (position.startsWith('center')) {
           centerCards.push(positionObject)
@@ -142,6 +163,7 @@ class GameBoardStore {
 
     this.centerCards = centerCards
     this.playerCards = playerCards
+    this.gamePlayBoardCards = gamePlayBoardCards
   }
 }
 
