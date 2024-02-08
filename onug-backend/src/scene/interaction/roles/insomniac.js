@@ -21,10 +21,11 @@ exports.insomniac = gameState => {
       }
       
       newGameState.players[token].role_history = roleHistory
-      newGameState.players[token].card.team = newGameState.card_positions[`player_${insomniacPlayerNumbers[0]}`].team
+      newGameState.players[token].card.team = newGameState.card_positions[`player_${insomniacPlayerNumbers[0]}`]?.team
 
       role_interactions.push({
         type: INTERACTION,
+        title: "INSOMNIAC",
         token,
         message: "interaction_insomniac",
         show_cards: showCards,
@@ -35,6 +36,7 @@ exports.insomniac = gameState => {
     } else if (newGameState.players[token].card.shield) {
       role_interactions.push({
         type: INTERACTION,
+        title: "INSOMNIAC",
         token,
         message: "interaction_shielded",
         shielded_players: newGameState.shield,

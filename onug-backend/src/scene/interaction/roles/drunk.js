@@ -22,6 +22,7 @@ exports.drunk = gameState => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "DRUNK",
       token,
       message: "interaction_drunk",
       selectable_cards: centerCardPositions,
@@ -50,6 +51,7 @@ exports.drunk_response = (gameState, token, selected_positions, ws) => {
   
   role_interactions.push({
     type: INTERACTION,
+    title: "DRUNK",
     token,
     message: "interaction_drunk2",
     swapped_cards: [`player_${newGameState.players[token].player_number}`, `${selected_positions[0]}`],
@@ -64,6 +66,7 @@ exports.drunk_response = (gameState, token, selected_positions, ws) => {
   
   ws.send(JSON.stringify({
     type: INTERACTION,
+    title: "DRUNK",
     message: 'SUCCESSFULLY swapped cards',
   }))
 

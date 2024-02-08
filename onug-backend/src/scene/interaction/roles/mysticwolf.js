@@ -22,6 +22,7 @@ exports.mysticwolf = gameState => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "MYSTIC_WOLF",
       token,
       message: "interaction_mysticwolf",
       selectable_cards: selectablePlayerNumbers,
@@ -49,6 +50,7 @@ exports.mysticwolf_response = (gameState, token, selected_positions, ws) => {
 
   role_interactions.push({
     type: INTERACTION,
+    title: "MYSTIC_WOLF",
     token,
     message: "interaction_mysticwolf2",
     show_cards: showCards,
@@ -63,6 +65,7 @@ exports.mysticwolf_response = (gameState, token, selected_positions, ws) => {
 
   ws.send(JSON.stringify({
     type: INTERACTION,
+    title: "MYSTIC_WOLF",
     message: 'SUCCESSFULLY showed cards',
   }))
 

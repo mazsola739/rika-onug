@@ -9,6 +9,7 @@ export type WsJsonMessage = {
   errors?: string[]
   room_id?: string
   stage?: string
+  title?: string
   player_name?: string
   player_card_id?: number
   player_number?: number
@@ -25,6 +26,17 @@ export type WsJsonMessage = {
     scene_title: string
     narration?: string[]
   }
+  selectable_cards?: string[]
+  shielded_players?: string[]
+  shielded_card?: string
+  swapped_cards?: string[]
+  show_cards?: Record<string, number>[]
+  new_role_id?: number
+  werewolves?: string[]
+  tanner?: string[]
+  masons?: string[]
+  selectable_center_cards?: string[]
+  selectable_player_cards?: string[]
 }
 
 export type RoomType = {

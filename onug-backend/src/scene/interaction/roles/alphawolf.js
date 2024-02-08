@@ -22,6 +22,7 @@ exports.alphawolf = (gameState) => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "ALPHA_WOLF",
       token,
       message: "interaction_alphawolf",
       selectable_cards: selectablePlayerNumbers,
@@ -49,6 +50,7 @@ exports.alphawolf_response = (gameState, token, selected_positions, ws) => {
   
   role_interactions.push({
     type: INTERACTION,
+    title: "ALPHA_WOLF",
     token,
     message: "interaction_alphawolf2",
     swapped_cards: [selected_positions[0], "center wolf"],
@@ -62,6 +64,7 @@ exports.alphawolf_response = (gameState, token, selected_positions, ws) => {
 
   ws.send(JSON.stringify({
     type: INTERACTION,
+    title: "ALPHA_WOLF",
     message: 'SUCCESSFULLY swapped cards',
   }))
 

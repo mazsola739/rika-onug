@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx'
 
-class AlienStore {
+class AliensStore {
   constructor() {
     makeAutoObservable(this)
   }
 }
 
-export default AlienStore
-export const alienStore = new AlienStore()
+export default AliensStore
+export const aliensStore = new AliensStore()

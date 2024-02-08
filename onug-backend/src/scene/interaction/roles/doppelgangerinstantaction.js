@@ -12,7 +12,7 @@ const { doppelgangerInstantActionsIds, instantRoleIds } = require("../constants"
  * ? 68 Switcheroo, 69 Temptress, 70 Voodoolou, 85 Thing 
  * */
 exports.doppelganger_instant_action = (gameState, new_role_id, token, ws) => {
-  if (doppelgangerInstantActionsIds.includes(gameState.players[token].role_history.new_role_id) === false) return gameState
+  if (new_role_id && doppelgangerInstantActionsIds.includes(gameState.players[token].role_history.new_role_id) === false) return gameState
     
   let newGameState = { ...gameState }
 
@@ -24,6 +24,7 @@ exports.doppelganger_instant_action = (gameState, new_role_id, token, ws) => {
 
     ws.send(JSON.stringify({
     type: INTERACTION,
+    title: "DOPPELGÄNGER_INSTANT_ACTION",
     message: 'SUCCESSFULLY night action started',
     }))
   }

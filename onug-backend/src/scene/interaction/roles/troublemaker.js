@@ -22,6 +22,7 @@ exports.troublemaker = gameState => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "TROUBLEMAKER",
       token,
       message: "interaction_troublemaker",
       selectable_cards: selectablePlayerNumbers,
@@ -48,6 +49,7 @@ exports.troublemaker_response = (gameState, token, selected_positions, ws) => {
  
   role_interactions.push({
     type: INTERACTION,
+    title: "TROUBLEMAKER",
     token,
     message: "interaction_troublemaker2",
     swapped_cards: selected_positions.slice(0, 2),
@@ -62,6 +64,7 @@ exports.troublemaker_response = (gameState, token, selected_positions, ws) => {
 
   ws.send(JSON.stringify({
     type: INTERACTION,
+    title: "TROUBLEMAKER",
     message: 'SUCCESSFULLY swapped cards',
   }))
 

@@ -21,6 +21,7 @@ exports.doppelganger = (gameState) => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "DOPPELGÄNGER",
       token,
       message: "interaction_doppelganger",
       selectable_cards: selectablePlayerNumbers,
@@ -52,6 +53,7 @@ exports.doppelganger_response = (gameState, token, selected_positions, ws) => {
 
   role_interactions.push({
     type: INTERACTION,
+    title: "DOPPELGÄNGER",
     token,
     message: "interaction_doppelganger2",
     show_cards: showCards,

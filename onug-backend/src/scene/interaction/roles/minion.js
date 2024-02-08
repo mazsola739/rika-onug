@@ -14,7 +14,7 @@ exports.minion = gameState => {
 
   const roleHistory = {
     ...newGameState.actual_scene,
-    werewolf_cards: werewolfPlayerNumbers,
+    werewolves: werewolfPlayerNumbers,
     card_or_mark_action: false,
   }
 
@@ -23,9 +23,10 @@ exports.minion = gameState => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "MINION",
       token,
       message: "interaction_minion",
-      werewolf_cards: werewolfPlayerNumbers,
+      werewolves: werewolfPlayerNumbers,
       shielded_players: newGameState.shield,
     })
 

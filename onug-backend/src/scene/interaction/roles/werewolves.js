@@ -26,6 +26,7 @@ exports.werewolves = gameState => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "WEREWOLVES",
       token,
       message: "interaction_werewolves",
       werewolves: werewolfPlayerNumbers,
@@ -55,6 +56,7 @@ exports.werewolves_response = (gameState, token, selected_positions, ws) => {
 
   role_interactions.push({
     type: INTERACTION,
+    title: "WEREWOLVES",
     token,
     message: "interaction_werewolves2",
     show_cards: showCards,
@@ -69,6 +71,7 @@ exports.werewolves_response = (gameState, token, selected_positions, ws) => {
 
   ws.send(JSON.stringify({
     type: INTERACTION,
+    title: "WEREWOLVES",
     message: 'SUCCESSFULLY showed cards',
   }))
 

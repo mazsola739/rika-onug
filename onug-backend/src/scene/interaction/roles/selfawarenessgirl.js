@@ -21,10 +21,11 @@ exports.selfawarenessgirl = gameState => {
       }
     
       newGameState.players[token].role_history = roleHistory
-      newGameState.players[token].card.team = newGameState.card_positions[`player_${selfawarenessgirlPlayerNumber[0]}`].team
+      newGameState.players[token].card.team = newGameState.card_positions[`player_${selfawarenessgirlPlayerNumber[0]}`]?.team
 
       role_interactions.push({
         type: INTERACTION,
+        title: "SELF_AWARENESS_GIRL",
         token,
         message: "interaction_insomniac",
         show_cards: showCards,
@@ -35,6 +36,7 @@ exports.selfawarenessgirl = gameState => {
     } else if (newGameState.players[token].card.shield) {
       role_interactions.push({
         type: INTERACTION,
+        title: "SELF_AWARENESS_GIRL",
         token,
         message: "interaction_shielded",
         shielded_players: newGameState.shield,

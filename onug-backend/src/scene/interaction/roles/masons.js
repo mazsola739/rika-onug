@@ -21,6 +21,7 @@ exports.masons = gameState => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "MASONS",
       token,
       message: "interaction_masons",
       masons: masonPlayerNumbers,

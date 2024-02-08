@@ -20,6 +20,7 @@ exports.apprenticetanner = gameState => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "APPRENTICE_TANNER",
       token,
       message: "interaction_apprenticetanner",
       tanner: tannerPlayerNumbers,

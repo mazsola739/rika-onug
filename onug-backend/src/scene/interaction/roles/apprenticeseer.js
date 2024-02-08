@@ -22,6 +22,7 @@ exports.apprenticeseer = gameState => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "APPRENTICE_SEER",
       token,
       message: "interaction_apprenticeseer",
       selectable_cards: centerCardPositions,
@@ -49,6 +50,7 @@ exports.apprenticeseer_response = (gameState, token, selected_positions, ws) => 
 
   role_interactions.push({
     type: INTERACTION,
+    title: "APPRENTICE_SEER",
     token,
     message: "interaction_apprenticeseer2",
     show_cards: showCards,
@@ -63,6 +65,7 @@ exports.apprenticeseer_response = (gameState, token, selected_positions, ws) => 
 
   ws.send(JSON.stringify({
     type: INTERACTION,
+    title: "APPRENTICE_SEER",
     message: 'SUCCESSFULLY showed card',
   }))
 

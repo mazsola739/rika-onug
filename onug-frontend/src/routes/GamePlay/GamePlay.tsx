@@ -1,7 +1,19 @@
 import { observer } from 'mobx-react-lite'
-import { narrationStore, gameBoardStore, wsStore, gamePlayStore } from 'store'
+import {
+  narrationStore,
+  gameBoardStore,
+  wsStore,
+  gamePlayStore,
+  interactionStore,
+} from 'store'
 import { BoardCards, Button, Header, Main, OwnCard } from 'components'
-import { ARRIVE_GAME_PLAY, HYDRATE_GAME_PLAY, REDIRECT, STAGES } from 'constant'
+import {
+  ARRIVE_GAME_PLAY,
+  HYDRATE_GAME_PLAY,
+  INTERACTION,
+  REDIRECT,
+  STAGES,
+} from 'constant'
 import { useEffect, useState } from 'react'
 import { GamePlayHeader } from './GamePlayHeader'
 import { useNavigate } from 'react-router-dom'
@@ -30,6 +42,7 @@ export const GamePlay: React.FC = observer(() => {
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
+      gameBoardStore.getGamePlayBoardCards()
       sendJsonMessage?.({
         type: ARRIVE_GAME_PLAY,
         stage: STAGES.GAME_PLAY,
@@ -37,19 +50,22 @@ export const GamePlay: React.FC = observer(() => {
         token,
       })
     }
-  }, [sendJsonMessage, firstTime])
+  }, [sendJsonMessage, firstTime, gameBoardStore])
 
   useEffect(() => {
     if (
       lastJsonMessage?.type === HYDRATE_GAME_PLAY /* &&
       lastJsonMessage?.success */ //TODO success
     ) {
-      console.log(JSON.stringify(lastJsonMessage.actual_scene.scene_start_time))
       narrationStore.setNarration(lastJsonMessage.actual_scene.narration)
       narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
       gamePlayStore.setStartingTime(
         lastJsonMessage.actual_scene.scene_start_time
       )
+    }
+    if (lastJsonMessage?.type === INTERACTION) {
+      interactionStore.setLastJsonMessage(lastJsonMessage)
+      interactionStore.setInteraction(lastJsonMessage.title)
     }
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)

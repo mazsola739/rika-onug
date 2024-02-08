@@ -23,6 +23,7 @@ exports.sentinel = gameState => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "SENTINEL",
       token,
       message: "interaction_sentinel",
       selectable_cards: selectablePlayerNumbers,
@@ -56,6 +57,7 @@ exports.sentinel_response = (gameState, token, selected_positions, ws) => {
 
   role_interactions.push({
     type: INTERACTION,
+    title: "SENTINEL",
     token,
     message: "interaction_sentinel2",
     shielded_card: selected_positions[0],
@@ -70,6 +72,7 @@ exports.sentinel_response = (gameState, token, selected_positions, ws) => {
 
   ws.send(JSON.stringify({
     type: INTERACTION,
+    title: "SENTINEL",
     message: 'SUCCESSFULLY placed shield',
   }))
 

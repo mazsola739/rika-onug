@@ -18,7 +18,7 @@ const {
   seerIds,
   masonIds,
 } = require("./constants");
-const { logError } = require("../../log");
+const { logError, logDebug } = require("../../log");
 
 const NARRATION = 'actual_scene.narration'
 

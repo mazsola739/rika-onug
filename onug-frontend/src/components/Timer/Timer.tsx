@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { StyledTimer } from './Timer.styles'
 import { TimerProps } from './Timer.types'
 import { useEffect, useState } from 'react'
+import { gameBoardStore } from 'store'
 
 export const Timer: React.FC<TimerProps> = observer(
   ({ startingTime, actionTime = 5000 }) => {
@@ -16,6 +17,12 @@ export const Timer: React.FC<TimerProps> = observer(
 
       return () => clearInterval(intervalId)
     }, [startingTime, actionTime])
+
+    useEffect(() => {
+      if (remainingTime === 0) {
+        gameBoardStore.getGamePlayBoardCards()
+      }
+    }, [remainingTime])
 
     const formatTime = (time: number) => {
       const seconds = Math.floor(time / 1000)

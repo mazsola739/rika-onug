@@ -40,7 +40,7 @@
     "room_id": "armory",
     "room_name": "Armory",
     "stage": "LOBBY",
-    "selected_cards": [2, 4, 5, 6, 8, 9, 11, 7, 15, 16],
+    "selected_cards": [4, 12, 14, 13],
     "available_names": [
       "Forrest Gump",
       "Indiana Jones",

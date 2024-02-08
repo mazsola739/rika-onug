@@ -23,6 +23,7 @@ exports.robber = gameState => {
 
       role_interactions.push({
         type: INTERACTION,
+        title: "ROBBER",
         token,
         message: "interaction_robber",
         selectable_cards: selectablePlayerNumbers,
@@ -31,6 +32,7 @@ exports.robber = gameState => {
     } else if (newGameState.players[token].card.shield) {
       role_interactions.push({
         type: INTERACTION,
+        title: "ROBBER",
         token,
         message: "interaction_shielded",
         shielded_players: newGameState.shield,
@@ -66,6 +68,7 @@ exports.robber_response = (gameState, token, selected_positions, ws) => {
 
   role_interactions.push({
     type: INTERACTION,
+    title: "ROBBER",
     token,
     message: "interaction_robber2",
     show_cards: showCard,
@@ -80,6 +83,7 @@ exports.robber_response = (gameState, token, selected_positions, ws) => {
 
   ws.send(JSON.stringify({
     type: INTERACTION,
+    title: "ROBBER",
     message: 'SUCCESSFULLY swapped and showed cards',
   }))
 

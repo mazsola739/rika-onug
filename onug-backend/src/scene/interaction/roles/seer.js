@@ -24,6 +24,7 @@ exports.seer = gameState => {
 
     role_interactions.push({
       type: INTERACTION,
+      title: "SEER",
       token,
       message: "interaction_seer",
       selectable_center_cards: centerCardPositions,
@@ -57,6 +58,7 @@ exports.seer_response = (gameState, token, selected_positions, ws) => {
 
   role_interactions.push({
     type: INTERACTION,
+    title: "SEER",
     token,
     message: "interaction_seer2",
     show_cards: showCards,
@@ -71,6 +73,7 @@ exports.seer_response = (gameState, token, selected_positions, ws) => {
 
   ws.send(JSON.stringify({
     type: INTERACTION,
+    title: "SEER",
     message: 'SUCCESSFULLY showed cards',
   }))
 
