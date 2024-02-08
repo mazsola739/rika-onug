@@ -8,6 +8,7 @@ export const Timer: React.FC<TimerProps> = observer(
   ({ startingTime, actionTime = 5000 }) => {
     const [remainingTime, setRemainingTime] = useState(0)
 
+    //TODO rethink
     useEffect(() => {
       const intervalId = setInterval(() => {
         const currentTime = Date.now()
@@ -15,14 +16,17 @@ export const Timer: React.FC<TimerProps> = observer(
         setRemainingTime(remaining < 0 ? 0 : remaining)
       }, 1000)
 
-      return () => clearInterval(intervalId)
+      return () => {
+        clearInterval(intervalId)
+      }
     }, [startingTime, actionTime])
 
     useEffect(() => {
+      console.log(remainingTime)
       if (remainingTime === 0) {
-        gameBoardStore.getGamePlayBoardCards()
+        gameBoardStore.closeYourEyes()
       }
-    }, [remainingTime])
+    }, [remainingTime, gameBoardStore, gameBoardStore])
 
     const formatTime = (time: number) => {
       const seconds = Math.floor(time / 1000)

@@ -13,7 +13,13 @@ export const CardBack = styled.div<StyledGameCardProps>`
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
-  border: 3px solid white;
+  border: ${(props) =>
+    props.selectable
+      ? props.isSelected
+        ? '3px solid yellow'
+        : '3px solid green'
+      : '3px solid white'};
+
   border-radius: 6px;
   height: 90px;
   justify-content: center;
@@ -24,5 +30,6 @@ export const Tokens = styled.div`
   display: flex;
   flex-wrap: row;
   justify-content: center;
+  color: red;
   gap: 2px;
 `

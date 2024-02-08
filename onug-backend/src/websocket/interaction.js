@@ -2,6 +2,7 @@ const { INTERACTION } = require("../constant/ws")
 const { logDebug, logError } = require("../log")
 const { roles } = require("../scene/interaction/roles")
 const { repository } = require('../repository')
+const { websocketServerConnectionsPerRoom } = require("./connections")
 const { readGameState, upsertRoomState } = repository
 
 exports.interaction = async (ws, message) => {
@@ -13,6 +14,10 @@ exports.interaction = async (ws, message) => {
     // TODO validate client request
 
     const newGameState = generateInteractionResponse(gameState, token, selected_positions, ws)
+
+    newGameState?.role_interactions.forEach((role_interaction) => {
+      websocketServerConnectionsPerRoom[newGameState.room_id][role_interaction.token].send(JSON.stringify(role_interaction))
+    })
 
     await upsertRoomState(newGameState)
   } catch (error) {

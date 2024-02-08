@@ -7,7 +7,7 @@ class InsomniacStore {
     makeAutoObservable(this)
   }
 
-  setGamePlayBoardCards(lastJsonMessage: WsJsonMessage): void {
+  openYourEyes(lastJsonMessage: WsJsonMessage): void {
     const playerCards: PositionProperties[] = [...gameBoardStore.playerCards]
     const shielded_players = lastJsonMessage.shielded_players || []
     const show_cards = lastJsonMessage.show_cards || []

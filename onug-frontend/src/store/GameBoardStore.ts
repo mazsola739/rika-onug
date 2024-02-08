@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { interactionStore } from 'store'
 import {
   GamePlayBoardCardType,
   GameTableBoardCardType,
@@ -41,10 +42,10 @@ class GameBoardStore {
 
     this.setPlayer = this.setPlayer.bind(this)
     this.setPlayers = this.setPlayers.bind(this)
-    this.setGameTableBoardCards = this.setGameTableBoardCards.bind(this)
+    this.everyoneCheckOwnCard = this.everyoneCheckOwnCard.bind(this)
     this.setPlayerCards = this.setPlayerCards.bind(this)
     this.setCenterCards = this.setCenterCards.bind(this)
-    this.getGamePlayBoardCards = this.getGamePlayBoardCards.bind(this)
+    this.closeYourEyes = this.closeYourEyes.bind(this)
 
     this.gameTableBoardCards = []
     this.gamePlayBoardCards = []
@@ -86,7 +87,7 @@ class GameBoardStore {
     this.players = players
   }
 
-  setGameTableBoardCards(gameTableBoardCards: GameTableBoardCardType[]): void {
+  everyoneCheckOwnCard(gameTableBoardCards: GameTableBoardCardType[]): void {
     this.gameTableBoardCards = gameTableBoardCards
 
     const playerCards: PositionProperties[] = []
@@ -115,7 +116,9 @@ class GameBoardStore {
     this.playerCards = playerCards
   }
 
-  getGamePlayBoardCards(): void {
+  closeYourEyes(): void {
+    interactionStore.toggleMessageBoxStatus(false)
+
     const gamePlayBoardCards: GamePlayBoardCardType[] = []
     const playerCards: PositionProperties[] = []
     const centerCards: PositionProperties[] = []
@@ -128,9 +131,12 @@ class GameBoardStore {
           artifact: false,
           shield: false,
           selectable: false,
+          werewolf: false,
+          mason: false,
         },
       }
       gamePlayBoardCards.push(card)
+      centerCards.push({ ...centerCard, ...card.card })
     })
 
     this.playerCards.forEach((playerCard) => {
@@ -141,24 +147,12 @@ class GameBoardStore {
           artifact: false,
           shield: false,
           selectable: false,
+          werewolf: false,
+          mason: false,
         },
       }
       gamePlayBoardCards.push(card)
-    })
-
-    gamePlayBoardCards.forEach((gamePlayBoardCard) => {
-      const { position, card } = gamePlayBoardCard
-      const positionKey = position as PositionKeys
-      if (this[positionKey]) {
-        const positionObject = this[positionKey] as PositionProperties
-        positionObject.id = card.id
-
-        if (position.startsWith('center')) {
-          centerCards.push(positionObject)
-        } else {
-          playerCards.push(positionObject)
-        }
-      }
+      playerCards.push({ ...playerCard, ...card.card })
     })
 
     this.centerCards = centerCards

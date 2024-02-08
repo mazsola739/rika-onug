@@ -6,27 +6,35 @@ import {
   CenterCards,
   CenterCardContainer,
 } from './BoardCards.styles'
-import { PositionProperties } from 'types'
+import { gameBoardStore } from 'store'
 
-const renderPlayerCards = (playerCards: PositionProperties[]) => {
+const renderPlayerCards = () => {
+  const { playerCards } = gameBoardStore
+
   return (
     <CardContainer>
       <PlayersCards>
-        {playerCards.map(({ position, id, ready }) => (
-          <GameCard
-            key={position}
-            isCenter={false}
-            id={id}
-            position={position}
-            ready={ready}
-          />
-        ))}
+        {playerCards.map(
+          ({ position, id, ready, werewolf, selectable, mason }) => (
+            <GameCard
+              key={position}
+              isCenter={false}
+              id={id}
+              position={position}
+              ready={ready}
+              werewolf={werewolf}
+              selectable={selectable}
+              mason={mason}
+            />
+          )
+        )}
       </PlayersCards>
     </CardContainer>
   )
 }
 
-const renderCenterCard = (centerCards: PositionProperties[]) => {
+const renderCenterCard = () => {
+  const { centerCards } = gameBoardStore
   const renderCard = (position: string, title: string) => {
     const card = centerCards.find((c) => c.position === position)
     return (
@@ -35,7 +43,12 @@ const renderCenterCard = (centerCards: PositionProperties[]) => {
         <CardContainer>
           <CardTitle>{title}</CardTitle>
           <CenterCards>
-            <GameCard id={card.id} position={card.position} isCenter={true} />
+            <GameCard
+              id={card.id}
+              position={card.position}
+              isCenter={true}
+              selectable={card.selectable}
+            />
           </CenterCards>
         </CardContainer>
       )
@@ -58,6 +71,7 @@ const renderCenterCard = (centerCards: PositionProperties[]) => {
                   id={card.id}
                   position={card.position}
                   isCenter={true}
+                  selectable={card.selectable}
                 />
               )
             )

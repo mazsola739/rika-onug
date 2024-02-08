@@ -90,14 +90,17 @@ export const useClickHandler = (room_id: string, token: string) => {
     })
   }, [sendJsonMessage])
 
-  const handleInteraction = useCallback(() => {
-    sendJsonMessage?.({
-      type: INTERACTION,
-      room_id,
-      token,
-      selected_positions: ['player_2'],
-    })
-  }, [sendJsonMessage])
+  const handleInteraction = useCallback(
+    (selected_cards: string[]) => {
+      sendJsonMessage?.({
+        type: INTERACTION,
+        room_id,
+        token,
+        selected_positions: selected_cards,
+      })
+    },
+    [sendJsonMessage]
+  )
 
   const handleDeselect = useCallback(
     (id: number, action: string) => {

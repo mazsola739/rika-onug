@@ -66,14 +66,3 @@ export const GameArea = styled.div`
   display: flex;
   justify-content: center;
 `
-
-export const MessageBox = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: flex-end;
-  padding: 10px;
-`
-
-export const SendButton = styled.div`
-  display: flex;
-`

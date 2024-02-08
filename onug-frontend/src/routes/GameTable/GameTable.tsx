@@ -39,7 +39,7 @@ export const GameTable: React.FC = observer(() => {
 
   const { hasSentinel, hasMarks, hasCurator } = gameTableStore
   const { selectedMarks, deck } = deckStore
-  const { setPlayer, setPlayers, setGameTableBoardCards } = gameBoardStore
+  const { setPlayer, setPlayers, everyoneCheckOwnCard } = gameBoardStore
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
 
@@ -64,13 +64,13 @@ export const GameTable: React.FC = observer(() => {
         player_card: findCardById(deck, lastJsonMessage.player_card_id),
       })
       setPlayers(lastJsonMessage.board.players)
-      setGameTableBoardCards(lastJsonMessage.board.gameTableBoardCards)
+      everyoneCheckOwnCard(lastJsonMessage.board.gameTableBoardCards)
       roomStore.resetDetailedCardInfo()
     }
 
     if (lastJsonMessage?.type === HYDRATE_READY) {
       setPlayers(lastJsonMessage.board.players)
-      setGameTableBoardCards(lastJsonMessage.board.gameTableBoardCards)
+      everyoneCheckOwnCard(lastJsonMessage.board.gameTableBoardCards)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
@@ -80,7 +80,7 @@ export const GameTable: React.FC = observer(() => {
     lastJsonMessage,
     setPlayer,
     setPlayers,
-    setGameTableBoardCards,
+    everyoneCheckOwnCard,
     deck,
     navigate,
   ])

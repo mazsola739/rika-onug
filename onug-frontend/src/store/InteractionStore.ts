@@ -1,15 +1,29 @@
 import { makeObservable, observable, action } from 'mobx'
-import { insomniacStore } from './roleStores'
+import { insomniacStore, masonsStore, werewolvesStore } from './roleStores'
 import { WsJsonMessage } from 'types'
 
 class InteractionStore {
   lastJsonMessage: WsJsonMessage = {}
+  hasMessageBox = false
+  selectedCards: string[] = []
 
   constructor() {
     makeObservable(this, {
       lastJsonMessage: observable,
+      hasMessageBox: observable,
+      selectedCards: observable,
+      toggleMessageBoxStatus: action,
       setLastJsonMessage: action,
+      setInteraction: action,
     })
+  }
+
+  toggleMessageBoxStatus(boolean: boolean): void {
+    this.hasMessageBox = boolean
+  }
+
+  setSelectedCards(positions: string[]): void {
+    this.selectedCards = positions
   }
 
   setLastJsonMessage(lastJsonMessage: WsJsonMessage): void {
@@ -131,7 +145,7 @@ class InteractionStore {
       
       break;*/
       case 'INSOMNIAC':
-        insomniacStore.setGamePlayBoardCards(this.lastJsonMessage)
+        insomniacStore.openYourEyes(this.lastJsonMessage)
 
         break /*
       case "INSTIGATOR": instigatorStore
@@ -154,10 +168,11 @@ class InteractionStore {
       break;
       case "MARKSMAN": marksmanStore
       
-      break;
-      case "MASONS": masonsStore
-      
-      break;
+      break;*/
+      case 'MASONS':
+        masonsStore.openYourEyes(this.lastJsonMessage)
+
+        break /*
       case "MINION": minionStore
       
       break;
@@ -274,10 +289,11 @@ class InteractionStore {
       break;
       case "VOODOO_LOU": voodoolouStore
       
-      break;
-      case "WEREWOLVES": werewolvesStore
-      
-      break;
+      break; */
+      case 'WEREWOLVES':
+        werewolvesStore.openYourEyes(this.lastJsonMessage)
+
+        break /*
       case "WITCH": witchStore
       
       break;*/
