@@ -62,11 +62,5 @@ exports.troublemaker_response = (gameState, token, selected_positions, ws) => {
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} swapped cards between: ${selected_positions[0]} and ${selected_positions[1]}`
 
-  ws.send(JSON.stringify({
-    type: INTERACTION,
-    title: "TROUBLEMAKER",
-    message: 'SUCCESSFULLY swapped cards',
-  }))
-
   return newGameState
 };

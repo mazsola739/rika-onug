@@ -66,10 +66,5 @@ exports.doppelganger_response = (gameState, token, selected_positions, ws) => {
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} copied card on the next position: ${selected_positions[0]}`
 
-  ws.send(JSON.stringify({
-    type: INTERACTION,
-    message: 'SUCCESSFULLY copied cards',
-  }))
-
   return newGameState
 };

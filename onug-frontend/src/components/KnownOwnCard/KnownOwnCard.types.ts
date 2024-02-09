@@ -1,5 +1,5 @@
 import { PlayerType } from 'types'
 
-export interface GameTableHeaderProp {
+export interface KnownOwnCardProps {
   player: PlayerType
 }

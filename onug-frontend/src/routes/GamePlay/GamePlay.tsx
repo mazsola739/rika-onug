@@ -6,7 +6,7 @@ import {
   gamePlayStore,
   interactionStore,
 } from 'store'
-import { BoardCards, Header, Main, MessageBox, OwnCard } from 'components'
+import { BoardCards, Header, KnownOwnCard, Main, MessageBox } from 'components'
 import {
   ARRIVE_GAME_PLAY,
   HYDRATE_GAME_PLAY,
@@ -70,8 +70,6 @@ export const GamePlay: React.FC = observer(() => {
     }
   }, [lastJsonMessage, narrationStore, gamePlayStore])
 
-  const { player } = gameBoardStore
-
   return (
     <StyledGamePlay>
       <Header>
@@ -84,7 +82,7 @@ export const GamePlay: React.FC = observer(() => {
           </GameArea>
           <PlayerHand>
             <OwnCardPlace>
-              <OwnCard player={player} />
+              <KnownOwnCard player={gameBoardStore.knownPlayer} />
             </OwnCardPlace>
             {interactionStore.hasMessageBox && (
               <MessageBox room_id={room_id} token={token} />

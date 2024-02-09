@@ -81,11 +81,5 @@ exports.robber_response = (gameState, token, selected_positions, ws) => {
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} swapped their card with ${selected_positions[0]} and then viewed their new card`
 
-  ws.send(JSON.stringify({
-    type: INTERACTION,
-    title: "ROBBER",
-    message: 'SUCCESSFULLY swapped and showed cards',
-  }))
-
   return newGameState
 };

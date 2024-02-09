@@ -15,7 +15,6 @@ import {
   deckStore,
   wsStore,
 } from 'store'
-import { utils } from 'utils'
 import {
   GameArea,
   OwnCardPlace,
@@ -28,7 +27,6 @@ import { GameTableHeader } from './GameTableHeader'
 import { useNavigate } from 'react-router-dom'
 import { DealtCards, Main, OwnCard, PlayerList } from 'components'
 
-const { findCardById } = utils
 const { renderMarks, renderArtifacts } = gameTableUtils
 
 export const GameTable: React.FC = observer(() => {
@@ -38,7 +36,7 @@ export const GameTable: React.FC = observer(() => {
   const token = sessionStorage.getItem('token')
 
   const { hasSentinel, hasMarks, hasCurator } = gameTableStore
-  const { selectedMarks, deck } = deckStore
+  const { selectedMarks } = deckStore
   const { setPlayer, setPlayers, everyoneCheckOwnCard } = gameBoardStore
   const { sendJsonMessage, lastJsonMessage } =
     wsStore.getWsCommunicationsBridge()
@@ -58,10 +56,12 @@ export const GameTable: React.FC = observer(() => {
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_GAME_TABLE) {
       setPlayer({
-        player_card_id: lastJsonMessage.player_card_id,
         player_name: lastJsonMessage.player_name,
         player_number: lastJsonMessage.player_number,
-        player_card: findCardById(deck, lastJsonMessage.player_card_id),
+        player_card_id: lastJsonMessage.player_card_id,
+        player_role: lastJsonMessage.player_role,
+        player_role_id: lastJsonMessage.player_role_id,
+        player_team: lastJsonMessage.player_team,
       })
       setPlayers(lastJsonMessage.board.players)
       everyoneCheckOwnCard(lastJsonMessage.board.gameTableBoardCards)
@@ -76,20 +76,13 @@ export const GameTable: React.FC = observer(() => {
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [
-    lastJsonMessage,
-    setPlayer,
-    setPlayers,
-    everyoneCheckOwnCard,
-    deck,
-    navigate,
-  ])
+  }, [lastJsonMessage, setPlayer, setPlayers, everyoneCheckOwnCard, navigate])
 
   const { player, players } = gameBoardStore
 
   return (
     <StyledGameTable>
-      <GameTableHeader />
+      <GameTableHeader player={player} />
       <Main>
         <OwnCardPlace>{player && <OwnCard player={player} />}</OwnCardPlace>
         <GameArea>

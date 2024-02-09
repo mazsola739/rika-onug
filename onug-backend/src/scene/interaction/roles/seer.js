@@ -71,11 +71,5 @@ exports.seer_response = (gameState, token, selected_positions, ws) => {
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card(s) on the next position(s): ${selected_positions.join(', ')}`
 
-  ws.send(JSON.stringify({
-    type: INTERACTION,
-    title: "SEER",
-    message: 'SUCCESSFULLY showed cards',
-  }))
-
   return newGameState
 };

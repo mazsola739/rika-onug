@@ -1,5 +1,11 @@
 import { makeObservable, observable, action } from 'mobx'
-import { insomniacStore, masonsStore, werewolvesStore } from './roleStores'
+import {
+  drunkStore,
+  insomniacStore,
+  masonsStore,
+  minionStore,
+  werewolvesStore,
+} from './roleStores'
 import { WsJsonMessage } from 'types'
 
 class InteractionStore {
@@ -12,10 +18,18 @@ class InteractionStore {
       lastJsonMessage: observable,
       hasMessageBox: observable,
       selectedCards: observable,
+
+      resetInteraction: action,
       toggleMessageBoxStatus: action,
+      setSelectedCards: action,
       setLastJsonMessage: action,
       setInteraction: action,
     })
+  }
+
+  resetInteraction(): void {
+    this.selectedCards = []
+    this.toggleMessageBoxStatus(false)
   }
 
   toggleMessageBoxStatus(boolean: boolean): void {
@@ -31,6 +45,7 @@ class InteractionStore {
   }
 
   setInteraction(title: string): void {
+    console.log(this.lastJsonMessage)
     /* if (this.lastJsonMessage && title) {} */
     switch (title) {
       /*case "ALIENS": aliensStore
@@ -100,14 +115,15 @@ class InteractionStore {
       
       break;
       case "DOPPELGÄNGER_INSTANT_ACTION": doppelgangerStore
-      
+      //todo
       break;
       case "DR_PEEKER": drpeekerStore
       
-      break;
-      case "DRUNK": drunkStore
-      
-      break;
+      break;*/
+      case 'DRUNK':
+        drunkStore.openYourEyes(this.lastJsonMessage)
+
+        break /*
       case "EMPATH": empathStore
       
       break;
@@ -172,10 +188,11 @@ class InteractionStore {
       case 'MASONS':
         masonsStore.openYourEyes(this.lastJsonMessage)
 
+        break
+      case 'MINION':
+        minionStore.openYourEyes(this.lastJsonMessage)
+
         break /*
-      case "MINION": minionStore
-      
-      break;
       case "MIRROR_MAN": mirrormanStore
       
       break;

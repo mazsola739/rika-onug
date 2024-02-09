@@ -1,6 +1,6 @@
 import { CardImage, Header, Token } from 'components'
 import { observer } from 'mobx-react-lite'
-import { gameBoardStore } from 'store'
+import { deckStore } from 'store'
 import {
   PlayerCardInfo,
   PlayerCardRule,
@@ -8,32 +8,36 @@ import {
   PlayerName,
   StyledGameTableHeader,
 } from './GameTable.styles'
+import { GameTableHeaderProp } from './GameTable.types'
 
-export const GameTableHeader: React.FC = observer(() => {
-  const { player } = gameBoardStore
+export const GameTableHeader: React.FC<GameTableHeaderProp> = observer(
+  ({ player }) => {
+    const card = player?.player_card_id
+      ? deckStore.getCardById(player.player_card_id)
+      : null
+    //Todo wining condition
+    //TODO Add mark
 
-  //Todo wining condition
-  //TODO Add role tokens
-
-  return (
-    <Header>
-      {player && (
-        <StyledGameTableHeader>
-          <PlayerInfo>
-            <Token
-              tokenName={`selected_player_${player.player_number}`}
-              size={50}
-            />
-            <PlayerName>{player.player_name}</PlayerName>
-          </PlayerInfo>
-          <PlayerCardInfo>
-            <CardImage image={player.player_card.card_name} size={100} />
-            <PlayerCardRule>
-              {`${player.player_card.display_name}: ${player.player_card.rules}`}
-            </PlayerCardRule>
-          </PlayerCardInfo>
-        </StyledGameTableHeader>
-      )}
-    </Header>
-  )
-})
+    return (
+      <Header>
+        {player && (
+          <StyledGameTableHeader>
+            <PlayerInfo>
+              <Token
+                tokenName={`selected_player_${player.player_number}`}
+                size={50}
+              />
+              <PlayerName>{player.player_name}</PlayerName>
+            </PlayerInfo>
+            <PlayerCardInfo>
+              <CardImage image={card.card_name} size={100} />
+              <PlayerCardRule>
+                {`${player.player_role}: ${card.rules}`}
+              </PlayerCardRule>
+            </PlayerCardInfo>
+          </StyledGameTableHeader>
+        )}
+      </Header>
+    )
+  }
+)

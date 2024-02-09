@@ -8,10 +8,12 @@ import {
   PositionKeys,
   PositionProperties,
   PositionType,
+  WsJsonMessage,
 } from 'types'
 
 class GameBoardStore {
   player: PlayerType
+  knownPlayer: PlayerType
   players: PlayersType[]
   gameTableBoardCards: GameTableBoardCardType[]
   gamePlayBoardCards: GamePlayBoardCardType[]
@@ -71,6 +73,18 @@ class GameBoardStore {
     this.player_12 = { position: 'player_12' }
   }
 
+  setKnownPlayer(lastJsonMessage: WsJsonMessage): void {
+    const newPlayer = { ...this.player }
+    const player_card_id = lastJsonMessage.player_card_id
+
+    newPlayer.player_card_id =
+      player_card_id !== newPlayer.player_card_id
+        ? player_card_id
+        : newPlayer.player_card_id
+
+    this.knownPlayer = newPlayer
+  }
+
   setPlayer(player: PlayerType): void {
     this.player = player
   }
@@ -85,6 +99,7 @@ class GameBoardStore {
 
   setPlayers(players: PlayersType[]): void {
     this.players = players
+    this.knownPlayer = { ...this.player }
   }
 
   everyoneCheckOwnCard(gameTableBoardCards: GameTableBoardCardType[]): void {
@@ -117,7 +132,7 @@ class GameBoardStore {
   }
 
   closeYourEyes(): void {
-    interactionStore.toggleMessageBoxStatus(false)
+    interactionStore.resetInteraction()
 
     const gamePlayBoardCards: GamePlayBoardCardType[] = []
     const playerCards: PositionProperties[] = []

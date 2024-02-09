@@ -62,11 +62,5 @@ exports.alphawolf_response = (gameState, token, selected_positions, ws) => {
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} swapped cards between positions: player ${selected_positions[0]} and center wolf`
 
-  ws.send(JSON.stringify({
-    type: INTERACTION,
-    title: "ALPHA_WOLF",
-    message: 'SUCCESSFULLY swapped cards',
-  }))
-
   return newGameState
 };

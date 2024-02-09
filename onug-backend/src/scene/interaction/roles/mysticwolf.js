@@ -63,11 +63,5 @@ exports.mysticwolf_response = (gameState, token, selected_positions, ws) => {
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card on the next position: ${selected_positions[0]}`
 
-  ws.send(JSON.stringify({
-    type: INTERACTION,
-    title: "MYSTIC_WOLF",
-    message: 'SUCCESSFULLY showed cards',
-  }))
-
   return newGameState
 };

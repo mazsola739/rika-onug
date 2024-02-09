@@ -70,11 +70,5 @@ exports.sentinel_response = (gameState, token, selected_positions, ws) => {
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} placed shield on the next position: ${selected_positions[0]}`
 
-  ws.send(JSON.stringify({
-    type: INTERACTION,
-    title: "SENTINEL",
-    message: 'SUCCESSFULLY placed shield',
-  }))
-
   return newGameState
 };

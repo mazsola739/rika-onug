@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { getTokensByCardIds } = require("../utils");
+const { getTokensByCardIds, getPlayerNumbersWithMatchingTokens } = require("../utils");
 const { centerCardPositions } = require("../constants");
 
 //TODO doppelganger instant action
@@ -43,9 +43,16 @@ exports.drunk_response = (gameState, token, selected_positions, ws) => {
   const newGameState = {...gameState}
   const role_interactions = [];
 
-  [newGameState.players[token].card.role_id, newGameState.card_positions[selected_positions[0]].id] = [newGameState.card_positions[selected_positions[0]].id, newGameState.players[token].card.role_id]
-  [newGameState.players[token].card.team, newGameState.card_positions[selected_positions[0]].team] = [newGameState.card_positions[selected_positions[0]].team, newGameState.players[token].card.team]
+  const drunkPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token]);
+
+  const playerCard = { ...newGameState.card_positions[drunkPlayerNumbers] };
+  const selectedCard = { ...newGameState.card_positions[selected_positions[0]] };
   
+  newGameState.card_positions[drunkPlayerNumbers] = selectedCard;
+  newGameState.card_positions[selected_positions[0]] = playerCard;
+
+  newGameState.players[token].card.id = 0;
+
   newGameState.players[token].role_history.swapped_cards = [selected_positions[0], `player_${newGameState.players[token].player_number}`]
   newGameState.players[token].role_history.card_or_mark_action = true
   
@@ -56,6 +63,7 @@ exports.drunk_response = (gameState, token, selected_positions, ws) => {
     message: "interaction_drunk2",
     swapped_cards: [`player_${newGameState.players[token].player_number}`, `${selected_positions[0]}`],
     shielded_players: newGameState.shield,
+    player_card_id: newGameState.players[token].card.id
   })
   
   newGameState.role_interactions = role_interactions
@@ -64,11 +72,5 @@ exports.drunk_response = (gameState, token, selected_positions, ws) => {
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} swapped their card with ${selected_positions[0]}`
   
-  ws.send(JSON.stringify({
-    type: INTERACTION,
-    title: "DRUNK",
-    message: 'SUCCESSFULLY swapped cards',
-  }))
-
   return newGameState
 };

@@ -11,6 +11,7 @@ class WerewolvesStore {
     const playerCards: PositionProperties[] = [...gameBoardStore.playerCards]
     const shielded_players = lastJsonMessage.shielded_players || []
     const selectable_cards = lastJsonMessage.selectable_cards || []
+    const show_cards = lastJsonMessage.show_cards || []
     const werewolves = lastJsonMessage.werewolves || []
 
     playerCards.forEach((playerCard) => {
@@ -30,6 +31,13 @@ class WerewolvesStore {
         centerCard.selectable = true
       } else {
         centerCard.selectable = false
+      }
+
+      const showCard = show_cards.find(
+        (showCardObj) => showCardObj[centerCard.position]
+      )
+      if (showCard) {
+        centerCard.id = showCard[centerCard.position]
       }
     })
 

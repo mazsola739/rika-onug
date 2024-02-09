@@ -1,5 +1,3 @@
-import { CardType } from './Json.types'
-
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
 export type WsJsonMessage = {
@@ -12,6 +10,9 @@ export type WsJsonMessage = {
   title?: string
   player_name?: string
   player_card_id?: number
+  player_role?: string
+  player_role_id?: number
+  player_team?: string
   player_number?: number
   board?: {
     players?: PlayersType[]
@@ -84,7 +85,9 @@ export type PlayerType = {
   player_name: string
   player_number: number
   player_card_id: number
-  player_card: CardType
+  player_role: string
+  player_role_id: number
+  player_team: string
 }
 
 export type PositionKeys =

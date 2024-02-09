@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { gameBoardStore } from 'store'
 
 export const Timer: React.FC<TimerProps> = observer(
-  ({ startingTime, actionTime = 5000 }) => {
+  ({ startingTime, actionTime = 8000 }) => {
     const [remainingTime, setRemainingTime] = useState(0)
 
     //TODO rethink
@@ -20,13 +20,18 @@ export const Timer: React.FC<TimerProps> = observer(
         clearInterval(intervalId)
       }
     }, [startingTime, actionTime])
-
+    //TODO rethink
     useEffect(() => {
-      console.log(remainingTime)
-      if (remainingTime === 0) {
+      if (remainingTime <= 1000 && remainingTime > 0) {
+        const closeEyesTimer = setTimeout(() => {
+          gameBoardStore.closeYourEyes()
+        }, remainingTime)
+
+        return () => clearTimeout(closeEyesTimer)
+      } else if (remainingTime === 0) {
         gameBoardStore.closeYourEyes()
       }
-    }, [remainingTime, gameBoardStore, gameBoardStore])
+    }, [remainingTime, gameBoardStore])
 
     const formatTime = (time: number) => {
       const seconds = Math.floor(time / 1000)
