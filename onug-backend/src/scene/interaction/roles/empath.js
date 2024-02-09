@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.empath = (gameState, tokens) => {
+exports.empath = (gameState, token) => {
   const newGameState = {...gameState}
 
   return newGameState;

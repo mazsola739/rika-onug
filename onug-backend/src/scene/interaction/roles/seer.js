@@ -5,11 +5,11 @@ const { centerCardPositions } = require("../constants");
 
 //TODO doppelganger instant action
 //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
-exports.seer = (gameState) => {
+exports.seer = (gameState, token) => {
   const newGameState = { ...gameState };
   const role_interactions = [];
 
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, tokens);
+  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token);
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -18,24 +18,23 @@ exports.seer = (gameState) => {
     card_or_mark_action: false,
   };
 
-  tokens.forEach((token) => {
-    newGameState.players[token].role_history = roleHistory;
+  newGameState.players[token].role_history = roleHistory;
 
-    role_interactions.push({
-      type: INTERACTION,
-      title: "SEER",
-      token,
-      message: "interaction_seer",
-      selectable_center_cards: centerCardPositions,
-      selectable_player_cards: selectablePlayerNumbers,
-      shielded_players: newGameState.shield,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
-    });
+  role_interactions.push({
+    type: INTERACTION,
+    title: "SEER",
+    token,
+    message: "interaction_seer",
+    selectable_center_cards: centerCardPositions,
+    selectable_player_cards: selectablePlayerNumbers,
+    shielded_players: newGameState.shield,
+    player_card_id: newGameState.players[token]?.card?.id,
+    player_role: newGameState.players[token]?.card?.role,
+    player_role_id: newGameState.players[token]?.card?.role_id,
+    player_team: newGameState.players[token]?.card?.team,
+    player_number: newGameState.players[token]?.player_number,
   });
+
 
   newGameState.role_interactions = role_interactions;
 
@@ -85,9 +84,8 @@ exports.seer_response = (gameState, token, selected_positions) => {
 
   logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`);
 
-  newGameState.actual_scene.interaction = `The player ${
-    newGameState.players[token].player_number
-  } viewed card(s) on the next position(s): ${selected_positions.join(", ")}`;
+  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number
+    } viewed card(s) on the next position(s): ${selected_positions.join(", ")}`;
 
   return newGameState;
 };

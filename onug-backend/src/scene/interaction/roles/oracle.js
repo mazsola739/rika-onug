@@ -1,6 +1,6 @@
 
 
-exports.oracle = (gameState, tokens) => {
+exports.oracle = (gameState, token) => {
     const newGameState = {...gameState}
   
     return newGameState;

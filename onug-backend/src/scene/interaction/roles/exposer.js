@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.exposer = (gameState, tokens) => {
+exports.exposer = (gameState, token) => {
   const newGameState = {...gameState}
 
   return newGameState;

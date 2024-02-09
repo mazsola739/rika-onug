@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.pickpocket = (gameState, tokens) => {
+exports.pickpocket = (gameState, token) => {
   const newGameState = {...gameState}
 
   return newGameState;

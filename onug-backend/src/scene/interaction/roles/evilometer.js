@@ -1,6 +1,6 @@
 
 
-exports.evilometer = (gameState, tokens) => {
+exports.evilometer = (gameState, token) => {
   const newGameState = {...gameState}
 
   return newGameState;

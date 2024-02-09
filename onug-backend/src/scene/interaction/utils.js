@@ -166,3 +166,39 @@ exports.getPlayerRoleIds = players => {
 
   return result
 }
+
+exports.containsAllIds = (selectedCardIds, roleIds) => roleIds.every((cardId) => selectedCardIds.includes(cardId))
+
+exports.containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId) => selectedCardIds.includes(cardId))
+
+exports.containsAnyOriginalIds = (players, ids) => ids.some(id => Object.values(players).some(player => player.card.original_id === id))
+
+exports.containsAllOriginalIds = (players, ids) => ids.every(id => Object.values(players).some(player => player.card.original_id === id))
+
+exports.getTokenByOriginalIds = (players, ids) => {
+  let result = ""
+  
+  for (const token in players) {
+    if (ids.includes(players?.[token]?.card.original_id)) {
+      result = token
+    }
+  }
+
+  return result
+}
+
+exports.getTokensByOriginalIds = (players, ids) => {
+  const result = []
+
+  for (const token in players) {
+    if (ids.includes(players?.[token]?.card.original_id)) {
+      result.push(token)
+    }
+  }
+
+  return result
+}
+
+exports.getAllPlayerTokens = (players) => {
+  return Object.keys(players);
+}

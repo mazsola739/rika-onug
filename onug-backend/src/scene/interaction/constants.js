@@ -24,7 +24,7 @@ exports.instantRoleIds = {
   85: "thing",
 }
 
-exports.doppelgangerInstantActionsIds = [2, 8, 9, 11, 17, 18, 22, 23, 25, 26, 27, 31, 32, 34, 55, 56, 57, 65, 66, 68, 69, 70, 85]
+  exports.doppelgangerInstantActionsIds = [2, 8, 9, 11, 17, 18, 22, 23, 25, 26, 27, 31, 32, 34, 55, 56, 57, 65, 66, 68, 69, 70, 85]
 exports.teamIds = {
   werewolf: [7, 15, 16, 17, 21, 22, 83],
   vampire: [38, 39, 40, 41],

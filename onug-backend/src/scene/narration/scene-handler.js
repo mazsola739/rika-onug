@@ -1,23 +1,6 @@
 const { roles } = require("./roles");
-const {
-  getRolesNames,
-  getTeamName,
-  containsAnyIds,
-  containsAllIds,
-  hasRole,
-} = require("./utils");
-const {
-  instantRoleIds,
-  doppelgangerInstantActionsIds,
-  vampireIds,
-  alienIds,
-  groobAndZerbIds,
-  superVillainsIds,
-  werewolvesIds,
-  hasMarkIds,
-  seerIds,
-  masonIds,
-} = require("./constants");
+const { getRolesNames, getTeamName, containsAnyIds, containsAllIds, hasRole } = require("./utils");
+const { instantRoleIds, doppelgangerInstantActionsIds, vampireIds, alienIds, groobAndZerbIds, superVillainsIds, werewolvesIds, hasMarkIds, seerIds, masonIds } = require("./constants");
 const { logError, logDebug } = require("../../log");
 
 const NARRATION = 'actual_scene.narration'

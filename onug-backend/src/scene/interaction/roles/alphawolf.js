@@ -4,7 +4,7 @@ const { getNonWerewolfPlayerNumbersByRoleIds } = require("../utils");
 
 //TODO doppelganger instant action
 //? INFO: Alpha Wolf - Wakes with other Werewolves. Wakes after and exchanges the center Alpha card with any other non-Werewolf player card
-exports.alphawolf = (gameState, tokens) => {
+exports.alphawolf = (gameState, token) => {
   const newGameState = { ...gameState };
   const role_interactions = [];
 
@@ -16,17 +16,15 @@ exports.alphawolf = (gameState, tokens) => {
     card_or_mark_action: false,
   };
 
-  tokens.forEach((token) => {
     newGameState.players[token].role_history = roleHistory;
 
-    role_interactions.push({
-      type: INTERACTION,
-      title: "ALPHA_WOLF",
-      token,
-      message: "interaction_alphawolf",
-      selectable_cards: selectablePlayerNumbers,
-      shielded_players: newGameState.shield,
-    })
+  role_interactions.push({
+    type: INTERACTION,
+    title: "ALPHA_WOLF",
+    token,
+    message: "interaction_alphawolf",
+    selectable_cards: selectablePlayerNumbers,
+    shielded_players: newGameState.shield,
   })
 
   newGameState.role_interactions = role_interactions;

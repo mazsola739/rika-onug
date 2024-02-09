@@ -1,3 +1,5 @@
+//TODO collect common constants here
+
 exports.instantRoleIds = {
   17: "role_alphawolf",
   55: "role_annoyinglad",

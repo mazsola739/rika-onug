@@ -1,6 +1,6 @@
 
 //TODO doppelganger separated
-exports.bodysnatcher = (gameState, tokens) => {
+exports.bodysnatcher = (gameState, token) => {
     const newGameState = {...gameState}
   
     return newGameState;

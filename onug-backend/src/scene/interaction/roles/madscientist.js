@@ -1,6 +1,6 @@
 
 
-exports.madscientist = (gameState, tokens) => {
+exports.madscientist = (gameState, token) => {
   const newGameState = {...gameState}
 
   return newGameState;

@@ -5,7 +5,7 @@ const { centerCardPositions } = require("../constants");
 
 //TODO doppelganger instant action
 //? INFO: Apprentice Seer - looks at one card from the center (not another players or her own)
-exports.apprenticeseer = (gameState, tokens) => {
+exports.apprenticeseer = (gameState, token) => {
   const newGameState = {...gameState}
   const role_interactions = [];
 
@@ -15,18 +15,16 @@ exports.apprenticeseer = (gameState, tokens) => {
     card_or_mark_action: false,
   }
 
-  tokens.forEach((token) =>{
-    newGameState.players[token].role_history = roleHistory
+  newGameState.players[token].role_history = roleHistory
 
-    role_interactions.push({
-      type: INTERACTION,
-      title: "APPRENTICE_SEER",
-      token,
-      message: "interaction_apprenticeseer",
-      selectable_cards: centerCardPositions,
-      shielded_players: newGameState.shield,
-    })
-  });
+  role_interactions.push({
+    type: INTERACTION,
+    title: "APPRENTICE_SEER",
+    token,
+    message: "interaction_apprenticeseer",
+    selectable_cards: centerCardPositions,
+    shielded_players: newGameState.shield,
+  })
 
   newGameState.role_interactions = role_interactions
 

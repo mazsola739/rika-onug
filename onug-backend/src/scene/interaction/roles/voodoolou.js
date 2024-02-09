@@ -1,6 +1,6 @@
 
 //TODO doppelganger instant action
-exports.voodoolou = (gameState, tokens) => {
+exports.voodoolou = (gameState, token) => {
   const newGameState = {...gameState}
 
   return newGameState;

@@ -1,10 +1,10 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
 const { werewolvesAndDreamWolfIds } = require("../constants");
-const { getPlayerNumbersWithMatchingTokens } = require("../utils");
+const { getPlayerNumbersWithMatchingTokens, getTokensByRoleIds } = require("../utils");
 
 //? INFO: Minion - All Werewolf team (not Minion/Squire) stick up their thumb for him to see
-exports.minion = tokens => {
+exports.minion = (gameState, token) => {
   const newGameState = {...gameState}
   const role_interactions = [];
 
@@ -17,20 +17,18 @@ exports.minion = tokens => {
     card_or_mark_action: false,
   }
 
-  tokens.forEach((token) =>{
-    newGameState.players[token].role_history = roleHistory
+  newGameState.players[token].role_history = roleHistory
 
-    role_interactions.push({
-      type: INTERACTION,
-      title: "MINION",
-      token,
-      message: "interaction_minion",
-      werewolves: werewolfPlayerNumbers,
-      shielded_players: newGameState.shield,
-    })
+  role_interactions.push({
+    type: INTERACTION,
+    title: "MINION",
+    token,
+    message: "interaction_minion",
+    werewolves: werewolfPlayerNumbers,
+    shielded_players: newGameState.shield,
+  })
 
-    newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw werewolf position(s): player ${werewolfPlayerNumbers.join(', ')}`
-  });
+  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw werewolf position(s): player ${werewolfPlayerNumbers.join(', ')}`
 
   newGameState.role_interactions = role_interactions
 

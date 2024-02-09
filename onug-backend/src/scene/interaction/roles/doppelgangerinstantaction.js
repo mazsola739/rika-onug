@@ -1,5 +1,4 @@
 const { roles } = require(".")
-const { INTERACTION } = require("../../../constant/ws")
 const { logInfo } = require("../../../log")
 const { doppelgangerInstantActionsIds, instantRoleIds } = require("../constants")
 
@@ -11,45 +10,20 @@ const { doppelgangerInstantActionsIds, instantRoleIds } = require("../constants"
  * ? 68 Switcheroo, 69 Temptress, 70 Voodoolou, 85 Thing
  * */
 exports.doppelganger_instant_action = (gameState, new_role_id, token) => {
-  if (new_role_id && doppelgangerInstantActionsIds.includes(gameState.players[token].role_history.new_role_id) === false) return gameState
+  const playerRoleHistory = gameState.players[token].role_history;
 
-  let newGameState = { ...gameState }
+  if (playerRoleHistory.new_role_id !== new_role_id) return;
 
-  const roleName = instantRoleIds[new_role_id]
+  if (!doppelgangerInstantActionsIds.includes(new_role_id)) return;
+
+  const roleName = instantRoleIds[new_role_id];
 
   if (roleName && roles[roleName]) {
-    logInfo(`Doppelganger instant night action: ${typeof roles[roleName]}`)
-    newGameState = roles[roleName](newGameState)
+    logInfo(`Doppelganger instant night action for ${token}: ${typeof roles[roleName]}`);
 
-    //! TODO how to communicate
-    //TODO newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} started the next night action: ${}`
+    roles[roleName](gameState, token);
   }
 
-  return newGameState
+  return gameState;
 }
 
-exports.doppelganger_instant_response = (gameState, token, selected_positions, ws) => {
-/*   const generateInteractionResponse = (gameState, token, selected_positions, ws) => {
-    const interaction_type = gameState?.players?.[token]?.role_history?.scene_title
-    if (!interaction_type) {
-      ws.send(JSON.stringify({
-        type: INTERACTION,
-        message: 'nope'
-      }))
-      return gameState
-    }
-  
-    if (interaction_type === "ALPHA_WOLF")      return roles.alphawolf_response(gameState, token, selected_positions)
-    if (interaction_type === "APPRENTICE_SEER") return roles.apprenticeseer_response(gameState, token, selected_positions)
-    if (interaction_type === "DOPPELGÄNGER")    return roles.doppelganger_response(gameState, token, selected_positions)
-    if (interaction_type === "DRUNK")           return roles.drunk_response(gameState, token, selected_positions)
-    if (interaction_type === "MYSTIC_WOLF")     return roles.mysticwolf_response(gameState, token, selected_positions)
-    if (interaction_type === "ROBBER")          return roles.robber_response(gameState, token, selected_positions)
-    if (interaction_type === "SEER")            return roles.seer_response(gameState, token, selected_positions)  
-    if (interaction_type === "TROUBLEMAKER")    return roles.troublemaker_response(gameState, token, selected_positions)
-    if (interaction_type === "WEREWOLVES")      return roles.werewolves_response(gameState, token, selected_positions)
-  
-    return gameState
-  } */
-
-}

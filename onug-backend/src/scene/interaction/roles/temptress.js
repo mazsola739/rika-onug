@@ -1,6 +1,6 @@
 
 //TODO doppelganger instant action
-exports.temptress = (gameState, tokens) => {
+exports.temptress = (gameState, token) => {
   const newGameState = {...gameState}
 
   return newGameState;

@@ -1,6 +1,6 @@
 
 
-exports.supervillains = (gameState, tokens) => {
+exports.supervillains = (gameState, token) => {
   const newGameState = {...gameState}
 
   return newGameState;

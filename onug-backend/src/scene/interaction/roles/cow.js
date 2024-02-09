@@ -1,6 +1,6 @@
 
 
-exports.cow = (gameState, tokens) => {
+exports.cow = (gameState, token) => {
     const newGameState = {...gameState}
   
     return newGameState;
