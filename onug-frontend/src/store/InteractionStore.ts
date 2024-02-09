@@ -1,5 +1,6 @@
 import { makeObservable, observable, action } from 'mobx'
 import {
+  doppelgangerStore,
   drunkStore,
   insomniacStore,
   masonsStore,
@@ -155,11 +156,11 @@ class InteractionStore {
       case "DISEASED":
          diseasedStore.openYourEyes(this.lastJsonMessage)
       
-      break;
-      case "DOPPELGÄNGER":
-         doppelgangerStore.openYourEyes(this.lastJsonMessage)
-      
-      break;
+      break; */
+      case 'DOPPELGÄNGER':
+        doppelgangerStore.openYourEyes(this.lastJsonMessage)
+
+        break /*
       case "DOPPELGÄNGER_INSTANT_ACTION":
          doppelgangerStore
       //todo

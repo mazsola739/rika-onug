@@ -1,10 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const {
-  getTokensByRoleIds,
-  getCardIdsByPositions,
-  getPlayerNumbersWithNonMatchingTokens,
-} = require("../utils");
+const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens } = require("../utils");
 const { centerCardPositions } = require("../constants");
 
 //TODO doppelganger instant action
@@ -13,8 +9,7 @@ exports.seer = (gameState) => {
   const newGameState = { ...gameState };
   const role_interactions = [];
 
-  const seerTokens = getTokensByRoleIds(newGameState.players, [9]); //todo doppelganger
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, seerTokens);
+  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, tokens);
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -23,7 +18,7 @@ exports.seer = (gameState) => {
     card_or_mark_action: false,
   };
 
-  seerTokens.forEach((token) => {
+  tokens.forEach((token) => {
     newGameState.players[token].role_history = roleHistory;
 
     role_interactions.push({

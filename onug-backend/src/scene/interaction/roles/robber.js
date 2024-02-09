@@ -1,15 +1,14 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { getTokensByRoleIds, getPlayerNumbersWithMatchingTokens, getPlayerNumbersWithNonMatchingTokens, getCardIdsByPlayerNumbers } = require("../utils");
+const { getPlayerNumbersWithMatchingTokens, getPlayerNumbersWithNonMatchingTokens, getCardIdsByPlayerNumbers } = require("../utils");
 
 //TODO doppelganger instant action
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
-exports.robber = gameState => {
+exports.robber = (gameState, tokens) => {
   const newGameState = {...gameState}
   const role_interactions = [];
 
-  const robberTokens = getTokensByRoleIds(newGameState.players, [8]); //todo doppelganger
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, robberTokens);
+  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, tokens);
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -17,7 +16,7 @@ exports.robber = gameState => {
     card_or_mark_action: false,
   }
 
-  robberTokens.forEach((token) => {
+  tokens.forEach((token) => {
     if (!newGameState.players[token].card.shield) {
       newGameState.players[token].role_history = roleHistory
 

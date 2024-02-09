@@ -1,10 +1,10 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { getTokensByRoleIds, getPlayerNumbersWithMatchingTokens } = require("../utils");
+const { getPlayerNumbersWithMatchingTokens } = require("../utils");
 const { masonIds } = require("../constants");
 
 //? INFO: Mason (2) – Wakes up and looks for the other fellow Mason
-exports.masons = gameState => {
+exports.masons = (gameState, tokens) => {
   const newGameState = { ...gameState };
   const role_interactions = [];
 

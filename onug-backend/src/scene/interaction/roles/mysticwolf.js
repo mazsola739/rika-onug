@@ -1,15 +1,14 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { getTokensByRoleIds, getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens } = require("../utils");
+const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens } = require("../utils");
 
 //TODO doppelganger instant action
 //? INFO: Mystic Wolf - Wakes with other Werewolves. Wakes after and looks at any other player's card (not center or own)
-exports.mysticwolf = gameState => {
+exports.mysticwolf = (gameState, tokens) => {
   const newGameState = {...gameState}
   const role_interactions = [];
 
-  const mysticwolfTokens = getTokensByRoleIds(newGameState.players, [22]); //todo doppelganger
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, mysticwolfTokens);
+  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, tokens);
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -17,7 +16,7 @@ exports.mysticwolf = gameState => {
     card_or_mark_action: false,
   }
 
-  mysticwolfTokens.forEach((token) =>{
+  tokens.forEach((token) =>{
     newGameState.players[token].role_history = roleHistory
 
     role_interactions.push({

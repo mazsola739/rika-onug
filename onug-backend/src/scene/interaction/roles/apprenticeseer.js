@@ -1,23 +1,21 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { getTokensByRoleIds, getCardIdsByPositions } = require("../utils");
+const { getCardIdsByPositions } = require("../utils");
 const { centerCardPositions } = require("../constants");
 
 //TODO doppelganger instant action
 //? INFO: Apprentice Seer - looks at one card from the center (not another players or her own)
-exports.apprenticeseer = gameState => {
+exports.apprenticeseer = (gameState, tokens) => {
   const newGameState = {...gameState}
   const role_interactions = [];
 
-  const apprenticeseerTokens = getTokensByRoleIds(newGameState.players, [18]); //todo doppelganger
- 
   const roleHistory = {
     ...newGameState.actual_scene,
     selectable_cards: centerCardPositions,
     card_or_mark_action: false,
   }
 
-  apprenticeseerTokens.forEach((token) =>{
+  tokens.forEach((token) =>{
     newGameState.players[token].role_history = roleHistory
 
     role_interactions.push({

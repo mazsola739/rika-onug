@@ -1,16 +1,15 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { getTokensByRoleIds, getPlayerNumbersWithMatchingTokens, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions } = require("../utils");
-const { werewolvesIds, centerCardPositions } = require("../constants");
+const { getPlayerNumbersWithMatchingTokens, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions } = require("../utils");
+const { centerCardPositions } = require("../constants");
 
 //TODO DREAMWOLF & werewolf_response
 //? INFO: Werewolves (4) - Open their eyes and view their fellow Werewolves (including Mystic and Alpha)
-exports.werewolves = gameState => {
+exports.werewolves = (gameState, tokens) => {
   const newGameState = { ...gameState };
   const role_interactions = [];
 
-  const werewolfTokens = getTokensByRoleIds(newGameState.players, werewolvesIds);
-  const werewolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, werewolfTokens);
+  const werewolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens);
   const dreamWolfPlayerNumber = getDreamWolfPlayerNumberByRoleIds(newGameState.players)
 
   const loneWolf = werewolfPlayerNumbers.length + dreamWolfPlayerNumber.length === 1
@@ -21,7 +20,7 @@ exports.werewolves = gameState => {
     card_or_mark_action: false,
   }
 
-  werewolfTokens.forEach((token) => {
+  tokens.forEach((token) => {
     newGameState.players[token].role_history = roleHistory;
 
     role_interactions.push({

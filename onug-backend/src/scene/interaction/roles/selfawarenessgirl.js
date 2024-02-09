@@ -3,13 +3,11 @@ const { logInfo } = require("../../../log");
 const { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens, getTokensByRoleIds } = require("../utils");
 
 //? INFO: SAME AS INSOMNIAC! Self-Awareness Girl – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
-exports.selfawarenessgirl = gameState => {
+exports.selfawarenessgirl = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = [];
-
-  const selfawarenessgirlToken = getTokensByRoleIds(newGameState.players, [67]);
   
-  selfawarenessgirlToken.forEach((token) =>{
+  tokens.forEach((token) =>{
     if (!newGameState.players[token].card.shield) {
       const selfawarenessgirlPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token]);
       const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, selfawarenessgirlPlayerNumber);

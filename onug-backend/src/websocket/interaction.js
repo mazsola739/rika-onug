@@ -36,14 +36,15 @@ const generateInteractionResponse = (gameState, token, selected_positions, ws) =
     return gameState
   }
 
-  if (interaction_type === "WEREWOLVES")      return roles.werewolves_response(gameState, token, selected_positions)
   if (interaction_type === "ALPHA_WOLF")      return roles.alphawolf_response(gameState, token, selected_positions)
-  if (interaction_type === "MYSTIC_WOLF")     return roles.mysticwolf_response(gameState, token, selected_positions)
-  if (interaction_type === "SEER")            return roles.seer_response(gameState, token, selected_positions)
   if (interaction_type === "APPRENTICE_SEER") return roles.apprenticeseer_response(gameState, token, selected_positions)
-  if (interaction_type === "ROBBER")          return roles.robber_response(gameState, token, selected_positions)
-  if (interaction_type === "TROUBLEMAKER")    return roles.troublemaker_response(gameState, token, selected_positions)
+  if (interaction_type === "DOPPELGÄNGER")    return roles.doppelganger_response(gameState, token, selected_positions)
   if (interaction_type === "DRUNK")           return roles.drunk_response(gameState, token, selected_positions)
+  if (interaction_type === "MYSTIC_WOLF")     return roles.mysticwolf_response(gameState, token, selected_positions)
+  if (interaction_type === "ROBBER")          return roles.robber_response(gameState, token, selected_positions)
+  if (interaction_type === "SEER")            return roles.seer_response(gameState, token, selected_positions)  
+  if (interaction_type === "TROUBLEMAKER")    return roles.troublemaker_response(gameState, token, selected_positions)
+  if (interaction_type === "WEREWOLVES")      return roles.werewolves_response(gameState, token, selected_positions)
 
   return gameState
 }

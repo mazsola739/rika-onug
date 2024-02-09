@@ -1,7 +1,7 @@
 
-//TODO doppelganger seperated 
-//! cant give to shieleded
-exports.curator = gameState => {
+//TODO doppelganger separated 
+//! cant give to shielded
+exports.curator = (gameState, tokens) => {
     const newGameState = {...gameState}
   
     return newGameState;

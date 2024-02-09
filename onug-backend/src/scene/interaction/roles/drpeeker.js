@@ -1,6 +1,6 @@
 
 //TODO doppelganger instant
-exports.drpeeker = gameState => {
+exports.drpeeker = (gameState, tokens) => {
   const newGameState = {...gameState}
 
   return newGameState;

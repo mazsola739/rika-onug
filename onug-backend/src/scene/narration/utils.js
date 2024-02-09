@@ -6,9 +6,25 @@ exports.getRandomItemFromArray = (array) => array[getRandomNumber(0, array.lengt
 
 exports.hasRole = (selectedCards, roleId) => selectedCards.includes(roleId)
 
-exports.containsAllIds = (selectedCardIds, roleIds) => roleIds.every((cardId) => selectedCardIds.includes(cardId))
+exports.containsAnyIds = (players, ids) => ids.some(id => Object.values(players).some(player => player.card.original_id === id))
 
-exports.containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId) => selectedCardIds.includes(cardId))
+exports.containsAllIds = (players, ids) => ids.every(id => Object.values(players).some(player => player.card.original_id === id))
+
+exports.getTokensByOriginalIds = (players, ids) => {
+  const result = []
+
+  for (const token in players) {
+    if (ids.includes(players?.[token]?.card.original_id)) {
+      result.push(token)
+    }
+  }
+
+  return result
+}
+
+exports.getAllPlayerTokens = (players) => {
+  return Object.keys(players);
+}
 
 exports.getRolesNames = (selectedCardIds, actionIds, roles) => {
   const commonIds = selectedCardIds.filter((id) => actionIds.includes(id))

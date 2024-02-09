@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.flipper = gameState => {
+exports.flipper = (gameState, tokens) => {
   const newGameState = {...gameState}
 
   return newGameState;

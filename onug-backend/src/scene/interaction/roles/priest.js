@@ -1,6 +1,6 @@
 
 //TODO doppelganger
-exports.priest = gameState => {
+exports.priest = (gameState, tokens) => {
   const newGameState = {...gameState}
 
   return newGameState;

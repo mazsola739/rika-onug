@@ -72,3 +72,50 @@ export const GameCard: React.FC<GameCardProps> = observer(
     )
   }
 )
+
+//TODO new click handler
+/* const clickHandler = (cardType: string) => {
+  const maxCenterCardSelection = interactionStore.selectableCenterCardLimit;
+  const maxPlayerCardSelection = interactionStore.selectablePlayerCardLimit;
+
+  if (selectable) {
+    const isCenterCardType = cardType === 'center';
+    const selectedCards = isCenterCardType
+      ? interactionStore.selectedCenterCards
+      : interactionStore.selectedPlayerCards;
+    const maxSelectionLimit = isCenterCardType
+      ? maxCenterCardSelection
+      : maxPlayerCardSelection;
+    const hasOppositeSelected = isCenterCardType
+      ? interactionStore.selectedPlayerCards.length > 0
+      : interactionStore.selectedCenterCards.length > 0;
+
+    if (isSelected && selectedCards.includes(position)) {
+      const updatedSelectedCards = selectedCards.filter(
+        (cardPos) => cardPos !== position
+      );
+      isCenterCardType
+        ? interactionStore.setSelectedCenterCards(updatedSelectedCards)
+        : interactionStore.setSelectedPlayerCards(updatedSelectedCards);
+      interactionStore.setSelectedCards(updatedSelectedCards);
+      setIsSelected(false);
+    } else if (selectedCards.length < maxSelectionLimit) {
+      if (hasOppositeSelected && selectedCards.length + 1 === maxSelectionLimit) {
+        const updatedSelectedCards = [position];
+        isCenterCardType
+          ? interactionStore.setSelectedCenterCards(updatedSelectedCards)
+          : interactionStore.setSelectedPlayerCards(updatedSelectedCards);
+        interactionStore.setSelectedCards(updatedSelectedCards);
+        setIsSelected(true);
+      } else {
+        const updatedSelectedCards = [...selectedCards, position];
+        isCenterCardType
+          ? interactionStore.setSelectedCenterCards(updatedSelectedCards)
+          : interactionStore.setSelectedPlayerCards(updatedSelectedCards);
+        interactionStore.setSelectedCards(updatedSelectedCards);
+        setIsSelected(true);
+      }
+    }
+  }
+};
+ */

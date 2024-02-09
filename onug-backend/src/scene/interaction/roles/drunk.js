@@ -1,15 +1,13 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { getPlayerNumbersWithMatchingTokens, getTokensByRoleIds } = require("../utils");
+const { getPlayerNumbersWithMatchingTokens } = require("../utils");
 const { centerCardPositions } = require("../constants");
 
 //TODO doppelganger instant action
 //? INFO: Drunk – Swap your card with a card from center but does not look at his new card
-exports.drunk = gameState => {
+exports.drunk = (gameState, tokens) => {
   const newGameState = {...gameState}
   const role_interactions = [];
-
-  const drunkTokens = getTokensByRoleIds(newGameState.players, [2]); //todo doppelganger
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -17,7 +15,7 @@ exports.drunk = gameState => {
     card_or_mark_action: false,
   }
 
-  drunkTokens.forEach((token) =>{
+  tokens.forEach((token) =>{
     newGameState.players[token].role_history = roleHistory
 
     role_interactions.push({

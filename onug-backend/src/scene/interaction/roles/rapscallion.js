@@ -1,6 +1,6 @@
 
 //TODO doppelganger instant action
-exports.rapscallion = gameState => {
+exports.rapscallion = (gameState, tokens) => {
   const newGameState = {...gameState}
 
   return newGameState;

@@ -1,6 +1,5 @@
-const { collectCardInfo, getPlayersByRoleIds } = require("../utils");
 
-exports.squire = gameState => {
+exports.squire = (gameState, tokens) => {
   const newGameState = {...gameState}
 
   return newGameState;
