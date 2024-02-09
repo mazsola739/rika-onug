@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { interactionStore } from 'store'
 import { gameBoardStore } from 'store/GameBoardStore'
 import { WsJsonMessage, PositionProperties } from 'types'
 
@@ -22,6 +23,7 @@ class TroublemakerStore {
       }
     )
 
+    interactionStore.selectablePlayerCardLimit = 2
     gameBoardStore.setPlayerCards(playerCards)
   }
 }

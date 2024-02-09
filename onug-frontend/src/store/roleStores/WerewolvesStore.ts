@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { interactionStore } from 'store'
 import { gameBoardStore } from 'store/GameBoardStore'
 import { WsJsonMessage, PositionProperties } from 'types'
 
@@ -32,6 +33,7 @@ class WerewolvesStore {
       }
     )
 
+    interactionStore.selectableCenterCardLimit = 1
     gameBoardStore.setPlayerCards(playerCards)
     gameBoardStore.setCenterCards(centerCards)
   }

@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { interactionStore } from 'store'
 import { gameBoardStore } from 'store/GameBoardStore'
 import { PositionProperties, WsJsonMessage } from 'types'
 
@@ -24,6 +25,7 @@ class RobberStore {
       }
     )
 
+    interactionStore.selectablePlayerCardLimit = 1
     gameBoardStore.setPlayerCards(playerCards)
     gameBoardStore.setKnownPlayer({
       player_name: lastJsonMessage.player_name,

@@ -50,10 +50,13 @@ exports.seer = (gameState) => {
 };
 
 exports.seer_response = (gameState, token, selected_positions) => {
+  const playerCards = selected_positions.some(pos => pos.includes("player_"));
+  const centerCards = selected_positions.some(pos => pos.includes("center"));
+
   let showCards = [];
-  if (selected_positions[0].includes("player_") && gameState.players[token].role_history.selectable_player_cards.includes(selected_positions[0])) {
+  if (playerCards && !centerCards && gameState.players[token].role_history.selectable_player_cards.includes(selected_positions[0])) {
     showCards = [selected_positions[0]];
-  } else if ([selected_positions[0], selected_positions[1]].includes("center_") && [selected_positions[0], selected_positions[1]].every((position) => gameState.players[token].role_history.selectable_center_cards.includes(position))) {
+  } else if (centerCards && !playerCards && [selected_positions[0], selected_positions[1]].every((position) => gameState.players[token].role_history.selectable_center_cards.includes(position))) {
     showCards = [selected_positions[0], selected_positions[1]];
   } else return gameState;
 
@@ -62,7 +65,6 @@ exports.seer_response = (gameState, token, selected_positions) => {
 
   showCards = getCardIdsByPositions(newGameState.card_positions, selected_positions);
 
-  //todo see herself?
   if (showCards.some((showCard) => Object.values(showCard).includes(newGameState.players[token].card.id))) {
     newGameState.players[token].card.id = 0;
   }

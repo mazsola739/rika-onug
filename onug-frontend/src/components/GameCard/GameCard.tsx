@@ -10,27 +10,46 @@ export const GameCard: React.FC<GameCardProps> = observer(
     const [isSelected, setIsSelected] = useState(false)
     const { hasMarks } = gameTableStore
     const card = id === 0 ? '' : deckStore.getCardById(id)
-
     const playerTokenName = ready ? `selected_${position}` : position
     const imgSrc =
       card && card.id !== 0
         ? `/assets/cards/${card.card_name}.png`
         : '/assets/backgrounds/card_back.png'
 
-    const clickHandler = () => {
-      if (selectable) {
-        setIsSelected(!isSelected)
+    const clickHandler = (cardType: string) => {
+      const maxCenterCardSelection = interactionStore.selectableCenterCardLimit
+      const maxPlayerCardSelection = interactionStore.selectablePlayerCardLimit
 
-        if (!isSelected) {
-          interactionStore.setSelectedCards([
-            ...interactionStore.selectedCards,
-            position,
-          ])
-        } else {
-          const updatedSelectedCards = interactionStore.selectedCards.filter(
+      if (selectable) {
+        const isCenterCardType = cardType === 'center'
+        const selectedCards = isCenterCardType
+          ? interactionStore.selectedCenterCards
+          : interactionStore.selectedPlayerCards
+        const maxSelectionLimit = isCenterCardType
+          ? maxCenterCardSelection
+          : maxPlayerCardSelection
+        const hasOppositeSelected = isCenterCardType
+          ? interactionStore.selectedPlayerCards.length > 0
+          : interactionStore.selectedCenterCards.length > 0
+
+        if (isSelected && selectedCards.includes(position)) {
+          const updatedSelectedCards = selectedCards.filter(
             (cardPos) => cardPos !== position
           )
+          isCenterCardType
+            ? interactionStore.setSelectedCenterCards(updatedSelectedCards)
+            : interactionStore.setSelectedPlayerCards(updatedSelectedCards)
           interactionStore.setSelectedCards(updatedSelectedCards)
+          setIsSelected(false)
+        } else if (selectedCards.length < maxSelectionLimit) {
+          const updatedSelectedCards = [...selectedCards, position]
+          isCenterCardType
+            ? interactionStore.setSelectedCenterCards(updatedSelectedCards)
+            : interactionStore.setSelectedPlayerCards(updatedSelectedCards)
+          interactionStore.setSelectedCards(updatedSelectedCards)
+          setIsSelected(true)
+        } else if (hasOppositeSelected) {
+          return
         }
       }
     }
@@ -40,7 +59,7 @@ export const GameCard: React.FC<GameCardProps> = observer(
         <CardBack
           backgroundImage={imgSrc}
           selectable={selectable}
-          onClick={clickHandler}
+          onClick={() => clickHandler(isCenter ? 'center' : 'player')}
           isSelected={isSelected}
         />
         <Tokens>

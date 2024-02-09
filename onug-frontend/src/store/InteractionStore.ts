@@ -14,16 +14,26 @@ import { WsJsonMessage } from 'types'
 class InteractionStore {
   lastJsonMessage: WsJsonMessage = {}
   hasMessageBox = false
+  selectedPlayerCards: string[] = []
+  selectedCenterCards: string[] = []
   selectedCards: string[] = []
+  selectablePlayerCardLimit = 0
+  selectableCenterCardLimit = 0
 
   constructor() {
     makeObservable(this, {
       lastJsonMessage: observable,
       hasMessageBox: observable,
+      selectedCenterCards: observable,
+      selectedPlayerCards: observable,
       selectedCards: observable,
+      selectablePlayerCardLimit: observable,
+      selectableCenterCardLimit: observable,
 
       resetInteraction: action,
       toggleMessageBoxStatus: action,
+      setSelectedCenterCards: action,
+      setSelectedPlayerCards: action,
       setSelectedCards: action,
       setLastJsonMessage: action,
       setInteraction: action,
@@ -31,12 +41,24 @@ class InteractionStore {
   }
 
   resetInteraction(): void {
+    this.selectedCenterCards = []
+    this.selectedPlayerCards = []
     this.selectedCards = []
     this.toggleMessageBoxStatus(false)
+    this.selectablePlayerCardLimit = 0
+    this.selectableCenterCardLimit = 0
   }
 
   toggleMessageBoxStatus(boolean: boolean): void {
     this.hasMessageBox = boolean
+  }
+
+  setSelectedCenterCards(positions: string[]): void {
+    this.selectedCenterCards = positions
+  }
+
+  setSelectedPlayerCards(positions: string[]): void {
+    this.selectedPlayerCards = positions
   }
 
   setSelectedCards(positions: string[]): void {

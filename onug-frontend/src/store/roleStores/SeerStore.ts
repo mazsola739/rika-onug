@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { interactionStore } from 'store'
 import { gameBoardStore } from 'store/GameBoardStore'
 import { WsJsonMessage, PositionProperties } from 'types'
 
@@ -39,6 +40,8 @@ class SeerStore {
       }
     )
 
+    interactionStore.selectablePlayerCardLimit = 1
+    interactionStore.selectableCenterCardLimit = 2
     gameBoardStore.setPlayerCards(playerCards)
     gameBoardStore.setCenterCards(centerCards)
     gameBoardStore.setKnownPlayer({
