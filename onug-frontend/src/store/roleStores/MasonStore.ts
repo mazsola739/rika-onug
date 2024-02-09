@@ -8,19 +8,17 @@ class MasonsStore {
   }
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
-    const playerCards: PositionProperties[] = [...gameBoardStore.playerCards]
-    const shielded_players = lastJsonMessage.shielded_players || []
-    const masons = lastJsonMessage.masons || []
-
-    playerCards.forEach((playerCard) => {
-      if (shielded_players.includes(playerCard.position)) {
-        playerCard.shield = true
-      } else {
-        playerCard.shield = false
+    const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
+      (playerCard) => {
+        const shield = (lastJsonMessage.shielded_players || []).includes(
+          playerCard.position
+        )
+        const mason = (lastJsonMessage.masons || []).includes(
+          playerCard.position
+        )
+        return { ...playerCard, shield, mason }
       }
-
-      playerCard.mason = masons.includes(playerCard.position)
-    })
+    )
 
     gameBoardStore.setPlayerCards(playerCards)
   }

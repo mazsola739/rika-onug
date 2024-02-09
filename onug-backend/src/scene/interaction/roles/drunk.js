@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { getTokensByCardIds, getPlayerNumbersWithMatchingTokens } = require("../utils");
+const { getPlayerNumbersWithMatchingTokens, getTokensByRoleIds } = require("../utils");
 const { centerCardPositions } = require("../constants");
 
 //TODO doppelganger instant action
@@ -9,7 +9,7 @@ exports.drunk = gameState => {
   const newGameState = {...gameState}
   const role_interactions = [];
 
-  const drunkTokens = getTokensByCardIds(newGameState.players, [2]);
+  const drunkTokens = getTokensByRoleIds(newGameState.players, [2]); //todo doppelganger
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -27,6 +27,11 @@ exports.drunk = gameState => {
       message: "interaction_drunk",
       selectable_cards: centerCardPositions,
       shielded_players: newGameState.shield,
+      player_card_id: newGameState.players[token]?.card?.id,
+      player_role: newGameState.players[token]?.card?.role,
+      player_role_id: newGameState.players[token]?.card?.role_id,
+      player_team: newGameState.players[token]?.card?.team,
+      player_number: newGameState.players[token]?.player_number,
     })
   });
 
@@ -63,7 +68,11 @@ exports.drunk_response = (gameState, token, selected_positions) => {
     message: "interaction_drunk2",
     swapped_cards: [`player_${newGameState.players[token].player_number}`, `${selected_positions[0]}`],
     shielded_players: newGameState.shield,
-    player_card_id: newGameState.players[token].card.id
+    player_card_id: newGameState.players[token]?.card?.id,
+    player_role: newGameState.players[token]?.card?.role,
+    player_role_id: newGameState.players[token]?.card?.role_id,
+    player_team: newGameState.players[token]?.card?.team,
+    player_number: newGameState.players[token]?.player_number,
   })
   
   newGameState.role_interactions = role_interactions

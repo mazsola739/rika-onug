@@ -7,7 +7,7 @@ exports.insomniac = gameState => {
   const newGameState = { ...gameState }
   const role_interactions = [];
 
-  const insomniacTokens = getTokensByRoleIds(newGameState.players, [4]);
+  const insomniacTokens = getTokensByRoleIds(newGameState.players, [4]); //todo doppelganger
 
   insomniacTokens.forEach((token) => {
     if (!newGameState.players[token].card.shield) {
@@ -30,6 +30,11 @@ exports.insomniac = gameState => {
         message: "interaction_insomniac",
         show_cards: showCards,
         shielded_players: newGameState.shield,
+        player_card_id: newGameState.players[token]?.card?.id,
+        player_role: newGameState.players[token]?.card?.role,
+        player_role_id: newGameState.players[token]?.card?.role_id,
+        player_team: newGameState.players[token]?.card?.team,
+        player_number: newGameState.players[token]?.player_number,
       })
 
       newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed their card`
@@ -40,6 +45,11 @@ exports.insomniac = gameState => {
         token,
         message: "interaction_shielded",
         shielded_players: newGameState.shield,
+        player_card_id: newGameState.players[token]?.card?.id,
+        player_role: newGameState.players[token]?.card?.role,
+        player_role_id: newGameState.players[token]?.card?.role_id,
+        player_team: newGameState.players[token]?.card?.team,
+        player_number: newGameState.players[token]?.player_number,
       })
       
       newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} has shield, can't view their card`

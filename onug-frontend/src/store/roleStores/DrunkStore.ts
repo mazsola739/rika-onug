@@ -8,34 +8,34 @@ class DrunkStore {
   }
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
-    const playerCards: PositionProperties[] = [...gameBoardStore.playerCards]
-    const shielded_players = lastJsonMessage.shielded_players || []
-    const selectable_cards = lastJsonMessage.selectable_cards || []
-
-    playerCards.forEach((playerCard) => {
-      if (shielded_players.includes(playerCard.position)) {
-        playerCard.shield = true
-      } else {
-        playerCard.shield = false
+    const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
+      (playerCard) => {
+        const shield =
+          lastJsonMessage.shielded_players?.includes(playerCard.position) ||
+          false
+        return { ...playerCard, shield }
       }
-    })
+    )
 
-    const centerCards: PositionProperties[] = [...gameBoardStore.centerCards]
-
-    centerCards.forEach((centerCard) => {
-      if (selectable_cards.includes(centerCard.position)) {
-        centerCard.selectable = true
-      } else {
-        centerCard.selectable = false
+    const centerCards: PositionProperties[] = gameBoardStore.centerCards.map(
+      (centerCard) => {
+        const selectable =
+          lastJsonMessage.selectable_cards?.includes(centerCard.position) ||
+          false
+        return { ...centerCard, selectable }
       }
-    })
+    )
 
     gameBoardStore.setPlayerCards(playerCards)
     gameBoardStore.setCenterCards(centerCards)
-    const player_card_id = lastJsonMessage.player_card_id || 0
-
-    if (player_card_id && player_card_id === 0)
-      return gameBoardStore.setKnownPlayer(lastJsonMessage)
+    gameBoardStore.setKnownPlayer({
+      player_name: lastJsonMessage.player_name,
+      player_number: lastJsonMessage.player_number,
+      player_card_id: lastJsonMessage.player_card_id,
+      player_role: lastJsonMessage.player_role,
+      player_role_id: lastJsonMessage.player_role_id,
+      player_team: lastJsonMessage.player_team,
+    })
   }
 }
 

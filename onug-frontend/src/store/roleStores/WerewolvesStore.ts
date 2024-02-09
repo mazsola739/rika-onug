@@ -8,38 +8,29 @@ class WerewolvesStore {
   }
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
-    const playerCards: PositionProperties[] = [...gameBoardStore.playerCards]
-    const shielded_players = lastJsonMessage.shielded_players || []
-    const selectable_cards = lastJsonMessage.selectable_cards || []
-    const show_cards = lastJsonMessage.show_cards || []
-    const werewolves = lastJsonMessage.werewolves || []
-
-    playerCards.forEach((playerCard) => {
-      if (shielded_players.includes(playerCard.position)) {
-        playerCard.shield = true
-      } else {
-        playerCard.shield = false
+    const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
+      (playerCard) => {
+        const shield =
+          lastJsonMessage.shielded_players?.includes(playerCard.position) ||
+          false
+        const werewolf =
+          lastJsonMessage.werewolves?.includes(playerCard.position) || false
+        return { ...playerCard, shield, werewolf }
       }
+    )
 
-      playerCard.werewolf = werewolves.includes(playerCard.position)
-    })
-
-    const centerCards: PositionProperties[] = [...gameBoardStore.centerCards]
-
-    centerCards.forEach((centerCard) => {
-      if (selectable_cards.includes(centerCard.position)) {
-        centerCard.selectable = true
-      } else {
-        centerCard.selectable = false
+    const centerCards: PositionProperties[] = gameBoardStore.centerCards.map(
+      (centerCard) => {
+        const selectable =
+          lastJsonMessage.selectable_cards?.includes(centerCard.position) ||
+          false
+        const showCard = lastJsonMessage.show_cards?.find(
+          (showCardObj) => centerCard.position in showCardObj
+        )
+        const id = showCard ? showCard[centerCard.position] : centerCard.id
+        return { ...centerCard, selectable, id }
       }
-
-      const showCard = show_cards.find(
-        (showCardObj) => showCardObj[centerCard.position]
-      )
-      if (showCard) {
-        centerCard.id = showCard[centerCard.position]
-      }
-    })
+    )
 
     gameBoardStore.setPlayerCards(playerCards)
     gameBoardStore.setCenterCards(centerCards)

@@ -8,7 +8,6 @@ import {
   PositionKeys,
   PositionProperties,
   PositionType,
-  WsJsonMessage,
 } from 'types'
 
 class GameBoardStore {
@@ -43,6 +42,7 @@ class GameBoardStore {
     makeAutoObservable(this)
 
     this.setPlayer = this.setPlayer.bind(this)
+    this.setKnownPlayer = this.setKnownPlayer.bind(this)
     this.setPlayers = this.setPlayers.bind(this)
     this.everyoneCheckOwnCard = this.everyoneCheckOwnCard.bind(this)
     this.setPlayerCards = this.setPlayerCards.bind(this)
@@ -73,16 +73,8 @@ class GameBoardStore {
     this.player_12 = { position: 'player_12' }
   }
 
-  setKnownPlayer(lastJsonMessage: WsJsonMessage): void {
-    const newPlayer = { ...this.player }
-    const player_card_id = lastJsonMessage.player_card_id
-
-    newPlayer.player_card_id =
-      player_card_id !== newPlayer.player_card_id
-        ? player_card_id
-        : newPlayer.player_card_id
-
-    this.knownPlayer = newPlayer
+  setKnownPlayer(knownPlayer: PlayerType): void {
+    this.knownPlayer = knownPlayer
   }
 
   setPlayer(player: PlayerType): void {

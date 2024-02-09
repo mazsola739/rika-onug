@@ -9,7 +9,6 @@ const { capitalize } = utils
 
 export const KnownOwnCard: React.FC<KnownOwnCardProps> = observer(
   ({ player }) => {
-    console.log(player)
     const card = player?.player_card_id
       ? deckStore.getCardById(player.player_card_id)
       : null

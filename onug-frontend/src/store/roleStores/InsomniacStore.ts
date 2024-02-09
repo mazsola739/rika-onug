@@ -8,32 +8,29 @@ class InsomniacStore {
   }
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
-    const playerCards: PositionProperties[] = [...gameBoardStore.playerCards]
-    const shielded_players = lastJsonMessage.shielded_players || []
-    const show_cards = lastJsonMessage.show_cards || []
-
-    playerCards.forEach((playerCard) => {
-      if (shielded_players.includes(playerCard.position)) {
-        playerCard.shield = true
-      } else {
-        playerCard.shield = false
+    const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
+      (playerCard) => {
+        const shield =
+          (lastJsonMessage.shielded_players || []).includes(
+            playerCard.position
+          ) || false
+        const showCard = (lastJsonMessage.show_cards || []).find(
+          (showCardObj) => Object.keys(showCardObj)[0] === playerCard.position
+        )
+        const id = showCard ? (showCard[playerCard.position] as number) : 0
+        return { ...playerCard, shield, id }
       }
-
-      const showCard = show_cards.find((showCardObj) => {
-        const [position] = Object.keys(showCardObj)
-
-        return position === playerCard.position
-      })
-      if (showCard) {
-        playerCard.id = (showCard as Record<string, number>)[
-          playerCard.position
-        ]
-      } else {
-        playerCard.id = 0
-      }
-    })
+    )
 
     gameBoardStore.setPlayerCards(playerCards)
+    gameBoardStore.setKnownPlayer({
+      player_name: lastJsonMessage.player_name,
+      player_number: lastJsonMessage.player_number,
+      player_card_id: lastJsonMessage.player_card_id,
+      player_role: lastJsonMessage.player_role,
+      player_role_id: lastJsonMessage.player_role_id,
+      player_team: lastJsonMessage.player_team,
+    })
   }
 }
 

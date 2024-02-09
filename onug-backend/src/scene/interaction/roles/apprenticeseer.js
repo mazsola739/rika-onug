@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { getTokensByCardIds, getCardIdsByPositions } = require("../utils");
+const { getTokensByRoleIds, getCardIdsByPositions } = require("../utils");
 const { centerCardPositions } = require("../constants");
 
 //TODO doppelganger instant action
@@ -9,7 +9,7 @@ exports.apprenticeseer = gameState => {
   const newGameState = {...gameState}
   const role_interactions = [];
 
-  const apprenticeseerTokens = getTokensByCardIds(newGameState.players, [18]);
+  const apprenticeseerTokens = getTokensByRoleIds(newGameState.players, [18]); //todo doppelganger
  
   const roleHistory = {
     ...newGameState.actual_scene,

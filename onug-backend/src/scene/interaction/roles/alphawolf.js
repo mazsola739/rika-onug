@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws");
 const { logInfo } = require("../../../log");
-const { getNonWerewolfPlayerNumbersByRoleIds, getTokensByCardIds } = require("../utils");
+const { getNonWerewolfPlayerNumbersByRoleIds, getTokensByRoleIds } = require("../utils");
 
 //TODO doppelganger instant action
 //? INFO: Alpha Wolf - Wakes with other Werewolves. Wakes after and exchanges the center Alpha card with any other non-Werewolf player card
@@ -8,7 +8,7 @@ exports.alphawolf = (gameState) => {
   const newGameState = { ...gameState };
   const role_interactions = [];
 
-  const alphawolfTokens = getTokensByCardIds(newGameState.players, [17]);
+  const alphawolfTokens = getTokensByRoleIds(newGameState.players, [17]); //todo doppelganger
   const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(newGameState.players);
 
   const roleHistory = {

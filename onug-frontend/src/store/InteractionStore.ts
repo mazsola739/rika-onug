@@ -4,6 +4,8 @@ import {
   insomniacStore,
   masonsStore,
   minionStore,
+  robberStore,
+  seerStore,
   troublemakerStore,
   werewolvesStore,
 } from './roleStores'
@@ -46,144 +48,186 @@ class InteractionStore {
   }
 
   setInteraction(title: string): void {
-    console.log(this.lastJsonMessage)
     /* if (this.lastJsonMessage && title) {} */
     switch (title) {
-      /*case "ALIENS": aliensStore
+      /*case "ALIENS":
+       aliensStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "ALPHA_WOLF": alphawolfStore
+      case "ALPHA_WOLF":
+         alphawolfStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "ANNOYING_LAD": annoyingladStore
+      case "ANNOYING_LAD":
+         annoyingladStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "APPRENTICE_ASSASSIN": apprenticeassassinStore
+      case "APPRENTICE_ASSASSIN":
+         apprenticeassassinStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_APPRENTICE_ASSASSIN": apprenticeassassinStore
+      case "DOPPELGÄNGER_APPRENTICE_ASSASSIN":
+         apprenticeassassinStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "APPRENTICE_SEER": apprenticeseerStore
+      case "APPRENTICE_SEER":
+         apprenticeseerStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "APPRENTICE_TANNER": apprenticetannerStore
+      case "APPRENTICE_TANNER":
+         apprenticetannerStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "ASSASSIN": assassinStore
+      case "ASSASSIN":
+         assassinStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_ASSASSIN": assassinStore
+      case "DOPPELGÄNGER_ASSASSIN":
+         assassinStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "AURA_SEER": auraseerStore
+      case "AURA_SEER":
+         auraseerStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "BEHOLDER": beholderStore
+      case "BEHOLDER":
+         beholderStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "BLOB": blobStore
+      case "BLOB":
+         blobStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "BODY_SNATCHER": bodysnatcherStore
+      case "BODY_SNATCHER":
+         bodysnatcherStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_BODY_SNATCHER": bodysnatcherStore
+      case "DOPPELGÄNGER_BODY_SNATCHER":
+         bodysnatcherStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "COPYCAT": copycatStore
+      case "COPYCAT":
+         copycatStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "COW": cowStore
+      case "COW":
+         cowStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "CUPID": cupidStore
+      case "CUPID":
+         cupidStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "CURATOR": curatorStore
+      case "CURATOR":
+         curatorStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_CURATOR": curatorStore
+      case "DOPPELGÄNGER_CURATOR":
+         curatorStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DETECTOR": detectorStore
+      case "DETECTOR":
+         detectorStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DISEASED": diseasedStore
+      case "DISEASED":
+         diseasedStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER": doppelgangerStore
+      case "DOPPELGÄNGER":
+         doppelgangerStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_INSTANT_ACTION": doppelgangerStore
+      case "DOPPELGÄNGER_INSTANT_ACTION":
+         doppelgangerStore
       //todo
       break;
-      case "DR_PEEKER": drpeekerStore
+      case "DR_PEEKER":
+         drpeekerStore.openYourEyes(this.lastJsonMessage)
       
       break;*/
       case 'DRUNK':
         drunkStore.openYourEyes(this.lastJsonMessage)
 
         break /*
-      case "EMPATH": empathStore
+      case "EMPATH":
+         empathStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_EMPATH": empathStore
+      case "DOPPELGÄNGER_EMPATH":
+         empathStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "EVERYONE_MARK": everyonemarkStore
+      case "EVERYONE_MARK":
+         everyonemarkStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "EVILOMETER": evilometerStore
+      case "EVILOMETER":
+         evilometerStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "EXPOSER": exposerStore
+      case "EXPOSER":
+         exposerStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_EXPOSER": exposerStore
+      case "DOPPELGÄNGER_EXPOSER":
+         exposerStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "FAMILY_MAN": familymanStore
+      case "FAMILY_MAN":
+         familymanStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "FLIPPER": flipperStore
+      case "FLIPPER":
+         flipperStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_FLIPPER": flipperStore
+      case "DOPPELGÄNGER_FLIPPER":
+         flipperStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "GREMLIN": gremlinStore
+      case "GREMLIN":
+         gremlinStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_GREMLIN": gremlinStore
+      case "DOPPELGÄNGER_GREMLIN":
+         gremlinStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "GROOB_ZERB": groobzerbStore
+      case "GROOB_ZERB":
+         groobzerbStore.openYourEyes(this.lastJsonMessage)
       
       break;*/
       case 'INSOMNIAC':
         insomniacStore.openYourEyes(this.lastJsonMessage)
 
         break /*
-      case "INSTIGATOR": instigatorStore
+      case "INSTIGATOR":
+         instigatorStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "INTERN": internStore
+      case "INTERN":
+         internStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "LEADER": leaderStore
+      case "LEADER":
+         leaderStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "LEADER_ZERB_GROOB": leaderStore
+      case "LEADER_ZERB_GROOB":
+         leaderStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "LOVERS": loverStore
+      case "LOVERS":
+         loverStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "MAD_SCIENTIST": madscientistStore
+      case "MAD_SCIENTIST":
+         madscientistStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "MARKSMAN": marksmanStore
+      case "MARKSMAN":
+         marksmanStore.openYourEyes(this.lastJsonMessage)
       
       break;*/
       case 'MASONS':
@@ -194,126 +238,162 @@ class InteractionStore {
         minionStore.openYourEyes(this.lastJsonMessage)
 
         break /*
-      case "MIRROR_MAN": mirrormanStore
+      case "MIRROR_MAN":
+         mirrormanStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "MORTICIAN": morticianStore
+      case "MORTICIAN":
+         morticianStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_MORTICIAN": morticianStore
+      case "DOPPELGÄNGER_MORTICIAN":
+         morticianStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "MYSTIC_WOLF": mysticwolfStore
+      case "MYSTIC_WOLF":
+         mysticwolfStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "NOSTRADAMUS": nostradamusStore
+      case "NOSTRADAMUS":
+         nostradamusStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "NOSTRADAMUS_REACTION": nostradamusStore
+      case "NOSTRADAMUS_REACTION":
+         nostradamusStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case 'ORACLE_QUESTION': oracleStore
+      case 'ORACLE_QUESTION': oracleStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case 'ORACLE_REACTION': oracleStore
+      case 'ORACLE_REACTION': oracleStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "PARANORMAL_INVESTIGATOR": paranormalinvestigatorStore
+      case "PARANORMAL_INVESTIGATOR":
+         paranormalinvestigatorStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "PICKPOCKET": pickpocketStore
+      case "PICKPOCKET":
+         pickpocketStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_PICKPOCKET": pickpocketStore
+      case "DOPPELGÄNGER_PICKPOCKET":
+         pickpocketStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "PRIEST": priestStore
+      case "PRIEST":
+         priestStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_PRIEST": priestStore
+      case "DOPPELGÄNGER_PRIEST":
+         priestStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "PSYCHIC": psychicStore
+      case "PSYCHIC":
+         psychicStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_PSYCHIC": psychicStore
+      case "DOPPELGÄNGER_PSYCHIC":
+         psychicStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "RAPSCALLION": rapscallionStore
+      case "RAPSCALLION":
+         rapscallionStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "RASCAL": rascalStore
+      case "RASCAL":
+         rascalStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_RASCAL": rascalStore
+      case "DOPPELGÄNGER_RASCAL":
+         rascalStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "RENFIELD": renfieldStore
+      case "RENFIELD":
+         renfieldStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "REVEALER": revealerStore
+      case "REVEALER":
+         revealerStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "DOPPELGÄNGER_REVEALER": revealerStore
+      case "DOPPELGÄNGER_REVEALER":
+         revealerStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "RIPPLE": rippleStore
+      case "RIPPLE":
+         rippleStore.openYourEyes(this.lastJsonMessage)
+      
+      break; */
+      case 'ROBBER':
+        robberStore.openYourEyes(this.lastJsonMessage)
+
+        break /*
+      case "ROLE_RETRIEVER":
+         roleretrieverStore.openYourEyes(this.lastJsonMessage)
+      
+      break; */
+      case 'SEER':
+        seerStore.openYourEyes(this.lastJsonMessage)
+
+        break /*
+      case "SELF_AWARENESS_GIRL":
+         selfawarenessgirlStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "ROBBER": robberStore
+      case "SENTINEL":
+         sentinelStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "ROLE_RETRIEVER": roleretrieverStore
+      case "SQUIRE":
+         squireStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "SEER": seerStore
+      case "SUPER_VILLAINS":
+         supervillainsStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "SELF_AWARENESS_GIRL": selfawarenessgirlStore
+      case "SWITCHEROO":
+         switcherooStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "SENTINEL": sentinelStore
+      case "TEMPTRESS":
+         temptressStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "SQUIRE": squireStore
+      case "THE_COUNT":
+         thecountStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "SUPER_VILLAINS": supervillainsStore
+      case "DOPPELGÄNGER_THE_COUNT":
+         thecountStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "SWITCHEROO": switcherooStore
-      
-      break;
-      case "TEMPTRESS": temptressStore
-      
-      break;
-      case "THE_COUNT": thecountStore
-      
-      break;
-      case "DOPPELGÄNGER_THE_COUNT": thecountStore
-      
-      break;
-      case "THING": thingStore
+      case "THING":
+         thingStore.openYourEyes(this.lastJsonMessage)
       
       break;*/
       case 'TROUBLEMAKER':
         troublemakerStore.openYourEyes(this.lastJsonMessage)
 
         break /*
-      case "VAMPIRES": vampireStore
+      case "VAMPIRES":
+         vampireStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "VILLAGE_IDIOT": villageidiotStore
+      case "VILLAGE_IDIOT":
+         villageidiotStore.openYourEyes(this.lastJsonMessage)
       
       break;
-      case "VOODOO_LOU": voodoolouStore
+      case "VOODOO_LOU":
+         voodoolouStore.openYourEyes(this.lastJsonMessage)
       
       break; */
       case 'WEREWOLVES':
         werewolvesStore.openYourEyes(this.lastJsonMessage)
 
         break /*
-      case "WITCH": witchStore
+      case "WITCH":
+         witchStore.openYourEyes(this.lastJsonMessage)
       
       break;*/
       default:

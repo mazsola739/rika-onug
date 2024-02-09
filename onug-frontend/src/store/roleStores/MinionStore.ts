@@ -8,19 +8,17 @@ class MinionStore {
   }
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
-    const playerCards: PositionProperties[] = [...gameBoardStore.playerCards]
-    const shielded_players = lastJsonMessage.shielded_players || []
-    const werewolves = lastJsonMessage.werewolves || []
-
-    playerCards.forEach((playerCard) => {
-      if (shielded_players.includes(playerCard.position)) {
-        playerCard.shield = true
-      } else {
-        playerCard.shield = false
-      }
-
-      playerCard.werewolf = werewolves.includes(playerCard.position)
-    })
+    const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
+      (playerCard) => ({
+        ...playerCard,
+        shield: (lastJsonMessage.shielded_players || []).includes(
+          playerCard.position
+        ),
+        werewolf: (lastJsonMessage.werewolves || []).includes(
+          playerCard.position
+        ),
+      })
+    )
 
     gameBoardStore.setPlayerCards(playerCards)
   }
