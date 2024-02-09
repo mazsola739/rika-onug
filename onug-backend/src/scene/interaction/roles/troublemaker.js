@@ -37,12 +37,17 @@ exports.troublemaker = gameState => {
   return newGameState;
 };
 
-exports.troublemaker_response = (gameState, token, selected_positions, ws) => {
+exports.troublemaker_response = (gameState, token, selected_positions) => {
   if (selected_positions.every(position => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
   
   const newGameState = {...gameState}
+  const role_interactions = [];
 
-  [newGameState.card_positions[selected_positions[0]], newGameState.card_positions[selected_positions[1]]] = [newGameState.card_positions[selected_positions[1]], newGameState.card_positions[selected_positions[0]]]
+  const playerOneCard = { ...newGameState.card_positions[selected_positions[0]] };
+  const playerTwoCard = { ...newGameState.card_positions[selected_positions[1]] };
+  
+  newGameState.card_positions[selected_positions[0]] = playerTwoCard;
+  newGameState.card_positions[selected_positions[1]] = playerOneCard;
 
   newGameState.players[token].role_history.swapped_cards = selected_positions.slice(0, 2)
   newGameState.players[token].role_history.card_or_mark_action = true

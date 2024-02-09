@@ -37,7 +37,7 @@ exports.apprenticeseer = gameState => {
   return newGameState;
 };
 
-exports.apprenticeseer_response = (gameState, token, selected_positions, ws) => {
+exports.apprenticeseer_response = (gameState, token, selected_positions) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false ) return gameState
   
   const newGameState = {...gameState}

@@ -4,6 +4,7 @@ import {
   insomniacStore,
   masonsStore,
   minionStore,
+  troublemakerStore,
   werewolvesStore,
 } from './roleStores'
 import { WsJsonMessage } from 'types'
@@ -294,10 +295,11 @@ class InteractionStore {
       break;
       case "THING": thingStore
       
-      break;
-      case "TROUBLEMAKER": troublemakerStore
-      
-      break;
+      break;*/
+      case 'TROUBLEMAKER':
+        troublemakerStore.openYourEyes(this.lastJsonMessage)
+
+        break /*
       case "VAMPIRES": vampireStore
       
       break;

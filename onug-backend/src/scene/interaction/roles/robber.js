@@ -49,10 +49,11 @@ exports.robber = gameState => {
   return newGameState;
 };
 
-exports.robber_response = (gameState, token, selected_positions, ws) => {
+exports.robber_response = (gameState, token, selected_positions) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
   
   const newGameState = {...gameState}
+  const role_interactions = [];
 
   const robberPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token]);
 
@@ -61,7 +62,7 @@ exports.robber_response = (gameState, token, selected_positions, ws) => {
   newGameState.card_positions[selected_positions[0]].id = newGameState.players[token].card.role_id
   newGameState.card_positions[selected_positions[0]].team = newGameState.players[token].card.team
   
-  const showCard = getCardIdsByPlayerNumbers(newGameState.card_positions, robberPlayerNumber);
+  const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, robberPlayerNumber);
 
   newGameState.players[token].role_history.show_cards = showCards
   newGameState.players[token].role_history.card_or_mark_action = true

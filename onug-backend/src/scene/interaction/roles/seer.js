@@ -40,7 +40,7 @@ exports.seer = gameState => {
   return newGameState;
 };
 
-exports.seer_response = (gameState, token, selected_positions, ws) => {
+exports.seer_response = (gameState, token, selected_positions) => {
   let showCards = []
   if (selected_positions[0].includes("player_") && gameState.players[token].role_history.selectable_player_cards.includes(selected_positions[0])) {
     showCards = [selected_positions[0]]

@@ -32,7 +32,7 @@ class DrunkStore {
 
     gameBoardStore.setPlayerCards(playerCards)
     gameBoardStore.setCenterCards(centerCards)
-    const player_card_id = lastJsonMessage.player_card_id
+    const player_card_id = lastJsonMessage.player_card_id || 0
 
     if (player_card_id && player_card_id === 0)
       return gameBoardStore.setKnownPlayer(lastJsonMessage)
