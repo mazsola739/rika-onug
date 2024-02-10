@@ -31,7 +31,7 @@ export const ripple_repeat_2_text =
   'Some roles may not wake up during the time loop.'
 export const ripple_revealer_text = 'You may turn over one card from'
 export const ripple_revealer_end_text =
-  'If that card is on the Villager team, leave it face up. Otherwise, turn it back over, face down.'
+  'If that card is on the Villager/Hero team, leave it face up. Otherwise, turn it back over, face down.'
 export const ripple_robber_text = 'You may steal a card from'
 export const ripple_robber_end_text =
   'If you do, look at your new card. Do not wake up if that role is called.'

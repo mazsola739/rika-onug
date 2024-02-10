@@ -1,6 +1,6 @@
-const { getRandomItemFromArray, pickRandomTwoPlayersArray, pickRandomTwoPlayers, pickRandomUpToThreePlayers, pickRandomOnePlayer } = require("../utils");
+const { getRandomItemFromArray, pickRandomTwoPlayersArray, pickRandomTwoPlayers, pickRandomUpToThreePlayers, pickRandomOnePlayer } = require("../utils")
 
-const ripple_sure_repeat = ["random_ripple_repeat", "random_ripple_repeat1p"];
+const ripple_sure_repeat = ["random_ripple_repeat", "random_ripple_repeat1p"]
 const ripple_random = [
   "random_ripple_none",
   "random_ripple_1minute",
@@ -22,143 +22,143 @@ const ripple_random = [
   "random_ripple_voteapp",
   "random_ripple_repeatrole",
   "random_ripple_iamalien",
-];
-const random_ripple_dualview = ["ripple_dualseer_text", "ripple_view2_text"];
+]
+const random_ripple_dualview = ["ripple_dualseer_text", "ripple_view2_text"]
 
 const rippleAnyKeys = [
   "identifier_any_text",
   "identifier_anyeven_text",
   "identifier_anyodd_text",
   "activePlayers",
-];
+]
 const rippleAllKeys = [
   "identifier_everyone_text",
   "identifier_oddplayers_text",
   "identifier_evenplayers_text",
   "activePlayers",
-];
+]
 const rippleNeighborKeys = [
   "identifier_leftneighbor_text",
   "identifier_rightneighbor_text",
   "identifier_oneneighbor_text",
   "identifier_yourself_text",
-];
+]
 const rippleCenterAnyKeys = [
   "identifier_any_text",
   "identifier_anyeven_text",
   "identifier_anyodd_text",
   "identifier_center_text",
-];
+]
 
 exports.ripple = (oracleMadeSureRipple, totalPlayers) => {
-  const result = [];
+  const result = []
 
-  const randomRipple = oracleMadeSureRipple ? getRandomItemFromArray(ripple_sure_repeat) : getRandomItemFromArray(ripple_random);
+  const randomRipple = oracleMadeSureRipple ? getRandomItemFromArray(ripple_sure_repeat) : getRandomItemFromArray(ripple_random)
 
-  const randomRippleAllKey = getRandomItemFromArray(rippleAllKeys);
-  const randomRippleAnyKey = getRandomItemFromArray(rippleAnyKeys);
+  const randomRippleAllKey = getRandomItemFromArray(rippleAllKeys)
+  const randomRippleAnyKey = getRandomItemFromArray(rippleAnyKeys)
 
-  const random1PlayerIdentifier = pickRandomOnePlayer(totalPlayers);
-  const random2PlayersIdentifier = pickRandomTwoPlayers(totalPlayers);
+  const random1PlayerIdentifier = pickRandomOnePlayer(totalPlayers)
+  const random2PlayersIdentifier = pickRandomTwoPlayers(totalPlayers)
   const randomRippleAllIdentifier = randomRippleAllKey === "activePlayers" ? pickRandomUpToThreePlayers(totalPlayers, "conjunction_and") : randomRippleAllKey
   const randomRippleAnyIdentifier = randomRippleAnyKey === "activePlayers" ? pickRandomUpToThreePlayers(totalPlayers, "conjunction_or") : randomRippleAnyKey
-  const randomRippleNeighborIdentifier = getRandomItemFromArray(rippleNeighborKeys);
-  const randomRippleCenterAnyIdentifier = getRandomItemFromArray(rippleCenterAnyKeys);
+  const randomRippleNeighborIdentifier = getRandomItemFromArray(rippleNeighborKeys)
+  const randomRippleCenterAnyIdentifier = getRandomItemFromArray(rippleCenterAnyKeys)
 
   const randomDualview = getRandomItemFromArray(random_ripple_dualview)
   const randomShuffle2Players = pickRandomTwoPlayersArray(random2PlayersIdentifier)
 
   if (randomRipple === "random_ripple_none") { //TODO in this case jump to the next scene?
-    return result;
+    return result
   } else {
-    result.push("ripple_intro_text");
+    result.push("ripple_intro_text")
 
     switch (randomRipple) {
       case "random_ripple_1minute":
-        result.push("ripple_1minute_text");
-        break;
+        result.push("ripple_1minute_text")
+        break
 
       case "random_ripple_repeat":
-        result.push("ripple_repeat_text", "ripple_repeat_2_text");
+        result.push("ripple_repeat_text", "ripple_repeat_2_text")
 
-        break;
+        break
 
       case "random_ripple_repeat1p":
         result.push("ripple_repeat_text", "ripple_repeat_2_text", random1PlayerIdentifier, "ripple_openeyes_text")
 
-        break;
+        break
 
       case "random_ripple_insomniac":
-        result.push(randomRippleAllIdentifier, "ripple_insomniac_text");
+        result.push(randomRippleAllIdentifier, "ripple_insomniac_text")
 
-        break;
+        break
 
       case "random_ripple_nospeak":
-        result.push(randomRippleAllIdentifier, "ripple_nospeak_text");
+        result.push(randomRippleAllIdentifier, "ripple_nospeak_text")
 
-        break;
+        break
 
       case "random_ripple_faceaway":
-        result.push(randomRippleAllIdentifier, "ripple_faceaway_text");
+        result.push(randomRippleAllIdentifier, "ripple_faceaway_text")
 
-        break;
+        break
 
       case "random_ripple_troublemaker":
-        result.push(random1PlayerIdentifier, "ripple_troublemaker_text", random2PlayersIdentifier, "ripple_troublemaker_end_text");
+        result.push(random1PlayerIdentifier, "ripple_troublemaker_text", random2PlayersIdentifier, "ripple_troublemaker_end_text")
 
-        break;
+        break
 
       case "random_ripple_steal":
-        result.push(random1PlayerIdentifier, "ripple_robber_text", randomRippleAnyIdentifier, "ripple_robber_end_text");
+        result.push(random1PlayerIdentifier, "ripple_robber_text", randomRippleAnyIdentifier, "ripple_robber_end_text")
 
-        break;
+        break
 
       case "random_ripple_witch":
-        result.push(random1PlayerIdentifier, "ripple_witch_text", randomRippleAnyIdentifier);
+        result.push(random1PlayerIdentifier, "ripple_witch_text", randomRippleAnyIdentifier)
 
-        break;
+        break
 
       case "random_ripple_view1":
-        result.push(random1PlayerIdentifier, "ripple_view1_text", randomRippleAnyIdentifier);
+        result.push(random1PlayerIdentifier, "ripple_view1_text", randomRippleAnyIdentifier)
 
-        break;
+        break
 
       case "random_ripple_view2":
-        result.push(random1PlayerIdentifier, "ripple_view2_text", randomRippleAnyIdentifier);
+        result.push(random1PlayerIdentifier, "ripple_view2_text", randomRippleAnyIdentifier)
 
-        break;
+        break
 
       case "random_ripple_reveal":
-        result.push(random1PlayerIdentifier, "ripple_revealer_text", randomRippleNeighborIdentifier, "ripple_revealer_end_text");
+        result.push(random1PlayerIdentifier, "ripple_revealer_text", randomRippleNeighborIdentifier, "ripple_revealer_end_text")
 
-        break;
+        break
 
       case "random_ripple_dualview":
-        result.push(random2PlayersIdentifier, randomDualview, randomRippleCenterAnyIdentifier);
+        result.push(random2PlayersIdentifier, randomDualview, randomRippleCenterAnyIdentifier)
 
-        break;
+        break
 
       case "random_ripple_twovote":
 
-        result.push(randomRippleAllIdentifier, "ripple_doublevote_text");
+        result.push(randomRippleAllIdentifier, "ripple_doublevote_text")
 
-        break;
+        break
 
       case "random_ripple_shuffle":  //TODO just narration, we shuffle in backend
-        result.push(randomShuffle2Players[0], "conjunction_and", randomShuffle2Players[1], "ripple_doublevote_text", randomShuffle2Players[0]);
-        result.push(randomShuffle2Players[0], "ripple_dualshuffle2_text", randomShuffle2Players[1], "ripple_dualshuffle3_text");
+        result.push(randomShuffle2Players[0], "conjunction_and", randomShuffle2Players[1], "ripple_doublevote_text", randomShuffle2Players[0])
+        result.push(randomShuffle2Players[0], "ripple_dualshuffle2_text", randomShuffle2Players[1], "ripple_dualshuffle3_text")
 
-        break;
+        break
 
       case "random_ripple_drunk":
-        result.push(random1PlayerIdentifier, "ripple_drunk_text", randomRippleAnyIdentifier, "ripple_drunk_end_text");
+        result.push(random1PlayerIdentifier, "ripple_drunk_text", randomRippleAnyIdentifier, "ripple_drunk_end_text")
 
-        break;
+        break
 
       case "random_ripple_voteapp":
-        result.push("ripple_app_text");
+        result.push("ripple_app_text")
 
-        break;
+        break
 
       case "random_ripple_repeatrole": //TODO night actions roles
         /* const repeatrole = [
@@ -190,24 +190,24 @@ exports.ripple = (oracleMadeSureRipple, totalPlayers) => {
         ]
 
         const roleText = getRandomRoleDisplayName(repeatrole)
-        result.push(roleText, "ripple_repeatrole_text"); */
+        result.push(roleText, "ripple_repeatrole_text") */
 
-        result.push("ripple_repeatrole_text");
+        result.push("ripple_repeatrole_text")
 
-        break;
+        break
 
       case "random_ripple_iamalien":
-        result.push(randomRippleAllIdentifier, "ripple_iamalien_text");
+        result.push(randomRippleAllIdentifier, "ripple_iamalien_text")
 
-        break;
+        break
 
       default:
-        break;
+        break
     }
   }
 
-  return result;
-};
+  return result
+}
 
 
 
