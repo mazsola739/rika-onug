@@ -25,7 +25,7 @@ exports.startGame = async (message) => {
       scene_title: "JOKE",
       scene_number: 0,
       scene_start_time: startTime,
-      narration: [],
+      narration: [], //TODO RANDOM JOKE
     },
   }
 

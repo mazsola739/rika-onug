@@ -34,10 +34,9 @@ exports.websocketServer = (port) => {
         logTrace(`Received message ${rawMessage} from user ${client}`)
         const message = JSON.parse(rawMessage)
         logTrace(`msg received: ${rawMessage}`)
-        
-        if (ws.token !== message.token)         return
 
         if (message.type === NEWBIE)            return newbie(ws, message)
+        if (ws.token     !== message.token)     return
         if (message.type === RELOAD)            return reload(ws, message)
         if (message.type === JOIN_ROOM)         return joinRoom(ws, message)
         if (message.type === LEAVE_ROOM)        return leaveRoom(ws, message)

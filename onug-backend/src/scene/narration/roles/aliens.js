@@ -1,4 +1,4 @@
-const { pickRandomUpToThreePlayers } = require("../utils")
+const { pickRandomUpToThreePlayers, getRandomItemFromArray } = require("../utils")
 
 //TODO save which interaction!
 

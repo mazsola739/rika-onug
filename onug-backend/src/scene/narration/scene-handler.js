@@ -83,13 +83,18 @@ exports.sceneHandler = gameState => {
     hasBlob:                   hasRole(selectedCards, 44),
     hasMortician:              hasRole(selectedCards, 49),
     hasFamilyMan:              hasRole(selectedCards, 78),
+    hasRipple:                 containsAnyIds(selectedCards, alienIds), //TODO oracle is enough for ripple?
   }
   conditions.haOneMasonAndDoppelganger = conditions.hasDoppelganger && conditions.hasAnyMason
   conditions.hasMasons = conditions.hasBothMasons || conditions.haOneMasonAndDoppelganger
   conditions.hasBeholder = hasRole(selectedCards, 73) && conditions.hasSeers
 
   switch (sceneTitle) {
-    // case "JOKE":// (Scene Number 0)
+    case "JOKE": // (Scene Number 0)
+      return {
+        [NARRATION]: roles.joke()
+      }
+
     // case "EPIC_BATTLE":// (Scene Number: 1)
 
     /*  T W I L L I G H T  */
@@ -623,11 +628,15 @@ exports.sceneHandler = gameState => {
         [NARRATION]: roles.familyman(conditions.hasDoppelganger),
       }
       break
+    //Ripple Scene:
+    case "RIPPLE": // (Scene Number: 88)
+      if (conditions.hasRipple) return {
+        [NARRATION]: roles.ripple(),
+      }
+      break
+      
     default:
       logError(`SCENE_HANDLER_DEFAULT case: no role found for: sceneTitle ${sceneTitle}`)
-
-    //Ripple Scene:
-    /*  RIPPLE":// (Scene Number: 88) */
     //Day Scenes:
     /*  INVESTIGATION":// (Scene Number: 89)
   VOTE":// (Scene Number: 90)

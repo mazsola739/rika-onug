@@ -8,12 +8,12 @@ module.exports = {
 
 /*  Screenplay steps
 
-=>  BACKEND: check in selected cards, wich role next, (id or role name?)
+=>  BACKEND: check in selected cards, which role next, (id or role name?)
     FRONTEND: send narration to everyone, 
     BACKEND & FRONTEND: start action timer
 =>  BACKEND: check in known cards the player, who has the role, this player can do their action? 
     (some card swaps not allow to wake up again),if there player with doable action, generate this action 
-=>  FRONTEND: send invidiually to this player message (YOUR TURN), selectable and/or visible options, 
+=>  FRONTEND: send individually to this player message (YOUR TURN), selectable and/or visible options, 
     and / or message about action (example, swap is already done)
 =>  BACKEND: wait (until timer) answer from player if need (selected option, card ect.), 
     FRONTEND: and react to their action if need (example select card to look at, we need to show this card) and send message

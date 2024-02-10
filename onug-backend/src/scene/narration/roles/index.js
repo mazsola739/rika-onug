@@ -1,3 +1,6 @@
+const { joke } = require("./joke") //random
+const { ripple } = require("./ripple") //TODO do we have ripple?
+
 const { oracle_question, oracle_reaction } = require("./oracle") //random
 const { copycat } = require("./copycat")
 const { mirrorman } = require("./mirrorman")
@@ -68,6 +71,7 @@ const { familyman } = require("./familyman")
 
 exports.roles = {
   /* T W I L L I G H T  */
+  joke,
   oracle_question, oracle_reaction,
   copycat,
   mirrorman,
@@ -138,7 +142,7 @@ exports.roles = {
   mortician, doppelganger_mortician,
   familyman,
   /*  R I P P L E */
-  //TODO ripple
+  ripple,
   /*  D A Y */
   //TODO vote
 }
