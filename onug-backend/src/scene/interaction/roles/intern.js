@@ -1,7 +1,7 @@
 
 //TODO doppelganger
 exports.intern = () => gameState => {
-  const newGameState = {...gameState}
+  const newGameState = { ...gameState }
 
-  return newGameState;
-};
+  return newGameState
+}

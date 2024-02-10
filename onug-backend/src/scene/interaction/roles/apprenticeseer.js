@@ -1,13 +1,11 @@
-const { INTERACTION } = require("../../../constant/ws");
-const { logInfo } = require("../../../log");
-const { getCardIdsByPositions } = require("../utils");
-const { centerCardPositions } = require("../constants");
+const { INTERACTION } = require("../../../constant/ws")
+const { getCardIdsByPositions } = require("../utils")
+const { centerCardPositions } = require("../constants")
 
-//TODO doppelganger instant action
 //? INFO: Apprentice Seer - looks at one card from the center (not another players or her own)
 exports.apprenticeseer = (gameState, token) => {
   const newGameState = {...gameState}
-  const role_interactions = [];
+  const role_interactions = []
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -28,18 +26,16 @@ exports.apprenticeseer = (gameState, token) => {
 
   newGameState.role_interactions = role_interactions
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
-
-  return newGameState;
-};
+  return newGameState
+}
 
 exports.apprenticeseer_response = (gameState, token, selected_positions) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false ) return gameState
   
   const newGameState = {...gameState}
-  const role_interactions = [];
+  const role_interactions = []
 
-  const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]]);
+  const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
 
   newGameState.players[token].role_history.show_cards = showCards
   newGameState.players[token].role_history.card_or_mark_action = true
@@ -55,9 +51,7 @@ exports.apprenticeseer_response = (gameState, token, selected_positions) => {
   
   newGameState.role_interactions = role_interactions
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
-
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card on the next position: ${[selected_positions[0]]}`
 
   return newGameState
-};
+}

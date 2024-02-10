@@ -1,16 +1,16 @@
-const { roles } = require("./roles");
-const { getRolesNames, getTeamName, containsAnyIds, containsAllIds, hasRole } = require("./utils");
-const { instantRoleIds, doppelgangerInstantActionsIds, vampireIds, alienIds, groobAndZerbIds, superVillainsIds, werewolvesIds, hasMarkIds, seerIds, masonIds } = require("./constants");
-const { logError, logDebug } = require("../../log");
+const { roles } = require("./roles")
+const { getRolesNames, getTeamName, containsAnyIds, containsAllIds, hasRole } = require("./utils")
+const { instantRoleIds, doppelgangerInstantActionsIds, vampireIds, alienIds, groobAndZerbIds, superVillainsIds, werewolvesIds, hasMarkIds, seerIds, masonIds } = require("./constants")
+const { logError, logDebug } = require("../../log")
 
 const NARRATION = 'actual_scene.narration'
 
 //! todo save interaction identifiers for this: aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
 //TODO action_history
 exports.sceneHandler = gameState => {
-  const sceneTitle = gameState.actual_scene.scene_title;
-  const selectedCards = gameState.selected_cards;
-  const totalPlayers = gameState.players.length;
+  const sceneTitle = gameState.actual_scene.scene_title
+  const selectedCards = gameState.selected_cards
+  const totalPlayers = gameState.players.length
 
   const conditions = {
     hasOracle:                 hasRole(selectedCards, 50),
@@ -83,10 +83,10 @@ exports.sceneHandler = gameState => {
     hasBlob:                   hasRole(selectedCards, 44),
     hasMortician:              hasRole(selectedCards, 49),
     hasFamilyMan:              hasRole(selectedCards, 78),
-  };
-  conditions.haOneMasonAndDoppelganger = conditions.hasDoppelganger && conditions.hasAnyMason;
-  conditions.hasMasons = conditions.hasBothMasons || conditions.haOneMasonAndDoppelganger;
-  conditions.hasBeholder = hasRole(selectedCards, 73) && conditions.hasSeers;
+  }
+  conditions.haOneMasonAndDoppelganger = conditions.hasDoppelganger && conditions.hasAnyMason
+  conditions.hasMasons = conditions.hasBothMasons || conditions.haOneMasonAndDoppelganger
+  conditions.hasBeholder = hasRole(selectedCards, 73) && conditions.hasSeers
 
   switch (sceneTitle) {
     // case "JOKE":// (Scene Number 0)
@@ -107,8 +107,8 @@ exports.sceneHandler = gameState => {
       const oracleAnswer = gameState.oracle_answer
 
       if (conditions.hasOracle) return {
-          [NARRATION]: roles.oracle_reaction(oracleQuestion, oracleAnswer),
-        }
+        [NARRATION]: roles.oracle_reaction(oracleQuestion, oracleAnswer),
+      }
       break
 
     case "COPYCAT": // (Scene Number: 4)
@@ -150,7 +150,7 @@ exports.sceneHandler = gameState => {
         [NARRATION]: roles.thecount(),
       }
       break
-      
+
     case "DOPPELGÄNGER_THE_COUNT": // (Scene Number: 10)
       if (conditions.hasDoppelganger && conditions.hasTheCount) return {
         [NARRATION]: roles.doppelganger_thecount(),
@@ -625,13 +625,13 @@ exports.sceneHandler = gameState => {
       break
     default:
       logError(`SCENE_HANDLER_DEFAULT case: no role found for: sceneTitle ${sceneTitle}`)
-    
-      //Ripple Scene:
-      /*  RIPPLE":// (Scene Number: 88) */
-      //Day Scenes:
-      /*  INVESTIGATION":// (Scene Number: 89)
-    VOTE":// (Scene Number: 90)
-    WINNERS":// (Scene Number: 91) */
-    }
-    return {}
-  };
+
+    //Ripple Scene:
+    /*  RIPPLE":// (Scene Number: 88) */
+    //Day Scenes:
+    /*  INVESTIGATION":// (Scene Number: 89)
+  VOTE":// (Scene Number: 90)
+  WINNERS":// (Scene Number: 91) */
+  }
+  return {}
+}

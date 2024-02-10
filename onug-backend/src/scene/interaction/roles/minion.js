@@ -1,15 +1,14 @@
-const { INTERACTION } = require("../../../constant/ws");
-const { logInfo } = require("../../../log");
-const { werewolvesAndDreamWolfIds } = require("../constants");
-const { getPlayerNumbersWithMatchingTokens, getTokensByRoleIds } = require("../utils");
+const { INTERACTION } = require("../../../constant/ws")
+const { werewolvesAndDreamWolfIds } = require("../constants")
+const { getPlayerNumbersWithMatchingTokens, getTokensByRoleIds } = require("../utils")
 
 //? INFO: Minion - All Werewolf team (not Minion/Squire) stick up their thumb for him to see
 exports.minion = (gameState, token) => {
-  const newGameState = {...gameState}
-  const role_interactions = [];
+  const newGameState = { ...gameState }
+  const role_interactions = []
 
-  const werewolfTokens = getTokensByRoleIds(newGameState.players, werewolvesAndDreamWolfIds);
-  const werewolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, werewolfTokens);
+  const werewolfTokens = getTokensByRoleIds(newGameState.players, werewolvesAndDreamWolfIds)
+  const werewolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, werewolfTokens)
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -32,7 +31,7 @@ exports.minion = (gameState, token) => {
 
   newGameState.role_interactions = role_interactions
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`);
+  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
-  return newGameState;
-};
+  return newGameState
+}

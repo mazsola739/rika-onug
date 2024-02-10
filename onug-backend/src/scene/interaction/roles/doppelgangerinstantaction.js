@@ -1,5 +1,4 @@
 const { roles } = require(".")
-const { logInfo } = require("../../../log")
 const { doppelgangerInstantActionsIds, instantRoleIds } = require("../constants")
 
 /**
@@ -15,8 +14,8 @@ exports.doppelganger_instant_action = (gameState, token) => {
 
   if (!doppelgangerInstantActionsIds.includes(new_role_id)) return
 
-  const newGameState = { ...gameState };
-  const role_interactions = [];
+  const newGameState = { ...gameState }
+  const role_interactions = []
 
   const roleName = instantRoleIds[new_role_id]
 
@@ -27,7 +26,7 @@ exports.doppelganger_instant_action = (gameState, token) => {
 
   newGameState.players[token].role_history = roleHistory
 
-  logInfo(`Doppelganger instant night action for ${token}: ${roleName}`)
+  newGameState.actual_scene.interaction = `Doppelganger instant night action for ${token}: ${roleName}`
 
   role_interactions.push({
     type: INTERACTION,
@@ -39,8 +38,6 @@ exports.doppelganger_instant_action = (gameState, token) => {
   })
 
   newGameState.role_interactions = role_interactions
-
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   if (new_role_id === 2)  return roles.drunk(newGameState, token)
   if (new_role_id === 8)  return roles.robber(newGameState, token)

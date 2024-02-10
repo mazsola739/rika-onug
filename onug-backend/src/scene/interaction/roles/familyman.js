@@ -1,7 +1,7 @@
 
 //TODO doppelganger
 exports.familyman = (gameState, token) => {
-  const newGameState = {...gameState}
+  const newGameState = { ...gameState }
 
-  return newGameState;
-};
+  return newGameState
+}

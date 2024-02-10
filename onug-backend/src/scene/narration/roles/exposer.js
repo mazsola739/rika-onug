@@ -1,6 +1,6 @@
 const { getRandomItemFromArray } = require("../utils")
 
-//TODO save wich interaction!
+//TODO save which interaction!
 
 const randomExposer = [
   "exposer_flip1_text",

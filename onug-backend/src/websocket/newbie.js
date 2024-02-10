@@ -5,11 +5,11 @@ const { logInfo } = require("../log")
 exports.newbie = (ws, message) => {
   const { token } = message //TODO handle rejoin, user has valid token
 
-  // reconnect, already existing token from client, no token on serverside
+  // reconnect, already existing token from client, no token on server side
   if (token && !ws.token && validate(token)) {
     ws.token = token
     ws.send(
-      JSON.stringify({ type: NEWBIE, update: false, message: 'client succesfully rejoined' })
+      JSON.stringify({ type: NEWBIE, update: false, message: 'client successfully rejoined' })
     )
     return ws.send(
       JSON.stringify({ type: REDIRECT, path: '/lobby' })

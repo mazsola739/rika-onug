@@ -1,15 +1,14 @@
-const { INTERACTION } = require("../../../constant/ws");
-const { logInfo } = require("../../../log");
-const { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens } = require("../utils");
+const { INTERACTION } = require("../../../constant/ws")
+const { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens } = require("../utils")
 
 //? INFO: Insomniac – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
 exports.insomniac = (gameState, token) => {
   const newGameState = { ...gameState }
-  const role_interactions = [];
+  const role_interactions = []
 
   if (!newGameState.players[token].card.shield) {
-    const insomniacPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token]);
-    const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, insomniacPlayerNumbers);
+    const insomniacPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, insomniacPlayerNumbers)
 
     const roleHistory = {
       ...newGameState.actual_scene,
@@ -54,7 +53,7 @@ exports.insomniac = (gameState, token) => {
 
   newGameState.role_interactions = role_interactions
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`);
+  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
-  return newGameState;
-};
+  return newGameState
+}

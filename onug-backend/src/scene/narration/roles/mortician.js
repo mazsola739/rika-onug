@@ -1,4 +1,4 @@
-//TODO save wich interaction!
+//TODO save which interaction!
 
 const random_mortician = ["mortician_1card_text", "mortician_2cards_text"]
 

@@ -1,12 +1,12 @@
-//TODO doppelganger instant action
+//? INFO: Cupid - Gives any two players (including herself) a Mark of Love if one of them dies so does the other
 exports.cupid = (gameState) => {
-  const newGameState = { ...gameState };
+  const newGameState = { ...gameState }
 
-  return newGameState;
-};
+  return newGameState
+}
 
 exports.cupid_response = (gameState) => {
-  const newGameState = { ...gameState };
+  const newGameState = { ...gameState }
 
-  return newGameState;
-};
+  return newGameState
+}

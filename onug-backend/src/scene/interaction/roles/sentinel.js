@@ -1,8 +1,7 @@
-const { INTERACTION } = require("../../../constant/ws");
-const { logInfo } = require("../../../log");
+const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber } = require("../utils");
 
-//TODO doppelganger instant action
+
 //? INFO: Sentinel - Place a Shield token on any other player's card; that card (not mark) cannot be looked at or moved
 exports.sentinel = (gameState, token) => {
   const newGameState = { ...gameState };
@@ -29,8 +28,6 @@ exports.sentinel = (gameState, token) => {
   })
 
   newGameState.role_interactions = role_interactions
-
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   return newGameState;
 };
@@ -62,8 +59,6 @@ exports.sentinel_response = (gameState, token, selected_positions, ws) => {
   })
 
   newGameState.role_interactions = role_interactions
-
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} placed shield on the next position: ${selected_positions[0]}`
 

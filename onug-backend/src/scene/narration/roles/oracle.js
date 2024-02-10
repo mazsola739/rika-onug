@@ -1,4 +1,4 @@
-//TODO save wich interaction!
+//TODO save which interaction!
 
 const { getRandomItemFromArray } = require("../utils")
 

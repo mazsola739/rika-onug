@@ -1,4 +1,4 @@
-//TODO save wich interaction!
+//TODO save which interaction!
 
 const randomFamilyman = [
   "familyman_1pleft_text",

@@ -1,6 +1,5 @@
 exports.everyonemark = (gameState, token) => {
-    const newGameState = {...gameState}
-  
-    return newGameState;
-  };
-  
+  const newGameState = { ...gameState }
+
+  return newGameState
+}

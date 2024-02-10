@@ -1,15 +1,14 @@
-const { INTERACTION } = require("../../../constant/ws");
-const { logInfo } = require("../../../log");
-const { getPlayerNumbersWithMatchingTokens, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions } = require("../utils");
-const { centerCardPositions } = require("../constants");
+const { INTERACTION } = require("../../../constant/ws")
+const { getPlayerNumbersWithMatchingTokens, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions } = require("../utils")
+const { centerCardPositions } = require("../constants")
 
 //TODO DREAMWOLF & werewolf_response
 //? INFO: Werewolves (4) - Open their eyes and view their fellow Werewolves (including Mystic and Alpha)
 exports.werewolves = (gameState, tokens) => {
-  const newGameState = { ...gameState };
-  const role_interactions = [];
+  const newGameState = { ...gameState }
+  const role_interactions = []
 
-  const werewolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens);
+  const werewolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens)
   const dreamWolfPlayerNumber = getDreamWolfPlayerNumberByRoleIds(newGameState.players)
 
   const loneWolf = werewolfPlayerNumbers.length + dreamWolfPlayerNumber.length === 1
@@ -21,7 +20,7 @@ exports.werewolves = (gameState, tokens) => {
   }
 
   tokens.forEach((token) => {
-    newGameState.players[token].role_history = roleHistory;
+    newGameState.players[token].role_history = roleHistory
 
     role_interactions.push({
       type: INTERACTION,
@@ -31,25 +30,25 @@ exports.werewolves = (gameState, tokens) => {
       werewolves: werewolfPlayerNumbers,
       selectable_cards: loneWolf ? centerCardPositions : [],
       shielded_players: newGameState.shield,
-    });
+    })
 
     if (!loneWolf) newGameState.actual_scene.interaction = `The Werewolves saw werewolf position(s): player ${werewolfPlayerNumbers.join(', ')} and dream wolf position(s): player ${dreamWolfPlayerNumber.join(', ')}`
-  });
+  })
 
   newGameState.role_interactions = role_interactions
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`);
+  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
-  return newGameState;
-};
+  return newGameState
+}
 
 exports.werewolves_response = (gameState, token, selected_positions) => {
   if (selected_positions.every(position => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
   const role_interactions = []
 
-  const newGameState = {...gameState}
+  const newGameState = { ...gameState }
 
-  const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]]);
+  const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
 
   newGameState.players[token].role_history.show_cards = showCards
   newGameState.players[token].role_history.card_or_mark_action = true
@@ -65,9 +64,7 @@ exports.werewolves_response = (gameState, token, selected_positions) => {
 
   newGameState.role_interactions = role_interactions
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
-
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card on the next position: ${selected_positions[0]}`
 
   return newGameState
-};
+}

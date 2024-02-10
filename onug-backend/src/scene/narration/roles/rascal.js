@@ -1,6 +1,6 @@
 const { getRandomItemFromArray } = require("../utils")
 
-//TODO save wich interaction!
+//TODO save which interaction!
 
 const random_rascal = [
   "rascal_idiot_text",

@@ -106,7 +106,7 @@ exports.rippleCenterAnyKeys = [
   'identifier_anyodd_text',
   'identifier_center_text',
 ]
-const identifier_player  = [
+const identifier_player = [
   "identifier_player1_text",
   "identifier_player2_text",
   "identifier_player3_text",

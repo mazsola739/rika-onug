@@ -1,8 +1,8 @@
 
 //TODO doppelganger same result as nostradamus
 exports.nostradamus = (gameState, token) => {
-  const newGameState = {...gameState}
+  const newGameState = { ...gameState }
 
-  return newGameState;
-};
+  return newGameState
+}
 

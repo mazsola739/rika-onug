@@ -1,9 +1,8 @@
-const { INTERACTION } = require("../../../constant/ws");
-const { logInfo } = require("../../../log");
+const { INTERACTION } = require("../../../constant/ws")
 const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens } = require("../utils");
 const { centerCardPositions } = require("../constants");
 
-//TODO doppelganger instant action
+
 //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
 exports.seer = (gameState, token) => {
   const newGameState = { ...gameState };

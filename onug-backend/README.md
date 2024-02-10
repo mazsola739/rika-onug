@@ -23,8 +23,8 @@ will be only set in production (on AWS lambda), to use the aws-sdk s3 read / wri
 for everything related to actually playing the game
 
 ### websocket
-for everything related webscoket connections
-websocket-server.js is the entry point (webscoket router)
+for everything related websocket connections
+websocket-server.js is the entry point (websocket router)
 connections.js manages connections per room and holds all the references of ws for users. Also handles broadcasting to all users (in a room)
 all other files are actual 'endpoint', routed by message type
 
@@ -35,7 +35,7 @@ for everything related to validating players, cards, gamestates, etc...
 other useful utility functions separated by domain (card, player, date-time, etc...)
 
 ### repository
-for everything related to database management, every database update, delete, read should be called from this layer. Currently handling the gamestate alltogether.
+for everything related to database management, every database update, delete, read should be called from this layer. Currently handling the gamestate altogether.
 
 ### log
 logging utility, handles console logs and writing to log files (under onug-backend/logs)

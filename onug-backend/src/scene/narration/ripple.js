@@ -3,7 +3,7 @@ exports.ripple_random = [
   "random_ripple_1minute", //vote time only 1 minute
   "random_ripple_repeat", //repeat the night with 1 person see everything
   "random_ripple_repeat1p", //repeat the night action for 1 player
-  "random_ripple_insomniac", //selected players 
+  "random_ripple_insomniac", //selected players
   "random_ripple_nospeak",
   "random_ripple_faceaway",
   "random_ripple_troublemaker",
@@ -83,30 +83,30 @@ export const rippleCenterAnyKeys: string[] = [
 ]
  */
 exports.rippleAnyKeys = [
-  'identifier_any_text',
-  'identifier_anyeven_text',
-  'identifier_anyodd_text',
-  'activePlayers',
+  "identifier_any_text",
+  "identifier_anyeven_text",
+  "identifier_anyodd_text",
+  "activePlayers",
 ]
 exports.rippleAllKeys = [
-  'identifier_everyone_text',
-  'identifier_oddplayers_text',
-  'identifier_evenplayers_text',
-  'activePlayers',
+  "identifier_everyone_text",
+  "identifier_oddplayers_text",
+  "identifier_evenplayers_text",
+  "activePlayers",
 ]
 exports.rippleNeighborKeys = [
-  'identifier_leftneighbor_text',
-  'identifier_rightneighbor_text',
-  'identifier_oneneighbor_text',
-  'identifier_yourself_text',
+  "identifier_leftneighbor_text",
+  "identifier_rightneighbor_text",
+  "identifier_oneneighbor_text",
+  "identifier_yourself_text",
 ]
 exports.rippleCenterAnyKeys = [
-  'identifier_any_text',
-  'identifier_anyeven_text',
-  'identifier_anyodd_text',
-  'identifier_center_text',
+  "identifier_any_text",
+  "identifier_anyeven_text",
+  "identifier_anyodd_text",
+  "identifier_center_text",
 ]
-const identifier_player  = [
+const identifier_player = [
   "identifier_player1_text",
   "identifier_player2_text",
   "identifier_player3_text",
@@ -123,9 +123,9 @@ const identifier_player  = [
 
 exports.ripple = () => [] //TODO
 
-const shuffleAndSplitDeck = (deck: ActionCardType[]): ActionCardType[] => {
+const shuffleAndSplitDeck = (deck) => {
   const shuffledDeck = shuffleCardsArray([...deck])
-  const rippleDeck: ActionCardType[] = []
+  const rippleDeck = []
 
   rippleDeck.push(
     shuffledDeck.splice(getRandomNumber(0, shuffledDeck.length - 1), 1)[0]

@@ -1,11 +1,11 @@
 exports.mirrorman = (gameState) => {
-  const newGameState = { ...gameState };
+  const newGameState = { ...gameState }
 
-  return newGameState;
-};
+  return newGameState
+}
 
 exports.mirrorman_response = (gameState) => {
-  const newGameState = { ...gameState };
+  const newGameState = { ...gameState }
 
-  return newGameState;
-};
+  return newGameState
+}

@@ -6,7 +6,7 @@ exports.hasDoppelganger = players => {
       return true
     }
   }
-  
+
   return false
 }
 
@@ -44,7 +44,7 @@ exports.getDoppelgangerTokenByRoleIds = (players, roleIds) => {
       }
     }
   }
-  
+
   return result
 }
 
@@ -56,7 +56,7 @@ exports.getDreamWolfPlayerNumberByRoleIds = players => {
       result.push(`player_${players[token].player_number}`)
     }
   }
-  
+
   return result
 }
 
@@ -68,7 +68,7 @@ exports.getTannerNumberByRoleIds = players => {
       result.push(`player_${players[token].player_number}`)
     }
   }
-  
+
   return result
 }
 
@@ -80,7 +80,7 @@ exports.getDreamWolfPlayerNumberByRoleIds = players => {
       result.push(`player_${players[token].player_number}`)
     }
   }
-  
+
   return result
 }
 
@@ -102,7 +102,7 @@ exports.getPlayerNumbersWithMatchingTokens = (players, tokens) => tokens.map(tok
 exports.getPlayerNumbersWithNonMatchingTokens = (players, tokens) => {
   return Object.keys(players)
     .filter((token) => {
-      const player = players[token];
+      const player = players[token]
       return !tokens.includes(token) && !(player.card?.shield)
     })
     .map((token) => `player_${players[token].player_number}`)
@@ -128,7 +128,7 @@ exports.getCardIdsByPositions = (cardPositions, selectedPositions) => {
     const cardId = cardPositions[position].id
     result.push({ [position]: cardId })
   })
-  
+
   return result
 }
 
@@ -143,7 +143,7 @@ exports.getPlayerTokenByPlayerNumber = (players, player) => {
   }
 
   return result
-};
+}
 
 exports.getPlayerCardIds = players => {
   const result = []
@@ -177,7 +177,7 @@ exports.containsAllOriginalIds = (players, ids) => ids.every(id => Object.values
 
 exports.getTokenByOriginalIds = (players, ids) => {
   let result = ""
-  
+
   for (const token in players) {
     if (ids.includes(players?.[token]?.card.original_id)) {
       result = token
@@ -200,5 +200,5 @@ exports.getTokensByOriginalIds = (players, ids) => {
 }
 
 exports.getAllPlayerTokens = (players) => {
-  return Object.keys(players);
+  return Object.keys(players)
 }

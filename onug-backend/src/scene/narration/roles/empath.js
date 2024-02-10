@@ -1,14 +1,11 @@
-const {
-  getRandomItemFromArray,
-  pickRandomUpToThreePlayers,
-} = require("../utils");
+const { getRandomItemFromArray, pickRandomUpToThreePlayers } = require("../utils")
 
 const empathAllKeys = [
   "identifier_everyone_text",
   "identifier_oddplayers_text",
   "identifier_evenplayers_text",
   "activePlayers",
-];
+]
 
 const randomEmpath = [
   "empath_action1_text",
@@ -25,11 +22,11 @@ const randomEmpath = [
   "empath_action12_text",
   "empath_action13_text",
   "empath_action14_text",
-];
+]
 
 const createEmpath = (kickoffText, totalPlayers) => () => {
-  const randomIdentifier = getRandomItemFromArray(empathAllKeys);
-  const randomInstructions = getRandomItemFromArray(randomEmpath);
+  const randomIdentifier = getRandomItemFromArray(empathAllKeys)
+  const randomInstructions = getRandomItemFromArray(randomEmpath)
 
   return [
     kickoffText,
@@ -38,10 +35,10 @@ const createEmpath = (kickoffText, totalPlayers) => () => {
       ? pickRandomUpToThreePlayers(totalPlayers, "conjunction_and")
       : randomIdentifier,
     randomInstructions,
-  ];
-};
+  ]
+}
 
 exports.empath = (totalPlayers) =>
-  createEmpath("empath_kickoff_text", totalPlayers)();
+  createEmpath("empath_kickoff_text", totalPlayers)()
 exports.doppelganger_empath = (totalPlayers) =>
-  createEmpath("doppelganger_empath_kickoff_text", totalPlayers)();
+  createEmpath("doppelganger_empath_kickoff_text", totalPlayers)()

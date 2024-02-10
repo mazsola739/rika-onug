@@ -6,7 +6,6 @@ const { STAGES } = require("../constant/stage")
 const { broadcast } = require("./connections")
 const { upsertRoomState } = repository
 const { startGamePlay } = require("../screen-play")
-const { getGamePlayBoard } = require("../utils")
 
 exports.startGame = async (message) => {
   const { room_id, token } = message

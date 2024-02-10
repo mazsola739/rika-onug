@@ -1,13 +1,12 @@
-const { INTERACTION } = require("../../../constant/ws");
-const { logInfo } = require("../../../log");
-const { getPlayerNumbersWithMatchingTokens } = require("../utils");
-const { centerCardPositions } = require("../constants");
+const { INTERACTION } = require("../../../constant/ws")
+const { getPlayerNumbersWithMatchingTokens } = require("../utils")
+const { centerCardPositions } = require("../constants")
 
-//TODO doppelganger instant action
+
 //? INFO: Drunk – Swap your card with a card from center but does not look at his new card
 exports.drunk = (gameState, token) => {
-  const newGameState = {...gameState}
-  const role_interactions = [];
+  const newGameState = { ...gameState }
+  const role_interactions = []
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -33,30 +32,28 @@ exports.drunk = (gameState, token) => {
 
   newGameState.role_interactions = role_interactions
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
-
-  return newGameState;
-};
+  return newGameState
+}
 
 exports.drunk_response = (gameState, token, selected_positions) => {
   if (selected_positions.every(position => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
-  
-  const newGameState = {...gameState}
-  const role_interactions = [];
 
-  const drunkPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token]);
+  const newGameState = { ...gameState }
+  const role_interactions = []
 
-  const playerCard = { ...newGameState.card_positions[drunkPlayerNumbers] };
-  const selectedCard = { ...newGameState.card_positions[selected_positions[0]] };
-  
-  newGameState.card_positions[drunkPlayerNumbers] = selectedCard;
-  newGameState.card_positions[selected_positions[0]] = playerCard;
+  const drunkPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
 
-  newGameState.players[token].card.id = 0;
+  const playerCard = { ...newGameState.card_positions[drunkPlayerNumbers] }
+  const selectedCard = { ...newGameState.card_positions[selected_positions[0]] }
+
+  newGameState.card_positions[drunkPlayerNumbers] = selectedCard
+  newGameState.card_positions[selected_positions[0]] = playerCard
+
+  newGameState.players[token].card.id = 0
 
   newGameState.players[token].role_history.swapped_cards = [selected_positions[0], `player_${newGameState.players[token].player_number}`]
   newGameState.players[token].role_history.card_or_mark_action = true
-  
+
   role_interactions.push({
     type: INTERACTION,
     title: "DRUNK",
@@ -70,12 +67,10 @@ exports.drunk_response = (gameState, token, selected_positions) => {
     player_team: newGameState.players[token]?.card?.team,
     player_number: newGameState.players[token]?.player_number,
   })
-  
+
   newGameState.role_interactions = role_interactions
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
-
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} swapped their card with ${selected_positions[0]}`
-  
+
   return newGameState
-};
+}

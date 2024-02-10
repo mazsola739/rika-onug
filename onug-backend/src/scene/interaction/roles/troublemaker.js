@@ -1,8 +1,7 @@
-const { INTERACTION } = require("../../../constant/ws");
-const { logInfo } = require("../../../log");
+const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithNonMatchingTokens } = require("../utils");
 
-//TODO doppelganger instant action
+
 //? INFO: Troublemaker - Swaps any two other player's cards (not her own or center) without looking at them
 exports.troublemaker = (gameState, token) => {
   const newGameState = { ...gameState }
@@ -29,8 +28,6 @@ exports.troublemaker = (gameState, token) => {
 
 
   newGameState.role_interactions = role_interactions
-
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   return newGameState;
 };
@@ -60,8 +57,6 @@ exports.troublemaker_response = (gameState, token, selected_positions) => {
   })
 
   newGameState.role_interactions = role_interactions
-
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} swapped cards between: ${selected_positions[0]} and ${selected_positions[1]}`
 

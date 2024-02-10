@@ -1,8 +1,7 @@
-const { INTERACTION } = require("../../../constant/ws");
-const { logInfo } = require("../../../log");
+const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithMatchingTokens, getPlayerNumbersWithNonMatchingTokens, getCardIdsByPlayerNumbers } = require("../utils");
 
-//TODO doppelganger instant action
+
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
 exports.robber = (gameState, token) => {
   const newGameState = { ...gameState }
@@ -51,8 +50,6 @@ exports.robber = (gameState, token) => {
 
   newGameState.role_interactions = role_interactions
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
-
   return newGameState;
 };
 
@@ -95,8 +92,6 @@ exports.robber_response = (gameState, token, selected_positions) => {
   })
 
   newGameState.role_interactions = role_interactions
-
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} swapped their card with ${selected_positions[0]} and then viewed their new card`
 

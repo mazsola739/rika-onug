@@ -1,1 +1,1 @@
-exports.alphawolf = () => ["alphawolf_kickoff_text"];
+exports.alphawolf = () => ["alphawolf_kickoff_text"]

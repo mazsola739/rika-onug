@@ -1,1 +1,1 @@
-exports.annoyinglad = () => ["annoyinglad_kickoff_text"];
+exports.annoyinglad = () => ["annoyinglad_kickoff_text"]
