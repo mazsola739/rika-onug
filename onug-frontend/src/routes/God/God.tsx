@@ -212,7 +212,14 @@ export const God: React.FC = observer(() => {
 
       <RightSide>
         <GodTitle>
-          <Icon iconName="interaction" size={25} /> {RESPONSE}
+          <Icon iconName="interaction" size={25} /> {RESPONSE}{' '}
+          <Icon iconName="blind" size={25} />
+          <Icon iconName="claw" size={25} />
+          <Icon iconName="eye" size={25} />
+          <Icon iconName="mute" size={25} />
+          <Icon iconName="ufo" size={25} />
+          <Icon iconName="select" size={25} />
+          <Icon iconName="secret" size={25} />
         </GodTitle>
         <ResponseContainer>
           <ResponsePre>{`${JSON.stringify(response, null, 4)}`}</ResponsePre>

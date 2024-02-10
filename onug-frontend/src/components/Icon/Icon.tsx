@@ -32,8 +32,7 @@ import {
   WerewolfIcon,
 } from 'assets'
 import { StyledIcon } from './Icon.styles'
-import { IconProps } from './Icon.types'
-import { IconType } from 'types'
+import { IconProps, IconType } from './Icon.types'
 
 export const Icons: Record<
   IconType,

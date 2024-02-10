@@ -7,7 +7,7 @@ import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { useEffect, useState } from 'react'
 import { NEWBIE, RELOAD } from 'constant'
 import { Icon } from 'components'
-import { IconType } from 'types'
+import { IconType } from 'components/Icon/Icon.types'
 
 export const App: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(false)
