@@ -131,9 +131,8 @@ exports.interactionHandler = (gameState) => {
 
     case "DOPPELGÄNGER_INSTANT_ACTION": // (Scene Number: 7)
       if (conditions.hasDoppelgangerPlayer && hasInstantAction) {
-        const new_role_id = newGameState.role_interactions?.new_role_id
         token = getTokenByOriginalIds(players, [1])
-        return doppelganger_instant_action(newGameState, new_role_id, token)
+        return doppelganger_instant_action(newGameState, token)
       }
       break
 

@@ -160,11 +160,11 @@ class InteractionStore {
       case 'DOPPELGÄNGER':
         doppelgangerStore.openYourEyes(this.lastJsonMessage)
 
+        break
+      case 'DOPPELGÄNGER_INSTANT_ACTION':
+        doppelgangerStore.instantNightAction(this.lastJsonMessage)
+
         break /*
-      case "DOPPELGÄNGER_INSTANT_ACTION":
-         doppelgangerStore
-      //todo
-      break;
       case "DR_PEEKER":
          drpeekerStore.openYourEyes(this.lastJsonMessage)
       
