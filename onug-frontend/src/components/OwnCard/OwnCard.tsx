@@ -14,7 +14,7 @@ export const OwnCard: React.FC<OwnCardProps> = observer(({ player }) => {
   return (
     <OwnCardContainer>
       <OwnCardText>
-        Player {player.player_number}:<br />
+        Player {player.player_number}: <br />
         {player.player_name}
       </OwnCardText>
       <CardImage image={card.card_name} size={100}></CardImage>

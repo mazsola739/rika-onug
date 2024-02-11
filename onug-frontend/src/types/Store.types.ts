@@ -9,6 +9,7 @@ export type WsJsonMessage = {
   stage?: string
   title?: string
   player_name?: string
+  player_original_id?: number
   player_card_id?: number
   player_role?: string
   player_role_id?: number
@@ -85,6 +86,7 @@ export type PlayerType = {
   player_name: string
   player_number: number
   player_card_id: number
+  player_original_id: number
   player_role: string
   player_role_id: number
   player_team: string

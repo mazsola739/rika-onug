@@ -11,13 +11,14 @@ export const KnownOwnCardContainer = styled.div`
   border-radius: 4px;
   padding: 10px;
   justify-content: flex-end;
-  max-height: 220px;
+  max-height: 250px;
   margin: 0 10px;
-  min-width: 130px;
+  min-width: 150px;
 `
 
 export const KnownOwnCardText = styled.span`
-  font-family: 'Josefin Sans', sans-serif;
+  font-size: 14px;
+  font-weight: light;
   color: white;
   text-align: center;
 `

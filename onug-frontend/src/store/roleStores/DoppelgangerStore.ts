@@ -32,6 +32,7 @@ class DoppelgangerStore {
       player_name: lastJsonMessage.player_name,
       player_number: lastJsonMessage.player_number,
       player_card_id: lastJsonMessage.player_card_id,
+      player_original_id: lastJsonMessage.player_original_id,
       player_role: lastJsonMessage.player_role,
       player_role_id: lastJsonMessage.player_role_id,
       player_team: lastJsonMessage.player_team,
@@ -92,6 +93,16 @@ class DoppelgangerStore {
     if (new_role_id === 69) return interactionStore.setInteraction('TEMPTRESS')
     if (new_role_id === 70) return interactionStore.setInteraction('VOODOO_LOU')
     if (new_role_id === 85) return interactionStore.setInteraction('THING')
+
+    gameBoardStore.setKnownPlayer({
+      player_name: lastJsonMessage.player_name,
+      player_number: lastJsonMessage.player_number,
+      player_card_id: lastJsonMessage.player_card_id,
+      player_original_id: lastJsonMessage.player_original_id,
+      player_role: lastJsonMessage.player_role,
+      player_role_id: lastJsonMessage.player_role_id,
+      player_team: lastJsonMessage.player_team,
+    })
   }
 }
 

@@ -28,7 +28,7 @@ exports.stopGamePlay = gameState => {
     delete gameState.card_positions
     gameState.action_history = [
       {
-          "scene_name": "JOKE",
+          "scene_title": "JOKE",
           "scene_number": 0
       }]
 
@@ -69,6 +69,7 @@ const getNextScene = gameState => {
 const tick = async (room_id) => {
   logTrace("tick")
   const gameState = await readGameState(room_id)
+  
   const newGameState = getNextScene(gameState)
 
   if (!newGameState) return // game already stopped
