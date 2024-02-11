@@ -1,23 +1,23 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens } = require("../utils");
-const { centerCardPositions } = require("../constants");
+const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens } = require("../utils")
+const { centerCardPositions } = require("../constants")
 
 
 //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
 exports.seer = (gameState, token) => {
-  const newGameState = { ...gameState };
-  const role_interactions = [];
+  const newGameState = { ...gameState }
+  const role_interactions = []
 
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token);
+  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
 
   const roleHistory = {
     ...newGameState.actual_scene,
     selectable_center_cards: centerCardPositions,
     selectable_player_cards: selectablePlayerNumbers,
-    card_or_mark_action: false,
-  };
+  }
 
-  newGameState.players[token].role_history = roleHistory;
+  newGameState.players[token].role_history = roleHistory
+  newGameState.players[token].card_or_mark_action = false
 
   role_interactions.push({
     type: INTERACTION,
@@ -32,38 +32,36 @@ exports.seer = (gameState, token) => {
     player_role_id: newGameState.players[token]?.card?.role_id,
     player_team: newGameState.players[token]?.card?.team,
     player_number: newGameState.players[token]?.player_number,
-  });
+  })
 
 
-  newGameState.role_interactions = role_interactions;
+  newGameState.role_interactions = role_interactions
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`);
-
-  return newGameState;
-};
+  return newGameState
+}
 
 exports.seer_response = (gameState, token, selected_positions) => {
-  const playerCards = selected_positions.some(pos => pos.includes("player_"));
-  const centerCards = selected_positions.some(pos => pos.includes("center"));
+  const playerCards = selected_positions.some(pos => pos.includes("player_"))
+  const centerCards = selected_positions.some(pos => pos.includes("center"))
 
-  let showCards = [];
+  let showCards = []
   if (playerCards && !centerCards && gameState.players[token].role_history.selectable_player_cards.includes(selected_positions[0])) {
-    showCards = [selected_positions[0]];
+    showCards = [selected_positions[0]]
   } else if (centerCards && !playerCards && [selected_positions[0], selected_positions[1]].every((position) => gameState.players[token].role_history.selectable_center_cards.includes(position))) {
-    showCards = [selected_positions[0], selected_positions[1]];
-  } else return gameState;
+    showCards = [selected_positions[0], selected_positions[1]]
+  } else return gameState
 
-  const newGameState = { ...gameState };
-  const role_interactions = [];
+  const newGameState = { ...gameState }
+  const role_interactions = []
 
-  showCards = getCardIdsByPositions(newGameState.card_positions, selected_positions);
+  showCards = getCardIdsByPositions(newGameState.card_positions, selected_positions)
 
   if (showCards.some((showCard) => Object.values(showCard).includes(newGameState.players[token].card.id))) {
-    newGameState.players[token].card.id = 0;
+    newGameState.players[token].card.id = 0
   }
 
-  newGameState.players[token].role_history.show_cards = showCards;
-  newGameState.players[token].role_history.card_or_mark_action = true;
+  newGameState.players[token].role_history.show_cards = showCards
+  newGameState.players[token].role_history.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
@@ -77,14 +75,11 @@ exports.seer_response = (gameState, token, selected_positions) => {
     player_role_id: newGameState.players[token]?.card?.role_id,
     player_team: newGameState.players[token]?.card?.team,
     player_number: newGameState.players[token]?.player_number,
-  });
+  })
 
-  newGameState.role_interactions = role_interactions;
+  newGameState.role_interactions = role_interactions
 
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`);
+  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card(s) on the next position(s): ${selected_positions.join(", ")}`
 
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number
-    } viewed card(s) on the next position(s): ${selected_positions.join(", ")}`;
-
-  return newGameState;
-};
+  return newGameState
+}

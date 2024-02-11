@@ -10,10 +10,10 @@ exports.apprenticeseer = (gameState, token) => {
   const roleHistory = {
     ...newGameState.actual_scene,
     selectable_cards: centerCardPositions,
-    card_or_mark_action: false,
   }
 
   newGameState.players[token].role_history = roleHistory
+  newGameState.players[token].card_or_mark_action = false
 
   role_interactions.push({
     type: INTERACTION,
@@ -51,7 +51,7 @@ exports.apprenticeseer_response = (gameState, token, selected_positions) => {
   
   newGameState.role_interactions = role_interactions
 
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card on the next position: ${[selected_positions[0]]}`
+  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card on the next position: ${selected_positions[0]}`
 
   return newGameState
 }

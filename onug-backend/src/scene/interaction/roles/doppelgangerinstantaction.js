@@ -1,5 +1,10 @@
 const { roles } = require(".")
-const { doppelgangerInstantActionsIds, instantRoleIds } = require("../constants")
+const { INTERACTION } = require("../../../constant/ws")
+const { logError } = require("../../../log")
+const {
+  doppelgangerInstantActionsIds,
+  instantRoleIds,
+} = require("../constants")
 
 /**
  * * Doppelgänger instant night actions:
@@ -26,7 +31,7 @@ exports.doppelganger_instant_action = (gameState, token) => {
 
   newGameState.players[token].role_history = roleHistory
 
-  newGameState.actual_scene.interaction = `Doppelganger instant night action for ${token}: ${roleName}`
+  newGameState.actual_scene.interaction = `Doppelganger instant night action for player_${newGameState.players[token].player_number}: ${roleName}`
 
   role_interactions.push({
     type: INTERACTION,
@@ -34,7 +39,8 @@ exports.doppelganger_instant_action = (gameState, token) => {
     token,
     message: "interaction_instant_night_action",
     shielded_players: newGameState.shield,
-    new_role_id
+    instant_night_action: roleName,
+    new_role_id,
   })
 
   newGameState.role_interactions = role_interactions
@@ -66,3 +72,43 @@ exports.doppelganger_instant_action = (gameState, token) => {
   return newGameState
 }
 
+exports.doppelganger_instant_action_response = (gameState, token, selected_positions) => {
+  logError("ITT VAGYOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK", selected_positions)
+  const interaction_type = gameState?.players?.[token]?.role_history?.scene_title
+  logError("ITT VAGYOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOK", JSON.stringify(gameState))
+  if (!interaction_type) {
+    ws.send(
+      JSON.stringify({
+        type: INTERACTION,
+        message: "nope",
+      })
+    )
+    return gameState
+  }
+
+  if (interaction_type === "ALPHA_WOLF")              return roles.alphawolf_response(gameState, token, selected_positions)
+//if (interaction_type === "ANNOYING_LAD")            return roles.annoyinglad_response(gameState, token, selected_positions)
+  if (interaction_type === "APPRENTICE_SEER")         return roles.apprenticeseer_response(gameState, token, selected_positions)
+//if (interaction_type === "CUPID")                   return roles.cupid_response(gameState, token, selected_positions)
+//if (interaction_type === "DETECTOR")                return roles.detector_response(gameState, token, selected_positions)
+//if (interaction_type === "DISEASED")                return roles.diseased_response(gameState, token, selected_positions)
+//if (interaction_type === "DR_PEEKER")               return roles.drpeeker_response(gameState, token, selected_positions)
+  if (interaction_type === "DRUNK")                   return roles.drunk_response(gameState, token, selected_positions)
+//if (interaction_type === "INSTIGATOR")              return roles.instigator_response(gameState, token, selected_positions)
+  if (interaction_type === "MYSTIC_WOLF")             return roles.mysticwolf_response(gameState, token, selected_positions)
+//if (interaction_type === "PARANORMAL_INVESTIGATOR") return roles.paranormalinvestigator_response(gameState, token, selected_positions)
+//if (interaction_type === "RAPSCALLION")             return roles.rapscallion_response(gameState, token, selected_positions)
+  if (interaction_type === "ROBBER")                  return roles.robber_response(gameState, token, selected_positions)
+//if (interaction_type === "ROLE_RETRIEVER")          return roles.roleretriever_response(gameState, token, selected_positions)
+  if (interaction_type === "SEER")                    return roles.seer_response(gameState, token, selected_positions)
+//if (interaction_type === "SENTINEL")                return roles.sentinel_response(gameState, token, selected_positions)
+//if (interaction_type === "SWITCHEROO")              return roles.switcheroo_response(gameState, token, selected_positions)
+//if (interaction_type === "TEMPTRESS")               return roles.temptress_response(gameState, token, selected_positions)
+//if (interaction_type === "THING")                   return roles.thing_response(gameState, token, selected_positions)
+  if (interaction_type === "TROUBLEMAKER")            return roles.troublemaker_response(gameState, token, selected_positions)
+//if (interaction_type === "VILLAGE_IDIOT")           return roles.villageidiot_response(gameState, token, selected_positions)
+//if (interaction_type === "VOODOO_LOU")              return roles.voodoolou_response(gameState, token, selected_positions)
+//if (interaction_type === "WITCH")                   return roles.witch_response(gameState, token, selected_positions)
+
+  return gameState
+}

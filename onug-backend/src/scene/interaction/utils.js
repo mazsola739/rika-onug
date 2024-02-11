@@ -171,10 +171,6 @@ exports.containsAllIds = (selectedCardIds, roleIds) => roleIds.every((cardId) =>
 
 exports.containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId) => selectedCardIds.includes(cardId))
 
-exports.containsAnyOriginalIds = (players, ids) => ids.some(id => Object.values(players).some(player => player.card.original_id === id))
-
-exports.containsAllOriginalIds = (players, ids) => ids.every(id => Object.values(players).some(player => player.card.original_id === id))
-
 exports.getTokenByOriginalIds = (players, ids) => {
   let result = ""
 
@@ -201,4 +197,19 @@ exports.getTokensByOriginalIds = (players, ids) => {
 
 exports.getAllPlayerTokens = (players) => {
   return Object.keys(players)
+}
+
+exports.getPlayerNeighborsByToken = (players, token) => {
+  const tokens = Object.keys(players)
+  const playerCount = tokens.length
+  const playerNumber = players[token].player_number
+  const neighbors = []
+
+  const prevNeighborNumber = playerNumber === 1 ? playerCount : playerNumber - 1
+  const nextNeighborNumber = playerNumber === playerCount ? 1 : playerNumber + 1
+
+  neighbors.push(`player_${prevNeighborNumber}`)
+  neighbors.push(`player_${nextNeighborNumber}`)
+
+  return neighbors
 }

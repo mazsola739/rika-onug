@@ -13,11 +13,11 @@ exports.insomniac = (gameState, token) => {
     const roleHistory = {
       ...newGameState.actual_scene,
       show_cards: showCards,
-      card_or_mark_action: true,
     }
 
     newGameState.players[token].role_history = roleHistory
     newGameState.players[token].card.team = newGameState.card_positions[`player_${insomniacPlayerNumbers[0]}`]?.team
+
 
     role_interactions.push({
       type: INTERACTION,
@@ -52,8 +52,6 @@ exports.insomniac = (gameState, token) => {
   }
 
   newGameState.role_interactions = role_interactions
-
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   return newGameState
 }

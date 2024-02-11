@@ -9,14 +9,14 @@ exports.robber = (gameState, token) => {
 
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token);
 
-  const roleHistory = {
-    ...newGameState.actual_scene,
-    selectable_cards: selectablePlayerNumbers,
-    card_or_mark_action: false,
-  }
-
   if (!newGameState.players[token].card.shield) {
+    const roleHistory = {
+      ...newGameState.actual_scene,
+      selectable_cards: selectablePlayerNumbers,
+    }
+
     newGameState.players[token].role_history = roleHistory
+    newGameState.players[token].card_or_mark_action = false
 
     role_interactions.push({
       type: INTERACTION,
@@ -32,6 +32,13 @@ exports.robber = (gameState, token) => {
       player_number: newGameState.players[token]?.player_number,
     })
   } else if (newGameState.players[token].card.shield) {
+    const roleHistory = {
+      ...newGameState.actual_scene,
+    }
+
+    newGameState.players[token].role_history = roleHistory
+    newGameState.players[token].card_or_mark_action = false
+    
     role_interactions.push({
       type: INTERACTION,
       title: "ROBBER",

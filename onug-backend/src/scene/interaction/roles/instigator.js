@@ -6,7 +6,7 @@ exports.instigator = () => (gameState) => {
   return newGameState
 }
 
-exports.instigator_response = () => (gameState) => {
+exports.instigator_response = (gameState, token, selected_positions) => {
   const newGameState = { ...gameState }
 
   return newGameState

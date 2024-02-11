@@ -12,11 +12,10 @@ exports.sentinel = (gameState, token) => {
   const roleHistory = {
     ...newGameState.actual_scene,
     selectable_cards: selectablePlayerNumbers,
-    card_or_mark_action: false,
-
   }
 
   newGameState.players[token].role_history = roleHistory
+  newGameState.players[token].card_or_mark_action = false
 
   role_interactions.push({
     type: INTERACTION,
@@ -32,7 +31,7 @@ exports.sentinel = (gameState, token) => {
   return newGameState;
 };
 
-exports.sentinel_response = (gameState, token, selected_positions, ws) => {
+exports.sentinel_response = (gameState, token, selected_positions) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }

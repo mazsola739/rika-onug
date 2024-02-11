@@ -10,10 +10,10 @@ exports.apprenticetanner = (gameState, token) => {
 
   const roleHistory = {
     ...newGameState.actual_scene,
-    card_or_mark_action: false,
   }
 
   newGameState.players[token].role_history = roleHistory
+  newGameState.players[token].card_or_mark_action = false
 
   role_interactions.push({
     type: INTERACTION,
@@ -27,8 +27,6 @@ exports.apprenticetanner = (gameState, token) => {
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw tanner position(s): player ${tannerPlayerNumbers.join(', ')}`
 
   newGameState.role_interactions = role_interactions
-
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   return newGameState
 }

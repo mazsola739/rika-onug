@@ -11,10 +11,10 @@ exports.mysticwolf = (gameState, token) => {
   const roleHistory = {
     ...newGameState.actual_scene,
     selectable_cards: selectablePlayerNumbers,
-    card_or_mark_action: false,
   }
 
   newGameState.players[token].role_history = roleHistory
+  newGameState.players[token].card_or_mark_action = false
 
   role_interactions.push({
     type: INTERACTION,

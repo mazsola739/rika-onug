@@ -569,3 +569,148 @@ exports.sceneHandler = gameState => {
   
   return {}
 }
+
+
+//TODO check if its better
+
+/* const { roles } = require("./roles");
+const { instantRoleIds, doppelgangerInstantActionsIds } = require("./constants");
+const { logError } = require("../../log");
+const { checkConditions } = require("./check-conditions");
+const { getRolesNames } = require("./utils");
+
+const NARRATION = 'actual_scene.narration';
+
+exports.sceneHandler = gameState => {
+  const sceneTitle = gameState.actual_scene.scene_title;
+  const selectedCards = gameState.selected_cards;
+  const totalPlayers = gameState.players.length;
+  const conditions = checkConditions(selectedCards);
+
+  const sceneHandlers = {
+    "JOKE": () => ({ [NARRATION]: roles.joke() }),
+    "EPIC_BATTLE": () => conditions.hasEpicBattle ? { [NARRATION]: roles.epicbattle() } : null,
+    "ORACLE_QUESTION": () => handleRoleScene("oracle_question", conditions.hasOracle),
+    "ORACLE_REACTION": () => handleRoleScene("oracle_reaction", conditions.hasOracle),
+    "COPYCAT": () => handleRoleScene("copycat", conditions.hasCopycat),
+    "MIRROR_MAN": () => handleRoleScene("mirrorman", conditions.hasMirrorMan),
+    "DOPPELGÄNGER": () => handleRoleScene("doppelganger", conditions.hasDoppelganger),
+    "DOPPELGÄNGER_INSTANT_ACTION": () => handleDoppelgangerInstantActionScene(),
+    "VAMPIRES": () => handleRoleScene("vampires", conditions.hasAnyVampire),
+    "THE_COUNT": () => handleRoleScene("thecount", conditions.hasTheCount),
+    "DOPPELGÄNGER_THE_COUNT": () => handleRoleScene("doppelganger_thecount", conditions.hasDoppelganger && conditions.hasTheCount),
+    "RENFIELD": () => handleRoleScene("renfield", conditions.hasRenfield),
+    "DISEASED": () => handleRoleScene("diseased", conditions.hasDiseased),
+    "CUPID": () => handleRoleScene("cupid", conditions.hasCupid),
+    "INSTIGATOR": () => handleRoleScene("instigator", conditions.hasInstigator),
+    "PRIEST": () => handleRoleScene("priest", conditions.hasPriest),
+    "DOPPELGÄNGER_PRIEST": () => handleRoleScene("doppelganger_priest", conditions.hasDoppelganger && conditions.hasPriest),
+    "ASSASSIN": () => handleRoleScene("assassin", conditions.hasAssassin),
+    "DOPPELGÄNGER_ASSASSIN": () => handleRoleScene("doppelganger_assassin", conditions.hasDoppelganger && conditions.hasAssassin),
+    "APPRENTICE_ASSASSIN": () => handleRoleScene("apprenticeassassin", conditions.hasApprenticeAssassin),
+    "DOPPELGÄNGER_APPRENTICE_ASSASSIN": () => handleRoleScene("doppelganger_apprenticeassassin", conditions.hasDoppelganger && conditions.hasApprenticeAssassin),
+    "EVERYONE_MARK": () => handleRoleScene("everyonemark", conditions.hasMarks),
+    "LOVERS": () => handleRoleScene("lovers", conditions.hasCupid),
+    "SENTINEL": () => handleRoleScene("sentinel", conditions.hasSentinel),
+    "ALIENS": () => handleRoleScene("aliens", conditions.hasAnyAlien),
+    "COW": () => handleRoleScene("cow", conditions.hasCow),
+    "GROOB_ZERB": () => handleRoleScene("groobzerb", conditions.hasGroobAndZerb),
+    "LEADER": () => handleRoleScene("leader", conditions.hasLeader && conditions.hasAnyAlien),
+    "LEADER_ZERB_GROOB": () => handleRoleScene("leader_zerbgroob", conditions.hasLeader && conditions.hasGroobAndZerb),
+    "BODY_SNATCHER": () => handleRoleScene("bodysnatcher", conditions.hasBodySnatcher),
+    "DOPPELGÄNGER_BODY_SNATCHER": () => handleRoleScene("doppelganger_bodysnatcher", conditions.hasDoppelganger && conditions.hasBodySnatcher),
+    "SUPER_VILLAINS": () => handleRoleScene("supervillains", conditions.hasAnySuperVillains),
+    "TEMPTRESS": () => handleRoleScene("temptress", conditions.hasTemptress),
+    "DR_PEEKER": () => handleRoleScene("drpeeker", conditions.hasDrPeeker),
+    "RAPSCALLION": () => handleRoleScene("rapscallion", conditions.hasRapscallion),
+    "EVILOMETER": () => handleRoleScene("evilometer", conditions.hasEvilometer),
+    "WEREWOLVES": () => handleRoleScene("werewolves", conditions.hasAnyWerewolf),
+    "ALPHA_WOLF": () => handleRoleScene("alphawolf", conditions.hasAlphaWolf),
+    "MYSTIC_WOLF": () => handleRoleScene("mysticwolf", conditions.hasMysticWolf),
+    "MINION": () => handleRoleScene("minion", conditions.hasMinion),
+    "APPRENTICE_TANNER": () => handleRoleScene("apprenticetanner", conditions.hasApprenticeTanner && conditions.hasTanner),
+    "MAD_SCIENTIST": () => handleRoleScene("madscientist", conditions.hasMadScientist),
+    "INTERN": () => handleRoleScene("intern", conditions.hasIntern),
+    "MASONS": () => handleRoleScene("masons", conditions.hasMasons),
+    "THING": () => handleRoleScene("thing", conditions.hasThing),
+    "ANNOYING_LAD": () => handleRoleScene("annoyinglad", conditions.hasAnnoyingLad),
+    "SEER": () => handleRoleScene("seer", conditions.hasSeer),
+    "APPRENTICE_SEER": () => handleRoleScene("apprenticeseer", conditions.hasApprenticeSeer),
+    "PARANORMAL_INVESTIGATOR": () => handleRoleScene("paranormalinvestigator", conditions.hasParanormalInvestigator),
+    "MARKSMAN": () => handleRoleScene("marksman", conditions.hasMarksman),
+    "NOSTRADAMUS": () => handleRoleScene("nostradamus", conditions.hasNostradamus),
+    "NOSTRADAMUS_REACTION": () => handleNostradamusReactionScene(),
+    "PSYCHIC": () => handleRoleScene("psychic", conditions.hasPsychic),
+    "DOPPELGÄNGER_PSYCHIC": () => handleRoleScene("doppelganger_psychic", conditions.hasDoppelganger && conditions.hasPsychic),
+    "DETECTOR": () => handleRoleScene("detector", conditions.hasDetector),
+    "ROBBER": () => handleRoleScene("robber", conditions.hasRobber),
+    "WITCH": () => handleRoleScene("witch", conditions.hasWitch),
+    "PICKPOCKET": () => handleRoleScene("pickpocket", conditions.hasPickpocket),
+    "DOPPELGÄNGER_PICKPOCKET": () => handleRoleScene("doppelganger_pickpocket", conditions.hasDoppelganger && conditions.hasPickpocket),
+    "ROLE_RETRIEVER": () => handleRoleScene("roleretriever", conditions.hasRoleRetriever),
+    "VOODOO_LOU": () => handleRoleScene("voodoolou", conditions.hasVoodooLou),
+    "TROUBLEMAKER": () => handleRoleScene("troublemaker", conditions.hasTroublemaker),
+    "VILLAGE_IDIOT": () => handleRoleScene("villageidiot", conditions.hasVillageIdiot),
+    "AURA_SEER": () => handleRoleScene("auraseer", conditions.hasAuraSeer),
+    "GREMLIN": () => handleRoleScene("gremlin", conditions.hasGremlin),
+    "DOPPELGÄNGER_GREMLIN": () => handleRoleScene("doppelganger_gremlin", conditions.hasDoppelganger && conditions.hasGremlin),
+    "RASCAL": () => handleRoleScene("rascal", conditions.hasRascal),
+    "DOPPELGÄNGER_RASCAL": () => handleRoleScene("doppelganger_rascal", conditions.hasDoppelganger && conditions.hasRascal),
+    "SWITCHEROO": () => handleRoleScene("switcheroo", conditions.hasSwitcheroo),
+    "DRUNK": () => handleRoleScene("drunk", conditions.hasDrunk),
+    "INSOMNIAC": () => handleRoleScene("insomniac", conditions.hasInsomniac),
+    "SELF_AWARENESS_GIRL": () => handleRoleScene("selfawarenessgirl", conditions.hasSelfAwarenessGirl),
+    "SQUIRE": () => handleRoleScene("squire", conditions.hasSquire),
+    "BEHOLDER": () => handleRoleScene("beholder", conditions.hasBeholder),
+    "REVEALER": () => handleRoleScene("revealer", conditions.hasRevealer),
+    "DOPPELGÄNGER_REVEALER": () => handleRoleScene("doppelganger_revealer", conditions.hasDoppelganger && conditions.hasRevealer),
+    "EXPOSER": () => handleRoleScene("exposer", conditions.hasExposer),
+    "DOPPELGÄNGER_EXPOSER": () => handleRoleScene("doppelganger_exposer", conditions.hasDoppelganger && conditions.hasExposer),
+    "FLIPPER": () => handleRoleScene("flipper", conditions.hasFlipper),
+    "DOPPELGÄNGER_FLIPPER": () => handleRoleScene("doppelganger_flipper", conditions.hasDoppelganger && conditions.hasFlipper),
+    "EMPATH": () => handleRoleScene("empath", conditions.hasEmpath),
+    "DOPPELGÄNGER_EMPATH": () => handleRoleScene("doppelganger_empath", conditions.hasDoppelganger && conditions.hasEmpath),
+    "CURATOR": () => handleRoleScene("curator", conditions.hasCurator),
+    "DOPPELGÄNGER_CURATOR": () => handleRoleScene("doppelganger_curator", conditions.hasDoppelganger && conditions.hasCurator),
+    "BLOB": () => handleRoleScene("blob", conditions.hasBlob),
+    "MORTICIAN": () => handleRoleScene("mortician", conditions.hasMortician),
+    "DOPPELGÄNGER_MORTICIAN": () => handleRoleScene("doppelganger_mortician", conditions.hasMortician && conditions.hasDoppelganger),
+    "FAMILY_MAN": () => handleRoleScene("familyman", conditions.hasFamilyMan),
+    "RIPPLE": () => handleRoleScene("ripple", conditions.hasRipple),
+    // Add more scene handlers as needed...
+  };
+  
+  function handleRoleScene(roleName, condition) {
+    return condition ? { [NARRATION]: roles[roleName]() } : null;
+  }
+  
+  function handleDoppelgangerInstantActionScene() {
+    const instantRoles = getRolesNames(selectedCards, doppelgangerInstantActionsIds, instantRoleIds);
+    return conditions.hasDoppelganger && conditions.hasInstantAction ? { [NARRATION]: roles.doppelganger_instant_action(instantRoles) } : null;
+  }
+  
+  function handleNostradamusReactionScene() {
+    const lastViewedCardId = gameState.lastViewedCardId;
+    const nostradamusTeam = getTeamName(lastViewedCardId); // TODO it's undefined
+    return conditions.hasNostradamus ? { [NARRATION]: roles.nostradamus_reaction(nostradamusTeam) } : null;
+  }
+  
+
+  function handleRoleScene(roleName, condition) {
+    return condition ? { [NARRATION]: roles[roleName]() } : null;
+  }
+
+  function handleDoppelgangerInstantActionScene() {
+    const instantRoles = getRolesNames(selectedCards, doppelgangerInstantActionsIds, instantRoleIds);
+    return conditions.hasDoppelganger && conditions.hasInstantAction ? { [NARRATION]: roles.doppelganger_instant_action(instantRoles) } : null;
+  }
+
+  const handler = sceneHandlers[sceneTitle];
+  if (handler) {
+    return handler();
+  } else {
+    logError(`SCENE_HANDLER_DEFAULT case: no role found for sceneTitle ${sceneTitle}`);
+    return {};
+  }
+};
+ */

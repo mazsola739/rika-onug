@@ -6,4 +6,8 @@ exports.oracle = (gameState, token) => {
   return newGameState
 }
 
-exports.oracle_response = () => { }
+exports.oracle_response = (gameState, token, selected_positions) => {
+  const newGameState = { ...gameState }
+
+  return newGameState
+}

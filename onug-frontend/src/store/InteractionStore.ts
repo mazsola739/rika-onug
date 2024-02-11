@@ -71,6 +71,7 @@ class InteractionStore {
   }
 
   setInteraction(title: string): void {
+    this.resetInteraction()
     /* if (this.lastJsonMessage && title) {} */
     switch (title) {
       /*case "ALIENS":

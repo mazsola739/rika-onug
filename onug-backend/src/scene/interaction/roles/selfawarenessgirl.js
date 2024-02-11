@@ -13,11 +13,11 @@ exports.selfawarenessgirl = (gameState, token) => {
     const roleHistory = {
       ...newGameState.actual_scene,
       show_cards: showCards,
-      card_or_mark_action: true,
     }
 
     newGameState.players[token].role_history = roleHistory
     newGameState.players[token].card.team = newGameState.card_positions[`player_${selfawarenessgirlPlayerNumber[0]}`]?.team
+    newGameState.players[token].card_or_mark_action = false
 
     role_interactions.push({
       type: INTERACTION,

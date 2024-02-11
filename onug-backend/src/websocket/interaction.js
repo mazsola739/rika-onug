@@ -3,6 +3,7 @@ const { logDebug, logError } = require("../log")
 const { roles } = require("../scene/interaction/roles")
 const { repository } = require('../repository')
 const { websocketServerConnectionsPerRoom } = require("./connections")
+const { doppelganger_instant_action_response } = require("../scene/interaction/roles/doppelgangerinstantaction")
 const { readGameState, upsertRoomState } = repository
 
 exports.interaction = async (ws, message) => {
@@ -28,6 +29,7 @@ exports.interaction = async (ws, message) => {
 
 const generateInteractionResponse = (gameState, token, selected_positions, ws) => {
   const interaction_type = gameState?.players?.[token]?.role_history?.scene_title
+  logError('HAHÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓ',interaction_type)
   if (!interaction_type) {
     ws.send(JSON.stringify({
       type: INTERACTION,
@@ -35,7 +37,9 @@ const generateInteractionResponse = (gameState, token, selected_positions, ws) =
     }))
     return gameState
   }
-
+  
+  if (interaction_type === "DOPPELGÄNGER_INSTANT_ACTION") return doppelganger_instant_action_response(gameState, token, selected_positions)
+  
   if (interaction_type === "ALPHA_WOLF")      return roles.alphawolf_response(gameState, token, selected_positions)
   if (interaction_type === "APPRENTICE_SEER") return roles.apprenticeseer_response(gameState, token, selected_positions)
   if (interaction_type === "DOPPELGÄNGER")    return roles.doppelganger_response(gameState, token, selected_positions)

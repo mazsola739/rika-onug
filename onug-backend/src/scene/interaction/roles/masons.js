@@ -10,11 +10,11 @@ exports.masons = (gameState, tokens) => {
 
   const roleHistory = {
     ...newGameState.actual_scene,
-    card_or_mark_action: false,
   }
 
   tokens.forEach((token) => {
     newGameState.players[token].role_history = roleHistory
+    newGameState.players[token].card_or_mark_action = false
 
     role_interactions.push({
       type: INTERACTION,
@@ -29,8 +29,6 @@ exports.masons = (gameState, tokens) => {
   })
 
   newGameState.role_interactions = role_interactions
-
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   return newGameState
 }

@@ -13,10 +13,10 @@ exports.minion = (gameState, token) => {
   const roleHistory = {
     ...newGameState.actual_scene,
     werewolves: werewolfPlayerNumbers,
-    card_or_mark_action: false,
   }
 
   newGameState.players[token].role_history = roleHistory
+  newGameState.players[token].card_or_mark_action = false
 
   role_interactions.push({
     type: INTERACTION,
@@ -30,8 +30,6 @@ exports.minion = (gameState, token) => {
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw werewolf position(s): player ${werewolfPlayerNumbers.join(', ')}`
 
   newGameState.role_interactions = role_interactions
-
-  logInfo(`role_interactions: ${JSON.stringify(role_interactions)}`)
 
   return newGameState
 }
