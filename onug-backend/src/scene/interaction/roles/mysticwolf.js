@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens } = require("../utils")
+const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield } = require("../utils")
 
 //? INFO: Mystic Wolf - Wakes with other Werewolves. Wakes after and looks at any other player's card (not center or own)
 exports.mysticwolf = (gameState, token) => {
@@ -7,10 +7,11 @@ exports.mysticwolf = (gameState, token) => {
   const role_interactions = []
 
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
+  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
   const roleHistory = {
     ...newGameState.actual_scene,
-    selectable_cards: selectablePlayerNumbers,
+    selectable_cards: selectablePlayersWithNoShield,
   }
 
   newGameState.players[token].role_history = roleHistory
@@ -21,7 +22,7 @@ exports.mysticwolf = (gameState, token) => {
     title: "MYSTIC_WOLF",
     token,
     message: "interaction_mysticwolf",
-    selectable_cards: selectablePlayerNumbers,
+    selectable_cards: selectablePlayersWithNoShield,
     shielded_players: newGameState.shield,
   })
 
@@ -31,12 +32,14 @@ exports.mysticwolf = (gameState, token) => {
 }
 
 exports.mysticwolf_response = (gameState, token, selected_positions) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+  const { role_history } = gameState.players[token]
+  
+  if (!selected_positions.every(position => role_history.selectable_cards.includes(position))) return gameState
 
   const newGameState = { ...gameState }
   const role_interactions = []
 
-  showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
+  const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
 
   newGameState.players[token].role_history.show_cards = showCards
   newGameState.players[token].role_history.card_or_mark_action = true
@@ -51,8 +54,7 @@ exports.mysticwolf_response = (gameState, token, selected_positions) => {
   })
 
   newGameState.role_interactions = role_interactions
-
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card on the next position: ${selected_positions[0]}`
+  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed the card at position: ${selected_positions[0]}`
 
   return newGameState
 }

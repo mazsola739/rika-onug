@@ -1,3 +1,4 @@
+const { INTERACTION, MESSAGE } = require("../../../constant/ws")
 const { getPlayerNeighborsByToken, getPlayerTokenByPlayerNumber } = require("../utils")
 
 //? INFO: Thing - Taps the nearest shoulder of the player on their immediate right or left //THING, ANNOYING_LAD
@@ -29,15 +30,17 @@ exports.annoyinglad = (gameState, token) => {
   return newGameState
 }
 
-exports.annoyinglad_response = (gameState, token, selected_positions) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false ) return gameState
+exports.annoyinglad_response = (gameState, token, selected_positions, websocketServerConnectionsPerRoom) => {
+  const { players, shield, room_id } = gameState
+
+  if (!players[token].role_history.selectable_cards.includes(selected_positions[0])) return gameState
   
-  const newGameState = {...gameState}
+  const newGameState = { ...gameState }
   const role_interactions = []
 
-  const tappedPlayerToken = getPlayerTokenByPlayerNumber(newGameState.players, selected_positions[0])
+  const tappedPlayerToken = getPlayerTokenByPlayerNumber(players, selected_positions[0])
 
-  websocketServerConnectionsPerRoom[newGameState.room_id][tappedPlayerToken].send(JSON.stringify({
+  websocketServerConnectionsPerRoom[room_id][tappedPlayerToken].send(JSON.stringify({
     type: MESSAGE,
     message: "You got tapped by your neighbor"
   }))
@@ -50,12 +53,12 @@ exports.annoyinglad_response = (gameState, token, selected_positions) => {
     token,
     message: "interaction_annoyinglad2",
     tapped_player: selected_positions[0],
-    shielded_players: newGameState.shield,
+    shielded_players: shield,
   })
   
   newGameState.role_interactions = role_interactions
 
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} tapped their neighbor on the next position: ${selected_positions[0]}`
+  newGameState.actual_scene.interaction = `The player ${players[token].player_number} tapped their neighbor on the next position: ${selected_positions[0]}`
 
   return newGameState
 }

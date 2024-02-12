@@ -31,7 +31,7 @@ export type WsJsonMessage = {
   selectable_cards?: string[]
   shielded_players?: string[]
   shielded_card?: string
-  swapped_cards?: string[]
+  flipped_cards?: Record<string, number>[]
   show_cards?: Record<string, number>[]
   new_role_id?: number
   werewolves?: string[]

@@ -10,16 +10,12 @@ exports.werewolves = (gameState, tokens) => {
 
   const werewolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens)
   const dreamWolfPlayerNumber = getDreamWolfPlayerNumberByRoleIds(newGameState.players)
-
   const loneWolf = werewolfPlayerNumbers.length + dreamWolfPlayerNumber.length === 1
 
-  const roleHistory = {
-    ...newGameState.actual_scene,
-    selectable_cards: loneWolf ? centerCardPositions : [],
-  }
+  const selectableCards = loneWolf ? centerCardPositions : []
 
   tokens.forEach((token) => {
-
+    const roleHistory = { ...newGameState.actual_scene, selectable_cards: selectableCards }
 
     newGameState.players[token].role_history = roleHistory
     newGameState.players[token].card_or_mark_action = false
@@ -30,11 +26,13 @@ exports.werewolves = (gameState, tokens) => {
       token,
       message: loneWolf ? "interaction_lonewolf" : "interaction_werewolves",
       werewolves: werewolfPlayerNumbers,
-      selectable_cards: loneWolf ? centerCardPositions : [],
+      selectable_cards: selectableCards,
       shielded_players: newGameState.shield,
     })
 
-    if (!loneWolf) newGameState.actual_scene.interaction = `The Werewolves saw werewolf position(s): player ${werewolfPlayerNumbers.join(', ')} and dream wolf position(s): player ${dreamWolfPlayerNumber.join(', ')}`
+    if (!loneWolf) {
+      newGameState.actual_scene.interaction = `The Werewolves saw werewolf position(s): player ${werewolfPlayerNumbers.join(', ')} and dream wolf position(s): player ${dreamWolfPlayerNumber.join(', ')}`
+    }
   })
 
   newGameState.role_interactions = role_interactions
@@ -43,10 +41,10 @@ exports.werewolves = (gameState, tokens) => {
 }
 
 exports.werewolves_response = (gameState, token, selected_positions) => {
-  if (selected_positions.every(position => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
-  const role_interactions = []
+  if (selected_positions.some(position => !gameState.players[token].role_history.selectable_cards.includes(position))) return gameState
 
   const newGameState = { ...gameState }
+  const role_interactions = []
 
   const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
 

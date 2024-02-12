@@ -23,29 +23,26 @@ exports.doppelganger = (gameState, token) => {
     message: "interaction_doppelganger",
     selectable_cards: selectablePlayerNumbers,
     shielded_players: newGameState.shield,
-    player_name: newGameState.players[token]?.name,
-    player_original_id: newGameState.players[token]?.card?.original_id,
-    player_card_id: newGameState.players[token]?.card?.id,
-    player_role: newGameState.players[token]?.card?.role,
-    player_role_id: newGameState.players[token]?.card?.role_id,
-    player_team: newGameState.players[token]?.card?.team,
+    ...newGameState.players[token]?.card,
     player_number: newGameState.players[token]?.player_number,
   })
   
-  newGameState.role_interactions = role_interactions
+  newGameState.role_interactions = [...role_interactions]
 
   return newGameState
 }
 
 exports.doppelganger_response = (gameState, token, selected_positions) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+  if (!selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position))) return gameState
   
-  const newGameState = {...gameState}
+  const newGameState = { ...gameState }
   const role_interactions = []
 
-  newGameState.players[token].card.role_id =  newGameState.card_positions[selected_positions[0]].id
-  newGameState.players[token].card.role =   newGameState.card_positions[selected_positions[0]].role
-  newGameState.players[token].card.team =   newGameState.card_positions[selected_positions[0]].team
+  const selectedPositionCard = newGameState.card_positions[selected_positions[0]]
+
+  newGameState.players[token].card.role_id = selectedPositionCard.id
+  newGameState.players[token].card.role = selectedPositionCard.role
+  newGameState.players[token].card.team = selectedPositionCard.team
   
   const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
 
@@ -60,19 +57,13 @@ exports.doppelganger_response = (gameState, token, selected_positions) => {
     message: "interaction_doppelganger2",
     show_cards: showCards,
     new_role_id: newGameState.players[token].card.role_id,
-    player_name: newGameState.players[token]?.name,
-    player_original_id: newGameState.players[token]?.card?.original_id,
-    player_card_id: newGameState.players[token]?.card?.id,
-    player_role: newGameState.players[token]?.card?.role,
-    player_role_id: newGameState.players[token]?.card?.role_id,
-    player_team: newGameState.players[token]?.card?.team,
+    ...newGameState.players[token]?.card,
     player_number: newGameState.players[token]?.player_number,
   })
 
-  newGameState.role_interactions = role_interactions
+  newGameState.role_interactions = [...role_interactions]
 
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} copied card on the next position: ${selected_positions[0]}`
+  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} copied the card from the next position: ${selected_positions[0]}`
 
   return newGameState
 }
-

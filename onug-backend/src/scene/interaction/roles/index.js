@@ -29,7 +29,6 @@ const { alphawolf, alphawolf_response }                       = require("./alpha
 const { mysticwolf, mysticwolf_response }                     = require("./mysticwolf")
 const { minion }                                              = require("./minion")
 const { apprenticetanner }                                    = require("./apprenticetanner")
-const { madscientist }                                        = require("./madscientist")
 const { intern }                                              = require("./intern")
 const { masons }                                              = require("./masons")
 const { thing, thing_response }                               = require("./thing")
@@ -102,7 +101,6 @@ exports.roles = {
   mysticwolf, mysticwolf_response,
   minion,
   apprenticetanner,
-  madscientist,
   intern,
   masons,
   thing, thing_response,

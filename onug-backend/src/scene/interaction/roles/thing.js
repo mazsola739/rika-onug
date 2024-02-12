@@ -32,16 +32,19 @@ exports.thing = (gameState, token) => {
 }
 
 exports.thing_response = (gameState, token, selected_positions) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false ) return gameState
-  
-  const newGameState = {...gameState}
+  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) {
+    // Log an error or handle the invalid selection here
+    return gameState
+  }
+
+  const newGameState = { ...gameState }
   const role_interactions = []
 
   const tappedPlayerToken = getPlayerTokenByPlayerNumber(newGameState.players, selected_positions[0])
 
   websocketServerConnectionsPerRoom[newGameState.room_id][tappedPlayerToken].send(JSON.stringify({
     type: MESSAGE,
-    message: "You got tapped by your neighbor"
+    message: "You got tapped by your neighbor",
   }))
 
   newGameState.players[token].role_history.tapped_player = selected_positions[0]
@@ -54,7 +57,7 @@ exports.thing_response = (gameState, token, selected_positions) => {
     tapped_player: selected_positions[0],
     shielded_players: newGameState.shield,
   })
-  
+
   newGameState.role_interactions = role_interactions
 
   newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} tapped their neighbor on the next position: ${selected_positions[0]}`

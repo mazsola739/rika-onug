@@ -1,7 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens } = require("../utils")
+const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield } = require("../utils")
 const { centerCardPositions } = require("../constants")
-
 
 //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
 exports.seer = (gameState, token) => {
@@ -9,11 +8,12 @@ exports.seer = (gameState, token) => {
   const role_interactions = []
 
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
+  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
   const roleHistory = {
     ...newGameState.actual_scene,
     selectable_center_cards: centerCardPositions,
-    selectable_player_cards: selectablePlayerNumbers,
+    selectable_player_cards: selectablePlayersWithNoShield,
   }
 
   newGameState.players[token].role_history = roleHistory
@@ -25,7 +25,7 @@ exports.seer = (gameState, token) => {
     token,
     message: "interaction_seer",
     selectable_center_cards: centerCardPositions,
-    selectable_player_cards: selectablePlayerNumbers,
+    selectable_player_cards: selectablePlayersWithNoShield,
     shielded_players: newGameState.shield,
     player_name: newGameState.players[token]?.name,
     player_original_id: newGameState.players[token]?.card?.original_id,
@@ -36,14 +36,13 @@ exports.seer = (gameState, token) => {
     player_number: newGameState.players[token]?.player_number,
   })
 
-
   newGameState.role_interactions = role_interactions
 
   return newGameState
 }
 
 exports.seer_response = (gameState, token, selected_positions) => {
-  const playerCards = selected_positions.some(pos => pos.includes("player_"))
+  const playerCards = selected_positions.some(pos => pos.includes("player"))
   const centerCards = selected_positions.some(pos => pos.includes("center"))
 
   let showCards = []
@@ -87,3 +86,4 @@ exports.seer_response = (gameState, token, selected_positions) => {
 
   return newGameState
 }
+

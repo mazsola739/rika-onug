@@ -4,7 +4,7 @@ const { centerCardPositions } = require("../constants")
 
 //? INFO: Apprentice Seer - looks at one card from the center (not another players or her own)
 exports.apprenticeseer = (gameState, token) => {
-  const newGameState = {...gameState}
+  const newGameState = { ...gameState }
   const role_interactions = []
 
   const roleHistory = {
@@ -30,9 +30,11 @@ exports.apprenticeseer = (gameState, token) => {
 }
 
 exports.apprenticeseer_response = (gameState, token, selected_positions) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false ) return gameState
-  
-  const newGameState = {...gameState}
+  const { players, shield } = gameState
+
+  if (!players[token].role_history.selectable_cards.includes(selected_positions[0])) return gameState
+
+  const newGameState = { ...gameState }
   const role_interactions = []
 
   const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
@@ -46,12 +48,12 @@ exports.apprenticeseer_response = (gameState, token, selected_positions) => {
     token,
     message: "interaction_apprenticeseer2",
     show_cards: showCards,
-    shielded_players: newGameState.shield,
+    shielded_players: shield,
   })
-  
+
   newGameState.role_interactions = role_interactions
 
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card on the next position: ${selected_positions[0]}`
+  newGameState.actual_scene.interaction = `The player ${players[token].player_number} viewed a card in the next position: ${selected_positions[0]}`
 
   return newGameState
 }

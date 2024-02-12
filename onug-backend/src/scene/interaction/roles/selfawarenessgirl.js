@@ -1,14 +1,14 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens, getTokensByRoleIds } = require("../utils");
+const { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens } = require("../utils")
 
-//? INFO: SAME AS INSOMNIAC! Self-Awareness Girl – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
-exports.selfawarenessgirl = (gameState, token) => {
+//? INFO: SELF_AWARENESS_GIRL – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
+exports.self_awareness_girl = (gameState, token) => {
   const newGameState = { ...gameState }
-  const role_interactions = [];
+  const role_interactions = []
 
   if (!newGameState.players[token].card.shield) {
-    const selfawarenessgirlPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token]);
-    const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, selfawarenessgirlPlayerNumber);
+    const selfAwarenessGirlPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, selfAwarenessGirlPlayerNumbers)
 
     const roleHistory = {
       ...newGameState.actual_scene,
@@ -16,7 +16,7 @@ exports.selfawarenessgirl = (gameState, token) => {
     }
 
     newGameState.players[token].role_history = roleHistory
-    newGameState.players[token].card.team = newGameState.card_positions[`player_${selfawarenessgirlPlayerNumber[0]}`]?.team
+    newGameState.players[token].card.team = newGameState.card_positions[`player_${selfAwarenessGirlPlayerNumbers[0]}`]?.team
     newGameState.players[token].card_or_mark_action = false
 
     role_interactions.push({
@@ -29,7 +29,7 @@ exports.selfawarenessgirl = (gameState, token) => {
     })
 
     newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed their card`
-  } else if (newGameState.players[token].card.shield) {
+  } else {
     role_interactions.push({
       type: INTERACTION,
       title: "SELF_AWARENESS_GIRL",
@@ -43,5 +43,5 @@ exports.selfawarenessgirl = (gameState, token) => {
 
   newGameState.role_interactions = role_interactions
 
-  return newGameState;
-};
+  return newGameState
+}

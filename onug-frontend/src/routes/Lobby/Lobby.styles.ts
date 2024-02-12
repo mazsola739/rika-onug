@@ -34,7 +34,8 @@ export const StyledRoomButton = styled.button<StyledLobbyProps>`
 
   &:hover {
     transition: 0.75s;
-    background: ${({ index }) => darken(generateRainbowColor(index), 15)};
+    border: 5px solid ${({ index }) => darken(generateRainbowColor(index), 15)};
+    filter: drop-shadow(8px 5px 5px black);
   }
 `
 

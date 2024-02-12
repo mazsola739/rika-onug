@@ -24,7 +24,7 @@ exports.apprenticetanner = (gameState, token) => {
     shielded_players: newGameState.shield,
   })
 
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw tanner position(s): player ${tannerPlayerNumbers.join(', ')}`
+  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw the position(s) of Tanner(s): ${tannerPlayerNumbers.join(", ")}`
 
   newGameState.role_interactions = role_interactions
 

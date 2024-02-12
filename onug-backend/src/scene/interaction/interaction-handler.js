@@ -302,13 +302,6 @@ exports.interactionHandler = (gameState) => {
       }
       break /*
 
-    case "MAD_SCIENTIST": 
-      if (conditions.hasMadScientistPlayer) {
-        token = getTokenByOriginalIds(players, [1])
-        return roles.madscientist(newGameState, token)
-      }
-      break
-
     case "INTERN": 
       if (conditions.hasInternPlayer) {
         token = getTokenByOriginalIds(players, [1])
@@ -529,19 +522,19 @@ exports.interactionHandler = (gameState) => {
         token = getTokenByOriginalIds(players, [1])
         return roles.beholder(newGameState, token)
       }
-      break
+      break */
 
     case "REVEALER":  //! FLIPPED
       if (conditions.hasRevealerPlayer) {
-        token = getTokenByOriginalIds(players, [1])
+        token = getTokenByOriginalIds(players, [24])
         return roles.revealer(newGameState, token)
       }
-      break
+      break /*
 
-    case "DOPPELGÄNGER_REVEALER": //! FLIPPED}
+    case "DOPPELGÄNGER_REVEALER": //! FLIPPED //TODO
       if (conditions.hasDoppelgangerPlayer && conditions.hasRevealerPlayer) {
         token = getTokenByOriginalIds(players, [1])
-        return roles.doppelganger_revealer(newGameState, token) 
+        return roles.revealer(newGameState, token) 
     break
 
     case "EXPOSER":  //! FLIPPED

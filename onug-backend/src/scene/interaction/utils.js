@@ -10,38 +10,12 @@ exports.hasDoppelganger = players => {
   return false
 }
 
-exports.getTokensByCardIds = (players, cardIds) => {
-  const result = []
-
-  for (const token in players) {
-    if (cardIds.includes(players?.[token]?.card.id)) {
-      result.push(token)
-    }
-  }
-
-  return result
-}
-
 exports.getTokensByRoleIds = (players, roleIds) => {
   const result = []
 
   for (const token in players) {
     if (roleIds.includes(players?.[token]?.card?.role_id)) {
       result.push(token)
-    }
-  }
-
-  return result
-}
-
-exports.getDoppelgangerTokenByRoleIds = (players, roleIds) => {
-  const result = []
-
-  for (const token in players) {
-    if (players[token].card.role_id === 1) {
-      if (roleIds.includes(players[token].card.role_id) && players[token].card.id === 1) {
-        result.push(token)
-      }
     }
   }
 
@@ -65,18 +39,6 @@ exports.getTannerNumberByRoleIds = players => {
 
   for (const token in players) {
     if (players[token].card.role_id === 10) {
-      result.push(`player_${players[token].player_number}`)
-    }
-  }
-
-  return result
-}
-
-exports.getDreamWolfPlayerNumberByRoleIds = players => {
-  const result = []
-
-  for (const token in players) {
-    if (players[token].card.role_id === 21) {
       result.push(`player_${players[token].player_number}`)
     }
   }
@@ -214,6 +176,34 @@ exports.getPlayerNeighborsByToken = (players, token) => {
   return neighbors
 }
 
-exports.getSelectablePlayersWithNoShield = (players, shielded_players) => {
-  return players.filter(item => !shielded_players.includes(item));
+exports.getSelectablePlayersWithNoShield = (players, shielded_players) => players.filter(player => !shielded_players.includes(player))
+
+exports.isPlayersCardsFlipped = (flipped, playersPositions) =>  Object.keys(flipped).some(key => playersPositions.includes(key))
+
+exports.flippedCardIds = (flipped) => flipped.map(obj => Object.values(obj)[0])
+
+
+
+exports.getTokenByCardId = (players, cardId) => {
+  for (const token in players) {
+    if (players?.[token]?.card.id === cardId) {
+      return token
+    }
+  }
+
+  return null
 }
+
+exports.getDoppelgangerTokenByRoleId = (players, roleId) => {
+  for (const token in players) {
+    if (
+      players[token].card.role_id === roleId &&
+      players[token].card.id === 1
+    ) {
+      return token
+    }
+  }
+
+  return null
+}
+

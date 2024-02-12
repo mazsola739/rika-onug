@@ -52,26 +52,27 @@ class DeckStore {
 
   setSelectedCard(cardIds: number[]): void {
     this.selectedCards = cardIds.map((cardId) => this.getCardById(cardId))
-    this.updateSelectedMarks()
+    /* this.updateSelectedMarks() */
   }
 
   resetSelection(): void {
     this.selectedCards = []
     roomStore.resetDetailedCardInfo()
-    this.updateSelectedMarks()
+    /* this.updateSelectedMarks() */
   }
 
   handleSelectCard(card: CardType): void {
     selectCard(this.selectedCards, card)
-    this.updateSelectedMarks()
+    /* this.updateSelectedMarks() */
   }
 
   handleDeselectCard(card: CardType): void {
     deselectCard(this.selectedCards, card)
-    this.updateSelectedMarks()
+    /* this.updateSelectedMarks() */
   }
 
   updateSelectedMarks(): void {
+    //TODO bug
     this.selectedMarks = this.marks.filter((mark) => {
       switch (mark.token_name) {
         case 'mark_of_vampire':
