@@ -32,3 +32,4 @@ exports.STOP_GAME          = "STOP_GAME"
 exports.ERROR              = "ERROR"
 
 exports.INTERACTION        = "INTERACTION"
+exports.MESSAGE            = "MESSAGE"

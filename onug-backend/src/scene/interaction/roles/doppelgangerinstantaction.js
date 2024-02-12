@@ -17,7 +17,7 @@ const {
 exports.doppelganger_instant_action = (gameState, token) => {
   const new_role_id = gameState.players[token]?.role_history?.new_role_id
 
-  if (!doppelgangerInstantActionsIds.includes(new_role_id)) return
+  if (!doppelgangerInstantActionsIds.includes(new_role_id)) return gameState
 
   const newGameState = { ...gameState }
   const role_interactions = []
@@ -110,10 +110,10 @@ exports.doppelganger_instant_action_response = (gameState, token, selected_posit
   if (role === "robber")                 return roles.robber_response(newGameState, token, selected_positions)
 //if (role === "roleretriever")          return roles.roleretriever_response(newGameState, token, selected_positions)
   if (role === "seer")                   return roles.seer_response(newGameState, token, selected_positions)
-//if (role === "sentinel")               return roles.sentinel_response(newGameState, token, selected_positions)
+  if (role === "sentinel")               return roles.sentinel_response(newGameState, token, selected_positions)
 //if (role === "switcheroo")             return roles.switcheroo_response(newGameState, token, selected_positions)
 //if (role === "temptress")              return roles.temptress_response(newGameState, token, selected_positions)
-//if (role === "thing")                  return roles.thing_response(newGameState, token, selected_positions)
+  if (role === "thing")                  return roles.thing_response(newGameState, token, selected_positions)
   if (role === "troublemaker")           return roles.troublemaker_response(newGameState, token, selected_positions)
 //if (role === "village_idiot")          return roles.villageidiot_response(newGameState, token, selected_positions)
 //if (role === "voodoo_lou")             return roles.voodoolou_response(newGameState, token, selected_positions)

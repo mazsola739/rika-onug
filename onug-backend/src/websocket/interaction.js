@@ -49,6 +49,8 @@ const generateInteractionResponse = (gameState, token, selected_positions, ws) =
   if (interaction_type === "MYSTIC_WOLF")     return roles.mysticwolf_response(newGameState, token, selected_positions)
   if (interaction_type === "ROBBER")          return roles.robber_response(newGameState, token, selected_positions)
   if (interaction_type === "SEER")            return roles.seer_response(newGameState, token, selected_positions)  
+  if (interaction_type === "SENTINEL")        return roles.sentinel_response(newGameState, token, selected_positions)  
+  if (interaction_type === "THING")           return roles.thing_response(newGameState, token, selected_positions)
   if (interaction_type === "TROUBLEMAKER")    return roles.troublemaker_response(newGameState, token, selected_positions)
   if (interaction_type === "WEREWOLVES")      return roles.werewolves_response(newGameState, token, selected_positions)
 

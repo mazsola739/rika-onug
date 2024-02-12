@@ -134,7 +134,7 @@ exports.getCardIdsByPositions = (cardPositions, selectedPositions) => {
 
 exports.getPlayerTokenByPlayerNumber = (players, player) => {
   const result = []
-  const playerNumber = player.match(/\d+/)
+  const playerNumber = parseInt(player.match(/\d+/)[0])
 
   for (const token in players) {
     if (players[token].player_number === playerNumber) {

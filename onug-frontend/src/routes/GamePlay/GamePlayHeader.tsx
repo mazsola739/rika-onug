@@ -20,6 +20,7 @@ export const GamePlayHeader: React.FC = observer(() => {
       </NarrationImage>
       <Narration> {narration}</Narration>
       <TimerContainer>
+        <p>Time remaining:</p>
         <Timer startingTime={startingTime} actionTime={8000} />
       </TimerContainer>
     </StyledGamePlayHeader>

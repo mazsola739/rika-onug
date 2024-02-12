@@ -15,7 +15,7 @@ const renderPlayerCards = () => {
     <CardContainer>
       <PlayersCards>
         {playerCards.map(
-          ({ position, id, ready, werewolf, selectable, mason }) => (
+          ({ position, id, ready, werewolf, selectable, mason, shield }) => (
             <GameCard
               key={position}
               isCenter={false}
@@ -25,6 +25,7 @@ const renderPlayerCards = () => {
               werewolf={werewolf}
               selectable={selectable}
               mason={mason}
+              shield={shield}
             />
           )
         )}

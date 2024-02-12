@@ -40,8 +40,6 @@ export const Timer: React.FC<TimerProps> = observer(
       return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`
     }
 
-    return (
-      <StyledTimer>Time remaining: {formatTime(remainingTime)}</StyledTimer>
-    )
+    return <StyledTimer>{formatTime(remainingTime)}</StyledTimer>
   }
 )

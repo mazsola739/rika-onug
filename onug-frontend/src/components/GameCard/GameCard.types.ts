@@ -3,6 +3,7 @@ export interface GameCardProps {
   position: string
   ready?: boolean
   isCenter: boolean
+  shield?: boolean
   werewolf?: boolean
   selectable?: boolean
   mason?: boolean

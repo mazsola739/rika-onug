@@ -35,8 +35,12 @@ exports.annoyinglad_response = (gameState, token, selected_positions) => {
   const newGameState = {...gameState}
   const role_interactions = []
 
-  const tapPlayer = getPlayerTokenByPlayerNumber(newGameState.players, selected_positions[0])
-   //TODO tap player
+  const tappedPlayerToken = getPlayerTokenByPlayerNumber(newGameState.players, selected_positions[0])
+
+  websocketServerConnectionsPerRoom[newGameState.room_id][tappedPlayerToken].send(JSON.stringify({
+    type: MESSAGE,
+    message: "You got tapped by your neighbor"
+  }))
 
   newGameState.players[token].role_history.tapped_player = selected_positions[0]
 

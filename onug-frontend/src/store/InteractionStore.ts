@@ -7,6 +7,8 @@ import {
   minionStore,
   robberStore,
   seerStore,
+  sentinelStore,
+  thingStore,
   troublemakerStore,
   werewolvesStore,
 } from './roleStores'
@@ -363,11 +365,11 @@ class InteractionStore {
       case "SELF_AWARENESS_GIRL":
          selfawarenessgirlStore.openYourEyes(this.lastJsonMessage)
       
-      break;
-      case "SENTINEL":
-         sentinelStore.openYourEyes(this.lastJsonMessage)
-      
-      break;
+      break; */
+      case 'SENTINEL':
+        sentinelStore.openYourEyes(this.lastJsonMessage)
+
+        break /*
       case "SQUIRE":
          squireStore.openYourEyes(this.lastJsonMessage)
       
@@ -391,11 +393,11 @@ class InteractionStore {
       case "DOPPELGÄNGER_THE_COUNT":
          thecountStore.openYourEyes(this.lastJsonMessage)
       
-      break;
-      case "THING":
-         thingStore.openYourEyes(this.lastJsonMessage)
-      
       break;*/
+      case 'THING':
+        thingStore.openYourEyes(this.lastJsonMessage)
+
+        break
       case 'TROUBLEMAKER':
         troublemakerStore.openYourEyes(this.lastJsonMessage)
 

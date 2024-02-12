@@ -16,16 +16,17 @@ exports.startGame = async (message) => {
 
   if (!roomIdValid) return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
 
+  
   const startTime = Date.now()
   let newGameState = {
     ...gameState,
     stage: STAGES.GAME_PLAY,
     game_play_start_time: startTime,
     actual_scene: {
-      scene_title: "JOKE",
+      scene_title: "GAME_START",
       scene_number: 0,
       scene_start_time: startTime,
-      narration: [], //TODO RANDOM JOKE
+      narration: [],
     },
   }
 

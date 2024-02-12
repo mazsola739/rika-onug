@@ -6,6 +6,8 @@ const { logTrace } = require("../log")
 const { narration, interaction } = require("../scene")
 const { STAGES } = require("../constant/stage")
 
+//TODO set tickTime each narration different
+
 const tickTime = 8000
 
 exports.stopGamePlay = gameState => {
@@ -28,8 +30,8 @@ exports.stopGamePlay = gameState => {
     delete gameState.card_positions
     gameState.action_history = [
       {
-          "scene_title": "JOKE",
-          "scene_number": 0
+        "scene_title": "GAME_START",
+        "scene_number": 0
       }]
 
     delete gameState.game_play_start_time

@@ -76,6 +76,7 @@ export type GamePlayBoardCardType = {
     id: number
     artifact: boolean
     shield: boolean
+    shielded: boolean
     selectable: boolean
     werewolf: boolean
     mason: boolean
@@ -116,6 +117,7 @@ export type PositionProperties = {
   id?: number
   artifact?: boolean
   shield?: boolean
+  shielded?: boolean
   ready?: boolean
   werewolf?: boolean
   selectable?: boolean

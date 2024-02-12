@@ -6,7 +6,7 @@ import { deckStore, gameTableStore, interactionStore } from 'store'
 import { Icon, Token } from 'components'
 
 export const GameCard: React.FC<GameCardProps> = observer(
-  ({ position, id, isCenter, ready, werewolf, selectable, mason }) => {
+  ({ position, id, isCenter, ready, werewolf, selectable, mason, shield }) => {
     const [isSelected, setIsSelected] = useState(false)
     const { hasMarks } = gameTableStore
     const card = id === 0 ? '' : deckStore.getCardById(id)
@@ -15,6 +15,8 @@ export const GameCard: React.FC<GameCardProps> = observer(
       card && card.id !== 0
         ? `/assets/cards/${card.card_name}.png`
         : '/assets/backgrounds/card_back.png'
+
+    console.log(`${position}: `, shield)
 
     const clickHandler = (cardType: string) => {
       const maxCenterCardSelection = interactionStore.selectableCenterCardLimit
@@ -65,6 +67,7 @@ export const GameCard: React.FC<GameCardProps> = observer(
         <Tokens>
           {!isCenter && <Token tokenName={playerTokenName} size={35} />}
           {!isCenter && hasMarks && <Token tokenName={'mark_back'} size={35} />}
+          {!isCenter && shield && <Icon iconName="shield" size={33} />}
           {!isCenter && werewolf && <Icon iconName="werewolf" size={33} />}
           {!isCenter && mason && <Icon iconName="mason" size={33} />}
         </Tokens>

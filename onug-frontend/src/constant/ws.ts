@@ -29,6 +29,7 @@ export const STOP_GAME = 'STOP_GAME'
 export const PAUSE_GAME = 'PAUSE_GAME'
 
 export const INTERACTION = 'INTERACTION'
+export const MESSAGE = 'MESSAGE'
 
 export const STAGES = {
   LOBBY: 'LOBBY',

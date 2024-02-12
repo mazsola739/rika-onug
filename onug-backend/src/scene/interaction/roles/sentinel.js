@@ -1,4 +1,5 @@
-const { INTERACTION } = require("../../../constant/ws")
+const { INTERACTION } = require("../../../constant/ws");
+const { logError } = require("../../../log");
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber } = require("../utils");
 
 
@@ -7,7 +8,7 @@ exports.sentinel = (gameState, token) => {
   const newGameState = { ...gameState };
   const role_interactions = [];
 
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, sentinelTokens);
+  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token);
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -38,6 +39,7 @@ exports.sentinel_response = (gameState, token, selected_positions) => {
   const role_interactions = [];
 
   newGameState.shield.push(selected_positions[0])
+  logError('___________________________SHIELD: ',newGameState.shield)
 
   const shieldedPlayers = newGameState.shield
   const shieldedPlayerTokens = shieldedPlayers.map(player => getPlayerTokenByPlayerNumber(newGameState.players, player))
@@ -59,7 +61,7 @@ exports.sentinel_response = (gameState, token, selected_positions) => {
 
   newGameState.role_interactions = role_interactions
 
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} placed shield on the next position: ${selected_positions[0]}`
+  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} placed a shield on the next position: ${selected_positions[0]}`
 
   return newGameState
 };

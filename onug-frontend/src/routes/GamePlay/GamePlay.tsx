@@ -11,6 +11,7 @@ import {
   ARRIVE_GAME_PLAY,
   HYDRATE_GAME_PLAY,
   INTERACTION,
+  MESSAGE,
   REDIRECT,
   STAGES,
 } from 'constant'
@@ -59,6 +60,9 @@ export const GamePlay: React.FC = observer(() => {
       gamePlayStore.setStartingTime(
         lastJsonMessage.actual_scene.scene_start_time
       )
+    }
+    if (lastJsonMessage?.type === MESSAGE) {
+      console.log(lastJsonMessage.message)
     }
     if (lastJsonMessage?.type === INTERACTION) {
       interactionStore.setLastJsonMessage(lastJsonMessage)

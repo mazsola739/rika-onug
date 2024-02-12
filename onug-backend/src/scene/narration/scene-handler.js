@@ -12,16 +12,10 @@ exports.sceneHandler = gameState => {
   const sceneTitle    = gameState.actual_scene.scene_title
   const selectedCards = gameState.selected_cards
   const totalPlayers  = gameState.players.length
-  
   const conditions    = checkConditions(selectedCards)
 
   switch (sceneTitle) {
-    case "JOKE":
-      return {
-        [NARRATION]: roles.joke()
-      }
-
-    case "EPIC_BATTLE":
+   case "EPIC_BATTLE":
       if (conditions.hasEpicBattle) return {
         [NARRATION]: roles.epicbattle()
       }
@@ -559,6 +553,11 @@ exports.sceneHandler = gameState => {
       }
       break
     //! D A Y
+    case "JOKE":
+      return {
+        [NARRATION]: roles.joke(totalPlayers, conditions.nobadguys, conditions.nogoodguys)
+      }
+
     /*  INVESTIGATION":
         VOTE":
         WINNERS":*/

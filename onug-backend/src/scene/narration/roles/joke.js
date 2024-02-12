@@ -1,3 +1,6 @@
+const { logError } = require("../../../log")
+const { getRandomItemFromArray } = require("../utils")
+
 const random_joke = [
   "joke_1_text",
   "joke_2_text",

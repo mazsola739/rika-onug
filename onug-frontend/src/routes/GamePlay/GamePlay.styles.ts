@@ -12,7 +12,7 @@ export const StyledGamePlayHeader = styled.div`
 export const NarrationImage = styled.div`
   display: flex;
   justify-content: flex-end;
-  min-width: 160px;
+  min-width: 182px;
 `
 
 export const Narration = styled.span`
@@ -20,13 +20,14 @@ export const Narration = styled.span`
   justify-content: center;
   align-items: center;
   color: white;
-  font-family: 'Josefin Sans', sans-serif;
+  font-size: 20px;
   padding: 10px;
 `
 
 export const TimerContainer = styled.div`
   min-width: 130px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
@@ -56,7 +57,7 @@ export const PlayerHand = styled.div`
 `
 
 export const OwnCardPlace = styled.div`
-  max-width: 160px;
+  max-width: 182px;
   display: flex;
   align-items: flex-end;
 `

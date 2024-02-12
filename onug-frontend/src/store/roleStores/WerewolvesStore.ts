@@ -10,14 +10,15 @@ class WerewolvesStore {
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
     const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
-      (playerCard) => {
-        const shield =
-          lastJsonMessage.shielded_players?.includes(playerCard.position) ||
-          false
-        const werewolf =
-          lastJsonMessage.werewolves?.includes(playerCard.position) || false
-        return { ...playerCard, shield, werewolf }
-      }
+      (playerCard) => ({
+        ...playerCard,
+        shield: (lastJsonMessage.shielded_players || []).includes(
+          playerCard.position
+        ),
+        werewolf: (lastJsonMessage.werewolves || []).includes(
+          playerCard.position
+        ),
+      })
     )
 
     const centerCards: PositionProperties[] = gameBoardStore.centerCards.map(

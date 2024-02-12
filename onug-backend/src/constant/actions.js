@@ -1,7 +1,5 @@
-//TODO easteregg
-//todo joke
 
-exports.identifier_player  = [
+const identifier_player  = [
   "identifier_player1_text",
   "identifier_player2_text",
   "identifier_player3_text",
@@ -16,8 +14,8 @@ exports.identifier_player  = [
   "identifier_player12_text",
 ]
 
-exports.aliens = "aliens_kickoff_text" //show aline cards
-exports.random_aliens = [
+const aliens = "aliens_kickoff_text" //show aline cards
+const random_aliens = [
   "aliens_view_text", //alienAnyKeys - selected - show it  - update known if own selected
   "aliens_allview_text", //alienAnyKeys random selected - selected - may show - update known & actual if own selected & viewed
   "aliens_stare_text", //alien cards - no update
@@ -28,41 +26,41 @@ exports.random_aliens = [
   "aliens_newalien_text", //alienAllKeys random selected - show to this player alien cards - update known & actual selected card team
   "aliens_alienhelper_text", //alienAllKeys  random selected - show to this player alien cards - update player known & actual new team alien helper
 ]
-exports.alienAnyKeys = [
+const alienAnyKeys = [
   "identifier_any_text",
   "identifier_anyeven_text",
   "identifier_anyodd_text",
   "activePlayers", //up to 3 random players example: identifier_player1_text with 'or'
 ]
-exports.alienAllKeys = [
+const alienAllKeys = [
   "identifier_everyone_text",
   "identifier_oddplayers_text",
   "identifier_evenplayers_text",
 ]
 
-exports.alphawolf = "alphawolf_kickoff_text" //wolf center card swap to any non werewolf card - update wolf center actual card & selected player actual card
+const alphawolf = "alphawolf_kickoff_text" //wolf center card swap to any non werewolf card - update wolf center actual card & selected player actual card
 
-exports.annoyinglad = "annoyinglad_kickoff_text" //left or right neighbor player sending message to selected player - no update
+const annoyinglad = "annoyinglad_kickoff_text" //left or right neighbor player sending message to selected player - no update
 
 //TODO rename const
-exports.apprenticeassassin = "apprenticeassassin_alone_text" //doppelganger! may any player mark swap with Mark of the Assassin - update selected player actual mark
-exports.assassin_apprenticeassassin = "apprenticeassassin_kickoff_text" //doppelganger! show assassin or may any player mark swap with Mark of the Assassin - update selected player actual mark
+const apprenticeassassin = "apprenticeassassin_alone_text" //doppelganger! may any player mark swap with Mark of the Assassin - update selected player actual mark
+const assassin_apprenticeassassin = "apprenticeassassin_kickoff_text" //doppelganger! show assassin or may any player mark swap with Mark of the Assassin - update selected player actual mark
 
-exports.apprenticeseer = "apprenticeseer_kickoff_text" //may select 1 center card - show selected card - no update expect if it was own known
+const apprenticeseer = "apprenticeseer_kickoff_text" //may select 1 center card - show selected card - no update expect if it was own known
 
-exports.apprenticetanner = "apprenticetanner_kickoff_text" //doppelganger! show Tanner and Doppelganger-Tanner - no update
+const apprenticetanner = "apprenticetanner_kickoff_text" //doppelganger! show Tanner and Doppelganger-Tanner - no update
 
 //TODO check
-exports.assassin = "assassin_kickoff_text" //doppelganger! any player mark swap with Mark of the Assassin - update selected player actual mark
+const assassin = "assassin_kickoff_text" //doppelganger! any player mark swap with Mark of the Assassin - update selected player actual mark
 
-exports.auraseer = "auraseer_kickoff_text" //doppelganger! show selected player thumb -  no update
-exports.auraseer_mark = "auraseer_mark_kickoff_text" //doppelganger! show selected player thumbs - no update
+const auraseer = "auraseer_kickoff_text" //doppelganger! show selected player thumb -  no update
+const auraseer_mark = "auraseer_mark_kickoff_text" //doppelganger! show selected player thumbs - no update
 
-exports.beholder_seer = "beholder_seer_kickoff_text" //doppelganger! show seer thumb, may choose seer card, show selected card - no update expect if it was own known
-exports.beholder_apprenticeseer = "beholder_apprenticeseer_kickoff_text" //doppelganger! show apprentice seer thumb, may choose apprentice seer card, show selected card - no update expect if it was own known
-exports.beholder_seer_apprenticeseer = "beholder_seer_apprenticeseer_kickoff_text" //doppelganger! show seer and apprentice seer thumb, may choose apprentice seer and seer cards, show selected cards - no update expect if it was own known
+const beholder_seer = "beholder_seer_kickoff_text" //doppelganger! show seer thumb, may choose seer card, show selected card - no update expect if it was own known
+const beholder_apprenticeseer = "beholder_apprenticeseer_kickoff_text" //doppelganger! show apprentice seer thumb, may choose apprentice seer card, show selected card - no update expect if it was own known
+const beholder_seer_apprenticeseer = "beholder_seer_apprenticeseer_kickoff_text" //doppelganger! show seer and apprentice seer thumb, may choose apprentice seer and seer cards, show selected cards - no update expect if it was own known
 
-exports.random_blob_kickoff_text = [ //randomize text, show selected card in focus? - update selected players actual team
+const random_blob_kickoff_text = [ //randomize text, show selected card in focus? - update selected players actual team
   "blob_1pleft_text",
   "blob_1pright_text",
   "blob_eachside_text",
@@ -74,14 +72,14 @@ exports.random_blob_kickoff_text = [ //randomize text, show selected card in foc
   "blob_4pright_text",
   "blob_2eachside_text",
 ] 
-exports.blob = ["blob_is_end_text", "blob_are_end_text"]
+const blob = ["blob_is_end_text", "blob_are_end_text"]
 
-exports.bodysnatcher = ["bodysnatcher_kickoff_text", "bodysnatcher_end_text"] //doppelganger!
-exports.random_bodysnatcher = [
+const bodysnatcher = ["bodysnatcher_kickoff_text", "bodysnatcher_end_text"] //doppelganger!
+const random_bodysnatcher = [
   "bodysnatcher_steal_text", //bodysnatcherKeys - select card, swap and show selected,  - update known & actual card team
   "bodysnatcher_center_text", //select center card swap and show,  - update known & actual card team
 ]
-exports.bodysnatcherKeys = [
+const bodysnatcherKeys = [
   "identifier_any_text",
   "identifier_anyeven_text",
   "identifier_anyodd_text",
@@ -90,76 +88,76 @@ exports.bodysnatcherKeys = [
   "identifier_bothneighbors_text",
 ]
 
-exports.copycat = "copycat_kickoff_text" //select center card - update player known & actual role and team
+const copycat = "copycat_kickoff_text" //select center card - update player known & actual role and team
 
-exports.cow = "cow_kickoff_text" //doppelganger! show cow fist sending tap message to cow - no update
+const cow = "cow_kickoff_text" //doppelganger! show cow fist sending tap message to cow - no update
 
-exports.cupid = "cupid_kickoff_text" //select any 2 players swap marks to mark of love - update players actual mark and (known if selected is own)
+const cupid = "cupid_kickoff_text" //select any 2 players swap marks to mark of love - update players actual mark and (known if selected is own)
 
-exports.curator = "curator_kickoff_text" //doppelganger!may select any player place random artifact - update player's info artifact true (from this point check every player's known artifact if wakes up)
+const curator = "curator_kickoff_text" //doppelganger!may select any player place random artifact - update player's info artifact true (from this point check every player's known artifact if wakes up)
 
-exports.detector = "detector_kickoff_text" //may look 2 center, or any other 1 player card - no update expect if it was own known
+const detector = "detector_kickoff_text" //may look 2 center, or any other 1 player card - no update expect if it was own known
 
-exports.diseased = "diseased_kickoff_text" //select any neighbor, swap mark to disease - update selected player actual mark
+const diseased = "diseased_kickoff_text" //select any neighbor, swap mark to disease - update selected player actual mark
 
 /* Doppelgänger instant night actions: Sentinel 25, Alpha Wolf 17, Mystic Wolf 22, Seer 9, Apprentice Seer 18, P.I. 23, Robber 8, 
 Witch 27, Troublemaker 11, Village Idiot 26, Drunk 2, Diseased 32, Cupid 31, Instigator 34, Thing 85, Annoying Lad 55, Detector 56,
 Role Retriever 66, Voodoo Lou 70 or Switcheroo 68. */
-exports.doppelganger = [
+const doppelganger = [
   "doppelganger_kickoff_text",
   "doppelganger_verbose_intro_text",
   "doppelganger_verbose_or_text",
   "doppelganger_verbose_outro_text",
 ]
-exports.doppelganger_thecount = "doppelganger_thecount_kickoff_text" //id: 39 után
-exports.doppelganger_renfield = "doppelganger_renfield_kickoff_text" //id: 38 egyszerre
-exports.doppelganger_priest = "doppelganger_priest_kickoff_text" //id: 37  if no [28, 29, 31, 32, 34, 38, 39, 40, 41], then no need to
-exports.doppelganger_assassin = "doppelganger_assassin_kickoff_text" //id: 29 után
-exports.doppelganger_apprenticeassassin_assassin = "doppelganger_apprenticeassassin_assassin_kickoff_text" //id: 28 & 29 után
-exports.doppelganger_apprenticeassassin = "doppelganger_apprenticeassassin_kickoff_text" //id: 28 után
-exports.doppelganger_cow = "doppelganger_cow_kickoff_text" //id: 45 egyszerre
-exports.doppelganger_leader = "doppelganger_leader_kickoff_text" //id: 48 egyszerre
-exports.doppelganger_leader_zerbgroob = "doppelganger_leader_zerbgroob_text" //id: 48 egyszerre
-exports.doppelganger_bodysnatcher = "doppelganger_bodysnatcher_kickoff_text" //id: 74 után
-exports.doppelganger_evilometer = "doppelganger_evilometer_kickoff_text" //id 58 egyszerre
-exports.doppelganger_minion = "doppelganger_minion_kickoff_text" //id: 7 egyszerre
-exports.doppelganger_apprenticetanner = "doppelganger_apprenticetanner_kickoff_text" //id: 71 egyszerre
-exports.doppelganger_intern_madscientist = "doppelganger_intern_madscientist_kickoff_text" //id 62 egyszerre
-exports.doppelganger_intern = "doppelganger_intern_kickoff_text" //id 62 & 63 egyszerre
-exports.doppelganger_marksman = "doppelganger_marksman_kickoff_text" //id: 35 egyszerre
-exports.doppelganger_psychic = "doppelganger_psychic_kickoff_text" //id: 51 után
-exports.doppelganger_pickpocket = "doppelganger_pickpocket_kickoff_text" //id: 36 után
-exports.doppelganger_auraseer = "doppelganger_auraseer_kickoff_text" //id: 72 egyszerre
-exports.doppelganger_auraseer_marks = "doppelganger_auraseer_marks_kickoff_text" //id: 72 & marks egyszerre
-exports.doppelganger_gremlin = "doppelganger_gremlin_kickoff_text" //id: 33 után
-exports.doppelganger_groobzerb = "doppelganger_groobzerb_kickoff_text" //id: 47 vagy 54 egyszerre
-exports.doppelganger_rascal = "doppelganger_rascal_kickoff_text" //id: 52 után
-exports.doppelganger_insomniac = "doppelganger_insomniac_kickoff_text" //id: 4 egyszerre
-exports.doppelganger_selfawarenessgirl = "doppelganger_selfawarenessgirl_kickoff_text" //id 67 egyszerre
-exports.doppelganger_squire = "doppelganger_squire_kickoff_text" //id: 83 egyszerre
-exports.doppelganger_beholder_seer = "doppelganger_beholder_seer_kickoff_text" //id: 9 egyszerre
-exports.doppelganger_beholder_apprenticeseer = "doppelganger_beholder_apprenticeseer_kickoff_text" //id: 18 egyszerre
-exports.doppelganger_beholder_seer_apprenticeseer = "doppelganger_beholder_seer_apprenticeseer_kickoff_text" //id: 9 & 18 egyszerre
-exports.doppelganger_revealer = "doppelganger_revealer_kickoff_text" //id: 24 után
-exports.doppelganger_exposer = "doppelganger_exposer_kickoff_text" //id: 46 után
-exports.doppelganger_flipper = "doppelganger_flipper_kickoff_text" //id 59 után
-exports.doppelganger_empath = "doppelganger_empath_kickoff_text" //id: 77 után
-exports.doppelganger_curator = "doppelganger_curator_kickoff_text" //id: 20 után
-exports.doppelganger_mortician = "doppelganger_mortician_kickoff_text" //id: 49 után
-exports.doppelganger_familyman = "doppelganger_familyman_kickoff_text" //id 78 egyszerre
+const doppelganger_thecount = "doppelganger_thecount_kickoff_text" //id: 39 után
+const doppelganger_renfield = "doppelganger_renfield_kickoff_text" //id: 38 egyszerre
+const doppelganger_priest = "doppelganger_priest_kickoff_text" //id: 37  if no [28, 29, 31, 32, 34, 38, 39, 40, 41], then no need to
+const doppelganger_assassin = "doppelganger_assassin_kickoff_text" //id: 29 után
+const doppelganger_apprenticeassassin_assassin = "doppelganger_apprenticeassassin_assassin_kickoff_text" //id: 28 & 29 után
+const doppelganger_apprenticeassassin = "doppelganger_apprenticeassassin_kickoff_text" //id: 28 után
+const doppelganger_cow = "doppelganger_cow_kickoff_text" //id: 45 egyszerre
+const doppelganger_leader = "doppelganger_leader_kickoff_text" //id: 48 egyszerre
+const doppelganger_leader_zerbgroob = "doppelganger_leader_zerbgroob_text" //id: 48 egyszerre
+const doppelganger_bodysnatcher = "doppelganger_bodysnatcher_kickoff_text" //id: 74 után
+const doppelganger_evilometer = "doppelganger_evilometer_kickoff_text" //id 58 egyszerre
+const doppelganger_minion = "doppelganger_minion_kickoff_text" //id: 7 egyszerre
+const doppelganger_apprenticetanner = "doppelganger_apprenticetanner_kickoff_text" //id: 71 egyszerre
+const doppelganger_intern_madscientist = "doppelganger_intern_madscientist_kickoff_text" //id 62 egyszerre
+const doppelganger_intern = "doppelganger_intern_kickoff_text" //id 62 & 63 egyszerre
+const doppelganger_marksman = "doppelganger_marksman_kickoff_text" //id: 35 egyszerre
+const doppelganger_psychic = "doppelganger_psychic_kickoff_text" //id: 51 után
+const doppelganger_pickpocket = "doppelganger_pickpocket_kickoff_text" //id: 36 után
+const doppelganger_auraseer = "doppelganger_auraseer_kickoff_text" //id: 72 egyszerre
+const doppelganger_auraseer_marks = "doppelganger_auraseer_marks_kickoff_text" //id: 72 & marks egyszerre
+const doppelganger_gremlin = "doppelganger_gremlin_kickoff_text" //id: 33 után
+const doppelganger_groobzerb = "doppelganger_groobzerb_kickoff_text" //id: 47 vagy 54 egyszerre
+const doppelganger_rascal = "doppelganger_rascal_kickoff_text" //id: 52 után
+const doppelganger_insomniac = "doppelganger_insomniac_kickoff_text" //id: 4 egyszerre
+const doppelganger_selfawarenessgirl = "doppelganger_selfawarenessgirl_kickoff_text" //id 67 egyszerre
+const doppelganger_squire = "doppelganger_squire_kickoff_text" //id: 83 egyszerre
+const doppelganger_beholder_seer = "doppelganger_beholder_seer_kickoff_text" //id: 9 egyszerre
+const doppelganger_beholder_apprenticeseer = "doppelganger_beholder_apprenticeseer_kickoff_text" //id: 18 egyszerre
+const doppelganger_beholder_seer_apprenticeseer = "doppelganger_beholder_seer_apprenticeseer_kickoff_text" //id: 9 & 18 egyszerre
+const doppelganger_revealer = "doppelganger_revealer_kickoff_text" //id: 24 után
+const doppelganger_exposer = "doppelganger_exposer_kickoff_text" //id: 46 után
+const doppelganger_flipper = "doppelganger_flipper_kickoff_text" //id 59 után
+const doppelganger_empath = "doppelganger_empath_kickoff_text" //id: 77 után
+const doppelganger_curator = "doppelganger_curator_kickoff_text" //id: 20 után
+const doppelganger_mortician = "doppelganger_mortician_kickoff_text" //id: 49 után
+const doppelganger_familyman = "doppelganger_familyman_kickoff_text" //id 78 egyszerre
 
-exports.drpeeker = "drpeeker_kickoff_text" //egyszerre többi gonosszal! may view any other player - send message about the actions to super villains
+const drpeeker = "drpeeker_kickoff_text" //egyszerre többi gonosszal! may view any other player - send message about the actions to super villains
 
-exports.drunk = "drunk_kickoff_text" //swap your card with any other player - update actual cards
+const drunk = "drunk_kickoff_text" //swap your card with any other player - update actual cards
 
-exports.empath = "empath_kickoff_text" //doppelganger! - show vote result - no update
-exports.empathAllKeys = [
+const empath = "empath_kickoff_text" //doppelganger! - show vote result - no update
+const empathAllKeys = [
   "identifier_everyone_text",
   "identifier_oddplayers_text",
   "identifier_evenplayers_text",
   "activePlayers", //up to 3 random players example: identifier_player1_text with 'and'
 ]
-exports.random_empath = [
+const random_empath = [
   "empath_action1_text",
   "empath_action2_text",
   "empath_action3_text",
@@ -177,7 +175,7 @@ exports.random_empath = [
 ]
 
 //TODO EVERYONE texts
-exports.everyone = [
+const everyone = [
   "everyone_epic_intro_text", //at lease 2 type evil team: werewolves, aliens, vampires, super villains
   "everyone_card_text", //show players card - update known informations
   "everyone_vote_text",
@@ -185,16 +183,16 @@ exports.everyone = [
   "everyone_artifact_text", //show to the player(s) their artifact(s)
 ]
 
-exports.evilometer = "evilometer_kickoff_text" //doppelganger! show her evilometer card and send message to her - no update
+const evilometer = "evilometer_kickoff_text" //doppelganger! show her evilometer card and send message to her - no update
 
-exports.exposer = "exposer_kickoff_text" //doppelganger! select center cards, dont hide (only from this moment to the next players when their turn comes) - no update expect if it was own known
-exports.random_exposer = [
+const exposer = "exposer_kickoff_text" //doppelganger! select center cards, dont hide (only from this moment to the next players when their turn comes) - no update expect if it was own known
+const random_exposer = [
   "exposer_flip1_text",
   "exposer_flip2_text",
   "exposer_flip3_text",
 ]
 
-exports.familyman_kickoff = [ //doppelganger! random selected players, show focus, update players actual team
+const familyman_kickoff = [ //doppelganger! random selected players, show focus, update players actual team
   "familyman_1pleft_text",
   "familyman_1pright_text",
   "familyman_eachside_text",
@@ -206,28 +204,28 @@ exports.familyman_kickoff = [ //doppelganger! random selected players, show focu
   "familyman_4pright_text",
   "familyman_2eachside_text",
 ]
-exports.familyman_close = ["familyman_is_end_text", "familyman_are_end_text"]
+const familyman_close = ["familyman_is_end_text", "familyman_are_end_text"]
 
-exports.flipper = "flipper_kickoff_text" //doppelganger! may choose any other player card, show and dont hide - update known player card
+const flipper = "flipper_kickoff_text" //doppelganger! may choose any other player card, show and dont hide - update known player card
 
-exports.gremlin = "gremlin_kickoff_text" //doppelganger! may switch cards OR marks any 2 players - update players actual info
+const gremlin = "gremlin_kickoff_text" //doppelganger! may switch cards OR marks any 2 players - update players actual info
 
-exports.groobzerb = "groobzerb_kickoff_text" //doppelganger! - update team, if both see eachother
+const groobzerb = "groobzerb_kickoff_text" //doppelganger! - update team, if both see eachother
 
-exports.insomniac = "insomniac_kickoff_text" //doppelganger! show own card - update known and actual card if need
+const insomniac = "insomniac_kickoff_text" //doppelganger! show own card - update known and actual card if need
 
-exports.instigator = "instigator_kickoff_text" //choose any player mark swap with traitor - update players actual mark, and known if own
+const instigator = "instigator_kickoff_text" //choose any player mark swap with traitor - update players actual mark, and known if own
 
-exports.intern = "intern_kickoff_alone_text" //doppelganger! - no update
-exports.intern_madscientist = "intern_kickoff_text" //doppelganger! - no update
+const intern = "intern_kickoff_alone_text" //doppelganger! - no update
+const intern_madscientist = "intern_kickoff_text" //doppelganger! - no update
 
-exports.leader = "leader_kickoff_text" //doppelganger! show aline cards - no update
-exports.leader_zerbgroob = "leader_zerbgroob_text" //doppelganger! show zerb and groob cards - no update
+const leader = "leader_kickoff_text" //doppelganger! show aline cards - no update
+const leader_zerbgroob = "leader_zerbgroob_text" //doppelganger! show zerb and groob cards - no update
 
-exports.lovers = "lovers_kickoff_text" //show lovers - no update
+const lovers = "lovers_kickoff_text" //show lovers - no update
 
-exports.madscientist = ["madscientist_kickoff_text", "madscientist_close_text"] //no update
-exports.random_madscientist_intro = [
+const madscientist = ["madscientist_kickoff_text", "madscientist_close_text"] //no update
+const random_madscientist_intro = [
   "madscientist_intro_1_text",
   "madscientist_intro_2_text",
   "madscientist_intro_3_text",
@@ -243,14 +241,14 @@ exports.random_madscientist_intro = [
   "madscientist_intro_13_text",
   "madscientist_intro_14_text",
 ]
-exports.random_madscientist_therefore = [
+const random_madscientist_therefore = [
   "madscientist_therefore_1_text",
   "madscientist_therefore_2_text",
   "madscientist_therefore_3_text",
   "madscientist_therefore_4_text",
   "madscientist_therefore_5_text",
 ]
-exports.random_madscientist_result = [
+const random_madscientist_result = [
   "madscientist_result_1_text",
   "madscientist_result_2_text",
   "madscientist_result_3_text",
@@ -263,7 +261,7 @@ exports.random_madscientist_result = [
   "madscientist_result_10_text",
   "madscientist_result_11_text",
 ]
-exports.random_madscientist_transition = [
+const random_madscientist_transition = [
   "madscientist_transition_1_text",
   "madscientist_transition_2_text",
   "madscientist_transition_3_text",
@@ -287,20 +285,20 @@ exports.random_madscientist_transition = [
   "madscientist_transition_21_text",
 ]
 
-exports.marksman = "marksman_kickoff_text" //doppelganger! may select a mark and may select a card from another player (cant be same player)  - no update expect if own known
+const marksman = "marksman_kickoff_text" //doppelganger! may select a mark and may select a card from another player (cant be same player)  - no update expect if own known
 
-exports.masons = "masons_kickoff_text" //look for other masons - no update
+const masons = "masons_kickoff_text" //look for other masons - no update
 
-exports.minion = "minion_kickoff_text" //doppelganger! show wolf cards - no update
+const minion = "minion_kickoff_text" //doppelganger! show wolf cards - no update
 
-exports.mirrorman = "mirrorman_kickoff_text" //select center card - update player known & actual role and team
+const mirrorman = "mirrorman_kickoff_text" //select center card - update player known & actual role and team
 
-exports.mortician = "mortician_kickoff_text" //doppelganger! show 1 or 2 neighbor cards - no update
-exports.random_mortician = ["mortician_1card_text", "mortician_2cards_text"]
+const mortician = "mortician_kickoff_text" //doppelganger! show 1 or 2 neighbor cards - no update
+const random_mortician = ["mortician_1card_text", "mortician_2cards_text"]
 
-exports.mysticwolf = "mysticwolf_kickoff_text" //select another player, show selected card - no update
+const mysticwolf = "mysticwolf_kickoff_text" //select another player, show selected card - no update
 
-exports.nostradamus = [ //start look up to 3 cards, if card team non-villager or non-hero stop view, if 3rd still villager or hero, tell to everyone new team
+const nostradamus = [ //start look up to 3 cards, if card team non-villager or non-hero stop view, if 3rd still villager or hero, tell to everyone new team
   "nostradamus_kickoff_text",
   "nostradamus_teamstart_text",
   "nostradamus_team_alien_text",
@@ -320,8 +318,8 @@ exports.nostradamus = [ //start look up to 3 cards, if card team non-villager or
   "nostradamus_team_doppelganger_text",
 ]
 
-exports.oracle = "oracle_kickoff_text"
-exports.random_oracle = [
+const oracle = "oracle_kickoff_text"
+const random_oracle = [
   "random_oracle_aliens", //yes no question - update if alien team
   "random_oracle_werewolf", //yes no question - update if werewolf team
   "random_oracle_vampire", //yes no question - update if vampire team
@@ -333,14 +331,14 @@ exports.random_oracle = [
   "random_oracle_playernum", //choose player number, and show the selected player
   "random_oracle_number" //guess number
 ]
-exports.random_oracle_aliens = [
+const random_oracle_aliens = [
   "oracle_alienteam_text",
   "oracle_alienteam_yes_text",
   "oracle_alienteam_yes2_text",
   "oracle_teamswitch_yes_text",
   "oracle_teamswitch_no_text",
 ]
-exports.random_oracle_werewolf = [
+const random_oracle_werewolf = [
   "oracle_werewolfteam_text",
   "oracle_werewolfteam_yes_text",
   "oracle_teamswitch_yes_text",
@@ -349,77 +347,77 @@ exports.random_oracle_werewolf = [
   "random_oracle_playernum",
   "random_oracle_number",
 ]
-exports.random_oracle_vampire = [
+const random_oracle_vampire = [
   "oracle_vampireteam_text",
   "oracle_vampireteam_yes_text",
   "oracle_teamswitch_yes_text",
   "oracle_teamswitch_no_text",
 ]
-exports.random_oracle_alienexchange = [
+const random_oracle_alienexchange = [
   "oracle_alienexchange_text",
   "oracle_alienexchange_yes_text",
   "oracle_alienexchange_no_text",
 ]
-exports.random_oracle_exchange = [
+const random_oracle_exchange = [
   "oracle_centerexchange_text",
   "oracle_teamswitch_no_text",
   "oracle_centerexchange_yes_text",
   "oracle_centerexchange_yes2_text",
 ]
-exports.random_oracle_center = [
+const random_oracle_center = [
   "oracle_viewcenter_text",
   "oracle_ripple_no_text",
   "oracle_view_yes1_text",
   "oracle_view_yes2_text",
   "oracle_view_yes3_text",
 ]
-exports.random_oracle_ripple = [
+const random_oracle_ripple = [
   "oracle_ripple_text",
   "oracle_ripple_yes_text",
   "oracle_ripple_no_text",
 ]
-exports.random_oracle_evenodd = [
+const random_oracle_evenodd = [
   "oracle_evenodd_text",
   "oracle_evenodd_odd_text",
   "oracle_evenodd_even_text",
 ]
-exports.random_oracle_playernum = [
+const random_oracle_playernum = [
   "oracle_viewplayer_text",
   "oracle_viewplayer_result_text",
   "oracle_viewplayer_result2_text",
 ]
-exports.random_oracle_number = [
+const random_oracle_number = [
   "oracle_guessnumber_text",
   "oracle_guessnumber_success_text",
   "oracle_guessnumber_failure_text",
 ]
 
-exports.paranormalinvestigator = "paranormalinvestigator_kickoff_text" //may view up to 2 another players card, if non-villager or non-hero stop - update known card role, actual card role
+const paranormalinvestigator = "paranormalinvestigator_kickoff_text" //may view up to 2 another players card, if non-villager or non-hero stop - update known card role, actual card role
 
-exports.pickpocket = "pickpocket_kickoff_text" // may select another player, swap own mark with selected, show new mark - update known and actual player info
+const pickpocket = "pickpocket_kickoff_text" // may select another player, swap own mark with selected, show new mark - update known and actual player info
 
-exports.priest = "priest_kickoff_text" //if no [28, 29, 31, 32, 34, 38, 39, 40, 41], then no need to start doppelganger! swap hes mark to mark of clarity, may choose another player to swap mark of clarity - update actual player information and own known
+const priest = "priest_kickoff_text" //if no [28, 29, 31, 32, 34, 38, 39, 40, 41], then no need to start doppelganger! swap hes mark to mark of clarity, may choose another player to swap mark of clarity - update actual player information and own known
 
-exports.psychic = "psychic_kickoff_text" //doppelganger! select 1 or 2 cards even or odd players - no update expect if it was own known
-exports.random_psychic = ["psychic_view1_text", "psychic_view2_text"]
-exports.psychicKeys = ["identifier_anyeven_text", "identifier_anyodd_text"]
+const psychic = "psychic_kickoff_text" //doppelganger! select 1 or 2 cards even or odd players - no update expect if it was own known
+const random_psychic = ["psychic_view1_text", "psychic_view2_text"]
+const psychicKeys = ["identifier_anyeven_text", "identifier_anyodd_text"]
 
-exports.rapscallion = "rapscallion_kickoff_text" //egyszerre többi gonosszal! choose center card, show selected card - no update expect if it was own known
+const rapscallion = "rapscallion_kickoff_text" //egyszerre többi gonosszal! choose center card, show selected card - no update expect if it was own known
 
-exports.rascal = [ //doppelganger!
+const rascal = [ //doppelganger!
   "rascal_kickoff_text",
   "rascal_witchend_text",
   "rascal_drunkend_text",
   "rascal_robberend_text",
 ]
-exports.random_rascal = [
+const random_rascal = [
   "rascal_idiot_text", //may village idiot action
   "rascal_troublemaker_text", //rascalAnyTwoKeys may pick 2 players suggested by game - update selected players actual cards
   "rascal_witch_text", //rascalAnyOneKeys may view card suggested position - update expect if own know
   "rascal_drunk_text", //rascalAnyOneKeys must change card - update selected and own actual cards
   "rascal_robber_text", //rascalAnyOneKeys may swap card with suggested players, show new card - update own known and actual, and selected player actual
 ]
-exports.rascalAnyOneKeys = [
+const rascalAnyOneKeys = [
   'identifier_higher_text',
   'identifier_lower_text',
   'identifier_any_text',
@@ -430,7 +428,7 @@ exports.rascalAnyOneKeys = [
   'identifier_leftneighbor_text',
   'identifier_rightneighbor_text',
 ]
-exports.rascalAnyTwoKeys = [
+const rascalAnyTwoKeys = [
   'identifier_any2_text',
   'identifier_any2even_text',
   'identifier_any2odd_text',
@@ -440,12 +438,12 @@ exports.rascalAnyTwoKeys = [
   'identifier_2rightneighbors_text',
 ]
 
-exports.renfield = "renfield_kickoff_text" //doppelganger! show vampires, show mark of vampire, swap own mark with mark of bat - update known and actual player info
+const renfield = "renfield_kickoff_text" //doppelganger! show vampires, show mark of vampire, swap own mark with mark of bat - update known and actual player info
 
-exports.revealer = "revealer_kickoff_text" //doppelganger! select any other player card, flip, flip it back if its non-villager (from this moment don't hide from players who's doing their action) - update board card
+const revealer = "revealer_kickoff_text" //doppelganger! select any other player card, flip, flip it back if its non-villager (from this moment don't hide from players who's doing their action) - update board card
 
-exports.ripple = "ripple_intro_text"
-exports.ripple_random = [
+const ripple = "ripple_intro_text"
+const ripple_random = [
   "random_ripple_1minute", //vote time only 1 minute
   "random_ripple_repeat", //repeat the night with 1 person see everything
   "random_ripple_repeat1p", //repeat the night action for 1 player
@@ -466,103 +464,103 @@ exports.ripple_random = [
   "random_ripple_repeatrole",
   "random_ripple_iamalien",
 ]
-exports.random_ripple_1minute = "ripple_1minute_text"
-exports.random_ripple_repeat = ["ripple_repeat_text", "ripple_repeat_2_text"]
-exports.random_ripple_repeat1p = [
+const random_ripple_1minute = "ripple_1minute_text"
+const random_ripple_repeat = ["ripple_repeat_text", "ripple_repeat_2_text"]
+const random_ripple_repeat1p = [
   "ripple_repeat_text",
   "ripple_repeat_2_text",
   "ripple_openeyes_text",
 ]
-exports.random_ripple_insomniac = "ripple_insomniac_text"
-exports.random_ripple_nospeak = "ripple_nospeak_text"
-exports.random_ripple_faceaway = "ripple_faceaway_text"
-exports.random_ripple_troublemaker = [
+const random_ripple_insomniac = "ripple_insomniac_text"
+const random_ripple_nospeak = "ripple_nospeak_text"
+const random_ripple_faceaway = "ripple_faceaway_text"
+const random_ripple_troublemaker = [
   "ripple_troublemaker_text",
   "ripple_troublemaker_end_text",
 ]
-exports.random_ripple_steal = ["ripple_robber_text", "ripple_robber_end_text"]
-exports.random_ripple_witch = "ripple_witch_text"
-exports.random_ripple_view1 = "ripple_view1_text"
-exports.random_ripple_view2 = "ripple_view2_text"
-exports.random_ripple_reveal = [
+const random_ripple_steal = ["ripple_robber_text", "ripple_robber_end_text"]
+const random_ripple_witch = "ripple_witch_text"
+const random_ripple_view1 = "ripple_view1_text"
+const random_ripple_view2 = "ripple_view2_text"
+const random_ripple_reveal = [
   "ripple_revealer_text",
   "ripple_revealer_end_text",
 ]
-exports.random_ripple_dualview = ["ripple_dualseer_text", "ripple_view2_text"]
-exports.random_ripple_twovote = "ripple_doublevote_text"
-exports.random_ripple_shuffle = [
+const random_ripple_dualview = ["ripple_dualseer_text", "ripple_view2_text"]
+const random_ripple_twovote = "ripple_doublevote_text"
+const random_ripple_shuffle = [
   "ripple_dualshuffle1_text",
   "ripple_dualshuffle2_text",
   "ripple_dualshuffle3_text",
 ]
-exports.random_ripple_drunk = ["ripple_drunk_text", "ripple_drunk_end_text"]
-exports.random_ripple_voteapp = "ripple_app_text"
-exports.random_ripple_repeatrole = "ripple_repeatrole_text"
-exports.random_ripple_iamalien = "ripple_iamalien_text"
-exports.rippleAnyKeys = [
+const random_ripple_drunk = ["ripple_drunk_text", "ripple_drunk_end_text"]
+const random_ripple_voteapp = "ripple_app_text"
+const random_ripple_repeatrole = "ripple_repeatrole_text"
+const random_ripple_iamalien = "ripple_iamalien_text"
+const rippleAnyKeys = [
   'identifier_any_text',
   'identifier_anyeven_text',
   'identifier_anyodd_text',
   'activePlayers',
 ]
-exports.rippleAllKeys = [
+const rippleAllKeys = [
   'identifier_everyone_text',
   'identifier_oddplayers_text',
   'identifier_evenplayers_text',
   'activePlayers',
 ]
-exports.rippleNeighborKeys = [
+const rippleNeighborKeys = [
   'identifier_leftneighbor_text',
   'identifier_rightneighbor_text',
   'identifier_oneneighbor_text',
   'identifier_yourself_text',
 ]
-exports.rippleCenterAnyKeys = [
+const rippleCenterAnyKeys = [
   'identifier_any_text',
   'identifier_anyeven_text',
   'identifier_anyodd_text',
   'identifier_center_text',
 ]
 
-exports.robber = "robber_kickoff_text" //may select another player, swap card, view own card - update own actual and known card, selected actual card
+const robber = "robber_kickoff_text" //may select another player, swap card, view own card - update own actual and known card, selected actual card
 
-exports.roleretriever = "roleretriever_kickoff_text" //may select another player, swap card, view own card - update own actual and known card, selected actual card
+const roleretriever = "roleretriever_kickoff_text" //may select another player, swap card, view own card - update own actual and known card, selected actual card
 
-exports.seer = "seer_kickoff_text" //may select another player card or 2 center card, show selected card(s) - no update expect if own known
+const seer = "seer_kickoff_text" //may select another player card or 2 center card, show selected card(s) - no update expect if own known
 
-exports.selfawarenessgirl = "selfawarenessgirl_kickoff_text" //doppelganger! show own card - update known and actual card if need
+const selfawarenessgirl = "selfawarenessgirl_kickoff_text" //doppelganger! show own card - update known and actual card if need
 
-exports.sentinel = "sentinel_kickoff_text" //may place shield on any other player - from this point check known card shield if player wakes up, and disable this player's card from any view or move action
+const sentinel = "sentinel_kickoff_text" //may place shield on any other player - from this point check known card shield if player wakes up, and disable this player's card from any view or move action
 
-exports.squire = "squire_kickoff_text" //doppelganger! show werewolves cards, may view the selected wolf cards - no update, expect of own known
+const squire = "squire_kickoff_text" //doppelganger! show werewolves cards, may view the selected wolf cards - no update, expect of own known
 
-exports.supervillains = "supervillains_kickoff_text"  //show known supervillains cards - no update
+const supervillains = "supervillains_kickoff_text"  //show known supervillains cards - no update
 
-exports.switcheroo = "switcheroo_kickoff_text" //may select 2 another players - update selected actual cards
+const switcheroo = "switcheroo_kickoff_text" //may select 2 another players - update selected actual cards
 
-exports.temptress = "temptress_kickoff_text" //egyszerre többi gonosszal! select villain center card, select any non villain card , swap. - upade selected actual cards
+const temptress = "temptress_kickoff_text" //egyszerre többi gonosszal! select villain center card, select any non villain card , swap. - upade selected actual cards
 
-exports.thecount = "thecount_kickoff_text" // select any non-vampire player place mark of fear - update selected player actual info (make sure if its at a player he cant do action from mark-check point)
+const thecount = "thecount_kickoff_text" // select any non-vampire player place mark of fear - update selected player actual info (make sure if its at a player he cant do action from mark-check point)
 
-exports.thing = "thing_kickoff_text" //left or right neighbor player sending message to selected player - no update
+const thing = "thing_kickoff_text" //left or right neighbor player sending message to selected player - no update
 
-exports.troublemaker = "troublemaker_kickoff_text" //may select another 2 player, swap cards, - update selected actual cards
+const troublemaker = "troublemaker_kickoff_text" //may select another 2 player, swap cards, - update selected actual cards
 
-exports.vampires = "vampires_kickoff_text" //show vampire cards, vote for non vampire player who gets mark of vampire - update selected player actual infos
+const vampires = "vampires_kickoff_text" //show vampire cards, vote for non vampire player who gets mark of vampire - update selected player actual infos
 
-exports.villageidiot = "villageidiot_kickoff_text" //choose direction to move everyone's card - update players actual cards
+const villageidiot = "villageidiot_kickoff_text" //choose direction to move everyone's card - update players actual cards
 
-exports.voodoolou = "voodoolou_kickoff_text" //may choose any center card, swap with any player card - update selected card
+const voodoolou = "voodoolou_kickoff_text" //may choose any center card, swap with any player card - update selected card
 
-exports.werewolves = "werewolves_kickoff_text" //show player wolf cards, may choose any center card, swap with any player card - update selected card
-exports.werewolves_dreamwolf = "werewolves_dreamwolf_kickoff_text" //show player wolf cards, dreamwolf thumb, may choose any center card, swap with any player card - update selected card
+const werewolves = "werewolves_kickoff_text" //show player wolf cards, may choose any center card, swap with any player card - update selected card
+const werewolves_dreamwolf = "werewolves_dreamwolf_kickoff_text" //show player wolf cards, dreamwolf thumb, may choose any center card, swap with any player card - update selected card
 
-exports.witch = "witch_kickoff_text" //may choose any center card, swap with any player card - update selected card
-
-
+const witch = "witch_kickoff_text" //may choose any center card, swap with any player card - update selected card
 
 
-exports.easteregg = [
+
+
+const easteregg = [
   "easteregg_really_text",
 
   "easteregg_nobadguys_text_1",
@@ -587,7 +585,7 @@ exports.easteregg = [
   "easteregg_nogoodguys_text_9",
   "easteregg_nogoodguys_text_10"
 ]
-exports.joke = [
+const joke = [
   "joke_1_text",
   "joke_2_text",
   "joke_3_text",
@@ -609,7 +607,7 @@ exports.joke = [
   "joke_19_text",
   "joke_20_text",
 ]
-exports.time = [
+const time = [
   "timertext_prefix",
   "timertext_postfix",
   "timerscreen_label_1_text",
