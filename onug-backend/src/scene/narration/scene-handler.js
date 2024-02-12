@@ -12,12 +12,13 @@ exports.sceneHandler = gameState => {
   const sceneTitle    = gameState.actual_scene.scene_title
   const selectedCards = gameState.selected_cards
   const totalPlayers  = gameState.players.length
-  const conditions    = checkConditions(selectedCards)
+  const conditions    = checkConditions(selectedCards, totalPlayers)
 
+  //TODO easteregg / epic battle
   switch (sceneTitle) {
    case "EPIC_BATTLE":
-      if (conditions.hasEpicBattle) return {
-        [NARRATION]: roles.epicbattle()
+      if (conditions.hasEpicBattle || conditions.hasEasterEgg) return {
+        [NARRATION]: roles.epicbattle(conditions.hasEasterEgg, conditions.hasEpicBattle, totalPlayers, conditions.nobadguys, conditions.nogoodguys)
       }
       break
     //! T W I L L I G H T 
@@ -555,7 +556,7 @@ exports.sceneHandler = gameState => {
     //! D A Y
     case "JOKE":
       return {
-        [NARRATION]: roles.joke(totalPlayers, conditions.nobadguys, conditions.nogoodguys)
+        [NARRATION]: roles.joke()
       }
 
     /*  INVESTIGATION":

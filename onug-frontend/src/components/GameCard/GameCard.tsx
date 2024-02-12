@@ -16,8 +16,6 @@ export const GameCard: React.FC<GameCardProps> = observer(
         ? `/assets/cards/${card.card_name}.png`
         : '/assets/backgrounds/card_back.png'
 
-    console.log(`${position}: `, shield)
-
     const clickHandler = (cardType: string) => {
       const maxCenterCardSelection = interactionStore.selectableCenterCardLimit
       const maxPlayerCardSelection = interactionStore.selectablePlayerCardLimit

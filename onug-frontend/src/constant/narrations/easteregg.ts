@@ -1,5 +1,7 @@
 export const easteregg_really_text =
-  'Really? You selected ALL the roles? I have better things to do, and you probably do too. Well, whatever, here you go.'
+  'Really? You selected ALL the roles? I have better things to do, and you probably do too.'
+
+export const easteregg_whatever_text = 'Well, whatever, here you go.'
 
 export const easteregg_nobadguys_text_1 =
   "Hold the phone! No bad guys chosen? It's a night of pure innocence and rainbows. What happened to the dark side?"

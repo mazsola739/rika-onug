@@ -213,3 +213,7 @@ exports.getPlayerNeighborsByToken = (players, token) => {
 
   return neighbors
 }
+
+exports.getSelectablePlayersWithNoShield = (players, shielded_players) => {
+  return players.filter(item => !shielded_players.includes(item));
+}

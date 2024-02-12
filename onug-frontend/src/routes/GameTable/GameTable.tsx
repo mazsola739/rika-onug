@@ -26,6 +26,7 @@ import { GameTableFooter } from './GameTableFooter'
 import { GameTableHeader } from './GameTableHeader'
 import { useNavigate } from 'react-router-dom'
 import { DealtCards, Main, OwnCard, PlayerList } from 'components'
+import { SceneTracker } from 'components/SceneTracker/SceneTracker'
 
 const { renderMarks, renderArtifacts } = gameTableUtils
 
@@ -91,6 +92,7 @@ export const GameTable: React.FC = observer(() => {
             renderArtifacts(artifacts, hasCurator, hasSentinel)}
           <DealtCards />
           {hasMarks && renderMarks(selectedMarks)}
+          <SceneTracker />
         </GameArea>
         <Ready>{players && <PlayerList players={players} />}</Ready>
       </Main>

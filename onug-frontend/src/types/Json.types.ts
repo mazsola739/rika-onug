@@ -20,3 +20,11 @@ export type ScriptType = {
   scene_img: string
   scene_number: number
 }
+
+export type ConditionFunction = (selectedCards: CardType[]) => boolean
+export type OrderType = {
+  scene_title: string
+  card_id: number[]
+  scene_number: number
+  condition?: ConditionFunction
+}

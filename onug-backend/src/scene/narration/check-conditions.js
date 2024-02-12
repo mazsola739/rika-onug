@@ -31,7 +31,7 @@ const hasEpicBattle  = (selectedCards) => {
   return trueCount >= 2
 }
 
-exports.checkConditions = (selectedCards) => {
+exports.checkConditions = (selectedCards, totalPlayers) => {
   const conditions = {
     hasGoodGuys:               containsAnyIds(selectedCards, goodGuyIds),
     hasBadGuys:                containsAnyIds(selectedCards, badGuysIds),
@@ -108,6 +108,7 @@ exports.checkConditions = (selectedCards) => {
     hasFamilyMan:              hasRole(selectedCards, 78),
     hasRipple:                 containsAnyIds(selectedCards, alienIds), //TODO oracle is enough for ripple?
   }
+  conditions.hasEasterEgg              = !conditions.hasGoodGuys || !conditions.hasBadGuys || totalPlayers === 12
   conditions.haOneMasonAndDoppelganger = conditions.hasDoppelganger && conditions.hasAnyMason
   conditions.hasMasons                 = conditions.hasBothMasons || conditions.haOneMasonAndDoppelganger
   conditions.hasBeholder               = hasRole(selectedCards, 73) && conditions.hasSeers
