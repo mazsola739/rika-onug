@@ -1,6 +1,9 @@
 import styled from '@emotion/styled'
 
-export const StyledBoardCards = styled.div``
+export const StyledBoardCards = styled.div`
+  margin-left: auto;
+  margin-left: auto;
+`
 
 export const CardContainer = styled.div`
   align-items: center;

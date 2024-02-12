@@ -19,7 +19,7 @@ exports.getTeamName = (id) => {
 exports.shufflePlayers = (totalPlayers) => Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`).sort(() => 0.5 - Math.random())
 
 exports.pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
-  const players = shufflePlayers(totalPlayers)
+  const players = this.shufflePlayers(totalPlayers)
   const selectedPlayers = ~~(Math.random() * 3) + 1
 
   return selectedPlayers > 1 ? [...players.slice(0, -1), conjunction, players.slice(-1)[0]] : players

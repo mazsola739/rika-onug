@@ -6,7 +6,14 @@ import {
   gamePlayStore,
   interactionStore,
 } from 'store'
-import { BoardCards, Header, KnownOwnCard, Main, MessageBox } from 'components'
+import {
+  BoardCards,
+  Header,
+  KnownOwnCard,
+  Main,
+  MessageBox,
+  SceneTracker,
+} from 'components'
 import {
   ARRIVE_GAME_PLAY,
   HYDRATE_GAME_PLAY,
@@ -83,6 +90,7 @@ export const GamePlay: React.FC = observer(() => {
         <GamePlayContainer>
           <GameArea>
             <BoardCards />
+            <SceneTracker />
           </GameArea>
           <PlayerHand>
             <OwnCardPlace>

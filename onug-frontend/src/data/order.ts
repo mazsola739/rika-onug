@@ -35,7 +35,10 @@ export const order: OrderType[] = [
     scene_title: 'VAMPIRES',
     card_id: [39, 40, 41, 1],
     scene_number: 8,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 39),
+    condition: (selectedCards) =>
+      selectedCards.some((card) => card.id === 39) ||
+      selectedCards.some((card) => card.id === 40) ||
+      selectedCards.some((card) => card.id === 41),
   },
   {
     scene_title: 'THE_COUNT',
@@ -52,6 +55,7 @@ export const order: OrderType[] = [
     scene_title: 'RENFIELD',
     card_id: [38, 1],
     scene_number: 11,
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 38),
   },
   {
     scene_title: 'DISEASED',
@@ -110,29 +114,39 @@ export const order: OrderType[] = [
     scene_title: 'ALIENS',
     card_id: [42, 43, 47, 53, 54, 74, 1],
     scene_number: 24,
+    condition: (selectedCards) =>
+      selectedCards.some((card) => card.id === 42) ||
+      selectedCards.some((card) => card.id === 43) ||
+      selectedCards.some((card) => card.id === 47) ||
+      selectedCards.some((card) => card.id === 53) ||
+      selectedCards.some((card) => card.id === 54) ||
+      selectedCards.some((card) => card.id === 74),
   },
   {
     scene_title: 'COW',
     card_id: [45, 1],
     scene_number: 25,
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 45),
   },
   {
     scene_title: 'GROOB_ZERB',
     card_id: [47, 54, 1],
     scene_number: 26,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 47), //TODO
+    condition: (selectedCards) =>
+      selectedCards.some((card) => card.id === 47) &&
+      selectedCards.some((card) => card.id === 54),
   },
   {
     scene_title: 'LEADER',
     card_id: [48, 1],
     scene_number: 27,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 48), //TODO
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 48),
   },
   {
     scene_title: 'LEADER_ZERB_GROOB',
     card_id: [48, 1],
     scene_number: 28,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 28), //TODO
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 28),
   },
   {
     scene_title: 'BODY_SNATCHER',
@@ -147,9 +161,13 @@ export const order: OrderType[] = [
   },
   {
     scene_title: 'SUPER_VILLAINS',
-    card_id: [57, 60, 65, 69],
+    card_id: [57, 60, 65, 69, 1],
     scene_number: 31,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 28), //TODO
+    condition: (selectedCards) =>
+      selectedCards.some((card) => card.id === 57) ||
+      selectedCards.some((card) => card.id === 60) ||
+      selectedCards.some((card) => card.id === 65) ||
+      selectedCards.some((card) => card.id === 69),
   },
   {
     scene_title: 'TEMPTRESS',
@@ -176,7 +194,11 @@ export const order: OrderType[] = [
     scene_title: 'WEREWOLVES',
     card_id: [15, 16, 17, 21, 22, 1],
     scene_number: 36,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 28), //TODO
+    condition: (selectedCards) =>
+      selectedCards.some((card) => card.id === 15) ||
+      selectedCards.some((card) => card.id === 16) ||
+      selectedCards.some((card) => card.id === 17) ||
+      selectedCards.some((card) => card.id === 22),
   },
   {
     scene_title: 'ALPHA_WOLF',
@@ -192,31 +214,36 @@ export const order: OrderType[] = [
     scene_title: 'MINION',
     card_id: [7, 1],
     scene_number: 39,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 7), //TODO
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 7),
   },
   {
     scene_title: 'APPRENTICE_TANNER',
     card_id: [71, 1],
     scene_number: 40,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 71), //TODO
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 71),
   },
   {
     scene_title: 'MAD_SCIENTIST',
     card_id: [63, 1],
     scene_number: 41,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 63), //TODO
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 63),
   },
   {
     scene_title: 'INTERN',
     card_id: [62, 1],
     scene_number: 42,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 62), //TODO
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 62),
   },
   {
     scene_title: 'MASONS',
     card_id: [5, 6, 1],
     scene_number: 43,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 5), //TODO
+    condition: (selectedCards) =>
+      (selectedCards.some((card) => card.id === 5) &&
+        selectedCards.some((card) => card.id === 6)) ||
+      ((selectedCards.some((card) => card.id === 5) ||
+        selectedCards.some((card) => card.id === 6)) &&
+        selectedCards.some((card) => card.id === 1)),
   },
   {
     scene_title: 'THING',
@@ -247,6 +274,7 @@ export const order: OrderType[] = [
     scene_title: 'MARKSMAN',
     card_id: [35, 1],
     scene_number: 49,
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 35),
   },
   {
     scene_title: 'NOSTRADAMUS',
@@ -257,7 +285,7 @@ export const order: OrderType[] = [
     scene_title: 'NOSTRADAMUS_REACTION',
     card_id: [80, 1],
     scene_number: 51,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 80), //TODO
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 80),
   },
   {
     scene_title: 'PSYCHIC',
@@ -320,6 +348,7 @@ export const order: OrderType[] = [
     scene_title: 'AURA_SEER',
     card_id: [72, 1],
     scene_number: 63,
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 72),
   },
   {
     scene_title: 'GREMLIN',
@@ -341,6 +370,7 @@ export const order: OrderType[] = [
     scene_title: 'DOPPELGÄNGER_RASCAL',
     card_id: [1],
     scene_number: 67,
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 52),
   },
   {
     scene_title: 'SWITCHEROO',
@@ -356,18 +386,19 @@ export const order: OrderType[] = [
     scene_title: 'INSOMNIAC',
     card_id: [4, 1],
     scene_number: 70,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 4), //TODo
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 4),
   },
   {
     scene_title: 'SELF_AWARENESS_GIRL',
     card_id: [67, 1],
     scene_number: 71,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 67), //TODO
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 67),
   },
   {
     scene_title: 'SQUIRE',
     card_id: [83, 1],
     scene_number: 72,
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 83),
   },
   {
     scene_title: 'BEHOLDER',
@@ -433,7 +464,7 @@ export const order: OrderType[] = [
     scene_title: 'BLOB',
     card_id: [44, 1],
     scene_number: 84,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 44), //TODO
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 44),
   },
   {
     scene_title: 'MORTICIAN',
@@ -450,6 +481,6 @@ export const order: OrderType[] = [
     scene_title: 'FAMILY_MAN',
     card_id: [78, 1],
     scene_number: 87,
-    condition: (selectedCards) => selectedCards.some((card) => card.id === 78), //TODO
+    condition: (selectedCards) => selectedCards.some((card) => card.id === 78),
   },
 ]

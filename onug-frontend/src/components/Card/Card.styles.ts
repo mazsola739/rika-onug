@@ -3,10 +3,10 @@ import { StyledCardProps } from './Card.types'
 
 export const StyledCard = styled.div<StyledCardProps>`
   align-items: center;
-  background-color: ${({ isSelected }) =>
-    isSelected ? 'rgba(0, 0, 0, 0.3)' : 'transparent'};
+  /*   background-color: ${({ isSelected }) =>
+    isSelected ? 'rgba(0, 0, 0, 0.3)' : 'transparent'}; */
   border: ${({ isSelected }) =>
-    isSelected ? '2px solid yellow' : '2px solid transparent'};
+    isSelected ? '1px solid yellow' : '1px solid transparent'};
   display: flex;
   flex-direction: column;
   height: 90px;
@@ -22,6 +22,9 @@ export const CardImage = styled.img<{ isSelected?: boolean }>`
   transition: 0.75s;
   width: 90px;
   z-index: 1;
+
+  filter: ${({ isSelected }) =>
+    isSelected ? ' drop-shadow(8px 5px 5px black);' : ''};
 
   &:hover {
     transition: 0.75s;
