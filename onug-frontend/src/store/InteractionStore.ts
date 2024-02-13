@@ -5,6 +5,7 @@ import {
   insomniacStore,
   masonsStore,
   minionStore,
+  revealerStore,
   robberStore,
   seerStore,
   sentinelStore,
@@ -337,11 +338,11 @@ class InteractionStore {
       case "RENFIELD":
          renfieldStore.openYourEyes(this.lastJsonMessage)
       
-      break;
-      case "REVEALER":
-         revealerStore.openYourEyes(this.lastJsonMessage)
-      
-      break;
+      break;*/
+      case 'REVEALER':
+        revealerStore.openYourEyes(this.lastJsonMessage)
+
+        break /*
       case "DOPPELGÄNGER_REVEALER":
          revealerStore.openYourEyes(this.lastJsonMessage)
       

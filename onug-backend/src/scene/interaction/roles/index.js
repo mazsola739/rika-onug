@@ -56,7 +56,7 @@ const { insomniac }                                           = require("./insom
 const { selfawarenessgirl }                                   = require("./selfawarenessgirl")
 const { squire }                                              = require("./squire")
 const { beholder }                                            = require("./beholder")
-const { revealer, doppelganger_revealer }                     = require("./revealer")
+const { revealer, revealer_response, doppelganger_revealer }  = require("./revealer")
 const { exposer, doppelganger_exposer }                       = require("./exposer")
 const { flipper, doppelganger_flipper }                       = require("./flipper")
 const { empath, doppelganger_empath }                         = require("./empath")
@@ -128,7 +128,7 @@ exports.roles = {
   selfawarenessgirl,
   squire,
   beholder,
-  revealer, doppelganger_revealer,
+  revealer, revealer_response, doppelganger_revealer,
   exposer, doppelganger_exposer,
   flipper, doppelganger_flipper,
   empath, doppelganger_empath,

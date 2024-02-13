@@ -180,10 +180,23 @@ exports.getSelectablePlayersWithNoShield = (players, shielded_players) => player
 
 exports.isPlayersCardsFlipped = (flipped, playersPositions) =>  Object.keys(flipped).some(key => playersPositions.includes(key))
 
-exports.flippedCardIds = (flipped) => flipped.map(obj => Object.values(obj)[0])
+exports.isActivePlayersCardsFlipped = (flipped, playersPositions) => playersPositions.some((position) => flipped.some((obj) => Object.keys(obj)[0] === position))
 
+exports.getPlayersWithFlippedCards = (players, flipped) => {
+  const flippedCardIds = flipped.map(card => Object.values(card)[0]);
+  const flippedPlayers = [];
 
+  for (const token in players) {
+    const originalId = players[token].card.original_id;
+    if (flippedCardIds.includes(originalId)) {
+      flippedPlayers.push(token);
+    }
+  }
 
+  return flippedPlayers;
+}
+
+//TODO do i need this functions?
 exports.getTokenByCardId = (players, cardId) => {
   for (const token in players) {
     if (players?.[token]?.card.id === cardId) {

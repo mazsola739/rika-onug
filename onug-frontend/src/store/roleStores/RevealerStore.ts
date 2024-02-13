@@ -16,18 +16,10 @@ class RevealerStore {
           lastJsonMessage.shielded_players?.includes(position) || false
         const selectable =
           lastJsonMessage.selectable_cards?.includes(position) || false
-
         const showCard = lastJsonMessage.show_cards?.find(
           (showCardObj) => Object.keys(showCardObj)[0] === position
         )
-        const flippedCard = lastJsonMessage.flipped_cards?.find(
-          (flippedCardObj) => Object.keys(flippedCardObj)[0] === position
-        )
-
-        const showCardId = showCard?.[position] ?? 0
-        const flippedCardId = flippedCard?.[position] ?? 0
-
-        const id = showCardId || flippedCardId
+        const id = showCard ? (showCard as Record<string, number>)[position] : 0
 
         return { ...playerCard, shield, selectable, id }
       }

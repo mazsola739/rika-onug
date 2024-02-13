@@ -75,8 +75,8 @@ exports.doppelganger_instant_action = (gameState, token) => {
 
   return newGameState
 }
-
-exports.doppelganger_instant_action_response = (gameState, token, selected_positions) => {
+//TODO
+exports.doppelganger_instant_action_response = (gameState, token) => {
   const role = gameState?.players?.[token]?.role_history?.copied_role
 
   if (!role) {
@@ -92,7 +92,7 @@ exports.doppelganger_instant_action_response = (gameState, token, selected_posit
   const newGameState = {...gameState}
 
   if (role === "alphawolf")              return roles.alphawolf_response(newGameState, token, selected_positions)
-//if (role === "annoyinglad")            return roles.annoyinglad_response(newGameState, token, selected_positions)
+  if (role === "annoyinglad")            return roles.annoyinglad_response(newGameState, token, selected_positions)
   if (role === "apprenticeseer")         return roles.apprenticeseer_response(newGameState, token, selected_positions)
 //if (role === "cupid")                  return roles.cupid_response(newGameState, token, selected_positions)
 //if (role === "detector")               return roles.detector_response(newGameState, token, selected_positions)
@@ -117,101 +117,3 @@ exports.doppelganger_instant_action_response = (gameState, token, selected_posit
 
   return newGameState
 }
-
-
-/* const { roles } = require(".")
-const { INTERACTION } = require("../../../constant/ws")
-const { logError } = require("../../../log")
-const {
-  doppelgangerInstantActionsIds,
-  instantRoleIds,
-} = require("../constants")
-
-exports.doppelganger_instant_action = (gameState, token) => {
-  const new_role_id = gameState.players[token]?.role_history?.new_role_id
-
-  if (!doppelgangerInstantActionsIds.includes(new_role_id)) return gameState
-
-  const newGameState = { ...gameState }
-  const role_interactions = []
-
-  const roleName = instantRoleIds[new_role_id]
-
-  const roleHistory = {
-    ...newGameState.actual_scene,
-    instant_night_action: roleName,
-  }
-
-  newGameState.players[token].role_history = roleHistory
-
-  newGameState.actual_scene.interaction = `Doppelganger instant night action for player_${newGameState.players[token].player_number}: ${roleName}`
-  newGameState.actual_scene.copied_role = roleName
-
-  role_interactions.push({
-    type: INTERACTION,
-    title: "DOPPELGÄNGER_INSTANT_ACTION",
-    token,
-    message: "interaction_instant_night_action",
-    shielded_players: newGameState.shield,
-    instant_night_action: roleName,
-    new_role_id,
-    player_name: newGameState.players[token]?.name,
-    player_original_id: newGameState.players[token]?.card?.original_id,
-    player_card_id: newGameState.players[token]?.card?.id,
-    player_role: newGameState.players[token]?.card?.role,
-    player_role_id: newGameState.players[token]?.card?.role_id,
-    player_team: newGameState.players[token]?.card?.team,
-    player_number: newGameState.players[token]?.player_number,
-  })
-
-  newGameState.role_interactions = role_interactions
-
-  // Execute corresponding role function
-  if (roles.hasOwnProperty(roleName)) {
-    try {
-      return roles[roleName](newGameState, token)
-    } catch (error) {
-      logError(error)
-      return newGameState
-    }
-  }
-
-  return newGameState
-}
-
-exports.doppelganger_instant_action_response = (gameState, token, selected_positions) => {
-  const role = gameState?.players?.[token]?.role_history?.copied_role
-
-  if (!role) {
-    ws.send(
-      JSON.stringify({
-        type: INTERACTION,
-        message: "nope",
-      })
-    )
-    return gameState
-  }
-
-  const newGameState = { ...gameState }
-
-  // Mapping of role names to response functions
-  const responseFunctions = {
-    alphawolf: roles.alphawolf_response,
-    apprenticeseer: roles.apprenticeseer_response,
-    drunk: roles.drunk_response,
-    mysticwolf: roles.mysticwolf_response,
-    robber: roles.robber_response,
-    seer: roles.seer_response,
-    sentinel: roles.sentinel_response,
-    thing: roles.thing_response,
-    troublemaker: roles.troublemaker_response,
-  }
-
-  // Execute the corresponding response function if available
-  if (responseFunctions.hasOwnProperty(role)) {
-    return responseFunctions[role](newGameState, token, selected_positions)
-  }
-
-  return newGameState
-}
- */

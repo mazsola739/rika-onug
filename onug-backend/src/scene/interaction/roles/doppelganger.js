@@ -2,6 +2,7 @@ const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions } = require("../utils")
 
 //? INFO: Doppelgänger - Looks at any other player's card and becomes that card. Does that action during but different time
+//!ENNÉL A PONTNÁL soha sem látja ha shielded, vagy flipped
 exports.doppelganger = (gameState, token) => {
   const newGameState = { ...gameState }
   const role_interactions = []
@@ -22,8 +23,12 @@ exports.doppelganger = (gameState, token) => {
     token,
     message: "interaction_doppelganger",
     selectable_cards: selectablePlayerNumbers,
-    shielded_players: newGameState.shield,
-    ...newGameState.players[token]?.card,
+    player_name: newGameState.players[token]?.name,
+    player_original_id: newGameState.players[token]?.card?.original_id,
+    player_card_id: newGameState.players[token]?.card?.id,
+    player_role: newGameState.players[token]?.card?.role,
+    player_role_id: newGameState.players[token]?.card?.role_id,
+    player_team: newGameState.players[token]?.card?.team,
     player_number: newGameState.players[token]?.player_number,
   })
   
@@ -33,8 +38,8 @@ exports.doppelganger = (gameState, token) => {
 }
 
 exports.doppelganger_response = (gameState, token, selected_positions) => {
-  if (!selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position))) return gameState
-  
+  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -57,7 +62,12 @@ exports.doppelganger_response = (gameState, token, selected_positions) => {
     message: "interaction_doppelganger2",
     show_cards: showCards,
     new_role_id: newGameState.players[token].card.role_id,
-    ...newGameState.players[token]?.card,
+    player_name: newGameState.players[token]?.name,
+    player_original_id: newGameState.players[token]?.card?.original_id,
+    player_card_id: newGameState.players[token]?.card?.id,
+    player_role: newGameState.players[token]?.card?.role,
+    player_role_id: newGameState.players[token]?.card?.role_id,
+    player_team: newGameState.players[token]?.card?.team,
     player_number: newGameState.players[token]?.player_number,
   })
 
