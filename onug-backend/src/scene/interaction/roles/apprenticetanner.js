@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getTannerNumberByRoleIds } = require("../utils")
+const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getTannerNumberByRoleIds } = require("../utils")
 
 //? INFO: Apprentice Tanner - Tanner sticks out his thumb for him to see. Only wins if another Tanner dies. Multiple Apprentice Tanners are on the same team
 exports.apprenticetanner = (gameState, token) => {
@@ -15,15 +15,15 @@ exports.apprenticetanner = (gameState, token) => {
   newGameState.players[token].role_history = roleHistory
   newGameState.players[token].card_or_mark_action = false
 
-  const alphawolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
+  const apprenticetannerPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, apprenticetannerPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, apprenticetannerPlayerNumber)
 
   if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumbers[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumbers[0]].team
+    newGameState.players[token].card.id = newGameState.card_positions[apprenticetannerPlayerNumber[0]].id
+    newGameState.players[token].card.role_id = newGameState.card_positions[apprenticetannerPlayerNumber[0]].id
+    newGameState.players[token].card.role = newGameState.card_positions[apprenticetannerPlayerNumber[0]].role
+    newGameState.players[token].card.team = newGameState.card_positions[apprenticetannerPlayerNumber[0]].team
   } else if (iSeeMyCardElsewhere) {
     newGameState.players[token].card.id = 0
   }

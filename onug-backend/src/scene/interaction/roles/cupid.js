@@ -1,3 +1,6 @@
+const { INTERACTION } = require("../../../constant/ws")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+
 //? INFO: Cupid - Gives any two players (including herself) a Mark of Love if one of them dies so does the other
 //! NO flipped card but shield
 exports.cupid = (gameState, token) => {

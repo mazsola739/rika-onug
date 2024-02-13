@@ -1,24 +1,23 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
 
 //? INFO: Insomniac – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
 exports.insomniac = (gameState, token) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
-/*   const alphawolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
+  const insomniacPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, insomniacPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, insomniacPlayerNumber)
 
   if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumbers[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumbers[0]].team
+    newGameState.players[token].card.id = newGameState.card_positions[insomniacPlayerNumber[0]].id
+    newGameState.players[token].card.role_id = newGameState.card_positions[insomniacPlayerNumber[0]].id
+    newGameState.players[token].card.role = newGameState.card_positions[insomniacPlayerNumber[0]].role
+    newGameState.players[token].card.team = newGameState.card_positions[insomniacPlayerNumber[0]].team
   } else if (iSeeMyCardElsewhere) {
     newGameState.players[token].card.id = 0
   }
- */
 
   if (!newGameState.players[token].card.shield) {
     const insomniacPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])

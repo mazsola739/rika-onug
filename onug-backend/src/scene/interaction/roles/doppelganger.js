@@ -2,7 +2,7 @@ const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions } = require("../utils")
 
 //? INFO: Doppelgänger - Looks at any other player's card and becomes that card. Does that action during but different time
-//!ENNÉL A PONTNÁL soha sem látja ha shielded, vagy flipped
+//! At this moment doppelganger never see flipped or shielded cards
 exports.doppelganger = (gameState, token) => {
   const newGameState = { ...gameState }
   const role_interactions = []

@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithMatchingTokens } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
 
 //? INFO: Mason (2) – Wakes up and looks for the other fellow Mason
 exports.masons = (gameState, tokens) => {
@@ -16,18 +16,18 @@ exports.masons = (gameState, tokens) => {
     newGameState.players[token].role_history = roleHistory
     newGameState.players[token].card_or_mark_action = false
 
-    const alphawolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
+    const masonPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, masonPlayerNumber)
+    const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, masonPlayerNumber)
 
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumbers[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumbers[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
+    if (iSeeMyCardIsFlipped) {
+      newGameState.players[token].card.id = newGameState.card_positions[masonPlayerNumber[0]].id
+      newGameState.players[token].card.role_id = newGameState.card_positions[masonPlayerNumber[0]].id
+      newGameState.players[token].card.role = newGameState.card_positions[masonPlayerNumber[0]].role
+      newGameState.players[token].card.team = newGameState.card_positions[masonPlayerNumber[0]].team
+    } else if (iSeeMyCardElsewhere) {
+      newGameState.players[token].card.id = 0
+    }
 
     role_interactions.push({
       type: INTERACTION,

@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithMatchingTokens, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions } = require("../utils")
+const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions } = require("../utils")
 const { centerCardPositions } = require("../constants")
 
 //TODO DREAMWOLF & werewolf_response
@@ -14,24 +14,27 @@ exports.werewolves = (gameState, tokens) => {
 
   const selectableCards = loneWolf ? centerCardPositions : []
 
-  /* const alphawolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumbers[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumbers[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  } */
-
   tokens.forEach((token) => {
-    const roleHistory = { ...newGameState.actual_scene, selectable_cards: selectableCards }
+    const roleHistory = {
+      ...newGameState.actual_scene,
+      selectable_cards: selectableCards
+    }
 
     newGameState.players[token].role_history = roleHistory
     newGameState.players[token].card_or_mark_action = false
+
+    const werewolfPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, werewolfPlayerNumber)
+    const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, werewolfPlayerNumber)
+
+    if (iSeeMyCardIsFlipped) {
+      newGameState.players[token].card.id = newGameState.card_positions[werewolfPlayerNumber[0]].id
+      newGameState.players[token].card.role_id = newGameState.card_positions[werewolfPlayerNumber[0]].id
+      newGameState.players[token].card.role = newGameState.card_positions[werewolfPlayerNumber[0]].role
+      newGameState.players[token].card.team = newGameState.card_positions[werewolfPlayerNumber[0]].team
+    } else if (iSeeMyCardElsewhere) {
+      newGameState.players[token].card.id = 0
+    }
 
     role_interactions.push({
       type: INTERACTION,
@@ -41,6 +44,14 @@ exports.werewolves = (gameState, tokens) => {
       werewolves: werewolfPlayerNumbers,
       selectable_cards: selectableCards,
       shielded_players: newGameState.shield,
+      show_cards: newGameState.flipped,
+      player_name: newGameState.players[token]?.name,
+      player_original_id: newGameState.players[token]?.card?.original_id,
+      player_card_id: newGameState.players[token]?.card?.id,
+      player_role: newGameState.players[token]?.card?.role,
+      player_role_id: newGameState.players[token]?.card?.role_id,
+      player_team: newGameState.players[token]?.card?.team,
+      player_number: newGameState.players[token]?.player_number,
     })
 
     if (!loneWolf) {

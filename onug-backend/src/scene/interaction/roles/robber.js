@@ -1,6 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithMatchingTokens, getPlayerNumbersWithNonMatchingTokens, getCardIdsByPlayerNumbers } = require("../utils");
-
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
 
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
 exports.robber = (gameState, token) => {
@@ -9,18 +8,18 @@ exports.robber = (gameState, token) => {
 
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token);
 
-  /* const alphawolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
+  const robberPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, robberPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, robberPlayerNumber)
 
   if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumbers[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumbers[0]].team
+    newGameState.players[token].card.id = newGameState.card_positions[robberPlayerNumber[0]].id
+    newGameState.players[token].card.role_id = newGameState.card_positions[robberPlayerNumber[0]].id
+    newGameState.players[token].card.role = newGameState.card_positions[robberPlayerNumber[0]].role
+    newGameState.players[token].card.team = newGameState.card_positions[robberPlayerNumber[0]].team
   } else if (iSeeMyCardElsewhere) {
     newGameState.players[token].card.id = 0
-  } */
+  }
 
   if (!newGameState.players[token].card.shield) {
     const roleHistory = {
@@ -38,6 +37,7 @@ exports.robber = (gameState, token) => {
       message: "interaction_robber",
       selectable_cards: selectablePlayerNumbers,
       shielded_players: newGameState.shield,
+      show_cards: newGameState.flipped,
       player_name: newGameState.players[token]?.name,
       player_original_id: newGameState.players[token]?.card?.original_id,
       player_card_id: newGameState.players[token]?.card?.id,
@@ -53,13 +53,14 @@ exports.robber = (gameState, token) => {
 
     newGameState.players[token].role_history = roleHistory
     newGameState.players[token].card_or_mark_action = false
-    
+
     role_interactions.push({
       type: INTERACTION,
       title: "ROBBER",
       token,
       message: "interaction_shielded",
       shielded_players: newGameState.shield,
+      show_cards: newGameState.flipped,
       player_name: newGameState.players[token]?.name,
       player_original_id: newGameState.players[token]?.card?.original_id,
       player_card_id: newGameState.players[token]?.card?.id,
@@ -84,7 +85,6 @@ exports.robber_response = (gameState, token, selected_positions) => {
   const role_interactions = []
 
   const robberPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token]);
-
 
   const playerCard = { ...newGameState.card_positions[robberPlayerNumber] };
   const selectedCard = { ...newGameState.card_positions[selected_positions[0]] };

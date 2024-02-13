@@ -1,11 +1,24 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithMatchingTokens } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
 const { centerCardPositions } = require("../constants")
 
 //? INFO: Drunk – Swap your card with a card from center but does not look at his new card
 exports.drunk = (gameState, token) => {
   const newGameState = { ...gameState }
   const role_interactions = []
+
+  const drunkPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, drunkPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, drunkPlayerNumber)
+
+  if (iSeeMyCardIsFlipped) {
+    newGameState.players[token].card.id = newGameState.card_positions[drunkPlayerNumber[0]].id
+    newGameState.players[token].card.role_id = newGameState.card_positions[drunkPlayerNumber[0]].id
+    newGameState.players[token].card.role = newGameState.card_positions[drunkPlayerNumber[0]].role
+    newGameState.players[token].card.team = newGameState.card_positions[drunkPlayerNumber[0]].team
+  } else if (iSeeMyCardElsewhere) {
+    newGameState.players[token].card.id = 0
+  }
 
   if (!newGameState.players[token].card.shield) {
     const roleHistory = {
@@ -14,19 +27,6 @@ exports.drunk = (gameState, token) => {
     }
     newGameState.players[token].role_history = roleHistory
     newGameState.players[token].card_or_mark_action = false
-
-    const alphawolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumbers[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumbers[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
 
     role_interactions.push({
       type: INTERACTION,

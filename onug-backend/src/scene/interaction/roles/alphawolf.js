@@ -1,6 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { getNonWerewolfPlayerNumbersByRoleIds, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
-const { logError } = require("../../../log")
 
 //? INFO: Alpha Wolf - Wakes with other Werewolves. Wakes after and exchanges the center Alpha card with any other non-Werewolf player card
 exports.alphawolf = (gameState, token) => {
@@ -18,15 +17,15 @@ exports.alphawolf = (gameState, token) => {
   newGameState.players[token].role_history = roleHistory
   newGameState.players[token].card_or_mark_action = false
 
-  const alphawolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
+  const alphawolfPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumber)
 
   if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumbers[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumbers[0]].team
+    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumber[0]].id
+    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumber[0]].id
+    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumber[0]].role
+    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumber[0]].team
   } else if (iSeeMyCardElsewhere) {
     newGameState.players[token].card.id = 0
   }

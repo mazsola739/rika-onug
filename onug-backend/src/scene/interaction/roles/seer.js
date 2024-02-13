@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
 const { centerCardPositions } = require("../constants")
 
 //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
@@ -19,15 +19,15 @@ exports.seer = (gameState, token) => {
   newGameState.players[token].role_history = roleHistory
   newGameState.players[token].card_or_mark_action = false
 
-  const alphawolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
+  const seerPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, seerPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, seerPlayerNumber)
 
   if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumbers[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumbers[0]].team
+    newGameState.players[token].card.id = newGameState.card_positions[seerPlayerNumber[0]].id
+    newGameState.players[token].card.role_id = newGameState.card_positions[seerPlayerNumber[0]].id
+    newGameState.players[token].card.role = newGameState.card_positions[seerPlayerNumber[0]].role
+    newGameState.players[token].card.team = newGameState.card_positions[seerPlayerNumber[0]].team
   } else if (iSeeMyCardElsewhere) {
     newGameState.players[token].card.id = 0
   }

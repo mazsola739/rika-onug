@@ -16,15 +16,15 @@ exports.annoyinglad = (gameState, token) => {
   newGameState.players[token].role_history = roleHistory
   newGameState.players[token].card_or_mark_action = false
 
-  const annoyingladPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, annoyingladPlayerNumbers)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, annoyingladPlayerNumbers)
+  const annoyingladPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, annoyingladPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, annoyingladPlayerNumber)
 
   if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[annoyingladPlayerNumbers[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[annoyingladPlayerNumbers[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[annoyingladPlayerNumbers[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[annoyingladPlayerNumbers[0]].team
+    newGameState.players[token].card.id = newGameState.card_positions[annoyingladPlayerNumber[0]].id
+    newGameState.players[token].card.role_id = newGameState.card_positions[annoyingladPlayerNumber[0]].id
+    newGameState.players[token].card.role = newGameState.card_positions[annoyingladPlayerNumber[0]].role
+    newGameState.players[token].card.team = newGameState.card_positions[annoyingladPlayerNumber[0]].team
   } else if (iSeeMyCardElsewhere) {
     newGameState.players[token].card.id = 0
   }

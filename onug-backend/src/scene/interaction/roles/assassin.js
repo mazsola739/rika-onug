@@ -1,3 +1,5 @@
+const { INTERACTION } = require("../../../constant/ws")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
 
 //TODO doppelganger
 //! NO flipped card but shield

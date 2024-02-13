@@ -1,4 +1,7 @@
-//! NINCS FLIPPED VAGY SHIELDED card ezen a ponton
+const { INTERACTION } = require("../../../constant/ws")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+
+//! At this moment doppelganger never see flipped or shielded cards
 exports.mirrorman = (gameState, token) => {
   const newGameState = { ...gameState }
 

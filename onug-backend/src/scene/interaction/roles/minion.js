@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getTokensByRoleIds } = require("../utils")
 const { werewolvesAndDreamWolfIds } = require("../constants")
-const { getPlayerNumbersWithMatchingTokens, getTokensByRoleIds } = require("../utils")
 
 //? INFO: Minion - All Werewolf team (not Minion/Squire) stick up their thumb for him to see
 exports.minion = (gameState, token) => {
@@ -18,15 +18,15 @@ exports.minion = (gameState, token) => {
   newGameState.players[token].role_history = roleHistory
   newGameState.players[token].card_or_mark_action = false
 
-  const alphawolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
+  const minionPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, minionPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, minionPlayerNumber)
 
   if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumbers[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumbers[0]].team
+    newGameState.players[token].card.id = newGameState.card_positions[minionPlayerNumber[0]].id
+    newGameState.players[token].card.role_id = newGameState.card_positions[minionPlayerNumber[0]].id
+    newGameState.players[token].card.role = newGameState.card_positions[minionPlayerNumber[0]].role
+    newGameState.players[token].card.team = newGameState.card_positions[minionPlayerNumber[0]].team
   } else if (iSeeMyCardElsewhere) {
     newGameState.players[token].card.id = 0
   }

@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens } = require("../utils");
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
 
 
 //? INFO: Troublemaker - Swaps any two other player's cards (not her own or center) without looking at them
@@ -17,15 +17,15 @@ exports.troublemaker = (gameState, token) => {
   newGameState.players[token].role_history = roleHistory
   newGameState.players[token].card_or_mark_action = false
 
-  const alphawolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumbers)
+  const troublemakerPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, troublemakerPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, troublemakerPlayerNumber)
 
   if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumbers[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumbers[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumbers[0]].team
+    newGameState.players[token].card.id = newGameState.card_positions[troublemakerPlayerNumber[0]].id
+    newGameState.players[token].card.role_id = newGameState.card_positions[troublemakerPlayerNumber[0]].id
+    newGameState.players[token].card.role = newGameState.card_positions[troublemakerPlayerNumber[0]].role
+    newGameState.players[token].card.team = newGameState.card_positions[troublemakerPlayerNumber[0]].team
   } else if (iSeeMyCardElsewhere) {
     newGameState.players[token].card.id = 0
   }
@@ -37,6 +37,14 @@ exports.troublemaker = (gameState, token) => {
     message: "interaction_troublemaker",
     selectable_cards: selectablePlayerNumbers,
     shielded_players: newGameState.shield,
+    show_cards: newGameState.flipped,
+    player_name: newGameState.players[token]?.name,
+    player_original_id: newGameState.players[token]?.card?.original_id,
+    player_card_id: newGameState.players[token]?.card?.id,
+    player_role: newGameState.players[token]?.card?.role,
+    player_role_id: newGameState.players[token]?.card?.role_id,
+    player_team: newGameState.players[token]?.card?.team,
+    player_number: newGameState.players[token]?.player_number,
   })
 
 
