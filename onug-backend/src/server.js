@@ -6,6 +6,7 @@ const { pageNotFoundError, internalServerError, apiRouter } = require("./api")
 const { logDebug } = require('./log')
 const { websocketServer } = require('./websocket')
 const { godRouter } = require("./god")
+const { stubRouter } = require("./stub")
 
 const app = express()
 const PORT = 7654
@@ -25,6 +26,7 @@ app.use(cors({
 // API routing
 app.use('/api', apiRouter)
 app.use('/god', godRouter)
+app.use('/stub', stubRouter)
 
 // Error handling
 app.use(pageNotFoundError)

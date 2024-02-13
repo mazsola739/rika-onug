@@ -1,11 +1,12 @@
 const { DEAL, REDIRECT } = require("../constant/ws")
-const { logTrace } = require("../log")
+const { logTrace, logInfo } = require("../log")
 const { validateRoom } = require("../validator")
 const { repository } = require("../repository")
 const { STAGES } = require("../constant/stage")
 const { broadcast } = require("./connections")
 const { upsertRoomState } = repository
 const cards = require("../data/cards.json")
+const { stubbedCards } = require("../stub/populate-deal")
 
 const alphaWolfId = 17
 const temptressId = 69
@@ -35,6 +36,7 @@ const shuffle = (selectedCardIds) => {
 
   return selectedCardIds
 }
+const getStubbedOrDealtCard = (stubbedCard, dealtCard) => stubbedCard || dealtCard
 
 const dealCardIds = (selectedCardIds) => {
   let cardIds = [...selectedCardIds]
@@ -53,15 +55,21 @@ const dealCardIds = (selectedCardIds) => {
 
   const centerCardIds = shuffledCards.slice(0, 3)
   const playerCardIds = shuffledCards.slice(3)
+  stubbedCards.playerCards.forEach((stubbedCard, index) => playerCardIds[index] = playerCardIds[index] && getStubbedOrDealtCard(stubbedCard, playerCardIds[index]))
 
   const playerCards = playerCardIds.map((id) => getCardById(id))
   const centerCards = centerCardIds.map((id) => getCardById(id))
 
-  const leftCard = centerCards[0]
-  const middleCard = centerCards[1]
-  const rightCard = centerCards[2]
-  const newWolfCard = getCardById(newWolfCardId)
-  const newVillainCard = getCardById(newVillainCardId)
+  logInfo('dealt cards: ', {
+    playerCards,
+    centerCards,
+  })
+  logInfo('stubbedCards: ', stubbedCards)
+  const leftCard = getStubbedOrDealtCard(stubbedCards.leftCard, centerCards[0])
+  const middleCard = getStubbedOrDealtCard(stubbedCards.middleCard, centerCards[1])
+  const rightCard = getStubbedOrDealtCard(stubbedCards.rightCard, centerCards[2])
+  const newWolfCard = getStubbedOrDealtCard(stubbedCards.newWolfCard, getCardById(newWolfCardId))
+  const newVillainCard = getStubbedOrDealtCard(stubbedCards.newVillainCard, getCardById(newVillainCardId))
 
   return {
     playerCards,
@@ -194,3 +202,8 @@ exports.dealCards = async (ws, message) => {
 
   return broadcast(room_id, redirectToGameTable)
 }
+/* 
+module.exports = {
+  stubbedCards,
+}
+ */
