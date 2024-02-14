@@ -48,7 +48,7 @@ export const God: React.FC = observer(() => {
   })
   const [roomId, setRoomId] = useState('')
   const [token, setToken] = useState('')
-  const [message, setMessage] = useState({"type": "MESSAGE", "message": "hi there, this is a broadcast message"})
+  const [message, setMessage] = useState({"type": "REDIRECT", "path": "/lobby"})
 
   const checkGameStates = async () => {
     const res = await fetch('/god/check-game-states')
