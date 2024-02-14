@@ -1,6 +1,7 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
 
+//SAME as seer
 exports.detector = (gameState, token) => {
   const newGameState = {...gameState}
 
@@ -16,6 +17,15 @@ exports.detector = (gameState, token) => {
   } else if (iSeeMyCardElsewhere) {
     newGameState.players[token].card.id = 0
   }
+
+  return newGameState
+}
+
+exports.detector_response = (gameState, token, selected_positions) => {
+  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+
+  const newGameState = { ...gameState }
+  const role_interactions = []
 
   return newGameState
 }

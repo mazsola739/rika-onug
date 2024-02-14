@@ -4,6 +4,7 @@ import { CardBack, StyledGameCard, Tokens } from './GameCard.styles'
 import { GameCardProps } from './GameCard.types'
 import { deckStore, gameTableStore, interactionStore } from 'store'
 import { Icon, Token } from 'components'
+import { useClickHandler } from 'hooks'
 
 export const GameCard: React.FC<GameCardProps> = observer(
   ({ position, id, isCenter, ready, werewolf, selectable, mason, shield }) => {
@@ -15,6 +16,10 @@ export const GameCard: React.FC<GameCardProps> = observer(
       card && card.id !== 0
         ? `/assets/cards/${card.card_name}.png`
         : '/assets/backgrounds/card_back.png'
+
+    const room_id = sessionStorage.getItem('room_id')
+    const token = sessionStorage.getItem('token')
+    const { handleInteraction } = useClickHandler(room_id, token)
 
     const clickHandler = (cardType: string) => {
       const maxCenterCardSelection = interactionStore.selectableCenterCardLimit
@@ -51,6 +56,9 @@ export const GameCard: React.FC<GameCardProps> = observer(
         } else if (hasOppositeSelected) {
           return
         }
+
+        interactionStore.selectedCards.length === maxSelectionLimit &&
+          handleInteraction(interactionStore.selectedCards)
       }
     }
 

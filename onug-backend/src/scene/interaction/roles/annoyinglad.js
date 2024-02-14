@@ -1,5 +1,5 @@
 const { INTERACTION, MESSAGE } = require("../../../constant/ws")
-const { getPlayerNeighborsByToken, getPlayerTokenByPlayerNumber, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped } = require("../utils")
+const { getPlayerNeighborsByToken, getPlayerTokenByPlayerNumber, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
 
 //? INFO: Thing - Taps the nearest shoulder of the player on their immediate right or left //THING, ANNOYING_LAD
 exports.annoyinglad = (gameState, token) => {

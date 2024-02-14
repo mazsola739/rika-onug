@@ -5,8 +5,9 @@ const { repository } = require("../repository")
 const { STAGES } = require("../constant/stage")
 const { broadcast } = require("./connections")
 const { upsertRoomState } = repository
-const cards = require("../data/cards.json")
 const { stubbedCards } = require("../stub/populate-deal")
+
+const cards = require("../data/cards.json")
 
 const alphaWolfId = 17
 const temptressId = 69
@@ -18,15 +19,12 @@ const markIds = [28, 29, 31, 32, 34, 38, 39, 40, 41]
 
 const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(alphaWolfId)
 const hasTemptress = (selectedCardIds) => selectedCardIds.includes(temptressId)
-const hasMark = (selectedCardIds) =>
-  markIds.some((id) => selectedCardIds.includes(id))
+const hasMark = (selectedCardIds) =>  markIds.some((id) => selectedCardIds.includes(id))
 
 const getCardById = (card_id) => cards.find((card) => card.id === card_id)
 const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
-const getRandomItemFromArray = (array) =>
-  array[getRandomNumber(0, array.length - 1)]
-const filterCardsByIds = (selectedCardIds, idsToCheck) =>
-  selectedCardIds.filter((cardId) => idsToCheck.includes(cardId))
+const getRandomItemFromArray = (array) => array[getRandomNumber(0, array.length - 1)]
+const filterCardsByIds = (selectedCardIds, idsToCheck) => selectedCardIds.filter((cardId) => idsToCheck.includes(cardId))
 
 const shuffle = (selectedCardIds) => {
   for (let i = selectedCardIds.length - 1; i > 0; i--) {
@@ -48,13 +46,14 @@ const dealCardIds = (selectedCardIds) => {
     ? getRandomItemFromArray(filterCardsByIds(cardIds, supervillainIdsToCheck))
     : undefined
 
-  if (newWolfCardId) cardIds = cardIds.filter((cardId) => cardId !== newWolfCardId)
+  if (newWolfCardId) cardIds    = cardIds.filter((cardId) => cardId !== newWolfCardId)
   if (newVillainCardId) cardIds = cardIds.filter((cardId) => cardId !== newVillainCardId)
 
   const shuffledCards = shuffle(cardIds)
 
   const centerCardIds = shuffledCards.slice(0, 3)
   const playerCardIds = shuffledCards.slice(3)
+  
   stubbedCards.playerCards.forEach((stubbedCard, index) => playerCardIds[index] = playerCardIds[index] && getStubbedOrDealtCard(stubbedCard, playerCardIds[index]))
 
   const playerCards = playerCardIds.map((id) => getCardById(id))
@@ -65,10 +64,10 @@ const dealCardIds = (selectedCardIds) => {
     centerCards,
   })
   logInfo('stubbedCards: ', stubbedCards)
-  const leftCard = getStubbedOrDealtCard(stubbedCards.leftCard, centerCards[0])
-  const middleCard = getStubbedOrDealtCard(stubbedCards.middleCard, centerCards[1])
-  const rightCard = getStubbedOrDealtCard(stubbedCards.rightCard, centerCards[2])
-  const newWolfCard = getStubbedOrDealtCard(stubbedCards.newWolfCard, getCardById(newWolfCardId))
+  const leftCard       = getStubbedOrDealtCard(stubbedCards.leftCard, centerCards[0])
+  const middleCard     = getStubbedOrDealtCard(stubbedCards.middleCard, centerCards[1])
+  const rightCard      = getStubbedOrDealtCard(stubbedCards.rightCard, centerCards[2])
+  const newWolfCard    = getStubbedOrDealtCard(stubbedCards.newWolfCard, getCardById(newWolfCardId))
   const newVillainCard = getStubbedOrDealtCard(stubbedCards.newVillainCard, getCardById(newVillainCardId))
 
   return {

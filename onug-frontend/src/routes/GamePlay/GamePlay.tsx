@@ -96,9 +96,7 @@ export const GamePlay: React.FC = observer(() => {
             <OwnCardPlace>
               <KnownOwnCard player={gameBoardStore.knownPlayer} />
             </OwnCardPlace>
-            {interactionStore.hasMessageBox && (
-              <MessageBox room_id={room_id} token={token} />
-            )}
+            {interactionStore.hasMessageBox && <MessageBox />}
           </PlayerHand>
         </GamePlayContainer>
       </Main>

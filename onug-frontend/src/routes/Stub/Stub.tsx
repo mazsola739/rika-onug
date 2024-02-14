@@ -15,44 +15,49 @@ import {
   StyledStub,
   PopulatorContainer,
   StubTitle,
+  RoleName,
+  InputField,
 } from './Stub.styles'
-import { Icon } from 'components'
 import { dealStubDoppelganger } from './TestCases/test-case-doppelganger-01'
+import {
+  labels,
+  roleMapping,
+  DEAL_POPULATOR,
+  POPULATE,
+  RESET,
+  TEST_CASE,
+  RESPONSE,
+} from './Stub.constants'
 
-const DEAL_POPULATOR = 'Deal populator'
-const POPULATE = 'populate'
-const RESET = 'reset'
-const TEST_CASE = 'test case'
-const RESPONSE = 'Response'
-const labels = [
-  'P1',
-  'P2',
-  'P3',
-  'P4',
-  'P5',
-  'P6',
-  'P7',
-  'P8',
-  'P9',
-  'P10',
-  'P11',
-  'P12',
-  'newWolfCard',
-  'newVillainCard',
-  'middleCard',
-  'rightCard',
-  'leftCard',
-]
 // TODO security, protected routing and sending a secure GOD token
-export type DealStubType = {
-  [key: string]: number
-}
 
 export const Stub: React.FC = observer(() => {
+  const [inputValues, setInputValues] = useState<number[]>(
+    Array(labels.length).fill(0)
+  )
   const [response, setResponse] = useState({
     serverResponse: 'will be populated here',
   })
-  const [dealStub, setDealStub] = useState<DealStubType>({})
+  const [dealStub, setDealStub] = useState<Record<string, number>>({})
+
+  // Function to update the input value
+  const handleInputChange = useCallback(
+    (index: number, value: number) => {
+      setInputValues((prevState) => {
+        const newState = [...prevState]
+        newState[index] = value
+        return newState
+      })
+      const newDealStub = { ...dealStub, [labels[index]]: value }
+      setDealStub(newDealStub)
+    },
+    [dealStub, setDealStub]
+  )
+
+  // Function to get the role name based on the input value
+  const getRoleName = useCallback((id: number): string => {
+    return roleMapping[id] || 'Unknown'
+  }, [])
 
   const populateStub = useCallback(async () => {
     const res = await fetch('/stub/populate/deal', {
@@ -95,63 +100,41 @@ export const Stub: React.FC = observer(() => {
     setResponse(json)
   }, [setDealStub])
 
-  const updateDealStub = useCallback(
-    (position: string, id: number) => {
-      const newDealStub = { ...dealStub }
-      newDealStub[position] = id
-      setDealStub(newDealStub)
-    },
-    [dealStub, setDealStub]
-  )
-
   return (
     <StyledStub>
       <LeftSide>
-        <StubTitle>
-          <Icon iconName="shield" size={25} /> {DEAL_POPULATOR}
-        </StubTitle>
+        <StubTitle>{DEAL_POPULATOR}</StubTitle>
         <PopulatorContainer>
           <FormContainer>
             <InputContainer>
               {labels.map((label, index) => (
                 <PositionContainer key={index}>
-                  <Label htmlFor={label}>{label}</Label>
-                  <Input
-                    type="number"
-                    id={label}
-                    name={label}
-                    onChange={(e) =>
-                      updateDealStub(label, e.target.valueAsNumber)
-                    }
-                  />
+                  <Input>
+                    <Label htmlFor={label}>{label}</Label>
+                    <InputField
+                      type="number"
+                      id={label}
+                      name={label}
+                      value={inputValues[index]}
+                      onChange={(e) =>
+                        handleInputChange(index, parseInt(e.target.value))
+                      }
+                    />
+                  </Input>
+                  <RoleName>{getRoleName(dealStub[label])}</RoleName>
                 </PositionContainer>
               ))}
             </InputContainer>
           </FormContainer>
+          <ButtonsContainer>
+            <Button onClick={populateStub}>{POPULATE}</Button>
+            <Button onClick={resetStub}>{RESET}</Button>
+            <Button onClick={useTestCase}>{TEST_CASE}</Button>
+          </ButtonsContainer>
         </PopulatorContainer>
-        <ButtonsContainer>
-          <Button onClick={populateStub}>
-            <Icon iconName="alien" size={25} /> {POPULATE}
-          </Button>
-          <Button onClick={resetStub}>
-            <Icon iconName="alien" size={25} /> {RESET}
-          </Button>{' '}
-          <Button onClick={useTestCase}>
-            <Icon iconName="alien" size={25} /> {TEST_CASE}
-          </Button>{' '}
-        </ButtonsContainer>{' '}
       </LeftSide>
       <RightSide>
-        <StubTitle>
-          <Icon iconName="interaction" size={25} /> {RESPONSE}{' '}
-          <Icon iconName="blind" size={25} />
-          <Icon iconName="claw" size={25} />
-          <Icon iconName="eye" size={25} />
-          <Icon iconName="mute" size={25} />
-          <Icon iconName="ufo" size={25} />
-          <Icon iconName="select" size={25} />
-          <Icon iconName="secret" size={25} />
-        </StubTitle>
+        <StubTitle>{RESPONSE}</StubTitle>
         <ResponseContainer>
           <ResponsePre>{`${JSON.stringify(response, null, 4)}`}</ResponsePre>
         </ResponseContainer>

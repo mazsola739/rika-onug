@@ -1,7 +1,5 @@
-import { DealStubType } from '../Stub'
-
-export const dealStubDoppelganger: DealStubType = {
-  P1: 1,
-  P2: 15,
-  P3: 7,
+export const dealStubDoppelganger: Record<string, number> = {
+  Player1: 1,
+  Player2: 15,
+  Player3: 7,
 }
