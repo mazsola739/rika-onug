@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { observer } from 'mobx-react-lite'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import {
   Button,
   ButtonsContainer,
@@ -22,6 +23,7 @@ import { Icon } from 'components'
 const GAMESTATES = 'GameStates'
 const LABEL_ROOM_ID = 'room_id:'
 const LABEL_TOKEN = 'token:'
+const LABEL_MESSAGE = 'message:'
 const CHECK_GAME_STATES = 'Check gamesStates'
 const CHECK_GAME_STATE_BY_ROOM_ID = 'Check gameState by room_id'
 const DELETE_ALL_GAME_STATES = 'Delete all gameStates'
@@ -46,6 +48,7 @@ export const God: React.FC = observer(() => {
   })
   const [roomId, setRoomId] = useState('')
   const [token, setToken] = useState('')
+  const [message, setMessage] = useState({type: 'MESSAGE', message: 'hi there'})
 
   const checkGameStates = async () => {
     const res = await fetch('/god/check-game-states')
@@ -93,9 +96,19 @@ export const God: React.FC = observer(() => {
     setResponse(json)
   }
 
-  const broadcastToAll = () => {
-    console.log('Click')
-  }
+  // {type: 'MESSAGE', message: 'asdqwe'}
+  const broadcastToAll = useCallback(async () => {
+    const res = await fetch('/god/broadcast-to-all', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(message),
+    })
+    const json = await res.json()
+    setResponse(json)
+  }, [message, setResponse])
 
   const broadcastToAllInRoom = () => {
     console.log('Click')
@@ -116,6 +129,14 @@ export const God: React.FC = observer(() => {
     const json = await res.json()
     setResponse(json)
   }
+
+  const setMessageHandler = (value: string) => {
+      try {
+        return setMessage(JSON.parse(value))
+      } catch (error) {
+        // shhhhhh, no need to do anything, we just try to 
+      }
+    }
 
   return (
     <StyledGod>
@@ -147,6 +168,18 @@ export const God: React.FC = observer(() => {
                 name="token"
                 value={token}
                 onChange={(e) => setToken(e.target.value)}
+              />
+            </InputContainer>
+            <InputContainer>
+              <Label htmlFor="message">
+                <Icon iconName="mason" size={25} /> {LABEL_MESSAGE}
+              </Label>
+              <Input
+                type="textarea"
+                id="message"
+                name="message"
+                defaultValue={JSON.stringify(message)}
+                onChange={(event) => setMessageHandler(event.target.value)}
               />
             </InputContainer>
           </FormContainer>

@@ -1,8 +1,12 @@
-const { logError } = require("../log")
+const { logError, logErrorWithStack } = require("../log")
 
 exports.pageNotFoundError = (req, res) => {
-  logError(`page not found: ${req.originalUrl}`)
-  res.status(404).send("error")
+  try {
+    throw new Error(`page not found: ${req.originalUrl}`)
+  } catch(error) {
+    logErrorWithStack(error)
+    res.status(404).send("error")
+  }
 }
 
 exports.internalServerError = (error, req, res) => {

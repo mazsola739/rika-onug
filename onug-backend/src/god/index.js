@@ -8,6 +8,7 @@ const { deleteGameStateByRoomId } = require('./delete-game-state-by-room-id')
 const { deleteAllPlayers } = require('./delete-all-players')
 const { deletePlayerByToken } = require('./delete-player-by-token')
 const { checkConnections } = require('./check-connections')
+const { broadCastToAll } = require('./broadcast-to-all')
 const { metaListOnugEnv } = require('./meta-list-onug-env')
 const { metaDeleteAllOldLogFiles } = require('./meta-delete-all-old-log-files')
 
@@ -19,6 +20,7 @@ router.get('/delete-game-state-by-room-id', deleteGameStateByRoomId)
 
 // ws
 router.get('/check-connections', checkConnections)
+router.post('/broadcast-to-all', broadCastToAll)
 
 //! TODO removing players does not handle available_names, and admin rights right now. TODO fix it.
 router.get('/delete-all-players', deleteAllPlayers)
