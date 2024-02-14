@@ -40,7 +40,6 @@ export const Stub: React.FC = observer(() => {
   })
   const [dealStub, setDealStub] = useState<Record<string, number>>({})
 
-  // Function to update the input value
   const handleInputChange = useCallback(
     (index: number, value: number) => {
       setInputValues((prevState) => {
@@ -48,13 +47,13 @@ export const Stub: React.FC = observer(() => {
         newState[index] = value
         return newState
       })
-      const newDealStub = { ...dealStub, [labels[index]]: value }
+      const newDealStub = { ...dealStub }
+      newDealStub[labels[index]] = value < 1 || value > 86 ? null : value
       setDealStub(newDealStub)
     },
     [dealStub, setDealStub]
   )
 
-  // Function to get the role name based on the input value
   const getRoleName = useCallback((id: number): string => {
     return roleMapping[id] || 'Unknown'
   }, [])

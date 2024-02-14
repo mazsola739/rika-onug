@@ -53,8 +53,9 @@ const dealCardIds = (selectedCardIds) => {
 
   const centerCardIds = shuffledCards.slice(0, 3)
   const playerCardIds = shuffledCards.slice(3)
+
+  playerCardIds.forEach((playerCard, index) => playerCardIds[index] = getStubbedOrDealtCard(stubbedCards.playerCards[index], playerCard))
   
-  stubbedCards.playerCards.forEach((stubbedCard, index) => playerCardIds[index] = playerCardIds[index] && getStubbedOrDealtCard(stubbedCard, playerCardIds[index]))
 
   const playerCards = playerCardIds.map((id) => getCardById(id))
   const centerCards = centerCardIds.map((id) => getCardById(id))
@@ -69,6 +70,8 @@ const dealCardIds = (selectedCardIds) => {
   const rightCard      = getStubbedOrDealtCard(stubbedCards.rightCard, centerCards[2])
   const newWolfCard    = getStubbedOrDealtCard(stubbedCards.newWolfCard, getCardById(newWolfCardId))
   const newVillainCard = getStubbedOrDealtCard(stubbedCards.newVillainCard, getCardById(newVillainCardId))
+
+
 
   return {
     playerCards,
@@ -181,6 +184,7 @@ exports.dealCards = async (ws, message) => {
       }, {}),
     },
   }
+  newGameState.selected_cards = Object.values(newGameState.card_positions).filter(value => value.id).map((value) => value.id)
 
   const playerTokens = Object.keys(gameState.players)
 
@@ -201,8 +205,3 @@ exports.dealCards = async (ws, message) => {
 
   return broadcast(room_id, redirectToGameTable)
 }
-/* 
-module.exports = {
-  stubbedCards,
-}
- */

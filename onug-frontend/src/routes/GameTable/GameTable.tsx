@@ -67,6 +67,7 @@ export const GameTable: React.FC = observer(() => {
       setPlayers(lastJsonMessage.board.players)
       everyoneCheckOwnCard(lastJsonMessage.board.gameTableBoardCards)
       roomStore.resetDetailedCardInfo()
+      deckStore.setSelectedCard(lastJsonMessage.selected_cards)
     }
 
     if (lastJsonMessage?.type === HYDRATE_READY) {
