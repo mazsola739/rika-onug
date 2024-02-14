@@ -48,7 +48,7 @@ export const God: React.FC = observer(() => {
   })
   const [roomId, setRoomId] = useState('')
   const [token, setToken] = useState('')
-  const [message, setMessage] = useState({type: 'MESSAGE', message: 'hi there'})
+  const [message, setMessage] = useState({"type": "MESSAGE", "message": "hi there, this is a broadcast message"})
 
   const checkGameStates = async () => {
     const res = await fetch('/god/check-game-states')
@@ -96,7 +96,9 @@ export const God: React.FC = observer(() => {
     setResponse(json)
   }
 
-  // {type: 'MESSAGE', message: 'asdqwe'}
+  // {"type": "MESSAGE", "message": "hi there, this is a broadcast message"}
+  // examples:
+  // {"type": "REDIRECT", "path": "/stub"}
   const broadcastToAll = useCallback(async () => {
     const res = await fetch('/god/broadcast-to-all', {
       method: 'POST',
@@ -104,7 +106,7 @@ export const God: React.FC = observer(() => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(message),
+      body: JSON.stringify({message: message}),
     })
     const json = await res.json()
     setResponse(json)
