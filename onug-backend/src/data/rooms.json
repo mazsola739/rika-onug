@@ -29,6 +29,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",
@@ -40,13 +46,7 @@
     "room_id": "armory",
     "room_name": "Armory",
     "stage": "LOBBY",
-    "selected_cards": [
-      85,
-      12,
-      13,
-      14,
-      24
-  ],
+    "selected_cards": [12, 13, 14, 61, 79],
     "available_names": [
       "Forrest Gump",
       "Indiana Jones",
@@ -72,6 +72,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",
@@ -109,6 +115,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",
@@ -146,6 +158,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",
@@ -183,6 +201,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",
@@ -220,6 +244,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",
@@ -257,6 +287,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",
@@ -294,6 +330,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",
@@ -331,6 +373,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",
@@ -368,6 +416,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",
@@ -405,6 +459,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",
@@ -442,6 +502,12 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
+    "vampire": [],
+    "lover": [],
+    "dreamwolf": [],
+    "alien": [],
+    "villain": [],
+    "werewolf": [],
     "action_history": [
       {
         "scene_title": "GAME_START",

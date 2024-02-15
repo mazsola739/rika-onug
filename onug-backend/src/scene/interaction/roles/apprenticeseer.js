@@ -3,9 +3,39 @@ const { getCardIdsByPositions } = require("../utils")
 const { centerCardPositions } = require("../constants")
 
 //? INFO: Apprentice Seer - looks at one card from the center (not another players or her own)
-exports.apprenticeseer = (gameState, token) => {
+exports.apprenticeseer = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = []
+
+  tokens.forEach((token) => {
+    const roleHistory = {
+      ...newGameState.actual_scene,
+    }
+  
+    newGameState.players[token].role_history = roleHistory
+      
+  
+  
+    role_interactions.push({
+      type: INTERACTION,
+      title: "",
+      token,
+      message: "interaction_",
+      
+      shielded_cards: newGameState.shield,
+      player_name: newGameState.players[token]?.name,
+      player_original_id: newGameState.players[token]?.card?.original_id,
+      player_card_id: newGameState.players[token]?.card?.id,
+      player_role: newGameState.players[token]?.card?.role,
+      player_role_id: newGameState.players[token]?.card?.role_id,
+      player_team: newGameState.players[token]?.card?.team,
+      player_number: newGameState.players[token]?.player_number,
+    })
+  
+   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
+  })
+  
+    newGameState.role_interactions = role_interactions
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -13,8 +43,7 @@ exports.apprenticeseer = (gameState, token) => {
   }
 
   newGameState.players[token].role_history = roleHistory
-  newGameState.players[token].card_or_mark_action = false
-
+  
   const apprenticeseerPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
   const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, apprenticeseerPlayerNumber)
   const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, apprenticeseerPlayerNumber)
@@ -34,7 +63,8 @@ exports.apprenticeseer = (gameState, token) => {
     token,
     message: "interaction_apprenticeseer",
     selectable_cards: centerCardPositions,
-    shielded_players: newGameState.shield,
+    selectable_limit: { player: 0, center: 1 },
+    shielded_cards: newGameState.shield,
     show_cards: newGameState.flipped,
     player_name: newGameState.players[token]?.name,
     player_original_id: newGameState.players[token]?.card?.original_id,
@@ -67,7 +97,7 @@ exports.apprenticeseer_response = (gameState, token, selected_positions) => {
     token,
     message: "interaction_apprenticeseer2",
     show_cards: showCards,
-    shielded_players: newGameState.shield,
+    shielded_cards: newGameState.shield,
   })
 
   newGameState.role_interactions = role_interactions

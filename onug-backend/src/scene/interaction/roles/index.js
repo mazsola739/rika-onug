@@ -107,7 +107,7 @@ exports.roles = {
   annoyinglad, annoyinglad_response,
   seer, seer_response,
   apprenticeseer, apprenticeseer_response,
-  paranormalinvestigator,
+  paranormalinvestigator, paranormalinvestigator_response,
   marksman,
   nostradamus, nostradamus_response,
   psychic,

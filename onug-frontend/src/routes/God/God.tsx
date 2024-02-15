@@ -28,6 +28,7 @@ const CHECK_GAME_STATES = 'Check gamesStates'
 const CHECK_GAME_STATE_BY_ROOM_ID = 'Check gameState by room_id'
 const DELETE_ALL_GAME_STATES = 'Delete all gameStates'
 const DELETE_GAME_STATE_BY_ROOM_ID = 'Delete gameState by room_id'
+const RE_INIT_ALL_GAME_STATES = 'Re init all gamestates'
 const WS = 'WS'
 const CHECK_CONNECTIONS = 'Check connections'
 const REMOVE_PLAYER_BY_TOKEN = 'Remove player by token'
@@ -78,6 +79,14 @@ export const God: React.FC = observer(() => {
     setResponse(json)
   }
 
+  const reInitAllGameStates = async () => {
+    const res = await fetch(
+      `/god/re-init-all-game-states`
+    )
+    const json = await res.json()
+    setResponse(json)
+  }
+
   const checkConnections = async () => {
     const res = await fetch('/god/check-connections')
     const json = await res.json()
@@ -112,13 +121,31 @@ export const God: React.FC = observer(() => {
     setResponse(json)
   }, [message, setResponse])
 
-  const broadcastToAllInRoom = () => {
-    console.log('Click')
-  }
+  const broadcastToAllInRoom = useCallback(async () => {
+    const res = await fetch('/god/broadcast-to-all-in-room', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({message: message, room_id: roomId}),
+    })
+    const json = await res.json()
+    setResponse(json)
+  }, [token, message, setResponse])
 
-  const sendMessageToPlayer = () => {
-    console.log('Click')
-  }
+  const sendMessageToPlayer = useCallback(async () => {
+    const res = await fetch('/god/send-message-to-player', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({message: message, token: token}),
+    })
+    const json = await res.json()
+    setResponse(json)
+  }, [token, message, setResponse])
 
   const listOnugEnvVars = async () => {
     const res = await fetch('/god/list-onug-env-vars')
@@ -172,18 +199,6 @@ export const God: React.FC = observer(() => {
                 onChange={(e) => setToken(e.target.value)}
               />
             </InputContainer>
-            <InputContainer>
-              <Label htmlFor="message">
-                <Icon iconName="mason" size={25} /> {LABEL_MESSAGE}
-              </Label>
-              <Input
-                type="textarea"
-                id="message"
-                name="message"
-                defaultValue={JSON.stringify(message)}
-                onChange={(event) => setMessageHandler(event.target.value)}
-              />
-            </InputContainer>
           </FormContainer>
           <ButtonsContainer>
             <Button onClick={checkGameStates}>
@@ -200,6 +215,10 @@ export const God: React.FC = observer(() => {
               <Icon iconName="dreamwolf" size={25} />{' '}
               {DELETE_GAME_STATE_BY_ROOM_ID}
             </Button>
+            <Button onClick={reInitAllGameStates}>
+              <Icon iconName="dreamwolf" size={25} />{' '}
+              {RE_INIT_ALL_GAME_STATES}
+            </Button>
           </ButtonsContainer>
         </GameStatesContainer>
 
@@ -207,6 +226,19 @@ export const God: React.FC = observer(() => {
           <GodTitle>
             <Icon iconName="family" size={25} /> {WS}
           </GodTitle>
+          <FormContainer>
+            <InputContainer>
+              <Label htmlFor="message">
+                <Icon iconName="mason" size={25} /> {LABEL_MESSAGE}
+              </Label>
+              <textarea
+                id="message"
+                name="message"
+                defaultValue={JSON.stringify(message)}
+                onChange={(event) => setMessageHandler(event.target.value)}
+              />
+            </InputContainer>
+          </FormContainer>
           <ButtonsContainer>
             <Button onClick={checkConnections}>
               <Icon iconName="seer" size={25} /> {CHECK_CONNECTIONS}
@@ -215,7 +247,7 @@ export const God: React.FC = observer(() => {
               <Icon iconName="blob" size={25} /> {REMOVE_ALL_PLAYERS}
             </Button>
             <Button onClick={removePlayerByToken}>
-              <Icon iconName="supervillain" size={25} />{' '}
+              <Icon iconName="villain" size={25} />{' '}
               {REMOVE_PLAYER_BY_TOKEN}
             </Button>
             <Button onClick={broadcastToAll}>

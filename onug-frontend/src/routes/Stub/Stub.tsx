@@ -136,6 +136,8 @@ export const Stub: React.FC = observer(() => {
         <StubTitle>{RESPONSE}</StubTitle>
         <ResponseContainer>
           <ResponsePre>{`${JSON.stringify(response, null, 4)}`}</ResponsePre>
+          <br />
+          <ResponsePre>{`${JSON.stringify(roleMapping, null, 4)}`}</ResponsePre>
         </ResponseContainer>
       </RightSide>
     </StyledStub>

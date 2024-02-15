@@ -3,51 +3,56 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, get
 
 //? INFO: Sentinel - Place a Shield token on any other player's card that card (not mark) cannot be looked at or moved
 //! MARK_OF_FEAR
-exports.sentinel = (gameState, token) => {
+exports.sentinel = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
 
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
-  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+  tokens.forEach((token) => {
+    const selectablePlayerNumber = getPlayerNumbersWithNonMatchingTokens(players, [token])
+    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumber, newGameState.shield)
+    const player = players[token]
 
-  const roleHistory = {
-    ...newGameState.actual_scene,
-    selectable_cards: selectablePlayersWithNoShield,
-  }
+    const roleHistory = {
+      ...newGameState.actual_scene,
+      selectable_cards: selectablePlayersWithNoShield,
+    }
+    player.role_history = roleHistory
 
-  newGameState.players[token].role_history = roleHistory
-  newGameState.players[token].card_or_mark_action = false
-
-  const sentinelPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, sentinelPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, sentinelPlayerNumber)
-
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[sentinelPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[sentinelPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[sentinelPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[sentinelPlayerNumber[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
-
-  role_interactions.push({
-    type: INTERACTION,
-    title: "SENTINEL",
-    token,
-    message: "interaction_sentinel",
-    selectable_cards: selectablePlayersWithNoShield,
-    shielded_players: newGameState.shield,
-    show_cards: newGameState.flipped,
-    player_name: newGameState.players[token]?.name,
-    player_original_id: newGameState.players[token]?.card?.original_id,
-    player_card_id: newGameState.players[token]?.card?.id,
-    player_role: newGameState.players[token]?.card?.role,
-    player_role_id: newGameState.players[token]?.card?.role_id,
-    player_team: newGameState.players[token]?.card?.team,
-    player_number: newGameState.players[token]?.player_number,
+    const sentinelPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
+    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, sentinelPlayerNumber)
+    const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, sentinelPlayerNumber)
+    const playerCard = player?.card
+    const currentCard = newGameState.card_positions[sentinelPlayerNumber[0]]
+  
+    if (iSeeMyCardIsFlipped) {
+      playerCard.id = currentCard?.id
+      playerCard.role_id = currentCard?.id
+      playerCard.role = currentCard?.role
+      playerCard.team = currentCard?.team
+    } else if (iSeeMyCardElsewhere) {
+      playerCard.id = 0
+    }
+  
+    role_interactions.push({
+      type: INTERACTION,
+      title: "SENTINEL",
+      token,
+      message: "interaction_sentinel",
+      selectable_cards: selectablePlayersWithNoShield,
+      selectable_limit: { player: 1, center: 0 },
+      shielded_cards: newGameState.shield,
+      show_cards: newGameState.flipped,
+      player_name: player?.name,
+      player_original_id: playerCard?.original_id,
+      player_card_id: playerCard?.id,
+      player_role: playerCard?.role,
+      player_role_id: playerCard?.role_id,
+      player_team: playerCard?.team,
+      player_number: player?.player_number,
+    })
   })
-
+  
   newGameState.role_interactions = role_interactions
 
   return newGameState
@@ -58,30 +63,37 @@ exports.sentinel_response = (gameState, token, selected_positions) => {
 
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
+  const player = players[token]
+  const playerCard = player?.card
 
   newGameState.shield.push(selected_positions[0])
-
-  const shieldedPlayers = newGameState.shield
-  const shieldedPlayerTokens = shieldedPlayers.map(player => getPlayerTokenByPlayerNumber(newGameState.players, player))
-
+  const shieldedCards = newGameState.shield
+  const shieldedPlayerTokens = shieldedCards.map(player => getPlayerTokenByPlayerNumber(newGameState.players, player))
   shieldedPlayerTokens.forEach((token) => {
-    newGameState.players[token].card.shield = true
+    players[token].shield = true
   })
 
-  newGameState.players[token].role_history.shielded_card = selected_positions[0]
+  player.role_history.new_shielded_card = selected_positions[0]
 
   role_interactions.push({
     type: INTERACTION,
     title: "SENTINEL",
     token,
     message: "interaction_sentinel2",
-    shielded_card: selected_positions[0],
-    shielded_players: newGameState.shield,
+    shielded_cards: newGameState.shield,
+    show_cards: newGameState.flipped,
+    player_name: player?.name,
+    player_original_id: playerCard?.original_id,
+    player_card_id: playerCard?.id,
+    player_role: playerCard?.role,
+    player_role_id: playerCard?.role_id,
+    player_team: playerCard?.team,
+    player_number: player?.player_number,
   })
 
   newGameState.role_interactions = role_interactions
-
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} placed a shield on the next position: ${selected_positions[0]}`
+  newGameState.actual_scene.interaction = `The player ${player.player_number} placed a shield on the next position: ${selected_positions[0]}`
 
   return newGameState
 }

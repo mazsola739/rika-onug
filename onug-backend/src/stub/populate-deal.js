@@ -1,6 +1,6 @@
 const { logTrace, logErrorWithStack } = require("../log")
 
-let stubbedCards = {
+const initStubbedCards = {
   playerCards:    [],
   leftCard:       null,
   middleCard:     null,
@@ -8,21 +8,21 @@ let stubbedCards = {
   newWolfCard:    null,
   newVillainCard: null,
 }
+let stubbedCards = initStubbedCards
+
+const getCenterCardPositionByIndex = index => {
+  if (index === 0) return 'leftCard'
+  if (index === 1) return 'middleCard'
+  return 'rightCard'
+}
 
 const populateDeal = async (req, res) => {
   try {
     const { reset, Player1, Player2, Player3, Player4, Player5, Player6, Player7, Player8, Player9, Player10, Player11, Player12,
-      CenterLeft, CenterMiddle, CenterRight, CenterWolf, CenterVillain, } = req.body
+      CenterLeft, CenterMiddle, CenterRight, CenterWolf, CenterVillain } = req.body
     logTrace(`Stub populate dealing endpoint triggered`, req.body)
   if (reset) {
-    stubbedCards = {
-      playerCards:    [],
-      leftCard:       null,
-      middleCard:     null,
-      rightCard:      null,
-      newWolfCard:    null,
-      newVillainCard: null,
-    }
+    stubbedCards = initStubbedCards
 
     return res.send(JSON.stringify({ stub: 'reseted', stubbedCards }))
   }
@@ -54,4 +54,5 @@ const populateDeal = async (req, res) => {
 module.exports = {
   populateDeal,
   stubbedCards,
+  getCenterCardPositionByIndex,
 }

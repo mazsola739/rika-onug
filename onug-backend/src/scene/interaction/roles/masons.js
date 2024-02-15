@@ -6,16 +6,16 @@ exports.masons = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
-  const masonPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens)
+  const masons = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens)
 
   tokens.forEach((token) => {
     const roleHistory = {
       ...newGameState.actual_scene,
+      masons,
     }
 
     newGameState.players[token].role_history = roleHistory
-    newGameState.players[token].card_or_mark_action = false
-
+    
     const masonPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
     const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, masonPlayerNumber)
     const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, masonPlayerNumber)
@@ -34,8 +34,9 @@ exports.masons = (gameState, tokens) => {
       title: "MASONS",
       token,
       message: "interaction_masons",
-      masons: masonPlayerNumbers,
-      shielded_players: newGameState.shield,
+      selectable_limit: { player: 0, center: 0 },
+      masons,
+      shielded_cards: newGameState.shield,
       player_name: newGameState.players[token]?.name,
       player_original_id: newGameState.players[token]?.card?.original_id,
       player_card_id: newGameState.players[token]?.card?.id,

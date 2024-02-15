@@ -6,7 +6,7 @@ import { SelectedCardProps } from './SelectedCardList.types'
 import { CardImage } from 'components'
 
 export const SelectedCard: React.FC<SelectedCardProps> = observer(
-  ({ card }) => {
+  ({ card }, index) => {
     const { id } = card
     const isSelected = deckStore.selectedCards.some(
       (selectedCard) => selectedCard.id === id
@@ -31,7 +31,7 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
     return (
       <CardImage
         image={card.card_name}
-        key={card.id}
+        key={index}
         onClick={handleDeselect}
         size={45}
       />

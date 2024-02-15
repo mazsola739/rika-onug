@@ -8,8 +8,8 @@ export const SelectedCardList: React.FC = observer(() => {
 
   return (
     <StyledSelectedCardList>
-      {selectedCards.map((card) => (
-        <SelectedCard key={card.id} card={card} />
+      {selectedCards.map((card, index) => (
+        <SelectedCard key={index} card={card} />
       ))}
     </StyledSelectedCardList>
   )

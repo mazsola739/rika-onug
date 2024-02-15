@@ -12,9 +12,9 @@ const renderPlayerCards = (playerCards: PositionProperties[]) => {
   return (
     <CardContainer>
       <PlayersCards>
-        {playerCards.map(({ position, id, ready }) => (
+        {playerCards.map(({ position, id, ready }, index) => (
           <GameCard
-            key={position}
+            key={index}
             isCenter={false}
             id={id}
             position={position}
@@ -48,20 +48,22 @@ const renderCenterCard = (centerCards: PositionProperties[]) => {
       <CardContainer>
         <CardTitle>Center</CardTitle>
         <CenterCards>
-          {['center_left', 'center_middle', 'center_right'].map((position) => {
-            const card = centerCards.find((c) => c.position === position)
-            return (
-              card &&
-              card.id !== null && (
-                <GameCard
-                  key={position}
-                  id={card.id}
-                  position={card.position}
-                  isCenter={true}
-                />
+          {['center_left', 'center_middle', 'center_right'].map(
+            (position, index) => {
+              const card = centerCards.find((c) => c.position === position)
+              return (
+                card &&
+                card.id !== null && (
+                  <GameCard
+                    key={index}
+                    id={card.id}
+                    position={card.position}
+                    isCenter={true}
+                  />
+                )
               )
-            )
-          })}
+            }
+          )}
         </CenterCards>
       </CardContainer>
       {renderCard('center_villain', 'Villain')}

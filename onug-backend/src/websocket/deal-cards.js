@@ -5,7 +5,7 @@ const { repository } = require("../repository")
 const { STAGES } = require("../constant/stage")
 const { broadcast } = require("./connections")
 const { upsertRoomState } = repository
-const { stubbedCards } = require("../stub/populate-deal")
+const { stubbedCards, getCenterCardPositionByIndex } = require("../stub/populate-deal")
 
 const cards = require("../data/cards.json")
 
@@ -39,12 +39,14 @@ const getStubbedOrDealtCard = (stubbedCard, dealtCard) => stubbedCard || dealtCa
 const dealCardIds = (selectedCardIds) => {
   let cardIds = [...selectedCardIds]
 
-  const newWolfCardId = hasAlphaWolf(selectedCardIds)
+  let newWolfCardId = hasAlphaWolf(selectedCardIds)
     ? getRandomItemFromArray(filterCardsByIds(cardIds, wolfIdsToCheck))
     : undefined
-  const newVillainCardId = hasTemptress(selectedCardIds)
+  newWolfCardId = getStubbedOrDealtCard(stubbedCards.newWolfCard, newWolfCardId)
+  let newVillainCardId = hasTemptress(selectedCardIds)
     ? getRandomItemFromArray(filterCardsByIds(cardIds, supervillainIdsToCheck))
     : undefined
+  newVillainCardId = getStubbedOrDealtCard(stubbedCards.newVillainCard, newVillainCardId)
 
   if (newWolfCardId) cardIds    = cardIds.filter((cardId) => cardId !== newWolfCardId)
   if (newVillainCardId) cardIds = cardIds.filter((cardId) => cardId !== newVillainCardId)
@@ -54,7 +56,8 @@ const dealCardIds = (selectedCardIds) => {
   const centerCardIds = shuffledCards.slice(0, 3)
   const playerCardIds = shuffledCards.slice(3)
 
-  playerCardIds.forEach((playerCard, index) => playerCardIds[index] = getStubbedOrDealtCard(stubbedCards.playerCards[index], playerCard))
+  playerCardIds.forEach((playerCardId, index) => playerCardIds[index] = getStubbedOrDealtCard(stubbedCards.playerCards[index], playerCardId))
+  centerCardIds.forEach((centerCardId, index) => centerCardIds[index] = getStubbedOrDealtCard(stubbedCards[getCenterCardPositionByIndex(index)], centerCardId))
   
 
   const playerCards = playerCardIds.map((id) => getCardById(id))
@@ -65,12 +68,11 @@ const dealCardIds = (selectedCardIds) => {
     centerCards,
   })
   logInfo('stubbedCards: ', stubbedCards)
-  const leftCard       = getStubbedOrDealtCard(stubbedCards.leftCard, centerCards[0])
-  const middleCard     = getStubbedOrDealtCard(stubbedCards.middleCard, centerCards[1])
-  const rightCard      = getStubbedOrDealtCard(stubbedCards.rightCard, centerCards[2])
-  const newWolfCard    = getStubbedOrDealtCard(stubbedCards.newWolfCard, getCardById(newWolfCardId))
-  const newVillainCard = getStubbedOrDealtCard(stubbedCards.newVillainCard, getCardById(newVillainCardId))
-
+  const leftCard       = centerCards[0]
+  const middleCard     = centerCards[1]
+  const rightCard      = centerCards[2]
+  const newWolfCard    = getCardById(newWolfCardId)
+  const newVillainCard = getCardById(newVillainCardId)
 
 
   return {

@@ -29,15 +29,57 @@ export type WsJsonMessage = {
     narration?: string[]
   }
   selectable_cards?: string[]
-  shielded_players?: string[]
-  shielded_card?: string
-  show_cards?: Record<string, number>[]
-  new_role_id?: number
-  werewolves?: string[]
-  tanner?: string[]
-  masons?: string[]
   selectable_center_cards?: string[]
   selectable_player_cards?: string[]
+  selectable_marks?: string[]
+  selectable_limit?: { player: number; center: number; mark: number }
+  shielded_cards?: string[]
+  show_cards?: Record<string, number>[]
+  new_role_id?: number
+  alien?: string[]
+  artifact?: string[]
+  assassin?: string[]
+  awesome?: string[]
+  babyalien?: string[]
+  bat?: string[]
+  blob?: string[]
+  bulb?: string[]
+  clarity?: string[]
+  claw?: string[]
+  cow?: string[]
+  diseased?: string[]
+  dreamwolf?: string[]
+  dress?: string[]
+  drunk?: string[]
+  empath?: string[]
+  evil?: string[]
+  family?: string[]
+  fang?: string[]
+  fear?: string[]
+  friend?: string[]
+  jest?: string[]
+  like?: string[]
+  lover?: string[]
+  mason?: string[]
+  mad?: string[]
+  mortician?: string[]
+  nice?: string[]
+  pretty?: string[]
+  seer?: string[]
+  select?: string[]
+  shield?: string[]
+  smell?: string[]
+  villain?: string[]
+  sus?: string[]
+  swap?: string[]
+  tanner?: string[]
+  tap?: string[]
+  target?: string[]
+  traitor?: string[]
+  trophy?: string[]
+  ufo?: string[]
+  vampire?: string[]
+  werewolf?: string[]
 }
 
 export type RoomType = {
@@ -73,12 +115,51 @@ export type GamePlayBoardCardType = {
   position: string
   card: {
     id: number
-    artifact: boolean
-    shield: boolean
-    shielded: boolean
     selectable: boolean
-    werewolf: boolean
+    alien: boolean
+    artifact: boolean
+    assassin: boolean
+    awesome: boolean
+    babyalien: boolean
+    bat: boolean
+    blob: boolean
+    bulb: boolean
+    clarity: boolean
+    claw: boolean
+    cow: boolean
+    diseased: boolean
+    dreamwolf: boolean
+    dress: boolean
+    drunk: boolean
+    empath: boolean
+    evil: boolean
+    family: boolean
+    fang: boolean
+    fear: boolean
+    friend: boolean
+    jest: boolean
+    like: boolean
+    lover: boolean
     mason: boolean
+    mad: boolean
+    mortician: boolean
+    nice: boolean
+    pretty: boolean
+    seer: boolean
+    select: boolean
+    shield: boolean
+    smell: boolean
+    villain: boolean
+    sus: boolean
+    swap: boolean
+    tanner: boolean
+    tap: boolean
+    target: boolean
+    traitor: boolean
+    trophy: boolean
+    ufo: boolean
+    vampire: boolean
+    werewolf: boolean
   }
 }
 
@@ -113,12 +194,51 @@ export type PositionKeys =
 
 export type PositionProperties = {
   position: string
+  selectable: boolean
   id?: number
-  artifact?: boolean
-  shield?: boolean
-  shielded?: boolean
   ready?: boolean
-  werewolf?: boolean
-  selectable?: boolean
+  alien?: boolean
+  artifact?: boolean
+  assassin?: boolean
+  awesome?: boolean
+  babyalien?: boolean
+  bat?: boolean
+  blob?: boolean
+  bulb?: boolean
+  clarity?: boolean
+  claw?: boolean
+  cow?: boolean
+  diseased?: boolean
+  dreamwolf?: boolean
+  dress?: boolean
+  drunk?: boolean
+  empath?: boolean
+  evil?: boolean
+  family?: boolean
+  fang?: boolean
+  fear?: boolean
+  friend?: boolean
+  jest?: boolean
+  like?: boolean
+  lover?: boolean
   mason?: boolean
+  mad?: boolean
+  mortician?: boolean
+  nice?: boolean
+  pretty?: boolean
+  seer?: boolean
+  select?: boolean
+  shield?: boolean
+  smell?: boolean
+  villain?: boolean
+  sus?: boolean
+  swap?: boolean
+  tanner?: boolean
+  tap?: boolean
+  target?: boolean
+  traitor?: boolean
+  trophy?: boolean
+  ufo?: boolean
+  vampire?: boolean
+  werewolf?: boolean
 }

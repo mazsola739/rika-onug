@@ -82,9 +82,9 @@ export const Room: React.FC = observer(() => {
       <Main>
         <Filter />
         <RoomCardList>
-          {orderedTeams.map((teamName) => (
+          {orderedTeams.map((teamName, index) => (
             <CardList
-              key={teamName}
+              key={index}
               team={teamName}
               cards={roomStore.getFilteredCardsForTeam(teamName)}
             />

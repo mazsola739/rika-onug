@@ -12,17 +12,14 @@ class DoppelgangerStore {
     const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
       (playerCard) => {
         const { position } = playerCard
-        const shield =
-          lastJsonMessage.shielded_players?.includes(playerCard.position) ||
-          false
         const selectable =
-          lastJsonMessage.selectable_cards?.includes(position) || false
+          (lastJsonMessage.selectable_cards || []).includes(position) || false
         const showCard = lastJsonMessage.show_cards?.find(
           (showCardObj) => Object.keys(showCardObj)[0] === position
         )
-        const id = showCard ? (showCard as Record<string, number>)[position] : 0
+        const id = showCard ? (showCard[position] as number) : 0
 
-        return { ...playerCard, shield, selectable, id }
+        return { ...playerCard, selectable, id }
       }
     )
 
@@ -48,51 +45,32 @@ class DoppelgangerStore {
    * */
 
   instantNightAction(lastJsonMessage: WsJsonMessage): void {
-    const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
-      (playerCard) => {
-        const shield =
-          lastJsonMessage.shielded_players?.includes(playerCard.position) ||
-          false
-
-        return { ...playerCard, shield }
-      }
-    )
-
-    gameBoardStore.setPlayerCards(playerCards)
-
     const new_role_id = lastJsonMessage.new_role_id
+    const { setInteraction } = interactionStore
 
-    if (new_role_id === 2) return interactionStore.setInteraction('DRUNK')
-    if (new_role_id === 8) return interactionStore.setInteraction('ROBBER')
-    if (new_role_id === 9) return interactionStore.setInteraction('SEER')
-    if (new_role_id === 11)
-      return interactionStore.setInteraction('TROUBLEMAKER')
-    if (new_role_id === 17) return interactionStore.setInteraction('ALPHA_WOLF')
-    if (new_role_id === 18)
-      return interactionStore.setInteraction('APPRENTICE_SEER')
-    if (new_role_id === 22)
-      return interactionStore.setInteraction('MYSTIC_WOLF')
-    if (new_role_id === 23)
-      return interactionStore.setInteraction('PARANORMAL_INVESTIGATOR')
-    if (new_role_id === 25) return interactionStore.setInteraction('SENTINEL')
-    if (new_role_id === 26)
-      return interactionStore.setInteraction('VILLAGE_IDIOT')
-    if (new_role_id === 27) return interactionStore.setInteraction('WITCH')
-    if (new_role_id === 31) return interactionStore.setInteraction('CUPID')
-    if (new_role_id === 32) return interactionStore.setInteraction('DISEASED')
-    if (new_role_id === 34) return interactionStore.setInteraction('INSTIGATOR')
-    if (new_role_id === 55)
-      return interactionStore.setInteraction('ANNOYING_LAD')
-    if (new_role_id === 56) return interactionStore.setInteraction('DETECTOR')
-    if (new_role_id === 57) return interactionStore.setInteraction('DR_PEEKER')
-    if (new_role_id === 65)
-      return interactionStore.setInteraction('RAPSCALLION')
-    if (new_role_id === 66)
-      return interactionStore.setInteraction('ROLE_RETRIEVER')
-    if (new_role_id === 68) return interactionStore.setInteraction('SWITCHEROO')
-    if (new_role_id === 69) return interactionStore.setInteraction('TEMPTRESS')
-    if (new_role_id === 70) return interactionStore.setInteraction('VOODOO_LOU')
-    if (new_role_id === 85) return interactionStore.setInteraction('THING')
+    if (new_role_id === 2) return setInteraction('DRUNK')
+    if (new_role_id === 8) return setInteraction('ROBBER')
+    if (new_role_id === 9) return setInteraction('SEER')
+    if (new_role_id === 11) return setInteraction('TROUBLEMAKER')
+    if (new_role_id === 17) return setInteraction('ALPHA_WOLF')
+    if (new_role_id === 18) return setInteraction('APPRENTICE_SEER')
+    if (new_role_id === 22) return setInteraction('MYSTIC_WOLF')
+    if (new_role_id === 23) return setInteraction('PARANORMAL_INVESTIGATOR')
+    if (new_role_id === 25) return setInteraction('SENTINEL')
+    if (new_role_id === 26) return setInteraction('VILLAGE_IDIOT')
+    if (new_role_id === 27) return setInteraction('WITCH')
+    if (new_role_id === 31) return setInteraction('CUPID')
+    if (new_role_id === 32) return setInteraction('DISEASED')
+    if (new_role_id === 34) return setInteraction('INSTIGATOR')
+    if (new_role_id === 55) return setInteraction('ANNOYING_LAD')
+    if (new_role_id === 56) return setInteraction('DETECTOR')
+    if (new_role_id === 57) return setInteraction('DR_PEEKER')
+    if (new_role_id === 65) return setInteraction('RAPSCALLION')
+    if (new_role_id === 66) return setInteraction('ROLE_RETRIEVER')
+    if (new_role_id === 68) return setInteraction('SWITCHEROO')
+    if (new_role_id === 69) return setInteraction('TEMPTRESS')
+    if (new_role_id === 70) return setInteraction('VOODOO_LOU')
+    if (new_role_id === 85) return setInteraction('THING')
 
     gameBoardStore.setKnownPlayer({
       player_name: lastJsonMessage.player_name,

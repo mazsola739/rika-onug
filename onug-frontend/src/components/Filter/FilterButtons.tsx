@@ -6,9 +6,9 @@ import { FilterButton } from './FilterButton'
 export const FilterButtons: React.FC<FilterButtonsProps> = observer(
   ({ expansionNames, selectedExpansions, onToggleExpansion }) => (
     <StyledFilterButtons>
-      {expansionNames.map((expansion) => (
+      {expansionNames.map((expansion, index) => (
         <FilterButton
-          key={expansion}
+          key={index}
           expansion={expansion}
           onClick={() => onToggleExpansion(expansion)}
           isSelected={selectedExpansions.includes(expansion)}

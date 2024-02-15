@@ -1,42 +1,48 @@
-const { writeFileSync } = require("fs")
-const { readFile, unlink } = require("fs/promises")
-const { logError, logTrace } = require("../log")
-const roomNames = require("../data/room_names.json")
-const { websocketServerConnectionsPerRoom } = require("../websocket/connections")
+const { writeFileSync } = require('fs')
+const { readFile, unlink } = require('fs/promises')
+const { logError, logTrace, logErrorWithStack } = require('../log')
+const {
+  websocketServerConnectionsPerRoom,
+} = require('../websocket/connections')
+const roomsData = require('../data/rooms.json')
+const roomNames = require('../data/room_names.json')
 
 const upsertRoomState = async (state) => {
-  logTrace("upsertRoomState")
+  logTrace('upsertRoomState')
   const filePath = `${__dirname}/../database/room_${state.room_id}_gamestate.json`
   const roomState = JSON.stringify(state, null, 4)
-  const options = { flag: "w" }
+  const options = { flag: 'w' }
   try {
     writeFileSync(filePath, roomState, options)
-    logTrace("room updated")
+    logTrace('room updated')
   } catch (e) {
     logError(e)
   }
 }
 
 const readGameState = async (room_id) => {
-  logTrace("read game state")
+  logTrace('read game state')
   const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
-  const options = { encoding: "utf8" }
+  const options = { encoding: 'utf8' }
   try {
     const data = await readFile(filePath, options)
     return JSON.parse(data)
   } catch (error) {
-    return logTrace(`###>>> READ_GAME_STATE_ERROR
-###>>> `, error)
+    return logTrace(
+      `###>>> READ_GAME_STATE_ERROR
+###>>> `,
+      error
+    )
   }
 }
 
 const readAllGameStates = async () => {
-  logTrace("read all game states")
+  logTrace('read all game states')
   const gameStates = {}
   for (let i = 0; i < roomNames.length; i++) {
     let room_id = roomNames[i]
     const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
-    const options = { encoding: "utf8" }
+    const options = { encoding: 'utf8' }
     try {
       const rawData = await readFile(filePath, options)
       gameStates[room_id] = JSON.parse(rawData)
@@ -49,10 +55,10 @@ const readAllGameStates = async () => {
 }
 
 const readGameStateByRoomId = async (room_id) => {
-  logTrace("read game state by room_id")
+  logTrace('read game state by room_id')
   const gameState = {}
   const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
-  const options = { encoding: "utf8" }
+  const options = { encoding: 'utf8' }
   try {
     const rawData = await readFile(filePath, options)
     gameState[room_id] = JSON.parse(rawData)
@@ -65,7 +71,7 @@ const readGameStateByRoomId = async (room_id) => {
 }
 
 const deleteAllGameStates = async () => {
-  logTrace("delete all game states")
+  logTrace('delete all game states')
   for (let i = 0; i < roomNames.length; i++) {
     let room_id = roomNames[i]
     const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
@@ -75,11 +81,11 @@ const deleteAllGameStates = async () => {
       logTrace(`Could not delete gameState for filePath ${filePath}`, error)
     }
   }
-  return { status: "gamestates deleted" }
+  return { status: 'gamestates deleted' }
 }
 
 const deleteGameStateByRoomId = async (room_id) => {
-  logTrace("delete game state by room_id")
+  logTrace('delete game state by room_id')
   const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
   try {
     await unlink(filePath)
@@ -87,16 +93,16 @@ const deleteGameStateByRoomId = async (room_id) => {
     logTrace(`Could not delete gameState for filePath ${filePath}`, error)
   }
 
-  return { status: "gamestate deleted" }
+  return { status: 'gamestate deleted' }
 }
 
 const deleteAllPlayers = async () => {
-  logTrace("delete all players")
+  logTrace('delete all players')
   const gameStates = {}
   for (let i = 0; i < roomNames.length; i++) {
     let room_id = roomNames[i]
     const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
-    const options = { encoding: "utf8" }
+    const options = { encoding: 'utf8' }
     try {
       const rawData = await readFile(filePath, options)
       const newGameState = JSON.parse(rawData)
@@ -107,41 +113,66 @@ const deleteAllPlayers = async () => {
       await upsertRoomState(newGameState)
       gameStates[room_id] = newGameState
     } catch (error) {
-      logTrace(`Could not delete all players. No gameState found for room_id: ${room_id}`, error)
+      logTrace(
+        `Could not delete all players. No gameState found for room_id: ${room_id}`,
+        error
+      )
       gameStates[room_id] = `No gameState found for room_id: ${room_id}`
     }
   }
 
-  return { status: "players deleted from rooms", gameStates }
+  return { status: 'players deleted from rooms', gameStates }
 }
 
 const deletePlayerByToken = async (token) => {
-  logTrace("delete player by token");
+  logTrace('delete player by token')
   const gameStates = {}
 
   for (let i = 0; i < roomNames.length; i++) {
     let room_id = roomNames[i]
     const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
-    const options = { encoding: "utf8" }
+    const options = { encoding: 'utf8' }
 
     try {
       const rawData = await readFile(filePath, options)
       const newGameState = JSON.parse(rawData)
 
       if (newGameState.players[token]) {
-        delete newGameState.players[token];
-        await upsertRoomState(newGameState);
-        gameStates[room_id] = newGameState;
+        delete newGameState.players[token]
+        await upsertRoomState(newGameState)
+        gameStates[room_id] = newGameState
         delete websocketServerConnectionsPerRoom[room_id][token]
-      } 
-} catch (error) {
-      logTrace(`Could not delete all players. No gameState found for room_id: ${room_id}`, error)
+      }
+    } catch (error) {
+      logTrace(
+        `Could not delete all players. No gameState found for room_id: ${room_id}`,
+        error
+      )
       gameStates[room_id] = `No gameState found for room_id: ${room_id}`
     }
   }
 
-  return { status: "player deleted from rooms", gameStates }
-};
+  return { status: 'player deleted from rooms', gameStates }
+}
+
+const reInitializeAllGameStates = async () => {
+  try {
+    logTrace('Re-init all gamestates')
+    const gameStates = {}
+    for (let index = 0; index < roomNames.length; index++) {
+      let room_id = roomNames[index]
+
+      const room = roomsData[index]
+      await upsertRoomState(room)
+      gameStates[room_id] = room
+    }
+    return { status: 'rooms re-initialized', gameStates }
+  } catch (error) {
+    logErrorWithStack(error)
+  }
+
+  return { status: 'ERROR during re-initializing game states' }
+}
 
 module.exports = {
   upsertRoomState,
@@ -152,4 +183,5 @@ module.exports = {
   deleteGameStateByRoomId,
   deleteAllPlayers,
   deletePlayerByToken,
+  reInitializeAllGameStates,
 }

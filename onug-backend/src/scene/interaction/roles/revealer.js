@@ -4,9 +4,40 @@ const { townIds } = require("../constants")
 
 //? INFO: Revealer - Turns and keeps one player's card face up unless they are not on the Villager Team
 //TODO doppelganger
-exports.revealer = (gameState, token) => {
+exports.revealer = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = []
+
+  tokens.forEach((token) => {
+    const roleHistory = {
+      ...newGameState.actual_scene,
+    }
+  
+    newGameState.players[token].role_history = roleHistory
+      
+  
+  
+    role_interactions.push({
+      type: INTERACTION,
+      title: "",
+      token,
+      message: "interaction_",
+      
+      selectable_limit: { player: 1, center: 0 },
+      shielded_cards: newGameState.shield,
+      player_name: newGameState.players[token]?.name,
+      player_original_id: newGameState.players[token]?.card?.original_id,
+      player_card_id: newGameState.players[token]?.card?.id,
+      player_role: newGameState.players[token]?.card?.role,
+      player_role_id: newGameState.players[token]?.card?.role_id,
+      player_team: newGameState.players[token]?.card?.team,
+      player_number: newGameState.players[token]?.player_number,
+    })
+  
+   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
+  })
+  
+    newGameState.role_interactions = role_interactions
 
   const selectablePlayersWithNoShield = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
 
@@ -16,17 +47,16 @@ exports.revealer = (gameState, token) => {
   }
 
   newGameState.players[token].role_history = roleHistory
-  newGameState.players[token].card_or_mark_action = false
-
-  const alphawolfPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumber)
+  
+  const revealerPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, revealerPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, revealerPlayerNumber)
 
   if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumber[0]].team
+    newGameState.players[token].card.id = newGameState.card_positions[revealerPlayerNumber[0]].id
+    newGameState.players[token].card.role_id = newGameState.card_positions[revealerPlayerNumber[0]].id
+    newGameState.players[token].card.role = newGameState.card_positions[revealerPlayerNumber[0]].role
+    newGameState.players[token].card.team = newGameState.card_positions[revealerPlayerNumber[0]].team
   } else if (iSeeMyCardElsewhere) {
     newGameState.players[token].card.id = 0
   }
@@ -37,7 +67,7 @@ exports.revealer = (gameState, token) => {
     token,
     message: "interaction_revealer",
     selectable_cards: selectablePlayersWithNoShield,
-    shielded_players: newGameState.shield,
+    shielded_cards: newGameState.shield,
     show_cards: newGameState.flipped,
     player_name: newGameState.players[token]?.name,
     player_original_id: newGameState.players[token]?.card?.original_id,
@@ -64,8 +94,8 @@ exports.revealer_response = (gameState, token, selected_positions) => {
 
   newGameState.players[token].role_history.card_or_mark_action = true
 
-  const revealerPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const revealerCardInFlippedCards = isActivePlayersCardsFlipped(flippedCard, revealerPlayerNumbers)
+  const revealerPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const revealerCardInFlippedCards = isActivePlayersCardsFlipped(flippedCard, revealerPlayerNumber)
 
   if (revealerCardInFlippedCards) {
     newGameState.players[token].card.id = 0
@@ -76,7 +106,7 @@ exports.revealer_response = (gameState, token, selected_positions) => {
     title: "REVEALER",
     token,
     message: "interaction_revealer2",
-    shielded_players: newGameState.shield,
+    shielded_cards: newGameState.shield,
     show_cards: flippedCard,
     player_name: newGameState.players[token]?.name,
     player_original_id: newGameState.players[token]?.card?.original_id,

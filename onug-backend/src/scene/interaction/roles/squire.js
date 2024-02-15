@@ -2,18 +2,49 @@ const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
 
 //? INFO: Squire - All Werewolf team (not Minion/Squire) stick up their thumb for him to see, who may look at their cards
-exports.squire = (gameState, token) => {
+exports.squire = (gameState, tokens) => {
   const newGameState = { ...gameState }
+  const role_interactions = []
 
-  const alphawolfPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, alphawolfPlayerNumber)
+  tokens.forEach((token) => {
+    const roleHistory = {
+      ...newGameState.actual_scene,
+    }
+  
+    newGameState.players[token].role_history = roleHistory
+      
+  
+  
+    role_interactions.push({
+      type: INTERACTION,
+      title: "",
+      token,
+      message: "interaction_",
+      
+      shielded_cards: newGameState.shield,
+      player_name: newGameState.players[token]?.name,
+      player_original_id: newGameState.players[token]?.card?.original_id,
+      player_card_id: newGameState.players[token]?.card?.id,
+      player_role: newGameState.players[token]?.card?.role,
+      player_role_id: newGameState.players[token]?.card?.role_id,
+      player_team: newGameState.players[token]?.card?.team,
+      player_number: newGameState.players[token]?.player_number,
+    })
+  
+   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
+  })
+  
+    newGameState.role_interactions = role_interactions
+  
+  const squirePlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, squirePlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, squirePlayerNumber)
 
   if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[alphawolfPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[alphawolfPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[alphawolfPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[alphawolfPlayerNumber[0]].team
+    newGameState.players[token].card.id = newGameState.card_positions[squirePlayerNumber[0]].id
+    newGameState.players[token].card.role_id = newGameState.card_positions[squirePlayerNumber[0]].id
+    newGameState.players[token].card.role = newGameState.card_positions[squirePlayerNumber[0]].role
+    newGameState.players[token].card.team = newGameState.card_positions[squirePlayerNumber[0]].team
   } else if (iSeeMyCardElsewhere) {
     newGameState.players[token].card.id = 0
   }

@@ -3,12 +3,42 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, get
 const { centerCardPositions } = require("../constants")
 
 //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
-exports.seer = (gameState, token) => {
+exports.seer = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
+  const selectablePlayerNumber = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+
+  tokens.forEach((token) => {
+    const roleHistory = {
+      ...newGameState.actual_scene,
+    }
+  
+    newGameState.players[token].role_history = roleHistory
+      
+  
+  
+    role_interactions.push({
+      type: INTERACTION,
+      title: "",
+      token,
+      message: "interaction_",
+      
+      shielded_cards: newGameState.shield,
+      player_name: newGameState.players[token]?.name,
+      player_original_id: newGameState.players[token]?.card?.original_id,
+      player_card_id: newGameState.players[token]?.card?.id,
+      player_role: newGameState.players[token]?.card?.role,
+      player_role_id: newGameState.players[token]?.card?.role_id,
+      player_team: newGameState.players[token]?.card?.team,
+      player_number: newGameState.players[token]?.player_number,
+    })
+  
+   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
+  })
+  
+    newGameState.role_interactions = role_interactions
 
   const roleHistory = {
     ...newGameState.actual_scene,
@@ -17,8 +47,7 @@ exports.seer = (gameState, token) => {
   }
 
   newGameState.players[token].role_history = roleHistory
-  newGameState.players[token].card_or_mark_action = false
-
+  
   const seerPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
   const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, seerPlayerNumber)
   const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, seerPlayerNumber)
@@ -39,7 +68,8 @@ exports.seer = (gameState, token) => {
     message: "interaction_seer",
     selectable_center_cards: centerCardPositions,
     selectable_player_cards: selectablePlayersWithNoShield,
-    shielded_players: newGameState.shield,
+    selectable_limit: { player: 1, center: 2 },
+    shielded_cards: newGameState.shield,
     player_name: newGameState.players[token]?.name,
     player_original_id: newGameState.players[token]?.card?.original_id,
     player_card_id: newGameState.players[token]?.card?.id,
@@ -83,7 +113,7 @@ exports.seer_response = (gameState, token, selected_positions) => {
     token,
     message: "interaction_seer2",
     show_cards: showCards,
-    shielded_players: newGameState.shield,
+    shielded_cards: newGameState.shield,
     player_name: newGameState.players[token]?.name,
     player_original_id: newGameState.players[token]?.card?.original_id,
     player_card_id: newGameState.players[token]?.card?.id,

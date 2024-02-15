@@ -39,14 +39,14 @@ export const SceneTracker: React.FC = observer(() => {
         index++
         return (
           <ActualScene
-            key={scene.scene_number}
+            key={index}
             isCurrentScene={isCurrentScene}
             ref={isCurrentScene ? focusedSceneRef : null}
           >
             <p>{index}.</p>
             <ActualSceneImages>
-              {matchingCards.map((card) => (
-                <CardImage image={card.card_name} key={card.id} size={55} />
+              {matchingCards.map((card, index) => (
+                <CardImage image={card.card_name} key={index} size={55} />
               ))}
             </ActualSceneImages>
           </ActualScene>

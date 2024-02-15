@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions } = require("../utils")
+const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions, concatArraysWithUniqueElements } = require("../utils")
 const { centerCardPositions } = require("../constants")
 
 //TODO DREAMWOLF & werewolf_response
@@ -7,33 +7,39 @@ const { centerCardPositions } = require("../constants")
 exports.werewolves = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
 
-  const werewolfPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens)
-  const dreamWolfPlayerNumber = getDreamWolfPlayerNumberByRoleIds(newGameState.players)
-  const loneWolf = werewolfPlayerNumbers.length + dreamWolfPlayerNumber.length === 1
+  newGameState.werewolves = getPlayerNumbersWithMatchingTokens(players, tokens)
+  newGameState.dreamwolf = getDreamWolfPlayerNumberByRoleIds(players)
+  const loneWolf = (newGameState.werewolves.length + newGameState.dreamwolf.length) === 1
 
   const selectableCards = loneWolf ? centerCardPositions : []
 
   tokens.forEach((token) => {
+    const player = players[token]
+    const flippedCards = newGameState.flipped
+
     const roleHistory = {
       ...newGameState.actual_scene,
-      selectable_cards: selectableCards
+      werewolves: newGameState.werewolves,
+      dreamwolf: newGameState.dreamwolf,
+      selectable_cards: selectableCards,
     }
-
-    newGameState.players[token].role_history = roleHistory
-    newGameState.players[token].card_or_mark_action = false
-
+    player.role_history = roleHistory
+    
     const werewolfPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, werewolfPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, werewolfPlayerNumber)
+    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, werewolfPlayerNumber)
+    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, werewolfPlayerNumber)
+    const playerCard = player?.card
 
     if (iSeeMyCardIsFlipped) {
-      newGameState.players[token].card.id = newGameState.card_positions[werewolfPlayerNumber[0]].id
-      newGameState.players[token].card.role_id = newGameState.card_positions[werewolfPlayerNumber[0]].id
-      newGameState.players[token].card.role = newGameState.card_positions[werewolfPlayerNumber[0]].role
-      newGameState.players[token].card.team = newGameState.card_positions[werewolfPlayerNumber[0]].team
+      const positionCard = newGameState.card_positions[werewolfPlayerNumber[0]]
+      playerCard.id = positionCard.id
+      playerCard.role_id = positionCard.id
+      playerCard.role = positionCard.role
+      playerCard.team = positionCard.team
     } else if (iSeeMyCardElsewhere) {
-      newGameState.players[token].card.id = 0
+      playerCard.id = 0
     }
 
     role_interactions.push({
@@ -41,21 +47,23 @@ exports.werewolves = (gameState, tokens) => {
       title: "WEREWOLVES",
       token,
       message: loneWolf ? "interaction_lonewolf" : "interaction_werewolves",
-      werewolves: werewolfPlayerNumbers,
+      werewolves: newGameState.werewolves,
+      dreamwolf: newGameState.dreamwolf,
       selectable_cards: selectableCards,
-      shielded_players: newGameState.shield,
-      show_cards: newGameState.flipped,
-      player_name: newGameState.players[token]?.name,
-      player_original_id: newGameState.players[token]?.card?.original_id,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
+      selectable_limit: { player: 0, center: 1 },
+      shielded_cards: newGameState.shield,
+      show_cards: flippedCards,
+      player_name: player?.name,
+      player_original_id: playerCard?.original_id,
+      player_card_id: playerCard?.id,
+      player_role: playerCard?.role,
+      player_role_id: playerCard?.role_id,
+      player_team: playerCard?.team,
+      player_number: player?.player_number,
     })
 
     if (!loneWolf) {
-      newGameState.actual_scene.interaction = `The Werewolves saw werewolf position(s): player ${werewolfPlayerNumbers.join(', ')} and dream wolf position(s): player ${dreamWolfPlayerNumber.join(', ')}`
+      newGameState.actual_scene.interaction = `The Werewolves saw werewolf position(s): player ${newGameState.werewolves.join(', ')} and dream wolf position(s): player ${newGameState.dreamwolf.join(', ')}`
     }
   })
 
@@ -69,24 +77,40 @@ exports.werewolves_response = (gameState, token, selected_positions) => {
 
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
+  const player = players[token]
+  const playerCard = player?.card
+  const cardPositions =  newGameState.card_positions
+  const showCards = getCardIdsByPositions(cardPositions, [selected_positions[0]])
+  const selectedPositionCard = cardPositions[selected_positions[0]]
 
-  const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
+  if (playerCard.original_id === selectedPositionCard.id) {
+    playerCard.id = 0
+  }
 
-  newGameState.players[token].role_history.show_cards = showCards
-  newGameState.players[token].role_history.card_or_mark_action = true
+  player.role_history.show_cards = showCards
+  player.role_history.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
     title: "WEREWOLVES",
     token,
-    message: "interaction_werewolves2",
-    show_cards: showCards,
-    shielded_players: newGameState.shield,
+    message: "interaction_lonewolf2",
+    werewolves: newGameState.werewolves,
+    dreamwolf: newGameState.dreamwolf,
+    show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
+    shielded_cards: newGameState.shield,
+    player_name: player?.name,
+    player_original_id: playerCard?.original_id,
+    player_card_id: playerCard?.id,
+    player_role: playerCard?.role,
+    player_role_id: playerCard?.role_id,
+    player_team: playerCard?.team,
+    player_number: player?.player_number,
   })
 
   newGameState.role_interactions = role_interactions
-
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card on the next position: ${selected_positions[0]}`
+  newGameState.actual_scene.interaction = `The player ${player.player_number} viewed card on the next position: ${selected_positions[0]}`
 
   return newGameState
 }

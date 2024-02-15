@@ -7,7 +7,57 @@ import { Icon, Token } from 'components'
 import { useClickHandler } from 'hooks'
 
 export const GameCard: React.FC<GameCardProps> = observer(
-  ({ position, id, isCenter, ready, werewolf, selectable, mason, shield }) => {
+  ({
+    position,
+    id,
+    isCenter,
+    ready,
+    selectable,
+    alien,
+    artifact,
+    assassin,
+    awesome,
+    babyalien,
+    bat,
+    blob,
+    bulb,
+    clarity,
+    claw,
+    cow,
+    diseased,
+    dreamwolf,
+    dress,
+    drunk,
+    empath,
+    evil,
+    family,
+    fang,
+    fear,
+    friend,
+    jest,
+    like,
+    lover,
+    mason,
+    mad,
+    mortician,
+    nice,
+    pretty,
+    seer,
+    select,
+    shield,
+    smell,
+    sus,
+    swap,
+    tanner,
+    tap,
+    target,
+    traitor,
+    trophy,
+    ufo,
+    vampire,
+    villain,
+    werewolf,
+  }) => {
     const [isSelected, setIsSelected] = useState(false)
     const { hasMarks } = gameTableStore
     const card = id === 0 ? '' : deckStore.getCardById(id)
@@ -73,9 +123,50 @@ export const GameCard: React.FC<GameCardProps> = observer(
         <Tokens>
           {!isCenter && <Token tokenName={playerTokenName} size={35} />}
           {!isCenter && hasMarks && <Token tokenName={'mark_back'} size={35} />}
-          {!isCenter && shield && <Icon iconName="shield" size={33} />}
-          {!isCenter && werewolf && <Icon iconName="werewolf" size={33} />}
+          {!isCenter && alien && <Icon iconName="alien" size={33} />}
+          {!isCenter && artifact && <Icon iconName="artifact" size={33} />}
+          {!isCenter && assassin && <Icon iconName="assassin" size={33} />}
+          {!isCenter && awesome && <Icon iconName="awesome" size={33} />}
+          {!isCenter && babyalien && <Icon iconName="babyalien" size={33} />}
+          {!isCenter && bat && <Icon iconName="bat" size={33} />}
+          {!isCenter && blob && <Icon iconName="blob" size={33} />}
+          {!isCenter && bulb && <Icon iconName="bulb" size={33} />}
+          {!isCenter && clarity && <Icon iconName="clarity" size={33} />}
+          {!isCenter && claw && <Icon iconName="claw" size={33} />}
+          {!isCenter && cow && <Icon iconName="cow" size={33} />}
+          {!isCenter && diseased && <Icon iconName="diseased" size={33} />}
+          {!isCenter && dreamwolf && <Icon iconName="dreamwolf" size={33} />}
+          {!isCenter && dress && <Icon iconName="dress" size={33} />}
+          {!isCenter && drunk && <Icon iconName="drunk" size={33} />}
+          {!isCenter && empath && <Icon iconName="empath" size={33} />}
+          {!isCenter && evil && <Icon iconName="evil" size={33} />}
+          {!isCenter && family && <Icon iconName="family" size={33} />}
+          {!isCenter && fang && <Icon iconName="fang" size={33} />}
+          {!isCenter && fear && <Icon iconName="fear" size={33} />}
+          {!isCenter && friend && <Icon iconName="friend" size={33} />}
+          {!isCenter && jest && <Icon iconName="jest" size={33} />}
+          {!isCenter && like && <Icon iconName="like" size={33} />}
+          {!isCenter && lover && <Icon iconName="lover" size={33} />}
           {!isCenter && mason && <Icon iconName="mason" size={33} />}
+          {!isCenter && mad && <Icon iconName="mad" size={33} />}
+          {!isCenter && mortician && <Icon iconName="mortician" size={33} />}
+          {!isCenter && nice && <Icon iconName="nice" size={33} />}
+          {!isCenter && pretty && <Icon iconName="pretty" size={33} />}
+          {!isCenter && seer && <Icon iconName="seer" size={33} />}
+          {!isCenter && select && <Icon iconName="select" size={33} />}
+          {!isCenter && shield && <Icon iconName="shield" size={33} />}
+          {!isCenter && smell && <Icon iconName="smell" size={33} />}
+          {!isCenter && sus && <Icon iconName="sus" size={33} />}
+          {!isCenter && swap && <Icon iconName="swap" size={33} />}
+          {!isCenter && tanner && <Icon iconName="tanner" size={33} />}
+          {!isCenter && tap && <Icon iconName="tap" size={33} />}
+          {!isCenter && target && <Icon iconName="target" size={33} />}
+          {!isCenter && traitor && <Icon iconName="traitor" size={33} />}
+          {!isCenter && trophy && <Icon iconName="trophy" size={33} />}
+          {!isCenter && ufo && <Icon iconName="ufo" size={33} />}
+          {!isCenter && vampire && <Icon iconName="vampire" size={33} />}
+          {!isCenter && villain && <Icon iconName="villain" size={33} />}
+          {!isCenter && werewolf && <Icon iconName="werewolf" size={33} />}
         </Tokens>
       </StyledGameCard>
     )

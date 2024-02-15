@@ -1,4 +1,5 @@
 const { werewolvesAndDreamWolfIds } = require("./constants")
+const _ = require("lodash")
 
 exports.hasDoppelganger = players => {
   for (const token in players) {
@@ -133,17 +134,6 @@ exports.containsAllIds = (selectedCardIds, roleIds) => roleIds.every((cardId) =>
 
 exports.containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId) => selectedCardIds.includes(cardId))
 
-exports.getTokenByOriginalIds = (players, ids) => {
-  let result = ""
-
-  for (const token in players) {
-    if (ids.includes(players?.[token]?.card.original_id)) {
-      result = token
-    }
-  }
-
-  return result
-}
 
 exports.getTokensByOriginalIds = (players, ids) => {
   const result = []
@@ -176,7 +166,7 @@ exports.getPlayerNeighborsByToken = (players, token) => {
   return neighbors
 }
 
-exports.getSelectablePlayersWithNoShield = (players, shielded_players) => players.filter(player => !shielded_players.includes(player))
+exports.getSelectablePlayersWithNoShield = (players, shielded_cards) => players.filter(player => !shielded_cards.includes(player))
 
 exports.isPlayersCardsFlipped = (flipped, playersPositions) =>  Object.keys(flipped).some(key => playersPositions.includes(key))
 
@@ -195,6 +185,8 @@ exports.getPlayersWithFlippedCards = (players, flipped) => {
 
   return flippedPlayers;
 }
+
+exports.concatArraysWithUniqueElements = (array1, array2) => _.uniqWith([...array1, ...array2], _.isEqual),
 
 //TODO do i need this functions?
 exports.getTokenByCardId = (players, cardId) => {
@@ -220,3 +212,14 @@ exports.getDoppelgangerTokenByRoleId = (players, roleId) => {
   return null
 }
 
+exports.getTokenByOriginalIds = (players, ids) => {
+  let result = ""
+
+  for (const token in players) {
+    if (ids.includes(players?.[token]?.card.original_id)) {
+      result = token
+    }
+  }
+
+  return result
+}

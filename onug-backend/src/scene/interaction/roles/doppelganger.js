@@ -1,38 +1,43 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens } = require("../utils")
 
 //? INFO: Doppelgänger - Looks at any other player's card and becomes that card. Does that action during but different time
-//! At this moment doppelganger never see flipped or shielded cards
-exports.doppelganger = (gameState, token) => {
+//! At this moment doppelganger never see flipped or shielded cards, ripple different
+exports.doppelganger = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
 
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
+  tokens.forEach((token) => {
+    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
+    const player = players[token]
 
-  const roleHistory = {
-    ...newGameState.actual_scene,
-    selectable_cards: selectablePlayerNumbers,
-  }
+    const roleHistory = {
+      ...newGameState.actual_scene,
+      selectable_cards: selectablePlayerNumbers,
+    }
+    player.role_history = roleHistory
 
-  newGameState.players[token].role_history = roleHistory
-  newGameState.players[token].card_or_mark_action = false
+    const playerCard = player?.card
 
-  role_interactions.push({
-    type: INTERACTION,
-    title: "DOPPELGÄNGER",
-    token,
-    message: "interaction_doppelganger",
-    selectable_cards: selectablePlayerNumbers,
-    player_name: newGameState.players[token]?.name,
-    player_original_id: newGameState.players[token]?.card?.original_id,
-    player_card_id: newGameState.players[token]?.card?.id,
-    player_role: newGameState.players[token]?.card?.role,
-    player_role_id: newGameState.players[token]?.card?.role_id,
-    player_team: newGameState.players[token]?.card?.team,
-    player_number: newGameState.players[token]?.player_number,
+    role_interactions.push({
+      type: INTERACTION,
+      title: "DOPPELGÄNGER",
+      token,
+      message: "interaction_doppelganger",
+      selectable_cards: selectablePlayerNumbers,
+      selectable_limit: { player: 1, center: 0 },
+      player_name: player?.name,
+      player_original_id: playerCard?.original_id,
+      player_card_id: playerCard?.id,
+      player_role: playerCard?.role,
+      player_role_id: playerCard?.role_id,
+      player_team: playerCard?.team,
+      player_number: player?.player_number,
+    })
   })
-  
-  newGameState.role_interactions = [...role_interactions]
+
+  newGameState.role_interactions = role_interactions
 
   return newGameState
 }
@@ -42,18 +47,20 @@ exports.doppelganger_response = (gameState, token, selected_positions) => {
 
   const newGameState = { ...gameState }
   const role_interactions = []
-
+  const player = newGameState.players[token]
   const selectedPositionCard = newGameState.card_positions[selected_positions[0]]
+  const playerCard = player?.card
 
-  newGameState.players[token].card.role_id = selectedPositionCard.id
-  newGameState.players[token].card.role = selectedPositionCard.role
-  newGameState.players[token].card.team = selectedPositionCard.team
+  playerCard.role_id = selectedPositionCard.id
+  playerCard.role = selectedPositionCard.role
+  playerCard.team = selectedPositionCard.team
   
   const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
+  const playerRoleHistory = player?.role_history
 
-  newGameState.players[token].role_history.show_cards = showCards
-  newGameState.players[token].role_history.card_or_mark_action = true
-  newGameState.players[token].role_history.new_role_id = newGameState.players[token].card.role_id
+  playerRoleHistory.show_cards = showCards
+  playerRoleHistory.card_or_mark_action = true
+  playerRoleHistory.new_role_id = playerCard.role_id
 
   role_interactions.push({
     type: INTERACTION,
@@ -61,19 +68,18 @@ exports.doppelganger_response = (gameState, token, selected_positions) => {
     token,
     message: "interaction_doppelganger2",
     show_cards: showCards,
-    new_role_id: newGameState.players[token].card.role_id,
-    player_name: newGameState.players[token]?.name,
-    player_original_id: newGameState.players[token]?.card?.original_id,
-    player_card_id: newGameState.players[token]?.card?.id,
-    player_role: newGameState.players[token]?.card?.role,
-    player_role_id: newGameState.players[token]?.card?.role_id,
-    player_team: newGameState.players[token]?.card?.team,
-    player_number: newGameState.players[token]?.player_number,
+    new_role_id: playerCard.role_id,
+    player_name: player.name,
+    player_original_id: playerCard.original_id,
+    player_card_id: playerCard.id,
+    player_role: playerCard.role,
+    player_role_id: playerCard.role_id,
+    player_team: playerCard.team,
+    player_number: player.player_number,
   })
 
   newGameState.role_interactions = [...role_interactions]
-
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} copied the card from the next position: ${selected_positions[0]}`
+  newGameState.actual_scene.interaction = `The player ${player.player_number} copied the card from the next position: ${selected_positions[0]}`
 
   return newGameState
 }

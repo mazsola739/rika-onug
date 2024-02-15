@@ -10,72 +10,75 @@ const {doppelgangerInstantActionsIds, instantRoleIds} = require("../constants")
  * ? 68 Switcheroo, 69 Temptress, 70 Voodoolou, 85 Thing
  * */
 
-exports.doppelganger_instant_action = (gameState, token) => {
-  const new_role_id = gameState.players[token]?.role_history?.new_role_id
-
-  if (!doppelgangerInstantActionsIds.includes(new_role_id)) return gameState
-
+exports.doppelganger_instant_action = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
 
-  const roleName = instantRoleIds[new_role_id]
+  tokens.forEach((token) => {
+    const player = players[token]
+    const new_role_id = player?.role_history?.new_role_id
+    if (!doppelgangerInstantActionsIds.includes(new_role_id)) return newGameState
 
-  const roleHistory = {
-    ...newGameState.actual_scene,
-    instant_night_action: roleName,
-  }
+    const roleName = instantRoleIds[new_role_id]
 
-  newGameState.players[token].role_history = roleHistory
+    const roleHistory = {
+      ...newGameState.actual_scene,
+      instant_night_action: roleName,
+    }
+    player.role_history = roleHistory
 
-  newGameState.actual_scene.interaction = `Doppelganger instant night action for player_${newGameState.players[token].player_number}: ${roleName}`
-  newGameState.actual_scene.copied_role = roleName
+    newGameState.actual_scene.interaction = `Doppelganger instant night action for player_${player.player_number}: ${roleName}`
+    newGameState.actual_scene.copied_role = roleName
 
-  role_interactions.push({
-    type: INTERACTION,
-    title: "DOPPELGÄNGER_INSTANT_ACTION",
-    token,
-    message: "interaction_instant_night_action",
-    shielded_players: newGameState.shield,
-    instant_night_action: roleName,
-    new_role_id,
-    player_name: newGameState.players[token]?.name,
-    player_original_id: newGameState.players[token]?.card?.original_id,
-    player_card_id: newGameState.players[token]?.card?.id,
-    player_role: newGameState.players[token]?.card?.role,
-    player_role_id: newGameState.players[token]?.card?.role_id,
-    player_team: newGameState.players[token]?.card?.team,
-    player_number: newGameState.players[token]?.player_number,
+    const playerCard = player?.card
+  
+    role_interactions.push({
+      type: INTERACTION,
+      title: "DOPPELGÄNGER_INSTANT_ACTION",
+      token,
+      message: "interaction_instant_night_action",
+      instant_night_action: roleName,
+      new_role_id,
+      player_name: player?.name,
+      player_original_id: playerCard?.original_id,
+      player_card_id: playerCard?.id,
+      player_role: playerCard?.role,
+      player_role_id: playerCard?.role_id,
+      player_team: playerCard?.team,
+      player_number: player?.player_number,
+    })
+  
+    newGameState.role_interactions = role_interactions
+  
+    if (new_role_id === 2)  return roles.drunk(newGameState, [token])
+    if (new_role_id === 8)  return roles.robber(newGameState, [token])
+    if (new_role_id === 9)  return roles.seer(newGameState, [token])
+    if (new_role_id === 11) return roles.troublemaker(newGameState, [token])
+    if (new_role_id === 17) return roles.alphawolf(newGameState, [token])
+    if (new_role_id === 18) return roles.apprenticeseer(newGameState, [token])
+    if (new_role_id === 22) return roles.mysticwolf(newGameState, [token])
+    if (new_role_id === 23) return roles.paranormalinvestigator(newGameState, [token])
+    if (new_role_id === 25) return roles.sentinel(newGameState, [token])
+    if (new_role_id === 26) return roles.villageidiot(newGameState, [token])
+    if (new_role_id === 27) return roles.witch(newGameState, [token])
+    if (new_role_id === 31) return roles.cupid(newGameState, [token])
+    if (new_role_id === 32) return roles.diseased(newGameState, [token])
+    if (new_role_id === 34) return roles.instigator(newGameState, [token])
+    if (new_role_id === 55) return roles.annoyinglad(newGameState, [token])
+    if (new_role_id === 56) return roles.detector(newGameState, [token])
+    if (new_role_id === 57) return roles.drpeeker(newGameState, [token])
+    if (new_role_id === 65) return roles.rapscallion(newGameState, [token])
+    if (new_role_id === 66) return roles.roleretriever(newGameState, [token])
+    if (new_role_id === 68) return roles.switcheroo(newGameState, [token])
+    if (new_role_id === 69) return roles.temptress(newGameState, [token])
+    if (new_role_id === 70) return roles.voodoolou(newGameState, [token])
+    if (new_role_id === 85) return roles.thing(newGameState, [token])
   })
-
-  newGameState.role_interactions = role_interactions
-
-  if (new_role_id === 2)  return roles.drunk(newGameState, token)
-  if (new_role_id === 8)  return roles.robber(newGameState, token)
-  if (new_role_id === 9)  return roles.seer(newGameState, token)
-  if (new_role_id === 11) return roles.troublemaker(newGameState, token)
-  if (new_role_id === 17) return roles.alphawolf(newGameState, token)
-  if (new_role_id === 18) return roles.apprenticeseer(newGameState, token)
-  if (new_role_id === 22) return roles.mysticwolf(newGameState, token)
-  if (new_role_id === 23) return roles.paranormalinvestigator(newGameState, token)
-  if (new_role_id === 25) return roles.sentinel(newGameState, token)
-  if (new_role_id === 26) return roles.villageidiot(newGameState, token)
-  if (new_role_id === 27) return roles.witch(newGameState, token)
-  if (new_role_id === 31) return roles.cupid(newGameState, token)
-  if (new_role_id === 32) return roles.diseased(newGameState, token)
-  if (new_role_id === 34) return roles.instigator(newGameState, token)
-  if (new_role_id === 55) return roles.annoyinglad(newGameState, token)
-  if (new_role_id === 56) return roles.detector(newGameState, token)
-  if (new_role_id === 57) return roles.drpeeker(newGameState, token)
-  if (new_role_id === 65) return roles.rapscallion(newGameState, token)
-  if (new_role_id === 66) return roles.roleretriever(newGameState, token)
-  if (new_role_id === 68) return roles.switcheroo(newGameState, token)
-  if (new_role_id === 69) return roles.temptress(newGameState, token)
-  if (new_role_id === 70) return roles.voodoolou(newGameState, token)
-  if (new_role_id === 85) return roles.thing(newGameState, token)
 
   return newGameState
 }
-//TODO
+
 exports.doppelganger_instant_action_response = (gameState, token) => {
   const role = gameState?.players?.[token]?.role_history?.copied_role
 

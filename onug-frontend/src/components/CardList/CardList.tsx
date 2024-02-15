@@ -14,8 +14,8 @@ export const CardList: React.FC<CardListProps> = observer(({ team, cards }) => {
     <StyledCardList>
       <CardListTitle>{`${teamName} TEAM`}</CardListTitle>
       <CardListGrid>
-        {teamMembers.map((card) => (
-          <Card key={card.id} card={card} />
+        {teamMembers.map((card, index) => (
+          <Card key={index} card={card} />
         ))}
       </CardListGrid>
     </StyledCardList>
