@@ -43,6 +43,7 @@ export type IconType =
   | 'sentinel'
   | 'shield'
   | 'smell'
+  | 'spy'
   | 'sus'
   | 'swap'
   | 'tanner'

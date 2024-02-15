@@ -1,10 +1,11 @@
 export interface GameCardProps {
   id: number
+  spy?: boolean
   position: string
   ready?: boolean
   isCenter: boolean
   selectable?: boolean
-  alien?: boolean
+  aliens?: boolean
   artifact?: boolean
   assassin?: boolean
   awesome?: boolean
@@ -27,8 +28,8 @@ export interface GameCardProps {
   friend?: boolean
   jest?: boolean
   like?: boolean
-  lover?: boolean
-  mason?: boolean
+  lovers?: boolean
+  masons?: boolean
   mad?: boolean
   mortician?: boolean
   nice?: boolean
@@ -45,9 +46,9 @@ export interface GameCardProps {
   traitor?: boolean
   trophy?: boolean
   ufo?: boolean
-  vampire?: boolean
-  villain?: boolean
-  werewolf?: boolean
+  vampires?: boolean
+  villains?: boolean
+  werewolves?: boolean
 }
 
 export interface StyledGameCardProps {

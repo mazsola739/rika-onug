@@ -42,7 +42,7 @@ exports.alphawolf = (gameState, tokens) => {
       token,
       message: "interaction_alphawolf",
       selectable_cards: selectablePlayersWithNoShield,
-      selectable_limit: { player: 1, center: 0 },
+      selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
       show_cards: flippedCards,
       player_name: player?.name,

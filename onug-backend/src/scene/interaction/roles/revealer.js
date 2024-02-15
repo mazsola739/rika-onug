@@ -23,7 +23,7 @@ exports.revealer = (gameState, tokens) => {
       token,
       message: "interaction_",
       
-      selectable_limit: { player: 1, center: 0 },
+      selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
       player_name: newGameState.players[token]?.name,
       player_original_id: newGameState.players[token]?.card?.original_id,

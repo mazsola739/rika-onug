@@ -7,8 +7,8 @@ export const MessageBox: React.FC = observer(() => {
   const message = interactionStore.lastJsonMessage.message
   const selectable_cards =
     interactionStore.lastJsonMessage.selectable_cards || []
-  const masons = interactionStore.lastJsonMessage.mason || []
-  const werewolves = interactionStore.lastJsonMessage.werewolf || []
+  const masons = interactionStore.lastJsonMessage.masons || []
+  const werewolves = interactionStore.lastJsonMessage.werewolves || []
 
   //selected
   const selected_cards = interactionStore.selectedCards || []

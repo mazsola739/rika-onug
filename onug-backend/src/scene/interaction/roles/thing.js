@@ -3,111 +3,110 @@ const { getPlayerTokenByPlayerNumber, getPlayerNumbersWithMatchingTokens, isActi
 const { websocketServerConnectionsPerRoom } = require("../../../websocket/connections")
 
 //? INFO: Thing - Taps the nearest shoulder of the player on their immediate right or left //THING, ANNOYING_LAD
-exports.thing = (gameState, tokens) => {
-  const newGameState = { ...gameState }
-  const role_interactions = []
-
-  tokens.forEach((token) => {
-    const roleHistory = {
-      ...newGameState.actual_scene,
-    }
-  
-    newGameState.players[token].role_history = roleHistory
-      
-  
-  
-    role_interactions.push({
-      type: INTERACTION,
-      title: "",
-      token,
-      message: "interaction_",
-      
-      selectable_limit: { player: 1, center: 0 },
-      shielded_cards: newGameState.shield,
-      player_name: newGameState.players[token]?.name,
-      player_original_id: newGameState.players[token]?.card?.original_id,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
-    })
-  
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
-  })
-  
-    newGameState.role_interactions = role_interactions
-
-  const neighbors = getPlayerNeighborsByToken(newGameState.players, token)
-
-  const roleHistory = {
-    ...newGameState.actual_scene,
-    selectable_cards: neighbors,
+exports.thing = (gameState, tokens, title) => {
+  const roleMapping = {
+    'ANNOYING_LAD': 'interaction_annoyinglad',
+    'THING': 'interaction_thing'
   }
 
-  newGameState.players[token].role_history = roleHistory
+  const newGameState = { ...gameState }
+  const role_interactions = []
+  const players = newGameState.players
+
+  tokens.forEach((token) => {
+    const player = players[token]
+    const flippedCards = newGameState.flipped
+    const neighbors = getPlayerNeighborsByToken(players, token)
+
+    const roleHistory = {
+      ...newGameState.actual_scene,
+      selectable_cards: neighbors
+    }
   
-  const thingPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, thingPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, thingPlayerNumber)
+  player.role_history = roleHistory
+  
+  const thingPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, thingPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, thingPlayerNumber)
+  const playerCard = player?.card
 
   if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[thingPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[thingPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[thingPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[thingPlayerNumber[0]].team
+    const positionCard = newGameState.card_positions[thingPlayerNumber[0]]
+    playerCard.id = positionCard.id
+    playerCard.role_id = positionCard.id
+    playerCard.role = positionCard.role
+    playerCard.team = positionCard.team
   } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
+    playerCard.id = 0
   }
 
   role_interactions.push({
     type: INTERACTION,
-    title: "THING",
+    title,
     token,
-    message: "interaction_thing",
+    message: roleMapping[title],
     selectable_cards: neighbors,
+    selectable_card_limit: { player: 1, center: 0 },
     shielded_cards: newGameState.shield,
-    player_name: newGameState.players[token]?.name,
-    player_original_id: newGameState.players[token]?.card?.original_id,
-    player_card_id: newGameState.players[token]?.card?.id,
-    player_role: newGameState.players[token]?.card?.role,
-    player_role_id: newGameState.players[token]?.card?.role_id,
-    player_team: newGameState.players[token]?.card?.team,
-    player_number: newGameState.players[token]?.player_number,
+    show_cards: flippedCards,
+    player_name: player?.name,
+    player_original_id: playerCard?.original_id,
+    player_card_id: playerCard?.id,
+    player_role: playerCard?.role,
+    player_role_id: playerCard?.role_id,
+    player_team: playerCard?.team,
+    player_number: player?.player_number,
   })
-
+  })
+  
   newGameState.role_interactions = role_interactions
 
   return newGameState
 }
 
-exports.thing_response = (gameState, token, selected_positions) => {
+exports.thing_response = (gameState, token, selected_positions, title) => {
+  const roleMapping = {
+    'ANNOYING_LAD': 'interaction_annoyinglad2',
+    'THING': 'interaction_thing2'
+  }
+  
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
+  const player = players[token]
+  const playerCard = player?.card
 
-  const tappedPlayerToken = getPlayerTokenByPlayerNumber(newGameState.players, selected_positions[0])
+  const tappedPlayerToken = getPlayerTokenByPlayerNumber(players, selected_positions[0])
 
+  //TODO TAPPED icon to the tapped player
   websocketServerConnectionsPerRoom[newGameState.room_id][tappedPlayerToken].send(JSON.stringify({
     type: MESSAGE,
     message: "You got tapped by your neighbor",
   }))
 
-  newGameState.players[token].role_history.tapped_player = selected_positions[0]
+  player.role_history.tapped_player = selected_positions[0]
 
   role_interactions.push({
     type: INTERACTION,
-    title: "THING",
+    title,
     token,
-    message: "interaction_thing2",
-    tapped_player: selected_positions[0],
+    message: roleMapping[title],
+    tapped_player: [selected_positions[0]],
     shielded_cards: newGameState.shield,
+    show_cards: newGameState.flipped,
+    player_name: player?.name,
+    player_original_id: playerCard?.original_id,
+    player_card_id: playerCard?.id,
+    player_role: playerCard?.role,
+    player_role_id: playerCard?.role_id,
+    player_team: playerCard?.team,
+    player_number: player?.player_number,
   })
 
   newGameState.role_interactions = role_interactions
-
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} tapped their neighbor on the next position: ${selected_positions[0]}`
+  newGameState.actual_scene.interaction = `The player ${player.player_number} tapped their neighbor on the next position: ${selected_positions[0]}`
 
   return newGameState
 }

@@ -42,7 +42,7 @@ exports.mysticwolf = (gameState, tokens) => {
       token,
       message: "interaction_mysticwolf",
       selectable_cards: selectablePlayersWithNoShield,
-      selectable_limit: { player: 1, center: 0 },
+      selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
       player_name: player?.name,
       player_original_id: player?.card?.original_id,

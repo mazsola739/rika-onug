@@ -50,7 +50,7 @@ exports.werewolves = (gameState, tokens) => {
       werewolves: newGameState.werewolves,
       dreamwolf: newGameState.dreamwolf,
       selectable_cards: selectableCards,
-      selectable_limit: { player: 0, center: 1 },
+      selectable_card_limit: { player: 0, center: 1 },
       shielded_cards: newGameState.shield,
       show_cards: flippedCards,
       player_name: player?.name,

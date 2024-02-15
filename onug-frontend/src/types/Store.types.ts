@@ -29,14 +29,14 @@ export type WsJsonMessage = {
     narration?: string[]
   }
   selectable_cards?: string[]
-  selectable_center_cards?: string[]
-  selectable_player_cards?: string[]
+
   selectable_marks?: string[]
-  selectable_limit?: { player: number; center: number; mark: number }
+  selectable_card_limit?: { player: number; center: number; mark: number }
   shielded_cards?: string[]
   show_cards?: Record<string, number>[]
+  viewed_cards?: string[]
   new_role_id?: number
-  alien?: string[]
+  aliens?: string[]
   artifact?: string[]
   assassin?: string[]
   awesome?: string[]
@@ -59,8 +59,8 @@ export type WsJsonMessage = {
   friend?: string[]
   jest?: string[]
   like?: string[]
-  lover?: string[]
-  mason?: string[]
+  lovers?: string[]
+  masons?: string[]
   mad?: string[]
   mortician?: string[]
   nice?: string[]
@@ -69,17 +69,17 @@ export type WsJsonMessage = {
   select?: string[]
   shield?: string[]
   smell?: string[]
-  villain?: string[]
+  villains?: string[]
   sus?: string[]
   swap?: string[]
   tanner?: string[]
-  tap?: string[]
+  tapped_player?: string[]
   target?: string[]
   traitor?: string[]
   trophy?: string[]
   ufo?: string[]
-  vampire?: string[]
-  werewolf?: string[]
+  vampires?: string[]
+  werewolves?: string[]
 }
 
 export type RoomType = {
@@ -115,8 +115,9 @@ export type GamePlayBoardCardType = {
   position: string
   card: {
     id: number
+    spy: boolean
     selectable: boolean
-    alien: boolean
+    aliens: boolean
     artifact: boolean
     assassin: boolean
     awesome: boolean
@@ -139,7 +140,7 @@ export type GamePlayBoardCardType = {
     friend: boolean
     jest: boolean
     like: boolean
-    lover: boolean
+    lovers: boolean
     mason: boolean
     mad: boolean
     mortician: boolean
@@ -149,7 +150,7 @@ export type GamePlayBoardCardType = {
     select: boolean
     shield: boolean
     smell: boolean
-    villain: boolean
+    villains: boolean
     sus: boolean
     swap: boolean
     tanner: boolean
@@ -158,8 +159,8 @@ export type GamePlayBoardCardType = {
     traitor: boolean
     trophy: boolean
     ufo: boolean
-    vampire: boolean
-    werewolf: boolean
+    vampires: boolean
+    werewolves: boolean
   }
 }
 
@@ -196,8 +197,9 @@ export type PositionProperties = {
   position: string
   selectable: boolean
   id?: number
+  spy?: boolean
   ready?: boolean
-  alien?: boolean
+  aliens?: boolean
   artifact?: boolean
   assassin?: boolean
   awesome?: boolean
@@ -220,8 +222,8 @@ export type PositionProperties = {
   friend?: boolean
   jest?: boolean
   like?: boolean
-  lover?: boolean
-  mason?: boolean
+  lovers?: boolean
+  masons?: boolean
   mad?: boolean
   mortician?: boolean
   nice?: boolean
@@ -230,7 +232,7 @@ export type PositionProperties = {
   select?: boolean
   shield?: boolean
   smell?: boolean
-  villain?: boolean
+  villains?: boolean
   sus?: boolean
   swap?: boolean
   tanner?: boolean
@@ -239,6 +241,6 @@ export type PositionProperties = {
   traitor?: boolean
   trophy?: boolean
   ufo?: boolean
-  vampire?: boolean
-  werewolf?: boolean
+  vampires?: boolean
+  werewolves?: boolean
 }

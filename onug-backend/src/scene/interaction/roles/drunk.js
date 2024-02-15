@@ -63,7 +63,7 @@ exports.drunk = (gameState, tokens) => {
       token,
       message: "interaction_drunk",
       selectable_cards: centerCardPositions,
-      selectable_limit: { player: 0, center: 1 },
+      selectable_card_limit: { player: 0, center: 1 },
       shielded_cards: newGameState.shield,
       player_name: newGameState.players[token]?.name,
       player_original_id: newGameState.players[token]?.card?.original_id,

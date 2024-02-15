@@ -26,7 +26,7 @@ exports.doppelganger = (gameState, tokens) => {
       token,
       message: "interaction_doppelganger",
       selectable_cards: selectablePlayerNumbers,
-      selectable_limit: { player: 1, center: 0 },
+      selectable_card_limit: { player: 1, center: 0 },
       player_name: player?.name,
       player_original_id: playerCard?.original_id,
       player_card_id: playerCard?.id,

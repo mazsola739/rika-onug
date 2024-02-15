@@ -39,7 +39,7 @@ exports.apprenticetanner = (gameState, tokens) => {
       title: "APPRENTICE_TANNER",
       token,
       message: "interaction_apprentice_tanner",
-      selectable_limit: { player: 0, center: 0 },
+      selectable_card_limit: { player: 0, center: 0 },
       tanner,
       shielded_cards: newGameState.shield,
       show_cards: flippedCards,
@@ -53,7 +53,7 @@ exports.apprenticetanner = (gameState, tokens) => {
     })
   
     //TODO save multiple
-    //newGameState.actual_scene.interaction = `The player $player.player_number} saw the position(s) of Tanner(s): ${tanner(", ")}`
+    newGameState.actual_scene.interaction = `The player ${player.player_number} saw the position(s) of Tanner(s): ${tanner(", ")}`
   })
   
   newGameState.role_interactions = role_interactions

@@ -40,7 +40,7 @@ exports.sentinel = (gameState, tokens) => {
       token,
       message: "interaction_sentinel",
       selectable_cards: selectablePlayersWithNoShield,
-      selectable_limit: { player: 1, center: 0 },
+      selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
       show_cards: newGameState.flipped,
       player_name: player?.name,

@@ -318,14 +318,14 @@ exports.interactionHandler = (gameState) => {
     case "THING":
       if (conditions.hasThingPlayer) {
         tokens = getTokensByOriginalIds(players, [85])
-        return roles.thing(newGameState, tokens)
+        return roles.thing(newGameState, tokens, sceneTitle)
       }
       break
 
-    case "ANNOYING_LAD":
+    case "ANNOYING_LAD": //? same as thing
       if (conditions.hasAnnoyingLadPlayer) {
         tokens = getTokensByOriginalIds(players, [55])
-        return roles.annoyinglad(newGameState, tokens)
+        return roles.thing(newGameState, tokens, sceneTitle)
       }
       break
 
@@ -395,7 +395,7 @@ exports.interactionHandler = (gameState) => {
     case "ROBBER":
       if (conditions.hasRobberPlayer) {
         tokens = getTokensByOriginalIds(players, [8])
-        return roles.robber(newGameState, tokens)
+        return roles.robber(newGameState, tokens, sceneTitle)
       }
       break /*
 
@@ -418,14 +418,14 @@ exports.interactionHandler = (gameState) => {
         tokens = getTokensByOriginalIds(players, [1])
         return roles.doppelganger_pickpocket(newGameState, tokens)
       }
-      break
+      break */
 
-    case "ROLE_RETRIEVER": 
+    case "ROLE_RETRIEVER": //? same as robber
       if (conditions.hasRoleRetrieverPlayer) {
         tokens = getTokensByOriginalIds(players, [1])
-        return roles.roleretriever(newGameState, tokens)
+        return roles.robber(newGameState, tokens, sceneTitle)
       }
-      break
+      break /*
 
     case "VOODOO_LOU": 
       if (conditions.hasVoodooLouPlayer) {
@@ -482,7 +482,7 @@ exports.interactionHandler = (gameState) => {
       }
       break
 
-    case "SWITCHEROO": 
+    case "SWITCHEROO": //? same as troublemaker
       if (conditions.hasSwitcherooPlayer) {
         tokens = getTokensByOriginalIds(players, [1])
         return roles.switcheroo(newGameState, tokens)}

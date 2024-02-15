@@ -32,7 +32,6 @@ const { apprenticetanner }                                        = require("./a
 const { intern }                                                  = require("./intern")
 const { masons }                                                  = require("./masons")
 const { thing, thing_response }                                   = require("./thing")
-const { annoyinglad, annoyinglad_response }                       = require("./annoyinglad")
 const { seer, seer_response }                                     = require("./seer")
 const { apprenticeseer, apprenticeseer_response }                 = require("./apprenticeseer")
 const { paranormalinvestigator, paranormalinvestigator_response } = require("./paranormalinvestigator")
@@ -43,7 +42,6 @@ const { detector, detector_response }                             = require("./d
 const { robber, robber_response }                                 = require("./robber")
 const { witch }                                                   = require("./witch")
 const { pickpocket, doppelganger_pickpocket }                     = require("./pickpocket")
-const { roleretriever }                                           = require("./roleretriever")
 const { voodoolou }                                               = require("./voodoolou")
 const { troublemaker, troublemaker_response }                     = require("./troublemaker")
 const { villageidiot }                                            = require("./villageidiot")
@@ -104,7 +102,6 @@ exports.roles = {
   intern,
   masons,
   thing, thing_response,
-  annoyinglad, annoyinglad_response,
   seer, seer_response,
   apprenticeseer, apprenticeseer_response,
   paranormalinvestigator, paranormalinvestigator_response,
@@ -115,7 +112,6 @@ exports.roles = {
   robber, robber_response,
   witch,
   pickpocket, doppelganger_pickpocket,
-  roleretriever,
   voodoolou,
   troublemaker, troublemaker_response,
   villageidiot,

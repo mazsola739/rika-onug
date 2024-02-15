@@ -10,10 +10,11 @@ export const GameCard: React.FC<GameCardProps> = observer(
   ({
     position,
     id,
+    spy,
     isCenter,
     ready,
     selectable,
-    alien,
+    aliens,
     artifact,
     assassin,
     awesome,
@@ -36,8 +37,8 @@ export const GameCard: React.FC<GameCardProps> = observer(
     friend,
     jest,
     like,
-    lover,
-    mason,
+    lovers,
+    masons,
     mad,
     mortician,
     nice,
@@ -54,9 +55,9 @@ export const GameCard: React.FC<GameCardProps> = observer(
     traitor,
     trophy,
     ufo,
-    vampire,
-    villain,
-    werewolf,
+    vampires,
+    villains,
+    werewolves,
   }) => {
     const [isSelected, setIsSelected] = useState(false)
     const { hasMarks } = gameTableStore
@@ -121,9 +122,11 @@ export const GameCard: React.FC<GameCardProps> = observer(
           isSelected={isSelected}
         />
         <Tokens>
+          {isCenter && spy && <Icon iconName="spy" size={33} />}
+          {/* //TODO check why is not working */}
           {!isCenter && <Token tokenName={playerTokenName} size={35} />}
-          {!isCenter && hasMarks && <Token tokenName={'mark_back'} size={35} />}
-          {!isCenter && alien && <Icon iconName="alien" size={33} />}
+          {!isCenter && hasMarks && <Token tokenName="mark_back" size={35} />}
+          {!isCenter && aliens && <Icon iconName="alien" size={33} />}
           {!isCenter && artifact && <Icon iconName="artifact" size={33} />}
           {!isCenter && assassin && <Icon iconName="assassin" size={33} />}
           {!isCenter && awesome && <Icon iconName="awesome" size={33} />}
@@ -146,8 +149,8 @@ export const GameCard: React.FC<GameCardProps> = observer(
           {!isCenter && friend && <Icon iconName="friend" size={33} />}
           {!isCenter && jest && <Icon iconName="jest" size={33} />}
           {!isCenter && like && <Icon iconName="like" size={33} />}
-          {!isCenter && lover && <Icon iconName="lover" size={33} />}
-          {!isCenter && mason && <Icon iconName="mason" size={33} />}
+          {!isCenter && lovers && <Icon iconName="lover" size={33} />}
+          {!isCenter && masons && <Icon iconName="mason" size={33} />}
           {!isCenter && mad && <Icon iconName="mad" size={33} />}
           {!isCenter && mortician && <Icon iconName="mortician" size={33} />}
           {!isCenter && nice && <Icon iconName="nice" size={33} />}
@@ -164,9 +167,9 @@ export const GameCard: React.FC<GameCardProps> = observer(
           {!isCenter && traitor && <Icon iconName="traitor" size={33} />}
           {!isCenter && trophy && <Icon iconName="trophy" size={33} />}
           {!isCenter && ufo && <Icon iconName="ufo" size={33} />}
-          {!isCenter && vampire && <Icon iconName="vampire" size={33} />}
-          {!isCenter && villain && <Icon iconName="villain" size={33} />}
-          {!isCenter && werewolf && <Icon iconName="werewolf" size={33} />}
+          {!isCenter && vampires && <Icon iconName="vampire" size={33} />}
+          {!isCenter && villains && <Icon iconName="villain" size={33} />}
+          {!isCenter && werewolves && <Icon iconName="werewolf" size={33} />}
         </Tokens>
       </StyledGameCard>
     )

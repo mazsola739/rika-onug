@@ -1,82 +1,60 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPositions, concatArraysWithUniqueElements } = require("../utils")
 const { centerCardPositions } = require("../constants")
 
 //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
 exports.seer = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = []
-
-  const selectablePlayerNumber = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
-  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+  const players = newGameState.players
 
   tokens.forEach((token) => {
+    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
+    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+    const selectablePositions= concatArraysWithUniqueElements(centerCardPositions, selectablePlayersWithNoShield)  
+
+    const player = players[token]
+    const flippedCards = newGameState.flipped
+
     const roleHistory = {
       ...newGameState.actual_scene,
+      selectable_cards: selectablePositions,
     }
-  
-    newGameState.players[token].role_history = roleHistory
-      
-  
-  
+
+    player.role_history = roleHistory
+
+    const seerPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
+    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, seerPlayerNumber)
+    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, seerPlayerNumber)
+    const playerCard = player?.card
+    const currentCard = newGameState.card_positions[seerPlayerNumber[0]]
+
+    if (iSeeMyCardIsFlipped) {
+      playerCard.id = currentCard.id
+      playerCard.role_id = currentCard.id
+      playerCard.role = currentCard.role
+      playerCard.team = currentCard.team
+    } else if (iSeeMyCardElsewhere) {
+      playerCard.id = 0
+    }
+
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title: "SEER",
       token,
-      message: "interaction_",
-      
+      message: "interaction_seer",
+      selectable_cards: selectablePositions,
+      selectable_card_limit: { player: 1, center: 2 },
       shielded_cards: newGameState.shield,
-      player_name: newGameState.players[token]?.name,
-      player_original_id: newGameState.players[token]?.card?.original_id,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
+      show_cards: flippedCards,
+      player_name: player?.name,
+      player_original_id: playerCard?.original_id,
+      player_card_id: playerCard?.id,
+      player_role: playerCard?.role,
+      player_role_id: playerCard?.role_id,
+      player_team: playerCard?.team,
+      player_number: player?.player_number,
     })
-  
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
-  })
-  
-    newGameState.role_interactions = role_interactions
-
-  const roleHistory = {
-    ...newGameState.actual_scene,
-    selectable_center_cards: centerCardPositions,
-    selectable_player_cards: selectablePlayersWithNoShield,
-  }
-
-  newGameState.players[token].role_history = roleHistory
-  
-  const seerPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, seerPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, seerPlayerNumber)
-
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[seerPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[seerPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[seerPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[seerPlayerNumber[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
-
-  role_interactions.push({
-    type: INTERACTION,
-    title: "SEER",
-    token,
-    message: "interaction_seer",
-    selectable_center_cards: centerCardPositions,
-    selectable_player_cards: selectablePlayersWithNoShield,
-    selectable_limit: { player: 1, center: 2 },
-    shielded_cards: newGameState.shield,
-    player_name: newGameState.players[token]?.name,
-    player_original_id: newGameState.players[token]?.card?.original_id,
-    player_card_id: newGameState.players[token]?.card?.id,
-    player_role: newGameState.players[token]?.card?.role,
-    player_role_id: newGameState.players[token]?.card?.role_id,
-    player_team: newGameState.players[token]?.card?.team,
-    player_number: newGameState.players[token]?.player_number,
   })
 
   newGameState.role_interactions = role_interactions
@@ -85,48 +63,51 @@ exports.seer = (gameState, tokens) => {
 }
 
 exports.seer_response = (gameState, token, selected_positions) => {
-  const playerCards = selected_positions.some(pos => pos.includes("player"))
-  const centerCards = selected_positions.some(pos => pos.includes("center"))
+  const newGameState = { ...gameState };
+  const role_interactions = [];
+  const players = newGameState.players;
+  
+  let showCards = [];
+  
+  const playerCards = selected_positions.some(pos => pos.includes("player"));
+  const centerCards = selected_positions.some(pos => pos.includes("center"));
+  
+  const roleHistory = players[token].role_history.selectable_cards;
+  const playerCard = players[token]?.card;
 
-  let showCards = []
-  if (playerCards && !centerCards && gameState.players[token].role_history.selectable_player_cards.includes(selected_positions[0])) {
-    showCards = [selected_positions[0]]
-  } else if (centerCards && !playerCards && [selected_positions[0], selected_positions[1]].every((position) => gameState.players[token].role_history.selectable_center_cards.includes(position))) {
-    showCards = [selected_positions[0], selected_positions[1]]
-  } else return gameState
-
-  const newGameState = { ...gameState }
-  const role_interactions = []
-
-  showCards = getCardIdsByPositions(newGameState.card_positions, selected_positions)
-
-  if (showCards.some((showCard) => Object.values(showCard).includes(newGameState.players[token].card.id))) {
-    newGameState.players[token].card.id = 0
+  if (playerCards && !centerCards && roleHistory.includes(selected_positions[0])) {
+    showCards = getCardIdsByPositions(gameState?.card_positions, [selected_positions[0]]);
+  } else if (centerCards && !playerCards && selected_positions.every(position => roleHistory.includes(position))) {
+    showCards = getCardIdsByPositions(gameState?.card_positions, selected_positions);
+  } else {
+    return newGameState;
   }
 
-  newGameState.players[token].role_history.show_cards = showCards
-  newGameState.players[token].role_history.card_or_mark_action = true
+  if (showCards.some(card => playerCard.original_id === card.id)) {
+    playerCard.id = 0;
+  }
+
+  players[token].role_history.show_cards = showCards;
+  players[token].role_history.card_or_mark_action = true;
 
   role_interactions.push({
     type: INTERACTION,
     title: "SEER",
     token,
     message: "interaction_seer2",
-    show_cards: showCards,
+    show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     shielded_cards: newGameState.shield,
-    player_name: newGameState.players[token]?.name,
-    player_original_id: newGameState.players[token]?.card?.original_id,
-    player_card_id: newGameState.players[token]?.card?.id,
-    player_role: newGameState.players[token]?.card?.role,
-    player_role_id: newGameState.players[token]?.card?.role_id,
-    player_team: newGameState.players[token]?.card?.team,
-    player_number: newGameState.players[token]?.player_number,
-  })
+    player_name: playerCard?.name,
+    player_original_id: playerCard?.original_id,
+    player_card_id: playerCard?.id,
+    player_role: playerCard?.role,
+    player_role_id: playerCard?.role_id,
+    player_team: playerCard?.team,
+    player_number: players[token]?.player_number,
+  });
 
-  newGameState.role_interactions = role_interactions
+  newGameState.role_interactions = role_interactions;
+  newGameState.actual_scene.interaction = `The player ${players[token].player_number} viewed card(s) on the next position(s): ${selected_positions.join(", ")}`;
 
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed card(s) on the next position(s): ${selected_positions.join(", ")}`
-
-  return newGameState
+  return newGameState;
 }
-

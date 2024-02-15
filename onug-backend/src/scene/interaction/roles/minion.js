@@ -40,7 +40,7 @@ exports.minion = (gameState, tokens) => {
       token,
       message: "interaction_minion",
       werewolves: werewolfPlayerNumbers,
-      selectable_limit: { player: 0, center: 0 },
+      selectable_card_limit: { player: 0, center: 0 },
       shielded_cards: newGameState.shield,
       show_cards: flippedCards,
       player_name: player?.name,
