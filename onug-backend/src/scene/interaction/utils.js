@@ -1,5 +1,6 @@
 const { werewolvesAndDreamWolfIds } = require("./constants")
 const _ = require("lodash")
+const artifacts = require("../../data/artifacts.json")
 
 exports.hasDoppelganger = players => {
   for (const token in players) {
@@ -17,6 +18,18 @@ exports.getTokensByRoleIds = (players, roleIds) => {
   for (const token in players) {
     if (roleIds.includes(players?.[token]?.card?.role_id)) {
       result.push(token)
+    }
+  }
+
+  return result
+}
+
+exports.getMadScientistPlayerNumberByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    if (players[token].card.role_id === 63) {
+      result.push(`player_${players[token].player_number}`)
     }
   }
 
@@ -95,7 +108,7 @@ exports.getCardIdsByPositions = (cardPositions, selectedPositions) => {
   return result
 }
 
-exports.getPlayerTokenByPlayerNumber = (players, player) => {
+exports.getPlayerTokensByPlayerNumber = (players, player) => {
   const result = []
   const playerNumber = parseInt(player.match(/\d+/)[0])
 
@@ -106,6 +119,18 @@ exports.getPlayerTokenByPlayerNumber = (players, player) => {
   }
 
   return result
+}
+
+exports.getPlayerTokenByPlayerNumber = (players, player) => {
+  const playerNumber = parseInt(player.match(/\d+/)[0]);
+
+  for (const token in players) {
+    if (players[token].player_number === playerNumber) {
+      return token;
+    }
+  }
+
+  return null;
 }
 
 exports.getPlayerCardIds = players => {
@@ -168,7 +193,9 @@ exports.getPlayerNeighborsByToken = (players, token) => {
 
 exports.getSelectablePlayersWithNoShield = (players, shielded_cards) => players.filter(player => !shielded_cards.includes(player))
 
-exports.isPlayersCardsFlipped = (flipped, playersPositions) =>  Object.keys(flipped).some(key => playersPositions.includes(key))
+exports.getSelectablePlayersWithNoArtifact = (players, artifacted_cards) => players.filter(player => !artifacted_cards.includes(player))
+
+exports.isPlayersCardsFlipped = (flipped, playersPositions) => Object.keys(flipped).some(key => playersPositions.includes(key))
 
 exports.isActivePlayersCardsFlipped = (flipped, playersPositions) => playersPositions.some((position) => flipped.some((obj) => Object.keys(obj)[0] === position))
 
@@ -186,7 +213,17 @@ exports.getPlayersWithFlippedCards = (players, flipped) => {
   return flippedPlayers;
 }
 
-exports.concatArraysWithUniqueElements = (array1, array2) => _.uniqWith([...array1, ...array2], _.isEqual),
+exports.concatArraysWithUniqueElements = (array1, array2) => _.uniqWith([...array1, ...array2], _.isEqual)
+
+exports.getRandomArtifact = (playerArtifacts) => {
+  const assignedArtifacts = playerArtifacts.map(obj => Object.values(obj)[0])
+  const availableArtifacts = artifacts.filter(artifact => !assignedArtifacts.includes(artifact.id))
+  const randomIndex = Math.floor(Math.random() * availableArtifacts.length)
+
+  return availableArtifacts[randomIndex].id
+}
+
+exports.getKeys = (array) => array.map(obj => Object.keys(obj)[0])
 
 //TODO do i need this functions?
 exports.getTokenByCardId = (players, cardId) => {

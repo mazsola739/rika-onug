@@ -55,7 +55,7 @@ class RoleStore {
         const seer = (lastJsonMessage.seer || []).includes(position) || false
         //EMPATH icons
         const artifact =
-          (lastJsonMessage.artifact || []).includes(position) || false
+          (lastJsonMessage.artifacted_cards || []).includes(position) || false
         const blob = (lastJsonMessage.blob || []).includes(position) || false
         const mortician =
           (lastJsonMessage.mortician || []).includes(position) || false

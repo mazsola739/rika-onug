@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, concatArraysWithUniqueElements } = require("../utils")
+const { getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, concatArraysWithUniqueElements , getKeys } = require("../utils")
 const { centerCardPositions } = require("../constants")
 
 //? INFO: Apprentice Seer - looks at one card from the center (not another players or her own)
@@ -41,6 +41,7 @@ exports.apprenticeseer = (gameState, tokens) => {
       selectable_cards: centerCardPositions,
       selectable_card_limit: { player: 0, center: 1 },
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
       player_original_id: playerCard?.original_id,
@@ -84,6 +85,7 @@ exports.apprenticeseer_response = (gameState, token, selected_positions) => {
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     viewed_cards: [selected_positions[0]],
     shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
     player_name: player?.name,
     player_original_id: playerCard?.original_id,
     player_card_id: playerCard?.id,

@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getKeys } = require("../utils")
 const { centerCardPositions } = require("../constants")
 
 //? INFO: Drunk – Swap your card with a card from center but does not look at his new card
@@ -42,6 +42,7 @@ exports.drunk = (gameState, tokens) => {
         selectable_cards: centerCardPositions,
         selectable_card_limit: { player: 0, center: 1 },
         shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
         player_original_id: playerCard?.original_id,
@@ -59,6 +60,7 @@ exports.drunk = (gameState, tokens) => {
         message: "interaction_shielded",
         selectable_card_limit: { player: 0, center: 0 },
         shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
         player_original_id: playerCard?.original_id,
@@ -108,6 +110,7 @@ exports.drunk_response = (gameState, token, selected_positions) => {
     swapped_cards: [`player_${player.player_number}`, `${selected_positions[0]}`],
     show_cards: newGameState.flipped,
     shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
     player_name: player?.name,
     player_original_id: playerCard?.original_id,
     player_card_id: playerCard?.id,

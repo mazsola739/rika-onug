@@ -33,11 +33,11 @@ export type WsJsonMessage = {
   selectable_marks?: string[]
   selectable_card_limit?: { player: number; center: number; mark: number }
   shielded_cards?: string[]
+  artifacted_cards?: string[]
   show_cards?: Record<string, number>[]
   viewed_cards?: string[]
   new_role_id?: number
   aliens?: string[]
-  artifact?: string[]
   assassin?: string[]
   awesome?: string[]
   babyalien?: string[]

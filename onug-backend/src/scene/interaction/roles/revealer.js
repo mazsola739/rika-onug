@@ -1,21 +1,21 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, isPlayersCardsFlipped, isActivePlayersCardsFlipped, getSelectablePlayersWithNoShield, concatArraysWithUniqueElements } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, isPlayersCardsFlipped, isActivePlayersCardsFlipped, getSelectablePlayersWithNoShield, concatArraysWithUniqueElements , getKeys } = require("../utils")
 const { townIds } = require("../constants")
 
 //? INFO: Revealer - Turns and keeps one player's card face up unless they are not on the Villager Team
 //TODO doppelganger
-exports.revealer = (gameState, tokens, role_id) => {
+exports.revealer = (gameState, tokens, role_id, title) => {
   const roleMapping = {
     1: {
-      title: 'DOPPELGÄNGER_REVEALER',
-      message: 'interaction_doppelganger_revealer'
+      title,
+      message: title === "DOPPELGÄNGER_REVEALER" ? 'interaction_doppelganger_revealer' : 'interaction_doppelganger_flipper'
     },
     24: {
-      title: 'REVEALER',
+      title,
       message: 'interaction_revealer'
     },
     59: {
-      title: 'FLIPPER',
+      title,
       message: 'interaction_flipper'
     }
   }
@@ -61,6 +61,7 @@ exports.revealer = (gameState, tokens, role_id) => {
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
       player_original_id: playerCard?.original_id,
@@ -77,18 +78,18 @@ exports.revealer = (gameState, tokens, role_id) => {
   return newGameState
 }
 
-exports.revealer_response = (gameState, token, selected_positions, role_id) => {
+exports.revealer_response = (gameState, token, selected_positions, role_id, title) => {
   const roleMapping = {
     1: {
-      title: 'DOPPELGÄNGER_REVEALER',
+      title: title === "DOPPELGÄNGER_REVEALER" ? 'interaction_doppelganger_revealer' : 'interaction_doppelganger_flipper',
       message: 'interaction_doppelganger_revealer2'
     },
     24: {
-      title: 'REVEALER',
+      title,
       message: 'interaction_revealer2'
     },
     59: {
-      title: 'FLIPPER',
+      title,
       message: 'interaction_flipper2'
     }
   }
@@ -120,6 +121,7 @@ exports.revealer_response = (gameState, token, selected_positions, role_id) => {
     token,
     message: roleMapping[role_id].message,
     shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
     show_cards: concatArraysWithUniqueElements(revealedCard, newGameState.flipped),
     player_name: player?.name,
     player_original_id: playerCard?.original_id,

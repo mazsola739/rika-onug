@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys, getPlayerTokenByPlayerNumber } = require("../utils")
 
 //? INFO: Sentinel - Place a Shield token on any other player's card that card (not mark) cannot be looked at or moved
 //! MARK_OF_FEAR
@@ -42,6 +42,7 @@ exports.sentinel = (gameState, tokens) => {
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       show_cards: newGameState.flipped,
       player_name: player?.name,
       player_original_id: playerCard?.original_id,
@@ -64,17 +65,14 @@ exports.sentinel_response = (gameState, token, selected_positions) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
-  const player = players[token]
-  const playerCard = player?.card
 
   newGameState.shield.push(selected_positions[0])
-  const shieldedCards = newGameState.shield
-  const shieldedPlayerTokens = shieldedCards.map(player => getPlayerTokenByPlayerNumber(newGameState.players, player))
-  shieldedPlayerTokens.forEach((token) => {
-    players[token].shield = true
-  })
+  const shieldedPlayerToken = getPlayerTokenByPlayerNumber(players, selected_positions[0])
+  players[shieldedPlayerToken].shield = true
 
-  player.role_history.new_shielded_card = selected_positions[0]
+  const player = players[token]
+  const playerCard = player?.card
+  player.role_history.shielded_card = selected_positions[0]
 
   role_interactions.push({
     type: INTERACTION,
@@ -82,6 +80,8 @@ exports.sentinel_response = (gameState, token, selected_positions) => {
     token,
     message: "interaction_sentinel2",
     shielded_cards: newGameState.shield,
+    new_shield_card: [selected_positions[0]],
+    artifacted_cards: getKeys(newGameState.artifact),
     show_cards: newGameState.flipped,
     player_name: player?.name,
     player_original_id: playerCard?.original_id,

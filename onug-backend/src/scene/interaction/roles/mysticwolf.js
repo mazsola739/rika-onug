@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Mystic Wolf - Wakes with other Werewolves. Wakes after and looks at any other player's card (not center or own)
 exports.mysticwolf = (gameState, tokens) => {
@@ -44,6 +44,7 @@ exports.mysticwolf = (gameState, tokens) => {
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       player_name: player?.name,
       player_original_id: player?.card?.original_id,
       player_card_id: player?.card?.id,
@@ -85,6 +86,7 @@ exports.mysticwolf_response = (gameState, token, selected_positions) => {
     message: "interaction_mysticwolf2",
     show_cards: showCards,
     shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
     player_name: player?.name,
     player_original_id: player?.card?.original_id,
     player_card_id: player?.card?.id,

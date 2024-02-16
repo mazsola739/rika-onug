@@ -126,8 +126,8 @@ export const GameCard: React.FC<GameCardProps> = observer(
           {/* //TODO check why is not working */}
           {!isCenter && <Token tokenName={playerTokenName} size={35} />}
           {!isCenter && hasMarks && <Token tokenName="mark_back" size={35} />}
-          {!isCenter && aliens && <Icon iconName="alien" size={33} />}
           {!isCenter && artifact && <Icon iconName="artifact" size={33} />}
+          {!isCenter && aliens && <Icon iconName="alien" size={33} />}
           {!isCenter && assassin && <Icon iconName="assassin" size={33} />}
           {!isCenter && awesome && <Icon iconName="awesome" size={33} />}
           {!isCenter && babyalien && <Icon iconName="babyalien" size={33} />}

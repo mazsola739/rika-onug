@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Mason (2) – Wakes up and looks for the other fellow Mason
 exports.masons = (gameState, tokens) => {
@@ -43,6 +43,7 @@ exports.masons = (gameState, tokens) => {
       selectable_card_limit: { player: 0, center: 0 },
       masons,
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
       player_original_id: playerCard?.original_id,

@@ -1,15 +1,15 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements } = require("../utils")
+const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements , getKeys } = require("../utils")
 
 //? INFO: Insomniac – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
-exports.insomniac = (gameState, tokens, role_id) => {
+exports.insomniac = (gameState, tokens, role_id, title) => {
   const roleMapping = {
     4: {
-      title: 'INSOMNIAC',
+      title,
       message: 'interaction_insomniac'
     },
     67: {
-      title: 'SELF_AWARENESS_GIRL',
+      title,
       message: 'interaction_selfawarenessgirl'
     }
   }
@@ -56,6 +56,7 @@ exports.insomniac = (gameState, tokens, role_id) => {
         message: roleMapping[role_id].message,
         selectable_card_limit: { player: 0, center: 0 },
         shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
         show_cards: concatArraysWithUniqueElements(showCards, flippedCards),
         player_name: player?.name,
         player_original_id: playerCard?.original_id,
@@ -75,6 +76,7 @@ exports.insomniac = (gameState, tokens, role_id) => {
         message: "interaction_shielded",
         selectable_card_limit: { player: 0, center: 0 },
         shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
         player_original_id: playerCard?.original_id,

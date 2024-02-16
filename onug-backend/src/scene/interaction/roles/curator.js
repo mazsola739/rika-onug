@@ -1,55 +1,128 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getAllPlayerTokens, getSelectablePlayersWithNoArtifact, getRandomArtifact, getPlayerTokenByPlayerNumber, getKeys } = require("../utils")
 
 //? INFO: Curator - Gives any player (including himself) a random, unknown Artifact. Cannot give to a Shielded player.
 //TODO doppelganger separated 
 //! cant give to shielded
-exports.curator = (gameState, tokens) => {
+exports.curator = (gameState, tokens, role_id, title) => {
+  const roleMapping = {
+    1: {
+      title,
+      message: 'interaction_doppelganger_curator'
+    },
+    20: {
+      title,
+      message: 'interaction_curator'
+    }
+  }
+
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
+
+  const allPlayerTokens = getAllPlayerTokens(players)
+  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(players, allPlayerTokens)
+  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+  const selectablePlayersWithNoArtifact = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, newGameState.artifact)
 
   tokens.forEach((token) => {
+    const player = players[token]
+    const flippedCards = newGameState.flipped
+
+    const curatorPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
+    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, curatorPlayerNumber)
+    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, curatorPlayerNumber)
+    const playerCard = player?.card
+    const currentCard = newGameState.card_positions[curatorPlayerNumber[0]]
+
+    if (iSeeMyCardIsFlipped) {
+      playerCard.id = currentCard.id
+      playerCard.role_id = currentCard.id
+      playerCard.role = currentCard.role
+      playerCard.team = currentCard.team
+    } else if (iSeeMyCardElsewhere) {
+      playerCard.id = 0
+    }
+
     const roleHistory = {
       ...newGameState.actual_scene,
+      selectable_cards: selectablePlayersWithNoArtifact,
     }
-  
-    newGameState.players[token].role_history = roleHistory
-      
-  
-  
+    player.role_history = roleHistory
+
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title: roleMapping[role_id].title,
       token,
-      message: "interaction_",
-      
+      message: roleMapping[role_id].message,
+      selectable_cards: selectablePlayersWithNoArtifact,
+      selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
-      player_name: newGameState.players[token]?.name,
-      player_original_id: newGameState.players[token]?.card?.original_id,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
+      artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: flippedCards,
+      player_name: player?.name,
+      player_original_id: playerCard?.original_id,
+      player_card_id: playerCard?.id,
+      player_role: playerCard?.role,
+      player_role_id: playerCard?.role_id,
+      player_team: playerCard?.team,
+      player_number: player?.player_number,
     })
-  
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
   })
-  
-    newGameState.role_interactions = role_interactions
-  
-  const curatorPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, curatorPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, curatorPlayerNumber)
 
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[curatorPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[curatorPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[curatorPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[curatorPlayerNumber[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
+  newGameState.role_interactions = role_interactions
+
+  return newGameState
+}
+
+exports.curator_response = (gameState, token, selected_positions, role_id, title) => {
+  const roleMapping = {
+    1: {
+      title,
+      message: 'interaction_doppelganger_curator'
+    },
+    20: {
+      title,
+      message: 'interaction_curator'
+    }
   }
+
+  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+
+  const newGameState = { ...gameState }
+  const role_interactions = []
+  const players = newGameState.players
+
+  const randomPickedArtifact = getRandomArtifact(newGameState.artifact)
+  newGameState.artifact.push({ [selected_positions[0]]: randomPickedArtifact })
+  const artifactedPlayersToken = getPlayerTokenByPlayerNumber(players, selected_positions[0])
+  players[artifactedPlayersToken].artifact = true
+
+  const player = players[token]
+  const playerCard = player?.card
+  const artifactedCard = newGameState.artifact
+  player.role_history.artifacted_cards = artifactedCard
+
+  role_interactions.push({
+    type: INTERACTION,
+    title: roleMapping[role_id].title,
+    token,
+    message: roleMapping[role_id].message,
+    shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
+    new_artifact_card: [selected_positions[0]],
+    show_cards: newGameState.flipped,
+    player_name: player?.name,
+    player_original_id: playerCard?.original_id,
+    player_card_id: playerCard?.id,
+    player_role: playerCard?.role,
+    player_role_id: playerCard?.role_id,
+    player_team: playerCard?.team,
+    player_number: player?.player_number,
+  })
+
+  newGameState.role_interactions = role_interactions
+  newGameState.actual_scene.interaction = `The player ${player.player_number} placed a shield on the next position: ${selected_positions[0]}`
 
   return newGameState
 }

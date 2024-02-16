@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Oracle - App asks her a question, she enters it on the app, when then reveals what she did to everyone
 //! At this moment oracle never see flipped or shielded cards, ripple different
@@ -24,6 +24,7 @@ exports.oracle = (gameState, tokens) => {
       message: "interaction_",
       
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       player_name: newGameState.players[token]?.name,
       player_original_id: newGameState.players[token]?.card?.original_id,
       player_card_id: newGameState.players[token]?.card?.id,

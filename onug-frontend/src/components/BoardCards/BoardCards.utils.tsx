@@ -19,7 +19,6 @@ const renderPlayerCards = () => {
             key={index}
             isCenter={false}
             id={card.id}
-            spy={card.spy}
             position={card.position}
             ready={card.ready}
             selectable={card.selectable}
@@ -89,6 +88,7 @@ const renderCenterCard = () => {
               position={card.position}
               isCenter={true}
               selectable={card.selectable}
+              spy={card.spy}
             />
           </CenterCards>
         </CardContainer>
@@ -114,6 +114,7 @@ const renderCenterCard = () => {
                     position={card.position}
                     isCenter={true}
                     selectable={card.selectable}
+                    spy={card.spy}
                   />
                 )
               )

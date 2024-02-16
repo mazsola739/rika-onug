@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Cow - Puts hand out in a fist when Aliens wake. If an Alien is sitting next to her, one must tap her fist
 //! NEM KEL FEL
@@ -23,6 +23,7 @@ exports.cow = (gameState, tokens) => {
       message: "interaction_",
       
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       player_name: newGameState.players[token]?.name,
       player_original_id: newGameState.players[token]?.card?.original_id,
       player_card_id: newGameState.players[token]?.card?.id,

@@ -55,7 +55,7 @@ const { beholder }                                                = require("./b
 const { revealer, revealer_response }                             = require("./revealer")
 const { exposer, doppelganger_exposer }                           = require("./exposer")
 const { empath, doppelganger_empath }                             = require("./empath")
-const { curator, doppelganger_curator }                           = require("./curator")
+const { curator, curator_response }                               = require("./curator")
 const { blob }                                                    = require("./blob")
 const { mortician, doppelganger_mortician }                       = require("./mortician")
 const { familyman }                                               = require("./familyman")
@@ -122,7 +122,7 @@ exports.roles = {
   revealer, revealer_response,
   exposer, doppelganger_exposer,
   empath, doppelganger_empath,
-  curator, doppelganger_curator,
+  curator, curator_response,
   blob,
   mortician, doppelganger_mortician,
   familyman,

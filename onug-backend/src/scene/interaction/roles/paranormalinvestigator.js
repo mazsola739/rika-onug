@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Paranormal Investigator - Looks at two other player's cards one at a time if he sees team they are not on the Villager Team he stops looking and becomes that role. May not look at any center cards.
 exports.paranormalinvestigator = (gameState, tokens) => {
@@ -22,6 +22,7 @@ exports.paranormalinvestigator = (gameState, tokens) => {
       message: "interaction_",
       
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       player_name: newGameState.players[token]?.name,
       player_original_id: newGameState.players[token]?.card?.original_id,
       player_card_id: newGameState.players[token]?.card?.id,

@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //SAME as seer
 exports.detector = (gameState, tokens) => {
@@ -21,6 +21,7 @@ exports.detector = (gameState, tokens) => {
       message: "interaction_",
       
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       player_name: newGameState.players[token]?.name,
       player_original_id: newGameState.players[token]?.card?.original_id,
       player_card_id: newGameState.players[token]?.card?.id,

@@ -1,15 +1,15 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements , getKeys } = require("../utils")
 
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
-exports.robber = (gameState, tokens, role_id) => {
+exports.robber = (gameState, tokens, role_id, title) => {
   const roleMapping = {
     8: {
-      title: 'ROBBER',
+      title,
       message: 'interaction_robber'
     },
     66: {
-      title: 'ROLE_RETRIEVER',
+      title,
       message: 'interaction_roleretriever'
     }
   }
@@ -55,6 +55,7 @@ exports.robber = (gameState, tokens, role_id) => {
         selectable_cards: selectablePlayersWithNoShield,
         selectable_card_limit: { player: 1, center: 0 },
         shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
         player_original_id: playerCard?.original_id,
@@ -77,6 +78,7 @@ exports.robber = (gameState, tokens, role_id) => {
         message: "interaction_shielded",
         selectable_card_limit: { player: 0, center: 0 },
         shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
         player_original_id: playerCard?.original_id,
@@ -139,6 +141,7 @@ exports.robber_response = (gameState, token, selected_positions, role_id) => {
     message: roleMapping[role_id].message,
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
     player_name: player?.name,
     player_original_id: playerCard?.original_id,
     player_card_id: playerCard?.id,

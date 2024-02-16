@@ -1,15 +1,15 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Troublemaker - Swaps any two other player's cards (not her own or center) without looking at them
-exports.troublemaker = (gameState, tokens, role_id) => {
+exports.troublemaker = (gameState, tokens, role_id, title) => {
   const roleMapping = {
     11: {
-      title: 'TROUBLEMAKER',
+      title,
       message: 'interaction_troublemaker'
     },
     68: {
-      title: 'SWITCHEROO',
+      title,
       message: 'interaction_switcheroo'
     }
   }
@@ -56,6 +56,7 @@ exports.troublemaker = (gameState, tokens, role_id) => {
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 2, center: 0 },
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
       player_original_id: playerCard?.original_id,
@@ -72,14 +73,14 @@ exports.troublemaker = (gameState, tokens, role_id) => {
   return newGameState;
 };
 
-exports.troublemaker_response = (gameState, token, selected_positions, role_id) => {
+exports.troublemaker_response = (gameState, token, selected_positions, role_id, title) => {
   const roleMapping = {
     11: {
-      title: 'TROUBLEMAKER',
+      title,
       message: 'interaction_troublemaker2'
     },
     68: {
-      title: 'SWITCHEROO',
+      title,
       message: 'interaction_switcheroo2'
     }
   }
@@ -108,6 +109,7 @@ exports.troublemaker_response = (gameState, token, selected_positions, role_id) 
     message: roleMapping[role_id].message,
     swapped_cards: selected_positions.slice(0, 2),
     shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
     show_cards: newGameState.flipped,
     player_name: player?.name,
     player_original_id: playerCard?.original_id,

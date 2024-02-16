@@ -1,16 +1,16 @@
 const { INTERACTION, MESSAGE } = require("../../../constant/ws")
-const { getPlayerTokenByPlayerNumber, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getPlayerNeighborsByToken } = require("../utils")
+const { getPlayerTokensByPlayerNumber, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getPlayerNeighborsByToken , getKeys } = require("../utils")
 const { websocketServerConnectionsPerRoom } = require("../../../websocket/connections")
 
 //? INFO: Thing - Taps the nearest shoulder of the player on their immediate right or left //THING, ANNOYING_LAD
-exports.thing = (gameState, tokens, role_id) => {
+exports.thing = (gameState, tokens, role_id, title) => {
   const roleMapping = {
     55: {
-      title: 'ANNOYING_LAD',
+      title,
       message: 'interaction_annoyinglad'
     },
     85: {
-      title: 'THING',
+      title,
       message: 'interaction_thing'
     }
   }
@@ -54,6 +54,7 @@ exports.thing = (gameState, tokens, role_id) => {
     selectable_cards: neighbors,
     selectable_card_limit: { player: 1, center: 0 },
     shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
     show_cards: flippedCards,
     player_name: player?.name,
     player_original_id: playerCard?.original_id,
@@ -70,14 +71,14 @@ exports.thing = (gameState, tokens, role_id) => {
   return newGameState
 }
 
-exports.thing_response = (gameState, token, selected_positions, role_id) => {
+exports.thing_response = (gameState, token, selected_positions, role_id, title) => {
   const roleMapping = {
     55: {
-      title: 'ANNOYING_LAD',
+      title,
       message: 'interaction_annoyinglad2'
     },
     85: {
-      title: 'THING',
+      title,
       message: 'interaction_thing2'
     }
   }
@@ -90,7 +91,7 @@ exports.thing_response = (gameState, token, selected_positions, role_id) => {
   const player = players[token]
   const playerCard = player?.card
 
-  const tappedPlayerToken = getPlayerTokenByPlayerNumber(players, selected_positions[0])
+  const tappedPlayerToken = getPlayerTokensByPlayerNumber(players, selected_positions[0])
 
   //TODO TAPPED icon to the tapped player
   websocketServerConnectionsPerRoom[newGameState.room_id][tappedPlayerToken].send(JSON.stringify({
@@ -107,6 +108,7 @@ exports.thing_response = (gameState, token, selected_positions, role_id) => {
     message: roleMapping[role_id].message,
     tapped_player: [selected_positions[0]],
     shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
     show_cards: newGameState.flipped,
     player_name: player?.name,
     player_original_id: playerCard?.original_id,

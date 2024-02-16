@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPositions, concatArraysWithUniqueElements } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPositions, concatArraysWithUniqueElements , getKeys } = require("../utils")
 const { centerCardPositions } = require("../constants")
 
 //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
@@ -46,6 +46,7 @@ exports.seer = (gameState, tokens) => {
       selectable_cards: selectablePositions,
       selectable_card_limit: { player: 1, center: 2 },
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
       player_original_id: playerCard?.original_id,
@@ -97,6 +98,7 @@ exports.seer_response = (gameState, token, selected_positions) => {
     message: "interaction_seer2",
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
     player_name: playerCard?.name,
     player_original_id: playerCard?.original_id,
     player_card_id: playerCard?.id,

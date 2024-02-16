@@ -125,9 +125,8 @@ const createPositionCard = (card, selected_cards) => {
   if (!card || typeof card !== "object" || !card.id) return { id: 0, role: "", team: "" }
 
   let positionCard
-
+  
   const hasPlayerMark = hasMark(selected_cards)
-  const hasShield = selected_cards.includes(25)
 
   if (hasPlayerMark) {
     positionCard = {
@@ -142,10 +141,6 @@ const createPositionCard = (card, selected_cards) => {
       role: card.role,
       team: card.team,
     }
-  }
-  
-  if (hasShield) {
-    positionCard.shield = false
   }
 
   return positionCard

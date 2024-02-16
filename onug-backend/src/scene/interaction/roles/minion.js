@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Minion - All Werewolf team (not Minion/Squire) stick up their thumb for him to see
 exports.minion = (gameState, tokens) => {
@@ -42,6 +42,7 @@ exports.minion = (gameState, tokens) => {
       werewolves: werewolfPlayerNumbers,
       selectable_card_limit: { player: 0, center: 0 },
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
       player_original_id: playerCard?.original_id,

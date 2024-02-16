@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getNonWerewolfPlayerNumbersByRoleIds, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { getNonWerewolfPlayerNumbersByRoleIds, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Alpha Wolf - Wakes with other Werewolves. Wakes after and exchanges the center Alpha card with any other non-Werewolf player card
 exports.alphawolf = (gameState, tokens) => {
@@ -44,6 +44,7 @@ exports.alphawolf = (gameState, tokens) => {
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
       player_original_id: playerCard?.original_id,
@@ -86,6 +87,7 @@ exports.alphawolf_response = (gameState, token, selected_positions) => {
     message: "interaction_alphawolf2",
     swapped_cards: [selected_positions[0], "center wolf"],
     shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
     show_cards: newGameState.flipped,
     player_name: player?.name,
     player_original_id: playerCard?.original_id,

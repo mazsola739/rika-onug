@@ -1,53 +1,74 @@
-const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
+const { INTERACTION } = require('../../../constant/ws')
+const {
+  getPlayerNumbersWithMatchingTokens,
+  isActivePlayersCardsFlipped,
+  isPlayersCardsFlipped,
+  getKeys,
+  getMadScientistPlayerNumberByRoleIds,
+} = require('../utils')
 
-//TODO doppelganger
 exports.intern = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
+
+  const madscientistPlayerNumbers = getMadScientistPlayerNumberByRoleIds(players)
 
   tokens.forEach((token) => {
+    const player = players[token]
+    const flippedCards = newGameState.flipped
+
     const roleHistory = {
       ...newGameState.actual_scene,
+      madscientist: madscientistPlayerNumbers,
     }
-  
-    newGameState.players[token].role_history = roleHistory
-      
-  
-  
+    player.role_history = roleHistory
+
+    const internPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, internPlayerNumber)
+    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, internPlayerNumber)
+    const playerCard = player?.card
+
+    if (iSeeMyCardIsFlipped) {
+      const positionCard = newGameState.card_positions[internPlayerNumber[0]]
+      playerCard.id = positionCard.id
+      playerCard.role_id = positionCard.id
+      playerCard.role = positionCard.role
+      playerCard.team = positionCard.team
+    } else if (iSeeMyCardElsewhere) {
+      playerCard.id = 0
+    }
+
+    if (madscientistPlayerNumbers.length === 0) {
+      playerCard.role_id = 63
+      playerCard.role = 'MAD_SCIENTIST'
+
+      newGameState.actual_scene.interaction = `The player ${player.player_number} did not see the Mad Scientist, so they become that role.}`
+    } else {
+      newGameState.actual_scene.interaction = `The player ${player.player_number} saw Mad Scientist position(s): player ${madscientistPlayerNumbers.join(', ')}`
+    }
+
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title: 'INTERN',
       token,
-      message: "interaction_",
-      
+      message: 'interaction_intern',
+      madscientist: madscientistPlayerNumbers,
+      selectable_card_limit: { player: 0, center: 0 },
       shielded_cards: newGameState.shield,
-      player_name: newGameState.players[token]?.name,
-      player_original_id: newGameState.players[token]?.card?.original_id,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
+      artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: flippedCards,
+      player_name: player?.name,
+      player_original_id: playerCard?.original_id,
+      player_card_id: playerCard?.id,
+      player_role: playerCard?.role,
+      player_role_id: playerCard?.role_id,
+      player_team: playerCard?.team,
+      player_number: player?.player_number,
     })
-  
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
   })
-  
-    newGameState.role_interactions = role_interactions
-  
-  const internPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, internPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, internPlayerNumber)
 
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[internPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[internPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[internPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[internPlayerNumber[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
+  newGameState.role_interactions = role_interactions
 
   return newGameState
 }

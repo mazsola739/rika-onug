@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions, concatArraysWithUniqueElements } = require("../utils")
+const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions, concatArraysWithUniqueElements , getKeys } = require("../utils")
 const { centerCardPositions } = require("../constants")
 
 //TODO DREAMWOLF & werewolf_response
@@ -52,6 +52,7 @@ exports.werewolves = (gameState, tokens) => {
       selectable_cards: selectableCards,
       selectable_card_limit: { player: 0, center: 1 },
       shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
       player_original_id: playerCard?.original_id,
@@ -100,6 +101,7 @@ exports.werewolves_response = (gameState, token, selected_positions) => {
     dreamwolf: newGameState.dreamwolf,
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
     player_name: player?.name,
     player_original_id: playerCard?.original_id,
     player_card_id: playerCard?.id,
