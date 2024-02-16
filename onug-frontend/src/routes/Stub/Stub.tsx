@@ -42,13 +42,15 @@ export const Stub: React.FC = observer(() => {
 
   const handleInputChange = useCallback(
     (index: number, value: number) => {
+      if (value < 0 || value > 86) return
+
       setInputValues((prevState) => {
         const newState = [...prevState]
         newState[index] = value
         return newState
       })
       const newDealStub = { ...dealStub }
-      newDealStub[labels[index]] = value < 1 || value > 86 ? null : value
+      newDealStub[labels[index]] = value === 0 ? null : value
       setDealStub(newDealStub)
     },
     [dealStub, setDealStub]
@@ -73,6 +75,7 @@ export const Stub: React.FC = observer(() => {
 
   const resetStub = useCallback(async () => {
     setDealStub({})
+    setInputValues(Array(labels.length).fill(0))
     const res = await fetch('/stub/populate/deal', {
       method: 'POST',
       headers: {
@@ -111,12 +114,13 @@ export const Stub: React.FC = observer(() => {
                   <Input>
                     <Label htmlFor={label}>{label}</Label>
                     <InputField
-                      type="number"
+                      type="text"
+                      inputMode="numeric"
                       id={label}
                       name={label}
                       value={inputValues[index]}
                       onChange={(e) =>
-                        handleInputChange(index, parseInt(e.target.value))
+                        handleInputChange(index, parseInt(e.target.value) || 0)
                       }
                     />
                   </Input>
