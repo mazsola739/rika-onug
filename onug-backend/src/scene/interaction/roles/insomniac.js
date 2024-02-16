@@ -1,101 +1,93 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPlayerNumbers } = require("../utils")
+const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements } = require("../utils")
 
 //? INFO: Insomniac – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
-exports.insomniac = (gameState, tokens) => {
+exports.insomniac = (gameState, tokens, role_id) => {
+  const roleMapping = {
+    4: {
+      title: 'INSOMNIAC',
+      message: 'interaction_insomniac'
+    },
+    67: {
+      title: 'SELF_AWARENESS_GIRL',
+      message: 'interaction_selfawarenessgirl'
+    }
+  }
+
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
 
   tokens.forEach((token) => {
-    const roleHistory = {
-      ...newGameState.actual_scene,
+    const player = players[token]
+    const flippedCards = newGameState.flipped
+
+    const insomniacPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
+    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, insomniacPlayerNumber)
+    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, insomniacPlayerNumber)
+    const playerCard = player?.card
+    const cardPositions = newGameState.card_positions
+    const currentCard = cardPositions[insomniacPlayerNumber[0]]
+
+    if (iSeeMyCardIsFlipped) {
+      playerCard.id = currentCard.id
+      playerCard.role_id = currentCard.id
+      playerCard.role = currentCard.role
+      playerCard.team = currentCard.team
+    } else if (iSeeMyCardElsewhere) {
+      playerCard.id = 0
     }
-  
-    newGameState.players[token].role_history = roleHistory
-      
-  
-  
-    role_interactions.push({
-      type: INTERACTION,
-      title: "",
-      token,
-      message: "interaction_",
-      
-      selectable_card_limit: { player: 0, center: 0 },
-      shielded_cards: newGameState.shield,
-      player_name: newGameState.players[token]?.name,
-      player_original_id: newGameState.players[token]?.card?.original_id,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
-    })
-  
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
+
+    if (!playerCard.shield) {
+      const showCards = getCardIdsByPlayerNumbers(cardPositions, insomniacPlayerNumber)
+      playerCard.id = currentCard.id
+      playerCard.team = currentCard.team
+
+      const roleHistory = {
+        ...newGameState.actual_scene,
+        show_cards: showCards,
+      }
+      player.role_history = roleHistory
+
+      role_interactions.push({
+        type: INTERACTION,
+        title: roleMapping[role_id].title,
+        token,
+        message: roleMapping[role_id].message,
+        selectable_card_limit: { player: 0, center: 0 },
+        shielded_cards: newGameState.shield,
+        show_cards: concatArraysWithUniqueElements(showCards, flippedCards),
+        player_name: player?.name,
+        player_original_id: playerCard?.original_id,
+        player_card_id: playerCard?.id,
+        player_role: playerCard?.role,
+        player_role_id: playerCard?.role_id,
+        player_team: playerCard?.team,
+        player_number: player?.player_number,
+      })
+
+      newGameState.actual_scene.interaction = `The player ${player.player_number} viewed their card`
+    } else {
+      role_interactions.push({
+        type: INTERACTION,
+        title: roleMapping[role_id].title,
+        token,
+        message: "interaction_shielded",
+        selectable_card_limit: { player: 0, center: 0 },
+        shielded_cards: newGameState.shield,
+        show_cards: flippedCards,
+        player_name: player?.name,
+        player_original_id: playerCard?.original_id,
+        player_card_id: playerCard?.id,
+        player_role: playerCard?.role,
+        player_role_id: playerCard?.role_id,
+        player_team: playerCard?.team,
+        player_number: player?.player_number,
+      })
+
+      newGameState.actual_scene.interaction = `The player ${player.player_number} cannot swap cards due to having a shield.`
+    }
   })
-  
-    newGameState.role_interactions = role_interactions
-
-  const insomniacPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, insomniacPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, insomniacPlayerNumber)
-
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[insomniacPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[insomniacPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[insomniacPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[insomniacPlayerNumber[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
-
-  if (!newGameState.players[token].card.shield) {
-    const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, insomniacPlayerNumber)
-
-    const roleHistory = {
-      ...newGameState.actual_scene,
-      show_cards: showCards,
-    }
-
-    newGameState.players[token].role_history = roleHistory
-    newGameState.players[token].card.team = newGameState.card_positions[`player_${insomniacPlayerNumbers[0]}`]?.team
-
-    role_interactions.push({
-      type: INTERACTION,
-      title: "INSOMNIAC",
-      token,
-      message: "interaction_insomniac",
-      show_cards: showCards,
-      shielded_cards: newGameState.shield,
-      player_name: newGameState.players[token]?.name,
-      player_original_id: newGameState.players[token]?.card?.original_id,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
-    })
-
-    newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed their card`
-  } else {
-    role_interactions.push({
-      type: INTERACTION,
-      title: "INSOMNIAC",
-      token,
-      message: "interaction_shielded",
-      shielded_cards: newGameState.shield,
-      player_name: newGameState.players[token]?.name,
-      player_original_id: newGameState.players[token]?.card?.original_id,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
-    })
-
-    newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} has a shield and can't view their card`
-  }
 
   newGameState.role_interactions = role_interactions
 

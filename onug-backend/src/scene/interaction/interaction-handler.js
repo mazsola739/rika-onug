@@ -47,7 +47,7 @@ exports.interactionHandler = (gameState) => {
       }
       break
 
-    case "MIRROR_MAN":
+    case "MIRROR_MAN": //COPYCAT
       if (conditions.hasMirrorManPlayer) {
         tokens = getTokensByOriginalIds(players, [64])
         return roles.mirrorman(newGameState, tokens)
@@ -240,14 +240,14 @@ exports.interactionHandler = (gameState) => {
 
     case "TEMPTRESS": 
       if (conditions.hasTemptressPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
+        tokens = getTokensByOriginalIds(players, [69])
         return roles.temptress(newGameState, tokens)
       }
       break
 
     case "DR_PEEKER": 
       if (conditions.hasDrPeekerPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
+        tokens = getTokensByOriginalIds(players, [57])
         return roles.drpeeker(newGameState, tokens)
       }
       break
@@ -318,14 +318,14 @@ exports.interactionHandler = (gameState) => {
     case "THING":
       if (conditions.hasThingPlayer) {
         tokens = getTokensByOriginalIds(players, [85])
-        return roles.thing(newGameState, tokens, sceneTitle)
+        return roles.thing(newGameState, tokens, 85)
       }
       break
 
     case "ANNOYING_LAD": //? same as thing
       if (conditions.hasAnnoyingLadPlayer) {
         tokens = getTokensByOriginalIds(players, [55])
-        return roles.thing(newGameState, tokens, sceneTitle)
+        return roles.thing(newGameState, tokens, 55)
       }
       break
 
@@ -345,7 +345,7 @@ exports.interactionHandler = (gameState) => {
 
     case "PARANORMAL_INVESTIGATOR": 
       if (conditions.hasParanormalInvestigatorPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
+        tokens = getTokensByOriginalIds(players, [23])
         return roles.paranormalinvestigator(newGameState, tokens)
       }
       break
@@ -385,9 +385,9 @@ exports.interactionHandler = (gameState) => {
       }
       break
 
-    case "DETECTOR": 
+    case "DETECTOR": //SEER
       if (conditions.hasDetectorPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
+        tokens = getTokensByOriginalIds(players, [56])
         return roles.detector(newGameState, tokens)
       }
       break */
@@ -395,7 +395,7 @@ exports.interactionHandler = (gameState) => {
     case "ROBBER":
       if (conditions.hasRobberPlayer) {
         tokens = getTokensByOriginalIds(players, [8])
-        return roles.robber(newGameState, tokens, sceneTitle)
+        return roles.robber(newGameState, tokens, 8)
       }
       break /*
 
@@ -422,27 +422,27 @@ exports.interactionHandler = (gameState) => {
 
     case "ROLE_RETRIEVER": //? same as robber
       if (conditions.hasRoleRetrieverPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
-        return roles.robber(newGameState, tokens, sceneTitle)
+        tokens = getTokensByOriginalIds(players, [66])
+        return roles.robber(newGameState, tokens, 66)
       }
       break /*
 
     case "VOODOO_LOU": 
       if (conditions.hasVoodooLouPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
+        tokens = getTokensByOriginalIds(players, [70])
         return roles.voodoolou(newGameState, tokens)}
           break*/
 
     case "TROUBLEMAKER":
       if (conditions.hasTroublemakerPlayer) {
         tokens = getTokensByOriginalIds(players, [11])
-        return roles.troublemaker(newGameState, tokens)
+        return roles.troublemaker(newGameState, tokens, 11)
       }
       break /*
 
     case "VILLAGE_IDIOT": 
       if (conditions.hasVillageIdiotPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
+        tokens = getTokensByOriginalIds(players, [26])
         return roles.villageidiot(newGameState, tokens)
       }
       break
@@ -480,13 +480,13 @@ exports.interactionHandler = (gameState) => {
         tokens = getTokensByOriginalIds(players, [1])
         return roles.doppelganger_rascal(newGameState, tokens)
       }
-      break
+      break */
 
     case "SWITCHEROO": //? same as troublemaker
       if (conditions.hasSwitcherooPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
-        return roles.switcheroo(newGameState, tokens)}
-      break*/
+        tokens = getTokensByOriginalIds(players, [68])
+        return roles.troublemaker(newGameState, tokens, 68)}
+      break
 
     case "DRUNK":
       if (conditions.hasDrunkPlayer) {
@@ -498,14 +498,14 @@ exports.interactionHandler = (gameState) => {
     case "INSOMNIAC":
       if (conditions.hasInsomniacPlayer) {
         tokens = getTokensByOriginalIds(players, [4])
-        return roles.insomniac(newGameState, tokens)
+        return roles.insomniac(newGameState, tokens, 4)
       }
       break
 
-    case "SELF_AWARENESS_GIRL":
+    case "SELF_AWARENESS_GIRL": //? Same as insomniac
       if (conditions.hasSelfAwarenessGirlPlayer) {
         tokens = getTokensByOriginalIds(players, [67])
-        return roles.selfawarenessgirl(newGameState, tokens)
+        return roles.insomniac(newGameState, tokens, 67)
       }
       break /*
 
@@ -523,38 +523,39 @@ exports.interactionHandler = (gameState) => {
       }
       break */
 
-    case "REVEALER":  //! FLIPPED
+    case "REVEALER":
       if (conditions.hasRevealerPlayer) {
         tokens = getTokensByOriginalIds(players, [24])
-        return roles.revealer(newGameState, tokens)
+        return roles.revealer(newGameState, tokens, 24)
       }
-      break /*
+      break
 
-    case "DOPPELGÄNGER_REVEALER": //! FLIPPED //TODO
+    case "DOPPELGÄNGER_REVEALER":
       if (conditions.hasDoppelgangerPlayer && conditions.hasRevealerPlayer) {
         tokens = getTokensByOriginalIds(players, [1])
-        return roles.revealer(newGameState, tokens) 
-    break
+        return roles.revealer(newGameState, tokens, 1)
+      }
+    break /*
 
-    case "EXPOSER":  //! FLIPPED
+    case "EXPOSER":
       if (conditions.hasExposerPlayer) {
         tokens = getTokensByOriginalIds(players, [1])
         return roles.exposer(newGameState, tokens)
       }
       break
 
-    case "DOPPELGÄNGER_EXPOSER": //! FLIPPED}
+    case "DOPPELGÄNGER_EXPOSER":
       if (conditions.hasDoppelgangerPlayer && conditions.hasExposerPlayer) {
         tokens = getTokensByOriginalIds(players, [1])
         return roles.doppelganger_exposer(newGameState, tokens) 
-    break
+    break */
 
-    case "FLIPPER": 
+    case "FLIPPER": //? Same as revealer
       if (conditions.hasFlipperPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
-        return roles.flipper(newGameState, tokens)
+        tokens = getTokensByOriginalIds(players, [59])
+        return roles.revealer(newGameState, tokens, 59)
       }
-      break
+      break /*
 
     case "DOPPELGÄNGER_FLIPPER": 
       if (conditions.hasDoppelgangerPlayer && conditions.hasFlipperPlayer) {

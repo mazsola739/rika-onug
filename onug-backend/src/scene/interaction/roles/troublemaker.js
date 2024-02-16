@@ -1,115 +1,125 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokenByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
-
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("../utils")
 
 //? INFO: Troublemaker - Swaps any two other player's cards (not her own or center) without looking at them
-exports.troublemaker = (gameState, tokens) => {
+exports.troublemaker = (gameState, tokens, role_id) => {
+  const roleMapping = {
+    11: {
+      title: 'TROUBLEMAKER',
+      message: 'interaction_troublemaker'
+    },
+    68: {
+      title: 'SWITCHEROO',
+      message: 'interaction_switcheroo'
+    }
+  }
+
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
 
   tokens.forEach((token) => {
+    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
+    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+   
+    const player = players[token]
+    const flippedCards = newGameState.flipped
+
     const roleHistory = {
       ...newGameState.actual_scene,
+      selectable_cards: selectablePlayersWithNoShield,
     }
-  
-    newGameState.players[token].role_history = roleHistory
+
+    player.role_history = roleHistory
       
+    
+    const troublemakerPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
+    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, troublemakerPlayerNumber)
+    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, troublemakerPlayerNumber)
+    const playerCard = player?.card
+    const currentCard = newGameState.card_positions[troublemakerPlayerNumber[0]]
   
+    if (iSeeMyCardIsFlipped) {
+      playerCard.id = currentCard.id
+      playerCard.role_id = currentCard.id
+      playerCard.role = currentCard.role
+      playerCard.team = currentCard.team
+    } else if (iSeeMyCardElsewhere) {
+      playerCard.id = 0
+    }
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title: roleMapping[role_id].title,
       token,
-      message: "interaction_",
-      
+      message: roleMapping[role_id].message,
+      selectable_cards: selectablePlayersWithNoShield,
+      selectable_card_limit: { player: 2, center: 0 },
       shielded_cards: newGameState.shield,
-      player_name: newGameState.players[token]?.name,
-      player_original_id: newGameState.players[token]?.card?.original_id,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
+      show_cards: flippedCards,
+      player_name: player?.name,
+      player_original_id: playerCard?.original_id,
+      player_card_id: playerCard?.id,
+      player_role: playerCard?.role,
+      player_role_id: playerCard?.role_id,
+      player_team: playerCard?.team,
+      player_number: player?.player_number,
     })
-  
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
   })
-  
-    newGameState.role_interactions = role_interactions
-
-  const selectablePlayerNumber = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token);
-
-  const roleHistory = {
-    ...newGameState.actual_scene,
-    selectable_cards: selectablePlayerNumbers,
-  }
-
-  newGameState.players[token].role_history = roleHistory
-  
-  const troublemakerPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, troublemakerPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, troublemakerPlayerNumber)
-
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[troublemakerPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[troublemakerPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[troublemakerPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[troublemakerPlayerNumber[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
-
-  role_interactions.push({
-    type: INTERACTION,
-    title: "TROUBLEMAKER",
-    token,
-    message: "interaction_troublemaker",
-    selectable_cards: selectablePlayerNumbers,
-    selectable_limit: { player: 2, center: 0 },
-    shielded_cards: newGameState.shield,
-    show_cards: newGameState.flipped,
-    player_name: newGameState.players[token]?.name,
-    player_original_id: newGameState.players[token]?.card?.original_id,
-    player_card_id: newGameState.players[token]?.card?.id,
-    player_role: newGameState.players[token]?.card?.role,
-    player_role_id: newGameState.players[token]?.card?.role_id,
-    player_team: newGameState.players[token]?.card?.team,
-    player_number: newGameState.players[token]?.player_number,
-  })
-
 
   newGameState.role_interactions = role_interactions
 
   return newGameState;
 };
 
-exports.troublemaker_response = (gameState, token, selected_positions) => {
+exports.troublemaker_response = (gameState, token, selected_positions, role_id) => {
+  const roleMapping = {
+    11: {
+      title: 'TROUBLEMAKER',
+      message: 'interaction_troublemaker2'
+    },
+    68: {
+      title: 'SWITCHEROO',
+      message: 'interaction_switcheroo2'
+    }
+  }
+
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
   const role_interactions = []
+  const players = newGameState.players
+  const player = players[token]
+  const playerCard = player?.card
+  const cardPositions =  newGameState.card_positions
 
-  const playerOneCard = { ...newGameState.card_positions[selected_positions[0]] };
-  const playerTwoCard = { ...newGameState.card_positions[selected_positions[1]] };
+  const playerOneCard = { ...cardPositions[selected_positions[0]] };
+  const playerTwoCard = { ...cardPositions[selected_positions[1]] };
+  cardPositions[selected_positions[0]] = playerTwoCard;
+  cardPositions[selected_positions[1]] = playerOneCard;
 
-  newGameState.card_positions[selected_positions[0]] = playerTwoCard;
-  newGameState.card_positions[selected_positions[1]] = playerOneCard;
-
-  newGameState.players[token].role_history.swapped_cards = selected_positions.slice(0, 2)
-  newGameState.players[token].role_history.card_or_mark_action = true
+  player.role_history.swapped_cards = selected_positions.slice(0, 2)
+  player.role_history.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
-    title: "TROUBLEMAKER",
+    title: roleMapping[role_id].title,
     token,
-    message: "interaction_troublemaker2",
+    message: roleMapping[role_id].message,
     swapped_cards: selected_positions.slice(0, 2),
     shielded_cards: newGameState.shield,
+    show_cards: newGameState.flipped,
+    player_name: player?.name,
+    player_original_id: playerCard?.original_id,
+    player_card_id: playerCard?.id,
+    player_role: playerCard?.role,
+    player_role_id: playerCard?.role_id,
+    player_team: playerCard?.team,
+    player_number: player?.player_number,
   })
 
   newGameState.role_interactions = role_interactions
-
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} swapped cards between: ${selected_positions[0]} and ${selected_positions[1]}`
+  newGameState.actual_scene.interaction = `The player ${player.player_number} swapped cards between: ${selected_positions[0]} and ${selected_positions[1]}`
 
   return newGameState
 };

@@ -2,10 +2,16 @@ const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements } = require("../utils")
 
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
-exports.robber = (gameState, tokens, title) => {
+exports.robber = (gameState, tokens, role_id) => {
   const roleMapping = {
-    'ROBBER': 'interaction_robber',
-    'ROLE_RETRIEVER': 'interaction_roleretriever'
+    8: {
+      title: 'ROBBER',
+      message: 'interaction_robber'
+    },
+    66: {
+      title: 'ROLE_RETRIEVER',
+      message: 'interaction_roleretriever'
+    }
   }
 
   const newGameState = { ...gameState }
@@ -43,9 +49,9 @@ exports.robber = (gameState, tokens, title) => {
 
       role_interactions.push({
         type: INTERACTION,
-        title,
+        title: roleMapping[role_id].title,
         token,
-        message: roleMapping[title],
+        message: roleMapping[role_id].message,
         selectable_cards: selectablePlayersWithNoShield,
         selectable_card_limit: { player: 1, center: 0 },
         shielded_cards: newGameState.shield,
@@ -66,7 +72,7 @@ exports.robber = (gameState, tokens, title) => {
 
       role_interactions.push({
         type: INTERACTION,
-        title,
+        title: roleMapping[role_id].title,
         token,
         message: "interaction_shielded",
         selectable_card_limit: { player: 0, center: 0 },
@@ -90,10 +96,16 @@ exports.robber = (gameState, tokens, title) => {
   return newGameState
 }
 
-exports.robber_response = (gameState, token, selected_positions) => {
+exports.robber_response = (gameState, token, selected_positions, role_id) => {
   const roleMapping = {
-    'ROBBER': 'interaction_robber2',
-    'ROLE_RETRIEVER': 'interaction_roleretriever2'
+    8: {
+      title: 'ROBBER',
+      message: 'interaction_robber2'
+    },
+    66: {
+      title: 'ROLE_RETRIEVER',
+      message: 'interaction_roleretriever2'
+    }
   }
 
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
@@ -111,7 +123,7 @@ exports.robber_response = (gameState, token, selected_positions) => {
   const selectedCard = { ...cardPositions[selected_positions[0]] }
   cardPositions[robberPlayerNumber] = selectedCard
   cardPositions[selected_positions[0]] = robberCard
-  playerCard.id =cardPositions[robberPlayerNumber].id
+  playerCard.id = cardPositions[robberPlayerNumber].id
   playerCard.team = cardPositions[robberPlayerNumber].team
 
   const showCards = getCardIdsByPlayerNumbers(cardPositions, robberPlayerNumber)
@@ -122,9 +134,9 @@ exports.robber_response = (gameState, token, selected_positions) => {
 
   role_interactions.push({
     type: INTERACTION,
-    title,
+    title: roleMapping[role_id].title,
     token,
-    message: roleMapping[title],
+    message: roleMapping[role_id].message,
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     shielded_cards: newGameState.shield,
     player_name: player?.name,

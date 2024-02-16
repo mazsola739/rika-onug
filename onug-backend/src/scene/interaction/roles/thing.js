@@ -3,10 +3,16 @@ const { getPlayerTokenByPlayerNumber, getPlayerNumbersWithMatchingTokens, isActi
 const { websocketServerConnectionsPerRoom } = require("../../../websocket/connections")
 
 //? INFO: Thing - Taps the nearest shoulder of the player on their immediate right or left //THING, ANNOYING_LAD
-exports.thing = (gameState, tokens, title) => {
+exports.thing = (gameState, tokens, role_id) => {
   const roleMapping = {
-    'ANNOYING_LAD': 'interaction_annoyinglad',
-    'THING': 'interaction_thing'
+    55: {
+      title: 'ANNOYING_LAD',
+      message: 'interaction_annoyinglad'
+    },
+    85: {
+      title: 'THING',
+      message: 'interaction_thing'
+    }
   }
 
   const newGameState = { ...gameState }
@@ -42,9 +48,9 @@ exports.thing = (gameState, tokens, title) => {
 
   role_interactions.push({
     type: INTERACTION,
-    title,
+    title: roleMapping[role_id].title,
     token,
-    message: roleMapping[title],
+    message: roleMapping[role_id].message,
     selectable_cards: neighbors,
     selectable_card_limit: { player: 1, center: 0 },
     shielded_cards: newGameState.shield,
@@ -64,12 +70,18 @@ exports.thing = (gameState, tokens, title) => {
   return newGameState
 }
 
-exports.thing_response = (gameState, token, selected_positions, title) => {
+exports.thing_response = (gameState, token, selected_positions, role_id) => {
   const roleMapping = {
-    'ANNOYING_LAD': 'interaction_annoyinglad2',
-    'THING': 'interaction_thing2'
+    55: {
+      title: 'ANNOYING_LAD',
+      message: 'interaction_annoyinglad2'
+    },
+    85: {
+      title: 'THING',
+      message: 'interaction_thing2'
+    }
   }
-  
+
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -90,9 +102,9 @@ exports.thing_response = (gameState, token, selected_positions, title) => {
 
   role_interactions.push({
     type: INTERACTION,
-    title,
+    title: roleMapping[role_id].title,
     token,
-    message: roleMapping[title],
+    message: roleMapping[role_id].message,
     tapped_player: [selected_positions[0]],
     shielded_cards: newGameState.shield,
     show_cards: newGameState.flipped,

@@ -5,6 +5,7 @@ import { expansions } from 'constant'
 import { FilterButtons } from './FilterButtons'
 import { StyledFilter } from './Filter.styles'
 
+//TODO from backend - now its not working properly
 export const Filter: React.FC = observer(() => {
   const { selectedExpansions, toggleExpansionSelection } = roomStore
 

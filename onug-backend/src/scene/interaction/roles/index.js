@@ -48,15 +48,12 @@ const { villageidiot }                                            = require("./v
 const { auraseer }                                                = require("./auraseer")
 const { gremlin, doppelganger_gremlin }                           = require("./gremlin")
 const { rascal, doppelganger_rascal }                             = require("./rascal")
-const { switcheroo }                                              = require("./switcheroo")
 const { drunk, drunk_response }                                   = require("./drunk")
 const { insomniac }                                               = require("./insomniac")
-const { selfawarenessgirl }                                       = require("./selfawarenessgirl")
 const { squire }                                                  = require("./squire")
 const { beholder }                                                = require("./beholder")
-const { revealer, revealer_response, doppelganger_revealer }      = require("./revealer")
+const { revealer, revealer_response }                             = require("./revealer")
 const { exposer, doppelganger_exposer }                           = require("./exposer")
-const { flipper, doppelganger_flipper }                           = require("./flipper")
 const { empath, doppelganger_empath }                             = require("./empath")
 const { curator, doppelganger_curator }                           = require("./curator")
 const { blob }                                                    = require("./blob")
@@ -118,15 +115,12 @@ exports.roles = {
   auraseer,
   gremlin, doppelganger_gremlin,
   rascal, doppelganger_rascal,
-  switcheroo,
   drunk, drunk_response,
   insomniac,
-  selfawarenessgirl,
   squire,
   beholder,
-  revealer, revealer_response, doppelganger_revealer,
+  revealer, revealer_response,
   exposer, doppelganger_exposer,
-  flipper, doppelganger_flipper,
   empath, doppelganger_empath,
   curator, doppelganger_curator,
   blob,
