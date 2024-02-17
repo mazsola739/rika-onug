@@ -21,12 +21,8 @@ exports.hydrateGameTable = async (ws, message) => {
         type: HYDRATE_GAME_TABLE,
         selected_cards: gameState.selected_cards,
         player_name: player?.name,
-        player_original_id: playerCard?.original_id,
-        player_card_id: playerCard?.id,
-        player_role: playerCard?.role,
-        player_role_id: playerCard?.role_id,
-        player_team: playerCard?.team,
         player_number: player?.player_number,
+        ...playerCard,
         board: getGameTableBoard(gameState)
       })
     )

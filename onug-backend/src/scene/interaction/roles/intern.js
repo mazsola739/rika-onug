@@ -1,12 +1,6 @@
 const { INTERACTION } = require('../../../constant/ws')
 const { updatePlayerCard } = require('../update-player-card')
-const {
-  getPlayerNumbersWithMatchingTokens,
-  isActivePlayersCardsFlipped,
-  isPlayersCardsFlipped,
-  getKeys,
-  getMadScientistPlayerNumberByRoleIds,
-} = require('../utils')
+const { getKeys, getMadScientistPlayerNumberByRoleIds } = require('../utils')
 
 exports.intern = (gameState, tokens) => {
   const newGameState = { ...gameState }
@@ -17,8 +11,6 @@ exports.intern = (gameState, tokens) => {
 
   tokens.forEach((token) => {
     const player = players[token]
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
 
     const roleHistory = {
       ...newGameState.actual_scene,
@@ -27,6 +19,8 @@ exports.intern = (gameState, tokens) => {
     player.role_history = roleHistory
 
     updatePlayerCard(newGameState, token)
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
 
     if (madscientistPlayerNumbers.length === 0) {
       playerCard.role_id = 63
@@ -48,12 +42,8 @@ exports.intern = (gameState, tokens) => {
       artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
-      player_original_id: playerCard?.original_id,
-      player_card_id: playerCard?.id,
-      player_role: playerCard?.role,
-      player_role_id: playerCard?.role_id,
-      player_team: playerCard?.team,
       player_number: player?.player_number,
+      ...playerCard,
     })
   })
 

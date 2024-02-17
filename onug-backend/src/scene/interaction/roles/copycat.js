@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens , getKeys } = require("../utils")
 
 //? INFO: Copycat - Looks at one card from the center and becomes that card. Does the action when called
 //! At this moment copycat never see flipped or shielded cards, ripple different
@@ -8,6 +8,7 @@ exports.copycat = (gameState, tokens) => {
   const role_interactions = []
 
   tokens.forEach((token) => {
+    const player = players[token]
     const roleHistory = {
       ...newGameState.actual_scene,
     }
@@ -24,13 +25,9 @@ exports.copycat = (gameState, tokens) => {
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),
-      player_name: newGameState.players[token]?.name,
-      player_original_id: newGameState.players[token]?.card?.original_id,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
+      player_name: player?.name,
+      player_number: player?.player_number,
+      ...playerCard,
     })
   
   
@@ -39,6 +36,9 @@ exports.copycat = (gameState, tokens) => {
     newGameState.role_interactions = role_interactions
   
 updatePlayerCard(newGameState, token)
+    const player = players[token]
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
 
   return newGameState
 }

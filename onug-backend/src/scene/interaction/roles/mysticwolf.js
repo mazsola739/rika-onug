@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { updatePlayerCard } = require("../update-player-card")
-const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
+const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getKeys } = require("../utils")
 
 //? INFO: Mystic Wolf - Wakes with other Werewolves. Wakes after and looks at any other player's card (not center or own)
 exports.mysticwolf = (gameState, tokens) => {
@@ -9,11 +9,9 @@ exports.mysticwolf = (gameState, tokens) => {
   const players = newGameState.players
 
   tokens.forEach((token) => {
+    const player = players[token]
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
-
-    const player = players[token]
-    const flippedCards = newGameState.flipped
 
     const roleHistory = {
       ...newGameState.actual_scene,
@@ -23,6 +21,8 @@ exports.mysticwolf = (gameState, tokens) => {
     player.role_history = roleHistory
 
     updatePlayerCard(newGameState, token)
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
 
     role_interactions.push({
       type: INTERACTION,
@@ -33,13 +33,10 @@ exports.mysticwolf = (gameState, tokens) => {
       selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: flippedCards,
       player_name: player?.name,
-      player_original_id: player?.card?.original_id,
-      player_card_id: player?.card?.id,
-      player_role: player?.card?.role,
-      player_role_id: player?.card?.role_id,
-      player_team: player?.card?.team,
       player_number: player?.player_number,
+      ...playerCard,
     })
   })
 
@@ -75,13 +72,9 @@ exports.mysticwolf_response = (gameState, token, selected_positions) => {
     show_cards: showCards,
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),
-    player_name: player?.name,
-    player_original_id: player?.card?.original_id,
-    player_card_id: player?.card?.id,
-    player_role: player?.card?.role,
-    player_role_id: player?.card?.role_id,
-    player_team: player?.card?.team,
-    player_number: player?.player_number,
+      player_name: player?.name,
+      player_number: player?.player_number,
+      ...playerCard,
   })
 
   newGameState.role_interactions = role_interactions

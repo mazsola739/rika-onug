@@ -17,6 +17,7 @@ exports.doppelganger_instant_action = (gameState, tokens) => {
 
   tokens.forEach((token) => {
     const player = players[token]
+    
     const new_role_id = player?.role_history?.new_role_id
     if (!doppelgangerInstantActionsIds.includes(new_role_id)) return newGameState
 
@@ -41,12 +42,8 @@ exports.doppelganger_instant_action = (gameState, tokens) => {
       instant_night_action: roleName,
       new_role_id,
       player_name: player?.name,
-      player_original_id: playerCard?.original_id,
-      player_card_id: playerCard?.id,
-      player_role: playerCard?.role,
-      player_role_id: playerCard?.role_id,
-      player_team: playerCard?.team,
       player_number: player?.player_number,
+      ...playerCard,
     })
   
     newGameState.role_interactions = role_interactions

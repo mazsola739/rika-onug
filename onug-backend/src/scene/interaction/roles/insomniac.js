@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { updatePlayerCard } = require("../update-player-card")
-const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements , getKeys } = require("../utils")
+const { getCardIdsByPlayerNumbers, concatArraysWithUniqueElements, getKeys } = require("../utils")
 
 //? INFO: Insomniac – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
 exports.insomniac = (gameState, tokens, role_id, title) => {
@@ -21,10 +21,10 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
 
   tokens.forEach((token) => {
     const player = players[token]
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
 
     updatePlayerCard(newGameState, token)
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
 
     if (!playerCard.shield) {
       const showCards = getCardIdsByPlayerNumbers(cardPositions, currentPlayerNumber)
@@ -47,11 +47,11 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
         artifacted_cards: getKeys(newGameState.artifact),
         show_cards: concatArraysWithUniqueElements(showCards, flippedCards),
         player_name: player?.name,
-        player_original_id: playerCard?.original_id,
-        player_card_id: playerCard?.id,
-        player_role: playerCard?.role,
-        player_role_id: playerCard?.role_id,
-        player_team: playerCard?.team,
+        player_original_id: playerCard?.player_original_id,
+        player_card_id: playerCard?.player_card_id,
+        player_role: playerCard?.player_role,
+        player_role_id: playerCard?.player_role_id,
+        player_team: playerCard?.player_team,
         player_number: player?.player_number,
       })
 
@@ -67,11 +67,11 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
       artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
-        player_original_id: playerCard?.original_id,
-        player_card_id: playerCard?.id,
-        player_role: playerCard?.role,
-        player_role_id: playerCard?.role_id,
-        player_team: playerCard?.team,
+        player_original_id: playerCard?.player_original_id,
+        player_card_id: playerCard?.player_card_id,
+        player_role: playerCard?.player_role,
+        player_role_id: playerCard?.player_role_id,
+        player_team: playerCard?.player_team,
         player_number: player?.player_number,
       })
 

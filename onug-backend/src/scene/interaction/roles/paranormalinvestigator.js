@@ -1,7 +1,7 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { townIds } = require("../constants")
 const { updatePlayerCard } = require("../update-player-card")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys, concatArraysWithUniqueElements, getCardIdsByPositions } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getKeys, concatArraysWithUniqueElements, getCardIdsByPositions } = require("../utils")
 
 //? INFO: Paranormal Investigator - Looks at two other player's cards one at a time if he sees team they are not on the Villager Team he stops looking and becomes that role. May not look at any center cards.
 exports.paranormalinvestigator = (gameState, tokens) => {
@@ -11,8 +11,6 @@ exports.paranormalinvestigator = (gameState, tokens) => {
 
   tokens.forEach((token) => {
     const player = players[token]
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
 
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
@@ -25,6 +23,8 @@ exports.paranormalinvestigator = (gameState, tokens) => {
     player.role_history = roleHistory
 
     updatePlayerCard(newGameState, token)
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
 
     role_interactions.push({
       type: INTERACTION,
@@ -37,12 +37,8 @@ exports.paranormalinvestigator = (gameState, tokens) => {
       artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
-      player_original_id: playerCard?.original_id,
-      player_card_id: playerCard?.id,
-      player_role: playerCard?.role,
-      player_role_id: playerCard?.role_id,
-      player_team: playerCard?.team,
       player_number: player?.player_number,
+      ...playerCard,
     })
   })
 
@@ -105,12 +101,8 @@ exports.paranormalinvestigator_response = (gameState, token, selected_positions)
     artifacted_cards: getKeys(newGameState.artifact),
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     player_name: player?.name,
-    player_original_id: playerCard?.original_id,
-    player_card_id: playerCard?.id,
-    player_role: playerCard?.role,
-    player_role_id: playerCard?.role_id,
-    player_team: playerCard?.team,
     player_number: player?.player_number,
+    ...playerCard,
   })
 
   newGameState.role_interactions = role_interactions

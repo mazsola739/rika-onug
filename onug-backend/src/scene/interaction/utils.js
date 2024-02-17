@@ -2,28 +2,6 @@ const { werewolvesAndDreamWolfIds } = require("./constants")
 const _ = require("lodash")
 const artifacts = require("../../data/artifacts.json")
 
-exports.hasDoppelganger = players => {
-  for (const token in players) {
-    if (players[token].card.id === 1) {
-      return true
-    }
-  }
-
-  return false
-}
-
-exports.getTokensByRoleIds = (players, roleIds) => {
-  const result = []
-
-  for (const token in players) {
-    if (roleIds.includes(players?.[token]?.card?.role_id)) {
-      result.push(token)
-    }
-  }
-
-  return result
-}
-
 exports.getMadScientistPlayerNumberByRoleIds = players => {
   const result = []
 
@@ -95,8 +73,6 @@ exports.getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
   return result
 }
 
-exports.getRolePositions = (playerNumbers, roleId) => playerNumbers.map(number => ({ [`player_${number}`]: roleId }))
-
 exports.getCardIdsByPositions = (cardPositions, selectedPositions) => {
   const result = []
 
@@ -133,45 +109,6 @@ exports.getPlayerTokenByPlayerNumber = (players, player) => {
   return null;
 }
 
-exports.getPlayerCardIds = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    result.push({ [player]: player.card.id })
-  }
-
-  return result
-}
-
-exports.getPlayerRoleIds = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    result.push({ [player]: player.card.role_id })
-  }
-
-  return result
-}
-
-exports.containsAllIds = (selectedCardIds, roleIds) => roleIds.every((cardId) => selectedCardIds.includes(cardId))
-
-exports.containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId) => selectedCardIds.includes(cardId))
-
-
-exports.getTokensByOriginalIds = (players, ids) => {
-  const result = []
-
-  for (const token in players) {
-    if (ids.includes(players?.[token]?.card.original_id)) {
-      result.push(token)
-    }
-  }
-
-  return result
-}
-
 exports.getAllPlayerTokens = (players) => {
   return Object.keys(players)
 }
@@ -198,20 +135,6 @@ exports.getSelectablePlayersWithNoArtifact = (players, artifacted_cards) => play
 exports.isPlayersCardsFlipped = (flipped, playersPositions) => Object.keys(flipped).some(key => playersPositions.includes(key))
 
 exports.isActivePlayersCardsFlipped = (flipped, playersPositions) => playersPositions.some((position) => flipped.some((obj) => Object.keys(obj)[0] === position))
-
-exports.getPlayersWithFlippedCards = (players, flipped) => {
-  const flippedCardIds = flipped.map(card => Object.values(card)[0]);
-  const flippedPlayers = [];
-
-  for (const token in players) {
-    const originalId = players[token].card.original_id;
-    if (flippedCardIds.includes(originalId)) {
-      flippedPlayers.push(token);
-    }
-  }
-
-  return flippedPlayers;
-}
 
 exports.concatArraysWithUniqueElements = (array1, array2) => _.uniqWith([...array1, ...array2], _.isEqual)
 
@@ -260,4 +183,80 @@ exports.getTokenByOriginalIds = (players, ids) => {
   }
 
   return result
+}
+
+exports.hasDoppelganger = players => {
+  for (const token in players) {
+    if (players[token].card.id === 1) {
+      return true
+    }
+  }
+
+  return false
+}
+
+exports.getTokensByRoleIds = (players, roleIds) => {
+  const result = []
+
+  for (const token in players) {
+    if (roleIds.includes(players?.[token]?.card?.role_id)) {
+      result.push(token)
+    }
+  }
+
+  return result
+}
+
+exports.getRolePositions = (playerNumbers, roleId) => playerNumbers.map(number => ({ [`player_${number}`]: roleId }))
+
+exports.getPlayerCardIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    result.push({ [player]: player.card.id })
+  }
+
+  return result
+}
+
+exports.getPlayerRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    result.push({ [player]: player.card.role_id })
+  }
+
+  return result
+}
+
+exports.containsAllIds = (selectedCardIds, roleIds) => roleIds.every((cardId) => selectedCardIds.includes(cardId))
+
+exports.containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId) => selectedCardIds.includes(cardId))
+
+exports.getTokensByOriginalIds = (players, ids) => {
+  const result = []
+
+  for (const token in players) {
+    if (ids.includes(players?.[token]?.card.original_id)) {
+      result.push(token)
+    }
+  }
+
+  return result
+}
+
+exports.getPlayersWithFlippedCards = (players, flipped) => {
+  const flippedCardIds = flipped.map(card => Object.values(card)[0]);
+  const flippedPlayers = [];
+
+  for (const token in players) {
+    const originalId = players[token].card.original_id;
+    if (flippedCardIds.includes(originalId)) {
+      flippedPlayers.push(token);
+    }
+  }
+
+  return flippedPlayers;
 }

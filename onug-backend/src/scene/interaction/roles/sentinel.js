@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { updatePlayerCard } = require("../update-player-card")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys, getPlayerTokenByPlayerNumber } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getKeys, getPlayerTokenByPlayerNumber } = require("../utils")
 
 //? INFO: Sentinel - Place a Shield token on any other player's card that card (not mark) cannot be looked at or moved
 //! MARK_OF_FEAR
@@ -11,8 +11,6 @@ exports.sentinel = (gameState, tokens) => {
 
   tokens.forEach((token) => {
     const player = players[token]
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
 
     const selectablePlayerNumber = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumber, newGameState.shield)
@@ -24,6 +22,8 @@ exports.sentinel = (gameState, tokens) => {
     player.role_history = roleHistory
 
     updatePlayerCard(newGameState, token)
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
   
     role_interactions.push({
       type: INTERACTION,
@@ -36,12 +36,8 @@ exports.sentinel = (gameState, tokens) => {
       artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
-      player_original_id: playerCard?.original_id,
-      player_card_id: playerCard?.id,
-      player_role: playerCard?.role,
-      player_role_id: playerCard?.role_id,
-      player_team: playerCard?.team,
       player_number: player?.player_number,
+      ...playerCard,
     })
   })
   
@@ -75,12 +71,8 @@ exports.sentinel_response = (gameState, token, selected_positions) => {
     artifacted_cards: getKeys(newGameState.artifact),
     show_cards: newGameState.flipped,
     player_name: player?.name,
-    player_original_id: playerCard?.original_id,
-    player_card_id: playerCard?.id,
-    player_role: playerCard?.role,
-    player_role_id: playerCard?.role_id,
-    player_team: playerCard?.team,
     player_number: player?.player_number,
+    ...playerCard,
   })
 
   newGameState.role_interactions = role_interactions

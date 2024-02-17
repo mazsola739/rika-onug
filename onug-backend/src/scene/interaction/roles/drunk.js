@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getKeys } = require("../utils")
+const { getPlayerNumbersWithMatchingTokens, getKeys } = require("../utils")
 const { centerCardPositions } = require("../constants")
 const { updatePlayerCard } = require("../update-player-card")
 
@@ -11,10 +11,10 @@ exports.drunk = (gameState, tokens) => {
 
   tokens.forEach((token) => {
     const player = players[token]
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
 
     updatePlayerCard(newGameState, token)
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
 
     if (!playerCard.shield) {
       const roleHistory = {
@@ -34,11 +34,11 @@ exports.drunk = (gameState, tokens) => {
         artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
-        player_original_id: playerCard?.original_id,
-        player_card_id: playerCard?.id,
-        player_role: playerCard?.role,
-        player_role_id: playerCard?.role_id,
-        player_team: playerCard?.team,
+        player_original_id: playerCard?.player_original_id,
+        player_card_id: playerCard?.player_card_id,
+        player_role: playerCard?.player_role,
+        player_role_id: playerCard?.player_role_id,
+        player_team: playerCard?.player_team,
         player_number: player?.player_number,
       })
     } else {
@@ -52,11 +52,11 @@ exports.drunk = (gameState, tokens) => {
         artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
-        player_original_id: playerCard?.original_id,
-        player_card_id: playerCard?.id,
-        player_role: playerCard?.role,
-        player_role_id: playerCard?.role_id,
-        player_team: playerCard?.team,
+        player_original_id: playerCard?.player_original_id,
+        player_card_id: playerCard?.player_card_id,
+        player_role: playerCard?.player_role,
+        player_role_id: playerCard?.player_role_id,
+        player_team: playerCard?.player_team,
         player_number: player?.player_number,
       })
 
@@ -101,12 +101,8 @@ exports.drunk_response = (gameState, token, selected_positions) => {
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),
     player_name: player?.name,
-    player_original_id: playerCard?.original_id,
-    player_card_id: playerCard?.id,
-    player_role: playerCard?.role,
-    player_role_id: playerCard?.role_id,
-    player_team: playerCard?.team,
     player_number: player?.player_number,
+    ...playerCard,
   })
 
   newGameState.role_interactions = role_interactions

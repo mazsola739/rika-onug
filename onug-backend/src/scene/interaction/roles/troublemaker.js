@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { updatePlayerCard } = require("../update-player-card")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getKeys } = require("../utils")
 
 //? INFO: Troublemaker - Swaps any two other player's cards (not her own or center) without looking at them
 exports.troublemaker = (gameState, tokens, role_id, title) => {
@@ -21,9 +21,7 @@ exports.troublemaker = (gameState, tokens, role_id, title) => {
 
   tokens.forEach((token) => {
     const player = players[token]
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
-    
+
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
@@ -36,6 +34,8 @@ exports.troublemaker = (gameState, tokens, role_id, title) => {
       
     
     updatePlayerCard(newGameState, token)
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
   
     role_interactions.push({
       type: INTERACTION,
@@ -48,12 +48,8 @@ exports.troublemaker = (gameState, tokens, role_id, title) => {
       artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
       player_name: player?.name,
-      player_original_id: playerCard?.original_id,
-      player_card_id: playerCard?.id,
-      player_role: playerCard?.role,
-      player_role_id: playerCard?.role_id,
-      player_team: playerCard?.team,
       player_number: player?.player_number,
+      ...playerCard,
     })
   })
 
@@ -101,12 +97,8 @@ exports.troublemaker_response = (gameState, token, selected_positions, role_id, 
     artifacted_cards: getKeys(newGameState.artifact),
     show_cards: newGameState.flipped,
     player_name: player?.name,
-    player_original_id: playerCard?.original_id,
-    player_card_id: playerCard?.id,
-    player_role: playerCard?.role,
-    player_role_id: playerCard?.role_id,
-    player_team: playerCard?.team,
     player_number: player?.player_number,
+    ...playerCard,
   })
 
   newGameState.role_interactions = role_interactions

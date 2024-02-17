@@ -1,5 +1,5 @@
 const { INTERACTION, MESSAGE } = require("../../../constant/ws")
-const { getPlayerTokensByPlayerNumber, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getPlayerNeighborsByToken , getKeys } = require("../utils")
+const { getPlayerTokensByPlayerNumber, getPlayerNeighborsByToken, getKeys } = require("../utils")
 const { websocketServerConnectionsPerRoom } = require("../../../websocket/connections")
 const { updatePlayerCard } = require("../update-player-card")
 
@@ -22,8 +22,6 @@ exports.thing = (gameState, tokens, role_id, title) => {
 
   tokens.forEach((token) => {
     const player = players[token]
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
 
     const neighbors = getPlayerNeighborsByToken(players, token)
 
@@ -32,9 +30,11 @@ exports.thing = (gameState, tokens, role_id, title) => {
       selectable_cards: neighbors
     }
   
-  player.role_history = roleHistory
+    player.role_history = roleHistory
   
-  updatePlayerCard(newGameState, token)
+    updatePlayerCard(newGameState, token)
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
 
   role_interactions.push({
     type: INTERACTION,
@@ -47,12 +47,8 @@ exports.thing = (gameState, tokens, role_id, title) => {
     artifacted_cards: getKeys(newGameState.artifact),
     show_cards: flippedCards,
     player_name: player?.name,
-    player_original_id: playerCard?.original_id,
-    player_card_id: playerCard?.id,
-    player_role: playerCard?.role,
-    player_role_id: playerCard?.role_id,
-    player_team: playerCard?.team,
     player_number: player?.player_number,
+    ...playerCard,
   })
   })
   
@@ -101,12 +97,8 @@ exports.thing_response = (gameState, token, selected_positions, role_id, title) 
     artifacted_cards: getKeys(newGameState.artifact),
     show_cards: newGameState.flipped,
     player_name: player?.name,
-    player_original_id: playerCard?.original_id,
-    player_card_id: playerCard?.id,
-    player_role: playerCard?.role,
-    player_role_id: playerCard?.role_id,
-    player_team: playerCard?.team,
     player_number: player?.player_number,
+    ...playerCard,
   })
 
   newGameState.role_interactions = role_interactions

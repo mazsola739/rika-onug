@@ -10,8 +10,6 @@ exports.doppelganger = (gameState, tokens) => {
 
   tokens.forEach((token) => {
     const player = players[token]
-    const playerCard = player?.card
-
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
     
     const roleHistory = {
@@ -19,6 +17,8 @@ exports.doppelganger = (gameState, tokens) => {
       selectable_cards: selectablePlayerNumbers,
     }
     player.role_history = roleHistory
+
+    const playerCard = player?.card
 
     role_interactions.push({
       type: INTERACTION,
@@ -28,12 +28,8 @@ exports.doppelganger = (gameState, tokens) => {
       selectable_cards: selectablePlayerNumbers,
       selectable_card_limit: { player: 1, center: 0 },
       player_name: player?.name,
-      player_original_id: playerCard?.original_id,
-      player_card_id: playerCard?.id,
-      player_role: playerCard?.role,
-      player_role_id: playerCard?.role_id,
-      player_team: playerCard?.team,
       player_number: player?.player_number,
+      ...playerCard,
     })
   })
 

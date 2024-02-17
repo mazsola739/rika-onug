@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { updatePlayerCard } = require("../update-player-card")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens , getKeys } = require("../utils")
 
 //? INFO: Aliens - View their fellow Aliens (including Body Snatcher, Synthetic, Groob and Zerb) and do the action app says
 //! MARK_OF_FEAR
@@ -11,6 +11,7 @@ exports.aliens = (gameState, tokens) => {
   const alienPlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens)
 
   tokens.forEach((token) => {
+    const player = players[token]
     const roleHistory = {
       ...newGameState.actual_scene,
     }
@@ -18,6 +19,8 @@ exports.aliens = (gameState, tokens) => {
     newGameState.players[token].role_history = roleHistory
 
     updatePlayerCard(newGameState, token)
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
 
     role_interactions.push({
       type: INTERACTION,
@@ -27,13 +30,9 @@ exports.aliens = (gameState, tokens) => {
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),
-      player_name: newGameState.players[token]?.name,
-      player_original_id: newGameState.players[token]?.card?.original_id,
-      player_card_id: newGameState.players[token]?.card?.id,
-      player_role: newGameState.players[token]?.card?.role,
-      player_role_id: newGameState.players[token]?.card?.role_id,
-      player_team: newGameState.players[token]?.card?.team,
-      player_number: newGameState.players[token]?.player_number,
+      player_name: player?.name,
+      player_number: player?.player_number,
+      ...playerCard,
     })
 
   

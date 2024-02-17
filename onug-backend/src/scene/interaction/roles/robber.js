@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { updatePlayerCard } = require("../update-player-card")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements , getKeys } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements, getKeys } = require("../utils")
 
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
 exports.robber = (gameState, tokens, role_id, title) => {
@@ -21,10 +21,10 @@ exports.robber = (gameState, tokens, role_id, title) => {
 
   tokens.forEach((token) => {
     const player = players[token]
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
 
     updatePlayerCard(newGameState, token)
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
 
     if (!playerCard.shield) {
       const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
@@ -47,11 +47,11 @@ exports.robber = (gameState, tokens, role_id, title) => {
         artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
-        player_original_id: playerCard?.original_id,
-        player_card_id: playerCard?.id,
-        player_role: playerCard?.role,
-        player_role_id: playerCard?.role_id,
-        player_team: playerCard?.team,
+        player_original_id: playerCard?.player_original_id,
+        player_card_id: playerCard?.player_card_id,
+        player_role: playerCard?.player_role,
+        player_role_id: playerCard?.player_role_id,
+        player_team: playerCard?.player_team,
         player_number: player?.player_number,
       })
     } else if (newGameState.players[token].card.shield) {
@@ -70,11 +70,11 @@ exports.robber = (gameState, tokens, role_id, title) => {
       artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
-        player_original_id: playerCard?.original_id,
-        player_card_id: playerCard?.id,
-        player_role: playerCard?.role,
-        player_role_id: playerCard?.role_id,
-        player_team: playerCard?.team,
+        player_original_id: playerCard?.player_original_id,
+        player_card_id: playerCard?.player_card_id,
+        player_role: playerCard?.player_role,
+        player_role_id: playerCard?.player_role_id,
+        player_team: playerCard?.player_team,
         player_number: player?.player_number,
       })
 
@@ -132,12 +132,8 @@ exports.robber_response = (gameState, token, selected_positions, role_id) => {
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),
     player_name: player?.name,
-    player_original_id: playerCard?.original_id,
-    player_card_id: playerCard?.id,
-    player_role: playerCard?.role,
-    player_role_id: playerCard?.role_id,
-    player_team: playerCard?.team,
     player_number: player?.player_number,
+    ...playerCard,
   })
 
   newGameState.role_interactions = role_interactions

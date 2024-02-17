@@ -86,7 +86,7 @@ const dealCardIds = (selectedCardIds) => {
 }
 
 const createPlayerCard = (card, selected_cards) => {
-  if (!card || typeof card !== "object" || !card.id)  return { original_id: 0, id: 0, role: "", role_id: 0, team: "", mark: false, mark_id: "" }
+  if (!card || typeof card !== "object" || !card.id)  return { player_original_id: 0, player_card_id: 0, player_role: "", player_role_id: 0, team: "", mark: false, mark_id: "" }
  
   let playerCard
 
@@ -95,22 +95,20 @@ const createPlayerCard = (card, selected_cards) => {
 
   if (hasPlayerMark) {
     playerCard = {
-      original_id: card.id,
-      id: card.id,
-      role: card.role,
-      role_id: card.id,
-      team: card.team,
-      mark: hasMark,
+      player_original_id: card.id,
+      player_card_id: card.id,
+      player_role: card.role,
+      player_role_id: card.id,
+      player_team: card.team,
       mark_id: "mark_of_clarity",
     }
   } else {
     playerCard = {
-      original_id: card.id,
-      id: card.id,
-      role: card.role,
-      role_id: card.id,
-      team: card.team,
-      mark: hasMark,
+      player_original_id: card.id,
+      player_card_id: card.id,
+      player_role: card.role,
+      player_role_id: card.id,
+      player_team: card.team,
     }
   }
 
