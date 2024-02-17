@@ -82,7 +82,7 @@ exports.witch_response = (gameState, token, selected_positions) => {
   const roleHistory = {
     ...newGameState.actual_scene,
     selectable_cards: selectablePlayersWithNoShield,
-    selected_center_card: selectedCenterCardPosition,
+    selected_center_card: selected_positions[0],
     show_cards: showCards,
     card_or_mark_action: true,
   }
@@ -120,6 +120,18 @@ exports.witch_response = (gameState, token, selected_positions) => {
 
     cardPositions[player.role_history.selected_center_card] = selectedPlayerCard
     cardPositions[selected_positions[0]] = selectedCenterCard
+
+    const witchPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
+    const playerCard = player?.card
+
+    if (selected_positions[0] === witchPlayerNumber[0]) {
+      const currentCard = newGameState.card_positions[witchPlayerNumber[0]]
+
+      playerCard.id = currentCard.id
+      playerCard.role_id = currentCard.id
+      playerCard.role = currentCard.role
+      playerCard.team = currentCard.team
+    }
 
     player.role_history.swapped_cards = [player.role_history.selected_center_card, selected_positions[0]]
 
