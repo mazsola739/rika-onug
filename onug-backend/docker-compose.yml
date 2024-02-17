@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  rika-onug-service:
+    build: .
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 7654:7654
+      - 7655:7655
+    command: yarn start

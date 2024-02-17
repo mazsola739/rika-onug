@@ -38,3 +38,10 @@ export const STAGES = {
   GAME_PLAY: 'GAME_PLAY',
   GAME_VOTE: 'GAME_VOTE',
 }
+
+export const API_SERVER_HOST =
+  'http://ec2-100-26-21-53.compute-1.amazonaws.com:7654'
+export const API_LOCALHOST = 'http://localhost:7654'
+export const WS_SERVER_HOST =
+  'ws://ec2-100-26-21-53.compute-1.amazonaws.com:7655/'
+export const WS_LOCALHOST = 'ws://localhost:7655/'

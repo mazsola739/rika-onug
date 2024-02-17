@@ -58,3 +58,39 @@ shrinking api router for REST endpoints (everything moving to ws instead)
 ## postman collections
 - under /postman you can find the related postman collections, to trigger the backend with different pre-setup request bodies.
 - please update them accordingly as well
+
+## docker
+- Dockerfile contains an alpine linux based setup, for be dockerization
+- docker-compose.yml contains information about how to start the container, enlist services, which ports should be exposed etc...
+commands
+
+create the image:
+> docker build -t sylwolveryn/rika-onug .
+
+check locally built / pulled images
+> docker images
+
+run locally built docker
+preferred way: using docker-compose.yml
+> docker-compose up
+
+
+list docker containers 
+> docker ps
+
+stop docker container
+> docker stop CONTAINER_ID_FROM_PS
+
+prune everything
+> docker system prune -a
+
+shell inside the running docker from commandline
+> docker run --name rika-onug -p 80:7654 -d sylwolveryn/rika-onug sh
+
+or use docker desktop
+
+
+## aws
+[Install aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+
+[get push command for onug](https://us-east-1.console.aws.amazon.com/ecr/repositories/private)
