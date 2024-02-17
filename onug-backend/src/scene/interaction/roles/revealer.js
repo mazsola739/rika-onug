@@ -97,7 +97,7 @@ exports.revealer_response = (gameState, token, selected_positions, role_id, titl
   const revealerCardInFlippedCards = isActivePlayersCardsFlipped(revealedCard, revealerPlayerNumber)
 
   if (revealerCardInFlippedCards) {
-    playerCard.id = 0
+    playerCard.player_card_id = 0
   }
 
   role_interactions.push({

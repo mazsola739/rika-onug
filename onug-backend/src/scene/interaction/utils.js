@@ -6,7 +6,7 @@ exports.getMadScientistPlayerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
-    if (players[token].card.role_id === 63) {
+    if (players[token].card.player_role_id === 63) {
       result.push(`player_${players[token].player_number}`)
     }
   }
@@ -18,7 +18,7 @@ exports.getDreamWolfPlayerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
-    if (players[token].card.role_id === 21) {
+    if (players[token].card.player_role_id === 21) {
       result.push(`player_${players[token].player_number}`)
     }
   }
@@ -30,7 +30,7 @@ exports.getTannerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
-    if (players[token].card.role_id === 10) {
+    if (players[token].card.player_role_id === 10) {
       result.push(`player_${players[token].player_number}`)
     }
   }
@@ -43,7 +43,7 @@ exports.getNonWerewolfPlayerNumbersByRoleIds = (players) => {
 
   for (const token in players) {
     const player = players[token]
-    if (!werewolvesAndDreamWolfIds.includes(player.card.role_id)) {
+    if (!werewolvesAndDreamWolfIds.includes(player.card.player_role_id)) {
       result.push(`player_${players[token].player_number}`)
     }
   }
@@ -152,7 +152,7 @@ exports.getKeys = (array) => array.map(obj => Object.keys(obj)[0])
 //TODO do i need this functions?
 exports.getTokenByCardId = (players, cardId) => {
   for (const token in players) {
-    if (players?.[token]?.card.id === cardId) {
+    if (players?.[token]?.card.player_card_id === cardId) {
       return token
     }
   }
@@ -163,8 +163,8 @@ exports.getTokenByCardId = (players, cardId) => {
 exports.getDoppelgangerTokenByRoleId = (players, roleId) => {
   for (const token in players) {
     if (
-      players[token].card.role_id === roleId &&
-      players[token].card.id === 1
+      players[token].card.player_role_id === roleId &&
+      players[token].card.player_card_id === 1
     ) {
       return token
     }
@@ -177,7 +177,7 @@ exports.getTokenByOriginalIds = (players, ids) => {
   let result = ""
 
   for (const token in players) {
-    if (ids.includes(players?.[token]?.card.original_id)) {
+    if (ids.includes(players?.[token]?.card.player_original_id)) {
       result = token
     }
   }
@@ -187,7 +187,7 @@ exports.getTokenByOriginalIds = (players, ids) => {
 
 exports.hasDoppelganger = players => {
   for (const token in players) {
-    if (players[token].card.id === 1) {
+    if (players[token].card.player_card_id === 1) {
       return true
     }
   }
@@ -199,7 +199,7 @@ exports.getTokensByRoleIds = (players, roleIds) => {
   const result = []
 
   for (const token in players) {
-    if (roleIds.includes(players?.[token]?.card?.role_id)) {
+    if (roleIds.includes(players?.[token]?.card?.player_role_id)) {
       result.push(token)
     }
   }
@@ -214,7 +214,7 @@ exports.getPlayerCardIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    result.push({ [player]: player.card.id })
+    result.push({ [player]: player.card.player_card_id })
   }
 
   return result
@@ -225,7 +225,7 @@ exports.getPlayerRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    result.push({ [player]: player.card.role_id })
+    result.push({ [player]: player.card.player_role_id })
   }
 
   return result
@@ -239,7 +239,7 @@ exports.getTokensByOriginalIds = (players, ids) => {
   const result = []
 
   for (const token in players) {
-    if (ids.includes(players?.[token]?.card.original_id)) {
+    if (ids.includes(players?.[token]?.card.player_original_id)) {
       result.push(token)
     }
   }
@@ -252,7 +252,7 @@ exports.getPlayersWithFlippedCards = (players, flipped) => {
   const flippedPlayers = [];
 
   for (const token in players) {
-    const originalId = players[token].card.original_id;
+    const originalId = players[token].card.player_original_id;
     if (flippedCardIds.includes(originalId)) {
       flippedPlayers.push(token);
     }

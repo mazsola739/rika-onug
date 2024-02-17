@@ -1,6 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { updatePlayerCard } = require("../update-player-card")
-const { getCardIdsByPlayerNumbers, concatArraysWithUniqueElements, getKeys } = require("../utils")
+const { getCardIdsByPlayerNumbers, concatArraysWithUniqueElements, getKeys, getPlayerNumbersWithMatchingTokens } = require("../utils")
 
 //? INFO: Insomniac – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
 exports.insomniac = (gameState, tokens, role_id, title) => {
@@ -18,6 +18,7 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
+  const cardPositions = newGameState.card_positions
 
   tokens.forEach((token) => {
     const player = players[token]
@@ -25,11 +26,14 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
     updatePlayerCard(newGameState, token)
     const playerCard = player?.card
     const flippedCards = newGameState.flipped
+    const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
+    const currentCard = cardPositions[currentPlayerNumber[0]]
 
     if (!playerCard.shield) {
+      playerCard.player_card_id = currentCard.id
+      playerCard.player_team = currentCard.team
+      
       const showCards = getCardIdsByPlayerNumbers(cardPositions, currentPlayerNumber)
-      playerCard.id = currentCard.id
-      playerCard.team = currentCard.team
 
       const roleHistory = {
         ...newGameState.actual_scene,
@@ -47,12 +51,8 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
         artifacted_cards: getKeys(newGameState.artifact),
         show_cards: concatArraysWithUniqueElements(showCards, flippedCards),
         player_name: player?.name,
-        player_original_id: playerCard?.player_original_id,
-        player_card_id: playerCard?.player_card_id,
-        player_role: playerCard?.player_role,
-        player_role_id: playerCard?.player_role_id,
-        player_team: playerCard?.player_team,
         player_number: player?.player_number,
+        ...playerCard,
       })
 
       newGameState.actual_scene.interaction = `The player ${player.player_number} viewed their card`
@@ -64,15 +64,11 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
         message: "interaction_shielded",
         selectable_card_limit: { player: 0, center: 0 },
         shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
+        artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
-        player_original_id: playerCard?.player_original_id,
-        player_card_id: playerCard?.player_card_id,
-        player_role: playerCard?.player_role,
-        player_role_id: playerCard?.player_role_id,
-        player_team: playerCard?.player_team,
         player_number: player?.player_number,
+        ...playerCard,
       })
 
       newGameState.actual_scene.interaction = `The player ${player.player_number} cannot swap cards due to having a shield.`

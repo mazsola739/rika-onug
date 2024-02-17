@@ -58,7 +58,7 @@ exports.mysticwolf_response = (gameState, token, selected_positions) => {
   const selectedPositionCard = cardPositions[selected_positions[0]]
 
   if (playerCard.original_id === selectedPositionCard.id) {
-    playerCard.id = 0
+    playerCard.player_card_id = 0
   }
 
   player.role_history.show_cards = showCards

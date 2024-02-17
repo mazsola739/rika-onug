@@ -5,8 +5,8 @@ const superVillainsIds = [57, 60, 65, 69]
 const werewolvesIds    = [15, 16, 17, 22]
 const masonIds         = [5, 6]
 
-const containsAnyOriginalIds = (players, ids) => ids.some(id =>  Object.values(players).some(player => player.card.original_id === id))
-const containsAllOriginalIds = (players, ids) => ids.every(id => Object.values(players).some(player => player.card.original_id === id))
+const containsAnyOriginalIds = (players, ids) => ids.some(id =>  Object.values(players).some(player => player.card.player_original_id === id))
+const containsAllOriginalIds = (players, ids) => ids.every(id => Object.values(players).some(player => player.card.player_original_id === id))
 
 exports.checkConditions = (players) => {
   const conditions = { 

@@ -1,4 +1,4 @@
-import { API_LOCALHOST, API_SERVER_HOST } from 'constant'
+import { API_LOCALHOST } from 'constant'
 
 export const roomsRequest = async () => {
   try {

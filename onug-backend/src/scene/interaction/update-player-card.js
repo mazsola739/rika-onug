@@ -14,11 +14,11 @@ exports.updatePlayerCard = (newGameState, token) => {
     const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, currentPlayerNumber);
   
     if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard.id;
-      playerCard.role_id = currentCard.id;
-      playerCard.role = currentCard.role;
-      playerCard.team = currentCard.team;
+      playerCard.player_card_id = currentCard.id;
+      playerCard.player_role_id = currentCard.id;
+      playerCard.player_role = currentCard.role;
+      playerCard.player_team = currentCard.team;
     } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0;
+      playerCard.player_card_id = 0;
     }
   };

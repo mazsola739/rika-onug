@@ -23,8 +23,8 @@ exports.intern = (gameState, tokens) => {
     const flippedCards = newGameState.flipped
 
     if (madscientistPlayerNumbers.length === 0) {
-      playerCard.role_id = 63
-      playerCard.role = 'MAD_SCIENTIST'
+      playerCard.player_role_id = 63
+      playerCard.player_role = 'MAD_SCIENTIST'
 
       newGameState.actual_scene.interaction = `The player ${player.player_number} did not see the Mad Scientist, so they become that role.}`
     } else {

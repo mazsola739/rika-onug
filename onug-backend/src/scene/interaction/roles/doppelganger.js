@@ -47,16 +47,16 @@ exports.doppelganger_response = (gameState, token, selected_positions) => {
   const selectedPositionCard = newGameState.card_positions[selected_positions[0]]
   const playerCard = player?.card
 
-  playerCard.role_id = selectedPositionCard.id
-  playerCard.role = selectedPositionCard.role
-  playerCard.team = selectedPositionCard.team
+  playerCard.player_role_id = selectedPositionCard.id
+  playerCard.player_role = selectedPositionCard.role
+  playerCard.player_team = selectedPositionCard.team
   
   const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
   const playerRoleHistory = player?.role_history
 
   playerRoleHistory.show_cards = showCards
   playerRoleHistory.card_or_mark_action = true
-  playerRoleHistory.new_role_id = playerCard.role_id
+  playerRoleHistory.new_role_id = playerCard.player_role_id
 
   role_interactions.push({
     type: INTERACTION,
@@ -64,14 +64,10 @@ exports.doppelganger_response = (gameState, token, selected_positions) => {
     token,
     message: "interaction_doppelganger2",
     show_cards: showCards,
-    new_role_id: playerCard.role_id,
+    new_role_id: playerCard.player_role_id,
     player_name: player.name,
-    player_original_id: playerCard.original_id,
-    player_card_id: playerCard.id,
-    player_role: playerCard.role,
-    player_role_id: playerCard.role_id,
-    player_team: playerCard.team,
     player_number: player.player_number,
+    ...playerCard,
   })
 
   newGameState.role_interactions = [...role_interactions]

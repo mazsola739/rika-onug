@@ -65,7 +65,7 @@ exports.paranormalinvestigator_response = (gameState, token, selected_positions)
     if (townIds.includes(playerTwoCardId)) {
       showCards = selectedCards
       if (playerCard.original_id === playerOneCardId || playerCard.original_id === playerTwoCardId) {
-        playerCard.id = 0
+        playerCard.player_card_id = 0
       }
 
       newGameState.actual_scene.interaction = `The player ${player.player_number} saw the cards on the next positions: ${selected_positions[0]}, ${selected_positions[1]}, and both was town member`
@@ -73,21 +73,21 @@ exports.paranormalinvestigator_response = (gameState, token, selected_positions)
 
       showCards = selectedCards
       if (playerCard.original_id === playerOneCardId) {
-        playerCard.id = 0
+        playerCard.player_card_id = 0
       }
 
-      playerCard.role_id = cardPositions[selected_positions[1]].id
-      playerCard.role = cardPositions[selected_positions[1]].role
-      playerCard.team = cardPositions[selected_positions[1]].team
+      playerCard.player_role_id = cardPositions[selected_positions[1]].id
+      playerCard.player_role = cardPositions[selected_positions[1]].role
+      playerCard.player_team = cardPositions[selected_positions[1]].team
 
       newGameState.actual_scene.interaction = `The player ${player.player_number} saw the cards on the next positions: ${selected_positions[0]}, ${selected_positions[1]}, and the second card was a non-town member, so the player became that role`
     }
   } else if (!townIds.includes(playerOneCardId)) {
     showCards = [selectedCards[0]]
 
-    playerCard.role_id = cardPositions[selected_positions[0]].id
-    playerCard.role = cardPositions[selected_positions[0]].role
-    playerCard.team = cardPositions[selected_positions[0]].team
+    playerCard.player_role_id = cardPositions[selected_positions[0]].id
+    playerCard.player_role = cardPositions[selected_positions[0]].role
+    playerCard.player_team = cardPositions[selected_positions[0]].team
 
     newGameState.actual_scene.interaction = `The player ${player.player_number} saw the card on the next position: ${selected_positions[0]}, and the card was a non-town member, so the player became that role`
   }

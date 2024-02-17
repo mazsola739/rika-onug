@@ -67,7 +67,7 @@ exports.robber = (gameState, tokens, role_id, title) => {
         message: "interaction_shielded",
         selectable_card_limit: { player: 0, center: 0 },
         shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
+        artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
         player_original_id: playerCard?.player_original_id,
@@ -114,8 +114,8 @@ exports.robber_response = (gameState, token, selected_positions, role_id) => {
   const selectedCard = { ...cardPositions[selected_positions[0]] }
   cardPositions[robberPlayerNumber] = selectedCard
   cardPositions[selected_positions[0]] = robberCard
-  playerCard.id = cardPositions[robberPlayerNumber].id
-  playerCard.team = cardPositions[robberPlayerNumber].team
+  playerCard.player_card_id = cardPositions[robberPlayerNumber].id
+  playerCard.player_team = cardPositions[robberPlayerNumber].team
 
   const showCards = getCardIdsByPlayerNumbers(cardPositions, robberPlayerNumber)
 

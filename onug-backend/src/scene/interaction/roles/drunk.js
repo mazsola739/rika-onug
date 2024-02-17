@@ -34,12 +34,8 @@ exports.drunk = (gameState, tokens) => {
         artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
-        player_original_id: playerCard?.player_original_id,
-        player_card_id: playerCard?.player_card_id,
-        player_role: playerCard?.player_role,
-        player_role_id: playerCard?.player_role_id,
-        player_team: playerCard?.player_team,
         player_number: player?.player_number,
+        ...playerCard,
       })
     } else {
       role_interactions.push({
@@ -52,12 +48,8 @@ exports.drunk = (gameState, tokens) => {
         artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
-        player_original_id: playerCard?.player_original_id,
-        player_card_id: playerCard?.player_card_id,
-        player_role: playerCard?.player_role,
-        player_role_id: playerCard?.player_role_id,
-        player_team: playerCard?.player_team,
         player_number: player?.player_number,
+        ...playerCard,
       })
 
       newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} cannot swap cards due to having a shield.`
@@ -86,7 +78,7 @@ exports.drunk_response = (gameState, token, selected_positions) => {
   const selectedCard = { ...selectedPositionCard }
   cardPositions[drunkPlayerNumber] = selectedCard
   cardPositions[selected_positions[0]] = drunkCard
-  player.card.id = 0
+  player.card.player_card_id = 0
 
   player.role_history.swapped_cards = [selected_positions[0], `player_${ player.player_number}`]
   player.role_history.card_or_mark_action = true

@@ -57,7 +57,7 @@ exports.witch_response = (gameState, token, selected_positions) => {
   const selectedCenterCardPosition = cardPositions[selected_positions[0]]
 
   if (playerCard.original_id === selectedCenterCardPosition.id) {
-    playerCard.id = 0
+    playerCard.player_card_id = 0
   }
 
   const allPlayerTokens = getAllPlayerTokens(players)
@@ -108,10 +108,8 @@ exports.witch_response = (gameState, token, selected_positions) => {
     if (selected_positions[0] === witchPlayerNumber[0]) {
       const currentCard = newGameState.card_positions[witchPlayerNumber[0]]
 
-      playerCard.id = currentCard.id
-      playerCard.role_id = currentCard.id
-      playerCard.role = currentCard.role
-      playerCard.team = currentCard.team
+      playerCard.player_card_id = currentCard.id
+      playerCard.player_team = currentCard.team
     }
 
     player.role_history.swapped_cards = [player.role_history.selected_center_card, selected_positions[0]]

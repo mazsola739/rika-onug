@@ -83,7 +83,7 @@ exports.seer_response = (gameState, token, selected_positions) => {
   }
 
   if (showCards.some((card) => playerCard.original_id === card.id)) {
-    playerCard.id = 0
+    playerCard.player_card_id = 0
   }
 
   players[token].role_history.show_cards = showCards
