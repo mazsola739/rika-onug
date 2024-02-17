@@ -100,9 +100,7 @@ exports.thing_response = (gameState, token, selected_positions, role_id, title) 
     player_number: player?.player_number,
     ...playerCard,
   })
-
   newGameState.role_interactions = role_interactions
-  newGameState.actual_scene.interaction = `The player ${player.player_number} tapped their neighbor on the next position: ${selected_positions[0]}`
 
   return newGameState
 }

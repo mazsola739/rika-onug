@@ -24,8 +24,8 @@ exports.interactionHandler = (gameState) => {
   let tokens = []
 
   switch (sceneTitle) {
-  //! T W I L L I G H T  
-  /* 
+    //! T W I L L I G H T
+    /* 
     case "ORACLE_QUESTION":
       if (conditions.hasOraclePlayer) {
         tokens = getTokensByOriginalIds(players, [50])
@@ -54,22 +54,22 @@ exports.interactionHandler = (gameState) => {
       }
       break */
 
-    case "DOPPELGÄNGER":
+    case 'DOPPELGÄNGER':
       if (conditions.hasDoppelgangerPlayer) {
         tokens = getTokensByOriginalIds(players, [1])
         return roles.doppelganger(newGameState, tokens)
       }
       break
 
-    case "DOPPELGÄNGER_INSTANT_ACTION":
+    case 'DOPPELGÄNGER_INSTANT_ACTION':
       if (conditions.hasDoppelgangerPlayer && hasInstantAction) {
         tokens = getTokensByOriginalIds(players, [1])
         return doppelganger_instant_action(newGameState, tokens)
       }
       break
 
-  //! D U S K 
-  /*
+    //! D U S K
+    /*
     case "VAMPIRES": //TODO check vampire ids
       if (conditions.hasAnyVampirePlayer) {
         tokens = getTokensByOriginalIds(players, [vampireIds]) 
@@ -167,8 +167,8 @@ exports.interactionHandler = (gameState) => {
         return roles.everyonemark(newGameState, tokens)
       }
       break*/
-  //! N I G H T 
-  /*
+    //! N I G H T
+    /*
     case "LOVERS": //TODO mark_of_love   tokens = ?
       if (conditions.hasCupidPlayer) {
         tokens = getTokensByOriginalIds(players, [1])
@@ -176,7 +176,7 @@ exports.interactionHandler = (gameState) => {
       }
       break */
 
-    case "SENTINEL":  //!SHIELD & MARK_OF_FEAR
+    case 'SENTINEL': //!SHIELD & MARK_OF_FEAR
       if (conditions.hasSentinelPlayer) {
         tokens = getTokensByOriginalIds(players, [25])
         return roles.sentinel(newGameState, tokens)
@@ -266,84 +266,87 @@ exports.interactionHandler = (gameState) => {
       }
       break */
 
-    case "WEREWOLVES":
+    case 'WEREWOLVES':
       if (conditions.hasAnyWerewolfPlayers) {
         tokens = getTokensByOriginalIds(players, werewolvesIds)
         return roles.werewolves(newGameState, tokens)
       }
       break
 
-    case "ALPHA_WOLF":
+    case 'ALPHA_WOLF':
       if (conditions.hasAlphaWolfPlayer) {
         tokens = getTokensByOriginalIds(players, [17])
         return roles.alphawolf(newGameState, tokens)
       }
       break
 
-    case "MYSTIC_WOLF":
+    case 'MYSTIC_WOLF':
       if (conditions.hasMysticWolfPlayer) {
         tokens = getTokensByOriginalIds(players, [22])
         return roles.mysticwolf(newGameState, tokens)
       }
       break
 
-    case "MINION":
+    case 'MINION':
       if (conditions.hasMinionPlayer) {
         tokens = getTokensByOriginalIds(players, [7])
         return roles.minion(newGameState, tokens)
       }
       break
 
-    case "APPRENTICE_TANNER":
+    case 'APPRENTICE_TANNER':
       if (conditions.hasApprenticeTannerPlayer && conditions.hasTannerPlayer) {
         tokens = getTokensByOriginalIds(players, [71])
         return roles.apprenticetanner(newGameState, tokens)
       }
       break
 
-    case "INTERN":
+    case 'INTERN':
       if (conditions.hasInternPlayer) {
-        tokens = getTokensByOriginalIds(players, conditions.hasDoppelgangerPlayer ? [62, 1] : [62])
+        tokens = getTokensByOriginalIds(
+          players,
+          conditions.hasDoppelgangerPlayer ? [62, 1] : [62]
+        )
         return roles.intern(newGameState, tokens)
       }
       break
 
-    case "MASONS":  //! TODO mason players
+    case 'MASONS': //! TODO mason players
       if (conditions.hasMasonPlayers) {
         tokens = getTokensByOriginalIds(players, masonIds)
         return roles.masons(newGameState, tokens)
       }
       break
 
-    case "THING":
+    case 'THING':
       if (conditions.hasThingPlayer) {
         tokens = getTokensByOriginalIds(players, [85])
         return roles.thing(newGameState, tokens, 85, sceneTitle)
       }
       break
 
-    case "ANNOYING_LAD": //? same as thing
+    case 'ANNOYING_LAD': //? same as thing
       if (conditions.hasAnnoyingLadPlayer) {
         tokens = getTokensByOriginalIds(players, [55])
         return roles.thing(newGameState, tokens, 55, sceneTitle)
       }
       break
 
-    case "SEER":
+    case 'SEER':
       if (conditions.hasSeerPlayer) {
         tokens = getTokensByOriginalIds(players, [9])
         return roles.seer(newGameState, tokens)
       }
       break
 
-    case "APPRENTICE_SEER":
+    case 'APPRENTICE_SEER':
       if (conditions.hasApprenticeSeerPlayer) {
         tokens = getTokensByOriginalIds(players, [18])
         return roles.apprenticeseer(newGameState, tokens)
-      } 
+      }
       break
 
-    case "PARANORMAL_INVESTIGATOR": 
+    case 'PARANORMAL_INVESTIGATOR':
       if (conditions.hasParanormalInvestigatorPlayer) {
         tokens = getTokensByOriginalIds(players, [23])
         return roles.paranormalinvestigator(newGameState, tokens)
@@ -392,14 +395,14 @@ exports.interactionHandler = (gameState) => {
       }
       break */
 
-    case "ROBBER":
+    case 'ROBBER':
       if (conditions.hasRobberPlayer) {
         tokens = getTokensByOriginalIds(players, [8])
         return roles.robber(newGameState, tokens, 8, sceneTitle)
       }
-      break 
+      break
 
-    case "WITCH": 
+    case 'WITCH':
       if (conditions.hasWitchPlayer) {
         tokens = getTokensByOriginalIds(players, [27])
         return roles.witch(newGameState, tokens)
@@ -420,20 +423,21 @@ exports.interactionHandler = (gameState) => {
       }
       break */
 
-    case "ROLE_RETRIEVER": //? same as robber
+    case 'ROLE_RETRIEVER': //? same as robber
       if (conditions.hasRoleRetrieverPlayer) {
         tokens = getTokensByOriginalIds(players, [66])
         return roles.robber(newGameState, tokens, 66, sceneTitle)
       }
-      break /*
+      break
 
-    case "VOODOO_LOU": 
+    case 'VOODOO_LOU':
       if (conditions.hasVoodooLouPlayer) {
         tokens = getTokensByOriginalIds(players, [70])
-        return roles.voodoolou(newGameState, tokens)}
-          break*/
+        return roles.witch(newGameState, tokens, 70, sceneTitle)
+      }
+      break
 
-    case "TROUBLEMAKER":
+    case 'TROUBLEMAKER':
       if (conditions.hasTroublemakerPlayer) {
         tokens = getTokensByOriginalIds(players, [11])
         return roles.troublemaker(newGameState, tokens, 11, sceneTitle)
@@ -482,27 +486,28 @@ exports.interactionHandler = (gameState) => {
       }
       break */
 
-    case "SWITCHEROO": //? same as troublemaker
+    case 'SWITCHEROO': //? same as troublemaker
       if (conditions.hasSwitcherooPlayer) {
         tokens = getTokensByOriginalIds(players, [68])
-        return roles.troublemaker(newGameState, tokens, 68, sceneTitle)}
+        return roles.troublemaker(newGameState, tokens, 68, sceneTitle)
+      }
       break
 
-    case "DRUNK":
+    case 'DRUNK':
       if (conditions.hasDrunkPlayer) {
         tokens = getTokensByOriginalIds(players, [2])
         return roles.drunk(newGameState, tokens)
       }
       break
 
-    case "INSOMNIAC":
+    case 'INSOMNIAC':
       if (conditions.hasInsomniacPlayer) {
         tokens = getTokensByOriginalIds(players, [4])
         return roles.insomniac(newGameState, tokens, 4, sceneTitle)
       }
       break
 
-    case "SELF_AWARENESS_GIRL": //? Same as insomniac
+    case 'SELF_AWARENESS_GIRL': //? Same as insomniac
       if (conditions.hasSelfAwarenessGirlPlayer) {
         tokens = getTokensByOriginalIds(players, [67])
         return roles.insomniac(newGameState, tokens, 67, sceneTitle)
@@ -523,19 +528,19 @@ exports.interactionHandler = (gameState) => {
       }
       break */
 
-    case "REVEALER":
+    case 'REVEALER':
       if (conditions.hasRevealerPlayer) {
         tokens = getTokensByOriginalIds(players, [24])
         return roles.revealer(newGameState, tokens, 24, sceneTitle)
       }
       break
 
-    case "DOPPELGÄNGER_REVEALER":
+    case 'DOPPELGÄNGER_REVEALER':
       if (conditions.hasDoppelgangerPlayer && conditions.hasRevealerPlayer) {
         tokens = getTokensByOriginalIds(players, [1])
         return roles.revealer(newGameState, tokens, 1, sceneTitle)
       }
-    break /*
+      break /*
 
     case "EXPOSER":
       if (conditions.hasExposerPlayer) {
@@ -550,14 +555,14 @@ exports.interactionHandler = (gameState) => {
         return roles.doppelganger_exposer(newGameState, tokens) 
     break */
 
-    case "FLIPPER": //? Same as revealer
+    case 'FLIPPER': //? Same as revealer
       if (conditions.hasFlipperPlayer) {
         tokens = getTokensByOriginalIds(players, [59])
         return roles.revealer(newGameState, tokens, 59, sceneTitle)
       }
       break
 
-    case "DOPPELGÄNGER_FLIPPER": 
+    case 'DOPPELGÄNGER_FLIPPER':
       if (conditions.hasDoppelgangerPlayer && conditions.hasFlipperPlayer) {
         tokens = getTokensByOriginalIds(players, [1])
         return roles.revealer(newGameState, tokens, 1, sceneTitle)
@@ -578,17 +583,17 @@ exports.interactionHandler = (gameState) => {
       }
       break */
 
-    case "CURATOR":
+    case 'CURATOR':
       if (conditions.hasCuratorPlayer) {
         tokens = getTokensByOriginalIds(players, [20])
         return roles.curator(newGameState, tokens, 20, sceneTitle)
       }
       break
 
-    case "DOPPELGÄNGER_CURATOR":
+    case 'DOPPELGÄNGER_CURATOR':
       if (conditions.hasDoppelgangerPlayer && conditions.hasCuratorPlayer) {
         tokens = getTokensByOriginalIds(players, [1])
-        return roles.curator(newGameState, tokens, 1, sceneTitle) 
+        return roles.curator(newGameState, tokens, 1, sceneTitle)
       }
       break /*
 
@@ -621,11 +626,11 @@ exports.interactionHandler = (gameState) => {
       break */
 
     default:
-  logDebug(
-    `INTERACTION_HANDLER_DEFAULT case: no role found for: sceneTitle ${sceneTitle}`
-  )
+      logDebug(
+        `INTERACTION_HANDLER_DEFAULT case: no role found for: sceneTitle ${sceneTitle}`
+      )
 
-  /* 
+    /* 
   //Ripple Scene:
     RIPPLE":// (Scene Number: 88) 
   //Day Scenes:
@@ -633,7 +638,7 @@ exports.interactionHandler = (gameState) => {
     VOTE":// (Scene Number: 90)
     WINNERS":// (Scene Number: 91)  
     */
-}
+  }
 
 return newGameState
 }

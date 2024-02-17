@@ -29,11 +29,8 @@ exports.copycat = (gameState, tokens) => {
       player_number: player?.player_number,
       ...playerCard,
     })
-  
-  
   })
-  
-    newGameState.role_interactions = role_interactions
+  newGameState.role_interactions = role_interactions
   
 updatePlayerCard(newGameState, token)
     const player = players[token]

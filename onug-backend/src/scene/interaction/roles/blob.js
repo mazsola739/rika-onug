@@ -8,7 +8,7 @@ exports.blob = (gameState, tokens) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   
-  const blobPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token]);
 
   tokens.forEach((token) => {
     const player = players[token]
@@ -32,12 +32,8 @@ exports.blob = (gameState, tokens) => {
       player_number: player?.player_number,
       ...playerCard,
     })
-  
-  
   })
-  
-    newGameState.role_interactions = role_interactions
-
+  newGameState.role_interactions = role_interactions
 
   return newGameState
 }

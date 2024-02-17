@@ -31,13 +31,10 @@ exports.diseased = (gameState, tokens) => {
       player_number: player?.player_number,
       ...playerCard,
     })
-  
-  
   })
+  newGameState.role_interactions = role_interactions
   
-    newGameState.role_interactions = role_interactions
-  
-  const diseasedPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token]);
 
   return newGameState
 }

@@ -42,7 +42,6 @@ exports.seer = (gameState, tokens) => {
       ...playerCard,
     })
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState
@@ -58,36 +57,25 @@ exports.seer_response = (gameState, token, selected_positions) => {
   const playerCards = selected_positions.some((pos) => pos.includes('player'))
   const centerCards = selected_positions.some((pos) => pos.includes('center'))
 
-  const roleHistory = players[token].role_history.selectable_cards
-  const playerCard = players[token]?.card
+  const player = players[token]
+  const roleHistory = player.role_history.selectable_cards
 
-  if (
-    playerCards &&
-    !centerCards &&
-    roleHistory.includes(selected_positions[0])
-  ) {
-    showCards = getCardIdsByPositions(gameState?.card_positions, [
-      selected_positions[0],
-    ])
-  } else if (
-    centerCards &&
-    !playerCards &&
-    selected_positions.every((position) => roleHistory.includes(position))
-  ) {
-    showCards = getCardIdsByPositions(
-      gameState?.card_positions,
-      selected_positions
-    )
+  if (playerCards && !centerCards && roleHistory.includes(selected_positions[0])) {
+    showCards = getCardIdsByPositions(gameState?.card_positions, [selected_positions[0]])
+  } else if (centerCards && !playerCards && selected_positions.every((position) => roleHistory.includes(position))) {
+    showCards = getCardIdsByPositions(gameState?.card_positions, selected_positions)
   } else {
     return newGameState
   }
 
-  if (showCards.some((card) => playerCard.original_id === card.id)) {
+  const playerCard = player?.card
+
+  if (showCards.some((card) => playerCard.player_original_id === card.id)) {
     playerCard.player_card_id = 0
   }
 
-  players[token].role_history.show_cards = showCards
-  players[token].role_history.card_or_mark_action = true
+  player.role_history.show_cards = showCards
+  player.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
@@ -97,19 +85,11 @@ exports.seer_response = (gameState, token, selected_positions) => {
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),
-    player_name: playerCard?.name,
-    player_original_id: playerCard?.player_original_id,
-    player_card_id: playerCard?.player_card_id,
-    player_role: playerCard?.player_role,
-    player_role_id: playerCard?.player_role_id,
-    player_team: playerCard?.player_team,
-    player_number: players[token]?.player_number,
+    player_name: player?.name,
+    player_number: player?.player_number,
+    ...playerCard,
   })
-
   newGameState.role_interactions = role_interactions
-  newGameState.actual_scene.interaction = `The player ${
-    players[token].player_number
-  } viewed card(s) on the next position(s): ${selected_positions.join(', ')}`
 
   return newGameState
 }

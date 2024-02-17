@@ -1,4 +1,4 @@
-//TODO messages heroes supervillains
+//TODO do i need different messages for everyone? (same role interactions, common messages...)
 
 export const interaction_alphawolf =
   'Alpha Wolf - Wakes with other Werewolves. Wakes after and exchanges the center Alpha card with any other non-Werewolf player card'

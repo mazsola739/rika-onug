@@ -77,11 +77,8 @@ exports.robber = (gameState, tokens, role_id, title) => {
         player_team: playerCard?.player_team,
         player_number: player?.player_number,
       })
-
-      newGameState.actual_scene.interaction = `The player ${player.player_number} has shield, can't swap their card`
     }
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState
@@ -121,7 +118,7 @@ exports.robber_response = (gameState, token, selected_positions, role_id) => {
 
    player.role_history.swapped_cards = [selected_positions[0], `player_${ player.player_number}`]
    player.role_history.show_cards = showCards
-   player.role_history.card_or_mark_action = true
+   player.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
@@ -135,9 +132,7 @@ exports.robber_response = (gameState, token, selected_positions, role_id) => {
     player_number: player?.player_number,
     ...playerCard,
   })
-
   newGameState.role_interactions = role_interactions
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} swapped their card with ${selected_positions[0]} and then viewed their new card`
 
   return newGameState
 }

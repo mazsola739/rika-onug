@@ -186,8 +186,10 @@ exports.dealCards = async (ws, message) => {
   playerTokens.forEach((token, index) => {
     newGameState.players[token] = {
       ...gameState.players[token],
-      card: createPlayerCard(playerCards[index], selectedCards),
       player_number: index + 1,
+      card: createPlayerCard(playerCards[index], selectedCards),
+      card_or_mark_action: false,
+      player_history: [],
     }
   })
 

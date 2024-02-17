@@ -54,8 +54,6 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
         player_number: player?.player_number,
         ...playerCard,
       })
-
-      newGameState.actual_scene.interaction = `The player ${player.player_number} viewed their card`
     } else {
       role_interactions.push({
         type: INTERACTION,
@@ -70,11 +68,8 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
         player_number: player?.player_number,
         ...playerCard,
       })
-
-      newGameState.actual_scene.interaction = `The player ${player.player_number} cannot swap cards due to having a shield.`
     }
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState

@@ -32,7 +32,6 @@ exports.doppelganger = (gameState, tokens) => {
       ...playerCard,
     })
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState
@@ -69,9 +68,7 @@ exports.doppelganger_response = (gameState, token, selected_positions) => {
     player_number: player.player_number,
     ...playerCard,
   })
-
-  newGameState.role_interactions = [...role_interactions]
-  newGameState.actual_scene.interaction = `The player ${player.player_number} copied the card from the next position: ${selected_positions[0]}`
+  newGameState.role_interactions = role_interactions
 
   return newGameState
 }

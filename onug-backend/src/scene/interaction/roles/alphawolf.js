@@ -14,13 +14,6 @@ exports.alphawolf = (gameState, tokens) => {
   tokens.forEach((token) => {
     const player = players[token]
 
-    const roleHistory = {
-      ...newGameState.actual_scene,
-      selectable_cards: selectablePlayersWithNoShield,
-    }
-
-    player.role_history = roleHistory
-
     updatePlayerCard(newGameState, token)
     const playerCard = player?.card
     const flippedCards = newGameState.flipped
@@ -39,10 +32,15 @@ exports.alphawolf = (gameState, tokens) => {
       player_number: player?.player_number,
       ...playerCard,
     })
+
+    const roleHistory = {
+      ...newGameState.actual_scene,
+      selectable_cards: selectablePlayersWithNoShield,
+    }
+    player.player_history.push(roleHistory)
   })
-
   newGameState.role_interactions = role_interactions
-
+  
   return newGameState
 }
 
@@ -63,7 +61,7 @@ exports.alphawolf_response = (gameState, token, selected_positions) => {
   cardPositions[selected_positions[0]] = centerWolf
 
   player.role_history.swapped_cards = [selected_positions[0], "center wolf"]
-  player.role_history.card_or_mark_action = true
+  player.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
@@ -78,9 +76,7 @@ exports.alphawolf_response = (gameState, token, selected_positions) => {
     player_number: player?.player_number,
     ...playerCard,
   })
-
   newGameState.role_interactions = role_interactions
-  newGameState.actual_scene.interaction = `The player ${player.player_number} swapped cards between positions: player ${selected_positions[0]} and center wolf`
 
   return newGameState
 }

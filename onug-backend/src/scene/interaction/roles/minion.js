@@ -37,11 +37,7 @@ exports.minion = (gameState, tokens) => {
       player_number: player?.player_number,
       ...playerCard,
     })
-
-    //TODO save multiple
-    newGameState.actual_scene.interaction = `The player ${player.player_number} saw werewolf position(s): player ${werewolfPlayerNumbers.join(', ')}`
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState

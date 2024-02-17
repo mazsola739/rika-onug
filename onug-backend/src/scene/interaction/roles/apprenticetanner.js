@@ -15,7 +15,7 @@ exports.apprenticetanner = (gameState, tokens) => {
 
     const roleHistory = {
       ...newGameState.actual_scene,
-      tanner,
+      tanner: tanner,
     }
     player.role_history = roleHistory
     
@@ -37,11 +37,7 @@ exports.apprenticetanner = (gameState, tokens) => {
       player_number: player?.player_number,
       ...playerCard,
     })
-  
-    //TODO save multiple
-    newGameState.actual_scene.interaction = `The player ${player.player_number} saw the position(s) of Tanner(s): ${tanner(", ")}`
   })
-  
   newGameState.role_interactions = role_interactions
 
   return newGameState

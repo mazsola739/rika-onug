@@ -52,7 +52,6 @@ exports.troublemaker = (gameState, tokens, role_id, title) => {
       ...playerCard,
     })
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState
@@ -85,7 +84,7 @@ exports.troublemaker_response = (gameState, token, selected_positions, role_id, 
   cardPositions[selected_positions[1]] = playerOneCard
 
   player.role_history.swapped_cards = selected_positions.slice(0, 2)
-  player.role_history.card_or_mark_action = true
+  player.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
@@ -100,9 +99,7 @@ exports.troublemaker_response = (gameState, token, selected_positions, role_id, 
     player_number: player?.player_number,
     ...playerCard,
   })
-
   newGameState.role_interactions = role_interactions
-  newGameState.actual_scene.interaction = `The player ${player.player_number} swapped cards between: ${selected_positions[0]} and ${selected_positions[1]}`
 
   return newGameState
 }

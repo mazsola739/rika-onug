@@ -34,10 +34,7 @@ exports.apprenticeassassin = (gameState, tokens) => {
       player_number: player?.player_number,
       ...playerCard,
     })
-  
-  
   })
-  
   newGameState.role_interactions = role_interactions
 
   return newGameState

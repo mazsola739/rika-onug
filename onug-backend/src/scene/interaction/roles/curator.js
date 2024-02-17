@@ -54,7 +54,6 @@ exports.curator = (gameState, tokens, role_id, title) => {
       ...playerCard,
     })
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState
@@ -101,9 +100,7 @@ exports.curator_response = (gameState, token, selected_positions, role_id, title
     player_number: player?.player_number,
     ...playerCard,
   })
-
   newGameState.role_interactions = role_interactions
-  newGameState.actual_scene.interaction = `The player ${player.player_number} placed a shield on the next position: ${selected_positions[0]}`
-
+ 
   return newGameState
 }

@@ -47,12 +47,7 @@ exports.werewolves = (gameState, tokens) => {
       player_number: player?.player_number,
       ...playerCard,
     })
-
-    if (!loneWolf) {
-      newGameState.actual_scene.interaction = `The Werewolves saw werewolf position(s): player ${newGameState.werewolves.join(', ')} and dream wolf position(s): player ${newGameState.dreamwolf.join(', ')}`
-    }
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState
@@ -75,7 +70,7 @@ exports.werewolves_response = (gameState, token, selected_positions) => {
   }
 
   player.role_history.show_cards = showCards
-  player.role_history.card_or_mark_action = true
+  player.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
@@ -91,9 +86,7 @@ exports.werewolves_response = (gameState, token, selected_positions) => {
     player_number: player?.player_number,
     ...playerCard,
   })
-
   newGameState.role_interactions = role_interactions
-  newGameState.actual_scene.interaction = `The player ${player.player_number} viewed card on the next position: ${selected_positions[0]}`
 
   return newGameState
 }

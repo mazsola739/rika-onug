@@ -51,11 +51,8 @@ exports.drunk = (gameState, tokens) => {
         player_number: player?.player_number,
         ...playerCard,
       })
-
-      newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} cannot swap cards due to having a shield.`
     }
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState
@@ -81,7 +78,7 @@ exports.drunk_response = (gameState, token, selected_positions) => {
   player.card.player_card_id = 0
 
   player.role_history.swapped_cards = [selected_positions[0], `player_${ player.player_number}`]
-  player.role_history.card_or_mark_action = true
+  player.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
@@ -96,9 +93,7 @@ exports.drunk_response = (gameState, token, selected_positions) => {
     player_number: player?.player_number,
     ...playerCard,
   })
-
   newGameState.role_interactions = role_interactions
-  newGameState.actual_scene.interaction = `The player ${player.player_number} swapped their card with ${selected_positions[0]}`
 
   return newGameState
 }

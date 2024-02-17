@@ -39,7 +39,6 @@ exports.mysticwolf = (gameState, tokens) => {
       ...playerCard,
     })
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState
@@ -62,7 +61,7 @@ exports.mysticwolf_response = (gameState, token, selected_positions) => {
   }
 
   player.role_history.show_cards = showCards
-  player.role_history.card_or_mark_action = true
+  player.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
@@ -76,9 +75,7 @@ exports.mysticwolf_response = (gameState, token, selected_positions) => {
       player_number: player?.player_number,
       ...playerCard,
   })
-
   newGameState.role_interactions = role_interactions
-  newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} viewed the card at position: ${selected_positions[0]}`
-
+ 
   return newGameState
 }

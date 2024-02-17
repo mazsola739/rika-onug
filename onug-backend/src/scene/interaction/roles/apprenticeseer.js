@@ -37,8 +37,7 @@ exports.apprenticeseer = (gameState, tokens) => {
       ...playerCard,
     })
    })
-  
-    newGameState.role_interactions = role_interactions
+  newGameState.role_interactions = role_interactions
 
   return newGameState
 }
@@ -60,7 +59,7 @@ exports.apprenticeseer_response = (gameState, token, selected_positions) => {
   }
 
   player.role_history.show_cards = showCards
-  player.role_history.card_or_mark_action = true
+  player.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
@@ -75,9 +74,7 @@ exports.apprenticeseer_response = (gameState, token, selected_positions) => {
     player_number: player?.player_number,
     ...playerCard,
   })
-
   newGameState.role_interactions = role_interactions
-  newGameState.actual_scene.interaction = `The player ${player.player_number} viewed a card in the next position: ${selected_positions[0]}`
 
   return newGameState
 }

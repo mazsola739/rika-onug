@@ -25,10 +25,6 @@ exports.intern = (gameState, tokens) => {
     if (madscientistPlayerNumbers.length === 0) {
       playerCard.player_role_id = 63
       playerCard.player_role = 'MAD_SCIENTIST'
-
-      newGameState.actual_scene.interaction = `The player ${player.player_number} did not see the Mad Scientist, so they become that role.}`
-    } else {
-      newGameState.actual_scene.interaction = `The player ${player.player_number} saw Mad Scientist position(s): player ${madscientistPlayerNumbers.join(', ')}`
     }
 
     role_interactions.push({
@@ -46,7 +42,6 @@ exports.intern = (gameState, tokens) => {
       ...playerCard,
     })
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState

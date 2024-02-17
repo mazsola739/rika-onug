@@ -38,10 +38,7 @@ exports.masons = (gameState, tokens) => {
       player_number: player?.player_number,
       ...playerCard,
     })
-
-    newGameState.actual_scene.interaction = `The player ${player.player_number} saw Mason position(s): player ${masons.join(', ')}`
   })
-
   newGameState.role_interactions = role_interactions
 
   return newGameState
