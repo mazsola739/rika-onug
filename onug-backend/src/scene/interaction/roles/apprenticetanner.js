@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getTannerNumberByRoleIds , getKeys } = require("../utils")
 
 //? INFO: Apprentice Tanner - Tanner sticks out his thumb for him to see. Only wins if another Tanner dies. Multiple Apprentice Tanners are on the same team
@@ -19,20 +20,7 @@ exports.apprenticetanner = (gameState, tokens) => {
     }
     player.role_history = roleHistory
     
-    const apprenticetannerPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, apprenticetannerPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, apprenticetannerPlayerNumber)
-    const playerCard = player?.card
-
-    if (iSeeMyCardIsFlipped) {
-      const positionCard = newGameState.card_positions[apprenticetannerPlayerNumber[0]]
-      playerCard.id = positionCard.id
-      playerCard.role_id = positionCard.id
-      playerCard.role = positionCard.role
-      playerCard.team = positionCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token);
 
     role_interactions.push({
       type: INTERACTION,

@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Aura Seer - All players that have viewed or moved a card or mark stick up their thumbs for her to see (list of roles in FAQ)
@@ -12,7 +13,7 @@ exports.auraseer = (gameState, tokens) => {
   
     newGameState.players[token].role_history = roleHistory
       
-  
+    updatePlayerCard(newGameState, token);
   
     role_interactions.push({
       type: INTERACTION,
@@ -31,23 +32,10 @@ exports.auraseer = (gameState, tokens) => {
       player_number: newGameState.players[token]?.player_number,
     })
   
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
+  
   })
   
     newGameState.role_interactions = role_interactions
-
-  const auraseerPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, auraseerPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, auraseerPlayerNumber)
-
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[auraseerPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[auraseerPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[auraseerPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[auraseerPlayerNumber[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
 
   return newGameState
 }

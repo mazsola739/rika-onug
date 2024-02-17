@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Vampire (2) - Open their eyes and view their fellow Vampires (including The Count and The Master). Then decide together to give one non-Vampire the Mark of the Vampire, which turns them into a Vampire
@@ -14,7 +15,7 @@ exports.vampires = (gameState, tokens) => {
   
     newGameState.players[token].role_history = roleHistory
       
-  
+    updatePlayerCard(newGameState, token)
   
     role_interactions.push({
       type: INTERACTION,
@@ -32,23 +33,10 @@ exports.vampires = (gameState, tokens) => {
       player_number: newGameState.players[token]?.player_number,
     })
   
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
+  
   })
   
     newGameState.role_interactions = role_interactions
-  
-  const vampirePlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, vampirePlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, vampirePlayerNumber)
-
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[vampirePlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[vampirePlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[vampirePlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[vampirePlayerNumber[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
 
   return newGameState
 }

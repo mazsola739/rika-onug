@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getAllPlayerTokens, getSelectablePlayersWithNoArtifact, getRandomArtifact, getPlayerTokenByPlayerNumber, getKeys } = require("../utils")
 
 //? INFO: Curator - Gives any player (including himself) a random, unknown Artifact. Cannot give to a Shielded player.
@@ -29,20 +30,7 @@ exports.curator = (gameState, tokens, role_id, title) => {
     const player = players[token]
     const flippedCards = newGameState.flipped
 
-    const curatorPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, curatorPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, curatorPlayerNumber)
-    const playerCard = player?.card
-    const currentCard = newGameState.card_positions[curatorPlayerNumber[0]]
-
-    if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard.id
-      playerCard.role_id = currentCard.id
-      playerCard.role = currentCard.role
-      playerCard.team = currentCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
 
     const roleHistory = {
       ...newGameState.actual_scene,

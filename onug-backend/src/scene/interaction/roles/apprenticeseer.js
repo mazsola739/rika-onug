@@ -1,6 +1,7 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, concatArraysWithUniqueElements , getKeys } = require("../utils")
 const { centerCardPositions } = require("../constants")
+const { updatePlayerCard } = require("../update-player-card")
 
 //? INFO: Apprentice Seer - looks at one card from the center (not another players or her own)
 exports.apprenticeseer = (gameState, tokens) => {
@@ -18,20 +19,7 @@ exports.apprenticeseer = (gameState, tokens) => {
     }
     player.role_history = roleHistory
 
-    const apprenticeseerPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, apprenticeseerPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, apprenticeseerPlayerNumber)
-    const playerCard = player?.card
-    const currentCard = newGameState.card_positions[apprenticeseerPlayerNumber[0]]
-
-    if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard.id
-      playerCard.role_id = currentCard.id
-      playerCard.role = currentCard.role
-      playerCard.team = currentCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
   
     role_interactions.push({
       type: INTERACTION,

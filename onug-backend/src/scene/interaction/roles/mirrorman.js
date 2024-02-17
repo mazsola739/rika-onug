@@ -1,5 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
-const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
+const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getKeys } = require("../utils")
 
 //! At this moment mirrorman never see flipped or shielded cards, ripple different
 exports.mirrorman = (gameState, tokens) => {
@@ -13,7 +13,6 @@ exports.mirrorman = (gameState, tokens) => {
   
     newGameState.players[token].role_history = roleHistory
       
-  
   
     role_interactions.push({
       type: INTERACTION,

@@ -1,6 +1,7 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPositions, concatArraysWithUniqueElements , getKeys } = require("../utils")
 const { centerCardPositions } = require("../constants")
+const { updatePlayerCard } = require("../update-player-card")
 
 //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
 exports.seer = (gameState, tokens) => {
@@ -23,20 +24,7 @@ exports.seer = (gameState, tokens) => {
 
     player.role_history = roleHistory
 
-    const seerPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, seerPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, seerPlayerNumber)
-    const playerCard = player?.card
-    const currentCard = newGameState.card_positions[seerPlayerNumber[0]]
-
-    if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard.id
-      playerCard.role_id = currentCard.id
-      playerCard.role = currentCard.role
-      playerCard.team = currentCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
 
     role_interactions.push({
       type: INTERACTION,

@@ -1,6 +1,7 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, isPlayersCardsFlipped, isActivePlayersCardsFlipped, getSelectablePlayersWithNoShield, concatArraysWithUniqueElements , getKeys } = require("../utils")
 const { townIds } = require("../constants")
+const { updatePlayerCard } = require("../update-player-card")
 
 //? INFO: Revealer - Turns and keeps one player's card face up unless they are not on the Villager Team
 //TODO doppelganger
@@ -38,20 +39,7 @@ exports.revealer = (gameState, tokens, role_id, title) => {
 
     player.role_history = roleHistory
 
-    const revealerPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, revealerPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, revealerPlayerNumber)
-    const playerCard = player?.card
-    const currentCard = newGameState.card_positions[revealerPlayerNumber[0]]
-
-    if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard.id
-      playerCard.role_id = currentCard.id
-      playerCard.role = currentCard.role
-      playerCard.team = currentCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
 
     role_interactions.push({
       type: INTERACTION,

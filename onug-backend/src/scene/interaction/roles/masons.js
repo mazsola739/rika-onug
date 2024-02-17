@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Mason (2) – Wakes up and looks for the other fellow Mason
@@ -20,20 +21,7 @@ exports.masons = (gameState, tokens) => {
 
     player.role_history = roleHistory
     
-    const masonPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, masonPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, masonPlayerNumber)
-    const playerCard = player?.card
-
-    if (iSeeMyCardIsFlipped) {
-      const positionCard = newGameState.card_positions[masonPlayerNumber[0]]
-      playerCard.id = positionCard.id
-      playerCard.role_id = positionCard.id
-      playerCard.role = positionCard.role
-      playerCard.team = positionCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
 
     role_interactions.push({
       type: INTERACTION,

@@ -1,5 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { centerCardPositions } = require("../constants")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys, getSelectablePlayersWithNoShield, getAllPlayerTokens, getCardIdsByPositions, concatArraysWithUniqueElements } = require("../utils")
 
 //? INFO: Witch - May look at one center card. If she does she must swap it with any player's card (including hers)
@@ -18,20 +19,7 @@ exports.witch = (gameState, tokens) => {
     }
     player.role_history = roleHistory
 
-    const witchPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, witchPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, witchPlayerNumber)
-    const playerCard = player?.card
-    const currentCard = newGameState.card_positions[witchPlayerNumber[0]]
-
-    if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard.id
-      playerCard.role_id = currentCard.id
-      playerCard.role = currentCard.role
-      playerCard.team = currentCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
   
     role_interactions.push({
       type: INTERACTION,

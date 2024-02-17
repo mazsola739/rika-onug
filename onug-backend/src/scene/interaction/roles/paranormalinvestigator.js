@@ -1,5 +1,6 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { townIds } = require("../constants")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys, concatArraysWithUniqueElements, getCardIdsByPositions } = require("../utils")
 
 //? INFO: Paranormal Investigator - Looks at two other player's cards one at a time if he sees team they are not on the Villager Team he stops looking and becomes that role. May not look at any center cards.
@@ -22,20 +23,7 @@ exports.paranormalinvestigator = (gameState, tokens) => {
 
     player.role_history = roleHistory
 
-    const paranormalinvestigatorPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, paranormalinvestigatorPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, paranormalinvestigatorPlayerNumber)
-    const playerCard = player?.card
-    const currentCard = newGameState.card_positions[paranormalinvestigatorPlayerNumber[0]]
-
-    if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard.id
-      playerCard.role_id = currentCard.id
-      playerCard.role = currentCard.role
-      playerCard.team = currentCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
 
     role_interactions.push({
       type: INTERACTION,

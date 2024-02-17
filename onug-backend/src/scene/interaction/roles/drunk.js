@@ -1,6 +1,7 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getKeys } = require("../utils")
 const { centerCardPositions } = require("../constants")
+const { updatePlayerCard } = require("../update-player-card")
 
 //? INFO: Drunk – Swap your card with a card from center but does not look at his new card
 exports.drunk = (gameState, tokens) => {
@@ -12,20 +13,7 @@ exports.drunk = (gameState, tokens) => {
     const player = players[token]
     const flippedCards = newGameState.flipped
 
-    const drunkPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, drunkPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, drunkPlayerNumber)
-    const playerCard = player?.card
-    const currentCard = newGameState.card_positions[drunkPlayerNumber[0]]
-
-    if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard.id
-      playerCard.role_id = currentCard.id
-      playerCard.role = currentCard.role
-      playerCard.team = currentCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
 
     if (!playerCard.shield) {
       const roleHistory = {

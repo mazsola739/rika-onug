@@ -1,6 +1,7 @@
 const { INTERACTION, MESSAGE } = require("../../../constant/ws")
 const { getPlayerTokensByPlayerNumber, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getPlayerNeighborsByToken , getKeys } = require("../utils")
 const { websocketServerConnectionsPerRoom } = require("../../../websocket/connections")
+const { updatePlayerCard } = require("../update-player-card")
 
 //? INFO: Thing - Taps the nearest shoulder of the player on their immediate right or left //THING, ANNOYING_LAD
 exports.thing = (gameState, tokens, role_id, title) => {
@@ -31,20 +32,7 @@ exports.thing = (gameState, tokens, role_id, title) => {
   
   player.role_history = roleHistory
   
-  const thingPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, thingPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, thingPlayerNumber)
-  const playerCard = player?.card
-
-  if (iSeeMyCardIsFlipped) {
-    const positionCard = newGameState.card_positions[thingPlayerNumber[0]]
-    playerCard.id = positionCard.id
-    playerCard.role_id = positionCard.id
-    playerCard.role = positionCard.role
-    playerCard.team = positionCard.team
-  } else if (iSeeMyCardElsewhere) {
-    playerCard.id = 0
-  }
+  updatePlayerCard(newGameState, token)
 
   role_interactions.push({
     type: INTERACTION,

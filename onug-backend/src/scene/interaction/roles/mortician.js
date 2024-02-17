@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Mortician - Looks at 1-2 neighbor cards (left or right), via app. Wins if at least one of his neighbors is killed
@@ -14,7 +15,7 @@ exports.mortician = (gameState, tokens) => {
   
     newGameState.players[token].role_history = roleHistory
       
-  
+    updatePlayerCard(newGameState, token)
   
     role_interactions.push({
       type: INTERACTION,
@@ -33,23 +34,10 @@ exports.mortician = (gameState, tokens) => {
       player_number: newGameState.players[token]?.player_number,
     })
   
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
+  
   })
   
     newGameState.role_interactions = role_interactions
-  
-  const morticianPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, morticianPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, morticianPlayerNumber)
-
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[morticianPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[morticianPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[morticianPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[morticianPlayerNumber[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
 
   return newGameState
 }

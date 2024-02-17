@@ -1,4 +1,5 @@
 const { INTERACTION } = require('../../../constant/ws')
+const { updatePlayerCard } = require('../update-player-card')
 const {
   getPlayerNumbersWithMatchingTokens,
   isActivePlayersCardsFlipped,
@@ -24,20 +25,7 @@ exports.intern = (gameState, tokens) => {
     }
     player.role_history = roleHistory
 
-    const internPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, internPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, internPlayerNumber)
-    const playerCard = player?.card
-
-    if (iSeeMyCardIsFlipped) {
-      const positionCard = newGameState.card_positions[internPlayerNumber[0]]
-      playerCard.id = positionCard.id
-      playerCard.role_id = positionCard.id
-      playerCard.role = positionCard.role
-      playerCard.team = positionCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
 
     if (madscientistPlayerNumbers.length === 0) {
       playerCard.role_id = 63

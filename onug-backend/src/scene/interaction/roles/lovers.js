@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 exports.lovers = (gameState, tokens) => {
@@ -12,7 +13,7 @@ exports.lovers = (gameState, tokens) => {
   
     newGameState.players[token].role_history = roleHistory
       
-  
+    updatePlayerCard(newGameState, token)
   
     role_interactions.push({
       type: INTERACTION,
@@ -30,23 +31,10 @@ exports.lovers = (gameState, tokens) => {
       player_number: newGameState.players[token]?.player_number,
     })
   
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
+  
   })
   
     newGameState.role_interactions = role_interactions
-  
-  const loverPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, loverPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, loverPlayerNumber)
-
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[loverPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[loverPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[loverPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[loverPlayerNumber[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
 
   return newGameState
 }

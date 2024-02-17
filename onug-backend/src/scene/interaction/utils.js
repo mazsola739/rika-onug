@@ -225,6 +225,7 @@ exports.getRandomArtifact = (playerArtifacts) => {
 
 exports.getKeys = (array) => array.map(obj => Object.keys(obj)[0])
 
+
 //TODO do i need this functions?
 exports.getTokenByCardId = (players, cardId) => {
   for (const token in players) {

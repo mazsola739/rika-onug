@@ -34,7 +34,7 @@ exports.oracle = (gameState, tokens) => {
       player_number: newGameState.players[token]?.player_number,
     })
   
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
+  
   })
   
     newGameState.role_interactions = role_interactions

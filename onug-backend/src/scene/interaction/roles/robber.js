@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements , getKeys } = require("../utils")
 
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
@@ -22,20 +23,7 @@ exports.robber = (gameState, tokens, role_id, title) => {
     const player = players[token]
     const flippedCards = newGameState.flipped
 
-    const robberPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, robberPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, robberPlayerNumber)
-    const playerCard = player?.card
-    const currentCard = newGameState.card_positions[robberPlayerNumber[0]]
-
-    if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard.id
-      playerCard.role_id = currentCard.id
-      playerCard.role = currentCard.role
-      playerCard.team = currentCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
 
     if (!playerCard.shield) {
       const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)

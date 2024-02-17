@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Beholder - Seer and Apprentice Seer stick up their thumbs for her to see, who may check their cards
@@ -12,7 +13,7 @@ exports.beholder = (gameState, tokens) => {
   
     newGameState.players[token].role_history = roleHistory
       
-  
+    updatePlayerCard(newGameState, token)
   
     role_interactions.push({
       type: INTERACTION,
@@ -31,23 +32,10 @@ exports.beholder = (gameState, tokens) => {
       player_number: newGameState.players[token]?.player_number,
     })
   
-   // newGameState.actual_scene.interaction = `The player ${newGameState.players[token].player_number} saw Mason position(s): player ${masonPlayerNumbers.join(', ')}`
+  
   })
   
     newGameState.role_interactions = role_interactions
-
-  const beholderPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, beholderPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, beholderPlayerNumber)
-
-  if (iSeeMyCardIsFlipped) {
-    newGameState.players[token].card.id = newGameState.card_positions[beholderPlayerNumber[0]].id
-    newGameState.players[token].card.role_id = newGameState.card_positions[beholderPlayerNumber[0]].id
-    newGameState.players[token].card.role = newGameState.card_positions[beholderPlayerNumber[0]].role
-    newGameState.players[token].card.team = newGameState.card_positions[beholderPlayerNumber[0]].team
-  } else if (iSeeMyCardElsewhere) {
-    newGameState.players[token].card.id = 0
-  }
 
   return newGameState
 }

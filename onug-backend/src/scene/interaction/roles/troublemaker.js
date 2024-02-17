@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Troublemaker - Swaps any two other player's cards (not her own or center) without looking at them
@@ -33,20 +34,7 @@ exports.troublemaker = (gameState, tokens, role_id, title) => {
     player.role_history = roleHistory
       
     
-    const troublemakerPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, troublemakerPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, troublemakerPlayerNumber)
-    const playerCard = player?.card
-    const currentCard = newGameState.card_positions[troublemakerPlayerNumber[0]]
-  
-    if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard.id
-      playerCard.role_id = currentCard.id
-      playerCard.role = currentCard.role
-      playerCard.team = currentCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
   
     role_interactions.push({
       type: INTERACTION,

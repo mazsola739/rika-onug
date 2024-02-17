@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements , getKeys } = require("../utils")
 
 //? INFO: Insomniac – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
@@ -22,24 +23,10 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
     const player = players[token]
     const flippedCards = newGameState.flipped
 
-    const insomniacPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, insomniacPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, insomniacPlayerNumber)
-    const playerCard = player?.card
-    const cardPositions = newGameState.card_positions
-    const currentCard = cardPositions[insomniacPlayerNumber[0]]
-
-    if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard.id
-      playerCard.role_id = currentCard.id
-      playerCard.role = currentCard.role
-      playerCard.team = currentCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
 
     if (!playerCard.shield) {
-      const showCards = getCardIdsByPlayerNumbers(cardPositions, insomniacPlayerNumber)
+      const showCards = getCardIdsByPlayerNumbers(cardPositions, currentPlayerNumber)
       playerCard.id = currentCard.id
       playerCard.team = currentCard.team
 

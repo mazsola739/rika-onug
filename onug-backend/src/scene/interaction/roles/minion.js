@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys } = require("../utils")
 
 //? INFO: Minion - All Werewolf team (not Minion/Squire) stick up their thumb for him to see
@@ -19,20 +20,7 @@ exports.minion = (gameState, tokens) => {
     }
     player.role_history = roleHistory
 
-    const minionPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, minionPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, minionPlayerNumber)
-    const playerCard = player?.card
-
-    if (iSeeMyCardIsFlipped) {
-      const positionCard = newGameState.card_positions[minionPlayerNumber[0]]
-      playerCard.id = positionCard.id
-      playerCard.role_id = positionCard.id
-      playerCard.role = positionCard.role
-      playerCard.team = positionCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
 
     role_interactions.push({
       type: INTERACTION,

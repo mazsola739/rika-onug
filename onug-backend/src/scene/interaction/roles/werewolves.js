@@ -1,6 +1,7 @@
 const { INTERACTION } = require("../../../constant/ws")
 const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions, concatArraysWithUniqueElements , getKeys } = require("../utils")
 const { centerCardPositions } = require("../constants")
+const { updatePlayerCard } = require("../update-player-card")
 
 //TODO DREAMWOLF & werewolf_response
 //? INFO: Werewolves (4) - Open their eyes and view their fellow Werewolves (including Mystic and Alpha)
@@ -27,20 +28,7 @@ exports.werewolves = (gameState, tokens) => {
     }
     player.role_history = roleHistory
     
-    const werewolfPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, werewolfPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, werewolfPlayerNumber)
-    const playerCard = player?.card
-
-    if (iSeeMyCardIsFlipped) {
-      const positionCard = newGameState.card_positions[werewolfPlayerNumber[0]]
-      playerCard.id = positionCard.id
-      playerCard.role_id = positionCard.id
-      playerCard.role = positionCard.role
-      playerCard.team = positionCard.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
 
     role_interactions.push({
       type: INTERACTION,

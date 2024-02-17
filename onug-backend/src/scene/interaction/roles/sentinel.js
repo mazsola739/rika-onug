@@ -1,4 +1,5 @@
 const { INTERACTION } = require("../../../constant/ws")
+const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped , getKeys, getPlayerTokenByPlayerNumber } = require("../utils")
 
 //? INFO: Sentinel - Place a Shield token on any other player's card that card (not mark) cannot be looked at or moved
@@ -19,20 +20,7 @@ exports.sentinel = (gameState, tokens) => {
     }
     player.role_history = roleHistory
 
-    const sentinelPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
-    const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGameState.flipped, sentinelPlayerNumber)
-    const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGameState.flipped, sentinelPlayerNumber)
-    const playerCard = player?.card
-    const currentCard = newGameState.card_positions[sentinelPlayerNumber[0]]
-  
-    if (iSeeMyCardIsFlipped) {
-      playerCard.id = currentCard?.id
-      playerCard.role_id = currentCard?.id
-      playerCard.role = currentCard?.role
-      playerCard.team = currentCard?.team
-    } else if (iSeeMyCardElsewhere) {
-      playerCard.id = 0
-    }
+    updatePlayerCard(newGameState, token)
   
     role_interactions.push({
       type: INTERACTION,
