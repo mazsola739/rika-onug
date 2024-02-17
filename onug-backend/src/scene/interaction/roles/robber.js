@@ -21,6 +21,7 @@ exports.robber = (gameState, tokens, role_id, title) => {
 
   tokens.forEach((token) => {
     const player = players[token]
+    const playerCard = player?.card
     const flippedCards = newGameState.flipped
 
     updatePlayerCard(newGameState, token)
@@ -43,7 +44,7 @@ exports.robber = (gameState, tokens, role_id, title) => {
         selectable_cards: selectablePlayersWithNoShield,
         selectable_card_limit: { player: 1, center: 0 },
         shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
+        artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
         player_original_id: playerCard?.original_id,

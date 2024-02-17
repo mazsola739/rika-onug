@@ -17,6 +17,7 @@ exports.intern = (gameState, tokens) => {
 
   tokens.forEach((token) => {
     const player = players[token]
+    const playerCard = player?.card
     const flippedCards = newGameState.flipped
 
     const roleHistory = {

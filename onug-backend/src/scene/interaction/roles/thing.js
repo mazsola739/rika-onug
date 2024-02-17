@@ -22,7 +22,9 @@ exports.thing = (gameState, tokens, role_id, title) => {
 
   tokens.forEach((token) => {
     const player = players[token]
+    const playerCard = player?.card
     const flippedCards = newGameState.flipped
+
     const neighbors = getPlayerNeighborsByToken(players, token)
 
     const roleHistory = {

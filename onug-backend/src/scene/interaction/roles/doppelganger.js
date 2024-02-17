@@ -9,16 +9,16 @@ exports.doppelganger = (gameState, tokens) => {
   const players = newGameState.players
 
   tokens.forEach((token) => {
-    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const player = players[token]
+    const playerCard = player?.card
 
+    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
+    
     const roleHistory = {
       ...newGameState.actual_scene,
       selectable_cards: selectablePlayerNumbers,
     }
     player.role_history = roleHistory
-
-    const playerCard = player?.card
 
     role_interactions.push({
       type: INTERACTION,

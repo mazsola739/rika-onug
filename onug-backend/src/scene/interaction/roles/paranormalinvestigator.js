@@ -10,11 +10,12 @@ exports.paranormalinvestigator = (gameState, tokens) => {
   const players = newGameState.players
 
   tokens.forEach((token) => {
+    const player = players[token]
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
+
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
-
-    const player = players[token]
-    const flippedCards = newGameState.flipped
 
     const roleHistory = {
       ...newGameState.actual_scene,
@@ -34,12 +35,13 @@ exports.paranormalinvestigator = (gameState, tokens) => {
       selectable_card_limit: { player: 2, center: 0 },
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: flippedCards,
       player_name: player?.name,
-      player_original_id: player?.card?.original_id,
-      player_card_id: player?.card?.id,
-      player_role: player?.card?.role,
-      player_role_id: player?.card?.role_id,
-      player_team: player?.card?.team,
+      player_original_id: playerCard?.original_id,
+      player_card_id: playerCard?.id,
+      player_role: playerCard?.role,
+      player_role_id: playerCard?.role_id,
+      player_team: playerCard?.team,
       player_number: player?.player_number,
     })
   })

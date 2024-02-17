@@ -26,11 +26,12 @@ exports.revealer = (gameState, tokens, role_id, title) => {
   const players = newGameState.players
 
   tokens.forEach((token) => {
+    const player = players[token]
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
+    
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
-
-    const player = players[token]
-    const flippedCards = newGameState.flipped
 
     const roleHistory = {
       ...newGameState.actual_scene,

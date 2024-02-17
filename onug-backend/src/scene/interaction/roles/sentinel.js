@@ -10,9 +10,12 @@ exports.sentinel = (gameState, tokens) => {
   const players = newGameState.players
 
   tokens.forEach((token) => {
+    const player = players[token]
+    const playerCard = player?.card
+    const flippedCards = newGameState.flipped
+
     const selectablePlayerNumber = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumber, newGameState.shield)
-    const player = players[token]
 
     const roleHistory = {
       ...newGameState.actual_scene,
@@ -31,7 +34,7 @@ exports.sentinel = (gameState, tokens) => {
       selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),
-      show_cards: newGameState.flipped,
+      show_cards: flippedCards,
       player_name: player?.name,
       player_original_id: playerCard?.original_id,
       player_card_id: playerCard?.id,

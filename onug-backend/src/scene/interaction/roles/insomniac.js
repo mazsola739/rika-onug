@@ -21,6 +21,7 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
 
   tokens.forEach((token) => {
     const player = players[token]
+    const playerCard = player?.card
     const flippedCards = newGameState.flipped
 
     updatePlayerCard(newGameState, token)
@@ -43,7 +44,7 @@ exports.insomniac = (gameState, tokens, role_id, title) => {
         message: roleMapping[role_id].message,
         selectable_card_limit: { player: 0, center: 0 },
         shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
+        artifacted_cards: getKeys(newGameState.artifact),
         show_cards: concatArraysWithUniqueElements(showCards, flippedCards),
         player_name: player?.name,
         player_original_id: playerCard?.original_id,
