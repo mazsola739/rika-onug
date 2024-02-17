@@ -104,7 +104,7 @@ exports.revealer_response = (gameState, token, selected_positions, role_id, titl
   const cardPositions =  newGameState.card_positions
 
   const revealedCard = getCardIdsByPositions(cardPositions, [selected_positions[0]])
-  const isTown = townIds.includes(revealedCard)
+  const isTown = revealedCard.every(card => townIds.includes(Object.values(card)[0]))
 
   player.role_history.card_or_mark_action = true
 
@@ -135,10 +135,10 @@ exports.revealer_response = (gameState, token, selected_positions, role_id, titl
   newGameState.actual_scene.interaction = `The player, ${player.player_number}, flipped a card in the next position: ${selected_positions[0]}, and it turned out to be ${isTown ? "a town member" : "a non-town member"}.`
 
   if (isTown) {
-    newGameState.flipped.push(revealedCard)
-    newGameState.players[token].role_history.flipped_cards = [revealedCard]
+    newGameState.flipped.push(revealedCard[0])
+    newGameState.players[token].role_history.flipped_cards = revealedCard
   } else {
-    newGameState.players[token].role_history.show_cards = [revealedCard]
+    newGameState.players[token].role_history.show_cards = revealedCard
   }
 
   newGameState.role_interactions = role_interactions

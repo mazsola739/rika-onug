@@ -70,8 +70,8 @@ exports.troublemaker = (gameState, tokens, role_id, title) => {
 
   newGameState.role_interactions = role_interactions
 
-  return newGameState;
-};
+  return newGameState
+}
 
 exports.troublemaker_response = (gameState, token, selected_positions, role_id, title) => {
   const roleMapping = {
@@ -94,10 +94,10 @@ exports.troublemaker_response = (gameState, token, selected_positions, role_id, 
   const playerCard = player?.card
   const cardPositions =  newGameState.card_positions
 
-  const playerOneCard = { ...cardPositions[selected_positions[0]] };
-  const playerTwoCard = { ...cardPositions[selected_positions[1]] };
-  cardPositions[selected_positions[0]] = playerTwoCard;
-  cardPositions[selected_positions[1]] = playerOneCard;
+  const playerOneCard = { ...cardPositions[selected_positions[0]] }
+  const playerTwoCard = { ...cardPositions[selected_positions[1]] }
+  cardPositions[selected_positions[0]] = playerTwoCard
+  cardPositions[selected_positions[1]] = playerOneCard
 
   player.role_history.swapped_cards = selected_positions.slice(0, 2)
   player.role_history.card_or_mark_action = true
@@ -124,4 +124,4 @@ exports.troublemaker_response = (gameState, token, selected_positions, role_id, 
   newGameState.actual_scene.interaction = `The player ${player.player_number} swapped cards between: ${selected_positions[0]} and ${selected_positions[1]}`
 
   return newGameState
-};
+}

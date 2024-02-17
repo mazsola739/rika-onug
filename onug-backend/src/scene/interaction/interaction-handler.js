@@ -341,14 +341,14 @@ exports.interactionHandler = (gameState) => {
         tokens = getTokensByOriginalIds(players, [18])
         return roles.apprenticeseer(newGameState, tokens)
       } 
-      break /*
+      break
 
     case "PARANORMAL_INVESTIGATOR": 
       if (conditions.hasParanormalInvestigatorPlayer) {
         tokens = getTokensByOriginalIds(players, [23])
         return roles.paranormalinvestigator(newGameState, tokens)
       }
-      break
+      break /*
 
     case "MARKSMAN": 
       if (conditions.hasMarksmanPlayer) {
@@ -436,7 +436,7 @@ exports.interactionHandler = (gameState) => {
     case "TROUBLEMAKER":
       if (conditions.hasTroublemakerPlayer) {
         tokens = getTokensByOriginalIds(players, [11])
-        return roles.troublemaker(newGameState, tokens, 11, title)
+        return roles.troublemaker(newGameState, tokens, 11, sceneTitle)
       }
       break /*
 

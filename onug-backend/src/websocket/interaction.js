@@ -57,7 +57,7 @@ const generateInteractionResponse = (gameState, token, selected_positions, ws) =
   if (interaction_type === "FLIPPER")                     return roles.revealer_response(newGameState, token, selected_positions, 59)
   //if (interaction_type === "INSTIGATOR")                 return roles.instigator_response(newGameState, token, selected_positions, 34)
   if (interaction_type === "MYSTIC_WOLF")                 return roles.mysticwolf_response(newGameState, token, selected_positions, 22)
-  //if (interaction_type === "PARANORMAL_INVESTIGATOR")    return roles.paranormalinvestigator_response(newGameState, token, selected_positions, 23)
+  if (interaction_type === "PARANORMAL_INVESTIGATOR")     return roles.paranormalinvestigator_response(newGameState, token, selected_positions, 23)
   //if (interaction_type === "RAPSCALLION")                return roles.rapscallion_response(newGameState, token, selected_positions, 65)
   if (interaction_type === "REVEALER")                    return roles.revealer_response(newGameState, token, selected_positions, 24, interaction_type)
   if (interaction_type === "ROBBER")                      return roles.robber_response(newGameState, token, selected_positions, 8, interaction_type)

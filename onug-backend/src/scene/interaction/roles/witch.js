@@ -157,6 +157,5 @@ exports.witch_response = (gameState, token, selected_positions) => {
     newGameState.actual_scene.interaction = `The player ${player.player_number} swapped cards between positions: ${[player.role_history.selected_center_card, selected_positions[0]].join(', ')}`
   }
 
-  
   return newGameState
 }
