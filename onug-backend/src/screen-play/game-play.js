@@ -110,4 +110,4 @@ const tick = async (room_id) => {
   }
 }
 
-exports.startGamePlay = room_id => setTimeout(() => tick(room_id), tickTime)
+exports.startGamePlay = room_id => setTimeout(() => tick(room_id), 2)
