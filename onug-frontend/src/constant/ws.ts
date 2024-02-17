@@ -40,8 +40,8 @@ export const STAGES = {
 }
 
 export const API_SERVER_HOST =
-  'http://ec2-100-26-21-53.compute-1.amazonaws.com:7654'
+  'http://ec2-34-227-9-145.compute-1.amazonaws.com:7654'
 export const API_LOCALHOST = 'http://localhost:7654'
 export const WS_SERVER_HOST =
-  'ws://ec2-100-26-21-53.compute-1.amazonaws.com:7655/'
+  'ws://ec2-34-227-9-145.compute-1.amazonaws.com:7655/'
 export const WS_LOCALHOST = 'ws://localhost:7655/'

@@ -5,13 +5,13 @@ import { ConnectionStatus, StyledApp } from './App.styles'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { useEffect, useState } from 'react'
-import { NEWBIE, RELOAD, WS_LOCALHOST } from 'constant'
+import { NEWBIE, RELOAD, WS_SERVER_HOST } from 'constant'
 import { Icon } from 'components'
 import { IconType } from 'components/Icon/Icon.types'
 
 export const App: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(false)
-  const [socketUrl] = useState(WS_LOCALHOST)
+  const [socketUrl] = useState(WS_SERVER_HOST)
   const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket(
     socketUrl,
     {
