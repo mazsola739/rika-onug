@@ -1,24 +1,19 @@
 import styled from '@emotion/styled'
-import { StyledGameCardProps } from './GameCard.types'
+import { StyledDealtGameCardProps } from './DealtGameCard.types'
 
-export const StyledGameCard = styled.div`
+export const StyledDealtGameCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
 `
 
-export const CardBack = styled.div<StyledGameCardProps>`
+export const CardBack = styled.div<StyledDealtGameCardProps>`
   align-items: center;
   background-image: ${(props) => `url(${props.backgroundImage})`};
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
-  border: ${(props) =>
-    props.selectable
-      ? props.isSelected
-        ? '3px solid yellow'
-        : '3px solid green'
-      : '3px solid white'};
+  border: 3px solid white;
 
   border-radius: 6px;
   height: 90px;

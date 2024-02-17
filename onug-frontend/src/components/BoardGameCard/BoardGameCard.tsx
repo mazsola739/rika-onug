@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { CardBack, StyledGameCard, Tokens } from './GameCard.styles'
-import { GameCardProps } from './GameCard.types'
+import { CardBack, StyledBoardGameCard, Tokens } from './BoardGameCard.styles'
+import { BoardGameCardProps } from './BoardGameCard.types'
 import { deckStore, gameTableStore, interactionStore } from 'store'
 import { Icon, Token } from 'components'
 import { useClickHandler } from 'hooks'
 
-export const GameCard: React.FC<GameCardProps> = observer(
+export const BoardGameCard: React.FC<BoardGameCardProps> = observer(
   ({
     position,
     id,
@@ -114,7 +114,10 @@ export const GameCard: React.FC<GameCardProps> = observer(
     }
 
     return (
-      <StyledGameCard>
+      <StyledBoardGameCard>
+        <Tokens>
+          {!isCenter && <Token tokenName={playerTokenName} size={35} />}
+        </Tokens>
         <CardBack
           backgroundImage={imgSrc}
           selectable={selectable}
@@ -122,11 +125,8 @@ export const GameCard: React.FC<GameCardProps> = observer(
           isSelected={isSelected}
         />
         <Tokens>
-          {/*//TODO refactor for gameplay */}
-          {isCenter && spy && <Icon iconName="spy" size={33} />}
-          {!isCenter && <Token tokenName={playerTokenName} size={35} />}
           {!isCenter && shield && <Token tokenName="shield" size={35} />}
-          {!isCenter && hasMarks && <Token tokenName="mark_back" size={35} />}
+          {isCenter && spy && <Icon iconName="spy" size={33} />}
           {!isCenter && artifact && <Icon iconName="artifact" size={33} />}
           {!isCenter && aliens && <Icon iconName="alien" size={33} />}
           {!isCenter && assassin && <Icon iconName="assassin" size={33} />}
@@ -171,7 +171,8 @@ export const GameCard: React.FC<GameCardProps> = observer(
           {!isCenter && villains && <Icon iconName="villain" size={33} />}
           {!isCenter && werewolves && <Icon iconName="werewolf" size={33} />}
         </Tokens>
-      </StyledGameCard>
+        {!isCenter && hasMarks && <Token tokenName="mark_back" size={75} />}
+      </StyledBoardGameCard>
     )
   }
 )

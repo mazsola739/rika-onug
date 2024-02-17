@@ -1,4 +1,4 @@
-export interface GameCardProps {
+export interface BoardGameCardProps {
   id: number
   spy?: boolean
   position: string
@@ -51,7 +51,7 @@ export interface GameCardProps {
   werewolves?: boolean
 }
 
-export interface StyledGameCardProps {
+export interface StyledBoardGameCardProps {
   backgroundImage: string
   selectable?: boolean
   isSelected?: boolean

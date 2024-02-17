@@ -1,4 +1,4 @@
-import { GameCard } from 'components'
+import { DealtGameCard } from 'components'
 import {
   CardContainer,
   PlayersCards,
@@ -13,7 +13,7 @@ const renderPlayerCards = (playerCards: PositionProperties[]) => {
     <CardContainer>
       <PlayersCards>
         {playerCards.map(({ position, id, ready }, index) => (
-          <GameCard
+          <DealtGameCard
             key={index}
             isCenter={false}
             id={id}
@@ -35,7 +35,11 @@ const renderCenterCard = (centerCards: PositionProperties[]) => {
         <CardContainer>
           <CardTitle>{title}</CardTitle>
           <CenterCards>
-            <GameCard id={card.id} position={card.position} isCenter={true} />
+            <DealtGameCard
+              id={card.id}
+              position={card.position}
+              isCenter={true}
+            />
           </CenterCards>
         </CardContainer>
       )
@@ -54,7 +58,7 @@ const renderCenterCard = (centerCards: PositionProperties[]) => {
               return (
                 card &&
                 card.id !== null && (
-                  <GameCard
+                  <DealtGameCard
                     key={index}
                     id={card.id}
                     position={card.position}
