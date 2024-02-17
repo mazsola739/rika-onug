@@ -397,14 +397,14 @@ exports.interactionHandler = (gameState) => {
         tokens = getTokensByOriginalIds(players, [8])
         return roles.robber(newGameState, tokens, 8, sceneTitle)
       }
-      break /*
+      break 
 
     case "WITCH": 
       if (conditions.hasWitchPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
+        tokens = getTokensByOriginalIds(players, [27])
         return roles.witch(newGameState, tokens)
       }
-      break
+      break /*
 
     case "PICKPOCKET": 
       if (conditions.hasPickpocketPlayer) {

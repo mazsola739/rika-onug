@@ -122,9 +122,10 @@ export const GameCard: React.FC<GameCardProps> = observer(
           isSelected={isSelected}
         />
         <Tokens>
+          {/*//TODO refactor for gameplay */}
           {isCenter && spy && <Icon iconName="spy" size={33} />}
-          {/* //TODO check why is not working */}
           {!isCenter && <Token tokenName={playerTokenName} size={35} />}
+          {!isCenter && shield && <Token tokenName="shield" size={35} />}
           {!isCenter && hasMarks && <Token tokenName="mark_back" size={35} />}
           {!isCenter && artifact && <Icon iconName="artifact" size={33} />}
           {!isCenter && aliens && <Icon iconName="alien" size={33} />}
@@ -157,7 +158,6 @@ export const GameCard: React.FC<GameCardProps> = observer(
           {!isCenter && pretty && <Icon iconName="pretty" size={33} />}
           {!isCenter && seer && <Icon iconName="seer" size={33} />}
           {!isCenter && select && <Icon iconName="select" size={33} />}
-          {!isCenter && shield && <Icon iconName="shield" size={33} />}
           {!isCenter && smell && <Icon iconName="smell" size={33} />}
           {!isCenter && sus && <Icon iconName="sus" size={33} />}
           {!isCenter && swap && <Icon iconName="swap" size={33} />}

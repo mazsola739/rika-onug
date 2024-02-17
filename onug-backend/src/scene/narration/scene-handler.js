@@ -11,14 +11,14 @@ const NARRATION = 'actual_scene.narration'
 exports.sceneHandler = gameState => {
   const sceneTitle    = gameState.actual_scene.scene_title
   const selectedCards = gameState.selected_cards
-  const totalPlayers  = gameState.players.length
+  const totalPlayers  = Object.keys(gameState.players).length
   const conditions    = checkConditions(selectedCards, totalPlayers)
 
   //TODO easteregg / epic battle
   switch (sceneTitle) {
    case "EPIC_BATTLE":
       if (conditions.hasEpicBattle || conditions.hasEasterEgg) return {
-        [NARRATION]: roles.epicbattle(conditions.hasEasterEgg, conditions.hasEpicBattle, totalPlayers, conditions.nobadguys, conditions.nogoodguys)
+        [NARRATION]: roles.epicbattle(conditions.hasEasterEgg, conditions.hasEpicBattle, totalPlayers, conditions.hasBadGuys, conditions.hasGoodGuys)
       }
       break
     //! T W I L L I G H T 

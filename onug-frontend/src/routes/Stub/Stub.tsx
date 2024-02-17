@@ -90,7 +90,15 @@ export const Stub: React.FC = observer(() => {
 
   const useTestCase = useCallback(async () => {
     setDealStub(dealStubDoppelganger)
-    setInputValues(labels.map((label) => Object.keys(dealStubDoppelganger).find(testCaseLabel => testCaseLabel === label) ? dealStubDoppelganger[label] : 0))
+    setInputValues(
+      labels.map((label) =>
+        Object.keys(dealStubDoppelganger).find(
+          (testCaseLabel) => testCaseLabel === label
+        )
+          ? dealStubDoppelganger[label]
+          : 0
+      )
+    )
     const res = await fetch('/stub/populate/deal', {
       method: 'POST',
       headers: {

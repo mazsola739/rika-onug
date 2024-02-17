@@ -1,4 +1,4 @@
-const { logError } = require("../../../log");
+const { getRandomItemFromArray } = require("../utils")
 
 const random_easteregg_nobadguys = [
   "easteregg_nobadguys_text_1",
@@ -11,7 +11,7 @@ const random_easteregg_nobadguys = [
   "easteregg_nobadguys_text_8",
   "easteregg_nobadguys_text_9",
   "easteregg_nobadguys_text_10",
-];
+]
 const random_easteregg_nogoodguys = [
   "easteregg_nogoodguys_text_1",
   "easteregg_nogoodguys_text_2",
@@ -23,39 +23,24 @@ const random_easteregg_nogoodguys = [
   "easteregg_nogoodguys_text_8",
   "easteregg_nogoodguys_text_9",
   "easteregg_nogoodguys_text_10",
-];
+]
 
-exports.epicbattle = (
-  easterEgg,
-  battle,
-  totalPlayers,
-  nobadguys,
-  nogoodguys
-) => {
-  const result = [];
+exports.epicbattle = (hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
+  if (hasEpicBattle) {
+    return ["everyone_epic_intro_text"]
+  }
+  
+  const result = []
 
-  if (easterEgg) {
+  if (hasEasterEgg) {
     if (totalPlayers === 12) {
-      result.push("easteregg_really_text", "easteregg_whatever_text");
-      logError("_______________RESULT: ", result);
+      result.push("easteregg_really_text", "easteregg_whatever_text")
     } else if (nobadguys) {
-      result.push(
-        getRandomItemFromArray(random_easteregg_nobadguys),
-        "easteregg_whatever_text"
-      );
-      logError("_______________RESULT: ", result);
+      result.push(getRandomItemFromArray(random_easteregg_nobadguys), "easteregg_whatever_text")
     } else if (nogoodguys) {
-      result.push(
-        getRandomItemFromArray(random_easteregg_nogoodguys),
-        "easteregg_whatever_text"
-      );
-      logError("_______________RESULT: ", result);
+      result.push(getRandomItemFromArray(random_easteregg_nogoodguys), "easteregg_whatever_text")
     }
-  } else if (battle) {
-    result.push("everyone_epic_intro_text");
-    logError("_______________RESULT: ", result);
   }
 
-  logError("_______________RESULT: ", result);
-  return result;
-};
+  return result
+}

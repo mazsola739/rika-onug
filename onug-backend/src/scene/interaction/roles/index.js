@@ -40,7 +40,7 @@ const { nostradamus, nostradamus_response }                       = require("./n
 const { psychic }                                                 = require("./psychic")
 const { detector, detector_response }                             = require("./detector")
 const { robber, robber_response }                                 = require("./robber")
-const { witch }                                                   = require("./witch")
+const { witch, witch_response }                                   = require("./witch")
 const { pickpocket, doppelganger_pickpocket }                     = require("./pickpocket")
 const { voodoolou }                                               = require("./voodoolou")
 const { troublemaker, troublemaker_response }                     = require("./troublemaker")
@@ -107,7 +107,7 @@ exports.roles = {
   psychic,
   detector, detector_response,
   robber, robber_response,
-  witch,
+  witch, witch_response,
   pickpocket, doppelganger_pickpocket,
   voodoolou,
   troublemaker, troublemaker_response,

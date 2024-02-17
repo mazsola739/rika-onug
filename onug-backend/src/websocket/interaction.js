@@ -70,7 +70,7 @@ const generateInteractionResponse = (gameState, token, selected_positions, ws) =
   if (interaction_type === "TROUBLEMAKER")                return roles.troublemaker_response(newGameState, token, selected_positions, 11, interaction_type)
   //if (interaction_type === "VILLAGE_IDIOT")               return roles.villageidiot_response(newGameState, token, selected_positions, 26)
   //if (interaction_type === "VOODOO_LOU")                  return roles.voodoolou_response(newGameState, token, selected_positions, 70)
-  //if (interaction_type === "WITCH")                       return roles.witch_response(newGameState, token, selected_positions, 27)
+  if (interaction_type === "WITCH")                       return roles.witch_response(newGameState, token, selected_positions)
   if (interaction_type === "WEREWOLVES")                  return roles.werewolves_response(newGameState, token, selected_positions)
 
   return newGameState
