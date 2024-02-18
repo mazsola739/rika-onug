@@ -4,7 +4,7 @@ const { centerCardPositions } = require('../constants')
 const { updatePlayerCard } = require('../update-player-card')
 
 //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
-exports.seer = (gameState, tokens) => {
+exports.seer = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -29,9 +29,9 @@ exports.seer = (gameState, tokens) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: 'SEER',
+      title,
       token,
-      message: 'interaction_seer',
+      message: ['interaction_may_one_any_other', "conjunction_or", "interaction_seer_end"],
       selectable_cards: selectablePositions,
       selectable_card_limit: { player: 1, center: 2 },
       shielded_cards: newGameState.shield,
@@ -47,7 +47,7 @@ exports.seer = (gameState, tokens) => {
   return newGameState
 }
 
-exports.seer_response = (gameState, token, selected_positions) => {
+exports.seer_response = (gameState, token, selected_positions, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -79,9 +79,9 @@ exports.seer_response = (gameState, token, selected_positions) => {
 
   role_interactions.push({
     type: INTERACTION,
-    title: 'SEER',
+    title,
     token,
-    message: 'interaction_seer2',
+    message: ['interaction_saw_card', `${selected_positions[0]}`, showCards.length > 1 ? `${selected_positions[1]}`: ""],
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),

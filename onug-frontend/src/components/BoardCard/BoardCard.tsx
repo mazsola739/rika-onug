@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { CardBack, StyledBoardGameCard, Tokens } from './BoardGameCard.styles'
-import { BoardGameCardProps } from './BoardGameCard.types'
+import { CardBack, StyledBoardCard, Tokens } from './BoardCard.styles'
+import { BoardCardProps } from './BoardCard.types'
 import { deckStore, gameTableStore, interactionStore } from 'store'
 import { Icon, Token } from 'components'
 import { useClickHandler } from 'hooks'
 
-export const BoardGameCard: React.FC<BoardGameCardProps> = observer(
+export const BoardCard: React.FC<BoardCardProps> = observer(
   ({
     position,
     id,
     spy,
     isCenter,
-    ready,
-    selectable,
+    selectableCard,
     aliens,
     artifact,
     assassin,
@@ -62,7 +61,7 @@ export const BoardGameCard: React.FC<BoardGameCardProps> = observer(
     const [isSelected, setIsSelected] = useState(false)
     const { hasMarks } = gameTableStore
     const card = id === 0 ? '' : deckStore.getCardById(id)
-    const playerTokenName = ready ? `selected_${position}` : position
+    //TODO VOTED? const playerTokenName = ready ? `selected_${position}` : position
     const imgSrc =
       card && card.id !== 0
         ? `/assets/cards/${card.card_name}.png`
@@ -72,11 +71,11 @@ export const BoardGameCard: React.FC<BoardGameCardProps> = observer(
     const token = sessionStorage.getItem('token')
     const { handleInteraction } = useClickHandler(room_id, token)
 
-    const clickHandler = (cardType: string) => {
+    const cardClickHandler = (cardType: string) => {
       const maxCenterCardSelection = interactionStore.selectableCenterCardLimit
       const maxPlayerCardSelection = interactionStore.selectablePlayerCardLimit
 
-      if (selectable) {
+      if (selectableCard) {
         const isCenterCardType = cardType === 'center'
         const selectedCards = isCenterCardType
           ? interactionStore.selectedCenterCards
@@ -114,18 +113,18 @@ export const BoardGameCard: React.FC<BoardGameCardProps> = observer(
     }
 
     return (
-      <StyledBoardGameCard>
+      <StyledBoardCard>
         <Tokens>
-          {!isCenter && <Token tokenName={playerTokenName} size={35} />}
+          {!isCenter && <Token tokenName={position} size={45} />}
+          {!isCenter && shield && <Token tokenName="shield" size={45} />}
         </Tokens>
         <CardBack
           backgroundImage={imgSrc}
-          selectable={selectable}
-          onClick={() => clickHandler(isCenter ? 'center' : 'player')}
+          selectableCard={selectableCard}
+          onClick={() => cardClickHandler(isCenter ? 'center' : 'player')}
           isSelected={isSelected}
         />
         <Tokens>
-          {!isCenter && shield && <Token tokenName="shield" size={35} />}
           {isCenter && spy && <Icon iconName="spy" size={33} />}
           {!isCenter && artifact && <Icon iconName="artifact" size={33} />}
           {!isCenter && aliens && <Icon iconName="alien" size={33} />}
@@ -172,7 +171,7 @@ export const BoardGameCard: React.FC<BoardGameCardProps> = observer(
           {!isCenter && werewolves && <Icon iconName="werewolf" size={33} />}
         </Tokens>
         {!isCenter && hasMarks && <Token tokenName="mark_back" size={75} />}
-      </StyledBoardGameCard>
+      </StyledBoardCard>
     )
   }
 )

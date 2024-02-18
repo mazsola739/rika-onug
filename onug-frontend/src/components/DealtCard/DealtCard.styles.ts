@@ -1,13 +1,13 @@
 import styled from '@emotion/styled'
-import { StyledDealtGameCardProps } from './DealtGameCard.types'
+import { StyledDealtCardProps } from './DealtCard.types'
 
-export const StyledDealtGameCard = styled.div`
+export const StyledDealtCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
 `
 
-export const CardBack = styled.div<StyledDealtGameCardProps>`
+export const CardBack = styled.div<StyledDealtCardProps>`
   align-items: center;
   background-image: ${(props) => `url(${props.backgroundImage})`};
   background-position: center;

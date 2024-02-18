@@ -3,7 +3,7 @@ const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens , getKeys } = require("../utils")
 
 //? INFO: Beholder - Seer and Apprentice Seer stick up their thumbs for her to see, who may check their cards
-exports.beholder = (gameState, tokens) => {
+exports.beholder = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
 
   tokens.forEach((token) => {
@@ -20,9 +20,9 @@ exports.beholder = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),

@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 
 //? INFO: Exposer - May flip 0-3 center cards over, the max via app
 //TODO doppelganger
-exports.exposer = (gameState, tokens) => {
+exports.exposer = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -22,9 +22,9 @@ exports.exposer = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),

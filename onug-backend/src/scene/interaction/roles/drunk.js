@@ -4,7 +4,7 @@ const { centerCardPositions } = require("../constants")
 const { updatePlayerCard } = require("../update-player-card")
 
 //? INFO: Drunk – Swap your card with a card from center but does not look at his new card
-exports.drunk = (gameState, tokens) => {
+exports.drunk = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -25,9 +25,9 @@ exports.drunk = (gameState, tokens) => {
 
       role_interactions.push({
         type: INTERACTION,
-        title: "DRUNK",
+        title,
         token,
-        message: "interaction_drunk",
+        message: ["interaction_must_one_center"],
         selectable_cards: centerCardPositions,
         selectable_card_limit: { player: 0, center: 1 },
         shielded_cards: newGameState.shield,
@@ -40,9 +40,9 @@ exports.drunk = (gameState, tokens) => {
     } else {
       role_interactions.push({
         type: INTERACTION,
-        title: "DRUNK",
+        title,
         token,
-        message: "interaction_shielded",
+        message: ["interaction_shielded"],
         selectable_card_limit: { player: 0, center: 0 },
         shielded_cards: newGameState.shield,
         artifacted_cards: getKeys(newGameState.artifact),
@@ -58,7 +58,7 @@ exports.drunk = (gameState, tokens) => {
   return newGameState
 }
 
-exports.drunk_response = (gameState, token, selected_positions) => {
+exports.drunk_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -82,9 +82,9 @@ exports.drunk_response = (gameState, token, selected_positions) => {
 
   role_interactions.push({
     type: INTERACTION,
-    title: "DRUNK",
+    title,
     token,
-    message: "interaction_drunk_response",
+    message: ["interaction_swapped_cards",  `${selected_positions[0]}`, `player_${ player.player_number}`],
     swapped_cards: [`player_${player.player_number}`, `${selected_positions[0]}`],
     show_cards: newGameState.flipped,
     shielded_cards: newGameState.shield,

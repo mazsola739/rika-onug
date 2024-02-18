@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 
 //? INFO: Priest - Swaps his mark and one other player's mark with a Mark of Clarity. which purge other Marks)
 //TODO doppelganger
-exports.priest = (gameState, tokens) => {
+exports.priest = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -22,9 +22,9 @@ exports.priest = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       player_name: player?.name,

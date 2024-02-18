@@ -3,7 +3,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 
 //? INFO: Copycat - Looks at one card from the center and becomes that card. Does the action when called
 //! At this moment copycat never see flipped or shielded cards, ripple different
-exports.copycat = (gameState, tokens) => {
+exports.copycat = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -19,9 +19,9 @@ exports.copycat = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),
@@ -40,7 +40,7 @@ updatePlayerCard(newGameState, token)
   return newGameState
 }
 
-exports.copycat_response = (gameState, token, selected_positions) => {
+exports.copycat_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }

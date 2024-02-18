@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 
 //? INFO: Diseased - Gives either player to right or left a Mark of Disease whoever votes for either the marked or player loses
 //! NO flipped card but shield
-exports.diseased = (gameState, tokens) => {
+exports.diseased = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -22,9 +22,9 @@ exports.diseased = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       player_name: player?.name,
@@ -39,7 +39,7 @@ exports.diseased = (gameState, tokens) => {
   return newGameState
 }
 
-exports.diseased_response = (gameState, token, selected_positions) => {
+exports.diseased_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }

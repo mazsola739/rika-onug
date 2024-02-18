@@ -5,18 +5,7 @@ const { getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, ge
 //? INFO: Curator - Gives any player (including himself) a random, unknown Artifact. Cannot give to a Shielded player.
 //TODO doppelganger separated 
 //! cant give to shielded
-exports.curator = (gameState, tokens, role_id, title) => {
-  const roleMapping = {
-    1: {
-      title,
-      message: 'interaction_doppelganger_curator'
-    },
-    20: {
-      title,
-      message: 'interaction_curator'
-    }
-  }
-
+exports.curator = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -41,9 +30,9 @@ exports.curator = (gameState, tokens, role_id, title) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: roleMapping[role_id].title,
+      title,
       token,
-      message: roleMapping[role_id].message,
+      message: ["artifact", "interaction_may_one_any"],
       selectable_cards: selectablePlayersWithNoArtifact,
       selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
@@ -59,18 +48,7 @@ exports.curator = (gameState, tokens, role_id, title) => {
   return newGameState
 }
 
-exports.curator_response = (gameState, token, selected_positions, role_id, title) => {
-  const roleMapping = {
-    1: {
-      title,
-      message: 'interaction_doppelganger_curator'
-    },
-    20: {
-      title,
-      message: 'interaction_curator'
-    }
-  }
-
+exports.curator_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -89,9 +67,9 @@ exports.curator_response = (gameState, token, selected_positions, role_id, title
 
   role_interactions.push({
     type: INTERACTION,
-    title: roleMapping[role_id].title,
+    title,
     token,
-    message: roleMapping[role_id].message,
+    message: ["artifact", "interaction_placed_artifact", `${selected_positions[0]}`],
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),
     new_artifact_card: [selected_positions[0]],

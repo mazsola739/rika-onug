@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 
 //? INFO: Vampire (2) - Open their eyes and view their fellow Vampires (including The Count and The Master). Then decide together to give one non-Vampire the Mark of the Vampire, which turns them into a Vampire
 //! NO flipped card but shield
-exports.vampires = (gameState, tokens) => {
+exports.vampires = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -22,9 +22,9 @@ exports.vampires = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       player_name: player?.name,
@@ -37,7 +37,7 @@ exports.vampires = (gameState, tokens) => {
   return newGameState
 }
 
-exports.vampires_response = (gameState, token, selected_positions) => {
+exports.vampires_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }

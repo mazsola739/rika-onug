@@ -3,7 +3,7 @@ const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens , getKeys } = require("../utils")
 
 //? INFO: Aura Seer - All players that have viewed or moved a card or mark stick up their thumbs for her to see (list of roles in FAQ)
-exports.auraseer = (gameState, tokens) => {
+exports.auraseer = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
 
   tokens.forEach((token) => {
@@ -20,9 +20,9 @@ exports.auraseer = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),

@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 
 //? INFO: Gremlin - Swap any two player's (even himself) cards or marks (not both)
 //TODO doppelganger
-exports.gremlin = (gameState, tokens) => {
+exports.gremlin = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -22,9 +22,9 @@ exports.gremlin = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),

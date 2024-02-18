@@ -1,6 +1,7 @@
 import { makeObservable, observable, action } from 'mobx'
 import { doppelgangerStore, oracleStore, roleStore } from './roleStores'
 import { WsJsonMessage } from 'types'
+import * as constants from '../constant'
 
 class InteractionStore {
   lastJsonMessage: WsJsonMessage = {}
@@ -10,6 +11,8 @@ class InteractionStore {
   selectedCards: string[] = []
   selectablePlayerCardLimit = 0
   selectableCenterCardLimit = 0
+  message: string[] = []
+  messageIcon = ''
 
   constructor() {
     makeObservable(this, {
@@ -58,6 +61,24 @@ class InteractionStore {
 
   setLastJsonMessage(lastJsonMessage: WsJsonMessage): void {
     this.lastJsonMessage = lastJsonMessage
+  }
+
+  setMessage(message: string[]): void {
+    this.messageIcon = message[0]
+    this.message = message.slice(1)
+  }
+
+  getMessage(): string | undefined {
+    if (!this.message || this.message.length === 0) {
+      return ''
+    }
+
+    const message = this.message
+      .map((constantName) => constants[constantName as keyof typeof constants])
+      .filter((constantValue) => constantValue !== undefined)
+      .join(' ')
+
+    return message || ''
   }
 
   setInteraction(title: string): void {

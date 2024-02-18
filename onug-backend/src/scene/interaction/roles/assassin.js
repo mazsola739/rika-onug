@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 
 //TODO doppelganger
 //! NO flipped card but shield
-exports.assassin = (gameState, tokens) => {
+exports.assassin = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   
@@ -22,9 +22,9 @@ exports.assassin = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),

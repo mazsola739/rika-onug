@@ -5,7 +5,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 //TODO doppelganger
 //? INFO: The Count - Gives a non-Vampire the Mark of Fear; this prevents that player from doing their night action
 //! NO flipped card but shield
-exports.thecount = (gameState, tokens) => {
+exports.thecount = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -23,9 +23,9 @@ exports.thecount = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       player_name: player?.name,
@@ -40,7 +40,7 @@ exports.thecount = (gameState, tokens) => {
   return newGameState
 }
 
-exports.thecount_response = (gameState, token, selected_positions) => {
+exports.thecount_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }

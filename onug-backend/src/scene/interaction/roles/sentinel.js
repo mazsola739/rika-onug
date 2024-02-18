@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield,
 
 //? INFO: Sentinel - Place a Shield token on any other player's card that card (not mark) cannot be looked at or moved
 //! MARK_OF_FEAR
-exports.sentinel = (gameState, tokens) => {
+exports.sentinel = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -27,9 +27,9 @@ exports.sentinel = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "SENTINEL",
+      title,
       token,
-      message: "interaction_sentinel",
+      message: ["interaction_may_one_any_other"],
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
@@ -46,7 +46,7 @@ exports.sentinel = (gameState, tokens) => {
   return newGameState
 }
 
-exports.sentinel_response = (gameState, token, selected_positions) => {
+exports.sentinel_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -63,9 +63,9 @@ exports.sentinel_response = (gameState, token, selected_positions) => {
 
   role_interactions.push({
     type: INTERACTION,
-    title: "SENTINEL",
+    title,
     token,
-    message: "interaction_sentinel2",
+    message: ["interaction_placed_shield", `${selected_positions[0]}`],
     shielded_cards: newGameState.shield,
     new_shield_card: [selected_positions[0]],
     artifacted_cards: getKeys(newGameState.artifact),

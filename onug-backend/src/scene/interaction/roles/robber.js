@@ -3,18 +3,7 @@ const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements, getKeys } = require("../utils")
 
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
-exports.robber = (gameState, tokens, role_id, title) => {
-  const roleMapping = {
-    8: {
-      title,
-      message: 'interaction_robber'
-    },
-    66: {
-      title,
-      message: 'interaction_roleretriever'
-    }
-  }
-
+exports.robber = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -38,21 +27,17 @@ exports.robber = (gameState, tokens, role_id, title) => {
 
       role_interactions.push({
         type: INTERACTION,
-        title: roleMapping[role_id].title,
+        title,
         token,
-        message: roleMapping[role_id].message,
+        message: ["interaction_may_one_any_other"],
         selectable_cards: selectablePlayersWithNoShield,
         selectable_card_limit: { player: 1, center: 0 },
         shielded_cards: newGameState.shield,
         artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
-        player_original_id: playerCard?.player_original_id,
-        player_card_id: playerCard?.player_card_id,
-        player_role: playerCard?.player_role,
-        player_role_id: playerCard?.player_role_id,
-        player_team: playerCard?.player_team,
         player_number: player?.player_number,
+        ...playerCard,
       })
     } else if (newGameState.players[token].card.shield) {
       const roleHistory = {
@@ -62,20 +47,16 @@ exports.robber = (gameState, tokens, role_id, title) => {
 
       role_interactions.push({
         type: INTERACTION,
-        title: roleMapping[role_id].title,
+        title,
         token,
-        message: "interaction_shielded",
+        message: ["interaction_shielded"],
         selectable_card_limit: { player: 0, center: 0 },
         shielded_cards: newGameState.shield,
         artifacted_cards: getKeys(newGameState.artifact),
         show_cards: flippedCards,
         player_name: player?.name,
-        player_original_id: playerCard?.player_original_id,
-        player_card_id: playerCard?.player_card_id,
-        player_role: playerCard?.player_role,
-        player_role_id: playerCard?.player_role_id,
-        player_team: playerCard?.player_team,
         player_number: player?.player_number,
+        ...playerCard,
       })
     }
   })
@@ -84,18 +65,7 @@ exports.robber = (gameState, tokens, role_id, title) => {
   return newGameState
 }
 
-exports.robber_response = (gameState, token, selected_positions, role_id) => {
-  const roleMapping = {
-    8: {
-      title: 'ROBBER',
-      message: 'interaction_robber2'
-    },
-    66: {
-      title: 'ROLE_RETRIEVER',
-      message: 'interaction_roleretriever2'
-    }
-  }
-
+exports.robber_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -119,12 +89,12 @@ exports.robber_response = (gameState, token, selected_positions, role_id) => {
    player.role_history.swapped_cards = [selected_positions[0], `player_${ player.player_number}`]
    player.role_history.show_cards = showCards
    player.card_or_mark_action = true
-
+//TODO better message
   role_interactions.push({
     type: INTERACTION,
-    title: roleMapping[role_id].title,
+    title,
     token,
-    message: roleMapping[role_id].message,
+    message: ["interaction_swapped_cards", "interaction_saw_card", `player_${ player.player_number}`],
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),

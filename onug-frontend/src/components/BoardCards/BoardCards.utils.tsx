@@ -1,4 +1,4 @@
-import { BoardGameCard } from 'components'
+import { BoardCard } from 'components'
 import {
   CardContainer,
   PlayersCards,
@@ -15,13 +15,12 @@ const renderPlayerCards = () => {
     <CardContainer>
       <PlayersCards>
         {playerCards.map((card, index) => (
-          <BoardGameCard
+          <BoardCard
             key={index}
             isCenter={false}
             id={card.id}
             position={card.position}
-            ready={card.ready}
-            selectable={card.selectable}
+            selectableCard={card.selectableCard}
             aliens={card.aliens}
             artifact={card.artifact}
             assassin={card.assassin}
@@ -83,11 +82,11 @@ const renderCenterCard = () => {
         <CardContainer>
           <CardTitle>{title}</CardTitle>
           <CenterCards>
-            <BoardGameCard
+            <BoardCard
               id={card.id}
               position={card.position}
               isCenter={true}
-              selectable={card.selectable}
+              selectableCard={card.selectableCard}
               spy={card.spy}
             />
           </CenterCards>
@@ -108,12 +107,12 @@ const renderCenterCard = () => {
               return (
                 card &&
                 card.id !== null && (
-                  <BoardGameCard
+                  <BoardCard
                     key={index}
                     id={card.id}
                     position={card.position}
                     isCenter={true}
-                    selectable={card.selectable}
+                    selectableCard={card.selectableCard}
                     spy={card.spy}
                   />
                 )

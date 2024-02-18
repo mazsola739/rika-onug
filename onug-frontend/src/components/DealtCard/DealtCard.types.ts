@@ -1,10 +1,10 @@
-export interface DealtGameCardProps {
+export interface DealtCardProps {
   id: number
   position: string
   ready?: boolean
   isCenter: boolean
 }
 
-export interface StyledDealtGameCardProps {
+export interface StyledDealtCardProps {
   backgroundImage: string
 }

@@ -1,20 +1,21 @@
 import styled from '@emotion/styled'
-import { StyledBoardGameCardProps } from './BoardGameCard.types'
+import { StyledBoardCardProps } from './BoardCard.types'
 
-export const StyledBoardGameCard = styled.div`
+export const StyledBoardCard = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  align-items: center;
 `
 
-export const CardBack = styled.div<StyledBoardGameCardProps>`
+export const CardBack = styled.div<StyledBoardCardProps>`
   align-items: center;
   background-image: ${(props) => `url(${props.backgroundImage})`};
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
   border: ${(props) =>
-    props.selectable
+    props.selectableCard
       ? props.isSelected
         ? '3px solid yellow'
         : '3px solid green'
@@ -32,4 +33,5 @@ export const Tokens = styled.div`
   justify-content: center;
   color: red;
   gap: 2px;
+  min-height: 35px;
 `

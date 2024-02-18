@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 
 //? INFO: Leader - Aliens must stick out thumb for him to see. if all Aliens vote the Leader, they win, even if an Alien is killed. If Groob and Zerb are in play, he is on his own team wins if they survive
 //TODO doppelganger
-exports.leader = (gameState, tokens) => {
+exports.leader = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -22,9 +22,9 @@ exports.leader = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),

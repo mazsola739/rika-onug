@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 
 //? INFO: Groob - Wakes with other aliens. Wakes after to see Zerb. If Zerb is a player at vote, only wins if Zerb dies
 //TODO doppelganger check if groob zerb separately exist
-exports.groobzerb = (gameState, tokens) => {
+exports.groobzerb = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -22,9 +22,9 @@ exports.groobzerb = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),

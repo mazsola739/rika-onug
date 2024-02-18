@@ -3,7 +3,7 @@ export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 export type WsJsonMessage = {
   path?: string
   type?: string
-  message?: string
+  message?: string[]
   errors?: string[]
   room_id?: string
   stage?: string
@@ -195,9 +195,9 @@ export type PositionKeys =
 
 export type PositionProperties = {
   position: string
-  selectable: boolean
+  selectableCard: boolean
   id?: number
-  spy?: boolean
+  centerSpy?: boolean
   ready?: boolean
   aliens?: boolean
   artifact?: boolean
@@ -233,6 +233,7 @@ export type PositionProperties = {
   shield?: boolean
   smell?: boolean
   villains?: boolean
+  spy?: boolean
   sus?: boolean
   swap?: boolean
   tanner?: boolean

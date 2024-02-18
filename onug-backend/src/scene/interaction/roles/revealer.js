@@ -5,22 +5,7 @@ const { updatePlayerCard } = require("../update-player-card")
 
 //? INFO: Revealer - Turns and keeps one player's card face up unless they are not on the Villager Team
 //TODO doppelganger
-exports.revealer = (gameState, tokens, role_id, title) => {
-  const roleMapping = {
-    1: {
-      title,
-      message: title === "DOPPELGÄNGER_REVEALER" ? 'interaction_doppelganger_revealer' : 'interaction_doppelganger_flipper'
-    },
-    24: {
-      title,
-      message: 'interaction_revealer'
-    },
-    59: {
-      title,
-      message: 'interaction_flipper'
-    }
-  }
-
+exports.revealer = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -44,9 +29,9 @@ exports.revealer = (gameState, tokens, role_id, title) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: roleMapping[role_id].title,
+      title,
       token,
-      message: roleMapping[role_id].message,
+      message: ["interaction_may_one_any_other"],
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
@@ -62,23 +47,8 @@ exports.revealer = (gameState, tokens, role_id, title) => {
 
   return newGameState
 }
-
-exports.revealer_response = (gameState, token, selected_positions, role_id, title) => {
-  const roleMapping = {
-    1: {
-      title: title === "DOPPELGÄNGER_REVEALER" ? 'interaction_doppelganger_revealer' : 'interaction_doppelganger_flipper',
-      message: 'interaction_doppelganger_revealer2'
-    },
-    24: {
-      title,
-      message: 'interaction_revealer2'
-    },
-    59: {
-      title,
-      message: 'interaction_flipper2'
-    }
-  }
-
+//TODO better response message
+exports.revealer_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -102,9 +72,9 @@ exports.revealer_response = (gameState, token, selected_positions, role_id, titl
 
   role_interactions.push({
     type: INTERACTION,
-    title: roleMapping[role_id].title,
+    title,
     token,
-    message: roleMapping[role_id].message,
+    message: ["interaction_saw_card", `${selected_positions[0]}`],
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),
     show_cards: concatArraysWithUniqueElements(revealedCard, newGameState.flipped),

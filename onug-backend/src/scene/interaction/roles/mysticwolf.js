@@ -3,7 +3,7 @@ const { updatePlayerCard } = require("../update-player-card")
 const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getKeys } = require("../utils")
 
 //? INFO: Mystic Wolf - Wakes with other Werewolves. Wakes after and looks at any other player's card (not center or own)
-exports.mysticwolf = (gameState, tokens) => {
+exports.mysticwolf = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -26,9 +26,9 @@ exports.mysticwolf = (gameState, tokens) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: "MYSTIC_WOLF",
+      title,
       token,
-      message: "interaction_mysticwolf",
+      message: ["interaction_may_one_any_other"],
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
@@ -44,7 +44,7 @@ exports.mysticwolf = (gameState, tokens) => {
   return newGameState
 }
 
-exports.mysticwolf_response = (gameState, token, selected_positions) => {
+exports.mysticwolf_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -65,9 +65,9 @@ exports.mysticwolf_response = (gameState, token, selected_positions) => {
 
   role_interactions.push({
     type: INTERACTION,
-    title: "MYSTIC_WOLF",
+    title,
     token,
-    message: "interaction_mysticwolf2",
+    message: ["interaction_saw_card", `${selected_positions[0]}`],
     show_cards: showCards,
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),

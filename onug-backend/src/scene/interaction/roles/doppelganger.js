@@ -3,7 +3,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions, getPlayerN
 
 //? INFO: Doppelgänger - Looks at any other player's card and becomes that card. Does that action during but different time
 //! At this moment doppelganger never see flipped or shielded cards, ripple different
-exports.doppelganger = (gameState, tokens) => {
+exports.doppelganger = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -22,9 +22,9 @@ exports.doppelganger = (gameState, tokens) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: "DOPPELGÄNGER",
+      title,
       token,
-      message: "interaction_doppelganger",
+      message: ["copy", "interaction_must_one_any_other"],
       selectable_cards: selectablePlayerNumbers,
       selectable_card_limit: { player: 1, center: 0 },
       player_name: player?.name,
@@ -37,7 +37,7 @@ exports.doppelganger = (gameState, tokens) => {
   return newGameState
 }
 
-exports.doppelganger_response = (gameState, token, selected_positions) => {
+exports.doppelganger_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -59,9 +59,9 @@ exports.doppelganger_response = (gameState, token, selected_positions) => {
 
   role_interactions.push({
     type: INTERACTION,
-    title: "DOPPELGÄNGER",
+    title,
     token,
-    message: "interaction_doppelganger2",
+    message: ["copy", "interaction_you_are_that_role", `${playerCard.player_role}`],
     show_cards: showCards,
     new_role_id: playerCard.player_role_id,
     player_name: player.name,

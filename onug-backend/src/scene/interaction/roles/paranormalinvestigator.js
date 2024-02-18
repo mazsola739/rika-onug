@@ -4,7 +4,7 @@ const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getKeys, concatArraysWithUniqueElements, getCardIdsByPositions } = require("../utils")
 
 //? INFO: Paranormal Investigator - Looks at two other player's cards one at a time if he sees team they are not on the Villager Team he stops looking and becomes that role. May not look at any center cards.
-exports.paranormalinvestigator = (gameState, tokens) => {
+exports.paranormalinvestigator = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -28,9 +28,9 @@ exports.paranormalinvestigator = (gameState, tokens) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: "PARANORMAL_INVESTIGATOR",
+      title,
       token,
-      message: "interaction_paranormalinvestigator",
+      message: ["interaction_may_two_any_other"],
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 2, center: 0 },
       shielded_cards: newGameState.shield,
@@ -46,7 +46,7 @@ exports.paranormalinvestigator = (gameState, tokens) => {
   return newGameState
 }
 
-exports.paranormalinvestigator_response = (gameState, token, selected_positions) => {
+exports.paranormalinvestigator_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
   const newGameState = { ...gameState }
   const role_interactions = []
@@ -67,29 +67,24 @@ exports.paranormalinvestigator_response = (gameState, token, selected_positions)
         playerCard.player_card_id = 0
       }
     } else if (!townIds.includes(playerTwoCardId)) {
-
       showCards = selectedCards
       if (playerCard.original_id === playerOneCardId) {
         playerCard.player_card_id = 0
       }
-
-      playerCard.player_role_id = cardPositions[selected_positions[1]].id
       playerCard.player_role = cardPositions[selected_positions[1]].role
       playerCard.player_team = cardPositions[selected_positions[1]].team
     }
   } else if (!townIds.includes(playerOneCardId)) {
     showCards = [selectedCards[0]]
-
-    playerCard.player_role_id = cardPositions[selected_positions[0]].id
     playerCard.player_role = cardPositions[selected_positions[0]].role
     playerCard.player_team = cardPositions[selected_positions[0]].team
   }
-
+//TODO message not complete!
   role_interactions.push({
     type: INTERACTION,
-    title: "PARANORMAL_INVESTIGATOR",
+    title,
     token,
-    message: "interaction_paranormalinvestigator2",
+    message: ["interaction_saw_card"],
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),

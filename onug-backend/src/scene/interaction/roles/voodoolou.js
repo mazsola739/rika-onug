@@ -2,7 +2,7 @@ const { INTERACTION } = require("../../../constant/ws")
 const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens , getKeys } = require("../utils")
 
-exports.voodoolou = (gameState, tokens) => {
+exports.voodoolou = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -20,9 +20,9 @@ exports.voodoolou = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),
@@ -36,7 +36,7 @@ exports.voodoolou = (gameState, tokens) => {
   return newGameState
 }
 
-exports.voodoolou_response = (gameState, token, selected_positions) => {
+exports.voodoolou_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }

@@ -69,10 +69,11 @@ export const GamePlay: React.FC = observer(() => {
       )
     }
     if (lastJsonMessage?.type === MESSAGE) {
-      console.log(lastJsonMessage.message)
+      interactionStore.toggleMessageBoxStatus(true)
     }
     if (lastJsonMessage?.type === INTERACTION) {
       interactionStore.setLastJsonMessage(lastJsonMessage)
+      interactionStore.setMessage(lastJsonMessage.message)
       interactionStore.setInteraction(lastJsonMessage.title)
       interactionStore.toggleMessageBoxStatus(true)
     }

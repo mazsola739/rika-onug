@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 
 //? INFO: Aliens - View their fellow Aliens (including Body Snatcher, Synthetic, Groob and Zerb) and do the action app says
 //! MARK_OF_FEAR
-exports.aliens = (gameState, tokens) => {
+exports.aliens = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -24,9 +24,9 @@ exports.aliens = (gameState, tokens) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: "ALIENS",
+      title,
       token,
-      message: "interaction_aliens",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),

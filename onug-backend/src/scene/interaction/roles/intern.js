@@ -2,7 +2,7 @@ const { INTERACTION } = require('../../../constant/ws')
 const { updatePlayerCard } = require('../update-player-card')
 const { getKeys, getMadScientistPlayerNumberByRoleIds } = require('../utils')
 
-exports.intern = (gameState, tokens) => {
+exports.intern = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -29,9 +29,9 @@ exports.intern = (gameState, tokens) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: 'INTERN',
+      title,
       token,
-      message: 'interaction_intern',
+      message: [madscientistPlayerNumbers.length === 0 ? "interaction_mad_now" : "interaction_mad"],
       madscientist: madscientistPlayerNumbers,
       selectable_card_limit: { player: 0, center: 0 },
       shielded_cards: newGameState.shield,

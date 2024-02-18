@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 //? INFO: Oracle - App asks her a question, she enters it on the app, when then reveals what she did to everyone
 //! At this moment oracle never see flipped or shielded cards, ripple different
 //* No doppelganger
-exports.oracle = (gameState, tokens) => {
+exports.oracle = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -20,9 +20,9 @@ exports.oracle = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),
@@ -39,7 +39,7 @@ exports.oracle = (gameState, tokens) => {
 }
 
 //TODO
-exports.oracle_response = (gameState, tokens) => {
+exports.oracle_response = (gameState, tokens, title) => {
   
   const newGameState = { ...gameState }
   const role_interactions = []

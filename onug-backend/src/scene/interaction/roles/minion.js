@@ -3,7 +3,7 @@ const { updatePlayerCard } = require("../update-player-card")
 const { getKeys } = require("../utils")
 
 //? INFO: Minion - All Werewolf team (not Minion/Squire) stick up their thumb for him to see
-exports.minion = (gameState, tokens) => {
+exports.minion = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -25,9 +25,9 @@ exports.minion = (gameState, tokens) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: "MINION",
+      title,
       token,
-      message: "interaction_minion",
+      message: ["interaction_werewolves"],
       werewolves: werewolfPlayerNumbers,
       selectable_card_limit: { player: 0, center: 0 },
       shielded_cards: newGameState.shield,

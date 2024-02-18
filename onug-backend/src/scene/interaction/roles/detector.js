@@ -3,7 +3,7 @@ const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens , getKeys } = require("../utils")
 
 //SAME as seer
-exports.detector = (gameState, tokens) => {
+exports.detector = (gameState, tokens, title) => {
   const newGameState = {...gameState}
 
   tokens.forEach((token) => {
@@ -20,9 +20,9 @@ exports.detector = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),
@@ -36,7 +36,7 @@ exports.detector = (gameState, tokens) => {
   return newGameState
 }
 
-exports.detector_response = (gameState, token, selected_positions) => {
+exports.detector_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }

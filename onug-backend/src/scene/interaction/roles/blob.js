@@ -4,7 +4,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 //TODO doppelganger same result as blob
 //! NEM KEL FEL, BLOB-NAK AZ ICON-T
 //? INFO: Blob -  Wins if no player part of him (left, right or both), via app, dies
-exports.blob = (gameState, tokens) => {
+exports.blob = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   
@@ -22,9 +22,9 @@ exports.blob = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),

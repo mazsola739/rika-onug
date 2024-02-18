@@ -3,7 +3,7 @@ const { updatePlayerCard } = require("../update-player-card")
 const { getNonWerewolfPlayerNumbersByRoleIds, getSelectablePlayersWithNoShield, getKeys } = require("../utils")
 
 //? INFO: Alpha Wolf - Wakes with other Werewolves. Wakes after and exchanges the center Alpha card with any other non-Werewolf player card
-exports.alphawolf = (gameState, tokens) => {
+exports.alphawolf = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -20,9 +20,9 @@ exports.alphawolf = (gameState, tokens) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: "ALPHA_WOLF",
+      title,
       token,
-      message: "interaction_alphawolf",
+      message: ["claw", "interaction_one_any_non_werewolf"],
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 },
       shielded_cards: newGameState.shield,
@@ -45,7 +45,7 @@ exports.alphawolf = (gameState, tokens) => {
 }
 
 //TODO check for null
-exports.alphawolf_response = (gameState, token, selected_positions) => {
+exports.alphawolf_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -60,15 +60,15 @@ exports.alphawolf_response = (gameState, token, selected_positions) => {
   cardPositions.center_wolf = selectedCard
   cardPositions[selected_positions[0]] = centerWolf
 
-  player.role_history.swapped_cards = [selected_positions[0], "center wolf"]
+  player.role_history.swapped_cards = [selected_positions[0], "center_wolf"]
   player.card_or_mark_action = true
 
   role_interactions.push({
     type: INTERACTION,
-    title: "ALPHA_WOLF",
+    title,
     token,
-    message: "interaction_alphawolf2",
-    swapped_cards: [selected_positions[0], "center wolf"],
+    message: ["claw", "interaction_swapped_cards", `${selected_positions[0]}`, "center_wolf"],
+    swapped_cards: [selected_positions[0], "center_wolf"],
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),
     show_cards: newGameState.flipped,

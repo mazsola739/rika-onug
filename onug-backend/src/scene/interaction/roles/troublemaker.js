@@ -3,18 +3,7 @@ const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getKeys } = require("../utils")
 
 //? INFO: Troublemaker - Swaps any two other player's cards (not her own or center) without looking at them
-exports.troublemaker = (gameState, tokens, role_id, title) => {
-  const roleMapping = {
-    11: {
-      title,
-      message: 'interaction_troublemaker'
-    },
-    68: {
-      title,
-      message: 'interaction_switcheroo'
-    }
-  }
-
+exports.troublemaker = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -39,9 +28,9 @@ exports.troublemaker = (gameState, tokens, role_id, title) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: roleMapping[role_id].title,
+      title,
       token,
-      message: roleMapping[role_id].message,
+      message: ["interaction_may_two_any_other"],
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 2, center: 0 },
       shielded_cards: newGameState.shield,
@@ -57,18 +46,7 @@ exports.troublemaker = (gameState, tokens, role_id, title) => {
   return newGameState
 }
 
-exports.troublemaker_response = (gameState, token, selected_positions, role_id, title) => {
-  const roleMapping = {
-    11: {
-      title,
-      message: 'interaction_troublemaker2'
-    },
-    68: {
-      title,
-      message: 'interaction_switcheroo2'
-    }
-  }
-
+exports.troublemaker_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -88,9 +66,9 @@ exports.troublemaker_response = (gameState, token, selected_positions, role_id, 
 
   role_interactions.push({
     type: INTERACTION,
-    title: roleMapping[role_id].title,
+    title,
     token,
-    message: roleMapping[role_id].message,
+    message: ["interaction_swapped_cards", `${selected_positions[0]}`, `${selected_positions[1]}`],
     swapped_cards: selected_positions.slice(0, 2),
     shielded_cards: newGameState.shield,
     artifacted_cards: getKeys(newGameState.artifact),

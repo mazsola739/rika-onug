@@ -3,7 +3,7 @@ const { updatePlayerCard } = require("../update-player-card")
 const { getTannerNumberByRoleIds, getKeys } = require("../utils")
 
 //? INFO: Apprentice Tanner - Tanner sticks out his thumb for him to see. Only wins if another Tanner dies. Multiple Apprentice Tanners are on the same team
-exports.apprenticetanner = (gameState, tokens) => {
+exports.apprenticetanner = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -25,9 +25,9 @@ exports.apprenticetanner = (gameState, tokens) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: "APPRENTICE_TANNER",
+      title,
       token,
-      message: "interaction_apprentice_tanner",
+      message: ["tanner", "interaction_tanner"],
       selectable_card_limit: { player: 0, center: 0 },
       tanner,
       shielded_cards: newGameState.shield,

@@ -5,16 +5,6 @@ const { getPlayerNumbersWithMatchingTokens, getKeys, getSelectablePlayersWithNoS
 
 //? INFO: Witch - May look at one center card. If she does she must swap it with any player's card (including hers)
 exports.witch = (gameState, tokens, role_id, title) => {
-  const roleMapping = {
-    27: {
-      title,
-      message: 'interaction_witch'
-    },
-    70: {
-      title,
-      message: 'interaction_voodoolou'
-    }
-  }
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -34,9 +24,9 @@ exports.witch = (gameState, tokens, role_id, title) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: roleMapping[role_id].title,
+      title,
       token,
-      message: roleMapping[role_id].message,
+      message: ["interaction_may_one_center"],
       selectable_cards: centerCardPositions,
       selectable_card_limit: { player: 0, center: 1 },
       shielded_cards: newGameState.shield,
@@ -52,7 +42,7 @@ exports.witch = (gameState, tokens, role_id, title) => {
   return newGameState
 }
 
-exports.witch_response = (gameState, token, selected_positions) => {
+exports.witch_response = (gameState, token, selected_positions, title) => {
 
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
   const newGameState = { ...gameState }
@@ -63,17 +53,6 @@ exports.witch_response = (gameState, token, selected_positions) => {
   const cardPositions =  newGameState.card_positions
 
   if (selected_positions[0].includes("center_")) {
-    const roleMapping = {
-      27: {
-        title,
-        message: 'interaction_witch2'
-      },
-      70: {
-        title,
-        message: 'interaction_voodoolou2'
-      }
-    }
-
   const showCards = getCardIdsByPositions(cardPositions, [selected_positions[0]])
   const selectedCenterCardPosition = cardPositions[selected_positions[0]]
 
@@ -97,9 +76,9 @@ exports.witch_response = (gameState, token, selected_positions) => {
 
   role_interactions.push({
     type: INTERACTION,
-    title: roleMapping[role_id].title,
+    title,
     token,
-    message: roleMapping[role_id].message,
+    message: ["interaction_saw_card", `${selected_positions[0]}`, "interaction_must_one_any"],
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     viewed_cards: [selected_positions[0]],
     selectable_cards: selectablePlayersWithNoShield,
@@ -112,17 +91,6 @@ exports.witch_response = (gameState, token, selected_positions) => {
   })
   newGameState.role_interactions = role_interactions
 } else if (selected_positions[0].includes("player_")) {
-    const roleMapping = {
-      27: {
-        title,
-        message: 'interaction_witch3'
-      },
-      70: {
-        title,
-        message: 'interaction_voodoolou3'
-      }
-    }
-
     const selectedCenterPositionCard = cardPositions[player.role_history.selected_center_card]
     const selectedPlayerPositionCard = cardPositions[selected_positions[0]]
 
@@ -146,9 +114,9 @@ exports.witch_response = (gameState, token, selected_positions) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: roleMapping[role_id].title,
+      title,
       token,
-      message: roleMapping[role_id].message,
+      message: ["interaction_swapped_cards", `${player.role_history.selected_center_card}`, `${selected_positions[0]}`],
       show_cards: newGameState.flipped,
       swapped_cards: [player.role_history.selected_center_card, selected_positions[0]],
       shielded_cards: newGameState.shield,

@@ -5,7 +5,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 //TODO doppelganger
 //? INFO: Apprentice Assassin - Wakes up to see who the Assassin is he can only win if the Assassin  dies. If there is no Assassin, he becomes the Assassin
 //! NO flipped card but shield
-exports.apprenticeassassin = (gameState, tokens) => {
+exports.apprenticeassassin = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   
@@ -25,9 +25,9 @@ exports.apprenticeassassin = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       player_name: player?.name,

@@ -5,7 +5,7 @@ const { getPlayerNumbersWithNonMatchingTokens, getPlayerTokensByPlayerNumber, ge
 //TODO doppelganger
 //? INFO: Renfield - With their eyes closed, sees who Vampires gave Mark of the Vampire then gives himself Mark of the Bat
 //! NO flipped card but shield
-exports.renfield = (gameState, tokens) => {
+exports.renfield = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -23,9 +23,9 @@ exports.renfield = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "",
+      title,
       token,
-      message: "interaction_",
+      message: [""],
       
       shielded_cards: newGameState.shield,
       player_name: player?.name,

@@ -61,11 +61,11 @@ class RoleStore {
           (lastJsonMessage.mortician || []).includes(position) || false
         const family =
           (lastJsonMessage.family || []).includes(position) || false
-        const selectable =
-          (lastJsonMessage.selectable_cards || []).includes(position) || false
         const spy =
           (lastJsonMessage.viewed_cards || []).includes(position) || false
 
+        const selectableCard =
+          (lastJsonMessage.selectable_cards || []).includes(position) || false
         const showCard = (lastJsonMessage?.show_cards || []).find(
           (showCardObj) => Object.keys(showCardObj)[0] === position
         )
@@ -74,8 +74,8 @@ class RoleStore {
         return {
           ...playerCard,
           id,
+          selectableCard,
           spy,
-          selectable,
           aliens,
           artifact,
           assassin,
@@ -129,14 +129,14 @@ class RoleStore {
         const { position } = centerCard
         const selectable =
           lastJsonMessage?.selectable_cards?.includes(position) || false
-        const spy =
+        const centerSpy =
           (lastJsonMessage.viewed_cards || []).includes(position) || false
         const showCard = (lastJsonMessage?.show_cards || []).find(
           (showCardObj) => Object.keys(showCardObj)[0] === position
         )
         const id = showCard ? showCard[position] : centerCard.id
 
-        return { ...centerCard, id, spy, selectable }
+        return { ...centerCard, id, centerSpy, selectable }
       }
     )
 

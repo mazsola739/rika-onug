@@ -4,7 +4,7 @@ const { centerCardPositions } = require("../constants")
 const { updatePlayerCard } = require("../update-player-card")
 
 //? INFO: Apprentice Seer - looks at one card from the center (not another players or her own)
-exports.apprenticeseer = (gameState, tokens) => {
+exports.apprenticeseer = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -24,9 +24,9 @@ exports.apprenticeseer = (gameState, tokens) => {
   
     role_interactions.push({
       type: INTERACTION,
-      title: "APPRENTICE_SEER",
+      title,
       token,
-      message: "interaction_apprenticeseer",
+      message: ["spy", "interaction_may_one_center"],
       selectable_cards: centerCardPositions,
       selectable_card_limit: { player: 0, center: 1 },
       shielded_cards: newGameState.shield,
@@ -42,7 +42,7 @@ exports.apprenticeseer = (gameState, tokens) => {
   return newGameState
 }
 
-exports.apprenticeseer_response = (gameState, token, selected_positions) => {
+exports.apprenticeseer_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -63,9 +63,9 @@ exports.apprenticeseer_response = (gameState, token, selected_positions) => {
 
   role_interactions.push({
     type: INTERACTION,
-    title: "APPRENTICE_SEER",
+    title,
     token,
-    message: "interaction_apprenticeseer2",
+    message: ["spy", "interaction_saw_card", `${selected_positions[0]}`],
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
     viewed_cards: [selected_positions[0]],
     shielded_cards: newGameState.shield,

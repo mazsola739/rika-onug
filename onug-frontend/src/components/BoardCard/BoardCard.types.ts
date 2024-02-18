@@ -1,10 +1,9 @@
-export interface BoardGameCardProps {
+export interface BoardCardProps {
   id: number
   spy?: boolean
   position: string
-  ready?: boolean
   isCenter: boolean
-  selectable?: boolean
+  selectableCard?: boolean
   aliens?: boolean
   artifact?: boolean
   assassin?: boolean
@@ -51,8 +50,8 @@ export interface BoardGameCardProps {
   werewolves?: boolean
 }
 
-export interface StyledBoardGameCardProps {
+export interface StyledBoardCardProps {
   backgroundImage: string
-  selectable?: boolean
+  selectableCard?: boolean
   isSelected?: boolean
 }

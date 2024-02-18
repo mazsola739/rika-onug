@@ -5,7 +5,7 @@ const { updatePlayerCard } = require("../update-player-card")
 
 //TODO DREAMWOLF & werewolf_response
 //? INFO: Werewolves (4) - Open their eyes and view their fellow Werewolves (including Mystic and Alpha)
-exports.werewolves = (gameState, tokens) => {
+exports.werewolves = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -33,9 +33,9 @@ exports.werewolves = (gameState, tokens) => {
 
     role_interactions.push({
       type: INTERACTION,
-      title: "WEREWOLVES",
+      title,
       token,
-      message: loneWolf ? "interaction_lonewolf" : "interaction_werewolves",
+      message: [loneWolf ? "spy" : "werewolf", loneWolf ? "interaction_may_one_center" : "interaction_werewolves"],
       werewolves: newGameState.werewolves,
       dreamwolf: newGameState.dreamwolf,
       selectable_cards: selectableCards,
@@ -53,7 +53,7 @@ exports.werewolves = (gameState, tokens) => {
   return newGameState
 }
 
-exports.werewolves_response = (gameState, token, selected_positions) => {
+exports.werewolves_response = (gameState, token, selected_positions, title) => {
   if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
@@ -74,9 +74,9 @@ exports.werewolves_response = (gameState, token, selected_positions) => {
 
   role_interactions.push({
     type: INTERACTION,
-    title: "WEREWOLVES",
+    title,
     token,
-    message: "interaction_lonewolf2",
+    message: ["spy", "interaction_saw_card", `${selected_positions[0]}`],
     werewolves: newGameState.werewolves,
     dreamwolf: newGameState.dreamwolf,
     show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
