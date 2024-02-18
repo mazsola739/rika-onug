@@ -13,7 +13,6 @@ export const MessageBox: React.FC = observer(() => {
 
   return (
     <StyledMessageBox>
-      {iconName.length > 0 && <Icon iconName={iconName} size={50} />}
       <Message>{message}</Message>
       <SendButton>
         {iconName.length > 0 && <Icon iconName={iconName} size={50} />}

@@ -4,7 +4,7 @@ const { updatePlayerCard } = require("../update-player-card")
 const { getPlayerNumbersWithMatchingTokens, getKeys, getSelectablePlayersWithNoShield, getAllPlayerTokens, getCardIdsByPositions, concatArraysWithUniqueElements } = require("../utils")
 
 //? INFO: Witch - May look at one center card. If she does she must swap it with any player's card (including hers)
-exports.witch = (gameState, tokens, role_id, title) => {
+exports.witch = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -12,29 +12,36 @@ exports.witch = (gameState, tokens, role_id, title) => {
   tokens.forEach((token) => {
     const player = players[token]
 
-    const roleHistory = {
+    const playerHistory = {
       ...newGameState.actual_scene,
       selectable_cards: centerCardPositions,
     }
-    player.role_history = roleHistory
+    player.player_history = playerHistory
 
     updatePlayerCard(newGameState, token)
     const playerCard = player?.card
     const flippedCards = newGameState.flipped
   
-    role_interactions.push({
+    
+
+role_interactions.push({
       type: INTERACTION,
       title,
       token,
-      message: ["interaction_may_one_center"],
-      selectable_cards: centerCardPositions,
-      selectable_card_limit: { player: 0, center: 1 },
-      shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
-      show_cards: flippedCards,
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
+      informations: {
+        message: ["interaction_may_one_center"],
+        icon: 'voodoo',
+        selectable_cards: centerCardPositions,
+        selectable_card_limit: { player: 0, center: 1 },
+        shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
+        show_cards: flippedCards,
+      },
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
     })
    })
   newGameState.role_interactions = role_interactions
@@ -44,7 +51,7 @@ exports.witch = (gameState, tokens, role_id, title) => {
 
 exports.witch_response = (gameState, token, selected_positions, title) => {
 
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+  if (selected_positions.every((position) => gameState.players[token].player_history.selectable_cards.includes(position)) === false) return gameState
   const newGameState = { ...gameState }
   const role_interactions = []
   const players = newGameState.players
@@ -64,7 +71,7 @@ exports.witch_response = (gameState, token, selected_positions, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(players, allPlayerTokens)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-  const roleHistory = {
+  const playerHistory = {
     ...newGameState.actual_scene,
     selectable_cards: selectablePlayersWithNoShield,
     selected_center_card: selected_positions[0],
@@ -72,32 +79,37 @@ exports.witch_response = (gameState, token, selected_positions, title) => {
     card_or_mark_action: true,
   }
 
-  player.role_history = roleHistory
+  player.player_history = playerHistory
 
-  role_interactions.push({
+  
+
+role_interactions.push({
     type: INTERACTION,
     title,
     token,
-    message: ["interaction_saw_card", `${selected_positions[0]}`, "interaction_must_one_any"],
-    show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
-    viewed_cards: [selected_positions[0]],
-    selectable_cards: selectablePlayersWithNoShield,
-    selectable_card_limit: { player: 1, center: 0 },
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    player_name: player?.name,
-    player_number: player?.player_number,
-    ...playerCard,
+    informations: {
+      message: ["interaction_saw_card", `${selected_positions[0]}`, "interaction_must_one_any"],
+      icon: 'voodoo',
+      viewed_cards: [selected_positions[0]],
+      shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
+    },
+    player: {
+      player_name: player?.name,
+      player_number: player?.player_number,
+      ...playerCard,
+    },
   })
   newGameState.role_interactions = role_interactions
 } else if (selected_positions[0].includes("player_")) {
-    const selectedCenterPositionCard = cardPositions[player.role_history.selected_center_card]
+    const selectedCenterPositionCard = cardPositions[player.player_history.selected_center_card]
     const selectedPlayerPositionCard = cardPositions[selected_positions[0]]
 
     const selectedCenterCard = { ...selectedCenterPositionCard }
     const selectedPlayerCard = { ...selectedPlayerPositionCard }
 
-    cardPositions[player.role_history.selected_center_card] = selectedPlayerCard
+    cardPositions[player.player_history.selected_center_card] = selectedPlayerCard
     cardPositions[selected_positions[0]] = selectedCenterCard
 
     const witchPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
@@ -110,20 +122,27 @@ exports.witch_response = (gameState, token, selected_positions, title) => {
       playerCard.player_team = currentCard.team
     }
 
-    player.role_history.swapped_cards = [player.role_history.selected_center_card, selected_positions[0]]
+    player.player_history.swapped_cards = [player.player_history.selected_center_card, selected_positions[0]]
 
-    role_interactions.push({
+    
+
+role_interactions.push({
       type: INTERACTION,
       title,
       token,
-      message: ["interaction_swapped_cards", `${player.role_history.selected_center_card}`, `${selected_positions[0]}`],
-      show_cards: newGameState.flipped,
-      swapped_cards: [player.role_history.selected_center_card, selected_positions[0]],
-      shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
+      informations: {
+        message: ["interaction_saw_card", "interaction_swapped_cards", `${player.player_history.selected_center_card}`, `${selected_positions[0]}`],
+        icon: 'voodoo',
+        swapped_cards: [player.player_history.selected_center_card, selected_positions[0]],
+        shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
+        show_cards: newGameState.flipped,
+      },
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
     })
     newGameState.role_interactions = role_interactions
   }

@@ -50,7 +50,7 @@ exports.interactionHandler = (gameState) => {
     case "MIRROR_MAN": //COPYCAT
       if (conditions.hasMirrorManPlayer) {
         tokens = getTokensByOriginalIds(players, [64])
-        return roles.mirrorman(newGameState, tokens, sceneTitle)
+        return roles.copycat(newGameState, tokens, sceneTitle)
       }
       break */
 
@@ -383,14 +383,14 @@ exports.interactionHandler = (gameState) => {
         tokens = getTokensByOriginalIds(players, [1])
         return roles.doppelganger_psychic(newGameState, tokens, sceneTitle)
       }
-      break
+      break */
 
-    case "DETECTOR": //SEER
+    case "DETECTOR": //? same as seer
       if (conditions.hasDetectorPlayer) {
         tokens = getTokensByOriginalIds(players, [56])
-        return roles.detector(newGameState, tokens, sceneTitle)
+        return roles.seer(newGameState, tokens, sceneTitle)
       }
-      break */
+      break
 
     case 'ROBBER':
       if (conditions.hasRobberPlayer) {

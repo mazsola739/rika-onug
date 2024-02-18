@@ -24,7 +24,7 @@ exports.stopGamePlay = gameState => {
     delete gameState.players[token].player_start_card_id
     delete gameState.players[token].card
     delete gameState.players[token].player_number
-    delete gameState.players[token].role_history
+    delete gameState.players[token].player_history
     gameState.players[token].ready = false
     
     delete gameState.card_positions

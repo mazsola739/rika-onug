@@ -18,30 +18,40 @@ exports.doppelganger_instant_action = (gameState, tokens, title) => {
   tokens.forEach((token) => {
     const player = players[token]
     
-    const new_role_id = player?.role_history?.new_role_id
+    const new_role_id = player?.player_history?.new_role_id
     if (!doppelgangerInstantActionsIds.includes(new_role_id)) return newGameState
 
     const roleName = instantRoleIds[new_role_id]
 
-    const roleHistory = {
+    const playerHistory = {
       ...newGameState.actual_scene,
       instant_night_action: roleName,
     }
-    player.role_history = roleHistory
-    player.role_history.copied_role = roleName
+    player.player_history = playerHistory
+    player.player_history.copied_role = roleName
 
     const playerCard = player?.card
   
-    role_interactions.push({
+    
+
+role_interactions.push({
       type: INTERACTION,
       title,
       token,
-      message: ["interaction_instant_night_action"],
-      instant_night_action: roleName,
-      new_role_id,
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
+      informations: {
+        message: ["interaction_instant_night_action"],
+        icon: 'night',
+        instant_night_action: roleName,
+        new_role_id,
+        shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
+        show_cards: flippedCards,
+      },
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
     })
   newGameState.role_interactions = role_interactions
   
@@ -74,13 +84,13 @@ exports.doppelganger_instant_action = (gameState, tokens, title) => {
 }
 
 exports.doppelganger_instant_action_response = (gameState, token) => {
-  const role = gameState?.players?.[token]?.role_history?.copied_role
+  const role = gameState?.players?.[token]?.player_history?.copied_role
 
   if (!role) {
     ws.send(
       JSON.stringify({
         type: INTERACTION,
-        message: ["nope"],
+        informations: { message: ['night', 'no_night_action'] },
       })
     )
     return gameState

@@ -16,30 +16,37 @@ exports.revealer = (gameState, tokens, title) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-    const roleHistory = {
+    const playerHistory = {
       ...newGameState.actual_scene,
       selectable_cards: selectablePlayersWithNoShield,
     }
 
-    player.role_history = roleHistory
+    player.player_history = playerHistory
 
     updatePlayerCard(newGameState, token)
     const playerCard = player?.card
     const flippedCards = newGameState.flipped
 
-    role_interactions.push({
+    
+
+role_interactions.push({
       type: INTERACTION,
       title,
       token,
-      message: ["interaction_may_one_any_other"],
-      selectable_cards: selectablePlayersWithNoShield,
-      selectable_card_limit: { player: 1, center: 0 },
-      shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
-      show_cards: flippedCards,
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
+      informations: {
+        message: ["interaction_may_one_any_other"],
+        icon: 'id',
+        selectable_cards: selectablePlayersWithNoShield,
+        selectable_card_limit: { player: 1, center: 0 },
+        shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
+        show_cards: flippedCards,
+      },
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
     })
   })
   
@@ -49,7 +56,7 @@ exports.revealer = (gameState, tokens, title) => {
 }
 //TODO better response message
 exports.revealer_response = (gameState, token, selected_positions, title) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+  if (selected_positions.every((position) => gameState.players[token].player_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
   const role_interactions = []
@@ -69,25 +76,33 @@ exports.revealer_response = (gameState, token, selected_positions, title) => {
   if (revealerCardInFlippedCards) {
     playerCard.player_card_id = 0
   }
+//todo not complete the message
+  
 
-  role_interactions.push({
+role_interactions.push({
     type: INTERACTION,
     title,
     token,
-    message: ["interaction_saw_card", `${selected_positions[0]}`],
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    show_cards: concatArraysWithUniqueElements(revealedCard, newGameState.flipped),
-    player_name: player?.name,
-    player_number: player?.player_number,
-    ...playerCard,
+    informations: {
+      message: ["interaction_saw_card", `${selected_positions[0]}`],
+      icon: 'id',
+      flipped_cards: `${selected_positions[0]}`,
+      shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: concatArraysWithUniqueElements(revealedCard, newGameState.flipped),
+    },
+    player: {
+      player_name: player?.name,
+      player_number: player?.player_number,
+      ...playerCard,
+    },
   })
 
   if (isTown) {
     newGameState.flipped.push(revealedCard[0])
-    newGameState.players[token].role_history.flipped_cards = revealedCard
+    newGameState.players[token].player_history.flipped_cards = revealedCard
   } else {
-    newGameState.players[token].role_history.show_cards = revealedCard
+    newGameState.players[token].player_history.show_cards = revealedCard
   }
 
   newGameState.role_interactions = role_interactions

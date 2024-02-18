@@ -28,7 +28,7 @@ exports.interaction = async (ws, message) => {
 }
 
 const generateInteractionResponse = (gameState, token, selected_positions, ws) => {
-  const interaction_type = gameState?.players?.[token]?.role_history?.scene_title
+  const interaction_type = gameState?.players?.[token]?.player_history?.scene_title
   logError('HAHÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓ',interaction_type)
   if (!interaction_type) {
     ws.send(JSON.stringify({

@@ -29,7 +29,10 @@ export type IconType =
   | 'fang'
   | 'fear'
   | 'friend'
+  | 'id'
+  | 'insomniac'
   | 'interaction'
+  | 'investigator'
   | 'jest'
   | 'like'
   | 'lover'
@@ -39,6 +42,7 @@ export type IconType =
   | 'mute'
   | 'newalien'
   | 'nice'
+  | 'night'
   | 'oracle'
   | 'pretty'
   | 'robber'
@@ -59,7 +63,9 @@ export type IconType =
   | 'ufo'
   | 'vampire'
   | 'villain'
+  | 'voodoo'
   | 'werewolf'
+  | 'witch'
 
 export interface IconProps {
   iconName: IconType

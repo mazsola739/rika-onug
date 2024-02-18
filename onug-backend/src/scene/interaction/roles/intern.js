@@ -12,11 +12,11 @@ exports.intern = (gameState, tokens, title) => {
   tokens.forEach((token) => {
     const player = players[token]
 
-    const roleHistory = {
+    const playerHistory = {
       ...newGameState.actual_scene,
       madscientist: madscientistPlayerNumbers,
     }
-    player.role_history = roleHistory
+    player.player_history = playerHistory
 
     updatePlayerCard(newGameState, token)
     const playerCard = player?.card
@@ -27,7 +27,9 @@ exports.intern = (gameState, tokens, title) => {
       playerCard.player_role = 'MAD_SCIENTIST'
     }
 
-    role_interactions.push({
+    
+
+role_interactions.push({
       type: INTERACTION,
       title,
       token,
@@ -37,9 +39,11 @@ exports.intern = (gameState, tokens, title) => {
       shielded_cards: newGameState.shield,
       artifacted_cards: getKeys(newGameState.artifact),
       show_cards: flippedCards,
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
     })
   })
   newGameState.role_interactions = role_interactions

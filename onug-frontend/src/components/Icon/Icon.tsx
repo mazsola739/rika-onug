@@ -27,7 +27,10 @@ import {
   FangIcon,
   FearIcon,
   FriendIcon,
+  IdIcon,
+  InsomniacIcon,
   InteractionIcon,
+  InvestigatorIcon,
   JestIcon,
   LikeIcon,
   LoverIcon,
@@ -37,6 +40,7 @@ import {
   MuteIcon,
   NewalienIcon,
   NiceIcon,
+  NightIcon,
   OpenIcon,
   OracleIcon,
   PrettyIcon,
@@ -59,7 +63,9 @@ import {
   UninstantiatedIcon,
   VampireIcon,
   VillainIcon,
+  VoodooIcon,
   WerewolfIcon,
+  WitchIcon,
 } from 'assets'
 import { StyledIcon } from './Icon.styles'
 import { IconType, IconProps } from './Icon.types'
@@ -96,7 +102,10 @@ export const Icons: Record<
   fang: FangIcon,
   fear: FearIcon,
   friend: FriendIcon,
+  id: IdIcon,
+  insomniac: InsomniacIcon,
   interaction: InteractionIcon,
+  investigator: InvestigatorIcon,
   jest: JestIcon,
   like: LikeIcon,
   lover: LoverIcon,
@@ -106,6 +115,7 @@ export const Icons: Record<
   mute: MuteIcon,
   newalien: NewalienIcon,
   nice: NiceIcon,
+  night: NightIcon,
   open: OpenIcon,
   oracle: OracleIcon,
   pretty: PrettyIcon,
@@ -128,7 +138,9 @@ export const Icons: Record<
   uninstantiated: UninstantiatedIcon,
   vampire: VampireIcon,
   villain: VillainIcon,
+  voodoo: VoodooIcon,
   werewolf: WerewolfIcon,
+  witch: WitchIcon,
 }
 
 export const Icon: React.FC<IconProps> = ({ iconName, size }) => {

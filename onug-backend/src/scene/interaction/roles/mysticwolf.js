@@ -13,30 +13,37 @@ exports.mysticwolf = (gameState, tokens, title) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-    const roleHistory = {
+    const playerHistory = {
       ...newGameState.actual_scene,
       selectable_cards: selectablePlayersWithNoShield,
     }
 
-    player.role_history = roleHistory
+    player.player_history = playerHistory
 
     updatePlayerCard(newGameState, token)
     const playerCard = player?.card
     const flippedCards = newGameState.flipped
 
-    role_interactions.push({
+    
+
+role_interactions.push({
       type: INTERACTION,
       title,
       token,
-      message: ["interaction_may_one_any_other"],
-      selectable_cards: selectablePlayersWithNoShield,
-      selectable_card_limit: { player: 1, center: 0 },
-      shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
-      show_cards: flippedCards,
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
+      informations: {
+        message: ["interaction_may_one_any_other"],
+        icon: 'spy',
+        selectable_cards: selectablePlayersWithNoShield,
+        selectable_card_limit: { player: 1, center: 0 },
+        shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
+        show_cards: flippedCards,
+      },
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
     })
   })
   newGameState.role_interactions = role_interactions
@@ -45,7 +52,7 @@ exports.mysticwolf = (gameState, tokens, title) => {
 }
 
 exports.mysticwolf_response = (gameState, token, selected_positions, title) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+  if (selected_positions.every((position) => gameState.players[token].player_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
   const role_interactions = []
@@ -60,20 +67,28 @@ exports.mysticwolf_response = (gameState, token, selected_positions, title) => {
     playerCard.player_card_id = 0
   }
 
-  player.role_history.show_cards = showCards
+  player.player_history.show_cards = showCards
   player.card_or_mark_action = true
 
-  role_interactions.push({
+  
+
+role_interactions.push({
     type: INTERACTION,
     title,
     token,
-    message: ["interaction_saw_card", `${selected_positions[0]}`],
-    show_cards: showCards,
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
+    informations: {
+      message: ["interaction_saw_card", `${selected_positions[0]}`],
+      icon: 'spy',
+      viewed_card: selected_positions[0],
+      shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: flippedCards,
+    },
+    player: {
       player_name: player?.name,
       player_number: player?.player_number,
       ...playerCard,
+    },
   })
   newGameState.role_interactions = role_interactions
  

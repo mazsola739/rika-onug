@@ -1,5 +1,6 @@
 //messages
 export const message_tapped = 'You got tapped by your neighbor'
+export const no_night_action = 'No such a night action, sorry'
 
 //any other player
 export const interaction_may_one_any_other = 'You may choose any other player'

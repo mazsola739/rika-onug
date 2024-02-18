@@ -1,6 +1,5 @@
 const { oracle, oracle_response }                                 = require("./oracle")
 const { copycat, copycat_response}                                = require("./copycat")
-const { mirrorman, mirrorman_response }                           = require("./mirrorman")
 const { doppelganger, doppelganger_response }                     = require("./doppelganger")
 const { vampires, vampires_response }                             = require("./vampires")
 const { thecount, doppelganger_thecount, thecount_response }      = require("./thecount")
@@ -38,11 +37,9 @@ const { paranormalinvestigator, paranormalinvestigator_response } = require("./p
 const { marksman }                                                = require("./marksman")
 const { nostradamus, nostradamus_response }                       = require("./nostradamus")
 const { psychic }                                                 = require("./psychic")
-const { detector, detector_response }                             = require("./detector")
 const { robber, robber_response }                                 = require("./robber")
 const { witch, witch_response }                                   = require("./witch")
 const { pickpocket, doppelganger_pickpocket }                     = require("./pickpocket")
-const { voodoolou }                                               = require("./voodoolou")
 const { troublemaker, troublemaker_response }                     = require("./troublemaker")
 const { villageidiot }                                            = require("./villageidiot")
 const { auraseer }                                                = require("./auraseer")
@@ -63,7 +60,6 @@ const { familyman }                                               = require("./f
 exports.roles = {
   oracle, oracle_response,
   copycat, copycat_response,
-  mirrorman, mirrorman_response,
   doppelganger, doppelganger_response,
   vampires, vampires_response,
   thecount, doppelganger_thecount, thecount_response,
@@ -105,11 +101,9 @@ exports.roles = {
   marksman,
   nostradamus, nostradamus_response,
   psychic,
-  detector, detector_response,
   robber, robber_response,
   witch, witch_response,
   pickpocket, doppelganger_pickpocket,
-  voodoolou,
   troublemaker, troublemaker_response,
   villageidiot,
   auraseer,

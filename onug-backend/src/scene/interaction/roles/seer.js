@@ -16,30 +16,37 @@ exports.seer = (gameState, tokens, title) => {
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
     const selectablePositions = concatArraysWithUniqueElements(centerCardPositions, selectablePlayersWithNoShield)
 
-    const roleHistory = {
+    const playerHistory = {
       ...newGameState.actual_scene,
       selectable_cards: selectablePositions,
     }
 
-    player.role_history = roleHistory
+    player.player_history = playerHistory
 
     updatePlayerCard(newGameState, token)
     const playerCard = player?.card
     const flippedCards = newGameState.flipped
 
-    role_interactions.push({
+    
+
+role_interactions.push({
       type: INTERACTION,
       title,
       token,
-      message: ['interaction_may_one_any_other', "conjunction_or", "interaction_seer_end"],
-      selectable_cards: selectablePositions,
-      selectable_card_limit: { player: 1, center: 2 },
-      shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
-      show_cards: flippedCards,
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
+      informations: {
+        message: ['interaction_may_one_any_other', "conjunction_or", "interaction_seer_end"],
+        icon: 'seer',
+        selectable_cards: selectablePositions,
+        selectable_card_limit: { player: 1, center: 2 },
+        shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
+        show_cards: flippedCards,
+      },
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
     })
   })
   newGameState.role_interactions = role_interactions
@@ -58,11 +65,11 @@ exports.seer_response = (gameState, token, selected_positions, title) => {
   const centerCards = selected_positions.some((pos) => pos.includes('center'))
 
   const player = players[token]
-  const roleHistory = player.role_history.selectable_cards
+  const playerHistory = player.player_history.selectable_cards
 
-  if (playerCards && !centerCards && roleHistory.includes(selected_positions[0])) {
+  if (playerCards && !centerCards && playerHistory.includes(selected_positions[0])) {
     showCards = getCardIdsByPositions(gameState?.card_positions, [selected_positions[0]])
-  } else if (centerCards && !playerCards && selected_positions.every((position) => roleHistory.includes(position))) {
+  } else if (centerCards && !playerCards && selected_positions.every((position) => playerHistory.includes(position))) {
     showCards = getCardIdsByPositions(gameState?.card_positions, selected_positions)
   } else {
     return newGameState
@@ -74,20 +81,28 @@ exports.seer_response = (gameState, token, selected_positions, title) => {
     playerCard.player_card_id = 0
   }
 
-  player.role_history.show_cards = showCards
+  player.player_history.show_cards = showCards
   player.card_or_mark_action = true
 
-  role_interactions.push({
+  
+
+role_interactions.push({
     type: INTERACTION,
     title,
     token,
-    message: ['interaction_saw_card', `${selected_positions[0]}`, showCards.length > 1 ? `${selected_positions[1]}`: ""],
-    show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    player_name: player?.name,
-    player_number: player?.player_number,
-    ...playerCard,
+    informations: {
+      message: ['interaction_saw_card', `${selected_positions[0]}`, showCards.length > 1 ? `${selected_positions[1]}`: ""],
+      icon: 'seer',
+      viewed_cards: showCards,
+      shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
+    },
+    player: {
+      player_name: player?.name,
+      player_number: player?.player_number,
+      ...playerCard,
+    },
   })
   newGameState.role_interactions = role_interactions
 

@@ -1,82 +1,75 @@
-const { INTERACTION } = require("../../../constant/ws")
-const { updatePlayerCard } = require("../update-player-card")
-const { getNonWerewolfPlayerNumbersByRoleIds, getSelectablePlayersWithNoShield, getKeys } = require("../utils")
+const { generateRoleInteractions } = require("../generate-role-interactions")
+const { getNonWerewolfPlayerNumbersByRoleIds, getSelectablePlayersWithNoShield } = require("../utils")
 
 //? INFO: Alpha Wolf - Wakes with other Werewolves. Wakes after and exchanges the center Alpha card with any other non-Werewolf player card
 exports.alphawolf = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
-  const players = newGameState.players
 
-  const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(players)
-  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
-
-  tokens.forEach((token) => {
-    const player = players[token]
-
-    updatePlayerCard(newGameState, token)
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
-
-    role_interactions.push({
-      type: INTERACTION,
-      title,
-      token,
-      message: ["claw", "interaction_one_any_non_werewolf"],
-      selectable_cards: selectablePlayersWithNoShield,
-      selectable_card_limit: { player: 1, center: 0 },
-      shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
-      show_cards: flippedCards,
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
-    })
-
-    const roleHistory = {
-      ...newGameState.actual_scene,
-      selectable_cards: selectablePlayersWithNoShield,
-    }
-    player.player_history.push(roleHistory)
-  })
-  newGameState.role_interactions = role_interactions
+  tokens.forEach(token => {
+    const players = newGameState.players
+    
+    const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(players)
+    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
   
-  return newGameState
+    role_interactions.push(
+      generateRoleInteractions(
+        newGameState,
+        title,
+        token,
+        ["interaction_one_any_non_werewolf"],
+        'claw',
+        { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
+        null,
+        null,
+        null,
+        null
+      )
+    )
+
+    const playerHistory = {
+      ...newGameState.actual_scene,
+      selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 }
+    }
+    players[token].player_history.push(playerHistory)
+  })
+
+  return { ...newGameState, role_interactions }
 }
 
 //TODO check for null
 exports.alphawolf_response = (gameState, token, selected_positions, title) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+  if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
+    return gameState
+  }
 
   const newGameState = { ...gameState }
-  const role_interactions = []
-  const players = newGameState.players
-  const player = players[token]
-  const playerCard = player?.card
-  const cardPositions =  newGameState.card_positions
+  const player = newGameState.players[token]
+  const cardPositions = newGameState.card_positions
 
   const centerWolf = { ...cardPositions.center_wolf }
   const selectedCard = { ...cardPositions[selected_positions[0]] }
   cardPositions.center_wolf = selectedCard
   cardPositions[selected_positions[0]] = centerWolf
 
-  player.role_history.swapped_cards = [selected_positions[0], "center_wolf"]
+  player.player_history.swapped_cards = [selected_positions[0], "center_wolf"]
   player.card_or_mark_action = true
 
-  role_interactions.push({
-    type: INTERACTION,
-    title,
-    token,
-    message: ["claw", "interaction_swapped_cards", `${selected_positions[0]}`, "center_wolf"],
-    swapped_cards: [selected_positions[0], "center_wolf"],
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    show_cards: newGameState.flipped,
-    player_name: player?.name,
-    player_number: player?.player_number,
-    ...playerCard,
-  })
-  newGameState.role_interactions = role_interactions
+  const role_interactions = [
+    generateRoleInteractions(
+      newGameState,
+      title,
+      token,
+      ["interaction_swapped_cards", selected_positions[0], "center_wolf"],
+      'claw',
+      null,
+      null,
+      null,
+      null,
+      { swapped_cards: [selected_positions[0], 'center_wolf'] }
+    )
+  ]
 
-  return newGameState
+  return { ...newGameState, role_interactions }
 }
+

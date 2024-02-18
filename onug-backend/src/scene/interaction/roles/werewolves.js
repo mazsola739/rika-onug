@@ -19,33 +19,40 @@ exports.werewolves = (gameState, tokens, title) => {
   tokens.forEach((token) => {
     const player = players[token]
 
-    const roleHistory = {
+    const playerHistory = {
       ...newGameState.actual_scene,
       werewolves: newGameState.werewolves,
       dreamwolf: newGameState.dreamwolf,
       selectable_cards: selectableCards,
     }
-    player.role_history = roleHistory
+    player.player_history = playerHistory
     
     updatePlayerCard(newGameState, token)
     const playerCard = player?.card
     const flippedCards = newGameState.flipped
 
-    role_interactions.push({
+    
+
+role_interactions.push({
       type: INTERACTION,
       title,
       token,
-      message: [loneWolf ? "spy" : "werewolf", loneWolf ? "interaction_may_one_center" : "interaction_werewolves"],
-      werewolves: newGameState.werewolves,
-      dreamwolf: newGameState.dreamwolf,
-      selectable_cards: selectableCards,
-      selectable_card_limit: { player: 0, center: 1 },
-      shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
-      show_cards: flippedCards,
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
+      informations: {
+        message: [loneWolf ? "interaction_may_one_center" : "interaction_werewolves"],
+        icon: loneWolf ? "spy" : "werewolf",
+        werewolves: newGameState.werewolves,
+        dreamwolf: newGameState.dreamwolf,
+        selectable_cards: selectablePlayersWithNoShield,
+        selectable_card_limit: { player: 2, center: 0 },
+        shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
+        show_cards: flippedCards,
+      },
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
     })
   })
   newGameState.role_interactions = role_interactions
@@ -54,7 +61,7 @@ exports.werewolves = (gameState, tokens, title) => {
 }
 
 exports.werewolves_response = (gameState, token, selected_positions, title) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+  if (selected_positions.every((position) => gameState.players[token].player_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
   const role_interactions = []
@@ -69,22 +76,30 @@ exports.werewolves_response = (gameState, token, selected_positions, title) => {
     playerCard.player_card_id = 0
   }
 
-  player.role_history.show_cards = showCards
+  player.player_history.show_cards = showCards
   player.card_or_mark_action = true
 
-  role_interactions.push({
+  
+
+role_interactions.push({
     type: INTERACTION,
     title,
     token,
-    message: ["spy", "interaction_saw_card", `${selected_positions[0]}`],
-    werewolves: newGameState.werewolves,
-    dreamwolf: newGameState.dreamwolf,
-    show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    player_name: player?.name,
-    player_number: player?.player_number,
-    ...playerCard,
+    informations: {
+      message: ["interaction_saw_card", `${selected_positions[0]}`],
+      icon: "spy",
+      werewolves: newGameState.werewolves,
+      dreamwolf: newGameState.dreamwolf,
+      viewed_cards: `${selected_positions[0]}`,
+      shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
+    },
+    player: {
+      player_name: player?.name,
+      player_number: player?.player_number,
+      ...playerCard,
+    },
   })
   newGameState.role_interactions = role_interactions
 

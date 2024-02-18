@@ -13,29 +13,35 @@ exports.minion = (gameState, tokens, title) => {
   tokens.forEach((token) => {
     const player = players[token]
     
-    const roleHistory = {
+    const playerHistory = {
       ...newGameState.actual_scene,
       werewolves: werewolfPlayerNumbers,
     }
-    player.role_history = roleHistory
+    player.player_history = playerHistory
 
     updatePlayerCard(newGameState, token)
     const playerCard = player?.card
     const flippedCards = newGameState.flipped
 
-    role_interactions.push({
+    
+
+role_interactions.push({
       type: INTERACTION,
       title,
       token,
-      message: ["interaction_werewolves"],
-      werewolves: werewolfPlayerNumbers,
-      selectable_card_limit: { player: 0, center: 0 },
-      shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
-      show_cards: flippedCards,
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
+      informations: {
+        message: ['interaction_werewolves'],
+        icon: 'werewolf',
+        werewolves: werewolfPlayerNumbers,
+        shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
+        show_cards: flippedCards,
+      },
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
     })
   })
   newGameState.role_interactions = role_interactions

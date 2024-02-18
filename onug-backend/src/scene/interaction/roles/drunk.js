@@ -17,39 +17,52 @@ exports.drunk = (gameState, tokens, title) => {
     const flippedCards = newGameState.flipped
 
     if (!playerCard.shield) {
-      const roleHistory = {
+      const playerHistory = {
         ...newGameState.actual_scene,
         selectable_cards: centerCardPositions,
       }
-      player.role_history = roleHistory
+      player.player_history = playerHistory
 
-      role_interactions.push({
+      
+
+role_interactions.push({
         type: INTERACTION,
         title,
         token,
-        message: ["interaction_must_one_center"],
-        selectable_cards: centerCardPositions,
-        selectable_card_limit: { player: 0, center: 1 },
-        shielded_cards: newGameState.shield,
-        artifacted_cards: getKeys(newGameState.artifact),
-        show_cards: flippedCards,
-        player_name: player?.name,
-        player_number: player?.player_number,
-        ...playerCard,
+        informations: {
+          message: ["interaction_must_one_center"],
+          icon: 'drunk',
+          selectable_cards: centerCardPositions,
+          selectable_card_limit: { player: 0, center: 1 },
+          shielded_cards: newGameState.shield,
+          artifacted_cards: getKeys(newGameState.artifact),
+          show_cards: flippedCards,
+        },
+        player: {
+          player_name: player?.name,
+          player_number: player?.player_number,
+          ...playerCard,
+        },
       })
     } else {
-      role_interactions.push({
+      
+
+role_interactions.push({
         type: INTERACTION,
         title,
         token,
-        message: ["interaction_shielded"],
-        selectable_card_limit: { player: 0, center: 0 },
-        shielded_cards: newGameState.shield,
-        artifacted_cards: getKeys(newGameState.artifact),
-        show_cards: flippedCards,
-        player_name: player?.name,
-        player_number: player?.player_number,
-        ...playerCard,
+        informations: {
+          message: ["interaction_shielded"],
+          icon: 'shield',
+          shielded_cards: newGameState.shield,
+          artifacted_cards: getKeys(newGameState.artifact),
+          show_cards: flippedCards,
+        },
+        player: {
+          player_name: player?.name,
+          player_number: player?.player_number,
+          ...playerCard,
+        },
       })
     }
   })
@@ -59,7 +72,7 @@ exports.drunk = (gameState, tokens, title) => {
 }
 
 exports.drunk_response = (gameState, token, selected_positions, title) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+  if (selected_positions.every((position) => gameState.players[token].player_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
   const role_interactions = []
@@ -77,21 +90,28 @@ exports.drunk_response = (gameState, token, selected_positions, title) => {
   cardPositions[selected_positions[0]] = drunkCard
   player.card.player_card_id = 0
 
-  player.role_history.swapped_cards = [selected_positions[0], `player_${ player.player_number}`]
+  player.player_history.swapped_cards = [selected_positions[0], `player_${ player.player_number}`]
   player.card_or_mark_action = true
 
-  role_interactions.push({
+  
+
+role_interactions.push({
     type: INTERACTION,
     title,
     token,
-    message: ["interaction_swapped_cards",  `${selected_positions[0]}`, `player_${ player.player_number}`],
-    swapped_cards: [`player_${player.player_number}`, `${selected_positions[0]}`],
-    show_cards: newGameState.flipped,
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    player_name: player?.name,
-    player_number: player?.player_number,
-    ...playerCard,
+    informations: {
+      message: ["interaction_swapped_cards",  `${selected_positions[0]}`, `player_${ player.player_number}`],
+      icon: 'drunk',
+      swapped_cards: [`player_${player.player_number}`, `${selected_positions[0]}`],
+      shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: flippedCards,
+    },
+    player: {
+      player_name: player?.name,
+      player_number: player?.player_number,
+      ...playerCard,
+    },
   })
   newGameState.role_interactions = role_interactions
 

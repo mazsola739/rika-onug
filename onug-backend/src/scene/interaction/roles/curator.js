@@ -22,25 +22,32 @@ exports.curator = (gameState, tokens, title) => {
     const playerCard = player?.card
     const flippedCards = newGameState.flipped
 
-    const roleHistory = {
+    const playerHistory = {
       ...newGameState.actual_scene,
       selectable_cards: selectablePlayersWithNoArtifact,
     }
-    player.role_history = roleHistory
+    player.player_history = playerHistory
 
-    role_interactions.push({
+    
+
+role_interactions.push({
       type: INTERACTION,
       title,
       token,
-      message: ["artifact", "interaction_may_one_any"],
-      selectable_cards: selectablePlayersWithNoArtifact,
-      selectable_card_limit: { player: 1, center: 0 },
-      shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
-      show_cards: flippedCards,
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
+      informations: {
+        message: ['interaction_may_one_any'],
+        icon: 'artifact',
+        selectable_cards: selectablePlayersWithNoArtifact,
+        selectable_card_limit: { player: 1, center: 0 },
+        shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
+        show_cards: flippedCards,
+      },
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
     })
   })
   newGameState.role_interactions = role_interactions
@@ -49,7 +56,7 @@ exports.curator = (gameState, tokens, title) => {
 }
 
 exports.curator_response = (gameState, token, selected_positions, title) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+  if (selected_positions.every((position) => gameState.players[token].player_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
   const role_interactions = []
@@ -63,20 +70,27 @@ exports.curator_response = (gameState, token, selected_positions, title) => {
   const player = players[token]
   const playerCard = player?.card
   const artifactedCard = newGameState.artifact
-  player.role_history.artifacted_cards = artifactedCard
+  player.player_history.artifacted_cards = artifactedCard
 
-  role_interactions.push({
+  
+
+role_interactions.push({
     type: INTERACTION,
     title,
     token,
-    message: ["artifact", "interaction_placed_artifact", `${selected_positions[0]}`],
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    new_artifact_card: [selected_positions[0]],
-    show_cards: newGameState.flipped,
-    player_name: player?.name,
-    player_number: player?.player_number,
-    ...playerCard,
+    informations: {
+      message: ["interaction_placed_artifact", `${selected_positions[0]}`],
+      icon: 'artifact',
+      new_artifact_card: selected_positions[0],
+      shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: flippedCards,
+    },
+    player: {
+      player_name: player?.name,
+      player_number: player?.player_number,
+      ...playerCard,
+    },
   })
   newGameState.role_interactions = role_interactions
  

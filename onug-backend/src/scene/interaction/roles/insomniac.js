@@ -24,38 +24,51 @@ exports.insomniac = (gameState, tokens, title) => {
       
       const showCards = getCardIdsByPlayerNumbers(cardPositions, currentPlayerNumber)
 
-      const roleHistory = {
+      const playerHistory = {
         ...newGameState.actual_scene,
         show_cards: showCards,
       }
-      player.role_history = roleHistory
+      player.player_history = playerHistory
 
-      role_interactions.push({
+      
+
+role_interactions.push({
         type: INTERACTION,
         title,
         token,
-        message: ["interaction_own"],
-        selectable_card_limit: { player: 0, center: 0 },
-        shielded_cards: newGameState.shield,
-        artifacted_cards: getKeys(newGameState.artifact),
-        show_cards: concatArraysWithUniqueElements(showCards, flippedCards),
-        player_name: player?.name,
-        player_number: player?.player_number,
-        ...playerCard,
+        informations: {
+          message: ["interaction_own"],
+          icon: 'insomniac',
+          own_card: currentPlayerNumber,
+          shielded_cards: newGameState.shield,
+          artifacted_cards: getKeys(newGameState.artifact),
+          show_cards: concatArraysWithUniqueElements(showCards, flippedCards),
+        },
+        player: {
+          player_name: player?.name,
+          player_number: player?.player_number,
+          ...playerCard,
+        },
       })
     } else {
-      role_interactions.push({
+      
+
+role_interactions.push({
         type: INTERACTION,
         title,
         token,
-        message: ["interaction_shielded"],
-        selectable_card_limit: { player: 0, center: 0 },
-        shielded_cards: newGameState.shield,
-        artifacted_cards: getKeys(newGameState.artifact),
-        show_cards: flippedCards,
-        player_name: player?.name,
-        player_number: player?.player_number,
-        ...playerCard,
+        informations: {
+          message: ["interaction_shielded"],
+          icon: 'shield',
+          shielded_cards: newGameState.shield,
+          artifacted_cards: getKeys(newGameState.artifact),
+          show_cards: flippedCards,
+        },
+        player: {
+          player_name: player?.name,
+          player_number: player?.player_number,
+          ...playerCard,
+        },
       })
     }
   })

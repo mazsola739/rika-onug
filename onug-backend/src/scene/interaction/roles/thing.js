@@ -14,31 +14,38 @@ exports.thing = (gameState, tokens, title) => {
 
     const neighbors = getPlayerNeighborsByToken(players, token)
 
-    const roleHistory = {
+    const playerHistory = {
       ...newGameState.actual_scene,
       selectable_cards: neighbors
     }
   
-    player.role_history = roleHistory
+    player.player_history = playerHistory
   
     updatePlayerCard(newGameState, token)
     const playerCard = player?.card
     const flippedCards = newGameState.flipped
 
-  role_interactions.push({
-    type: INTERACTION,
-    title,
-    token,
-    message: ["interaction_must_one_neighbor"],
-    selectable_cards: neighbors,
-    selectable_card_limit: { player: 1, center: 0 },
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    show_cards: flippedCards,
-    player_name: player?.name,
-    player_number: player?.player_number,
-    ...playerCard,
-  })
+    
+
+role_interactions.push({
+      type: INTERACTION,
+      title,
+      token,
+      informations: {
+        message: ["interaction_must_one_neighbor"],
+        icon: 'tap',
+        selectable_cards: selectablePlayersWithNoShield,
+        selectable_card_limit: { player: 1, center: 0 },
+        shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
+        show_cards: flippedCards,
+      },
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
+    })
   })
   
   newGameState.role_interactions = role_interactions
@@ -47,7 +54,7 @@ exports.thing = (gameState, tokens, title) => {
 }
 
 exports.thing_response = (gameState, token, selected_positions, title) => {
-  if (selected_positions.every((position) => gameState.players[token].role_history.selectable_cards.includes(position)) === false) return gameState
+  if (selected_positions.every((position) => gameState.players[token].player_history.selectable_cards.includes(position)) === false) return gameState
 
   const newGameState = { ...gameState }
   const role_interactions = []
@@ -63,20 +70,27 @@ exports.thing_response = (gameState, token, selected_positions, title) => {
     message: ["message_tapped"],
   }))
 
-  player.role_history.tapped_player = selected_positions[0]
+  player.player_history.tapped_player = selected_positions[0]
 
-  role_interactions.push({
+  
+
+role_interactions.push({
     type: INTERACTION,
     title,
     token,
-    message: ["interaction_tap", `${selected_positions[0]}`],
-    tapped_player: [selected_positions[0]],
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    show_cards: newGameState.flipped,
-    player_name: player?.name,
-    player_number: player?.player_number,
-    ...playerCard,
+    informations: {
+      message: ["interaction_tap", `${selected_positions[0]}`],
+      icon: 'tap',
+      tapped_player: [selected_positions[0]],
+      shielded_cards: newGameState.shield,
+      artifacted_cards: getKeys(newGameState.artifact),
+      show_cards: flippedCards,
+    },
+    player: {
+      player_name: player?.name,
+      player_number: player?.player_number,
+      ...playerCard,
+    },
   })
   newGameState.role_interactions = role_interactions
 

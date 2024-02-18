@@ -11,26 +11,35 @@ exports.renfield = (gameState, tokens, title) => {
 
   tokens.forEach((token) => {
     const player = players[token]
-    const roleHistory = {
+    const playerHistory = {
       ...newGameState.actual_scene,
     }
   
-    newGameState.players[token].role_history = roleHistory
+    newGameState.players[token].player_history = playerHistory
       
     updatePlayerCard(newGameState, token)
     const playerCard = player?.card
     const flippedCards = newGameState.flipped
   
-    role_interactions.push({
+    
+
+role_interactions.push({
       type: INTERACTION,
       title,
       token,
-      message: [""],
-      
-      shielded_cards: newGameState.shield,
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
+      informations: {
+        message: [''],
+        icon: '',
+
+        shielded_cards: newGameState.shield,
+        artifacted_cards: getKeys(newGameState.artifact),
+        show_cards: flippedCards,
+      },
+      player: {
+        player_name: player?.name,
+        player_number: player?.player_number,
+        ...playerCard,
+      },
     })
   })
   newGameState.role_interactions = role_interactions

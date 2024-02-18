@@ -8,13 +8,14 @@ export const StyledMessageBox = styled.main`
   padding: 10px;
 `
 
-export const Message = styled.div`
+export const Message = styled.span`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-content: center;
   align-items: center;
+  color: white;
 `
 
 export const SendButton = styled.div`
