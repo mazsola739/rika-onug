@@ -11,20 +11,20 @@ class OracleStore {
     const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
       (playerCard) => {
         const { position } = playerCard
-        const selectable =
+        const selectable_cards =
           (lastJsonMessage.selectable_cards || []).includes(position) || false
 
-        return { ...playerCard, selectable }
+        return { ...playerCard, selectable_cards }
       }
     )
 
     const centerCards: PositionProperties[] = gameBoardStore.centerCards.map(
       (centerCard) => {
         const { position } = centerCard
-        const selectable =
+        const selectable_cards =
           (lastJsonMessage.selectable_cards || []).includes(position) || false
 
-        return { ...centerCard, selectable }
+        return { ...centerCard, selectable_cards }
       }
     )
 

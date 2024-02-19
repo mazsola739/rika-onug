@@ -3,18 +3,17 @@ export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 export type WsJsonMessage = {
   path?: string
   type?: string
-  message?: string[]
   errors?: string[]
   room_id?: string
-  stage?: string
-  title?: string
   player_name?: string
+  player_number?: number
   player_original_id?: number
   player_card_id?: number
   player_role?: string
   player_role_id?: number
   player_team?: string
-  player_number?: number
+  stage?: string
+  title?: string
   board?: {
     players?: PlayersType[]
     gamePlayBoardCards?: GamePlayBoardCardType[]
@@ -28,19 +27,32 @@ export type WsJsonMessage = {
     scene_title: string
     narration?: string[]
   }
-  selectable_cards?: string[]
-
-  selectable_marks?: string[]
-  selectable_card_limit?: { player: number; center: number; mark: number }
+  message?: string[]
+  icon?: string
   shielded_cards?: string[]
   artifacted_cards?: string[]
+  show_card?: Record<string, number>[]
   show_cards?: Record<string, number>[]
-  viewed_cards?: string[]
+  show_marks?: Record<string, number>[] //TODO correcting type
+  selectable_cards?: string[]
+  selectable_card_limit?: { player: number; center: number }
+  selectable_marks?: string[]
+  selectable_mark_limit?: { mark: number }
+
+  //unique informations
   new_role_id?: number
+  copied_role?: string
+  instant_night_action?: string
+  viewed_cards?: string[]
+  swapped_cards?: string[]
+  flipped_cards?: string[]
+  new_artifact_card?: string
+  new_shield_card?: string
+
+  //icons
   aliens?: string[]
   assassin?: string[]
   awesome?: string[]
-  babyalien?: string[]
   bat?: string[]
   blob?: string[]
   bulb?: string[]
@@ -73,7 +85,7 @@ export type WsJsonMessage = {
   sus?: string[]
   swap?: string[]
   tanner?: string[]
-  tapped_player?: string[]
+  tapped?: string[]
   target?: string[]
   traitor?: string[]
   trophy?: string[]
@@ -95,7 +107,7 @@ export type PositionType = {
   artifact?: boolean
   shield?: boolean
   mark?: string
-  selectable?: boolean
+  selectable_cards?: boolean
   ready?: boolean
 }
 
@@ -116,7 +128,7 @@ export type GamePlayBoardCardType = {
   card: {
     id: number
     spy: boolean
-    selectable: boolean
+    selectable_cards: boolean
     aliens: boolean
     artifact: boolean
     assassin: boolean
@@ -195,7 +207,7 @@ export type PositionKeys =
 
 export type PositionProperties = {
   position: string
-  selectableCard: boolean
+  selectable_cards: boolean
   id?: number
   centerSpy?: boolean
   ready?: boolean

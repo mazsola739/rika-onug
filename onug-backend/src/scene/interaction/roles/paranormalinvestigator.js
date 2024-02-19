@@ -1,64 +1,54 @@
-const { INTERACTION } = require("../../../constant/ws")
 const { townIds } = require("../constants")
 const { updatePlayerCard } = require("../update-player-card")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getKeys, concatArraysWithUniqueElements, getCardIdsByPositions } = require("../utils")
+const { generateRoleInteractions } = require("../generate-role-interactions")
+const { isValidSelection } = require("../validate-response-data")
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions } = require("../utils")
 
 //? INFO: Paranormal Investigator - Looks at two other player's cards one at a time if he sees team they are not on the Villager Team he stops looking and becomes that role. May not look at any center cards.
 exports.paranormalinvestigator = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
-  const players = newGameState.players
 
   tokens.forEach((token) => {
-    const player = players[token]
-
+    const { players } = newGameState
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-    const playerHistory = {
-      ...newGameState.actual_scene,
-      selectable_cards: selectablePlayersWithNoShield,
-    }
-
-    player.player_history = playerHistory
-
     updatePlayerCard(newGameState, token)
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
 
-    
+    role_interactions.push(
+      generateRoleInteractions(
+        newGameState,
+        title,
+        token,
+        ['interaction_may_two_any_other'],
+        'investigator',
+        { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 2, center: 0 } },
+        null,
+        null,
+        null,
+        null,
+      )
+    )
 
-role_interactions.push({
-      type: INTERACTION,
-      title,
-      token,
-      informations: {
-        message: ["interaction_may_two_any_other"],
-        icon: 'investigator',
-        selectable_cards: selectablePlayersWithNoShield,
-        selectable_card_limit: { player: 2, center: 0 },
-        shielded_cards: newGameState.shield,
-        artifacted_cards: getKeys(newGameState.artifact),
-        show_cards: flippedCards,
-      },
-      player: {
-        player_name: player?.name,
-        player_number: player?.player_number,
-        ...playerCard,
-      },
-    })
+    const playerHistory = {
+      ...newGameState.players[token].player_history,
+      ...newGameState.actual_scene,
+      selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 2, center: 0 }
+    }
+    newGameState.players[token].player_history = playerHistory
   })
-  newGameState.role_interactions = role_interactions
 
-  return newGameState
+  return { ...newGameState, role_interactions }
 }
 
 exports.paranormalinvestigator_response = (gameState, token, selected_positions, title) => {
-  if (selected_positions.every((position) => gameState.players[token].player_history.selectable_cards.includes(position)) === false) return gameState
+  if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
+    return gameState
+  }
+
   const newGameState = { ...gameState }
-  const role_interactions = []
-  const players = newGameState.players
-  const player = players[token]
+  const player = newGameState.players[token]
   const playerCard = player?.card
   const cardPositions = newGameState.card_positions
 
@@ -66,48 +56,45 @@ exports.paranormalinvestigator_response = (gameState, token, selected_positions,
   const playerOneCardId = selectedCards[0][selected_positions[0]]
   const playerTwoCardId = selectedCards[1][selected_positions[1]]
 
-  let showCards
+  let showCards = []
+
   if (townIds.includes(playerOneCardId)) {
-    if (townIds.includes(playerTwoCardId)) {
+    showCards = selectedCards
+    if (!townIds.includes(playerTwoCardId)) {
+      showCards = [selectedCards[0]]
+      playerCard.player_role = cardPositions[selected_positions[0]].role
+      playerCard.player_team = cardPositions[selected_positions[0]].team
+    }
+  } else {
+    if (!townIds.includes(playerTwoCardId)) {
+      showCards = [selectedCards[0]]
+      playerCard.player_role = cardPositions[selected_positions[0]].role
+      playerCard.player_team = cardPositions[selected_positions[0]].team
+    } else {
       showCards = selectedCards
       if (playerCard.original_id === playerOneCardId || playerCard.original_id === playerTwoCardId) {
         playerCard.player_card_id = 0
       }
-    } else if (!townIds.includes(playerTwoCardId)) {
-      showCards = selectedCards
-      if (playerCard.original_id === playerOneCardId) {
-        playerCard.player_card_id = 0
-      }
-      playerCard.player_role = cardPositions[selected_positions[1]].role
-      playerCard.player_team = cardPositions[selected_positions[1]].team
     }
-  } else if (!townIds.includes(playerOneCardId)) {
-    showCards = [selectedCards[0]]
-    playerCard.player_role = cardPositions[selected_positions[0]].role
-    playerCard.player_team = cardPositions[selected_positions[0]].team
   }
-//TODO message not complete!
 
+  player.player_history.show_cards = viewCards
+  player.card_or_mark_action = true
 
-role_interactions.push({
-  type: INTERACTION,
-  title,
-  token,
-  informations: {
-    message: ["interaction_saw_card"],
-    icon: 'investigator',
-    viewed_cards: selected_positions[0],
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
-  },
-  player: {
-    player_name: player?.name,
-    player_number: player?.player_number,
-    ...playerCard,
-  },
-})
-  newGameState.role_interactions = role_interactions
+const role_interactions = [
+  generateRoleInteractions(
+    newGameState,
+    title,
+    token,
+    ["interaction_saw_card", selected_positions[0], showCards.length === 2 ? selected_positions[1] : ''],
+    'investigator',
+    null,
+    viewCards,
+    null,
+    null,
+    { viewed_cards: showCards }
+  )
+]
 
-  return newGameState
+return { ...newGameState, role_interactions }
 }

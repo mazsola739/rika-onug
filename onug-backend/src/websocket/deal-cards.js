@@ -189,7 +189,7 @@ exports.dealCards = async (ws, message) => {
       player_number: index + 1,
       card: createPlayerCard(playerCards[index], selectedCards),
       card_or_mark_action: false,
-      player_history: [],
+      player_history: {},
     }
   })
 

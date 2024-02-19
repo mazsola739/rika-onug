@@ -1,4 +1,6 @@
+const { updatePlayerCard } = require("../update-player-card")
 const { generateRoleInteractions } = require("../generate-role-interactions")
+const { isValidSelection } = require("../validate-response-data")
 const { getNonWerewolfPlayerNumbersByRoleIds, getSelectablePlayersWithNoShield } = require("../utils")
 
 //? INFO: Alpha Wolf - Wakes with other Werewolves. Wakes after and exchanges the center Alpha card with any other non-Werewolf player card
@@ -7,11 +9,12 @@ exports.alphawolf = (gameState, tokens, title) => {
   const role_interactions = []
 
   tokens.forEach(token => {
-    const players = newGameState.players
-    
+    const { players, shield, actual_scene } = newGameState
     const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(players)
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, shield)
   
+    updatePlayerCard(newGameState, token)
+
     role_interactions.push(
       generateRoleInteractions(
         newGameState,
@@ -28,24 +31,24 @@ exports.alphawolf = (gameState, tokens, title) => {
     )
 
     const playerHistory = {
+      ...newGameState.players[token].player_history,
       ...newGameState.actual_scene,
       selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 }
     }
-    players[token].player_history.push(playerHistory)
+    newGameState.players[token].player_history = playerHistory
   })
 
   return { ...newGameState, role_interactions }
 }
 
-//TODO check for null
 exports.alphawolf_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
 
   const newGameState = { ...gameState }
-  const player = newGameState.players[token]
-  const cardPositions = newGameState.card_positions
+  const { players, card_positions: cardPositions } = newGameState
+  const player = players[token]
 
   const centerWolf = { ...cardPositions.center_wolf }
   const selectedCard = { ...cardPositions[selected_positions[0]] }

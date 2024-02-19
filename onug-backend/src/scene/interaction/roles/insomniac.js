@@ -1,78 +1,75 @@
-const { INTERACTION } = require("../../../constant/ws")
 const { updatePlayerCard } = require("../update-player-card")
-const { getCardIdsByPlayerNumbers, concatArraysWithUniqueElements, getKeys, getPlayerNumbersWithMatchingTokens } = require("../utils")
+const { generateRoleInteractions } = require("../generate-role-interactions")
+const { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens } = require("../utils")
 
 //? INFO: Insomniac – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
 exports.insomniac = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
-  const players = newGameState.players
-  const cardPositions = newGameState.card_positions
 
-  tokens.forEach((token) => {
+  tokens.forEach(token => {
+    const { players } = newGameState
+    const cardPositions = newGameState.card_positions
     const player = players[token]
 
     updatePlayerCard(newGameState, token)
+
     const playerCard = player?.card
-    const flippedCards = newGameState.flipped
     const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
     const currentCard = cardPositions[currentPlayerNumber[0]]
 
     if (!playerCard.shield) {
+
       playerCard.player_card_id = currentCard.id
       playerCard.player_team = currentCard.team
-      
+
       const showCards = getCardIdsByPlayerNumbers(cardPositions, currentPlayerNumber)
 
+      role_interactions.push(
+        generateRoleInteractions(
+          newGameState,
+          title,
+          token,
+          ['interaction_own'],
+          'insomniac',
+          null,
+          null,
+          showCards,
+          null,
+          null
+        )
+      )
+
       const playerHistory = {
+        ...newGameState.players[token].player_history,
         ...newGameState.actual_scene,
         show_cards: showCards,
       }
       player.player_history = playerHistory
-
-      
-
-role_interactions.push({
-        type: INTERACTION,
-        title,
-        token,
-        informations: {
-          message: ["interaction_own"],
-          icon: 'insomniac',
-          own_card: currentPlayerNumber,
-          shielded_cards: newGameState.shield,
-          artifacted_cards: getKeys(newGameState.artifact),
-          show_cards: concatArraysWithUniqueElements(showCards, flippedCards),
-        },
-        player: {
-          player_name: player?.name,
-          player_number: player?.player_number,
-          ...playerCard,
-        },
-      })
     } else {
+      role_interactions.push(
+        generateRoleInteractions(
+          newGameState,
+          title,
+          token,
+          ['interaction_shielded'],
+          'shield',
+          null,
+          null,
+          null,
+          null,
+          null
+        )
+      )
       
-
-role_interactions.push({
-        type: INTERACTION,
-        title,
-        token,
-        informations: {
-          message: ["interaction_shielded"],
-          icon: 'shield',
-          shielded_cards: newGameState.shield,
-          artifacted_cards: getKeys(newGameState.artifact),
-          show_cards: flippedCards,
-        },
-        player: {
-          player_name: player?.name,
-          player_number: player?.player_number,
-          ...playerCard,
-        },
-      })
+      const playerHistory = {
+        ...newGameState.players[token].player_history,
+        ...newGameState.actual_scene,
+        shielded: true
+      }
+      player.player_history = playerHistory
     }
   })
-  newGameState.role_interactions = role_interactions
 
-  return newGameState
+  return { ...newGameState, role_interactions }
 }

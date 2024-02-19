@@ -74,6 +74,7 @@ export const GamePlay: React.FC = observer(() => {
     if (lastJsonMessage?.type === INTERACTION) {
       interactionStore.setLastJsonMessage(lastJsonMessage)
       interactionStore.setMessage(lastJsonMessage.message)
+      interactionStore.setMessageIcon(lastJsonMessage.icon)
       interactionStore.setInteraction(lastJsonMessage.title)
       interactionStore.toggleMessageBoxStatus(true)
     }

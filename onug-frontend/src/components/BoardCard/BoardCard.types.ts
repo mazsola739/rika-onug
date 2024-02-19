@@ -3,7 +3,7 @@ export interface BoardCardProps {
   spy?: boolean
   position: string
   isCenter: boolean
-  selectableCard?: boolean
+  selectable_cards?: boolean
   aliens?: boolean
   artifact?: boolean
   assassin?: boolean
@@ -52,6 +52,6 @@ export interface BoardCardProps {
 
 export interface StyledBoardCardProps {
   backgroundImage: string
-  selectableCard?: boolean
+  selectable_cards?: boolean
   isSelected?: boolean
 }

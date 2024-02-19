@@ -16,6 +16,7 @@ export const Message = styled.span`
   align-content: center;
   align-items: center;
   color: white;
+  font-size: 20px;
 `
 
 export const SendButton = styled.div`

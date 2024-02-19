@@ -15,7 +15,7 @@ export const CardBack = styled.div<StyledBoardCardProps>`
   background-repeat: no-repeat;
   background-size: 100%;
   border: ${(props) =>
-    props.selectableCard
+    props.selectable_cards
       ? props.isSelected
         ? '3px solid yellow'
         : '3px solid green'

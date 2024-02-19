@@ -1,129 +1,112 @@
-const { INTERACTION } = require("../../../constant/ws")
 const { updatePlayerCard } = require("../update-player-card")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, getCardIdsByPlayerNumbers, concatArraysWithUniqueElements, getKeys } = require("../utils")
+const { generateRoleInteractions } = require("../generate-role-interactions")
+const { isValidSelection } = require("../validate-response-data")
+const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, getCardIdsByPlayerNumbers } = require("../utils")
 
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
 exports.robber = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
-  const players = newGameState.players
 
   tokens.forEach((token) => {
-    const player = players[token]
-
     updatePlayerCard(newGameState, token)
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
+    const playerCard = newGameState.players[token]?.card
 
     if (!playerCard.shield) {
       const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
       const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-      const playerHistory = {
-        ...newGameState.actual_scene,
-        selectable_cards: selectablePlayersWithNoShield,
-      }
-      player.player_history = playerHistory
-
+      role_interactions.push(
+        generateRoleInteractions(
+          newGameState,
+          title,
+          token,
+          ['interaction_may_one_any_other'],
+          'robber',
+          { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
+          null,
+          null,
+          null,
+          null
+        )
+      )
       
-
-role_interactions.push({
-        type: INTERACTION,
-        title,
-        token,
-        informations: {
-          message: ["interaction_may_one_any_other"],
-          icon: 'robber',
-          selectable_cards: selectablePlayersWithNoShield,
-          selectable_card_limit: { player: 1, center: 0 },
-          shielded_cards: newGameState.shield,
-          artifacted_cards: getKeys(newGameState.artifact),
-          show_cards: flippedCards,
-        },
-        player: {
-          player_name: player?.name,
-          player_number: player?.player_number,
-          ...playerCard,
-        },
-      })
-    } else if (newGameState.players[token].card.shield) {
       const playerHistory = {
+        ...newGameState.players[token].player_history,
         ...newGameState.actual_scene,
+        selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 }
       }
-      player.player_history = playerHistory
+      newGameState.players[token].player_history = playerHistory
 
-      
+    } else {
+      role_interactions.push(
+        generateRoleInteractions(
+          newGameState,
+          title,
+          token,
+          ['interaction_shielded'],
+          'shield',
+          null,
+          null,
+          null,
+          null,
+          null
+        )
+      )
 
-role_interactions.push({
-        type: INTERACTION,
-        title,
-        token,
-        informations: {
-          message: ["interaction_shielded"],
-          icon: 'shield',
-          shielded_cards: newGameState.shield,
-          artifacted_cards: getKeys(newGameState.artifact),
-          show_cards: flippedCards,
-        },
-        player: {
-          player_name: player?.name,
-          player_number: player?.player_number,
-          ...playerCard,
-        },
-      })
+      const playerHistory = {
+        ...newGameState.players[token].player_history,
+        ...newGameState.actual_scene,
+        shielded: true
+      }
+      newGameState.players[token].player_history = playerHistory
     }
   })
-  newGameState.role_interactions = role_interactions
 
-  return newGameState
+  return { ...newGameState, role_interactions }
 }
 
 exports.robber_response = (gameState, token, selected_positions, title) => {
-  if (selected_positions.every((position) => gameState.players[token].player_history.selectable_cards.includes(position)) === false) return gameState
+  if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
+    return gameState
+  }
 
   const newGameState = { ...gameState }
-  const role_interactions = []
-  const players = newGameState.players
+
+  const { players, card_positions } = newGameState
   const player = players[token]
-  const playerCard = player?.card
-  const cardPositions =  newGameState.card_positions
+  const playerCard = player.card
 
-  const robberPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])
+  const robberPlayerNumber = getPlayerNumbersWithMatchingTokens(players, [token])[0]
 
-  const robberCard = { ...cardPositions[robberPlayerNumber] }
-  const selectedCard = { ...cardPositions[selected_positions[0]] }
-  cardPositions[robberPlayerNumber] = selectedCard
-  cardPositions[selected_positions[0]] = robberCard
-  playerCard.player_card_id = cardPositions[robberPlayerNumber].id
-  playerCard.player_team = cardPositions[robberPlayerNumber].team
+  const robberCard = { ...card_positions[robberPlayerNumber] }
+  const selectedCard = { ...card_positions[selected_positions[0]] }
+  card_positions[robberPlayerNumber] = selectedCard
+  card_positions[selected_positions[0]] = robberCard
 
-  const showCards = getCardIdsByPlayerNumbers(cardPositions, robberPlayerNumber)
+  playerCard.player_card_id = card_positions[robberPlayerNumber].id
+  playerCard.player_team = card_positions[robberPlayerNumber].team
 
-   player.player_history.swapped_cards = [selected_positions[0], `player_${ player.player_number}`]
-   player.player_history.show_cards = showCards
-   player.card_or_mark_action = true
-//TODO better message
+  const showCards = getCardIdsByPlayerNumbers(card_positions, robberPlayerNumber)
 
+  player.player_history.swapped_cards = [selected_positions[0], `player_${player.player_number}`]
+  player.player_history.show_cards = showCards
+  player.card_or_mark_action = true
 
-role_interactions.push({
-  type: INTERACTION,
-  title,
-  token,
-  informations: {
-    message: ["interaction_swapped_cards", "interaction_saw_card", `player_${ player.player_number}`],
-    icon: 'robber',
-    viewed_cards: `${selected_positions[0]}`,
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
-  },
-  player: {
-    player_name: player?.name,
-    player_number: player?.player_number,
-    ...playerCard,
-  },
-})
-  newGameState.role_interactions = role_interactions
+  const role_interactions = [
+    generateRoleInteractions(
+      newGameState,
+      title,
+      token,
+      ["interaction_swapped_cards", "interaction_saw_card", `player_${player.player_number}`],
+      'robber',
+      null,
+      null,
+      showCards,
+      null,
+      { swapped_cards: [`player_${player.player_number}`, selected_positions[0]], viewed_cards: [`player_${player.player_number}`] }
+    )
+  ]
 
-  return newGameState
+  return { ...gameState, role_interactions }
 }

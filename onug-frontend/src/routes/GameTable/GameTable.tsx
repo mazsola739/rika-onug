@@ -58,8 +58,8 @@ export const GameTable: React.FC = observer(() => {
       setPlayer({
         player_name: lastJsonMessage.player_name,
         player_number: lastJsonMessage.player_number,
-        player_original_id: lastJsonMessage.player_original_id,
         player_card_id: lastJsonMessage.player_card_id,
+        player_original_id: lastJsonMessage.player_original_id,
         player_role: lastJsonMessage.player_role,
         player_role_id: lastJsonMessage.player_role_id,
         player_team: lastJsonMessage.player_team,

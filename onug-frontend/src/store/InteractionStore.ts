@@ -63,9 +63,12 @@ class InteractionStore {
     this.lastJsonMessage = lastJsonMessage
   }
 
+  setMessageIcon(icon: string): void {
+    this.messageIcon = icon
+  }
+
   setMessage(message: string[]): void {
-    this.messageIcon = message[0]
-    this.message = message.slice(1)
+    this.message = message
   }
 
   getMessage(): string | undefined {
@@ -82,6 +85,8 @@ class InteractionStore {
   }
 
   setInteraction(title: string): void {
+    console.log(title)
+    console.log(this.lastJsonMessage)
     switch (title) {
       case 'DOPPELGÄNGER_INSTANT_ACTION':
         doppelgangerStore.instantNightAction(this.lastJsonMessage)

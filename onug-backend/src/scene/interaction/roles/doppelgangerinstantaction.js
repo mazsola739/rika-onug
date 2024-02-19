@@ -1,6 +1,9 @@
 const { roles } = require(".")
 const { INTERACTION } = require("../../../constant/ws")
-const {doppelgangerInstantActionsIds, instantRoleIds} = require("../constants")
+const { doppelgangerInstantActionsIds, instantRoleIds} = require("../constants")
+const { updatePlayerCard } = require("../update-player-card")
+const { generateRoleInteractions } = require("../generate-role-interactions")
+const { isValidSelection } = require("../validate-response-data")
 
 /**
  * * Doppelgänger instant night actions:
@@ -13,48 +16,30 @@ const {doppelgangerInstantActionsIds, instantRoleIds} = require("../constants")
 exports.doppelganger_instant_action = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
-  const players = newGameState.players
+  const { players, actual_scene } = newGameState
 
   tokens.forEach((token) => {
-    const player = players[token]
-    
-    const new_role_id = player?.player_history?.new_role_id
+    const new_role_id = players[token]?.player_history?.new_role_id
+
     if (!doppelgangerInstantActionsIds.includes(new_role_id)) return newGameState
 
     const roleName = instantRoleIds[new_role_id]
 
-    const playerHistory = {
-      ...newGameState.actual_scene,
-      instant_night_action: roleName,
-    }
-    player.player_history = playerHistory
-    player.player_history.copied_role = roleName
+    role_interactions.push(
+      generateRoleInteractions(
+        newGameState,
+        title,
+        token,
+        ['interaction_instant_night_action'],
+        'night',
+        null,
+        null,
+        null,
+        null,
+        { instant_night_action: roleName, new_role_id, copied_role : roleName,}
+      )
+    )
 
-    const playerCard = player?.card
-  
-    
-
-role_interactions.push({
-      type: INTERACTION,
-      title,
-      token,
-      informations: {
-        message: ["interaction_instant_night_action"],
-        icon: 'night',
-        instant_night_action: roleName,
-        new_role_id,
-        shielded_cards: newGameState.shield,
-        artifacted_cards: getKeys(newGameState.artifact),
-        show_cards: flippedCards,
-      },
-      player: {
-        player_name: player?.name,
-        player_number: player?.player_number,
-        ...playerCard,
-      },
-    })
-  newGameState.role_interactions = role_interactions
-  
     if (new_role_id === 2)  return roles.drunk(newGameState, [token], "DRUNK")
     if (new_role_id === 8)  return roles.robber(newGameState, [token], "ROBBER")
     if (new_role_id === 9)  return roles.seer(newGameState, [token], "SEER")
@@ -78,11 +63,18 @@ role_interactions.push({
     if (new_role_id === 69) return roles.temptress(newGameState, [token], "TEMPTRESS")
     if (new_role_id === 70) return roles.witch(newGameState, [token], "VOODOO_LOU")
     if (new_role_id === 85) return roles.thing(newGameState, [token], "THING")
+
+    const playerHistory = {
+      ...newGameState.players[token].player_history,
+      ...newGameState.actual_scene,
+      instant_night_action: roleName, copied_role : roleName
+    }
+    players[token]?.player_history?.push(playerHistory)
   })
 
-  return newGameState
+  return { ...newGameState, role_interactions }
 }
-
+//TODO check copied_role and instant_night_action
 exports.doppelganger_instant_action_response = (gameState, token) => {
   const role = gameState?.players?.[token]?.player_history?.copied_role
 
@@ -90,7 +82,7 @@ exports.doppelganger_instant_action_response = (gameState, token) => {
     ws.send(
       JSON.stringify({
         type: INTERACTION,
-        informations: { message: ['night', 'no_night_action'] },
+        message: ['no_night_action'], icon: 'night',
       })
     )
     return gameState

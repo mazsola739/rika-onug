@@ -25,18 +25,18 @@ exports.pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
   return selectedPlayers > 1 ? [...players.slice(0, -1), conjunction, players.slice(-1)[0]] : players
 }
 
-exports.pickRandomOnePlayer = (numPlayers) => shufflePlayers(numPlayers)[0];
+exports.pickRandomOnePlayer = (numPlayers) => shufflePlayers(numPlayers)[0]
 
 exports.pickRandomTwoPlayers = (numPlayers, conjunction) => {
-  const players = shufflePlayers(numPlayers);
+  const players = shufflePlayers(numPlayers)
 
   return [players[0], conjunction, players[1]]
-};
+}
 
 exports.pickRandomTwoPlayersArray = (numPlayers) => {
-  const players = shufflePlayers(numPlayers);
+  const players = shufflePlayers(numPlayers)
 
   return [players[0], players[1]]
-};
+}
 
 

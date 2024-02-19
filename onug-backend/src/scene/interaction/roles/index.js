@@ -2,23 +2,23 @@ const { oracle, oracle_response }                                 = require("./o
 const { copycat, copycat_response}                                = require("./copycat")
 const { doppelganger, doppelganger_response }                     = require("./doppelganger")
 const { vampires, vampires_response }                             = require("./vampires")
-const { thecount, doppelganger_thecount, thecount_response }      = require("./thecount")
+const { thecount, thecount_response }                             = require("./thecount")
 const { renfield }                                                = require("./renfield")
 const { diseased, diseased_response }                             = require("./diseased")
 const { cupid, cupid_response }                                   = require("./cupid")
 const { instigator, instigator_response }                         = require("./instigator")
-const { priest, doppelganger_priest }                             = require("./priest")
-const { assassin, doppelganger_assassin }                         = require("./assassin")
-const { apprenticeassassin, doppelganger_apprenticeassassin }     = require("./apprenticeassassin")
+const { priest, priest_response }                                 = require("./priest")
+const { assassin, assassin_response }                             = require("./assassin")
+const { apprenticeassassin, apprenticeassassin_response }         = require("./apprenticeassassin")
 const { everyonemark }                                            = require("./everyonemark")
 const { lovers }                                                  = require("./lovers")
 const { sentinel, sentinel_response }                             = require("./sentinel")
-const { aliens }                                                  = require("./aliens") //random
+const { aliens, aliens_response }                                 = require("./aliens") //random
 const { cow }                                                     = require("./cow")
 const { groobzerb }                                               = require("./groobzerb")
 const { leader, leader_zerbgroob }                                = require("./leader")
-const { bodysnatcher, doppelganger_bodysnatcher }                 = require("./bodysnatcher")
-const { supervillains }                                           = require("./supervillains")
+const { bodysnatcher, bodysnatcher_response }                     = require("./bodysnatcher")
+const { supervillains, supervillain_response }                    = require("./supervillains")
 const { temptress, temptress_response }                           = require("./temptress")
 const { drpeeker, drpeeker_response }                             = require("./drpeeker")
 const { rapscallion, rapscallion_response }                       = require("./rapscallion")
@@ -34,27 +34,27 @@ const { thing, thing_response }                                   = require("./t
 const { seer, seer_response }                                     = require("./seer")
 const { apprenticeseer, apprenticeseer_response }                 = require("./apprenticeseer")
 const { paranormalinvestigator, paranormalinvestigator_response } = require("./paranormalinvestigator")
-const { marksman }                                                = require("./marksman")
+const { marksman, marksman_response }                             = require("./marksman")
 const { nostradamus, nostradamus_response }                       = require("./nostradamus")
-const { psychic }                                                 = require("./psychic")
+const { psychic, psychic_response}                                = require("./psychic")
 const { robber, robber_response }                                 = require("./robber")
 const { witch, witch_response }                                   = require("./witch")
-const { pickpocket, doppelganger_pickpocket }                     = require("./pickpocket")
+const { pickpocket, pickpocket_response }                         = require("./pickpocket")
 const { troublemaker, troublemaker_response }                     = require("./troublemaker")
-const { villageidiot }                                            = require("./villageidiot")
-const { auraseer }                                                = require("./auraseer")
-const { gremlin, doppelganger_gremlin }                           = require("./gremlin")
-const { rascal, doppelganger_rascal }                             = require("./rascal")
+const { villageidiot, villageidiot_response }                     = require("./villageidiot")
+const { auraseer, auraseer_response }                             = require("./auraseer")
+const { gremlin, gremlin_response }                               = require("./gremlin")
+const { rascal, rascal_response }                                 = require("./rascal")
 const { drunk, drunk_response }                                   = require("./drunk")
 const { insomniac }                                               = require("./insomniac")
-const { squire }                                                  = require("./squire")
-const { beholder }                                                = require("./beholder")
+const { squire, squire_response }                                 = require("./squire")
+const { beholder, beholder_response }                             = require("./beholder")
 const { revealer, revealer_response }                             = require("./revealer")
-const { exposer, doppelganger_exposer }                           = require("./exposer")
-const { empath, doppelganger_empath }                             = require("./empath")
+const { exposer, exposer_response }                               = require("./exposer")
+const { empath, empath_response }                                 = require("./empath")
 const { curator, curator_response }                               = require("./curator")
 const { blob }                                                    = require("./blob")
-const { mortician, doppelganger_mortician }                       = require("./mortician")
+const { mortician, mortician_response }                           = require("./mortician")
 const { familyman }                                               = require("./familyman")
 
 exports.roles = {
@@ -62,27 +62,23 @@ exports.roles = {
   copycat, copycat_response,
   doppelganger, doppelganger_response,
   vampires, vampires_response,
-  thecount, doppelganger_thecount, thecount_response,
+  thecount, thecount_response,
   renfield,
   diseased, diseased_response,
   cupid, cupid_response,
   instigator, instigator_response,
-  priest,
-  doppelganger_priest,
-  assassin,
-  doppelganger_assassin,
-  apprenticeassassin,
-  doppelganger_apprenticeassassin,
+  priest, priest_response,
+  assassin, assassin_response,
+  apprenticeassassin, apprenticeassassin_response,
   everyonemark,
   lovers,
   sentinel, sentinel_response,
-  aliens,
+  aliens, aliens_response,
   cow,
   groobzerb,
   leader, leader_zerbgroob,
-  bodysnatcher,
-  doppelganger_bodysnatcher,
-  supervillains,
+  bodysnatcher, bodysnatcher_response,
+  supervillains, supervillain_response,
   temptress, temptress_response,
   drpeeker, drpeeker_response,
   rapscallion, rapscallion_response,
@@ -98,27 +94,27 @@ exports.roles = {
   seer, seer_response,
   apprenticeseer, apprenticeseer_response,
   paranormalinvestigator, paranormalinvestigator_response,
-  marksman,
+  marksman, marksman_response,
   nostradamus, nostradamus_response,
-  psychic,
+  psychic, psychic_response,
   robber, robber_response,
   witch, witch_response,
-  pickpocket, doppelganger_pickpocket,
+  pickpocket, pickpocket_response,
   troublemaker, troublemaker_response,
-  villageidiot,
-  auraseer,
-  gremlin, doppelganger_gremlin,
-  rascal, doppelganger_rascal,
+  villageidiot, villageidiot_response,
+  auraseer, auraseer_response,
+  gremlin, gremlin_response,
+  rascal, rascal_response,
   drunk, drunk_response,
   insomniac,
-  squire,
-  beholder,
+  squire, squire_response,
+  beholder, beholder_response,
   revealer, revealer_response,
-  exposer, doppelganger_exposer,
-  empath, doppelganger_empath,
+  exposer, exposer_response,
+  empath, empath_response,
   curator, curator_response,
   blob,
-  mortician, doppelganger_mortician,
+  mortician, mortician_response,
   familyman,
   //const { ripple: require("./ripple")
   //TODO vote

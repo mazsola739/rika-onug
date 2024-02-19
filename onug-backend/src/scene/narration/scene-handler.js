@@ -8,7 +8,7 @@ const NARRATION = 'actual_scene.narration'
 
 //! todo save interaction identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
 //TODO action_history
-exports.sceneHandler = gameState => {
+exports.sceneHandler  = gameState => {
   const sceneTitle    = gameState.actual_scene.scene_title
   const selectedCards = gameState.selected_cards
   const totalPlayers  = Object.keys(gameState.players).length

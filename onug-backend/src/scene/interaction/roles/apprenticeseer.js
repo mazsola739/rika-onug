@@ -1,63 +1,53 @@
-const { INTERACTION } = require("../../../constant/ws")
-const { getCardIdsByPositions, concatArraysWithUniqueElements , getKeys } = require("../utils")
+const { getCardIdsByPositions, } = require("../utils")
 const { centerCardPositions } = require("../constants")
 const { updatePlayerCard } = require("../update-player-card")
+const { generateRoleInteractions } = require("../generate-role-interactions")
+const { isValidSelection } = require("../validate-response-data")
 
 //? INFO: Apprentice Seer - looks at one card from the center (not another players or her own)
 exports.apprenticeseer = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
-  const players = newGameState.players
 
-  tokens.forEach((token) => {
-    const player = players[token]
+  tokens.forEach(token => {
+    updatePlayerCard(newGameState, token)
+
+    role_interactions.push(
+      generateRoleInteractions(
+        newGameState,
+        title,
+        token,
+        ['interaction_may_one_center'],
+        'spy',
+        { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
+        null,
+        null,
+        null,
+        null
+      )
+    )
 
     const playerHistory = {
+      ...newGameState.players[token].player_history,
       ...newGameState.actual_scene,
-      selectable_cards: centerCardPositions,
+      selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 }
     }
-    player.player_history = playerHistory
+    newGameState.players[token].player_history = playerHistory
+  })
 
-    updatePlayerCard(newGameState, token)
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
-  
-    
-
-role_interactions.push({
-      type: INTERACTION,
-      title,
-      token,
-      informations: {
-        message: ['interaction_may_one_center'],
-        icon: 'spy',
-        selectable_cards: centerCardPositions,
-        selectable_card_limit: { player: 0, center: 1 },
-        shielded_cards: newGameState.shield,
-        artifacted_cards: getKeys(newGameState.artifact),
-        show_cards: flippedCards,
-      },
-      player: {
-        player_name: player?.name,
-        player_number: player?.player_number,
-        ...playerCard,
-      },
-    })
-   })
-  newGameState.role_interactions = role_interactions
-
-  return newGameState
+  return { ...newGameState, role_interactions }
 }
 
 exports.apprenticeseer_response = (gameState, token, selected_positions, title) => {
-  if (selected_positions.every((position) => gameState.players[token].player_history.selectable_cards.includes(position)) === false) return gameState
+  if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
+    return gameState
+  }
 
   const newGameState = { ...gameState }
-  const role_interactions = []
-  const players = newGameState.players
+  const { players, card_positions: cardPositions } = newGameState
   const player = players[token]
   const playerCard = player?.card
-  const cardPositions =  newGameState.card_positions
+
   const viewCards = getCardIdsByPositions(cardPositions, [selected_positions[0]])
   const selectedPositionCard = cardPositions[selected_positions[0]]
 
@@ -68,27 +58,20 @@ exports.apprenticeseer_response = (gameState, token, selected_positions, title) 
   player.player_history.show_cards = viewCards
   player.card_or_mark_action = true
 
-  
+  const role_interactions = [
+    generateRoleInteractions(
+      newGameState,
+      title,
+      token,
+      ["interaction_saw_card", selected_positions[0]],
+      'spy',
+      null,
+      viewCards,
+      null,
+      null,
+      { viewed_cards: [selected_positions[0]] }
+    )
+  ]
 
-role_interactions.push({
-    type: INTERACTION,
-    title,
-    token,
-    informations: {
-      message: ['interaction_saw_card'],
-      icon: 'spy',
-      viewed_cards: viewCards,
-      shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
-      show_cards: concatArraysWithUniqueElements(showCards, newGameState.flipped),
-    },
-    player: {
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
-    },
-  })
-  newGameState.role_interactions = role_interactions
-
-  return newGameState
+  return { ...newGameState, role_interactions }
 }

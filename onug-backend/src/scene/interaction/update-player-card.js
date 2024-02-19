@@ -1,12 +1,12 @@
 const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("./utils")
 
-exports.updatePlayerCard = (newGameState, token) => {
-    const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-    const player = newGameState.players[token]
-    const flippedCards = newGameState.flipped
+exports.updatePlayerCard = (gameState, token) => {
+    const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(gameState.players, [token])
+    const player = gameState.players[token]
+    const flippedCards = gameState.flipped
   
     const playerCard = player?.card
-    const currentCard = newGameState.card_positions[currentPlayerNumber[0]]
+    const currentCard = gameState.card_positions[currentPlayerNumber[0]]
   
     if (!playerCard || !currentCard) return
   

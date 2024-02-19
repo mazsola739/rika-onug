@@ -8,7 +8,7 @@ import { interactionStore } from 'store'
 export const MessageBox: React.FC = observer(() => {
   const iconName = interactionStore.messageIcon as IconType
   const message = interactionStore.getMessage()
-  console.log(interactionStore.lastJsonMessage.message)
+
   console.log(message)
 
   return (

@@ -9,8 +9,7 @@ const { getTokensByOriginalIds, containsAnyIds, containsAllIds } = require("./ut
 exports.interactionHandler = (gameState) => {
   const newGameState = { ...gameState }
   const sceneTitle = newGameState.actual_scene.scene_title
-  const players = newGameState.players
-  const selectedCards = newGameState.selected_cards
+  const { players, selected_cards: selectedCards } = newGameState;
 
   const conditions = checkConditions(players)
 

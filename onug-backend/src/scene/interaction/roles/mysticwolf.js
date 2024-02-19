@@ -1,96 +1,78 @@
-const { INTERACTION } = require("../../../constant/ws")
 const { updatePlayerCard } = require("../update-player-card")
-const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getKeys } = require("../utils")
+const { generateRoleInteractions } = require("../generate-role-interactions")
+const { isValidSelection } = require("../validate-response-data")
+const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield } = require("../utils")
 
 //? INFO: Mystic Wolf - Wakes with other Werewolves. Wakes after and looks at any other player's card (not center or own)
 exports.mysticwolf = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
-  const players = newGameState.players
 
   tokens.forEach((token) => {
-    const player = players[token]
+    const { players } = newGameState
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-    const playerHistory = {
-      ...newGameState.actual_scene,
-      selectable_cards: selectablePlayersWithNoShield,
-    }
-
-    player.player_history = playerHistory
-
     updatePlayerCard(newGameState, token)
-    const playerCard = player?.card
-    const flippedCards = newGameState.flipped
 
-    
+    role_interactions.push(
+      generateRoleInteractions(
+        newGameState,
+        title,
+        token,
+        ['interaction_may_one_any_other'],
+        'spy',
+        { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
+        null,
+        null,
+        null,
+        null,
+      )
+    )
 
-role_interactions.push({
-      type: INTERACTION,
-      title,
-      token,
-      informations: {
-        message: ["interaction_may_one_any_other"],
-        icon: 'spy',
-        selectable_cards: selectablePlayersWithNoShield,
-        selectable_card_limit: { player: 1, center: 0 },
-        shielded_cards: newGameState.shield,
-        artifacted_cards: getKeys(newGameState.artifact),
-        show_cards: flippedCards,
-      },
-      player: {
-        player_name: player?.name,
-        player_number: player?.player_number,
-        ...playerCard,
-      },
-    })
+    const playerHistory = {
+      ...newGameState.players[token].player_history,
+      ...newGameState.actual_scene,
+      selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 }
+    }
+    newGameState.players[token].player_history = playerHistory
   })
-  newGameState.role_interactions = role_interactions
 
-  return newGameState
+  return { ...newGameState, role_interactions }
 }
 
 exports.mysticwolf_response = (gameState, token, selected_positions, title) => {
-  if (selected_positions.every((position) => gameState.players[token].player_history.selectable_cards.includes(position)) === false) return gameState
+  if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
+    return gameState
+  }
 
   const newGameState = { ...gameState }
-  const role_interactions = []
-  const players = newGameState.players
-  const player = players[token]
+  const player = newGameState.players[token]
   const playerCard = player?.card
-  const cardPositions =  newGameState?.card_positions
-  const showCards = getCardIdsByPositions(cardPositions, [selected_positions[0]])
-  const selectedPositionCard = cardPositions[selected_positions[0]]
+  const selectedPositionCard = newGameState.card_positions[selected_positions[0]]
+  const viewCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
 
-  if (playerCard.original_id === selectedPositionCard.id) {
+  if (playerCard?.original_id === selectedPositionCard.id) {
     playerCard.player_card_id = 0
   }
 
-  player.player_history.show_cards = showCards
+  player.player_history.show_cards = viewCards
   player.card_or_mark_action = true
 
-  
+  const role_interactions = [
+    generateRoleInteractions(
+      newGameState,
+      title,
+      token,
+      ["interaction_saw_card", selected_positions[0]],
+      'spy',
+      null,
+      viewCards,
+      null,
+      null,
+      { viewed_cards: [selected_positions[0]] }
+    )
+  ]
 
-role_interactions.push({
-    type: INTERACTION,
-    title,
-    token,
-    informations: {
-      message: ["interaction_saw_card", `${selected_positions[0]}`],
-      icon: 'spy',
-      viewed_card: selected_positions[0],
-      shielded_cards: newGameState.shield,
-      artifacted_cards: getKeys(newGameState.artifact),
-      show_cards: flippedCards,
-    },
-    player: {
-      player_name: player?.name,
-      player_number: player?.player_number,
-      ...playerCard,
-    },
-  })
-  newGameState.role_interactions = role_interactions
- 
-  return newGameState
+  return { ...newGameState, role_interactions }
 }

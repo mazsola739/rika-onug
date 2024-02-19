@@ -12,7 +12,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
     id,
     spy,
     isCenter,
-    selectableCard,
+    selectable_cards,
     aliens,
     artifact,
     assassin,
@@ -75,7 +75,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
       const maxCenterCardSelection = interactionStore.selectableCenterCardLimit
       const maxPlayerCardSelection = interactionStore.selectablePlayerCardLimit
 
-      if (selectableCard) {
+      if (selectable_cards) {
         const isCenterCardType = cardType === 'center'
         const selectedCards = isCenterCardType
           ? interactionStore.selectedCenterCards
@@ -120,7 +120,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
         </Tokens>
         <CardBack
           backgroundImage={imgSrc}
-          selectableCard={selectableCard}
+          selectable_cards={selectable_cards}
           onClick={() => cardClickHandler(isCenter ? 'center' : 'player')}
           isSelected={isSelected}
         />

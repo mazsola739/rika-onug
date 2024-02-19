@@ -18,9 +18,9 @@ const ripple_random = [
   "random_ripple_voteapp", //players suggested to may vote to app, so every1 will survive - //! extra vote button
   "random_ripple_repeatrole", //random roles will called again - //! all player who has original id
   "random_ripple_iamalien", //player can only repeat im alien - //! UFO icon
-];
+]
 
-exports.ripple = () => []; //TODO
+exports.ripple = () => [] //TODO
 
 /* const repeatrole = [
 { name: 'role_aliens', isExist: areAnyCardSelectedById(deck, [42, 43, 47, 53, 54, 74]), specialCondition: () => !alienStore.isNewAlienOrHelper },
