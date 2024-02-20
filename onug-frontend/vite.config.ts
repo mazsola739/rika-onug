@@ -18,6 +18,7 @@ export default defineConfig({
     port: 3000,
   },
   preview: {
+    open: false,
     port: 3000,
   },
   test: {
