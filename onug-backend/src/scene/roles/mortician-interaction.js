@@ -3,4 +3,4 @@
 //TODO doppelganger
 export const mortician_interaction = (gameState, tokens, title) => {};
 
-export const mortician_response = (gameState, token, selected_positions, title) => {};
+export const mortician_response_interaction =  (gameState, token, selected_positions, title) => {};

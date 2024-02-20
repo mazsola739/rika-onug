@@ -47,7 +47,7 @@ export const revealer_interaction = (gameState, tokens, title) => {
 };
 
 //TODO better response message
-export const revealer_response = (gameState, token, selected_positions, title) => {
+export const revealer_response_interaction =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }

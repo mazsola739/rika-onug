@@ -3,4 +3,4 @@
 //TODO doppelganger
 export const psychic_interaction = (gameState, tokens, title) => {};
 
-export const psychic_response = (gameState, token, selected_positions, title) => {};
+export const psychic_response_interaction =  (gameState, token, selected_positions, title) => {};

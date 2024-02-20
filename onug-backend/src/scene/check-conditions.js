@@ -10,6 +10,10 @@ import {
   doppelgangerInstantActionsIds,
   seerIds,
   hasMarkIds,
+  epicVampireIds,
+  epicAlienIds,
+  epicWerewolfIds,
+  epicVillainIds,
 } from './constants';
 
 const hasRole        = (selectedCards, roleId)  => selectedCards.includes(roleId)
@@ -26,172 +30,165 @@ const hasEpicBattle  = (selectedCards) => {
 
   return trueCount >= 2
 }
+const containsAnyOriginalIds = (players, ids) => ids.some(id =>  Object.values(players).some(player = (player) => player.card.player_original_id === id))
+const containsAllOriginalIds = (players, ids) => ids.every(id => Object.values(players).some(player = (player) => player.card.player_original_id === id))
 
-export const checkConditions = (players) => {
-  const conditions = { 
-    hasOraclePlayer:                  containsAllOriginalIds(players, [50]),
-    hasCopycatPlayer:                 containsAllOriginalIds(players, [30]),
-    hasMirrorManPlayer:               containsAllOriginalIds(players, [64]),
-    hasDoppelgangerPlayer:            containsAllOriginalIds(players, [1]),
-    hasAnyVampirePlayers:             containsAnyOriginalIds(players, vampireIds),
-    hasTheCountPlayer:                containsAllOriginalIds(players, [39]),
-    hasRenfieldPlayer:                containsAllOriginalIds(players, [38]),
-    hasDiseasedPlayer:                containsAllOriginalIds(players, [32]),
-    hasCupidPlayer:                   containsAllOriginalIds(players, [31]),
-    hasInstigatorPlayer:              containsAllOriginalIds(players, [34]), 
-    hasPriestPlayer:                  containsAllOriginalIds(players, [37]),
-    hasAssassinPlayer:                containsAllOriginalIds(players, [29]),
-    hasApprenticeAssassinPlayer:      containsAllOriginalIds(players, [28]),
-    hasSentinelPlayer:                containsAllOriginalIds(players, [25]),
-    hasAnyAlienPlayers:               containsAnyOriginalIds(players, alienIds),
-    hasCowPlayer:                     containsAllOriginalIds(players, [45]),
-    hasGroobAndZerbPlayers:           containsAllOriginalIds(players, groobAndZerbIds),
-    hasLeaderPlayer:                  containsAllOriginalIds(players, [48]),
-    hasBodySnatcherPlayer:            containsAllOriginalIds(players, [74]),
-    hasAnySuperVillainsPlayers:       containsAnyOriginalIds(players, superVillainsIds),
-    hasTemptressPlayer:               containsAllOriginalIds(players, [69]),
-    hasDrPeekerPlayer:                containsAllOriginalIds(players, [57]),
-    hasRapscallionPlayer:             containsAllOriginalIds(players, [65]),
-    hasEvilometerPlayer:              containsAllOriginalIds(players, [58]),
-    hasAnyWerewolfPlayers:            containsAnyOriginalIds(players, werewolvesIds),
-    hasDreamWolfPlayer:               containsAllOriginalIds(players, [21]),
-    hasAlphaWolfPlayer:               containsAllOriginalIds(players, [17]),
-    hasMysticWolfPlayer:              containsAllOriginalIds(players, [22]),
-    hasMinionPlayer:                  containsAllOriginalIds(players, [7]),
-    hasApprenticeTannerPlayer:        containsAllOriginalIds(players, [71]),
-    hasTannerPlayer:                  containsAllOriginalIds(players, [10]),
-    hasMadScientistPlayer:            containsAllOriginalIds(players, [63]),
-    hasInternPlayer:                  containsAllOriginalIds(players, [62]),
-    hasMasonPlayers:                  containsAnyOriginalIds(players, masonIds),
-    hasThingPlayer:                   containsAllOriginalIds(players, [85]),
-    hasAnnoyingLadPlayer:             containsAllOriginalIds(players, [55]),
-    hasSeerPlayer:                    containsAllOriginalIds(players, [9]),
-    hasApprenticeSeerPlayer:          containsAllOriginalIds(players, [18]),
-    hasParanormalInvestigatorPlayer:  containsAllOriginalIds(players, [23]),
-    hasMarksmanPlayer:                containsAllOriginalIds(players, [35]),
-    hasNostradamusPlayer:             containsAllOriginalIds(players, [80]),
-    hasPsychicPlayer:                 containsAllOriginalIds(players, [51]),
-    hasDetectorPlayer:                containsAllOriginalIds(players, [56]),
-    hasRobberPlayer:                  containsAllOriginalIds(players, [8]),
-    hasWitchPlayer:                   containsAllOriginalIds(players, [27]),
-    hasPickpocketPlayer:              containsAllOriginalIds(players, [36]),
-    hasRoleRetrieverPlayer:           containsAllOriginalIds(players, [66]),
-    hasVoodooLouPlayer:               containsAllOriginalIds(players, [70]),
-    hasTroublemakerPlayer:            containsAllOriginalIds(players, [11]),
-    hasVillageIdiotPlayer:            containsAllOriginalIds(players, [26]),
-    //hasMarks:                       containsAnyOriginalIds(players, hasMarkIds),
-    hasAuraSeerPlayer:                containsAllOriginalIds(players, [72]),
-    hasGremlinPlayer:                 containsAllOriginalIds(players, [33]),
-    hasRascalPlayer:                  containsAllOriginalIds(players, [52]),
-    hasSwitcherooPlayer:              containsAllOriginalIds(players, [68]),
-    hasDrunkPlayer:                   containsAllOriginalIds(players, [2]),
-    hasInsomniacPlayer:               containsAllOriginalIds(players, [4]),
-    hasSelfAwarenessGirlPlayer:       containsAllOriginalIds(players, [67]),
-    hasSquirePlayer:                  containsAllOriginalIds(players, [83]),
-    hasBeholderPlayer:                containsAllOriginalIds(players, [73]),
-    hasRevealerPlayer:                containsAllOriginalIds(players, [24]),
-    hasExposerPlayer:                 containsAllOriginalIds(players, [46]),
-    hasFlipperPlayer:                 containsAllOriginalIds(players, [59]),
-    hasEmpathPlayer:                  containsAllOriginalIds(players, [77]),
-    hasCuratorPlayer:                 containsAllOriginalIds(players, [20]),
-    hasBlobPlayer:                    containsAllOriginalIds(players, [44]),
-    hasMorticianPlayer:               containsAllOriginalIds(players, [49]),
-    hasFamilyManPlayer:               containsAllOriginalIds(players, [78]),
-  }
+export const hasOraclePlayer = (players)                 => containsAllOriginalIds(players, [50])
+export const hasCopycatPlayer = (players)                => containsAllOriginalIds(players, [30])
+export const hasMirrorManPlayer = (players)              => containsAllOriginalIds(players, [64])
+export const hasDoppelgangerPlayer = (players)           => containsAllOriginalIds(players, [1])
+export const hasAnyVampirePlayers = (players)            => containsAnyOriginalIds(players, vampireIds)
+export const hasTheCountPlayer = (players)               => containsAllOriginalIds(players, [39])
+export const hasRenfieldPlayer = (players)               => containsAllOriginalIds(players, [38])
+export const hasDiseasedPlayer = (players)               => containsAllOriginalIds(players, [32])
+export const hasCupidPlayer = (players)                  => containsAllOriginalIds(players, [31])
+export const hasInstigatorPlayer = (players)             => containsAllOriginalIds(players, [34]) 
+export const hasPriestPlayer = (players)                 => containsAllOriginalIds(players, [37])
+export const hasAssassinPlayer = (players)               => containsAllOriginalIds(players, [29])
+export const hasApprenticeAssassinPlayer = (players)     => containsAllOriginalIds(players, [28])
+export const hasSentinelPlayer = (players)               => containsAllOriginalIds(players, [25])
+export const hasAnyAlienPlayers = (players)              => containsAnyOriginalIds(players, alienIds)
+export const hasCowPlayer = (players)                    => containsAllOriginalIds(players, [45])
+export const hasGroobAndZerbPlayers = (players)          => containsAllOriginalIds(players, groobAndZerbIds)
+export const hasLeaderPlayer = (players)                 => containsAllOriginalIds(players, [48])
+export const hasBodySnatcherPlayer = (players)           => containsAllOriginalIds(players, [74])
+export const hasAnySuperVillainsPlayers = (players)      => containsAnyOriginalIds(players, superVillainsIds)
+export const hasTemptressPlayer = (players)              => containsAllOriginalIds(players, [69])
+export const hasDrPeekerPlayer = (players)               => containsAllOriginalIds(players, [57])
+export const hasRapscallionPlayer = (players)            => containsAllOriginalIds(players, [65])
+export const hasEvilometerPlayer = (players)             => containsAllOriginalIds(players, [58])
+export const hasAnyWerewolfPlayers = (players)           => containsAnyOriginalIds(players, werewolvesIds)
+export const hasDreamWolfPlayer = (players)              => containsAllOriginalIds(players, [21])
+export const hasAlphaWolfPlayer = (players)              => containsAllOriginalIds(players, [17])
+export const hasMysticWolfPlayer = (players)             => containsAllOriginalIds(players, [22])
+export const hasMinionPlayer = (players)                 => containsAllOriginalIds(players, [7])
+export const hasApprenticeTannerPlayer = (players)       => containsAllOriginalIds(players, [71])
+export const hasTannerPlayer = (players)                 => containsAllOriginalIds(players, [10])
+export const hasMadScientistPlayer = (players)           => containsAllOriginalIds(players, [63])
+export const hasInternPlayer = (players)                 => containsAllOriginalIds(players, [62])
+export const hasMasonPlayers = (players)                 => containsAnyOriginalIds(players, masonIds)
+export const hasThingPlayer = (players)                  => containsAllOriginalIds(players, [85])
+export const hasAnnoyingLadPlayer = (players)            => containsAllOriginalIds(players, [55])
+export const hasSeerPlayer = (players)                   => containsAllOriginalIds(players, [9])
+export const hasApprenticeSeerPlayer = (players)         => containsAllOriginalIds(players, [18])
+export const hasParanormalInvestigatorPlayer = (players) => containsAllOriginalIds(players, [23])
+export const hasMarksmanPlayer = (players)               => containsAllOriginalIds(players, [35])
+export const hasNostradamusPlayer = (players)            => containsAllOriginalIds(players, [80])
+export const hasPsychicPlayer = (players)                => containsAllOriginalIds(players, [51])
+export const hasDetectorPlayer = (players)               => containsAllOriginalIds(players, [56])
+export const hasRobberPlayer = (players)                 => containsAllOriginalIds(players, [8])
+export const hasWitchPlayer = (players)                  => containsAllOriginalIds(players, [27])
+export const hasPickpocketPlayer = (players)             => containsAllOriginalIds(players, [36])
+export const hasRoleRetrieverPlayer = (players)          => containsAllOriginalIds(players, [66])
+export const hasVoodooLouPlayer = (players)              => containsAllOriginalIds(players, [70])
+export const hasTroublemakerPlayer = (players)           => containsAllOriginalIds(players, [11])
+export const hasVillageIdiotPlayer = (players)           => containsAllOriginalIds(players, [26])
+//export const hasMarks = (players)                        => containsAnyOriginalIds(players,hasMarkIds) //! TODO
+export const hasAuraSeerPlayer = (players)               => containsAllOriginalIds(players, [72])
+export const hasGremlinPlayer = (players)                => containsAllOriginalIds(players, [33])
+export const hasRascalPlayer = (players)                 => containsAllOriginalIds(players, [52])
+export const hasSwitcherooPlayer = (players)             => containsAllOriginalIds(players, [68])
+export const hasDrunkPlayer = (players)                  => containsAllOriginalIds(players, [2])
+export const hasInsomniacPlayer = (players)              => containsAllOriginalIds(players, [4])
+export const hasSelfAwarenessGirlPlayer = (players)      => containsAllOriginalIds(players, [67])
+export const hasSquirePlayer = (players)                 => containsAllOriginalIds(players, [83])
+export const hasBeholderPlayer = (players)               => containsAllOriginalIds(players, [73])
+export const hasRevealerPlayer = (players)               => containsAllOriginalIds(players, [24])
+export const hasExposerPlayer = (players)                => containsAllOriginalIds(players, [46])
+export const hasFlipperPlayer = (players)                => containsAllOriginalIds(players, [59])
+export const hasEmpathPlayer = (players)                 => containsAllOriginalIds(players, [77])
+export const hasCuratorPlayer = (players)                => containsAllOriginalIds(players, [20])
+export const hasBlobPlayer = (players)                   => containsAllOriginalIds(players, [44])
+export const hasMorticianPlayer = (players)              => containsAllOriginalIds(players, [49])
+export const hasFamilyManPlayer = (players)              => containsAllOriginalIds(players, [78])
 
-  return conditions
-}
+//TODO check
+//export const hasInstantAction = (selectedCards) =>containsAnyIds(selectedCards, doppelgangerInstantActionsIds)
+//export const hasBothMasons = (selectedCards) =>containsAllIds(selectedCards, masonIds)
+//export const hasAnyMason = (selectedCards) =>containsAnyIds(selectedCards, masonIds)
+//export const haOneMasonAndDoppelganger = (selectedCards) =>containsAllIds(selectedCards, [1]) && hasAnyMason
+//export const hasMasons =  hasBothMasons || haOneMasonAndDoppelganger //TODO check if its need to mason
+//export const hasSeers = (selectedCards) =>containsAnyIds(selectedCards, seerIds) //TODO check i need it on beholder */
 
-//TODO check if i can merge into conditions
-/* const hasInstantAction = containsAnyIds(selectedCards, doppelgangerInstantActionsIds)
-const hasBothMasons = containsAllIds(selectedCards, masonIds)
-const hasAnyMason = containsAnyIds(selectedCards, masonIds)
-const haOneMasonAndDoppelganger = containsAllIds(selectedCards, [1]) && hasAnyMason
-const hasMasons = hasBothMasons || haOneMasonAndDoppelganger //TODO check if its need to mason
-const hasSeers = containsAnyIds(selectedCards, seerIds) //TODO check i need it on beholder */
 
-export const checkCards = (selectedCards, totalPlayers) => {
-  const conditions = {
-    hasGoodGuys:               containsAnyIds(selectedCards, goodGuyIds),
-    hasBadGuys:                containsAnyIds(selectedCards, badGuysIds),
-    hasEpicBattle:             hasEpicBattle(selectedCards),
-    hasOracle:                 hasRole(selectedCards, 50),
-    hasCopycat:                hasRole(selectedCards, 30),
-    hasMirrorMan:              hasRole(selectedCards, 64),
-    hasDoppelganger:           hasRole(selectedCards, 1),
-    hasInstantAction:          containsAnyIds(selectedCards, doppelgangerInstantActionsIds),
-    hasAnyVampire:             containsAnyIds(selectedCards, vampireIds),
-    hasTheCount:               hasRole(selectedCards, 39),
-    hasRenfield:               hasRole(selectedCards, 38),
-    hasDiseased:               hasRole(selectedCards, 32),
-    hasCupid:                  hasRole(selectedCards, 31),
-    hasInstigator:             hasRole(selectedCards, 34),
-    hasPriest:                 hasRole(selectedCards, 37),
-    hasAssassin:               hasRole(selectedCards, 29),
-    hasApprenticeAssassin:     hasRole(selectedCards, 28),
-    hasSentinel:               hasRole(selectedCards, 25),
-    hasAnyAlien:               containsAnyIds(selectedCards, alienIds),
-    hasCow:                    hasRole(selectedCards, 45),
-    hasGroobAndZerb:           containsAllIds(selectedCards, groobAndZerbIds),
-    hasLeader:                 hasRole(selectedCards, 48),
-    hasBodySnatcher:           hasRole(selectedCards, 74),
-    hasAnySuperVillains:       containsAnyIds(selectedCards, superVillainsIds),
-    hasTemptress:              hasRole(selectedCards, 69),
-    hasDrPeeker:               hasRole(selectedCards, 57),
-    hasRapscallion:            hasRole(selectedCards, 65),
-    hasEvilometer:             hasRole(selectedCards, 58),
-    hasAnyWerewolf:            containsAnyIds(selectedCards, werewolvesIds),
-    hasDreamWolf:              hasRole(selectedCards, 21),
-    hasAlphaWolf:              hasRole(selectedCards, 17),
-    hasMysticWolf:             hasRole(selectedCards, 22),
-    hasMinion:                 hasRole(selectedCards, 7),
-    hasApprenticeTanner:       hasRole(selectedCards, 71),
-    hasTanner:                 hasRole(selectedCards, 10),
-    hasMadScientist:           hasRole(selectedCards, 63),
-    hasIntern:                 hasRole(selectedCards, 62),
-    hasBothMasons:             containsAllIds(selectedCards, masonIds),
-    hasAnyMason:               containsAnyIds(selectedCards, masonIds),
-    hasThing:                  hasRole(selectedCards, 85),
-    hasAnnoyingLad:            hasRole(selectedCards, 55),
-    hasSeer:                   hasRole(selectedCards, 9),
-    hasApprenticeSeer:         hasRole(selectedCards, 18),
-    hasParanormalInvestigator: hasRole(selectedCards, 23),
-    hasMarksman:               hasRole(selectedCards, 35),
-    hasNostradamus:            hasRole(selectedCards, 80),
-    hasPsychic:                hasRole(selectedCards, 51),
-    hasDetector:               hasRole(selectedCards, 56),
-    hasRobber:                 hasRole(selectedCards, 8),
-    hasWitch:                  hasRole(selectedCards, 27),
-    hasPickpocket:             hasRole(selectedCards, 36),
-    hasRoleRetriever:          hasRole(selectedCards, 66),
-    hasVoodooLou:              hasRole(selectedCards, 70),
-    hasTroublemaker:           hasRole(selectedCards, 11),
-    hasVillageIdiot:           hasRole(selectedCards, 26),
-    hasMarks:                  containsAnyIds(selectedCards, hasMarkIds),
-    hasAuraSeer:               hasRole(selectedCards, 72),
-    hasGremlin:                hasRole(selectedCards, 33),
-    hasRascal:                 hasRole(selectedCards, 52),
-    hasSwitcheroo:             hasRole(selectedCards, 68),
-    hasDrunk:                  hasRole(selectedCards, 2),
-    hasInsomniac:              hasRole(selectedCards, 4),
-    hasSelfAwarenessGirl:      hasRole(selectedCards, 67),
-    hasSquire:                 hasRole(selectedCards, 83),
-    hasSeers:                  containsAnyIds(selectedCards, seerIds),
-    hasRevealer:               hasRole(selectedCards, 24),
-    hasExposer:                hasRole(selectedCards, 46),
-    hasFlipper:                hasRole(selectedCards, 59),
-    hasEmpath:                 hasRole(selectedCards, 77),
-    hasCurator:                hasRole(selectedCards, 20),
-    hasBlob:                   hasRole(selectedCards, 44),
-    hasMortician:              hasRole(selectedCards, 49),
-    hasFamilyMan:              hasRole(selectedCards, 78),
-    hasRipple:                 containsAnyIds(selectedCards, alienIds), //TODO oracle is enough for ripple?
-  }
-  conditions.hasEasterEgg              = !conditions.hasGoodGuys || !conditions.hasBadGuys || totalPlayers === 12
-  conditions.haOneMasonAndDoppelganger = conditions.hasDoppelganger && conditions.hasAnyMason
-  conditions.hasMasons                 = conditions.hasBothMasons || conditions.haOneMasonAndDoppelganger
-  conditions.hasBeholder               = hasRole(selectedCards, 73) && conditions.hasSeers
+export const hasGoodGuys = (selectedCards)               => containsAnyIds(selectedCards, goodGuyIds)
+export const hasBadGuys = (selectedCards)                => containsAnyIds(selectedCards, badGuysIds)
+//export const hasEpicBattle = (selectedCards)             => hasEpicBattle(selectedCards) //! TODO
+export const hasOracle = (selectedCards)                 => hasRole(selectedCards, 50)
+export const hasCopycat = (selectedCards)                => hasRole(selectedCards, 30)
+export const hasMirrorMan = (selectedCards)              => hasRole(selectedCards, 64)
+export const hasDoppelganger = (selectedCards)           => hasRole(selectedCards, 1)
+export const hasInstantAction = (selectedCards)          => containsAnyIds(selectedCards, doppelgangerInstantActionsIds)
+export const hasAnyVampire = (selectedCards)             => containsAnyIds(selectedCards, vampireIds)
+export const hasTheCount = (selectedCards)               => hasRole(selectedCards, 39)
+export const hasRenfield = (selectedCards)               => hasRole(selectedCards, 38)
+export const hasDiseased = (selectedCards)               => hasRole(selectedCards, 32)
+export const hasCupid = (selectedCards)                  => hasRole(selectedCards, 31)
+export const hasInstigator = (selectedCards)             => hasRole(selectedCards, 34)
+export const hasPriest = (selectedCards)                 => hasRole(selectedCards, 37)
+export const hasAssassin = (selectedCards)               => hasRole(selectedCards, 29)
+export const hasApprenticeAssassin = (selectedCards)     => hasRole(selectedCards, 28)
+export const hasSentinel = (selectedCards)               => hasRole(selectedCards, 25)
+export const hasAnyAlien = (selectedCards)               => containsAnyIds(selectedCards, alienIds)
+export const hasCow = (selectedCards)                    => hasRole(selectedCards, 45)
+export const hasGroobAndZerb = (selectedCards)           => containsAllIds(selectedCards, groobAndZerbIds)
+export const hasLeader = (selectedCards)                 => hasRole(selectedCards, 48)
+export const hasBodySnatcher = (selectedCards)           => hasRole(selectedCards, 74)
+export const hasAnySuperVillains = (selectedCards)       => containsAnyIds(selectedCards, superVillainsIds)
+export const hasTemptress = (selectedCards)              => hasRole(selectedCards, 69)
+export const hasDrPeeker = (selectedCards)               => hasRole(selectedCards, 57)
+export const hasRapscallion = (selectedCards)            => hasRole(selectedCards, 65)
+export const hasEvilometer = (selectedCards)             => hasRole(selectedCards, 58)
+export const hasAnyWerewolf = (selectedCards)            => containsAnyIds(selectedCards, werewolvesIds)
+export const hasDreamWolf = (selectedCards)              => hasRole(selectedCards, 21)
+export const hasAlphaWolf = (selectedCards)              => hasRole(selectedCards, 17)
+export const hasMysticWolf = (selectedCards)             => hasRole(selectedCards, 22)
+export const hasMinion = (selectedCards)                 => hasRole(selectedCards, 7)
+export const hasApprenticeTanner = (selectedCards)       => hasRole(selectedCards, 71)
+export const hasTanner = (selectedCards)                 => hasRole(selectedCards, 10)
+export const hasMadScientist = (selectedCards)           => hasRole(selectedCards, 63)
+export const hasIntern = (selectedCards)                 => hasRole(selectedCards, 62)
+export const hasBothMasons = (selectedCards)             => containsAllIds(selectedCards, masonIds)
+export const hasAnyMason = (selectedCards)               => containsAnyIds(selectedCards, masonIds)
+export const hasThing = (selectedCards)                  => hasRole(selectedCards, 85)
+export const hasAnnoyingLad = (selectedCards)            => hasRole(selectedCards, 55)
+export const hasSeer = (selectedCards)                   => hasRole(selectedCards, 9)
+export const hasApprenticeSeer = (selectedCards)         => hasRole(selectedCards, 18)
+export const hasParanormalInvestigator = (selectedCards) => hasRole(selectedCards, 23)
+export const hasMarksman = (selectedCards)               => hasRole(selectedCards, 35)
+export const hasNostradamus = (selectedCards)            => hasRole(selectedCards, 80)
+export const hasPsychic = (selectedCards)                => hasRole(selectedCards, 51)
+export const hasDetector = (selectedCards)               => hasRole(selectedCards, 56)
+export const hasRobber = (selectedCards)                 => hasRole(selectedCards, 8)
+export const hasWitch = (selectedCards)                  => hasRole(selectedCards, 27)
+export const hasPickpocket = (selectedCards)             => hasRole(selectedCards, 36)
+export const hasRoleRetriever = (selectedCards)          => hasRole(selectedCards, 66)
+export const hasVoodooLou = (selectedCards)              => hasRole(selectedCards, 70)
+export const hasTroublemaker = (selectedCards)           => hasRole(selectedCards, 11)
+export const hasVillageIdiot = (selectedCards)           => hasRole(selectedCards, 26)
+export const hasMarks = (selectedCards)                  => containsAnyIds(selectedCards, hasMarkIds)
+export const hasAuraSeer = (selectedCards)               => hasRole(selectedCards, 72)
+export const hasGremlin = (selectedCards)                => hasRole(selectedCards, 33)
+export const hasRascal = (selectedCards)                 => hasRole(selectedCards, 52)
+export const hasSwitcheroo = (selectedCards)             => hasRole(selectedCards, 68)
+export const hasDrunk = (selectedCards)                  => hasRole(selectedCards, 2)
+export const hasInsomniac = (selectedCards)              => hasRole(selectedCards, 4)
+export const hasSelfAwarenessGirl = (selectedCards)      => hasRole(selectedCards, 67)
+export const hasSquire = (selectedCards)                 => hasRole(selectedCards, 83)
+export const hasSeers = (selectedCards)                  => containsAnyIds(selectedCards, seerIds)
+export const hasRevealer = (selectedCards)               => hasRole(selectedCards, 24)
+export const hasExposer = (selectedCards)                => hasRole(selectedCards, 46)
+export const hasFlipper = (selectedCards)                => hasRole(selectedCards, 59)
+export const hasEmpath = (selectedCards)                 => hasRole(selectedCards, 77)
+export const hasCurator = (selectedCards)                => hasRole(selectedCards, 20)
+export const hasBlob = (selectedCards)                   => hasRole(selectedCards, 44)
+export const hasMortician = (selectedCards)              => hasRole(selectedCards, 49)
+export const hasFamilyMan = (selectedCards)              => hasRole(selectedCards, 78)
+export const hasRipple = (selectedCards)                 => containsAnyIds(selectedCards, alienIds) //TODO oracle is enough for ripple?
 
-  return conditions
-};
+//export const hasEasterEgg              = !hasGoodGuys || !hasBadGuys || totalPlayers === 12
+export const haOneMasonAndDoppelganger = hasDoppelganger && hasAnyMason
+export const hasMasons                 = hasBothMasons || haOneMasonAndDoppelganger
+//export const hasBeholder               = hasRole(selectedCards, 73) && hasSeers
+
 

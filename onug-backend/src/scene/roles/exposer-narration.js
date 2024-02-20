@@ -11,7 +11,7 @@ const randomExposer = [
 const createExposer = (kickoffText) => () =>
   [kickoffText, getRandomItemFromArray(randomExposer)]
 
-export const exposer = () => createExposer("exposer_kickoff_text");
+export const exposer_narration = () => createExposer("exposer_kickoff_text");
 
 export const doppelganger_exposer = () =>
   createExposer("doppelganger_exposer_kickoff_text");

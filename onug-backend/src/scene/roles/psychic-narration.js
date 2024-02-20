@@ -12,7 +12,7 @@ const createPsychic = (kickoffText) => () =>
     getRandomItemFromArray(psychicKeys),
   ]
 
-export const psychic = () => createPsychic("psychic_kickoff_text");
+export const psychic_narration = () => createPsychic("psychic_kickoff_text");
 
 export const doppelganger_psychic = () =>
   createPsychic("doppelganger_psychic_kickoff_text");

@@ -3,4 +3,4 @@
 //! At this moment copycat never see flipped or shielded cards, ripple different
 export const copycat_interaction = (gameState, tokens, title) => {};
 
-export const copycat_response = (gameState, token, selected_positions, title) => {};
+export const copycat_response_interaction = (gameState, token, selected_positions, title) => {};

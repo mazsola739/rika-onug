@@ -47,7 +47,7 @@ export const doppelganger_instant_action_interaction = (gameState, tokens, title
   return { ...newGameState, role_interactions }
 };
 
-export const doppelganger_instant_action_response = (gameState, token, selected_positions, title) => {
+export const doppelganger_instant_action_response_interaction =  (gameState, token, selected_positions, title) => {
   const new_role_id = gameState.players[token]?.new_role_id
 
   if (!new_role_id) {

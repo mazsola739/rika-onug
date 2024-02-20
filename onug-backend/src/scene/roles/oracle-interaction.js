@@ -4,4 +4,4 @@
 //* No doppelganger
 export const oracle_interaction = (gameState, tokens, title) => {};
 
-export const oracle_response = (gameState, token, selected_positions, title) => {};
+export const oracle_response_interaction = (gameState, token, selected_positions, title) => {};

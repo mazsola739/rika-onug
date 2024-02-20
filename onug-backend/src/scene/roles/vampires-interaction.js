@@ -3,4 +3,4 @@
 //! NO flipped card but shield
 export const vampire_interaction = (gameState, tokens, title) => {};
 
-export const vampire_response = (gameState, token, selected_positions, title) => {};
+export const vampire_response_interaction =  (gameState, token, selected_positions, title) => {};

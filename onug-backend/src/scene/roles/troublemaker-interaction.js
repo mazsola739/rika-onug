@@ -40,7 +40,7 @@ export const troublemaker_interaction = (gameState, tokens, title) => {
   return { ...newGameState, role_interactions };
 };
 
-export const troublemaker_response = (gameState, token, selected_positions, title) => {
+export const troublemaker_response_interaction =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState;
   }

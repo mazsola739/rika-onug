@@ -1,569 +1,558 @@
-import { roles } from './roles/index';
-import { instantRoleIds, doppelgangerInstantActionsIds } from './constants';
+import * as roles from './roles'
 import { logError } from '../log';
-import { checkCards } from './check-conditions';
-import { getRolesNames, getTeamName } from './utils';
+import { checkCards } from './check-conditions'
 
 const NARRATION = 'actual_scene.narration'
 
 //! todo save interaction identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
 //TODO action_history
 export const sceneHandler = gameState => {
-  const sceneTitle    = gameState.actual_scene.scene_title
-  const selectedCards = gameState.selected_cards
-  const totalPlayers  = Object.keys(gameState.players).length
-  const conditions    = checkCards(selectedCards, totalPlayers)
+  const scene_title    = gameState.actual_scene.scene_title
+  const total_players  = Object.keys(gameState.players).length //TODO save total players into the gamestate
+  const conditions    = checkCards(gameState.selected_cards, total_players)
+
+  const newGameState = { ... gameState }
 
   //TODO easteregg / epic battle
-  switch (sceneTitle) {
+  switch (scene_title) {
    case "EPIC_BATTLE":
       if (conditions.hasEpicBattle || conditions.hasEasterEgg) return {
-        [NARRATION]: roles.epicbattle(conditions.hasEasterEgg, conditions.hasEpicBattle, totalPlayers, conditions.hasBadGuys, conditions.hasGoodGuys)
+        [NARRATION]: roles.epicbattle_narration(newGameState)
       }
       break
-    //! T W I L L I G H T 
+      
     case "ORACLE_QUESTION":
-      const oq = roles.oracle_question()
-
       if (conditions.hasOracle) return {
-        [NARRATION]: oq, 'oracle_question': oq[1]
+        [NARRATION]: roles.oracle_question_narration(newGameState)
       }
       break
 
     case "ORACLE_REACTION":
-      const oracleQuestion = gameState.oracle_question
-      const oracleAnswer = gameState.oracle_answer
-
       if (conditions.hasOracle) return {
-        [NARRATION]: roles.oracle_reaction(oracleQuestion, oracleAnswer),
+        [NARRATION]: roles.oracle_reaction_narration(newGameState),
       }
       break
 
     case "COPYCAT":
       if (conditions.hasCopycat) return {
-        [NARRATION]: roles.copycat(),
+        [NARRATION]: roles.copycat_narration(newGameState),
       }
       break
 
     case "MIRROR_MAN":
       if (conditions.hasMirrorMan) return {
-        [NARRATION]: roles.mirrorman(),
+        [NARRATION]: roles.mirrorman_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER":
       if (conditions.hasDoppelganger) return {
-        [NARRATION]: roles.doppelganger(),
+        [NARRATION]: roles.doppelganger_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_INSTANT_ACTION":
-      const instantRoles = getRolesNames(selectedCards, doppelgangerInstantActionsIds, instantRoleIds)
-
       if (conditions.hasDoppelganger && conditions.hasInstantAction) return {
-        [NARRATION]: roles.doppelganger_instant_action(instantRoles),
+        [NARRATION]: roles.doppelganger_instant_action_narration(newGameState),
       }
       break
-    //! D U S K
+
     case "VAMPIRES":
       if (conditions.hasAnyVampire) return {
-        [NARRATION]: roles.vampires(),
+        [NARRATION]: roles.vampires_narration(newGameState),
       }
       break
 
     case "THE_COUNT":
       if (conditions.hasTheCount) return {
-        [NARRATION]: roles.thecount(),
+        [NARRATION]: roles.thecount_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_THE_COUNT":
       if (conditions.hasDoppelganger && conditions.hasTheCount) return {
-        [NARRATION]: roles.doppelganger_thecount(),
+        [NARRATION]: roles.doppelganger_thecount_narration(newGameState),
       }
       break
 
-    case "RENFIELD":
+    case "RENFIELD": //conditions.hasDoppelganger
       if (conditions.hasRenfield) return {
-        [NARRATION]: roles.renfield(conditions.hasDoppelganger),
+        [NARRATION]: roles.renfield_narration(newGameState),
       }
       break
 
     case "DISEASED":
       if (conditions.hasDiseased) return {
-        [NARRATION]: roles.diseased(),
+        [NARRATION]: roles.diseased_narration(newGameState),
       }
       break
 
     case "CUPID":
       if (conditions.hasCupid) return {
-        [NARRATION]: roles.cupid(),
+        [NARRATION]: roles.cupid_narration(newGameState),
       }
       break
 
     case "INSTIGATOR":
       if (conditions.hasInstigator) return {
-        [NARRATION]: roles.instigator(),
+        [NARRATION]: roles.instigator_narration(newGameState),
       }
       break
 
     case "PRIEST":
       if (conditions.hasPriest) return {
-        [NARRATION]: roles.priest(),
+        [NARRATION]: roles.priest_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_PRIEST":
       if (conditions.hasDoppelganger && conditions.hasPriest) return {
-        [NARRATION]: roles.doppelganger_priest(),
+        [NARRATION]: roles.doppelganger_priest_narration(newGameState),
       }
       break
 
     case "ASSASSIN":
       if (conditions.hasAssassin) return {
-        [NARRATION]: roles.assassin(),
+        [NARRATION]: roles.assassin_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_ASSASSIN":
       if (conditions.hasDoppelganger && conditions.hasAssassin) return {
-        [NARRATION]: roles.doppelganger_assassin(),
+        [NARRATION]: roles.doppelganger_assassin_narration(newGameState),
       }
       break
 
-    case "APPRENTICE_ASSASSIN":
+    case "APPRENTICE_ASSASSIN": //conditions.hasAssassin
       if (conditions.hasApprenticeAssassin) return {
-        [NARRATION]: roles.apprenticeassassin(conditions.hasAssassin),
+        [NARRATION]: roles.apprenticeassassin_narration(newGameState),
       }
       break
 
-    case "DOPPELGÄNGER_APPRENTICE_ASSASSIN":
+    case "DOPPELGÄNGER_APPRENTICE_ASSASSIN": //conditions.hasAssassin
       if (conditions.hasDoppelganger && conditions.hasApprenticeAssassin) return {
-        [NARRATION]: roles.doppelganger_apprenticeassassin(conditions.hasAssassin),
+        [NARRATION]: roles.doppelganger_apprenticeassassin_narration(newGameState),
       }
       break
 
     case "EVERYONE_MARK":
       if (conditions.hasMarks) return {
-        [NARRATION]: roles.everyonemark(),
+        [NARRATION]: roles.everyonemark_narration(newGameState),
       }
       break
-    //! N I G H T
+      
     case "LOVERS":
       if (conditions.hasCupid) return {
-        [NARRATION]: roles.lovers(),
+        [NARRATION]: roles.lovers_narration(newGameState),
       }
       break
 
     case "SENTINEL":
       if (conditions.hasSentinel) return {
-        [NARRATION]: roles.sentinel(gameState),
+        [NARRATION]: roles.sentinel_narration(newGameState),
       }
       break
 
     case "ALIENS":
       if (conditions.hasAnyAlien) return {
-        [NARRATION]: roles.aliens(totalPlayers),
+        [NARRATION]: roles.aliens_narration(newGameState),
       }
       break
 
-    case "COW":
+    case "COW": //conditions.hasDoppelganger
       if (conditions.hasCow) return {
-        [NARRATION]: roles.cow(conditions.hasDoppelganger),
+        [NARRATION]: roles.cow_narration(newGameState),
       }
       break
 
-    case "GROOB_ZERB":
+    case "GROOB_ZERB": //conditions.hasDoppelganger
       if (conditions.hasGroobAndZerb) return {
-        [NARRATION]: roles.groobzerb(conditions.hasDoppelganger),
+        [NARRATION]: roles.groobzerb_narration(newGameState),
       }
       break
 
-    case "LEADER":
+    case "LEADER": //conditions.hasDoppelganger
       if (conditions.hasLeader && conditions.hasAnyAlien) return {
-        [NARRATION]: roles.leader(conditions.hasDoppelganger),
+        [NARRATION]: roles.leader_narration(newGameState),
       }
       break
 
     case "LEADER_ZERB_GROOB":
       if (conditions.hasLeader && conditions.hasGroobAndZerb) return {
-        [NARRATION]: roles.leader_zerbgroob(),
+        [NARRATION]: roles.leader_zerbgroob_narration(newGameState),
       }
       break
 
     case "BODY_SNATCHER":
       if (conditions.hasBodySnatcher) return {
-        [NARRATION]: roles.bodysnatcher(),
+        [NARRATION]: roles.bodysnatcher_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_BODY_SNATCHER":
       if (conditions.hasDoppelganger && conditions.hasBodySnatcher) return {
-        [NARRATION]: roles.doppelganger_bodysnatcher(),
+        [NARRATION]: roles.doppelganger_bodysnatcher_narration(newGameState),
       }
       break
 
     case "SUPER_VILLAINS":
       if (conditions.hasAnySuperVillains) return {
-        [NARRATION]: roles.supervillains(),
+        [NARRATION]: roles.supervillains_narration(newGameState),
       }
       break
 
     case "TEMPTRESS":
       if (conditions.hasTemptress) return {
-        [NARRATION]: roles.temptress(),
+        [NARRATION]: roles.temptress_narration(newGameState),
       }
       break
 
     case "DR_PEEKER":
       if (conditions.hasDrPeeker) return {
-        [NARRATION]: roles.drpeeker(),
+        [NARRATION]: roles.drpeeker_narration(newGameState),
       }
       break
 
     case "RAPSCALLION":
       if (conditions.hasRapscallion) return {
-        [NARRATION]: roles.rapscallion(),
+        [NARRATION]: roles.rapscallion_narration(newGameState),
       }
       break
 
-    case "EVILOMETER":
+    case "EVILOMETER": //conditions.hasDoppelganger
       if (conditions.hasEvilometer) return {
-        [NARRATION]: roles.evilometer(conditions.hasDoppelganger),
+        [NARRATION]: roles.evilometer_narration(newGameState),
       }
       break
 
-    case "WEREWOLVES":
+    case "WEREWOLVES": //conditions.hasDreamWolf
       if (conditions.hasAnyWerewolf) return {
-        [NARRATION]: roles.werewolves(conditions.hasDreamWolf),
+        [NARRATION]: roles.werewolves_narration(newGameState),
       }
       break
 
     case "ALPHA_WOLF":
       if (conditions.hasAlphaWolf) return {
-        [NARRATION]: roles.alphawolf(),
+        [NARRATION]: roles.alphawolf_narration(newGameState),
       }
       break
 
     case "MYSTIC_WOLF":
       if (conditions.hasMysticWolf) return {
-        [NARRATION]: roles.mysticwolf(),
+        [NARRATION]: roles.mysticwolf_narration(newGameState),
       }
       break
 
-    case "MINION":
+    case "MINION": //conditions.hasDoppelganger
       if (conditions.hasMinion) return {
-        [NARRATION]: roles.minion(conditions.hasDoppelganger),
+        [NARRATION]: roles.minion_narration(newGameState),
       }
       break
 
-    case "APPRENTICE_TANNER":
+    case "APPRENTICE_TANNER": //conditions.hasDoppelganger
       if (conditions.hasApprenticeTanner && conditions.hasTanner) return {
-        [NARRATION]: roles.apprenticetanner(conditions.hasDoppelganger),
+        [NARRATION]: roles.apprenticetanner_narration(newGameState),
       }
       break
 
     case "MAD_SCIENTIST":
       if (conditions.hasMadScientist) return {
-        [NARRATION]: roles.madscientist(),
+        [NARRATION]: roles.madscientist_narration(newGameState),
       }
       break
 
-    case "INTERN":
+    case "INTERN": //conditions.hasDoppelganger, conditions.hasMadScientist
       if (conditions.hasIntern) return {
-        [NARRATION]: roles.intern(conditions.hasDoppelganger, conditions.hasMadScientist),
+        [NARRATION]: roles.intern_narration(newGameState),
       }
       break
 
     case "MASONS":
       if (conditions.hasMasons) return {
-        [NARRATION]: roles.masons(),
+        [NARRATION]: roles.masons_narration(newGameState),
       }
       break
 
     case "THING":
       if (conditions.hasThing) return {
-        [NARRATION]: roles.thing(),
+        [NARRATION]: roles.thing_narration(newGameState),
       }
       break
 
     case "ANNOYING_LAD":
       if (conditions.hasAnnoyingLad) return {
-        [NARRATION]: roles.annoyinglad(),
+        [NARRATION]: roles.annoyinglad_narration(newGameState),
       }
       break
 
     case "SEER":
       if (conditions.hasSeer) return {
-        [NARRATION]: roles.seer(),
+        [NARRATION]: roles.seer_narration(newGameState),
       }
       break
 
     case "APPRENTICE_SEER":
       if (conditions.hasApprenticeSeer) return {
-        [NARRATION]: roles.apprenticeseer(),
+        [NARRATION]: roles.apprenticeseer_narration(newGameState),
       }
       break
 
     case "PARANORMAL_INVESTIGATOR":
       if (conditions.hasParanormalInvestigator) return {
-        [NARRATION]: roles.paranormalinvestigator(),
+        [NARRATION]: roles.paranormalinvestigator_narration(newGameState),
       }
       break
 
-    case "MARKSMAN":
+    case "MARKSMAN": //conditions.hasDoppelganger
       if (conditions.hasMarksman) return {
-        [NARRATION]: roles.marksman(conditions.hasDoppelganger),
+        [NARRATION]: roles.marksman_narration(newGameState),
       }
       break
 
     case "NOSTRADAMUS":
       if (conditions.hasNostradamus) return {
-        [NARRATION]: roles.nostradamus(),
+        [NARRATION]: roles.nostradamus_narration(newGameState),
       }
       break
 
-    case "NOSTRADAMUS_REACTION":
-      const lastViewedCardId = gameState.lastViewedCardId
-      const nostradamusTeam = getTeamName(lastViewedCardId) // TODO it's undefined
-
+    case "NOSTRADAMUS_REACTION": //last viewed card id
       if (conditions.hasNostradamus) return {
-        [NARRATION]: roles.nostradamus_reaction(nostradamusTeam),
+        [NARRATION]: roles.nostradamus_reaction_narration(newGameState),
       }
       break
 
     case "PSYCHIC":
       if (conditions.hasPsychic) return {
-        [NARRATION]: roles.psychic(),
+        [NARRATION]: roles.psychic_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_PSYCHIC":
       if (conditions.hasDoppelganger && conditions.hasPsychic) return {
-        [NARRATION]: roles.doppelganger_psychic(),
+        [NARRATION]: roles.doppelganger_psychic_narration(newGameState),
       }
       break
 
     case "DETECTOR":
       if (conditions.hasDetector) return {
-        [NARRATION]: roles.detector(),
+        [NARRATION]: roles.detector_narration(newGameState),
       }
       break
 
     case "ROBBER":
       if (conditions.hasRobber) return {
-        [NARRATION]: roles.robber(),
+        [NARRATION]: roles.robber_narration(newGameState),
       }
       break
 
     case "WITCH":
       if (conditions.hasWitch) return {
-        [NARRATION]: roles.witch(),
+        [NARRATION]: roles.witch_narration(newGameState),
       }
       break
 
     case "PICKPOCKET":
       if (conditions.hasPickpocket) return {
-        [NARRATION]: roles.pickpocket(),
+        [NARRATION]: roles.pickpocket_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_PICKPOCKET":
       if (conditions.hasDoppelganger && conditions.hasPickpocket) return {
-        [NARRATION]: roles.doppelganger_pickpocket(),
+        [NARRATION]: roles.doppelganger_pickpocket_narration(newGameState),
       }
       break
 
     case "ROLE_RETRIEVER":
       if (conditions.hasRoleRetriever) return {
-        [NARRATION]: roles.roleretriever(),
+        [NARRATION]: roles.roleretriever_narration(newGameState),
       }
       break
 
     case "VOODOO_LOU":
       if (conditions.hasVoodooLou) return {
-        [NARRATION]: roles.voodoolou(),
+        [NARRATION]: roles.voodoolou_narration(newGameState),
       }
       break
 
     case "TROUBLEMAKER":
       if (conditions.hasTroublemaker) return {
-        [NARRATION]: roles.troublemaker(),
+        [NARRATION]: roles.troublemaker_narration(newGameState),
       }
       break
 
     case "VILLAGE_IDIOT":
       if (conditions.hasVillageIdiot) return {
-        [NARRATION]: roles.villageidiot(),
+        [NARRATION]: roles.villageidiot_narration(newGameState),
       }
       break
 
-    case "AURA_SEER":
+    case "AURA_SEER": //conditions.hasDoppelganger, conditions.hasMarks
       if (conditions.hasAuraSeer) return {
-        [NARRATION]: roles.auraseer(conditions.hasDoppelganger, conditions.hasMarks),
+        [NARRATION]: roles.auraseer_narration(newGameState),
       }
       break
 
     case "GREMLIN":
       if (conditions.hasGremlin) return {
-        [NARRATION]: roles.gremlin(),
+        [NARRATION]: roles.gremlin_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_GREMLIN":
       if (conditions.hasDoppelganger && conditions.hasGremlin) return {
-        [NARRATION]: roles.doppelganger_gremlin(),
+        [NARRATION]: roles.doppelganger_gremlin_narration(newGameState),
       }
       break
 
     case "RASCAL":
       if (conditions.hasRascal) return {
-        [NARRATION]: roles.rascal(),
+        [NARRATION]: roles.rascal_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_RASCAL":
       if (conditions.hasDoppelganger && conditions.hasRascal) return {
-        [NARRATION]: roles.doppelganger_rascal(),
+        [NARRATION]: roles.doppelganger_rascal_narration(newGameState),
       }
       break
 
     case "SWITCHEROO":
       if (conditions.hasSwitcheroo) return {
-        [NARRATION]: roles.switcheroo(),
+        [NARRATION]: roles.switcheroo_narration(newGameState),
       }
       break
 
     case "DRUNK":
       if (conditions.hasDrunk) return {
-        [NARRATION]: roles.drunk(),
+        [NARRATION]: roles.drunk_narration(newGameState),
       }
       break
 
-    case "INSOMNIAC":
+    case "INSOMNIAC": //conditions.hasDoppelganger
       if (conditions.hasInsomniac) return {
-        [NARRATION]: roles.insomniac(conditions.hasDoppelganger),
+        [NARRATION]: roles.insomniac_narration(newGameState),
       }
       break
 
-    case "SELF_AWARENESS_GIRL":
+    case "SELF_AWARENESS_GIRL": //conditions.hasDoppelganger
       if (conditions.hasSelfAwarenessGirl) return {
-        [NARRATION]: roles.selfawarenessgirl(conditions.hasDoppelganger),
+        [NARRATION]: roles.selfawarenessgirl_narration(newGameState),
       }
       break
 
-    case "SQUIRE":
+    case "SQUIRE": //conditions.hasDoppelganger
       if (conditions.hasSquire) return {
-        [NARRATION]: roles.squire(conditions.hasDoppelganger),
+        [NARRATION]: roles.squire_narration(newGameState),
       }
       break
 
-    case "BEHOLDER":
+    case "BEHOLDER": //conditions.hasSeer, conditions.hasApprenticeSeer, conditions.hasDoppelganger
       if (conditions.hasBeholder) return {
-        [NARRATION]: roles.beholder(conditions.hasSeer, conditions.hasApprenticeSeer, conditions.hasDoppelganger),
+        [NARRATION]: roles.beholder_narration(newGameState),
       }
       break
 
     case "REVEALER":
       if (conditions.hasRevealer) return {
-        [NARRATION]: roles.revealer(),
+        [NARRATION]: roles.revealer_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_REVEALER":
       if (conditions.hasDoppelganger && conditions.hasRevealer) return {
-        [NARRATION]: roles.doppelganger_revealer(),
+        [NARRATION]: roles.doppelganger_revealer_narration(newGameState),
       }
       break
 
     case "EXPOSER":
       if (conditions.hasExposer) return {
-        [NARRATION]: roles.exposer(),
+        [NARRATION]: roles.exposer_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_EXPOSER":
       if (conditions.hasDoppelganger && conditions.hasExposer) return {
-        [NARRATION]: roles.doppelganger_exposer(),
+        [NARRATION]: roles.doppelganger_exposer_narration(newGameState),
       }
       break
 
     case "FLIPPER":
       if (conditions.hasFlipper) return {
-        [NARRATION]: roles.flipper(),
+        [NARRATION]: roles.flipper_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_FLIPPER":
       if (conditions.hasDoppelganger && conditions.hasFlipper) return {
-        [NARRATION]: roles.doppelganger_flipper(),
+        [NARRATION]: roles.doppelganger_flipper_narration(newGameState),
       }
       break
 
     case "EMPATH":
       if (conditions.hasEmpath) return {
-        [NARRATION]: roles.empath(totalPlayers),
+        [NARRATION]: roles.empath_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_EMPATH":
       if (conditions.hasDoppelganger && conditions.hasEmpath) return {
-        [NARRATION]: roles.doppelganger_empath(totalPlayers),
+        [NARRATION]: roles.doppelganger_empath_narration(newGameState),
       }
       break
 
     case "CURATOR":
       if (conditions.hasCurator) return {
-        [NARRATION]: roles.curator(),
+        [NARRATION]: roles.curator_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_CURATOR":
       if (conditions.hasDoppelganger && conditions.hasCurator) return {
-        [NARRATION]: roles.doppelganger_curator(),
+        [NARRATION]: roles.doppelganger_curator_narration(newGameState),
       }
       break
 
     case "BLOB":
       if (conditions.hasBlob) return {
-        [NARRATION]: roles.blob(),
+        [NARRATION]: roles.blob_narration(newGameState),
       }
       break
 
     case "MORTICIAN":
       if (conditions.hasMortician) return {
-        [NARRATION]: roles.mortician(),
+        [NARRATION]: roles.mortician_narration(newGameState),
       }
       break
 
     case "DOPPELGÄNGER_MORTICIAN":
       if (conditions.hasMortician && conditions.hasDoppelganger) return {
-        [NARRATION]: roles.doppelganger_mortician(),
+        [NARRATION]: roles.doppelganger_mortician_narration(newGameState),
       }
       break
 
-    case "FAMILY_MAN":
+    case "FAMILY_MAN": //conditions.hasDoppelganger
       if (conditions.hasFamilyMan) return {
-        [NARRATION]: roles.familyman(conditions.hasDoppelganger),
+        [NARRATION]: roles.familyman_narration(newGameState),
       }
       break
-    //! R I P P L E
+      
     case "RIPPLE":
       if (conditions.hasRipple) return {
-        [NARRATION]: roles.ripple(),
+        [NARRATION]: roles.ripple_narration(newGameState),
       }
       break
-    //! D A Y
+
     case "JOKE":
       return {
-        [NARRATION]: roles.joke()
+        [NARRATION]: roles.joke_narration(newGameState)
       }
 
     /*  INVESTIGATION":
         VOTE":
         WINNERS":*/
     default:
-      logError(`SCENE_HANDLER_DEFAULT case: no role found for: sceneTitle ${sceneTitle}`)
+      logError(`SCENE_HANDLER_DEFAULT case: no role found for: sceneTitle ${scene_title}`)
 
   }
   

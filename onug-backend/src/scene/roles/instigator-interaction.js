@@ -3,4 +3,4 @@
 //! NO flipped card but shield
 export const instigator_interaction = (gameState, tokens, title) => {};
 
-export const instigator_response = (gameState, token, selected_positions, title) => {};
+export const instigator_response_interaction =  (gameState, token, selected_positions, title) => {};

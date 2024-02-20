@@ -20,8 +20,8 @@ const createMortician = (kickoffText) => () =>
     ),
   ]
 
-export const mortician = () => createMortician("mortician_kickoff_text");
+export const mortician_narration = () => createMortician("mortician_kickoff_text");
 
-export const doppelganger_mortician = () => createMortician(
+export const doppelganger_mortician_narration = () => createMortician(
   "doppelganger_mortician_kickoff_text"
 );

@@ -3,4 +3,4 @@
 //TODO doppelganger
 export const priest_interaction = (gameState, tokens, title) => {};
 
-export const priest_response = (gameState, token, selected_positions, title) => {};
+export const priest_response_interaction =  (gameState, token, selected_positions, title) => {};

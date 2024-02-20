@@ -63,7 +63,7 @@ const createRascal = (kickoffText) => () => {
   return result
 }
 
-export const rascal = () => createRascal("rascal_kickoff_text");
+export const rascal_narration = () => createRascal("rascal_kickoff_text");
 
 export const doppelganger_rascal = () =>
   createRascal("doppelganger_rascal_kickoff_text");

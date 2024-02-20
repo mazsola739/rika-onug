@@ -4,4 +4,4 @@
 //! NO flipped card but shield
 export const apprenticeassassin_interaction = (gameState, tokens, title) => {};
 
-export const apprenticeassassin_response = (gameState, token, selected_positions, title) => {};
+export const apprenticeassassin_response_interaction =  (gameState, token, selected_positions, title) => {};

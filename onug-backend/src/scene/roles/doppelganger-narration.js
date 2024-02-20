@@ -11,6 +11,10 @@ const addVerboseOr = (rolesFromIds) => {
 
 export const doppelganger_narration = () => ["doppelganger_kickoff_text"];
 
+
+//const instantRoles = getRolesNames(selectedCards, doppelgangerInstantActionsIds, instantRoleIds)
+//TODO
+
 export const doppelganger_instant_action = (rolesFromIds) => [
   "doppelganger_verbose_intro_text",
   ...addVerboseOr(rolesFromIds),

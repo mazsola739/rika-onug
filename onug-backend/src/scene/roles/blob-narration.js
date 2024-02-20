@@ -13,7 +13,7 @@ const randomBlobKickoffText = [
   "blob_2eachside_text",
 ]
 
-export const blob = () => {
+export const blob_narration = () => {
   const randomKickoff = getRandomItemFromArray(randomBlobKickoffText)
 
   return [

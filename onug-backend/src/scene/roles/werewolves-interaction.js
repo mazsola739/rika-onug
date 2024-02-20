@@ -49,7 +49,7 @@ export const werewolves_interaction = (gameState, tokens, title) => {
   return { ...newGameState, role_interactions }
 };
 
-export const werewolves_response = (gameState, token, selected_positions, title) => {
+export const werewolves_response_interaction =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }

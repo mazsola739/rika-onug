@@ -4,4 +4,4 @@
 //! NO flipped card but shield
 export const thecount_interaction = (gameState, tokens, title) => {};
 
-export const thecount_response = (gameState, token, selected_positions, title) => {};
+export const thecount_response_interaction =  (gameState, token, selected_positions, title) => {};

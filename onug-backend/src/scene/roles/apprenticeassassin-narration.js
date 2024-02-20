@@ -6,8 +6,8 @@ const createApprenticeAssassin = (prefix) => (hasAssassin) =>
       : "apprenticeassassin_alone_text",
   ]
 
-export const apprenticeassassin = () => createApprenticeAssassin("apprenticeassassin");
+export const apprenticeassassin_narration = () => createApprenticeAssassin("apprenticeassassin");
 
-export const doppelganger_apprenticeassassin = () => createApprenticeAssassin(
+export const doppelganger_apprenticeassassin_narration = () => createApprenticeAssassin(
   "doppelganger_apprenticeassassin"
 );

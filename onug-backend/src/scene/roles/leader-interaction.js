@@ -3,4 +3,4 @@
 //TODO doppelganger
 export const leader_interaction = (gameState, tokens, title) => {};
 
-export const leader_response = (gameState, token, selected_positions, title) => {};
+export const leader_response_interaction =  (gameState, token, selected_positions, title) => {};

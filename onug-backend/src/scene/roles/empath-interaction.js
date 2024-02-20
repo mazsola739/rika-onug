@@ -3,4 +3,4 @@
 //TODO doppelganger
 export const empath_interaction = (gameState, tokens, title) => {};
 
-export const empath_response = (gameState, token, selected_positions, title) => {};
+export const empath_response_interaction =  (gameState, token, selected_positions, title) => {};

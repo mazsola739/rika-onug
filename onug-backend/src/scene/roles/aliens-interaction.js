@@ -4,4 +4,4 @@
 //! MARK_OF_FEAR
 export const alien_interaction = (gameState, tokens, title) => {};
 
-export const alien_response = (gameState, token, selected_positions, title) => {};
+export const alien_response_interaction =  (gameState, token, selected_positions, title) => {};

@@ -23,8 +23,8 @@ const createBodysnatcher = (kickoffText) => () =>
     "bodysnatcher_end_text",
   ]
 
-export const bodysnatcher = () => createBodysnatcher("bodysnatcher_kickoff_text");
+export const bodysnatcher_narration = () => createBodysnatcher("bodysnatcher_kickoff_text");
 
-export const doppelganger_bodysnatcher = () => createBodysnatcher(
+export const doppelganger_bodysnatcher_narration = () => createBodysnatcher(
   "doppelganger_bodysnatcher_kickoff_text"
 );

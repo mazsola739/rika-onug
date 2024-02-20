@@ -3,4 +3,4 @@
 //! NO flipped card but shield
 export const cupid_interaction = (gameState, tokens, title) => {};
 
-export const cupid_response = (gameState, token, selected_positions, title) => {};
+export const cupid_response_interaction =  (gameState, token, selected_positions, title) => {};

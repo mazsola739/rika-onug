@@ -3,4 +3,4 @@
 //! NO flipped card but shield
 export const diseased_interaction = (gameState, tokens, title) => {};
 
-export const diseased_response = (gameState, token, selected_positions, title) => {};
+export const diseased_response_interaction =  (gameState, token, selected_positions, title) => {};
