@@ -1,12 +1,12 @@
-const { MESSAGE } = require("../../constant/ws")
-const { getPlayerTokensByPlayerNumber, getPlayerNeighborsByToken } = require("../utils")
-const { websocketServerConnectionsPerRoom } = require("../../websocket/connections")
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
+import { MESSAGE } from '../../constant/ws';
+import { getPlayerTokensByPlayerNumber, getPlayerNeighborsByToken } from '../utils';
+import { websocketServerConnectionsPerRoom } from '../../websocket/connections';
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
 
 //? INFO: Thing - Taps the nearest shoulder of the player on their immediate right or left //THING, ANNOYING_LAD
-exports.thing_interaction = (gameState, tokens, title) => {
+export const thing_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -39,9 +39,9 @@ exports.thing_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};
 
-exports.thing_response = (gameState, token, selected_positions, title) => {
+export const thing_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -73,4 +73,4 @@ exports.thing_response = (gameState, token, selected_positions, title) => {
   ]
 
   return { ...newGameState, role_interactions }
-}
+};

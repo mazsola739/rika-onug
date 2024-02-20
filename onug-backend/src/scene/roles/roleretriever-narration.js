@@ -1,1 +1,1 @@
-exports.roleretriever_narration  = () => ["roleretriever_kickoff_text"]
+export const roleretriever_narration = () => ["roleretriever_kickoff_text"];

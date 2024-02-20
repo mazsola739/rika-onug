@@ -1,8 +1,8 @@
-const { HYDRATE_ROOM } = require("../constant/ws")
-const { logTrace } = require("../log")
-const { validateRoom } = require("../validator")
+import { HYDRATE_ROOM } from '../constant/ws';
+import { logTrace } from '../log';
+import { validateRoom } from '../validator';
 
-exports.hydrateRoom = async (ws, message) => {
+export const hydrateRoom = async (ws, message) => {
   const { room_id } = message
   const [roomIdValid, gameState, errors] = await validateRoom(room_id)
 
@@ -18,4 +18,4 @@ exports.hydrateRoom = async (ws, message) => {
   logTrace(`sending message to client, hydrate room`, hydrateRoom)
 
   return ws.send(hydrateRoom)
-}
+};

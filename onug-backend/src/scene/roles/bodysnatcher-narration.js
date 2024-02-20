@@ -1,4 +1,4 @@
-const { getRandomItemFromArray } = require("../utils")
+import { getRandomItemFromArray } from '../utils';
 
 //TODO save which interaction!
 
@@ -23,7 +23,8 @@ const createBodysnatcher = (kickoffText) => () =>
     "bodysnatcher_end_text",
   ]
 
-exports.bodysnatcher = () => createBodysnatcher("bodysnatcher_kickoff_text")
-exports.doppelganger_bodysnatcher = () => createBodysnatcher(
+export const bodysnatcher = () => createBodysnatcher("bodysnatcher_kickoff_text");
+
+export const doppelganger_bodysnatcher = () => createBodysnatcher(
   "doppelganger_bodysnatcher_kickoff_text"
-)
+);

@@ -1,11 +1,11 @@
-const express = require('express')
+import express from 'express';
 const router = express.Router()
 
-const { populateDeal } = require('./populate-deal')
+import { populateDeal } from './populate-deal';
 
 // populator
 router.post('/populate/deal', populateDeal)
 
-module.exports = {
+export default {
     stubRouter: router,
-}
+};

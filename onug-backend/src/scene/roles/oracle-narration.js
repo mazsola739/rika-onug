@@ -1,6 +1,6 @@
 //TODO save which interaction!
 
-const { getRandomItemFromArray } = require("../utils")
+import { getRandomItemFromArray } from '../utils';
 
 const random_oracle_question = [
   "oracle_alienteam_text",
@@ -51,12 +51,12 @@ const oracle_responses = {
   },
 }
 
-exports.oracle_question_narration  = () => [
+export const oracle_question_narration = () => [
   "oracle_kickoff_text", 
   getRandomItemFromArray(random_oracle_question),
-]
+];
 
-exports.oracle_reaction = (question, answer) => {
+export const oracle_reaction = (question, answer) => {
   if (question === "oracle_evenodd_text") {
     if (answer === "even") {
       return ["oracle_evenodd_even_text"]
@@ -76,4 +76,4 @@ exports.oracle_reaction = (question, answer) => {
       return [getRandomItemFromArray(oracle_responses[question].no)]
     }
   }
-}
+};

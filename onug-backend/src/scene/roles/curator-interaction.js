@@ -1,12 +1,20 @@
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
-const { getSelectablePlayersWithNoShield, getPlayerNumbersWithMatchingTokens, getAllPlayerTokens, getSelectablePlayersWithNoArtifact, getRandomArtifact, getPlayerTokenByPlayerNumber } = require("../utils")
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
+
+import {
+  getSelectablePlayersWithNoShield,
+  getPlayerNumbersWithMatchingTokens,
+  getAllPlayerTokens,
+  getSelectablePlayersWithNoArtifact,
+  getRandomArtifact,
+  getPlayerTokenByPlayerNumber,
+} from '../utils';
 
 //? INFO: Curator - Gives any player (including himself) a random, unknown Artifact. Cannot give to a Shielded player.
 //TODO doppelganger separated 
 //! cant give to shielded
-exports.curator_interaction = (gameState, tokens, title) => {
+export const curator_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -42,9 +50,9 @@ exports.curator_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};
 
-exports.curator_response = (gameState, token, selected_positions, title) => {
+export const curator_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -73,4 +81,4 @@ exports.curator_response = (gameState, token, selected_positions, title) => {
   ]
  
   return { ...newGameState, role_interactions }
-}
+};

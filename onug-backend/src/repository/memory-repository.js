@@ -1,4 +1,4 @@
-const { logTrace } = require('../log')
+import { logTrace } from '../log';
 
 const gameStates = {}
 
@@ -14,7 +14,7 @@ const readGameState = async (room_id) => {
   return gameStates[room_id]
 }
 
-module.exports = {
+export default {
   upsertRoomState,
   readGameState,
-}
+};

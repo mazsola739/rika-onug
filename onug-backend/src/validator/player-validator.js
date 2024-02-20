@@ -1,6 +1,6 @@
-const { validateRoom } = require('./room-validator')
+import { validateRoom } from './room-validator';
 
-exports.validatePlayer = async (room_id, player_name) => {
+export const validatePlayer = async (room_id, player_name) => {
   const [isValidRoom, gameState] = await validateRoom(room_id)
   
   if (!isValidRoom) return [false, 'Invalid room']
@@ -10,4 +10,4 @@ exports.validatePlayer = async (room_id, player_name) => {
   if (isPlayerAlreadyInRoom) return [false, 'Player is already in the room']
 
   return [true, 'Player can join']
-}
+};

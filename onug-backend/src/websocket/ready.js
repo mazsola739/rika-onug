@@ -1,11 +1,11 @@
-const { HYDRATE_READY } = require("../constant/ws")
-const { logDebug, logError } = require("../log")
-const { repository } = require("../repository")
-const { getGameTableBoard } = require("../utils")
-const { broadcast } = require("./connections")
+import { HYDRATE_READY } from '../constant/ws';
+import { logDebug, logError } from '../log';
+import { repository } from '../repository';
+import { getGameTableBoard } from '../utils';
+import { broadcast } from './connections';
 const { readGameState, upsertRoomState } = repository
 
-exports.ready = async (message) => {
+export const ready = async (message) => {
   try {
     logDebug(`ready/not ready requested with ${JSON.stringify(message)}`)
     
@@ -31,4 +31,4 @@ exports.ready = async (message) => {
   } catch (error) {
     logError(error)
   }
-}
+};

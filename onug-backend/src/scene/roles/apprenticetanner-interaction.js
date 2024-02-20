@@ -1,9 +1,9 @@
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { getTannerNumberByRoleIds } = require("../utils")
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { getTannerNumberByRoleIds } from '../utils';
 
 //? INFO: Apprentice Tanner - Tanner sticks out his thumb for him to see. Only wins if another Tanner dies. Multiple Apprentice Tanners are on the same team
-exports.apprenticetanner_interaction = (gameState, tokens, title) => {
+export const apprenticetanner_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -36,4 +36,4 @@ exports.apprenticetanner_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};

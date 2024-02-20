@@ -1,11 +1,11 @@
-const { toggleCardSelect, getCardById, distributeCards, isCardSelectedById } = require("./card")
-const { determineTotalPlayers, getGameTableBoard, getGamePlayBoard } = require("./player")
-const { randomPlayerName } = require("./name-generator")
-const { sanitize, truncate } = require("./sanitizer")
-const { isGameTableClosed, isGamePlayStopped } = require("./game-state")
-const { buildSceneForCardId } = require("./scene")
+import { toggleCardSelect, getCardById, distributeCards, isCardSelectedById } from './card';
+import { determineTotalPlayers, getGameTableBoard, getGamePlayBoard } from './player';
+import { randomPlayerName } from './name-generator';
+import { sanitize, truncate } from './sanitizer';
+import { isGameTableClosed, isGamePlayStopped } from './game-state';
+import { buildSceneForCardId } from './scene';
 
-module.exports = {
+export default {
   toggleCardSelect,
   determineTotalPlayers,
   randomPlayerName,
@@ -19,4 +19,4 @@ module.exports = {
   getCardById,
   distributeCards,
   isCardSelectedById,
-}
+};

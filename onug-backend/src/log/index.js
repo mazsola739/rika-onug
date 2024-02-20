@@ -1,4 +1,4 @@
-const { appendFile } = require("fs/promises")
+import { appendFile } from 'fs/promises';
 
 const LOG_LEVELS = {
     'ERROR': 'ERROR',
@@ -34,21 +34,12 @@ const writeToLogFile = async (message) => {
     })
 }
 
-const logErrorWithStack = error => writeToLogFile(`[ERROR] ${error}. ${error.stack}`) && console.error(`${logTimestamp()}: [ERROR] ${error} ${error.stack}`)
-const logError = (message, items = '') => writeToLogFile(`[ERROR] ${message} ${items && JSON.stringify(items, null, 2)}`)  && console.error(`${logTimestamp()}: [ERROR] ${message} ${JSON.stringify(items, null, 2)}`)
-const logWarn  = (message, items = '') => writeToLogFile(`[WARN]  ${message} ${items && JSON.stringify(items, null, 2)}`)  && isLogLevelEnabled(LOG_LEVELS.WARN)  && console.warn(`${logTimestamp()}: [WARN] ${message} ${items && JSON.stringify(items, null, 2)}`)
-const logInfo  = (message, items = '') => writeToLogFile(`[INFO]  ${message} ${items && JSON.stringify(items, null, 2)}`)  && isLogLevelEnabled(LOG_LEVELS.INFO)  && console.info(`${logTimestamp()}: [INFO] ${message} ${items && JSON.stringify(items, null, 2)}`)
-const logDebug = (message, items = '') => writeToLogFile(`[DEBUG] ${message} ${items && JSON.stringify(items, null, 2)}`)  && isLogLevelEnabled(LOG_LEVELS.DEBUG) && console.info(`${logTimestamp()}: [DEBUG] ${message} ${items && JSON.stringify(items, null, 2)}`)
-const logTrace = (message, items = '') => writeToLogFile(`[TRACE] ${message} ${items && JSON.stringify(items, null, 2)}`)  && isLogLevelEnabled(LOG_LEVELS.TRACE) && console.info(`${logTimestamp()}: [TRACE] ${message} ${items && JSON.stringify(items, null, 2)}`)
+export const logErrorWithStack = error => writeToLogFile(`[ERROR] ${error}. ${error.stack}`) && console.error(`${logTimestamp()}: [ERROR] ${error} ${error.stack}`)
+export const logError = (message, items = '') => writeToLogFile(`[ERROR] ${message} ${items && JSON.stringify(items, null, 2)}`)  && console.error(`${logTimestamp()}: [ERROR] ${message} ${JSON.stringify(items, null, 2)}`)
+export const logWarn  = (message, items = '') => writeToLogFile(`[WARN]  ${message} ${items && JSON.stringify(items, null, 2)}`)  && isLogLevelEnabled(LOG_LEVELS.WARN)  && console.warn(`${logTimestamp()}: [WARN] ${message} ${items && JSON.stringify(items, null, 2)}`)
+export const logInfo  = (message, items = '') => writeToLogFile(`[INFO]  ${message} ${items && JSON.stringify(items, null, 2)}`)  && isLogLevelEnabled(LOG_LEVELS.INFO)  && console.info(`${logTimestamp()}: [INFO] ${message} ${items && JSON.stringify(items, null, 2)}`)
+export const logDebug = (message, items = '') => writeToLogFile(`[DEBUG] ${message} ${items && JSON.stringify(items, null, 2)}`)  && isLogLevelEnabled(LOG_LEVELS.DEBUG) && console.info(`${logTimestamp()}: [DEBUG] ${message} ${items && JSON.stringify(items, null, 2)}`)
+export const logTrace = (message, items = '') => writeToLogFile(`[TRACE] ${message} ${items && JSON.stringify(items, null, 2)}`)  && isLogLevelEnabled(LOG_LEVELS.TRACE) && console.info(`${logTimestamp()}: [TRACE] ${message} ${items && JSON.stringify(items, null, 2)}`)
 
 logDebug('logFilePath', logFilePath)
 logDebug('Log level is set to', LOG_LEVEL)
-
-module.exports = {
-    logError,
-    logWarn,
-    logInfo,
-    logDebug,
-    logTrace,
-    logErrorWithStack,
-}

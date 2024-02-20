@@ -1,10 +1,10 @@
 
-const { startGamePlay, stopGamePlay } = require('./game-play')
+import { startGamePlay, stopGamePlay } from './game-play';
 
-module.exports = {
+export default {
     startGamePlay,
     stopGamePlay,
-}
+};
 
 /*  Screenplay steps
 

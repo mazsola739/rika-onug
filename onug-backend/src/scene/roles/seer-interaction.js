@@ -1,11 +1,18 @@
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, concatArraysWithUniqueElements, getKeys } = require('../utils')
-const { centerCardPositions } = require('../constants')
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
+import {
+  getPlayerNumbersWithNonMatchingTokens,
+  getSelectablePlayersWithNoShield,
+  getCardIdsByPositions,
+  concatArraysWithUniqueElements,
+  getKeys,
+} from '../utils';
+
+import { centerCardPositions } from '../constants';
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
 
 //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
-exports.seer_interaction = (gameState, tokens, title) => {
+export const seer_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -40,9 +47,9 @@ exports.seer_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};
 
-exports.seer_response = (gameState, token, selected_positions, title) => {
+export const seer_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -86,4 +93,4 @@ exports.seer_response = (gameState, token, selected_positions, title) => {
   ]
 
   return { ...newGameState, role_interactions }
-}
+};

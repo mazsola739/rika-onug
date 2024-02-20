@@ -1,4 +1,4 @@
-const { getRandomItemFromArray } = require("../utils")
+import { getRandomItemFromArray } from '../utils';
 
 //TODO save which interaction!
 
@@ -63,6 +63,7 @@ const createRascal = (kickoffText) => () => {
   return result
 }
 
-exports.rascal = () => createRascal("rascal_kickoff_text")
-exports.doppelganger_rascal = () =>
-  createRascal("doppelganger_rascal_kickoff_text")
+export const rascal = () => createRascal("rascal_kickoff_text");
+
+export const doppelganger_rascal = () =>
+  createRascal("doppelganger_rascal_kickoff_text");

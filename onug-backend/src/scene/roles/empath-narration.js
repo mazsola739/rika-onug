@@ -1,4 +1,4 @@
-const { getRandomItemFromArray, pickRandomUpToThreePlayers } = require("../utils")
+import { getRandomItemFromArray, pickRandomUpToThreePlayers } from '../utils';
 
 const empathAllKeys = [
   "identifier_everyone_text",
@@ -38,7 +38,8 @@ const createEmpath = (kickoffText, totalPlayers) => () => {
   ]
 }
 
-exports.empath = (totalPlayers) =>
-  createEmpath("empath_kickoff_text", totalPlayers)()
-exports.doppelganger_empath = (totalPlayers) =>
-  createEmpath("doppelganger_empath_kickoff_text", totalPlayers)()
+export const empath = (totalPlayers) =>
+  createEmpath("empath_kickoff_text", totalPlayers)();
+
+export const doppelganger_empath = (totalPlayers) =>
+  createEmpath("doppelganger_empath_kickoff_text", totalPlayers)();

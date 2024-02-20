@@ -1,19 +1,19 @@
-const express = require('express')
+import express from 'express';
 const router = express.Router()
 
-const { checkGameStates } = require('./check-game-states')
-const { checkGameStateByRoomId } = require('./check-game-state-by-room-id')
-const { reInitAllGameStates } = require('./re-init-all-game-states')
-const { deleteAllGameStates } = require('./delete-all-game-states')
-const { deleteGameStateByRoomId } = require('./delete-game-state-by-room-id')
-const { deleteAllPlayers } = require('./delete-all-players')
-const { deletePlayerByToken } = require('./delete-player-by-token')
-const { checkConnections } = require('./check-connections')
-const { broadCastToAll } = require('./broadcast-to-all')
-const { broadCastToAllInRoom } = require('./broadcast-to-all-in-room')
-const { sendMessageToPlayer } = require('./send-message-to-player')
-const { metaListOnugEnv } = require('./meta-list-onug-env')
-const { metaDeleteAllOldLogFiles } = require('./meta-delete-all-old-log-files')
+import { checkGameStates } from './check-game-states';
+import { checkGameStateByRoomId } from './check-game-state-by-room-id';
+import { reInitAllGameStates } from './re-init-all-game-states';
+import { deleteAllGameStates } from './delete-all-game-states';
+import { deleteGameStateByRoomId } from './delete-game-state-by-room-id';
+import { deleteAllPlayers } from './delete-all-players';
+import { deletePlayerByToken } from './delete-player-by-token';
+import { checkConnections } from './check-connections';
+import { broadCastToAll } from './broadcast-to-all';
+import { broadCastToAllInRoom } from './broadcast-to-all-in-room';
+import { sendMessageToPlayer } from './send-message-to-player';
+import { metaListOnugEnv } from './meta-list-onug-env';
+import { metaDeleteAllOldLogFiles } from './meta-delete-all-old-log-files';
 
 // gamestates
 router.get('/check-game-states', checkGameStates)
@@ -37,6 +37,6 @@ router.get('/delete-player-by-token', deletePlayerByToken)
 router.get('/list-onug-env-vars', metaListOnugEnv)
 router.get('/delete-all-old-log-files', metaDeleteAllOldLogFiles)
 
-module.exports = {
+export default {
     godRouter: router,
-}
+};

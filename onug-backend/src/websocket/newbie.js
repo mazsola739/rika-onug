@@ -1,8 +1,8 @@
-const { NEWBIE, REDIRECT } = require("../constant/ws")
-const { v4: uuidv4, validate } = require("uuid")
-const { logInfo } = require("../log")
+import { NEWBIE, REDIRECT } from '../constant/ws';
+import { v4 as uuidv4, validate } from 'uuid';
+import { logInfo } from '../log';
 
-exports.newbie = (ws, message) => {
+export const newbie = (ws, message) => {
   const { token } = message //TODO handle rejoin, user has valid token
 
   // reconnect, already existing token from client, no token on server side
@@ -29,4 +29,4 @@ exports.newbie = (ws, message) => {
   }
 
   return
-}
+};

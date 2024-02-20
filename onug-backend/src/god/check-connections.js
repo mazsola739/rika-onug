@@ -1,7 +1,7 @@
-const {logTrace, logErrorWithStack} = require("../log")
-const {websocketServerConnectionsPerRoom} = require("../websocket/connections")
+import { logTrace, logErrorWithStack } from '../log';
+import { websocketServerConnectionsPerRoom } from '../websocket/connections';
 
-exports.checkConnections = async (req, res) => {
+export const checkConnections = async (req, res) => {
   try {
     logTrace(`GOD check connections endpoint triggered`)
     const connectionsPerRoom = Object.keys(websocketServerConnectionsPerRoom).map(
@@ -16,4 +16,4 @@ exports.checkConnections = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-}
+};

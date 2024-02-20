@@ -1,1 +1,1 @@
-exports.evilometer_interaction = (gameState, tokens, title) => {}
+export const evilometer_interaction = (gameState, tokens, title) => {};

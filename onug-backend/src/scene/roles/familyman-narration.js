@@ -13,7 +13,7 @@ const randomFamilyman = [
   "familyman_2eachside_text",
 ]
 
-exports.familyman = (hasDoppelganger) => [
+export const familyman = (hasDoppelganger) => [
   hasDoppelganger
     ? "doppelganger_familyman_kickoff_text"
     : "familyman_kickoff_text",
@@ -21,4 +21,4 @@ exports.familyman = (hasDoppelganger) => [
   randomFamilyman.includes("1p")
     ? "familyman_is_end_text"
     : "familyman_are_end_text",
-]
+];

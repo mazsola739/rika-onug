@@ -1,11 +1,11 @@
-const { logWarn } = require('../log')
+import { logWarn } from '../log';
 const validCardIdRange = [1, 86]
 
 const CARDS_ARE_NOT_AN_ARRAY = 'Cards were not provided as an array'
 const CARD_IDS_NOT_IN_VALID_RANGE = 'Card IDs were not in the right ID range'
 const DUPLICATED_CARD_IDS = 'Card IDs were duplicated.'
 
-exports.validateCards = (cards) => {
+export const validateCards = (cards) => {
   const errors = []
 
   const cardsStructIsArray = Array.isArray(cards)
@@ -26,4 +26,4 @@ exports.validateCards = (cards) => {
   if (!validity) logWarn(`Validation errors: ${errors}`)
 
   return [validity, errors]
-}
+};

@@ -1,15 +1,14 @@
-const { werewolvesAndDreamWolfIds, werewolvesIds } = require("./constants")
-const _ = require("lodash")
-const artifacts = require("../data/artifacts.json")
-const { teamIds } = require("./constants")
+import { werewolvesAndDreamWolfIds, werewolvesIds } from './constants';
+import _ from 'lodash';
+import artifacts from '../data/artifacts.json';
+import { teamIds } from './constants';
 
 const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
 
-exports.getRandomItemFromArray = (array) => array[getRandomNumber(0, array.length - 1)]
+export const getRandomItemFromArray = (array) => array[getRandomNumber(0, array.length - 1)];
+export const getRolesNames = (selectedCardIds, actionIds, roles) => selectedCardIds.filter((id) => actionIds.includes(id)).map((id) => roles[id]);
 
-exports.getRolesNames = (selectedCardIds, actionIds, roles) => selectedCardIds.filter((id) => actionIds.includes(id)).map((id) => roles[id])
-
-exports.getTeamName = (id) => {
+export const getTeamName = (id) => {
   for (const key in teamIds) {
     if (teamIds[key].includes(id)) {
       return key
@@ -17,35 +16,32 @@ exports.getTeamName = (id) => {
   }
 
   return "villager"
-}
+};
 
-exports.shufflePlayers = (totalPlayers) => Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`).sort(() => 0.5 - Math.random())
+export const shufflePlayers = (totalPlayers) => Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`).sort(() => 0.5 - Math.random());
 
-exports.pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
+export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
   const players = this.shufflePlayers(totalPlayers)
   const selectedPlayers = ~~(Math.random() * 3) + 1
 
   return selectedPlayers > 1 ? [...players.slice(0, -1), conjunction, players.slice(-1)[0]] : players
-}
+};
 
-exports.pickRandomOnePlayer = (numPlayers) => shufflePlayers(numPlayers)[0]
+export const pickRandomOnePlayer = (numPlayers) => shufflePlayers(numPlayers)[0];
 
-exports.pickRandomTwoPlayers = (numPlayers, conjunction) => {
+export const pickRandomTwoPlayers = (numPlayers, conjunction) => {
   const players = shufflePlayers(numPlayers)
 
   return [players[0], conjunction, players[1]]
-}
+};
 
-exports.pickRandomTwoPlayersArray = (numPlayers) => {
+export const pickRandomTwoPlayersArray = (numPlayers) => {
   const players = shufflePlayers(numPlayers)
 
   return [players[0], players[1]]
-}
+};
 
-
-
-
-exports.getMadScientistPlayerNumberByRoleIds = players => {
+export const getMadScientistPlayerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
@@ -55,9 +51,9 @@ exports.getMadScientistPlayerNumberByRoleIds = players => {
   }
 
   return result
-}
+};
 
-exports.getDreamWolfPlayerNumberByRoleIds = players => {
+export const getDreamWolfPlayerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
@@ -67,9 +63,9 @@ exports.getDreamWolfPlayerNumberByRoleIds = players => {
   }
 
   return result
-}
+};
 
-exports.getTannerNumberByRoleIds = players => {
+export const getTannerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
@@ -79,9 +75,9 @@ exports.getTannerNumberByRoleIds = players => {
   }
 
   return result
-}
+};
 
-exports.getNonWerewolfPlayerNumbersByRoleIds = (players) => {
+export const getNonWerewolfPlayerNumbersByRoleIds = (players) => {
   const result = []
 
   for (const token in players) {
@@ -92,9 +88,9 @@ exports.getNonWerewolfPlayerNumbersByRoleIds = (players) => {
   }
 
   return result
-}
+};
 
-exports.getWerewolfAndDreamwolfPlayerNumbersByRoleIds = (players) => {
+export const getWerewolfAndDreamwolfPlayerNumbersByRoleIds = (players) => {
   const result = []
 
   for (const token in players) {
@@ -105,9 +101,9 @@ exports.getWerewolfAndDreamwolfPlayerNumbersByRoleIds = (players) => {
   }
 
   return result
-}
+};
 
-exports.getWerewolfPlayerNumbersByRoleIds = (players) => {
+export const getWerewolfPlayerNumbersByRoleIds = (players) => {
   const result = []
 
   for (const token in players) {
@@ -118,20 +114,20 @@ exports.getWerewolfPlayerNumbersByRoleIds = (players) => {
   }
 
   return result
-}
+};
 
-exports.getPlayerNumbersWithMatchingTokens = (players, tokens) => tokens.map(token => `player_${players[token].player_number}`)
+export const getPlayerNumbersWithMatchingTokens = (players, tokens) => tokens.map(token => `player_${players[token].player_number}`);
 
-exports.getPlayerNumbersWithNonMatchingTokens = (players, tokens) => {
+export const getPlayerNumbersWithNonMatchingTokens = (players, tokens) => {
   return Object.keys(players)
     .filter((token) => {
       const player = players[token]
       return !tokens.includes(token) && !(player.card?.shield)
     })
     .map((token) => `player_${players[token].player_number}`)
-}
+};
 
-exports.getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
+export const getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
   const result = []
 
   playerNumbers.forEach(key => {
@@ -140,9 +136,9 @@ exports.getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
   })
 
   return result
-}
+};
 
-exports.getCardIdsByPositions = (cardPositions, selectedPositions) => {
+export const getCardIdsByPositions = (cardPositions, selectedPositions) => {
   const result = []
 
   selectedPositions.forEach(position => {
@@ -151,9 +147,9 @@ exports.getCardIdsByPositions = (cardPositions, selectedPositions) => {
   })
 
   return result
-}
+};
 
-exports.getPlayerTokensByPlayerNumber = (players, player) => {
+export const getPlayerTokensByPlayerNumber = (players, player) => {
   const result = []
   const playerNumber = parseInt(player.match(/\d+/)[0])
 
@@ -164,9 +160,9 @@ exports.getPlayerTokensByPlayerNumber = (players, player) => {
   }
 
   return result
-}
+};
 
-exports.getPlayerTokenByPlayerNumber = (players, player) => {
+export const getPlayerTokenByPlayerNumber = (players, player) => {
   const playerNumber = parseInt(player.match(/\d+/)[0]);
 
   for (const token in players) {
@@ -176,13 +172,13 @@ exports.getPlayerTokenByPlayerNumber = (players, player) => {
   }
 
   return null;
-}
+};
 
-exports.getAllPlayerTokens = (players) => {
+export const getAllPlayerTokens = (players) => {
   return Object.keys(players)
-}
+};
 
-exports.getPlayerNeighborsByToken = (players, token) => {
+export const getPlayerNeighborsByToken = (players, token) => {
   const tokens = Object.keys(players)
   const playerCount = tokens.length
   const playerNumber = players[token].player_number
@@ -195,31 +191,26 @@ exports.getPlayerNeighborsByToken = (players, token) => {
   neighbors.push(`player_${nextNeighborNumber}`)
 
   return neighbors
-}
+};
 
-exports.getSelectablePlayersWithNoShield = (players, shielded_cards) => players.filter(player => !shielded_cards.includes(player))
+export const getSelectablePlayersWithNoShield = (players, shielded_cards) => players.filter(player => !shielded_cards.includes(player));
+export const getSelectablePlayersWithNoArtifact = (players, artifacted_cards) => players.filter(player => !artifacted_cards.includes(player));
+export const isPlayersCardsFlipped = (flipped, playersPositions) => Object.keys(flipped).some(key => playersPositions.includes(key));
+export const isActivePlayersCardsFlipped = (flipped, playersPositions) => playersPositions.some((position) => flipped.some((obj) => Object.keys(obj)[0] === position));
+export const concatArraysWithUniqueElements = (array1, array2) => _.uniqWith([...array1, ...array2], _.isEqual);
 
-exports.getSelectablePlayersWithNoArtifact = (players, artifacted_cards) => players.filter(player => !artifacted_cards.includes(player))
-
-exports.isPlayersCardsFlipped = (flipped, playersPositions) => Object.keys(flipped).some(key => playersPositions.includes(key))
-
-exports.isActivePlayersCardsFlipped = (flipped, playersPositions) => playersPositions.some((position) => flipped.some((obj) => Object.keys(obj)[0] === position))
-
-exports.concatArraysWithUniqueElements = (array1, array2) => _.uniqWith([...array1, ...array2], _.isEqual)
-
-exports.getRandomArtifact = (playerArtifacts) => {
+export const getRandomArtifact = (playerArtifacts) => {
   const assignedArtifacts = playerArtifacts.map(obj => Object.values(obj)[0])
   const availableArtifacts = artifacts.filter(artifact => !assignedArtifacts.includes(artifact.id))
   const randomIndex = Math.floor(Math.random() * availableArtifacts.length)
 
   return availableArtifacts[randomIndex].id
-}
+};
 
-exports.getKeys = (array) => array.map(obj => Object.keys(obj)[0])
-
+export const getKeys = (array) => array.map(obj => Object.keys(obj)[0]);
 
 //TODO do i need this functions?
-exports.getTokenByCardId = (players, cardId) => {
+export const getTokenByCardId = (players, cardId) => {
   for (const token in players) {
     if (players?.[token]?.card.player_card_id === cardId) {
       return token
@@ -227,9 +218,9 @@ exports.getTokenByCardId = (players, cardId) => {
   }
 
   return null
-}
+};
 
-exports.getDoppelgangerTokenByRoleId = (players, roleId) => {
+export const getDoppelgangerTokenByRoleId = (players, roleId) => {
   for (const token in players) {
     if (
       players[token].card.player_role_id === roleId &&
@@ -240,9 +231,9 @@ exports.getDoppelgangerTokenByRoleId = (players, roleId) => {
   }
 
   return null
-}
+};
 
-exports.getTokenByOriginalIds = (players, ids) => {
+export const getTokenByOriginalIds = (players, ids) => {
   let result = ""
 
   for (const token in players) {
@@ -252,9 +243,9 @@ exports.getTokenByOriginalIds = (players, ids) => {
   }
 
   return result
-}
+};
 
-exports.hasDoppelganger = players => {
+export const hasDoppelganger = players => {
   for (const token in players) {
     if (players[token].card.player_card_id === 1) {
       return true
@@ -262,9 +253,9 @@ exports.hasDoppelganger = players => {
   }
 
   return false
-}
+};
 
-exports.getTokensByRoleIds = (players, roleIds) => {
+export const getTokensByRoleIds = (players, roleIds) => {
   const result = []
 
   for (const token in players) {
@@ -274,11 +265,11 @@ exports.getTokensByRoleIds = (players, roleIds) => {
   }
 
   return result
-}
+};
 
-exports.getRolePositions = (playerNumbers, roleId) => playerNumbers.map(number => ({ [`player_${number}`]: roleId }))
+export const getRolePositions = (playerNumbers, roleId) => playerNumbers.map(number => ({ [`player_${number}`]: roleId }));
 
-exports.getPlayerCardIds = players => {
+export const getPlayerCardIds = players => {
   const result = []
 
   for (const token in players) {
@@ -287,9 +278,9 @@ exports.getPlayerCardIds = players => {
   }
 
   return result
-}
+};
 
-exports.getPlayerRoleIds = players => {
+export const getPlayerRoleIds = players => {
   const result = []
 
   for (const token in players) {
@@ -298,13 +289,12 @@ exports.getPlayerRoleIds = players => {
   }
 
   return result
-}
+};
 
-exports.containsAllIds = (selectedCardIds, roleIds) => roleIds.every((cardId) => selectedCardIds.includes(cardId))
+export const containsAllIds = (selectedCardIds, roleIds) => roleIds.every((cardId) => selectedCardIds.includes(cardId));
+export const containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId) => selectedCardIds.includes(cardId));
 
-exports.containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId) => selectedCardIds.includes(cardId))
-
-exports.getTokensByOriginalIds = (players, ids) => {
+export const getTokensByOriginalIds = (players, ids) => {
   const result = []
 
   for (const token in players) {
@@ -314,9 +304,9 @@ exports.getTokensByOriginalIds = (players, ids) => {
   }
 
   return result
-}
+};
 
-exports.getTokensByRoleIds = (players, ids) => {
+export const getTokensByRoleIds = (players, ids) => {
   const result = []
 
   for (const token in players) {
@@ -326,9 +316,9 @@ exports.getTokensByRoleIds = (players, ids) => {
   }
 
   return result
-}
+};
 
-exports.getPlayersWithFlippedCards = (players, flipped) => {
+export const getPlayersWithFlippedCards = (players, flipped) => {
   const flippedCardIds = flipped.map(card => Object.values(card)[0]);
   const flippedPlayers = [];
 
@@ -340,4 +330,4 @@ exports.getPlayersWithFlippedCards = (players, flipped) => {
   }
 
   return flippedPlayers;
-}
+};

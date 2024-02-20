@@ -1,16 +1,16 @@
-const { repository } = require("../repository")
+import { repository } from '../repository';
 const { readGameState, upsertRoomState } = repository
-const { broadcast, websocketServerConnectionsPerRoom } = require("../websocket/connections")
-const { HYDRATE_GAME_PLAY } = require("../constant/ws")
-const { logTrace } = require("../log")
-const { narration, interaction } = require("../scene")
-const { STAGES } = require("../constant/stage")
+import { broadcast, websocketServerConnectionsPerRoom } from '../websocket/connections';
+import { HYDRATE_GAME_PLAY } from '../constant/ws';
+import { logTrace } from '../log';
+import { narration, interaction } from '../scene';
+import { STAGES } from '../constant/stage';
 
 //TODO set tickTime each narration different
 
 const tickTime = 8000
 
-exports.stopGamePlay = gameState => {
+export const stopGamePlay = gameState => {
   gameState.game_stopped = true
   gameState.stage = STAGES.ROOM
 
@@ -39,7 +39,7 @@ exports.stopGamePlay = gameState => {
   })
 
   return gameState
-}
+};
 
 const getNextScene = gameState => {
   if (!gameState.actual_scene) return // game already stopped
@@ -110,4 +110,4 @@ const tick = async (room_id) => {
   }
 }
 
-exports.startGamePlay = room_id => setTimeout(() => tick(room_id), 2000)
+export const startGamePlay = room_id => setTimeout(() => tick(room_id), 2000);

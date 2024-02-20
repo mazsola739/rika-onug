@@ -1,5 +1,5 @@
 const createTheCount = (prefix) => () =>
   [`${prefix}_kickoff_text`, "thecount_kickoff2_text"]
 
-exports.thecount = () => createTheCount("thecount")
-exports.doppelganger_thecount = () => createTheCount("doppelganger_thecount")
+export const thecount = () => createTheCount("thecount");
+export const doppelganger_thecount = () => createTheCount("doppelganger_thecount");

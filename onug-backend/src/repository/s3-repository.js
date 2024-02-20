@@ -1,7 +1,7 @@
-const { logTrace } = require('../log')
+import { logTrace } from '../log';
 
 const upsertRoomState = async (state) => logTrace('todo create s3 persister')
 
-module.exports = {
+export default {
   upsertRoomState,
-}
+};

@@ -1,1 +1,1 @@
-exports.switcheroo_narration  = () => ["switcheroo_kickoff_text"]
+export const switcheroo_narration = () => ["switcheroo_kickoff_text"];

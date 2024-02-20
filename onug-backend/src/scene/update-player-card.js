@@ -1,6 +1,10 @@
-const { getPlayerNumbersWithMatchingTokens, isActivePlayersCardsFlipped, isPlayersCardsFlipped } = require("./utils")
+import {
+  getPlayerNumbersWithMatchingTokens,
+  isActivePlayersCardsFlipped,
+  isPlayersCardsFlipped,
+} from './utils';
 
-exports.updatePlayerCard = (gameState, token) => {
+export const updatePlayerCard = (gameState, token) => {
     const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(gameState.players, [token])
     const player = gameState.players[token]
     const flippedCards = gameState.flipped
@@ -21,4 +25,4 @@ exports.updatePlayerCard = (gameState, token) => {
     } else if (iSeeMyCardElsewhere) {
       playerCard.player_card_id = 0
     }
-  }
+  };

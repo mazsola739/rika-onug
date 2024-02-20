@@ -1,8 +1,8 @@
-const {logTrace} = require("../log")
-const {repository} = require("../repository")
+import { logTrace } from '../log';
+import { repository } from '../repository';
 const {readGameStateByRoomId} = repository
 
-exports.checkGameStateByRoomId = async (req, res) => {
+export const checkGameStateByRoomId = async (req, res) => {
     try {
         const {body} = req
         logTrace(`GOD check game state by room_id endpoint triggered: ${JSON.stringify(body)}`)
@@ -17,4 +17,4 @@ exports.checkGameStateByRoomId = async (req, res) => {
     } catch (error) {
         logErrorWithStack(error)
     }
-}
+};

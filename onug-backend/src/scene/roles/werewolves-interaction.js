@@ -1,11 +1,16 @@
-const { getWerewolfPlayerNumbersByRoleIds, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions } = require("../utils")
-const { centerCardPositions } = require("../constants")
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
+import {
+  getWerewolfPlayerNumbersByRoleIds,
+  getDreamWolfPlayerNumberByRoleIds,
+  getCardIdsByPositions,
+} from '../utils';
+
+import { centerCardPositions } from '../constants';
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
 
 //? INFO: Werewolves (4) - Open their eyes and view their fellow Werewolves (including Mystic and Alpha)
-exports.werewolves_interaction = (gameState, tokens, title) => {
+export const werewolves_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -42,9 +47,9 @@ exports.werewolves_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};
 
-exports.werewolves_response = (gameState, token, selected_positions, title) => {
+export const werewolves_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -76,4 +81,4 @@ exports.werewolves_response = (gameState, token, selected_positions, title) => {
   newGameState.players[token].card_or_mark_action = true
 
   return { ...newGameState, role_interactions }
-}
+};

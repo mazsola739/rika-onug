@@ -1,5 +1,6 @@
 
 //TODO doppelganger 
 //! wakes up!
-exports.familyman_interaction = (gameState, tokens, title) => {}
-exports.familyman_response = (gameState, token, selected_positions, title) => {}
+export const familyman_interaction = (gameState, tokens, title) => {};
+
+export const familyman_response = (gameState, token, selected_positions, title) => {};

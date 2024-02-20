@@ -1,4 +1,4 @@
-const { getRandomItemFromArray } = require("../utils")
+import { getRandomItemFromArray } from '../utils';
 
 //TODO save which interaction!
 
@@ -12,6 +12,7 @@ const createPsychic = (kickoffText) => () =>
     getRandomItemFromArray(psychicKeys),
   ]
 
-exports.psychic = () => createPsychic("psychic_kickoff_text")
-exports.doppelganger_psychic = () =>
-  createPsychic("doppelganger_psychic_kickoff_text")
+export const psychic = () => createPsychic("psychic_kickoff_text");
+
+export const doppelganger_psychic = () =>
+  createPsychic("doppelganger_psychic_kickoff_text");

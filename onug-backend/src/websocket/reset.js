@@ -1,11 +1,11 @@
-const { HYDRATE_ROOM } = require("../constant/ws")
-const { logTrace } = require("../log")
-const { validateRoom } = require("../validator")
-const { repository } = require("../repository")
-const { broadcast } = require("./connections")
+import { HYDRATE_ROOM } from '../constant/ws';
+import { logTrace } from '../log';
+import { validateRoom } from '../validator';
+import { repository } from '../repository';
+import { broadcast } from './connections';
 const { upsertRoomState } = repository
 
-exports.reset = async (message) => {
+export const reset = async (message) => {
   try {
     const { room_id } = message
     const [roomIdValid, gameState, errors] = await validateRoom(room_id)
@@ -26,4 +26,4 @@ exports.reset = async (message) => {
   } catch (error) {
     logError(error)
   }
-}
+};

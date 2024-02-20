@@ -1,4 +1,10 @@
-const { getRandomItemFromArray, pickRandomTwoPlayersArray, pickRandomTwoPlayers, pickRandomUpToThreePlayers, pickRandomOnePlayer } = require("../utils")
+import {
+  getRandomItemFromArray,
+  pickRandomTwoPlayersArray,
+  pickRandomTwoPlayers,
+  pickRandomUpToThreePlayers,
+  pickRandomOnePlayer,
+} from '../utils';
 
 const ripple_sure_repeat = ["random_ripple_repeat", "random_ripple_repeat1p"]
 const ripple_random = [
@@ -50,7 +56,7 @@ const rippleCenterAnyKeys = [
   "identifier_center_text",
 ]
 
-exports.ripple = (oracleMadeSureRipple, totalPlayers) => {
+export const ripple = (oracleMadeSureRipple, totalPlayers) => {
   const result = []
 
   const randomRipple = oracleMadeSureRipple ? getRandomItemFromArray(ripple_sure_repeat) : getRandomItemFromArray(ripple_random)
@@ -207,7 +213,7 @@ exports.ripple = (oracleMadeSureRipple, totalPlayers) => {
   }
 
   return result
-}
+};
 
 
 

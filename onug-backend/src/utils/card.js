@@ -1,4 +1,4 @@
-const cards = require("../data/cards.json")
+import cards from '../data/cards.json';
 
 const wolfIdsToCheck = [15, 16, 21, 22]
 const supervillainIdsToCheck = [57, 60, 65]
@@ -146,7 +146,7 @@ const getCardById = (card_id) => cards.find((card) => card.id === card_id)
 const isCardSelectedById = (cardIds, cardId) =>
   cardIds.some((id) => id === cardId)
 
-module.exports = {
+export default {
   toggleCardSelect,
   distributeCards,
   isCardSelectedById,
@@ -156,4 +156,4 @@ module.exports = {
   hasAlphaWolf,
   hasTemptress,
   getRandomNumber,
-}
+};

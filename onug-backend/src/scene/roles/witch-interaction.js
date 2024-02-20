@@ -1,11 +1,17 @@
-const { centerCardPositions } = require("../constants")
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
-const { getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getAllPlayerTokens, getCardIdsByPositions } = require("../utils")
+import { centerCardPositions } from '../constants';
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
+
+import {
+  getPlayerNumbersWithMatchingTokens,
+  getSelectablePlayersWithNoShield,
+  getAllPlayerTokens,
+  getCardIdsByPositions,
+} from '../utils';
 
 //? INFO: Witch - May look at one center card. If she does she must swap it with any player's card (including hers)
-exports.witch_interaction = (gameState, tokens, title) => {
+export const witch_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -36,9 +42,9 @@ exports.witch_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};
 
-exports.witch_response = (gameState, token, selected_positions, title) => {
+export const witch_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -116,4 +122,4 @@ exports.witch_response = (gameState, token, selected_positions, title) => {
   }
 
   return newGameState
-}
+};

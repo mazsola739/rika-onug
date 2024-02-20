@@ -1,11 +1,11 @@
-const { validateRoom } = require("../validator")
-const { determineTotalPlayers, toggleCardSelect } = require("../utils")
-const { repository } = require("../repository")
+import { validateRoom } from '../validator';
+import { determineTotalPlayers, toggleCardSelect } from '../utils';
+import { repository } from '../repository';
 const { upsertRoomState } = repository
-const { HYDRATE_ROOM } = require("../constant/ws")
-const { broadcast } = require("./connections")
+import { HYDRATE_ROOM } from '../constant/ws';
+import { broadcast } from './connections';
 
-exports.updateRoom = async (message) => {
+export const updateRoom = async (message) => {
   const { room_id, card_id, token } = message
   const [roomIdValid, gameState, errors] = await validateRoom(room_id)
 
@@ -26,4 +26,4 @@ exports.updateRoom = async (message) => {
   upsertRoomState(newGameState)
   
   return broadcast(room_id, { type: HYDRATE_ROOM, success: true, selected_cards: newGameState.selected_cards })
-}
+};

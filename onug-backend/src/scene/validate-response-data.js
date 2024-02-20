@@ -1,4 +1,4 @@
-exports.isValidSelection = (selected_positions, player_history) => {
+export const isValidSelection = (selected_positions, player_history) => {
     if (selected_positions.length === 0 || !selected_positions.every(position => player_history.selectable_cards.includes(position))) {
       return false
     }
@@ -10,6 +10,6 @@ exports.isValidSelection = (selected_positions, player_history) => {
     }
   
     return true
-  }
+  };
   
   

@@ -1,8 +1,8 @@
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const {  getMadScientistPlayerNumberByRoleIds } = require('../utils')
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { getMadScientistPlayerNumberByRoleIds } from '../utils';
 
-exports.intern_interaction = (gameState, tokens, title) => {
+export const intern_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -41,4 +41,4 @@ exports.intern_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};

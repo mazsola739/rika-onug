@@ -1,4 +1,16 @@
-const { vampireIds, alienIds, groobAndZerbIds, superVillainsIds, werewolvesIds, masonIds, goodGuyIds, badGuysIds, doppelgangerInstantActionsIds, seerIds, hasMarkIds } = require("./constants")
+import {
+  vampireIds,
+  alienIds,
+  groobAndZerbIds,
+  superVillainsIds,
+  werewolvesIds,
+  masonIds,
+  goodGuyIds,
+  badGuysIds,
+  doppelgangerInstantActionsIds,
+  seerIds,
+  hasMarkIds,
+} from './constants';
 
 const hasRole        = (selectedCards, roleId)  => selectedCards.includes(roleId)
 const containsAllIds = (selectedCards, roleIds) => roleIds.every((cardId) => selectedCards.includes(cardId))
@@ -15,7 +27,7 @@ const hasEpicBattle  = (selectedCards) => {
   return trueCount >= 2
 }
 
-exports.checkCards = (selectedCards, totalPlayers) => {
+export const checkCards = (selectedCards, totalPlayers) => {
   const conditions = {
     hasGoodGuys:               containsAnyIds(selectedCards, goodGuyIds),
     hasBadGuys:                containsAnyIds(selectedCards, badGuysIds),
@@ -98,8 +110,7 @@ exports.checkCards = (selectedCards, totalPlayers) => {
   conditions.hasBeholder               = hasRole(selectedCards, 73) && conditions.hasSeers
 
   return conditions
-}
-
+};
 
 //TODO check if i can merge into conditions
 /* const hasInstantAction = containsAnyIds(selectedCards, doppelgangerInstantActionsIds)
@@ -109,7 +120,7 @@ const haOneMasonAndDoppelganger = containsAllIds(selectedCards, [1]) && hasAnyMa
 const hasMasons = hasBothMasons || haOneMasonAndDoppelganger //TODO check if its need to mason
 const hasSeers = containsAnyIds(selectedCards, seerIds) //TODO check i need it on beholder */
 
-exports.checkCards = (selectedCards, totalPlayers) => {
+export const checkCards = (selectedCards, totalPlayers) => {
   const conditions = {
     hasGoodGuys:               containsAnyIds(selectedCards, goodGuyIds),
     hasBadGuys:                containsAnyIds(selectedCards, badGuysIds),
@@ -192,5 +203,5 @@ exports.checkCards = (selectedCards, totalPlayers) => {
   conditions.hasBeholder               = hasRole(selectedCards, 73) && conditions.hasSeers
 
   return conditions
-}
+};
 

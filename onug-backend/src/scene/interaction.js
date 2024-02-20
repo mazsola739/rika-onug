@@ -1,7 +1,7 @@
-const { interactionHandler } = require("./interaction-handler")
-const { logTrace, logDebug } = require("../log")
+import { interactionHandler } from './interaction-handler';
+import { logTrace, logDebug } from '../log';
 
-exports.interaction = gameState => {
+export const interaction = gameState => {
   const { room_id } = gameState.room_id
   logTrace(`Interaction handling in room: ${room_id}`)
 
@@ -18,4 +18,4 @@ exports.interaction = gameState => {
   }
 
   return newGameState
-}
+};

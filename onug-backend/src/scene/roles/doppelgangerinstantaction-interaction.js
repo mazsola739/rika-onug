@@ -1,6 +1,6 @@
-const { roleInteractions } = require("./index")
-const { INTERACTION } = require("../../constant/ws")
-const { doppelgangerInstantActionsIds} = require("../constants")
+import { roleInteractions } from './index';
+import { INTERACTION } from '../../constant/ws';
+import { doppelgangerInstantActionsIds } from '../constants';
 
 /**
  * * Doppelgänger instant night actions:
@@ -10,7 +10,7 @@ const { doppelgangerInstantActionsIds} = require("../constants")
  * ? 68 Switcheroo, 69 Temptress, 70 Voodoolou, 85 Thing
  * */
 
-exports.doppelganger_instant_action_interaction = (gameState, tokens, title) => {
+export const doppelganger_instant_action_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -45,9 +45,9 @@ exports.doppelganger_instant_action_interaction = (gameState, tokens, title) => 
     if (new_role_id === 85) return roleInteractions.thing(newGameState, [token], title)
   })
   return { ...newGameState, role_interactions }
-}
+};
 
-exports.doppelganger_instant_action_response = (gameState, token, selected_positions, title) => {
+export const doppelganger_instant_action_response = (gameState, token, selected_positions, title) => {
   const new_role_id = gameState.players[token]?.new_role_id
 
   if (!new_role_id) {
@@ -87,4 +87,4 @@ exports.doppelganger_instant_action_response = (gameState, token, selected_posit
   if (new_role_id === 85) return roleInteractions.thing_response(newGameState, token, selected_positions, title)
 
   return newGameState
-}
+};

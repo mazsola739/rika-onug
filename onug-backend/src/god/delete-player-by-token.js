@@ -1,9 +1,9 @@
-const {logTrace, logErrorWithStack} = require("../log")
-const {repository} = require("../repository")
+import { logTrace, logErrorWithStack } from '../log';
+import { repository } from '../repository';
 const {deletePlayerByToken} = repository
 
 
-exports.deletePlayerByToken = async (req, res) => {
+export const deletePlayerByToken = async (req, res) => {
   try {
 
 
@@ -18,4 +18,4 @@ exports.deletePlayerByToken = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-}
+};

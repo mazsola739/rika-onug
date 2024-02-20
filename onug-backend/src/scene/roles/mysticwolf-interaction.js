@@ -1,10 +1,15 @@
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
-const { getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield } = require("../utils")
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
+
+import {
+  getCardIdsByPositions,
+  getPlayerNumbersWithNonMatchingTokens,
+  getSelectablePlayersWithNoShield,
+} from '../utils';
 
 //? INFO: Mystic Wolf - Wakes with other Werewolves. Wakes after and looks at any other player's card (not center or own)
-exports.mysticwolf_interaction = (gameState, tokens, title) => {
+export const mysticwolf_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -38,9 +43,9 @@ exports.mysticwolf_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};
 
-exports.mysticwolf_response = (gameState, token, selected_positions, title) => {
+export const mysticwolf_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -74,4 +79,4 @@ exports.mysticwolf_response = (gameState, token, selected_positions, title) => {
   newGameState.role_interactions = role_interactions
 
   return newGameState
-}
+};

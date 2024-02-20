@@ -1,1 +1,1 @@
-exports.drunk_narration  = () => ["drunk_kickoff_text"]
+export const drunk_narration = () => ["drunk_kickoff_text"];

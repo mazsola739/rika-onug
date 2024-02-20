@@ -1,11 +1,16 @@
-const { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions, getSelectablePlayersWithNoShield } = require("../utils")
-const { townIds } = require("../constants")
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
+import {
+  getPlayerNumbersWithNonMatchingTokens,
+  getCardIdsByPositions,
+  getSelectablePlayersWithNoShield,
+} from '../utils';
+
+import { townIds } from '../constants';
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
 
 //? INFO: Revealer - Turns and keeps one player's card face up unless they are not on the Villager Team
-exports.revealer_interaction = (gameState, tokens, title) => {
+export const revealer_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -39,10 +44,10 @@ exports.revealer_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};
 
 //TODO better response message
-exports.revealer_response = (gameState, token, selected_positions, title) => {
+export const revealer_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -82,4 +87,4 @@ exports.revealer_response = (gameState, token, selected_positions, title) => {
   }
 
   return { ...newGameState, role_interactions }
-}
+};

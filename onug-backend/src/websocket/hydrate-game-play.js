@@ -1,10 +1,10 @@
-const { HYDRATE_GAME_PLAY, REDIRECT } = require("../constant/ws")
-const { logTrace } = require("../log")
-const { repository } = require("../repository")
-const { isGamePlayStopped } = require("../utils")
+import { HYDRATE_GAME_PLAY, REDIRECT } from '../constant/ws';
+import { logTrace } from '../log';
+import { repository } from '../repository';
+import { isGamePlayStopped } from '../utils';
 const { readGameState } = repository
 
-exports.hydrateGamePlay = async (ws, message) => {
+export const hydrateGamePlay = async (ws, message) => {
   logTrace(`hydrate game play ${JSON.stringify(message)}`)
 
   const { room_id, token } = message
@@ -25,4 +25,4 @@ exports.hydrateGamePlay = async (ws, message) => {
       actual_scene,
     })
   )
-}
+};

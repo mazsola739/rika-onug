@@ -1,4 +1,4 @@
-const { getRandomItemFromArray } = require("../utils")
+import { getRandomItemFromArray } from '../utils';
 
 const random_easteregg_nobadguys = [
   "easteregg_nobadguys_text_1",
@@ -25,7 +25,7 @@ const random_easteregg_nogoodguys = [
   "easteregg_nogoodguys_text_10",
 ]
 
-exports.epicbattle = (hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
+export const epicbattle = (hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
   if (hasEpicBattle) {
     return ["everyone_epic_intro_text"]
   }
@@ -43,4 +43,4 @@ exports.epicbattle = (hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nob
   }
 
   return result
-}
+};

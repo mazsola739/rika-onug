@@ -1,13 +1,12 @@
-const { DEAL, REDIRECT } = require("../constant/ws")
-const { logTrace, logInfo } = require("../log")
-const { validateRoom } = require("../validator")
-const { repository } = require("../repository")
-const { STAGES } = require("../constant/stage")
-const { broadcast } = require("./connections")
+import { DEAL, REDIRECT } from '../constant/ws';
+import { logTrace, logInfo } from '../log';
+import { validateRoom } from '../validator';
+import { repository } from '../repository';
+import { STAGES } from '../constant/stage';
+import { broadcast } from './connections';
 const { upsertRoomState } = repository
-const { stubbedCards, getCenterCardPositionByIndex } = require("../stub/populate-deal")
-
-const cards = require("../data/cards.json")
+import { stubbedCards, getCenterCardPositionByIndex } from '../stub/populate-deal';
+import cards from '../data/cards.json';
 
 const alphaWolfId = 17
 const temptressId = 69
@@ -144,7 +143,7 @@ const createPositionCard = (card, selected_cards) => {
   return positionCard
 }
 
-exports.dealCards = async (ws, message) => {
+export const dealCards = async (ws, message) => {
   const { room_id } = message
 
   logTrace(`Dealing cards for players in room: ${room_id}`)
@@ -201,4 +200,4 @@ exports.dealCards = async (ws, message) => {
   }
 
   return broadcast(room_id, redirectToGameTable)
-}
+};

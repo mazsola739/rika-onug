@@ -1,4 +1,4 @@
-exports.beholder = (hasSeer, hasApprenticeSeer, hasDoppelganger) => [
+export const beholder = (hasSeer, hasApprenticeSeer, hasDoppelganger) => [
   hasDoppelganger
     ? "doppelganger_beholder_kickoff_text"
     : "beholder_seer_kickoff_text",
@@ -7,4 +7,4 @@ exports.beholder = (hasSeer, hasApprenticeSeer, hasDoppelganger) => [
     : hasSeer
     ? "beholder_seer_kickoff_text"
     : "beholder_apprenticeseer_kickoff_text",
-]
+];

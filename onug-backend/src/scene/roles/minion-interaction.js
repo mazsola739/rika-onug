@@ -1,8 +1,8 @@
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
 
 //? INFO: Minion - All Werewolf team (not Minion/Squire) stick up their thumb for him to see
-exports.minion_interaction = (gameState, tokens, title) => {
+export const minion_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -35,4 +35,4 @@ exports.minion_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};

@@ -1,12 +1,12 @@
-const { REDIRECT } = require("../constant/ws")
-const { logTrace } = require("../log")
-const { validateRoom } = require("../validator")
-const { repository } = require("../repository")
-const { broadcast } = require("./connections")
-const { stopGamePlay } = require("../screen-play")
+import { REDIRECT } from '../constant/ws';
+import { logTrace } from '../log';
+import { validateRoom } from '../validator';
+import { repository } from '../repository';
+import { broadcast } from './connections';
+import { stopGamePlay } from '../screen-play';
 const { upsertRoomState } = repository
 
-exports.stopGame = async (message) => {
+export const stopGame = async (message) => {
   const { room_id, token } = message
   logTrace(`game stop requested in: ${room_id}`)
   const [roomIdValid, gameState, errors] = await validateRoom(room_id)
@@ -27,4 +27,4 @@ exports.stopGame = async (message) => {
   }
   
   return broadcast(room_id, stopGame)
-}
+};

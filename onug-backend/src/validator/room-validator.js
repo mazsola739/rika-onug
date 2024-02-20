@@ -1,11 +1,11 @@
-const { repository } = require('../repository')
+import { repository } from '../repository';
 const { readGameState } = repository
-const { logWarn } = require('../log')
+import { logWarn } from '../log';
 
 const roomIds = ['foyer', 'archives', 'armory', 'dynamite_room', 'great_hall', 'guest_bedroom', 'kitchen', 'laboratory', 
 'observatory', 'panic_room', 'parlor', 'secret_passage', 'sitting_room', 'staff_quarters', 'study', 'workshop']
 
-exports.validateRoom = async (roomId) => {
+export const validateRoom = async (roomId) => {
   const errors = []
   
   const roomIdExists = roomIds.includes(roomId)
@@ -35,4 +35,4 @@ exports.validateRoom = async (roomId) => {
   if (!validity) logWarn(`Validation errors: ${errors}`)
 
   return [validity, gameState, errors]
-}
+};

@@ -1,3 +1,3 @@
 
-exports.lover_interaction = (gameState, tokens, title) => {}
+export const lover_interaction = (gameState, tokens, title) => {};
 

@@ -1,7 +1,7 @@
-const { logError, logTrace } = require("../log")
-const { websocketServerConnectionsPerRoom } = require("./connections")
+import { logError, logTrace } from '../log';
+import { websocketServerConnectionsPerRoom } from './connections';
 
-exports.reload = (ws, message) => {
+export const reload = (ws, message) => {
   try {
     logTrace("reload happened on the client side")
     const { token } = message
@@ -17,4 +17,4 @@ exports.reload = (ws, message) => {
   } catch (error) {
     logError(error)
   }
-}
+};

@@ -1,12 +1,12 @@
-const { logDebug } = require("../log")
-const { checkPlayers } = require("./check-conditions")
-const { doppelgangerInstantActionsIds, werewolvesIds, seerIds, masonIds } = require("./constants")
-const { roleInteractions } = require("./roles")
-const { doppelganger_instant_action } = require("./roles/doppelgangerinstantaction-interaction")
-const { getTokensByOriginalIds, containsAnyIds, containsAllIds } = require("./utils")
+import { logDebug } from '../log';
+import { checkPlayers } from './check-conditions';
+import { doppelgangerInstantActionsIds, werewolvesIds, seerIds, masonIds } from './constants';
+import { roleInteractions } from './roles';
+import { doppelganger_instant_action } from './roles/doppelgangerinstantaction-interaction';
+import { getTokensByOriginalIds, containsAnyIds, containsAllIds } from './utils';
 
 //TODO action_history
-exports.interactionHandler = (gameState) => {
+export const interactionHandler = (gameState) => {
   const newGameState = { ...gameState }
   const sceneTitle = newGameState.actual_scene.scene_title
 
@@ -636,4 +636,4 @@ exports.interactionHandler = (gameState) => {
   }
 
 return newGameState
-}
+};

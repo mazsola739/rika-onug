@@ -1,11 +1,11 @@
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
-const { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions } = require("../utils")
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
+import { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions } from '../utils';
 
 //? INFO: Doppelgänger - Looks at any other player's card and becomes that card. Does that action during but different time
 //! At this moment doppelganger never see flipped or shielded cards, ripple different
-exports.doppelganger_interaction = (gameState, tokens, title) => {
+export const doppelganger_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -38,9 +38,9 @@ exports.doppelganger_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};
 
-exports.doppelganger_response = (gameState, token, selected_positions, title) => {
+export const doppelganger_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -73,4 +73,4 @@ exports.doppelganger_response = (gameState, token, selected_positions, title) =>
   ]
 
   return { ...newGameState, role_interactions }
-}
+};

@@ -1,11 +1,16 @@
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getPlayerTokenByPlayerNumber } = require("../utils")
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
+
+import {
+  getPlayerNumbersWithNonMatchingTokens,
+  getSelectablePlayersWithNoShield,
+  getPlayerTokenByPlayerNumber,
+} from '../utils';
 
 //? INFO: Sentinel - Place a Shield token on any other player's card that card (not mark) cannot be looked at or moved
 //! MARK_OF_FEAR
-exports.sentinel_interaction = (gameState, tokens, title) => {
+export const sentinel_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -39,9 +44,9 @@ exports.sentinel_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};
 
-exports.sentinel_response = (gameState, token, selected_positions, title) => {
+export const sentinel_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -69,4 +74,4 @@ exports.sentinel_response = (gameState, token, selected_positions, title) => {
   ]
 
   return { ...newGameState, role_interactions }
-}
+};

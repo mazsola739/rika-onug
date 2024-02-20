@@ -1,4 +1,4 @@
-const { getRandomItemFromArray } = require("../utils")
+import { getRandomItemFromArray } from '../utils';
 
 const random_joke = [
   "joke_1_text",
@@ -23,4 +23,4 @@ const random_joke = [
   "joke_20_text",
 ]
 
-exports.joke_narration  = () => [getRandomItemFromArray(random_joke)]
+export const joke_narration = () => [getRandomItemFromArray(random_joke)];

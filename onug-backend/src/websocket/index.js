@@ -1,5 +1,5 @@
-const { websocketServer } = require('./websocket-server')
+import { websocketServer } from './websocket-server';
 
-module.exports = {
+export default {
     websocketServer
-}
+};

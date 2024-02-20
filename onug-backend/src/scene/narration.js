@@ -1,7 +1,7 @@
-const { logTrace, logDebug } = require("../log")
-const { sceneHandler } = require("./scene-handler")
-const script = require("../data/script.json")
-const _ = require("lodash")
+import { logTrace, logDebug } from '../log';
+import { sceneHandler } from './scene-handler';
+import script from '../data/script.json';
+import _ from 'lodash';
 
 const scriptOrder = [
   script.twilight,
@@ -13,7 +13,7 @@ const scriptOrder = [
 
 //TODO RIPPLE
 
-exports.narration = (gameState) => {
+export const narration = (gameState) => {
   const { room_id } = gameState.room_id
   logTrace(`Narration playing for players in room: ${room_id}`)
 
@@ -40,4 +40,4 @@ exports.narration = (gameState) => {
   )
 
   return newGameState
-}
+};

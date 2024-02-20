@@ -1,11 +1,11 @@
-const { repository } = require("../repository")
+import { repository } from '../repository';
 const { upsertRoomState, readGameState } = repository
-const { logTrace } = require("../log")
-const { LEAVE_TABLE, HYDRATE_GAME_TABLE, REDIRECT } = require("../constant/ws")
-const { broadcast } = require("./connections")
-const { STAGES } = require("../constant/stage")
+import { logTrace } from '../log';
+import { LEAVE_TABLE, HYDRATE_GAME_TABLE, REDIRECT } from '../constant/ws';
+import { broadcast } from './connections';
+import { STAGES } from '../constant/stage';
 
-exports.leaveTable = async (ws, message) => {
+export const leaveTable = async (ws, message) => {
   logTrace(`leave-table requested with ${JSON.stringify(message)}`)
 
   const { room_id, token } = message
@@ -44,4 +44,4 @@ exports.leaveTable = async (ws, message) => {
   await upsertRoomState(newGameState)
 
   return broadcast(room_id, { type: REDIRECT, path: `/room/${room_id}` })
-}
+};

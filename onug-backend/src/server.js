@@ -1,12 +1,11 @@
-const express = require("express")
-const cors = require('cors')
-const cookieParser = require('cookie-parser')
-
-const { pageNotFoundError, internalServerError, apiRouter } = require("./api")
-const { logDebug } = require('./log')
-const { websocketServer } = require('./websocket')
-const { godRouter } = require("./god")
-const { stubRouter } = require("./stub")
+import express from 'express';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import { pageNotFoundError, internalServerError, apiRouter } from './api';
+import { logDebug } from './log';
+import { websocketServer } from './websocket';
+import { godRouter } from './god';
+import { stubRouter } from './stub';
 import ViteExpress from "vite-express";
 
 

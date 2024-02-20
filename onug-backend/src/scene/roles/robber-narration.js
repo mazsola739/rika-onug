@@ -1,1 +1,1 @@
-exports.robber_narration  = () => ["robber_kickoff_text"]
+export const robber_narration = () => ["robber_kickoff_text"];

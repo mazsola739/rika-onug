@@ -1,1 +1,1 @@
-exports.alphawolf_narration  = () => ["alphawolf_kickoff_text"]
+export const alphawolf_narration = () => ["alphawolf_kickoff_text"];

@@ -1,4 +1,4 @@
-const { getRandomItemFromArray } = require("../utils")
+import { getRandomItemFromArray } from '../utils';
 
 //TODO save which interaction!
 
@@ -11,6 +11,7 @@ const randomExposer = [
 const createExposer = (kickoffText) => () =>
   [kickoffText, getRandomItemFromArray(randomExposer)]
 
-exports.exposer = () => createExposer("exposer_kickoff_text")
-exports.doppelganger_exposer = () =>
-  createExposer("doppelganger_exposer_kickoff_text")
+export const exposer = () => createExposer("exposer_kickoff_text");
+
+export const doppelganger_exposer = () =>
+  createExposer("doppelganger_exposer_kickoff_text");

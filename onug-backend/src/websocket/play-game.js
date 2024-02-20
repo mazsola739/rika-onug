@@ -1,12 +1,12 @@
-const { PLAY_GAME } = require("../constant/ws")
-const { logTrace } = require("../log")
-const { validateRoom } = require("../validator")
-const { repository } = require("../repository")
-const { STAGES } = require("../constant/stage")
-const { broadcastPlayGame } = require("./connections")
+import { PLAY_GAME } from '../constant/ws';
+import { logTrace } from '../log';
+import { validateRoom } from '../validator';
+import { repository } from '../repository';
+import { STAGES } from '../constant/stage';
+import { broadcastPlayGame } from './connections';
 const { upsertRoomState } = repository
 
-exports.playGame = async (ws, message) => {
+export const playGame = async (ws, message) => {
   const { room_id, token } = message
   logTrace(`Game started in room: ${room_id}`)
   const [roomIdValid, gameState, errors] = await validateRoom(room_id)
@@ -43,4 +43,4 @@ exports.playGame = async (ws, message) => {
   await upsertRoomState(newRoomState)
 
   return broadcastPlayGame(newRoomState)
-}
+};

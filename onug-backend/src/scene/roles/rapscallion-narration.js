@@ -1,2 +1,2 @@
-exports.rapscallion_narration  = () => ["rapscallion_kickoff_text"]
+export const rapscallion_narration = () => ["rapscallion_kickoff_text"];
 

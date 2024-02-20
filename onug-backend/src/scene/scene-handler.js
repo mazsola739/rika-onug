@@ -1,14 +1,14 @@
-const { roles } = require("./roles/index")
-const { instantRoleIds, doppelgangerInstantActionsIds } = require("./constants")
-const { logError } = require("../log")
-const { checkCards } = require("./check-conditions")
-const { getRolesNames, getTeamName } = require("./utils")
+import { roles } from './roles/index';
+import { instantRoleIds, doppelgangerInstantActionsIds } from './constants';
+import { logError } from '../log';
+import { checkCards } from './check-conditions';
+import { getRolesNames, getTeamName } from './utils';
 
 const NARRATION = 'actual_scene.narration'
 
 //! todo save interaction identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
 //TODO action_history
-exports.sceneHandler  = gameState => {
+export const sceneHandler = gameState => {
   const sceneTitle    = gameState.actual_scene.scene_title
   const selectedCards = gameState.selected_cards
   const totalPlayers  = Object.keys(gameState.players).length
@@ -568,4 +568,4 @@ exports.sceneHandler  = gameState => {
   }
   
   return {}
-}
+};

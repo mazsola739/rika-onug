@@ -1,4 +1,4 @@
-const { pickRandomUpToThreePlayers, getRandomItemFromArray } = require("../utils")
+import { pickRandomUpToThreePlayers, getRandomItemFromArray } from '../utils';
 
 const random_aliens = [
   "aliens_view_text",
@@ -23,7 +23,7 @@ const alienAllKeys = [
   "identifier_evenplayers_text",
 ]
 
-exports.aliens = (totalPlayers) => {
+export const aliens = (totalPlayers) => {
   const result = ["aliens_kickoff_text"]
   const randomInstructions = getRandomItemFromArray(random_aliens)
 
@@ -49,4 +49,4 @@ exports.aliens = (totalPlayers) => {
   }
 
   return result
-}
+};

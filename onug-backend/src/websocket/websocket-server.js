@@ -1,26 +1,41 @@
-const WebSocket = require("ws")
-const { logTrace, logError, logErrorWithStack } = require("../log")
-const {
-  UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_GAME_TABLE, ARRIVE_ROOM, START_GAME,
-  DEAL, ARRIVE_GAME_PLAY, STOP_GAME, RELOAD, INTERACTION
-} = require("../constant/ws")
-const { hydrateRoom } = require("./hydrate-room")
-const { reset } = require("./reset")
-const { updateRoom } = require("./update-room")
-const { newbie } = require("./newbie")
-const { joinRoom } = require("./join-room")
-const { leaveRoom } = require("./leave-room")
-const { leaveTable } = require("./leave-table")
-const { ready } = require("./ready")
-const { hydrateGameTable } = require("./hydrate-game-table")
-const { startGame } = require('./start-game')
-const { dealCards } = require('./deal-cards')
-const { hydrateGamePlay } = require('./hydrate-game-play')
-const { stopGame } = require("./stop-game")
-const { reload } = require("./reload")
-const { interaction } = require("./interaction")
+import WebSocket from 'ws';
+import { logTrace, logError, logErrorWithStack } from '../log';
 
-exports.websocketServer = (port) => {
+import {
+  UPDATE_ROOM,
+  READY,
+  RESET,
+  NEWBIE,
+  JOIN_ROOM,
+  LEAVE_ROOM,
+  LEAVE_TABLE,
+  ARRIVE_GAME_TABLE,
+  ARRIVE_ROOM,
+  START_GAME,
+  DEAL,
+  ARRIVE_GAME_PLAY,
+  STOP_GAME,
+  RELOAD,
+  INTERACTION,
+} from '../constant/ws';
+
+import { hydrateRoom } from './hydrate-room';
+import { reset } from './reset';
+import { updateRoom } from './update-room';
+import { newbie } from './newbie';
+import { joinRoom } from './join-room';
+import { leaveRoom } from './leave-room';
+import { leaveTable } from './leave-table';
+import { ready } from './ready';
+import { hydrateGameTable } from './hydrate-game-table';
+import { startGame } from './start-game';
+import { dealCards } from './deal-cards';
+import { hydrateGamePlay } from './hydrate-game-play';
+import { stopGame } from './stop-game';
+import { reload } from './reload';
+import { interaction } from './interaction';
+
+export const websocketServer = (port) => {
   try {
     const wss = new WebSocket.WebSocketServer({ port })
     wss.on("connection", function connection(ws, request, client) {
@@ -56,4 +71,4 @@ exports.websocketServer = (port) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-}
+};

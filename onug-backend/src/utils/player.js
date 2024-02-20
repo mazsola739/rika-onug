@@ -1,4 +1,4 @@
-exports.determineTotalPlayers = (totalCharacters, selectedCards) => {
+export const determineTotalPlayers = (totalCharacters, selectedCards) => {
   const hasAlphaWolf = selectedCards.includes(17)
   const hasTemptress = selectedCards.includes(69)
 
@@ -12,9 +12,9 @@ exports.determineTotalPlayers = (totalCharacters, selectedCards) => {
   }
 
   return Math.max(totalPlayers, 0)
-}
+};
 
-exports.getGameTableBoard = (gameState) => {
+export const getGameTableBoard = (gameState) => {
   const playersPrivate = Object.values(gameState.players);
 
   const playersPublic = playersPrivate.map((player) => {
@@ -46,7 +46,7 @@ exports.getGameTableBoard = (gameState) => {
   };
 };
 
-exports.getGamePlayBoard = (gameState) => {
+export const getGamePlayBoard = (gameState) => {
   const cardsOnBoard = Object.keys(gameState?.card_positions).map(
     (position) => {
       const playerCard = gameState.card_positions[position];

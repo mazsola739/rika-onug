@@ -1,6 +1,6 @@
-exports.renfield = (hasDoppelganger) => [
+export const renfield = (hasDoppelganger) => [
   hasDoppelganger
     ? "doppelganger_renfield_kickoff_text"
     : "renfield_kickoff_text",
   "renfield_kickoff2_text",
-]
+];

@@ -1,12 +1,12 @@
-const { INTERACTION } = require("../constant/ws")
-const { logDebug, logError } = require("../log")
-const { roleInteractions } = require("../scene/roles/index")
-const { repository } = require('../repository')
-const { websocketServerConnectionsPerRoom } = require("./connections")
-const { doppelganger_instant_action_response } = require("../scene/roles/doppelganger-interaction")
+import { INTERACTION } from '../constant/ws';
+import { logDebug, logError } from '../log';
+import { roleInteractions } from '../scene/roles/index';
+import { repository } from '../repository';
+import { websocketServerConnectionsPerRoom } from './connections';
+import { doppelganger_instant_action_response } from '../scene/roles/doppelganger-interaction';
 const { readGameState, upsertRoomState } = repository
 
-exports.interaction = async (ws, message) => {
+export const interaction = async (ws, message) => {
   try {
     logDebug(`Interaction requested with ${JSON.stringify(message)}`)
 
@@ -25,7 +25,7 @@ exports.interaction = async (ws, message) => {
     logError(error)
     logError(JSON.stringify(error?.stack))
   }
-}
+};
 
 const generateInteractionResponse = (gameState, token, selected_positions, ws) => {
   const interaction_type = gameState?.players?.[token]?.player_history?.scene_title

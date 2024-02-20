@@ -1,5 +1,5 @@
-const roomNames = require("../data/room_names.json")
-const { logDebug, logTrace } = require("../log")
+import roomNames from '../data/room_names.json';
+import { logDebug, logTrace } from '../log';
 
 const websocketServerConnectionsPerRoom = {}
 const initWebSocketConnections = () => roomNames.forEach((roomName) => (websocketServerConnectionsPerRoom[roomName] = {}))
@@ -33,11 +33,11 @@ const sendInteractionSceneToPlayer = gameState => {
   })
 }
 
-module.exports = {
+export default {
   websocketServerConnectionsPerRoom,
   initWebSocketConnections,
   addUserToRoom,
   removeUserFromRoom,
   broadcast,
   sendInteractionSceneToPlayer,
-}
+};

@@ -13,11 +13,11 @@ const randomBlobKickoffText = [
   "blob_2eachside_text",
 ]
 
-exports.blob = () => {
+export const blob = () => {
   const randomKickoff = getRandomItemFromArray(randomBlobKickoffText)
 
   return [
     randomKickoff,
     randomKickoff.includes("1p") ? "blob_is_end_text" : "blob_are_end_text",
   ]
-}
+};

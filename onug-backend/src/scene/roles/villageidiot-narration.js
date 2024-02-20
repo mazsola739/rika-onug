@@ -1,1 +1,1 @@
-exports.villageidiot_narration  = () => ["villageidiot_kickoff_text"]
+export const villageidiot_narration = () => ["villageidiot_kickoff_text"];

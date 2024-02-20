@@ -1,4 +1,4 @@
-const { logTrace, logErrorWithStack } = require("../log")
+import { logTrace, logErrorWithStack } from '../log';
 
 const initStubbedCards = {
   playerCards:    [],
@@ -42,8 +42,8 @@ const populateDeal = async (req, res) => {
   }
 }
 
-module.exports = {
+export default {
   populateDeal,
   stubbedCards,
   getCenterCardPositionByIndex,
-}
+};

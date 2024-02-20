@@ -1,9 +1,9 @@
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens } = require("../utils")
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens } from '../utils';
 
 //? INFO: Insomniac – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
-exports.insomniac_interaction = (gameState, tokens, title) => {
+export const insomniac_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -67,4 +67,4 @@ exports.insomniac_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};

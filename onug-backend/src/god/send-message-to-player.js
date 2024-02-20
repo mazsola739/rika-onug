@@ -1,7 +1,7 @@
-const { logTrace, logErrorWithStack } = require("../log")
-const { websocketServerConnectionsPerRoom } = require("../websocket/connections")
+import { logTrace, logErrorWithStack } from '../log';
+import { websocketServerConnectionsPerRoom } from '../websocket/connections';
 
-exports.sendMessageToPlayer = async (req, res) => {
+export const sendMessageToPlayer = async (req, res) => {
   try {
     const { message, token } = req.body
     logTrace('GOD send message to player endpoint triggered', message, token)
@@ -20,4 +20,4 @@ exports.sendMessageToPlayer = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-}
+};

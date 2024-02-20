@@ -9,9 +9,10 @@ const addVerboseOr = (rolesFromIds) => {
   return rolesFromIds
 }
 
-exports.doppelganger_narration  = () => ["doppelganger_kickoff_text"]
-exports.doppelganger_instant_action = (rolesFromIds) => [
+export const doppelganger_narration = () => ["doppelganger_kickoff_text"];
+
+export const doppelganger_instant_action = (rolesFromIds) => [
   "doppelganger_verbose_intro_text",
   ...addVerboseOr(rolesFromIds),
   "doppelganger_verbose_outro_text",
-]
+];

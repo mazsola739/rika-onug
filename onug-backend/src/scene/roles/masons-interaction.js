@@ -1,9 +1,9 @@
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { getPlayerNumbersWithMatchingTokens } = require("../utils")
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { getPlayerNumbersWithMatchingTokens } from '../utils';
 
 //? INFO: Mason (2) – Wakes up and looks for the other fellow Mason
-exports.masons_interaction = (gameState, tokens, title) => {
+export const masons_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -36,4 +36,4 @@ exports.masons_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};

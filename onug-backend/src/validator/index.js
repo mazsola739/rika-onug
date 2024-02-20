@@ -1,9 +1,9 @@
-const { validateCards } = require('./card-validator')
-const { validatePlayer } = require('./player-validator')
-const { validateRoom } = require('./room-validator')
+import { validateCards } from './card-validator';
+import { validatePlayer } from './player-validator';
+import { validateRoom } from './room-validator';
 
-module.exports = {
+export default {
     validateCards,
     validateRoom,
     validatePlayer,
-}
+};

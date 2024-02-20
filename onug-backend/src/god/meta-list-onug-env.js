@@ -1,6 +1,6 @@
-const {logTrace, logErrorWithStack} = require("../log")
+import { logTrace, logErrorWithStack } from '../log';
 
-exports.metaListOnugEnv = async (req, res) => {
+export const metaListOnugEnv = async (req, res) => {
   try {
 
     logTrace(`GOD list onug environments endpoint triggered`)
@@ -14,4 +14,4 @@ exports.metaListOnugEnv = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-}
+};

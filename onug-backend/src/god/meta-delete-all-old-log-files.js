@@ -1,7 +1,7 @@
-const {logTrace, logErrorWithStack} = require("../log")
-const {readdir, unlink} = require("fs/promises")
+import { logTrace, logErrorWithStack } from '../log';
+import { readdir, unlink } from 'fs/promises';
 
-exports.metaDeleteAllOldLogFiles = async (req, res) => {
+export const metaDeleteAllOldLogFiles = async (req, res) => {
   try {
 
     logTrace(`GOD delete all old log files endpoint triggered`)
@@ -20,4 +20,4 @@ exports.metaDeleteAllOldLogFiles = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-}
+};

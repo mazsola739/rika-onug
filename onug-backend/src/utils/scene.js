@@ -1,8 +1,8 @@
-const actions = require("../constant/actions")
-const { logTrace } = require("../log")
-const { getCardById } = require("./card")
+import actions from '../constant/actions';
+import { logTrace } from '../log';
+import { getCardById } from './card';
 
-exports.buildSceneForCardId = ({ card_ids, scene_title, sceneTextKey }) => {
+export const buildSceneForCardId = ({ card_ids, scene_title, sceneTextKey }) => {
   const roleName = getCardById(card_ids[0]).display_name.toLowerCase()
   const sceneDynamically = sceneTextKey || `${roleName}_wake_text` // TODO not just wake texts
   const scene = actions[roleName][sceneDynamically]
@@ -18,4 +18,4 @@ exports.buildSceneForCardId = ({ card_ids, scene_title, sceneTextKey }) => {
     scene_title: scene_title,
     scene_card_ids: card_ids,
   }
-}
+};

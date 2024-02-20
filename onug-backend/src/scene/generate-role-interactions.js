@@ -1,8 +1,8 @@
-const { INTERACTION } = require("../constant/ws")
-const { updatePlayerCard } = require("./update-player-card")
-const { getKeys, concatArraysWithUniqueElements } = require('./utils')
+import { INTERACTION } from '../constant/ws';
+import { updatePlayerCard } from './update-player-card';
+import { getKeys, concatArraysWithUniqueElements } from './utils';
 
-exports.generateRoleInteractions = (gameState, title, token, message, icon, selectableCards, selectableMarks, showCards, showMarks, uniqInformations) => {
+export const generateRoleInteractions = (gameState, title, token, message, icon, selectableCards, selectableMarks, showCards, showMarks, uniqInformations) => {
     updatePlayerCard(gameState, token)
     const player = gameState.players[token]
     const playerCard = player?.card
@@ -31,4 +31,4 @@ exports.generateRoleInteractions = (gameState, title, token, message, icon, sele
       player_number: player?.player_number,
       ...playerCard,
     }
-  }
+  };

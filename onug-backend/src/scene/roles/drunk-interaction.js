@@ -1,11 +1,11 @@
-const { getPlayerNumbersWithMatchingTokens } = require("../utils")
-const { centerCardPositions } = require("../constants")
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
+import { getPlayerNumbersWithMatchingTokens } from '../utils';
+import { centerCardPositions } from '../constants';
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
 
 //? INFO: Drunk – Swap your card with a card from center but does not look at his new card
-exports.drunk_interaction = (gameState, tokens, title) => {
+export const drunk_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -60,9 +60,9 @@ exports.drunk_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};
 
-exports.drunk_response = (gameState, token, selected_positions, title) => {
+export const drunk_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -95,4 +95,4 @@ exports.drunk_response = (gameState, token, selected_positions, title) => {
   ]
 
   return { ...gameState, role_interactions }
-}
+};

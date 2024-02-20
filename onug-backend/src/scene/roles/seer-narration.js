@@ -1,1 +1,1 @@
-exports.seer_narration  = () => ["seer_kickoff_text"]
+export const seer_narration = () => ["seer_kickoff_text"];

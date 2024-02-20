@@ -1,7 +1,7 @@
-const roomsData = require("../data/rooms.json")
-const {logTrace, logErrorWithStack} = require("../log")
+import roomsData from '../data/rooms.json';
+import { logTrace, logErrorWithStack } from '../log';
 
-exports.rooms = (req, res) => {
+export const rooms = (req, res) => {
   try {
     logTrace("Rooms endpoint called")
     return res.send({
@@ -14,4 +14,4 @@ exports.rooms = (req, res) => {
       message: "Failed to fetch rooms",
     })
   }
-}
+};

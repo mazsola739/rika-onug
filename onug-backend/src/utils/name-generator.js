@@ -1,1 +1,1 @@
-exports.randomPlayerName = (names = []) => names[~~(Math.random() * names.length)]
+export const randomPlayerName = (names = []) => names[~~(Math.random() * names.length)];

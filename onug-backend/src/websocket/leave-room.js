@@ -1,11 +1,11 @@
-const roomsData = require("../data/rooms.json")
-const { repository } = require("../repository")
+import roomsData from '../data/rooms.json';
+import { repository } from '../repository';
 const { upsertRoomState, readGameState } = repository
-const { logTrace } = require("../log")
-const { LEAVE_ROOM } = require("../constant/ws")
-const { removeUserFromRoom } = require("./connections")
+import { logTrace } from '../log';
+import { LEAVE_ROOM } from '../constant/ws';
+import { removeUserFromRoom } from './connections';
 
-exports.leaveRoom = async (ws, message) => {
+export const leaveRoom = async (ws, message) => {
   logTrace(`leave-room requested with ${JSON.stringify(message)}`)
 
   const { room_id, token } = message
@@ -54,4 +54,4 @@ exports.leaveRoom = async (ws, message) => {
       room_id,
     })
   )
-}
+};

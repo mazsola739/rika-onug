@@ -1,8 +1,8 @@
-const {logTrace, logErrorWithStack} = require("../log")
-const {repository} = require("../repository")
+import { logTrace, logErrorWithStack } from '../log';
+import { repository } from '../repository';
 const {reInitializeAllGameStates} = repository
 
-exports.reInitAllGameStates = async (req, res) => {
+export const reInitAllGameStates = async (req, res) => {
   try {
     const {body} = req
     logTrace(`GOD re-initialize all game states endpoint triggered: ${JSON.stringify(body)}`)
@@ -14,4 +14,4 @@ exports.reInitAllGameStates = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-}
+};

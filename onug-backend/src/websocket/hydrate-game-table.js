@@ -1,10 +1,10 @@
-const { HYDRATE_GAME_TABLE, REDIRECT } = require("../constant/ws")
-const { logTrace, logErrorWithStack} = require("../log")
-const { repository } = require('../repository')
-const { isGameTableClosed, getGameTableBoard } = require("../utils")
+import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant/ws';
+import { logTrace, logErrorWithStack } from '../log';
+import { repository } from '../repository';
+import { isGameTableClosed, getGameTableBoard } from '../utils';
 const { readGameState } = repository
 
-exports.hydrateGameTable = async (ws, message) => {
+export const hydrateGameTable = async (ws, message) => {
   try {
     logTrace(`hydrate game table requested with ${JSON.stringify(message)}`)
     const { room_id, token } = message
@@ -29,4 +29,4 @@ exports.hydrateGameTable = async (ws, message) => {
   } catch (error) { 
     logErrorWithStack(error)
   }
-}
+};

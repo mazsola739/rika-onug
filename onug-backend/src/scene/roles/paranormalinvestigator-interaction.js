@@ -1,11 +1,16 @@
-const { townIds } = require("../constants")
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions } = require("../utils")
+import { townIds } from '../constants';
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
+
+import {
+  getPlayerNumbersWithNonMatchingTokens,
+  getSelectablePlayersWithNoShield,
+  getCardIdsByPositions,
+} from '../utils';
 
 //? INFO: Paranormal Investigator - Looks at two other player's cards one at a time if he sees team they are not on the Villager Team he stops looking and becomes that role. May not look at any center cards.
-exports.paranormalinvestigator_interaction = (gameState, tokens, title) => {
+export const paranormalinvestigator_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
   const role_interactions = []
 
@@ -39,9 +44,9 @@ exports.paranormalinvestigator_interaction = (gameState, tokens, title) => {
   })
 
   return { ...newGameState, role_interactions }
-}
+};
 
-exports.paranormalinvestigator_response = (gameState, token, selected_positions, title) => {
+export const paranormalinvestigator_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -93,4 +98,4 @@ const role_interactions = [
 ]
 
 return { ...newGameState, role_interactions }
-}
+};

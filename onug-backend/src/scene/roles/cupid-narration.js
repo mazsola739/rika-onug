@@ -1,1 +1,1 @@
-exports.cupid_narration  = () => ["cupid_kickoff_text"]
+export const cupid_narration = () => ["cupid_kickoff_text"];

@@ -1,8 +1,8 @@
-const {logTrace, logErrorWithStack} = require("../log")
-const {repository} = require("../repository")
+import { logTrace, logErrorWithStack } from '../log';
+import { repository } from '../repository';
 const {deleteAllGameStates, readAllGameStates} = repository
 
-exports.deleteAllGameStates = async (req, res) => {
+export const deleteAllGameStates = async (req, res) => {
   try {
     const {body} = req
     logTrace(`GOD delete all game states endpoint triggered: ${JSON.stringify(body)}`)
@@ -16,4 +16,4 @@ exports.deleteAllGameStates = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-}
+};

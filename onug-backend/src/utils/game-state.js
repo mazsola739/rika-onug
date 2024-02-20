@@ -1,4 +1,4 @@
-const { STAGES } = require("../constant/stage")
+import { STAGES } from '../constant/stage';
 
-exports.isGameTableClosed = gameState => gameState.stage !== STAGES.GAME_TABLE
-exports.isGamePlayStopped = gameState => gameState.stage !== STAGES.GAME_PLAY
+export const isGameTableClosed = gameState => gameState.stage !== STAGES.GAME_TABLE;
+export const isGamePlayStopped = gameState => gameState.stage !== STAGES.GAME_PLAY;

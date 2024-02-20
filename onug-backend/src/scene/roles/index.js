@@ -1,77 +1,75 @@
-const { joke_narration }                                                          = require("./joke-narration") //random
-const { epicbattle_narration }                                                    = require("./epicbattle-narration") //random
+import { joke_narration } from './joke-narration'; //random
+import { epicbattle_narration } from './epicbattle-narration'; //random
+import { oracle_question_narration, oracle_reaction_narration } from './oracle-narration'; //random
+import { copycat_narration } from './copycat-narration';
+import { mirrorman_narration } from './mirrorman-narration';
+import { doppelganger_narration, doppelganger_instant_action_narration } from './doppelganger-narration';
+import { vampires_narration } from './vampires-narration';
+import { thecount_narration, doppelganger_thecount_narration } from './thecount-narration';
+import { renfield_narration } from './renfield-narration';
+import { diseased_narration } from './diseased-narration';
+import { cupid_narration } from './cupid-narration';
+import { instigator_narration } from './instigator-narration';
+import { priest_narration, doppelganger_priest_narration } from './priest-narration';
+import { assassin_narration, doppelganger_assassin_narration } from './assassin-narration';
+import { apprenticeassassin_narration, doppelganger_apprenticeassassin_narration } from './apprenticeassassin-narration';
+import { everyonemark_narration } from './everyonemark-narration';
+import { lovers_narration } from './lovers-narration';
+import { sentinel_narration } from './sentinel-narration';
+import { aliens_narration } from './aliens-narration';
+import { cow_narration } from './cow-narration';
+import { groobzerb_narration } from './groobzerb-narration';
+import { leader_narration } from './leader-narration';
+import { bodysnatcher_narration, doppelganger_bodysnatcher_narration } from './bodysnatcher-narration';
+import { supervillains_narration } from './supervillains-narration';
+import { temptress_narration } from './temptress-narration';
+import { drpeeker_narration } from './drpeeker-narration';
+import { rapscallion_narration } from './rapscallion-narration';
+import { evilometer_narration } from './evilometer-narration';
+import { werewolves_narration } from './werewolves-narration';
+import { alphawolf_narration } from './alphawolf-narration';
+import { mysticwolf_narration } from './mysticwolf-narration';
+import { minion_narration } from './minion-narration';
+import { apprenticetanner_narration } from './apprenticetanner-narration';
+import { madscientist_narration } from './madscientist-narration';
+import { intern_narration } from './intern-narration';
+import { masons_narration } from './masons-narration';
+import { thing_narration } from './thing-narration';
+import { annoyinglad_narration } from './annoyinglad-narration';
+import { seer_narration } from './seer-narration';
+import { apprenticeseer_narration } from './apprenticeseer-narration';
+import { paranormalinvestigator_narration } from './paranormalinvestigator-narration';
+import { marksman_narration } from './marksman-narration';
+import { nostradamus_narration, nostradamus_reaction_narration } from './nostradamus-narration';
+import { psychic_narration } from './psychic-narration';
+import { detector_narration } from './detector-narration';
+import { robber_narration } from './robber-narration';
+import { witch_narration } from './witch-narration';
+import { pickpocket_narration, doppelganger_pickpocket_narration } from './pickpocket-narration';
+import { roleretriever_narration } from './roleretriever-narration';
+import { voodoolou_narration } from './voodoolou-narration';
+import { troublemaker_narration } from './troublemaker-narration';
+import { villageidiot_narration } from './villageidiot-narration';
+import { auraseer_narration } from './auraseer-narration';
+import { gremlin_narration, doppelganger_gremlin_narration } from './gremlin-narration';
+import { rascal_narration, doppelganger_rascal_narration } from './rascal-narration';
+import { switcheroo_narration } from './switcheroo-narration';
+import { drunk_narration } from './drunk-narration';
+import { insomniac_narration } from './insomniac-narration';
+import { selfawarenessgirl_narration } from './selfawarenessgirl-narration';
+import { squire_narration } from './squire-narration';
+import { beholder_narration } from './beholder-narration';
+import { revealer_narration, doppelganger_revealer_narration } from './revealer-narration';
+import { exposer_narration, doppelganger_exposer_narration } from './exposer-narration';
+import { flipper_narration, doppelganger_flipper_narration } from './flipper-narration';
+import { empath_narration, doppelganger_empath_narration } from './empath-narration';
+import { curator_narration, doppelganger_curator_narration } from './curator-narration';
+import { blob_narration } from './blob-narration';
+import { mortician_narration, doppelganger_mortician_narration } from './mortician-narration';
+import { familyman_narration } from './familyman-narration';
+import { ripple_narration } from './ripple-narration'; //TODO do we have ripple?
 
-const { oracle_question_narration, oracle_reaction_narration }                    = require("./oracle-narration") //random
-const { copycat_narration }                                                       = require("./copycat-narration")
-const { mirrorman_narration }                                                     = require("./mirrorman-narration")
-const { doppelganger_narration, doppelganger_instant_action_narration }           = require("./doppelganger-narration")
-const { vampires_narration }                                                      = require("./vampires-narration")
-const { thecount_narration, doppelganger_thecount_narration }                     = require("./thecount-narration")
-const { renfield_narration }                                                      = require("./renfield-narration")
-const { diseased_narration }                                                      = require("./diseased-narration")
-const { cupid_narration }                                                         = require("./cupid-narration")
-const { instigator_narration }                                                    = require("./instigator-narration")
-const { priest_narration, doppelganger_priest_narration }                         = require("./priest-narration")
-const { assassin_narration, doppelganger_assassin_narration }                     = require("./assassin-narration")
-const { apprenticeassassin_narration, doppelganger_apprenticeassassin_narration } = require("./apprenticeassassin-narration")
-const { everyonemark_narration }                                                  = require("./everyonemark-narration")
-const { lovers_narration }                                                        = require("./lovers-narration")
-const { sentinel_narration }                                                      = require("./sentinel-narration")
-const { aliens_narration }                                                        = require("./aliens-narration")
-const { cow_narration }                                                           = require("./cow-narration")
-const { groobzerb_narration }                                                     = require("./groobzerb-narration")
-const { leader_narration }                                                        = require("./leader-narration")
-const { bodysnatcher_narration, doppelganger_bodysnatcher_narration }             = require("./bodysnatcher-narration")
-const { supervillains_narration }                                                 = require("./supervillains-narration")
-const { temptress_narration }                                                     = require("./temptress-narration")
-const { drpeeker_narration }                                                      = require("./drpeeker-narration")
-const { rapscallion_narration }                                                   = require("./rapscallion-narration")
-const { evilometer_narration }                                                    = require("./evilometer-narration")
-const { werewolves_narration }                                                    = require("./werewolves-narration")
-const { alphawolf_narration }                                                     = require("./alphawolf-narration")
-const { mysticwolf_narration }                                                    = require("./mysticwolf-narration")
-const { minion_narration }                                                        = require("./minion-narration")
-const { apprenticetanner_narration }                                              = require("./apprenticetanner-narration")
-const { madscientist_narration }                                                  = require("./madscientist-narration")
-const { intern_narration }                                                        = require("./intern-narration")
-const { masons_narration }                                                        = require("./masons-narration")
-const { thing_narration }                                                         = require("./thing-narration")
-const { annoyinglad_narration }                                                   = require("./annoyinglad-narration")
-const { seer_narration }                                                          = require("./seer-narration")
-const { apprenticeseer_narration }                                                = require("./apprenticeseer-narration")
-const { paranormalinvestigator_narration }                                        = require("./paranormalinvestigator-narration")
-const { marksman_narration }                                                      = require("./marksman-narration")
-const { nostradamus_narration, nostradamus_reaction_narration }                   = require("./nostradamus-narration")
-const { psychic_narration }                                                       = require("./psychic-narration")
-const { detector_narration }                                                      = require("./detector-narration")
-const { robber_narration }                                                        = require("./robber-narration")
-const { witch_narration }                                                         = require("./witch-narration")
-const { pickpocket_narration, doppelganger_pickpocket_narration }                 = require("./pickpocket-narration")
-const { roleretriever_narration }                                                 = require("./roleretriever-narration")
-const { voodoolou_narration }                                                     = require("./voodoolou-narration")
-const { troublemaker_narration }                                                  = require("./troublemaker-narration")
-const { villageidiot_narration }                                                  = require("./villageidiot-narration")
-const { auraseer_narration }                                                      = require("./auraseer-narration")
-const { gremlin_narration, doppelganger_gremlin_narration }                       = require("./gremlin-narration")
-const { rascal_narration, doppelganger_rascal_narration }                         = require("./rascal-narration")
-const { switcheroo_narration }                                                    = require("./switcheroo-narration")
-const { drunk_narration }                                                         = require("./drunk-narration")
-const { insomniac_narration }                                                     = require("./insomniac-narration")
-const { selfawarenessgirl_narration }                                             = require("./selfawarenessgirl-narration")
-const { squire_narration }                                                        = require("./squire-narration")
-const { beholder_narration }                                                      = require("./beholder-narration")
-const { revealer_narration, doppelganger_revealer_narration }                     = require("./revealer-narration")
-const { exposer_narration, doppelganger_exposer_narration }                       = require("./exposer-narration")
-const { flipper_narration, doppelganger_flipper_narration }                       = require("./flipper-narration")
-const { empath_narration, doppelganger_empath_narration }                         = require("./empath-narration")
-const { curator_narration, doppelganger_curator_narration }                       = require("./curator-narration")
-const { blob_narration }                                                          = require("./blob-narration")
-const { mortician_narration, doppelganger_mortician_narration }                   = require("./mortician-narration")
-const { familyman_narration }                                                     = require("./familyman-narration")
-
-const { ripple_narration }                                                        = require("./ripple-narration") //TODO do we have ripple?
-
-exports.roles = {
+export const roles = {
   joke_narration,
   epicbattle_narration,
   oracle_question_narration, oracle_reaction_narration,
@@ -143,68 +141,68 @@ exports.roles = {
   familyman_narration,
   ripple_narration,
   //TODO vote
-}
+};
 
-const { oracle_interaction, oracle_response }                                 = require("./oracle-interaction")
-const { copycat_interaction, copycat_response}                                = require("./copycat-interaction")
-const { doppelganger_interaction, doppelganger_response }                     = require("./doppelganger-interaction")
-const { vampires_interaction, vampires_response }                             = require("./vampires-interaction")
-const { thecount_interaction, thecount_response }                             = require("./thecount-interaction")
-const { renfield_interaction }                                                = require("./renfield-interaction")
-const { diseased_interaction, diseased_response }                             = require("./diseased-interaction")
-const { cupid_interaction, cupid_response }                                   = require("./cupid-interaction")
-const { instigator_interaction, instigator_response }                         = require("./instigator-interaction")
-const { priest_interaction, priest_response }                                 = require("./priest-interaction")
-const { assassin_interaction, assassin_response }                             = require("./assassin-interaction")
-const { apprenticeassassin_interaction, apprenticeassassin_response }         = require("./apprenticeassassin-interaction")
-const { everyonemark_interaction }                                            = require("./everyonemark-interaction")
-const { lovers_interaction }                                                  = require("./lovers-interaction")
-const { sentinel_interaction, sentinel_response }                             = require("./sentinel-interaction")
-const { aliens_interaction, aliens_response }                                 = require("./aliens-interaction") //random
-const { cow_interaction }                                                     = require("./cow-interaction")
-const { groobzerb_interaction }                                               = require("./groobzerb-interaction")
-const { leader_interaction, leader_zerbgroob }                                = require("./leader-interaction")
-const { bodysnatcher_interaction, bodysnatcher_response }                     = require("./bodysnatcher-interaction")
-const { supervillains_interaction, supervillain_response }                    = require("./supervillains-interaction")
-const { temptress_interaction, temptress_response }                           = require("./temptress-interaction")
-const { drpeeker_interaction, drpeeker_response }                             = require("./drpeeker-interaction")
-const { rapscallion_interaction, rapscallion_response }                       = require("./rapscallion-interaction")
-const { evilometer_interaction }                                              = require("./evilometer-interaction")
-const { werewolves_interaction, werewolves_response }                         = require("./werewolves-interaction")
-const { alphawolf_interaction, alphawolf_response }                           = require("./alphawolf-interaction")
-const { mysticwolf_interaction, mysticwolf_response }                         = require("./mysticwolf-interaction")
-const { minion_interaction }                                                  = require("./minion-interaction")
-const { apprenticetanner_interaction }                                        = require("./apprenticetanner-interaction")
-const { intern_interaction }                                                  = require("./intern-interaction")
-const { masons_interaction }                                                  = require("./masons-interaction")
-const { thing_interaction, thing_response }                                   = require("./thing-interaction")
-const { seer_interaction, seer_response }                                     = require("./seer-interaction")
-const { apprenticeseer_interaction, apprenticeseer_response }                 = require("./apprenticeseer-interaction")
-const { paranormalinvestigator_interaction, paranormalinvestigator_response } = require("./paranormalinvestigator-interaction")
-const { marksman_interaction, marksman_response }                             = require("./marksman-interaction")
-const { nostradamus_interaction, nostradamus_response }                       = require("./nostradamus-interaction")
-const { psychic_interaction, psychic_response}                                = require("./psychic-interaction")
-const { robber_interaction, robber_response }                                 = require("./robber-interaction")
-const { witch_interaction, witch_response }                                   = require("./witch-interaction")
-const { pickpocket_interaction, pickpocket_response }                         = require("./pickpocket-interaction")
-const { troublemaker_interaction, troublemaker_response }                     = require("./troublemaker-interaction")
-const { villageidiot_interaction, villageidiot_response }                     = require("./villageidiot-interaction")
-const { auraseer_interaction, auraseer_response }                             = require("./auraseer-interaction")
-const { gremlin_interaction, gremlin_response }                               = require("./gremlin-interaction")
-const { rascal_interaction, rascal_response }                                 = require("./rascal-interaction")
-const { drunk_interaction, drunk_response }                                   = require("./drunk-interaction")
-const { insomniac_interaction }                                               = require("./insomniac-interaction")
-const { squire_interaction, squire_response }                                 = require("./squire-interaction")
-const { beholder_interaction, beholder_response }                             = require("./beholder-interaction")
-const { revealer_interaction, revealer_response }                             = require("./revealer-interaction")
-const { exposer_interaction, exposer_response }                               = require("./exposer-interaction")
-const { empath_interaction, empath_response }                                 = require("./empath-interaction")
-const { curator_interaction, curator_response }                               = require("./curator-interaction")
-const { blob_interaction }                                                    = require("./blob-interaction")
-const { mortician_interaction, mortician_response }                           = require("./mortician-interaction")
-const { familyman_interaction }                                               = require("./familyman-interaction")
+import { oracle_interaction, oracle_response } from './oracle-interaction';
+import { copycat_interaction, copycat_response } from './copycat-interaction';
+import { doppelganger_interaction, doppelganger_response } from './doppelganger-interaction';
+import { vampires_interaction, vampires_response } from './vampires-interaction';
+import { thecount_interaction, thecount_response } from './thecount-interaction';
+import { renfield_interaction } from './renfield-interaction';
+import { diseased_interaction, diseased_response } from './diseased-interaction';
+import { cupid_interaction, cupid_response } from './cupid-interaction';
+import { instigator_interaction, instigator_response } from './instigator-interaction';
+import { priest_interaction, priest_response } from './priest-interaction';
+import { assassin_interaction, assassin_response } from './assassin-interaction';
+import { apprenticeassassin_interaction, apprenticeassassin_response } from './apprenticeassassin-interaction';
+import { everyonemark_interaction } from './everyonemark-interaction';
+import { lovers_interaction } from './lovers-interaction';
+import { sentinel_interaction, sentinel_response } from './sentinel-interaction';
+import { aliens_interaction, aliens_response } from './aliens-interaction'; //random
+import { cow_interaction } from './cow-interaction';
+import { groobzerb_interaction } from './groobzerb-interaction';
+import { leader_interaction, leader_zerbgroob } from './leader-interaction';
+import { bodysnatcher_interaction, bodysnatcher_response } from './bodysnatcher-interaction';
+import { supervillains_interaction, supervillain_response } from './supervillains-interaction';
+import { temptress_interaction, temptress_response } from './temptress-interaction';
+import { drpeeker_interaction, drpeeker_response } from './drpeeker-interaction';
+import { rapscallion_interaction, rapscallion_response } from './rapscallion-interaction';
+import { evilometer_interaction } from './evilometer-interaction';
+import { werewolves_interaction, werewolves_response } from './werewolves-interaction';
+import { alphawolf_interaction, alphawolf_response } from './alphawolf-interaction';
+import { mysticwolf_interaction, mysticwolf_response } from './mysticwolf-interaction';
+import { minion_interaction } from './minion-interaction';
+import { apprenticetanner_interaction } from './apprenticetanner-interaction';
+import { intern_interaction } from './intern-interaction';
+import { masons_interaction } from './masons-interaction';
+import { thing_interaction, thing_response } from './thing-interaction';
+import { seer_interaction, seer_response } from './seer-interaction';
+import { apprenticeseer_interaction, apprenticeseer_response } from './apprenticeseer-interaction';
+import { paranormalinvestigator_interaction, paranormalinvestigator_response } from './paranormalinvestigator-interaction';
+import { marksman_interaction, marksman_response } from './marksman-interaction';
+import { nostradamus_interaction, nostradamus_response } from './nostradamus-interaction';
+import { psychic_interaction, psychic_response } from './psychic-interaction';
+import { robber_interaction, robber_response } from './robber-interaction';
+import { witch_interaction, witch_response } from './witch-interaction';
+import { pickpocket_interaction, pickpocket_response } from './pickpocket-interaction';
+import { troublemaker_interaction, troublemaker_response } from './troublemaker-interaction';
+import { villageidiot_interaction, villageidiot_response } from './villageidiot-interaction';
+import { auraseer_interaction, auraseer_response } from './auraseer-interaction';
+import { gremlin_interaction, gremlin_response } from './gremlin-interaction';
+import { rascal_interaction, rascal_response } from './rascal-interaction';
+import { drunk_interaction, drunk_response } from './drunk-interaction';
+import { insomniac_interaction } from './insomniac-interaction';
+import { squire_interaction, squire_response } from './squire-interaction';
+import { beholder_interaction, beholder_response } from './beholder-interaction';
+import { revealer_interaction, revealer_response } from './revealer-interaction';
+import { exposer_interaction, exposer_response } from './exposer-interaction';
+import { empath_interaction, empath_response } from './empath-interaction';
+import { curator_interaction, curator_response } from './curator-interaction';
+import { blob_interaction } from './blob-interaction';
+import { mortician_interaction, mortician_response } from './mortician-interaction';
+import { familyman_interaction } from './familyman-interaction';
 
-exports.roleInteractions = {
+export const roleInteractions = {
   oracle_interaction, oracle_response,
   copycat_interaction, copycat_response,
   doppelganger_interaction, doppelganger_response,
@@ -265,4 +263,4 @@ exports.roleInteractions = {
   familyman_interaction,
   //const { ripple: require("./ripple-interaction")
   //TODO vote
-}
+};

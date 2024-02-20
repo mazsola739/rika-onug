@@ -1,7 +1,7 @@
-const { interaction } = require("./interaction")
-const { narration } = require("./narration")
+import { interaction } from './interaction';
+import { narration } from './narration';
 
-module.exports = {
+export default {
   interaction,
   narration,
-}
+};

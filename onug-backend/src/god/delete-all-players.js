@@ -1,9 +1,9 @@
-const { logTrace, logErrorWithStack } = require('../log')
-const { repository } = require('../repository')
-const { initWebSocketConnections } = require('../websocket/connections')
+import { logTrace, logErrorWithStack } from '../log';
+import { repository } from '../repository';
+import { initWebSocketConnections } from '../websocket/connections';
 const { deleteAllPlayers } = repository
 
-exports.deleteAllPlayers = async (req, res) => {
+export const deleteAllPlayers = async (req, res) => {
   try {
     const { body } = req
     logTrace('GOD delete all players endpoint triggered', body)
@@ -16,4 +16,4 @@ exports.deleteAllPlayers = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-}
+};

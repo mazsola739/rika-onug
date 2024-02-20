@@ -1,15 +1,15 @@
-const { JOIN_ROOM } = require("../constant/ws")
-const roomsData = require("../data/rooms.json")
-const { randomPlayerName } = require("../utils/name-generator")
-const validator = require("../validator")
+import { JOIN_ROOM } from '../constant/ws';
+import roomsData from '../data/rooms.json';
+import { randomPlayerName } from '../utils/name-generator';
+import validator from '../validator';
 const { validateRoom } = validator
-const { repository } = require("../repository")
+import { repository } from '../repository';
 const { upsertRoomState } = repository
-const { logTrace } = require("../log")
-const { STAGES } = require("../constant/stage")
-const { addUserToRoom } = require("./connections")
+import { logTrace } from '../log';
+import { STAGES } from '../constant/stage';
+import { addUserToRoom } from './connections';
 
-exports.joinRoom = async (ws, message) => {
+export const joinRoom = async (ws, message) => {
   logTrace(`join-room requested with ${JSON.stringify(message)}`)
 
   const { room_id, token } = message
@@ -93,4 +93,4 @@ exports.joinRoom = async (ws, message) => {
       player_name,
     })
   )
-}
+};

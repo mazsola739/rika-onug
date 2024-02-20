@@ -1,10 +1,10 @@
-const { updatePlayerCard } = require("../update-player-card")
-const { generateRoleInteractions } = require("../generate-role-interactions")
-const { isValidSelection } = require("../validate-response-data")
-const { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield } = require("../utils")
+import { updatePlayerCard } from '../update-player-card';
+import { generateRoleInteractions } from '../generate-role-interactions';
+import { isValidSelection } from '../validate-response-data';
+import { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield } from '../utils';
 
 //? INFO: Troublemaker - Swaps any two other player's cards (not her own or center) without looking at them
-exports.troublemaker_interaction = (gameState, tokens, title) => {
+export const troublemaker_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState };
   const role_interactions = [];
 
@@ -40,8 +40,7 @@ exports.troublemaker_interaction = (gameState, tokens, title) => {
   return { ...newGameState, role_interactions };
 };
 
-
-exports.troublemaker_response = (gameState, token, selected_positions, title) => {
+export const troublemaker_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState;
   }

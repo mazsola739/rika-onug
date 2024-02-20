@@ -1,7 +1,7 @@
-const { logTrace, logErrorWithStack } = require("../log")
-const { websocketServerConnectionsPerRoom } = require("../websocket/connections")
+import { logTrace, logErrorWithStack } from '../log';
+import { websocketServerConnectionsPerRoom } from '../websocket/connections';
 
-exports.broadCastToAll = async (req, res) => {
+export const broadCastToAll = async (req, res) => {
   try {
     const { message } = req.body
     logTrace('GOD broadcast to all endpoint triggered', message)
@@ -18,4 +18,4 @@ exports.broadCastToAll = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-}
+};

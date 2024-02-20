@@ -1,4 +1,4 @@
-exports.teamIds = {
+export const teamIds = {
   werewolfTeam: [7, 15, 16, 17, 21, 22, 83],
   vampireTeam: [38, 39, 40, 41],
   alienTeam: [42, 43, 47, 53, 54, 74],
@@ -19,4 +19,4 @@ exports.teamIds = {
   nostradamusTeam: [80],
   madTeam: [62, 63],
   familyTeam: [78],
-}
+};

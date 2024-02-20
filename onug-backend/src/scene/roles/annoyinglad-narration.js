@@ -1,1 +1,1 @@
-exports.annoyinglad_narration  = () => ["annoyinglad_kickoff_text"]
+export const annoyinglad_narration = () => ["annoyinglad_kickoff_text"];
