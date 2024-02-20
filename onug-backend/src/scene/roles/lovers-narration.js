@@ -1,1 +1,0 @@
-export const lovers_narration = () => ["lovers_kickoff_text"];

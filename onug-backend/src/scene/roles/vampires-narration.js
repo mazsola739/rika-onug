@@ -1,1 +1,0 @@
-export const vampires_narration = () => ["vampires_kickoff_text"];
