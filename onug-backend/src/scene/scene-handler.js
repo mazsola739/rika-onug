@@ -1,12 +1,12 @@
 import * as roles from './roles'
-import { logError } from '../log';
-import { checkCards } from './check-conditions'
+import { logError } from '../log'
+import * as conditions from './check-conditions'
 
 const NARRATION = 'actual_scene.narration'
 
 //! todo save interaction identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
 //TODO action_history
-export const sceneHandler = gameState => {
+export const sceneHandler = (gameState: GameStateType) => {
   const scene_title    = gameState.actual_scene.scene_title
   const total_players  = Object.keys(gameState.players).length //TODO save total players into the gamestate
   const conditions    = checkCards(gameState.selected_cards, total_players)
