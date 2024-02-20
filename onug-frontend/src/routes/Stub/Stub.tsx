@@ -28,6 +28,7 @@ import {
   TEST_CASE,
   RESPONSE,
 } from './Stub.constants'
+import { API_LOCALHOST } from 'constant'
 
 // TODO security, protected routing and sending a secure GOD token
 
@@ -61,7 +62,7 @@ export const Stub: React.FC = observer(() => {
   }, [])
 
   const populateStub = useCallback(async () => {
-    const res = await fetch('/stub/populate/deal', {
+    const res = await fetch(`${API_LOCALHOST}/stub/populate/deal`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -76,7 +77,7 @@ export const Stub: React.FC = observer(() => {
   const resetStub = useCallback(async () => {
     setDealStub({})
     setInputValues(Array(labels.length).fill(0))
-    const res = await fetch('/stub/populate/deal', {
+    const res = await fetch(`${API_LOCALHOST}/stub/populate/deal`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -99,7 +100,7 @@ export const Stub: React.FC = observer(() => {
           : 0
       )
     )
-    const res = await fetch('/stub/populate/deal', {
+    const res = await fetch(`${API_LOCALHOST}/stub/populate/deal`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',

@@ -1,8 +1,7 @@
 import { HYDRATE_GAME_PLAY, REDIRECT } from '../constant/ws';
 import { logTrace } from '../log';
-import { repository } from '../repository';
+import { readGameState } from '../repository';
 import { isGamePlayStopped } from '../utils';
-const { readGameState } = repository
 
 export const hydrateGamePlay = async (ws, message) => {
   logTrace(`hydrate game play ${JSON.stringify(message)}`)

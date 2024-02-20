@@ -1,10 +1,8 @@
 import { JOIN_ROOM } from '../constant/ws';
 import roomsData from '../data/rooms.json';
 import { randomPlayerName } from '../utils/name-generator';
-import validator from '../validator';
-const { validateRoom } = validator
-import { repository } from '../repository';
-const { upsertRoomState } = repository
+import { validateRoom } from '../validator';
+import { upsertRoomState } from '../repository';
 import { logTrace } from '../log';
 import { STAGES } from '../constant/stage';
 import { addUserToRoom } from './connections';

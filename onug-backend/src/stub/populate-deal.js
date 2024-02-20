@@ -8,15 +8,15 @@ const initStubbedCards = {
   newWolfCard:    null,
   newVillainCard: null,
 }
-let stubbedCards = JSON.parse(JSON.stringify(initStubbedCards))
+export let stubbedCards = JSON.parse(JSON.stringify(initStubbedCards))
 
-const getCenterCardPositionByIndex = index => {
+export const getCenterCardPositionByIndex = index => {
   if (index === 0) return 'leftCard'
   if (index === 1) return 'middleCard'
   return 'rightCard'
 }
 
-const populateDeal = async (req, res) => {
+export const populateDeal = async (req, res) => {
   try {
     const body = req.body
     const { reset, CenterLeft, CenterMiddle, CenterRight, CenterWolf, CenterVillain } = body
@@ -41,9 +41,3 @@ const populateDeal = async (req, res) => {
     logErrorWithStack(error)
   }
 }
-
-export default {
-  populateDeal,
-  stubbedCards,
-  getCenterCardPositionByIndex,
-};

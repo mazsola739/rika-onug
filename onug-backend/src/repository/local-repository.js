@@ -5,7 +5,7 @@ import { websocketServerConnectionsPerRoom } from '../websocket/connections';
 import roomsData from '../data/rooms.json';
 import roomNames from '../data/room_names.json';
 
-const upsertRoomState = async (state) => {
+export const upsertRoomState = async (state) => {
   logTrace('upsertRoomState')
   const filePath = `${__dirname}/../database/room_${state.room_id}_gamestate.json`
   const roomState = JSON.stringify(state, null, 4)
@@ -18,7 +18,7 @@ const upsertRoomState = async (state) => {
   }
 }
 
-const readGameState = async (room_id) => {
+export const readGameState = async (room_id) => {
   logTrace('read game state')
   const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
   const options = { encoding: 'utf8' }
@@ -34,7 +34,7 @@ const readGameState = async (room_id) => {
   }
 }
 
-const readAllGameStates = async () => {
+export const readAllGameStates = async () => {
   logTrace('read all game states')
   const gameStates = {}
   for (let i = 0; i < roomNames.length; i++) {
@@ -52,7 +52,7 @@ const readAllGameStates = async () => {
   return gameStates
 }
 
-const readGameStateByRoomId = async (room_id) => {
+export const readGameStateByRoomId = async (room_id) => {
   logTrace('read game state by room_id')
   const gameState = {}
   const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
@@ -68,7 +68,7 @@ const readGameStateByRoomId = async (room_id) => {
   return gameState
 }
 
-const deleteAllGameStates = async () => {
+export const deleteAllGameStates = async () => {
   logTrace('delete all game states')
   for (let i = 0; i < roomNames.length; i++) {
     let room_id = roomNames[i]
@@ -82,7 +82,7 @@ const deleteAllGameStates = async () => {
   return { status: 'gamestates deleted' }
 }
 
-const deleteGameStateByRoomId = async (room_id) => {
+export const deleteGameStateByRoomId = async (room_id) => {
   logTrace('delete game state by room_id')
   const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
   try {
@@ -94,7 +94,7 @@ const deleteGameStateByRoomId = async (room_id) => {
   return { status: 'gamestate deleted' }
 }
 
-const deleteAllPlayers = async () => {
+export const deleteAllPlayers = async () => {
   logTrace('delete all players')
   const gameStates = {}
   for (let i = 0; i < roomNames.length; i++) {
@@ -122,7 +122,7 @@ const deleteAllPlayers = async () => {
   return { status: 'players deleted from rooms', gameStates }
 }
 
-const deletePlayerByToken = async (token) => {
+export const deletePlayerByToken = async (token) => {
   logTrace('delete player by token')
   const gameStates = {}
 
@@ -153,7 +153,7 @@ const deletePlayerByToken = async (token) => {
   return { status: 'player deleted from rooms', gameStates }
 }
 
-const reInitializeAllGameStates = async () => {
+export const reInitializeAllGameStates = async () => {
   try {
     logTrace('Re-init all gamestates')
     const gameStates = {}
@@ -171,15 +171,3 @@ const reInitializeAllGameStates = async () => {
 
   return { status: 'ERROR during re-initializing game states' }
 }
-
-export default {
-  upsertRoomState,
-  readGameState,
-  readAllGameStates,
-  readGameStateByRoomId,
-  deleteAllGameStates,
-  deleteGameStateByRoomId,
-  deleteAllPlayers,
-  deletePlayerByToken,
-  reInitializeAllGameStates,
-};

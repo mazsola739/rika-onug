@@ -1,6 +1,5 @@
 import { logTrace, logErrorWithStack } from '../log';
-import { repository } from '../repository';
-const {reInitializeAllGameStates} = repository
+import { reInitializeAllGameStates } from '../repository';
 
 export const reInitAllGameStates = async (req, res) => {
   try {

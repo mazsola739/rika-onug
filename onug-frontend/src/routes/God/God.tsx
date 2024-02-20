@@ -19,6 +19,7 @@ import {
   WSContainer,
 } from './God.styles'
 import { Icon } from 'components'
+import { API_LOCALHOST } from 'constant'
 
 const GAMESTATES = 'GameStates'
 const LABEL_ROOM_ID = 'room_id:'
@@ -52,28 +53,28 @@ export const God: React.FC = observer(() => {
   const [message, setMessage] = useState({"type": "REDIRECT", "path": "/lobby"})
 
   const checkGameStates = async () => {
-    const res = await fetch('/god/check-game-states')
+    const res = await fetch(`${API_LOCALHOST}/god/check-game-states`)
     const json = await res.json()
     setResponse(json)
   }
 
   const checkGameStateByRoomId = async () => {
     const res = await fetch(
-      `/god/check-game-state-by-room-id?room_id=${roomId}`
+      `${API_LOCALHOST}/god/check-game-state-by-room-id?room_id=${roomId}`
     )
     const json = await res.json()
     setResponse(json)
   }
 
   const deleteAllGameStates = async () => {
-    const res = await fetch('/god/delete-all-game-states')
+    const res = await fetch(`${API_LOCALHOST}/god/delete-all-game-states`)
     const json = await res.json()
     setResponse(json)
   }
 
   const deleteGameStateByRoomId = async () => {
     const res = await fetch(
-      `/god/delete-game-state-by-room-id?room_id=${roomId}`
+      `${API_LOCALHOST}/god/delete-game-state-by-room-id?room_id=${roomId}`
     )
     const json = await res.json()
     setResponse(json)
@@ -81,26 +82,26 @@ export const God: React.FC = observer(() => {
 
   const reInitAllGameStates = async () => {
     const res = await fetch(
-      `/god/re-init-all-game-states`
+      `${API_LOCALHOST}/god/re-init-all-game-states`
     )
     const json = await res.json()
     setResponse(json)
   }
 
   const checkConnections = async () => {
-    const res = await fetch('/god/check-connections')
+    const res = await fetch(`${API_LOCALHOST}/god/check-connections`)
     const json = await res.json()
     setResponse(json)
   }
 
   const removePlayerByToken = async () => {
-    const res = await fetch(`/god/delete-player-by-token?token=${token}`)
+    const res = await fetch(`${API_LOCALHOST}/god/delete-player-by-token?token=${token}`)
     const json = await res.json()
     setResponse(json)
   }
 
   const removeAllPlayers = async () => {
-    const res = await fetch('/god/delete-all-players')
+    const res = await fetch(`${API_LOCALHOST}/god/delete-all-players`)
     const json = await res.json()
     setResponse(json)
   }
@@ -109,7 +110,7 @@ export const God: React.FC = observer(() => {
   // examples:
   // {"type": "REDIRECT", "path": "/stub"}
   const broadcastToAll = useCallback(async () => {
-    const res = await fetch('/god/broadcast-to-all', {
+    const res = await fetch(`${API_LOCALHOST}/god/broadcast-to-all`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -122,7 +123,7 @@ export const God: React.FC = observer(() => {
   }, [message, setResponse])
 
   const broadcastToAllInRoom = useCallback(async () => {
-    const res = await fetch('/god/broadcast-to-all-in-room', {
+    const res = await fetch(`${API_LOCALHOST}/god/broadcast-to-all-in-room`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -132,10 +133,10 @@ export const God: React.FC = observer(() => {
     })
     const json = await res.json()
     setResponse(json)
-  }, [token, message, setResponse])
+  }, [token, message, setResponse, roomId])
 
   const sendMessageToPlayer = useCallback(async () => {
-    const res = await fetch('/god/send-message-to-player', {
+    const res = await fetch(`${API_LOCALHOST}/god/send-message-to-player`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -148,13 +149,13 @@ export const God: React.FC = observer(() => {
   }, [token, message, setResponse])
 
   const listOnugEnvVars = async () => {
-    const res = await fetch('/god/list-onug-env-vars')
+    const res = await fetch(`${API_LOCALHOST}/god/list-onug-env-vars`)
     const json = await res.json()
     setResponse(json)
   }
 
   const deleteAllOldLogFiles = async () => {
-    const res = await fetch('/god/delete-all-old-log-files')
+    const res = await fetch(`${API_LOCALHOST}/god/delete-all-old-log-files`)
     const json = await res.json()
     setResponse(json)
   }

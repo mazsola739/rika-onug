@@ -1,6 +1,5 @@
 import roomsData from '../data/rooms.json';
-import { repository } from '../repository';
-const { upsertRoomState, readGameState } = repository
+import { upsertRoomState, readGameState } from '../repository';
 import { logTrace } from '../log';
 import { LEAVE_ROOM } from '../constant/ws';
 import { removeUserFromRoom } from './connections';

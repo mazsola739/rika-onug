@@ -1,10 +1,9 @@
 import { REDIRECT } from '../constant/ws';
 import { logTrace } from '../log';
 import { validateRoom } from '../validator';
-import { repository } from '../repository';
+import { upsertRoomState } from '../repository';
 import { broadcast } from './connections';
-import { stopGamePlay } from '../screen-play';
-const { upsertRoomState } = repository
+import { stopGamePlay } from '../screen-play'
 
 export const stopGame = async (message) => {
   const { room_id, token } = message

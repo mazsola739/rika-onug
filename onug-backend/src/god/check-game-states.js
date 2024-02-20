@@ -1,6 +1,5 @@
 import { logTrace, logErrorWithStack } from '../log';
-import { repository } from '../repository';
-const {readAllGameStates} = repository
+import { readAllGameStates } from '../repository';
 
 export const checkGameStates = async (req, res) => {
   try {

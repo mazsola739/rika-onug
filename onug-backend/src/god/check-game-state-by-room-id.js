@@ -1,6 +1,5 @@
 import { logTrace } from '../log';
-import { repository } from '../repository';
-const {readGameStateByRoomId} = repository
+import { readGameStateByRoomId } from '../repository';
 
 export const checkGameStateByRoomId = async (req, res) => {
     try {

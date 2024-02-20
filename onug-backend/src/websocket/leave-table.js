@@ -1,7 +1,6 @@
-import { repository } from '../repository';
-const { upsertRoomState, readGameState } = repository
+import { upsertRoomState, readGameState } from '../repository';
 import { logTrace } from '../log';
-import { LEAVE_TABLE, HYDRATE_GAME_TABLE, REDIRECT } from '../constant/ws';
+import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant/ws';
 import { broadcast } from './connections';
 import { STAGES } from '../constant/stage';
 

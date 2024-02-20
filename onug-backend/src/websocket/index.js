@@ -1,5 +1,1 @@
-import { websocketServer } from './websocket-server';
-
-export default {
-    websocketServer
-};
+export { websocketServer } from './websocket-server';

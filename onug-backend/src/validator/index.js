@@ -1,9 +1,3 @@
-import { validateCards } from './card-validator';
-import { validatePlayer } from './player-validator';
-import { validateRoom } from './room-validator';
-
-export default {
-    validateCards,
-    validateRoom,
-    validatePlayer,
-};
+export { validateCards } from './card-validator';
+export { validatePlayer } from './player-validator';
+export { validateRoom } from './room-validator';

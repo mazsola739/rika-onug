@@ -6,6 +6,4 @@ import { populateDeal } from './populate-deal';
 // populator
 router.post('/populate/deal', populateDeal)
 
-export default {
-    stubRouter: router,
-};
+export const stubRouter = router

@@ -1,9 +1,8 @@
 import { logTrace, logErrorWithStack } from '../log';
-import { repository } from '../repository';
+import { deleteAllPlayers } from '../repository';
 import { initWebSocketConnections } from '../websocket/connections';
-const { deleteAllPlayers } = repository
 
-export const deleteAllPlayers = async (req, res) => {
+export const delete_all_players = async (req, res) => {
   try {
     const { body } = req
     logTrace('GOD delete all players endpoint triggered', body)

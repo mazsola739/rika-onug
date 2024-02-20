@@ -1,10 +1,9 @@
 import { DEAL, REDIRECT } from '../constant/ws';
 import { logTrace, logInfo } from '../log';
 import { validateRoom } from '../validator';
-import { repository } from '../repository';
+import { upsertRoomState } from '../repository';
 import { STAGES } from '../constant/stage';
-import { broadcast } from './connections';
-const { upsertRoomState } = repository
+import { broadcast } from './connections'
 import { stubbedCards, getCenterCardPositionByIndex } from '../stub/populate-deal';
 import cards from '../data/cards.json';
 

@@ -255,18 +255,6 @@ export const hasDoppelganger = players => {
   return false
 };
 
-export const getTokensByRoleIds = (players, roleIds) => {
-  const result = []
-
-  for (const token in players) {
-    if (roleIds.includes(players?.[token]?.card?.player_role_id)) {
-      result.push(token)
-    }
-  }
-
-  return result
-};
-
 export const getRolePositions = (playerNumbers, roleId) => playerNumbers.map(number => ({ [`player_${number}`]: roleId }));
 
 export const getPlayerCardIds = players => {

@@ -1,7 +1,6 @@
 import { validateRoom } from '../validator';
 import { determineTotalPlayers, toggleCardSelect } from '../utils';
-import { repository } from '../repository';
-const { upsertRoomState } = repository
+import { upsertRoomState } from '../repository'
 import { HYDRATE_ROOM } from '../constant/ws';
 import { broadcast } from './connections';
 

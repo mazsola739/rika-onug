@@ -11,7 +11,7 @@ const specialCardsDefaultToAddLookupMap = {
   69: 60,
 }
 
-const toggleCardSelect = (selectedCards, cardId, totalPlayers) => {
+export const toggleCardSelect = (selectedCards, cardId, totalPlayers) => {
   let newSelectedCards = [...selectedCards]
 
   if (containsById(selectedCards, cardId)) {
@@ -102,15 +102,15 @@ const shuffle = (selectedCardIds) => {
   return selectedCardIds
 }
 
-const filterCardsByIds = (selectedCardIds, idsToCheck) =>
+export const filterCardsByIds = (selectedCardIds, idsToCheck) =>
   selectedCardIds.filter((cardId) => idsToCheck.includes(cardId))
-const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(17)
-const hasTemptress = (selectedCardIds) => selectedCardIds.includes(69)
-const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
-const getRandomItemFromArray = (array) =>
+export const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(17)
+export const hasTemptress = (selectedCardIds) => selectedCardIds.includes(69)
+export const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
+export const getRandomItemFromArray = (array) =>
   array[getRandomNumber(0, array.length - 1)]
 
-const distributeCards = (selectedCardIds) => {
+export const distributeCards = (selectedCardIds) => {
   let cardIds = [...selectedCardIds]
 
   const newWolfCardId = hasAlphaWolf(selectedCardIds)
@@ -142,18 +142,6 @@ const distributeCards = (selectedCardIds) => {
   }
 }
 
-const getCardById = (card_id) => cards.find((card) => card.id === card_id)
-const isCardSelectedById = (cardIds, cardId) =>
+export const getCardById = (card_id) => cards.find((card) => card.id === card_id)
+export const isCardSelectedById = (cardIds, cardId) =>
   cardIds.some((id) => id === cardId)
-
-export default {
-  toggleCardSelect,
-  distributeCards,
-  isCardSelectedById,
-  getCardById,
-  getRandomItemFromArray,
-  filterCardsByIds,
-  hasAlphaWolf,
-  hasTemptress,
-  getRandomNumber,
-};

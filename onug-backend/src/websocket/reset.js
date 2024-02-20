@@ -1,9 +1,8 @@
 import { HYDRATE_ROOM } from '../constant/ws';
 import { logTrace } from '../log';
 import { validateRoom } from '../validator';
-import { repository } from '../repository';
-import { broadcast } from './connections';
-const { upsertRoomState } = repository
+import { upsertRoomState } from '../repository';
+import { broadcast } from './connections'
 
 export const reset = async (message) => {
   try {

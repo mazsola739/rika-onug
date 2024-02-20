@@ -1,10 +1,9 @@
 import { PLAY_GAME } from '../constant/ws';
 import { logTrace } from '../log';
 import { validateRoom } from '../validator';
-import { repository } from '../repository';
+import { upsertRoomState } from '../repository';
 import { STAGES } from '../constant/stage';
-import { broadcastPlayGame } from './connections';
-const { upsertRoomState } = repository
+import { broadcastPlayGame } from './connections'
 
 export const playGame = async (ws, message) => {
   const { room_id, token } = message

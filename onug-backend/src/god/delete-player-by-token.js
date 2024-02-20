@@ -1,9 +1,7 @@
 import { logTrace, logErrorWithStack } from '../log';
-import { repository } from '../repository';
-const {deletePlayerByToken} = repository
+import { deletePlayerByToken, repository } from '../repository';
 
-
-export const deletePlayerByToken = async (req, res) => {
+export const delete_player_by_token = async (req, res) => {
   try {
 
 

@@ -1,9 +1,8 @@
 import { HYDRATE_READY } from '../constant/ws';
 import { logDebug, logError } from '../log';
-import { repository } from '../repository';
+import { readGameState, upsertRoomState } from '../repository';
 import { getGameTableBoard } from '../utils';
 import { broadcast } from './connections';
-const { readGameState, upsertRoomState } = repository
 
 export const ready = async (message) => {
   try {

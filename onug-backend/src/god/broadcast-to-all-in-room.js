@@ -4,7 +4,8 @@ import { websocketServerConnectionsPerRoom } from '../websocket/connections';
 export const broadCastToAllInRoom = async (req, res) => {
   try {
     const { message, room_id } = req.body
-    logTrace('GOD broadcast to all endpoint triggered', message)
+    logTrace('GOD broadcast to all endpoint triggered', {room_id, message})
+
     Object.values(websocketServerConnectionsPerRoom[room_id])
       .forEach(ws => ws.send(JSON.stringify(message)))
 

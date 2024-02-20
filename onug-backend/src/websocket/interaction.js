@@ -1,10 +1,9 @@
 import { INTERACTION } from '../constant/ws';
 import { logDebug, logError } from '../log';
 import { roleInteractions } from '../scene/roles/index';
-import { repository } from '../repository';
+import { readGameState, upsertRoomState } from '../repository';
 import { websocketServerConnectionsPerRoom } from './connections';
 import { doppelganger_instant_action_response } from '../scene/roles/doppelganger-interaction';
-const { readGameState, upsertRoomState } = repository
 
 export const interaction = async (ws, message) => {
   try {

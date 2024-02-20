@@ -1,5 +1,4 @@
-import { repository } from '../repository';
-const { readGameState } = repository
+import { readGameState } from '../repository';
 import { logWarn } from '../log';
 
 const roomIds = ['foyer', 'archives', 'armory', 'dynamite_room', 'great_hall', 'guest_bedroom', 'kitchen', 'laboratory', 
