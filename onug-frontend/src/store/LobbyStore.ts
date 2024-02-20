@@ -1,5 +1,5 @@
 import { roomsRequest } from 'api'
-import { action, makeAutoObservable } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import { RoomType } from 'types'
 
 class LobbyStore {
@@ -11,7 +11,6 @@ class LobbyStore {
     makeAutoObservable(this)
   }
 
-  @action
   async fetchRooms() {
     this.isLoading = true
     try {

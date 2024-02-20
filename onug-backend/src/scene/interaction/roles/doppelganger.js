@@ -58,7 +58,7 @@ exports.doppelganger_response = (gameState, token, selected_positions, title) =>
   const showCards = getCardIdsByPositions(card_positions, [selected_positions[0]])
 
   players[token].player_history.show_cards = showCards,
-  players[token].player_history.new_role_id = playerCard.player_role_id
+  players[token].new_role_id = playerCard.player_role_id
   players[token].card_or_mark_action = true
 
   const role_interactions = [
@@ -66,7 +66,7 @@ exports.doppelganger_response = (gameState, token, selected_positions, title) =>
       newGameState,
       title,
       token,
-      ["interaction_placed_artifact", `${playerCard.player_role}`],
+      ["interaction_you_are_that_role", `${playerCard.player_role}`],
       'copy',
       null,
       null,

@@ -12,6 +12,13 @@ class RoleStore {
     const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
       (playerCard) => {
         const { position } = playerCard
+        const selectable_cards =
+          (lastJsonMessage.selectable_cards || []).includes(position) || false
+        const shielded_cards =
+          (lastJsonMessage.new_shield_card || []).includes(position) || false
+
+        const shield =
+          (lastJsonMessage.shielded_cards || []).includes(position) || false
         const werewolves =
           (lastJsonMessage.werewolves || []).includes(position) || false
         const dreamwolf =
@@ -22,8 +29,7 @@ class RoleStore {
         const mad = (lastJsonMessage.mad || []).includes(position) || false
         const masons =
           (lastJsonMessage.masons || []).includes(position) || false
-        const selectable_cards =
-          (lastJsonMessage.selectable_cards || []).includes(position) || false
+
         const showCard = (lastJsonMessage.show_cards || []).find(
           (showCardObj) => Object.keys(showCardObj)[0] === position
         )
@@ -33,6 +39,8 @@ class RoleStore {
           ...playerCard,
           id,
           selectable_cards,
+          shielded_cards,
+          shield,
           /* spy,
           aliens,
           artifact,
@@ -85,10 +93,8 @@ class RoleStore {
     const centerCards: PositionProperties[] = gameBoardStore.centerCards.map(
       (centerCard) => {
         const { position } = centerCard
-        console.log(position)
         const selectable_cards =
           lastJsonMessage?.selectable_cards?.includes(position) || false
-        console.log(selectable_cards)
         const showCard = (lastJsonMessage?.show_cards || []).find(
           (showCardObj) => Object.keys(showCardObj)[0] === position
         )

@@ -53,6 +53,7 @@ const renderPlayerCards = () => {
             seer={card.seer}
             select={card.select}
             shield={card.shield}
+            shielded_cards={card.shielded_cards}
             smell={card.smell}
             villains={card.villains}
             sus={card.sus}

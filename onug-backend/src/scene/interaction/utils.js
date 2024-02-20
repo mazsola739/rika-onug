@@ -1,4 +1,4 @@
-const { werewolvesAndDreamWolfIds } = require("./constants")
+const { werewolvesAndDreamWolfIds, werewolvesIds } = require("./constants")
 const _ = require("lodash")
 const artifacts = require("../../data/artifacts.json")
 
@@ -44,6 +44,32 @@ exports.getNonWerewolfPlayerNumbersByRoleIds = (players) => {
   for (const token in players) {
     const player = players[token]
     if (!werewolvesAndDreamWolfIds.includes(player.card.player_role_id)) {
+      result.push(`player_${players[token].player_number}`)
+    }
+  }
+
+  return result
+}
+
+exports.getWerewolfAndDreamwolfPlayerNumbersByRoleIds = (players) => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (werewolvesAndDreamWolfIds.includes(player.card.player_role_id)) {
+      result.push(`player_${players[token].player_number}`)
+    }
+  }
+
+  return result
+}
+
+exports.getWerewolfPlayerNumbersByRoleIds = (players) => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (werewolvesIds.includes(player.card.player_role_id)) {
       result.push(`player_${players[token].player_number}`)
     }
   }
@@ -240,6 +266,18 @@ exports.getTokensByOriginalIds = (players, ids) => {
 
   for (const token in players) {
     if (ids.includes(players?.[token]?.card.player_original_id)) {
+      result.push(token)
+    }
+  }
+
+  return result
+}
+
+exports.getTokensByRoleIds = (players, ids) => {
+  const result = []
+
+  for (const token in players) {
+    if (ids.includes(players?.[token]?.card.player_role_id)) {
       result.push(token)
     }
   }

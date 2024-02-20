@@ -9,9 +9,8 @@ exports.alphawolf = (gameState, tokens, title) => {
   const role_interactions = []
 
   tokens.forEach(token => {
-    const { players, shield, actual_scene } = newGameState
-    const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(players)
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, shield)
+    const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(newGameState.players)
+    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
   
     updatePlayerCard(newGameState, token)
 
@@ -47,16 +46,14 @@ exports.alphawolf_response = (gameState, token, selected_positions, title) => {
   }
 
   const newGameState = { ...gameState }
-  const { players, card_positions: cardPositions } = newGameState
-  const player = players[token]
 
-  const centerWolf = { ...cardPositions.center_wolf }
-  const selectedCard = { ...cardPositions[selected_positions[0]] }
-  cardPositions.center_wolf = selectedCard
-  cardPositions[selected_positions[0]] = centerWolf
+  const centerWolf = { ...newGameState.card_positions.center_wolf }
+  const selectedCard = { ...newGameState.card_positions[selected_positions[0]] }
+  newGameState.card_positions.center_wolf = selectedCard
+  newGameState.card_positions[selected_positions[0]] = centerWolf
 
-  player.player_history.swapped_cards = [selected_positions[0], "center_wolf"]
-  player.card_or_mark_action = true
+  newGameState.players[token].card_or_mark_action = true
+  newGameState.players[token].player_history.swapped_cards = [selected_positions[0], "center_wolf"]
 
   const role_interactions = [
     generateRoleInteractions(

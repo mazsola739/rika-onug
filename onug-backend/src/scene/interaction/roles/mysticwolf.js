@@ -9,8 +9,7 @@ exports.mysticwolf = (gameState, tokens, title) => {
   const role_interactions = []
 
   tokens.forEach((token) => {
-    const { players } = newGameState
-    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(players, [token])
+    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
     updatePlayerCard(newGameState, token)
@@ -47,17 +46,15 @@ exports.mysticwolf_response = (gameState, token, selected_positions, title) => {
   }
 
   const newGameState = { ...gameState }
-  const player = newGameState.players[token]
-  const playerCard = player?.card
   const selectedPositionCard = newGameState.card_positions[selected_positions[0]]
   const viewCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
 
-  if (playerCard?.original_id === selectedPositionCard.id) {
-    playerCard.player_card_id = 0
+  if (newGameState.players[token]?.card?.original_id === selectedPositionCard.id) {
+    newGameState.players[token].card.player_card_id = 0
   }
 
-  player.player_history.show_cards = viewCards
-  player.card_or_mark_action = true
+  newGameState.players[token].player_history.show_cards = viewCards
+  newGameState.players[token].card_or_mark_action = true
 
   const role_interactions = [
     generateRoleInteractions(
@@ -67,12 +64,14 @@ exports.mysticwolf_response = (gameState, token, selected_positions, title) => {
       ["interaction_saw_card", selected_positions[0]],
       'spy',
       null,
-      viewCards,
       null,
+      viewCards,
       null,
       { viewed_cards: [selected_positions[0]] }
     )
   ]
 
-  return { ...newGameState, role_interactions }
+  newGameState.role_interactions = role_interactions
+
+  return newGameState
 }

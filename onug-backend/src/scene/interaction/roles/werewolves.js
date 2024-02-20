@@ -1,4 +1,4 @@
-const { getPlayerNumbersWithMatchingTokens, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions } = require("../utils")
+const { getWerewolfPlayerNumbersByRoleIds, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions } = require("../utils")
 const { centerCardPositions } = require("../constants")
 const { updatePlayerCard } = require("../update-player-card")
 const { generateRoleInteractions } = require("../generate-role-interactions")
@@ -11,7 +11,7 @@ exports.werewolves = (gameState, tokens, title) => {
 
   tokens.forEach(token => {
     const { players } = newGameState
-    const werewolves = getPlayerNumbersWithMatchingTokens(players, tokens)
+    const werewolves = getWerewolfPlayerNumbersByRoleIds(players, tokens)
     const dreamwolf = getDreamWolfPlayerNumberByRoleIds(players)
     const loneWolf = (werewolves.length + dreamwolf.length) === 1
 
@@ -51,14 +51,11 @@ exports.werewolves_response = (gameState, token, selected_positions, title) => {
   }
 
   const newGameState = { ...gameState }
-  const { players, card_positions: cardPositions, werewolves, dreamwolf } = newGameState
-  const player = players[token]
-  const playerCard = player?.card
-  const showCards = getCardIdsByPositions(cardPositions, [selected_positions[0]])
-  const selectedPositionCard = cardPositions[selected_positions[0]]
+  const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
+  const selectedPositionCard = newGameState.card_positions[selected_positions[0]]
 
-  if (playerCard.original_id === selectedPositionCard.id) {
-    playerCard.player_card_id = 0
+  if (newGameState.players[token].card.original_id === selectedPositionCard.id) {
+    newGameState.players[token].card.player_card_id = 0
   }
 
   const role_interactions = [
@@ -68,16 +65,16 @@ exports.werewolves_response = (gameState, token, selected_positions, title) => {
       token,
       ["interaction_saw_card", selected_positions[0]],
       'spy',
-      { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
+      null,
       null,
       showCards,
       null,
-      { viewed_cards: selected_positions[0], werewolves, dreamwolf }
+      { viewed_cards: selected_positions[0], werewolves: newGameState.werewolves, dreamwolf: newGameState.dreamwolf }
     )
   ]
 
-  player.player_history.show_cards = showCards
-  player.card_or_mark_action = true
+  newGameState.players[token].player_history.show_cards = showCards
+  newGameState.players[token].card_or_mark_action = true
 
   return { ...newGameState, role_interactions }
 }

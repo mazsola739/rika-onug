@@ -36,6 +36,7 @@ export interface BoardCardProps {
   seer?: boolean
   select?: boolean
   shield?: boolean
+  shielded_cards?: boolean
   smell?: boolean
   sus?: boolean
   swap?: boolean

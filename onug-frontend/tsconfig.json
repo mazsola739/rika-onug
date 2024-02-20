@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "skipLibCheck": true,
+    "strict": false,
     "baseUrl": "./src",
     "paths": {
       "@App/*": ["src/App/*"],
@@ -16,13 +19,19 @@
     },
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
-    "module": "es6",
+    "module": "esnext",
     "esModuleInterop": true,
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
     "downlevelIteration": true,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
-    "jsx": "react-jsx"
+    "useDefineForClassFields": true,
+    "jsx": "react-jsx",
+    "types": ["vite/client", "vite-plugin-svgr/client"]
   },
   "include": ["src", "src/declaration.d.ts"],
   "exclude": ["node_modules", "src/**/*.spec.ts"]

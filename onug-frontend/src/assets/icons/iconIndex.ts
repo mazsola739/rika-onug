@@ -1,67 +1,138 @@
-export { ReactComponent as AlienIcon } from './alien.svg'
-export { ReactComponent as ArtifactIcon } from './artifact.svg'
-export { ReactComponent as AssassinIcon } from './assassin.svg'
-export { ReactComponent as AwesomeIcon } from './awesome.svg'
-export { ReactComponent as BabyAlienIcon } from './babyalien.svg'
-export { ReactComponent as BatIcon } from './bat.svg'
-export { ReactComponent as BlindIcon } from './blind.svg'
-export { ReactComponent as BlobIcon } from './blob.svg'
-export { ReactComponent as BulbIcon } from './bulb.svg'
-export { ReactComponent as ClarityIcon } from './clarity.svg'
-export { ReactComponent as ClawIcon } from './claw.svg'
-export { ReactComponent as ClosedIcon } from './closed.svg'
-export { ReactComponent as ClosingIcon } from './closing.svg'
-export { ReactComponent as ConnectingIcon } from './connecting.svg'
-export { ReactComponent as CopyIcon } from './copy.svg'
-export { ReactComponent as CowIcon } from './cow.svg'
-export { ReactComponent as CupidIcon } from './cupid.svg'
-export { ReactComponent as DiseasedIcon } from './diseased.svg'
-export { ReactComponent as DreamwolfIcon } from './dreamwolf.svg'
-export { ReactComponent as DressIcon } from './dress.svg'
-export { ReactComponent as DrunkIcon } from './drunk.svg'
-export { ReactComponent as EmpathIcon } from './empath.svg'
-export { ReactComponent as EvilIcon } from './evil.svg'
-export { ReactComponent as EyeIcon } from './eye.svg'
-export { ReactComponent as FamilyIcon } from './family.svg'
-export { ReactComponent as FangIcon } from './fang.svg'
-export { ReactComponent as FearIcon } from './fear.svg'
-export { ReactComponent as FriendIcon } from './friend.svg'
-export { ReactComponent as IdIcon } from './id.svg'
-export { ReactComponent as InsomniacIcon } from './insomniac.svg'
-export { ReactComponent as InteractionIcon } from './interaction.svg'
-export { ReactComponent as InvestigatorIcon } from './investigator.svg'
-export { ReactComponent as JestIcon } from './jest.svg'
-export { ReactComponent as LikeIcon } from './like.svg'
-export { ReactComponent as LoverIcon } from './lover.svg'
-export { ReactComponent as MadIcon } from './mad.svg'
-export { ReactComponent as MasonIcon } from './mason.svg'
-export { ReactComponent as MorticianIcon } from './mortician.svg'
-export { ReactComponent as MuteIcon } from './mute.svg'
-export { ReactComponent as NewalienIcon } from './newalien.svg'
-export { ReactComponent as NiceIcon } from './nice.svg'
-export { ReactComponent as NightIcon } from './night.svg'
-export { ReactComponent as OpenIcon } from './open.svg'
-export { ReactComponent as OracleIcon } from './oracle.svg'
-export { ReactComponent as PrettyIcon } from './pretty.svg'
-export { ReactComponent as RobberIcon } from './robber.svg'
-export { ReactComponent as SecretIcon } from './secret.svg'
-export { ReactComponent as SeerIcon } from './seer.svg'
-export { ReactComponent as SelectIcon } from './select.svg'
-export { ReactComponent as SentinelIcon } from './sentinel.svg'
-export { ReactComponent as ShieldIcon } from './shield.svg'
-export { ReactComponent as SmellIcon } from './smell.svg'
-export { ReactComponent as SpyIcon } from './spy.svg'
-export { ReactComponent as SusIcon } from './sus.svg'
-export { ReactComponent as SwapIcon } from './swap.svg'
-export { ReactComponent as TannerIcon } from './tanner.svg'
-export { ReactComponent as TapIcon } from './tap.svg'
-export { ReactComponent as TargetIcon } from './target.svg'
-export { ReactComponent as TraitorIcon } from './traitor.svg'
-export { ReactComponent as TrophyIcon } from './trophy.svg'
-export { ReactComponent as UfoIcon } from './ufo.svg'
-export { ReactComponent as UninstantiatedIcon } from './uninstantiated.svg'
-export { ReactComponent as VampireIcon } from './vampire.svg'
-export { ReactComponent as VillainIcon } from './villain.svg'
-export { ReactComponent as VoodooIcon } from './voodoo.svg'
-export { ReactComponent as WerewolfIcon } from './werewolf.svg'
-export { ReactComponent as WitchIcon } from './witch.svg'
+import React from 'react'
+import AlienIcon from './alien.svg?react'
+import ArtifactIcon from './artifact.svg?react'
+import AssassinIcon from './assassin.svg?react'
+import AwesomeIcon from './awesome.svg?react'
+import BabyAlienIcon from './babyalien.svg?react'
+import BatIcon from './bat.svg?react'
+import BlindIcon from './blind.svg?react'
+import BlobIcon from './blob.svg?react'
+import BulbIcon from './bulb.svg?react'
+import ClarityIcon from './clarity.svg?react'
+import ClawIcon from './claw.svg?react'
+import ClosedIcon from './closed.svg?react'
+import ClosingIcon from './closing.svg?react'
+import ConnectingIcon from './connecting.svg?react'
+import CopyIcon from './copy.svg?react'
+import CowIcon from './cow.svg?react'
+import CupidIcon from './cupid.svg?react'
+import DiseasedIcon from './diseased.svg?react'
+import DreamwolfIcon from './dreamwolf.svg?react'
+import DressIcon from './dress.svg?react'
+import DrunkIcon from './drunk.svg?react'
+import EmpathIcon from './empath.svg?react'
+import EvilIcon from './evil.svg?react'
+import EyeIcon from './eye.svg?react'
+import FamilyIcon from './family.svg?react'
+import FangIcon from './fang.svg?react'
+import FearIcon from './fear.svg?react'
+import FriendIcon from './friend.svg?react'
+import IdIcon from './id.svg?react'
+import InsomniacIcon from './insomniac.svg?react'
+import InteractionIcon from './interaction.svg?react'
+import InvestigatorIcon from './investigator.svg?react'
+import JestIcon from './jest.svg?react'
+import LikeIcon from './like.svg?react'
+import LoverIcon from './lover.svg?react'
+import MadIcon from './mad.svg?react'
+import MasonIcon from './mason.svg?react'
+import MorticianIcon from './mortician.svg?react'
+import MuteIcon from './mute.svg?react'
+import NewalienIcon from './newalien.svg?react'
+import NiceIcon from './nice.svg?react'
+import NightIcon from './night.svg?react'
+import OpenIcon from './open.svg?react'
+import OracleIcon from './oracle.svg?react'
+import PrettyIcon from './pretty.svg?react'
+import RobberIcon from './robber.svg?react'
+import SecretIcon from './secret.svg?react'
+import SeerIcon from './seer.svg?react'
+import SelectIcon from './select.svg?react'
+import SentinelIcon from './sentinel.svg?react'
+import ShieldIcon from './shield.svg?react'
+import SmellIcon from './smell.svg?react'
+import SpyIcon from './spy.svg?react'
+import SusIcon from './sus.svg?react'
+import SwapIcon from './swap.svg?react'
+import TannerIcon from './tanner.svg?react'
+import TapIcon from './tap.svg?react'
+import TargetIcon from './target.svg?react'
+import TraitorIcon from './traitor.svg?react'
+import TrophyIcon from './trophy.svg?react'
+import UfoIcon from './ufo.svg?react'
+import UninstantiatedIcon from './uninstantiated.svg?react'
+import VampireIcon from './vampire.svg?react'
+import VillainIcon from './villain.svg?react'
+import VoodooIcon from './voodoo.svg?react'
+import WerewolfIcon from './werewolf.svg?react'
+import WitchIcon from './witch.svg?react'
+
+export {
+  AlienIcon,
+  ArtifactIcon,
+  AssassinIcon,
+  AwesomeIcon,
+  BabyAlienIcon,
+  BatIcon,
+  BlindIcon,
+  BlobIcon,
+  BulbIcon,
+  ClarityIcon,
+  ClawIcon,
+  ClosedIcon,
+  ClosingIcon,
+  ConnectingIcon,
+  CopyIcon,
+  CowIcon,
+  CupidIcon,
+  DiseasedIcon,
+  DreamwolfIcon,
+  DressIcon,
+  DrunkIcon,
+  EmpathIcon,
+  EvilIcon,
+  EyeIcon,
+  FamilyIcon,
+  FangIcon,
+  FearIcon,
+  FriendIcon,
+  IdIcon,
+  InsomniacIcon,
+  InteractionIcon,
+  InvestigatorIcon,
+  JestIcon,
+  LikeIcon,
+  LoverIcon,
+  MadIcon,
+  MasonIcon,
+  MorticianIcon,
+  MuteIcon,
+  NewalienIcon,
+  NiceIcon,
+  NightIcon,
+  OpenIcon,
+  OracleIcon,
+  PrettyIcon,
+  RobberIcon,
+  SecretIcon,
+  SeerIcon,
+  SelectIcon,
+  SentinelIcon,
+  ShieldIcon,
+  SmellIcon,
+  SpyIcon,
+  SusIcon,
+  SwapIcon,
+  TannerIcon,
+  TapIcon,
+  TargetIcon,
+  TraitorIcon,
+  TrophyIcon,
+  UfoIcon,
+  UninstantiatedIcon,
+  VampireIcon,
+  VillainIcon,
+  VoodooIcon,
+  WerewolfIcon,
+  WitchIcon,
+}

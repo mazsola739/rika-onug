@@ -3,7 +3,7 @@ const { checkConditions } = require("./check-conditions")
 const { doppelgangerInstantActionsIds, werewolvesIds, seerIds, masonIds } = require("./constants")
 const { roles } = require("./roles")
 const { doppelganger_instant_action } = require("./roles/doppelgangerinstantaction")
-const { getTokensByOriginalIds, containsAnyIds, containsAllIds } = require("./utils")
+const { getTokensByOriginalIds, containsAnyIds, containsAllIds, getTokensByRoleIds } = require("./utils")
 
 //TODO action_history
 exports.interactionHandler = (gameState) => {

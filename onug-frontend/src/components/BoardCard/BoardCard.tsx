@@ -13,6 +13,8 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
     spy,
     isCenter,
     selectable_cards,
+    shielded_cards,
+    shield,
     aliens,
     artifact,
     assassin,
@@ -44,7 +46,6 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
     pretty,
     seer,
     select,
-    shield,
     smell,
     sus,
     swap,
@@ -115,8 +116,8 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
     return (
       <StyledBoardCard>
         <Tokens>
-          {!isCenter && <Token tokenName={position} size={45} />}
-          {!isCenter && shield && <Token tokenName="shield" size={45} />}
+          {!isCenter && <Token tokenName={position} size={35} />}
+          {!isCenter && shield && <Token tokenName="shield" size={35} />}
         </Tokens>
         <CardBack
           backgroundImage={imgSrc}
@@ -126,6 +127,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
         />
         <Tokens>
           {isCenter && spy && <Icon iconName="spy" size={33} />}
+          {!isCenter && shielded_cards && <Icon iconName="shield" size={33} />}
           {!isCenter && artifact && <Icon iconName="artifact" size={33} />}
           {!isCenter && aliens && <Icon iconName="alien" size={33} />}
           {!isCenter && assassin && <Icon iconName="assassin" size={33} />}

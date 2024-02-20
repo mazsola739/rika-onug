@@ -87,7 +87,7 @@ exports.robber_response = (gameState, token, selected_positions, title) => {
   playerCard.player_card_id = card_positions[robberPlayerNumber].id
   playerCard.player_team = card_positions[robberPlayerNumber].team
 
-  const showCards = getCardIdsByPlayerNumbers(card_positions, robberPlayerNumber)
+  const showCards = getCardIdsByPlayerNumbers(card_positions, [robberPlayerNumber])
 
   player.player_history.swapped_cards = [selected_positions[0], `player_${player.player_number}`]
   player.player_history.show_cards = showCards

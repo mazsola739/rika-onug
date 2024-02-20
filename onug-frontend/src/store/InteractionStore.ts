@@ -85,8 +85,6 @@ class InteractionStore {
   }
 
   setInteraction(title: string): void {
-    console.log(title)
-    console.log(this.lastJsonMessage)
     switch (title) {
       case 'DOPPELGÄNGER_INSTANT_ACTION':
         doppelgangerStore.instantNightAction(this.lastJsonMessage)

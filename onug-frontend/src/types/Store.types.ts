@@ -161,6 +161,7 @@ export type GamePlayBoardCardType = {
     seer: boolean
     select: boolean
     shield: boolean
+    shielded_cards: boolean
     smell: boolean
     villains: boolean
     sus: boolean
@@ -243,6 +244,7 @@ export type PositionProperties = {
   seer?: boolean
   select?: boolean
   shield?: boolean
+  shielded_cards?: boolean
   smell?: boolean
   villains?: boolean
   spy?: boolean

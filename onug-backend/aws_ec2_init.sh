@@ -14,8 +14,8 @@ sudo ./aws/install
 ## install node version 20.x 
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install -y nodejs
-npm install --global yarn
-npm install --global nodemon
+sudo npm install --global yarn
+sudo npm install --global nodemon
 
 
 # GIT
