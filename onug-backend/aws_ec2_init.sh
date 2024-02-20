@@ -38,6 +38,9 @@ cd /rika-onug/onug-backend
 yarn
 nohup yarn start &
 
+## start frontend
+cd /rika-onug/onug-frontend
+nohup yarn start --host
 
 ## kill service
 ps
