@@ -11,6 +11,7 @@
 
 # production
 /onug-frontend/build
+/onug-frontend/dist
 /onug-backend/dist
 
 # logs

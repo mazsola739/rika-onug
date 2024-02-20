@@ -30,6 +30,8 @@ git clone git@github.com:mazsola739/rika-onug.git
 ## open up ports
 sudo iptables -A INPUT -p tcp --dport 7654 -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 7655 -j ACCEPT
+# for FE
+sudo iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
 
 ## start backend
 cd /rika-onug/onug-backend
