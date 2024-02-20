@@ -1,0 +1,1 @@
+exports.vampires_narration  = () => ["vampires_kickoff_text"]

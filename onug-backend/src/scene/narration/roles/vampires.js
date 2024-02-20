@@ -1,1 +1,0 @@
-exports.vampires = () => ["vampires_kickoff_text"]

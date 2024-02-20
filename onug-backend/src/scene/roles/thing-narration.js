@@ -1,0 +1,1 @@
+exports.thing_narration  = () => ["thing_kickoff_text"]

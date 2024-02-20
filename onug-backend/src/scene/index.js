@@ -1,5 +1,5 @@
-const { interaction } = require("./interaction/interaction")
-const { narration } = require("./narration/narration")
+const { interaction } = require("./interaction")
+const { narration } = require("./narration")
 
 module.exports = {
   interaction,

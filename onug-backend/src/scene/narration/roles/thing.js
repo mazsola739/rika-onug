@@ -1,1 +1,0 @@
-exports.thing = () => ["thing_kickoff_text"]
