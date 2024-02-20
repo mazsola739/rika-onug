@@ -7,6 +7,8 @@ const { logDebug } = require('./log')
 const { websocketServer } = require('./websocket')
 const { godRouter } = require("./god")
 const { stubRouter } = require("./stub")
+import ViteExpress from "vite-express";
+
 
 const app = express()
 const PORT = 7654
@@ -19,11 +21,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(cors())
-/* app.use(cors({
-    origin: 'http://localhost:3000',
-    credentials: true,
-}))
- */
 
 // API routing
 app.use('/api', apiRouter)
@@ -34,6 +31,6 @@ app.use('/stub', stubRouter)
 app.use(pageNotFoundError)
 app.use(internalServerError)
 
-app.listen(PORT, () => {
+ViteExpress.listen(app, PORT, () =>
     logDebug(`Server is listening on port: ${PORT}`)
-})
+);
