@@ -4,14 +4,14 @@ const createPriest = (prefix) => () =>
 export const priest = (gameState) => createPriest("priest")
 export const doppelganger_priest = (gameState) => createPriest("doppelganger_priest")
 
-/* if (conditions.hasPriestPlayer) {
-  tokens = getTokensByOriginalIds(players, [37])
-  return roles.priest_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasPriestPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [37])
+  return roles.priest_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
 
-if (conditions.hasDoppelgangerPlayer && conditions.hasPriestPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.doppelganger_priest_interaction(newGameState, tokens, sceneTitle)
+if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasPriestPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.doppelganger_priest_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 //? INFO: Priest - Swaps his mark and one other player's mark with a Mark of Clarity. which purge other Marks)
 //TODO doppelganger

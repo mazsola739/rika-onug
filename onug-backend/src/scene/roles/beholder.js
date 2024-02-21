@@ -9,9 +9,9 @@ export const beholder = (hasSeer, hasApprenticeSeer, hasDoppelganger) => [
     : "beholder_apprenticeseer_kickoff_text",
 ]
 
-/* if (conditions.hasBeholderPlayer && hasSeers) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.beholder_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasBeholderPlayer(newGameState.players) && hasSeers) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.beholder_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 

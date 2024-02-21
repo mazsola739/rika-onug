@@ -1,13 +1,11 @@
 export const masons = (gameState) => ["masons_kickoff_text"]
 
 //! TODO mason players
-/* if (conditions.hasMasonPlayers) {
-  tokens = getTokensByOriginalIds(newGameState.players, masonIds)
-  return roles.masons_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasMasonPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, masonIds)
+  return roles.masons_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
-
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { getPlayerNumbersWithMatchingTokens } from '../utils'
 
 //? INFO: Mason (2) – Wakes up and looks for the other fellow Mason
@@ -17,8 +15,6 @@ export const masons_interaction = (gameState, tokens, title) => {
 
   tokens.forEach((token) => {
     const masons = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens)
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

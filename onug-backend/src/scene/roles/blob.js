@@ -22,9 +22,9 @@ export const blob = (gameState) => {
   ]
 }
 
-/* if (conditions.hasBlobPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.blob_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasBlobPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.blob_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 

@@ -1,14 +1,13 @@
 export const apprenticeseer = (gameState) => ["apprenticeseer_kickoff_text"]
 
-/* if (conditions.hasApprenticeSeerPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [18])
-  return roles.apprenticeseer_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasApprenticeSeerPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [18])
+  return roles.apprenticeseer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 import { getCardIdsByPositions } from '../utils'
 import { centerCardPositions } from '../constants'
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
 //? INFO: Apprentice Seer - looks at one card from the center (not another players or her own)
@@ -17,8 +16,6 @@ export const apprenticeseer_interaction = (gameState, tokens, title) => {
   const scene_role_interactions = []
 
   tokens.forEach(token => {
-    updatePlayerCard(newGameState, token)
-
     scene_role_interactions.push(
       generateSceneRoleInteractions(
         newGameState,

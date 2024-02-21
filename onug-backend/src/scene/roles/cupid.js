@@ -1,8 +1,8 @@
 export const cupid = (gameState) => ["cupid_kickoff_text"]
 
-/* if (conditions.hasCupidPlayer) {
-    tokens = getTokensByOriginalIds(players, [31])
-    return roles.cupid_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasCupidPlayer(newGameState.players)) {
+   const actualSceneRoleTokens = getTokensByOriginalIds(players, [31])
+    return roles.cupid_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
   } */
 //? INFO: Cupid - Gives any two players (including herself) a Mark of Love if one of them dies so does the other
 //! NO flipped card but shield

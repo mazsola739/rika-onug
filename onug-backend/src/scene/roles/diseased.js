@@ -1,8 +1,8 @@
 export const diseased = (gameState) => ["diseased_kickoff_text"]
 
-/* if (conditions.hasDiseasedPlayer) {
-    tokens = getTokensByOriginalIds(players, [32])
-    return roles.diseased_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasDiseasedPlayer(newGameState.players)) {
+   const actualSceneRoleTokens = getTokensByOriginalIds(players, [32])
+    return roles.diseased_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
   } */
 
 //? INFO: Diseased - Gives either player to right or left a Mark of Disease whoever votes for either the marked or player loses

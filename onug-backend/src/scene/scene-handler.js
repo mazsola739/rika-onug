@@ -1,6 +1,6 @@
 import * as roles from './roles'
 import { logError } from '../log'
-import * as conditions from './check-conditions'
+import * as conditions from './conditions'
 
 export let selected_cards = {}
 

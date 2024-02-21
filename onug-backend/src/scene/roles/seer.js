@@ -1,8 +1,8 @@
 export const seer = (gameState) => ["seer_kickoff_text"]
 
-/* if (conditions.hasSeerPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [9])
-  return roles.seer_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasSeerPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [9])
+  return roles.seer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 import {
@@ -14,8 +14,7 @@ import {
   } from '../utils'
   
   import { centerCardPositions } from '../constants'
-  import { updatePlayerCard } from '../update-player-card'
-  import { generateSceneRoleInteractions } from '../generate-role-interactions'
+  import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
   import { isValidSelection } from '../validate-response-data'
   
   //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
@@ -27,9 +26,7 @@ import {
       const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
       const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
       const selectablePositions = concatArraysWithUniqueElements(centerCardPositions, selectablePlayersWithNoShield)
-  
-      updatePlayerCard(newGameState, token)
-  
+
       scene_role_interactions.push(
         generateSceneRoleInteractions(
           newGameState,

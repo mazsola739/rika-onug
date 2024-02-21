@@ -7,9 +7,9 @@ export const doppelganger_instant_action = (rolesFromIds) => [
   "doppelganger_verbose_outro_text",
 ]
 
-/* if (conditions.hasDoppelgangerPlayer && hasInstantAction) {
-  tokens = getTokensByOriginalIds(newGameState.players, [1])
-  return doppelganger_instant_action_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasDoppelgangerPlayer(newGameState.players) && hasInstantAction) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [1])
+  return doppelganger_instant_action_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
  */
 import { roleInteractions } from './index'

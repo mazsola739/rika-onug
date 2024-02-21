@@ -44,13 +44,13 @@ export const empath = (totalPlayers) =>
 export const doppelganger_empath = (totalPlayers) =>
   createEmpath("doppelganger_empath_kickoff_text", totalPlayers)()
 
-/*   if (conditions.hasEmpathPlayer) {
-    tokens = getTokensByOriginalIds(players, [1])
-    return roles.empath_interaction(newGameState, tokens, sceneTitle)
+/*   if (conditions.hasEmpathPlayer(newGameState.players)) {
+   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+    return roles.empath_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
   }
-  if (conditions.hasDoppelgangerPlayer && conditions.hasEmpathPlayer) {
-    tokens = getTokensByOriginalIds(players, [1])
-    return roles.doppelganger_empath_interaction(newGameState, tokens, sceneTitle)
+  if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasEmpathPlayer(newGameState.players)) {
+   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+    return roles.doppelganger_empath_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
   } */
   
 //? INFO: Empath - App asks some other players w/ eyes closed to point at someone. She observes it with her eyes open

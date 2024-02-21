@@ -5,9 +5,9 @@ export const evilometer = (hasDoppelganger) => [
   "evilometer_kickoff2_text",
 ]
 
-/* if (conditions.hasEvilometerPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.evilometer_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasEvilometerPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.evilometer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 export const evilometer_interaction = (gameState, tokens, title) => {}

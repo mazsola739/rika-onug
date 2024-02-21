@@ -1,8 +1,7 @@
 export const witch = (gameState) => ["witch_kickoff_text"] 
 
 import { centerCardPositions } from '../constants'
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
 import {
@@ -12,9 +11,9 @@ import {
   getCardIdsByPositions,
 } from '../utils'
 
-/* if (conditions.hasWitchPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [27])
-  return roles.witch_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasWitchPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [27])
+  return roles.witch_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 //? INFO: Witch - May look at one center card. If she does she must swap it with any player's card (including hers)
@@ -23,8 +22,6 @@ export const witch_interaction = (gameState, tokens, title) => {
   const scene_role_interactions = []
 
   tokens.forEach(token => {
-    updatePlayerCard(newGameState, token)
-
     scene_role_interactions.push(
       generateSceneRoleInteractions(
         newGameState,

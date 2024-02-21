@@ -11,14 +11,13 @@ import {
 } from '../utils'
 
 
-/* if (conditions.hasAnyWerewolfPlayers) {
-  tokens = getTokensByOriginalIds(newGameState.players, werewolvesIds)
-  return roles.werewolves_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasAnyWerewolfPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, werewolvesIds)
+  return roles.werewolves_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */ //! doppelganger?
 
 import { centerCardPositions } from '../constants'
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
 //? INFO: Werewolves (4) - Open their eyes and view their fellow Werewolves (including Mystic and Alpha)
@@ -30,8 +29,6 @@ export const werewolves_interaction = (gameState, tokens, title) => {
     const werewolves = getWerewolfPlayerNumbersByRoleIds(newGameState.players, tokens)
     const dreamwolf = getDreamWolfPlayerNumberByRoleIds(newGameState.players)
     const loneWolf = (werewolves.length + dreamwolf.length) === 1
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

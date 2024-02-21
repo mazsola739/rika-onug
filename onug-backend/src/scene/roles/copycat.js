@@ -1,8 +1,8 @@
 export const copycat = (gameState) => ["copycat_kickoff_text"]
 
-/* if (conditions.hasCopycatPlayer) {
-    tokens = getTokensByOriginalIds(players, [30])
-    return roles.copycat_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasCopycatPlayer(newGameState.players)) {
+   const actualSceneRoleTokens = getTokensByOriginalIds(players, [30])
+    return roles.copycat_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
   } */
 
 //? INFO: Copycat - Looks at one card from the center and becomes that card. Does the action when called

@@ -5,13 +5,13 @@ export const leader = (hasDoppelganger) => [
 
 export const leader_zerbgroob = (gameState) => ["leader_zerbgroob_text"]
 
-/*       if (conditions.hasLeaderPlayer && conditions.hasAnyAlienPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
-        return roles.leader_interaction(newGameState, tokens, sceneTitle)
+/*       if (conditions.hasLeaderPlayer(newGameState.players) && conditions.hasAnyAlienPlayer(newGameState.players)) {
+       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+        return roles.leader_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
       } 
-            if (conditions.hasLeaderPlayer && conditions.hasGroobAndZerbPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
-        return roles.leader_zerbgroob_interaction(newGameState, tokens, sceneTitle)
+            if (conditions.hasLeaderPlayer(newGameState.players) && conditions.hasGroobAndZerbPlayer(newGameState.players)) {
+       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+        return roles.leader_zerbgroob_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
       }
       */
 

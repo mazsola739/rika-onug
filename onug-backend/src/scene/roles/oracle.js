@@ -51,14 +51,14 @@ const oracle_responses = {
   },
 }
 
-/* if (conditions.hasOraclePlayer) {   //TODO make sure always have answer if oracle in selected cards
-  tokens = getTokensByOriginalIds(players, [50])
-  return roles.oracle_question_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasOraclePlayer(newGameState.players)) {   //TODO make sure always have answer if oracle in selected cards
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [50])
+  return roles.oracle_question_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
-/* if (conditions.hasOracle && oracleAnswerPlayer) {
-  tokens = getTokensByOriginalIds(players, [50])
-  return roles.oracle_reaction_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasOracle && oracleAnswerPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [50])
+  return roles.oracle_reaction_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 export const oracle_question = (gameState) => [

@@ -1,7 +1,6 @@
 export const robber = (gameState) => ["robber_kickoff_text"]
 
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
 import {
@@ -11,9 +10,9 @@ import {
   getCardIdsByPlayerNumbers,
 } from '../utils'
 
-/* if (conditions.hasRobberPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [8])
-  return roles.robber_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasRobberPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [8])
+  return roles.robber_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
@@ -22,8 +21,6 @@ export const robber_interaction = (gameState, tokens, title) => {
   const scene_role_interactions = []
 
   tokens.forEach((token) => {
-    updatePlayerCard(newGameState, token)
-
     if (!newGameState.players[token].shield) {
       const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
       const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)

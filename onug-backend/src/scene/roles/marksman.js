@@ -5,9 +5,9 @@ export const marksman = (hasDoppelganger) => [
   "marksman_kickoff2_text",
 ]
 
-/* if (conditions.hasMarksmanPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.marksman_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasMarksmanPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.marksman_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 //? INFO: Marksman - Looks at one other player's card and a different player's mark
 //TODO doppelganger

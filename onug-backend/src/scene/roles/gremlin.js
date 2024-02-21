@@ -4,13 +4,13 @@ const createGremlin = (prefix) => () =>
 export const gremlin = createGremlin("gremlin")
 export const doppelganger_gremlin = createGremlin("doppelganger_gremlin")
 
-/* if (conditions.hasGremlinPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.gremlin_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasGremlinPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.gremlin_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } 
-      if (conditions.hasDoppelgangerPlayer && conditions.hasGremlinPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
-        return roles.doppelganger_gremlin_interaction(newGameState, tokens, sceneTitle)
+      if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasGremlinPlayer(newGameState.players)) {
+       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+        return roles.doppelganger_gremlin_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
       }*/
 
 //? INFO: Gremlin - Swap any two player's (even himself) cards or marks (not both)

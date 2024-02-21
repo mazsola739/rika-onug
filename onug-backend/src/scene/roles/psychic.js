@@ -5,13 +5,13 @@ import { getRandomItemFromArray } from '../utils'
 const random_psychic = ["psychic_view1_text", "psychic_view2_text"]
 const psychicKeys = ["identifier_anyeven_text", "identifier_anyodd_text"]
 
-/* if (conditions.hasPsychicPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.psychic_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasPsychicPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.psychic_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
-      if (conditions.hasDoppelgangerPlayer && conditions.hasPsychicPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
-        return roles.doppelganger_psychic_interaction(newGameState, tokens, sceneTitle)
+      if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasPsychicPlayer(newGameState.players)) {
+       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+        return roles.doppelganger_psychic_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
       } */
 const createPsychic = (kickoffText) => () =>
   [

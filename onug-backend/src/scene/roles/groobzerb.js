@@ -5,9 +5,9 @@ export const groobzerb = (hasDoppelganger) => [
   "groobzerb_kickoff2_text",
 ]
 
-/* if (conditions.hasGroobAndZerbPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.groobzerb_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasGroobAndZerbPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.groobzerb_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 //? INFO: Groob - Wakes with other aliens. Wakes after to see Zerb. If Zerb is a player at vote, only wins if Zerb dies

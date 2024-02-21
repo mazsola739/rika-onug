@@ -1,13 +1,12 @@
 export const paranormalinvestigator = (gameState) => ["paranormalinvestigator_kickoff_text"]
 
-/* if (conditions.hasParanormalInvestigatorPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [23])
-  return roles.paranormalinvestigator_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasParanormalInvestigatorPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [23])
+  return roles.paranormalinvestigator_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 import { townIds } from '../constants'
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
 import {
@@ -24,8 +23,6 @@ export const paranormalinvestigator_interaction = (gameState, tokens, title) => 
   tokens.forEach((token) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

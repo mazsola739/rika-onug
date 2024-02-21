@@ -1,13 +1,12 @@
 export const troublemaker = (gameState) => ["troublemaker_kickoff_text"]
 
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 import { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield } from '../utils'
 
-/* if (conditions.hasTroublemakerPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [11])
-  return roles.troublemaker_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasTroublemakerPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [11])
+  return roles.troublemaker_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 //? INFO: Troublemaker - Swaps any two other player's cards (not her own or center) without looking at them
@@ -18,8 +17,6 @@ export const troublemaker_interaction = (gameState, tokens, title) => {
   tokens.forEach(token => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

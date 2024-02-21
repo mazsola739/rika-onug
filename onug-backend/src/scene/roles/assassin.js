@@ -4,14 +4,14 @@ const createAssassin = (prefix) => () =>
 export const assassin = (gameState) => createAssassin("assassin")
 export const doppelganger_assassin = (gameState) => createAssassin("doppelganger_assassin")
 
-/* if (conditions.hasAssassinPlayer) { 
-  tokens = getTokensByOriginalIds(players, [29])
-  return roles.assassin_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasAssassinPlayer(newGameState.players)) { 
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [29])
+  return roles.assassin_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
 
-      if (conditions.hasDoppelgangerPlayer && conditions.hasAssassinPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
-        return roles.doppelganger_assassin_interaction(newGameState, tokens, sceneTitle)
+      if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasAssassinPlayer(newGameState.players)) {
+       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+        return roles.doppelganger_assassin_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
       }*/
 
 //TODO doppelganger

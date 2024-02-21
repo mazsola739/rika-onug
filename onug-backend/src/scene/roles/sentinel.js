@@ -1,7 +1,6 @@
 export const sentinel = (gameState) => ["sentinel_kickoff_text"]
 
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
 import {
@@ -10,9 +9,9 @@ import {
   getPlayerTokenByPlayerNumber,
 } from '../utils'
 
-/* if (conditions.hasSentinelPlayer) { //!SHIELD & MARK_OF_FEAR
-  tokens = getTokensByOriginalIds(newGameState.players, [25])
-  return roles.sentinel_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasSentinelPlayer(newGameState.players)) { //!SHIELD & MARK_OF_FEAR
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [25])
+  return roles.sentinel_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
  */
 //? INFO: Sentinel - Place a Shield token on any other player's card that card (not mark) cannot be looked at or moved
@@ -24,8 +23,6 @@ export const sentinel_interaction = (gameState, tokens, title) => {
   tokens.forEach((token) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

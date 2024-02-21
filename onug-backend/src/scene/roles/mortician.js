@@ -27,13 +27,13 @@ export const doppelganger_mortician = (gameState) => createMortician(
 )
 
 
-/* if (conditions.hasMorticianPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.mortician_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasMorticianPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.mortician_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
-if (conditions.hasMorticianPlayer && conditions.hasDoppelgangerPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.doppelganger_mortician_interaction(newGameState, tokens, sceneTitle)
+if (conditions.hasMorticianPlayer(newGameState.players) && conditions.hasDoppelgangerPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.doppelganger_mortician_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 //? INFO: Mortician - Looks at 1-2 neighbor cards (left or right), via app. Wins if at least one of his neighbors is killed
 //TODO doppelganger

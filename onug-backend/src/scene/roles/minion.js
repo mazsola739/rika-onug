@@ -4,13 +4,11 @@ export const minion = (hasDoppelganger) => [
 ]
 
  //! doppelganger?
-/*  if (conditions.hasMinionPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [7])
-  return roles.minion_interaction(newGameState, tokens, sceneTitle)
+/*  if (conditions.hasMinionPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [7])
+  return roles.minion_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
-
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 
 //? INFO: Minion - All Werewolf team (not Minion/Squire) stick up their thumb for him to see
 export const minion_interaction = (gameState, tokens, title) => {
@@ -19,8 +17,6 @@ export const minion_interaction = (gameState, tokens, title) => {
 
   tokens.forEach((token) => {
     const werewolfPlayerNumbers = [...newGameState.werewolves, ...newGameState.dreamwolf]
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

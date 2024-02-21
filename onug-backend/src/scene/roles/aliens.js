@@ -53,11 +53,11 @@ export const aliens = (gameState) => {
 
     return result
   }
-  /* if (conditions.hasAnyAlienPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.aliens_interaction(newGameState, tokens, sceneTitle)
-} */
-
+ if (conditions.hasAnyAlienPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.aliens_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
+} 
+ 
   return newGameState
 }
 

@@ -4,8 +4,7 @@ const createCurator = (prefix) => () =>
 export const curator = (gameState) => createCurator("curator")
 export const doppelganger_curator = (gameState) => createCurator("doppelganger_curator")
 
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
 import {
@@ -17,13 +16,13 @@ import {
   getPlayerTokenByPlayerNumber,
 } from '../utils'
 
-/* if (conditions.hasCuratorPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [20])
-  return roles.curator_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasCuratorPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [20])
+  return roles.curator_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
-if (conditions.hasDoppelgangerPlayer && conditions.hasCuratorPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [1])
-  return roles.curator_interaction(newGameState, tokens, sceneTitle)
+if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasCuratorPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [1])
+  return roles.curator_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 //? INFO: Curator - Gives any player (including himself) a random, unknown Artifact. Cannot give to a Shielded player.
@@ -38,8 +37,6 @@ export const curator_interaction = (gameState, tokens, title) => {
     const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
     const selectablePlayersWithNoArtifact = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, newGameState.artifact)
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

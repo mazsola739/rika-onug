@@ -14,14 +14,14 @@ export const doppelganger_apprenticeassassin = (gameState) => createApprenticeAs
   "doppelganger_apprenticeassassin"
 )
 
-/* if (conditions.hasApprenticeAssassinPlayer) {
-  tokens = getTokensByOriginalIds(players, [28])
-  return roles.apprenticeassassin_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasApprenticeAssassinPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [28])
+  return roles.apprenticeassassin_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
 
-      if (conditions.hasDoppelgangerPlayer && conditions.hasApprenticeAssassinPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
-        return roles.doppelganger_apprenticeassassin_interaction(newGameState, tokens, sceneTitle)
+      if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasApprenticeAssassinPlayer(newGameState.players)) {
+       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+        return roles.doppelganger_apprenticeassassin_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
       }*/
 
 //TODO doppelganger

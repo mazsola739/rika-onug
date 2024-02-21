@@ -1,15 +1,14 @@
 export const thing = (gameState) => ["thing_kickoff_text"]
 
-/* if (conditions.hasThingPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [85])
-  return roles.thing_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasThingPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [85])
+  return roles.thing_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 import { MESSAGE } from '../../constant/ws'
 import { getPlayerTokensByPlayerNumber, getPlayerNeighborsByToken } from '../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
 //? INFO: Thing - Taps the nearest shoulder of the player on their immediate right or left //THING, ANNOYING_LAD
@@ -19,8 +18,6 @@ export const thing_interaction = (gameState, tokens, title) => {
 
   tokens.forEach((token) => {
     const neighbors = getPlayerNeighborsByToken(newGameState.players, token)
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

@@ -68,13 +68,13 @@ export const rascal = (gameState) => createRascal("rascal_kickoff_text")
 export const doppelganger_rascal = () =>
   createRascal("doppelganger_rascal_kickoff_text")
 
-/*   if (conditions.hasRascalPlayer) {
-    tokens = getTokensByOriginalIds(players, [1])
-    return roles.rascal_interaction(newGameState, tokens, sceneTitle)
+/*   if (conditions.hasRascalPlayer(newGameState.players)) {
+   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+    return roles.rascal_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
   }
-  if (conditions.hasDoppelgangerPlayer && conditions.hasRascalPlayer) {
-    tokens = getTokensByOriginalIds(players, [1])
-    return roles.doppelganger_rascal_interaction(newGameState, tokens, sceneTitle)
+  if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasRascalPlayer(newGameState.players)) {
+   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+    return roles.doppelganger_rascal_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
   } */
 //? INFO: Rascal - May manipulate cards via app such as stealing, switching, moving, etc
 //TODO doppelganger

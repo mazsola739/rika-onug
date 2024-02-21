@@ -5,9 +5,9 @@ export const auraseer = (hasDoppelganger, hasMarks) => [
   hasMarks ? "auraseer_marks_and_cards_text" : "auraseer_cards_text",
 ]
 
-/* if (conditions.hasAuraSeerPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.auraseer_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasAuraSeerPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.auraseer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 

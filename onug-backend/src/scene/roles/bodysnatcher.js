@@ -29,13 +29,13 @@ export const doppelganger_bodysnatcher = (gameState) => createBodysnatcher(
   "doppelganger_bodysnatcher_kickoff_text"
 )
 
-/* if (conditions.hasBodySnatcherPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.bodysnatcher_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasBodySnatcherPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.bodysnatcher_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
-       if (conditions.hasDoppelgangerPlayer && conditions.hasBodySnatcherPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
-        return roles.doppelganger_bodysnatcher_interaction(newGameState, tokens, sceneTitle)
+       if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasBodySnatcherPlayer(newGameState.players)) {
+       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+        return roles.doppelganger_bodysnatcher_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
       }*/
 
 //TODO doppelganger separated

@@ -2,27 +2,24 @@ import { INTERACTION } from '../constant/ws';
 import { updatePlayerCard } from './update-player-card';
 import { getKeys, concatArraysWithUniqueElements } from './utils';
 
-export const generateSceneRoleInteractions = (
+export const generateSceneRoleInteractions = ({
   gameState,
   title,
   token,
   narration,
-  message,
+  private_message = '',
   icon,
-  selectableCards,
-  selectableMarks,
-  showCards,
-  showMarks,
-  uniqInformations
-) => {
-  //{gameState, title, token, narration, message, icon, selectableCards, selectableMarks, showCards, showMarks, uniqInformations}
-  //{shield, artifact, flipped, players} = gameState
-  
+  selectableCards = null,
+  selectableMarks = null,
+  showCards = null,
+  showMarks = null,
+  uniqInteractions = null
+}) => {
   updatePlayerCard(gameState, token)
 
-  const informations = {
+  const interactions = {
     narration,
-    message,
+    private_message,
     icon,
     shielded_cards: gameState.shield,
     artifacted_cards: getKeys(gameState.artifact),
@@ -30,14 +27,14 @@ export const generateSceneRoleInteractions = (
     show_marks: showMarks,
     ...selectableCards,
     ...selectableMarks,
-    ...uniqInformations,
+    ...uniqInteractions,
   }
 
   return {
     type: INTERACTION,
     title,
     token,
-    ...informations,
+    ...interactions,
     player_name: gameState.players[token].name,
     player_number: gameState.players[token].player_number,
     ...gameState.players[token].card,

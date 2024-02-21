@@ -1,14 +1,13 @@
 export const drunk = (gameState) => ["drunk_kickoff_text"]
 
-/* if (conditions.hasDrunkPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [2])
-  return roles.drunk_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasDrunkPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [2])
+  return roles.drunk_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 import { getPlayerNumbersWithMatchingTokens } from '../utils'
 import { centerCardPositions } from '../constants'
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
 //? INFO: Drunk – Swap your card with a card from center but does not look at his new card
@@ -17,8 +16,6 @@ export const drunk_interaction = (gameState, tokens, title) => {
   const scene_role_interactions = []
 
   tokens.forEach(token => {
-    updatePlayerCard(newGameState, token)
-
     if (!newGameState.players[token].shield) {
       scene_role_interactions.push(
         generateSceneRoleInteractions(

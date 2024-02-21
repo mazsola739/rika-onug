@@ -11,18 +11,17 @@ import {
 } from '../utils'
 
 import { townIds } from '../constants'
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
 
-/* if (conditions.hasRevealerPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [24])
-  return roles.revealer_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasRevealerPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [24])
+  return roles.revealer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
-if (conditions.hasDoppelgangerPlayer && conditions.hasRevealerPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [1])
-  return roles.revealer_interaction(newGameState, tokens, sceneTitle)
+if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasRevealerPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [1])
+  return roles.revealer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 //? INFO: Revealer - Turns and keeps one player's card face up unless they are not on the Villager Team
 export const revealer_interaction = (gameState, tokens, title) => {
@@ -32,8 +31,6 @@ export const revealer_interaction = (gameState, tokens, title) => {
   tokens.forEach((token) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

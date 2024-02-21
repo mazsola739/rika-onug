@@ -4,15 +4,15 @@ const createTheCount = (prefix) => () =>
 export const thecount = (gameState) => createTheCount("thecount")
 export const doppelganger_thecount = (gameState) => createTheCount("doppelganger_thecount")
 
-/* if (conditions.hasTheCountPlayer) {
-  tokens = getTokensByOriginalIds(players, [39])
-  return roles.thecount_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasTheCountPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [39])
+  return roles.thecount_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
  */
 
-/* if (conditions.hasDoppelgangerPlayer && conditions.hasTheCountPlayer) {
-  tokens = getTokensByOriginalIds(players, [1]) 
-  return roles.doppelganger_thecount_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasTheCountPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1]) 
+  return roles.doppelganger_thecount_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 //TODO doppelganger
 //? INFO: The Count - Gives a non-Vampire the Mark of Fear this prevents that player from doing their night action

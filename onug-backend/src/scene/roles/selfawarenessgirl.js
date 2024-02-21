@@ -6,7 +6,7 @@ export const selfawarenessgirl = (hasDoppelganger) => [
 ]
 
 //? Same as insomniac
-/* if (conditions.hasSelfAwarenessGirlPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [67])
-  return roles.insomniac_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasSelfAwarenessGirlPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [67])
+  return roles.insomniac_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */

@@ -5,13 +5,12 @@ export const apprenticetanner = (hasDoppelganger) => [
   "apprenticetanner_kickoff2_text",
 ]
 
-/* if (conditions.hasApprenticeTannerPlayer && conditions.hasTannerPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [71])
-  return roles.apprenticetanner_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasApprenticeTannerPlayer(newGameState.players) && conditions.hasTannerPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [71])
+  return roles.apprenticetanner_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */  //! doppelganger?
 
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { getTannerNumberByRoleIds } from '../utils'
 
 //? INFO: Apprentice Tanner - Tanner sticks out his thumb for him to see. Only wins if another Tanner dies. Multiple Apprentice Tanners are on the same team
@@ -21,8 +20,6 @@ export const apprenticetanner_interaction = (gameState, tokens, title) => {
 
   tokens.forEach(token => {
     const tanner = getTannerNumberByRoleIds(newGameState.players)
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

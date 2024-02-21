@@ -1,12 +1,11 @@
 export const mysticwolf = (gameState) => ["mysticwolf_kickoff_text"]
 
-/* if (conditions.hasMysticWolfPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [22])
-  return roles.mysticwolf_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasMysticWolfPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [22])
+  return roles.mysticwolf_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
  */
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
 import {
@@ -23,8 +22,6 @@ export const mysticwolf_interaction = (gameState, tokens, title) => {
   tokens.forEach((token) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

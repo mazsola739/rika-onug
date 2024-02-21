@@ -11,13 +11,12 @@ const addVerboseOr = (rolesFromIds) => {
 
 export const doppelganger = (gameState) => ["doppelganger_kickoff_text"]
 
-/* if (conditions.hasDoppelgangerPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [1])
-  return roles.doppelganger_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasDoppelgangerPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [1])
+  return roles.doppelganger_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 import { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions } from '../utils'
 
@@ -29,8 +28,6 @@ export const doppelganger_interaction = (gameState, tokens, title) => {
 
   tokens.forEach((token) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
-
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(

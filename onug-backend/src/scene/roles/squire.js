@@ -3,9 +3,9 @@ export const squire = (hasDoppelganger) => [
   "squire_kickoff2_text",
 ]
 
-/* if (conditions.hasSquirePlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.squire_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasSquirePlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.squire_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 //? INFO: Squire - All Werewolf team (not Minion/Squire) stick up their thumb for him to see, who may look at their cards
 export const squire_interaction = (gameState, tokens, title) => {}

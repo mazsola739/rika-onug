@@ -5,13 +5,13 @@ export const nostradamus_reaction = (nostradamusTeam) => [
   `nostradamus_team_${nostradamusTeam}_text`,
 ]
 
-/* if (conditions.hasNostradamusPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.nostradamus_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasNostradamusPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.nostradamus_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
-      if (conditions.hasNostradamusPlayer) {
-        tokens = getTokensByOriginalIds(players, [1])
-        return roles.nostradamus_reaction_interaction(newGameState, tokens, sceneTitle)
+      if (conditions.hasNostradamusPlayer(newGameState.players)) {
+       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+        return roles.nostradamus_reaction_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
       } */
 //TODO doppelganger same result as nostradamus
 export const nostradamus_interaction = (gameState, tokens, title) => {}

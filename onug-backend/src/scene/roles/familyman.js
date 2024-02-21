@@ -23,9 +23,9 @@ export const familyman = (hasDoppelganger) => [
     : "familyman_are_end_text",
 ]
 
-/* if (conditions.hasFamilyManPlayer) {
-  tokens = getTokensByOriginalIds(players, [1])
-  return roles.familyman_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasFamilyManPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
+  return roles.familyman_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 //TODO doppelganger 

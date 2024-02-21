@@ -5,13 +5,12 @@ export const insomniac = (hasDoppelganger) => [
   "insomniac_kickoff2_text",
 ]
 
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens } from '../utils'
 
-/* if (conditions.hasInsomniacPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [4])
-  return roles.insomniac_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasInsomniacPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [4])
+  return roles.insomniac_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 } */
 
 //? INFO: Insomniac – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
@@ -20,8 +19,6 @@ export const insomniac_interaction = (gameState, tokens, title) => {
   const scene_role_interactions = []
 
   tokens.forEach(token => {
-    updatePlayerCard(newGameState, token)
-
     const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
     const currentCard = newGameState.card_positions[currentPlayerNumber[0]]
 

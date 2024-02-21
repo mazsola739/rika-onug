@@ -1,15 +1,18 @@
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 import { getNonWerewolfPlayerNumbersByRoleIds, getSelectablePlayersWithNoShield } from '../utils'
 
-export const alphawolf = (gameState) => ["alphawolf_kickoff_text"]
+export const alphawolf = (gameState) => {
+  
+  ["alphawolf_kickoff_text"]
 
-/* if (conditions.hasAlphaWolfPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, [17])
-  return roles.alphawolf_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasAlphaWolfPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [17])
+  return roles.alphawolf_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
  */
+}
+
 //? INFO: Alpha Wolf - Wakes with other Werewolves. Wakes after and exchanges the center Alpha card with any other non-Werewolf player card
 export const alphawolf_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
@@ -18,22 +21,16 @@ export const alphawolf_interaction = (gameState, tokens, title) => {
   tokens.forEach(token => {
     const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(newGameState.players)
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
-  
-    updatePlayerCard(newGameState, token)
 
     scene_role_interactions.push(
       generateSceneRoleInteractions(
-        newGameState,
-        title,
-        token,
-        narration,
-        ["interaction_one_any_non_werewolf"],
-        'claw',
-        { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
-        null,
-        null,
-        null,
-        null
+        gameState = newGameState,
+        title = title,
+        token = token,
+        narration = [""],
+        message = ["interaction_one_any_non_werewolf"],
+        icon = 'claw',
+        selectableCards = { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
       )
     )
 

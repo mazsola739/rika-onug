@@ -4,13 +4,12 @@ export const intern = (hasDoppelganger, hasMadScientist) => [
 ]
 
 //! doppelganger?, hasMad?
-/* if (conditions.hasInternPlayer) {
-  tokens = getTokensByOriginalIds(newGameState.players, conditions.hasDoppelgangerPlayer ? [62, 1] : [62])
-  return roles.intern_interaction(newGameState, tokens, sceneTitle)
+/* if (conditions.hasInternPlayer(newGameState.players)) {
+ const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, conditions.hasDoppelgangerPlayer ? [62, 1] : [62])
+  return roles.intern_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
 }
  */
-import { updatePlayerCard } from '../update-player-card'
-import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
 import { getMadScientistPlayerNumberByRoleIds } from '../utils'
 
 export const intern_interaction = (gameState, tokens, title) => {
@@ -19,8 +18,6 @@ export const intern_interaction = (gameState, tokens, title) => {
 
   tokens.forEach((token) => {
     const madscientistPlayerNumbers = getMadScientistPlayerNumberByRoleIds(newGameState.players)
-
-    updatePlayerCard(newGameState, token)
     const playerCard = newGameState.players[token]?.card
 
     if (madscientistPlayerNumbers.length === 0) {
