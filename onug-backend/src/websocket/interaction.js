@@ -14,7 +14,7 @@ export const interaction = async (ws, message) => {
 
     const newGameState = generateInteractionResponse(gameState, token, selected_positions, ws)
 
-    newGameState?.role_interactions.forEach((role_interaction) => {
+    newGameState?.scene_role_interactions.forEach((role_interaction) => {
       websocketServerConnectionsPerRoom[newGameState.room_id][role_interaction.token].send(JSON.stringify(role_interaction))
     })
 

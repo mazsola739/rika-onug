@@ -1,4 +1,4 @@
-import { getRandomItemFromArray } from '../utils';
+import { getRandomItemFromArray } from '../utils'
 
 const random_joke = [
   "joke_1_text",
@@ -23,4 +23,4 @@ const random_joke = [
   "joke_20_text",
 ]
 
-export const joke_narration = () => [getRandomItemFromArray(random_joke)];
+export const joke = (gameState) => [getRandomItemFromArray(random_joke)]

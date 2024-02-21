@@ -1,4 +1,4 @@
-import { getRandomItemFromArray } from '../utils';
+import { getRandomItemFromArray } from '../utils'
 
 const random_madscientist_intro = [
   "madscientist_intro_1_text",
@@ -60,11 +60,11 @@ const random_madscientist_transition = [
   "madscientist_transition_21_text",
 ]
 
-export const madscientist_narration = () => [
+export const madscientist = (gameState) => [
   "madscientist_kickoff_text",
   getRandomItemFromArray(random_madscientist_intro),
   getRandomItemFromArray(random_madscientist_therefore),
   getRandomItemFromArray(random_madscientist_result),
   getRandomItemFromArray(random_madscientist_transition),
   "madscientist_close_text",
-];
+]

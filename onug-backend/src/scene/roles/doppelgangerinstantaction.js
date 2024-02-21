@@ -1,17 +1,20 @@
 //const instantRoles = getRolesNames(selectedCards, doppelgangerInstantActionsIds, instantRoleIds)
 //TODO
 
-export const doppelganger_instant_action_narration = (rolesFromIds) => [
+export const doppelganger_instant_action = (rolesFromIds) => [
   "doppelganger_verbose_intro_text",
   ...addVerboseOr(rolesFromIds),
   "doppelganger_verbose_outro_text",
-];
+]
 
-
-
-import { roleInteractions } from './index';
-import { INTERACTION } from '../../constant/ws';
-import { doppelgangerInstantActionsIds } from '../constants';
+/* if (conditions.hasDoppelgangerPlayer && hasInstantAction) {
+  tokens = getTokensByOriginalIds(newGameState.players, [1])
+  return doppelganger_instant_action_interaction(newGameState, tokens, sceneTitle)
+}
+ */
+import { roleInteractions } from './index'
+import { INTERACTION } from '../../constant/ws'
+import { doppelgangerInstantActionsIds } from '../constants'
 
 /**
  * * Doppelgänger instant night actions:
@@ -23,7 +26,7 @@ import { doppelgangerInstantActionsIds } from '../constants';
 
 export const doppelganger_instant_action_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
 
   tokens.forEach((token) => {
@@ -55,8 +58,8 @@ export const doppelganger_instant_action_interaction = (gameState, tokens, title
     if (new_role_id === 70) return roleInteractions.witch(newGameState, [token], title)
     if (new_role_id === 85) return roleInteractions.thing(newGameState, [token], title)
   })
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 export const doppelganger_instant_action_response =  (gameState, token, selected_positions, title) => {
   const new_role_id = gameState.players[token]?.new_role_id
@@ -98,4 +101,4 @@ export const doppelganger_instant_action_response =  (gameState, token, selected
   if (new_role_id === 85) return roleInteractions.thing_response(newGameState, token, selected_positions, title)
 
   return newGameState
-};
+}

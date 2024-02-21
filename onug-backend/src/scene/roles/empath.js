@@ -1,4 +1,4 @@
-import { getRandomItemFromArray, pickRandomUpToThreePlayers } from '../utils';
+import { getRandomItemFromArray, pickRandomUpToThreePlayers } from '../utils'
 
 const empathAllKeys = [
   "identifier_everyone_text",
@@ -39,15 +39,22 @@ const createEmpath = (kickoffText, totalPlayers) => () => {
 }
 
 export const empath = (totalPlayers) =>
-  createEmpath("empath_kickoff_text", totalPlayers)();
+  createEmpath("empath_kickoff_text", totalPlayers)()
 
 export const doppelganger_empath = (totalPlayers) =>
-  createEmpath("doppelganger_empath_kickoff_text", totalPlayers)();
+  createEmpath("doppelganger_empath_kickoff_text", totalPlayers)()
 
-
+/*   if (conditions.hasEmpathPlayer) {
+    tokens = getTokensByOriginalIds(players, [1])
+    return roles.empath_interaction(newGameState, tokens, sceneTitle)
+  }
+  if (conditions.hasDoppelgangerPlayer && conditions.hasEmpathPlayer) {
+    tokens = getTokensByOriginalIds(players, [1])
+    return roles.doppelganger_empath_interaction(newGameState, tokens, sceneTitle)
+  } */
   
 //? INFO: Empath - App asks some other players w/ eyes closed to point at someone. She observes it with her eyes open
 //TODO doppelganger
-export const empath_interaction = (gameState, tokens, title) => {};
+export const empath_interaction = (gameState, tokens, title) => {}
 
-export const empath_response =  (gameState, token, selected_positions, title) => {};
+export const empath_response =  (gameState, token, selected_positions, title) => {}

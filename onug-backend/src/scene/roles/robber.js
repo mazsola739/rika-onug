@@ -1,20 +1,25 @@
-export const robber_narration = () => ["robber_kickoff_text"];
+export const robber = (gameState) => ["robber_kickoff_text"]
 
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { isValidSelection } from '../validate-response-data';
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { isValidSelection } from '../validate-response-data'
 
 import {
   getPlayerNumbersWithNonMatchingTokens,
   getSelectablePlayersWithNoShield,
   getPlayerNumbersWithMatchingTokens,
   getCardIdsByPlayerNumbers,
-} from '../utils';
+} from '../utils'
+
+/* if (conditions.hasRobberPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [8])
+  return roles.robber_interaction(newGameState, tokens, sceneTitle)
+} */
 
 //? INFO: Robber - Swaps his card for any other player’s card (not center) which he then looks at
 export const robber_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach((token) => {
     updatePlayerCard(newGameState, token)
@@ -23,8 +28,8 @@ export const robber_interaction = (gameState, tokens, title) => {
       const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, token)
       const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-      role_interactions.push(
-        generateRoleInteractions(
+      scene_role_interactions.push(
+        generateSceneRoleInteractions(
           newGameState,
           title,
           token,
@@ -46,8 +51,8 @@ export const robber_interaction = (gameState, tokens, title) => {
       newGameState.players[token].player_history = playerHistory
 
     } else {
-      role_interactions.push(
-        generateRoleInteractions(
+      scene_role_interactions.push(
+        generateSceneRoleInteractions(
           newGameState,
           title,
           token,
@@ -70,8 +75,8 @@ export const robber_interaction = (gameState, tokens, title) => {
     }
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 export const robber_response =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
@@ -95,8 +100,8 @@ export const robber_response =  (gameState, token, selected_positions, title) =>
   newGameState.players[token].player_history.show_cards = showCards
   newGameState.players[token].card_or_mark_action = true
 
-  const role_interactions = [
-    generateRoleInteractions(
+  const scene_role_interactions = [
+    generateSceneRoleInteractions(
       newGameState,
       title,
       token,
@@ -110,5 +115,5 @@ export const robber_response =  (gameState, token, selected_positions, title) =>
     )
   ]
 
-  return { ...gameState, role_interactions }
-};
+  return { ...gameState, scene_role_interactions }
+}

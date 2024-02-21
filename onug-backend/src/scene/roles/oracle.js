@@ -1,6 +1,6 @@
 //TODO save which interaction!
 
-import { getRandomItemFromArray } from '../utils';
+import { getRandomItemFromArray } from '../utils'
 
 const random_oracle_question = [
   "oracle_alienteam_text",
@@ -51,10 +51,20 @@ const oracle_responses = {
   },
 }
 
-export const oracle_question_narration = () => [
+/* if (conditions.hasOraclePlayer) {   //TODO make sure always have answer if oracle in selected cards
+  tokens = getTokensByOriginalIds(players, [50])
+  return roles.oracle_question_interaction(newGameState, tokens, sceneTitle)
+} */
+
+/* if (conditions.hasOracle && oracleAnswerPlayer) {
+  tokens = getTokensByOriginalIds(players, [50])
+  return roles.oracle_reaction_interaction(newGameState, tokens, sceneTitle)
+} */
+
+export const oracle_question = (gameState) => [
   "oracle_kickoff_text", 
   getRandomItemFromArray(random_oracle_question),
-];
+]
 
 export const oracle_reaction = (question, answer) => {
   if (question === "oracle_evenodd_text") {
@@ -76,12 +86,12 @@ export const oracle_reaction = (question, answer) => {
       return [getRandomItemFromArray(oracle_responses[question].no)]
     }
   }
-};
+}
 
 
 //? INFO: Oracle - App asks her a question, she enters it on the app, when then reveals what she did to everyone
 //! At this moment oracle never see flipped or shielded cards, ripple different
 //* No doppelganger
-export const oracle_interaction = (gameState, tokens, title) => {};
+export const oracle_interaction = (gameState, tokens, title) => {}
 
-export const oracle_response = (gameState, token, selected_positions, title) => {};
+export const oracle_response = (gameState, token, selected_positions, title) => {}

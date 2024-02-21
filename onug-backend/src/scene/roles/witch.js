@@ -1,27 +1,32 @@
-export const witch_narration = () => ["witch_kickoff_text"]; 
+export const witch = (gameState) => ["witch_kickoff_text"] 
 
-import { centerCardPositions } from '../constants';
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { isValidSelection } from '../validate-response-data';
+import { centerCardPositions } from '../constants'
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { isValidSelection } from '../validate-response-data'
 
 import {
   getPlayerNumbersWithMatchingTokens,
   getSelectablePlayersWithNoShield,
   getAllPlayerTokens,
   getCardIdsByPositions,
-} from '../utils';
+} from '../utils'
+
+/* if (conditions.hasWitchPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [27])
+  return roles.witch_interaction(newGameState, tokens, sceneTitle)
+} */
 
 //? INFO: Witch - May look at one center card. If she does she must swap it with any player's card (including hers)
 export const witch_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach(token => {
     updatePlayerCard(newGameState, token)
 
-    role_interactions.push(
-      generateRoleInteractions(
+    scene_role_interactions.push(
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -43,8 +48,8 @@ export const witch_interaction = (gameState, tokens, title) => {
     newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 export const witch_response =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
@@ -65,8 +70,8 @@ export const witch_response =  (gameState, token, selected_positions, title) => 
     const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-    const role_interactions = [
-      generateRoleInteractions(
+    const scene_role_interactions = [
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -85,7 +90,7 @@ export const witch_response =  (gameState, token, selected_positions, title) => 
     newGameState.players[token].player_history.selected_center_card = selected_positions[0]
     newGameState.players[token].player_history.show_cards = showCards
 
-    return { ...newGameState, role_interactions }
+    return { ...newGameState, scene_role_interactions }
   } else if (selected_positions[0].includes("player_")) {
     const selectedCenterPositionCard = newGameState.card_positions[newGameState.players[token].player_history.selected_center_card]
     const selectedPlayerPositionCard = newGameState.card_positions[selected_positions[0]]
@@ -103,8 +108,8 @@ export const witch_response =  (gameState, token, selected_positions, title) => 
       newGameState.players[token].card.player_team = currentCard.team
     }
 
-    const role_interactions = [
-      generateRoleInteractions(
+    const scene_role_interactions = [
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -120,8 +125,8 @@ export const witch_response =  (gameState, token, selected_positions, title) => 
 
     newGameState.players[token].player_history.swapped_cards = [newGameState.players[token].player_history.selected_center_card, selected_positions[0]]
 
-    return { ...newGameState, role_interactions }
+    return { ...newGameState, scene_role_interactions }
   }
 
   return newGameState
-};
+}

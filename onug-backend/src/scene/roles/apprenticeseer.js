@@ -1,21 +1,26 @@
-export const apprenticeseer_narration = () => ["apprenticeseer_kickoff_text"];
+export const apprenticeseer = (gameState) => ["apprenticeseer_kickoff_text"]
 
-import { getCardIdsByPositions } from '../utils';
-import { centerCardPositions } from '../constants';
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { isValidSelection } from '../validate-response-data';
+/* if (conditions.hasApprenticeSeerPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [18])
+  return roles.apprenticeseer_interaction(newGameState, tokens, sceneTitle)
+} */
+
+import { getCardIdsByPositions } from '../utils'
+import { centerCardPositions } from '../constants'
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { isValidSelection } from '../validate-response-data'
 
 //? INFO: Apprentice Seer - looks at one card from the center (not another players or her own)
 export const apprenticeseer_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach(token => {
     updatePlayerCard(newGameState, token)
 
-    role_interactions.push(
-      generateRoleInteractions(
+    scene_role_interactions.push(
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -37,8 +42,8 @@ export const apprenticeseer_interaction = (gameState, tokens, title) => {
     newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 export const apprenticeseer_response =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
@@ -57,8 +62,8 @@ export const apprenticeseer_response =  (gameState, token, selected_positions, t
   newGameState.players[token].player_history.show_cards = viewCards
   newGameState.players[token].card_or_mark_action = true
 
-  const role_interactions = [
-    generateRoleInteractions(
+  const scene_role_interactions = [
+    generateSceneRoleInteractions(
       newGameState,
       title,
       token,
@@ -72,5 +77,5 @@ export const apprenticeseer_response =  (gameState, token, selected_positions, t
     )
   ]
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}

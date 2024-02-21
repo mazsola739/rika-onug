@@ -9,28 +9,31 @@ const addVerboseOr = (rolesFromIds) => {
   return rolesFromIds
 }
 
-export const doppelganger_narration = () => ["doppelganger_kickoff_text"];
+export const doppelganger = (gameState) => ["doppelganger_kickoff_text"]
 
+/* if (conditions.hasDoppelgangerPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [1])
+  return roles.doppelganger_interaction(newGameState, tokens, sceneTitle)
+} */
 
-
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { isValidSelection } from '../validate-response-data';
-import { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions } from '../utils';
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { isValidSelection } from '../validate-response-data'
+import { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions } from '../utils'
 
 //? INFO: Doppelgänger - Looks at any other player's card and becomes that card. Does that action during but different time
 //! At this moment doppelganger never see flipped or shielded cards, ripple different
 export const doppelganger_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach((token) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
 
     updatePlayerCard(newGameState, token)
 
-    role_interactions.push(
-      generateRoleInteractions(
+    scene_role_interactions.push(
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -52,8 +55,8 @@ export const doppelganger_interaction = (gameState, tokens, title) => {
     newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 export const doppelganger_response =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
@@ -72,8 +75,8 @@ export const doppelganger_response =  (gameState, token, selected_positions, tit
   newGameState.players[token].new_role_id = newGameState.players[token].card.player_role_id
   newGameState.players[token].card_or_mark_action = true
 
-  const role_interactions = [
-    generateRoleInteractions(
+  const scene_role_interactions = [
+    generateSceneRoleInteractions(
       newGameState,
       title,
       token,
@@ -87,5 +90,5 @@ export const doppelganger_response =  (gameState, token, selected_positions, tit
     )
   ]
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}

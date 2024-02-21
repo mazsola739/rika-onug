@@ -1,14 +1,19 @@
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { isValidSelection } from '../validate-response-data';
-import { getNonWerewolfPlayerNumbersByRoleIds, getSelectablePlayersWithNoShield } from '../utils';
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { isValidSelection } from '../validate-response-data'
+import { getNonWerewolfPlayerNumbersByRoleIds, getSelectablePlayersWithNoShield } from '../utils'
 
-export const alphawolf_narration = () => ["alphawolf_kickoff_text"];
+export const alphawolf = (gameState) => ["alphawolf_kickoff_text"]
 
+/* if (conditions.hasAlphaWolfPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [17])
+  return roles.alphawolf_interaction(newGameState, tokens, sceneTitle)
+}
+ */
 //? INFO: Alpha Wolf - Wakes with other Werewolves. Wakes after and exchanges the center Alpha card with any other non-Werewolf player card
 export const alphawolf_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach(token => {
     const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(newGameState.players)
@@ -16,11 +21,12 @@ export const alphawolf_interaction = (gameState, tokens, title) => {
   
     updatePlayerCard(newGameState, token)
 
-    role_interactions.push(
-      generateRoleInteractions(
+    scene_role_interactions.push(
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
+        narration,
         ["interaction_one_any_non_werewolf"],
         'claw',
         { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
@@ -39,8 +45,8 @@ export const alphawolf_interaction = (gameState, tokens, title) => {
     newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 export const alphawolf_response =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
@@ -57,8 +63,8 @@ export const alphawolf_response =  (gameState, token, selected_positions, title)
   newGameState.players[token].card_or_mark_action = true
   newGameState.players[token].player_history.swapped_cards = [selected_positions[0], "center_wolf"]
 
-  const role_interactions = [
-    generateRoleInteractions(
+  const scene_role_interactions = [
+    generateSceneRoleInteractions(
       newGameState,
       title,
       token,
@@ -72,5 +78,5 @@ export const alphawolf_response =  (gameState, token, selected_positions, title)
     )
   ]
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}

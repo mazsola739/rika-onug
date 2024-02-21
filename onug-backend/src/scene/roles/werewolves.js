@@ -2,23 +2,29 @@ export const werewolves = hasDreamwolf => [
   hasDreamwolf
     ? "werewolves_dreamwolf_kickoff_text"
     : "werewolves_kickoff_text",
-];
+]
 
 import {
   getWerewolfPlayerNumbersByRoleIds,
   getDreamWolfPlayerNumberByRoleIds,
   getCardIdsByPositions,
-} from '../utils';
+} from '../utils'
 
-import { centerCardPositions } from '../constants';
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { isValidSelection } from '../validate-response-data';
+
+/* if (conditions.hasAnyWerewolfPlayers) {
+  tokens = getTokensByOriginalIds(newGameState.players, werewolvesIds)
+  return roles.werewolves_interaction(newGameState, tokens, sceneTitle)
+} */ //! doppelganger?
+
+import { centerCardPositions } from '../constants'
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { isValidSelection } from '../validate-response-data'
 
 //? INFO: Werewolves (4) - Open their eyes and view their fellow Werewolves (including Mystic and Alpha)
 export const werewolves_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach(token => {
     const werewolves = getWerewolfPlayerNumbersByRoleIds(newGameState.players, tokens)
@@ -27,8 +33,8 @@ export const werewolves_interaction = (gameState, tokens, title) => {
 
     updatePlayerCard(newGameState, token)
 
-    role_interactions.push(
-      generateRoleInteractions(
+    scene_role_interactions.push(
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -52,8 +58,8 @@ export const werewolves_interaction = (gameState, tokens, title) => {
     newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 export const werewolves_response =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
@@ -68,8 +74,8 @@ export const werewolves_response =  (gameState, token, selected_positions, title
     newGameState.players[token].card.player_card_id = 0
   }
 
-  const role_interactions = [
-    generateRoleInteractions(
+  const scene_role_interactions = [
+    generateSceneRoleInteractions(
       newGameState,
       title,
       token,
@@ -86,5 +92,5 @@ export const werewolves_response =  (gameState, token, selected_positions, title
   newGameState.players[token].player_history.show_cards = showCards
   newGameState.players[token].card_or_mark_action = true
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}

@@ -1,19 +1,24 @@
-export const mysticwolf_narration = () => ["mysticwolf_kickoff_text"];
+export const mysticwolf = (gameState) => ["mysticwolf_kickoff_text"]
 
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { isValidSelection } from '../validate-response-data';
+/* if (conditions.hasMysticWolfPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [22])
+  return roles.mysticwolf_interaction(newGameState, tokens, sceneTitle)
+}
+ */
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { isValidSelection } from '../validate-response-data'
 
 import {
   getCardIdsByPositions,
   getPlayerNumbersWithNonMatchingTokens,
   getSelectablePlayersWithNoShield,
-} from '../utils';
+} from '../utils'
 
 //? INFO: Mystic Wolf - Wakes with other Werewolves. Wakes after and looks at any other player's card (not center or own)
 export const mysticwolf_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach((token) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
@@ -21,8 +26,8 @@ export const mysticwolf_interaction = (gameState, tokens, title) => {
 
     updatePlayerCard(newGameState, token)
 
-    role_interactions.push(
-      generateRoleInteractions(
+    scene_role_interactions.push(
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -44,8 +49,8 @@ export const mysticwolf_interaction = (gameState, tokens, title) => {
     newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 export const mysticwolf_response =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
@@ -63,8 +68,8 @@ export const mysticwolf_response =  (gameState, token, selected_positions, title
   newGameState.players[token].player_history.show_cards = viewCards
   newGameState.players[token].card_or_mark_action = true
 
-  const role_interactions = [
-    generateRoleInteractions(
+  const scene_role_interactions = [
+    generateSceneRoleInteractions(
       newGameState,
       title,
       token,
@@ -78,7 +83,7 @@ export const mysticwolf_response =  (gameState, token, selected_positions, title
     )
   ]
 
-  newGameState.role_interactions = role_interactions
+  newGameState.scene_role_interactions = scene_role_interactions
 
   return newGameState
-};
+}

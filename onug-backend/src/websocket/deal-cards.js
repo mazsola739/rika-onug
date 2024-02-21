@@ -161,9 +161,12 @@ export const dealCards = async (ws, message) => {
     newVillainCard,
   } = dealCardIds(selectedCards)
 
+  const totalPlayers = determineTotalPlayers(gameState.selected_cards.length, gameState.selected_cards)
+
   const newGameState = {
     ...gameState,
     stage: STAGES.GAME_TABLE,
+    total_players: totalPlayers,
     card_positions: {
       center_left: createPositionCard(leftCard, selectedCards),
       center_middle: createPositionCard(middleCard, selectedCards),

@@ -1,3 +1,1 @@
-export { interaction } from './interaction';
-export { narration } from './narration';
-
+export { scene as narration } from './scene'

@@ -1,24 +1,33 @@
 const createRevealer = (prefix) => () =>
   [`${prefix}_kickoff_text`, "revealer_kickoff2_text"]
 
-export const revealer_narration = () => createRevealer("revealer");
-export const doppelganger_revealer_narration = () => createRevealer("doppelganger_revealer");
+export const revealer = (gameState) => createRevealer("revealer")
+export const doppelganger_revealer = (gameState) => createRevealer("doppelganger_revealer")
 
 import {
   getPlayerNumbersWithNonMatchingTokens,
   getCardIdsByPositions,
   getSelectablePlayersWithNoShield,
-} from '../utils';
+} from '../utils'
 
-import { townIds } from '../constants';
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { isValidSelection } from '../validate-response-data';
+import { townIds } from '../constants'
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { isValidSelection } from '../validate-response-data'
 
+
+/* if (conditions.hasRevealerPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [24])
+  return roles.revealer_interaction(newGameState, tokens, sceneTitle)
+}
+if (conditions.hasDoppelgangerPlayer && conditions.hasRevealerPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [1])
+  return roles.revealer_interaction(newGameState, tokens, sceneTitle)
+} */
 //? INFO: Revealer - Turns and keeps one player's card face up unless they are not on the Villager Team
 export const revealer_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach((token) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
@@ -26,8 +35,8 @@ export const revealer_interaction = (gameState, tokens, title) => {
 
     updatePlayerCard(newGameState, token)
 
-    role_interactions.push(
-      generateRoleInteractions(
+    scene_role_interactions.push(
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -49,8 +58,8 @@ export const revealer_interaction = (gameState, tokens, title) => {
     newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 //TODO better response message
 export const revealer_response =  (gameState, token, selected_positions, title) => {
@@ -70,8 +79,8 @@ export const revealer_response =  (gameState, token, selected_positions, title) 
 
   newGameState.players[token].card_or_mark_action = true
 
-  const role_interactions = [
-    generateRoleInteractions(
+  const scene_role_interactions = [
+    generateSceneRoleInteractions(
       newGameState,
       title,
       token,
@@ -92,5 +101,5 @@ export const revealer_response =  (gameState, token, selected_positions, title) 
     newGameState.players[token].player_history.show_cards = revealedCard
   }
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}

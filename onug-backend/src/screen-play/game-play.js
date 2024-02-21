@@ -2,7 +2,7 @@ import { readGameState, upsertRoomState } from '../repository';
 import { broadcast, websocketServerConnectionsPerRoom } from '../websocket/connections';
 import { HYDRATE_GAME_PLAY } from '../constant/ws';
 import { logTrace } from '../log';
-import { narration, interaction } from '../scene';
+import { narration } from '../scene';
 import { STAGES } from '../constant/stage';
 
 //TODO set tickTime each narration different
@@ -47,13 +47,11 @@ const getNextScene = gameState => {
   
   const startTime = Date.now()
   newGameState.actual_scene.scene_start_time = startTime
-
   newGameState.actual_scene.scene_number++
 
   newGameState = narration(newGameState)
-  newGameState = interaction(newGameState)
 
-  newGameState.role_interactions.forEach((role_interaction) => {
+  newGameState.scene_role_interactions.forEach((role_interaction) => {
     websocketServerConnectionsPerRoom[newGameState.room_id][role_interaction.token].send(JSON.stringify(role_interaction))
   })
 
@@ -62,7 +60,7 @@ const getNextScene = gameState => {
     return newGameState
   }
 
-  if (!newGameState.actual_scene.narration) return getNextScene(newGameState)
+  if (!newGameState.actual_scene.started) return getNextScene(newGameState)
 
   return newGameState
 }
@@ -82,7 +80,7 @@ const tick = async (room_id) => {
     scene_number: newGameState.actual_scene.scene_number,
     scene_start_time: newGameState.actual_scene.scene_start_time,
     scene_title: newGameState.actual_scene.scene_title,
-    narration: newGameState.actual_scene.narration
+    narration: newGameState.actual_scene.started
   }
 
   newGameState.actual_scene = actualScene

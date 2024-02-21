@@ -3,16 +3,21 @@ export const insomniac = (hasDoppelganger) => [
     ? "doppelganger_insomniac_kickoff_text"
     : "insomniac_kickoff_text",
   "insomniac_kickoff2_text",
-];
+]
 
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens } from '../utils';
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens } from '../utils'
+
+/* if (conditions.hasInsomniacPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [4])
+  return roles.insomniac_interaction(newGameState, tokens, sceneTitle)
+} */
 
 //? INFO: Insomniac – Looks at her own card, but does not gain its power, just the team alliance. Can’t if it has a Shield on it
 export const insomniac_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach(token => {
     updatePlayerCard(newGameState, token)
@@ -27,8 +32,8 @@ export const insomniac_interaction = (gameState, tokens, title) => {
 
       const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, currentPlayerNumber)
 
-      role_interactions.push(
-        generateRoleInteractions(
+      scene_role_interactions.push(
+        generateSceneRoleInteractions(
           newGameState,
           title,
           token,
@@ -49,8 +54,8 @@ export const insomniac_interaction = (gameState, tokens, title) => {
       }
       newGameState.players[token].player_history = playerHistory
     } else {
-      role_interactions.push(
-        generateRoleInteractions(
+      scene_role_interactions.push(
+        generateSceneRoleInteractions(
           newGameState,
           title,
           token,
@@ -73,7 +78,7 @@ export const insomniac_interaction = (gameState, tokens, title) => {
     }
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 

@@ -1,24 +1,29 @@
-export const thing_narration = () => ["thing_kickoff_text"];
+export const thing = (gameState) => ["thing_kickoff_text"]
 
-import { MESSAGE } from '../../constant/ws';
-import { getPlayerTokensByPlayerNumber, getPlayerNeighborsByToken } from '../utils';
-import { websocketServerConnectionsPerRoom } from '../../websocket/connections';
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { isValidSelection } from '../validate-response-data';
+/* if (conditions.hasThingPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [85])
+  return roles.thing_interaction(newGameState, tokens, sceneTitle)
+} */
+
+import { MESSAGE } from '../../constant/ws'
+import { getPlayerTokensByPlayerNumber, getPlayerNeighborsByToken } from '../utils'
+import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { isValidSelection } from '../validate-response-data'
 
 //? INFO: Thing - Taps the nearest shoulder of the player on their immediate right or left //THING, ANNOYING_LAD
 export const thing_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach((token) => {
     const neighbors = getPlayerNeighborsByToken(newGameState.players, token)
 
     updatePlayerCard(newGameState, token)
 
-    role_interactions.push(
-      generateRoleInteractions(
+    scene_role_interactions.push(
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -40,8 +45,8 @@ export const thing_interaction = (gameState, tokens, title) => {
     newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 export const thing_response =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
@@ -59,8 +64,8 @@ export const thing_response =  (gameState, token, selected_positions, title) => 
 
   newGameState.players[token].player_history.tapped_player = selected_positions[0]
 
-  const role_interactions = [
-    generateRoleInteractions(
+  const scene_role_interactions = [
+    generateSceneRoleInteractions(
       newGameState,
       title,
       token,
@@ -74,5 +79,5 @@ export const thing_response =  (gameState, token, selected_positions, title) => 
     )
   ]
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}

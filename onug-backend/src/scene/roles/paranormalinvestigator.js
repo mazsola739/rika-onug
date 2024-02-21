@@ -1,20 +1,25 @@
-export const paranormalinvestigator_narration = () => ["paranormalinvestigator_kickoff_text"];
+export const paranormalinvestigator = (gameState) => ["paranormalinvestigator_kickoff_text"]
 
-import { townIds } from '../constants';
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { isValidSelection } from '../validate-response-data';
+/* if (conditions.hasParanormalInvestigatorPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [23])
+  return roles.paranormalinvestigator_interaction(newGameState, tokens, sceneTitle)
+} */
+
+import { townIds } from '../constants'
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { isValidSelection } from '../validate-response-data'
 
 import {
   getPlayerNumbersWithNonMatchingTokens,
   getSelectablePlayersWithNoShield,
   getCardIdsByPositions,
-} from '../utils';
+} from '../utils'
 
 //? INFO: Paranormal Investigator - Looks at two other player's cards one at a time if he sees team they are not on the Villager Team he stops looking and becomes that role. May not look at any center cards.
 export const paranormalinvestigator_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach((token) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
@@ -22,8 +27,8 @@ export const paranormalinvestigator_interaction = (gameState, tokens, title) => 
 
     updatePlayerCard(newGameState, token)
 
-    role_interactions.push(
-      generateRoleInteractions(
+    scene_role_interactions.push(
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -45,8 +50,8 @@ export const paranormalinvestigator_interaction = (gameState, tokens, title) => 
     newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 export const paranormalinvestigator_response =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
@@ -84,8 +89,8 @@ export const paranormalinvestigator_response =  (gameState, token, selected_posi
   newGameState.players[token].player_history.show_cards = viewCards
   newGameState.players[token].card_or_mark_action = true
 
-const role_interactions = [
-  generateRoleInteractions(
+const scene_role_interactions = [
+  generateSceneRoleInteractions(
     newGameState,
     title,
     token,
@@ -99,5 +104,5 @@ const role_interactions = [
   )
 ]
 
-return { ...newGameState, role_interactions }
-};
+return { ...newGameState, scene_role_interactions }
+}

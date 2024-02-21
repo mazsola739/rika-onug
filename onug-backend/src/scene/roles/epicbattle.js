@@ -1,4 +1,4 @@
-import { getRandomItemFromArray } from '../utils';
+import { getRandomItemFromArray } from '../utils'
 
 const random_easteregg_nobadguys = [
   "easteregg_nobadguys_text_1",
@@ -43,4 +43,4 @@ export const epicbattle = (hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys
   }
 
   return result
-};
+}

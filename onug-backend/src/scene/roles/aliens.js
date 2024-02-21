@@ -1,59 +1,75 @@
-import { pickRandomUpToThreePlayers, getRandomItemFromArray } from '../utils';
+import { pickRandomUpToThreePlayers, getRandomItemFromArray } from '../utils'
 
 const random_aliens = [
-  "aliens_view_text",
-  "aliens_allview_text",
-  "aliens_stare_text",
-  "aliens_left_text",
-  "aliens_right_text",
-  "aliens_show_text",
-  "aliens_timer_text",
-  "aliens_newalien_text",
-  "aliens_alienhelper_text",
+  'aliens_view_text',
+  'aliens_allview_text',
+  'aliens_stare_text',
+  'aliens_left_text',
+  'aliens_right_text',
+  'aliens_show_text',
+  'aliens_timer_text',
+  'aliens_newalien_text',
+  'aliens_alienhelper_text',
 ]
 const alienAnyKeys = [
-  "identifier_any_text",
-  "identifier_anyeven_text",
-  "identifier_anyodd_text",
-  "activePlayers",
+  'identifier_any_text',
+  'identifier_anyeven_text',
+  'identifier_anyodd_text',
+  'activePlayers',
 ]
 const alienAllKeys = [
-  "identifier_everyone_text",
-  "identifier_oddplayers_text",
-  "identifier_evenplayers_text",
+  'identifier_everyone_text',
+  'identifier_oddplayers_text',
+  'identifier_evenplayers_text',
 ]
 
-export const aliens = (totalPlayers) => {
-  const result = ["aliens_kickoff_text"]
-  const randomInstructions = getRandomItemFromArray(random_aliens)
+export const aliens = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = () => {
+    const result = ['aliens_kickoff_text']
+    const randomInstructions = getRandomItemFromArray(random_aliens)
+    const totalPlayers = gameState.totalPlayers
 
-  result[1] = randomInstructions
+    result[1] = randomInstructions
 
-  if (randomInstructions.includes("view")) {
-    let randomAnyIdentifier = getRandomItemFromArray(alienAnyKeys)
-    if (randomAnyIdentifier === "activePlayers") {
-      randomAnyIdentifier = pickRandomUpToThreePlayers(
-        totalPlayers,
-        "conjunction_or"
-      )
+    if (randomInstructions.includes('view')) {
+      let randomAnyIdentifier = getRandomItemFromArray(alienAnyKeys)
+      if (randomAnyIdentifier === 'activePlayers') {
+        randomAnyIdentifier = pickRandomUpToThreePlayers(
+          totalPlayers,
+          'conjunction_or'
+        )
+      }
+      result[2] = randomAnyIdentifier
     }
-    result[2] = randomAnyIdentifier
-  }
 
-  if (
-    randomInstructions === "aliens_newalien_text" ||
-    randomInstructions === "aliens_alienhelper_text"
-  ) {
-    const randomAllIdentifier = getRandomItemFromArray(alienAllKeys)
-    result[2] = randomAllIdentifier
-  }
+    if (
+      randomInstructions === 'aliens_newalien_text' ||
+      randomInstructions === 'aliens_alienhelper_text'
+    ) {
+      const randomAllIdentifier = getRandomItemFromArray(alienAllKeys)
+      result[2] = randomAllIdentifier
+    }
 
-  return result
-};
+    return result
+  }
+  /* if (conditions.hasAnyAlienPlayer) {
+  tokens = getTokensByOriginalIds(players, [1])
+  return roles.aliens_interaction(newGameState, tokens, sceneTitle)
+} */
+
+  return newGameState
+}
+
 
 
 //? INFO: Aliens - View their fellow Aliens (including Body Snatcher, Synthetic, Groob and Zerb) and do the action app says
 //! MARK_OF_FEAR
-export const alien_interaction = (gameState, tokens, title) => {};
+export const alien_interaction = (gameState, tokens, title) => {}
 
-export const alien_response =  (gameState, token, selected_positions, title) => {};
+export const alien_response = (
+  gameState,
+  token,
+  selected_positions,
+  title
+) => {}

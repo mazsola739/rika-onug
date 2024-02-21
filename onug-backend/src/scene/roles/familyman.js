@@ -21,12 +21,15 @@ export const familyman = (hasDoppelganger) => [
   randomFamilyman.includes("1p")
     ? "familyman_is_end_text"
     : "familyman_are_end_text",
-];
+]
 
-
+/* if (conditions.hasFamilyManPlayer) {
+  tokens = getTokensByOriginalIds(players, [1])
+  return roles.familyman_interaction(newGameState, tokens, sceneTitle)
+} */
 
 //TODO doppelganger 
 //! wakes up!
-export const familyman_interaction = (gameState, tokens, title) => {};
+export const familyman_interaction = (gameState, tokens, title) => {}
 
-export const familyman_response =  (gameState, token, selected_positions, title) => {};
+export const familyman_response =  (gameState, token, selected_positions, title) => {}

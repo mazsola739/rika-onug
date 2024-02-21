@@ -1,4 +1,9 @@
-export const seer_narration = () => ["seer_kickoff_text"];
+export const seer = (gameState) => ["seer_kickoff_text"]
+
+/* if (conditions.hasSeerPlayer) {
+  tokens = getTokensByOriginalIds(newGameState.players, [9])
+  return roles.seer_interaction(newGameState, tokens, sceneTitle)
+} */
 
 import {
     getPlayerNumbersWithNonMatchingTokens,
@@ -6,17 +11,17 @@ import {
     getCardIdsByPositions,
     concatArraysWithUniqueElements,
     getKeys,
-  } from '../utils';
+  } from '../utils'
   
-  import { centerCardPositions } from '../constants';
-  import { updatePlayerCard } from '../update-player-card';
-  import { generateRoleInteractions } from '../generate-role-interactions';
-  import { isValidSelection } from '../validate-response-data';
+  import { centerCardPositions } from '../constants'
+  import { updatePlayerCard } from '../update-player-card'
+  import { generateSceneRoleInteractions } from '../generate-role-interactions'
+  import { isValidSelection } from '../validate-response-data'
   
   //? INFO: Seer (2) - Looks at one player's card (not her own) or two cards from the center
   export const seer_interaction = (gameState, tokens, title) => {
     const newGameState = { ...gameState }
-    const role_interactions = []
+    const scene_role_interactions = []
   
     tokens.forEach((token) => {
       const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
@@ -25,8 +30,8 @@ import {
   
       updatePlayerCard(newGameState, token)
   
-      role_interactions.push(
-        generateRoleInteractions(
+      scene_role_interactions.push(
+        generateSceneRoleInteractions(
           newGameState,
           title,
           token,
@@ -48,8 +53,8 @@ import {
       newGameState.players[token].player_history = playerHistory
     })
   
-    return { ...newGameState, role_interactions }
-  };
+    return { ...newGameState, scene_role_interactions }
+  }
   
   export const seer_response =  (gameState, token, selected_positions, title) => {
     if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
@@ -79,8 +84,8 @@ import {
     newGameState.players[token].player_history.show_cards = showCards
     newGameState.players[token].card_or_mark_action = true
   
-    const role_interactions = [
-      generateRoleInteractions(
+    const scene_role_interactions = [
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -94,6 +99,6 @@ import {
       )
     ]
   
-    return { ...newGameState, role_interactions }
-  };
+    return { ...newGameState, scene_role_interactions }
+  }
   

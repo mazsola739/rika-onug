@@ -1,4 +1,4 @@
-import { getRandomItemFromArray } from '../utils';
+import { getRandomItemFromArray } from '../utils'
 
 //TODO save which interaction!
 
@@ -63,15 +63,21 @@ const createRascal = (kickoffText) => () => {
   return result
 }
 
-export const rascal_narration = () => createRascal("rascal_kickoff_text");
+export const rascal = (gameState) => createRascal("rascal_kickoff_text")
 
 export const doppelganger_rascal = () =>
-  createRascal("doppelganger_rascal_kickoff_text");
+  createRascal("doppelganger_rascal_kickoff_text")
 
-
-  
+/*   if (conditions.hasRascalPlayer) {
+    tokens = getTokensByOriginalIds(players, [1])
+    return roles.rascal_interaction(newGameState, tokens, sceneTitle)
+  }
+  if (conditions.hasDoppelgangerPlayer && conditions.hasRascalPlayer) {
+    tokens = getTokensByOriginalIds(players, [1])
+    return roles.doppelganger_rascal_interaction(newGameState, tokens, sceneTitle)
+  } */
 //? INFO: Rascal - May manipulate cards via app such as stealing, switching, moving, etc
 //TODO doppelganger
-export const rascal_interaction = (gameState, tokens, title) => {};
+export const rascal_interaction = (gameState, tokens, title) => {}
 
-export const rascal_response =  (gameState, token, selected_positions, title) => {};
+export const rascal_response =  (gameState, token, selected_positions, title) => {}

@@ -1,20 +1,25 @@
-export const sentinel_narration = () => ["sentinel_kickoff_text"];
+export const sentinel = (gameState) => ["sentinel_kickoff_text"]
 
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { isValidSelection } from '../validate-response-data';
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { isValidSelection } from '../validate-response-data'
 
 import {
   getPlayerNumbersWithNonMatchingTokens,
   getSelectablePlayersWithNoShield,
   getPlayerTokenByPlayerNumber,
-} from '../utils';
+} from '../utils'
 
+/* if (conditions.hasSentinelPlayer) { //!SHIELD & MARK_OF_FEAR
+  tokens = getTokensByOriginalIds(newGameState.players, [25])
+  return roles.sentinel_interaction(newGameState, tokens, sceneTitle)
+}
+ */
 //? INFO: Sentinel - Place a Shield token on any other player's card that card (not mark) cannot be looked at or moved
 //! MARK_OF_FEAR
 export const sentinel_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach((token) => {
     const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
@@ -22,8 +27,8 @@ export const sentinel_interaction = (gameState, tokens, title) => {
 
     updatePlayerCard(newGameState, token)
 
-    role_interactions.push(
-      generateRoleInteractions(
+    scene_role_interactions.push(
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -45,8 +50,8 @@ export const sentinel_interaction = (gameState, tokens, title) => {
     newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}
 
 export const sentinel_response =  (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
@@ -60,8 +65,8 @@ export const sentinel_response =  (gameState, token, selected_positions, title) 
   newGameState.players[shieldedPlayerToken].shield = true
   newGameState.players[token].player_history.new_shield_card = selected_positions[0]
 
-  const role_interactions = [
-    generateRoleInteractions(
+  const scene_role_interactions = [
+    generateSceneRoleInteractions(
       newGameState,
       title,
       token,
@@ -75,5 +80,5 @@ export const sentinel_response =  (gameState, token, selected_positions, title) 
     )
   ]
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}

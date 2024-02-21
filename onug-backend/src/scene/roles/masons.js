@@ -1,21 +1,27 @@
-export const masons_narration = () => ["masons_kickoff_text"];
+export const masons = (gameState) => ["masons_kickoff_text"]
 
-import { updatePlayerCard } from '../update-player-card';
-import { generateRoleInteractions } from '../generate-role-interactions';
-import { getPlayerNumbersWithMatchingTokens } from '../utils';
+//! TODO mason players
+/* if (conditions.hasMasonPlayers) {
+  tokens = getTokensByOriginalIds(newGameState.players, masonIds)
+  return roles.masons_interaction(newGameState, tokens, sceneTitle)
+} */
+
+import { updatePlayerCard } from '../update-player-card'
+import { generateSceneRoleInteractions } from '../generate-role-interactions'
+import { getPlayerNumbersWithMatchingTokens } from '../utils'
 
 //? INFO: Mason (2) – Wakes up and looks for the other fellow Mason
 export const masons_interaction = (gameState, tokens, title) => {
   const newGameState = { ...gameState }
-  const role_interactions = []
+  const scene_role_interactions = []
 
   tokens.forEach((token) => {
     const masons = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens)
 
     updatePlayerCard(newGameState, token)
 
-    role_interactions.push(
-      generateRoleInteractions(
+    scene_role_interactions.push(
+      generateSceneRoleInteractions(
         newGameState,
         title,
         token,
@@ -37,5 +43,5 @@ export const masons_interaction = (gameState, tokens, title) => {
     newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, role_interactions }
-};
+  return { ...newGameState, scene_role_interactions }
+}

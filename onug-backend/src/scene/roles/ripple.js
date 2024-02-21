@@ -4,7 +4,7 @@ import {
   pickRandomTwoPlayers,
   pickRandomUpToThreePlayers,
   pickRandomOnePlayer,
-} from '../utils';
+} from '../utils'
 
 const ripple_sure_repeat = ["random_ripple_repeat", "random_ripple_repeat1p"]
 const ripple_random = [
@@ -213,7 +213,7 @@ export const ripple = (oracleMadeSureRipple, totalPlayers) => {
   }
 
   return result
-};
+}
 
 /* 
 const ripple_random = [
@@ -238,7 +238,7 @@ const ripple_random = [
   "random_ripple_iamalien", //player can only repeat im alien - //! UFO icon
 ]
 
-export const ripple_narration = () => []; //TODO
+export const ripple = (gameState) => [] //TODO
 
 const repeatrole = [
 { name: 'role_aliens', isExist: areAnyCardSelectedById(deck, [42, 43, 47, 53, 54, 74]), specialCondition: () => !alienStore.isNewAlienOrHelper },

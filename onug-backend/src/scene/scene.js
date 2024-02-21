@@ -13,29 +13,31 @@ const scriptOrder = [
 
 //TODO RIPPLE
 
-export const narration = (gameState) => {
+export const scene = (gameState) => {
   const { room_id } = gameState.room_id
-  logTrace(`Narration playing for players in room: ${room_id}`)
+  logTrace(`Scene playing for players in room: ${room_id}`)
 
   const newGameState = { ...gameState }
   newGameState.actual_scene.scene_title =
     scriptOrder[newGameState.actual_scene.scene_number].scene_title
 
   //? what this lodash update actually does: updates newGameState with nested levels of various fields.
-  //? For example: 'actual_scene.narration' key and the related value will be set inside newGameState.actual_scene.narration = [something],
+  //? For example: 'actual_scene.started' key and the related value will be set inside newGameState.actual_scene.started = [something],
   //? also sometimes other fields, like: oracle_answer: 'some_oracle_answer' will be set as well.
+  
   const entries = sceneHandler(newGameState)
+
   Object.entries(entries).forEach(([key, value]) => {
     _.update(newGameState, key, () => value)
   })
   //TODO null?
-  if (!entries["actual_scene.narration"]) {
-    newGameState.actual_scene.narration = null
+  if (!entries["actual_scene.started"]) {
+    newGameState.actual_scene.started = false
   }
 
   logDebug(
-    `__NARRATION__ SCENE_NUMBER: ${newGameState.actual_scene.scene_number
-    } TEXT: ${newGameState.actual_scene.narration} scene_title: ${scriptOrder[newGameState.actual_scene.scene_number].scene_title
+    `__SCENE__ SCENE_NUMBER: ${newGameState.actual_scene.scene_number
+    } STARTED: ${newGameState.actual_scene.started} scene_title: ${scriptOrder[newGameState.actual_scene.scene_number].scene_title
     }`
   )
 
