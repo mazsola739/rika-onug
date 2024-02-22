@@ -1,7 +1,6 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+import { getAllPlayerTokens } from "../../utils/scene"
 
-export const leader = (gameState) => {
+export const leader = (gameState, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger ? "doppelganger_leader_kickoff_text" : "leader_kickoff_text",

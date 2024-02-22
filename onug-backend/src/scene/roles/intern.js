@@ -1,7 +1,8 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens, getMadScientistPlayerNumberByRoleIds } from "../../utils/scene"
+import { generateRoleInteraction } from "../generate-scene-role-interactions"
 
-export const intern = (gameState) => {
+export const intern = (gameState, hasDoppelganger, hasMadScientist) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger ? "doppelganger_intern_kickoff_text" : "intern_kickoff_text",
@@ -20,7 +21,7 @@ export const intern = (gameState) => {
   return newGameState
 }
 
-export const intern_interaction = (gameState, token, title) => {
+export const intern_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
 
   const madscientistPlayerNumbers = getMadScientistPlayerNumberByRoleIds(newGameState.players)
@@ -38,8 +39,8 @@ export const intern_interaction = (gameState, token, title) => {
 
   return generateRoleInteraction(
     newGameState,
-    private_message = [madscientistPlayerNumbers.length === 0 ? "interaction_mad_now" : "interaction_mad"],
-    icon = 'mad',
-    uniqInformations = { madscientist: madscientistPlayerNumbers, },
+    {private_message: [madscientistPlayerNumbers.length === 0 ? "interaction_mad_now" : "interaction_mad"],
+    icon: 'mad',
+    uniqInformations: { madscientist: madscientistPlayerNumbers, },}
   )
 }

@@ -1,5 +1,6 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
+import { seer_interaction } from "./seer"
 
 export const detector = (gameState) => {
   const newGameState = { ...gameState }
@@ -16,6 +17,3 @@ export const detector = (gameState) => {
 
   return newGameState
 }
-
-export const cupid_interaction = (gameState, token) => {return {}}
-export const cupid_response =  (gameState, token, selected_positions) => {return {}}

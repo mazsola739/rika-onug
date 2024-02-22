@@ -1,9 +1,10 @@
-import { PLAY_GAME } from '../constant/ws';
-import { logTrace } from '../log';
-import { validateRoom } from '../validator';
-import { upsertRoomState } from '../repository';
-import { STAGES } from '../constant/stage';
-import { broadcastPlayGame } from './connections'
+//@ts-check
+import { PLAY_GAME } from '../constant/ws'
+import { logTrace } from '../log'
+import { validateRoom } from '../validator'
+import { upsertRoomState } from '../repository'
+import { STAGES } from '../constant/stage'
+import { broadcastPlayGame } from './connections' //TODO ???
 
 export const playGame = async (ws, message) => {
   const { room_id, token } = message
@@ -42,4 +43,4 @@ export const playGame = async (ws, message) => {
   await upsertRoomState(newRoomState)
 
   return broadcastPlayGame(newRoomState)
-};
+}

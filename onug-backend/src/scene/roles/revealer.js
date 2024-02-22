@@ -1,15 +1,17 @@
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { townIds } from "../../constant"
+import { getAllPlayerTokens, getCardIdsByPositions, getSelectableOtherPlayersWithoutShield } from "../../utils/scene"
+import { generateRoleInteraction } from "../generate-scene-role-interactions"
 import { isValidSelection } from '../validate-response-data'
 
 const createRevealer = (prefix) => () =>
   [`${prefix}_kickoff_text`, "revealer_kickoff2_text"]
 
 
-export const revealer = (gameState) => {
+export const revealer = (gameState, prefix) => {
   const newGameState = { ...gameState }
-  createRevealer("revealer")
-  createRevealer("doppelganger_revealer")
-  const narration = []
+
+  const narration = createRevealer(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {
@@ -35,9 +37,9 @@ export const revealer_interaction = (gameState, token) => {
     
     return generateRoleInteraction(
       newGameState,
-      private_message = ['interaction_may_one_any_other'],
-      icon = 'id',
-      selectableCards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
+      {private_message: ['interaction_may_one_any_other'],
+      icon: 'id',
+      selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },}
     )
 }
 
@@ -72,9 +74,9 @@ export const revealer_response =  (gameState, token, selected_positions) => {
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ["interaction_saw_card", selected_positions[0]],
-    icon = 'id',
-    showCards = revealedCard,
-    uniqInformations = { flipped_cards: [selected_positions[0]] }
+   { private_message: ["interaction_saw_card", selected_positions[0]],
+    icon: 'id',
+    showCards: revealedCard,
+    uniqInformations: { flipped_cards: [selected_positions[0]] }}
   )
 }

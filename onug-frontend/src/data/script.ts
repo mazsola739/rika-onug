@@ -17,7 +17,7 @@ export const script: ScriptType[] = [
     scene_number: 2,
   },
   {
-    scene_title: 'ORACLE_REACTION',
+    scene_title: 'ORACLE_ANSWER',
     scene_img: 'onua_oracle',
     scene_number: 3,
   },

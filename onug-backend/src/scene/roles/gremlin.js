@@ -1,14 +1,12 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 
 const createGremlin = (prefix) => () =>
   [`${prefix}_kickoff_text`, "gremlin_kickoff2_text"]
 
-export const gremlin = (gameState) => {
+export const gremlin = (gameState, prefix) => {
   const newGameState = { ...gameState }
-  createGremlin("gremlin")
-  createGremlin("doppelganger_gremlin")
-  const narration = []
+  const narration = createGremlin(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {

@@ -1,3 +1,4 @@
+//@ts-check
 import { logTrace, logErrorWithStack } from '../log';
 import { readdir, unlink } from 'fs/promises';
 

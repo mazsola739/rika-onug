@@ -1,5 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens, getRandomItemFromArray } from "../../utils/scene"
 
 const randomExposer = [
   "exposer_flip1_text",
@@ -10,7 +10,7 @@ const randomExposer = [
 const createExposer = (kickoffText) => () =>
   [kickoffText, getRandomItemFromArray(randomExposer)]
 
-export const exposer = (gameState) => {
+export const exposer = (gameState, prefix) => { //TODO fix prefix
   const newGameState = { ...gameState }
   createExposer("exposer_kickoff_text")
   createExposer("doppelganger_exposer_kickoff_text")

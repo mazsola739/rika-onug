@@ -1,5 +1,7 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+
+import { getAllPlayerTokens } from "../../utils/scene"
+
 
 export const villageidiot = (gameState) => {
   const newGameState = { ...gameState }
@@ -11,7 +13,7 @@ export const villageidiot = (gameState) => {
     newGameState.players[token].scene_role_interaction.narration = narration
 
     if (newGameState.players[token].card.player_original_id === 26) {
-      newGameState.players[token].scene_role_interaction.interaction = villageidiot_interaction(newGameState)
+      newGameState.players[token].scene_role_interaction.interaction = villageidiot_interaction(newGameState, token)
     }
   })
 

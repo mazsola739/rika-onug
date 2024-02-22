@@ -1,4 +1,6 @@
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { getAllPlayerTokens, getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens, getSelectableOtherPlayersWithoutShield } from "../../utils/scene"
+import { generateRoleInteraction } from "../generate-scene-role-interactions"
 import { isValidSelection } from '../validate-response-data'
 
 export const robber = (gameState) => {
@@ -30,9 +32,9 @@ export const robber_interaction = (gameState, token) => {
 
     return generateRoleInteraction(
       newGameState,
-      private_message = ['interaction_may_one_any_other'],
-      icon = 'robber',
-      selectableCards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
+      {private_message: ['interaction_may_one_any_other'],
+      icon: 'robber',
+      selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },}
     )
 
   } else {
@@ -43,8 +45,8 @@ export const robber_interaction = (gameState, token) => {
 
     return generateRoleInteraction(
       newGameState,
-      private_message = ['interaction_shielded'],
-      icon = 'shield',
+      {private_message: ['interaction_shielded'],
+      icon: 'shield',}
     )
   }
 }
@@ -76,9 +78,9 @@ export const robber_response =  (gameState, token, selected_positions, title) =>
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ["interaction_swapped_cards", "interaction_saw_card", `player_${newGameState.players[token].player_number}`],
-    icon = 'robber',
-    showCards = showCards,
-    uniqInformations = { swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_positions[0]], viewed_cards: [`player_${newGameState.players[token].player_number}`] }
+    {private_message: ["interaction_swapped_cards", "interaction_saw_card", `player_${newGameState.players[token].player_number}`],
+    icon: 'robber',
+    showCards: showCards,
+    uniqInformations: { swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_positions[0]], viewed_cards: [`player_${newGameState.players[token].player_number}`] }}
   )
 }

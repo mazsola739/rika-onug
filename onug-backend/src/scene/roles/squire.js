@@ -1,7 +1,7 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 
-export const squire = (gameState) => {
+export const squire = (gameState, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger ? "doppelganger_squire_kickoff_text" : "squire_kickoff_text",

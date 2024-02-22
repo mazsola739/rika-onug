@@ -1,5 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 
 export const nostradamus = (gameState) => {
   const newGameState = { ...gameState }
@@ -18,10 +18,11 @@ export const nostradamus = (gameState) => {
 }
 
 export const nostradamus_interaction = (gameState, token) => {return {}}
-export const nostradamus_response =  (gameState, token, selected_positions) => {return {}}
+export const nostradamus_response =  (gameState, token, selected_positions) => {return {}} //newGameState.nostradamus_team = ?
 
 export const nostradamus_reaction = (gameState) => {
   const newGameState = { ...gameState }
+  const nostradamusTeam = newGameState.nostradamus_team
   const narration =  [
     "nostradamus_teamstart_text",
     `nostradamus_team_${nostradamusTeam}_text`,
@@ -31,7 +32,8 @@ export const nostradamus_reaction = (gameState) => {
   tokens.forEach(token => {
    newGameState.players[token].scene_role_interaction.narration = narration
   })
-
+  
+  delete newGameState.nostradamus_team
   return newGameState
 }
 

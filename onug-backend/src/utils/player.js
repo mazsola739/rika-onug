@@ -1,3 +1,4 @@
+//@ts-check
 export const determineTotalPlayers = (totalCharacters, selectedCards) => {
   const hasAlphaWolf = selectedCards.includes(17)
   const hasTemptress = selectedCards.includes(69)

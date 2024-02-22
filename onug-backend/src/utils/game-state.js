@@ -1,3 +1,4 @@
+//@ts-check
 import { STAGES } from '../constant/stage';
 
 export const isGameTableClosed = gameState => gameState.stage !== STAGES.GAME_TABLE;

@@ -1,7 +1,7 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 
-const createApprenticeAssassin = (prefix) =>
+const createApprenticeAssassin = (hasAssassin, prefix) =>
   [
     `${prefix}_kickoff_text`,
     hasAssassin
@@ -9,19 +9,23 @@ const createApprenticeAssassin = (prefix) =>
       : "apprenticeassassin_alone_text",
   ]
 
-export const apprenticeassassin = (gameState) => {
+export const apprenticeassassin = (gameState, hasAssassin, prefix) => {
   const newGameState = { ...gameState }
-  createApprenticeAssassin("apprenticeassassin")
-  createApprenticeAssassin("doppelganger_apprenticeassassin")
-  const narration = []
+  const narration = createApprenticeAssassin(hasAssassin, prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-   newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    newGameState.players[token].scene_role_interaction.narration = narration
 
-   if (newGameState.players[token].card.player_original_id === 28) {
-    newGameState.players[token].scene_role_interaction.interaction = apprenticeassassin_interaction(newGameState, token)
-   }
+    if (prefix === 'assassin') {
+      if (newGameState.players[token].card.player_original_id === 28) {
+        newGameState.players[token].scene_role_interaction.interaction = apprenticeassassin_interaction(newGameState, token)
+      }
+    } else if (prefix === 'doppelganger_assassin') {
+      if (newGameState.players[token].card.role_id === 28 && newGameState.players[token].card.player_original_id === 1) {
+        newGameState.players[token].scene_role_interaction.interaction = apprenticeassassin_interaction(newGameState, token)
+      }
+    }
   })
 
   return newGameState

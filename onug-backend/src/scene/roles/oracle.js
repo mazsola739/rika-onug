@@ -1,5 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens, getRandomItemFromArray } from "../../utils/scene"
 
 const random_oracle_question = [
   "oracle_alienteam_text",
@@ -58,10 +58,13 @@ export const oracle_question = (gameState) => {
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  newGameState.oracle.question = narration[1]
+
   tokens.forEach(token => {
    newGameState.players[token].scene_role_interaction.narration = narration
 
    if (newGameState.players[token].card.player_original_id === 50) {
+    newGameState.players[token].player_history.oracle = narration[1]
     newGameState.players[token].scene_role_interaction.interaction = oracle_question_interaction(newGameState, token)
    }
   })
@@ -70,44 +73,46 @@ export const oracle_question = (gameState) => {
 }
 
 export const oracle_question_interaction = (gameState, token) => {return {}}
-export const oracle_question_response =  (gameState, token, selected_positions) => {return {}}
+//TODO newGameState.oracle.answer = ? if no answer do sure answer
+export const oracle_question_response =  (gameState, token, selected_positions) => {return {}} 
 
 export const oracle_answer = (gameState) => {
   const newGameState = { ...gameState }
-  const narration = []
- /*  {
+  const question = newGameState.oracle.question
+  const answer = newGameState.oracle.answer
+  let narration = []
     if (question === "oracle_evenodd_text") {
       if (answer === "even") {
-        return ["oracle_evenodd_even_text"]
+        narration = ["oracle_evenodd_even_text"]
       } else {
-        return ["oracle_evenodd_odd_text"]
+        narration = ["oracle_evenodd_odd_text"]
       }
     } else if (question === "oracle_guessnumber_text") {
       if (answer === "success") {
-        return ["oracle_guessnumber_success_text"]
+        narration = ["oracle_guessnumber_success_text"]
       } else {
-        return ["oracle_guessnumber_failure_text"]
+        narration = ["oracle_guessnumber_failure_text"]
       }
     } else {
       if (answer === "yes") {
-        return [getRandomItemFromArray(oracle_responses[question].yes)]
+        narration = [getRandomItemFromArray(oracle_responses[question].yes)]
       } else {
-        return [getRandomItemFromArray(oracle_responses[question].no)]
+        narration = [getRandomItemFromArray(oracle_responses[question].no)]
       }
     }
-  } */
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {
    newGameState.players[token].scene_role_interaction.narration = narration
 
    if (newGameState.players[token].card.player_original_id === 50) {
+    newGameState.players[token].player_history.oracle = narration[0]
     newGameState.players[token].scene_role_interaction.interaction = oracle_answer_interaction(newGameState, token)
    }
   })
 
+  delete newGameState.oracle
   return newGameState
 }
 
 export const oracle_answer_interaction = (gameState, token) => {return {}}
-export const oracle_answer_response =  (gameState, token, selected_positions) => {return {}}

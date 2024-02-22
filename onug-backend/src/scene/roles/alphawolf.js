@@ -1,6 +1,7 @@
+//@ts-check
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
-import { getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIds, getSelectablePlayersWithNoShield } from '../utils'
+import { getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIds, getSelectableOtherPlayersWithoutShield, getSelectablePlayersWithNoShield } from '../../utils/scene'
 
 export const alphawolf = (gameState) => {
   const newGameState = { ...gameState }
@@ -18,7 +19,7 @@ export const alphawolf = (gameState) => {
   return newGameState
 }
 
-export const alphawolf_interaction = (gameState, token, title) => {
+export const alphawolf_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
   
   const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(newGameState.players)
@@ -31,9 +32,11 @@ export const alphawolf_interaction = (gameState, token, title) => {
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ['interaction_one_any_non_werewolf'],
-    icon = 'claw',
-    selectableCards = { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
+    {
+      private_message:['interaction_one_any_non_werewolf'],
+      icon: 'claw',
+      selectableCards: { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
+    }
   )
 }
 
@@ -58,8 +61,10 @@ export const alphawolf_response =  (gameState, token, selected_positions, title)
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ["interaction_swapped_cards", selected_positions[0], "center_wolf"],
-    icon = 'claw',
-    uniqInformations = { swapped_cards: [selected_positions[0], 'center_wolf'] },
+    {
+      private_message: ["interaction_swapped_cards", selected_positions[0], "center_wolf"],
+      icon: 'claw',
+      uniqInformations: { swapped_cards: [selected_positions[0], 'center_wolf'] },
+    }
   )
 }

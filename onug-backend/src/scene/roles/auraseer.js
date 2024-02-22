@@ -1,7 +1,7 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 
-export const auraseer = (gameState) => {
+export const auraseer = (gameState, hasDoppelganger, hasMarks) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger

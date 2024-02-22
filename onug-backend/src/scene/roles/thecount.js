@@ -1,23 +1,26 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 
 const createTheCount = (prefix) => () =>
   [`${prefix}_kickoff_text`, "thecount_kickoff2_text"]
 
-export const thecount = (gameState) => {
+export const thecount = (gameState, prefix) => {
   const newGameState = { ...gameState }
-
-  createTheCount("thecount")
-  createTheCount("doppelganger_thecount")
-  const narration = ['vampires_kickoff_text']
+  const narration = createTheCount(prefix)
 
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach((token) => {
     newGameState.players[token].scene_role_interaction.narration = narration
-    
-    if (newGameState.players[token].card.player_original_id === 39) {
-      newGameState.players[token].scene_role_interaction.interaction = thecount_interaction(newGameState)
+
+    if (prefix === 'thecount') {
+      if (newGameState.players[token].card.player_original_id === 39) {
+        newGameState.players[token].scene_role_interaction.interaction = thecount_interaction(newGameState, token)
+      }
+    } else if (prefix === 'doppelganger_thecount') {
+      if (newGameState.players[token].card.role_id === 39 && newGameState.players[token].card.player_original_id === 1) {
+        newGameState.players[token].scene_role_interaction.interaction = thecount_interaction(newGameState, token)
+      }
     }
   })
 

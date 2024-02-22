@@ -1,5 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 
 export const cupid = (gameState) => {
   const newGameState = { ...gameState }

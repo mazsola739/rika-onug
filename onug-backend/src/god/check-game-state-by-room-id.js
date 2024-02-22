@@ -1,3 +1,4 @@
+//@ts-check
 import { logTrace } from '../log';
 import { readGameStateByRoomId } from '../repository';
 

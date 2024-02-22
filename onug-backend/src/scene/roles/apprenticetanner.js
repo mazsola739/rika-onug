@@ -1,7 +1,8 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens, getTannerNumberByRoleIds } from "../../utils/scene"
+import { generateRoleInteraction } from "../generate-scene-role-interactions"
 
-export const apprenticetanner = (gameState) => {
+export const apprenticetanner = (gameState, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger
@@ -32,11 +33,10 @@ export const apprenticetanner_interaction = (gameState, token) => {
       tanner: tanner
     }
   
-    return generateRoleInteraction(
-      newGameState,
-      private_message = ['interaction_tanner'],
-      icon = 'tanner',
-      uniqInformations = { tanner: tanner },
-    )
+    return generateRoleInteraction(newGameState, {
+      private_message: ['interaction_tanner'],
+      icon: 'tanner',
+      uniqInformations: { tanner: tanner },
+    })
 }
 

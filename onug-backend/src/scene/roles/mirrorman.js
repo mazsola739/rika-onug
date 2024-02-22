@@ -1,4 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 
 export const mirrorman = (gameState) => {
   const newGameState = { ...gameState }
@@ -9,9 +10,12 @@ export const mirrorman = (gameState) => {
    newGameState.players[token].scene_role_interaction.narration = narration
 
    if (newGameState.players[token].card.player_original_id === 64) {
-    newGameState.players[token].scene_role_interaction.interaction = copycat_interaction(newGameState, token)
+    newGameState.players[token].scene_role_interaction.interaction = mirrorman_interaction(newGameState, token)
    }
   })
 
   return newGameState
 }
+
+export const mirrorman_interaction = (gameState, token) => {return {}}
+export const mirrorman_response =  (gameState, token, selected_positions) => {return {}}

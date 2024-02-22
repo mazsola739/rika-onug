@@ -1,8 +1,9 @@
-import roomsData from '../data/rooms.json';
-import { upsertRoomState, readGameState } from '../repository';
-import { logTrace } from '../log';
-import { LEAVE_ROOM } from '../constant/ws';
-import { removeUserFromRoom } from './connections';
+//@ts-check
+import roomsData from '../data/rooms.json'
+import { upsertRoomState, readGameState } from '../repository'
+import { logTrace } from '../log'
+import { LEAVE_ROOM } from '../constant/ws'
+import { removeUserFromRoom } from './connections'
 
 export const leaveRoom = async (ws, message) => {
   logTrace(`leave-room requested with ${JSON.stringify(message)}`)
@@ -53,4 +54,4 @@ export const leaveRoom = async (ws, message) => {
       room_id,
     })
   )
-};
+}

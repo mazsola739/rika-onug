@@ -1,7 +1,7 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 
-export const beholder = (gameState) => {
+export const beholder = (gameState, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger

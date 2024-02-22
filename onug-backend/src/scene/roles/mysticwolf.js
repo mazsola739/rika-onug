@@ -1,5 +1,7 @@
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { getAllPlayerTokens, getCardIdsByPositions, getSelectableOtherPlayersWithoutShield } from "../../utils/scene"
 import { isValidSelection } from '../validate-response-data'
+import { generateRoleInteraction } from './../generate-scene-role-interactions';
 
 export const mysticwolf = (gameState) => {
   const newGameState = { ...gameState }
@@ -10,14 +12,14 @@ export const mysticwolf = (gameState) => {
    newGameState.players[token].scene_role_interaction.narration = narration
 
    if (newGameState.players[token].card.player_original_id === 22) {
-    newGameState.players[token].scene_role_interaction.interaction = robber_interaction(newGameState, token)
+    newGameState.players[token].scene_role_interaction.interaction = mysticwolf_interaction(newGameState, token)
    }
   })
 
   return newGameState
 }
 
-export const mysticwolf_interaction = (gameState, token, title) => {
+export const mysticwolf_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
   
   const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(newGameState.players, token)
@@ -29,9 +31,9 @@ export const mysticwolf_interaction = (gameState, token, title) => {
     
     return generateRoleInteraction(
       newGameState,
-      private_message = ['interaction_may_one_any_other'],
-      icon = 'spy',
-      selectableCards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
+      {private_message: ['interaction_may_one_any_other'],
+      icon: 'spy',
+      selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },}
     )
 }
 
@@ -58,9 +60,9 @@ export const mysticwolf_response =  (gameState, token, selected_positions, title
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ["interaction_saw_card", selected_positions[0]],
-    icon = 'spy',
-    showCards = viewCards,
-    uniqInformations = { viewed_cards: [selected_positions[0]] }
+    {private_message: ["interaction_saw_card", selected_positions[0]],
+    icon: 'spy',
+    showCards: viewCards,
+    uniqInformations: { viewed_cards: [selected_positions[0]] }}
   )
 }

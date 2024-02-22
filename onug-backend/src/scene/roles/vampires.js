@@ -1,6 +1,6 @@
-import { vampireIds } from "../constants"
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { vampireIds } from '../../constant'
+import { getAllPlayerTokens } from "../../utils/scene"
 
 export const vampires = (gameState) => {
   const newGameState = { ...gameState }
@@ -12,7 +12,7 @@ export const vampires = (gameState) => {
     newGameState.players[token].scene_role_interaction.narration = narration
 
     if (vampireIds.some(id => newGameState.players[token].card.player_role_id === id)) {
-      newGameState.players[token].scene_role_interaction.interaction = vampires_interaction(newGameState)
+      newGameState.players[token].scene_role_interaction.interaction = vampires_interaction(newGameState, token)
     }
   })
 

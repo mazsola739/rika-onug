@@ -1,7 +1,8 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens, getCardIdsByPlayerNumbers, getPlayerNumbersWithMatchingTokens } from "../../utils/scene"
+import { generateRoleInteraction } from "../generate-scene-role-interactions"
 
-export const insomniac = (gameState) => {
+export const insomniac = (gameState, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration =  [
     hasDoppelganger
@@ -22,7 +23,7 @@ export const insomniac = (gameState) => {
   return newGameState
 }
 
-export const insomniac_interaction = (gameState, token, title) => {
+export const insomniac_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
 
   const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
@@ -42,9 +43,9 @@ export const insomniac_interaction = (gameState, token, title) => {
 
     return generateRoleInteraction(
       newGameState,
-      private_message = ['interaction_own'],
-      icon = 'insomniac',
-      showCards = showCards,
+     { private_message: ['interaction_own'],
+      icon: 'insomniac',
+      showCards: showCards,}
     )
   } else {
 
@@ -55,9 +56,9 @@ export const insomniac_interaction = (gameState, token, title) => {
 
     return generateRoleInteraction(
       newGameState,
-      private_message = ['interaction_shielded'],
-      icon = 'shield',
-      uniqInformations = { shielded: true },
+      {private_message: ['interaction_shielded'],
+      icon: 'shield',
+      uniqInformations: { shielded: true },}
     )
   }
 }

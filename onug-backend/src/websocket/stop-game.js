@@ -1,3 +1,4 @@
+//@ts-check
 import { REDIRECT } from '../constant/ws';
 import { logTrace } from '../log';
 import { validateRoom } from '../validator';

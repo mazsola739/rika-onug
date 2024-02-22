@@ -1,8 +1,10 @@
-import { werewolvesAndDreamWolfIds } from "../constants"
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { werewolvesAndDreamWolfIds } from '../../constant'
+import { getAllPlayerTokens } from "../../utils/scene"
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
-export const minion = (gameState) => {
+export const minion = (gameState, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger ? "doppelganger_minion_kickoff_text" : "minion_kickoff_text",
@@ -21,7 +23,7 @@ export const minion = (gameState) => {
   return newGameState
 }
 
-export const minion_interaction = (gameState, token, title) => {
+export const minion_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
 
   const werewolfPlayerNumbers = werewolvesAndDreamWolfIds //TODO
@@ -33,8 +35,8 @@ export const minion_interaction = (gameState, token, title) => {
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ['interaction_werewolves'],
-    icon = 'werewolf',
-    uniqInformations = { werewolves: werewolfPlayerNumbers },
+   { private_message: ['interaction_werewolves'],
+    icon: 'werewolf',
+    uniqInformations: { werewolves: werewolfPlayerNumbers },}
   )
 }

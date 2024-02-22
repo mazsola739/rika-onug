@@ -1,7 +1,8 @@
+//@ts-check
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { getAllPlayerTokens } from "../utils"
+import { getAllPlayerTokens } from "../../utils/scene"
 import { isValidSelection } from '../validate-response-data'
-import { getSelectableOtherPlayersWithoutShield } from '../utils'
+import { getSelectableOtherPlayersWithoutShield } from '../../utils/scene'
 
 export const troublemaker = (gameState) => {
   const newGameState = { ...gameState }
@@ -31,9 +32,9 @@ export const troublemaker_interaction = (gameState, token) => {
   
   return generateRoleInteraction(
     newGameState,
-    private_message = ['interaction_may_two_any_other'],
-    icon = 'swap',
-    selectableCards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 } },
+   { private_message: ['interaction_may_two_any_other'],
+    icon: 'swap',
+    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 } },}
   )
 }
 
@@ -60,8 +61,8 @@ export const troublemaker_response =  (gameState, token, selected_positions, tit
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ["interaction_swapped_cards", position1, position2],
-    icon = 'swap',
-    uniqInformations = { swapped_cards: [position1, position2] }
+   { private_message: ["interaction_swapped_cards", position1, position2],
+    icon: 'swap',
+    uniqInformations: { swapped_cards: [position1, position2] }}
   )
 }

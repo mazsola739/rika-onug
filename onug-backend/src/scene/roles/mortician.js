@@ -1,5 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens, getRandomItemFromArray } from "../../utils/scene"
 
 const random_mortician = ["mortician_1card_text", "mortician_2cards_text"]
 
@@ -15,14 +15,14 @@ const createMortician = (kickoffText) => () =>
     kickoffText,
     getRandomItemFromArray(random_mortician),
     getRandomItemFromArray(
-      random_mortician === "mortician_2cards_text"
+      random_mortician === "mortician_2cards_text" //TODO FIX HERE
         ? morticianAllKeys
         : ["identifier_bothneighbors_text"]
     ),
   ]
 
 
-export const mortician = (gameState) => {
+export const mortician = (gameState, prefix) => { //TODO prefix
   const newGameState = { ...gameState }
   const narration = []
   createMortician("mortician_kickoff_text")
@@ -33,7 +33,7 @@ export const mortician = (gameState) => {
    newGameState.players[token].scene_role_interaction.narration = narration
 
    if (newGameState.players[token].card.player_original_id === 36) {
-    newGameState.players[token].scene_role_interaction.interaction = pickpocket_interaction(newGameState, token)
+    newGameState.players[token].scene_role_interaction.interaction = mortician_interaction(newGameState, token)
    }
   })
 

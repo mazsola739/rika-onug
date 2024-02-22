@@ -1,3 +1,4 @@
+//@ts-check
 import { readGameState, upsertRoomState } from '../repository';
 import { broadcast, websocketServerConnectionsPerRoom } from '../websocket/connections';
 import { HYDRATE_GAME_PLAY } from '../constant/ws';

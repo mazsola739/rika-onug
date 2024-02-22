@@ -1,7 +1,8 @@
-import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant/ws';
-import { logTrace, logErrorWithStack } from '../log';
-import { readGameState } from '../repository';
-import { isGameTableClosed, getGameTableBoard } from '../utils';
+//@ts-check
+import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant/ws'
+import { logTrace, logErrorWithStack } from '../log'
+import { readGameState } from '../repository'
+import { isGameTableClosed, getGameTableBoard } from '../utils'
 
 export const hydrateGameTable = async (ws, message) => {
   try {
@@ -28,4 +29,4 @@ export const hydrateGameTable = async (ws, message) => {
   } catch (error) { 
     logErrorWithStack(error)
   }
-};
+}

@@ -1,5 +1,6 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
+import { troublemaker_interaction } from "./troublemaker"
 
 export const switcheroo = (gameState) => {
   const newGameState = { ...gameState }

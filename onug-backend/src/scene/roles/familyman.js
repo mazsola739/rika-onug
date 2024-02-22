@@ -1,5 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens, getRandomItemFromArray } from "../../utils/scene"
 
 const randomFamilyman = [
   "familyman_1pleft_text",
@@ -14,7 +14,7 @@ const randomFamilyman = [
   "familyman_2eachside_text",
 ]
 
-export const familyman = (gameState) => {
+export const familyman = (gameState, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger

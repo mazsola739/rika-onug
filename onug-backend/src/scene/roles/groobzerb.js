@@ -1,8 +1,8 @@
-import { groobAndZerbIds } from "../constants"
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { groobAndZerbIds } from '../../constant'
+import { getAllPlayerTokens } from "../../utils/scene"
 
-export const groobzerb = (gameState) => {
+export const groobzerb = (gameState, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger

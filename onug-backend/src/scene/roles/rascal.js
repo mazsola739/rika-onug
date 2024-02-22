@@ -1,5 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens, getRandomItemFromArray } from "../../utils/scene"
 
 const random_rascal = [
   "rascal_idiot_text",
@@ -62,12 +62,9 @@ const createRascal = (kickoffText) => () => {
   return result
 }
 
-export const rascal = (gameState) => {
+export const rascal = (gameState, prefix) => {
   const newGameState = { ...gameState }
-  const narration = []
-  createRascal("rascal_kickoff_text")
-  createRascal("doppelganger_rascal_kickoff_text")
-
+  const narration =   createRascal(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {

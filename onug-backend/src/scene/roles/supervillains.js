@@ -1,6 +1,6 @@
-import { superVillainsIds } from "../constants"
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { superVillainsIds } from '../../constant'
+import { getAllPlayerTokens } from "../../utils/scene"
 
 export const supervillains = (gameState) => {
   const newGameState = { ...gameState }

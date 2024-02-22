@@ -1,5 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from "../../utils/scene"
 
 const empathAllKeys = [
   "identifier_everyone_text",
@@ -38,8 +38,8 @@ const createEmpath = (kickoffText, totalPlayers) => () => {
     randomInstructions,
   ]
 }
-
-export const empath = (gameState) => {
+//TODO prefix, total players
+export const empath = (gameState, prefix) => { //TODO prefix and total players
   const newGameState = { ...gameState }
   createEmpath("empath_kickoff_text", totalPlayers)
   createEmpath("doppelganger_empath_kickoff_text", totalPlayers)

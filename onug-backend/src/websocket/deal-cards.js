@@ -1,11 +1,13 @@
-import { DEAL, REDIRECT } from '../constant/ws';
-import { logTrace, logInfo } from '../log';
-import { validateRoom } from '../validator';
-import { upsertRoomState } from '../repository';
-import { STAGES } from '../constant/stage';
+//@ts-check
+import { DEAL, REDIRECT } from '../constant/ws'
+import { logTrace, logInfo } from '../log'
+import { validateRoom } from '../validator'
+import { upsertRoomState } from '../repository'
+import { STAGES } from '../constant/stage'
 import { broadcast } from './connections'
-import { stubbedCards, getCenterCardPositionByIndex } from '../stub/populate-deal';
-import cards from '../data/cards.json';
+import { stubbedCards, getCenterCardPositionByIndex } from '../stub/populate-deal'
+import cards from '../data/cards.json'
+import { determineTotalPlayers } from '../utils/player'
 
 const alphaWolfId = 17
 const temptressId = 69
@@ -61,10 +63,8 @@ const dealCardIds = (selectedCardIds) => {
   const playerCards = playerCardIds.map((id) => getCardById(id))
   const centerCards = centerCardIds.map((id) => getCardById(id))
 
-  logInfo('dealt cards: ', {
-    playerCards,
-    centerCards,
-  })
+  logInfo('dealt playerCards: ', playerCards,)
+  logInfo('dealt centerCards: ', centerCards)
   logInfo('stubbedCards: ', stubbedCards)
   const leftCard       = centerCards[0]
   const middleCard     = centerCards[1]
@@ -202,4 +202,4 @@ export const dealCards = async (ws, message) => {
   }
 
   return broadcast(room_id, redirectToGameTable)
-};
+}

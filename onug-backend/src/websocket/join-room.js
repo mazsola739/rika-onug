@@ -1,11 +1,13 @@
-import { JOIN_ROOM } from '../constant/ws';
-import roomsData from '../data/rooms.json';
-import { randomPlayerName } from '../utils/name-generator';
-import { validateRoom } from '../validator';
-import { upsertRoomState } from '../repository';
-import { logTrace } from '../log';
-import { STAGES } from '../constant/stage';
-import { addUserToRoom } from './connections';
+//@ts-check
+import { JOIN_ROOM } from '../constant/ws'
+import roomsData from '../data/rooms.json'
+import { validateRoom } from '../validator'
+import { upsertRoomState } from '../repository'
+import { logTrace } from '../log'
+import { STAGES } from '../constant/stage'
+import { addUserToRoom } from './connections'
+
+const randomPlayerName = (names = []) => names[~~(Math.random() * names.length)]
 
 export const joinRoom = async (ws, message) => {
   logTrace(`join-room requested with ${JSON.stringify(message)}`)
@@ -38,7 +40,7 @@ export const joinRoom = async (ws, message) => {
         })
       )
     }
-    
+
     player_name = randomPlayerName(room.available_names)
 
     const newGameState = {
@@ -91,4 +93,4 @@ export const joinRoom = async (ws, message) => {
       player_name,
     })
   )
-};
+}

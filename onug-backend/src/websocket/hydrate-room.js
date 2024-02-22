@@ -1,6 +1,7 @@
-import { HYDRATE_ROOM } from '../constant/ws';
-import { logTrace } from '../log';
-import { validateRoom } from '../validator';
+//@ts-check
+import { HYDRATE_ROOM } from '../constant/ws'
+import { logTrace } from '../log'
+import { validateRoom } from '../validator'
 
 export const hydrateRoom = async (ws, message) => {
   const { room_id } = message
@@ -18,4 +19,4 @@ export const hydrateRoom = async (ws, message) => {
   logTrace(`sending message to client, hydrate room`, hydrateRoom)
 
   return ws.send(hydrateRoom)
-};
+}

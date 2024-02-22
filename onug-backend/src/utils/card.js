@@ -1,3 +1,4 @@
+//@ts-check
 import cards from '../data/cards.json';
 
 const wolfIdsToCheck = [15, 16, 21, 22]

@@ -1,14 +1,12 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 
 const createPickpocket = (prefix) => () =>
   [`${prefix}_kickoff_text`, "pickpocket_kickoff2_text"]
 
-export const pickpocket = (gameState) => {
+export const pickpocket = (gameState, prefix) => {
   const newGameState = { ...gameState }
-  const narration = []
-  createPickpocket("pickpocket")
-  createPickpocket("doppelganger_pickpocket")
+  const narration = createPickpocket(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {

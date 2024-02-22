@@ -1,5 +1,6 @@
-import { alienIds } from '../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../utils'
+//@ts-check
+import { alienIds } from '../../constant'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../utils'
 import { isValidSelection } from '../validate-response-data'
 
 const random_aliens = [
@@ -51,7 +52,7 @@ export const aliens = (gameState) => {
 
     if (alienIds.some(id => newGameState.players[token].card.player_role_id === id)) {
       newGameState.players[token].player_history.random = { random_instruction: narration[1], random_identifier: narration.slice(2) }
-      newGameState.players[token].scene_role_interaction.interaction = aliens_interaction(newGameState)
+      newGameState.players[token].scene_role_interaction.interaction = aliens_interaction(newGameState, token)
     }
   })
 

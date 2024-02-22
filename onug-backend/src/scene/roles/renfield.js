@@ -1,7 +1,7 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 
-export const renfield = (gameState) => {
+export const renfield = (gameState, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger ? "doppelganger_renfield_kickoff_text" : "renfield_kickoff_text",
@@ -12,7 +12,7 @@ export const renfield = (gameState) => {
   tokens.forEach(token => {
    newGameState.players[token].scene_role_interaction.narration = narration
 
-   if (newGameState.players[token].card.player_original_id === 38) {
+   if (newGameState.players[token].card.player_original_id === 38 || (newGameState.players[token].card.role_id === 38 && newGameState.players[token].card.player_original_id === 1)) {
     newGameState.players[token].scene_role_interaction.interaction = renfield_interaction(newGameState, token)
    }
   })

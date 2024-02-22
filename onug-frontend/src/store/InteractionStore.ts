@@ -92,7 +92,7 @@ class InteractionStore {
       case 'ORACLE_QUESTION':
         oracleStore.openYourEyes(this.lastJsonMessage)
         break
-      case 'ORACLE_REACTION':
+      case 'ORACLE_ANSWER':
         oracleStore.openYourEyes(this.lastJsonMessage)
         break
       default:

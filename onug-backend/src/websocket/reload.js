@@ -1,5 +1,6 @@
-import { logError, logTrace } from '../log';
-import { websocketServerConnectionsPerRoom } from './connections';
+//@ts-check
+import { logError, logTrace } from '../log'
+import { websocketServerConnectionsPerRoom } from './connections'
 
 export const reload = (ws, message) => {
   try {
@@ -17,4 +18,4 @@ export const reload = (ws, message) => {
   } catch (error) {
     logError(error)
   }
-};
+}

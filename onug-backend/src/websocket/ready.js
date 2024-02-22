@@ -1,8 +1,9 @@
-import { HYDRATE_READY } from '../constant/ws';
-import { logDebug, logError } from '../log';
-import { readGameState, upsertRoomState } from '../repository';
-import { getGameTableBoard } from '../utils';
-import { broadcast } from './connections';
+//@ts-check
+import { HYDRATE_READY } from '../constant/ws'
+import { logDebug, logError } from '../log'
+import { readGameState, upsertRoomState } from '../repository'
+import { getGameTableBoard } from '../utils'
+import { broadcast } from './connections'
 
 export const ready = async (message) => {
   try {
@@ -30,4 +31,4 @@ export const ready = async (message) => {
   } catch (error) {
     logError(error)
   }
-};
+}

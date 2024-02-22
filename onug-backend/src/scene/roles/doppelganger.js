@@ -1,4 +1,6 @@
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { getAllPlayerTokens, getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens } from "../../utils/scene"
+import { generateRoleInteraction } from "../generate-scene-role-interactions"
 import { isValidSelection } from '../validate-response-data'
 
 export const doppelganger = (gameState) => {
@@ -29,9 +31,9 @@ export const doppelganger_interaction = (gameState, token) => {
 
     return generateRoleInteraction(
       newGameState,
-      private_message = ['interaction_must_one_any_other'],
-      icon = 'copy',
-      selectable_cards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
+      {private_message: ['interaction_must_one_any_other'],
+      icon: 'copy',
+      selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },}
     )
 }
 
@@ -60,9 +62,9 @@ export const doppelganger_response =  (gameState, token, selected_positions, tit
 
   return generateRoleInteraction(
     newGameState,
-    private_message =  ["interaction_you_are_that_role", `${newGameState.players[token]?.card.player_role}`],
-    icon = 'copy',
-    showCards = showCards,
-    uniqInformations =  { new_role_id: newGameState.players[token].card.player_role_id, }
+    {private_message:  ["interaction_you_are_that_role", `${newGameState.players[token]?.card.player_role}`],
+    icon: 'copy',
+    showCards: showCards,
+    uniqInformations:  { new_role_id: newGameState.players[token].card.player_role_id, }}
   )
 }

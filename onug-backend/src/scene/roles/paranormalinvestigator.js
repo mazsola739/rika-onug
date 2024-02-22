@@ -1,4 +1,7 @@
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { townIds } from "../../constant"
+import { getAllPlayerTokens, getCardIdsByPositions, getSelectableOtherPlayersWithoutShield } from "../../utils/scene"
+import { generateRoleInteraction } from "../generate-scene-role-interactions"
 import { isValidSelection } from '../validate-response-data'
 
 export const paranormalinvestigator = (gameState) => {
@@ -29,9 +32,9 @@ export const paranormalinvestigator_interaction = (gameState, token) => {
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ['interaction_may_two_any_other'],
-    icon = 'investigator',
-    selectableCards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 } },
+    {private_message: ['interaction_may_two_any_other'],
+    icon: 'investigator',
+    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 } },}
   )
 }
 
@@ -78,9 +81,9 @@ export const paranormalinvestigator_response = (gameState, token, selected_posit
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ["interaction_saw_card", selected_positions[0], showCards.length === 2 ? selected_positions[1] : ''],
-    icon = 'investigator',
-    showCards = showCards,
-    uniqInformations = { viewed_cards: showCards }
+   { private_message: ["interaction_saw_card", selected_positions[0], showCards.length === 2 ? selected_positions[1] : ''],
+    icon: 'investigator',
+    showCards: showCards,
+    uniqInformations: { viewed_cards: showCards }}
   )
 }

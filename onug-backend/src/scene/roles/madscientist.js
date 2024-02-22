@@ -1,4 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { getAllPlayerTokens, getRandomItemFromArray } from "../../utils/scene"
 
 const random_madscientist_intro = [
   "madscientist_intro_1_text",

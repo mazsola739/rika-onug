@@ -1,3 +1,4 @@
+//@ts-check
 import { logTrace, logErrorWithStack } from '../log';
 import { deletePlayerByToken, repository } from '../repository';
 

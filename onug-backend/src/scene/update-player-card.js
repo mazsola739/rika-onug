@@ -1,8 +1,9 @@
+//@ts-check
 import {
   getPlayerNumbersWithMatchingTokens,
   isActivePlayersCardsFlipped,
   isPlayersCardsFlipped,
-} from './utils';
+} from '../utils/scene';
 
 export const updatePlayerCard = (gameState, token) => {
     const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(gameState.players, [token])

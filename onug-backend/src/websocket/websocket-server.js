@@ -1,3 +1,4 @@
+//@ts-check
 import WebSocket from 'ws';
 import { logTrace, logError, logErrorWithStack } from '../log';
 

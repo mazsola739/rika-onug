@@ -1,6 +1,7 @@
-import { NEWBIE, REDIRECT } from '../constant/ws';
-import { v4 as uuidv4, validate } from 'uuid';
-import { logInfo } from '../log';
+//@ts-check
+import { NEWBIE, REDIRECT } from '../constant/ws'
+import { v4 as uuidv4, validate } from 'uuid'
+import { logInfo } from '../log'
 
 export const newbie = (ws, message) => {
   const { token } = message //TODO handle rejoin, user has valid token
@@ -29,4 +30,4 @@ export const newbie = (ws, message) => {
   }
 
   return
-};
+}

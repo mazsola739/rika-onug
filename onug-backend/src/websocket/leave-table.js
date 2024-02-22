@@ -1,8 +1,9 @@
-import { upsertRoomState, readGameState } from '../repository';
-import { logTrace } from '../log';
-import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant/ws';
-import { broadcast } from './connections';
-import { STAGES } from '../constant/stage';
+//@ts-check
+import { upsertRoomState, readGameState } from '../repository'
+import { logTrace } from '../log'
+import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant/ws'
+import { broadcast } from './connections'
+import { STAGES } from '../constant/stage'
 
 export const leaveTable = async (ws, message) => {
   logTrace(`leave-table requested with ${JSON.stringify(message)}`)
@@ -43,4 +44,4 @@ export const leaveTable = async (ws, message) => {
   await upsertRoomState(newGameState)
 
   return broadcast(room_id, { type: REDIRECT, path: `/room/${room_id}` })
-};
+}

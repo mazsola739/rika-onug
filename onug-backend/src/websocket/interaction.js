@@ -1,8 +1,9 @@
-import { INTERACTION } from '../constant/ws';
-import { logDebug, logError } from '../log';
-import * as roles from '../scene/roles';
-import { readGameState, upsertRoomState } from '../repository';
-import { websocketServerConnectionsPerRoom } from './connections';
+//@ts-check
+import { INTERACTION } from '../constant/ws'
+import { logDebug, logError } from '../log'
+import * as roles from '../scene/roles'
+import { readGameState, upsertRoomState } from '../repository'
+import { websocketServerConnectionsPerRoom } from './connections'
 
 export const interaction = async (ws, message) => {
   try {
@@ -23,7 +24,7 @@ export const interaction = async (ws, message) => {
     logError(error)
     logError(JSON.stringify(error?.stack))
   }
-};
+}
 
 //TODO better idea?
 const generateInteractionResponse = (gameState, token, selected_positions, ws) => {

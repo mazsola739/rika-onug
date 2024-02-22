@@ -1,4 +1,7 @@
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { centerCardPositions } from "../../constant"
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from "../../utils/scene"
+import { generateRoleInteraction } from "../generate-scene-role-interactions"
 import { isValidSelection } from '../validate-response-data'
 
 export const drunk = (gameState) => {
@@ -17,7 +20,7 @@ export const drunk = (gameState) => {
   return newGameState
 }
 
-export const drunk_interaction = (gameState, token, title) => {
+export const drunk_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
 
     if (!newGameState.players[token].shield) {
@@ -28,9 +31,9 @@ export const drunk_interaction = (gameState, token, title) => {
   
       return generateRoleInteraction(
         newGameState,
-        private_message = ['interaction_must_one_center'],
-        icon = 'drunk',
-        selectable_cards = {selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 }},
+       { private_message: ['interaction_must_one_center'],
+        icon: 'drunk',
+        selectableCards: {selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 }},}
       )
     } else {
       newGameState.players[token].player_history = {
@@ -40,9 +43,9 @@ export const drunk_interaction = (gameState, token, title) => {
   
       return generateRoleInteraction(
         newGameState,
-        private_message = ['interaction_shielded'],
-        icon = 'shield',
-        uniqInformations = { shielded: true },
+       { private_message: ['interaction_shielded'],
+        icon: 'shield',
+        uniqInformations: { shielded: true },}
       )
     }
 }
@@ -70,8 +73,8 @@ export const drunk_response =  (gameState, token, selected_positions, title) => 
 
   return generateRoleInteraction(
     newGameState,
-    private_message =["interaction_swapped_cards", selected_positions[0], `player_${newGameState.players[token].player_number}`],
-    icon = 'drunk',
-    uniqInformations = { swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_positions[0]] }
+   { private_message: ["interaction_swapped_cards", selected_positions[0], `player_${newGameState.players[token].player_number}`],
+    icon: 'drunk',
+    uniqInformations: { swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_positions[0]] }}
   )
 }

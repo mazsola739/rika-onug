@@ -1,3 +1,4 @@
+//@ts-check
 import { logDebug } from "../log";
 
 const repositoryType = process.env.ONUG_REPOSITORY_TYPE || 'memory'

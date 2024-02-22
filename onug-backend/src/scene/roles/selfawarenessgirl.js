@@ -1,7 +1,8 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
+import { insomniac_interaction } from "./insomniac"
 
-export const selfawarenessgirl = (gameState) => {
+export const selfawarenessgirl = (gameState, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger

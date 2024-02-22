@@ -1,5 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens, getRandomItemFromArray } from "../../utils/scene"
 
 const randomBodysnatcher = [
   "bodysnatcher_steal_text",
@@ -22,7 +22,7 @@ const createBodysnatcher = (kickoffText) => () =>
     "bodysnatcher_end_text",
   ]
 
-export const beholder = (gameState) => {
+export const bodysnatcher = (gameState, prefix) => { //TODO fix prefix
   const newGameState = { ...gameState }
   createBodysnatcher("bodysnatcher_kickoff_text")
   createBodysnatcher("doppelganger_bodysnatcher_kickoff_text")

@@ -1,3 +1,4 @@
+//@ts-check
 import { writeFileSync } from 'fs';
 import { readFile, unlink } from 'fs/promises';
 import { logError, logTrace, logErrorWithStack } from '../log';

@@ -1,3 +1,4 @@
+//@ts-check
 import { REDIRECT } from '../constant/ws';
 import { logTrace } from '../log';
 import { validateRoom } from '../validator';
@@ -6,7 +7,7 @@ import { STAGES } from '../constant/stage';
 import { broadcast } from './connections'
 import { startGamePlay } from '../screen-play';
 
-export const startGame = async (message) => {
+export const startGame = async (ws, message) => {
   const { room_id, token } = message
 
   logTrace(`Everybody is ready, game started in: ${room_id}`)

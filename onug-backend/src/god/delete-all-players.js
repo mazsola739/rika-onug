@@ -1,3 +1,4 @@
+//@ts-check
 import { logTrace, logErrorWithStack } from '../log';
 import { deleteAllPlayers } from '../repository';
 import { initWebSocketConnections } from '../websocket/connections';

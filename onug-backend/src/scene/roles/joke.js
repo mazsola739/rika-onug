@@ -1,4 +1,5 @@
-import { getRandomItemFromArray } from '../utils'
+//@ts-check
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene'
 
 const random_joke = [
   "joke_1_text",

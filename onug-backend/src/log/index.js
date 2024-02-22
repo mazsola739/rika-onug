@@ -1,3 +1,4 @@
+//@ts-check
 import { appendFile } from 'fs/promises';
 
 const LOG_LEVELS = {

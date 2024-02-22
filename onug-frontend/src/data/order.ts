@@ -7,7 +7,7 @@ export const order: OrderType[] = [
     scene_number: 2,
   },
   {
-    scene_title: 'ORACLE_REACTION',
+    scene_title: 'ORACLE_ANSWER',
     card_id: [50],
     scene_number: 3,
   },

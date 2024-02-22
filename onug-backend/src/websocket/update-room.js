@@ -1,3 +1,4 @@
+//@ts-check
 import { validateRoom } from '../validator';
 import { determineTotalPlayers, toggleCardSelect } from '../utils';
 import { upsertRoomState } from '../repository'

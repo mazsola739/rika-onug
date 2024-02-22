@@ -1,1 +1,0 @@
-export const randomPlayerName = (names = []) => names[~~(Math.random() * names.length)];

@@ -1,15 +1,15 @@
+//@ts-check
 import { updatePlayerCard } from './update-player-card';
-import { getKeys, concatArraysWithUniqueElements } from './utils';
+import { getKeys, concatArraysWithUniqueElements } from '../utils/scene';
 
-export const generateRoleInteraction = ({
-  newGameState,
+export const generateRoleInteraction = ( newGameState, token, {
   private_message = [''],
   icon = '',
-  selectableCards = null,
-  selectableMarks = null,
-  showCards = null,
-  showMarks = null,
-  uniqInformations = null
+  selectableCards = {},
+  selectableMarks = {},
+  showCards = [],
+  showMarks = [],
+  uniqInformations = {}
 }) => {
   updatePlayerCard(newGameState, token)
 

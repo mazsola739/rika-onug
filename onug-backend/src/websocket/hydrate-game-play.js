@@ -1,7 +1,8 @@
-import { HYDRATE_GAME_PLAY, REDIRECT } from '../constant/ws';
-import { logTrace } from '../log';
-import { readGameState } from '../repository';
-import { isGamePlayStopped } from '../utils';
+//@ts-check
+import { HYDRATE_GAME_PLAY, REDIRECT } from '../constant/ws'
+import { logTrace } from '../log'
+import { readGameState } from '../repository'
+import { isGamePlayStopped } from '../utils'
 
 export const hydrateGamePlay = async (ws, message) => {
   logTrace(`hydrate game play ${JSON.stringify(message)}`)
@@ -24,4 +25,4 @@ export const hydrateGamePlay = async (ws, message) => {
       actual_scene,
     })
   )
-};
+}

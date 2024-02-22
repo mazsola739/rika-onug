@@ -1,3 +1,4 @@
+//@ts-check
 import { logTrace, logDebug } from '../log';
 import { sceneHandler } from './scene-handler';
 import script from '../data/script.json';

@@ -1,14 +1,14 @@
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerTokenByPlayerNumber, getRandomArtifact, getSelectablePlayersWithNoArtifact, getSelectablePlayersWithNoShield } from "../../utils/scene"
+import { generateRoleInteraction } from "../generate-scene-role-interactions"
 import { isValidSelection } from '../validate-response-data'
 
 const createCurator = (prefix) => () =>
   [`${prefix}_kickoff_text`, "curator_kickoff2_text"]
 
-export const curator = (gameState) => {
+export const curator = (gameState, prefix) => {
   const newGameState = { ...gameState }
-  createCurator("curator")
-createCurator("doppelganger_curator")
-  const narration = []
+  const narration = createCurator(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {
@@ -22,7 +22,7 @@ createCurator("doppelganger_curator")
   return newGameState
 }
 
-export const curator_interaction = (gameState, token, title) => {
+export const curator_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
 
   const allPlayerTokens = getAllPlayerTokens(newGameState.players)
@@ -37,9 +37,9 @@ export const curator_interaction = (gameState, token, title) => {
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ['interaction_may_one_any'],
-    icon = 'artifact',
-    selectableCards = { selectable_cards: selectablePlayersWithNoArtifact, selectable_card_limit: { player: 1, center: 0 } },
+   { private_message: ['interaction_may_one_any'],
+    icon: 'artifact',
+    selectableCards: { selectable_cards: selectablePlayersWithNoArtifact, selectable_card_limit: { player: 1, center: 0 } },}
   )
 }
 
@@ -52,7 +52,8 @@ export const curator_response = (gameState, token, selected_positions, title) =>
   const newArtifact = getRandomArtifact(newGameState.artifact)
   const artifactedPlayersToken = getPlayerTokenByPlayerNumber(newGameState.players, selected_positions[0])
   newGameState.artifact.push({ [selected_positions[0]]: newArtifact })
-  newGameState.players[artifactedPlayersToken].artifact = true
+  // @ts-ignore
+  newGameState.players[artifactedPlayersToken[0]].artifact = true //TODO better solution, only 1 card
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
@@ -61,8 +62,8 @@ export const curator_response = (gameState, token, selected_positions, title) =>
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ["interaction_placed_artifact", selected_positions[0]],
-    icon = 'artifact',
-    uniqInformations = { new_artifact_card: selected_positions[0] },
+    {private_message: ["interaction_placed_artifact", selected_positions[0]],
+    icon: 'artifact',
+    uniqInformations: { new_artifact_card: selected_positions[0] },}
   )
 }

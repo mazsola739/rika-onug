@@ -1,5 +1,6 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
+import { robber_interaction } from "./robber"
 
 export const roleretriever = (gameState) => {
   const newGameState = { ...gameState }

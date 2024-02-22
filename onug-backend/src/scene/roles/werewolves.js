@@ -1,10 +1,11 @@
+//@ts-check
 import {
   getWerewolfPlayerNumbersByRoleIds,
   getDreamWolfPlayerNumberByRoleIds,
   getCardIdsByPositions,
   getAllPlayerTokens,
-} from '../utils'
-import { centerCardPositions, werewolvesIds } from '../constants'
+} from '../../utils/scene'
+import { centerCardPositions, werewolvesIds } from '../../constant'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
@@ -21,14 +22,14 @@ export const werewolves = (gameState, hasDreamWolf) => {
     newGameState.players[token].scene_role_interaction.narration = narration
  
     if (werewolvesIds.some(id => newGameState.players[token].card.player_role_id === id)) {
-     newGameState.players[token].scene_role_interaction.interaction = werewolves_interaction(newGameState)
+     newGameState.players[token].scene_role_interaction.interaction = werewolves_interaction(newGameState, token)
     }
    })
  
    return newGameState
 }
 
-export const werewolves_interaction = (gameState) => {
+export const werewolves_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
 
   const werewolves = getWerewolfPlayerNumbersByRoleIds(newGameState.players)
@@ -43,10 +44,10 @@ export const werewolves_interaction = (gameState) => {
 
   return generateRoleInteraction(
     newGameState,
-    private_message = [loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves'],
-    icon = loneWolf ? 'spy' : 'werewolf',
-    selectableCards = { selectable_cards: loneWolf ? centerCardPositions : [], selectable_card_limit: { player: 0, center: 1 } },
-    uniqInformations = { werewolves, dreamwolf }
+    {private_message: [loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves'],
+    icon: loneWolf ? 'spy' : 'werewolf',
+    selectableCards: { selectable_cards: loneWolf ? centerCardPositions : [], selectable_card_limit: { player: 0, center: 1 } },
+    uniqInformations: { werewolves, dreamwolf }}
   )
 }
 
@@ -73,9 +74,9 @@ export const werewolves_response = (gameState, token, selected_positions) => {
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ["interaction_saw_card", selected_positions[0]],
-    icon = 'spy',
-    showCards = showCards,
-    uniqInformations = { viewed_cards: [selected_positions[0]] }
+    {private_message: ["interaction_saw_card", selected_positions[0]],
+    icon: 'spy',
+    showCards: showCards,
+    uniqInformations: { viewed_cards: [selected_positions[0]] }}
   )
 }

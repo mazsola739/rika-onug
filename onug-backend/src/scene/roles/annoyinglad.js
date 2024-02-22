@@ -1,5 +1,6 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
+import { thing_interaction } from "./thing"
 
 export const annoyinglad = (gameState) => {
   const newGameState = { ...gameState }
@@ -10,9 +11,10 @@ export const annoyinglad = (gameState) => {
     newGameState.players[token].scene_role_interaction.narration = narration
 
     if (newGameState.players[token].card.player_original_id === 55) {
-      newGameState.players[token].scene_role_interaction.interaction = roles.thing_interaction(newGameState, token)
+      newGameState.players[token].scene_role_interaction.interaction = thing_interaction(newGameState, token)
     }
   })
 
   return newGameState
 }
+

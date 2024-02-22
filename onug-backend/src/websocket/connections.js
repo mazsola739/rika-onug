@@ -1,5 +1,6 @@
-import roomNames from '../data/room_names.json';
-import { logDebug, logTrace } from '../log';
+//@ts-check
+import roomNames from '../data/room_names.json'
+import { logDebug, logTrace } from '../log'
 
 export const websocketServerConnectionsPerRoom = {}
 export const initWebSocketConnections = () => roomNames.forEach((roomName) => (websocketServerConnectionsPerRoom[roomName] = {}))

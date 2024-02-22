@@ -1,5 +1,5 @@
-import { getAllPlayerTokens } from "../utils"
-import { isValidSelection } from '../validate-response-data'
+//@ts-check
+import { getAllPlayerTokens, getRandomItemFromArray } from "../../utils/scene"
 
 const random_psychic = ["psychic_view1_text", "psychic_view2_text"]
 const psychicKeys = ["identifier_anyeven_text", "identifier_anyodd_text"]
@@ -10,7 +10,7 @@ const createPsychic = (kickoffText) => () =>
     getRandomItemFromArray(psychicKeys),
   ]
 
-export const psychic = (gameState) => {
+export const psychic = (gameState, prefix) => { //TODO fix prefix
   const newGameState = { ...gameState }
   const narration = []
   createPsychic("psychic_kickoff_text")

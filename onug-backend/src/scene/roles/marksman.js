@@ -1,7 +1,8 @@
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { getAllPlayerTokens } from "../../utils/scene"
 import { isValidSelection } from '../validate-response-data'
 
-export const marksman = (gameState) => {
+export const marksman = (gameState, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger

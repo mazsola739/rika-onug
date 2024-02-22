@@ -1,4 +1,7 @@
-import { getAllPlayerTokens } from "../utils"
+//@ts-check
+import { centerCardPositions } from "../../constant"
+import { getAllPlayerTokens, getCardIdsByPositions } from "../../utils/scene"
+import { generateRoleInteraction } from "../generate-scene-role-interactions"
 import { isValidSelection } from '../validate-response-data'
 
 export const apprenticeseer = (gameState) => {
@@ -17,23 +20,22 @@ export const apprenticeseer = (gameState) => {
   return newGameState
 }
 
-export const apprenticeseer_interaction = (gameState, token, title) => {
+export const apprenticeseer_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
-  
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 }
-    }
-  
-    return generateRoleInteraction(
-      newGameState,
-      private_message = ['interaction_may_one_center'],
-      icon = 'spy',
-      selectableCards = {selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 }},
-    )
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 }
+  }
+
+  return generateRoleInteraction(newGameState, {
+    private_message: ['interaction_may_one_center'],
+    icon: 'spy',
+    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 }, },
+  })
 }
 
-export const apprenticeseer_response =  (gameState, token, selected_positions, title) => {
+export const apprenticeseer_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -56,9 +58,11 @@ export const apprenticeseer_response =  (gameState, token, selected_positions, t
 
   return generateRoleInteraction(
     newGameState,
-    private_message = ["interaction_saw_card", selected_positions[0]],
-    icon = 'spy',
-    showCards = viewCards,
-    uniqInformations = { viewed_cards: [selected_positions[0]] },
+    {
+      private_message: ["interaction_saw_card", selected_positions[0]],
+      icon: 'spy',
+      showCards: viewCards,
+      uniqInformations: { viewed_cards: [selected_positions[0]] },
+    }
   )
 }

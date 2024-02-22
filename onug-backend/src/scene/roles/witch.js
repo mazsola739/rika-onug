@@ -1,4 +1,5 @@
-import { centerCardPositions } from '../constants'
+//@ts-check
+import { centerCardPositions } from '../../constant'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 import {
@@ -6,7 +7,7 @@ import {
   getSelectablePlayersWithNoShield,
   getAllPlayerTokens,
   getCardIdsByPositions,
-} from '../utils'
+} from '../../utils/scene'
 
 export const witch = (gameState) => {
   const newGameState = { ...gameState }
@@ -18,14 +19,14 @@ export const witch = (gameState) => {
     newGameState.players[token].scene_role_interaction.narration = narration
  
     if (newGameState.players[token].card.player_original_id === 27) {
-     newGameState.players[token].scene_role_interaction.interaction = witch_interaction(newGameState)
+     newGameState.players[token].scene_role_interaction.interaction = witch_interaction(newGameState, token)
     }
    })
  
    return newGameState
 }
 
-export const witch_interaction = (gameState, token, title) => {
+export const witch_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
 
   newGameState.players[token].player_history = {
@@ -35,9 +36,9 @@ export const witch_interaction = (gameState, token, title) => {
   
   return generateRoleInteraction(
     newGameState,
-    private_message = ['interaction_may_one_center'],
-    icon = 'voodoo',
-    selectableCards = { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
+    {private_message: ['interaction_may_one_center'],
+    icon: 'voodoo',
+    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },}
   )
 }
 
@@ -67,11 +68,11 @@ export const witch_response =  (gameState, token, selected_positions) => {
 
     return generateRoleInteraction(
       newGameState,
-      private_message = ["interaction_saw_card", selected_positions[0], "interaction_must_one_any"],
-      icon = 'voodoo',
-      selectableCards = { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
-      showCards = showCards,
-      uniqInformations = { viewed_cards: [selected_positions[0]] }
+      {private_message: ["interaction_saw_card", selected_positions[0], "interaction_must_one_any"],
+      icon: 'voodoo',
+      selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
+      showCards: showCards,
+      uniqInformations: { viewed_cards: [selected_positions[0]] }}
     )
   } else if (selected_positions[0].includes("player_")) {
     const selectedCenterPositionCard = newGameState.card_positions[newGameState.players[token].player_history.selected_center_card]
@@ -97,9 +98,9 @@ export const witch_response =  (gameState, token, selected_positions) => {
 
     return generateRoleInteraction(
       newGameState,
-      private_message = ["interaction_saw_card", "interaction_swapped_cards", `${newGameState.players[token].player_history.selected_center_card}`, selected_positions[0]],
-      icon = 'voodoo',
-      uniqInformations = { swapped_cards: [newGameState.players[token].player_history.selected_center_card, selected_positions[0]] }
+      {private_message: ["interaction_saw_card", "interaction_swapped_cards", `${newGameState.players[token].player_history.selected_center_card}`, selected_positions[0]],
+      icon: 'voodoo',
+      uniqInformations: { swapped_cards: [newGameState.players[token].player_history.selected_center_card, selected_positions[0]] }}
     )
   }
 }

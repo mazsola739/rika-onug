@@ -1,3 +1,4 @@
+//@ts-check
 import { logError, logErrorWithStack } from '../log';
 
 export const pageNotFoundError = (req, res) => {

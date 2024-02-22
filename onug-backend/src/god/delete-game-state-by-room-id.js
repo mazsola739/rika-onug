@@ -1,3 +1,4 @@
+//@ts-check
 import { logTrace } from '../log';
 import { deleteGameStateByRoomId } from '../repository';
 
