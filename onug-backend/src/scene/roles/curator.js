@@ -25,7 +25,7 @@ export const curator = (gameState, prefix) => {
 export const curator_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
 
-  const allPlayerTokens = getAllPlayerTokens(newGameState.players)
+  const allPlayerTokens = getAllPlayerTokens(newGameState.players) //TODO better solution
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
   const selectablePlayersWithNoArtifact = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, newGameState.artifact)
@@ -51,9 +51,11 @@ export const curator_response = (gameState, token, selected_positions, title) =>
 
   const newArtifact = getRandomArtifact(newGameState.artifact)
   const artifactedPlayersToken = getPlayerTokenByPlayerNumber(newGameState.players, selected_positions[0])
-  newGameState.artifact.push({ [selected_positions[0]]: newArtifact })
-  // @ts-ignore
-  newGameState.players[artifactedPlayersToken[0]].artifact = true //TODO better solution, only 1 card
+
+  if (artifactedPlayersToken) {
+    newGameState.artifact.push({ [selected_positions[0]]: newArtifact })
+    newGameState.players[artifactedPlayersToken[0]].artifact = true
+  }
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,

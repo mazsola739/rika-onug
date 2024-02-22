@@ -49,7 +49,7 @@ export const getNonWerewolfPlayerNumbersByRoleIds = (players) => {
 
   for (const token in players) {
     const player = players[token]
-    if (!werewolvesAndDreamWolfIds.includes(player.card.player_role_id)) {
+    if (!werewolvesAndDreamWolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${players[token].player_number}`)
     }
   }

@@ -3,18 +3,16 @@ import { getAllPlayerTokens, getRandomItemFromArray } from "../../utils/scene"
 
 const random_psychic = ["psychic_view1_text", "psychic_view2_text"]
 const psychicKeys = ["identifier_anyeven_text", "identifier_anyodd_text"]
-const createPsychic = (kickoffText) => () =>
+const createPsychic = (prefix) => () =>
   [
-    kickoffText,
+    `${prefix}_kickoff_text`,
     getRandomItemFromArray(random_psychic),
     getRandomItemFromArray(psychicKeys),
   ]
 
-export const psychic = (gameState, prefix) => { //TODO fix prefix
+export const psychic = (gameState, prefix) => {
   const newGameState = { ...gameState }
-  const narration = []
-  createPsychic("psychic_kickoff_text")
-  createPsychic("doppelganger_psychic_kickoff_text")
+  const narration = createPsychic(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {

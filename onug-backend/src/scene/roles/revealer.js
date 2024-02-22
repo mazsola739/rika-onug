@@ -7,7 +7,6 @@ import { isValidSelection } from '../validate-response-data'
 const createRevealer = (prefix) => () =>
   [`${prefix}_kickoff_text`, "revealer_kickoff2_text"]
 
-
 export const revealer = (gameState, prefix) => {
   const newGameState = { ...gameState }
 

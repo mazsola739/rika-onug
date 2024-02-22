@@ -14,19 +14,17 @@ const bodysnatcherKeys = [
   "identifier_bothneighbors_text",
 ]
 
-const createBodysnatcher = (kickoffText) => () =>
+const createBodysnatcher = (prefix) => () =>
   [
-    kickoffText,
+    `${prefix}_kickoff_text`,
     getRandomItemFromArray(randomBodysnatcher),
     getRandomItemFromArray(bodysnatcherKeys),
     "bodysnatcher_end_text",
   ]
 
-export const bodysnatcher = (gameState, prefix) => { //TODO fix prefix
+export const bodysnatcher = (gameState, prefix) => {
   const newGameState = { ...gameState }
-  createBodysnatcher("bodysnatcher_kickoff_text")
-  createBodysnatcher("doppelganger_bodysnatcher_kickoff_text")
-  const narration = []
+  const narration = createBodysnatcher(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {

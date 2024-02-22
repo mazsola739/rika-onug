@@ -29,8 +29,8 @@ const rascalAnyTwoKeys = [
   "identifier_2rightneighbors_text",
 ]
 
-const createRascal = (kickoffText) => () => {
-  const result = [kickoffText]
+const createRascal = (prefix) => () => {
+  const result = [`${prefix}_kickoff_text`,]
   const randomInstructions = getRandomItemFromArray(random_rascal)
   const randomAnyOne = getRandomItemFromArray(rascalAnyOneKeys)
   const randomAnyTwo = getRandomItemFromArray(rascalAnyTwoKeys)

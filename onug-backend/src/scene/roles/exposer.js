@@ -7,14 +7,12 @@ const randomExposer = [
   "exposer_flip3_text",
 ]
 
-const createExposer = (kickoffText) => () =>
-  [kickoffText, getRandomItemFromArray(randomExposer)]
+const createExposer = (prefix) => () =>
+  [`${prefix}_kickoff_text`, getRandomItemFromArray(randomExposer)]
 
-export const exposer = (gameState, prefix) => { //TODO fix prefix
+export const exposer = (gameState, prefix) => {
   const newGameState = { ...gameState }
-  createExposer("exposer_kickoff_text")
-  createExposer("doppelganger_exposer_kickoff_text")
-  const narration = []
+  const narration = createExposer(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {

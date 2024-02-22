@@ -2,7 +2,6 @@
 
 import { getAllPlayerTokens } from "../../utils/scene"
 
-
 export const villageidiot = (gameState) => {
   const newGameState = { ...gameState }
   const narration = ['villageidiot_kickoff_text']

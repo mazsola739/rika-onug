@@ -1,7 +1,6 @@
 //@ts-check
 import { alienIds } from '../../constant'
 import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../utils'
-import { isValidSelection } from '../validate-response-data'
 
 const random_aliens = [
   'aliens_view_text',

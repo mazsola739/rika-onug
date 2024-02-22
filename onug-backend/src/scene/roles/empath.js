@@ -25,12 +25,12 @@ const randomEmpath = [
   "empath_action14_text",
 ]
 
-const createEmpath = (kickoffText, totalPlayers) => () => {
+const createEmpath = (prefix, totalPlayers) => () => {
   const randomIdentifier = getRandomItemFromArray(empathAllKeys)
   const randomInstructions = getRandomItemFromArray(randomEmpath)
 
   return [
-    kickoffText,
+    `${prefix}_kickoff_text`,
     "empath_kickoff2_text",
     randomIdentifier === "activePlayers"
       ? pickRandomUpToThreePlayers(totalPlayers, "conjunction_and")
@@ -38,12 +38,11 @@ const createEmpath = (kickoffText, totalPlayers) => () => {
     randomInstructions,
   ]
 }
-//TODO prefix, total players
-export const empath = (gameState, prefix) => { //TODO prefix and total players
+
+export const empath = (gameState, prefix) => {
   const newGameState = { ...gameState }
-  createEmpath("empath_kickoff_text", totalPlayers)
-  createEmpath("doppelganger_empath_kickoff_text", totalPlayers)
-  const narration = []
+  const total_players = newGameState.total_players
+  const narration = createEmpath(prefix, total_players)
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {

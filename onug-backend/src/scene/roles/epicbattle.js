@@ -1,6 +1,4 @@
 //@ts-check
-//@ts-check
-//@ts-check
 import { getRandomItemFromArray } from '../../utils/scene'
 
 const random_easteregg_nobadguys = [

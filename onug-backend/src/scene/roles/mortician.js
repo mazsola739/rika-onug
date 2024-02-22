@@ -10,23 +10,18 @@ const morticianAllKeys = [
   "identifier_yourself_text",
 ]
 
-const createMortician = (kickoffText) => () =>
-  [
-    kickoffText,
-    getRandomItemFromArray(random_mortician),
-    getRandomItemFromArray(
-      random_mortician === "mortician_2cards_text" //TODO FIX HERE
-        ? morticianAllKeys
-        : ["identifier_bothneighbors_text"]
-    ),
+const createMortician = (prefix) => () =>{
+const randomMortician = getRandomItemFromArray(random_mortician)
+return [
+    `${prefix}_kickoff_text`,
+    randomMortician,
+    getRandomItemFromArray(randomMortician === "mortician_2cards_text" ? morticianAllKeys : ["identifier_bothneighbors_text"]),
   ]
+}
 
-
-export const mortician = (gameState, prefix) => { //TODO prefix
+export const mortician = (gameState, prefix) => {
   const newGameState = { ...gameState }
-  const narration = []
-  createMortician("mortician_kickoff_text")
-  createMortician("doppelganger_mortician_kickoff_text")
+  const narration = createMortician(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {

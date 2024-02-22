@@ -23,11 +23,9 @@ export const toggleCardSelect = (selectedCards, cardId, totalPlayers) => {
   return newSelectedCards
 }
 
-const containsByIdsToCheck = (selectedCards, idsToCheck) =>
-  idsToCheck.some((id) => containsById(selectedCards, id))
+const containsByIdsToCheck = (selectedCards, idsToCheck) => idsToCheck.some((id) => containsById(selectedCards, id))
 
-const containsById = (selectedCards, cardId) =>
-  selectedCards.some((id) => id === cardId)
+const containsById = (selectedCards, cardId) => selectedCards.some((id) => id === cardId)
 
 const handleSelectCard = (selectedCards, cardId) => {
   let newSelectedCards = [...selectedCards]
@@ -103,13 +101,11 @@ const shuffle = (selectedCardIds) => {
   return selectedCardIds
 }
 
-export const filterCardsByIds = (selectedCardIds, idsToCheck) =>
-  selectedCardIds.filter((cardId) => idsToCheck.includes(cardId))
+export const filterCardsByIds = (selectedCardIds, idsToCheck) => selectedCardIds.filter((cardId) => idsToCheck.includes(cardId))
 export const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(17)
 export const hasTemptress = (selectedCardIds) => selectedCardIds.includes(69)
 export const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
-export const getRandomItemFromArray = (array) =>
-  array[getRandomNumber(0, array.length - 1)]
+export const getRandomItemFromArray = (array) => array[getRandomNumber(0, array.length - 1)]
 
 export const distributeCards = (selectedCardIds) => {
   let cardIds = [...selectedCardIds]

@@ -1,7 +1,7 @@
 //@ts-check
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
-import { getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIds, getSelectableOtherPlayersWithoutShield, getSelectablePlayersWithNoShield } from '../../utils/scene'
+import { getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIds } from '../../utils/scene'
 
 export const alphawolf = (gameState) => {
   const newGameState = { ...gameState }
@@ -23,11 +23,10 @@ export const alphawolf_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
   
   const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(newGameState.players)
-  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
-    selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 }
+    selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 }
   }
 
   return generateRoleInteraction(
@@ -35,7 +34,7 @@ export const alphawolf_interaction = (gameState, token) => {
     {
       private_message:['interaction_one_any_non_werewolf'],
       icon: 'claw',
-      selectableCards: { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
+      selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
     }
   )
 }

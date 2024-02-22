@@ -23,6 +23,7 @@ export const robber_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
 
   if (!newGameState.players[token].shield) {
+    
     const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(newGameState.players, token)
 
     newGameState.players[token].player_history = {
