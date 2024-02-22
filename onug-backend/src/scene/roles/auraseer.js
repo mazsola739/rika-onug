@@ -1,29 +1,45 @@
 //@ts-check
-import { getAllPlayerTokens } from "../../utils/scene"
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
 
-export const auraseer = (gameState, hasDoppelganger, hasMarks) => {
+export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger
-      ? "doppelganger_auraseer_kickoff_text"
-      : "auraseer_kickoff_text",
-    hasMarks ? "auraseer_marks_and_cards_text" : "auraseer_cards_text",
-  ] 
+      ? 'doppelganger_auraseer_kickoff_text'
+      : 'auraseer_kickoff_text',
+    hasMarks ? 'auraseer_marks_and_cards_text' : 'auraseer_cards_text',
+  ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-   newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
-   if (newGameState.players[token].card.player_original_id === 72) {
-    newGameState.players[token].scene_role_interaction.interaction = auraseer_interaction(newGameState, token)
-   }
+    if (newGameState.players[token].card.player_original_id === 72) {
+      interaction = auraseer_interaction(newGameState, token)
+    }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const auraseer_interaction = (gameState, token) => {return {}}
-export const auraseer_response =  (gameState, token, selected_positions) => {return {}}
+export const auraseer_interaction = (gameState, token) => {
+  return {}
+}
+export const auraseer_response = (gameState, token, selected_positions) => {
+  return {}
+}
 
 /*AURA SEER moved viewed Copycat, Doppelgänger, Rascal, Body Snatcher, Alpha Wolf, Mystic Wolf, Seer, Exposer, 
 Mortician, Psychic, Apprentice Seer, Paranormal Investigator, Marksman, Robber, Witch, 

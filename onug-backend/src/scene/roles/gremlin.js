@@ -1,24 +1,40 @@
 //@ts-check
-import { getAllPlayerTokens } from "../../utils/scene"
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
 
 const createGremlin = (prefix) => () =>
-  [`${prefix}_kickoff_text`, "gremlin_kickoff2_text"]
+  [`${prefix}_kickoff_text`, 'gremlin_kickoff2_text']
 
-export const gremlin = (gameState, prefix) => {
+export const gremlin = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
   const narration = createGremlin(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-   newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
-   if (newGameState.players[token].card.player_original_id === 33) {
-    newGameState.players[token].scene_role_interaction.interaction = gremlin_interaction(newGameState, token)
-   }
+    if (newGameState.players[token].card.player_original_id === 33) {
+      interaction = gremlin_interaction(newGameState, token)
+    }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const gremlin_interaction = (gameState, token) => {return {}}
-export const gremlin_response =  (gameState, token, selected_positions) => {return {}}
+export const gremlin_interaction = (gameState, token) => {
+  return {}
+}
+export const gremlin_response = (gameState, token, selected_positions) => {
+  return {}
+}

@@ -1,20 +1,34 @@
 //@ts-check
-import { getAllPlayerTokens } from "../../utils/scene"
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
 
-export const lovers = (gameState) => {
+export const lovers = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ["lovers_kickoff_text"]
+  const narration = ['lovers_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-   newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
-   if (newGameState.players[token].mark.id === "mark_of_love") {
-    newGameState.players[token].scene_role_interaction.interaction = lover_interaction(newGameState, token)
-   }
+    if (newGameState.players[token].mark.id === 'mark_of_love') {
+      interaction = lover_interaction(newGameState, token)
+    }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const lover_interaction = (gameState, token) => {return {}}
+export const lover_interaction = (gameState, token) => {
+  return {}
+}

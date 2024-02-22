@@ -239,7 +239,7 @@ const ripple_random = [
   "random_ripple_iamalien", //player can only repeat im alien - //! UFO icon
 ]
 
-export const ripple = (gameState) => [] //TODO
+export const ripple = (gameState, title) => [] //TODO
 
 const repeatrole = [
 { name: 'role_aliens', isExist: areAnyCardSelectedById(deck, [42, 43, 47, 53, 54, 74]), specialCondition: () => !alienStore.isNewAlienOrHelper },

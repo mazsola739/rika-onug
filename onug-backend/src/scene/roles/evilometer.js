@@ -1,26 +1,39 @@
 //@ts-check
-import { getAllPlayerTokens } from "../../utils/scene"
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
 
-export const evilometer = (gameState, hasDoppelganger) => {
+export const evilometer = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger
-      ? "doppelganger_evilometer_kickoff_text"
-      : "evilometer_kickoff_text",
-    "evilometer_kickoff2_text",
+      ? 'doppelganger_evilometer_kickoff_text'
+      : 'evilometer_kickoff_text',
+    'evilometer_kickoff2_text',
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-   newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
-   if (newGameState.players[token].card.player_original_id === 58) {
-    newGameState.players[token].scene_role_interaction.interaction = evilometer_interaction(newGameState, token)
-   }
+    if (newGameState.players[token].card.player_original_id === 58) {
+      interaction = evilometer_interaction(newGameState, token)
+    }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const evilometer_interaction = (gameState, token) => {return {}}
-
+export const evilometer_interaction = (gameState, token) => {
+  return {}
+}

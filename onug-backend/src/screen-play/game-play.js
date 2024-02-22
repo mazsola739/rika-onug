@@ -3,11 +3,10 @@ import { readGameState, upsertRoomState } from '../repository';
 import { broadcast, websocketServerConnectionsPerRoom } from '../websocket/connections';
 import { HYDRATE_GAME_PLAY } from '../constant/ws';
 import { logTrace } from '../log';
-import { narration } from '../scene';
+import { scene } from '../scene';
 import { STAGES } from '../constant/stage';
 
 //TODO set tickTime each narration different
-
 const tickTime = 8000
 
 export const stopGamePlay = gameState => {
@@ -50,10 +49,10 @@ const getNextScene = gameState => {
   newGameState.actual_scene.scene_start_time = startTime
   newGameState.actual_scene.scene_number++
 
-  newGameState = narration(newGameState)
+  newGameState = scene(newGameState)
 
-  newGameState.scene_role_interactions.forEach((scene_role_interaction) => {
-    websocketServerConnectionsPerRoom[newGameState.room_id][scene_role_interaction.token].send(JSON.stringify(scene_role_interaction))
+  newGameState.scene.forEach((item) => {
+    websocketServerConnectionsPerRoom[newGameState.room_id][item.token].send(JSON.stringify(item))
   })
 
   if (newGameState.actual_scene.scene_title === "VOTE") {
@@ -74,7 +73,6 @@ const tick = async (room_id) => {
 
   if (!newGameState) return // game already stopped
 
-  //TODO action_history: need narration & interactions
   newGameState.action_history.push(newGameState.actual_scene)
 
   const actualScene = {

@@ -1,6 +1,10 @@
 //@ts-check
-import { alienIds } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../utils'
+import { SCENE, alienIds } from '../../constant'
+import {
+  getAllPlayerTokens,
+  getRandomItemFromArray,
+  pickRandomUpToThreePlayers,
+} from '../../utils'
 
 const random_aliens = [
   'aliens_view_text',
@@ -25,7 +29,7 @@ const alienAllKeys = [
   'identifier_evenplayers_text',
 ]
 
-export const aliens = (gameState) => {
+export const aliens = (gameState, title) => {
   const newGameState = { ...gameState }
 
   const narration = ['aliens_kickoff_text']
@@ -35,28 +39,56 @@ export const aliens = (gameState) => {
   if (randomInstructions.includes('view')) {
     let randomAnyIdentifier = getRandomItemFromArray(alienAnyKeys)
     if (randomAnyIdentifier === 'activePlayers') {
-      randomAnyIdentifier = pickRandomUpToThreePlayers(newGameState.total_players, 'conjunction_or')
+      randomAnyIdentifier = pickRandomUpToThreePlayers(
+        newGameState.total_players,
+        'conjunction_or'
+      )
     }
     narration[2] = randomAnyIdentifier
   }
-  if (randomInstructions === 'aliens_newalien_text' || randomInstructions === 'aliens_alienhelper_text') {
+  if (
+    randomInstructions === 'aliens_newalien_text' ||
+    randomInstructions === 'aliens_alienhelper_text'
+  ) {
     const randomAllIdentifier = getRandomItemFromArray(alienAllKeys)
     narration[2] = randomAllIdentifier
   }
 
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-    newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
-    if (alienIds.some(id => newGameState.players[token].card.player_role_id === id)) {
-      newGameState.players[token].player_history.random = { random_instruction: narration[1], random_identifier: narration.slice(2) }
-      newGameState.players[token].scene_role_interaction.interaction = aliens_interaction(newGameState, token)
+    if (
+      alienIds.some(
+        (id) => newGameState.players[token].card.player_role_id === id
+      )
+    ) {
+      newGameState.players[token].player_history.random = {
+        random_instruction: narration[1],
+        random_identifier: narration.slice(2),
+      }
+      interaction = aliens_interaction(newGameState, token)
     }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const aliens_interaction = (gameState, token) => {return {}}
-export const aliens_response =  (gameState, token, selected_positions) => {return {}}
+export const aliens_interaction = (gameState, token) => {
+  return {}
+}
+export const aliens_response = (gameState, token, selected_positions) => {
+  return {}
+}

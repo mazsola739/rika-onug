@@ -1,24 +1,42 @@
 //@ts-check
-import { getAllPlayerTokens } from "../../utils/scene"
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
 
-export const squire = (gameState, hasDoppelganger) => {
+export const squire = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
-    hasDoppelganger ? "doppelganger_squire_kickoff_text" : "squire_kickoff_text",
-    "squire_kickoff2_text",
-  ] 
+    hasDoppelganger
+      ? 'doppelganger_squire_kickoff_text'
+      : 'squire_kickoff_text',
+    'squire_kickoff2_text',
+  ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-   newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
-   if (newGameState.players[token].card.player_original_id === 83) {
-    newGameState.players[token].scene_role_interaction.interaction = squire_interaction(newGameState, token)
-   }
+    if (newGameState.players[token].card.player_original_id === 83) {
+      interaction = squire_interaction(newGameState, token)
+    }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const squire_interaction = (gameState, token) => {return {}}
-export const squire_response =  (gameState, token, selected_positions) => {return {}}
+export const squire_interaction = (gameState, token) => {
+  return {}
+}
+export const squire_response = (gameState, token, selected_positions) => {
+  return {}
+}

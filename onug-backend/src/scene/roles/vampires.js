@@ -1,23 +1,42 @@
 //@ts-check
-import { vampireIds } from '../../constant'
-import { getAllPlayerTokens } from "../../utils/scene"
+import { SCENE, vampireIds } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
 
-export const vampires = (gameState) => {
+export const vampires = (gameState, title) => {
   const newGameState = { ...gameState }
   const narration = ['vampires_kickoff_text']
 
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach((token) => {
-    newGameState.players[token].scene_role_interaction.narration = narration
+    const scene = []
+    let interaction = {}
 
-    if (vampireIds.some(id => newGameState.players[token].card.player_role_id === id)) {
-      newGameState.players[token].scene_role_interaction.interaction = vampires_interaction(newGameState, token)
+    if (
+      vampireIds.some(
+        (id) => newGameState.players[token].card.player_role_id === id
+      )
+    ) {
+      interaction = vampires_interaction(newGameState, token)
     }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const vampires_interaction = (gameState, token) => {return {}}
-export const vampires_response =  (gameState, token, selected_positions) => {return {}}
+export const vampires_interaction = (gameState, token) => {
+  return {}
+}
+export const vampires_response = (gameState, token, selected_positions) => {
+  return {}
+}

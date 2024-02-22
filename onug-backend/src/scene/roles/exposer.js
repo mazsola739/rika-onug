@@ -1,30 +1,46 @@
 //@ts-check
-import { getAllPlayerTokens, getRandomItemFromArray } from "../../utils/scene"
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene'
 
 const randomExposer = [
-  "exposer_flip1_text",
-  "exposer_flip2_text",
-  "exposer_flip3_text",
+  'exposer_flip1_text',
+  'exposer_flip2_text',
+  'exposer_flip3_text',
 ]
 
 const createExposer = (prefix) => () =>
   [`${prefix}_kickoff_text`, getRandomItemFromArray(randomExposer)]
 
-export const exposer = (gameState, prefix) => {
+export const exposer = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
   const narration = createExposer(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-   newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
-   if (newGameState.players[token].card.player_original_id === 46) {
-    newGameState.players[token].scene_role_interaction.interaction = exposer_interaction(newGameState, token)
-   }
+    if (newGameState.players[token].card.player_original_id === 46) {
+      interaction = exposer_interaction(newGameState, token)
+    }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const exposer_interaction = (gameState, token) => {return {}}
-export const exposer_response =  (gameState, token, selected_positions) => {return {}}
+export const exposer_interaction = (gameState, token) => {
+  return {}
+}
+export const exposer_response = (gameState, token, selected_positions) => {
+  return {}
+}

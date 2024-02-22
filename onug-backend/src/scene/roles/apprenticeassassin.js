@@ -1,35 +1,57 @@
 //@ts-check
-import { getAllPlayerTokens } from "../../utils/scene"
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
 
-const createApprenticeAssassin = (hasAssassin, prefix) =>
-  [
-    `${prefix}_kickoff_text`,
-    hasAssassin
-      ? "apprenticeassassin_assassin_text"
-      : "apprenticeassassin_alone_text",
-  ]
+const createApprenticeAssassin = (hasAssassin, prefix) => [
+  `${prefix}_kickoff_text`,
+  hasAssassin
+    ? 'apprenticeassassin_assassin_text'
+    : 'apprenticeassassin_alone_text',
+]
 
-export const apprenticeassassin = (gameState, hasAssassin, prefix) => {
+export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
   const newGameState = { ...gameState }
   const narration = createApprenticeAssassin(hasAssassin, prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach((token) => {
-    newGameState.players[token].scene_role_interaction.narration = narration
+    const scene = []
+    let interaction = {}
 
     if (prefix === 'assassin') {
       if (newGameState.players[token].card.player_original_id === 28) {
-        newGameState.players[token].scene_role_interaction.interaction = apprenticeassassin_interaction(newGameState, token)
+        interaction = apprenticeassassin_interaction(newGameState, token)
       }
     } else if (prefix === 'doppelganger_assassin') {
-      if (newGameState.players[token].card.role_id === 28 && newGameState.players[token].card.player_original_id === 1) {
-        newGameState.players[token].scene_role_interaction.interaction = apprenticeassassin_interaction(newGameState, token)
+      if (
+        newGameState.players[token].card.role_id === 28 &&
+        newGameState.players[token].card.player_original_id === 1
+      ) {
+        interaction = apprenticeassassin_interaction(newGameState, token)
       }
     }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const apprenticeassassin_interaction = (gameState, token) => {return {}}
-export const apprenticeassassin_response =  (gameState, token, selected_positions) => {return {}}
+export const apprenticeassassin_interaction = (gameState, token) => {
+  return {}
+}
+export const apprenticeassassin_response = (
+  gameState,
+  token,
+  selected_positions
+) => {
+  return {}
+}

@@ -1,27 +1,46 @@
 //@ts-check
-import { groobAndZerbIds } from '../../constant'
-import { getAllPlayerTokens } from "../../utils/scene"
+import { SCENE, groobAndZerbIds } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
 
-export const groobzerb = (gameState, hasDoppelganger) => {
+export const groobzerb = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger
-      ? "doppelganger_groobzerb_kickoff_text"
-      : "groobzerb_kickoff_text",
-    "groobzerb_kickoff2_text",
+      ? 'doppelganger_groobzerb_kickoff_text'
+      : 'groobzerb_kickoff_text',
+    'groobzerb_kickoff2_text',
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-   newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
-   if (groobAndZerbIds.some(id => newGameState.players[token].card.player_role_id === id)) {
-    newGameState.players[token].scene_role_interaction.interaction = groobzerb_interaction(newGameState, token)
-   }
+    if (
+      groobAndZerbIds.some(
+        (id) => newGameState.players[token].card.player_role_id === id
+      )
+    ) {
+      interaction = groobzerb_interaction(newGameState, token)
+    }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const groobzerb_interaction = (gameState, token) => {return {}}
-export const groobzerb_response =  (gameState, token, selected_positions) => {return {}}
+export const groobzerb_interaction = (gameState, token) => {
+  return {}
+}
+export const groobzerb_response = (gameState, token, selected_positions) => {
+  return {}
+}

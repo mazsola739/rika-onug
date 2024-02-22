@@ -1,37 +1,51 @@
 //@ts-check
-import { getAllPlayerTokens, getRandomItemFromArray } from "../../utils/scene"
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene'
 
 const randomBlobKickoffText = [
-  "blob_1pleft_text",
-  "blob_1pright_text",
-  "blob_eachside_text",
-  "blob_2pleft_text",
-  "blob_2pright_text",
-  "blob_3pleft_text",
-  "blob_3pright_text",
-  "blob_4pleft_text",
-  "blob_4pright_text",
-  "blob_2eachside_text",
+  'blob_1pleft_text',
+  'blob_1pright_text',
+  'blob_eachside_text',
+  'blob_2pleft_text',
+  'blob_2pright_text',
+  'blob_3pleft_text',
+  'blob_3pright_text',
+  'blob_4pleft_text',
+  'blob_4pright_text',
+  'blob_2eachside_text',
 ]
 
-export const blob = (gameState) => {
+export const blob = (gameState, title) => {
   const newGameState = { ...gameState }
   const randomKickoff = getRandomItemFromArray(randomBlobKickoffText)
   const narration = [
     randomKickoff,
-    randomKickoff.includes("1p") ? "blob_is_end_text" : "blob_are_end_text",
+    randomKickoff.includes('1p') ? 'blob_is_end_text' : 'blob_are_end_text',
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-   newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
-   if (newGameState.players[token].card.player_original_id === 44) {
-    newGameState.players[token].scene_role_interaction.interaction = blob_interaction(newGameState, token)
-   }
+    if (newGameState.players[token].card.player_original_id === 44) {
+      interaction = blob_interaction(newGameState, token)
+    }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const blob_interaction = (gameState, token) => {return {}}
+export const blob_interaction = (gameState, token) => {
+  return {}
+}

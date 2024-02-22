@@ -5,28 +5,43 @@ import {
   getCardIdsByPositions,
   getAllPlayerTokens,
 } from '../../utils/scene'
-import { centerCardPositions, werewolvesIds } from '../../constant'
+import { SCENE, centerCardPositions, werewolvesIds } from '../../constant'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
 
-export const werewolves = (gameState, hasDreamWolf) => { 
+export const werewolves = (gameState, title, hasDreamWolf) => {
   const newGameState = { ...gameState }
-  const narration =  [
+  const narration = [
     hasDreamWolf
-    ? "werewolves_dreamwolf_kickoff_text"
-    : "werewolves_kickoff_text",
-]
+      ? 'werewolves_dreamwolf_kickoff_text'
+      : 'werewolves_kickoff_text',
+  ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-    newGameState.players[token].scene_role_interaction.narration = narration
- 
-    if (werewolvesIds.some(id => newGameState.players[token].card.player_role_id === id)) {
-     newGameState.players[token].scene_role_interaction.interaction = werewolves_interaction(newGameState, token)
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
+
+    if (
+      werewolvesIds.some(
+        (id) => newGameState.players[token].card.player_role_id === id
+      )
+    ) {
+      interaction = werewolves_interaction(newGameState, token)
     }
-   })
- 
-   return newGameState
+    
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
+  })
+
+  return newGameState
 }
 
 export const werewolves_interaction = (gameState, token) => {
@@ -38,29 +53,45 @@ export const werewolves_interaction = (gameState, token) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
-    selectable_cards: loneWolf ? centerCardPositions : [], selectable_card_limit: { player: 0, center: 1 },
-    werewolves, dreamwolf
+    selectable_cards: loneWolf ? centerCardPositions : [],
+    selectable_card_limit: { player: 0, center: 1 },
+    werewolves,
+    dreamwolf,
   }
 
-  return generateRoleInteraction(
-    newGameState,
-    {private_message: [loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves'],
+  return generateRoleInteraction(newGameState, {
+    private_message: [
+      loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves',
+    ],
     icon: loneWolf ? 'spy' : 'werewolf',
-    selectableCards: { selectable_cards: loneWolf ? centerCardPositions : [], selectable_card_limit: { player: 0, center: 1 } },
-    uniqInformations: { werewolves, dreamwolf }}
-  )
+    selectableCards: {
+      selectable_cards: loneWolf ? centerCardPositions : [],
+      selectable_card_limit: { player: 0, center: 1 },
+    },
+    uniqInformations: { werewolves, dreamwolf },
+  })
 }
 
 export const werewolves_response = (gameState, token, selected_positions) => {
-  if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
+  if (
+    !isValidSelection(
+      selected_positions,
+      gameState.players[token].player_history
+    )
+  ) {
     return gameState
   }
   const newGameState = { ...gameState }
 
-  const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_positions[0]])
-  const selectedPositionCard = newGameState.card_positions[selected_positions[0]]
+  const showCards = getCardIdsByPositions(newGameState.card_positions, [
+    selected_positions[0],
+  ])
+  const selectedPositionCard =
+    newGameState.card_positions[selected_positions[0]]
 
-  if (newGameState.players[token].card.original_id === selectedPositionCard.id) {
+  if (
+    newGameState.players[token].card.original_id === selectedPositionCard.id
+  ) {
     newGameState.players[token].card.player_card_id = 0
   }
 
@@ -69,14 +100,13 @@ export const werewolves_response = (gameState, token, selected_positions) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     card_or_mark_action: true,
-    viewed_cards: [selected_positions[0]]
+    viewed_cards: [selected_positions[0]],
   }
 
-  return generateRoleInteraction(
-    newGameState,
-    {private_message: ["interaction_saw_card", selected_positions[0]],
+  return generateRoleInteraction(newGameState, {
+    private_message: ['interaction_saw_card', selected_positions[0]],
     icon: 'spy',
     showCards: showCards,
-    uniqInformations: { viewed_cards: [selected_positions[0]] }}
-  )
+    uniqInformations: { viewed_cards: [selected_positions[0]] },
+  })
 }

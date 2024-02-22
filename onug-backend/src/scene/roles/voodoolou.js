@@ -1,19 +1,31 @@
 //@ts-check
-import { getAllPlayerTokens } from "../../utils/scene"
-import { witch_interaction } from "./witch"
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
+import { witch_interaction } from './witch'
 
-export const voodoolou = (gameState) => {
+export const voodoolou = (gameState, title) => {
   const newGameState = { ...gameState }
   const narration = ['voodoolou_kickoff_text']
 
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach((token) => {
-    newGameState.players[token].scene_role_interaction.narration = narration
+    const scene = []
+    let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 70) {
-      newGameState.players[token].scene_role_interaction.interaction = witch_interaction(newGameState, token)
+      interaction = witch_interaction(newGameState, token)
     }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState

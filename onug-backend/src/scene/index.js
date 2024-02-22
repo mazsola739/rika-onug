@@ -1,1 +1,1 @@
-export { scene as narration } from './scene'
+export { scene } from './scene'

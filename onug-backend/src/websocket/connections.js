@@ -20,7 +20,7 @@ export const broadcast = (room_id, jsonMessage) => {
   if (!websocketServerConnectionsPerRoom?.[room_id]) return
 
   logDebug(`broadcast to all users in room [${room_id}] with message [${JSON.stringify(jsonMessage)}]`)
-  logTrace(`active connections in room [${room_id}]: [${JSON.stringify(Object.keys(websocketServerConnectionsPerRoom?.[room_id]))}]`)
+  logTrace(`active connections in room [${room_id}]: ${JSON.stringify(Object.keys(websocketServerConnectionsPerRoom?.[room_id]))}`)
 
   Object.values(websocketServerConnectionsPerRoom[room_id]).forEach(ws => ws.send(JSON.stringify(jsonMessage)))
 }

@@ -1,22 +1,37 @@
 //@ts-check
-import { MESSAGE } from "../../constant";
-import { getAllPlayerTokens, getPlayerNeighborsByToken, getPlayerTokensByPlayerNumber } from "../../utils/scene"
-import { generateRoleInteraction } from "../generate-scene-role-interactions"
+import { MESSAGE, SCENE } from '../../constant'
+import {
+  getAllPlayerTokens,
+  getPlayerNeighborsByToken,
+  getPlayerTokensByPlayerNumber,
+} from '../../utils/scene'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidSelection } from '../validate-response-data'
-import { websocketServerConnectionsPerRoom } from './../../websocket/connections';
+import { websocketServerConnectionsPerRoom } from './../../websocket/connections'
 
-export const thing = (gameState) => {
+export const thing = (gameState, title) => {
   const newGameState = { ...gameState }
   const narration = ['thing_kickoff_text']
 
   const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach((token) => {
-    newGameState.players[token].scene_role_interaction.narration = narration
-    
+    const scene = []
+    let interaction = {}
+
     if (newGameState.players[token].card.player_original_id === 85) {
-      newGameState.players[token].scene_role_interaction.interaction = thing_interaction(newGameState, token)
+      interaction = thing_interaction(newGameState, token)
     }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
@@ -25,43 +40,58 @@ export const thing = (gameState) => {
 export const thing_interaction = (gameState, token) => {
   const newGameState = { ...gameState }
 
-  const neighbors = getPlayerNeighborsByToken(newGameState.players, token) 
+  const neighbors = getPlayerNeighborsByToken(newGameState.players, token)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
-     selectable_cards: neighbors, selectable_card_limit: { player: 1, center: 0 } 
+    selectable_cards: neighbors,
+    selectable_card_limit: { player: 1, center: 0 },
   }
 
-  return generateRoleInteraction(
-    newGameState,
-    {private_message: ['interaction_must_one_neighbor'],
+  return generateRoleInteraction(newGameState, {
+    private_message: ['interaction_must_one_neighbor'],
     icon: 'tap',
-    selectableCards: { selectable_cards: neighbors, selectable_card_limit: { player: 1, center: 0 } },}
-  )
+    selectableCards: {
+      selectable_cards: neighbors,
+      selectable_card_limit: { player: 1, center: 0 },
+    },
+  })
 }
 
-export const thing_response =  (gameState, token, selected_positions) => {
-  if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
+export const thing_response = (gameState, token, selected_positions) => {
+  if (
+    !isValidSelection(
+      selected_positions,
+      gameState.players[token].player_history
+    )
+  ) {
     return gameState
   }
   const newGameState = { ...gameState }
 
-  const tappedPlayerToken = getPlayerTokensByPlayerNumber(newGameState.players, selected_positions[0]) //TODO only 1 player
+  const tappedPlayerToken = getPlayerTokensByPlayerNumber(
+    newGameState.players,
+    selected_positions[0]
+  ) //TODO only 1 player
 
-  websocketServerConnectionsPerRoom[newGameState.room_id][tappedPlayerToken[0]].send(JSON.stringify({
-    type: MESSAGE,
-    message: ["message_tapped"], icon: "tap",
-  }))
+  websocketServerConnectionsPerRoom[newGameState.room_id][
+    tappedPlayerToken[0]
+  ].send(
+    JSON.stringify({
+      type: MESSAGE,
+      message: ['message_tapped'],
+      icon: 'tap',
+    })
+  )
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
-    tapped_player: [selected_positions[0]]
+    tapped_player: [selected_positions[0]],
   }
 
-  return generateRoleInteraction(
-    newGameState,
-    {private_message:  ["interaction_tap", selected_positions[0]],
+  return generateRoleInteraction(newGameState, {
+    private_message: ['interaction_tap', selected_positions[0]],
     icon: 'tap',
-    uniqInformations: { tapped_player: [selected_positions[0]] }}
-  )
+    uniqInformations: { tapped_player: [selected_positions[0]] },
+  })
 }

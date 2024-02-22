@@ -1,20 +1,31 @@
 //@ts-check
-import { getAllPlayerTokens } from "../../utils/scene"
-import { thing_interaction } from "./thing"
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
+import { thing_interaction } from './thing'
 
-export const annoyinglad = (gameState) => {
+export const annoyinglad = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ["annoyinglad_kickoff_text"]
+  const narration = ['annoyinglad_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-    newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 55) {
-      newGameState.players[token].scene_role_interaction.interaction = thing_interaction(newGameState, token)
+      interaction = thing_interaction(newGameState, token)
     }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
-

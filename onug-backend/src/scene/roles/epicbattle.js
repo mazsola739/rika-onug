@@ -1,6 +1,8 @@
 //@ts-check
-import { getRandomItemFromArray } from '../../utils/scene'
-
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene'
+import { everyonemark_interaction } from './everyonemark'
+//TODO
 const random_easteregg_nobadguys = [
   "easteregg_nobadguys_text_1",
   "easteregg_nobadguys_text_2",
@@ -26,22 +28,41 @@ const random_easteregg_nogoodguys = [
   "easteregg_nogoodguys_text_10",
 ]
 
-export const epicbattle = (hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
+export const epicbattle = (gameState, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
   if (hasEpicBattle) {
     return ["everyone_epic_intro_text"]
   }
-  
-  const result = []
+  const newGameState = { ...gameState }
+  const narration = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+
 
   if (hasEasterEgg) {
     if (totalPlayers === 12) {
-      result.push("easteregg_really_text", "easteregg_whatever_text")
+      narration.push("easteregg_really_text", "easteregg_whatever_text")
     } else if (nobadguys) {
-      result.push(getRandomItemFromArray(random_easteregg_nobadguys), "easteregg_whatever_text")
+      narration.push(getRandomItemFromArray(random_easteregg_nobadguys), "easteregg_whatever_text")
     } else if (nogoodguys) {
-      result.push(getRandomItemFromArray(random_easteregg_nogoodguys), "easteregg_whatever_text")
+      narration.push(getRandomItemFromArray(random_easteregg_nogoodguys), "easteregg_whatever_text")
     }
   }
 
-  return result
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
+
+    interaction = everyonemark_interaction(newGameState, token)
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
+  })
+
+  return newGameState
 }

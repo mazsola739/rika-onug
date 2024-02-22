@@ -1,30 +1,52 @@
 //@ts-check
-import { getAllPlayerTokens } from "../../utils/scene"
+import { SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
 
-export const beholder = (gameState, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
+export const beholder = (
+  gameState,
+  title,
+  hasSeer,
+  hasApprenticeSeer,
+  hasDoppelganger
+) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger
-      ? "doppelganger_beholder_kickoff_text"
-      : "beholder_seer_kickoff_text",
+      ? 'doppelganger_beholder_kickoff_text'
+      : 'beholder_seer_kickoff_text',
     hasSeer && hasApprenticeSeer
-      ? "beholder_seer_apprenticeseer_kickoff_text"
+      ? 'beholder_seer_apprenticeseer_kickoff_text'
       : hasSeer
-      ? "beholder_seer_kickoff_text"
-      : "beholder_apprenticeseer_kickoff_text",
-  ] 
+      ? 'beholder_seer_kickoff_text'
+      : 'beholder_apprenticeseer_kickoff_text',
+  ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-   newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
-   if (newGameState.players[token].card.player_original_id === 73) {
-    newGameState.players[token].scene_role_interaction.interaction = beholder_interaction(newGameState, token)
-   }
+    if (newGameState.players[token].card.player_original_id === 73) {
+      interaction = beholder_interaction(newGameState, token)
+    }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState
 }
 
-export const beholder_interaction = (gameState, token) => {return {}}
-export const beholder_response =  (gameState, token, selected_positions) => {return {}}
+export const beholder_interaction = (gameState, token) => {
+  return {}
+}
+export const beholder_response = (gameState, token, selected_positions) => {
+  return {}
+}

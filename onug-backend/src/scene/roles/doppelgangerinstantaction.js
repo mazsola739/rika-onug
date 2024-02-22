@@ -1,59 +1,79 @@
 //@ts-check
-import { doppelgangerInstantActionsIds } from '../../constant'
-import { getAllPlayerTokens } from "../../utils/scene"
-import * as roles from "./index"
+import { SCENE, doppelgangerInstantActionsIds } from '../../constant'
+import { getAllPlayerTokens } from '../../utils/scene'
+import * as roles from './index'
 
 const instantRoleIds = {
-  17: "role_alphawolf",
-  55: "role_annoyinglad",
-  18: "role_apprenticeseer",
-  31: "role_cupid",
-  56: "role_detector",
-  32: "role_diseased",
-  57: "role_drpeeker",
-  2:  "role_drunk",
-  34: "role_instigator",
-  22: "role_mysticwolf",
-  23: "role_paranormalinvestigator",
-  65: "role_rapscallion",
-  8:  "role_robber",
-  66: "role_roleretriever",
-  25: "role_sentinel",
-  9:  "role_seer",
-  68: "role_switcheroo",
-  69: "role_temptress",
-  85: "role_thing",
-  11: "role_troublemaker",
-  26: "role_villageidiot",
-  70: "role_voodoolou",
-  27: "role_witch",
+  17: 'role_alphawolf',
+  55: 'role_annoyinglad',
+  18: 'role_apprenticeseer',
+  31: 'role_cupid',
+  56: 'role_detector',
+  32: 'role_diseased',
+  57: 'role_drpeeker',
+  2: 'role_drunk',
+  34: 'role_instigator',
+  22: 'role_mysticwolf',
+  23: 'role_paranormalinvestigator',
+  65: 'role_rapscallion',
+  8: 'role_robber',
+  66: 'role_roleretriever',
+  25: 'role_sentinel',
+  9: 'role_seer',
+  68: 'role_switcheroo',
+  69: 'role_temptress',
+  85: 'role_thing',
+  11: 'role_troublemaker',
+  26: 'role_villageidiot',
+  70: 'role_voodoolou',
+  27: 'role_witch',
 }
 
-const getRolesNames = (selectedCardIds, actionIds, roles) => selectedCardIds.filter((id) => actionIds.includes(id)).map((id) => roles[id]);
+const getRolesNames = (selectedCardIds, actionIds, roles) =>
+  selectedCardIds.filter((id) => actionIds.includes(id)).map((id) => roles[id])
 
 const addVerboseOr = (rolesFromIds) => {
   if (rolesFromIds.length > 1) {
-    rolesFromIds.splice(rolesFromIds.length - 1, 0, "doppelganger_verbose_or_text")
+    rolesFromIds.splice(
+      rolesFromIds.length - 1,
+      0,
+      'doppelganger_verbose_or_text'
+    )
   }
   return rolesFromIds
 }
 
-export const doppelganger_instant_action = (gameState) => {
+export const doppelganger_instant_action = (gameState, title) => {
   const newGameState = { ...gameState }
-  const rolesFromIds = getRolesNames(newGameState.selected_cards, doppelgangerInstantActionsIds, instantRoleIds)
-  const narration =  [
-    "doppelganger_verbose_intro_text",
-    ...addVerboseOr(rolesFromIds), 
-    "doppelganger_verbose_outro_text",
+  const rolesFromIds = getRolesNames(
+    newGameState.selected_cards,
+    doppelgangerInstantActionsIds,
+    instantRoleIds
+  )
+  const narration = [
+    'doppelganger_verbose_intro_text',
+    ...addVerboseOr(rolesFromIds),
+    'doppelganger_verbose_outro_text',
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach(token => {
-   newGameState.players[token].scene_role_interaction.narration = narration
+  tokens.forEach((token) => {
+    const scene = []
+    let interaction = {}
 
-   if (newGameState.players[token].card.player_original_id === 1) {
-    newGameState.players[token].scene_role_interaction.interaction = doppelganger_instant_action_interaction(newGameState, token)
-   }
+    if (newGameState.players[token].card.player_original_id === 1) {
+      interaction = doppelganger_instant_action_interaction(newGameState, token)
+    }
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      narration,
+      interaction,
+    })
+
+    newGameState.scene = scene
   })
 
   return newGameState

@@ -18,22 +18,27 @@ export const scene = (gameState) => {
   const { room_id } = gameState.room_id
   logTrace(`Scene playing for players in room: ${room_id}`)
 
-  const newGameState = { ...gameState }
+  let newGameState = { ...gameState }
+  newGameState.scene = []
   newGameState.actual_scene.scene_title =
     scriptOrder[newGameState.actual_scene.scene_number].scene_title
-
-  //? what this lodash update actually does: updates newGameState with nested levels of various fields.
-  //? For example: 'actual_scene.started' key and the related value will be set inside newGameState.actual_scene.started = [something],
-  //? also sometimes other fields, like: oracle_answer: 'some_oracle_answer' will be set as well.
   
   const entries = sceneHandler(newGameState)
 
   Object.entries(entries).forEach(([key, value]) => {
     _.update(newGameState, key, () => value)
   })
-  //TODO null?
+
   if (!entries["actual_scene.started"]) {
     newGameState.actual_scene.started = false
+  }
+
+  if (newGameState.actual_scene) {
+    newGameState = sceneHandler(newGameState)
+    logDebug(`__INTERACTION__ SCENE_NUMBER: ${newGameState.actual_scene.scene_number} role_interaction: ${JSON.stringify(newGameState?.role_interactions)}`)
+  } else {
+    logDebug("No actual_scene found in gameState.")
+    logDebug("gameState:", JSON.stringify(newGameState)) // Log the entire gameState object
   }
 
   logDebug(
@@ -43,4 +48,4 @@ export const scene = (gameState) => {
   )
 
   return newGameState
-};
+}
