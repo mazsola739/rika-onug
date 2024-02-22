@@ -51,8 +51,8 @@ const getNextScene = gameState => {
 
   newGameState = narration(newGameState)
 
-  newGameState.scene_role_interactions.forEach((role_interaction) => {
-    websocketServerConnectionsPerRoom[newGameState.room_id][role_interaction.token].send(JSON.stringify(role_interaction))
+  newGameState.scene_role_interactions.forEach((scene_role_interaction) => {
+    websocketServerConnectionsPerRoom[newGameState.room_id][scene_role_interaction.token].send(JSON.stringify(scene_role_interaction))
   })
 
   if (newGameState.actual_scene.scene_title === "VOTE") {

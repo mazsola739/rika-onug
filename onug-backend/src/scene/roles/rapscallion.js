@@ -1,9 +1,21 @@
-export const rapscallion = (gameState) => ["rapscallion_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasRapscallionPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-    return roles.rapscallion_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
+export const rapscallion = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["rapscallion_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const rapscallion_interaction = (gameState, tokens, title) => {}
-export const rapscallion_response =  (gameState, token, selected_positions, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 65) {
+    newGameState.players[token].scene_role_interaction.interaction = rapscallion_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const rapscallion_interaction = (gameState, token) => {return {}}
+export const rapscallion_response =  (gameState, token, selected_positions) => {return {}}

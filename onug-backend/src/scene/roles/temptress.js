@@ -1,9 +1,21 @@
-export const temptress = (gameState) => ["temptress_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasTemptressPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [69])
-    return roles.temptress_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  }
- */
-export const temptress_interaction = (gameState, tokens, title) => {}
-export const temptress_response =  (gameState, token, selected_positions, title) => {}
+export const temptress = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["temptress_kickoff_text"] 
+  const tokens = getAllPlayerTokens(newGameState.players)
+
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 69) {
+    newGameState.players[token].scene_role_interaction.interaction = temptress_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const temptress_interaction = (gameState, token) => {return {}}
+export const temptress_response =  (gameState, token, selected_positions) => {return {}}

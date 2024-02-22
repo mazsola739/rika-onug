@@ -1,6 +1,7 @@
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-
-const createApprenticeAssassin = (prefix) => (hasAssassin) =>
+const createApprenticeAssassin = (prefix) =>
   [
     `${prefix}_kickoff_text`,
     hasAssassin
@@ -8,25 +9,23 @@ const createApprenticeAssassin = (prefix) => (hasAssassin) =>
       : "apprenticeassassin_alone_text",
   ]
 
-export const apprenticeassassin = (gameState) => createApprenticeAssassin("apprenticeassassin")
+export const apprenticeassassin = (gameState) => {
+  const newGameState = { ...gameState }
+  createApprenticeAssassin("apprenticeassassin")
+  createApprenticeAssassin("doppelganger_apprenticeassassin")
+  const narration = []
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const doppelganger_apprenticeassassin = (gameState) => createApprenticeAssassin(
-  "doppelganger_apprenticeassassin"
-)
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-/* if (conditions.hasApprenticeAssassinPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [28])
-  return roles.apprenticeassassin_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
+   if (newGameState.players[token].card.player_original_id === 28) {
+    newGameState.players[token].scene_role_interaction.interaction = apprenticeassassin_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
 }
 
-      if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasApprenticeAssassinPlayer(newGameState.players)) {
-       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-        return roles.doppelganger_apprenticeassassin_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-      }*/
-
-//TODO doppelganger
-//? INFO: Apprentice Assassin - Wakes up to see who the Assassin is he can only win if the Assassin  dies. If there is no Assassin, he becomes the Assassin
-//! NO flipped card but shield
-export const apprenticeassassin_interaction = (gameState, tokens, title) => {}
-
-export const apprenticeassassin_response =  (gameState, token, selected_positions, title) => {}
+export const apprenticeassassin_interaction = (gameState, token) => {return {}}
+export const apprenticeassassin_response =  (gameState, token, selected_positions) => {return {}}

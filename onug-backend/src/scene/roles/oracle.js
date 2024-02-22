@@ -1,6 +1,5 @@
-//TODO save which interaction!
-
-import { getRandomItemFromArray } from '../utils'
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
 const random_oracle_question = [
   "oracle_alienteam_text",
@@ -51,47 +50,64 @@ const oracle_responses = {
   },
 }
 
-/* if (conditions.hasOraclePlayer(newGameState.players)) {   //TODO make sure always have answer if oracle in selected cards
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [50])
-  return roles.oracle_question_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
+export const oracle_question = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = [
+    "oracle_kickoff_text", 
+    getRandomItemFromArray(random_oracle_question),
+  ]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-/* if (conditions.hasOracle && oracleAnswerPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [50])
-  return roles.oracle_reaction_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-export const oracle_question = (gameState) => [
-  "oracle_kickoff_text", 
-  getRandomItemFromArray(random_oracle_question),
-]
+   if (newGameState.players[token].card.player_original_id === 50) {
+    newGameState.players[token].scene_role_interaction.interaction = oracle_question_interaction(newGameState, token)
+   }
+  })
 
-export const oracle_reaction = (question, answer) => {
-  if (question === "oracle_evenodd_text") {
-    if (answer === "even") {
-      return ["oracle_evenodd_even_text"]
-    } else {
-      return ["oracle_evenodd_odd_text"]
-    }
-  } else if (question === "oracle_guessnumber_text") {
-    if (answer === "success") {
-      return ["oracle_guessnumber_success_text"]
-    } else {
-      return ["oracle_guessnumber_failure_text"]
-    }
-  } else {
-    if (answer === "yes") {
-      return [getRandomItemFromArray(oracle_responses[question].yes)]
-    } else {
-      return [getRandomItemFromArray(oracle_responses[question].no)]
-    }
-  }
+  return newGameState
 }
 
+export const oracle_question_interaction = (gameState, token) => {return {}}
+export const oracle_question_response =  (gameState, token, selected_positions) => {return {}}
 
-//? INFO: Oracle - App asks her a question, she enters it on the app, when then reveals what she did to everyone
-//! At this moment oracle never see flipped or shielded cards, ripple different
-//* No doppelganger
-export const oracle_interaction = (gameState, tokens, title) => {}
+export const oracle_answer = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = []
+ /*  {
+    if (question === "oracle_evenodd_text") {
+      if (answer === "even") {
+        return ["oracle_evenodd_even_text"]
+      } else {
+        return ["oracle_evenodd_odd_text"]
+      }
+    } else if (question === "oracle_guessnumber_text") {
+      if (answer === "success") {
+        return ["oracle_guessnumber_success_text"]
+      } else {
+        return ["oracle_guessnumber_failure_text"]
+      }
+    } else {
+      if (answer === "yes") {
+        return [getRandomItemFromArray(oracle_responses[question].yes)]
+      } else {
+        return [getRandomItemFromArray(oracle_responses[question].no)]
+      }
+    }
+  } */
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const oracle_response = (gameState, token, selected_positions, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 50) {
+    newGameState.players[token].scene_role_interaction.interaction = oracle_answer_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const oracle_answer_interaction = (gameState, token) => {return {}}
+export const oracle_answer_response =  (gameState, token, selected_positions) => {return {}}

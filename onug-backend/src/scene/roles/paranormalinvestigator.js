@@ -1,56 +1,41 @@
-export const paranormalinvestigator = (gameState) => ["paranormalinvestigator_kickoff_text"]
-
-/* if (conditions.hasParanormalInvestigatorPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [23])
-  return roles.paranormalinvestigator_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-
-import { townIds } from '../constants'
-import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
+import { getAllPlayerTokens } from "../utils"
 import { isValidSelection } from '../validate-response-data'
 
-import {
-  getPlayerNumbersWithNonMatchingTokens,
-  getSelectablePlayersWithNoShield,
-  getCardIdsByPositions,
-} from '../utils'
-
-//? INFO: Paranormal Investigator - Looks at two other player's cards one at a time if he sees team they are not on the Villager Team he stops looking and becomes that role. May not look at any center cards.
-export const paranormalinvestigator_interaction = (gameState, tokens, title) => {
+export const paranormalinvestigator = (gameState) => {
   const newGameState = { ...gameState }
-  const scene_role_interactions = []
+  const narration = ["paranormalinvestigator_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach((token) => {
-    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+  tokens.forEach(token => {
+    newGameState.players[token].scene_role_interaction.narration = narration
 
-    scene_role_interactions.push(
-      generateSceneRoleInteractions(
-        newGameState,
-        title,
-        token,
-        ['interaction_may_two_any_other'],
-        'investigator',
-        { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 2, center: 0 } },
-        null,
-        null,
-        null,
-        null,
-      )
-    )
-
-    const playerHistory = {
-      ...newGameState.players[token].player_history,
-      ...newGameState.actual_scene,
-      selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 2, center: 0 }
+    if (newGameState.players[token].card.player_original_id === 23) {
+      newGameState.players[token].scene_role_interaction.interaction = paranormalinvestigator_interaction(newGameState, token)
     }
-    newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, scene_role_interactions }
+  return newGameState
 }
 
-export const paranormalinvestigator_response =  (gameState, token, selected_positions, title) => {
+export const paranormalinvestigator_interaction = (gameState, token) => {
+  const newGameState = { ...gameState }
+
+  const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(newGameState.players, token)
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 }
+  }
+
+  return generateRoleInteraction(
+    newGameState,
+    private_message = ['interaction_may_two_any_other'],
+    icon = 'investigator',
+    selectableCards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 } },
+  )
+}
+
+export const paranormalinvestigator_response = (gameState, token, selected_positions) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -83,23 +68,19 @@ export const paranormalinvestigator_response =  (gameState, token, selected_posi
     }
   }
 
-  newGameState.players[token].player_history.show_cards = viewCards
   newGameState.players[token].card_or_mark_action = true
 
-const scene_role_interactions = [
-  generateSceneRoleInteractions(
-    newGameState,
-    title,
-    token,
-    ["interaction_saw_card", selected_positions[0], showCards.length === 2 ? selected_positions[1] : ''],
-    'investigator',
-    null,
-    viewCards,
-    null,
-    null,
-    { viewed_cards: showCards }
-  )
-]
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    card_or_mark_action: true,
+    viewed_cards: showCards
+  }
 
-return { ...newGameState, scene_role_interactions }
+  return generateRoleInteraction(
+    newGameState,
+    private_message = ["interaction_saw_card", selected_positions[0], showCards.length === 2 ? selected_positions[1] : ''],
+    icon = 'investigator',
+    showCards = showCards,
+    uniqInformations = { viewed_cards: showCards }
+  )
 }

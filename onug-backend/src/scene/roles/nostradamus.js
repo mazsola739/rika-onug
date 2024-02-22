@@ -1,20 +1,37 @@
-export const nostradamus = (gameState) => ["nostradamus_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-export const nostradamus_reaction = (nostradamusTeam) => [
-  "nostradamus_teamstart_text",
-  `nostradamus_team_${nostradamusTeam}_text`,
-]
+export const nostradamus = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["nostradamus_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-/* if (conditions.hasNostradamusPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.nostradamus_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 80) {
+    newGameState.players[token].scene_role_interaction.interaction = nostradamus_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
 }
-      if (conditions.hasNostradamusPlayer(newGameState.players)) {
-       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-        return roles.nostradamus_reaction_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-      } */
-//TODO doppelganger same result as nostradamus
-export const nostradamus_interaction = (gameState, tokens, title) => {}
 
-export const nostradamus_response =  (gameState, token, selected_positions, title) => {}
+export const nostradamus_interaction = (gameState, token) => {return {}}
+export const nostradamus_response =  (gameState, token, selected_positions) => {return {}}
+
+export const nostradamus_reaction = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration =  [
+    "nostradamus_teamstart_text",
+    `nostradamus_team_${nostradamusTeam}_text`,
+  ]
+  const tokens = getAllPlayerTokens(newGameState.players)
+
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+  })
+
+  return newGameState
+}
 

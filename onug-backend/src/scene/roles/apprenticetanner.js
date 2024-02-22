@@ -1,48 +1,42 @@
-export const apprenticetanner = (hasDoppelganger) => [
-  hasDoppelganger
-    ? "doppelganger_apprenticetanner_kickoff_text"
-    : "apprenticetanner_kickoff_text",
-  "apprenticetanner_kickoff2_text",
-]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasApprenticeTannerPlayer(newGameState.players) && conditions.hasTannerPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [71])
-  return roles.apprenticetanner_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */  //! doppelganger?
-
-import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
-import { getTannerNumberByRoleIds } from '../utils'
-
-//? INFO: Apprentice Tanner - Tanner sticks out his thumb for him to see. Only wins if another Tanner dies. Multiple Apprentice Tanners are on the same team
-export const apprenticetanner_interaction = (gameState, tokens, title) => {
+export const apprenticetanner = (gameState) => {
   const newGameState = { ...gameState }
-  const scene_role_interactions = []
+  const narration = [
+    hasDoppelganger
+      ? "doppelganger_apprenticetanner_kickoff_text"
+      : "apprenticetanner_kickoff_text",
+    "apprenticetanner_kickoff2_text",
+  ]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
   tokens.forEach(token => {
-    const tanner = getTannerNumberByRoleIds(newGameState.players)
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-    scene_role_interactions.push(
-      generateSceneRoleInteractions(
-        newGameState,
-        title,
-        token,
-        ['interaction_tanner'],
-        'tanner',
-        null,
-        null,
-        null,
-        null,
-        tanner
-      )
-    )
-
-    const playerHistory = {
-      ...newGameState.players[token].player_history,
-      ...newGameState.actual_scene,
-      tanner
-    }
-    newGameState.players[token].player_history = playerHistory
+   if (newGameState.players[token].card.player_original_id === 71) {
+    newGameState.players[token].scene_role_interaction.interaction = apprenticetanner_interaction(newGameState, token)
+   }
   })
 
-  return { ...newGameState, scene_role_interactions }
+  return newGameState
 }
+
+export const apprenticetanner_interaction = (gameState, token) => {
+  const newGameState = { ...gameState }
+  
+    const tanner = getTannerNumberByRoleIds(newGameState.players)
+
+    newGameState.players[token].player_history = {
+      ...newGameState.players[token].player_history,
+      tanner: tanner
+    }
+  
+    return generateRoleInteraction(
+      newGameState,
+      private_message = ['interaction_tanner'],
+      icon = 'tanner',
+      uniqInformations = { tanner: tanner },
+    )
+}
+

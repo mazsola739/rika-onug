@@ -1,96 +1,68 @@
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
+
 const createCurator = (prefix) => () =>
   [`${prefix}_kickoff_text`, "curator_kickoff2_text"]
 
-export const curator = (gameState) => createCurator("curator")
-export const doppelganger_curator = (gameState) => createCurator("doppelganger_curator")
-
-import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
-
-import {
-  getSelectablePlayersWithNoShield,
-  getPlayerNumbersWithMatchingTokens,
-  getAllPlayerTokens,
-  getSelectablePlayersWithNoArtifact,
-  getRandomArtifact,
-  getPlayerTokenByPlayerNumber,
-} from '../utils'
-
-/* if (conditions.hasCuratorPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [20])
-  return roles.curator_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-}
-if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasCuratorPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [1])
-  return roles.curator_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-
-//? INFO: Curator - Gives any player (including himself) a random, unknown Artifact. Cannot give to a Shielded player.
-//TODO doppelganger separated 
-//! cant give to shielded
-export const curator_interaction = (gameState, tokens, title) => {
+export const curator = (gameState) => {
   const newGameState = { ...gameState }
-  const scene_role_interactions = []
+  createCurator("curator")
+createCurator("doppelganger_curator")
+  const narration = []
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach((token) => {
-    const allPlayerTokens = getAllPlayerTokens(newGameState.players)
-    const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
-    const selectablePlayersWithNoArtifact = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, newGameState.artifact)
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-    scene_role_interactions.push(
-      generateSceneRoleInteractions(
-        newGameState,
-        title,
-        token,
-        ['interaction_may_one_any'],
-        'artifact',
-        { selectable_cards: selectablePlayersWithNoArtifact, selectable_card_limit: { player: 1, center: 0 } },
-        null,
-        null,
-        null,
-        null,
-      )
-    )
-
-    const playerHistory = {
-      ...newGameState.players[token].player_history,
-      ...newGameState.actual_scene,
-      selectable_cards: selectablePlayersWithNoArtifact, selectable_card_limit: { player: 1, center: 0 }
-    }
-    newGameState.players[token].player_history = playerHistory
+   if (newGameState.players[token].card.player_original_id === 20) {
+    newGameState.players[token].scene_role_interaction.interaction = curator_interaction(newGameState, token)
+   }
   })
 
-  return { ...newGameState, scene_role_interactions }
+  return newGameState
 }
 
-export const curator_response =  (gameState, token, selected_positions, title) => {
+export const curator_interaction = (gameState, token, title) => {
+  const newGameState = { ...gameState }
+
+  const allPlayerTokens = getAllPlayerTokens(newGameState.players)
+  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
+  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+  const selectablePlayersWithNoArtifact = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, newGameState.artifact)
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    selectable_cards: selectablePlayersWithNoArtifact, selectable_card_limit: { player: 1, center: 0 }
+  }
+
+  return generateRoleInteraction(
+    newGameState,
+    private_message = ['interaction_may_one_any'],
+    icon = 'artifact',
+    selectableCards = { selectable_cards: selectablePlayersWithNoArtifact, selectable_card_limit: { player: 1, center: 0 } },
+  )
+}
+
+export const curator_response = (gameState, token, selected_positions, title) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
-
   const newGameState = { ...gameState }
+
   const newArtifact = getRandomArtifact(newGameState.artifact)
   const artifactedPlayersToken = getPlayerTokenByPlayerNumber(newGameState.players, selected_positions[0])
   newGameState.artifact.push({ [selected_positions[0]]: newArtifact })
   newGameState.players[artifactedPlayersToken].artifact = true
 
-  newGameState.players[token].player_history.new_artifact_card = selected_positions[0]
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    new_artifact_card: selected_positions[0]
+  }
 
-  const scene_role_interactions = [
-    generateSceneRoleInteractions(
-      newGameState,
-      title,
-      token,
-      ["interaction_placed_artifact", selected_positions[0]],
-      'artifact',
-      null,
-      null,
-      null,
-      null,
-      { new_artifact_card: selected_positions[0] }
-    )
-  ]
- 
-  return { ...newGameState, scene_role_interactions }
+  return generateRoleInteraction(
+    newGameState,
+    private_message = ["interaction_placed_artifact", selected_positions[0]],
+    icon = 'artifact',
+    uniqInformations = { new_artifact_card: selected_positions[0] },
+  )
 }

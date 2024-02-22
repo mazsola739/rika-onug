@@ -1,20 +1,29 @@
-export const auraseer = (hasDoppelganger, hasMarks) => [
-  hasDoppelganger
-    ? "doppelganger_auraseer_kickoff_text"
-    : "auraseer_kickoff_text",
-  hasMarks ? "auraseer_marks_and_cards_text" : "auraseer_cards_text",
-]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasAuraSeerPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.auraseer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
+export const auraseer = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = [
+    hasDoppelganger
+      ? "doppelganger_auraseer_kickoff_text"
+      : "auraseer_kickoff_text",
+    hasMarks ? "auraseer_marks_and_cards_text" : "auraseer_cards_text",
+  ] 
+  const tokens = getAllPlayerTokens(newGameState.players)
 
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-//? INFO: Aura Seer - All players that have viewed or moved a card or mark stick up their thumbs for her to see (list of roles in FAQ)
-export const auraseer_interaction = (gameState, tokens, title) => {}
+   if (newGameState.players[token].card.player_original_id === 72) {
+    newGameState.players[token].scene_role_interaction.interaction = auraseer_interaction(newGameState, token)
+   }
+  })
 
-export const auraseer_response =  (gameState, token, selected_positions, title) => {}
+  return newGameState
+}
+
+export const auraseer_interaction = (gameState, token) => {return {}}
+export const auraseer_response =  (gameState, token, selected_positions) => {return {}}
 
 /*AURA SEER moved viewed Copycat, Doppelgänger, Rascal, Body Snatcher, Alpha Wolf, Mystic Wolf, Seer, Exposer, 
 Mortician, Psychic, Apprentice Seer, Paranormal Investigator, Marksman, Robber, Witch, 

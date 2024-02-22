@@ -23,4 +23,14 @@ const random_joke = [
   "joke_20_text",
 ]
 
-export const joke = (gameState) => [getRandomItemFromArray(random_joke)]
+export const joke = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = [getRandomItemFromArray(random_joke)]
+  const tokens = getAllPlayerTokens(newGameState.players)
+
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+  })
+
+  return newGameState
+}

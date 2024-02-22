@@ -1,8 +1,20 @@
-export const lovers = (gameState) => ["lovers_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasCupidPlayer(newGameState.players)) {  //TODO mark_of_love  const actualSceneRoleTokens = ?
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-    return roles.lovers_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
-export const lover_interaction = (gameState, tokens, title) => {}
+export const lovers = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["lovers_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].mark.id === "mark_of_love") {
+    newGameState.players[token].scene_role_interaction.interaction = lover_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const lover_interaction = (gameState, token) => {return {}}

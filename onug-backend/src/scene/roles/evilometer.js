@@ -1,13 +1,26 @@
-export const evilometer = (hasDoppelganger) => [
-  hasDoppelganger
-    ? "doppelganger_evilometer_kickoff_text"
-    : "evilometer_kickoff_text",
-  "evilometer_kickoff2_text",
-]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasEvilometerPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.evilometer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
+export const evilometer = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = [
+    hasDoppelganger
+      ? "doppelganger_evilometer_kickoff_text"
+      : "evilometer_kickoff_text",
+    "evilometer_kickoff2_text",
+  ]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const evilometer_interaction = (gameState, tokens, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 58) {
+    newGameState.players[token].scene_role_interaction.interaction = evilometer_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const evilometer_interaction = (gameState, token) => {return {}}
+

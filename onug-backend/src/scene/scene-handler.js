@@ -14,7 +14,7 @@ export const sceneHandler = (gameState) => {
 
   //TODO easteregg / epic battle
   switch (scene_title) {
-   case "EPIC_BATTLE": //! total players
+   /* case "EPIC_BATTLE": //! total players
       if (conditions.hasEpicBattle || conditions.hasEasterEgg) {
         newGameState.actual_scene.started = true
         return roles.epicbattle(newGameState)
@@ -70,14 +70,14 @@ export const sceneHandler = (gameState) => {
       }
       break
 
-    case "THE_COUNT":
+    case "THE_COUNT": //TODO
       if (conditions.hasTheCount) {
         newGameState.actual_scene.started = true
         return roles.thecount(newGameState)
       }
       break
 
-    case "DOPPELGÄNGER_THE_COUNT":
+    case "DOPPELGÄNGER_THE_COUNT": //TODO
       if (conditions.hasDoppelganger && conditions.hasTheCount) {
         newGameState.actual_scene.started = true
         return roles.doppelganger_thecount(newGameState)
@@ -257,14 +257,14 @@ export const sceneHandler = (gameState) => {
         newGameState.actual_scene.started = true
         return roles.evilometer(newGameState)
       }
-      break
+      break */
 
     case "WEREWOLVES": //conditions.hasDreamWolf
       if (conditions.hasAnyWerewolf) {
         newGameState.actual_scene.started = true
-        return roles.werewolves(newGameState)
+        return roles.werewolves(newGameState, conditions.hasDreamWolf)
       }
-      break
+      break /*
 
     case "ALPHA_WOLF":
       if (conditions.hasAlphaWolf) {
@@ -432,14 +432,14 @@ export const sceneHandler = (gameState) => {
         newGameState.actual_scene.started = true
         return roles.voodoolou(newGameState)
       }
-      break
+      break */
 
     case "TROUBLEMAKER":
       if (conditions.hasTroublemaker) {
         newGameState.actual_scene.started = true
         return roles.troublemaker(newGameState)
       }
-      break
+      break /*
 
     case "VILLAGE_IDIOT":
       if (conditions.hasVillageIdiot) {
@@ -628,7 +628,7 @@ export const sceneHandler = (gameState) => {
         newGameState.actual_scene.started = true
         return roles.ripple(newGameState)
       }
-      break
+      break */
 
     case "JOKE":
       

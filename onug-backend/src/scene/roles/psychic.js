@@ -1,18 +1,8 @@
-import { getRandomItemFromArray } from '../utils'
-
-//TODO save which interaction!
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
 const random_psychic = ["psychic_view1_text", "psychic_view2_text"]
 const psychicKeys = ["identifier_anyeven_text", "identifier_anyodd_text"]
-
-/* if (conditions.hasPsychicPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.psychic_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-}
-      if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasPsychicPlayer(newGameState.players)) {
-       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-        return roles.doppelganger_psychic_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-      } */
 const createPsychic = (kickoffText) => () =>
   [
     kickoffText,
@@ -20,15 +10,23 @@ const createPsychic = (kickoffText) => () =>
     getRandomItemFromArray(psychicKeys),
   ]
 
-export const psychic = (gameState) => createPsychic("psychic_kickoff_text")
-
-export const doppelganger_psychic = () =>
+export const psychic = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = []
+  createPsychic("psychic_kickoff_text")
   createPsychic("doppelganger_psychic_kickoff_text")
+  const tokens = getAllPlayerTokens(newGameState.players)
 
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-  
-//? INFO: Psychic - Looks at 1-2 cards, which in position via app such as neighbors, center, odd or even players
-//TODO doppelganger
-export const psychic_interaction = (gameState, tokens, title) => {}
+   if (newGameState.players[token].card.player_original_id === 51) {
+    newGameState.players[token].scene_role_interaction.interaction = psychic_interaction(newGameState, token)
+   }
+  })
 
-export const psychic_response =  (gameState, token, selected_positions, title) => {}
+  return newGameState
+}
+
+export const psychic_interaction = (gameState, token) => {return {}}
+export const psychic_response =  (gameState, token, selected_positions) => {return {}}

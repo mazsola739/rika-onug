@@ -1,4 +1,5 @@
-import { getRandomItemFromArray, pickRandomUpToThreePlayers } from '../utils'
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
 const empathAllKeys = [
   "identifier_everyone_text",
@@ -38,23 +39,23 @@ const createEmpath = (kickoffText, totalPlayers) => () => {
   ]
 }
 
-export const empath = (totalPlayers) =>
-  createEmpath("empath_kickoff_text", totalPlayers)()
+export const empath = (gameState) => {
+  const newGameState = { ...gameState }
+  createEmpath("empath_kickoff_text", totalPlayers)
+  createEmpath("doppelganger_empath_kickoff_text", totalPlayers)
+  const narration = []
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const doppelganger_empath = (totalPlayers) =>
-  createEmpath("doppelganger_empath_kickoff_text", totalPlayers)()
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-/*   if (conditions.hasEmpathPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-    return roles.empath_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  }
-  if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasEmpathPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-    return roles.doppelganger_empath_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
-  
-//? INFO: Empath - App asks some other players w/ eyes closed to point at someone. She observes it with her eyes open
-//TODO doppelganger
-export const empath_interaction = (gameState, tokens, title) => {}
+   if (newGameState.players[token].card.player_original_id === 77) {
+    newGameState.players[token].scene_role_interaction.interaction = empath_interaction(newGameState, token)
+   }
+  })
 
-export const empath_response =  (gameState, token, selected_positions, title) => {}
+  return newGameState
+}
+
+export const empath_interaction = (gameState, token) => {return {}}
+export const empath_response =  (gameState, token, selected_positions) => {return {}}

@@ -1,8 +1,17 @@
-export const mirrorman = (gameState) => ["mirrorman_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
 
-/* if (conditions.hasMirrorManPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [64])
-    return roles.copycat_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
+export const mirrorman = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["mirrorman_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-  //copycat
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 64) {
+    newGameState.players[token].scene_role_interaction.interaction = copycat_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}

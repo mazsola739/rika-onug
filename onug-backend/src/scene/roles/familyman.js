@@ -1,4 +1,5 @@
-//TODO save which interaction!
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
 const randomFamilyman = [
   "familyman_1pleft_text",
@@ -13,23 +14,29 @@ const randomFamilyman = [
   "familyman_2eachside_text",
 ]
 
-export const familyman = (hasDoppelganger) => [
-  hasDoppelganger
-    ? "doppelganger_familyman_kickoff_text"
-    : "familyman_kickoff_text",
-  getRandomItemFromArray(randomFamilyman),
-  randomFamilyman.includes("1p")
-    ? "familyman_is_end_text"
-    : "familyman_are_end_text",
-]
+export const familyman = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = [
+    hasDoppelganger
+      ? "doppelganger_familyman_kickoff_text"
+      : "familyman_kickoff_text",
+    getRandomItemFromArray(randomFamilyman),
+    randomFamilyman.includes("1p")
+      ? "familyman_is_end_text"
+      : "familyman_are_end_text",
+  ]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-/* if (conditions.hasFamilyManPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.familyman_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-//TODO doppelganger 
-//! wakes up!
-export const familyman_interaction = (gameState, tokens, title) => {}
+   if (newGameState.players[token].card.player_original_id === 78) {
+    newGameState.players[token].scene_role_interaction.interaction = familyman_interaction(newGameState, token)
+   }
+  })
 
-export const familyman_response =  (gameState, token, selected_positions, title) => {}
+  return newGameState
+}
+
+export const familyman_interaction = (gameState, token) => {return {}}
+export const familyman_response =  (gameState, token, selected_positions) => {return {}}

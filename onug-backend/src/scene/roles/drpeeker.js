@@ -1,9 +1,21 @@
-export const drpeeker = (gameState) => ["drpeeker_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasDrPeekerPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [57])
-    return roles.drpeeker_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
+export const drpeeker = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["drpeeker_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const drpeeker_interaction = (gameState, tokens, title) => {}
-export const drpeeker_response =  (gameState, token, selected_positions, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 57) {
+    newGameState.players[token].scene_role_interaction.interaction = drpeeker_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const drpeeker_interaction = (gameState, token) => {return {}}
+export const drpeeker_response =  (gameState, token, selected_positions) => {return {}}

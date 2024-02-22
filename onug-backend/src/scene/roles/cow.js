@@ -1,12 +1,23 @@
-export const cow = (hasDoppelganger) => [
-  hasDoppelganger ? "doppelganger_cow_kickoff_text" : "cow_kickoff_text",
-  "cow_kickoff2_text",
-]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasCowPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.cow_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-//? INFO: Cow - Puts hand out in a fist when Aliens wake. If an Alien is sitting next to her, one must tap her fist
-//! NEM KEL FEL
-export const cow_interaction = (gameState, tokens, title) => {}
+export const cow = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = [
+    hasDoppelganger ? "doppelganger_cow_kickoff_text" : "cow_kickoff_text",
+    "cow_kickoff2_text",
+  ] 
+  const tokens = getAllPlayerTokens(newGameState.players)
+
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 45) {
+    newGameState.players[token].scene_role_interaction.interaction = cow_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const cow_interaction = (gameState, token) => {return {}}

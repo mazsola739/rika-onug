@@ -1,9 +1,22 @@
-export const villageidiot = (gameState) => ["villageidiot_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasVillageIdiotPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [26])
-    return roles.villageidiot_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
+export const villageidiot = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ['villageidiot_kickoff_text']
 
-export const villageidiot_interaction = (gameState, tokens, title) => {}
-export const villageidiot_response =  (gameState, token, selected_positions, title) => {}
+  const tokens = getAllPlayerTokens(newGameState.players)
+
+  tokens.forEach((token) => {
+    newGameState.players[token].scene_role_interaction.narration = narration
+
+    if (newGameState.players[token].card.player_original_id === 26) {
+      newGameState.players[token].scene_role_interaction.interaction = villageidiot_interaction(newGameState)
+    }
+  })
+
+  return newGameState
+}
+
+export const villageidiot_interaction = (gameState, token) => {return {}}
+export const villageidiot_response =  (gameState, token, selected_positions) => {return {}}

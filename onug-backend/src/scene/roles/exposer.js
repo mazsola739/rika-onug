@@ -1,6 +1,5 @@
-import { getRandomItemFromArray } from '../utils'
-
-//TODO save which interaction!
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
 const randomExposer = [
   "exposer_flip1_text",
@@ -11,20 +10,23 @@ const randomExposer = [
 const createExposer = (kickoffText) => () =>
   [kickoffText, getRandomItemFromArray(randomExposer)]
 
-export const exposer = (gameState) => createExposer("exposer_kickoff_text")
-
-export const doppelganger_exposer = () =>
+export const exposer = (gameState) => {
+  const newGameState = { ...gameState }
+  createExposer("exposer_kickoff_text")
   createExposer("doppelganger_exposer_kickoff_text")
+  const narration = []
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-/*   if (conditions.hasExposerPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-    return roles.exposer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  }
-  if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasExposerPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-    return roles.doppelganger_exposer_interaction(newGameState, actualSceneRoleTokens, sceneTitle) } */
-  
-//? INFO: Exposer - May flip 0-3 center cards over, the max via app
-export const exposer_interaction = (gameState, tokens, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-export const exposer_response =  (gameState, token, selected_positions, title) => {}
+   if (newGameState.players[token].card.player_original_id === 46) {
+    newGameState.players[token].scene_role_interaction.interaction = exposer_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const exposer_interaction = (gameState, token) => {return {}}
+export const exposer_response =  (gameState, token, selected_positions) => {return {}}

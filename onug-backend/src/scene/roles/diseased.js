@@ -1,12 +1,21 @@
-export const diseased = (gameState) => ["diseased_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasDiseasedPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [32])
-    return roles.diseased_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
+export const diseased = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["diseased_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-//? INFO: Diseased - Gives either player to right or left a Mark of Disease whoever votes for either the marked or player loses
-//! NO flipped card but shield
-export const diseased_interaction = (gameState, tokens, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-export const diseased_response =  (gameState, token, selected_positions, title) => {}
+   if (newGameState.players[token].card.player_original_id === 32) {
+    newGameState.players[token].scene_role_interaction.interaction = diseased_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const diseased_interaction = (gameState, token) => {return {}}
+export const diseased_response =  (gameState, token, selected_positions) => {return {}}

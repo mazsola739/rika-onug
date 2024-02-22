@@ -1,43 +1,36 @@
-export const masons = (gameState) => ["masons_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-//! TODO mason players
-/* if (conditions.hasMasonPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, masonIds)
-  return roles.masons_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
-import { getPlayerNumbersWithMatchingTokens } from '../utils'
-
-//? INFO: Mason (2) – Wakes up and looks for the other fellow Mason
-export const masons_interaction = (gameState, tokens, title) => {
+export const masons = (gameState) => {
   const newGameState = { ...gameState }
-  const scene_role_interactions = []
+  const narration = ["masons_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach((token) => {
-    const masons = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens)
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-    scene_role_interactions.push(
-      generateSceneRoleInteractions(
-        newGameState,
-        title,
-        token,
-        ['interaction_masons'],
-        'mason',
-        null,
-        null,
-        null,
-        null,
-        { masons, },
-      )
-    )
-
-    const playerHistory = {
-      ...newGameState.players[token].player_history,
-      ...newGameState.actual_scene,
-      masons,
-    }
-    newGameState.players[token].player_history = playerHistory
+   if (masonIds.some(id => newGameState.players[token].card.player_role_id === id)) {
+    newGameState.players[token].scene_role_interaction.interaction = masons_interaction(newGameState, token)
+   }
   })
 
-  return { ...newGameState, scene_role_interactions }
+  return newGameState
+}
+
+export const masons_interaction = (gameState, token, title) => {
+  const newGameState = { ...gameState }
+
+  const masons = getPlayerNumbersWithMatchingTokens(newGameState.players, tokens)
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    masons: masons
+  }
+
+  return generateRoleInteraction(
+    newGameState,
+    private_message = ['interaction_masons'],
+    icon = 'mason',
+    uniqInformations = { masons: masons },
+  )
 }

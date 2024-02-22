@@ -1,11 +1,23 @@
-export const vampires = (gameState) => ["vampires_kickoff_text"]
+import { vampireIds } from "../constants"
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasAnyVampirePlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [vampireIds]) 
-    return roles.vampires_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
-//? INFO: Vampire (2) - Open their eyes and view their fellow Vampires (including The Count and The Master). Then decide together to give one non-Vampire the Mark of the Vampire, which turns them into a Vampire
-//! NO flipped card but shield
-export const vampire_interaction = (gameState, tokens, title) => {}
+export const vampires = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ['vampires_kickoff_text']
 
-export const vampire_response =  (gameState, token, selected_positions, title) => {}
+  const tokens = getAllPlayerTokens(newGameState.players)
+
+  tokens.forEach((token) => {
+    newGameState.players[token].scene_role_interaction.narration = narration
+
+    if (vampireIds.some(id => newGameState.players[token].card.player_role_id === id)) {
+      newGameState.players[token].scene_role_interaction.interaction = vampires_interaction(newGameState)
+    }
+  })
+
+  return newGameState
+}
+
+export const vampires_interaction = (gameState, token) => {return {}}
+export const vampires_response =  (gameState, token, selected_positions) => {return {}}

@@ -1,4 +1,5 @@
-//TODO save which interaction!
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
 const random_mortician = ["mortician_1card_text", "mortician_2cards_text"]
 
@@ -20,23 +21,24 @@ const createMortician = (kickoffText) => () =>
     ),
   ]
 
-export const mortician = (gameState) => createMortician("mortician_kickoff_text")
 
-export const doppelganger_mortician = (gameState) => createMortician(
-  "doppelganger_mortician_kickoff_text"
-)
+export const mortician = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = []
+  createMortician("mortician_kickoff_text")
+  createMortician("doppelganger_mortician_kickoff_text")
+  const tokens = getAllPlayerTokens(newGameState.players)
 
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-/* if (conditions.hasMorticianPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.mortician_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
+   if (newGameState.players[token].card.player_original_id === 36) {
+    newGameState.players[token].scene_role_interaction.interaction = pickpocket_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
 }
-if (conditions.hasMorticianPlayer(newGameState.players) && conditions.hasDoppelgangerPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.doppelganger_mortician_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-//? INFO: Mortician - Looks at 1-2 neighbor cards (left or right), via app. Wins if at least one of his neighbors is killed
-//TODO doppelganger
-export const mortician_interaction = (gameState, tokens, title) => {}
 
-export const mortician_response =  (gameState, token, selected_positions, title) => {}
+export const mortician_interaction = (gameState, token) => {return {}}
+export const mortician_response =  (gameState, token, selected_positions) => {return {}}

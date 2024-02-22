@@ -1,6 +1,5 @@
-import { getRandomItemFromArray } from '../utils'
-
-//TODO save which interaction!
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
 const randomBodysnatcher = [
   "bodysnatcher_steal_text",
@@ -23,23 +22,23 @@ const createBodysnatcher = (kickoffText) => () =>
     "bodysnatcher_end_text",
   ]
 
-export const bodysnatcher = (gameState) => createBodysnatcher("bodysnatcher_kickoff_text")
+export const beholder = (gameState) => {
+  const newGameState = { ...gameState }
+  createBodysnatcher("bodysnatcher_kickoff_text")
+  createBodysnatcher("doppelganger_bodysnatcher_kickoff_text")
+  const narration = []
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const doppelganger_bodysnatcher = (gameState) => createBodysnatcher(
-  "doppelganger_bodysnatcher_kickoff_text"
-)
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-/* if (conditions.hasBodySnatcherPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.bodysnatcher_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
+   if (newGameState.players[token].card.player_original_id === 74) {
+    newGameState.players[token].scene_role_interaction.interaction = bodysnatcher_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
 }
-       if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasBodySnatcherPlayer(newGameState.players)) {
-       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-        return roles.doppelganger_bodysnatcher_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-      }*/
 
-//TODO doppelganger separated
-//? INFO: Body Snatcher - Wakes with other aliens. Wakes after and swaps cards via app. New card is on the Alien team.
-export const bodysnatcher_interaction = (gameState, tokens, title) => {}
-
-export const bodysnatcher_response =  (gameState, token, selected_positions, title) => {}
+export const bodysnatcher_interaction = (gameState, token) => {return {}}
+export const bodysnatcher_response =  (gameState, token, selected_positions) => {return {}}

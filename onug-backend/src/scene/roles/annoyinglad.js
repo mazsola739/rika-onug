@@ -1,8 +1,18 @@
-export const annoyinglad = (gameState) => ["annoyinglad_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-//? same as thing
+export const annoyinglad = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["annoyinglad_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-/* if (conditions.hasAnnoyingLadPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [55])
-    return roles.thing_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
+  tokens.forEach(token => {
+    newGameState.players[token].scene_role_interaction.narration = narration
+
+    if (newGameState.players[token].card.player_original_id === 55) {
+      newGameState.players[token].scene_role_interaction.interaction = roles.thing_interaction(newGameState, token)
+    }
+  })
+
+  return newGameState
+}

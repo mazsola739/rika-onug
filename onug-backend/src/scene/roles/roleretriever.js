@@ -1,7 +1,18 @@
-export const roleretriever = (gameState) => ["roleretriever_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-//? same as robber
-/* if (conditions.hasRoleRetrieverPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [66])
-    return roles.robber_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
+export const roleretriever = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["roleretriever_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
+
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 66) {
+    newGameState.players[token].scene_role_interaction.interaction = robber_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}

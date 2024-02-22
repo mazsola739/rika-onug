@@ -1,69 +1,51 @@
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
+
 const createRevealer = (prefix) => () =>
   [`${prefix}_kickoff_text`, "revealer_kickoff2_text"]
 
-export const revealer = (gameState) => createRevealer("revealer")
-export const doppelganger_revealer = (gameState) => createRevealer("doppelganger_revealer")
 
-import {
-  getPlayerNumbersWithNonMatchingTokens,
-  getCardIdsByPositions,
-  getSelectablePlayersWithNoShield,
-} from '../utils'
-
-import { townIds } from '../constants'
-import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
-
-
-/* if (conditions.hasRevealerPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [24])
-  return roles.revealer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-}
-if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasRevealerPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [1])
-  return roles.revealer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-//? INFO: Revealer - Turns and keeps one player's card face up unless they are not on the Villager Team
-export const revealer_interaction = (gameState, tokens, title) => {
+export const revealer = (gameState) => {
   const newGameState = { ...gameState }
-  const scene_role_interactions = []
+  createRevealer("revealer")
+  createRevealer("doppelganger_revealer")
+  const narration = []
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach((token) => {
-    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-    scene_role_interactions.push(
-      generateSceneRoleInteractions(
-        newGameState,
-        title,
-        token,
-        ['interaction_may_one_any_other'],
-        'id',
-        { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
-        null,
-        null,
-        null,
-        null,
-      )
-    )
-
-    const playerHistory = {
-      ...newGameState.players[token].player_history,
-      ...newGameState.actual_scene,
-      selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 }
-    }
-    newGameState.players[token].player_history = playerHistory
+   if (newGameState.players[token].card.player_original_id === 24) {
+    newGameState.players[token].scene_role_interaction.interaction = revealer_interaction(newGameState, token)
+   }
   })
 
-  return { ...newGameState, scene_role_interactions }
+  return newGameState
+}
+
+export const revealer_interaction = (gameState, token) => {
+  const newGameState = { ...gameState }
+
+  const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(newGameState.players, token)
+
+    newGameState.players[token].player_history = {
+      ...newGameState.players[token].player_history,
+      selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 }
+    }
+    
+    return generateRoleInteraction(
+      newGameState,
+      private_message = ['interaction_may_one_any_other'],
+      icon = 'id',
+      selectableCards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
+    )
 }
 
 //TODO better response message
-export const revealer_response =  (gameState, token, selected_positions, title) => {
+export const revealer_response =  (gameState, token, selected_positions) => {
   if (!isValidSelection(selected_positions, gameState.players[token].player_history)) {
     return gameState
   }
-
   const newGameState = { ...gameState }
 
   const selectedPositionCard = newGameState.card_positions[selected_positions[0]]
@@ -76,20 +58,10 @@ export const revealer_response =  (gameState, token, selected_positions, title) 
 
   newGameState.players[token].card_or_mark_action = true
 
-  const scene_role_interactions = [
-    generateSceneRoleInteractions(
-      newGameState,
-      title,
-      token,
-      ["interaction_saw_card", selected_positions[0]],
-      'id',
-      null,
-      revealedCard,
-      null,
-      null,
-      { flipped_cards: [selected_positions[0]] }
-    )
-  ]
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    card_or_mark_action: true,
+  }
 
   if (isTown) {
     newGameState.flipped.push(revealedCard[0])
@@ -98,5 +70,11 @@ export const revealer_response =  (gameState, token, selected_positions, title) 
     newGameState.players[token].player_history.show_cards = revealedCard
   }
 
-  return { ...newGameState, scene_role_interactions }
+  return generateRoleInteraction(
+    newGameState,
+    private_message = ["interaction_saw_card", selected_positions[0]],
+    icon = 'id',
+    showCards = revealedCard,
+    uniqInformations = { flipped_cards: [selected_positions[0]] }
+  )
 }

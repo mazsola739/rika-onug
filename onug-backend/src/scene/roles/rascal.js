@@ -1,6 +1,5 @@
-import { getRandomItemFromArray } from '../utils'
-
-//TODO save which interaction!
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
 const random_rascal = [
   "rascal_idiot_text",
@@ -63,21 +62,24 @@ const createRascal = (kickoffText) => () => {
   return result
 }
 
-export const rascal = (gameState) => createRascal("rascal_kickoff_text")
-
-export const doppelganger_rascal = () =>
+export const rascal = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = []
+  createRascal("rascal_kickoff_text")
   createRascal("doppelganger_rascal_kickoff_text")
 
-/*   if (conditions.hasRascalPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-    return roles.rascal_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  }
-  if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasRascalPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-    return roles.doppelganger_rascal_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
-//? INFO: Rascal - May manipulate cards via app such as stealing, switching, moving, etc
-//TODO doppelganger
-export const rascal_interaction = (gameState, tokens, title) => {}
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const rascal_response =  (gameState, token, selected_positions, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 52) {
+    newGameState.players[token].scene_role_interaction.interaction = rascal_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const rascal_interaction = (gameState, token) => {return {}}
+export const rascal_response =  (gameState, token, selected_positions) => {return {}}

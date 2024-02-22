@@ -1,15 +1,23 @@
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
+
 const createFlipper = (prefix) => () =>
   [`${prefix}_kickoff_text`, "flipper_kickoff2_text"]
 
-export const flipper = createFlipper("flipper")
-export const doppelganger_flipper = createFlipper("doppelganger_flipper")
+export const flipper = (gameState) => {
+  const newGameState = { ...gameState }
+  createFlipper("flipper")
+  createFlipper("doppelganger_flipper")
+  const narration = []
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-//? Same as revealer
-/* if (conditions.hasFlipperPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [59])
-  return roles.revealer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 59) {
+    newGameState.players[token].scene_role_interaction.interaction = revealer_response(newGameState, token)
+   }
+  })
+
+  return newGameState
 }
-if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasFlipperPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [1])
-  return roles.revealer_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */

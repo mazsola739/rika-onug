@@ -1,52 +1,45 @@
-export const intern = (hasDoppelganger, hasMadScientist) => [
-  hasDoppelganger ? "doppelganger_intern_kickoff_text" : "intern_kickoff_text",
-  hasMadScientist ? "intern_kickoff2_text" : "intern_kickoff_alone_text",
-]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-//! doppelganger?, hasMad?
-/* if (conditions.hasInternPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, conditions.hasDoppelgangerPlayer ? [62, 1] : [62])
-  return roles.intern_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-}
- */
-import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
-import { getMadScientistPlayerNumberByRoleIds } from '../utils'
-
-export const intern_interaction = (gameState, tokens, title) => {
+export const intern = (gameState) => {
   const newGameState = { ...gameState }
-  const scene_role_interactions = []
+  const narration = [
+    hasDoppelganger ? "doppelganger_intern_kickoff_text" : "intern_kickoff_text",
+    hasMadScientist ? "intern_kickoff2_text" : "intern_kickoff_alone_text",
+  ]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach((token) => {
-    const madscientistPlayerNumbers = getMadScientistPlayerNumberByRoleIds(newGameState.players)
-    const playerCard = newGameState.players[token]?.card
+  tokens.forEach(token => {
+    newGameState.players[token].scene_role_interaction.narration = narration
 
-    if (madscientistPlayerNumbers.length === 0) {
-      playerCard.player_role_id = 63
-      playerCard.player_role = 'MAD_SCIENTIST'
+    if (newGameState.players[token].card.player_original_id === 62) {
+      newGameState.players[token].scene_role_interaction.interaction = intern_interaction(newGameState, token)
     }
-
-    scene_role_interactions.push(
-      generateSceneRoleInteractions(
-        newGameState,
-        title,
-        token,
-        [madscientistPlayerNumbers.length === 0 ? "interaction_mad_now" : "interaction_mad"],
-        'mad',
-        null,
-        null,
-        null,
-        null,
-        { madscientist: madscientistPlayerNumbers, },
-      )
-    )
-
-    const playerHistory = {
-      ...newGameState.players[token].player_history,
-      ...newGameState.actual_scene,
-      madscientist: madscientistPlayerNumbers,
-    }
-    newGameState.players[token].player_history = playerHistory
   })
 
-  return { ...newGameState, scene_role_interactions }
+  return newGameState
+}
+
+export const intern_interaction = (gameState, token, title) => {
+  const newGameState = { ...gameState }
+
+  const madscientistPlayerNumbers = getMadScientistPlayerNumberByRoleIds(newGameState.players)
+  const playerCard = newGameState.players[token]?.card
+
+  if (madscientistPlayerNumbers.length === 0) {
+    playerCard.player_role_id = 63
+    playerCard.player_role = 'MAD_SCIENTIST'
+  }
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    madscientist: madscientistPlayerNumbers,
+  }
+
+  return generateRoleInteraction(
+    newGameState,
+    private_message = [madscientistPlayerNumbers.length === 0 ? "interaction_mad_now" : "interaction_mad"],
+    icon = 'mad',
+    uniqInformations = { madscientist: madscientistPlayerNumbers, },
+  )
 }

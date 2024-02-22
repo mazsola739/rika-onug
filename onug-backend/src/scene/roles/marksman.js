@@ -1,16 +1,26 @@
-export const marksman = (hasDoppelganger) => [
-  hasDoppelganger
-    ? "doppelganger_marksman_kickoff_text"
-    : "marksman_kickoff_text",
-  "marksman_kickoff2_text",
-]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasMarksmanPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.marksman_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-//? INFO: Marksman - Looks at one other player's card and a different player's mark
-//TODO doppelganger
-export const marksman_interaction = (gameState, tokens, title) => {}
+export const marksman = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = [
+    hasDoppelganger
+      ? "doppelganger_marksman_kickoff_text"
+      : "marksman_kickoff_text",
+    "marksman_kickoff2_text",
+  ]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const marksman_response =  (gameState, token, selected_positions, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 35) {
+    newGameState.players[token].scene_role_interaction.interaction = marksman_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const marksman_interaction = (gameState, token) => {return {}}
+export const marksman_response =  (gameState, token, selected_positions) => {return {}}

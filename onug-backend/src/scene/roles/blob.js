@@ -1,4 +1,5 @@
-//TODO save which interaction!
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
 const randomBlobKickoffText = [
   "blob_1pleft_text",
@@ -14,21 +15,23 @@ const randomBlobKickoffText = [
 ]
 
 export const blob = (gameState) => {
+  const newGameState = { ...gameState }
   const randomKickoff = getRandomItemFromArray(randomBlobKickoffText)
-
-  return [
+  const narration = [
     randomKickoff,
     randomKickoff.includes("1p") ? "blob_is_end_text" : "blob_are_end_text",
   ]
+  const tokens = getAllPlayerTokens(newGameState.players)
+
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 44) {
+    newGameState.players[token].scene_role_interaction.interaction = blob_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
 }
 
-/* if (conditions.hasBlobPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.blob_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-
-
-//TODO doppelganger same result as blob
-//! NEM KEL FEL, BLOB-NAK AZ ICON-T
-//? INFO: Blob -  Wins if no player part of him (left, right or both), via app, dies
-export const blob_interaction = (gameState, tokens, title) => {}
+export const blob_interaction = (gameState, token) => {return {}}

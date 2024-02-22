@@ -1,13 +1,24 @@
-export const squire = (hasDoppelganger) => [
-  hasDoppelganger ? "doppelganger_squire_kickoff_text" : "squire_kickoff_text",
-  "squire_kickoff2_text",
-]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasSquirePlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.squire_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-//? INFO: Squire - All Werewolf team (not Minion/Squire) stick up their thumb for him to see, who may look at their cards
-export const squire_interaction = (gameState, tokens, title) => {}
+export const squire = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = [
+    hasDoppelganger ? "doppelganger_squire_kickoff_text" : "squire_kickoff_text",
+    "squire_kickoff2_text",
+  ] 
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const squire_response =  (gameState, token, selected_positions, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 83) {
+    newGameState.players[token].scene_role_interaction.interaction = squire_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const squire_interaction = (gameState, token) => {return {}}
+export const squire_response =  (gameState, token, selected_positions) => {return {}}

@@ -1,20 +1,26 @@
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
+
 const createPickpocket = (prefix) => () =>
   [`${prefix}_kickoff_text`, "pickpocket_kickoff2_text"]
 
-export const pickpocket = (gameState) => createPickpocket("pickpocket")
-export const doppelganger_pickpocket = (gameState) => createPickpocket("doppelganger_pickpocket")
+export const pickpocket = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = []
+  createPickpocket("pickpocket")
+  createPickpocket("doppelganger_pickpocket")
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-/* if (conditions.hasPickpocketPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.pickpocket_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} 
-      if (conditions.hasDoppelgangerPlayer(newGameState.players) && conditions.hasPickpocketPlayer(newGameState.players)) {
-       const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-        return roles.doppelganger_pickpocket_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-      }*/
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-//? INFO: Pickpocket - Swaps his mark for another player's mark and then looks at it
-//TODO doppelganger
-export const pickpocket_interaction = (gameState, tokens, title) => {}
+   if (newGameState.players[token].card.player_original_id === 36) {
+    newGameState.players[token].scene_role_interaction.interaction = pickpocket_interaction(newGameState, token)
+   }
+  })
 
-export const pickpocket_response =  (gameState, token, selected_positions, title) => {}
+  return newGameState
+}
+
+export const pickpocket_interaction = (gameState, token) => {return {}}
+export const pickpocket_response =  (gameState, token, selected_positions) => {return {}}

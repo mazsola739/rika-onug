@@ -1,45 +1,40 @@
-export const minion = (hasDoppelganger) => [
-  hasDoppelganger ? "doppelganger_minion_kickoff_text" : "minion_kickoff_text",
-  "minion_kickoff2_text",
-]
+import { werewolvesAndDreamWolfIds } from "../constants"
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
- //! doppelganger?
-/*  if (conditions.hasMinionPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [7])
-  return roles.minion_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
-
-//? INFO: Minion - All Werewolf team (not Minion/Squire) stick up their thumb for him to see
-export const minion_interaction = (gameState, tokens, title) => {
+export const minion = (gameState) => {
   const newGameState = { ...gameState }
-  const scene_role_interactions = []
+  const narration = [
+    hasDoppelganger ? "doppelganger_minion_kickoff_text" : "minion_kickoff_text",
+    "minion_kickoff2_text",
+  ]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach((token) => {
-    const werewolfPlayerNumbers = [...newGameState.werewolves, ...newGameState.dreamwolf]
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-    scene_role_interactions.push(
-      generateSceneRoleInteractions(
-        newGameState,
-        title,
-        token,
-        ['interaction_werewolves'],
-        'werewolf',
-        null,
-        null,
-        null,
-        null,
-         {werewolves: werewolfPlayerNumbers, },
-      )
-    )
-
-    const playerHistory = {
-      ...newGameState.players[token].player_history,
-      ...newGameState.actual_scene,
-      werewolves: werewolfPlayerNumbers,
-    }
-    newGameState.players[token].player_history = playerHistory
+   if (newGameState.players[token].card.player_original_id === 7) {
+    newGameState.players[token].scene_role_interaction.interaction = minion_interaction(newGameState, token)
+   }
   })
 
-  return { ...newGameState, scene_role_interactions }
+  return newGameState
+}
+
+export const minion_interaction = (gameState, token, title) => {
+  const newGameState = { ...gameState }
+
+  const werewolfPlayerNumbers = werewolvesAndDreamWolfIds //TODO
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    werewolves: werewolfPlayerNumbers
+  }
+
+  return generateRoleInteraction(
+    newGameState,
+    private_message = ['interaction_werewolves'],
+    icon = 'werewolf',
+    uniqInformations = { werewolves: werewolfPlayerNumbers },
+  )
 }

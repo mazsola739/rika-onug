@@ -1,7 +1,18 @@
-export const switcheroo = (gameState) => ["switcheroo_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-//? same as troublemaker
-/* if (conditions.hasSwitcherooPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [68])
-    return roles.troublemaker_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
+export const switcheroo = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["switcheroo_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
+
+  tokens.forEach(token => {
+    newGameState.players[token].scene_role_interaction.narration = narration
+
+    if (newGameState.players[token].card.player_original_id === 68) {
+      newGameState.players[token].scene_role_interaction.interaction = troublemaker_interaction(newGameState, token)
+    }
+  })
+
+  return newGameState
+}

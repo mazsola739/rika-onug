@@ -1,58 +1,38 @@
-const addVerboseOr = (rolesFromIds) => {
-  if (rolesFromIds.length > 1) {
-    rolesFromIds.splice(
-      rolesFromIds.length - 1,
-      0,
-      "doppelganger_verbose_or_text"
-    )
-  }
-  return rolesFromIds
-}
-
-export const doppelganger = (gameState) => ["doppelganger_kickoff_text"]
-
-/* if (conditions.hasDoppelgangerPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [1])
-  return roles.doppelganger_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-
-import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
+import { getAllPlayerTokens } from "../utils"
 import { isValidSelection } from '../validate-response-data'
-import { getPlayerNumbersWithNonMatchingTokens, getCardIdsByPositions } from '../utils'
 
-//? INFO: Doppelgänger - Looks at any other player's card and becomes that card. Does that action during but different time
-//! At this moment doppelganger never see flipped or shielded cards, ripple different
-export const doppelganger_interaction = (gameState, tokens, title) => {
+export const doppelganger = (gameState) => {
   const newGameState = { ...gameState }
-  const scene_role_interactions = []
+  const narration = ["doppelganger_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach((token) => {
-    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-    scene_role_interactions.push(
-      generateSceneRoleInteractions(
-        newGameState,
-        title,
-        token,
-        ['interaction_must_one_any_other'],
-        'copy',
-        { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
-        null,
-        null,
-        null,
-        null,
-      )
-    )
-
-    const playerHistory = {
-      ...newGameState.players[token].player_history,
-      ...newGameState.actual_scene,
-      selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 }
-    }
-    newGameState.players[token].player_history = playerHistory
+   if (newGameState.players[token].card.player_original_id === 1) {
+    newGameState.players[token].scene_role_interaction.interaction = doppelganger_interaction(newGameState, token)
+   }
   })
 
-  return { ...newGameState, scene_role_interactions }
+  return newGameState
+}
+
+export const doppelganger_interaction = (gameState, token) => {
+  const newGameState = { ...gameState }
+  
+    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
+
+    newGameState.players[token].player_history = {
+      ...newGameState.players[token].player_history,
+      selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
+    }
+
+    return generateRoleInteraction(
+      newGameState,
+      private_message = ['interaction_must_one_any_other'],
+      icon = 'copy',
+      selectable_cards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
+    )
 }
 
 export const doppelganger_response =  (gameState, token, selected_positions, title) => {
@@ -72,20 +52,17 @@ export const doppelganger_response =  (gameState, token, selected_positions, tit
   newGameState.players[token].new_role_id = newGameState.players[token].card.player_role_id
   newGameState.players[token].card_or_mark_action = true
 
-  const scene_role_interactions = [
-    generateSceneRoleInteractions(
-      newGameState,
-      title,
-      token,
-      ["interaction_you_are_that_role", `${newGameState.players[token]?.card.player_role}`],
-      'copy',
-      null,
-      null,
-      showCards,
-      null,
-      { new_role_id: newGameState.players[token].card.player_role_id, }
-    )
-  ]
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    card_or_mark_action: true,
+    viewed_cards: showCards
+  }
 
-  return { ...newGameState, scene_role_interactions }
+  return generateRoleInteraction(
+    newGameState,
+    private_message =  ["interaction_you_are_that_role", `${newGameState.players[token]?.card.player_role}`],
+    icon = 'copy',
+    showCards = showCards,
+    uniqInformations =  { new_role_id: newGameState.players[token].card.player_role_id, }
+  )
 }

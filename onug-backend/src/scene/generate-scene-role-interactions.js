@@ -1,42 +1,34 @@
-import { INTERACTION } from '../constant/ws';
 import { updatePlayerCard } from './update-player-card';
 import { getKeys, concatArraysWithUniqueElements } from './utils';
 
-export const generateSceneRoleInteractions = ({
-  gameState,
-  title,
-  token,
-  narration,
-  private_message = '',
-  icon,
+export const generateRoleInteraction = ({
+  newGameState,
+  private_message = [''],
+  icon = '',
   selectableCards = null,
   selectableMarks = null,
   showCards = null,
   showMarks = null,
-  uniqInteractions = null
+  uniqInformations = null
 }) => {
-  updatePlayerCard(gameState, token)
+  updatePlayerCard(newGameState, token)
 
-  const interactions = {
-    narration,
+  const informations = {
     private_message,
     icon,
-    shielded_cards: gameState.shield,
-    artifacted_cards: getKeys(gameState.artifact),
-    show_cards: showCards !== null ? concatArraysWithUniqueElements(showCards, gameState.flipped) : gameState.flipped,
+    shielded_cards: newGameState.shield,
+    artifacted_cards: getKeys(newGameState.artifact),
+    show_cards: showCards !== null ? concatArraysWithUniqueElements(showCards, newGameState.flipped) : newGameState.flipped,
     show_marks: showMarks,
     ...selectableCards,
     ...selectableMarks,
-    ...uniqInteractions,
+    ...uniqInformations,
   }
 
   return {
-    type: INTERACTION,
-    title,
-    token,
-    ...interactions,
-    player_name: gameState.players[token].name,
-    player_number: gameState.players[token].player_number,
-    ...gameState.players[token].card,
+    ...informations,
+    player_name: newGameState.players[token].name,
+    player_number: newGameState.players[token].player_number,
+    ...newGameState.players[token].card,
   }
 }

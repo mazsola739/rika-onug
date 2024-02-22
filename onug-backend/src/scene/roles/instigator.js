@@ -1,11 +1,21 @@
-export const instigator = (gameState) => ["instigator_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasInstigatorPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [34])
-    return roles.instigator_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
-//? INFO: Instigator - Give any player (including herself) a Mark of the Traitor they only win if someone on their team dies
-//! NO flipped card but shield
-export const instigator_interaction = (gameState, tokens, title) => {}
+export const instigator = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["instigator_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const instigator_response =  (gameState, token, selected_positions, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 34) {
+    newGameState.players[token].scene_role_interaction.interaction = instigator_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const instigator_interaction = (gameState, token) => {return {}}
+export const instigator_response =  (gameState, token, selected_positions) => {return {}}

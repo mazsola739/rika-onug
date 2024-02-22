@@ -1,11 +1,21 @@
-export const cupid = (gameState) => ["cupid_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasCupidPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [31])
-    return roles.cupid_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
-//? INFO: Cupid - Gives any two players (including herself) a Mark of Love if one of them dies so does the other
-//! NO flipped card but shield
-export const cupid_interaction = (gameState, tokens, title) => {}
+export const cupid = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["cupid_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-export const cupid_response =  (gameState, token, selected_positions, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 31) {
+    newGameState.players[token].scene_role_interaction.interaction = cupid_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const cupid_interaction = (gameState, token) => {return {}}
+export const cupid_response =  (gameState, token, selected_positions) => {return {}}

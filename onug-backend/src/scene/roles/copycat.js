@@ -1,12 +1,21 @@
-export const copycat = (gameState) => ["copycat_kickoff_text"]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasCopycatPlayer(newGameState.players)) {
-   const actualSceneRoleTokens = getTokensByOriginalIds(players, [30])
-    return roles.copycat_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-  } */
+export const copycat = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = ["copycat_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-//? INFO: Copycat - Looks at one card from the center and becomes that card. Does the action when called
-//! At this moment copycat never see flipped or shielded cards, ripple different
-export const copycat_interaction = (gameState, tokens, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-export const copycat_response = (gameState, token, selected_positions, title) => {}
+   if (newGameState.players[token].card.player_original_id === 30) {
+    newGameState.players[token].scene_role_interaction.interaction = copycat_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const copycat_interaction = (gameState, token) => {return {}}
+export const copycat_response =  (gameState, token, selected_positions) => {return {}}

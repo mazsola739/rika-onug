@@ -14,8 +14,8 @@ export const interaction = async (ws, message) => {
 
     const newGameState = generateInteractionResponse(gameState, token, selected_positions, ws)
 
-    newGameState?.scene_role_interactions.forEach((role_interaction) => {
-      websocketServerConnectionsPerRoom[newGameState.room_id][role_interaction.token].send(JSON.stringify(role_interaction))
+    newGameState?.scene_role_interactions.forEach((scene_role_interaction) => {
+      websocketServerConnectionsPerRoom[newGameState.room_id][scene_role_interaction.token].send(JSON.stringify(scene_role_interaction))
     })
 
     await upsertRoomState(newGameState)
@@ -25,6 +25,7 @@ export const interaction = async (ws, message) => {
   }
 };
 
+//TODO better idea?
 const generateInteractionResponse = (gameState, token, selected_positions, ws) => {
   const interaction_type = gameState?.players?.[token]?.player_history?.scene_title
   logError('HAHÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓÓ',interaction_type)

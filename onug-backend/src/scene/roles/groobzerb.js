@@ -1,16 +1,27 @@
-export const groobzerb = (hasDoppelganger) => [
-  hasDoppelganger
-    ? "doppelganger_groobzerb_kickoff_text"
-    : "groobzerb_kickoff_text",
-  "groobzerb_kickoff2_text",
-]
+import { groobAndZerbIds } from "../constants"
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasGroobAndZerbPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [1])
-  return roles.groobzerb_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
+export const groobzerb = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = [
+    hasDoppelganger
+      ? "doppelganger_groobzerb_kickoff_text"
+      : "groobzerb_kickoff_text",
+    "groobzerb_kickoff2_text",
+  ]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-//? INFO: Groob - Wakes with other aliens. Wakes after to see Zerb. If Zerb is a player at vote, only wins if Zerb dies
-export const groobzerb_interaction = (gameState, tokens, title) => {}
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-export const groobzerb_response =  (gameState, token, selected_positions, title) => {}
+   if (groobAndZerbIds.some(id => newGameState.players[token].card.player_role_id === id)) {
+    newGameState.players[token].scene_role_interaction.interaction = groobzerb_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const groobzerb_interaction = (gameState, token) => {return {}}
+export const groobzerb_response =  (gameState, token, selected_positions) => {return {}}

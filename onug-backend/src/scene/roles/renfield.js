@@ -1,15 +1,24 @@
-export const renfield = (hasDoppelganger) => [
-  hasDoppelganger
-    ? "doppelganger_renfield_kickoff_text"
-    : "renfield_kickoff_text",
-  "renfield_kickoff2_text",
-]
+import { getAllPlayerTokens } from "../utils"
+import { isValidSelection } from '../validate-response-data'
 
-/* if (conditions.hasRenfieldPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(players, [38])
-  return roles.renfield_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-} */
-//TODO doppelganger
-//? INFO: Renfield - With their eyes closed, sees who Vampires gave Mark of the Vampire then gives himself Mark of the Bat
-//! NO flipped card but shield
-export const renfield_interaction = (gameState, tokens, title) => {}
+export const renfield = (gameState) => {
+  const newGameState = { ...gameState }
+  const narration = [
+    hasDoppelganger ? "doppelganger_renfield_kickoff_text" : "renfield_kickoff_text",
+    "renfield_kickoff2_text",
+  ]
+  const tokens = getAllPlayerTokens(newGameState.players)
+
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
+
+   if (newGameState.players[token].card.player_original_id === 38) {
+    newGameState.players[token].scene_role_interaction.interaction = renfield_interaction(newGameState, token)
+   }
+  })
+
+  return newGameState
+}
+
+export const renfield_interaction = (gameState, token) => {return {}}
+export const renfield_response =  (gameState, token, selected_positions) => {return {}}

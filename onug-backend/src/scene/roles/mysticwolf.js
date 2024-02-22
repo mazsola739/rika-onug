@@ -1,52 +1,38 @@
-export const mysticwolf = (gameState) => ["mysticwolf_kickoff_text"]
-
-/* if (conditions.hasMysticWolfPlayer(newGameState.players)) {
- const actualSceneRoleTokens = getTokensByOriginalIds(newGameState.players, [22])
-  return roles.mysticwolf_interaction(newGameState, actualSceneRoleTokens, sceneTitle)
-}
- */
-import { generateSceneRoleInteractions } from '../generate-scene-role-interactions'
+import { getAllPlayerTokens } from "../utils"
 import { isValidSelection } from '../validate-response-data'
 
-import {
-  getCardIdsByPositions,
-  getPlayerNumbersWithNonMatchingTokens,
-  getSelectablePlayersWithNoShield,
-} from '../utils'
-
-//? INFO: Mystic Wolf - Wakes with other Werewolves. Wakes after and looks at any other player's card (not center or own)
-export const mysticwolf_interaction = (gameState, tokens, title) => {
+export const mysticwolf = (gameState) => {
   const newGameState = { ...gameState }
-  const scene_role_interactions = []
+  const narration = ["mysticwolf_kickoff_text"]
+  const tokens = getAllPlayerTokens(newGameState.players)
 
-  tokens.forEach((token) => {
-    const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+  tokens.forEach(token => {
+   newGameState.players[token].scene_role_interaction.narration = narration
 
-    scene_role_interactions.push(
-      generateSceneRoleInteractions(
-        newGameState,
-        title,
-        token,
-        ['interaction_may_one_any_other'],
-        'spy',
-        { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
-        null,
-        null,
-        null,
-        null,
-      )
-    )
-
-    const playerHistory = {
-      ...newGameState.players[token].player_history,
-      ...newGameState.actual_scene,
-      selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 }
-    }
-    newGameState.players[token].player_history = playerHistory
+   if (newGameState.players[token].card.player_original_id === 22) {
+    newGameState.players[token].scene_role_interaction.interaction = robber_interaction(newGameState, token)
+   }
   })
 
-  return { ...newGameState, scene_role_interactions }
+  return newGameState
+}
+
+export const mysticwolf_interaction = (gameState, token, title) => {
+  const newGameState = { ...gameState }
+  
+  const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(newGameState.players, token)
+
+    newGameState.players[token].player_history = {
+      ...newGameState.players[token].player_history,
+      selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 }
+    }
+    
+    return generateRoleInteraction(
+      newGameState,
+      private_message = ['interaction_may_one_any_other'],
+      icon = 'spy',
+      selectableCards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
+    )
 }
 
 export const mysticwolf_response =  (gameState, token, selected_positions, title) => {
@@ -62,25 +48,19 @@ export const mysticwolf_response =  (gameState, token, selected_positions, title
     newGameState.players[token].card.player_card_id = 0
   }
 
-  newGameState.players[token].player_history.show_cards = viewCards
   newGameState.players[token].card_or_mark_action = true
 
-  const scene_role_interactions = [
-    generateSceneRoleInteractions(
-      newGameState,
-      title,
-      token,
-      ["interaction_saw_card", selected_positions[0]],
-      'spy',
-      null,
-      null,
-      viewCards,
-      null,
-      { viewed_cards: [selected_positions[0]] }
-    )
-  ]
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    card_or_mark_action: true,
+    viewed_cards: [selected_positions[0]]
+  }
 
-  newGameState.scene_role_interactions = scene_role_interactions
-
-  return newGameState
+  return generateRoleInteraction(
+    newGameState,
+    private_message = ["interaction_saw_card", selected_positions[0]],
+    icon = 'spy',
+    showCards = viewCards,
+    uniqInformations = { viewed_cards: [selected_positions[0]] }
+  )
 }
