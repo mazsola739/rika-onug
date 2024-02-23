@@ -13,8 +13,9 @@ export const sentinel = (gameState, title) => {
   const narration = ['sentinel_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 25) {
@@ -28,10 +29,9 @@ export const sentinel = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -49,7 +49,7 @@ export const sentinel_interaction = (gameState, token) => {
     selectable_card_limit: { player: 1, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_any_other'],
     icon: 'shield',
     selectableCards: {
@@ -90,7 +90,7 @@ export const sentinel_response = (
     new_shield_card: [selected_positions[0]],
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_placed_shield', selected_positions[0]],
     icon: 'shield',
     uniqInformations: { new_shield_card: [selected_positions[0]] },

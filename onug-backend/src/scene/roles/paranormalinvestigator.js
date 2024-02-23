@@ -13,8 +13,9 @@ export const paranormalinvestigator = (gameState, title) => {
   const narration = ['paranormalinvestigator_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 23) {
@@ -28,10 +29,9 @@ export const paranormalinvestigator = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -49,7 +49,7 @@ export const paranormalinvestigator_interaction = (gameState, token) => {
     selectable_card_limit: { player: 2, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_two_any_other'],
     icon: 'investigator',
     selectableCards: {
@@ -119,7 +119,7 @@ export const paranormalinvestigator_response = (
     viewed_cards: showCards,
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_saw_card',
       selected_positions[0],

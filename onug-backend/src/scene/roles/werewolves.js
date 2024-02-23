@@ -18,8 +18,9 @@ export const werewolves = (gameState, title, hasDreamWolf) => {
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (
@@ -37,10 +38,9 @@ export const werewolves = (gameState, title, hasDreamWolf) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -59,7 +59,7 @@ export const werewolves_interaction = (gameState, token) => {
     dreamwolf,
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: [
       loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves',
     ],
@@ -103,7 +103,7 @@ export const werewolves_response = (gameState, token, selected_positions) => {
     viewed_cards: [selected_positions[0]],
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', selected_positions[0]],
     icon: 'spy',
     showCards: showCards,

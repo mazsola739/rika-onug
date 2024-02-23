@@ -14,8 +14,9 @@ export const robber = (gameState, title) => {
   const narration = ['robber_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 8) {
@@ -29,10 +30,9 @@ export const robber = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -51,7 +51,7 @@ export const robber_interaction = (gameState, token) => {
       selectable_card_limit: { player: 1, center: 0 },
     }
 
-    return generateRoleInteraction(newGameState, {
+    return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_may_one_any_other'],
       icon: 'robber',
       selectableCards: {
@@ -65,7 +65,7 @@ export const robber_interaction = (gameState, token) => {
       shielded: true,
     }
 
-    return generateRoleInteraction(newGameState, {
+    return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_shielded'],
       icon: 'shield',
     })
@@ -118,7 +118,7 @@ export const robber_response = (
     viewed_cards: [`player_${newGameState.players[token].player_number}`],
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_swapped_cards',
       'interaction_saw_card',

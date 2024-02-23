@@ -10,8 +10,9 @@ export const cow = (gameState, title, hasDoppelganger) => {
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (
@@ -29,10 +30,9 @@ export const cow = (gameState, title, hasDoppelganger) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 

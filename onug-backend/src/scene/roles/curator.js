@@ -19,8 +19,9 @@ export const curator = (gameState, title, prefix) => {
   const narration = createCurator(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 20) {
@@ -34,10 +35,9 @@ export const curator = (gameState, title, prefix) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -64,7 +64,7 @@ export const curator_interaction = (gameState, token) => {
     selectable_card_limit: { player: 1, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_any'],
     icon: 'artifact',
     selectableCards: {
@@ -106,7 +106,7 @@ export const curator_response = (
     new_artifact_card: selected_positions[0],
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_placed_artifact', selected_positions[0]],
     icon: 'artifact',
     uniqInformations: { new_artifact_card: selected_positions[0] },

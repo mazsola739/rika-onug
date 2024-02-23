@@ -7,8 +7,9 @@ export const nostradamus = (gameState, title) => {
   const narration = ['nostradamus_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 80) {
@@ -22,10 +23,9 @@ export const nostradamus = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -45,8 +45,9 @@ export const nostradamus_reaction = (gameState, title) => {
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     scene.push({
@@ -56,9 +57,8 @@ export const nostradamus_reaction = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }

@@ -11,8 +11,9 @@ export const thecount = (gameState, title, prefix) => {
 
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (prefix === 'thecount') {
@@ -35,10 +36,9 @@ export const thecount = (gameState, title, prefix) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 

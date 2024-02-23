@@ -10,8 +10,9 @@ export const assassin = (gameState, title, prefix) => {
   const narration = createAssassin(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (prefix === 'assassin') {
@@ -34,10 +35,9 @@ export const assassin = (gameState, title, prefix) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 

@@ -13,8 +13,9 @@ export const mysticwolf = (gameState, title) => {
   const narration = ['mysticwolf_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 22) {
@@ -28,10 +29,9 @@ export const mysticwolf = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -49,7 +49,7 @@ export const mysticwolf_interaction = (gameState, token) => {
     selectable_card_limit: { player: 1, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_any_other'],
     icon: 'spy',
     selectableCards: {
@@ -95,7 +95,7 @@ export const mysticwolf_response = (
     viewed_cards: [selected_positions[0]],
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', selected_positions[0]],
     icon: 'spy',
     showCards: viewCards,

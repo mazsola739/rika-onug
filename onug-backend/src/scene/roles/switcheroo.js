@@ -8,8 +8,9 @@ export const switcheroo = (gameState, title) => {
   const narration = ['switcheroo_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 68) {
@@ -23,9 +24,8 @@ export const switcheroo = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }

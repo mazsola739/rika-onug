@@ -7,8 +7,9 @@ export const everyonemark = (gameState, title) => {
   const narration = ['everyone_mark_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     interaction = everyonemark_interaction(newGameState, token)
@@ -20,10 +21,9 @@ export const everyonemark = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 

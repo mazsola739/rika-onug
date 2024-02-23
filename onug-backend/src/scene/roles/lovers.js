@@ -6,9 +6,9 @@ export const lovers = (gameState, title) => {
   const newGameState = { ...gameState }
   const narration = ['lovers_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
+  const scene = []
 
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].mark.id === 'mark_of_love') {
@@ -22,10 +22,9 @@ export const lovers = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 

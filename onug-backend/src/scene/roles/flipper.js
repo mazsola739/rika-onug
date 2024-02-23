@@ -16,8 +16,9 @@ export const flipper = (gameState, title, prefix) => {
   const narration = createFlipper(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 59) {
@@ -31,10 +32,9 @@ export const flipper = (gameState, title, prefix) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -52,7 +52,7 @@ export const flipper_interaction = (gameState, token) => {
     selectable_card_limit: { player: 1, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_any_other'],
     icon: 'id',
     selectableCards: {
@@ -103,7 +103,7 @@ export const flipper_response = (gameState, token, selected_positions) => {
     newGameState.players[token].player_history.show_cards = revealedCard
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', selected_positions[0]],
     icon: 'id',
     showCards: revealedCard,

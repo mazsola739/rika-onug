@@ -74,8 +74,9 @@ export const madscientist = (gameState, title) => {
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     scene.push({
@@ -85,9 +86,8 @@ export const madscientist = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }

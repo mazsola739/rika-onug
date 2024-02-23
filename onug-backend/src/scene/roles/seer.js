@@ -13,8 +13,9 @@ export const seer = (gameState, title) => {
   const narration = ['seer_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 9) {
@@ -28,10 +29,9 @@ export const seer = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -49,7 +49,7 @@ export const seer_interaction = (gameState, token) => {
     selectable_card_limit: { player: 1, center: 2 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_may_one_any_other',
       'conjunction_or',
@@ -118,7 +118,7 @@ export const seer_response = (gameState, token, selected_positions, title) => {
     viewed_cards: showCards,
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_saw_card',
       selected_positions[0],

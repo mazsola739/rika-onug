@@ -17,8 +17,9 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 4) {
@@ -32,10 +33,9 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -62,7 +62,7 @@ export const insomniac_interaction = (gameState, token) => {
       viewed_cards: showCards,
     }
 
-    return generateRoleInteraction(newGameState, {
+    return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_own'],
       icon: 'insomniac',
       showCards: showCards,
@@ -73,7 +73,7 @@ export const insomniac_interaction = (gameState, token) => {
       shielded: true,
     }
 
-    return generateRoleInteraction(newGameState, {
+    return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_shielded'],
       icon: 'shield',
       uniqInformations: { shielded: true },

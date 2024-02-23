@@ -48,7 +48,7 @@ export const thing_interaction = (gameState, token) => {
     selectable_card_limit: { player: 1, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_must_one_neighbor'],
     icon: 'tap',
     selectableCards: {
@@ -89,7 +89,7 @@ export const thing_response = (gameState, token, selected_positions) => {
     tapped_player: [selected_positions[0]],
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_tap', selected_positions[0]],
     icon: 'tap',
     uniqInformations: { tapped_player: [selected_positions[0]] },

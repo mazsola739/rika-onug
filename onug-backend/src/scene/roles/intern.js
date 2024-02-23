@@ -16,8 +16,9 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 62) {
@@ -31,10 +32,9 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -56,7 +56,7 @@ export const intern_interaction = (gameState, token) => {
     madscientist: madscientistPlayerNumbers,
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: [
       madscientistPlayerNumbers.length === 0
         ? 'interaction_mad_now'

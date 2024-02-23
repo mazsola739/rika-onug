@@ -10,8 +10,9 @@ export const priest = (gameState, title, prefix) => {
   const narration = createPriest(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (prefix === 'priest') {
@@ -34,10 +35,9 @@ export const priest = (gameState, title, prefix) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 

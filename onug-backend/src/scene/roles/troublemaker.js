@@ -10,8 +10,9 @@ export const troublemaker = (gameState, title) => {
   const narration = ['troublemaker_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 11) {
@@ -25,10 +26,9 @@ export const troublemaker = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -46,7 +46,7 @@ export const troublemaker_interaction = (gameState, token) => {
     selectable_card_limit: { player: 2, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_two_any_other'],
     icon: 'swap',
     selectableCards: {
@@ -87,7 +87,7 @@ export const troublemaker_response = (
     swapped_cards: [position1, position2],
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_swapped_cards', position1, position2],
     icon: 'swap',
     uniqInformations: { swapped_cards: [position1, position2] },

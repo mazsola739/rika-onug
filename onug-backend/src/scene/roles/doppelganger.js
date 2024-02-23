@@ -13,8 +13,9 @@ export const doppelganger = (gameState, title) => {
   const narration = ['doppelganger_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 1) {
@@ -28,10 +29,9 @@ export const doppelganger = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -49,7 +49,7 @@ export const doppelganger_interaction = (gameState, token) => {
     selectable_card_limit: { player: 1, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_must_one_any_other'],
     icon: 'copy',
     selectableCards: {
@@ -98,7 +98,7 @@ export const doppelganger_response = (
     viewed_cards: showCards,
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_you_are_that_role',
       `${newGameState.players[token]?.card.player_role}`,

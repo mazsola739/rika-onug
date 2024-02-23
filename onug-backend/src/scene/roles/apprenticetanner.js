@@ -13,8 +13,9 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 71) {
@@ -28,10 +29,9 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -45,7 +45,7 @@ export const apprenticetanner_interaction = (gameState, token) => {
     tanner: tanner,
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_tanner'],
     icon: 'tanner',
     uniqInformations: { tanner: tanner },

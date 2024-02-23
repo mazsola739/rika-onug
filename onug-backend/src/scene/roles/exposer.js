@@ -16,8 +16,9 @@ export const exposer = (gameState, title, prefix) => {
   const narration = createExposer(prefix)
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 46) {
@@ -31,10 +32,9 @@ export const exposer = (gameState, title, prefix) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 

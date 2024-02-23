@@ -47,8 +47,9 @@ export const epicbattle = (gameState, title, hasEasterEgg, hasEpicBattle, totalP
     }
   }
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     interaction = everyonemark_interaction(newGameState, token)
@@ -60,9 +61,8 @@ export const epicbattle = (gameState, title, hasEasterEgg, hasEpicBattle, totalP
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }

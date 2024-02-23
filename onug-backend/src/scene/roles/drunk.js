@@ -12,8 +12,9 @@ export const drunk = (gameState, title) => {
   const narration = ['drunk_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 2) {
@@ -27,10 +28,9 @@ export const drunk = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -44,7 +44,7 @@ export const drunk_interaction = (gameState, token) => {
       selectable_card_limit: { player: 0, center: 1 },
     }
 
-    return generateRoleInteraction(newGameState, {
+    return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_must_one_center'],
       icon: 'drunk',
       selectableCards: {
@@ -58,7 +58,7 @@ export const drunk_interaction = (gameState, token) => {
       shielded: true,
     }
 
-    return generateRoleInteraction(newGameState, {
+    return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_shielded'],
       icon: 'shield',
       uniqInformations: { shielded: true },
@@ -98,7 +98,7 @@ export const drunk_response = (gameState, token, selected_positions, title) => {
     ],
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_swapped_cards',
       selected_positions[0],

@@ -9,8 +9,9 @@ export const apprenticeseer = (gameState, title) => {
   const narration = ['apprenticeseer_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 18) {
@@ -24,10 +25,9 @@ export const apprenticeseer = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -40,7 +40,7 @@ export const apprenticeseer_interaction = (gameState, token) => {
     selectable_card_limit: { player: 0, center: 1 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_center'],
     icon: 'spy',
     selectableCards: {
@@ -86,7 +86,7 @@ export const apprenticeseer_response = (
     viewed_cards: [selected_positions[0]],
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', selected_positions[0]],
     icon: 'spy',
     showCards: viewCards,

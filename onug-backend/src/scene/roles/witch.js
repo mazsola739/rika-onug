@@ -15,8 +15,9 @@ export const witch = (gameState, title) => {
 
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 27) {
@@ -30,10 +31,9 @@ export const witch = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -46,7 +46,7 @@ export const witch_interaction = (gameState, token) => {
     selectable_card_limit: { player: 1, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_center'],
     icon: 'voodoo',
     selectableCards: {
@@ -99,7 +99,7 @@ export const witch_response = (gameState, token, selected_positions) => {
       selected_center_card: selected_positions[0],
     }
 
-    return generateRoleInteraction(newGameState, {
+    return generateRoleInteraction(newGameState, token, {
       private_message: [
         'interaction_saw_card',
         selected_positions[0],
@@ -147,7 +147,7 @@ export const witch_response = (gameState, token, selected_positions) => {
       ],
     }
 
-    return generateRoleInteraction(newGameState, {
+    return generateRoleInteraction(newGameState, token, {
       private_message: [
         'interaction_saw_card',
         'interaction_swapped_cards',

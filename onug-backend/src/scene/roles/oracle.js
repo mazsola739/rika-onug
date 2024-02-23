@@ -69,8 +69,9 @@ export const oracle_question = (gameState, title) => {
 
   newGameState.oracle.question = narration[1]
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 50) {
@@ -85,10 +86,9 @@ export const oracle_question = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -130,8 +130,9 @@ export const oracle_answer = (gameState, title) => {
   }
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 50) {

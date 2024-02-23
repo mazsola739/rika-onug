@@ -50,8 +50,9 @@ export const empath = (gameState, title, prefix) => {
   const narration = createEmpath(prefix, total_players)
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 77) {
@@ -65,10 +66,9 @@ export const empath = (gameState, title, prefix) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 

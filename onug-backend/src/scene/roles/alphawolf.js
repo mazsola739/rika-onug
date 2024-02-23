@@ -12,8 +12,9 @@ export const alphawolf = (gameState, title) => {
   const narration = ['alphawolf_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
 
+  const scene = []
+
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 17) {
@@ -27,10 +28,9 @@ export const alphawolf = (gameState, title) => {
       narration,
       interaction,
     })
-
-    newGameState.scene = scene
   })
 
+  newGameState.scene = scene
   return newGameState
 }
 
@@ -47,7 +47,7 @@ export const alphawolf_interaction = (gameState, token) => {
     selectable_card_limit: { player: 1, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_one_any_non_werewolf'],
     icon: 'claw',
     selectableCards: {
@@ -86,7 +86,7 @@ export const alphawolf_response = (
     swapped_cards: [selected_positions[0], 'center_wolf'],
   }
 
-  return generateRoleInteraction(newGameState, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_swapped_cards',
       selected_positions[0],
