@@ -21,7 +21,7 @@ export const masons = (gameState, title) => {
         (id) => newGameState.players[token].card.player_role_id === id
       )
     ) {
-      interaction = masons_interaction(newGameState, token)
+      interaction = masons_interaction(newGameState, token, title)
     }
 
     scene.push({

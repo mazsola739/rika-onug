@@ -13,7 +13,7 @@ export const nostradamus = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 80) {
-      interaction = nostradamus_interaction(newGameState, token)
+      interaction = nostradamus_interaction(newGameState, token, title)
     }
 
     scene.push({

@@ -19,7 +19,7 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 71) {
-      interaction = apprenticetanner_interaction(newGameState, token)
+      interaction = apprenticetanner_interaction(newGameState, token, title)
     }
 
     scene.push({

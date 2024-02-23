@@ -22,7 +22,7 @@ export const renfield = (gameState, title, hasDoppelganger) => {
       (newGameState.players[token].card.role_id === 38 &&
         newGameState.players[token].card.player_original_id === 1)
     ) {
-      interaction = renfield_interaction(newGameState, token)
+      interaction = renfield_interaction(newGameState, token, title)
     }
 
     scene.push({

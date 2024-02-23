@@ -76,7 +76,7 @@ export const oracle_question = (gameState, title) => {
 
     if (newGameState.players[token].card.player_original_id === 50) {
       newGameState.players[token].player_history.oracle = narration[1]
-      interaction = oracle_question_interaction(newGameState, token)
+      interaction = oracle_question_interaction(newGameState, token, title)
     }
 
     scene.push({
@@ -138,7 +138,7 @@ export const oracle_answer = (gameState, title) => {
 
     if (newGameState.players[token].card.player_original_id === 50) {
       newGameState.players[token].player_history.oracle = narration[0]
-      interaction = oracle_answer_interaction(newGameState, token)
+      interaction = oracle_answer_interaction(newGameState, token, title)
     }
   })
 

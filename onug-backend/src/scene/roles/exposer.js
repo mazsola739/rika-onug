@@ -22,7 +22,7 @@ export const exposer = (gameState, title, prefix) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 46) {
-      interaction = exposer_interaction(newGameState, token)
+      interaction = exposer_interaction(newGameState, token, title)
     }
 
     scene.push({

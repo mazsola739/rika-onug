@@ -28,7 +28,7 @@ export const beholder = (
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 73) {
-      interaction = beholder_interaction(newGameState, token)
+      interaction = beholder_interaction(newGameState, token, title)
     }
 
     scene.push({

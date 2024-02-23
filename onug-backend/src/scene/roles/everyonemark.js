@@ -12,7 +12,7 @@ export const everyonemark = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    interaction = everyonemark_interaction(newGameState, token)
+    interaction = everyonemark_interaction(newGameState, token, title)
 
           newGameState.players[token].player_history.scene_title = title
 scene.push({

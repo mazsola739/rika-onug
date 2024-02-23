@@ -17,7 +17,7 @@ export const supervillains = (gameState, title) => {
         (id) => newGameState.players[token].card.player_role_id === id
       )
     ) {
-      interaction = supervillain_interaction(newGameState, token)
+      interaction = supervillain_interaction(newGameState, token, title)
     }
 
     scene.push({

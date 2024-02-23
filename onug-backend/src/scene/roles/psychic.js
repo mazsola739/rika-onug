@@ -22,7 +22,7 @@ export const psychic = (gameState, title, prefix) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 51) {
-      interaction = psychic_interaction(newGameState, token)
+      interaction = psychic_interaction(newGameState, token, title)
     }
 
     scene.push({

@@ -15,7 +15,7 @@ export const voodoolou = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 70) {
-      interaction = witch_interaction(newGameState, token)
+      interaction = witch_interaction(newGameState, token, title)
     }
 
     scene.push({

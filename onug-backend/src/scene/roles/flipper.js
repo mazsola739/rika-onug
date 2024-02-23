@@ -22,7 +22,7 @@ export const flipper = (gameState, title, prefix) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 59) {
-      interaction = flipper_interaction(newGameState, token)
+      interaction = flipper_interaction(newGameState, token, title)
     }
 
     scene.push({

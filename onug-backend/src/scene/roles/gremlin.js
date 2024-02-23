@@ -16,7 +16,7 @@ export const gremlin = (gameState, title, prefix) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 33) {
-      interaction = gremlin_interaction(newGameState, token)
+      interaction = gremlin_interaction(newGameState, token, title)
     }
 
     scene.push({

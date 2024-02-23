@@ -19,7 +19,7 @@ export const sentinel = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 25) {
-      interaction = sentinel_interaction(newGameState, token)
+      interaction = sentinel_interaction(newGameState, token, title)
     }
 
     scene.push({

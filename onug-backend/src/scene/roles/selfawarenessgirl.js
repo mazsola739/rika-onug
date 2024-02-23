@@ -19,7 +19,7 @@ export const selfawarenessgirl = (gameState, title, hasDoppelganger) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 67) {
-      interaction = insomniac_interaction(newGameState, token)
+      interaction = insomniac_interaction(newGameState, token, title)
     }
 
     scene.push({

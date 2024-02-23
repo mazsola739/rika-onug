@@ -70,7 +70,7 @@ export const aliens = (gameState, title) => {
         random_instruction: narration[1],
         random_identifier: narration.slice(2),
       }
-      interaction = aliens_interaction(newGameState, token)
+      interaction = aliens_interaction(newGameState, token, title)
     }
     
         scene.push({

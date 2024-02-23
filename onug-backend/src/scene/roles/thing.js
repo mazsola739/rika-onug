@@ -20,11 +20,10 @@ export const thing = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 85) {
-      interaction = thing_interaction(newGameState, token)
+      interaction = thing_interaction(newGameState, token, title)
     }
 
-          newGameState.players[token].player_history.scene_title = title
-scene.push({
+    scene.push({
       type: SCENE,
       title,
       token,

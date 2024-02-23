@@ -74,7 +74,7 @@ export const rascal = (gameState, title, prefix) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 52) {
-      interaction = rascal_interaction(newGameState, token)
+      interaction = rascal_interaction(newGameState, token, title)
     }
 
     scene.push({

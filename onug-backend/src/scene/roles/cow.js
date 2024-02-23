@@ -20,7 +20,7 @@ export const cow = (gameState, title, hasDoppelganger) => {
       (newGameState.players[token].card.role_id === 45 &&
         newGameState.players[token].card.player_original_id === 1)
     ) {
-      interaction = cow_interaction(newGameState, token)
+      interaction = cow_interaction(newGameState, token, title)
     }
 
     scene.push({

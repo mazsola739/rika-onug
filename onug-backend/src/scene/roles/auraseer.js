@@ -18,7 +18,7 @@ export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 72) {
-      interaction = auraseer_interaction(newGameState, token)
+      interaction = auraseer_interaction(newGameState, token, title)
     }
 
     scene.push({

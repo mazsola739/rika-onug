@@ -34,7 +34,7 @@ export const bodysnatcher = (gameState, title, prefix) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 74) {
-      interaction = bodysnatcher_interaction(newGameState, token)
+      interaction = bodysnatcher_interaction(newGameState, token, title)
     }
 
     scene.push({

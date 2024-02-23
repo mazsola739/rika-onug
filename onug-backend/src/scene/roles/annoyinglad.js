@@ -14,7 +14,7 @@ export const annoyinglad = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 55) {
-      interaction = thing_interaction(newGameState, token)
+      interaction = thing_interaction(newGameState, token, title)
     }
 
     scene.push({

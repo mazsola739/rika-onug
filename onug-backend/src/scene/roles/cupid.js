@@ -13,7 +13,7 @@ export const cupid = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 31) {
-      interaction = cupid_interaction(newGameState, token)
+      interaction = cupid_interaction(newGameState, token, title)
     }
 
     scene.push({

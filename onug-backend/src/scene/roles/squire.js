@@ -18,7 +18,7 @@ export const squire = (gameState, title, hasDoppelganger) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 83) {
-      interaction = squire_interaction(newGameState, token)
+      interaction = squire_interaction(newGameState, token, title)
     }
 
     scene.push({

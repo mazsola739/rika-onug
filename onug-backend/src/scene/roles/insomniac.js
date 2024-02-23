@@ -23,7 +23,7 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 4) {
-      interaction = insomniac_interaction(newGameState, token)
+      interaction = insomniac_interaction(newGameState, token, title)
     }
 
     scene.push({

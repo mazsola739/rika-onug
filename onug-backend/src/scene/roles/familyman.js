@@ -34,7 +34,7 @@ export const familyman = (gameState, title, hasDoppelganger) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 78) {
-      interaction = familyman_interaction(newGameState, token)
+      interaction = familyman_interaction(newGameState, token, title)
     }
 
     scene.push({

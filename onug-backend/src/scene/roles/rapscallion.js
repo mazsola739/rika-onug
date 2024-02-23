@@ -13,7 +13,7 @@ export const rapscallion = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 65) {
-      interaction = rapscallion_interaction(newGameState, token)
+      interaction = rapscallion_interaction(newGameState, token, title)
     }
 
     scene.push({

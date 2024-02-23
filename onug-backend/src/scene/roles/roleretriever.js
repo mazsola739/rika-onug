@@ -14,7 +14,7 @@ export const roleretriever = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 66) {
-      interaction = robber_interaction(newGameState, token)
+      interaction = robber_interaction(newGameState, token, title)
     }
 
     scene.push({

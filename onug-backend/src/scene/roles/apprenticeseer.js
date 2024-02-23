@@ -15,7 +15,7 @@ export const apprenticeseer = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 18) {
-      interaction = apprenticeseer_interaction(newGameState, token)
+      interaction = apprenticeseer_interaction(newGameState, token, title)
     }
 
     scene.push({

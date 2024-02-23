@@ -13,7 +13,7 @@ export const copycat = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 30) {
-      interaction = copycat_interaction(newGameState, token)
+      interaction = copycat_interaction(newGameState, token, title)
     }
 
     scene.push({

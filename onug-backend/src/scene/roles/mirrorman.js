@@ -13,7 +13,7 @@ export const mirrorman = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 64) {
-      interaction = mirrorman_interaction(newGameState, token)
+      interaction = mirrorman_interaction(newGameState, token, title)
     }
 
     scene.push({

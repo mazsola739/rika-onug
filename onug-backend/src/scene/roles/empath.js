@@ -56,7 +56,7 @@ export const empath = (gameState, title, prefix) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 77) {
-      interaction = empath_interaction(newGameState, token)
+      interaction = empath_interaction(newGameState, token, title)
     }
 
     scene.push({

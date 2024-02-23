@@ -16,7 +16,7 @@ export const vampires = (gameState, title) => {
         (id) => newGameState.players[token].card.player_role_id === id
       )
     ) {
-      interaction = vampires_interaction(newGameState, token)
+      interaction = vampires_interaction(newGameState, token, title)
     }
 
           newGameState.players[token].player_history.scene_title = title

@@ -23,7 +23,7 @@ export const revealer = (gameState, title, prefix) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 24) {
-      interaction = revealer_interaction(newGameState, token)
+      interaction = revealer_interaction(newGameState, token, title)
     }
 
     scene.push({

@@ -12,11 +12,10 @@ export const lovers = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].mark.id === 'mark_of_love') {
-      interaction = lover_interaction(newGameState, token)
+      interaction = lover_interaction(newGameState, token, title)
     }
 
-          newGameState.players[token].player_history.scene_title = title
-scene.push({
+    scene.push({
       type: SCENE,
       title,
       token,

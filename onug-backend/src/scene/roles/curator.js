@@ -25,7 +25,7 @@ export const curator = (gameState, title, prefix) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 20) {
-      interaction = curator_interaction(newGameState, token)
+      interaction = curator_interaction(newGameState, token, title)
     }
 
     scene.push({

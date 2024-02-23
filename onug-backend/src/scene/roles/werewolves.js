@@ -28,7 +28,7 @@ export const werewolves = (gameState, title, hasDreamWolf) => {
         (id) => newGameState.players[token].card.player_role_id === id
       )
     ) {
-      interaction = werewolves_interaction(newGameState, token)
+      interaction = werewolves_interaction(newGameState, token, title)
     }
     
           newGameState.players[token].player_history.scene_title = title

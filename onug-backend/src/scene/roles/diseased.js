@@ -13,7 +13,7 @@ export const diseased = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 32) {
-      interaction = diseased_interaction(newGameState, token)
+      interaction = diseased_interaction(newGameState, token, title)
     }
 
     scene.push({

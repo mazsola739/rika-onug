@@ -35,7 +35,7 @@ export const mortician = (gameState, title, prefix) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 36) {
-      interaction = mortician_interaction(newGameState, token)
+      interaction = mortician_interaction(newGameState, token, title)
     }
 
     scene.push({

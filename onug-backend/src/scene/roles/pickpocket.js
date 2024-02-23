@@ -16,7 +16,7 @@ export const pickpocket = (gameState, title, prefix) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 36) {
-      interaction = pickpocket_interaction(newGameState, token)
+      interaction = pickpocket_interaction(newGameState, token, title)
     }
 
     scene.push({

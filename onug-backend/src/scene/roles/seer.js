@@ -19,7 +19,7 @@ export const seer = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 9) {
-      interaction = seer_interaction(newGameState, token)
+      interaction = seer_interaction(newGameState, token, title)
     }
 
     scene.push({

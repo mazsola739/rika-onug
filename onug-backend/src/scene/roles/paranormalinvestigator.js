@@ -19,7 +19,7 @@ export const paranormalinvestigator = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 23) {
-      interaction = paranormalinvestigator_interaction(newGameState, token)
+      interaction = paranormalinvestigator_interaction(newGameState, token, title)
     }
 
     scene.push({

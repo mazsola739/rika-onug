@@ -30,7 +30,7 @@ export const blob = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 44) {
-      interaction = blob_interaction(newGameState, token)
+      interaction = blob_interaction(newGameState, token, title)
     }
 
     scene.push({

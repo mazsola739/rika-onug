@@ -14,7 +14,7 @@ export const switcheroo = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 68) {
-      interaction = troublemaker_interaction(newGameState, token)
+      interaction = troublemaker_interaction(newGameState, token, title)
     }
 
     scene.push({

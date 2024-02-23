@@ -14,7 +14,7 @@ export const detector = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 56) {
-      interaction = seer_interaction(newGameState, token)
+      interaction = seer_interaction(newGameState, token, title)
     }
 
     scene.push({

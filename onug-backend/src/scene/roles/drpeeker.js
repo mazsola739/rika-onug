@@ -13,7 +13,7 @@ export const drpeeker = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 57) {
-      interaction = drpeeker_interaction(newGameState, token)
+      interaction = drpeeker_interaction(newGameState, token, title)
     }
 
     scene.push({

@@ -19,7 +19,7 @@ export const marksman = (gameState, title, hasDoppelganger) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 35) {
-      interaction = marksman_interaction(newGameState, token)
+      interaction = marksman_interaction(newGameState, token, title)
     }
 
     scene.push({

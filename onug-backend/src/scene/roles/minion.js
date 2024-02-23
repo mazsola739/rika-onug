@@ -20,7 +20,7 @@ export const minion = (gameState, title, hasDoppelganger) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 7) {
-      interaction = minion_interaction(newGameState, token)
+      interaction = minion_interaction(newGameState, token, title)
     }
 
     scene.push({

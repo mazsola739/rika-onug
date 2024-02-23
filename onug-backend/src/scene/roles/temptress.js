@@ -13,7 +13,7 @@ export const temptress = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 69) {
-      interaction = temptress_interaction(newGameState, token)
+      interaction = temptress_interaction(newGameState, token, title)
     }
 
     scene.push({

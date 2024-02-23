@@ -18,7 +18,7 @@ export const leader = (gameState, title, hasDoppelganger) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 48) {
-      interaction = leader_interaction(newGameState, token)
+      interaction = leader_interaction(newGameState, token, title)
     }
 
     scene.push({
@@ -49,7 +49,7 @@ export const leader_zerbgroob = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 48) {
-      interaction = leader_zerbgroob_interaction(newGameState, token)
+      interaction = leader_zerbgroob_interaction(newGameState, token, title)
     }
 
     scene.push({

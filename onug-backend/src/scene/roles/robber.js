@@ -20,7 +20,7 @@ export const robber = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 8) {
-      interaction = robber_interaction(newGameState, token)
+      interaction = robber_interaction(newGameState, token, title)
     }
 
     scene.push({

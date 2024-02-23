@@ -21,14 +21,14 @@ export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
 
     if (prefix === 'assassin') {
       if (newGameState.players[token].card.player_original_id === 28) {
-        interaction = apprenticeassassin_interaction(newGameState, token)
+        interaction = apprenticeassassin_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_assassin') {
       if (
         newGameState.players[token].card.role_id === 28 &&
         newGameState.players[token].card.player_original_id === 1
       ) {
-        interaction = apprenticeassassin_interaction(newGameState, token)
+        interaction = apprenticeassassin_interaction(newGameState, token, title)
       }
     }
 

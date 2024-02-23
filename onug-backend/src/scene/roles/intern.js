@@ -22,7 +22,7 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 62) {
-      interaction = intern_interaction(newGameState, token)
+      interaction = intern_interaction(newGameState, token, title)
     }
 
     scene.push({

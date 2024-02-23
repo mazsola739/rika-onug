@@ -66,7 +66,7 @@ export const websocketServer = (port) => {
         if (message.type === START_GAME)        return startGame(ws, message)
         if (message.type === ARRIVE_GAME_PLAY)  return hydrateGamePlay(ws, message)
         if (message.type === STOP_GAME)         return stopGame(message)
-        //if (message.type === SCENE)       return interaction(ws, message)
+        if (message.type === SCENE)             return interaction(ws, message)
       })
     })
   } catch (error) {

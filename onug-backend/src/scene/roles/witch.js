@@ -21,7 +21,7 @@ export const witch = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 27) {
-      interaction = witch_interaction(newGameState, token)
+      interaction = witch_interaction(newGameState, token, title)
     }
 
     scene.push({

@@ -18,7 +18,7 @@ export const evilometer = (gameState, title, hasDoppelganger) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 58) {
-      interaction = evilometer_interaction(newGameState, token)
+      interaction = evilometer_interaction(newGameState, token, title)
     }
 
     scene.push({

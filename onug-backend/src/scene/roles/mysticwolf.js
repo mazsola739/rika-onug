@@ -19,7 +19,7 @@ export const mysticwolf = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 22) {
-      interaction = mysticwolf_interaction(newGameState, token)
+      interaction = mysticwolf_interaction(newGameState, token, title)
     }
 
     scene.push({
