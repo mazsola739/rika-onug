@@ -38,7 +38,7 @@ export const flipper = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const flipper_interaction = (gameState, token) => {
+export const flipper_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
@@ -48,6 +48,7 @@ export const flipper_interaction = (gameState, token) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     selectable_cards: selectablePlayerNumbers,
     selectable_card_limit: { player: 1, center: 0 },
   }
@@ -63,7 +64,7 @@ export const flipper_interaction = (gameState, token) => {
 }
 
 //TODO better response message
-export const flipper_response = (gameState, token, selected_positions) => {
+export const flipper_response = (gameState, token, selected_positions, title) => {
   if (
     !isValidSelection(
       selected_positions,
@@ -93,6 +94,7 @@ export const flipper_response = (gameState, token, selected_positions) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     card_or_mark_action: true,
   }
 

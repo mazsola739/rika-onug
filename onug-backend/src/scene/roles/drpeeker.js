@@ -29,9 +29,9 @@ export const drpeeker = (gameState, title) => {
   return newGameState
 }
 
-export const drpeeker_interaction = (gameState, token) => {
+export const drpeeker_interaction = (gameState, token, title) => {
   return {}
 }
-export const drpeeker_response = (gameState, token, selected_positions) => {
+export const drpeeker_response = (gameState, token, selected_positions, title) => {
   return {}
 }

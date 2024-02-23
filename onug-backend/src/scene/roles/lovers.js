@@ -15,7 +15,8 @@ export const lovers = (gameState, title) => {
       interaction = lover_interaction(newGameState, token)
     }
 
-    scene.push({
+          newGameState.players[token].player_history.scene_title = title
+scene.push({
       type: SCENE,
       title,
       token,
@@ -28,6 +29,6 @@ export const lovers = (gameState, title) => {
   return newGameState
 }
 
-export const lover_interaction = (gameState, token) => {
+export const lover_interaction = (gameState, token, title) => {
   return {}
 }

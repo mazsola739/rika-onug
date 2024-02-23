@@ -29,9 +29,9 @@ export const instigator = (gameState, title) => {
   return newGameState
 }
 
-export const instigator_interaction = (gameState, token) => {
+export const instigator_interaction = (gameState, token, title) => {
   return {}
 }
-export const instigator_response = (gameState, token, selected_positions) => {
+export const instigator_response = (gameState, token, selected_positions, title) => {
   return {}
 }

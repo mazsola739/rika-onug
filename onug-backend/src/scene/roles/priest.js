@@ -41,9 +41,9 @@ export const priest = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const priest_interaction = (gameState, token) => {
+export const priest_interaction = (gameState, token, title) => {
   return {}
 }
-export const priest_response = (gameState, token, selected_positions) => {
+export const priest_response = (gameState, token, selected_positions, title) => {
   return {}
 }

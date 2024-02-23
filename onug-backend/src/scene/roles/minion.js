@@ -36,13 +36,14 @@ export const minion = (gameState, title, hasDoppelganger) => {
   return newGameState
 }
 
-export const minion_interaction = (gameState, token) => {
+export const minion_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const werewolfPlayerNumbers = werewolvesAndDreamWolfIds //TODO
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     werewolves: werewolfPlayerNumbers,
   }
 

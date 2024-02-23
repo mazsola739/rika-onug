@@ -5,6 +5,8 @@ export type WsJsonMessage = {
   type?: string
   errors?: string[]
   room_id?: string
+  selected_cards?: number[]
+  success?: boolean
   player_name?: string
   player_number?: number
   player_original_id?: number
@@ -14,84 +16,92 @@ export type WsJsonMessage = {
   player_team?: string
   stage?: string
   title?: string
+  actual_scene?: {
+    scene_number: number
+    scene_start_time: number
+    scene_title: string
+  }
   board?: {
     players?: PlayersType[]
     gamePlayBoardCards?: GamePlayBoardCardType[]
     gameTableBoardCards?: GameTableBoardCardType[]
   }
-  selected_cards?: number[]
-  success?: boolean
-  actual_scene?: {
-    scene_number: number
-    scene_start_time: number
-    scene_title: string
-    narration?: string[]
+  narration?: string[]
+  interaction?: {
+    title?: string
+    icon?: string
+    player_name?: string
+    player_number?: number
+    player_original_id?: number
+    player_card_id?: number
+    player_role?: string
+    player_role_id?: number
+    player_team?: string
+    private_message?: string[]
+    selectable_card_limit?: { player: number; center: number }
+    selectable_mark_limit?: { mark: number }
+    selectable_cards?: string[]
+    shielded_cards: string[]
+    artifacted_cards?: string[]
+    show_cards?: Record<string, number>[]
+    show_marks?: Record<string, number>[] //TODO correcting type
+    
+    //unique informations
+    new_role_id?: number
+    copied_role?: string
+    instant_night_action?: string
+    viewed_cards?: string[]
+    swapped_cards?: string[]
+    flipped_cards?: string[]
+    new_artifact_card?: string
+    new_shield_card?: string
+
+    //icons
+    aliens?: string[]
+    assassin?: string[]
+    awesome?: string[]
+    bat?: string[]
+    blob?: string[]
+    bulb?: string[]
+    clarity?: string[]
+    claw?: string[]
+    cow?: string[]
+    diseased?: string[]
+    dreamwolf?: string[]
+    dress?: string[]
+    drunk?: string[]
+    empath?: string[]
+    evil?: string[]
+    family?: string[]
+    fang?: string[]
+    fear?: string[]
+    friend?: string[]
+    jest?: string[]
+    like?: string[]
+    lovers?: string[]
+    masons?: string[]
+    mad?: string[]
+    mortician?: string[]
+    nice?: string[]
+    pretty?: string[]
+    seer?: string[]
+    select?: string[]
+    shield?: string[]
+    smell?: string[]
+    villains?: string[]
+    sus?: string[]
+    swap?: string[]
+    tanner?: string[]
+    tapped?: string[]
+    target?: string[]
+    traitor?: string[]
+    trophy?: string[]
+    ufo?: string[]
+    vampires?: string[]
+    werewolves?: string[]
   }
   message?: string[]
   icon?: string
-  shielded_cards?: string[]
-  artifacted_cards?: string[]
-  show_card?: Record<string, number>[]
-  show_cards?: Record<string, number>[]
-  show_marks?: Record<string, number>[] //TODO correcting type
-  selectable_cards?: string[]
-  selectable_card_limit?: { player: number; center: number }
-  selectable_marks?: string[]
-  selectable_mark_limit?: { mark: number }
-
-  //unique informations
-  new_role_id?: number
-  copied_role?: string
-  instant_night_action?: string
-  viewed_cards?: string[]
-  swapped_cards?: string[]
-  flipped_cards?: string[]
-  new_artifact_card?: string
-  new_shield_card?: string
-
-  //icons
-  aliens?: string[]
-  assassin?: string[]
-  awesome?: string[]
-  bat?: string[]
-  blob?: string[]
-  bulb?: string[]
-  clarity?: string[]
-  claw?: string[]
-  cow?: string[]
-  diseased?: string[]
-  dreamwolf?: string[]
-  dress?: string[]
-  drunk?: string[]
-  empath?: string[]
-  evil?: string[]
-  family?: string[]
-  fang?: string[]
-  fear?: string[]
-  friend?: string[]
-  jest?: string[]
-  like?: string[]
-  lovers?: string[]
-  masons?: string[]
-  mad?: string[]
-  mortician?: string[]
-  nice?: string[]
-  pretty?: string[]
-  seer?: string[]
-  select?: string[]
-  shield?: string[]
-  smell?: string[]
-  villains?: string[]
-  sus?: string[]
-  swap?: string[]
-  tanner?: string[]
-  tapped?: string[]
-  target?: string[]
-  traitor?: string[]
-  trophy?: string[]
-  ufo?: string[]
-  vampires?: string[]
-  werewolves?: string[]
 }
 
 export type RoomType = {

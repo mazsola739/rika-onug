@@ -31,11 +31,12 @@ export const apprenticeseer = (gameState, title) => {
   return newGameState
 }
 
-export const apprenticeseer_interaction = (gameState, token) => {
+export const apprenticeseer_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     selectable_cards: centerCardPositions,
     selectable_card_limit: { player: 0, center: 1 },
   }
@@ -82,6 +83,7 @@ export const apprenticeseer_response = (
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     card_or_mark_action: true,
     viewed_cards: [selected_positions[0]],
   }

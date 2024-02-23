@@ -46,6 +46,6 @@ export const blob = (gameState, title) => {
   return newGameState
 }
 
-export const blob_interaction = (gameState, token) => {
+export const blob_interaction = (gameState, token, title) => {
   return {}
 }

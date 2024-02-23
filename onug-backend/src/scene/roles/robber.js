@@ -36,7 +36,7 @@ export const robber = (gameState, title) => {
   return newGameState
 }
 
-export const robber_interaction = (gameState, token) => {
+export const robber_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   if (!newGameState.players[token].shield) {
@@ -47,6 +47,7 @@ export const robber_interaction = (gameState, token) => {
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
+    scene_title: title,
       selectable_cards: selectablePlayerNumbers,
       selectable_card_limit: { player: 1, center: 0 },
     }
@@ -62,6 +63,7 @@ export const robber_interaction = (gameState, token) => {
   } else {
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
+    scene_title: title,
       shielded: true,
     }
 
@@ -110,6 +112,7 @@ export const robber_response = (
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     card_or_mark_action: true,
     swapped_cards: [
       `player_${newGameState.players[token].player_number}`,

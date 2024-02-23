@@ -8,7 +8,7 @@ import {
   READY,
   PAUSE_GAME,
   STOP_GAME,
-  INTERACTION,
+  SCENE,
   LEAVE_TABLE,
   UPDATE_ROOM,
 } from 'constant'
@@ -93,7 +93,7 @@ export const useClickHandler = (room_id: string, token: string) => {
   const handleInteraction = useCallback(
     (selected_cards: string[]) => {
       sendJsonMessage?.({
-        type: INTERACTION,
+        type: SCENE,
         room_id,
         token,
         selected_positions: selected_cards,

@@ -29,9 +29,9 @@ export const cupid = (gameState, title) => {
   return newGameState
 }
 
-export const cupid_interaction = (gameState, token) => {
+export const cupid_interaction = (gameState, token, title) => {
   return {}
 }
-export const cupid_response = (gameState, token, selected_positions) => {
+export const cupid_response = (gameState, token, selected_positions, title) => {
   return {}
 }

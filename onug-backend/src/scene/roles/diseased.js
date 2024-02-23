@@ -29,9 +29,9 @@ export const diseased = (gameState, title) => {
   return newGameState
 }
 
-export const diseased_interaction = (gameState, token) => {
+export const diseased_interaction = (gameState, token, title) => {
   return {}
 }
-export const diseased_response = (gameState, token, selected_positions) => {
+export const diseased_response = (gameState, token, selected_positions, title) => {
   return {}
 }

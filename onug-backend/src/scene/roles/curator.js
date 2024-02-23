@@ -41,7 +41,7 @@ export const curator = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const curator_interaction = (gameState, token) => {
+export const curator_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const allPlayerTokens = getAllPlayerTokens(newGameState.players) //TODO better solution
@@ -60,6 +60,7 @@ export const curator_interaction = (gameState, token) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     selectable_cards: selectablePlayersWithNoArtifact,
     selectable_card_limit: { player: 1, center: 0 },
   }
@@ -103,6 +104,7 @@ export const curator_response = (
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     new_artifact_card: selected_positions[0],
   }
 

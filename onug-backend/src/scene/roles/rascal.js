@@ -90,9 +90,9 @@ export const rascal = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const rascal_interaction = (gameState, token) => {
+export const rascal_interaction = (gameState, token, title) => {
   return {}
 }
-export const rascal_response = (gameState, token, selected_positions) => {
+export const rascal_response = (gameState, token, selected_positions, title) => {
   return {}
 }

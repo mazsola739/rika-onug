@@ -35,7 +35,7 @@ export const sentinel = (gameState, title) => {
   return newGameState
 }
 
-export const sentinel_interaction = (gameState, token) => {
+export const sentinel_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
@@ -45,6 +45,7 @@ export const sentinel_interaction = (gameState, token) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     selectable_cards: selectablePlayerNumbers,
     selectable_card_limit: { player: 1, center: 0 },
   }
@@ -87,6 +88,7 @@ export const sentinel_response = (
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     new_shield_card: [selected_positions[0]],
   }
 

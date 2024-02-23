@@ -29,10 +29,10 @@ export const nostradamus = (gameState, title) => {
   return newGameState
 }
 
-export const nostradamus_interaction = (gameState, token) => {
+export const nostradamus_interaction = (gameState, token, title) => {
   return {}
 }
-export const nostradamus_response = (gameState, token, selected_positions) => {
+export const nostradamus_response = (gameState, token, selected_positions, title) => {
   return {}
 } //newGameState.nostradamus_team = ?
 

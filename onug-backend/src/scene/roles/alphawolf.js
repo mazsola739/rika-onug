@@ -18,7 +18,7 @@ export const alphawolf = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 17) {
-      interaction = alphawolf_interaction(newGameState, token)
+      interaction = alphawolf_interaction(newGameState, token, title)
     }
 
     scene.push({
@@ -34,7 +34,7 @@ export const alphawolf = (gameState, title) => {
   return newGameState
 }
 
-export const alphawolf_interaction = (gameState, token) => {
+export const alphawolf_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(
@@ -43,6 +43,7 @@ export const alphawolf_interaction = (gameState, token) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     selectable_cards: selectablePlayerNumbers,
     selectable_card_limit: { player: 1, center: 0 },
   }
@@ -82,6 +83,7 @@ export const alphawolf_response = (
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     card_or_mark_action: true,
     swapped_cards: [selected_positions[0], 'center_wolf'],
   }

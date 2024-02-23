@@ -92,14 +92,15 @@ export const oracle_question = (gameState, title) => {
   return newGameState
 }
 
-export const oracle_question_interaction = (gameState, token) => {
+export const oracle_question_interaction = (gameState, token, title) => {
   return {}
 }
 //TODO newGameState.oracle.answer = ? if no answer do sure answer
 export const oracle_question_response = (
   gameState,
   token,
-  selected_positions
+  selected_positions,
+  title
 ) => {
   return {}
 }
@@ -145,6 +146,6 @@ export const oracle_answer = (gameState, title) => {
   return newGameState
 }
 
-export const oracle_answer_interaction = (gameState, token) => {
+export const oracle_answer_interaction = (gameState, token, title) => {
   return {}
 }

@@ -41,9 +41,9 @@ export const assassin = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const assassin_interaction = (gameState, token) => {
+export const assassin_interaction = (gameState, token, title) => {
   return {}
 }
-export const assassin_response = (gameState, token, selected_positions) => {
+export const assassin_response = (gameState, token, selected_positions, title) => {
   return {}
 }

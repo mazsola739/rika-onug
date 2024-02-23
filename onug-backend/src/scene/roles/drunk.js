@@ -18,7 +18,7 @@ export const drunk = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 2) {
-      interaction = drunk_interaction(newGameState, token)
+      interaction = drunk_interaction(newGameState, token, title)
     }
 
     scene.push({
@@ -34,12 +34,13 @@ export const drunk = (gameState, title) => {
   return newGameState
 }
 
-export const drunk_interaction = (gameState, token) => {
+export const drunk_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   if (!newGameState.players[token].shield) {
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
+      scene_title: title,
       selectable_cards: centerCardPositions,
       selectable_card_limit: { player: 0, center: 1 },
     }
@@ -55,6 +56,7 @@ export const drunk_interaction = (gameState, token) => {
   } else {
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
+    scene_title: title,
       shielded: true,
     }
 
@@ -91,6 +93,7 @@ export const drunk_response = (gameState, token, selected_positions, title) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     card_or_mark_action: true,
     swapped_cards: [
       `player_${newGameState.players[token].player_number}`,

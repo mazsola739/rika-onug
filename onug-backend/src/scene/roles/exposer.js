@@ -38,9 +38,9 @@ export const exposer = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const exposer_interaction = (gameState, token) => {
+export const exposer_interaction = (gameState, token, title) => {
   return {}
 }
-export const exposer_response = (gameState, token, selected_positions) => {
+export const exposer_response = (gameState, token, selected_positions, title) => {
   return {}
 }

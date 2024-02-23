@@ -31,7 +31,8 @@ export const werewolves = (gameState, title, hasDreamWolf) => {
       interaction = werewolves_interaction(newGameState, token)
     }
     
-    scene.push({
+          newGameState.players[token].player_history.scene_title = title
+scene.push({
       type: SCENE,
       title,
       token,
@@ -44,7 +45,7 @@ export const werewolves = (gameState, title, hasDreamWolf) => {
   return newGameState
 }
 
-export const werewolves_interaction = (gameState, token) => {
+export const werewolves_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const werewolves = getWerewolfPlayerNumbersByRoleIds(newGameState.players)
@@ -53,6 +54,7 @@ export const werewolves_interaction = (gameState, token) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     selectable_cards: loneWolf ? centerCardPositions : [],
     selectable_card_limit: { player: 0, center: 1 },
     werewolves,
@@ -72,7 +74,7 @@ export const werewolves_interaction = (gameState, token) => {
   })
 }
 
-export const werewolves_response = (gameState, token, selected_positions) => {
+export const werewolves_response = (gameState, token, selected_positions, title) => {
   if (
     !isValidSelection(
       selected_positions,
@@ -99,6 +101,7 @@ export const werewolves_response = (gameState, token, selected_positions) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     card_or_mark_action: true,
     viewed_cards: [selected_positions[0]],
   }

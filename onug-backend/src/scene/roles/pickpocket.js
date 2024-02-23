@@ -32,9 +32,9 @@ export const pickpocket = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const pickpocket_interaction = (gameState, token) => {
+export const pickpocket_interaction = (gameState, token, title) => {
   return {}
 }
-export const pickpocket_response = (gameState, token, selected_positions) => {
+export const pickpocket_response = (gameState, token, selected_positions, title) => {
   return {}
 }

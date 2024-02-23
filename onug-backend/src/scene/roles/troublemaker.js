@@ -32,7 +32,7 @@ export const troublemaker = (gameState, title) => {
   return newGameState
 }
 
-export const troublemaker_interaction = (gameState, token) => {
+export const troublemaker_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
@@ -42,6 +42,7 @@ export const troublemaker_interaction = (gameState, token) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     selectable_cards: selectablePlayerNumbers,
     selectable_card_limit: { player: 2, center: 0 },
   }
@@ -83,6 +84,7 @@ export const troublemaker_response = (
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     card_or_mark_action: true,
     swapped_cards: [position1, position2],
   }

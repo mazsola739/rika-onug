@@ -39,7 +39,7 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
   return newGameState
 }
 
-export const insomniac_interaction = (gameState, token) => {
+export const insomniac_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(
@@ -59,6 +59,7 @@ export const insomniac_interaction = (gameState, token) => {
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
+    scene_title: title,
       viewed_cards: showCards,
     }
 
@@ -70,6 +71,7 @@ export const insomniac_interaction = (gameState, token) => {
   } else {
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
+    scene_title: title,
       shielded: true,
     }
 

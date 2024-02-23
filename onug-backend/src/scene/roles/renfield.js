@@ -38,9 +38,9 @@ export const renfield = (gameState, title, hasDoppelganger) => {
   return newGameState
 }
 
-export const renfield_interaction = (gameState, token) => {
+export const renfield_interaction = (gameState, token, title) => {
   return {}
 }
-export const renfield_response = (gameState, token, selected_positions) => {
+export const renfield_response = (gameState, token, selected_positions, title) => {
   return {}
 }

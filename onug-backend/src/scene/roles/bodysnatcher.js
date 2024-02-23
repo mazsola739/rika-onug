@@ -50,9 +50,9 @@ export const bodysnatcher = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const bodysnatcher_interaction = (gameState, token) => {
+export const bodysnatcher_interaction = (gameState, token, title) => {
   return {}
 }
-export const bodysnatcher_response = (gameState, token, selected_positions) => {
+export const bodysnatcher_response = (gameState, token, selected_positions, title) => {
   return {}
 }

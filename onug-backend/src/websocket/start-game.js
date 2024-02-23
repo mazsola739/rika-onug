@@ -26,7 +26,6 @@ export const startGame = async (ws, message) => {
       scene_title: "GAME_START",
       scene_number: 0,
       scene_start_time: startTime,
-      narration: false,
     },
   }
 

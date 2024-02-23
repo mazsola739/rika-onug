@@ -37,11 +37,12 @@ export const witch = (gameState, title) => {
   return newGameState
 }
 
-export const witch_interaction = (gameState, token) => {
+export const witch_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     selectable_cards: centerCardPositions,
     selectable_card_limit: { player: 1, center: 0 },
   }
@@ -56,7 +57,7 @@ export const witch_interaction = (gameState, token) => {
   })
 }
 
-export const witch_response = (gameState, token, selected_positions) => {
+export const witch_response = (gameState, token, selected_positions, title) => {
   if (
     !isValidSelection(
       selected_positions,
@@ -93,6 +94,7 @@ export const witch_response = (gameState, token, selected_positions) => {
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
+    scene_title: title,
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 },
       viewed_cards: [selected_positions[0]],
@@ -141,6 +143,7 @@ export const witch_response = (gameState, token, selected_positions) => {
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
+    scene_title: title,
       swapped_cards: [
         newGameState.players[token].player_history.selected_center_card,
         selected_positions[0],

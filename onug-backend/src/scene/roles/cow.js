@@ -36,6 +36,6 @@ export const cow = (gameState, title, hasDoppelganger) => {
   return newGameState
 }
 
-export const cow_interaction = (gameState, token) => {
+export const cow_interaction = (gameState, token, title) => {
   return {}
 }

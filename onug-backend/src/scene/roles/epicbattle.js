@@ -54,7 +54,8 @@ export const epicbattle = (gameState, title, hasEasterEgg, hasEpicBattle, totalP
 
     interaction = everyonemark_interaction(newGameState, token)
 
-    scene.push({
+          newGameState.players[token].player_history.scene_title = title
+scene.push({
       type: SCENE,
       title,
       token,

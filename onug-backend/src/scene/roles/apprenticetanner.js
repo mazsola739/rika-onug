@@ -35,13 +35,14 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
   return newGameState
 }
 
-export const apprenticetanner_interaction = (gameState, token) => {
+export const apprenticetanner_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const tanner = getTannerNumberByRoleIds(newGameState.players)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     tanner: tanner,
   }
 

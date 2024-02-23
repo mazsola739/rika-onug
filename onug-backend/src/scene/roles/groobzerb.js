@@ -38,9 +38,9 @@ export const groobzerb = (gameState, title, hasDoppelganger) => {
   return newGameState
 }
 
-export const groobzerb_interaction = (gameState, token) => {
+export const groobzerb_interaction = (gameState, token, title) => {
   return {}
 }
-export const groobzerb_response = (gameState, token, selected_positions) => {
+export const groobzerb_response = (gameState, token, selected_positions, title) => {
   return {}
 }

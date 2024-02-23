@@ -51,9 +51,9 @@ export const mortician = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const mortician_interaction = (gameState, token) => {
+export const mortician_interaction = (gameState, token, title) => {
   return {}
 }
-export const mortician_response = (gameState, token, selected_positions) => {
+export const mortician_response = (gameState, token, selected_positions, title) => {
   return {}
 }

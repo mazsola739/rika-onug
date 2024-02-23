@@ -34,9 +34,9 @@ export const squire = (gameState, title, hasDoppelganger) => {
   return newGameState
 }
 
-export const squire_interaction = (gameState, token) => {
+export const squire_interaction = (gameState, token, title) => {
   return {}
 }
-export const squire_response = (gameState, token, selected_positions) => {
+export const squire_response = (gameState, token, selected_positions, title) => {
   return {}
 }

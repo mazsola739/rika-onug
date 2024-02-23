@@ -14,7 +14,8 @@ export const everyonemark = (gameState, title) => {
 
     interaction = everyonemark_interaction(newGameState, token)
 
-    scene.push({
+          newGameState.players[token].player_history.scene_title = title
+scene.push({
       type: SCENE,
       title,
       token,
@@ -27,6 +28,6 @@ export const everyonemark = (gameState, title) => {
   return newGameState
 }
 
-export const everyonemark_interaction = (gameState, token) => {
+export const everyonemark_interaction = (gameState, token, title) => {
   return {}
 }

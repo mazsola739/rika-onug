@@ -35,7 +35,7 @@ export const seer = (gameState, title) => {
   return newGameState
 }
 
-export const seer_interaction = (gameState, token) => {
+export const seer_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
@@ -45,6 +45,7 @@ export const seer_interaction = (gameState, token) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     selectable_cards: selectablePlayerNumbers,
     selectable_card_limit: { player: 1, center: 2 },
   }
@@ -114,6 +115,7 @@ export const seer_response = (gameState, token, selected_positions, title) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     card_or_mark_action: true,
     viewed_cards: showCards,
   }

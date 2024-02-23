@@ -29,9 +29,9 @@ export const rapscallion = (gameState, title) => {
   return newGameState
 }
 
-export const rapscallion_interaction = (gameState, token) => {
+export const rapscallion_interaction = (gameState, token, title) => {
   return {}
 }
-export const rapscallion_response = (gameState, token, selected_positions) => {
+export const rapscallion_response = (gameState, token, selected_positions, title) => {
   return {}
 }

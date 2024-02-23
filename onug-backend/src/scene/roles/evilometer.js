@@ -34,6 +34,6 @@ export const evilometer = (gameState, title, hasDoppelganger) => {
   return newGameState
 }
 
-export const evilometer_interaction = (gameState, token) => {
+export const evilometer_interaction = (gameState, token, title) => {
   return {}
 }

@@ -34,7 +34,7 @@ export const leader = (gameState, title, hasDoppelganger) => {
   return newGameState
 }
 
-export const leader_interaction = (gameState, token) => {
+export const leader_interaction = (gameState, token, title) => {
   return {}
 }
 
@@ -65,6 +65,6 @@ export const leader_zerbgroob = (gameState, title) => {
   return newGameState
 }
 
-export const leader_zerbgroob_interaction = (gameState, token) => {
+export const leader_zerbgroob_interaction = (gameState, token, title) => {
   return {}
 }

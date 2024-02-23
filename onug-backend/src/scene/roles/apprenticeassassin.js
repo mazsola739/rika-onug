@@ -45,13 +45,14 @@ export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
   return newGameState
 }
 
-export const apprenticeassassin_interaction = (gameState, token) => {
+export const apprenticeassassin_interaction = (gameState, token, title) => {
   return {}
 }
 export const apprenticeassassin_response = (
   gameState,
   token,
-  selected_positions
+  selected_positions,
+  title
 ) => {
   return {}
 }

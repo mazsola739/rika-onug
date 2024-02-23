@@ -35,9 +35,9 @@ export const marksman = (gameState, title, hasDoppelganger) => {
   return newGameState
 }
 
-export const marksman_interaction = (gameState, token) => {
+export const marksman_interaction = (gameState, token, title) => {
   return {}
 }
-export const marksman_response = (gameState, token, selected_positions) => {
+export const marksman_response = (gameState, token, selected_positions, title) => {
   return {}
 }

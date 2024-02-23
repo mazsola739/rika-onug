@@ -24,14 +24,16 @@ export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
 }
 export const getRandomItemFromArray = (array) => array[getRandomNumber(0, array.length - 1)]
 
-//INTERACTION
-export const getSelectableOtherPlayersWithoutShield = (players, token) =>
-  Object.keys(players)
-    .filter((playerToken) => {
-      const player = players[playerToken]
-      return playerToken !== token && !player.card?.shield
-    })
-    .map((playerToken) => `player_${players[playerToken].player_number}`)
+//SCENE
+export const getSelectableOtherPlayersWithoutShield = (players, token) => {
+  const result = [];
+  Object.keys(players).forEach((playerToken) => {
+    if (playerToken !== token && players[playerToken].card.shield !== true) {
+      result.push(`player_${players[playerToken].player_number}`);
+    }
+  });
+  return result;
+};
 
 export const getCardIdsByPositions = (cardPositions, selectedPositions) => {
   const result = []

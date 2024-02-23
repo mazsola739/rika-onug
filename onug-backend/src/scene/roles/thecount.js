@@ -42,9 +42,9 @@ export const thecount = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const thecount_interaction = (gameState, token) => {
+export const thecount_interaction = (gameState, token, title) => {
   return {}
 }
-export const thecount_response = (gameState, token, selected_positions) => {
+export const thecount_response = (gameState, token, selected_positions, title) => {
   return {}
 }

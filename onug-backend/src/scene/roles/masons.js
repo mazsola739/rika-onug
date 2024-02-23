@@ -37,7 +37,7 @@ export const masons = (gameState, title) => {
   return newGameState
 }
 
-export const masons_interaction = (gameState, token) => {
+export const masons_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const masons = getPlayerNumbersWithMatchingTokens(newGameState.players, [
@@ -46,6 +46,7 @@ export const masons_interaction = (gameState, token) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     masons: masons,
   }
 

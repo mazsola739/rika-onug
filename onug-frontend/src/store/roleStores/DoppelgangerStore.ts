@@ -17,7 +17,7 @@ class DoppelgangerStore {
    * */
 
   instantNightAction(lastJsonMessage: WsJsonMessage): void {
-    const new_role_id = lastJsonMessage.new_role_id
+    const new_role_id = lastJsonMessage.interaction.new_role_id
     const { setInteraction } = interactionStore
 
     if (new_role_id === 2) return setInteraction('DRUNK')
@@ -45,13 +45,13 @@ class DoppelgangerStore {
     if (new_role_id === 85) return setInteraction('THING')
 
     gameBoardStore.setKnownPlayer({
-      player_name: lastJsonMessage.player_name,
-      player_number: lastJsonMessage.player_number,
-      player_card_id: lastJsonMessage.player_card_id,
-      player_original_id: lastJsonMessage.player_original_id,
-      player_role: lastJsonMessage.player_role,
-      player_role_id: lastJsonMessage.player_role_id,
-      player_team: lastJsonMessage.player_team,
+      player_name: lastJsonMessage.interaction?.player_name,
+      player_number: lastJsonMessage.interaction?.player_number,
+      player_original_id: lastJsonMessage.interaction?.player_original_id,
+      player_card_id: lastJsonMessage.interaction?.player_card_id,
+      player_role: lastJsonMessage.interaction?.player_role,
+      player_role_id: lastJsonMessage.interaction?.player_role_id,
+      player_team: lastJsonMessage.interaction?.player_team,
     })
   }
 }

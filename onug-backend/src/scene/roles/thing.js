@@ -23,7 +23,8 @@ export const thing = (gameState, title) => {
       interaction = thing_interaction(newGameState, token)
     }
 
-    scene.push({
+          newGameState.players[token].player_history.scene_title = title
+scene.push({
       type: SCENE,
       title,
       token,
@@ -37,13 +38,14 @@ export const thing = (gameState, title) => {
   return newGameState
 }
 
-export const thing_interaction = (gameState, token) => {
+export const thing_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const neighbors = getPlayerNeighborsByToken(newGameState.players, token)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     selectable_cards: neighbors,
     selectable_card_limit: { player: 1, center: 0 },
   }
@@ -58,7 +60,7 @@ export const thing_interaction = (gameState, token) => {
   })
 }
 
-export const thing_response = (gameState, token, selected_positions) => {
+export const thing_response = (gameState, token, selected_positions, title) => {
   if (
     !isValidSelection(
       selected_positions,
@@ -86,6 +88,7 @@ export const thing_response = (gameState, token, selected_positions) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     tapped_player: [selected_positions[0]],
   }
 

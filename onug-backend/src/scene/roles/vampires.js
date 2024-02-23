@@ -19,7 +19,8 @@ export const vampires = (gameState, title) => {
       interaction = vampires_interaction(newGameState, token)
     }
 
-    scene.push({
+          newGameState.players[token].player_history.scene_title = title
+scene.push({
       type: SCENE,
       title,
       token,
@@ -32,9 +33,9 @@ export const vampires = (gameState, title) => {
   return newGameState
 }
 
-export const vampires_interaction = (gameState, token) => {
+export const vampires_interaction = (gameState, token, title) => {
   return {}
 }
-export const vampires_response = (gameState, token, selected_positions) => {
+export const vampires_response = (gameState, token, selected_positions, title) => {
   return {}
 }

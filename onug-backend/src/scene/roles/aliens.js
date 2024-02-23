@@ -72,8 +72,8 @@ export const aliens = (gameState, title) => {
       }
       interaction = aliens_interaction(newGameState, token)
     }
-
-    scene.push({
+    
+        scene.push({
       type: SCENE,
       title,
       token,
@@ -86,9 +86,9 @@ export const aliens = (gameState, title) => {
   return newGameState
 }
 
-export const aliens_interaction = (gameState, token) => {
+export const aliens_interaction = (gameState, token, title) => {
   return {}
 }
-export const aliens_response = (gameState, token, selected_positions) => {
+export const aliens_response = (gameState, token, selected_positions, title) => {
   return {}
 }

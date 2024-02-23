@@ -79,7 +79,6 @@ const tick = async (room_id) => {
     scene_number: newGameState.actual_scene.scene_number,
     scene_start_time: newGameState.actual_scene.scene_start_time,
     scene_title: newGameState.actual_scene.scene_title,
-    narration: newGameState.actual_scene.started
   }
 
   newGameState.actual_scene = actualScene

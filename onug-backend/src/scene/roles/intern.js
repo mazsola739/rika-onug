@@ -38,7 +38,7 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
   return newGameState
 }
 
-export const intern_interaction = (gameState, token) => {
+export const intern_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const madscientistPlayerNumbers = getMadScientistPlayerNumberByRoleIds(
@@ -53,6 +53,7 @@ export const intern_interaction = (gameState, token) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
+    scene_title: title,
     madscientist: madscientistPlayerNumbers,
   }
 

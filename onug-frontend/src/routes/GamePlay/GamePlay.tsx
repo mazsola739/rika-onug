@@ -17,7 +17,7 @@ import {
 import {
   ARRIVE_GAME_PLAY,
   HYDRATE_GAME_PLAY,
-  INTERACTION,
+  SCENE,
   MESSAGE,
   REDIRECT,
   STAGES,
@@ -62,7 +62,6 @@ export const GamePlay: React.FC = observer(() => {
       lastJsonMessage?.type === HYDRATE_GAME_PLAY /* &&
       lastJsonMessage?.success */ //TODO success
     ) {
-      narrationStore.setNarration(lastJsonMessage.actual_scene.started)
       narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
       gamePlayStore.setStartingTime(
         lastJsonMessage.actual_scene.scene_start_time
@@ -71,12 +70,17 @@ export const GamePlay: React.FC = observer(() => {
     if (lastJsonMessage?.type === MESSAGE) {
       interactionStore.toggleMessageBoxStatus(true)
     }
-    if (lastJsonMessage?.type === INTERACTION) {
+    if (lastJsonMessage?.type === SCENE) {
+      narrationStore.setNarration(lastJsonMessage.narration)
       interactionStore.setLastJsonMessage(lastJsonMessage)
-      interactionStore.setMessage(lastJsonMessage.message)
-      interactionStore.setMessageIcon(lastJsonMessage.icon)
-      interactionStore.setInteraction(lastJsonMessage.title)
-      interactionStore.toggleMessageBoxStatus(true)
+
+      if (Object.keys(lastJsonMessage.interaction).length > 0) {
+        interactionStore.setMessage(lastJsonMessage.interaction.private_message)
+        interactionStore.setMessageIcon(lastJsonMessage.interaction.icon)
+        interactionStore.setInteraction(lastJsonMessage.interaction.title)
+        interactionStore.toggleMessageBoxStatus(true)
+      }
+
     }
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)

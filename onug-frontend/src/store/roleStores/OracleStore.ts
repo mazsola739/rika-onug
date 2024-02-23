@@ -12,7 +12,7 @@ class OracleStore {
       (playerCard) => {
         const { position } = playerCard
         const selectable_cards =
-          (lastJsonMessage.selectable_cards || []).includes(position) || false
+          (lastJsonMessage.interaction.selectable_cards || []).includes(position) || false
 
         return { ...playerCard, selectable_cards }
       }
@@ -22,7 +22,7 @@ class OracleStore {
       (centerCard) => {
         const { position } = centerCard
         const selectable_cards =
-          (lastJsonMessage.selectable_cards || []).includes(position) || false
+          (lastJsonMessage.interaction.selectable_cards || []).includes(position) || false
 
         return { ...centerCard, selectable_cards }
       }
@@ -32,13 +32,13 @@ class OracleStore {
     gameBoardStore.setPlayerCards(playerCards)
     gameBoardStore.setCenterCards(centerCards)
     gameBoardStore.setKnownPlayer({
-      player_name: lastJsonMessage.player_name,
-      player_number: lastJsonMessage.player_number,
-      player_card_id: lastJsonMessage.player_card_id,
-      player_original_id: lastJsonMessage.player_original_id,
-      player_role: lastJsonMessage.player_role,
-      player_role_id: lastJsonMessage.player_role_id,
-      player_team: lastJsonMessage.player_team,
+      player_name: lastJsonMessage.interaction?.player_name,
+      player_number: lastJsonMessage.interaction?.player_number,
+      player_original_id: lastJsonMessage.interaction?.player_original_id,
+      player_card_id: lastJsonMessage.interaction?.player_card_id,
+      player_role: lastJsonMessage.interaction?.player_role,
+      player_role_id: lastJsonMessage.interaction?.player_role_id,
+      player_team: lastJsonMessage.interaction?.player_team,
     })
   }
 }
