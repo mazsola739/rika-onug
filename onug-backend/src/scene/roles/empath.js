@@ -75,6 +75,6 @@ export const empath = (gameState, title, prefix) => {
 export const empath_interaction = (gameState, token, title) => {
   return {}
 }
-export const empath_response = (gameState, token, selected_positions, title) => {
+export const empath_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

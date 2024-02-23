@@ -90,13 +90,25 @@ export const useClickHandler = (room_id: string, token: string) => {
     })
   }, [sendJsonMessage])
 
-  const handleInteraction = useCallback(
+  const handleCardInteraction = useCallback(
     (selected_cards: string[]) => {
       sendJsonMessage?.({
         type: SCENE,
         room_id,
         token,
-        selected_positions: selected_cards,
+        selected_card_positions: selected_cards,
+      })
+    },
+    [sendJsonMessage]
+  )
+
+  const handleMarkInteraction = useCallback(
+    (selected_marks: string[]) => {
+      sendJsonMessage?.({
+        type: SCENE,
+        room_id,
+        token,
+        selected_mark_positions: selected_marks,
       })
     },
     [sendJsonMessage]
@@ -141,7 +153,8 @@ export const useClickHandler = (room_id: string, token: string) => {
     handleReady,
     handlePauseGame,
     handleStopGame,
-    handleInteraction,
+    handleCardInteraction,
+    handleMarkInteraction,
     handleDeselect,
     handleCardClick,
   }

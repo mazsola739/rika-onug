@@ -63,6 +63,7 @@ export const GameTable: React.FC = observer(() => {
         player_role: lastJsonMessage.player_role,
         player_role_id: lastJsonMessage.player_role_id,
         player_team: lastJsonMessage.player_team,
+        player_mark: lastJsonMessage.player_mark,
       })
       setPlayers(lastJsonMessage.board.players)
       everyoneCheckOwnCard(lastJsonMessage.board.gameTableBoardCards)

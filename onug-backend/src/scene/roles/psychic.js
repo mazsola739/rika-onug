@@ -41,6 +41,6 @@ export const psychic = (gameState, title, prefix) => {
 export const psychic_interaction = (gameState, token, title) => {
   return {}
 }
-export const psychic_response = (gameState, token, selected_positions, title) => {
+export const psychic_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

@@ -37,7 +37,7 @@ export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
 export const auraseer_interaction = (gameState, token, title) => {
   return {}
 }
-export const auraseer_response = (gameState, token, selected_positions, title) => {
+export const auraseer_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }
 

@@ -1,7 +1,7 @@
 //@ts-check
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { getAllPlayerTokens } from '../../utils/scene'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 import { getSelectableOtherPlayersWithoutShield } from '../../utils/scene'
 import { SCENE } from '../../constant'
 
@@ -60,12 +60,12 @@ export const troublemaker_interaction = (gameState, token, title) => {
 export const troublemaker_response = (
   gameState,
   token,
-  selected_positions,
+  selected_card_positions,
   title
 ) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -73,7 +73,7 @@ export const troublemaker_response = (
   }
   const newGameState = { ...gameState }
 
-  const [position1, position2] = selected_positions
+  const [position1, position2] = selected_card_positions
   const playerOneCard = { ...newGameState.card_positions[position1] }
   const playerTwoCard = { ...newGameState.card_positions[position2] }
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { observer } from 'mobx-react-lite'
-import { CardBack, StyledBoardCard, Tokens } from './BoardCard.styles'
+import { CardBack, MarkBack, StyledBoardCard, Tokens } from './BoardCard.styles'
 import { BoardCardProps } from './BoardCard.types'
 import { deckStore, gameTableStore, interactionStore } from 'store'
 import { Icon, Token } from 'components'
@@ -10,9 +10,11 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
   ({
     position,
     id,
+    mark,
     spy,
     isCenter,
     selectable_cards,
+    selectable_marks,
     shielded_cards,
     shield,
     aliens,
@@ -59,18 +61,25 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
     villains,
     werewolves,
   }) => {
-    const [isSelected, setIsSelected] = useState(false)
+    const [isSelectedCard, setIsSelectedCard] = useState(false)
+    const [isSelectedMark, setIsSelectedMark] = useState(false)
     const { hasMarks } = gameTableStore
     const card = id === 0 ? '' : deckStore.getCardById(id)
     //TODO VOTED? const playerTokenName = ready ? `selected_${position}` : position
-    const imgSrc =
+    const cardImageSrc =
       card && card.id !== 0
         ? `/assets/cards/${card.card_name}.png`
         : '/assets/backgrounds/card_back.png'
 
+
+    const markImageSrc =
+      mark && mark.length !== 0
+        ? `/assets/tokens/${mark}.png`
+        : '/assets/tokens/mark_back.png'
+
     const room_id = sessionStorage.getItem('room_id')
     const token = sessionStorage.getItem('token')
-    const { handleInteraction } = useClickHandler(room_id, token)
+    const { handleCardInteraction, handleMarkInteraction } = useClickHandler(room_id, token)
 
     const cardClickHandler = (cardType: string) => {
       const maxCenterCardSelection = interactionStore.selectableCenterCardLimit
@@ -88,7 +97,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
           ? interactionStore.selectedPlayerCards.length > 0
           : interactionStore.selectedCenterCards.length > 0
 
-        if (isSelected && selectedCards.includes(position)) {
+        if (isSelectedCard && selectedCards.includes(position)) {
           const updatedSelectedCards = selectedCards.filter(
             (cardPos) => cardPos !== position
           )
@@ -96,83 +105,110 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
             ? interactionStore.setSelectedCenterCards(updatedSelectedCards)
             : interactionStore.setSelectedPlayerCards(updatedSelectedCards)
           interactionStore.setSelectedCards(updatedSelectedCards)
-          setIsSelected(false)
+          setIsSelectedCard(false)
         } else if (selectedCards.length < maxSelectionLimit) {
           const updatedSelectedCards = [...selectedCards, position]
           isCenterCardType
             ? interactionStore.setSelectedCenterCards(updatedSelectedCards)
             : interactionStore.setSelectedPlayerCards(updatedSelectedCards)
           interactionStore.setSelectedCards(updatedSelectedCards)
-          setIsSelected(true)
+          setIsSelectedCard(true)
         } else if (hasOppositeSelected) {
           return
         }
 
         interactionStore.selectedCards.length === maxSelectionLimit &&
-          handleInteraction(interactionStore.selectedCards)
+        handleCardInteraction(interactionStore.selectedCards)
       }
     }
 
+    const markClickHandler = () => {
+      const maxMarkSelection = interactionStore.selectableMarkLimit
+
+      if (selectable_marks) {
+        const selectedMarks = interactionStore.selectedMarks
+        if (isSelectedMark && selectedMarks.includes(position)) {
+          const updatedSelectedMarks = selectedMarks.filter(
+            (markPos) => markPos !== position
+          )
+          interactionStore.setSelectedCards(updatedSelectedMarks)
+          setIsSelectedMark(false)
+        } else if (selectedMarks.length < maxMarkSelection) {
+          const updatedSelectedMarks = [...selectedMarks, position]
+          interactionStore.setSelectedCards(updatedSelectedMarks)
+          setIsSelectedMark(true)
+        }
+        interactionStore.selectedMarks.length === maxMarkSelection &&
+          handleMarkInteraction(interactionStore.selectedMarks)
+      }
+    }
+    
     return (
       <StyledBoardCard>
-        <Tokens>
-          {!isCenter && <Token tokenName={position} size={35} />}
-          {!isCenter && shield && <Token tokenName="shield" size={35} />}
-        </Tokens>
+       {!isCenter && <Tokens>
+          {!isCenter && <Token tokenName={position} size={25} />}
+          {!isCenter && shield && <Token tokenName="shield" size={25} />}
+          {!isCenter && artifact && <Token tokenName="artifact_back" size={25} />}
+        </Tokens>}
         <CardBack
-          backgroundImage={imgSrc}
+          backgroundImage={cardImageSrc}
           selectable_cards={selectable_cards}
           onClick={() => cardClickHandler(isCenter ? 'center' : 'player')}
-          isSelected={isSelected}
+          isSelectedCard={isSelectedCard}
         />
         <Tokens>
-          {isCenter && spy && <Icon iconName="spy" size={33} />}
-          {!isCenter && shielded_cards && <Icon iconName="shield" size={33} />}
-          {!isCenter && artifact && <Icon iconName="artifact" size={33} />}
-          {!isCenter && aliens && <Icon iconName="alien" size={33} />}
-          {!isCenter && assassin && <Icon iconName="assassin" size={33} />}
-          {!isCenter && awesome && <Icon iconName="awesome" size={33} />}
-          {!isCenter && babyalien && <Icon iconName="babyalien" size={33} />}
-          {!isCenter && bat && <Icon iconName="bat" size={33} />}
-          {!isCenter && blob && <Icon iconName="blob" size={33} />}
-          {!isCenter && bulb && <Icon iconName="bulb" size={33} />}
-          {!isCenter && clarity && <Icon iconName="clarity" size={33} />}
-          {!isCenter && claw && <Icon iconName="claw" size={33} />}
-          {!isCenter && cow && <Icon iconName="cow" size={33} />}
-          {!isCenter && diseased && <Icon iconName="diseased" size={33} />}
-          {!isCenter && dreamwolf && <Icon iconName="dreamwolf" size={33} />}
-          {!isCenter && dress && <Icon iconName="dress" size={33} />}
-          {!isCenter && drunk && <Icon iconName="drunk" size={33} />}
-          {!isCenter && empath && <Icon iconName="empath" size={33} />}
-          {!isCenter && evil && <Icon iconName="evil" size={33} />}
-          {!isCenter && family && <Icon iconName="family" size={33} />}
-          {!isCenter && fang && <Icon iconName="fang" size={33} />}
-          {!isCenter && fear && <Icon iconName="fear" size={33} />}
-          {!isCenter && friend && <Icon iconName="friend" size={33} />}
-          {!isCenter && jest && <Icon iconName="jest" size={33} />}
-          {!isCenter && like && <Icon iconName="like" size={33} />}
-          {!isCenter && lovers && <Icon iconName="lover" size={33} />}
-          {!isCenter && masons && <Icon iconName="mason" size={33} />}
-          {!isCenter && mad && <Icon iconName="mad" size={33} />}
-          {!isCenter && mortician && <Icon iconName="mortician" size={33} />}
-          {!isCenter && nice && <Icon iconName="nice" size={33} />}
-          {!isCenter && pretty && <Icon iconName="pretty" size={33} />}
-          {!isCenter && seer && <Icon iconName="seer" size={33} />}
-          {!isCenter && select && <Icon iconName="select" size={33} />}
-          {!isCenter && smell && <Icon iconName="smell" size={33} />}
-          {!isCenter && sus && <Icon iconName="sus" size={33} />}
-          {!isCenter && swap && <Icon iconName="swap" size={33} />}
-          {!isCenter && tanner && <Icon iconName="tanner" size={33} />}
-          {!isCenter && tap && <Icon iconName="tap" size={33} />}
-          {!isCenter && target && <Icon iconName="target" size={33} />}
-          {!isCenter && traitor && <Icon iconName="traitor" size={33} />}
-          {!isCenter && trophy && <Icon iconName="trophy" size={33} />}
-          {!isCenter && ufo && <Icon iconName="ufo" size={33} />}
-          {!isCenter && vampires && <Icon iconName="vampire" size={33} />}
-          {!isCenter && villains && <Icon iconName="villain" size={33} />}
-          {!isCenter && werewolves && <Icon iconName="werewolf" size={33} />}
+          {isCenter && spy && <Icon iconName="spy" size={25} />}
+          {!isCenter && shielded_cards && <Icon iconName="shield" size={25} />}
+          {!isCenter && artifact && <Icon iconName="artifact" size={25} />}
+          {!isCenter && aliens && <Icon iconName="alien" size={25} />}
+          {!isCenter && assassin && <Icon iconName="assassin" size={25} />}
+          {!isCenter && awesome && <Icon iconName="awesome" size={25} />}
+          {!isCenter && babyalien && <Icon iconName="babyalien" size={25} />}
+          {!isCenter && bat && <Icon iconName="bat" size={25} />}
+          {!isCenter && blob && <Icon iconName="blob" size={25} />}
+          {!isCenter && bulb && <Icon iconName="bulb" size={25} />}
+          {!isCenter && clarity && <Icon iconName="clarity" size={25} />}
+          {!isCenter && claw && <Icon iconName="claw" size={25} />}
+          {!isCenter && cow && <Icon iconName="cow" size={25} />}
+          {!isCenter && diseased && <Icon iconName="diseased" size={25} />}
+          {!isCenter && dreamwolf && <Icon iconName="dreamwolf" size={25} />}
+          {!isCenter && dress && <Icon iconName="dress" size={25} />}
+          {!isCenter && drunk && <Icon iconName="drunk" size={25} />}
+          {!isCenter && empath && <Icon iconName="empath" size={25} />}
+          {!isCenter && evil && <Icon iconName="evil" size={25} />}
+          {!isCenter && family && <Icon iconName="family" size={25} />}
+          {!isCenter && fang && <Icon iconName="fang" size={25} />}
+          {!isCenter && fear && <Icon iconName="fear" size={25} />}
+          {!isCenter && friend && <Icon iconName="friend" size={25} />}
+          {!isCenter && jest && <Icon iconName="jest" size={25} />}
+          {!isCenter && like && <Icon iconName="like" size={25} />}
+          {!isCenter && lovers && <Icon iconName="lover" size={25} />}
+          {!isCenter && masons && <Icon iconName="mason" size={25} />}
+          {!isCenter && mad && <Icon iconName="mad" size={25} />}
+          {!isCenter && mortician && <Icon iconName="mortician" size={25} />}
+          {!isCenter && nice && <Icon iconName="nice" size={25} />}
+          {!isCenter && pretty && <Icon iconName="pretty" size={25} />}
+          {!isCenter && seer && <Icon iconName="seer" size={25} />}
+          {!isCenter && select && <Icon iconName="select" size={25} />}
+          {!isCenter && smell && <Icon iconName="smell" size={25} />}
+          {!isCenter && sus && <Icon iconName="sus" size={25} />}
+          {!isCenter && swap && <Icon iconName="swap" size={25} />}
+          {!isCenter && tanner && <Icon iconName="tanner" size={25} />}
+          {!isCenter && tap && <Icon iconName="tap" size={25} />}
+          {!isCenter && target && <Icon iconName="target" size={25} />}
+          {!isCenter && traitor && <Icon iconName="traitor" size={25} />}
+          {!isCenter && trophy && <Icon iconName="trophy" size={25} />}
+          {!isCenter && ufo && <Icon iconName="ufo" size={25} />}
+          {!isCenter && vampires && <Icon iconName="vampire" size={25} />}
+          {!isCenter && villains && <Icon iconName="villain" size={25} />}
+          {!isCenter && werewolves && <Icon iconName="werewolf" size={25} />}
         </Tokens>
-        {!isCenter && hasMarks && <Token tokenName="mark_back" size={75} />}
+        {!isCenter && hasMarks && <MarkBack
+          backgroundImage={markImageSrc}
+          selectable_marks={selectable_marks}
+          onClick={() => markClickHandler()}
+          isSelectedMark={isSelectedMark}
+        />}
       </StyledBoardCard>
     )
   }

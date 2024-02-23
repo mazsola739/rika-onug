@@ -6,7 +6,7 @@ import {
   getSelectableOtherPlayersWithoutShield,
 } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 export const seer = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -64,10 +64,10 @@ export const seer_interaction = (gameState, token, title) => {
   })
 }
 
-export const seer_response = (gameState, token, selected_positions, title) => {
+export const seer_response = (gameState, token, selected_card_positions, title) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -77,27 +77,27 @@ export const seer_response = (gameState, token, selected_positions, title) => {
 
   let showCards = []
 
-  const playerCards = selected_positions.some((pos) => pos.includes('player'))
-  const centerCards = selected_positions.some((pos) => pos.includes('center'))
+  const playerCards = selected_card_positions.some((pos) => pos.includes('player'))
+  const centerCards = selected_card_positions.some((pos) => pos.includes('center'))
   const playerHistory =
     newGameState.players[token].player_history.selectable_cards
 
   if (
     playerCards &&
     !centerCards &&
-    playerHistory.includes(selected_positions[0])
+    playerHistory.includes(selected_card_positions[0])
   ) {
     showCards = getCardIdsByPositions(newGameState?.card_positions, [
-      selected_positions[0],
+      selected_card_positions[0],
     ])
   } else if (
     centerCards &&
     !playerCards &&
-    selected_positions.every((position) => playerHistory.includes(position))
+    selected_card_positions.every((position) => playerHistory.includes(position))
   ) {
     showCards = getCardIdsByPositions(
       newGameState?.card_positions,
-      selected_positions
+      selected_card_positions
     )
   } else {
     return newGameState
@@ -123,8 +123,8 @@ export const seer_response = (gameState, token, selected_positions, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_saw_card',
-      selected_positions[0],
-      showCards.length > 1 ? selected_positions[1] : '',
+      selected_card_positions[0],
+      showCards.length > 1 ? selected_card_positions[1] : '',
     ],
     icon: 'seer',
     uniqInformations: { viewed_cards: showCards },

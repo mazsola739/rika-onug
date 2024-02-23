@@ -32,7 +32,7 @@ export const nostradamus = (gameState, title) => {
 export const nostradamus_interaction = (gameState, token, title) => {
   return {}
 }
-export const nostradamus_response = (gameState, token, selected_positions, title) => {
+export const nostradamus_response = (gameState, token, selected_card_positions, title) => {
   return {}
 } //newGameState.nostradamus_team = ?
 

@@ -36,6 +36,6 @@ scene.push({
 export const vampires_interaction = (gameState, token, title) => {
   return {}
 }
-export const vampires_response = (gameState, token, selected_positions, title) => {
+export const vampires_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

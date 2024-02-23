@@ -32,6 +32,6 @@ export const rapscallion = (gameState, title) => {
 export const rapscallion_interaction = (gameState, token, title) => {
   return {}
 }
-export const rapscallion_response = (gameState, token, selected_positions, title) => {
+export const rapscallion_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

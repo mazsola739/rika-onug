@@ -35,6 +35,6 @@ export const gremlin = (gameState, title, prefix) => {
 export const gremlin_interaction = (gameState, token, title) => {
   return {}
 }
-export const gremlin_response = (gameState, token, selected_positions, title) => {
+export const gremlin_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

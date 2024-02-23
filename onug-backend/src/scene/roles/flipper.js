@@ -5,7 +5,7 @@ import {
   getCardIdsByPositions,
   getSelectableOtherPlayersWithoutShield,
 } from '../../utils/scene'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
 const createFlipper = (prefix) => () =>
@@ -64,10 +64,10 @@ export const flipper_interaction = (gameState, token, title) => {
 }
 
 //TODO better response message
-export const flipper_response = (gameState, token, selected_positions, title) => {
+export const flipper_response = (gameState, token, selected_card_positions, title) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -76,9 +76,9 @@ export const flipper_response = (gameState, token, selected_positions, title) =>
   const newGameState = { ...gameState }
 
   const selectedPositionCard =
-    newGameState.card_positions[selected_positions[0]]
+    newGameState.card_positions[selected_card_positions[0]]
   const revealedCard = getCardIdsByPositions(newGameState.card_positions, [
-    selected_positions[0],
+    selected_card_positions[0],
   ])
   const isTown = revealedCard.every((card) =>
     townIds.includes(Object.values(card)[0])
@@ -106,9 +106,9 @@ export const flipper_response = (gameState, token, selected_positions, title) =>
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_saw_card', selected_positions[0]],
+    private_message: ['interaction_saw_card', selected_card_positions[0]],
     icon: 'id',
     showCards: revealedCard,
-    uniqInformations: { flipped_cards: [selected_positions[0]] },
+    uniqInformations: { flipped_cards: [selected_card_positions[0]] },
   })
 }

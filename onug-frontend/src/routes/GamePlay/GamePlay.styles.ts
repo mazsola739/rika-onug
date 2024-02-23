@@ -12,7 +12,7 @@ export const StyledGamePlayHeader = styled.div`
 export const NarrationImage = styled.div`
   display: flex;
   justify-content: flex-end;
-  min-width: 182px;
+  min-width: 260px;
 `
 
 export const Narration = styled.span`
@@ -57,7 +57,7 @@ export const PlayerHand = styled.div`
 `
 
 export const OwnCardPlace = styled.div`
-  max-width: 182px;
+  max-width: 260px;
   display: flex;
   align-items: flex-end;
 `

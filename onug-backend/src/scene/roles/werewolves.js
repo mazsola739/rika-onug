@@ -7,7 +7,7 @@ import {
 } from '../../utils/scene'
 import { SCENE, centerCardPositions, werewolvesIds } from '../../constant'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 export const werewolves = (gameState, title, hasDreamWolf) => {
   const newGameState = { ...gameState }
@@ -74,10 +74,10 @@ export const werewolves_interaction = (gameState, token, title) => {
   })
 }
 
-export const werewolves_response = (gameState, token, selected_positions, title) => {
+export const werewolves_response = (gameState, token, selected_card_positions, title) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -86,10 +86,10 @@ export const werewolves_response = (gameState, token, selected_positions, title)
   const newGameState = { ...gameState }
 
   const showCards = getCardIdsByPositions(newGameState.card_positions, [
-    selected_positions[0],
+    selected_card_positions[0],
   ])
   const selectedPositionCard =
-    newGameState.card_positions[selected_positions[0]]
+    newGameState.card_positions[selected_card_positions[0]]
 
   if (
     newGameState.players[token].card.original_id === selectedPositionCard.id
@@ -103,13 +103,13 @@ export const werewolves_response = (gameState, token, selected_positions, title)
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    viewed_cards: [selected_positions[0]],
+    viewed_cards: [selected_card_positions[0]],
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_saw_card', selected_positions[0]],
+    private_message: ['interaction_saw_card', selected_card_positions[0]],
     icon: 'spy',
     showCards: showCards,
-    uniqInformations: { viewed_cards: [selected_positions[0]] },
+    uniqInformations: { viewed_cards: [selected_card_positions[0]] },
   })
 }

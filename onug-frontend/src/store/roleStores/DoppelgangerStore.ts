@@ -52,6 +52,7 @@ class DoppelgangerStore {
       player_role: lastJsonMessage.interaction?.player_role,
       player_role_id: lastJsonMessage.interaction?.player_role_id,
       player_team: lastJsonMessage.interaction?.player_team,
+      player_mark: lastJsonMessage.interaction?.player_mark,
     })
   }
 }

@@ -53,6 +53,6 @@ export const bodysnatcher = (gameState, title, prefix) => {
 export const bodysnatcher_interaction = (gameState, token, title) => {
   return {}
 }
-export const bodysnatcher_response = (gameState, token, selected_positions, title) => {
+export const bodysnatcher_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

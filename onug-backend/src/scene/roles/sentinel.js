@@ -6,7 +6,7 @@ import {
   getSelectableOtherPlayersWithoutShield,
 } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 export const sentinel = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -63,12 +63,12 @@ export const sentinel_interaction = (gameState, token, title) => {
 export const sentinel_response = (
   gameState,
   token,
-  selected_positions,
+  selected_card_positions,
   title
 ) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -78,23 +78,23 @@ export const sentinel_response = (
 
   const shieldedPlayerToken = getPlayerTokenByPlayerNumber(
     newGameState.players,
-    selected_positions[0]
+    selected_card_positions[0]
   )
 
   if (shieldedPlayerToken) {
-    newGameState.shield.push(selected_positions[0])
+    newGameState.shield.push(selected_card_positions[0])
     newGameState.players[shieldedPlayerToken[0]].shield = true
   }
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    new_shield_card: [selected_positions[0]],
+    new_shield_card: [selected_card_positions[0]],
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_placed_shield', selected_positions[0]],
+    private_message: ['interaction_placed_shield', selected_card_positions[0]],
     icon: 'shield',
-    uniqInformations: { new_shield_card: [selected_positions[0]] },
+    uniqInformations: { new_shield_card: [selected_card_positions[0]] },
   })
 }

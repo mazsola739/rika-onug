@@ -5,6 +5,7 @@ import { validateRoom } from '../validator'
 import { upsertRoomState } from '../repository'
 import { STAGES } from '../constant/stage'
 import { broadcastPlayGame } from './connections' //TODO ???
+import { dealCardIds } from './deal-cards'
 
 export const playGame = async (ws, message) => {
   const { room_id, token } = message
@@ -16,7 +17,7 @@ export const playGame = async (ws, message) => {
 
   const player = gameState.players[token]
 
-  const { playerCards, leftCard, middleCard, rightCard, newWolfCard, newVillainCard } = dealCardIds(selectedCards) //todo check
+  const { playerCards, leftCard, middleCard, rightCard, newWolfCard, newVillainCard } = dealCardIds(gameState.selected_cards) //todo check
 
   const newRoomState = {
     ...gameState,
@@ -29,7 +30,7 @@ export const playGame = async (ws, message) => {
       center_villain: newVillainCard,
     },
   }
-  const playerTokens = Object.keys(gameState.players)
+  const playerTokens = Object.keys(newRoomState.players)
 
   playerTokens.forEach((token, index) => {
     newRoomState.players[token] = {

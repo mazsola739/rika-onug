@@ -32,6 +32,6 @@ export const copycat = (gameState, title) => {
 export const copycat_interaction = (gameState, token, title) => {
   return {}
 }
-export const copycat_response = (gameState, token, selected_positions, title) => {
+export const copycat_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

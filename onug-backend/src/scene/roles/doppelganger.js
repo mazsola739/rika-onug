@@ -6,7 +6,7 @@ import {
   getPlayerNumbersWithNonMatchingTokens,
 } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 export const doppelganger = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -63,12 +63,12 @@ export const doppelganger_interaction = (gameState, token, title) => {
 export const doppelganger_response = (
   gameState,
   token,
-  selected_positions,
+  selected_card_positions,
   title
 ) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -78,14 +78,14 @@ export const doppelganger_response = (
   const newGameState = { ...gameState }
 
   newGameState.players[token].card.player_role_id =
-    newGameState.card_positions[selected_positions[0]].id
+    newGameState.card_positions[selected_card_positions[0]].id
   newGameState.players[token].card.player_role =
-    newGameState.card_positions[selected_positions[0]].role
+    newGameState.card_positions[selected_card_positions[0]].role
   newGameState.players[token].card.player_team =
-    newGameState.card_positions[selected_positions[0]].team
+    newGameState.card_positions[selected_card_positions[0]].team
 
   const showCards = getCardIdsByPositions(newGameState.card_positions, [
-    selected_positions[0],
+    selected_card_positions[0],
   ])
 
   ;(newGameState.players[token].player_history.show_cards = showCards),

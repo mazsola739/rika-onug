@@ -36,6 +36,6 @@ export const supervillains = (gameState, title) => {
 export const supervillain_interaction = (gameState, token, title) => {
   return {}
 }
-export const supervillain_response = (gameState, token, selected_positions, title) => {
+export const supervillain_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

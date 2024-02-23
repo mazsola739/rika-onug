@@ -9,7 +9,7 @@ import {
   getSelectablePlayersWithNoShield,
 } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 const createCurator = (prefix) => () =>
   [`${prefix}_kickoff_text`, 'curator_kickoff2_text']
@@ -78,12 +78,12 @@ export const curator_interaction = (gameState, token, title) => {
 export const curator_response = (
   gameState,
   token,
-  selected_positions,
+  selected_card_positions,
   title
 ) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -94,23 +94,23 @@ export const curator_response = (
   const newArtifact = getRandomArtifact(newGameState.artifact)
   const artifactedPlayersToken = getPlayerTokenByPlayerNumber(
     newGameState.players,
-    selected_positions[0]
+    selected_card_positions[0]
   )
 
   if (artifactedPlayersToken) {
-    newGameState.artifact.push({ [selected_positions[0]]: newArtifact })
+    newGameState.artifact.push({ [selected_card_positions[0]]: newArtifact })
     newGameState.players[artifactedPlayersToken[0]].artifact = true
   }
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    new_artifact_card: selected_positions[0],
+    new_artifact_card: selected_card_positions[0],
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_placed_artifact', selected_positions[0]],
+    private_message: ['interaction_placed_artifact', selected_card_positions[0]],
     icon: 'artifact',
-    uniqInformations: { new_artifact_card: selected_positions[0] },
+    uniqInformations: { new_artifact_card: selected_card_positions[0] },
   })
 }

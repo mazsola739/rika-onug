@@ -2,7 +2,7 @@
 import { SCENE, centerCardPositions } from '../../constant'
 import { getAllPlayerTokens, getCardIdsByPositions } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 export const apprenticeseer = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -54,12 +54,12 @@ export const apprenticeseer_interaction = (gameState, token, title) => {
 export const apprenticeseer_response = (
   gameState,
   token,
-  selected_positions,
+  selected_card_positions,
   title
 ) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -68,10 +68,10 @@ export const apprenticeseer_response = (
   const newGameState = { ...gameState }
 
   const viewCards = getCardIdsByPositions(newGameState.card_positions, [
-    selected_positions[0],
+    selected_card_positions[0],
   ])
   const selectedPositionCard =
-    newGameState.card_positions[selected_positions[0]]
+    newGameState.card_positions[selected_card_positions[0]]
 
   if (
     newGameState.players[token].card.original_id === selectedPositionCard.id
@@ -85,13 +85,13 @@ export const apprenticeseer_response = (
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    viewed_cards: [selected_positions[0]],
+    viewed_cards: [selected_card_positions[0]],
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_saw_card', selected_positions[0]],
+    private_message: ['interaction_saw_card', selected_card_positions[0]],
     icon: 'spy',
     showCards: viewCards,
-    uniqInformations: { viewed_cards: [selected_positions[0]] },
+    uniqInformations: { viewed_cards: [selected_card_positions[0]] },
   })
 }

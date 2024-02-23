@@ -1,7 +1,7 @@
 //@ts-check
 import { SCENE, centerCardPositions } from '../../constant'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 import {
   getPlayerNumbersWithMatchingTokens,
   getSelectablePlayersWithNoShield,
@@ -57,10 +57,10 @@ export const witch_interaction = (gameState, token, title) => {
   })
 }
 
-export const witch_response = (gameState, token, selected_positions, title) => {
+export const witch_response = (gameState, token, selected_card_positions, title) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -68,12 +68,12 @@ export const witch_response = (gameState, token, selected_positions, title) => {
   }
   const newGameState = { ...gameState }
 
-  if (selected_positions[0].includes('center_')) {
+  if (selected_card_positions[0].includes('center_')) {
     const showCards = getCardIdsByPositions(newGameState.card_positions, [
-      selected_positions[0],
+      selected_card_positions[0],
     ])
     const selectedCenterCardPosition =
-      newGameState.card_positions[selected_positions[0]]
+      newGameState.card_positions[selected_card_positions[0]]
 
     if (
       newGameState.players[token].card.original_id ===
@@ -97,14 +97,14 @@ export const witch_response = (gameState, token, selected_positions, title) => {
     scene_title: title,
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 },
-      viewed_cards: [selected_positions[0]],
-      selected_center_card: selected_positions[0],
+      viewed_cards: [selected_card_positions[0]],
+      selected_center_card: selected_card_positions[0],
     }
 
     return generateRoleInteraction(newGameState, token, {
       private_message: [
         'interaction_saw_card',
-        selected_positions[0],
+        selected_card_positions[0],
         'interaction_must_one_any',
       ],
       icon: 'voodoo',
@@ -113,29 +113,29 @@ export const witch_response = (gameState, token, selected_positions, title) => {
         selectable_card_limit: { player: 1, center: 0 },
       },
       showCards: showCards,
-      uniqInformations: { viewed_cards: [selected_positions[0]] },
+      uniqInformations: { viewed_cards: [selected_card_positions[0]] },
     })
-  } else if (selected_positions[0].includes('player_')) {
+  } else if (selected_card_positions[0].includes('player_')) {
     const selectedCenterPositionCard =
       newGameState.card_positions[
         newGameState.players[token].player_history.selected_center_card
       ]
     const selectedPlayerPositionCard =
-      newGameState.card_positions[selected_positions[0]]
+      newGameState.card_positions[selected_card_positions[0]]
 
     const selectedCenterCard = { ...selectedCenterPositionCard }
     const selectedPlayerCard = { ...selectedPlayerPositionCard }
     newGameState.card_positions[
       newGameState.players[token].player_history.selected_center_card
     ] = selectedPlayerCard
-    newGameState.card_positions[selected_positions[0]] = selectedCenterCard
+    newGameState.card_positions[selected_card_positions[0]] = selectedCenterCard
 
     const witchPlayerNumber = getPlayerNumbersWithMatchingTokens(
       newGameState.players,
       [token]
     )
 
-    if (selected_positions[0] === witchPlayerNumber[0]) {
+    if (selected_card_positions[0] === witchPlayerNumber[0]) {
       const currentCard = newGameState.card_positions[witchPlayerNumber[0]]
       newGameState.players[token].card.player_card_id = currentCard.id
       newGameState.players[token].card.player_team = currentCard.team
@@ -146,7 +146,7 @@ export const witch_response = (gameState, token, selected_positions, title) => {
     scene_title: title,
       swapped_cards: [
         newGameState.players[token].player_history.selected_center_card,
-        selected_positions[0],
+        selected_card_positions[0],
       ],
     }
 
@@ -155,13 +155,13 @@ export const witch_response = (gameState, token, selected_positions, title) => {
         'interaction_saw_card',
         'interaction_swapped_cards',
         `${newGameState.players[token].player_history.selected_center_card}`,
-        selected_positions[0],
+        selected_card_positions[0],
       ],
       icon: 'voodoo',
       uniqInformations: {
         swapped_cards: [
           newGameState.players[token].player_history.selected_center_card,
-          selected_positions[0],
+          selected_card_positions[0],
         ],
       },
     })

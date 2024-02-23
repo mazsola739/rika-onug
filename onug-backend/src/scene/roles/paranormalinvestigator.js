@@ -6,7 +6,7 @@ import {
   getSelectableOtherPlayersWithoutShield,
 } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 export const paranormalinvestigator = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -63,12 +63,12 @@ export const paranormalinvestigator_interaction = (gameState, token, title) => {
 export const paranormalinvestigator_response = (
   gameState,
   token,
-  selected_positions, 
+  selected_card_positions, 
   title
 ) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -78,11 +78,11 @@ export const paranormalinvestigator_response = (
   const newGameState = { ...gameState }
 
   const selectedCards = getCardIdsByPositions(newGameState.card_positions, [
-    selected_positions[0],
-    selected_positions[1],
+    selected_card_positions[0],
+    selected_card_positions[1],
   ])
-  const playerOneCardId = selectedCards[0][selected_positions[0]]
-  const playerTwoCardId = selectedCards[1][selected_positions[1]]
+  const playerOneCardId = selectedCards[0][selected_card_positions[0]]
+  const playerTwoCardId = selectedCards[1][selected_card_positions[1]]
 
   let showCards = []
 
@@ -91,17 +91,17 @@ export const paranormalinvestigator_response = (
     if (!townIds.includes(playerTwoCardId)) {
       showCards = [selectedCards[0]]
       newGameState.players[token].card.player_role =
-        newGameState.card_positions[selected_positions[0]].role
+        newGameState.card_positions[selected_card_positions[0]].role
       newGameState.players[token].card.player_team =
-        newGameState.card_positions[selected_positions[0]].team
+        newGameState.card_positions[selected_card_positions[0]].team
     }
   } else {
     if (!townIds.includes(playerTwoCardId)) {
       showCards = [selectedCards[0]]
       newGameState.players[token].card.player_role =
-        newGameState.card_positions[selected_positions[0]].role
+        newGameState.card_positions[selected_card_positions[0]].role
       newGameState.players[token].card.player_team =
-        newGameState.card_positions[selected_positions[0]].team
+        newGameState.card_positions[selected_card_positions[0]].team
     } else {
       showCards = selectedCards
       if (
@@ -125,8 +125,8 @@ export const paranormalinvestigator_response = (
   return generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_saw_card',
-      selected_positions[0],
-      showCards.length === 2 ? selected_positions[1] : '',
+      selected_card_positions[0],
+      showCards.length === 2 ? selected_card_positions[1] : '',
     ],
     icon: 'investigator',
     showCards: showCards,

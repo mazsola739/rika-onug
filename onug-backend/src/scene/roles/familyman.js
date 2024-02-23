@@ -53,6 +53,6 @@ export const familyman = (gameState, title, hasDoppelganger) => {
 export const familyman_interaction = (gameState, token, title) => {
   return {}
 }
-export const familyman_response = (gameState, token, selected_positions, title) => {
+export const familyman_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

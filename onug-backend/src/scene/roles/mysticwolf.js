@@ -5,7 +5,7 @@ import {
   getCardIdsByPositions,
   getSelectableOtherPlayersWithoutShield,
 } from '../../utils/scene'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
 export const mysticwolf = (gameState, title) => {
@@ -63,12 +63,12 @@ export const mysticwolf_interaction = (gameState, token, title) => {
 export const mysticwolf_response = (
   gameState,
   token,
-  selected_positions,
+  selected_card_positions,
   title
 ) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -77,9 +77,9 @@ export const mysticwolf_response = (
 
   const newGameState = { ...gameState }
   const selectedPositionCard =
-    newGameState.card_positions[selected_positions[0]]
+    newGameState.card_positions[selected_card_positions[0]]
   const viewCards = getCardIdsByPositions(newGameState.card_positions, [
-    selected_positions[0],
+    selected_card_positions[0],
   ])
 
   if (
@@ -94,13 +94,13 @@ export const mysticwolf_response = (
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    viewed_cards: [selected_positions[0]],
+    viewed_cards: [selected_card_positions[0]],
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_saw_card', selected_positions[0]],
+    private_message: ['interaction_saw_card', selected_card_positions[0]],
     icon: 'spy',
     showCards: viewCards,
-    uniqInformations: { viewed_cards: [selected_positions[0]] },
+    uniqInformations: { viewed_cards: [selected_card_positions[0]] },
   })
 }

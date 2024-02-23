@@ -51,7 +51,7 @@ export const apprenticeassassin_interaction = (gameState, token, title) => {
 export const apprenticeassassin_response = (
   gameState,
   token,
-  selected_positions,
+  selected_card_positions,
   title
 ) => {
   return {}

@@ -32,6 +32,6 @@ export const temptress = (gameState, title) => {
 export const temptress_interaction = (gameState, token, title) => {
   return {}
 }
-export const temptress_response = (gameState, token, selected_positions, title) => {
+export const temptress_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

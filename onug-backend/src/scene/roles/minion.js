@@ -2,7 +2,7 @@
 import { SCENE, werewolvesAndDreamWolfIds } from '../../constant'
 import { getAllPlayerTokens } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 export const minion = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }

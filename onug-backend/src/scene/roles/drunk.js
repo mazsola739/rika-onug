@@ -5,7 +5,7 @@ import {
   getPlayerNumbersWithMatchingTokens,
 } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 export const drunk = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -68,10 +68,10 @@ export const drunk_interaction = (gameState, token, title) => {
   }
 }
 
-export const drunk_response = (gameState, token, selected_positions, title) => {
+export const drunk_response = (gameState, token, selected_card_positions, title) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -84,9 +84,9 @@ export const drunk_response = (gameState, token, selected_positions, title) => {
     [token]
   )[0]
   const drunkCard = { ...newGameState.card_positions[drunkPlayerNumber] }
-  const selectedCard = { ...newGameState.card_positions[selected_positions[0]] }
+  const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]] }
   newGameState.card_positions[drunkPlayerNumber] = selectedCard
-  newGameState.card_positions[selected_positions[0]] = drunkCard
+  newGameState.card_positions[selected_card_positions[0]] = drunkCard
 
   newGameState.players[token].card.player_card_id = 0
   newGameState.players[token].card_or_mark_action = true
@@ -97,21 +97,21 @@ export const drunk_response = (gameState, token, selected_positions, title) => {
     card_or_mark_action: true,
     swapped_cards: [
       `player_${newGameState.players[token].player_number}`,
-      selected_positions[0],
+      selected_card_positions[0],
     ],
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_swapped_cards',
-      selected_positions[0],
+      selected_card_positions[0],
       `player_${newGameState.players[token].player_number}`,
     ],
     icon: 'drunk',
     uniqInformations: {
       swapped_cards: [
         `player_${newGameState.players[token].player_number}`,
-        selected_positions[0],
+        selected_card_positions[0],
       ],
     },
   })

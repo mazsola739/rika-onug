@@ -32,6 +32,6 @@ export const instigator = (gameState, title) => {
 export const instigator_interaction = (gameState, token, title) => {
   return {}
 }
-export const instigator_response = (gameState, token, selected_positions, title) => {
+export const instigator_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

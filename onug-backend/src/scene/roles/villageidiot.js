@@ -34,6 +34,6 @@ export const villageidiot = (gameState, title) => {
 export const villageidiot_interaction = (gameState, token, title) => {
   return {}
 }
-export const villageidiot_response = (gameState, token, selected_positions, title) => {
+export const villageidiot_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

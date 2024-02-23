@@ -36,7 +36,7 @@ const shuffle = (selectedCardIds) => {
 }
 const getStubbedOrDealtCard = (stubbedCard, dealtCard) => stubbedCard || dealtCard
 
-const dealCardIds = (selectedCardIds) => {
+export const dealCardIds = (selectedCardIds) => {
   let cardIds = [...selectedCardIds]
 
   let newWolfCardId = hasAlphaWolf(selectedCardIds)
@@ -84,12 +84,11 @@ const dealCardIds = (selectedCardIds) => {
 }
 
 const createPlayerCard = (card, selected_cards) => {
-  if (!card || typeof card !== "object" || !card.id)  return { player_original_id: 0, player_card_id: 0, player_role: "", player_role_id: 0, team: "", mark: false, mark_id: "" }
- 
+  if (!card || typeof card !== "object" || !card.id) return { player_original_id: 0, player_card_id: 0, player_role: "", player_role_id: 0, team: "", mark: false, player_mark: "" }
+
   let playerCard
 
   const hasPlayerMark = hasMark(selected_cards)
-  const hasShield = selected_cards.includes(25)
 
   if (hasPlayerMark) {
     playerCard = {
@@ -98,7 +97,7 @@ const createPlayerCard = (card, selected_cards) => {
       player_role: card.role,
       player_role_id: card.id,
       player_team: card.team,
-      mark_id: "mark_of_clarity",
+      player_mark: "mark_of_clarity",
     }
   } else {
     playerCard = {
@@ -108,10 +107,6 @@ const createPlayerCard = (card, selected_cards) => {
       player_role_id: card.id,
       player_team: card.team,
     }
-  }
-
-  if (hasShield) {
-    playerCard.shield = false
   }
 
   return playerCard
@@ -129,7 +124,7 @@ const createPositionCard = (card, selected_cards) => {
       id: card.id,
       role: card.role,
       team: card.team,
-      mark_id: "mark_of_clarity",
+      player_mark: "mark_of_clarity",
     }
   } else {
     positionCard = {
@@ -180,9 +175,42 @@ export const dealCards = async (ws, message) => {
       }, {}),
     },
   }
+
+  const hasPlayerMark = hasMark(selectedCards)
+  const hasDoppelganger = selectedCards.includes(1)
+
+  if (hasPlayerMark) {
+    newGameState.mark_positions = {
+      vampire: "mark_of_vampire",
+      fear: "mark_of_fear",
+      bat: "mark_of_bat",
+      disease: "mark_of_disease",
+      love1: "mark_of_love",
+      love2: "mark_of_love",
+      traitor: "mark_of_traitor",
+      clarity1: "mark_of_clarity",
+      clarity2: "mark_of_clarity",
+      assassin: "mark_of_assassin",
+    }
+    if (hasDoppelganger) {
+      newGameState.doppelganger_mark_positions = {
+        fear: "mark_of_fear",
+        bat: "mark_of_bat",
+        disease: "mark_of_disease",
+        love1: "mark_of_love",
+        love2: "mark_of_love",
+        traitor: "mark_of_traitor",
+        clarity1: "mark_of_clarity",
+        clarity2: "mark_of_clarity",
+        assassin: "mark_of_assassin",
+      }
+    }
+  }
+
   newGameState.selected_cards = Object.values(newGameState.card_positions).filter(value => value.id).map((value) => value.id)
 
   const playerTokens = Object.keys(gameState.players)
+  const hasShield = selectedCards.includes(25)
 
   playerTokens.forEach((token, index) => {
     newGameState.players[token] = {
@@ -192,6 +220,7 @@ export const dealCards = async (ws, message) => {
       card_or_mark_action: false,
       player_history: {},
     }
+    if (hasShield) {newGameState.players[token].shield = false}
   })
 
   await upsertRoomState(newGameState)

@@ -89,6 +89,6 @@ export const aliens = (gameState, title) => {
 export const aliens_interaction = (gameState, token, title) => {
   return {}
 }
-export const aliens_response = (gameState, token, selected_positions, title) => {
+export const aliens_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

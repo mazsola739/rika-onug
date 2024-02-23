@@ -32,6 +32,6 @@ export const mirrorman = (gameState, title) => {
 export const mirrorman_interaction = (gameState, token, title) => {
   return {}
 }
-export const mirrorman_response = (gameState, token, selected_positions, title) => {
+export const mirrorman_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

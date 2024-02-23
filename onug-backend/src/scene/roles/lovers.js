@@ -11,7 +11,7 @@ export const lovers = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].mark.id === 'mark_of_love') {
+    if (newGameState.players[token].player_mark === 'mark_of_love') {
       interaction = lover_interaction(newGameState, token, title)
     }
 

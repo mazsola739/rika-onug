@@ -1,6 +1,6 @@
 //@ts-check
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 import {
   getAllPlayerTokens,
   getNonWerewolfPlayerNumbersByRoleIds,
@@ -61,12 +61,12 @@ export const alphawolf_interaction = (gameState, token, title) => {
 export const alphawolf_response = (
   gameState,
   token,
-  selected_positions,
+  selected_card_positions,
   title
 ) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -75,9 +75,9 @@ export const alphawolf_response = (
   const newGameState = { ...gameState }
 
   const centerWolf = { ...newGameState.card_positions.center_wolf }
-  const selectedCard = { ...newGameState.card_positions[selected_positions[0]] }
+  const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]] }
   newGameState.card_positions.center_wolf = selectedCard
-  newGameState.card_positions[selected_positions[0]] = centerWolf
+  newGameState.card_positions[selected_card_positions[0]] = centerWolf
 
   newGameState.players[token].card_or_mark_action = true
 
@@ -85,16 +85,16 @@ export const alphawolf_response = (
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    swapped_cards: [selected_positions[0], 'center_wolf'],
+    swapped_cards: [selected_card_positions[0], 'center_wolf'],
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_swapped_cards',
-      selected_positions[0],
+      selected_card_positions[0],
       'center_wolf',
     ],
     icon: 'claw',
-    uniqInformations: { swapped_cards: [selected_positions[0], 'center_wolf'] },
+    uniqInformations: { swapped_cards: [selected_card_positions[0], 'center_wolf'] },
   })
 }

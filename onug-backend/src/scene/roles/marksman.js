@@ -1,7 +1,7 @@
 //@ts-check
 import { SCENE } from '../../constant'
 import { getAllPlayerTokens } from '../../utils/scene'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 export const marksman = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
@@ -38,6 +38,6 @@ export const marksman = (gameState, title, hasDoppelganger) => {
 export const marksman_interaction = (gameState, token, title) => {
   return {}
 }
-export const marksman_response = (gameState, token, selected_positions, title) => {
+export const marksman_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

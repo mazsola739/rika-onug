@@ -44,6 +44,6 @@ export const assassin = (gameState, title, prefix) => {
 export const assassin_interaction = (gameState, token, title) => {
   return {}
 }
-export const assassin_response = (gameState, token, selected_positions, title) => {
+export const assassin_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

@@ -1,9 +1,11 @@
 export interface BoardCardProps {
   id: number
+  mark?: string
   spy?: boolean
   position: string
   isCenter: boolean
   selectable_cards?: boolean
+  selectable_marks?: boolean
   aliens?: boolean
   artifact?: boolean
   assassin?: boolean
@@ -54,5 +56,11 @@ export interface BoardCardProps {
 export interface StyledBoardCardProps {
   backgroundImage: string
   selectable_cards?: boolean
-  isSelected?: boolean
+  isSelectedCard?: boolean
+}
+
+export interface StyledBoardMarkProps {
+  backgroundImage: string
+  selectable_marks?: boolean
+  isSelectedMark?: boolean
 }

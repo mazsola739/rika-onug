@@ -35,6 +35,6 @@ export const pickpocket = (gameState, title, prefix) => {
 export const pickpocket_interaction = (gameState, token, title) => {
   return {}
 }
-export const pickpocket_response = (gameState, token, selected_positions, title) => {
+export const pickpocket_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

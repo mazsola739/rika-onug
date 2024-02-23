@@ -1,7 +1,24 @@
 //@ts-check
 import { SCENE, doppelgangerInstantActionsIds } from '../../constant'
 import { getAllPlayerTokens } from '../../utils/scene'
-import * as roles from './index'
+import { alphawolf_interaction, alphawolf_response } from './alphawolf'
+import { apprenticeseer_interaction, apprenticeseer_response } from './apprenticeseer'
+import { cupid_interaction, cupid_response } from './cupid'
+import { diseased_interaction, diseased_response } from './diseased'
+import { drpeeker_interaction, drpeeker_response } from './drpeeker'
+import { drunk_interaction, drunk_response } from './drunk'
+import { instigator_interaction, instigator_response } from './instigator'
+import { mysticwolf_interaction, mysticwolf_response } from './mysticwolf'
+import { paranormalinvestigator_interaction, paranormalinvestigator_response } from './paranormalinvestigator'
+import { rapscallion_interaction, rapscallion_response } from './rapscallion'
+import { robber_interaction, robber_response } from './robber'
+import { seer_interaction, seer_response } from './seer'
+import { sentinel_interaction, sentinel_response } from './sentinel'
+import { temptress_interaction, temptress_response } from './temptress'
+import { thing_interaction, thing_response } from './thing'
+import { troublemaker_interaction, troublemaker_response } from './troublemaker'
+import { villageidiot_interaction, villageidiot_response } from './villageidiot'
+import { witch_interaction, witch_response } from './witch'
 
 const instantRoleIds = {
   17: 'role_alphawolf',
@@ -11,15 +28,15 @@ const instantRoleIds = {
   56: 'role_detector',
   32: 'role_diseased',
   57: 'role_drpeeker',
-  2: 'role_drunk',
+  2:  'role_drunk',
   34: 'role_instigator',
   22: 'role_mysticwolf',
   23: 'role_paranormalinvestigator',
   65: 'role_rapscallion',
-  8: 'role_robber',
+  8:  'role_robber',
   66: 'role_roleretriever',
   25: 'role_sentinel',
-  9: 'role_seer',
+  9:  'role_seer',
   68: 'role_switcheroo',
   69: 'role_temptress',
   85: 'role_thing',
@@ -40,7 +57,7 @@ const addVerboseOr = (rolesFromIds) => {
       'doppelganger_verbose_or_text'
     )
   }
-  return rolesFromIds
+  rolesFromIds
 }
 
 export const doppelganger_instant_action = (gameState, title) => {
@@ -50,9 +67,12 @@ export const doppelganger_instant_action = (gameState, title) => {
     doppelgangerInstantActionsIds,
     instantRoleIds
   )
+
+  addVerboseOr(rolesFromIds)
+  
   const narration = [
     'doppelganger_verbose_intro_text',
-    ...addVerboseOr(rolesFromIds),
+    ...rolesFromIds,
     'doppelganger_verbose_outro_text',
   ]
   const tokens = getAllPlayerTokens(newGameState.players)
@@ -63,7 +83,11 @@ export const doppelganger_instant_action = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 1) {
-      interaction = doppelganger_instant_action_interaction(newGameState, token, title)
+      interaction = doppelganger_instant_action_interaction(
+        newGameState,
+        token,
+        title
+      )
     }
 
     scene.push({
@@ -88,40 +112,40 @@ export const doppelganger_instant_action = (gameState, title) => {
  * */
 
 export const doppelganger_instant_action_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
-  
-    const new_role_id = newGameState.players[token]?.new_role_id
+  const new_role_id = gameState.players[token]?.new_role_id
 
-    if (!doppelgangerInstantActionsIds.includes(new_role_id)) return {}
+  if (!doppelgangerInstantActionsIds.includes(new_role_id)) {}
+  console.log(title)
+  let interaction = {}
 
-    if (new_role_id === 2)  return roles.drunk_interaction(newGameState, token, title)
-    if (new_role_id === 8)  return roles.robber_interaction(newGameState, token, title)
-    if (new_role_id === 9)  return roles.seer_interaction(newGameState, token, title)
-    if (new_role_id === 11) return roles.troublemaker_interaction(newGameState, token, title)
-    if (new_role_id === 17) return roles.alphawolf_interaction(newGameState, token, title)
-    if (new_role_id === 18) return roles.apprenticeseer_interaction(newGameState, token, title)
-    if (new_role_id === 22) return roles.mysticwolf_interaction(newGameState, token, title)
-    if (new_role_id === 23) return roles.paranormalinvestigator_interaction(newGameState, token, title)
-    if (new_role_id === 25) return roles.sentinel_interaction(newGameState, token, title)
-    if (new_role_id === 26) return roles.villageidiot_interaction(newGameState, token, title)
-    if (new_role_id === 27) return roles.witch_interaction(newGameState, token, title)
-    if (new_role_id === 31) return roles.cupid_interaction(newGameState, token, title)
-    if (new_role_id === 32) return roles.diseased_interaction(newGameState, token, title)
-    if (new_role_id === 34) return roles.instigator_interaction(newGameState, token, title)
-    if (new_role_id === 55) return roles.thing_interaction(newGameState, token, title)
-    if (new_role_id === 56) return roles.seer_interaction(newGameState, token, title)
-    if (new_role_id === 57) return roles.drpeeker_interaction(newGameState, token, title)
-    if (new_role_id === 65) return roles.rapscallion_interaction(newGameState, token, title)
-    if (new_role_id === 66) return roles.robber_interaction(newGameState, token, title)
-    if (new_role_id === 68) return roles.troublemaker_interaction(newGameState, token, title)
-    if (new_role_id === 69) return roles.temptress_interaction(newGameState, token, title)
-    if (new_role_id === 70) return roles.witch_interaction(newGameState, token, title)
-    if (new_role_id === 85) return roles.thing_interaction(newGameState, token, title)
+  if (new_role_id === 2)  interaction = drunk_interaction(gameState, token, title)
+  if (new_role_id === 8)  interaction = robber_interaction(gameState, token, title)
+  if (new_role_id === 9)  interaction = seer_interaction(gameState, token, title)
+  if (new_role_id === 11) interaction = troublemaker_interaction(gameState, token, title)
+  if (new_role_id === 17) interaction = alphawolf_interaction(gameState, token, title)
+  if (new_role_id === 18) interaction = apprenticeseer_interaction(gameState, token, title)
+  if (new_role_id === 22) interaction = mysticwolf_interaction(gameState, token, title)
+  if (new_role_id === 23) interaction = paranormalinvestigator_interaction(gameState, token, title)
+  if (new_role_id === 25) interaction = sentinel_interaction(gameState, token, title)
+  if (new_role_id === 26) interaction = villageidiot_interaction(gameState, token, title)
+  if (new_role_id === 27) interaction = witch_interaction(gameState, token, title)
+  if (new_role_id === 31) interaction = cupid_interaction(gameState, token, title)
+  if (new_role_id === 32) interaction = diseased_interaction(gameState, token, title)
+  if (new_role_id === 34) interaction = instigator_interaction(gameState, token, title)
+  if (new_role_id === 55) interaction = thing_interaction(gameState, token, title)
+  if (new_role_id === 56) interaction = seer_interaction(gameState, token, title)
+  if (new_role_id === 57) interaction = drpeeker_interaction(gameState, token, title)
+  if (new_role_id === 65) interaction = rapscallion_interaction(gameState, token, title)
+  if (new_role_id === 66) interaction = robber_interaction(gameState, token, title)
+  if (new_role_id === 68) interaction = troublemaker_interaction(gameState, token, title)
+  if (new_role_id === 69) interaction = temptress_interaction(gameState, token, title)
+  if (new_role_id === 70) interaction = witch_interaction(gameState, token, title)
+  if (new_role_id === 85) interaction = thing_interaction(gameState, token, title)
 
-    return {}
+  return interaction
 }
 
-export const doppelganger_instant_action_response =  (gameState, token, selected_positions, title) => {
+export const doppelganger_instant_action_response =  (gameState, token, selected_card_positions, title) => {
   const new_role_id = gameState.players[token]?.new_role_id
 
 /*   if (!new_role_id) { //! TODO
@@ -131,34 +155,34 @@ export const doppelganger_instant_action_response =  (gameState, token, selected
         message: ['no_night_action'], icon: 'night',
       })
     )
-    return gameState
+    gameState
   } */
 
-  const newGameState = { ...gameState }
+  let interaction = {}
 
-  if (new_role_id === 2)  return roles.drunk_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 8)  return roles.robber_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 9)  return roles.seer_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 11) return roles.troublemaker_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 17) return roles.alphawolf_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 18) return roles.apprenticeseer_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 22) return roles.mysticwolf_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 23) return roles.paranormalinvestigator_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 25) return roles.sentinel_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 26) return roles.villageidiot_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 27) return roles.witch_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 31) return roles.cupid_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 32) return roles.diseased_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 34) return roles.instigator_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 55) return roles.thing_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 56) return roles.seer_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 57) return roles.drpeeker_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 65) return roles.rapscallion_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 66) return roles.robber_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 68) return roles.troublemaker_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 69) return roles.temptress_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 70) return roles.witch_response(newGameState, token, selected_positions, title)
-  if (new_role_id === 85) return roles.thing_response(newGameState, token, selected_positions, title)
+  if (new_role_id === 2)  interaction = drunk_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 8)  interaction = robber_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 9)  interaction = seer_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 11) interaction = troublemaker_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 17) interaction = alphawolf_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 18) interaction = apprenticeseer_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 22) interaction = mysticwolf_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 23) interaction = paranormalinvestigator_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 25) interaction = sentinel_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 26) interaction = villageidiot_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 27) interaction = witch_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 31) interaction = cupid_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 32) interaction = diseased_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 34) interaction = instigator_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 55) interaction = thing_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 56) interaction = seer_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 57) interaction = drpeeker_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 65) interaction = rapscallion_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 66) interaction = robber_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 68) interaction = troublemaker_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 69) interaction = temptress_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 70) interaction = witch_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 85) interaction = thing_response(gameState, token, selected_card_positions, title)
 
-  return {}
+  return interaction
 }

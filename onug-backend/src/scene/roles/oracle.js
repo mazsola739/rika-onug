@@ -99,7 +99,7 @@ export const oracle_question_interaction = (gameState, token, title) => {
 export const oracle_question_response = (
   gameState,
   token,
-  selected_positions,
+  selected_card_positions,
   title
 ) => {
   return {}

@@ -6,7 +6,7 @@ import {
   getSelectableOtherPlayersWithoutShield,
 } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 const createRevealer = (prefix) => () =>
   [`${prefix}_kickoff_text`, 'revealer_kickoff2_text']
@@ -65,10 +65,10 @@ export const revealer_interaction = (gameState, token, title) => {
 }
 
 //TODO better response message
-export const revealer_response = (gameState, token, selected_positions, title) => {
+export const revealer_response = (gameState, token, selected_card_positions, title) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -77,9 +77,9 @@ export const revealer_response = (gameState, token, selected_positions, title) =
   const newGameState = { ...gameState }
 
   const selectedPositionCard =
-    newGameState.card_positions[selected_positions[0]]
+    newGameState.card_positions[selected_card_positions[0]]
   const revealedCard = getCardIdsByPositions(newGameState.card_positions, [
-    selected_positions[0],
+    selected_card_positions[0],
   ])
   const isTown = revealedCard.every((card) =>
     townIds.includes(Object.values(card)[0])
@@ -107,9 +107,9 @@ export const revealer_response = (gameState, token, selected_positions, title) =
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_saw_card', selected_positions[0]],
+    private_message: ['interaction_saw_card', selected_card_positions[0]],
     icon: 'id',
     showCards: revealedCard,
-    uniqInformations: { flipped_cards: [selected_positions[0]] },
+    uniqInformations: { flipped_cards: [selected_card_positions[0]] },
   })
 }

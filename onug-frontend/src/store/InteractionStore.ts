@@ -9,8 +9,10 @@ class InteractionStore {
   selectedPlayerCards: string[] = []
   selectedCenterCards: string[] = []
   selectedCards: string[] = []
+  selectedMarks: string[] = []
   selectablePlayerCardLimit = 0
   selectableCenterCardLimit = 0
+  selectableMarkLimit = 0
   message: string[] = []
   messageIcon = ''
 
@@ -21,14 +23,17 @@ class InteractionStore {
       selectedCenterCards: observable,
       selectedPlayerCards: observable,
       selectedCards: observable,
+      selectedMarks: observable,
       selectablePlayerCardLimit: observable,
       selectableCenterCardLimit: observable,
+      selectableMarkLimit: observable,
 
       resetInteraction: action,
       toggleMessageBoxStatus: action,
       setSelectedCenterCards: action,
       setSelectedPlayerCards: action,
       setSelectedCards: action,
+      setSelectedMarks: action,
       setLastJsonMessage: action,
       setInteraction: action,
     })
@@ -38,9 +43,11 @@ class InteractionStore {
     this.selectedCenterCards = []
     this.selectedPlayerCards = []
     this.selectedCards = []
+    this.selectedMarks = []
     this.toggleMessageBoxStatus(false)
     this.selectablePlayerCardLimit = 0
     this.selectableCenterCardLimit = 0
+    this.selectableMarkLimit = 0
   }
 
   toggleMessageBoxStatus(boolean: boolean): void {
@@ -57,6 +64,10 @@ class InteractionStore {
 
   setSelectedCards(positions: string[]): void {
     this.selectedCards = positions
+  }
+
+  setSelectedMarks(positions: string[]): void {
+    this.selectedMarks = positions
   }
 
   setLastJsonMessage(lastJsonMessage: WsJsonMessage): void {

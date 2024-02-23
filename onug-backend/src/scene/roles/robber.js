@@ -7,7 +7,7 @@ import {
   getSelectableOtherPlayersWithoutShield,
 } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 
 export const robber = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -77,12 +77,12 @@ export const robber_interaction = (gameState, token, title) => {
 export const robber_response = (
   gameState,
   token,
-  selected_positions,
+  selected_card_positions,
   title
 ) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -95,9 +95,9 @@ export const robber_response = (
     [token]
   )[0]
   const robberCard = { ...newGameState.card_positions[robberPlayerNumber] }
-  const selectedCard = { ...newGameState.card_positions[selected_positions[0]] }
+  const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]] }
   newGameState.card_positions[robberPlayerNumber] = selectedCard
-  newGameState.card_positions[selected_positions[0]] = robberCard
+  newGameState.card_positions[selected_card_positions[0]] = robberCard
 
   newGameState.players[token].card.player_card_id =
     newGameState.card_positions[robberPlayerNumber].id
@@ -116,7 +116,7 @@ export const robber_response = (
     card_or_mark_action: true,
     swapped_cards: [
       `player_${newGameState.players[token].player_number}`,
-      selected_positions[0],
+      selected_card_positions[0],
     ],
     viewed_cards: [`player_${newGameState.players[token].player_number}`],
   }
@@ -132,7 +132,7 @@ export const robber_response = (
     uniqInformations: {
       swapped_cards: [
         `player_${newGameState.players[token].player_number}`,
-        selected_positions[0],
+        selected_card_positions[0],
       ],
       viewed_cards: [`player_${newGameState.players[token].player_number}`],
     },

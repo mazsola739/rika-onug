@@ -41,6 +41,6 @@ export const exposer = (gameState, title, prefix) => {
 export const exposer_interaction = (gameState, token, title) => {
   return {}
 }
-export const exposer_response = (gameState, token, selected_positions, title) => {
+export const exposer_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }

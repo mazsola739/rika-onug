@@ -14,6 +14,7 @@ export type WsJsonMessage = {
   player_role?: string
   player_role_id?: number
   player_team?: string
+  player_mark?: string
   stage?: string
   title?: string
   actual_scene?: {
@@ -37,6 +38,7 @@ export type WsJsonMessage = {
     player_role?: string
     player_role_id?: number
     player_team?: string
+    player_mark?: string
     private_message?: string[]
     selectable_card_limit?: { player: number; center: number }
     selectable_mark_limit?: { mark: number }
@@ -195,6 +197,7 @@ export type PlayerType = {
   player_role: string
   player_role_id: number
   player_team: string
+  player_mark: string
 }
 
 export type PositionKeys =

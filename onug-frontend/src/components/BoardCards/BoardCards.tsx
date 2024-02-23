@@ -8,7 +8,7 @@ export const BoardCards: React.FC = observer(() => {
   return (
     <StyledBoardCards>
       {renderPlayerCards()}
-      <CenterCardContainer>{renderCenterCard()}</CenterCardContainer>
+      {renderCenterCard()}
     </StyledBoardCards>
   )
 })

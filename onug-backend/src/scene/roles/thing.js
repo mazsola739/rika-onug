@@ -6,7 +6,7 @@ import {
   getPlayerTokensByPlayerNumber,
 } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidSelection } from '../validate-response-data'
+import { isValidCardSelection } from '../validate-response-data'
 import { websocketServerConnectionsPerRoom } from './../../websocket/connections'
 
 export const thing = (gameState, title) => {
@@ -59,10 +59,10 @@ export const thing_interaction = (gameState, token, title) => {
   })
 }
 
-export const thing_response = (gameState, token, selected_positions, title) => {
+export const thing_response = (gameState, token, selected_card_positions, title) => {
   if (
-    !isValidSelection(
-      selected_positions,
+    !isValidCardSelection(
+      selected_card_positions,
       gameState.players[token].player_history
     )
   ) {
@@ -72,7 +72,7 @@ export const thing_response = (gameState, token, selected_positions, title) => {
 
   const tappedPlayerToken = getPlayerTokensByPlayerNumber(
     newGameState.players,
-    selected_positions[0]
+    selected_card_positions[0]
   ) //TODO only 1 player
 
   websocketServerConnectionsPerRoom[newGameState.room_id][
@@ -88,12 +88,12 @@ export const thing_response = (gameState, token, selected_positions, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    tapped_player: [selected_positions[0]],
+    tapped_player: [selected_card_positions[0]],
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_tap', selected_positions[0]],
+    private_message: ['interaction_tap', selected_card_positions[0]],
     icon: 'tap',
-    uniqInformations: { tapped_player: [selected_positions[0]] },
+    uniqInformations: { tapped_player: [selected_card_positions[0]] },
   })
 }

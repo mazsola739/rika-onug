@@ -47,6 +47,6 @@ export const beholder = (
 export const beholder_interaction = (gameState, token, title) => {
   return {}
 }
-export const beholder_response = (gameState, token, selected_positions, title) => {
+export const beholder_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }
