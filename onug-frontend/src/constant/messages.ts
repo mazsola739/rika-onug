@@ -26,6 +26,9 @@ export const interaction_one_any_non_werewolf =
   'You must choose any other non-werewolf player'
 export const interaction_must_one_neighbor =
   'You must choose any player of your neighbors'
+  
+export const interaction_may_direction =
+  'You may choose a direction to move other players cards'
 
 //center card
 export const interaction_may_one_center = 'You may choose center'
@@ -53,3 +56,5 @@ export const interaction_saw_card = 'You saw card from'
 export const interaction_swapped_cards = 'You swapped cards between'
 //tapped
 export const interaction_tap = 'You tapped'
+//moved
+export const interaction_moved = 'You moved cards to'

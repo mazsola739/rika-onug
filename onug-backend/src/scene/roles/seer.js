@@ -74,7 +74,7 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
     return gameState
   }
   const newGameState = { ...gameState }
-
+  const scene = []
   let showCards = []
 
   const playerCards = selected_card_positions.some((pos) => pos.includes('player'))
@@ -120,7 +120,7 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
     viewed_cards: showCards,
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_saw_card',
       selected_card_positions[0],
@@ -129,4 +129,14 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
     icon: 'seer',
     uniqInformations: { viewed_cards: showCards },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

@@ -58,18 +58,6 @@ export const GamePlay: React.FC = observer(() => {
   }, [sendJsonMessage, firstTime, gameBoardStore])
 
   useEffect(() => {
-    if (
-      lastJsonMessage?.type === HYDRATE_GAME_PLAY /* &&
-      lastJsonMessage?.success */ //TODO success
-    ) {
-      narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
-      gamePlayStore.setStartingTime(
-        lastJsonMessage.actual_scene.scene_start_time
-      )
-    }
-    if (lastJsonMessage?.type === MESSAGE) {
-      interactionStore.toggleMessageBoxStatus(true)
-    }
     if (lastJsonMessage?.type === SCENE) {
       narrationStore.setNarration(lastJsonMessage.narration)
       interactionStore.setLastJsonMessage(lastJsonMessage)
@@ -82,10 +70,20 @@ export const GamePlay: React.FC = observer(() => {
       }
 
     }
+    if (lastJsonMessage?.type === HYDRATE_GAME_PLAY)  /* && lastJsonMessage?.success */ //TODO success
+    {
+      narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
+      gamePlayStore.setStartingTime(
+        lastJsonMessage.actual_scene.scene_start_time
+      )
+    }
+    if (lastJsonMessage?.type === MESSAGE) {
+      interactionStore.toggleMessageBoxStatus(true)
+    }
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [lastJsonMessage, narrationStore, gamePlayStore])
+  }, [lastJsonMessage, narrationStore, gamePlayStore, interactionStore])
 
   return (
     <StyledGamePlay>

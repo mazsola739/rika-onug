@@ -75,6 +75,7 @@ export const sentinel_response = (
     return gameState
   }
   const newGameState = { ...gameState }
+  const scene = []
 
   const shieldedPlayerToken = getPlayerTokenByPlayerNumber(
     newGameState.players,
@@ -92,9 +93,19 @@ export const sentinel_response = (
     new_shield_card: [selected_card_positions[0]],
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_placed_shield', selected_card_positions[0]],
     icon: 'shield',
     uniqInformations: { new_shield_card: [selected_card_positions[0]] },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

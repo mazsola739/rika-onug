@@ -67,6 +67,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     return gameState
   }
   const newGameState = { ...gameState }
+  const scene = []
 
   if (selected_card_positions[0].includes('center_')) {
     const showCards = getCardIdsByPositions(newGameState.card_positions, [
@@ -94,14 +95,14 @@ export const witch_response = (gameState, token, selected_card_positions, title)
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
-    scene_title: title,
+      scene_title: title,
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 },
       viewed_cards: [selected_card_positions[0]],
       selected_center_card: selected_card_positions[0],
     }
 
-    return generateRoleInteraction(newGameState, token, {
+    const interaction = generateRoleInteraction(newGameState, token, {
       private_message: [
         'interaction_saw_card',
         selected_card_positions[0],
@@ -115,10 +116,21 @@ export const witch_response = (gameState, token, selected_card_positions, title)
       showCards: showCards,
       uniqInformations: { viewed_cards: [selected_card_positions[0]] },
     })
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      interaction,
+    })
+    newGameState.scene = scene
+
+    return newGameState
+
   } else if (selected_card_positions[0].includes('player_')) {
     const selectedCenterPositionCard =
       newGameState.card_positions[
-        newGameState.players[token].player_history.selected_center_card
+      newGameState.players[token].player_history.selected_center_card
       ]
     const selectedPlayerPositionCard =
       newGameState.card_positions[selected_card_positions[0]]
@@ -143,14 +155,14 @@ export const witch_response = (gameState, token, selected_card_positions, title)
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
-    scene_title: title,
+      scene_title: title,
       swapped_cards: [
         newGameState.players[token].player_history.selected_center_card,
         selected_card_positions[0],
       ],
     }
 
-    return generateRoleInteraction(newGameState, token, {
+    const interaction = generateRoleInteraction(newGameState, token, {
       private_message: [
         'interaction_saw_card',
         'interaction_swapped_cards',
@@ -165,5 +177,17 @@ export const witch_response = (gameState, token, selected_card_positions, title)
         ],
       },
     })
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      interaction,
+    })
+    newGameState.scene = scene
+
+    return newGameState
   }
 }
+
+

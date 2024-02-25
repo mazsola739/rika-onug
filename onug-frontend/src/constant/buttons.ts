@@ -3,6 +3,8 @@ export const buttons: Record<string, string> = {
   no_button_label: 'NO',
   even_button_label: 'EVEN',
   odd_button_label: 'ODD',
+  left_button_label: 'LEFT',
+  right_button_label: 'RIGHT',
   '1_button_label': '1',
   '2_button_label': '2',
   '3_button_label': '3',

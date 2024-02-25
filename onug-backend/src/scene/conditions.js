@@ -103,7 +103,7 @@ export const hasMortician = (selected_cards) => selected_cards.includes(49)
 export const hasFamilyMan = (selected_cards) => selected_cards.includes(78)
 export const hasRipple = (selected_cards) => alienIds.some((id) => selected_cards.includes(id)) //TODO oracle is enough for ripple
 
-export const hasEasterEgg = (totalPlayers) => !hasGoodGuys || !hasBadGuys || totalPlayers === 12
-/* export const haOneMasonAndDoppelganger = hasDoppelganger  && hasAnyMason
-export const hasMasons = hasBothMasons || haOneMasonAndDoppelganger */
+export const hasEasterEgg = (selected_cards, totalPlayers) => !hasGoodGuys(selected_cards) || !hasBadGuys(selected_cards) || totalPlayers === 12
+export const haOneMasonAndDoppelganger = (selected_cards) => hasDoppelganger(selected_cards)  && hasAnyMason(selected_cards)
+export const hasMasons = (selected_cards) => hasBothMasons(selected_cards) || haOneMasonAndDoppelganger(selected_cards)
 export const hasBeholder = (selected_cards) => selected_cards.includes(73) && hasSeers

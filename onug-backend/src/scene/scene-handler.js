@@ -12,12 +12,11 @@ export const sceneHandler = (gameState) => {
   const selected_cards = newGameState.selected_cards
   const total_players = newGameState.total_players
 
-  //TODO easteregg / epic battle
   switch (scene_title) {
-    case "EPIC_BATTLE": //! total players
-      if (conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(total_players)) {
+    case "EPIC_BATTLE": 
+      if (conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players)) {
         newGameState.actual_scene.started = true
-        return roles.epicbattle(newGameState, scene_title, conditions.hasEasterEgg(total_players), conditions.hasEpicBattle(selected_cards), total_players, ) //(gameState, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys)
+        return roles.epicbattle(newGameState, scene_title, conditions.hasEasterEgg(selected_cards, total_players), conditions.hasEpicBattle(selected_cards), total_players, !conditions.hasGoodGuys(selected_cards), !conditions.hasBadGuys(selected_cards)) 
       }
       break
 
@@ -308,12 +307,12 @@ export const sceneHandler = (gameState) => {
       }
       break
 
-   /*  case "MASONS":
-      if (conditions.hasMasons(selected_cards)) { //TODO fix hasMasons
+     case "MASONS":
+      if (conditions.hasMasons(selected_cards)) {
         newGameState.actual_scene.started = true
         return roles.masons(newGameState, scene_title)
       }
-      break */
+      break 
 
     case "THING":
       if (conditions.hasThing(selected_cards)) {

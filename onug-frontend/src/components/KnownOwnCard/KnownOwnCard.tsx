@@ -11,17 +11,16 @@ export const KnownOwnCard: React.FC<KnownOwnCardProps> = observer(
   ({ player }) => {
     const card = player?.player_card_id
       ? deckStore.getCardById(player.player_card_id)
-      : null;
+      : null
 
-    const mark = player?.player_mark ? capitalize(player.player_mark) : null;
-    console.log(mark)
+    const mark = player?.player_mark ? capitalize(player.player_mark) : null
 
-    const playerNumber = player?.player_number || '';
-    const playerName = player?.player_name || '';
-    const playerTeam = player?.player_team || '';
-    const playerRole = player?.player_role || '';
+    const playerNumber = player?.player_number || ''
+    const playerName = player?.player_name || ''
+    const playerTeam = player?.player_team || ''
+    const playerRole = player?.player_role || ''
     const original =
-      deckStore.getCardById(player?.player_original_id)?.display_name || '';
+      deckStore.getCardById(player?.player_original_id)?.display_name || ''
 
     return (
       <KnownOwnCardContainer>
@@ -38,6 +37,6 @@ export const KnownOwnCard: React.FC<KnownOwnCardProps> = observer(
           {mark && <KnownOwnCardText>Mark: {mark}</KnownOwnCardText>}
         </KnownOwnInfos>
       </KnownOwnCardContainer>
-    );
+    )
   }
-);
+)

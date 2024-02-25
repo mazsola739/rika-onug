@@ -30,12 +30,12 @@ export const StyledSceneTracker = styled.div`
 
 export const ActualScene = styled.div<ActualSceneProps>`
   display: flex;
-  color: ${({ isCurrentScene }) => (isCurrentScene ? 'yellow' : 'transparent')};
+  color: ${({ isCurrentScene }) => (isCurrentScene ? '#FF5733' : 'transparent')};
   flex-direction: row;
   justify-content: center;
   gap: 20px;
   border: ${({ isCurrentScene }) =>
-    isCurrentScene ? '2px solid yellow' : '2px solid transparent'};
+    isCurrentScene ? '2px solid #FF5733' : '2px solid transparent'};
 `
 export const ActualSceneImages = styled.div`
   display: flex;

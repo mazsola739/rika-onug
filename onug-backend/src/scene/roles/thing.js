@@ -69,6 +69,7 @@ export const thing_response = (gameState, token, selected_card_positions, title)
     return gameState
   }
   const newGameState = { ...gameState }
+  const scene = []
 
   const tappedPlayerToken = getPlayerTokensByPlayerNumber(
     newGameState.players,
@@ -91,9 +92,19 @@ export const thing_response = (gameState, token, selected_card_positions, title)
     tapped_player: [selected_card_positions[0]],
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_tap', selected_card_positions[0]],
     icon: 'tap',
     uniqInformations: { tapped_player: [selected_card_positions[0]] },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

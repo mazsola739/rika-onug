@@ -50,7 +50,7 @@ export const God: React.FC = observer(() => {
   })
   const [roomId, setRoomId] = useState('')
   const [token, setToken] = useState('')
-  const [message, setMessage] = useState({"type": "REDIRECT", "path": "/lobby"})
+  const [message, setMessage] = useState({ type: 'REDIRECT', path: '/lobby' })
 
   const checkGameStates = async () => {
     const res = await fetch(`${API_LOCALHOST}/god/check-game-states`)
@@ -81,9 +81,7 @@ export const God: React.FC = observer(() => {
   }
 
   const reInitAllGameStates = async () => {
-    const res = await fetch(
-      `${API_LOCALHOST}/god/re-init-all-game-states`
-    )
+    const res = await fetch(`${API_LOCALHOST}/god/re-init-all-game-states`)
     const json = await res.json()
     setResponse(json)
   }
@@ -95,7 +93,9 @@ export const God: React.FC = observer(() => {
   }
 
   const removePlayerByToken = async () => {
-    const res = await fetch(`${API_LOCALHOST}/god/delete-player-by-token?token=${token}`)
+    const res = await fetch(
+      `${API_LOCALHOST}/god/delete-player-by-token?token=${token}`
+    )
     const json = await res.json()
     setResponse(json)
   }
@@ -116,7 +116,7 @@ export const God: React.FC = observer(() => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({message: message}),
+      body: JSON.stringify({ message: message }),
     })
     const json = await res.json()
     setResponse(json)
@@ -129,7 +129,7 @@ export const God: React.FC = observer(() => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({message: message, room_id: roomId}),
+      body: JSON.stringify({ message: message, room_id: roomId }),
     })
     const json = await res.json()
     setResponse(json)
@@ -142,7 +142,7 @@ export const God: React.FC = observer(() => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({message: message, token: token}),
+      body: JSON.stringify({ message: message, token: token }),
     })
     const json = await res.json()
     setResponse(json)
@@ -161,25 +161,21 @@ export const God: React.FC = observer(() => {
   }
 
   const setMessageHandler = (value: string) => {
-      try {
-        return setMessage(JSON.parse(value))
-      } catch (error) {
-        // shhhhhh, no need to do anything, we just try to 
-      }
+    try {
+      return setMessage(JSON.parse(value))
+    } catch (error) {
+      // shhhhhh, no need to do anything, we just try to
     }
+  }
 
   return (
     <StyledGod>
       <LeftSide>
         <GameStatesContainer>
-          <GodTitle>
-            <Icon iconName="shield" size={25} /> {GAMESTATES}
-          </GodTitle>
+          <GodTitle>{GAMESTATES}</GodTitle>
           <FormContainer>
             <InputContainer>
-              <Label htmlFor="room_id">
-                <Icon iconName="artifact" size={25} /> {LABEL_ROOM_ID}
-              </Label>
+              <Label htmlFor="room_id">{LABEL_ROOM_ID}</Label>
               <Input
                 type="text"
                 id="room_id"
@@ -189,9 +185,7 @@ export const God: React.FC = observer(() => {
               />
             </InputContainer>
             <InputContainer>
-              <Label htmlFor="token">
-                <Icon iconName="mason" size={25} /> {LABEL_TOKEN}
-              </Label>
+              <Label htmlFor="token">{LABEL_TOKEN}</Label>
               <Input
                 type="text"
                 id="token"
@@ -202,36 +196,27 @@ export const God: React.FC = observer(() => {
             </InputContainer>
           </FormContainer>
           <ButtonsContainer>
-            <Button onClick={checkGameStates}>
-              <Icon iconName="alien" size={25} /> {CHECK_GAME_STATES}
-            </Button>
+            <Button onClick={checkGameStates}>{CHECK_GAME_STATES}</Button>
             <Button onClick={checkGameStateByRoomId}>
-              <Icon iconName="assassin" size={25} />{' '}
               {CHECK_GAME_STATE_BY_ROOM_ID}
             </Button>
             <Button onClick={deleteAllGameStates}>
-              <Icon iconName="mortician" size={25} /> {DELETE_ALL_GAME_STATES}
+              {DELETE_ALL_GAME_STATES}
             </Button>
             <Button onClick={deleteGameStateByRoomId}>
-              <Icon iconName="dreamwolf" size={25} />{' '}
               {DELETE_GAME_STATE_BY_ROOM_ID}
             </Button>
             <Button onClick={reInitAllGameStates}>
-              <Icon iconName="dreamwolf" size={25} />{' '}
               {RE_INIT_ALL_GAME_STATES}
             </Button>
           </ButtonsContainer>
         </GameStatesContainer>
 
         <WSContainer>
-          <GodTitle>
-            <Icon iconName="family" size={25} /> {WS}
-          </GodTitle>
+          <GodTitle>{WS}</GodTitle>
           <FormContainer>
             <InputContainer>
-              <Label htmlFor="message">
-                <Icon iconName="mason" size={25} /> {LABEL_MESSAGE}
-              </Label>
+              <Label htmlFor="message">{LABEL_MESSAGE}</Label>
               <textarea
                 id="message"
                 name="message"
@@ -241,54 +226,34 @@ export const God: React.FC = observer(() => {
             </InputContainer>
           </FormContainer>
           <ButtonsContainer>
-            <Button onClick={checkConnections}>
-              <Icon iconName="seer" size={25} /> {CHECK_CONNECTIONS}
-            </Button>
-            <Button onClick={removeAllPlayers}>
-              <Icon iconName="blob" size={25} /> {REMOVE_ALL_PLAYERS}
-            </Button>
+            <Button onClick={checkConnections}>{CHECK_CONNECTIONS}</Button>
+            <Button onClick={removeAllPlayers}>{REMOVE_ALL_PLAYERS}</Button>
             <Button onClick={removePlayerByToken}>
-              <Icon iconName="villain" size={25} />{' '}
               {REMOVE_PLAYER_BY_TOKEN}
             </Button>
-            <Button onClick={broadcastToAll}>
-              <Icon iconName="vampire" size={25} /> {BROADCAST_TO_ALL}
-            </Button>
+            <Button onClick={broadcastToAll}>{BROADCAST_TO_ALL}</Button>
             <Button onClick={broadcastToAllInRoom}>
-              <Icon iconName="fang" size={25} /> {BROADCAST_TO_ALL_IN_ROOM}
+              {BROADCAST_TO_ALL_IN_ROOM}
             </Button>
             <Button onClick={sendMessageToPlayer}>
-              <Icon iconName="lover" size={25} /> {SEND_MESSAGE_TO_PLAYER}
+              {SEND_MESSAGE_TO_PLAYER}
             </Button>
           </ButtonsContainer>
         </WSContainer>
 
         <MetaContainer>
-          <GodTitle>
-            <Icon iconName="tanner" size={25} /> {META}
-          </GodTitle>
+          <GodTitle>{META}</GodTitle>
           <ButtonsContainer>
-            <Button onClick={listOnugEnvVars}>
-              <Icon iconName="werewolf" size={25} /> {LIST_ONUG_ENV_VARS}
-            </Button>
+            <Button onClick={listOnugEnvVars}>{LIST_ONUG_ENV_VARS}</Button>
             <Button onClick={deleteAllOldLogFiles}>
-              <Icon iconName="cow" size={25} /> {DELETE_ALL_OLD_LOG_FILES}
+              {DELETE_ALL_OLD_LOG_FILES}
             </Button>
           </ButtonsContainer>
         </MetaContainer>
       </LeftSide>
 
       <RightSide>
-        <GodTitle>
-          <Icon iconName="interaction" size={25} /> {RESPONSE}{' '}
-          <Icon iconName="blind" size={25} />
-          <Icon iconName="claw" size={25} />
-          <Icon iconName="eye" size={25} />
-          <Icon iconName="mute" size={25} />
-          <Icon iconName="ufo" size={25} />
-          <Icon iconName="select" size={25} />
-          <Icon iconName="secret" size={25} />
-        </GodTitle>
+        <GodTitle>{RESPONSE}</GodTitle>
         <ResponseContainer>
           <ResponsePre>{`${JSON.stringify(response, null, 4)}`}</ResponsePre>
         </ResponseContainer>

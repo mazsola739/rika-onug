@@ -90,6 +90,7 @@ export const curator_response = (
     return gameState
   }
   const newGameState = { ...gameState }
+  const scene = []
 
   const newArtifact = getRandomArtifact(newGameState.artifact)
   const artifactedPlayersToken = getPlayerTokenByPlayerNumber(
@@ -108,9 +109,19 @@ export const curator_response = (
     new_artifact_card: selected_card_positions[0],
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_placed_artifact', selected_card_positions[0]],
     icon: 'artifact',
     uniqInformations: { new_artifact_card: selected_card_positions[0] },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

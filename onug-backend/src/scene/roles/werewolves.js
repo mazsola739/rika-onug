@@ -30,9 +30,9 @@ export const werewolves = (gameState, title, hasDreamWolf) => {
     ) {
       interaction = werewolves_interaction(newGameState, token, title)
     }
-    
-          newGameState.players[token].player_history.scene_title = title
-scene.push({
+
+    newGameState.players[token].player_history.scene_title = title
+    scene.push({
       type: SCENE,
       title,
       token,
@@ -84,6 +84,7 @@ export const werewolves_response = (gameState, token, selected_card_positions, t
     return gameState
   }
   const newGameState = { ...gameState }
+  const scene = []
 
   const showCards = getCardIdsByPositions(newGameState.card_positions, [
     selected_card_positions[0],
@@ -106,10 +107,21 @@ export const werewolves_response = (gameState, token, selected_card_positions, t
     viewed_cards: [selected_card_positions[0]],
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', selected_card_positions[0]],
     icon: 'spy',
     showCards: showCards,
     uniqInformations: { viewed_cards: [selected_card_positions[0]] },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+
+  newGameState.scene = scene
+
+  return newGameState
 }

@@ -72,6 +72,7 @@ export const troublemaker_response = (
     return gameState
   }
   const newGameState = { ...gameState }
+  const scene = []
 
   const [position1, position2] = selected_card_positions
   const playerOneCard = { ...newGameState.card_positions[position1] }
@@ -89,9 +90,19 @@ export const troublemaker_response = (
     swapped_cards: [position1, position2],
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_swapped_cards', position1, position2],
     icon: 'swap',
     uniqInformations: { swapped_cards: [position1, position2] },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

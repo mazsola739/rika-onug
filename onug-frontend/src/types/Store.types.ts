@@ -49,6 +49,7 @@ export type WsJsonMessage = {
     show_marks?: Record<string, number>[] //TODO correcting type
     
     //unique informations
+    answer_options?: string[]
     new_role_id?: number
     copied_role?: string
     instant_night_action?: string

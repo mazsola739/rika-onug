@@ -63,7 +63,7 @@ export const paranormalinvestigator_interaction = (gameState, token, title) => {
 export const paranormalinvestigator_response = (
   gameState,
   token,
-  selected_card_positions, 
+  selected_card_positions,
   title
 ) => {
   if (
@@ -76,6 +76,7 @@ export const paranormalinvestigator_response = (
   }
 
   const newGameState = { ...gameState }
+  const scene = []
 
   const selectedCards = getCardIdsByPositions(newGameState.card_positions, [
     selected_card_positions[0],
@@ -122,7 +123,7 @@ export const paranormalinvestigator_response = (
     viewed_cards: showCards,
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_saw_card',
       selected_card_positions[0],
@@ -132,4 +133,14 @@ export const paranormalinvestigator_response = (
     showCards: showCards,
     uniqInformations: { viewed_cards: showCards },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

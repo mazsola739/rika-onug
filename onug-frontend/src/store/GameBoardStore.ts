@@ -38,6 +38,8 @@ class GameBoardStore {
   player_11: PositionType
   player_12: PositionType
 
+  answerOptions: string[]
+
   constructor() {
     makeAutoObservable(this)
 
@@ -53,6 +55,8 @@ class GameBoardStore {
     this.gamePlayBoardCards = []
     this.centerCards = []
     this.playerCards = []
+
+    this.answerOptions = []
 
     this.center_left = { position: 'center_left' }
     this.center_middle = { position: 'center_middle' }
@@ -75,6 +79,10 @@ class GameBoardStore {
 
   setKnownPlayer(knownPlayer: PlayerType): void {
     this.knownPlayer = knownPlayer
+  }
+
+  setAnswerOptions(answerOptions: string[]): void {
+    this.answerOptions = answerOptions
   }
 
   setPlayer(player: PlayerType): void {
@@ -129,6 +137,7 @@ class GameBoardStore {
     const gamePlayBoardCards: GamePlayBoardCardType[] = []
     const playerCards: PositionProperties[] = []
     const centerCards: PositionProperties[] = []
+    const answerOptions: string[] = []
 
     this.centerCards.forEach((centerCard) => {
       const card: GamePlayBoardCardType = {
@@ -245,6 +254,8 @@ class GameBoardStore {
       gamePlayBoardCards.push(card)
       playerCards.push({ ...playerCard, ...card.card })
     })
+
+    this.answerOptions = answerOptions
 
     this.centerCards = centerCards
     this.playerCards = playerCards

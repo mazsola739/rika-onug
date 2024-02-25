@@ -76,6 +76,7 @@ export const doppelganger_response = (
   }
 
   const newGameState = { ...gameState }
+  const scene = []
 
   newGameState.players[token].card.player_role_id =
     newGameState.card_positions[selected_card_positions[0]].id
@@ -100,7 +101,7 @@ export const doppelganger_response = (
     viewed_cards: showCards,
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_you_are_that_role',
       `${newGameState.players[token]?.card.player_role}`,
@@ -111,4 +112,14 @@ export const doppelganger_response = (
       new_role_id: newGameState.players[token].card.player_role_id,
     },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

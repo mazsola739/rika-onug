@@ -73,6 +73,7 @@ export const alphawolf_response = (
     return gameState
   }
   const newGameState = { ...gameState }
+  const scene = []
 
   const centerWolf = { ...newGameState.card_positions.center_wolf }
   const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]] }
@@ -88,7 +89,7 @@ export const alphawolf_response = (
     swapped_cards: [selected_card_positions[0], 'center_wolf'],
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_swapped_cards',
       selected_card_positions[0],
@@ -97,4 +98,14 @@ export const alphawolf_response = (
     icon: 'claw',
     uniqInformations: { swapped_cards: [selected_card_positions[0], 'center_wolf'] },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

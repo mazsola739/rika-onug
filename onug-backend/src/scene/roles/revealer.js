@@ -75,6 +75,7 @@ export const revealer_response = (gameState, token, selected_card_positions, tit
     return gameState
   }
   const newGameState = { ...gameState }
+  const scene = []
 
   const selectedPositionCard =
     newGameState.card_positions[selected_card_positions[0]]
@@ -106,10 +107,20 @@ export const revealer_response = (gameState, token, selected_card_positions, tit
     newGameState.players[token].player_history.show_cards = revealedCard
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', selected_card_positions[0]],
     icon: 'id',
     showCards: revealedCard,
     uniqInformations: { flipped_cards: [selected_card_positions[0]] },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

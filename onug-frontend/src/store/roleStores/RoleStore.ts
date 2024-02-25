@@ -9,6 +9,8 @@ class RoleStore {
   }
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
+    const answerOptions: string[] = lastJsonMessage.interaction.answer_options || []
+
     const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
       (playerCard) => {
         const { position } = playerCard
@@ -110,6 +112,7 @@ class RoleStore {
       lastJsonMessage.interaction.selectable_card_limit?.player
     interactionStore.selectableMarkLimit =
       lastJsonMessage.interaction.selectable_mark_limit?.mark
+    gameBoardStore.setAnswerOptions(answerOptions)
     gameBoardStore.setPlayerCards(playerCards)
     gameBoardStore.setCenterCards(centerCards)
     gameBoardStore.setKnownPlayer({

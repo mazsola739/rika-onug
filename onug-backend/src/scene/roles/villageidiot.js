@@ -1,7 +1,7 @@
 //@ts-check
-
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, moveCards } from '../../utils/scene'
+import { generateRoleInteraction } from './../generate-scene-role-interactions';
 
 export const villageidiot = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -32,8 +32,54 @@ export const villageidiot = (gameState, title) => {
 }
 
 export const villageidiot_interaction = (gameState, token, title) => {
-  return {}
+  const newGameState = { ...gameState }
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    answer_options: ["left", "right"],
+  }
+
+  return generateRoleInteraction(newGameState, token, {
+    private_message: ['interaction_may_direction'],
+    icon: 'jest',
+    uniqInformations: { answer_options: ["left", "right"] },
+  })
 }
-export const villageidiot_response = (gameState, token, selected_card_positions, title) => {
-  return {}
+
+export const villageidiot_response = (gameState, token, answer, title) => { //TODO validate answer?
+  const newGameState = { ...gameState }
+  const scene = []
+
+  const currentPlayer = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const updatedPlayerCards = moveCards(newGameState.card_positions, answer, currentPlayer[0])
+
+  newGameState.players[token].card_or_mark_action = true
+
+  newGameState.card_positions = {
+    ...newGameState.card_positions,
+    ...updatedPlayerCards
+  }
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    card_or_mark_action: true,
+    direction: answer,
+  }
+
+  const interaction = generateRoleInteraction(newGameState, token, {
+    private_message: ["interaction_moved", answer === "left" ? "direction_left" : "direction_right"],
+    icon: 'jest',
+  })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

@@ -114,6 +114,18 @@ export const useClickHandler = (room_id: string, token: string) => {
     [sendJsonMessage]
   )
 
+  const handleAnswerInteraction = useCallback(
+    (answer: string) => {
+      sendJsonMessage?.({
+        type: SCENE,
+        room_id,
+        token,
+        answer: answer,
+      })
+    },
+    [sendJsonMessage]
+  )
+
   const handleDeselect = useCallback(
     (id: number, action: string) => {
       sendJsonMessage?.({
@@ -155,6 +167,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     handleStopGame,
     handleCardInteraction,
     handleMarkInteraction,
+    handleAnswerInteraction,
     handleDeselect,
     handleCardClick,
   }

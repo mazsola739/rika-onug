@@ -11,6 +11,7 @@ const colorVariants = {
   blue: '#007bff',
   crimson: '#dc3545',
   orange: '#ff9800',
+  yellow: '#FFFF00',
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`

@@ -93,4 +93,7 @@ export const team: TeamType = {
 export const conjunction_and = 'and'
 export const conjunction_or = 'or'
 
+export const direction_left = 'left'
+export const direction_right = 'right'
+
 export const evils = ['vampire', 'alien', 'werewolf', 'supervillain']

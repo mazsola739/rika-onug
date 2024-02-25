@@ -47,7 +47,7 @@ export const robber_interaction = (gameState, token, title) => {
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
-    scene_title: title,
+      scene_title: title,
       selectable_cards: selectablePlayerNumbers,
       selectable_card_limit: { player: 1, center: 0 },
     }
@@ -63,7 +63,7 @@ export const robber_interaction = (gameState, token, title) => {
   } else {
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
-    scene_title: title,
+      scene_title: title,
       shielded: true,
     }
 
@@ -89,23 +89,24 @@ export const robber_response = (
     return gameState
   }
   const newGameState = { ...gameState }
+  const scene = []
 
-  const robberPlayerNumber = getPlayerNumbersWithMatchingTokens(
+  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(
     newGameState.players,
     [token]
   )[0]
-  const robberCard = { ...newGameState.card_positions[robberPlayerNumber] }
+  const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber] }
   const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]] }
-  newGameState.card_positions[robberPlayerNumber] = selectedCard
-  newGameState.card_positions[selected_card_positions[0]] = robberCard
+  newGameState.card_positions[currentPlayerNumber] = selectedCard
+  newGameState.card_positions[selected_card_positions[0]] = currentPlayerCard
 
   newGameState.players[token].card.player_card_id =
-    newGameState.card_positions[robberPlayerNumber].id
+    newGameState.card_positions[currentPlayerNumber].id
   newGameState.players[token].card.player_team =
-    newGameState.card_positions[robberPlayerNumber].team
+    newGameState.card_positions[currentPlayerNumber].team
 
   const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, [
-    robberPlayerNumber,
+    currentPlayerNumber,
   ])
 
   newGameState.players[token].card_or_mark_action = true
@@ -121,7 +122,7 @@ export const robber_response = (
     viewed_cards: [`player_${newGameState.players[token].player_number}`],
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_swapped_cards',
       'interaction_saw_card',
@@ -137,4 +138,14 @@ export const robber_response = (
       viewed_cards: [`player_${newGameState.players[token].player_number}`],
     },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

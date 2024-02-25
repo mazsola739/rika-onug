@@ -78,6 +78,7 @@ export const drunk_response = (gameState, token, selected_card_positions, title)
     return gameState
   }
   const newGameState = { ...gameState }
+  const scene = []
 
   const drunkPlayerNumber = getPlayerNumbersWithMatchingTokens(
     newGameState.players,
@@ -101,7 +102,7 @@ export const drunk_response = (gameState, token, selected_card_positions, title)
     ],
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: [
       'interaction_swapped_cards',
       selected_card_positions[0],
@@ -115,4 +116,14 @@ export const drunk_response = (gameState, token, selected_card_positions, title)
       ],
     },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

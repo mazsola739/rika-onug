@@ -200,6 +200,30 @@ export const getRandomArtifact = (playerArtifacts) => {
 
 export const getKeys = (array) => array.map(obj => Object.keys(obj)[0])
 
+export const moveCards = (cards, direction, currentPlayer) => {
+  const playerCards = Object.fromEntries(
+      Object.entries(cards)
+          .filter(([key, value]) => key.startsWith("player_"))
+  );
+
+  const movableCards = { ...playerCards };
+  const currentPlayerCard = movableCards[currentPlayer];
+  delete movableCards[currentPlayer];
+
+  const shiftAmount = direction === 'right' ? 1 : Object.keys(movableCards).length - 1;
+
+  const shiftedCards = {};
+  Object.keys(movableCards).forEach((key, index) => {
+      const newIndex = (index + shiftAmount) % Object.keys(movableCards).length;
+      shiftedCards[`player_${newIndex + 2}`] = movableCards[key];
+  });
+
+  const updatedPlayerCards = { ...shiftedCards, [currentPlayer]: currentPlayerCard };
+
+  return updatedPlayerCards;
+};
+
+
 //RIPPLE
 export const pickRandomOnePlayer = (numPlayers) => shufflePlayers(numPlayers)[0]
 
