@@ -60,28 +60,27 @@ export const cupid_response = (gameState, token, selected_mark_positions, title)
   const newGameState = { ...gameState }
   const scene = []
 
-  let loveOnePosition
-  let loveTwoPosition
-  let selectedOnePosition
-  let selectedTwoPosition
-
   if (gameState.players[token].card.player_original_id === 1) {
-    loveOnePosition = newGameState.doppelganger_mark_positions.love_1
-    loveTwoPosition = newGameState.doppelganger_mark_positions.love_2
-    selectedOnePosition = newGameState.card_positions[selected_mark_positions[0]].mark
-    selectedTwoPosition = newGameState.card_positions[selected_mark_positions[1]].mark
+    const loveOnePosition = newGameState.doppelganger_mark_positions.love_1
+    const loveTwoPosition = newGameState.doppelganger_mark_positions.love_2
+    const selectedOnePosition = newGameState.card_positions[selected_mark_positions[0]].mark
+    const selectedTwoPosition = newGameState.card_positions[selected_mark_positions[1]].mark
 
+    newGameState.doppelganger_mark_positions.love_1 = selectedOnePosition
+    newGameState.doppelganger_mark_positions.love_2 = selectedTwoPosition
+    newGameState.card_positions[selected_mark_positions[0]].mark = loveOnePosition
+    newGameState.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
   } else {
-    loveOnePosition = newGameState.mark_positions.love_1
-    loveTwoPosition = newGameState.mark_positions.love_2
-    selectedOnePosition = newGameState.card_positions[selected_mark_positions[0]].mark
-    selectedTwoPosition = newGameState.card_positions[selected_mark_positions[1]].mark
-  }
+    const loveOnePosition = newGameState.mark_positions.love_1
+    const loveTwoPosition = newGameState.mark_positions.love_2
+    const selectedOnePosition = newGameState.card_positions[selected_mark_positions[0]].mark
+    const selectedTwoPosition = newGameState.card_positions[selected_mark_positions[1]].mark
 
-  newGameState.mark_positions.love_1 = selectedOnePosition
-  newGameState.mark_positions.love_2 = selectedTwoPosition
-  newGameState.card_positions[selected_mark_positions[0]].mark = loveOnePosition
-  newGameState.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
+    newGameState.mark_positions.love_1 = selectedOnePosition
+    newGameState.mark_positions.love_2 = selectedTwoPosition
+    newGameState.card_positions[selected_mark_positions[0]].mark = loveOnePosition
+    newGameState.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
+  }
 
   const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
 

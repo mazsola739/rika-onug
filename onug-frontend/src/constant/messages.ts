@@ -52,3 +52,5 @@ export const interaction_tap = 'You tapped'
 export const interaction_moved = 'You moved cards to'
 //mark_of_love
 export const interaction_love = 'You placed Mark of Love front of '
+//mark_of_disease
+export const interaction_diseased = 'You placed Mark of Disease front of '

@@ -1,6 +1,8 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene'
+import { getAllPlayerTokens, getPlayerNeighborsByToken } from '../../utils/scene'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
+import { isValidMarkSelection } from '../validate-response-data'
 
 export const diseased = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -30,12 +32,66 @@ export const diseased = (gameState, title) => {
 }
 
 export const diseased_interaction = (gameState, token, title) => {
-  return {}
+  const newGameState = { ...gameState }
+
+  const neighbors = getPlayerNeighborsByToken(newGameState.players, token)
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    selectable_marks: neighbors,
+    selectable_mark_limit: { mark: 1 },
+  }
+
+  return generateRoleInteraction(newGameState, token, {
+    private_message: ['interaction_must_one_neighbor'],
+    icon: 'diseased',
+    selectableCards: { selectable_marks: neighbors, selectable_mark_limit: { mark: 1 } },
+  })
 }
-export const diseased_response = (gameState, token, selected_card_positions, title) => {
+
+export const diseased_response = (gameState, token, selected_mark_positions, title) => {
+  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
+    return gameState
+  }
+
   const newGameState = { ...gameState }
   const scene = []
-  const interaction = {}
+
+  console.log(selected_mark_positions[0])
+
+  if (gameState.players[token].card.player_original_id === 1) {
+    const diseasedPosition = newGameState.doppelganger_mark_positions.disease
+    const selectedPosition = newGameState.card_positions[selected_mark_positions[0]].mark
+
+    newGameState.doppelganger_mark_positions.diseased = selectedPosition
+    newGameState.card_positions[selected_mark_positions[0]].mark = diseasedPosition
+  } else {
+    const diseasedPosition = newGameState.mark_positions.disease
+    const selectedPosition = newGameState.card_positions[selected_mark_positions[0]].mark
+
+    newGameState.mark_positions.diseased = selectedPosition
+    newGameState.card_positions[selected_mark_positions[0]].mark = diseasedPosition
+  }
+
+  console.log(newGameState.card_positions[selected_mark_positions[0]].mark)
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    card_or_mark_action: true,
+    mark_of_disease: [selected_mark_positions[0]],
+  }
+
+  const interaction = generateRoleInteraction(newGameState, token, {
+    private_message: [
+      'interaction_love',
+      selected_mark_positions[0],
+    ],
+    icon: 'diseased',
+    uniqInformations: { mark_of_disease: [selected_mark_positions[0]] },
+  })
+
   scene.push({
     type: SCENE,
     title,
