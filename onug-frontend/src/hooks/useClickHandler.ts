@@ -104,6 +104,7 @@ export const useClickHandler = (room_id: string, token: string) => {
 
   const handleMarkInteraction = useCallback(
     (selected_marks: string[]) => {
+      console.log("hehe")
       sendJsonMessage?.({
         type: SCENE,
         room_id,

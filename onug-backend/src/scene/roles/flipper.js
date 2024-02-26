@@ -65,12 +65,7 @@ export const flipper_interaction = (gameState, token, title) => {
 
 //TODO better response message
 export const flipper_response = (gameState, token, selected_card_positions, title) => {
-  if (
-    !isValidCardSelection(
-      selected_card_positions,
-      gameState.players[token].player_history
-    )
-  ) {
+    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
   const newGameState = { ...gameState }

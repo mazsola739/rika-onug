@@ -19,7 +19,6 @@ import { thing_interaction, thing_response } from './thing'
 import { troublemaker_interaction, troublemaker_response } from './troublemaker'
 import { villageidiot_interaction, villageidiot_response } from './villageidiot'
 import { witch_interaction, witch_response } from './witch'
-import { newGameState } from './../../websocket/interaction';
 
 const instantRoleIds = {
   17: 'role_alphawolf',
@@ -146,7 +145,7 @@ export const doppelganger_instant_action_interaction = (gameState, token, title)
   return interaction
 }
 
-export const doppelganger_instant_action_response =  (gameState, token, selected_card_positions, answer, title) => {
+export const doppelganger_instant_action_response =  (gameState, token, selected_card_positions, selected_mark_positions, answer, title) => {
   const new_role_id = gameState.players[token]?.new_role_id
   let newGameState = {...gameState}
 
@@ -161,9 +160,9 @@ export const doppelganger_instant_action_response =  (gameState, token, selected
   if (new_role_id === 25) newGameState = sentinel_response(gameState, token, selected_card_positions, title)
   if (new_role_id === 26) newGameState = villageidiot_response(gameState, token, answer, title)
   if (new_role_id === 27) newGameState = witch_response(gameState, token, selected_card_positions, title)
-  if (new_role_id === 31) newGameState = cupid_response(gameState, token, selected_card_positions, title)
-  if (new_role_id === 32) newGameState = diseased_response(gameState, token, selected_card_positions, title)
-  if (new_role_id === 34) newGameState = instigator_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 31) newGameState = cupid_response(gameState, token, selected_mark_positions, title)
+  if (new_role_id === 32) newGameState = diseased_response(gameState, token, selected_mark_positions, title)
+  if (new_role_id === 34) newGameState = instigator_response(gameState, token, selected_mark_positions, title)
   if (new_role_id === 55) newGameState = thing_response(gameState, token, selected_card_positions, title)
   if (new_role_id === 56) newGameState = seer_response(gameState, token, selected_card_positions, title)
   if (new_role_id === 57) newGameState = drpeeker_response(gameState, token, selected_card_positions, title)

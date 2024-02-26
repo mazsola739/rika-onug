@@ -43,6 +43,7 @@ export type WsJsonMessage = {
     selectable_card_limit?: { player: number; center: number }
     selectable_mark_limit?: { mark: number }
     selectable_cards?: string[]
+    selectable_marks?: string[]
     shielded_cards: string[]
     artifacted_cards?: string[]
     show_cards?: Record<string, number>[]
@@ -58,6 +59,7 @@ export type WsJsonMessage = {
     flipped_cards?: string[]
     new_artifact_card?: string
     new_shield_card?: string
+    mark_of_love?: string[]
 
     //icons
     aliens?: string[]
@@ -121,6 +123,7 @@ export type PositionType = {
   shield?: boolean
   mark?: string
   selectable_cards?: boolean
+  selectable_marks?: boolean
   ready?: boolean
 }
 
@@ -142,6 +145,7 @@ export type GamePlayBoardCardType = {
     id: number
     spy: boolean
     selectable_cards: boolean
+    selectable_marks: boolean
     aliens: boolean
     artifact: boolean
     assassin: boolean
@@ -223,6 +227,7 @@ export type PositionKeys =
 export type PositionProperties = {
   position: string
   selectable_cards: boolean
+  selectable_marks?: boolean
   id?: number
   centerSpy?: boolean
   ready?: boolean

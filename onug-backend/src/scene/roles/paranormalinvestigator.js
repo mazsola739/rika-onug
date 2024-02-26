@@ -66,12 +66,7 @@ export const paranormalinvestigator_response = (
   selected_card_positions,
   title
 ) => {
-  if (
-    !isValidCardSelection(
-      selected_card_positions,
-      gameState.players[token].player_history
-    )
-  ) {
+    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
 

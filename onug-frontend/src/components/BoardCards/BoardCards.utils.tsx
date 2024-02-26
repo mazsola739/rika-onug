@@ -21,6 +21,7 @@ const renderPlayerCards = () => {
             id={card.id}
             position={card.position}
             selectable_cards={card.selectable_cards}
+            selectable_marks={card.selectable_marks}
             aliens={card.aliens}
             artifact={card.artifact}
             assassin={card.assassin}

@@ -84,7 +84,7 @@ export const dealCardIds = (selectedCardIds) => {
 }
 
 const createPlayerCard = (card, selected_cards) => {
-  if (!card || typeof card !== "object" || !card.id) return { player_original_id: 0, player_card_id: 0, player_role: "", player_role_id: 0, team: "", mark: false, player_mark: "" }
+  if (!card || typeof card !== "object" || !card.id) return { player_original_id: 0, player_card_id: 0, player_role: "", player_role_id: 0, team: ""}
 
   let playerCard
 
@@ -113,7 +113,7 @@ const createPlayerCard = (card, selected_cards) => {
 }
 
 const createPositionCard = (card, selected_cards) => {
-  if (!card || typeof card !== "object" || !card.id) return { id: 0, role: "", team: "" }
+  if (!card || typeof card !== "object" || !card.id) return { id: 0, role: "", team: ""}
 
   let positionCard
   
@@ -124,7 +124,7 @@ const createPositionCard = (card, selected_cards) => {
       id: card.id,
       role: card.role,
       team: card.team,
-      player_mark: "mark_of_clarity",
+      mark: "mark_of_clarity",
     }
   } else {
     positionCard = {
@@ -185,11 +185,11 @@ export const dealCards = async (ws, message) => {
       fear: "mark_of_fear",
       bat: "mark_of_bat",
       disease: "mark_of_disease",
-      love1: "mark_of_love",
-      love2: "mark_of_love",
+      love_1: "mark_of_love",
+      love_2: "mark_of_love",
       traitor: "mark_of_traitor",
-      clarity1: "mark_of_clarity",
-      clarity2: "mark_of_clarity",
+      clarity_1: "mark_of_clarity",
+      clarity_2: "mark_of_clarity",
       assassin: "mark_of_assassin",
     }
     if (hasDoppelganger) {
@@ -197,11 +197,11 @@ export const dealCards = async (ws, message) => {
         fear: "mark_of_fear",
         bat: "mark_of_bat",
         disease: "mark_of_disease",
-        love1: "mark_of_love",
-        love2: "mark_of_love",
+        love_1: "mark_of_love",
+        love_2: "mark_of_love",
         traitor: "mark_of_traitor",
-        clarity1: "mark_of_clarity",
-        clarity2: "mark_of_clarity",
+        clarity_1: "mark_of_clarity",
+        clarity_2: "mark_of_clarity",
         assassin: "mark_of_assassin",
       }
     }

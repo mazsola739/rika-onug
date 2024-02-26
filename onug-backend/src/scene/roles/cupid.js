@@ -1,6 +1,9 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../utils/scene'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
+import { isValidMarkSelection } from '../validate-response-data'
+import { interaction } from './../../websocket/interaction';
 
 export const cupid = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -30,12 +33,79 @@ export const cupid = (gameState, title) => {
 }
 
 export const cupid_interaction = (gameState, token, title) => {
-  return {}
+  const newGameState = { ...gameState }
+
+  const allPlayerTokens = getAllPlayerTokens(newGameState.players)
+  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    selectable_marks: selectablePlayerNumbers,
+    selectable_mark_limit: { mark: 2 },
+  }
+
+  return generateRoleInteraction(newGameState, token, {
+    private_message: ["interaction_must_two_any"],
+    icon: 'cupid',
+    selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 2 } },
+  })
 }
-export const cupid_response = (gameState, token, selected_card_positions, title) => {
+
+export const cupid_response = (gameState, token, selected_mark_positions, title) => {
+  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
+    return gameState
+  }
+
   const newGameState = { ...gameState }
   const scene = []
-  const interaction = {}
+
+  let loveOnePosition
+  let loveTwoPosition
+  let selectedOnePosition
+  let selectedTwoPosition
+
+  if (gameState.players[token].card.player_original_id === 1) {
+    loveOnePosition = newGameState.doppelganger_mark_positions.love_1
+    loveTwoPosition = newGameState.doppelganger_mark_positions.love_2
+    selectedOnePosition = newGameState.card_positions[selected_mark_positions[0]].mark
+    selectedTwoPosition = newGameState.card_positions[selected_mark_positions[1]].mark
+
+  } else {
+    loveOnePosition = newGameState.mark_positions.love_1
+    loveTwoPosition = newGameState.mark_positions.love_2
+    selectedOnePosition = newGameState.card_positions[selected_mark_positions[0]].mark
+    selectedTwoPosition = newGameState.card_positions[selected_mark_positions[1]].mark
+  }
+
+  newGameState.mark_positions.love_1 = selectedOnePosition
+  newGameState.mark_positions.love_2 = selectedTwoPosition
+  newGameState.card_positions[selected_mark_positions[0]].mark = loveOnePosition
+  newGameState.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
+
+  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+
+  if (currentPlayerNumber[0] === selected_mark_positions[0] || currentPlayerNumber[0] === selected_mark_positions[1]) {
+    newGameState.players[token].card.player_mark = "mark_of_love"
+  }
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    card_or_mark_action: true,
+    mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]],
+  }
+
+  const interaction = generateRoleInteraction(newGameState, token, {
+    private_message: [
+      'interaction_love',
+      selected_mark_positions[0],
+      selected_mark_positions[1],
+    ],
+    icon: 'cupid',
+    uniqInformations: { mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]] },
+  })
+
   scene.push({
     type: SCENE,
     title,

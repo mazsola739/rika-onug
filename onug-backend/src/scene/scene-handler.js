@@ -13,12 +13,12 @@ export const sceneHandler = (gameState) => {
   const total_players = newGameState.total_players
 
   switch (scene_title) {
-    case "EPIC_BATTLE": 
+/*     case "EPIC_BATTLE": 
       if (conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players)) {
         newGameState.actual_scene.started = true
         return roles.epicbattle(newGameState, scene_title, conditions.hasEasterEgg(selected_cards, total_players), conditions.hasEpicBattle(selected_cards), total_players, !conditions.hasGoodGuys(selected_cards), !conditions.hasBadGuys(selected_cards)) 
       }
-      break
+      break */
 
     case "ORACLE_QUESTION":
       if (conditions.hasOracle(selected_cards)) {

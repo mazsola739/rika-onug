@@ -117,8 +117,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
           return
         }
 
-        interactionStore.selectedCards.length === maxSelectionLimit &&
-        handleCardInteraction(interactionStore.selectedCards)
+        interactionStore.selectedCards.length === maxSelectionLimit && handleCardInteraction(interactionStore.selectedCards)
       }
     }
 
@@ -131,16 +130,16 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
           const updatedSelectedMarks = selectedMarks.filter(
             (markPos) => markPos !== position
           )
-          interactionStore.setSelectedCards(updatedSelectedMarks)
+          interactionStore.setSelectedMarks(updatedSelectedMarks)
           setIsSelectedMark(false)
         } else if (selectedMarks.length < maxMarkSelection) {
           const updatedSelectedMarks = [...selectedMarks, position]
-          interactionStore.setSelectedCards(updatedSelectedMarks)
+          interactionStore.setSelectedMarks(updatedSelectedMarks)
           setIsSelectedMark(true)
         }
-        interactionStore.selectedMarks.length === maxMarkSelection &&
-          handleMarkInteraction(interactionStore.selectedMarks)
       }
+
+      interactionStore.selectedMarks.length === maxMarkSelection && handleMarkInteraction(interactionStore.selectedMarks)
     }
     
     return (

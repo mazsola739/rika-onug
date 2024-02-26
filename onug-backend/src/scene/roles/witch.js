@@ -58,12 +58,7 @@ export const witch_interaction = (gameState, token, title) => {
 }
 
 export const witch_response = (gameState, token, selected_card_positions, title) => {
-  if (
-    !isValidCardSelection(
-      selected_card_positions,
-      gameState.players[token].player_history
-    )
-  ) {
+    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
   const newGameState = { ...gameState }
@@ -76,22 +71,13 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     const selectedCenterCardPosition =
       newGameState.card_positions[selected_card_positions[0]]
 
-    if (
-      newGameState.players[token].card.original_id ===
-      selectedCenterCardPosition.id
-    ) {
+    if (newGameState.players[token].card.original_id === selectedCenterCardPosition.id) {
       newGameState.players[token].card.player_card_id = 0
     }
 
     const allPlayerTokens = getAllPlayerTokens(newGameState.players)
-    const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(
-      newGameState.players,
-      allPlayerTokens
-    )
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(
-      selectablePlayerNumbers,
-      newGameState.shield
-    )
+    const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
+    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
@@ -109,10 +95,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
         'interaction_must_one_any',
       ],
       icon: 'voodoo',
-      selectableCards: {
-        selectable_cards: centerCardPositions,
-        selectable_card_limit: { player: 1, center: 0 },
-      },
+      selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
       showCards: showCards,
       uniqInformations: { viewed_cards: [selected_card_positions[0]] },
     })

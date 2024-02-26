@@ -16,6 +16,8 @@ class RoleStore {
         const { position } = playerCard
         const selectable_cards =
           (lastJsonMessage.interaction.selectable_cards || []).includes(position) || false
+        const selectable_marks =
+          (lastJsonMessage.interaction.selectable_marks || []).includes(position) || false
         const shielded_cards =
           (lastJsonMessage.interaction.new_shield_card || []).includes(position) || false
 
@@ -25,7 +27,6 @@ class RoleStore {
           (lastJsonMessage.interaction.werewolves || []).includes(position) || false
         const dreamwolf =
           (lastJsonMessage.interaction.dreamwolf || []).includes(position) || false
-
         const tanner =
           (lastJsonMessage.interaction.tanner || []).includes(position) || false
         const mad = (lastJsonMessage.interaction.mad || []).includes(position) || false
@@ -41,6 +42,7 @@ class RoleStore {
           ...playerCard,
           id,
           selectable_cards,
+          selectable_marks,
           shielded_cards,
           shield,
           /* spy,

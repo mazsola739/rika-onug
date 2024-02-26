@@ -1,18 +1,18 @@
 //@ts-check
 import { logDebug, logError } from '../log'
 import { readGameState, upsertRoomState } from '../repository'
-import { doppelganger_instant_action_response, alphawolf_response, thing_response, apprenticeseer_response, doppelganger_response, curator_response, revealer_response, cupid_response, seer_response, diseased_response, drpeeker_response, drunk_response, instigator_response, mysticwolf_response, paranormalinvestigator_response, rapscallion_response, robber_response, sentinel_response, troublemaker_response, temptress_response, villageidiot_response, witch_response, werewolves_response } from '../scene/roles'
+import { doppelganger_instant_action_response, alphawolf_response, thing_response, apprenticeseer_response, doppelganger_response, curator_response, revealer_response, cupid_response, seer_response, diseased_response, drpeeker_response, drunk_response, instigator_response, mysticwolf_response, paranormalinvestigator_response, rapscallion_response, robber_response, sentinel_response, troublemaker_response, temptress_response, villageidiot_response, witch_response, werewolves_response, copycat_response } from '../scene/roles'
 import { websocketServerConnectionsPerRoom } from './connections'
 
 export const interaction = async (ws, message) => {
   try {
     logDebug(`Interaction requested with ${JSON.stringify(message)}`)
 
-    const { room_id, token, selected_card_positions, answer } = message
+    const { room_id, token, selected_card_positions, selected_mark_positions, answer } = message
     const gameState = await readGameState(room_id)
     // TODO validate client request
 
-    const newGameState = generateInteractionResponse(gameState, token, selected_card_positions, ws, answer)
+    const newGameState = generateInteractionResponse(gameState, token, selected_card_positions, selected_mark_positions, ws, answer)
 
     newGameState?.scene.forEach((item) => {
       websocketServerConnectionsPerRoom[newGameState.room_id][item.token].send(JSON.stringify(item))
@@ -25,14 +25,14 @@ export const interaction = async (ws, message) => {
   }
 }
 
-export const generateInteractionResponse = (gameState, token, selected_card_positions, ws, answer) => {
+export const generateInteractionResponse = (gameState, token, selected_card_positions, selected_mark_positions, ws, answer) => {
   const interaction_type = gameState.players[token]?.player_history?.scene_title
 
 let newGameState = {...gameState}
 //TODO check all response
   switch (interaction_type) {
       case "DOPPELGÄNGER_INSTANT_ACTION":
-          newGameState = doppelganger_instant_action_response(gameState, token, selected_card_positions, answer, interaction_type)
+          newGameState = doppelganger_instant_action_response(gameState, token, selected_card_positions, selected_mark_positions, answer, interaction_type)
           break
       case "ALPHA_WOLF":
           newGameState = alphawolf_response(gameState, token, selected_card_positions, interaction_type)
@@ -52,17 +52,20 @@ let newGameState = {...gameState}
       case "DOPPELGÄNGER_REVEALER":
           newGameState = revealer_response(gameState, token, selected_card_positions, interaction_type)
           break
+      case "COPYCAT":
+          newGameState = copycat_response(gameState, token, selected_card_positions, interaction_type)
+          break
       case "CURATOR":
           newGameState = curator_response(gameState, token, selected_card_positions, interaction_type)
           break
       case "CUPID":
-          newGameState = cupid_response(gameState, token, selected_card_positions, interaction_type)
+          newGameState = cupid_response(gameState, token, selected_mark_positions, interaction_type)
           break
       case "DETECTOR":
           newGameState = seer_response(gameState, token, selected_card_positions, interaction_type)
           break
       case "DISEASED":
-          newGameState = diseased_response(gameState, token, selected_card_positions, interaction_type)
+          newGameState = diseased_response(gameState, token, selected_mark_positions, interaction_type)
           break
       case "DR_PEEKER":
           newGameState = drpeeker_response(gameState, token, selected_card_positions, interaction_type)
@@ -74,7 +77,10 @@ let newGameState = {...gameState}
           newGameState = revealer_response(gameState, token, selected_card_positions, interaction_type)
           break
       case "INSTIGATOR":
-          newGameState = instigator_response(gameState, token, selected_card_positions, interaction_type)
+          newGameState = instigator_response(gameState, token, selected_mark_positions, interaction_type)
+          break
+      case "MIRROR_MAN":
+          newGameState = copycat_response(gameState, token, selected_card_positions, interaction_type)
           break
       case "MYSTIC_WOLF":
           newGameState = mysticwolf_response(gameState, token, selected_card_positions, interaction_type)
