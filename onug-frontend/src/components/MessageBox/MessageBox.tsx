@@ -23,7 +23,7 @@ export const MessageBox: React.FC = observer(() => {
               <Button
                 key={index}
                 onClick={() => handleAnswerInteraction(option)}
-                variant="yellow"
+                variant="magenta"
                 buttonText={option}
               />
             ))}

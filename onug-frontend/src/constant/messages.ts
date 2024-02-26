@@ -54,3 +54,5 @@ export const interaction_moved = 'You moved cards to'
 export const interaction_love = 'You placed Mark of Love front of '
 //mark_of_disease
 export const interaction_diseased = 'You placed Mark of Disease front of '
+//mark_of_traitor
+export const interaction_traitor = 'You placed Mark of the Traitor front of '

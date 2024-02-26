@@ -1,18 +1,17 @@
 import styled from '@emotion/styled'
 
-export const StyledMessageBox = styled.main`
+export const StyledMessageBox = styled.div`
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
   padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `
 
 export const Buttons = styled.div`
+  gap: 5px;
   display: flex;
   flex-direction: row;
-  gap: 5px;
 `
 
 export const Message = styled.span`
@@ -27,13 +26,14 @@ export const Message = styled.span`
 `
 
 export const RoleInteractionIcon = styled.div`
-  display: flex;
   height: 100%;
   width: 172px;
-  align-items: center;
-  flex-direction: column;
-  justify-content: space-between;
 `
 
 export const Instructions = styled.div`
+display: flex;
+flex-direction: column;
+width: 100%;
+    align-items: center;
+    justify-content: center;
 `

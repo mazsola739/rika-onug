@@ -1,14 +1,14 @@
-import { Header } from 'components'
+import { Header, Main } from 'components'
 import { observer } from 'mobx-react-lite'
-import { Main } from './Voting.styles'
+import { StyledVoting } from './Voting.styles'
 import { VotingFooter } from './VotingFooter'
 
 export const Voting: React.FC = observer(() => {
   return (
-    <>
+    <StyledVoting>
       <Header>Header</Header>
-      <Main>hali</Main>
+      <Main>hai</Main>
       <VotingFooter />
-    </>
+    </StyledVoting>
   )
 })

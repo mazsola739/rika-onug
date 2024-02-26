@@ -61,20 +61,18 @@ export const diseased_response = (gameState, token, selected_mark_positions, tit
   console.log(selected_mark_positions[0])
 
   if (gameState.players[token].card.player_original_id === 1) {
-    const diseasedPosition = newGameState.doppelganger_mark_positions.disease
+    const diseasePosition = newGameState.doppelganger_mark_positions.disease
     const selectedPosition = newGameState.card_positions[selected_mark_positions[0]].mark
 
-    newGameState.doppelganger_mark_positions.diseased = selectedPosition
-    newGameState.card_positions[selected_mark_positions[0]].mark = diseasedPosition
+    newGameState.doppelganger_mark_positions.disease = selectedPosition
+    newGameState.card_positions[selected_mark_positions[0]].mark = diseasePosition
   } else {
-    const diseasedPosition = newGameState.mark_positions.disease
+    const diseasePosition = newGameState.mark_positions.disease
     const selectedPosition = newGameState.card_positions[selected_mark_positions[0]].mark
 
     newGameState.mark_positions.diseased = selectedPosition
-    newGameState.card_positions[selected_mark_positions[0]].mark = diseasedPosition
+    newGameState.card_positions[selected_mark_positions[0]].mark = diseasePosition
   }
-
-  console.log(newGameState.card_positions[selected_mark_positions[0]].mark)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
@@ -85,7 +83,7 @@ export const diseased_response = (gameState, token, selected_mark_positions, tit
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: [
-      'interaction_love',
+      'interaction_diseased',
       selected_mark_positions[0],
     ],
     icon: 'diseased',

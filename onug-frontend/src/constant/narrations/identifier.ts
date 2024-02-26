@@ -25,6 +25,7 @@ export const identifier_rightneighbor_text = 'The neighbor on your right'
 export const identifier_bothneighbors_text = 'Both of your neighbors'
 export const identifier_yourself_text = 'Yourself'
 
+//TODO response player_1 = identifier_player1_text, ...
 export const identifier_player1_text = 'Player 1'
 export const identifier_player2_text = 'Player 2'
 export const identifier_player3_text = 'Player 3'
