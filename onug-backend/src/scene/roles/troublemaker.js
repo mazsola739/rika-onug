@@ -15,7 +15,7 @@ export const troublemaker = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 11) {
+    if (newGameState.players[token].card.player_original_id === 11 || (newGameState.players[token].card.role_id === 11 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 11 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = troublemaker_interaction(newGameState, token, title)
     }
 

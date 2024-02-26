@@ -12,7 +12,7 @@ export const instigator = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 34) {
+    if (newGameState.players[token].card.player_original_id === 34 || (newGameState.players[token].card.role_id === 34 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 34 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = instigator_interaction(newGameState, token, title)
     }
 

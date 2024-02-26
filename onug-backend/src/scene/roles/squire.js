@@ -17,7 +17,7 @@ export const squire = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 83) {
+    if (newGameState.players[token].card.player_original_id === 83 || (newGameState.players[token].card.role_id === 83 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 83 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = squire_interaction(newGameState, token, title)
     }
 

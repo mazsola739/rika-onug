@@ -33,7 +33,7 @@ export const familyman = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 78) {
+    if (newGameState.players[token].card.player_original_id === 78 || (newGameState.players[token].card.role_id === 78 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 78 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = familyman_interaction(newGameState, token, title)
     }
 

@@ -12,7 +12,7 @@ export const nostradamus = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 80) {
+    if (newGameState.players[token].card.player_original_id === 80  || (newGameState.players[token].card.role_id === 80 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 80 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = nostradamus_interaction(newGameState, token, title)
     }
 

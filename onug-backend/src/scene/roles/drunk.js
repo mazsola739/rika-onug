@@ -17,7 +17,7 @@ export const drunk = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 2) {
+    if (newGameState.players[token].card.player_original_id === 2 || (newGameState.players[token].card.role_id === 2 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 2 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = drunk_interaction(newGameState, token, title)
     }
 

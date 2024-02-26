@@ -34,7 +34,7 @@ export const mortician = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 36) {
+    if (newGameState.players[token].card.player_original_id === 49 || (newGameState.players[token].card.role_id === 49 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 49 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = mortician_interaction(newGameState, token, title)
     }
 

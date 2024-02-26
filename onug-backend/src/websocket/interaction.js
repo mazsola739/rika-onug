@@ -29,7 +29,7 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
   const interaction_type = gameState.players[token]?.player_history?.scene_title
 
 let newGameState = {...gameState}
-
+//TODO check all response
   switch (interaction_type) {
       case "DOPPELGÄNGER_INSTANT_ACTION":
           newGameState = doppelganger_instant_action_response(gameState, token, selected_card_positions, answer, interaction_type)

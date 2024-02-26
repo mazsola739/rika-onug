@@ -29,7 +29,7 @@ export const blob = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 44) {
+    if (newGameState.players[token].card.player_original_id === 44 || (newGameState.players[token].card.role_id === 44 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 44 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = blob_interaction(newGameState, token, title)
     }
 

@@ -17,7 +17,7 @@ export const leader = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 48) {
+    if (newGameState.players[token].card.player_original_id === 48 || (newGameState.players[token].card.role_id === 48 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 48 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = leader_interaction(newGameState, token, title)
     }
 

@@ -12,7 +12,7 @@ export const temptress = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 69) {
+    if (newGameState.players[token].card.player_original_id === 69 || (newGameState.players[token].card.role_id === 69 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 69 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = temptress_interaction(newGameState, token, title)
     }
 

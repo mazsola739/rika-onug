@@ -12,7 +12,7 @@ export const rapscallion = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 65) {
+    if (newGameState.players[token].card.player_original_id === 65  || (newGameState.players[token].card.role_id === 65 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 65 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = rapscallion_interaction(newGameState, token, title)
     }
 

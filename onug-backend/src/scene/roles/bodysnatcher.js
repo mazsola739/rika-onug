@@ -33,7 +33,7 @@ export const bodysnatcher = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 74) {
+    if (newGameState.players[token].card.player_original_id === 74 || (newGameState.players[token].card.role_id === 74 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 74 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = bodysnatcher_interaction(newGameState, token, title)
     }
 

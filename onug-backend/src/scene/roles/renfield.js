@@ -17,11 +17,7 @@ export const renfield = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (
-      newGameState.players[token].card.player_original_id === 38 ||
-      (newGameState.players[token].card.role_id === 38 &&
-        newGameState.players[token].card.player_original_id === 1)
-    ) {
+    if (newGameState.players[token].card.player_original_id === 38 || (newGameState.players[token].card.role_id === 38 && newGameState.players[token].card.player_original_id === 1) || (newGameState.players[token].card.role_id === 38 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 38 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = renfield_interaction(newGameState, token, title)
     }
 

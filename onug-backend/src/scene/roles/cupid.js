@@ -12,7 +12,7 @@ export const cupid = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 31) {
+    if (newGameState.players[token].card.player_original_id === 31 || (newGameState.players[token].card.role_id === 31 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 31 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = cupid_interaction(newGameState, token, title)
     }
 

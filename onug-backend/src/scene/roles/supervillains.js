@@ -12,11 +12,7 @@ export const supervillains = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (
-      superVillainsIds.some(
-        (id) => newGameState.players[token].card.player_role_id === id
-      )
-    ) {
+    if (superVillainsIds.some((id) => newGameState.players[token].card.player_role_id === id)) {
       interaction = supervillain_interaction(newGameState, token, title)
     }
 

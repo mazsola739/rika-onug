@@ -11,11 +11,7 @@ export const vampires = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (
-      vampireIds.some(
-        (id) => newGameState.players[token].card.player_role_id === id
-      )
-    ) {
+    if (vampireIds.some((id) => newGameState.players[token].card.player_role_id === id)) {
       interaction = vampires_interaction(newGameState, token, title)
     }
 

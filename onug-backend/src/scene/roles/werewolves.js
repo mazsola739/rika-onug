@@ -23,11 +23,7 @@ export const werewolves = (gameState, title, hasDreamWolf) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (
-      werewolvesIds.some(
-        (id) => newGameState.players[token].card.player_role_id === id
-      )
-    ) {
+    if (werewolvesIds.some((id) => newGameState.players[token].card.player_role_id === id)) {
       interaction = werewolves_interaction(newGameState, token, title)
     }
 

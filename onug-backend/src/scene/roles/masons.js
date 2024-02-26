@@ -16,11 +16,7 @@ export const masons = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (
-      masonIds.some(
-        (id) => newGameState.players[token].card.player_role_id === id
-      )
-    ) {
+    if (masonIds.some((id) => newGameState.players[token].card.player_role_id === id)) {
       interaction = masons_interaction(newGameState, token, title)
     }
 

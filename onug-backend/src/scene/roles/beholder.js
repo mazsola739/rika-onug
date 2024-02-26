@@ -27,7 +27,7 @@ export const beholder = (
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 73) {
+    if (newGameState.players[token].card.player_original_id === 73 || (newGameState.players[token].card.role_id === 73 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 73 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = beholder_interaction(newGameState, token, title)
     }
 

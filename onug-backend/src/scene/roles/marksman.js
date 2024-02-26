@@ -18,7 +18,7 @@ export const marksman = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 35) {
+    if (newGameState.players[token].card.player_original_id === 35 || (newGameState.players[token].card.role_id === 35 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 35 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = marksman_interaction(newGameState, token, title)
     }
 

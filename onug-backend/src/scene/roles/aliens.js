@@ -61,11 +61,7 @@ export const aliens = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (
-      alienIds.some(
-        (id) => newGameState.players[token].card.player_role_id === id
-      )
-    ) {
+    if (alienIds.some((id) => newGameState.players[token].card.player_role_id === id)) {
       newGameState.players[token].player_history.random = {
         random_instruction: narration[1],
         random_identifier: narration.slice(2),

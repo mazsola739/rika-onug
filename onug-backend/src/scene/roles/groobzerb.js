@@ -17,11 +17,7 @@ export const groobzerb = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (
-      groobAndZerbIds.some(
-        (id) => newGameState.players[token].card.player_role_id === id
-      )
-    ) {
+    if (groobAndZerbIds.some((id) => newGameState.players[token].card.player_role_id === id)) {
       interaction = groobzerb_interaction(newGameState, token, title)
     }
 

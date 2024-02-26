@@ -21,7 +21,7 @@ export const flipper = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 59) {
+    if (newGameState.players[token].card.player_original_id === 59 || (newGameState.players[token].card.role_id === 59 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 59 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = flipper_interaction(newGameState, token, title)
     }
 
