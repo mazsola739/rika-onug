@@ -19,6 +19,7 @@ class DeckStore {
   marks: TokenType[] = marks
   artifacts: TokenType[] = artifacts
   selectedCards: CardType[] = []
+  selectedMarks: TokenType[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -50,21 +51,49 @@ class DeckStore {
 
   setSelectedCard(cardIds: number[]): void {
     this.selectedCards = cardIds.map((cardId) => this.getCardById(cardId))
+
   }
 
   resetSelection(): void {
     this.selectedCards = []
     roomStore.resetDetailedCardInfo()
+
   }
 
   handleSelectCard(card: CardType): void {
     selectCard(this.selectedCards, card)
+
   }
 
   handleDeselectCard(card: CardType): void {
     deselectCard(this.selectedCards, card)
+
   }
 
+  updateSelectedMarks(): void {
+    this.selectedMarks = this.marks.filter((mark) => {
+      switch (mark.token_name) {
+        case 'mark_of_vampire':
+          return areAnyCardSelectedById(this.selectedCards, vampireIds)
+        case 'mark_of_fear':
+          return isCardSelectedById(this.selectedCards, 39)
+        case 'mark_of_the_bat':
+          return isCardSelectedById(this.selectedCards, 38)
+        case 'mark_of_disease':
+          return isCardSelectedById(this.selectedCards, 32)
+        case 'mark_of_love':
+          return isCardSelectedById(this.selectedCards, 31)
+        case 'mark_of_traitor':
+          return isCardSelectedById(this.selectedCards, 34)
+        case 'mark_of_clarity':
+          return isCardSelectedById(this.selectedCards, 37)
+        case 'mark_of_assassin':
+          return areAnyCardSelectedById(this.selectedCards, assassinIds)
+        default:
+          return false
+      }
+    })
+  }
 }
 
 export default DeckStore
