@@ -11,11 +11,12 @@ git fetch -u && git pull
 cd onug-frontend
 
 yarn install
-yarn build
+yarn build:prod
 cp -r assets/ dist/
 
+cat << EOF
 nohup sudo yarn start:prod > prod__nohup.txt &
 
-sleep 3s 
 sudo lsof -i -P -n | grep LISTEN
 cat prod__nohup.txt
+EOF
