@@ -48,6 +48,8 @@ export const interaction_saw_card = 'You saw card from'
 export const interaction_saw_mark = 'You saw mark from'
 //swapped card
 export const interaction_swapped_cards = 'You swapped cards between'
+//swapped mark
+export const interaction_swapped_marks = 'You swapped marks between'
 //tapped
 export const interaction_tap = 'You tapped'
 //moved

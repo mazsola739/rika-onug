@@ -27,6 +27,7 @@ export const stopGamePlay = gameState => {
     gameState.players[token].ready = false
     
     delete gameState.card_positions
+    delete gameState.mark_positions
     gameState.action_history = [
       {
         "scene_title": "GAME_START",

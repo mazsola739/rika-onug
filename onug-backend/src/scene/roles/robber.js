@@ -82,13 +82,13 @@ export const robber_response = (gameState, token, selected_card_positions, title
   const scene = []
 
   const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])[0]
-  const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber] }
-  const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]] }
-  newGameState.card_positions[currentPlayerNumber] = selectedCard
-  newGameState.card_positions[selected_card_positions[0]] = currentPlayerCard
+  const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber].card }
+  const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]].card }
+  newGameState.card_positions[currentPlayerNumber].card = selectedCard
+  newGameState.card_positions[selected_card_positions[0]].card = currentPlayerCard
 
-  newGameState.players[token].card.player_card_id = newGameState.card_positions[currentPlayerNumber].id
-  newGameState.players[token].card.player_team = newGameState.card_positions[currentPlayerNumber].team
+  newGameState.players[token].card.player_card_id = newGameState.card_positions[currentPlayerNumber].card.id
+  newGameState.players[token].card.player_team = newGameState.card_positions[currentPlayerNumber].card.team
 
   const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, [currentPlayerNumber])
 

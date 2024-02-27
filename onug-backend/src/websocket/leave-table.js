@@ -28,6 +28,7 @@ export const leaveTable = async (ws, message) => {
   }
 
   delete newGameState.card_positions
+  delete newGameState.mark_positions
 
   const playerTokens = Object.keys(newGameState.players)
   

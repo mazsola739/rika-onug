@@ -66,7 +66,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
 
   if (selected_card_positions[0].includes('center_')) {
     const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
-    const selectedCenterCardPosition = newGameState.card_positions[selected_card_positions[0]]
+    const selectedCenterCardPosition = newGameState.card_positions[selected_card_positions[0]].card
 
     if (newGameState.players[token].card.player_original_id === selectedCenterCardPosition.id) {
       newGameState.players[token].card.player_card_id = 0
@@ -108,18 +108,18 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     return newGameState
 
   } else if (selected_card_positions[0].includes('player_')) {
-    const selectedCenterPositionCard = newGameState.card_positions[newGameState.players[token].player_history.selected_center_card]
-    const selectedPlayerPositionCard = newGameState.card_positions[selected_card_positions[0]]
+    const selectedCenterPositionCard = newGameState.card_positions[newGameState.players[token].player_history.selected_center_card].card
+    const selectedPlayerPositionCard = newGameState.card_positions[selected_card_positions[0]].card
 
     const selectedCenterCard = { ...selectedCenterPositionCard }
     const selectedPlayerCard = { ...selectedPlayerPositionCard }
-    newGameState.card_positions[newGameState.players[token].player_history.selected_center_card] = selectedPlayerCard
-    newGameState.card_positions[selected_card_positions[0]] = selectedCenterCard
+    newGameState.card_positions[newGameState.players[token].player_history.selected_center_card].card = selectedPlayerCard
+    newGameState.card_positions[selected_card_positions[0]].card = selectedCenterCard
 
-    const witchPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
 
-    if (selected_card_positions[0] === witchPlayerNumber[0]) {
-      const currentCard = newGameState.card_positions[witchPlayerNumber[0]]
+    if (selected_card_positions[0] === currentPlayerNumber[0]) {
+      const currentCard = newGameState.card_positions[currentPlayerNumber[0]].card
       newGameState.players[token].card.player_card_id = currentCard.id
       newGameState.players[token].card.player_team = currentCard.team
     }

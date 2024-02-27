@@ -68,10 +68,7 @@ export const paranormalinvestigator_response = (gameState, token, selected_card_
   const newGameState = { ...gameState }
   const scene = []
 
-  const selectedCards = getCardIdsByPositions(newGameState.card_positions, [
-    selected_card_positions[0],
-    selected_card_positions[1],
-  ])
+  const selectedCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0], selected_card_positions[1]])
   const playerOneCardId = selectedCards[0][selected_card_positions[0]]
   const playerTwoCardId = selectedCards[1][selected_card_positions[1]]
 
@@ -81,20 +78,17 @@ export const paranormalinvestigator_response = (gameState, token, selected_card_
     showCards = selectedCards
     if (!townIds.includes(playerTwoCardId)) {
       showCards = [selectedCards[0]]
-      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].role
-      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].team
+      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
+      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team
     }
   } else {
     if (!townIds.includes(playerTwoCardId)) {
       showCards = [selectedCards[0]]
-      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].role
-      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].team
+      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
+      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team
     } else {
       showCards = selectedCards
-      if (
-        newGameState.players[token].card.player_original_id === playerOneCardId ||
-        newGameState.players[token].card.player_original_id === playerTwoCardId
-      ) {
+      if (newGameState.players[token].card.player_original_id === playerOneCardId || newGameState.players[token].card.player_original_id === playerTwoCardId) {
         newGameState.players[token].card.player_card_id = 0
       }
     }

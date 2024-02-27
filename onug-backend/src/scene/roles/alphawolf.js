@@ -61,10 +61,10 @@ export const alphawolf_response = (gameState, token, selected_card_positions, ti
   const newGameState = { ...gameState }
   const scene = []
 
-  const centerWolf = { ...newGameState.card_positions.center_wolf }
-  const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]] }
-  newGameState.card_positions.center_wolf = selectedCard
-  newGameState.card_positions[selected_card_positions[0]] = centerWolf
+  const centerWolf = { ...newGameState.card_positions.center_wolf.card }
+  const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]].card }
+  newGameState.card_positions.center_wolf.card = selectedCard
+  newGameState.card_positions[selected_card_positions[0]].card = centerWolf
 
   newGameState.players[token].card_or_mark_action = true
 

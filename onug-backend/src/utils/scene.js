@@ -26,20 +26,20 @@ export const getRandomItemFromArray = (array) => array[getRandomNumber(0, array.
 
 //SCENE
 export const getSelectableOtherPlayersWithoutShield = (players, token) => {
-  const result = [];
+  const result = []
   Object.keys(players).forEach((playerToken) => {
     if (playerToken !== token && players[playerToken].card.shield !== true) {
-      result.push(`player_${players[playerToken].player_number}`);
+      result.push(`player_${players[playerToken].player_number}`)
     }
-  });
-  return result;
-};
+  })
+  return result
+}
 
 export const getCardIdsByPositions = (cardPositions, selectedPositions) => {
   const result = []
 
   selectedPositions.forEach(position => {
-    const cardId = cardPositions[position].id
+    const cardId = cardPositions[position].card.id
     result.push({ [position]: cardId })
   })
 
@@ -147,7 +147,7 @@ export const getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
   const result = []
 
   playerNumbers.forEach(key => {
-    const cardId = cardPositions[key].id
+    const cardId = cardPositions[key].card.id
     result.push({ [key]: cardId })
   })
 
@@ -215,25 +215,24 @@ export const moveCards = (cards, direction, currentPlayer) => {
   const playerCards = Object.fromEntries(
       Object.entries(cards)
           .filter(([key, value]) => key.startsWith("player_"))
-  );
+  )
 
-  const movableCards = { ...playerCards };
-  const currentPlayerCard = movableCards[currentPlayer];
-  delete movableCards[currentPlayer];
+  const movableCards = { ...playerCards }
+  const currentPlayerCard = movableCards[currentPlayer]
+  delete movableCards[currentPlayer]
 
-  const shiftAmount = direction === 'right' ? 1 : Object.keys(movableCards).length - 1;
+  const shiftAmount = direction === 'right' ? 1 : Object.keys(movableCards).length - 1
 
-  const shiftedCards = {};
+  const shiftedCards = {}
   Object.keys(movableCards).forEach((key, index) => {
-      const newIndex = (index + shiftAmount) % Object.keys(movableCards).length;
-      shiftedCards[`player_${newIndex + 2}`] = movableCards[key];
-  });
+      const newIndex = (index + shiftAmount) % Object.keys(movableCards).length
+      shiftedCards[`player_${newIndex + 2}`].card = movableCards[key].card
+  })
 
-  const updatedPlayerCards = { ...shiftedCards, [currentPlayer]: currentPlayerCard };
+  const updatedPlayerCards = { ...shiftedCards, [currentPlayer]: currentPlayerCard }
 
-  return updatedPlayerCards;
-};
-
+  return updatedPlayerCards
+}
 
 //RIPPLE
 export const pickRandomOnePlayer = (numPlayers) => shufflePlayers(numPlayers)[0]

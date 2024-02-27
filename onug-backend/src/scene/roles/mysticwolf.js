@@ -64,15 +64,10 @@ export const mysticwolf_response = (gameState, token, selected_card_positions, t
   const newGameState = { ...gameState }
   const scene = []
 
-  const selectedPositionCard =
-    newGameState.card_positions[selected_card_positions[0]]
-  const viewCards = getCardIdsByPositions(newGameState.card_positions, [
-    selected_card_positions[0],
-  ])
+  const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
+  const viewCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
 
-  if (
-    newGameState.players[token]?.card?.original_id === selectedPositionCard.id
-  ) {
+  if (newGameState.players[token]?.card?.original_id === selectedPositionCard.id) {
     newGameState.players[token].card.player_card_id = 0
   }
 

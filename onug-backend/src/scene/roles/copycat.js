@@ -59,9 +59,9 @@ export const copycat_response = (gameState, token, selected_card_positions, titl
   const newGameState = { ...gameState }
   const scene = []
 
-  newGameState.players[token].card.player_role_id = newGameState.card_positions[selected_card_positions[0]].id
-  newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].role
-  newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].team
+  newGameState.players[token].card.player_role_id = newGameState.card_positions[selected_card_positions[0]].card.id
+  newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
+  newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team
 
   const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
 

@@ -39,6 +39,7 @@ export const leaveRoom = async (ws, message) => {
       gameState.closed = false
       gameState.available_names = [...defaultRoom.available_names]
       delete gameState.card_positions
+      delete gameState.mark_positions
     }
   }
 

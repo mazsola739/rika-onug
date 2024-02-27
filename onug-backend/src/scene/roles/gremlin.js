@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../utils/scene'
+import { getAllPlayerTokens, getMarksByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
 
@@ -66,11 +66,11 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
     const scene = []
 
     const [position1, position2] = selected_card_positions
-    const playerOneCard = { ...newGameState.card_positions[position1] }
-    const playerTwoCard = { ...newGameState.card_positions[position2] }
+    const playerOneCard = { ...newGameState.card_positions[position1].card }
+    const playerTwoCard = { ...newGameState.card_positions[position2].card }
 
-    newGameState.card_positions[position1] = playerTwoCard
-    newGameState.card_positions[position2] = playerOneCard
+    newGameState.card_positions[position1].card = playerTwoCard
+    newGameState.card_positions[position2].card = playerOneCard
 
     newGameState.players[token].card_or_mark_action = true
 
@@ -108,54 +108,36 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
       return gameState
     }
 
-    console.log("mark")
-
     const newGameState = { ...gameState }
     const scene = []
 
-    const viewMarks = getMarksByPositions(newGameState.card_positions, [selected_mark_positions[0]])
-    const selectedPositionMark = newGameState.card_positions[selected_mark_positions[0]].mark
-    const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const [position1, position2] = selected_mark_positions
+    const playerOneMark = { ...newGameState.card_positions[position1].mark }
+    const playerTwoMark = { ...newGameState.card_positions[position2].mark }
 
-    if (currentPlayerNumber[0] === selected_mark_positions[0]) {
-      newGameState.players[token].card.player_mark = selectedPositionMark
-    }
+    newGameState.card_positions[position1].mark = playerTwoMark
+    newGameState.card_positions[position2].mark = playerOneMark
 
     newGameState.players[token].card_or_mark_action = true
+
+    const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+
+    if (currentPlayerNumber[0] === selected_mark_positions[0] || currentPlayerNumber[0] === selected_mark_positions[1]) {
+      newGameState.players[token].card.player_mark = ''
+    }
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
       card_or_mark_action: true,
-      viewed_marks: [selected_mark_positions[0]],
+      swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]],
     }
 
-    let interaction = {}
-    if (newGameState.players[token].player_history.viewed_cards) {
-      interaction = generateRoleInteraction(newGameState, token, {
-        private_message: ['interaction_saw_mark', selected_mark_positions[0]],
-        icon: 'target',
-        showMarks: viewMarks,
-        uniqInformations: { viewed_marks: [selected_mark_positions[0]] },
-      })
-    } else {
-      let selectableCards = newGameState.players[token].player_history.selectable_cards
-      const indexToRemove = selectableCards.indexOf(selected_mark_positions[0])
-      if (indexToRemove !== -1) {
-        selectableCards.splice(indexToRemove, 1)
-      }
-
-      newGameState.players[token].player_history.selectable_cards = selectableCards
-      newGameState.players[token].player_history.selectable_card_limit = { player: 1, center: 0 }
-
-      interaction = generateRoleInteraction(newGameState, token, {
-        private_message: ['interaction_saw_mark', selected_mark_positions[0], "interaction_must_one_any"],
-        icon: 'target',
-        showMarks: viewMarks,
-        selectableCards: { selectable_cards: selectableCards, selectable_card_limit: { player: 1, center: 0 } },
-        uniqInformations: { viewed_marks: [selected_mark_positions[0]] },
-      })
-    }
+    const interaction = generateRoleInteraction(newGameState, token, {
+      private_message: ['interaction_swapped_marks', selected_mark_positions[0], selected_mark_positions[1]],
+      icon: 'swap',
+      uniqInformations: { swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]] },
+    })
 
     scene.push({
       type: SCENE,

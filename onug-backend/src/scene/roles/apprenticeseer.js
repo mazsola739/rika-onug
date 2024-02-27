@@ -59,7 +59,7 @@ export const apprenticeseer_response = (gameState, token, selected_card_position
   const scene = []
 
   const viewCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
-  const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]]
+  const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
 
   if (newGameState.players[token].card.player_original_id === selectedPositionCard.id) {
     newGameState.players[token].card.player_card_id = 0

@@ -11,7 +11,7 @@ export const updatePlayerCard = (gameState, token) => {
     const flippedCards = gameState.flipped
   
     const playerCard = player?.card
-    const currentCard = gameState.card_positions[currentPlayerNumber[0]]
+    const currentCard = gameState.card_positions[currentPlayerNumber[0]].card
   
     if (!playerCard || !currentCard) return
   

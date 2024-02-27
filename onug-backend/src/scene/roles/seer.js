@@ -1,10 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getCardIdsByPositions,
-  getSelectableOtherPlayersWithoutShield,
-} from '../../utils/scene'
+import { getAllPlayerTokens, getCardIdsByPositions, getSelectableOtherPlayersWithoutShield } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -51,16 +47,9 @@ export const seer_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: [
-      'interaction_may_one_any_other',
-      'conjunction_or',
-      'interaction_seer_end',
-    ],
+    private_message: ['interaction_may_one_any_other', 'conjunction_or', 'interaction_seer_end'],
     icon: 'seer',
-    selectableCards: {
-      selectable_cards: selectablePlayerNumbers,
-      selectable_card_limit: { player: 1, center: 2 },
-    },
+    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 2 } },
   })
 }
 
@@ -74,35 +63,17 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
 
   const playerCards = selected_card_positions.some((pos) => pos.includes('player'))
   const centerCards = selected_card_positions.some((pos) => pos.includes('center'))
-  const playerHistory =
-    newGameState.players[token].player_history.selectable_cards
+  const playerHistory = newGameState.players[token].player_history.selectable_cards
 
-  if (
-    playerCards &&
-    !centerCards &&
-    playerHistory.includes(selected_card_positions[0])
-  ) {
-    showCards = getCardIdsByPositions(newGameState?.card_positions, [
-      selected_card_positions[0],
-    ])
-  } else if (
-    centerCards &&
-    !playerCards &&
-    selected_card_positions.every((position) => playerHistory.includes(position))
-  ) {
-    showCards = getCardIdsByPositions(
-      newGameState?.card_positions,
-      selected_card_positions
-    )
+  if (playerCards && !centerCards && playerHistory.includes(selected_card_positions[0])) {
+    showCards = getCardIdsByPositions(newGameState?.card_positions, [selected_card_positions[0]])
+  } else if (centerCards && !playerCards && selected_card_positions.every((position) => playerHistory.includes(position))) {
+    showCards = getCardIdsByPositions(newGameState?.card_positions, selected_card_positions)
   } else {
     return newGameState
   }
 
-  if (
-    showCards.some(
-      (card) => newGameState.players[token].card.player_original_id === card.id
-    )
-  ) {
+  if (showCards.some((card) => newGameState.players[token].card.player_original_id === card.id)) {
     newGameState.players[token].card.player_card_id = 0
   }
 
@@ -116,11 +87,7 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: [
-      'interaction_saw_card',
-      selected_card_positions[0],
-      showCards.length > 1 ? selected_card_positions[1] : '',
-    ],
+    private_message: ['interaction_saw_card', selected_card_positions[0], showCards.length > 1 ? selected_card_positions[1] : ''],
     icon: 'seer',
     uniqInformations: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
   })

@@ -19,7 +19,7 @@ const markIds = [28, 29, 31, 32, 34, 38, 39, 40, 41]
 
 const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(alphaWolfId)
 const hasTemptress = (selectedCardIds) => selectedCardIds.includes(temptressId)
-const hasMark = (selectedCardIds) =>  markIds.some((id) => selectedCardIds.includes(id))
+const hasMark = (selectedCardIds) => markIds.some((id) => selectedCardIds.includes(id))
 
 const getCardById = (card_id) => cards.find((card) => card.id === card_id)
 const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
@@ -29,7 +29,7 @@ const filterCardsByIds = (selectedCardIds, idsToCheck) => selectedCardIds.filter
 const shuffle = (selectedCardIds) => {
   for (let i = selectedCardIds.length - 1; i > 0; i--) {
     const j = ~~(Math.random() * (i + 1))
-    ;[selectedCardIds[i], selectedCardIds[j]] = [selectedCardIds[j], selectedCardIds[i]]
+      ;[selectedCardIds[i], selectedCardIds[j]] = [selectedCardIds[j], selectedCardIds[i]]
   }
 
   return selectedCardIds
@@ -48,7 +48,7 @@ export const dealCardIds = (selectedCardIds) => {
     : undefined
   newVillainCardId = getStubbedOrDealtCard(stubbedCards.newVillainCard, newVillainCardId)
 
-  if (newWolfCardId) cardIds    = cardIds.filter((cardId) => cardId !== newWolfCardId)
+  if (newWolfCardId) cardIds = cardIds.filter((cardId) => cardId !== newWolfCardId)
   if (newVillainCardId) cardIds = cardIds.filter((cardId) => cardId !== newVillainCardId)
 
   const shuffledCards = shuffle(cardIds)
@@ -58,7 +58,7 @@ export const dealCardIds = (selectedCardIds) => {
 
   playerCardIds.forEach((playerCardId, index) => playerCardIds[index] = getStubbedOrDealtCard(stubbedCards.playerCards[index], playerCardId))
   centerCardIds.forEach((centerCardId, index) => centerCardIds[index] = getStubbedOrDealtCard(stubbedCards[getCenterCardPositionByIndex(index)], centerCardId))
-  
+
 
   const playerCards = playerCardIds.map((id) => getCardById(id))
   const centerCards = centerCardIds.map((id) => getCardById(id))
@@ -66,10 +66,10 @@ export const dealCardIds = (selectedCardIds) => {
   logInfo('dealt playerCards: ', playerCards,)
   logInfo('dealt centerCards: ', centerCards)
   logInfo('stubbedCards: ', stubbedCards)
-  const leftCard       = centerCards[0]
-  const middleCard     = centerCards[1]
-  const rightCard      = centerCards[2]
-  const newWolfCard    = getCardById(newWolfCardId)
+  const leftCard = centerCards[0]
+  const middleCard = centerCards[1]
+  const rightCard = centerCards[2]
+  const newWolfCard = getCardById(newWolfCardId)
   const newVillainCard = getCardById(newVillainCardId)
 
 
@@ -84,7 +84,7 @@ export const dealCardIds = (selectedCardIds) => {
 }
 
 const createPlayerCard = (card, selected_cards) => {
-  if (!card || typeof card !== "object" || !card.id) return { player_original_id: 0, player_card_id: 0, player_role: "", player_role_id: 0, team: ""}
+  if (!card || typeof card !== "object" || !card.id) return { player_original_id: 0, player_card_id: 0, player_role: "", player_role_id: 0, team: "" }
 
   let playerCard
 
@@ -112,22 +112,42 @@ const createPlayerCard = (card, selected_cards) => {
   return playerCard
 }
 
-const createPositionCard = (card, selected_cards) => {
-  if (!card || typeof card !== "object" || !card.id) return { id: 0, role: "", team: ""}
+const createPlayerPositionCard = (card, selected_cards) => {
+  if (!card || typeof card !== "object" || !card.id) return { card: { id: 0, role: "", team: "" } }
 
   let positionCard
-  
+
   const hasPlayerMark = hasMark(selected_cards)
 
   if (hasPlayerMark) {
     positionCard = {
-      id: card.id,
-      role: card.role,
-      team: card.team,
+      card: {
+        id: card.id,
+        role: card.role,
+        team: card.team,
+      },
       mark: "mark_of_clarity",
     }
   } else {
     positionCard = {
+      card: {
+        id: card.id,
+        role: card.role,
+        team: card.team,
+      }
+    }
+  }
+
+  return positionCard
+}
+
+const createCenterPositionCard = (card) => {
+  if (!card || typeof card !== "object" || !card.id) return { card: { id: 0, role: "", team: "" } }
+
+  let positionCard
+
+  positionCard = {
+    card: {
       id: card.id,
       role: card.role,
       team: card.team,
@@ -163,14 +183,14 @@ export const dealCards = async (ws, message) => {
     stage: STAGES.GAME_TABLE,
     total_players: totalPlayers,
     card_positions: {
-      center_left: createPositionCard(leftCard, selectedCards),
-      center_middle: createPositionCard(middleCard, selectedCards),
-      center_right: createPositionCard(rightCard, selectedCards),
-      center_wolf: createPositionCard(newWolfCard, selectedCards),
-      center_villain: createPositionCard(newVillainCard, selectedCards),
+      center_left: createCenterPositionCard(leftCard),
+      center_middle: createCenterPositionCard(middleCard),
+      center_right: createCenterPositionCard(rightCard),
+      center_wolf: createCenterPositionCard(newWolfCard),
+      center_villain: createCenterPositionCard(newVillainCard),
       ...playerCards.reduce((positions, playerCard, index) => {
-        positions[`player_${index + 1}`] = createPositionCard(playerCard, selectedCards)
-        
+        positions[`player_${index + 1}`] = createPlayerPositionCard(playerCard, selectedCards)
+
         return positions
       }, {}),
     },
@@ -220,7 +240,7 @@ export const dealCards = async (ws, message) => {
       card_or_mark_action: false,
       player_history: {},
     }
-    if (hasShield) {newGameState.players[token].shield = false}
+    if (hasShield) { newGameState.players[token].shield = false }
   })
 
   await upsertRoomState(newGameState)

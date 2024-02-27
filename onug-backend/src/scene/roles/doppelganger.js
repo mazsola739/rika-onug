@@ -64,17 +64,14 @@ export const doppelganger_response = (gameState, token, selected_card_positions,
   const newGameState = { ...gameState }
   const scene = []
 
-  newGameState.players[token].card.player_role_id = newGameState.card_positions[selected_card_positions[0]].id
-  newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].role
-  newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].team
+  newGameState.players[token].card.player_role_id = newGameState.card_positions[selected_card_positions[0]].card.id
+  newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
+  newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team
 
-  const showCards = getCardIdsByPositions(newGameState.card_positions, [
-    selected_card_positions[0],
-  ])
+  const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
 
   ;(newGameState.players[token].player_history.show_cards = showCards),
-    (newGameState.players[token].new_role_id =
-      newGameState.players[token].card.player_role_id)
+    (newGameState.players[token].new_role_id = newGameState.players[token].card.player_role_id)
   newGameState.players[token].card_or_mark_action = true
 
   newGameState.players[token].player_history = {
@@ -85,10 +82,7 @@ export const doppelganger_response = (gameState, token, selected_card_positions,
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: [
-      'interaction_you_are_that_role',
-      `${newGameState.players[token]?.card.player_role}`,
-    ],
+    private_message: ['interaction_you_are_that_role', `${newGameState.players[token]?.card.player_role}`],
     icon: 'copy',
     showCards: showCards,
     uniqInformations: { new_role_id: newGameState.players[token].card.player_role_id, viewed_cards: [selected_card_positions[0]] },

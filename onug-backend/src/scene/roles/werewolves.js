@@ -58,14 +58,9 @@ export const werewolves_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: [
-      loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves',
-    ],
+    private_message: [loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves'],
     icon: loneWolf ? 'spy' : 'werewolf',
-    selectableCards: {
-      selectable_cards: loneWolf ? centerCardPositions : [],
-      selectable_card_limit: { player: 0, center: 1 },
-    },
+    selectableCards: { selectable_cards: loneWolf ? centerCardPositions : [], selectable_card_limit: { player: 0, center: 1 } },
     uniqInformations: { werewolves, dreamwolf },
   })
 }
@@ -77,15 +72,10 @@ export const werewolves_response = (gameState, token, selected_card_positions, t
   const newGameState = { ...gameState }
   const scene = []
 
-  const showCards = getCardIdsByPositions(newGameState.card_positions, [
-    selected_card_positions[0],
-  ])
-  const selectedPositionCard =
-    newGameState.card_positions[selected_card_positions[0]]
+  const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
+  const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
 
-  if (
-    newGameState.players[token].card.player_original_id === selectedPositionCard.id
-  ) {
+  if (newGameState.players[token].card.player_original_id === selectedPositionCard.id) {
     newGameState.players[token].card.player_card_id = 0
   }
 

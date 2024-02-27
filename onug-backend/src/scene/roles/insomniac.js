@@ -43,7 +43,7 @@ export const insomniac_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const currentCard = newGameState.card_positions[currentPlayerNumber[0]]
+  const currentCard = newGameState.card_positions[currentPlayerNumber[0]].card
 
   if (!newGameState.players[token].shield) {
     newGameState.players[token].card.player_card_id = currentCard.id

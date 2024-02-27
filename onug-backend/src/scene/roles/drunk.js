@@ -48,10 +48,7 @@ export const drunk_interaction = (gameState, token, title) => {
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_must_one_center'],
       icon: 'drunk',
-      selectableCards: {
-        selectable_cards: centerCardPositions,
-        selectable_card_limit: { player: 0, center: 1 },
-      },
+      selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 } },
     })
   } else {
     newGameState.players[token].player_history = {
@@ -75,14 +72,11 @@ export const drunk_response = (gameState, token, selected_card_positions, title)
   const newGameState = { ...gameState }
   const scene = []
 
-  const drunkPlayerNumber = getPlayerNumbersWithMatchingTokens(
-    newGameState.players,
-    [token]
-  )[0]
-  const drunkCard = { ...newGameState.card_positions[drunkPlayerNumber] }
-  const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]] }
-  newGameState.card_positions[drunkPlayerNumber] = selectedCard
-  newGameState.card_positions[selected_card_positions[0]] = drunkCard
+  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])[0]
+  const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber].card }
+  const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]].card }
+  newGameState.card_positions[currentPlayerNumber].card = selectedCard
+  newGameState.card_positions[selected_card_positions[0]].card = currentPlayerCard
 
   newGameState.players[token].card.player_card_id = 0
   newGameState.players[token].card_or_mark_action = true

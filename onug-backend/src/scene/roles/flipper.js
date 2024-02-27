@@ -65,19 +65,13 @@ export const flipper_response = (gameState, token, selected_card_positions, titl
     return gameState
   }
   const newGameState = { ...gameState }
+  const scene = []
 
-  const selectedPositionCard =
-    newGameState.card_positions[selected_card_positions[0]]
-  const revealedCard = getCardIdsByPositions(newGameState.card_positions, [
-    selected_card_positions[0],
-  ])
-  const isTown = revealedCard.every((card) =>
-    townIds.includes(Object.values(card)[0])
-  )
+  const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
+  const revealedCard = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
+  const isTown = revealedCard.every((card) => townIds.includes(Object.values(card)[0]))
 
-  if (
-    newGameState.players[token].card?.original_id === selectedPositionCard.id
-  ) {
+  if (newGameState.players[token].card?.original_id === selectedPositionCard.id) {
     newGameState.players[token].card.player_card_id = 0
   }
 
@@ -96,10 +90,20 @@ export const flipper_response = (gameState, token, selected_card_positions, titl
     newGameState.players[token].player_history.show_cards = revealedCard
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', selected_card_positions[0]],
     icon: 'id',
     showCards: revealedCard,
     uniqInformations: { flipped_cards: [selected_card_positions[0]] },
   })
+
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

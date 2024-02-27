@@ -65,11 +65,11 @@ export const troublemaker_response = (gameState, token, selected_card_positions,
   const scene = []
 
   const [position1, position2] = selected_card_positions
-  const playerOneCard = { ...newGameState.card_positions[position1] }
-  const playerTwoCard = { ...newGameState.card_positions[position2] }
+  const playerOneCard = { ...newGameState.card_positions[position1].card }
+  const playerTwoCard = { ...newGameState.card_positions[position2].card }
 
-  newGameState.card_positions[position1] = playerTwoCard
-  newGameState.card_positions[position2] = playerOneCard
+  newGameState.card_positions[position1].card = playerTwoCard
+  newGameState.card_positions[position2].card = playerOneCard
 
   newGameState.players[token].card_or_mark_action = true
 

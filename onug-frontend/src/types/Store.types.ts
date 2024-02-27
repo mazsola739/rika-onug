@@ -56,6 +56,7 @@ export type WsJsonMessage = {
     instant_night_action?: string
     viewed_cards?: string[]
     swapped_cards?: string[]
+    swapped_marks?: string[]
     flipped_cards?: string[]
     new_artifact_card?: string
     new_shield_card?: string

@@ -68,18 +68,11 @@ export const revealer_response = (gameState, token, selected_card_positions, tit
   const newGameState = { ...gameState }
   const scene = []
 
-  const selectedPositionCard =
-    newGameState.card_positions[selected_card_positions[0]]
-  const revealedCard = getCardIdsByPositions(newGameState.card_positions, [
-    selected_card_positions[0],
-  ])
-  const isTown = revealedCard.every((card) =>
-    townIds.includes(Object.values(card)[0])
-  )
+  const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
+  const revealedCard = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
+  const isTown = revealedCard.every((card) => townIds.includes(Object.values(card)[0]))
 
-  if (
-    newGameState.players[token].card?.original_id === selectedPositionCard.id
-  ) {
+  if (newGameState.players[token].card?.original_id === selectedPositionCard.id) {
     newGameState.players[token].card.player_card_id = 0
   }
 

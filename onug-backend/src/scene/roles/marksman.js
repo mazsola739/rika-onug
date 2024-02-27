@@ -68,7 +68,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
     const scene = []
 
     const viewCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
-    const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]]
+    const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
     const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
 
     if (newGameState.players[token].card.player_original_id === selectedPositionCard.id && currentPlayerNumber[0] !== selected_card_positions[0]) {
@@ -129,8 +129,6 @@ export const marksman_response = (gameState, token, selected_card_positions = []
     if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
       return gameState
     }
-
-    console.log("mark")
 
     const newGameState = { ...gameState }
     const scene = []
