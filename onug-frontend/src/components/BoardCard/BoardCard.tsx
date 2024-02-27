@@ -81,7 +81,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
     const cardClickHandler = (cardType: string) => {
       const maxCenterCardSelection = interactionStore.selectableCenterCardLimit
       const maxPlayerCardSelection = interactionStore.selectablePlayerCardLimit
-
+    
       if (selectable_cards) {
         const isCenterCardType = cardType === 'center'
         const selectedCards = isCenterCardType
@@ -93,7 +93,10 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
         const hasOppositeSelected = isCenterCardType
           ? interactionStore.selectedPlayerCards.length > 0
           : interactionStore.selectedCenterCards.length > 0
-
+    
+        interactionStore.setSelectedMarks([])
+        setIsSelectedMark(false)
+    
         if (isSelectedCard && selectedCards.includes(position)) {
           const updatedSelectedCards = selectedCards.filter(
             (cardPos) => cardPos !== position
@@ -113,16 +116,20 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
         } else if (hasOppositeSelected) {
           return
         }
-
+    
         interactionStore.selectedCards.length === maxSelectionLimit && handleCardInteraction(interactionStore.selectedCards)
       }
     }
-
+    
     const markClickHandler = () => {
       const maxMarkSelection = interactionStore.selectableMarkLimit
-
+    
       if (selectable_marks) {
         const selectedMarks = interactionStore.selectedMarks
+        interactionStore.setSelectedPlayerCards([])
+        interactionStore.setSelectedCards([])
+        setIsSelectedCard(false)
+    
         if (isSelectedMark && selectedMarks.includes(position)) {
           const updatedSelectedMarks = selectedMarks.filter(
             (markPos) => markPos !== position
@@ -135,7 +142,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
           setIsSelectedMark(true)
         }
       }
-
+    
       interactionStore.selectedMarks.length === maxMarkSelection && handleMarkInteraction(interactionStore.selectedMarks)
     }
     

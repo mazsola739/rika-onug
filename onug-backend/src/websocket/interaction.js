@@ -1,7 +1,7 @@
 //@ts-check
 import { logDebug, logError } from '../log'
 import { readGameState, upsertRoomState } from '../repository'
-import { doppelganger_instant_action_response, alphawolf_response, thing_response, apprenticeseer_response, doppelganger_response, curator_response, revealer_response, cupid_response, seer_response, diseased_response, drpeeker_response, drunk_response, instigator_response, mysticwolf_response, paranormalinvestigator_response, rapscallion_response, robber_response, sentinel_response, troublemaker_response, temptress_response, villageidiot_response, witch_response, werewolves_response, copycat_response, marksman_response } from '../scene/roles'
+import { doppelganger_instant_action_response, alphawolf_response, thing_response, apprenticeseer_response, doppelganger_response, curator_response, revealer_response, cupid_response, seer_response, diseased_response, drpeeker_response, drunk_response, instigator_response, mysticwolf_response, paranormalinvestigator_response, rapscallion_response, robber_response, sentinel_response, troublemaker_response, temptress_response, villageidiot_response, witch_response, werewolves_response, copycat_response, marksman_response, gremlin_response } from '../scene/roles'
 import { websocketServerConnectionsPerRoom } from './connections'
 
 export const interaction = async (ws, message) => {
@@ -75,6 +75,9 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
       break
     case "FLIPPER":
       newGameState = revealer_response(gameState, token, selected_card_positions, interaction_type)
+      break
+    case "GREMLIN":
+      newGameState = gremlin_response(gameState, token, selected_card_positions, selected_mark_positions, interaction_type)
       break
     case "INSTIGATOR":
       newGameState = instigator_response(gameState, token, selected_mark_positions, interaction_type)

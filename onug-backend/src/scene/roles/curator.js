@@ -45,18 +45,9 @@ export const curator_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const allPlayerTokens = getAllPlayerTokens(newGameState.players) //TODO better solution
-  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(
-    newGameState.players,
-    allPlayerTokens
-  )
-  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(
-    selectablePlayerNumbers,
-    newGameState.shield
-  )
-  const selectablePlayersWithNoArtifact = getSelectablePlayersWithNoArtifact(
-    selectablePlayersWithNoShield,
-    newGameState.artifact
-  )
+  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
+  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+  const selectablePlayersWithNoArtifact = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, newGameState.artifact)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,

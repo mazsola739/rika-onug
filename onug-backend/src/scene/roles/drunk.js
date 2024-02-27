@@ -56,7 +56,7 @@ export const drunk_interaction = (gameState, token, title) => {
   } else {
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
-    scene_title: title,
+      scene_title: title,
       shielded: true,
     }
 
@@ -69,7 +69,7 @@ export const drunk_interaction = (gameState, token, title) => {
 }
 
 export const drunk_response = (gameState, token, selected_card_positions, title) => {
-    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
   const newGameState = { ...gameState }
@@ -91,25 +91,13 @@ export const drunk_response = (gameState, token, selected_card_positions, title)
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    swapped_cards: [
-      `player_${newGameState.players[token].player_number}`,
-      selected_card_positions[0],
-    ],
+    swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: [
-      'interaction_swapped_cards',
-      selected_card_positions[0],
-      `player_${newGameState.players[token].player_number}`,
-    ],
+    private_message: ['interaction_swapped_cards', selected_card_positions[0], `player_${newGameState.players[token].player_number}`],
     icon: 'drunk',
-    uniqInformations: {
-      swapped_cards: [
-        `player_${newGameState.players[token].player_number}`,
-        selected_card_positions[0],
-      ],
-    },
+    uniqInformations: { swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_card_positions[0]] },
   })
 
   scene.push({

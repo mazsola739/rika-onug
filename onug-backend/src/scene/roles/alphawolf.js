@@ -44,17 +44,13 @@ export const alphawolf_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: selectablePlayerNumbers,
-    selectable_card_limit: { player: 1, center: 0 },
+    selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_one_any_non_werewolf'],
     icon: 'claw',
-    selectableCards: {
-      selectable_cards: selectablePlayerNumbers,
-      selectable_card_limit: { player: 1, center: 0 },
-    },
+    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
   })
 }
 
@@ -80,11 +76,7 @@ export const alphawolf_response = (gameState, token, selected_card_positions, ti
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: [
-      'interaction_swapped_cards',
-      selected_card_positions[0],
-      'center_wolf',
-    ],
+    private_message: ['interaction_swapped_cards',  selected_card_positions[0], 'center_wolf'],
     icon: 'claw',
     uniqInformations: { swapped_cards: [selected_card_positions[0], 'center_wolf'] },
   })

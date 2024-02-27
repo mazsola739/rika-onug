@@ -49,17 +49,13 @@ export const flipper_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: selectablePlayerNumbers,
-    selectable_card_limit: { player: 1, center: 0 },
+    selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_any_other'],
     icon: 'id',
-    selectableCards: {
-      selectable_cards: selectablePlayerNumbers,
-      selectable_card_limit: { player: 1, center: 0 },
-    },
+    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
   })
 }
 
