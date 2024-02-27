@@ -27,7 +27,7 @@ export const readGameState = async (room_id) => {
     const data = await readFile(filePath, options)
     return JSON.parse(data)
   } catch (error) {
-    return logTrace(
+    return logError(
       `###>>> READ_GAME_STATE_ERROR
 ###>>> `,
       error

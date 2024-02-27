@@ -6,8 +6,7 @@ import { useCallback, useMemo } from 'react'
 import { UPDATE_ROOM } from 'constant'
 
 export const Card: React.FC<CardProps> = observer(({ card }) => {
-  const { id, card_name, display_name, rules, expansion, team, wake_up_time } =
-    card
+  const { id, card_name, display_name } = card
 
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
@@ -31,13 +30,8 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
 
     roomStore.toggleInfo(id)
   }, [
-    id,
     card_name,
     display_name,
-    rules,
-    expansion,
-    team,
-    wake_up_time,
     room_id,
     sendJsonMessage,
   ])

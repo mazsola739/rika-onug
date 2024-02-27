@@ -176,7 +176,7 @@ export const order: OrderType[] = [
   },
   {
     scene_title: 'DR_PEEKER',
-    card_id: [33],
+    card_id: [57],
     scene_number: 33,
   },
   {

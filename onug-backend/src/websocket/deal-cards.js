@@ -227,7 +227,7 @@ export const dealCards = async (ws, message) => {
     }
   }
 
-  newGameState.selected_cards = Object.values(newGameState.card_positions).filter(value => value.id).map((value) => value.id)
+  newGameState.selected_cards = Object.values(newGameState.card_positions).filter(value => value.card.id).map((value) => value.card.id)
 
   const playerTokens = Object.keys(gameState.players)
   const hasShield = selectedCards.includes(25)
