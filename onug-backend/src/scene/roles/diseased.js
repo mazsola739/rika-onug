@@ -14,7 +14,7 @@ export const diseased = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 32 || (newGameState.players[token].card.role_id === 32 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 32 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 32 || (newGameState.players[token].card.player_role_id === 32 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 32 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = diseased_interaction(newGameState, token, title)
     }
 
@@ -73,6 +73,8 @@ export const diseased_response = (gameState, token, selected_mark_positions, tit
     newGameState.mark_positions.diseased = selectedPosition
     newGameState.card_positions[selected_mark_positions[0]].mark = diseasePosition
   }
+
+  newGameState.players[token].card_or_mark_action = true
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,

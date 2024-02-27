@@ -20,7 +20,7 @@ export const witch = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 27 || (newGameState.players[token].card.role_id === 27 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 27 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 27 || (newGameState.players[token].card.player_role_id === 27 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 27 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = witch_interaction(newGameState, token, title)
     }
 
@@ -58,20 +58,17 @@ export const witch_interaction = (gameState, token, title) => {
 }
 
 export const witch_response = (gameState, token, selected_card_positions, title) => {
-    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
   const newGameState = { ...gameState }
   const scene = []
 
   if (selected_card_positions[0].includes('center_')) {
-    const showCards = getCardIdsByPositions(newGameState.card_positions, [
-      selected_card_positions[0],
-    ])
-    const selectedCenterCardPosition =
-      newGameState.card_positions[selected_card_positions[0]]
+    const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
+    const selectedCenterCardPosition = newGameState.card_positions[selected_card_positions[0]]
 
-    if (newGameState.players[token].card.original_id === selectedCenterCardPosition.id) {
+    if (newGameState.players[token].card.player_original_id === selectedCenterCardPosition.id) {
       newGameState.players[token].card.player_card_id = 0
     }
 
@@ -111,24 +108,15 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     return newGameState
 
   } else if (selected_card_positions[0].includes('player_')) {
-    const selectedCenterPositionCard =
-      newGameState.card_positions[
-      newGameState.players[token].player_history.selected_center_card
-      ]
-    const selectedPlayerPositionCard =
-      newGameState.card_positions[selected_card_positions[0]]
+    const selectedCenterPositionCard = newGameState.card_positions[newGameState.players[token].player_history.selected_center_card]
+    const selectedPlayerPositionCard = newGameState.card_positions[selected_card_positions[0]]
 
     const selectedCenterCard = { ...selectedCenterPositionCard }
     const selectedPlayerCard = { ...selectedPlayerPositionCard }
-    newGameState.card_positions[
-      newGameState.players[token].player_history.selected_center_card
-    ] = selectedPlayerCard
+    newGameState.card_positions[newGameState.players[token].player_history.selected_center_card] = selectedPlayerCard
     newGameState.card_positions[selected_card_positions[0]] = selectedCenterCard
 
-    const witchPlayerNumber = getPlayerNumbersWithMatchingTokens(
-      newGameState.players,
-      [token]
-    )
+    const witchPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
 
     if (selected_card_positions[0] === witchPlayerNumber[0]) {
       const currentCard = newGameState.card_positions[witchPlayerNumber[0]]
@@ -139,10 +127,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      swapped_cards: [
-        newGameState.players[token].player_history.selected_center_card,
-        selected_card_positions[0],
-      ],
+      swapped_cards: [newGameState.players[token].player_history.selected_center_card, selected_card_positions[0]],
     }
 
     const interaction = generateRoleInteraction(newGameState, token, {
@@ -153,12 +138,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
         selected_card_positions[0],
       ],
       icon: 'voodoo',
-      uniqInformations: {
-        swapped_cards: [
-          newGameState.players[token].player_history.selected_center_card,
-          selected_card_positions[0],
-        ],
-      },
+      uniqInformations: { swapped_cards: [newGameState.players[token].player_history.selected_center_card, selected_card_positions[0]] },
     })
 
     scene.push({

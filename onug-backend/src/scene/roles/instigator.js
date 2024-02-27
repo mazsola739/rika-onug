@@ -14,7 +14,7 @@ export const instigator = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 34 || (newGameState.players[token].card.role_id === 34 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 34 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 34 || (newGameState.players[token].card.player_role_id === 34 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 34 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = instigator_interaction(newGameState, token, title)
     }
 
@@ -80,6 +80,8 @@ export const instigator_response = (gameState, token, selected_mark_positions, t
   if (currentPlayerNumber[0] === selected_mark_positions[0]) {
     newGameState.players[token].card.player_mark = "mark_of_traitor"
   }
+
+  newGameState.players[token].card_or_mark_action = true
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,

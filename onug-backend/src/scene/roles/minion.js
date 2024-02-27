@@ -19,7 +19,7 @@ export const minion = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 7 || (newGameState.players[token].card.role_id === 7 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 7 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 7 || (newGameState.players[token].card.player_role_id === 7 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 7 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = minion_interaction(newGameState, token, title)
     }
 

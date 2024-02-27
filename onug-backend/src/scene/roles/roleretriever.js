@@ -13,7 +13,7 @@ export const roleretriever = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 66 || (newGameState.players[token].card.role_id === 66 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 66 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 66 || (newGameState.players[token].card.player_role_id === 66 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 66 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = robber_interaction(newGameState, token, title)
     }
 

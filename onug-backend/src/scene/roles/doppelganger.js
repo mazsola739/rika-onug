@@ -60,12 +60,7 @@ export const doppelganger_interaction = (gameState, token, title) => {
   })
 }
 
-export const doppelganger_response = (
-  gameState,
-  token,
-  selected_card_positions,
-  title
-) => {
+export const doppelganger_response = (gameState, token, selected_card_positions, title) => {
     if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
@@ -73,12 +68,9 @@ export const doppelganger_response = (
   const newGameState = { ...gameState }
   const scene = []
 
-  newGameState.players[token].card.player_role_id =
-    newGameState.card_positions[selected_card_positions[0]].id
-  newGameState.players[token].card.player_role =
-    newGameState.card_positions[selected_card_positions[0]].role
-  newGameState.players[token].card.player_team =
-    newGameState.card_positions[selected_card_positions[0]].team
+  newGameState.players[token].card.player_role_id = newGameState.card_positions[selected_card_positions[0]].id
+  newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].role
+  newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].team
 
   const showCards = getCardIdsByPositions(newGameState.card_positions, [
     selected_card_positions[0],
@@ -93,7 +85,7 @@ export const doppelganger_response = (
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    viewed_cards: showCards,
+    viewed_cards: [selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
@@ -103,9 +95,7 @@ export const doppelganger_response = (
     ],
     icon: 'copy',
     showCards: showCards,
-    uniqInformations: {
-      new_role_id: newGameState.players[token].card.player_role_id,
-    },
+    uniqInformations: { new_role_id: newGameState.players[token].card.player_role_id, viewed_cards: [selected_card_positions[0]] },
   })
 
   scene.push({

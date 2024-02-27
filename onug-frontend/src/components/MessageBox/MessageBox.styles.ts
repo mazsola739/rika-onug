@@ -27,13 +27,17 @@ export const Message = styled.span`
 
 export const RoleInteractionIcon = styled.div`
   height: 100%;
-  width: 172px;
+  min-width: 260px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
 `
 
 export const Instructions = styled.div`
-display: flex;
-flex-direction: column;
-width: 100%;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
 `

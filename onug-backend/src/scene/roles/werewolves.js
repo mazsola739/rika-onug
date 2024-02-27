@@ -84,7 +84,7 @@ export const werewolves_response = (gameState, token, selected_card_positions, t
     newGameState.card_positions[selected_card_positions[0]]
 
   if (
-    newGameState.players[token].card.original_id === selectedPositionCard.id
+    newGameState.players[token].card.player_original_id === selectedPositionCard.id
   ) {
     newGameState.players[token].card.player_card_id = 0
   }

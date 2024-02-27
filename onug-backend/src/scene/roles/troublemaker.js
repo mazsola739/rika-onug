@@ -15,7 +15,7 @@ export const troublemaker = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 11 || (newGameState.players[token].card.role_id === 11 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 11 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 11 || (newGameState.players[token].card.player_role_id === 11 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 11 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = troublemaker_interaction(newGameState, token, title)
     }
 
@@ -57,12 +57,7 @@ export const troublemaker_interaction = (gameState, token, title) => {
   })
 }
 
-export const troublemaker_response = (
-  gameState,
-  token,
-  selected_card_positions,
-  title
-) => {
+export const troublemaker_response = (gameState, token, selected_card_positions, title) => {
     if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }

@@ -15,7 +15,7 @@ export const gremlin = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 33 || (newGameState.players[token].card.role_id === 33 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 33 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 33 || (newGameState.players[token].card.player_role_id === 33 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 33 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = gremlin_interaction(newGameState, token, title)
     }
 

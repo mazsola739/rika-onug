@@ -14,7 +14,7 @@ export const apprenticeseer = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 18 || (newGameState.players[token].card.role_id === 18 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 18 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 18 || (newGameState.players[token].card.player_role_id === 18 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 18 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = apprenticeseer_interaction(newGameState, token, title)
     }
 
@@ -51,27 +51,17 @@ export const apprenticeseer_interaction = (gameState, token, title) => {
   })
 }
 
-export const apprenticeseer_response = (
-  gameState,
-  token,
-  selected_card_positions,
-  title
-) => {
+export const apprenticeseer_response = (gameState, token, selected_card_positions, title) => {
     if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
   const newGameState = { ...gameState }
   const scene = []
 
-  const viewCards = getCardIdsByPositions(newGameState.card_positions, [
-    selected_card_positions[0],
-  ])
-  const selectedPositionCard =
-    newGameState.card_positions[selected_card_positions[0]]
+  const viewCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
+  const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]]
 
-  if (
-    newGameState.players[token].card.original_id === selectedPositionCard.id
-  ) {
+  if (newGameState.players[token].card.player_original_id === selectedPositionCard.id) {
     newGameState.players[token].card.player_card_id = 0
   }
 

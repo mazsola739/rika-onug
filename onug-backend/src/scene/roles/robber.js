@@ -19,7 +19,7 @@ export const robber = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 8 || (newGameState.players[token].card.role_id === 8 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 8 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 8 || (newGameState.players[token].card.player_role_id === 8 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 8 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = robber_interaction(newGameState, token, title)
     }
 
@@ -74,35 +74,23 @@ export const robber_interaction = (gameState, token, title) => {
   }
 }
 
-export const robber_response = (
-  gameState,
-  token,
-  selected_card_positions,
-  title
-) => {
+export const robber_response = (gameState, token, selected_card_positions, title) => {
     if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
   const newGameState = { ...gameState }
   const scene = []
 
-  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(
-    newGameState.players,
-    [token]
-  )[0]
+  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])[0]
   const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber] }
   const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]] }
   newGameState.card_positions[currentPlayerNumber] = selectedCard
   newGameState.card_positions[selected_card_positions[0]] = currentPlayerCard
 
-  newGameState.players[token].card.player_card_id =
-    newGameState.card_positions[currentPlayerNumber].id
-  newGameState.players[token].card.player_team =
-    newGameState.card_positions[currentPlayerNumber].team
+  newGameState.players[token].card.player_card_id = newGameState.card_positions[currentPlayerNumber].id
+  newGameState.players[token].card.player_team = newGameState.card_positions[currentPlayerNumber].team
 
-  const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, [
-    currentPlayerNumber,
-  ])
+  const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, [currentPlayerNumber])
 
   newGameState.players[token].card_or_mark_action = true
 
@@ -110,10 +98,7 @@ export const robber_response = (
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    swapped_cards: [
-      `player_${newGameState.players[token].player_number}`,
-      selected_card_positions[0],
-    ],
+    swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_card_positions[0]],
     viewed_cards: [`player_${newGameState.players[token].player_number}`],
   }
 
@@ -125,12 +110,9 @@ export const robber_response = (
     ],
     icon: 'robber',
     showCards: showCards,
-    uniqInformations: {
-      swapped_cards: [
-        `player_${newGameState.players[token].player_number}`,
-        selected_card_positions[0],
-      ],
-      viewed_cards: [`player_${newGameState.players[token].player_number}`],
+    uniqInformations: { 
+      swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_card_positions[0]], 
+      viewed_cards: [`player_${newGameState.players[token].player_number}`] 
     },
   })
 

@@ -203,6 +203,7 @@ class GameBoardStore {
         position: playerCard.position,
         card: {
           id: 0,
+          mark: '',
           spy: false,
           artifact: false,
           shield: false,

@@ -47,7 +47,7 @@ export type WsJsonMessage = {
     shielded_cards: string[]
     artifacted_cards?: string[]
     show_cards?: Record<string, number>[]
-    show_marks?: Record<string, number>[] //TODO correcting type
+    show_marks?: Record<string, string>[]
     
     //unique informations
     answer_options?: string[]
@@ -143,6 +143,7 @@ export type GamePlayBoardCardType = {
   position: string
   card: {
     id: number
+    mark: string
     spy: boolean
     selectable_cards: boolean
     selectable_marks: boolean
@@ -229,6 +230,7 @@ export type PositionProperties = {
   selectable_cards: boolean
   selectable_marks?: boolean
   id?: number
+  mark?: string
   centerSpy?: boolean
   ready?: boolean
   aliens?: boolean

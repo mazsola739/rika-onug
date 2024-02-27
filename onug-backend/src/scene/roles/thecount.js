@@ -17,11 +17,11 @@ export const thecount = (gameState, title, prefix) => {
     let interaction = {}
 
     if (prefix === 'thecount') {
-      if (newGameState.players[token].card.player_original_id === 39 || (newGameState.players[token].card.role_id === 39 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 39 && newGameState.players[token].card.player_original_id === 64)) {
+      if (newGameState.players[token].card.player_original_id === 39 || (newGameState.players[token].card.player_role_id === 39 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 39 && newGameState.players[token].card.player_original_id === 64)) {
         interaction = thecount_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_thecount') {
-      if (newGameState.players[token].card.role_id === 39 && newGameState.players[token].card.player_original_id === 1) {
+      if (newGameState.players[token].card.player_role_id === 39 && newGameState.players[token].card.player_original_id === 1) {
         interaction = thecount_interaction(newGameState, token, title)
       }
     }

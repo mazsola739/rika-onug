@@ -19,6 +19,7 @@ const renderPlayerCards = () => {
             key={index}
             isCenter={false}
             id={card.id}
+            mark={card.mark}
             position={card.position}
             selectable_cards={card.selectable_cards}
             selectable_marks={card.selectable_marks}

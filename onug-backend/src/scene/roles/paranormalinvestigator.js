@@ -18,7 +18,7 @@ export const paranormalinvestigator = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 23  || (newGameState.players[token].card.role_id === 23 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 23 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 23  || (newGameState.players[token].card.player_role_id === 23 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 23 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = paranormalinvestigator_interaction(newGameState, token, title)
     }
 
@@ -60,13 +60,8 @@ export const paranormalinvestigator_interaction = (gameState, token, title) => {
   })
 }
 
-export const paranormalinvestigator_response = (
-  gameState,
-  token,
-  selected_card_positions,
-  title
-) => {
-    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+export const paranormalinvestigator_response = (gameState, token, selected_card_positions, title) => {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
 
@@ -86,23 +81,19 @@ export const paranormalinvestigator_response = (
     showCards = selectedCards
     if (!townIds.includes(playerTwoCardId)) {
       showCards = [selectedCards[0]]
-      newGameState.players[token].card.player_role =
-        newGameState.card_positions[selected_card_positions[0]].role
-      newGameState.players[token].card.player_team =
-        newGameState.card_positions[selected_card_positions[0]].team
+      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].role
+      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].team
     }
   } else {
     if (!townIds.includes(playerTwoCardId)) {
       showCards = [selectedCards[0]]
-      newGameState.players[token].card.player_role =
-        newGameState.card_positions[selected_card_positions[0]].role
-      newGameState.players[token].card.player_team =
-        newGameState.card_positions[selected_card_positions[0]].team
+      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].role
+      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].team
     } else {
       showCards = selectedCards
       if (
-        newGameState.players[token].card.original_id === playerOneCardId ||
-        newGameState.players[token].card.original_id === playerTwoCardId
+        newGameState.players[token].card.player_original_id === playerOneCardId ||
+        newGameState.players[token].card.player_original_id === playerTwoCardId
       ) {
         newGameState.players[token].card.player_card_id = 0
       }
@@ -115,7 +106,7 @@ export const paranormalinvestigator_response = (
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    viewed_cards: showCards,
+    viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
@@ -126,7 +117,7 @@ export const paranormalinvestigator_response = (
     ],
     icon: 'investigator',
     showCards: showCards,
-    uniqInformations: { viewed_cards: showCards },
+    uniqInformations: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
   })
 
   scene.push({

@@ -18,7 +18,7 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 71 || (newGameState.players[token].card.role_id === 71 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 71 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 71 || (newGameState.players[token].card.player_role_id === 71 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 71 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = apprenticetanner_interaction(newGameState, token, title)
     }
 

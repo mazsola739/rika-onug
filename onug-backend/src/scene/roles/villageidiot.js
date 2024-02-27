@@ -14,7 +14,7 @@ export const villageidiot = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 26 || (newGameState.players[token].card.role_id === 26 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 26 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 26 || (newGameState.players[token].card.player_role_id === 26 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 26 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = villageidiot_interaction(newGameState, token, title)
     }
 

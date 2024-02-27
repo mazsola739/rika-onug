@@ -66,14 +66,11 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
     const { hasMarks } = gameTableStore
     const card = id === 0 ? '' : deckStore.getCardById(id)
     //TODO VOTED? const playerTokenName = ready ? `selected_${position}` : position
-    const cardImageSrc =
-      card && card.id !== 0
+    const cardImageSrc = card && card.id !== 0
         ? `/assets/cards/${card.card_name}.png`
         : '/assets/backgrounds/card_back.png'
 
-
-    const markImageSrc =
-      mark && mark.length !== 0
+    const markImageSrc = mark && mark.length !== 0
         ? `/assets/tokens/${mark}.png`
         : '/assets/tokens/mark_back.png'
 
@@ -150,7 +147,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
           {!isCenter && artifact && <Token tokenName="artifact_back" size={25} />}
         </Tokens>}
         <CardBack
-          backgroundImage={cardImageSrc}
+          cardBackgroundImage={cardImageSrc}
           selectable_cards={selectable_cards}
           onClick={() => cardClickHandler(isCenter ? 'center' : 'player')}
           isSelectedCard={isSelectedCard}
@@ -203,7 +200,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
           {!isCenter && werewolves && <Icon iconName="werewolf" size={25} />}
         </Tokens>
         {!isCenter && hasMarks && <MarkBack
-          backgroundImage={markImageSrc}
+          markBackgroundImage={markImageSrc}
           selectable_marks={selectable_marks}
           onClick={() => markClickHandler()}
           isSelectedMark={isSelectedMark}

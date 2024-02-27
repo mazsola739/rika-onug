@@ -54,13 +54,13 @@ export interface BoardCardProps {
 }
 
 export interface StyledBoardCardProps {
-  backgroundImage: string
+  cardBackgroundImage: string
   selectable_cards?: boolean
   isSelectedCard?: boolean
 }
 
 export interface StyledBoardMarkProps {
-  backgroundImage: string
+  markBackgroundImage: string
   selectable_marks?: boolean
   isSelectedMark?: boolean
 }

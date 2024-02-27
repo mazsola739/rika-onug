@@ -18,7 +18,7 @@ export const seer = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 9 || (newGameState.players[token].card.role_id === 9 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 9 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 9 || (newGameState.players[token].card.player_role_id === 9 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 9 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = seer_interaction(newGameState, token, title)
     }
 
@@ -112,7 +112,7 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    viewed_cards: showCards,
+    viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
@@ -122,7 +122,7 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
       showCards.length > 1 ? selected_card_positions[1] : '',
     ],
     icon: 'seer',
-    uniqInformations: { viewed_cards: showCards },
+    uniqInformations: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
   })
 
   scene.push({

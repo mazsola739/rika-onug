@@ -17,7 +17,7 @@ export const alphawolf = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 17 || (newGameState.players[token].card.role_id === 17 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 17 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 17 || (newGameState.players[token].card.player_role_id === 17 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 17 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = alphawolf_interaction(newGameState, token, title)
     }
 
@@ -58,12 +58,7 @@ export const alphawolf_interaction = (gameState, token, title) => {
   })
 }
 
-export const alphawolf_response = (
-  gameState,
-  token,
-  selected_card_positions,
-  title
-) => {
+export const alphawolf_response = (gameState, token, selected_card_positions, title) => {
     if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }

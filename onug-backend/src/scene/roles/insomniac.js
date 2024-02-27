@@ -22,7 +22,7 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 4 || (newGameState.players[token].card.role_id === 4 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 4 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 4 || (newGameState.players[token].card.player_role_id === 4 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 4 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = insomniac_interaction(newGameState, token, title)
     }
 
@@ -42,36 +42,31 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
 export const insomniac_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(
-    newGameState.players,
-    [token]
-  )
+  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
   const currentCard = newGameState.card_positions[currentPlayerNumber[0]]
 
   if (!newGameState.players[token].shield) {
     newGameState.players[token].card.player_card_id = currentCard.id
     newGameState.players[token].card.player_team = currentCard.team
 
-    const showCards = getCardIdsByPlayerNumbers(
-      newGameState.card_positions,
-      currentPlayerNumber
-    )
+    const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, currentPlayerNumber)
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
-    scene_title: title,
-      viewed_cards: showCards,
+      scene_title: title,
+      viewed_cards: currentPlayerNumber,
     }
 
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_own'],
       icon: 'insomniac',
       showCards: showCards,
+      uniqInformations: { viewed_cards: currentPlayerNumber }
     })
   } else {
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
-    scene_title: title,
+      scene_title: title,
       shielded: true,
     }
 

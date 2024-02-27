@@ -21,7 +21,7 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 62 || (newGameState.players[token].card.role_id === 62 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 62 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 62 || (newGameState.players[token].card.player_role_id === 62 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 62 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = intern_interaction(newGameState, token, title)
     }
 

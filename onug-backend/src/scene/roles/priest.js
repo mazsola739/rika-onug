@@ -16,11 +16,11 @@ export const priest = (gameState, title, prefix) => {
     let interaction = {}
 
     if (prefix === 'priest') {
-      if (newGameState.players[token].card.player_original_id === 37 || (newGameState.players[token].card.role_id === 37 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 37 && newGameState.players[token].card.player_original_id === 64)) {
+      if (newGameState.players[token].card.player_original_id === 37 || (newGameState.players[token].card.player_role_id === 37 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 37 && newGameState.players[token].card.player_original_id === 64)) {
         interaction = priest_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_priest') {
-      if (newGameState.players[token].card.role_id === 37 && newGameState.players[token].card.player_original_id === 1) {
+      if (newGameState.players[token].card.player_role_id === 37 && newGameState.players[token].card.player_original_id === 1) {
         interaction = priest_interaction(newGameState, token, title)
       }
     }

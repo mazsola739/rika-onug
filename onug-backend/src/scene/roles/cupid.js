@@ -15,7 +15,7 @@ export const cupid = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 31 || (newGameState.players[token].card.role_id === 31 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 31 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 31 || (newGameState.players[token].card.player_role_id === 31 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 31 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = cupid_interaction(newGameState, token, title)
     }
 
@@ -87,6 +87,8 @@ export const cupid_response = (gameState, token, selected_mark_positions, title)
   if (currentPlayerNumber[0] === selected_mark_positions[0] || currentPlayerNumber[0] === selected_mark_positions[1]) {
     newGameState.players[token].card.player_mark = "mark_of_love"
   }
+  
+  newGameState.players[token].card_or_mark_action = true
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,

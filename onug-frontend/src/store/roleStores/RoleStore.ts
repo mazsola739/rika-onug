@@ -37,10 +37,15 @@ class RoleStore {
           (showCardObj) => Object.keys(showCardObj)[0] === position
         )
         const id = showCard ? showCard[position] : playerCard.id
+        const showMark = (lastJsonMessage.interaction.show_marks || []).find(
+          (showMarkObj) => Object.keys(showMarkObj)[0] === position
+        )
+        const mark = showMark ? showMark[position] : playerCard.mark
 
         return {
           ...playerCard,
           id,
+          mark,
           selectable_cards,
           selectable_marks,
           shielded_cards,

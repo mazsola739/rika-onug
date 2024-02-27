@@ -46,6 +46,17 @@ export const getCardIdsByPositions = (cardPositions, selectedPositions) => {
   return result
 }
 
+export const getMarksByPositions = (cardPositions, selectedPositions) => {
+  const result = []
+
+  selectedPositions.forEach(position => {
+    const mark = cardPositions[position].mark
+    result.push({ [position]: mark })
+  })
+
+  return result
+}
+
 export const getNonWerewolfPlayerNumbersByRoleIds = (players) => {
   const result = []
 

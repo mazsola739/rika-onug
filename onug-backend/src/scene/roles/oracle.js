@@ -96,12 +96,7 @@ export const oracle_question_interaction = (gameState, token, title) => {
   return {}
 }
 //TODO newGameState.oracle.answer = ? if no answer do sure answer
-export const oracle_question_response = (
-  gameState,
-  token,
-  selected_card_positions,
-  title
-) => {
+export const oracle_question_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }
 

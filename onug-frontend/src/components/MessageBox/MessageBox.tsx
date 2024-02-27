@@ -31,7 +31,7 @@ export const MessageBox: React.FC = observer(() => {
         )}
       </Instructions>
       <RoleInteractionIcon>
-        {iconName.length > 0 && <Icon iconName={iconName} size={50} />}
+        {iconName.length > 0 && <Icon iconName={iconName} size={100} />}
       </RoleInteractionIcon>
     </StyledMessageBox>
   )

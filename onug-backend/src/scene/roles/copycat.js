@@ -65,7 +65,6 @@ export const copycat_response = (gameState, token, selected_card_positions, titl
 
   const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
 
-  newGameState.players[token].player_history.show_cards = showCards 
   newGameState.players[token].new_role_id = newGameState.players[token].card.player_role_id
   newGameState.players[token].card_or_mark_action = true
 
@@ -73,14 +72,14 @@ export const copycat_response = (gameState, token, selected_card_positions, titl
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    viewed_cards: showCards,
+    viewed_cards: [selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_you_are_that_role', `${newGameState.players[token]?.card.player_role}`],
     icon: 'copy',
     showCards: showCards,
-    uniqInformations: { new_role_id: newGameState.players[token].card.player_role_id },
+    uniqInformations: { new_role_id: newGameState.players[token].card.player_role_id, viewed_cards: [selected_card_positions[0]] },
   })
 
   scene.push({

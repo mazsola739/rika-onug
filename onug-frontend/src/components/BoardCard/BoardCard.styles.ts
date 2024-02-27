@@ -10,7 +10,7 @@ export const StyledBoardCard = styled.div`
 
 export const CardBack = styled.div<StyledBoardCardProps>`
   align-items: center;
-  background-image: ${(props) => `url(${props.backgroundImage})`};
+  background-image: ${(props) => `url(${props.cardBackgroundImage})`};
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -29,7 +29,7 @@ export const CardBack = styled.div<StyledBoardCardProps>`
 
 export const MarkBack = styled.div<StyledBoardMarkProps>`
   align-items: center;
-  background-image: ${(props) => `url(${props.backgroundImage})`};
+  background-image: ${(props) => `url(${props.markBackgroundImage})`};
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;

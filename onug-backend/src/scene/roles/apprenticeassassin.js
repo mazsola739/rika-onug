@@ -20,11 +20,11 @@ export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
     let interaction = {}
 
     if (prefix === 'assassin') {
-      if (newGameState.players[token].card.player_original_id === 28 || (newGameState.players[token].card.role_id === 28 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.role_id === 28 && newGameState.players[token].card.player_original_id === 64)) {
+      if (newGameState.players[token].card.player_original_id === 28 || (newGameState.players[token].card.player_role_id === 28 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 28 && newGameState.players[token].card.player_original_id === 64)) {
         interaction = apprenticeassassin_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_assassin') {
-      if (newGameState.players[token].card.role_id === 28 && newGameState.players[token].card.player_original_id === 1) {
+      if (newGameState.players[token].card.player_role_id === 28 && newGameState.players[token].card.player_original_id === 1) {
         interaction = apprenticeassassin_interaction(newGameState, token, title)
       }
     }
@@ -45,11 +45,6 @@ export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
 export const apprenticeassassin_interaction = (gameState, token, title) => {
   return {}
 }
-export const apprenticeassassin_response = (
-  gameState,
-  token,
-  selected_card_positions,
-  title
-) => {
+export const apprenticeassassin_response = (gameState, token, selected_card_positions, title) => {
   return {}
 }
