@@ -12,7 +12,6 @@ cd onug-frontend
 
 yarn install
 yarn build:prod
-cp -r assets/ dist/
 
 cat << EOF
 nohup sudo yarn start:prod > prod__nohup.txt &
