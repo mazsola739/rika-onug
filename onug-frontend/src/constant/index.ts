@@ -2,6 +2,7 @@ export * from './narrations'
 export * from './messages'
 
 export * from './misc'
+export * from './env'
 
 export * from './buttons'
 export * from './gametime'

@@ -6,6 +6,8 @@
     "start": "vite",
     "start:prod": "vite preview --host",
     "build": "tsc && vite build",
+    "build:debug": "cross-env DEBUG=vite-tsconfig-paths yarn vite",
+    "build:prod": "tsc && vite build --mode prod",
     "serve": "vite preview",
     "test": "vitest",
     "test:coverage": "vitest run --coverage --watch=false"
@@ -64,6 +66,5 @@
   },
   "description": "One Night Ultimate Werewolf - Frontend",
   "author": "Rika",
-  "license": "MIT",
-  "proxy": "http://localhost:7654"
+  "license": "MIT"
 }

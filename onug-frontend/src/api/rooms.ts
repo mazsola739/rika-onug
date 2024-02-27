@@ -1,8 +1,8 @@
-import { API_LOCALHOST } from 'constant'
+import { API_HOST } from 'constant'
 
 export const roomsRequest = async () => {
   try {
-    const response = await fetch(`${API_LOCALHOST}/api/rooms`)
+    const response = await fetch(`${API_HOST}/api/rooms`)
     const data = await response.json()
 
     if (data.message === 'Successfully fetched') {
