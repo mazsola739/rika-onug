@@ -3,7 +3,6 @@ import { SCENE } from '../../constant'
 import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../utils/scene'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
-import { interaction } from './../../websocket/interaction';
 
 export const cupid = (gameState, title) => {
   const newGameState = { ...gameState }

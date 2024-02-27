@@ -15,7 +15,7 @@ const scriptOrder = [
 //TODO RIPPLE
 
 export const scene = (gameState) => {
-  const { room_id } = gameState.room_id
+  const { room_id } = gameState
   logTrace(`Scene playing for players in room: ${room_id}`)
 
   let newGameState = { ...gameState }
@@ -35,7 +35,7 @@ export const scene = (gameState) => {
 
   if (newGameState.actual_scene) {
     newGameState = sceneHandler(newGameState)
-    logDebug(`__INTERACTION__ SCENE_NUMBER: ${newGameState.actual_scene.scene_number} role_interaction: ${JSON.stringify(newGameState?.role_interactions)}`)
+    logDebug(`__INTERACTION__ SCENE_NUMBER: ${newGameState.actual_scene.scene_number} role_interaction: ${JSON.stringify(newGameState?.scene)}`)
   } else {
     logDebug("No actual_scene found in gameState.")
     logDebug("gameState:", JSON.stringify(newGameState)) // Log the entire gameState object

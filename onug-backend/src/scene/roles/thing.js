@@ -52,10 +52,7 @@ export const thing_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_must_one_neighbor'],
     icon: 'tap',
-    selectableCards: {
-      selectable_cards: neighbors,
-      selectable_card_limit: { player: 1, center: 0 },
-    },
+    selectableCards: { selectable_cards: neighbors, selectable_card_limit: { player: 1, center: 0 } },
   })
 }
 

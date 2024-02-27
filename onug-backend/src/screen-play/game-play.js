@@ -1,15 +1,18 @@
 //@ts-check
-import { readGameState, upsertRoomState } from '../repository';
-import { broadcast, websocketServerConnectionsPerRoom } from '../websocket/connections';
-import { HYDRATE_GAME_PLAY } from '../constant/ws';
-import { logTrace } from '../log';
-import { scene } from '../scene';
-import { STAGES } from '../constant/stage';
+import { readGameState, upsertRoomState } from '../repository'
+import {
+  broadcast,
+  websocketServerConnectionsPerRoom,
+} from '../websocket/connections'
+import { HYDRATE_GAME_PLAY } from '../constant/ws'
+import { logErrorWithStack, logTrace } from '../log'
+import { scene } from '../scene'
+import { STAGES } from '../constant/stage'
 
 //TODO set tickTime each narration different
 const tickTime = 8000
 
-export const stopGamePlay = gameState => {
+export const stopGamePlay = (gameState) => {
   gameState.game_stopped = true
   gameState.stage = STAGES.ROOM
 
@@ -25,51 +28,59 @@ export const stopGamePlay = gameState => {
     delete gameState.players[token].player_number
     delete gameState.players[token].player_history
     gameState.players[token].ready = false
-    
+
     delete gameState.card_positions
     delete gameState.mark_positions
     gameState.action_history = [
       {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }]
+        scene_title: 'GAME_START',
+        scene_number: 0,
+      },
+    ]
 
     delete gameState.game_play_start_time
     delete gameState.actual_scene
   })
 
   return gameState
-};
+}
 
-const getNextScene = gameState => {
-  if (!gameState.actual_scene) return // game already stopped
+const getNextScene = (gameState) => {
+  try {
+    if (!gameState.actual_scene) return // game already stopped
 
-  let newGameState = { ...gameState }
-  
-  const startTime = Date.now()
-  newGameState.actual_scene.scene_start_time = startTime
-  newGameState.actual_scene.scene_number++
+    let newGameState = { ...gameState }
 
-  newGameState = scene(newGameState)
+    const startTime = Date.now()
+    newGameState.actual_scene.scene_start_time = startTime
+    newGameState.actual_scene.scene_number++
 
-  newGameState.scene.forEach((item) => {
-    websocketServerConnectionsPerRoom[newGameState.room_id][item.token].send(JSON.stringify(item))
-  })
+    newGameState = scene(newGameState)
 
-  if (newGameState.actual_scene.scene_title === "VOTE") {
-    newGameState.game_stopped = true
+    newGameState.scene.forEach((item) => {
+      websocketServerConnectionsPerRoom[newGameState.room_id][item.token].send(
+        JSON.stringify(item)
+      )
+    })
+
+    if (newGameState.actual_scene.scene_title === 'VOTE') {
+      newGameState.game_stopped = true
+      return newGameState
+    }
+
+    if (!newGameState.actual_scene.started) return getNextScene(newGameState)
+
     return newGameState
+  } catch (error) {
+    logErrorWithStack(error)
+    return
   }
-
-  if (!newGameState.actual_scene.started) return getNextScene(newGameState)
-
-  return newGameState
 }
 
 const tick = async (room_id) => {
-  logTrace("tick")
+  logTrace('tick')
   const gameState = await readGameState(room_id)
-  
+
   const newGameState = getNextScene(gameState)
 
   if (!newGameState) return // game already stopped
@@ -106,4 +117,4 @@ const tick = async (room_id) => {
   }
 }
 
-export const startGamePlay = room_id => setTimeout(() => tick(room_id), 2000);
+export const startGamePlay = (room_id) => setTimeout(() => tick(room_id), 2000)
