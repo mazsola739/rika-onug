@@ -2,7 +2,7 @@
 import { SCENE, centerCardPositions } from '../../constant'
 import {
   getAllPlayerTokens,
-  getPlayerNumbersWithMatchingTokens,
+  getPlayerNumberWithMatchingToken,
 } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -72,7 +72,7 @@ export const drunk_response = (gameState, token, selected_card_positions, title)
   const newGameState = { ...gameState }
   const scene = []
 
-  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])[0]
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
   const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber].card }
   const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]].card }
   newGameState.card_positions[currentPlayerNumber].card = selectedCard
@@ -85,13 +85,13 @@ export const drunk_response = (gameState, token, selected_card_positions, title)
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_card_positions[0]],
+    swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_cards', selected_card_positions[0], `player_${newGameState.players[token].player_number}`],
+    private_message: ['interaction_swapped_cards', selected_card_positions[0], currentPlayerNumber],
     icon: 'drunk',
-    uniqInformations: { swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_card_positions[0]] },
+    uniqInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
   })
 
   scene.push({

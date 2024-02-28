@@ -21,8 +21,14 @@ export const psychic = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 51 || (newGameState.players[token].card.player_role_id === 51 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 51 && newGameState.players[token].card.player_original_id === 64)) {
-      interaction = psychic_interaction(newGameState, token, title)
+    if (prefix === 'psychic') {
+      if (newGameState.players[token].card.player_original_id === 51 || (newGameState.players[token].card.player_role_id === 51 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 51 && newGameState.players[token].card.player_original_id === 64)) {
+        interaction = psychic_interaction(newGameState, token, title)
+      }
+    } else if (prefix === 'doppelganger_psychic') {
+      if (newGameState.players[token].card.player_role_id === 51 && newGameState.players[token].card.player_original_id === 1) {
+        interaction = psychic_interaction(newGameState, token, title)
+      }
     }
 
     scene.push({

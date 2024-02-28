@@ -22,8 +22,14 @@ export const revealer = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 24 || (newGameState.players[token].card.player_role_id === 24 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 24 && newGameState.players[token].card.player_original_id === 64)) {
-      interaction = revealer_interaction(newGameState, token, title)
+    if (prefix === 'revealer') {
+      if (newGameState.players[token].card.player_original_id === 24 || (newGameState.players[token].card.player_role_id === 24 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 24 && newGameState.players[token].card.player_original_id === 64)) {
+        interaction = revealer_interaction(newGameState, token, title)
+      }
+    } else if (prefix === 'doppelganger_revealer') {
+      if (newGameState.players[token].card.player_role_id === 24 && newGameState.players[token].card.player_original_id === 1) {
+        interaction = revealer_interaction(newGameState, token, title)
+      }
     }
 
     scene.push({

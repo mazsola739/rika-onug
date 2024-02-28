@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions, getMarksByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../utils/scene-utils'
+import { getAllPlayerTokens, getCardIdsByPositions, getMarksByPositions, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
 
@@ -69,12 +69,12 @@ export const marksman_response = (gameState, token, selected_card_positions = []
 
     const viewCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
     const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
-    const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
-    if (newGameState.players[token].card.player_original_id === selectedPositionCard.id && currentPlayerNumber[0] !== selected_card_positions[0]) {
+    if (newGameState.players[token].card.player_original_id === selectedPositionCard.id && currentPlayerNumber !== selected_card_positions[0]) {
       newGameState.players[token].card.player_card_id = 0
     }
-    if (currentPlayerNumber[0] === selected_card_positions[0]) {
+    if (currentPlayerNumber === selected_card_positions[0]) {
       newGameState.players[token].card.player_card_id = selectedPositionCard.id
       newGameState.players[token].card.player_team = selectedPositionCard.team
     }
@@ -135,9 +135,9 @@ export const marksman_response = (gameState, token, selected_card_positions = []
 
     const viewMarks = getMarksByPositions(newGameState.card_positions, [selected_mark_positions[0]])
     const selectedPositionMark = newGameState.card_positions[selected_mark_positions[0]].mark
-    const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
-    if (currentPlayerNumber[0] === selected_mark_positions[0]) {
+    if (currentPlayerNumber === selected_mark_positions[0]) {
       newGameState.players[token].card.player_mark = selectedPositionMark
     }
 

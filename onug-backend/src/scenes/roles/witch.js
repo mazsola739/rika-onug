@@ -7,6 +7,7 @@ import {
   getSelectablePlayersWithNoShield,
   getAllPlayerTokens,
   getCardIdsByPositions,
+  getPlayerNumberWithMatchingToken,
 } from '../../utils/scene-utils'
 
 export const witch = (gameState, title) => {
@@ -116,7 +117,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     newGameState.card_positions[newGameState.players[token].player_history.selected_center_card].card = selectedPlayerCard
     newGameState.card_positions[selected_card_positions[0]].card = selectedCenterCard
 
-    const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
     if (selected_card_positions[0] === currentPlayerNumber[0]) {
       const currentCard = newGameState.card_positions[currentPlayerNumber[0]].card

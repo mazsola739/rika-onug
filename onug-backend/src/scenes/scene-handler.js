@@ -5,7 +5,7 @@ import * as conditions from './conditions'
 
 //! todo save interaction identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
 //TODO delete 
- //! TODO if must action, random selecting?
+//! TODO if must action, random selecting?
 export const sceneHandler = (gameState) => {
   const newGameState = { ...gameState }
   const scene_title = newGameState.actual_scene.scene_title
@@ -13,12 +13,12 @@ export const sceneHandler = (gameState) => {
   const total_players = newGameState.total_players
 
   switch (scene_title) {
-/*     case "EPIC_BATTLE": 
-      if (conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players)) {
-        newGameState.actual_scene.started = true
-        return roles.epicbattle(newGameState, scene_title, conditions.hasEasterEgg(selected_cards, total_players), conditions.hasEpicBattle(selected_cards), total_players, !conditions.hasGoodGuys(selected_cards), !conditions.hasBadGuys(selected_cards)) 
-      }
-      break */
+    /*     case "EPIC_BATTLE": 
+          if (conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players)) {
+            newGameState.actual_scene.started = true
+            return roles.epicbattle(newGameState, scene_title, conditions.hasEasterEgg(selected_cards, total_players), conditions.hasEpicBattle(selected_cards), total_players, !conditions.hasGoodGuys(selected_cards), !conditions.hasBadGuys(selected_cards)) 
+          }
+          break */
 
     case "ORACLE_QUESTION":
       if (conditions.hasOracle(selected_cards)) {
@@ -139,14 +139,14 @@ export const sceneHandler = (gameState) => {
       }
       break
 
-    case "APPRENTICE_ASSASSIN": 
+    case "APPRENTICE_ASSASSIN":
       if (conditions.hasApprenticeAssassin(selected_cards)) {
         newGameState.actual_scene.started = true
         return roles.apprenticeassassin(newGameState, scene_title, conditions.hasAssassin(selected_cards), "apprenticeassassin")
       }
       break
 
-    case "DOPPELGÄNGER_APPRENTICE_ASSASSIN": 
+    case "DOPPELGÄNGER_APPRENTICE_ASSASSIN":
       if (conditions.hasDoppelganger(selected_cards) && conditions.hasApprenticeAssassin(selected_cards)) {
         newGameState.actual_scene.started = true
         return roles.apprenticeassassin(newGameState, scene_title, conditions.hasAssassin(selected_cards), "doppelganger_apprenticeassassin")
@@ -307,12 +307,12 @@ export const sceneHandler = (gameState) => {
       }
       break
 
-     case "MASONS":
+    case "MASONS":
       if (conditions.hasMasons(selected_cards)) {
         newGameState.actual_scene.started = true
         return roles.masons(newGameState, scene_title)
       }
-      break 
+      break
 
     case "THING":
       if (conditions.hasThing(selected_cards)) {
@@ -630,14 +630,9 @@ export const sceneHandler = (gameState) => {
       break
 
     case "JOKE":
-
       newGameState.actual_scene.started = true
       return roles.joke(newGameState, scene_title)
 
-
-    /*  INVESTIGATION":
-        VOTE":
-        WINNERS":*/
     default:
       logInfo(`SCENE_HANDLER_DEFAULT case: no role found for: sceneTitle ${scene_title}`)
 

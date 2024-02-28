@@ -1,3 +1,4 @@
+import { doppelgangerInstantActionsIds } from 'constant'
 import { OrderType } from 'types'
 
 export const order: OrderType[] = [
@@ -30,6 +31,7 @@ export const order: OrderType[] = [
     scene_title: 'DOPPELGÄNGER_INSTANT_ACTION',
     card_id: [1],
     scene_number: 7,
+    condition: (selectedCards) => selectedCards.some(card => doppelgangerInstantActionsIds.includes(card.id)),
   },
   {
     scene_title: 'VAMPIRES',

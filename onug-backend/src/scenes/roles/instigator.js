@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../utils/scene-utils'
+import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -72,9 +72,9 @@ export const instigator_response = (gameState, token, selected_mark_positions, t
     newGameState.card_positions[selected_mark_positions[0]].mark = traitorPosition
   }
 
-  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
-  if (currentPlayerNumber[0] === selected_mark_positions[0]) {
+  if (currentPlayerNumber === selected_mark_positions[0]) {
     newGameState.players[token].card.player_mark = "mark_of_traitor"
   }
 

@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../utils/scene-utils'
+import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -81,7 +81,7 @@ export const cupid_response = (gameState, token, selected_mark_positions, title)
     newGameState.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
   }
 
-  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
   if (currentPlayerNumber[0] === selected_mark_positions[0] || currentPlayerNumber[0] === selected_mark_positions[1]) {
     newGameState.players[token].card.player_mark = "mark_of_love"

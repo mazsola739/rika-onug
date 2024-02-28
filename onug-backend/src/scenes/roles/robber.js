@@ -3,7 +3,7 @@ import { SCENE } from '../../constant'
 import {
   getAllPlayerTokens,
   getCardIdsByPlayerNumbers,
-  getPlayerNumbersWithMatchingTokens,
+  getPlayerNumberWithMatchingToken,
   getSelectableOtherPlayersWithoutShield,
 } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
@@ -75,13 +75,13 @@ export const robber_interaction = (gameState, token, title) => {
 }
 
 export const robber_response = (gameState, token, selected_card_positions, title) => {
-    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
   const newGameState = { ...gameState }
   const scene = []
 
-  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])[0]
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
   const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber].card }
   const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]].card }
   newGameState.card_positions[currentPlayerNumber].card = selectedCard
@@ -98,22 +98,15 @@ export const robber_response = (gameState, token, selected_card_positions, title
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_card_positions[0]],
-    viewed_cards: [`player_${newGameState.players[token].player_number}`],
+    swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
+    viewed_cards: [currentPlayerNumber],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: [
-      'interaction_swapped_cards',
-      'interaction_saw_card',
-      `player_${newGameState.players[token].player_number}`,
-    ],
+    private_message: ['interaction_swapped_cards', 'interaction_saw_card', currentPlayerNumber],
     icon: 'robber',
     showCards: showCards,
-    uniqInformations: { 
-      swapped_cards: [`player_${newGameState.players[token].player_number}`, selected_card_positions[0]], 
-      viewed_cards: [`player_${newGameState.players[token].player_number}`] 
-    },
+    uniqInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], viewed_cards: [currentPlayerNumber] },
   })
 
   scene.push({

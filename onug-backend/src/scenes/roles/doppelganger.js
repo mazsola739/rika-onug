@@ -4,6 +4,7 @@ import {
   getAllPlayerTokens,
   getCardIdsByPositions,
   getPlayerNumbersWithNonMatchingTokens,
+  getSelectablePlayersWithNoShield,
 } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -38,21 +39,19 @@ export const doppelganger = (gameState, title) => {
 export const doppelganger_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(
-    newGameState.players,
-    [token]
-  )
+  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players,[token])
+  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
+    selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 },
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_must_one_any_other'],
     icon: 'copy',
-    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
+    selectableCards: { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
   })
 }
 

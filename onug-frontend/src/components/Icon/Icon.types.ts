@@ -37,6 +37,7 @@ export type IconType =
   | 'like'
   | 'lover'
   | 'mad'
+  | 'mark'
   | 'mason'
   | 'mortician'
   | 'mute'

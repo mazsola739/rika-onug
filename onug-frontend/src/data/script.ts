@@ -451,19 +451,4 @@ export const script: ScriptType[] = [
     scene_img: '',
     scene_number: 89,
   },
-  {
-    scene_title: 'INVESTIGATION',
-    scene_img: '',
-    scene_number: 90,
-  },
-  {
-    scene_title: 'VOTE',
-    scene_img: '',
-    scene_number: 91,
-  },
-  {
-    scene_title: 'WINNERS',
-    scene_img: '',
-    scene_number: 92,
-  },
 ]

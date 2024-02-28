@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, moveCards } from '../../utils/scene-utils'
+import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens, moveCards } from '../../utils/scene-utils'
 import { generateRoleInteraction } from './../generate-scene-role-interactions';
 
 export const villageidiot = (gameState, title) => {
@@ -51,8 +51,8 @@ export const villageidiot_response = (gameState, token, answer, title) => { //TO
   const newGameState = { ...gameState }
   const scene = []
 
-  const currentPlayer = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const updatedPlayerCards = moveCards(newGameState.card_positions, answer, currentPlayer[0])
+  const currentPlayer = getPlayerNumberWithMatchingToken(newGameState.players, token)
+  const updatedPlayerCards = moveCards(newGameState.card_positions, answer, currentPlayer)
 
   newGameState.players[token].card_or_mark_action = true
 

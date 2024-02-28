@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getMarksByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../utils/scene-utils'
+import { getAllPlayerTokens, getMarksByPositions, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
 
@@ -17,8 +17,14 @@ export const gremlin = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 33 || (newGameState.players[token].card.player_role_id === 33 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 33 && newGameState.players[token].card.player_original_id === 64)) {
-      interaction = gremlin_interaction(newGameState, token, title)
+    if (prefix === 'gremlin') {
+      if (newGameState.players[token].card.player_original_id === 33 || (newGameState.players[token].card.player_role_id === 33 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 33 && newGameState.players[token].card.player_original_id === 64)) {
+        interaction = gremlin_interaction(newGameState, token, title)
+      }
+    } else if (prefix === 'doppelganger_gremlin') {
+      if (newGameState.players[token].card.player_role_id === 33 && newGameState.players[token].card.player_original_id === 1) {
+        interaction = gremlin_interaction(newGameState, token, title)
+      }
     }
 
     scene.push({
@@ -74,9 +80,9 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
 
     newGameState.players[token].card_or_mark_action = true
 
-    const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
-    if (currentPlayerNumber[0] === selected_card_positions[0] || currentPlayerNumber[0] === selected_card_positions[1]) {
+    if (currentPlayerNumber === selected_card_positions[0] || currentPlayerNumber === selected_card_positions[1]) {
       newGameState.players[token].card.player_card_id = 0
     }
 
@@ -120,9 +126,9 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
 
     newGameState.players[token].card_or_mark_action = true
 
-    const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
-    if (currentPlayerNumber[0] === selected_mark_positions[0] || currentPlayerNumber[0] === selected_mark_positions[1]) {
+    if (currentPlayerNumber === selected_mark_positions[0] || currentPlayerNumber === selected_mark_positions[1]) {
       newGameState.players[token].card.player_mark = ''
     }
 

@@ -34,8 +34,14 @@ export const mortician = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 49 || (newGameState.players[token].card.player_role_id === 49 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 49 && newGameState.players[token].card.player_original_id === 64)) {
-      interaction = mortician_interaction(newGameState, token, title)
+    if (prefix === 'mortician') {
+      if (newGameState.players[token].card.player_original_id === 49 || (newGameState.players[token].card.player_role_id === 49 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 49 && newGameState.players[token].card.player_original_id === 64)) {
+        interaction = mortician_interaction(newGameState, token, title)
+      }
+    } else if (prefix === 'doppelganger_mortician') {
+      if (newGameState.players[token].card.player_role_id === 49 && newGameState.players[token].card.player_original_id === 1) {
+        interaction = mortician_interaction(newGameState, token, title)
+      }
     }
 
     scene.push({

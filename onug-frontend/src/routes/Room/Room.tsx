@@ -76,6 +76,8 @@ export const Room: React.FC = observer(() => {
     [roomStore, teamArray]
   )
 
+
+
   return (
     <StyledRoom>
       <RoomHeader />

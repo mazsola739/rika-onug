@@ -33,8 +33,14 @@ export const bodysnatcher = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 74 || (newGameState.players[token].card.player_role_id === 74 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 74 && newGameState.players[token].card.player_original_id === 64)) {
-      interaction = bodysnatcher_interaction(newGameState, token, title)
+    if (prefix === 'bodysnatcher') {
+      if (newGameState.players[token].card.player_original_id === 74 || (newGameState.players[token].card.player_role_id === 74 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 74 && newGameState.players[token].card.player_original_id === 64)) {
+        interaction = bodysnatcher_interaction(newGameState, token, title)
+      }
+    } else if (prefix === 'doppelganger_bodysnatcher') {
+      if (newGameState.players[token].card.player_role_id === 74 && newGameState.players[token].card.player_original_id === 1) {
+        interaction = bodysnatcher_interaction(newGameState, token, title)
+      }
     }
 
     scene.push({

@@ -35,6 +35,7 @@ import JestIcon from './jest.svg?react'
 import LikeIcon from './like.svg?react'
 import LoverIcon from './lover.svg?react'
 import MadIcon from './mad.svg?react'
+import MarkIcon from './mark.svg?react'
 import MasonIcon from './mason.svg?react'
 import MorticianIcon from './mortician.svg?react'
 import MuteIcon from './mute.svg?react'
@@ -104,6 +105,7 @@ export {
   LikeIcon,
   LoverIcon,
   MadIcon,
+  MarkIcon,
   MasonIcon,
   MorticianIcon,
   MuteIcon,

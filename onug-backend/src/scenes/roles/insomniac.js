@@ -3,7 +3,7 @@ import { SCENE } from '../../constant'
 import {
   getAllPlayerTokens,
   getCardIdsByPlayerNumbers,
-  getPlayerNumbersWithMatchingTokens,
+  getPlayerNumberWithMatchingToken,
 } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
@@ -42,8 +42,8 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
 export const insomniac_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  const currentPlayerNumber = getPlayerNumbersWithMatchingTokens(newGameState.players, [token])
-  const currentCard = newGameState.card_positions[currentPlayerNumber[0]].card
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
+  const currentCard = newGameState.card_positions[currentPlayerNumber].card
 
   if (!newGameState.players[token].shield) {
     newGameState.players[token].card.player_card_id = currentCard.id
@@ -54,14 +54,14 @@ export const insomniac_interaction = (gameState, token, title) => {
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      viewed_cards: currentPlayerNumber,
+      viewed_cards: [currentPlayerNumber],
     }
 
     return generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_own'],
+      private_message: ['interaction_own_card'],
       icon: 'insomniac',
       showCards: showCards,
-      uniqInformations: { viewed_cards: currentPlayerNumber }
+      uniqInformations: { viewed_cards: [currentPlayerNumber] }
     })
   } else {
     newGameState.players[token].player_history = {

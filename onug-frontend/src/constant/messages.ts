@@ -17,7 +17,9 @@ export const interaction_werewolves = 'Look for Werewolves'
 export const interaction_tanner = 'Look for Tanner'
 export const interaction_mad = 'Look for Mad Scientist'
 export const interaction_masons = 'Look for Masons'
-export const interaction_own = 'Look for yourself'
+export const interaction_lover = 'Look for your love interest'
+export const interaction_own_card = 'Look for your own card'
+export const interaction_own_mark = 'Look for your own mark'
 
 //TODO better idea?
 export const interaction_seer_end = 'two center'

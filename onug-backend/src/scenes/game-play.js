@@ -60,7 +60,7 @@ const getNextScene = (gameState) => {
       )
     })
 
-    if (newGameState.actual_scene.scene_title === 'VOTE') {
+    if (newGameState.actual_scene.scene_title === 'JOKE') {
       newGameState.game_stopped = true
       return newGameState
     }

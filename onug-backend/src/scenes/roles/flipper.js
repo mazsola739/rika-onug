@@ -21,8 +21,14 @@ export const flipper = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 59 || (newGameState.players[token].card.player_role_id === 59 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 59 && newGameState.players[token].card.player_original_id === 64)) {
-      interaction = flipper_interaction(newGameState, token, title)
+    if (prefix === 'flipper') {
+      if (newGameState.players[token].card.player_original_id === 59 || (newGameState.players[token].card.player_role_id === 59 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 59 && newGameState.players[token].card.player_original_id === 64)) {
+        interaction = flipper_interaction(newGameState, token, title)
+      }
+    } else if (prefix === 'doppelganger_flipper') {
+      if (newGameState.players[token].card.player_role_id === 59 && newGameState.players[token].card.player_original_id === 1) {
+        interaction = flipper_interaction(newGameState, token, title)
+      }
     }
 
     scene.push({
