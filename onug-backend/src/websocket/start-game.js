@@ -4,8 +4,8 @@ import { validateRoom } from '../validator';
 import { upsertRoomState } from '../repository';
 import { STAGES } from '../constant/stage';
 import { broadcast } from './connections'
-import { startGamePlay } from '../screen-play';
 import { REDIRECT } from '../constant';
+import { startGamePlay } from '../scenes/game-play';
 
 export const startGame = async (ws, message) => {
   const { room_id, token } = message

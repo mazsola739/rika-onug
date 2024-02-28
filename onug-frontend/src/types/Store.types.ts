@@ -131,7 +131,9 @@ export type PositionType = {
 export type PlayersType = {
   player_name: string
   player_number: string
-  ready: boolean
+  ready?: boolean  
+  voted?: boolean
+
 }
 
 export type GameTableBoardCardType = {

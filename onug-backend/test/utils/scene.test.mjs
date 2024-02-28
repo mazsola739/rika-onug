@@ -1,6 +1,6 @@
 import { describe, it } from "node:test"
 import { strictEqual, deepEqual } from "node:assert"
-import { moveCards } from "../../../src/utils/scene"
+import { moveCards } from "../../../src/utils/scene-utils"
 
 describe("Test scene utils", () => {
     it("moveCards should correctly move player cards, while the mark should remain.", () => {

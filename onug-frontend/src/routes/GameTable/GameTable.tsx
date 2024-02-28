@@ -25,7 +25,7 @@ import { gameTableUtils } from './GameTable.utils'
 import { GameTableFooter } from './GameTableFooter'
 import { GameTableHeader } from './GameTableHeader'
 import { useNavigate } from 'react-router-dom'
-import { DealtCards, Main, OwnCard, PlayerList } from 'components'
+import { DealtCards, Main, OwnCard, ReadyList } from 'components'
 
 const { renderMarks, renderArtifacts } = gameTableUtils
 
@@ -94,7 +94,7 @@ export const GameTable: React.FC = observer(() => {
           <DealtCards />
           {hasMarks && renderMarks(selectedMarks)}
         </GameArea>
-        <Ready>{players && <PlayerList players={players} />}</Ready>
+        <Ready>{players && <ReadyList players={players} />}</Ready>
       </Main>
       <GameTableFooter />
     </StyledGameTable>
