@@ -32,6 +32,8 @@ class RoleStore {
         const mad = (lastJsonMessage.interaction.mad || []).includes(position) || false
         const masons =
           (lastJsonMessage.interaction.masons || []).includes(position) || false
+          const assassin =
+          (lastJsonMessage.interaction.assassin || []).includes(position) || false
 
         const showCard = (lastJsonMessage.interaction.show_cards || []).find(
           (showCardObj) => Object.keys(showCardObj)[0] === position
@@ -52,8 +54,8 @@ class RoleStore {
           shield,
           /* spy,
           aliens,
-          artifact,
-          assassin, */
+          artifact,*/
+          assassin, 
           //awesome,
           //babyalien,
           /* bat,

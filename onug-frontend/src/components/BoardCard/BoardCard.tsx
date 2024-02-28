@@ -162,7 +162,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
         <Tokens>
           {isCenter && spy && <Icon iconName="spy" size={25} />}
           {!isCenter && shielded_cards && <Icon iconName="shield" size={25} />}
-          {!isCenter && artifact && <Icon iconName="artifact" size={25} />}
+          {/* {!isCenter && artifact && <Icon iconName="artifact" size={25} />} */}
           {!isCenter && aliens && <Icon iconName="alien" size={25} />}
           {!isCenter && assassin && <Icon iconName="assassin" size={25} />}
           {!isCenter && awesome && <Icon iconName="awesome" size={25} />}

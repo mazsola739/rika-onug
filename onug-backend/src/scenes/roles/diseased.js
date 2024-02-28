@@ -82,7 +82,7 @@ export const diseased_response = (gameState, token, selected_mark_positions, tit
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_diseased', selected_mark_positions[0]],
+    private_message: ['interaction_mark_of_diseased', selected_mark_positions[0]],
     icon: 'diseased',
     uniqInformations: { mark_of_disease: [selected_mark_positions[0]] },
   })

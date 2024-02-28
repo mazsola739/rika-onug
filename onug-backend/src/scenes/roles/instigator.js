@@ -50,6 +50,7 @@ export const instigator_interaction = (gameState, token, title) => {
     selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 } },
   })
 }
+
 export const instigator_response = (gameState, token, selected_mark_positions, title) => {
   if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
     return gameState
@@ -88,7 +89,7 @@ export const instigator_response = (gameState, token, selected_mark_positions, t
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_traitor', selected_mark_positions[0]],
+    private_message: ['interaction_mark_of_traitor', selected_mark_positions[0]],
     icon: 'traitor',
     uniqInformations: { mark_of_traitor: [selected_mark_positions[0]] },
   })

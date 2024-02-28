@@ -43,7 +43,7 @@ export const pickpocket = (gameState, title, prefix) => {
 export const pickpocket_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players,[token])
+  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
@@ -67,8 +67,8 @@ export const pickpocket_response = (gameState, token, selected_mark_positions, t
   const scene = []
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
-  const currentPlayerMark = { ...newGameState.card_positions[currentPlayerNumber].mark }
-  const selectedMark = { ...newGameState.card_positions[selected_mark_positions[0]].mark }
+  const currentPlayerMark = newGameState.card_positions[currentPlayerNumber].mark 
+  const selectedMark = newGameState.card_positions[selected_mark_positions[0]].mark 
   newGameState.card_positions[currentPlayerNumber].mark = selectedMark
   newGameState.card_positions[selected_mark_positions[0]].mark = currentPlayerMark
 

@@ -15,9 +15,10 @@ export const interaction_must_two_any = 'You must choose any two players (includ
 //any specific player
 export const interaction_werewolves = 'Look for Werewolves'
 export const interaction_tanner = 'Look for Tanner'
+export const interaction_assassin = 'Look for Assassin'
 export const interaction_mad = 'Look for Mad Scientist'
 export const interaction_masons = 'Look for Masons'
-export const interaction_lover = 'Look for your love interest'
+export const interaction_mark_of_lover = 'Look for your love interest'
 export const interaction_own_card = 'Look for your own card'
 export const interaction_own_mark = 'Look for your own mark'
 
@@ -57,8 +58,12 @@ export const interaction_tap = 'You tapped'
 //moved
 export const interaction_moved = 'You moved cards to'
 //mark_of_love
-export const interaction_love = 'You placed Mark of Love front of'
+export const interaction_mark_of_love = 'You placed Mark of Love front of'
 //mark_of_disease
-export const interaction_diseased = 'You placed Mark of Disease front of'
+export const interaction_mark_of_diseased = 'You placed Mark of Disease front of'
 //mark_of_traitor
-export const interaction_traitor = 'You placed Mark of the Traitor front of'
+export const interaction_mark_of_traitor = 'You placed Mark of the Traitor front of'
+//mark_of_clarity
+export const interaction_mark_of_clarity = 'You placed Mark of Clarity front of yourself and'
+//mark_of_assassin
+export const interaction_mark_of_assassin = 'You placed Mark of Assassin front of'

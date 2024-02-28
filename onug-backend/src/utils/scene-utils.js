@@ -119,6 +119,18 @@ export const getTannerNumberByRoleIds = players => {
   return result
 }
 
+export const getAssassinNumberByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    if (players[token].card.player_role_id === 29) {
+      result.push(`player_${players[token].player_number}`)
+    }
+  }
+
+  return result
+}
+
 export const getWerewolfAndDreamwolfPlayerNumbersByRoleIds = (players) => {
   const result = []
 
