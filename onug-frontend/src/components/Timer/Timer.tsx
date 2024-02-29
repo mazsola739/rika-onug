@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { gameBoardStore } from 'store'
 
 export const Timer: React.FC<TimerProps> = observer(
-  ({ startingTime, actionTime = 8000 }) => {
+  ({ startingTime, actionTime = 20000 }) => {
     const [remainingTime, setRemainingTime] = useState(0)
 
     //TODO rethink

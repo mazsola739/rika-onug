@@ -1,5 +1,5 @@
 //@ts-check
-import { masonIds, werewolvesAndDreamWolfIds, werewolvesIds } from "../constant"
+import { masonIds, vampireIds, werewolvesAndDreamWolfIds, werewolvesIds } from "../constant"
 import artifacts from '../data/artifacts.json'
 import _ from 'lodash'
 
@@ -88,6 +88,45 @@ export const getDreamWolfPlayerNumberByRoleIds = players => {
 
   for (const token in players) {
     if (players[token].card.player_role_id === 21) {
+      result.push(`player_${players[token].player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getVampirePlayerNumbersByRoleIds = (players) => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (vampireIds.includes(player.card.player_role_id)) {
+      result.push(`player_${players[token].player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getVampireTokensByRoleIds = (players) => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (vampireIds.includes(player.card.player_role_id)) {
+      result.push(token)
+    }
+  }
+
+  return result
+}
+
+export const getNonVampirePlayerNumbersByRoleIds = (players) => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (!vampireIds.includes(player.card.player_role_id)) {
       result.push(`player_${players[token].player_number}`)
     }
   }
@@ -274,6 +313,55 @@ export const moveCards = (cards, direction, currentPlayer) => {
 
   return updatedPlayerCards
 }
+
+export const countPlayersVoted = (players) => {
+  let votedCount = 0
+
+  Object.values(players).forEach(player => {
+      if (player.vampire_vote) {
+          votedCount++
+      }
+  })
+  
+  return votedCount
+}
+
+export const getPlayerNumbersWhoGotVoted = (players) => {
+  const playersVotedFor = new Set()
+  
+  Object.values(players).forEach(player => {
+      if (player.vampire_vote) {
+          playersVotedFor.add(player.vampire_vote)
+      }
+  })
+  
+  return [...playersVotedFor]
+}
+
+
+export const findMostVotedPlayer = (gameState) => {
+  const voteCount = {}
+  
+  Object.values(gameState.players).forEach(player => {
+      const vote = player.vampire_vote
+      if (vote) {
+          voteCount[vote] = (voteCount[vote] || 0) + 1
+      }
+  })
+  
+  let mostVotedPlayer = null
+  let maxVotes = -1
+  
+  Object.entries(voteCount).forEach(([player, count]) => {
+      if (count > maxVotes || (count === maxVotes && voteCount[player] > voteCount[mostVotedPlayer])) {
+          mostVotedPlayer = player
+          maxVotes = count
+      }
+  })
+  
+  return mostVotedPlayer
+}
+
 
 //RIPPLE
 export const pickRandomOnePlayer = (numPlayers) => shufflePlayers(numPlayers)[0]

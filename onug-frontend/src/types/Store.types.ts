@@ -108,6 +108,7 @@ export type WsJsonMessage = {
   }
   message?: string[]
   icon?: string
+  votes?: string[]
 }
 
 export type RoomType = {

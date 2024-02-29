@@ -97,9 +97,9 @@ describe("Test scene utils", () => {
                 },
             },
         ]
-        testData.forEach( data => {
-            const {cards, direction, currentPlayer, expectedUpdatedPlayerCards} = data
-          console.log(`testing move cards:
+        testData.forEach(data => {
+            const { cards, direction, currentPlayer, expectedUpdatedPlayerCards } = data
+            console.log(`testing move cards:
 cards:
 ${JSON.stringify(cards, null, 4)}
 

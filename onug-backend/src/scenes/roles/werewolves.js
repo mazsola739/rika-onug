@@ -51,8 +51,7 @@ export const werewolves_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: loneWolf ? centerCardPositions : [],
-    selectable_card_limit: { player: 0, center: 1 },
+    selectable_cards: loneWolf ? centerCardPositions : [], selectable_card_limit: { player: 0, center: 1 },
     werewolves,
     dreamwolf,
   }

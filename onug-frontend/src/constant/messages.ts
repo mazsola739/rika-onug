@@ -14,6 +14,7 @@ export const interaction_must_two_any = 'You must choose any two players (includ
 
 //any specific player
 export const interaction_werewolves = 'Look for Werewolves'
+export const interaction_vampires = 'Look for Vampires'
 export const interaction_tanner = 'Look for Tanner'
 export const interaction_assassin = 'Look for Assassin'
 export const interaction_mad = 'Look for Mad Scientist'

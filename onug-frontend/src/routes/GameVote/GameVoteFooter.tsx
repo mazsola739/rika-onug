@@ -3,10 +3,6 @@ import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
 
 export const GameVoteFooter: React.FC = observer(() => {
-  const handleStopGame = useCallback(() => {
-    console.log('stop')
-  }, [])
-
   const handleVoteNow = useCallback(() => {
     console.log('Vote now')
   }, [])

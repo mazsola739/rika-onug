@@ -22,7 +22,6 @@ export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
     let interaction = {}
 
     if (prefix === 'apprenticeassassin') {
-      console.log("hali")
       if (newGameState.players[token].card.player_original_id === 28 || (newGameState.players[token].card.player_role_id === 28 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 28 && newGameState.players[token].card.player_original_id === 64)) {
         interaction = apprenticeassassin_interaction(newGameState, token, title)
       }
@@ -47,7 +46,7 @@ export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
 
 export const apprenticeassassin_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-console.log("started")
+  
   const assassin = getAssassinNumberByRoleIds(newGameState.players)
 
   if (assassin.length > 0) {
