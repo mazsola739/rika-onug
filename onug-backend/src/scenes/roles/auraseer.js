@@ -37,8 +37,20 @@ export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
 export const auraseer_interaction = (gameState, token, title) => {
   return {}
 }
+
 export const auraseer_response = (gameState, token, selected_card_positions, title) => {
-  return {}
+  const newGameState = { ...gameState }
+  const scene = []
+  const interaction = {}
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }
 
 /*AURA SEER moved viewed Copycat, Doppelgänger, Rascal, Body Snatcher, Alpha Wolf, Mystic Wolf, Seer, Exposer, 

@@ -57,7 +57,7 @@ export const troublemaker_interaction = (gameState, token, title) => {
 }
 
 export const troublemaker_response = (gameState, token, selected_card_positions, title) => {
-    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
   const newGameState = { ...gameState }

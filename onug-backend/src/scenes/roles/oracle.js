@@ -97,7 +97,18 @@ export const oracle_question_interaction = (gameState, token, title) => {
 }
 //TODO newGameState.oracle.answer = ? if no answer do sure answer
 export const oracle_question_response = (gameState, token, selected_card_positions, title) => {
-  return {}
+  const newGameState = { ...gameState }
+  const scene = []
+  const interaction = {}
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }
 
 export const oracle_answer = (gameState, title) => {
@@ -142,5 +153,16 @@ export const oracle_answer = (gameState, title) => {
 }
 
 export const oracle_answer_interaction = (gameState, token, title) => {
-  return {}
+  const newGameState = { ...gameState }
+  const scene = []
+  const interaction = {}
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

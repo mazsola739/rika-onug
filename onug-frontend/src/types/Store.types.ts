@@ -60,10 +60,18 @@ export type WsJsonMessage = {
     flipped_cards?: string[]
     new_artifact_card?: string
     new_shield_card?: string
+    mark_of_vampire?: string[]
+    mark_of_fear?: string[]
+    mark_of_bat?: string[]
+    mark_of_disease?: string[]
     mark_of_love?: string[]
+    mark_of_traitor?: string[]
+    mark_of_clarity?: string[]
+    mark_of_assassin?: string[]
 
     //icons
     aliens?: string[]
+    artifact?: string[]
     assassin?: string[]
     awesome?: string[]
     bat?: string[]
@@ -82,6 +90,7 @@ export type WsJsonMessage = {
     fang?: string[]
     fear?: string[]
     friend?: string[]
+    interaction?: string[]
     jest?: string[]
     like?: string[]
     lovers?: string[]

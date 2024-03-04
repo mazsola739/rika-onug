@@ -121,13 +121,13 @@ export const getVampireTokensByRoleIds = (players) => {
   return result
 }
 
-export const getNonVampirePlayerNumbersByRoleIds = (players) => {
+export const getNonVampirePlayerNumbersByRoleIds = (gameState) => {
   const result = []
 
-  for (const token in players) {
-    const player = players[token]
-    if (!vampireIds.includes(player.card.player_role_id)) {
-      result.push(`player_${players[token].player_number}`)
+  for (const token in gameState.players) {
+    const player = gameState.players[token]
+    if (!vampireIds.includes(player.card.player_role_id) && gameState.card_positions[`player_${gameState.players[token].player_number}`].mark !== "mark_of_vampire") {
+      result.push(`player_${gameState.players[token].player_number}`)
     }
   }
 
@@ -202,6 +202,19 @@ export const getLoversPlayerNumbersByMark = (players) => {
   for (const token in players) {
     const player = players[token]
     if (player.player_mark === "mark_of_love") {
+      result.push(`player_${players[token].player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getVampirePlayerNumbersByMark = (players) => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (player.player_mark === "mark_of_vampire") {
       result.push(`player_${players[token].player_number}`)
     }
   }

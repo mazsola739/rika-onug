@@ -1,7 +1,7 @@
 //@ts-check
 import { logDebug, logError } from '../log'
 import { readGameState, upsertRoomState } from '../repository'
-import { doppelganger_instant_action_response, alphawolf_response, thing_response, apprenticeseer_response, doppelganger_response, curator_response, revealer_response, cupid_response, seer_response, diseased_response, drpeeker_response, drunk_response, instigator_response, mysticwolf_response, paranormalinvestigator_response, rapscallion_response, robber_response, sentinel_response, troublemaker_response, temptress_response, villageidiot_response, witch_response, werewolves_response, copycat_response, marksman_response, gremlin_response, priest_response, assassin_response, apprenticeassassin_response, vampires_response } from '../scenes/roles'
+import { doppelganger_instant_action_response, alphawolf_response, thing_response, apprenticeseer_response, doppelganger_response, curator_response, revealer_response, cupid_response, seer_response, diseased_response, drpeeker_response, drunk_response, instigator_response, mysticwolf_response, paranormalinvestigator_response, rapscallion_response, robber_response, sentinel_response, troublemaker_response, temptress_response, villageidiot_response, witch_response, werewolves_response, copycat_response, marksman_response, gremlin_response, priest_response, assassin_response, apprenticeassassin_response, vampires_response, thecount_response, squire_response } from '../scenes/roles'
 import { websocketServerConnectionsPerRoom } from './connections'
 import { pickpocket, pickpocket_response } from './../scenes/roles/pickpocket';
 
@@ -77,6 +77,9 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
     case "DOPPELGÄNGER_REVEALER":
       newGameState = revealer_response(gameState, token, selected_card_positions, interaction_type)
       break
+    case "DOPPELGÄNGER_THE_COUNT":
+      newGameState = thecount_response(gameState, token, selected_mark_positions, interaction_type)
+      break
     case "COPYCAT":
       newGameState = copycat_response(gameState, token, selected_card_positions, interaction_type)
       break
@@ -143,11 +146,17 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
     case "SENTINEL":
       newGameState = sentinel_response(gameState, token, selected_card_positions, interaction_type)
       break
+    case "SQUIRE":
+      newGameState = squire_response(gameState, token, answer, interaction_type)
+      break
     case "SWITCHEROO":
       newGameState = troublemaker_response(gameState, token, selected_card_positions, interaction_type)
       break
     case "TEMPTRESS":
       newGameState = temptress_response(gameState, token, selected_card_positions, interaction_type)
+      break
+    case "THE_COUNT":
+      newGameState = thecount_response(gameState, token, selected_mark_positions, interaction_type)
       break
     case "THING":
       newGameState = thing_response(gameState, token, selected_card_positions, interaction_type)
@@ -156,7 +165,7 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
       newGameState = troublemaker_response(gameState, token, selected_card_positions, interaction_type)
       break
     case "VAMPIRES":
-      newGameState = vampires_response(gameState, token, selected_mark_positions, interaction_type, ws)
+      newGameState = vampires_response(gameState, token, selected_mark_positions, interaction_type)
       break
     case "VILLAGE_IDIOT":
       newGameState = villageidiot_response(gameState, token, answer, interaction_type)

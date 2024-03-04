@@ -59,6 +59,18 @@ export const bodysnatcher = (gameState, title, prefix) => {
 export const bodysnatcher_interaction = (gameState, token, title) => {
   return {}
 }
+
 export const bodysnatcher_response = (gameState, token, selected_card_positions, title) => {
-  return {}
+  const newGameState = { ...gameState }
+  const scene = []
+  const interaction = {}
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

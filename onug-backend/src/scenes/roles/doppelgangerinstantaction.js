@@ -51,22 +51,14 @@ const getRolesNames = (selectedCardIds, actionIds, roles) =>
 
 const addVerboseOr = (rolesFromIds) => {
   if (rolesFromIds.length > 1) {
-    rolesFromIds.splice(
-      rolesFromIds.length - 1,
-      0,
-      'doppelganger_verbose_or_text'
-    )
+    rolesFromIds.splice(rolesFromIds.length - 1, 0, 'doppelganger_verbose_or_text')
   }
   rolesFromIds
 }
 
 export const doppelganger_instant_action = (gameState, title) => {
   const newGameState = { ...gameState }
-  const rolesFromIds = getRolesNames(
-    newGameState.selected_cards,
-    doppelgangerInstantActionsIds,
-    instantRoleIds
-  )
+  const rolesFromIds = getRolesNames(newGameState.selected_cards, doppelgangerInstantActionsIds, instantRoleIds)
 
   addVerboseOr(rolesFromIds)
   
@@ -83,11 +75,7 @@ export const doppelganger_instant_action = (gameState, title) => {
     let interaction = {}
 
     if (newGameState.players[token].card.player_original_id === 1) {
-      interaction = doppelganger_instant_action_interaction(
-        newGameState,
-        token,
-        title
-      )
+      interaction = doppelganger_instant_action_interaction(newGameState, token, title)
     }
 
     scene.push({

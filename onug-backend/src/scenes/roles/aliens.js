@@ -1,10 +1,6 @@
 //@ts-check
 import { SCENE, alienIds } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getRandomItemFromArray,
-  pickRandomUpToThreePlayers,
-} from '../../utils'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../utils'
 
 const random_aliens = [
   'aliens_view_text',
@@ -85,6 +81,18 @@ export const aliens = (gameState, title) => {
 export const aliens_interaction = (gameState, token, title) => {
   return {}
 }
+
 export const aliens_response = (gameState, token, selected_card_positions, title) => {
-  return {}
+  const newGameState = { ...gameState }
+  const scene = []
+  const interaction = {}
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

@@ -11,6 +11,7 @@ export const interaction_must_one_any_other = 'You must choose any other player'
 export const interaction_may_one_any = 'You may choose any player (including yourself)'
 export const interaction_must_one_any = 'You must choose any player (including yourself)'
 export const interaction_must_two_any = 'You must choose any two players (including yourself)'
+export const interaction_must_three_any = 'You must choose any three players (including yourself)'
 
 //any specific player
 export const interaction_werewolves = 'Look for Werewolves'
@@ -30,12 +31,15 @@ export const interaction_one_any_non_werewolf = 'You must choose any other non-w
 export const interaction_must_one_neighbor = 'You must choose any player of your neighbors'
   
 export const interaction_may_direction = 'You may choose a direction to move other players cards'
+export const interaction_may_look = 'You may look at the cards'
 
 //center card
 export const interaction_may_one_center = 'You may choose center'
 export const interaction_must_one_center = 'You must choose center'
 
 //responses
+//nothing
+export const interaction_nothing = 'You chose to do nothing'
 //shielded
 export const interaction_shielded = 'You are unable to do you action, you have shield'
 //new role,
@@ -58,10 +62,17 @@ export const interaction_swapped_marks = 'You swapped marks between'
 export const interaction_tap = 'You tapped'
 //moved
 export const interaction_moved = 'You moved cards to'
+
+//mark_of_vampire
+export const interaction_mark_of_vampire = 'You placed Mark of Vampire front of'
+//mark_of_fear
+export const interaction_mark_of_fear = 'You placed Mark of Fear front of'
+//mark_of_bat
+export const interaction_mark_of_bat = 'You placed Mark of Bat front yourself'
+//mark_of_disease
+export const interaction_mark_of_disease = 'You placed Mark of Disease front of'
 //mark_of_love
 export const interaction_mark_of_love = 'You placed Mark of Love front of'
-//mark_of_disease
-export const interaction_mark_of_diseased = 'You placed Mark of Disease front of'
 //mark_of_traitor
 export const interaction_mark_of_traitor = 'You placed Mark of the Traitor front of'
 //mark_of_clarity

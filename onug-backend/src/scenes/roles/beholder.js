@@ -2,13 +2,7 @@
 import { SCENE } from '../../constant'
 import { getAllPlayerTokens } from '../../utils/scene-utils'
 
-export const beholder = (
-  gameState,
-  title,
-  hasSeer,
-  hasApprenticeSeer,
-  hasDoppelganger
-) => {
+export const beholder = (gameState, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const narration = [
     hasDoppelganger
@@ -48,5 +42,16 @@ export const beholder_interaction = (gameState, token, title) => {
   return {}
 }
 export const beholder_response = (gameState, token, selected_card_positions, title) => {
-  return {}
+  const newGameState = { ...gameState }
+  const scene = []
+  const interaction = {}
+  scene.push({
+    type: SCENE,
+    title,
+    token,
+    interaction,
+  })
+  newGameState.scene = scene
+
+  return newGameState
 }

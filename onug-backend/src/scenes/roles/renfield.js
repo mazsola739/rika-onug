@@ -1,6 +1,7 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getVampirePlayerNumbersByMark, getVampirePlayerNumbersByRoleIds } from '../../utils/scene-utils'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const renfield = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
@@ -35,8 +36,34 @@ export const renfield = (gameState, title, hasDoppelganger) => {
 }
 
 export const renfield_interaction = (gameState, token, title) => {
-  return {}
-}
-export const renfield_response = (gameState, token, selected_card_positions, title) => {
-  return {}
+  const newGameState = { ...gameState }
+
+  const vampires = getVampirePlayerNumbersByRoleIds(newGameState.players)
+  const newVampire = getVampirePlayerNumbersByMark(newGameState.players)
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
+  const currentPlayerMark = newGameState.card_positions[currentPlayerNumber].mark
+
+  if (gameState.players[token].card.player_original_id === 1) {
+    const batPosition = newGameState.doppelganger_mark_positions.bat
+    newGameState.doppelganger_mark_positions.bat = currentPlayerMark
+    newGameState.card_positions[currentPlayerNumber].mark = batPosition
+  } else {
+    const batPosition = newGameState.mark_positions.bat
+    newGameState.mark_positions.bat = currentPlayerMark
+    newGameState.card_positions[currentPlayerNumber].mark = batPosition
+  }
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    vampires, 
+    new_vampire: newVampire, 
+    mark_of_bat: [currentPlayerNumber]
+  }
+
+  return generateRoleInteraction(newGameState, token, {
+    private_message: ['interaction_vampires', 'interaction_mark_of_bat'],
+    icon: 'bat',
+    uniqInformations: { vampires, new_vampire: newVampire, mark_of_bat: [currentPlayerNumber] },
+  })
 }

@@ -57,12 +57,7 @@ export const thing_interaction = (gameState, token, title) => {
 }
 
 export const thing_response = (gameState, token, selected_card_positions, title) => {
-  if (
-    !isValidCardSelection(
-      selected_card_positions,
-      gameState.players[token].player_history
-    )
-  ) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
   const newGameState = { ...gameState }
@@ -86,13 +81,13 @@ export const thing_response = (gameState, token, selected_card_positions, title)
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    tapped_player: [selected_card_positions[0]],
+    tapped: [selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_tap', selected_card_positions[0]],
     icon: 'tap',
-    uniqInformations: { tapped_player: [selected_card_positions[0]] },
+    uniqInformations: { tapped: [selected_card_positions[0]] },
   })
 
   scene.push({

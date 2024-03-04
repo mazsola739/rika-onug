@@ -44,6 +44,7 @@ export type IconType =
   | 'newalien'
   | 'nice'
   | 'night'
+  | 'nostradamus'
   | 'oracle'
   | 'pretty'
   | 'robber'

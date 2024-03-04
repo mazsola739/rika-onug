@@ -3,6 +3,7 @@ import { HYDRATE_VOTES, MESSAGE, SCENE, vampireIds } from '../../constant'
 import { countPlayersVoted, findMostVotedPlayer, getAllPlayerTokens, getNonVampirePlayerNumbersByRoleIds, getPlayerNumbersWhoGotVoted, getVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
+import { websocketServerConnectionsPerRoom } from './../../websocket/connections';
 
 export const vampires = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -35,7 +36,7 @@ export const vampires_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const vampires = getVampirePlayerNumbersByRoleIds(newGameState.players)
-  const nonVampires = getNonVampirePlayerNumbersByRoleIds(newGameState.players)
+  const nonVampires = getNonVampirePlayerNumbersByRoleIds(newGameState)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
@@ -52,11 +53,10 @@ export const vampires_interaction = (gameState, token, title) => {
   })
 }
 
-export const vampires_response = (gameState, token, selected_mark_positions, title, ws) => {
+export const vampires_response = (gameState, token, selected_mark_positions, title) => {
   if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
     return gameState
   }
-
   const newGameState = { ...gameState }
   const scene = []
 
@@ -68,37 +68,38 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
 
   if (alreadyVoted < vampireTokens.length) {
     vampireTokens.forEach((token) => {
-      ws.send(
-        JSON.stringify({ type: HYDRATE_VOTES, votes: playerNumbersWhoGotVoted })
-      )
+      websocketServerConnectionsPerRoom[newGameState.room_id][token].send(JSON.stringify({
+        type: HYDRATE_VOTES,
+        votes: playerNumbersWhoGotVoted,
+      }))
     })
   } else if (alreadyVoted === vampireTokens.length) {
     newGameState.players[token].card_or_mark_action = true
 
     const mostVotedPlayer = findMostVotedPlayer(newGameState)
-    console.log(mostVotedPlayer)
+
+    newGameState.players[token].player_history = {
+      ...newGameState.players[token].player_history,
+      scene_title: title,
+      card_or_mark_action: true,
+      mark_of_vampire: [mostVotedPlayer],
+    }
+
+    const interaction = generateRoleInteraction(newGameState, token, {
+      private_message: ['interaction_mark_of_vampire', mostVotedPlayer],
+      icon: 'fang',
+      uniqInformations: { mark_of_vampire: [mostVotedPlayer] },
+    })
+
+    scene.push({
+      type: SCENE,
+      title,
+      token,
+      interaction,
+    })
+    newGameState.scene = scene
+
   }
-
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
-    card_or_mark_action: true,
-    mark_of_vampire: [selected_mark_positions[0]],
-  }
-
-  const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_mark_of_diseased', selected_mark_positions[0]],
-    icon: 'diseased',
-    uniqInformations: { mark_of_disease: [selected_mark_positions[0]] },
-  })
-
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
-  newGameState.scene = scene
 
   return newGameState
 }

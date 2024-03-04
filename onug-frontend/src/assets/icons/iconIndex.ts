@@ -42,6 +42,7 @@ import MuteIcon from './mute.svg?react'
 import NewalienIcon from './newalien.svg?react'
 import NiceIcon from './nice.svg?react'
 import NightIcon from './night.svg?react'
+import NostradamusIcon from './nostradamus.svg?react'
 import OpenIcon from './open.svg?react'
 import OracleIcon from './oracle.svg?react'
 import PrettyIcon from './pretty.svg?react'
@@ -112,6 +113,7 @@ export {
   NewalienIcon,
   NiceIcon,
   NightIcon,
+  NostradamusIcon,
   OpenIcon,
   OracleIcon,
   PrettyIcon,

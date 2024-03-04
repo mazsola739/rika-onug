@@ -39,7 +39,7 @@ export const doppelganger = (gameState, title) => {
 export const doppelganger_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players,[token])
+  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
   newGameState.players[token].player_history = {
@@ -56,10 +56,9 @@ export const doppelganger_interaction = (gameState, token, title) => {
 }
 
 export const doppelganger_response = (gameState, token, selected_card_positions, title) => {
-    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
-
   const newGameState = { ...gameState }
   const scene = []
 
@@ -69,8 +68,8 @@ export const doppelganger_response = (gameState, token, selected_card_positions,
 
   const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
 
-  ;(newGameState.players[token].player_history.show_cards = showCards),
-    (newGameState.players[token].new_role_id = newGameState.players[token].card.player_role_id)
+    ; (newGameState.players[token].player_history.show_cards = showCards),
+      (newGameState.players[token].new_role_id = newGameState.players[token].card.player_role_id)
   newGameState.players[token].card_or_mark_action = true
 
   newGameState.players[token].player_history = {

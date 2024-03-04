@@ -18,7 +18,7 @@ export const mysticwolf = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 22  || (newGameState.players[token].card.player_role_id === 22 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 22 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 22 || (newGameState.players[token].card.player_role_id === 22 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 22 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = mysticwolf_interaction(newGameState, token, title)
     }
 
@@ -57,10 +57,9 @@ export const mysticwolf_interaction = (gameState, token, title) => {
 }
 
 export const mysticwolf_response = (gameState, token, selected_card_positions, title) => {
-    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
-
   const newGameState = { ...gameState }
   const scene = []
 

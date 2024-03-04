@@ -54,7 +54,6 @@ export const diseased_response = (gameState, token, selected_mark_positions, tit
   if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
     return gameState
   }
-
   const newGameState = { ...gameState }
   const scene = []
 
@@ -68,7 +67,7 @@ export const diseased_response = (gameState, token, selected_mark_positions, tit
     const diseasePosition = newGameState.mark_positions.disease
     const selectedPosition = newGameState.card_positions[selected_mark_positions[0]].mark
 
-    newGameState.mark_positions.diseased = selectedPosition
+    newGameState.mark_positions.disease = selectedPosition
     newGameState.card_positions[selected_mark_positions[0]].mark = diseasePosition
   }
 
@@ -82,7 +81,7 @@ export const diseased_response = (gameState, token, selected_mark_positions, tit
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_mark_of_diseased', selected_mark_positions[0]],
+    private_message: ['interaction_mark_of_disease', selected_mark_positions[0]],
     icon: 'diseased',
     uniqInformations: { mark_of_disease: [selected_mark_positions[0]] },
   })

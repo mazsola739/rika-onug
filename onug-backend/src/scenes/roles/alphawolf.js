@@ -37,9 +37,7 @@ export const alphawolf = (gameState, title) => {
 export const alphawolf_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(
-    newGameState.players
-  )
+  const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(newGameState.players)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
@@ -55,9 +53,10 @@ export const alphawolf_interaction = (gameState, token, title) => {
 }
 
 export const alphawolf_response = (gameState, token, selected_card_positions, title) => {
-    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
+
   const newGameState = { ...gameState }
   const scene = []
 
@@ -76,7 +75,7 @@ export const alphawolf_response = (gameState, token, selected_card_positions, ti
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_cards',  selected_card_positions[0], 'center_wolf'],
+    private_message: ['interaction_swapped_cards', selected_card_positions[0], 'center_wolf'],
     icon: 'claw',
     uniqInformations: { swapped_cards: [selected_card_positions[0], 'center_wolf'], claw: [selected_card_positions[0]] },
   })

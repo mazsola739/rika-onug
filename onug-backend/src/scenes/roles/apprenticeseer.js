@@ -37,22 +37,18 @@ export const apprenticeseer_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: centerCardPositions,
-    selectable_card_limit: { player: 0, center: 1 },
+    selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 },
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_center'],
     icon: 'spy',
-    selectableCards: {
-      selectable_cards: centerCardPositions,
-      selectable_card_limit: { player: 0, center: 1 },
-    },
+    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 } },
   })
 }
 
 export const apprenticeseer_response = (gameState, token, selected_card_positions, title) => {
-    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
   const newGameState = { ...gameState }

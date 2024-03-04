@@ -44,10 +44,7 @@ export const copycat_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_must_one_center'],
     icon: 'copy',
-    selectableCards: {
-      selectable_cards: centerCardPositions,
-      selectable_card_limit: { player: 0, center: 1 },
-    },
+    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 } },
   })
 }
 
@@ -55,7 +52,6 @@ export const copycat_response = (gameState, token, selected_card_positions, titl
   if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
-
   const newGameState = { ...gameState }
   const scene = []
 

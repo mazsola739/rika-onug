@@ -18,7 +18,7 @@ export const paranormalinvestigator = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 23  || (newGameState.players[token].card.player_role_id === 23 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 23 && newGameState.players[token].card.player_original_id === 64)) {
+    if (newGameState.players[token].card.player_original_id === 23 || (newGameState.players[token].card.player_role_id === 23 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 23 && newGameState.players[token].card.player_original_id === 64)) {
       interaction = paranormalinvestigator_interaction(newGameState, token, title)
     }
 
@@ -38,25 +38,18 @@ export const paranormalinvestigator = (gameState, title) => {
 export const paranormalinvestigator_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
-    newGameState.players,
-    token
-  )
+  const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(newGameState.players, token)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: selectablePlayerNumbers,
-    selectable_card_limit: { player: 2, center: 0 },
+    selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 },
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_two_any_other'],
     icon: 'investigator',
-    selectableCards: {
-      selectable_cards: selectablePlayerNumbers,
-      selectable_card_limit: { player: 2, center: 0 },
-    },
+    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 } },
   })
 }
 
@@ -64,7 +57,6 @@ export const paranormalinvestigator_response = (gameState, token, selected_card_
   if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
-
   const newGameState = { ...gameState }
   const scene = []
 
@@ -75,22 +67,21 @@ export const paranormalinvestigator_response = (gameState, token, selected_card_
   let showCards = []
 
   if (townIds.includes(playerOneCardId)) {
-    showCards = selectedCards
     if (!townIds.includes(playerTwoCardId)) {
-      showCards = [selectedCards[0]]
-      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
-      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team
-    }
-  } else {
-    if (!townIds.includes(playerTwoCardId)) {
-      showCards = [selectedCards[0]]
-      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
-      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team
+      showCards = selectedCards
+      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[1]].card.role
+      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[1]].card.team
     } else {
       showCards = selectedCards
       if (newGameState.players[token].card.player_original_id === playerOneCardId || newGameState.players[token].card.player_original_id === playerTwoCardId) {
         newGameState.players[token].card.player_card_id = 0
       }
+    }
+  } else {
+    if (!townIds.includes(playerOneCardId)) {
+      showCards = [selectedCards[0]]
+      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
+      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team
     }
   }
 

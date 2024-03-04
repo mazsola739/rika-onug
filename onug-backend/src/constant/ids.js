@@ -7,7 +7,6 @@ export const hasMarkIds = [28, 29, 31, 32, 34, 38, 39, 40, 41]
 
 //Nostradamus
 export const alienTeam = [42, 43, 47, 54, 74]
-
 export const wolfTeam = [7, 15, 16, 17, 21, 22, 83]
 export const vampireTeam = [38, 39, 40, 41]
 export const assassinTeam = [29]
