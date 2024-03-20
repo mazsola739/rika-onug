@@ -1,13 +1,7 @@
 import { CardImage, Header, Token } from 'components'
 import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
-import {
-  PlayerCardInfo,
-  PlayerCardRule,
-  PlayerInfo,
-  PlayerName,
-  StyledGameTableHeader,
-} from './GameTable.styles'
+import { PlayerCardInfo, PlayerCardRule, PlayerInfo, PlayerName, StyledGameTableHeader } from './GameTable.styles'
 import { GameTableHeaderProp } from './GameTable.types'
 
 export const GameTableHeader: React.FC<GameTableHeaderProp> = observer(

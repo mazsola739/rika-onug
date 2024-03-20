@@ -2,11 +2,7 @@ import { deckStore, narrationStore } from 'store'
 import { order } from 'data'
 import { CardType } from 'types'
 import { CardImage } from 'components'
-import {
-  ActualScene,
-  ActualSceneImages,
-  StyledSceneTracker,
-} from './SceneTracker.styles'
+import { ActualScene, ActualSceneImages, StyledSceneTracker } from './SceneTracker.styles'
 import { observer } from 'mobx-react-lite'
 import { useRef, useEffect } from 'react'
 

@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { CenterCardContainer, StyledBoardCards } from './BoardCards.styles'
+import { StyledBoardCards } from './BoardCards.styles'
 import { dealtCardsUtils } from './BoardCards.utils'
 
 const { renderPlayerCards, renderCenterCard } = dealtCardsUtils

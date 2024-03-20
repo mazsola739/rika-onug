@@ -1,21 +1,5 @@
 //@ts-check
-import {
-  vampireIds,
-  alienIds,
-  groobAndZerbIds,
-  superVillainsIds,
-  werewolvesIds,
-  masonIds,
-  goodGuyIds,
-  badGuysIds,
-  doppelgangerInstantActionsIds,
-  seerIds,
-  hasMarkIds,
-  epicVampireIds,
-  epicAlienIds,
-  epicWerewolfIds,
-  epicVillainIds,
-} from '../constant';
+import { vampireIds, alienIds, groobAndZerbIds, superVillainsIds, werewolvesIds, masonIds, goodGuyIds, badGuysIds, doppelgangerInstantActionsIds, seerIds, hasMarkIds, epicVampireIds, epicAlienIds, epicWerewolfIds, epicVillainIds } from '../constant';
 
 export const hasEpicBattle = (selected_cards) => {
   const battles = {

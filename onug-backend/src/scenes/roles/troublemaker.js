@@ -17,7 +17,7 @@ export const troublemaker = (gameState, title) => {
       interaction = troublemaker_interaction(newGameState, token, title)
     }
 
-    scene.push({ type: SCENE, title,  token,  narration,  interaction })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

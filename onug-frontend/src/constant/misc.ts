@@ -1,13 +1,4 @@
-import {
-  CardType,
-  ExpansionType,
-  ExpansionsType,
-  TeamNames as TeamNamesTypes,
-  TeamType,
-  TeamsType,
-  TokenType,
-  WakeType,
-} from 'types'
+import { CardType, ExpansionType, ExpansionsType, TeamNames as TeamNamesTypes, TeamType, TeamsType, TokenType, WakeType } from 'types'
 
 export const teams: TeamsType = {
   village: 0,

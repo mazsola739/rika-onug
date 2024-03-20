@@ -1,37 +1,11 @@
 import { observer } from 'mobx-react-lite'
-import {
-  narrationStore,
-  gameBoardStore,
-  wsStore,
-  gamePlayStore,
-  interactionStore,
-} from 'store'
-import {
-  BoardCards,
-  Header,
-  KnownOwnCard,
-  Main,
-  MessageBox,
-  SceneTracker,
-} from 'components'
-import {
-  ARRIVE_GAME_PLAY,
-  HYDRATE_GAME_PLAY,
-  SCENE,
-  MESSAGE,
-  REDIRECT,
-  STAGES,
-} from 'constant'
+import { narrationStore, gameBoardStore, wsStore, gamePlayStore, interactionStore } from 'store'
+import { BoardCards, Header, KnownOwnCard, Main, MessageBox, SceneTracker } from 'components'
+import { ARRIVE_GAME_PLAY, HYDRATE_GAME_PLAY, SCENE, MESSAGE, REDIRECT, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { GamePlayHeader } from './GamePlayHeader'
 import { useNavigate } from 'react-router-dom'
-import {
-  GameArea,
-  GamePlayContainer,
-  OwnCardPlace,
-  PlayerHand,
-  StyledGamePlay,
-} from './GamePlay.styles'
+import { GameArea, GamePlayContainer, OwnCardPlace, PlayerHand, StyledGamePlay } from './GamePlay.styles'
 import { GamePlayFooter } from './GamePlayFooter'
 
 export const GamePlay: React.FC = observer(() => {
@@ -68,10 +42,9 @@ export const GamePlay: React.FC = observer(() => {
         interactionStore.setInteraction(lastJsonMessage.interaction.title)
         interactionStore.toggleMessageBoxStatus(true)
       }
-
     }
-    if (lastJsonMessage?.type === HYDRATE_GAME_PLAY)  /* && lastJsonMessage?.success */ //TODO success
-    {
+    if (lastJsonMessage?.type === HYDRATE_GAME_PLAY) {
+      /* && lastJsonMessage?.success */ //TODO success
       narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
       gamePlayStore.setStartingTime(
         lastJsonMessage.actual_scene.scene_start_time

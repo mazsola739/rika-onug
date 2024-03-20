@@ -1,12 +1,7 @@
 import React from 'react'
 import { Header } from 'components'
 import { observer } from 'mobx-react-lite'
-import {
-  Hello,
-  RuleImage,
-  RuleInfoDescription,
-  StyledRuleInfo,
-} from './Room.styles'
+import { Hello, RuleImage, RuleInfoDescription, StyledRuleInfo } from './Room.styles'
 import { gamePlayStore, roomStore } from 'store'
 
 const RuleInfo: React.FC = observer(() => {

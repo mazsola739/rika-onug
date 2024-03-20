@@ -1,26 +1,9 @@
-import {
-  ARRIVE_GAME_TABLE,
-  HYDRATE_GAME_TABLE,
-  HYDRATE_READY,
-  REDIRECT,
-  STAGES,
-} from 'constant'
+import { ARRIVE_GAME_TABLE, HYDRATE_GAME_TABLE, HYDRATE_READY, REDIRECT, STAGES } from 'constant'
 import { artifacts } from 'data'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
-import {
-  gameTableStore,
-  gameBoardStore,
-  roomStore,
-  deckStore,
-  wsStore,
-} from 'store'
-import {
-  GameArea,
-  OwnCardPlace,
-  Ready,
-  StyledGameTable,
-} from './GameTable.styles'
+import { gameTableStore, gameBoardStore, roomStore, deckStore, wsStore } from 'store'
+import { GameArea, OwnCardPlace, Ready, StyledGameTable } from './GameTable.styles'
 import { gameTableUtils } from './GameTable.utils'
 import { GameTableFooter } from './GameTableFooter'
 import { GameTableHeader } from './GameTableHeader'

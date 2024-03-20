@@ -1,33 +1,8 @@
 import { observer } from 'mobx-react-lite'
 import { useCallback, useState } from 'react'
-import {
-  Button,
-  ButtonsContainer,
-  PositionContainer,
-  FormContainer,
-  InputContainer,
-  Input,
-  Label,
-  LeftSide,
-  ResponseContainer,
-  ResponsePre,
-  RightSide,
-  StyledStub,
-  PopulatorContainer,
-  StubTitle,
-  RoleName,
-  InputField,
-} from './Stub.styles'
+import { Button, ButtonsContainer, PositionContainer, FormContainer, InputContainer, Input, Label, LeftSide, ResponseContainer, ResponsePre, RightSide, StyledStub, PopulatorContainer, StubTitle, RoleName, InputField } from './Stub.styles'
 import { dealStubDoppelganger } from './TestCases/test-case-doppelganger-01'
-import {
-  labels,
-  roleMapping,
-  DEAL_POPULATOR,
-  POPULATE,
-  RESET,
-  TEST_CASE,
-  RESPONSE,
-} from './Stub.constants'
+import { labels, roleMapping, DEAL_POPULATOR, POPULATE, RESET, TEST_CASE, RESPONSE } from './Stub.constants'
 import { API_HOST } from 'constant'
 
 // TODO security, protected routing and sending a secure GOD token

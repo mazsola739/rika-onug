@@ -1,20 +1,15 @@
 export const identifier_everyone_text = 'Everyone'
 export const identifier_oddplayers_text = 'Odd Players'
 export const identifier_evenplayers_text = 'Even Players'
-export const identifier_higher_text =
-  'Any player with a number higher than yours'
+export const identifier_higher_text = 'Any player with a number higher than yours'
 export const identifier_lower_text = 'Any player with a number lower than yours'
 export const identifier_any2_text = 'Any two players'
 export const identifier_any2even_text = 'Any two even players'
 export const identifier_any2odd_text = 'Any two odd players'
-export const identifier_any2higher_text =
-  'Any two players with a number higher than yours'
-export const identifier_any2lower_text =
-  'Any two players with a number lower than yours'
-export const identifier_2leftneighbors_text =
-  'The two players immediately to your left'
-export const identifier_2rightneighbors_text =
-  'The two players immediately to your right'
+export const identifier_any2higher_text = 'Any two players with a number higher than yours'
+export const identifier_any2lower_text = 'Any two players with a number lower than yours'
+export const identifier_2leftneighbors_text = 'The two players immediately to your left'
+export const identifier_2rightneighbors_text = 'The two players immediately to your right'
 export const identifier_any_text = 'Any player'
 export const identifier_anyeven_text = 'Any even player'
 export const identifier_anyodd_text = 'Any odd player'

@@ -1,11 +1,5 @@
 import { DealtCard } from 'components'
-import {
-  CardContainer,
-  PlayersCards,
-  CardTitle,
-  CenterCards,
-  CenterCardContainer,
-} from './DealtCards.styles'
+import { CardContainer, PlayersCards, CardTitle, CenterCards, CenterCardContainer } from './DealtCards.styles'
 import { PositionProperties } from 'types'
 
 const renderPlayerCards = (playerCards: PositionProperties[]) => {

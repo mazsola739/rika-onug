@@ -1,14 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { interactionStore } from 'store'
-import {
-  GamePlayBoardCardType,
-  GameTableBoardCardType,
-  PlayerType,
-  PlayersType,
-  PositionKeys,
-  PositionProperties,
-  PositionType,
-} from 'types'
+import { GamePlayBoardCardType, GameTableBoardCardType, PlayerType, PlayersType, PositionKeys, PositionProperties, PositionType } from 'types'
 
 class GameBoardStore {
   player: PlayerType

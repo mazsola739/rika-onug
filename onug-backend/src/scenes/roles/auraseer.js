@@ -44,5 +44,5 @@ export const auraseer_response = (gameState, token, selected_card_positions, tit
 
 /*AURA SEER moved viewed Copycat, Doppelgänger, Rascal, Body Snatcher, Alpha Wolf, Mystic Wolf, Seer, Exposer, 
 Mortician, Psychic, Apprentice Seer, Paranormal Investigator, Marksman, Robber, Witch, 
-Troublemaker, Village Idiot,  Cupid, Any Vampire, Count,  Pickpocket, Priest, Diseased,  
+Troublemaker, Village Idiot, Cupid, Any Vampire, Count, Pickpocket, Priest, Diseased, 
 Insomniac, Instigator, Assassin, Apprentice Assassin(If there is no Assassin) */

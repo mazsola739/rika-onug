@@ -1,5 +1,4 @@
-export const nostradamus_kickoff_text =
-  "NOSTRADAMUS, look at up to three cards. If you see any role that isn't on the villager team, stop. The last card you look at is the team you are on."
+export const nostradamus_kickoff_text = "NOSTRADAMUS, look at up to three cards. If you see any role that isn't on the villager team, stop. The last card you look at is the team you are on."
 
 export const nostradamus_teamstart_text = 'Nostradamus is on the '
 
@@ -10,8 +9,7 @@ export const nostradamus_team_villain_text = 'Villain team.'
 export const nostradamus_team_villager_text = 'Villager team.'
 export const nostradamus_team_hero_text = 'Hero team.'
 export const nostradamus_team_assassin_text = 'Assassin team.'
-export const nostradamus_team_apprenticeassassin_text =
-  'Apprentice Assassin team.'
+export const nostradamus_team_apprenticeassassin_text = 'Apprentice Assassin team.'
 export const nostradamus_team_tanner_text = 'Tanner team.'
 export const nostradamus_team_synthetic_text = 'Synthetic team.'
 export const nostradamus_team_blob_text = 'Blob team.'

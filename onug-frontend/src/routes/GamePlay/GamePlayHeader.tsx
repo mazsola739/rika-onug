@@ -1,10 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import {
-  Narration,
-  NarrationImage,
-  StyledGamePlayHeader,
-  TimerContainer,
-} from './GamePlay.styles'
+import { Narration, NarrationImage, StyledGamePlayHeader, TimerContainer } from './GamePlay.styles'
 import { gamePlayStore, narrationStore } from 'store'
 import { CardImage, Timer } from 'components'
 

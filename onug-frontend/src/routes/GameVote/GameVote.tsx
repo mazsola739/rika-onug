@@ -1,19 +1,6 @@
-import {
-  BoardCards,
-  Header,
-  KnownOwnCard,
-  Main,
-  MessageBox,
-  VotedList,
-} from 'components'
+import { BoardCards, Header, KnownOwnCard, Main, MessageBox, VotedList } from 'components'
 import { observer } from 'mobx-react-lite'
-import {
-  GameArea,
-  OwnCardPlace,
-  PlayerHand,
-  Voted,
-  StyledGameVote,
-} from './GameVote.styles'
+import { GameArea, OwnCardPlace, PlayerHand, Voted, StyledGameVote } from './GameVote.styles'
 import { GameVoteFooter } from './GameVoteFooter'
 import { gameBoardStore, interactionStore } from 'store'
 

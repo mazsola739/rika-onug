@@ -1,12 +1,5 @@
 import { CardList, Filter, Main } from 'components'
-import {
-  ARRIVE_ROOM,
-  HYDRATE_ROOM,
-  LEAVE_ROOM,
-  REDIRECT,
-  STAGES,
-  team,
-} from 'constant'
+import { ARRIVE_ROOM, HYDRATE_ROOM, LEAVE_ROOM, REDIRECT, STAGES, team } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useEffect, useMemo, useState } from 'react'
 import { deckStore, roomStore, wsStore } from 'store'
