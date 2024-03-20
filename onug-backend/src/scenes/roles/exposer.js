@@ -13,10 +13,9 @@ const createExposer = (prefix) => () =>
 
 export const exposer = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createExposer(prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createExposer(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -31,13 +30,7 @@ export const exposer = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -47,16 +40,12 @@ export const exposer = (gameState, title, prefix) => {
 export const exposer_interaction = (gameState, token, title) => {
   return {}
 }
+
 export const exposer_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
   const scene = []
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

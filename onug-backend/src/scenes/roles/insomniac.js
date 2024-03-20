@@ -1,23 +1,18 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getCardIdsByPlayerNumbers,
-  getPlayerNumberWithMatchingToken,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getCardIdsByPlayerNumbers, getPlayerNumberWithMatchingToken } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const insomniac = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_insomniac_kickoff_text'
       : 'insomniac_kickoff_text',
     'insomniac_kickoff2_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -26,13 +21,7 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
       interaction = insomniac_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -41,7 +30,6 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
 
 export const insomniac_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
   const currentCard = newGameState.card_positions[currentPlayerNumber].card
 

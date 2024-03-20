@@ -4,10 +4,9 @@ import { getAllPlayerTokens } from '../../utils/scene-utils'
 
 export const supervillains = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['supervillains_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['supervillains_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -16,13 +15,7 @@ export const supervillains = (gameState, title) => {
       interaction = supervillain_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -37,12 +30,7 @@ export const supervillain_response = (gameState, token, selected_card_positions,
   const newGameState = { ...gameState }
   const scene = []
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

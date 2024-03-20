@@ -1,13 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getPlayerNumbersWithMatchingTokens,
-  getPlayerTokenByPlayerNumber,
-  getRandomArtifact,
-  getSelectablePlayersWithNoArtifact,
-  getSelectablePlayersWithNoShield,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerTokenByPlayerNumber, getRandomArtifact, getSelectablePlayersWithNoArtifact, getSelectablePlayersWithNoShield } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -16,10 +9,9 @@ const createCurator = (prefix) => () =>
 
 export const curator = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createCurator(prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createCurator(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -34,13 +26,7 @@ export const curator = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -49,7 +35,7 @@ export const curator = (gameState, title, prefix) => {
 
 export const curator_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   const allPlayerTokens = getAllPlayerTokens(newGameState.players) //TODO better solution
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
@@ -102,12 +88,7 @@ export const curator_response = (gameState, token, selected_card_positions, titl
     uniqInformations: { new_artifact_card: selected_card_positions[0] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

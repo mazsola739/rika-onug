@@ -19,13 +19,7 @@ export const vampires = (gameState, title) => {
     }
 
     newGameState.players[token].player_history.scene_title = title
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -91,12 +85,7 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
       uniqInformations: { mark_of_vampire: [mostVotedPlayer] },
     })
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, interaction })
     newGameState.scene = scene
 
   }

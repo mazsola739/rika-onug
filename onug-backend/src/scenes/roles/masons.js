@@ -5,10 +5,9 @@ import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const masons = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['masons_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['masons_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -17,13 +16,7 @@ export const masons = (gameState, title) => {
       interaction = masons_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -32,7 +25,6 @@ export const masons = (gameState, title) => {
 
 export const masons_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const masons = getMasonPlayerNumbersByRoleIds(newGameState.players)
 
   newGameState.players[token].player_history = {

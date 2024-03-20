@@ -17,14 +17,13 @@ const randomBlobKickoffText = [
 
 export const blob = (gameState, title) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const randomKickoff = getRandomItemFromArray(randomBlobKickoffText)
   const narration = [
     randomKickoff,
     randomKickoff.includes('1p') ? 'blob_is_end_text' : 'blob_are_end_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -33,13 +32,7 @@ export const blob = (gameState, title) => {
       interaction = blob_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

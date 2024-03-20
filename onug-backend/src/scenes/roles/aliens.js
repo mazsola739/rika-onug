@@ -27,6 +27,8 @@ const alienAllKeys = [
 
 export const aliens = (gameState, title) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
 
   const narration = ['aliens_kickoff_text']
   const randomInstructions = getRandomItemFromArray(random_aliens)
@@ -42,17 +44,11 @@ export const aliens = (gameState, title) => {
     }
     narration[2] = randomAnyIdentifier
   }
-  if (
-    randomInstructions === 'aliens_newalien_text' ||
-    randomInstructions === 'aliens_alienhelper_text'
-  ) {
+
+  if (randomInstructions === 'aliens_newalien_text' || randomInstructions === 'aliens_alienhelper_text') {
     const randomAllIdentifier = getRandomItemFromArray(alienAllKeys)
     narration[2] = randomAllIdentifier
   }
-
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -65,13 +61,7 @@ export const aliens = (gameState, title) => {
       interaction = aliens_interaction(newGameState, token, title)
     }
     
-        scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+        scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -85,13 +75,9 @@ export const aliens_interaction = (gameState, token, title) => {
 export const aliens_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
   const scene = []
+
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

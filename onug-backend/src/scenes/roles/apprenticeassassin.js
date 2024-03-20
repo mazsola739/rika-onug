@@ -1,11 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getAssassinNumberByRoleIds,
-  getPlayerNumberWithMatchingToken,
-  getPlayerNumbersWithMatchingTokens,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getAssassinNumberByRoleIds, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -18,10 +13,9 @@ const createApprenticeAssassin = (hasAssassin, prefix) => [
 
 export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createApprenticeAssassin(hasAssassin, prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createApprenticeAssassin(hasAssassin, prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -45,13 +39,7 @@ export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -89,10 +77,7 @@ export const apprenticeassassin_interaction = (gameState, token, title) => {
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_may_one_any'],
       icon: 'target',
-      selectableMarks: {
-        selectable_marks: selectablePlayerNumbers,
-        selectable_mark_limit: { mark: 1 },
-      },
+      selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 } },
     })
   }
 }
@@ -149,12 +134,7 @@ export const apprenticeassassin_response = (gameState, token, selected_mark_posi
     uniqInformations: { mark_of_assassin: [selected_mark_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

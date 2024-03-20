@@ -6,15 +6,14 @@ import { isValidCardSelection } from '../validate-response-data'
 
 export const minion = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_minion_kickoff_text'
       : 'minion_kickoff_text',
     'minion_kickoff2_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -23,13 +22,7 @@ export const minion = (gameState, title, hasDoppelganger) => {
       interaction = minion_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -38,7 +31,6 @@ export const minion = (gameState, title, hasDoppelganger) => {
 
 export const minion_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(newGameState.players)
 
   newGameState.players[token].player_history = {

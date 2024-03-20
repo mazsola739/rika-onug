@@ -9,10 +9,9 @@ const createPickpocket = (prefix) => () =>
 
 export const pickpocket = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createPickpocket(prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createPickpocket(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -27,13 +26,7 @@ export const pickpocket = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -42,7 +35,6 @@ export const pickpocket = (gameState, title, prefix) => {
 
 export const pickpocket_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
 
   newGameState.players[token].player_history = {
@@ -92,12 +84,7 @@ export const pickpocket_response = (gameState, token, selected_mark_positions, t
     uniqInformations: { swapped_marks: [currentPlayerNumber, selected_mark_positions[0]], viewed_marks: [currentPlayerNumber] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

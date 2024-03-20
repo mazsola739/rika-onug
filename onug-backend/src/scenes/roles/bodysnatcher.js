@@ -25,10 +25,9 @@ const createBodysnatcher = (prefix) => () =>
 
 export const bodysnatcher = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createBodysnatcher(prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createBodysnatcher(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -43,13 +42,7 @@ export const bodysnatcher = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -63,13 +56,9 @@ export const bodysnatcher_interaction = (gameState, token, title) => {
 export const bodysnatcher_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
   const scene = []
+  
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

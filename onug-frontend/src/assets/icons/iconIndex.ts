@@ -1,5 +1,6 @@
 import React from 'react'
 import AlienIcon from './alien.svg?react'
+import AlienhandIcon from './alienhand.svg?react'
 import ArtifactIcon from './artifact.svg?react'
 import AssassinIcon from './assassin.svg?react'
 import AwesomeIcon from './awesome.svg?react'
@@ -22,6 +23,7 @@ import DressIcon from './dress.svg?react'
 import DrunkIcon from './drunk.svg?react'
 import EmpathIcon from './empath.svg?react'
 import EvilIcon from './evil.svg?react'
+import EvilhandIcon from './evilhand.svg?react'
 import EyeIcon from './eye.svg?react'
 import FamilyIcon from './family.svg?react'
 import FangIcon from './fang.svg?react'
@@ -39,7 +41,6 @@ import MarkIcon from './mark.svg?react'
 import MasonIcon from './mason.svg?react'
 import MorticianIcon from './mortician.svg?react'
 import MuteIcon from './mute.svg?react'
-import NewalienIcon from './newalien.svg?react'
 import NiceIcon from './nice.svg?react'
 import NightIcon from './night.svg?react'
 import NostradamusIcon from './nostradamus.svg?react'
@@ -110,7 +111,8 @@ export {
   MasonIcon,
   MorticianIcon,
   MuteIcon,
-  NewalienIcon,
+  AlienhandIcon,
+  EvilhandIcon,
   NiceIcon,
   NightIcon,
   NostradamusIcon,

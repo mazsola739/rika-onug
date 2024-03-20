@@ -1,20 +1,14 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getCardIdsByPositions,
-  getPlayerNumbersWithNonMatchingTokens,
-  getSelectablePlayersWithNoShield,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getCardIdsByPositions, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
 export const doppelganger = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['doppelganger_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['doppelganger_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -23,13 +17,7 @@ export const doppelganger = (gameState, title) => {
       interaction = doppelganger_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -86,12 +74,7 @@ export const doppelganger_response = (gameState, token, selected_card_positions,
     uniqInformations: { new_role_id: newGameState.players[token].card.player_role_id, viewed_cards: [selected_card_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

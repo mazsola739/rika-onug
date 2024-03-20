@@ -1,22 +1,18 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getMadScientistPlayerNumberByRoleIds,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getMadScientistPlayerNumberByRoleIds } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_intern_kickoff_text'
       : 'intern_kickoff_text',
     hasMadScientist ? 'intern_kickoff2_text' : 'intern_kickoff_alone_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -25,13 +21,7 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
       interaction = intern_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -40,7 +30,6 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
 
 export const intern_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const madscientistPlayerNumbers = getMadScientistPlayerNumberByRoleIds(
     newGameState.players
   )

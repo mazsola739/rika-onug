@@ -9,10 +9,9 @@ const createAssassin = (prefix) => () =>
 
 export const assassin = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createAssassin(prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createAssassin(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -27,13 +26,7 @@ export const assassin = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -42,7 +35,7 @@ export const assassin = (gameState, title, prefix) => {
 
 export const assassin_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   const allPlayerTokens = getAllPlayerTokens(newGameState.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
 
@@ -102,12 +95,7 @@ export const assassin_response = (gameState, token, selected_mark_positions, tit
     uniqInformations: { mark_of_assassin: [selected_mark_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

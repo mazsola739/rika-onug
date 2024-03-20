@@ -1,20 +1,14 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getCardIdsByPlayerNumbers,
-  getPlayerNumberWithMatchingToken,
-  getSelectableOtherPlayersWithoutShield,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getCardIdsByPlayerNumbers, getPlayerNumberWithMatchingToken, getSelectableOtherPlayersWithoutShield } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
 export const robber = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['robber_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['robber_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -23,13 +17,7 @@ export const robber = (gameState, title) => {
       interaction = robber_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -38,7 +26,7 @@ export const robber = (gameState, title) => {
 
 export const robber_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   if (!newGameState.players[token].shield) {
     const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
       newGameState.players,
@@ -109,12 +97,7 @@ export const robber_response = (gameState, token, selected_card_positions, title
     uniqInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], viewed_cards: [currentPlayerNumber] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

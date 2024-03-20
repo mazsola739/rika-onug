@@ -61,15 +61,14 @@ const oracle_responses = {
 
 export const oracle_question = (gameState, title) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     'oracle_kickoff_text',
     getRandomItemFromArray(random_oracle_question),
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
 
   newGameState.oracle.question = narration[1]
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -79,13 +78,7 @@ export const oracle_question = (gameState, title) => {
       interaction = oracle_question_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -99,13 +92,9 @@ export const oracle_question_interaction = (gameState, token, title) => {
 export const oracle_question_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState
@@ -113,6 +102,7 @@ export const oracle_question_response = (gameState, token, selected_card_positio
 
 export const oracle_answer = (gameState, title) => {
   const newGameState = { ...gameState }
+  const tokens = getAllPlayerTokens(newGameState.players)  
   const question = newGameState.oracle.question
   const answer = newGameState.oracle.answer
   let narration = []
@@ -135,9 +125,6 @@ export const oracle_answer = (gameState, title) => {
       narration = [getRandomItemFromArray(oracle_responses[question].no)]
     }
   }
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -156,12 +143,7 @@ export const oracle_answer_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   const scene = []
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

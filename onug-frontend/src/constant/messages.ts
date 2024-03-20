@@ -28,6 +28,7 @@ export const interaction_own_mark = 'Look for your own mark'
 export const interaction_seer_end = 'two center'
 
 export const interaction_one_any_non_werewolf = 'You must choose any other non-werewolf player'
+export const interaction_one_any_non_villain = 'You must choose any other non-villain player'
 export const interaction_must_one_neighbor = 'You must choose any player of your neighbors'
   
 export const interaction_may_direction = 'You may choose a direction to move other players cards'

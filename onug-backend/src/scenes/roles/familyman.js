@@ -17,6 +17,8 @@ const randomFamilyman = [
 
 export const familyman = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_familyman_kickoff_text'
@@ -26,9 +28,8 @@ export const familyman = (gameState, title, hasDoppelganger) => {
       ? 'familyman_is_end_text'
       : 'familyman_are_end_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
 
-  const scene = []
+
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -37,13 +38,7 @@ export const familyman = (gameState, title, hasDoppelganger) => {
       interaction = familyman_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -53,16 +48,13 @@ export const familyman = (gameState, title, hasDoppelganger) => {
 export const familyman_interaction = (gameState, token, title) => {
   return {}
 }
+
 export const familyman_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

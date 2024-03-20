@@ -1,10 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getRandomItemFromArray,
-  pickRandomUpToThreePlayers,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../utils/scene-utils'
 
 const empathAllKeys = [
   'identifier_everyone_text',
@@ -46,11 +42,10 @@ const createEmpath = (prefix, totalPlayers) => () => {
 
 export const empath = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)  
   const total_players = newGameState.total_players
   const narration = createEmpath(prefix, total_players)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -65,13 +60,7 @@ export const empath = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -81,16 +70,12 @@ export const empath = (gameState, title, prefix) => {
 export const empath_interaction = (gameState, token, title) => {
   return {}
 }
+
 export const empath_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
   const scene = []
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

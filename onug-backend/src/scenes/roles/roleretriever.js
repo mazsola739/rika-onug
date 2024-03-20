@@ -5,10 +5,9 @@ import { robber_interaction } from './robber'
 
 export const roleretriever = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['roleretriever_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['roleretriever_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -17,13 +16,7 @@ export const roleretriever = (gameState, title) => {
       interaction = robber_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

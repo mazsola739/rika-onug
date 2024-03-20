@@ -1,10 +1,6 @@
 //@ts-check
 import { SCENE, townIds } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getCardIdsByPositions,
-  getSelectableOtherPlayersWithoutShield,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getCardIdsByPositions, getSelectableOtherPlayersWithoutShield } from '../../utils/scene-utils'
 import { isValidCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
@@ -13,10 +9,9 @@ const createFlipper = (prefix) => () =>
 
 export const flipper = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createFlipper(prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createFlipper(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -31,13 +26,7 @@ export const flipper = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -46,7 +35,6 @@ export const flipper = (gameState, title, prefix) => {
 
 export const flipper_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
     newGameState.players,
     token
@@ -103,12 +91,7 @@ export const flipper_response = (gameState, token, selected_card_positions, titl
     uniqInformations: { flipped_cards: [selected_card_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

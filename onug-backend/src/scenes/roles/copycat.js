@@ -6,10 +6,9 @@ import { isValidCardSelection } from '../validate-response-data'
 
 export const copycat = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['copycat_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['copycat_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -18,13 +17,7 @@ export const copycat = (gameState, title) => {
       interaction = copycat_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -33,7 +26,7 @@ export const copycat = (gameState, title) => {
 
 export const copycat_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
@@ -78,12 +71,7 @@ export const copycat_response = (gameState, token, selected_card_positions, titl
     uniqInformations: { new_role_id: newGameState.players[token].card.player_role_id, viewed_cards: [selected_card_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

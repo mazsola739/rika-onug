@@ -6,10 +6,9 @@ import { isValidMarkSelection } from '../validate-response-data'
 
 export const instigator = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['instigator_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['instigator_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -18,13 +17,7 @@ export const instigator = (gameState, title) => {
       interaction = instigator_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -33,7 +26,6 @@ export const instigator = (gameState, title) => {
 
 export const instigator_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const allPlayerTokens = getAllPlayerTokens(newGameState.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
 
@@ -93,12 +85,7 @@ export const instigator_response = (gameState, token, selected_mark_positions, t
     uniqInformations: { mark_of_traitor: [selected_mark_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

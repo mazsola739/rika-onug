@@ -33,9 +33,9 @@ export const epicbattle = (gameState, title, hasEasterEgg, hasEpicBattle, totalP
     return ["everyone_epic_intro_text"]
   }
   const newGameState = { ...gameState }
-  const narration = []
+  const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-
+  const narration = []
 
   if (hasEasterEgg) {
     if (totalPlayers === 12) {
@@ -47,20 +47,12 @@ export const epicbattle = (gameState, title, hasEasterEgg, hasEpicBattle, totalP
     }
   }
 
-  const scene = []
-
   tokens.forEach((token) => {
     let interaction = {}
 
     interaction = everyonemark_interaction(newGameState, token, title)
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

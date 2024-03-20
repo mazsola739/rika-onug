@@ -9,11 +9,9 @@ const createTheCount = (prefix) => () =>
 
 export const thecount = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createTheCount(prefix)
-
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createTheCount(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -28,13 +26,7 @@ export const thecount = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -43,7 +35,7 @@ export const thecount = (gameState, title, prefix) => {
 
 export const thecount_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   const nonVampires = getNonVampirePlayerNumbersByRoleIds(newGameState)
 
   newGameState.players[token].player_history = {
@@ -95,12 +87,7 @@ export const thecount_response = (gameState, token, selected_mark_positions, tit
     uniqInformations: { mark_of_fear: [selected_mark_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

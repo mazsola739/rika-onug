@@ -13,10 +13,9 @@ const createPsychic = (prefix) => () =>
 
 export const psychic = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createPsychic(prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createPsychic(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -31,13 +30,7 @@ export const psychic = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -47,16 +40,12 @@ export const psychic = (gameState, title, prefix) => {
 export const psychic_interaction = (gameState, token, title) => {
   return {}
 }
+
 export const psychic_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
   const scene = []
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

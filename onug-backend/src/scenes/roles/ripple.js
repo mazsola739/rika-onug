@@ -1,11 +1,5 @@
 //@ts-check
-import {
-  getRandomItemFromArray,
-  pickRandomTwoPlayersArray,
-  pickRandomTwoPlayers,
-  pickRandomUpToThreePlayers,
-  pickRandomOnePlayer,
-} from '../../utils/scene-utils'
+import { getRandomItemFromArray, pickRandomTwoPlayersArray, pickRandomTwoPlayers, pickRandomUpToThreePlayers, pickRandomOnePlayer } from '../../utils/scene-utils'
 
 const ripple_sure_repeat = ["random_ripple_repeat", "random_ripple_repeat1p"]
 const ripple_random = [

@@ -58,6 +58,8 @@ const addVerboseOr = (rolesFromIds) => {
 
 export const doppelganger_instant_action = (gameState, title) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)  
   const rolesFromIds = getRolesNames(newGameState.selected_cards, doppelgangerInstantActionsIds, instantRoleIds)
 
   addVerboseOr(rolesFromIds)
@@ -67,9 +69,8 @@ export const doppelganger_instant_action = (gameState, title) => {
     ...rolesFromIds,
     'doppelganger_verbose_outro_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
 
-  const scene = []
+
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -78,13 +79,7 @@ export const doppelganger_instant_action = (gameState, title) => {
       interaction = doppelganger_instant_action_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

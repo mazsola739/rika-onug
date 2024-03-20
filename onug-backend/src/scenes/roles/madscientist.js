@@ -64,6 +64,8 @@ const random_madscientist_transition = [
 
 export const madscientist = (gameState, title) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     'madscientist_kickoff_text',
     getRandomItemFromArray(random_madscientist_intro),
@@ -72,20 +74,11 @@ export const madscientist = (gameState, title) => {
     getRandomItemFromArray(random_madscientist_transition),
     'madscientist_close_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

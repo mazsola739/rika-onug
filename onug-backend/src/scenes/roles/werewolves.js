@@ -1,24 +1,18 @@
 //@ts-check
-import {
-  getWerewolfPlayerNumbersByRoleIds,
-  getDreamWolfPlayerNumberByRoleIds,
-  getCardIdsByPositions,
-  getAllPlayerTokens,
-} from '../../utils/scene-utils'
+import { getWerewolfPlayerNumbersByRoleIds, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions, getAllPlayerTokens } from '../../utils/scene-utils'
 import { SCENE, centerCardPositions, werewolvesIds } from '../../constant'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
 export const werewolves = (gameState, title, hasDreamWolf) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDreamWolf
       ? 'werewolves_dreamwolf_kickoff_text'
       : 'werewolves_kickoff_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -28,13 +22,7 @@ export const werewolves = (gameState, title, hasDreamWolf) => {
     }
 
     newGameState.players[token].player_history.scene_title = title
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -94,12 +82,7 @@ export const werewolves_response = (gameState, token, selected_card_positions, t
     uniqInformations: { viewed_cards: [selected_card_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
 
   newGameState.scene = scene
 

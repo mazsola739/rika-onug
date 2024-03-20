@@ -6,10 +6,9 @@ import { isValidCardSelection } from '../validate-response-data'
 
 export const apprenticeseer = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['apprenticeseer_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['apprenticeseer_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -18,13 +17,7 @@ export const apprenticeseer = (gameState, title) => {
       interaction = apprenticeseer_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -77,12 +70,7 @@ export const apprenticeseer_response = (gameState, token, selected_card_position
     uniqInformations: { viewed_cards: [selected_card_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

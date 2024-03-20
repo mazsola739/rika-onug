@@ -4,10 +4,9 @@ import { getAllPlayerTokens } from '../../utils/scene-utils'
 
 export const rapscallion = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['rapscallion_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['rapscallion_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -16,13 +15,7 @@ export const rapscallion = (gameState, title) => {
       interaction = rapscallion_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -32,16 +25,13 @@ export const rapscallion = (gameState, title) => {
 export const rapscallion_interaction = (gameState, token, title) => {
   return {}
 }
+
 export const rapscallion_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
   const scene = []
+  
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

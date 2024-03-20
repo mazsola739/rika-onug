@@ -1,5 +1,5 @@
 //@ts-check
-import { masonIds, vampireIds, werewolvesAndDreamWolfIds, werewolvesIds } from "../constant"
+import { masonIds, superVillainsIds, vampireIds, werewolvesAndDreamWolfIds, werewolvesIds } from "../constant"
 import artifacts from '../data/artifacts.json'
 import _ from 'lodash'
 
@@ -63,6 +63,19 @@ export const getNonWerewolfPlayerNumbersByRoleIds = (players) => {
   for (const token in players) {
     const player = players[token]
     if (!werewolvesAndDreamWolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
+      result.push(`player_${players[token].player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getNonVillainPlayerNumbersByRoleIds = (players) => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (!superVillainsIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${players[token].player_number}`)
     }
   }

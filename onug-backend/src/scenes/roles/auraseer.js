@@ -4,15 +4,14 @@ import { getAllPlayerTokens } from '../../utils/scene-utils'
 
 export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_auraseer_kickoff_text'
       : 'auraseer_kickoff_text',
     hasMarks ? 'auraseer_marks_and_cards_text' : 'auraseer_cards_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -21,13 +20,7 @@ export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
       interaction = auraseer_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -41,13 +34,9 @@ export const auraseer_interaction = (gameState, token, title) => {
 export const auraseer_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
   const scene = []
+  
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

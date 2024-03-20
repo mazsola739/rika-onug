@@ -1,5 +1,6 @@
 import {
   AlienIcon,
+  AlienhandIcon,
   ArtifactIcon,
   AssassinIcon,
   AwesomeIcon,
@@ -22,6 +23,7 @@ import {
   DrunkIcon,
   EmpathIcon,
   EvilIcon,
+  EvilhandIcon,
   EyeIcon,
   FamilyIcon,
   FangIcon,
@@ -39,7 +41,6 @@ import {
   MasonIcon,
   MorticianIcon,
   MuteIcon,
-  NewalienIcon,
   NiceIcon,
   NightIcon,
   NostradamusIcon,
@@ -77,6 +78,7 @@ export const Icons: Record<
   React.FC<React.SVGProps<SVGSVGElement>>
 > = {
   alien: AlienIcon,
+  alienhand: AlienhandIcon,
   artifact: ArtifactIcon,
   assassin: AssassinIcon,
   awesome: AwesomeIcon,
@@ -99,6 +101,7 @@ export const Icons: Record<
   drunk: DrunkIcon,
   empath: EmpathIcon,
   evil: EvilIcon,
+  evilhand: EvilhandIcon,
   eye: EyeIcon,
   family: FamilyIcon,
   fang: FangIcon,
@@ -116,7 +119,6 @@ export const Icons: Record<
   mason: MasonIcon,
   mortician: MorticianIcon,
   mute: MuteIcon,
-  newalien: NewalienIcon,
   nice: NiceIcon,
   night: NightIcon,
   nostradamus: NostradamusIcon,

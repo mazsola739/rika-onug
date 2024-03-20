@@ -1,10 +1,6 @@
 //@ts-check
 import { SCENE, townIds } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getCardIdsByPositions,
-  getSelectableOtherPlayersWithoutShield,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getCardIdsByPositions, getSelectableOtherPlayersWithoutShield } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -13,11 +9,9 @@ const createRevealer = (prefix) => () =>
 
 export const revealer = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-
-  const narration = createRevealer(prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createRevealer(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -32,13 +26,7 @@ export const revealer = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -47,7 +35,6 @@ export const revealer = (gameState, title, prefix) => {
 
 export const revealer_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
     newGameState.players,
     token
@@ -104,12 +91,7 @@ export const revealer_response = (gameState, token, selected_card_positions, tit
     uniqInformations: { flipped_cards: [selected_card_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

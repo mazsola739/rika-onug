@@ -27,21 +27,14 @@ const random_joke = [
 
 export const joke = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = [getRandomItemFromArray(random_joke)]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = [getRandomItemFromArray(random_joke)]
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

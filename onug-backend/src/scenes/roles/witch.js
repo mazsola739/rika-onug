@@ -2,21 +2,13 @@
 import { SCENE, centerCardPositions } from '../../constant'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
-import {
-  getPlayerNumbersWithMatchingTokens,
-  getSelectablePlayersWithNoShield,
-  getAllPlayerTokens,
-  getCardIdsByPositions,
-  getPlayerNumberWithMatchingToken,
-} from '../../utils/scene-utils'
+import { getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getAllPlayerTokens, getCardIdsByPositions, getPlayerNumberWithMatchingToken } from '../../utils/scene-utils'
 
 export const witch = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['witch_kickoff_text']
-
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['witch_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -25,13 +17,7 @@ export const witch = (gameState, title) => {
       interaction = witch_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -40,7 +26,7 @@ export const witch = (gameState, title) => {
 
 export const witch_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
@@ -98,12 +84,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
       uniqInformations: { viewed_cards: [selected_card_positions[0]] },
     })
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, interaction })
     newGameState.scene = scene
 
     return newGameState
@@ -142,12 +123,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
       uniqInformations: { swapped_cards: [newGameState.players[token].player_history.selected_center_card, selected_card_positions[0]] },
     })
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, interaction })
     newGameState.scene = scene
 
     return newGameState

@@ -1,19 +1,15 @@
 //@ts-check
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
-import {
-  getAllPlayerTokens,
-  getNonWerewolfPlayerNumbersByRoleIds,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIds } from '../../utils/scene-utils'
 import { SCENE } from '../../constant'
 
 export const alphawolf = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['alphawolf_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
-
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['alphawolf_kickoff_text']
+  
   tokens.forEach((token) => {
     let interaction = {}
 
@@ -21,13 +17,7 @@ export const alphawolf = (gameState, title) => {
       interaction = alphawolf_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -80,12 +70,7 @@ export const alphawolf_response = (gameState, token, selected_card_positions, ti
     uniqInformations: { swapped_cards: [selected_card_positions[0], 'center_wolf'], claw: [selected_card_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

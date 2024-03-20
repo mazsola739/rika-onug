@@ -5,15 +5,14 @@ import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const squire = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_squire_kickoff_text'
       : 'squire_kickoff_text',
     'squire_kickoff2_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -22,13 +21,7 @@ export const squire = (gameState, title, hasDoppelganger) => {
       interaction = squire_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -37,7 +30,7 @@ export const squire = (gameState, title, hasDoppelganger) => {
 
 export const squire_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(newGameState.players)
 
   newGameState.players[token].player_history = {
@@ -89,12 +82,7 @@ export const squire_response = (gameState, token, answer, title) => { //TODO val
     })
   }
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

@@ -5,15 +5,14 @@ import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const apprenticetanner = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_apprenticetanner_kickoff_text'
       : 'apprenticetanner_kickoff_text',
     'apprenticetanner_kickoff2_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -22,13 +21,7 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
       interaction = apprenticetanner_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -37,7 +30,7 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
 
 export const apprenticetanner_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   const tanner = getTannerNumberByRoleIds(newGameState.players)
 
   newGameState.players[token].player_history = {

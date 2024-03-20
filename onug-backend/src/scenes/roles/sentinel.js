@@ -1,19 +1,14 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getPlayerTokenByPlayerNumber,
-  getSelectableOtherPlayersWithoutShield,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getPlayerTokenByPlayerNumber, getSelectableOtherPlayersWithoutShield } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
 export const sentinel = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['sentinel_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['sentinel_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -22,13 +17,7 @@ export const sentinel = (gameState, title) => {
       interaction = sentinel_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -37,7 +26,7 @@ export const sentinel = (gameState, title) => {
 
 export const sentinel_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
     newGameState.players,
     token
@@ -85,12 +74,7 @@ export const sentinel_response = (gameState, token, selected_card_positions, tit
     uniqInformations: { new_shield_card: [selected_card_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

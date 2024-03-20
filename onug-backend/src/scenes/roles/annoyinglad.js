@@ -5,10 +5,9 @@ import { thing_interaction } from './thing'
 
 export const annoyinglad = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['annoyinglad_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['annoyinglad_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -17,13 +16,7 @@ export const annoyinglad = (gameState, title) => {
       interaction = thing_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

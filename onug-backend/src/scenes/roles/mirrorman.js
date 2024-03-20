@@ -5,10 +5,9 @@ import { copycat_interaction } from './copycat'
 
 export const mirrorman = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['mirrorman_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['mirrorman_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -17,13 +16,7 @@ export const mirrorman = (gameState, title) => {
       interaction = copycat_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

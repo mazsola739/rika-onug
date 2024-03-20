@@ -6,10 +6,9 @@ import { getAllPlayerTokens, getSelectableOtherPlayersWithoutShield } from '../.
 
 export const troublemaker = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['troublemaker_kickoff_text']
+  const scene = []  
   const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
+  const narration = ['troublemaker_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -18,13 +17,7 @@ export const troublemaker = (gameState, title) => {
       interaction = troublemaker_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title,  token,  narration,  interaction })
   })
 
   newGameState.scene = scene
@@ -85,12 +78,7 @@ export const troublemaker_response = (gameState, token, selected_card_positions,
     uniqInformations: { swapped_cards: [position1, position2] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

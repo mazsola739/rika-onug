@@ -9,10 +9,9 @@ const createPriest = (prefix) => () =>
 
 export const priest = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createPriest(prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createPriest(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -27,13 +26,7 @@ export const priest = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -42,7 +35,6 @@ export const priest = (gameState, title, prefix) => {
 
 export const priest_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
@@ -108,12 +100,7 @@ export const priest_response = (gameState, token, selected_mark_positions, title
     uniqInformations: { mark_of_clarity: [currentPlayerNumber, selected_mark_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

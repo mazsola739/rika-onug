@@ -9,10 +9,9 @@ const createGremlin = (prefix) => () =>
 
 export const gremlin = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createGremlin(prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createGremlin(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -27,13 +26,7 @@ export const gremlin = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -99,12 +92,7 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
       uniqInformations: { swapped_cards: [position1, position2] },
     })
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, interaction })
     newGameState.scene = scene
 
     return newGameState
@@ -145,12 +133,7 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
       uniqInformations: { swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]] },
     })
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, interaction })
     newGameState.scene = scene
 
     return newGameState

@@ -4,15 +4,14 @@ import { getAllPlayerTokens } from '../../utils/scene-utils'
 
 export const leader = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_leader_kickoff_text'
       : 'leader_kickoff_text',
     'leader_kickoff2_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -21,13 +20,7 @@ export const leader = (gameState, title, hasDoppelganger) => {
       interaction = leader_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -40,10 +33,9 @@ export const leader_interaction = (gameState, token, title) => {
 
 export const leader_zerbgroob = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['leader_zerbgroob_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['leader_zerbgroob_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -52,13 +44,7 @@ export const leader_zerbgroob = (gameState, title) => {
       interaction = leader_zerbgroob_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

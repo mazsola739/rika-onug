@@ -6,15 +6,14 @@ import { isValidCardSelection, isValidMarkSelection } from '../validate-response
 
 export const marksman = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_marksman_kickoff_text'
       : 'marksman_kickoff_text',
     'marksman_kickoff2_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -23,13 +22,7 @@ export const marksman = (gameState, title, hasDoppelganger) => {
       interaction = marksman_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -38,7 +31,6 @@ export const marksman = (gameState, title, hasDoppelganger) => {
 
 export const marksman_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const allPlayerTokens = getAllPlayerTokens(newGameState.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
@@ -115,12 +107,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
       })
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, interaction })
     newGameState.scene = scene
 
     return newGameState
@@ -177,12 +164,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
       })
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, interaction })
     newGameState.scene = scene
 
     return newGameState

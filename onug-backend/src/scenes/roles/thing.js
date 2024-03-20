@@ -23,13 +23,7 @@ export const thing = (gameState, title) => {
       interaction = thing_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
 
     newGameState.scene = scene
   })
@@ -90,12 +84,7 @@ export const thing_response = (gameState, token, selected_card_positions, title)
     uniqInformations: { tapped: [selected_card_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

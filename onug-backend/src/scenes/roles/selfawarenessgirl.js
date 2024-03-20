@@ -5,15 +5,14 @@ import { insomniac_interaction } from './insomniac'
 
 export const selfawarenessgirl = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_selfawarenessgirl_kickoff_text'
       : 'selfawarenessgirl_kickoff_text',
     'selfawarenessgirl_kickoff2_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -22,13 +21,7 @@ export const selfawarenessgirl = (gameState, title, hasDoppelganger) => {
       interaction = insomniac_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

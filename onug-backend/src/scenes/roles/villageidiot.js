@@ -5,11 +5,9 @@ import { generateRoleInteraction } from './../generate-scene-role-interactions';
 
 export const villageidiot = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['villageidiot_kickoff_text']
-
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['villageidiot_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -18,13 +16,7 @@ export const villageidiot = (gameState, title) => {
       interaction = villageidiot_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -33,7 +25,7 @@ export const villageidiot = (gameState, title) => {
 
 export const villageidiot_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
@@ -73,12 +65,7 @@ export const villageidiot_response = (gameState, token, answer, title) => { //TO
     icon: 'jest',
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

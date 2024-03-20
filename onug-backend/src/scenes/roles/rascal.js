@@ -65,10 +65,9 @@ const createRascal = (prefix) => () => {
 
 export const rascal = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
-  const narration = createRascal(prefix)
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = createRascal(prefix)
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -83,13 +82,7 @@ export const rascal = (gameState, title, prefix) => {
       }
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -103,13 +96,9 @@ export const rascal_interaction = (gameState, token, title) => {
 export const rascal_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
   const scene = []
+
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

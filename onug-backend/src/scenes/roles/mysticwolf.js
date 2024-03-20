@@ -1,19 +1,14 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getCardIdsByPositions,
-  getSelectableOtherPlayersWithoutShield,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getCardIdsByPositions, getSelectableOtherPlayersWithoutShield } from '../../utils/scene-utils'
 import { isValidCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
 export const mysticwolf = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['mysticwolf_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['mysticwolf_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -22,13 +17,7 @@ export const mysticwolf = (gameState, title) => {
       interaction = mysticwolf_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -37,7 +26,6 @@ export const mysticwolf = (gameState, title) => {
 
 export const mysticwolf_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
     newGameState.players,
     token
@@ -86,12 +74,7 @@ export const mysticwolf_response = (gameState, token, selected_card_positions, t
     uniqInformations: { viewed_cards: [selected_card_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

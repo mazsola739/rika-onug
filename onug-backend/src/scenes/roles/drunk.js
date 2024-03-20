@@ -1,18 +1,14 @@
 //@ts-check
 import { SCENE, centerCardPositions } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getPlayerNumberWithMatchingToken,
-} from '../../utils/scene-utils'
+import { getAllPlayerTokens, getPlayerNumberWithMatchingToken } from '../../utils/scene-utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
 export const drunk = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['drunk_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['drunk_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -21,13 +17,7 @@ export const drunk = (gameState, title) => {
       interaction = drunk_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -94,12 +84,7 @@ export const drunk_response = (gameState, token, selected_card_positions, title)
     uniqInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

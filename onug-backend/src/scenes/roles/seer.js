@@ -6,10 +6,9 @@ import { isValidCardSelection } from '../validate-response-data'
 
 export const seer = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['seer_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['seer_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -18,13 +17,7 @@ export const seer = (gameState, title) => {
       interaction = seer_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -93,12 +86,7 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
     uniqInformations: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

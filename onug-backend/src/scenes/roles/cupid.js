@@ -6,10 +6,9 @@ import { isValidMarkSelection } from '../validate-response-data'
 
 export const cupid = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['cupid_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['cupid_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -18,13 +17,7 @@ export const cupid = (gameState, title) => {
       interaction = cupid_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -33,7 +26,7 @@ export const cupid = (gameState, title) => {
 
 export const cupid_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   const allPlayerTokens = getAllPlayerTokens(newGameState.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
 
@@ -101,12 +94,7 @@ export const cupid_response = (gameState, token, selected_mark_positions, title)
     uniqInformations: { mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

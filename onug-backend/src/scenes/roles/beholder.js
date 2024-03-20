@@ -4,6 +4,8 @@ import { getAllPlayerTokens } from '../../utils/scene-utils'
 
 export const beholder = (gameState, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_beholder_kickoff_text'
@@ -14,9 +16,6 @@ export const beholder = (gameState, title, hasSeer, hasApprenticeSeer, hasDoppel
       ? 'beholder_seer_kickoff_text'
       : 'beholder_apprenticeseer_kickoff_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -25,13 +24,7 @@ export const beholder = (gameState, title, hasSeer, hasApprenticeSeer, hasDoppel
       interaction = beholder_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -41,16 +34,13 @@ export const beholder = (gameState, title, hasSeer, hasApprenticeSeer, hasDoppel
 export const beholder_interaction = (gameState, token, title) => {
   return {}
 }
+
 export const beholder_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
   const scene = []
+  
   const interaction = {}
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

@@ -4,15 +4,14 @@ import { getAllPlayerTokens } from '../../utils/scene-utils'
 
 export const evilometer = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_evilometer_kickoff_text'
       : 'evilometer_kickoff_text',
     'evilometer_kickoff2_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -21,13 +20,7 @@ export const evilometer = (gameState, title, hasDoppelganger) => {
       interaction = evilometer_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

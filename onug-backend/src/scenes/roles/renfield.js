@@ -5,15 +5,14 @@ import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const renfield = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_renfield_kickoff_text'
       : 'renfield_kickoff_text',
     'renfield_kickoff2_text',
   ]
-  const tokens = getAllPlayerTokens(newGameState.players)
-
-  const scene = []
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -22,13 +21,7 @@ export const renfield = (gameState, title, hasDoppelganger) => {
       interaction = renfield_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -37,7 +30,6 @@ export const renfield = (gameState, title, hasDoppelganger) => {
 
 export const renfield_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
   const vampires = getVampirePlayerNumbersByRoleIds(newGameState.players)
   const newVampire = getVampirePlayerNumbersByMark(newGameState.players)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)

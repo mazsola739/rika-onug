@@ -5,10 +5,9 @@ import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const everyonemark = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['everyone_mark_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['everyone_mark_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -16,13 +15,7 @@ export const everyonemark = (gameState, title) => {
     interaction = everyonemark_interaction(newGameState, token, title)
 
     newGameState.players[token].player_history.scene_title = title
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -31,7 +24,7 @@ export const everyonemark = (gameState, title) => {
 
 export const everyonemark_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
   const viewMarks = getMarksByPositions(newGameState.card_positions, [currentPlayerNumber])
 

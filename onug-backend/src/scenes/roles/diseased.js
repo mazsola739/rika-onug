@@ -6,10 +6,9 @@ import { isValidMarkSelection } from '../validate-response-data'
 
 export const diseased = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['diseased_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['diseased_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -18,13 +17,7 @@ export const diseased = (gameState, title) => {
       interaction = diseased_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
@@ -33,7 +26,7 @@ export const diseased = (gameState, title) => {
 
 export const diseased_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-
+  
   const neighbors = getPlayerNeighborsByToken(newGameState.players, token)
 
   newGameState.players[token].player_history = {
@@ -86,12 +79,7 @@ export const diseased_response = (gameState, token, selected_mark_positions, tit
     uniqInformations: { mark_of_disease: [selected_mark_positions[0]] },
   })
 
-  scene.push({
-    type: SCENE,
-    title,
-    token,
-    interaction,
-  })
+  scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState

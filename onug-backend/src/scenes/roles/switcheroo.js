@@ -5,10 +5,9 @@ import { troublemaker_interaction } from './troublemaker'
 
 export const switcheroo = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['switcheroo_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['switcheroo_kickoff_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -17,13 +16,7 @@ export const switcheroo = (gameState, title) => {
       interaction = troublemaker_interaction(newGameState, token, title)
     }
 
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-      interaction,
-    })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene
