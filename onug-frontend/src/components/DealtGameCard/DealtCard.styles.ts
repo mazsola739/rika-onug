@@ -13,12 +13,10 @@ export const CardBack = styled.div<StyledDealtCardProps>`
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
-  border: 3px solid white;
 
-  border-radius: 6px;
-  height: 90px;
+  height: 110px;
   justify-content: center;
-  width: 90px;
+  width: 80px;
 `
 
 export const Tokens = styled.div`
