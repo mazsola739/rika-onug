@@ -22,9 +22,9 @@ export const CardBack = styled.div<StyledBoardCardProps>`
       : '3px solid white'};
 
   border-radius: 6px;
-  height: 90px;
+  height: 110px;
   justify-content: center;
-  width: 90px;
+  width: 80px;
 `
 
 export const MarkBack = styled.div<StyledBoardMarkProps>`

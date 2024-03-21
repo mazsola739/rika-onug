@@ -20,5 +20,5 @@ export const CardListTitle = styled.p`
 export const CardListGrid = styled.div`
   display: grid;
   gap: 5px;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
 `

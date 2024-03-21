@@ -17,6 +17,7 @@ export const CardBack = styled.div<StyledDealtCardProps>`
   height: 110px;
   justify-content: center;
   width: 80px;
+  filter: drop-shadow(1px 1px 1px black);
 `
 
 export const Tokens = styled.div`
@@ -25,4 +26,5 @@ export const Tokens = styled.div`
   justify-content: center;
   color: red;
   gap: 2px;
+  filter: drop-shadow(1px 1px 1px black);
 `

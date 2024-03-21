@@ -1,11 +1,11 @@
-import { Token } from 'components'
+import { DealtToken } from 'components'
 import { Marks } from './GameTable.styles'
 import { TokenType } from 'types'
 
 const renderMarks = (selectedMarks: TokenType[]) => (
   <Marks>
     {selectedMarks.map((mark, index) => (
-      <Token key={index} tokenName={mark.token_name} size={55} />
+      <DealtToken key={index} tokenName={mark.token_name} size={55} />
     ))}
   </Marks>
 )
@@ -16,12 +16,12 @@ const renderArtifacts = (
   hasSentinel: boolean
 ) => (
   <Marks>
-    {hasSentinel && <Token tokenName="shield" size={55} />}
+    {hasSentinel && <DealtToken tokenName="shield" size={55} />}
     {hasCurator &&
       artifacts.map(
         (artifact, index) =>
           artifact.token_name !== 'shield' && (
-            <Token key={index} tokenName={artifact.token_name} size={55} />
+            <DealtToken key={index} tokenName={artifact.token_name} size={55} />
           )
       )}
   </Marks>
