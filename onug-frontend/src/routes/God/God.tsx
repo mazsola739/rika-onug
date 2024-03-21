@@ -159,39 +159,19 @@ export const God: React.FC = observer(() => {
           <FormContainer>
             <InputContainer>
               <Label htmlFor="room_id">{LABEL_ROOM_ID}</Label>
-              <Input
-                type="text"
-                id="room_id"
-                name="room_id"
-                value={roomId}
-                onChange={(e) => setRoomId(e.target.value)}
-              />
+              <Input type="text" id="room_id" name="room_id" value={roomId} onChange={(e) => setRoomId(e.target.value)} />
             </InputContainer>
             <InputContainer>
               <Label htmlFor="token">{LABEL_TOKEN}</Label>
-              <Input
-                type="text"
-                id="token"
-                name="token"
-                value={token}
-                onChange={(e) => setToken(e.target.value)}
-              />
+              <Input type="text" id="token" name="token" value={token} onChange={(e) => setToken(e.target.value)} />
             </InputContainer>
           </FormContainer>
           <ButtonsContainer>
             <Button onClick={checkGameStates}>{CHECK_GAME_STATES}</Button>
-            <Button onClick={checkGameStateByRoomId}>
-              {CHECK_GAME_STATE_BY_ROOM_ID}
-            </Button>
-            <Button onClick={deleteAllGameStates}>
-              {DELETE_ALL_GAME_STATES}
-            </Button>
-            <Button onClick={deleteGameStateByRoomId}>
-              {DELETE_GAME_STATE_BY_ROOM_ID}
-            </Button>
-            <Button onClick={reInitAllGameStates}>
-              {RE_INIT_ALL_GAME_STATES}
-            </Button>
+            <Button onClick={checkGameStateByRoomId}>{CHECK_GAME_STATE_BY_ROOM_ID}</Button>
+            <Button onClick={deleteAllGameStates}>{DELETE_ALL_GAME_STATES}</Button>
+            <Button onClick={deleteGameStateByRoomId}>{DELETE_GAME_STATE_BY_ROOM_ID}</Button>
+            <Button onClick={reInitAllGameStates}>{RE_INIT_ALL_GAME_STATES}</Button>
           </ButtonsContainer>
         </GameStatesContainer>
 
@@ -200,27 +180,16 @@ export const God: React.FC = observer(() => {
           <FormContainer>
             <InputContainer>
               <Label htmlFor="message">{LABEL_MESSAGE}</Label>
-              <textarea
-                id="message"
-                name="message"
-                defaultValue={JSON.stringify(message)}
-                onChange={(event) => setMessageHandler(event.target.value)}
-              />
+              <textarea id="message" name="message" defaultValue={JSON.stringify(message)} onChange={(event) => setMessageHandler(event.target.value)} />
             </InputContainer>
           </FormContainer>
           <ButtonsContainer>
             <Button onClick={checkConnections}>{CHECK_CONNECTIONS}</Button>
             <Button onClick={removeAllPlayers}>{REMOVE_ALL_PLAYERS}</Button>
-            <Button onClick={removePlayerByToken}>
-              {REMOVE_PLAYER_BY_TOKEN}
-            </Button>
+            <Button onClick={removePlayerByToken}>{REMOVE_PLAYER_BY_TOKEN}</Button>
             <Button onClick={broadcastToAll}>{BROADCAST_TO_ALL}</Button>
-            <Button onClick={broadcastToAllInRoom}>
-              {BROADCAST_TO_ALL_IN_ROOM}
-            </Button>
-            <Button onClick={sendMessageToPlayer}>
-              {SEND_MESSAGE_TO_PLAYER}
-            </Button>
+            <Button onClick={broadcastToAllInRoom}>{BROADCAST_TO_ALL_IN_ROOM}</Button>
+            <Button onClick={sendMessageToPlayer}>{SEND_MESSAGE_TO_PLAYER}</Button>
           </ButtonsContainer>
         </WSContainer>
 
@@ -228,9 +197,7 @@ export const God: React.FC = observer(() => {
           <GodTitle>{META}</GodTitle>
           <ButtonsContainer>
             <Button onClick={listOnugEnvVars}>{LIST_ONUG_ENV_VARS}</Button>
-            <Button onClick={deleteAllOldLogFiles}>
-              {DELETE_ALL_OLD_LOG_FILES}
-            </Button>
+            <Button onClick={deleteAllOldLogFiles}>{DELETE_ALL_OLD_LOG_FILES}</Button>
           </ButtonsContainer>
         </MetaContainer>
       </LeftSide>

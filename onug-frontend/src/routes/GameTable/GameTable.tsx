@@ -72,8 +72,7 @@ export const GameTable: React.FC = observer(() => {
       <Main>
         <OwnCardPlace>{player && <OwnCard player={player} />}</OwnCardPlace>
         <GameArea>
-          {(hasCurator || hasSentinel) &&
-            renderArtifacts(artifacts, hasCurator, hasSentinel)}
+          {(hasCurator || hasSentinel) && renderArtifacts(artifacts, hasCurator, hasSentinel)}
           <DealtCards />
           {hasMarks && renderMarks(selectedMarks)}
         </GameArea>

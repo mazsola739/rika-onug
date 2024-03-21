@@ -98,16 +98,7 @@ export const Stub: React.FC = observer(() => {
                 <PositionContainer key={index}>
                   <Input>
                     <Label htmlFor={label}>{label}</Label>
-                    <InputField
-                      type="text"
-                      inputMode="numeric"
-                      id={label}
-                      name={label}
-                      value={inputValues[index]}
-                      onChange={(e) =>
-                        handleInputChange(index, parseInt(e.target.value) || 0)
-                      }
-                    />
+                    <InputField type="text" inputMode="numeric" id={label} name={label} value={inputValues[index]} onChange={(e) => handleInputChange(index, parseInt(e.target.value) || 0)} />
                   </Input>
                   <RoleName>{getRoleName(dealStub[label])}</RoleName>
                 </PositionContainer>

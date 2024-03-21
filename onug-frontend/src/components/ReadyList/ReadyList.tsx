@@ -12,9 +12,7 @@ export const ReadyList: React.FC<ReadyListProps> = observer(({ players }) => (
       return (
         <Player key={index}>
           <Token tokenName={playerTokenName} size={25} ready={ready} />
-          <PlayerReadyName ready={ready}>
-            {player_name} is {ready ? 'ready' : 'not ready'}
-          </PlayerReadyName>
+          <PlayerReadyName ready={ready}>{player_name} is {ready ? 'ready' : 'not ready'}</PlayerReadyName>
         </Player>
       )
     })}

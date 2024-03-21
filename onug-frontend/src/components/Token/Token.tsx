@@ -10,13 +10,5 @@ export const Token: React.FC<TokenProps> = ({
 }) => {
   const imageSrc = useMemo(() => `/assets/tokens/${tokenName}.png`, [tokenName])
 
-  return (
-    <StyledToken
-      src={imageSrc}
-      alt={tokenName}
-      onClick={onClick}
-      size={size}
-      ready={ready}
-    />
-  )
+  return <StyledToken  src={imageSrc}  alt={tokenName}  onClick={onClick}  size={size}  ready={ready} />
 }

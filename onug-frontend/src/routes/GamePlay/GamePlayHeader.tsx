@@ -13,7 +13,7 @@ export const GamePlayHeader: React.FC = observer(() => {
       <NarrationImage>
         {img.length > 0 && <CardImage image={img} size={100} />}
       </NarrationImage>
-      <Narration> {narration}</Narration>
+      <Narration>{narration}</Narration>
       <TimerContainer>
         <p>Time remaining:</p>
         <Timer startingTime={startingTime} actionTime={20000} />

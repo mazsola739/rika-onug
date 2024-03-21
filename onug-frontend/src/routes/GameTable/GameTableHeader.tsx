@@ -17,17 +17,12 @@ export const GameTableHeader: React.FC<GameTableHeaderProp> = observer(
         {player && (
           <StyledGameTableHeader>
             <PlayerInfo>
-              <Token
-                tokenName={`selected_player_${player.player_number}`}
-                size={50}
-              />
+              <Token tokenName={`selected_player_${player.player_number}`} size={50} />
               <PlayerName>{player.player_name}</PlayerName>
             </PlayerInfo>
             <PlayerCardInfo>
               <CardImage image={card.card_name} size={100} />
-              <PlayerCardRule>
-                {`${player.player_role}: ${card.rules}`}
-              </PlayerCardRule>
+              <PlayerCardRule>{`${player.player_role}: ${card.rules}`}</PlayerCardRule>
             </PlayerCardInfo>
           </StyledGameTableHeader>
         )}

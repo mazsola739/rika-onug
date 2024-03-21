@@ -16,16 +16,8 @@ export const GamePlayFooter: React.FC = observer(() => {
   return (
     <Footer>
       <FooterButtons>
-        <Button
-          onClick={handlePauseGame}
-          buttonText={buttonText}
-          variant="orange"
-        />
-        <Button
-          onClick={handleStopGame}
-          buttonText={buttons.stop_button_label}
-          variant="red"
-        />
+        <Button onClick={handlePauseGame} buttonText={buttonText}variant="orange" />
+        <Button onClick={handleStopGame} buttonText={buttons.stop_button_label}variant="red" />
       </FooterButtons>
     </Footer>
   )

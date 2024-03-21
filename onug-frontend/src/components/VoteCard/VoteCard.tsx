@@ -50,18 +50,11 @@ export const VoteCard: React.FC<VoteCardProps> = observer(
             {!isCenter && shield && <Token tokenName="shield" size={25} />}
           </Tokens>
         )}
-        <CardBack
-          cardBackgroundImage={cardImageSrc}
-          selectable_cards={selectable_cards}
-          onClick={() => cardClickHandler(isCenter ? 'center' : 'player')}
-          isSelectedCard={isSelectedCard}
-        />
+        <CardBack cardBackgroundImage={cardImageSrc} selectable_cards={selectable_cards} onClick={() => cardClickHandler(isCenter ? 'center' : 'player')} isSelectedCard={isSelectedCard} />
         <Tokens>
           {!isCenter && select && <Icon iconName="select" size={25} />}
         </Tokens>
-        {!isCenter && hasMarks && (
-          <MarkBack markBackgroundImage={markImageSrc} />
-        )}
+        {!isCenter && hasMarks && (<MarkBack markBackgroundImage={markImageSrc} />)}
         {!isCenter && artifact && (<ArtifactBack artifactBackgroundImage={markImageSrc} />)}
       </StyledVoteCard>
     )

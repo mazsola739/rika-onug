@@ -82,12 +82,7 @@ export const Lobby: React.FC = observer(() => {
   ) : (
     <StyledLobby>
       {lobbyStore.rooms.map((room, index) => (
-        <RoomButton
-          key={index}
-          onClick={() => handleJoinRoom(room.room_id)}
-          index={index}
-          buttonText={room.room_name}
-        />
+        <RoomButton key={index} onClick={() => handleJoinRoom(room.room_id)} index={index} buttonText={room.room_name} />
       ))}
     </StyledLobby>
   )
