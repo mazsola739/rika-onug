@@ -37,10 +37,7 @@ export const aliens = (gameState, title) => {
   if (randomInstructions.includes('view')) {
     let randomAnyIdentifier = getRandomItemFromArray(alienAnyKeys)
     if (randomAnyIdentifier === 'activePlayers') {
-      randomAnyIdentifier = pickRandomUpToThreePlayers(
-        newGameState.total_players,
-        'conjunction_or'
-      )
+      randomAnyIdentifier = pickRandomUpToThreePlayers(newGameState.total_players, 'conjunction_or')
     }
     narration[2] = randomAnyIdentifier
   }
@@ -61,7 +58,7 @@ export const aliens = (gameState, title) => {
       interaction = aliens_interaction(newGameState, token, title)
     }
     
-        scene.push({ type: SCENE, title, token, narration, interaction })
+    scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
   newGameState.scene = scene

@@ -51,10 +51,7 @@ export const curator_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_any'],
     icon: 'artifact',
-    selectableCards: {
-      selectable_cards: selectablePlayersWithNoArtifact,
-      selectable_card_limit: { player: 1, center: 0 },
-    },
+    selectableCards: { selectable_cards: selectablePlayersWithNoArtifact, selectable_card_limit: { player: 1, center: 0 } },
   })
 }
 

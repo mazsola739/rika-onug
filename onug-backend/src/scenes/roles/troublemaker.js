@@ -42,10 +42,7 @@ export const troublemaker_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_two_any_other'],
     icon: 'swap',
-    selectableCards: {
-      selectable_cards: selectablePlayerNumbers,
-      selectable_card_limit: { player: 2, center: 0 },
-    },
+    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 } },
   })
 }
 

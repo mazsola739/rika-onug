@@ -37,10 +37,7 @@ export const witch_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_center'],
     icon: 'voodoo',
-    selectableCards: {
-      selectable_cards: centerCardPositions,
-      selectable_card_limit: { player: 1, center: 0 },
-    },
+    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
   })
 }
 
