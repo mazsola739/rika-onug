@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getRandomItemFromArray, getAllPlayerTokens } from '../../utils'
 
 const randomBodysnatcher = [
   'bodysnatcher_steal_text',
@@ -15,13 +15,7 @@ const bodysnatcherKeys = [
   'identifier_bothneighbors_text',
 ]
 
-const createBodysnatcher = (prefix) => () =>
-  [
-    `${prefix}_kickoff_text`,
-    getRandomItemFromArray(randomBodysnatcher),
-    getRandomItemFromArray(bodysnatcherKeys),
-    'bodysnatcher_end_text',
-  ]
+const createBodysnatcher = prefix =>  [`${prefix}_kickoff_text`, getRandomItemFromArray(randomBodysnatcher), getRandomItemFromArray(bodysnatcherKeys), 'bodysnatcher_end_text']
 
 export const bodysnatcher = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -32,12 +26,14 @@ export const bodysnatcher = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'bodysnatcher') {
-      if (newGameState.players[token].card.player_original_id === 74 || (newGameState.players[token].card.player_role_id === 74 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 74 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 74 || (card.player_role_id === 74 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = bodysnatcher_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_bodysnatcher') {
-      if (newGameState.players[token].card.player_role_id === 74 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 74 && card.player_original_id === 1) {
         interaction = bodysnatcher_interaction(newGameState, token, title)
       }
     }

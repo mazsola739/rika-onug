@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNeighborsByToken } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNeighborsByToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -13,7 +13,9 @@ export const diseased = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 32 || (newGameState.players[token].card.player_role_id === 32 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 32 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 32 || (card.player_role_id === 32 && copyPlayerIds.includes(card.player_original_id))) {
       interaction = diseased_interaction(newGameState, token, title)
     }
 

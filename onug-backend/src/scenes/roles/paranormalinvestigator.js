@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE, townIds } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions, getSelectableOtherPlayersWithoutShield } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE, townIds } from '../../constant'
+import { getAllPlayerTokens, getSelectableOtherPlayersWithoutShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -13,7 +13,9 @@ export const paranormalinvestigator = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 23 || (newGameState.players[token].card.player_role_id === 23 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 23 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 23 || (card.player_role_id === 23 && copyPlayerIds.includes(card.player_original_id))) {
       interaction = paranormalinvestigator_interaction(newGameState, token, title)
     }
 
@@ -83,11 +85,7 @@ export const paranormalinvestigator_response = (gameState, token, selected_card_
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: [
-      'interaction_saw_card',
-      selected_card_positions[0],
-      showCards.length === 2 ? selected_card_positions[1] : '',
-    ],
+    private_message: ['interaction_saw_card', selected_card_positions[0], showCards.length === 2 ? selected_card_positions[1] : ''],
     icon: 'investigator',
     showCards: showCards,
     uniqInformations: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },

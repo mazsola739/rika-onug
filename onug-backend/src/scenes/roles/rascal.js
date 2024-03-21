@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getRandomItemFromArray, getAllPlayerTokens } from '../../utils'
 
 const random_rascal = [
   'rascal_idiot_text',
@@ -30,7 +30,7 @@ const rascalAnyTwoKeys = [
   'identifier_2rightneighbors_text',
 ]
 
-const createRascal = (prefix) => () => {
+const createRascal = prefix => {
   const result = [`${prefix}_kickoff_text`]
   const randomInstructions = getRandomItemFromArray(random_rascal)
   const randomAnyOne = getRandomItemFromArray(rascalAnyOneKeys)
@@ -72,12 +72,14 @@ export const rascal = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'rascal') {
-      if (newGameState.players[token].card.player_original_id === 52 || (newGameState.players[token].card.player_role_id === 52 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 52 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 52 || (card.player_role_id === 52 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = rascal_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_rascal') {
-      if (newGameState.players[token].card.player_role_id === 52 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 52 && card.player_original_id === 1) {
         interaction = rascal_interaction(newGameState, token, title)
       }
     }

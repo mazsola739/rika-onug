@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getRandomItemFromArray, getAllPlayerTokens } from '../../utils'
 
 const randomExposer = [
   'exposer_flip1_text',
@@ -8,8 +8,7 @@ const randomExposer = [
   'exposer_flip3_text',
 ]
 
-const createExposer = (prefix) => () =>
-  [`${prefix}_kickoff_text`, getRandomItemFromArray(randomExposer)]
+const createExposer = prefix => [`${prefix}_kickoff_text`, getRandomItemFromArray(randomExposer)]
 
 export const exposer = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -20,12 +19,14 @@ export const exposer = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'exposer') {
-      if (newGameState.players[token].card.player_original_id === 46 || (newGameState.players[token].card.player_role_id === 46 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 46 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 46 || (card.player_role_id === 46 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = exposer_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_exposer') {
-      if (newGameState.players[token].card.player_role_id === 46 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 46 && card.player_original_id === 1) {
         interaction = exposer_interaction(newGameState, token, title)
       }
     }

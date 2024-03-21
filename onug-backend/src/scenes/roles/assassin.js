@@ -1,11 +1,10 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
-const createAssassin = (prefix) => () =>
-  [`${prefix}_kickoff_text`, 'assassin_kickoff2_text']
+const createAssassin = prefix => [`${prefix}_kickoff_text`, 'assassin_kickoff2_text']
 
 export const assassin = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -16,12 +15,14 @@ export const assassin = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'assassin') {
-      if (newGameState.players[token].card.player_original_id === 29 || (newGameState.players[token].card.player_role_id === 29 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 29 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 29 || (card.player_role_id === 29 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = assassin_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_assassin') {
-      if (newGameState.players[token].card.player_role_id === 29 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 29 && card.player_original_id === 1) {
         interaction = assassin_interaction(newGameState, token, title)
       }
     }
@@ -47,7 +48,7 @@ export const assassin_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ["interaction_must_one_any"],
+    private_message: ['interaction_must_one_any'],
     icon: 'target',
     selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 } },
   })
@@ -77,7 +78,7 @@ export const assassin_response = (gameState, token, selected_mark_positions, tit
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
   if (currentPlayerNumber === selected_mark_positions[0]) {
-    newGameState.players[token].card.player_mark = "mark_of_assassin"
+    newGameState.players[token].card.player_mark = 'mark_of_assassin'
   }
 
   newGameState.players[token].card_or_mark_action = true

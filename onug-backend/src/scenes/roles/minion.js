@@ -1,8 +1,7 @@
 //@ts-check
-import { SCENE, werewolvesAndDreamWolfIds } from '../../constant'
-import { getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
 
 export const minion = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
@@ -18,7 +17,9 @@ export const minion = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 7 || (newGameState.players[token].card.player_role_id === 7 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 7 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 7 || (card.player_role_id === 7 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = minion_interaction(newGameState, token, title)
     }
 

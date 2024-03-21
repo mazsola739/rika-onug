@@ -1,15 +1,10 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getAssassinNumberByRoleIds, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getAssassinNumberByRoleIds, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
-const createApprenticeAssassin = (hasAssassin, prefix) => [
-  `${prefix}_kickoff_text`,
-  hasAssassin
-    ? 'apprenticeassassin_assassin_text'
-    : 'apprenticeassassin_alone_text',
-]
+const createApprenticeAssassin = (hasAssassin, prefix) => [`${prefix}_kickoff_text`, hasAssassin ? 'apprenticeassassin_assassin_text' : 'apprenticeassassin_alone_text']
 
 export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
   const newGameState = { ...gameState }
@@ -20,21 +15,14 @@ export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'apprenticeassassin') {
-      if (
-        newGameState.players[token].card.player_original_id === 28 ||
-        (newGameState.players[token].card.player_role_id === 28 &&
-          newGameState.players[token].card.player_original_id === 30) ||
-        (newGameState.players[token].card.player_role_id === 28 &&
-          newGameState.players[token].card.player_original_id === 64)
-      ) {
+      if (card.player_original_id === 28 || (card.player_role_id === 28 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = apprenticeassassin_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_apprenticeassassin') {
-      if (
-        newGameState.players[token].card.player_role_id === 28 &&
-        newGameState.players[token].card.player_original_id === 1
-      ) {
+      if (card.player_role_id === 28 && card.player_original_id === 1) {
         interaction = apprenticeassassin_interaction(newGameState, token, title)
       }
     }
@@ -126,10 +114,7 @@ export const apprenticeassassin_response = (gameState, token, selected_mark_posi
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: [
-      'interaction_mark_of_assassin',
-      selected_mark_positions[0],
-    ],
+    private_message: ['interaction_mark_of_assassin', selected_mark_positions[0]],
     icon: 'target',
     uniqInformations: { mark_of_assassin: [selected_mark_positions[0]] },
   })

@@ -70,12 +70,12 @@ export const doppelganger_instant_action = (gameState, title) => {
     'doppelganger_verbose_outro_text',
   ]
 
-
-
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 1) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 1) {
       interaction = doppelganger_instant_action_interaction(newGameState, token, title)
     }
 

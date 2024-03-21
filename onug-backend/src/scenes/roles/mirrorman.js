@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { getAllPlayerTokens } from '../../utils'
 import { copycat_interaction } from './copycat'
 
 export const mirrorman = (gameState, title) => {
@@ -12,7 +12,9 @@ export const mirrorman = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 64) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 64) {
       interaction = copycat_interaction(newGameState, token, title)
     }
 

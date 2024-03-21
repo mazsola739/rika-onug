@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getMadScientistPlayerNumberByRoleIds } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getMadScientistPlayerNumberByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
@@ -17,7 +17,9 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 62 || (newGameState.players[token].card.player_role_id === 62 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 62 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 62 || (card.player_role_id === 62 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = intern_interaction(newGameState, token, title)
     }
 
@@ -47,11 +49,7 @@ export const intern_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: [
-      madscientistPlayerNumbers.length === 0
-        ? 'interaction_mad_now'
-        : 'interaction_mad',
-    ],
+    private_message: [madscientistPlayerNumbers.length === 0 ? 'interaction_mad_now' : 'interaction_mad'],
     icon: 'mad',
     uniqInformations: { madscientist: madscientistPlayerNumbers },
   })

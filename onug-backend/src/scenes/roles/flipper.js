@@ -1,11 +1,10 @@
 //@ts-check
-import { SCENE, townIds } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions, getSelectableOtherPlayersWithoutShield } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE, townIds } from '../../constant'
+import { getAllPlayerTokens, getSelectableOtherPlayersWithoutShield, getCardIdsByPositions } from '../../utils'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
-import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
-const createFlipper = (prefix) => () =>
-  [`${prefix}_kickoff_text`, 'flipper_kickoff2_text']
+const createFlipper = prefix => [`${prefix}_kickoff_text`, 'flipper_kickoff2_text']
 
 export const flipper = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -16,12 +15,14 @@ export const flipper = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'flipper') {
-      if (newGameState.players[token].card.player_original_id === 59 || (newGameState.players[token].card.player_role_id === 59 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 59 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 59 || (card.player_role_id === 59 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = flipper_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_flipper') {
-      if (newGameState.players[token].card.player_role_id === 59 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 59 && card.player_original_id === 1) {
         interaction = flipper_interaction(newGameState, token, title)
       }
     }
@@ -35,10 +36,8 @@ export const flipper = (gameState, title, prefix) => {
 
 export const flipper_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-  const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
-    newGameState.players,
-    token
-  )
+  
+  const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(newGameState.players, token)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,

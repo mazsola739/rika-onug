@@ -1,11 +1,10 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getMarksByPositions, getPlayerNumberWithMatchingToken, getPlayerNumbersWithNonMatchingTokens } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken, getMarksByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
-const createPickpocket = (prefix) => () =>
-  [`${prefix}_kickoff_text`, 'pickpocket_kickoff2_text']
+const createPickpocket = prefix => [`${prefix}_kickoff_text`, 'pickpocket_kickoff2_text']
 
 export const pickpocket = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -16,12 +15,14 @@ export const pickpocket = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'pickpocket') {
-      if (newGameState.players[token].card.player_original_id === 36 || (newGameState.players[token].card.player_role_id === 36 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 36 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 36 || (card.player_role_id === 36 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = pickpocket_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_pickpocket') {
-      if (newGameState.players[token].card.player_role_id === 36 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 36 && card.player_original_id === 1) {
         interaction = pickpocket_interaction(newGameState, token, title)
       }
     }

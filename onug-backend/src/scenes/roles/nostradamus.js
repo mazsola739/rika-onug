@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE, townIds } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE, townIds } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -13,7 +13,9 @@ export const nostradamus = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 80 || (newGameState.players[token].card.player_role_id === 80 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 80 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 80 || (card.player_role_id === 80 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = nostradamus_interaction(newGameState, token, title)
     }
 

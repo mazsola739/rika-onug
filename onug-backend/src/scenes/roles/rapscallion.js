@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils'
 
 export const rapscallion = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -11,7 +11,9 @@ export const rapscallion = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 65  || (newGameState.players[token].card.player_role_id === 65 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 65 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 65 || (card.player_role_id === 65 && copyPlayerIds.includes(card.player_original_id))) {
       interaction = rapscallion_interaction(newGameState, token, title)
     }
 

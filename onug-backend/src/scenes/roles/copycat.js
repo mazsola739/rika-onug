@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE, centerCardPositions } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions } from '../../utils/scene-utils'
+import { getAllPlayerTokens, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -13,7 +13,9 @@ export const copycat = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 30) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 30) {
       interaction = copycat_interaction(newGameState, token, title)
     }
 

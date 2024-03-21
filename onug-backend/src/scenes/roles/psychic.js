@@ -1,15 +1,11 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getRandomItemFromArray, getAllPlayerTokens } from '../../utils'
 
 const random_psychic = ['psychic_view1_text', 'psychic_view2_text']
 const psychicKeys = ['identifier_anyeven_text', 'identifier_anyodd_text']
-const createPsychic = (prefix) => () =>
-  [
-    `${prefix}_kickoff_text`,
-    getRandomItemFromArray(random_psychic),
-    getRandomItemFromArray(psychicKeys),
-  ]
+
+const createPsychic = prefix => [`${prefix}_kickoff_text`, getRandomItemFromArray(random_psychic), getRandomItemFromArray(psychicKeys)]
 
 export const psychic = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -20,12 +16,14 @@ export const psychic = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'psychic') {
-      if (newGameState.players[token].card.player_original_id === 51 || (newGameState.players[token].card.player_role_id === 51 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 51 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 51 || (card.player_role_id === 51 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = psychic_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_psychic') {
-      if (newGameState.players[token].card.player_role_id === 51 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 51 && card.player_original_id === 1) {
         interaction = psychic_interaction(newGameState, token, title)
       }
     }

@@ -9,7 +9,7 @@ import { scene } from './scene'
 //TODO set tickTime each narration different
 const tickTime = 20000
 
-export const stopGamePlay = (gameState) => {
+export const stopGamePlay = gameState => {
   gameState.game_stopped = true
   gameState.stage = STAGES.ROOM
 
@@ -42,7 +42,7 @@ export const stopGamePlay = (gameState) => {
   return gameState
 }
 
-const getNextScene = (gameState) => {
+const getNextScene = gameState => {
   try {
     if (!gameState.actual_scene) return // game already stopped
 
@@ -85,7 +85,7 @@ const getNextScene = (gameState) => {
   }
 }
 
-/* const handlePlayerTimeout = (gameState) => {
+/* const handlePlayerTimeout = gameState => {
   // Handle player timeout here
   // For example, you can simulate a random answer or trigger a specific action
   console.log('Player timed out. Triggering action...');

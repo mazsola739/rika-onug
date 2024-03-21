@@ -5,10 +5,9 @@ import _ from 'lodash'
 
 const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
 
-const shufflePlayers = (totalPlayers) => Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`).sort(() => 0.5 - Math.random())
+const shufflePlayers = totalPlayers => Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`).sort(() => 0.5 - Math.random())
 
-
-export const getAllPlayerTokens = (players) => Object.keys(players)
+export const getAllPlayerTokens = players => Object.keys(players)
 
 //CONDITION
 export const containsAllIds = (selectedCardIds, roleIds) => roleIds.every((cardId) => selectedCardIds.includes(cardId))
@@ -22,16 +21,19 @@ export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
 
   return selectedPlayers > 1 ? [...players.slice(0, -1), conjunction, players.slice(-1)[0]] : players
 }
-export const getRandomItemFromArray = (array) => array[getRandomNumber(0, array.length - 1)]
+
+export const getRandomItemFromArray = array => array[getRandomNumber(0, array.length - 1)]
 
 //SCENE
 export const getSelectableOtherPlayersWithoutShield = (players, token) => {
   const result = []
+
   Object.keys(players).forEach((playerToken) => {
     if (playerToken !== token && players[playerToken].card.shield !== true) {
       result.push(`player_${players[playerToken].player_number}`)
     }
   })
+  
   return result
 }
 
@@ -57,39 +59,39 @@ export const getMarksByPositions = (cardPositions, selectedPositions) => {
   return result
 }
 
-export const getNonWerewolfPlayerNumbersByRoleIds = (players) => {
+export const getNonWerewolfPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
     if (!werewolvesAndDreamWolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
     }
   }
 
   return result
 }
 
-export const getNonVillainPlayerNumbersByRoleIds = (players) => {
+export const getNonVillainPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
     if (!superVillainsIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
     }
   }
 
   return result
 }
 
-export const getWerewolfPlayerNumbersByRoleIds = (players) => {
+export const getWerewolfPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
     if (werewolvesIds.includes(player.card.player_role_id)) {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
     }
   }
 
@@ -100,28 +102,29 @@ export const getDreamWolfPlayerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
+    const player = players[token]
     if (players[token].card.player_role_id === 21) {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
     }
   }
 
   return result
 }
 
-export const getVampirePlayerNumbersByRoleIds = (players) => {
+export const getVampirePlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
     if (vampireIds.includes(player.card.player_role_id)) {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
     }
   }
 
   return result
 }
 
-export const getVampireTokensByRoleIds = (players) => {
+export const getVampireTokensByRoleIds = players => {
   const result = []
 
   for (const token in players) {
@@ -134,13 +137,14 @@ export const getVampireTokensByRoleIds = (players) => {
   return result
 }
 
-export const getNonVampirePlayerNumbersByRoleIds = (gameState) => {
+export const getNonVampirePlayerNumbersByRoleIds = gameState => {
   const result = []
 
   for (const token in gameState.players) {
     const player = gameState.players[token]
-    if (!vampireIds.includes(player.card.player_role_id) && gameState.card_positions[`player_${gameState.players[token].player_number}`].mark !== "mark_of_vampire") {
-      result.push(`player_${gameState.players[token].player_number}`)
+    const cardPositions = gameState.card_positions
+    if (!vampireIds.includes(player.card.player_role_id) && cardPositions[`player_${player.player_number}`].mark !== "mark_of_vampire") {
+      result.push(`player_${player.player_number}`)
     }
   }
 
@@ -151,8 +155,9 @@ export const getMadScientistPlayerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
+    const player = players[token]
     if (players[token].card.player_role_id === 63) {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
     }
   }
 
@@ -163,8 +168,9 @@ export const getTannerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
+    const player = players[token]
     if (players[token].card.player_role_id === 10) {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
     }
   }
 
@@ -175,60 +181,113 @@ export const getAssassinNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
+    const player = players[token]
     if (players[token].card.player_role_id === 29) {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
     }
   }
 
   return result
 }
 
-export const getWerewolfAndDreamwolfPlayerNumbersByRoleIds = (players) => {
+export const getAnySeerNumberByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (player.card.player_role_id === 9 || player.card.player_role_id === 18) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getAnySeerNumberByRoleIdsWithoutShield = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if ((player.card.player_role_id === 9 || player.card.player_role_id === 18) && !(player.card?.shield)) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getWerewolfAndDreamwolfPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
     if (werewolvesAndDreamWolfIds.includes(player.card.player_role_id)) {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
     }
   }
 
   return result
 }
 
-export const getMasonPlayerNumbersByRoleIds = (players) => {
+export const getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithoutShield = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (werewolvesAndDreamWolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getMasonPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
     if (masonIds.includes(player.card.player_role_id)) {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
     }
   }
 
   return result
 }
 
-export const getLoversPlayerNumbersByMark = (players) => {
+export const getLoversPlayerNumbersByMark = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
     if (player.player_mark === "mark_of_love") {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
     }
   }
 
   return result
 }
 
-export const getVampirePlayerNumbersByMark = (players) => {
+export const getVampirePlayerNumbersByMark = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
     if (player.player_mark === "mark_of_vampire") {
-      result.push(`player_${players[token].player_number}`)
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const  getPlayerNumbersWithCardOrMarkActionTrue = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (player.card_or_mark_action === true) {
+      result.push(`player_${player.player_number}`)
     }
   }
 
@@ -297,6 +356,42 @@ export const getPlayerNeighborsByToken = (players, token) => {
   return neighbors
 }
 
+export const getPartOfBlobByToken = (players, token, randomInstruction) => {
+  const tokens = Object.keys(players)
+  const totalPlayers = tokens.length
+  const blobNumber = players[token].player_number
+  const partOfBlob = [`player_${blobNumber}`]
+
+  const side = randomInstruction.includes("left") ? "left" : randomInstruction.includes("right") ? "right" : "each"
+  const amount = randomInstruction.includes("4") ? 4 : randomInstruction.includes("3") ? 3 : randomInstruction.includes("2") ? 2 : 1
+
+  const getPartOfBlobNumber = (index) => {
+    let partOfBlobNumber = blobNumber + index
+    if (partOfBlobNumber <= 0) {
+      partOfBlobNumber += totalPlayers
+    } else if (partOfBlobNumber > totalPlayers) {
+      partOfBlobNumber -= totalPlayers
+    }
+    return partOfBlobNumber
+  }
+
+  if (side === "each" || side === "left") {
+    for (let i = 1; i <= amount; i++) {
+      const partOfBlobLeftSideNumber = getPartOfBlobNumber(-i)
+      partOfBlob.push(`player_${partOfBlobLeftSideNumber}`)
+    }
+  }
+
+  if (side === "each" || side === "right") {
+    for (let i = 1; i <= amount; i++) {
+      const partOfBlobRightSideNumber = getPartOfBlobNumber(i)
+      partOfBlob.push(`player_${partOfBlobRightSideNumber}`)
+    }
+  }
+
+  return partOfBlob
+}
+
 export const getSelectablePlayersWithNoShield = (players, shielded_cards) => players.filter(player => !shielded_cards.includes(player))
 export const getSelectablePlayersWithNoArtifact = (players, artifacted_cards) => players.filter(player => !artifacted_cards.includes(player))
 
@@ -304,7 +399,7 @@ export const isPlayersCardsFlipped = (flipped, playersPosition) => Object.keys(f
 export const isActivePlayersCardsFlipped = (flipped, playersPosition) =>  flipped.some((obj) => Object.keys(obj)[0] === playersPosition)
 export const concatArraysWithUniqueElements = (array1, array2) => _.uniqWith([...array1, ...array2], _.isEqual)
 
-export const getRandomArtifact = (playerArtifacts) => {
+export const getRandomArtifact = playerArtifacts => {
   const assignedArtifacts = playerArtifacts.map(obj => Object.values(obj)[0])
   const availableArtifacts = artifacts.filter(artifact => !assignedArtifacts.includes(artifact.id))
   const randomIndex = Math.floor(Math.random() * availableArtifacts.length)
@@ -312,7 +407,7 @@ export const getRandomArtifact = (playerArtifacts) => {
   return availableArtifacts[randomIndex].id
 }
 
-export const getKeys = (array) => array.map(obj => Object.keys(obj)[0])
+export const getKeys = array => array.map(obj => Object.keys(obj)[0])
 
 export const moveCards = (cards, direction, currentPlayer) => {
   const playerCards = Object.fromEntries(
@@ -340,7 +435,7 @@ export const moveCards = (cards, direction, currentPlayer) => {
   return updatedPlayerCards
 }
 
-export const countPlayersVoted = (players) => {
+export const countPlayersVoted = players => {
   let votedCount = 0
 
   Object.values(players).forEach(player => {
@@ -352,7 +447,7 @@ export const countPlayersVoted = (players) => {
   return votedCount
 }
 
-export const getPlayerNumbersWhoGotVoted = (players) => {
+export const getPlayerNumbersWhoGotVoted = players => {
   const playersVotedFor = new Set()
   
   Object.values(players).forEach(player => {
@@ -365,7 +460,7 @@ export const getPlayerNumbersWhoGotVoted = (players) => {
 }
 
 
-export const findMostVotedPlayer = (gameState) => {
+export const findMostVotedPlayer = gameState => {
   const voteCount = {}
   
   Object.values(gameState.players).forEach(player => {
@@ -390,7 +485,7 @@ export const findMostVotedPlayer = (gameState) => {
 
 
 //RIPPLE
-export const pickRandomOnePlayer = (numPlayers) => shufflePlayers(numPlayers)[0]
+export const pickRandomOnePlayer = numPlayers => shufflePlayers(numPlayers)[0]
 
 export const pickRandomTwoPlayers = (numPlayers, conjunction) => {
   const players = shufflePlayers(numPlayers)
@@ -398,7 +493,7 @@ export const pickRandomTwoPlayers = (numPlayers, conjunction) => {
   return [players[0], conjunction, players[1]]
 }
 
-export const pickRandomTwoPlayersArray = (numPlayers) => {
+export const pickRandomTwoPlayersArray = numPlayers => {
   const players = shufflePlayers(numPlayers)
 
   return [players[0], players[1]]

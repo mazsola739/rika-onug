@@ -1,11 +1,10 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerTokenByPlayerNumber, getRandomArtifact, getSelectablePlayersWithNoArtifact, getSelectablePlayersWithNoShield } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getSelectablePlayersWithNoArtifact, getRandomArtifact, getPlayerTokenByPlayerNumber } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
-const createCurator = (prefix) => () =>
-  [`${prefix}_kickoff_text`, 'curator_kickoff2_text']
+const createCurator = prefix => [`${prefix}_kickoff_text`, 'curator_kickoff2_text']
 
 export const curator = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -16,12 +15,14 @@ export const curator = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'curator') {
-      if (newGameState.players[token].card.player_original_id === 20 || (newGameState.players[token].card.player_role_id === 20 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 20 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 20 || (card.player_role_id === 20 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = curator_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_curator') {
-      if (newGameState.players[token].card.player_role_id === 20 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 20 && card.player_original_id === 1) {
         interaction = curator_interaction(newGameState, token, title)
       }
     }

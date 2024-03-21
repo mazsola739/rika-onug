@@ -1,33 +1,29 @@
 //@ts-check
-import { MESSAGE, SCENE } from '../../constant'
-import {
-  getAllPlayerTokens,
-  getPlayerNeighborsByToken,
-  getPlayerTokensByPlayerNumber,
-} from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE, MESSAGE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNeighborsByToken, getPlayerTokensByPlayerNumber } from '../../utils'
+import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
-import { websocketServerConnectionsPerRoom } from './../../websocket/connections'
 
 export const thing = (gameState, title) => {
   const newGameState = { ...gameState }
+  const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
   const narration = ['thing_kickoff_text']
 
-  const tokens = getAllPlayerTokens(newGameState.players)
-
   tokens.forEach((token) => {
-    const scene = []
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 85 || (newGameState.players[token].card.player_role_id === 85 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 85 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 85 || (card.player_role_id === 85 && copyPlayerIds.includes(card.player_original_id))) {
       interaction = thing_interaction(newGameState, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
-
-    newGameState.scene = scene
   })
-
+  
+  newGameState.scene = scene
   return newGameState
 }
 

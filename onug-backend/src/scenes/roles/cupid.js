@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -13,7 +13,9 @@ export const cupid = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 31 || (newGameState.players[token].card.player_role_id === 31 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 31 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 31 || (card.player_role_id === 31 && copyPlayerIds.includes(card.player_original_id))) {
       interaction = cupid_interaction(newGameState, token, title)
     }
 
@@ -38,7 +40,7 @@ export const cupid_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ["interaction_must_two_any"],
+    private_message: ['interaction_must_two_any'],
     icon: 'cupid',
     selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 2 } },
   })
@@ -76,7 +78,7 @@ export const cupid_response = (gameState, token, selected_mark_positions, title)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
   if (currentPlayerNumber[0] === selected_mark_positions[0] || currentPlayerNumber[0] === selected_mark_positions[1]) {
-    newGameState.players[token].card.player_mark = "mark_of_love"
+    newGameState.players[token].card.player_mark = 'mark_of_love'
   }
   
   newGameState.players[token].card_or_mark_action = true

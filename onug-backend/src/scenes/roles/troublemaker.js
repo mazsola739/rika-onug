@@ -1,8 +1,8 @@
 //@ts-check
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getSelectableOtherPlayersWithoutShield } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getSelectableOtherPlayersWithoutShield } from '../../utils'
 
 export const troublemaker = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -13,7 +13,9 @@ export const troublemaker = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 11 || (newGameState.players[token].card.player_role_id === 11 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 11 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 11 || (card.player_role_id === 11 && copyPlayerIds.includes(card.player_original_id))) {
       interaction = troublemaker_interaction(newGameState, token, title)
     }
 

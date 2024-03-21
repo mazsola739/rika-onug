@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds, getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithoutShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const squire = (gameState, title, hasDoppelganger) => {
@@ -17,7 +17,9 @@ export const squire = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 83 || (newGameState.players[token].card.player_role_id === 83 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 83 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 83 || (card.player_role_id === 27 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = squire_interaction(newGameState, token, title)
     }
 
@@ -40,9 +42,9 @@ export const squire_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_werewolves', "interaction_may_look"],
+    private_message: ['interaction_werewolves', 'interaction_may_look'],
     icon: 'werewolf',
-    uniqInformations: { werewolves: werewolves, answer_options: ["yes", "no"] },
+    uniqInformations: { werewolves: werewolves, answer_options: ['yes', 'no'] },
   })
 }
 
@@ -52,9 +54,9 @@ export const squire_response = (gameState, token, answer, title) => { //TODO val
 
   let interaction = {}
 
-  if (answer === "yes") {
-    const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(newGameState.players)
-    const viewCards = getCardIdsByPositions(newGameState.card_positions, [werewolves])
+  if (answer === 'yes') {
+    const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithoutShield(newGameState.players)
+    const viewCards = getCardIdsByPositions(newGameState.card_positions, werewolves)
 
     if ( werewolves.some(wolf => newGameState.card_positions[wolf].card.id === newGameState.players[token]?.card?.original_id)  ) {
       newGameState.players[token].card.player_card_id = 0
@@ -66,16 +68,16 @@ export const squire_response = (gameState, token, answer, title) => { //TODO val
       ...newGameState.players[token].player_history,
       scene_title: title,
       card_or_mark_action: true,
-      viewed_cards: [werewolves],
+      viewed_cards: werewolves,
     }
   
     interaction = generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_saw_card', werewolves],
       icon: 'werewolves',
       showCards: viewCards,
-      uniqInformations: { viewed_cards: [werewolves] },
+      uniqInformations: { viewed_cards: werewolves },
     })
-  } else if (answer === "no") {
+  } else if (answer === 'no') {
     interaction = generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_nothing'],
       icon: 'werewolves',

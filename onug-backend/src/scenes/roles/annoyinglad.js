@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils'
 import { thing_interaction } from './thing'
 
 export const annoyinglad = (gameState, title) => {
@@ -12,7 +12,9 @@ export const annoyinglad = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 55|| (newGameState.players[token].card.player_role_id === 55 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 55 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 55 || (card.player_role_id === 55 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = thing_interaction(newGameState, token, title)
     }
 

@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils'
 import { troublemaker_interaction } from './troublemaker'
 
 export const switcheroo = (gameState, title) => {
@@ -12,7 +12,9 @@ export const switcheroo = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 68 || (newGameState.players[token].card.player_role_id === 68 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 68 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 68 || (card.player_role_id === 68 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = troublemaker_interaction(newGameState, token, title)
     }
 

@@ -1,7 +1,7 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens, moveCards } from '../../utils/scene-utils'
-import { generateRoleInteraction } from './../generate-scene-role-interactions';
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, moveCards } from '../../utils'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const villageidiot = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -12,7 +12,9 @@ export const villageidiot = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 26 || (newGameState.players[token].card.player_role_id === 26 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 26 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 26 || (card.player_role_id === 26 && copyPlayerIds.includes(card.player_original_id))) {
       interaction = villageidiot_interaction(newGameState, token, title)
     }
 
@@ -29,13 +31,13 @@ export const villageidiot_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    answer_options: ["left", "right"],
+    answer_options: ['left', 'right'],
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_direction'],
     icon: 'jest',
-    uniqInformations: { answer_options: ["left", "right"] },
+    uniqInformations: { answer_options: ['left', 'right'] },
   })
 }
 
@@ -61,7 +63,7 @@ export const villageidiot_response = (gameState, token, answer, title) => { //TO
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ["interaction_moved", answer === "left" ? "direction_left" : "direction_right"],
+    private_message: ['interaction_moved', answer === 'left' ? 'direction_left' : 'direction_right'],
     icon: 'jest',
   })
 

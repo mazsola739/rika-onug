@@ -1,11 +1,10 @@
 //@ts-check
-import { SCENE, townIds } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions, getSelectableOtherPlayersWithoutShield } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE, townIds } from '../../constant'
+import { getAllPlayerTokens, getSelectableOtherPlayersWithoutShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
-const createRevealer = (prefix) => () =>
-  [`${prefix}_kickoff_text`, 'revealer_kickoff2_text']
+const createRevealer = prefix => [`${prefix}_kickoff_text`, 'revealer_kickoff2_text']
 
 export const revealer = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -16,12 +15,14 @@ export const revealer = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'revealer') {
-      if (newGameState.players[token].card.player_original_id === 24 || (newGameState.players[token].card.player_role_id === 24 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 24 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 24 || (card.player_role_id === 24 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = revealer_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_revealer') {
-      if (newGameState.players[token].card.player_role_id === 24 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 24 && card.player_original_id === 1) {
         interaction = revealer_interaction(newGameState, token, title)
       }
     }

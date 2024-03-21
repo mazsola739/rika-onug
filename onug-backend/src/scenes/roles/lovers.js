@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getLoversPlayerNumbersByMark } from '../../utils/scene-utils'
+import { getAllPlayerTokens, getLoversPlayerNumbersByMark } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const lovers = (gameState, title) => {
@@ -12,7 +12,9 @@ export const lovers = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].player_mark === 'mark_of_love') {
+    const player = newGameState.players[token]
+
+    if (player.player_mark === 'mark_of_love') {
       interaction = lover_interaction(newGameState, token, title)
     }
 

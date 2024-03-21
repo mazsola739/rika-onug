@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils'
 
 export const leader = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
@@ -16,7 +16,9 @@ export const leader = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 48 || (newGameState.players[token].card.player_role_id === 48 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 48 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 48 || (card.player_role_id === 48 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = leader_interaction(newGameState, token, title)
     }
 

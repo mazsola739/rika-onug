@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils'
 
 const randomFamilyman = [
   'familyman_1pleft_text',
@@ -29,12 +29,12 @@ export const familyman = (gameState, title, hasDoppelganger) => {
       : 'familyman_are_end_text',
   ]
 
-
-
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 78 || (newGameState.players[token].card.player_role_id === 78 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 78 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 78 || (card.player_role_id === 78 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = familyman_interaction(newGameState, token, title)
     }
 

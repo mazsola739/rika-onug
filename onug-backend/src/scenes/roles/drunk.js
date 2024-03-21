@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE, centerCardPositions } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumberWithMatchingToken } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE, centerCardPositions } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -13,7 +13,9 @@ export const drunk = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 2 || (newGameState.players[token].card.player_role_id === 2 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 2 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 2 || (card.player_role_id === 2 && copyPlayerIds.includes(card.player_original_id))) {
       interaction = drunk_interaction(newGameState, token, title)
     }
 

@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -13,7 +13,9 @@ export const instigator = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 34 || (newGameState.players[token].card.player_role_id === 34 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 34 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 34 || (card.player_role_id === 34 && copyPlayerIds.includes(card.player_original_id))) {
       interaction = instigator_interaction(newGameState, token, title)
     }
 
@@ -37,7 +39,7 @@ export const instigator_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ["interaction_must_one_any"],
+    private_message: ['interaction_must_one_any'],
     icon: 'traitor',
     selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 } },
   })
@@ -67,7 +69,7 @@ export const instigator_response = (gameState, token, selected_mark_positions, t
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
   if (currentPlayerNumber === selected_mark_positions[0]) {
-    newGameState.players[token].card.player_mark = "mark_of_traitor"
+    newGameState.players[token].card.player_mark = 'mark_of_traitor'
   }
 
   newGameState.players[token].card_or_mark_action = true

@@ -1,9 +1,9 @@
 //@ts-check
-import { HYDRATE_VOTES, MESSAGE, SCENE, vampireIds } from '../../constant'
-import { countPlayersVoted, findMostVotedPlayer, getAllPlayerTokens, getNonVampirePlayerNumbersByRoleIds, getPlayerNumbersWhoGotVoted, getVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds } from '../../utils/scene-utils'
+import { vampireIds, allCopyPlayerIds, SCENE, HYDRATE_VOTES } from '../../constant'
+import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds, countPlayersVoted, getPlayerNumbersWhoGotVoted, findMostVotedPlayer } from '../../utils'
+import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
-import { websocketServerConnectionsPerRoom } from './../../websocket/connections';
 
 export const vampires = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -14,7 +14,9 @@ export const vampires = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (vampireIds.some((id) => newGameState.players[token].card.player_role_id === id)) {
+    const card = newGameState.players[token].card
+
+    if (vampireIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
       interaction = vampires_interaction(newGameState, token, title)
     }
 

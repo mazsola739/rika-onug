@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE, masonIds } from '../../constant'
-import { getAllPlayerTokens, getMasonPlayerNumbersByRoleIds } from '../../utils/scene-utils'
+import { masonIds, allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getMasonPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const masons = (gameState, title) => {
@@ -12,7 +12,9 @@ export const masons = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (masonIds.some((id) => newGameState.players[token].card.player_role_id === id)) {
+    const card = newGameState.players[token].card
+
+    if (masonIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
       interaction = masons_interaction(newGameState, token, title)
     }
 
@@ -25,6 +27,7 @@ export const masons = (gameState, title) => {
 
 export const masons_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
+  
   const masons = getMasonPlayerNumbersByRoleIds(newGameState.players)
 
   newGameState.players[token].player_history = {

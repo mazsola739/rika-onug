@@ -1,11 +1,10 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getPlayerNumbersWithNonMatchingTokens } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
-const createPriest = (prefix) => () =>
-  [`${prefix}_kickoff_text`, 'priest_kickoff2_text']
+const createPriest = prefix => [`${prefix}_kickoff_text`, 'priest_kickoff2_text']
 
 export const priest = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -16,12 +15,14 @@ export const priest = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'priest') {
-      if (newGameState.players[token].card.player_original_id === 37 || (newGameState.players[token].card.player_role_id === 37 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 37 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 37 || (card.player_role_id === 37 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = priest_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_priest') {
-      if (newGameState.players[token].card.player_role_id === 37 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 37 && card.player_original_id === 1) {
         interaction = priest_interaction(newGameState, token, title)
       }
     }
@@ -50,7 +51,7 @@ export const priest_interaction = (gameState, token, title) => {
     newGameState.mark_positions.clarity_1 = currentPlayerMark
   }
 
-  newGameState.players[token].card.player_mark = "mark_of_clarity"
+  newGameState.players[token].card.player_mark = 'mark_of_clarity'
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,

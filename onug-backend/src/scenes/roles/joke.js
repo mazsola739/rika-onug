@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene-utils'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils'
 
 const random_joke = [
   'joke_1_text',

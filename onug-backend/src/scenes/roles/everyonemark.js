@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getMarksByPositions, getPlayerNumberWithMatchingToken } from '../../utils/scene-utils'
+import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getMarksByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const everyonemark = (gameState, title) => {

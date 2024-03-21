@@ -1,11 +1,10 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getMarksByPositions, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
 
-const createGremlin = (prefix) => () =>
-  [`${prefix}_kickoff_text`, 'gremlin_kickoff2_text']
+const createGremlin = prefix => [`${prefix}_kickoff_text`, 'gremlin_kickoff2_text']
 
 export const gremlin = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -16,12 +15,14 @@ export const gremlin = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'gremlin') {
-      if (newGameState.players[token].card.player_original_id === 33 || (newGameState.players[token].card.player_role_id === 33 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 33 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 33 || (card.player_role_id === 33 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = gremlin_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_gremlin') {
-      if (newGameState.players[token].card.player_role_id === 33 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 33 && card.player_original_id === 1) {
         interaction = gremlin_interaction(newGameState, token, title)
       }
     }
@@ -48,7 +49,7 @@ export const gremlin_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ["interaction_must_two_any"],
+    private_message: ['interaction_must_two_any'],
     icon: 'swap',
     selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 2 } },
     selectableCards: { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 2, center: 0 } },

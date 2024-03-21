@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getRandomItemFromArray, getAllPlayerTokens } from '../../utils'
 
 const random_mortician = ['mortician_1card_text', 'mortician_2cards_text']
 
@@ -11,17 +11,10 @@ const morticianAllKeys = [
   'identifier_yourself_text',
 ]
 
-const createMortician = (prefix) => () => {
+const createMortician = prefix => {
   const randomMortician = getRandomItemFromArray(random_mortician)
-  return [
-    `${prefix}_kickoff_text`,
-    randomMortician,
-    getRandomItemFromArray(
-      randomMortician === 'mortician_2cards_text'
-        ? morticianAllKeys
-        : ['identifier_bothneighbors_text']
-    ),
-  ]
+
+  return [`${prefix}_kickoff_text`, randomMortician, getRandomItemFromArray(randomMortician === 'mortician_2cards_text' ? morticianAllKeys : ['identifier_bothneighbors_text'])]
 }
 
 export const mortician = (gameState, title, prefix) => {
@@ -33,12 +26,14 @@ export const mortician = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'mortician') {
-      if (newGameState.players[token].card.player_original_id === 49 || (newGameState.players[token].card.player_role_id === 49 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 49 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 49 || (card.player_role_id === 49 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = mortician_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_mortician') {
-      if (newGameState.players[token].card.player_role_id === 49 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 49 && card.player_original_id === 1) {
         interaction = mortician_interaction(newGameState, token, title)
       }
     }

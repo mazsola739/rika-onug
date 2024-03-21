@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../utils/scene-utils'
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getRandomItemFromArray, pickRandomUpToThreePlayers, getAllPlayerTokens } from '../../utils'
 
 const empathAllKeys = [
   'identifier_everyone_text',
@@ -26,18 +26,11 @@ const randomEmpath = [
   'empath_action14_text',
 ]
 
-const createEmpath = (prefix, totalPlayers) => () => {
+const createEmpath = (prefix, totalPlayers) => {
   const randomIdentifier = getRandomItemFromArray(empathAllKeys)
   const randomInstructions = getRandomItemFromArray(randomEmpath)
 
-  return [
-    `${prefix}_kickoff_text`,
-    'empath_kickoff2_text',
-    randomIdentifier === 'activePlayers'
-      ? pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and')
-      : randomIdentifier,
-    randomInstructions,
-  ]
+  return [`${prefix}_kickoff_text`, 'empath_kickoff2_text', randomIdentifier === 'activePlayers' ? pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and') : randomIdentifier, randomInstructions]
 }
 
 export const empath = (gameState, title, prefix) => {
@@ -50,12 +43,14 @@ export const empath = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'empath') {
-      if (newGameState.players[token].card.player_original_id === 77 || (newGameState.players[token].card.player_role_id === 77 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 77 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 77 || (card.player_role_id === 77 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = empath_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_empath') {
-      if (newGameState.players[token].card.player_role_id === 77 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 77 && card.player_original_id === 1) {
         interaction = empath_interaction(newGameState, token, title)
       }
     }

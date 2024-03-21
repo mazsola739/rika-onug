@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions, getMarksByPositions, getPlayerNumberWithMatchingToken, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getMarksByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
 
@@ -18,7 +18,9 @@ export const marksman = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 35 || (newGameState.players[token].card.player_role_id === 35 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 35 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 35 || (card.player_role_id === 35 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = marksman_interaction(newGameState, token, title)
     }
 
@@ -43,7 +45,7 @@ export const marksman_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ["interaction_must_one_any"],
+    private_message: ['interaction_must_one_any'],
     icon: 'target',
     selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 } },
     selectableCards: { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
@@ -99,7 +101,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
       newGameState.players[token].player_history.selectable_mark_limit = { mark: 1 }
 
       interaction = generateRoleInteraction(newGameState, token, {
-        private_message: ['interaction_saw_card', selected_card_positions[0], "interaction_must_one_any"],
+        private_message: ['interaction_saw_card', selected_card_positions[0], 'interaction_must_one_any'],
         icon: 'target',
         showCards: viewCards,
         selectableMarks: { selectable_marks: selectableMarks, selectable_mark_limit: { mark: 1 } },
@@ -156,7 +158,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
       newGameState.players[token].player_history.selectable_card_limit = { player: 1, center: 0 }
 
       interaction = generateRoleInteraction(newGameState, token, {
-        private_message: ['interaction_saw_mark', selected_mark_positions[0], "interaction_must_one_any"],
+        private_message: ['interaction_saw_mark', selected_mark_positions[0], 'interaction_must_one_any'],
         icon: 'target',
         showMarks: viewMarks,
         selectableCards: { selectable_cards: selectableCards, selectable_card_limit: { player: 1, center: 0 } },

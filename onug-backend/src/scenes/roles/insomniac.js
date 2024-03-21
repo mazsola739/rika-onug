@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPlayerNumbers, getPlayerNumberWithMatchingToken } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const insomniac = (gameState, title, hasDoppelganger) => {
@@ -17,7 +17,9 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 4 || (newGameState.players[token].card.player_role_id === 4 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 4 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 4 || (card.player_role_id === 4 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = insomniac_interaction(newGameState, token, title)
     }
 

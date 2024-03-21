@@ -14,7 +14,7 @@ const scriptOrder = [
 
 //TODO RIPPLE
 
-export const scene = (gameState) => {
+export const scene = gameState => {
   const { room_id } = gameState
   logTrace(`Scene playing for players in room: ${room_id}`)
 

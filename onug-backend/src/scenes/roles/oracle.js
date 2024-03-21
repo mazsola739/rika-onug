@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene-utils'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils'
 
 const random_oracle_question = [
   'oracle_alienteam_text',
@@ -73,7 +73,9 @@ export const oracle_question = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 50) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 50) {
       newGameState.players[token].player_history.oracle = narration[1]
       interaction = oracle_question_interaction(newGameState, token, title)
     }

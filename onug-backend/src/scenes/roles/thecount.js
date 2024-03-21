@@ -1,11 +1,10 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getNonVampirePlayerNumbersByRoleIds } from '../../utils/scene-utils'
-import { isValidMarkSelection } from '../validate-response-data';
-import { generateRoleInteraction } from './../generate-scene-role-interactions';
+import { copyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getNonVampirePlayerNumbersByRoleIds } from '../../utils'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
+import { isValidMarkSelection } from '../validate-response-data'
 
-const createTheCount = (prefix) => () =>
-  [`${prefix}_kickoff_text`, 'thecount_kickoff2_text']
+const createTheCount = prefix => [`${prefix}_kickoff_text`, 'thecount_kickoff2_text']
 
 export const thecount = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -16,12 +15,14 @@ export const thecount = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
+    const card = newGameState.players[token].card
+
     if (prefix === 'thecount') {
-      if (newGameState.players[token].card.player_original_id === 39 || (newGameState.players[token].card.player_role_id === 39 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 39 && newGameState.players[token].card.player_original_id === 64)) {
+      if (card.player_original_id === 39 || (card.player_role_id === 39 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = thecount_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_thecount') {
-      if (newGameState.players[token].card.player_role_id === 39 && newGameState.players[token].card.player_original_id === 1) {
+      if (card.player_role_id === 39 && card.player_original_id === 1) {
         interaction = thecount_interaction(newGameState, token, title)
       }
     }

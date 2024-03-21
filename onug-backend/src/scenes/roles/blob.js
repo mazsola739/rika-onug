@@ -1,6 +1,7 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getRandomItemFromArray, getPartOfBlobByToken } from '../../utils'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 const randomBlobKickoffText = [
   'blob_1pleft_text',
@@ -19,7 +20,17 @@ export const blob = (gameState, title) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const randomKickoff = getRandomItemFromArray(randomBlobKickoffText)
+  const total_players = newGameState.total_players
+
+  let availableBlobOptions = []
+
+  if (total_players === 3) {
+    availableBlobOptions = randomBlobKickoffText.filter(option => !option.includes('2eachside') || !option.includes('3') || !option.includes('4'))
+  }else if (total_players >= 4 && total_players < 5) {
+    availableBlobOptions = randomBlobKickoffText.filter(option => !option.includes('2eachside') || !option.includes('4'))
+  }
+
+  const randomKickoff = getRandomItemFromArray(availableBlobOptions)
   const narration = [
     randomKickoff,
     randomKickoff.includes('1p') ? 'blob_is_end_text' : 'blob_are_end_text',
@@ -28,7 +39,9 @@ export const blob = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 44 || (newGameState.players[token].card.player_role_id === 44 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 44 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 44 || (card.player_role_id === 44 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = blob_interaction(newGameState, token, title)
     }
 
@@ -40,5 +53,20 @@ export const blob = (gameState, title) => {
 }
 
 export const blob_interaction = (gameState, token, title) => {
-  return {}
+  const newGameState = { ...gameState }
+  const randomInstruction = newGameState.scene.narration[0]
+  
+  const partOfBlob = getPartOfBlobByToken(newGameState.players, token, randomInstruction)
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    blob: partOfBlob,
+  }
+
+  return generateRoleInteraction(newGameState, token, {
+    private_message: ['interaction_part_of_blob'],
+    icon: 'blob',
+    uniqInformations: { blob: partOfBlob },
+  })
 }

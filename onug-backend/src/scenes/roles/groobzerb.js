@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE, groobAndZerbIds } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { groobAndZerbIds, allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils'
 
 export const groobzerb = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
@@ -16,7 +16,9 @@ export const groobzerb = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (groobAndZerbIds.some((id) => newGameState.players[token].card.player_role_id === id)) {
+    const card = newGameState.players[token].card
+
+    if (groobAndZerbIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
       interaction = groobzerb_interaction(newGameState, token, title)
     }
 

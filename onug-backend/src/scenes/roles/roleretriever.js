@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils'
 import { robber_interaction } from './robber'
 
 export const roleretriever = (gameState, title) => {
@@ -12,7 +12,9 @@ export const roleretriever = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 66 || (newGameState.players[token].card.player_role_id === 66 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 66 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 66 || (card.player_role_id === 66 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = robber_interaction(newGameState, token, title)
     }
 

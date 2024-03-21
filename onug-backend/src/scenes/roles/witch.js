@@ -1,8 +1,8 @@
 //@ts-check
-import { SCENE, centerCardPositions } from '../../constant'
+import { copyPlayerIds, SCENE, centerCardPositions } from '../../constant'
+import { getAllPlayerTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
-import { getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getAllPlayerTokens, getCardIdsByPositions, getPlayerNumberWithMatchingToken } from '../../utils/scene-utils'
 
 export const witch = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -13,7 +13,9 @@ export const witch = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 27 || (newGameState.players[token].card.player_role_id === 27 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 27 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 27 || (card.player_role_id === 27 && copyPlayerIds.includes(card.player_original_id))) {
       interaction = witch_interaction(newGameState, token, title)
     }
 
@@ -70,11 +72,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     }
 
     const interaction = generateRoleInteraction(newGameState, token, {
-      private_message: [
-        'interaction_saw_card',
-        selected_card_positions[0],
-        'interaction_must_one_any',
-      ],
+      private_message: ['interaction_saw_card', selected_card_positions[0], 'interaction_must_one_any'],
       icon: 'voodoo',
       selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
       showCards: showCards,
@@ -110,12 +108,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     }
 
     const interaction = generateRoleInteraction(newGameState, token, {
-      private_message: [
-        'interaction_saw_card',
-        'interaction_swapped_cards',
-        `${newGameState.players[token].player_history.selected_center_card}`,
-        selected_card_positions[0],
-      ],
+      private_message: ['interaction_saw_card', 'interaction_swapped_cards', `${newGameState.players[token].player_history.selected_center_card}`, selected_card_positions[0]],
       icon: 'voodoo',
       uniqInformations: { swapped_cards: [newGameState.players[token].player_history.selected_center_card, selected_card_positions[0]] },
     })

@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE, centerCardPositions } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE, centerCardPositions } from '../../constant'
+import { getAllPlayerTokens, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -13,7 +13,9 @@ export const apprenticeseer = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 18 || (newGameState.players[token].card.player_role_id === 18 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 18 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 18 || (card.player_role_id === 18 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = apprenticeseer_interaction(newGameState, token, title)
     }
 

@@ -1,17 +1,18 @@
 //@ts-check
-import { SCENE, alienIds } from '../../constant'
+import { alienIds, allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../utils'
 
+//TODO
 const random_aliens = [
   'aliens_view_text',
-  'aliens_allview_text',
+/*   'aliens_allview_text', */
   'aliens_stare_text',
   'aliens_left_text',
   'aliens_right_text',
   'aliens_show_text',
-  'aliens_timer_text',
-  'aliens_newalien_text',
-  'aliens_alienhelper_text',
+/*   'aliens_timer_text', */
+/*   'aliens_newalien_text', */
+/*   'aliens_alienhelper_text', */
 ]
 const alienAnyKeys = [
   'identifier_any_text',
@@ -29,7 +30,6 @@ export const aliens = (gameState, title) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-
   const narration = ['aliens_kickoff_text']
   const randomInstructions = getRandomItemFromArray(random_aliens)
   narration[1] = randomInstructions
@@ -37,7 +37,7 @@ export const aliens = (gameState, title) => {
   if (randomInstructions.includes('view')) {
     let randomAnyIdentifier = getRandomItemFromArray(alienAnyKeys)
     if (randomAnyIdentifier === 'activePlayers') {
-      randomAnyIdentifier = pickRandomUpToThreePlayers(newGameState.total_players, 'conjunction_or')
+      randomAnyIdentifier = pickRandomUpToThreePlayers(newGameState.total_players, 'conjunction_and')
     }
     narration[2] = randomAnyIdentifier
   }
@@ -50,7 +50,9 @@ export const aliens = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (alienIds.some((id) => newGameState.players[token].card.player_role_id === id)) {
+    const card = newGameState.players[token].card
+
+    if (alienIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
       newGameState.players[token].player_history.random = {
         random_instruction: narration[1],
         random_identifier: narration.slice(2),

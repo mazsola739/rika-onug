@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils'
 
 export const cow = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
@@ -14,7 +14,9 @@ export const cow = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 45 || (newGameState.players[token].card.player_role_id === 45 && newGameState.players[token].card.player_original_id === 1) || (newGameState.players[token].card.player_role_id === 45 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 45 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 45 || (card.player_role_id === 45 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = cow_interaction(newGameState, token, title)
     }
 

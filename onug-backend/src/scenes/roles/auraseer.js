@@ -1,6 +1,7 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens, getPlayerNumbersWithCardOrMarkActionTrue } from '../../utils'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
   const newGameState = { ...gameState }
@@ -16,7 +17,9 @@ export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 72 || (newGameState.players[token].card.player_role_id === 72 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 72 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 72 || (card.player_role_id === 72 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = auraseer_interaction(newGameState, token, title)
     }
 
@@ -28,18 +31,21 @@ export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
 }
 
 export const auraseer_interaction = (gameState, token, title) => {
-  return {}
-}
-
-export const auraseer_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
-  const scene = []
   
-  const interaction = {}
-  scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  const playersWithCardOrMarkActionTrue = getPlayerNumbersWithCardOrMarkActionTrue(newGameState.players)
 
-  return newGameState
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    auraseer: playersWithCardOrMarkActionTrue
+  }
+
+  return generateRoleInteraction(newGameState, token, {
+    private_message: ['interaction_card_or_mark_action'],
+    icon: 'interaction',
+    uniqInformations: { auraseer: playersWithCardOrMarkActionTrue }
+  })
 }
 
 /*AURA SEER moved viewed Copycat, Doppelgänger, Rascal, Body Snatcher, Alpha Wolf, Mystic Wolf, Seer, Exposer, 

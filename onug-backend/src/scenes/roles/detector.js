@@ -1,6 +1,6 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { allCopyPlayerIds, SCENE } from '../../constant'
+import { getAllPlayerTokens } from '../../utils'
 import { seer_interaction } from './seer'
 
 export const detector = (gameState, title) => {
@@ -12,7 +12,9 @@ export const detector = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    if (newGameState.players[token].card.player_original_id === 56 || (newGameState.players[token].card.player_role_id === 56 && newGameState.players[token].card.player_original_id === 30) || (newGameState.players[token].card.player_role_id === 56 && newGameState.players[token].card.player_original_id === 64)) {
+    const card = newGameState.players[token].card
+
+    if (card.player_original_id === 56 || (card.player_role_id === 56 && allCopyPlayerIds.includes(card.player_original_id))) {
       interaction = seer_interaction(newGameState, token, title)
     }
 
