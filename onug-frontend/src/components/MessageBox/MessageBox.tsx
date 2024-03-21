@@ -1,9 +1,9 @@
-import { observer } from 'mobx-react-lite'
 import { Button, Icon } from 'components'
 import { IconType } from 'components/Icon/Icon.types'
-import { Buttons, Instructions, Message, RoleInteractionIcon, StyledMessageBox } from './MessageBox.styles'
-import { gameBoardStore, interactionStore } from 'store'
 import { useClickHandler } from 'hooks'
+import { observer } from 'mobx-react-lite'
+import { interactionStore, gameBoardStore } from 'store'
+import { StyledMessageBox, Instructions, Message, Buttons, RoleInteractionIcon } from './MessageBox.styles'
 
 export const MessageBox: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')

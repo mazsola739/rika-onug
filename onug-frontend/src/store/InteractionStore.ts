@@ -1,6 +1,6 @@
 import { makeObservable, observable, action } from 'mobx'
-import { doppelgangerStore, oracleStore, roleStore } from './roleStores'
 import { WsJsonMessage } from 'types'
+import { doppelgangerStore, oracleStore, roleStore } from './roleStores'
 import * as constants from '../constant'
 
 class InteractionStore {

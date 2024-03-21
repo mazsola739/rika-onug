@@ -1,6 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { interactionStore } from 'store'
-import { gameBoardStore } from 'store/GameBoardStore'
+import { gameBoardStore, interactionStore } from 'store'
 import { WsJsonMessage, PositionProperties } from 'types'
 
 class RoleStore {

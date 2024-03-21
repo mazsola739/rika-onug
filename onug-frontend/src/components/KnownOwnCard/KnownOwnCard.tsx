@@ -1,11 +1,9 @@
-import { observer } from 'mobx-react-lite'
-import { KnownOwnCardContainer, KnownOwnCardText, KnownOwnInfos } from './KnownOwnCard.styles'
-import { KnownOwnCardProps } from './KnownOwnCard.types'
-import { utils } from 'utils'
 import { CardImage, Icon } from 'components'
+import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
-
-const { capitalize } = utils
+import { capitalize } from 'utils'
+import { KnownOwnCardContainer, KnownOwnInfos, KnownOwnCardText } from './KnownOwnCard.styles'
+import { KnownOwnCardProps } from './KnownOwnCard.types'
 
 export const KnownOwnCard: React.FC<KnownOwnCardProps> = observer(
   ({ player }) => {

@@ -1,9 +1,8 @@
-import React from 'react'
-import { observer } from 'mobx-react-lite'
-import { CardBack, StyledDealtCard, Tokens } from './DealtCard.styles'
-import { DealtCardProps } from './DealtCard.types'
-import { deckStore, gameTableStore } from 'store'
 import { Token } from 'components'
+import { observer } from 'mobx-react-lite'
+import { gameTableStore, deckStore } from 'store'
+import { StyledDealtCard, CardBack, Tokens } from './DealtCard.styles'
+import { DealtCardProps } from './DealtCard.types'
 
 export const DealtCard: React.FC<DealtCardProps> = observer(
   ({ position, id, isCenter, ready }) => {

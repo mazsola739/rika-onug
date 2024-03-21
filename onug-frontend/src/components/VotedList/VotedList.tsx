@@ -1,7 +1,7 @@
+import { Token } from 'components'
 import { observer } from 'mobx-react-lite'
-import { Player, PlayerVotedName, StyledVotedList } from './VotedList.styles'
+import { StyledVotedList, Player, PlayerVotedName } from './VotedList.styles'
 import { VotedListProps } from './VotedList.types'
-import { Token } from 'components/Token/Token'
 
 export const VotedList: React.FC<VotedListProps> = observer(({ players }) => (
   <StyledVotedList>

@@ -1,7 +1,7 @@
-import { makeAutoObservable } from 'mobx'
-import * as constants from '../constant'
-import { ScriptType } from 'types'
 import { script } from 'data'
+import { makeAutoObservable } from 'mobx'
+import { ScriptType } from 'types'
+import * as constants from '../constant'
 
 class NarrationStore {
   narration: string[] = []

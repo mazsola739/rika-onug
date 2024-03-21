@@ -3,7 +3,7 @@ export const POPULATE = 'populate'
 export const RESET = 'reset'
 export const TEST_CASE = 'test case'
 export const RESPONSE = 'Response'
-export const labels = [
+export const LABELS = [
   'Player1',
   'Player2',
   'Player3',
@@ -23,7 +23,7 @@ export const labels = [
   'CenterVillain',
 ]
 
-export const roleMapping: Record<number, string> = {
+export const ROLEMAPPING: Record<number, string> = {
   1: 'Doppelganger',
   2: 'Drunk',
   3: 'Hunter',

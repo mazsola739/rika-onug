@@ -1,4 +1,4 @@
-export const buttons: Record<string, string> = {
+export const BUTTONS: Record<string, string> = {
   yes_button_label: 'YES',
   no_button_label: 'NO',
   even_button_label: 'EVEN',

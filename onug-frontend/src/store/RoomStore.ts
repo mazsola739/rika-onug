@@ -1,17 +1,17 @@
+import { TEAM, EXPANSIONS } from 'constant'
+import { cards } from 'data'
 import { makeAutoObservable, reaction } from 'mobx'
 import { CardType } from 'types'
 import { roomStoreUtils } from 'utils'
 import { deckStore } from './DeckStore'
-import { expansions, team } from 'constant'
-import { cards } from 'data'
 
 const { getFilteredCardsForTeam, getOrderedTeams, filterByExpansions } =
   roomStoreUtils
-const { hero, village } = team
+const { hero, village } = TEAM
 
 class RoomStore {
   detailedCardInfo: CardType = deckStore.createEmptyCard()
-  selectedExpansions: string[] = Object.keys(expansions)
+  selectedExpansions: string[] = Object.keys(EXPANSIONS)
 
   constructor() {
     makeAutoObservable(this)
@@ -93,7 +93,7 @@ class RoomStore {
   }
 
   getExpansionShortName(fullName: string): string | undefined {
-    return Object.keys(expansions).find((key) => expansions[key] === fullName)
+    return Object.keys(EXPANSIONS).find((key) => EXPANSIONS[key] === fullName)
   }
 }
 

@@ -1,18 +1,9 @@
-import { assassinIds, vampireIds } from 'constant'
+import { VAMPIRE_IDS, ASSASSIN_IDS } from 'constant'
 import { cards, marks, artifacts } from 'data'
 import { makeAutoObservable } from 'mobx'
-import { roomStore } from 'store'
 import { CardType, TokenType } from 'types'
-import { deckStoreUtils, utils } from 'utils'
-
-const {
-  createEmptyCard,
-  createEmptyToken,
-  deselectCard,
-  determineTotalPlayers,
-  selectCard,
-} = deckStoreUtils
-const { areAnyCardSelectedById, findCardById, isCardSelectedById } = utils
+import { createEmptyCard, createEmptyToken, findCardById, determineTotalPlayers, selectCard, deselectCard, areAnyCardSelectedById, isCardSelectedById } from 'utils'
+import { roomStore } from './RoomStore'
 
 class DeckStore {
   deck: CardType[] = cards
@@ -51,23 +42,19 @@ class DeckStore {
 
   setSelectedCard(cardIds: number[]): void {
     this.selectedCards = cardIds.map((cardId) => this.getCardById(cardId))
-
   }
 
   resetSelection(): void {
     this.selectedCards = []
     roomStore.resetDetailedCardInfo()
-
   }
 
   handleSelectCard(card: CardType): void {
     selectCard(this.selectedCards, card)
-
   }
 
   handleDeselectCard(card: CardType): void {
     deselectCard(this.selectedCards, card)
-
   }
 
   //TODO fix, not working
@@ -75,7 +62,7 @@ class DeckStore {
     this.selectedMarks = this.marks.filter((mark) => {
       switch (mark.token_name) {
         case 'mark_of_vampire':
-          return areAnyCardSelectedById(this.selectedCards, vampireIds)
+          return areAnyCardSelectedById(this.selectedCards, VAMPIRE_IDS)
         case 'mark_of_fear':
           return isCardSelectedById(this.selectedCards, 39)
         case 'mark_of_the_bat':
@@ -89,7 +76,7 @@ class DeckStore {
         case 'mark_of_clarity':
           return isCardSelectedById(this.selectedCards, 37)
         case 'mark_of_assassin':
-          return areAnyCardSelectedById(this.selectedCards, assassinIds)
+          return areAnyCardSelectedById(this.selectedCards, ASSASSIN_IDS)
         default:
           return false
       }

@@ -1,5 +1,5 @@
 //@ts-check
-import { masonIds, superVillainsIds, vampireIds, werewolvesAndDreamWolfIds, werewolvesIds } from "../constant"
+import { masonIds, superVillainsIds, vampireIds, werewolvesAndDreamWolfIds, werewolvesIds } from '../constant'
 import artifacts from '../data/artifacts.json'
 import _ from 'lodash'
 

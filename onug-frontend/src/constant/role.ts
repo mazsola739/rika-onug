@@ -86,7 +86,7 @@ export const role_windywendy = 'WINDY WENDY'
 export const role_witch = 'WITCH'
 export const role_zerb = 'ZERB'
 
-export const roles = {
+export const ROLES = {
   role_alien,
   role_aliens,
   role_alphawolf,

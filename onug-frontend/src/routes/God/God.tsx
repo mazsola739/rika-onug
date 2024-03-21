@@ -1,8 +1,7 @@
-/* eslint-disable prettier/prettier */
-import { observer } from 'mobx-react-lite'
-import { useCallback, useState } from 'react'
-import { Button, ButtonsContainer, GameStatesContainer, FormContainer, InputContainer, GodTitle, Input, Label, LeftSide, MetaContainer, ResponseContainer, ResponsePre, RightSide, StyledGod, WSContainer } from './God.styles'
 import { API_HOST } from 'constant'
+import { observer } from 'mobx-react-lite'
+import { useState, useCallback } from 'react'
+import { StyledGod, LeftSide, GameStatesContainer, GodTitle, FormContainer, InputContainer, Label, Input, ButtonsContainer, Button, WSContainer, MetaContainer, RightSide, ResponseContainer, ResponsePre } from './God.styles'
 
 const GAMESTATES = 'GameStates'
 const LABEL_ROOM_ID = 'room_id:'

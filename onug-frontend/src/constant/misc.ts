@@ -1,6 +1,6 @@
 import { CardType, ExpansionType, ExpansionsType, TeamNames as TeamNamesTypes, TeamType, TeamsType, TokenType, WakeType } from 'types'
 
-export const teams: TeamsType = {
+export const TEAMS: TeamsType = {
   village: 0,
   hero: 1,
   own: 2,
@@ -10,7 +10,7 @@ export const teams: TeamsType = {
   villain: 6,
 }
 
-export const expansions: ExpansionsType = {
+export const EXPANSIONS: ExpansionsType = {
   onuw: 'Werewolf',
   onud: 'Daybreak',
   onuv: 'Vampire',
@@ -19,7 +19,7 @@ export const expansions: ExpansionsType = {
   onub: 'Bonus Roles',
 }
 
-export const teamNames: TeamNamesTypes = {
+export const TEAM_NAMES: TeamNamesTypes = {
   werewolf: 'Werewolf',
   vampire: 'Vampire',
   alien: 'Alien',
@@ -38,7 +38,7 @@ export const teamNames: TeamNamesTypes = {
   traitor: 'Traitor',
 }
 
-export const emptyCard: CardType = {
+export const EMPTY_CARD: CardType = {
   id: 0,
   card_name: '',
   display_name: '',
@@ -48,21 +48,21 @@ export const emptyCard: CardType = {
   wake_up_time: '',
 }
 
-export const emptyToken: TokenType = {
+export const EMPTY_TOKEN: TokenType = {
   id: 0,
   token_name: '',
   rules: '',
   expansion: '',
 }
 
-export const wake: WakeType = {
+export const WAKE: WakeType = {
   day: 'day',
   twilight: 'twilight',
   dusk: 'dusk',
   night: 'night',
 }
 
-export const expansion: ExpansionType = {
+export const EXPANSION: ExpansionType = {
   werewolf: 'onuw',
   daybreak: 'onud',
   vampire: 'onuv',
@@ -71,7 +71,7 @@ export const expansion: ExpansionType = {
   bonusroles: 'onub',
 }
 
-export const team: TeamType = {
+export const TEAM: TeamType = {
   village: 'village',
   hero: 'hero',
   own: 'own',

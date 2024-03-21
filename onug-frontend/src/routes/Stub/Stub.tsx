@@ -1,15 +1,14 @@
-import { observer } from 'mobx-react-lite'
-import { useCallback, useState } from 'react'
-import { Button, ButtonsContainer, PositionContainer, FormContainer, InputContainer, Input, Label, LeftSide, ResponseContainer, ResponsePre, RightSide, StyledStub, PopulatorContainer, StubTitle, RoleName, InputField } from './Stub.styles'
-import { dealStubDoppelganger } from './TestCases/test-case-doppelganger-01'
-import { labels, roleMapping, DEAL_POPULATOR, POPULATE, RESET, TEST_CASE, RESPONSE } from './Stub.constants'
 import { API_HOST } from 'constant'
+import { observer } from 'mobx-react-lite'
+import { useState, useCallback } from 'react'
+import { LABELS, ROLEMAPPING, DEAL_POPULATOR, POPULATE, RESET, TEST_CASE, RESPONSE } from './Stub.constants'
+import { StyledStub, LeftSide, StubTitle, PopulatorContainer, FormContainer, InputContainer, PositionContainer, Input, Label, InputField, RoleName, ButtonsContainer, Button, RightSide, ResponseContainer, ResponsePre } from './Stub.styles'
+import { dealStubDoppelganger } from './TestCases/test-case-doppelganger-01'
 
 // TODO security, protected routing and sending a secure GOD token
-
 export const Stub: React.FC = observer(() => {
   const [inputValues, setInputValues] = useState<number[]>(
-    Array(labels.length).fill(0)
+    Array(LABELS.length).fill(0)
   )
   const [response, setResponse] = useState({
     serverResponse: 'will be populated here',
@@ -26,14 +25,14 @@ export const Stub: React.FC = observer(() => {
         return newState
       })
       const newDealStub = { ...dealStub }
-      newDealStub[labels[index]] = value === 0 ? null : value
+      newDealStub[LABELS[index]] = value === 0 ? null : value
       setDealStub(newDealStub)
     },
     [dealStub, setDealStub]
   )
 
   const getRoleName = useCallback((id: number): string => {
-    return roleMapping[id] || 'Unknown'
+    return ROLEMAPPING[id] || 'Unknown'
   }, [])
 
   const populateStub = useCallback(async () => {
@@ -51,7 +50,7 @@ export const Stub: React.FC = observer(() => {
 
   const resetStub = useCallback(async () => {
     setDealStub({})
-    setInputValues(Array(labels.length).fill(0))
+    setInputValues(Array(LABELS.length).fill(0))
     const res = await fetch(`${API_HOST}/stub/populate/deal`, {
       method: 'POST',
       headers: {
@@ -67,7 +66,7 @@ export const Stub: React.FC = observer(() => {
   const useTestCase = useCallback(async () => {
     setDealStub(dealStubDoppelganger)
     setInputValues(
-      labels.map((label) =>
+      LABELS.map((label) =>
         Object.keys(dealStubDoppelganger).find(
           (testCaseLabel) => testCaseLabel === label
         )
@@ -94,7 +93,7 @@ export const Stub: React.FC = observer(() => {
         <PopulatorContainer>
           <FormContainer>
             <InputContainer>
-              {labels.map((label, index) => (
+              {LABELS.map((label, index) => (
                 <PositionContainer key={index}>
                   <Input>
                     <Label htmlFor={label}>{label}</Label>
@@ -117,7 +116,7 @@ export const Stub: React.FC = observer(() => {
         <ResponseContainer>
           <ResponsePre>{`${JSON.stringify(response, null, 4)}`}</ResponsePre>
           <br />
-          <ResponsePre>{`${JSON.stringify(roleMapping, null, 4)}`}</ResponsePre>
+          <ResponsePre>{`${JSON.stringify(ROLEMAPPING, null, 4)}`}</ResponsePre>
         </ResponseContainer>
       </RightSide>
     </StyledStub>

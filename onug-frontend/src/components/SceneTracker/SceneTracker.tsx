@@ -1,10 +1,10 @@
-import { deckStore, narrationStore } from 'store'
-import { order } from 'data'
-import { CardType } from 'types'
 import { CardImage } from 'components'
-import { ActualScene, ActualSceneImages, StyledSceneTracker } from './SceneTracker.styles'
+import { order } from 'data'
 import { observer } from 'mobx-react-lite'
 import { useRef, useEffect } from 'react'
+import { deckStore, narrationStore } from 'store'
+import { CardType } from 'types'
+import { ActualScene, ActualSceneImages, StyledSceneTracker } from './SceneTracker.styles'
 
 export const SceneTracker: React.FC = observer(() => {
   const { selectedCards } = deckStore

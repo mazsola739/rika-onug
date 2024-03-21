@@ -1,8 +1,8 @@
 import { BoardCard } from 'components'
-import { CardContainer, PlayersCards, CardTitle, CenterCards, CenterCardContainer } from './BoardCards.styles'
 import { gameBoardStore } from 'store'
+import { CardContainer, PlayersCards, CardTitle, CenterCards, CenterCardContainer } from './BoardCards.styles'
 
-const renderPlayerCards = () => {
+export const renderPlayerCards = () => {
   const { playerCards } = gameBoardStore
 
   return (
@@ -69,7 +69,7 @@ const renderPlayerCards = () => {
   )
 }
 
-const renderCenterCard = () => {
+export const renderCenterCard = () => {
   const { centerCards } = gameBoardStore
   const renderCard = (position: string, title: string) => {
     const card = centerCards.find((c) => c.position === position)
@@ -121,9 +121,4 @@ const renderCenterCard = () => {
       {renderCard('center_villain', 'Villain')}
     </CenterCardContainer>
   )
-}
-
-export const dealtCardsUtils = {
-  renderPlayerCards,
-  renderCenterCard,
 }

@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { observer } from 'mobx-react-lite'
-import { CardBack, MarkBack, StyledBoardCard, Tokens } from './BoardCard.styles'
-import { BoardCardProps } from './BoardCard.types'
-import { deckStore, gameTableStore, interactionStore } from 'store'
-import { Icon, Token } from 'components'
+import { Token, Icon } from 'components'
 import { useClickHandler } from 'hooks'
+import { observer } from 'mobx-react-lite'
+import { useState } from 'react'
+import { gameTableStore, deckStore, interactionStore } from 'store'
+import { StyledBoardCard, Tokens, CardBack, MarkBack } from './BoardCard.styles'
+import { BoardCardProps } from './BoardCard.types'
 
 export const BoardCard: React.FC<BoardCardProps> = observer(
   ({

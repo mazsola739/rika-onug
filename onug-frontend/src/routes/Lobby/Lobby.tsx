@@ -1,10 +1,10 @@
+import { HYDRATE_LOBBY, STAGES, REDIRECT, JOIN_ROOM } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { useEffect, useState } from 'react'
-import { StyledLobby, StyledRoomButton } from './Lobby.styles'
-import { lobbyStore, wsStore } from 'store'
-import { StyledLobbyProps } from './Lobby.types'
-import { HYDRATE_LOBBY, JOIN_ROOM, REDIRECT, STAGES } from 'constant'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { wsStore, lobbyStore } from 'store'
+import { StyledRoomButton, StyledLobby } from './Lobby.styles'
+import { StyledLobbyProps } from './Lobby.types'
 
 const RoomButton: React.FC<StyledLobbyProps> = ({
   buttonText,

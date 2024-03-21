@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
-import { gameBoardStore } from 'store/GameBoardStore'
-import { interactionStore } from 'store/InteractionStore'
+import { gameBoardStore, interactionStore } from 'store'
 import { WsJsonMessage, PositionProperties } from 'types'
+
 class OracleStore {
   constructor() {
     makeAutoObservable(this)

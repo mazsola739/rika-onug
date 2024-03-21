@@ -1,7 +1,7 @@
-import { Button, Footer, FooterButtons } from 'components'
-import { observer } from 'mobx-react-lite'
-import { buttons } from 'constant'
+import { Footer, FooterButtons, Button } from 'components'
+import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
+import { observer } from 'mobx-react-lite'
 
 export const GameTableFooter: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
@@ -15,9 +15,9 @@ export const GameTableFooter: React.FC = observer(() => {
   return (
     <Footer>
       <FooterButtons>
-        <Button onClick={handleLeaveTable} buttonText={buttons.stop_button_label} variant="red" />
-        <Button onClick={handleStartGame} buttonText={buttons.start_game_label} variant="purple" />
-        <Button onClick={handleReady} variant="green" buttonText={   /* ready ? buttons.im_ready_label :  */ buttons.ready_label } />
+        <Button onClick={handleLeaveTable} buttonText={BUTTONS.stop_button_label} variant="red" />
+        <Button onClick={handleStartGame} buttonText={BUTTONS.start_game_label} variant="purple" />
+        <Button onClick={handleReady} variant="green" buttonText={   /* ready ? buttons.im_ready_label :  */ BUTTONS.ready_label } />
       </FooterButtons>
     </Footer>
   )

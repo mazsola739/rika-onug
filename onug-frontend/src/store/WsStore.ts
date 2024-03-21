@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from 'mobx'
+import { makeObservable, observable, action } from 'mobx'
 import { SendJsonMessageType, WsJsonMessage } from 'types'
 
 class WsStore {

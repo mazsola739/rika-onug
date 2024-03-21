@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
+import { Token, Icon } from 'components'
 import { observer } from 'mobx-react-lite'
-import { ArtifactBack, CardBack, MarkBack, StyledVoteCard, Tokens } from './VoteCard.styles'
+import { useState } from 'react'
+import { gameTableStore, deckStore, interactionStore } from 'store'
+import { StyledVoteCard, Tokens, CardBack, MarkBack, ArtifactBack } from './VoteCard.styles'
 import { VoteCardProps } from './VoteCard.types'
-import { deckStore, gameTableStore, interactionStore } from 'store'
-import { Icon, Token } from 'components'
 
 export const VoteCard: React.FC<VoteCardProps> = observer(
   ({

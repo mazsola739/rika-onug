@@ -1,7 +1,6 @@
 import styled from '@emotion/styled'
 import { StyledCardProps, StyledMarkProps, StyledArtifactProps } from './VoteCard.types'
 
-
 export const StyledVoteCard = styled.div`
   display: flex;
   flex-direction: column;

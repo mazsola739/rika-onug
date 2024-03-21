@@ -1,7 +1,7 @@
-import { observer } from 'mobx-react-lite'
-import { Narration, NarrationImage, StyledGamePlayHeader, TimerContainer } from './GamePlay.styles'
-import { gamePlayStore, narrationStore } from 'store'
 import { CardImage, Timer } from 'components'
+import { observer } from 'mobx-react-lite'
+import { gamePlayStore, narrationStore } from 'store'
+import { StyledGamePlayHeader, NarrationImage, Narration, TimerContainer } from './GamePlay.styles'
 
 export const GamePlayHeader: React.FC = observer(() => {
   const startingTime = gamePlayStore.startingTime

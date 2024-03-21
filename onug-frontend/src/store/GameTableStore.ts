@@ -1,10 +1,8 @@
+import { HAS_MARK_IDS } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { CardType } from 'types'
-import { hasMarkIds } from 'constant'
-import { utils } from 'utils'
-import { deckStore } from 'store'
-
-const { areAnyCardSelectedById, checkCardPresence } = utils
+import { checkCardPresence, areAnyCardSelectedById } from 'utils'
+import { deckStore } from './DeckStore'
 
 export class GameTableStore {
   constructor() {
@@ -40,7 +38,7 @@ export class GameTableStore {
   }
 
   get hasMarks(): boolean {
-    return areAnyCardSelectedById(this.selectedCards, hasMarkIds)
+    return areAnyCardSelectedById(this.selectedCards, HAS_MARK_IDS)
   }
 }
 

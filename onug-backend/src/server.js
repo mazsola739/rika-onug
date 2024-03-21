@@ -7,7 +7,7 @@ import { logDebug } from './log';
 import { websocketServer } from './websocket';
 import { godRouter } from './god';
 import { stubRouter } from './stub';
-import ViteExpress from "vite-express";
+import ViteExpress from 'vite-express'
 
 
 const app = express()

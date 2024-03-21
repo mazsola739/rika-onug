@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite'
+import { useState, useEffect } from 'react'
+import { gameBoardStore } from 'store'
 import { StyledTimer } from './Timer.styles'
 import { TimerProps } from './Timer.types'
-import { useEffect, useState } from 'react'
-import { gameBoardStore } from 'store'
 
 export const Timer: React.FC<TimerProps> = observer(
   ({ startingTime, actionTime = 20000 }) => {

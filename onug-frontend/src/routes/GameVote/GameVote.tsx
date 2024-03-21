@@ -1,8 +1,8 @@
-import { BoardCards, Header, KnownOwnCard, Main, MessageBox, VotedList } from 'components'
+import { Header, Main, BoardCards, KnownOwnCard, MessageBox, VotedList } from 'components'
 import { observer } from 'mobx-react-lite'
-import { GameArea, OwnCardPlace, PlayerHand, Voted, StyledGameVote } from './GameVote.styles'
-import { GameVoteFooter } from './GameVoteFooter'
 import { gameBoardStore, interactionStore } from 'store'
+import { StyledGameVote, GameArea, PlayerHand, OwnCardPlace, Voted } from './GameVote.styles'
+import { GameVoteFooter } from './GameVoteFooter'
 
 export const GameVote: React.FC = observer(() => {
   return (

@@ -1,7 +1,7 @@
 
-import { describe, it } from "node:test"
-import { strictEqual } from "node:assert"
-import { isTimeElapsed } from "../../src/utils/date-time"
+import { describe, it } from 'node:test'
+import { strictEqual } from 'node:assert'
+import { isTimeElapsed } from '../../src/utils/date-time"
 
 describe("Test date-time utils", () => {
     it("should correctly measure elapsed time-periods", () => {

@@ -1,12 +1,12 @@
+import { Header, Main, BoardCards, SceneTracker, KnownOwnCard, MessageBox } from 'components'
+import { ARRIVE_GAME_PLAY, STAGES, SCENE, HYDRATE_GAME_PLAY, MESSAGE, REDIRECT } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { narrationStore, gameBoardStore, wsStore, gamePlayStore, interactionStore } from 'store'
-import { BoardCards, Header, KnownOwnCard, Main, MessageBox, SceneTracker } from 'components'
-import { ARRIVE_GAME_PLAY, HYDRATE_GAME_PLAY, SCENE, MESSAGE, REDIRECT, STAGES } from 'constant'
-import { useEffect, useState } from 'react'
-import { GamePlayHeader } from './GamePlayHeader'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { GameArea, GamePlayContainer, OwnCardPlace, PlayerHand, StyledGamePlay } from './GamePlay.styles'
+import { wsStore, gameBoardStore, narrationStore, interactionStore, gamePlayStore } from 'store'
+import { StyledGamePlay, GamePlayContainer, GameArea, PlayerHand, OwnCardPlace } from './GamePlay.styles'
 import { GamePlayFooter } from './GamePlayFooter'
+import { GamePlayHeader } from './GamePlayHeader'
 
 export const GamePlay: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)

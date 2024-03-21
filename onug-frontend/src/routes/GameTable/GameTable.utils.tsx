@@ -1,6 +1,6 @@
 import { DealtToken } from 'components'
-import { Marks } from './GameTable.styles'
 import { TokenType } from 'types'
+import { Marks } from './GameTable.styles'
 
 const renderMarks = (selectedMarks: TokenType[]) => (
   <Marks>

@@ -1,12 +1,12 @@
-import { CardList, Filter, Main } from 'components'
-import { ARRIVE_ROOM, HYDRATE_ROOM, LEAVE_ROOM, REDIRECT, STAGES, team } from 'constant'
+import { Main, Filter, CardList } from 'components'
+import { ARRIVE_ROOM, STAGES, HYDRATE_ROOM, REDIRECT, LEAVE_ROOM, TEAM } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { useEffect, useMemo, useState } from 'react'
-import { deckStore, roomStore, wsStore } from 'store'
-import { RoomCardList, StyledRoom } from './Room.styles'
+import { useState, useEffect, useMemo } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { wsStore, deckStore, roomStore } from 'store'
+import { StyledRoom, RoomCardList } from './Room.styles'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
-import { useNavigate } from 'react-router-dom'
 
 export const Room: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
@@ -55,8 +55,8 @@ export const Room: React.FC = observer(() => {
     () => [
       ...new Set(
         deck.map((card) =>
-          card.team === team.hero || card.team === team.village
-            ? team.village
+          card.team === TEAM.hero || card.team === TEAM.village
+            ? TEAM.village
             : card.team
         )
       ),
@@ -68,8 +68,6 @@ export const Room: React.FC = observer(() => {
     () => roomStore.getOrderedTeams(teamArray),
     [roomStore, teamArray]
   )
-
-
 
   return (
     <StyledRoom>
