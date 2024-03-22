@@ -11,6 +11,7 @@ class DeckStore {
   artifacts: TokenType[] = artifacts
   selectedCards: CardType[] = []
   selectedMarks: TokenType[] = []
+  selectedExpansions: string[] = []
 
   constructor() {
     makeAutoObservable(this)

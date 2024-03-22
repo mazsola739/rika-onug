@@ -1,5 +1,5 @@
 //@ts-check
-import { logTrace, logErrorWithStack } from '../log';
+import { logTrace, logErrorWithStack } from '../log'
 
 export const metaListOnugEnv = async (req, res) => {
   try {
@@ -15,4 +15,4 @@ export const metaListOnugEnv = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-};
+}

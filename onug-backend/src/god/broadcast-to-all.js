@@ -1,6 +1,6 @@
 //@ts-check
-import { logTrace, logErrorWithStack } from '../log';
-import { websocketServerConnectionsPerRoom } from '../websocket/connections';
+import { logTrace, logErrorWithStack } from '../log'
+import { websocketServerConnectionsPerRoom } from '../websocket/connections'
 
 export const broadCastToAll = async (req, res) => {
   try {
@@ -19,4 +19,4 @@ export const broadCastToAll = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-};
+}

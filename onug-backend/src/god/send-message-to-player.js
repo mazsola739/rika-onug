@@ -1,6 +1,6 @@
 //@ts-check
-import { logTrace, logErrorWithStack } from '../log';
-import { websocketServerConnectionsPerRoom } from '../websocket/connections';
+import { logTrace, logErrorWithStack } from '../log'
+import { websocketServerConnectionsPerRoom } from '../websocket/connections'
 
 export const sendMessageToPlayer = async (req, res) => {
   try {
@@ -21,4 +21,4 @@ export const sendMessageToPlayer = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-};
+}

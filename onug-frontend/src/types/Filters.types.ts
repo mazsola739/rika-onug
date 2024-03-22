@@ -45,12 +45,12 @@ export type WakeType = {
 }
 
 export type ExpansionType = {
-  werewolf: 'onuw'
-  daybreak: 'onud'
-  vampire: 'onuv'
-  alien: 'onua'
-  supervillains: 'onus'
-  bonusroles: 'onub'
+  werewolf: 'werewolf'
+  daybreak: 'daybreak'
+  vampire: 'vampire'
+  alien: 'alien'
+  supervillains: 'supervillains'
+  bonusroles: 'bonusroles'
 }
 
 export type TeamType = {

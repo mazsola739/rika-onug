@@ -1,6 +1,6 @@
 //@ts-check
-import { logTrace, logErrorWithStack } from '../log';
-import { deleteAllGameStates, readAllGameStates } from '../repository';
+import { logTrace, logErrorWithStack } from '../log'
+import { deleteAllGameStates, readAllGameStates } from '../repository'
 
 export const delete_all_gamestates = async (req, res) => {
   try {
@@ -16,4 +16,4 @@ export const delete_all_gamestates = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-};
+}

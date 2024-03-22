@@ -1,12 +1,12 @@
 //@ts-check
-import express from 'express';
-import cors from 'cors';
-import cookieParser from 'cookie-parser';
-import { pageNotFoundError, internalServerError, apiRouter } from './api';
-import { logDebug } from './log';
-import { websocketServer } from './websocket';
-import { godRouter } from './god';
-import { stubRouter } from './stub';
+import express from 'express'
+import cors from 'cors'
+import cookieParser from 'cookie-parser'
+import { pageNotFoundError, internalServerError, apiRouter } from './api'
+import { logDebug } from './log'
+import { websocketServer } from './websocket'
+import { godRouter } from './god'
+import { stubRouter } from './stub'
 import ViteExpress from 'vite-express'
 
 
@@ -33,4 +33,4 @@ app.use(internalServerError)
 
 ViteExpress.listen(app, PORT, () =>
     logDebug(`Server is listening on port: ${PORT}`)
-);
+)

@@ -1,4 +1,4 @@
-import { logWarn } from '../log';
+import { logWarn } from '../log'
 const validCardIdRange = [1, 86]
 
 const CARDS_ARE_NOT_AN_ARRAY = 'Cards were not provided as an array'
@@ -26,4 +26,4 @@ export const validateCards = (cards) => {
   if (!validity) logWarn(`Validation errors: ${errors}`)
 
   return [validity, errors]
-};
+}

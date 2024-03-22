@@ -14,6 +14,7 @@ export const hydrateRoom = async (ws, message) => {
     success: true,
     room_id: gameState.room_id,
     selected_cards: gameState.selected_cards,
+    selected_expansions: gameState.selected_expansions,
   })
   
   logTrace(`sending message to client, hydrate room`, hydrateRoom)

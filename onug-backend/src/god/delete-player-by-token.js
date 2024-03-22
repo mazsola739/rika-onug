@@ -1,6 +1,6 @@
 //@ts-check
-import { logTrace, logErrorWithStack } from '../log';
-import { deletePlayerByToken, repository } from '../repository';
+import { logTrace, logErrorWithStack } from '../log'
+import { deletePlayerByToken, repository } from '../repository'
 
 export const delete_player_by_token = async (req, res) => {
   try {
@@ -17,4 +17,4 @@ export const delete_player_by_token = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-};
+}

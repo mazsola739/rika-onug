@@ -1,6 +1,6 @@
 //@ts-check
-import { logTrace, logErrorWithStack } from '../log';
-import { readdir, unlink } from 'fs/promises';
+import { logTrace, logErrorWithStack } from '../log'
+import { readdir, unlink } from 'fs/promises'
 
 export const metaDeleteAllOldLogFiles = async (req, res) => {
   try {
@@ -21,4 +21,4 @@ export const metaDeleteAllOldLogFiles = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-};
+}

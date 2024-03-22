@@ -1,24 +1,24 @@
 //@ts-check
-import WebSocket from 'ws';
-import { logTrace, logError, logErrorWithStack } from '../log';
+import WebSocket from 'ws'
+import { logTrace, logError, logErrorWithStack } from '../log'
 
-import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_GAME_TABLE, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME_PLAY, STOP_GAME, RELOAD, SCENE } from '../constant/ws';
+import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_GAME_TABLE, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME_PLAY, STOP_GAME, RELOAD, SCENE } from '../constant/ws'
 
-import { hydrateRoom } from './hydrate-room';
-import { reset } from './reset';
-import { updateRoom } from './update-room';
-import { newbie } from './newbie';
-import { joinRoom } from './join-room';
-import { leaveRoom } from './leave-room';
-import { leaveTable } from './leave-table';
-import { ready } from './ready';
-import { hydrateGameTable } from './hydrate-game-table';
-import { startGame } from './start-game';
-import { dealCards } from './deal-cards';
-import { hydrateGamePlay } from './hydrate-game-play';
-import { stopGame } from './stop-game';
-import { reload } from './reload';
-import { interaction } from './interaction';
+import { hydrateRoom } from './hydrate-room'
+import { reset } from './reset'
+import { updateRoom } from './update-room'
+import { newbie } from './newbie'
+import { joinRoom } from './join-room'
+import { leaveRoom } from './leave-room'
+import { leaveTable } from './leave-table'
+import { ready } from './ready'
+import { hydrateGameTable } from './hydrate-game-table'
+import { startGame } from './start-game'
+import { dealCards } from './deal-cards'
+import { hydrateGamePlay } from './hydrate-game-play'
+import { stopGame } from './stop-game'
+import { reload } from './reload'
+import { interaction } from './interaction'
 
 export const websocketServer = (port) => {
   try {
@@ -56,4 +56,4 @@ export const websocketServer = (port) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-};
+}

@@ -72,11 +72,10 @@ class RoomStore {
   }
 
   toggleExpansionSelection(expansion: string): void {
-    const shortName = this.getExpansionShortName(expansion)
-    if (shortName) {
-      this.selectedExpansions.includes(shortName)
-        ? this.removeSelectedExpansion(shortName)
-        : this.addSelectedExpansion(shortName)
+    if (expansion) {
+      this.selectedExpansions.includes(expansion)
+        ? this.removeSelectedExpansion(expansion)
+        : this.addSelectedExpansion(expansion)
     }
   }
 
@@ -88,10 +87,6 @@ class RoomStore {
     this.selectedExpansions = this.selectedExpansions.filter(
       (selected) => selected !== expansion
     )
-  }
-
-  getExpansionShortName(fullName: string): string | undefined {
-    return Object.keys(EXPANSIONS).find((key) => EXPANSIONS[key] === fullName)
   }
 }
 

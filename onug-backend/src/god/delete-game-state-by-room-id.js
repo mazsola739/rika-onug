@@ -1,6 +1,6 @@
 //@ts-check
-import { logTrace } from '../log';
-import { deleteGameStateByRoomId } from '../repository';
+import { logTrace } from '../log'
+import { deleteGameStateByRoomId } from '../repository'
 
 export const delete_gamestate_by_room_id = async (req, res) => {
   try {
@@ -15,4 +15,4 @@ export const delete_gamestate_by_room_id = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-};
+}

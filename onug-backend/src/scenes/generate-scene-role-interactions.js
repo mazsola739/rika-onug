@@ -1,6 +1,6 @@
 //@ts-check
-import { updatePlayerCard } from './update-player-card';
-import { getKeys, concatArraysWithUniqueElements } from '../utils/scene-utils';
+import { updatePlayerCard } from './update-player-card'
+import { getKeys, concatArraysWithUniqueElements } from '../utils/scene-utils'
 
 export const generateRoleInteraction = ( newGameState, token, {
   private_message,

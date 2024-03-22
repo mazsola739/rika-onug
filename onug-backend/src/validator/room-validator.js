@@ -1,5 +1,5 @@
-import { readGameState } from '../repository';
-import { logWarn } from '../log';
+import { readGameState } from '../repository'
+import { logWarn } from '../log'
 
 const roomIds = ['foyer', 'archives', 'armory', 'dynamite_room', 'great_hall', 'guest_bedroom', 'kitchen', 'laboratory', 
 'observatory', 'panic_room', 'parlor', 'secret_passage', 'sitting_room', 'staff_quarters', 'study', 'workshop']
@@ -34,4 +34,4 @@ export const validateRoom = async (roomId) => {
   if (!validity) logWarn(`Validation errors: ${errors}`)
 
   return [validity, gameState, errors]
-};
+}

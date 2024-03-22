@@ -1,20 +1,20 @@
 //@ts-check
-import express from 'express';
+import express from 'express'
 const router = express.Router()
 
-import { checkGameStates } from './check-game-states';
-import { checkGameStateByRoomId } from './check-game-state-by-room-id';
-import { reInitAllGameStates } from './re-init-all-game-states';
-import { delete_all_gamestates } from './delete-all-game-states';
-import { delete_gamestate_by_room_id } from './delete-game-state-by-room-id';
-import { delete_all_players } from './delete-all-players';
-import { delete_player_by_token } from './delete-player-by-token';
-import { checkConnections } from './check-connections';
-import { broadCastToAll } from './broadcast-to-all';
-import { broadCastToAllInRoom } from './broadcast-to-all-in-room';
-import { sendMessageToPlayer } from './send-message-to-player';
-import { metaListOnugEnv } from './meta-list-onug-env';
-import { metaDeleteAllOldLogFiles } from './meta-delete-all-old-log-files';
+import { checkGameStates } from './check-game-states'
+import { checkGameStateByRoomId } from './check-game-state-by-room-id'
+import { reInitAllGameStates } from './re-init-all-game-states'
+import { delete_all_gamestates } from './delete-all-game-states'
+import { delete_gamestate_by_room_id } from './delete-game-state-by-room-id'
+import { delete_all_players } from './delete-all-players'
+import { delete_player_by_token } from './delete-player-by-token'
+import { checkConnections } from './check-connections'
+import { broadCastToAll } from './broadcast-to-all'
+import { broadCastToAllInRoom } from './broadcast-to-all-in-room'
+import { sendMessageToPlayer } from './send-message-to-player'
+import { metaListOnugEnv } from './meta-list-onug-env'
+import { metaDeleteAllOldLogFiles } from './meta-delete-all-old-log-files'
 
 // gamestates
 router.get('/check-game-states', checkGameStates)

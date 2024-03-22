@@ -1,10 +1,10 @@
 //@ts-check
-import { writeFileSync } from 'fs';
-import { readFile, unlink } from 'fs/promises';
-import { logError, logTrace, logErrorWithStack } from '../log';
-import { websocketServerConnectionsPerRoom } from '../websocket/connections';
-import roomsData from '../data/rooms.json';
-import roomNames from '../data/room_names.json';
+import { writeFileSync } from 'fs'
+import { readFile, unlink } from 'fs/promises'
+import { logError, logTrace, logErrorWithStack } from '../log'
+import { websocketServerConnectionsPerRoom } from '../websocket/connections'
+import roomsData from '../data/rooms.json'
+import roomNames from '../data/room_names.json'
 
 export const upsertRoomState = async (state) => {
   logTrace('upsertRoomState')

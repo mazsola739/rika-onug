@@ -1,8 +1,8 @@
 //@ts-check
-import { HYDRATE_ROOM } from '../constant/ws';
-import { logError, logTrace } from '../log';
-import { validateRoom } from '../validator';
-import { upsertRoomState } from '../repository';
+import { HYDRATE_ROOM } from '../constant/ws'
+import { logError, logTrace } from '../log'
+import { validateRoom } from '../validator'
+import { upsertRoomState } from '../repository'
 import { broadcast } from './connections'
 
 export const reset = async (message) => {
@@ -12,7 +12,7 @@ export const reset = async (message) => {
 
     if (!roomIdValid) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors })
 
-    const newGameState = { ...gameState, selected_cards: [] }
+    const newGameState = { ...gameState, selected_cards: [], selected_expansions: ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"] }
 
     upsertRoomState(newGameState)
 
@@ -22,8 +22,9 @@ export const reset = async (message) => {
       type: HYDRATE_ROOM,
       success: true,
       selected_cards: [],
+      selected_expansions: ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
     })
   } catch (error) {
     logError(error)
   }
-};
+}

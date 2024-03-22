@@ -1,11 +1,11 @@
 //@ts-check
-import { logTrace } from '../log';
-import { validateRoom } from '../validator';
-import { upsertRoomState } from '../repository';
-import { STAGES } from '../constant/stage';
+import { logTrace } from '../log'
+import { validateRoom } from '../validator'
+import { upsertRoomState } from '../repository'
+import { STAGES } from '../constant/stage'
 import { broadcast } from './connections'
-import { REDIRECT } from '../constant';
-import { startGamePlay } from '../scenes/game-play';
+import { REDIRECT } from '../constant'
+import { startGamePlay } from '../scenes/game-play'
 
 export const startGame = async (ws, message) => {
   const { room_id, token } = message
@@ -42,4 +42,4 @@ export const startGame = async (ws, message) => {
   startGamePlay(gameState.room_id)
   
   return broadcast(room_id, startGame)
-};
+}

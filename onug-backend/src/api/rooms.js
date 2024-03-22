@@ -1,6 +1,6 @@
 //@ts-check
-import roomsData from '../data/rooms.json';
-import { logTrace, logErrorWithStack } from '../log';
+import roomsData from '../data/rooms.json'
+import { logTrace, logErrorWithStack } from '../log'
 
 export const rooms = (req, res) => {
   try {
@@ -15,4 +15,4 @@ export const rooms = (req, res) => {
       message: "Failed to fetch rooms",
     })
   }
-};
+}

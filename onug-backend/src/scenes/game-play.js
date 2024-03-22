@@ -67,8 +67,8 @@ const getNextScene = gameState => {
         const actionTimeout = 10000; // Adjust timeout duration as needed (e.g., 10 seconds)
         setTimeout(() => {
             // Trigger action if player doesn't respond in time
-            handlePlayerTimeout(newGameState);
-        }, actionTimeout);
+            handlePlayerTimeout(newGameState)
+        }, actionTimeout)
     } */
 
     if (newGameState.actual_scene.scene_title === 'JOKE') {
@@ -88,15 +88,15 @@ const getNextScene = gameState => {
 /* const handlePlayerTimeout = gameState => {
   // Handle player timeout here
   // For example, you can simulate a random answer or trigger a specific action
-  console.log('Player timed out. Triggering action...');
+  console.log('Player timed out. Triggering action...')
   // Perform actions like selecting a random answer, ending the scene, etc.
   // Update gameState accordingly
   // For example:
-  // gameState = performRandomAnswer(gameState);
+  // gameState = performRandomAnswer(gameState)
   // Or
-  // gameState = endScene(gameState);
+  // gameState = endScene(gameState)
   // Then proceed with the next scene
-  getNextScene(gameState);
+  getNextScene(gameState)
 } */
 
 const tick = async (room_id) => {

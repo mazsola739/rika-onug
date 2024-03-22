@@ -4,4 +4,4 @@ export const isTimeElapsed = (fromTimeStamp, durationInSeconds) => {
   const totalSecondsElapsed = (now - fromTimeStamp) / 1000
   
   return totalSecondsElapsed >= durationInSeconds
-};
+}

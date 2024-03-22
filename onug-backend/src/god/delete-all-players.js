@@ -1,7 +1,7 @@
 //@ts-check
-import { logTrace, logErrorWithStack } from '../log';
-import { deleteAllPlayers } from '../repository';
-import { initWebSocketConnections } from '../websocket/connections';
+import { logTrace, logErrorWithStack } from '../log'
+import { deleteAllPlayers } from '../repository'
+import { initWebSocketConnections } from '../websocket/connections'
 
 export const delete_all_players = async (req, res) => {
   try {
@@ -16,4 +16,4 @@ export const delete_all_players = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-};
+}

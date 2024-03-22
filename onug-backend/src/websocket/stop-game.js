@@ -1,10 +1,10 @@
 //@ts-check
-import { REDIRECT } from '../constant/ws';
-import { logTrace } from '../log';
-import { validateRoom } from '../validator';
-import { upsertRoomState } from '../repository';
-import { broadcast } from './connections';
-import { stopGamePlay } from '../scenes/game-play';
+import { REDIRECT } from '../constant/ws'
+import { logTrace } from '../log'
+import { validateRoom } from '../validator'
+import { upsertRoomState } from '../repository'
+import { broadcast } from './connections'
+import { stopGamePlay } from '../scenes/game-play'
 
 export const stopGame = async (message) => {
   const { room_id, token } = message
@@ -27,4 +27,4 @@ export const stopGame = async (message) => {
   }
   
   return broadcast(room_id, stopGame)
-};
+}

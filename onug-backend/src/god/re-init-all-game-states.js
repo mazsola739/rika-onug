@@ -1,6 +1,6 @@
 //@ts-check
-import { logTrace, logErrorWithStack } from '../log';
-import { reInitializeAllGameStates } from '../repository';
+import { logTrace, logErrorWithStack } from '../log'
+import { reInitializeAllGameStates } from '../repository'
 
 export const reInitAllGameStates = async (req, res) => {
   try {
@@ -14,4 +14,4 @@ export const reInitAllGameStates = async (req, res) => {
   } catch (error) {
     logErrorWithStack(error)
   }
-};
+}

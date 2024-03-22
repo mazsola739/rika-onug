@@ -1,6 +1,6 @@
 //@ts-check
-import { logTrace } from '../log';
-import { readGameStateByRoomId } from '../repository';
+import { logTrace } from '../log'
+import { readGameStateByRoomId } from '../repository'
 
 export const checkGameStateByRoomId = async (req, res) => {
     try {
@@ -17,4 +17,4 @@ export const checkGameStateByRoomId = async (req, res) => {
     } catch (error) {
         logErrorWithStack(error)
     }
-};
+}

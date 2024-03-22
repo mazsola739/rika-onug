@@ -1,5 +1,5 @@
 //@ts-check
-import { logError, logErrorWithStack } from '../log';
+import { logError, logErrorWithStack } from '../log'
 
 export const pageNotFoundError = (req, res) => {
   try {
@@ -8,11 +8,11 @@ export const pageNotFoundError = (req, res) => {
     logErrorWithStack(error)
     res.status(404).send("error")
   }
-};
+}
 
 export const internalServerError = (error, req, res) => {
   logError(`ERROR occurred: ${error.stack}`)
   res
     .status(500)
     .send(`500 | Sorry, the app could not handle the request properly`)
-};
+}

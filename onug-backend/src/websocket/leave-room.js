@@ -34,6 +34,7 @@ export const leaveRoom = async (ws, message) => {
 
     if (defaultRoom) {
       gameState.selected_cards = defaultRoom.selected_cards
+      gameState.selected_expansions = defaultRoom.selected_expansions
       gameState.players = {}
       gameState.scene_number = 0
       gameState.closed = false
