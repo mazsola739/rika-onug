@@ -1,16 +1,14 @@
-import { TEAM, EXPANSIONS } from 'constant'
-import { cards } from 'data'
-import { makeAutoObservable, reaction } from 'mobx'
-import { CardType } from 'types'
-import { roomStoreUtils } from 'utils'
-import { deckStore } from './DeckStore'
+import { TEAM, EXPANSIONS } from "constant"
+import { cards } from "data"
+import { makeAutoObservable, reaction } from "mobx"
+import { CardType } from "types"
+import { createEmptyCard, filterByExpansions, getFilteredCardsForTeam, getOrderedTeams } from "utils"
+import { deckStore } from "store"
 
-const { getFilteredCardsForTeam, getOrderedTeams, filterByExpansions } =
-  roomStoreUtils
 const { hero, village } = TEAM
 
 class RoomStore {
-  detailedCardInfo: CardType = deckStore.createEmptyCard()
+  detailedCardInfo: CardType = createEmptyCard()
   selectedExpansions: string[] = Object.keys(EXPANSIONS)
 
   constructor() {
@@ -56,7 +54,7 @@ class RoomStore {
   }
 
   resetDetailedCardInfo(): void {
-    this.detailedCardInfo = deckStore.createEmptyCard()
+    this.detailedCardInfo = createEmptyCard()
   }
 
   toggleInfo(id: number): void {
@@ -66,7 +64,7 @@ class RoomStore {
     }
 
     const newCardInfo = deckStore.getCardById(id)
-    this.detailedCardInfo = newCardInfo || deckStore.createEmptyCard()
+    this.detailedCardInfo = newCardInfo || createEmptyCard()
   }
 
   filterByExpansions(expansions: string[] = []): void {

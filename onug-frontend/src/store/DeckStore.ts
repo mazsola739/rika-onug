@@ -16,17 +16,9 @@ class DeckStore {
     makeAutoObservable(this)
   }
 
-  createEmptyCard(): CardType {
-    return createEmptyCard()
-  }
-
-  createEmptyToken(): TokenType {
-    return createEmptyToken()
-  }
-
   getCardById(cardId: number): CardType {
     if (!this.deck) {
-      return this.createEmptyCard()
+      return createEmptyCard()
     }
 
     return findCardById(this.deck, cardId)

@@ -1,5 +1,5 @@
 import { roomsRequest } from 'api'
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 import { RoomType } from 'types'
 
 class LobbyStore {
@@ -12,13 +12,23 @@ class LobbyStore {
   }
 
   async fetchRooms() {
-    this.isLoading = true
+    runInAction(() => {
+      this.isLoading = true
+    })
+
     try {
-      this.rooms = await roomsRequest()
+      const rooms = await roomsRequest()
+      runInAction(() => {
+        this.rooms = rooms
+      })
     } catch (error) {
-      this.errorMessage = error.message
+      runInAction(() => {
+        this.errorMessage = error.message
+      })
     } finally {
-      this.isLoading = false
+      runInAction(() => {
+        this.isLoading = false
+      })
     }
   }
 }
