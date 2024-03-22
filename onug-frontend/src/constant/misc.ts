@@ -11,12 +11,12 @@ export const TEAMS: TeamsType = {
 }
 
 export const EXPANSIONS: ExpansionsType = {
-  onuw: 'Werewolf',
-  onud: 'Daybreak',
-  onuv: 'Vampire',
-  onua: 'Alien',
-  onus: 'Super Villains',
-  onub: 'Bonus Roles',
+  werewolf: 'Werewolf',
+  daybreak: 'Daybreak',
+  vampire: 'Vampire',
+  alien: 'Alien',
+  supervillains: 'Super Villains',
+  bonusroles: 'Bonus Roles',
 }
 
 export const TEAM_NAMES: TeamNamesTypes = {

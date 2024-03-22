@@ -12,9 +12,7 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
   const token = sessionStorage.getItem('token')
 
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
-  const isSelected = deckStore.selectedCards.some(
-    (selectedCard) => selectedCard.id === id
-  )
+  const isSelected = deckStore.selectedCards.some((selectedCard) => selectedCard.id === id)
 
   const testId = `${display_name.replace(/ /g, '-')}--${
     isSelected ? 'selected' : 'not-selected'
@@ -39,11 +37,7 @@ export const Card: React.FC<CardProps> = observer(({ card }) => {
   const imageSrc = useMemo(() => `/assets/cards/${card_name}.png`, [card_name])
 
   return (
-    <StyledCard
-      isSelected={isSelected}
-      onClick={handleCardClick}
-      data-testid={testId}
-    >
+    <StyledCard isSelected={isSelected} onClick={handleCardClick} data-testid={testId} >
       <CardImage src={imageSrc} alt={display_name} isSelected={isSelected} />
       <CardName isSelected={isSelected}>{display_name}</CardName>
     </StyledCard>

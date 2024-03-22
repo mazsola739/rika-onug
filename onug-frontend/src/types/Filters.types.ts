@@ -10,12 +10,12 @@ export type TeamsType = {
 
 export type ExpansionsType = {
   [key: string]: string
-  onuw: 'Werewolf'
-  onud: 'Daybreak'
-  onuv: 'Vampire'
-  onua: 'Alien'
-  onus: 'Super Villains'
-  onub: 'Bonus Roles'
+  werewolf: 'Werewolf',
+  daybreak: 'Daybreak',
+  vampire: 'Vampire',
+  alien: 'Alien',
+  supervillains: 'Super Villains',
+  bonusroles: 'Bonus Roles',
 }
 
 export type TeamNames = {

@@ -4,7 +4,7 @@
     "room_name": "Archives",
     "stage": "LOBBY",
     "selected_cards": [1, 15, 16, 2, 4, 6, 7, 9, 8, 11],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Dragon", "Phoenix", "Griffin", "Mermaid", "Unicorn", "Cyclops", "Troll", "Chimera", "Goblin", "Minotaur", "Fairy", "Djinn"],
     "players": {},
     "card_positions": {
@@ -31,7 +31,7 @@
     "room_name": "Armory",
     "stage": "LOBBY",
     "selected_cards": [79, 84, 19, 81, 86, 14],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": [
       "Forrest Gump",
       "Indiana Jones",
@@ -71,7 +71,7 @@
     "room_name": "Dynamite Room",
     "stage": "LOBBY",
     "selected_cards": [],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": [
       "Superman",
       "Batman",
@@ -111,7 +111,7 @@
     "room_name": "Foyer",
     "stage": "LOBBY",
     "selected_cards": [25, 15, 17, 22, 18, 23, 27, 11, 24],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": [
       "Harry Potter",
       "Hermione Granger",
@@ -151,7 +151,7 @@
     "room_name": "Great Hall",
     "stage": "LOBBY",
     "selected_cards": [15, 16, 9, 8, 11, 83, 73, 76],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": [
       "Billy Butcher",
       "Hughie Campbell",
@@ -191,7 +191,7 @@
     "room_name": "Guest Bedroom",
     "stage": "LOBBY",
     "selected_cards": [41, 40, 32, 34, 29, 35, 36, 33],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": [
       "Frodo",
       "Samwise",
@@ -231,7 +231,7 @@
     "room_name": "Kitchen",
     "stage": "LOBBY",
     "selected_cards": [50, 42, 53, 45, 52, 46, 77, 44],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": [
       "Jon Snow",
       "Daenerys Targaryen",
@@ -271,7 +271,7 @@
     "room_name": "Observatory",
     "stage": "LOBBY",
     "selected_cards": [15, 22, 5, 6, 9, 23, 8, 27, 11, 24, 20, 25, 10],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": [
       "Maleficent",
       "Ursula",
@@ -311,7 +311,7 @@
     "room_name": "Parlor",
     "stage": "LOBBY",
     "selected_cards": [15, 16, 7, 71, 18, 10, 80, 27, 11, 72, 20, 75, 21],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": [
       "Chuck Norris",
       "Keanu Reeves",
@@ -351,7 +351,7 @@
     "room_name": "Secret Passage",
     "stage": "LOBBY",
     "selected_cards": [50, 30, 42, 53, 15, 22, 85, 9, 27, 11, 33, 4, 20],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": [
       "Luke Skywalker",
       "Princess Leia Organa",
@@ -391,7 +391,7 @@
     "room_name": "Sitting Room",
     "stage": "LOBBY",
     "selected_cards": [25, 53, 47, 54, 48, 51, 27, 52, 46, 20, 44, 49, 74],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": [
       "Peter Parker",
       "Tony Stark",
@@ -431,7 +431,7 @@
     "room_name": "Study",
     "stage": "LOBBY",
     "selected_cards": [],
-    "selected_expansions": ["werewolf", "daybreak", "vampire", "alien", "supervillains", "bonusroles"],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": [
       "Clark Kent",
       "Bruce Wayne",

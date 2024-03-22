@@ -1,9 +1,8 @@
-import { VAMPIRE_IDS, ASSASSIN_IDS } from 'constant'
+import { VAMPIRE_IDS, ASSASSIN_IDS, EXPANSIONS } from 'constant'
 import { cards, marks, artifacts } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardType, TokenType } from 'types'
-import { createEmptyCard, createEmptyToken, findCardById, determineTotalPlayers, selectCard, deselectCard, areAnyCardSelectedById, isCardSelectedById } from 'utils'
-import { roomStore } from './RoomStore'
+import { createEmptyCard, findCardById, determineTotalPlayers, areAnyCardSelectedById, isCardSelectedById } from 'utils'
 
 class DeckStore {
   deck: CardType[] = cards
@@ -25,31 +24,14 @@ class DeckStore {
     return findCardById(this.deck, cardId)
   }
 
-  get totalCharacters(): number {
-    return this.selectedCards.length
-  }
-
-  get totalPlayers(): number {
-    return determineTotalPlayers(this.totalCharacters, this.selectedCards)
-  }
-
   setSelectedCard(cardIds: number[]): void {
     this.selectedCards = cardIds.map((cardId) => this.getCardById(cardId))
   }
 
-  resetSelection(): void {
-    this.selectedCards = []
-    roomStore.resetDetailedCardInfo()
+  setSelectedExpansions(extensions: string[]): void {
+    this.selectedExpansions = extensions
   }
-
-  handleSelectCard(card: CardType): void {
-    selectCard(this.selectedCards, card)
-  }
-
-  handleDeselectCard(card: CardType): void {
-    deselectCard(this.selectedCards, card)
-  }
-
+  
   //TODO fix, not working
   updateSelectedMarks(): void {
     this.selectedMarks = this.marks.filter((mark) => {
@@ -74,6 +56,26 @@ class DeckStore {
           return false
       }
     })
+  }
+
+  toggleExpansionSelection(expansion: string): void {
+    if (expansion) {
+      if (this.selectedExpansions.includes(expansion)) {
+        this.removeSelectedExpansion(expansion);
+      } else {
+        this.addSelectedExpansion(expansion);
+      }
+    }
+  }
+
+  addSelectedExpansion(expansion: string): void {
+    this.selectedExpansions.push(expansion)
+  }
+
+  removeSelectedExpansion(expansion: string): void {
+    this.selectedExpansions = this.selectedExpansions.filter(
+      (selected) => selected !== expansion
+    )
   }
 }
 

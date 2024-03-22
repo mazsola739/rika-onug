@@ -9,17 +9,9 @@ const { hero, village } = TEAM
 
 class RoomStore {
   detailedCardInfo: CardType = createEmptyCard()
-  selectedExpansions: string[] = Object.keys(EXPANSIONS)
 
   constructor() {
     makeAutoObservable(this)
-
-    reaction(
-      () => this.selectedExpansions.slice(),
-      (selectedExpansions) => this.filterByExpansions(selectedExpansions)
-    )
-
-    this.toggleExpansionSelection = this.toggleExpansionSelection.bind(this)
   }
 
   getOrderedTeams(teamArray: string[]): string[] {
@@ -69,24 +61,6 @@ class RoomStore {
 
   filterByExpansions(expansions: string[] = []): void {
     deckStore.deck = filterByExpansions(cards, expansions)
-  }
-
-  toggleExpansionSelection(expansion: string): void {
-    if (expansion) {
-      this.selectedExpansions.includes(expansion)
-        ? this.removeSelectedExpansion(expansion)
-        : this.addSelectedExpansion(expansion)
-    }
-  }
-
-  addSelectedExpansion(expansion: string): void {
-    this.selectedExpansions.push(expansion)
-  }
-
-  removeSelectedExpansion(expansion: string): void {
-    this.selectedExpansions = this.selectedExpansions.filter(
-      (selected) => selected !== expansion
-    )
   }
 }
 

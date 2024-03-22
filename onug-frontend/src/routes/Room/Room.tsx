@@ -34,6 +34,7 @@ export const Room: React.FC = observer(() => {
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_ROOM && lastJsonMessage?.success) {
       deckStore.setSelectedCard(lastJsonMessage.selected_cards)
+      deckStore.setSelectedExpansions(lastJsonMessage.selected_expansions)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {

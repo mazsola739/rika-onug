@@ -11,12 +11,12 @@ export const StyledFilterButton = styled.div<FilterButtonProps>`
   align-items: center;
   align-content: center;
   background-image: ${({ expansion }) =>
-    `url(/assets/backgrounds/game_${expansion}.png)`};
+    `url(/assets/backgrounds/expansion_${expansion.toLocaleLowerCase().replace(' ', '')}.png)`};
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 100% auto;
   border: ${({ isSelected }) =>
-    isSelected ? '1px solid transparent' : '1px solid white'};
+    isSelected ? '1px solid white' : '1px solid transparent'};
   color: ${({ isSelected }) =>
     isSelected ? 'rgba(255,255,255, 1)' : 'rgba(255,255,255, 0.4)'};
   cursor: pointer;
@@ -25,7 +25,7 @@ export const StyledFilterButton = styled.div<FilterButtonProps>`
   height: 50px;
   justify-content: center;
   margin: auto;
-  opacity: ${({ isSelected }) => (isSelected ? '0.5' : '0.8')};
+  opacity: ${({ isSelected }) => (isSelected ? '0.8' : '0.5')};
   display: flex;
   width: 130px;
   transition: 0.75s;
