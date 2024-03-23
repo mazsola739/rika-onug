@@ -38,7 +38,7 @@ export const TEAM_NAMES: TeamNamesTypes = {
   traitor: 'Traitor',
 }
 
-export const EMPTY_CARD: CardType = {
+export const empty_card: CardType = {
   id: 0,
   card_name: '',
   display_name: '',
@@ -48,7 +48,7 @@ export const EMPTY_CARD: CardType = {
   wake_up_time: '',
 }
 
-export const EMPTY_TOKEN: TokenType = {
+export const empty_token: TokenType = {
   id: 0,
   token_name: '',
   rules: '',
@@ -86,5 +86,3 @@ export const conjunction_or = 'or'
 
 export const direction_left = 'left'
 export const direction_right = 'right'
-
-export const evils = ['vampire', 'alien', 'werewolf', 'supervillain']

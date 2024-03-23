@@ -1,9 +1,9 @@
-import { EMPTY_CARD, EMPTY_TOKEN, ROLES } from 'constant'
+import { empty_card, empty_token, ROLES } from 'constant'
 import { CardType, TokenType } from 'types'
 
-export const createEmptyCard = (): CardType => EMPTY_CARD
+export const createEmptyCard = (): CardType => empty_card
 
-export const createEmptyToken = (): TokenType => EMPTY_TOKEN
+export const createEmptyToken = (): TokenType => empty_token
 
 const containsByName = (selectedCards: CardType[], cardName: string): boolean =>
   selectedCards.some((card) => card.display_name === cardName)

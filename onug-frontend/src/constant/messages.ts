@@ -1,3 +1,4 @@
+//TODO better messages
 //messages
 export const message_tapped = 'You got tapped by your neighbor'
 export const no_night_action = 'No such a night action, sorry'

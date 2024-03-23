@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
 import { StyledGameTableHeader, PlayerInfo, PlayerName, PlayerCardInfo, PlayerCardRule } from './GameTable.styles'
 import { GameTableHeaderProp } from './GameTable.types'
+import { ROLES } from 'constant'
 
 export const GameTableHeader: React.FC<GameTableHeaderProp> = observer(
   ({ player }) => {
@@ -11,6 +12,8 @@ export const GameTableHeader: React.FC<GameTableHeaderProp> = observer(
       : null
     //Todo wining condition
     //TODO Add mark
+    //TODO roles names here
+    const roleName = ROLES[`role_${player?.player_role.toLowerCase().replace('_', '')}` as keyof typeof ROLES]
 
     return (
       <Header>
@@ -22,7 +25,7 @@ export const GameTableHeader: React.FC<GameTableHeaderProp> = observer(
             </PlayerInfo>
             <PlayerCardInfo>
               <CardImage image={card.card_name} size={100} />
-              <PlayerCardRule>{`${player.player_role}: ${card.rules}`}</PlayerCardRule>
+              <PlayerCardRule>{`${roleName.toUpperCase()}: ${card.rules}`}</PlayerCardRule>
             </PlayerCardInfo>
           </StyledGameTableHeader>
         )}

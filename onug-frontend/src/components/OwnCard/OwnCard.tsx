@@ -4,9 +4,12 @@ import { deckStore } from 'store'
 import { capitalize } from 'utils'
 import { OwnCardContainer, OwnCardText } from './OwnCard.styles'
 import { OwnCardProps } from './OwnCard.types'
+import { ROLES } from 'constant'
 
 export const OwnCard: React.FC<OwnCardProps> = observer(({ player }) => {
   const card = deckStore.getCardById(player.player_card_id)
+
+  const roleName = ROLES[`role_${player.player_role.toLowerCase().replace('_', '')}` as keyof typeof ROLES]
   //TODO Add mark
 
   return (
@@ -17,7 +20,7 @@ export const OwnCard: React.FC<OwnCardProps> = observer(({ player }) => {
       </OwnCardText>
       <CardImage image={card.card_name} size={80}></CardImage>
       <OwnCardText>Team: {capitalize(player.player_team)}</OwnCardText>
-      <OwnCardText>Role: {capitalize(player.player_role)}</OwnCardText>
+      <OwnCardText>Role: {roleName}</OwnCardText>
     </OwnCardContainer>
   )
 })
