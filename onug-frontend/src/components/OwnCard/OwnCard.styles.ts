@@ -13,7 +13,7 @@ export const OwnCardContainer = styled.div`
   justify-content: flex-end;
   max-height: 250px;
   margin: 0 10px;
-  min-width: 150px;
+  min-width: 120px;
 `
 
 export const OwnCardText = styled.span`

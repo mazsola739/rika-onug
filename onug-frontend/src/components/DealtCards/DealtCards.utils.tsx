@@ -7,13 +7,7 @@ export const renderPlayerCards = (playerCards: PositionProperties[]) => {
     <CardContainer>
       <PlayersCards>
         {playerCards.map(({ position, id, ready }, index) => (
-          <DealtCard
-            key={index}
-            isCenter={false}
-            id={id}
-            position={position}
-            ready={ready}
-          />
+          <DealtCard key={index} isCenter={false} id={id} position={position} ready={ready} />
         ))}
       </PlayersCards>
     </CardContainer>
@@ -24,8 +18,7 @@ export const renderCenterCard = (centerCards: PositionProperties[]) => {
   const renderCard = (position: string, title: string) => {
     const card = centerCards.find((c) => c.position === position)
     return (
-      card &&
-      card.id !== null && (
+      card && card.id !== null && (
         <CardContainer>
           <CardTitle>{title}</CardTitle>
           <CenterCards>
@@ -48,12 +41,7 @@ export const renderCenterCard = (centerCards: PositionProperties[]) => {
               return (
                 card &&
                 card.id !== null && (
-                  <DealtCard
-                    key={index}
-                    id={card.id}
-                    position={card.position}
-                    isCenter={true}
-                  />
+                  <DealtCard key={index} id={card.id} position={card.position} isCenter={true} />
                 )
               )
             }

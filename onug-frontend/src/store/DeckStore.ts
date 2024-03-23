@@ -30,6 +30,7 @@ class DeckStore {
 
   setSelectedCard(cardIds: number[]): void {
     this.selectedCards = cardIds.map((cardId) => this.getCardById(cardId))
+    this.updateSelectedMarks()
   }
 
   setSelectedExpansions(expansions: string[]): void {

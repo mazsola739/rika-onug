@@ -9,7 +9,7 @@ export const StyledGameTable = styled.div`
 `
 
 export const OwnCardPlace = styled.div`
-  max-width: 160px;
+  max-width: 150px;
   display: flex;
   align-items: flex-end;
 `
