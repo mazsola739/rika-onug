@@ -8,7 +8,7 @@ export type TeamsType = {
   villain: number
 }
 
-export type ExpansionsType = {
+export type ExtensionsType = {
   [key: string]: string
   werewolf: 'Werewolf',
   daybreak: 'Daybreak',

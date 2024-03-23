@@ -10,7 +10,7 @@ class DeckStore {
   artifacts: TokenType[] = artifacts
   selectedCards: CardType[] = []
   selectedMarks: TokenType[] = []
-  selectedExpansions: string[] = []
+  selectedExtensions: string[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -28,8 +28,8 @@ class DeckStore {
     this.selectedCards = cardIds.map((cardId) => this.getCardById(cardId))
   }
 
-  setSelectedExpansions(extensions: string[]): void {
-    this.selectedExpansions = extensions
+  setSelectedExtensions(extensions: string[]): void {
+    this.selectedExtensions = extensions
   }
   
   //TODO fix, not working
@@ -60,23 +60,33 @@ class DeckStore {
 
   toggleExpansionSelection(expansion: string): void {
     if (expansion) {
-      if (this.selectedExpansions.includes(expansion)) {
-        this.removeSelectedExpansion(expansion);
+      if (this.selectedExtensions.includes(expansion)) {
+        this.removeSelectedExpansion(expansion)
       } else {
-        this.addSelectedExpansion(expansion);
+        this.addSelectedExpansion(expansion)
       }
     }
   }
 
   addSelectedExpansion(expansion: string): void {
-    this.selectedExpansions.push(expansion)
+    this.selectedExtensions.push(expansion)
   }
 
   removeSelectedExpansion(expansion: string): void {
-    this.selectedExpansions = this.selectedExpansions.filter(
+    this.selectedExtensions = this.selectedExtensions.filter(
       (selected) => selected !== expansion
     )
   }
+
+  getFilteredDeckByExtensions(cards: CardType[]): CardType[] {
+    if (this.selectedExtensions.length === 0) {
+      return []
+    } else {
+      console.log(this.deck.filter(card => this.selectedExtensions.includes(card.expansion)))
+      return this.deck.filter(card => this.selectedExtensions.includes(card.expansion))
+    }
+  }
+  
 }
 
 export default DeckStore

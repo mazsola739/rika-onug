@@ -46,7 +46,7 @@ export const joinRoom = async (ws, message) => {
     const newGameState = {
       ...room,
       selected_cards: room.selected_cards,
-      selected_expansions: room.selected_expansions,
+      selected_extensions: room.selected_extensions,
       stage: STAGES.ROOM,
       players: {
         [token]: { name: player_name, admin: true, ready: false },

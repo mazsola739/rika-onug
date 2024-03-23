@@ -15,9 +15,8 @@ export const Room: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
 
-  const { sendJsonMessage, lastJsonMessage } =
-    wsStore.getWsCommunicationsBridge()
-  const { deck } = deckStore
+  const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
+  const { deck, getFilteredDeckByExtensions } = deckStore
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -34,7 +33,7 @@ export const Room: React.FC = observer(() => {
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_ROOM && lastJsonMessage?.success) {
       deckStore.setSelectedCard(lastJsonMessage.selected_cards)
-      deckStore.setSelectedExpansions(lastJsonMessage.selected_expansions)
+      deckStore.setSelectedExtensions(lastJsonMessage.selected_extensions)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
@@ -55,7 +54,7 @@ export const Room: React.FC = observer(() => {
   const teamArray = useMemo(
     () => [
       ...new Set(
-        deck.map((card) =>
+        getFilteredDeckByExtensions(deck).map((card) =>
           card.team === TEAM.hero || card.team === TEAM.village
             ? TEAM.village
             : card.team
@@ -77,7 +76,7 @@ export const Room: React.FC = observer(() => {
         <Filter />
         <RoomCardList>
           {orderedTeams.map((teamName, index) => (
-            <CardList key={index} team={teamName} cards={roomStore.getFilteredCardsForTeam(teamName)} />
+            <CardList key={index} team={teamName} cards={roomStore.getSortedCardsByTeam(teamName)} />
           ))}
         </RoomCardList>
       </Main>

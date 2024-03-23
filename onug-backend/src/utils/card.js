@@ -12,32 +12,32 @@ const specialCardsDefaultToAddLookupMap = {
   69: 60,
 }
 
-export const filterCardsByExpansions = (selectedCards, selectedExpansions) => {
+export const filterCardsByExtensions = (selectedCards, selectedExtensions) => {
   return selectedCards.filter((cardId) => {
     const card = getCardById(cardId)
-    return card && selectedExpansions.includes(card.expansion)
+    return card && selectedExtensions.includes(card.expansion)
   })
 }
 
-export const toggleExpansions = (selectedExpansions, expansion) => {
-  const newSelectedExpansions = [...selectedExpansions]
+export const toggleExtensions = (selectedExtensions, expansion) => {
+  const newSelectedExtensions = [...selectedExtensions]
 
-  const index = newSelectedExpansions.indexOf(expansion)
+  const index = newSelectedExtensions.indexOf(expansion)
   if (index !== -1) {
-    newSelectedExpansions.splice(index, 1)
+    newSelectedExtensions.splice(index, 1)
   } else {
-    newSelectedExpansions.push(expansion)
+    newSelectedExtensions.push(expansion)
   }
 
-  return newSelectedExpansions
+  return newSelectedExtensions
 }
 
 
-export const toggleCardSelect = (selectedCards, selectedExpansions, cardId, totalPlayers) => {
+export const toggleCardSelect = (selectedCards, selectedExtensions, cardId, totalPlayers) => {
   let newSelectedCards = [...selectedCards]
   const card = getCardById(cardId)
 
-  if (card && selectedExpansions.includes(card.expansion)) {
+  if (card && selectedExtensions.includes(card.expansion)) {
     if (containsById(selectedCards, cardId)) {
       newSelectedCards = handleDeselectCard(newSelectedCards, cardId)
     } else if (totalPlayers < 12) {
