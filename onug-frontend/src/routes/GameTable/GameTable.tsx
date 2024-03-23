@@ -21,8 +21,7 @@ export const GameTable: React.FC = observer(() => {
   const { hasSentinel, hasMarks, hasCurator } = gameTableStore
   const { selectedMarks } = deckStore
   const { setPlayer, setPlayers, everyoneCheckOwnCard } = gameBoardStore
-  const { sendJsonMessage, lastJsonMessage } =
-    wsStore.getWsCommunicationsBridge()
+  const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {

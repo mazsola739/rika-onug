@@ -144,7 +144,6 @@ export type PlayersType = {
   player_number: string
   ready?: boolean  
   voted?: boolean
-
 }
 
 export type GameTableBoardCardType = {

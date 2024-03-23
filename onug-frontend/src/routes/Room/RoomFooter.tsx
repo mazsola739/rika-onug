@@ -14,8 +14,7 @@ export const RoomFooter: React.FC = observer(() => {
     ? `${BUTTONS.deal_label} FOR ${totalPlayers}`
     : BUTTONS.deal_label
 
-  const { handleResetGame, handleLeaveRoom, handleToGameTable } =
-    useClickHandler(room_id, token)
+  const { handleResetGame, handleLeaveRoom, handleToGameTable } = useClickHandler(room_id, token)
 
   return (
     <Footer>
