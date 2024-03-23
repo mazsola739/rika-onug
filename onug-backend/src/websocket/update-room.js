@@ -17,7 +17,7 @@ export const updateRoom = async (message) => {
     newGameState.selected_expansions = toggleExpansions(newGameState.selected_expansions, expansion)
     newGameState.selected_cards = filterCardsByExpansions(newGameState.selected_cards, newGameState.selected_expansions)
   }
-
+ 
   if (card_id) {
     newGameState.selected_cards = toggleCardSelect(newGameState.selected_cards, newGameState.selected_expansions, card_id, totalPlayers)
   }

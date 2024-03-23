@@ -86,7 +86,6 @@ const handleDeselectCard = (selectedCards, cardId) => {
   return newSelectedCards
 }
 
-
 const handleCardById = (selectedCards, idsToCheck, specialCardId) => {
   if (!containsByIdsToCheck(selectedCards, idsToCheck)) {
     const cardToAdd = specialCardsDefaultToAddLookupMap[specialCardId]
