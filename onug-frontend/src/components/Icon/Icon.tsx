@@ -78,6 +78,4 @@ export const Icons: Record<
   witch: WitchIcon,
 }
 
-export const Icon: React.FC<IconProps> = ({ iconName, size }) => {
-  return <StyledIcon as={Icons[iconName]} size={size} />
-}
+export const Icon: React.FC<IconProps> = ({ iconName, size }) => <StyledIcon as={Icons[iconName]} size={size} />

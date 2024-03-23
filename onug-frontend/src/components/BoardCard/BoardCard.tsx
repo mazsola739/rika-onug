@@ -169,12 +169,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
           {!isCenter && shield && <Token tokenName="shield" size={25} />}
           {!isCenter && artifact && <Token tokenName="artifact_back" size={25} />}
         </Tokens>}
-        <CardBack
-          cardBackgroundImage={cardImageSrc}
-          selectable_cards={selectable_cards}
-          onClick={() => cardClickHandler(isCenter ? 'center' : 'player')}
-          isSelectedCard={isSelectedCard}
-        />
+        <CardBack cardBackgroundImage={cardImageSrc} selectable_cards={selectable_cards} onClick={() => cardClickHandler(isCenter ? 'center' : 'player')} isSelectedCard={isSelectedCard} />
         <Tokens>
           {isCenter && spy && <Icon iconName="spy" size={25} />}
           {!isCenter && shielded_cards && <Icon iconName="shield" size={25} />}
@@ -222,12 +217,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
           {!isCenter && villains && <Icon iconName="villain" size={25} />}
           {!isCenter && werewolves && <Icon iconName="werewolf" size={25} />}
         </Tokens>
-        {!isCenter && hasMarks && <MarkBack
-          markBackgroundImage={markImageSrc}
-          selectable_marks={selectable_marks}
-          onClick={() => markClickHandler()}
-          isSelectedMark={isSelectedMark}
-        />}
+        {!isCenter && hasMarks && <MarkBack markBackgroundImage={markImageSrc} selectable_marks={selectable_marks} onClick={() => markClickHandler()}          isSelectedMark={isSelectedMark}        />}
       </StyledBoardCard>
     )
   }
