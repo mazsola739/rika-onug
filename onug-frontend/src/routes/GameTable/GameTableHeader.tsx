@@ -17,7 +17,7 @@ export const GameTableHeader: React.FC<GameTableHeaderProp> = observer(
         {player && (
           <StyledGameTableHeader>
             <PlayerInfo>
-              <Token tokenName={`selected_player_${player.player_number}`} size={50} />
+              <Token tokenName={`${player.player_number}`} size={60} />
               <PlayerName>{player.player_name}</PlayerName>
             </PlayerInfo>
             <PlayerCardInfo>

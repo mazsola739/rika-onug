@@ -1,12 +1,13 @@
-import { Main, OwnCard, DealtCards, ReadyList } from 'components'
-import { ARRIVE_GAME_TABLE, STAGES, HYDRATE_GAME_TABLE, HYDRATE_READY, REDIRECT } from 'constant'
+import { DealtCards, Main, OwnCard, ReadyList } from 'components'
+import { ARRIVE_GAME_TABLE, HYDRATE_GAME_TABLE, HYDRATE_READY, REDIRECT, STAGES } from 'constant'
 import { artifacts } from 'data'
 import { observer } from 'mobx-react-lite'
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { gameTableStore, deckStore, gameBoardStore, wsStore, roomStore } from 'store'
-import { StyledGameTable, OwnCardPlace, GameArea, Ready, GameTableFooter } from './GameTable.styles'
+import { gameTableStore, gameBoardStore, roomStore, deckStore, wsStore } from 'store'
+import { GameArea, OwnCardPlace, Ready, StyledGameTable } from './GameTable.styles'
 import { gameTableUtils } from './GameTable.utils'
+import { GameTableFooter } from './GameTableFooter'
 import { GameTableHeader } from './GameTableHeader'
 
 const { renderMarks, renderArtifacts } = gameTableUtils

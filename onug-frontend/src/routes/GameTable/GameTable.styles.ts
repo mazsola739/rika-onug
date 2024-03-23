@@ -74,6 +74,3 @@ export const PlayerCardRule = styled.span`
   padding-top: 10px;
   text-align: start;
 `
-
-//FOOTER
-export const GameTableFooter = styled.div``

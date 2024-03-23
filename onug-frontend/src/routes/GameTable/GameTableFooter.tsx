@@ -17,7 +17,7 @@ export const GameTableFooter: React.FC = observer(() => {
       <FooterButtons>
         <Button onClick={handleLeaveTable} buttonText={BUTTONS.stop_button_label} variant="red" />
         <Button onClick={handleStartGame} buttonText={BUTTONS.start_game_label} variant="purple" />
-        <Button onClick={handleReady} variant="green" buttonText={   /* ready ? buttons.im_ready_label :  */ BUTTONS.ready_label } />
+        <Button onClick={handleReady} variant="green" buttonText={/* ready ? buttons.im_ready_label :  */BUTTONS.ready_label } />
       </FooterButtons>
     </Footer>
   )

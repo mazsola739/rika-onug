@@ -2,7 +2,7 @@ import { VAMPIRE_IDS, ASSASSIN_IDS } from 'constant'
 import { cards, marks, artifacts } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardType, TokenType } from 'types'
-import { createEmptyCard, findCardById, areAnyCardSelectedById, isCardSelectedById } from 'utils'
+import { createEmptyCard, findCardById, areAnyCardSelectedById, isCardSelectedById, determineTotalPlayers } from 'utils'
 
 class DeckStore {
   deck: CardType[] = cards
@@ -35,6 +35,14 @@ class DeckStore {
   setSelectedExpansions(expansions: string[]): void {
     this.selectedExpansions = expansions
     this.setDeck()
+  }
+
+  get totalCharacters(): number {
+    return this.selectedCards.length
+  }
+
+  get totalPlayers(): number {
+    return determineTotalPlayers(this.totalCharacters, this.selectedCards)
   }
   
   //TODO fix, not working
