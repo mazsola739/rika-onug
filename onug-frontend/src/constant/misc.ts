@@ -1,4 +1,4 @@
-import { CardType, ExpansionType, ExtensionsType, TeamNames as TeamNamesTypes, TeamType, TeamsType, TokenType, WakeType } from 'types'
+import { CardType, ExpansionType, ExpansionsType, TeamNames as TeamNamesTypes, TeamType, TeamsType, TokenType, WakeType } from 'types'
 
 export const TEAMS: TeamsType = {
   village: 0,
@@ -10,7 +10,7 @@ export const TEAMS: TeamsType = {
   villain: 6,
 }
 
-export const EXPANSIONS: ExtensionsType = {
+export const EXPANSIONS: ExpansionsType = {
   werewolf: 'Werewolf',
   daybreak: 'Daybreak',
   vampire: 'Vampire',
@@ -63,12 +63,12 @@ export const WAKE: WakeType = {
 }
 
 export const EXPANSION: ExpansionType = {
-  werewolf: 'werewolf',
-  daybreak: 'daybreak',
-  vampire: 'vampire',
-  alien: 'alien',
-  supervillains: 'supervillains',
-  bonusroles: 'bonusroles',
+  werewolf: 'Werewolf',
+  daybreak: 'Daybreak',
+  vampire: 'Vampire',
+  alien: 'Alien',
+  supervillains: 'Super Villains',
+  bonusroles: 'Bonus Roles'
 }
 
 export const TEAM: TeamType = {

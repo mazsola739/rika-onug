@@ -1,4 +1,4 @@
-import { VAMPIRE_IDS, ASSASSIN_IDS, EXPANSIONS } from 'constant'
+import { VAMPIRE_IDS, ASSASSIN_IDS } from 'constant'
 import { cards, marks, artifacts } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardType, TokenType } from 'types'
@@ -10,7 +10,7 @@ class DeckStore {
   artifacts: TokenType[] = artifacts
   selectedCards: CardType[] = []
   selectedMarks: TokenType[] = []
-  selectedExtensions: string[] = []
+  selectedExpansions: string[] = ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"]
 
   constructor() {
     makeAutoObservable(this)
@@ -24,12 +24,17 @@ class DeckStore {
     return findCardById(this.deck, cardId)
   }
 
+  setDeck(): void {
+    this.deck = cards.filter(card => this.selectedExpansions.includes(card.expansion))
+  }
+
   setSelectedCard(cardIds: number[]): void {
     this.selectedCards = cardIds.map((cardId) => this.getCardById(cardId))
   }
 
-  setSelectedExtensions(extensions: string[]): void {
-    this.selectedExtensions = extensions
+  setSelectedExpansions(expansions: string[]): void {
+    this.selectedExpansions = expansions
+    this.setDeck()
   }
   
   //TODO fix, not working
@@ -57,36 +62,6 @@ class DeckStore {
       }
     })
   }
-
-  toggleExpansionSelection(expansion: string): void {
-    if (expansion) {
-      if (this.selectedExtensions.includes(expansion)) {
-        this.removeSelectedExpansion(expansion)
-      } else {
-        this.addSelectedExpansion(expansion)
-      }
-    }
-  }
-
-  addSelectedExpansion(expansion: string): void {
-    this.selectedExtensions.push(expansion)
-  }
-
-  removeSelectedExpansion(expansion: string): void {
-    this.selectedExtensions = this.selectedExtensions.filter(
-      (selected) => selected !== expansion
-    )
-  }
-
-  getFilteredDeckByExtensions(cards: CardType[]): CardType[] {
-    if (this.selectedExtensions.length === 0) {
-      return []
-    } else {
-      console.log(this.deck.filter(card => this.selectedExtensions.includes(card.expansion)))
-      return this.deck.filter(card => this.selectedExtensions.includes(card.expansion))
-    }
-  }
-  
 }
 
 export default DeckStore

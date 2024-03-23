@@ -1,7 +1,7 @@
 import { TEAMS } from 'constant'
 import { CardType, TeamsType } from 'types'
 
-export const filterByExtensions = <T extends { expansion: string }>(list: T[],extensions: string[]): T[] => list.filter((item) => extensions.includes(item.expansion))
+export const filterByExpansions = <T extends { expansion: string }>(list: T[],expansions: string[]): T[] => list.filter((item) => expansions.includes(item.expansion))
 
 export const getFilteredCardsForTeam = (team: string, deck: CardType[]): CardType[] => {
   const validTeams = team === 'village' ? ['hero', 'village'] : [team]

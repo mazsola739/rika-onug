@@ -8,7 +8,7 @@ export type TeamsType = {
   villain: number
 }
 
-export type ExtensionsType = {
+export type ExpansionsType = {
   [key: string]: string
   werewolf: 'Werewolf',
   daybreak: 'Daybreak',
@@ -45,12 +45,12 @@ export type WakeType = {
 }
 
 export type ExpansionType = {
-  werewolf: 'werewolf'
-  daybreak: 'daybreak'
-  vampire: 'vampire'
-  alien: 'alien'
-  supervillains: 'supervillains'
-  bonusroles: 'bonusroles'
+  werewolf: 'Werewolf'
+  daybreak: 'Daybreak'
+  vampire: 'Vampire'
+  alien: 'Alien'
+  supervillains: 'Super Villains'
+  bonusroles: 'Bonus Roles'
 }
 
 export type TeamType = {

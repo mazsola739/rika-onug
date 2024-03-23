@@ -13,7 +13,7 @@ export const FilterButton: React.FC<FilterButtonProps> = observer(
     const room_id = sessionStorage.getItem('room_id')
     const token = sessionStorage.getItem('token')
 
-    const isSelected = deckStore.selectedExtensions.some((selectedExpansion) => selectedExpansion === expansion)
+    const isSelected = deckStore.selectedExpansions.some((selectedExpansion) => selectedExpansion === expansion)
 
     const handleClick = useCallback(() => {
       sendJsonMessage?.({

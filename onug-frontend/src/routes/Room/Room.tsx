@@ -16,7 +16,7 @@ export const Room: React.FC = observer(() => {
   const token = sessionStorage.getItem('token')
 
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
-  const { deck, getFilteredDeckByExtensions } = deckStore
+  const { deck } = deckStore
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -33,7 +33,7 @@ export const Room: React.FC = observer(() => {
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_ROOM && lastJsonMessage?.success) {
       deckStore.setSelectedCard(lastJsonMessage.selected_cards)
-      deckStore.setSelectedExtensions(lastJsonMessage.selected_extensions)
+      deckStore.setSelectedExpansions(lastJsonMessage.selected_expansions)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
@@ -54,7 +54,7 @@ export const Room: React.FC = observer(() => {
   const teamArray = useMemo(
     () => [
       ...new Set(
-        getFilteredDeckByExtensions(deck).map((card) =>
+        deck.map((card) =>
           card.team === TEAM.hero || card.team === TEAM.village
             ? TEAM.village
             : card.team
