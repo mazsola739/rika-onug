@@ -2,7 +2,7 @@ import { VAMPIRE_IDS, ASSASSIN_IDS, EXPANSIONS } from 'constant'
 import { cards, marks, artifacts } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardType, TokenType } from 'types'
-import { createEmptyCard, findCardById, determineTotalPlayers, areAnyCardSelectedById, isCardSelectedById } from 'utils'
+import { createEmptyCard, findCardById, areAnyCardSelectedById, isCardSelectedById } from 'utils'
 
 class DeckStore {
   deck: CardType[] = cards
