@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getTannerNumberByRoleIds } from '../../utils'
+import { getAllPlayerTokens, getTannerPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const apprenticetanner = (gameState, title, hasDoppelganger) => {
@@ -33,7 +33,7 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
 export const apprenticetanner_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   
-  const tanner = getTannerNumberByRoleIds(newGameState.players)
+  const tanner = getTannerPlayerNumbersByRoleIds(newGameState.players)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,

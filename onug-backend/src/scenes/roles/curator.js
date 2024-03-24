@@ -64,10 +64,7 @@ export const curator_response = (gameState, token, selected_card_positions, titl
   const scene = []
 
   const newArtifact = getRandomArtifact(newGameState.artifact)
-  const artifactedPlayersToken = getPlayerTokenByPlayerNumber(
-    newGameState.players,
-    selected_card_positions[0]
-  )
+  const artifactedPlayersToken = getPlayerTokenByPlayerNumber(newGameState.players, selected_card_positions[0])
 
   if (artifactedPlayersToken) {
     newGameState.artifact.push({ [selected_card_positions[0]]: newArtifact })

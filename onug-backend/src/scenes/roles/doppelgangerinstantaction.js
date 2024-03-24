@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE, doppelgangerInstantActionsIds } from '../../constant'
-import { getAllPlayerTokens } from '../../utils/scene-utils'
+import { getAllPlayerTokens } from '../../utils'
 import { alphawolf_interaction, alphawolf_response } from './alphawolf'
 import { apprenticeseer_interaction, apprenticeseer_response } from './apprenticeseer'
 import { cupid_interaction, cupid_response } from './cupid'

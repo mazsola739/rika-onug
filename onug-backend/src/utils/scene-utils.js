@@ -1,5 +1,5 @@
-//@ts-check
-import { masonIds, superVillainsIds, vampireIds, werewolvesAndDreamWolfIds, werewolvesIds } from '../constant'
+
+import { alienIds, allCopyPlayerIds, masonIds, superVillainsIds, vampireIds, werewolvesAndDreamWolfIds, werewolvesIds } from '../constant'
 import artifacts from '../data/artifacts.json'
 import _ from 'lodash'
 
@@ -25,7 +25,7 @@ export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
 export const getRandomItemFromArray = array => array[getRandomNumber(0, array.length - 1)]
 
 //SCENE
-export const getSelectableOtherPlayersWithoutShield = (players, token) => {
+export const getSelectableOtherPlayerNumbersWithoutShield = (players, token) => {
   const result = []
 
   Object.keys(players).forEach((playerToken) => {
@@ -72,6 +72,19 @@ export const getNonWerewolfPlayerNumbersByRoleIds = players => {
   return result
 }
 
+export const getVillainPlayerNumbersByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (superVillainsIds.includes(player.card.player_role_id)) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
 export const getNonVillainPlayerNumbersByRoleIds = players => {
   const result = []
 
@@ -83,6 +96,45 @@ export const getNonVillainPlayerNumbersByRoleIds = players => {
   }
 
   return result
+}
+
+export const getAlienPlayerNumbersByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (alienIds.includes(player.card.player_role_id)) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const superVillainDetected = (players, evilometerToken) => {
+  const evilometerNeighbors = getPlayerNeighborsByToken(players, evilometerToken)
+  const superVillains = getVillainPlayerNumbersByRoleIds(players)
+
+  for (let villain of superVillains) {
+    if (evilometerNeighbors.has(villain)) {
+      return true
+    }
+  }
+
+  return false
+}
+
+export const alienAbducted = (players, cowToken) => {
+  const cowNeighbors = getPlayerNeighborsByToken(players, cowToken)
+  const aliens = getAlienPlayerNumbersByRoleIds(players)
+
+  for (let alien of aliens) {
+    if (cowNeighbors.has(alien)) {
+      return true
+    }
+  }
+
+  return false
 }
 
 export const getWerewolfPlayerNumbersByRoleIds = players => {
@@ -164,7 +216,7 @@ export const getMadScientistPlayerNumberByRoleIds = players => {
   return result
 }
 
-export const getTannerNumberByRoleIds = players => {
+export const getTannerPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {
@@ -177,7 +229,7 @@ export const getTannerNumberByRoleIds = players => {
   return result
 }
 
-export const getAssassinNumberByRoleIds = players => {
+export const getAssassinPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {
@@ -190,7 +242,7 @@ export const getAssassinNumberByRoleIds = players => {
   return result
 }
 
-export const getAnySeerNumberByRoleIds = players => {
+export const getAnySeerPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {
@@ -203,7 +255,7 @@ export const getAnySeerNumberByRoleIds = players => {
   return result
 }
 
-export const getAnySeerNumberByRoleIdsWithoutShield = players => {
+export const getAnySeerPlayerNumbersByRoleIdsWithoutShield = players => {
   const result = []
 
   for (const token in players) {
@@ -462,12 +514,15 @@ export const getPlayerNumbersWhoGotVoted = players => {
 
 export const findMostVotedPlayer = gameState => {
   const voteCount = {}
-  
+
   Object.values(gameState.players).forEach(player => {
+    const card = player.card
+    if (vampireIds.some(id => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
       const vote = player.vampire_vote
       if (vote) {
-          voteCount[vote] = (voteCount[vote] || 0) + 1
+        voteCount[vote] = (voteCount[vote] || 0) + 1
       }
+    }
   })
   
   let mostVotedPlayer = null

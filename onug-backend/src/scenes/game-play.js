@@ -1,10 +1,10 @@
 //@ts-check
 import { readGameState, upsertRoomState } from '../repository'
 import { broadcast, websocketServerConnectionsPerRoom } from '../websocket/connections'
-import { HYDRATE_GAME_PLAY } from '../constant/ws'
+import { HYDRATE_GAME_PLAY, STAGES } from '../constant'
 import { logErrorWithStack, logTrace } from '../log'
-import { STAGES } from '../constant/stage'
 import { scene } from './scene'
+
 
 //TODO set tickTime each narration different
 const tickTime = 20000

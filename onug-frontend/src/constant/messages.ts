@@ -17,6 +17,7 @@ export const interaction_must_three_any = 'You must choose any three players (in
 //any specific player
 export const interaction_werewolves = 'Look for Werewolves'
 export const interaction_vampires = 'Look for Vampires'
+export const interaction_villains = 'Look for Super Villains'
 export const interaction_tanner = 'Look for Tanner'
 export const interaction_assassin = 'Look for Assassin'
 export const interaction_mad = 'Look for Mad Scientist'
@@ -65,6 +66,9 @@ export const interaction_swapped_cards = 'You swapped cards between'
 export const interaction_swapped_marks = 'You swapped marks between'
 //tapped
 export const interaction_tap = 'You tapped'
+export const interaction_no_tap = "You don't have such type of neighbor."
+export const interaction_got_tapped_by_villain = 'You got tapped by your super villain neighbor'
+export const interaction_got_tapped_by_alien = 'You got tapped by your alien neighbor'
 //moved
 export const interaction_moved = 'You moved cards to'
 

@@ -1,9 +1,9 @@
 //@ts-check
 import { upsertRoomState, readGameState } from '../repository'
 import { logTrace } from '../log'
-import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant/ws'
+import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant'
 import { broadcast } from './connections'
-import { STAGES } from '../constant/stage'
+import { STAGES } from '../constant'
 
 export const leaveTable = async (ws, message) => {
   logTrace(`leave-table requested with ${JSON.stringify(message)}`)

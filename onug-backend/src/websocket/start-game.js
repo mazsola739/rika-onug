@@ -2,7 +2,7 @@
 import { logTrace } from '../log'
 import { validateRoom } from '../validator'
 import { upsertRoomState } from '../repository'
-import { STAGES } from '../constant/stage'
+import { STAGES } from '../constant'
 import { broadcast } from './connections'
 import { REDIRECT } from '../constant'
 import { startGamePlay } from '../scenes/game-play'

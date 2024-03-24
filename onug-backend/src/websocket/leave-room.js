@@ -2,7 +2,7 @@
 import roomsData from '../data/rooms.json'
 import { upsertRoomState, readGameState } from '../repository'
 import { logTrace } from '../log'
-import { LEAVE_ROOM } from '../constant/ws'
+import { LEAVE_ROOM } from '../constant'
 import { removeUserFromRoom } from './connections'
 
 export const leaveRoom = async (ws, message) => {

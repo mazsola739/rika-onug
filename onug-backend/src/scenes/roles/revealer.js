@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE, townIds } from '../../constant'
-import { getAllPlayerTokens, getSelectableOtherPlayersWithoutShield, getCardIdsByPositions } from '../../utils'
+import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -36,7 +36,7 @@ export const revealer = (gameState, title, prefix) => {
 
 export const revealer_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-  const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
+  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(
     newGameState.players,
     token
   )

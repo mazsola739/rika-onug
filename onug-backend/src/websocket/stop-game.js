@@ -1,5 +1,5 @@
 //@ts-check
-import { REDIRECT } from '../constant/ws'
+import { REDIRECT } from '../constant'
 import { logTrace } from '../log'
 import { validateRoom } from '../validator'
 import { upsertRoomState } from '../repository'

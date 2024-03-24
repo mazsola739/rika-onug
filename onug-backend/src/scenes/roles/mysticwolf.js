@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getSelectableOtherPlayersWithoutShield, getCardIdsByPositions } from '../../utils'
+import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -28,7 +28,7 @@ export const mysticwolf = (gameState, title) => {
 
 export const mysticwolf_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-  const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(
+  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(
     newGameState.players,
     token
   )

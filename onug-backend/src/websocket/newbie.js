@@ -1,5 +1,5 @@
 //@ts-check
-import { NEWBIE, REDIRECT } from '../constant/ws'
+import { NEWBIE, REDIRECT } from '../constant'
 import { v4 as uuidv4, validate } from 'uuid'
 import { logInfo } from '../log'
 

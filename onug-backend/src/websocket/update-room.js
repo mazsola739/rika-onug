@@ -2,7 +2,7 @@
 import { validateRoom } from '../validator'
 import { determineTotalPlayers, filterCardsByExpansions, toggleCardSelect, toggleExpansions } from '../utils'
 import { upsertRoomState } from '../repository'
-import { HYDRATE_ROOM } from '../constant/ws'
+import { HYDRATE_ROOM } from '../constant'
 import { broadcast } from './connections'
 
 export const updateRoom = async (message) => {

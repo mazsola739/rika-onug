@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getAssassinNumberByRoleIds, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
+import { getAllPlayerTokens, getAssassinPlayerNumbersByRoleIds, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -37,7 +37,7 @@ export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
 export const apprenticeassassin_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  const assassin = getAssassinNumberByRoleIds(newGameState.players)
+  const assassin = getAssassinPlayerNumbersByRoleIds(newGameState.players)
 
   if (assassin.length > 0) {
     newGameState.players[token].player_history = {

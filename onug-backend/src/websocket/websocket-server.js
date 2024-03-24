@@ -2,7 +2,7 @@
 import WebSocket from 'ws'
 import { logTrace, logError, logErrorWithStack } from '../log'
 
-import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_GAME_TABLE, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME_PLAY, STOP_GAME, RELOAD, SCENE } from '../constant/ws'
+import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_GAME_TABLE, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME_PLAY, STOP_GAME, RELOAD, SCENE } from '../constant'
 
 import { hydrateRoom } from './hydrate-room'
 import { reset } from './reset'

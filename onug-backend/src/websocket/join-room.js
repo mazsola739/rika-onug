@@ -1,10 +1,10 @@
 //@ts-check
-import { JOIN_ROOM } from '../constant/ws'
+import { JOIN_ROOM } from '../constant'
 import roomsData from '../data/rooms.json'
 import { validateRoom } from '../validator'
 import { upsertRoomState } from '../repository'
 import { logTrace } from '../log'
-import { STAGES } from '../constant/stage'
+import { STAGES } from '../constant'
 import { addUserToRoom } from './connections'
 
 const randomPlayerName = (names = []) => names[~~(Math.random() * names.length)]

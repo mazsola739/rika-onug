@@ -1,5 +1,5 @@
 //@ts-check
-import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant/ws'
+import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant'
 import { logTrace, logErrorWithStack } from '../log'
 import { readGameState } from '../repository'
 import { isGameTableClosed, getGameTableBoard } from '../utils'

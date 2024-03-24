@@ -1,5 +1,5 @@
 //@ts-check
-import { HYDRATE_ROOM } from '../constant/ws'
+import { HYDRATE_ROOM } from '../constant'
 import { logError, logTrace } from '../log'
 import { validateRoom } from '../validator'
 import { upsertRoomState } from '../repository'

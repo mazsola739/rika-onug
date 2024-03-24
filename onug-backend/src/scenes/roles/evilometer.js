@@ -1,7 +1,9 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils'
+import { getAllPlayerTokens, superVillainDetected } from '../../utils'
+import { generateRoleInteraction } from './../generate-scene-role-interactions';
 
+//TODO super villains can see evilometer
 export const evilometer = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const scene = []
@@ -30,5 +32,19 @@ export const evilometer = (gameState, title, hasDoppelganger) => {
 }
 
 export const evilometer_interaction = (gameState, token, title) => {
-  return {}
+  const newGameState = { ...gameState }
+
+  const neighborIsSuperVillain = superVillainDetected(newGameState.players, token)
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    super_villain_neighbor: neighborIsSuperVillain,
+  }
+
+  return generateRoleInteraction(newGameState, token, {
+    private_message:  [neighborIsSuperVillain ? 'interaction_got_tapped_by_villain' : 'interaction_no_tap'],
+    icon: 'tap',
+    uniqInformations: { super_villain_neighbor: neighborIsSuperVillain }
+  })
 }

@@ -73,6 +73,22 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
     newGameState.players[token].card_or_mark_action = true
 
     const mostVotedPlayer = findMostVotedPlayer(newGameState)
+//TODO fix
+/*       const vampirePosition = newGameState.mark_positions.vampire
+      const selectedPosition = newGameState.card_positions[mostVotedPlayer[0]].mark
+  
+      newGameState.mark_positions.vampire = selectedPosition
+      newGameState.card_positions[mostVotedPlayer[0]].mark = vampirePosition
+    
+  
+    newGameState.players[token].card_or_mark_action = true */
+  
+    newGameState.players[token].player_history = {
+      ...newGameState.players[token].player_history,
+      scene_title: title,
+      card_or_mark_action: true,
+      mark_of_fear: [selected_mark_positions[0]],
+    }
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,

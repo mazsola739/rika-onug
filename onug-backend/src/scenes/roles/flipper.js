@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE, townIds } from '../../constant'
-import { getAllPlayerTokens, getSelectableOtherPlayersWithoutShield, getCardIdsByPositions } from '../../utils'
+import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -37,7 +37,7 @@ export const flipper = (gameState, title, prefix) => {
 export const flipper_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   
-  const selectablePlayerNumbers = getSelectableOtherPlayersWithoutShield(newGameState.players, token)
+  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(newGameState.players, token)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,

@@ -29,3 +29,12 @@ export const supervillainIdsToCheck = [57, 60, 65]
 export const assassinIds = [28, 29]
 export const alphaWolfId = 17
 export const temptressId = 69
+
+export const markIds = [28, 29, 31, 32, 34, 38, 39, 40, 41]
+
+export const mirrorManId = 64
+export const copycatId = 30
+export const specialCardsDefaultToAddLookupMap = {
+  17: 15,
+  69: 60,
+}
