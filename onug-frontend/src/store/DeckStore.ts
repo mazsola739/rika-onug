@@ -46,7 +46,6 @@ class DeckStore {
     return determineTotalPlayers(this.totalCharacters, this.selectedCards)
   }
   
-  //TODO fix, not working
   updateSelectedMarks(): void {
     this.selectedMarks = this.marks.filter((mark) => {
       switch (mark.token_name) {
