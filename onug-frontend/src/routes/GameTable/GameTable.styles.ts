@@ -54,13 +54,17 @@ export const PlayerInfo = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  filter: drop-shadow(8px 5px 5px black);
 `
 
 export const PlayerName = styled.span`
   color: white;
+  text-align: center;
+  margin: 0 10px;
 `
 
 export const PlayerCardInfo = styled.div`
+  filter: drop-shadow(8px 5px 5px black);
   display: flex;
   flex-direction: row;
 `
@@ -70,7 +74,6 @@ export const PlayerCardRule = styled.span`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding-left: 10px;
-  padding-top: 10px;
+  padding: 10px;
   text-align: start;
 `

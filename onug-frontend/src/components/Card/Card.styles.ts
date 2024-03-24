@@ -9,18 +9,18 @@ export const StyledCard = styled.div<StyledCardProps>`
     isSelected ? '1px solid yellow' : '1px solid transparent'};
   display: flex;
   flex-direction: column;
-  height: 70px;
+  height: 100px;
   justify-content: flex-start;
   overflow: hidden;
   position: relative;
-  width: 70px;
+  width: 100px;
   transition: 0.75s;
 `
 
 export const CardImage = styled.img<{ isSelected?: boolean }>`
   opacity: ${({ isSelected }) => (isSelected ? '1' : '0.6')};
   transition: 0.75s;
-  width: 70px;
+  width: 100px;
   z-index: 1;
 
   filter: ${({ isSelected }) =>
@@ -36,7 +36,9 @@ export const CardName = styled.span<StyledCardProps>`
   color: ${({ isSelected }) =>
     isSelected ? 'rgba(255,255,255, 1)' : 'rgba(255,255,255, 0.4)'};
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 10px;
+  text-shadow: ${({ isSelected }) =>
+    isSelected ? '2px 2px 2px black' : ''};
+  font-size: 11px;
   font-weight: 500;
   left: 50%;
   transition: 0.75s;

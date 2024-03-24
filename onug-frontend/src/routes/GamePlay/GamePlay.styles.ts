@@ -2,6 +2,7 @@ import styled from '@emotion/styled'
 
 //HEADER
 export const StyledGamePlayHeader = styled.div`
+  filter: drop-shadow(3px 3px 3px black);
   height: 100%;
   display: flex;
   flex-direction: row;
@@ -34,6 +35,7 @@ export const TimerContainer = styled.div`
   font-family: 'Josefin Sans', sans-serif;
   padding: 10px;
   margin-left: auto;
+  filter: drop-shadow(3px 3px 3px black);
 `
 
 //MAIN

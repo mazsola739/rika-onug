@@ -12,7 +12,7 @@ export const GameTableFooter: React.FC = observer(() => {
   const { handleLeaveTable, handleStartGame, handleReady } = useClickHandler(room_id, token)
   const { player, players } = gameBoardStore
   
-  const ready = players.find(actualPlayer => actualPlayer.player_number === `player_${player.player_number}`).ready
+  const ready = players?.find(actualPlayer => actualPlayer.player_number === `player_${player.player_number}`).ready
 
   return (
     <Footer>

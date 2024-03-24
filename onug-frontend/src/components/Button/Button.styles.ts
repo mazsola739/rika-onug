@@ -28,6 +28,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   width: 130px;
   height: 35px;
   transition: 0.75s;
+  filter: drop-shadow(3px 3px 3px black);
   &:disabled {
     cursor: not-allowed;
     opacity: 0.6;

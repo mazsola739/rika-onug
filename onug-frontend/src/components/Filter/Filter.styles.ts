@@ -8,6 +8,7 @@ export const StyledFilter = styled.div`
 `
 
 export const StyledFilterButton = styled.div<FilterButtonProps>`
+  filter: drop-shadow(3px 3px 3px black);
   align-items: center;
   align-content: center;
   background-image: ${({ expansion }) =>
@@ -19,6 +20,8 @@ export const StyledFilterButton = styled.div<FilterButtonProps>`
     isSelected ? '1px solid white' : '1px solid transparent'};
   color: ${({ isSelected }) =>
     isSelected ? 'rgba(255,255,255, 1)' : 'rgba(255,255,255, 0.4)'};
+  text-shadow: ${({ isSelected }) =>
+    isSelected ? '2px 2px 2px black' : ''};  
   cursor: pointer;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;

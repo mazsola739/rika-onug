@@ -17,6 +17,7 @@ export const Hello = styled.div`
   display: flex;
   text-align: center;
   align-items: center;
+  filter: drop-shadow(5px 5px 5px black);
 `
 
 export const StyledRuleInfo = styled.div`
@@ -35,6 +36,7 @@ export const RuleImage = styled.img`
 `
 
 export const RuleInfoDescription = styled.p`
+  filter: drop-shadow(5px 5px 5px black);
   color: white;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 16px;

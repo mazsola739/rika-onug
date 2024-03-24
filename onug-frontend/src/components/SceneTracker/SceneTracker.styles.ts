@@ -30,12 +30,18 @@ export const StyledSceneTracker = styled.div`
 
 export const ActualScene = styled.div<ActualSceneProps>`
   display: flex;
-  color: ${({ isCurrentScene }) => (isCurrentScene ? '#FF5733' : 'transparent')};
+  color: ${({ isCurrentScene }) => (isCurrentScene ? 'white' : 'transparent')};
+  border-radius: 5px;
+  border: ${({ isCurrentScene }) =>
+    isCurrentScene ? '2px solid yellow' : '2px solid transparent'};
   flex-direction: row;
   justify-content: center;
   gap: 20px;
-  border: ${({ isCurrentScene }) =>
-    isCurrentScene ? '2px solid #FF5733' : '2px solid transparent'};
+  filter: ${({ isCurrentScene }) =>
+    isCurrentScene ? 'drop-shadow(8px 5px 5px black);' : ''};
+  opacity: ${({ isCurrentScene }) => (isCurrentScene ? '1' : '0.6')};
+  text-shadow: ${({ isCurrentScene }) =>
+  isCurrentScene ? '2px 2px 2px black' : ''};
 `
 export const ActualSceneImages = styled.div`
   display: flex;

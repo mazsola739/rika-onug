@@ -14,14 +14,13 @@ export const CardBack = styled.div<StyledBoardCardProps>`
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
-  border: ${(props) =>
+  filter: ${(props) =>
     props.selectable_cards
       ? props.isSelectedCard
-        ? '3px solid yellow'
-        : '3px solid green'
-      : '3px solid white'};
+        ? 'drop-shadow(5px 5px 5px yellow);'
+        : 'drop-shadow(5px 5px 5px green);'
+      : 'drop-shadow(5px 5px 5px black);'};
 
-  border-radius: 6px;
   height: 110px;
   justify-content: center;
   width: 80px;
@@ -33,14 +32,13 @@ export const MarkBack = styled.div<StyledBoardMarkProps>`
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100%;
-  border: ${(props) =>
+
+  filter: ${(props) =>
     props.selectable_marks
       ? props.isSelectedMark
-        ? '3px solid yellow'
-        : '3px solid green'
-      : '3px solid white'};
-
-  border-radius: 50%;
+        ? 'drop-shadow(5px 5px 5px yellow);'
+        : 'drop-shadow(5px 5px 5px green);'
+      : 'drop-shadow(5px 5px 5px black);'};
   height: 50px;
   justify-content: center;
   width: 50px;

@@ -7,6 +7,7 @@ export const StyledCardList = styled.div`
 `
 
 export const CardListTitle = styled.p`
+  filter: drop-shadow(3px 3px 3px black);
   color: white;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 24px;
@@ -20,5 +21,5 @@ export const CardListTitle = styled.p`
 export const CardListGrid = styled.div`
   display: grid;
   gap: 5px;
-  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(100px, 100px));
 `
