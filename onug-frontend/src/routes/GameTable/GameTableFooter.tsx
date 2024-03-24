@@ -3,7 +3,6 @@ import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { gameBoardStore } from 'store'
-import { ready } from './../../../../onug-backend/src/websocket/ready';
 
 export const GameTableFooter: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
