@@ -65,8 +65,10 @@ export const temptress_response = (gameState, token, selected_card_positions, ti
     swapped_cards: [selected_card_positions[0], 'center_villain'],
   }
 
+  const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], 'center_villain'])
+
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_cards', formatPlayerIdentifier([selected_card_positions[0], 'center_villain'])],
+    private_message: ['interaction_swapped_cards', ...messageIdentifiers],
     icon: 'evilhand',
     uniqInformations: { swapped_cards: [selected_card_positions[0], 'center_villain'], evilhand: [selected_card_positions[0]] },
   })

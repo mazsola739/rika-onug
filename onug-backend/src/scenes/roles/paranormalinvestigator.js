@@ -85,7 +85,7 @@ export const paranormalinvestigator_response = (gameState, token, selected_card_
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length === 2 ? selected_card_positions[1] : ''],
+    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length === 2 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     icon: 'investigator',
     showCards: showCards,
     uniqInformations: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },

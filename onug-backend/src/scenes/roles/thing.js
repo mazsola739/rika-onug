@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE, MESSAGE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNeighborsByToken, getPlayerTokensByPlayerNumber } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNeighborsByToken, getPlayerTokensByPlayerNumber } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -75,7 +75,7 @@ export const thing_response = (gameState, token, selected_card_positions, title)
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_tap', selected_card_positions[0]],
+    private_message: ['interaction_tap', formatPlayerIdentifier(selected_card_positions)[0]],
     icon: 'tap',
     uniqInformations: { tapped: [selected_card_positions[0]] },
   })

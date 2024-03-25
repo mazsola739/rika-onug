@@ -1,6 +1,6 @@
 //@ts-check
 import { vampireIds, allCopyPlayerIds, SCENE, HYDRATE_VOTES } from '../../constant'
-import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds, countPlayersVoted, getPlayerNumbersWhoGotVoted, findMostVotedPlayer } from '../../utils'
+import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds, countPlayersVoted, getPlayerNumbersWhoGotVoted, findMostVotedPlayer, formatPlayerIdentifier } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
@@ -73,7 +73,7 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
     newGameState.players[token].card_or_mark_action = true
 
     const mostVotedPlayer = findMostVotedPlayer(newGameState)
-//TODO fix
+//TODO fix and better voting system
 /*       const vampirePosition = newGameState.mark_positions.vampire
       const selectedPosition = newGameState.card_positions[mostVotedPlayer[0]].mark
   
@@ -98,7 +98,7 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
     }
 
     const interaction = generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_mark_of_vampire', mostVotedPlayer],
+      private_message: ['interaction_mark_of_vampire', formatPlayerIdentifier([mostVotedPlayer])],
       icon: 'fang',
       uniqInformations: { mark_of_vampire: [mostVotedPlayer] },
     })

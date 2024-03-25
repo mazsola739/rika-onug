@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -90,8 +90,10 @@ export const cupid_response = (gameState, token, selected_mark_positions, title)
     mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]],
   }
 
+  const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
+
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_mark_of_love', selected_mark_positions[0], selected_mark_positions[1]],
+    private_message: ['interaction_mark_of_love', ...messageIdentifiers],
     icon: 'cupid',
     uniqInformations: { mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]] },
   })

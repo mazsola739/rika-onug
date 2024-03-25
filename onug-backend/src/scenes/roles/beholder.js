@@ -76,9 +76,11 @@ export const beholder_response = (gameState, token, answer, title) => {
       card_or_mark_action: true,
       viewed_cards: seers,
     }
+    
+    const messageIdentifiers = formatPlayerIdentifier(seers)
   
     interaction = generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_saw_card', formatPlayerIdentifier(seers)],
+      private_message: ['interaction_saw_card', ...messageIdentifiers],
       icon: 'seer',
       showCards: viewCards,
       uniqInformations: { viewed_cards: seers },

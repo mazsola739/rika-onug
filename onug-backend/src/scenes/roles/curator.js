@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getSelectablePlayersWithNoArtifact, getRandomArtifact, getPlayerTokenByPlayerNumber } from '../../utils'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getSelectablePlayersWithNoArtifact, getRandomArtifact, getPlayerTokenByPlayerNumber, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -78,7 +78,7 @@ export const curator_response = (gameState, token, selected_card_positions, titl
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_placed_artifact', selected_card_positions[0]],
+    private_message: ['interaction_placed_artifact', formatPlayerIdentifier(selected_card_positions)[0]],
     icon: 'artifact',
     uniqInformations: { new_artifact_card: selected_card_positions[0] },
   })

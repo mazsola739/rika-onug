@@ -142,7 +142,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
     let interaction = {}
     if (newGameState.players[token].player_history.viewed_cards) {
       interaction = generateRoleInteraction(newGameState, token, {
-        private_message: ['interaction_saw_mark', selected_mark_positions[0]],
+        private_message: ['interaction_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0]],
         icon: 'target',
         showMarks: viewMarks,
         uniqInformations: { viewed_marks: [selected_mark_positions[0]] },
@@ -158,7 +158,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
       newGameState.players[token].player_history.selectable_card_limit = { player: 1, center: 0 }
 
       interaction = generateRoleInteraction(newGameState, token, {
-        private_message: ['interaction_saw_mark', selected_mark_positions[0], 'interaction_must_one_any'],
+        private_message: ['interaction_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0], 'interaction_must_one_any'],
         icon: 'target',
         showMarks: viewMarks,
         selectableCards: { selectable_cards: selectableCards, selectable_card_limit: { player: 1, center: 0 } },

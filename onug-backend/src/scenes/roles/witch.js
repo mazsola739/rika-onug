@@ -107,8 +107,10 @@ export const witch_response = (gameState, token, selected_card_positions, title)
       swapped_cards: [newGameState.players[token].player_history.selected_center_card, selected_card_positions[0]],
     }
 
+    const messageIdentifiers = formatPlayerIdentifier([`${newGameState.players[token].player_history.selected_center_card}`, selected_card_positions[0]])
+
     const interaction = generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_swapped_cards', formatPlayerIdentifier([`${newGameState.players[token].player_history.selected_center_card}`, selected_card_positions[0]])],
+      private_message: ['interaction_swapped_cards', ...messageIdentifiers],
       icon: 'voodoo',
       uniqInformations: { swapped_cards: [newGameState.players[token].player_history.selected_center_card, selected_card_positions[0]] },
     })

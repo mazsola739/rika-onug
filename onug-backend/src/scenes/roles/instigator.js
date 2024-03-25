@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -82,7 +82,7 @@ export const instigator_response = (gameState, token, selected_mark_positions, t
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_mark_of_traitor', selected_mark_positions[0]],
+    private_message: ['interaction_mark_of_traitor', formatPlayerIdentifier(selected_mark_positions)[0]],
     icon: 'traitor',
     uniqInformations: { mark_of_traitor: [selected_mark_positions[0]] },
   })

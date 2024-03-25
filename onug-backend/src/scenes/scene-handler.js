@@ -6,6 +6,7 @@ import * as conditions from './conditions'
 //! todo save interaction identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
 //TODO delete 
 //! TODO if must action, random selecting?
+//? TODO better private message, private message generator?
 export const sceneHandler = gameState => {
   const newGameState = { ...gameState }
   const scene_title = newGameState.actual_scene.scene_title

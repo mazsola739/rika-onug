@@ -70,9 +70,11 @@ export const squire_response = (gameState, token, answer, title) => { //TODO val
       card_or_mark_action: true,
       viewed_cards: werewolves,
     }
+
+    const messageIdentifiers = formatPlayerIdentifier(werewolves)
   
     interaction = generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_saw_card', formatPlayerIdentifier(werewolves)],
+      private_message: ['interaction_saw_card', ...messageIdentifiers],
       icon: 'werewolves',
       showCards: viewCards,
       uniqInformations: { viewed_cards: werewolves },

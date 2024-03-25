@@ -71,8 +71,10 @@ export const troublemaker_response = (gameState, token, selected_card_positions,
     swapped_cards: [position1, position2],
   }
 
+  const messageIdentifiers = formatPlayerIdentifier([position1, position2])
+
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_cards', formatPlayerIdentifier([position1, position2])],
+    private_message: ['interaction_swapped_cards', ...messageIdentifiers],
     icon: 'swap',
     uniqInformations: { swapped_cards: [position1, position2] },
   })

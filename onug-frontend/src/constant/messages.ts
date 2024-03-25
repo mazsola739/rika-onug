@@ -67,15 +67,15 @@ export const interaction_placed_shield = 'You placed a shield front of'
 //curator
 export const interaction_placed_artifact = 'You placed an artifact front of'
 //saw card
-export const interaction_saw_card = 'You saw card from'
+export const interaction_saw_card = 'You saw card from:'
 //saw mark
-export const interaction_saw_mark = 'You saw mark from'
+export const interaction_saw_mark = 'You saw mark from:'
 //swapped card
-export const interaction_swapped_cards = 'You swapped cards between'
+export const interaction_swapped_cards = 'You swapped cards between:'
 //swapped mark
-export const interaction_swapped_marks = 'You swapped marks between'
+export const interaction_swapped_marks = 'You swapped marks between:'
 //tapped
-export const interaction_tap = 'You tapped'
+export const interaction_tap = 'You tapped:'
 export const interaction_no_tap = "You don't have such type of neighbor."
 export const interaction_got_tapped_by_villain = 'You got tapped by your super villain neighbor'
 export const interaction_got_tapped_by_alien = 'You got tapped by your alien neighbor'

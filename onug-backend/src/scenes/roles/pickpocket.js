@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken, getMarksByPositions } from '../../utils'
+import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken, getMarksByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -78,8 +78,10 @@ export const pickpocket_response = (gameState, token, selected_mark_positions, t
     viewed_marks: [currentPlayerNumber],
   }
 
+  const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_mark_positions[0]])
+
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_marks', 'interaction_saw_mark', currentPlayerNumber],
+    private_message: ['interaction_swapped_marks', ...messageIdentifiers, 'interaction_saw_mark', formatPlayerIdentifier([currentPlayerNumber])],
     icon: 'robber',
     showMarks: viewMarks,
     uniqInformations: { swapped_marks: [currentPlayerNumber, selected_mark_positions[0]], viewed_marks: [currentPlayerNumber] },

@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerTokenByPlayerNumber, getSelectableOtherPlayerNumbersWithoutShield } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerTokenByPlayerNumber, getSelectableOtherPlayerNumbersWithoutShield } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -68,7 +68,7 @@ export const sentinel_response = (gameState, token, selected_card_positions, tit
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_placed_shield', selected_card_positions[0]],
+    private_message: ['interaction_placed_shield', formatPlayerIdentifier(selected_card_positions)[0]],
     icon: 'shield',
     uniqInformations: { new_shield_card: [selected_card_positions[0]] },
   })

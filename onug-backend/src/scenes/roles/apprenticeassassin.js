@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getAssassinPlayerNumbersByRoleIds, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getAssassinPlayerNumbersByRoleIds, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -114,7 +114,7 @@ export const apprenticeassassin_response = (gameState, token, selected_mark_posi
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_mark_of_assassin', selected_mark_positions[0]],
+    private_message: ['interaction_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
     icon: 'target',
     uniqInformations: { mark_of_assassin: [selected_mark_positions[0]] },
   })

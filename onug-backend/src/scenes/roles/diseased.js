@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNeighborsByToken } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNeighborsByToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -76,7 +76,7 @@ export const diseased_response = (gameState, token, selected_mark_positions, tit
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_mark_of_disease', selected_mark_positions[0]],
+    private_message: ['interaction_mark_of_disease', formatPlayerIdentifier(selected_mark_positions)[0]],
     icon: 'diseased',
     uniqInformations: { mark_of_disease: [selected_mark_positions[0]] },
   })

@@ -66,8 +66,10 @@ export const alphawolf_response = (gameState, token, selected_card_positions, ti
     swapped_cards: [selected_card_positions[0], 'center_wolf'],
   }
 
+  const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], 'center_wolf'])
+
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_cards', formatPlayerIdentifier([selected_card_positions[0], 'center_wolf'])],
+    private_message: ['interaction_swapped_cards', ...messageIdentifiers],
     icon: 'claw',
     uniqInformations: { swapped_cards: [selected_card_positions[0], 'center_wolf'], claw: [selected_card_positions[0]] },
   })
