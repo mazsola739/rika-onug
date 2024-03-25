@@ -32,8 +32,7 @@ export const copycat_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: centerCardPositions,
-    selectable_card_limit: { player: 0, center: 1 },
+    selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 },
   }
 
   return generateRoleInteraction(newGameState, token, {

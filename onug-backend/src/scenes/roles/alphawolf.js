@@ -38,7 +38,7 @@ export const alphawolf_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_one_any_non_werewolf'],
+    private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_one_any_non_werewolf'],
     icon: 'claw',
     selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
   })

@@ -39,7 +39,7 @@ export const nostradamus_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_must_three_any'],
+    private_message: [selectablePlayerNumbers.length < 3 ? 'interaction_no_selectable_player' : 'interaction_must_three_any'],
     icon: 'nostradamus',
     selectableCards: { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 3, center: 0 } },
   })

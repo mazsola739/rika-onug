@@ -30,16 +30,18 @@ export const paranormalinvestigator_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(newGameState.players, token)
 
+  const limit = selectablePlayerNumbers.length < 2 ? 1 : 2
+
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 },
+    selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 },
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_may_two_any_other'],
+    private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : limit === 1 ? 'interaction_may_one_any_other' : 'interaction_may_two_any_other'],
     icon: 'investigator',
-    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 } },
+    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 } },
   })
 }
 

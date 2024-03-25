@@ -34,8 +34,7 @@ export const diseased_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_marks: neighbors,
-    selectable_mark_limit: { mark: 1 },
+    selectable_marks: neighbors, selectable_mark_limit: { mark: 1 },
   }
 
   return generateRoleInteraction(newGameState, token, {

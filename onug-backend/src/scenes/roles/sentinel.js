@@ -29,10 +29,7 @@ export const sentinel = (gameState, title) => {
 export const sentinel_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   
-  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(
-    newGameState.players,
-    token
-  )
+  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(newGameState.players, token)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
@@ -41,7 +38,7 @@ export const sentinel_interaction = (gameState, token, title) => {
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_may_one_any_other'],
+    private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any_other'],
     icon: 'shield',
     selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
   })

@@ -37,7 +37,7 @@ export const curator = (gameState, title, prefix) => {
 export const curator_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   
-  const allPlayerTokens = getAllPlayerTokens(newGameState.players) //TODO better solution
+  const allPlayerTokens = getAllPlayerTokens(newGameState.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
   const selectablePlayersWithNoArtifact = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, newGameState.artifact)
@@ -45,12 +45,11 @@ export const curator_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: selectablePlayersWithNoArtifact,
-    selectable_card_limit: { player: 1, center: 0 },
+    selectable_cards: selectablePlayersWithNoArtifact, selectable_card_limit: { player: 1, center: 0 },
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_may_one_any'],
+    private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any'],
     icon: 'artifact',
     selectableCards: { selectable_cards: selectablePlayersWithNoArtifact, selectable_card_limit: { player: 1, center: 0 } },
   })

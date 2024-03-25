@@ -10,6 +10,7 @@ export const interaction_must_one_any_other = 'You must choose any other player'
 
 //any player
 export const interaction_may_one_any = 'You may choose any player (including yourself)'
+export const interaction_may_two_any = 'You may choose any two player (including yourself)'
 export const interaction_must_one_any = 'You must choose any player (including yourself)'
 export const interaction_must_two_any = 'You must choose any two players (including yourself)'
 export const interaction_must_three_any = 'You must choose any three players (including yourself)'

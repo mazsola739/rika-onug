@@ -30,20 +30,16 @@ export const robber_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   
   if (!newGameState.players[token].shield) {
-    const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(
-      newGameState.players,
-      token
-    )
+    const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(newGameState.players, token)
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      selectable_cards: selectablePlayerNumbers,
-      selectable_card_limit: { player: 1, center: 0 },
+      selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
     }
 
     return generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_may_one_any_other'],
+      private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any_other'],
       icon: 'robber',
       selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
     })

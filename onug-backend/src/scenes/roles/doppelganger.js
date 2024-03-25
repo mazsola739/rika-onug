@@ -26,6 +26,7 @@ export const doppelganger = (gameState, title) => {
   return newGameState
 }
 
+//TODO shield?
 export const doppelganger_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 

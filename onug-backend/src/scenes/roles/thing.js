@@ -35,8 +35,7 @@ export const thing_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: neighbors,
-    selectable_card_limit: { player: 1, center: 0 },
+    selectable_cards: neighbors, selectable_card_limit: { player: 1, center: 0 },
   }
 
   return generateRoleInteraction(newGameState, token, {

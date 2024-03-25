@@ -32,14 +32,13 @@ export const witch_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: centerCardPositions,
-    selectable_card_limit: { player: 1, center: 0 },
+    selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 },
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_center'],
     icon: 'voodoo',
-    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
+    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 } },
   })
 }
 
@@ -65,8 +64,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      selectable_cards: selectablePlayersWithNoShield,
-      selectable_card_limit: { player: 1, center: 0 },
+      selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 },
       viewed_cards: [selected_card_positions[0]],
       selected_center_card: selected_card_positions[0],
     }

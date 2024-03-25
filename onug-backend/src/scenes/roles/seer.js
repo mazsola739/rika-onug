@@ -29,16 +29,12 @@ export const seer = (gameState, title) => {
 export const seer_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(
-    newGameState.players,
-    token
-  )
+  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(newGameState.players, token)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_cards: selectablePlayerNumbers,
-    selectable_card_limit: { player: 1, center: 2 },
+    selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 2 },
   }
 
   return generateRoleInteraction(newGameState, token, {
@@ -64,7 +60,7 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
   if (playerCards && !centerCards && playerHistory.includes(selected_card_positions[0])) {
     showCards = getCardIdsByPositions(newGameState?.card_positions, [selected_card_positions[0]])
   } else if (centerCards && !playerCards && selected_card_positions.every((position) => playerHistory.includes(position))) {
-    showCards = getCardIdsByPositions(newGameState?.card_positions, selected_card_positions)
+    showCards = getCardIdsByPositions(newGameState?.card_positions, selected_card_positions.slice(0, 2))
   } else {
     return newGameState
   }
