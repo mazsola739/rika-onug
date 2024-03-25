@@ -81,7 +81,7 @@ export const pickpocket_response = (gameState, token, selected_mark_positions, t
   const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_mark_positions[0]])
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_marks', ...messageIdentifiers, 'interaction_saw_mark', formatPlayerIdentifier([currentPlayerNumber])],
+    private_message: ['interaction_swapped_marks', ...messageIdentifiers, 'interaction_own_mark'],
     icon: 'robber',
     showMarks: viewMarks,
     uniqInformations: { swapped_marks: [currentPlayerNumber, selected_mark_positions[0]], viewed_marks: [currentPlayerNumber] },

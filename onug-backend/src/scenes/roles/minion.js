@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const minion = (gameState, title, hasDoppelganger) => {
@@ -37,12 +37,14 @@ export const minion_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    werewolves: werewolves,
+    werewolves,
   }
 
+  const messageIdentifiers = formatPlayerIdentifier(werewolves)
+
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_werewolves'],
+    private_message: ['interaction_werewolves', ...messageIdentifiers],
     icon: 'werewolf',
-    uniqInformations: { werewolves: werewolves },
+    uniqInformations: { werewolves },
   })
 }

@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE, centerCardPositions } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -66,8 +66,10 @@ export const copycat_response = (gameState, token, selected_card_positions, titl
     viewed_cards: [selected_card_positions[0]],
   }
 
+  const messageIdentifiers = formatPlayerIdentifier(villains)
+
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_you_are_that_role', `${newGameState.players[token]?.card.player_role}`],
+    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_you_are_that_role', `${newGameState.players[token]?.card.player_role}`],
     icon: 'copy',
     showCards: showCards,
     uniqInformations: { new_role_id: newGameState.players[token].card.player_role_id, viewed_cards: [selected_card_positions[0]] },

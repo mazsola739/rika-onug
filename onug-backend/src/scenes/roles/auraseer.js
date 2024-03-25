@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithCardOrMarkActionTrue } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithCardOrMarkActionTrue } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
@@ -41,8 +41,10 @@ export const auraseer_interaction = (gameState, token, title) => {
     auraseer: playersWithCardOrMarkActionTrue
   }
 
+  const messageIdentifiers = formatPlayerIdentifier(playersWithCardOrMarkActionTrue)
+
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_card_or_mark_action'],
+    private_message: ['interaction_card_or_mark_action', ...messageIdentifiers],
     icon: 'interaction',
     uniqInformations: { auraseer: playersWithCardOrMarkActionTrue }
   })

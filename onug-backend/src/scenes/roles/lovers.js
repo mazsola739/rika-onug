@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getLoversPlayerNumbersByMark } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getLoversPlayerNumbersByMark } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const lovers = (gameState, title) => {
@@ -33,12 +33,14 @@ export const lover_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    lovers: lovers,
+    lovers,
   }
 
+  const messageIdentifiers = formatPlayerIdentifier(lovers)
+
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_mark_of_lover'],
+    private_message: ['interaction_mark_of_lover', ...messageIdentifiers],
     icon: 'lover',
-    uniqInformations: { lovers: lovers },
+    uniqInformations: { lovers },
   })
 }

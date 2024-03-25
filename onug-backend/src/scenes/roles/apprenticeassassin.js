@@ -43,13 +43,15 @@ export const apprenticeassassin_interaction = (gameState, token, title) => {
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      assassin: assassin,
+      assassin,
     }
 
+    const messageIdentifiers = formatPlayerIdentifier(assassin)
+
     return generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_assassin'],
+      private_message: ['interaction_assassin', ...messageIdentifiers],
       icon: 'assassin',
-      uniqInformations: { assassin: assassin },
+      uniqInformations: { assassin },
     })
   } else if (assassin.length === 0) {
     const allPlayerTokens = getAllPlayerTokens(newGameState.players)

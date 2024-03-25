@@ -1,6 +1,6 @@
 //@ts-check
 import { masonIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getMasonPlayerNumbersByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getMasonPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const masons = (gameState, title) => {
@@ -36,8 +36,10 @@ export const masons_interaction = (gameState, token, title) => {
     masons: masons,
   }
 
+  const messageIdentifiers = formatPlayerIdentifier(masons)
+
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_masons'],
+    private_message: ['interaction_masons', ...messageIdentifiers],
     icon: 'mason',
     uniqInformations: { masons: masons },
   })

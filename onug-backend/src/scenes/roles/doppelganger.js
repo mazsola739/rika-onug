@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions } from '../../utils'
+import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -70,7 +70,7 @@ export const doppelganger_response = (gameState, token, selected_card_positions,
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_you_are_that_role', `${newGameState.players[token]?.card.player_role}`],
+    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_you_are_that_role', `${newGameState.players[token]?.card.player_role}`],
     icon: 'copy',
     showCards: showCards,
     uniqInformations: { new_role_id: newGameState.players[token].card.player_role_id, viewed_cards: [selected_card_positions[0]] },

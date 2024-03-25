@@ -1,6 +1,7 @@
 //@ts-check
 import { supervillainIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getVillainPlayerNumbersByRoleIds } from '../../utils'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const supervillains = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -25,5 +26,21 @@ export const supervillains = (gameState, title) => {
 }
 
 export const supervillain_interaction = (gameState, token, title) => {
-  return {}
+  const newGameState = { ...gameState }
+
+  const villains = getVillainPlayerNumbersByRoleIds(newGameState.players)
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    villains,
+  }
+
+  const messageIdentifiers = formatPlayerIdentifier(villains)
+
+  return generateRoleInteraction(newGameState, token, {
+    private_message: ['interaction_villains', ...messageIdentifiers],
+    icon: 'villain',
+    uniqInformations: { villains },
+  })
 }

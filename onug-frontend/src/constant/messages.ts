@@ -68,8 +68,10 @@ export const interaction_placed_shield = 'You placed a shield front of'
 export const interaction_placed_artifact = 'You placed an artifact front of'
 //saw card
 export const interaction_saw_card = 'You saw card from:'
+export const interaction_saw_own_card = 'You saw your own card'
 //saw mark
 export const interaction_saw_mark = 'You saw mark from:'
+export const interaction_saw_own_mark = 'You saw your own mark'
 //swapped card
 export const interaction_swapped_cards = 'You swapped cards between:'
 //swapped mark

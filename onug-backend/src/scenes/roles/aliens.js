@@ -67,6 +67,8 @@ export const aliens = (gameState, title) => {
   return newGameState
 }
 
+//  const messageIdentifiers = formatPlayerIdentifier(aliens)
+
 export const aliens_interaction = (gameState, token, title) => {
   return {}
 }

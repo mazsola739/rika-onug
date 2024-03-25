@@ -1,6 +1,6 @@
 //@ts-check
 import { groobzerbIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getZerbPlayerNumberByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getZerbPlayerNumberByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const groobzerb = (gameState, title, hasDoppelganger) => {
@@ -40,8 +40,10 @@ export const groobzerb_interaction = (gameState, token, title) => {
     if (zerb.length >= 1) {
       player.player_history = { ...player.player_history, scene_title: title, zerb }
 
+      const messageIdentifiers = formatPlayerIdentifier(zerb)
+
       return generateRoleInteraction(newGameState, token, {
-        private_message: ['interaction_zerbgroob'],
+        private_message: ['interaction_zerbgroob', ...messageIdentifiers],
         icon: 'groobzerb',
         uniqInformations: { zerb },
       })
@@ -59,8 +61,10 @@ export const groobzerb_interaction = (gameState, token, title) => {
     if (groob.length >= 1) {
       player.player_history = { ...player.player_history, scene_title: title, groob }
 
+      const messageIdentifiers = formatPlayerIdentifier(groob)
+
       return generateRoleInteraction(newGameState, token, {
-        private_message: ['interaction_zerbgroob'],
+        private_message: ['interaction_zerbgroob', ...messageIdentifiers],
         icon: 'groobzerb',
         uniqInformations: { groob },
       })

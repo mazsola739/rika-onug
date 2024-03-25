@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray, getPartOfGroupByToken } from '../../utils'
+import { getAllPlayerTokens, getRandomItemFromArray, getPartOfGroupByToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 const randomBlobKickoffText = [
@@ -66,8 +66,10 @@ export const blob_interaction = (gameState, token, title) => {
     blob: partOfBlob,
   }
 
+  const messageIdentifiers = formatPlayerIdentifier(partOfBlob)
+
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_part_of_blob'],
+    private_message: ['interaction_part_of_blob', ...messageIdentifiers],
     icon: 'blob',
     uniqInformations: { blob: partOfBlob },
   })

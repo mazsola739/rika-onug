@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getMadScientistPlayerNumberByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getMadScientistPlayerNumberByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
@@ -32,12 +32,12 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
 
 export const intern_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-  const madscientistPlayerNumbers = getMadScientistPlayerNumberByRoleIds(
+  const madscientist = getMadScientistPlayerNumberByRoleIds(
     newGameState.players
   )
   const playerCard = newGameState.players[token]?.card
 
-  if (madscientistPlayerNumbers.length === 0) {
+  if (madscientist.length === 0) {
     playerCard.player_role_id = 63
     playerCard.player_role = 'MAD_SCIENTIST'
   }
@@ -45,12 +45,14 @@ export const intern_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    madscientist: madscientistPlayerNumbers,
+    madscientist,
   }
 
+  const messageIdentifiers = formatPlayerIdentifier(madscientist)
+
   return generateRoleInteraction(newGameState, token, {
-    private_message: [madscientistPlayerNumbers.length === 0 ? 'interaction_mad_now' : 'interaction_mad'],
+    private_message: [madscientist.length === 0 ? 'interaction_mad_now' : 'interaction_mad', ...messageIdentifiers],
     icon: 'mad',
-    uniqInformations: { madscientist: madscientistPlayerNumbers },
+    uniqInformations: { madscientist },
   })
 }

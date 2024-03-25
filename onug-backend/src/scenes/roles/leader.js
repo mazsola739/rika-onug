@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAlienPlayerNumbersByRoleIds, getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getZerbPlayerNumberByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAlienPlayerNumbersByRoleIds, getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getZerbPlayerNumberByRoleIds } from '../../utils'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
 export const leader = (gameState, title, hasDoppelganger) => {
@@ -41,8 +41,10 @@ export const leader_interaction = (gameState, token, title) => {
     aliens,
   }
 
+  const messageIdentifiers = formatPlayerIdentifier(aliens)
+
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_aliens'],
+    private_message: ['interaction_aliens', ...messageIdentifiers],
     icon: 'alien',
     uniqInformations: { aliens },
   })
@@ -85,8 +87,10 @@ export const leader_zerbgroob_interaction = (gameState, token, title) => {
       zerbgroob,
     }
 
+    const messageIdentifiers = formatPlayerIdentifier(zerbgroob)
+
     return generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_zerbgroob'],
+      private_message: ['interaction_zerbgroob', ...messageIdentifiers],
       icon: 'groobzerb',
       uniqInformations: { zerbgroob },
     })
