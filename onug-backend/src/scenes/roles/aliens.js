@@ -3,7 +3,7 @@ import { alienIds, allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../utils'
 
 //TODO
-const random_aliens = [
+const randomAlienInstructions = [
   'aliens_view_text',
 /*   'aliens_allview_text', */
   'aliens_stare_text',
@@ -31,7 +31,7 @@ export const aliens = (gameState, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = ['aliens_kickoff_text']
-  const randomInstructions = getRandomItemFromArray(random_aliens)
+  const randomInstructions = getRandomItemFromArray(randomAlienInstructions)
   narration[1] = randomInstructions
 
   if (randomInstructions.includes('view')) {

@@ -19,7 +19,7 @@ export const containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId
 export const formatPlayerIdentifier = playerNumbers => {
   const formattedPlayerNumbers = [...playerNumbers]
   
-  return formattedPlayerNumbers.map(player => `identifier_${player.replace('_', '')}_text`);
+  return formattedPlayerNumbers.map(player => `identifier_${player.replace('_', '')}_text`)
 }
 
 export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
@@ -119,7 +119,7 @@ export const getAlienPlayerNumbersByRoleIds = players => {
 }
 
 export const superVillainDetected = (players, evilometerToken) => {
-  const evilometerNeighbors = getPlayerNeighborsByToken(players, evilometerToken)
+  const evilometerNeighbors = getNeighborPlayerNumbersByToken(players, evilometerToken)
   const superVillains = getVillainPlayerNumbersByRoleIds(players)
 
   for (let villain of superVillains) {
@@ -132,7 +132,7 @@ export const superVillainDetected = (players, evilometerToken) => {
 }
 
 export const alienAbducted = (players, cowToken) => {
-  const cowNeighbors = getPlayerNeighborsByToken(players, cowToken)
+  const cowNeighbors = getNeighborPlayerNumbersByToken(players, cowToken)
   const aliens = getAlienPlayerNumbersByRoleIds(players)
 
   for (let alien of aliens) {
@@ -426,7 +426,62 @@ export const getPlayerTokenByPlayerNumber = (players, player) => {
   return null
 }
 
-export const getPlayerNeighborsByToken = (players, token) => {
+export const getAnyOtherPlayersByToken = (players, token) => {
+  const result = {}
+  
+  for (const player in players) {
+    if (player !== token) {
+      result[player] = players[player]
+    }
+  }
+
+  return result
+}
+
+export const getAnyEvenOrOddPlayers = (players, evenOrOdd) => {
+  const result = {}
+  
+  for (const playerId in players) {
+    const playerNumber = players[playerId].player_number
+    const isPlayerNumberEven = playerNumber % 2 === 0
+    const isPlayerNumberOdd = playerNumber % 2 !== 0
+
+    if (evenOrOdd === 'even' && isPlayerNumberEven) {
+      result[playerId] = players[playerId]
+    } else if (evenOrOdd === 'odd' && isPlayerNumberOdd) {
+      result[playerId] = players[playerId]
+    }
+  }
+
+  return result
+}
+
+export const getPlayerNeighborsByToken = (players, token, direction) => {
+  const tokens = Object.keys(players)
+  const playerCount = tokens.length
+  const playerNumber = players[token].player_number
+  const neighbors = {}
+
+  if (direction === 'left' || direction === 'both') {
+    const prevNeighborNumber = playerNumber === 1 ? playerCount : playerNumber - 1
+    const prevNeighborId = Object.keys(players).find(key => players[key].player_number === prevNeighborNumber)
+    if (prevNeighborId) {
+      neighbors['left'] = players[prevNeighborId]
+    }
+  }
+
+  if (direction === 'right' || direction === 'both') {
+    const nextNeighborNumber = playerNumber === playerCount ? 1 : playerNumber + 1
+    const nextNeighborId = Object.keys(players).find(key => players[key].player_number === nextNeighborNumber)
+    if (nextNeighborId) {
+      neighbors['right'] = players[nextNeighborId]
+    }
+  }
+
+  return neighbors
+}
+
+export const getNeighborPlayerNumbersByToken = (players, token) => {
   const tokens = Object.keys(players)
   const playerCount = tokens.length
   const playerNumber = players[token].player_number

@@ -9,7 +9,7 @@ const empathAllKeys = [
   'activePlayers',
 ]
 
-const randomEmpath = [
+const randomEmpathInstructions = [
   'empath_action1_text',
   'empath_action2_text',
   'empath_action3_text',
@@ -28,7 +28,7 @@ const randomEmpath = [
 
 const createEmpath = (prefix, totalPlayers) => {
   const randomIdentifier = getRandomItemFromArray(empathAllKeys)
-  const randomInstructions = getRandomItemFromArray(randomEmpath)
+  const randomInstructions = getRandomItemFromArray(randomEmpathInstructions)
 
   return [`${prefix}_kickoff_text`, 'empath_kickoff2_text', randomIdentifier === 'activePlayers' ? pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and') : randomIdentifier, randomInstructions]
 }

@@ -2,7 +2,7 @@
 import { copyPlayerIds, SCENE } from '../../constant'
 import { getRandomItemFromArray, getAllPlayerTokens } from '../../utils'
 
-const random_mortician = ['mortician_1card_text', 'mortician_2cards_text']
+const randomMorticianInstructions = ['mortician_1card_text', 'mortician_2cards_text']
 
 const morticianAllKeys = [
   'identifier_leftneighbor_text',
@@ -12,7 +12,7 @@ const morticianAllKeys = [
 ]
 
 const createMortician = prefix => {
-  const randomMortician = getRandomItemFromArray(random_mortician)
+  const randomMortician = getRandomItemFromArray(randomMorticianInstructions)
 
   return [`${prefix}_kickoff_text`, randomMortician, getRandomItemFromArray(randomMortician === 'mortician_2cards_text' ? morticianAllKeys : ['identifier_bothneighbors_text'])]
 }

@@ -2,10 +2,10 @@
 import { copyPlayerIds, SCENE } from '../../constant'
 import { getRandomItemFromArray, getAllPlayerTokens } from '../../utils'
 
-const random_psychic = ['psychic_view1_text', 'psychic_view2_text']
+const randomPsychicInstructions = ['psychic_view1_text', 'psychic_view2_text']
 const psychicKeys = ['identifier_anyeven_text', 'identifier_anyodd_text']
 
-const createPsychic = prefix => [`${prefix}_kickoff_text`, getRandomItemFromArray(random_psychic), getRandomItemFromArray(psychicKeys)]
+const createPsychic = prefix => [`${prefix}_kickoff_text`, getRandomItemFromArray(randomPsychicInstructions), getRandomItemFromArray(psychicKeys)]
 
 export const psychic = (gameState, title, prefix) => {
   const newGameState = { ...gameState }

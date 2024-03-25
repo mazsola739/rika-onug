@@ -2,7 +2,7 @@
 import { copyPlayerIds, SCENE } from '../../constant'
 import { getRandomItemFromArray, getAllPlayerTokens } from '../../utils'
 
-const random_rascal = [
+const randomRascalInstructions = [
   'rascal_idiot_text',
   'rascal_troublemaker_text',
   'rascal_witch_text',
@@ -32,7 +32,7 @@ const rascalAnyTwoKeys = [
 
 const createRascal = prefix => {
   const result = [`${prefix}_kickoff_text`]
-  const randomInstructions = getRandomItemFromArray(random_rascal)
+  const randomInstructions = getRandomItemFromArray(randomRascalInstructions)
   const randomAnyOne = getRandomItemFromArray(rascalAnyOneKeys)
   const randomAnyTwo = getRandomItemFromArray(rascalAnyTwoKeys)
 

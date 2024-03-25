@@ -45,6 +45,8 @@ export const interaction_one_any_non_werewolf = 'You must choose any other non-w
 export const interaction_one_any_non_villain = 'You must choose any other non-villain player'
 export const interaction_one_any_non_alien = 'You must choose any other non-alien player'
 export const interaction_must_one_neighbor = 'You must choose any player of your neighbors'
+
+export const interaction_no_selectable_player = 'You cannot choose any player based on these criteria'
   
 export const interaction_may_direction = 'You may choose a direction to move other players cards'
 export const interaction_may_look = 'You may look at the cards'
