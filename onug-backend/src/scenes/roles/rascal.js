@@ -1,6 +1,6 @@
 //@ts-check
 import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield } from '../../utils'
+import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getSelectableOtherPlayerNumbersWithoutShield } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { villageidiot_interaction } from './villageidiot'
 
@@ -110,6 +110,8 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
   let selectableTwoPlayers
   let selectableOnePlayers
   let selectableCards
+  let selectableLimit
+  let privateMessage
 
   switch (randomAnyTwo) {
     case 'identifier_any2_text':
@@ -126,7 +128,7 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
     case 'identifier_any2lower_text':
       const higherOrLower = randomAnyTwo.replace('identifier_any2', '').replace('_text', '')
       selectableTwoPlayers = getAnyHigherOrLowerPlayerNumbersByToken(newGameState.players, higherOrLower)
-      
+
       break
     case 'identifier_2leftneighbors_text':
     case 'identifier_2rightneighbors_text':
@@ -135,7 +137,7 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
       const amount = randomAnyTwo.include('2') ? 2 : 1
       selectableTwoPlayers = getPlayerNeighborsByToken(newGameState.players, direction, amount)
 
-      break 
+      break
   }
 
   switch (randomAnyOne) {
@@ -143,7 +145,7 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
     case 'identifier_lower_text':
       const higherOrLower = randomAnyOne.replace('identifier_', '').replace('_text', '')
       selectableOnePlayers = getAnyHigherOrLowerPlayerNumbersByToken(newGameState.players, higherOrLower)
-      
+
       break
     case 'identifier_any_text':
       selectableOnePlayers = getAllPlayerTokens(newGameState.players)
@@ -164,49 +166,49 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
 
   if (randomRascalInstruction === 'rascal_troublemaker_text') {
     selectableCards = getSelectablePlayersWithNoShield(selectableTwoPlayers)
+    selectableLimit = 2
+    privateMessage = [selectableCards.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_two_any']
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
-      selectable_cards: selectableCards, selectable_card_limit: { player: 2, center: 0 },
-    }
-
-    return generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_must_one_center'],
-      icon: 'drunk',
-      selectableCards: { selectable_cards: selectableCards, selectable_card_limit: { player: 2, center: 0 } },
-    })
   } else if (randomRascalInstruction !== 'rascal_troublemaker_text' && randomRascalInstruction !== 'rascal_idiot_text') {
-    if(randomRascalInstruction === 'rascal_drunk_text' || randomRascalInstruction === 'rascal_robber_text') {
+    if (randomRascalInstruction === 'rascal_drunk_text' || randomRascalInstruction === 'rascal_robber_text') {
       if (newGameState.players[token].shield) {
         newGameState.players[token].player_history = {
           ...newGameState.players[token].player_history,
           scene_title: title,
           shielded: true,
         }
-    
+
         return generateRoleInteraction(newGameState, token, {
           private_message: ['interaction_shielded'],
           icon: 'shield',
           uniqInformations: { shielded: true },
         })
+      } else {
+        selectableCards = randomAnyOne === 'identifier_center_text' ? centerCardPositions : getSelectableOtherPlayerNumbersWithoutShield(selectableOnePlayers, token)
+        privateMessage = [selectableCards.length === 0 ? 'interaction_no_selectable_player' : randomRascalInstruction === 'rascal_drunk_text' ? 'interaction_must_one_any_other' : 'interaction_may_one_any_other']
+
       }
+    } else {
+      selectableCards = randomAnyOne === 'identifier_center_text' ? centerCardPositions : getSelectablePlayersWithNoShield(selectableOnePlayers)
+      privateMessage = [selectableCards.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any_other']
     }
 
-    selectableCards = randomAnyOne === 'identifier_center_text' ? centerCardPositions : getSelectablePlayersWithNoShield(selectableOnePlayers)
+    selectableLimit = 1
+    privateMessage = [selectableCards.length === 0 ? 'interaction_no_selectable_player' : randomRascalInstruction === 'rascal_drunk_text' ? 'interaction_must_one_any_other' : 'interaction_may_one_any']
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
-      selectable_cards: selectableCards, selectable_card_limit: { player: 1, center: 0 },
-    }
-
-    return generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_must_one_center'],
-      icon: 'drunk',
-      selectableCards: { selectable_cards: selectableCards, selectable_card_limit: { player: 1, center: 0 } },
-    })
   }
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    selectable_cards: selectableCards, selectable_card_limit: { player: selectableLimit, center: 0 },
+  }
+
+  return generateRoleInteraction(newGameState, token, {
+    private_message: privateMessage,
+    icon: 'drunk',
+    selectableCards: { selectable_cards: selectableCards, selectable_card_limit: { player: selectableLimit, center: 0 } },
+  })
 }
 
 export const rascal_response = (gameState, token, selected_card_positions, title) => {
