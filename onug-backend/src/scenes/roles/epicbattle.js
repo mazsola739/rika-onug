@@ -2,7 +2,6 @@
 import { SCENE } from '../../constant'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils'
 
-//TODO
 const random_easteregg_nobadguys = [
   'easteregg_nobadguys_text_1',
   'easteregg_nobadguys_text_2',
@@ -27,6 +26,8 @@ const random_easteregg_nogoodguys = [
   'easteregg_nogoodguys_text_9',
   'easteregg_nogoodguys_text_10',
 ]
+
+//TODO FIX IT
 
 /* export const epicbattle = (gameState, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
   if (hasEpicBattle) {

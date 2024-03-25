@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken } from '../../utils'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
 
@@ -88,7 +88,7 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
     }
 
     const interaction = generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_swapped_cards', position1, position2],
+      private_message: ['interaction_swapped_cards', formatPlayerIdentifier([position1, position2])],
       icon: 'swap',
       uniqInformations: { swapped_cards: [position1, position2] },
     })

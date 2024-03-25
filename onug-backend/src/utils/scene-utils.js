@@ -15,6 +15,13 @@ export const containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId
 
 
 //NARRATION
+
+export const formatPlayerIdentifier = playerNumbers => {
+  const formattedPlayerNumbers = [...playerNumbers]
+  
+  return formattedPlayerNumbers.map(player => `identifier_${player.replace('_', '')}_text`);
+}
+
 export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
   const players = shufflePlayers(totalPlayers)
   const selectedPlayers = ~~(Math.random() * 3) + 1
@@ -196,6 +203,32 @@ export const getNonVampirePlayerNumbersByRoleIds = gameState => {
     const player = gameState.players[token]
     const cardPositions = gameState.card_positions
     if (!vampireIds.includes(player.card.player_role_id) && cardPositions[`player_${player.player_number}`].mark !== "mark_of_vampire") {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getGroobPlayerNumberByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (players[token].card.player_role_id === 47) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getZerbPlayerNumberByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (players[token].card.player_role_id === 54) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -408,40 +441,40 @@ export const getPlayerNeighborsByToken = (players, token) => {
   return neighbors
 }
 
-export const getPartOfBlobByToken = (players, token, randomInstruction) => {
+export const getPartOfGroupByToken = (players, token, randomInstruction) => {
   const tokens = Object.keys(players)
   const totalPlayers = tokens.length
-  const blobNumber = players[token].player_number
-  const partOfBlob = [`player_${blobNumber}`]
+  const groupHeadsNumber = players[token].player_number
+  const partOfGroup = [`player_${groupHeadsNumber}`]
 
   const side = randomInstruction.includes("left") ? "left" : randomInstruction.includes("right") ? "right" : "each"
   const amount = randomInstruction.includes("4") ? 4 : randomInstruction.includes("3") ? 3 : randomInstruction.includes("2") ? 2 : 1
 
-  const getPartOfBlobNumber = (index) => {
-    let partOfBlobNumber = blobNumber + index
-    if (partOfBlobNumber <= 0) {
-      partOfBlobNumber += totalPlayers
-    } else if (partOfBlobNumber > totalPlayers) {
-      partOfBlobNumber -= totalPlayers
+  const getPartOfGroupNumber = (index) => {
+    let partOfGroupNumber = groupHeadsNumber + index
+    if (partOfGroupNumber <= 0) {
+      partOfGroupNumber += totalPlayers
+    } else if (partOfGroupNumber > totalPlayers) {
+      partOfGroupNumber -= totalPlayers
     }
-    return partOfBlobNumber
+    return partOfGroupNumber
   }
 
   if (side === "each" || side === "left") {
     for (let i = 1; i <= amount; i++) {
-      const partOfBlobLeftSideNumber = getPartOfBlobNumber(-i)
-      partOfBlob.push(`player_${partOfBlobLeftSideNumber}`)
+      const partOfGroupLeftSideNumber = getPartOfGroupNumber(-i)
+      partOfGroup.push(`player_${partOfGroupLeftSideNumber}`)
     }
   }
 
   if (side === "each" || side === "right") {
     for (let i = 1; i <= amount; i++) {
-      const partOfBlobRightSideNumber = getPartOfBlobNumber(i)
-      partOfBlob.push(`player_${partOfBlobRightSideNumber}`)
+      const partOfGroupRightSideNumber = getPartOfGroupNumber(i)
+      partOfGroup.push(`player_${partOfGroupRightSideNumber}`)
     }
   }
 
-  return partOfBlob
+  return partOfGroup
 }
 
 export const getSelectablePlayersWithNoShield = (players, shielded_cards) => players.filter(player => !shielded_cards.includes(player))

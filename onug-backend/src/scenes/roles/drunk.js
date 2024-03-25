@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE, centerCardPositions } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumberWithMatchingToken } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -81,7 +81,7 @@ export const drunk_response = (gameState, token, selected_card_positions, title)
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_cards', selected_card_positions[0], currentPlayerNumber],
+    private_message: ['interaction_swapped_cards', formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])],
     icon: 'drunk',
     uniqInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
   })

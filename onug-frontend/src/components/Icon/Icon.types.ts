@@ -31,6 +31,7 @@ export type IconType =
   | 'fang'
   | 'fear'
   | 'friend'
+  | 'groobzerb'
   | 'id'
   | 'insomniac'
   | 'interaction'

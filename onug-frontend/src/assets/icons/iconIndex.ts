@@ -29,6 +29,7 @@ import FamilyIcon from './family.svg?react'
 import FangIcon from './fang.svg?react'
 import FearIcon from './fear.svg?react'
 import FriendIcon from './friend.svg?react'
+import GroobzerbIcon from './groobzerb.svg?react'
 import IdIcon from './id.svg?react'
 import InsomniacIcon from './insomniac.svg?react'
 import InteractionIcon from './interaction.svg?react'
@@ -99,6 +100,7 @@ export {
   FangIcon,
   FearIcon,
   FriendIcon,
+  GroobzerbIcon,
   IdIcon,
   InsomniacIcon,
   InteractionIcon,

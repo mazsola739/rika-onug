@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield, getCardIdsByPositions } from '../../utils'
+import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -70,7 +70,7 @@ export const mysticwolf_response = (gameState, token, selected_card_positions, t
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_saw_card', selected_card_positions[0]],
+    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
     icon: 'spy',
     showCards: viewCards,
     uniqInformations: { viewed_cards: [selected_card_positions[0]] },

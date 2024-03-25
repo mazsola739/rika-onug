@@ -1,6 +1,7 @@
 //@ts-check
 import { groobzerbIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils'
+import { getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getZerbPlayerNumberByRoleIds } from '../../utils'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const groobzerb = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
@@ -30,16 +31,47 @@ export const groobzerb = (gameState, title, hasDoppelganger) => {
 }
 
 export const groobzerb_interaction = (gameState, token, title) => {
-  return {}
-}
-
-export const groobzerb_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
-  const scene = []
-  
-  const interaction = {}
-  scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  const player = newGameState.players[token]
 
-  return newGameState
+  if (player.player_role_id === 47) {
+    const zerb = getZerbPlayerNumberByRoleIds(newGameState.players)
+
+    if (zerb.length >= 1) {
+      player.player_history = { ...player.player_history, scene_title: title, zerb }
+
+      return generateRoleInteraction(newGameState, token, {
+        private_message: ['interaction_zerbgroob'],
+        icon: 'groobzerb',
+        uniqInformations: { zerb },
+      })
+    } else {
+      player.player_history = { ...player.player_history, scene_title: title }
+
+      return generateRoleInteraction(newGameState, token, {
+        private_message: ['interaction_no_zerb'],
+        icon: 'groobzerb',
+      })
+    }
+  } else if (player.player_role_id === 54) {
+    const groob = getGroobPlayerNumberByRoleIds(newGameState.players)
+
+    if (groob.length >= 1) {
+      player.player_history = { ...player.player_history, scene_title: title, groob }
+
+      return generateRoleInteraction(newGameState, token, {
+        private_message: ['interaction_zerbgroob'],
+        icon: 'groobzerb',
+        uniqInformations: { groob },
+      })
+    } else {
+      player.player_history = { ...player.player_history, scene_title: title }
+      
+      return generateRoleInteraction(newGameState, token, {
+        private_message: ['interaction_no_groob'],
+        icon: 'groobzerb',
+      })
+    }
+  }
 }
+

@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds, getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithoutShield, getCardIdsByPositions } from '../../utils'
+import { getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds, getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithoutShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const squire = (gameState, title, hasDoppelganger) => {
@@ -72,7 +72,7 @@ export const squire_response = (gameState, token, answer, title) => { //TODO val
     }
   
     interaction = generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_saw_card', werewolves],
+      private_message: ['interaction_saw_card', formatPlayerIdentifier(werewolves)],
       icon: 'werewolves',
       showCards: viewCards,
       uniqInformations: { viewed_cards: werewolves },

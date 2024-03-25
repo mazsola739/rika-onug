@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE, goodGuyIds } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions } from '../../utils'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -90,16 +90,11 @@ export const nostradamus_response = (gameState, token, selected_card_positions, 
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0],
+    viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) :[ selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message : [
-      'interaction_saw_card',
-      selected_card_positions[0],
-      showCards.length >= 2 ? selected_card_positions[1] : '',
-      showCards.length === 3 ? selected_card_positions[2] : ''
-    ],
+    private_message : ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length >= 2 ? formatPlayerIdentifier(selected_card_positions)[1] : '', showCards.length === 3 ? formatPlayerIdentifier(selected_card_positions)[2] : '' ],
     icon: 'investigator',
     showCards: showCards,
     uniqInformations: { viewed_cards: showCards.length === 3 ? selected_card_positions.slice(0, 3) : showCards.length === 2 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },

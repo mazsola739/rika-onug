@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE, centerCardPositions } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken } from '../../utils'
+import { getAllPlayerTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -72,7 +72,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     }
 
     const interaction = generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_saw_card', selected_card_positions[0], 'interaction_must_one_any'],
+      private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
       icon: 'voodoo',
       selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
       showCards: showCards,
@@ -108,7 +108,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     }
 
     const interaction = generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_saw_card', 'interaction_swapped_cards', `${newGameState.players[token].player_history.selected_center_card}`, selected_card_positions[0]],
+      private_message: ['interaction_swapped_cards', formatPlayerIdentifier([`${newGameState.players[token].player_history.selected_center_card}`, selected_card_positions[0]])],
       icon: 'voodoo',
       uniqInformations: { swapped_cards: [newGameState.players[token].player_history.selected_center_card, selected_card_positions[0]] },
     })

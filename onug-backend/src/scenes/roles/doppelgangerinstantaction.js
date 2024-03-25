@@ -5,12 +5,10 @@ import { alphawolf_interaction, alphawolf_response } from './alphawolf'
 import { apprenticeseer_interaction, apprenticeseer_response } from './apprenticeseer'
 import { cupid_interaction, cupid_response } from './cupid'
 import { diseased_interaction, diseased_response } from './diseased'
-import { drpeeker_interaction, drpeeker_response } from './drpeeker'
 import { drunk_interaction, drunk_response } from './drunk'
 import { instigator_interaction, instigator_response } from './instigator'
 import { mysticwolf_interaction, mysticwolf_response } from './mysticwolf'
 import { paranormalinvestigator_interaction, paranormalinvestigator_response } from './paranormalinvestigator'
-import { rapscallion_interaction, rapscallion_response } from './rapscallion'
 import { robber_interaction, robber_response } from './robber'
 import { seer_interaction, seer_response } from './seer'
 import { sentinel_interaction, sentinel_response } from './sentinel'
@@ -117,8 +115,8 @@ export const doppelganger_instant_action_interaction = (gameState, token, title)
   if (new_role_id === 34) interaction = instigator_interaction(gameState, token, title)
   if (new_role_id === 55) interaction = thing_interaction(gameState, token, title)
   if (new_role_id === 56) interaction = seer_interaction(gameState, token, title)
-  if (new_role_id === 57) interaction = drpeeker_interaction(gameState, token, title)
-  if (new_role_id === 65) interaction = rapscallion_interaction(gameState, token, title)
+  if (new_role_id === 57) interaction = mysticwolf_interaction(gameState, token, title)
+  if (new_role_id === 65) interaction = apprenticeseer_interaction(gameState, token, title)
   if (new_role_id === 66) interaction = robber_interaction(gameState, token, title)
   if (new_role_id === 68) interaction = troublemaker_interaction(gameState, token, title)
   if (new_role_id === 69) interaction = temptress_interaction(gameState, token, title)
@@ -148,8 +146,8 @@ export const doppelganger_instant_action_response =  (gameState, token, selected
   if (new_role_id === 34) newGameState = instigator_response(gameState, token, selected_mark_positions, title)
   if (new_role_id === 55) newGameState = thing_response(gameState, token, selected_card_positions, title)
   if (new_role_id === 56) newGameState = seer_response(gameState, token, selected_card_positions, title)
-  if (new_role_id === 57) newGameState = drpeeker_response(gameState, token, selected_card_positions, title)
-  if (new_role_id === 65) newGameState = rapscallion_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 57) newGameState = mysticwolf_response(gameState, token, selected_card_positions, title)
+  if (new_role_id === 65) newGameState = apprenticeseer_response(gameState, token, selected_card_positions, title)
   if (new_role_id === 66) newGameState = robber_response(gameState, token, selected_card_positions, title)
   if (new_role_id === 68) newGameState = troublemaker_response(gameState, token, selected_card_positions, title)
   if (new_role_id === 69) newGameState = temptress_response(gameState, token, selected_card_positions, title)

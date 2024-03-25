@@ -4,14 +4,6 @@ import { sceneHandler } from './scene-handler'
 import script from '../data/script.json'
 import _ from 'lodash'
 
-const scriptOrder = [
-  script.twilight,
-  script.dusk,
-  script.night,
-  script.ripple,
-  script.day,
-].flatMap((x) => x)
-
 //TODO RIPPLE
 
 export const scene = gameState => {
@@ -20,18 +12,13 @@ export const scene = gameState => {
 
   let newGameState = { ...gameState }
   newGameState.scene = []
-  newGameState.actual_scene.scene_title =
-    scriptOrder[newGameState.actual_scene.scene_number].scene_title
+  newGameState.actual_scene.scene_title = script[newGameState.actual_scene.scene_number].scene_title
   
   const entries = sceneHandler(newGameState)
 
-  Object.entries(entries).forEach(([key, value]) => {
-    _.update(newGameState, key, () => value)
-  })
+  Object.entries(entries).forEach(([key, value]) => _.update(newGameState, key, () => value))
 
-  if (!entries["actual_scene.started"]) {
-    newGameState.actual_scene.started = false
-  }
+  if (!entries["actual_scene.started"]) newGameState.actual_scene.started = false
 
   if (newGameState.actual_scene) {
     newGameState = sceneHandler(newGameState)
@@ -43,7 +30,7 @@ export const scene = gameState => {
 
   logDebug(
     `__SCENE__ SCENE_NUMBER: ${newGameState.actual_scene.scene_number
-    } STARTED: ${newGameState.actual_scene.started} scene_title: ${scriptOrder[newGameState.actual_scene.scene_number].scene_title
+    } STARTED: ${newGameState.actual_scene.started} scene_title: ${script[newGameState.actual_scene.scene_number].scene_title
     }`
   )
 

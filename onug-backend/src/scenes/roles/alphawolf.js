@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -67,7 +67,7 @@ export const alphawolf_response = (gameState, token, selected_card_positions, ti
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_cards', selected_card_positions[0], 'center_wolf'],
+    private_message: ['interaction_swapped_cards', formatPlayerIdentifier([selected_card_positions[0], 'center_wolf'])],
     icon: 'claw',
     uniqInformations: { swapped_cards: [selected_card_positions[0], 'center_wolf'], claw: [selected_card_positions[0]] },
   })

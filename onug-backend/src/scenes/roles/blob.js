@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray, getPartOfBlobByToken } from '../../utils'
+import { getAllPlayerTokens, getRandomItemFromArray, getPartOfGroupByToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 const randomBlobKickoffText = [
@@ -33,7 +33,9 @@ export const blob = (gameState, title) => {
   const randomKickoff = getRandomItemFromArray(availableBlobOptions)
   const narration = [
     randomKickoff,
-    randomKickoff.includes('1p') ? 'blob_is_end_text' : 'blob_are_end_text',
+    randomKickoff.includes('1p') 
+      ? 'blob_is_end_text' 
+      : 'blob_are_end_text',
   ]
 
   tokens.forEach((token) => {
@@ -56,7 +58,7 @@ export const blob_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   const randomInstruction = newGameState.scene.narration[0]
   
-  const partOfBlob = getPartOfBlobByToken(newGameState.players, token, randomInstruction)
+  const partOfBlob = getPartOfGroupByToken(newGameState.players, token, randomInstruction)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,

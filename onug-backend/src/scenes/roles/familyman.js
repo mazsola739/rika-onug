@@ -1,6 +1,7 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils'
+import { getAllPlayerTokens, getPartOfGroupByToken, getRandomItemFromArray } from '../../utils'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 const randomFamilyman = [
   'familyman_1pleft_text',
@@ -19,11 +20,23 @@ export const familyman = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
+  const total_players = newGameState.total_players
+
+  let availableFamilyManOptions = []
+
+  if (total_players === 3) {
+    availableFamilyManOptions = randomFamilyman.filter(option => !option.includes('2eachside') || !option.includes('3') || !option.includes('4'))
+  }else if (total_players >= 4 && total_players < 5) {
+    availableFamilyManOptions = randomFamilyman.filter(option => !option.includes('2eachside') || !option.includes('4'))
+  }
+
+  const randomAvailableOption = getRandomItemFromArray(availableFamilyManOptions)
+
   const narration = [
     hasDoppelganger
       ? 'doppelganger_familyman_kickoff_text'
       : 'familyman_kickoff_text',
-    getRandomItemFromArray(randomFamilyman),
+    randomAvailableOption,
     randomFamilyman.includes('1p')
       ? 'familyman_is_end_text'
       : 'familyman_are_end_text',
@@ -46,16 +59,20 @@ export const familyman = (gameState, title, hasDoppelganger) => {
 }
 
 export const familyman_interaction = (gameState, token, title) => {
-  return {}
-}
-
-export const familyman_response = (gameState, token, selected_card_positions, title) => {
   const newGameState = { ...gameState }
-  const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
-  const interaction = {}
-  scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  const randomInstruction = newGameState.scene.narration[1]
+  
+  const partOfFamily = getPartOfGroupByToken(newGameState.players, token, randomInstruction)
 
-  return newGameState
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    family: partOfFamily,
+  }
+
+  return generateRoleInteraction(newGameState, token, {
+    private_message: ['interaction_part_of_family'],
+    icon: 'family',
+    uniqInformations: { family: partOfFamily, },
+  })
 }

@@ -13,6 +13,7 @@ export const sceneHandler = gameState => {
   const total_players = newGameState.total_players
 
   switch (scene_title) {
+    //TODO fix epic battle
     /*     case "EPIC_BATTLE": 
           if (conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players)) {
             newGameState.actual_scene.started = true

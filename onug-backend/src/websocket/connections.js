@@ -1,5 +1,5 @@
 //@ts-check
-import roomNames from '../data/room_names.json'
+import { roomNames } from '../constant'
 import { logDebug, logTrace } from '../log'
 
 export const websocketServerConnectionsPerRoom = {}

@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers } from '../../utils'
+import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -90,7 +90,7 @@ export const robber_response = (gameState, token, selected_card_positions, title
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_cards', 'interaction_saw_card', currentPlayerNumber],
+    private_message: ['interaction_swapped_cards', formatPlayerIdentifier([currentPlayerNumber, selected_card_positions[0]]), 'interaction_saw_card', formatPlayerIdentifier([currentPlayerNumber])],
     icon: 'robber',
     showCards: showCards,
     uniqInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], viewed_cards: [currentPlayerNumber] },

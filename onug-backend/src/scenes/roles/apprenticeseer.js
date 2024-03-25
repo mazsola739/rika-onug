@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE, centerCardPositions } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -66,7 +66,7 @@ export const apprenticeseer_response = (gameState, token, selected_card_position
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_saw_card', selected_card_positions[0]],
+    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
     icon: 'spy',
     showCards: viewCards,
     uniqInformations: { viewed_cards: [selected_card_positions[0]] },

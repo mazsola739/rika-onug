@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getAnySeerPlayerNumbersByRoleIds, getAnySeerPlayerNumbersByRoleIdsWithoutShield, getCardIdsByPositions } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getAnySeerPlayerNumbersByRoleIds, getAnySeerPlayerNumbersByRoleIdsWithoutShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const beholder = (gameState, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
@@ -78,7 +78,7 @@ export const beholder_response = (gameState, token, answer, title) => {
     }
   
     interaction = generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_saw_card', seers],
+      private_message: ['interaction_saw_card', formatPlayerIdentifier(seers)],
       icon: 'seer',
       showCards: viewCards,
       uniqInformations: { viewed_cards: seers },

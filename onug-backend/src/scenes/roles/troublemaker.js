@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -72,7 +72,7 @@ export const troublemaker_response = (gameState, token, selected_card_positions,
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_cards', position1, position2],
+    private_message: ['interaction_swapped_cards', formatPlayerIdentifier([position1, position2])],
     icon: 'swap',
     uniqInformations: { swapped_cards: [position1, position2] },
   })

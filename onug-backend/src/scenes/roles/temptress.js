@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getNonVillainPlayerNumbersByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getNonVillainPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -66,7 +66,7 @@ export const temptress_response = (gameState, token, selected_card_positions, ti
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_cards', selected_card_positions[0], 'center_villain'],
+    private_message: ['interaction_swapped_cards', formatPlayerIdentifier([selected_card_positions[0], 'center_villain'])],
     icon: 'evilhand',
     uniqInformations: { swapped_cards: [selected_card_positions[0], 'center_villain'], evilhand: [selected_card_positions[0]] },
   })

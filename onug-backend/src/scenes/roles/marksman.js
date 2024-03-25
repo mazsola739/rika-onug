@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getMarksByPositions } from '../../utils'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getMarksByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
 
@@ -85,7 +85,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
     let interaction = {}
     if (newGameState.players[token].player_history.viewed_marks) {
       interaction = generateRoleInteraction(newGameState, token, {
-        private_message: ['interaction_saw_card', selected_card_positions[0]],
+        private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
         icon: 'target',
         showCards: viewCards,
         uniqInformations: { viewed_cards: [selected_card_positions[0]] },
@@ -101,7 +101,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
       newGameState.players[token].player_history.selectable_mark_limit = { mark: 1 }
 
       interaction = generateRoleInteraction(newGameState, token, {
-        private_message: ['interaction_saw_card', selected_card_positions[0], 'interaction_must_one_any'],
+        private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
         icon: 'target',
         showCards: viewCards,
         selectableMarks: { selectable_marks: selectableMarks, selectable_mark_limit: { mark: 1 } },
