@@ -1,6 +1,11 @@
 //@ts-check
-import { alphaWolfId, copycatId, mirrorManId, specialCardsDefaultToAddLookupMap, supervillainIdsToCheck, temptressId, wolfIdsToCheck } from '../constant'
+import { alphaWolfId, copycatId, mirrorManId, supervillainIdsToCheck, temptressId, wolfIdsToCheck } from '../constant'
 import cards from '../data/cards.json'
+
+const specialCardsDefaultToAddLookupMap = {
+  17: 15,
+  69: 60,
+}
 
 export const filterCardsByExpansions = (selectedCards, selectedExpansions) => {
   return selectedCards.filter((cardId) => {

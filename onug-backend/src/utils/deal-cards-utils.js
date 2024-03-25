@@ -2,11 +2,11 @@
 import cards from '../data/cards.json'
 import { getCenterCardPositionByIndex, stubbedCards } from '../stub/populate-deal';
 import { logInfo } from '../log'
-import { alphaWolfId, markIds, supervillainIdsToCheck, temptressId, wolfIdsToCheck } from '../constant';
+import { alphaWolfId, hasMarkIds, supervillainIdsToCheck, temptressId, wolfIdsToCheck } from '../constant';
 
 const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(alphaWolfId)
 const hasTemptress = (selectedCardIds) => selectedCardIds.includes(temptressId)
-export const hasMark = (selectedCardIds) => markIds.some((id) => selectedCardIds.includes(id))
+export const hasMark = (selectedCardIds) => hasMarkIds.some((id) => selectedCardIds.includes(id))
 
 const getCardById = (card_id) => cards.find((card) => card.id === card_id)
 const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min

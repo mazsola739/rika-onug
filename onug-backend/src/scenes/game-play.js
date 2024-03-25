@@ -1,13 +1,13 @@
 //@ts-check
 import { readGameState, upsertRoomState } from '../repository'
 import { broadcast, websocketServerConnectionsPerRoom } from '../websocket/connections'
-import { HYDRATE_GAME_PLAY, STAGES } from '../constant'
+import { HYDRATE_GAME_PLAY, REDIRECT, STAGES } from '../constant'
 import { logErrorWithStack, logTrace } from '../log'
 import { scene } from './scene'
 
-
 //TODO set tickTime each narration different
-const tickTime = 20000
+//TODO pauseGamePlay
+const tickTime = 10000
 
 export const stopGamePlay = gameState => {
   gameState.game_stopped = true
@@ -119,21 +119,21 @@ const tick = async (room_id) => {
 
   await upsertRoomState(newGameState)
 
-  let nextScene
+  let broadcastMessage
   if (newGameState.game_stopped) {
-    nextScene = {
-      type: HYDRATE_GAME_PLAY, // TODO decide whether we need to redirect or stay on gameplay for vote
-      actual_scene: newGameState.actual_scene,
+    broadcastMessage = {
+      type: REDIRECT,
+      path: `/gamevote/${room_id}`,
     }
-    logTrace(`broadcast vote scene : ${JSON.stringify(nextScene)}`)
-    broadcast(room_id, nextScene)
+    logTrace(`broadcast vote scene : ${JSON.stringify(broadcastMessage)}`)
+    broadcast(room_id, broadcastMessage)
   } else {
-    nextScene = {
+    broadcastMessage = {
       type: HYDRATE_GAME_PLAY,
       actual_scene: newGameState.actual_scene,
     }
-    logTrace(`broadcast next scene : ${JSON.stringify(nextScene)}`)
-    broadcast(room_id, nextScene)
+    logTrace(`broadcast next scene : ${JSON.stringify(broadcastMessage)}`)
+    broadcast(room_id, broadcastMessage)
 
     setTimeout(() => tick(room_id), tickTime)
   }

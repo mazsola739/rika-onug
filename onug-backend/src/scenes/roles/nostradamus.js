@@ -1,5 +1,5 @@
 //@ts-check
-import { allCopyPlayerIds, SCENE, townIds } from '../../constant'
+import { allCopyPlayerIds, SCENE, goodGuyIds } from '../../constant'
 import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -59,13 +59,13 @@ export const nostradamus_response = (gameState, token, selected_card_positions, 
 
   let showCards = []
 
-  if (townIds.includes(playerOneCardId)) {
-    if (!townIds.includes(playerTwoCardId)) {
+  if (goodGuyIds.includes(playerOneCardId)) {
+    if (!goodGuyIds.includes(playerTwoCardId)) {
       showCards = [selectedCards[0], selectedCards[1]]
       newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[1]].card.role
       newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[1]].card.team
-    } else if (townIds.includes(playerTwoCardId)) {
-      if (!townIds.includes(playerThreeCardId)) {
+    } else if (goodGuyIds.includes(playerTwoCardId)) {
+      if (!goodGuyIds.includes(playerThreeCardId)) {
         showCards = selectedCards
         newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[2]].card.role
         newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[2]].card.team
@@ -77,7 +77,7 @@ export const nostradamus_response = (gameState, token, selected_card_positions, 
         }
       }
     }
-  } else if (!townIds.includes(playerOneCardId)) {
+  } else if (!goodGuyIds.includes(playerOneCardId)) {
     showCards = [selectedCards[0]]
     newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
     newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team

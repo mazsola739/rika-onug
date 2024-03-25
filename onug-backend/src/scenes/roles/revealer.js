@@ -1,5 +1,5 @@
 //@ts-check
-import { copyPlayerIds, SCENE, townIds } from '../../constant'
+import { copyPlayerIds, SCENE, goodGuyIds } from '../../constant'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -64,7 +64,7 @@ export const revealer_response = (gameState, token, selected_card_positions, tit
 
   const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
   const revealedCard = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
-  const isTown = revealedCard.every((card) => townIds.includes(Object.values(card)[0]))
+  const isTown = revealedCard.every((card) => goodGuyIds.includes(Object.values(card)[0]))
 
   if (newGameState.players[token].card?.original_id === selectedPositionCard.id) {
     newGameState.players[token].card.player_card_id = 0

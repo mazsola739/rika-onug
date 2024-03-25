@@ -1,7 +1,6 @@
 //@ts-check
 import { getPlayerNumberWithMatchingToken, isActivePlayersCardsFlipped, isPlayersCardsFlipped } from "../utils";
 
-
 export const updatePlayerCard = (gameState, token) => {
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gameState.players, token)
     const player = gameState.players[token]

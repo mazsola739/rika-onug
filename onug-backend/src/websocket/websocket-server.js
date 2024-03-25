@@ -2,7 +2,7 @@
 import WebSocket from 'ws'
 import { logTrace, logError, logErrorWithStack } from '../log'
 
-import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_GAME_TABLE, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME_PLAY, STOP_GAME, RELOAD, SCENE } from '../constant'
+import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_GAME_TABLE, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME_PLAY, STOP_GAME, RELOAD, SCENE, ARRIVE_GAME_VOTE } from '../constant'
 
 import { hydrateRoom } from './hydrate-room'
 import { reset } from './reset'
@@ -19,6 +19,7 @@ import { hydrateGamePlay } from './hydrate-game-play'
 import { stopGame } from './stop-game'
 import { reload } from './reload'
 import { interaction } from './interaction'
+import { hydrateGameVote } from './hydrate-game-vote';
 
 export const websocketServer = (port) => {
   try {
@@ -51,6 +52,7 @@ export const websocketServer = (port) => {
         if (message.type === ARRIVE_GAME_PLAY)  return hydrateGamePlay(ws, message)
         if (message.type === STOP_GAME)         return stopGame(message)
         if (message.type === SCENE)             return interaction(ws, message)
+        if (message.type === ARRIVE_GAME_VOTE)  return hydrateGameVote(ws, message)
       })
     })
   } catch (error) {

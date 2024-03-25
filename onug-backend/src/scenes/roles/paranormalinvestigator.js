@@ -1,5 +1,5 @@
 //@ts-check
-import { copyPlayerIds, SCENE, townIds } from '../../constant'
+import { copyPlayerIds, SCENE, goodGuyIds } from '../../constant'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -56,8 +56,8 @@ export const paranormalinvestigator_response = (gameState, token, selected_card_
 
   let showCards = []
 
-  if (townIds.includes(playerOneCardId)) {
-    if (!townIds.includes(playerTwoCardId)) {
+  if (goodGuyIds.includes(playerOneCardId)) {
+    if (!goodGuyIds.includes(playerTwoCardId)) {
       showCards = selectedCards
       newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[1]].card.role
       newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[1]].card.team
@@ -68,7 +68,7 @@ export const paranormalinvestigator_response = (gameState, token, selected_card_
       }
     }
   } else {
-    if (!townIds.includes(playerOneCardId)) {
+    if (!goodGuyIds.includes(playerOneCardId)) {
       showCards = [selectedCards[0]]
       newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
       newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team

@@ -5,7 +5,7 @@ import { StyledTimer } from './Timer.styles'
 import { TimerProps } from './Timer.types'
 
 export const Timer: React.FC<TimerProps> = observer(
-  ({ startingTime, actionTime = 20000 }) => {
+  ({ startingTime, actionTime = 10000 }) => {
     const [remainingTime, setRemainingTime] = useState(0)
 
     //TODO rethink

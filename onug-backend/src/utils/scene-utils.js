@@ -1,5 +1,5 @@
 
-import { alienIds, allCopyPlayerIds, masonIds, superVillainsIds, vampireIds, werewolvesAndDreamWolfIds, werewolvesIds } from '../constant'
+import { alienIds, allCopyPlayerIds, masonIds, supervillainIds, vampireIds, wolfIds, werewolvesIds } from '../constant'
 import artifacts from '../data/artifacts.json'
 import _ from 'lodash'
 
@@ -64,7 +64,7 @@ export const getNonWerewolfPlayerNumbersByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (!werewolvesAndDreamWolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
+    if (!wolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -77,7 +77,7 @@ export const getVillainPlayerNumbersByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (superVillainsIds.includes(player.card.player_role_id)) {
+    if (supervillainIds.includes(player.card.player_role_id)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -90,7 +90,7 @@ export const getNonVillainPlayerNumbersByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (!superVillainsIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
+    if (!supervillainIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -273,7 +273,7 @@ export const getWerewolfAndDreamwolfPlayerNumbersByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (werewolvesAndDreamWolfIds.includes(player.card.player_role_id)) {
+    if (wolfIds.includes(player.card.player_role_id)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -286,7 +286,7 @@ export const getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithoutShield = player
 
   for (const token in players) {
     const player = players[token]
-    if (werewolvesAndDreamWolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
+    if (wolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${player.player_number}`)
     }
   }

@@ -1,5 +1,5 @@
 //@ts-check
-import { superVillainsIds, allCopyPlayerIds, SCENE } from '../../constant'
+import { supervillainIds, allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens } from '../../utils'
 
 export const supervillains = (gameState, title) => {
@@ -13,7 +13,7 @@ export const supervillains = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (superVillainsIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
+    if (supervillainIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
       interaction = supervillain_interaction(newGameState, token, title)
     }
 

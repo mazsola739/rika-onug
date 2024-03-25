@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { useState, useCallback } from 'react'
 import { StyledGod, LeftSide, GameStatesContainer, GodTitle, FormContainer, InputContainer, Label, Input, ButtonsContainer, Button, WSContainer, MetaContainer, RightSide, ResponseContainer, ResponsePre } from './God.styles'
 
+//TODO hack mode (send message to server)
 const GAMESTATES = 'GameStates'
 const LABEL_ROOM_ID = 'room_id:'
 const LABEL_TOKEN = 'token:'

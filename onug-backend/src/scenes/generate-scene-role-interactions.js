@@ -2,7 +2,6 @@
 import { getKeys, concatArraysWithUniqueElements } from '../utils'
 import { updatePlayerCard } from './update-player-card'
 
-
 export const generateRoleInteraction = ( newGameState, token, {
   private_message,
   icon,

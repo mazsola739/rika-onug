@@ -1,12 +1,12 @@
 //@ts-check
-import { vampireIds, alienIds, groobAndZerbIds, superVillainsIds, werewolvesIds, masonIds, goodGuyIds, badGuysIds, doppelgangerInstantActionsIds, seerIds, hasMarkIds, epicVampireIds, epicAlienIds, epicWerewolfIds, epicVillainIds } from '../constant'
+import { vampireIds, alienIds, groobzerbIds, supervillainIds, werewolvesIds, masonIds, goodGuyIds, badGuysIds, doppelgangerInstantActionsIds, seerIds, hasMarkIds, vampireIds, alienIds, wolfIds, supervillainIds } from '../constant'
 
 export const hasEpicBattle = (selected_cards) => {
   const battles = {
-    vampire: epicVampireIds.some(id => selected_cards.includes(id)),
-    alien: epicAlienIds.some(id => selected_cards.includes(id)),
-    werewolf: epicWerewolfIds.some(id => selected_cards.includes(id)),
-    villain: epicVillainIds.some(id => selected_cards.includes(id))
+    vampire: vampireIds.some(id => selected_cards.includes(id)),
+    alien: alienIds.some(id => selected_cards.includes(id)),
+    werewolf: wolfIds.some(id => selected_cards.includes(id)),
+    villain: supervillainIds.some(id => selected_cards.includes(id))
   }
   const trueCount = Object.values(battles).filter(val => val).length
 
@@ -32,10 +32,10 @@ export const hasApprenticeAssassin = (selected_cards) => selected_cards.includes
 export const hasSentinel = (selected_cards) => selected_cards.includes(25)
 export const hasAnyAlien = (selected_cards) => alienIds.some((id) => selected_cards.includes(id))
 export const hasCow = (selected_cards) => selected_cards.includes(45)
-export const hasGroobAndZerb = (selected_cards) => groobAndZerbIds.every((cardId) => selected_cards.includes(cardId))
+export const hasGroobAndZerb = (selected_cards) => groobzerbIds.every((cardId) => selected_cards.includes(cardId))
 export const hasLeader = (selected_cards) => selected_cards.includes(48)
 export const hasBodySnatcher = (selected_cards) => selected_cards.includes(74)
-export const hasAnySuperVillains = (selected_cards) => superVillainsIds.some((id) => selected_cards.includes(id))
+export const hasAnySuperVillains = (selected_cards) => supervillainIds.some((id) => selected_cards.includes(id))
 export const hasTemptress = (selected_cards) => selected_cards.includes(69)
 export const hasDrPeeker = (selected_cards) => selected_cards.includes(57)
 export const hasRapscallion = (selected_cards) => selected_cards.includes(65)
