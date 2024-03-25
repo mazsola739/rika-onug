@@ -14,7 +14,7 @@ const bodysnatcherKeys = [
   'identifier_anyodd_text',
   'identifier_leftneighbor_text',
   'identifier_rightneighbor_text',
-  'identifier_bothneighbors_text',
+  'identifier_oneneighbor_text',
 ]
 
 const randomBodysnatcherInstruction = getRandomItemFromArray(randomBodysnatcherInstructions)
@@ -81,11 +81,11 @@ export const bodysnatcher_interaction = (gameState, token, title, randomBodysnat
         break
       case 'identifier_leftneighbor_text':
       case 'identifier_rightneighbor_text':
-      case 'identifier_bothneighbors_text':
-        const direction = bodysnatcherKey.replace('identifier_', '').replace('_text', '')
-        selectablePlayers = getPlayerNeighborsByToken(newGameState.players, direction)
+      case 'identifier_oneneighbor_text':
+        const direction = bodysnatcherKey.include('left') ? 'left' : bodysnatcherKey.include('right') ? 'right' : 'both'
+        selectablePlayers = getPlayerNeighborsByToken(newGameState.players, direction, 1)
         break
-      default:
+      case 'identifier_any_text':
         selectablePlayers = getAnyOtherPlayersByToken(newGameState.players)
         break
     }

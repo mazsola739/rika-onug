@@ -456,25 +456,57 @@ export const getAnyEvenOrOddPlayers = (players, evenOrOdd) => {
   return result
 }
 
-export const getPlayerNeighborsByToken = (players, token, direction) => {
+export const getAnyHigherOrLowerPlayerNumbersByToken = (players, token, higherOrLower) => {
+  const playerNumber = players[token].player_number
+  const result = {}
+
+  if (higherOrLower === 'lower') {
+    for (let i = playerNumber - 1; i >= 1; i--) {
+      result[i] = players[Object.keys(players).find(key => players[key].player_number === i)]
+    }
+  } else if (higherOrLower === 'higher') {
+    const totalPlayers = Object.keys(players).length
+    for (let i = playerNumber + 1; i <= totalPlayers; i++) {
+      result[i] = players[Object.keys(players).find(key => players[key].player_number === i)]
+    }
+  }
+
+  return result
+}
+
+export const getPlayerNeighborsByToken = (players, token, direction, amount) => {
   const tokens = Object.keys(players)
   const playerCount = tokens.length
   const playerNumber = players[token].player_number
   const neighbors = {}
 
   if (direction === 'left' || direction === 'both') {
-    const prevNeighborNumber = playerNumber === 1 ? playerCount : playerNumber - 1
-    const prevNeighborId = Object.keys(players).find(key => players[key].player_number === prevNeighborNumber)
-    if (prevNeighborId) {
-      neighbors['left'] = players[prevNeighborId]
+    let prevNeighborNumber = playerNumber - 1
+    while (prevNeighborNumber !== playerNumber - amount && prevNeighborNumber !== playerNumber) {
+      if (prevNeighborNumber < 1) {
+        prevNeighborNumber = playerCount
+      }
+      const prevNeighborId = Object.keys(players).find(key => players[key].player_number === prevNeighborNumber)
+      if (prevNeighborId) {
+        neighbors['left'] = neighbors['left'] || []
+        neighbors['left'].push(players[prevNeighborId])
+      }
+      prevNeighborNumber--
     }
   }
 
   if (direction === 'right' || direction === 'both') {
-    const nextNeighborNumber = playerNumber === playerCount ? 1 : playerNumber + 1
-    const nextNeighborId = Object.keys(players).find(key => players[key].player_number === nextNeighborNumber)
-    if (nextNeighborId) {
-      neighbors['right'] = players[nextNeighborId]
+    let nextNeighborNumber = playerNumber + 1
+    while (nextNeighborNumber !== playerNumber + amount && nextNeighborNumber !== playerNumber) {
+      if (nextNeighborNumber > playerCount) {
+        nextNeighborNumber = 1
+      }
+      const nextNeighborId = Object.keys(players).find(key => players[key].player_number === nextNeighborNumber)
+      if (nextNeighborId) {
+        neighbors['right'] = neighbors['right'] || []
+        neighbors['right'].push(players[nextNeighborId])
+      }
+      nextNeighborNumber++
     }
   }
 
