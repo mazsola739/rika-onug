@@ -1,7 +1,8 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, getAllPlayerTokens, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken } from '../../utils'
+import { getRandomItemFromArray, getAllPlayerTokens, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
+import { isValidCardSelection } from '../validate-response-data'
 
 const randomMorticianInstructions = ['mortician_1card_text', 'mortician_2cards_text']
 const morticianKeys = [
@@ -53,13 +54,13 @@ export const mortician_interaction = (gameState, token, title, randomMorticianIn
       newGameState.players[token].player_history = {
         ...newGameState.players[token].player_history,
         scene_title: title,
-        selectable_cards: currentPlayerNumber, selectable_card_limit: { player: 1, center: 0 },
+        selectable_cards: [currentPlayerNumber], selectable_card_limit: { player: 1, center: 0 },
       }
 
       return generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_may_look_yourself'],
         icon: 'coffin',
-        selectableCards: { selectable_cards: currentPlayerNumber, selectable_card_limit: { player: 1, center: 0 } },
+        selectableCards: { selectable_cards: [currentPlayerNumber], selectable_card_limit: { player: 1, center: 0 } },
       })
     } else {
       newGameState.players[token].player_history = {
@@ -78,25 +79,67 @@ export const mortician_interaction = (gameState, token, title, randomMorticianIn
     const direction = morticianKey.includes('left') ? 'left' : morticianKey.includes('right') ? 'right' : 'both'
     const selectablePlayers = getPlayerNeighborsByToken(newGameState.players, direction, 1)
     const selectablePlayerNumbers = getSelectablePlayersWithNoShield(selectablePlayers)
+    const limit = randomMorticianInstruction.includes('1') ? 1 : 2
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: randomMorticianInstruction.includes('1') ? 1 : 2, center: 0 },
+      selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 },
     }
 
     return generateRoleInteraction(newGameState, token, {
-      private_message: [''],
+      private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : `interaction_may_${morticianKey.replace('identifier_', '').replace('_text', '')}`],
       icon: 'coffin',
-      selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: randomMorticianInstruction.includes('1') ? 1 : 2, center: 0 }, }
+      selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 }, }
     })
   }
 }
 
 export const mortician_response = (gameState, token, selected_card_positions, title) => {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+    return gameState
+  }
+
   const newGameState = { ...gameState }
   const scene = []
-  const interaction = {}
+
+  const cardPositions = selected_card_positions.slice(0, gameState.players[token].player_history.selectable_card_limit.player)
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
+  const viewCards = getCardIdsByPositions(newGameState.card_positions, cardPositions)
+
+  const shouldResetPlayerCardId = () => {
+    if (viewCards.some((card) => newGameState.players[token].card.player_original_id === card.id)) {
+      return true
+    }
+    if (cardPositions.length === 1 && currentPlayerNumber === cardPositions[0] && viewCards[0].card.id === newGameState.players[token].card.player_original_id) {
+      return false
+    }
+    return true
+  }
+
+  if (shouldResetPlayerCardId()) {
+    newGameState.players[token].card.player_card_id = 0
+  } else {
+    newGameState.players[token].card.player_card_id = newGameState.card_positions[currentPlayerNumber].card.id
+    newGameState.players[token].card.player_team = newGameState.card_positions[currentPlayerNumber].card.team
+  }
+
+  newGameState.players[token].card_or_mark_action = true
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    card_or_mark_action: true,
+    viewed_cards: cardPositions,
+  }
+
+  const interaction = generateRoleInteraction(newGameState, token, {
+    private_message: ['interaction_saw_card', formatPlayerIdentifier(cardPositions)],
+    icon: 'coffin',
+    showCards: viewCards,
+    uniqInformations: { viewed_cards: cardPositions },
+  })
+
   scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 

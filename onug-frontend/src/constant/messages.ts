@@ -17,10 +17,10 @@ export const interaction_must_three_any = 'You must choose any three players (in
 
 //neighbor
 export const interaction_must_one_neighbor = 'You must choose any player of your neighbors'
-export const interaction_may_one_neighbor = 'You may choose any player of your neighbors'
-export const interaction_may_left_neighbor = 'You may choose your left neighbors'
-export const interaction_may_right_neighbor = 'You may choose your right neighbors'
-export const interaction_may_both_neighbors = 'You may choose both your neighbors'
+export const interaction_may_oneneighbor = 'You may choose any player of your neighbors'
+export const interaction_may_leftneighbor = 'You may choose your left neighbors'
+export const interaction_may_rightneighbor = 'You may choose your right neighbors'
+export const interaction_may_bothneighbors = 'You may choose both your neighbors'
 
 //any specific player
 export const interaction_werewolves = 'Look for Werewolves'
