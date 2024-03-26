@@ -40,7 +40,7 @@ export const robber_interaction = (gameState, token, title) => {
 
     return generateRoleInteraction(newGameState, token, {
       private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any_other'],
-      icon: 'robber',
+      icon: title === 'ROBBER' ? 'robber' : 'dog',
       selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
     })
   } else {
@@ -90,7 +90,7 @@ export const robber_response = (gameState, token, selected_card_positions, title
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
-    icon: 'robber',
+    icon: title === 'ROBBER' ? 'robber' : 'dog',
     showCards: showCards,
     uniqInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], viewed_cards: [currentPlayerNumber] },
   })

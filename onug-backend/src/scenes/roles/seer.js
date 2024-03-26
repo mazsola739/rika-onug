@@ -81,7 +81,7 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
-    icon: 'seer',
+    icon: title === 'seer' ? 'seer' : 'detector',
     uniqInformations: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
   })
 

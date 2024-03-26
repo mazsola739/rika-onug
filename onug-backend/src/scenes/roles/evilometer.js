@@ -44,7 +44,7 @@ export const evilometer_interaction = (gameState, token, title) => {
 
   return generateRoleInteraction(newGameState, token, {
     private_message:  [neighborIsSuperVillain ? 'interaction_got_tapped_by_villain' : 'interaction_no_tap'],
-    icon: 'tap',
+    icon: 'aerial',
     uniqInformations: { super_villain_neighbor: neighborIsSuperVillain }
   })
 }

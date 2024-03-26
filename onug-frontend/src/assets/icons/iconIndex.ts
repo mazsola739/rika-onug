@@ -1,4 +1,4 @@
-import React from 'react'
+import AerialIcon from './aerial.svg?react'
 import AlienIcon from './alien.svg?react'
 import AlienhandIcon from './alienhand.svg?react'
 import ArtifactIcon from './artifact.svg?react'
@@ -17,7 +17,9 @@ import ConnectingIcon from './connecting.svg?react'
 import CopyIcon from './copy.svg?react'
 import CowIcon from './cow.svg?react'
 import CupidIcon from './cupid.svg?react'
+import DetectorIcon from './detector.svg?react'
 import DiseasedIcon from './diseased.svg?react'
+import DogIcon from './dog.svg?react'
 import DreamwolfIcon from './dreamwolf.svg?react'
 import DressIcon from './dress.svg?react'
 import DrunkIcon from './drunk.svg?react'
@@ -29,6 +31,7 @@ import FamilyIcon from './family.svg?react'
 import FangIcon from './fang.svg?react'
 import FearIcon from './fear.svg?react'
 import FriendIcon from './friend.svg?react'
+import GremlinIcon from './gremlin.svg?react'
 import GroobzerbIcon from './groobzerb.svg?react'
 import IdIcon from './id.svg?react'
 import InsomniacIcon from './insomniac.svg?react'
@@ -42,11 +45,14 @@ import MarkIcon from './mark.svg?react'
 import MasonIcon from './mason.svg?react'
 import MorticianIcon from './mortician.svg?react'
 import MuteIcon from './mute.svg?react'
+import MysticIcon from './mute.svg?react'
 import NiceIcon from './nice.svg?react'
 import NightIcon from './night.svg?react'
 import NostradamusIcon from './nostradamus.svg?react'
 import OpenIcon from './open.svg?react'
 import OracleIcon from './oracle.svg?react'
+import PeekerIcon from './peeker.svg?react'
+import PrankIcon from './prank.svg?react'
 import PrettyIcon from './pretty.svg?react'
 import RobberIcon from './robber.svg?react'
 import SecretIcon from './secret.svg?react'
@@ -72,7 +78,9 @@ import WerewolfIcon from './werewolf.svg?react'
 import WitchIcon from './witch.svg?react'
 
 export {
+  AerialIcon,
   AlienIcon,
+  AlienhandIcon,
   ArtifactIcon,
   AssassinIcon,
   AwesomeIcon,
@@ -89,17 +97,21 @@ export {
   CopyIcon,
   CowIcon,
   CupidIcon,
+  DetectorIcon,
   DiseasedIcon,
+  DogIcon,
   DreamwolfIcon,
   DressIcon,
   DrunkIcon,
   EmpathIcon,
   EvilIcon,
+  EvilhandIcon,
   EyeIcon,
   FamilyIcon,
   FangIcon,
   FearIcon,
   FriendIcon,
+  GremlinIcon,
   GroobzerbIcon,
   IdIcon,
   InsomniacIcon,
@@ -113,13 +125,14 @@ export {
   MasonIcon,
   MorticianIcon,
   MuteIcon,
-  AlienhandIcon,
-  EvilhandIcon,
+  MysticIcon,
   NiceIcon,
   NightIcon,
   NostradamusIcon,
   OpenIcon,
   OracleIcon,
+  PeekerIcon,
+  PrankIcon,
   PrettyIcon,
   RobberIcon,
   SecretIcon,

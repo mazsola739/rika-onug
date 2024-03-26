@@ -1,4 +1,4 @@
-import { AlienIcon, AlienhandIcon, ArtifactIcon, AssassinIcon, AwesomeIcon, BabyAlienIcon, BatIcon, BlindIcon, BlobIcon, BulbIcon, ClarityIcon, ClawIcon, ClosedIcon, ClosingIcon, ConnectingIcon, CopyIcon, CowIcon, CupidIcon, DiseasedIcon, DreamwolfIcon, DressIcon, DrunkIcon, EmpathIcon, EvilIcon, EvilhandIcon, EyeIcon, FamilyIcon, FangIcon, FearIcon, FriendIcon, GroobzerbIcon, IdIcon, InsomniacIcon, InteractionIcon, InvestigatorIcon, JestIcon, LikeIcon, LoverIcon, MadIcon, MarkIcon, MasonIcon, MorticianIcon, MuteIcon, NiceIcon, NightIcon, NostradamusIcon, OpenIcon, OracleIcon, PrettyIcon, RobberIcon, SecretIcon, SeerIcon, SelectIcon, SentinelIcon, ShieldIcon, SmellIcon, SpyIcon, SusIcon, SwapIcon, TannerIcon, TapIcon, TargetIcon, TraitorIcon, TrophyIcon, UfoIcon, UninstantiatedIcon, VampireIcon, VillainIcon, VoodooIcon, WerewolfIcon, WitchIcon } from 'assets'
+import { AerialIcon, AlienIcon, AlienhandIcon, ArtifactIcon, AssassinIcon, AwesomeIcon, BabyAlienIcon, BatIcon, BlindIcon, BlobIcon, BulbIcon, ClarityIcon, ClawIcon, ClosedIcon, ClosingIcon, ConnectingIcon, CopyIcon, CowIcon, CupidIcon, DetectorIcon, DiseasedIcon, DogIcon, DreamwolfIcon, DressIcon, DrunkIcon, EmpathIcon, EvilIcon, EvilhandIcon, EyeIcon, FamilyIcon, FangIcon, FearIcon, FriendIcon, GremlinIcon, GroobzerbIcon, IdIcon, InsomniacIcon, InteractionIcon, InvestigatorIcon, JestIcon, LikeIcon, LoverIcon, MadIcon, MarkIcon, MasonIcon, MorticianIcon, MuteIcon, MysticIcon, NiceIcon, NightIcon, NostradamusIcon, OpenIcon, OracleIcon, PeekerIcon, PrankIcon, PrettyIcon, RobberIcon, SecretIcon, SeerIcon, SelectIcon, SentinelIcon, ShieldIcon, SmellIcon, SpyIcon, SusIcon, SwapIcon, TannerIcon, TapIcon, TargetIcon, TraitorIcon, TrophyIcon, UfoIcon, UninstantiatedIcon, VampireIcon, VillainIcon, VoodooIcon, WerewolfIcon, WitchIcon } from 'assets'
 import { StyledIcon } from './Icon.styles'
 import { IconType, IconProps } from './Icon.types'
 
@@ -6,6 +6,7 @@ export const Icons: Record<
   IconType,
   React.FC<React.SVGProps<SVGSVGElement>>
 > = {
+  aerial: AerialIcon,
   alien: AlienIcon,
   alienhand: AlienhandIcon,
   artifact: ArtifactIcon,
@@ -24,7 +25,9 @@ export const Icons: Record<
   copy: CopyIcon,
   cow: CowIcon,
   cupid: CupidIcon,
+  detector: DetectorIcon,
   diseased: DiseasedIcon,
+  dog: DogIcon,
   dreamwolf: DreamwolfIcon,
   dress: DressIcon,
   drunk: DrunkIcon,
@@ -36,6 +39,7 @@ export const Icons: Record<
   fang: FangIcon,
   fear: FearIcon,
   friend: FriendIcon,
+  gremlin: GremlinIcon,
   groobzerb: GroobzerbIcon,
   id: IdIcon,
   insomniac: InsomniacIcon,
@@ -49,11 +53,14 @@ export const Icons: Record<
   mason: MasonIcon,
   mortician: MorticianIcon,
   mute: MuteIcon,
+  mystic: MysticIcon,
   nice: NiceIcon,
   night: NightIcon,
   nostradamus: NostradamusIcon,
   open: OpenIcon,
   oracle: OracleIcon,
+  peeker: PeekerIcon,
+  prank: PrankIcon,
   pretty: PrettyIcon,
   robber: RobberIcon,
   secret: SecretIcon,

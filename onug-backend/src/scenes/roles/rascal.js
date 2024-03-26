@@ -1,7 +1,8 @@
 //@ts-check
 import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getSelectableOtherPlayerNumbersWithoutShield } from '../../utils'
+import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getSelectableOtherPlayerNumbersWithoutShield, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
+import { isValidCardSelection } from '../validate-response-data'
 import { villageidiot_interaction } from './villageidiot'
 
 const randomRascalInstructions = [
@@ -163,9 +164,9 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
   const selectableOnePlayers = getSelectableOnePlayers(randomAnyOne)
 
   if (randomRascalInstruction === 'rascal_troublemaker_text') {
-    selectableCards = getSelectablePlayersWithNoShield(selectableTwoPlayers)
-    limit = 2
-    privateMessage = [selectableCards.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_two_any']
+    selectableCards = getSelectablePlayersWithNoShield(selectableTwoPlayers) <= 2 ? [] : getSelectablePlayersWithNoShield(selectableTwoPlayers)
+    limit = selectableCards.length <= 2 ? 0 : 2
+    privateMessage = [selectableCards.length <= 2 ? 'interaction_no_selectable_player' : 'interaction_may_two_any']
   } else if (randomRascalInstruction === 'rascal_drunk_text' || randomRascalInstruction === 'rascal_robber_text') {
     if (newGameState.players[token].shield) {
       newGameState.players[token].player_history = {
@@ -194,26 +195,173 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
     selectableLimit = { player: limit , center: 0 }
   }
 
+  const random = randomRascalInstruction.replace('rascal_', '').replace('_text', '')
+
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     selectable_cards: selectableCards, selectable_card_limit: selectableLimit,
+    random,
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: privateMessage,
-    icon: 'drunk',
+    icon: 'prank',
     selectableCards: { selectable_cards: selectableCards, selectable_card_limit: selectableLimit },
+    uniqInformations: { random },
   })
 }
 
 export const rascal_response = (gameState, token, selected_card_positions, title) => {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+    return gameState
+  }
+
   const newGameState = { ...gameState }
   const scene = []
 
-  const interaction = {}
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
+  const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber].card }
+
+  let interaction
+
+  switch (newGameState.players[token].player_history.random) {
+    case 'troublemaker':
+      const [position1, position2] = selected_card_positions.slice(0, 2)
+
+      const playerOneCard = { ...newGameState.card_positions[position1].card }
+      const playerTwoCard = { ...newGameState.card_positions[position2].card }
+
+      newGameState.card_positions[position1].card = playerTwoCard
+      newGameState.card_positions[position2].card = playerOneCard
+
+      newGameState.players[token].card_or_mark_action = true
+
+      if (currentPlayerNumber === position1 || currentPlayerNumber === position2) {
+        newGameState.players[token].card.player_card_id = 0
+      }
+
+      newGameState.players[token].player_history = {
+        ...newGameState.players[token].player_history,
+        scene_title: title,
+        card_or_mark_action: true,
+        swapped_cards: [position1, position2],
+      }
+
+      const messageIdentifiers = formatPlayerIdentifier([position1, position2])
+
+      interaction = generateRoleInteraction(newGameState, token, {
+        private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+        icon: 'prank',
+        uniqInformations: { swapped_cards: [position1, position2] },
+      })
+
+      break
+
+    case 'witch':
+      if (!newGameState.players[token].player_history.witch_answer) {
+        const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
+        const selectedCardPosition = newGameState.card_positions[selected_card_positions[0]].card
+
+        if (newGameState.players[token].card.player_original_id === selectedCardPosition.id) {
+          newGameState.players[token].card.player_card_id = 0
+        }
+
+        const allPlayerTokens = getAllPlayerTokens(newGameState.players)
+        const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
+        const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
+
+        newGameState.players[token].player_history = {
+          ...newGameState.players[token].player_history,
+          scene_title: title,
+          selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 },
+          viewed_cards: [selected_card_positions[0]], selected_card: selected_card_positions[0],
+          witch_answer: true,
+        }
+
+        interaction = generateRoleInteraction(newGameState, token, {
+          private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
+          icon: 'prank',
+          selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
+          showCards: showCards,
+          uniqInformations: { viewed_cards: [selected_card_positions[0]], witch_answer: true },
+        })
+
+      } else if (newGameState.players[token].player_history.witch_answer) {
+        const firstSelectedPositionCard = newGameState.card_positions[newGameState.players[token].player_history.selected_card].card
+        const secondSelectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
+
+        const selectedCenterCard = { ...firstSelectedPositionCard }
+        const selectedPlayerCard = { ...secondSelectedPositionCard }
+        newGameState.card_positions[newGameState.players[token].player_history.selected_card].card = selectedPlayerCard
+        newGameState.card_positions[selected_card_positions[0]].card = selectedCenterCard
+
+        if (selected_card_positions[0] === currentPlayerNumber[0]) {
+          const currentCard = newGameState.card_positions[currentPlayerNumber[0]].card
+          newGameState.players[token].card.player_card_id = currentCard.id
+          newGameState.players[token].card.player_team = currentCard.team
+        }
+
+        newGameState.players[token].player_history = {
+          ...newGameState.players[token].player_history,
+          scene_title: title,
+          swapped_cards: [newGameState.players[token].player_history.selected_card, selected_card_positions[0]],
+        }
+
+        const messageIdentifiers = formatPlayerIdentifier([`${newGameState.players[token].player_history.selected_card}`, selected_card_positions[0]])
+
+        interaction = generateRoleInteraction(newGameState, token, {
+          private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+          icon: 'prank',
+          uniqInformations: { swapped_cards: [newGameState.players[token].player_history.selected_card, selected_card_positions[0]] },
+        })
+
+      }
+      break
+
+    case 'drunk':
+    case 'robber':
+      const selectedPosition = selected_card_positions[0]
+      const selectedCard = { ...newGameState.card_positions[selectedPosition].card }
+
+      newGameState.card_positions[currentPlayerNumber].card = selectedCard
+      newGameState.card_positions[selectedPosition].card = currentPlayerCard
+
+      if (newGameState.players[token].player_history.random === 'drunk') {
+        newGameState.players[token].card.player_card_id = 0
+      } else {
+        newGameState.players[token].card.player_card_id = newGameState.card_positions[currentPlayerNumber].card.id
+        newGameState.players[token].card.player_team = newGameState.card_positions[currentPlayerNumber].card.team
+      }
+
+      const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, [currentPlayerNumber])
+
+      newGameState.players[token].card_or_mark_action = true
+
+      newGameState.players[token].player_history = {
+        ...newGameState.players[token].player_history,
+        scene_title: title,
+        card_or_mark_action: true,
+        swapped_cards: [currentPlayerNumber, selectedPosition],
+        viewed_cards: [currentPlayerNumber],
+      }
+
+      const messageIds = formatPlayerIdentifier([currentPlayerNumber, selectedPosition])
+
+      interaction = generateRoleInteraction(newGameState, token, {
+        private_message: ['interaction_swapped_cards', ...messageIds, newGameState.players[token].player_history.random === 'robber' ? 'interaction_own_card' : ''],
+        icon: 'prank',
+        showCards: newGameState.players[token].player_history.random === 'robber' ? showCards : undefined,
+        uniqInformations: { swapped_cards: [currentPlayerNumber, selectedPosition], viewed_cards: [currentPlayerNumber] },
+      })
+
+      break
+  }
+
+
   scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
   return newGameState
 }
+

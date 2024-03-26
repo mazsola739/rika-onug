@@ -37,7 +37,7 @@ export const villageidiot_interaction = (gameState, token, title) => {
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_direction'],
-    icon: 'jest',
+    icon: title === 'RASCAL' ? 'prank' : 'jest',
     uniqInformations: { answer_options: ['left', 'right'] },
   })
 }
@@ -69,7 +69,7 @@ export const villageidiot_response = (gameState, token, selected_answer, title) 
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_moved', selected_answer === 'left' ? 'direction_left' : 'direction_right'],
-    icon: 'jest',
+    icon: title === 'RASCAL' ? 'prank' : 'jest',
   })
 
   scene.push({ type: SCENE, title, token, interaction })

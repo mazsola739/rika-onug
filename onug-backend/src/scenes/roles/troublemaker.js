@@ -36,11 +36,11 @@ export const troublemaker_interaction = (gameState, token, title) => {
     scene_title: title,
     selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 },
   }
-//todo fix if enough player
+
   return generateRoleInteraction(newGameState, token, {
-    private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_two_any_other'],
+    private_message: [selectablePlayerNumbers.length <= 2 ? 'interaction_no_selectable_player' : 'interaction_may_two_any_other'],
     icon: 'swap',
-    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 2, center: 0 } },
+    selectableCards: { selectable_cards: selectablePlayerNumbers.length <= 2 ? [] : selectablePlayerNumbers, selectable_card_limit: { player: selectablePlayerNumbers.length <= 2 ? 0 : 2, center: 0 } },
   })
 }
 
@@ -52,7 +52,7 @@ export const troublemaker_response = (gameState, token, selected_card_positions,
   const newGameState = { ...gameState }
   const scene = []
 
-  const [position1, position2] = selected_card_positions
+  const [position1, position2] = selected_card_positions.slice(0, 2)
   const playerOneCard = { ...newGameState.card_positions[position1].card }
   const playerTwoCard = { ...newGameState.card_positions[position2].card }
 

@@ -38,7 +38,7 @@ export const mysticwolf_interaction = (gameState, token, title) => {
 
   return generateRoleInteraction(newGameState, token, {
     private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any_other'],
-    icon: 'spy',
+    icon: title === 'MYSTIC_WOLF' ? 'mystic' : 'peeker',
     selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
   })
 }
@@ -69,7 +69,7 @@ export const mysticwolf_response = (gameState, token, selected_card_positions, t
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
-    icon: 'spy',
+    icon: title === 'MYSTIC_WOLF' ? 'mystic' : 'peeker',
     showCards: viewCards,
     uniqInformations: { viewed_cards: [selected_card_positions[0]] },
   })

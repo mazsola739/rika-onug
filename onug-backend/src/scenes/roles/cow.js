@@ -44,7 +44,7 @@ export const cow_interaction = (gameState, token, title) => {
 
   return generateRoleInteraction(newGameState, token, {
     private_message:  [neighborIsAlien ? 'interaction_got_tapped_by_alien' : 'interaction_no_tap'],
-    icon: 'tap',
+    icon: 'cow',
     uniqInformations: { alien_neighbor: neighborIsAlien }
   })
 }
