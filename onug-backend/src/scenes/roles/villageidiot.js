@@ -2,6 +2,7 @@
 import { copyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, moveCards } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
+import { isValidAnswerSelection } from '../validate-response-data'
 
 export const villageidiot = (gameState, title) => {
   const newGameState = { ...gameState }
@@ -41,12 +42,16 @@ export const villageidiot_interaction = (gameState, token, title) => {
   })
 }
 
-export const villageidiot_response = (gameState, token, answer, title) => { //TODO validate answer?
+export const villageidiot_response = (gameState, token, selected_answer, title) => {
+  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history)) {
+    return gameState
+  }
+
   const newGameState = { ...gameState }
   const scene = []
 
   const currentPlayer = getPlayerNumberWithMatchingToken(newGameState.players, token)
-  const updatedPlayerCards = moveCards(newGameState.card_positions, answer, currentPlayer)
+  const updatedPlayerCards = moveCards(newGameState.card_positions, selected_answer, currentPlayer)
 
   newGameState.players[token].card_or_mark_action = true
 
@@ -59,11 +64,11 @@ export const villageidiot_response = (gameState, token, answer, title) => { //TO
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    direction: answer,
+    direction: selected_answer,
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_moved', answer === 'left' ? 'direction_left' : 'direction_right'],
+    private_message: ['interaction_moved', selected_answer === 'left' ? 'direction_left' : 'direction_right'],
     icon: 'jest',
   })
 

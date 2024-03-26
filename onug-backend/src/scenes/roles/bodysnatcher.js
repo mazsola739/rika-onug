@@ -82,7 +82,7 @@ export const bodysnatcher_interaction = (gameState, token, title, randomBodysnat
       case 'identifier_leftneighbor_text':
       case 'identifier_rightneighbor_text':
       case 'identifier_oneneighbor_text':
-        const direction = bodysnatcherKey.include('left') ? 'left' : bodysnatcherKey.include('right') ? 'right' : 'both'
+        const direction = bodysnatcherKey.includes('left') ? 'left' : bodysnatcherKey.includes('right') ? 'right' : 'both'
         selectablePlayers = getPlayerNeighborsByToken(newGameState.players, direction, 1)
         break
       case 'identifier_any_text':
@@ -116,6 +116,7 @@ export const bodysnatcher_response = (gameState, token, selected_card_positions,
   if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
+  
   const newGameState = { ...gameState }
   const scene = []
 

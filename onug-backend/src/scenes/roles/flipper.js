@@ -57,6 +57,7 @@ export const flipper_response = (gameState, token, selected_card_positions, titl
   if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
+  
   const newGameState = { ...gameState }
   const scene = []
 

@@ -55,6 +55,7 @@ export const pickpocket_response = (gameState, token, selected_mark_positions, t
   if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
     return gameState
   }
+  
   const newGameState = { ...gameState }
   const scene = []
 

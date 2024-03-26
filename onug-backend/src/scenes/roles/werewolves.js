@@ -57,6 +57,7 @@ export const werewolves_response = (gameState, token, selected_card_positions, t
   if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
+  
   const newGameState = { ...gameState }
   const scene = []
 

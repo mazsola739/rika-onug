@@ -73,11 +73,11 @@ export const priest_response = (gameState, token, selected_mark_positions, title
   if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
     return gameState
   }
+
   const newGameState = { ...gameState }
   const scene = []
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
-
   const selectedPositionMark = newGameState.card_positions[selected_mark_positions[0]].mark
 
   if (gameState.players[token].card.player_original_id === 1) {

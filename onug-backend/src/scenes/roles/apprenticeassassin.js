@@ -75,6 +75,7 @@ export const apprenticeassassin_response = (gameState, token, selected_mark_posi
   if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
     return gameState
   }
+  
   const newGameState = { ...gameState }
   const scene = []
 

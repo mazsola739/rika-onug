@@ -26,3 +26,11 @@ export const isValidMarkSelection = (selected_mark_positions, player_history) =>
 
   return true
 }
+
+export const isValidAnswerSelection = (selected_answer, player_history) => {
+  if (!selected_answer || !player_history.answer_options.includes(selected_answer)) {
+    return false
+  }
+
+  return true
+}

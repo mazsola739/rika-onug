@@ -103,12 +103,12 @@ export const useClickHandler = (room_id: string, token: string) => {
   )
 
   const handleAnswerInteraction = useCallback(
-    (answer: string) => {
+    (selected_answer: string) => {
       sendJsonMessage?.({
         type: SCENE,
         room_id,
         token,
-        answer: answer,
+        selected_answer,
       })
     },
     [sendJsonMessage]

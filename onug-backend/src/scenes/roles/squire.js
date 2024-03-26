@@ -2,6 +2,7 @@
 import { allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds, getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithoutShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
+import { isValidAnswerSelection } from '../validate-response-data'
 
 export const squire = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
@@ -48,13 +49,17 @@ export const squire_interaction = (gameState, token, title) => {
   })
 }
 
-export const squire_response = (gameState, token, answer, title) => { //TODO validate answer?
+export const squire_response = (gameState, token, selected_answer, title) => {
+  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history)) {
+    return gameState
+  }
+
   const newGameState = { ...gameState }
   const scene = []
 
   let interaction = {}
 
-  if (answer === 'yes') {
+  if (selected_answer === 'yes') {
     const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithoutShield(newGameState.players)
     const viewCards = getCardIdsByPositions(newGameState.card_positions, werewolves)
 
@@ -79,7 +84,7 @@ export const squire_response = (gameState, token, answer, title) => { //TODO val
       showCards: viewCards,
       uniqInformations: { viewed_cards: werewolves },
     })
-  } else if (answer === 'no') {
+  } else if (selected_answer === 'no') {
     interaction = generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_nothing'],
       icon: 'werewolves',

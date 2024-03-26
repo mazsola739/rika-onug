@@ -9,11 +9,11 @@ export const interaction = async (ws, message) => {
   try {
     logDebug(`Interaction requested with ${JSON.stringify(message)}`)
 
-    const { room_id, token, selected_card_positions, selected_mark_positions, answer } = message
+    const { room_id, token, selected_card_positions, selected_mark_positions, selected_answer } = message
     const gameState = await readGameState(room_id)
     // TODO validate client request
 
-    const newGameState = generateInteractionResponse(gameState, token, selected_card_positions, selected_mark_positions, ws, answer)
+    const newGameState = generateInteractionResponse(gameState, token, selected_card_positions, selected_mark_positions, selected_answer, ws)
 
     newGameState?.scene.forEach((item) => {
       websocketServerConnectionsPerRoom[newGameState.room_id][item.token].send(JSON.stringify(item))
@@ -26,7 +26,7 @@ export const interaction = async (ws, message) => {
   }
 }
 
-export const generateInteractionResponse = (gameState, token, selected_card_positions, selected_mark_positions, ws, answer) => {
+export const generateInteractionResponse = (gameState, token, selected_card_positions, selected_mark_positions, selected_answer, ws) => {
   const interaction_type = gameState.players[token]?.player_history?.scene_title
 
   let newGameState = { ...gameState }
@@ -51,7 +51,7 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
       newGameState = assassin_response(gameState, token, selected_mark_positions, interaction_type)
       break
     case "BEHOLDER":
-      newGameState = beholder_response(gameState, token, selected_card_positions, interaction_type)
+      newGameState = beholder_response(gameState, token, selected_answer, interaction_type)
       break
     case "BODY_SNATCHER":
       newGameState = bodysnatcher_response(gameState, token, selected_card_positions, interaction_type)
@@ -75,7 +75,7 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
       newGameState = doppelganger_response(gameState, token, selected_card_positions, interaction_type)
       break
     case "DOPPELGÄNGER_INSTANT_ACTION":
-      newGameState = doppelganger_instant_action_response(gameState, token, selected_card_positions, selected_mark_positions, answer, interaction_type)
+      newGameState = doppelganger_instant_action_response(gameState, token, selected_card_positions, selected_mark_positions, selected_answer, interaction_type)
       break
     case "DOPPELGÄNGER_APPRENTICE_ASSASSIN":
       newGameState = apprenticeassassin_response(gameState, token, selected_mark_positions, interaction_type)
@@ -111,7 +111,7 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
       newGameState = priest_response(gameState, token, selected_mark_positions, interaction_type)
       break
     case "DOPPELGÄNGER_PSYCHIC":
-      newGameState = psychic_response(gameState, token, selected_mark_positions, interaction_type)
+      newGameState = psychic_response(gameState, token, selected_card_positions, interaction_type)
       break
     case "DOPPELGÄNGER_RASCAL":
       newGameState = rascal_response(gameState, token, selected_card_positions, interaction_type)
@@ -159,7 +159,7 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
       newGameState = nostradamus_response(gameState, token, selected_card_positions, interaction_type)
       break  
     case "ORACLE_QUESTION":
-      newGameState = oracle_question_response(gameState, token, answer, interaction_type)
+      newGameState = oracle_question_response(gameState, token, selected_answer, interaction_type)
       break
     case "PARANORMAL_INVESTIGATOR":
       newGameState = paranormalinvestigator_response(gameState, token, selected_card_positions, interaction_type)
@@ -171,7 +171,7 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
       newGameState = priest_response(gameState, token, selected_mark_positions, interaction_type)
       break
     case "PSYCHIC":
-      newGameState = psychic_response(gameState, token, selected_mark_positions, interaction_type)
+      newGameState = psychic_response(gameState, token, selected_card_positions, interaction_type)
       break
     case "RAPSCALLION":
       newGameState = apprenticeseer_response(gameState, token, selected_card_positions, interaction_type)
@@ -195,7 +195,7 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
       newGameState = sentinel_response(gameState, token, selected_card_positions, interaction_type)
       break
     case "SQUIRE":
-      newGameState = squire_response(gameState, token, answer, interaction_type)
+      newGameState = squire_response(gameState, token, selected_answer, interaction_type)
       break
     case "SWITCHEROO":
       newGameState = troublemaker_response(gameState, token, selected_card_positions, interaction_type)
@@ -216,7 +216,7 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
       newGameState = vampires_response(gameState, token, selected_mark_positions, interaction_type)
       break
     case "VILLAGE_IDIOT":
-      newGameState = villageidiot_response(gameState, token, answer, interaction_type)
+      newGameState = villageidiot_response(gameState, token, selected_answer, interaction_type)
       break
     case "VOODOO_LOU":
       newGameState = witch_response(gameState, token, selected_card_positions, interaction_type)

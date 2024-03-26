@@ -48,6 +48,7 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
   if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
+  
   const newGameState = { ...gameState }
   const scene = []
 

@@ -126,7 +126,7 @@ export const doppelganger_instant_action_interaction = (gameState, token, title)
   return interaction
 }
 
-export const doppelganger_instant_action_response =  (gameState, token, selected_card_positions, selected_mark_positions, answer, title) => {
+export const doppelganger_instant_action_response =  (gameState, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
   const new_role_id = gameState.players[token]?.new_role_id
   let newGameState = {...gameState}
 
@@ -139,7 +139,7 @@ export const doppelganger_instant_action_response =  (gameState, token, selected
   if (new_role_id === 22) newGameState = mysticwolf_response(gameState, token, selected_card_positions, title)
   if (new_role_id === 23) newGameState = paranormalinvestigator_response(gameState, token, selected_card_positions, title)
   if (new_role_id === 25) newGameState = sentinel_response(gameState, token, selected_card_positions, title)
-  if (new_role_id === 26) newGameState = villageidiot_response(gameState, token, answer, title)
+  if (new_role_id === 26) newGameState = villageidiot_response(gameState, token, selected_answer, title)
   if (new_role_id === 27) newGameState = witch_response(gameState, token, selected_card_positions, title)
   if (new_role_id === 31) newGameState = cupid_response(gameState, token, selected_mark_positions, title)
   if (new_role_id === 32) newGameState = diseased_response(gameState, token, selected_mark_positions, title)

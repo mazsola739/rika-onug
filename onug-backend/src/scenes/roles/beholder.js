@@ -2,6 +2,7 @@
 import { allCopyPlayerIds, SCENE } from '../../constant'
 import { formatPlayerIdentifier, getAllPlayerTokens, getAnySeerPlayerNumbersByRoleIds, getAnySeerPlayerNumbersByRoleIdsWithoutShield, getCardIdsByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
+import { isValidAnswerSelection } from '../validate-response-data'
 
 export const beholder = (gameState, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
   const newGameState = { ...gameState }
@@ -56,13 +57,17 @@ export const beholder_interaction = (gameState, token, title) => {
   })
 }
 
-export const beholder_response = (gameState, token, answer, title) => {
+export const beholder_response = (gameState, token, selected_answer, title) => {
+  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history)) {
+    return gameState
+  }
+
   const newGameState = { ...gameState }
   const scene = []
 
   let interaction = {}
 
-  if (answer === 'yes') {
+  if (selected_answer === 'yes') {
     const seers = getAnySeerPlayerNumbersByRoleIdsWithoutShield(newGameState.players)
     const viewCards = getCardIdsByPositions(newGameState.card_positions, seers)
 
@@ -87,7 +92,7 @@ export const beholder_response = (gameState, token, answer, title) => {
       showCards: viewCards,
       uniqInformations: { viewed_cards: seers },
     })
-  } else if (answer === 'no') {
+  } else if (selected_answer === 'no') {
     interaction = generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_nothing'],
       icon: 'seer',
