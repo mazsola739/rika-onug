@@ -76,6 +76,8 @@ export const interaction_mad_now = 'You are Mad Scientist now'
 export const interaction_placed_shield = 'You placed a shield front of'
 //curator
 export const interaction_placed_artifact = 'You placed an artifact front of'
+//flipped card
+export const interaction_flipped_card = 'You flipped card from:'
 //saw card
 export const interaction_saw_card = 'You saw card from:'
 export const interaction_saw_own_card = 'You saw your own card'
