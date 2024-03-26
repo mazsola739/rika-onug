@@ -17,6 +17,7 @@ export type IconType =
   | 'bulb'
   | 'clarity'
   | 'claw'
+  | 'coffin'
   | 'copy'
   | 'cow'
   | 'cupid'

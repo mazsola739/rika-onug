@@ -13,6 +13,7 @@ import ClarityIcon from './clarity.svg?react'
 import ClawIcon from './claw.svg?react'
 import ClosedIcon from './closed.svg?react'
 import ClosingIcon from './closing.svg?react'
+import CoffinIcon from './coffin.svg?react'
 import ConnectingIcon from './connecting.svg?react'
 import CopyIcon from './copy.svg?react'
 import CowIcon from './cow.svg?react'
@@ -93,6 +94,7 @@ export {
   ClawIcon,
   ClosedIcon,
   ClosingIcon,
+  CoffinIcon,
   ConnectingIcon,
   CopyIcon,
   CowIcon,

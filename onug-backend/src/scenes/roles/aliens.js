@@ -25,7 +25,7 @@ const alienAllKeys = [
   'identifier_oddplayers_text',
   'identifier_evenplayers_text',
 ]
-
+//TODO fix 
 export const aliens = (gameState, title) => {
   const newGameState = { ...gameState }
   const scene = []

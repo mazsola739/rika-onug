@@ -2,13 +2,14 @@
 import { copyPlayerIds, SCENE } from '../../constant'
 import { getRandomItemFromArray, getAllPlayerTokens } from '../../utils'
 
-const randomExposer = [
+const randomExposerInstructions = [
   'exposer_flip1_text',
   'exposer_flip2_text',
   'exposer_flip3_text',
 ]
 
-const createExposer = prefix => [`${prefix}_kickoff_text`, getRandomItemFromArray(randomExposer)]
+const randomExposerInstruction = getRandomItemFromArray(randomExposerInstructions)
+const createExposer = prefix => [`${prefix}_kickoff_text`, randomExposerInstruction]
 
 export const exposer = (gameState, title, prefix) => {
   const newGameState = { ...gameState }

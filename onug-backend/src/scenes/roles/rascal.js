@@ -35,8 +35,8 @@ const rascalAnyTwoKeys = [
 ]
 
 const randomRascalInstruction = getRandomItemFromArray(randomRascalInstructions)
-const randomAnyOne = getRandomItemFromArray(rascalAnyOneKeys)
-const randomAnyTwo = getRandomItemFromArray(rascalAnyTwoKeys)
+const randomAnyOneKey = getRandomItemFromArray(rascalAnyOneKeys)
+const randomAnyTwoKey = getRandomItemFromArray(rascalAnyTwoKeys)
 
 const createRascal = prefix => {
   const result = [`${prefix}_kickoff_text`]
@@ -44,21 +44,21 @@ const createRascal = prefix => {
   switch (randomRascalInstruction) {
     case 'rascal_troublemaker_text':
       result[1] = 'rascal_troublemaker_text'
-      result[2] = randomAnyTwo
+      result[2] = randomAnyTwoKey
       break
     case 'rascal_witch_text':
       result[1] = 'rascal_witch_text'
-      result[2] = randomAnyOne
+      result[2] = randomAnyOneKey
       result[3] = 'rascal_witchend_text'
       break
     case 'rascal_drunk_text':
       result[1] = 'rascal_drunk_text'
-      result[2] = randomAnyOne
+      result[2] = randomAnyOneKey
       result[3] = 'rascal_drunkend_text'
       break
     case 'rascal_robber_text':
       result[1] = 'rascal_robber_text'
-      result[2] = randomAnyOne
+      result[2] = randomAnyOneKey
       result[3] = 'rascal_robberend_text'
       break
     case 'rascal_idiot_text':
@@ -84,7 +84,7 @@ export const rascal = (gameState, title, prefix) => {
         if (randomRascalInstruction === "rascal_idiot_text") {
           interaction = villageidiot_interaction(newGameState, token, title)
         } else {
-          interaction = rascal_interaction(newGameState, token, title, randomRascalInstruction, randomAnyOne, randomAnyTwo)
+          interaction = rascal_interaction(newGameState, token, title, randomRascalInstruction, randomAnyOneKey, randomAnyTwoKey)
         }
         
       }
@@ -93,7 +93,7 @@ export const rascal = (gameState, title, prefix) => {
         if (randomRascalInstruction === "rascal_idiot_text") {
           interaction = villageidiot_interaction(newGameState, token, title)
         } else {
-          interaction = rascal_interaction(newGameState, token, title, randomRascalInstruction, randomAnyOne, randomAnyTwo)
+          interaction = rascal_interaction(newGameState, token, title, randomRascalInstruction, randomAnyOneKey, randomAnyTwoKey)
         }
       }
     }
@@ -105,7 +105,7 @@ export const rascal = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const rascal_interaction = (gameState, token, title, randomRascalInstruction, randomAnyOne, randomAnyTwo) => {
+export const rascal_interaction = (gameState, token, title, randomRascalInstruction, randomAnyOneKey, randomAnyTwoKey) => {
   const newGameState = { ...gameState }
   
   let privateMessage
@@ -113,35 +113,35 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
   let selectableCards
   let selectableLimit
 
-  const getSelectableTwoPlayers = (randomAnyTwo) => {
-    switch (randomAnyTwo) {
+  const getSelectableTwoPlayers = (randomAnyTwoKey) => {
+    switch (randomAnyTwoKey) {
       case 'identifier_any2_text':
         return getAllPlayerTokens(newGameState.players)
 
       case 'identifier_any2even_text':
       case 'identifier_any2odd_text':
-        const evenOrOddTwo = randomAnyTwo.replace('identifier_any2', '').replace('_text', '')
+        const evenOrOddTwo = randomAnyTwoKey.replace('identifier_any2', '').replace('_text', '')
         return getAnyEvenOrOddPlayers(newGameState.players, evenOrOddTwo)
 
       case 'identifier_any2higher_text':
       case 'identifier_any2lower_text':
-        const higherOrLowerTwo = randomAnyTwo.replace('identifier_any2', '').replace('_text', '')
+        const higherOrLowerTwo = randomAnyTwoKey.replace('identifier_any2', '').replace('_text', '')
         return getAnyHigherOrLowerPlayerNumbersByToken(newGameState.players, higherOrLowerTwo)
 
       case 'identifier_2leftneighbors_text':
       case 'identifier_2rightneighbors_text':
       case 'identifier_bothneighbors_text':
-        const directionTwo = randomAnyTwo.includes('left') ? 'left' : randomAnyTwo.includes('right') ? 'right' : 'both'
-        const amountTwo = randomAnyTwo.includes('2') ? 2 : 1
+        const directionTwo = randomAnyTwoKey.includes('left') ? 'left' : randomAnyTwoKey.includes('right') ? 'right' : 'both'
+        const amountTwo = randomAnyTwoKey.includes('2') ? 2 : 1
         return getPlayerNeighborsByToken(newGameState.players, directionTwo, amountTwo)
     }
   }
 
-  const getSelectableOnePlayers = (randomAnyOne) => {
-    switch (randomAnyOne) {
+  const getSelectableOnePlayers = (randomAnyOneKey) => {
+    switch (randomAnyOneKey) {
       case 'identifier_higher_text':
       case 'identifier_lower_text':
-        const higherOrLowerOne = randomAnyOne.replace('identifier_', '').replace('_text', '')
+        const higherOrLowerOne = randomAnyOneKey.replace('identifier_', '').replace('_text', '')
         return getAnyHigherOrLowerPlayerNumbersByToken(newGameState.players, higherOrLowerOne)
 
       case 'identifier_any_text':
@@ -149,19 +149,19 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
 
       case 'identifier_anyeven_text':
       case 'identifier_anyodd_text':
-        const evenOrOddOne = randomAnyOne.replace('identifier_any', '').replace('_text', '')
+        const evenOrOddOne = randomAnyOneKey.replace('identifier_any', '').replace('_text', '')
         return getAnyEvenOrOddPlayers(newGameState.players, evenOrOddOne)
 
       case 'identifier_oneneighbor_text':
       case 'identifier_leftneighbor_text':
       case 'identifier_rightneighbor_text':
-        const directionOne = randomAnyOne.includes('left') ? 'left' : randomAnyOne.includes('right') ? 'right' : 'both'
+        const directionOne = randomAnyOneKey.includes('left') ? 'left' : randomAnyOneKey.includes('right') ? 'right' : 'both'
         return getPlayerNeighborsByToken(newGameState.players, directionOne, 1)
     }
   }
 
-  const selectableTwoPlayers = getSelectableTwoPlayers(randomAnyTwo)
-  const selectableOnePlayers = getSelectableOnePlayers(randomAnyOne)
+  const selectableTwoPlayers = getSelectableTwoPlayers(randomAnyTwoKey)
+  const selectableOnePlayers = getSelectableOnePlayers(randomAnyOneKey)
 
   if (randomRascalInstruction === 'rascal_troublemaker_text') {
     selectableCards = getSelectablePlayersWithNoShield(selectableTwoPlayers) <= 2 ? [] : getSelectablePlayersWithNoShield(selectableTwoPlayers)
@@ -181,11 +181,11 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
         uniqInformations: { shielded: true },
       })
     } else {
-      selectableCards = randomAnyOne === 'identifier_center_text' ? centerCardPositions : getSelectableOtherPlayerNumbersWithoutShield(selectableOnePlayers, token)
+      selectableCards = randomAnyOneKey === 'identifier_center_text' ? centerCardPositions : getSelectableOtherPlayerNumbersWithoutShield(selectableOnePlayers, token)
       privateMessage = [selectableCards.length === 0 ? 'interaction_no_selectable_player' : randomRascalInstruction === 'rascal_drunk_text' ? 'interaction_must_one_any_other' : 'interaction_may_one_any_other']
     }
   } else {
-    selectableCards = randomAnyOne === 'identifier_center_text' ? centerCardPositions : getSelectablePlayersWithNoShield(selectableOnePlayers)
+    selectableCards = randomAnyOneKey === 'identifier_center_text' ? centerCardPositions : getSelectablePlayersWithNoShield(selectableOnePlayers)
     privateMessage = [selectableCards.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any_other']
   }
 

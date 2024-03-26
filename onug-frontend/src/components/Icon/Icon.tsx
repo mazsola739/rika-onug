@@ -1,4 +1,4 @@
-import { AerialIcon, AlienIcon, AlienhandIcon, ArtifactIcon, AssassinIcon, AwesomeIcon, BabyAlienIcon, BatIcon, BlindIcon, BlobIcon, BulbIcon, ClarityIcon, ClawIcon, ClosedIcon, ClosingIcon, ConnectingIcon, CopyIcon, CowIcon, CupidIcon, DetectorIcon, DiseasedIcon, DogIcon, DreamwolfIcon, DressIcon, DrunkIcon, EmpathIcon, EvilIcon, EvilhandIcon, EyeIcon, FamilyIcon, FangIcon, FearIcon, FriendIcon, GremlinIcon, GroobzerbIcon, IdIcon, InsomniacIcon, InteractionIcon, InvestigatorIcon, JestIcon, LikeIcon, LoverIcon, MadIcon, MarkIcon, MasonIcon, MorticianIcon, MuteIcon, MysticIcon, NiceIcon, NightIcon, NostradamusIcon, OpenIcon, OracleIcon, PeekerIcon, PrankIcon, PrettyIcon, RobberIcon, SecretIcon, SeerIcon, SelectIcon, SentinelIcon, ShieldIcon, SmellIcon, SpyIcon, SusIcon, SwapIcon, TannerIcon, TapIcon, TargetIcon, TraitorIcon, TrophyIcon, UfoIcon, UninstantiatedIcon, VampireIcon, VillainIcon, VoodooIcon, WerewolfIcon, WitchIcon } from 'assets'
+import { AerialIcon, AlienIcon, AlienhandIcon, ArtifactIcon, AssassinIcon, AwesomeIcon, BabyAlienIcon, BatIcon, BlindIcon, BlobIcon, BulbIcon, ClarityIcon, ClawIcon, ClosedIcon, ClosingIcon, CoffinIcon, ConnectingIcon, CopyIcon, CowIcon, CupidIcon, DetectorIcon, DiseasedIcon, DogIcon, DreamwolfIcon, DressIcon, DrunkIcon, EmpathIcon, EvilIcon, EvilhandIcon, EyeIcon, FamilyIcon, FangIcon, FearIcon, FriendIcon, GremlinIcon, GroobzerbIcon, IdIcon, InsomniacIcon, InteractionIcon, InvestigatorIcon, JestIcon, LikeIcon, LoverIcon, MadIcon, MarkIcon, MasonIcon, MorticianIcon, MuteIcon, MysticIcon, NiceIcon, NightIcon, NostradamusIcon, OpenIcon, OracleIcon, PeekerIcon, PrankIcon, PrettyIcon, RobberIcon, SecretIcon, SeerIcon, SelectIcon, SentinelIcon, ShieldIcon, SmellIcon, SpyIcon, SusIcon, SwapIcon, TannerIcon, TapIcon, TargetIcon, TraitorIcon, TrophyIcon, UfoIcon, UninstantiatedIcon, VampireIcon, VillainIcon, VoodooIcon, WerewolfIcon, WitchIcon } from 'assets'
 import { StyledIcon } from './Icon.styles'
 import { IconType, IconProps } from './Icon.types'
 
@@ -21,6 +21,7 @@ export const Icons: Record<
   claw: ClawIcon,
   closed: ClosedIcon,
   closing: ClosingIcon,
+  coffin: CoffinIcon,
   connecting: ConnectingIcon,
   copy: CopyIcon,
   cow: CowIcon,

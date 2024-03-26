@@ -1,6 +1,6 @@
 //@ts-check
 import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIds, getAnyOtherPlayersByToken, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers } from '../../utils'
+import { getRandomItemFromArray, getAllPlayerTokens, getNonAlienPlayerNumbersByRoleIds, getAnyOtherPlayersByToken, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers } from '../../utils'
 import { isValidCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
@@ -19,9 +19,7 @@ const bodysnatcherKeys = [
 
 const randomBodysnatcherInstruction = getRandomItemFromArray(randomBodysnatcherInstructions)
 const bodysnatcherKey = getRandomItemFromArray(bodysnatcherKeys)
-const createBodysnatcher = prefix => {
-  return [`${prefix}_kickoff_text`, randomBodysnatcherInstruction, randomBodysnatcherInstruction === 'bodysnatcher_steal_text' ? bodysnatcherKey : '', 'bodysnatcher_end_text']
-}
+const createBodysnatcher = prefix => [`${prefix}_kickoff_text`, randomBodysnatcherInstruction, randomBodysnatcherInstruction === 'bodysnatcher_steal_text' ? bodysnatcherKey : '', 'bodysnatcher_end_text']
 
 export const bodysnatcher = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
@@ -90,7 +88,7 @@ export const bodysnatcher_interaction = (gameState, token, title, randomBodysnat
         break
     }
 
-    const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(selectablePlayers)
+    const selectablePlayerNumbers = getNonAlienPlayerNumbersByRoleIds(selectablePlayers)
 
     selectableCards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } }
     interactionMessage = selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_one_any_non_alien'

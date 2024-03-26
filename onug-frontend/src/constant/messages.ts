@@ -15,6 +15,13 @@ export const interaction_must_one_any = 'You must choose any player (including y
 export const interaction_must_two_any = 'You must choose any two players (including yourself)'
 export const interaction_must_three_any = 'You must choose any three players (including yourself)'
 
+//neighbor
+export const interaction_must_one_neighbor = 'You must choose any player of your neighbors'
+export const interaction_may_one_neighbor = 'You may choose any player of your neighbors'
+export const interaction_may_left_neighbor = 'You may choose your left neighbors'
+export const interaction_may_right_neighbor = 'You may choose your right neighbors'
+export const interaction_may_both_neighbors = 'You may choose both your neighbors'
+
 //any specific player
 export const interaction_werewolves = 'Look for Werewolves'
 export const interaction_vampires = 'Look for Vampires'
@@ -45,12 +52,12 @@ export const interaction_seer_end = 'two center'
 export const interaction_one_any_non_werewolf = 'You must choose any other non-werewolf player'
 export const interaction_one_any_non_villain = 'You must choose any other non-villain player'
 export const interaction_one_any_non_alien = 'You must choose any other non-alien player'
-export const interaction_must_one_neighbor = 'You must choose any player of your neighbors'
 
 export const interaction_no_selectable_player = 'You cannot choose any player based on these criteria'
   
 export const interaction_may_direction = 'You may choose a direction to move other players cards'
 export const interaction_may_look = 'You may look at the cards'
+export const interaction_may_look_yourself = 'You may look at your cards'
 
 //center card
 export const interaction_may_one_center = 'You may choose center'

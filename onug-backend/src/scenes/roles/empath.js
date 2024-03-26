@@ -26,12 +26,9 @@ const randomEmpathInstructions = [
   'empath_action14_text',
 ]
 
-const createEmpath = (prefix, totalPlayers) => {
-  const randomIdentifier = getRandomItemFromArray(empathAllKeys)
-  const randomInstructions = getRandomItemFromArray(randomEmpathInstructions)
-
-  return [`${prefix}_kickoff_text`, 'empath_kickoff2_text', randomIdentifier === 'activePlayers' ? pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and') : randomIdentifier, randomInstructions]
-}
+const empathKey = getRandomItemFromArray(empathAllKeys)
+const randomEmpathInstruction = getRandomItemFromArray(randomEmpathInstructions)
+const createEmpath = (prefix, totalPlayers) =>  [`${prefix}_kickoff_text`, 'empath_kickoff2_text', randomEmpathInstruction === 'activePlayers' ? pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and') : empathKey, randomEmpathInstruction]
 
 export const empath = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
