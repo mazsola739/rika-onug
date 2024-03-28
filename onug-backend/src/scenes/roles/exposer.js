@@ -53,8 +53,8 @@ export const exposer_interaction = (gameState, token, title, randomExposerInstru
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_may_one_center'],
-    icon: 'spy',
+    private_message: [limit === 3 ? 'interaction_must_three_center' : limit === 2 ? 'interaction_must_two_center' : 'interaction_must_one_center'],
+    icon: 'id',
     selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: limit } },
   })
 }

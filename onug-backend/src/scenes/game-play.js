@@ -17,9 +17,7 @@ export const stopGamePlay = gameState => {
   const playerTokens = Object.keys(gameState.players)
 
   playerTokens.forEach((token) => {
-    gameState.players[token] = {
-      ...gameState.players[token],
-    }
+    gameState.players[token] = { ...gameState.players[token] }
     delete gameState.players[token].player_start_card_id
     delete gameState.players[token].card
     delete gameState.players[token].player_number
@@ -28,12 +26,7 @@ export const stopGamePlay = gameState => {
 
     delete gameState.card_positions
     delete gameState.mark_positions
-    gameState.action_history = [
-      {
-        scene_title: 'GAME_START',
-        scene_number: 0,
-      },
-    ]
+    gameState.action_history = []
 
     delete gameState.game_play_start_time
     delete gameState.actual_scene

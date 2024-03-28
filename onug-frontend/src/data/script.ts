@@ -3,12 +3,12 @@ import { ScriptType } from 'types'
 export const script: ScriptType[] = [
   {
     scene_title: 'GAME_START',
-    scene_img: '',
+    scene_img: 'day',
     scene_number: 0,
   },
   {
     scene_title: 'EPIC_BATTLE',
-    scene_img: '',
+    scene_img: 'epicbattle',
     scene_number: 1,
   },
   {
@@ -43,7 +43,7 @@ export const script: ScriptType[] = [
   },
   {
     scene_title: 'VAMPIRES',
-    scene_img: 'vampire',
+    scene_img: 'vampires',
     scene_number: 8,
   },
   {
@@ -108,12 +108,12 @@ export const script: ScriptType[] = [
   },
   {
     scene_title: 'EVERYONE_MARK',
-    scene_img: '',
+    scene_img: 'mark',
     scene_number: 21,
   },
   {
     scene_title: 'LOVERS',
-    scene_img: '',
+    scene_img: 'markoflove',
     scene_number: 22,
   },
   {
@@ -123,7 +123,7 @@ export const script: ScriptType[] = [
   },
   {
     scene_title: 'ALIENS',
-    scene_img: 'alien',
+    scene_img: 'aliens',
     scene_number: 24,
   },
   {
@@ -158,7 +158,7 @@ export const script: ScriptType[] = [
   },
   {
     scene_title: 'SUPER_VILLAINS',
-    scene_img: 'henchman_7',
+    scene_img: 'villains',
     scene_number: 31,
   },
   {
@@ -183,7 +183,7 @@ export const script: ScriptType[] = [
   },
   {
     scene_title: 'WEREWOLVES',
-    scene_img: 'werewolf',
+    scene_img: 'werewolves',
     scene_number: 36,
   },
   {
@@ -443,12 +443,12 @@ export const script: ScriptType[] = [
   },
   {
     scene_title: 'RIPPLE',
-    scene_img: '',
+    scene_img: 'aliens',
     scene_number: 88,
   },
   {
     scene_title: 'JOKE',
-    scene_img: '',
+    scene_img: 'day',
     scene_number: 89,
   },
 ]

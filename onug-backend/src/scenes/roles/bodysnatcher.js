@@ -144,7 +144,7 @@ export const bodysnatcher_response = (gameState, token, selected_card_positions,
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
-    icon: 'robber',
+    icon: 'ufo',
     showCards: showCards,
     uniqInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], viewed_cards: [currentPlayerNumber] },
   })

@@ -3,9 +3,9 @@
     "room_id": "archives",
     "room_name": "Archives",
     "stage": "LOBBY",
-    "selected_cards": [1, 15, 16, 2, 4, 6, 7, 9, 8, 11],
+    "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": ["Dragon", "Phoenix", "Griffin", "Mermaid", "Unicorn", "Cyclops", "Troll", "Chimera", "Goblin", "Minotaur", "Fairy", "Djinn"],
+    "available_names": ["Barack Obama", "Einstein", "Elon Musk", "Jane Austen", "Leonardo da Vinci", "Marilyn Monroe", "Michael Jackson", "Oprah", "Picasso", "Shakespeare", "Stephen Hawking", "Stephen King", "Steve Jobs"],
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -19,33 +19,15 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
+    "action_history": []
   },
   {
     "room_id": "armory",
     "room_name": "Armory",
     "stage": "LOBBY",
-    "selected_cards": [79, 84, 19, 81, 86, 14],
+    "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": [
-      "Forrest Gump",
-      "Indiana Jones",
-      "James Bond",
-      "Captain Jack Sparrow",
-      "Ellen Ripley",
-      "Neo",
-      "Sarah Connor",
-      "Hannibal Lecter",
-      "Sherlock Holmes",
-      "E.T.",
-      "Katniss Everdeen",
-      "James T. Kirk"
-    ],
+    "available_names": ["Bruce Banner", "Carol Danvers", "Natasha Romanoff", "Nick Fury", "Otto Octavius", "Norman Osborn", "Peter Parker", "Steve Rogers", "Stephen Strange", "T'Challa", "Tony Stark", "Wanda Maximoff"],
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -59,12 +41,51 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
+    "action_history": []
+  },
+  {
+    "room_id": "bottomless_pit",
+    "room_name": "Bottomless Pit",
+    "stage": "LOBBY",
+    "selected_cards": [],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
+    "available_names": ["Dragon", "Phoenix", "Griffin", "Mermaid", "Pegasus", "Unicorn", "Goblin", "Fairy", "Troll", "Chimera", "Minotaur", "Elf"],
+    "players": {},
+    "card_positions": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "mark_positions": {},
+    "doppelganger_mark_positions": {},
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": []
+  },
+  {
+    "room_id": "dungeon",
+    "room_name": "Dungeon",
+    "stage": "LOBBY",
+    "selected_cards": [],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
+    "available_names": ["Aragog", "Buckbeak", "Dobby", "Firenze", "Fluffy", "Fawkes", "Grindelwald", "Hedwig", "Kreacher", "Nagini", "Norbert", "Winky"],
+    "players": {},
+    "card_positions": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "mark_positions": {},
+    "doppelganger_mark_positions": {},
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": []
   },
   {
     "room_id": "dynamite_room",
@@ -72,20 +93,7 @@
     "stage": "LOBBY",
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": [
-      "Superman",
-      "Batman",
-      "Wonder Woman",
-      "Loki",
-      "Spider-Man",
-      "Iron Man",
-      "Thor",
-      "Aquaman",
-      "Deadpool",
-      "Wolverine",
-      "Groot",
-      "Thanos"
-    ],
+    "available_names": ["Black Panther", "Captain America", "Hulk", "Iron Man", "Loki", "Red Skull", "Scarlet Witch", "Spider-Man", "Thanos", "Thor", "Ultron", "Vision"],
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -99,73 +107,15 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
-  },
-  {
-    "room_id": "foyer",
-    "room_name": "Foyer",
-    "stage": "LOBBY",
-    "selected_cards": [25, 15, 17, 22, 18, 23, 27, 11, 24],
-    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": [
-      "Harry Potter",
-      "Hermione Granger",
-      "Ron Weasley",
-      "Severus Snape",
-      "Albus Dumbledore",
-      "Lord Voldemort",
-      "Draco Malfoy",
-      "Neville Longbottom",
-      "Ginny Weasley",
-      "Dobby",
-      "Dolores Umbridge",
-      "Rubeus Hagrid"
-    ],
-    "players": {},
-    "card_positions": {
-      "center_left": {},
-      "center_middle": {},
-      "center_right": {},
-      "center_wolf": {},
-      "center_villain": {}
-    },
-    "mark_positions": {},
-    "doppelganger_mark_positions": {},
-    "flipped": [],
-    "artifact": [],
-    "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
+    "action_history": []
   },
   {
     "room_id": "great_hall",
     "room_name": "Great Hall",
     "stage": "LOBBY",
-    "selected_cards": [15, 16, 9, 8, 11, 83, 73, 76],
+    "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": [
-      "Billy Butcher",
-      "Hughie Campbell",
-      "Homelander",
-      "Starlight",
-      "The Deep",
-      "Queen Maeve",
-      "Cate Dunlap",
-      "Sam Riordan",
-      "Emma Meyer",
-      "Andre Anderson",
-      "Jordan Li",
-      "Marie Moreau"
-    ],
+    "available_names": ["Arryn", "Baratheon", "Bolton", "Clegane", "Frey", "Greyjoy", "Lannister", "Martell", "Stark", "Targaryen", "Tully", "Tyrell"],
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -179,33 +129,15 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
+    "action_history": []
   },
   {
     "room_id": "guest_bedroom",
     "room_name": "Guest Bedroom",
     "stage": "LOBBY",
-    "selected_cards": [41, 40, 32, 34, 29, 35, 36, 33],
+    "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": [
-      "Frodo",
-      "Samwise",
-      "Gandalf",
-      "Aragorn",
-      "Legolas",
-      "Gimli",
-      "Pippin",
-      "Galadriel",
-      "Sauron",
-      "Bilbo",
-      "Gollum",
-      "Saruman"
-    ],
+    "available_names": ["Carrie Bradshaw", "Dana Scully", "Dexter Morgan", "Fox Mulder", "Frank Underwood", "Jack Bauer", "Lorelai Gilmore", "Olivia Pope", "Rick Grimes", "Sam Winchester", "Tony Soprano", "Walter White"],
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -219,33 +151,15 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
+    "action_history": []
   },
   {
     "room_id": "kitchen",
     "room_name": "Kitchen",
     "stage": "LOBBY",
-    "selected_cards": [50, 42, 53, 45, 52, 46, 77, 44],
+    "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": [
-      "Jon Snow",
-      "Daenerys Targaryen",
-      "Tyrion Lannister",
-      "Arya Stark",
-      "Khal Drogo",
-      "Varys",
-      "Petyr Baelish",
-      "Cersei Lannister",
-      "Sansa Stark",
-      "Jorah Mormont",
-      "Theon Greyjoy",
-      "Samwell Tarly"
-    ],
+    "available_names": ["Luke Skywalker", "Princess Leia", "Han Solo", "Darth Vader", "Obi-Wan Kenobi", "Yoda", "Chewbacca", "R2-D2", "C-3PO", "Kylo Ren", "Padmé Amidala", "Rey"],
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -259,33 +173,37 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
+    "action_history": []
+  },
+  {
+    "room_id": "laboratory",
+    "room_name": "Laboratory",
+    "stage": "LOBBY",
+    "selected_cards": [],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
+    "available_names": ["Angela Petrelli", "Arthur Petrelli", "Claire Bennet", "Elle Bishop", "Hiro Nakamura", "Isaac Mendez", "Matt Parkman", "Mohinder Suresh", "Nathan Petrelli", "Peter Petrelli", "Sylar", "The Haitian"],
+    "players": {},
+    "card_positions": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "mark_positions": {},
+    "doppelganger_mark_positions": {},
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": []
   },
   {
     "room_id": "observatory",
     "room_name": "Observatory",
     "stage": "LOBBY",
-    "selected_cards": [15, 22, 5, 6, 9, 23, 8, 27, 11, 24, 20, 25, 10],
+    "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": [
-      "Maleficent",
-      "Ursula",
-      "Cruella de Vil",
-      "Jafar",
-      "Captain Hook",
-      "Gaston",
-      "Evil Queen",
-      "Queen of Hearts",
-      "Mother Gothel",
-      "Queen Narissa",
-      "Prince Hans",
-      "Shere Khan"
-    ],
+    "available_names": ["Albus Dumbledore", "Bellatrix Lestrange", "Draco Malfoy", "Hermione Granger", "Harry Potter", "Luna Lovegood", "Lord Voldemort", "Minerva McGonagall", "Neville Longbottom", "Ron Weasley", "Rubeus Hagrid", "Severus Snape"],
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -299,33 +217,37 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
+    "action_history": []
+  },
+  {
+    "room_id": "panic_room",
+    "room_name": "Panic Room",
+    "stage": "LOBBY",
+    "selected_cards": [25, 15, 17, 22, 18, 23, 27, 11, 24],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
+    "available_names": ["Captain Jack Sparrow", "Ellen Ripley", "Ethan Hunt ", "Forrest Gump", "Hannibal Lecter", "Indiana Jones", "James Bond", "John McClane", "Katniss Everdeen", "Marty McFly", "Neo", "Sarah Connor"],
+    "players": {},
+    "card_positions": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "mark_positions": {},
+    "doppelganger_mark_positions": {},
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": []
   },
   {
     "room_id": "parlor",
     "room_name": "Parlor",
     "stage": "LOBBY",
-    "selected_cards": [15, 16, 7, 71, 18, 10, 80, 27, 11, 72, 20, 75, 21],
+    "selected_cards": [25, 15, 9, 8, 11, 83, 73, 81],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": [
-      "Chuck Norris",
-      "Keanu Reeves",
-      "Elon Musk",
-      "Leonardo DiCaprio",
-      "Hide the Pain Harold",
-      "Grumpy Cat",
-      "Woman Yelling at a Cat",
-      "Distracted Boyfriend",
-      "Nicolas Cage",
-      "Rick Astley",
-      "The Rock ",
-      "Gordon Ramsay "
-    ],
+    "available_names": ["Aquaman", "Bane", "Batman", "Harley Quinn", "Joker", "Lex Luthor", "Poison Ivy", "Ra's al Ghul", "Robin", "Superman", "Wonder Woman"],
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -339,33 +261,15 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
+    "action_history": []
   },
   {
     "room_id": "secret_passage",
     "room_name": "Secret Passage",
     "stage": "LOBBY",
-    "selected_cards": [50, 30, 42, 53, 15, 22, 85, 9, 27, 11, 33, 4, 20],
+    "selected_cards": [31, 41, 32, 34, 29, 35, 36, 33],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": [
-      "Luke Skywalker",
-      "Princess Leia Organa",
-      "Han Solo",
-      "Darth Vader",
-      "Obi-Wan Kenobi",
-      "Yoda",
-      "Chewbacca",
-      "R2-D2",
-      "C-3PO",
-      "Emperor Palpatine",
-      "Lando Calrissian",
-      "Boba Fett"
-    ],
+    "available_names": ["Frodo", "Gandalf", "Aragorn", "Legolas", "Gimli", "Galadriel", "Gollum", "Sauron", "Samwise", "Arwen", "Bilbo", "Saruman"],
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -379,33 +283,15 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
+    "action_history": []
   },
   {
     "room_id": "sitting_room",
     "room_name": "Sitting Room",
     "stage": "LOBBY",
-    "selected_cards": [25, 53, 47, 54, 48, 51, 27, 52, 46, 20, 44, 49, 74],
+    "selected_cards": [50, 42, 53, 43, 52, 46, 77, 44],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": [
-      "Peter Parker",
-      "Tony Stark",
-      "Steve Rogers",
-      "Bruce Banner",
-      "Natasha Romanoff",
-      "Wade Wilson",
-      "T'Challa",
-      "Carol Danvers",
-      "Bucky Barnes",
-      "Stephen Strange",
-      "Wanda Maximoff",
-      "Matt Murdock"
-    ],
+    "available_names": ["Barney Stinson", "Chandler Bing", "Joey Tribbiani", "Lily Aldrin", "Marshall Eriksen", "Monica Geller", "Phoebe Buffay", "Rachel Green", "Robin Scherbatsky", "Ross Geller", "Ted Mosby", "Tracy McConnell"],
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -419,33 +305,37 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
+    "action_history": []
+  },
+  {
+    "room_id": "staff_quarters",
+    "room_name": "Staff Quarters",
+    "stage": "LOBBY",
+    "selected_cards": [25, 22, 5, 6, 9, 23, 8, 27, 11, 24, 20, 3, 10],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
+    "available_names": ["CC", "Csiti", "Irda", "Ittol", "Kira", "Luna", "Maffia", "Momo", "Natasa", "Rika", "Sura", "Syl"],
+    "players": {},
+    "card_positions": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "mark_positions": {},
+    "doppelganger_mark_positions": {},
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": []
   },
   {
     "room_id": "study",
     "room_name": "Study",
     "stage": "LOBBY",
-    "selected_cards": [],
+    "selected_cards": [25, 15, 7, 71, 72, 70, 80, 27, 11, 82, 20, 71, 75],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
-    "available_names": [
-      "Clark Kent",
-      "Bruce Wayne",
-      "Diana Prince",
-      "Barry Allen",
-      "Arthur Curry",
-      "Selina Kyle",
-      "Edward Nygma",
-      "Harvey Dent",
-      "Lex Luthor",
-      "Harley Quinn",
-      "The Joker",
-      "Dick Grayson"
-    ],
+    "available_names": ["Arya", "Bran", "Brienne", "Cersei", "Daenerys", "Jaime", "Joffrey", "Jon Snow", "Khal Drogo", "Sansa", "Tyrion", "Varys"],
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -459,11 +349,50 @@
     "flipped": [],
     "artifact": [],
     "shield": [],
-    "action_history": [
-      {
-        "scene_title": "GAME_START",
-        "scene_number": 0
-      }
-    ]
+    "action_history": []
+  },
+  {
+    "room_id": "venus_grotto",
+    "room_name": "Venus Grotto",
+    "stage": "LOBBY",
+    "selected_cards": [50, 30, 42, 53, 15, 22, 85, 9, 27, 11, 33, 4, 20],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
+    "available_names": ["Amaterasu", "Anubis", "Apollo", "Athena", "Freyja", "Hades", "Hera", "Isis", "Odin", "Shiva", "Vishnu", "Zeus"],
+    "players": {},
+    "card_positions": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "mark_positions": {},
+    "doppelganger_mark_positions": {},
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": []
+  },
+  {
+    "room_id": "workshop",
+    "room_name": "Workshop",
+    "stage": "LOBBY",
+    "selected_cards": [25, 53, 47, 54, 48, 51, 27, 52, 46, 20, 44, 49, 19],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
+    "available_names": ["Arthur Curry", "Barry Allen", "Bruce Wayne", "Clark Kent", "Diana Prince", "Dick Grayson", "Edward Nygma", "Harvey Dent", "Oliver Queen", "Oswald Cobblepot", "Selina Kyle", "Victor Stone"],
+    "players": {},
+    "card_positions": {
+      "center_left": {},
+      "center_middle": {},
+      "center_right": {},
+      "center_wolf": {},
+      "center_villain": {}
+    },
+    "mark_positions": {},
+    "doppelganger_mark_positions": {},
+    "flipped": [],
+    "artifact": [],
+    "shield": [],
+    "action_history": []
   }
 ]

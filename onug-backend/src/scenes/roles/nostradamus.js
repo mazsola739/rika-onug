@@ -85,13 +85,13 @@ export const nostradamus_response = (gameState, token, selected_card_positions, 
   }
 
   newGameState.players[token].card_or_mark_action = true
-  newGameState.nostradamus_team = newGameState.players[token].card.player_team //TODO better method to get nostradamus team!
+  newGameState.nostradamus_team = newGameState.players[token].card.player_team
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) :[ selected_card_positions[0]],
+    viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : [selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
@@ -107,44 +107,16 @@ export const nostradamus_response = (gameState, token, selected_card_positions, 
   return newGameState
 }
 
-/* 
-newGameState.nostradamus_team = ?
-export const nostradamus_team_alien_text = 'Alien team.'
-export const nostradamus_team_werewolf_text = 'Werewolf team;'
-export const nostradamus_team_vampire_text = 'Vampire team.'
-export const nostradamus_team_villain_text = 'Villain team.'
-export const nostradamus_team_villager_text = 'Villager team.'
-export const nostradamus_team_hero_text = 'Hero team.'
-export const nostradamus_team_assassin_text = 'Assassin team.'
-export const nostradamus_team_apprenticeassassin_text = 'Apprentice Assassin team.'
-export const nostradamus_team_tanner_text = 'Tanner team.'
-export const nostradamus_team_synthetic_text = 'Synthetic team.'
-export const nostradamus_team_blob_text = 'Blob team.'
-export const nostradamus_team_family_text = 'Family team.'
-export const nostradamus_team_mortician_text = 'Mortician team.'
-export const nostradamus_team_mad_text = 'Mad team.'
-export const nostradamus_team_doppelganger_text = 'Doppelganger team.'
-*/
+const getNostradamusTeam = (team) => !team ? 'nostradamus_team_villager_text' : `nostradamus_team_${team}_text`
 
 export const nostradamus_reaction = (gameState, title) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)  
-  const nostradamusTeam = newGameState.nostradamus_team
-  const narration = [
-    'nostradamus_teamstart_text',
-    `nostradamus_team_${nostradamusTeam}_text`,
-  ]
+  const nostradamusTeam = getNostradamusTeam(newGameState.nostradamus_team)
+  const narration = ['nostradamus_teamstart_text', nostradamusTeam]
 
-  tokens.forEach((token) => {
-
-    scene.push({
-      type: SCENE,
-      title,
-      token,
-      narration,
-    })
-  })
+  tokens.forEach((token) => { scene.push({ type: SCENE, title, token, narration })})
 
   newGameState.scene = scene
   return newGameState

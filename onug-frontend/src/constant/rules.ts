@@ -94,7 +94,6 @@ export const rules_mark: Record<string, string> = {
 }
 
 export const rules_artifact: Record<string, string> = {
-  rules_shield: 'Shield given by Sentinel. A card with a Shield Token on it cannot be looked at or moved.',
   rules_werewolf: 'The Claw of the Werewolf makes the player who has it a Werewolf.',
   rules_villager: 'The Brand of the Villager makes the player who has it a Villager.',
   rules_tanner: 'The Cudgel of the Tanner makes the player who has it a Tanner.',
@@ -107,4 +106,8 @@ export const rules_artifact: Record<string, string> = {
   rules_vampire: 'The Mist of the Vampire makes the player who has it a Vampire and win with the Vampires.',
   rules_traitor: 'The Dagger of the Traitor turns a player who has it a Traitor who wants to kill someone on their team',
   rules_alien: 'The Alien Artifact makes the player who has it an Alien.',
+}
+
+export const rules_shield: Record<string, string> = {
+  rules_shield: 'Shield given by Sentinel. A card with a Shield Token on it cannot be looked at or moved.',
 }

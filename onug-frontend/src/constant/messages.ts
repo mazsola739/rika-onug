@@ -60,8 +60,10 @@ export const interaction_may_look = 'You may look at the cards'
 export const interaction_may_look_yourself = 'You may look at your cards'
 
 //center card
-export const interaction_may_one_center = 'You may choose center'
-export const interaction_must_one_center = 'You must choose center'
+export const interaction_may_one_center = 'You may choose one center card'
+export const interaction_must_one_center = 'You must choose one center card'
+export const interaction_must_two_center = 'You must choose two center cards'
+export const interaction_must_three_center = 'You must choose three center cards'
 
 //responses
 //nothing

@@ -1,4 +1,4 @@
-import { EXPANSION, rules_artifact } from 'constant'
+import { EXPANSION, rules_artifact, rules_shield } from 'constant'
 import { TokenType } from 'types'
 
 export const artifacts: TokenType[] = [
@@ -6,7 +6,7 @@ export const artifacts: TokenType[] = [
     id: 1,
     expansion: EXPANSION.daybreak,
     token_name: 'shield',
-    rules: rules_artifact.rules_shield,
+    rules: rules_shield.rules_shield,
   },
   {
     id: 2,

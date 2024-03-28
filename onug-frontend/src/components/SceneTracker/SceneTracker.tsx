@@ -27,12 +27,14 @@ export const SceneTracker: React.FC = observer(() => {
           return null
         }
       }
+
+      //TODO add mark and markoflove if scene is 21 and 22 (EVERYONE_MARK, LOVERS)
       const isCurrentScene = narrationStore.title === scene.scene_title
-      const matchingCards: CardType[] = selectedCards.filter((card) =>
-        scene.card_id.includes(card.id)
-      )
+      const matchingCards: CardType[] = selectedCards.filter((card) => scene.card_id.includes(card.id))
+
       if (matchingCards.length > 0) {
         index++
+        
         return (
           <ActualScene key={index} isCurrentScene={isCurrentScene} ref={isCurrentScene ? focusedSceneRef : null} >
             <p>{index}.</p>

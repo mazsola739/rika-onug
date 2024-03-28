@@ -107,6 +107,7 @@ export const order: OrderType[] = [
     scene_number: 20,
     condition: (selectedCards) => selectedCards.some((card) => card.id === 28),
   },
+
   {
     scene_title: 'SENTINEL',
     card_id: [25],

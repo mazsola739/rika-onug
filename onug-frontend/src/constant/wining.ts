@@ -82,3 +82,90 @@ export const wining_role: Record<string, string> = {
   wining_witch: "View a center card and exchange it with any other player's card.",
   wining_zerb: 'Wake with the other aliens, then wake again to look for Groob, you win, if Groob is killed.',
 }
+
+export const villager_vs_werewolf_conditions: Record<string, string> = {
+  villager_team: 'You are in villager team, you win if',
+  vs_werewolf_team: 'at least one werewolf dies, even if anyone else on any team also dies',
+  no_active_werewolf: 'no one dies (circle vote)',
+
+  werewolf_team: 'You are in werewolf team, you win if all on the werewolf team survive',
+  and_tanner: 'and tanner does not die',
+}
+
+
+/*   villager_and_hero_team: 'You are in villager/hero team, you win if',
+  hero_team: 'You are in hero team, you win, if all heroes survive',
+  alien_team: 'You are in alien team, you win, if all aliens survive', */
+
+  /* Win Conditions
+Villagers VS Werewolves
+With at least one active Werewolf: 
+Villagers win if at least one Werewolf dies, even if anyone else on any team also dies
+Werewolves win if all the Werewolves survive and the Tanner does not die
+With no active Werewolves (all in center): 
+Villagers win if no one dies (circle vote)
+If a Minion and Squire present, then they must survive and someone else dies to win(they can win independently from each other)
+Minion and/or Squire wins if anyone but can win with the Tanner is killed
+
+Villagers VS Vampires
+With at least one active Vampire: 
+Villagers win if at least one Vampire dies, even if anyone else on any team also dies
+Vampires win if all the Vampires survive and the Tanner does not die
+Renfield wins with the same conditions; even if he dies and all Vampires survive
+If only members of the Vampire and Tanner teams are present, either the Vampires must circle vote or kill Renfield whilst keeping the Tanner alive to win
+With no active Vampires (all in center): 
+Villagers win if no one dies (i.e. they must circle vote)
+If Renfield is present without Vampires then he is a member of the Village team
+
+Villagers VS Aliens
+	With at least one active Alien:
+Villagers win if at least one Alien dies, even if anyone else on any team also dies
+      Leader if both Groob & Zerb are in play, Leader wins if both survive. Otherwise, regular Villager win.   
+      condition. If all Aliens (including Groob & Zerb, but not Synthetic) vote for a Leader, then the Alien team wins and the Villager team loses
+Aliens & Body Snatcher win if all the Aliens (including Groob & Zerb) survive and the Tanner does not die
+      Groob & Zerb only win if the other dies
+      Synthetic wins if only he dies. If he wins, neither the Alien nor Villager nor Vampire nor Werewolf team can win (However all the roles that can win if the Tanner dies[Minus Villager team])
+With no active Aliens (all in center): 
+Villagers win if no one dies (i.e. they must circle vote)		
+
+Villagers VS Werewolves VS Vampires VS Aliens EPIC BATTLES!
+Villagers win if at least one player from two different teams (Werewolf, Vampire or Alien) dies, if all 3 are present
+Werewolves win if at least one Vampire or Alien dies (if both present) and no Werewolf die
+Aliens win if at least one Vampire dies or Werewolf dies (if both present) and no Alien dies
+Vampires win if at least one Werewolf or Alien dies (if both present) and no Vampire dies
+Minion, Squire, and Renfield might change these wins if they die
+If 3+ different teams present, players with the first and second most votes die. 
+If there is a tie for first, only those tied for first die
+If there is no tie for first but a tie for second, all players who tied for second die as well as first
+A single vote may count as either the first or second highest number; in a circle vote, everyone dies
+If one or more of these three teams is absent after the vote, follow the rules for a normal game
+
+Tanners win only if they die. The Assassin, Apprentice Assassin, Groob & Zerb(If both are in play), Blob, Leader(if both Groob & Zerb are in play), Synthetic, Minion & Squire(if no Werewolves are in play) and other Tanners can win simultaneously
+The Apprentice Tanner wins only if the Tanner dies, even if he himself also dies
+If there is no Tanner, the Apprentice Tanner becomes a Tanner and must die to win
+If there is more than one Tanner, the Apprentice Tanner(s) wins if any Tanner dies
+
+Blob – Wins if no player part of him (left, right or both), via app, dies
+
+Mortician – Only wins if at least one of his neighbors dies
+
+Assassins win only if the player with the Mark of the Assassin dies, even if he himself also dies
+If no player was originally the Assassin (so there is no Mark of the Assassin), he is on the Village team
+If more than one player has a Mark of the Assassin, the Assassin wins by killing any of those players
+
+Apprentice Assassin wins only if the Assassin dies, even if he himself also dies
+If no player was originally the Assassin or Apprentice Assassin (so there is no Mark of the Assassin) and no player at the end is the Assassin, he is on the Village team
+If there is no Assassin after the vote, but was one at the start, the Apprentice Assassin becomes an Assassin
+If there is more than one Assassin, the Apprentice Assassin wins by killing any of the Assassins
+
+Traitors (those with Mark of the Traitor) can now only win if someone else on their team dies, never themselves. 
+If they are the only active member of a team, then the Mark of the Traitor has no effect 
+The Tanner & Apprentice Tanner with Mark of the Traitor wins if the other dies or Doppelganger-Tanner/Doppelganger-Apprentice Tanner/Paranormal Investigator-Tanner/Paranormal-Apprentice Tanner
+
+Mortician/Blob/Synthetic with Mark of the Traitor must kill Doppelganger-Mortician/Doppelganger-Blob/Doppelganger-Synthetic or Paranormal Investigator-Mortician/Paranormal Investigator-Blob/Paranormal Investigator Synthetic otherwise they stick to their winning conditions
+Nostradamus with Mark of the Traitor mist kill his “predicted” team
+Oracle with Mark of the Traitor but has changed teams, they must kill their new team
+Leader with Mark of the Traitor must kill Doppelganger-Leader otherwise they stick to their winning conditions(if both Groob & Zerb are in play)
+If both Groob & Zerb are in play, Groob/Zerb win if both Doppelganger-Groob/Doppelganger-Zerb or Paranormal Investigator-Groob/Paranormal Investigator-Zerb
+Minion & Squire(if no Werewolves are in play) win if the other dies or Doppelganger-Minion/Doppelganger-Squire/Paranormal Investigator-Minion/Paranormal Investigator-Squire dies
+ */
