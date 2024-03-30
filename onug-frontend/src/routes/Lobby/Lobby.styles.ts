@@ -4,37 +4,29 @@ import { StyledLobbyProps } from './Lobby.types'
 export const StyledLobby = styled.div`
   height: 100%;
   margin: auto;
-  position: relative;
   width: 100%;
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 5px;
+  justify-items: center;
   align-items: center;
 `
 
 export const StyledRoomButton = styled.button<StyledLobbyProps>`
-  background: ${({ index }) => generateRainbowColor(index)};
-  border: 5px solid ${({ index }) => generateRainbowColor(index)};
+
+  background: ${({ img }) => `url(/assets/rooms/${img}.png)`} center center/cover no-repeat;
   border-radius: 50%;
-  color: black;
+  color: white;
+  text-shadow: 2px 2px 2px black;
   cursor: pointer;
   font-family: 'Josefin Sans', sans-serif;
   font-size: 14px;
   font-weight: 900;
-  height: 120px;
-  position: absolute;
-  text-transform: uppercase;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%)
-    rotate(${({ index }) => index * (360 / 12)}deg) translate(250px)
-    rotate(-${({ index }) => index * (360 / 12)}deg);
-
-  width: 120px;
-  transition: 0.75s;
-
+  height: 140px;
+  width: 140px;
   &:hover {
     transition: 0.75s;
-    border: 5px solid ${({ index }) => darken(generateRainbowColor(index), 15)};
     filter: drop-shadow(8px 5px 5px black);
   }
 `
@@ -53,7 +45,7 @@ const darken = (color: string, amount: number): string => {
 }
 
 const generateRainbowColor = (index: number) => {
-  const hues = [0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330]
+  const hues = [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340]
   const lightness = 55
   const hue = hues[index % hues.length]
   return `hsl(${hue}, 100%, ${lightness}%)`

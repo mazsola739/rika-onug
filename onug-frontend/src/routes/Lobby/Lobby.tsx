@@ -10,11 +10,12 @@ const RoomButton: React.FC<StyledLobbyProps> = ({
   buttonText,
   onClick,
   index,
+  img
 }) => {
   const testId = buttonText.replace(/ /g, '-')
 
   return (
-    <StyledRoomButton index={index} onClick={onClick} data-testid={testId}>
+    <StyledRoomButton index={index} onClick={onClick} data-testid={testId} img={img}>
       {buttonText}
     </StyledRoomButton>
   )
@@ -82,7 +83,7 @@ export const Lobby: React.FC = observer(() => {
   ) : (
     <StyledLobby>
       {lobbyStore.rooms.map((room, index) => (
-        <RoomButton key={index} onClick={() => handleJoinRoom(room.room_id)} index={index} buttonText={room.room_name} />
+        <RoomButton key={index} onClick={() => handleJoinRoom(room.room_id)} index={index} buttonText={room.room_name} img={room.room_id}/>
       ))}
     </StyledLobby>
   )
