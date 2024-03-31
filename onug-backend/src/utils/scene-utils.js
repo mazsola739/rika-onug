@@ -30,6 +30,10 @@ export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
 }
 
 export const getRandomItemFromArray = array => array[getRandomNumber(0, array.length - 1)]
+export const getRandomItemsFromArray = (array, amount) => {
+  const shuffled = array.sort(() => 0.5 - Math.random())
+  return shuffled.slice(0, amount)
+}
 
 //SCENE
 export const getSelectableOtherPlayerNumbersWithoutShield = (players, token) => {

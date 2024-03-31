@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getNonVillainPlayerNumbersByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getNonVillainPlayerNumbersByRoleIds, getRandomItemsFromArray } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -30,14 +30,18 @@ export const temptress_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   const selectablePlayerNumbers = getNonVillainPlayerNumbersByRoleIds(newGameState.players)
 
+  const privateMessage = [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_must_one_any_non_villain']
+  const requiredCardSelection = getRandomItemsFromArray(selectablePlayerNumbers, 1)
+
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
+    required_card_selection: requiredCardSelection, private_message: privateMessage,
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_one_any_non_villain'],
+    private_message: privateMessage,
     icon: 'evilhand',
     selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
   })

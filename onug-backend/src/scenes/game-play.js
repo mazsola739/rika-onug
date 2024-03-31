@@ -53,17 +53,6 @@ const getNextScene = gameState => {
       )
     })
 
-/*     const requiresPlayerActionScenes = ['YOUR_SCENE_TYPES_HERE']; // Define scene types that require player action
-
-    if (requiresPlayerActionScenes.includes(newGameState.actual_scene.scene_title)) {
-        // Set a timeout for player action
-        const actionTimeout = 10000; // Adjust timeout duration as needed (e.g., 10 seconds)
-        setTimeout(() => {
-            // Trigger action if player doesn't respond in time
-            handlePlayerTimeout(newGameState)
-        }, actionTimeout)
-    } */
-
     if (newGameState.actual_scene.scene_title === 'VOTE') {
       newGameState.game_stopped = true
       return newGameState
@@ -77,20 +66,6 @@ const getNextScene = gameState => {
     return
   }
 }
-
-/* const handlePlayerTimeout = gameState => {
-  // Handle player timeout here
-  // For example, you can simulate a random answer or trigger a specific action
-  console.log('Player timed out. Triggering action...')
-  // Perform actions like selecting a random answer, ending the scene, etc.
-  // Update gameState accordingly
-  // For example:
-  // gameState = performRandomAnswer(gameState)
-  // Or
-  // gameState = endScene(gameState)
-  // Then proceed with the next scene
-  getNextScene(gameState)
-} */
 
 const tick = async (room_id) => {
   logTrace('tick')

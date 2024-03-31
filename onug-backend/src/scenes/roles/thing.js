@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE, MESSAGE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNeighborsByToken, getPlayerTokensByPlayerNumber } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNeighborsByToken, getPlayerTokensByPlayerNumber, getRandomItemsFromArray } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -32,14 +32,18 @@ export const thing_interaction = (gameState, token, title) => {
 
   const neighbors = getPlayerNeighborsByToken(newGameState.players, token)
 
+  const privateMessage = ['interaction_must_one_neighbor']
+  const requiredCardSelection = getRandomItemsFromArray(neighbors, 1)
+
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     selectable_cards: neighbors, selectable_card_limit: { player: 1, center: 0 },
+    required_card_selection: requiredCardSelection, private_message: privateMessage,
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_must_one_neighbor'],
+    private_message: privateMessage,
     icon: 'tap',
     selectableCards: { selectable_cards: neighbors, selectable_card_limit: { player: 1, center: 0 } },
   })

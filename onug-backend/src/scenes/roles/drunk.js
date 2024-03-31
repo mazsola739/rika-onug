@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE, centerCardPositions } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumberWithMatchingToken } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumberWithMatchingToken, getRandomItemsFromArray } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -30,14 +30,18 @@ export const drunk_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   if (!newGameState.players[token].shield) {
+    const privateMessage = ['interaction_must_one_center']
+    const requiredCardSelection = getRandomItemsFromArray(centerCardPositions, 1)
+
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
       selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 },
+      required_card_selection: requiredCardSelection, private_message: privateMessage,
     }
 
     return generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_must_one_center'],
+      private_message: privateMessage,
       icon: 'drunk',
       selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 } },
     })

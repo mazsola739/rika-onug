@@ -1,4 +1,3 @@
-//TODO basic wining condition descriptions!
 
 export const wining_role: Record<string, string> = {
   wining_alien: 'Wake and look for the other aliens and then do the action as instructed by the app.',

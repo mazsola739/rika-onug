@@ -1,6 +1,6 @@
 //@ts-check
 import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, getAllPlayerTokens, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
+import { getRandomItemFromArray, getAllPlayerTokens, getCardIdsByPositions, formatPlayerIdentifier, getRandomItemsFromArray } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -46,14 +46,18 @@ export const exposer_interaction = (gameState, token, title, randomExposerInstru
 
   const limit = randomExposerInstruction.replace('exposer_flip', '').replace('_text', '')
 
+  const privateMessage = [limit === 3 ? 'interaction_must_three_center' : limit === 2 ? 'interaction_must_two_center' : 'interaction_must_one_center']
+  const requiredCardSelection = getRandomItemsFromArray(centerCardPositions, limit)
+
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: limit },
+    required_card_selection: requiredCardSelection, private_message: privateMessage,
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: [limit === 3 ? 'interaction_must_three_center' : limit === 2 ? 'interaction_must_two_center' : 'interaction_must_one_center'],
+    private_message: privateMessage,
     icon: 'id',
     selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: limit } },
   })

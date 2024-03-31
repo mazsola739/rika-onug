@@ -1,6 +1,6 @@
 //@ts-check
 import { vampireIds, allCopyPlayerIds, SCENE, HYDRATE_VOTES } from '../../constant'
-import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds, countPlayersVoted, getPlayerNumbersWhoGotVoted, findMostVotedPlayer, formatPlayerIdentifier } from '../../utils'
+import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds, countPlayersVoted, getPlayerNumbersWhoGotVoted, findMostVotedPlayer, formatPlayerIdentifier, getRandomItemsFromArray } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
@@ -34,15 +34,19 @@ export const vampires_interaction = (gameState, token, title) => {
   const vampires = getVampirePlayerNumbersByRoleIds(newGameState.players)
   const nonVampires = getNonVampirePlayerNumbersByRoleIds(newGameState)
 
+  const privateMessage = ['interaction_vampires', 'interaction_must_one_any_non_vampire']
+  const requiredMarkSelection = getRandomItemsFromArray(nonVampires, 1)
+
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 },
     vampires,
+    required_mark_selection: requiredMarkSelection, private_message: privateMessage,
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_vampires', 'interaction_must_one_any_other'],
+    private_message: privateMessage,
     icon: 'vampire',
     selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
     uniqInformations: { vampires },

@@ -49,9 +49,10 @@ export const interaction_own_mark = 'Look for your own mark'
 //TODO better idea?
 export const interaction_seer_end = 'two center'
 
-export const interaction_one_any_non_werewolf = 'You must choose any other non-werewolf player'
-export const interaction_one_any_non_villain = 'You must choose any other non-villain player'
-export const interaction_one_any_non_alien = 'You must choose any other non-alien player'
+export const interaction_must_one_any_non_werewolf = 'You must choose any other non-werewolf player'
+export const interaction_must_one_any_non_vampire = 'You must choose any other non-vampire player'
+export const interaction_must_one_any_non_villain = 'You must choose any other non-villain player'
+export const interaction_must_one_any_non_alien = 'You must choose any other non-alien player'
 
 export const interaction_no_selectable_player = 'You cannot choose any player based on these criteria'
   

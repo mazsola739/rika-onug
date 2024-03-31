@@ -1,6 +1,6 @@
 //@ts-check
 import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, getAllPlayerTokens, getNonAlienPlayerNumbersByRoleIds, getAnyOtherPlayersByToken, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers } from '../../utils'
+import { getRandomItemFromArray, getAllPlayerTokens, getNonAlienPlayerNumbersByRoleIds, getAnyOtherPlayersByToken, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getRandomItemsFromArray } from '../../utils'
 import { isValidCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
@@ -69,6 +69,7 @@ export const bodysnatcher_interaction = (gameState, token, title, randomBodysnat
   let selectablePlayers
   let selectableCards
   let interactionMessage
+  let requiredCardSelection
 
   if (randomBodysnatcherInstruction === 'bodysnatcher_steal_text') {
     switch (bodysnatcherKey) {
@@ -90,17 +91,21 @@ export const bodysnatcher_interaction = (gameState, token, title, randomBodysnat
 
     const selectablePlayerNumbers = getNonAlienPlayerNumbersByRoleIds(selectablePlayers)
 
+    requiredCardSelection = getRandomItemsFromArray(selectablePlayerNumbers, 1)
+
     selectableCards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } }
-    interactionMessage = selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_one_any_non_alien'
+    interactionMessage = selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_must_one_any_non_alien'
   } else if (randomBodysnatcherInstruction === 'bodysnatcher_center_text') {
     selectableCards = { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 } }
     interactionMessage = 'interaction_must_one_center'
+    requiredCardSelection = getRandomItemsFromArray(centerCardPositions, 1)
   }
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    ...selectableCards
+    ...selectableCards,
+    required_card_selection: requiredCardSelection, private_message: [interactionMessage],
   }
 
   return generateRoleInteraction(newGameState, token, {
