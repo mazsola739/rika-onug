@@ -6,15 +6,16 @@ export const StyledLobby = styled.div`
   margin: auto;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 150px);
+  grid-template-rows: repeat(3, 150px);
   gap: 5px;
   justify-items: center;
   align-items: center;
+  justify-content: center;
+  align-content: center;
 `
 
 export const StyledRoomButton = styled.button<StyledLobbyProps>`
-
   background: ${({ img }) => `url(/assets/rooms/${img}.png)`} center center/cover no-repeat;
   border-radius: 50%;
   color: white;
@@ -30,23 +31,3 @@ export const StyledRoomButton = styled.button<StyledLobbyProps>`
     filter: drop-shadow(8px 5px 5px black);
   }
 `
-
-const darken = (color: string, amount: number): string => {
-  const match = color.match(/hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/)
-
-  if (!match) {
-    return color
-  }
-
-  const [, hue, saturation, lightness] = match.map(Number)
-  const newLightness = Math.max(0, lightness - amount)
-
-  return `hsl(${hue}, ${saturation}%, ${newLightness}%)`
-}
-
-const generateRainbowColor = (index: number) => {
-  const hues = [0, 20, 40, 60, 80, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300, 320, 340]
-  const lightness = 55
-  const hue = hues[index % hues.length]
-  return `hsl(${hue}, 100%, ${lightness}%)`
-}

@@ -16,8 +16,8 @@ export const startGame = async (ws, message) => {
 
   if (!roomIdValid) return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
 
-  
   const startTime = Date.now()
+  
   let newGameState = {
     ...gameState,
     stage: STAGES.GAME_PLAY,

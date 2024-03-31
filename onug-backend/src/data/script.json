@@ -358,5 +358,9 @@
   {
     "scene_title": "JOKE",
     "scene_number": 89
+  },
+  {
+    "scene_title": "VOTE",
+    "scene_number": 90
   }
 ]
