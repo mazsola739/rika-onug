@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../utils'
 
 const random_oracle_question = [
   'oracle_alienteam_text',
@@ -67,6 +67,7 @@ export const oracle_question = (gameState, title) => {
     'oracle_kickoff_text',
     getRandomItemFromArray(random_oracle_question),
   ]
+  const actionTime = 8
 
   newGameState.oracle.question = narration[1]
 
@@ -83,6 +84,7 @@ export const oracle_question = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

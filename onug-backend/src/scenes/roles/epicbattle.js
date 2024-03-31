@@ -38,6 +38,7 @@ const random_easteregg_nogoodguys = [
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = []
+  const actionTime = 8
 
   if (hasEasterEgg) {
     if (totalPlayers === 12) {
@@ -57,6 +58,7 @@ const random_easteregg_nogoodguys = [
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 } */

@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getTannerPlayerNumbersByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getSceneEndTime, getTannerPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const apprenticetanner = (gameState, title, hasDoppelganger) => {
@@ -13,6 +13,7 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
       : 'apprenticetanner_kickoff_text',
     'apprenticetanner_kickoff2_text',
   ]
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -26,6 +27,7 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

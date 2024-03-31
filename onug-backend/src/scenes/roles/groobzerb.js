@@ -1,6 +1,6 @@
 //@ts-check
 import { groobzerbIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getZerbPlayerNumberByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getSceneEndTime, getZerbPlayerNumberByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const groobzerb = (gameState, title, hasDoppelganger) => {
@@ -13,6 +13,7 @@ export const groobzerb = (gameState, title, hasDoppelganger) => {
       : 'groobzerb_kickoff_text',
     'groobzerb_kickoff2_text',
   ]
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -26,6 +27,7 @@ export const groobzerb = (gameState, title, hasDoppelganger) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

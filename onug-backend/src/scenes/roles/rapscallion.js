@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { apprenticeseer_interaction } from './apprenticeseer'
 
 export const rapscallion = (gameState, title) => {
@@ -8,6 +8,7 @@ export const rapscallion = (gameState, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = ['rapscallion_kickoff_text']
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -21,6 +22,7 @@ export const rapscallion = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

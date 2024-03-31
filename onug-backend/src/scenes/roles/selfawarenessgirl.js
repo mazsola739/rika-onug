@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { insomniac_interaction } from './insomniac'
 
 export const selfawarenessgirl = (gameState, title, hasDoppelganger) => {
@@ -13,6 +13,7 @@ export const selfawarenessgirl = (gameState, title, hasDoppelganger) => {
       : 'selfawarenessgirl_kickoff_text',
     'selfawarenessgirl_kickoff2_text',
   ]
+  const actionTime = 6
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -26,6 +27,7 @@ export const selfawarenessgirl = (gameState, title, hasDoppelganger) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE, goodGuyIds } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getRandomItemsFromArray } from '../../utils'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -9,6 +9,7 @@ export const nostradamus = (gameState, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = ['nostradamus_kickoff_text']
+  const actionTime = 15
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -22,6 +23,7 @@ export const nostradamus = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }
@@ -119,9 +121,11 @@ export const nostradamus_reaction = (gameState, title) => {
   const tokens = getAllPlayerTokens(newGameState.players)  
   const nostradamusTeam = getNostradamusTeam(newGameState.nostradamus_team)
   const narration = ['nostradamus_teamstart_text', nostradamusTeam]
+  const actionTime = 6
 
   tokens.forEach((token) => { scene.push({ type: SCENE, title, token, narration })})
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

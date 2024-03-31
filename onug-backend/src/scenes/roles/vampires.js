@@ -1,6 +1,6 @@
 //@ts-check
 import { vampireIds, allCopyPlayerIds, SCENE, HYDRATE_VOTES } from '../../constant'
-import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds, countPlayersVoted, getPlayerNumbersWhoGotVoted, findMostVotedPlayer, formatPlayerIdentifier, getRandomItemsFromArray } from '../../utils'
+import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds, countPlayersVoted, getPlayerNumbersWhoGotVoted, findMostVotedPlayer, formatPlayerIdentifier, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
@@ -10,6 +10,7 @@ export const vampires = (gameState, title) => {
   const narration = ['vampires_kickoff_text']
   const tokens = getAllPlayerTokens(newGameState.players)
   const scene = []
+  const actionTime = 15
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -24,6 +25,7 @@ export const vampires = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

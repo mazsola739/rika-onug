@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getMadScientistPlayerNumberByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getMadScientistPlayerNumberByRoleIds, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
@@ -13,6 +13,7 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
       : 'intern_kickoff_text',
     hasMadScientist ? 'intern_kickoff2_text' : 'intern_kickoff_alone_text',
   ]
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -26,6 +27,7 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

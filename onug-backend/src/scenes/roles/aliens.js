@@ -1,6 +1,6 @@
 //@ts-check
 import { alienIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../utils'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime, pickRandomUpToThreePlayers } from '../../utils'
 
 //TODO
 const randomAlienInstructions = [
@@ -33,6 +33,7 @@ export const aliens = (gameState, title) => {
   const narration = ['aliens_kickoff_text']
   const randomAlienInstruction = getRandomItemFromArray(randomAlienInstructions)
   let alienKey
+  const actionTime = 8
 
   if (randomAlienInstruction.includes('view')) {
     alienKey = getRandomItemFromArray(alienAnyKeys)
@@ -58,6 +59,7 @@ export const aliens = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

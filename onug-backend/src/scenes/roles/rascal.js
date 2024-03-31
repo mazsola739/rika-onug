@@ -1,6 +1,6 @@
 //@ts-check
 import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getSelectableOtherPlayerNumbersWithoutShield, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getRandomItemsFromArray } from '../../utils'
+import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getSelectableOtherPlayerNumbersWithoutShield, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 import { villageidiot_interaction } from './villageidiot'
@@ -37,31 +37,37 @@ const rascalAnyTwoKeys = [
 const randomRascalInstruction = getRandomItemFromArray(randomRascalInstructions)
 const randomAnyOneKey = getRandomItemFromArray(rascalAnyOneKeys)
 const randomAnyTwoKey = getRandomItemFromArray(rascalAnyTwoKeys)
+let actionTime
 
 const createRascal = prefix => {
   const result = [`${prefix}_kickoff_text`]
 
   switch (randomRascalInstruction) {
     case 'rascal_troublemaker_text':
+      actionTime = 12
       result[1] = 'rascal_troublemaker_text'
       result[2] = randomAnyTwoKey
       break
     case 'rascal_witch_text':
+      actionTime = 12
       result[1] = 'rascal_witch_text'
       result[2] = randomAnyOneKey
       result[3] = 'rascal_witchend_text'
       break
     case 'rascal_drunk_text':
+      actionTime = 12
       result[1] = 'rascal_drunk_text'
       result[2] = randomAnyOneKey
       result[3] = 'rascal_drunkend_text'
       break
     case 'rascal_robber_text':
+      actionTime = 12
       result[1] = 'rascal_robber_text'
       result[2] = randomAnyOneKey
       result[3] = 'rascal_robberend_text'
       break
     case 'rascal_idiot_text':
+      actionTime = 8
       result[1] = 'rascal_idiot_text'
   }
 
@@ -101,6 +107,7 @@ export const rascal = (gameState, title, prefix) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

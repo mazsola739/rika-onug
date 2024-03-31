@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE, centerCardPositions } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getRandomItemsFromArray } from '../../utils'
+import { getAllPlayerTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -9,6 +9,7 @@ export const witch = (gameState, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = ['witch_kickoff_text']
+  const actionTime = 12
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -22,6 +23,7 @@ export const witch = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

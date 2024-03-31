@@ -1,6 +1,6 @@
 //@ts-check
 import { supervillainIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getVillainPlayerNumbersByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getSceneEndTime, getVillainPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const supervillains = (gameState, title) => {
@@ -8,6 +8,7 @@ export const supervillains = (gameState, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = ['supervillains_kickoff_text']
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -21,6 +22,7 @@ export const supervillains = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

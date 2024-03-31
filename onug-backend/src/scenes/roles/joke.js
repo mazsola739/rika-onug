@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../utils'
 
 const random_joke = [
   'joke_1_text',
@@ -30,6 +30,7 @@ export const joke = (gameState, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = [getRandomItemFromArray(random_joke)]
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -37,6 +38,7 @@ export const joke = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

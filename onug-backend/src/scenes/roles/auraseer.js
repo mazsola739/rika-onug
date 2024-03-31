@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithCardOrMarkActionTrue } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithCardOrMarkActionTrue, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
@@ -13,6 +13,7 @@ export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
       : 'auraseer_kickoff_text',
     hasMarks ? 'auraseer_marks_and_cards_text' : 'auraseer_cards_text',
   ]
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -26,6 +27,7 @@ export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

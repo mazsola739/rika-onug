@@ -9,32 +9,6 @@ import { scene } from './scene'
 //TODO pauseGamePlay
 const tickTime = 10000
 
-export const stopGamePlay = gameState => {
-  gameState.game_stopped = true
-  gameState.stage = STAGES.ROOM
-
-  delete gameState.startTime
-  const playerTokens = Object.keys(gameState.players)
-
-  playerTokens.forEach((token) => {
-    gameState.players[token] = { ...gameState.players[token] }
-    delete gameState.players[token].player_start_card_id
-    delete gameState.players[token].card
-    delete gameState.players[token].player_number
-    delete gameState.players[token].player_history
-    gameState.players[token].ready = false
-
-    delete gameState.card_positions
-    delete gameState.mark_positions
-    gameState.action_history = []
-
-    delete gameState.game_play_start_time
-    delete gameState.actual_scene
-  })
-
-  return gameState
-}
-
 const getNextScene = gameState => {
   try {
     if (!gameState.actual_scene) return // game already stopped
@@ -102,9 +76,35 @@ const tick = async (room_id) => {
     }
     logTrace(`broadcast next scene : ${JSON.stringify(broadcastMessage)}`)
     broadcast(room_id, broadcastMessage)
-
+    
     setTimeout(() => tick(room_id), tickTime)
   }
+}
+
+export const stopGamePlay = gameState => {
+  gameState.game_stopped = true
+  gameState.stage = STAGES.ROOM
+
+  delete gameState.startTime
+  const playerTokens = Object.keys(gameState.players)
+
+  playerTokens.forEach((token) => {
+    gameState.players[token] = { ...gameState.players[token] }
+    delete gameState.players[token].player_start_card_id
+    delete gameState.players[token].card
+    delete gameState.players[token].player_number
+    delete gameState.players[token].player_history
+    gameState.players[token].ready = false
+
+    delete gameState.card_positions
+    delete gameState.mark_positions
+    gameState.action_history = []
+
+    delete gameState.game_play_start_time
+    delete gameState.actual_scene
+  })
+
+  return gameState
 }
 
 export const startGamePlay = (room_id) => setTimeout(() => tick(room_id), 2000)

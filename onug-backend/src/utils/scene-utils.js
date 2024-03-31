@@ -9,6 +9,8 @@ const shufflePlayers = totalPlayers => Array.from({ length: totalPlayers }, (_, 
 
 export const getAllPlayerTokens = players => Object.keys(players)
 
+export const getSceneEndTime = (starTime, actionTime) => starTime + (actionTime * 1000)
+
 //CONDITION
 export const containsAllIds = (selectedCardIds, roleIds) => roleIds.every((cardId) => selectedCardIds.includes(cardId))
 export const containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId) => selectedCardIds.includes(cardId))

@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIds, getRandomItemsFromArray } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIds, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -9,6 +9,7 @@ export const alphawolf = (gameState, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = ['alphawolf_kickoff_text']
+  const actionTime = 8
   
   tokens.forEach((token) => {
     let interaction = {}
@@ -22,6 +23,7 @@ export const alphawolf = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

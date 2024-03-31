@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getNonVampirePlayerNumbersByRoleIds, getRandomItemsFromArray } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getNonVampirePlayerNumbersByRoleIds, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -11,6 +11,7 @@ export const thecount = (gameState, title, prefix) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = createTheCount(prefix)
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -30,6 +31,7 @@ export const thecount = (gameState, title, prefix) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

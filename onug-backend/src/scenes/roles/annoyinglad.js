@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { thing_interaction } from './thing'
 
 export const annoyinglad = (gameState, title) => {
@@ -8,6 +8,7 @@ export const annoyinglad = (gameState, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = ['annoyinglad_kickoff_text']
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -21,6 +22,7 @@ export const annoyinglad = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

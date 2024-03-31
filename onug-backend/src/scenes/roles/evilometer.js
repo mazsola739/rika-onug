@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, superVillainDetected } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime, superVillainDetected } from '../../utils'
 import { generateRoleInteraction } from './../generate-scene-role-interactions';
 
 //TODO super villains can see evilometer
@@ -14,6 +14,7 @@ export const evilometer = (gameState, title, hasDoppelganger) => {
       : 'evilometer_kickoff_text',
     'evilometer_kickoff2_text',
   ]
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -27,6 +28,7 @@ export const evilometer = (gameState, title, hasDoppelganger) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

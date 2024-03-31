@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { troublemaker_interaction } from './troublemaker'
 
 export const switcheroo = (gameState, title) => {
@@ -8,6 +8,7 @@ export const switcheroo = (gameState, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = ['switcheroo_kickoff_text']
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -21,6 +22,7 @@ export const switcheroo = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

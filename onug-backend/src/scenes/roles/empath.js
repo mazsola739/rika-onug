@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, pickRandomUpToThreePlayers, getAllPlayerTokens } from '../../utils'
+import { getRandomItemFromArray, pickRandomUpToThreePlayers, getAllPlayerTokens, getSceneEndTime } from '../../utils'
 
 const empathAllKeys = [
   'identifier_everyone_text',
@@ -36,6 +36,7 @@ export const empath = (gameState, title, prefix) => {
   const tokens = getAllPlayerTokens(newGameState.players)  
   const total_players = newGameState.total_players
   const narration = createEmpath(prefix, total_players)
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -55,6 +56,7 @@ export const empath = (gameState, title, prefix) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

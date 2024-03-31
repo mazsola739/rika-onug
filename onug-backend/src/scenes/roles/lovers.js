@@ -1,13 +1,14 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getLoversPlayerNumbersByMark } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getLoversPlayerNumbersByMark, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const lovers = (gameState, title) => {
   const newGameState = { ...gameState }
-  const narration = ['lovers_kickoff_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
   const scene = []
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const narration = ['lovers_kickoff_text']
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -21,6 +22,7 @@ export const lovers = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

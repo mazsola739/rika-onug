@@ -1,6 +1,6 @@
 //@ts-check
 import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, getAllPlayerTokens, getNonAlienPlayerNumbersByRoleIds, getAnyOtherPlayersByToken, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getRandomItemsFromArray } from '../../utils'
+import { getRandomItemFromArray, getAllPlayerTokens, getNonAlienPlayerNumbersByRoleIds, getAnyOtherPlayersByToken, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
 import { isValidCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
@@ -26,6 +26,7 @@ export const bodysnatcher = (gameState, title, prefix) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
   const narration = createBodysnatcher(prefix)
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -45,6 +46,7 @@ export const bodysnatcher = (gameState, title, prefix) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

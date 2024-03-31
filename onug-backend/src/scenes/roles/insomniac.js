@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers } from '../../utils'
+import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const insomniac = (gameState, title, hasDoppelganger) => {
@@ -13,6 +13,7 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
       : 'insomniac_kickoff_text',
     'insomniac_kickoff2_text',
   ]
+  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -26,6 +27,7 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }

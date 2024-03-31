@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE, doppelgangerInstantActionsIds } from '../../constant'
-import { getAllPlayerTokens } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { alphawolf_interaction, alphawolf_response } from './alphawolf'
 import { apprenticeseer_interaction, apprenticeseer_response } from './apprenticeseer'
 import { cupid_interaction, cupid_response } from './cupid'
@@ -59,6 +59,7 @@ export const doppelganger_instant_action = (gameState, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)  
   const rolesFromIds = getRolesNames(newGameState.selected_cards, doppelgangerInstantActionsIds, instantRoleIds)
+  const actionTime = 8
 
   addVerboseOr(rolesFromIds)
   
@@ -80,6 +81,7 @@ export const doppelganger_instant_action = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
   return newGameState
 }
