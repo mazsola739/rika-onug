@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { alienAbducted, getAllPlayerTokens, getSceneEndTime } from '../../utils'
+import { alienAbducted, getAllPlayerTokens, getPlayerNeighborsByToken, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 //TODO aliens can see cow
@@ -37,16 +37,17 @@ export const cow_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const neighborIsAlien = alienAbducted(newGameState.players, token)
+  const neighbors = getPlayerNeighborsByToken(newGameState.players, 'both', 1)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    alien_neighbor: neighborIsAlien,
+    alien_neighbor: neighborIsAlien ? neighbors : [],
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message:  [neighborIsAlien ? 'interaction_got_tapped_by_alien' : 'interaction_no_tap'],
     icon: 'cow',
-    uniqueInformations: { alien_neighbor: neighborIsAlien }
+    uniqueInformations: { alien_neighbor: neighborIsAlien ? neighbors : [], }
   })
 }

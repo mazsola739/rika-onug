@@ -74,7 +74,6 @@ export const mortician_interaction = (gameState, token, title, randomMorticianIn
       return generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_shielded'],
         icon: 'shield',
-        uniqueInformations: { shielded: true },
       })
     }
   } else if (morticianKey.includes('neighbor')) {

@@ -186,7 +186,6 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
       return generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_shielded'],
         icon: 'shield',
-        uniqueInformations: { shielded: true },
       })
     } else {
       selectableCards = randomAnyOneKey === 'identifier_center_text' ? centerCardPositions : getSelectableOtherPlayerNumbersWithoutShield(selectableOnePlayers, token)

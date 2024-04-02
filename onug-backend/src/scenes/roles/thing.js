@@ -59,14 +59,10 @@ export const thing_response = (gameState, token, selected_card_positions, title)
   const newGameState = { ...gameState }
   const scene = []
 
-  const tappedPlayerToken = getPlayerTokensByPlayerNumber(
-    newGameState.players,
-    selected_card_positions[0]
-  ) //TODO only 1 player
+  const tappedPlayerToken = getPlayerTokensByPlayerNumber(newGameState.players, selected_card_positions[0])
+  //TODO only 1 player
 
-  websocketServerConnectionsPerRoom[newGameState.room_id][
-    tappedPlayerToken[0]
-  ].send(
+  websocketServerConnectionsPerRoom[newGameState.room_id][tappedPlayerToken[0]].send(
     JSON.stringify({
       type: MESSAGE,
       message: ['message_tapped'],

@@ -65,7 +65,6 @@ export const insomniac_interaction = (gameState, token, title) => {
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_shielded'],
       icon: 'shield',
-      uniqueInformations: { shielded: true },
     })
   }
 }

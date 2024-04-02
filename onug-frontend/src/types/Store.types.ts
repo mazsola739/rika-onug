@@ -65,15 +65,13 @@ export type WsJsonMessage = {
     
     //unique informations
     answer_options?: string[]
-    new_role_id?: number
-    copied_role?: string
-    instant_night_action?: string
     viewed_cards?: string[]
+    viewed_marks?: string[]
     swapped_cards?: string[]
     swapped_marks?: string[]
     flipped_cards?: string[]
-    new_artifact_card?: string
-    new_shield_card?: string
+    new_artifact_card?: string[]
+    new_shield_card?: string[]
     mark_of_vampire?: string[]
     mark_of_fear?: string[]
     mark_of_bat?: string[]
@@ -82,6 +80,30 @@ export type WsJsonMessage = {
     mark_of_traitor?: string[]
     mark_of_clarity?: string[]
     mark_of_assassin?: string[]
+
+    aliens?: string[]
+    zerb?: string[]
+    groob?: string[]
+    zerbgroob?: string[]
+    alien_neighbor?: []
+    vampires?: string[]
+    new_vampire?: string[]
+    werewolves?: string[]
+    dreamwolf?: string[] 
+    claw?: string[]
+    villains?: string[]
+    villain_neighbor?: []
+    evilhand?: string[]    
+    assassin?: string[]
+    tanner?: string[]
+    auraseer?: string[]
+    seers?: string[]
+    blob?: string[]
+    family?: string[]
+    madscientist?: string[]
+    lovers?: string[]
+    masons?: string[]
+    tapped?: string[]
   }
 }
 

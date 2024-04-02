@@ -2,7 +2,7 @@
 import { getKeys, concatArraysWithUniqueElements } from '../utils'
 import { updatePlayerCard } from './update-player-card'
 
-export const generateRoleInteraction = ( newGameState, token, {
+export const generateRoleInteraction = ( gameState, token, {
   private_message,
   icon,
   selectableCards = {},
@@ -11,12 +11,12 @@ export const generateRoleInteraction = ( newGameState, token, {
   showMarks = [],
   uniqueInformations = {}
 }) => {
-  updatePlayerCard(newGameState, token)
+  updatePlayerCard(gameState, token)
 
   const informations = {
-    shielded_cards: newGameState.shield,
-    artifacted_cards: getKeys(newGameState.artifact),
-    show_cards: showCards !== null ? concatArraysWithUniqueElements(showCards, newGameState.flipped) : newGameState.flipped,
+    shielded_cards: gameState.shield,
+    artifacted_cards: getKeys(gameState.artifact),
+    show_cards: showCards !== null ? concatArraysWithUniqueElements(showCards, gameState.flipped) : gameState.flipped,
     show_marks: showMarks,
     ...selectableCards,
     ...selectableMarks,
@@ -27,8 +27,8 @@ export const generateRoleInteraction = ( newGameState, token, {
     private_message,
     icon,
     ...informations,
-    player_name: newGameState.players[token].name,
-    player_number: newGameState.players[token].player_number,
-    ...newGameState.players[token].card,
+    player_name: gameState.players[token].name,
+    player_number: gameState.players[token].player_number,
+    ...gameState.players[token].card,
   }
 }
