@@ -6,6 +6,7 @@ import AssassinIcon from './assassin.svg?react'
 import AwesomeIcon from './awesome.svg?react'
 import BabyAlienIcon from './babyalien.svg?react'
 import BatIcon from './bat.svg?react'
+import BearIcon from './bear.svg?react'
 import BlindIcon from './blind.svg?react'
 import BlobIcon from './blob.svg?react'
 import BulbIcon from './bulb.svg?react'
@@ -35,7 +36,6 @@ import FriendIcon from './friend.svg?react'
 import GremlinIcon from './gremlin.svg?react'
 import GroobzerbIcon from './groobzerb.svg?react'
 import IdIcon from './id.svg?react'
-import InsomniacIcon from './insomniac.svg?react'
 import InteractionIcon from './interaction.svg?react'
 import InvestigatorIcon from './investigator.svg?react'
 import JestIcon from './jest.svg?react'
@@ -68,6 +68,7 @@ import SwapIcon from './swap.svg?react'
 import TannerIcon from './tanner.svg?react'
 import TapIcon from './tap.svg?react'
 import TargetIcon from './target.svg?react'
+import ThumbIcon from './thumb.svg?react'
 import TraitorIcon from './traitor.svg?react'
 import TrophyIcon from './trophy.svg?react'
 import UfoIcon from './ufo.svg?react'
@@ -87,6 +88,7 @@ export {
   AwesomeIcon,
   BabyAlienIcon,
   BatIcon,
+  BearIcon,
   BlindIcon,
   BlobIcon,
   BulbIcon,
@@ -116,7 +118,6 @@ export {
   GremlinIcon,
   GroobzerbIcon,
   IdIcon,
-  InsomniacIcon,
   InteractionIcon,
   InvestigatorIcon,
   JestIcon,
@@ -149,6 +150,7 @@ export {
   TannerIcon,
   TapIcon,
   TargetIcon,
+  ThumbIcon,
   TraitorIcon,
   TrophyIcon,
   UfoIcon,

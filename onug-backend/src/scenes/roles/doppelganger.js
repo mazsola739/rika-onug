@@ -81,7 +81,7 @@ export const doppelganger_response = (gameState, token, selected_card_positions,
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_you_are_that_role', `${newGameState.players[token]?.card.player_role}`],
     icon: 'copy',
     showCards: showCards,
-    uniqInformations: { new_role_id: newGameState.players[token].card.player_role_id, viewed_cards: [selected_card_positions[0]] },
+    uniqueInformations: { new_role_id: newGameState.players[token].card.player_role_id, viewed_cards: [selected_card_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

@@ -13,122 +13,20 @@ class RoleStore {
     const playerCards: PositionProperties[] = gameBoardStore.playerCards.map(
       (playerCard) => {
         const { position } = playerCard
-        const selectable_cards =
-          (lastJsonMessage.interaction.selectable_cards || []).includes(position) || false
-        const selectable_marks =
-          (lastJsonMessage.interaction.selectable_marks || []).includes(position) || false
-        const shielded_cards =
-          (lastJsonMessage.interaction.shielded_cards || []).includes(position) || false
-        const artifacted_cards =
-          (lastJsonMessage.interaction.artifacted_cards || []).includes(position) || false
+        const selectable_cards = (lastJsonMessage.interaction.selectable_cards || []).includes(position) || false
+        const selectable_marks = (lastJsonMessage.interaction.selectable_marks || []).includes(position) || false
 
-
-        const aliens =
-          (lastJsonMessage.interaction.aliens || []).includes(position) || false
-        const claw =
-          (lastJsonMessage.interaction.claw || []).includes(position) || false
-        const tap =
-          (lastJsonMessage.interaction.tapped || []).includes(position) || false
-        const assassin =
-          (lastJsonMessage.interaction.assassin || []).includes(position) || false
-        const spy =
-          (lastJsonMessage.interaction.viewed_cards || []).includes(position) || false
-        const tanner =
-          (lastJsonMessage.interaction.tanner || []).includes(position) || false
-        const target =
-          (lastJsonMessage.interaction.mark_of_assassin || []).includes(position) || false
-        const interaction =
-          (lastJsonMessage.interaction.interaction || []).includes(position) || false
-        const seer =
-          (lastJsonMessage.interaction.seer || []).includes(position) || false
-        const blob =
-          (lastJsonMessage.interaction.blob || []).includes(position) || false
-        //bodysnatcher
-
-        const shield =
-          (lastJsonMessage.interaction.new_shield_card || []).includes(position) || false
-        const artifact =
-          (lastJsonMessage.interaction.new_artifact_card || []).includes(position) || false
-        const werewolves =
-          (lastJsonMessage.interaction.werewolves || []).includes(position) || false
-        const dreamwolf =
-          (lastJsonMessage.interaction.dreamwolf || []).includes(position) || false
-
-        const mad = (lastJsonMessage.interaction.mad || []).includes(position) || false
-        const masons =
-          (lastJsonMessage.interaction.masons || []).includes(position) || false
-
-
-        const showCard = (lastJsonMessage.interaction.show_cards || []).find(
-          (showCardObj) => Object.keys(showCardObj)[0] === position
-        )
-        const id = showCard ? showCard[position] : playerCard.id
-        const showMark = (lastJsonMessage.interaction.show_marks || []).find(
-          (showMarkObj) => Object.keys(showMarkObj)[0] === position
-        )
-        const mark = showMark ? showMark[position] : playerCard.mark
+        const showCard = (lastJsonMessage.interaction.show_cards || []).find((showCardObj) => Object.keys(showCardObj)[0] === position)
+        const cardId = showCard ? showCard[position] : playerCard.id
+        const showMark = (lastJsonMessage.interaction.show_marks || []).find((showMarkObj) => Object.keys(showMarkObj)[0] === position)
+        const markId = showMark ? showMark[position] : playerCard.mark
 
         return {
           ...playerCard,
-          id,
-          mark,
+          cardId,
+          markId,
           selectable_cards,
           selectable_marks,
-          shielded_cards,
-          artifacted_cards,
-          aliens,
-          claw,
-          tap,
-          assassin,
-          spy,
-          tanner,
-          target,
-          interaction,
-          seer,
-          blob,
-
-          shield,
-          artifact,
-
-          //awesome,
-          //babyalien,
-          /* bat,
-          blob, */
-          //bulb,
-          //clarity,
-          /*  cow,
-          diseased, */
-          dreamwolf,
-          //dress,
-          //drunk,
-          //empath,
-          //evil,
-          /* family,
-          fang,
-          fear, */
-          //friend,
-          //jest,
-          //like,
-          /*  lovers, */
-          masons,
-          mad,
-          /*  mortician, */
-          //nice,
-          //pretty,
-          /*  seer, */
-          //select,
-          /*   shield, */
-          //smell,
-          //sus,
-          //swap,
-
-          /*
-          traitor, */
-          //trophy,
-          //ufo,
-          /* vampires,
-          villains, */
-          werewolves,
         }
       }
     )
@@ -136,23 +34,17 @@ class RoleStore {
     const centerCards: PositionProperties[] = gameBoardStore.centerCards.map(
       (centerCard) => {
         const { position } = centerCard
-        const selectable_cards =
-          (lastJsonMessage.interaction.selectable_cards || []).includes(position) || false
-        const showCard = (lastJsonMessage.interaction.show_cards || []).find(
-          (showCardObj) => Object.keys(showCardObj)[0] === position
-        )
-        const id = showCard ? showCard[position] : centerCard.id
+        const selectable_cards = (lastJsonMessage.interaction.selectable_cards || []).includes(position) || false
+        const showCard = (lastJsonMessage.interaction.show_cards || []).find((showCardObj) => Object.keys(showCardObj)[0] === position)
+        const cardId = showCard ? showCard[position] : centerCard.id
 
-        return { ...centerCard, id, selectable_cards }
+        return { ...centerCard, cardId, selectable_cards }
       }
     )
 
-    interactionStore.selectableCenterCardLimit =
-      lastJsonMessage.interaction.selectable_card_limit?.center
-    interactionStore.selectablePlayerCardLimit =
-      lastJsonMessage.interaction.selectable_card_limit?.player
-    interactionStore.selectableMarkLimit =
-      lastJsonMessage.interaction.selectable_mark_limit?.mark
+    interactionStore.selectableCenterCardLimit = lastJsonMessage.interaction.selectable_card_limit?.center
+    interactionStore.selectablePlayerCardLimit = lastJsonMessage.interaction.selectable_card_limit?.player
+    interactionStore.selectableMarkLimit = lastJsonMessage.interaction.selectable_mark_limit?.mark
     gameBoardStore.setAnswerOptions(answerOptions)
     gameBoardStore.setPlayerCards(playerCards)
     gameBoardStore.setCenterCards(centerCards)

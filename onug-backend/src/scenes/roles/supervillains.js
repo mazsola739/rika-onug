@@ -43,6 +43,6 @@ export const supervillain_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_villains', ...messageIdentifiers],
     icon: 'villain',
-    uniqInformations: { villains },
+    uniqueInformations: { villains },
   })
 }

@@ -64,7 +64,7 @@ export const bodysnatcher_interaction = (gameState, token, title, randomBodysnat
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_shielded'],
       icon: 'shield',
-      uniqInformations: { shielded: true },
+      uniqueInformations: { shielded: true },
     })
   }
 
@@ -153,7 +153,7 @@ export const bodysnatcher_response = (gameState, token, selected_card_positions,
     private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
     icon: 'ufo',
     showCards: showCards,
-    uniqInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], viewed_cards: [currentPlayerNumber] },
+    uniqueInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], viewed_cards: [currentPlayerNumber] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

@@ -70,7 +70,7 @@ export const sentinel_response = (gameState, token, selected_card_positions, tit
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_placed_shield', formatPlayerIdentifier(selected_card_positions)[0]],
     icon: 'shield',
-    uniqInformations: { new_shield_card: [selected_card_positions[0]] },
+    uniqueInformations: { new_shield_card: [selected_card_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

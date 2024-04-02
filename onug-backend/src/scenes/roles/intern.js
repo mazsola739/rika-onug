@@ -55,6 +55,6 @@ export const intern_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: [madscientist.length === 0 ? 'interaction_mad_now' : 'interaction_mad', ...messageIdentifiers],
     icon: 'mad',
-    uniqInformations: { madscientist },
+    uniqueInformations: { madscientist },
   })
 }

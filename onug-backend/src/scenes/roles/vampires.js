@@ -51,7 +51,7 @@ export const vampires_interaction = (gameState, token, title) => {
     private_message: privateMessage,
     icon: 'vampire',
     selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
-    uniqInformations: { vampires },
+    uniqueInformations: { vampires },
   })
 }
 
@@ -107,7 +107,7 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
     const interaction = generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_mark_of_vampire', formatPlayerIdentifier([mostVotedPlayer])],
       icon: 'fang',
-      uniqInformations: { mark_of_vampire: [mostVotedPlayer] },
+      uniqueInformations: { mark_of_vampire: [mostVotedPlayer] },
     })
 
     scene.push({ type: SCENE, title, token, interaction })

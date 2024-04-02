@@ -94,7 +94,7 @@ export const robber_response = (gameState, token, selected_card_positions, title
     private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
     icon: title === 'ROBBER' ? 'robber' : 'dog',
     showCards: showCards,
-    uniqInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], viewed_cards: [currentPlayerNumber] },
+    uniqueInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], viewed_cards: [currentPlayerNumber] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

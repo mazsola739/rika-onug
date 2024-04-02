@@ -43,6 +43,6 @@ export const lover_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_mark_of_lover', ...messageIdentifiers],
     icon: 'lover',
-    uniqInformations: { lovers },
+    uniqueInformations: { lovers },
   })
 }

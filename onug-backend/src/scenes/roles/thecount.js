@@ -92,7 +92,7 @@ export const thecount_response = (gameState, token, selected_mark_positions, tit
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_mark_of_fear', formatPlayerIdentifier(selected_mark_positions)[0]],
     icon: 'fear',
-    uniqInformations: { mark_of_fear: [selected_mark_positions[0]] },
+    uniqueInformations: { mark_of_fear: [selected_mark_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

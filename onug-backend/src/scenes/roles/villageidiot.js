@@ -40,7 +40,7 @@ export const villageidiot_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_direction'],
     icon: title === 'RASCAL' ? 'prank' : 'jest',
-    uniqInformations: { answer_options: ['left', 'right'] },
+    uniqueInformations: { answer_options: ['left', 'right'] },
   })
 }
 

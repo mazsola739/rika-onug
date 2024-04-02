@@ -101,7 +101,7 @@ export const cupid_response = (gameState, token, selected_mark_positions, title)
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_mark_of_love', ...messageIdentifiers],
     icon: 'cupid',
-    uniqInformations: { mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]] },
+    uniqueInformations: { mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

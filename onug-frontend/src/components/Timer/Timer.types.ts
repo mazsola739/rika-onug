@@ -1,4 +1,4 @@
 export interface TimerProps {
+  endingTime: number
   startingTime: number
-  actionTime: number
 }

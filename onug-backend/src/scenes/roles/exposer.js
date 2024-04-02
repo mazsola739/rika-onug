@@ -96,7 +96,7 @@ export const exposer_response = (gameState, token, selected_card_positions, titl
     private_message: ['interaction_flipped_card', formatPlayerIdentifier(cardPositions)],
     icon: 'id',
     showCards: revealedCards,
-    uniqInformations: { flipped_cards: cardPositions },
+    uniqueInformations: { flipped_cards: cardPositions },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

@@ -48,7 +48,7 @@ export const auraseer_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_card_or_mark_action', ...messageIdentifiers],
     icon: 'interaction',
-    uniqInformations: { auraseer: playersWithCardOrMarkActionTrue }
+    uniqueInformations: { auraseer: playersWithCardOrMarkActionTrue }
   })
 }
 

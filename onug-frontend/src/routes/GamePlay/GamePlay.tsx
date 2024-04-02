@@ -44,10 +44,13 @@ export const GamePlay: React.FC = observer(() => {
       }
     }
     if (lastJsonMessage?.type === HYDRATE_GAME_PLAY) {
-      /* && lastJsonMessage?.success */ //TODO success
+      /* && lastJsonMessage?.success */ //TODO success?
       narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
       gamePlayStore.setStartingTime(
         lastJsonMessage.actual_scene.scene_start_time
+      )
+      gamePlayStore.setEndingTime(
+        lastJsonMessage.actual_scene.scene_end_time
       )
     }
     if (lastJsonMessage?.type === MESSAGE) {

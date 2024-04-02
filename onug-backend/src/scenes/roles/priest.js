@@ -67,7 +67,7 @@ export const priest_interaction = (gameState, token, title) => {
     private_message: ['interaction_may_one_any_other'],
     icon: 'clarity',
     selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 } },
-    uniqInformations: { mark_of_clarity: [currentPlayerNumber] }
+    uniqueInformations: { mark_of_clarity: [currentPlayerNumber] }
   })
 }
 
@@ -100,7 +100,7 @@ export const priest_response = (gameState, token, selected_mark_positions, title
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_mark_of_clarity', formatPlayerIdentifier(selected_mark_positions)[0]],
     icon: 'clarity',
-    uniqInformations: { mark_of_clarity: [currentPlayerNumber, selected_mark_positions[0]] },
+    uniqueInformations: { mark_of_clarity: [currentPlayerNumber, selected_mark_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

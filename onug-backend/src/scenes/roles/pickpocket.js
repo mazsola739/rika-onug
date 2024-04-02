@@ -87,7 +87,7 @@ export const pickpocket_response = (gameState, token, selected_mark_positions, t
     private_message: ['interaction_swapped_marks', ...messageIdentifiers, 'interaction_own_mark'],
     icon: 'robber',
     showMarks: viewMarks,
-    uniqInformations: { swapped_marks: [currentPlayerNumber, selected_mark_positions[0]], viewed_marks: [currentPlayerNumber] },
+    uniqueInformations: { swapped_marks: [currentPlayerNumber, selected_mark_positions[0]], viewed_marks: [currentPlayerNumber] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

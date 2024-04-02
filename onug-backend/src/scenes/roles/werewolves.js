@@ -51,7 +51,7 @@ export const werewolves_interaction = (gameState, token, title) => {
     private_message: [loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves'],
     icon: loneWolf ? 'spy' : 'werewolf',
     selectableCards: { selectable_cards: loneWolf ? centerCardPositions : [], selectable_card_limit: { player: 0, center: 1 } },
-    uniqInformations: { werewolves, dreamwolf },
+    uniqueInformations: { werewolves, dreamwolf },
   })
 }
 
@@ -83,7 +83,7 @@ export const werewolves_response = (gameState, token, selected_card_positions, t
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
     icon: 'spy',
     showCards: showCards,
-    uniqInformations: { viewed_cards: [selected_card_positions[0]] },
+    uniqueInformations: { viewed_cards: [selected_card_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

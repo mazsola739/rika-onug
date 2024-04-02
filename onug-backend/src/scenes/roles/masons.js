@@ -43,6 +43,6 @@ export const masons_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_masons', ...messageIdentifiers],
     icon: 'mason',
-    uniqInformations: { masons: masons },
+    uniqueInformations: { masons: masons },
   })
 }

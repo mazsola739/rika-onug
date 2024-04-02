@@ -57,7 +57,7 @@ export const drunk_interaction = (gameState, token, title) => {
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_shielded'],
       icon: 'shield',
-      uniqInformations: { shielded: true },
+      uniqueInformations: { shielded: true },
     })
   }
 }
@@ -91,7 +91,7 @@ export const drunk_response = (gameState, token, selected_card_positions, title)
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
     icon: 'drunk',
-    uniqInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
+    uniqueInformations: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

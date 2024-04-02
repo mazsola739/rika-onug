@@ -9,7 +9,7 @@ export const generateRoleInteraction = ( newGameState, token, {
   selectableMarks = {},
   showCards = [],
   showMarks = [],
-  uniqInformations = {}
+  uniqueInformations = {}
 }) => {
   updatePlayerCard(newGameState, token)
 
@@ -20,7 +20,7 @@ export const generateRoleInteraction = ( newGameState, token, {
     show_marks: showMarks,
     ...selectableCards,
     ...selectableMarks,
-    ...uniqInformations,
+    ...uniqueInformations,
   }
 
   return {

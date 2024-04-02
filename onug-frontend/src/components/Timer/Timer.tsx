@@ -4,13 +4,13 @@ import { gameBoardStore } from 'store'
 import { StyledTimer } from './Timer.styles'
 import { TimerProps } from './Timer.types'
 
-export const Timer: React.FC<TimerProps> = observer(
-  ({ startingTime, actionTime = 10000 }) => {
-    const [remainingTime, setRemainingTime] = useState(0)
+//TODO rethink
+export const Timer: React.FC<TimerProps> = observer(({ startingTime, endingTime }) => {
+  const [remainingTime, setRemainingTime] = useState(0)
 
-    //TODO rethink
     useEffect(() => {
       const intervalId = setInterval(() => {
+        const actionTime = endingTime - startingTime
         const currentTime = Date.now()
         const remaining = startingTime - currentTime + actionTime
         setRemainingTime(remaining < 0 ? 0 : remaining)
@@ -19,10 +19,10 @@ export const Timer: React.FC<TimerProps> = observer(
       return () => {
         clearInterval(intervalId)
       }
-    }, [startingTime, actionTime])
-    //TODO rethink
+    }, [startingTime, endingTime])
+
     useEffect(() => {
-      if (remainingTime <= 1000 && remainingTime > 0) {
+      if ((remainingTime <= 1000 && remainingTime > 0) || remainingTime === 0) {
         const closeEyesTimer = setTimeout(() => {
           gameBoardStore.closeYourEyes()
         }, remainingTime)

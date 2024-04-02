@@ -73,6 +73,6 @@ export const blob_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_part_of_blob', ...messageIdentifiers],
     icon: 'blob',
-    uniqInformations: { blob: partOfBlob },
+    uniqueInformations: { blob: partOfBlob },
   })
 }

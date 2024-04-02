@@ -186,7 +186,7 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
       return generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_shielded'],
         icon: 'shield',
-        uniqInformations: { shielded: true },
+        uniqueInformations: { shielded: true },
       })
     } else {
       selectableCards = randomAnyOneKey === 'identifier_center_text' ? centerCardPositions : getSelectableOtherPlayerNumbersWithoutShield(selectableOnePlayers, token)
@@ -219,7 +219,6 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
     private_message: privateMessage,
     icon: 'prank',
     selectableCards: { selectable_cards: selectableCards, selectable_card_limit: selectableLimit },
-    uniqInformations: { random },
   })
 }
 
@@ -264,7 +263,7 @@ export const rascal_response = (gameState, token, selected_card_positions, title
       interaction = generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_swapped_cards', ...messageIdentifiers],
         icon: 'prank',
-        uniqInformations: { swapped_cards: [position1, position2] },
+        uniqueInformations: { swapped_cards: [position1, position2] },
       })
 
       break
@@ -298,7 +297,7 @@ export const rascal_response = (gameState, token, selected_card_positions, title
           icon: 'prank',
           selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
           showCards: showCards,
-          uniqInformations: { viewed_cards: [selected_card_positions[0]], witch_answer: true },
+          uniqueInformations: { viewed_cards: [selected_card_positions[0]], witch_answer: true },
         })
 
       } else if (newGameState.players[token].player_history.witch_answer) {
@@ -327,7 +326,7 @@ export const rascal_response = (gameState, token, selected_card_positions, title
         interaction = generateRoleInteraction(newGameState, token, {
           private_message: ['interaction_swapped_cards', ...messageIdentifiers],
           icon: 'prank',
-          uniqInformations: { swapped_cards: [newGameState.players[token].player_history.selected_card, selected_card_positions[0]] },
+          uniqueInformations: { swapped_cards: [newGameState.players[token].player_history.selected_card, selected_card_positions[0]] },
         })
 
       }
@@ -366,7 +365,7 @@ export const rascal_response = (gameState, token, selected_card_positions, title
         private_message: ['interaction_swapped_cards', ...messageIds, newGameState.players[token].player_history.random === 'robber' ? 'interaction_own_card' : ''],
         icon: 'prank',
         showCards: newGameState.players[token].player_history.random === 'robber' ? showCards : undefined,
-        uniqInformations: { swapped_cards: [currentPlayerNumber, selectedPosition], viewed_cards: [currentPlayerNumber] },
+        uniqueInformations: { swapped_cards: [currentPlayerNumber, selectedPosition] },
       })
 
       break

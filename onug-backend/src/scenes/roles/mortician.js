@@ -74,7 +74,7 @@ export const mortician_interaction = (gameState, token, title, randomMorticianIn
       return generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_shielded'],
         icon: 'shield',
-        uniqInformations: { shielded: true },
+        uniqueInformations: { shielded: true },
       })
     }
   } else if (morticianKey.includes('neighbor')) {
@@ -139,7 +139,7 @@ export const mortician_response = (gameState, token, selected_card_positions, ti
     private_message: ['interaction_saw_card', formatPlayerIdentifier(cardPositions)],
     icon: 'coffin',
     showCards: viewCards,
-    uniqInformations: { viewed_cards: cardPositions },
+    uniqueInformations: { viewed_cards: cardPositions },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

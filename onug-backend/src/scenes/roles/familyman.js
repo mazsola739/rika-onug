@@ -75,6 +75,6 @@ export const familyman_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_part_of_family'],
     icon: 'family',
-    uniqInformations: { family: partOfFamily, },
+    uniqueInformations: { family: partOfFamily, },
   })
 }

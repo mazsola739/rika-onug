@@ -47,6 +47,6 @@ export const minion_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_werewolves', ...messageIdentifiers],
     icon: 'werewolf',
-    uniqInformations: { werewolves },
+    uniqueInformations: { werewolves },
   })
 }

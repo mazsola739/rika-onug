@@ -17,51 +17,6 @@ export const renderPlayerCards = () => {
             position={card.position}
             selectable_cards={card.selectable_cards}
             selectable_marks={card.selectable_marks}
-            aliens={card.aliens}
-            artifact={card.artifact}
-            assassin={card.assassin}
-            awesome={card.awesome}
-            babyalien={card.babyalien}
-            bat={card.bat}
-            blob={card.blob}
-            bulb={card.bulb}
-            clarity={card.clarity}
-            claw={card.claw}
-            cow={card.cow}
-            diseased={card.diseased}
-            dreamwolf={card.dreamwolf}
-            dress={card.dress}
-            drunk={card.drunk}
-            empath={card.empath}
-            evil={card.evil}
-            family={card.family}
-            fang={card.fang}
-            fear={card.fear}
-            friend={card.friend}
-            jest={card.jest}
-            like={card.like}
-            lovers={card.lovers}
-            masons={card.masons}
-            mad={card.mad}
-            mortician={card.mortician}
-            nice={card.nice}
-            pretty={card.pretty}
-            seer={card.seer}
-            select={card.select}
-            shield={card.shield}
-            shielded_cards={card.shielded_cards}
-            smell={card.smell}
-            villains={card.villains}
-            sus={card.sus}
-            swap={card.swap}
-            tanner={card.tanner}
-            tap={card.tap}
-            target={card.target}
-            traitor={card.traitor}
-            trophy={card.trophy}
-            ufo={card.ufo}
-            vampires={card.vampires}
-            werewolves={card.werewolves}
           />
         ))}
       </PlayersCards>
@@ -84,7 +39,6 @@ export const renderCenterCard = () => {
               position={card.position}
               isCenter={true}
               selectable_cards={card.selectable_cards}
-              spy={card.spy}
             />
           </CenterCards>
         </CardContainer>
@@ -110,7 +64,6 @@ export const renderCenterCard = () => {
                     position={card.position}
                     isCenter={true}
                     selectable_cards={card.selectable_cards}
-                    spy={card.spy}
                   />
                 )
               )

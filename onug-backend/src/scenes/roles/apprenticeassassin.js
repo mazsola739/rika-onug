@@ -53,7 +53,7 @@ export const apprenticeassassin_interaction = (gameState, token, title) => {
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_assassin', ...messageIdentifiers],
       icon: 'assassin',
-      uniqInformations: { assassin },
+      uniqueInformations: { assassin },
     })
   } else if (assassin.length === 0) {
     const allPlayerTokens = getAllPlayerTokens(newGameState.players)
@@ -99,10 +99,7 @@ export const apprenticeassassin_response = (gameState, token, selected_mark_posi
       assassinPosition
   }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(
-    newGameState.players,
-    token
-  )
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
   if (currentPlayerNumber === selected_mark_positions[0]) {
     newGameState.players[token].card.player_mark = 'mark_of_assassin'
@@ -120,7 +117,7 @@ export const apprenticeassassin_response = (gameState, token, selected_mark_posi
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
     icon: 'target',
-    uniqInformations: { mark_of_assassin: [selected_mark_positions[0]] },
+    uniqueInformations: { mark_of_assassin: [selected_mark_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

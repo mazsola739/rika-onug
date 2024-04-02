@@ -5,6 +5,7 @@ class GamePlayStore {
   isGameStopped = true
   isGamePaused = false
   startingTime = 0
+  endingTime = 0
 
   constructor() {
     makeAutoObservable(this)
@@ -12,6 +13,10 @@ class GamePlayStore {
 
   setStartingTime(startingTime: number): void {
     this.startingTime = startingTime
+  }
+
+  setEndingTime(endingTime: number): void {
+    this.endingTime = endingTime
   }
 
   toggleGameStatus(): void {

@@ -42,6 +42,6 @@ export const everyonemark_interaction = (gameState, token, title) => {
     private_message: ['interaction_own_mark'],
     icon: 'mark',
     showMarks: viewMarks,
-    uniqInformations: { viewed_marks: [currentPlayerNumber] },
+    uniqueInformations: { viewed_marks: [currentPlayerNumber] },
   })
 }

@@ -90,7 +90,7 @@ export const instigator_response = (gameState, token, selected_mark_positions, t
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_mark_of_traitor', formatPlayerIdentifier(selected_mark_positions)[0]],
     icon: 'traitor',
-    uniqInformations: { mark_of_traitor: [selected_mark_positions[0]] },
+    uniqueInformations: { mark_of_traitor: [selected_mark_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

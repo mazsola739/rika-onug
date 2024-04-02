@@ -7,7 +7,6 @@ import { scene } from './scene'
 
 //TODO set tickTime each narration different
 //TODO pauseGamePlay
-const tickTime = 10000
 
 const getNextScene = gameState => {
   try {
@@ -55,9 +54,12 @@ const tick = async (room_id) => {
     scene_number: newGameState.actual_scene.scene_number,
     scene_start_time: newGameState.actual_scene.scene_start_time,
     scene_title: newGameState.actual_scene.scene_title,
+    scene_end_time: newGameState.actual_scene.scene_end_time,
   }
 
   newGameState.actual_scene = actualScene
+
+  const tickTime = newGameState.actual_scene.scene_end_time - newGameState.actual_scene.scene_start_time
 
   await upsertRoomState(newGameState)
 

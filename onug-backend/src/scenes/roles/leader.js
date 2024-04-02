@@ -48,7 +48,7 @@ export const leader_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_aliens', ...messageIdentifiers],
     icon: 'alien',
-    uniqInformations: { aliens },
+    uniqueInformations: { aliens },
   })
 }
 
@@ -96,7 +96,7 @@ export const leader_zerbgroob_interaction = (gameState, token, title) => {
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_zerbgroob', ...messageIdentifiers],
       icon: 'groobzerb',
-      uniqInformations: { zerbgroob },
+      uniqueInformations: { zerbgroob },
     })
   } else {
     newGameState.players[token].player_history = {

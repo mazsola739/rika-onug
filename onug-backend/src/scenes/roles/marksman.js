@@ -91,7 +91,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
         private_message: privateMessage,
         icon: 'target',
         showCards: viewCards,
-        uniqInformations: { viewed_cards: [selected_card_positions[0]] },
+        uniqueInformations: { viewed_cards: [selected_card_positions[0]] },
       })
     } else {
       let selectableMarks = newGameState.players[token].player_history.selectable_marks
@@ -113,7 +113,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
         icon: 'target',
         showCards: viewCards,
         selectableMarks: { selectable_marks: selectableMarks, selectable_mark_limit: { mark: 1 } },
-        uniqInformations: { viewed_cards: [selected_card_positions[0]] },
+        uniqueInformations: { viewed_cards: [selected_card_positions[0]] },
       })
     }
 
@@ -155,7 +155,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
         private_message: ['interaction_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0]],
         icon: 'target',
         showMarks: viewMarks,
-        uniqInformations: { viewed_marks: [selected_mark_positions[0]] },
+        uniqueInformations: { viewed_marks: [selected_mark_positions[0]] },
       })
     } else {
       let selectableCards = newGameState.players[token].player_history.selectable_cards
@@ -177,7 +177,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
         icon: 'target',
         showMarks: viewMarks,
         selectableCards: { selectable_cards: selectableCards, selectable_card_limit: { player: 1, center: 0 } },
-        uniqInformations: { viewed_marks: [selected_mark_positions[0]] },
+        uniqueInformations: { viewed_marks: [selected_mark_positions[0]] },
       })
     }
 

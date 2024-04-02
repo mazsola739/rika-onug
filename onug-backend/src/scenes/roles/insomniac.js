@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getSceneEndTime } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const insomniac = (gameState, title, hasDoppelganger) => {
@@ -41,7 +41,7 @@ export const insomniac_interaction = (gameState, token, title) => {
     newGameState.players[token].card.player_card_id = currentCard.id
     newGameState.players[token].card.player_team = currentCard.team
 
-    const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, currentPlayerNumber)
+    const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, [currentPlayerNumber])
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
@@ -51,9 +51,9 @@ export const insomniac_interaction = (gameState, token, title) => {
 
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_own_card'],
-      icon: 'insomniac',
+      icon: title === 'INSOMNIAC' ? 'bear' : 'thumb',
       showCards: showCards,
-      uniqInformations: { viewed_cards: [currentPlayerNumber] }
+      uniqueInformations: { viewed_cards: [currentPlayerNumber] }
     })
   } else {
     newGameState.players[token].player_history = {
@@ -65,7 +65,7 @@ export const insomniac_interaction = (gameState, token, title) => {
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_shielded'],
       icon: 'shield',
-      uniqInformations: { shielded: true },
+      uniqueInformations: { shielded: true },
     })
   }
 }

@@ -47,7 +47,7 @@ export const groobzerb_interaction = (gameState, token, title) => {
       return generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_zerbgroob', ...messageIdentifiers],
         icon: 'groobzerb',
-        uniqInformations: { zerb },
+        uniqueInformations: { zerb },
       })
     } else {
       player.player_history = { ...player.player_history, scene_title: title }
@@ -68,7 +68,7 @@ export const groobzerb_interaction = (gameState, token, title) => {
       return generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_zerbgroob', ...messageIdentifiers],
         icon: 'groobzerb',
-        uniqInformations: { groob },
+        uniqueInformations: { groob },
       })
     } else {
       player.player_history = { ...player.player_history, scene_title: title }
