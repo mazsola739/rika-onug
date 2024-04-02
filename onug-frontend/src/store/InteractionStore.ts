@@ -1,6 +1,6 @@
 import { makeObservable, observable, action } from 'mobx'
 import { WsJsonMessage } from 'types'
-import { doppelgangerStore, oracleStore, roleStore } from './roleStores'
+import { doppelgangerStore, roleStore } from './roleStores'
 import * as constants from '../constant'
 
 class InteractionStore {
@@ -99,12 +99,6 @@ class InteractionStore {
     switch (title) {
       case 'DOPPELGÄNGER_INSTANT_ACTION':
         doppelgangerStore.instantNightAction(this.lastJsonMessage)
-        break
-      case 'ORACLE_QUESTION':
-        oracleStore.openYourEyes(this.lastJsonMessage)
-        break
-      case 'ORACLE_ANSWER':
-        oracleStore.openYourEyes(this.lastJsonMessage)
         break
       default:
         roleStore.openYourEyes(this.lastJsonMessage)

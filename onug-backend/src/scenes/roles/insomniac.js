@@ -53,7 +53,7 @@ export const insomniac_interaction = (gameState, token, title) => {
       private_message: ['interaction_own_card'],
       icon: title === 'INSOMNIAC' ? 'bear' : 'thumb',
       showCards: showCards,
-      uniqueInformations: { viewed_cards: [currentPlayerNumber] }
+      uniqueInformations: { bear: title === 'INSOMNIAC' ? [currentPlayerNumber] : [], thumb: title === 'SELF_AWARENESS_GIRL' ? [currentPlayerNumber] : [], }
     })
   } else {
     newGameState.players[token].player_history = {
@@ -64,7 +64,7 @@ export const insomniac_interaction = (gameState, token, title) => {
 
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_shielded'],
-      icon: 'shield',
+      icon: 'shielded',
     })
   }
 }

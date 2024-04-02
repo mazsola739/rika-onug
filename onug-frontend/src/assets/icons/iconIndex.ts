@@ -1,7 +1,7 @@
 import AerialIcon from './aerial.svg?react'
 import AlienIcon from './alien.svg?react'
 import AlienhandIcon from './alienhand.svg?react'
-import ArtifactIcon from './artifact.svg?react'
+import ArtifactedIcon from './artifacted.svg?react'
 import AssassinIcon from './assassin.svg?react'
 import AwesomeIcon from './awesome.svg?react'
 import BabyAlienIcon from './babyalien.svg?react'
@@ -35,14 +35,14 @@ import FearIcon from './fear.svg?react'
 import FriendIcon from './friend.svg?react'
 import GremlinIcon from './gremlin.svg?react'
 import GroobzerbIcon from './groobzerb.svg?react'
-import IdIcon from './id.svg?react'
+import IdcardIcon from './idcard.svg?react'
 import InteractionIcon from './interaction.svg?react'
 import InvestigatorIcon from './investigator.svg?react'
 import JestIcon from './jest.svg?react'
 import LikeIcon from './like.svg?react'
+import LonelyIcon from './lonely.svg?react'
 import LoverIcon from './lover.svg?react'
 import MadIcon from './mad.svg?react'
-import MarkIcon from './mark.svg?react'
 import MasonIcon from './mason.svg?react'
 import MorticianIcon from './mortician.svg?react'
 import MuteIcon from './mute.svg?react'
@@ -60,7 +60,7 @@ import SecretIcon from './secret.svg?react'
 import SeerIcon from './seer.svg?react'
 import SelectIcon from './select.svg?react'
 import SentinelIcon from './sentinel.svg?react'
-import ShieldIcon from './shield.svg?react'
+import ShieldedIcon from './shielded.svg?react'
 import SmellIcon from './smell.svg?react'
 import SpyIcon from './spy.svg?react'
 import SusIcon from './sus.svg?react'
@@ -83,7 +83,7 @@ export {
   AerialIcon,
   AlienIcon,
   AlienhandIcon,
-  ArtifactIcon,
+  ArtifactedIcon,
   AssassinIcon,
   AwesomeIcon,
   BabyAlienIcon,
@@ -117,14 +117,14 @@ export {
   FriendIcon,
   GremlinIcon,
   GroobzerbIcon,
-  IdIcon,
+  IdcardIcon,
   InteractionIcon,
   InvestigatorIcon,
   JestIcon,
   LikeIcon,
+  LonelyIcon,
   LoverIcon,
   MadIcon,
-  MarkIcon,
   MasonIcon,
   MorticianIcon,
   MuteIcon,
@@ -142,7 +142,7 @@ export {
   SeerIcon,
   SelectIcon,
   SentinelIcon,
-  ShieldIcon,
+  ShieldedIcon,
   SmellIcon,
   SpyIcon,
   SusIcon,

@@ -93,7 +93,7 @@ export const paranormalinvestigator_response = (gameState, token, selected_card_
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length === 2 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     icon: 'investigator',
     showCards: showCards,
-    uniqueInformations: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
+    uniqueInformations: { investigator: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

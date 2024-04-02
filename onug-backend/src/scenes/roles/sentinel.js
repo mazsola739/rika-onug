@@ -41,7 +41,7 @@ export const sentinel_interaction = (gameState, token, title) => {
 
   return generateRoleInteraction(newGameState, token, {
     private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any_other'],
-    icon: 'shield',
+    icon: 'sentinel',
     selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
   })
 }
@@ -69,8 +69,8 @@ export const sentinel_response = (gameState, token, selected_card_positions, tit
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_placed_shield', formatPlayerIdentifier(selected_card_positions)[0]],
-    icon: 'shield',
-    uniqueInformations: { new_shield_card: [selected_card_positions[0]] },
+    icon: 'sentinel',
+    uniqueInformations: { sentinel: [selected_card_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

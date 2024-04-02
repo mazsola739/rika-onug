@@ -74,17 +74,19 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
 
   newGameState.players[token].card_or_mark_action = true
 
+  const viewedCards = showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0]
+
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     card_or_mark_action: true,
-    viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0],
+    viewed_cards: viewedCards,
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
-    icon: title === 'seer' ? 'seer' : 'detector',
-    uniqueInformations: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
+    icon: title === 'SEER' ? 'seer' : 'detector',
+    uniqueInformations: { seer: title === 'SEER' ? viewedCards : [], detector: title === 'DETECTOR' ? viewedCards : []},
   })
 
   scene.push({ type: SCENE, title, token, interaction })

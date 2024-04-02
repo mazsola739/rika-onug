@@ -61,7 +61,7 @@ export const mortician_interaction = (gameState, token, title, randomMorticianIn
 
       return generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_may_look_yourself'],
-        icon: 'coffin',
+        icon: 'mortician',
         selectableCards: { selectable_cards: [currentPlayerNumber], selectable_card_limit: { player: 1, center: 0 } },
       })
     } else {
@@ -73,7 +73,7 @@ export const mortician_interaction = (gameState, token, title, randomMorticianIn
 
       return generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_shielded'],
-        icon: 'shield',
+        icon: 'shielded',
       })
     }
   } else if (morticianKey.includes('neighbor')) {
@@ -90,7 +90,7 @@ export const mortician_interaction = (gameState, token, title, randomMorticianIn
 
     return generateRoleInteraction(newGameState, token, {
       private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : `interaction_may_${morticianKey.replace('identifier_', '').replace('_text', '')}`],
-      icon: 'coffin',
+      icon: 'mortician',
       selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 }, }
     })
   }
@@ -136,9 +136,9 @@ export const mortician_response = (gameState, token, selected_card_positions, ti
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(cardPositions)],
-    icon: 'coffin',
+    icon: 'mortician',
     showCards: viewCards,
-    uniqueInformations: { viewed_cards: cardPositions },
+    uniqueInformations: { mortician: cardPositions },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

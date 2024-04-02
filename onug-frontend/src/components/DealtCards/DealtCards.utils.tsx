@@ -1,8 +1,8 @@
 import { DealtCard } from 'components'
 import { CardContainer, PlayersCards, CardTitle, CenterCards, CenterCardContainer } from './DealtCards.styles'
-import { PositionProperties } from 'types'
+import { PlayerPositionProperties, CenterPositionProperties } from 'types'
 
-export const renderPlayerCards = (playerCards: PositionProperties[]) => {
+export const renderPlayerCards = (playerCards: PlayerPositionProperties[]) => {
   return (
     <CardContainer>
       <PlayersCards>
@@ -14,7 +14,7 @@ export const renderPlayerCards = (playerCards: PositionProperties[]) => {
   )
 }
 
-export const renderCenterCard = (centerCards: PositionProperties[]) => {
+export const renderCenterCard = (centerCards: CenterPositionProperties[]) => {
   const renderCard = (position: string, title: string) => {
     const card = centerCards.find((c) => c.position === position)
     return (

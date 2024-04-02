@@ -73,7 +73,7 @@ export const mysticwolf_response = (gameState, token, selected_card_positions, t
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
     icon: title === 'MYSTIC_WOLF' ? 'mystic' : 'peeker',
     showCards: viewCards,
-    uniqueInformations: { viewed_cards: [selected_card_positions[0]] },
+    uniqueInformations: { mystic: title === 'MYSTIC_WOLF' ? [selected_card_positions[0]] : [], peeker: title === 'DR_PEEKER' ? [selected_card_positions[0]] : [], },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

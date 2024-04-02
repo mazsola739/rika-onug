@@ -40,7 +40,7 @@ export const apprenticetanner_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    tanner: tanner,
+    tanner,
   }
 
   const messageIdentifiers = formatPlayerIdentifier(tanner)
@@ -48,6 +48,6 @@ export const apprenticetanner_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_tanner', ...messageIdentifiers],
     icon: 'tanner',
-    uniqueInformations: { tanner: tanner },
+    uniqueInformations: { tanner },
   })
 }

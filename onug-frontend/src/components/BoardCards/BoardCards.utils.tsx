@@ -9,15 +9,7 @@ export const renderPlayerCards = () => {
     <CardContainer>
       <PlayersCards>
         {playerCards.map((card, index) => (
-          <BoardCard
-            key={index}
-            isCenter={false}
-            id={card.id}
-            mark={card.mark}
-            position={card.position}
-            selectable_cards={card.selectable_cards}
-            selectable_marks={card.selectable_marks}
-          />
+          <BoardCard key={index} isCenter={false} boardCard={card} />
         ))}
       </PlayersCards>
     </CardContainer>
@@ -29,17 +21,11 @@ export const renderCenterCard = () => {
   const renderCard = (position: string, title: string) => {
     const card = centerCards.find((c) => c.position === position)
     return (
-      card &&
-      card.id !== null && (
+      card && card.id !== null && (
         <CardContainer>
           <CardTitle>{title}</CardTitle>
           <CenterCards>
-            <BoardCard
-              id={card.id}
-              position={card.position}
-              isCenter={true}
-              selectable_cards={card.selectable_cards}
-            />
+            <BoardCard isCenter={true} boardCard={card} />
           </CenterCards>
         </CardContainer>
       )
@@ -56,15 +42,8 @@ export const renderCenterCard = () => {
             (position, index) => {
               const card = centerCards.find((c) => c.position === position)
               return (
-                card &&
-                card.id !== null && (
-                  <BoardCard
-                    key={index}
-                    id={card.id}
-                    position={card.position}
-                    isCenter={true}
-                    selectable_cards={card.selectable_cards}
-                  />
+                card && card.id !== null && (
+                  <BoardCard key={index} isCenter={true} boardCard={card} />
                 )
               )
             }

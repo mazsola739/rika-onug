@@ -60,7 +60,7 @@ export const exposer_interaction = (gameState, token, title, randomExposerInstru
 
   return generateRoleInteraction(newGameState, token, {
     private_message: privateMessage,
-    icon: 'id',
+    icon: 'idcard',
     selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: limit } },
   })
 }
@@ -94,9 +94,9 @@ export const exposer_response = (gameState, token, selected_card_positions, titl
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_flipped_card', formatPlayerIdentifier(cardPositions)],
-    icon: 'id',
+    icon: 'idcard',
     showCards: revealedCards,
-    uniqueInformations: { flipped_cards: cardPositions },
+    uniqueInformations: { idcard: cardPositions },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

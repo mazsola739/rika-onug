@@ -75,7 +75,7 @@ export const troublemaker_response = (gameState, token, selected_card_positions,
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
     icon: 'swap',
-    uniqueInformations: { swapped_cards: [position1, position2] },
+    uniqueInformations: { swap: [position1, position2] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

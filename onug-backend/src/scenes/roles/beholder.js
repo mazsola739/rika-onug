@@ -92,7 +92,7 @@ export const beholder_response = (gameState, token, selected_answer, title) => {
       private_message: ['interaction_saw_card', ...messageIdentifiers],
       icon: 'seer',
       showCards: viewCards,
-      uniqueInformations: { viewed_cards: seers },
+      uniqueInformations: { seers },
     })
   } else if (selected_answer === 'no') {
     interaction = generateRoleInteraction(newGameState, token, {

@@ -41,13 +41,13 @@ export const squire_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    werewolves: werewolves,
+    werewolves,
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_werewolves', 'interaction_may_look'],
     icon: 'werewolf',
-    uniqueInformations: { werewolves: werewolves, answer_options: ['yes', 'no'] },
+    uniqueInformations: { werewolves, answer_options: ['yes', 'no'] },
   })
 }
 
@@ -84,7 +84,7 @@ export const squire_response = (gameState, token, selected_answer, title) => {
       private_message: ['interaction_saw_card', ...messageIdentifiers],
       icon: 'werewolves',
       showCards: viewCards,
-      uniqueInformations: { viewed_cards: werewolves },
+      uniqueInformations: { werewolves },
     })
   } else if (selected_answer === 'no') {
     interaction = generateRoleInteraction(newGameState, token, {

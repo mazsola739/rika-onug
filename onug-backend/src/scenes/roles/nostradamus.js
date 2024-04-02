@@ -102,9 +102,9 @@ export const nostradamus_response = (gameState, token, selected_card_positions, 
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message : ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length >= 2 ? formatPlayerIdentifier(selected_card_positions)[1] : '', showCards.length === 3 ? formatPlayerIdentifier(selected_card_positions)[2] : '' ],
-    icon: 'investigator',
+    icon: 'nostradamus',
     showCards: showCards,
-    uniqueInformations: { viewed_cards: showCards.length === 3 ? selected_card_positions.slice(0, 3) : showCards.length === 2 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
+    uniqueInformations: { nostradamus: showCards.length === 3 ? selected_card_positions.slice(0, 3) : showCards.length === 2 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

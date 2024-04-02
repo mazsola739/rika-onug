@@ -39,23 +39,23 @@ export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
 export const apprenticeassassin_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  const assassin = getAssassinPlayerNumbersByRoleIds(newGameState.players)
+  const assassins = getAssassinPlayerNumbersByRoleIds(newGameState.players)
 
-  if (assassin.length > 0) {
+  if (assassins.length > 0) {
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      assassin,
+      assassins,
     }
 
-    const messageIdentifiers = formatPlayerIdentifier(assassin)
+    const messageIdentifiers = formatPlayerIdentifier(assassins)
 
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_assassin', ...messageIdentifiers],
       icon: 'assassin',
-      uniqueInformations: { assassin },
+      uniqueInformations: { assassins },
     })
-  } else if (assassin.length === 0) {
+  } else if (assassins.length === 0) {
     const allPlayerTokens = getAllPlayerTokens(newGameState.players)
     const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
 

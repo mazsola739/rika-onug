@@ -39,7 +39,7 @@ export const apprenticeseer_interaction = (gameState, token, title) => {
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_center'],
-    icon: 'spy',
+    icon: 'seer',
     selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 } },
   })
 }
@@ -70,9 +70,9 @@ export const apprenticeseer_response = (gameState, token, selected_card_position
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
-    icon: 'spy',
+    icon: 'seer',
     showCards: viewCards,
-    uniqueInformations: { viewed_cards: [selected_card_positions[0]] },
+    uniqueInformations: { seer: [selected_card_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

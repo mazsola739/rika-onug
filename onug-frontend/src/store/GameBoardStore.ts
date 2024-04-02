@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { PlayerType, PlayersType, GameTableBoardCardType, GamePlayBoardCardType, PositionProperties, PositionType, PositionKeys } from 'types'
+import { PlayerType, PlayersType, GameTableBoardCardType, GamePlayBoardCardType, PlayerPositionProperties, CenterPositionProperties, PositionType, PositionKeys } from 'types'
 import { interactionStore } from './InteractionStore'
 
 class GameBoardStore {
@@ -9,8 +9,8 @@ class GameBoardStore {
   gameTableBoardCards: GameTableBoardCardType[]
   gamePlayBoardCards: GamePlayBoardCardType[]
 
-  centerCards: PositionProperties[]
-  playerCards: PositionProperties[]
+  centerCards: CenterPositionProperties[]
+  playerCards: PlayerPositionProperties[]
 
   center_left: PositionType
   center_middle: PositionType
@@ -81,11 +81,11 @@ class GameBoardStore {
     this.player = player
   }
 
-  setPlayerCards(playerCards: PositionProperties[]): void {
+  setPlayerCards(playerCards: PlayerPositionProperties[]): void {
     this.playerCards = playerCards
   }
 
-  setCenterCards(centerCards: PositionProperties[]): void {
+  setCenterCards(centerCards: CenterPositionProperties[]): void {
     this.centerCards = centerCards
   }
 
@@ -97,14 +97,14 @@ class GameBoardStore {
   everyoneCheckOwnCard(gameTableBoardCards: GameTableBoardCardType[]): void {
     this.gameTableBoardCards = gameTableBoardCards
 
-    const playerCards: PositionProperties[] = []
-    const centerCards: PositionProperties[] = []
+    const playerCards: PlayerPositionProperties[] = []
+    const centerCards: CenterPositionProperties[] = []
 
     gameTableBoardCards.forEach((gameTableBoardCard) => {
       const { position, card, ready } = gameTableBoardCard
       const positionKey = position as PositionKeys
       if (this[positionKey]) {
-        const positionObject = this[positionKey] as PositionProperties
+        const positionObject = this[positionKey] as PlayerPositionProperties
         positionObject.id =
           `player_${this.player.player_number}` === positionObject.position
             ? this.player.player_card_id
@@ -127,21 +127,14 @@ class GameBoardStore {
     interactionStore.resetInteraction()
 
     const gamePlayBoardCards: GamePlayBoardCardType[] = []
-    const playerCards: PositionProperties[] = []
-    const centerCards: PositionProperties[] = []
+    const playerCards: PlayerPositionProperties[] = []
+    const centerCards: CenterPositionProperties[] = []
     const answerOptions: string[] = []
 
     this.centerCards.forEach((centerCard) => {
       const card: GamePlayBoardCardType = {
         position: centerCard.position,
-        card: {
-          id: centerCard.id === null ? null : 0,
-          spy: false,
-          artifact: false,
-          shield: false,
-          selectable_cards: false,
-          select: false,
-        },
+        card: { id: centerCard.id === null ? null : 0, mark: '' },
       }
       gamePlayBoardCards.push(card)
       centerCards.push({ ...centerCard, ...card.card })
@@ -150,8 +143,8 @@ class GameBoardStore {
     this.playerCards.forEach((playerCard) => {
       const card: GamePlayBoardCardType = {
         position: playerCard.position,
-        card: {
-          id: 0,
+        card: { 
+          id: 0, 
           mark: '',
         },
       }

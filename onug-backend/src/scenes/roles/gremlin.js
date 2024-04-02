@@ -99,7 +99,7 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
     const interaction = generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers],
       icon: 'gremlin',
-      uniqueInformations: { swapped_cards: [position1, position2] },
+      uniqueInformations: { gremlin: [position1, position2] },
     })
 
     scene.push({ type: SCENE, title, token, interaction })
@@ -142,7 +142,7 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
     const interaction = generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_swapped_marks', ...messageIdentifiers],
       icon: 'gremlin',
-      uniqueInformations: { swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]] },
+      uniqueInformations: { gremlin: [selected_mark_positions[0], selected_mark_positions[1]] },
     })
 
     scene.push({ type: SCENE, title, token, interaction })

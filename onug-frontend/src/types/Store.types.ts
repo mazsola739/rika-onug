@@ -43,7 +43,7 @@ export type WsJsonMessage = {
     title?: string
     icon?: string
     private_message?: string[]
-
+    new_role_id?: number
 
     player_name?: string
     player_number?: number
@@ -65,13 +65,7 @@ export type WsJsonMessage = {
     
     //unique informations
     answer_options?: string[]
-    viewed_cards?: string[]
-    viewed_marks?: string[]
-    swapped_cards?: string[]
-    swapped_marks?: string[]
-    flipped_cards?: string[]
-    new_artifact_card?: string[]
-    new_shield_card?: string[]
+
     mark_of_vampire?: string[]
     mark_of_fear?: string[]
     mark_of_bat?: string[]
@@ -81,29 +75,73 @@ export type WsJsonMessage = {
     mark_of_clarity?: string[]
     mark_of_assassin?: string[]
 
+    shield?: string[]
+    artifact?: string[]
+
+    aerial?: string[]
     aliens?: string[]
-    zerb?: string[]
-    groob?: string[]
-    zerbgroob?: string[]
-    alien_neighbor?: []
-    vampires?: string[]
-    new_vampire?: string[]
-    werewolves?: string[]
-    dreamwolf?: string[] 
-    claw?: string[]
-    villains?: string[]
-    villain_neighbor?: []
-    evilhand?: string[]    
-    assassin?: string[]
-    tanner?: string[]
-    auraseer?: string[]
-    seers?: string[]
+    alienhand?: string[]
+    artifacted?: string[]
+    assassins?: string[]
+    /* awesome?: string[] */
+    /* bear?: string[] */
+    /* babyalien?: string[] */
+    /* blind?: string[] */
     blob?: string[]
+    /* bulb?: string[] */
+    claw?: string[]
+    /* coffin?: string[] */
+    copy?: string[]
+    /* cow?: string[] */
+    detector?: string[]
+    dog?: string[]
+    dreamwolf?: string[]
+    /* dress?: string[] */
+    drunk?: string[]
+    /* empath?: string[] */
+    /* evil?: string[] */
+    evilhand?: string[]
+    /* eye?: string[] */
     family?: string[]
-    madscientist?: string[]
+    /* friend?: string[] */
+    gremlin?: string[]
+    groobzerb?: string[]
+    idcard?: string[]
+    interaction?: string[]
+    investigator?: string[]
+    /* like?: string[] */
+    lonely?: string[]
     lovers?: string[]
+    mad?: string[]
     masons?: string[]
-    tapped?: string[]
+    mortician?: string[]
+    /* mute?: string[] */
+    mystic?: string[]
+    /* nice?: string[] */
+    /* night?: string[] */
+    nostradamus?: string[]
+    /* oracle?: string[] */
+    peeker?: string[]
+    prank?: string[]
+    /* pretty?: string[] */
+    robber?: string[]
+    seers?: string[]
+    /* select?: string[] */
+    sentinel?: string[]
+    /* smell?: string[] */
+    /* spy?: string[] */
+    /* sus?: string[] */
+    swap?: string[]
+    tanner?: string[]
+    tap?: string[]
+    thumb?: string[]
+    /* trophy?: string[] */
+    ufo?: string[]
+    vampires?: string[]
+    villains?: string[]
+    voodoo?: string[]
+    werewolves?: string[]
+    witch?: string[]
   }
 }
 
@@ -140,10 +178,7 @@ export type GameTableBoardCardType = {
 
 export type GamePlayBoardCardType = {
   position: string
-  card: {
-    id: number
-    mark: string
-  }
+  card: { id: number, mark: string }
 }
 
 export type PlayerType = {
@@ -178,14 +213,105 @@ export type PositionKeys =
 
 export type PlayerPositionProperties = {
   position: string
+  ready?: boolean
   selectable_cards: boolean
   selectable_marks?: boolean
   id?: number
   mark?: string
+
+  shield?: boolean
+  artifact?: boolean
+
+  fang?: boolean
+  fear?: boolean
+  bat?: boolean
+  diseased?: boolean
+  cupid?: boolean
+  traitor?: boolean
+  clarity?: boolean
+  target?: boolean
+
+  aerial?: boolean
+  alien?: boolean
+  alienhand?: boolean
+  artifacted?: boolean
+  assassin?: boolean
+  awesome?: boolean
+  bear?: boolean
+  babyalien?: boolean
+  blind?: boolean
+  blob?: boolean
+  bulb?: boolean
+  claw?: boolean
+  coffin?: boolean
+  copy?: boolean
+  cow?: boolean
+  detector?: boolean
+  dog?: boolean
+  dreamwolf?: boolean
+  dress?: boolean
+  drunk?: boolean
+  empath?: boolean
+  evil?: boolean
+  evilhand?: boolean
+  eye?: boolean
+  family?: boolean
+  friend?: boolean
+  gremlin?: boolean
+  groobzerb?: boolean
+  idcard?: boolean
+  interaction?: boolean
+  investigator?: boolean
+  jest?: boolean
+  like?: boolean
+  lover?: boolean
+  mad?: boolean
+  mason?: boolean
+  mortician?: boolean
+  mute?: boolean
+  mystic?: boolean
+  nice?: boolean
+  night?: boolean
+  nostradamus?: boolean
+  oracle?: boolean
+  peeker?: boolean
+  prank?: boolean
+  pretty?: boolean
+  robber?: boolean
+  secret?: boolean
+  seer?: boolean
+  select?: boolean
+  sentinel?: boolean
+  shielded?: boolean
+  smell?: boolean
+  spy?: boolean
+  sus?: boolean
+  swap?: boolean
+  tanner?: boolean
+  tap?: boolean
+  thumb?: boolean
+  trophy?: boolean
+  ufo?: boolean
+  vampire?: boolean
+  villain?: boolean
+  voodoo?: boolean
+  werewolf?: boolean
+  witch?: boolean
 }
 
 export type CenterPositionProperties = {
   position: string
   selectable_cards: boolean
   id?: number
+
+  alienhand?: boolean
+  copy?: boolean
+  drunk?: boolean
+  idcard?: boolean
+  lonely?: boolean
+  prank?: boolean
+  seer?: boolean
+  swap?: boolean
+  voodoo?: boolean
+  witch?: boolean
 }
