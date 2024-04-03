@@ -10,7 +10,7 @@ export const OwnCard: React.FC<OwnCardProps> = observer(({ player }) => {
   const card = deckStore.getCardById(player.player_card_id)
 
   const roleName = ROLES[`role_${player.player_role.toLowerCase().replace('_', '')}` as keyof typeof ROLES]
-  //TODO Add mark
+  //TODO Add mark role id
 
   return (
     <OwnCardContainer>

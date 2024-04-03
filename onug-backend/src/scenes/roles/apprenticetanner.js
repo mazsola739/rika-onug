@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getSceneEndTime, getTannerPlayerNumbersByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumberWithMatchingToken, getSceneEndTime, getTannerPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 export const apprenticetanner = (gameState, title, hasDoppelganger) => {
@@ -35,7 +35,19 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
 export const apprenticetanner_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   
-  const tanner = getTannerPlayerNumbersByRoleIds(newGameState.players)
+  let tanner = getTannerPlayerNumbersByRoleIds(newGameState.players)
+
+  const messageIdentifiers = formatPlayerIdentifier(tanner)
+  let privateMessage = ['interaction_tanner', ...messageIdentifiers]
+
+  if (tanner.length > 0) {
+    newGameState.players[token].card.player_team = 'apprenticetanner'
+  } else if (tanner.length === 0) {
+    tanner = [getPlayerNumberWithMatchingToken(gameState.players, token)]
+    newGameState.players[token].card.player_team = 'tanner'
+    newGameState.players[token].card.player_role = 'TANNER'
+    privateMessage = ['interaction_tanner_now']
+  }
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
@@ -43,10 +55,8 @@ export const apprenticetanner_interaction = (gameState, token, title) => {
     tanner,
   }
 
-  const messageIdentifiers = formatPlayerIdentifier(tanner)
-
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_tanner', ...messageIdentifiers],
+    private_message: privateMessage,
     icon: 'tanner',
     uniqueInformations: { tanner },
   })

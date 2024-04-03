@@ -61,13 +61,18 @@ export const doppelganger_response = (gameState, token, selected_card_positions,
   const scene = []
 
   newGameState.players[token].card.player_role_id = newGameState.card_positions[selected_card_positions[0]].card.id
-  newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
-  newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team
+    
+  if (newGameState.card_positions[selected_card_positions[0]].card.id === 30 || newGameState.card_positions[selected_card_positions[0]].card.id === 64) {
+    newGameState.players[token].card.player_role = 'VILLAGER'
+    newGameState.players[token].card.player_team = 'villager'
+  } else {
+    newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
+    newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team
+  }
 
   const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
 
-    ; (newGameState.players[token].player_history.show_cards = showCards),
-      (newGameState.players[token].new_role_id = newGameState.players[token].card.player_role_id)
+    ; (newGameState.players[token].player_history.show_cards = showCards), (newGameState.players[token].new_role_id = newGameState.players[token].card.player_role_id)
   newGameState.players[token].card_or_mark_action = true
 
   newGameState.players[token].player_history = {

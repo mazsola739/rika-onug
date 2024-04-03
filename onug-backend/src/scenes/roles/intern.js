@@ -34,9 +34,7 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
 
 export const intern_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-  const madscientist = getMadScientistPlayerNumberByRoleIds(
-    newGameState.players
-  )
+  const madscientist = getMadScientistPlayerNumberByRoleIds(newGameState.players)
   const playerCard = newGameState.players[token]?.card
 
   if (madscientist.length === 0) {

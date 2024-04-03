@@ -38,6 +38,10 @@ export const squire_interaction = (gameState, token, title) => {
   
   const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(newGameState.players)
 
+  if (werewolves.length === 0) {
+    newGameState.players[token].card.player_team = 'squire'
+  }
+
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,

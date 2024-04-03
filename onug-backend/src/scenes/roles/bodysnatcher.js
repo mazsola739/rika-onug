@@ -130,9 +130,11 @@ export const bodysnatcher_response = (gameState, token, selected_card_positions,
   newGameState.card_positions[currentPlayerNumber].card = selectedCard
   newGameState.card_positions[selected_card_positions[0]].card = currentPlayerCard
   newGameState.card_positions[currentPlayerNumber].card.team = "alien"
+  newGameState.card_positions[currentPlayerNumber].card.role = "ALIEN"
 
   newGameState.players[token].card.player_card_id = newGameState.card_positions[currentPlayerNumber].card.id
   newGameState.players[token].card.player_team = newGameState.card_positions[currentPlayerNumber].card.team
+  newGameState.players[token].card.player_role = newGameState.card_positions[currentPlayerNumber].card.role
 
   const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, [currentPlayerNumber])
 

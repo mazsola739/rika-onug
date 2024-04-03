@@ -75,6 +75,8 @@ export const interaction_shielded = 'You are unable to do you action, you have s
 export const interaction_you_are_that_role = 'You are now this role:'
 //intern
 export const interaction_mad_now = 'You are Mad Scientist now'
+//apprenticetanner 
+export const interaction_tanner_now = 'You are Tanner now'
 //sentinel
 export const interaction_placed_shield = 'You placed a shield front of'
 //curator

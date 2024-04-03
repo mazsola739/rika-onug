@@ -2,6 +2,7 @@
 import { SCENE } from '../../constant'
 import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../utils'
 
+//TODO oracle team
 const random_oracle_question = [
   'oracle_alienteam_text',
   'oracle_werewolfteam_text',

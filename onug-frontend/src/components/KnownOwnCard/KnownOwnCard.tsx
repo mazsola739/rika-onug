@@ -4,7 +4,7 @@ import { deckStore } from 'store'
 import { capitalize } from 'utils'
 import { KnownOwnCardContainer, KnownOwnInfos, KnownOwnCardText } from './KnownOwnCard.styles'
 import { KnownOwnCardProps } from './KnownOwnCard.types'
-
+//TODO role id
 export const KnownOwnCard: React.FC<KnownOwnCardProps> = observer(
   ({ player }) => {
     const card = player?.player_card_id
@@ -17,8 +17,7 @@ export const KnownOwnCard: React.FC<KnownOwnCardProps> = observer(
     const playerName = player?.player_name || ''
     const playerTeam = player?.player_team || ''
     const playerRole = player?.player_role || ''
-    const original =
-      deckStore.getCardById(player?.player_original_id)?.display_name || ''
+    const original = deckStore.getCardById(player?.player_original_id)?.display_name || ''
 
     return (
       <KnownOwnCardContainer>

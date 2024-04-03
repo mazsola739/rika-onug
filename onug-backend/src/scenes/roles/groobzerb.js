@@ -1,8 +1,9 @@
 //@ts-check
 import { groobzerbIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getSceneEndTime, getZerbPlayerNumberByRoleIds } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getPlayerNumberWithMatchingToken, getSceneEndTime, getZerbPlayerNumberByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
+//TODO groob and zerb own team
 export const groobzerb = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const scene = []
@@ -40,6 +41,8 @@ export const groobzerb_interaction = (gameState, token, title) => {
     const zerb = getZerbPlayerNumberByRoleIds(newGameState.players)
 
     if (zerb.length >= 1) {
+      newGameState.players[token].card.player_team = 'groob'
+
       player.player_history = { ...player.player_history, scene_title: title, zerb }
 
       const messageIdentifiers = formatPlayerIdentifier(zerb)
@@ -61,6 +64,8 @@ export const groobzerb_interaction = (gameState, token, title) => {
     const groob = getGroobPlayerNumberByRoleIds(newGameState.players)
 
     if (groob.length >= 1) {
+      newGameState.players[token].card.player_team = 'zerb'
+
       player.player_history = { ...player.player_history, scene_title: title, groob }
 
       const messageIdentifiers = formatPlayerIdentifier(groob)

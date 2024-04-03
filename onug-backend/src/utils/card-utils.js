@@ -55,13 +55,11 @@ const handleSelectCard = (selectedCards, cardId) => {
   } else if (cardId === temptressId) {
     handleCardById(newSelectedCards, supervillainIdsToCheck, temptressId)
   } else if (
-    cardId === mirrorManId &&
-    containsByIdsToCheck(selectedCards, [copycatId])
+    cardId === mirrorManId && containsByIdsToCheck(selectedCards, [copycatId])
   ) {
     newSelectedCards = newSelectedCards.filter((id) => id !== copycatId)
   } else if (
-    cardId === copycatId &&
-    containsByIdsToCheck(selectedCards, [mirrorManId])
+    cardId === copycatId && containsByIdsToCheck(selectedCards, [mirrorManId])
   ) {
     newSelectedCards = newSelectedCards.filter((id) => id !== mirrorManId)
   }

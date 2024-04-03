@@ -3,6 +3,7 @@ import { allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByMark, getPlayerNumberWithMatchingToken, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
+//TODO no vampire he is villager
 export const renfield = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const scene = []
