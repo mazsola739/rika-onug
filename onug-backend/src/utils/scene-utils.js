@@ -24,6 +24,8 @@ export const formatPlayerIdentifier = playerNumbers => {
   return formattedPlayerNumbers.map(player => `identifier_${player.replace('_', '')}_text`)
 }
 
+export const formatOracleAnswer = answer => `${answer}_button_label`
+
 export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
   const players = shufflePlayers(totalPlayers)
   const selectedPlayers = ~~(Math.random() * 3) + 1
@@ -36,6 +38,16 @@ export const getRandomItemsFromArray = (array, amount) => {
   const shuffled = array.sort(() => 0.5 - Math.random())
   return shuffled.slice(0, amount)
 }
+
+export const createNumberArray = number => {
+  const result = []
+  for (let i = 1; i <= number; i++) {
+    result.push(`${i}`)
+  }
+  return result
+}
+
+export const thinkRandomNumber = () => Math.floor(Math.random() * 10) + 1
 
 //SCENE
 export const getSelectableOtherPlayerNumbersWithoutShield = (players, token) => {
@@ -401,6 +413,8 @@ export const  getPlayerNumbersWithCardOrMarkActionTrue = players => {
 export const getPlayerNumbersWithMatchingTokens = (players, tokens) => tokens.map(token => `player_${players[token].player_number}`)
 export const getPlayerNumberWithMatchingToken = (players, token) => `player_${players[token].player_number}`
 
+export const isCurrentPlayerNumberEven = (players, token) => players[token].player_number % 2 === 0
+
 export const getPlayerNumbersWithNonMatchingTokens = (players, tokens) => {
   return Object.keys(players)
     .filter((token) => {
@@ -638,45 +652,35 @@ export const countPlayersVoted = players => {
   return votedCount
 }
 
-export const getPlayerNumbersWhoGotVoted = players => {
-  const playersVotedFor = new Set()
-  
-  Object.values(players).forEach(player => {
-      if (player.vampire_vote) {
-          playersVotedFor.add(player.vampire_vote)
-      }
-  })
-  
-  return [...playersVotedFor]
+export const collectVotes = (playerNumber, selectedCard, votes) => {
+  const updatedVotes = {...votes}
+
+  if (votes[selectedCard]) {
+    updatedVotes[selectedCard].push(playerNumber)
+  } else {
+    updatedVotes[selectedCard] = [playerNumber]
+  }
+
+  return updatedVotes
 }
 
+export const findMostVoted = (votes) => {
+  let maxVotes = 0
+  let mostVotedPlayers = []
 
-export const findMostVotedPlayer = gameState => {
-  const voteCount = {}
+  for (const playerNumber in votes) {
+    const voteCount = votes[playerNumber].length
 
-  Object.values(gameState.players).forEach(player => {
-    const card = player.card
-    if (vampireIds.some(id => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
-      const vote = player.vampire_vote
-      if (vote) {
-        voteCount[vote] = (voteCount[vote] || 0) + 1
-      }
+    if (voteCount > maxVotes) {
+      maxVotes = voteCount
+      mostVotedPlayers = [playerNumber]
+    } else if (voteCount === maxVotes) {
+      mostVotedPlayers.push(playerNumber)
     }
-  })
-  
-  let mostVotedPlayer = null
-  let maxVotes = -1
-  
-  Object.entries(voteCount).forEach(([player, count]) => {
-      if (count > maxVotes || (count === maxVotes && voteCount[player] > voteCount[mostVotedPlayer])) {
-          mostVotedPlayer = player
-          maxVotes = count
-      }
-  })
-  
-  return mostVotedPlayer
-}
+  }
 
+  return mostVotedPlayers
+}
 
 //RIPPLE
 export const pickRandomOnePlayer = numPlayers => shufflePlayers(numPlayers)[0]

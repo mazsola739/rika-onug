@@ -2,6 +2,10 @@
 //messages
 export const message_tapped = 'You got tapped by your neighbor'
 export const no_night_action = 'No such a night action, sorry'
+export const vote_vampire_votes = 'Vampire votes:'
+
+export const interaction_oracle_question = 'Answer the question'
+export const interaction_oracle_answer = 'Your answer'
 
 //any other player
 export const interaction_may_one_any_other = 'You may choose any other player'

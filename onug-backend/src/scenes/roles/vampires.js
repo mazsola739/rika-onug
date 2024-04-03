@@ -1,6 +1,6 @@
 //@ts-check
-import { vampireIds, allCopyPlayerIds, SCENE, HYDRATE_VOTES } from '../../constant'
-import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds, countPlayersVoted, getPlayerNumbersWhoGotVoted, findMostVotedPlayer, formatPlayerIdentifier, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
+import { vampireIds, allCopyPlayerIds, SCENE, VOTE } from '../../constant'
+import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds, countPlayersVoted, formatPlayerIdentifier, getRandomItemsFromArray, getSceneEndTime, collectVotes, findMostVoted } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
@@ -67,52 +67,45 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
   newGameState.players[token].vampire_vote = selected_mark_positions[0]
 
   const alreadyVoted = countPlayersVoted(newGameState.players)
-  const playerNumbersWhoGotVoted = getPlayerNumbersWhoGotVoted(newGameState.players)
+  const votes = collectVotes(newGameState.players[token].player_number, selected_mark_positions[0], newGameState.vampire_votes)
 
+  newGameState.vampire_votes = votes
+  
+  //TODO why not working?
   if (alreadyVoted < vampireTokens.length) {
     vampireTokens.forEach((token) => {
       websocketServerConnectionsPerRoom[newGameState.room_id][token].send(JSON.stringify({
-        type: HYDRATE_VOTES,
-        votes: playerNumbersWhoGotVoted,
+        type: VOTE,
+        votes,
+        message: ['vote_vampire_votes']
       }))
     })
   } else if (alreadyVoted === vampireTokens.length) {
     newGameState.players[token].card_or_mark_action = true
 
-    const mostVotedPlayer = findMostVotedPlayer(newGameState)
-//TODO fix and better voting system
-/*       const vampirePosition = newGameState.mark_positions.vampire
-      const selectedPosition = newGameState.card_positions[mostVotedPlayer[0]].mark
+    const mostVotedPlayer = findMostVoted(votes)
+
+    const vampirePosition = newGameState.mark_positions.vampire
+    const selectedPosition = newGameState.card_positions[mostVotedPlayer[0]].mark
   
-      newGameState.mark_positions.vampire = selectedPosition
-      newGameState.card_positions[mostVotedPlayer[0]].mark = vampirePosition
-    
-  
-    newGameState.players[token].card_or_mark_action = true */
-  
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
-      card_or_mark_action: true,
-      mark_of_fear: [selected_mark_positions[0]],
-    }
+    newGameState.mark_positions.vampire = selectedPosition
+    newGameState.card_positions[mostVotedPlayer[0]].mark = vampirePosition
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
       card_or_mark_action: true,
-      mark_of_vampire: [mostVotedPlayer],
+      mark_of_vampire: [mostVotedPlayer[0]],
     }
 
     const interaction = generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_mark_of_vampire', formatPlayerIdentifier([mostVotedPlayer])],
+      private_message: ['interaction_mark_of_vampire', formatPlayerIdentifier(mostVotedPlayer)[0]],
       icon: 'fang',
-      uniqueInformations: { mark_of_vampire: [mostVotedPlayer] },
+      uniqueInformations: { mark_of_vampire: [mostVotedPlayer[0]] },
     })
 
     scene.push({ type: SCENE, title, token, interaction })
     newGameState.scene = scene
-
   }
 
   return newGameState

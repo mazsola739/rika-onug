@@ -11,7 +11,7 @@ export type WsJsonMessage = {
   title?: string
   message?: string[]
   icon?: string
-  votes?: string[]
+  votes?: Record<string, number[]>
 
   selected_cards?: number[]
   selected_expansions?: string[]

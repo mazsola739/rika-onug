@@ -20,7 +20,6 @@ export const UPDATE_ROOM = 'UPDATE_ROOM'
 export const RESET = 'RESET'
 export const DEAL = 'DEAL'
 export const HYDRATE_READY = 'HYDRATE_READY'
-export const HYDRATE_VOTES = 'HYDRATE_VOTES'
 export const LEAVE_TABLE = 'LEAVE_TABLE'
 export const UPDATE_GAME_TABLE = 'UPDATE_GAME_TABLE'
 export const READY = 'READY'
@@ -31,6 +30,7 @@ export const PAUSE_GAME = 'PAUSE_GAME'
 
 export const SCENE = 'SCENE'
 export const MESSAGE = 'MESSAGE'
+export const VOTE = 'VOTE'
 
 export const STAGES = {
   LOBBY: 'LOBBY',
