@@ -178,7 +178,91 @@ export type GameTableBoardCardType = {
 
 export type GamePlayBoardCardType = {
   position: string
-  card: { id: number, mark: string }
+  card: { 
+    id: number, 
+    mark: string,
+    selectable_cards?: boolean
+    selectable_marks?: boolean
+    shield?: boolean
+    artifact?: boolean
+  
+    fang?: boolean
+    fear?: boolean
+    bat?: boolean
+    diseased?: boolean
+    cupid?: boolean
+    traitor?: boolean
+    clarity?: boolean
+    target?: boolean
+  
+    aerial?: boolean
+    alien?: boolean
+    alienhand?: boolean
+    artifacted?: boolean
+    assassin?: boolean
+    awesome?: boolean
+    bear?: boolean
+    babyalien?: boolean
+    blind?: boolean
+    blob?: boolean
+    bulb?: boolean
+    claw?: boolean
+    coffin?: boolean
+    copy?: boolean
+    cow?: boolean
+    detector?: boolean
+    dog?: boolean
+    dreamwolf?: boolean
+    dress?: boolean
+    drunk?: boolean
+    empath?: boolean
+    evil?: boolean
+    evilhand?: boolean
+    eye?: boolean
+    family?: boolean
+    friend?: boolean
+    gremlin?: boolean
+    groobzerb?: boolean
+    idcard?: boolean
+    interaction?: boolean
+    investigator?: boolean
+    jest?: boolean
+    like?: boolean
+    lonely?: boolean
+    lover?: boolean
+    mad?: boolean
+    mason?: boolean
+    mortician?: boolean
+    mute?: boolean
+    mystic?: boolean
+    nice?: boolean
+    night?: boolean
+    nostradamus?: boolean
+    oracle?: boolean
+    peeker?: boolean
+    prank?: boolean
+    pretty?: boolean
+    robber?: boolean
+    secret?: boolean
+    seer?: boolean
+    select?: boolean
+    sentinel?: boolean
+    shielded?: boolean
+    smell?: boolean
+    spy?: boolean
+    sus?: boolean
+    swap?: boolean
+    tanner?: boolean
+    tap?: boolean
+    thumb?: boolean
+    trophy?: boolean
+    ufo?: boolean
+    vampire?: boolean
+    villain?: boolean
+    voodoo?: boolean
+    werewolf?: boolean
+    witch?: boolean 
+  }
 }
 
 export type PlayerType = {
@@ -214,7 +298,7 @@ export type PositionKeys =
 export type PlayerPositionProperties = {
   position: string
   ready?: boolean
-  selectable_cards: boolean
+  selectable_cards?: boolean
   selectable_marks?: boolean
   id?: number
   mark?: string
@@ -301,7 +385,7 @@ export type PlayerPositionProperties = {
 
 export type CenterPositionProperties = {
   position: string
-  selectable_cards: boolean
+  selectable_cards?: boolean
   id?: number
 
   alienhand?: boolean

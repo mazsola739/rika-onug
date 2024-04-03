@@ -34,5 +34,9 @@ export const identifier_player10_text = 'Player 10'
 export const identifier_player11_text = 'Player 11'
 export const identifier_player12_text = 'Player 12'
 
-export const identifier_centerwolf_text = 'Center Wolf Card'
-export const identifier_centervillain_text = 'Center Villain Card'
+export const identifier_centerleft_text = 'Center Left'
+export const identifier_centermiddle_text = 'Center Middle'
+export const identifier_centerright_text = 'Center Right'
+
+export const identifier_centerwolf_text = 'Center Wolf'
+export const identifier_centervillain_text = 'Center Villain'

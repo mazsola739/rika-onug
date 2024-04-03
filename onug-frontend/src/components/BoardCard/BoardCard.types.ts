@@ -1,7 +1,7 @@
 type BoardCard = {
   position?: string
-  id?: number
-  mark?: string
+  cardId?: number
+  markId?: string
   isCenter?: boolean
 
   selectable_cards?: boolean

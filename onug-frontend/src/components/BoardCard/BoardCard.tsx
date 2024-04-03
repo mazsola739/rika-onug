@@ -10,8 +10,8 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
   ({ isCenter, boardCard}) => {
     const {
       position,
-      id,
-      mark,
+      cardId,
+      markId,
       selectable_cards,
       selectable_marks,
       shield,
@@ -69,7 +69,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
     const [isSelectedCard, setIsSelectedCard] = useState(false)
     const [isSelectedMark, setIsSelectedMark] = useState(false)
     const { hasMarks } = gameTableStore
-    const card = id === 0 ? '' : deckStore.getCardById(id)
+    const card = cardId === 0 ? '' : deckStore.getCardById(cardId)
 
     let cardImageSrc = card && card.id !== 0
       ? `/assets/playingcards/${card.card_name}.png`
@@ -92,16 +92,13 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
     }
 
     const markImageSrc =
-      mark && mark.length !== 0
-        ? `/assets/tokens/${mark}.png`
+      markId && markId.length !== 0
+        ? `/assets/tokens/${markId}.png`
         : '/assets/tokens/mark_back.png'
 
     const room_id = sessionStorage.getItem('room_id')
     const token = sessionStorage.getItem('token')
-    const { handleCardInteraction, handleMarkInteraction } = useClickHandler(
-      room_id,
-      token
-    )
+    const { handleCardInteraction, handleMarkInteraction } = useClickHandler(room_id, token)
 
     const cardClickHandler = (cardType: string) => {
       const maxCenterCardSelection = interactionStore.selectableCenterCardLimit
@@ -140,8 +137,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
           return
         }
 
-        interactionStore.selectedCards.length === maxSelectionLimit &&
-          handleCardInteraction(interactionStore.selectedCards)
+        interactionStore.selectedCards.length === maxSelectionLimit && handleCardInteraction(interactionStore.selectedCards)
       }
     }
 
@@ -165,8 +161,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
         }
       }
 
-      interactionStore.selectedMarks.length === maxMarkSelection &&
-        handleMarkInteraction(interactionStore.selectedMarks)
+      interactionStore.selectedMarks.length === maxMarkSelection && handleMarkInteraction(interactionStore.selectedMarks)
     }
 
     return (
@@ -242,12 +237,7 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
           {isCenter && witch && <Icon iconName="witch" size={25} />}
         </Tokens>
         {!isCenter && hasMarks && (
-          <MarkBack
-            markBackgroundImage={markImageSrc}
-            selectable_marks={selectable_marks}
-            onClick={() => markClickHandler()}
-            isSelectedMark={isSelectedMark}
-          />
+          <MarkBack markBackgroundImage={markImageSrc} selectable_marks={selectable_marks} onClick={() => markClickHandler()} isSelectedMark={isSelectedMark} />
         )}
       </StyledBoardCard>
     )

@@ -3,7 +3,14 @@
     "room_id": "archives",
     "room_name": "Archives",
     "stage": "LOBBY",
-    "selected_cards": [],
+    "selected_cards": [
+      12,
+      13,
+      14,
+      61,
+      79,
+      84
+  ],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Barack Obama", "Einstein", "Elon Musk", "Jane Austen", "Leonardo da Vinci", "Marilyn Monroe", "Michael Jackson", "Oprah", "Picasso", "Shakespeare", "Stephen Hawking", "Stephen King", "Steve Jobs"],
     "players": {},

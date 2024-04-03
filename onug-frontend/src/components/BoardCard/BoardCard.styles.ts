@@ -20,7 +20,13 @@ export const CardBack = styled.div<StyledBoardCardProps>`
         ? 'drop-shadow(5px 5px 5px yellow);'
         : 'drop-shadow(5px 5px 5px green);'
       : 'drop-shadow(5px 5px 5px black);'};
-
+  border-radius: 10px;
+  border: 2px solid ${(props) =>
+        props.selectable_cards
+          ? props.isSelectedCard
+            ? 'yellow'
+            : 'green'
+          : 'transparent'};
   height: 110px;
   justify-content: center;
   width: 80px;

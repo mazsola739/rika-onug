@@ -173,8 +173,8 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
 
   if (randomRascalInstruction === 'rascal_troublemaker_text') {
     selectableCards = getSelectablePlayersWithNoShield(selectableTwoPlayers) <= 2 ? [] : getSelectablePlayersWithNoShield(selectableTwoPlayers)
-    limit = selectableCards.length <= 2 ? 0 : 2
-    privateMessage = [selectableCards.length <= 2 ? 'interaction_no_selectable_player' : 'interaction_may_two_any']
+    limit = selectableCards.length >= 2 ? 2 : 0
+    privateMessage = [selectableCards.length >= 2 ? 'interaction_may_two_any' : 'interaction_no_selectable_player']
   } else if (randomRascalInstruction === 'rascal_drunk_text' || randomRascalInstruction === 'rascal_robber_text') {
     if (newGameState.players[token].shield) {
       newGameState.players[token].player_history = {
