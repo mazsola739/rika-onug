@@ -1,5 +1,5 @@
 export const wining_role: Record<string, string> = {
-  wining_villager_or_hero_team: 'You can win if any one dies from',
+  wining_village_or_hero_team: 'You can win if any one dies from',
   wining_werewolf_team: 'You can win if no werewolf on the werewolf team dies',
   wining_minion_team: 'You can win if you survive, and any one else dies',
   wining_squire_team: 'You can win if you survive, and any one else dies',
@@ -24,7 +24,7 @@ export const wining_role: Record<string, string> = {
   wining_vs_vampire: ' the vampire team',
   wining_vs_alien: ' the alien team',
   wining_vs_villain: ' the villain team',
-  wining_vs_villager_epic: ' 2 other "badguy" teams',
+  wining_vs_village_epic: ' 2 other "badguy" teams',
   wining_vs_badguy_epic: ', and 1 from other "badguy" teams',
   wining_vs_nopresent: '. If no present, then everyone must to survive',
 
@@ -40,7 +40,7 @@ export const wining_role: Record<string, string> = {
 
   wining_vs_oracle: 'You can win if Oracle gets killed, if no Oracle, everyone must survive',
 
-  wining_cursed: "You can win with the villager team, or in case of any werewolf's vote, you can win with werewolf team",
+  wining_cursed: "You can win with the village team, or in case of any werewolf's vote, you can win with werewolf team",
   wining_windywendy: "You can win with the hero team, or in case of any villain's vote, you can win with villain team",
   wining_prince: 'You can not die',
   wining_sponge: 'You can not die',
@@ -50,7 +50,7 @@ export const wining_role: Record<string, string> = {
   wining_with_love_token: ", or the owner of the Mark of Love doesn't get killed",
   wining_with_traitor_token: 'You can win, if anyone from your team gets killed, and you survive',
   wining_with_alien_token: 'You can win with the alien team, even if you get killed',
-  wining_with_villager_token: 'You can win with the villager team, even if you get killed',
+  wining_with_village_token: 'You can win with the village team, even if you get killed',
   wining_with_werewolf_token: 'You can win with the werewolf team, even if you get killed',
   wining_vs_disease_token: ", and the owner of the Mark of Disease doesn't point at you",
 }

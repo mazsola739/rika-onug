@@ -1,5 +1,5 @@
 export const losing_role: Record<string, string> = {
-  losing_villager_or_hero_team: 'You can lose if no one dies from',
+  losing_village_or_hero_team: 'You can lose if no one dies from',
   losing_werewolf_tem: 'You can lose if any werewolf on the werewolf team dies',
   losing_minion_tem: 'You can lose if you die',
   losing_squire_tem: 'You can lose if you die',
@@ -25,7 +25,7 @@ export const losing_role: Record<string, string> = {
   losing_vs_vampire: ' the vampire team',
   losing_vs_alien: ' the alien team',
   losing_vs_villain: ' the villain team',
-  losing_vs_villager_epic: ' 2 other teams',
+  losing_vs_village_epic: ' 2 other teams',
   losing_vs_nopresent: '. If no present, and anyone gets killed from your team',
 
   losing_vs_hunter: " or in case of Hunter's death, the Hunter does point at you",
@@ -40,6 +40,6 @@ export const losing_role: Record<string, string> = {
   losing_with_love_token: ", or the owner of the Mark of Love doesn't stay alive",
   losing_with_traitor_token: "You can lose, if anyone from your team doesn't get killed, or you die",
   losing_with_alien_token: 'You can lose with the alien team, even if you stay alive',
-  losing_with_villager_token: 'You can lose with the villager team, even if you stay alive',
+  losing_with_village_token: 'You can lose with the village team, even if you stay alive',
   losing_with_werewolf_token: 'You can lose with the werewolf team, even if you stay alive',
 }
