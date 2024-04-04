@@ -1,7 +1,7 @@
 //@ts-check
 import { logDebug, logError } from '../log'
 import { readGameState, upsertRoomState } from '../repository'
-import { aliens_response, alphawolf_response, thing_response, apprenticeseer_response, apprenticeassassin_response, assassin_response, beholder_response, bodysnatcher_response, copycat_response, curator_response, cupid_response, seer_response, diseased_response, doppelganger_response, doppelganger_instant_action_response, empath_response, exposer_response, revealer_response, gremlin_response, mortician_response, pickpocket_response, priest_response, psychic_response, rascal_response, thecount_response, mysticwolf_response, drunk_response, instigator_response, marksman_response, nostradamus_response, oracle_question_response, paranormalinvestigator_response, robber_response, sentinel_response, squire_response, troublemaker_response, temptress_response, vampires_response, villageidiot_response, witch_response, werewolves_response } from '../scenes/roles'
+import { aliens_response, alphawolf_response, thing_response, apprenticeseer_response, apprenticeassassin_response, assassin_response, beholder_response, bodysnatcher_response, copycat_response, curator_response, cupid_response, seer_response, diseased_response, doppelganger_response, doppelganger_instant_action_response, empath_response, exposer_response, revealer_response, gremlin_response, mortician_response, pickpocket_response, priest_response, psychic_response, rascal_response, thecount_response, mysticwolf_response, drunk_response, instigator_response, marksman_response, nostradamus_response, oracle_question_response, oracle_answer_response, paranormalinvestigator_response, robber_response, sentinel_response, squire_response, troublemaker_response, temptress_response, vampires_response, villageidiot_response, witch_response, werewolves_response } from '../scenes/roles'
 import { websocketServerConnectionsPerRoom } from './connections'
 
 
@@ -160,6 +160,9 @@ export const generateInteractionResponse = (gameState, token, selected_card_posi
       break  
     case "ORACLE_QUESTION":
       newGameState = oracle_question_response(gameState, token, selected_answer, interaction_type)
+      break
+    case "ORACLE_ANSWER":
+      newGameState = oracle_answer_response(gameState, token, selected_card_positions, interaction_type)
       break
     case "PARANORMAL_INVESTIGATOR":
       newGameState = paranormalinvestigator_response(gameState, token, selected_card_positions, interaction_type)

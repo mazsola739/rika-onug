@@ -26,7 +26,7 @@ export const blob = (gameState, title) => {
 
   if (total_players === 3) {
     availableBlobOptions = randomBlobKickoffText.filter(option => !option.includes('2eachside') || !option.includes('3') || !option.includes('4'))
-  }else if (total_players >= 4 && total_players < 5) {
+  } else if (total_players >= 4 && total_players < 5) {
     availableBlobOptions = randomBlobKickoffText.filter(option => !option.includes('2eachside') || !option.includes('4'))
   }
 

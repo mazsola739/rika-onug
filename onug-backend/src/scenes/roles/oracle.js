@@ -1,10 +1,11 @@
 //@ts-check
-import { SCENE } from '../../constant'
-import { createNumberArray, formatOracleAnswer, formatPlayerIdentifier, getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime, isCurrentPlayerNumberEven, thinkRandomNumber } from '../../utils'
+import { SCENE, centerCardPositions } from '../../constant'
+import { createNumberArray, formatOracleAnswer, formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getRandomItemFromArray, getRandomNumber, getSceneEndTime, isCurrentPlayerNumberEven, thinkRandomNumber } from '../../utils'
+import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../conditions';
 import { isValidAnswerSelection, isValidCardSelection } from '../validate-response-data';
 import { generateRoleInteraction } from './../generate-scene-role-interactions';
 
-const random_oracle_question = [
+const randomOracleQuestions = [
   'oracle_alienteam_text',
   'oracle_werewolfteam_text',
   'oracle_vampireteam_text',
@@ -17,7 +18,7 @@ const random_oracle_question = [
   'oracle_guessnumber_text',
 ]
 
-const oracle_responses = {
+const oracleResponses = {
   oracle_alienteam_text: {
     yes: [
       'oracle_alienteam_yes_text',
@@ -60,18 +61,27 @@ const oracle_responses = {
   },
 }
 
-const oracleQuestion = getRandomItemFromArray(random_oracle_question)
-const theNumberIThinkingOf = thinkRandomNumber()
-
-
+//ORACLE_QUESTION
 export const oracle_question = (gameState, title) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const narration = [
-    'oracle_kickoff_text',
-    oracleQuestion,
-  ]
+  const selectedCards = newGameState.selected_cards
+
+  let availableOracleQuestionOptions = []
+
+  if (!hasAnyAlien(selectedCards)) {
+    availableOracleQuestionOptions = randomOracleQuestions.filter(question => !question.includes('alien') || !question.includes('ripple'))
+  } else if (!hasAnyVampire(selectedCards)) {
+    availableOracleQuestionOptions = randomOracleQuestions.filter(question => !question.includes('vampire'))
+  } else if (!hasAnyWerewolf(selectedCards)) {
+    availableOracleQuestionOptions = randomOracleQuestions.filter(question => !question.includes('werewolf'))
+  }
+
+  const oracleQuestion = getRandomItemFromArray(availableOracleQuestionOptions)
+  const theNumberIThinkingOf = thinkRandomNumber()
+
+  const narration = ['oracle_kickoff_text', oracleQuestion]
   const actionTime = 8
 
   newGameState.oracle.question = oracleQuestion
@@ -119,7 +129,7 @@ export const oracle_question_raising = (gameState, token, title) => {
 
   switch (oracleQuestion) {
     case 'oracle_viewplayer_text':
-      answerOptions = createNumberArray(Object.keys(newGameState.players).length)
+      answerOptions = createNumberArray(newGameState.total_players)
       break
     case 'oracle_evenodd_text':
       const isCurrentPlayerEven = isCurrentPlayerNumberEven(newGameState.players, token)
@@ -186,19 +196,20 @@ export const oracle_question_response = (gameState, token, selected_answer, titl
   return newGameState
 }
 
+//ORACLE_ANSWER
 export const oracle_answer = (gameState, title) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const question = newGameState.oracle.question
-  const answer = newGameState.oracle.answer
+  const oracleQuestion = newGameState.oracle.question
+  const oracleAnswer = newGameState.oracle.answer
 
   let narration = []
   let aftermath = false
 
-  switch (question) {
+  switch (oracleQuestion) {
     case 'oracle_evenodd_text':
-      if (answer === 'even') {
+      if (oracleAnswer === 'even') {
         narration = ['oracle_evenodd_even_text']
       } else {
         narration = ['oracle_evenodd_odd_text']
@@ -206,27 +217,44 @@ export const oracle_answer = (gameState, title) => {
       break
     case 'oracle_guessnumber_text':
       aftermath = true
-      if (answer === 'success') {
+      if (oracleAnswer === 'success') {
         narration = ['oracle_guessnumber_success_text']
       } else {
         narration = ['oracle_guessnumber_failure_text']
       }
       break
-    case 'oracle_viewplayer_text':
-      aftermath = true
-      const yes = oracle_responses[question].yes
-      const no = oracle_responses[question].no
+    case 'oracle_viewplayer_text': 
+      const yes = oracleResponses[oracleQuestion].yes
+      const no = oracleResponses[oracleQuestion].no
       const options = yes.concat(no)
-
       narration = [getRandomItemFromArray(options)]
       break
-    default:
-      //todo ripple and alien exchange saving!
-      if (answer === 'yes') {
-        aftermath = true
-        narration = [getRandomItemFromArray(oracle_responses[question].yes)]
+    case 'oracle_alienexchange_text':
+      aftermath = true
+      if (oracleAnswer === 'yes') {
+        newGameState.alienexchange = true
+        narration = ['oracle_alienexchange_yes_text']
       } else {
-        narration = [getRandomItemFromArray(oracle_responses[question].no)]
+        newGameState.alienexchange = false
+        narration = ['oracle_alienexchange_no_text']
+      }
+      break
+    case 'oracle_ripple_text':
+      aftermath = true
+      if (oracleAnswer === 'yes') {
+        newGameState.ripple = true
+        narration = ['oracle_ripple_yes_text']
+      } else {
+        newGameState.ripple = false
+        narration = ['oracle_ripple_no_text']
+      }
+      break
+    default:
+      if (oracleAnswer === 'yes') {
+        aftermath = true
+        narration = [getRandomItemFromArray(oracleResponses[oracleQuestion].yes)]
+      } else {
+        narration = [getRandomItemFromArray(oracleResponses[oracleQuestion].no)]
       }
       break
   }
@@ -244,7 +272,6 @@ export const oracle_answer = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  delete newGameState.oracle
   return newGameState
 }
 
@@ -253,55 +280,109 @@ export const oracle_answer_aftermath = (gameState, token, title) => {
   const scene = []
 
   const oracleQuestion = newGameState.oracle.question
+  const oracleAnswer = newGameState.oracle.answer
   const oracleAftermath = newGameState.oracle.aftermath
-  let privateMessage = []
 
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
+  const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber].card }
+
+  let showCards = []
+  let limit = 0
+  let privateMessage = []
+  
   switch (oracleQuestion) {
     case 'oracle_guessnumber_text':
-      //success oracle can open eyes
-      //failure oracle team, new wining condition to everyone
+      if (oracleAftermath.includes('success')) {
+        newGameState.oracle_eyes_open = true
+        privateMessage = ['interaction_oracle_open_you_eyes']
+      } else {
+        newGameState.oracle_target = true
+
+        newGameState.players[token].card.player_team = 'oracle'
+        currentPlayerCard.team = 'oracle'
+        privateMessage = ['interaction_oracle_team']
+      }
       break
     case 'oracle_viewplayer_text':
-      //result2 random player number
-      //result selected answer
+      newGameState.players[token].card_or_mark_action = true
+
+      if (oracleAftermath.includes('yes')) {
+        showCards = getCardIdsByPositions(newGameState.card_positions, [`player_${oracleAnswer}`])
+      } else {
+        const randomPlayerNumber = getRandomNumber(1, newGameState.total_players)
+        showCards = getCardIdsByPositions(newGameState.card_positions, [`player_${randomPlayerNumber}`])
+      }
+
+      privateMessage = ['interaction_selected_card', formatPlayerIdentifier(showCards)]
       break
     case 'oracle_alienteam_text':
-      //yes card is now an alien card
-      //yes2 win with aliens, but not alien (team?)
-      //teamswitch_yes stays oracle and village team
+      if (!oracleAftermath.includes('teamswitch_yes')) {
+        newGameState.players[token].card.player_team = 'alien'
+        privateMessage = ['interaction_alien_team']
+        if (oracleAftermath.includes('yes2')) {
+          newGameState.players[token].card.player_role = 'ALIEN'
+          currentPlayerCard.role = 'ALIEN'
+          currentPlayerCard.team = 'alien'
+          privateMessage = ['interaction_alien_role']
+        }
+      } else {
+        privateMessage = ['interaction_stay_oracle']
+      }
       break
     case 'oracle_werewolfteam_text':
-      //teamswitch_yes stays oracle and village team
-      //yes werewolf card
+      if (!oracleAftermath.includes('teamswitch_yes')) {
+        newGameState.players[token].card.player_team = 'werewolf'
+        currentPlayerCard.team = 'werewolf'
+        privateMessage = ['interaction_werewolf_team']
+      } else {
+        privateMessage = ['interaction_stay_oracle']
+      }
       break
     case 'oracle_vampireteam_text':
-      //teamswitch_yes stays oracle and village team
-      //yes vampire card
+      if (!oracleAftermath.includes('teamswitch_yes')) {
+        newGameState.players[token].card.player_team = 'vampire'
+        currentPlayerCard.team = 'vampire'
+        privateMessage = ['interaction_vampire_team']
+      } else {
+        privateMessage = ['interaction_stay_oracle']
+      }
       break
     case 'oracle_centerexchange_text':
-      //yes2 no card change 
-      //yes can pick center card
+      if (!oracleAftermath.includes('yes2')) {
+        limit = 1
+        privateMessage = ['interaction_must_one_center']
+      } else {
+        privateMessage = ['interaction_stay_oracle']
+      }
       break
     case 'oracle_viewcenter_text':
-      //yes1 can pick 1 center card
-      //yes2 can pick 2 center card
-      //yes3 can pick 3 center card
-      break
-    case 'oracle_viewplayer_text':
-      //selectable player number
+      if (oracleAftermath.includes('yes1')) {
+        limit = 1
+        privateMessage = ['interaction_must_one_center']
+      } else if (oracleAftermath.includes('yes2')) {
+        limit = 2
+        privateMessage = ['interaction_must_two_center']
+      } else if (oracleAftermath.includes('yes3')) {
+        limit = 3
+        privateMessage = ['interaction_must_three_center']
+      }
       break
   }
-  
+
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
-    aftermath: oracleAftermath
+    viewed_cards: showCards,
+    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: limit } },
+    uniqueInformations: { oracle: showCards },
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: privateMessage,
     icon: 'oracle',
+    showCards,
+    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: limit } },
+    uniqueInformations: { oracle: showCards },
   })
 
   scene.push({ type: SCENE, title, token, interaction })
@@ -310,7 +391,6 @@ export const oracle_answer_aftermath = (gameState, token, title) => {
   return newGameState
 }
 
-//TODO finish view card
 export const oracle_answer_response = (gameState, token, selected_card_positions, title) => {
   if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
@@ -318,23 +398,54 @@ export const oracle_answer_response = (gameState, token, selected_card_positions
 
   const newGameState = { ...gameState }
   const scene = []
+  let interaction = {}
 
-  newGameState.players[token].card_or_mark_action = true
+  const oracleQuestion = newGameState.oracle.question
+  const oracleAftermath = newGameState.oracle.aftermath
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
-    card_or_mark_action: true,
-    swapped_cards: [selected_card_positions[0], 'center_wolf'],
+  if (oracleQuestion === 'oracle_centerexchange_text') {
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
+    const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber].card }
+    const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]].card }
+    newGameState.card_positions[currentPlayerNumber].card = selectedCard
+    newGameState.card_positions[selected_card_positions[0]].card = currentPlayerCard
+
+    newGameState.players[token].card.player_card_id = 0
+    newGameState.players[token].card_or_mark_action = true
+
+    newGameState.players[token].player_history = {
+      ...newGameState.players[token].player_history,
+      scene_title: title,
+      swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
+    }
+
+    const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])
+
+    interaction = generateRoleInteraction(newGameState, token, {
+      private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+      icon: 'oracle',
+      uniqueInformations: { oracle: [currentPlayerNumber, selected_card_positions[0]], },
+    })
+  } else if (oracleQuestion === 'oracle_viewcenter_text') {
+    const selectedCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0], selected_card_positions[1], selected_card_positions[2]])
+    const limit = + oracleAftermath.replace('oracle_view_yes', '').replace('_text', '')
+    const showCards = limit === 3 ? selectedCards : limit === 2 ? selectedCards.slice(0, 2) : selectedCards.slice(0, 1)
+
+    newGameState.players[token].card_or_mark_action = true
+
+    newGameState.players[token].player_history = {
+      ...newGameState.players[token].player_history,
+      scene_title: title,
+      viewed_cards: showCards,
+    }
+    
+    interaction = generateRoleInteraction(newGameState, token, {
+      private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length >= 2 ? formatPlayerIdentifier(selected_card_positions)[1] : '', showCards.length === 3 ? formatPlayerIdentifier(selected_card_positions)[2] : ''],
+      icon: 'nostradamus',
+      showCards,
+      uniqueInformations: { nostradamus: showCards.length === 3 ? selected_card_positions.slice(0, 3) : showCards.length === 2 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
+    })
   }
-
-  const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], 'center_wolf'])
-
-  const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_swapped_cards', ...messageIdentifiers],
-    icon: 'claw',
-    uniqueInformations: { swap: [selected_card_positions[0], 'center_wolf'], claw: [selected_card_positions[0]], },
-  })
 
   scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene

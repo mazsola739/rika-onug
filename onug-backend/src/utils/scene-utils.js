@@ -3,7 +3,7 @@ import { alienIds, allCopyPlayerIds, masonIds, supervillainIds, vampireIds, wolf
 import artifacts from '../data/artifacts.json'
 import _ from 'lodash'
 
-const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
+export const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
 
 const shufflePlayers = totalPlayers => Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`).sort(() => 0.5 - Math.random())
 
@@ -656,9 +656,9 @@ export const collectVotes = (playerNumber, selectedCard, votes) => {
   const updatedVotes = {...votes}
 
   if (votes[selectedCard]) {
-    updatedVotes[selectedCard].push(playerNumber)
+    updatedVotes[selectedCard].push(`player_${playerNumber}`)
   } else {
-    updatedVotes[selectedCard] = [playerNumber]
+    updatedVotes[selectedCard] = [`player_${playerNumber}`]
   }
 
   return updatedVotes

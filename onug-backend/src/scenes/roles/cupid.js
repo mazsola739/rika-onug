@@ -92,7 +92,6 @@ export const cupid_response = (gameState, token, selected_mark_positions, title)
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]],
   }
 

@@ -67,7 +67,6 @@ export const temptress_response = (gameState, token, selected_card_positions, ti
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     swapped_cards: [selected_card_positions[0], 'center_villain'],
   }
 

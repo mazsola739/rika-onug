@@ -76,7 +76,6 @@ export const pickpocket_response = (gameState, token, selected_mark_positions, t
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     swapped_marks: [currentPlayerNumber, selected_mark_positions[0]],
     viewed_marks: [currentPlayerNumber],
   }

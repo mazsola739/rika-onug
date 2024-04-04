@@ -66,7 +66,6 @@ export const troublemaker_response = (gameState, token, selected_card_positions,
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     swapped_cards: [position1, position2],
   }
 

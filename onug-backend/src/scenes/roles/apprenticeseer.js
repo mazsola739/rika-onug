@@ -64,7 +64,6 @@ export const apprenticeseer_response = (gameState, token, selected_card_position
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     viewed_cards: [selected_card_positions[0]],
   }
 

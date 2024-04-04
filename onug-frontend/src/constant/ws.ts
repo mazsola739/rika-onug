@@ -30,7 +30,6 @@ export const PAUSE_GAME = 'PAUSE_GAME'
 
 export const SCENE = 'SCENE'
 export const MESSAGE = 'MESSAGE'
-export const VOTE = 'VOTE'
 
 export const STAGES = {
   LOBBY: 'LOBBY',

@@ -143,7 +143,6 @@ export const bodysnatcher_response = (gameState, token, selected_card_positions,
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
     viewed_cards: [currentPlayerNumber],
   }
@@ -153,7 +152,7 @@ export const bodysnatcher_response = (gameState, token, selected_card_positions,
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
     icon: 'alienhand',
-    showCards: showCards,
+    showCards,
     uniqueInformations: { swap: [currentPlayerNumber, selected_card_positions[0]], alienhand: [currentPlayerNumber] },
   })
 

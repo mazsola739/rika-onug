@@ -6,15 +6,6 @@ import { observer } from 'mobx-react-lite'
 import { interactionStore, gameBoardStore } from 'store'
 import { StyledMessageBox, Instructions, Message, Buttons, RoleInteractionIcon } from './MessageBox.styles'
 
-const Votes: React.FC<{ player: string; votes: number[] }> = observer(({ player, votes }) => (
-  <>
-    <span>{`Player ${player.replace('player_', '')}: `}</span>
-    {votes.map((voter, index) => (
-       <Token key={index} tokenName={`player_${voter}`} size={20} />
-    ))}
-  </>
-))
-
 export const MessageBox: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
@@ -22,7 +13,6 @@ export const MessageBox: React.FC = observer(() => {
   const iconName = interactionStore.messageIcon as IconType
   const message = interactionStore.getMessage()
   const answerOptions = gameBoardStore.answerOptions
-  const votes = interactionStore.votes
 
   return (
     <StyledMessageBox>
@@ -34,13 +24,6 @@ export const MessageBox: React.FC = observer(() => {
               <Button key={index} onClick={() => handleAnswerInteraction(option)} variant="magenta" buttonText={option} />
             ))}
           </Buttons>
-        )}
-        {votes.length && (
-          <>
-            {Object.entries(votes).map(([player, voters], index) => (
-              <Votes key={index} player={player} votes={voters} />
-            ))}
-          </>
         )}
       </Instructions>
       <RoleInteractionIcon>

@@ -52,7 +52,7 @@ export const insomniac_interaction = (gameState, token, title) => {
     return generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_own_card'],
       icon: title === 'INSOMNIAC' ? 'bear' : 'thumb',
-      showCards: showCards,
+      showCards,
       uniqueInformations: { bear: title === 'INSOMNIAC' ? [currentPlayerNumber] : [], thumb: title === 'SELF_AWARENESS_GIRL' ? [currentPlayerNumber] : [], }
     })
   } else {

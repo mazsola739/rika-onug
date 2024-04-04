@@ -81,7 +81,6 @@ export const drunk_response = (gameState, token, selected_card_positions, title)
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
   }
 

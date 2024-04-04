@@ -6,6 +6,17 @@ export const vote_vampire_votes = 'Vampire votes:'
 
 export const interaction_oracle_question = 'Answer the question'
 export const interaction_oracle_answer = 'Your answer'
+export const interaction_oracle_open_you_eyes = 'You can open your eyes for the next scene'
+export const interaction_stay_oracle = 'Stay oracle'
+
+//TEAM
+export const interaction_oracle_team = 'You are in oracle team'
+export const interaction_alien_team = 'You are in alien team'
+export const interaction_werewolf_team = 'You are in werewolf team'
+export const interaction_vampire_team = 'You are in vampire team'
+
+//ROLE
+export const interaction_alien_role = 'You are alien'
 
 //any other player
 export const interaction_may_one_any_other = 'You may choose any other player'
@@ -49,6 +60,7 @@ export const interaction_part_of_blob = 'Look for part of blob'
 export const interaction_part_of_family = 'Look for part of family'
 export const interaction_own_card = 'Look for your own card'
 export const interaction_own_mark = 'Look for your own mark'
+export const interaction_selected_card = 'Look for selected card'
 
 //TODO better idea?
 export const interaction_seer_end = 'two center'

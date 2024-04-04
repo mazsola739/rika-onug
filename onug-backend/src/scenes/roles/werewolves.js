@@ -75,14 +75,13 @@ export const werewolves_response = (gameState, token, selected_card_positions, t
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     viewed_cards: [selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
     icon: 'lonely',
-    showCards: showCards,
+    showCards,
     uniqueInformations: { lonely: [selected_card_positions[0]] },
   })
 

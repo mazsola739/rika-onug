@@ -253,7 +253,6 @@ export const rascal_response = (gameState, token, selected_card_positions, title
       newGameState.players[token].player_history = {
         ...newGameState.players[token].player_history,
         scene_title: title,
-        card_or_mark_action: true,
         swapped_cards: [position1, position2],
       }
 
@@ -295,7 +294,7 @@ export const rascal_response = (gameState, token, selected_card_positions, title
           private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
           icon: 'prank',
           selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
-          showCards: showCards,
+          showCards,
           uniqueInformations: { prank: [selected_card_positions[0]], witch_answer: true },
         })
 
@@ -353,7 +352,6 @@ export const rascal_response = (gameState, token, selected_card_positions, title
       newGameState.players[token].player_history = {
         ...newGameState.players[token].player_history,
         scene_title: title,
-        card_or_mark_action: true,
         swapped_cards: [currentPlayerNumber, selectedPosition],
         viewed_cards: [currentPlayerNumber],
       }

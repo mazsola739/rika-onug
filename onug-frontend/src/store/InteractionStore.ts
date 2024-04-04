@@ -15,7 +15,6 @@ class InteractionStore {
   selectableMarkLimit = 0
   message: string[] = []
   messageIcon = ''
-  votes: Record<string, number[]> = {}
 
   constructor() {
     makeObservable(this, {
@@ -28,7 +27,6 @@ class InteractionStore {
       selectablePlayerCardLimit: observable,
       selectableCenterCardLimit: observable,
       selectableMarkLimit: observable,
-      votes: observable,
 
       resetInteraction: action,
       toggleMessageBoxStatus: action,
@@ -82,10 +80,6 @@ class InteractionStore {
 
   setMessage(message: string[]): void {
     this.message = message
-  }
-
-  setVotes(votes: Record<string, number[]>): void {
-    this.votes = votes
   }
 
   getMessage(): string | undefined {

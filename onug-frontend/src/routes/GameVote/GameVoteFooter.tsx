@@ -10,11 +10,7 @@ export const GameVoteFooter: React.FC = observer(() => {
   return (
     <Footer>
       <FooterButtons>
-        <Button
-          onClick={handleVoteNow}
-          buttonText={'VOTE NOW'}
-          variant="orange"
-        />
+        <Button onClick={handleVoteNow} buttonText={'VOTE NOW'} variant="orange" />
       </FooterButtons>
     </Footer>
   )

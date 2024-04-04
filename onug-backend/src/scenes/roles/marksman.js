@@ -120,7 +120,6 @@ export const marksman_response = (gameState, token, selected_card_positions = []
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      card_or_mark_action: true,
       viewed_cards: [selected_mark_positions[0]],
     }
 
@@ -184,7 +183,6 @@ export const marksman_response = (gameState, token, selected_card_positions = []
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      card_or_mark_action: true,
       viewed_marks: [selected_mark_positions[0]],
     }
 

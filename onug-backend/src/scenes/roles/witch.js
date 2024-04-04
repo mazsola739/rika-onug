@@ -80,7 +80,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
       private_message: privateMessage,
       icon: title === 'WITCH' ? 'witch' : 'voodoo',
       selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
-      showCards: showCards,
+      showCards,
       uniqueInformations: { witch: title === 'WITCH' ? [selected_card_positions[0]] : [], voodoo: title === 'VOODOO' ? [selected_card_positions[0]] : [], },
     })
 

@@ -1,10 +1,11 @@
 //@ts-check
-import { vampireIds, allCopyPlayerIds, SCENE, VOTE } from '../../constant'
+import { vampireIds, allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, getVampireTokensByRoleIds, countPlayersVoted, formatPlayerIdentifier, getRandomItemsFromArray, getSceneEndTime, collectVotes, findMostVoted } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
+//TODO rethink voting system
 export const vampires = (gameState, title) => {
   const newGameState = { ...gameState }
   const narration = ['vampires_kickoff_text']
@@ -67,15 +68,15 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
   newGameState.players[token].vampire_vote = selected_mark_positions[0]
 
   const alreadyVoted = countPlayersVoted(newGameState.players)
-  const votes = collectVotes(newGameState.players[token].player_number, selected_mark_positions[0], newGameState.vampire_votes)
 
+  const votes = collectVotes(newGameState.players[token].player_number, selected_mark_positions[0], newGameState.vampire_votes)
   newGameState.vampire_votes = votes
   
   //TODO why not working?
   if (alreadyVoted < vampireTokens.length) {
     vampireTokens.forEach((token) => {
       websocketServerConnectionsPerRoom[newGameState.room_id][token].send(JSON.stringify({
-        type: VOTE,
+        type: SCENE,
         votes,
         message: ['vote_vampire_votes']
       }))
@@ -94,7 +95,6 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      card_or_mark_action: true,
       mark_of_vampire: [mostVotedPlayer[0]],
     }
 
@@ -110,3 +110,5 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
 
   return newGameState
 }
+
+export const vampire_vote = (gameState, token, selected_mark_positions, title) => {}

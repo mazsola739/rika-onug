@@ -4,6 +4,7 @@ import { formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions, getR
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
+//TODO if oracle is oracle team
 export const copycat = (gameState, title) => {
   const newGameState = { ...gameState }
   const scene = []
@@ -74,14 +75,13 @@ export const copycat_response = (gameState, token, selected_card_positions, titl
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     viewed_cards: [selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_you_are_that_role', `${newGameState.players[token]?.card.player_role}`],
     icon: 'copy',
-    showCards: showCards,
+    showCards,
     uniqueInformations: { copy: [selected_card_positions[0]] },
   })
 

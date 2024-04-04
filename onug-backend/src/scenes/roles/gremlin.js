@@ -90,7 +90,6 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      card_or_mark_action: true,
       swapped_cards: [position1, position2],
     }
 
@@ -133,7 +132,6 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      card_or_mark_action: true,
       swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]],
     }
 

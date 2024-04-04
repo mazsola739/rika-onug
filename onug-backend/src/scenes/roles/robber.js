@@ -83,7 +83,6 @@ export const robber_response = (gameState, token, selected_card_positions, title
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
     viewed_cards: [currentPlayerNumber],
   }
@@ -93,7 +92,7 @@ export const robber_response = (gameState, token, selected_card_positions, title
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
     icon: title === 'ROBBER' ? 'robber' : 'dog',
-    showCards: showCards,
+    showCards,
     uniqueInformations: { robber: title === 'ROBBER' ? [currentPlayerNumber, selected_card_positions[0]] : [], dog: title === 'ROLE_RETRIEVER' ? [currentPlayerNumber, selected_card_positions[0]] : [], },
   })
 

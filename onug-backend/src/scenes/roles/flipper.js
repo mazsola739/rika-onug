@@ -76,7 +76,6 @@ export const flipper_response = (gameState, token, selected_card_positions, titl
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
   }
 
   if (isTown) {

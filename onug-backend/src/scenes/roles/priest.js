@@ -57,7 +57,6 @@ export const priest_interaction = (gameState, token, title) => {
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
-    card_or_mark_action: true,
     scene_title: title,
     selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 },
     mark_of_clarity: [currentPlayerNumber],

@@ -87,7 +87,6 @@ export const exposer_response = (gameState, token, selected_card_positions, titl
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     viewed_cards: cardPositions,
     flipped_cards: revealedCards,
   }

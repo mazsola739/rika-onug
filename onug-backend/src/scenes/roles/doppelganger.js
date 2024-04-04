@@ -4,6 +4,7 @@ import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getSelectabl
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
+//TODO if oracle is oracle team
 export const doppelganger = (gameState, title) => {
   const newGameState = { ...gameState }
   const scene = []
@@ -78,14 +79,13 @@ export const doppelganger_response = (gameState, token, selected_card_positions,
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    card_or_mark_action: true,
     viewed_cards: [selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_you_are_that_role', `${newGameState.players[token]?.card.player_role}`],
     icon: 'copy',
-    showCards: showCards,
+    showCards,
     uniqueInformations: { new_role_id: newGameState.players[token].card.player_role_id, copy: [selected_card_positions[0]] },
   })
 

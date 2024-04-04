@@ -1,5 +1,5 @@
 import { Header, Main, BoardCards, SceneTracker, KnownOwnCard, MessageBox } from 'components'
-import { ARRIVE_GAME_PLAY, STAGES, SCENE, HYDRATE_GAME_PLAY, MESSAGE, REDIRECT, VOTE } from 'constant'
+import { ARRIVE_GAME_PLAY, STAGES, SCENE, HYDRATE_GAME_PLAY, MESSAGE, REDIRECT } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -55,11 +55,6 @@ export const GamePlay: React.FC = observer(() => {
     }
     if (lastJsonMessage?.type === MESSAGE) {
       interactionStore.toggleMessageBoxStatus(true)
-    }
-    if (lastJsonMessage?.type === VOTE) {
-      interactionStore.toggleMessageBoxStatus(true)
-      interactionStore.setVotes(lastJsonMessage.votes)
-      interactionStore.setMessage(lastJsonMessage.message)
     }
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)

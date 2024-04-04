@@ -82,7 +82,6 @@ export const beholder_response = (gameState, token, selected_answer, title) => {
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      card_or_mark_action: true,
       viewed_cards: seers,
     }
     
