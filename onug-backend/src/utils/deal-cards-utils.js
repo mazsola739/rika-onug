@@ -1,8 +1,8 @@
 //@ts-check
 import cards from '../data/cards.json'
-import { getCenterCardPositionByIndex, stubbedCards } from '../stub/populate-deal';
+import { getCenterCardPositionByIndex, stubbedCards } from '../stub/populate-deal'
 import { logInfo } from '../log'
-import { alphaWolfId, hasMarkIds, supervillainIdsToCheck, temptressId, wolfIdsToCheck } from '../constant';
+import { alphaWolfId, hasMarkIds, supervillainIdsToCheck, temptressId, wolfIdsToCheck } from '../constant'
 
 const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(alphaWolfId)
 const hasTemptress = (selectedCardIds) => selectedCardIds.includes(temptressId)

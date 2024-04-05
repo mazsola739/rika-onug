@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
+import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -32,7 +32,7 @@ export const robber_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   
   if (!newGameState.players[token].shield) {
-    const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(newGameState.players, token)
+    const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGameState.players, token)
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,

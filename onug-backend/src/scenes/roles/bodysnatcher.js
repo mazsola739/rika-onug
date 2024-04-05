@@ -1,6 +1,6 @@
 //@ts-check
 import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, getAllPlayerTokens, getNonAlienPlayerNumbersByRoleIds, getAnyOtherPlayersByToken, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
+import { getRandomItemFromArray, getAllPlayerTokens, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getAnyOtherPlayersByToken, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
 import { isValidCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
@@ -90,7 +90,7 @@ export const bodysnatcher_interaction = (gameState, token, title, randomBodysnat
         break
     }
 
-    const selectablePlayerNumbers = getNonAlienPlayerNumbersByRoleIds(selectablePlayers)
+    const selectablePlayerNumbers = getNonAlienPlayerNumbersByRoleIdsWithNoShield(selectablePlayers)
 
     requiredCardSelection = getRandomItemsFromArray(selectablePlayerNumbers, 1)
 

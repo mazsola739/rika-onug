@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE, goodGuyIds } from '../../constant'
-import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithoutShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
+import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -30,7 +30,7 @@ export const paranormalinvestigator = (gameState, title) => {
 
 export const paranormalinvestigator_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(newGameState.players, token)
+  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGameState.players, token)
 
   const limit = selectablePlayerNumbers.length < 2 ? 1 : 2
 

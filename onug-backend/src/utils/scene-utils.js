@@ -1,44 +1,40 @@
 
-import { alienIds, allCopyPlayerIds, masonIds, supervillainIds, vampireIds, wolfIds, werewolvesIds } from '../constant'
+import { alienIds, masonIds, supervillainIds, vampireIds, wolfIds, werewolvesIds } from '../constant'
 import artifacts from '../data/artifacts.json'
 import _ from 'lodash'
 
-export const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
-
-const shufflePlayers = totalPlayers => Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`).sort(() => 0.5 - Math.random())
-
-export const getAllPlayerTokens = players => Object.keys(players)
-
-export const getSceneEndTime = (starTime, actionTime) => starTime + (actionTime * 1000)
-
-//CONDITION
-export const containsAllIds = (selectedCardIds, roleIds) => roleIds.every((cardId) => selectedCardIds.includes(cardId))
-export const containsAnyIds = (selectedCardIds, roleIds) => roleIds.some((cardId) => selectedCardIds.includes(cardId))
-
-
-//NARRATION
-
-export const formatPlayerIdentifier = playerNumbers => {
-  const formattedPlayerNumbers = [...playerNumbers]
-  
-  return formattedPlayerNumbers.map(player => `identifier_${player.replace('_', '')}_text`)
-}
-
-export const formatOracleAnswer = answer => `${answer}_button_label`
-
-export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
-  const players = shufflePlayers(totalPlayers)
-  const selectedPlayers = ~~(Math.random() * 3) + 1
-
-  return selectedPlayers > 1 ? [...players.slice(0, -1), conjunction, players.slice(-1)[0]] : players
-}
-
-export const getRandomItemFromArray = array => array[getRandomNumber(0, array.length - 1)]
 export const getRandomItemsFromArray = (array, amount) => {
   const shuffled = array.sort(() => 0.5 - Math.random())
   return shuffled.slice(0, amount)
 }
 
+const shufflePlayers = totalPlayers => Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`).sort(() => 0.5 - Math.random())
+
+export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
+    const players = shufflePlayers(totalPlayers)
+    const selectedPlayers = ~~(Math.random() * 3) + 1
+
+    return selectedPlayers > 1 ? [...players.slice(0, -1), conjunction, players.slice(-1)[0]] : players
+}
+
+//NARRATION
+export const getAllPlayerTokens = players => Object.keys(players)
+
+export const getSceneEndTime = (starTime, actionTime) => starTime + (actionTime * 1000)
+
+export const getRandomItemFromArray = array => array[getRandomNumber(0, array.length - 1)]
+
+//PRIVATE MESSAGE
+export const formatPlayerIdentifier = playerNumbers => {
+  const formattedPlayerNumbers = [...playerNumbers]
+
+  return formattedPlayerNumbers.map(player => `identifier_${player.replace('_', '')}_text`)
+}
+
+export const formatOracleAnswer = answer => `${answer}_button_label`
+
+//SPECIAL ROLE UTILS
+//oracle
 export const createNumberArray = number => {
   const result = []
   for (let i = 1; i <= number; i++) {
@@ -47,10 +43,195 @@ export const createNumberArray = number => {
   return result
 }
 
+export const isCurrentPlayerNumberEven = (players, token) => players[token].player_number % 2 === 0
+
+const getNeighborPlayerNumbersByToken = (players, token) => {
+  const tokens = Object.keys(players)
+  const playerCount = tokens.length
+  const playerNumber = players[token].player_number
+  const neighbors = []
+
+  const prevNeighborNumber = playerNumber === 1 ? playerCount : playerNumber - 1
+  const nextNeighborNumber = playerNumber === playerCount ? 1 : playerNumber + 1
+
+  neighbors.push(`player_${prevNeighborNumber}`)
+  neighbors.push(`player_${nextNeighborNumber}`)
+
+  return neighbors
+}
+
 export const thinkRandomNumber = () => Math.floor(Math.random() * 10) + 1
 
-//SCENE
-export const getSelectableOtherPlayerNumbersWithoutShield = (players, token) => {
+export const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
+
+export const getRandomArtifact = playerArtifacts => {
+    const assignedArtifacts = playerArtifacts.map(obj => Object.values(obj)[0])
+    const availableArtifacts = artifacts.filter(artifact => !assignedArtifacts.includes(artifact.id))
+    const randomIndex = Math.floor(Math.random() * availableArtifacts.length)
+
+    return availableArtifacts[randomIndex].id
+}
+
+//evilometer
+export const superVillainDetected = (players, evilometerToken) => {
+  const evilometerNeighbors = getNeighborPlayerNumbersByToken(players, evilometerToken)
+  const superVillains = getVillainPlayerNumbersByRoleIds(players)
+
+  for (let villain of superVillains) {
+    if (evilometerNeighbors.has(villain)) {
+      return true
+    }
+  }
+
+  return false
+}
+
+//cow
+export const alienAbducted = (players, cowToken) => {
+  const cowNeighbors = getNeighborPlayerNumbersByToken(players, cowToken)
+  const aliens = getAlienPlayerNumbersByRoleIds(players)
+
+  for (let alien of aliens) {
+    if (cowNeighbors.has(alien)) {
+      return true
+    }
+  }
+
+  return false
+}
+
+//auraseer
+export const getPlayerNumbersWithCardOrMarkActionTrue = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (player.card_or_mark_action === true) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+//rascal
+export const moveCards = (cards, direction, currentPlayer) => {
+  const playerCards = Object.fromEntries(
+    Object.entries(cards)
+      .filter(([key]) => key.startsWith("player_"))
+  )
+
+  const movableCards = { ...playerCards }
+  const currentPlayerData = movableCards[currentPlayer]
+  delete movableCards[currentPlayer]
+
+  const shiftAmount = direction === 'right' ? 1 : Object.keys(movableCards).length - 1
+
+  const shiftedCards = {}
+  Object.keys(movableCards).forEach((key, index) => {
+    const newIndex = (index + shiftAmount) % Object.keys(movableCards).length
+    shiftedCards[`player_${newIndex + 2}`] = {
+      mark: cards[`player_${newIndex + 2}`].mark
+    }
+    shiftedCards[`player_${newIndex + 2}`].card = movableCards[key].card
+  })
+
+  const updatedPlayerCards = { ...shiftedCards, [currentPlayer]: currentPlayerData }
+
+  return updatedPlayerCards
+}
+
+//lovers
+export const getLoversPlayerNumbersByMark = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (player.player_mark === "mark_of_love") {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+//renfield
+export const getVampirePlayerNumbersByMark = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (player.player_mark === "mark_of_vampire") {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getAnyEvenOrOddPlayers = (players, evenOrOdd) => {
+  const result = {}
+
+  for (const playerId in players) {
+    const playerNumber = players[playerId].player_number
+    const isPlayerNumberEven = playerNumber % 2 === 0
+    const isPlayerNumberOdd = playerNumber % 2 !== 0
+
+    if (evenOrOdd === 'even' && isPlayerNumberEven) {
+      result[playerId] = players[playerId]
+    } else if (evenOrOdd === 'odd' && isPlayerNumberOdd) {
+      result[playerId] = players[playerId]
+    }
+  }
+
+  return result
+}
+
+//VOTE COUNTING
+export const countPlayersVoted = players => {
+  let votedCount = 0
+
+  Object.values(players).forEach(player => {
+    if (player.vampire_vote) {
+      votedCount++
+    }
+  })
+
+  return votedCount
+}
+
+export const collectVotes = (playerNumber, selectedCard, votes) => {
+  const updatedVotes = { ...votes }
+
+  if (votes[selectedCard]) {
+    updatedVotes[selectedCard].push(`player_${playerNumber}`)
+  } else {
+    updatedVotes[selectedCard] = [`player_${playerNumber}`]
+  }
+
+  return updatedVotes
+}
+
+export const findMostVoted = (votes) => {
+  let maxVotes = 0
+  let mostVotedPlayers = []
+
+  for (const playerNumber in votes) {
+    const voteCount = votes[playerNumber].length
+
+    if (voteCount > maxVotes) {
+      maxVotes = voteCount
+      mostVotedPlayers = [playerNumber]
+    } else if (voteCount === maxVotes) {
+      mostVotedPlayers.push(playerNumber)
+    }
+  }
+
+  return mostVotedPlayers
+}
+
+//GET SELECTABLE PLAYERS
+export const getSelectableOtherPlayerNumbersWithNoShield = (players, token) => {
   const result = []
 
   Object.keys(players).forEach((playerToken) => {
@@ -58,10 +239,15 @@ export const getSelectableOtherPlayerNumbersWithoutShield = (players, token) => 
       result.push(`player_${players[playerToken].player_number}`)
     }
   })
-  
+
   return result
 }
 
+export const getSelectablePlayersWithNoShield = (players, shieldedCards) => players.filter(player => !shieldedCards.includes(player))
+
+export const getSelectablePlayersWithNoArtifact = (players, artifactedCards) => players.filter(player => !artifactedCards.includes(player))
+
+//GET BY POSITION
 export const getCardIdsByPositions = (cardPositions, selectedPositions) => {
   const result = []
 
@@ -84,12 +270,89 @@ export const getMarksByPositions = (cardPositions, selectedPositions) => {
   return result
 }
 
-export const getNonWerewolfPlayerNumbersByRoleIds = players => {
+//GET BY PLAYER NUMBER
+export const getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
+  const result = []
+
+  playerNumbers.forEach((key) => {
+    const cardId = cardPositions[key].card.id
+    result.push({ [key]: cardId })
+  })
+
+  return result
+}
+
+export const getPlayerTokensByPlayerNumber = (players, player) => {
+  const result = []
+  const playerNumber = parseInt(player.match(/\d+/)[0])
+
+  for (const token in players) {
+    if (players[token].player_number === playerNumber) {
+      result.push(token)
+    }
+  }
+
+  return result
+}
+
+//GET BY ROLE IDS
+export const getNonWerewolfPlayerNumbersByRoleIdsWithNoShield = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
     if (!wolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getWerewolfPlayerNumbersByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (werewolvesIds.includes(player.card.player_role_id)) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+export const getDreamWolfPlayerNumberByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (players[token].card.player_role_id === 21) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getWerewolfAndDreamwolfPlayerNumbersByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (wolfIds.includes(player.card.player_role_id)) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (wolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -110,7 +373,7 @@ export const getVillainPlayerNumbersByRoleIds = players => {
   return result
 }
 
-export const getNonVillainPlayerNumbersByRoleIds = players => {
+export const getNonVillainPlayerNumbersByRoleIdsWithNoShield = players => {
   const result = []
 
   for (const token in players) {
@@ -136,7 +399,7 @@ export const getAlienPlayerNumbersByRoleIds = players => {
   return result
 }
 
-export const getNonAlienPlayerNumbersByRoleIds = players => {
+export const getNonAlienPlayerNumbersByRoleIdsWithNoShield = players => {
   const result = []
 
   for (const token in players) {
@@ -149,38 +412,12 @@ export const getNonAlienPlayerNumbersByRoleIds = players => {
   return result
 }
 
-export const superVillainDetected = (players, evilometerToken) => {
-  const evilometerNeighbors = getNeighborPlayerNumbersByToken(players, evilometerToken)
-  const superVillains = getVillainPlayerNumbersByRoleIds(players)
-
-  for (let villain of superVillains) {
-    if (evilometerNeighbors.has(villain)) {
-      return true
-    }
-  }
-
-  return false
-}
-
-export const alienAbducted = (players, cowToken) => {
-  const cowNeighbors = getNeighborPlayerNumbersByToken(players, cowToken)
-  const aliens = getAlienPlayerNumbersByRoleIds(players)
-
-  for (let alien of aliens) {
-    if (cowNeighbors.has(alien)) {
-      return true
-    }
-  }
-
-  return false
-}
-
-export const getWerewolfPlayerNumbersByRoleIds = players => {
+export const getGroobPlayerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
-    if (werewolvesIds.includes(player.card.player_role_id)) {
+    if (players[token].card.player_role_id === 47) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -188,12 +425,12 @@ export const getWerewolfPlayerNumbersByRoleIds = players => {
   return result
 }
 
-export const getDreamWolfPlayerNumberByRoleIds = players => {
+export const getZerbPlayerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
-    if (players[token].card.player_role_id === 21) {
+    if (players[token].card.player_role_id === 54) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -234,32 +471,6 @@ export const getNonVampirePlayerNumbersByRoleIds = gameState => {
     const player = gameState.players[token]
     const cardPositions = gameState.card_positions
     if (!vampireIds.includes(player.card.player_role_id) && cardPositions[`player_${player.player_number}`].mark !== "mark_of_vampire") {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
-
-export const getGroobPlayerNumberByRoleIds = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (players[token].card.player_role_id === 47) {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
-
-export const getZerbPlayerNumberByRoleIds = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (players[token].card.player_role_id === 54) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -319,38 +530,12 @@ export const getAnySeerPlayerNumbersByRoleIds = players => {
   return result
 }
 
-export const getAnySeerPlayerNumbersByRoleIdsWithoutShield = players => {
+export const getAnySeerPlayerNumbersByRoleIdsWithNoShield = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
     if ((player.card.player_role_id === 9 || player.card.player_role_id === 18) && !(player.card?.shield)) {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
-
-export const getWerewolfAndDreamwolfPlayerNumbersByRoleIds = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (wolfIds.includes(player.card.player_role_id)) {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
-
-export const getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithoutShield = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (wolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -371,137 +556,20 @@ export const getMasonPlayerNumbersByRoleIds = players => {
   return result
 }
 
-export const getLoversPlayerNumbersByMark = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (player.player_mark === "mark_of_love") {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
-
-export const getVampirePlayerNumbersByMark = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (player.player_mark === "mark_of_vampire") {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
-
-export const  getPlayerNumbersWithCardOrMarkActionTrue = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (player.card_or_mark_action === true) {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
-
-export const getPlayerNumbersWithMatchingTokens = (players, tokens) => tokens.map(token => `player_${players[token].player_number}`)
-export const getPlayerNumberWithMatchingToken = (players, token) => `player_${players[token].player_number}`
-
-export const isCurrentPlayerNumberEven = (players, token) => players[token].player_number % 2 === 0
-
-export const getPlayerNumbersWithNonMatchingTokens = (players, tokens) => {
-  return Object.keys(players)
-    .filter((token) => {
-      return !tokens.includes(token)
-    })
-    .map((token) => `player_${players[token].player_number}`)
-}
-
-export const getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
-  const result = []
-
-  playerNumbers.forEach(key => {
-    const cardId = cardPositions[key].card.id
-    result.push({ [key]: cardId })
-  })
-
-  return result
-}
-
-export const getPlayerTokensByPlayerNumber = (players, player) => {
-  const result = []
-  const playerNumber = parseInt(player.match(/\d+/)[0])
-
-  for (const token in players) {
-    if (players[token].player_number === playerNumber) {
-      result.push(token)
-    }
-  }
-
-  return result
-}
-
-export const getPlayerTokenByPlayerNumber = (players, player) => {
-  const playerNumber = parseInt(player.match(/\d+/)[0])
-
-  for (const token in players) {
-    if (players[token].player_number === playerNumber) {
-      return token
-    }
-  }
-
-  return null
-}
-
-export const getAnyOtherPlayersByToken = (players, token) => {
-  const result = {}
-  
-  for (const player in players) {
-    if (player !== token) {
-      result[player] = players[player]
-    }
-  }
-
-  return result
-}
-
-export const getAnyEvenOrOddPlayers = (players, evenOrOdd) => {
-  const result = {}
-  
-  for (const playerId in players) {
-    const playerNumber = players[playerId].player_number
-    const isPlayerNumberEven = playerNumber % 2 === 0
-    const isPlayerNumberOdd = playerNumber % 2 !== 0
-
-    if (evenOrOdd === 'even' && isPlayerNumberEven) {
-      result[playerId] = players[playerId]
-    } else if (evenOrOdd === 'odd' && isPlayerNumberOdd) {
-      result[playerId] = players[playerId]
-    }
-  }
-
-  return result
-}
-
+//GET BY TOKEN
 export const getAnyHigherOrLowerPlayerNumbersByToken = (players, token, higherOrLower) => {
   const playerNumber = players[token].player_number
   const result = {}
 
   if (higherOrLower === 'lower') {
-    for (let i = playerNumber - 1; i >= 1; i--) {
-      result[i] = players[Object.keys(players).find(key => players[key].player_number === i)]
-    }
+      for (let i = playerNumber - 1; i >= 1; i--) {
+          result[i] = players[Object.keys(players).find(key => players[key].player_number === i)]
+      }
   } else if (higherOrLower === 'higher') {
-    const totalPlayers = Object.keys(players).length
-    for (let i = playerNumber + 1; i <= totalPlayers; i++) {
-      result[i] = players[Object.keys(players).find(key => players[key].player_number === i)]
-    }
+      const totalPlayers = Object.keys(players).length
+      for (let i = playerNumber + 1; i <= totalPlayers; i++) {
+          result[i] = players[Object.keys(players).find(key => players[key].player_number === i)]
+      }
   }
 
   return result
@@ -514,49 +582,34 @@ export const getPlayerNeighborsByToken = (players, token, direction, amount) => 
   const neighbors = {}
 
   if (direction === 'left' || direction === 'both') {
-    let prevNeighborNumber = playerNumber - 1
-    while (prevNeighborNumber !== playerNumber - amount && prevNeighborNumber !== playerNumber) {
-      if (prevNeighborNumber < 1) {
-        prevNeighborNumber = playerCount
+      let prevNeighborNumber = playerNumber - 1
+      while (prevNeighborNumber !== playerNumber - amount && prevNeighborNumber !== playerNumber) {
+          if (prevNeighborNumber < 1) {
+              prevNeighborNumber = playerCount
+          }
+          const prevNeighborId = Object.keys(players).find(key => players[key].player_number === prevNeighborNumber)
+          if (prevNeighborId) {
+              neighbors['left'] = neighbors['left'] || []
+              neighbors['left'].push(players[prevNeighborId])
+          }
+          prevNeighborNumber--
       }
-      const prevNeighborId = Object.keys(players).find(key => players[key].player_number === prevNeighborNumber)
-      if (prevNeighborId) {
-        neighbors['left'] = neighbors['left'] || []
-        neighbors['left'].push(players[prevNeighborId])
-      }
-      prevNeighborNumber--
-    }
   }
 
   if (direction === 'right' || direction === 'both') {
-    let nextNeighborNumber = playerNumber + 1
-    while (nextNeighborNumber !== playerNumber + amount && nextNeighborNumber !== playerNumber) {
-      if (nextNeighborNumber > playerCount) {
-        nextNeighborNumber = 1
+      let nextNeighborNumber = playerNumber + 1
+      while (nextNeighborNumber !== playerNumber + amount && nextNeighborNumber !== playerNumber) {
+          if (nextNeighborNumber > playerCount) {
+              nextNeighborNumber = 1
+          }
+          const nextNeighborId = Object.keys(players).find(key => players[key].player_number === nextNeighborNumber)
+          if (nextNeighborId) {
+              neighbors['right'] = neighbors['right'] || []
+              neighbors['right'].push(players[nextNeighborId])
+          }
+          nextNeighborNumber++
       }
-      const nextNeighborId = Object.keys(players).find(key => players[key].player_number === nextNeighborNumber)
-      if (nextNeighborId) {
-        neighbors['right'] = neighbors['right'] || []
-        neighbors['right'].push(players[nextNeighborId])
-      }
-      nextNeighborNumber++
-    }
   }
-
-  return neighbors
-}
-
-export const getNeighborPlayerNumbersByToken = (players, token) => {
-  const tokens = Object.keys(players)
-  const playerCount = tokens.length
-  const playerNumber = players[token].player_number
-  const neighbors = []
-
-  const prevNeighborNumber = playerNumber === 1 ? playerCount : playerNumber - 1
-  const nextNeighborNumber = playerNumber === playerCount ? 1 : playerNumber + 1
-
-  neighbors.push(`player_${prevNeighborNumber}`)
-  neighbors.push(`player_${nextNeighborNumber}`)
 
   return neighbors
 }
@@ -571,128 +624,67 @@ export const getPartOfGroupByToken = (players, token, randomInstruction) => {
   const amount = randomInstruction.includes("4") ? 4 : randomInstruction.includes("3") ? 3 : randomInstruction.includes("2") ? 2 : 1
 
   const getPartOfGroupNumber = (index) => {
-    let partOfGroupNumber = groupHeadsNumber + index
-    if (partOfGroupNumber <= 0) {
-      partOfGroupNumber += totalPlayers
-    } else if (partOfGroupNumber > totalPlayers) {
-      partOfGroupNumber -= totalPlayers
-    }
-    return partOfGroupNumber
+      let partOfGroupNumber = groupHeadsNumber + index
+      if (partOfGroupNumber <= 0) {
+          partOfGroupNumber += totalPlayers
+      } else if (partOfGroupNumber > totalPlayers) {
+          partOfGroupNumber -= totalPlayers
+      }
+      return partOfGroupNumber
   }
 
   if (side === "each" || side === "left") {
-    for (let i = 1; i <= amount; i++) {
-      const partOfGroupLeftSideNumber = getPartOfGroupNumber(-i)
-      partOfGroup.push(`player_${partOfGroupLeftSideNumber}`)
-    }
+      for (let i = 1; i <= amount; i++) {
+          const partOfGroupLeftSideNumber = getPartOfGroupNumber(-i)
+          partOfGroup.push(`player_${partOfGroupLeftSideNumber}`)
+      }
   }
 
   if (side === "each" || side === "right") {
-    for (let i = 1; i <= amount; i++) {
-      const partOfGroupRightSideNumber = getPartOfGroupNumber(i)
-      partOfGroup.push(`player_${partOfGroupRightSideNumber}`)
-    }
+      for (let i = 1; i <= amount; i++) {
+          const partOfGroupRightSideNumber = getPartOfGroupNumber(i)
+          partOfGroup.push(`player_${partOfGroupRightSideNumber}`)
+      }
   }
 
   return partOfGroup
 }
 
-export const getSelectablePlayersWithNoShield = (players, shielded_cards) => players.filter(player => !shielded_cards.includes(player))
-export const getSelectablePlayersWithNoArtifact = (players, artifacted_cards) => players.filter(player => !artifacted_cards.includes(player))
+export const getAnyOtherPlayersByToken = (players, token) => {
+  const result = {}
 
-export const isPlayersCardsFlipped = (flipped, playersPosition) => Object.keys(flipped).some(key => playersPosition === key)
-export const isActivePlayersCardsFlipped = (flipped, playersPosition) =>  flipped.some((obj) => Object.keys(obj)[0] === playersPosition)
-export const concatArraysWithUniqueElements = (array1, array2) => _.uniqWith([...array1, ...array2], _.isEqual)
-
-export const getRandomArtifact = playerArtifacts => {
-  const assignedArtifacts = playerArtifacts.map(obj => Object.values(obj)[0])
-  const availableArtifacts = artifacts.filter(artifact => !assignedArtifacts.includes(artifact.id))
-  const randomIndex = Math.floor(Math.random() * availableArtifacts.length)
-
-  return availableArtifacts[randomIndex].id
-}
-
-export const getKeys = array => array.map(obj => Object.keys(obj)[0])
-
-export const moveCards = (cards, direction, currentPlayer) => {
-  const playerCards = Object.fromEntries(
-      Object.entries(cards)
-          .filter(([key]) => key.startsWith("player_"))
-  )
-
-  const movableCards = { ...playerCards }
-  const currentPlayerData = movableCards[currentPlayer]
-  delete movableCards[currentPlayer]
-
-  const shiftAmount = direction === 'right' ? 1 : Object.keys(movableCards).length - 1
-
-  const shiftedCards = {}
-  Object.keys(movableCards).forEach((key, index) => {
-      const newIndex = (index + shiftAmount) % Object.keys(movableCards).length
-      shiftedCards[`player_${newIndex + 2}`] = {
-          mark: cards[`player_${newIndex + 2}`].mark
+  for (const player in players) {
+      if (player !== token) {
+          result[player] = players[player]
       }
-      shiftedCards[`player_${newIndex + 2}`].card = movableCards[key].card
-  })
-
-  const updatedPlayerCards = { ...shiftedCards, [currentPlayer]: currentPlayerData }
-
-  return updatedPlayerCards
-}
-
-export const countPlayersVoted = players => {
-  let votedCount = 0
-
-  Object.values(players).forEach(player => {
-      if (player.vampire_vote) {
-          votedCount++
-      }
-  })
-  
-  return votedCount
-}
-
-export const collectVotes = (playerNumber, selectedCard, votes) => {
-  const updatedVotes = {...votes}
-
-  if (votes[selectedCard]) {
-    updatedVotes[selectedCard].push(`player_${playerNumber}`)
-  } else {
-    updatedVotes[selectedCard] = [`player_${playerNumber}`]
   }
 
-  return updatedVotes
+  return result
 }
 
-export const findMostVoted = (votes) => {
-  let maxVotes = 0
-  let mostVotedPlayers = []
+export const getPlayerNumbersWithMatchingTokens = (players, tokens) => tokens.map(token => `player_${players[token].player_number}`)
 
-  for (const playerNumber in votes) {
-    const voteCount = votes[playerNumber].length
+export const getPlayerNumberWithMatchingToken = (players, token) => `player_${players[token].player_number}`
 
-    if (voteCount > maxVotes) {
-      maxVotes = voteCount
-      mostVotedPlayers = [playerNumber]
-    } else if (voteCount === maxVotes) {
-      mostVotedPlayers.push(playerNumber)
-    }
-  }
-
-  return mostVotedPlayers
+export const getPlayerNumbersWithNonMatchingTokens = (players, tokens) => {
+  return Object.keys(players)
+      .filter((token) => {
+          return !tokens.includes(token)
+      })
+      .map((token) => `player_${players[token].player_number}`)
 }
 
 //RIPPLE
 export const pickRandomOnePlayer = numPlayers => shufflePlayers(numPlayers)[0]
 
 export const pickRandomTwoPlayers = (numPlayers, conjunction) => {
-  const players = shufflePlayers(numPlayers)
+    const players = shufflePlayers(numPlayers)
 
-  return [players[0], conjunction, players[1]]
+    return [players[0], conjunction, players[1]]
 }
 
 export const pickRandomTwoPlayersArray = numPlayers => {
-  const players = shufflePlayers(numPlayers)
+    const players = shufflePlayers(numPlayers)
 
-  return [players[0], players[1]]
+    return [players[0], players[1]]
 }

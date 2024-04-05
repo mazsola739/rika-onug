@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getNonVillainPlayerNumbersByRoleIds, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getNonVillainPlayerNumbersByRoleIdsWithNoShield, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -30,7 +30,7 @@ export const temptress = (gameState, title) => {
 
 export const temptress_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
-  const selectablePlayerNumbers = getNonVillainPlayerNumbersByRoleIds(newGameState.players)
+  const selectablePlayerNumbers = getNonVillainPlayerNumbersByRoleIdsWithNoShield(newGameState.players)
 
   const privateMessage = [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_must_one_any_non_villain']
   const requiredCardSelection = getRandomItemsFromArray(selectablePlayerNumbers, 1)

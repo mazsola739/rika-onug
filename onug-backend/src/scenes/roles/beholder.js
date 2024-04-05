@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getAnySeerPlayerNumbersByRoleIds, getAnySeerPlayerNumbersByRoleIdsWithoutShield, getCardIdsByPositions, getSceneEndTime } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getAnySeerPlayerNumbersByRoleIds, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidAnswerSelection } from '../validate-response-data'
 
@@ -70,7 +70,7 @@ export const beholder_response = (gameState, token, selected_answer, title) => {
   let interaction = {}
 
   if (selected_answer === 'yes') {
-    const seers = getAnySeerPlayerNumbersByRoleIdsWithoutShield(newGameState.players)
+    const seers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(newGameState.players)
     const viewCards = getCardIdsByPositions(newGameState.card_positions, seers)
 
     if ( seers.some(seer => newGameState.card_positions[seer].card.id === newGameState.players[token]?.card?.original_id)  ) {

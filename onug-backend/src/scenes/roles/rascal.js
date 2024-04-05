@@ -1,6 +1,6 @@
 //@ts-check
 import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getSelectableOtherPlayerNumbersWithoutShield, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
+import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getSelectableOtherPlayerNumbersWithNoShield, formatPlayerIdentifier, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 import { villageidiot_interaction } from './villageidiot'
@@ -188,7 +188,7 @@ export const rascal_interaction = (gameState, token, title, randomRascalInstruct
         icon: 'shielded',
       })
     } else {
-      selectableCards = randomAnyOneKey === 'identifier_center_text' ? centerCardPositions : getSelectableOtherPlayerNumbersWithoutShield(selectableOnePlayers, token)
+      selectableCards = randomAnyOneKey === 'identifier_center_text' ? centerCardPositions : getSelectableOtherPlayerNumbersWithNoShield(selectableOnePlayers, token)
       privateMessage = [selectableCards.length === 0 ? 'interaction_no_selectable_player' : randomRascalInstruction === 'rascal_drunk_text' ? 'interaction_must_one_any_other' : 'interaction_may_one_any_other']
       
       requiredCardSelection = getRandomItemsFromArray(selectableCards, limit)

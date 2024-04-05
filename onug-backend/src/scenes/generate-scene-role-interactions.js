@@ -1,6 +1,8 @@
 //@ts-check
-import { getKeys, concatArraysWithUniqueElements } from '../utils'
 import { updatePlayerCard } from './update-player-card'
+
+const getKeys = array => array.map(obj => Object.keys(obj)[0])
+const concatArraysWithUniqueElements = (array1, array2) => _.uniqWith([...array1, ...array2], _.isEqual)
 
 export const generateRoleInteraction = ( gameState, token, {
   private_message,

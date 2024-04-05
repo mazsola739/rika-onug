@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerTokenByPlayerNumber, getSceneEndTime, getSelectableOtherPlayerNumbersWithoutShield } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerTokensByPlayerNumber, getSceneEndTime, getSelectableOtherPlayerNumbersWithNoShield } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -31,7 +31,7 @@ export const sentinel = (gameState, title) => {
 export const sentinel_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   
-  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithoutShield(newGameState.players, token)
+  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGameState.players, token)
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
@@ -54,7 +54,7 @@ export const sentinel_response = (gameState, token, selected_card_positions, tit
   const newGameState = { ...gameState }
   const scene = []
 
-  const shieldedPlayerToken = getPlayerTokenByPlayerNumber(newGameState.players, selected_card_positions[0])
+  const shieldedPlayerToken = getPlayerTokensByPlayerNumber(newGameState.players, selected_card_positions[0])
 
   if (shieldedPlayerToken) {
     newGameState.shield.push(selected_card_positions[0])

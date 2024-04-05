@@ -1,9 +1,9 @@
 //@ts-check
 import { SCENE, centerCardPositions } from '../../constant'
 import { createNumberArray, formatOracleAnswer, formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getRandomItemFromArray, getRandomNumber, getSceneEndTime, isCurrentPlayerNumberEven, thinkRandomNumber } from '../../utils'
-import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../conditions';
-import { isValidAnswerSelection, isValidCardSelection } from '../validate-response-data';
-import { generateRoleInteraction } from './../generate-scene-role-interactions';
+import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../conditions'
+import { isValidAnswerSelection, isValidCardSelection } from '../validate-response-data'
+import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
 const randomOracleQuestions = [
   'oracle_alienteam_text',
@@ -84,7 +84,13 @@ export const oracle_question = (gameState, title) => {
   const narration = ['oracle_kickoff_text', oracleQuestion]
   const actionTime = 8
 
+  newGameState.oracle = {
+    question: [],
+    answer: '',
+    aftermath: ''
+  }
   newGameState.oracle.question = oracleQuestion
+
   switch (oracleQuestion) {
     case 'oracle_viewplayer_text':
       newGameState.oracle.answer = '1'
@@ -98,7 +104,7 @@ export const oracle_question = (gameState, title) => {
       break
     default:
       newGameState.oracle.answer = 'no'
-      break;
+      break
   }
 
   tokens.forEach((token) => {
@@ -424,26 +430,29 @@ export const oracle_answer_response = (gameState, token, selected_card_positions
     interaction = generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers],
       icon: 'oracle',
-      uniqueInformations: { oracle: [currentPlayerNumber, selected_card_positions[0]], },
+      uniqueInformations: { oracle: [currentPlayerNumber, selected_card_positions[0]] },
     })
   } else if (oracleQuestion === 'oracle_viewcenter_text') {
-    const selectedCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0], selected_card_positions[1], selected_card_positions[2]])
-    const limit = + oracleAftermath.replace('oracle_view_yes', '').replace('_text', '')
-    const showCards = limit === 3 ? selectedCards : limit === 2 ? selectedCards.slice(0, 2) : selectedCards.slice(0, 1)
+    const limit = +oracleAftermath.replace('oracle_view_yes', '').replace('_text', '')
+    const selectedCardPositions = selected_card_positions.slice(0, limit)
+    const selectedCards = getCardIdsByPositions(newGameState.card_positions, selectedCardPositions)
 
     newGameState.players[token].card_or_mark_action = true
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
       scene_title: title,
-      viewed_cards: showCards,
+      viewed_cards: selectedCards,
     }
-    
+
+    const identifiers = formatPlayerIdentifier(selectedCardPositions)
+    const message = ['interaction_saw_card', ...identifiers]
+
     interaction = generateRoleInteraction(newGameState, token, {
-      private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length >= 2 ? formatPlayerIdentifier(selected_card_positions)[1] : '', showCards.length === 3 ? formatPlayerIdentifier(selected_card_positions)[2] : ''],
+      private_message: message,
       icon: 'nostradamus',
-      showCards,
-      uniqueInformations: { nostradamus: showCards.length === 3 ? selected_card_positions.slice(0, 3) : showCards.length === 2 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
+      showCards: selectedCards,
+      uniqueInformations: { nostradamus: selectedCardPositions },
     })
   }
 

@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIds, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getNonWerewolfPlayerNumbersByRoleIdsWithNoShield, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -31,7 +31,7 @@ export const alphawolf = (gameState, title) => {
 export const alphawolf_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIds(newGameState.players)
+  const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIdsWithNoShield(newGameState.players)
 
   const privateMessage = [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_must_one_any_non_werewolf']
   const requiredCardSelection = getRandomItemsFromArray(selectablePlayerNumbers, 1)

@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getSelectablePlayersWithNoArtifact, getRandomArtifact, getPlayerTokenByPlayerNumber, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getSelectablePlayersWithNoArtifact, getRandomArtifact, getPlayerTokensByPlayerNumber, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -66,7 +66,7 @@ export const curator_response = (gameState, token, selected_card_positions, titl
   const scene = []
 
   const newArtifact = getRandomArtifact(newGameState.artifact)
-  const artifactedPlayersToken = getPlayerTokenByPlayerNumber(newGameState.players, selected_card_positions[0])
+  const artifactedPlayersToken = getPlayerTokensByPlayerNumber(newGameState.players, selected_card_positions[0])
 
   if (artifactedPlayersToken) {
     newGameState.artifact.push({ [selected_card_positions[0]]: newArtifact })

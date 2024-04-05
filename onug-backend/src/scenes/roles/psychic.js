@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnySeerPlayerNumbersByRoleIdsWithoutShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
+import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { isValidCardSelection } from '../validate-response-data';
 import { generateRoleInteraction } from './../generate-scene-role-interactions';
 
@@ -50,7 +50,7 @@ export const psychic_interaction = (gameState, token, title, randomPsychicInstru
   
   const evenOrOdd = psychicKeys.replace('identifier_', '').replace('_text', '').replace('any', '')
   const selectablePlayers = getAnyEvenOrOddPlayers(newGameState.players, evenOrOdd)
-  const selectablePlayerNumbers = getAnySeerPlayerNumbersByRoleIdsWithoutShield(selectablePlayers)
+  const selectablePlayerNumbers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(selectablePlayers)
 
   const limit = +randomPsychicInstructions.replace('psychic_view', '').replace('_text', '')
 

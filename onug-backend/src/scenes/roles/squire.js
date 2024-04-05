@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds, getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithoutShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
+import { getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds, getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidAnswerSelection } from '../validate-response-data'
 
@@ -66,7 +66,7 @@ export const squire_response = (gameState, token, selected_answer, title) => {
   let interaction = {}
 
   if (selected_answer === 'yes') {
-    const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithoutShield(newGameState.players)
+    const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield(newGameState.players)
     const viewCards = getCardIdsByPositions(newGameState.card_positions, werewolves)
 
     if ( werewolves.some(wolf => newGameState.card_positions[wolf].card.id === newGameState.players[token]?.card?.original_id)  ) {

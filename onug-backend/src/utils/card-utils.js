@@ -27,7 +27,6 @@ export const toggleExpansions = (selectedExpansions, expansion) => {
   return newSelectedExpansions
 }
 
-
 export const toggleCardSelect = (selectedCards, selectedExpansions, cardId, totalPlayers) => {
   let newSelectedCards = [...selectedCards]
   const card = getCardById(cardId)
