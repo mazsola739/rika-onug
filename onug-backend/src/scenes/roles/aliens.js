@@ -2,7 +2,6 @@
 import { alienIds, allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime, pickRandomUpToThreePlayers } from '../../utils'
 
-//TODO synthetic alien is alien here
 const randomAlienInstructions = [
   'aliens_view_text',
   'aliens_allview_text',
