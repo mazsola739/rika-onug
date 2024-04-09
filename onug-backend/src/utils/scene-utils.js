@@ -219,17 +219,34 @@ export const moveCards = (cards, direction, movablePlayers) => {
 }
 
 //VOTE COUNTING
-export const collectVotes = (playerNumber, selectedCard, votes) => {
+export const addVote = (playerNumber, selectedPosition, votes) => {
   const updatedVotes = { ...votes }
 
-  if (votes[selectedCard]) {
-    updatedVotes[selectedCard].push(`player_${playerNumber}`)
+  if (votes[selectedPosition]) {
+    updatedVotes[selectedPosition].push(`player_${playerNumber}`)
   } else {
-    updatedVotes[selectedCard] = [`player_${playerNumber}`]
+    updatedVotes[selectedPosition] = [`player_${playerNumber}`]
   }
 
   return updatedVotes
 }
+
+export const removeVote = (playerNumber, selectedPosition, votes) => {
+  const updatedVotes = { ...votes }
+
+  if (updatedVotes[selectedPosition]) {
+    const index = updatedVotes[selectedPosition].indexOf(`player_${playerNumber}`)
+    if (index !== -1) {
+      updatedVotes[selectedPosition].splice(index, 1)
+      if (updatedVotes[selectedPosition].length === 0) {
+        delete updatedVotes[selectedPosition]
+      }
+    }
+  }
+
+  return updatedVotes
+}
+
 
 export const findMostVoted = (votes) => {
   let maxVotes = 0
@@ -326,15 +343,18 @@ export const getCardIdsByPlayerNumbers = (cardPositions, playerNumbers) => {
   return result
 }
 
-export const getPlayerTokensByPlayerNumber = (players, player) => {
+export const getPlayerTokensByPlayerNumber = (players, playerNumbers) => {
   const result = []
-  const playerNumber = parseInt(player.match(/\d+/)[0])
 
-  for (const token in players) {
-    if (players[token].player_number === playerNumber) {
-      result.push(token)
+  playerNumbers.forEach(player => {
+    const number = parseInt(player.match(/\d+/)[0])
+
+    for (const token in players) {
+      if (players[token].player_number === number) {
+        result.push(token)
+      }
     }
-  }
+  })
 
   return result
 }

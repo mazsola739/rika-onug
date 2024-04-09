@@ -1,7 +1,8 @@
 //@ts-check
 import { alienIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime, getAlienPlayerNumbersByRoleIds, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getAnyEvenOrOddPlayers, getSelectableOtherPlayerNumbersWithNoShield, getNeighborByPosition, moveCards, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getAlienPlayerNumbersByRoleIdsWithNoShield } from '../../utils'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime, getAlienPlayerNumbersByRoleIds, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getAnyEvenOrOddPlayers, getSelectableOtherPlayerNumbersWithNoShield, getNeighborByPosition, moveCards, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getAlienPlayerNumbersByRoleIdsWithNoShield, addVote } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
+import { isValidCardSelection } from '../validate-response-data'
 
 const randomAlienInstructions = [
   'aliens_view_text',
@@ -64,12 +65,13 @@ export const aliens = (gameState, title) => {
 
   newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
+
   return newGameState
 }
 
 export const aliens_interaction = (gameState, token, title, randomAlienInstruction, alienKey) => {
   const newGameState = { ...gameState }
-  
+
   const aliens = getAlienPlayerNumbersByRoleIds(newGameState.players)
   const aliensWithoutShield = getAlienPlayerNumbersByRoleIdsWithNoShield(newGameState.players)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
@@ -80,31 +82,15 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
   let icon = 'alien'
 
   if (alienKey.length > 1) {
+    const selectablePlayerNumbers = alienKey.filter(key => key.includes('identifier_player')).map(key => key.replace('identifier_', ''))
     const playerNumbersWithNoShield = getSelectableAnyPlayerNumbersWithNoShield(newGameState.players)
-    const selectablePlayerNumbers = (alienKey.filter(key => key.includes('identifier_player'))).map(key => key.replace('identifier_', ''))
     const selectablePlayers = findUniqueElementsInArrays(playerNumbersWithNoShield, selectablePlayerNumbers)
-
-    selectableCards = { selectable_cards: selectablePlayers, selectable_card_limit: { player: 1, center: 0 }, }
-  } else if (alienKey.length === 1 && (alienKey[0].includes('even') || alienKey[0].includes('odd'))) {
-
-    const evenOrOdd = alienKey.includes('even') ? 'even' : 'odd'
-    const evenOrOddPlayers = getAnyEvenOrOddPlayers(newGameState.players, evenOrOdd)
-
-    if (randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text') {
-      const selectableNonAlienEvenOddPlayers = getSelectableAnyPlayerNumbersWithNoShield(evenOrOddPlayers)
-      selectableCards = { selectable_cards: selectableNonAlienEvenOddPlayers, selectable_card_limit: { player: 1, center: 0 }, }
-    } else {
-      const selectableEvenOddPlayers = getNonAlienPlayerNumbersByRoleIdsWithNoShield(evenOrOddPlayers)
-      selectableCards = { selectable_cards: selectableEvenOddPlayers, selectable_card_limit: { player: 1, center: 0 }, }
-    }
+    selectableCards = { selectable_cards: selectablePlayers, selectable_card_limit: { player: 1, center: 0 } }
   } else {
-    if (randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text') {
-      const selectableNonAlienPlayers = getSelectableAnyPlayerNumbersWithNoShield(newGameState.players)
-      selectableCards = { selectable_cards: selectableNonAlienPlayers, selectable_card_limit: { player: 1, center: 0 }, }
-    } else {
-      const selectablePlayers = getNonAlienPlayerNumbersByRoleIdsWithNoShield(newGameState.players)
-      selectableCards = { selectable_cards: selectablePlayers, selectable_card_limit: { player: 1, center: 0 }, }
-    }
+    const evenOrOdd = alienKey.length === 1 && (alienKey[0].includes('even') ? 'even' : 'odd')
+    const evenOrOddPlayers = evenOrOdd ? getAnyEvenOrOddPlayers(newGameState.players, evenOrOdd) : newGameState.players
+    const selectableNonAlienPlayers = randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text' ? getSelectableAnyPlayerNumbersWithNoShield(evenOrOddPlayers) : getNonAlienPlayerNumbersByRoleIdsWithNoShield(evenOrOddPlayers)
+    selectableCards = { selectable_cards: selectableNonAlienPlayers, selectable_card_limit: { player: 1, center: 0 } }
   }
 
   switch (randomAlienInstruction) {
@@ -112,7 +98,6 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
     case 'aliens_allview_text':
       if (newGameState.players[token].shield) {
         newGameState.players[token].player_history.shielded = true
-
         privateMessage.push('interaction_shielded')
         icon = 'shielded'
       } else {
@@ -130,21 +115,17 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
         const direction = randomAlienInstruction.includes('left') ? 'left' : 'right'
         const neighbor = getNeighborByPosition(aliensWithoutShield, currentPlayerNumber, direction)
         const updatedPlayerCards = moveCards(newGameState.card_positions, direction, aliensWithoutShield)
-
         newGameState.players[token].card_or_mark_action = true
-
         newGameState.card_positions = {
           ...newGameState.card_positions,
-          ...updatedPlayerCards
+          ...updatedPlayerCards,
         }
-
-        privateMessage.push(...['interaction_moved_yours', formatPlayerIdentifier([neighbor])[0]])
+        privateMessage.push('interaction_moved_yours', formatPlayerIdentifier([neighbor])[0])
       }
 
       break
     case 'aliens_show_text':
       showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, aliensWithoutShield)
-
       showCards.forEach((key) => {
         const card = newGameState.card_positions[key].card
 
@@ -158,7 +139,6 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
 
       if (newGameState.players[token].shield) {
         newGameState.players[token].player_history.shielded = true
-
         privateMessage.push('interaction_shielded')
         icon = 'shielded'
       } else {
@@ -167,14 +147,13 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
 
       break
     case 'aliens_timer_text':
-      newGameState.vote_timer = gameState.vote_timer / 2
+      newGameState.vote_timer /= 2
       privateMessage.push('interaction_timer')
 
       break
     case 'aliens_newalien_text':
     case 'aliens_alienhelper_text':
       privateMessage.push('interaction_must_one_any_other')
-
       break
   }
 
@@ -186,7 +165,7 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
 
   return generateRoleInteraction(newGameState, token, {
     private_message: privateMessage,
-    icon: icon,
+    icon,
     showCards,
     selectableCards,
     uniqueInformations: { aliens },
@@ -194,10 +173,34 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
 }
 
 export const aliens_response = (gameState, token, selected_card_positions, title) => {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+    return gameState
+  }
+  
   const newGameState = { ...gameState }
   const scene = []
 
-  const interaction = {}
+  const aliens = getAlienPlayerNumbersByRoleIds(newGameState.players)
+  const selectablePlayerNumbers = gameState.players[token]?.player_history?.selectable_cards
+  newGameState.players[token].alien_vote = selected_card_positions[0]
+
+  const votes = addVote(newGameState.players[token].player_number, selected_card_positions[0], newGameState.alien_votes)
+  newGameState.alien_votes = votes
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    selectableCards : { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
+    aliens, votes,
+  }
+
+  const interaction = generateRoleInteraction(newGameState, token, {
+    private_message: ['interaction_vampires', 'interaction_must_one_any_non_vampire'],
+    icon: 'vampire',
+    selectableCards : { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
+    uniqueInformations: { aliens, votes, },
+  })
+
   scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 

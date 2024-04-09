@@ -19,7 +19,7 @@ import { hydrateGamePlay } from './hydrate-game-play'
 import { stopGame } from './stop-game'
 import { reload } from './reload'
 import { interaction } from './interaction'
-import { hydrateGameVote } from './hydrate-game-vote';
+import { hydrateGameVote } from './hydrate-game-vote'
 
 export const websocketServer = (port) => {
   try {

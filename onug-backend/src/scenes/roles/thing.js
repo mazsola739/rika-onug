@@ -26,6 +26,7 @@ export const thing = (gameState, title) => {
   
   newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
+
   return newGameState
 }
 
@@ -55,7 +56,7 @@ export const thing_response = (gameState, token, selected_card_positions, title)
   const newGameState = { ...gameState }
   const scene = []
 
-  const tappedPlayerToken = getPlayerTokensByPlayerNumber(newGameState.players, selected_card_positions[0])
+  const tappedPlayerToken = getPlayerTokensByPlayerNumber(newGameState.players, [selected_card_positions[0]])
   //TODO only 1 player
 
   websocketServerConnectionsPerRoom[newGameState.room_id][tappedPlayerToken[0]].send(

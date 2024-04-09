@@ -1,6 +1,7 @@
 //@ts-check
-import { vampireIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getSceneEndTime, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, collectVotes, findMostVoted, formatPlayerIdentifier } from '../../utils'
+import { vampireIds, allCopyPlayerIds, SCENE, VOTE } from '../../constant'
+import { getAllPlayerTokens, getSceneEndTime, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, addVote, findMostVoted, formatPlayerIdentifier, removeVote, getPlayerTokensByPlayerNumber } from '../../utils'
+import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -26,6 +27,7 @@ export const vampires = (gameState, title) => {
 
   newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
+
   return newGameState
 }
 
@@ -58,25 +60,41 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
   const newGameState = { ...gameState }
   const scene = []
 
-  const vampires = getVampirePlayerNumbersByRoleIds(newGameState.players)
-  const nonVampires = getNonVampirePlayerNumbersByRoleIds(newGameState)
-  newGameState.players[token].vampire_vote = selected_mark_positions[0]
-
-  const votes = collectVotes(newGameState.players[token].player_number, selected_mark_positions[0], newGameState.vampire_votes)
+  const previousVote = newGameState.players[token].vampire_vote
+  let votes = removeVote(newGameState.players[token].player_number, previousVote, newGameState.vampire_votes)
   newGameState.vampire_votes = votes
+
+  newGameState.players[token].vampire_vote = selected_mark_positions[0]
+  votes = addVote(newGameState.players[token].player_number, selected_mark_positions[0], newGameState.vampire_votes)
+  newGameState.vampire_votes = votes
+
+  const vampires = getVampirePlayerNumbersByRoleIds(newGameState.players)
+  const vampireTokens = getPlayerTokensByPlayerNumber(newGameState.players, vampires)
+
+
+  vampireTokens.forEach((vampireToken) => {
+    websocketServerConnectionsPerRoom[newGameState.room_id][vampireToken].send(
+      JSON.stringify({
+        type: VOTE,
+        votes,
+      })
+    )
+  })
+
+  const selectablePlayers = gameState.players[token]?.player_history?.selectable_marks
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 },
-    vampires, votes,
+    selectableMarks: { selectable_marks: selectablePlayers, selectable_mark_limit: { mark: 1 } },
+    vampires,
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_vampires', 'interaction_must_one_any_non_vampire'],
     icon: 'vampire',
-    selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
-    uniqueInformations: { vampires, votes, },
+    selectableMarks: { selectable_marks: selectablePlayers, selectable_mark_limit: { mark: 1 } },
+    uniqueInformations: { vampires },
   })
 
   scene.push({ type: SCENE, title, token, interaction })
@@ -90,7 +108,7 @@ export const vampires_vote = (gameState, title) => {
   const narration = ['vampires_vote_result_text']
   const tokens = getAllPlayerTokens(newGameState.players)
   const scene = []
-  const actionTime = 5
+  const actionTime = 6
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -107,12 +125,12 @@ export const vampires_vote = (gameState, title) => {
 
   newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
+
   return newGameState
 }
 
 export const vampires_vote_result = (gameState, token, title) => {
   const newGameState = { ...gameState }
-  const scene = []
 
   newGameState.players[token].card_or_mark_action = true
 
@@ -130,14 +148,9 @@ export const vampires_vote_result = (gameState, token, title) => {
     mark_of_vampire: [mostVotedPlayer[0]],
   }
 
-  const interaction = generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_mark_of_vampire', formatPlayerIdentifier(mostVotedPlayer)[0]],
     icon: 'fang',
     uniqueInformations: { mark_of_vampire: [mostVotedPlayer[0]] },
   })
-
-  scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
-
-  return newGameState
 }

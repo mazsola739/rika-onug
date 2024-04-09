@@ -84,5 +84,6 @@ export const madscientist = (gameState, title) => {
 
   newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
+
   return newGameState
 }

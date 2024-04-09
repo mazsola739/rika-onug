@@ -1,8 +1,8 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
 import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
-import { isValidCardSelection } from '../validate-response-data';
-import { generateRoleInteraction } from './../generate-scene-role-interactions';
+import { isValidCardSelection } from '../validate-response-data'
+import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
 const randomPsychicInstructions = ['psychic_view1_text', 'psychic_view2_text']
 const psychicKeys = ['identifier_anyeven_text', 'identifier_anyodd_text']
@@ -42,6 +42,7 @@ export const psychic = (gameState, title, prefix) => {
 
   newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
   newGameState.scene = scene
+
   return newGameState
 }
 
