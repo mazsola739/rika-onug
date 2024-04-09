@@ -1,9 +1,9 @@
 import { describe, it } from 'node:test'
 import { strictEqual, deepEqual } from 'node:assert'
-import { moveCards } from '../../../src/utils/scene-utils"
+import { moveCardsButYourOwn } from '../../../src/utils/scene-utils"
 
 describe("Test scene utils", () => {
-    it("moveCards should correctly move player cards, while the mark should remain.", () => {
+    it("moveCardsButYourOwn should correctly move player cards, while the mark should remain.", () => {
         const testData = [
             {
                 cards: {
@@ -112,7 +112,7 @@ ${currentPlayer}
 expectedUpdatedPlayerCards
 ${JSON.stringify(expectedUpdatedPlayerCards, null, 4)}`)
 
-            const movedCards = moveCards(cards, direction, currentPlayer)
+            const movedCards = moveCardsButYourOwn(cards, direction, currentPlayer)
 
             console.log(`___MOVED__CARDS___
 ${JSON.stringify(movedCards, null, 4)}`)

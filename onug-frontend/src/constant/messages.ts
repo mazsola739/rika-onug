@@ -85,8 +85,10 @@ export const interaction_must_three_center = 'You must choose three center cards
 //responses
 //nothing
 export const interaction_nothing = 'You chose to do nothing'
+//timer
+export const interaction_timer = 'The voting time halved'
 //shielded
-export const interaction_shielded = 'You are unable to do you action, you have shield'
+export const interaction_shielded = 'You are unable to do your action, you have shield'
 //new role,
 export const interaction_you_are_that_role = 'You are now this role:'
 //intern
@@ -116,6 +118,7 @@ export const interaction_got_tapped_by_villain = 'You got tapped by your super v
 export const interaction_got_tapped_by_alien = 'You got tapped by your alien neighbor'
 //moved
 export const interaction_moved = 'You moved cards to'
+export const interaction_moved_yours = 'You moved your card to'
 
 //mark_of_vampire
 export const interaction_mark_of_vampire = 'You placed Mark of Vampire front of'

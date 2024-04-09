@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getSceneEndTime, moveCards } from '../../utils'
+import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getSceneEndTime, moveCardsButYourOwn } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidAnswerSelection } from '../validate-response-data'
 
@@ -53,7 +53,7 @@ export const villageidiot_response = (gameState, token, selected_answer, title) 
   const scene = []
 
   const currentPlayer = getPlayerNumberWithMatchingToken(newGameState.players, token)
-  const updatedPlayerCards = moveCards(newGameState.card_positions, selected_answer, currentPlayer)
+  const updatedPlayerCards = moveCardsButYourOwn(newGameState.card_positions, selected_answer, currentPlayer)
 
   newGameState.players[token].card_or_mark_action = true
 

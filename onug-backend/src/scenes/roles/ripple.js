@@ -1,6 +1,8 @@
 //@ts-check
 import { getRandomItemFromArray, pickRandomOnePlayer, pickRandomTwoPlayers, pickRandomUpToThreePlayers, pickRandomTwoPlayersArray } from '../../utils'
 
+
+//TODO newGameState.ripple true or false
 const ripple_sure_repeat = ['random_ripple_repeat', 'random_ripple_repeat1p']
 const ripple_random = [
   'random_ripple_none',

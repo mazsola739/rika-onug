@@ -121,7 +121,7 @@ export const filterCardsByIds = (selectedCardIds, idsToCheck) => selectedCardIds
 export const hasAlphaWolf = selectedCardIds => selectedCardIds.includes(17)
 export const hasTemptress = selectedCardIds => selectedCardIds.includes(69)
 export const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
-export const getRandomItemFromArray = (array) => array[getRandomNumber(0, array.length - 1)]
+export const getRandomItemFromArray = array => array[getRandomNumber(0, array.length - 1)]
 
 export const distributeCards = (selectedCardIds) => {
   let cardIds = [...selectedCardIds]

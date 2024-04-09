@@ -111,4 +111,4 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
   return newGameState
 }
 
-export const vampire_vote = (gameState, token, selected_mark_positions, title) => {}
+export const vampire_vote = (gameState, vampires, selected_mark_positions, title) => {}

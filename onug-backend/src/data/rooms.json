@@ -13,6 +13,7 @@
   ],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Barack Obama", "Einstein", "Elon Musk", "Jane Austen", "Leonardo da Vinci", "Marilyn Monroe", "Michael Jackson", "Oprah", "Picasso", "Shakespeare", "Stephen Hawking", "Stephen King", "Steve Jobs"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -36,6 +37,7 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Bruce Banner", "Carol Danvers", "Natasha Romanoff", "Nick Fury", "Otto Octavius", "Norman Osborn", "Peter Parker", "Steve Rogers", "Stephen Strange", "T'Challa", "Tony Stark", "Wanda Maximoff"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -59,6 +61,7 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Dragon", "Phoenix", "Griffin", "Mermaid", "Pegasus", "Unicorn", "Goblin", "Fairy", "Troll", "Chimera", "Minotaur", "Elf"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -82,6 +85,7 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Aragog", "Buckbeak", "Dobby", "Firenze", "Fluffy", "Fawkes", "Grindelwald", "Hedwig", "Kreacher", "Nagini", "Norbert", "Winky"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -105,6 +109,7 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Black Panther", "Captain America", "Hulk", "Iron Man", "Loki", "Red Skull", "Scarlet Witch", "Spider-Man", "Thanos", "Thor", "Ultron", "Vision"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -128,6 +133,7 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Arryn", "Baratheon", "Bolton", "Clegane", "Frey", "Greyjoy", "Lannister", "Martell", "Stark", "Targaryen", "Tully", "Tyrell"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -151,6 +157,7 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Carrie Bradshaw", "Dana Scully", "Dexter Morgan", "Fox Mulder", "Frank Underwood", "Jack Bauer", "Lorelai Gilmore", "Olivia Pope", "Rick Grimes", "Sam Winchester", "Tony Soprano", "Walter White"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -174,6 +181,7 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Luke Skywalker", "Princess Leia", "Han Solo", "Darth Vader", "Obi-Wan Kenobi", "Yoda", "Chewbacca", "R2-D2", "C-3PO", "Kylo Ren", "Padmé Amidala", "Rey"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -197,6 +205,7 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Angela Petrelli", "Arthur Petrelli", "Claire Bennet", "Elle Bishop", "Hiro Nakamura", "Isaac Mendez", "Matt Parkman", "Mohinder Suresh", "Nathan Petrelli", "Peter Petrelli", "Sylar", "The Haitian"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -220,6 +229,7 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Albus Dumbledore", "Bellatrix Lestrange", "Draco Malfoy", "Hermione Granger", "Harry Potter", "Luna Lovegood", "Lord Voldemort", "Minerva McGonagall", "Neville Longbottom", "Ron Weasley", "Rubeus Hagrid", "Severus Snape"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -243,6 +253,7 @@
     "selected_cards": [25, 15, 17, 22, 18, 23, 27, 11, 24],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Captain Jack Sparrow", "Ellen Ripley", "Ethan Hunt ", "Forrest Gump", "Hannibal Lecter", "Indiana Jones", "James Bond", "John McClane", "Katniss Everdeen", "Marty McFly", "Neo", "Sarah Connor"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -266,6 +277,7 @@
     "selected_cards": [25, 15, 9, 8, 11, 83, 73, 81],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Aquaman", "Bane", "Batman", "Harley Quinn", "Joker", "Lex Luthor", "Poison Ivy", "Ra's al Ghul", "Robin", "Superman", "Wonder Woman"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -289,6 +301,7 @@
     "selected_cards": [31, 41, 32, 34, 29, 35, 36, 33],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Frodo", "Gandalf", "Aragorn", "Legolas", "Gimli", "Galadriel", "Gollum", "Sauron", "Samwise", "Arwen", "Bilbo", "Saruman"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -312,6 +325,7 @@
     "selected_cards": [50, 42, 53, 43, 52, 46, 77, 44],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Barney Stinson", "Chandler Bing", "Joey Tribbiani", "Lily Aldrin", "Marshall Eriksen", "Monica Geller", "Phoebe Buffay", "Rachel Green", "Robin Scherbatsky", "Ross Geller", "Ted Mosby", "Tracy McConnell"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -335,6 +349,7 @@
     "selected_cards": [25, 22, 5, 6, 9, 23, 8, 27, 11, 24, 20, 3, 10],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["CC", "Csiti", "Irda", "Ittol", "Kira", "Luna", "Maffia", "Momo", "Natasa", "Rika", "Sura", "Syl"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -358,6 +373,7 @@
     "selected_cards": [25, 15, 7, 71, 72, 70, 80, 27, 11, 82, 20, 71, 75],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Arya", "Bran", "Brienne", "Cersei", "Daenerys", "Jaime", "Joffrey", "Jon Snow", "Khal Drogo", "Sansa", "Tyrion", "Varys"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -381,6 +397,7 @@
     "selected_cards": [50, 30, 42, 53, 15, 22, 85, 9, 27, 11, 33, 4, 20],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Amaterasu", "Anubis", "Apollo", "Athena", "Freyja", "Hades", "Hera", "Isis", "Odin", "Shiva", "Vishnu", "Zeus"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -404,6 +421,7 @@
     "selected_cards": [25, 53, 47, 54, 48, 51, 27, 52, 46, 20, 44, 49, 19],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Arthur Curry", "Barry Allen", "Bruce Wayne", "Clark Kent", "Diana Prince", "Dick Grayson", "Edward Nygma", "Harvey Dent", "Oliver Queen", "Oswald Cobblepot", "Selina Kyle", "Victor Stone"],
+    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
