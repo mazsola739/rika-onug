@@ -74,7 +74,7 @@ export const sceneHandler = gameState => {
     case "VAMPIRES_VOTE":
       if (conditions.hasAnyVampire(selected_cards)) {
         newGameState.actual_scene.started = true
-        return roles.vampire_vote(newGameState, scene_title)
+        return roles.vampires_vote(newGameState, scene_title)
       }
       break
 
@@ -189,13 +189,13 @@ export const sceneHandler = gameState => {
         return roles.aliens(newGameState, scene_title)
       }
       break
-      case "ALIENS_VOTE":
-        if (conditions.hasAnyVampire(selected_cards)) {
-          newGameState.actual_scene.started = true
-          return roles.aliens_vote(newGameState, scene_title)
-        }
-        break
-  
+
+    case "ALIENS_VOTE":
+      if (conditions.hasAnyVampire(selected_cards)) {
+        newGameState.actual_scene.started = true
+        return roles.aliens_vote(newGameState, scene_title)
+      }
+      break
 
     case "COW":
       if (conditions.hasCow(selected_cards)) {
@@ -589,16 +589,24 @@ export const sceneHandler = gameState => {
       }
       break
 
-      case "EMPATH_VOTE":
-        if (conditions.hasEmpath(selected_cards)) {
-          newGameState.actual_scene.started = true
-          return roles.empath_vote(newGameState, scene_title, "empath")
-        }
-        break 
+    case "EMPATH_VOTE":
+      if (conditions.hasEmpath(selected_cards)) {
+        newGameState.actual_scene.started = true
+        return roles.empath_vote(newGameState, scene_title)
+      }
+      break
+
     case "DOPPELGÄNGER_EMPATH":
       if (conditions.hasDoppelganger(selected_cards) && conditions.hasEmpath(selected_cards)) {
         newGameState.actual_scene.started = true
         return roles.empath(newGameState, scene_title, "doppelganger_empath")
+      }
+      break
+
+    case "DOPPELGÄNGER_EMPATH_VOTE":
+      if (conditions.hasEmpath(selected_cards)) {
+        newGameState.actual_scene.started = true
+        return roles.empath_vote(newGameState, scene_title)
       }
       break
 

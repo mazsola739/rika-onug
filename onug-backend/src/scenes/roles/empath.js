@@ -2,7 +2,7 @@
 import { copyPlayerIds, SCENE } from '../../constant'
 import { getRandomItemFromArray, pickRandomUpToThreePlayers, getAllPlayerTokens, getSceneEndTime } from '../../utils'
 
-const empathAllKeys = [
+const empathKeys = [
   'identifier_everyone_text',
   'identifier_oddplayers_text',
   'identifier_evenplayers_text',
@@ -26,7 +26,7 @@ const randomEmpathInstructions = [
   'empath_action14_text',
 ]
 
-const empathKey = getRandomItemFromArray(empathAllKeys)
+const empathKey = getRandomItemFromArray(empathKeys)
 const randomEmpathInstruction = getRandomItemFromArray(randomEmpathInstructions)
 const createEmpath = (prefix, totalPlayers) =>  [`${prefix}_kickoff_text`, 'empath_kickoff2_text', randomEmpathInstruction === 'activePlayers' ? pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and') : empathKey, randomEmpathInstruction]
 
@@ -42,7 +42,7 @@ export const empath = (gameState, title, prefix) => {
     let interaction = {}
 
     const card = newGameState.players[token].card
-    //TODO is not the empath here who get this, but empathAllKeys
+    //TODO is not the empath here who get this, but empathKeys
     if (prefix === 'empath') {
       if (card.player_original_id === 77 || (card.player_role_id === 77 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = empath_interaction(newGameState, token, title)

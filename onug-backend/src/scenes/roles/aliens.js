@@ -1,6 +1,6 @@
 //@ts-check
 import { alienIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime, getAlienPlayerNumbersByRoleIds, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getAnyEvenOrOddPlayers, getSelectableOtherPlayerNumbersWithNoShield, getNeighborByPosition, moveCards, formatPlayerIdentifier, getCardIdsByPlayerNumbers } from '../../utils'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime, getAlienPlayerNumbersByRoleIds, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getAnyEvenOrOddPlayers, getSelectableOtherPlayerNumbersWithNoShield, getNeighborByPosition, moveCards, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getAlienPlayerNumbersByRoleIdsWithNoShield } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 const randomAlienInstructions = [
@@ -70,12 +70,11 @@ export const aliens = (gameState, title) => {
 export const aliens_interaction = (gameState, token, title, randomAlienInstruction, alienKey) => {
   const newGameState = { ...gameState }
   
-
   const aliens = getAlienPlayerNumbersByRoleIds(newGameState.players)
-  const aliensWithoutShield = getNonAlienPlayerNumbersByRoleIdsWithNoShield(newGameState.players)
+  const aliensWithoutShield = getAlienPlayerNumbersByRoleIdsWithNoShield(newGameState.players)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
 
-  let selectablePlayers = []
+  let selectableCards = {}
   let showCards = []
   let privateMessage = ['interaction_aliens']
   let icon = 'alien'
@@ -83,30 +82,36 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
   if (alienKey.length > 1) {
     const playerNumbersWithNoShield = getSelectableAnyPlayerNumbersWithNoShield(newGameState.players)
     const selectablePlayerNumbers = (alienKey.filter(key => key.includes('identifier_player'))).map(key => key.replace('identifier_', ''))
-    selectablePlayers = findUniqueElementsInArrays(playerNumbersWithNoShield, selectablePlayerNumbers)
-  } else if (alienKey.length === 1) {
-    switch (alienKey[0]) {
-      case 'identifier_anyeven_text':
-      case 'identifier_anyodd_text':
-      case 'identifier_evenplayers_text':
-      case 'identifier_oddplayers_text':
-        const evenOrOdd = alienKey.includes('even') ? 'even' : 'odd'
-        const evenOrOddPlayers = getAnyEvenOrOddPlayers(newGameState.players, evenOrOdd)
-        selectablePlayers = getSelectableOtherPlayerNumbersWithNoShield(evenOrOddPlayers, evenOrOdd)
-        break
-      case 'identifier_any_text':
-      case 'identifier_everyone_text':
-        selectablePlayers = getSelectableOtherPlayerNumbersWithNoShield(newGameState.players)
-        break
+    const selectablePlayers = findUniqueElementsInArrays(playerNumbersWithNoShield, selectablePlayerNumbers)
+
+    selectableCards = { selectable_cards: selectablePlayers, selectable_card_limit: { player: 1, center: 0 }, }
+  } else if (alienKey.length === 1 && (alienKey[0].includes('even') || alienKey[0].includes('odd'))) {
+
+    const evenOrOdd = alienKey.includes('even') ? 'even' : 'odd'
+    const evenOrOddPlayers = getAnyEvenOrOddPlayers(newGameState.players, evenOrOdd)
+
+    if (randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text') {
+      const selectableNonAlienEvenOddPlayers = getSelectableAnyPlayerNumbersWithNoShield(evenOrOddPlayers)
+      selectableCards = { selectable_cards: selectableNonAlienEvenOddPlayers, selectable_card_limit: { player: 1, center: 0 }, }
+    } else {
+      const selectableEvenOddPlayers = getNonAlienPlayerNumbersByRoleIdsWithNoShield(evenOrOddPlayers)
+      selectableCards = { selectable_cards: selectableEvenOddPlayers, selectable_card_limit: { player: 1, center: 0 }, }
     }
-    
+  } else {
+    if (randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text') {
+      const selectableNonAlienPlayers = getSelectableAnyPlayerNumbersWithNoShield(newGameState.players)
+      selectableCards = { selectable_cards: selectableNonAlienPlayers, selectable_card_limit: { player: 1, center: 0 }, }
+    } else {
+      const selectablePlayers = getNonAlienPlayerNumbersByRoleIdsWithNoShield(newGameState.players)
+      selectableCards = { selectable_cards: selectablePlayers, selectable_card_limit: { player: 1, center: 0 }, }
+    }
   }
 
   switch (randomAlienInstruction) {
     case 'aliens_view_text':
     case 'aliens_allview_text':
       if (newGameState.players[token].shield) {
-        newGameState.players[token].player_history.shielded = true 
+        newGameState.players[token].player_history.shielded = true
 
         privateMessage.push('interaction_shielded')
         icon = 'shielded'
@@ -114,19 +119,14 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
         privateMessage.push('interaction_may_one_any')
       }
 
-      if (randomAlienInstruction === 'aliens_allview_text') {
-        //TODO vote
-      }
       break
     case 'aliens_left_text':
     case 'aliens_right_text':
       if (newGameState.players[token].shield) {
-        newGameState.players[token].player_history.shielded = true 
-
+        newGameState.players[token].player_history.shielded = true
         privateMessage.push('interaction_shielded')
         icon = 'shielded'
       } else {
-
         const direction = randomAlienInstruction.includes('left') ? 'left' : 'right'
         const neighbor = getNeighborByPosition(aliensWithoutShield, currentPlayerNumber, direction)
         const updatedPlayerCards = moveCards(newGameState.card_positions, direction, aliensWithoutShield)
@@ -157,23 +157,23 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
       })
 
       if (newGameState.players[token].shield) {
-        newGameState.players[token].player_history.shielded = true 
+        newGameState.players[token].player_history.shielded = true
 
         privateMessage.push('interaction_shielded')
         icon = 'shielded'
       } else {
-        //TODO privateMessage.push(aliensWithoutShield )
+        privateMessage.push(...formatPlayerIdentifier(aliensWithoutShield))
       }
 
       break
     case 'aliens_timer_text':
       newGameState.vote_timer = gameState.vote_timer / 2
       privateMessage.push('interaction_timer')
-      break
-    case 'aliens_newalien_text': //Tap one of the fists to turn that player into an alien from MUST
-    case 'aliens_alienhelper_text': //Tap one of the fists to turn that player into alien team, but isn't an alien from MUST
 
-    //TODO vote
+      break
+    case 'aliens_newalien_text':
+    case 'aliens_alienhelper_text':
+      privateMessage.push('interaction_must_one_any_other')
 
       break
   }
@@ -181,14 +181,14 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectableCards: { selectable_cards: selectablePlayers, selectable_card_limit: { player: 1, center: 0 } },
+    selectableCards,
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: privateMessage,
     icon: icon,
     showCards,
-    selectableCards: { selectable_cards: selectablePlayers, selectable_card_limit: { player: 1, center: 0 } },
+    selectableCards,
     uniqueInformations: { aliens },
   })
 }
@@ -204,4 +204,4 @@ export const aliens_response = (gameState, token, selected_card_positions, title
   return newGameState
 }
 
-export const alien_vote = (gameState, title) => {}
+export const aliens_vote = (gameState, title) => {}
