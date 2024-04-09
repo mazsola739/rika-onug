@@ -1,9 +1,8 @@
 //@ts-check
 import { groobzerbIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getPlayerNumberWithMatchingToken, getSceneEndTime, getZerbPlayerNumberByRoleIds } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime, getZerbPlayerNumberByRoleIds, getGroobPlayerNumberByRoleIds, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
-//TODO groob and zerb own team
 export const groobzerb = (gameState, title, hasDoppelganger) => {
   const newGameState = { ...gameState }
   const scene = []
@@ -37,20 +36,22 @@ export const groobzerb_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   const player = newGameState.players[token]
 
+  const zerbPlayers = getZerbPlayerNumberByRoleIds(newGameState.players)
+  const groobPlayers = getGroobPlayerNumberByRoleIds(newGameState.players)
+
   if (player.player_role_id === 47) {
-    const zerb = getZerbPlayerNumberByRoleIds(newGameState.players)
-
-    if (zerb.length >= 1) {
+    if (zerbPlayers.length >= 1) {
       newGameState.players[token].card.player_team = 'groob'
+      groobPlayers.forEach(groob => newGameState.card_positions[groob].team = 'groob')
 
-      player.player_history = { ...player.player_history, scene_title: title, zerb }
+      player.player_history = { ...player.player_history, scene_title: title, zerb: zerbPlayers }
 
-      const messageIdentifiers = formatPlayerIdentifier(zerb)
+      const messageIdentifiers = formatPlayerIdentifier(zerbPlayers)
 
       return generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_zerbgroob', ...messageIdentifiers],
         icon: 'groobzerb',
-        uniqueInformations: { groobzerb: zerb },
+        uniqueInformations: { groobzerb: zerbPlayers },
       })
     } else {
       player.player_history = { ...player.player_history, scene_title: title }
@@ -61,19 +62,18 @@ export const groobzerb_interaction = (gameState, token, title) => {
       })
     }
   } else if (player.player_role_id === 54) {
-    const groob = getGroobPlayerNumberByRoleIds(newGameState.players)
-
-    if (groob.length >= 1) {
+    if (groobPlayers.length >= 1) {
       newGameState.players[token].card.player_team = 'zerb'
+      zerbPlayers.forEach(zerb => newGameState.card_positions[zerb].team = 'zerb')
 
-      player.player_history = { ...player.player_history, scene_title: title, groob }
+      player.player_history = { ...player.player_history, scene_title: title, groob: groobPlayers }
 
-      const messageIdentifiers = formatPlayerIdentifier(groob)
+      const messageIdentifiers = formatPlayerIdentifier(groobPlayers)
 
       return generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_zerbgroob', ...messageIdentifiers],
         icon: 'groobzerb',
-        uniqueInformations: { groobzerb: groob },
+        uniqueInformations: { groobzerb: groobPlayers },
       })
     } else {
       player.player_history = { ...player.player_history, scene_title: title }

@@ -1,6 +1,6 @@
 //@ts-check
 import { SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -36,18 +36,14 @@ export const doppelganger_interaction = (gameState, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-  const privateMessage = ['interaction_must_one_any_other']
-  const requiredCardSelection = getRandomItemsFromArray(selectablePlayersWithNoShield, 1)
-
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 },
-    required_card_selection: requiredCardSelection, private_message: privateMessage,
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: privateMessage,
+    private_message: ['interaction_must_one_any_other'],
     icon: 'copy',
     selectableCards: { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
   })

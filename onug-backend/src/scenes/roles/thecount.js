@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getNonVampirePlayerNumbersByRoleIds, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime, getNonVampirePlayerNumbersByRoleIds, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -41,18 +41,14 @@ export const thecount_interaction = (gameState, token, title) => {
   
   const nonVampires = getNonVampirePlayerNumbersByRoleIds(newGameState)
 
-  const privateMessage = ['interaction_must_one_any_non_vampire']
-  const requiredMarkSelection = getRandomItemsFromArray(nonVampires, 1)
-
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 },
-    required_mark_selection: requiredMarkSelection, private_message: privateMessage,
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: privateMessage,
+    private_message: ['interaction_must_one_any_non_vampire'],
     icon: 'fear',
     selectableCards: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
   })

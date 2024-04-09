@@ -219,18 +219,6 @@ export const moveCards = (cards, direction, movablePlayers) => {
 }
 
 //VOTE COUNTING
-export const countPlayersVoted = players => {
-  let votedCount = 0
-
-  Object.values(players).forEach(player => {
-    if (player.vampire_vote) {
-      votedCount++
-    }
-  })
-
-  return votedCount
-}
-
 export const collectVotes = (playerNumber, selectedCard, votes) => {
   const updatedVotes = { ...votes }
 

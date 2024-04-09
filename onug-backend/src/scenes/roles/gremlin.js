@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
 
@@ -43,20 +43,15 @@ export const gremlin_interaction = (gameState, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-  const privateMessage = ['interaction_must_two_any']
-  const requiredMarkSelection = getRandomItemsFromArray(selectablePlayerNumbers, 2)
-  const requiredCardSelection = getRandomItemsFromArray(selectablePlayersWithNoShield, 2)
-
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 2 },
     selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 2, center: 0 },
-    required_card_selection: requiredCardSelection, required_mark_selection: requiredMarkSelection, private_message: privateMessage,
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: privateMessage,
+    private_message: ['interaction_must_two_any'],
     icon: 'swap',
     selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 2 } },
     selectableCards: { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 2, center: 0 } },

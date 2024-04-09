@@ -1,6 +1,6 @@
 //@ts-check
 import { alienIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { getAlienPlayerNumbersByRoleIds, getAllPlayerTokens, getAnyEvenOrOddPlayers, getSelectableOtherPlayerNumbersWithNoShield, getNeighborByPosition, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getRandomItemFromArray, getSceneEndTime, pickRandomUpToThreePlayers, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, moveCards, formatPlayerIdentifier, getCardIdsByPlayerNumbers } from '../../utils'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime, getAlienPlayerNumbersByRoleIds, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getAnyEvenOrOddPlayers, getSelectableOtherPlayerNumbersWithNoShield, getNeighborByPosition, moveCards, formatPlayerIdentifier, getCardIdsByPlayerNumbers } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 const randomAlienInstructions = [
@@ -78,7 +78,6 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
   let selectablePlayers = []
   let showCards = []
   let privateMessage = ['interaction_aliens']
-  let requiredCardSelection
   let icon = 'alien'
 
   if (alienKey.length > 1) {
@@ -169,12 +168,12 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
       break
     case 'aliens_timer_text':
       newGameState.vote_timer = gameState.vote_timer / 2
-      privateMessage = ['interaction_timer']
+      privateMessage.push('interaction_timer')
       break
     case 'aliens_newalien_text': //Tap one of the fists to turn that player into an alien from MUST
-
-      break
     case 'aliens_alienhelper_text': //Tap one of the fists to turn that player into alien team, but isn't an alien from MUST
+
+    //TODO vote
 
       break
   }
@@ -183,7 +182,6 @@ export const aliens_interaction = (gameState, token, title, randomAlienInstructi
     ...newGameState.players[token].player_history,
     scene_title: title,
     selectableCards: { selectable_cards: selectablePlayers, selectable_card_limit: { player: 1, center: 0 } },
-    required_card_selection: requiredCardSelection, private_message: privateMessage,
   }
 
   return generateRoleInteraction(newGameState, token, {
@@ -206,4 +204,4 @@ export const aliens_response = (gameState, token, selected_card_positions, title
   return newGameState
 }
 
-export const alien_vote = (gameState, aliens, selected_card_positions, title) => {}
+export const alien_vote = (gameState, title) => {}

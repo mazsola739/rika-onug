@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
-import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
@@ -34,18 +34,14 @@ export const cupid_interaction = (gameState, token, title) => {
   const allPlayerTokens = getAllPlayerTokens(newGameState.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
 
-  const privateMessage = ['interaction_must_two_any']
-  const requiredMarkSelection = getRandomItemsFromArray(selectablePlayerNumbers, 2)
-
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 2 },
-    required_mark_selection: requiredMarkSelection, private_message: privateMessage,
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: privateMessage,
+    private_message: ['interaction_must_two_any'],
     icon: 'cupid',
     selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 2 } },
   })

@@ -42,7 +42,7 @@ export const empath = (gameState, title, prefix) => {
     let interaction = {}
 
     const card = newGameState.players[token].card
-
+    //TODO is not the empath here who get this, but empathAllKeys
     if (prefix === 'empath') {
       if (card.player_original_id === 77 || (card.player_role_id === 77 && copyPlayerIds.includes(card.player_original_id))) {
         interaction = empath_interaction(newGameState, token, title)
@@ -74,3 +74,5 @@ export const empath_response = (gameState, token, selected_card_positions, title
 
   return newGameState
 }
+
+export const empath_vote = (gameState, title) => {}

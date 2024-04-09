@@ -1,6 +1,6 @@
 //@ts-check
 import { allCopyPlayerIds, SCENE, goodGuyIds } from '../../constant'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -34,18 +34,14 @@ export const nostradamus_interaction = (gameState, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-  const privateMessage = [selectablePlayerNumbers.length < 3 ? 'interaction_no_selectable_player' : 'interaction_must_three_any']
-  const requiredCardSelection = getRandomItemsFromArray(selectablePlayersWithNoShield, 3)
-
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
     selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 3, center: 0 },
-    required_card_selection: requiredCardSelection, private_message: privateMessage,
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: privateMessage,
+    private_message: [selectablePlayerNumbers.length < 3 ? 'interaction_no_selectable_player' : 'interaction_must_three_any'],
     icon: 'nostradamus',
     selectableCards: { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 3, center: 0 } },
   })

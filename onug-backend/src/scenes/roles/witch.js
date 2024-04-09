@@ -1,6 +1,6 @@
 //@ts-check
 import { copyPlayerIds, SCENE, centerCardPositions } from '../../constant'
-import { getAllPlayerTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getRandomItemsFromArray, getSceneEndTime } from '../../utils'
+import { getAllPlayerTokens, getSceneEndTime, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, formatPlayerIdentifier, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -64,8 +64,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-    const privateMessage = ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any']
-    const requiredCardSelection = getRandomItemsFromArray(selectablePlayersWithNoShield, 1)
+    
 
     newGameState.players[token].player_history = {
       ...newGameState.players[token].player_history,
@@ -73,11 +72,10 @@ export const witch_response = (gameState, token, selected_card_positions, title)
       selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 },
       viewed_cards: [selected_card_positions[0]],
       selected_center_card: selected_card_positions[0],
-      required_card_selection: requiredCardSelection, private_message: privateMessage,
     }
 
     const interaction = generateRoleInteraction(newGameState, token, {
-      private_message: privateMessage,
+      private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
       icon: title === 'WITCH' ? 'witch' : 'voodoo',
       selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
       showCards,
