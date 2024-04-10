@@ -89,8 +89,8 @@ export const priest_response = (gameState, token, selected_mark_positions, title
     newGameState.mark_positions.clarity_2 = selectedPositionMark
   }
 
-  newGameState.players[token].player_history.mark_of_clarity = [
-    ...newGameState.players[token].player_history.mark_of_clarity, 
+  newGameState.players[token].player_history[title].mark_of_clarity = [
+    ...newGameState.players[token].player_history[title].mark_of_clarity, 
     selected_mark_positions[0]
   ]
 

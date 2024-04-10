@@ -76,9 +76,9 @@ export const revealer_response = (gameState, token, selected_card_positions, tit
 
   if (isTown) {
     newGameState.flipped.push(revealedCard[0])
-    newGameState.players[token].player_history.flipped_cards = revealedCard
+    newGameState.players[token].player_history[title].flipped_cards = revealedCard
   } else {
-    newGameState.players[token].player_history.show_cards = revealedCard
+    newGameState.players[token].player_history[title].show_cards = revealedCard
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {

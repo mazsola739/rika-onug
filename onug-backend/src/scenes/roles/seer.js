@@ -58,7 +58,7 @@ export const seer_response = (gameState, token, selected_card_positions, title) 
 
   const playerCards = selected_card_positions.some((pos) => pos.includes('player'))
   const centerCards = selected_card_positions.some((pos) => pos.includes('center'))
-  const playerHistory = newGameState.players[token].player_history.selectable_cards
+  const playerHistory = newGameState.players[token].player_history[title].selectable_cards
 
   if (playerCards && !centerCards && playerHistory.includes(selected_card_positions[0])) {
     showCards = getCardIdsByPositions(newGameState?.card_positions, [selected_card_positions[0]])

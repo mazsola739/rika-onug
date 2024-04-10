@@ -83,59 +83,59 @@ export type WsJsonMessage = {
     alienhand?: string[]
     artifacted?: string[]
     assassins?: string[]
-    /* awesome?: string[] */
-    /* bear?: string[] */
-    /* babyalien?: string[] */
-    /* blind?: string[] */
+    awesome?: string[]
+    bear?: string[]
+    babyalien?: string[]
+    blind?: string[]
     blob?: string[]
-    /* bulb?: string[] */
+    bulb?: string[]
     claw?: string[]
-    /* coffin?: string[] */
+    coffin?: string[]
     copy?: string[]
-    /* cow?: string[] */
+    cow?: string[]
     detector?: string[]
     dog?: string[]
     dreamwolf?: string[]
-    /* dress?: string[] */
+    dress?: string[]
     drunk?: string[]
-    /* empath?: string[] */
-    /* evil?: string[] */
+    empath?: string[]
+    evil?: string[]
     evilhand?: string[]
     family?: string[]
-    /* friend?: string[] */
+    friend?: string[]
     gremlin?: string[]
     groobzerb?: string[]
     idcard?: string[]
     interaction?: string[]
     investigator?: string[]
-    /* like?: string[] */
+    like?: string[]
     lonely?: string[]
     lovers?: string[]
     mad?: string[]
     masons?: string[]
     mortician?: string[]
-    /* mute?: string[] */
+    mute?: string[]
     mystic?: string[]
-    /* nice?: string[] */
-    /* night?: string[] */
+    nice?: string[]
+    night?: string[]
     nostradamus?: string[]
-    /* oracle?: string[] */
+    oracle?: string[]
     peeker?: string[]
     prank?: string[]
-    /* pretty?: string[] */
+    pretty?: string[]
     robber?: string[]
     seers?: string[]
-    /* select?: string[] */
+    select?: string[]
     sentinel?: string[]
-    /* smell?: string[] */
-    /* spy?: string[] */
-    /* sus?: string[] */
+    smell?: string[]
+    spy?: string[]
+    sus?: string[]
     swap?: string[]
     tanner?: string[]
     tap?: string[]
-    /* think?: string[] */
+    think?: string[]
     thumb?: string[]
-    /* trophy?: string[] */
+    trophy?: string[]
     ufo?: string[]
     vampires?: string[]
     villains?: string[]

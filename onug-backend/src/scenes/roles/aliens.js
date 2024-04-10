@@ -109,7 +109,7 @@ export const aliens_interaction = (gameState, token, title) => {
     case 'aliens_view_text':
     case 'aliens_allview_text':
       if (newGameState.players[token].shield) {
-        newGameState.players[token].player_history.shielded = true
+        newGameState.players[token].player_history[title].shielded = true
         privateMessage.push('interaction_shielded')
         icon = 'shielded'
       } else {
@@ -120,7 +120,7 @@ export const aliens_interaction = (gameState, token, title) => {
     case 'aliens_left_text':
     case 'aliens_right_text':
       if (newGameState.players[token].shield) {
-        newGameState.players[token].player_history.shielded = true
+        newGameState.players[token].player_history[title].shielded = true
         privateMessage.push('interaction_shielded')
         icon = 'shielded'
       } else {
@@ -150,7 +150,7 @@ export const aliens_interaction = (gameState, token, title) => {
       })
 
       if (newGameState.players[token].shield) {
-        newGameState.players[token].player_history.shielded = true
+        newGameState.players[token].player_history[title].shielded = true
         privateMessage.push('interaction_shielded')
         icon = 'shielded'
       } else {
@@ -172,6 +172,7 @@ export const aliens_interaction = (gameState, token, title) => {
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],
     ...selectableCards,
+    aliens,
   }
 
   return generateRoleInteraction(newGameState, token, {
@@ -239,6 +240,7 @@ export const aliens_response = (gameState, token, selected_card_positions, title
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],
     aliens,
+    alien_vote: [selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {

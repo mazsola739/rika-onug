@@ -87,12 +87,12 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     return newGameState
 
   } else if (selected_card_positions[0].includes('player_')) {
-    const selectedCenterPositionCard = newGameState.card_positions[newGameState.players[token].player_history.selected_center_card].card
+    const selectedCenterPositionCard = newGameState.card_positions[newGameState.players[token].player_history[title].selected_center_card].card
     const selectedPlayerPositionCard = newGameState.card_positions[selected_card_positions[0]].card
 
     const selectedCenterCard = { ...selectedCenterPositionCard }
     const selectedPlayerCard = { ...selectedPlayerPositionCard }
-    newGameState.card_positions[newGameState.players[token].player_history.selected_center_card].card = selectedPlayerCard
+    newGameState.card_positions[newGameState.players[token].player_history[title].selected_center_card].card = selectedPlayerCard
     newGameState.card_positions[selected_card_positions[0]].card = selectedCenterCard
 
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
@@ -105,15 +105,15 @@ export const witch_response = (gameState, token, selected_card_positions, title)
 
     newGameState.players[token].player_history[title] = {
       ...newGameState.players[token].player_history[title],
-      swapped_cards: [newGameState.players[token].player_history.selected_center_card, selected_card_positions[0]],
+      swapped_cards: [newGameState.players[token].player_history[title].selected_center_card, selected_card_positions[0]],
     }
 
-    const messageIdentifiers = formatPlayerIdentifier([`${newGameState.players[token].player_history.selected_center_card}`, selected_card_positions[0]])
+    const messageIdentifiers = formatPlayerIdentifier([`${newGameState.players[token].player_history[title].selected_center_card}`, selected_card_positions[0]])
 
     const interaction = generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers],
       icon: title === 'WITCH' ? 'witch' : 'voodoo',
-      uniqueInformations: { witch: title === 'WITCH' ? [newGameState.players[token].player_history.selected_center_card, selected_card_positions[0]] : [], voodoo: title === 'VOODOO' ? [newGameState.players[token].player_history.selected_center_card, selected_card_positions[0]] : [], },
+      uniqueInformations: { witch: title === 'WITCH' ? [newGameState.players[token].player_history[title].selected_center_card, selected_card_positions[0]] : [], voodoo: title === 'VOODOO' ? [newGameState.players[token].player_history[title].selected_center_card, selected_card_positions[0]] : [], },
     })
 
     scene.push({ type: SCENE, title, token, interaction })

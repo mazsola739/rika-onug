@@ -77,7 +77,7 @@ export const exposer_response = (gameState, token, selected_card_positions, titl
   const newGameState = { ...gameState }
   const scene = []
 
-  const cardPositions = selected_card_positions.slice(0, gameState.players[token].player_history.selectable_card_limit.center)
+  const cardPositions = selected_card_positions.slice(0, gameState.players[token].player_history[title].selectable_card_limit.center)
   const revealedCards = getCardIdsByPositions(newGameState.card_positions, cardPositions)
 
   newGameState.flipped.push(...revealedCards)

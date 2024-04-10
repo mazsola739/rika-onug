@@ -164,7 +164,6 @@ export const BoardCard: React.FC<BoardCardProps> = observer(
       interactionStore.selectedMarks.length === maxMarkSelection && handleMarkInteraction(interactionStore.selectedMarks)
     }
     
-//todo voting system under the card the player number
     return (
       <StyledBoardCard>
         {!isCenter && (

@@ -79,7 +79,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
 
     let interaction = {}
 
-    if (newGameState.players[token].player_history.viewed_marks) { 
+    if (newGameState.players[token].player_history[title].viewed_marks) { 
       interaction = generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
         icon: 'target',
@@ -87,14 +87,14 @@ export const marksman_response = (gameState, token, selected_card_positions = []
         uniqueInformations: { target: [selected_card_positions[0]] },
       })
     } else {
-      let selectableMarks = newGameState.players[token].player_history.selectable_marks
+      let selectableMarks = newGameState.players[token].player_history[title].selectable_marks
       const indexToRemove = selectableMarks.indexOf(selected_card_positions[0])
       if (indexToRemove !== -1) {
         selectableMarks.splice(indexToRemove, 1)
       }
 
-      newGameState.players[token].player_history.selectable_marks = selectableMarks
-      newGameState.players[token].player_history.selectable_mark_limit = { mark: 1 }
+      newGameState.players[token].player_history[title].selectable_marks = selectableMarks
+      newGameState.players[token].player_history[title].selectable_mark_limit = { mark: 1 }
 
 
       interaction = generateRoleInteraction(newGameState, token, {
@@ -136,7 +136,7 @@ export const marksman_response = (gameState, token, selected_card_positions = []
 
     let interaction = {}
 
-    if (newGameState.players[token].player_history.viewed_cards) {
+    if (newGameState.players[token].player_history[title].viewed_cards) {
       interaction = generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0]],
         icon: 'target',
@@ -144,14 +144,14 @@ export const marksman_response = (gameState, token, selected_card_positions = []
         uniqueInformations: { target: [selected_mark_positions[0]] },
       })
     } else {
-      let selectableCards = newGameState.players[token].player_history.selectable_cards
+      let selectableCards = newGameState.players[token].player_history[title].selectable_cards
       const indexToRemove = selectableCards.indexOf(selected_mark_positions[0])
       if (indexToRemove !== -1) {
         selectableCards.splice(indexToRemove, 1)
       }
 
-      newGameState.players[token].player_history.selectable_cards = selectableCards
-      newGameState.players[token].player_history.selectable_card_limit = { player: 1, center: 0 }
+      newGameState.players[token].player_history[title].selectable_cards = selectableCards
+      newGameState.players[token].player_history[title].selectable_card_limit = { player: 1, center: 0 }
 
       interaction = generateRoleInteraction(newGameState, token, {
         private_message: ['interaction_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0], 'interaction_must_one_any'],

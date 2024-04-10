@@ -34,21 +34,20 @@ export const empath = (gameState, title, prefix) => {
   const tokens = getAllPlayerTokens(newGameState.players)  
   const totalPlayers = newGameState.total_players
   const randomKey = getRandomItemFromArray(empathKeys)
-  const activePlayers = pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and')
-  const empathKey = randomKey === 'activePlayers' ? activePlayers : [randomKey]
+  const randomPlayers = pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and')
+  const empathKey = randomKey === 'activePlayers' ? randomPlayers : [randomKey]
   const randomEmpathInstruction = getRandomItemFromArray(randomEmpathInstructions)
   const narration = [...empathKey, randomEmpathInstruction]
   const actionTime = 8
 
   let activePlayerNumbers = []
   if (randomKey === 'activePlayers') {
-    activePlayerNumbers = [activePlayers.map(player => parseInt(player.replace('identifier_player', '').replace('_text', '')))]
-  } if (randomKey === 'identifier_oddplayers_text' || randomKey === 'identifier_evenplayers_text') {
-    const evenOdd = randomKey.includes('even') ? 'even' : 'odd'
+    activePlayerNumbers = [randomPlayers.map(player => parseInt(player.replace('identifier_player', '').replace('_text', '')))]
+  } else if (randomKey === 'identifier_oddplayers_text' || randomKey === 'identifier_evenplayers_text' || randomKey === 'identifier_everyone_text') {
+    const evenOdd = randomKey.includes('even') ? 'even' : randomKey.includes('odd') ? 'odd' : ''
     activePlayerNumbers = empathNumbers(totalPlayers, evenOdd)
   }
 
-  newGameState.empath_votes = {}
   newGameState.empath = {
     instruction: '',
     icon: ''
@@ -136,13 +135,16 @@ export const empath_interaction = (gameState, token, title) => {
 
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],
-    selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
+    selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
   }
 
   return {
     private_message: ['interaction_may_one_any'],
     icon,
     selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
+    player_name: newGameState.players[token].name,
+    player_number: newGameState.players[token].player_number,
+    ...newGameState.players[token].card,
   }
 }
 
@@ -172,6 +174,7 @@ export const empath_response = (gameState, token, selected_card_positions, title
 
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],
+    empath_vote: [selected_card_positions[0]]
   }
 
   const icon = newGameState.empath.icon
@@ -179,6 +182,7 @@ export const empath_response = (gameState, token, selected_card_positions, title
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_voted', formatPlayerIdentifier(selected_card_positions)[0]],
     icon,
+    uniqueInformations: { empath_vote: [selected_card_positions[0]], },
   })
 
   scene.push({ type: SCENE, title, token, interaction })
@@ -221,10 +225,8 @@ export const empath_vote = (gameState, title, prefix) => {
 export const empath_vote_result = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
-  newGameState.players[token].card_or_mark_action = true
   const icon = newGameState.empath.icon
-
-  const mostVotedPlayer = findMostVoted(newGameState.vampire_votes)
+  const mostVotedPlayer = findMostVoted(newGameState.empath_votes)
 
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],

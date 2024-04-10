@@ -39,13 +39,20 @@ export const empathNumbers = (totalPlayers, evenOdd = '') => {
   return numbers
 }
 
-const shufflePlayers = totalPlayers => Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`).sort(() => 0.5 - Math.random())
+const shufflePlayers = totalPlayers => {
+  const players = Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`);
+  return players.sort(() => 0.5 - Math.random());
+}
 
 export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
-    const players = shufflePlayers(totalPlayers)
-    const selectedPlayers = ~~(Math.random() * 3) + 1
+  const players = shufflePlayers(totalPlayers)
+  const selectedPlayers = Math.floor(Math.random() * 3) + 1
 
-    return selectedPlayers > 1 ? [...players.slice(0, -1), conjunction, players.slice(-1)[0]] : players
+  return selectedPlayers === 1
+      ? [players[0]]
+      : selectedPlayers === 2
+      ? [players[0], conjunction, players[1]]
+      : [players[0], players[1], conjunction, players[2]];
 }
 
 //NARRATION

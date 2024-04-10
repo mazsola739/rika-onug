@@ -69,7 +69,7 @@ export const doppelganger_response = (gameState, token, selected_card_positions,
 
   const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
 
-    ; (newGameState.players[token].player_history.show_cards = showCards), (newGameState.players[token].new_role_id = newGameState.players[token].card.player_role_id)
+    ; (newGameState.players[token].player_history[title].show_cards = showCards), (newGameState.players[token].new_role_id = newGameState.players[token].card.player_role_id)
   newGameState.players[token].card_or_mark_action = true
 
   newGameState.players[token].player_history[title] = {

@@ -82,7 +82,7 @@ export const psychic_response = (gameState, token, selected_card_positions, titl
   const newGameState = { ...gameState }
   const scene = []
 
-  const limit = newGameState.players[token].player_history.selectable_card_limit.player
+  const limit = newGameState.players[token].player_history[title].selectable_card_limit.player
   const showCards = getCardIdsByPositions(newGameState?.card_positions, selected_card_positions.slice(0, limit))
 
   if (showCards.some((card) => newGameState.players[token].card.player_original_id === card.id)) {

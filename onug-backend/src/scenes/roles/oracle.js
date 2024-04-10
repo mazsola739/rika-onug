@@ -113,7 +113,7 @@ export const oracle_question = (gameState, title) => {
     const card = newGameState.players[token].card
 
     if (card.player_original_id === 50) {
-      newGameState.players[token].player_history.oracle = narration[1]
+      newGameState.players[token].player_history[title].oracle = narration[1]
       interaction = oracle_question_raising(newGameState, token, title)
     } else {
 

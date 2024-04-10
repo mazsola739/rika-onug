@@ -213,7 +213,7 @@ export const rascal_response = (gameState, token, selected_card_positions, title
 
   let interaction
 
-  switch (newGameState.players[token].player_history.random) {
+  switch (newGameState.players[token].player_history[title].random) {
     case 'troublemaker':
       const [position1, position2] = selected_card_positions.slice(0, 2)
 
@@ -245,7 +245,7 @@ export const rascal_response = (gameState, token, selected_card_positions, title
       break
 
     case 'witch':
-      if (!newGameState.players[token].player_history.witch_answer) {
+      if (!newGameState.players[token].player_history[title].witch_answer) {
         const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
         const selectedCardPosition = newGameState.card_positions[selected_card_positions[0]].card
 
@@ -272,13 +272,13 @@ export const rascal_response = (gameState, token, selected_card_positions, title
           uniqueInformations: { prank: [selected_card_positions[0]], witch_answer: true },
         })
 
-      } else if (newGameState.players[token].player_history.witch_answer) {
-        const firstSelectedPositionCard = newGameState.card_positions[newGameState.players[token].player_history.selected_card].card
+      } else if (newGameState.players[token].player_history[title].witch_answer) {
+        const firstSelectedPositionCard = newGameState.card_positions[newGameState.players[token].player_history[title].selected_card].card
         const secondSelectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
 
         const selectedCenterCard = { ...firstSelectedPositionCard }
         const selectedPlayerCard = { ...secondSelectedPositionCard }
-        newGameState.card_positions[newGameState.players[token].player_history.selected_card].card = selectedPlayerCard
+        newGameState.card_positions[newGameState.players[token].player_history[title].selected_card].card = selectedPlayerCard
         newGameState.card_positions[selected_card_positions[0]].card = selectedCenterCard
 
         if (selected_card_positions[0] === currentPlayerNumber[0]) {
@@ -289,15 +289,15 @@ export const rascal_response = (gameState, token, selected_card_positions, title
 
         newGameState.players[token].player_history[title] = {
           ...newGameState.players[token].player_history[title],
-          swapped_cards: [newGameState.players[token].player_history.selected_card, selected_card_positions[0]],
+          swapped_cards: [newGameState.players[token].player_history[title].selected_card, selected_card_positions[0]],
         }
 
-        const messageIdentifiers = formatPlayerIdentifier([`${newGameState.players[token].player_history.selected_card}`, selected_card_positions[0]])
+        const messageIdentifiers = formatPlayerIdentifier([`${newGameState.players[token].player_history[title].selected_card}`, selected_card_positions[0]])
 
         interaction = generateRoleInteraction(newGameState, token, {
           private_message: ['interaction_swapped_cards', ...messageIdentifiers],
           icon: 'prank',
-          uniqueInformations: { prank: [newGameState.players[token].player_history.selected_card, selected_card_positions[0]] },
+          uniqueInformations: { prank: [newGameState.players[token].player_history[title].selected_card, selected_card_positions[0]] },
         })
 
       }
@@ -311,7 +311,7 @@ export const rascal_response = (gameState, token, selected_card_positions, title
       newGameState.card_positions[currentPlayerNumber].card = selectedCard
       newGameState.card_positions[selectedPosition].card = currentPlayerCard
 
-      if (newGameState.players[token].player_history.random === 'drunk') {
+      if (newGameState.players[token].player_history[title].random === 'drunk') {
         newGameState.players[token].card.player_card_id = 0
       } else {
         newGameState.players[token].card.player_card_id = newGameState.card_positions[currentPlayerNumber].card.id
@@ -331,9 +331,9 @@ export const rascal_response = (gameState, token, selected_card_positions, title
       const messageIds = formatPlayerIdentifier([currentPlayerNumber, selectedPosition])
 
       interaction = generateRoleInteraction(newGameState, token, {
-        private_message: ['interaction_swapped_cards', ...messageIds, newGameState.players[token].player_history.random === 'robber' ? 'interaction_own_card' : ''],
+        private_message: ['interaction_swapped_cards', ...messageIds, newGameState.players[token].player_history[title].random === 'robber' ? 'interaction_own_card' : ''],
         icon: 'prank',
-        showCards: newGameState.players[token].player_history.random === 'robber' ? showCards : undefined,
+        showCards: newGameState.players[token].player_history[title].random === 'robber' ? showCards : undefined,
         uniqueInformations: { prank: [currentPlayerNumber, selectedPosition] },
       })
 

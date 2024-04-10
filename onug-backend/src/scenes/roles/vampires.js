@@ -21,7 +21,7 @@ export const vampires = (gameState, title) => {
       interaction = vampires_interaction(newGameState, token, title)
     }
 
-    newGameState.players[token].player_history.scene_title = title
+    newGameState.players[token].player_history[title].scene_title = title
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
@@ -79,6 +79,7 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],
     vampires,
+    vampire_vote: [selected_mark_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
@@ -109,7 +110,7 @@ export const vampires_vote = (gameState, title) => {
       interaction = vampires_vote_result(newGameState, token, title)
     }
 
-    newGameState.players[token].player_history.scene_title = title
+    newGameState.players[token].player_history[title].scene_title = title
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 

@@ -110,7 +110,7 @@ export const mortician_response = (gameState, token, selected_card_positions, ti
   const newGameState = { ...gameState }
   const scene = []
 
-  const cardPositions = selected_card_positions.slice(0, gameState.players[token].player_history.selectable_card_limit.player)
+  const cardPositions = selected_card_positions.slice(0, gameState.players[token].player_history[title].selectable_card_limit.player)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
   const viewCards = getCardIdsByPositions(newGameState.card_positions, cardPositions)
 

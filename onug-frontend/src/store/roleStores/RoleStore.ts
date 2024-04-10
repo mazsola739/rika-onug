@@ -34,57 +34,57 @@ class RoleStore {
         const alienhand = (lastJsonMessage.interaction.alienhand || []).includes(position) || false
         const artifacted = (lastJsonMessage.interaction.artifacted || []).includes(position) || false
         const assassin = (lastJsonMessage.interaction.assassins || []).includes(position) || false
-        /* const awesome = (lastJsonMessage.interaction.awesome || []).includes(position) || false */
-        /* const bear = (lastJsonMessage.interaction.bear || []).includes(position) || false */
-        /* const babyalien = (lastJsonMessage.interaction.babyalien || []).includes(position) || false */
-        /* const blind = (lastJsonMessage.interaction.blind || []).includes(position) || false */
+        const awesome = (lastJsonMessage.interaction.awesome || []).includes(position) || false
+        const bear = (lastJsonMessage.interaction.bear || []).includes(position) || false
+        const babyalien = (lastJsonMessage.interaction.babyalien || []).includes(position) || false
+        const blind = (lastJsonMessage.interaction.blind || []).includes(position) || false
         const blob = (lastJsonMessage.interaction.blob || []).includes(position) || false
-        /* const bulb = (lastJsonMessage.interaction.bulb || []).includes(position) || false */
+        const bulb = (lastJsonMessage.interaction.bulb || []).includes(position) || false
         const claw = (lastJsonMessage.interaction.claw || []).includes(position) || false
-        /* const coffin = (lastJsonMessage.interaction.coffin || []).includes(position) || false */
+        const coffin = (lastJsonMessage.interaction.coffin || []).includes(position) || false
         const copy = (lastJsonMessage.interaction.copy || []).includes(position) || false
-        /* const cow = (lastJsonMessage.interaction.cow || []).includes(position) || false */
+        const cow = (lastJsonMessage.interaction.cow || []).includes(position) || false
         const detector = (lastJsonMessage.interaction.detector || []).includes(position) || false
         const dog = (lastJsonMessage.interaction.dog || []).includes(position) || false
         const dreamwolf = (lastJsonMessage.interaction.dreamwolf || []).includes(position) || false
-        /* const dress = (lastJsonMessage.interaction.dress || []).includes(position) || false */
+        const dress = (lastJsonMessage.interaction.dress || []).includes(position) || false
         const drunk = (lastJsonMessage.interaction.drunk || []).includes(position) || false
-        /* const empath = (lastJsonMessage.interaction.empath || []).includes(position) || false */
-        /* const evil = (lastJsonMessage.interaction.evil || []).includes(position) || false */
+        const empath = (lastJsonMessage.interaction.empath || []).includes(position) || false
+        const evil = (lastJsonMessage.interaction.evil || []).includes(position) || false
         const evilhand = (lastJsonMessage.interaction.evilhand || []).includes(position) || false
         const family = (lastJsonMessage.interaction.family || []).includes(position) || false
-        /* const friend = (lastJsonMessage.interaction.friend || []).includes(position) || false */
+        const friend = (lastJsonMessage.interaction.friend || []).includes(position) || false
         const gremlin = (lastJsonMessage.interaction.gremlin || []).includes(position) || false
         const groobzerb = (lastJsonMessage.interaction.groobzerb || []).includes(position) || false
         const idcard = (lastJsonMessage.interaction.idcard || []).includes(position) || false
         const interaction = (lastJsonMessage.interaction.interaction || []).includes(position) || false
         const investigator = (lastJsonMessage.interaction.investigator || []).includes(position) || false
-        /* const like = (lastJsonMessage.interaction.like || []).includes(position) || false */
+        const like = (lastJsonMessage.interaction.like || []).includes(position) || false
         const lover = (lastJsonMessage.interaction.lovers || []).includes(position) || false
         const mad = (lastJsonMessage.interaction.mad || []).includes(position) || false
         const mason = (lastJsonMessage.interaction.masons || []).includes(position) || false
         const mortician = (lastJsonMessage.interaction.mortician || []).includes(position) || false
-        /* const mute = (lastJsonMessage.interaction.mute || []).includes(position) || false */
+        const mute = (lastJsonMessage.interaction.mute || []).includes(position) || false
         const mystic = (lastJsonMessage.interaction.mystic || []).includes(position) || false
-        /* const nice = (lastJsonMessage.interaction.nice || []).includes(position) || false */
+        const nice = (lastJsonMessage.interaction.nice || []).includes(position) || false
         const nostradamus = (lastJsonMessage.interaction.nostradamus || []).includes(position) || false
-        /* const oracle = (lastJsonMessage.interaction.oracle || []).includes(position) || false */
+        const oracle = (lastJsonMessage.interaction.oracle || []).includes(position) || false
         const peeker = (lastJsonMessage.interaction.peeker || []).includes(position) || false
         const prank = (lastJsonMessage.interaction.prank || []).includes(position) || false
-        /* const pretty = (lastJsonMessage.interaction.pretty || []).includes(position) || false */
+        const pretty = (lastJsonMessage.interaction.pretty || []).includes(position) || false
         const robber = (lastJsonMessage.interaction.robber || []).includes(position) || false
         const seer = (lastJsonMessage.interaction.seers || []).includes(position) || false
-        /* const select = (lastJsonMessage.interaction.select || []).includes(position) || false */
+        const select = (lastJsonMessage.interaction.select || []).includes(position) || false
         const sentinel = (lastJsonMessage.interaction.sentinel || []).includes(position) || false
-        /* const smell = (lastJsonMessage.interaction.smell || []).includes(position) || false */
-        /* const spy = (lastJsonMessage.interaction.spy || []).includes(position) || false */
-        /* const sus = (lastJsonMessage.interaction.sus || []).includes(position) || false */
+        const smell = (lastJsonMessage.interaction.smell || []).includes(position) || false
+        const spy = (lastJsonMessage.interaction.spy || []).includes(position) || false
+        const sus = (lastJsonMessage.interaction.sus || []).includes(position) || false
         const swap = (lastJsonMessage.interaction.swap || []).includes(position) || false
         const tanner = (lastJsonMessage.interaction.tanner || []).includes(position) || false
         const tap = (lastJsonMessage.interaction.tap || []).includes(position) || false
-        /* const think = (lastJsonMessage.interaction.think || []).includes(position) || false */
+        const think = (lastJsonMessage.interaction.think || []).includes(position) || false
         const thumb = (lastJsonMessage.interaction.thumb || []).includes(position) || false
-        /* const trophy = (lastJsonMessage.interaction.trophy || []).includes(position) || false */
+        const trophy = (lastJsonMessage.interaction.trophy || []).includes(position) || false
         const ufo = (lastJsonMessage.interaction.ufo || []).includes(position) || false
         const vampire = (lastJsonMessage.interaction.vampires || []).includes(position) || false
         const villain = (lastJsonMessage.interaction.villains || []).includes(position) || false
@@ -121,58 +121,57 @@ class RoleStore {
           alienhand,
           artifacted,
           assassin,
-          /* awesome, */
-          /* bear, */
-          /* babyalien, */
-          /* blind, */
+          awesome,
+          bear,
+          babyalien,
+          blind,
           blob,
-          /* bulb, */
+          bulb,
           claw,
-          /* coffin, */
+          coffin,
           copy,
-          /* cow, */
+          cow,
           detector,
           dog,
           dreamwolf,
-          /* dress, */
+          dress,
           drunk,
-          /* empath, */
-          /* evil, */
+          empath,
+          evil,
           evilhand,
           family,
-          /* friend, */
+          friend,
           gremlin,
           groobzerb,
           idcard,
           interaction,
           investigator,
-          /* like, */
+          like,
           lover,
           mad,
           mason,
           mortician,
-          /* mute, */
+          mute,
           mystic,
-          /* nice, */
-          /* night, */
+          nice,
           nostradamus,
-          /* oracle, */
+          oracle,
           peeker,
           prank,
-          /* pretty, */
+          pretty,
           robber,
           seer,
-          /* select, */
+          select,
           sentinel,
-          /* smell, */
-          /* spy, */
-          /* sus, */
+          smell,
+          spy,
+          sus,
           swap,
           tanner,
           tap,
-          /* think, */
+          think,
           thumb,
-          /* trophy, */
+          trophy,
           ufo,
           vampire,
           villain,

@@ -604,7 +604,7 @@ export const sceneHandler = gameState => {
       break
 
     case "DOPPELGÄNGER_EMPATH_VOTE":
-      if (conditions.hasEmpath(selected_cards)) {
+      if (conditions.hasDoppelganger(selected_cards) && conditions.hasEmpath(selected_cards)) {
         newGameState.actual_scene.started = true
         return roles.empath_vote(newGameState, scene_title, "doppelganger_empath")
       }
