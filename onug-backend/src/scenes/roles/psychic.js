@@ -18,6 +18,13 @@ export const psychic = (gameState, title, prefix) => {
   if (total_players === 3) {
     availablePsychicOptions = randomPsychicInstructions.filter(option => !option.includes('view2'))
   }
+ //todo better narration and save into constants
+     /*   newGameState.bodysnatcher = {
+    instruction: '',
+    key: '',
+  }
+  newGameState.bodysnatcher.instruction = randomAlienInstruction
+  newGameState.bodysnatcher.key = alienKey */
 
   const narration = [`${prefix}_kickoff_text`, getRandomItemFromArray(availablePsychicOptions), getRandomItemFromArray(psychicKeys)]
   const actionTime = 12

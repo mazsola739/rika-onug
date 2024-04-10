@@ -1,6 +1,7 @@
 import AerialIcon from './aerial.svg?react'
 import AlienIcon from './alien.svg?react'
 import AlienhandIcon from './alienhand.svg?react'
+import AlienstareIcon from './alienstare.svg?react'
 import ArtifactedIcon from './artifacted.svg?react'
 import AssassinIcon from './assassin.svg?react'
 import AwesomeIcon from './awesome.svg?react'
@@ -83,6 +84,7 @@ export {
   AerialIcon,
   AlienIcon,
   AlienhandIcon,
+  AlienstareIcon,
   ArtifactedIcon,
   AssassinIcon,
   AwesomeIcon,

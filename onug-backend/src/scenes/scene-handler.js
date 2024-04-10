@@ -191,7 +191,7 @@ export const sceneHandler = gameState => {
       break
 
     case "ALIENS_VOTE":
-      if (conditions.hasAnyVampire(selected_cards)) {
+      if (conditions.hasAnyVampire(selected_cards) && newGameState.alien.vote) {
         newGameState.actual_scene.started = true
         return roles.aliens_vote(newGameState, scene_title)
       }

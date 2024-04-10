@@ -7,6 +7,7 @@ export type IconType =
   | 'aerial'
   | 'alien'
   | 'alienhand'
+  | 'alienstare'
   | 'artifacted'
   | 'assassin'
   | 'awesome'

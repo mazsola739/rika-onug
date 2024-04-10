@@ -10,15 +10,22 @@ const randomExposerInstructions = [
   'exposer_flip3_text',
 ]
 
-const randomExposerInstruction = getRandomItemFromArray(randomExposerInstructions)
-const createExposer = prefix => [`${prefix}_kickoff_text`, randomExposerInstruction]
+
 
 export const exposer = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const narration = createExposer(prefix)
+ //todo better narration
   const actionTime = 8
+
+  const randomExposerInstruction = getRandomItemFromArray(randomExposerInstructions)
+  const narration = [`${prefix}_kickoff_text`, randomExposerInstruction]
+
+  newGameState.exposer = {
+    instruction: '',
+  }
+  newGameState.exposer.instruction = randomExposerInstruction
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -27,11 +34,11 @@ export const exposer = (gameState, title, prefix) => {
 
     if (prefix === 'exposer') {
       if (card.player_original_id === 46 || (card.player_role_id === 46 && copyPlayerIds.includes(card.player_original_id))) {
-        interaction = exposer_interaction(newGameState, token, title, randomExposerInstruction)
+        interaction = exposer_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_exposer') {
       if (card.player_role_id === 46 && card.player_original_id === 1) {
-        interaction = exposer_interaction(newGameState, token, title, randomExposerInstruction)
+        interaction = exposer_interaction(newGameState, token, title)
       }
     }
 
@@ -44,9 +51,10 @@ export const exposer = (gameState, title, prefix) => {
   return newGameState
 }
 
-export const exposer_interaction = (gameState, token, title, randomExposerInstruction) => {
+export const exposer_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
+  const randomExposerInstruction = newGameState.exposer.instruction
   const limit = randomExposerInstruction.replace('exposer_flip', '').replace('_text', '')
 
   newGameState.players[token].player_history = {

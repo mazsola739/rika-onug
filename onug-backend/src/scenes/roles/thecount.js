@@ -4,13 +4,11 @@ import { getAllPlayerTokens, getSceneEndTime, getNonVampirePlayerNumbersByRoleId
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
-const createTheCount = prefix => [`${prefix}_kickoff_text`, 'thecount_kickoff2_text']
-
 export const thecount = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const narration = createTheCount(prefix)
+  const narration = [`${prefix}_kickoff_text`, 'thecount_kickoff2_text']
   const actionTime = 8
 
   tokens.forEach((token) => {

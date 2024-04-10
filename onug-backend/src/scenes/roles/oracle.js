@@ -85,7 +85,7 @@ export const oracle_question = (gameState, title) => {
   const actionTime = 8
 
   newGameState.oracle = {
-    question: [],
+    question: '',
     answer: '',
     aftermath: ''
   }

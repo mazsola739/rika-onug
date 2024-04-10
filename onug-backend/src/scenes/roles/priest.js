@@ -4,13 +4,11 @@ import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithNonMatc
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
-const createPriest = prefix => [`${prefix}_kickoff_text`, 'priest_kickoff2_text']
-
 export const priest = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const narration = createPriest(prefix)
+  const narration = [`${prefix}_kickoff_text`, 'priest_kickoff2_text']
   const actionTime = 8
 
   tokens.forEach((token) => {

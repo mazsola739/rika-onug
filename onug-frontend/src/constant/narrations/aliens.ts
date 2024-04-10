@@ -1,4 +1,5 @@
 export const aliens_kickoff_text = 'ALIENS, look around for other aliens.'
+export const aliens_vote_result_text = 'ALIENS, look for the vote result'
 
 export const aliens_view_text = 'Each alien may secretly view a card from'
 export const aliens_allview_text = 'All aliens together may view a card from'

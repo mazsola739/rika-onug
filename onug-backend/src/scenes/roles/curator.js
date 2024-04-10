@@ -4,13 +4,11 @@ import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePl
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
-const createCurator = prefix => [`${prefix}_kickoff_text`, 'curator_kickoff2_text']
-
 export const curator = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const narration = createCurator(prefix)
+  const narration = [`${prefix}_kickoff_text`, 'curator_kickoff2_text']
   const actionTime = 8
 
   tokens.forEach((token) => {

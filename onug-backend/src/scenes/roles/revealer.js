@@ -4,13 +4,11 @@ import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getCar
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
-const createRevealer = prefix => [`${prefix}_kickoff_text`, 'revealer_kickoff2_text']
-
 export const revealer = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const narration = createRevealer(prefix)
+  const narration = [`${prefix}_kickoff_text`, 'revealer_kickoff2_text']
   const actionTime = 12
 
   tokens.forEach((token) => {

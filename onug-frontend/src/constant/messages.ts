@@ -2,7 +2,8 @@
 //messages
 export const message_tapped = 'You got tapped by your neighbor'
 export const no_night_action = 'No such a night action, sorry'
-export const vote_vampire_votes = 'Vampire votes:'
+
+export const interaction_voted = 'You voted for'
 
 export const interaction_oracle_question = 'Answer the question'
 export const interaction_oracle_answer = 'Your answer'
@@ -116,6 +117,9 @@ export const interaction_tap = 'You tapped:'
 export const interaction_no_tap = "You don't have such type of neighbor."
 export const interaction_got_tapped_by_villain = 'You got tapped by your super villain neighbor'
 export const interaction_got_tapped_by_alien = 'You got tapped by your alien neighbor'
+//turned
+export const interaction_turned_alienhelper = 'You turned to helper of aliens:'
+export const interaction_turned_newalien = 'You turned to alien:'
 //moved
 export const interaction_moved = 'You moved cards to'
 export const interaction_moved_yours = 'You moved your card to'

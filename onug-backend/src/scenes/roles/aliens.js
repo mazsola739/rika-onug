@@ -1,6 +1,7 @@
 //@ts-check
-import { alienIds, allCopyPlayerIds, SCENE } from '../../constant'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime, getAlienPlayerNumbersByRoleIds, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getAnyEvenOrOddPlayers, getSelectableOtherPlayerNumbersWithNoShield, getNeighborByPosition, moveCards, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getAlienPlayerNumbersByRoleIdsWithNoShield, addVote } from '../../utils'
+import { alienIds, allCopyPlayerIds, MESSAGE, SCENE, VOTE } from '../../constant'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime, getAlienPlayerNumbersByRoleIds, getAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getNeighborByPosition, moveCards, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getCardIdsByPositions, addVote, getPlayerTokensByPlayerNumber, findMostVoted } from '../../utils'
+import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -51,13 +52,22 @@ export const aliens = (gameState, title) => {
     narration.push(randomAlienInstruction)
   }
 
+  newGameState.alien = {
+    instruction: '',
+    key: '',
+    vote: false,
+  }
+  newGameState.alien.instruction = randomAlienInstruction
+  newGameState.alien.key = alienKey
+  newGameState.alien.vote = randomAlienInstruction === 'aliens_allview_text' || randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text'
+
   tokens.forEach((token) => {
     let interaction = {}
 
     const card = newGameState.players[token].card
 
     if (alienIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
-      interaction = aliens_interaction(newGameState, token, title, randomAlienInstruction, alienKey)
+      interaction = aliens_interaction(newGameState, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -69,17 +79,19 @@ export const aliens = (gameState, title) => {
   return newGameState
 }
 
-export const aliens_interaction = (gameState, token, title, randomAlienInstruction, alienKey) => {
+export const aliens_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   const aliens = getAlienPlayerNumbersByRoleIds(newGameState.players)
   const aliensWithoutShield = getAlienPlayerNumbersByRoleIdsWithNoShield(newGameState.players)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
+  const randomAlienInstruction = newGameState.alien.instruction
+  const alienKey = newGameState.alien.key
 
   let selectableCards = {}
   let showCards = []
   let privateMessage = ['interaction_aliens']
-  let icon = 'alien'
+  let icon = randomAlienInstruction === 'aliens_stare_text' ? 'alienstare' : 'alien'
 
   if (alienKey.length > 1) {
     const selectablePlayerNumbers = alienKey.filter(key => key.includes('identifier_player')).map(key => key.replace('identifier_', ''))
@@ -176,29 +188,66 @@ export const aliens_response = (gameState, token, selected_card_positions, title
   if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
     return gameState
   }
-  
+
   const newGameState = { ...gameState }
   const scene = []
 
+  const randomAlienInstruction = newGameState.alien.instruction
   const aliens = getAlienPlayerNumbersByRoleIds(newGameState.players)
-  const selectablePlayerNumbers = gameState.players[token]?.player_history?.selectable_cards
-  newGameState.players[token].alien_vote = selected_card_positions[0]
+
+  if (randomAlienInstruction === 'aliens_view_text') {
+
+    const showCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
+    const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
+
+    if (newGameState.players[token].card.player_original_id === selectedPositionCard.id) {
+      newGameState.players[token].card.player_card_id = 0
+    }
+  
+    newGameState.players[token].player_history = {
+      ...newGameState.players[token].player_history,
+      scene_title: title,
+      viewed_cards: showCards,
+    }
+  
+    const interaction = generateRoleInteraction(newGameState, token, {
+      private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
+      icon: 'alienhand',
+      uniqueInformations: { aliens, alienhand: showCards },
+    })
+  
+    scene.push({ type: SCENE, title, token, interaction })
+    newGameState.scene = scene
+  
+    return newGameState
+  }
 
   const votes = addVote(newGameState.players[token].player_number, selected_card_positions[0], newGameState.alien_votes)
+
+  newGameState.players[token].alien_vote = selected_card_positions[0]
   newGameState.alien_votes = votes
+
+  const alienTokens = getPlayerTokensByPlayerNumber(newGameState.players, aliens)
+
+  alienTokens.forEach((alienToken) => {
+    websocketServerConnectionsPerRoom[newGameState.room_id][alienToken].send(
+      JSON.stringify({
+        type: VOTE,
+        votes,
+      })
+    )
+  })
 
   newGameState.players[token].player_history = {
     ...newGameState.players[token].player_history,
     scene_title: title,
-    selectableCards : { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
-    aliens, votes,
+    aliens,
   }
 
   const interaction = generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_vampires', 'interaction_must_one_any_non_vampire'],
-    icon: 'vampire',
-    selectableCards : { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
-    uniqueInformations: { aliens, votes, },
+    private_message: ['interaction_voted', formatPlayerIdentifier(selected_card_positions)[0]],
+    icon: 'alien',
+    uniqueInformations: { aliens },
   })
 
   scene.push({ type: SCENE, title, token, interaction })
@@ -207,4 +256,89 @@ export const aliens_response = (gameState, token, selected_card_positions, title
   return newGameState
 }
 
-export const aliens_vote = (gameState, title) => {}
+//TODO only start if vote-interaction
+export const aliens_vote = (gameState, title) => {
+  const newGameState = { ...gameState }
+  const narration = ['aliens_vote_result_text']
+  const tokens = getAllPlayerTokens(newGameState.players)
+  const scene = []
+  const actionTime = 6
+
+  tokens.forEach((token) => {
+    let interaction = {}
+
+    const card = newGameState.players[token].card
+
+    if (alienIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
+      interaction = aliens_vote_result(newGameState, token, title)
+    }
+
+    scene.push({ type: SCENE, title, token, narration, interaction })
+  })
+
+  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
+  newGameState.scene = scene
+
+  return newGameState
+}
+
+export const aliens_vote_result = (gameState, token, title) => {
+  const newGameState = { ...gameState }
+  
+  const randomAlienInstruction = newGameState.alien.instruction
+  const mostVotedPlayer = findMostVoted(newGameState.alien_votes)
+  
+  let privateMessage = []
+  let icon = 'babyalien'
+  let showCards = []
+  let uniqueInformations = {}
+  
+  if (randomAlienInstruction === 'aliens_allview_text') {
+    newGameState.players[token].card_or_mark_action = true
+    privateMessage = ['interaction_saw_card', formatPlayerIdentifier(mostVotedPlayer)[0]]
+    icon = 'alienstare'
+    showCards = getCardIdsByPlayerNumbers([mostVotedPlayer[0]])
+    uniqueInformations = { alienstare: [mostVotedPlayer[0]] }
+  } else if (randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text') {
+    uniqueInformations = { babyalien: [mostVotedPlayer[0]] }
+    
+    const selectedPlayer = getPlayerTokensByPlayerNumber(newGameState.players, [mostVotedPlayer[0]])
+    const selectedPositionCard = newGameState.card_positions[mostVotedPlayer[0]].card
+    
+    if (newGameState.players[token].card.player_original_id === selectedPositionCard.id) {
+      newGameState.players[token].card.player_card_id = 0
+    }
+
+    newGameState.players[selectedPlayer[0]].card.player_team = 'alien'
+    newGameState.card_positions[mostVotedPlayer[0]].card.team = 'alien'
+    
+    if (randomAlienInstruction === 'aliens_newalien_text') {
+      privateMessage = ['interaction_turned_newalien']
+      newGameState.players[selectedPlayer[0]].card.player_role = 'ALIEN'
+      newGameState.card_positions[mostVotedPlayer[0]].card.role = 'ALIEN'
+    } else if (randomAlienInstruction === 'aliens_alienhelper_text') {
+      privateMessage = ['interaction_turned_alienhelper']
+    }
+
+    websocketServerConnectionsPerRoom[newGameState.room_id][mostVotedPlayer[0]].send(
+      JSON.stringify({
+        type: MESSAGE,
+        message: (randomAlienInstruction === 'aliens_newalien_text') ? ['interaction_alien_role'] : ['interaction_alien_team'],
+        icon: 'babyalien',
+      })
+    )
+  }
+
+  newGameState.players[token].player_history = {
+    ...newGameState.players[token].player_history,
+    scene_title: title,
+    ...uniqueInformations,
+  }
+  
+  return generateRoleInteraction(newGameState, token, {
+    private_message: privateMessage,
+    icon,
+    showCards,
+    uniqueInformations,
+  })
+}

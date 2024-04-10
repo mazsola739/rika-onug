@@ -4,13 +4,11 @@ import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
 
-const createGremlin = prefix => [`${prefix}_kickoff_text`, 'gremlin_kickoff2_text']
-
 export const gremlin = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const narration = createGremlin(prefix)
+  const narration = [`${prefix}_kickoff_text`, 'gremlin_kickoff2_text']
   const actionTime = 8
 
   tokens.forEach((token) => {

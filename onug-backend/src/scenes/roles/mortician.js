@@ -12,16 +12,24 @@ const morticianKeys = [
   'identifier_yourself_text',
 ]
 
-const randomMorticianInstruction = getRandomItemFromArray(randomMorticianInstructions)
-const morticianKey = randomMorticianInstruction === 'mortician_2cards_text' ? 'identifier_bothneighbors_text' : getRandomItemFromArray(morticianKeys)
-const createMortician = prefix => [`${prefix}_kickoff_text`, randomMorticianInstruction, morticianKey]
-
 export const mortician = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const narration = createMortician(prefix)
+  const narration = [`${prefix}_kickoff_text`]
   const actionTime = 10
+//TODO
+  const randomMorticianInstruction = getRandomItemFromArray(randomMorticianInstructions)
+  const morticianKey = randomMorticianInstruction === 'mortician_2cards_text' ? 'identifier_bothneighbors_text' : getRandomItemFromArray(morticianKeys)
+ // narration.push(randomMorticianInstruction, morticianKey)
+
+
+    /*   newGameState.bodysnatcher = {
+    instruction: '',
+    key: '',
+  }
+  newGameState.bodysnatcher.instruction = randomAlienInstruction
+  newGameState.bodysnatcher.key = alienKey */
 
   tokens.forEach((token) => {
     let interaction = {}

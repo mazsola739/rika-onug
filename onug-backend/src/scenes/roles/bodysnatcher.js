@@ -17,16 +17,23 @@ const bodysnatcherKeys = [
   'identifier_oneneighbor_text',
 ]
 
-const randomBodysnatcherInstruction = getRandomItemFromArray(randomBodysnatcherInstructions)
-const bodysnatcherKey = getRandomItemFromArray(bodysnatcherKeys)
-const createBodysnatcher = prefix => [`${prefix}_kickoff_text`, randomBodysnatcherInstruction, randomBodysnatcherInstruction === 'bodysnatcher_steal_text' ? bodysnatcherKey : '', 'bodysnatcher_end_text']
-
 export const bodysnatcher = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const narration = createBodysnatcher(prefix)
+ //todo better narration
   const actionTime = 8
+
+  const randomBodysnatcherInstruction = getRandomItemFromArray(randomBodysnatcherInstructions)
+  const bodysnatcherKey = getRandomItemFromArray(bodysnatcherKeys)
+  const narration = [`${prefix}_kickoff_text`, randomBodysnatcherInstruction, randomBodysnatcherInstruction === 'bodysnatcher_steal_text' ? bodysnatcherKey : '', 'bodysnatcher_end_text']
+
+/*   newGameState.bodysnatcher = {
+    instruction: '',
+    key: '',
+  }
+  newGameState.bodysnatcher.instruction = randomAlienInstruction
+  newGameState.bodysnatcher.key = alienKey */
 
   tokens.forEach((token) => {
     let interaction = {}

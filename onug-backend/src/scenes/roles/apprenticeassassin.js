@@ -4,13 +4,11 @@ import { formatPlayerIdentifier, getAllPlayerTokens, getAssassinPlayerNumbersByR
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
-const createApprenticeAssassin = (hasAssassin, prefix) => [`${prefix}_kickoff_text`, hasAssassin ? 'apprenticeassassin_assassin_text' : 'apprenticeassassin_alone_text']
-
 export const apprenticeassassin = (gameState, title, hasAssassin, prefix) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const narration = createApprenticeAssassin(hasAssassin, prefix)
+  const narration = [`${prefix}_kickoff_text`, hasAssassin ? 'apprenticeassassin_assassin_text' : 'apprenticeassassin_alone_text']
   const actionTime = 8
 
   tokens.forEach((token) => {

@@ -4,13 +4,11 @@ import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getPlayerNum
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
-const createPickpocket = prefix => [`${prefix}_kickoff_text`, 'pickpocket_kickoff2_text']
-
 export const pickpocket = (gameState, title, prefix) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)
-  const narration = createPickpocket(prefix)
+  const narration = [`${prefix}_kickoff_text`, 'pickpocket_kickoff2_text']
   const actionTime = 12
 
   tokens.forEach((token) => {
