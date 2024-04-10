@@ -42,9 +42,8 @@ export const gremlin_interaction = (gameState, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 2 },
     selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 2, center: 0 },
   }
@@ -59,7 +58,7 @@ export const gremlin_interaction = (gameState, token, title) => {
 
 export const gremlin_response = (gameState, token, selected_card_positions, selected_mark_positions, title) => {
   if (selected_card_positions && selected_card_positions.length > 0) {
-    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+    if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
       return gameState
     }
 
@@ -81,9 +80,8 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
       newGameState.players[token].card.player_card_id = 0
     }
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       swapped_cards: [position1, position2],
     }
 
@@ -101,7 +99,7 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
     return newGameState
 
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
-    if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
+    if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history, title)) {
       return gameState
     }
 
@@ -123,9 +121,8 @@ export const gremlin_response = (gameState, token, selected_card_positions, sele
       newGameState.players[token].card.player_mark = ''
     }
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]],
     }
 

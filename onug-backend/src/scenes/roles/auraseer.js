@@ -38,9 +38,8 @@ export const auraseer_interaction = (gameState, token, title) => {
   
   const playersWithCardOrMarkActionTrue = getPlayerNumbersWithCardOrMarkActionTrue(newGameState.players)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     auraseer: playersWithCardOrMarkActionTrue
   }
 

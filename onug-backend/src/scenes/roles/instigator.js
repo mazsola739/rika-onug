@@ -34,9 +34,8 @@ export const instigator_interaction = (gameState, token, title) => {
   const allPlayerTokens = getAllPlayerTokens(newGameState.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 },
   }
 
@@ -48,7 +47,7 @@ export const instigator_interaction = (gameState, token, title) => {
 }
 
 export const instigator_response = (gameState, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
+  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
   
@@ -77,9 +76,8 @@ export const instigator_response = (gameState, token, selected_mark_positions, t
 
   newGameState.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     mark_of_traitor: [selected_mark_positions[0]],
   }
 

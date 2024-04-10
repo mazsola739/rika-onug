@@ -169,10 +169,9 @@ export const aliens_interaction = (gameState, token, title) => {
       break
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
-    selectableCards,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
+    ...selectableCards,
   }
 
   return generateRoleInteraction(newGameState, token, {
@@ -185,7 +184,7 @@ export const aliens_interaction = (gameState, token, title) => {
 }
 
 export const aliens_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
 
@@ -204,9 +203,8 @@ export const aliens_response = (gameState, token, selected_card_positions, title
       newGameState.players[token].card.player_card_id = 0
     }
   
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       viewed_cards: showCards,
     }
   
@@ -238,9 +236,8 @@ export const aliens_response = (gameState, token, selected_card_positions, title
     )
   })
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     aliens,
   }
 
@@ -256,7 +253,6 @@ export const aliens_response = (gameState, token, selected_card_positions, title
   return newGameState
 }
 
-//TODO only start if vote-interaction
 export const aliens_vote = (gameState, title) => {
   const newGameState = { ...gameState }
   const narration = ['aliens_vote_result_text']
@@ -329,9 +325,8 @@ export const aliens_vote_result = (gameState, token, title) => {
     )
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     ...uniqueInformations,
   }
   

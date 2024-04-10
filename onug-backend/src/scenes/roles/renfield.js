@@ -51,9 +51,8 @@ export const renfield_interaction = (gameState, token, title) => {
     newGameState.card_positions[currentPlayerNumber].mark = batPosition
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     vampires, 
     new_vampire: newVampire, 
     mark_of_bat: [currentPlayerNumber]

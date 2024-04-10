@@ -35,9 +35,8 @@ export const thing_interaction = (gameState, token, title) => {
 
   const neighbors = getPlayerNeighborsByToken(newGameState.players, token)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_cards: neighbors, selectable_card_limit: { player: 1, center: 0 },
   }
 
@@ -49,7 +48,7 @@ export const thing_interaction = (gameState, token, title) => {
 }
 
 export const thing_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
   
@@ -67,9 +66,8 @@ export const thing_response = (gameState, token, selected_card_positions, title)
     })
   )
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     tapped: [selected_card_positions[0]],
   }
 

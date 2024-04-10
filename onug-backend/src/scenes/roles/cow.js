@@ -40,9 +40,8 @@ export const cow_interaction = (gameState, token, title) => {
   const neighborIsAlien = alienAbducted(newGameState.players, token)
   const neighbors = getPlayerNeighborsByToken(newGameState.players, 'both', 1)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     alien_neighbor: neighborIsAlien ? neighbors : [],
   }
 

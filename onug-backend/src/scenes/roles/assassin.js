@@ -43,9 +43,8 @@ export const assassin_interaction = (gameState, token, title) => {
 
   const privateMessage = 
   
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 },
   }
 
@@ -57,7 +56,7 @@ export const assassin_interaction = (gameState, token, title) => {
 }
 
 export const assassin_response = (gameState, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
+  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
   
@@ -86,9 +85,8 @@ export const assassin_response = (gameState, token, selected_mark_positions, tit
 
   newGameState.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     mark_of_assassin: [selected_mark_positions[0]],
   }
 

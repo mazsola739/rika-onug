@@ -62,9 +62,8 @@ export const mortician_interaction = (gameState, token, title, randomMorticianIn
     if (!newGameState.players[token].shield) {
       const currentPlayerNumber = getPlayerNumberWithMatchingToken(gameState.players, token)
 
-      newGameState.players[token].player_history = {
-        ...newGameState.players[token].player_history,
-        scene_title: title,
+      newGameState.players[token].player_history[title] = {
+        ...newGameState.players[token].player_history[title],
         selectable_cards: [currentPlayerNumber], selectable_card_limit: { player: 1, center: 0 },
       }
 
@@ -74,9 +73,8 @@ export const mortician_interaction = (gameState, token, title, randomMorticianIn
         selectableCards: { selectable_cards: [currentPlayerNumber], selectable_card_limit: { player: 1, center: 0 } },
       })
     } else {
-      newGameState.players[token].player_history = {
-        ...newGameState.players[token].player_history,
-        scene_title: title,
+      newGameState.players[token].player_history[title] = {
+        ...newGameState.players[token].player_history[title],
         shielded: true,
       }
 
@@ -91,9 +89,8 @@ export const mortician_interaction = (gameState, token, title, randomMorticianIn
     const selectablePlayerNumbers = getSelectablePlayersWithNoShield(selectablePlayers)
     const limit = randomMorticianInstruction.includes('1') ? 1 : 2
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 },
     }
 
@@ -106,7 +103,7 @@ export const mortician_interaction = (gameState, token, title, randomMorticianIn
 }
 
 export const mortician_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
 
@@ -136,9 +133,8 @@ export const mortician_response = (gameState, token, selected_card_positions, ti
 
   newGameState.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     viewed_cards: cardPositions,
   }
 

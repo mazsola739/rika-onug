@@ -37,9 +37,8 @@ export const vampires_interaction = (gameState, token, title) => {
   const vampires = getVampirePlayerNumbersByRoleIds(newGameState.players)
   const nonVampires = getNonVampirePlayerNumbersByRoleIds(newGameState)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 },
     vampires,
   }
@@ -53,7 +52,7 @@ export const vampires_interaction = (gameState, token, title) => {
 }
 
 export const vampires_response = (gameState, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
+  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
 
@@ -77,9 +76,8 @@ export const vampires_response = (gameState, token, selected_mark_positions, tit
     )
   })
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     vampires,
   }
 
@@ -134,9 +132,8 @@ export const vampires_vote_result = (gameState, token, title) => {
   newGameState.mark_positions.vampire = selectedPosition
   newGameState.card_positions[mostVotedPlayer[0]].mark = vampirePosition
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     mark_of_vampire: [mostVotedPlayer[0]],
   }
 

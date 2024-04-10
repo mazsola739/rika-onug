@@ -41,9 +41,8 @@ export const apprenticeassassin_interaction = (gameState, token, title) => {
   const assassins = getAssassinPlayerNumbersByRoleIds(newGameState.players)
 
   if (assassins.length > 0) {
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       assassins,
     }
 
@@ -58,9 +57,8 @@ export const apprenticeassassin_interaction = (gameState, token, title) => {
     const allPlayerTokens = getAllPlayerTokens(newGameState.players)
     const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 },
     }
 
@@ -73,7 +71,7 @@ export const apprenticeassassin_interaction = (gameState, token, title) => {
 }
 
 export const apprenticeassassin_response = (gameState, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
+  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
   
@@ -106,9 +104,8 @@ export const apprenticeassassin_response = (gameState, token, selected_mark_posi
 
   newGameState.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     mark_of_assassin: [selected_mark_positions[0]],
   }
 

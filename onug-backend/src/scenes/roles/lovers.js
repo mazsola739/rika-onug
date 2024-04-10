@@ -33,9 +33,8 @@ export const lover_interaction = (gameState, token, title) => {
 
   const lovers = getLoversPlayerNumbersByMark(newGameState.players)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     lovers,
   }
 

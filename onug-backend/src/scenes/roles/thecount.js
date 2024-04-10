@@ -40,9 +40,8 @@ export const thecount_interaction = (gameState, token, title) => {
   
   const nonVampires = getNonVampirePlayerNumbersByRoleIds(newGameState)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 },
   }
 
@@ -54,7 +53,7 @@ export const thecount_interaction = (gameState, token, title) => {
 }
 
 export const thecount_response = (gameState, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
+  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
   
@@ -77,9 +76,8 @@ export const thecount_response = (gameState, token, selected_mark_positions, tit
 
   newGameState.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     mark_of_fear: [selected_mark_positions[0]],
   }
 

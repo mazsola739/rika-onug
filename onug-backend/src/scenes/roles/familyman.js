@@ -67,9 +67,8 @@ export const familyman_interaction = (gameState, token, title) => {
   
   const partOfFamily = getPartOfGroupByToken(newGameState.players, token, randomInstruction)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     family: partOfFamily,
   }
 

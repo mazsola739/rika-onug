@@ -33,9 +33,8 @@ export const everyonemark_interaction = (gameState, token, title) => {
 
   newGameState.players[token].card.player_mark = newGameState.card_positions[currentPlayerNumber].mark
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     viewed_marks: [currentPlayerNumber]
   }
 

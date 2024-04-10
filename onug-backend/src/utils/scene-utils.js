@@ -39,7 +39,6 @@ export const empathNumbers = (totalPlayers, evenOdd = '') => {
   return numbers
 }
 
-
 const shufflePlayers = totalPlayers => Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`).sort(() => 0.5 - Math.random())
 
 export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
@@ -663,6 +662,32 @@ export const getMasonPlayerNumbersByRoleIds = players => {
     const player = players[token]
     if (masonIds.includes(player.card.player_role_id)) {
       result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getEmpathTokensByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (player.card.player_role_id === 77 && player.card.player_original_id !== 1) {
+      result.push(token)
+    }
+  }
+
+  return result
+}
+
+export const getDoppelgangerEmpathTokensByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (player.card.player_role_id === 77 && player.card.player_original_id === 1) {
+      result.push(token)
     }
   }
 

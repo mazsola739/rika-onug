@@ -150,9 +150,8 @@ export const oracle_question_raising = (gameState, token, title) => {
       break
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     answer_options: answerOptions,
   }
 
@@ -164,7 +163,7 @@ export const oracle_question_raising = (gameState, token, title) => {
 }
 
 export const oracle_question_response = (gameState, token, selected_answer, title) => {
-  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history)) {
+  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history, title)) {
     return gameState
   }
 
@@ -185,9 +184,8 @@ export const oracle_question_response = (gameState, token, selected_answer, titl
     newGameState.oracle.answer = selected_answer
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     question: oracleQuestion,
     answer: selected_answer
   }
@@ -376,9 +374,8 @@ export const oracle_answer_aftermath = (gameState, token, title) => {
       break
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     viewed_cards: showCards,
     selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: limit } },
     uniqueInformations: { oracle: showCards },
@@ -399,7 +396,7 @@ export const oracle_answer_aftermath = (gameState, token, title) => {
 }
 
 export const oracle_answer_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
 
@@ -420,9 +417,8 @@ export const oracle_answer_response = (gameState, token, selected_card_positions
     newGameState.players[token].card.player_card_id = 0
     newGameState.players[token].card_or_mark_action = true
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
     }
 
@@ -440,9 +436,8 @@ export const oracle_answer_response = (gameState, token, selected_card_positions
 
     newGameState.players[token].card_or_mark_action = true
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       viewed_cards: selectedCards,
     }
 

@@ -40,9 +40,8 @@ export const evilometer_interaction = (gameState, token, title) => {
   const neighborIsSuperVillain = superVillainDetected(newGameState.players, token)
   const neighbors = getPlayerNeighborsByToken(newGameState.players, 'both', 1)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     villain_neighbor: neighborIsSuperVillain ? neighbors : [],
   }
 

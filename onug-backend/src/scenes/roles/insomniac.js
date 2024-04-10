@@ -44,9 +44,8 @@ export const insomniac_interaction = (gameState, token, title) => {
 
     const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, [currentPlayerNumber])
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       viewed_cards: [currentPlayerNumber],
     }
 
@@ -57,9 +56,8 @@ export const insomniac_interaction = (gameState, token, title) => {
       uniqueInformations: { bear: title === 'INSOMNIAC' ? [currentPlayerNumber] : [], thumb: title === 'SELF_AWARENESS_GIRL' ? [currentPlayerNumber] : [], }
     })
   } else {
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       shielded: true,
     }
 

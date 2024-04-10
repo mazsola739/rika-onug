@@ -32,9 +32,8 @@ export const witch = (gameState, title) => {
 export const witch_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 },
   }
 
@@ -46,7 +45,7 @@ export const witch_interaction = (gameState, token, title) => {
 } 
 
 export const witch_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
   
@@ -67,9 +66,8 @@ export const witch_response = (gameState, token, selected_card_positions, title)
 
     
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 },
       viewed_cards: [selected_card_positions[0]],
       selected_center_card: selected_card_positions[0],
@@ -105,9 +103,8 @@ export const witch_response = (gameState, token, selected_card_positions, title)
       newGameState.players[token].card.player_team = currentCard.team
     }
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       swapped_cards: [newGameState.players[token].player_history.selected_center_card, selected_card_positions[0]],
     }
 

@@ -50,9 +50,8 @@ export const apprenticetanner_interaction = (gameState, token, title) => {
     privateMessage = ['interaction_tanner_now']
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     tanner,
   }
 

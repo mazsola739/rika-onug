@@ -45,7 +45,7 @@ export const groobzerb_interaction = (gameState, token, title) => {
       newGameState.players[token].card.player_team = 'groob'
       groobPlayers.forEach(groob => newGameState.card_positions[groob].team = 'groob')
 
-      player.player_history = { ...player.player_history, scene_title: title, zerb: zerbPlayers }
+      player.player_history[title] = { ...player.player_history[title], zerb: zerbPlayers }
 
       const messageIdentifiers = formatPlayerIdentifier(zerbPlayers)
 
@@ -67,7 +67,7 @@ export const groobzerb_interaction = (gameState, token, title) => {
       newGameState.players[token].card.player_team = 'zerb'
       zerbPlayers.forEach(zerb => newGameState.card_positions[zerb].team = 'zerb')
 
-      player.player_history = { ...player.player_history, scene_title: title, groob: groobPlayers }
+      player.player_history[title] = { ...player.player_history[title], groob: groobPlayers }
 
       const messageIdentifiers = formatPlayerIdentifier(groobPlayers)
 

@@ -43,9 +43,8 @@ export const intern_interaction = (gameState, token, title) => {
     playerCard.player_role = 'MAD_SCIENTIST'
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     madscientist,
   }
 

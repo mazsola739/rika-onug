@@ -38,9 +38,8 @@ export const leader_interaction = (gameState, token, title) => {
 
   const aliens = getAlienPlayerNumbersByRoleIds(newGameState.players)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     aliens,
   }
 
@@ -87,9 +86,8 @@ export const leader_zerbgroob_interaction = (gameState, token, title) => {
   if (groob.length >= 1 && zerb.length >= 1) {
     const zerbgroob = zerb.concat(groob)
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       groobzerb: zerbgroob,
     }
 
@@ -101,9 +99,8 @@ export const leader_zerbgroob_interaction = (gameState, token, title) => {
       uniqueInformations: { groobzerb: zerbgroob },
     })
   } else {
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
     }
 
     return generateRoleInteraction(newGameState, token, {

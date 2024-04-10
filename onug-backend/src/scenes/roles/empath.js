@@ -1,7 +1,9 @@
 //@ts-check
-import { copyPlayerIds, SCENE } from '../../constant'
-import { getRandomItemFromArray, pickRandomUpToThreePlayers, getAllPlayerTokens, getSceneEndTime, empathNumbers, getPlayerNumbersWithMatchingTokens } from '../../utils'
+import { copyPlayerIds, SCENE, VOTE } from '../../constant'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, empathNumbers, getSceneEndTime, getPlayerNumbersWithMatchingTokens, addVote, getEmpathTokensByRoleIds, getDoppelgangerEmpathTokensByRoleIds, formatPlayerIdentifier, findMostVoted } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
+import { generateRoleInteraction } from '../generate-scene-role-interactions'
+import { isValidCardSelection } from '../validate-response-data'
 
 const empathKeys = [
   'identifier_everyone_text',
@@ -46,8 +48,10 @@ export const empath = (gameState, title, prefix) => {
     activePlayerNumbers = empathNumbers(totalPlayers, evenOdd)
   }
 
+  newGameState.empath_votes = {}
   newGameState.empath = {
     instruction: '',
+    icon: ''
   }
   newGameState.empath.instruction = randomEmpathInstruction
   
@@ -84,68 +88,99 @@ export const empath_interaction = (gameState, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
 
   switch (randomEmpathInstruction) {
-    case 'empath_action1_text': //point in the direction of the player you think is the Empath.
+    case 'empath_action1_text':
       icon = 'empath'
       break
-    case 'empath_action2_text': //point in the direction of the player you think is really good looking.
+    case 'empath_action2_text':
       icon = 'pretty'
       break
-    case 'empath_action3_text': //point in the direction of the player you think is the most suspicious.
+    case 'empath_action3_text':
       icon = 'sus'
       break
-    case 'empath_action4_text': //point in the direction of a player who smells really good.
+    case 'empath_action4_text':
       icon = 'smell'
       break
-    case 'empath_action5_text': //point in the direction of a player you think is a sharp dresser.
+    case 'empath_action5_text':
       icon = 'dress'
       break
-    case 'empath_action6_text': //point in the direction of the player who is awesome.
+    case 'empath_action6_text':
       icon = 'awesome'
       break
-    case 'empath_action7_text': //point in the direction of the player you think everyone else is pointing at.
+    case 'empath_action7_text':
       icon = 'select'
       break
-    case 'empath_action8_text': //point in the direction of the smartest player.
+    case 'empath_action8_text':
       icon = 'bulb'
       break
-    case 'empath_action9_text': //point in the direction of the friendliest player.
+    case 'empath_action9_text':
       icon = 'friend'
       break
-    case 'empath_action10_text': //point in the direction of the funniest player.
+    case 'empath_action10_text':
       icon = 'jest'
       break
-    case 'empath_action11_text': //point in the direction a player who will win this game.
+    case 'empath_action11_text':
       icon = 'trophy'
       break
-    case 'empath_action12_text': //point in the direction a player you really, really like.
+    case 'empath_action12_text':
       icon = 'like'
       break
-    case 'empath_action13_text': //point in the direction of a player who you don't think anyone else will point at.
+    case 'empath_action13_text':
       icon = 'think'
       break
-    case 'empath_action14_text': //point in the direction of the nicest player.
+    case 'empath_action14_text':
       icon = 'nice'
       break
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.empath.icon = icon
+
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
   }
 
   return {
     private_message: ['interaction_may_one_any'],
     icon,
-    selectable_cards: selectablePlayerNumbers,
-    selectable_card_limit: { player: 1, center: 0 },
+    selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
   }
 }
 
 export const empath_response = (gameState, token, selected_card_positions, title) => {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
+    return gameState
+  }
+
   const newGameState = { ...gameState }
   const scene = []
-  const interaction = {}
+
+  const votes = addVote(newGameState.players[token].player_number, selected_card_positions[0], newGameState.empath_votes)
+
+  newGameState.players[token].empath_vote = selected_card_positions[0]
+  newGameState.empath_votes = votes
+
+  const empathTokens = title === 'empath' ? getEmpathTokensByRoleIds(newGameState.plyers) : getDoppelgangerEmpathTokensByRoleIds(newGameState.plyers)
+
+  empathTokens.forEach((empathToken) => {
+    websocketServerConnectionsPerRoom[newGameState.room_id][empathToken].send(
+      JSON.stringify({
+        type: VOTE,
+        votes,
+      })
+    )
+  })
+
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
+  }
+
+  const icon = newGameState.empath.icon
+
+  const interaction = generateRoleInteraction(newGameState, token, {
+    private_message: ['interaction_voted', formatPlayerIdentifier(selected_card_positions)[0]],
+    icon,
+  })
+
   scene.push({ type: SCENE, title, token, interaction })
   newGameState.scene = scene
 
@@ -163,14 +198,14 @@ export const empath_vote = (gameState, title, prefix) => {
     let interaction = {}
 
     const card = newGameState.players[token].card
-    //TODO is not the empath here who get this, but empathKeys
+
     if (prefix === 'empath') {
       if (card.player_original_id === 77 || (card.player_role_id === 77 && copyPlayerIds.includes(card.player_original_id))) {
-        interaction = empath_interaction(newGameState, token, title)
+        interaction = empath_vote_result(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_empath') {
       if (card.player_role_id === 77 && card.player_original_id === 1) {
-        interaction = empath_interaction(newGameState, token, title)
+        interaction = empath_vote_result(newGameState, token, title)
       }
     }
 
@@ -183,52 +218,22 @@ export const empath_vote = (gameState, title, prefix) => {
   return newGameState
 }
 
-/* export const alien_vote = (gameState, title) => {
-  const newGameState = { ...gameState }
-  const narration = ['aliens_vote_result_text']
-  const tokens = getAllPlayerTokens(newGameState.players)
-  const scene = []
-  const actionTime = 6
-
-  tokens.forEach((token) => {
-    let interaction = {}
-
-    const card = newGameState.players[token].card
-
-    if (alienIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
-      interaction = alien_vote_result(newGameState, token, title)
-    }
-
-    scene.push({ type: SCENE, title, token, narration, interaction })
-  })
-
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
-
-  return newGameState
-}
-
-export const alien_vote_result = (gameState, token, title) => {
+export const empath_vote_result = (gameState, token, title) => {
   const newGameState = { ...gameState }
 
   newGameState.players[token].card_or_mark_action = true
+  const icon = newGameState.empath.icon
 
-  const mostVotedPlayer = findMostVoted(newGameState.alien_votes)
+  const mostVotedPlayer = findMostVoted(newGameState.vampire_votes)
 
-  //TODO alien helper or new alien || view card
-  const selectedPosition = newGameState.card_positions[mostVotedPlayer[0]]
-  newGameState.mark_positions.alien = selectedPosition
-
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
-    babyalien: [mostVotedPlayer[0]],
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
+    [icon]: [mostVotedPlayer[0]],
   }
 
   return generateRoleInteraction(newGameState, token, {
-    private_message: ['interaction_mark_of_alien', formatPlayerIdentifier(mostVotedPlayer)[0]],
-    icon: 'alienhand',
-    uniqueInformations: { babyalien: [mostVotedPlayer[0]] },
+    private_message: ['interaction_vote_result', formatPlayerIdentifier(mostVotedPlayer)[0]],
+    icon,
+    uniqueInformations: { [icon]: [mostVotedPlayer[0]] },
   })
 }
- */

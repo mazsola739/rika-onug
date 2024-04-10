@@ -45,9 +45,8 @@ export const beholder_interaction = (gameState, token, title) => {
   
   const seers = getAnySeerPlayerNumbersByRoleIds(newGameState.players)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     seers,
   }
 
@@ -61,7 +60,7 @@ export const beholder_interaction = (gameState, token, title) => {
 }
 
 export const beholder_response = (gameState, token, selected_answer, title) => {
-  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history)) {
+  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history, title)) {
     return gameState
   }
 
@@ -80,9 +79,8 @@ export const beholder_response = (gameState, token, selected_answer, title) => {
 
     newGameState.players[token].card_or_mark_action = true
 
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       viewed_cards: seers,
     }
     

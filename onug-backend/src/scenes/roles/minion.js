@@ -41,9 +41,8 @@ export const minion_interaction = (gameState, token, title) => {
     newGameState.players[token].card.player_team = 'minion'
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     werewolves,
   }
 

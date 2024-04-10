@@ -43,9 +43,8 @@ export const curator_interaction = (gameState, token, title) => {
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
   const selectablePlayersWithNoArtifact = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, newGameState.artifact)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_cards: selectablePlayersWithNoArtifact, selectable_card_limit: { player: 1, center: 0 },
   }
 
@@ -57,7 +56,7 @@ export const curator_interaction = (gameState, token, title) => {
 }
 
 export const curator_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
   
@@ -72,9 +71,8 @@ export const curator_response = (gameState, token, selected_card_positions, titl
     newGameState.players[artifactedPlayersToken[0]].artifact = true
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     new_artifact_card: selected_card_positions[0],
   }
 

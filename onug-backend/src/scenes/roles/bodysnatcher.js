@@ -63,9 +63,8 @@ export const bodysnatcher_interaction = (gameState, token, title, randomBodysnat
   const newGameState = { ...gameState }
 
   if (newGameState.players[token].shield) {
-    newGameState.players[token].player_history = {
-      ...newGameState.players[token].player_history,
-      scene_title: title,
+    newGameState.players[token].player_history[title] = {
+      ...newGameState.players[token].player_history[title],
       shielded: true,
     }
 
@@ -106,9 +105,8 @@ export const bodysnatcher_interaction = (gameState, token, title, randomBodysnat
     interactionMessage = 'interaction_must_one_center'
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     ...selectableCards,
   }
 
@@ -120,7 +118,7 @@ export const bodysnatcher_interaction = (gameState, token, title, randomBodysnat
 }
 
 export const bodysnatcher_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
   
@@ -143,9 +141,8 @@ export const bodysnatcher_response = (gameState, token, selected_card_positions,
 
   newGameState.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
     viewed_cards: [currentPlayerNumber],
   }

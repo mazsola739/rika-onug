@@ -33,9 +33,8 @@ export const masons_interaction = (gameState, token, title) => {
   
   const masons = getMasonPlayerNumbersByRoleIds(newGameState.players)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     masons,
   }
 

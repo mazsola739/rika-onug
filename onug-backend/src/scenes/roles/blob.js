@@ -63,9 +63,8 @@ export const blob_interaction = (gameState, token, title) => {
   
   const partOfBlob = getPartOfGroupByToken(newGameState.players, token, randomInstruction)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     blob: partOfBlob,
   }
 

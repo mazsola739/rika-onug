@@ -161,9 +161,8 @@ export const rascal_interaction = (gameState, token, title) => {
     privateMessage = [selectableCards.length >= 2 ? 'interaction_may_two_any' : 'interaction_no_selectable_player']
   } else if (randomRascalInstruction === 'rascal_drunk_text' || randomRascalInstruction === 'rascal_robber_text') {
     if (newGameState.players[token].shield) {
-      newGameState.players[token].player_history = {
-        ...newGameState.players[token].player_history,
-        scene_title: title,
+      newGameState.players[token].player_history[title] = {
+        ...newGameState.players[token].player_history[title],
         shielded: true,
       }
 
@@ -188,9 +187,8 @@ export const rascal_interaction = (gameState, token, title) => {
 
   const random = randomRascalInstruction.replace('rascal_', '').replace('_text', '')
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_cards: selectableCards, selectable_card_limit: selectableLimit,
     random,
   }
@@ -203,7 +201,7 @@ export const rascal_interaction = (gameState, token, title) => {
 }
 
 export const rascal_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
 
@@ -231,9 +229,8 @@ export const rascal_response = (gameState, token, selected_card_positions, title
         newGameState.players[token].card.player_card_id = 0
       }
 
-      newGameState.players[token].player_history = {
-        ...newGameState.players[token].player_history,
-        scene_title: title,
+      newGameState.players[token].player_history[title] = {
+        ...newGameState.players[token].player_history[title],
         swapped_cards: [position1, position2],
       }
 
@@ -260,9 +257,8 @@ export const rascal_response = (gameState, token, selected_card_positions, title
         const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
         const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-        newGameState.players[token].player_history = {
-          ...newGameState.players[token].player_history,
-          scene_title: title,
+        newGameState.players[token].player_history[title] = {
+          ...newGameState.players[token].player_history[title],
           selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 },
           viewed_cards: [selected_card_positions[0]], selected_card: selected_card_positions[0],
           witch_answer: true,
@@ -291,9 +287,8 @@ export const rascal_response = (gameState, token, selected_card_positions, title
           newGameState.players[token].card.player_team = currentCard.team
         }
 
-        newGameState.players[token].player_history = {
-          ...newGameState.players[token].player_history,
-          scene_title: title,
+        newGameState.players[token].player_history[title] = {
+          ...newGameState.players[token].player_history[title],
           swapped_cards: [newGameState.players[token].player_history.selected_card, selected_card_positions[0]],
         }
 
@@ -327,9 +322,8 @@ export const rascal_response = (gameState, token, selected_card_positions, title
 
       newGameState.players[token].card_or_mark_action = true
 
-      newGameState.players[token].player_history = {
-        ...newGameState.players[token].player_history,
-        scene_title: title,
+      newGameState.players[token].player_history[title] = {
+        ...newGameState.players[token].player_history[title],
         swapped_cards: [currentPlayerNumber, selectedPosition],
         viewed_cards: [currentPlayerNumber],
       }

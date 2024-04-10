@@ -32,9 +32,8 @@ export const villageidiot = (gameState, title) => {
 export const villageidiot_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     answer_options: ['left', 'right'],
   }
 
@@ -46,7 +45,7 @@ export const villageidiot_interaction = (gameState, token, title) => {
 }
 
 export const villageidiot_response = (gameState, token, selected_answer, title) => {
-  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history)) {
+  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history, title)) {
     return gameState
   }
 
@@ -63,9 +62,8 @@ export const villageidiot_response = (gameState, token, selected_answer, title) 
     ...updatedPlayerCards
   }
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     direction: selected_answer,
   }
 

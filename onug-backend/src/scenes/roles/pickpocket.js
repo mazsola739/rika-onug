@@ -39,9 +39,8 @@ export const pickpocket_interaction = (gameState, token, title) => {
   const newGameState = { ...gameState }
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 },
   }
 
@@ -53,7 +52,7 @@ export const pickpocket_interaction = (gameState, token, title) => {
 }
 
 export const pickpocket_response = (gameState, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
+  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
   
@@ -72,9 +71,8 @@ export const pickpocket_response = (gameState, token, selected_mark_positions, t
 
   newGameState.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     swapped_marks: [currentPlayerNumber, selected_mark_positions[0]],
     viewed_marks: [currentPlayerNumber],
   }

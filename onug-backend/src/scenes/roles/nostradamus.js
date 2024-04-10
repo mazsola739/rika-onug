@@ -35,9 +35,8 @@ export const nostradamus_interaction = (gameState, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGameState.shield)
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 3, center: 0 },
   }
 
@@ -49,7 +48,7 @@ export const nostradamus_interaction = (gameState, token, title) => {
 }
 
 export const nostradamus_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
   
@@ -90,9 +89,8 @@ export const nostradamus_response = (gameState, token, selected_card_positions, 
   newGameState.players[token].card_or_mark_action = true
   newGameState.nostradamus_team = newGameState.players[token].card.player_team
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : [selected_card_positions[0]],
   }
 

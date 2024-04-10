@@ -54,9 +54,8 @@ export const priest_interaction = (gameState, token, title) => {
 
   newGameState.players[token].card.player_mark = 'mark_of_clarity'
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 },
     mark_of_clarity: [currentPlayerNumber],
   }
@@ -70,7 +69,7 @@ export const priest_interaction = (gameState, token, title) => {
 }
 
 export const priest_response = (gameState, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history)) {
+  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
 

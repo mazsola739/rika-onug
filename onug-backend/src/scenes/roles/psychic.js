@@ -62,9 +62,8 @@ export const psychic_interaction = (gameState, token, title, randomPsychicInstru
 
   const limit = +randomPsychicInstructions.replace('psychic_view', '').replace('_text', '')
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 },
   }
 
@@ -76,7 +75,7 @@ export const psychic_interaction = (gameState, token, title, randomPsychicInstru
 }
 
 export const psychic_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history)) {
+  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
     return gameState
   }
   
@@ -92,9 +91,8 @@ export const psychic_response = (gameState, token, selected_card_positions, titl
 
   newGameState.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history = {
-    ...newGameState.players[token].player_history,
-    scene_title: title,
+  newGameState.players[token].player_history[title] = {
+    ...newGameState.players[token].player_history[title],
     viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0],
   }
 
