@@ -27,7 +27,6 @@ import DreamwolfIcon from './dreamwolf.svg?react'
 import DressIcon from './dress.svg?react'
 import DrunkIcon from './drunk.svg?react'
 import EmpathIcon from './empath.svg?react'
-import EvilIcon from './evil.svg?react'
 import EvilhandIcon from './evilhand.svg?react'
 import FamilyIcon from './family.svg?react'
 import FangIcon from './fang.svg?react'
@@ -113,7 +112,6 @@ export {
   DressIcon,
   DrunkIcon,
   EmpathIcon,
-  EvilIcon,
   EvilhandIcon,
   FamilyIcon,
   FangIcon,

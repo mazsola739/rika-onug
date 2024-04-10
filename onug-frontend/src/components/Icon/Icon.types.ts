@@ -30,7 +30,6 @@ export type IconType =
   | 'dress'
   | 'drunk'
   | 'empath'
-  | 'evil'
   | 'evilhand'
   | 'family'
   | 'fang'
