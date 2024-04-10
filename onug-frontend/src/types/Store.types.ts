@@ -101,7 +101,6 @@ export type WsJsonMessage = {
     /* empath?: string[] */
     /* evil?: string[] */
     evilhand?: string[]
-    /* eye?: string[] */
     family?: string[]
     /* friend?: string[] */
     gremlin?: string[]
@@ -134,6 +133,7 @@ export type WsJsonMessage = {
     swap?: string[]
     tanner?: string[]
     tap?: string[]
+    /* think?: string[] */
     thumb?: string[]
     /* trophy?: string[] */
     ufo?: string[]
@@ -254,6 +254,7 @@ export type GamePlayBoardCardType = {
     swap?: boolean
     tanner?: boolean
     tap?: boolean
+    think?: boolean
     thumb?: boolean
     trophy?: boolean
     ufo?: boolean
@@ -373,6 +374,7 @@ export type PlayerPositionProperties = {
   swap?: boolean
   tanner?: boolean
   tap?: boolean
+  think?: boolean
   thumb?: boolean
   trophy?: boolean
   ufo?: boolean

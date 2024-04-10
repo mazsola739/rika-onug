@@ -592,7 +592,7 @@ export const sceneHandler = gameState => {
     case "EMPATH_VOTE":
       if (conditions.hasEmpath(selected_cards)) {
         newGameState.actual_scene.started = true
-        return roles.empath_vote(newGameState, scene_title)
+        return roles.empath_vote(newGameState, scene_title, "empath")
       }
       break
 
@@ -606,7 +606,7 @@ export const sceneHandler = gameState => {
     case "DOPPELGÄNGER_EMPATH_VOTE":
       if (conditions.hasEmpath(selected_cards)) {
         newGameState.actual_scene.started = true
-        return roles.empath_vote(newGameState, scene_title)
+        return roles.empath_vote(newGameState, scene_title, "doppelganger_empath")
       }
       break
 

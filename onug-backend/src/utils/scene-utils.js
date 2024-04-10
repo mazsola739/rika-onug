@@ -17,6 +17,29 @@ export const findUniqueElementsInArrays = (array1, array2) => {
   return uniqueElements
 }
 
+export const empathNumbers = (totalPlayers, evenOdd = '') => {
+  const numbers = []
+  
+  totalPlayers = Math.min(Math.max(1, totalPlayers), 12)
+  
+  let start = 1
+  let step = 1
+  if (evenOdd === 'even') {
+    start = 2
+    step = 2
+  } else if (evenOdd === 'odd') {
+    start = 1
+    step = 2
+  }
+
+  for (let i = start; i <= totalPlayers; i += step) {
+    numbers.push(i)
+  }
+
+  return numbers
+}
+
+
 const shufflePlayers = totalPlayers => Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}_text`).sort(() => 0.5 - Math.random())
 
 export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
@@ -247,7 +270,6 @@ export const removeVote = (playerNumber, selectedPosition, votes) => {
   return updatedVotes
 }
 
-
 export const findMostVoted = (votes) => {
   let maxVotes = 0
   let mostVotedPlayers = []
@@ -385,6 +407,7 @@ export const getWerewolfPlayerNumbersByRoleIds = players => {
 
   return result
 }
+
 export const getDreamWolfPlayerNumberByRoleIds = players => {
   const result = []
 

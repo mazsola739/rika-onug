@@ -48,7 +48,7 @@ export const thecount_interaction = (gameState, token, title) => {
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_must_one_any_non_vampire'],
-    icon: 'fear',
+    icon: 'thecount',
     selectableCards: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
   })
 }
@@ -85,7 +85,7 @@ export const thecount_response = (gameState, token, selected_mark_positions, tit
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_mark_of_fear', formatPlayerIdentifier(selected_mark_positions)[0]],
-    icon: 'fear',
+    icon: 'thecount',
     uniqueInformations: { mark_of_fear: [selected_mark_positions[0]] },
   })
 

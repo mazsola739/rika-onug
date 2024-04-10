@@ -29,7 +29,6 @@ import DrunkIcon from './drunk.svg?react'
 import EmpathIcon from './empath.svg?react'
 import EvilIcon from './evil.svg?react'
 import EvilhandIcon from './evilhand.svg?react'
-import EyeIcon from './eye.svg?react'
 import FamilyIcon from './family.svg?react'
 import FangIcon from './fang.svg?react'
 import FearIcon from './fear.svg?react'
@@ -50,12 +49,14 @@ import MuteIcon from './mute.svg?react'
 import MysticIcon from './mute.svg?react'
 import NiceIcon from './nice.svg?react'
 import NightIcon from './night.svg?react'
+import NightvisionIcon from './nightvision.svg?react'
 import NostradamusIcon from './nostradamus.svg?react'
 import OpenIcon from './open.svg?react'
 import OracleIcon from './oracle.svg?react'
 import PeekerIcon from './peeker.svg?react'
 import PrankIcon from './prank.svg?react'
 import PrettyIcon from './pretty.svg?react'
+import PsychicIcon from './psychic.svg?react'
 import RobberIcon from './robber.svg?react'
 import SecretIcon from './secret.svg?react'
 import SeerIcon from './seer.svg?react'
@@ -69,6 +70,8 @@ import SwapIcon from './swap.svg?react'
 import TannerIcon from './tanner.svg?react'
 import TapIcon from './tap.svg?react'
 import TargetIcon from './target.svg?react'
+import ThecountIcon from './thecount.svg?react'
+import ThinkIcon from './target.svg?react'
 import ThumbIcon from './thumb.svg?react'
 import TraitorIcon from './traitor.svg?react'
 import TrophyIcon from './trophy.svg?react'
@@ -112,7 +115,6 @@ export {
   EmpathIcon,
   EvilIcon,
   EvilhandIcon,
-  EyeIcon,
   FamilyIcon,
   FangIcon,
   FearIcon,
@@ -133,12 +135,14 @@ export {
   MysticIcon,
   NiceIcon,
   NightIcon,
+  NightvisionIcon,
   NostradamusIcon,
   OpenIcon,
   OracleIcon,
   PeekerIcon,
   PrankIcon,
   PrettyIcon,
+  PsychicIcon,
   RobberIcon,
   SecretIcon,
   SeerIcon,
@@ -152,6 +156,8 @@ export {
   TannerIcon,
   TapIcon,
   TargetIcon,
+  ThecountIcon,
+  ThinkIcon,
   ThumbIcon,
   TraitorIcon,
   TrophyIcon,

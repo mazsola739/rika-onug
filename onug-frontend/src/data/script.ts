@@ -427,43 +427,48 @@ export const script: ScriptType[] = [
     scene_number: 84,
   },
   {
+    scene_title: 'DOPPELGÄNGER_EMPATH_VOTE',
+    scene_img: 'doppelganger',
+    scene_number: 85,
+  },
+  {
     scene_title: 'CURATOR',
     scene_img: 'curator',
-    scene_number: 85,
+    scene_number: 86,
   },
   {
     scene_title: 'DOPPELGÄNGER_CURATOR',
     scene_img: 'doppelganger',
-    scene_number: 86,
+    scene_number: 87,
   },
   {
     scene_title: 'BLOB',
     scene_img: 'blob',
-    scene_number: 87,
+    scene_number: 88,
   },
   {
     scene_title: 'MORTICIAN',
     scene_img: 'mortician',
-    scene_number: 88,
+    scene_number: 89,
   },
   {
     scene_title: 'DOPPELGÄNGER_MORTICIAN',
     scene_img: 'doppelganger',
-    scene_number: 89,
+    scene_number: 90,
   },
   {
     scene_title: 'FAMILY_MAN',
     scene_img: 'family_man',
-    scene_number: 90,
+    scene_number: 91,
   },
   {
     scene_title: 'RIPPLE',
     scene_img: 'aliens',
-    scene_number: 91,
+    scene_number: 92,
   },
   {
     scene_title: 'JOKE',
     scene_img: 'day',
-    scene_number: 92,
+    scene_number: 93,
   },
 ]

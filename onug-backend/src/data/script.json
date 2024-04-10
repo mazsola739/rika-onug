@@ -340,39 +340,43 @@
     "scene_number": 84
   },
   {
-    "scene_title": "CURATOR",
+    "scene_title": "DOPPELGÄNGER_EMPATH_VOTE",
     "scene_number": 85
   },
   {
-    "scene_title": "DOPPELGÄNGER_CURATOR",
+    "scene_title": "CURATOR",
     "scene_number": 86
   },
   {
-    "scene_title": "BLOB",
+    "scene_title": "DOPPELGÄNGER_CURATOR",
     "scene_number": 87
   },
   {
-    "scene_title": "MORTICIAN",
+    "scene_title": "BLOB",
     "scene_number": 88
   },
   {
-    "scene_title": "DOPPELGÄNGER_MORTICIAN",
+    "scene_title": "MORTICIAN",
     "scene_number": 89
   },
   {
-    "scene_title": "FAMILY_MAN",
+    "scene_title": "DOPPELGÄNGER_MORTICIAN",
     "scene_number": 90
   },
   {
-    "scene_title": "RIPPLE",
+    "scene_title": "FAMILY_MAN",
     "scene_number": 91
   },
   {
-    "scene_title": "JOKE",
+    "scene_title": "RIPPLE",
     "scene_number": 92
   },
   {
-    "scene_title": "VOTE",
+    "scene_title": "JOKE",
     "scene_number": 93
+  },
+  {
+    "scene_title": "VOTE",
+    "scene_number": 94
   }
 ]

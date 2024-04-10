@@ -70,7 +70,7 @@ export const psychic_interaction = (gameState, token, title, randomPsychicInstru
 
   return generateRoleInteraction(newGameState, token, {
     private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : limit === 1 ? 'interaction_may_one_any_other' : 'interaction_may_two_any'],
-    icon: 'seer',
+    icon: 'psychic',
     selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 } },
   })
 }
@@ -100,7 +100,7 @@ export const psychic_response = (gameState, token, selected_card_positions, titl
 
   const interaction = generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
-    icon: 'seer',
+    icon: 'psychic',
     uniqueInformations: { seer: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
   })
 

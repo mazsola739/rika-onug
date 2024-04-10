@@ -52,7 +52,6 @@ class RoleStore {
         /* const empath = (lastJsonMessage.interaction.empath || []).includes(position) || false */
         /* const evil = (lastJsonMessage.interaction.evil || []).includes(position) || false */
         const evilhand = (lastJsonMessage.interaction.evilhand || []).includes(position) || false
-        /* const eye = (lastJsonMessage.interaction.eye || []).includes(position) || false */
         const family = (lastJsonMessage.interaction.family || []).includes(position) || false
         /* const friend = (lastJsonMessage.interaction.friend || []).includes(position) || false */
         const gremlin = (lastJsonMessage.interaction.gremlin || []).includes(position) || false
@@ -68,7 +67,6 @@ class RoleStore {
         /* const mute = (lastJsonMessage.interaction.mute || []).includes(position) || false */
         const mystic = (lastJsonMessage.interaction.mystic || []).includes(position) || false
         /* const nice = (lastJsonMessage.interaction.nice || []).includes(position) || false */
-        /* const night = (lastJsonMessage.interaction.night || []).includes(position) || false */
         const nostradamus = (lastJsonMessage.interaction.nostradamus || []).includes(position) || false
         /* const oracle = (lastJsonMessage.interaction.oracle || []).includes(position) || false */
         const peeker = (lastJsonMessage.interaction.peeker || []).includes(position) || false
@@ -84,6 +82,7 @@ class RoleStore {
         const swap = (lastJsonMessage.interaction.swap || []).includes(position) || false
         const tanner = (lastJsonMessage.interaction.tanner || []).includes(position) || false
         const tap = (lastJsonMessage.interaction.tap || []).includes(position) || false
+        /* const think = (lastJsonMessage.interaction.think || []).includes(position) || false */
         const thumb = (lastJsonMessage.interaction.thumb || []).includes(position) || false
         /* const trophy = (lastJsonMessage.interaction.trophy || []).includes(position) || false */
         const ufo = (lastJsonMessage.interaction.ufo || []).includes(position) || false
@@ -140,7 +139,6 @@ class RoleStore {
           /* empath, */
           /* evil, */
           evilhand,
-          /* eye, */
           family,
           /* friend, */
           gremlin,
@@ -172,6 +170,7 @@ class RoleStore {
           swap,
           tanner,
           tap,
+          /* think, */
           thumb,
           /* trophy, */
           ufo,
