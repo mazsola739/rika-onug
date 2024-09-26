@@ -15,7 +15,7 @@ export const masons = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (MASONS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
-      interaction = masons_interaction(newGamestate, token, title)
+      interaction = masonsInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -27,7 +27,7 @@ export const masons = (gamestate, title) => {
   return newGamestate
 }
 
-export const masons_interaction = (gamestate, token, title) => {
+export const masonsInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   const masons = getMasonPlayerNumbersByRoleIds(newGamestate.players)

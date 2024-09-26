@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getNonVampirePlayerNumbersByRoleIds, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidMarkSelection } from '../validate-response-data'
+import { validateMarkSelection } from '../validate-response-data'
 
 export const thecount = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
@@ -17,11 +17,11 @@ export const thecount = (gamestate, title, prefix) => {
 
     if (prefix === 'thecount') {
       if (card.player_original_id === 39 || (card.player_role_id === 39 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = thecount_interaction(newGamestate, token, title)
+        interaction = thecountInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_thecount') {
       if (card.player_role_id === 39 && card.player_original_id === 1) {
-        interaction = thecount_interaction(newGamestate, token, title)
+        interaction = thecountInteraction(newGamestate, token, title)
       }
     }
 
@@ -34,7 +34,7 @@ export const thecount = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const thecount_interaction = (gamestate, token, title) => {
+export const thecountInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   const nonVampires = getNonVampirePlayerNumbersByRoleIds(newGamestate)
@@ -51,8 +51,8 @@ export const thecount_interaction = (gamestate, token, title) => {
   })
 }
 
-export const thecount_response = (gamestate, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+export const thecountResponse = (gamestate, token, selected_mark_positions, title) => {
+  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

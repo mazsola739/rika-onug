@@ -21,7 +21,7 @@ export const cow = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 45 || (card.player_role_id === 45 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = cow_interaction(newGamestate, token, title)
+      interaction = cowInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -33,7 +33,7 @@ export const cow = (gamestate, title, hasDoppelganger) => {
   return newGamestate
 }
 
-export const cow_interaction = (gamestate, token, title) => {
+export const cowInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const neighborIsAlien = alienAbducted(newGamestate.players, token)

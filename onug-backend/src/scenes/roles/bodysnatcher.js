@@ -1,6 +1,6 @@
 import { CENTER_CARD_POSITIONS, COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getRandomItemFromArray, getAllPlayerTokens, getSceneEndTime, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, getAnyOtherPlayersByToken, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier } from '../../utils'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
 const randomBodysnatcherInstructions = [
@@ -41,11 +41,11 @@ export const bodysnatcher = (gamestate, title, prefix) => {
 
     if (prefix === 'bodysnatcher') {
       if (card.player_original_id === 74 || (card.player_role_id === 74 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = bodysnatcher_interaction(newGamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey)
+        interaction = bodysnatcherInteraction(newGamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey)
       }
     } else if (prefix === 'doppelganger_bodysnatcher') {
       if (card.player_role_id === 74 && card.player_original_id === 1) {
-        interaction = bodysnatcher_interaction(newGamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey)
+        interaction = bodysnatcherInteraction(newGamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey)
       }
     }
 
@@ -58,7 +58,7 @@ export const bodysnatcher = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const bodysnatcher_interaction = (gamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey) => {
+export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey) => {
   const newGamestate = { ...gamestate }
 
   if (newGamestate.players[token].shield) {
@@ -116,8 +116,8 @@ export const bodysnatcher_interaction = (gamestate, token, title, randomBodysnat
   })
 }
 
-export const bodysnatcher_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const bodysnatcherResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

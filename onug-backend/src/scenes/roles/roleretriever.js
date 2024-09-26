@@ -1,6 +1,6 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
-import { robber_interaction } from './robber'
+import { robberInteraction } from './robber'
 
 export const roleretriever = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -15,7 +15,7 @@ export const roleretriever = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 66 || (card.player_role_id === 66 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = robber_interaction(newGamestate, token, title)
+      interaction = robberInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })

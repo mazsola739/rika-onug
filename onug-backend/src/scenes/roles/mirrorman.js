@@ -1,6 +1,6 @@
 import { SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
-import { copycat_interaction } from './copycat'
+import { copycatInteraction } from './copycat'
 
 export const mirrorman = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -15,7 +15,7 @@ export const mirrorman = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 64) {
-      interaction = copycat_interaction(newGamestate, token, title)
+      interaction = copycatInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })

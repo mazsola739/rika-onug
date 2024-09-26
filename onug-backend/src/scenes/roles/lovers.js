@@ -15,7 +15,7 @@ export const lovers = (gamestate, title) => {
     const player = newGamestate.players[token]
 
     if (player.player_mark === 'mark_of_love') {
-      interaction = lover_interaction(newGamestate, token, title)
+      interaction = loverInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -27,7 +27,7 @@ export const lovers = (gamestate, title) => {
   return newGamestate
 }
 
-export const lover_interaction = (gamestate, token, title) => {
+export const loverInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const lovers = getLoversPlayerNumbersByMark(newGamestate.players)

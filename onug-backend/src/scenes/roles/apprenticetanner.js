@@ -20,7 +20,7 @@ export const apprenticetanner = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 71 || (card.player_role_id === 71 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = apprenticetanner_interaction(newGamestate, token, title)
+      interaction = apprenticetannerInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -32,7 +32,7 @@ export const apprenticetanner = (gamestate, title, hasDoppelganger) => {
   return newGamestate
 }
 
-export const apprenticetanner_interaction = (gamestate, token, title) => {
+export const apprenticetannerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   let tanner = getTannerPlayerNumbersByRoleIds(newGamestate.players)

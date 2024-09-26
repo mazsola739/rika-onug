@@ -21,7 +21,7 @@ export const scene = gamestate => {
 
   if (newGamestate.actual_scene) {
     newGamestate = sceneHandler(newGamestate)
-    logDebug(`__INTERACTION__ SCENE_NUMBER: ${newGamestate.actual_scene.scene_number} role_interaction: ${JSON.stringify(newGamestate?.scene)}`)
+    logDebug(`__INTERACTION__ SCENE_NUMBER: ${newGamestate.actual_scene.scene_number} roleInteraction: ${JSON.stringify(newGamestate?.scene)}`)
   } else {
     logDebug("No actual_scene found in gamestate.")
     logDebug("gamestate:", JSON.stringify(newGamestate)) // Log the entire gamestate object

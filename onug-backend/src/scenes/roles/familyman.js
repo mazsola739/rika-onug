@@ -48,7 +48,7 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 78 || (card.player_role_id === 78 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = familyman_interaction(newGamestate, token, title)
+      interaction = familymanInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -60,7 +60,7 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
   return newGamestate
 }
 
-export const familyman_interaction = (gamestate, token, title) => {
+export const familymanInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const randomInstruction = newGamestate.scene.narration[1]
   

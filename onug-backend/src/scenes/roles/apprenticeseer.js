@@ -1,7 +1,7 @@
 import { ALL_COPY_PLAYER_IDS, SCENE, CENTER_CARD_POSITIONS } from '../../constants'
 import { formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const apprenticeseer = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +16,7 @@ export const apprenticeseer = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 18 || (card.player_role_id === 18 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = apprenticeseer_interaction(newGamestate, token, title)
+      interaction = apprenticeseerInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -28,7 +28,7 @@ export const apprenticeseer = (gamestate, title) => {
   return newGamestate
 }
 
-export const apprenticeseer_interaction = (gamestate, token, title) => {
+export const apprenticeseerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   newGamestate.players[token].player_history[title] = {
@@ -43,8 +43,8 @@ export const apprenticeseer_interaction = (gamestate, token, title) => {
   })
 }
 
-export const apprenticeseer_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const apprenticeseerResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

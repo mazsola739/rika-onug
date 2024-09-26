@@ -20,7 +20,7 @@ export const insomniac = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 4 || (card.player_role_id === 4 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = insomniac_interaction(newGamestate, token, title)
+      interaction = insomniacInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -32,7 +32,7 @@ export const insomniac = (gamestate, title, hasDoppelganger) => {
   return newGamestate
 }
 
-export const insomniac_interaction = (gamestate, token, title) => {
+export const insomniacInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
   const currentCard = newGamestate.card_positions[currentPlayerNumber].card

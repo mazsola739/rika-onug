@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getNonVillainPlayerNumbersByRoleIdsWithNoShield, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const temptress = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +16,7 @@ export const temptress = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 69 || (card.player_role_id === 69 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = temptress_interaction(newGamestate, token, title)
+      interaction = temptressInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -28,7 +28,7 @@ export const temptress = (gamestate, title) => {
   return newGamestate
 }
 
-export const temptress_interaction = (gamestate, token, title) => {
+export const temptressInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const selectablePlayerNumbers = getNonVillainPlayerNumbersByRoleIdsWithNoShield(newGamestate.players)
 
@@ -44,8 +44,8 @@ export const temptress_interaction = (gamestate, token, title) => {
   })
 }
 
-export const temptress_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const temptressResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 

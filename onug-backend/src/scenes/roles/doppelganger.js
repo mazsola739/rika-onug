@@ -1,7 +1,7 @@
 import { SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 //TODO if oracle is oracle team
 export const doppelganger = (gamestate, title) => {
@@ -17,7 +17,7 @@ export const doppelganger = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 1) {
-      interaction = doppelganger_interaction(newGamestate, token, title)
+      interaction = doppelgangerInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -30,7 +30,7 @@ export const doppelganger = (gamestate, title) => {
 }
 
 //TODO shield?
-export const doppelganger_interaction = (gamestate, token, title) => {
+export const doppelgangerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGamestate.players, [token])
@@ -48,8 +48,8 @@ export const doppelganger_interaction = (gamestate, token, title) => {
   })
 }
 
-export const doppelganger_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const doppelgangerResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

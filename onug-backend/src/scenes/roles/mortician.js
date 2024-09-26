@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getRandomItemFromArray, getAllPlayerTokens, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 const randomMorticianInstructions = ['mortician_1card_text', 'mortician_2cards_text']
 const morticianKeys = [
@@ -37,11 +37,11 @@ export const mortician = (gamestate, title, prefix) => {
 
     if (prefix === 'mortician') {
       if (card.player_original_id === 49 || (card.player_role_id === 49 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = mortician_interaction(newGamestate, token, title, randomMorticianInstruction, morticianKey)
+        interaction = morticianInteraction(newGamestate, token, title, randomMorticianInstruction, morticianKey)
       }
     } else if (prefix === 'doppelganger_mortician') {
       if (card.player_role_id === 49 && card.player_original_id === 1) {
-        interaction = mortician_interaction(newGamestate, token, title, randomMorticianInstruction, morticianKey)
+        interaction = morticianInteraction(newGamestate, token, title, randomMorticianInstruction, morticianKey)
       }
     }
 
@@ -54,7 +54,7 @@ export const mortician = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const mortician_interaction = (gamestate, token, title, randomMorticianInstruction, morticianKey) => {
+export const morticianInteraction = (gamestate, token, title, randomMorticianInstruction, morticianKey) => {
   const newGamestate = { ...gamestate }
 
   if (morticianKey === 'identifier_yourself_text') {
@@ -101,8 +101,8 @@ export const mortician_interaction = (gamestate, token, title, randomMorticianIn
   }
 }
 
-export const mortician_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const morticianResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 

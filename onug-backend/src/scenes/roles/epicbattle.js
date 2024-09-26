@@ -52,7 +52,7 @@ const random_easteregg_nogoodguys = [
   tokens.forEach((token) => {
     let interaction = {}
 
-    interaction = everyonemark_interaction(newGamestate, token, title)
+    interaction = everyonemarkInteraction(newGamestate, token, title)
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })

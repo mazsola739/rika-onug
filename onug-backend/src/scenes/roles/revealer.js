@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../constants'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const revealer = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
@@ -17,11 +17,11 @@ export const revealer = (gamestate, title, prefix) => {
 
     if (prefix === 'revealer') {
       if (card.player_original_id === 24 || (card.player_role_id === 24 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = revealer_interaction(newGamestate, token, title)
+        interaction = revealerInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_revealer') {
       if (card.player_role_id === 24 && card.player_original_id === 1) {
-        interaction = revealer_interaction(newGamestate, token, title)
+        interaction = revealerInteraction(newGamestate, token, title)
       }
     }
 
@@ -34,7 +34,7 @@ export const revealer = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const revealer_interaction = (gamestate, token, title) => {
+export const revealerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGamestate.players, token)
 
@@ -51,8 +51,8 @@ export const revealer_interaction = (gamestate, token, title) => {
 }
 
 //TODO better response message
-export const revealer_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const revealerResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const robber = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +16,7 @@ export const robber = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 8 || (card.player_role_id === 8 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = robber_interaction(newGamestate, token, title)
+      interaction = robberInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -28,7 +28,7 @@ export const robber = (gamestate, title) => {
   return newGamestate
 }
 
-export const robber_interaction = (gamestate, token, title) => {
+export const robberInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   if (!newGamestate.players[token].shield) {
@@ -57,8 +57,8 @@ export const robber_interaction = (gamestate, token, title) => {
   }
 }
 
-export const robber_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const robberResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getSceneEndTime, moveCardsButYourOwn } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidAnswerSelection } from '../validate-response-data'
+import { validateAnswerSelection } from '../validate-response-data'
 
 export const villageidiot = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +16,7 @@ export const villageidiot = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 26 || (card.player_role_id === 26 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = villageidiot_interaction(newGamestate, token, title)
+      interaction = villageidiotInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -28,7 +28,7 @@ export const villageidiot = (gamestate, title) => {
   return newGamestate
 }
 
-export const villageidiot_interaction = (gamestate, token, title) => {
+export const villageidiotInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   newGamestate.players[token].player_history[title] = {
@@ -43,8 +43,8 @@ export const villageidiot_interaction = (gamestate, token, title) => {
   })
 }
 
-export const villageidiot_response = (gamestate, token, selected_answer, title) => {
-  if (!isValidAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+export const villageidiotResponse = (gamestate, token, selected_answer, title) => {
+  if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 

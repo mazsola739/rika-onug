@@ -2,7 +2,7 @@ import { ALL_ALIEN_IDS, ALL_COPY_PLAYER_IDS, MESSAGE, SCENE, VOTE } from '../../
 import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime, getAlienPlayerNumbersByRoleIds, getAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getNeighborByPosition, moveCards, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getCardIdsByPositions, addVote, getPlayerTokensByPlayerNumber, findMostVoted } from '../../utils'
 import { webSocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 const randomAlienInstructions = [
   'aliens_view_text',
@@ -66,7 +66,7 @@ export const aliens = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (ALL_ALIEN_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
-      interaction = aliens_interaction(newGamestate, token, title)
+      interaction = aliensInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -78,7 +78,7 @@ export const aliens = (gamestate, title) => {
   return newGamestate
 }
 
-export const aliens_interaction = (gamestate, token, title) => {
+export const aliensInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const aliens = getAlienPlayerNumbersByRoleIds(newGamestate.players)
@@ -183,8 +183,8 @@ export const aliens_interaction = (gamestate, token, title) => {
   })
 }
 
-export const aliens_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const aliensResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 
@@ -254,7 +254,7 @@ export const aliens_response = (gamestate, token, selected_card_positions, title
   return newGamestate
 }
 
-export const aliens_vote = (gamestate, title) => {
+export const aliensVote = (gamestate, title) => {
   const newGamestate = { ...gamestate }
   const narration = ['aliens_vote_result_text']
   const tokens = getAllPlayerTokens(newGamestate.players)
@@ -267,7 +267,7 @@ export const aliens_vote = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (ALL_ALIEN_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
-      interaction = aliens_vote_result(newGamestate, token, title)
+      interaction = aliensVoteResult(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -279,7 +279,7 @@ export const aliens_vote = (gamestate, title) => {
   return newGamestate
 }
 
-export const aliens_vote_result = (gamestate, token, title) => {
+export const aliensVoteResult = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   const randomAlienInstruction = newGamestate.alien.instruction

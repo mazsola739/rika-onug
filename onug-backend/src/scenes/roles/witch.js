@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE, CENTER_CARD_POSITIONS } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, formatPlayerIdentifier, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const witch = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +16,7 @@ export const witch = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 27 || (card.player_role_id === 27 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = witch_interaction(newGamestate, token, title)
+      interaction = witchInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -28,7 +28,7 @@ export const witch = (gamestate, title) => {
   return newGamestate
 }
 
-export const witch_interaction = (gamestate, token, title) => {
+export const witchInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   newGamestate.players[token].player_history[title] = {
@@ -43,8 +43,8 @@ export const witch_interaction = (gamestate, token, title) => {
   })
 } 
 
-export const witch_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const witchResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

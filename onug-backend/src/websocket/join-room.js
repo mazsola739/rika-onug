@@ -1,6 +1,6 @@
 import { JOIN_ROOM } from '../constants'
 import roomsData from '../data/rooms.json'
-import { validateRoom } from '../validator'
+import { validateRoom } from '../validators'
 import { upsertRoomState } from '../repository'
 import { logTrace } from '../log'
 import { STAGES } from '../constants'

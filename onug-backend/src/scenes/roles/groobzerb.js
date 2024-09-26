@@ -20,7 +20,7 @@ export const groobzerb = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (GROOB_AND_ZERB_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
-      interaction = groobzerb_interaction(newGamestate, token, title)
+      interaction = groobzerbInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -32,7 +32,7 @@ export const groobzerb = (gamestate, title, hasDoppelganger) => {
   return newGamestate
 }
 
-export const groobzerb_interaction = (gamestate, token, title) => {
+export const groobzerbInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const player = newGamestate.players[token]
 

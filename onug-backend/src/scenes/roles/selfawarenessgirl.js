@@ -1,6 +1,6 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
-import { insomniac_interaction } from './insomniac'
+import { insomniacInteraction } from './insomniac'
 
 export const selfawarenessgirl = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }
@@ -20,7 +20,7 @@ export const selfawarenessgirl = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 67 || (card.player_role_id === 67 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = insomniac_interaction(newGamestate, token, title)
+      interaction = insomniacInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })

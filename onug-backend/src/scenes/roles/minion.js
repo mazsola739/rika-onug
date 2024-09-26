@@ -20,7 +20,7 @@ export const minion = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 7 || (card.player_role_id === 7 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = minion_interaction(newGamestate, token, title)
+      interaction = minionInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -32,7 +32,7 @@ export const minion = (gamestate, title, hasDoppelganger) => {
   return newGamestate
 }
 
-export const minion_interaction = (gamestate, token, title) => {
+export const minionInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(newGamestate.players)
 

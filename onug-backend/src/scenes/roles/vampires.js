@@ -2,7 +2,7 @@ import { ALL_VAMPIRE_IDS, ALL_COPY_PLAYER_IDS, SCENE, VOTE } from '../../constan
 import { getAllPlayerTokens, getSceneEndTime, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, addVote, findMostVoted, formatPlayerIdentifier, removeVote, getPlayerTokensByPlayerNumber } from '../../utils'
 import { webSocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidMarkSelection } from '../validate-response-data'
+import { validateMarkSelection } from '../validate-response-data'
 
 export const vampires = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -17,7 +17,7 @@ export const vampires = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (ALL_VAMPIRE_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
-      interaction = vampires_interaction(newGamestate, token, title)
+      interaction = vampiresInteraction(newGamestate, token, title)
     }
 
     newGamestate.players[token].player_history[title].scene_title = title
@@ -30,7 +30,7 @@ export const vampires = (gamestate, title) => {
   return newGamestate
 }
 
-export const vampires_interaction = (gamestate, token, title) => {
+export const vampiresInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const vampires = getVampirePlayerNumbersByRoleIds(newGamestate.players)
@@ -50,8 +50,8 @@ export const vampires_interaction = (gamestate, token, title) => {
   })
 }
 
-export const vampires_response = (gamestate, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+export const vampiresResponse = (gamestate, token, selected_mark_positions, title) => {
+  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 
@@ -93,7 +93,7 @@ export const vampires_response = (gamestate, token, selected_mark_positions, tit
   return newGamestate
 }
 
-export const vampires_vote = (gamestate, title) => {
+export const vampiresVote = (gamestate, title) => {
   const newGamestate = { ...gamestate }
   const narration = ['vampires_vote_result_text']
   const tokens = getAllPlayerTokens(newGamestate.players)
@@ -106,7 +106,7 @@ export const vampires_vote = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (ALL_VAMPIRE_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
-      interaction = vampires_vote_result(newGamestate, token, title)
+      interaction = vampiresVoteResult(newGamestate, token, title)
     }
 
     newGamestate.players[token].player_history[title].scene_title = title
@@ -119,7 +119,7 @@ export const vampires_vote = (gamestate, title) => {
   return newGamestate
 }
 
-export const vampires_vote_result = (gamestate, token, title) => {
+export const vampiresVoteResult = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   newGamestate.players[token].card_or_mark_action = true

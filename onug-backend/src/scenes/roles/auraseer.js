@@ -20,7 +20,7 @@ export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 72 || (card.player_role_id === 72 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = auraseer_interaction(newGamestate, token, title)
+      interaction = auraseerInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -32,7 +32,7 @@ export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
   return newGamestate
 }
 
-export const auraseer_interaction = (gamestate, token, title) => {
+export const auraseerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   const playersWithCardOrMarkActionTrue = getPlayerNumbersWithCardOrMarkActionTrue(newGamestate.players)

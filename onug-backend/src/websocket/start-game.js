@@ -1,5 +1,5 @@
 import { logTrace } from '../log'
-import { validateRoom } from '../validator'
+import { validateRoom } from '../validators'
 import { upsertRoomState } from '../repository'
 import { STAGES } from '../constants'
 import { broadcast } from './connections'

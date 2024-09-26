@@ -1,7 +1,7 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds, getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidAnswerSelection } from '../validate-response-data'
+import { validateAnswerSelection } from '../validate-response-data'
 
 export const squire = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }
@@ -21,7 +21,7 @@ export const squire = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 83 || (card.player_role_id === 27 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = squire_interaction(newGamestate, token, title)
+      interaction = squireInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -33,7 +33,7 @@ export const squire = (gamestate, title, hasDoppelganger) => {
   return newGamestate
 }
 
-export const squire_interaction = (gamestate, token, title) => {
+export const squireInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(newGamestate.players)
@@ -54,8 +54,8 @@ export const squire_interaction = (gamestate, token, title) => {
   })
 }
 
-export const squire_response = (gamestate, token, selected_answer, title) => {
-  if (!isValidAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+export const squireResponse = (gamestate, token, selected_answer, title) => {
+  if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 

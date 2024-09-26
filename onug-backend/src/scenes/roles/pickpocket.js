@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken, getMarksByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidMarkSelection } from '../validate-response-data'
+import { validateMarkSelection } from '../validate-response-data'
 
 export const pickpocket = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
@@ -17,11 +17,11 @@ export const pickpocket = (gamestate, title, prefix) => {
 
     if (prefix === 'pickpocket') {
       if (card.player_original_id === 36 || (card.player_role_id === 36 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = pickpocket_interaction(newGamestate, token, title)
+        interaction = pickpocketInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_pickpocket') {
       if (card.player_role_id === 36 && card.player_original_id === 1) {
-        interaction = pickpocket_interaction(newGamestate, token, title)
+        interaction = pickpocketInteraction(newGamestate, token, title)
       }
     }
 
@@ -34,7 +34,7 @@ export const pickpocket = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const pickpocket_interaction = (gamestate, token, title) => {
+export const pickpocketInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGamestate.players, [token])
 
@@ -50,8 +50,8 @@ export const pickpocket_interaction = (gamestate, token, title) => {
   })
 }
 
-export const pickpocket_response = (gamestate, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+export const pickpocketResponse = (gamestate, token, selected_mark_positions, title) => {
+  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

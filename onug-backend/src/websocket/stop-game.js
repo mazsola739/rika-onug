@@ -1,6 +1,6 @@
 import { REDIRECT } from '../constants'
 import { logTrace } from '../log'
-import { validateRoom } from '../validator'
+import { validateRoom } from '../validators'
 import { upsertRoomState } from '../repository'
 import { broadcast } from './connections'
 import { stopGamePlay } from '../scenes/game-play'

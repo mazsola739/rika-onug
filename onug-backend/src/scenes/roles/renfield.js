@@ -21,7 +21,7 @@ export const renfield = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 38 || (card.player_role_id === 38 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = renfield_interaction(newGamestate, token, title)
+      interaction = renfieldInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -33,7 +33,7 @@ export const renfield = (gamestate, title, hasDoppelganger) => {
   return newGamestate
 }
 
-export const renfield_interaction = (gamestate, token, title) => {
+export const renfieldInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const vampires = getVampirePlayerNumbersByRoleIds(newGamestate.players)
   const newVampire = getVampirePlayerNumbersByMark(newGamestate.players)

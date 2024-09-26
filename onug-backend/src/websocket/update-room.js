@@ -1,4 +1,4 @@
-import { validateRoom } from '../validator'
+import { validateRoom } from '../validators'
 import { determineTotalPlayers, filterCardsByExpansions, toggleCardSelect, toggleExpansions } from '../utils'
 import { upsertRoomState } from '../repository'
 import { HYDRATE_ROOM } from '../constants'

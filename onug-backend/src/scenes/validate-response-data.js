@@ -1,6 +1,6 @@
 
 //TODO actual scene (timestamp)
-export const isValidCardSelection = (selected_card_positions, player_history, title) => {
+export const validateCardSelection = (selected_card_positions, player_history, title) => {
   if (selected_card_positions.length === 0 || !selected_card_positions.every(position => player_history[title]?.selectable_cards.includes(position))) {
     return false
   }
@@ -15,7 +15,7 @@ export const isValidCardSelection = (selected_card_positions, player_history, ti
   return true
 }
 
-export const isValidMarkSelection = (selected_mark_positions, player_history, title) => {
+export const validateMarkSelection = (selected_mark_positions, player_history, title) => {
   if (selected_mark_positions.length === 0 || !selected_mark_positions.every(position => player_history[title].selectable_marks.includes(position))) {
     return false
   }
@@ -27,7 +27,7 @@ export const isValidMarkSelection = (selected_mark_positions, player_history, ti
   return true
 }
 
-export const isValidAnswerSelection = (selected_answer, player_history, title) => {
+export const validateAnswerSelection = (selected_answer, player_history, title) => {
   if (!selected_answer || !player_history[title].answer_options.includes(selected_answer)) {
     return false
   }

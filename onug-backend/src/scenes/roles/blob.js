@@ -44,7 +44,7 @@ export const blob = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 44 || (card.player_role_id === 44 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = blob_interaction(newGamestate, token, title)
+      interaction = blobInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -56,7 +56,7 @@ export const blob = (gamestate, title) => {
   return newGamestate
 }
 
-export const blob_interaction = (gamestate, token, title) => {
+export const blobInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const randomInstruction = newGamestate.scene.narration[0]
   

@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidMarkSelection } from '../validate-response-data'
+import { validateMarkSelection } from '../validate-response-data'
 
 export const priest = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
@@ -17,11 +17,11 @@ export const priest = (gamestate, title, prefix) => {
 
     if (prefix === 'priest') {
       if (card.player_original_id === 37 || (card.player_role_id === 37 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = priest_interaction(newGamestate, token, title)
+        interaction = priestInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_priest') {
       if (card.player_role_id === 37 && card.player_original_id === 1) {
-        interaction = priest_interaction(newGamestate, token, title)
+        interaction = priestInteraction(newGamestate, token, title)
       }
     }
 
@@ -34,7 +34,7 @@ export const priest = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const priest_interaction = (gamestate, token, title) => {
+export const priestInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGamestate.players, [token])
 
@@ -67,8 +67,8 @@ export const priest_interaction = (gamestate, token, title) => {
   })
 }
 
-export const priest_response = (gamestate, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+export const priestResponse = (gamestate, token, selected_mark_positions, title) => {
+  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 

@@ -1,7 +1,7 @@
 import { SCENE, CENTER_CARD_POSITIONS } from '../../constants'
 import { createNumberArray, formatOracleAnswer, formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getRandomItemFromArray, getRandomNumber, getSceneEndTime, isCurrentPlayerNumberEven, thinkRandomNumber } from '../../utils'
 import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../conditions'
-import { isValidAnswerSelection, isValidCardSelection } from '../validate-response-data'
+import { validateAnswerSelection, validateCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
 const randomOracleQuestions = [
@@ -161,8 +161,8 @@ export const oracle_question_raising = (gamestate, token, title) => {
   })
 }
 
-export const oracle_question_response = (gamestate, token, selected_answer, title) => {
-  if (!isValidAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+export const oracle_questionResponse = (gamestate, token, selected_answer, title) => {
+  if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 
@@ -394,8 +394,8 @@ export const oracle_answer_aftermath = (gamestate, token, title) => {
   return newGamestate
 }
 
-export const oracle_answer_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const oracle_answerResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 

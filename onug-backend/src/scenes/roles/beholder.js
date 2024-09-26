@@ -1,7 +1,7 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { formatPlayerIdentifier, getAllPlayerTokens, getAnySeerPlayerNumbersByRoleIds, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidAnswerSelection } from '../validate-response-data'
+import { validateAnswerSelection } from '../validate-response-data'
 
 export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
   const newGamestate = { ...gamestate }
@@ -25,7 +25,7 @@ export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppel
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 73 || (card.player_role_id === 73 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = beholder_interaction(newGamestate, token, title)
+      interaction = beholderInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -39,7 +39,7 @@ export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppel
 
 
 
-export const beholder_interaction = (gamestate, token, title) => {
+export const beholderInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   const seers = getAnySeerPlayerNumbersByRoleIds(newGamestate.players)
@@ -58,8 +58,8 @@ export const beholder_interaction = (gamestate, token, title) => {
   })
 }
 
-export const beholder_response = (gamestate, token, selected_answer, title) => {
-  if (!isValidAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+export const beholderResponse = (gamestate, token, selected_answer, title) => {
+  if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 

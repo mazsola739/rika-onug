@@ -2,7 +2,7 @@ import { COPY_PLAYER_IDS, SCENE, VOTE } from '../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, empathNumbers, getSceneEndTime, getPlayerNumbersWithMatchingTokens, addVote, getEmpathTokensByRoleIds, getDoppelgangerEmpathTokensByRoleIds, formatPlayerIdentifier, findMostVoted } from '../../utils'
 import { webSocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 const empathKeys = [
   'identifier_everyone_text',
@@ -63,7 +63,7 @@ export const empath = (gamestate, title, prefix) => {
       const isNotDoppelgangerEmpath = prefix === 'doppelganger_empath' && (card.player_role_id !== 20 && card.player_original_id === 1);
     
       if (isNotEmpath || isNotDoppelgangerEmpath) {
-        interaction = empath_interaction(newGamestate, token, title);
+        interaction = empathInteraction(newGamestate, token, title);
       }
     }
     
@@ -76,7 +76,7 @@ export const empath = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const empath_interaction = (gamestate, token, title) => {
+export const empathInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   let icon = 'empath'
@@ -147,8 +147,8 @@ export const empath_interaction = (gamestate, token, title) => {
   }
 }
 
-export const empath_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const empathResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 
@@ -190,7 +190,7 @@ export const empath_response = (gamestate, token, selected_card_positions, title
   return newGamestate
 }
 
-export const empath_vote = (gamestate, title, prefix) => {
+export const empathVote = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
   const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)  
@@ -204,11 +204,11 @@ export const empath_vote = (gamestate, title, prefix) => {
 
     if (prefix === 'empath') {
       if (card.player_original_id === 77 || (card.player_role_id === 77 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = empath_vote_result(newGamestate, token, title)
+        interaction = empathVoteResult(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_empath') {
       if (card.player_role_id === 77 && card.player_original_id === 1) {
-        interaction = empath_vote_result(newGamestate, token, title)
+        interaction = empathVoteResult(newGamestate, token, title)
       }
     }
 
@@ -221,7 +221,7 @@ export const empath_vote = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const empath_vote_result = (gamestate, token, title) => {
+export const empathVoteResult = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const icon = newGamestate.empath.icon

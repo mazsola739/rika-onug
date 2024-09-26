@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../constants'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const paranormalinvestigator = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +16,7 @@ export const paranormalinvestigator = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 23 || (card.player_role_id === 23 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = paranormalinvestigator_interaction(newGamestate, token, title)
+      interaction = paranormalinvestigatorInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -28,7 +28,7 @@ export const paranormalinvestigator = (gamestate, title) => {
   return newGamestate
 }
 
-export const paranormalinvestigator_interaction = (gamestate, token, title) => {
+export const paranormalinvestigatorInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGamestate.players, token)
 
@@ -46,8 +46,8 @@ export const paranormalinvestigator_interaction = (gamestate, token, title) => {
   })
 }
 
-export const paranormalinvestigator_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const paranormalinvestigatorResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

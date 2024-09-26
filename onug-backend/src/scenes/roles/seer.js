@@ -1,7 +1,7 @@
 import { CENTER_CARD_POSITIONS, COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const seer = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +16,7 @@ export const seer = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 9 || (card.player_role_id === 9 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = seer_interaction(newGamestate, token, title)
+      interaction = seerInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -28,7 +28,7 @@ export const seer = (gamestate, title) => {
   return newGamestate
 }
 
-export const seer_interaction = (gamestate, token, title) => {
+export const seerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGamestate.players, token)
@@ -45,8 +45,8 @@ export const seer_interaction = (gamestate, token, title) => {
   })
 }
 
-export const seer_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const seerResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
  

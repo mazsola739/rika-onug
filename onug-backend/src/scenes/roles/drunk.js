@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE, CENTER_CARD_POSITIONS } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const drunk = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +16,7 @@ export const drunk = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 2 || (card.player_role_id === 2 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = drunk_interaction(newGamestate, token, title)
+      interaction = drunkInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -28,7 +28,7 @@ export const drunk = (gamestate, title) => {
   return newGamestate
 }
 
-export const drunk_interaction = (gamestate, token, title) => {
+export const drunkInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   if (!newGamestate.players[token].shield) {
@@ -55,8 +55,8 @@ export const drunk_interaction = (gamestate, token, title) => {
   }
 }
 
-export const drunk_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const drunkResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../constants'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const flipper = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
@@ -17,11 +17,11 @@ export const flipper = (gamestate, title, prefix) => {
 
     if (prefix === 'flipper') {
       if (card.player_original_id === 59 || (card.player_role_id === 59 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = flipper_interaction(newGamestate, token, title)
+        interaction = flipperInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_flipper') {
       if (card.player_role_id === 59 && card.player_original_id === 1) {
-        interaction = flipper_interaction(newGamestate, token, title)
+        interaction = flipperInteraction(newGamestate, token, title)
       }
     }
 
@@ -34,7 +34,7 @@ export const flipper = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const flipper_interaction = (gamestate, token, title) => {
+export const flipperInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGamestate.players, token)
@@ -52,8 +52,8 @@ export const flipper_interaction = (gamestate, token, title) => {
 }
 
 //TODO better response message
-export const flipper_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const flipperResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

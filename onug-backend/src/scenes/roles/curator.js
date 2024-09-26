@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getSelectablePlayersWithNoArtifact, getRandomArtifact, getPlayerTokensByPlayerNumber, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const curator = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
@@ -17,11 +17,11 @@ export const curator = (gamestate, title, prefix) => {
 
     if (prefix === 'curator') {
       if (card.player_original_id === 20 || (card.player_role_id === 20 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = curator_interaction(newGamestate, token, title)
+        interaction = curatorInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_curator') {
       if (card.player_role_id === 20 && card.player_original_id === 1) {
-        interaction = curator_interaction(newGamestate, token, title)
+        interaction = curatorInteraction(newGamestate, token, title)
       }
     }
 
@@ -34,7 +34,7 @@ export const curator = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const curator_interaction = (gamestate, token, title) => {
+export const curatorInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
@@ -54,8 +54,8 @@ export const curator_interaction = (gamestate, token, title) => {
   })
 }
 
-export const curator_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const curatorResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

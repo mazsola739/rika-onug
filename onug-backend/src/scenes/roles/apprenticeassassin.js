@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { formatPlayerIdentifier, getAllPlayerTokens, getAssassinPlayerNumbersByRoleIds, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidMarkSelection } from '../validate-response-data'
+import { validateMarkSelection } from '../validate-response-data'
 
 export const apprenticeassassin = (gamestate, title, hasAssassin, prefix) => {
   const newGamestate = { ...gamestate }
@@ -17,11 +17,11 @@ export const apprenticeassassin = (gamestate, title, hasAssassin, prefix) => {
 
     if (prefix === 'apprenticeassassin') {
       if (card.player_original_id === 28 || (card.player_role_id === 28 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = apprenticeassassin_interaction(newGamestate, token, title)
+        interaction = apprenticeassassinInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_apprenticeassassin') {
       if (card.player_role_id === 28 && card.player_original_id === 1) {
-        interaction = apprenticeassassin_interaction(newGamestate, token, title)
+        interaction = apprenticeassassinInteraction(newGamestate, token, title)
       }
     }
 
@@ -34,7 +34,7 @@ export const apprenticeassassin = (gamestate, title, hasAssassin, prefix) => {
   return newGamestate
 }
 
-export const apprenticeassassin_interaction = (gamestate, token, title) => {
+export const apprenticeassassinInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const assassins = getAssassinPlayerNumbersByRoleIds(newGamestate.players)
@@ -69,8 +69,8 @@ export const apprenticeassassin_interaction = (gamestate, token, title) => {
   }
 }
 
-export const apprenticeassassin_response = (gamestate, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+export const apprenticeassassinResponse = (gamestate, token, selected_mark_positions, title) => {
+  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

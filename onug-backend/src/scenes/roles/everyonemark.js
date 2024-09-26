@@ -12,7 +12,7 @@ export const everyonemark = (gamestate, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    interaction = everyonemark_interaction(newGamestate, token, title)
+    interaction = everyonemarkInteraction(newGamestate, token, title)
 
     newGamestate.players[token].player_history[title].scene_title = title
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -24,7 +24,7 @@ export const everyonemark = (gamestate, title) => {
   return newGamestate
 }
 
-export const everyonemark_interaction = (gamestate, token, title) => {
+export const everyonemarkInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)

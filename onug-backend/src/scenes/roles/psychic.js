@@ -1,6 +1,6 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
 const randomPsychicInstructions = ['psychic_view1_text', 'psychic_view2_text']
@@ -35,11 +35,11 @@ export const psychic = (gamestate, title, prefix) => {
 
     if (prefix === 'psychic') {
       if (card.player_original_id === 51 || (card.player_role_id === 51 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = psychic_interaction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
+        interaction = psychicInteraction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
       }
     } else if (prefix === 'doppelganger_psychic') {
       if (card.player_role_id === 51 && card.player_original_id === 1) {
-        interaction = psychic_interaction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
+        interaction = psychicInteraction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
       }
     }
 
@@ -52,7 +52,7 @@ export const psychic = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const psychic_interaction = (gamestate, token, title, randomPsychicInstructions, psychicKeys) => {
+export const psychicInteraction = (gamestate, token, title, randomPsychicInstructions, psychicKeys) => {
   const newGamestate = { ...gamestate }
   
   const evenOrOdd = psychicKeys.replace('identifier_', '').replace('_text', '').replace('any', '')
@@ -73,8 +73,8 @@ export const psychic_interaction = (gamestate, token, title, randomPsychicInstru
   })
 }
 
-export const psychic_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const psychicResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

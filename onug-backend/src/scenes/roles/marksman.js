@@ -1,7 +1,7 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getMarksByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
+import { validateCardSelection, validateMarkSelection } from '../validate-response-data'
 
 export const marksman = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }
@@ -21,7 +21,7 @@ export const marksman = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 35 || (card.player_role_id === 35 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = marksman_interaction(newGamestate, token, title)
+      interaction = marksmanInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -33,7 +33,7 @@ export const marksman = (gamestate, title, hasDoppelganger) => {
   return newGamestate
 }
 
-export const marksman_interaction = (gamestate, token, title) => {
+export const marksmanInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGamestate.players, allPlayerTokens)
@@ -53,9 +53,9 @@ export const marksman_interaction = (gamestate, token, title) => {
   })
 }
 
-export const marksman_response = (gamestate, token, selected_card_positions = [], selected_mark_positions = [], title) => {
+export const marksmanResponse = (gamestate, token, selected_card_positions = [], selected_mark_positions = [], title) => {
   if (selected_card_positions && selected_card_positions.length > 0) {
-    if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+    if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
       return gamestate
     }
 
@@ -116,7 +116,7 @@ export const marksman_response = (gamestate, token, selected_card_positions = []
     return newGamestate
 
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
-    if (!isValidMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+    if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
       return gamestate
     }
 

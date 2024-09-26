@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerTokensByPlayerNumber, getSceneEndTime, getSelectableOtherPlayerNumbersWithNoShield } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const sentinel = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +16,7 @@ export const sentinel = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 25 || (card.player_role_id === 25 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = sentinel_interaction(newGamestate, token, title)
+      interaction = sentinelInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -28,7 +28,7 @@ export const sentinel = (gamestate, title) => {
   return newGamestate
 }
 
-export const sentinel_interaction = (gamestate, token, title) => {
+export const sentinelInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGamestate.players, token)
@@ -45,8 +45,8 @@ export const sentinel_interaction = (gamestate, token, title) => {
   })
 }
 
-export const sentinel_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const sentinelResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

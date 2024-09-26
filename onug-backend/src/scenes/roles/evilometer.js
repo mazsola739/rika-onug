@@ -21,7 +21,7 @@ export const evilometer = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 58 || (card.player_role_id === 58 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = evilometer_interaction(newGamestate, token, title)
+      interaction = evilometerInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -33,7 +33,7 @@ export const evilometer = (gamestate, title, hasDoppelganger) => {
   return newGamestate
 }
 
-export const evilometer_interaction = (gamestate, token, title) => {
+export const evilometerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const neighborIsSuperVillain = superVillainDetected(newGamestate.players, token)

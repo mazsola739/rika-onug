@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidMarkSelection } from '../validate-response-data'
+import { validateMarkSelection } from '../validate-response-data'
 
 export const cupid = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +16,7 @@ export const cupid = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 31 || (card.player_role_id === 31 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = cupid_interaction(newGamestate, token, title)
+      interaction = cupidInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -28,7 +28,7 @@ export const cupid = (gamestate, title) => {
   return newGamestate
 }
 
-export const cupid_interaction = (gamestate, token, title) => {
+export const cupidInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
@@ -46,8 +46,8 @@ export const cupid_interaction = (gamestate, token, title) => {
   })
 }
 
-export const cupid_response = (gamestate, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+export const cupidResponse = (gamestate, token, selected_mark_positions, title) => {
+  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

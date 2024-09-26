@@ -1,7 +1,7 @@
 import { SCENE, CENTER_CARD_POSITIONS } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 //TODO if oracle is oracle team
 export const copycat = (gamestate, title) => {
@@ -17,7 +17,7 @@ export const copycat = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 30) {
-      interaction = copycat_interaction(newGamestate, token, title)
+      interaction = copycatInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -29,7 +29,7 @@ export const copycat = (gamestate, title) => {
   return newGamestate
 }
 
-export const copycat_interaction = (gamestate, token, title) => {
+export const copycatInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   newGamestate.players[token].player_history[title] = {
@@ -44,8 +44,8 @@ export const copycat_interaction = (gamestate, token, title) => {
   })
 }
 
-export const copycat_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const copycatResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

@@ -1,7 +1,7 @@
 import { ALL_COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
+import { validateCardSelection } from '../validate-response-data'
 
 export const nostradamus = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +16,7 @@ export const nostradamus = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 80 || (card.player_role_id === 80 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = nostradamus_interaction(newGamestate, token, title)
+      interaction = nostradamusInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -28,7 +28,7 @@ export const nostradamus = (gamestate, title) => {
   return newGamestate
 }
 
-export const nostradamus_interaction = (gamestate, token, title) => {
+export const nostradamusInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGamestate.players, allPlayerTokens)
@@ -46,8 +46,8 @@ export const nostradamus_interaction = (gamestate, token, title) => {
   })
 }
 
-export const nostradamus_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const nostradamusResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
   

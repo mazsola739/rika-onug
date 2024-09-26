@@ -15,7 +15,7 @@ export const supervillains = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (ALL_SUPER_VILLAIN_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
-      interaction = supervillain_interaction(newGamestate, token, title)
+      interaction = supervillainInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -27,7 +27,7 @@ export const supervillains = (gamestate, title) => {
   return newGamestate
 }
 
-export const supervillain_interaction = (gamestate, token, title) => {
+export const supervillainInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const villains = getVillainPlayerNumbersByRoleIds(newGamestate.players)

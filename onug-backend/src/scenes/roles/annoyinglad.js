@@ -1,6 +1,6 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
-import { thing_interaction } from './thing'
+import { thingInteraction } from './thing'
 
 export const annoyinglad = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -15,7 +15,7 @@ export const annoyinglad = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 55 || (card.player_role_id === 55 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = thing_interaction(newGamestate, token, title)
+      interaction = thingInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })

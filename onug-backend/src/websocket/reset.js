@@ -1,6 +1,6 @@
 import { HYDRATE_ROOM } from '../constants'
 import { logError, logTrace } from '../log'
-import { validateRoom } from '../validator'
+import { validateRoom } from '../validators'
 import { upsertRoomState } from '../repository'
 import { broadcast } from './connections'
 

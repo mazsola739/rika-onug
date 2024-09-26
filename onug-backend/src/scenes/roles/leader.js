@@ -20,7 +20,7 @@ export const leader = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 48 || (card.player_role_id === 48 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = leader_interaction(newGamestate, token, title)
+      interaction = leaderInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -32,7 +32,7 @@ export const leader = (gamestate, title, hasDoppelganger) => {
   return newGamestate
 }
 
-export const leader_interaction = (gamestate, token, title) => {
+export const leaderInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const aliens = getAlienPlayerNumbersByRoleIds(newGamestate.players)
@@ -64,7 +64,7 @@ export const leader_zerbgroob = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 48 || (card.player_role_id === 48 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = leader_zerbgroob_interaction(newGamestate, token, title)
+      interaction = leader_zerbgroobInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -76,7 +76,7 @@ export const leader_zerbgroob = (gamestate, title) => {
   return newGamestate
 }
 
-export const leader_zerbgroob_interaction = (gamestate, token, title) => {
+export const leader_zerbgroobInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const zerb = getZerbPlayerNumberByRoleIds(newGamestate.players)

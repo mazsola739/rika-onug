@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
+import { validateCardSelection, validateMarkSelection } from '../validate-response-data'
 
 export const gremlin = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
@@ -17,11 +17,11 @@ export const gremlin = (gamestate, title, prefix) => {
 
     if (prefix === 'gremlin') {
       if (card.player_original_id === 33 || (card.player_role_id === 33 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = gremlin_interaction(newGamestate, token, title)
+        interaction = gremlinInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_gremlin') {
       if (card.player_role_id === 33 && card.player_original_id === 1) {
-        interaction = gremlin_interaction(newGamestate, token, title)
+        interaction = gremlinInteraction(newGamestate, token, title)
       }
     }
 
@@ -34,7 +34,7 @@ export const gremlin = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const gremlin_interaction = (gamestate, token, title) => {
+export const gremlinInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
@@ -55,9 +55,9 @@ export const gremlin_interaction = (gamestate, token, title) => {
   })
 }
 
-export const gremlin_response = (gamestate, token, selected_card_positions, selected_mark_positions, title) => {
+export const gremlinResponse = (gamestate, token, selected_card_positions, selected_mark_positions, title) => {
   if (selected_card_positions && selected_card_positions.length > 0) {
-    if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+    if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
       return gamestate
     }
 
@@ -98,7 +98,7 @@ export const gremlin_response = (gamestate, token, selected_card_positions, sele
     return newGamestate
 
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
-    if (!isValidMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+    if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
       return gamestate
     }
 

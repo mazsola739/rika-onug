@@ -1,8 +1,8 @@
 import { CENTER_CARD_POSITIONS, COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getRandomItemFromArray, getAllPlayerTokens, getSceneEndTime, getAnyEvenOrOddPlayers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getSelectableOtherPlayerNumbersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getCardIdsByPlayerNumbers } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
-import { isValidCardSelection } from '../validate-response-data'
-import { villageidiot_interaction } from './villageidiot'
+import { validateCardSelection } from '../validate-response-data'
+import { villageidiotInteraction } from './villageidiot'
 
 const randomRascalInstructions = [
   'rascal_idiot_text',
@@ -79,9 +79,9 @@ export const rascal = (gamestate, title, prefix) => {
     if ((prefix === 'rascal' && (card.player_original_id === 52 || (card.player_role_id === 52 && COPY_PLAYER_IDS.includes(card.player_original_id)))) ||
       (prefix === 'doppelganger_rascal' && card.player_role_id === 52 && card.player_original_id === 1)) {
       if (randomRascalInstruction === "rascal_idiot_text") {
-        interaction = villageidiot_interaction(newGamestate, token, title)
+        interaction = villageidiotInteraction(newGamestate, token, title)
       } else {
-        interaction = rascal_interaction(newGamestate, token, title)
+        interaction = rascalInteraction(newGamestate, token, title)
       }
     }
 
@@ -94,7 +94,7 @@ export const rascal = (gamestate, title, prefix) => {
   return newGamestate
 }
 
-export const rascal_interaction = (gamestate, token, title) => {
+export const rascalInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   
   let privateMessage
@@ -199,8 +199,8 @@ export const rascal_interaction = (gamestate, token, title) => {
   })
 }
 
-export const rascal_response = (gamestate, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const rascalResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 

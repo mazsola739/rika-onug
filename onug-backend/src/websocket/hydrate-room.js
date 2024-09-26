@@ -1,6 +1,6 @@
 import { HYDRATE_ROOM } from '../constants'
 import { logTrace } from '../log'
-import { validateRoom } from '../validator'
+import { validateRoom } from '../validators'
 
 export const hydrateRoom = async (ws, message) => {
   const { room_id } = message

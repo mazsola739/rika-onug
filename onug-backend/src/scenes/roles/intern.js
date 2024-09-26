@@ -20,7 +20,7 @@ export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 62 || (card.player_role_id === 62 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = intern_interaction(newGamestate, token, title)
+      interaction = internInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -32,7 +32,7 @@ export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
   return newGamestate
 }
 
-export const intern_interaction = (gamestate, token, title) => {
+export const internInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const madscientist = getMadScientistPlayerNumberByRoleIds(newGamestate.players)
   const playerCard = newGamestate.players[token]?.card
