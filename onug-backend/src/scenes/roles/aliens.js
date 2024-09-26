@@ -1,4 +1,3 @@
-//@ts-check
 import { alienIds, allCopyPlayerIds, MESSAGE, SCENE, VOTE } from '../../constant'
 import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime, getAlienPlayerNumbersByRoleIds, getAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getNeighborByPosition, moveCards, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getCardIdsByPositions, addVote, getPlayerTokensByPlayerNumber, findMostVoted } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'

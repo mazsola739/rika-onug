@@ -1,4 +1,4 @@
-//@ts-check
+
 //TODO actual scene (timestamp)
 export const isValidCardSelection = (selected_card_positions, player_history, title) => {
   if (selected_card_positions.length === 0 || !selected_card_positions.every(position => player_history[title]?.selectable_cards.includes(position))) {

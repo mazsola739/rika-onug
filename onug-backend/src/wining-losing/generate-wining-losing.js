@@ -1,4 +1,3 @@
-//@ts-check
 import { getPlayerNumberWithMatchingToken } from "../utils"
 
 export const generateWiningLosing = (gameState, token) => {

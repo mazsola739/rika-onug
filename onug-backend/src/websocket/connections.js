@@ -1,4 +1,3 @@
-//@ts-check
 import { roomNames } from '../constant'
 import { logDebug, logTrace } from '../log'
 

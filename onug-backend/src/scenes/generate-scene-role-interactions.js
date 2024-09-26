@@ -1,4 +1,3 @@
-//@ts-check
 import { getPlayerNumberWithMatchingToken } from "../utils"
 
 const getKeys = array => array.map(obj => Object.keys(obj)[0])

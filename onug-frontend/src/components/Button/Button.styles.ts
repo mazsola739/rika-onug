@@ -23,8 +23,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
   cursor: pointer;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 500;
-  padding: 0;
-  padding-top: 2px;
+  padding: 2px 0 0 0;
   width: 130px;
   height: 35px;
   transition: 0.75s;

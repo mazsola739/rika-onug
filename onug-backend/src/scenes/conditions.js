@@ -1,4 +1,3 @@
-//@ts-check
 import { vampireIds, alienIds, groobzerbIds, supervillainIds, werewolvesIds, masonIds, goodGuyIds, badGuysIds, doppelgangerInstantActionsIds, seerIds, hasMarkIds, wolfIds } from '../constant'
 
 export const hasEpicBattle = (selected_cards) => {

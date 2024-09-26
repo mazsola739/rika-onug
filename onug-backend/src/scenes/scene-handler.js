@@ -1,4 +1,3 @@
-//@ts-check
 import * as roles from './roles'
 import { logInfo } from '../log'
 import * as conditions from './conditions'
@@ -7,6 +6,7 @@ import * as conditions from './conditions'
 //TODO delete 
 //! TODO if must action, random selecting?
 //? TODO better private message, private message generator?
+
 export const sceneHandler = gameState => {
   const newGameState = { ...gameState }
   const scene_title = newGameState.actual_scene.scene_title
@@ -14,13 +14,12 @@ export const sceneHandler = gameState => {
   const total_players = newGameState.total_players
 
   switch (scene_title) {
-    //TODO fix epic battle
-    /*     case "EPIC_BATTLE": 
-          if (conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players)) {
-            newGameState.actual_scene.started = true
-            return roles.epicbattle(newGameState, scene_title, conditions.hasEasterEgg(selected_cards, total_players), conditions.hasEpicBattle(selected_cards), total_players, !conditions.hasGoodGuys(selected_cards), !conditions.hasBadGuys(selected_cards)) 
-          }
-          break */
+/*     case "EPIC_BATTLE":
+      if (conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players)) {
+        newGameState.actual_scene.started = true
+        return roles.epicbattle(newGameState, scene_title, conditions.hasEasterEgg(selected_cards, total_players), conditions.hasEpicBattle(selected_cards), total_players, !conditions.hasGoodGuys(selected_cards), !conditions.hasBadGuys(selected_cards))
+      }
+      break */
 
     case "ORACLE_QUESTION":
       if (conditions.hasOracle(selected_cards)) {

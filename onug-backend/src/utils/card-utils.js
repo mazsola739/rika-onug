@@ -1,4 +1,3 @@
-//@ts-check
 import { alphaWolfId, copycatId, mirrorManId, supervillainIdsToCheck, temptressId, wolfIdsToCheck } from '../constant'
 import cards from '../data/cards.json'
 

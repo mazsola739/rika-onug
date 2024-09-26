@@ -1,4 +1,3 @@
-//@ts-check
 import roomsData from '../data/rooms.json'
 import { upsertRoomState, readGameState } from '../repository'
 import { logTrace } from '../log'

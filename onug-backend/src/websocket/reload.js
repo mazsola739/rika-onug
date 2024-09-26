@@ -1,4 +1,3 @@
-//@ts-check
 import { logError, logTrace } from '../log'
 import { websocketServerConnectionsPerRoom } from './connections'
 

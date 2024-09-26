@@ -1,4 +1,3 @@
-//@ts-check
 import { SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { copycat_interaction } from './copycat'

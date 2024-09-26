@@ -1,4 +1,3 @@
-//@ts-check
 import { copyPlayerIds, SCENE, VOTE } from '../../constant'
 import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, empathNumbers, getSceneEndTime, getPlayerNumbersWithMatchingTokens, addVote, getEmpathTokensByRoleIds, getDoppelgangerEmpathTokensByRoleIds, formatPlayerIdentifier, findMostVoted } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'

@@ -1,4 +1,3 @@
-//@ts-check
 import { writeFileSync } from 'fs'
 import { readFile, unlink } from 'fs/promises'
 import { logError, logTrace, logErrorWithStack } from '../log'
@@ -8,7 +7,7 @@ import { roomNames } from '../constant'
 
 export const upsertRoomState = async (state) => {
   logTrace('upsertRoomState')
-  const filePath = `${__dirname}/../database/room_${state.room_id}_gamestate.json`
+  const filePath = `${__dirname}/../gameState/room_${state.room_id}_gamestate.json`
   const roomState = JSON.stringify(state, null, 4)
   const options = { flag: 'w' }
   try {
@@ -21,7 +20,7 @@ export const upsertRoomState = async (state) => {
 
 export const readGameState = async (room_id) => {
   logTrace('read game state')
-  const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
+  const filePath = `${__dirname}/../gameState/room_${room_id}_gamestate.json`
   const options = { encoding: 'utf8' }
   try {
     const data = await readFile(filePath, options)
@@ -40,7 +39,7 @@ export const readAllGameStates = async () => {
   const gameStates = {}
   for (let i = 0; i < roomNames.length; i++) {
     let room_id = roomNames[i]
-    const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
+    const filePath = `${__dirname}/../gameState/room_${room_id}_gamestate.json`
     const options = { encoding: 'utf8' }
     try {
       const rawData = await readFile(filePath, options)
@@ -56,7 +55,7 @@ export const readAllGameStates = async () => {
 export const readGameStateByRoomId = async (room_id) => {
   logTrace('read game state by room_id')
   const gameState = {}
-  const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
+  const filePath = `${__dirname}/../gameState/room_${room_id}_gamestate.json`
   const options = { encoding: 'utf8' }
   try {
     const rawData = await readFile(filePath, options)
@@ -73,7 +72,7 @@ export const deleteAllGameStates = async () => {
   logTrace('delete all game states')
   for (let i = 0; i < roomNames.length; i++) {
     let room_id = roomNames[i]
-    const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
+    const filePath = `${__dirname}/../gameState/room_${room_id}_gamestate.json`
     try {
       await unlink(filePath)
     } catch (error) {
@@ -85,7 +84,7 @@ export const deleteAllGameStates = async () => {
 
 export const deleteGameStateByRoomId = async (room_id) => {
   logTrace('delete game state by room_id')
-  const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
+  const filePath = `${__dirname}/../gameState/room_${room_id}_gamestate.json`
   try {
     await unlink(filePath)
   } catch (error) {
@@ -100,7 +99,7 @@ export const deleteAllPlayers = async () => {
   const gameStates = {}
   for (let i = 0; i < roomNames.length; i++) {
     let room_id = roomNames[i]
-    const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
+    const filePath = `${__dirname}/../gameState/room_${room_id}_gamestate.json`
     const options = { encoding: 'utf8' }
     try {
       const rawData = await readFile(filePath, options)
@@ -129,7 +128,7 @@ export const deletePlayerByToken = async (token) => {
 
   for (let i = 0; i < roomNames.length; i++) {
     let room_id = roomNames[i]
-    const filePath = `${__dirname}/../database/room_${room_id}_gamestate.json`
+    const filePath = `${__dirname}/../gameState/room_${room_id}_gamestate.json`
     const options = { encoding: 'utf8' }
 
     try {

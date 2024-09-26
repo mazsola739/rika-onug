@@ -1,9 +1,9 @@
-import { Header } from 'components'
+import { Filter, Header } from 'components'
 import { observer } from 'mobx-react-lite'
 import { roomStore, gamePlayStore } from 'store'
-import { StyledRuleInfo, RuleImage, RuleInfoDescription, Hello } from './Room.styles'
+import { StyledInfo, RuleInfo, RuleImage, RuleInfoDescription, Logo, Banner, User } from './Room.styles'
 
-const RuleInfo: React.FC = observer(() => {
+const Info: React.FC = observer(() => {
   const detailedCardInfo = roomStore.getDetailedCardInfo()
 
   const { isGameStopped } = gamePlayStore
@@ -18,14 +18,14 @@ const RuleInfo: React.FC = observer(() => {
       : ''
 
   return (
-    <StyledRuleInfo>
+    <StyledInfo>
       {isGameStopped && displayInfo && (
-        <>
+        <RuleInfo>
           <RuleImage src={imgSrc} alt="info" />
           <RuleInfoDescription>{displayInfo}</RuleInfoDescription>
-        </>
+        </RuleInfo>
       )}
-    </StyledRuleInfo>
+    </StyledInfo>
   )
 })
 
@@ -36,10 +36,16 @@ export const RoomHeader: React.FC = observer(() => {
 
   return (
     <Header>
-      <Hello>
-        {player_name}, welcome in {room}! 🦄
-      </Hello>
-      <RuleInfo />
+      <Logo backgroundImage={room_id}>
+        Welcome in {room}!
+      </Logo>
+      <Banner>
+        <Info />
+        <Filter />
+      </Banner>
+      <User>
+        Itt lesz a user avatar
+      </User>
     </Header>
   )
 })

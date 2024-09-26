@@ -1,4 +1,3 @@
-
 import { alienIds, masonIds, supervillainIds, vampireIds, wolfIds, werewolvesIds } from '../constant'
 import artifacts from '../data/artifacts.json'
 import _ from 'lodash'

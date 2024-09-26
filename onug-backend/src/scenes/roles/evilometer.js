@@ -1,4 +1,3 @@
-//@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getPlayerNeighborsByToken, getSceneEndTime, superVillainDetected } from '../../utils'
 import { generateRoleInteraction } from './../generate-scene-role-interactions';

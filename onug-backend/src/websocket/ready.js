@@ -1,4 +1,3 @@
-//@ts-check
 import { HYDRATE_READY } from '../constant'
 import { logDebug, logError } from '../log'
 import { readGameState, upsertRoomState } from '../repository'

@@ -1,4 +1,3 @@
-//@ts-check
 import { HYDRATE_ROOM } from '../constant'
 import { logTrace } from '../log'
 import { validateRoom } from '../validator'

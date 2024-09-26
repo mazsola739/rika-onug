@@ -1,4 +1,3 @@
-//@ts-check
 import { vampireIds, allCopyPlayerIds, SCENE, VOTE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, addVote, findMostVoted, formatPlayerIdentifier, removeVote, getPlayerTokensByPlayerNumber } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'

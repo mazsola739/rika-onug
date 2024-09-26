@@ -1,4 +1,3 @@
-//@ts-check
 import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
 import { getRandomItemFromArray, getAllPlayerTokens, getSceneEndTime, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, getAnyOtherPlayersByToken, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier } from '../../utils'
 import { isValidCardSelection } from '../validate-response-data'

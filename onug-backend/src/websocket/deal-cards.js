@@ -1,4 +1,3 @@
-//@ts-check
 import { DEAL, REDIRECT } from '../constant'
 import { logTrace } from '../log'
 import { validateRoom } from '../validator'

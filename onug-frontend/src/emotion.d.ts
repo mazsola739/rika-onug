@@ -1,5 +1,4 @@
 import '@emotion/react'
-
 import { ThemeObject } from 'types'
 
 declare module '@emotion/react' {

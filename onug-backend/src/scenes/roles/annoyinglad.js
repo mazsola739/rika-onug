@@ -1,4 +1,3 @@
-//@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { thing_interaction } from './thing'

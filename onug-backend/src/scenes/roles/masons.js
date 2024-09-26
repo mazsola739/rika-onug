@@ -1,4 +1,3 @@
-//@ts-check
 import { masonIds, allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getMasonPlayerNumbersByRoleIds, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'

@@ -1,4 +1,3 @@
-//@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
 import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumberWithMatchingToken, getSceneEndTime, getTannerPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'

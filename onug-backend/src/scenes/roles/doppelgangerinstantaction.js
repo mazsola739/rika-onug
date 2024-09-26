@@ -1,4 +1,3 @@
-//@ts-check
 import { SCENE, doppelgangerInstantActionsIds } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { alphawolf_interaction, alphawolf_response } from './alphawolf'

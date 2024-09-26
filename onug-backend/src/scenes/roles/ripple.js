@@ -1,4 +1,3 @@
-//@ts-check
 import { getRandomItemFromArray, pickRandomOnePlayer, pickRandomTwoPlayers, pickRandomUpToThreePlayers, pickRandomTwoPlayersArray } from '../../utils'
 
 

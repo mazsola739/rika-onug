@@ -1,4 +1,3 @@
-//@ts-check
 import cards from '../data/cards.json'
 import { getCenterCardPositionByIndex, stubbedCards } from '../stub/populate-deal'
 import { logInfo } from '../log'

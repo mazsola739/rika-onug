@@ -1,9 +1,10 @@
 import styled from '@emotion/styled'
 
-export const StyledCardList = styled.div`
+export const StyledCardList = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 `
 
 export const CardListTitle = styled.p`
@@ -13,9 +14,9 @@ export const CardListTitle = styled.p`
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 1px;
-  margin: 10px 0 10px 0;
   text-align: center;
   text-transform: uppercase;
+  margin: 0;
 `
 
 export const CardListGrid = styled.div`

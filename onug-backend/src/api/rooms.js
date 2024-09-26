@@ -1,4 +1,3 @@
-//@ts-check
 import roomsData from '../data/rooms.json'
 import { logTrace, logErrorWithStack } from '../log'
 

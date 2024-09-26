@@ -1,5 +1,5 @@
 {
     "verbose": true,
-    "ignore": ["*.test.js", "**/fixtures/**", "**/logs/**", "**/database/**"],
+    "ignore": ["*.test.js", "**/fixtures/**", "**/logs/**", "**/gameState/**"],
     "delay": 2500
   }

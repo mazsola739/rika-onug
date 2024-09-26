@@ -1,4 +1,3 @@
-//@ts-check
 import { SCENE } from '../../constant'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils'
 

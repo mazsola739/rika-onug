@@ -1,4 +1,3 @@
-//@ts-check
 import { SCENE, centerCardPositions } from '../../constant'
 import { createNumberArray, formatOracleAnswer, formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getRandomItemFromArray, getRandomNumber, getSceneEndTime, isCurrentPlayerNumberEven, thinkRandomNumber } from '../../utils'
 import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../conditions'

@@ -2,7 +2,6 @@ import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react-swc'
 import svgr from 'vite-plugin-svgr'
 import viteTsconfigPaths from 'vite-tsconfig-paths'
-
 import path from 'path'
 import { readdirSync } from 'fs'
 

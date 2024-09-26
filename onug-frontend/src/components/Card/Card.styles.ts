@@ -29,6 +29,13 @@ export const CardImage = styled.img<{ isSelected?: boolean }>`
   &:hover {
     transition: 0.75s;
     transform: scale(1.1);
+    opacity: 1;
+
+    + span {
+      color: rgba(255, 255, 255, 1);
+      opacity: 1;
+      text-shadow: 2px 2px 2px black;
+    }
   }
 `
 
@@ -38,7 +45,7 @@ export const CardName = styled.span<StyledCardProps>`
   font-family: 'Josefin Sans', sans-serif;
   text-shadow: ${({ isSelected }) =>
     isSelected ? '2px 2px 2px black' : ''};
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 500;
   left: 50%;
   transition: 0.75s;

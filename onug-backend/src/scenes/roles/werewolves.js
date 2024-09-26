@@ -1,4 +1,3 @@
-//@ts-check
 import { werewolvesIds, allCopyPlayerIds, SCENE, centerCardPositions } from '../../constant'
 import { getAllPlayerTokens, getWerewolfPlayerNumbersByRoleIds, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'

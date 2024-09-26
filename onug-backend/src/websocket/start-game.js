@@ -1,4 +1,3 @@
-//@ts-check
 import { logTrace } from '../log'
 import { validateRoom } from '../validator'
 import { upsertRoomState } from '../repository'

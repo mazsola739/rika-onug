@@ -1,4 +1,3 @@
-//@ts-check
 import { logTrace, logErrorWithStack } from '../log'
 
 const initStubbedCards = {

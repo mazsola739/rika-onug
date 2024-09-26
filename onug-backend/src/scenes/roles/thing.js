@@ -1,4 +1,3 @@
-//@ts-check
 import { copyPlayerIds, SCENE, MESSAGE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNeighborsByToken, getPlayerTokensByPlayerNumber, formatPlayerIdentifier } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'

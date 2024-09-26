@@ -1,4 +1,3 @@
-//@ts-check
 import { upsertRoomState, readGameState } from '../repository'
 import { logTrace } from '../log'
 import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant'

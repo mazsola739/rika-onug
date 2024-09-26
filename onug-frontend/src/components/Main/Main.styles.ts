@@ -2,8 +2,8 @@ import styled from '@emotion/styled'
 
 export const StyledMain = styled.main`
   position: absolute;
-  top: 102px;
-  bottom: 95px;
+  top: 160px;
+  bottom: 100px;
   overflow-x: hidden;
   overflow-y: auto;
   width: 100%;

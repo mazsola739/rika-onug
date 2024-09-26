@@ -1,4 +1,3 @@
-//@ts-check
 import { groobzerbIds, allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getZerbPlayerNumberByRoleIds, getGroobPlayerNumberByRoleIds, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'

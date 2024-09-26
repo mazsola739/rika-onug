@@ -1,10 +1,10 @@
-import { Main, Filter, CardList } from 'components'
+import { Main, CardList, Nav } from 'components'
 import { ARRIVE_ROOM, STAGES, HYDRATE_ROOM, REDIRECT, LEAVE_ROOM, TEAM } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { wsStore, deckStore, roomStore } from 'store'
-import { StyledRoom, RoomCardList } from './Room.styles'
+import { StyledRoom, RoomCardList, Users } from './Room.styles'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
 
@@ -69,16 +69,19 @@ export const Room: React.FC = observer(() => {
     [roomStore, teamArray]
   )
 
+  const anchorList = orderedTeams.map(team => roomStore.getTeamName(roomStore.getSortedCardsByTeam(team), team).toUpperCase())
+
   return (
     <StyledRoom>
       <RoomHeader />
       <Main>
-        <Filter />
+        <Nav anchorList={anchorList} />
         <RoomCardList>
           {orderedTeams.map((teamName, index) => (
             <CardList key={index} team={teamName} cards={roomStore.getSortedCardsByTeam(teamName)} />
           ))}
         </RoomCardList>
+        <Users />
       </Main>
       <RoomFooter />
     </StyledRoom>

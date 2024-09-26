@@ -1,7 +1,4 @@
-//@ts-check
 import express from 'express'
-const router = express.Router()
-
 import { checkGameStates } from './check-game-states'
 import { checkGameStateByRoomId } from './check-game-state-by-room-id'
 import { reInitAllGameStates } from './re-init-all-game-states'
@@ -15,6 +12,8 @@ import { broadCastToAllInRoom } from './broadcast-to-all-in-room'
 import { sendMessageToPlayer } from './send-message-to-player'
 import { metaListOnugEnv } from './meta-list-onug-env'
 import { metaDeleteAllOldLogFiles } from './meta-delete-all-old-log-files'
+
+const router = express.Router()
 
 // gamestates
 router.get('/check-game-states', checkGameStates)

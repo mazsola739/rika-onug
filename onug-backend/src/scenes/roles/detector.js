@@ -1,4 +1,3 @@
-//@ts-check
 import { allCopyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { seer_interaction } from './seer'

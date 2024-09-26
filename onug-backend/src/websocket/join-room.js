@@ -1,4 +1,3 @@
-//@ts-check
 import { JOIN_ROOM } from '../constant'
 import roomsData from '../data/rooms.json'
 import { validateRoom } from '../validator'

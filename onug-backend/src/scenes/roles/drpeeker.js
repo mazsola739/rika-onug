@@ -1,4 +1,3 @@
-//@ts-check
 import { copyPlayerIds, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { mysticwolf_interaction } from './mysticwolf'

@@ -35,7 +35,7 @@ for everything related to validating players, cards, gamestates, etc...
 other useful utility functions separated by domain (card, player, date-time, etc...)
 
 ### repository
-for everything related to database management, every database update, delete, read should be called from this layer. Currently handling the gamestate altogether.
+for everything related to gameState management, every gameState update, delete, read should be called from this layer. Currently handling the gamestate altogether.
 
 ### log
 logging utility, handles console logs and writing to log files (under onug-backend/logs)
@@ -43,7 +43,7 @@ logging utility, handles console logs and writing to log files (under onug-backe
 ### god
 admin rooter - for admin functionalities for rooms, ws connections, etc...
 
-### database
+### gameState
 local json based database for gamestates
 
 ### data

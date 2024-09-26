@@ -49,7 +49,7 @@ export const StyledGameTableHeader = styled.div`
 
 export const PlayerInfo = styled.div`
   width: 140px;
-  height: 102px;
+  height: 140px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;

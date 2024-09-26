@@ -1,4 +1,3 @@
-//@ts-check
 import { logTrace } from '../log'
 
 const gameStates = {}

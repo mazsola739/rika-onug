@@ -1,4 +1,3 @@
-//@ts-check
 import { HYDRATE_GAME_VOTE, REDIRECT } from '../constant'
 import { logTrace } from '../log'
 import { readGameState } from '../repository'

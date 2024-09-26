@@ -2,8 +2,6 @@ import styled from '@emotion/styled'
 import { FilterButtonProps } from './Filter.types'
 
 export const StyledFilter = styled.div`
-  position: sticky;
-  top: 0;
   height: 100%;
 `
 
@@ -19,30 +17,30 @@ export const StyledFilterButton = styled.div<FilterButtonProps>`
   border: ${({ isSelected }) =>
     isSelected ? '1px solid white' : '1px solid transparent'};
   color: ${({ isSelected }) =>
-    isSelected ? 'rgba(255,255,255, 1)' : 'rgba(255,255,255, 0.4)'};
+    isSelected ? 'rgba(234,239,44, 1)' : 'rgba(255,255,255, 0.4)'};
   text-shadow: ${({ isSelected }) =>
-    isSelected ? '2px 2px 2px black' : ''};  
+    isSelected ? '-1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black' : ''};
   cursor: pointer;
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 16px;
-  height: 50px;
+  font-size: 20px;
   justify-content: center;
   margin: auto;
   opacity: ${({ isSelected }) => (isSelected ? '0.8' : '0.5')};
   display: flex;
-  width: 130px;
   transition: 0.75s;
+  height: 50px;
+  width: 100%;
 
   &:hover:not(:disabled) {
     transition: 0.75s;
+    color: white;
     opacity: 1;
   }
 `
 
 export const StyledFilterButtons = styled.div`
   display: flex;
-  flex-direction: column;
-  height: 100%;
   justify-content: space-between;
-  padding: 8px 10px;
+  gap: 10px;
+  width: 100%; 
 `
