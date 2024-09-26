@@ -1,4 +1,4 @@
-import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
+import { CENTER_CARD_POSITIONS, COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getRandomItemFromArray, getAllPlayerTokens, getSceneEndTime, getAnyEvenOrOddPlayers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getSelectableOtherPlayerNumbersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getCardIdsByPlayerNumbers } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -76,7 +76,7 @@ export const rascal = (gameState, title, prefix) => {
     let interaction = {}
     const card = newGameState.players[token].card
 
-    if ((prefix === 'rascal' && (card.player_original_id === 52 || (card.player_role_id === 52 && copyPlayerIds.includes(card.player_original_id)))) ||
+    if ((prefix === 'rascal' && (card.player_original_id === 52 || (card.player_role_id === 52 && COPY_PLAYER_IDS.includes(card.player_original_id)))) ||
       (prefix === 'doppelganger_rascal' && card.player_role_id === 52 && card.player_original_id === 1)) {
       if (randomRascalInstruction === "rascal_idiot_text") {
         interaction = villageidiot_interaction(newGameState, token, title)
@@ -170,15 +170,15 @@ export const rascal_interaction = (gameState, token, title) => {
         icon: 'shielded',
       })
     } else {
-      selectableCards = rascalKey === 'identifier_center_text' ? centerCardPositions : getSelectableOtherPlayerNumbersWithNoShield(selectableOnePlayers, token)
+      selectableCards = rascalKey === 'identifier_center_text' ? CENTER_CARD_POSITIONS : getSelectableOtherPlayerNumbersWithNoShield(selectableOnePlayers, token)
       privateMessage = [selectableCards.length === 0 ? 'interaction_no_selectable_player' : randomRascalInstruction === 'rascal_drunk_text' ? 'interaction_must_one_any_other' : 'interaction_may_one_any_other']
     }
   } else {
-    selectableCards = rascalKey === 'identifier_center_text' ? centerCardPositions : getSelectablePlayersWithNoShield(selectableOnePlayers)
+    selectableCards = rascalKey === 'identifier_center_text' ? CENTER_CARD_POSITIONS : getSelectablePlayersWithNoShield(selectableOnePlayers)
     privateMessage = [selectableCards.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any_other']
   }
 
-  if (selectableCards === centerCardPositions) {
+  if (selectableCards === CENTER_CARD_POSITIONS) {
     selectableLimit = { player: 0, center: limit  }
   } else {
     selectableLimit = { player: limit , center: 0 }
@@ -266,7 +266,7 @@ export const rascal_response = (gameState, token, selected_card_positions, title
         interaction = generateRoleInteraction(newGameState, token, {
           private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
           icon: 'prank',
-          selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
+          selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 1, center: 0 } },
           showCards,
           uniqueInformations: { prank: [selected_card_positions[0]], witch_answer: true },
         })

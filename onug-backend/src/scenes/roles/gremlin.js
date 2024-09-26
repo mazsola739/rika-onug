@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
@@ -16,7 +16,7 @@ export const gremlin = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'gremlin') {
-      if (card.player_original_id === 33 || (card.player_role_id === 33 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 33 || (card.player_role_id === 33 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = gremlin_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_gremlin') {

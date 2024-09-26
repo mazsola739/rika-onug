@@ -1,4 +1,4 @@
-import { vampireIds, allCopyPlayerIds, SCENE, VOTE } from '../../constant'
+import { ALL_VAMPIRE_IDS, ALL_COPY_PLAYER_IDS, SCENE, VOTE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, addVote, findMostVoted, formatPlayerIdentifier, removeVote, getPlayerTokensByPlayerNumber } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
@@ -16,7 +16,7 @@ export const vampires = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (vampireIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
+    if (ALL_VAMPIRE_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
       interaction = vampires_interaction(newGameState, token, title)
     }
 
@@ -105,7 +105,7 @@ export const vampires_vote = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (vampireIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
+    if (ALL_VAMPIRE_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
       interaction = vampires_vote_result(newGameState, token, title)
     }
 

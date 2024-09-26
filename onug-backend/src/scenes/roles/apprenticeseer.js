@@ -1,4 +1,4 @@
-import { allCopyPlayerIds, SCENE, centerCardPositions } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE, CENTER_CARD_POSITIONS } from '../../constant'
 import { formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -15,7 +15,7 @@ export const apprenticeseer = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 18 || (card.player_role_id === 18 && allCopyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 18 || (card.player_role_id === 18 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = apprenticeseer_interaction(newGameState, token, title)
     }
 
@@ -33,13 +33,13 @@ export const apprenticeseer_interaction = (gameState, token, title) => {
 
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],
-    selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 },
+    selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: 1 },
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_center'],
     icon: 'seer',
-    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 } },
+    selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: 1 } },
   })
 }
 

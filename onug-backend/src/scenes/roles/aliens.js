@@ -1,4 +1,4 @@
-import { alienIds, allCopyPlayerIds, MESSAGE, SCENE, VOTE } from '../../constant'
+import { ALL_ALIEN_IDS, ALL_COPY_PLAYER_IDS, MESSAGE, SCENE, VOTE } from '../../constant'
 import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime, getAlienPlayerNumbersByRoleIds, getAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getNeighborByPosition, moveCards, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getCardIdsByPositions, addVote, getPlayerTokensByPlayerNumber, findMostVoted } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
@@ -65,7 +65,7 @@ export const aliens = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (alienIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
+    if (ALL_ALIEN_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
       interaction = aliens_interaction(newGameState, token, title)
     }
 
@@ -266,7 +266,7 @@ export const aliens_vote = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (alienIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
+    if (ALL_ALIEN_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
       interaction = aliens_vote_result(newGameState, token, title)
     }
 

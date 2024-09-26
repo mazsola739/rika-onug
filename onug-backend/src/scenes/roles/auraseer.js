@@ -1,4 +1,4 @@
-import { allCopyPlayerIds, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithCardOrMarkActionTrue, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
@@ -19,7 +19,7 @@ export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 72 || (card.player_role_id === 72 && allCopyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 72 || (card.player_role_id === 72 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = auraseer_interaction(newGameState, token, title)
     }
 

@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerTokensByPlayerNumber, getSceneEndTime, getSelectableOtherPlayerNumbersWithNoShield } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -15,7 +15,7 @@ export const sentinel = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 25 || (card.player_role_id === 25 && copyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 25 || (card.player_role_id === 25 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = sentinel_interaction(newGameState, token, title)
     }
 

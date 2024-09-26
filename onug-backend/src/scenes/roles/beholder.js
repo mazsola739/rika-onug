@@ -1,4 +1,4 @@
-import { allCopyPlayerIds, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { formatPlayerIdentifier, getAllPlayerTokens, getAnySeerPlayerNumbersByRoleIds, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidAnswerSelection } from '../validate-response-data'
@@ -24,7 +24,7 @@ export const beholder = (gameState, title, hasSeer, hasApprenticeSeer, hasDoppel
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 73 || (card.player_role_id === 73 && allCopyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 73 || (card.player_role_id === 73 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = beholder_interaction(newGameState, token, title)
     }
 

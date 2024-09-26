@@ -1,4 +1,4 @@
-import { alienIds, masonIds, supervillainIds, vampireIds, wolfIds, werewolvesIds } from '../constant'
+import { ALL_ALIEN_IDS, MASONS, ALL_SUPER_VILLAIN_IDS, ALL_VAMPIRE_IDS, ALL_WEREWOLF_IDS, WEREVOLVES } from '../constant'
 import artifacts from '../data/artifacts.json'
 import _ from 'lodash'
 
@@ -392,7 +392,7 @@ export const getNonWerewolfPlayerNumbersByRoleIdsWithNoShield = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (!wolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
+    if (!ALL_WEREWOLF_IDS.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -405,7 +405,7 @@ export const getWerewolfPlayerNumbersByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (werewolvesIds.includes(player.card.player_role_id)) {
+    if (WEREVOLVES.includes(player.card.player_role_id)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -431,7 +431,7 @@ export const getWerewolfAndDreamwolfPlayerNumbersByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (wolfIds.includes(player.card.player_role_id)) {
+    if (ALL_WEREWOLF_IDS.includes(player.card.player_role_id)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -444,7 +444,7 @@ export const getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield = players
 
   for (const token in players) {
     const player = players[token]
-    if (wolfIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
+    if (ALL_WEREWOLF_IDS.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -457,7 +457,7 @@ export const getVillainPlayerNumbersByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (supervillainIds.includes(player.card.player_role_id)) {
+    if (ALL_SUPER_VILLAIN_IDS.includes(player.card.player_role_id)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -470,7 +470,7 @@ export const getNonVillainPlayerNumbersByRoleIdsWithNoShield = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (!supervillainIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
+    if (!ALL_SUPER_VILLAIN_IDS.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -483,7 +483,7 @@ export const getAlienPlayerNumbersByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (alienIds.includes(player.card.player_role_id)) {
+    if (ALL_ALIEN_IDS.includes(player.card.player_role_id)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -496,7 +496,7 @@ export const getAlienPlayerNumbersByRoleIdsWithNoShield = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (alienIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
+    if (ALL_ALIEN_IDS.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -509,7 +509,7 @@ export const getAlienTokensByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (alienIds.includes(player.card.player_role_id)) {
+    if (ALL_ALIEN_IDS.includes(player.card.player_role_id)) {
       result.push(token)
     }
   }
@@ -522,7 +522,7 @@ export const getNonAlienPlayerNumbersByRoleIdsWithNoShield = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (!alienIds.includes(player.card.player_role_id) && !(player.card?.shield)) {
+    if (!ALL_ALIEN_IDS.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -561,7 +561,7 @@ export const getVampirePlayerNumbersByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (vampireIds.includes(player.card.player_role_id)) {
+    if (ALL_VAMPIRE_IDS.includes(player.card.player_role_id)) {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -574,7 +574,7 @@ export const getVampireTokensByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (vampireIds.includes(player.card.player_role_id)) {
+    if (ALL_VAMPIRE_IDS.includes(player.card.player_role_id)) {
       result.push(token)
     }
   }
@@ -588,7 +588,7 @@ export const getNonVampirePlayerNumbersByRoleIds = gameState => {
   for (const token in gameState.players) {
     const player = gameState.players[token]
     const cardPositions = gameState.card_positions
-    if (!vampireIds.includes(player.card.player_role_id) && cardPositions[`player_${player.player_number}`].mark !== "mark_of_vampire") {
+    if (!ALL_VAMPIRE_IDS.includes(player.card.player_role_id) && cardPositions[`player_${player.player_number}`].mark !== "mark_of_vampire") {
       result.push(`player_${player.player_number}`)
     }
   }
@@ -666,7 +666,7 @@ export const getMasonPlayerNumbersByRoleIds = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (masonIds.includes(player.card.player_role_id)) {
+    if (MASONS.includes(player.card.player_role_id)) {
       result.push(`player_${player.player_number}`)
     }
   }

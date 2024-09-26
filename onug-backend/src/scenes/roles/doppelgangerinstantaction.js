@@ -1,4 +1,4 @@
-import { SCENE, doppelgangerInstantActionsIds } from '../../constant'
+import { SCENE, DOPPELGANGER_INSTANT_ACTION_IDS } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { alphawolf_interaction, alphawolf_response } from './alphawolf'
 import { apprenticeseer_interaction, apprenticeseer_response } from './apprenticeseer'
@@ -57,7 +57,7 @@ export const doppelganger_instant_action = (gameState, title) => {
   const newGameState = { ...gameState }
   const scene = []
   const tokens = getAllPlayerTokens(newGameState.players)  
-  const rolesFromIds = getRolesNames(newGameState.selected_cards, doppelgangerInstantActionsIds, instantRoleIds)
+  const rolesFromIds = getRolesNames(newGameState.selected_cards, DOPPELGANGER_INSTANT_ACTION_IDS, instantRoleIds)
   const actionTime = 8
 
   addVerboseOr(rolesFromIds)
@@ -97,7 +97,7 @@ export const doppelganger_instant_action = (gameState, title) => {
 export const doppelganger_instant_action_interaction = (gameState, token, title) => {
   const new_role_id = gameState.players[token]?.new_role_id
 
-  if (!doppelgangerInstantActionsIds.includes(new_role_id)) {}
+  if (!DOPPELGANGER_INSTANT_ACTION_IDS.includes(new_role_id)) {}
 
   let interaction = {}
 

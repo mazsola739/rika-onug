@@ -1,4 +1,4 @@
-import { allCopyPlayerIds, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByMark, getPlayerNumberWithMatchingToken, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
@@ -20,7 +20,7 @@ export const renfield = (gameState, title, hasDoppelganger) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 38 || (card.player_role_id === 38 && allCopyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 38 || (card.player_role_id === 38 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = renfield_interaction(newGameState, token, title)
     }
 

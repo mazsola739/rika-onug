@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE, goodGuyIds } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../constant'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -16,7 +16,7 @@ export const revealer = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'revealer') {
-      if (card.player_original_id === 24 || (card.player_role_id === 24 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 24 || (card.player_role_id === 24 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = revealer_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_revealer') {
@@ -61,7 +61,7 @@ export const revealer_response = (gameState, token, selected_card_positions, tit
 
   const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
   const revealedCard = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
-  const isTown = revealedCard.every((card) => goodGuyIds.includes(Object.values(card)[0]))
+  const isTown = revealedCard.every((card) => GOOD_GUY_IDS.includes(Object.values(card)[0]))
 
   if (newGameState.players[token].card?.original_id === selectedPositionCard.id) {
     newGameState.players[token].card.player_card_id = 0

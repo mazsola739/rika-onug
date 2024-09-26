@@ -1,4 +1,4 @@
-import { SCENE, centerCardPositions } from '../../constant'
+import { SCENE, CENTER_CARD_POSITIONS } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -34,13 +34,13 @@ export const copycat_interaction = (gameState, token, title) => {
 
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],
-    selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 },
+    selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: 1 },
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_must_one_center'],
     icon: 'copy',
-    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 } },
+    selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: 1 } },
   })
 }
 

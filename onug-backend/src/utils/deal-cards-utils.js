@@ -1,11 +1,11 @@
 import cards from '../data/cards.json'
 import { getCenterCardPositionByIndex, stubbedCards } from '../stub/populate-deal'
 import { logInfo } from '../log'
-import { alphaWolfId, hasMarkIds, supervillainIdsToCheck, temptressId, wolfIdsToCheck } from '../constant'
+import { ALPHA_WOLF_ID, HAS_MARK_IDS, SUPER_VILLAINS, TEMPTRESS_ID, WEREVOLVES } from '../constant'
 
-const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(alphaWolfId)
-const hasTemptress = (selectedCardIds) => selectedCardIds.includes(temptressId)
-export const hasMark = (selectedCardIds) => hasMarkIds.some((id) => selectedCardIds.includes(id))
+const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(ALPHA_WOLF_ID)
+const hasTemptress = (selectedCardIds) => selectedCardIds.includes(TEMPTRESS_ID)
+export const hasMark = (selectedCardIds) => HAS_MARK_IDS.some((id) => selectedCardIds.includes(id))
 
 const getCardById = (card_id) => cards.find((card) => card.id === card_id)
 const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
@@ -26,11 +26,11 @@ export const dealCardIds = (selectedCardIds) => {
   let cardIds = [...selectedCardIds]
 
   let newWolfCardId = hasAlphaWolf(selectedCardIds)
-    ? getRandomItemFromArray(filterCardsByIds(cardIds, wolfIdsToCheck))
+    ? getRandomItemFromArray(filterCardsByIds(cardIds, WEREVOLVES))
     : undefined
   newWolfCardId = getStubbedOrDealtCard(stubbedCards.newWolfCard, newWolfCardId)
   let newVillainCardId = hasTemptress(selectedCardIds)
-    ? getRandomItemFromArray(filterCardsByIds(cardIds, supervillainIdsToCheck))
+    ? getRandomItemFromArray(filterCardsByIds(cardIds, SUPER_VILLAINS))
     : undefined
   newVillainCardId = getStubbedOrDealtCard(stubbedCards.newVillainCard, newVillainCardId)
 

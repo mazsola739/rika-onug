@@ -1,4 +1,4 @@
-import { allCopyPlayerIds, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getMarksByPositions } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection, isValidMarkSelection } from '../validate-response-data'
@@ -20,7 +20,7 @@ export const marksman = (gameState, title, hasDoppelganger) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 35 || (card.player_role_id === 35 && allCopyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 35 || (card.player_role_id === 35 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = marksman_interaction(newGameState, token, title)
     }
 

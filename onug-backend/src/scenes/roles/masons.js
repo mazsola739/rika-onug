@@ -1,4 +1,4 @@
-import { masonIds, allCopyPlayerIds, SCENE } from '../../constant'
+import { MASONS, ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getMasonPlayerNumbersByRoleIds, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
@@ -14,7 +14,7 @@ export const masons = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (masonIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
+    if (MASONS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
       interaction = masons_interaction(newGameState, token, title)
     }
 

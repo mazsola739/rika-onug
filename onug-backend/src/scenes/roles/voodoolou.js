@@ -1,4 +1,4 @@
-import { allCopyPlayerIds, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { witch_interaction } from './witch'
 
@@ -14,7 +14,7 @@ export const voodoolou = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 70 || (card.player_role_id === 70 && allCopyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 70 || (card.player_role_id === 70 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = witch_interaction(newGameState, token, title)
     }
 

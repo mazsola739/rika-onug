@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE, MESSAGE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE, MESSAGE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNeighborsByToken, getPlayerTokensByPlayerNumber, formatPlayerIdentifier } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
@@ -16,7 +16,7 @@ export const thing = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 85 || (card.player_role_id === 85 && copyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 85 || (card.player_role_id === 85 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = thing_interaction(newGameState, token, title)
     }
 

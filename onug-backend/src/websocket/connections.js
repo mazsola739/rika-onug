@@ -1,8 +1,8 @@
-import { roomNames } from '../constant'
+import { ROOM_NAMES } from '../constant'
 import { logDebug, logTrace } from '../log'
 
 export const websocketServerConnectionsPerRoom = {}
-export const initWebSocketConnections = () => roomNames.forEach((roomName) => (websocketServerConnectionsPerRoom[roomName] = {}))
+export const initWebSocketConnections = () => ROOM_NAMES.forEach((roomName) => (websocketServerConnectionsPerRoom[roomName] = {}))
 initWebSocketConnections()
 
 export const addUserToRoom = (ws, token, room_id) => {

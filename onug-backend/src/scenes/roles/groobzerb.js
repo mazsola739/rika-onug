@@ -1,4 +1,4 @@
-import { groobzerbIds, allCopyPlayerIds, SCENE } from '../../constant'
+import { GROOB_AND_ZERB_IDS, ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getZerbPlayerNumberByRoleIds, getGroobPlayerNumberByRoleIds, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
@@ -19,7 +19,7 @@ export const groobzerb = (gameState, title, hasDoppelganger) => {
 
     const card = newGameState.players[token].card
 
-    if (groobzerbIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
+    if (GROOB_AND_ZERB_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
       interaction = groobzerb_interaction(newGameState, token, title)
     }
 

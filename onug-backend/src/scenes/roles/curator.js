@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getSelectablePlayersWithNoArtifact, getRandomArtifact, getPlayerTokensByPlayerNumber, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -16,7 +16,7 @@ export const curator = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'curator') {
-      if (card.player_original_id === 20 || (card.player_role_id === 20 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 20 || (card.player_role_id === 20 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = curator_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_curator') {

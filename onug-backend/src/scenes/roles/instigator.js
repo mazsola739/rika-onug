@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
@@ -15,7 +15,7 @@ export const instigator = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 34 || (card.player_role_id === 34 && copyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 34 || (card.player_role_id === 34 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = instigator_interaction(newGameState, token, title)
     }
 

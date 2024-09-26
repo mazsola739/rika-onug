@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -15,7 +15,7 @@ export const robber = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 8 || (card.player_role_id === 8 && copyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 8 || (card.player_role_id === 8 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = robber_interaction(newGameState, token, title)
     }
 

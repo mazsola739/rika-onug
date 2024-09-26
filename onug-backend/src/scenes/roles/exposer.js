@@ -1,4 +1,4 @@
-import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
+import { CENTER_CARD_POSITIONS, COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getRandomItemFromArray, getAllPlayerTokens, getSceneEndTime, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -32,7 +32,7 @@ export const exposer = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'exposer') {
-      if (card.player_original_id === 46 || (card.player_role_id === 46 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 46 || (card.player_role_id === 46 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = exposer_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_exposer') {
@@ -58,13 +58,13 @@ export const exposer_interaction = (gameState, token, title) => {
 
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],
-    selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: limit },
+    selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: limit },
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: [limit === 3 ? 'interaction_must_three_center' : limit === 2 ? 'interaction_must_two_center' : 'interaction_must_one_center'],
     icon: 'idcard',
-    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: limit } },
+    selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: limit } },
   })
 }
 

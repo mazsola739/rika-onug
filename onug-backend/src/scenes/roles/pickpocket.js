@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken, getMarksByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
@@ -16,7 +16,7 @@ export const pickpocket = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'pickpocket') {
-      if (card.player_original_id === 36 || (card.player_role_id === 36 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 36 || (card.player_role_id === 36 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = pickpocket_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_pickpocket') {

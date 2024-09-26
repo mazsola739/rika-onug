@@ -1,4 +1,4 @@
-export const roomNames = [
+export const ROOM_NAMES = [
   'archives',
   'armory',
   'bottomless_pit',
@@ -19,7 +19,7 @@ export const roomNames = [
   'workshop',
 ]
 
-export const centerCardPositions = [
+export const CENTER_CARD_POSITIONS = [
   "center_left",
   "center_middle",
   "center_right",

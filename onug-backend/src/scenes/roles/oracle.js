@@ -1,4 +1,4 @@
-import { SCENE, centerCardPositions } from '../../constant'
+import { SCENE, CENTER_CARD_POSITIONS } from '../../constant'
 import { createNumberArray, formatOracleAnswer, formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getRandomItemFromArray, getRandomNumber, getSceneEndTime, isCurrentPlayerNumberEven, thinkRandomNumber } from '../../utils'
 import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../conditions'
 import { isValidAnswerSelection, isValidCardSelection } from '../validate-response-data'
@@ -376,7 +376,7 @@ export const oracle_answer_aftermath = (gameState, token, title) => {
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],
     viewed_cards: showCards,
-    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: limit } },
+    selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: limit } },
     uniqueInformations: { oracle: showCards },
   }
 
@@ -384,7 +384,7 @@ export const oracle_answer_aftermath = (gameState, token, title) => {
     private_message: privateMessage,
     icon: 'oracle',
     showCards,
-    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: limit } },
+    selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: limit } },
     uniqueInformations: { oracle: showCards },
   })
 

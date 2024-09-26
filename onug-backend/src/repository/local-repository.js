@@ -3,7 +3,7 @@ import { readFile, unlink } from 'fs/promises'
 import { logError, logTrace, logErrorWithStack } from '../log'
 import { websocketServerConnectionsPerRoom } from '../websocket/connections'
 import roomsData from '../data/rooms.json'
-import { roomNames } from '../constant'
+import { ROOM_NAMES } from '../constant'
 
 export const upsertRoomState = async (state) => {
   logTrace('upsertRoomState')
@@ -37,8 +37,8 @@ export const readGameState = async (room_id) => {
 export const readAllGameStates = async () => {
   logTrace('read all game states')
   const gameStates = {}
-  for (let i = 0; i < roomNames.length; i++) {
-    let room_id = roomNames[i]
+  for (let i = 0; i < ROOM_NAMES.length; i++) {
+    let room_id = ROOM_NAMES[i]
     const filePath = `${__dirname}/../gameState/room_${room_id}_gamestate.json`
     const options = { encoding: 'utf8' }
     try {
@@ -70,8 +70,8 @@ export const readGameStateByRoomId = async (room_id) => {
 
 export const deleteAllGameStates = async () => {
   logTrace('delete all game states')
-  for (let i = 0; i < roomNames.length; i++) {
-    let room_id = roomNames[i]
+  for (let i = 0; i < ROOM_NAMES.length; i++) {
+    let room_id = ROOM_NAMES[i]
     const filePath = `${__dirname}/../gameState/room_${room_id}_gamestate.json`
     try {
       await unlink(filePath)
@@ -97,8 +97,8 @@ export const deleteGameStateByRoomId = async (room_id) => {
 export const deleteAllPlayers = async () => {
   logTrace('delete all players')
   const gameStates = {}
-  for (let i = 0; i < roomNames.length; i++) {
-    let room_id = roomNames[i]
+  for (let i = 0; i < ROOM_NAMES.length; i++) {
+    let room_id = ROOM_NAMES[i]
     const filePath = `${__dirname}/../gameState/room_${room_id}_gamestate.json`
     const options = { encoding: 'utf8' }
     try {
@@ -126,8 +126,8 @@ export const deletePlayerByToken = async (token) => {
   logTrace('delete player by token')
   const gameStates = {}
 
-  for (let i = 0; i < roomNames.length; i++) {
-    let room_id = roomNames[i]
+  for (let i = 0; i < ROOM_NAMES.length; i++) {
+    let room_id = ROOM_NAMES[i]
     const filePath = `${__dirname}/../gameState/room_${room_id}_gamestate.json`
     const options = { encoding: 'utf8' }
 
@@ -157,8 +157,8 @@ export const reInitializeAllGameStates = async () => {
   try {
     logTrace('Re-init all gamestates')
     const gameStates = {}
-    for (let index = 0; index < roomNames.length; index++) {
-      let room_id = roomNames[index]
+    for (let index = 0; index < ROOM_NAMES.length; index++) {
+      let room_id = ROOM_NAMES[index]
 
       const room = roomsData[index]
       await upsertRoomState(room)

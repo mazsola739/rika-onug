@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
@@ -16,7 +16,7 @@ export const assassin = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'assassin') {
-      if (card.player_original_id === 29 || (card.player_role_id === 29 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 29 || (card.player_role_id === 29 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = assassin_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_assassin') {

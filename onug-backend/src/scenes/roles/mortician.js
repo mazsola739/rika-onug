@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getRandomItemFromArray, getAllPlayerTokens, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -36,7 +36,7 @@ export const mortician = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'mortician') {
-      if (card.player_original_id === 49 || (card.player_role_id === 49 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 49 || (card.player_role_id === 49 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = mortician_interaction(newGameState, token, title, randomMorticianInstruction, morticianKey)
       }
     } else if (prefix === 'doppelganger_mortician') {

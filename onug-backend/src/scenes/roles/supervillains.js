@@ -1,4 +1,4 @@
-import { supervillainIds, allCopyPlayerIds, SCENE } from '../../constant'
+import { ALL_SUPER_VILLAIN_IDS, ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { formatPlayerIdentifier, getAllPlayerTokens, getSceneEndTime, getVillainPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
@@ -14,7 +14,7 @@ export const supervillains = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (supervillainIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
+    if (ALL_SUPER_VILLAIN_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
       interaction = supervillain_interaction(newGameState, token, title)
     }
 

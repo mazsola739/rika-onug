@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getNonVampirePlayerNumbersByRoleIds, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
@@ -16,7 +16,7 @@ export const thecount = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'thecount') {
-      if (card.player_original_id === 39 || (card.player_role_id === 39 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 39 || (card.player_role_id === 39 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = thecount_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_thecount') {

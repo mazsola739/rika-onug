@@ -1,4 +1,4 @@
-import { allCopyPlayerIds, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime } from '../../utils'
 import { seer_interaction } from './seer'
 
@@ -14,7 +14,7 @@ export const detector = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 56 || (card.player_role_id === 56 && allCopyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 56 || (card.player_role_id === 56 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = seer_interaction(newGameState, token, title)
     }
 

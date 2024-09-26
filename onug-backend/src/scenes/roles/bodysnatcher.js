@@ -1,4 +1,4 @@
-import { centerCardPositions, copyPlayerIds, SCENE } from '../../constant'
+import { CENTER_CARD_POSITIONS, COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getRandomItemFromArray, getAllPlayerTokens, getSceneEndTime, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, getAnyOtherPlayersByToken, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier } from '../../utils'
 import { isValidCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
@@ -40,7 +40,7 @@ export const bodysnatcher = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'bodysnatcher') {
-      if (card.player_original_id === 74 || (card.player_role_id === 74 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 74 || (card.player_role_id === 74 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = bodysnatcher_interaction(newGameState, token, title, randomBodysnatcherInstruction, bodysnatcherKey)
       }
     } else if (prefix === 'doppelganger_bodysnatcher') {
@@ -100,7 +100,7 @@ export const bodysnatcher_interaction = (gameState, token, title, randomBodysnat
     selectableCards = { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } }
     interactionMessage = selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_must_one_any_non_alien'
   } else if (randomBodysnatcherInstruction === 'bodysnatcher_center_text') {
-    selectableCards = { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 } }
+    selectableCards = { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: 1 } }
     interactionMessage = 'interaction_must_one_center'
   }
 

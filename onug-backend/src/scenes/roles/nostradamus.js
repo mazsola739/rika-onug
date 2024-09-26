@@ -1,4 +1,4 @@
-import { allCopyPlayerIds, SCENE, goodGuyIds } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -15,7 +15,7 @@ export const nostradamus = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 80 || (card.player_role_id === 80 && allCopyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 80 || (card.player_role_id === 80 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = nostradamus_interaction(newGameState, token, title)
     }
 
@@ -61,13 +61,13 @@ export const nostradamus_response = (gameState, token, selected_card_positions, 
 
   let showCards = []
 
-  if (goodGuyIds.includes(playerOneCardId)) {
-    if (!goodGuyIds.includes(playerTwoCardId)) {
+  if (GOOD_GUY_IDS.includes(playerOneCardId)) {
+    if (!GOOD_GUY_IDS.includes(playerTwoCardId)) {
       showCards = [selectedCards[0], selectedCards[1]]
       newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[1]].card.role
       newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[1]].card.team
-    } else if (goodGuyIds.includes(playerTwoCardId)) {
-      if (!goodGuyIds.includes(playerThreeCardId)) {
+    } else if (GOOD_GUY_IDS.includes(playerTwoCardId)) {
+      if (!GOOD_GUY_IDS.includes(playerThreeCardId)) {
         showCards = selectedCards
         newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[2]].card.role
         newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[2]].card.team
@@ -79,7 +79,7 @@ export const nostradamus_response = (gameState, token, selected_card_positions, 
         }
       }
     }
-  } else if (!goodGuyIds.includes(playerOneCardId)) {
+  } else if (!GOOD_GUY_IDS.includes(playerOneCardId)) {
     showCards = [selectedCards[0]]
     newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
     newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team

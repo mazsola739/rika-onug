@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
@@ -16,7 +16,7 @@ export const priest = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'priest') {
-      if (card.player_original_id === 37 || (card.player_role_id === 37 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 37 || (card.player_role_id === 37 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = priest_interaction(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_priest') {

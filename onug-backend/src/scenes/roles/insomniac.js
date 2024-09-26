@@ -1,4 +1,4 @@
-import { allCopyPlayerIds, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
@@ -19,7 +19,7 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 4 || (card.player_role_id === 4 && allCopyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 4 || (card.player_role_id === 4 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = insomniac_interaction(newGameState, token, title)
     }
 

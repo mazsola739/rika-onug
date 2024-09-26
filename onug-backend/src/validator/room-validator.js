@@ -1,11 +1,11 @@
 import { readGameState } from '../repository'
 import { logWarn } from '../log'
-import { roomNames } from '../constant'
+import { ROOM_NAMES } from '../constant'
 
 export const validateRoom = async (roomId) => {
   const errors = []
   
-  const roomIdExists = roomNames.includes(roomId)
+  const roomIdExists = ROOM_NAMES.includes(roomId)
   if (!roomIdExists) {
     errors.push('Invalid room id')
 

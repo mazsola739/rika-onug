@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -15,7 +15,7 @@ export const mysticwolf = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 22 || (card.player_role_id === 22 && copyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 22 || (card.player_role_id === 22 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = mysticwolf_interaction(newGameState, token, title)
     }
 

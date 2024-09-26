@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE, centerCardPositions } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE, CENTER_CARD_POSITIONS } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, formatPlayerIdentifier, getPlayerNumberWithMatchingToken } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -15,7 +15,7 @@ export const witch = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 27 || (card.player_role_id === 27 && copyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 27 || (card.player_role_id === 27 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = witch_interaction(newGameState, token, title)
     }
 
@@ -33,13 +33,13 @@ export const witch_interaction = (gameState, token, title) => {
   
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],
-    selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 },
+    selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: 1 },
   }
 
   return generateRoleInteraction(newGameState, token, {
     private_message: ['interaction_may_one_center'],
     icon: title === 'WITCH' ? 'witch' : 'voodoo',
-    selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 0, center: 1 } },
+    selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: 1 } },
   })
 } 
 
@@ -75,7 +75,7 @@ export const witch_response = (gameState, token, selected_card_positions, title)
     const interaction = generateRoleInteraction(newGameState, token, {
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
       icon: title === 'WITCH' ? 'witch' : 'voodoo',
-      selectableCards: { selectable_cards: centerCardPositions, selectable_card_limit: { player: 1, center: 0 } },
+      selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 1, center: 0 } },
       showCards,
       uniqueInformations: { witch: title === 'WITCH' ? [selected_card_positions[0]] : [], voodoo: title === 'VOODOO' ? [selected_card_positions[0]] : [], },
     })

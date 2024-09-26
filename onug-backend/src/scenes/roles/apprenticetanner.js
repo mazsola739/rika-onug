@@ -1,4 +1,4 @@
-import { allCopyPlayerIds, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumberWithMatchingToken, getSceneEndTime, getTannerPlayerNumbersByRoleIds } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
@@ -19,7 +19,7 @@ export const apprenticetanner = (gameState, title, hasDoppelganger) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 71 || (card.player_role_id === 71 && allCopyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 71 || (card.player_role_id === 71 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = apprenticetanner_interaction(newGameState, token, title)
     }
 

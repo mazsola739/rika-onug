@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getSceneEndTime, moveCardsButYourOwn } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidAnswerSelection } from '../validate-response-data'
@@ -15,7 +15,7 @@ export const villageidiot = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 26 || (card.player_role_id === 26 && copyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 26 || (card.player_role_id === 26 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = villageidiot_interaction(newGameState, token, title)
     }
 

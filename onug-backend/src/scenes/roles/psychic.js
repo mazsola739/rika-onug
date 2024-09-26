@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { isValidCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
@@ -34,7 +34,7 @@ export const psychic = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'psychic') {
-      if (card.player_original_id === 51 || (card.player_role_id === 51 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 51 || (card.player_role_id === 51 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = psychic_interaction(newGameState, token, title, randomPsychicInstructions, psychicKeys)
       }
     } else if (prefix === 'doppelganger_psychic') {

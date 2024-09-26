@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constant'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNeighborsByToken, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
@@ -15,7 +15,7 @@ export const diseased = (gameState, title) => {
 
     const card = newGameState.players[token].card
 
-    if (card.player_original_id === 32 || (card.player_role_id === 32 && copyPlayerIds.includes(card.player_original_id))) {
+    if (card.player_original_id === 32 || (card.player_role_id === 32 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = diseased_interaction(newGameState, token, title)
     }
 

@@ -1,4 +1,4 @@
-import { copyPlayerIds, SCENE, VOTE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE, VOTE } from '../../constant'
 import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, empathNumbers, getSceneEndTime, getPlayerNumbersWithMatchingTokens, addVote, getEmpathTokensByRoleIds, getDoppelgangerEmpathTokensByRoleIds, formatPlayerIdentifier, findMostVoted } from '../../utils'
 import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
@@ -59,7 +59,7 @@ export const empath = (gameState, title, prefix) => {
     
     if (activePlayerNumbers.includes(playerNumber)) {
       const card = newGameState.players[token].card
-      const isNotEmpath = prefix === 'empath' && (card.player_original_id !== 77 || (card.player_role_id !== 20 && copyPlayerIds.includes(card.player_original_id)));
+      const isNotEmpath = prefix === 'empath' && (card.player_original_id !== 77 || (card.player_role_id !== 20 && COPY_PLAYER_IDS.includes(card.player_original_id)));
       const isNotDoppelgangerEmpath = prefix === 'doppelganger_empath' && (card.player_role_id !== 20 && card.player_original_id === 1);
     
       if (isNotEmpath || isNotDoppelgangerEmpath) {
@@ -203,7 +203,7 @@ export const empath_vote = (gameState, title, prefix) => {
     const card = newGameState.players[token].card
 
     if (prefix === 'empath') {
-      if (card.player_original_id === 77 || (card.player_role_id === 77 && copyPlayerIds.includes(card.player_original_id))) {
+      if (card.player_original_id === 77 || (card.player_role_id === 77 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = empath_vote_result(newGameState, token, title)
       }
     } else if (prefix === 'doppelganger_empath') {

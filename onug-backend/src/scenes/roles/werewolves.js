@@ -1,4 +1,4 @@
-import { werewolvesIds, allCopyPlayerIds, SCENE, centerCardPositions } from '../../constant'
+import { WEREVOLVES, ALL_COPY_PLAYER_IDS, SCENE, CENTER_CARD_POSITIONS } from '../../constant'
 import { getAllPlayerTokens, getWerewolfPlayerNumbersByRoleIds, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
@@ -19,7 +19,7 @@ export const werewolves = (gameState, title, hasDreamWolf) => {
 
     const card = newGameState.players[token].card
 
-    if (werewolvesIds.some((id) => card.player_role_id === id && [id, ...allCopyPlayerIds].includes(card.player_original_id))) {
+    if (WEREVOLVES.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
       interaction = werewolves_interaction(newGameState, token, title)
     }
 
@@ -41,7 +41,7 @@ export const werewolves_interaction = (gameState, token, title) => {
 
   newGameState.players[token].player_history[title] = {
     ...newGameState.players[token].player_history[title],
-    selectable_cards: loneWolf ? centerCardPositions : [], selectable_card_limit: { player: 0, center: 1 },
+    selectable_cards: loneWolf ? CENTER_CARD_POSITIONS : [], selectable_card_limit: { player: 0, center: 1 },
     werewolves,
     dreamwolf,
   }
@@ -49,7 +49,7 @@ export const werewolves_interaction = (gameState, token, title) => {
   return generateRoleInteraction(newGameState, token, {
     private_message: [loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves'],
     icon: loneWolf ? 'lonely' : 'werewolf',
-    selectableCards: { selectable_cards: loneWolf ? centerCardPositions : [], selectable_card_limit: { player: 0, center: 1 } },
+    selectableCards: { selectable_cards: loneWolf ? CENTER_CARD_POSITIONS : [], selectable_card_limit: { player: 0, center: 1 } },
     uniqueInformations: { werewolves, dreamwolf },
   })
 }
