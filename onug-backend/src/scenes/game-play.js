@@ -1,38 +1,38 @@
-import { readGameState, upsertRoomState } from '../repository'
-import { broadcast, websocketServerConnectionsPerRoom } from '../websocket/connections'
-import { HYDRATE_GAME_PLAY, REDIRECT, STAGES } from '../constant'
+import { readGamestate, upsertRoomState } from '../repository'
+import { broadcast, webSocketServerConnectionsPerRoom } from '../websocket/connections'
+import { HYDRATE_GAME_PLAY, REDIRECT, STAGES } from '../constants'
 import { logErrorWithStack, logTrace } from '../log'
 import { scene } from './scene'
 
 //TODO set tickTime each narration different
 //TODO pauseGamePlay
 
-const getNextScene = gameState => {
+const getNextScene = gamestate => {
   try {
-    if (!gameState.actual_scene) return // game already stopped
+    if (!gamestate.actual_scene) return // game already stopped
 
-    let newGameState = { ...gameState }
+    let newGamestate = { ...gamestate }
 
     const startTime = Date.now()
-    newGameState.actual_scene.scene_start_time = startTime
-    newGameState.actual_scene.scene_number++
+    newGamestate.actual_scene.scene_start_time = startTime
+    newGamestate.actual_scene.scene_number++
 
-    newGameState = scene(newGameState)
+    newGamestate = scene(newGamestate)
 
-    newGameState.scene.forEach((item) => {
-      websocketServerConnectionsPerRoom[newGameState.room_id][item.token].send(
+    newGamestate.scene.forEach((item) => {
+      webSocketServerConnectionsPerRoom[newGamestate.room_id][item.token].send(
         JSON.stringify(item)
       )
     })
 
-    if (newGameState.actual_scene.scene_title === 'VOTE') {
-      newGameState.game_stopped = true
-      return newGameState
+    if (newGamestate.actual_scene.scene_title === 'VOTE') {
+      newGamestate.game_stopped = true
+      return newGamestate
     }
 
-    if (!newGameState.actual_scene.started) return getNextScene(newGameState)
+    if (!newGamestate.actual_scene.started) return getNextScene(newGamestate)
 
-    return newGameState
+    return newGamestate
   } catch (error) {
     logErrorWithStack(error)
     return
@@ -41,29 +41,29 @@ const getNextScene = gameState => {
 
 const tick = async (room_id) => {
   logTrace('tick')
-  const gameState = await readGameState(room_id)
+  const gamestate = await readGamestate(room_id)
 
-  const newGameState = getNextScene(gameState)
+  const newGamestate = getNextScene(gamestate)
 
-  if (!newGameState) return // game already stopped
+  if (!newGamestate) return // game already stopped
 
-  newGameState.action_history.push(newGameState.actual_scene)
+  newGamestate.action_history.push(newGamestate.actual_scene)
 
   const actualScene = {
-    scene_number: newGameState.actual_scene.scene_number,
-    scene_start_time: newGameState.actual_scene.scene_start_time,
-    scene_title: newGameState.actual_scene.scene_title,
-    scene_end_time: newGameState.actual_scene.scene_end_time,
+    scene_number: newGamestate.actual_scene.scene_number,
+    scene_start_time: newGamestate.actual_scene.scene_start_time,
+    scene_title: newGamestate.actual_scene.scene_title,
+    scene_end_time: newGamestate.actual_scene.scene_end_time,
   }
 
-  newGameState.actual_scene = actualScene
+  newGamestate.actual_scene = actualScene
 
-  const tickTime = newGameState.actual_scene.scene_end_time - newGameState.actual_scene.scene_start_time
+  const tickTime = newGamestate.actual_scene.scene_end_time - newGamestate.actual_scene.scene_start_time
 
-  await upsertRoomState(newGameState)
+  await upsertRoomState(newGamestate)
 
   let broadcastMessage
-  if (newGameState.game_stopped) {
+  if (newGamestate.game_stopped) {
     broadcastMessage = {
       type: REDIRECT,
       path: `/gamevote/${room_id}`,
@@ -73,7 +73,7 @@ const tick = async (room_id) => {
   } else {
     broadcastMessage = {
       type: HYDRATE_GAME_PLAY,
-      actual_scene: newGameState.actual_scene,
+      actual_scene: newGamestate.actual_scene,
     }
     logTrace(`broadcast next scene : ${JSON.stringify(broadcastMessage)}`)
     broadcast(room_id, broadcastMessage)
@@ -82,30 +82,30 @@ const tick = async (room_id) => {
   }
 }
 
-export const stopGamePlay = gameState => {
-  gameState.game_stopped = true
-  gameState.stage = STAGES.ROOM
+export const stopGamePlay = gamestate => {
+  gamestate.game_stopped = true
+  gamestate.stage = STAGES.ROOM
 
-  delete gameState.startTime
-  const playerTokens = Object.keys(gameState.players)
+  delete gamestate.startTime
+  const playerTokens = Object.keys(gamestate.players)
 
   playerTokens.forEach((token) => {
-    gameState.players[token] = { ...gameState.players[token] }
-    delete gameState.players[token].player_start_card_id
-    delete gameState.players[token].card
-    delete gameState.players[token].player_number
-    delete gameState.players[token].player_history
-    gameState.players[token].ready = false
+    gamestate.players[token] = { ...gamestate.players[token] }
+    delete gamestate.players[token].player_start_card_id
+    delete gamestate.players[token].card
+    delete gamestate.players[token].player_number
+    delete gamestate.players[token].player_history
+    gamestate.players[token].ready = false
 
-    delete gameState.card_positions
-    delete gameState.mark_positions
-    gameState.action_history = []
+    delete gamestate.card_positions
+    delete gamestate.mark_positions
+    gamestate.action_history = []
 
-    delete gameState.game_play_start_time
-    delete gameState.actual_scene
+    delete gamestate.game_play_start_time
+    delete gamestate.actual_scene
   })
 
-  return gameState
+  return gamestate
 }
 
 export const startGamePlay = (room_id) => setTimeout(() => tick(room_id), 2000)

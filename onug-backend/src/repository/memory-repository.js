@@ -1,15 +1,15 @@
 import { logTrace } from '../log'
 
-const gameStates = {}
+const gamestates = {}
 
 export const upsertRoomState = async (state) => {
-  logTrace('upsert game state in memory')
-  if (!gameStates[state.room_id]) gameStates[state.room_id] = {}
-  gameStates[state.room_id] = state
+  logTrace('upsert gamestate in memory')
+  if (!gamestates[state.room_id]) gamestates[state.room_id] = {}
+  gamestates[state.room_id] = state
 }
 
-export const readGameState = async (room_id) => {
-  logTrace('read game state from memory')
+export const readGamestate = async (room_id) => {
+  logTrace('read gamestate from memory')
 
-  return gameStates[room_id]
+  return gamestates[room_id]
 }

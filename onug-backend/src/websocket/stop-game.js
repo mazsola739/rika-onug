@@ -1,4 +1,4 @@
-import { REDIRECT } from '../constant'
+import { REDIRECT } from '../constants'
 import { logTrace } from '../log'
 import { validateRoom } from '../validator'
 import { upsertRoomState } from '../repository'
@@ -8,17 +8,17 @@ import { stopGamePlay } from '../scenes/game-play'
 export const stopGame = async (message) => {
   const { room_id, token } = message
   logTrace(`game stop requested in: ${room_id}`)
-  const [roomIdValid, gameState, errors] = await validateRoom(room_id)
+  const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
 
   if (!roomIdValid) return broadcast({ type: REDIRECT, path: '/lobby', errors })
 
   // TODO validate if player is admin and in the room
   
-  let newGameState = stopGamePlay(gameState)
+  let newGamestate = stopGamePlay(gamestate)
 
   logTrace(`Game stopped by player [${token}], in room [${room_id}]`)
 
-  await upsertRoomState(newGameState)
+  await upsertRoomState(newGamestate)
 
   const stopGame = {
     type: REDIRECT,

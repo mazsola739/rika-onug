@@ -1,18 +1,18 @@
 import { API_HOST } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useState, useCallback } from 'react'
-import { StyledGod, LeftSide, GameStatesContainer, GodTitle, FormContainer, InputContainer, Label, Input, ButtonsContainer, Button, WSContainer, MetaContainer, RightSide, ResponseContainer, ResponsePre } from './God.styles'
+import { StyledGod, LeftSide, GamestatesContainer, GodTitle, FormContainer, InputContainer, Label, Input, ButtonsContainer, Button, WSContainer, MetaContainer, RightSide, ResponseContainer, ResponsePre } from './God.styles'
 
 //TODO hack mode (send message to server)
-const GAMESTATES = 'GameStates'
+const gamestates = 'gamestates'
 const LABEL_ROOM_ID = 'room_id:'
 const LABEL_TOKEN = 'token:'
 const LABEL_MESSAGE = 'message:'
-const CHECK_GAME_STATES = 'Check gamesStates'
-const CHECK_GAME_STATE_BY_ROOM_ID = 'Check gameState by room_id'
-const DELETE_ALL_GAME_STATES = 'Delete all gameStates'
-const DELETE_GAME_STATE_BY_ROOM_ID = 'Delete gameState by room_id'
-const RE_INIT_ALL_GAME_STATES = 'Re init all gamestates'
+const CHECK_GAMESTATES = 'Check gamestates'
+const CHECK_GAMESTATE_BY_ROOM_ID = 'Check gamestate by room_id'
+const DELETE_ALL_GAMESTATES = 'Delete all gamestates'
+const DELETE_GAMESTATE_BY_ROOM_ID = 'Delete gamestate by room_id'
+const RE_INIT_ALL_GAMESTATES = 'Re init all gamestates'
 const WS = 'WS'
 const CHECK_CONNECTIONS = 'Check connections'
 const REMOVE_PLAYER_BY_TOKEN = 'Remove player by token'
@@ -35,36 +35,36 @@ export const God: React.FC = observer(() => {
   const [token, setToken] = useState('')
   const [message, setMessage] = useState({ type: 'REDIRECT', path: '/lobby' })
 
-  const checkGameStates = async () => {
-    const res = await fetch(`${API_HOST}/god/check-game-states`)
+  const checkGamestates = async () => {
+    const res = await fetch(`${API_HOST}/god/check-gamestates`)
     const json = await res.json()
     setResponse(json)
   }
 
-  const checkGameStateByRoomId = async () => {
+  const checkGamestateByRoomId = async () => {
     const res = await fetch(
-      `${API_HOST}/god/check-game-state-by-room-id?room_id=${roomId}`
+      `${API_HOST}/god/check-gamestate-by-room-id?room_id=${roomId}`
     )
     const json = await res.json()
     setResponse(json)
   }
 
-  const deleteAllGameStates = async () => {
-    const res = await fetch(`${API_HOST}/god/delete-all-game-states`)
+  const deleteAllGamestates = async () => {
+    const res = await fetch(`${API_HOST}/god/delete-all-gamestates`)
     const json = await res.json()
     setResponse(json)
   }
 
-  const deleteGameStateByRoomId = async () => {
+  const deleteGamestateByRoomId = async () => {
     const res = await fetch(
-      `${API_HOST}/god/delete-game-state-by-room-id?room_id=${roomId}`
+      `${API_HOST}/god/delete-gamestate-by-room-id?room_id=${roomId}`
     )
     const json = await res.json()
     setResponse(json)
   }
 
-  const reInitAllGameStates = async () => {
-    const res = await fetch(`${API_HOST}/god/re-init-all-game-states`)
+  const reInitAllGamestates = async () => {
+    const res = await fetch(`${API_HOST}/god/re-init-all-gamestates`)
     const json = await res.json()
     setResponse(json)
   }
@@ -154,8 +154,8 @@ export const God: React.FC = observer(() => {
   return (
     <StyledGod>
       <LeftSide>
-        <GameStatesContainer>
-          <GodTitle>{GAMESTATES}</GodTitle>
+        <GamestatesContainer>
+          <GodTitle>{gamestates}</GodTitle>
           <FormContainer>
             <InputContainer>
               <Label htmlFor="room_id">{LABEL_ROOM_ID}</Label>
@@ -167,13 +167,13 @@ export const God: React.FC = observer(() => {
             </InputContainer>
           </FormContainer>
           <ButtonsContainer>
-            <Button onClick={checkGameStates}>{CHECK_GAME_STATES}</Button>
-            <Button onClick={checkGameStateByRoomId}>{CHECK_GAME_STATE_BY_ROOM_ID}</Button>
-            <Button onClick={deleteAllGameStates}>{DELETE_ALL_GAME_STATES}</Button>
-            <Button onClick={deleteGameStateByRoomId}>{DELETE_GAME_STATE_BY_ROOM_ID}</Button>
-            <Button onClick={reInitAllGameStates}>{RE_INIT_ALL_GAME_STATES}</Button>
+            <Button onClick={checkGamestates}>{CHECK_GAMESTATES}</Button>
+            <Button onClick={checkGamestateByRoomId}>{CHECK_GAMESTATE_BY_ROOM_ID}</Button>
+            <Button onClick={deleteAllGamestates}>{DELETE_ALL_GAMESTATES}</Button>
+            <Button onClick={deleteGamestateByRoomId}>{DELETE_GAMESTATE_BY_ROOM_ID}</Button>
+            <Button onClick={reInitAllGamestates}>{RE_INIT_ALL_GAMESTATES}</Button>
           </ButtonsContainer>
-        </GameStatesContainer>
+        </GamestatesContainer>
 
         <WSContainer>
           <GodTitle>{WS}</GodTitle>

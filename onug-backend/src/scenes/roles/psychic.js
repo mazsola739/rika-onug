@@ -1,4 +1,4 @@
-import { COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { isValidCardSelection } from '../validate-response-data'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
@@ -6,11 +6,11 @@ import { generateRoleInteraction } from './../generate-scene-role-interactions'
 const randomPsychicInstructions = ['psychic_view1_text', 'psychic_view2_text']
 const psychicKeys = ['identifier_anyeven_text', 'identifier_anyodd_text']
 
-export const psychic = (gameState, title, prefix) => {
-  const newGameState = { ...gameState }
+export const psychic = (gamestate, title, prefix) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
-  const total_players = newGameState.total_players
+  const tokens = getAllPlayerTokens(newGamestate.players)
+  const total_players = newGamestate.total_players
 
   let availablePsychicOptions = []
 
@@ -18,12 +18,12 @@ export const psychic = (gameState, title, prefix) => {
     availablePsychicOptions = randomPsychicInstructions.filter(option => !option.includes('view2'))
   }
  //todo better narration and save into constants
-     /*   newGameState.bodysnatcher = {
+     /*   newGamestate.bodysnatcher = {
     instruction: '',
     key: '',
   }
-  newGameState.bodysnatcher.instruction = randomAlienInstruction
-  newGameState.bodysnatcher.key = alienKey */
+  newGamestate.bodysnatcher.instruction = randomAlienInstruction
+  newGamestate.bodysnatcher.key = alienKey */
 
   const narration = [`${prefix}_kickoff_text`, getRandomItemFromArray(availablePsychicOptions), getRandomItemFromArray(psychicKeys)]
   const actionTime = 12
@@ -31,78 +31,78 @@ export const psychic = (gameState, title, prefix) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (prefix === 'psychic') {
       if (card.player_original_id === 51 || (card.player_role_id === 51 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = psychic_interaction(newGameState, token, title, randomPsychicInstructions, psychicKeys)
+        interaction = psychic_interaction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
       }
     } else if (prefix === 'doppelganger_psychic') {
       if (card.player_role_id === 51 && card.player_original_id === 1) {
-        interaction = psychic_interaction(newGameState, token, title, randomPsychicInstructions, psychicKeys)
+        interaction = psychic_interaction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
       }
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const psychic_interaction = (gameState, token, title, randomPsychicInstructions, psychicKeys) => {
-  const newGameState = { ...gameState }
+export const psychic_interaction = (gamestate, token, title, randomPsychicInstructions, psychicKeys) => {
+  const newGamestate = { ...gamestate }
   
   const evenOrOdd = psychicKeys.replace('identifier_', '').replace('_text', '').replace('any', '')
-  const selectablePlayers = getAnyEvenOrOddPlayers(newGameState.players, evenOrOdd)
+  const selectablePlayers = getAnyEvenOrOddPlayers(newGamestate.players, evenOrOdd)
   const selectablePlayerNumbers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(selectablePlayers)
 
   const limit = +randomPsychicInstructions.replace('psychic_view', '').replace('_text', '')
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : limit === 1 ? 'interaction_may_one_any_other' : 'interaction_may_two_any'],
     icon: 'psychic',
     selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 } },
   })
 }
 
-export const psychic_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
-    return gameState
+export const psychic_response = (gamestate, token, selected_card_positions, title) => {
+  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+    return gamestate
   }
   
-  const newGameState = { ...gameState }
+  const newGamestate = { ...gamestate }
   const scene = []
 
-  const limit = newGameState.players[token].player_history[title].selectable_card_limit.player
-  const showCards = getCardIdsByPositions(newGameState?.card_positions, selected_card_positions.slice(0, limit))
+  const limit = newGamestate.players[token].player_history[title].selectable_card_limit.player
+  const showCards = getCardIdsByPositions(newGamestate?.card_positions, selected_card_positions.slice(0, limit))
 
-  if (showCards.some((card) => newGameState.players[token].card.player_original_id === card.id)) {
-    newGameState.players[token].card.player_card_id = 0
+  if (showCards.some((card) => newGamestate.players[token].card.player_original_id === card.id)) {
+    newGamestate.players[token].card.player_card_id = 0
   }
 
-  newGameState.players[token].card_or_mark_action = true
+  newGamestate.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0],
   }
 
-  const interaction = generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     icon: 'psychic',
     uniqueInformations: { seer: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }

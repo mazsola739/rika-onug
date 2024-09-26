@@ -1,5 +1,5 @@
 import { logError, logTrace } from '../log'
-import { websocketServerConnectionsPerRoom } from './connections'
+import { webSocketServerConnectionsPerRoom } from './connections'
 
 export const reload = (ws, message) => {
   try {
@@ -9,9 +9,9 @@ export const reload = (ws, message) => {
     if (token && ws.token && ws.token === token) {
       logTrace(`refreshing websocket reference for token [${token}]`)
 
-      const room_ids = Object.keys(websocketServerConnectionsPerRoom)
+      const room_ids = Object.keys(webSocketServerConnectionsPerRoom)
       room_ids.forEach((room_id) => {
-        if (websocketServerConnectionsPerRoom[room_id][token]) websocketServerConnectionsPerRoom[room_id][token] = ws
+        if (webSocketServerConnectionsPerRoom[room_id][token]) webSocketServerConnectionsPerRoom[room_id][token] = ws
       })
     }
   } catch (error) {

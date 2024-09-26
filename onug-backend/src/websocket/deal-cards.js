@@ -1,8 +1,8 @@
-import { DEAL, REDIRECT } from '../constant'
+import { DEAL, REDIRECT } from '../constants'
 import { logTrace } from '../log'
 import { validateRoom } from '../validator'
 import { upsertRoomState } from '../repository'
-import { STAGES } from '../constant'
+import { STAGES } from '../constants'
 import { broadcast } from './connections'
 import { determineTotalPlayers } from '../utils/player-utils'
 import { createCenterPositionCard, createPlayerCard, createPlayerPositionCard, dealCardIds, hasMark } from '../utils/deal-cards-utils'
@@ -12,11 +12,11 @@ export const dealCards = async (ws, message) => {
 
   logTrace(`Dealing cards for players in room: ${room_id}`)
 
-  const [roomIdValid, gameState, errors] = await validateRoom(room_id)
+  const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
 
   if (!roomIdValid) return ws.send(JSON.stringify({ type: DEAL, success: false, errors }))
 
-  const selectedCards = gameState.selected_cards
+  const selectedCards = gamestate.selected_cards
   const {
     playerCards,
     leftCard,
@@ -26,10 +26,10 @@ export const dealCards = async (ws, message) => {
     newVillainCard,
   } = dealCardIds(selectedCards)
 
-  const totalPlayers = determineTotalPlayers(gameState.selected_cards.length, gameState.selected_cards)
+  const totalPlayers = determineTotalPlayers(gamestate.selected_cards.length, gamestate.selected_cards)
 
-  const newGameState = {
-    ...gameState,
+  const newGamestate = {
+    ...gamestate,
     stage: STAGES.GAME_TABLE,
     total_players: totalPlayers,
     card_positions: {
@@ -50,7 +50,7 @@ export const dealCards = async (ws, message) => {
   const hasDoppelganger = selectedCards.includes(1)
 
   if (hasPlayerMark) {
-    newGameState.mark_positions = {
+    newGamestate.mark_positions = {
       vampire: "mark_of_vampire",
       fear: "mark_of_fear",
       bat: "mark_of_bat",
@@ -63,7 +63,7 @@ export const dealCards = async (ws, message) => {
       assassin: "mark_of_assassin",
     }
     if (hasDoppelganger) {
-      newGameState.doppelganger_mark_positions = {
+      newGamestate.doppelganger_mark_positions = {
         fear: "mark_of_fear",
         bat: "mark_of_bat",
         disease: "mark_of_disease",
@@ -77,23 +77,23 @@ export const dealCards = async (ws, message) => {
     }
   }
 
-  newGameState.selected_cards = Object.values(newGameState.card_positions).filter(value => value.card.id).map((value) => value.card.id)
+  newGamestate.selected_cards = Object.values(newGamestate.card_positions).filter(value => value.card.id).map((value) => value.card.id)
 
-  const playerTokens = Object.keys(gameState.players)
+  const playerTokens = Object.keys(gamestate.players)
   const hasShield = selectedCards.includes(25)
 
   playerTokens.forEach((token, index) => {
-    newGameState.players[token] = {
-      ...gameState.players[token],
+    newGamestate.players[token] = {
+      ...gamestate.players[token],
       player_number: index + 1,
       card: createPlayerCard(playerCards[index], selectedCards),
       card_or_mark_action: false,
       player_history: {},
     }
-    if (hasShield) { newGameState.players[token].shield = false }
+    if (hasShield) { newGamestate.players[token].shield = false }
   })
 
-  await upsertRoomState(newGameState)
+  await upsertRoomState(newGamestate)
 
   const redirectToGameTable = {
     type: REDIRECT,

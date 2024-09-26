@@ -1,84 +1,84 @@
-import { COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken, getMarksByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidMarkSelection } from '../validate-response-data'
 
-export const pickpocket = (gameState, title, prefix) => {
-  const newGameState = { ...gameState }
+export const pickpocket = (gamestate, title, prefix) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [`${prefix}_kickoff_text`, 'pickpocket_kickoff2_text']
   const actionTime = 12
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (prefix === 'pickpocket') {
       if (card.player_original_id === 36 || (card.player_role_id === 36 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = pickpocket_interaction(newGameState, token, title)
+        interaction = pickpocket_interaction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_pickpocket') {
       if (card.player_role_id === 36 && card.player_original_id === 1) {
-        interaction = pickpocket_interaction(newGameState, token, title)
+        interaction = pickpocket_interaction(newGamestate, token, title)
       }
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const pickpocket_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGameState.players, [token])
+export const pickpocket_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
+  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGamestate.players, [token])
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 },
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_may_one_any_other'],
     icon: 'robber',
     selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 } },
   })
 }
 
-export const pickpocket_response = (gameState, token, selected_mark_positions, title) => {
-  if (!isValidMarkSelection(selected_mark_positions, gameState.players[token].player_history, title)) {
-    return gameState
+export const pickpocket_response = (gamestate, token, selected_mark_positions, title) => {
+  if (!isValidMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+    return gamestate
   }
   
-  const newGameState = { ...gameState }
+  const newGamestate = { ...gamestate }
   const scene = []
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
-  const currentPlayerMark = newGameState.card_positions[currentPlayerNumber].mark 
-  const selectedMark = newGameState.card_positions[selected_mark_positions[0]].mark 
-  newGameState.card_positions[currentPlayerNumber].mark = selectedMark
-  newGameState.card_positions[selected_mark_positions[0]].mark = currentPlayerMark
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const currentPlayerMark = newGamestate.card_positions[currentPlayerNumber].mark 
+  const selectedMark = newGamestate.card_positions[selected_mark_positions[0]].mark 
+  newGamestate.card_positions[currentPlayerNumber].mark = selectedMark
+  newGamestate.card_positions[selected_mark_positions[0]].mark = currentPlayerMark
 
-  newGameState.players[token].card.player_mark = newGameState.card_positions[currentPlayerNumber].mark
+  newGamestate.players[token].card.player_mark = newGamestate.card_positions[currentPlayerNumber].mark
 
-  const viewMarks = getMarksByPositions(newGameState.card_positions, [currentPlayerNumber])
+  const viewMarks = getMarksByPositions(newGamestate.card_positions, [currentPlayerNumber])
 
-  newGameState.players[token].card_or_mark_action = true
+  newGamestate.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     swapped_marks: [currentPlayerNumber, selected_mark_positions[0]],
     viewed_marks: [currentPlayerNumber],
   }
 
   const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_mark_positions[0]])
 
-  const interaction = generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_marks', ...messageIdentifiers, 'interaction_own_mark'],
     icon: 'robber',
     showMarks: viewMarks,
@@ -86,7 +86,7 @@ export const pickpocket_response = (gameState, token, selected_mark_positions, t
   })
 
   scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }

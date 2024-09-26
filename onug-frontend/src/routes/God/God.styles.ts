@@ -28,7 +28,7 @@ export const RightSide = styled.div`
   width: 60%;
 `
 
-export const GameStatesContainer = styled.div`
+export const GamestatesContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;

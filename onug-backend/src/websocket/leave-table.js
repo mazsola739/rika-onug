@@ -1,15 +1,15 @@
-import { upsertRoomState, readGameState } from '../repository'
+import { upsertRoomState, readGamestate } from '../repository'
 import { logTrace } from '../log'
-import { HYDRATE_GAME_TABLE, REDIRECT } from '../constant'
+import { HYDRATE_GAME_TABLE, REDIRECT } from '../constants'
 import { broadcast } from './connections'
-import { STAGES } from '../constant'
+import { STAGES } from '../constants'
 
 export const leaveTable = async (ws, message) => {
   logTrace(`leave-table requested with ${JSON.stringify(message)}`)
 
   const { room_id, token } = message
-  const gameState = await readGameState(room_id)
-  const player = gameState.players[token]
+  const gamestate = await readGamestate(room_id)
+  const player = gamestate.players[token]
 
   if (!player) {
     return ws.send(
@@ -21,27 +21,27 @@ export const leaveTable = async (ws, message) => {
     )
   }
 
-  const newGameState = {
-    ...gameState,
+  const newGamestate = {
+    ...gamestate,
     stage: STAGES.ROOM,
   }
 
-  delete newGameState.card_positions
-  delete newGameState.mark_positions
+  delete newGamestate.card_positions
+  delete newGamestate.mark_positions
 
-  const playerTokens = Object.keys(newGameState.players)
+  const playerTokens = Object.keys(newGamestate.players)
   
   playerTokens.forEach((token) => {
-    newGameState.players[token] = {
-      ...newGameState.players[token],
+    newGamestate.players[token] = {
+      ...newGamestate.players[token],
     }
-    delete newGameState.players[token].player_start_card_id
-    delete newGameState.players[token].card
-    delete newGameState.players[token].player_number
-    newGameState.players[token].ready = false
+    delete newGamestate.players[token].player_start_card_id
+    delete newGamestate.players[token].card
+    delete newGamestate.players[token].player_number
+    newGamestate.players[token].ready = false
   })
 
-  await upsertRoomState(newGameState)
+  await upsertRoomState(newGamestate)
 
   return broadcast(room_id, { type: REDIRECT, path: `/room/${room_id}` })
 }

@@ -1,11 +1,11 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithCardOrMarkActionTrue, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
-export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
-  const newGameState = { ...gameState }
+export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_auraseer_kickoff_text'
@@ -17,34 +17,34 @@ export const auraseer = (gameState, title, hasDoppelganger, hasMarks) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 72 || (card.player_role_id === 72 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = auraseer_interaction(newGameState, token, title)
+      interaction = auraseer_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const auraseer_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const auraseer_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
   
-  const playersWithCardOrMarkActionTrue = getPlayerNumbersWithCardOrMarkActionTrue(newGameState.players)
+  const playersWithCardOrMarkActionTrue = getPlayerNumbersWithCardOrMarkActionTrue(newGamestate.players)
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     auraseer: playersWithCardOrMarkActionTrue
   }
 
   const messageIdentifiers = formatPlayerIdentifier(playersWithCardOrMarkActionTrue)
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_card_or_mark_action', ...messageIdentifiers],
     icon: 'interaction',
     uniqueInformations: { auraseer: playersWithCardOrMarkActionTrue }

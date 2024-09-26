@@ -13,13 +13,13 @@ const isPlayersCardsFlipped = (flipped, playersPosition) => Object.keys(flipped)
 
 const isActivePlayersCardsFlipped = (flipped, playersPosition) => flipped.some((obj) => Object.keys(obj)[0] === playersPosition)
 
-const updatePlayerCard = (gameState, token) => {
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gameState.players, token)
-  const player = gameState.players[token]
-  const flippedCards = gameState.flipped
+const updatePlayerCard = (gamestate, token) => {
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+  const player = gamestate.players[token]
+  const flippedCards = gamestate.flipped
 
   const playerCard = player?.card
-  const currentCard = gameState.card_positions[currentPlayerNumber].card
+  const currentCard = gamestate.card_positions[currentPlayerNumber].card
 
   if (!playerCard || !currentCard) return
 
@@ -36,7 +36,7 @@ const updatePlayerCard = (gameState, token) => {
   }
 }
 
-export const generateRoleInteraction = (gameState, token, {
+export const generateRoleInteraction = (gamestate, token, {
   private_message,
   icon,
   selectableCards = {},
@@ -45,12 +45,12 @@ export const generateRoleInteraction = (gameState, token, {
   showMarks = [],
   uniqueInformations = {}
 }) => {
-  updatePlayerCard(gameState, token)
+  updatePlayerCard(gamestate, token)
 
   const informations = {
-    shielded_cards: gameState.shield,
-    artifacted_cards: getKeys(gameState.artifact),
-    show_cards: showCards !== null ? concatArraysWithUniqueElements(showCards, gameState.flipped) : gameState.flipped,
+    shielded_cards: gamestate.shield,
+    artifacted_cards: getKeys(gamestate.artifact),
+    show_cards: showCards !== null ? concatArraysWithUniqueElements(showCards, gamestate.flipped) : gamestate.flipped,
     show_marks: showMarks,
     ...selectableCards,
     ...selectableMarks,
@@ -61,8 +61,8 @@ export const generateRoleInteraction = (gameState, token, {
     private_message,
     icon,
     ...informations,
-    player_name: gameState.players[token].name,
-    player_number: gameState.players[token].player_number,
-    ...gameState.players[token].card,
+    player_name: gamestate.players[token].name,
+    player_number: gamestate.players[token].player_number,
+    ...gamestate.players[token].card,
   }
 }

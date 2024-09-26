@@ -1,4 +1,4 @@
-import { SCENE } from '../../constant'
+import { SCENE } from '../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../utils'
 
 const random_easteregg_nobadguys = [
@@ -28,14 +28,14 @@ const random_easteregg_nogoodguys = [
 
 //TODO FIX IT
 
-/* export const epicbattle = (gameState, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
+/* export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
   if (hasEpicBattle) {
     return ['everyone_epic_intro_text']
   }
   
-  const newGameState = { ...gameState }
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = []
   const actionTime = 8
 
@@ -52,13 +52,13 @@ const random_easteregg_nogoodguys = [
   tokens.forEach((token) => {
     let interaction = {}
 
-    interaction = everyonemark_interaction(newGameState, token, title)
+    interaction = everyonemark_interaction(newGamestate, token, title)
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 } */

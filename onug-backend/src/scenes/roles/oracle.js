@@ -1,4 +1,4 @@
-import { SCENE, CENTER_CARD_POSITIONS } from '../../constant'
+import { SCENE, CENTER_CARD_POSITIONS } from '../../constants'
 import { createNumberArray, formatOracleAnswer, formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getRandomItemFromArray, getRandomNumber, getSceneEndTime, isCurrentPlayerNumberEven, thinkRandomNumber } from '../../utils'
 import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../conditions'
 import { isValidAnswerSelection, isValidCardSelection } from '../validate-response-data'
@@ -61,11 +61,11 @@ const oracleResponses = {
 }
 
 //ORACLE_QUESTION
-export const oracle_question = (gameState, title) => {
-  const newGameState = { ...gameState }
+export const oracle_question = (gamestate, title) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
-  const selectedCards = newGameState.selected_cards
+  const tokens = getAllPlayerTokens(newGamestate.players)
+  const selectedCards = newGamestate.selected_cards
 
   let availableOracleQuestionOptions = []
 
@@ -83,37 +83,37 @@ export const oracle_question = (gameState, title) => {
   const narration = ['oracle_kickoff_text', oracleQuestion]
   const actionTime = 8
 
-  newGameState.oracle = {
+  newGamestate.oracle = {
     question: '',
     answer: '',
     aftermath: ''
   }
-  newGameState.oracle.question = oracleQuestion
+  newGamestate.oracle.question = oracleQuestion
 
   switch (oracleQuestion) {
     case 'oracle_viewplayer_text':
-      newGameState.oracle.answer = '1'
+      newGamestate.oracle.answer = '1'
       break
     case 'oracle_evenodd_text':
-      newGameState.oracle.answer = 'even'
+      newGamestate.oracle.answer = 'even'
       break
     case 'oracle_guessnumber_text':
-      newGameState.oracle.number = `${theNumberIThinkingOf}`
-      newGameState.oracle.answer = 'failure'
+      newGamestate.oracle.number = `${theNumberIThinkingOf}`
+      newGamestate.oracle.answer = 'failure'
       break
     default:
-      newGameState.oracle.answer = 'no'
+      newGamestate.oracle.answer = 'no'
       break
   }
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 50) {
-      newGameState.players[token].player_history[title].oracle = narration[1]
-      interaction = oracle_question_raising(newGameState, token, title)
+      newGamestate.players[token].player_history[title].oracle = narration[1]
+      interaction = oracle_question_raising(newGamestate, token, title)
     } else {
 
     }
@@ -121,25 +121,25 @@ export const oracle_question = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const oracle_question_raising = (gameState, token, title) => {
-  const newGameState = { ...gameState }
-  const oracleQuestion = newGameState.oracle.question
+export const oracle_question_raising = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
+  const oracleQuestion = newGamestate.oracle.question
 
   let answerOptions = []
 
   switch (oracleQuestion) {
     case 'oracle_viewplayer_text':
-      answerOptions = createNumberArray(newGameState.total_players)
+      answerOptions = createNumberArray(newGamestate.total_players)
       break
     case 'oracle_evenodd_text':
-      const isCurrentPlayerEven = isCurrentPlayerNumberEven(newGameState.players, token)
-      newGameState.oracle.answer = isCurrentPlayerEven ? 'even' : 'odd'
+      const isCurrentPlayerEven = isCurrentPlayerNumberEven(newGamestate.players, token)
+      newGamestate.oracle.answer = isCurrentPlayerEven ? 'even' : 'odd'
       break
     case 'oracle_guessnumber_text':
       answerOptions = createNumberArray(10)
@@ -149,64 +149,64 @@ export const oracle_question_raising = (gameState, token, title) => {
       break
   }
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     answer_options: answerOptions,
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_oracle_question'],
     icon: 'oracle',
     uniqueInformations: { answer_options: answerOptions },
   })
 }
 
-export const oracle_question_response = (gameState, token, selected_answer, title) => {
-  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history, title)) {
-    return gameState
+export const oracle_question_response = (gamestate, token, selected_answer, title) => {
+  if (!isValidAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+    return gamestate
   }
 
-  const newGameState = { ...gameState }
+  const newGamestate = { ...gamestate }
   const scene = []
 
-  const oracleQuestion = newGameState.oracle.question
+  const oracleQuestion = newGamestate.oracle.question
 
   if (oracleQuestion === 'oracle_guessnumber_text') {
     const answer = selected_answer
-    const number = newGameState.oracle.number
+    const number = newGamestate.oracle.number
     if (answer === number) {
-      newGameState.oracle.answer = 'success'
+      newGamestate.oracle.answer = 'success'
     } else {
-      newGameState.oracle.answer = 'failure'
+      newGamestate.oracle.answer = 'failure'
     }
   } else {
-    newGameState.oracle.answer = selected_answer
+    newGamestate.oracle.answer = selected_answer
   }
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     question: oracleQuestion,
     answer: selected_answer
   }
 
-  const interaction = generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_oracle_answer', formatOracleAnswer(selected_answer)],
     icon: 'oracle',
   })
 
   scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
 //ORACLE_ANSWER
-export const oracle_answer = (gameState, title) => {
-  const newGameState = { ...gameState }
+export const oracle_answer = (gamestate, title) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
-  const oracleQuestion = newGameState.oracle.question
-  const oracleAnswer = newGameState.oracle.answer
+  const tokens = getAllPlayerTokens(newGamestate.players)
+  const oracleQuestion = newGamestate.oracle.question
+  const oracleAnswer = newGamestate.oracle.answer
 
   let narration = []
   let aftermath = false
@@ -236,20 +236,20 @@ export const oracle_answer = (gameState, title) => {
     case 'oracle_alienexchange_text':
       aftermath = true
       if (oracleAnswer === 'yes') {
-        newGameState.alienexchange = true
+        newGamestate.alienexchange = true
         narration = ['oracle_alienexchange_yes_text']
       } else {
-        newGameState.alienexchange = false
+        newGamestate.alienexchange = false
         narration = ['oracle_alienexchange_no_text']
       }
       break
     case 'oracle_ripple_text':
       aftermath = true
       if (oracleAnswer === 'yes') {
-        newGameState.ripple = true
+        newGamestate.ripple = true
         narration = ['oracle_ripple_yes_text']
       } else {
-        newGameState.ripple = false
+        newGamestate.ripple = false
         narration = ['oracle_ripple_no_text']
       }
       break
@@ -266,29 +266,29 @@ export const oracle_answer = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (aftermath && card.player_original_id === 50) {
-      newGameState.oracle.aftermath = narration[0]
-      interaction = oracle_answer_aftermath(newGameState, token, title)
+      newGamestate.oracle.aftermath = narration[0]
+      interaction = oracle_answer_aftermath(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  return newGameState
+  return newGamestate
 }
 
-export const oracle_answer_aftermath = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const oracle_answer_aftermath = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
   const scene = []
 
-  const oracleQuestion = newGameState.oracle.question
-  const oracleAnswer = newGameState.oracle.answer
-  const oracleAftermath = newGameState.oracle.aftermath
+  const oracleQuestion = newGamestate.oracle.question
+  const oracleAnswer = newGamestate.oracle.answer
+  const oracleAftermath = newGamestate.oracle.aftermath
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
-  const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber].card }
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const currentPlayerCard = { ...newGamestate.card_positions[currentPlayerNumber].card }
 
   let showCards = []
   let limit = 0
@@ -297,34 +297,34 @@ export const oracle_answer_aftermath = (gameState, token, title) => {
   switch (oracleQuestion) {
     case 'oracle_guessnumber_text':
       if (oracleAftermath.includes('success')) {
-        newGameState.oracle_eyes_open = true
+        newGamestate.oracle_eyes_open = true
         privateMessage = ['interaction_oracle_open_you_eyes']
       } else {
-        newGameState.oracle_target = true
+        newGamestate.oracle_target = true
 
-        newGameState.players[token].card.player_team = 'oracle'
+        newGamestate.players[token].card.player_team = 'oracle'
         currentPlayerCard.team = 'oracle'
         privateMessage = ['interaction_oracle_team']
       }
       break
     case 'oracle_viewplayer_text':
-      newGameState.players[token].card_or_mark_action = true
+      newGamestate.players[token].card_or_mark_action = true
 
       if (oracleAftermath.includes('yes')) {
-        showCards = getCardIdsByPositions(newGameState.card_positions, [`player_${oracleAnswer}`])
+        showCards = getCardIdsByPositions(newGamestate.card_positions, [`player_${oracleAnswer}`])
       } else {
-        const randomPlayerNumber = getRandomNumber(1, newGameState.total_players)
-        showCards = getCardIdsByPositions(newGameState.card_positions, [`player_${randomPlayerNumber}`])
+        const randomPlayerNumber = getRandomNumber(1, newGamestate.total_players)
+        showCards = getCardIdsByPositions(newGamestate.card_positions, [`player_${randomPlayerNumber}`])
       }
 
       privateMessage = ['interaction_selected_card', formatPlayerIdentifier(showCards)]
       break
     case 'oracle_alienteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
-        newGameState.players[token].card.player_team = 'alien'
+        newGamestate.players[token].card.player_team = 'alien'
         privateMessage = ['interaction_alien_team']
         if (oracleAftermath.includes('yes2')) {
-          newGameState.players[token].card.player_role = 'ALIEN'
+          newGamestate.players[token].card.player_role = 'ALIEN'
           currentPlayerCard.role = 'ALIEN'
           currentPlayerCard.team = 'alien'
           privateMessage = ['interaction_alien_role']
@@ -335,7 +335,7 @@ export const oracle_answer_aftermath = (gameState, token, title) => {
       break
     case 'oracle_werewolfteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
-        newGameState.players[token].card.player_team = 'werewolf'
+        newGamestate.players[token].card.player_team = 'werewolf'
         currentPlayerCard.team = 'werewolf'
         privateMessage = ['interaction_werewolf_team']
       } else {
@@ -344,7 +344,7 @@ export const oracle_answer_aftermath = (gameState, token, title) => {
       break
     case 'oracle_vampireteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
-        newGameState.players[token].card.player_team = 'vampire'
+        newGamestate.players[token].card.player_team = 'vampire'
         currentPlayerCard.team = 'vampire'
         privateMessage = ['interaction_vampire_team']
       } else {
@@ -373,14 +373,14 @@ export const oracle_answer_aftermath = (gameState, token, title) => {
       break
   }
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     viewed_cards: showCards,
     selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: limit } },
     uniqueInformations: { oracle: showCards },
   }
 
-  const interaction = generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: privateMessage,
     icon: 'oracle',
     showCards,
@@ -389,41 +389,41 @@ export const oracle_answer_aftermath = (gameState, token, title) => {
   })
 
   scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const oracle_answer_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
-    return gameState
+export const oracle_answer_response = (gamestate, token, selected_card_positions, title) => {
+  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+    return gamestate
   }
 
-  const newGameState = { ...gameState }
+  const newGamestate = { ...gamestate }
   const scene = []
   let interaction = {}
 
-  const oracleQuestion = newGameState.oracle.question
-  const oracleAftermath = newGameState.oracle.aftermath
+  const oracleQuestion = newGamestate.oracle.question
+  const oracleAftermath = newGamestate.oracle.aftermath
 
   if (oracleQuestion === 'oracle_centerexchange_text') {
-    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
-    const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber].card }
-    const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]].card }
-    newGameState.card_positions[currentPlayerNumber].card = selectedCard
-    newGameState.card_positions[selected_card_positions[0]].card = currentPlayerCard
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+    const currentPlayerCard = { ...newGamestate.card_positions[currentPlayerNumber].card }
+    const selectedCard = { ...newGamestate.card_positions[selected_card_positions[0]].card }
+    newGamestate.card_positions[currentPlayerNumber].card = selectedCard
+    newGamestate.card_positions[selected_card_positions[0]].card = currentPlayerCard
 
-    newGameState.players[token].card.player_card_id = 0
-    newGameState.players[token].card_or_mark_action = true
+    newGamestate.players[token].card.player_card_id = 0
+    newGamestate.players[token].card_or_mark_action = true
 
-    newGameState.players[token].player_history[title] = {
-      ...newGameState.players[token].player_history[title],
+    newGamestate.players[token].player_history[title] = {
+      ...newGamestate.players[token].player_history[title],
       swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
     }
 
     const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])
 
-    interaction = generateRoleInteraction(newGameState, token, {
+    interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers],
       icon: 'oracle',
       uniqueInformations: { oracle: [currentPlayerNumber, selected_card_positions[0]] },
@@ -431,19 +431,19 @@ export const oracle_answer_response = (gameState, token, selected_card_positions
   } else if (oracleQuestion === 'oracle_viewcenter_text') {
     const limit = +oracleAftermath.replace('oracle_view_yes', '').replace('_text', '')
     const selectedCardPositions = selected_card_positions.slice(0, limit)
-    const selectedCards = getCardIdsByPositions(newGameState.card_positions, selectedCardPositions)
+    const selectedCards = getCardIdsByPositions(newGamestate.card_positions, selectedCardPositions)
 
-    newGameState.players[token].card_or_mark_action = true
+    newGamestate.players[token].card_or_mark_action = true
 
-    newGameState.players[token].player_history[title] = {
-      ...newGameState.players[token].player_history[title],
+    newGamestate.players[token].player_history[title] = {
+      ...newGamestate.players[token].player_history[title],
       viewed_cards: selectedCards,
     }
 
     const identifiers = formatPlayerIdentifier(selectedCardPositions)
     const message = ['interaction_saw_card', ...identifiers]
 
-    interaction = generateRoleInteraction(newGameState, token, {
+    interaction = generateRoleInteraction(newGamestate, token, {
       private_message: message,
       icon: 'nostradamus',
       showCards: selectedCards,
@@ -452,7 +452,7 @@ export const oracle_answer_response = (gameState, token, selected_card_positions
   }
 
   scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }

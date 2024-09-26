@@ -1,11 +1,11 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
-export const insomniac = (gameState, title, hasDoppelganger) => {
-  const newGameState = { ...gameState }
+export const insomniac = (gamestate, title, hasDoppelganger) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_insomniac_kickoff_text'
@@ -17,50 +17,50 @@ export const insomniac = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 4 || (card.player_role_id === 4 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = insomniac_interaction(newGameState, token, title)
+      interaction = insomniac_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const insomniac_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
-  const currentCard = newGameState.card_positions[currentPlayerNumber].card
+export const insomniac_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const currentCard = newGamestate.card_positions[currentPlayerNumber].card
 
-  if (!newGameState.players[token].shield) {
-    newGameState.players[token].card.player_card_id = currentCard.id
-    newGameState.players[token].card.player_team = currentCard.team
+  if (!newGamestate.players[token].shield) {
+    newGamestate.players[token].card.player_card_id = currentCard.id
+    newGamestate.players[token].card.player_team = currentCard.team
 
-    const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, [currentPlayerNumber])
+    const showCards = getCardIdsByPlayerNumbers(newGamestate.card_positions, [currentPlayerNumber])
 
-    newGameState.players[token].player_history[title] = {
-      ...newGameState.players[token].player_history[title],
+    newGamestate.players[token].player_history[title] = {
+      ...newGamestate.players[token].player_history[title],
       viewed_cards: [currentPlayerNumber],
     }
 
-    return generateRoleInteraction(newGameState, token, {
+    return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_own_card'],
       icon: title === 'INSOMNIAC' ? 'bear' : 'thumb',
       showCards,
       uniqueInformations: { bear: title === 'INSOMNIAC' ? [currentPlayerNumber] : [], thumb: title === 'SELF_AWARENESS_GIRL' ? [currentPlayerNumber] : [], }
     })
   } else {
-    newGameState.players[token].player_history[title] = {
-      ...newGameState.players[token].player_history[title],
+    newGamestate.players[token].player_history[title] = {
+      ...newGamestate.players[token].player_history[title],
       shielded: true,
     }
 
-    return generateRoleInteraction(newGameState, token, {
+    return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_shielded'],
       icon: 'shielded',
     })

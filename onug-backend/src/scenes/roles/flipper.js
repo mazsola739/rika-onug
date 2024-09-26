@@ -1,50 +1,50 @@
-import { COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../constants'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
-export const flipper = (gameState, title, prefix) => {
-  const newGameState = { ...gameState }
+export const flipper = (gamestate, title, prefix) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [`${prefix}_kickoff_text`, 'flipper_kickoff2_text']
   const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (prefix === 'flipper') {
       if (card.player_original_id === 59 || (card.player_role_id === 59 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = flipper_interaction(newGameState, token, title)
+        interaction = flipper_interaction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_flipper') {
       if (card.player_role_id === 59 && card.player_original_id === 1) {
-        interaction = flipper_interaction(newGameState, token, title)
+        interaction = flipper_interaction(newGamestate, token, title)
       }
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const flipper_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const flipper_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
   
-  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGameState.players, token)
+  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGamestate.players, token)
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any_other'],
     icon: 'idcard',
     selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
@@ -52,36 +52,36 @@ export const flipper_interaction = (gameState, token, title) => {
 }
 
 //TODO better response message
-export const flipper_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
-    return gameState
+export const flipper_response = (gamestate, token, selected_card_positions, title) => {
+  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+    return gamestate
   }
   
-  const newGameState = { ...gameState }
+  const newGamestate = { ...gamestate }
   const scene = []
 
-  const selectedPositionCard = newGameState.card_positions[selected_card_positions[0]].card
-  const revealedCard = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0]])
+  const selectedPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
+  const revealedCard = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
   const isTown = revealedCard.every((card) => GOOD_GUY_IDS.includes(Object.values(card)[0]))
 
-  if (newGameState.players[token].card?.original_id === selectedPositionCard.id) {
-    newGameState.players[token].card.player_card_id = 0
+  if (newGamestate.players[token].card?.original_id === selectedPositionCard.id) {
+    newGamestate.players[token].card.player_card_id = 0
   }
 
-  newGameState.players[token].card_or_mark_action = true
+  newGamestate.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
   }
 
   if (isTown) {
-    newGameState.flipped.push(revealedCard[0])
-    newGameState.players[token].player_history[title].flipped_cards = revealedCard
+    newGamestate.flipped.push(revealedCard[0])
+    newGamestate.players[token].player_history[title].flipped_cards = revealedCard
   } else {
-    newGameState.players[token].player_history[title].show_cards = revealedCard
+    newGamestate.players[token].player_history[title].show_cards = revealedCard
   }
 
-  const interaction = generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_flipped_card', formatPlayerIdentifier(selected_card_positions)[0]],
     icon: 'idcard',
     showCards: revealedCard,
@@ -89,7 +89,7 @@ export const flipper_response = (gameState, token, selected_card_positions, titl
   })
 
   scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }

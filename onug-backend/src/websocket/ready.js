@@ -1,6 +1,6 @@
-import { HYDRATE_READY } from '../constant'
+import { HYDRATE_READY } from '../constants'
 import { logDebug, logError } from '../log'
-import { readGameState, upsertRoomState } from '../repository'
+import { readGamestate, upsertRoomState } from '../repository'
 import { getGameTableBoard } from '../utils'
 import { broadcast } from './connections'
 
@@ -9,19 +9,19 @@ export const ready = async (message) => {
     logDebug(`ready/not ready requested with ${JSON.stringify(message)}`)
     
     const { room_id, token } = message
-    const gameState = await readGameState(room_id)
-    const newGameState = {
-      ...gameState,
+    const gamestate = await readGamestate(room_id)
+    const newGamestate = {
+      ...gamestate,
     }
     // TODO validate client request
 
-    newGameState.players[token].ready = !gameState.players[token].ready
+    newGamestate.players[token].ready = !gamestate.players[token].ready
 
-    logDebug(`gameState.players[token].ready: ${gameState.players[token].ready}`)
+    logDebug(`gamestate.players[token].ready: ${gamestate.players[token].ready}`)
 
-    const board = getGameTableBoard(newGameState)
+    const board = getGameTableBoard(newGamestate)
 
-    await upsertRoomState(newGameState)
+    await upsertRoomState(newGamestate)
 
     return broadcast(room_id, {
       type: HYDRATE_READY,

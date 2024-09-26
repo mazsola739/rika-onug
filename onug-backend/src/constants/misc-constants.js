@@ -19,6 +19,13 @@ export const ROOM_NAMES = [
   'workshop',
 ]
 
+export const STAGES = {
+  ROOM: "ROOM",
+  GAME_TABLE: "GAME_TABLE",
+  GAME_PLAY: "GAME_PLAY",
+  GAME_VOTE: "GAME_VOTE",
+}
+
 export const CENTER_CARD_POSITIONS = [
   "center_left",
   "center_middle",

@@ -1,60 +1,60 @@
-import { COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../constants'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
-export const paranormalinvestigator = (gameState, title) => {
-  const newGameState = { ...gameState }
+export const paranormalinvestigator = (gamestate, title) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['paranormalinvestigator_kickoff_text']
   const actionTime = 12
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 23 || (card.player_role_id === 23 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = paranormalinvestigator_interaction(newGameState, token, title)
+      interaction = paranormalinvestigator_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const paranormalinvestigator_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
-  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGameState.players, token)
+export const paranormalinvestigator_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
+  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGamestate.players, token)
 
   const limit = selectablePlayerNumbers.length < 2 ? 1 : 2
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 },
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : limit === 1 ? 'interaction_may_one_any_other' : 'interaction_may_two_any_other'],
     icon: 'investigator',
     selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 } },
   })
 }
 
-export const paranormalinvestigator_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
-    return gameState
+export const paranormalinvestigator_response = (gamestate, token, selected_card_positions, title) => {
+  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+    return gamestate
   }
   
-  const newGameState = { ...gameState }
+  const newGamestate = { ...gamestate }
   const scene = []
 
-  const selectedCards = getCardIdsByPositions(newGameState.card_positions, [selected_card_positions[0], selected_card_positions[1]])
+  const selectedCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0], selected_card_positions[1]])
   const playerOneCardId = selectedCards[0][selected_card_positions[0]]
   const playerTwoCardId = selectedCards[1][selected_card_positions[1]]
 
@@ -63,30 +63,30 @@ export const paranormalinvestigator_response = (gameState, token, selected_card_
   if (GOOD_GUY_IDS.includes(playerOneCardId)) {
     if (!GOOD_GUY_IDS.includes(playerTwoCardId)) {
       showCards = selectedCards
-      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[1]].card.role
-      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[1]].card.team
+      newGamestate.players[token].card.player_role = newGamestate.card_positions[selected_card_positions[1]].card.role
+      newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[1]].card.team
     } else {
       showCards = selectedCards
-      if (newGameState.players[token].card.player_original_id === playerOneCardId || newGameState.players[token].card.player_original_id === playerTwoCardId) {
-        newGameState.players[token].card.player_card_id = 0
+      if (newGamestate.players[token].card.player_original_id === playerOneCardId || newGamestate.players[token].card.player_original_id === playerTwoCardId) {
+        newGamestate.players[token].card.player_card_id = 0
       }
     }
   } else {
     if (!GOOD_GUY_IDS.includes(playerOneCardId)) {
       showCards = [selectedCards[0]]
-      newGameState.players[token].card.player_role = newGameState.card_positions[selected_card_positions[0]].card.role
-      newGameState.players[token].card.player_team = newGameState.card_positions[selected_card_positions[0]].card.team
+      newGamestate.players[token].card.player_role = newGamestate.card_positions[selected_card_positions[0]].card.role
+      newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[0]].card.team
     }
   }
 
-  newGameState.players[token].card_or_mark_action = true
+  newGamestate.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0],
   }
 
-  const interaction = generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length === 2 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     icon: 'investigator',
     showCards,
@@ -94,7 +94,7 @@ export const paranormalinvestigator_response = (gameState, token, selected_card_
   })
 
   scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }

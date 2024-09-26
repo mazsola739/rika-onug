@@ -1,6 +1,6 @@
-import { COPY_PLAYER_IDS, SCENE, VOTE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE, VOTE } from '../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, empathNumbers, getSceneEndTime, getPlayerNumbersWithMatchingTokens, addVote, getEmpathTokensByRoleIds, getDoppelgangerEmpathTokensByRoleIds, formatPlayerIdentifier, findMostVoted } from '../../utils'
-import { websocketServerConnectionsPerRoom } from '../../websocket/connections'
+import { webSocketServerConnectionsPerRoom } from '../../websocket/connections'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
@@ -27,11 +27,11 @@ const randomEmpathInstructions = [
   'empath_action14_text',
 ]
 
-export const empath = (gameState, title, prefix) => {
-  const newGameState = { ...gameState }
+export const empath = (gamestate, title, prefix) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)  
-  const totalPlayers = newGameState.total_players
+  const tokens = getAllPlayerTokens(newGamestate.players)  
+  const totalPlayers = newGamestate.total_players
   const randomKey = getRandomItemFromArray(empathKeys)
   const randomPlayers = pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and')
   const empathKey = randomKey === 'activePlayers' ? randomPlayers : [randomKey]
@@ -47,43 +47,43 @@ export const empath = (gameState, title, prefix) => {
     activePlayerNumbers = empathNumbers(totalPlayers, evenOdd)
   }
 
-  newGameState.empath = {
+  newGamestate.empath = {
     instruction: '',
     icon: ''
   }
-  newGameState.empath.instruction = randomEmpathInstruction
+  newGamestate.empath.instruction = randomEmpathInstruction
   
   tokens.forEach((token) => {
     let interaction = {}
-    const playerNumber = newGameState.players[token].player_number
+    const playerNumber = newGamestate.players[token].player_number
     
     if (activePlayerNumbers.includes(playerNumber)) {
-      const card = newGameState.players[token].card
+      const card = newGamestate.players[token].card
       const isNotEmpath = prefix === 'empath' && (card.player_original_id !== 77 || (card.player_role_id !== 20 && COPY_PLAYER_IDS.includes(card.player_original_id)));
       const isNotDoppelgangerEmpath = prefix === 'doppelganger_empath' && (card.player_role_id !== 20 && card.player_original_id === 1);
     
       if (isNotEmpath || isNotDoppelgangerEmpath) {
-        interaction = empath_interaction(newGameState, token, title);
+        interaction = empath_interaction(newGamestate, token, title);
       }
     }
     
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const empath_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const empath_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
 
   let icon = 'empath'
-  const randomEmpathInstruction = newGameState.empath.instruction
+  const randomEmpathInstruction = newGamestate.empath.instruction
 
-  const allPlayerTokens = getAllPlayerTokens(newGameState.players)
-  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGameState.players, allPlayerTokens)
+  const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
+  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGamestate.players, allPlayerTokens)
 
   switch (randomEmpathInstruction) {
     case 'empath_action1_text':
@@ -130,10 +130,10 @@ export const empath_interaction = (gameState, token, title) => {
       break
   }
 
-  newGameState.empath.icon = icon
+  newGamestate.empath.icon = icon
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
   }
 
@@ -141,29 +141,29 @@ export const empath_interaction = (gameState, token, title) => {
     private_message: ['interaction_may_one_any'],
     icon,
     selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
-    player_name: newGameState.players[token].name,
-    player_number: newGameState.players[token].player_number,
-    ...newGameState.players[token].card,
+    player_name: newGamestate.players[token].name,
+    player_number: newGamestate.players[token].player_number,
+    ...newGamestate.players[token].card,
   }
 }
 
-export const empath_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
-    return gameState
+export const empath_response = (gamestate, token, selected_card_positions, title) => {
+  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+    return gamestate
   }
 
-  const newGameState = { ...gameState }
+  const newGamestate = { ...gamestate }
   const scene = []
 
-  const votes = addVote(newGameState.players[token].player_number, selected_card_positions[0], newGameState.empath_votes)
+  const votes = addVote(newGamestate.players[token].player_number, selected_card_positions[0], newGamestate.empath_votes)
 
-  newGameState.players[token].empath_vote = selected_card_positions[0]
-  newGameState.empath_votes = votes
+  newGamestate.players[token].empath_vote = selected_card_positions[0]
+  newGamestate.empath_votes = votes
 
-  const empathTokens = title === 'empath' ? getEmpathTokensByRoleIds(newGameState.plyers) : getDoppelgangerEmpathTokensByRoleIds(newGameState.plyers)
+  const empathTokens = title === 'empath' ? getEmpathTokensByRoleIds(newGamestate.plyers) : getDoppelgangerEmpathTokensByRoleIds(newGamestate.plyers)
 
   empathTokens.forEach((empathToken) => {
-    websocketServerConnectionsPerRoom[newGameState.room_id][empathToken].send(
+    webSocketServerConnectionsPerRoom[newGamestate.room_id][empathToken].send(
       JSON.stringify({
         type: VOTE,
         votes,
@@ -171,68 +171,68 @@ export const empath_response = (gameState, token, selected_card_positions, title
     )
   })
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     empath_vote: [selected_card_positions[0]]
   }
 
-  const icon = newGameState.empath.icon
+  const icon = newGamestate.empath.icon
 
-  const interaction = generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_voted', formatPlayerIdentifier(selected_card_positions)[0]],
     icon,
     uniqueInformations: { empath_vote: [selected_card_positions[0]], },
   })
 
   scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const empath_vote = (gameState, title, prefix) => {
-  const newGameState = { ...gameState }
+export const empath_vote = (gamestate, title, prefix) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)  
+  const tokens = getAllPlayerTokens(newGamestate.players)  
   const narration =  [`${prefix}_kickoff_text`, 'empath_kickoff2_text']
   const actionTime = 5
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (prefix === 'empath') {
       if (card.player_original_id === 77 || (card.player_role_id === 77 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-        interaction = empath_vote_result(newGameState, token, title)
+        interaction = empath_vote_result(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_empath') {
       if (card.player_role_id === 77 && card.player_original_id === 1) {
-        interaction = empath_vote_result(newGameState, token, title)
+        interaction = empath_vote_result(newGamestate, token, title)
       }
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const empath_vote_result = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const empath_vote_result = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
 
-  const icon = newGameState.empath.icon
-  const mostVotedPlayer = findMostVoted(newGameState.empath_votes)
+  const icon = newGamestate.empath.icon
+  const mostVotedPlayer = findMostVoted(newGamestate.empath_votes)
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     [icon]: [mostVotedPlayer[0]],
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_vote_result', formatPlayerIdentifier(mostVotedPlayer)[0]],
     icon,
     uniqueInformations: { [icon]: [mostVotedPlayer[0]] },

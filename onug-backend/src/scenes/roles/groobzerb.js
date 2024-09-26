@@ -1,11 +1,11 @@
-import { GROOB_AND_ZERB_IDS, ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { GROOB_AND_ZERB_IDS, ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getZerbPlayerNumberByRoleIds, getGroobPlayerNumberByRoleIds, formatPlayerIdentifier } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
-export const groobzerb = (gameState, title, hasDoppelganger) => {
-  const newGameState = { ...gameState }
+export const groobzerb = (gamestate, title, hasDoppelganger) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_groobzerb_kickoff_text'
@@ -17,38 +17,38 @@ export const groobzerb = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (GROOB_AND_ZERB_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
-      interaction = groobzerb_interaction(newGameState, token, title)
+      interaction = groobzerb_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const groobzerb_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
-  const player = newGameState.players[token]
+export const groobzerb_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
+  const player = newGamestate.players[token]
 
-  const zerbPlayers = getZerbPlayerNumberByRoleIds(newGameState.players)
-  const groobPlayers = getGroobPlayerNumberByRoleIds(newGameState.players)
+  const zerbPlayers = getZerbPlayerNumberByRoleIds(newGamestate.players)
+  const groobPlayers = getGroobPlayerNumberByRoleIds(newGamestate.players)
 
   if (player.player_role_id === 47) {
     if (zerbPlayers.length >= 1) {
-      newGameState.players[token].card.player_team = 'groob'
-      groobPlayers.forEach(groob => newGameState.card_positions[groob].team = 'groob')
+      newGamestate.players[token].card.player_team = 'groob'
+      groobPlayers.forEach(groob => newGamestate.card_positions[groob].team = 'groob')
 
       player.player_history[title] = { ...player.player_history[title], zerb: zerbPlayers }
 
       const messageIdentifiers = formatPlayerIdentifier(zerbPlayers)
 
-      return generateRoleInteraction(newGameState, token, {
+      return generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_zerbgroob', ...messageIdentifiers],
         icon: 'groobzerb',
         uniqueInformations: { groobzerb: zerbPlayers },
@@ -56,21 +56,21 @@ export const groobzerb_interaction = (gameState, token, title) => {
     } else {
       player.player_history = { ...player.player_history, scene_title: title }
 
-      return generateRoleInteraction(newGameState, token, {
+      return generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_no_zerb'],
         icon: 'groobzerb',
       })
     }
   } else if (player.player_role_id === 54) {
     if (groobPlayers.length >= 1) {
-      newGameState.players[token].card.player_team = 'zerb'
-      zerbPlayers.forEach(zerb => newGameState.card_positions[zerb].team = 'zerb')
+      newGamestate.players[token].card.player_team = 'zerb'
+      zerbPlayers.forEach(zerb => newGamestate.card_positions[zerb].team = 'zerb')
 
       player.player_history[title] = { ...player.player_history[title], groob: groobPlayers }
 
       const messageIdentifiers = formatPlayerIdentifier(groobPlayers)
 
-      return generateRoleInteraction(newGameState, token, {
+      return generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_zerbgroob', ...messageIdentifiers],
         icon: 'groobzerb',
         uniqueInformations: { groobzerb: groobPlayers },
@@ -78,7 +78,7 @@ export const groobzerb_interaction = (gameState, token, title) => {
     } else {
       player.player_history = { ...player.player_history, scene_title: title }
       
-      return generateRoleInteraction(newGameState, token, {
+      return generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_no_groob'],
         icon: 'groobzerb',
       })

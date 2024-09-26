@@ -1,45 +1,45 @@
-import { SCENE } from '../../constant'
+import { SCENE } from '../../constants'
 import { formatPlayerIdentifier, getAllPlayerTokens, getLoversPlayerNumbersByMark, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
-export const lovers = (gameState, title) => {
-  const newGameState = { ...gameState }
+export const lovers = (gamestate, title) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['lovers_kickoff_text']
   const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    const player = newGameState.players[token]
+    const player = newGamestate.players[token]
 
     if (player.player_mark === 'mark_of_love') {
-      interaction = lover_interaction(newGameState, token, title)
+      interaction = lover_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const lover_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const lover_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
 
-  const lovers = getLoversPlayerNumbersByMark(newGameState.players)
+  const lovers = getLoversPlayerNumbersByMark(newGamestate.players)
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     lovers,
   }
 
   const messageIdentifiers = formatPlayerIdentifier(lovers)
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_mark_of_lover', ...messageIdentifiers],
     icon: 'lover',
     uniqueInformations: { lovers },

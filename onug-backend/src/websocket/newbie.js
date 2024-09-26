@@ -1,4 +1,4 @@
-import { NEWBIE, REDIRECT } from '../constant'
+import { NEWBIE, REDIRECT } from '../constants'
 import { v4 as uuidv4, validate } from 'uuid'
 import { logInfo } from '../log'
 

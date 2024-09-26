@@ -1,4 +1,4 @@
-import { ALPHA_WOLF_ID, COPY_CAT_ID, MIRROR_MAN_ID, SUPER_VILLAINS, TEMPTRESS_ID, WEREVOLVES } from '../constant'
+import { ALPHA_WOLF_ID, COPY_CAT_ID, MIRROR_MAN_ID, SUPER_VILLAINS, TEMPTRESS_ID, WEREVOLVES } from '../constants'
 import cards from '../data/cards.json'
 
 const specialCardsDefaultToAddLookupMap = {

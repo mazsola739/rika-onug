@@ -1,78 +1,78 @@
-import { COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getSceneEndTime, moveCardsButYourOwn } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidAnswerSelection } from '../validate-response-data'
 
-export const villageidiot = (gameState, title) => {
-  const newGameState = { ...gameState }
+export const villageidiot = (gamestate, title) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['villageidiot_kickoff_text']
   const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 26 || (card.player_role_id === 26 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = villageidiot_interaction(newGameState, token, title)
+      interaction = villageidiot_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const villageidiot_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const villageidiot_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
   
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     answer_options: ['left', 'right'],
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_may_direction'],
     icon: title === 'RASCAL' ? 'prank' : 'jest',
     uniqueInformations: { answer_options: ['left', 'right'] },
   })
 }
 
-export const villageidiot_response = (gameState, token, selected_answer, title) => {
-  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history, title)) {
-    return gameState
+export const villageidiot_response = (gamestate, token, selected_answer, title) => {
+  if (!isValidAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+    return gamestate
   }
 
-  const newGameState = { ...gameState }
+  const newGamestate = { ...gamestate }
   const scene = []
 
-  const currentPlayer = getPlayerNumberWithMatchingToken(newGameState.players, token)
-  const updatedPlayerCards = moveCardsButYourOwn(newGameState.card_positions, selected_answer, currentPlayer)
+  const currentPlayer = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const updatedPlayerCards = moveCardsButYourOwn(newGamestate.card_positions, selected_answer, currentPlayer)
 
-  newGameState.players[token].card_or_mark_action = true
+  newGamestate.players[token].card_or_mark_action = true
 
-  newGameState.card_positions = {
-    ...newGameState.card_positions,
+  newGamestate.card_positions = {
+    ...newGamestate.card_positions,
     ...updatedPlayerCards
   }
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     direction: selected_answer,
   }
 
-  const interaction = generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_moved', selected_answer === 'left' ? 'direction_left' : 'direction_right'],
     icon: title === 'RASCAL' ? 'prank' : 'jest',
   })
 
   scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }

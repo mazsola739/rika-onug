@@ -1,22 +1,22 @@
-import { HYDRATE_GAME_PLAY, REDIRECT } from '../constant'
+import { HYDRATE_GAME_PLAY, REDIRECT } from '../constants'
 import { logTrace } from '../log'
-import { readGameState } from '../repository'
+import { readGamestate } from '../repository'
 import { isGamePlayStopped } from '../utils'
 
 export const hydrateGamePlay = async (ws, message) => {
   logTrace(`hydrate game play ${JSON.stringify(message)}`)
 
   const { room_id, token } = message
-  const gameState = await readGameState(room_id)
-  const newGameState = {...gameState}
+  const gamestate = await readGamestate(room_id)
+  const newGamestate = {...gamestate}
 
-  if (isGamePlayStopped(gameState))
+  if (isGamePlayStopped(gamestate))
     return ws.send(
       JSON.stringify({ type: REDIRECT, path: `/room/${room_id}` })
     )
 
   // TODO get actual scene based on scene_number and player token
-  const actual_scene = newGameState.actual_scene
+  const actual_scene = newGamestate.actual_scene
 
   return ws.send(
     JSON.stringify({

@@ -1,12 +1,12 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { alienAbducted, getAllPlayerTokens, getPlayerNeighborsByToken, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 //TODO aliens can see cow
-export const cow = (gameState, title, hasDoppelganger) => {
-  const newGameState = { ...gameState }
+export const cow = (gamestate, title, hasDoppelganger) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     hasDoppelganger 
       ? 'doppelganger_cow_kickoff_text' 
@@ -18,33 +18,33 @@ export const cow = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 45 || (card.player_role_id === 45 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = cow_interaction(newGameState, token, title)
+      interaction = cow_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const cow_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const cow_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
 
-  const neighborIsAlien = alienAbducted(newGameState.players, token)
-  const neighbors = getPlayerNeighborsByToken(newGameState.players, 'both', 1)
+  const neighborIsAlien = alienAbducted(newGamestate.players, token)
+  const neighbors = getPlayerNeighborsByToken(newGamestate.players, 'both', 1)
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     alien_neighbor: neighborIsAlien ? neighbors : [],
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message:  [neighborIsAlien ? 'interaction_got_tapped_by_alien' : 'interaction_no_tap'],
     icon: 'cow',
     uniqueInformations: { alien_neighbor: neighborIsAlien ? neighbors : [], }

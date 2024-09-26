@@ -1,6 +1,6 @@
-import { readGameState } from '../repository'
+import { readGamestate } from '../repository'
 import { logWarn } from '../log'
-import { ROOM_NAMES } from '../constant'
+import { ROOM_NAMES } from '../constants'
 
 export const validateRoom = async (roomId) => {
   const errors = []
@@ -12,18 +12,18 @@ export const validateRoom = async (roomId) => {
     return [false, {}, errors]
   }
 
-  const gameState = await readGameState(roomId)
+  const gamestate = await readGamestate(roomId)
 
-  if (!gameState) {
+  if (!gamestate) {
     errors.push('Room does not exist')
   }
 
-  const closed = gameState?.closed
+  const closed = gamestate?.closed
   if (closed) {
-    errors.push('Gamestate is already closed for that room id')
+    errors.push('gamestate is already closed for that room id')
   }
 
-  const playersFull = gameState?.players?.length === 12
+  const playersFull = gamestate?.players?.length === 12
   if (playersFull) {
     errors.push('Room is already full')
   }
@@ -31,5 +31,5 @@ export const validateRoom = async (roomId) => {
   const validity = errors.length === 0
   if (!validity) logWarn(`Validation errors: ${errors}`)
 
-  return [validity, gameState, errors]
+  return [validity, gamestate, errors]
 }

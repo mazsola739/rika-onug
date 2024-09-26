@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray, getPartOfGroupByToken, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
@@ -15,11 +15,11 @@ const randomBlobKickoffText = [
   'blob_2eachside_text',
 ]
 
-export const blob = (gameState, title) => {
-  const newGameState = { ...gameState }
+export const blob = (gamestate, title) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
-  const total_players = newGameState.total_players
+  const tokens = getAllPlayerTokens(newGamestate.players)
+  const total_players = newGamestate.total_players
 
   let availableBlobOptions = []
 
@@ -41,35 +41,35 @@ export const blob = (gameState, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 44 || (card.player_role_id === 44 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = blob_interaction(newGameState, token, title)
+      interaction = blob_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const blob_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
-  const randomInstruction = newGameState.scene.narration[0]
+export const blob_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
+  const randomInstruction = newGamestate.scene.narration[0]
   
-  const partOfBlob = getPartOfGroupByToken(newGameState.players, token, randomInstruction)
+  const partOfBlob = getPartOfGroupByToken(newGamestate.players, token, randomInstruction)
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     blob: partOfBlob,
   }
 
   const messageIdentifiers = formatPlayerIdentifier(partOfBlob)
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_part_of_blob', ...messageIdentifiers],
     icon: 'blob',
     uniqueInformations: { blob: partOfBlob },

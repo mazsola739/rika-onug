@@ -1,7 +1,7 @@
 import cards from '../data/cards.json'
 import { getCenterCardPositionByIndex, stubbedCards } from '../stub/populate-deal'
 import { logInfo } from '../log'
-import { ALPHA_WOLF_ID, HAS_MARK_IDS, SUPER_VILLAINS, TEMPTRESS_ID, WEREVOLVES } from '../constant'
+import { ALPHA_WOLF_ID, HAS_MARK_IDS, SUPER_VILLAINS, TEMPTRESS_ID, WEREVOLVES } from '../constants'
 
 const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(ALPHA_WOLF_ID)
 const hasTemptress = (selectedCardIds) => selectedCardIds.includes(TEMPTRESS_ID)

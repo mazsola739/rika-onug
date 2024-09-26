@@ -1,4 +1,4 @@
-import { ALL_ALIEN_IDS, MASONS, ALL_SUPER_VILLAIN_IDS, ALL_VAMPIRE_IDS, ALL_WEREWOLF_IDS, WEREVOLVES } from '../constant'
+import { ALL_ALIEN_IDS, MASONS, ALL_SUPER_VILLAIN_IDS, ALL_VAMPIRE_IDS, ALL_WEREWOLF_IDS, WEREVOLVES } from '../constants'
 import artifacts from '../data/artifacts.json'
 import _ from 'lodash'
 
@@ -582,12 +582,12 @@ export const getVampireTokensByRoleIds = players => {
   return result
 }
 
-export const getNonVampirePlayerNumbersByRoleIds = gameState => {
+export const getNonVampirePlayerNumbersByRoleIds = gamestate => {
   const result = []
 
-  for (const token in gameState.players) {
-    const player = gameState.players[token]
-    const cardPositions = gameState.card_positions
+  for (const token in gamestate.players) {
+    const player = gamestate.players[token]
+    const cardPositions = gamestate.card_positions
     if (!ALL_VAMPIRE_IDS.includes(player.card.player_role_id) && cardPositions[`player_${player.player_number}`].mark !== "mark_of_vampire") {
       result.push(`player_${player.player_number}`)
     }

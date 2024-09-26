@@ -1,12 +1,12 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByMark, getPlayerNumberWithMatchingToken, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
 //TODO no vampire he is villager
-export const renfield = (gameState, title, hasDoppelganger) => {
-  const newGameState = { ...gameState }
+export const renfield = (gamestate, title, hasDoppelganger) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_renfield_kickoff_text'
@@ -18,46 +18,46 @@ export const renfield = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 38 || (card.player_role_id === 38 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = renfield_interaction(newGameState, token, title)
+      interaction = renfield_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const renfield_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
-  const vampires = getVampirePlayerNumbersByRoleIds(newGameState.players)
-  const newVampire = getVampirePlayerNumbersByMark(newGameState.players)
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
-  const currentPlayerMark = newGameState.card_positions[currentPlayerNumber].mark
+export const renfield_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
+  const vampires = getVampirePlayerNumbersByRoleIds(newGamestate.players)
+  const newVampire = getVampirePlayerNumbersByMark(newGamestate.players)
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const currentPlayerMark = newGamestate.card_positions[currentPlayerNumber].mark
 
-  if (gameState.players[token].card.player_original_id === 1) {
-    const batPosition = newGameState.doppelganger_mark_positions.bat
-    newGameState.doppelganger_mark_positions.bat = currentPlayerMark
-    newGameState.card_positions[currentPlayerNumber].mark = batPosition
+  if (gamestate.players[token].card.player_original_id === 1) {
+    const batPosition = newGamestate.doppelganger_mark_positions.bat
+    newGamestate.doppelganger_mark_positions.bat = currentPlayerMark
+    newGamestate.card_positions[currentPlayerNumber].mark = batPosition
   } else {
-    const batPosition = newGameState.mark_positions.bat
-    newGameState.mark_positions.bat = currentPlayerMark
-    newGameState.card_positions[currentPlayerNumber].mark = batPosition
+    const batPosition = newGamestate.mark_positions.bat
+    newGamestate.mark_positions.bat = currentPlayerMark
+    newGamestate.card_positions[currentPlayerNumber].mark = batPosition
   }
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     vampires, 
     new_vampire: newVampire, 
     mark_of_bat: [currentPlayerNumber]
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_vampires', 'interaction_mark_of_bat'],
     icon: 'bat',
     uniqueInformations: { vampires, new_vampire: newVampire, mark_of_bat: [currentPlayerNumber] },

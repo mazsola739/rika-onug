@@ -1,11 +1,11 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { formatPlayerIdentifier, getAllPlayerTokens, getMadScientistPlayerNumberByRoleIds, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
-export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
-  const newGameState = { ...gameState }
+export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_intern_kickoff_text'
@@ -17,39 +17,39 @@ export const intern = (gameState, title, hasDoppelganger, hasMadScientist) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 62 || (card.player_role_id === 62 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = intern_interaction(newGameState, token, title)
+      interaction = intern_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const intern_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
-  const madscientist = getMadScientistPlayerNumberByRoleIds(newGameState.players)
-  const playerCard = newGameState.players[token]?.card
+export const intern_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
+  const madscientist = getMadScientistPlayerNumberByRoleIds(newGamestate.players)
+  const playerCard = newGamestate.players[token]?.card
 
   if (madscientist.length === 0) {
     playerCard.player_role_id = 63
     playerCard.player_role = 'MAD_SCIENTIST'
   }
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     madscientist,
   }
 
   const messageIdentifiers = formatPlayerIdentifier(madscientist)
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: [madscientist.length === 0 ? 'interaction_mad_now' : 'interaction_mad', ...messageIdentifiers],
     icon: 'mad',
     uniqueInformations: { mad: madscientist },

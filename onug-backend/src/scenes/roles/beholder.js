@@ -1,12 +1,12 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { formatPlayerIdentifier, getAllPlayerTokens, getAnySeerPlayerNumbersByRoleIds, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidAnswerSelection } from '../validate-response-data'
 
-export const beholder = (gameState, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
-  const newGameState = { ...gameState }
+export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_beholder_kickoff_text'
@@ -22,84 +22,84 @@ export const beholder = (gameState, title, hasSeer, hasApprenticeSeer, hasDoppel
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 73 || (card.player_role_id === 73 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = beholder_interaction(newGameState, token, title)
+      interaction = beholder_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
 
 
-export const beholder_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const beholder_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
   
-  const seers = getAnySeerPlayerNumbersByRoleIds(newGameState.players)
+  const seers = getAnySeerPlayerNumbersByRoleIds(newGamestate.players)
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     seers,
   }
 
   const messageIdentifiers = formatPlayerIdentifier(seers)
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_seers', ...messageIdentifiers, 'interaction_may_look'],
     icon: 'seer',
     uniqueInformations: { seers, answer_options: ['yes', 'no'] },
   })
 }
 
-export const beholder_response = (gameState, token, selected_answer, title) => {
-  if (!isValidAnswerSelection(selected_answer, gameState.players[token].player_history, title)) {
-    return gameState
+export const beholder_response = (gamestate, token, selected_answer, title) => {
+  if (!isValidAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+    return gamestate
   }
 
-  const newGameState = { ...gameState }
+  const newGamestate = { ...gamestate }
   const scene = []
 
   let interaction = {}
 
   if (selected_answer === 'yes') {
-    const seers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(newGameState.players)
-    const viewCards = getCardIdsByPositions(newGameState.card_positions, seers)
+    const seers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(newGamestate.players)
+    const viewCards = getCardIdsByPositions(newGamestate.card_positions, seers)
 
-    if ( seers.some(seer => newGameState.card_positions[seer].card.id === newGameState.players[token]?.card?.original_id)  ) {
-      newGameState.players[token].card.player_card_id = 0
+    if ( seers.some(seer => newGamestate.card_positions[seer].card.id === newGamestate.players[token]?.card?.original_id)  ) {
+      newGamestate.players[token].card.player_card_id = 0
     }
 
-    newGameState.players[token].card_or_mark_action = true
+    newGamestate.players[token].card_or_mark_action = true
 
-    newGameState.players[token].player_history[title] = {
-      ...newGameState.players[token].player_history[title],
+    newGamestate.players[token].player_history[title] = {
+      ...newGamestate.players[token].player_history[title],
       viewed_cards: seers,
     }
     
     const messageIdentifiers = formatPlayerIdentifier(seers)
   
-    interaction = generateRoleInteraction(newGameState, token, {
+    interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_saw_card', ...messageIdentifiers],
       icon: 'seer',
       showCards: viewCards,
       uniqueInformations: { seers },
     })
   } else if (selected_answer === 'no') {
-    interaction = generateRoleInteraction(newGameState, token, {
+    interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_nothing'],
       icon: 'seer',
     })
   }
 
   scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }

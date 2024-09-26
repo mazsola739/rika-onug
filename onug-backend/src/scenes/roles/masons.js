@@ -1,43 +1,43 @@
-import { MASONS, ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { MASONS, ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getMasonPlayerNumbersByRoleIds, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
-export const masons = (gameState, title) => {
-  const newGameState = { ...gameState }
+export const masons = (gamestate, title) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['masons_kickoff_text']
   const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (MASONS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
-      interaction = masons_interaction(newGameState, token, title)
+      interaction = masons_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const masons_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const masons_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
   
-  const masons = getMasonPlayerNumbersByRoleIds(newGameState.players)
+  const masons = getMasonPlayerNumbersByRoleIds(newGamestate.players)
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     masons,
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_masons'],
     icon: 'mason',
     uniqueInformations: { masons },

@@ -1,9 +1,9 @@
-import { JOIN_ROOM } from '../constant'
+import { JOIN_ROOM } from '../constants'
 import roomsData from '../data/rooms.json'
 import { validateRoom } from '../validator'
 import { upsertRoomState } from '../repository'
 import { logTrace } from '../log'
-import { STAGES } from '../constant'
+import { STAGES } from '../constants'
 import { addUserToRoom } from './connections'
 
 const randomPlayerName = (names = []) => names[~~(Math.random() * names.length)]
@@ -25,7 +25,7 @@ export const joinRoom = async (ws, message) => {
   }
 
   const room = roomsData[roomIndex]
-  const [roomIdValid, gameState] = await validateRoom(room_id)
+  const [roomIdValid, gamestate] = await validateRoom(room_id)
 
   let player_name
 
@@ -42,7 +42,7 @@ export const joinRoom = async (ws, message) => {
 
     player_name = randomPlayerName(room.available_names)
 
-    const newGameState = {
+    const newGamestate = {
       ...room,
       selected_cards: room.selected_cards,
       selected_expansions: room.selected_expansions,
@@ -55,7 +55,7 @@ export const joinRoom = async (ws, message) => {
       ),
     }
 
-    await upsertRoomState(newGameState)
+    await upsertRoomState(newGamestate)
   } else {
     if (room.available_names.length === 0) {
       return ws.send(
@@ -67,19 +67,19 @@ export const joinRoom = async (ws, message) => {
       )
     }
 
-    player_name = randomPlayerName(gameState.available_names)
+    player_name = randomPlayerName(gamestate.available_names)
 
-    gameState.players[token] = {
+    gamestate.players[token] = {
       name: player_name,
-      admin: gameState.players.length === 0,
+      admin: gamestate.players.length === 0,
       ready: false,
     }
 
-    gameState.available_names = gameState.available_names.filter(
+    gamestate.available_names = gamestate.available_names.filter(
       (name) => name !== player_name
     )
 
-    await upsertRoomState(gameState)
+    await upsertRoomState(gamestate)
   }
 
   addUserToRoom(ws, token, room_id)

@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getPartOfGroupByToken, getRandomItemFromArray, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 
@@ -15,11 +15,11 @@ const randomFamilyman = [
   'familyman_2eachside_text',
 ]
 
-export const familyman = (gameState, title, hasDoppelganger) => {
-  const newGameState = { ...gameState }
+export const familyman = (gamestate, title, hasDoppelganger) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
-  const total_players = newGameState.total_players
+  const tokens = getAllPlayerTokens(newGamestate.players)
+  const total_players = newGamestate.total_players
 
   let availableFamilyManOptions = []
 
@@ -45,33 +45,33 @@ export const familyman = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 78 || (card.player_role_id === 78 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = familyman_interaction(newGameState, token, title)
+      interaction = familyman_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const familyman_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
-  const randomInstruction = newGameState.scene.narration[1]
+export const familyman_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
+  const randomInstruction = newGamestate.scene.narration[1]
   
-  const partOfFamily = getPartOfGroupByToken(newGameState.players, token, randomInstruction)
+  const partOfFamily = getPartOfGroupByToken(newGamestate.players, token, randomInstruction)
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     family: partOfFamily,
   }
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_part_of_family'],
     icon: 'family',
     uniqueInformations: { family: partOfFamily, },

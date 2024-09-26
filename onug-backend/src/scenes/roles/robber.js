@@ -1,92 +1,92 @@
-import { COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier, getSceneEndTime } from '../../utils'
 import { generateRoleInteraction } from '../generate-scene-role-interactions'
 import { isValidCardSelection } from '../validate-response-data'
 
-export const robber = (gameState, title) => {
-  const newGameState = { ...gameState }
+export const robber = (gamestate, title) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['robber_kickoff_text']
   const actionTime = 12
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 8 || (card.player_role_id === 8 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = robber_interaction(newGameState, token, title)
+      interaction = robber_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const robber_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const robber_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
   
-  if (!newGameState.players[token].shield) {
-    const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGameState.players, token)
+  if (!newGamestate.players[token].shield) {
+    const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGamestate.players, token)
 
-    newGameState.players[token].player_history[title] = {
-      ...newGameState.players[token].player_history[title],
+    newGamestate.players[token].player_history[title] = {
+      ...newGamestate.players[token].player_history[title],
       selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 },
     }
 
-    return generateRoleInteraction(newGameState, token, {
+    return generateRoleInteraction(newGamestate, token, {
       private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any_other'],
       icon: title === 'ROBBER' ? 'robber' : 'dog',
       selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
     })
   } else {
-    newGameState.players[token].player_history[title] = {
-      ...newGameState.players[token].player_history[title],
+    newGamestate.players[token].player_history[title] = {
+      ...newGamestate.players[token].player_history[title],
       shielded: true,
     }
 
-    return generateRoleInteraction(newGameState, token, {
+    return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_shielded'],
       icon: 'shielded',
     })
   }
 }
 
-export const robber_response = (gameState, token, selected_card_positions, title) => {
-  if (!isValidCardSelection(selected_card_positions, gameState.players[token].player_history, title)) {
-    return gameState
+export const robber_response = (gamestate, token, selected_card_positions, title) => {
+  if (!isValidCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+    return gamestate
   }
   
-  const newGameState = { ...gameState }
+  const newGamestate = { ...gamestate }
   const scene = []
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGameState.players, token)
-  const currentPlayerCard = { ...newGameState.card_positions[currentPlayerNumber].card }
-  const selectedCard = { ...newGameState.card_positions[selected_card_positions[0]].card }
-  newGameState.card_positions[currentPlayerNumber].card = selectedCard
-  newGameState.card_positions[selected_card_positions[0]].card = currentPlayerCard
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const currentPlayerCard = { ...newGamestate.card_positions[currentPlayerNumber].card }
+  const selectedCard = { ...newGamestate.card_positions[selected_card_positions[0]].card }
+  newGamestate.card_positions[currentPlayerNumber].card = selectedCard
+  newGamestate.card_positions[selected_card_positions[0]].card = currentPlayerCard
 
-  newGameState.players[token].card.player_card_id = newGameState.card_positions[currentPlayerNumber].card.id
-  newGameState.players[token].card.player_team = newGameState.card_positions[currentPlayerNumber].card.team
+  newGamestate.players[token].card.player_card_id = newGamestate.card_positions[currentPlayerNumber].card.id
+  newGamestate.players[token].card.player_team = newGamestate.card_positions[currentPlayerNumber].card.team
 
-  const showCards = getCardIdsByPlayerNumbers(newGameState.card_positions, [currentPlayerNumber])
+  const showCards = getCardIdsByPlayerNumbers(newGamestate.card_positions, [currentPlayerNumber])
 
-  newGameState.players[token].card_or_mark_action = true
+  newGamestate.players[token].card_or_mark_action = true
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
     viewed_cards: [currentPlayerNumber],
   }
 
   const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_card_positions[0]])
 
-  const interaction = generateRoleInteraction(newGameState, token, {
+  const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
     icon: title === 'ROBBER' ? 'robber' : 'dog',
     showCards,
@@ -94,7 +94,7 @@ export const robber_response = (gameState, token, selected_card_positions, title
   })
 
   scene.push({ type: SCENE, title, token, interaction })
-  newGameState.scene = scene
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }

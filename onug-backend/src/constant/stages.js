@@ -1,6 +1,0 @@
-export const STAGES = {
-  ROOM: "ROOM",
-  GAME_TABLE: "GAME_TABLE",
-  GAME_PLAY: "GAME_PLAY",
-  GAME_VOTE: "GAME_VOTE",
-}

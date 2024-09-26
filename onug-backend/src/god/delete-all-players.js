@@ -1,15 +1,15 @@
 import { logTrace, logErrorWithStack } from '../log'
-import { deleteAllPlayers } from '../repository'
+import { removeAllPlayers } from '../repository'
 import { initWebSocketConnections } from '../websocket/connections'
 
-export const delete_all_players = async (req, res) => {
+export const deleteAllPlayers = async (req, res) => {
   try {
     const { body } = req
     logTrace('GOD delete all players endpoint triggered', body)
-    const response = await deleteAllPlayers()
+    const response = await removeAllPlayers()
     initWebSocketConnections()
 
-    logTrace(`sending back game states: ${JSON.stringify(response)}`)
+    logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
 
     return res.send(response)
   } catch (error) {

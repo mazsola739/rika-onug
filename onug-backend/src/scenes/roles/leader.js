@@ -1,11 +1,11 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constant'
+import { ALL_COPY_PLAYER_IDS, SCENE } from '../../constants'
 import { formatPlayerIdentifier, getAlienPlayerNumbersByRoleIds, getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getSceneEndTime, getZerbPlayerNumberByRoleIds } from '../../utils'
 import { generateRoleInteraction } from './../generate-scene-role-interactions'
 
-export const leader = (gameState, title, hasDoppelganger) => {
-  const newGameState = { ...gameState }
+export const leader = (gamestate, title, hasDoppelganger) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     hasDoppelganger
       ? 'doppelganger_leader_kickoff_text'
@@ -17,92 +17,92 @@ export const leader = (gameState, title, hasDoppelganger) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 48 || (card.player_role_id === 48 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = leader_interaction(newGameState, token, title)
+      interaction = leader_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const leader_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const leader_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
 
-  const aliens = getAlienPlayerNumbersByRoleIds(newGameState.players)
+  const aliens = getAlienPlayerNumbersByRoleIds(newGamestate.players)
 
-  newGameState.players[token].player_history[title] = {
-    ...newGameState.players[token].player_history[title],
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     aliens,
   }
 
   const messageIdentifiers = formatPlayerIdentifier(aliens)
 
-  return generateRoleInteraction(newGameState, token, {
+  return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_aliens', ...messageIdentifiers],
     icon: 'alien',
     uniqueInformations: { aliens },
   })
 }
 
-export const leader_zerbgroob = (gameState, title) => {
-  const newGameState = { ...gameState }
+export const leader_zerbgroob = (gamestate, title) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['leader_zerbgroob_text']
   const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
 
-    const card = newGameState.players[token].card
+    const card = newGamestate.players[token].card
 
     if (card.player_original_id === 48 || (card.player_role_id === 48 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
-      interaction = leader_zerbgroob_interaction(newGameState, token, title)
+      interaction = leader_zerbgroob_interaction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }
 
-export const leader_zerbgroob_interaction = (gameState, token, title) => {
-  const newGameState = { ...gameState }
+export const leader_zerbgroob_interaction = (gamestate, token, title) => {
+  const newGamestate = { ...gamestate }
 
-  const zerb = getZerbPlayerNumberByRoleIds(newGameState.players)
-  const groob = getGroobPlayerNumberByRoleIds(newGameState.players)
+  const zerb = getZerbPlayerNumberByRoleIds(newGamestate.players)
+  const groob = getGroobPlayerNumberByRoleIds(newGamestate.players)
 
   if (groob.length >= 1 && zerb.length >= 1) {
     const zerbgroob = zerb.concat(groob)
 
-    newGameState.players[token].player_history[title] = {
-      ...newGameState.players[token].player_history[title],
+    newGamestate.players[token].player_history[title] = {
+      ...newGamestate.players[token].player_history[title],
       groobzerb: zerbgroob,
     }
 
     const messageIdentifiers = formatPlayerIdentifier(zerbgroob)
 
-    return generateRoleInteraction(newGameState, token, {
+    return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_zerbgroob', ...messageIdentifiers],
       icon: 'groobzerb',
       uniqueInformations: { groobzerb: zerbgroob },
     })
   } else {
-    newGameState.players[token].player_history[title] = {
-      ...newGameState.players[token].player_history[title],
+    newGamestate.players[token].player_history[title] = {
+      ...newGamestate.players[token].player_history[title],
     }
 
-    return generateRoleInteraction(newGameState, token, {
+    return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_no_zerbgroob'],
       icon: 'groobzerb',
     })

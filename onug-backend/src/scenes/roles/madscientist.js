@@ -1,4 +1,4 @@
-import { SCENE } from '../../constant'
+import { SCENE } from '../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../utils'
 
 const random_madscientist_intro = [
@@ -61,10 +61,10 @@ const random_madscientist_transition = [
   'madscientist_transition_21_text',
 ]
 
-export const madscientist = (gameState, title) => {
-  const newGameState = { ...gameState }
+export const madscientist = (gamestate, title) => {
+  const newGamestate = { ...gamestate }
   const scene = []
-  const tokens = getAllPlayerTokens(newGameState.players)
+  const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     'madscientist_kickoff_text',
     getRandomItemFromArray(random_madscientist_intro),
@@ -81,8 +81,8 @@ export const madscientist = (gameState, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGameState.actual_scene.scene_end_time = getSceneEndTime(newGameState.actual_scene.scene_start_time, actionTime)
-  newGameState.scene = scene
+  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
+  newGamestate.scene = scene
 
-  return newGameState
+  return newGamestate
 }

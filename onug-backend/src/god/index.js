@@ -1,11 +1,11 @@
 import express from 'express'
-import { checkGameStates } from './check-game-states'
-import { checkGameStateByRoomId } from './check-game-state-by-room-id'
-import { reInitAllGameStates } from './re-init-all-game-states'
-import { delete_all_gamestates } from './delete-all-game-states'
-import { delete_gamestate_by_room_id } from './delete-game-state-by-room-id'
-import { delete_all_players } from './delete-all-players'
-import { delete_player_by_token } from './delete-player-by-token'
+import { checkGamestates } from './check-gamestates'
+import { checkGamestateByRoomId } from './check-gamestate-by-room-id'
+import { reInitAllGamestates } from './re-init-all-gamestates'
+import { deleteAllGamestates } from './delete-all-gamestates'
+import { deleteGamestateByRoomId } from './delete-gamestate-by-room-id'
+import { deleteAllPlayers } from './delete-all-players'
+import { deletePlayerByToken } from './delete-player-by-token'
 import { checkConnections } from './check-connections'
 import { broadCastToAll } from './broadcast-to-all'
 import { broadCastToAllInRoom } from './broadcast-to-all-in-room'
@@ -16,11 +16,11 @@ import { metaDeleteAllOldLogFiles } from './meta-delete-all-old-log-files'
 const router = express.Router()
 
 // gamestates
-router.get('/check-game-states', checkGameStates)
-router.get('/check-game-state-by-room-id', checkGameStateByRoomId)
-router.get('/re-init-all-game-states', reInitAllGameStates)
-router.get('/delete-all-game-states', delete_all_gamestates)
-router.get('/delete-game-state-by-room-id', delete_gamestate_by_room_id)
+router.get('/check-gamestates', checkGamestates)
+router.get('/check-gamestate-by-room-id', checkGamestateByRoomId)
+router.get('/re-init-all-gamestates', reInitAllGamestates)
+router.get('/delete-all-gamestates', deleteAllGamestates)
+router.get('/delete-gamestate-by-room-id', deleteGamestateByRoomId)
 
 // ws
 router.get('/check-connections', checkConnections)
@@ -30,8 +30,8 @@ router.post('/send-message-to-player', sendMessageToPlayer)
 
 //! TODO removing players does not handle available_names, and admin rights right now. TODO fix it.
 //! or just use re-init endpoint instead
-router.get('/delete-all-players', delete_all_players)
-router.get('/delete-player-by-token', delete_player_by_token)
+router.get('/delete-all-players', deleteAllPlayers)
+router.get('/delete-player-by-token', deletePlayerByToken)
 
 // meta
 router.get('/list-onug-env-vars', metaListOnugEnv)
