@@ -1,4 +1,4 @@
-import { HYDRATE_GAME_VOTE, REDIRECT } from '../constants'
+import { HYDRATE_VOTING, REDIRECT } from '../constants'
 import { logTrace } from '../log'
 import { readGamestate } from '../repository'
 
@@ -11,7 +11,7 @@ export const hydrateGameVote = async (ws, message) => {
 
   return ws.send(
     JSON.stringify({
-      type: HYDRATE_GAME_VOTE,
+      type: HYDRATE_VOTING,
     })
   )
 }

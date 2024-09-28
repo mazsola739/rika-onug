@@ -1,4 +1,4 @@
-import { HYDRATE_GAME_TABLE, REDIRECT } from '../constants'
+import { HYDRATE_DEALING, REDIRECT } from '../constants'
 import { logTrace, logErrorWithStack } from '../log'
 import { readGamestate } from '../repository'
 import { isGameTableClosed, getGameTableBoard } from '../utils'
@@ -17,7 +17,7 @@ export const hydrateGameTable = async (ws, message) => {
 
     return ws.send(
       JSON.stringify({
-        type: HYDRATE_GAME_TABLE,
+        type: HYDRATE_DEALING,
         selected_cards: gamestate.selected_cards,
         player_name: player?.name,
         player_number: player?.player_number,

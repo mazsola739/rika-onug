@@ -1,6 +1,6 @@
 import { upsertRoomState, readGamestate } from '../repository'
 import { logTrace } from '../log'
-import { HYDRATE_GAME_TABLE, REDIRECT } from '../constants'
+import { HYDRATE_DEALING, REDIRECT } from '../constants'
 import { broadcast } from './connections'
 import { STAGES } from '../constants'
 
@@ -14,7 +14,7 @@ export const leaveTable = async (ws, message) => {
   if (!player) {
     return ws.send(
       JSON.stringify({
-        type: HYDRATE_GAME_TABLE,
+        type: HYDRATE_DEALING,
         success: false,
         errors: ["Player not found at the table."],
       })

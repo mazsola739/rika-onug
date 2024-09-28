@@ -1,8 +1,9 @@
-import { Footer, FooterButtons, Button, SelectedCardList } from 'components'
+import { Footer, FooterButtons, Button } from 'components'
 import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
+import { SelectedCardList } from '../../modules/SelectedCardList/SelectedCardList'
 
 export const RoomFooter: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')

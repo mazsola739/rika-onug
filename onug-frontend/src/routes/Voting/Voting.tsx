@@ -1,12 +1,13 @@
-import { Header, Main, BoardCards, KnownOwnCard, VotedList } from 'components'
+import { Header, Main, KnownOwnCard } from 'components'
+import { ARRIVE_VOTING, STAGES } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { gameBoardStore, wsStore } from 'store'
-import { StyledGameVote, GameArea, PlayerHand, OwnCardPlace, Voted } from './GameVote.styles'
-import { GameVoteFooter } from './GameVoteFooter'
-import { useEffect, useState } from 'react'
-import { ARRIVE_GAME_VOTE, STAGES } from 'constant'
+import { VotedList } from 'modules'
+import { useState, useEffect } from 'react'
+import { wsStore, gameBoardStore } from 'store'
+import { StyledGameVote, GameArea, PlayerHand, OwnCardPlace, Voted } from './Voting.styles'
+import { VotingFooter } from './VotingFooter'
 
-export const GameVote: React.FC = observer(() => {
+export const Voting: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
 
   const { sendJsonMessage, lastJsonMessage } =
@@ -20,8 +21,8 @@ export const GameVote: React.FC = observer(() => {
       setFirstTime(false)
       gameBoardStore.closeYourEyes()
       sendJsonMessage?.({
-        type: ARRIVE_GAME_VOTE,
-        stage: STAGES.GAME_VOTE,
+        type: ARRIVE_VOTING,
+        stage: STAGES.VOTING,
         room_id,
         token,
       })
@@ -32,9 +33,7 @@ export const GameVote: React.FC = observer(() => {
     <StyledGameVote>
       <Header>Player history?</Header>
       <Main>
-        <GameArea>
-          <BoardCards />
-        </GameArea>
+        <GameArea />
         <PlayerHand>
           <OwnCardPlace>
             <KnownOwnCard player={gameBoardStore.knownPlayer} />
@@ -42,7 +41,7 @@ export const GameVote: React.FC = observer(() => {
         </PlayerHand>
         <Voted>{gameBoardStore.players && <VotedList players={gameBoardStore.players} />}</Voted>
       </Main>
-      <GameVoteFooter />
+      <VotingFooter />
     </StyledGameVote>
   )
 })

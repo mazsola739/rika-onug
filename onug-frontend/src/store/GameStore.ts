@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
-class GamePlayStore {
+class GameStore {
   isGameStarted = false
   isGameStopped = true
   isGamePaused = false
@@ -34,5 +34,5 @@ class GamePlayStore {
   }
 }
 
-export default GamePlayStore
-export const gamePlayStore = new GamePlayStore()
+export default GameStore
+export const gameStore = new GameStore()

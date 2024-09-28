@@ -6,22 +6,22 @@ export const LEAVE_ROOM = 'LEAVE_ROOM'
 
 export const ARRIVE_LOBBY = 'ARRIVE_LOBBY'
 export const ARRIVE_ROOM = 'ARRIVE_ROOM'
-export const ARRIVE_GAME_TABLE = 'ARRIVE_GAME_TABLE'
-export const ARRIVE_GAME_PLAY = 'ARRIVE_GAME_PLAY'
-export const ARRIVE_GAME_VOTE = 'ARRIVE_GAME_VOTE'
+export const ARRIVE_DEALING = 'ARRIVE_DEALING'
+export const ARRIVE_GAME = 'ARRIVE_GAME'
+export const ARRIVE_VOTING = 'ARRIVE_VOTING'
 
 export const HYDRATE_LOBBY = 'HYDRATE_LOBBY'
 export const HYDRATE_ROOM = 'HYDRATE_ROOM'
-export const HYDRATE_GAME_TABLE = 'HYDRATE_GAME_TABLE'
-export const HYDRATE_GAME_PLAY = 'HYDRATE_GAME_PLAY'
-export const HYDRATE_GAME_VOTE = 'HYDRATE_GAME_VOTE'
+export const HYDRATE_DEALING = 'HYDRATE_DEALING'
+export const HYDRATE_GAME = 'HYDRATE_GAME'
+export const HYDRATE_VOTING = 'HYDRATE_VOTING'
 
 export const UPDATE_ROOM = 'UPDATE_ROOM'
 export const RESET = 'RESET'
 export const DEAL = 'DEAL'
 export const HYDRATE_READY = 'HYDRATE_READY'
 export const LEAVE_TABLE = 'LEAVE_TABLE'
-export const UPDATE_GAME_TABLE = 'UPDATE_GAME_TABLE'
+export const UPDATE_DEALING = 'UPDATE_DEALING'
 export const READY = 'READY'
 export const REDIRECT = 'REDIRECT'
 export const START_GAME = 'START_GAME'
@@ -34,9 +34,9 @@ export const MESSAGE = 'MESSAGE'
 export const STAGES = {
   LOBBY: 'LOBBY',
   ROOM: 'ROOM',
-  GAME_TABLE: 'GAME_TABLE',
-  GAME_PLAY: 'GAME_PLAY',
-  GAME_VOTE: 'GAME_VOTE',
+  DEALING: 'DEALING',
+  GAME: 'GAME',
+  VOTING: 'VOTING',
 }
 
 export const API_SERVER_HOST = 'http://ec2-3-90-213-104.compute-1.amazonaws.com:7654'

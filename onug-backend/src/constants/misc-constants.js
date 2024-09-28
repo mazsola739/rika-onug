@@ -21,9 +21,9 @@ export const ROOM_NAMES = [
 
 export const STAGES = {
   ROOM: "ROOM",
-  GAME_TABLE: "GAME_TABLE",
-  GAME_PLAY: "GAME_PLAY",
-  GAME_VOTE: "GAME_VOTE",
+  DEALING: "DEALING",
+  GAME: "GAME",
+  VOTING: "VOTING",
 }
 
 export const CENTER_CARD_POSITIONS = [

@@ -1,14 +1,15 @@
-import { Header, Main, BoardCards, SceneTracker, KnownOwnCard, MessageBox } from 'components'
-import { ARRIVE_GAME_PLAY, STAGES, SCENE, HYDRATE_GAME_PLAY, MESSAGE, REDIRECT } from 'constant'
+import { Header, Main, KnownOwnCard } from 'components'
+import { ARRIVE_GAME, STAGES, SCENE, HYDRATE_GAME, MESSAGE, REDIRECT } from 'constant'
 import { observer } from 'mobx-react-lite'
+import { BoardCards, SceneTracker, MessageBox } from 'modules'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { wsStore, gameBoardStore, narrationStore, interactionStore, gamePlayStore } from 'store'
-import { StyledGamePlay, GamePlayContainer, GameArea, PlayerHand, OwnCardPlace } from './GamePlay.styles'
-import { GamePlayFooter } from './GamePlayFooter'
-import { GamePlayHeader } from './GamePlayHeader'
+import { wsStore, gameBoardStore, narrationStore, interactionStore, gameStore } from 'store'
+import { StyledGamePlay, GamePlayContainer, GameArea, PlayerHand, OwnCardPlace } from './Game.styles'
+import { GameFooter } from './GameFooter'
+import { GameHeader } from './GameHeader'
 
-export const GamePlay: React.FC = observer(() => {
+export const Game: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
   const navigate = useNavigate()
 
@@ -23,8 +24,8 @@ export const GamePlay: React.FC = observer(() => {
       setFirstTime(false)
       gameBoardStore.closeYourEyes()
       sendJsonMessage?.({
-        type: ARRIVE_GAME_PLAY,
-        stage: STAGES.GAME_PLAY,
+        type: ARRIVE_GAME,
+        stage: STAGES.GAME,
         room_id,
         token,
       })
@@ -43,13 +44,13 @@ export const GamePlay: React.FC = observer(() => {
         interactionStore.toggleMessageBoxStatus(true)
       }
     }
-    if (lastJsonMessage?.type === HYDRATE_GAME_PLAY) {
+    if (lastJsonMessage?.type === HYDRATE_GAME) {
       /* && lastJsonMessage?.success */ //TODO success?
       narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
-      gamePlayStore.setStartingTime(
+      gameStore.setStartingTime(
         lastJsonMessage.actual_scene.scene_start_time
       )
-      gamePlayStore.setEndingTime(
+      gameStore.setEndingTime(
         lastJsonMessage.actual_scene.scene_end_time
       )
     }
@@ -59,12 +60,12 @@ export const GamePlay: React.FC = observer(() => {
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [lastJsonMessage, narrationStore, gamePlayStore, interactionStore])
+  }, [lastJsonMessage, narrationStore, gameStore, interactionStore])
 
   return (
     <StyledGamePlay>
       <Header>
-        <GamePlayHeader />
+        <GameHeader />
       </Header>
       <Main>
         <GamePlayContainer>
@@ -80,7 +81,7 @@ export const GamePlay: React.FC = observer(() => {
           </PlayerHand>
         </GamePlayContainer>
       </Main>
-      <GamePlayFooter />
+      <GameFooter />
     </StyledGamePlay>
   )
 })

@@ -4,7 +4,7 @@ import { CardType } from 'types'
 import { checkCardPresence, areAnyCardSelectedById } from 'utils'
 import { deckStore } from './DeckStore'
 
-export class GameTableStore {
+export class DealingStore {
   constructor() {
     makeAutoObservable(this)
   }
@@ -42,5 +42,5 @@ export class GameTableStore {
   }
 }
 
-export default GameTableStore
-export const gameTableStore = new GameTableStore()
+export default DealingStore
+export const dealingStore = new DealingStore()

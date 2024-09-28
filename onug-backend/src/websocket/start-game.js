@@ -19,7 +19,7 @@ export const startGame = async (ws, message) => {
   
   let newGamestate = {
     ...gamestate,
-    stage: STAGES.GAME_PLAY,
+    stage: STAGES.GAME,
     game_play_start_time: startTime,
     actual_scene: {
       scene_title: "GAME_START",
@@ -35,7 +35,7 @@ export const startGame = async (ws, message) => {
 
   const startGame = {
     type: REDIRECT,
-    path: `/gameplay/${room_id}`
+    path: `/game/${room_id}`
   }
 
   startGamePlay(gamestate.room_id)

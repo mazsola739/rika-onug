@@ -1,6 +1,7 @@
-import { Main, CardList, Nav } from 'components'
+import { Main } from 'components'
 import { ARRIVE_ROOM, STAGES, HYDRATE_ROOM, REDIRECT, LEAVE_ROOM, TEAM } from 'constant'
 import { observer } from 'mobx-react-lite'
+import { Nav, CardList } from 'modules'
 import { useState, useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { wsStore, deckStore, roomStore } from 'store'

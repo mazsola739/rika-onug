@@ -1,4 +1,4 @@
-import { DealtCard } from 'components'
+import { DealtCard } from '../DealtCard/DealtCard'
 import { CardContainer, PlayersCards, CardTitle, CenterCards, CenterCardContainer } from './DealtCards.styles'
 import { PlayerPositionProperties, CenterPositionProperties } from 'types'
 

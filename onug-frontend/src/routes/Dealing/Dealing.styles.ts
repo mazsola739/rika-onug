@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 //MAIN
-export const StyledGameTable = styled.div`
+export const StyledDealing = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;

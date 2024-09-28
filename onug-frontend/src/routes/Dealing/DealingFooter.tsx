@@ -4,7 +4,7 @@ import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { gameBoardStore } from 'store'
 
-export const GameTableFooter: React.FC = observer(() => {
+export const DealingFooter: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
 

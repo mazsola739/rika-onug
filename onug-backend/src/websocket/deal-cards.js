@@ -30,7 +30,7 @@ export const dealCards = async (ws, message) => {
 
   const newGamestate = {
     ...gamestate,
-    stage: STAGES.GAME_TABLE,
+    stage: STAGES.DEALING,
     total_players: totalPlayers,
     card_positions: {
       center_left: createCenterPositionCard(leftCard),
@@ -95,10 +95,10 @@ export const dealCards = async (ws, message) => {
 
   await upsertRoomState(newGamestate)
 
-  const redirectToGameTable = {
+  const redirectToDealing = {
     type: REDIRECT,
-    path: `/gametable/${room_id}`,
+    path: `/dealing/${room_id}`,
   }
 
-  return broadcast(room_id, redirectToGameTable)
+  return broadcast(room_id, redirectToDealing)
 }

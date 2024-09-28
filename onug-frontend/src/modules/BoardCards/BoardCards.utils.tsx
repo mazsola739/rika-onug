@@ -1,6 +1,6 @@
-import { BoardCard } from 'components'
 import { gameBoardStore } from 'store'
 import { CardContainer, PlayersCards, CardTitle, CenterCards, CenterCardContainer } from './BoardCards.styles'
+import { BoardCard } from '../BoardCard/BoardCard'
 
 export const renderPlayerCards = () => {
   const { playerCards } = gameBoardStore

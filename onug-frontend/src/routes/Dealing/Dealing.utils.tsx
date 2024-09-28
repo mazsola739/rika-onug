@@ -1,6 +1,6 @@
 import { DealtToken } from 'components'
 import { TokenType } from 'types'
-import { Marks } from './GameTable.styles'
+import { Marks } from './Dealing.styles'
 
 const renderMarks = (selectedMarks: TokenType[]) => (
   <Marks>
@@ -27,7 +27,7 @@ const renderArtifacts = (
   </Marks>
 )
 
-export const gameTableUtils = {
+export const dealingUtils = {
   renderMarks,
   renderArtifacts,
 }

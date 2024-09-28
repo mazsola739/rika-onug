@@ -1,9 +1,8 @@
-import { Card } from 'components'
 import { observer } from 'mobx-react-lite'
 import { roomStore } from 'store'
 import { StyledCardList, CardListTitle, CardListGrid } from './CardList.styles'
 import { CardListProps } from './CardList.types'
-import { useEffect, useState } from 'react'
+import { Card } from '../Card/Card'
 
 export const CardList: React.FC<CardListProps> = observer(({ team, cards }) => {
   const { getTeamMembers, getTeamName } = roomStore

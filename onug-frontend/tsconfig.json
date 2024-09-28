@@ -13,6 +13,7 @@
       "@constant/*": ["src/constant/*"],
       "@data/*": ["src/data/*"],
       "@routes/*": ["src/routes/*"],
+      "@modules/*": ["src/modules/*"],
       "@store/*": ["src/store/*"],
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]

@@ -1,6 +1,6 @@
 import { readGamestate, upsertRoomState } from '../repository'
 import { broadcast, webSocketServerConnectionsPerRoom } from '../websocket/connections'
-import { HYDRATE_GAME_PLAY, REDIRECT, STAGES } from '../constants'
+import { HYDRATE_GAME, REDIRECT, STAGES } from '../constants'
 import { logErrorWithStack, logTrace } from '../log'
 import { scene } from './scene'
 
@@ -66,13 +66,13 @@ const tick = async (room_id) => {
   if (newGamestate.game_stopped) {
     broadcastMessage = {
       type: REDIRECT,
-      path: `/gamevote/${room_id}`,
+      path: `/voting/${room_id}`,
     }
     logTrace(`broadcast vote scene : ${JSON.stringify(broadcastMessage)}`)
     broadcast(room_id, broadcastMessage)
   } else {
     broadcastMessage = {
-      type: HYDRATE_GAME_PLAY,
+      type: HYDRATE_GAME,
       actual_scene: newGamestate.actual_scene,
     }
     logTrace(`broadcast next scene : ${JSON.stringify(broadcastMessage)}`)

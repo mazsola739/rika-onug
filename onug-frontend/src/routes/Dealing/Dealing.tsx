@@ -1,24 +1,25 @@
-import { DealtCards, Main, OwnCard, ReadyList } from 'components'
-import { ARRIVE_GAME_TABLE, HYDRATE_GAME_TABLE, HYDRATE_READY, REDIRECT, STAGES } from 'constant'
+import { Main } from 'components'
+import { ARRIVE_DEALING, STAGES, HYDRATE_DEALING, HYDRATE_READY, REDIRECT } from 'constant'
 import { artifacts } from 'data'
 import { observer } from 'mobx-react-lite'
-import { useEffect, useState } from 'react'
+import { OwnCard, DealtCards, ReadyList } from 'modules'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { gameTableStore, gameBoardStore, roomStore, deckStore, wsStore } from 'store'
-import { GameArea, OwnCardPlace, Ready, StyledGameTable } from './GameTable.styles'
-import { gameTableUtils } from './GameTable.utils'
-import { GameTableFooter } from './GameTableFooter'
-import { GameTableHeader } from './GameTableHeader'
+import { dealingStore, deckStore, gameBoardStore, wsStore, roomStore } from 'store'
+import { StyledDealing, OwnCardPlace, GameArea, Ready } from './Dealing.styles'
+import { dealingUtils } from './Dealing.utils'
+import { DealingFooter } from './DealingFooter'
+import { DealingHeader } from './DealingHeader'
 
-const { renderMarks, renderArtifacts } = gameTableUtils
+const { renderMarks, renderArtifacts } = dealingUtils
 
-export const GameTable: React.FC = observer(() => {
+export const Dealing: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
   const navigate = useNavigate()
 
   const token = sessionStorage.getItem('token')
 
-  const { hasSentinel, hasMarks, hasCurator } = gameTableStore
+  const { hasSentinel, hasMarks, hasCurator } = dealingStore
   const { selectedMarks } = deckStore
   const { setPlayer, setPlayers, everyoneCheckOwnCard } = gameBoardStore
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
@@ -27,8 +28,8 @@ export const GameTable: React.FC = observer(() => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       sendJsonMessage({
-        type: ARRIVE_GAME_TABLE,
-        stage: STAGES.GAME_TABLE,
+        type: ARRIVE_DEALING,
+        stage: STAGES.DEALING,
         token,
         room_id: sessionStorage.getItem('room_id'),
       })
@@ -36,7 +37,7 @@ export const GameTable: React.FC = observer(() => {
   }, [sendJsonMessage, firstTime])
 
   useEffect(() => {
-    if (lastJsonMessage?.type === HYDRATE_GAME_TABLE) {
+    if (lastJsonMessage?.type === HYDRATE_DEALING) {
       setPlayer({
         player_name: lastJsonMessage.player_name,
         player_number: lastJsonMessage.player_number,
@@ -66,8 +67,8 @@ export const GameTable: React.FC = observer(() => {
   const { player, players } = gameBoardStore
 
   return (
-    <StyledGameTable>
-      <GameTableHeader player={player} />
+    <StyledDealing>
+      <DealingHeader player={player} />
       <Main>
         <OwnCardPlace>{player && <OwnCard player={player} />}</OwnCardPlace>
         <GameArea>
@@ -77,7 +78,7 @@ export const GameTable: React.FC = observer(() => {
         </GameArea>
         <Ready>{players && <ReadyList players={players} />}</Ready>
       </Main>
-      <GameTableFooter />
-    </StyledGameTable>
+      <DealingFooter />
+    </StyledDealing>
   )
 })
