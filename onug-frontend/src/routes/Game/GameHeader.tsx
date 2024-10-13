@@ -4,8 +4,6 @@ import { gameStore, narrationStore } from 'store'
 import { StyledGamePlayHeader, NarrationImage, Narration, TimerContainer } from './Game.styles'
 
 export const GameHeader: React.FC = observer(() => {
-  const startingTime = gameStore.startingTime
-  const endingTime = gameStore.endingTime
   const narration = narrationStore.getNarrationMessage()
   const img = narrationStore.getNarrationImage()
 
@@ -17,7 +15,7 @@ export const GameHeader: React.FC = observer(() => {
       <Narration>{narration}</Narration>
       <TimerContainer>
         <p>Time remaining:</p>
-        <Timer startingTime={startingTime} endingTime={endingTime} />
+        <Timer/>
       </TimerContainer>
     </StyledGamePlayHeader>
   )

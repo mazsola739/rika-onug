@@ -1,11 +1,10 @@
 import { readGamestate, upsertRoomState } from '../repository'
 import { broadcast, webSocketServerConnectionsPerRoom } from '../websocket/connections'
 import { HYDRATE_GAME, REDIRECT, STAGES } from '../constants'
-import { logErrorWithStack, logTrace } from '../log'
+import { logDebug, logErrorWithStack, logTrace } from '../log'
 import { scene } from './scene'
 
 //TODO set tickTime each narration different
-//TODO pauseGamePlay
 
 const getNextScene = gamestate => {
   try {
@@ -42,24 +41,32 @@ const getNextScene = gamestate => {
 const tick = async (room_id) => {
   logTrace('tick')
   const gamestate = await readGamestate(room_id)
+  if (gamestate?.game_paused) {
+    logDebug('Game paused: ', gamestate.game_paused)
+    return
+  } else {
+    logDebug('Game paused: ', gamestate.game_paused)
+  }
 
   const newGamestate = getNextScene(gamestate)
 
+  // TODO check: maybe it's not enough validation any more, if getNextScene not returning null or undefined for gameState, but itás already stopped
   if (!newGamestate) return // game already stopped
 
   newGamestate.action_history.push(newGamestate.actual_scene)
+
+  const tickTime = newGamestate.actual_scene.scene_end_time - newGamestate.actual_scene.scene_start_time
 
   const actualScene = {
     scene_number: newGamestate.actual_scene.scene_number,
     scene_start_time: newGamestate.actual_scene.scene_start_time,
     scene_title: newGamestate.actual_scene.scene_title,
     scene_end_time: newGamestate.actual_scene.scene_end_time,
+    remaining_time: tickTime,
   }
 
   newGamestate.actual_scene = actualScene
-
-  const tickTime = newGamestate.actual_scene.scene_end_time - newGamestate.actual_scene.scene_start_time
-
+ 
   await upsertRoomState(newGamestate)
 
   let broadcastMessage
@@ -80,6 +87,24 @@ const tick = async (room_id) => {
     
     setTimeout(() => tick(room_id), tickTime)
   }
+}
+
+export const pauseGamePlay = gamestate => {
+  const newGamestate = {...gamestate}
+  newGamestate.game_paused = !newGamestate.game_paused
+
+  const now = Date.now()
+  if (newGamestate.game_paused) {
+    const remainingTime = newGamestate.actual_scene.scene_end_time - now
+    newGamestate.actual_scene.remaining_time = remainingTime
+  } else {
+    const newSceneEndTime = now + newGamestate.actual_scene.remaining_time
+    newGamestate.actual_scene.scene_end_time = newSceneEndTime
+
+    setTimeout(() => tick(newGamestate.room_id), newGamestate.actual_scene.remaining_time)
+  }
+
+  return newGamestate
 }
 
 export const stopGamePlay = gamestate => {

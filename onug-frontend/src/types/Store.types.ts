@@ -24,12 +24,14 @@ export type WsJsonMessage = {
   player_role_id?: number
   player_team?: string
   player_mark?: string
+  player_history?: unknown // TODO type: swapped cards, viewed cards, etc...
 
   actual_scene?: {
     scene_number: number
     scene_start_time: number
     scene_title: string
     scene_end_time: number
+    remaining_time: number
   }
 
   board?: {
@@ -179,7 +181,8 @@ export type GameTableBoardCardType = {
 export type GamePlayBoardCardType = {
   position: string
   card: { 
-    id: number, 
+    id: number,
+    cardId: number,
     mark: string,
     selectable_cards?: boolean
     selectable_marks?: boolean
@@ -302,6 +305,7 @@ export type PlayerPositionProperties = {
   selectable_cards?: boolean
   selectable_marks?: boolean
   id?: number
+  cardId?: number
   mark?: string
 
   shield?: boolean

@@ -6,6 +6,8 @@ class GameStore {
   isGamePaused = false
   startingTime = 0
   endingTime = 0
+  remainingTime: number[] = []
+  toggleIsRunning = () => {}
 
   constructor() {
     makeAutoObservable(this)
@@ -17,6 +19,14 @@ class GameStore {
 
   setEndingTime(endingTime: number): void {
     this.endingTime = endingTime
+  }
+
+  addRemainingTimeToStore(remainingTime: number): void {
+    this.remainingTime.push(remainingTime)
+  }
+
+  shiftRemainingTimeFromStore(): number {
+    return this.remainingTime.shift()
   }
 
   toggleGameStatus(): void {
@@ -31,6 +41,10 @@ class GameStore {
 
   togglePauseStatus(): void {
     this.isGamePaused = !this.isGamePaused
+  }
+
+  setToggleIsRunning(toggleIsRunning: (nextValue?: any) => void): void {
+    this.toggleIsRunning = toggleIsRunning
   }
 }
 

@@ -1,45 +1,42 @@
 import { observer } from 'mobx-react-lite'
-import { useState, useEffect } from 'react'
-import { gameBoardStore } from 'store'
+import { useEffect, useState } from 'react'
+import { useBoolean, useEffectOnce, useInterval } from 'react-use'
+import { gameStore } from 'store'
 import { StyledTimer } from './Timer.styles'
-import { TimerProps } from './Timer.types'
 
-//TODO rethink
-export const Timer: React.FC<TimerProps> = observer(({ startingTime, endingTime }) => {
-  const [remainingTime, setRemainingTime] = useState(0)
+export const Timer: React.FC = observer(() => {
+  const [isRunning, toggleIsRunning] = useBoolean(true)
+  const [remainingMs, setRemainingMs] = useState(0)
 
-    useEffect(() => {
-      const intervalId = setInterval(() => {
-        const actionTime = endingTime - startingTime
-        const currentTime = Date.now()
-        const remaining = startingTime - currentTime + actionTime
-        setRemainingTime(remaining < 0 ? 0 : remaining)
-      }, 1000)
+  useEffectOnce(() => {
+    gameStore.setToggleIsRunning(toggleIsRunning)
+  })
 
-      return () => {
-        clearInterval(intervalId)
-      }
-    }, [startingTime, endingTime])
+  useEffect(() => {
+    if (isNaN(gameStore.remainingTime?.[0])) return
 
-    useEffect(() => {
-      if ((remainingTime <= 1000 && remainingTime > 0) || remainingTime === 0) {
-        const closeEyesTimer = setTimeout(() => {
-          gameBoardStore.closeYourEyes()
-        }, remainingTime)
+    const remainingTime = gameStore.shiftRemainingTimeFromStore()
+    console.log(`useEffect remainingTime: ${remainingTime}`)
+    setRemainingMs(remainingTime)
+  }, [gameStore.remainingTime?.[0]])
 
-        return () => clearTimeout(closeEyesTimer)
-      } else if (remainingTime === 0) {
-        gameBoardStore.closeYourEyes()
-      }
-    }, [remainingTime, gameBoardStore])
+  useInterval(
+    () => {
+      const remaining = remainingMs - 1000 >= 0 ? remainingMs - 1000 : 0
+      setRemainingMs(remaining)
+    },
+    isRunning ? 1000 : null
+  )
 
-    const formatTime = (time: number) => {
-      const seconds = Math.floor(time / 1000)
-      const minutes = Math.floor(seconds / 60)
-      const remainingSeconds = seconds % 60
-      return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`
-    }
-
-    return <StyledTimer>{formatTime(remainingTime)}</StyledTimer>
+  const formatTime = (time: number) => {
+    console.log(`formatTime time: ${time}`)
+    const seconds = Math.round(time / 1000)
+    let minutes = Math.floor(seconds / 60)
+    let remainingSeconds = seconds % 60
+    minutes = isNaN(minutes) ? 0 : minutes
+    remainingSeconds = isNaN(remainingSeconds) ? 0 : remainingSeconds
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`
   }
-)
+
+  return <StyledTimer>{formatTime(remainingMs)}</StyledTimer>
+})

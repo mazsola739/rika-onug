@@ -1,7 +1,7 @@
 
 import WebSocket from 'ws'
 import { logTrace, logError, logErrorWithStack } from '../log'
-import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_DEALING, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME, STOP_GAME, RELOAD, SCENE, ARRIVE_VOTING } from '../constants'
+import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_DEALING, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME, PAUSE_GAME, STOP_GAME, RELOAD, SCENE, ARRIVE_VOTING } from '../constants'
 import { hydrateRoom } from './hydrate-room'
 import { reset } from './reset'
 import { updateRoom } from './update-room'
@@ -18,6 +18,7 @@ import { stopGame } from './stop-game'
 import { reload } from './reload'
 import { interaction } from './interaction'
 import { hydrateGameVote } from './hydrate-game-vote'
+import { pauseGame } from './pause-game'
 
 export const websocketServer = (port) => {
   try {
@@ -29,8 +30,8 @@ export const websocketServer = (port) => {
       ws.onerror = function () {
         logError("Some Error occurred")
       }
-      ws.on("message", async (rawMessage) => {
-        logTrace(`Received message ${rawMessage} from user ${client}`)
+      ws.on("message", async (rawMessage, client, client2) => {
+        logTrace(`Received message ${rawMessage} from user ${client} ${client2}`)
         const message = JSON.parse(rawMessage)
         logTrace(`msg received: ${rawMessage}`)
 
@@ -44,13 +45,14 @@ export const websocketServer = (port) => {
         if (message.type === LEAVE_TABLE)       return leaveTable(ws, message)
         if (message.type === RESET)             return reset(message)
         if (message.type === ARRIVE_ROOM)       return hydrateRoom(ws, message)
-        if (message.type === ARRIVE_DEALING) return hydrateGameTable(ws, message)
+        if (message.type === ARRIVE_DEALING)    return hydrateGameTable(ws, message)
         if (message.type === READY)             return ready(message)
         if (message.type === START_GAME)        return startGame(ws, message)
-        if (message.type === ARRIVE_GAME)  return hydrateGamePlay(ws, message)
+        if (message.type === ARRIVE_GAME)       return hydrateGamePlay(ws, message)
+        if (message.type === PAUSE_GAME)        return pauseGame(message)
         if (message.type === STOP_GAME)         return stopGame(message)
         if (message.type === SCENE)             return interaction(ws, message)
-        if (message.type === ARRIVE_VOTING)  return hydrateGameVote(ws, message)
+        if (message.type === ARRIVE_VOTING)     return hydrateGameVote(ws, message)
       })
     })
   } catch (error) {

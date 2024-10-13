@@ -136,6 +136,7 @@ class GameBoardStore {
         position: centerCard.position,
         card: {
           id: centerCard.id === null ? null : 0,
+          cardId: centerCard.id === null ? null : 0,
           mark: '',
           selectable_cards: false,
           selectable_marks: false,
@@ -161,6 +162,7 @@ class GameBoardStore {
         position: playerCard.position,
         card: {
           id: 0,
+          cardId: 0,
           mark: '',
           selectable_cards: false,
           selectable_marks: false,

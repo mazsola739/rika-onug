@@ -1,5 +1,5 @@
 import { Header, Main, KnownOwnCard } from 'components'
-import { ARRIVE_GAME, STAGES, SCENE, HYDRATE_GAME, MESSAGE, REDIRECT } from 'constant'
+import { ARRIVE_GAME, STAGES, SCENE, HYDRATE_GAME, MESSAGE, REDIRECT, PAUSE_GAME } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { BoardCards, SceneTracker, MessageBox } from 'modules'
 import { useState, useEffect } from 'react'
@@ -34,6 +34,7 @@ export const Game: React.FC = observer(() => {
 
   useEffect(() => {
     if (lastJsonMessage?.type === SCENE) {
+      gameBoardStore.closeYourEyes()
       narrationStore.setNarration(lastJsonMessage.narration)
       interactionStore.setLastJsonMessage(lastJsonMessage)
 
@@ -47,11 +48,8 @@ export const Game: React.FC = observer(() => {
     if (lastJsonMessage?.type === HYDRATE_GAME) {
       /* && lastJsonMessage?.success */ //TODO success?
       narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
-      gameStore.setStartingTime(
-        lastJsonMessage.actual_scene.scene_start_time
-      )
-      gameStore.setEndingTime(
-        lastJsonMessage.actual_scene.scene_end_time
+      gameStore.addRemainingTimeToStore(
+        lastJsonMessage.actual_scene.remaining_time
       )
     }
     if (lastJsonMessage?.type === MESSAGE) {
@@ -59,6 +57,12 @@ export const Game: React.FC = observer(() => {
     }
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
+    }
+    if (lastJsonMessage?.type === PAUSE_GAME) {
+      gameStore.addRemainingTimeToStore(
+        lastJsonMessage.actual_scene.remaining_time
+      )
+      gameStore.toggleIsRunning()
     }
   }, [lastJsonMessage, narrationStore, gameStore, interactionStore])
 
