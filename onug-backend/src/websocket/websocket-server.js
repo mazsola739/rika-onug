@@ -23,7 +23,7 @@ import { pauseGame } from './pause-game'
 export const websocketServer = (port) => {
   try {
     const wss = new WebSocket.WebSocketServer({ port })
-    wss.on("connection", function connection(ws, request, client) {
+    wss.on("connection", function connection(ws) {
       ws.on("close", () => {
         logTrace("Client disconnected")
       })

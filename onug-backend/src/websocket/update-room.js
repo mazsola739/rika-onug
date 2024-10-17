@@ -5,7 +5,7 @@ import { HYDRATE_ROOM } from '../constants'
 import { broadcast } from './connections'
 
 export const updateRoom = async (message) => {
-  const { room_id, card_id, expansion, token } = message
+  const { room_id, card_id, expansion } = message
   const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
 
   if (!roomIdValid) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors })

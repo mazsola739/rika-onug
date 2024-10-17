@@ -36,55 +36,55 @@ export const God: React.FC = observer(() => {
   const [message, setMessage] = useState({ type: 'REDIRECT', path: '/lobby' })
 
   const checkGamestates = async () => {
-    const res = await fetch(`${API_HOST}/god/check-gamestates`)
+    const res = await fetch(`${API_HOST}/god/check_gamestates`)
     const json = await res.json()
     setResponse(json)
   }
 
   const checkGamestateByRoomId = async () => {
     const res = await fetch(
-      `${API_HOST}/god/check-gamestate-by-room-id?room_id=${roomId}`
+      `${API_HOST}/god/check_gamestate_by_room_id?room_id=${roomId}`
     )
     const json = await res.json()
     setResponse(json)
   }
 
   const deleteAllGamestates = async () => {
-    const res = await fetch(`${API_HOST}/god/delete-all-gamestates`)
+    const res = await fetch(`${API_HOST}/god/delete_all_gamestates`)
     const json = await res.json()
     setResponse(json)
   }
 
   const deleteGamestateByRoomId = async () => {
     const res = await fetch(
-      `${API_HOST}/god/delete-gamestate-by-room-id?room_id=${roomId}`
+      `${API_HOST}/god/delete_gamestate_by_room_id?room_id=${roomId}`
     )
     const json = await res.json()
     setResponse(json)
   }
 
   const reInitAllGamestates = async () => {
-    const res = await fetch(`${API_HOST}/god/re-init-all-gamestates`)
+    const res = await fetch(`${API_HOST}/god/re_init_all_gamestates`)
     const json = await res.json()
     setResponse(json)
   }
 
   const checkConnections = async () => {
-    const res = await fetch(`${API_HOST}/god/check-connections`)
+    const res = await fetch(`${API_HOST}/god/check_connections`)
     const json = await res.json()
     setResponse(json)
   }
 
   const removePlayerByToken = async () => {
     const res = await fetch(
-      `${API_HOST}/god/delete-player-by-token?token=${token}`
+      `${API_HOST}/god/delete_player_by_token?token=${token}`
     )
     const json = await res.json()
     setResponse(json)
   }
 
   const removeAllPlayers = async () => {
-    const res = await fetch(`${API_HOST}/god/delete-all-players`)
+    const res = await fetch(`${API_HOST}/god/delete_all_players`)
     const json = await res.json()
     setResponse(json)
   }
@@ -93,7 +93,7 @@ export const God: React.FC = observer(() => {
   // examples:
   // {"type": "REDIRECT", "path": "/stub"}
   const broadcastToAll = useCallback(async () => {
-    const res = await fetch(`${API_HOST}/god/broadcast-to-all`, {
+    const res = await fetch(`${API_HOST}/god/broadcast_to_all`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -106,7 +106,7 @@ export const God: React.FC = observer(() => {
   }, [message, setResponse])
 
   const broadcastToAllInRoom = useCallback(async () => {
-    const res = await fetch(`${API_HOST}/god/broadcast-to-all-in-room`, {
+    const res = await fetch(`${API_HOST}/god/broadcast_to_all_in_room`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -119,7 +119,7 @@ export const God: React.FC = observer(() => {
   }, [token, message, setResponse, roomId])
 
   const sendMessageToPlayer = useCallback(async () => {
-    const res = await fetch(`${API_HOST}/god/send-message-to-player`, {
+    const res = await fetch(`${API_HOST}/god/send_message_to_player`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -132,13 +132,13 @@ export const God: React.FC = observer(() => {
   }, [token, message, setResponse])
 
   const listOnugEnvVars = async () => {
-    const res = await fetch(`${API_HOST}/god/list-onug-env-vars`)
+    const res = await fetch(`${API_HOST}/god/list_onug_env_vars`)
     const json = await res.json()
     setResponse(json)
   }
 
   const deleteAllOldLogFiles = async () => {
-    const res = await fetch(`${API_HOST}/god/delete-all-old-log-files`)
+    const res = await fetch(`${API_HOST}/god/delete_all_old_log_files`)
     const json = await res.json()
     setResponse(json)
   }

@@ -4,7 +4,7 @@ import { aliensResponse, alphawolfResponse, thingResponse, apprenticeseerRespons
 import { webSocketServerConnectionsPerRoom } from './connections'
 
 
-export const interaction = async (ws, message) => {
+export const interaction = async (message) => {
   try {
     logDebug(`Interaction requested with ${JSON.stringify(message)}`)
 
@@ -12,7 +12,7 @@ export const interaction = async (ws, message) => {
     const gamestate = await readGamestate(room_id)
     // TODO validate client request
 
-    const newGamestate = generateInteractionResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, ws)
+    const newGamestate = generateInteractionResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer)
 
     newGamestate?.scene.forEach((item) => {
       webSocketServerConnectionsPerRoom[newGamestate.room_id][item.token].send(JSON.stringify(item))
@@ -25,7 +25,7 @@ export const interaction = async (ws, message) => {
   }
 }
 
-export const generateInteractionResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, ws) => {
+export const generateInteractionResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer) => {
   const scene_title = gamestate.actual_scene.scene_title
 
   let newGamestate = { ...gamestate }

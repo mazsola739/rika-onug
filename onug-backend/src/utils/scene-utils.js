@@ -1,6 +1,5 @@
 import { ALL_ALIEN_IDS, MASONS, ALL_SUPER_VILLAIN_IDS, ALL_VAMPIRE_IDS, ALL_WEREWOLF_IDS, WEREVOLVES } from '../constants'
 import artifacts from '../data/artifacts.json'
-import _ from 'lodash'
 
 export const getRandomItemsFromArray = (array, amount) => {
   const shuffled = array.sort(() => 0.5 - Math.random())

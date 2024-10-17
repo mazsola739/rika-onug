@@ -1,40 +1,40 @@
 import express from 'express'
-import { checkGamestates } from './check-gamestates'
-import { checkGamestateByRoomId } from './check-gamestate-by-room-id'
-import { reInitAllGamestates } from './re-init-all-gamestates'
-import { deleteAllGamestates } from './delete-all-gamestates'
-import { deleteGamestateByRoomId } from './delete-gamestate-by-room-id'
-import { deleteAllPlayers } from './delete-all-players'
-import { deletePlayerByToken } from './delete-player-by-token'
-import { checkConnections } from './check-connections'
-import { broadCastToAll } from './broadcast-to-all'
-import { broadCastToAllInRoom } from './broadcast-to-all-in-room'
-import { sendMessageToPlayer } from './send-message-to-player'
-import { metaListOnugEnv } from './meta-list-onug-env'
-import { metaDeleteAllOldLogFiles } from './meta-delete-all-old-log-files'
+import { checkGamestates } from './checkGamestates'
+import { checkGamestateByRoomId } from './checkGamestateByRoomId'
+import { reInitAllGamestates } from './reInitAllGamestates'
+import { deleteAllGamestates } from './deleteAllGamestates'
+import { deleteGamestateByRoomId } from './deleteGamestateByRoomId'
+import { deleteAllPlayers } from './deleteAllPlayers'
+import { deletePlayerByToken } from './deletePlayerByToken'
+import { checkConnections } from './checkConnections'
+import { broadCastToAll } from './broadCastToAll'
+import { broadCastToAllInRoom } from './broadCastToAllInRoom'
+import { sendMessageToPlayer } from './sendMessageToPlayer'
+import { metaListOnugEnv } from './metaListOnugEnv'
+import { metaDeleteAllOldLogFiles } from './metaDeleteAllOldLogFiles'
 
 const router = express.Router()
 
 // gamestates
-router.get('/check-gamestates', checkGamestates)
-router.get('/check-gamestate-by-room-id', checkGamestateByRoomId)
-router.get('/re-init-all-gamestates', reInitAllGamestates)
-router.get('/delete-all-gamestates', deleteAllGamestates)
-router.get('/delete-gamestate-by-room-id', deleteGamestateByRoomId)
+router.get('/check_gamestates', checkGamestates)
+router.get('/check_gamestate_by_room_id', checkGamestateByRoomId)
+router.get('/re_init_all_gamestates', reInitAllGamestates)
+router.get('/delete_all_gamestates', deleteAllGamestates)
+router.get('/delete_gamestate_by_room_id', deleteGamestateByRoomId)
 
 // ws
-router.get('/check-connections', checkConnections)
-router.post('/broadcast-to-all', broadCastToAll)
-router.post('/broadcast-to-all-in-room', broadCastToAllInRoom)
-router.post('/send-message-to-player', sendMessageToPlayer)
+router.get('/check_connections', checkConnections)
+router.post('/broadcast_to_all', broadCastToAll)
+router.post('/broadcast_to_all_in_room', broadCastToAllInRoom)
+router.post('/send_message_to_player', sendMessageToPlayer)
 
 //! TODO removing players does not handle available_names, and admin rights right now. TODO fix it.
 //! or just use re-init endpoint instead
-router.get('/delete-all-players', deleteAllPlayers)
-router.get('/delete-player-by-token', deletePlayerByToken)
+router.get('/delete_all_players', deleteAllPlayers)
+router.get('/delete_player_by_token', deletePlayerByToken)
 
 // meta
-router.get('/list-onug-env-vars', metaListOnugEnv)
-router.get('/delete-all-old-log-files', metaDeleteAllOldLogFiles)
+router.get('/list_onug_env_vars', metaListOnugEnv)
+router.get('/delete_all_old_log_files', metaDeleteAllOldLogFiles)
 
 export const godRouter = router

@@ -6,7 +6,7 @@ import { isGamePlayStopped } from '../utils'
 export const hydrateGamePlay = async (ws, message) => {
   logTrace(`hydrate game play ${JSON.stringify(message)}`)
 
-  const { room_id, token } = message
+  const { room_id } = message
   const gamestate = await readGamestate(room_id)
   const newGamestate = {...gamestate}
 

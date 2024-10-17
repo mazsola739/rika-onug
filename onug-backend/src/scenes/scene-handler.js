@@ -11,7 +11,7 @@ export const sceneHandler = gamestate => {
   const newGamestate = { ...gamestate }
   const scene_title = newGamestate.actual_scene.scene_title
   const selected_cards = newGamestate.selected_cards
-  const total_players = newGamestate.total_players
+/*   const total_players = newGamestate.total_players */
 
   switch (scene_title) {
 /*     case "EPIC_BATTLE":
