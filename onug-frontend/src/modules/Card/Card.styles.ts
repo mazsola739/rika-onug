@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { StyledCardProps } from './Card.types'
 
 export const StyledCard = styled.div<StyledCardProps>`

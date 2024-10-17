@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { LogoProps } from './Room.types'
 
 export const StyledRoom = styled.div`

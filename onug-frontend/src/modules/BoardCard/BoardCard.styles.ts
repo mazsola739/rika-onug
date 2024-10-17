@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { StyledBoardCardProps, StyledBoardMarkProps } from './BoardCard.types'
 
 export const StyledBoardCard = styled.div`

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { StyledButtonProps } from './Button.types'
 
 type ColorVariant = keyof typeof colorVariants

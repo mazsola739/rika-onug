@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 export const KnownOwnCardContainer = styled.div`
   align-content: center;

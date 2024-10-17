@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 
 //HEADER
 export const StyledGamePlayHeader = styled.div`

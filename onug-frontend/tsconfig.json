@@ -18,6 +18,7 @@
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"]
     },
+    "jsxImportSource": "@emotion/react",
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": true,
     "module": "esnext",

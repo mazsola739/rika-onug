@@ -1,6 +1,5 @@
 export interface StyledLobbyProps {
-  index: number
-  img: string
+  img?: string
   buttonText?: string
   onClick: () => void
 }

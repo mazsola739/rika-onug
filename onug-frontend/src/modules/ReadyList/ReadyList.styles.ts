@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from '@emotion/styled'
 import { ReadyType } from './ReadyList.types'
 
 export const StyledReadyList = styled.div`
