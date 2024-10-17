@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 import { FilterButtonProps } from './Filter.types'
 
 export const StyledFilter = styled.div`

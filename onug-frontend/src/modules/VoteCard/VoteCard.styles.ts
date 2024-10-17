@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 import { StyledCardProps, StyledMarkProps, StyledArtifactProps } from './VoteCard.types'
 
 export const StyledVoteCard = styled.div`

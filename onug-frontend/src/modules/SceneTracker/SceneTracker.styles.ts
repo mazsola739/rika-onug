@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 import { ActualSceneProps } from './SceneTracker.types'
 
 export const StyledSceneTracker = styled.div`

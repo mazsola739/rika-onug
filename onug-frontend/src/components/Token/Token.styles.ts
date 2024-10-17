@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 import { StyledTokenProps } from './Token.types'
 
 export const StyledToken = styled.img<StyledTokenProps>`

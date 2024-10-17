@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 import { StyledLobbyProps } from './Lobby.types'
 
 export const StyledLobby = styled.div`

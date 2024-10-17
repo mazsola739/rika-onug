@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from 'styled-components'
 import { StyledIconProps } from './Icon.types'
 
 export const StyledIcon = styled.svg<StyledIconProps>`

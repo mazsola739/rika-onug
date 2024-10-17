@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from "styled-components"
 
 const primaryColor = '#00FFFF'
 const secondaryColor = '#00BFFF'

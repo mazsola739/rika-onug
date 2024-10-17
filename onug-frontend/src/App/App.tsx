@@ -9,10 +9,16 @@ import { NEWBIE, RELOAD, WS_HOST } from 'constant'
 import { Icon } from 'components'
 import { IconType } from 'components/Icon/Icon.types'
 
+interface WebSocketMessage {
+  type: string
+  token?: string
+  update?: boolean
+}
+
 export const App: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(false)
   const [socketUrl] = useState(WS_HOST)
-  const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket(
+  const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket<WebSocketMessage>(
     socketUrl,
     {
       onOpen: () => setFirstTime(true),
@@ -33,7 +39,7 @@ export const App: React.FC = observer(() => {
     }
 
     if (lastJsonMessage?.type === NEWBIE && lastJsonMessage?.update) {
-      sessionStorage.setItem('token', lastJsonMessage.token)
+      sessionStorage.setItem('token', lastJsonMessage.token!)
     }
   }, [wsStore, sendJsonMessage, lastJsonMessage, firstTime])
 
