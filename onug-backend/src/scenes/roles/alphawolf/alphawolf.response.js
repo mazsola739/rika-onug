@@ -1,6 +1,6 @@
 import { SCENE } from "../../../constants"
 import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { formatPlayerIdentifier } from "../../utils"
+import { formatPlayerIdentifier } from "../../sceneUtils"
 import { validateCardSelection } from "../../validators"
 
 export const alphawolfResponse = (gamestate, token, selected_card_positions, title) => {

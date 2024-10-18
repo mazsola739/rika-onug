@@ -1,33 +1,6 @@
-import { IDS, SCENE, CENTER_CARD_POSITIONS } from '../../../constants'
-import { getAllPlayerTokens, getWerewolfPlayerNumbersByRoleIds, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generateRoleInteraction'
-import { validateCardSelection } from '../../validators'
-
-export const getWerewolfPlayerNumbersByRoleIds = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (IDS.WEREVOLVES.includes(player.card.player_role_id)) {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
-
-export const getDreamWolfPlayerNumberByRoleIds = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (players[token].card.player_role_id === 21) {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { werewolvesInteraction } from "./werewolves.interaction"
 
 export const werewolves = (gamestate, title, hasDreamWolf) => {
   const newGamestate = { ...gamestate }
@@ -53,64 +26,6 @@ export const werewolves = (gamestate, title, hasDreamWolf) => {
   })
 
   newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
-  newGamestate.scene = scene
-
-  return newGamestate
-}
-
-export const werewolvesInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-
-  const werewolves = getWerewolfPlayerNumbersByRoleIds(newGamestate.players)
-  const dreamwolf = getDreamWolfPlayerNumberByRoleIds(newGamestate.players)
-  const loneWolf = werewolves.length + dreamwolf.length === 1
-
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
-    selectable_cards: loneWolf ? CENTER_CARD_POSITIONS : [], selectable_card_limit: { player: 0, center: 1 },
-    werewolves,
-    dreamwolf,
-  }
-
-  return generateRoleInteraction(newGamestate, token, {
-    private_message: [loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves'],
-    icon: loneWolf ? 'lonely' : 'werewolf',
-    selectableCards: { selectable_cards: loneWolf ? CENTER_CARD_POSITIONS : [], selectable_card_limit: { player: 0, center: 1 } },
-    uniqueInformations: { werewolves, dreamwolf },
-  })
-}
-
-export const werewolvesResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
-    return gamestate
-  }
-  
-  const newGamestate = { ...gamestate }
-  const scene = []
-
-  const showCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
-  const selectedPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
-
-  if (newGamestate.players[token].card.player_original_id === selectedPositionCard.id) {
-    newGamestate.players[token].card.player_card_id = 0
-  }
-
-  newGamestate.players[token].card_or_mark_action = true
-
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
-    viewed_cards: [selected_card_positions[0]],
-  }
-
-  const interaction = generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
-    icon: 'lonely',
-    showCards,
-    uniqueInformations: { lonely: [selected_card_positions[0]] },
-  })
-
-  scene.push({ type: SCENE, title, token, interaction })
-
   newGamestate.scene = scene
 
   return newGamestate

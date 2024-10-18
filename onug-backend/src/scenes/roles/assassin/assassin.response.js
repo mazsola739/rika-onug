@@ -1,6 +1,6 @@
 import { SCENE } from "../../../constants"
 import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from "../../utils"
+import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from "../../sceneUtils"
 import { validateMarkSelection } from "../../validators"
 
 export const assassinResponse = (gamestate, token, selected_mark_positions, title) => {

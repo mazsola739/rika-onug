@@ -1,19 +1,6 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getPlayerNeighborsByToken, getSceneEndTime, superVillainDetected } from '../../../utils'
-import { generateRoleInteraction } from '../../generateRoleInteraction';
-
-export const superVillainDetected = (players, evilometerToken) => {
-  const evilometerNeighbors = getNeighborPlayerNumbersByToken(players, evilometerToken)
-  const superVillains = getVillainPlayerNumbersByRoleIds(players)
-
-  for (let villain of superVillains) {
-    if (evilometerNeighbors.includes(villain)) {
-      return true
-    }
-  }
-
-  return false
-}
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { evilometerInteraction } from "./evilometer.interaction"
 
 //TODO super villains can see evilometer
 export const evilometer = (gamestate, title, hasDoppelganger) => {
@@ -33,7 +20,7 @@ export const evilometer = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 58 || (card.player_role_id === 58 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 58 || (card.player_role_id === 58 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = evilometerInteraction(newGamestate, token, title)
     }
 
@@ -44,22 +31,4 @@ export const evilometer = (gamestate, title, hasDoppelganger) => {
   newGamestate.scene = scene
 
   return newGamestate
-}
-
-export const evilometerInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-
-  const neighborIsSuperVillain = superVillainDetected(newGamestate.players, token)
-  const neighbors = getPlayerNeighborsByToken(newGamestate.players, 'both', 1)
-
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
-    villain_neighbor: neighborIsSuperVillain ? neighbors : [],
-  }
-
-  return generateRoleInteraction(newGamestate, token, {
-    private_message:  [neighborIsSuperVillain ? 'interaction_got_tapped_by_villain' : 'interaction_no_tap'],
-    icon: 'aerial',
-    uniqueInformations: { villain_neighbor: neighborIsSuperVillain ? neighbors : [], }
-  })
 }

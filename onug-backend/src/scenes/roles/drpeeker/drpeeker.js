@@ -1,6 +1,6 @@
-import { COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../../utils'
-import { mysticwolfInteraction } from '..'
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { mysticwolfInteraction } from ".."
 
 export const drpeeker = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -14,7 +14,7 @@ export const drpeeker = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 57 || (card.player_role_id === 57 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 57 || (card.player_role_id === 57 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = mysticwolfInteraction(newGamestate, token, title)
     }
 

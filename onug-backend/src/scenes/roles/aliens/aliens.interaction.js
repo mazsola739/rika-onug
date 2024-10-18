@@ -1,5 +1,5 @@
 import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getAlienPlayerNumbersByRoleIds, getPlayerNumberWithMatchingToken, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, formatPlayerIdentifier, getCardIdsByPlayerNumbers } from "../../utils"
+import { getAlienPlayerNumbersByRoleIds, getPlayerNumberWithMatchingToken, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, formatPlayerIdentifier, getCardIdsByPlayerNumbers } from "../../sceneUtils"
 import { getAlienPlayerNumbersByRoleIdsWithNoShield, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getNeighborByPosition, moveCards } from "./aliens.utils"
 
 export const aliensInteraction = (gamestate, token, title) => {

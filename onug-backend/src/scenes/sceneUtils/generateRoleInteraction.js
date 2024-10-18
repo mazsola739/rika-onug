@@ -1,14 +1,14 @@
 import { getPlayerNumberWithMatchingToken } from "./getPlayerNumberWithMatchingToken"
 
-export const getKeys = array => array.map(obj => Object.keys(obj)[0])
+const getKeys = array => array.map(obj => Object.keys(obj)[0])
 
-export const concatArraysWithUniqueElements = (array1, array2) => [...new Set([...array1, ...array2])]
+const concatArraysWithUniqueElements = (array1, array2) => [...new Set([...array1, ...array2])]
 
 const isPlayersCardsFlipped = (flipped, playersPosition) => Object.keys(flipped).some(key => playersPosition === key)
 
 const isActivePlayersCardsFlipped = (flipped, playersPosition) => flipped.some((obj) => Object.keys(obj)[0] === playersPosition)
 
-export const updatePlayerCard = (gamestate, token) => {
+const updatePlayerCard = (gamestate, token) => {
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
   const player = gamestate.players[token]
   const flippedCards = gamestate.flipped
@@ -28,5 +28,36 @@ export const updatePlayerCard = (gamestate, token) => {
     playerCard.player_team = currentCard.team
   } else if (iSeeMyCardElsewhere) {
     playerCard.player_card_id = 0
+  }
+}
+
+export const generateRoleInteraction = (gamestate, token, {
+  private_message,
+  icon,
+  selectableCards = {},
+  selectableMarks = {},
+  showCards = [],
+  showMarks = [],
+  uniqueInformations = {}
+}) => {
+  updatePlayerCard(gamestate, token)
+
+  const informations = {
+    shielded_cards: gamestate.shield,
+    artifacted_cards: getKeys(gamestate.artifact),
+    show_cards: showCards !== null ? concatArraysWithUniqueElements(showCards, gamestate.flipped) : gamestate.flipped,
+    show_marks: showMarks,
+    ...selectableCards,
+    ...selectableMarks,
+    ...uniqueInformations,
+  }
+
+  return {
+    private_message,
+    icon,
+    ...informations,
+    player_name: gamestate.players[token].name,
+    player_number: gamestate.players[token].player_number,
+    ...gamestate.players[token].card,
   }
 }

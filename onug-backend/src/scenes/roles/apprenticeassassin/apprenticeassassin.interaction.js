@@ -1,5 +1,5 @@
 import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from "../../utils"
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from "../../sceneUtils"
 import { getAssassinPlayerNumbersByRoleIds } from "./apprenticeassassin.utils"
 
 export const apprenticeassassinInteraction = (gamestate, token, title) => {

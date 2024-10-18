@@ -1,6 +1,6 @@
 import { SCENE } from "../../../constants"
 import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getCardIdsByPositions, formatPlayerIdentifier } from "../../utils"
+import { getCardIdsByPositions, formatPlayerIdentifier } from "../../sceneUtils"
 import { validateCardSelection } from "../../validators"
 
 export const apprenticeseerResponse = (gamestate, token, selected_card_positions, title) => {

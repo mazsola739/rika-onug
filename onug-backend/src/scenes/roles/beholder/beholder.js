@@ -1,5 +1,5 @@
 import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../utils"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
 import { beholderInteraction } from "./beholder.interaction"
 
 export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {

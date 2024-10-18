@@ -1,5 +1,5 @@
 import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime } from "../../utils"
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime } from "../../sceneUtils"
 import { randomAlienInstructions, alienAnyKeys, alienAllKeys } from "./aliens.constants"
 import { aliensInteraction } from "./aliens.interaction"
 

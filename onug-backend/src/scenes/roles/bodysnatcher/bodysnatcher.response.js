@@ -1,6 +1,6 @@
 import { SCENE } from "../../../constants"
 import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier } from "../../utils"
+import { getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier } from "../../sceneUtils"
 import { validateCardSelection } from "../../validators"
 
 export const bodysnatcherResponse = (gamestate, token, selected_card_positions, title) => {

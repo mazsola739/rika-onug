@@ -1,5 +1,5 @@
 import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../utils"
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
 import { randomBodysnatcherInstructions, bodysnatcherKeys } from "./bodysnatcher.constants"
 import { bodysnatcherInteraction } from "./bodysnatcher.interaction"
 

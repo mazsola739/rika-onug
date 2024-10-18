@@ -1,5 +1,5 @@
 import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { formatPlayerIdentifier } from "../../utils"
+import { formatPlayerIdentifier } from "../../sceneUtils"
 import { getAnySeerPlayerNumbersByRoleIds } from "./beholder.utils"
 
 export const beholderInteraction = (gamestate, token, title) => {

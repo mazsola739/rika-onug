@@ -1,7 +1,7 @@
 import { MESSAGE } from "../../../constants"
 import { webSocketServerConnectionsPerRoom } from "../../../websocket/connections"
 import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { findMostVoted, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getPlayerTokensByPlayerNumber } from "../../utils"
+import { findMostVoted, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getPlayerTokensByPlayerNumber } from "../../sceneUtils"
 
 export const aliensVoteResult = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

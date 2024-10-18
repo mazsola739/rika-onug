@@ -1,5 +1,5 @@
 import { SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../utils"
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
 import { randomBlobKickoffText } from "./blob.constants"
 import { blobInteraction } from "./blob.interaction"
 

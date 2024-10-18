@@ -1,5 +1,5 @@
 import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getPartOfGroupByToken, formatPlayerIdentifier } from "../../utils"
+import { getPartOfGroupByToken, formatPlayerIdentifier } from "../../sceneUtils"
 
 export const blobInteraction = (gamestate, token, title) => {
     const newGamestate = { ...gamestate }

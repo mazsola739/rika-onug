@@ -1,5 +1,5 @@
 import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../utils"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
 import { assassinInteraction } from "./assassin.interaction"
 
 export const assassin = (gamestate, title, prefix) => {

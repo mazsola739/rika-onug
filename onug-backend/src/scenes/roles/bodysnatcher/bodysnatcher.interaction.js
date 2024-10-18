@@ -1,6 +1,6 @@
 import { CENTER_CARD_POSITIONS } from "../../../constants"
 import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, getNonAlienPlayerNumbersByRoleIdsWithNoShield } from "../../utils"
+import { getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, getNonAlienPlayerNumbersByRoleIdsWithNoShield } from "../../sceneUtils"
 import { getAnyOtherPlayersByToken } from "./bodysnatcher.utils"
 
 export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey) => {

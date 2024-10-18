@@ -1,5 +1,5 @@
 import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { formatPlayerIdentifier } from "../../utils"
+import { formatPlayerIdentifier } from "../../sceneUtils"
 import { getPlayerNumbersWithCardOrMarkActionTrue } from "./auraseer.utils"
 
 export const auraseerInteraction = (gamestate, token, title) => {

@@ -1,6 +1,6 @@
 import { logDebug, logError } from "../log"
 import { readGamestate, upsertRoomState } from "../repository"
-import { aliensResponse, alphawolfResponse, thingResponse, apprenticeseerResponse, apprenticeassassinResponse, assassinResponse, beholderResponse, bodysnatcherResponse, copycatResponse, curatorResponse, cupidResponse, seerResponse, diseasedResponse, doppelgangerResponse, doppelgangerinstantactionResponse, empathResponse, exposerResponse, revealerResponse, gremlinResponse, morticianResponse, pickpocketResponse, priestResponse, psychicResponse, rascalResponse, thecountResponse, mysticwolfResponse, drunkResponse, instigatorResponse, marksmanResponse, nostradamusResponse, oracle_questionResponse, oracle_answerResponse, paranormalinvestigatorResponse, robberResponse, sentinelResponse, squireResponse, troublemakerResponse, temptressResponse, vampiresResponse, villageidiotResponse, witchResponse, werewolvesResponse } from "../scenes/roles"
+import { aliensResponse, alphawolfResponse, thingResponse, apprenticeseerResponse, apprenticeassassinResponse, assassinResponse, beholderResponse, bodysnatcherResponse, copycatResponse, curatorResponse, cupidResponse, seerResponse, diseasedResponse, doppelgangerResponse, doppelgangerinstantactionResponse, empathResponse, exposerResponse, revealerResponse, gremlinResponse, morticianResponse, pickpocketResponse, priestResponse, psychicResponse, rascalResponse, thecountResponse, mysticwolfResponse, drunkResponse, instigatorResponse, marksmanResponse, nostradamusResponse, oracleQuestionResponse, oracleAnswerResponse, paranormalinvestigatorResponse, robberResponse, sentinelResponse, squireResponse, troublemakerResponse, temptressResponse, vampiresResponse, villageidiotResponse, witchResponse, werewolvesResponse } from "../scenes/roles"
 import { webSocketServerConnectionsPerRoom } from "./connections"
 
 export const interaction = async (message) => {
@@ -157,10 +157,10 @@ export const generateInteractionResponse = (gamestate, token, selected_card_posi
       newGamestate = nostradamusResponse(gamestate, token, selected_card_positions, scene_title)
       break  
     case "ORACLE_QUESTION":
-      newGamestate = oracle_questionResponse(gamestate, token, selected_answer, scene_title)
+      newGamestate = oracleQuestionResponse(gamestate, token, selected_answer, scene_title)
       break
     case "ORACLE_ANSWER":
-      newGamestate = oracle_answerResponse(gamestate, token, selected_card_positions, scene_title)
+      newGamestate = oracleAnswerResponse(gamestate, token, selected_card_positions, scene_title)
       break
     case "PARANORMAL_INVESTIGATOR":
       newGamestate = paranormalinvestigatorResponse(gamestate, token, selected_card_positions, scene_title)
