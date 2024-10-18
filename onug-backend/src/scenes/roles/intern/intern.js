@@ -1,6 +1,19 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { formatPlayerIdentifier, getAllPlayerTokens, getMadScientistPlayerNumberByRoleIds, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { IDS, SCENE } from '../../../constants'
+import { formatPlayerIdentifier, getAllPlayerTokens, getSceneEndTime } from '../../../utils'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+
+export const getMadScientistPlayerNumberByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (players[token].card.player_role_id === 63) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
 
 export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
   const newGamestate = { ...gamestate }
@@ -19,7 +32,7 @@ export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 62 || (card.player_role_id === 62 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 62 || (card.player_role_id === 62 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = internInteraction(newGamestate, token, title)
     }
 

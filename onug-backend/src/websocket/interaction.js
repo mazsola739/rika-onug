@@ -1,8 +1,7 @@
-import { logDebug, logError } from '../log'
-import { readGamestate, upsertRoomState } from '../repository'
-import { aliensResponse, alphawolfResponse, thingResponse, apprenticeseerResponse, apprenticeassassinResponse, assassinResponse, beholderResponse, bodysnatcherResponse, copycatResponse, curatorResponse, cupidResponse, seerResponse, diseasedResponse, doppelgangerResponse, doppelganger_instant_actionResponse, empathResponse, exposerResponse, revealerResponse, gremlinResponse, morticianResponse, pickpocketResponse, priestResponse, psychicResponse, rascalResponse, thecountResponse, mysticwolfResponse, drunkResponse, instigatorResponse, marksmanResponse, nostradamusResponse, oracle_questionResponse, oracle_answerResponse, paranormalinvestigatorResponse, robberResponse, sentinelResponse, squireResponse, troublemakerResponse, temptressResponse, vampiresResponse, villageidiotResponse, witchResponse, werewolvesResponse } from '../scenes/roles'
-import { webSocketServerConnectionsPerRoom } from './connections'
-
+import { logDebug, logError } from "../log"
+import { readGamestate, upsertRoomState } from "../repository"
+import { aliensResponse, alphawolfResponse, thingResponse, apprenticeseerResponse, apprenticeassassinResponse, assassinResponse, beholderResponse, bodysnatcherResponse, copycatResponse, curatorResponse, cupidResponse, seerResponse, diseasedResponse, doppelgangerResponse, doppelgangerinstantactionResponse, empathResponse, exposerResponse, revealerResponse, gremlinResponse, morticianResponse, pickpocketResponse, priestResponse, psychicResponse, rascalResponse, thecountResponse, mysticwolfResponse, drunkResponse, instigatorResponse, marksmanResponse, nostradamusResponse, oracle_questionResponse, oracle_answerResponse, paranormalinvestigatorResponse, robberResponse, sentinelResponse, squireResponse, troublemakerResponse, temptressResponse, vampiresResponse, villageidiotResponse, witchResponse, werewolvesResponse } from "../scenes/roles"
+import { webSocketServerConnectionsPerRoom } from "./connections"
 
 export const interaction = async (message) => {
   try {
@@ -74,7 +73,7 @@ export const generateInteractionResponse = (gamestate, token, selected_card_posi
       newGamestate = doppelgangerResponse(gamestate, token, selected_card_positions, scene_title)
       break
     case "DOPPELGÄNGER_INSTANT_ACTION":
-      newGamestate = doppelganger_instant_actionResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title)
+      newGamestate = doppelgangerinstantactionResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title)
       break
     case "DOPPELGÄNGER_APPRENTICE_ASSASSIN":
       newGamestate = apprenticeassassinResponse(gamestate, token, selected_mark_positions, scene_title)

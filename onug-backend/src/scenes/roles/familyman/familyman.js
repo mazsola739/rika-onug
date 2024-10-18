@@ -1,6 +1,6 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getPartOfGroupByToken, getRandomItemFromArray, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
 
 const randomFamilyman = [
   'familyman_1pleft_text',

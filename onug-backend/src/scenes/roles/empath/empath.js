@@ -1,8 +1,57 @@
-import { COPY_PLAYER_IDS, SCENE, VOTE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, empathNumbers, getSceneEndTime, getPlayerNumbersWithMatchingTokens, addVote, getEmpathTokensByRoleIds, getDoppelgangerEmpathTokensByRoleIds, formatPlayerIdentifier, findMostVoted } from '../../../utils'
+import { IDS, SCENE, VOTE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime, getPlayerNumbersWithMatchingTokens, addVote, formatPlayerIdentifier, findMostVoted } from '../../../utils'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
+
+export const getEmpathTokensByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (player.card.player_role_id === 77 && player.card.player_original_id !== 1) {
+      result.push(token)
+    }
+  }
+
+  return result
+}
+
+export const getDoppelgangerEmpathTokensByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (player.card.player_role_id === 77 && player.card.player_original_id === 1) {
+      result.push(token)
+    }
+  }
+
+  return result
+}
+
+export const empathNumbers = (totalPlayers, evenOdd = '') => {
+  const numbers = []
+  
+  totalPlayers = Math.min(Math.max(1, totalPlayers), 12)
+  
+  let start = 1
+  let step = 1
+  if (evenOdd === 'even') {
+    start = 2
+    step = 2
+  } else if (evenOdd === 'odd') {
+    start = 1
+    step = 2
+  }
+
+  for (let i = start; i <= totalPlayers; i += step) {
+    numbers.push(i)
+  }
+
+  return numbers
+}
+
 
 const empathKeys = [
   'identifier_everyone_text',
@@ -59,7 +108,7 @@ export const empath = (gamestate, title, prefix) => {
     
     if (activePlayerNumbers.includes(playerNumber)) {
       const card = newGamestate.players[token].card
-      const isNotEmpath = prefix === 'empath' && (card.player_original_id !== 77 || (card.player_role_id !== 20 && COPY_PLAYER_IDS.includes(card.player_original_id)));
+      const isNotEmpath = prefix === 'empath' && (card.player_original_id !== 77 || (card.player_role_id !== 20 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id)));
       const isNotDoppelgangerEmpath = prefix === 'doppelganger_empath' && (card.player_role_id !== 20 && card.player_original_id === 1);
     
       if (isNotEmpath || isNotDoppelgangerEmpath) {
@@ -203,7 +252,7 @@ export const empathVote = (gamestate, title, prefix) => {
     const card = newGamestate.players[token].card
 
     if (prefix === 'empath') {
-      if (card.player_original_id === 77 || (card.player_role_id === 77 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      if (card.player_original_id === 77 || (card.player_role_id === 77 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = empathVoteResult(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_empath') {

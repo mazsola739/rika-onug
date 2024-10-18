@@ -1,6 +1,19 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getPlayerNeighborsByToken, getSceneEndTime, superVillainDetected } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions';
+import { generateRoleInteraction } from '../../generateRoleInteraction';
+
+export const superVillainDetected = (players, evilometerToken) => {
+  const evilometerNeighbors = getNeighborPlayerNumbersByToken(players, evilometerToken)
+  const superVillains = getVillainPlayerNumbersByRoleIds(players)
+
+  for (let villain of superVillains) {
+    if (evilometerNeighbors.includes(villain)) {
+      return true
+    }
+  }
+
+  return false
+}
 
 //TODO super villains can see evilometer
 export const evilometer = (gamestate, title, hasDoppelganger) => {

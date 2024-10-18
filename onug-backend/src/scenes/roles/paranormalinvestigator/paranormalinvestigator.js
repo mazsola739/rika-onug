@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../../constants'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
 
 export const paranormalinvestigator = (gamestate, title) => {
   const newGamestate = { ...gamestate }

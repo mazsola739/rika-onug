@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getRandomItemFromArray, getAllPlayerTokens, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
 
 const randomMorticianInstructions = ['mortician_1card_text', 'mortician_2cards_text']
 const morticianKeys = [

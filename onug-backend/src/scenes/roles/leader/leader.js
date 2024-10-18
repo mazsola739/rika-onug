@@ -1,6 +1,6 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { formatPlayerIdentifier, getAlienPlayerNumbersByRoleIds, getAllPlayerTokens, getGroobPlayerNumberByRoleIds, getSceneEndTime, getZerbPlayerNumberByRoleIds } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
 
 export const leader = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

@@ -1,7 +1,7 @@
 import { ALL_COPY_PLAYER_IDS, SCENE, GOOD_GUY_IDS } from '../../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
 
 export const nostradamus = (gamestate, title) => {
   const newGamestate = { ...gamestate }

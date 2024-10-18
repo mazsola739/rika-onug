@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE, CENTER_CARD_POSITIONS } from '../../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
 
 export const drunk = (gamestate, title) => {
   const newGamestate = { ...gamestate }

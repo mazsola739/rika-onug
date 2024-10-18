@@ -2,12 +2,13 @@ import { writeFileSync } from 'fs'
 import { readFile, unlink } from 'fs/promises'
 import { logError, logTrace, logErrorWithStack } from '../log'
 import { webSocketServerConnectionsPerRoom } from '../websocket/connections'
-import rooms from '../data/rooms.json'
 import { ROOM_NAMES } from '../constants'
+import rooms from '../data/rooms.json'
 
 const FILE_PATH_TEMPLATE = `${__dirname}/../gamestate/`
 const ROOM_GAMESTATE_FILE = (room_id) => `${FILE_PATH_TEMPLATE}${room_id}_gamestate.json`
-const ENCODING_OPTIONS = { encoding: 'utf8' }
+
+const ENCODING = 'utf8'
 const WRITE_OPTIONS = { flag: 'w' }
 const DELETE_STATUS = { status: 'gamestate removed' }
 
@@ -29,7 +30,7 @@ export const readGamestate = async (room_id) => {
   const filePath = ROOM_GAMESTATE_FILE(room_id)
 
   try {
-    const data = await readFile(filePath, ENCODING_OPTIONS)
+    const data = await readFile(filePath, { encoding: ENCODING })
     return JSON.parse(data)
   } catch (error) {
     return logError(
@@ -48,7 +49,7 @@ export const readAllGamestates = async () => {
     const filePath = ROOM_GAMESTATE_FILE(room_id)
 
     try {
-      const rawData = await readFile(filePath, ENCODING_OPTIONS)
+      const rawData = await readFile(filePath, { encoding: ENCODING })
       gamestates[room_id] = JSON.parse(rawData)
     } catch (error) {
       logTrace('Could not read all gamestates', error)
@@ -64,7 +65,7 @@ export const readGamestateByRoomId = async (room_id) => {
   const filePath = ROOM_GAMESTATE_FILE(room_id)
 
   try {
-    const rawData = await readFile(filePath, ENCODING_OPTIONS)
+    const rawData = await readFile(filePath, { encoding: ENCODING })
     gamestate[room_id] = JSON.parse(rawData)
   } catch (error) {
     logTrace(`Could not read gamestate for room_id ${room_id}`, error)
@@ -89,7 +90,7 @@ export const removeAllGamestates = async () => {
   return { status: 'gamestates removed' }
 }
 
-export const removeRoomGamestateById= async (room_id) => {
+export const removeRoomGamestateById = async (room_id) => {
   logTrace('remove gamestate by room_id')
   const filePath = ROOM_GAMESTATE_FILE(room_id)
 
@@ -110,7 +111,7 @@ export const removeAllPlayers = async () => {
     const filePath = ROOM_GAMESTATE_FILE(room_id)
 
     try {
-      const rawData = await readFile(filePath, ENCODING_OPTIONS)
+      const rawData = await readFile(filePath, { encoding: ENCODING })
       const newGamestate = JSON.parse(rawData)
 
       Object.keys(newGamestate.players).forEach(
@@ -139,7 +140,7 @@ export const removePlayerByToken = async (token) => {
     const filePath = ROOM_GAMESTATE_FILE(room_id)
 
     try {
-      const rawData = await readFile(filePath, ENCODING_OPTIONS)
+      const rawData = await readFile(filePath, { encoding: ENCODING })
       const newGamestate = JSON.parse(rawData)
 
       if (newGamestate.players[token]) {

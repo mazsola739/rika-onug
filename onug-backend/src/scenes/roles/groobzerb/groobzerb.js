@@ -1,6 +1,6 @@
 import { GROOB_AND_ZERB_IDS, ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getZerbPlayerNumberByRoleIds, getGroobPlayerNumberByRoleIds, formatPlayerIdentifier } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
 
 export const groobzerb = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

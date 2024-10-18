@@ -1,8 +1,8 @@
 import { COPY_PLAYER_IDS, SCENE, MESSAGE } from '../../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNeighborsByToken, getPlayerTokensByPlayerNumber, formatPlayerIdentifier } from '../../../utils'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
 
 export const thing = (gamestate, title) => {
   const newGamestate = { ...gamestate }

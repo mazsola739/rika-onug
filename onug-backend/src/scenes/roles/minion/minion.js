@@ -1,6 +1,6 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { formatPlayerIdentifier, getAllPlayerTokens, getSceneEndTime, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
 
 export const minion = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

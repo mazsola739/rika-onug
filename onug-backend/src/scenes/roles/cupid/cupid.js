@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateMarkSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateMarkSelection } from '../../validators'
 
 export const cupid = (gamestate, title) => {
   const newGamestate = { ...gamestate }

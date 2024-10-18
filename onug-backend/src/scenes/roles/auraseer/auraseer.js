@@ -1,6 +1,6 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithCardOrMarkActionTrue, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../utils"
+import { auraseerInteraction } from "./auraseer.interaction"
 
 export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
   const newGamestate = { ...gamestate }
@@ -19,7 +19,7 @@ export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 72 || (card.player_role_id === 72 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 72 || (card.player_role_id === 72 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = auraseerInteraction(newGamestate, token, title)
     }
 
@@ -31,27 +31,3 @@ export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
 
   return newGamestate
 }
-
-export const auraseerInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-  
-  const playersWithCardOrMarkActionTrue = getPlayerNumbersWithCardOrMarkActionTrue(newGamestate.players)
-
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
-    auraseer: playersWithCardOrMarkActionTrue
-  }
-
-  const messageIdentifiers = formatPlayerIdentifier(playersWithCardOrMarkActionTrue)
-
-  return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_card_or_mark_action', ...messageIdentifiers],
-    icon: 'interaction',
-    uniqueInformations: { auraseer: playersWithCardOrMarkActionTrue }
-  })
-}
-
-/*AURA SEER moved viewed Copycat, Doppelgänger, Rascal, Body Snatcher, Alpha Wolf, Mystic Wolf, Seer, Exposer, 
-Mortician, Psychic, Apprentice Seer, Paranormal Investigator, Marksman, Robber, Witch, 
-Troublemaker, Village Idiot, Cupid, Any Vampire, Count, Pickpocket, Priest, Diseased, 
-Insomniac, Instigator, Assassin, Apprentice Assassin(If there is no Assassin) */

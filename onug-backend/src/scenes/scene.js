@@ -1,5 +1,5 @@
 import { logTrace, logDebug } from '../log'
-import { sceneHandler } from './scene-handler'
+import { sceneHandler } from './sceneHandler'
 import script from '../data/script.json'
 import _ from 'lodash'
 

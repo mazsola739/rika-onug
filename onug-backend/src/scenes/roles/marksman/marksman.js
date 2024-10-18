@@ -1,7 +1,7 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getMarksByPositions } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection, validateMarkSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection, validateMarkSelection } from '../../validators/validateAnswerSelection'
 
 export const marksman = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getRandomItemFromArray, getAllPlayerTokens, getAnyEvenOrOddPlayers, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../../utils'
-import { validateCardSelection } from '../../validate-response-data'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { validateCardSelection } from '../../validators'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
 
 const randomPsychicInstructions = ['psychic_view1_text', 'psychic_view2_text']
 const psychicKeys = ['identifier_anyeven_text', 'identifier_anyodd_text']

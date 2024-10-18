@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getSelectableOtherPlayerNumbersWithNoShield, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
 
 export const robber = (gamestate, title) => {
   const newGamestate = { ...gamestate }

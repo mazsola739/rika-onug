@@ -1,12 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
+import ViteExpress from 'vite-express'
 import { pageNotFoundError, internalServerError, apiRouter } from './api'
 import { logDebug } from './log'
 import { websocketServer } from './websocket'
-import { godRouter } from './god'
-import { stubRouter } from './stub'
-import ViteExpress from 'vite-express'
+import { godRouter } from './omnipotent/god'
+import { stubRouter } from './omnipotent/stub'
 
 
 const app = express()

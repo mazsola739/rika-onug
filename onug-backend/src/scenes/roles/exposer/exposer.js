@@ -1,7 +1,7 @@
 import { CENTER_CARD_POSITIONS, COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getRandomItemFromArray, getAllPlayerTokens, getSceneEndTime, getCardIdsByPositions, formatPlayerIdentifier } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
 
 const randomExposerInstructions = [
   'exposer_flip1_text',

@@ -1,7 +1,7 @@
 import { COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken, getMarksByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateMarkSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateMarkSelection } from '../../validators'
 
 export const pickpocket = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

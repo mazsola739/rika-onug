@@ -1,8 +1,22 @@
 import { SCENE, CENTER_CARD_POSITIONS } from '../../../constants'
-import { createNumberArray, formatOracleAnswer, formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getRandomItemFromArray, getRandomNumber, getSceneEndTime, isCurrentPlayerNumberEven, thinkRandomNumber } from '../../../utils'
+import { formatPlayerIdentifier, getAllPlayerTokens, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getRandomItemFromArray, getRandomNumber, getSceneEndTime, isCurrentPlayerNumberEven, thinkRandomNumber } from '../../../utils'
 import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../../conditions'
-import { validateAnswerSelection, validateCardSelection } from '../../validate-response-data'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateAnswerSelection, validateCardSelection } from '../../validators'
+
+export const createNumberArray = number => {
+  const result = []
+  for (let i = 1; i <= number; i++) {
+    result.push(`${i}`)
+  }
+  return result
+}
+
+export const formatOracleAnswer = answer => `${answer}_button_label`
+
+export const isCurrentPlayerNumberEven = (players, token) => players[token].player_number % 2 === 0
+
+export const thinkRandomNumber = () => Math.floor(Math.random() * 10) + 1
 
 const randomOracleQuestions = [
   'oracle_alienteam_text',
@@ -115,7 +129,7 @@ export const oracle_question = (gamestate, title) => {
       newGamestate.players[token].player_history[title].oracle = narration[1]
       interaction = oracle_question_raising(newGamestate, token, title)
     } else {
-
+      console.log("do nothing")
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -138,9 +152,9 @@ export const oracle_question_raising = (gamestate, token, title) => {
       answerOptions = createNumberArray(newGamestate.total_players)
       break
     case 'oracle_evenodd_text':
-      const isCurrentPlayerEven = isCurrentPlayerNumberEven(newGamestate.players, token)
+      { const isCurrentPlayerEven = isCurrentPlayerNumberEven(newGamestate.players, token)
       newGamestate.oracle.answer = isCurrentPlayerEven ? 'even' : 'odd'
-      break
+      break }
     case 'oracle_guessnumber_text':
       answerOptions = createNumberArray(10)
       break
@@ -228,11 +242,11 @@ export const oracle_answer = (gamestate, title) => {
       }
       break
     case 'oracle_viewplayer_text': 
-      const yes = oracleResponses[oracleQuestion].yes
+      { const yes = oracleResponses[oracleQuestion].yes
       const no = oracleResponses[oracleQuestion].no
       const options = yes.concat(no)
       narration = [getRandomItemFromArray(options)]
-      break
+      break }
     case 'oracle_alienexchange_text':
       aftermath = true
       if (oracleAnswer === 'yes') {

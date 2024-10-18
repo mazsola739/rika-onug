@@ -1,7 +1,21 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getWerewolfAndDreamwolfPlayerNumbersByRoleIds, getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateAnswerSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateAnswerSelection } from '../../validators/validateAnswerSelection'
+
+export const getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (IDS.ALL_WEREWOLF_IDS.includes(player.card.player_role_id) && !(player.card?.shield)) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
 
 export const squire = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

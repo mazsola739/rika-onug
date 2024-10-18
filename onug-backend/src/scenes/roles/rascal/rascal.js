@@ -1,8 +1,26 @@
-import { CENTER_CARD_POSITIONS, COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { getRandomItemFromArray, getAllPlayerTokens, getSceneEndTime, getAnyEvenOrOddPlayers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getSelectableOtherPlayerNumbersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getCardIdsByPlayerNumbers } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { CENTER_CARD_POSITIONS, IDS, SCENE } from '../../../constants'
+import { getRandomItemFromArray, getAllPlayerTokens, getSceneEndTime, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, getSelectableOtherPlayerNumbersWithNoShield, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getCardIdsByPlayerNumbers } from '../../../utils'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
 import { villageidiotInteraction } from '..'
+
+export const getAnyHigherOrLowerPlayerNumbersByToken = (players, token, higherOrLower) => {
+  const playerNumber = players[token].player_number
+  const result = {}
+
+  if (higherOrLower === 'lower') {
+      for (let i = playerNumber - 1; i >= 1; i--) {
+          result[i] = players[Object.keys(players).find(key => players[key].player_number === i)]
+      }
+  } else if (higherOrLower === 'higher') {
+      const totalPlayers = Object.keys(players).length
+      for (let i = playerNumber + 1; i <= totalPlayers; i++) {
+          result[i] = players[Object.keys(players).find(key => players[key].player_number === i)]
+      }
+  }
+
+  return result
+}
 
 const randomRascalInstructions = [
   'rascal_idiot_text',
@@ -76,7 +94,7 @@ export const rascal = (gamestate, title, prefix) => {
     let interaction = {}
     const card = newGamestate.players[token].card
 
-    if ((prefix === 'rascal' && (card.player_original_id === 52 || (card.player_role_id === 52 && COPY_PLAYER_IDS.includes(card.player_original_id)))) ||
+    if ((prefix === 'rascal' && (card.player_original_id === 52 || (card.player_role_id === 52 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id)))) ||
       (prefix === 'doppelganger_rascal' && card.player_role_id === 52 && card.player_original_id === 1)) {
       if (randomRascalInstruction === "rascal_idiot_text") {
         interaction = villageidiotInteraction(newGamestate, token, title)
@@ -111,20 +129,20 @@ export const rascalInteraction = (gamestate, token, title) => {
 
       case 'identifier_any2even_text':
       case 'identifier_any2odd_text':
-        const evenOrOddTwo = rascalKey.replace('identifier_any2', '').replace('_text', '')
-        return getAnyEvenOrOddPlayers(newGamestate.players, evenOrOddTwo)
+        { const evenOrOddTwo = rascalKey.replace('identifier_any2', '').replace('_text', '')
+        return getAnyEvenOrOddPlayers(newGamestate.players, evenOrOddTwo) }
 
       case 'identifier_any2higher_text':
       case 'identifier_any2lower_text':
-        const higherOrLowerTwo = rascalKey.replace('identifier_any2', '').replace('_text', '')
-        return getAnyHigherOrLowerPlayerNumbersByToken(newGamestate.players, higherOrLowerTwo)
+        { const higherOrLowerTwo = rascalKey.replace('identifier_any2', '').replace('_text', '')
+        return getAnyHigherOrLowerPlayerNumbersByToken(newGamestate.players, higherOrLowerTwo) }
 
       case 'identifier_2leftneighbors_text':
       case 'identifier_2rightneighbors_text':
       case 'identifier_bothneighbors_text':
-        const directionTwo = rascalKey.includes('left') ? 'left' : rascalKey.includes('right') ? 'right' : 'both'
+        { const directionTwo = rascalKey.includes('left') ? 'left' : rascalKey.includes('right') ? 'right' : 'both'
         const amountTwo = rascalKey.includes('2') ? 2 : 1
-        return getPlayerNeighborsByToken(newGamestate.players, directionTwo, amountTwo)
+        return getPlayerNeighborsByToken(newGamestate.players, directionTwo, amountTwo) }
     }
   }
 
@@ -132,22 +150,22 @@ export const rascalInteraction = (gamestate, token, title) => {
     switch (rascalKey) {
       case 'identifier_higher_text':
       case 'identifier_lower_text':
-        const higherOrLowerOne = rascalKey.replace('identifier_', '').replace('_text', '')
-        return getAnyHigherOrLowerPlayerNumbersByToken(newGamestate.players, higherOrLowerOne)
+        { const higherOrLowerOne = rascalKey.replace('identifier_', '').replace('_text', '')
+        return getAnyHigherOrLowerPlayerNumbersByToken(newGamestate.players, higherOrLowerOne) }
 
       case 'identifier_any_text':
         return getAllPlayerTokens(newGamestate.players)
 
       case 'identifier_anyeven_text':
       case 'identifier_anyodd_text':
-        const evenOrOddOne = rascalKey.replace('identifier_any', '').replace('_text', '')
-        return getAnyEvenOrOddPlayers(newGamestate.players, evenOrOddOne)
+        { const evenOrOddOne = rascalKey.replace('identifier_any', '').replace('_text', '')
+        return getAnyEvenOrOddPlayers(newGamestate.players, evenOrOddOne) }
 
       case 'identifier_oneneighbor_text':
       case 'identifier_leftneighbor_text':
       case 'identifier_rightneighbor_text':
-        const directionOne = rascalKey.includes('left') ? 'left' : rascalKey.includes('right') ? 'right' : 'both'
-        return getPlayerNeighborsByToken(newGamestate.players, directionOne, 1)
+        { const directionOne = rascalKey.includes('left') ? 'left' : rascalKey.includes('right') ? 'right' : 'both'
+        return getPlayerNeighborsByToken(newGamestate.players, directionOne, 1) }
     }
   }
   //todo better solution to get selectable players
@@ -214,7 +232,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
 
   switch (newGamestate.players[token].player_history[title].random) {
     case 'troublemaker':
-      const [position1, position2] = selected_card_positions.slice(0, 2)
+      { const [position1, position2] = selected_card_positions.slice(0, 2)
 
       const playerOneCard = { ...newGamestate.card_positions[position1].card }
       const playerTwoCard = { ...newGamestate.card_positions[position2].card }
@@ -241,7 +259,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
         uniqueInformations: { prank: [position1, position2] },
       })
 
-      break
+      break }
 
     case 'witch':
       if (!newGamestate.players[token].player_history[title].witch_answer) {
@@ -304,7 +322,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
 
     case 'drunk':
     case 'robber':
-      const selectedPosition = selected_card_positions[0]
+      { const selectedPosition = selected_card_positions[0]
       const selectedCard = { ...newGamestate.card_positions[selectedPosition].card }
 
       newGamestate.card_positions[currentPlayerNumber].card = selectedCard
@@ -336,7 +354,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
         uniqueInformations: { prank: [currentPlayerNumber, selectedPosition] },
       })
 
-      break
+      break }
   }
 
 

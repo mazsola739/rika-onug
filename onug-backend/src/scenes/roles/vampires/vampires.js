@@ -1,8 +1,8 @@
 import { ALL_VAMPIRE_IDS, ALL_COPY_PLAYER_IDS, SCENE, VOTE } from '../../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, addVote, findMostVoted, formatPlayerIdentifier, getPlayerTokensByPlayerNumber } from '../../../utils'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateMarkSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateMarkSelection } from '../../validators'
 
 export const vampires = (gamestate, title) => {
   const newGamestate = { ...gamestate }

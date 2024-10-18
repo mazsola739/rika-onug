@@ -1,7 +1,7 @@
 import { SCENE } from '../../../constants'
 import { getAllPlayerTokens, getSceneEndTime, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPositions, formatPlayerIdentifier } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
 
 //TODO if oracle is oracle team
 export const doppelganger = (gamestate, title) => {

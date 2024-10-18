@@ -1,6 +1,6 @@
 import { ALL_SUPER_VILLAIN_IDS, ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { formatPlayerIdentifier, getAllPlayerTokens, getSceneEndTime, getVillainPlayerNumbersByRoleIds } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
 
 export const supervillains = (gamestate, title) => {
   const newGamestate = { ...gamestate }

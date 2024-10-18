@@ -1,5 +1,18 @@
 import { getRandomItemFromArray, pickRandomOnePlayer, pickRandomTwoPlayers, pickRandomUpToThreePlayers, pickRandomTwoPlayersArray } from '../../../utils'
 
+export const pickRandomOnePlayer = numPlayers => shufflePlayers(numPlayers)[0]
+
+export const pickRandomTwoPlayers = (numPlayers, conjunction) => {
+  const players = shufflePlayers(numPlayers)
+
+  return [players[0], conjunction, players[1]]
+}
+
+export const pickRandomTwoPlayersArray = numPlayers => {
+  const players = shufflePlayers(numPlayers)
+
+  return [players[0], players[1]]
+}
 
 //TODO newGamestate.ripple true or false
 const ripple_sure_repeat = ['random_ripple_repeat', 'random_ripple_repeat1p']

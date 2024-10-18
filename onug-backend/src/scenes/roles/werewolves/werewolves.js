@@ -1,7 +1,33 @@
-import { WEREVOLVES, ALL_COPY_PLAYER_IDS, SCENE, CENTER_CARD_POSITIONS } from '../../../constants'
-import { getAllPlayerTokens, getWerewolfPlayerNumbersByRoleIds, getDreamWolfPlayerNumberByRoleIds, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { IDS, SCENE, CENTER_CARD_POSITIONS } from '../../../constants'
+import { getAllPlayerTokens, getWerewolfPlayerNumbersByRoleIds, getCardIdsByPositions, formatPlayerIdentifier, getSceneEndTime } from '../../../utils'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
+
+export const getWerewolfPlayerNumbersByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (IDS.WEREVOLVES.includes(player.card.player_role_id)) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
+
+export const getDreamWolfPlayerNumberByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (players[token].card.player_role_id === 21) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
 
 export const werewolves = (gamestate, title, hasDreamWolf) => {
   const newGamestate = { ...gamestate }
@@ -19,7 +45,7 @@ export const werewolves = (gamestate, title, hasDreamWolf) => {
 
     const card = newGamestate.players[token].card
 
-    if (WEREVOLVES.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
+    if (IDS.WEREVOLVES.some((id) => card.player_role_id === id && [id, ...IDS.ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
       interaction = werewolvesInteraction(newGamestate, token, title)
     }
 

@@ -1,6 +1,20 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { alienAbducted, getAllPlayerTokens, getPlayerNeighborsByToken, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { getAllPlayerTokens, getPlayerNeighborsByToken, getSceneEndTime } from '../../../utils'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { getAlienPlayerNumbersByRoleIds, getNeighborPlayerNumbersByToken } from '../../utils'
+
+export const alienAbducted = (players, cowToken) => {
+  const cowNeighbors = getNeighborPlayerNumbersByToken(players, cowToken)
+  const aliens = getAlienPlayerNumbersByRoleIds(players)
+
+  for (let alien of aliens) {
+    if (cowNeighbors.includes(alien)) {
+      return true
+    }
+  }
+
+  return false
+}
 
 //TODO aliens can see cow
 export const cow = (gamestate, title, hasDoppelganger) => {

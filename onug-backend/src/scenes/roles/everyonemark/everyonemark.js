@@ -1,6 +1,6 @@
 import { SCENE } from '../../../constants'
 import { getAllPlayerTokens, getPlayerNumberWithMatchingToken, getMarksByPositions, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
 
 export const everyonemark = (gamestate, title) => {
   const newGamestate = { ...gamestate }

@@ -1,7 +1,20 @@
-import { COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime, getNonVillainPlayerNumbersByRoleIdsWithNoShield, formatPlayerIdentifier } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime, formatPlayerIdentifier } from '../../../utils'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
+
+export const getNonVillainPlayerNumbersByRoleIdsWithNoShield = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (!IDS.ALL_SUPER_VILLAIN_IDS.includes(player.card.player_role_id) && !(player.card?.shield)) {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
 
 export const temptress = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -15,7 +28,7 @@ export const temptress = (gamestate, title) => {
  
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 69 || (card.player_role_id === 69 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 69 || (card.player_role_id === 69 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = temptressInteraction(newGamestate, token, title)
     }
 

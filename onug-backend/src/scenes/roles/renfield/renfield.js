@@ -1,6 +1,19 @@
 import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByMark, getPlayerNumberWithMatchingToken, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+
+export const getVampirePlayerNumbersByMark = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (player.player_mark === "mark_of_vampire") {
+      result.push(`player_${player.player_number}`)
+    }
+  }
+
+  return result
+}
 
 //TODO no vampire he is villager
 export const renfield = (gamestate, title, hasDoppelganger) => {

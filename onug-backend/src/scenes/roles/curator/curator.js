@@ -1,7 +1,18 @@
-import { COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getSelectablePlayersWithNoArtifact, getRandomArtifact, getPlayerTokensByPlayerNumber, formatPlayerIdentifier, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generate-scene-role-interactions'
-import { validateCardSelection } from '../../validate-response-data'
+import { IDS, SCENE } from '../../../constants'
+import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getPlayerTokensByPlayerNumber, getSceneEndTime, getSelectablePlayersWithNoArtifact, getSelectablePlayersWithNoShield } from '../../../utils'
+import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { validateCardSelection } from '../../validators'
+import artifacts from '../../../data/artifacts.json'
+
+export const getSelectablePlayersWithNoArtifact = (players, artifactedCards) => players.filter(player => !artifactedCards.includes(player))
+
+export const getRandomArtifact = playerArtifacts => {
+  const assignedArtifacts = playerArtifacts.map(obj => Object.values(obj)[0])
+  const availableArtifacts = artifacts.filter(artifact => !assignedArtifacts.includes(artifact.id))
+  const randomIndex = Math.floor(Math.random() * availableArtifacts.length)
+
+  return availableArtifacts[randomIndex].id
+}
 
 export const curator = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +27,7 @@ export const curator = (gamestate, title, prefix) => {
     const card = newGamestate.players[token].card
 
     if (prefix === 'curator') {
-      if (card.player_original_id === 20 || (card.player_role_id === 20 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      if (card.player_original_id === 20 || (card.player_role_id === 20 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
         interaction = curatorInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_curator') {
