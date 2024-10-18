@@ -1,6 +1,6 @@
-import { ALL_SUPER_VILLAIN_IDS, ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { formatPlayerIdentifier, getAllPlayerTokens, getSceneEndTime, getVillainPlayerNumbersByRoleIds } from '../../../utils'
-import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { supervillainsInteraction } from "./supervillains.interaction"
 
 export const supervillains = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -14,8 +14,8 @@ export const supervillains = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (ALL_SUPER_VILLAIN_IDS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
-      interaction = supervillainInteraction(newGamestate, token, title)
+    if (IDS.ALL_SUPER_VILLAIN_IDS.some((id) => card.player_role_id === id && [id, ...IDS.ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
+      interaction = supervillainsInteraction(newGamestate, token, title)
     }
 
     scene.push({ type: SCENE, title, token, narration, interaction })
@@ -25,23 +25,4 @@ export const supervillains = (gamestate, title) => {
   newGamestate.scene = scene
 
   return newGamestate
-}
-
-export const supervillainInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-
-  const villains = getVillainPlayerNumbersByRoleIds(newGamestate.players)
-
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
-    villains,
-  }
-
-  const messageIdentifiers = formatPlayerIdentifier(villains)
-
-  return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_villains', ...messageIdentifiers],
-    icon: 'villain',
-    uniqueInformations: { villains },
-  })
 }

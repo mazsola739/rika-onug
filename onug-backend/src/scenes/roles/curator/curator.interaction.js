@@ -16,7 +16,6 @@ export const curatorInteraction = (gamestate, token, title) => {
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any'],
-      icon: 'artifacted',
       selectableCards: { selectable_cards: selectablePlayersWithNoArtifact, selectable_card_limit: { player: 1, center: 0 } },
     })
   }

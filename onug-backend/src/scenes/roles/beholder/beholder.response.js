@@ -1,6 +1,5 @@
 import { SCENE } from "../../../constants"
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier } from "../../sceneUtils"
+import { getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
 import { validateAnswerSelection } from "../../validators"
 
 export const beholderResponse = (gamestate, token, selected_answer, title) => {
@@ -32,14 +31,12 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
     
       interaction = generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_saw_card', ...messageIdentifiers],
-        icon: 'seer',
         showCards: viewCards,
         uniqueInformations: { seers },
       })
     } else if (selected_answer === 'no') {
       interaction = generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_nothing'],
-        icon: 'seer',
       })
     }
   

@@ -33,11 +33,8 @@ export const empathResponse = (gamestate, token, selected_card_positions, title)
     empath_vote: [selected_card_positions[0]]
   }
 
-  const icon = newGamestate.empath.icon
-
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_voted', formatPlayerIdentifier(selected_card_positions)[0]],
-    icon,
     uniqueInformations: { empath_vote: [selected_card_positions[0]], },
   })
 

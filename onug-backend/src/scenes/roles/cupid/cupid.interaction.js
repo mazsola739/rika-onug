@@ -13,7 +13,6 @@ export const cupidInteraction = (gamestate, token, title) => {
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_must_two_any'],
-      icon: 'cupid',
       selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 2 } },
     })
   }

@@ -1,5 +1,5 @@
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getAlienPlayerNumbersByRoleIds, getPlayerNumberWithMatchingToken, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, formatPlayerIdentifier, getCardIdsByPlayerNumbers } from "../../sceneUtils"
+
+import { getAlienPlayerNumbersByRoleIds, getPlayerNumberWithMatchingToken, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, formatPlayerIdentifier, getCardIdsByPlayerNumbers, generateRoleInteraction } from "../../sceneUtils"
 import { getAlienPlayerNumbersByRoleIdsWithNoShield, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getNeighborByPosition, moveCards } from "./aliens.utils"
 
 export const aliensInteraction = (gamestate, token, title) => {
@@ -14,7 +14,6 @@ export const aliensInteraction = (gamestate, token, title) => {
   let selectableCards = {}
   let showCards = []
   let privateMessage = ['interaction_aliens']
-  let icon = randomAlienInstruction === 'aliens_stare_text' ? 'alienstare' : 'alien'
 
   if (alienKey.length > 1) {
     const selectablePlayerNumbers = alienKey.filter(key => key.includes('identifier_player')).map(key => key.replace('identifier_', ''))
@@ -34,7 +33,6 @@ export const aliensInteraction = (gamestate, token, title) => {
       if (newGamestate.players[token].shield) {
         newGamestate.players[token].player_history[title].shielded = true
         privateMessage.push('interaction_shielded')
-        icon = 'shielded'
       } else {
         privateMessage.push('interaction_may_one_any')
       }
@@ -45,7 +43,6 @@ export const aliensInteraction = (gamestate, token, title) => {
       if (newGamestate.players[token].shield) {
         newGamestate.players[token].player_history[title].shielded = true
         privateMessage.push('interaction_shielded')
-        icon = 'shielded'
       } else {
         const direction = randomAlienInstruction.includes('left') ? 'left' : 'right'
         const neighbor = getNeighborByPosition(aliensWithoutShield, currentPlayerNumber, direction)
@@ -75,7 +72,6 @@ export const aliensInteraction = (gamestate, token, title) => {
       if (newGamestate.players[token].shield) {
         newGamestate.players[token].player_history[title].shielded = true
         privateMessage.push('interaction_shielded')
-        icon = 'shielded'
       } else {
         privateMessage.push(...formatPlayerIdentifier(aliensWithoutShield))
       }
@@ -100,7 +96,6 @@ export const aliensInteraction = (gamestate, token, title) => {
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: privateMessage,
-    icon,
     showCards,
     selectableCards,
     uniqueInformations: { aliens },

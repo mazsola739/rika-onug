@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS } from "../../../constants"
-import { generateRoleInteraction } from "../../generateRoleInteraction"
+import { generateRoleInteraction } from "../../sceneUtils"
 import { getWerewolfPlayerNumbersByRoleIds, getDreamWolfPlayerNumberByRoleIds } from "./werewolves.utils"
 
 export const werewolvesInteraction = (gamestate, token, title) => {
@@ -18,7 +18,6 @@ export const werewolvesInteraction = (gamestate, token, title) => {
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: [loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves'],
-      icon: loneWolf ? 'lonely' : 'werewolf',
       selectableCards: { selectable_cards: loneWolf ? CENTER_CARD_POSITIONS : [], selectable_card_limit: { player: 0, center: 1 } },
       uniqueInformations: { werewolves, dreamwolf },
     })

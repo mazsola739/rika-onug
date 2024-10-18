@@ -15,7 +15,6 @@ export const everyonemarkInteraction = (gamestate, token, title) => {
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_own_mark'],
-    icon: 'mark',
     showMarks: viewMarks,
   })
 }

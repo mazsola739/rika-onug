@@ -104,7 +104,6 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
   
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: privateMessage,
-      icon: 'oracle',
       showCards,
       selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: limit } },
       uniqueInformations: { oracle: showCards },

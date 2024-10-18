@@ -14,7 +14,6 @@ export const doppelgangerInteraction = (gamestate, token, title) => {
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_must_one_any_other'],
-      icon: 'copy',
       selectableCards: { selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 } },
     })
   }

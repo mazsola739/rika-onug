@@ -1,69 +1,6 @@
-import { getRandomItemFromArray, pickRandomOnePlayer, pickRandomTwoPlayers, pickRandomUpToThreePlayers, pickRandomTwoPlayersArray } from '../../../utils'
-
-export const pickRandomOnePlayer = numPlayers => shufflePlayers(numPlayers)[0]
-
-export const pickRandomTwoPlayers = (numPlayers, conjunction) => {
-  const players = shufflePlayers(numPlayers)
-
-  return [players[0], conjunction, players[1]]
-}
-
-export const pickRandomTwoPlayersArray = numPlayers => {
-  const players = shufflePlayers(numPlayers)
-
-  return [players[0], players[1]]
-}
-
-//TODO newGamestate.ripple true or false
-const ripple_sure_repeat = ['random_ripple_repeat', 'random_ripple_repeat1p']
-const ripple_random = [
-  'random_ripple_none',
-  'random_ripple_1minute',
-  'random_ripple_repeat',
-  'random_ripple_repeat1p',
-  'random_ripple_insomniac',
-  'random_ripple_nospeak',
-  'random_ripple_faceaway',
-  'random_ripple_troublemaker',
-  'random_ripple_steal',
-  'random_ripple_witch',
-  'random_ripple_view1',
-  'random_ripple_view2',
-  'random_ripple_reveal',
-  'random_ripple_dualview',
-  'random_ripple_twovote',
-  'random_ripple_shuffle',
-  'random_ripple_drunk',
-  'random_ripple_voteapp',
-  'random_ripple_repeatrole',
-  'random_ripple_iamalien',
-]
-const random_ripple_dualview = ['ripple_dualseer_text', 'ripple_view2_text']
-
-const rippleAnyKeys = [
-  'identifier_any_text',
-  'identifier_anyeven_text',
-  'identifier_anyodd_text',
-  'activePlayers',
-]
-const rippleAllKeys = [
-  'identifier_everyone_text',
-  'identifier_oddplayers_text',
-  'identifier_evenplayers_text',
-  'activePlayers',
-]
-const rippleNeighborKeys = [
-  'identifier_leftneighbor_text',
-  'identifier_rightneighbor_text',
-  'identifier_oneneighbor_text',
-  'identifier_yourself_text',
-]
-const rippleCenterAnyKeys = [
-  'identifier_any_text',
-  'identifier_anyeven_text',
-  'identifier_anyodd_text',
-  'identifier_center_text',
-]
+import { getRandomItemFromArray, pickRandomUpToThreePlayers } from "../../sceneUtils"
+import { ripple_sure_repeat, ripple_random, rippleAllKeys, rippleAnyKeys, rippleNeighborKeys, rippleCenterAnyKeys, random_ripple_dualview } from "./ripple.constants"
+import { pickRandomOnePlayer, pickRandomTwoPlayers, pickRandomTwoPlayersArray } from "./ripple.utils"
 
 export const ripple = (oracleMadeSureRipple, totalPlayers) => {
   const result = []
@@ -228,10 +165,10 @@ export const ripple = (oracleMadeSureRipple, totalPlayers) => {
 const ripple_random = [
   'random_ripple_1minute', //vote time only 1 minute - //!timer for vote set to 60 sec
   'random_ripple_repeat', //repeat the night with random roles - //!random night actions in order will repeat
-  'random_ripple_repeat1p', //repeat the night actions 1 person open eyes - //!random night actions in order will repeat - eye icon
+  'random_ripple_repeat1p', //repeat the night actions 1 person open eyes - //!random night actions in order will repeat -
   'random_ripple_insomniac', //selected players may check own cards - //!player can check
-  'random_ripple_nospeak', //selected players may be silent until after the vote - //! no action needed, mute icon
-  'random_ripple_faceaway', //selected players must turn away from table - //! blind icon
+  'random_ripple_nospeak', //selected players may be silent until after the vote - //! no action needed, 
+  'random_ripple_faceaway', //selected players must turn away from table - //!
   'random_ripple_troublemaker', //selected player may swap cards between given players - //!player can select
   'random_ripple_steal', //selected player may steal card from given options - //!player can select
   'random_ripple_witch', //may view center card, the must to give to give options - //!player can select
@@ -244,7 +181,7 @@ const ripple_random = [
   'random_ripple_drunk', //player must to exchange hes card with given - //!no action needed we change it on backend
   'random_ripple_voteapp', //players suggested to may vote to app, so every1 will survive - //! extra vote button
   'random_ripple_repeatrole', //random roles will called again - //! all player who has original id
-  'random_ripple_iamalien', //player can only repeat im alien - //! UFO icon
+  'random_ripple_iamalien', //player can only repeat im alien - //! 
 ]
 
 export const ripple = (gamestate, title) => [] //TODO

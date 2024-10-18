@@ -1,4 +1,4 @@
-import { SCENE } from "../../../constants"
+import { IDS, SCENE } from "../../../constants"
 import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
 import { randomBlobKickoffText } from "./blob.constants"
 import { blobInteraction } from "./blob.interaction"
@@ -31,7 +31,7 @@ export const blob = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 44 || (card.player_role_id === 44 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 44 || (card.player_role_id === 44 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = blobInteraction(newGamestate, token, title)
     }
 

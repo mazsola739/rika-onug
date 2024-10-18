@@ -220,7 +220,7 @@ export const sceneHandler = gamestate => {
     case "LEADER_ZERB_GROOB":
       if (conditions.hasLeader(selected_cards) && conditions.hasGroobAndZerb(selected_cards)) {
         newGamestate.actual_scene.started = true
-        return roles.leader_zerbgroob(newGamestate, scene_title)
+        return roles.leaderZerbgroob(newGamestate, scene_title)
       }
       break
 
@@ -381,7 +381,7 @@ export const sceneHandler = gamestate => {
     case "NOSTRADAMUS_REACTION":
       if (conditions.hasNostradamus(selected_cards)) {
         newGamestate.actual_scene.started = true
-        return roles.nostradamus_reaction(newGamestate, scene_title)
+        return roles.nostradamusReaction(newGamestate, scene_title)
       }
       break
 

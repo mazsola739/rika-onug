@@ -1,6 +1,6 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../../utils'
-import { robberInteraction } from '..'
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { robberInteraction } from ".."
 
 export const roleretriever = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -14,7 +14,7 @@ export const roleretriever = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 66 || (card.player_role_id === 66 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 66 || (card.player_role_id === 66 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = robberInteraction(newGamestate, token, title)
     }
 

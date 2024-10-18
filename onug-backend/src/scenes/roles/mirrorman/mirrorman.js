@@ -1,6 +1,6 @@
-import { SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../../utils'
-import { copycatInteraction } from '..'
+import { SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { copycatInteraction } from "../copycat/copycat.interaction"
 
 export const mirrorman = (gamestate, title) => {
   const newGamestate = { ...gamestate }

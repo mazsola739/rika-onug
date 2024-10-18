@@ -1,6 +1,6 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../../utils'
-import { troublemakerInteraction } from '..'
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { troublemakerInteraction } from "../troublemaker/troublemaker"
 
 export const switcheroo = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -14,7 +14,7 @@ export const switcheroo = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 68 || (card.player_role_id === 68 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 68 || (card.player_role_id === 68 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = troublemakerInteraction(newGamestate, token, title)
     }
 

@@ -30,7 +30,6 @@ export const oracleQuestionRaising = (gamestate, token, title) => {
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_oracle_question'],
-      icon: 'oracle',
       uniqueInformations: { answer_options: answerOptions },
     })
   }

@@ -1,6 +1,6 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime, getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers } from '../../../utils'
-import { generateRoleInteraction } from '../../generateRoleInteraction'
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { insomniacInteraction } from "./insomniac.interaction"
 
 export const insomniac = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }
@@ -19,7 +19,7 @@ export const insomniac = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 4 || (card.player_role_id === 4 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 4 || (card.player_role_id === 4 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = insomniacInteraction(newGamestate, token, title)
     }
 
@@ -30,39 +30,4 @@ export const insomniac = (gamestate, title, hasDoppelganger) => {
   newGamestate.scene = scene
 
   return newGamestate
-}
-
-export const insomniacInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
-  const currentCard = newGamestate.card_positions[currentPlayerNumber].card
-
-  if (!newGamestate.players[token].shield) {
-    newGamestate.players[token].card.player_card_id = currentCard.id
-    newGamestate.players[token].card.player_team = currentCard.team
-
-    const showCards = getCardIdsByPlayerNumbers(newGamestate.card_positions, [currentPlayerNumber])
-
-    newGamestate.players[token].player_history[title] = {
-      ...newGamestate.players[token].player_history[title],
-      viewed_cards: [currentPlayerNumber],
-    }
-
-    return generateRoleInteraction(newGamestate, token, {
-      private_message: ['interaction_own_card'],
-      icon: title === 'INSOMNIAC' ? 'bear' : 'thumb',
-      showCards,
-      uniqueInformations: { bear: title === 'INSOMNIAC' ? [currentPlayerNumber] : [], thumb: title === 'SELF_AWARENESS_GIRL' ? [currentPlayerNumber] : [], }
-    })
-  } else {
-    newGamestate.players[token].player_history[title] = {
-      ...newGamestate.players[token].player_history[title],
-      shielded: true,
-    }
-
-    return generateRoleInteraction(newGamestate, token, {
-      private_message: ['interaction_shielded'],
-      icon: 'shielded',
-    })
-  }
 }

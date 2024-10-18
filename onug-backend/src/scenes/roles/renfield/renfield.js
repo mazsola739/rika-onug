@@ -1,19 +1,6 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByMark, getPlayerNumberWithMatchingToken, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generateRoleInteraction'
-
-export const getVampirePlayerNumbersByMark = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (player.player_mark === "mark_of_vampire") {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { renfieldInteraction } from "./renfield.interaction"
 
 //TODO no vampire he is villager
 export const renfield = (gamestate, title, hasDoppelganger) => {
@@ -33,7 +20,7 @@ export const renfield = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 38 || (card.player_role_id === 38 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 38 || (card.player_role_id === 38 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = renfieldInteraction(newGamestate, token, title)
     }
 
@@ -44,35 +31,4 @@ export const renfield = (gamestate, title, hasDoppelganger) => {
   newGamestate.scene = scene
 
   return newGamestate
-}
-
-export const renfieldInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-  const vampires = getVampirePlayerNumbersByRoleIds(newGamestate.players)
-  const newVampire = getVampirePlayerNumbersByMark(newGamestate.players)
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
-  const currentPlayerMark = newGamestate.card_positions[currentPlayerNumber].mark
-
-  if (gamestate.players[token].card.player_original_id === 1) {
-    const batPosition = newGamestate.doppelganger_mark_positions.bat
-    newGamestate.doppelganger_mark_positions.bat = currentPlayerMark
-    newGamestate.card_positions[currentPlayerNumber].mark = batPosition
-  } else {
-    const batPosition = newGamestate.mark_positions.bat
-    newGamestate.mark_positions.bat = currentPlayerMark
-    newGamestate.card_positions[currentPlayerNumber].mark = batPosition
-  }
-
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
-    vampires, 
-    new_vampire: newVampire, 
-    mark_of_bat: [currentPlayerNumber]
-  }
-
-  return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_vampires', 'interaction_mark_of_bat'],
-    icon: 'bat',
-    uniqueInformations: { vampires, new_vampire: newVampire, mark_of_bat: [currentPlayerNumber] },
-  })
 }

@@ -1,19 +1,6 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generateRoleInteraction'
-
-export const getMasonPlayerNumbersByRoleIds = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (IDS.MASONS.includes(player.card.player_role_id)) {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { masonsInteraction } from "./masons.interaction"
 
 export const masons = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -38,21 +25,4 @@ export const masons = (gamestate, title) => {
   newGamestate.scene = scene
 
   return newGamestate
-}
-
-export const masonsInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-  
-  const masons = getMasonPlayerNumbersByRoleIds(newGamestate.players)
-
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
-    masons,
-  }
-
-  return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_masons'],
-    icon: 'mason',
-    uniqueInformations: { masons },
-  })
 }

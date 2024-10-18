@@ -26,7 +26,6 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
   
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_placed_artifact', formatPlayerIdentifier(selected_card_positions)[0]],
-      icon: 'artifacted',
       uniqueInformations: { artifacted: selected_card_positions[0] },
     })
   

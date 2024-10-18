@@ -1,6 +1,6 @@
-import { COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../../utils'
-import { apprenticeseerInteraction } from '..'
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { apprenticeseerInteraction } from "../apprenticeseer/apprenticeseer.interaction"
 
 export const rapscallion = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -14,7 +14,7 @@ export const rapscallion = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 65 || (card.player_role_id === 65 && COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 65 || (card.player_role_id === 65 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = apprenticeseerInteraction(newGamestate, token, title)
     }
 

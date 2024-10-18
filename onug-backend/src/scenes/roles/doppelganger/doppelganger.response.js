@@ -32,7 +32,6 @@ export const doppelgangerResponse = (gamestate, token, selected_card_positions, 
   
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_you_are_that_role', `${newGamestate.players[token]?.card.player_role}`],
-      icon: 'copy',
       showCards,
       uniqueInformations: { new_role_id: newGamestate.players[token].card.player_role_id, copy: [selected_card_positions[0]] },
     })

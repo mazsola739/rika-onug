@@ -1,6 +1,5 @@
 import { CENTER_CARD_POSITIONS } from "../../../constants"
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, getNonAlienPlayerNumbersByRoleIdsWithNoShield } from "../../sceneUtils"
+import { generateRoleInteraction, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, getNonAlienPlayerNumbersByRoleIdsWithNoShield } from "../../sceneUtils"
 import { getAnyOtherPlayersByToken } from "./bodysnatcher.utils"
 
 export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey) => {
@@ -14,7 +13,6 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
   
       return generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_shielded'],
-        icon: 'shielded',
       })
     }
   
@@ -56,7 +54,6 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: [interactionMessage],
-      icon: 'alienhand',
       selectableCards,
     })
   }

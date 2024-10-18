@@ -1,6 +1,5 @@
 import { SCENE } from "../../../constants"
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getCardIdsByPositions, formatPlayerIdentifier } from "../../sceneUtils"
+import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
 import { validateCardSelection } from "../../validators"
 
 export const werewolvesResponse = (gamestate, token, selected_card_positions, title) => {
@@ -27,7 +26,6 @@ export const werewolvesResponse = (gamestate, token, selected_card_positions, ti
   
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
-      icon: 'lonely',
       showCards,
       uniqueInformations: { lonely: [selected_card_positions[0]] },
     })

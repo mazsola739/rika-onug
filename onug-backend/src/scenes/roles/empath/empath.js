@@ -26,7 +26,6 @@ export const empath = (gamestate, title, prefix) => {
 
   newGamestate.empath = {
     instruction: '',
-    icon: ''
   }
   newGamestate.empath.instruction = randomEmpathInstruction
   

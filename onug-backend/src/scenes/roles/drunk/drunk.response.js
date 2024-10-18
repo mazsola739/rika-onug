@@ -28,7 +28,6 @@ export const drunkResponse = (gamestate, token, selected_card_positions, title) 
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
-    icon: 'drunk',
     uniqueInformations: { drunk: [currentPlayerNumber, selected_card_positions[0]], },
   })
 

@@ -1,8 +1,8 @@
 import { SCENE, VOTE } from "../../../constants"
 import { webSocketServerConnectionsPerRoom } from "../../../websocket/connections"
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getAlienPlayerNumbersByRoleIds, getCardIdsByPositions, formatPlayerIdentifier, addVote, getPlayerTokensByPlayerNumber } from "../../sceneUtils"
+import { getAlienPlayerNumbersByRoleIds, getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier, addVote, getPlayerTokensByPlayerNumber } from "../../sceneUtils"
 import { validateCardSelection } from "../../validators"
+
 
 export const aliensResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
@@ -31,7 +31,6 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
   
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
-      icon: 'alienhand',
       uniqueInformations: { aliens, alienhand: showCards },
     })
   
@@ -65,7 +64,6 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_voted', formatPlayerIdentifier(selected_card_positions)[0]],
-    icon: 'alien',
     uniqueInformations: { aliens },
   })
 

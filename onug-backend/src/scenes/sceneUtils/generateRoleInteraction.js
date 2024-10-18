@@ -33,7 +33,6 @@ const updatePlayerCard = (gamestate, token) => {
 
 export const generateRoleInteraction = (gamestate, token, {
   private_message,
-  icon,
   selectableCards = {},
   selectableMarks = {},
   showCards = [],
@@ -54,7 +53,6 @@ export const generateRoleInteraction = (gamestate, token, {
 
   return {
     private_message,
-    icon,
     ...informations,
     player_name: gamestate.players[token].name,
     player_number: gamestate.players[token].player_number,

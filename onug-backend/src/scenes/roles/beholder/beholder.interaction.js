@@ -1,5 +1,4 @@
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { formatPlayerIdentifier } from "../../sceneUtils"
+import { formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
 import { getAnySeerPlayerNumbersByRoleIds } from "./beholder.utils"
 
 export const beholderInteraction = (gamestate, token, title) => {
@@ -16,7 +15,6 @@ export const beholderInteraction = (gamestate, token, title) => {
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_seers', ...messageIdentifiers, 'interaction_may_look'],
-      icon: 'seer',
       uniqueInformations: { seers, answer_options: ['yes', 'no'] },
     })
   }

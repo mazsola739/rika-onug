@@ -1,5 +1,4 @@
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { formatPlayerIdentifier, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from "../../sceneUtils"
+import { formatPlayerIdentifier, generateRoleInteraction, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from "../../sceneUtils"
 import { getAssassinPlayerNumbersByRoleIds } from "./apprenticeassassin.utils"
 
 export const apprenticeassassinInteraction = (gamestate, token, title) => {
@@ -17,7 +16,6 @@ export const apprenticeassassinInteraction = (gamestate, token, title) => {
 
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_assassin', ...messageIdentifiers],
-      icon: 'assassin',
       uniqueInformations: { assassins },
     })
   } else if (assassins.length === 0) {
@@ -31,7 +29,6 @@ export const apprenticeassassinInteraction = (gamestate, token, title) => {
 
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_may_one_any'],
-      icon: 'target',
       selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 } },
     })
   }

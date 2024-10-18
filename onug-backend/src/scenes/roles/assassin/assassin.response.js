@@ -1,6 +1,5 @@
 import { SCENE } from "../../../constants"
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from "../../sceneUtils"
+import { getPlayerNumberWithMatchingToken, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
 import { validateMarkSelection } from "../../validators"
 
 export const assassinResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -40,7 +39,6 @@ export const assassinResponse = (gamestate, token, selected_mark_positions, titl
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
-    icon: 'target',
     uniqueInformations: { mark_of_assassin: [selected_mark_positions[0]] },
   })
 

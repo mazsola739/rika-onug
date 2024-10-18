@@ -1,4 +1,4 @@
-import { generateRoleInteraction } from "../../generateRoleInteraction"
+import { generateRoleInteraction } from "../../sceneUtils"
 import { getNonWerewolfPlayerNumbersByRoleIdsWithNoShield } from "./alphawolf.utils"
 
 export const alphawolfInteraction = (gamestate, token, title) => {
@@ -13,7 +13,6 @@ export const alphawolfInteraction = (gamestate, token, title) => {
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_must_one_any_non_werewolf'],
-    icon: 'claw',
     selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: 1, center: 0 } },
   })
 }

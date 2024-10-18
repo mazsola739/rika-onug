@@ -1,6 +1,5 @@
 import { SCENE } from "../../../constants"
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getCardIdsByPositions, formatPlayerIdentifier } from "../../sceneUtils"
+import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
 import { validateCardSelection } from "../../validators"
 
 export const apprenticeseerResponse = (gamestate, token, selected_card_positions, title) => {
@@ -27,7 +26,6 @@ export const apprenticeseerResponse = (gamestate, token, selected_card_positions
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
-    icon: 'seer',
     showCards: viewCards,
     uniqueInformations: { seer: [selected_card_positions[0]] },
   })

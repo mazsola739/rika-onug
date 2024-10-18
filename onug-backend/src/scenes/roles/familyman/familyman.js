@@ -1,19 +1,7 @@
-import { ALL_COPY_PLAYER_IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getPartOfGroupByToken, getRandomItemFromArray, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generateRoleInteraction'
-
-const randomFamilyman = [
-  'familyman_1pleft_text',
-  'familyman_1pright_text',
-  'familyman_eachside_text',
-  'familyman_2pleft_text',
-  'familyman_2pright_text',
-  'familyman_3pleft_text',
-  'familyman_3pright_text',
-  'familyman_4pleft_text',
-  'familyman_4pright_text',
-  'familyman_2eachside_text',
-]
+import { IDS, SCENE } from "../../../constants"
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
+import { randomFamilyman } from "./familyman.constants"
+import { familymanInteraction } from "./familyman.interaction"
 
 export const familyman = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }
@@ -47,7 +35,7 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 78 || (card.player_role_id === 78 && ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 78 || (card.player_role_id === 78 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
       interaction = familymanInteraction(newGamestate, token, title)
     }
 
@@ -58,22 +46,4 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
   newGamestate.scene = scene
 
   return newGamestate
-}
-
-export const familymanInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-  const randomInstruction = newGamestate.scene.narration[1]
-  
-  const partOfFamily = getPartOfGroupByToken(newGamestate.players, token, randomInstruction)
-
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
-    family: partOfFamily,
-  }
-
-  return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_part_of_family'],
-    icon: 'family',
-    uniqueInformations: { family: partOfFamily, },
-  })
 }

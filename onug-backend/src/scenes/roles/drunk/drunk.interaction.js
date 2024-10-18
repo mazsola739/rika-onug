@@ -12,7 +12,6 @@ export const drunkInteraction = (gamestate, token, title) => {
 
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_must_one_center'],
-      icon: 'drunk',
       selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: 1 } },
     })
   } else {
@@ -23,7 +22,6 @@ export const drunkInteraction = (gamestate, token, title) => {
 
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_shielded'],
-      icon: 'shielded',
     })
   }
 }

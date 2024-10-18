@@ -1,7 +1,6 @@
 import { MESSAGE } from "../../../constants"
 import { webSocketServerConnectionsPerRoom } from "../../../websocket/connections"
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { findMostVoted, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getPlayerTokensByPlayerNumber } from "../../sceneUtils"
+import { findMostVoted, formatPlayerIdentifier, getCardIdsByPlayerNumbers, getPlayerTokensByPlayerNumber, generateRoleInteraction } from "../../sceneUtils"
 
 export const aliensVoteResult = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
@@ -10,14 +9,12 @@ export const aliensVoteResult = (gamestate, token, title) => {
   const mostVotedPlayer = findMostVoted(newGamestate.alien_votes)
   
   let privateMessage = []
-  let icon = 'babyalien'
   let showCards = []
   let uniqueInformations = {}
   
   if (randomAlienInstruction === 'aliens_allview_text') {
     newGamestate.players[token].card_or_mark_action = true
     privateMessage = ['interaction_saw_card', formatPlayerIdentifier(mostVotedPlayer)[0]]
-    icon = 'alienstare'
     showCards = getCardIdsByPlayerNumbers([mostVotedPlayer[0]])
     uniqueInformations = { alienstare: [mostVotedPlayer[0]] }
   } else if (randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text') {
@@ -45,7 +42,6 @@ export const aliensVoteResult = (gamestate, token, title) => {
       JSON.stringify({
         type: MESSAGE,
         message: (randomAlienInstruction === 'aliens_newalien_text') ? ['interaction_alien_role'] : ['interaction_alien_team'],
-        icon: 'babyalien',
       })
     )
   }
@@ -57,7 +53,6 @@ export const aliensVoteResult = (gamestate, token, title) => {
   
   return generateRoleInteraction(newGamestate, token, {
     private_message: privateMessage,
-    icon,
     showCards,
     uniqueInformations,
   })

@@ -12,7 +12,6 @@ export const diseasedInteraction = (gamestate, token, title) => {
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_must_one_neighbor'],
-      icon: 'diseased',
       selectableCards: { selectable_marks: neighbors, selectable_mark_limit: { mark: 1 } },
     })
   }

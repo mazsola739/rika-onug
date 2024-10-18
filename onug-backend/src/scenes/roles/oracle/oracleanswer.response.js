@@ -33,7 +33,6 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
   
       interaction = generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_swapped_cards', ...messageIdentifiers],
-        icon: 'oracle',
         uniqueInformations: { oracle: [currentPlayerNumber, selected_card_positions[0]] },
       })
     } else if (oracleQuestion === 'oracle_viewcenter_text') {
@@ -53,7 +52,6 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
   
       interaction = generateRoleInteraction(newGamestate, token, {
         private_message: message,
-        icon: 'nostradamus',
         showCards: selectedCards,
         uniqueInformations: { nostradamus: selectedCardPositions },
       })

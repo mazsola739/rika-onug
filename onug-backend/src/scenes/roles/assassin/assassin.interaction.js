@@ -1,5 +1,4 @@
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from "../../sceneUtils"
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, generateRoleInteraction } from "../../sceneUtils"
 
 export const assassinInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +15,6 @@ export const assassinInteraction = (gamestate, token, title) => {
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_must_one_any'],
-    icon: 'target',
     selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 1 } },
   })
 }

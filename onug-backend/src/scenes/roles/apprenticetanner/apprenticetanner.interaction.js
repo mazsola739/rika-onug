@@ -1,5 +1,4 @@
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { formatPlayerIdentifier, getPlayerNumberWithMatchingToken } from "../../sceneUtils"
+import { formatPlayerIdentifier, getPlayerNumberWithMatchingToken, generateRoleInteraction } from "../../sceneUtils"
 import { getTannerPlayerNumbersByRoleIds } from "./apprenticetanner.utils"
 
 export const apprenticetannerInteraction = (gamestate, token, title) => {
@@ -26,7 +25,6 @@ export const apprenticetannerInteraction = (gamestate, token, title) => {
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: privateMessage,
-    icon: 'tanner',
     uniqueInformations: { tanner },
   })
 }

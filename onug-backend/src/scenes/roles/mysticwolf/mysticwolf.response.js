@@ -1,0 +1,38 @@
+import { SCENE } from "../../../constants"
+import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
+import { validateCardSelection } from "../../validators"
+
+export const mysticwolfResponse = (gamestate, token, selected_card_positions, title) => {
+    if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+      return gamestate
+    }
+    
+    const newGamestate = { ...gamestate }
+    const scene = []
+  
+    const selectedPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
+    const viewCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
+  
+    if (newGamestate.players[token]?.card?.original_id === selectedPositionCard.id) {
+      newGamestate.players[token].card.player_card_id = 0
+    }
+  
+    newGamestate.players[token].card_or_mark_action = true
+  
+    newGamestate.players[token].player_history[title] = {
+      ...newGamestate.players[token].player_history[title],
+      viewed_cards: [selected_card_positions[0]],
+    }
+  
+    const interaction = generateRoleInteraction(newGamestate, token, {
+      private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
+      showCards: viewCards,
+      uniqueInformations: { mystic: title === 'MYSTIC_WOLF' ? [selected_card_positions[0]] : [], peeker: title === 'DR_PEEKER' ? [selected_card_positions[0]] : [], },
+    })
+  
+    scene.push({ type: SCENE, title, token, interaction })
+    newGamestate.scene = scene
+  
+    return newGamestate
+  }
+  

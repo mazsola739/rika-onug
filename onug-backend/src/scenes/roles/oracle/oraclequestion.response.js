@@ -33,7 +33,6 @@ export const oracleQuestionResponse = (gamestate, token, selected_answer, title)
   
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_oracle_answer', formatOracleAnswer(selected_answer)],
-      icon: 'oracle',
     })
   
     scene.push({ type: SCENE, title, token, interaction })

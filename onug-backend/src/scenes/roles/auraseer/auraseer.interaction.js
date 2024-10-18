@@ -1,6 +1,5 @@
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { formatPlayerIdentifier } from "../../sceneUtils"
-import { getPlayerNumbersWithCardOrMarkActionTrue } from "./auraseer.utils"
+import { getPlayerNumbersWithCardOrMarkActionTrue } from ".."
+import { formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
 
 export const auraseerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
@@ -16,7 +15,6 @@ export const auraseerInteraction = (gamestate, token, title) => {
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_card_or_mark_action', ...messageIdentifiers],
-    icon: 'interaction',
     uniqueInformations: { auraseer: playersWithCardOrMarkActionTrue }
   })
 }

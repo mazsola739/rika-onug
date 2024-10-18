@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS } from "../../../constants"
-import { generateRoleInteraction } from "../../generateRoleInteraction"
+import { generateRoleInteraction } from "../../sceneUtils"
 
 export const apprenticeseerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
@@ -11,7 +11,6 @@ export const apprenticeseerInteraction = (gamestate, token, title) => {
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_may_one_center'],
-    icon: 'seer',
     selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: 1 } },
   })
 }

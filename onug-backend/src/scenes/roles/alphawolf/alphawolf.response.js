@@ -1,6 +1,5 @@
 import { SCENE } from "../../../constants"
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { formatPlayerIdentifier } from "../../sceneUtils"
+import { formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
 import { validateCardSelection } from "../../validators"
 
 export const alphawolfResponse = (gamestate, token, selected_card_positions, title) => {
@@ -27,7 +26,6 @@ export const alphawolfResponse = (gamestate, token, selected_card_positions, tit
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
-    icon: 'claw',
     uniqueInformations: { swap: [selected_card_positions[0], 'center_wolf'], claw: [selected_card_positions[0]], },
   })
 

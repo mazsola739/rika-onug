@@ -1,6 +1,5 @@
 import { SCENE } from "../../../constants"
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier } from "../../sceneUtils"
+import { getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
 import { validateCardSelection } from "../../validators"
 
 export const bodysnatcherResponse = (gamestate, token, selected_card_positions, title) => {
@@ -37,7 +36,6 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
   
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
-      icon: 'alienhand',
       showCards,
       uniqueInformations: { swap: [currentPlayerNumber, selected_card_positions[0]], alienhand: [currentPlayerNumber] },
     })

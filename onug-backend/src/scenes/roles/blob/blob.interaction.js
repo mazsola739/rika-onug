@@ -1,5 +1,4 @@
-import { generateRoleInteraction } from "../../generateRoleInteraction"
-import { getPartOfGroupByToken, formatPlayerIdentifier } from "../../sceneUtils"
+import { getPartOfGroupByToken, formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
 
 export const blobInteraction = (gamestate, token, title) => {
     const newGamestate = { ...gamestate }
@@ -16,7 +15,6 @@ export const blobInteraction = (gamestate, token, title) => {
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_part_of_blob', ...messageIdentifiers],
-      icon: 'blob',
       uniqueInformations: { blob: partOfBlob },
     })
   }

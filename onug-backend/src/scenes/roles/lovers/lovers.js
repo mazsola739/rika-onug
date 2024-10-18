@@ -1,19 +1,6 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, getAllPlayerTokens, getSceneEndTime } from '../../../utils'
-import { generateRoleInteraction } from '../../generateRoleInteraction'
-
-export const getLoversPlayerNumbersByMark = players => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    if (player.player_mark === "mark_of_love") {
-      result.push(`player_${player.player_number}`)
-    }
-  }
-
-  return result
-}
+import { SCENE } from "../../../constants"
+import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
+import { loverInteraction } from "./lovers.interaction"
 
 export const lovers = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -38,23 +25,4 @@ export const lovers = (gamestate, title) => {
   newGamestate.scene = scene
 
   return newGamestate
-}
-
-export const loverInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-
-  const lovers = getLoversPlayerNumbersByMark(newGamestate.players)
-
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
-    lovers,
-  }
-
-  const messageIdentifiers = formatPlayerIdentifier(lovers)
-
-  return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_mark_of_lover', ...messageIdentifiers],
-    icon: 'lover',
-    uniqueInformations: { lovers },
-  })
 }
