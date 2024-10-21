@@ -1,4 +1,4 @@
-import { CardImage, Icon } from 'components'
+import { RoleImage, Icon } from 'components'
 import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
 import { capitalize } from 'utils'
@@ -22,7 +22,7 @@ export const KnownOwnCard: React.FC<KnownOwnCardProps> = observer(
     return (
       <KnownOwnCardContainer>
         {player?.player_card_id > 0 ? (
-          <CardImage image={card?.card_name} size={80}></CardImage>
+          <RoleImage image={card?.card_name} size={80}></RoleImage>
         ) : (
           <Icon iconName="secret" size={80} />
         )}

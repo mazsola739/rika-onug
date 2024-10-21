@@ -1,6 +1,6 @@
-import { Footer, FooterButtons, Button } from 'components'
-import { observer } from 'mobx-react-lite'
-import { useCallback } from 'react'
+import { Footer, FooterButtons, Button } from "components"
+import { observer } from "mobx-react-lite"
+import { useCallback } from "react"
 
 export const VotingFooter: React.FC = observer(() => {
   const handleVoteNow = useCallback(() => {

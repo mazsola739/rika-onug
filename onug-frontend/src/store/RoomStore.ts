@@ -1,6 +1,6 @@
 import { TEAM } from "constant"
 import { makeAutoObservable } from "mobx"
-import { CardType } from "types"
+import { CardType, PlayersType } from "types"
 import { createEmptyCard, getFilteredCardsForTeam as getSortedCardsByTeam, getOrderedTeams } from "utils"
 import { deckStore } from "store"
 
@@ -8,6 +8,7 @@ const { hero, village } = TEAM
 
 class RoomStore {
   detailedCardInfo: CardType = createEmptyCard()
+  players: PlayersType[]
 
   constructor() {
     makeAutoObservable(this)
@@ -56,6 +57,10 @@ class RoomStore {
 
     const newCardInfo = deckStore.getCardById(id)
     this.detailedCardInfo = newCardInfo || createEmptyCard()
+  }
+
+  setPlayers(players: PlayersType[]): void {
+    this.players = players
   }
 }
 

@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
 
-//HEADER
 export const StyledGamePlayHeader = styled.div`
   filter: drop-shadow(3px 3px 3px black);
   height: 100%;
@@ -38,7 +37,6 @@ export const TimerContainer = styled.div`
   filter: drop-shadow(3px 3px 3px black);
 `
 
-//MAIN
 export const StyledGamePlay = styled.div`
   display: flex;
   flex-direction: column;

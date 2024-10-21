@@ -14,7 +14,6 @@ class InteractionStore {
   selectableCenterCardLimit = 0
   selectableMarkLimit = 0
   message: string[] = []
-  messageIcon = ''
 
   constructor() {
     makeObservable(this, {
@@ -72,10 +71,6 @@ class InteractionStore {
 
   setLastJsonMessage(lastJsonMessage: WsJsonMessage): void {
     this.lastJsonMessage = lastJsonMessage
-  }
-
-  setMessageIcon(icon: string): void {
-    this.messageIcon = icon
   }
 
   setMessage(message: string[]): void {

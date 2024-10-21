@@ -1,10 +1,11 @@
-import { JOIN_ROOM } from '../constants'
+import { HYDRATE_ROOM, JOIN_ROOM } from '../constants'
 import roomsData from '../data/rooms.json'
 import { validateRoom } from '../validators'
 import { upsertRoomState } from '../repository'
 import { logTrace } from '../log'
 import { STAGES } from '../constants'
-import { addUserToRoom } from './connections'
+import { addUserToRoom, broadcast } from './connections'
+import { getPlayerNames } from '../utils'
 
 const randomPlayerName = (names = []) => names[~~(Math.random() * names.length)]
 
@@ -69,20 +70,40 @@ export const joinRoom = async (ws, message) => {
 
     player_name = randomPlayerName(gamestate.available_names)
 
-    gamestate.players[token] = {
-      name: player_name,
-      admin: gamestate.players.length === 0,
-      ready: false,
+    const isAdmin = Object.values(gamestate.players).every(player => !player.admin);
+
+    if (isAdmin) {
+      gamestate.players[token] = {
+        name: player_name,
+        admin: true,
+        ready: false,
+      };
+    } else {
+      gamestate.players[token] = {
+        name: player_name,
+        admin: false,
+        ready: false,
+      };
     }
 
     gamestate.available_names = gamestate.available_names.filter(
       (name) => name !== player_name
-    )
+    );
 
-    await upsertRoomState(gamestate)
+    await upsertRoomState(gamestate);
   }
 
-  addUserToRoom(ws, token, room_id)
+  addUserToRoom(ws, token, room_id);
+
+  const players = getPlayerNames(gamestate);
+
+  broadcast(room_id, { 
+    type: HYDRATE_ROOM,
+    success: true,
+    selected_cards: gamestate.selected_cards, 
+    selected_expansions: gamestate.selected_expansions,
+    players,
+  });
 
   return ws.send(
     JSON.stringify({
@@ -92,5 +113,5 @@ export const joinRoom = async (ws, message) => {
       room_id,
       player_name,
     })
-  )
-}
+  );
+};

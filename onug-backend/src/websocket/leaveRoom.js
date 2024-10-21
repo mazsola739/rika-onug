@@ -1,8 +1,9 @@
 import roomsData from '../data/rooms.json'
 import { upsertRoomState, readGamestate } from '../repository'
 import { logTrace } from '../log'
-import { LEAVE_ROOM } from '../constants'
-import { removeUserFromRoom } from './connections'
+import { HYDRATE_ROOM, LEAVE_ROOM } from '../constants'
+import { broadcast, removeUserFromRoom } from './connections'
+import { getPlayerNames } from '../utils'
 
 export const leaveRoom = async (ws, message) => {
   logTrace(`leave-room requested with ${JSON.stringify(message)}`)
@@ -46,6 +47,16 @@ export const leaveRoom = async (ws, message) => {
   await upsertRoomState(gamestate)
 
   removeUserFromRoom(token, room_id)
+
+  const players = getPlayerNames(gamestate)
+
+  broadcast(room_id, { 
+    type: HYDRATE_ROOM,
+    success: true,
+    selected_cards: gamestate.selected_cards, 
+    selected_expansions: gamestate.selected_expansions,
+    players,
+  })
   
   return ws.send(
     JSON.stringify({

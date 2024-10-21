@@ -1,7 +1,6 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, getPlayerNumberWithMatchingToken } from '../../../utils'
-import { generateRoleInteraction } from '../../generateRoleInteraction'
-import { validateMarkSelection } from '../../validators'
+import { SCENE } from "../../../constants"
+import { getPlayerNumberWithMatchingToken, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
+import { validateMarkSelection } from "../../validators"
 
 export const apprenticeassassinResponse = (gamestate, token, selected_mark_positions, title) => {
   if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {

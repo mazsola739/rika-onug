@@ -1,5 +1,5 @@
 import { validateRoom } from '../validators'
-import { determineTotalPlayers, filterCardsByExpansions, toggleCardSelect, toggleExpansions } from '../utils'
+import { determineTotalPlayers, filterCardsByExpansions, getPlayerNames, toggleCardSelect, toggleExpansions } from '../utils'
 import { upsertRoomState } from '../repository'
 import { HYDRATE_ROOM } from '../constants'
 import { broadcast } from './connections'
@@ -25,7 +25,9 @@ export const updateRoom = async (message) => {
 
   if (totalPlayers > 12) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors: ["Cannot have more than 12 players."] })
 
+  const players = getPlayerNames(newGamestate)
+
   upsertRoomState(newGamestate)
   
-  return broadcast(room_id, { type: HYDRATE_ROOM, success: true, selected_cards: newGamestate.selected_cards, selected_expansions: newGamestate.selected_expansions })
+  return broadcast(room_id, { type: HYDRATE_ROOM, success: true, selected_cards: newGamestate.selected_cards, selected_expansions: newGamestate.selected_expansions, players })
 }

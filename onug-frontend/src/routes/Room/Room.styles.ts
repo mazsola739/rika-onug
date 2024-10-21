@@ -1,40 +1,31 @@
 import styled from '@emotion/styled'
-import { LogoProps } from './Room.types'
 
 export const StyledRoom = styled.div`
   min-width: 100%;
-  bottom: 90px;
-  display: flex;
-  flex-direction: column;
-`
+  display: grid;
+  grid-template-columns: 160px calc(100vw - 330px) 160px;
+  grid-template-rows: 160px calc(100vh - 330px) 160px;
 
-export const Logo = styled.div<LogoProps>`
-  color: yellow;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 24px;
-  margin: 10px 0 10px 10px;
-  width: 200px;
-  height: 140px;
-  display: flex;
-  text-align: center;
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
-  align-items: center;
-  filter: drop-shadow(5px 5px 5px black);
-  background: ${({ backgroundImage }) => `url(/assets/rooms/${backgroundImage}.png)`} center center/contain no-repeat;
-`
-
-export const Banner = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 10px 10px;
-  gap: 10px;
+  nav {
+    grid-area: 2 / 1 / 4 / 2;
+  }
+  header {
+    grid-area: 1 / 1 / 2 / 4;
+  }
+  main {
+     grid-area: 2 / 2 / 3 / 3;
+  }
+  footer {
+    grid-area: 3 / 2 / 4 / 3;
+  }
+  fieldset {
+     grid-area: 2 / 3 / 4 / 4;
+  }
 `
 
 export const StyledInfo  = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 80px;
   gap: 10px;
 `
 
@@ -42,17 +33,16 @@ export const RuleInfo = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
+  height: 75px;
 `
 
 export const RuleImage = styled.img`
-  border: 1px solid white;
-  border-radius: 50%;
-  width: 80px;
+  width: 75px;
+  border: 1px solid yellow;
 `
 
 export const RuleInfoDescription = styled.p`
   color: yellow;
-  font-family: 'Josefin Sans', sans-serif;
   font-size: 20px;
   margin: 0;
   padding: 5px;
@@ -60,15 +50,7 @@ export const RuleInfoDescription = styled.p`
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 `
 
-export const User = styled.div`
-  width: 200px;
-  height: 140px;
-  display: flex;
-  text-align: center;
-  margin: 10px 10px 10px 0;
-`
-
-export const RoomCardList = styled.div`
+export const RoomRoleCardList = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -79,12 +61,21 @@ export const RoomCardList = styled.div`
   }
 `
 
-export const Users = styled.div`
-  position: sticky;
-  top: 0;
-  right: 0;
-  width: 200px;
+export const StyledPlayerNames = styled.div`
   display: flex;
+  flex-direction: row;
+  gap: 5px;
+`
+
+export const Player = styled.div`
+  align-items: center;
+  display: flex;
+  color: white;
+  flex-direction: row;
+  gap: 5px;
+`
+
+export const PlayerName = styled.span`
+  color: white;
   text-align: center;
-  margin-left: 10px;
 `

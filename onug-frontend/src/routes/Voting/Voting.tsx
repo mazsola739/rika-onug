@@ -1,17 +1,10 @@
-import { Header, KnownOwnCard, Main } from 'components'
-import { ARRIVE_VOTING, STAGES } from 'constant'
-import { observer } from 'mobx-react-lite'
-import { VotedList } from 'modules'
-import { useEffect, useState } from 'react'
-import { gameBoardStore, wsStore } from 'store'
-import {
-  GameArea,
-  OwnCardPlace,
-  PlayerHand,
-  StyledGameVote,
-  Voted,
-} from './Voting.styles'
-import { VotingFooter } from './VotingFooter'
+import { Header, Main, KnownOwnCard, VotedList } from "components"
+import { ARRIVE_VOTING, STAGES } from "constant"
+import { observer } from "mobx-react-lite"
+import { useState, useEffect } from "react"
+import { wsStore, gameBoardStore } from "store"
+import { StyledGameVote, GameArea, PlayerHand, OwnCardPlace, Voted } from "./Voting.styles"
+import { VotingFooter } from "./VotingFooter"
 
 export const Voting: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)

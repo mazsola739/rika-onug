@@ -1,7 +1,7 @@
 import { HYDRATE_DEALING, REDIRECT } from '../constants'
 import { logTrace, logErrorWithStack } from '../log'
 import { readGamestate } from '../repository'
-import { isGameTableClosed, getGameTableBoard } from '../utils'
+import { isGameTableClosed, getTableBoard } from '../utils'
 
 export const hydrateTable = async (ws, message) => {
   try {
@@ -22,7 +22,7 @@ export const hydrateTable = async (ws, message) => {
         player_name: player?.name,
         player_number: player?.player_number,
         ...playerCard,
-        board: getGameTableBoard(gamestate)
+        board: getTableBoard(gamestate)
       })
     )
   } catch (error) { 

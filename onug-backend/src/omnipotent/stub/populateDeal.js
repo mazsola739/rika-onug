@@ -1,4 +1,4 @@
-import { logTrace, logErrorWithStack } from '../log'
+import { logTrace, logErrorWithStack } from '../../log'
 
 const initStubbedCards = {
   playerCards:    [],

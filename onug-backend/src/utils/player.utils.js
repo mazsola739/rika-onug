@@ -15,7 +15,19 @@ export const determineTotalPlayers = (totalCharacters, selectedCards) => {
   return Math.max(totalPlayers, 0)
 }
 
-export const getGameTableBoard = gamestate => {
+export const getPlayerNames = gamestate => {
+  const playersFromGamestate = Object.values(gamestate.players)
+
+  const players = playersFromGamestate.map((player) => {
+    return {
+      player_name: player.name,
+    }
+  })
+
+  return players
+}
+
+export const getTableBoard = gamestate => {
   const playersPrivate = Object.values(gamestate.players)
 
   const playersPublic = playersPrivate.map((player) => {
@@ -47,7 +59,7 @@ export const getGameTableBoard = gamestate => {
   }
 }
 
-export const getGamePlayBoard = gamestate => {
+export const getGameBoard = gamestate => {
   const cardsOnBoard = Object.keys(gamestate?.card_positions).map(
     (position) => {
       const playerCard = gamestate.card_positions[position].card

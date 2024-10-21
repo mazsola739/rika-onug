@@ -1,13 +1,12 @@
-import { Header, Main, KnownOwnCard } from 'components'
-import { ARRIVE_GAME, STAGES, SCENE, HYDRATE_GAME, MESSAGE, REDIRECT, PAUSE_GAME } from 'constant'
-import { observer } from 'mobx-react-lite'
-import { BoardCards, SceneTracker, MessageBox } from 'modules'
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { wsStore, gameBoardStore, narrationStore, interactionStore, gameStore } from 'store'
-import { StyledGamePlay, GamePlayContainer, GameArea, PlayerHand, OwnCardPlace } from './Game.styles'
-import { GameFooter } from './GameFooter'
-import { GameHeader } from './GameHeader'
+import { Header, Main, BoardCards, SceneTracker, KnownOwnCard } from "components"
+import { ARRIVE_GAME, STAGES, SCENE, HYDRATE_GAME, MESSAGE, REDIRECT, PAUSE_GAME } from "constant"
+import { observer } from "mobx-react-lite"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { wsStore, gameBoardStore, narrationStore, interactionStore, gameStore } from "store"
+import { StyledGamePlay, GamePlayContainer, GameArea, PlayerHand, OwnCardPlace } from "./Game.styles"
+import { GameFooter } from "./GameFooter"
+import { GameHeader } from "./GameHeader"
 
 export const Game: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
@@ -40,7 +39,6 @@ export const Game: React.FC = observer(() => {
 
       if (Object.keys(lastJsonMessage.interaction).length > 0) {
         interactionStore.setMessage(lastJsonMessage.interaction.private_message)
-        interactionStore.setMessageIcon(lastJsonMessage.interaction.icon)
         interactionStore.setInteraction(lastJsonMessage.interaction.title)
         interactionStore.toggleMessageBoxStatus(true)
       }
@@ -81,7 +79,6 @@ export const Game: React.FC = observer(() => {
             <OwnCardPlace>
               <KnownOwnCard player={gameBoardStore.knownPlayer} />
             </OwnCardPlace>
-            {interactionStore.hasMessageBox && <MessageBox />}
           </PlayerHand>
         </GamePlayContainer>
       </Main>

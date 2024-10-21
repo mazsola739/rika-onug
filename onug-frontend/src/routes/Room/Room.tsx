@@ -1,13 +1,12 @@
-import { Main } from 'components'
-import { ARRIVE_ROOM, STAGES, HYDRATE_ROOM, REDIRECT, LEAVE_ROOM, TEAM } from 'constant'
-import { observer } from 'mobx-react-lite'
-import { Nav, CardList } from 'modules'
-import { useState, useEffect, useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { wsStore, deckStore, roomStore } from 'store'
-import { StyledRoom, RoomCardList, Users } from './Room.styles'
-import { RoomFooter } from './RoomFooter'
-import { RoomHeader } from './RoomHeader'
+import { Nav, Main, RoleCardList, Filter } from "components"
+import { ARRIVE_ROOM, STAGES, HYDRATE_ROOM, REDIRECT, LEAVE_ROOM, TEAM } from "constant"
+import { observer } from "mobx-react-lite"
+import { useState, useEffect, useMemo } from "react"
+import { useNavigate } from "react-router-dom"
+import { wsStore, deckStore, roomStore } from "store"
+import { StyledRoom, RoomRoleCardList } from "./Room.styles"
+import { RoomFooter } from "./RoomFooter"
+import { RoomHeader } from "./RoomHeader"
 
 export const Room: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
@@ -35,6 +34,7 @@ export const Room: React.FC = observer(() => {
     if (lastJsonMessage?.type === HYDRATE_ROOM && lastJsonMessage?.success) {
       deckStore.setSelectedCard(lastJsonMessage.selected_cards)
       deckStore.setSelectedExpansions(lastJsonMessage.selected_expansions)
+      roomStore.setPlayers(lastJsonMessage.players)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
@@ -70,20 +70,20 @@ export const Room: React.FC = observer(() => {
     [roomStore, teamArray]
   )
 
-  const anchorList = orderedTeams.map(team => roomStore.getTeamName(roomStore.getSortedCardsByTeam(team), team).toUpperCase())
+  const anchorList = orderedTeams.map(team => roomStore.getTeamName(roomStore.getSortedCardsByTeam(team), team).replace(/\b\w/g, l => l.toUpperCase()))
 
   return (
     <StyledRoom>
       <RoomHeader />
+      <Nav anchorList={anchorList} />
       <Main>
-        <Nav anchorList={anchorList} />
-        <RoomCardList>
+        <RoomRoleCardList>
           {orderedTeams.map((teamName, index) => (
-            <CardList key={index} team={teamName} cards={roomStore.getSortedCardsByTeam(teamName)} />
+            <RoleCardList key={index} team={teamName} cards={roomStore.getSortedCardsByTeam(teamName)} />
           ))}
-        </RoomCardList>
-        <Users />
+        </RoomRoleCardList>
       </Main>
+      <Filter />
       <RoomFooter />
     </StyledRoom>
   )

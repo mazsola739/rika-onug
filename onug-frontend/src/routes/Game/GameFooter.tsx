@@ -1,8 +1,8 @@
-import { Footer, FooterButtons, Button } from 'components'
-import { BUTTONS } from 'constant'
-import { useClickHandler } from 'hooks'
-import { observer } from 'mobx-react-lite'
-import { gameStore } from 'store'
+import { Footer, FooterButtons, Button } from "components"
+import { BUTTONS } from "constant"
+import { useClickHandler } from "hooks"
+import { observer } from "mobx-react-lite"
+import { gameStore } from "store"
 
 export const GameFooter: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')

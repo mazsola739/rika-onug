@@ -5,12 +5,8 @@ export const StyledApp = styled.div`
   width: 100vw;
   height: 100vh;
 
-  background-image: radial-gradient(
-      circle,
-      hsla(190, 100%, 50%, 0.7) 0%,
-      hsla(240, 86%, 25%, 0.7) 100%
-    ),
-    url('/assets/backgrounds/cards.png');
+  background-image: radial-gradient(ellipse at top, #9a9a9aBF, #000000E6),
+    url('/assets/backgrounds/wood.png');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;

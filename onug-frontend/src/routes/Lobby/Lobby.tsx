@@ -1,10 +1,10 @@
-import { HYDRATE_LOBBY, STAGES, REDIRECT, JOIN_ROOM } from 'constant'
-import { observer } from 'mobx-react-lite'
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { wsStore, lobbyStore } from 'store'
-import { StyledRoomButton, StyledLobby } from './Lobby.styles'
-import { StyledLobbyProps } from './Lobby.types'
+import { HYDRATE_LOBBY, STAGES, REDIRECT, JOIN_ROOM } from "constant"
+import { observer } from "mobx-react-lite"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { wsStore, lobbyStore, roomStore } from "store"
+import { StyledRoomButton, StyledLobby } from "./Lobby.styles"
+import { StyledLobbyProps } from "./Lobby.types"
 
 const RoomButton: React.FC<StyledLobbyProps> = ({
   buttonText,
@@ -53,7 +53,6 @@ export const Lobby: React.FC = observer(() => {
         const { room_id, player_name } = lastJsonMessage
         sessionStorage.setItem('room_id', room_id)
         sessionStorage.setItem('player_name', player_name)
-
         navigate(`/room/${room_id}`)
       } else {
         console.error(lastJsonMessage.errors)
