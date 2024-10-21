@@ -1,8 +1,8 @@
-import { VAMPIRE_IDS, ASSASSIN_IDS } from 'constant'
+import { VAMPIRE_IDS, ASSASSIN_IDS, HAS_MARK_IDS } from 'constant'
 import { cards, marks, artifacts } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardType, TokenType } from 'types'
-import { createEmptyCard, findCardById, areAnyCardSelectedById, isCardSelectedById, determineTotalPlayers } from 'utils'
+import { createEmptyCard, findCardById, areAnyCardSelectedById, isCardSelectedById, determineTotalPlayers, checkCardPresence } from 'utils'
 
 class DeckStore {
   deck: CardType[] = cards
@@ -44,6 +44,18 @@ class DeckStore {
 
   get totalPlayers(): number {
     return determineTotalPlayers(this.totalCharacters, this.selectedCards)
+  }
+
+  get hasCurator(): boolean {
+    return checkCardPresence(this.selectedCards, 20)
+  }
+
+  get hasSentinel(): boolean {
+    return checkCardPresence(this.selectedCards, 25)
+  }
+
+  get hasMarks(): boolean {
+    return areAnyCardSelectedById(this.selectedCards, HAS_MARK_IDS)
   }
   
   updateSelectedMarks(): void {

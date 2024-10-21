@@ -15,7 +15,6 @@ export const CenterCardContainer = styled.div`
   align-items: flex-end;
   display: flex;
   flex-direction: row;
-  padding-top: 10px;
   gap: 10px;
   justify-content: center;
 `
@@ -32,7 +31,6 @@ export const PlayersCards = styled.div`
   gap: 5px;
   justify-content: center;
   width: 100%;
-  padding-top: 10px;
 `
 
 export const CenterCards = styled.div`

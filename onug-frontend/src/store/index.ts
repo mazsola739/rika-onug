@@ -1,4 +1,3 @@
-export * from './DealingStore'
 export * from './DeckStore'
 export * from './GameBoardStore'
 export * from './GameStore'

@@ -2,7 +2,7 @@ import { Token, Icon } from 'components'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { useState, useMemo } from 'react'
-import { dealingStore, deckStore, interactionStore } from 'store'
+import { deckStore, interactionStore } from 'store'
 import { StyledBoardCard, Tokens, CardBack, MarkBack } from './BoardCard.styles'
 import { BoardCardProps } from './BoardCard.types'
 
@@ -47,7 +47,7 @@ const BoardCard: React.FC<BoardCardProps> = observer(({ isCenter, boardCard }) =
   const { position, cardId, markId, selectable_cards, selectable_marks, ...icons } = boardCard
   const [isSelectedCard, setIsSelectedCard] = useState(false)
   const [isSelectedMark, setIsSelectedMark] = useState(false)
-  const { hasMarks } = dealingStore
+  const { hasMarks } = deckStore
   const cardImageSrc = useCardImageSrc(cardId)
   const markImageSrc = useMarkImageSrc(markId)
   

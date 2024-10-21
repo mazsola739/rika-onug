@@ -1,7 +1,7 @@
 import { HYDRATE_GAME, REDIRECT } from '../constants'
 import { logTrace } from '../log'
 import { readGamestate } from '../repository'
-import { isGamePlayStopped } from '../utils'
+import { isGameStopped } from '../utils'
 
 export const hydrateGame = async (ws, message) => {
   logTrace(`hydrate game play ${JSON.stringify(message)}`)
@@ -10,7 +10,7 @@ export const hydrateGame = async (ws, message) => {
   const gamestate = await readGamestate(room_id)
   const newGamestate = {...gamestate}
 
-  if (isGamePlayStopped(gamestate))
+  if (isGameStopped(gamestate))
     return ws.send(
       JSON.stringify({ type: REDIRECT, path: `/room/${room_id}` })
     )

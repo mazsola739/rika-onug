@@ -1,23 +1,14 @@
 import { Token, Icon } from 'components'
 import { observer } from 'mobx-react-lite'
 import { useState } from 'react'
-import { dealingStore, deckStore, interactionStore } from 'store'
+import { deckStore, interactionStore } from 'store'
 import { StyledVoteCard, Tokens, CardBack, MarkBack, ArtifactBack } from './VoteCard.styles'
 import { VoteCardProps } from './VoteCard.types'
 
 export const VoteCard: React.FC<VoteCardProps> = observer(
-  ({
-    position,
-    id,
-    mark,
-    isCenter,
-    selectable_cards,
-    shield,
-    artifact,
-    select,
-  }) => {
+  ({ position, id, mark, isCenter, selectable_cards, shield, artifact, select }) => {
     const [isSelectedCard, setIsSelectedCard] = useState(false)
-    const { hasMarks } = dealingStore
+    const { hasMarks } = deckStore
     const card = id === 0 ? '' : deckStore.getCardById(id)
 
     const cardImageSrc =

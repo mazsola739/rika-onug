@@ -2,15 +2,11 @@ import styled from '@emotion/styled'
 import { ReadyType } from './ReadyList.types'
 
 export const StyledReadyList = styled.div`
-  background-color: rgba(0, 0, 0, 0.3);
-  border: 1px solid black;
-  border-radius: 4px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(4, calc( calc(100vw  - 420px) / 4));
   gap: 5px;
-  min-width: 300px;
-  max-height: 355px;
+  grid-auto-flow: column;
 `
 
 export const Player = styled.div`

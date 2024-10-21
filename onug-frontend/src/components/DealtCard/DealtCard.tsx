@@ -1,12 +1,12 @@
 import { Token } from 'components'
 import { observer } from 'mobx-react-lite'
-import { dealingStore, deckStore } from 'store'
+import { deckStore } from 'store'
 import { StyledDealtCard, CardBack, Tokens } from './DealtCard.styles'
 import { DealtCardProps } from './DealtCard.types'
 
 export const DealtCard: React.FC<DealtCardProps> = observer(
   ({ position, id, isCenter, ready }) => {
-    const { hasMarks } = dealingStore
+    const { hasMarks } = deckStore
     const card = id === 0 ? '' : deckStore.getCardById(id)
     const playerTokenName = position.replace(/^player_/, '')
 

@@ -4,6 +4,7 @@ import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { roomStore, gameStore, deckStore } from 'store'
 import { StyledInfo, RuleInfo, RuleImage, RuleInfoDescription, StyledPlayerNames, Player, PlayerName } from './Room.styles'
+import { Fragment } from 'react'
 
 const Info: React.FC = observer(() => {
   const detailedCardInfo = roomStore.getDetailedCardInfo()
@@ -36,16 +37,20 @@ const PlayerNames: React.FC = observer(() => {
 
   return (
     <StyledPlayerNames>
+      {`Player(s) in the room: `}
       {players && players.map(({ player_name }, index) => (
-        <Player key={index}>
-          <Token tokenName={`player_${index + 1}`} size={30} />
-          <PlayerName>{player_name}</PlayerName>
-        </Player>
-      )
-    )}
+        <Fragment key={index}>
+          <Player>
+            <Token tokenName={`player_${index + 1}`} size={25} />
+            <PlayerName>{player_name}</PlayerName>
+          </Player>
+          {index < players.length - 1 && ', '}
+        </Fragment>
+      ))}
     </StyledPlayerNames>
   )
 })
+
 
 export const RoomFooter: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')

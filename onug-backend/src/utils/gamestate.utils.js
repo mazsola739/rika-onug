@@ -1,4 +1,4 @@
 import { STAGES } from '../constants'
 
-export const isGameTableClosed = gamestate => gamestate.stage !== STAGES.DEALING
-export const isGamePlayStopped = gamestate => gamestate.stage !== STAGES.GAME
+export const isTableClosed = gamestate => gamestate.stage !== STAGES.DEALING
+export const isGameStopped = gamestate => gamestate.stage !== STAGES.GAME

@@ -1,4 +1,4 @@
-import { Header, Main, BoardCards, SceneTracker, KnownOwnCard } from "components"
+import { Header, Main, BoardCards, SceneTracker } from "components"
 import { ARRIVE_GAME, STAGES, SCENE, HYDRATE_GAME, MESSAGE, REDIRECT, PAUSE_GAME } from "constant"
 import { observer } from "mobx-react-lite"
 import { useState, useEffect } from "react"
@@ -77,7 +77,6 @@ export const Game: React.FC = observer(() => {
           </GameArea>
           <PlayerHand>
             <OwnCardPlace>
-              <KnownOwnCard player={gameBoardStore.knownPlayer} />
             </OwnCardPlace>
           </PlayerHand>
         </GamePlayContainer>

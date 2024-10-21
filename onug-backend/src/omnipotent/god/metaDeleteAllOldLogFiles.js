@@ -1,24 +1,29 @@
-import { readdir, unlink } from 'fs/promises'
-import { logTrace, logErrorWithStack } from '../../log'
+import { readdir, unlink } from 'fs/promises';
+import { logTrace, logErrorWithStack } from '../../log';
+import path from 'path';
 
 export const metaDeleteAllOldLogFiles = async (req, res) => {
   try {
-    logTrace(`GOD delete all old log files endpoint triggered`)
+    logTrace('GOD delete all old log files endpoint triggered');
 
-    const allFilesInLogDir = await readdir(`${__dirname}/../../logs/`, {
-      withFileTypes: true,
-    })
+    const logDir = path.resolve(__dirname, '../../../logs');
+    const allFilesInLogDir = await readdir(logDir, { withFileTypes: true });
 
     const logFiles = allFilesInLogDir
       .filter((item) => !item.isDirectory() && item.name !== 'placeholder.md')
-      .map((item) => `${item.path}${item.name}`)
-    logFiles.pop()
+      .map((item) => path.join(logDir, item.name));
 
-    logTrace(`META DELETE ALL:  ${JSON.stringify(logFiles)}`)
-    logFiles.forEach(async (filePath) => await unlink(filePath))
+    if (logFiles.length > 0) {
+      logFiles.pop();
+    }
 
-    return res.send({ message: 'done', logFiles })
+    logTrace(`META DELETE ALL: ${JSON.stringify(logFiles)}`);
+
+    await Promise.all(logFiles.map(async (filePath) => unlink(filePath)));
+
+    return res.send({ message: 'done', logFiles });
   } catch (error) {
-    logErrorWithStack(error)
+    logErrorWithStack(error);
+    return res.status(500).send({ error: 'An error occurred while deleting log files.' });
   }
-}
+};

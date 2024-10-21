@@ -1,4 +1,4 @@
-import { Header, Main, KnownOwnCard, VotedList } from "components"
+import { Header, Main, VotedList } from "components"
 import { ARRIVE_VOTING, STAGES } from "constant"
 import { observer } from "mobx-react-lite"
 import { useState, useEffect } from "react"
@@ -46,7 +46,6 @@ export const Voting: React.FC = observer(() => {
         <GameArea />
         <PlayerHand>
           <OwnCardPlace>
-            <KnownOwnCard player={gameBoardStore.knownPlayer} />
           </OwnCardPlace>
         </PlayerHand>
         <Voted>

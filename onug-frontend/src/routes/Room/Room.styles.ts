@@ -64,18 +64,21 @@ export const RoomRoleCardList = styled.div`
 export const StyledPlayerNames = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 5px;
+  color: white;
+  font-size: 14px;
+  margin-top: 10px;
 `
 
 export const Player = styled.div`
   align-items: center;
   display: flex;
-  color: white;
   flex-direction: row;
+  align-items: center;
   gap: 5px;
 `
 
 export const PlayerName = styled.span`
-  color: white;
   text-align: center;
 `

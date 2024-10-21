@@ -1,5 +1,5 @@
-import { PlayerType } from 'types'
+import { PlayersType, PlayerType } from 'types'
 
 export interface TableHeaderProp {
-  player: PlayerType
+  players: PlayersType[]
 }

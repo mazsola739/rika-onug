@@ -1,16 +1,16 @@
-import { Main, ReadyList, DealtCards } from "components"
-import { ARRIVE_DEALING, STAGES, HYDRATE_DEALING, HYDRATE_READY, REDIRECT } from "constant"
+import { DealtCards, Main } from "components"
+import { ARRIVE_DEALING, HYDRATE_DEALING, HYDRATE_READY, REDIRECT, STAGES } from "constant"
 import { artifacts } from "data"
 import { observer } from "mobx-react-lite"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { dealingStore, deckStore, gameBoardStore, wsStore, roomStore } from "store"
-import { StyledTable, GameArea, Ready } from "./Table.styles"
+import { deckStore, gameBoardStore, wsStore } from "store"
+import { GameArea, StyledTable } from "./Table.styles"
 import { tableUtils } from "./Table.utils"
 import { TableFooter } from "./TableFooter"
 import { TableHeader } from "./TableHeader"
 
-const { renderMarks, renderArtifacts } = tableUtils
+const { renderTokens, /* renderLeftSide, renderRightSide */ } = tableUtils
 
 export const Table: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
@@ -18,11 +18,9 @@ export const Table: React.FC = observer(() => {
 
   const token = sessionStorage.getItem('token')
 
-  const { hasSentinel, hasMarks, hasCurator } = dealingStore
-  const { selectedMarks } = deckStore
-  const { setPlayer, setPlayers, everyoneCheckOwnCard } = gameBoardStore
-  const { sendJsonMessage, lastJsonMessage } =
-    wsStore.getWsCommunicationsBridge()
+  const { selectedMarks, hasSentinel, hasMarks, hasCurator } = deckStore
+  const { setPlayer, setPlayers } = gameBoardStore
+  const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -49,35 +47,28 @@ export const Table: React.FC = observer(() => {
         player_mark: lastJsonMessage.player_mark,
       })
       setPlayers(lastJsonMessage.board.players)
-      everyoneCheckOwnCard(lastJsonMessage.board.gameTableBoardCards)
-      roomStore.resetDetailedCardInfo()
-      deckStore.setSelectedCard(lastJsonMessage.selected_cards)
     }
 
     if (lastJsonMessage?.type === HYDRATE_READY) {
       setPlayers(lastJsonMessage.board.players)
-      everyoneCheckOwnCard(lastJsonMessage.board.gameTableBoardCards)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [lastJsonMessage, setPlayer, setPlayers, everyoneCheckOwnCard, navigate])
-
-  const { player, players } = gameBoardStore
+  }, [lastJsonMessage, setPlayer, setPlayers, navigate])
 
   return (
     <StyledTable>
-      <TableHeader player={player} />
+      <TableHeader />
+{/*       {renderLeftSide()} */}
       <Main>
         <GameArea>
-          <Ready>{players && <ReadyList players={players} />}</Ready>
           <DealtCards />
-          {(hasCurator || hasSentinel) &&
-            renderArtifacts(artifacts, hasCurator, hasSentinel)}
-          {hasMarks && renderMarks(selectedMarks)}
+          {(hasCurator || hasSentinel || hasMarks) && renderTokens(artifacts, hasCurator, hasSentinel, selectedMarks)}
         </GameArea>
       </Main>
+{/*       {renderRightSide()} */}
       <TableFooter />
     </StyledTable>
   )
