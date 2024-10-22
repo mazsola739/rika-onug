@@ -1,23 +1,8 @@
-import { gameBoardStore } from 'store'
-import { CardContainer, PlayersCards, CardTitle, CenterCards, CenterCardContainer } from './BoardCards.styles'
-import BoardCard from 'components/BoardCard/BoardCard'
+import { TableCard } from '../TableCard/TableCard'
+import { CardContainer, CardTitle, CenterCards, CenterCardContainer } from './CenterCards.styles'
+import { CenterPositionProperties } from 'types'
 
-export const renderPlayerCards = () => {
-  const { playerCards } = gameBoardStore
-
-  return (
-    <CardContainer>
-      <PlayersCards>
-        {playerCards.map((card, index) => (
-          <BoardCard key={index} isCenter={false} boardCard={card} />
-        ))}
-      </PlayersCards>
-    </CardContainer>
-  )
-}
-
-export const renderCenterCard = () => {
-  const { centerCards } = gameBoardStore
+export const renderCenterCard = (centerCards: CenterPositionProperties[]) => {
   const renderCard = (position: string, title: string) => {
     const card = centerCards.find((c) => c.position === position)
     return (
@@ -25,7 +10,7 @@ export const renderCenterCard = () => {
         <CardContainer>
           <CardTitle>{title}</CardTitle>
           <CenterCards>
-            <BoardCard isCenter={true} boardCard={card} />
+            <TableCard id={card.id} position={card.position} isCenter={true} />
           </CenterCards>
         </CardContainer>
       )
@@ -42,8 +27,9 @@ export const renderCenterCard = () => {
             (position, index) => {
               const card = centerCards.find((c) => c.position === position)
               return (
-                card && card.id !== null && (
-                  <BoardCard key={index} isCenter={true} boardCard={card} />
+                card &&
+                card.id !== null && (
+                  <TableCard key={index} id={card.id} position={card.position} isCenter={true} />
                 )
               )
             }

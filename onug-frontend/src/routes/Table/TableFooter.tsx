@@ -2,7 +2,7 @@ import { Footer, FooterButtons, Button, CardImage, Token } from "components"
 import { BUTTONS, ROLES } from "constant"
 import { useClickHandler } from "hooks"
 import { observer } from "mobx-react-lite"
-import { deckStore, gameBoardStore } from "store"
+import { deckStore, boardStore } from "store"
 import React from "react"
 import { StyledTableFooter, PlayerInfo, PlayerName, PlayerCardInfo, PlayerCardRule } from "./Table.styles"
 
@@ -11,7 +11,7 @@ export const TableFooter: React.FC = observer(() => {
     const token = sessionStorage.getItem('token')
 
     const { handleLeaveTable, handleStartGame, handleReady } = useClickHandler(room_id, token)
-    const { player, players } = gameBoardStore
+    const { player, players } = boardStore
 
     
     const card = player?.player_card_id

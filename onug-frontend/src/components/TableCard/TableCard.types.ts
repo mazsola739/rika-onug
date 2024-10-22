@@ -1,10 +1,10 @@
-export interface DealtCardProps {
+export interface TableCardProps {
   id: number
   position: string
   ready?: boolean
   isCenter: boolean
 }
 
-export interface StyledDealtCardProps {
+export interface StyledTableCardProps {
   backgroundImage: string
 }

@@ -1,8 +1,8 @@
-import { Header, Main, VotedList } from "components"
+import { Header, Main } from "components"
 import { ARRIVE_VOTING, STAGES } from "constant"
 import { observer } from "mobx-react-lite"
 import { useState, useEffect } from "react"
-import { wsStore, gameBoardStore } from "store"
+import { wsStore, boardStore } from "store"
 import { StyledGameVote, GameArea, PlayerHand, OwnCardPlace, Voted } from "./Voting.styles"
 import { VotingFooter } from "./VotingFooter"
 
@@ -26,7 +26,7 @@ export const Voting: React.FC = observer(() => {
         token,
       })
     }
-  }, [sendJsonMessage, firstTime, gameBoardStore])
+  }, [sendJsonMessage, firstTime, boardStore])
 
   useEffect(() => {
     if (!lastJsonMessage?.player_history) return
@@ -49,9 +49,6 @@ export const Voting: React.FC = observer(() => {
           </OwnCardPlace>
         </PlayerHand>
         <Voted>
-          {gameBoardStore.players && (
-            <VotedList players={gameBoardStore.players} />
-          )}
         </Voted>
       </Main>
       <VotingFooter />

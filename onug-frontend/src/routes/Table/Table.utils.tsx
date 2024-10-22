@@ -1,7 +1,6 @@
 import { DealtToken } from "components"
 import { PlayersType, PlayerType, TokenType } from "types"
 import { Marks } from "./Table.styles"
-import { deckStore, gameBoardStore } from "store"
 
 const renderTokens = (
   artifacts: TokenType[],
@@ -24,67 +23,28 @@ const renderTokens = (
   </Marks>
 )
 
-/* const splitPlayersToLeftAndRightSide = () => {
-  const {  player } = gameBoardStore
-
-  if (!player || player.player_number === undefined) {
-    return { left: [], right: [] }
+const splitPlayersToLeftAndRightSide = (players: PlayersType[], player: PlayerType) => {
+  const middleIndex = Math.floor(players.length / 2)
+  const playerIndex = player.player_number - 1
+  const difference = middleIndex - playerIndex
+  
+  let newPlayers = [...players]
+  
+  if (difference > 0) {
+    const shiftPart = newPlayers.slice(-difference)
+    newPlayers = [...shiftPart, ...newPlayers.slice(0, newPlayers.length - difference)]
+  } else if (difference < 0) {
+    const shiftPart = newPlayers.slice(0, -difference)
+    newPlayers = [...newPlayers.slice(-difference), ...shiftPart]
   }
 
-  const playerNumber = player.player_number
-  const index = playerNumber - 1
-  const totalPlayers = players.length
-
-  const left: PlayersType[] = []
-  const right: PlayersType[] = []
-
-  for (let i = 1; i <= Math.floor(totalPlayers / 2); i++) {
-    right.push(players[(index + i) % totalPlayers])
-    left.push(players[(index - i + totalPlayers) % totalPlayers])
-  }
-
-  left.reverse()
-  right.reverse()
-
+  const left = newPlayers.slice(0, middleIndex)
+  const right = newPlayers.slice(middleIndex + 1).reverse()
+  
   return { left, right }
 }
 
-const playersOnMySide = splitPlayersToLeftAndRightSide()
-const { left, right } = playersOnMySide
-
-const renderLeftSide = () => {(
-    <div>
-    {left.map(({player_number}) => (
-      <img
-        key={player_number}
-        src="/assets/playingcards/card_background.png"
-        alt={player_number}
-        width="50"
-        height="70"
-      />
-    ))}
-  </div>
-  )
-}
-
-const renderRightSide = () => {(
-    <div>
-    {right.map(({player_number}) => (
-      <img
-        key={player_number}
-        src="/assets/playingcards/card_background.png"
-        alt={player_number}
-        width="50"
-        height="70"
-      />
-    ))}
-  </div>
-  )
-} */
-
 export const tableUtils = {
   renderTokens,
-/*   splitPlayersToLeftAndRightSide,
-  renderLeftSide,
-  renderRightSide */
+  splitPlayersToLeftAndRightSide
 }

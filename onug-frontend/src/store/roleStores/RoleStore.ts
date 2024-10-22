@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { gameBoardStore, interactionStore } from 'store'
+import { boardStore, interactionStore } from 'store'
 import { CenterPositionProperties, PlayerPositionProperties, WsJsonMessage } from 'types'
 
 class RoleStore {
@@ -10,7 +10,7 @@ class RoleStore {
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
     const answerOptions: string[] = lastJsonMessage.interaction.answer_options || []
 
-    const playerCards: PlayerPositionProperties[] = gameBoardStore.playerCards.map(
+    const playerCards: PlayerPositionProperties[] = boardStore.playerCards.map(
       (playerCard) => {
         const { position } = playerCard
 
@@ -55,7 +55,7 @@ class RoleStore {
       }
     )
 
-    const centerCards: CenterPositionProperties[]  = gameBoardStore.centerCards.map(
+    const centerCards: CenterPositionProperties[]  = boardStore.centerCards.map(
       (centerCard) => {
         const { position } = centerCard
 
@@ -75,10 +75,10 @@ class RoleStore {
     interactionStore.selectableCenterCardLimit = lastJsonMessage.interaction.selectable_card_limit?.center
     interactionStore.selectablePlayerCardLimit = lastJsonMessage.interaction.selectable_card_limit?.player
     interactionStore.selectableMarkLimit = lastJsonMessage.interaction.selectable_mark_limit?.mark
-    gameBoardStore.setAnswerOptions(answerOptions)
-    gameBoardStore.setPlayerCards(playerCards)
-    gameBoardStore.setCenterCards(centerCards)
-    gameBoardStore.setKnownPlayer({
+    boardStore.setAnswerOptions(answerOptions)
+    boardStore.setPlayerCards(playerCards)
+    boardStore.setCenterCards(centerCards)
+    boardStore.setKnownPlayer({
       player_name: lastJsonMessage.interaction?.player_name,
       player_number: lastJsonMessage.interaction?.player_number,
       player_original_id: lastJsonMessage.interaction?.player_original_id,

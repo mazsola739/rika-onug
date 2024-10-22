@@ -1,16 +1,39 @@
-import { DealtCards, Main } from "components"
-import { ARRIVE_DEALING, HYDRATE_DEALING, HYDRATE_READY, REDIRECT, STAGES } from "constant"
+import { CenterCards, Main } from "components"
+import { ARRIVE_DEALING, HYDRATE_TABLE, HYDRATE_READY, REDIRECT, STAGES } from "constant"
 import { artifacts } from "data"
 import { observer } from "mobx-react-lite"
-import { useEffect, useState } from "react"
+import { Fragment, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { deckStore, gameBoardStore, wsStore } from "store"
-import { GameArea, StyledTable } from "./Table.styles"
+import { deckStore, boardStore, wsStore } from "store"
+import { GameArea, StyledSide, StyledTable } from "./Table.styles"
 import { tableUtils } from "./Table.utils"
 import { TableFooter } from "./TableFooter"
 import { TableHeader } from "./TableHeader"
+import { PlayersType } from "types"
 
-const { renderTokens, /* renderLeftSide, renderRightSide */ } = tableUtils
+const { renderTokens, splitPlayersToLeftAndRightSide } = tableUtils
+
+const Side: React.FC<{sidePlayers: PlayersType[]}> = observer(({sidePlayers}) => (
+  <StyledSide>
+    {sidePlayers.map(({player_number, player_name}) => (
+      <Fragment key={player_number}>
+      <img
+        src="/assets/playingcards/card_background.png"
+        alt={player_number.toString()}
+        width="50"
+        height="100"
+      />
+        <img
+        src={`/assets/tokens/${player_number.match(/\d+/)[0]}.png`}
+        alt={player_number.toString()}
+        width="25"
+      />
+      <p>{player_name}</p>
+      </Fragment>
+    ))}
+  </StyledSide>
+))
+
 
 export const Table: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
@@ -19,7 +42,7 @@ export const Table: React.FC = observer(() => {
   const token = sessionStorage.getItem('token')
 
   const { selectedMarks, hasSentinel, hasMarks, hasCurator } = deckStore
-  const { setPlayer, setPlayers } = gameBoardStore
+  const { setPlayer, setPlayers, players, player } = boardStore
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
 
   useEffect(() => {
@@ -35,7 +58,7 @@ export const Table: React.FC = observer(() => {
   }, [sendJsonMessage, firstTime])
 
   useEffect(() => {
-    if (lastJsonMessage?.type === HYDRATE_DEALING) {
+    if (lastJsonMessage?.type === HYDRATE_TABLE) {
       setPlayer({
         player_name: lastJsonMessage.player_name,
         player_number: lastJsonMessage.player_number,
@@ -58,17 +81,20 @@ export const Table: React.FC = observer(() => {
     }
   }, [lastJsonMessage, setPlayer, setPlayers, navigate])
 
+  const sides = players && player ? splitPlayersToLeftAndRightSide(players, player) : null
+  const { left = [], right = [] } = sides || {}
+
   return (
     <StyledTable>
       <TableHeader />
-{/*       {renderLeftSide()} */}
+      {players && player && <Side sidePlayers={left} />}
       <Main>
         <GameArea>
-          <DealtCards />
+          <CenterCards />
           {(hasCurator || hasSentinel || hasMarks) && renderTokens(artifacts, hasCurator, hasSentinel, selectedMarks)}
         </GameArea>
       </Main>
-{/*       {renderRightSide()} */}
+      {players && player && <Side sidePlayers={right} />}
       <TableFooter />
     </StyledTable>
   )

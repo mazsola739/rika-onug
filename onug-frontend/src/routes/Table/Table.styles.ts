@@ -72,3 +72,9 @@ export const PlayerCardInfo = styled.div`
 export const PlayerCardRule = styled.span`
   color: white;
 `
+
+export const StyledSide = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: white;
+`

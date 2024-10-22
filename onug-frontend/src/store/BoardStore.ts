@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { PlayerType, PlayersType, GameTableBoardCardType, GamePlayBoardCardType, PlayerPositionProperties, CenterPositionProperties, PositionType, PositionKeys } from 'types'
 import { interactionStore } from './InteractionStore'
 
-class GameBoardStore {
+class BoardStore {
   player: PlayerType
   knownPlayer: PlayerType
   players: PlayersType[]
@@ -171,5 +171,5 @@ class GameBoardStore {
   }
 }
 
-export default GameBoardStore
-export const gameBoardStore = new GameBoardStore()
+export default BoardStore
+export const boardStore = new BoardStore()

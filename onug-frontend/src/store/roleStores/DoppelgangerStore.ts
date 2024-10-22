@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { interactionStore, gameBoardStore } from 'store'
+import { interactionStore, boardStore } from 'store'
 import { WsJsonMessage } from 'types'
 
 class DoppelgangerStore {
@@ -43,7 +43,7 @@ class DoppelgangerStore {
     if (new_role_id === 70) return setInteraction('VOODOO_LOU')
     if (new_role_id === 85) return setInteraction('THING')
 
-    gameBoardStore.setKnownPlayer({
+    boardStore.setKnownPlayer({
       player_name: lastJsonMessage.interaction?.player_name,
       player_number: lastJsonMessage.interaction?.player_number,
       player_original_id: lastJsonMessage.interaction?.player_original_id,

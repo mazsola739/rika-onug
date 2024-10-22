@@ -1,5 +1,5 @@
 export * from './DeckStore'
-export * from './GameBoardStore'
+export * from './BoardStore'
 export * from './GameStore'
 export * from './InteractionStore'
 export * from './LobbyStore'

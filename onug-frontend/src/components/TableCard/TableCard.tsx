@@ -1,10 +1,10 @@
 import { Token } from 'components'
 import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
-import { StyledDealtCard, CardBack, Tokens } from './DealtCard.styles'
-import { DealtCardProps } from './DealtCard.types'
+import { StyledTableCard, CardBack, Tokens } from './TableCard.styles'
+import { TableCardProps } from './TableCard.types'
 
-export const DealtCard: React.FC<DealtCardProps> = observer(
+export const TableCard: React.FC<TableCardProps> = observer(
   ({ position, id, isCenter, ready }) => {
     const { hasMarks } = deckStore
     const card = id === 0 ? '' : deckStore.getCardById(id)
@@ -31,13 +31,13 @@ export const DealtCard: React.FC<DealtCardProps> = observer(
     }
 
     return (
-      <StyledDealtCard>
+      <StyledTableCard>
         <CardBack backgroundImage={imgSrc} />
         <Tokens>
           {!isCenter && <Token tokenName={playerTokenName} size={35} />}
           {!isCenter && hasMarks && <Token tokenName="mark_of_clarity" size={35} />}
         </Tokens>
-      </StyledDealtCard>
+      </StyledTableCard>
     )
   }
 )
