@@ -38,7 +38,6 @@ export const RoleImage = styled.img<{ isSelected?: boolean }>`
 
 export const RoleCardName = styled.span<StyledRoleCardProps>`
   color: ${({ isSelected }) => isSelected ? 'rgba(255,255,255, 1)' : 'rgba(255,255,255, 0.4)'};
-  font-family: 'Josefin Sans', sans-serif;
   text-shadow: ${({ isSelected }) => isSelected ? '2px 2px 2px black' : ''};
   font-size: 12px;
   font-weight: 500;

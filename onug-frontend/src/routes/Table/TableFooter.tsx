@@ -1,4 +1,4 @@
-import { Footer, FooterButtons, Button, CardImage, Token } from "components"
+import { Footer, FooterButtons, Button, Card, Token } from "components"
 import { BUTTONS, ROLES } from "constant"
 import { useClickHandler } from "hooks"
 import { observer } from "mobx-react-lite"
@@ -28,7 +28,7 @@ export const TableFooter: React.FC = observer(() => {
               <PlayerName>{player.player_name} is player
                 <Token tokenName={`${player.player_number}`} size={30} />
                 with the role of {roleName}</PlayerName>
-              <CardImage image={card.card_name} size={130} />
+              <Card image={card.card_name} size={130} />
               <PlayerCardRule>{card.rules}</PlayerCardRule>
             </StyledTableFooter>
           )}

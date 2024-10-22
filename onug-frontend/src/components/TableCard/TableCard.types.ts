@@ -1,10 +1,7 @@
 export interface TableCardProps {
   id: number
-  position: string
+  playerName?: string
+  position?: string
   ready?: boolean
   isCenter: boolean
-}
-
-export interface StyledTableCardProps {
-  backgroundImage: string
 }

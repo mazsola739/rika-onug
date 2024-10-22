@@ -1,39 +1,16 @@
-import { CenterCards, Main } from "components"
-import { ARRIVE_DEALING, HYDRATE_TABLE, HYDRATE_READY, REDIRECT, STAGES } from "constant"
+import { Main, TableCenterCards, TableSide } from "components"
+import { ARRIVE_DEALING, HYDRATE_READY, HYDRATE_TABLE, REDIRECT, STAGES } from "constant"
 import { artifacts } from "data"
 import { observer } from "mobx-react-lite"
-import { Fragment, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { deckStore, boardStore, wsStore } from "store"
-import { GameArea, StyledSide, StyledTable } from "./Table.styles"
+import { boardStore, deckStore, wsStore } from "store"
+import { GameArea, StyledTable } from "./Table.styles"
 import { tableUtils } from "./Table.utils"
 import { TableFooter } from "./TableFooter"
 import { TableHeader } from "./TableHeader"
-import { PlayersType } from "types"
 
 const { renderTokens, splitPlayersToLeftAndRightSide } = tableUtils
-
-const Side: React.FC<{sidePlayers: PlayersType[]}> = observer(({sidePlayers}) => (
-  <StyledSide>
-    {sidePlayers.map(({player_number, player_name}) => (
-      <Fragment key={player_number}>
-      <img
-        src="/assets/playingcards/card_background.png"
-        alt={player_number.toString()}
-        width="50"
-        height="100"
-      />
-        <img
-        src={`/assets/tokens/${player_number.match(/\d+/)[0]}.png`}
-        alt={player_number.toString()}
-        width="25"
-      />
-      <p>{player_name}</p>
-      </Fragment>
-    ))}
-  </StyledSide>
-))
-
 
 export const Table: React.FC = observer(() => {
   const [firstTime, setFirstTime] = useState(true)
@@ -87,14 +64,14 @@ export const Table: React.FC = observer(() => {
   return (
     <StyledTable>
       <TableHeader />
-      {players && player && <Side sidePlayers={left} />}
+      {players && player && <TableSide sidePlayers={left} />}
       <Main>
         <GameArea>
-          <CenterCards />
+          <TableCenterCards />
           {(hasCurator || hasSentinel || hasMarks) && renderTokens(artifacts, hasCurator, hasSentinel, selectedMarks)}
         </GameArea>
       </Main>
-      {players && player && <Side sidePlayers={right} />}
+      {players && player && <TableSide sidePlayers={right} />}
       <TableFooter />
     </StyledTable>
   )

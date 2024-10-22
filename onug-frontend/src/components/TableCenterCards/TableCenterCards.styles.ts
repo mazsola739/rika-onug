@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const StyledCenterCards = styled.div``
+export const StyledTableCenterCards = styled.div``
 
 export const CardContainer = styled.div`
   align-items: center;
@@ -18,10 +18,9 @@ export const CenterCardContainer = styled.div`
 
 export const CardTitle = styled.div`
   color: white;
-  font-family: 'Josefin Sans', sans-serif;
 `
 
-export const CenterCards = styled.div`
+export const TableCenterCards = styled.div`
   display: flex;
   flex-direction: row;
   gap: 2px;

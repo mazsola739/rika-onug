@@ -3,8 +3,8 @@ import styled from '@emotion/styled'
 export const StyledTable = styled.div`
   min-width: 100%;
   display: grid;
-  grid-template-columns: 200px calc(100vw - 400px) 200px;
-  grid-template-rows: 140px calc(100vh - 370px) 220px;
+  grid-template-columns: 250px calc(100vw - 500px) 250px;
+  grid-template-rows: 140px calc(100vh - 360px) 220px;
 
   nav {
     grid-area: 1 / 1 / 4 / 2;
@@ -61,11 +61,5 @@ export const PlayerName = styled.span`
 `
 
 export const PlayerCardRule = styled.span`
-  color: white;
-`
-
-export const StyledSide = styled.div`
-  display: flex;
-  flex-direction: column;
   color: white;
 `

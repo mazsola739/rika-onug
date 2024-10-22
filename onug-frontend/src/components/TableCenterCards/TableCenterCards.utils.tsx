@@ -1,6 +1,6 @@
 import { deckStore } from 'store'
 import { TableCard } from '../TableCard/TableCard'
-import { CardContainer, CardTitle, CenterCards, CenterCardContainer } from './CenterCards.styles'
+import { CardContainer, CardTitle, TableCenterCards, CenterCardContainer } from './TableCenterCards.styles'
 
 export const renderCenterCard = () => {
   const { hasAlphawolf, hasTemptress } = deckStore
@@ -9,9 +9,9 @@ export const renderCenterCard = () => {
     return (
         <CardContainer>
           <CardTitle>{title}</CardTitle>
-          <CenterCards>
+          <TableCenterCards>
             <TableCard id={0} position={position} isCenter={true} />
-          </CenterCards>
+          </TableCenterCards>
         </CardContainer>
     )
   }
@@ -21,11 +21,11 @@ export const renderCenterCard = () => {
       {hasAlphawolf && renderCard('center_wolf', 'Wolf')}
       <CardContainer>
         <CardTitle>Center</CardTitle>
-        <CenterCards>
+        <TableCenterCards>
           {['center_left', 'center_middle', 'center_right'].map(
             (position, index) => <TableCard key={index} id={0} position={position} isCenter={true} />
           )}
-        </CenterCards>
+        </TableCenterCards>
       </CardContainer>
       {hasTemptress && renderCard('center_villain', 'Villain')}
     </CenterCardContainer>
