@@ -43,7 +43,15 @@ class DeckStore {
   }
 
   get totalPlayers(): number {
-    return determineTotalPlayers(this.totalCharacters, this.selectedCards)
+    return determineTotalPlayers(this.totalCharacters)
+  }
+
+  get hasAlphawolf(): boolean {
+    return checkCardPresence(this.selectedCards, 17)
+  }
+
+  get hasTemptress(): boolean {
+    return checkCardPresence(this.selectedCards, 69)
   }
 
   get hasCurator(): boolean {

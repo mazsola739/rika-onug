@@ -14,14 +14,17 @@ export const hydrateTable = async (ws, message) => {
     const playersByToken = gamestate.players
     const player = playersByToken[token]
     const playerCard = player.card
+    const players = getTableBoard(gamestate)
 
     return ws.send(
       JSON.stringify({
         type: HYDRATE_TABLE,
-        player_name: player?.name,
-        player_number: player?.player_number,
-        ...playerCard,
-        board: getTableBoard(gamestate)
+        player: {
+          player_name: player?.name,
+          player_number: player?.player_number,
+          ...playerCard,
+        },
+        players,
       })
     )
   } catch (error) { 

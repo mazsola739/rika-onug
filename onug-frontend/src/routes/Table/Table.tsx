@@ -60,20 +60,20 @@ export const Table: React.FC = observer(() => {
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_TABLE) {
       setPlayer({
-        player_name: lastJsonMessage.player_name,
-        player_number: lastJsonMessage.player_number,
-        player_card_id: lastJsonMessage.player_card_id,
-        player_original_id: lastJsonMessage.player_original_id,
-        player_role: lastJsonMessage.player_role,
-        player_role_id: lastJsonMessage.player_role_id,
-        player_team: lastJsonMessage.player_team,
-        player_mark: lastJsonMessage.player_mark,
+        player_name: lastJsonMessage.player.player_name,
+        player_number: lastJsonMessage.player.player_number,
+        player_card_id: lastJsonMessage.player.player_card_id,
+        player_original_id: lastJsonMessage.player.player_original_id,
+        player_role: lastJsonMessage.player.player_role,
+        player_role_id: lastJsonMessage.player.player_role_id,
+        player_team: lastJsonMessage.player.player_team,
+        player_mark: lastJsonMessage.player.player_mark,
       })
-      setPlayers(lastJsonMessage.board.players)
+      setPlayers(lastJsonMessage.players)
     }
 
     if (lastJsonMessage?.type === HYDRATE_READY) {
-      setPlayers(lastJsonMessage.board.players)
+      setPlayers(lastJsonMessage.players)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {

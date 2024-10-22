@@ -52,21 +52,12 @@ export const StyledTableFooter = styled.div`
   justify-items: center;
 `
 
-export const PlayerInfo = styled.div`
-`
-
 export const PlayerName = styled.span`
   color: white;
   font-size: 20px;
   display: inline-flex;
   gap: 5px;
   align-items: center;
-`
-
-export const PlayerCardInfo = styled.div`
-  filter: drop-shadow(8px 5px 5px black);
-  display: flex;
-  flex-direction: column;
 `
 
 export const PlayerCardRule = styled.span`

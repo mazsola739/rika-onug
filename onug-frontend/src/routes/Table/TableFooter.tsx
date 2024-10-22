@@ -4,7 +4,7 @@ import { useClickHandler } from "hooks"
 import { observer } from "mobx-react-lite"
 import { deckStore, boardStore } from "store"
 import React from "react"
-import { StyledTableFooter, PlayerInfo, PlayerName, PlayerCardInfo, PlayerCardRule } from "./Table.styles"
+import { StyledTableFooter, PlayerName, PlayerCardRule } from "./Table.styles"
 
 export const TableFooter: React.FC = observer(() => {
     const room_id = sessionStorage.getItem('room_id')
@@ -13,13 +13,10 @@ export const TableFooter: React.FC = observer(() => {
     const { handleLeaveTable, handleStartGame, handleReady } = useClickHandler(room_id, token)
     const { player, players } = boardStore
 
-    
     const card = player?.player_card_id
       ? deckStore.getCardById(player.player_card_id)
       : null
-    //Todo wining condition
-    //TODO Add mark
-    //TODO roles names here
+
     const roleName = ROLES[`role_${player?.player_role.toLowerCase().replace('_', '')}` as keyof typeof ROLES]
     
     const ready = players?.find(actualPlayer => actualPlayer.player_number === `player_${player.player_number}`).ready
@@ -30,7 +27,7 @@ export const TableFooter: React.FC = observer(() => {
             <StyledTableFooter>
               <PlayerName>{player.player_name} is player
                 <Token tokenName={`${player.player_number}`} size={30} />
-                with the role of</PlayerName>
+                with the role of {roleName}</PlayerName>
               <CardImage image={card.card_name} size={130} />
               <PlayerCardRule>{card.rules}</PlayerCardRule>
             </StyledTableFooter>

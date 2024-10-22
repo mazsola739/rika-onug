@@ -3,7 +3,7 @@ import { UPDATE_ROOM } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback } from 'react'
 import { deckStore, wsStore, roomStore } from 'store'
-import { SelectedCardProps } from './SelectedCardList.types'
+import { SelectedCardProps } from './SelectedCard.types'
 
 export const SelectedCard: React.FC<SelectedCardProps> = observer(
   ({ card }, index) => {

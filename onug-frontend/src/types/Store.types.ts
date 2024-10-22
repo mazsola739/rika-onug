@@ -11,6 +11,7 @@ export type WsJsonMessage = {
   title?: string
   message?: string[]
   votes?: Record<string, number[]>
+  player?: PlayerType
   players?: PlayersType[]
 
   selected_cards?: number[]
@@ -32,12 +33,6 @@ export type WsJsonMessage = {
     scene_title: string
     scene_end_time: number
     remaining_time: number
-  }
-
-  board?: {
-    players?: PlayersType[]
-    gamePlayBoardCards?: GamePlayBoardCardType[]
-    gameTableBoardCards?: GameTableBoardCardType[]
   }
 
   narration?: string[]
@@ -90,41 +85,11 @@ export type RoomType = {
   players: string[]
 }
 
-export type PositionType = {
-  position: string
-  id?: number
-  artifact?: boolean
-  shield?: boolean
-  mark?: string
-  selectable_cards?: boolean
-  selectable_marks?: boolean
-  ready?: boolean
-}
-
 export type PlayersType = {
   player_name: string
   player_number?: string
   ready?: boolean  
   voted?: boolean
-}
-
-export type GameTableBoardCardType = {
-  position: string
-  ready: boolean
-  card: { id: number }
-}
-
-export type GamePlayBoardCardType = {
-  position: string
-  card: { 
-    id: number,
-    cardId: number,
-    mark: string,
-    selectable_cards?: boolean
-    selectable_marks?: boolean
-    shield?: boolean
-    artifact?: boolean
-  }
 }
 
 export type PlayerType = {
@@ -136,42 +101,4 @@ export type PlayerType = {
   player_role_id: number
   player_team: string
   player_mark: string
-}
-
-export type PositionKeys =
-  | 'center_left'
-  | 'center_middle'
-  | 'center_right'
-  | 'center_wolf'
-  | 'center_villain'
-  | 'player_1'
-  | 'player_2'
-  | 'player_3'
-  | 'player_4'
-  | 'player_5'
-  | 'player_6'
-  | 'player_7'
-  | 'player_8'
-  | 'player_9'
-  | 'player_10'
-  | 'player_11'
-  | 'player_12'
-
-export type PlayerPositionProperties = {
-  position: string
-  ready?: boolean
-  selectable_cards?: boolean
-  selectable_marks?: boolean
-  id?: number
-  cardId?: number
-  mark?: string
-
-  shield?: boolean
-  artifact?: boolean
-}
-
-export type CenterPositionProperties = {
-  position: string
-  selectable_cards?: boolean
-  id?: number
 }

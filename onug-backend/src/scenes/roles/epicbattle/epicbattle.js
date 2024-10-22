@@ -1,34 +1,9 @@
-import { SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../../utils'
+import { SCENE } from "../../../constants"
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
+import { everyonemarkInteraction } from "../everyonemark/everyonemark.interaction"
+import { random_easteregg_nobadguys, random_easteregg_nogoodguys } from "./epicbattle.constants"
 
-const random_easteregg_nobadguys = [
-  'easteregg_nobadguys_text_1',
-  'easteregg_nobadguys_text_2',
-  'easteregg_nobadguys_text_3',
-  'easteregg_nobadguys_text_4',
-  'easteregg_nobadguys_text_5',
-  'easteregg_nobadguys_text_6',
-  'easteregg_nobadguys_text_7',
-  'easteregg_nobadguys_text_8',
-  'easteregg_nobadguys_text_9',
-  'easteregg_nobadguys_text_10',
-]
-const random_easteregg_nogoodguys = [
-  'easteregg_nogoodguys_text_1',
-  'easteregg_nogoodguys_text_2',
-  'easteregg_nogoodguys_text_3',
-  'easteregg_nogoodguys_text_4',
-  'easteregg_nogoodguys_text_5',
-  'easteregg_nogoodguys_text_6',
-  'easteregg_nogoodguys_text_7',
-  'easteregg_nogoodguys_text_8',
-  'easteregg_nogoodguys_text_9',
-  'easteregg_nogoodguys_text_10',
-]
-
-//TODO FIX IT
-
-/* export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
+export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
   if (hasEpicBattle) {
     return ['everyone_epic_intro_text']
   }
@@ -61,4 +36,4 @@ const random_easteregg_nogoodguys = [
   newGamestate.scene = scene
 
   return newGamestate
-} */
+}

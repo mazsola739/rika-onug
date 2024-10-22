@@ -50,18 +50,6 @@ export const GamePlayContainer = styled.div`
   justify-content: space-between;
 `
 
-export const PlayerHand = styled.div`
-  display: flex;
-  flex-direction: row;
-  min-width: 100%;
-`
-
-export const OwnCardPlace = styled.div`
-  max-width: 260px;
-  display: flex;
-  align-items: flex-end;
-`
-
 export const GameArea = styled.div`
   width: 100%;
   display: flex;

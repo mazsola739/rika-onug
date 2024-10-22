@@ -19,13 +19,13 @@ export const ready = async (message) => {
 
     logDebug(`gamestate.players[token].ready: ${gamestate.players[token].ready}`)
 
-    const board = getTableBoard(newGamestate)
+    const players = getTableBoard(newGamestate)
 
     await upsertRoomState(newGamestate)
 
     return broadcast(room_id, {
       type: HYDRATE_READY,
-      board
+      players
     })
   } catch (error) {
     logError(error)

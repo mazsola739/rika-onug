@@ -3,7 +3,7 @@ import { ARRIVE_VOTING, STAGES } from "constant"
 import { observer } from "mobx-react-lite"
 import { useState, useEffect } from "react"
 import { wsStore, boardStore } from "store"
-import { StyledGameVote, GameArea, PlayerHand, OwnCardPlace, Voted } from "./Voting.styles"
+import { StyledGameVote, GameArea, Voted } from "./Voting.styles"
 import { VotingFooter } from "./VotingFooter"
 
 export const Voting: React.FC = observer(() => {
@@ -44,10 +44,6 @@ export const Voting: React.FC = observer(() => {
       </Header>
       <Main>
         <GameArea />
-        <PlayerHand>
-          <OwnCardPlace>
-          </OwnCardPlace>
-        </PlayerHand>
         <Voted>
         </Voted>
       </Main>

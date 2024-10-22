@@ -1,42 +1,33 @@
+import { deckStore } from 'store'
 import { TableCard } from '../TableCard/TableCard'
 import { CardContainer, CardTitle, CenterCards, CenterCardContainer } from './CenterCards.styles'
-import { CenterPositionProperties } from 'types'
 
-export const renderCenterCard = (centerCards: CenterPositionProperties[]) => {
+export const renderCenterCard = () => {
+  const { hasAlphawolf, hasTemptress } = deckStore
+
   const renderCard = (position: string, title: string) => {
-    const card = centerCards.find((c) => c.position === position)
     return (
-      card && card.id !== null && (
         <CardContainer>
           <CardTitle>{title}</CardTitle>
           <CenterCards>
-            <TableCard id={card.id} position={card.position} isCenter={true} />
+            <TableCard id={0} position={position} isCenter={true} />
           </CenterCards>
         </CardContainer>
-      )
     )
   }
 
   return (
     <CenterCardContainer>
-      {renderCard('center_wolf', 'Wolf')}
+      {hasAlphawolf && renderCard('center_wolf', 'Wolf')}
       <CardContainer>
         <CardTitle>Center</CardTitle>
         <CenterCards>
           {['center_left', 'center_middle', 'center_right'].map(
-            (position, index) => {
-              const card = centerCards.find((c) => c.position === position)
-              return (
-                card &&
-                card.id !== null && (
-                  <TableCard key={index} id={card.id} position={card.position} isCenter={true} />
-                )
-              )
-            }
+            (position, index) => <TableCard key={index} id={0} position={position} isCenter={true} />
           )}
         </CenterCards>
       </CardContainer>
-      {renderCard('center_villain', 'Villain')}
+      {hasTemptress && renderCard('center_villain', 'Villain')}
     </CenterCardContainer>
   )
 }

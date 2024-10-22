@@ -96,6 +96,7 @@ export * from './empath/empath.utils'
 export * from './empath/empath.vote'
 export * from './empath/empath.voteresult'
 
+export * from './epicbattle/epicbattle.constants'
 export * from './epicbattle/epicbattle'
 
 export * from './everyonemark/everyonemark.interaction'

@@ -12,18 +12,6 @@ export const GameArea = styled.div`
   overflow: hidden;
 `
 
-export const PlayerHand = styled.div`
-  display: flex;
-  flex-direction: row;
-  min-width: 100%;
-`
-
-export const OwnCardPlace = styled.div`
-  max-width: 260px;
-  display: flex;
-  align-items: flex-end;
-`
-
 export const Voted = styled.div`
   min-width: 320px;
   display: flex;

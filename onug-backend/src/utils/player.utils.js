@@ -38,25 +38,7 @@ export const getTableBoard = gamestate => {
     }
   })
   
-  const cardsOnBoard = Object.keys(gamestate?.card_positions).map(
-    (position) => {
-      const currentPlayer = playersPublic.find((player) => player.player_number === position)
-      const playerCard = gamestate.card_positions[position].card
-      if (playerCard.id > 0) {
-        const card = { id: 0 }
-        const ready = currentPlayer ? currentPlayer.ready : false
-
-        return { position, card, ready }
-      } else {
-        return { position, card: { id: null }, ready: false }
-      }
-    }
-  )
-
-  return {
-    players: playersPublic,
-    gameTableBoardCards: cardsOnBoard,
-  }
+  return playersPublic
 }
 
 export const getGameBoard = gamestate => {

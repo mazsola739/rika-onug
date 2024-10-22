@@ -21,15 +21,6 @@ export const CardTitle = styled.div`
   font-family: 'Josefin Sans', sans-serif;
 `
 
-export const PlayersCards = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
-  width: 100%;
-`
-
 export const CenterCards = styled.div`
   display: flex;
   flex-direction: row;

@@ -1,23 +1,17 @@
-import { empty_card, empty_token, ROLES } from 'constant'
+import { empty_card, empty_token } from 'constant'
+import { deckStore } from 'store'
 import { CardType, TokenType } from 'types'
 
 export const createEmptyCard = (): CardType => empty_card
 
 export const createEmptyToken = (): TokenType => empty_token
 
-const containsByName = (selectedCards: CardType[], cardName: string): boolean =>
-  selectedCards.some((card) => card.display_name === cardName)
-
-export const determineTotalPlayers = (
-    totalCharacters: number,
-    selectedCards: CardType[]
-  ): number => {
-    const hasAlphaWolf = containsByName(selectedCards, ROLES.role_alphawolf)
-    const hasTemptress = containsByName(selectedCards, ROLES.role_temptress)
+export const determineTotalPlayers = (totalCharacters: number): number => {
+    const { hasAlphawolf, hasTemptress } = deckStore
   
     let totalPlayers
-    if (hasAlphaWolf && hasTemptress) totalPlayers = totalCharacters - 5
-    else if (hasAlphaWolf || hasTemptress) totalPlayers = totalCharacters - 4
+    if (hasAlphawolf && hasTemptress) totalPlayers = totalCharacters - 5
+    else if (hasAlphawolf || hasTemptress) totalPlayers = totalCharacters - 4
     else totalPlayers = totalCharacters - 3
   
     return Math.max(totalPlayers, 0)

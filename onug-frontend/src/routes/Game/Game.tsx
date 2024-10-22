@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { wsStore, boardStore, narrationStore, interactionStore, gameStore } from "store"
-import { StyledGamePlay, GamePlayContainer, GameArea, PlayerHand, OwnCardPlace } from "./Game.styles"
+import { StyledGamePlay, GamePlayContainer, GameArea } from "./Game.styles"
 import { GameFooter } from "./GameFooter"
 import { GameHeader } from "./GameHeader"
 
@@ -21,7 +21,7 @@ export const Game: React.FC = observer(() => {
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
-      boardStore.closeYourEyes()
+/*       boardStore.closeYourEyes() */
       sendJsonMessage?.({
         type: ARRIVE_GAME,
         stage: STAGES.GAME,
@@ -33,7 +33,7 @@ export const Game: React.FC = observer(() => {
 
   useEffect(() => {
     if (lastJsonMessage?.type === SCENE) {
-      boardStore.closeYourEyes()
+/*       boardStore.closeYourEyes() */
       narrationStore.setNarration(lastJsonMessage.narration)
       interactionStore.setLastJsonMessage(lastJsonMessage)
 
@@ -74,10 +74,6 @@ export const Game: React.FC = observer(() => {
           <GameArea>
             <SceneTracker />
           </GameArea>
-          <PlayerHand>
-            <OwnCardPlace>
-            </OwnCardPlace>
-          </PlayerHand>
         </GamePlayContainer>
       </Main>
       <GameFooter />

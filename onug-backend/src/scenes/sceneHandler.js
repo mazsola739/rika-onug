@@ -11,27 +11,27 @@ export const sceneHandler = gamestate => {
   const newGamestate = { ...gamestate }
   const scene_title = newGamestate.actual_scene.scene_title
   const selected_cards = newGamestate.selected_cards
-/*   const total_players = newGamestate.total_players */
+  const total_players = newGamestate.total_players
 
   switch (scene_title) {
-/*     case "EPIC_BATTLE":
+    case "EPIC_BATTLE":
       if (conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players)) {
         newGamestate.actual_scene.started = true
         return roles.epicbattle(newGamestate, scene_title, conditions.hasEasterEgg(selected_cards, total_players), conditions.hasEpicBattle(selected_cards), total_players, !conditions.hasGoodGuys(selected_cards), !conditions.hasBadGuys(selected_cards))
       }
-      break */
+      break
 
     case "ORACLE_QUESTION":
       if (conditions.hasOracle(selected_cards)) {
         newGamestate.actual_scene.started = true
-        return roles.oracle_question(newGamestate, scene_title)
+        return roles.oracleQuestion(newGamestate, scene_title)
       }
       break
 
     case "ORACLE_ANSWER":
       if (conditions.hasOracle(selected_cards)) {
         newGamestate.actual_scene.started = true
-        return roles.oracle_answer(newGamestate, scene_title)
+        return roles.oracleAnswer(newGamestate, scene_title)
       }
       break
 
@@ -73,7 +73,7 @@ export const sceneHandler = gamestate => {
     case "VAMPIRES_VOTE":
       if (conditions.hasAnyVampire(selected_cards)) {
         newGamestate.actual_scene.started = true
-        return roles.vampires_vote(newGamestate, scene_title)
+        return roles.vampiresVote(newGamestate, scene_title)
       }
       break
 
@@ -192,7 +192,7 @@ export const sceneHandler = gamestate => {
     case "ALIENS_VOTE":
       if (conditions.hasAnyVampire(selected_cards) && newGamestate.alien.vote) {
         newGamestate.actual_scene.started = true
-        return roles.aliens_vote(newGamestate, scene_title)
+        return roles.aliensVote(newGamestate, scene_title)
       }
       break
 
@@ -220,7 +220,7 @@ export const sceneHandler = gamestate => {
     case "LEADER_ZERB_GROOB":
       if (conditions.hasLeader(selected_cards) && conditions.hasGroobAndZerb(selected_cards)) {
         newGamestate.actual_scene.started = true
-        return roles.leaderZerbgroob(newGamestate, scene_title)
+        return roles.leaderzerbgroob(newGamestate, scene_title)
       }
       break
 
@@ -591,7 +591,7 @@ export const sceneHandler = gamestate => {
     case "EMPATH_VOTE":
       if (conditions.hasEmpath(selected_cards)) {
         newGamestate.actual_scene.started = true
-        return roles.empath_vote(newGamestate, scene_title, "empath")
+        return roles.empathVote(newGamestate, scene_title, "empath")
       }
       break
 
@@ -605,7 +605,7 @@ export const sceneHandler = gamestate => {
     case "DOPPELGÄNGER_EMPATH_VOTE":
       if (conditions.hasDoppelganger(selected_cards) && conditions.hasEmpath(selected_cards)) {
         newGamestate.actual_scene.started = true
-        return roles.empath_vote(newGamestate, scene_title, "doppelganger_empath")
+        return roles.empathVote(newGamestate, scene_title, "doppelganger_empath")
       }
       break
 
