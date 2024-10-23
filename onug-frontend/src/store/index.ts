@@ -1,6 +1,6 @@
 export * from './DeckStore'
 export * from './BoardStore'
-export * from './GameStore'
+export * from './GamePlayStore'
 export * from './InteractionStore'
 export * from './LobbyStore'
 export * from './NarrationStore'

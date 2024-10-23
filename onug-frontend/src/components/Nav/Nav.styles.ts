@@ -64,7 +64,7 @@ export const UnorderedLists = styled.ul`
 export const ListItem = styled.li<NavListItemProps>`
   width: 140px;
 
-  & > a {
+  & > button {
     display: flex;
     align-items: center;
     text-decoration: none;

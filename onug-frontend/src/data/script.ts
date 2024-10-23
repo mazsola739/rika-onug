@@ -468,7 +468,7 @@ export const script: ScriptType[] = [
   },
   {
     scene_title: 'JOKE',
-    scene_img: 'day',
+    scene_img: 'joke',
     scene_number: 93,
   },
 ]

@@ -1,8 +1,9 @@
 import styled from '@emotion/styled'
 
-export const StyledTableCenterCards = styled.div``
+export const StyledCenterCards = styled.div`
+`
 
-export const CardContainer = styled.div`
+export const CardGroup = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -12,16 +13,16 @@ export const CenterCardContainer = styled.div`
   align-items: flex-end;
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 15px;
   justify-content: center;
 `
 
-export const CardTitle = styled.div`
+export const GroupTitle = styled.div`
   color: white;
 `
 
-export const TableCenterCards = styled.div`
+export const Cards = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 2px;
+  gap: 5px;
 `

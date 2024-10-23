@@ -1,9 +1,9 @@
 import { makeAutoObservable } from 'mobx'
 
-class GameStore {
-  isGameStarted = false
-  isGameStopped = true
-  isGamePaused = false
+class GamePlayStore {
+  isGamePlayStarted = false
+  isGamePlayStopped = true
+  isGamePlayPaused = false
   startingTime = 0
   endingTime = 0
   remainingTime: number[] = []
@@ -29,18 +29,18 @@ class GameStore {
     return this.remainingTime.shift()
   }
 
-  toggleGameStatus(): void {
-    this.isGameStarted = !this.isGameStarted
-    this.isGameStopped = !this.isGameStopped
-  }
+  toggleGamePlayStatus(): void {
+    this.isGamePlayStarted = !this.isGamePlayStarted
+    this.isGamePlayStopped = !this.isGamePlayStopped
+  } //TODO do i need?
 
-  resetGame(): void {
-    this.isGameStarted = false
-    this.isGameStopped = true
+  resetGamePlay(): void {
+    this.isGamePlayStarted = false
+    this.isGamePlayStopped = true
   }
 
   togglePauseStatus(): void {
-    this.isGamePaused = !this.isGamePaused
+    this.isGamePlayPaused = !this.isGamePlayPaused
   }
 
   setToggleIsRunning(toggleIsRunning: (nextValue?: any) => void): void {
@@ -48,5 +48,5 @@ class GameStore {
   }
 }
 
-export default GameStore
-export const gameStore = new GameStore()
+export default GamePlayStore
+export const gamePlayStore = new GamePlayStore()

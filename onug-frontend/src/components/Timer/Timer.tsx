@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
 import { useBoolean, useEffectOnce, useInterval } from 'react-use'
-import { gameStore } from 'store'
+import { gamePlayStore } from 'store'
 import { StyledTimer } from './Timer.styles'
 
 export const Timer: React.FC = observer(() => {
@@ -9,16 +9,16 @@ export const Timer: React.FC = observer(() => {
   const [remainingMs, setRemainingMs] = useState(0)
 
   useEffectOnce(() => {
-    gameStore.setToggleIsRunning(toggleIsRunning)
+    gamePlayStore.setToggleIsRunning(toggleIsRunning)
   })
 
   useEffect(() => {
-    if (isNaN(gameStore.remainingTime?.[0])) return
+    if (isNaN(gamePlayStore.remainingTime?.[0])) return
 
-    const remainingTime = gameStore.shiftRemainingTimeFromStore()
+    const remainingTime = gamePlayStore.shiftRemainingTimeFromStore()
     console.log(`useEffect remainingTime: ${remainingTime}`)
     setRemainingMs(remainingTime)
-  }, [gameStore.remainingTime?.[0]])
+  }, [gamePlayStore.remainingTime?.[0]])
 
   useInterval(
     () => {

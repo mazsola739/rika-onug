@@ -1,6 +1,6 @@
 import { IDS, SCENE } from "../../../constants"
 import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { troublemakerInteraction } from "../troublemaker/troublemaker"
+import { troublemakerInteraction } from ".."
 
 export const switcheroo = (gamestate, title) => {
   const newGamestate = { ...gamestate }

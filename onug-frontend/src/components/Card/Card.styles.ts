@@ -9,12 +9,22 @@ export const StyledCard = styled.div<StyledCardProps>`
   overflow: hidden;
   position: relative;
   transition: 0.75s;
+  width: ${({ size }) => size+20}px;
+`
+
+export const NameBackground = styled.img`
+  position: absolute;
+  width: 100%;
+  top: 33%;
+  z-index: 1;
 `
 
 export const PlayerName = styled.span`
   font-size: 16px;
   position: absolute;
   text-align: center;
-  top: 45%;
-  color: white;
+  color: yellow;
+  font-weight: 900;
+  top: 48%;
+  z-index: 2;
 `

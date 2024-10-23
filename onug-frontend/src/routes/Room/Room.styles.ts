@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 
+//ROOM
 export const StyledRoom = styled.div`
   min-width: 100%;
   display: grid;
@@ -23,6 +24,7 @@ export const StyledRoom = styled.div`
   }
 `
 
+//FOOTER
 export const StyledInfo  = styled.div`
   display: flex;
   flex-direction: column;
@@ -50,17 +52,6 @@ export const RuleInfoDescription = styled.p`
   text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
 `
 
-export const RoomRoleCardList = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 10px;
-
-  & > section:last-child {
-    min-height: 100%;
-  }
-`
-
 export const StyledPlayerNames = styled.div`
   display: flex;
   flex-direction: row;
@@ -81,4 +72,16 @@ export const Player = styled.div`
 
 export const PlayerName = styled.span`
   text-align: center;
+`
+
+//MAIN
+export const RoomCardList = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+
+  & > section:last-child {
+    min-height: 100%;
+  }
 `

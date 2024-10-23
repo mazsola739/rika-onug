@@ -1,82 +1,31 @@
-import { Header, Main, SceneTracker } from "components"
-import { ARRIVE_GAME, STAGES, SCENE, HYDRATE_GAME, MESSAGE, REDIRECT, PAUSE_GAME } from "constant"
+import { AroundTableSide, AroundTableTop, CenterCards, CenterTokens, Main } from "components"
+import { ARRIVE_GAME, HYDRATE_GAME, MESSAGE, PAUSE_GAME, REDIRECT, SCENE, STAGES } from "constant"
 import { observer } from "mobx-react-lite"
-import { useState, useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { wsStore, boardStore, narrationStore, interactionStore, gameStore } from "store"
-import { StyledGamePlay, GamePlayContainer, GameArea } from "./Game.styles"
+import { boardStore, gamePlayStore, interactionStore, narrationStore, wsStore } from "store"
+import { splitPlayersToTable } from "utils"
+import { StyledGame, TableCenter } from "./Game.styles"
 import { GameFooter } from "./GameFooter"
 import { GameHeader } from "./GameHeader"
+import { useGame } from "./useGame"
 
 export const Game: React.FC = observer(() => {
-  const [firstTime, setFirstTime] = useState(true)
-  const navigate = useNavigate()
-
-  const { sendJsonMessage, lastJsonMessage } =
-    wsStore.getWsCommunicationsBridge()
-
-  const room_id = sessionStorage.getItem('room_id')
-  const token = sessionStorage.getItem('token')
-
-  useEffect(() => {
-    if (sendJsonMessage && firstTime) {
-      setFirstTime(false)
-/*       boardStore.closeYourEyes() */
-      sendJsonMessage?.({
-        type: ARRIVE_GAME,
-        stage: STAGES.GAME,
-        room_id,
-        token,
-      })
-    }
-  }, [sendJsonMessage, firstTime, boardStore])
-
-  useEffect(() => {
-    if (lastJsonMessage?.type === SCENE) {
-/*       boardStore.closeYourEyes() */
-      narrationStore.setNarration(lastJsonMessage.narration)
-      interactionStore.setLastJsonMessage(lastJsonMessage)
-
-      if (Object.keys(lastJsonMessage.interaction).length > 0) {
-        interactionStore.setMessage(lastJsonMessage.interaction.private_message)
-        interactionStore.setInteraction(lastJsonMessage.interaction.title)
-        interactionStore.toggleMessageBoxStatus(true)
-      }
-    }
-    if (lastJsonMessage?.type === HYDRATE_GAME) {
-      /* && lastJsonMessage?.success */ //TODO success?
-      narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
-      gameStore.addRemainingTimeToStore(
-        lastJsonMessage.actual_scene.remaining_time
-      )
-    }
-    if (lastJsonMessage?.type === MESSAGE) {
-      interactionStore.toggleMessageBoxStatus(true)
-    }
-    if (lastJsonMessage?.type === REDIRECT) {
-      navigate(lastJsonMessage.path)
-    }
-    if (lastJsonMessage?.type === PAUSE_GAME) {
-      gameStore.addRemainingTimeToStore(
-        lastJsonMessage.actual_scene.remaining_time
-      )
-      gameStore.toggleIsRunning()
-    }
-  }, [lastJsonMessage, narrationStore, gameStore, interactionStore])
+  const { players, left, middle, right } = useGame()
 
   return (
-    <StyledGamePlay>
-      <Header>
-        <GameHeader />
-      </Header>
+    <StyledGame>
+      <GameHeader />
+      {players && <AroundTableSide players={left} />}
+      {players && <AroundTableTop players={middle} />}
       <Main>
-        <GamePlayContainer>
-          <GameArea>
-            <SceneTracker />
-          </GameArea>
-        </GamePlayContainer>
+        <TableCenter>
+          <CenterCards />
+          <CenterTokens />
+        </TableCenter>
       </Main>
+      {players && <AroundTableSide players={right} />}
       <GameFooter />
-    </StyledGamePlay>
+    </StyledGame>
   )
 })

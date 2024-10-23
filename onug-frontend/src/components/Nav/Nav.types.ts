@@ -4,6 +4,5 @@ export interface NavProps {
 
 export interface NavListItemProps {
   anchor: string
+  isActive: boolean
 }
-
-

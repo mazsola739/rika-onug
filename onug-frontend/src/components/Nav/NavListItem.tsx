@@ -5,8 +5,17 @@ import { ListItem } from './Nav.styles'
 export const NavListItem: React.FC<NavListItemProps> = observer(
   ({ anchor }) => {
     
+    const handleClick = () => {
+      const element = document.getElementById(anchor);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
     return (
-      <ListItem anchor={anchor}><a href={`#${anchor}`} >{anchor}</a></ListItem>
+      <ListItem anchor={anchor}>
+        <button onClick={handleClick}>{anchor}</button>
+      </ListItem>
     )
   }
 )

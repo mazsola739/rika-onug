@@ -2,14 +2,14 @@ import { Footer, FooterButtons, Button, Token } from 'components'
 import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
-import { roomStore, gameStore, deckStore } from 'store'
+import { roomStore, gamePlayStore, deckStore } from 'store'
 import { StyledInfo, RuleInfo, RuleImage, RuleInfoDescription, StyledPlayerNames, Player, PlayerName } from './Room.styles'
 import { Fragment } from 'react'
 
 const Info: React.FC = observer(() => {
   const detailedCardInfo = roomStore.getDetailedCardInfo()
 
-  const { isGameStopped } = gameStore
+  const { isGamePlayStopped } = gamePlayStore
 
   const displayInfo =
     detailedCardInfo.id !== 0
@@ -22,9 +22,9 @@ const Info: React.FC = observer(() => {
 
   return (
     <StyledInfo>
-      {isGameStopped && displayInfo && (
+      {isGamePlayStopped && displayInfo && (
         <RuleInfo>
-          <RuleImage src={imgSrc} alt="info" />
+          <RuleImage src={imgSrc} alt='info' />
           <RuleInfoDescription>{displayInfo}</RuleInfoDescription>
         </RuleInfo>
       )}
@@ -70,22 +70,9 @@ export const RoomFooter: React.FC = observer(() => {
       <PlayerNames />
       <Info />
       <FooterButtons>
-        <Button
-          onClick={handleResetGame}
-          buttonText={BUTTONS.reset_game_label}
-          variant="blue"
-        />
-        <Button
-          onClick={handleToGameTable}
-          disabled={!deckStore.totalPlayers}
-          buttonText={buttonText}
-          variant="green"
-        />
-        <Button
-          onClick={handleLeaveRoom}
-          buttonText="LEAVE ROOM"
-          variant="crimson"
-        />
+        <Button onClick={handleResetGame} buttonText={BUTTONS.reset_game_label} variant='blue' />
+        <Button onClick={handleToGameTable} disabled={!deckStore.totalPlayers} buttonText={buttonText} variant='green' />
+        <Button onClick={handleLeaveRoom} buttonText={BUTTONS.leave_room_label} variant='crimson' />
       </FooterButtons>
     </Footer>
   )

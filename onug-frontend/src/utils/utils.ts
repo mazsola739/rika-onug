@@ -1,4 +1,4 @@
-import { CardType } from 'types'
+import { CardType, PlayersType, PlayerType } from 'types'
 
 export const areAnyCardSelectedById = (
   selectedCards: CardType[],
@@ -23,3 +23,19 @@ export const checkCardPresence = (cards: CardType[], cardId: number): boolean =>
 
 export const capitalize = (string: string) =>
   string && string[0].toUpperCase() + string.slice(1).toLowerCase()
+
+export const splitPlayersToTable = (players: PlayersType[], player: PlayerType) => {
+  const playerIndex = player.player_number - 1
+
+  const newPlayers = [...players.slice(playerIndex), ...players.slice(0, playerIndex)]
+
+  const remainingPlayers = newPlayers.slice(1)
+
+  const third = Math.floor(remainingPlayers.length / 3)
+
+  const right = remainingPlayers.slice(0, third).reverse()
+  const left = remainingPlayers.slice(-third)
+  const middle = remainingPlayers.slice(third, -third).reverse()
+
+  return { right, middle, left }
+}

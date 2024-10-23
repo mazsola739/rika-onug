@@ -7,4 +7,5 @@ export interface CardProps {
 export interface StyledCardProps {
   isSelected?: boolean
   ready?: boolean
+  size: number
 }

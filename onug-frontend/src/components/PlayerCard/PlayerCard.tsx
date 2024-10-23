@@ -1,18 +1,16 @@
-import { Token } from 'components'
+import { Card, Token } from 'components'
 import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
-import { StyledPlayerCard, CardBack, Tokens } from './PlayerCard.styles'
+import { StyledPlayerCard, Tokens } from './PlayerCard.styles'
 import { PlayerCardProps } from './PlayerCard.types'
 
 export const PlayerCard: React.FC<PlayerCardProps> = observer(
-  ({ position, isCenter, id, ready }) => {
+  ({  position, isCenter, id, ready, playerName  }) => {
     const { hasMarks } = deckStore
     const card = id === 0 ? '' : deckStore.getCardById(id)
-    const playerTokenName = position.replace(/^player_/, '')
+    const playerNumberToken = position.replace(/^player_/, '')
 
-    let imgSrc = card && card.id !== 0
-      ? `/assets/playingcards/${card.card_name}.png`
-      : '/assets/playingcards/card_background.png'
+    let imgSrc = card && card.id !== 0 ? `${card.card_name}` : 'card_background'
 
     if (card && card.id !== 0) {
       const { card_name } = card
@@ -26,16 +24,19 @@ export const PlayerCard: React.FC<PlayerCardProps> = observer(
         } else {
           randomDeluxe = `_${Math.floor(Math.random() * 2) + 1}`
         }
-        imgSrc = `/assets/playingcards/${card_name}${randomDeluxe}.png`
+        imgSrc = `${card_name}${randomDeluxe}`
       }
     }
 
+
     return (
       <StyledPlayerCard>
-        <CardBack backgroundImage={imgSrc} />
+        <Card image={imgSrc} size={110} playerName={playerName}/>
         <Tokens>
-          {!isCenter && <Token tokenName={playerTokenName} size={35} />}
-          {!isCenter && hasMarks && <Token tokenName="mark_of_clarity" size={35} />}
+          {!isCenter && <Token tokenName={playerNumberToken} size={35} />}
+          {!isCenter && hasMarks && <Token tokenName="mark_of_clarity" size={35} />}{/* TODO mark of clarity now, but later background! */}
+          {/* {!isCenter && hasShield && <Token tokenName="mark_of_clarity" size={35} />} TODO*/}
+          {/* {!isCenter && hasArtifact && <Token tokenName="mark_of_clarity" size={35} />} TODO*/}
         </Tokens>
       </StyledPlayerCard>
     )

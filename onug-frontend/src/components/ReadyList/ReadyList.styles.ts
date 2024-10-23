@@ -3,10 +3,9 @@ import { ReadyType } from './ReadyList.types'
 
 export const StyledReadyList = styled.div`
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
-  grid-template-columns: repeat(4, calc( calc(100vw  - 520px) / 4));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 5px;
-  grid-auto-flow: column;
+  max-width: calc(100vw - 300px);
 `
 
 export const Player = styled.div`

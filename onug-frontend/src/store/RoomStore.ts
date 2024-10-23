@@ -1,10 +1,8 @@
-import { TEAM } from "constant"
-import { makeAutoObservable } from "mobx"
-import { CardType, PlayersType } from "types"
-import { createEmptyCard, getFilteredCardsForTeam as getSortedCardsByTeam, getOrderedTeams } from "utils"
-import { deckStore } from "store"
-
-const { hero, village } = TEAM
+import { TEAM } from 'constant'
+import { makeAutoObservable } from 'mobx'
+import { CardType, PlayersType } from 'types'
+import { createEmptyCard, getFilteredCardsForTeam as getSortedCardsByTeam, getOrderedTeams } from 'utils'
+import { deckStore } from 'store'
 
 class RoomStore {
   detailedCardInfo: CardType = createEmptyCard()
@@ -29,8 +27,8 @@ class RoomStore {
   }
 
   getTeamName(cards: CardType[], team: string): string {
-    const hasHero = cards.some((card) => card.team === hero)
-    const hasVillager = cards.some((card) => card.team === village)
+    const hasHero = cards.some((card) => card.team === TEAM.hero)
+    const hasVillager = cards.some((card) => card.team === TEAM.village)
 
     return hasHero && hasVillager
       ? 'Village & Hero'

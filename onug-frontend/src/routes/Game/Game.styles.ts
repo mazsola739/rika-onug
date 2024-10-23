@@ -1,58 +1,87 @@
 import styled from '@emotion/styled'
 
-export const StyledGamePlayHeader = styled.div`
-  filter: drop-shadow(3px 3px 3px black);
-  height: 100%;
+//GAME
+export const StyledGame = styled.div`
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: 170px calc(100vw - 340px) 170px;
+  grid-template-rows: 80px 150px calc(100vh - 450px) 220px;
+
+  header {
+    grid-area: 1 / 1 / 2 / 4;
+  }
+  & > div:nth-of-type(1) {
+    grid-area: 2 / 1 / 5 / 2;
+  }
+  & > div:nth-of-type(2) {
+    grid-area: 2 / 2 / 3 / 3;
+  }
+  & > div:nth-of-type(3) {
+    grid-area: 2 / 3 / 5 / 4;
+  } 
+  main {
+    grid-area: 3 / 2 / 4 / 3;
+  }
+  footer {
+    grid-area: 4 / 2 / 5 / 3;
+  }
+`
+
+//HEADER
+export const StyledGameHeader = styled.div`
   display: flex;
   flex-direction: row;
-  min-width: 100%;
-  justify-content: space-between;
+  color: white;
+  justify-content: space-around;
 `
 
 export const NarrationImage = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  min-width: 260px;
 `
 
-export const Narration = styled.span`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const Narration = styled.div`
   color: white;
   font-size: 20px;
-  padding: 10px;
 `
 
-export const TimerContainer = styled.div`
-  min-width: 130px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  font-family: 'Josefin Sans', sans-serif;
-  padding: 10px;
-  margin-left: auto;
-  filter: drop-shadow(3px 3px 3px black);
-`
-
-export const StyledGamePlay = styled.div`
-  display: flex;
-  flex-direction: column;
-`
-
-export const GamePlayContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-width: 100%;
-  min-height: 100%;
-  justify-content: space-between;
-`
-
-export const GameArea = styled.div`
+//MAIN
+export const TableCenter = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
-  overflow: hidden;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+`
+
+//FOOTER
+export const StyledGameFooter = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 140px 1fr;
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-items: stretch;
+  gap: 10px;
+`
+
+export const PlayerInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: flex-end;
+`
+
+export const Player = styled.span`
+  color: white;
+  font-size: 24px;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+`
+
+export const Tokens = styled.div`
+  display: flex; 
+`
+
+export const GameContainer = styled.div`
+  display: flex;
+  flex-direction: row;
 `

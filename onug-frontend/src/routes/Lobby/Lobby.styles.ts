@@ -15,7 +15,7 @@ export const StyledLobby = styled.div`
   align-content: center;
 `
 
-export const StyledRoomButton = styled.button<StyledLobbyProps>`
+export const StyledLobbyButton = styled.button<StyledLobbyProps>`
   background: ${({ img }) => `url(/assets/rooms/${img}.png)`} center center/cover no-repeat;
   border-radius: 50%;
   color: white;
