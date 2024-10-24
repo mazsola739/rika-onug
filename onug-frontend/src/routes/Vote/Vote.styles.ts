@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const StyledGameVote = styled.div`
+export const StyledVote = styled.div`
   display: flex;
   flex-direction: column;
 `

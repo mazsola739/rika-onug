@@ -35,12 +35,9 @@ export const StyledGameHeader = styled.div`
   justify-content: space-around;
 `
 
-export const NarrationImage = styled.div`
-`
-
 export const Narration = styled.div`
   color: white;
-  font-size: 20px;
+  font-size: 16px;
 `
 
 //MAIN

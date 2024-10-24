@@ -1,7 +1,7 @@
 import { Header, RoleImage } from 'components'
 import { observer } from 'mobx-react-lite'
 import { narrationStore } from 'store'
-import { Narration, NarrationImage, StyledGameHeader } from './Game.styles'
+import { Narration, StyledGameHeader } from './Game.styles'
 
 export const GameHeader: React.FC = observer(() => {
   const narration = narrationStore.getNarrationMessage()
@@ -10,10 +10,8 @@ export const GameHeader: React.FC = observer(() => {
   return (
     <Header>
       <StyledGameHeader>
-      <NarrationImage>
-          {img.length > 0 && <RoleImage image={img} size={80} />}
-          </NarrationImage>
-          <Narration>{narration}</Narration>
+          {img && <RoleImage image={img} size={80} />}
+        <Narration>{narration}</Narration>
       </StyledGameHeader>
     </Header>
   )

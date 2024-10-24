@@ -1,7 +1,7 @@
 import { RoleImage } from 'components'
 import { order } from 'data'
 import { observer } from 'mobx-react-lite'
-import { useRef, useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { deckStore, narrationStore } from 'store'
 import { CardType } from 'types'
 import { ActualScene, ActualSceneImages, StyledSceneTracker } from './SceneTracker.styles'
@@ -28,7 +28,6 @@ export const SceneTracker: React.FC = observer(() => {
         }
       }
 
-      //TODO add mark and markoflove if scene is 21 and 22 (EVERYONE_MARK, LOVERS)
       const isCurrentScene = narrationStore.title === scene.scene_title
       const matchingCards: CardType[] = selectedCards.filter((card) => scene.card_id.includes(card.id))
 

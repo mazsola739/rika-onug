@@ -1,9 +1,9 @@
-import { AroundTableSide, AroundTableTop, CenterCards, CenterTokens, Main } from "components"
-import { observer } from "mobx-react-lite"
-import { StyledTable, TableCenter } from "./Table.styles"
-import { TableFooter } from "./TableFooter"
-import { TableHeader } from "./TableHeader"
-import { useTable } from "./useTable"
+import { AroundTableSide, AroundTableTop, CenterCards, CenterTokens, Main } from 'components'
+import { observer } from 'mobx-react-lite'
+import { StyledTable, TableCenter } from './Table.styles'
+import { TableFooter } from './TableFooter'
+import { TableHeader } from './TableHeader'
+import { useTable } from './useTable'
 
 export const Table: React.FC = observer(() => {
   const { players, left, middle, right } = useTable()

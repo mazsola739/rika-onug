@@ -1,9 +1,9 @@
+import { UPDATE_ROOM } from 'constant'
 import { observer } from 'mobx-react-lite'
+import { useCallback } from 'react'
+import { deckStore, wsStore } from 'store'
 import { StyledFilterButton } from './Filter.styles'
 import { FilterButtonProps } from './Filter.types'
-import { deckStore, wsStore } from 'store'
-import { useCallback } from 'react'
-import { UPDATE_ROOM } from 'constant'
 
 export const FilterButton: React.FC<FilterButtonProps> = observer(
   ({ expansion}) => {

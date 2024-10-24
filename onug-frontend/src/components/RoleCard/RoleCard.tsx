@@ -1,8 +1,8 @@
 import { UPDATE_ROOM } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { useCallback, useMemo } from 'react'
-import { wsStore, deckStore, roomStore } from 'store'
-import { StyledRoleCard, RoleImage, RoleCardName } from './RoleCard.styles'
+import { deckStore, roomStore, wsStore } from 'store'
+import { RoleCardName, RoleImage, StyledRoleCard } from './RoleCard.styles'
 import { RoleCardProps } from './RoleCard.types'
 
 export const RoleCard: React.FC<RoleCardProps> = observer(({ card }) => {

@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { StyledMenuButtonProps } from "./MenuButton.types";
+import styled from '@emotion/styled';
+import { StyledMenuButtonProps } from './MenuButton.types';
 
 type AnchorTypes = 'Village & Hero' | 'Village' | 'Hero' | 'Own' | 'Werewolf' | 'Vampire' | 'Alien' | 'Villain';
 

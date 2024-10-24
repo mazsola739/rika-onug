@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite'
 import { roomStore } from 'store'
-import { StyledRoleCardList, RoleCardListTitle, RoleCardListGrid } from './RoleCardList.styles'
-import { RoleCardListProps } from './RoleCardList.types'
 import { RoleCard } from '../RoleCard/RoleCard'
+import { RoleCardListGrid, RoleCardListTitle, StyledRoleCardList } from './RoleCardList.styles'
+import { RoleCardListProps } from './RoleCardList.types'
 
 export const RoleCardList: React.FC<RoleCardListProps> = observer(({ team, cards }) => {
   const { getTeamMembers, getTeamName } = roomStore

@@ -84,7 +84,7 @@ import {
   WitchIcon,
 } from 'assets'
 import { StyledIcon } from './Icon.styles'
-import { IconType, IconProps } from './Icon.types'
+import { IconProps, IconType } from './Icon.types'
 
 export const Icons: Record<
   IconType,

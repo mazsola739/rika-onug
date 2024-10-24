@@ -1,8 +1,8 @@
 import { observer } from 'mobx-react-lite';
+import { useEffect, useState } from 'react';
 import { StyledNav, UnorderedLists } from './Nav.styles';
 import { NavProps } from './Nav.types';
 import { NavListItem } from './NavListItem';
-import { useEffect, useState } from 'react';
 
 export const Nav: React.FC<NavProps> = observer(({ anchorList }) => {
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null)

@@ -1,7 +1,7 @@
-import { Header, ReadyList } from "components"
-import { observer } from "mobx-react-lite"
-import { boardStore } from "store"
-import { Ready } from "./Table.styles"
+import { Header, ReadyList } from 'components'
+import { observer } from 'mobx-react-lite'
+import { boardStore } from 'store'
+import { Ready } from './Table.styles'
 
 export const TableHeader: React.FC = observer(() => {
     const { players } = boardStore

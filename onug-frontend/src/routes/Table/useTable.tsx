@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
 import { ARRIVE_DEALING, HYDRATE_READY, HYDRATE_TABLE, REDIRECT, STAGES } from 'constant'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { boardStore, wsStore } from 'store'
 import { splitPlayersToTable } from 'utils'
@@ -14,7 +14,6 @@ export const useTable = () => {
   const { setPlayer, setPlayers, players, player } = boardStore
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
 
-  // Initial message sending when the component loads
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
@@ -27,7 +26,6 @@ export const useTable = () => {
     }
   }, [sendJsonMessage, firstTime, room_id, token])
 
-  // Handling incoming WebSocket messages
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_TABLE) {
       setPlayer({
