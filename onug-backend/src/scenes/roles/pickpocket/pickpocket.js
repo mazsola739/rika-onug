@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens } from '../../sceneUtils'
 import { pickpocketInteraction } from './pickpocket.interaction'
 
 export const pickpocket = (gamestate, title, prefix) => {
@@ -7,7 +7,6 @@ export const pickpocket = (gamestate, title, prefix) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [`${prefix}_kickoff_text`, 'pickpocket_kickoff2_text']
-  const actionTime = 12
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -27,7 +26,6 @@ export const pickpocket = (gamestate, title, prefix) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens } from '../../sceneUtils'
 import { werewolvesInteraction } from './werewolves.interaction'
 
 export const werewolves = (gamestate, title, hasDreamWolf) => {
@@ -11,7 +11,6 @@ export const werewolves = (gamestate, title, hasDreamWolf) => {
       ? 'werewolves_dreamwolf_kickoff_text'
       : 'werewolves_kickoff_text',
   ]
-  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -25,7 +24,6 @@ export const werewolves = (gamestate, title, hasDreamWolf) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

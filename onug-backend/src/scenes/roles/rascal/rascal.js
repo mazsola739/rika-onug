@@ -1,6 +1,6 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
-import { villageidiotInteraction } from '../villageidiot/villageidiot'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
+import { villageidiotInteraction } from '../villageidiot/villageidiot.interaction'
 import { randomRascalInstructions, rascalAnyTwoKeys, rascalAnyOneKeys } from './rascal.constants'
 import { rascalInteraction } from './rascal.interaction'
 
@@ -11,27 +11,21 @@ export const rascal = (gamestate, title, prefix) => {
   const randomRascalInstruction = getRandomItemFromArray(randomRascalInstructions)
   const rascalKey = randomRascalInstruction === 'rascal_troublemaker_text' ? getRandomItemFromArray(rascalAnyTwoKeys) : getRandomItemFromArray(rascalAnyOneKeys)
   const narration = [`${prefix}_kickoff_text`]
-  let actionTime
 
   switch (randomRascalInstruction) {
     case 'rascal_troublemaker_text':
-      actionTime = 12
       narration.push('rascal_troublemaker_text', rascalKey)
       break
     case 'rascal_witch_text':
-      actionTime = 12
       narration.push('rascal_witch_text', rascalKey, 'rascal_witchend_text')
       break
     case 'rascal_drunk_text':
-      actionTime = 12
       narration.push('rascal_drunk_text', rascalKey, 'rascal_drunkend_text')
       break
     case 'rascal_robber_text':
-      actionTime = 12
       narration.push('rascal_robber_text', rascalKey, 'rascal_robberend_text')
       break
     case 'rascal_idiot_text':
-      actionTime = 8
       narration.push('rascal_idiot_text')
       break
   }
@@ -59,7 +53,6 @@ export const rascal = (gamestate, title, prefix) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

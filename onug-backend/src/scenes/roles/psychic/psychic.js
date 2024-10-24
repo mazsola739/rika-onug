@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomPsychicInstructions, psychicKeys } from './psychic.constants'
 import { psychicInteraction } from './psychic.interaction'
 
@@ -23,7 +23,6 @@ export const psychic = (gamestate, title, prefix) => {
   newGamestate.bodysnatcher.key = alienKey */
 
   const narration = [`${prefix}_kickoff_text`, getRandomItemFromArray(availablePsychicOptions), getRandomItemFromArray(psychicKeys)]
-  const actionTime = 12
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -43,7 +42,6 @@ export const psychic = (gamestate, title, prefix) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

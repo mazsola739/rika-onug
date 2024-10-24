@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomMorticianInstructions, morticianKeys } from './mortician.constants'
 import { morticianInteraction } from './mortician.interaction'
 
@@ -8,7 +8,6 @@ export const mortician = (gamestate, title, prefix) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [`${prefix}_kickoff_text`]
-  const actionTime = 10
 //TODO
   const randomMorticianInstruction = getRandomItemFromArray(randomMorticianInstructions)
   const morticianKey = randomMorticianInstruction === 'mortician_2cards_text' ? 'identifier_bothneighbors_text' : getRandomItemFromArray(morticianKeys)
@@ -40,7 +39,6 @@ export const mortician = (gamestate, title, prefix) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

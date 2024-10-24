@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens } from '../../sceneUtils'
 import { internInteraction } from './intern.interaction'
 
 export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
@@ -12,7 +12,6 @@ export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
       : 'intern_kickoff_text',
     hasMadScientist ? 'intern_kickoff2_text' : 'intern_kickoff_alone_text',
   ]
-  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -26,7 +25,6 @@ export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

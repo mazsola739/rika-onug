@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens } from '../../sceneUtils'
 import { vampiresVoteResult } from './vampires.voteresult'
 
 export const vampiresVote = (gamestate, title) => {
@@ -7,7 +7,6 @@ export const vampiresVote = (gamestate, title) => {
   const narration = ['vampires_vote_result_text']
   const tokens = getAllPlayerTokens(newGamestate.players)
   const scene = []
-  const actionTime = 6
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -22,7 +21,6 @@ export const vampiresVote = (gamestate, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

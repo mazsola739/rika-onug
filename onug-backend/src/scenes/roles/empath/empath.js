@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { empathKeys, randomEmpathInstructions } from './empath.constants'
 import { empathInteraction } from './empath.interaction'
 import { empathNumbers } from './empath.utils'
@@ -14,7 +14,6 @@ export const empath = (gamestate, title, prefix) => {
   const empathKey = randomKey === 'activePlayers' ? randomPlayers : [randomKey]
   const randomEmpathInstruction = getRandomItemFromArray(randomEmpathInstructions)
   const narration = [...empathKey, randomEmpathInstruction]
-  const actionTime = 8
 
   let activePlayerNumbers = []
   if (randomKey === 'activePlayers') {
@@ -46,7 +45,6 @@ export const empath = (gamestate, title, prefix) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

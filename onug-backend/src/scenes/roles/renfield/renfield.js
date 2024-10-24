@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens } from '../../sceneUtils'
 import { renfieldInteraction } from './renfield.interaction'
 
 //TODO no vampire he is villager
@@ -13,7 +13,6 @@ export const renfield = (gamestate, title, hasDoppelganger) => {
       : 'renfield_kickoff_text',
     'renfield_kickoff2_text',
   ]
-  const actionTime = 6
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -27,7 +26,6 @@ export const renfield = (gamestate, title, hasDoppelganger) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

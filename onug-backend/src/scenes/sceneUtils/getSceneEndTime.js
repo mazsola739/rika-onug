@@ -1,1 +1,0 @@
-export const getSceneEndTime = (starTime, actionTime) => starTime + (actionTime * 1000)

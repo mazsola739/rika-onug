@@ -111,7 +111,7 @@ export const joinRoom = async (ws, message) => {
       success: true,
       message: 'Successfully joined',
       room_id,
-      player_name,
+      player: { player_name },
     })
   );
 };

@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomBlobKickoffText } from './blob.constants'
 import { blobInteraction } from './blob.interaction'
 
@@ -24,7 +24,6 @@ export const blob = (gamestate, title) => {
       ? 'blob_is_end_text' 
       : 'blob_are_end_text',
   ]
-  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -38,7 +37,6 @@ export const blob = (gamestate, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

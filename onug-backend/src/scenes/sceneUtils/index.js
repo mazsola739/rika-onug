@@ -23,7 +23,6 @@ export * from './getPlayerTokensByPlayerNumber'
 export * from './getRandomItemFromArray'
 export * from './getRandomItemsFromArray' //TODO do i need?
 export * from './getRandomNumber'
-export * from './getSceneEndTime'
 export * from './getSelectableOtherPlayerNumbersWithNoShield'
 export * from './getSelectablePlayersWithNoShield'
 export * from './getVampirePlayerNumbersByRoleIds'

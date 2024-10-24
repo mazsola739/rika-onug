@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens } from '../../sceneUtils'
 import { nostradamusInteraction } from './nostradamus.interaction'
 
 export const nostradamus = (gamestate, title) => {
@@ -7,7 +7,6 @@ export const nostradamus = (gamestate, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['nostradamus_kickoff_text']
-  const actionTime = 15
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -21,7 +20,6 @@ export const nostradamus = (gamestate, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

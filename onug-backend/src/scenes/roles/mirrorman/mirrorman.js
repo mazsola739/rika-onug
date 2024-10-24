@@ -1,5 +1,5 @@
 import { SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens } from '../../sceneUtils'
 import { copycatInteraction } from '../copycat/copycat.interaction'
 
 export const mirrorman = (gamestate, title) => {
@@ -7,7 +7,6 @@ export const mirrorman = (gamestate, title) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['mirrorman_kickoff_text']
-  const actionTime = 12
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -21,7 +20,6 @@ export const mirrorman = (gamestate, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

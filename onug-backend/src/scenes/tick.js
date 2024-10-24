@@ -21,7 +21,7 @@ export const tick = async (room_id) => {
 
   newGamestate.action_history.push(newGamestate.actual_scene)
 
-  const tickTime = newGamestate.actual_scene.scene_end_time - newGamestate.actual_scene.scene_start_time
+  const tickTime = 8
 
   const actualScene = {
     scene_number: newGamestate.actual_scene.scene_number,

@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens } from '../../sceneUtils'
 import { insomniacInteraction } from '..'
 
 export const selfawarenessgirl = (gamestate, title, hasDoppelganger) => {
@@ -12,7 +12,6 @@ export const selfawarenessgirl = (gamestate, title, hasDoppelganger) => {
       : 'selfawarenessgirl_kickoff_text',
     'selfawarenessgirl_kickoff2_text',
   ]
-  const actionTime = 6
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -26,7 +25,6 @@ export const selfawarenessgirl = (gamestate, title, hasDoppelganger) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

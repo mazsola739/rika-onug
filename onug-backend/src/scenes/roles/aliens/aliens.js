@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { randomAlienInstructions, alienAnyKeys, alienAllKeys } from './aliens.constants'
 import { aliensInteraction } from './aliens.interaction'
 
@@ -10,7 +10,6 @@ export const aliens = (gamestate, title) => {
   const narration = ['aliens_kickoff_text']
   const randomAlienInstruction = newGamestate.alienexchange ? getRandomItemFromArray(['aliens_left_text', 'aliens_right_text']) : getRandomItemFromArray(randomAlienInstructions)
   let alienKey = []
-  const actionTime = 8
 
   if (randomAlienInstruction.includes('view')) {
     alienKey = [getRandomItemFromArray(alienAnyKeys)]
@@ -48,7 +47,6 @@ export const aliens = (gamestate, title) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomFamilyman } from './familyman.constants'
 import { familymanInteraction } from './familyman.interaction'
 
@@ -28,7 +28,6 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
       ? 'familyman_is_end_text'
       : 'familyman_are_end_text',
   ]
-  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -42,7 +41,6 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

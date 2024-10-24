@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens } from '../../sceneUtils'
 import { squireInteraction } from './squire.interaction'
 
 export const squire = (gamestate, title, hasDoppelganger) => {
@@ -12,7 +12,6 @@ export const squire = (gamestate, title, hasDoppelganger) => {
       : 'squire_kickoff_text',
     'squire_kickoff2_text',
   ]
-  const actionTime = 12
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -26,7 +25,6 @@ export const squire = (gamestate, title, hasDoppelganger) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

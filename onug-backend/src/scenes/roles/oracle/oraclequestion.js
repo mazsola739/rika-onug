@@ -1,6 +1,6 @@
 import { SCENE } from '../../../constants'
 import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../../conditions'
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomOracleQuestions } from './oracle.constants'
 import { thinkRandomNumber } from './oracle.utils'
 import { oracleQuestionRaising } from './oraclequestion.raising'
@@ -26,7 +26,6 @@ export const oracleQuestion = (gamestate, title) => {
     const theNumberIThinkingOf = thinkRandomNumber()
   
     const narration = ['oracle_kickoff_text', oracleQuestion]
-    const actionTime = 8
   
     newGamestate.oracle = {
       question: '',
@@ -66,7 +65,6 @@ export const oracleQuestion = (gamestate, title) => {
       scene.push({ type: SCENE, title, token, narration, interaction })
     })
   
-    newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
     newGamestate.scene = scene
   
     return newGamestate

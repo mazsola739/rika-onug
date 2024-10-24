@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomExposerInstructions } from './exposer.constants'
 import { exposerInteraction } from './exposer.interaction'
 
@@ -8,7 +8,6 @@ export const exposer = (gamestate, title, prefix) => {
   const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
  //todo better narration
-  const actionTime = 8
 
   const randomExposerInstruction = getRandomItemFromArray(randomExposerInstructions)
   const narration = [`${prefix}_kickoff_text`, randomExposerInstruction]
@@ -36,7 +35,6 @@ export const exposer = (gamestate, title, prefix) => {
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate

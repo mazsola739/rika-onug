@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { getAllPlayerTokens } from '../../sceneUtils'
 import { beholderInteraction } from './beholder.interaction'
 
 export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
@@ -16,7 +16,6 @@ export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppel
       ? 'beholder_seer_kickoff_text'
       : 'beholder_apprenticeseer_kickoff_text',
   ]
-  const actionTime = 8
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -30,7 +29,6 @@ export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppel
     scene.push({ type: SCENE, title, token, narration, interaction })
   })
 
-  newGamestate.actual_scene.scene_end_time = getSceneEndTime(newGamestate.actual_scene.scene_start_time, actionTime)
   newGamestate.scene = scene
 
   return newGamestate
