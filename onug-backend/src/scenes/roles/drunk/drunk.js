@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { drunkInteraction } from "./drunk.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { drunkInteraction } from './drunk.interaction'
 
 export const drunk = (gamestate, title) => {
   const newGamestate = { ...gamestate }

@@ -1,5 +1,5 @@
-import { logTrace, logErrorWithStack } from "../../log"
-import { webSocketServerConnectionsPerRoom } from "../../websocket/connections"
+import { logTrace, logErrorWithStack } from '../../log'
+import { webSocketServerConnectionsPerRoom } from '../../websocket/connections'
 
 export const sendMessageToPlayer = async (req, res) => {
   try {

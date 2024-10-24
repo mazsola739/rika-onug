@@ -1,4 +1,4 @@
-import { ALL_VAMPIRE_IDS } from "../../constants"
+import { ALL_VAMPIRE_IDS } from '../../constants'
 
 export const getVampirePlayerNumbersByRoleIds = players => {
     const result = []

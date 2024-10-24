@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { paranormalinvestigatorInteraction } from "./paranormalinvestigator.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { paranormalinvestigatorInteraction } from './paranormalinvestigator.interaction'
 
 export const paranormalinvestigator = (gamestate, title) => {
   const newGamestate = { ...gamestate }

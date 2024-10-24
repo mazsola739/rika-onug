@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { diseasedInteraction } from "./diseased.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { diseasedInteraction } from './diseased.interaction'
 
 export const diseased = (gamestate, title) => {
   const newGamestate = { ...gamestate }

@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { robberInteraction } from "./robber.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { robberInteraction } from './robber.interaction'
 
 export const robber = (gamestate, title) => {
   const newGamestate = { ...gamestate }

@@ -1,7 +1,7 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
-import { randomPsychicInstructions, psychicKeys } from "./psychic.constants"
-import { psychicInteraction } from "./psychic.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { randomPsychicInstructions, psychicKeys } from './psychic.constants'
+import { psychicInteraction } from './psychic.interaction'
 
 export const psychic = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

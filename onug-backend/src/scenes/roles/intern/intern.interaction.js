@@ -1,5 +1,5 @@
-import { formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
-import { getMadScientistPlayerNumberByRoleIds } from "./intern.utils"
+import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { getMadScientistPlayerNumberByRoleIds } from './intern.utils'
 
 export const internInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

@@ -1,6 +1,6 @@
-import { SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { copycatInteraction } from "./copycat.interaction"
+import { SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { copycatInteraction } from './copycat.interaction'
 
 //TODO if oracle is oracle team
 export const copycat = (gamestate, title) => {

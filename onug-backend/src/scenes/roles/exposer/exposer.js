@@ -1,7 +1,7 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
-import { randomExposerInstructions } from "./exposer.constants"
-import { exposerInteraction } from "./exposer.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { randomExposerInstructions } from './exposer.constants'
+import { exposerInteraction } from './exposer.interaction'
 
 export const exposer = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

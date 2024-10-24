@@ -1,6 +1,6 @@
-import { SCENE } from "../../../constants"
-import { getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
-import { validateCardSelection } from "../../validators"
+import { SCENE } from '../../../constants'
+import { getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { validateCardSelection } from '../../validators'
 
 export const bodysnatcherResponse = (gamestate, token, selected_card_positions, title) => {
     if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
@@ -15,8 +15,8 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
     const selectedCard = { ...newGamestate.card_positions[selected_card_positions[0]].card }
     newGamestate.card_positions[currentPlayerNumber].card = selectedCard
     newGamestate.card_positions[selected_card_positions[0]].card = currentPlayerCard
-    newGamestate.card_positions[currentPlayerNumber].card.team = "alien"
-    newGamestate.card_positions[currentPlayerNumber].card.role = "ALIEN"
+    newGamestate.card_positions[currentPlayerNumber].card.team = 'alien'
+    newGamestate.card_positions[currentPlayerNumber].card.role = 'ALIEN'
   
     newGamestate.players[token].card.player_card_id = newGamestate.card_positions[currentPlayerNumber].card.id
     newGamestate.players[token].card.player_team = newGamestate.card_positions[currentPlayerNumber].card.team

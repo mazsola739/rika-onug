@@ -1,4 +1,4 @@
-import { STAGES } from "../constants"
+import { STAGES } from '../constants'
 
 export const stopScene = gamestate => {
   gamestate.game_stopped = true

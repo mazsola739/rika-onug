@@ -1,8 +1,8 @@
-import { HYDRATE_GAME, REDIRECT } from "../constants"
-import { logDebug, logTrace } from "../log"
-import { readGamestate, upsertRoomState } from "../repository"
-import { broadcast } from "../websocket/connections"
-import { getNextScene } from "./getNextScene"
+import { HYDRATE_GAME, REDIRECT } from '../constants'
+import { logDebug, logTrace } from '../log'
+import { readGamestate, upsertRoomState } from '../repository'
+import { broadcast } from '../websocket/connections'
+import { getNextScene } from './getNextScene'
 
 export const tick = async (room_id) => {
   logTrace('tick')
@@ -39,7 +39,7 @@ export const tick = async (room_id) => {
   if (newGamestate.game_stopped) {
     broadcastMessage = {
       type: REDIRECT,
-      path: `/voting/${room_id}`,
+      path: `/vote/${room_id}`,
     }
     logTrace(`broadcast vote scene : ${JSON.stringify(broadcastMessage)}`)
     broadcast(room_id, broadcastMessage)

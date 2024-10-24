@@ -1,4 +1,4 @@
-import { getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, generateRoleInteraction } from "../../sceneUtils"
+import { getVampirePlayerNumbersByRoleIds, getNonVampirePlayerNumbersByRoleIds, generateRoleInteraction } from '../../sceneUtils'
 
 export const vampiresInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

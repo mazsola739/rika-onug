@@ -1,6 +1,6 @@
-import { SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { doppelgangerInteraction } from "./doppelganger.interaction"
+import { SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { doppelgangerInteraction } from './doppelganger.interaction'
 
 //TODO if oracle is oracle team
 export const doppelganger = (gamestate, title) => {

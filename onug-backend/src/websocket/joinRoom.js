@@ -20,7 +20,7 @@ export const joinRoom = async (ws, message) => {
       JSON.stringify({
         type: JOIN_ROOM,
         success: false,
-        errors: ["Room does not exist."],
+        errors: ['Room does not exist.'],
       })
     )
   }
@@ -36,7 +36,7 @@ export const joinRoom = async (ws, message) => {
         JSON.stringify({
           type: JOIN_ROOM,
           success: false,
-          errors: ["No more available names. Room is full."],
+          errors: ['No more available names. Room is full.'],
         })
       )
     }
@@ -63,7 +63,7 @@ export const joinRoom = async (ws, message) => {
         JSON.stringify({
           type: JOIN_ROOM,
           success: false,
-          errors: ["No more available names. Room is full."],
+          errors: ['No more available names. Room is full.'],
         })
       )
     }
@@ -109,7 +109,7 @@ export const joinRoom = async (ws, message) => {
     JSON.stringify({
       type: JOIN_ROOM,
       success: true,
-      message: "Successfully joined",
+      message: 'Successfully joined',
       room_id,
       player_name,
     })

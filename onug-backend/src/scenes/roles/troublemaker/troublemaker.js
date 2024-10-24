@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { troublemakerInteraction } from "./troublemaker.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { troublemakerInteraction } from './troublemaker.interaction'
 
 //todo why see?
 export const troublemaker = (gamestate, title) => {

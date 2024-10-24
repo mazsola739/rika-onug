@@ -1,6 +1,6 @@
-import { SCENE } from "../../../constants"
-import { getPlayerTokensByPlayerNumber, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
-import { validateCardSelection } from "../../validators"
+import { SCENE } from '../../../constants'
+import { getPlayerTokensByPlayerNumber, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { validateCardSelection } from '../../validators'
 
 export const sentinelResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {

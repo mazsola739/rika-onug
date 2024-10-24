@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { mysticwolfInteraction } from "./mysticwolf.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { mysticwolfInteraction } from './mysticwolf.interaction'
 
 export const mysticwolf = (gamestate, title) => {
   const newGamestate = { ...gamestate }

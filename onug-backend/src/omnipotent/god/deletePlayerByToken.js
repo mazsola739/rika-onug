@@ -1,5 +1,5 @@
-import { logTrace, logErrorWithStack } from "../../log"
-import { removePlayerByToken } from "../../repository"
+import { logTrace, logErrorWithStack } from '../../log'
+import { removePlayerByToken } from '../../repository'
 
 export const deletePlayerByToken = async (req, res) => {
   try {

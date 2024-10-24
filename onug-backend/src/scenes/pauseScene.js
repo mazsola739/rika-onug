@@ -1,4 +1,4 @@
-import { tick } from "./tick"
+import { tick } from './tick'
 
 export const pauseScene = gamestate => {
   const newGamestate = {...gamestate}

@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { alphawolfInteraction } from "./alphawolf.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { alphawolfInteraction } from './alphawolf.interaction'
 
 export const alphawolf = (gamestate, title) => {
   const newGamestate = { ...gamestate }

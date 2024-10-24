@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { leaderInteraction } from "./leader.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { leaderInteraction } from './leader.interaction'
 
 export const leader = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

@@ -1,5 +1,5 @@
-import { getPlayerNumbersWithCardOrMarkActionTrue } from ".."
-import { formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
+import { getPlayerNumbersWithCardOrMarkActionTrue } from '..'
+import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 
 export const auraseerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

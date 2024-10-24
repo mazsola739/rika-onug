@@ -20,16 +20,17 @@ export const ROOM_NAMES = [
 ]
 
 export const STAGES = {
-  ROOM: "ROOM",
-  DEALING: "DEALING",
-  GAME: "GAME",
-  VOTING: "VOTING",
+  LOBBY: 'LOBBY',
+  ROOM: 'ROOM',
+  DEALING: 'DEALING',
+  GAME: 'GAME',
+  VOTING: 'VOTING',
 }
 
 export const CENTER_CARD_POSITIONS = [
-  "center_left",
-  "center_middle",
-  "center_right",
-  "center_wolf",
-  "center_villain",
+  'center_left',
+  'center_middle',
+  'center_right',
+  'center_wolf',
+  'center_villain',
 ]

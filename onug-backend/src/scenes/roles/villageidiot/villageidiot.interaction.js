@@ -1,4 +1,4 @@
-import { generateRoleInteraction } from "../../sceneUtils"
+import { generateRoleInteraction } from '../../sceneUtils'
 
 export const villageidiotInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

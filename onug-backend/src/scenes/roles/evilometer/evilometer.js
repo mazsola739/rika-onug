@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { evilometerInteraction } from "./evilometer.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { evilometerInteraction } from './evilometer.interaction'
 
 //TODO super villains can see evilometer
 export const evilometer = (gamestate, title, hasDoppelganger) => {

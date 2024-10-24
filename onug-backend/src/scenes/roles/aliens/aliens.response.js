@@ -1,7 +1,7 @@
-import { SCENE, VOTE } from "../../../constants"
-import { webSocketServerConnectionsPerRoom } from "../../../websocket/connections"
-import { getAlienPlayerNumbersByRoleIds, getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier, addVote, getPlayerTokensByPlayerNumber } from "../../sceneUtils"
-import { validateCardSelection } from "../../validators"
+import { SCENE, VOTE } from '../../../constants'
+import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
+import { getAlienPlayerNumbersByRoleIds, getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier, addVote, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
+import { validateCardSelection } from '../../validators'
 
 
 export const aliensResponse = (gamestate, token, selected_card_positions, title) => {

@@ -17,7 +17,7 @@ export const leaveRoom = async (ws, message) => {
       JSON.stringify({
         type: LEAVE_ROOM,
         success: false,
-        errors: ["Player not found in the room."],
+        errors: ['Player not found in the room.'],
       })
     )
   }
@@ -62,7 +62,7 @@ export const leaveRoom = async (ws, message) => {
     JSON.stringify({
       type: LEAVE_ROOM,
       success: true,
-      message: "Successfully left the room",
+      message: 'Successfully left the room',
       room_id,
     })
   )

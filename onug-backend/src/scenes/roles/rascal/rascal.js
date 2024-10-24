@@ -1,8 +1,8 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
-import { villageidiotInteraction } from "../villageidiot/villageidiot"
-import { randomRascalInstructions, rascalAnyTwoKeys, rascalAnyOneKeys } from "./rascal.constants"
-import { rascalInteraction } from "./rascal.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { villageidiotInteraction } from '../villageidiot/villageidiot'
+import { randomRascalInstructions, rascalAnyTwoKeys, rascalAnyOneKeys } from './rascal.constants'
+import { rascalInteraction } from './rascal.interaction'
 
 export const rascal = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
@@ -49,7 +49,7 @@ export const rascal = (gamestate, title, prefix) => {
 
     if ((prefix === 'rascal' && (card.player_original_id === 52 || (card.player_role_id === 52 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id)))) ||
       (prefix === 'doppelganger_rascal' && card.player_role_id === 52 && card.player_original_id === 1)) {
-      if (randomRascalInstruction === "rascal_idiot_text") {
+      if (randomRascalInstruction === 'rascal_idiot_text') {
         interaction = villageidiotInteraction(newGamestate, token, title)
       } else {
         interaction = rascalInteraction(newGamestate, token, title)

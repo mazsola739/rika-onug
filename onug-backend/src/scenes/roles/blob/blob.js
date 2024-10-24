@@ -1,7 +1,7 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
-import { randomBlobKickoffText } from "./blob.constants"
-import { blobInteraction } from "./blob.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { randomBlobKickoffText } from './blob.constants'
+import { blobInteraction } from './blob.interaction'
 
 export const blob = (gamestate, title) => {
   const newGamestate = { ...gamestate }

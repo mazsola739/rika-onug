@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { auraseerInteraction } from "./auraseer.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { auraseerInteraction } from './auraseer.interaction'
 
 export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
   const newGamestate = { ...gamestate }

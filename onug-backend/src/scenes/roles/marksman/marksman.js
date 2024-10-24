@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { marksmanInteraction } from "./marksman.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { marksmanInteraction } from './marksman.interaction'
 
 export const marksman = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

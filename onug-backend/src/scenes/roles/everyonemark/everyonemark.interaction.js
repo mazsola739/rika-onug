@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken, getMarksByPositions, generateRoleInteraction } from "../../sceneUtils"
+import { getPlayerNumberWithMatchingToken, getMarksByPositions, generateRoleInteraction } from '../../sceneUtils'
 
 export const everyonemarkInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

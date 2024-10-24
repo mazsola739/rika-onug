@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { gremlinInteraction } from "./gremlin.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { gremlinInteraction } from './gremlin.interaction'
 
 export const gremlin = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

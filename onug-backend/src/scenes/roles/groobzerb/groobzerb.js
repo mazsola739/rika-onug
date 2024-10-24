@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { groobzerbInteraction } from "./groobzerb.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { groobzerbInteraction } from './groobzerb.interaction'
 
 export const groobzerb = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

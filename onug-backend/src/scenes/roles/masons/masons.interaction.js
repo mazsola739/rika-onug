@@ -1,5 +1,5 @@
-import { generateRoleInteraction } from "../../sceneUtils"
-import { getMasonPlayerNumbersByRoleIds } from "./masons.utils"
+import { generateRoleInteraction } from '../../sceneUtils'
+import { getMasonPlayerNumbersByRoleIds } from './masons.utils'
 
 export const masonsInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

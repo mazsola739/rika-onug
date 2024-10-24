@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
-import { validateCardSelection } from "../../validators"
+import { IDS, SCENE } from '../../../constants'
+import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { validateCardSelection } from '../../validators'
 
 //TODO better response message
 export const flipperResponse = (gamestate, token, selected_card_positions, title) => {

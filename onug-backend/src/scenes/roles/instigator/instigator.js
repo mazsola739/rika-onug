@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { instigatorInteraction } from "./instigator.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { instigatorInteraction } from './instigator.interaction'
 
 export const instigator = (gamestate, title) => {
   const newGamestate = { ...gamestate }

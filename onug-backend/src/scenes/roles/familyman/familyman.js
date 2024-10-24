@@ -1,7 +1,7 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
-import { randomFamilyman } from "./familyman.constants"
-import { familymanInteraction } from "./familyman.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { randomFamilyman } from './familyman.constants'
+import { familymanInteraction } from './familyman.interaction'
 
 export const familyman = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

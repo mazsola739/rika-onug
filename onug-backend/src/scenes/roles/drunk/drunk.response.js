@@ -1,6 +1,6 @@
-import { SCENE } from "../../../constants"
-import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
-import { validateCardSelection } from "../../validators"
+import { SCENE } from '../../../constants'
+import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { validateCardSelection } from '../../validators'
 
 export const drunkResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {

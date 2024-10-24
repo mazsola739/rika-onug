@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { assassinInteraction } from "./assassin.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { assassinInteraction } from './assassin.interaction'
 
 export const assassin = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

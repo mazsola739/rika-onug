@@ -1,7 +1,7 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime } from "../../sceneUtils"
-import { randomAlienInstructions, alienAnyKeys, alienAllKeys } from "./aliens.constants"
-import { aliensInteraction } from "./aliens.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime } from '../../sceneUtils'
+import { randomAlienInstructions, alienAnyKeys, alienAllKeys } from './aliens.constants'
+import { aliensInteraction } from './aliens.interaction'
 
 export const aliens = (gamestate, title) => {
   const newGamestate = { ...gamestate }

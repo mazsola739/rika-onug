@@ -1,4 +1,4 @@
-import { IDS } from "../../../constants"
+import { IDS } from '../../../constants'
 
 export const findUniqueElementsInArrays = (array1, array2) => {
   const set = new Set(array1)
@@ -48,7 +48,7 @@ export const getSelectableAnyPlayerNumbersWithNoShield = (players) => {
 }
 
 export const moveCards = (cards, direction, movablePlayers) => {
-  const playerCards = Object.fromEntries(Object.entries(cards).filter(([key]) => key.startsWith("player_")))
+  const playerCards = Object.fromEntries(Object.entries(cards).filter(([key]) => key.startsWith('player_')))
   const staticCards = Object.fromEntries(Object.entries(playerCards).filter(([key]) => !movablePlayers.includes(key)))
   const movableCards = {}
   movablePlayers.forEach(player => {

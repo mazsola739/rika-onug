@@ -1,7 +1,7 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
-import { randomMorticianInstructions, morticianKeys } from "./mortician.constants"
-import { morticianInteraction } from "./mortician.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { randomMorticianInstructions, morticianKeys } from './mortician.constants'
+import { morticianInteraction } from './mortician.interaction'
 
 export const mortician = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

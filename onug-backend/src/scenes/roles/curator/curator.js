@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { curatorInteraction } from "./curator.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { curatorInteraction } from './curator.interaction'
 
 export const curator = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

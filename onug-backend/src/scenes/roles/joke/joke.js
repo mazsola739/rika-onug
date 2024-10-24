@@ -1,6 +1,6 @@
-import { SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
-import { random_joke } from "./joke.constants"
+import { SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { random_joke } from './joke.constants'
 
 export const joke = (gamestate, title) => {
   const newGamestate = { ...gamestate }

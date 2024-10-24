@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { leaderZerbgroobInteraction } from "./leaderzerbgroob.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { leaderZerbgroobInteraction } from './leaderzerbgroob.interaction'
 
 export const leaderzerbgroob = (gamestate, title) => {
   const newGamestate = { ...gamestate }

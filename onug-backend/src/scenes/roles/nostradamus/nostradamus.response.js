@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
-import { validateCardSelection } from "../../validators"
+import { IDS, SCENE } from '../../../constants'
+import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { validateCardSelection } from '../../validators'
 
 export const nostradamusResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {

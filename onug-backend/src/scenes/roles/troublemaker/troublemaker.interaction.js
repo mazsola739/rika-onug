@@ -1,4 +1,4 @@
-import { getSelectableOtherPlayerNumbersWithNoShield, generateRoleInteraction } from "../../sceneUtils"
+import { getSelectableOtherPlayerNumbersWithNoShield, generateRoleInteraction } from '../../sceneUtils'
 
 export const troublemakerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

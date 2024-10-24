@@ -51,28 +51,28 @@ export const dealCards = async (ws, message) => {
 
   if (hasPlayerMark) {
     newGamestate.mark_positions = {
-      vampire: "mark_of_vampire",
-      fear: "mark_of_fear",
-      bat: "mark_of_bat",
-      disease: "mark_of_disease",
-      love_1: "mark_of_love",
-      love_2: "mark_of_love",
-      traitor: "mark_of_traitor",
-      clarity_1: "mark_of_clarity",
-      clarity_2: "mark_of_clarity",
-      assassin: "mark_of_assassin",
+      vampire: 'mark_of_vampire',
+      fear: 'mark_of_fear',
+      bat: 'mark_of_bat',
+      disease: 'mark_of_disease',
+      love_1: 'mark_of_love',
+      love_2: 'mark_of_love',
+      traitor: 'mark_of_traitor',
+      clarity_1: 'mark_of_clarity',
+      clarity_2: 'mark_of_clarity',
+      assassin: 'mark_of_assassin',
     }
     if (hasDoppelganger) {
       newGamestate.doppelganger_mark_positions = {
-        fear: "mark_of_fear",
-        bat: "mark_of_bat",
-        disease: "mark_of_disease",
-        love_1: "mark_of_love",
-        love_2: "mark_of_love",
-        traitor: "mark_of_traitor",
-        clarity_1: "mark_of_clarity",
-        clarity_2: "mark_of_clarity",
-        assassin: "mark_of_assassin",
+        fear: 'mark_of_fear',
+        bat: 'mark_of_bat',
+        disease: 'mark_of_disease',
+        love_1: 'mark_of_love',
+        love_2: 'mark_of_love',
+        traitor: 'mark_of_traitor',
+        clarity_1: 'mark_of_clarity',
+        clarity_2: 'mark_of_clarity',
+        assassin: 'mark_of_assassin',
       }
     }
   }

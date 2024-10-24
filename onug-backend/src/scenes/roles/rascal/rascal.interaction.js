@@ -1,6 +1,6 @@
-import { CENTER_CARD_POSITIONS } from "../../../constants"
-import { getAllPlayerTokens, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, generateRoleInteraction, getSelectableOtherPlayerNumbersWithNoShield } from "../../sceneUtils"
-import { getAnyHigherOrLowerPlayerNumbersByToken } from "./rascal.utils"
+import { CENTER_CARD_POSITIONS } from '../../../constants'
+import { getAllPlayerTokens, getAnyEvenOrOddPlayers, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield, generateRoleInteraction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
+import { getAnyHigherOrLowerPlayerNumbersByToken } from './rascal.utils'
 
 export const rascalInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

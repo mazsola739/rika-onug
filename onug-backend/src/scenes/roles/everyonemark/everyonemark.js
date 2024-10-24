@@ -1,6 +1,6 @@
-import { SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { everyonemarkInteraction } from "./everyonemark.interaction"
+import { SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { everyonemarkInteraction } from './everyonemark.interaction'
 
 export const everyonemark = (gamestate, title) => {
   const newGamestate = { ...gamestate }

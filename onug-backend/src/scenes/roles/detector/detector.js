@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { seerInteraction } from ".."
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { seerInteraction } from '..'
 
 export const detector = (gamestate, title) => {
   const newGamestate = { ...gamestate }

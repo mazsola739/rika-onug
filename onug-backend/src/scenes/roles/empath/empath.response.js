@@ -1,8 +1,8 @@
-import { VOTE, SCENE } from "../../../constants"
-import { webSocketServerConnectionsPerRoom } from "../../../websocket/connections"
-import { addVote, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
-import { validateCardSelection } from "../../validators"
-import { getEmpathTokensByRoleIds, getDoppelgangerEmpathTokensByRoleIds } from "./empath.utils"
+import { VOTE, SCENE } from '../../../constants'
+import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
+import { addVote, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { validateCardSelection } from '../../validators'
+import { getEmpathTokensByRoleIds, getDoppelgangerEmpathTokensByRoleIds } from './empath.utils'
 
 export const empathResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {

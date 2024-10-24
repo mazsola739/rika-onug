@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { minionInteraction } from "./minion.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { minionInteraction } from './minion.interaction'
 
 export const minion = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

@@ -1,7 +1,7 @@
-import { MESSAGE, SCENE } from "../../../constants"
-import { webSocketServerConnectionsPerRoom } from "../../../websocket/connections"
-import { getPlayerTokensByPlayerNumber, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
-import { validateCardSelection } from "../../validators"
+import { MESSAGE, SCENE } from '../../../constants'
+import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
+import { getPlayerTokensByPlayerNumber, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { validateCardSelection } from '../../validators'
 
 export const thingResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {

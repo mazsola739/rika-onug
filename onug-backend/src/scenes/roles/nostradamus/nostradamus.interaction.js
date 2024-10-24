@@ -1,4 +1,4 @@
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleInteraction } from "../../sceneUtils"
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleInteraction } from '../../sceneUtils'
 
 export const nostradamusInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

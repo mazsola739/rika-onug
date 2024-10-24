@@ -1,4 +1,4 @@
-import { shufflePlayers } from "../../sceneUtils"
+import { shufflePlayers } from '../../sceneUtils'
 
 export const pickRandomOnePlayer = numPlayers => shufflePlayers(numPlayers)[0]
 

@@ -1,5 +1,5 @@
-import { getPlayerNeighborsByToken, generateRoleInteraction } from "../../sceneUtils"
-import { alienAbducted } from "./cow.utils"
+import { getPlayerNeighborsByToken, generateRoleInteraction } from '../../sceneUtils'
+import { alienAbducted } from './cow.utils'
 
 export const cowInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

@@ -23,14 +23,14 @@ import { pauseGame } from './pauseGame'
 export const websocketServer = (port) => {
   try {
     const wss = new WebSocket.WebSocketServer({ port })
-    wss.on("connection", function connection(ws) {
-      ws.on("close", () => {
-        logTrace("Client disconnected")
+    wss.on('connection', function connection(ws) {
+      ws.on('close', () => {
+        logTrace('Client disconnected')
       })
       ws.onerror = function () {
-        logError("Some Error occurred")
+        logError('Some Error occurred')
       }
-      ws.on("message", async (rawMessage, client, client2) => {
+      ws.on('message', async (rawMessage, client, client2) => {
         logTrace(`Received message ${rawMessage} from user ${client} ${client2}`)
         const message = JSON.parse(rawMessage)
         logTrace(`msg received: ${rawMessage}`)

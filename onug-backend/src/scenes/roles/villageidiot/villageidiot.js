@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { villageidiotInteraction } from "./villageidiot.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { villageidiotInteraction } from './villageidiot.interaction'
 
 export const villageidiot = (gamestate, title) => {
   const newGamestate = { ...gamestate }

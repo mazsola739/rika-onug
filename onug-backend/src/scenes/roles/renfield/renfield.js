@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { renfieldInteraction } from "./renfield.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { renfieldInteraction } from './renfield.interaction'
 
 //TODO no vampire he is villager
 export const renfield = (gamestate, title, hasDoppelganger) => {

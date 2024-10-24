@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { cupidInteraction } from "./cupid.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { cupidInteraction } from './cupid.interaction'
 
 export const cupid = (gamestate, title) => {
   const newGamestate = { ...gamestate }

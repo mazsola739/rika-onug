@@ -1,6 +1,6 @@
-import { CENTER_CARD_POSITIONS, SCENE } from "../../../constants"
-import { getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleInteraction, formatPlayerIdentifier, getPlayerNumberWithMatchingToken } from "../../sceneUtils"
-import { validateCardSelection } from "../../validators"
+import { CENTER_CARD_POSITIONS, SCENE } from '../../../constants'
+import { getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleInteraction, formatPlayerIdentifier, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { validateCardSelection } from '../../validators'
 
 export const witchResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {

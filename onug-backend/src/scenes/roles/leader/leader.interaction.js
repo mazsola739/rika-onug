@@ -1,4 +1,4 @@
-import { getAlienPlayerNumbersByRoleIds, formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
+import { getAlienPlayerNumbersByRoleIds, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 
 export const leaderInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

@@ -1,5 +1,5 @@
-import { formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
-import { getAnySeerPlayerNumbersByRoleIds } from "./beholder.utils"
+import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { getAnySeerPlayerNumbersByRoleIds } from './beholder.utils'
 
 export const beholderInteraction = (gamestate, token, title) => {
     const newGamestate = { ...gamestate }

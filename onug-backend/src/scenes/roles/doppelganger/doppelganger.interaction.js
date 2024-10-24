@@ -1,4 +1,4 @@
-import { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, generateRoleInteraction } from "../../sceneUtils"
+import { getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield, generateRoleInteraction } from '../../sceneUtils'
 
 //TODO shield?
 export const doppelgangerInteraction = (gamestate, token, title) => {

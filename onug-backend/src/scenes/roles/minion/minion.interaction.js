@@ -1,4 +1,4 @@
-import { getWerewolfAndDreamwolfPlayerNumbersByRoleIds, formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
+import { getWerewolfAndDreamwolfPlayerNumbersByRoleIds, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 
 export const minionInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

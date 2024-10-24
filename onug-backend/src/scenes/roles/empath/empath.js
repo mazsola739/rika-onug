@@ -1,8 +1,8 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime } from "../../sceneUtils"
-import { empathKeys, randomEmpathInstructions } from "./empath.constants"
-import { empathInteraction } from "./empath.interaction"
-import { empathNumbers } from "./empath.utils"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers, getSceneEndTime } from '../../sceneUtils'
+import { empathKeys, randomEmpathInstructions } from './empath.constants'
+import { empathInteraction } from './empath.interaction'
+import { empathNumbers } from './empath.utils'
 
 export const empath = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

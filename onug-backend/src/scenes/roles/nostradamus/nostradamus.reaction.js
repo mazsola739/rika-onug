@@ -1,6 +1,6 @@
-import { SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { getNostradamusTeam } from "./nostradamus.utils"
+import { SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { getNostradamusTeam } from './nostradamus.utils'
 
 export const nostradamusReaction = (gamestate, title) => {
   const newGamestate = { ...gamestate }

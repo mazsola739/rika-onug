@@ -3,7 +3,7 @@ export const getLoversPlayerNumbersByMark = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (player.player_mark === "mark_of_love") {
+    if (player.player_mark === 'mark_of_love') {
       result.push(`player_${player.player_number}`)
     }
   }

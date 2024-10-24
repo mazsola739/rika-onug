@@ -1,5 +1,5 @@
-import { logTrace, logErrorWithStack } from "../../log"
-import { removeAllGamestates, readAllGamestates } from "../../repository"
+import { logTrace, logErrorWithStack } from '../../log'
+import { removeAllGamestates, readAllGamestates } from '../../repository'
 
 export const deleteAllGamestates = async (req, res) => {
   try {

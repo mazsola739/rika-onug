@@ -1,4 +1,4 @@
-import { getPlayerNeighborsByToken, generateRoleInteraction } from "../../sceneUtils"
+import { getPlayerNeighborsByToken, generateRoleInteraction } from '../../sceneUtils'
 
 export const diseasedInteraction = (gamestate, token, title) => {
     const newGamestate = { ...gamestate }

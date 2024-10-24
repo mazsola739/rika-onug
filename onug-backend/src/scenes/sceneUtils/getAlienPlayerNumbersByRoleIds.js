@@ -1,4 +1,4 @@
-import { IDS } from "../../constants"
+import { IDS } from '../../constants'
 
 export const getAlienPlayerNumbersByRoleIds = players => {
     const result = []

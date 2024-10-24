@@ -5,7 +5,7 @@ export const pageNotFoundError = (req, res) => {
     throw new Error(`page not found: ${req.originalUrl}`)
   } catch(error) {
     logErrorWithStack(error)
-    res.status(404).send("error")
+    res.status(404).send('error')
   }
 }
 

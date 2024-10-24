@@ -1,7 +1,7 @@
 export const moveCardsButYourOwn = (cards, direction, currentPlayer) => {
   const playerCards = Object.fromEntries(
     Object.entries(cards)
-      .filter(([key]) => key.startsWith("player_"))
+      .filter(([key]) => key.startsWith('player_'))
   )
 
   const movableCards = { ...playerCards }

@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { internInteraction } from "./intern.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { internInteraction } from './intern.interaction'
 
 export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
   const newGamestate = { ...gamestate }

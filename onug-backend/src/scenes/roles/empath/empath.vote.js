@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { empathVoteResult } from "./empath.voteresult"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { empathVoteResult } from './empath.voteresult'
 
 export const empathVote = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

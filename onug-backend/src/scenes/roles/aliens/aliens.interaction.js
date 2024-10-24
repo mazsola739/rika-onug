@@ -1,6 +1,6 @@
 
-import { getAlienPlayerNumbersByRoleIds, getPlayerNumberWithMatchingToken, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, formatPlayerIdentifier, getCardIdsByPlayerNumbers, generateRoleInteraction } from "../../sceneUtils"
-import { getAlienPlayerNumbersByRoleIdsWithNoShield, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getNeighborByPosition, moveCards } from "./aliens.utils"
+import { getAlienPlayerNumbersByRoleIds, getPlayerNumberWithMatchingToken, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, formatPlayerIdentifier, getCardIdsByPlayerNumbers, generateRoleInteraction } from '../../sceneUtils'
+import { getAlienPlayerNumbersByRoleIdsWithNoShield, getSelectableAnyPlayerNumbersWithNoShield, findUniqueElementsInArrays, getNeighborByPosition, moveCards } from './aliens.utils'
 
 export const aliensInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

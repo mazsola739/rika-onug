@@ -1,7 +1,7 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
-import { randomBodysnatcherInstructions, bodysnatcherKeys } from "./bodysnatcher.constants"
-import { bodysnatcherInteraction } from "./bodysnatcher.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { randomBodysnatcherInstructions, bodysnatcherKeys } from './bodysnatcher.constants'
+import { bodysnatcherInteraction } from './bodysnatcher.interaction'
 
 export const bodysnatcher = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

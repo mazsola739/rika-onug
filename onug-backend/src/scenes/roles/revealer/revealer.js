@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { revealerInteraction } from "./revealer.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { revealerInteraction } from './revealer.interaction'
 
 export const revealer = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

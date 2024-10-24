@@ -70,7 +70,7 @@ export const dealCardIds = (selectedCardIds) => {
 }
 
 export const createPlayerCard = (card, selected_cards) => {
-  if (!card || typeof card !== "object" || !card.id) return { player_original_id: 0, player_card_id: 0, player_role: "", player_role_id: 0, team: "" }
+  if (!card || typeof card !== 'object' || !card.id) return { player_original_id: 0, player_card_id: 0, player_role: '', player_role_id: 0, team: '' }
 
   let playerCard
 
@@ -83,7 +83,7 @@ export const createPlayerCard = (card, selected_cards) => {
       player_role: card.role,
       player_role_id: card.id,
       player_team: card.team,
-      player_mark: "mark_of_clarity",
+      player_mark: 'mark_of_clarity',
     }
   } else {
     playerCard = {
@@ -99,7 +99,7 @@ export const createPlayerCard = (card, selected_cards) => {
 }
 
 export const createPlayerPositionCard = (card, selected_cards) => {
-  if (!card || typeof card !== "object" || !card.id) return { card: { id: 0, role: "", team: "" } }
+  if (!card || typeof card !== 'object' || !card.id) return { card: { id: 0, role: '', team: '' } }
 
   let positionCard
 
@@ -112,7 +112,7 @@ export const createPlayerPositionCard = (card, selected_cards) => {
         role: card.role,
         team: card.team,
       },
-      mark: "mark_of_clarity",
+      mark: 'mark_of_clarity',
     }
   } else {
     positionCard = {
@@ -128,7 +128,7 @@ export const createPlayerPositionCard = (card, selected_cards) => {
 }
 
 export const createCenterPositionCard = (card) => {
-  if (!card || typeof card !== "object" || !card.id) return { card: { id: 0, role: "", team: "" } }
+  if (!card || typeof card !== 'object' || !card.id) return { card: { id: 0, role: '', team: '' } }
 
   let positionCard
 

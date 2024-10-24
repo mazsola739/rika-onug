@@ -4,8 +4,8 @@ export const getPartOfGroupByToken = (players, token, randomInstruction) => {
     const groupHeadsNumber = players[token].player_number
     const partOfGroup = [`player_${groupHeadsNumber}`]
   
-    const side = randomInstruction.includes("left") ? "left" : randomInstruction.includes("right") ? "right" : "each"
-    const amount = randomInstruction.includes("4") ? 4 : randomInstruction.includes("3") ? 3 : randomInstruction.includes("2") ? 2 : 1
+    const side = randomInstruction.includes('left') ? 'left' : randomInstruction.includes('right') ? 'right' : 'each'
+    const amount = randomInstruction.includes('4') ? 4 : randomInstruction.includes('3') ? 3 : randomInstruction.includes('2') ? 2 : 1
   
     const getPartOfGroupNumber = (index) => {
         let partOfGroupNumber = groupHeadsNumber + index
@@ -17,14 +17,14 @@ export const getPartOfGroupByToken = (players, token, randomInstruction) => {
         return partOfGroupNumber
     }
   
-    if (side === "each" || side === "left") {
+    if (side === 'each' || side === 'left') {
         for (let i = 1; i <= amount; i++) {
             const partOfGroupLeftSideNumber = getPartOfGroupNumber(-i)
             partOfGroup.push(`player_${partOfGroupLeftSideNumber}`)
         }
     }
   
-    if (side === "each" || side === "right") {
+    if (side === 'each' || side === 'right') {
         for (let i = 1; i <= amount; i++) {
             const partOfGroupRightSideNumber = getPartOfGroupNumber(i)
             partOfGroup.push(`player_${partOfGroupRightSideNumber}`)

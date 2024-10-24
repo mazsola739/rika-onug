@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { pickpocketInteraction } from "./pickpocket.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { pickpocketInteraction } from './pickpocket.interaction'
 
 export const pickpocket = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

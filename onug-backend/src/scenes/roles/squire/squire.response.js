@@ -1,7 +1,7 @@
-import { SCENE } from "../../../constants"
-import { getCardIdsByPositions, formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
-import { validateAnswerSelection } from "../../validators"
-import { getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield } from "./squire.utils"
+import { SCENE } from '../../../constants'
+import { getCardIdsByPositions, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { validateAnswerSelection } from '../../validators'
+import { getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield } from './squire.utils'
 
 export const squireResponse = (gamestate, token, selected_answer, title) => {
   if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {

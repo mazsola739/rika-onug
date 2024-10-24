@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { priestInteraction } from "./priest.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { priestInteraction } from './priest.interaction'
 
 export const priest = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

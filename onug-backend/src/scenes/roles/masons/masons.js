@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { masonsInteraction } from "./masons.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { masonsInteraction } from './masons.interaction'
 
 export const masons = (gamestate, title) => {
   const newGamestate = { ...gamestate }

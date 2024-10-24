@@ -1,7 +1,7 @@
-import { SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray } from "../../sceneUtils"
-import { oracleResponses } from "./oracle.constants"
-import { oracleAnswerAftermath } from "./oracleanswer.aftermath"
+import { SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
+import { oracleResponses } from './oracle.constants'
+import { oracleAnswerAftermath } from './oracleanswer.aftermath'
 
 //ORACLE_ANSWER
 export const oracleAnswer = (gamestate, title) => {

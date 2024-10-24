@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { vampiresInteraction } from "./vampires.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { vampiresInteraction } from './vampires.interaction'
 
 export const vampires = (gamestate, title) => {
   const newGamestate = { ...gamestate }

@@ -1,5 +1,5 @@
-import { CENTER_CARD_POSITIONS, SCENE } from "../../../constants"
-import { getPlayerNumberWithMatchingToken, getCardIdsByPositions, getRandomNumber, formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
+import { CENTER_CARD_POSITIONS, SCENE } from '../../../constants'
+import { getPlayerNumberWithMatchingToken, getCardIdsByPositions, getRandomNumber, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 
 export const oracleAnswerAftermath = (gamestate, token, title) => {
     const newGamestate = { ...gamestate }

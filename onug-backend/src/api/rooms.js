@@ -3,15 +3,15 @@ import { logTrace, logErrorWithStack } from '../log'
 
 export const rooms = (req, res) => {
   try {
-    logTrace("Rooms endpoint called")
+    logTrace('Rooms endpoint called')
     return res.send({
-      message: "Successfully fetched",
+      message: 'Successfully fetched',
       data: roomsData,
     })
   } catch (error) {
     logErrorWithStack(error)
     return res.send({
-      message: "Failed to fetch rooms",
+      message: 'Failed to fetch rooms',
     })
   }
 }

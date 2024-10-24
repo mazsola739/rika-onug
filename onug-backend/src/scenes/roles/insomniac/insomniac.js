@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { insomniacInteraction } from "./insomniac.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { insomniacInteraction } from './insomniac.interaction'
 
 export const insomniac = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

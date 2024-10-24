@@ -1,4 +1,4 @@
-/* import { getPlayerNumberWithMatchingToken } from "../utils"
+/* import { getPlayerNumberWithMatchingToken } from '../utils'
 
 export const generateWiningLosing = (gamestate, token) => {
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)

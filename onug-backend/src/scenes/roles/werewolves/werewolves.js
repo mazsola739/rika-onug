@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { werewolvesInteraction } from "./werewolves.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { werewolvesInteraction } from './werewolves.interaction'
 
 export const werewolves = (gamestate, title, hasDreamWolf) => {
   const newGamestate = { ...gamestate }

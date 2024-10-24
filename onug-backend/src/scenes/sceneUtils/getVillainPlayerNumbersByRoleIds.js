@@ -1,4 +1,4 @@
-import { ALL_SUPER_VILLAIN_IDS } from "../../constants"
+import { ALL_SUPER_VILLAIN_IDS } from '../../constants'
 
 export const getVillainPlayerNumbersByRoleIds = players => {
     const result = []

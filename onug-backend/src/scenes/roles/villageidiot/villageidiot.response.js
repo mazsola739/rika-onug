@@ -1,7 +1,7 @@
-import { SCENE } from "../../../constants"
-import { getPlayerNumberWithMatchingToken, generateRoleInteraction } from "../../sceneUtils"
-import { validateAnswerSelection } from "../../validators"
-import { moveCardsButYourOwn } from "./villageidiot.utils"
+import { SCENE } from '../../../constants'
+import { getPlayerNumberWithMatchingToken, generateRoleInteraction } from '../../sceneUtils'
+import { validateAnswerSelection } from '../../validators'
+import { moveCardsButYourOwn } from './villageidiot.utils'
 
 export const villageidiotResponse = (gamestate, token, selected_answer, title) => {
   if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {

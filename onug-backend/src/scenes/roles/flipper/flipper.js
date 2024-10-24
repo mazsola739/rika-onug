@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { flipperInteraction } from "./flipper.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { flipperInteraction } from './flipper.interaction'
 
 export const flipper = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }

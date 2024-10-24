@@ -1,4 +1,4 @@
-import { getAnyEvenOrOddPlayers, getAnySeerPlayerNumbersByRoleIdsWithNoShield, generateRoleInteraction } from "../../sceneUtils"
+import { getAnyEvenOrOddPlayers, getAnySeerPlayerNumbersByRoleIdsWithNoShield, generateRoleInteraction } from '../../sceneUtils'
 
 export const psychicInteraction = (gamestate, token, title, randomPsychicInstructions, psychicKeys) => {
   const newGamestate = { ...gamestate }

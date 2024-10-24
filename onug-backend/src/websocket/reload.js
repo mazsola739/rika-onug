@@ -3,7 +3,7 @@ import { webSocketServerConnectionsPerRoom } from './connections'
 
 export const reload = (ws, message) => {
   try {
-    logTrace("reload happened on the client side")
+    logTrace('reload happened on the client side')
     const { token } = message
 
     if (token && ws.token && ws.token === token) {

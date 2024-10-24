@@ -1,5 +1,5 @@
-import { generateRoleInteraction } from "../../sceneUtils"
-import { createNumberArray, isCurrentPlayerNumberEven } from "./oracle.utils"
+import { generateRoleInteraction } from '../../sceneUtils'
+import { createNumberArray, isCurrentPlayerNumberEven } from './oracle.utils'
 
 export const oracleQuestionRaising = (gamestate, token, title) => {
     const newGamestate = { ...gamestate }

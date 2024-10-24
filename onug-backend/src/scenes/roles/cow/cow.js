@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { cowInteraction } from "./cow.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { cowInteraction } from './cow.interaction'
 
 //TODO aliens can see cow
 export const cow = (gamestate, title, hasDoppelganger) => {

@@ -1,5 +1,5 @@
-import { logTrace, logErrorWithStack } from "../../log"
-import { readGamestateByRoomId } from "../../repository"
+import { logTrace, logErrorWithStack } from '../../log'
+import { readGamestateByRoomId } from '../../repository'
 
 export const checkGamestateByRoomId = async (req, res) => {
   try {

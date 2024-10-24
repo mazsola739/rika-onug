@@ -1,4 +1,4 @@
-import { ALL_WEREWOLF_IDS } from "../../constants"
+import { ALL_WEREWOLF_IDS } from '../../constants'
 
 export const getWerewolfAndDreamwolfPlayerNumbersByRoleIds = players => {
     const result = []

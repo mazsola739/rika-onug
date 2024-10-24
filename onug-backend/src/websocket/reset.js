@@ -11,7 +11,7 @@ export const reset = async (message) => {
 
     if (!roomIdValid) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors })
 
-    const newGamestate = { ...gamestate, selected_cards: [], selected_expansions: ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"] }
+    const newGamestate = { ...gamestate, selected_cards: [], selected_expansions: ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles'] }
 
     upsertRoomState(newGamestate)
 
@@ -21,7 +21,7 @@ export const reset = async (message) => {
       type: HYDRATE_ROOM,
       success: true,
       selected_cards: [],
-      selected_expansions: ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
+      selected_expansions: ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles'],
     })
   } catch (error) {
     logError(error)

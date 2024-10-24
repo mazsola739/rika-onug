@@ -1,5 +1,5 @@
-import { logTrace, logErrorWithStack } from "../../log"
-import { webSocketServerConnectionsPerRoom } from "../../websocket/connections"
+import { logTrace, logErrorWithStack } from '../../log'
+import { webSocketServerConnectionsPerRoom } from '../../websocket/connections'
 
 export const checkConnections = async (req, res) => {
   try {

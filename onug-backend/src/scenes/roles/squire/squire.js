@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { squireInteraction } from "./squire.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { squireInteraction } from './squire.interaction'
 
 export const squire = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }

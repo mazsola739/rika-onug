@@ -1,6 +1,6 @@
-import { CENTER_CARD_POSITIONS } from "../../../constants"
-import { generateRoleInteraction } from "../../sceneUtils"
-import { getWerewolfPlayerNumbersByRoleIds, getDreamWolfPlayerNumberByRoleIds } from "./werewolves.utils"
+import { CENTER_CARD_POSITIONS } from '../../../constants'
+import { generateRoleInteraction } from '../../sceneUtils'
+import { getWerewolfPlayerNumbersByRoleIds, getDreamWolfPlayerNumberByRoleIds } from './werewolves.utils'
 
 export const werewolvesInteraction = (gamestate, token, title) => {
     const newGamestate = { ...gamestate }

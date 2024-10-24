@@ -3,7 +3,7 @@ export const getVampirePlayerNumbersByMark = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (player.player_mark === "mark_of_vampire") {
+    if (player.player_mark === 'mark_of_vampire') {
       result.push(`player_${player.player_number}`)
     }
   }

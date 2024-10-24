@@ -1,5 +1,5 @@
-import { formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
-import { getLoversPlayerNumbersByMark } from "./lovers.utils"
+import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { getLoversPlayerNumbersByMark } from './lovers.utils'
 
 export const loversInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

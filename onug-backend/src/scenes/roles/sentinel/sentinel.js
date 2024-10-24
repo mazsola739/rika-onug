@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { sentinelInteraction } from "./sentinel.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { sentinelInteraction } from './sentinel.interaction'
 
 export const sentinel = (gamestate, title) => {
   const newGamestate = { ...gamestate }

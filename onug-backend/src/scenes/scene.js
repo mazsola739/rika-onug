@@ -17,14 +17,14 @@ export const scene = gamestate => {
 
   Object.entries(entries).forEach(([key, value]) => _.update(newGamestate, key, () => value))
 
-  if (!entries["actual_scene.started"]) newGamestate.actual_scene.started = false
+  if (!entries['actual_scene.started']) newGamestate.actual_scene.started = false
 
   if (newGamestate.actual_scene) {
     newGamestate = sceneHandler(newGamestate)
     logDebug(`__INTERACTION__ SCENE_NUMBER: ${newGamestate.actual_scene.scene_number} roleInteraction: ${JSON.stringify(newGamestate?.scene)}`)
   } else {
-    logDebug("No actual_scene found in gamestate.")
-    logDebug("gamestate:", JSON.stringify(newGamestate)) // Log the entire gamestate object
+    logDebug('No actual_scene found in gamestate.')
+    logDebug('gamestate:', JSON.stringify(newGamestate)) // Log the entire gamestate object
   }
 
   logDebug(

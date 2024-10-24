@@ -1,9 +1,9 @@
-import { SCENE } from "../../../constants"
-import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from "../../conditions"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
-import { randomOracleQuestions } from "./oracle.constants"
-import { thinkRandomNumber } from "./oracle.utils"
-import { oracleQuestionRaising } from "./oraclequestion.raising"
+import { SCENE } from '../../../constants'
+import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../../conditions'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { randomOracleQuestions } from './oracle.constants'
+import { thinkRandomNumber } from './oracle.utils'
+import { oracleQuestionRaising } from './oraclequestion.raising'
 
 //ORACLE_QUESTION
 export const oracleQuestion = (gamestate, title) => {
@@ -60,7 +60,7 @@ export const oracleQuestion = (gamestate, title) => {
         newGamestate.players[token].player_history[title].oracle = narration[1]
         interaction = oracleQuestionRaising(newGamestate, token, title)
       } else {
-        console.log("do nothing")
+        console.log('do nothing')
       }
   
       scene.push({ type: SCENE, title, token, narration, interaction })

@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { witchInteraction } from "./witch.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { witchInteraction } from './witch.interaction'
 
 export const witch = (gamestate, title) => {
   const newGamestate = { ...gamestate }

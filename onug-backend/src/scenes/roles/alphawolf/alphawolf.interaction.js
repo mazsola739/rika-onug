@@ -1,5 +1,5 @@
-import { generateRoleInteraction } from "../../sceneUtils"
-import { getNonWerewolfPlayerNumbersByRoleIdsWithNoShield } from "./alphawolf.utils"
+import { generateRoleInteraction } from '../../sceneUtils'
+import { getNonWerewolfPlayerNumbersByRoleIdsWithNoShield } from './alphawolf.utils'
 
 export const alphawolfInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

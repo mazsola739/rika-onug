@@ -1,6 +1,6 @@
-import { SCENE } from "../../../constants"
-import { getPlayerNumberWithMatchingToken, getMarksByPositions, formatPlayerIdentifier, generateRoleInteraction } from "../../sceneUtils"
-import { validateMarkSelection } from "../../validators"
+import { SCENE } from '../../../constants'
+import { getPlayerNumberWithMatchingToken, getMarksByPositions, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { validateMarkSelection } from '../../validators'
 
 export const pickpocketResponse = (gamestate, token, selected_mark_positions, title) => {
   if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {

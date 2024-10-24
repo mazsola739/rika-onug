@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { apprenticeseerInteraction } from "../apprenticeseer/apprenticeseer.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { apprenticeseerInteraction } from '../apprenticeseer/apprenticeseer.interaction'
 
 export const rapscallion = (gamestate, title) => {
   const newGamestate = { ...gamestate }

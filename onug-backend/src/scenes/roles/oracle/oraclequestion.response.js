@@ -1,7 +1,7 @@
-import { SCENE } from "../../../constants"
-import { generateRoleInteraction } from "../../sceneUtils"
-import { validateAnswerSelection } from "../../validators"
-import { formatOracleAnswer } from "./oracle.utils"
+import { SCENE } from '../../../constants'
+import { generateRoleInteraction } from '../../sceneUtils'
+import { validateAnswerSelection } from '../../validators'
+import { formatOracleAnswer } from './oracle.utils'
 
 export const oracleQuestionResponse = (gamestate, token, selected_answer, title) => {
     if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {

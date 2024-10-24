@@ -16,7 +16,7 @@ export const leaveTable = async (ws, message) => {
       JSON.stringify({
         type: HYDRATE_TABLE,
         success: false,
-        errors: ["Player not found at the table."],
+        errors: ['Player not found at the table.'],
       })
     )
   }

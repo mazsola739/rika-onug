@@ -1,5 +1,5 @@
-import { CENTER_CARD_POSITIONS } from "../../../constants"
-import { generateRoleInteraction } from "../../sceneUtils"
+import { CENTER_CARD_POSITIONS } from '../../../constants'
+import { generateRoleInteraction } from '../../sceneUtils'
 
 export const apprenticeseerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

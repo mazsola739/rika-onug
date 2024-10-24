@@ -1,6 +1,6 @@
-import { IDS, SCENE } from "../../../constants"
-import { getAllPlayerTokens, getSceneEndTime } from "../../sceneUtils"
-import { supervillainsInteraction } from "./supervillains.interaction"
+import { IDS, SCENE } from '../../../constants'
+import { getAllPlayerTokens, getSceneEndTime } from '../../sceneUtils'
+import { supervillainsInteraction } from './supervillains.interaction'
 
 export const supervillains = (gamestate, title) => {
   const newGamestate = { ...gamestate }

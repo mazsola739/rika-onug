@@ -1,5 +1,5 @@
-import { generateRoleInteraction } from "../../sceneUtils"
-import { getNonVillainPlayerNumbersByRoleIdsWithNoShield } from "./temptress.utils"
+import { generateRoleInteraction } from '../../sceneUtils'
+import { getNonVillainPlayerNumbersByRoleIdsWithNoShield } from './temptress.utils'
 
 export const temptressInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

@@ -1,7 +1,7 @@
-import { VOTE, SCENE } from "../../../constants"
-import { webSocketServerConnectionsPerRoom } from "../../../websocket/connections"
-import { addVote, getVampirePlayerNumbersByRoleIds, getPlayerTokensByPlayerNumber, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
-import { validateMarkSelection } from "../../validators"
+import { VOTE, SCENE } from '../../../constants'
+import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
+import { addVote, getVampirePlayerNumbersByRoleIds, getPlayerTokensByPlayerNumber, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { validateMarkSelection } from '../../validators'
 
 export const vampiresResponse = (gamestate, token, selected_mark_positions, title) => {
   if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {

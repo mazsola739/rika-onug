@@ -1,4 +1,4 @@
-import { findMostVoted, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
+import { findMostVoted, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 
 export const vampiresVoteResult = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

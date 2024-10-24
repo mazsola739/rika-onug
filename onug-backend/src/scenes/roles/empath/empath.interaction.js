@@ -1,4 +1,4 @@
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from "../../sceneUtils"
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
 
 export const empathInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

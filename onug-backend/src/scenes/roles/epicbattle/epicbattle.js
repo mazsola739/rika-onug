@@ -1,7 +1,7 @@
-import { SCENE } from "../../../constants"
-import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from "../../sceneUtils"
-import { everyonemarkInteraction } from "../everyonemark/everyonemark.interaction"
-import { random_easteregg_nobadguys, random_easteregg_nogoodguys } from "./epicbattle.constants"
+import { SCENE } from '../../../constants'
+import { getAllPlayerTokens, getRandomItemFromArray, getSceneEndTime } from '../../sceneUtils'
+import { everyonemarkInteraction } from '../everyonemark/everyonemark.interaction'
+import { random_easteregg_nobadguys, random_easteregg_nogoodguys } from './epicbattle.constants'
 
 export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
   if (hasEpicBattle) {

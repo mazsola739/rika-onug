@@ -23,7 +23,7 @@ export const updateRoom = async (message) => {
 
   totalPlayers = determineTotalPlayers(newGamestate.selected_cards.length, newGamestate.selected_cards)
 
-  if (totalPlayers > 12) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors: ["Cannot have more than 12 players."] })
+  if (totalPlayers > 12) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors: ['Cannot have more than 12 players.'] })
 
   const players = getPlayerNames(newGamestate)
 

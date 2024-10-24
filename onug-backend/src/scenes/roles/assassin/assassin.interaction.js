@@ -1,4 +1,4 @@
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, generateRoleInteraction } from "../../sceneUtils"
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, generateRoleInteraction } from '../../sceneUtils'
 
 export const assassinInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

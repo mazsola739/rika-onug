@@ -1,6 +1,6 @@
-import { SCENE } from "../../../constants"
-import { getCardIdsByPositions, getPlayerNumberWithMatchingToken, generateRoleInteraction, formatPlayerIdentifier, getMarksByPositions } from "../../sceneUtils"
-import { validateCardSelection, validateMarkSelection } from "../../validators"
+import { SCENE } from '../../../constants'
+import { getCardIdsByPositions, getPlayerNumberWithMatchingToken, generateRoleInteraction, formatPlayerIdentifier, getMarksByPositions } from '../../sceneUtils'
+import { validateCardSelection, validateMarkSelection } from '../../validators'
 
 export const marksmanResponse = (gamestate, token, selected_card_positions = [], selected_mark_positions = [], title) => {
   if (selected_card_positions && selected_card_positions.length > 0) {
