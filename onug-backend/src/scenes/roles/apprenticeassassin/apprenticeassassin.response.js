@@ -43,7 +43,6 @@ export const apprenticeassassinResponse = (gamestate, token, selected_mark_posit
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
-    uniqueInformations: { mark_of_assassin: [selected_mark_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

@@ -2,6 +2,7 @@ import { SCENE } from '../../../constants'
 import { getPlayerNumberWithMatchingToken, getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
+//TODO neighbors
 export const morticianResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
@@ -41,7 +42,6 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(cardPositions)],
     showCards: viewCards,
-    uniqueInformations: { mortician: cardPositions },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

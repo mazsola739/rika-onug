@@ -52,7 +52,6 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message : ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length >= 2 ? formatPlayerIdentifier(selected_card_positions)[1] : '', showCards.length === 3 ? formatPlayerIdentifier(selected_card_positions)[2] : '' ],
     showCards,
-    uniqueInformations: { nostradamus: showCards.length === 3 ? selected_card_positions.slice(0, 3) : showCards.length === 2 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

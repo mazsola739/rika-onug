@@ -30,6 +30,7 @@ export const TableFooter: React.FC = observer(() => {
                   {/* shield */}
                 </Tokens>
                 <Player>Role: {roleName}</Player>
+                <Player>Team: {player.player_team}</Player>
               </PlayerInfo>
               <Card image={card.card_name} size={130} />
               <PlayerCardRule>{card.rules}</PlayerCardRule>

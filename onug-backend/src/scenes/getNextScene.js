@@ -10,8 +10,6 @@ export const getNextScene = gamestate => {
 
     let newGamestate = { ...gamestate }
 
-    const startTime = Date.now()
-    newGamestate.actual_scene.scene_start_time = startTime
     newGamestate.actual_scene.scene_number++
 
     newGamestate = scene(newGamestate)

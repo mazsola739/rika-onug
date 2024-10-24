@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ARRIVE_VOTING, STAGES } from 'constant'
+import { ARRIVE_VOTE, STAGES } from 'constant'
 import { wsStore, boardStore } from 'store'
 
 export const useVote = () => {
@@ -15,7 +15,7 @@ export const useVote = () => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       sendJsonMessage?.({
-        type: ARRIVE_VOTING,
+        type: ARRIVE_VOTE,
         stage: STAGES.VOTING,
         room_id,
         token,

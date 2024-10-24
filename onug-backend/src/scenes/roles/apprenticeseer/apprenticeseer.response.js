@@ -27,7 +27,6 @@ export const apprenticeseerResponse = (gamestate, token, selected_card_positions
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
     showCards: viewCards,
-    uniqueInformations: { seer: [selected_card_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

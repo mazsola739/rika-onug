@@ -1,0 +1,35 @@
+{
+    "type": "SCENE",
+    "title": "INSOMNIAC",
+    "token": "c30c0c77-67a6-460d-b892-facfb5a60f39",
+    "narration": [
+        "doppelganger_insomniac_kickoff_text",
+        "insomniac_kickoff2_text"
+    ],
+    "interaction": {
+        "private_message": [
+            "interaction_own_card"
+        ],
+        "shielded_cards": [],
+        "artifacted_cards": [],
+        "show_cards": [
+            {
+                "player_1": 4
+            }
+        ],
+        "show_marks": [],
+        "bear": [
+            "player_1"
+        ],
+        "thumb": [],
+        "player": {
+            "player_name": "Lidérc",
+            "player_number": 1,
+            "player_original_id": 4,
+            "player_card_id": 4,
+            "player_role": "INSOMNIAC",
+            "player_role_id": 4,
+            "player_team": "village"
+        }
+    }
+}

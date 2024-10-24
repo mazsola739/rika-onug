@@ -1,5 +1,7 @@
 import { findMostVoted, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 
+
+//TODO better votes for new vampire
 export const vampiresVoteResult = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
@@ -20,6 +22,5 @@ export const vampiresVoteResult = (gamestate, token, title) => {
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_mark_of_vampire', formatPlayerIdentifier(mostVotedPlayer)[0]],
-    uniqueInformations: { mark_of_vampire: [mostVotedPlayer[0]] },
   })
 }

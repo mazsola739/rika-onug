@@ -33,7 +33,6 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_marks', ...messageIdentifiers, 'interaction_own_mark'],
     showMarks: viewMarks,
-    uniqueInformations: { robber: [currentPlayerNumber, selected_mark_positions[0]], },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

@@ -1,5 +1,5 @@
 import { SCENE } from '../../../constants'
-import { getPlayerNumberWithMatchingToken, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const priestResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -10,7 +10,6 @@ export const priestResponse = (gamestate, token, selected_mark_positions, title)
   const newGamestate = { ...gamestate }
   const scene = []
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
   const selectedPositionMark = newGamestate.card_positions[selected_mark_positions[0]].mark
 
   if (gamestate.players[token].card.player_original_id === 1) {
@@ -30,7 +29,6 @@ export const priestResponse = (gamestate, token, selected_mark_positions, title)
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_mark_of_clarity', formatPlayerIdentifier(selected_mark_positions)[0]],
-    uniqueInformations: { mark_of_clarity: [currentPlayerNumber, selected_mark_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

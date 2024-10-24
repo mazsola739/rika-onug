@@ -1,4 +1,4 @@
-import { ARRIVE_DEALING, HYDRATE_READY, HYDRATE_TABLE, REDIRECT, STAGES } from 'constant'
+import { ARRIVE_TABLE, HYDRATE_READY, HYDRATE_TABLE, REDIRECT, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { boardStore, wsStore } from 'store'
@@ -18,7 +18,7 @@ export const useTable = () => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       sendJsonMessage({
-        type: ARRIVE_DEALING,
+        type: ARRIVE_TABLE,
         stage: STAGES.DEALING,
         token,
         room_id,

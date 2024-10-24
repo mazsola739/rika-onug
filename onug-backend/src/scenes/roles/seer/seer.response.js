@@ -40,7 +40,6 @@ export const seerResponse = (gamestate, token, selected_card_positions, title) =
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     showCards,
-    uniqueInformations: { seer: title === 'SEER' ? viewedCards : [], detector: title === 'DETECTOR' ? viewedCards : []},
   })
 
   scene.push({ type: SCENE, title, token, interaction })

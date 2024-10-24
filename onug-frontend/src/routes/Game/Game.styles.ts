@@ -5,7 +5,7 @@ export const StyledGame = styled.div`
   min-width: 100%;
   display: grid;
   grid-template-columns: 170px calc(100vw - 340px) 170px;
-  grid-template-rows: 80px 150px calc(100vh - 450px) 220px;
+  grid-template-rows: 80px 170px calc(100vh - 470px) 220px;
 
   header {
     grid-area: 1 / 1 / 2 / 4;
@@ -32,7 +32,8 @@ export const StyledGameHeader = styled.div`
   display: flex;
   flex-direction: row;
   color: white;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
 `
 
 export const Narration = styled.div`
@@ -45,8 +46,9 @@ export const TableCenter = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
 `
 
 //FOOTER

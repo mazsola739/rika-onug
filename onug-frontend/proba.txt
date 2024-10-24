@@ -1,0 +1,173 @@
+0: GAME_START - 
+1: EPIC_BATTLE - 
+
+
+2: ORACLE_QUESTION             - MUST
+3: ORACLE_ANSWER               - MUST center or player card view  -------moving card? no  ---------moving mark? no
+4: COPYCAT                     - MUST center card view            -------moving card? no  ---------moving mark? no
+5: MIRROR_MAN                  - MUST center card view            -------moving card? no  ---------moving mark? no
+6: DOPPELGÄNGER                - MUST player card view            -------moving card? no  ---------moving mark? no
+7: DOPPELGÄNGER_INSTANT_ACTION - MUST can be any action           -------moving card? possible  ---------moving mark? possible
+
+
+
+8: VAMPIRES                - MUST change center mark to player               -------moving card? no  ---------moving mark? yes
+9: VAMPIRES_VOTE           - MUST change center mark to player               -------moving card? no  ---------moving mark? yes
+10: THE_COUNT              - MUST change center mark to player               -------moving card? no  ---------moving mark? yes
+11: DOPPELGÄNGER_THE_COUNT - MUST change center mark to player               -------moving card? no  ---------moving mark? yes
+12: RENFIELD               - MUST see vampires + change center mark with own -------moving card? no  ---------moving mark? yes
+13: DISEASED               - MUST change center mark to players              -------moving card? no  ---------moving mark? yes
+14: CUPID                  - MUST change center mark to player               -------moving card? no  ---------moving mark? yes
+15: INSTIGATOR             - MAY change center mark to player                -------moving card? no  ---------moving mark? yes
+16: PRIEST                 - change center mark MAY other and MUST own       -------moving card? no  ---------moving mark? yes
+17: DOPPELGÄNGER_PRIEST    - change center mark MAY other and MUST own       -------moving card? no  ---------moving mark? yes
+18: ASSASSIN               - MUST change center mark to player               -------moving card? no  ---------moving mark? yes
+19: DOPPELGÄNGER_ASSASSIN  - MUST change center mark to player               -------moving card? no  ---------moving mark? yes
+20: APPRENTICE_ASSASSIN              - MUST see assassin - MAY change center mark with player -------moving card? no  ---------moving mark? yes
+21: DOPPELGÄNGER_APPRENTICE_ASSASSIN - MUST see assassin - MAY change center mark with player -------moving card? no  ---------moving mark? yes
+
+
+
+22: EVERYONE_MARK - MUST see mark      -------moving card? no  ---------moving mark? no
+23: LOVERS        - MUST see lovers    -------moving card? no  ---------moving mark? no
+24: SENTINEL      - MAY shield player  -------moving card? no  ---------moving mark? no  -------SHIELD
+
+
+
+25: ALIENS            - MUST see     -------moving card? no  ---------moving mark? no
+26: ALIENS_VOTE       - MUST or MAY  -------moving card? no  ---------moving mark? no
+27: COW               - MUST tap     -------moving card? no  ---------moving mark? no
+28: GROOB_ZERB        - MUST see     -------moving card? no  ---------moving mark? no
+29: LEADER            - MUST see     -------moving card? no  ---------moving mark? no
+30: LEADER_ZERB_GROOB - MUST see     -------moving card? no  ---------moving mark? no
+
+31: BODY_SNATCHER     - MUST change player or center card MUST to see  -------moving card? yes  ---------moving mark? no
+
+
+
+32: DOPPELGÄNGER_BODY_SNATCHER - MUST change player or center card MUST to see -------moving card? yes  ---------moving mark? no
+
+
+
+33: SUPER_VILLAINS - MUST see and together open eyed     -------moving card? no  ---------moving mark? no
+34: TEMPTRESS      - MUST change center card with player -------moving card? yes  ---------moving mark? no
+35: DR_PEEKER      - MAY view player card                -------moving card? no  ---------moving mark? no
+36: RAPSCALLION    - MAY view center                     -------moving card? no  ---------moving mark? no
+37: EVILOMETER     - MUST see                            -------moving card? no  ---------moving mark? no
+
+
+
+38: WEREWOLVES - MUST see - alone MAY view center -------moving card? no  ---------moving mark? no
+39: ALPHA_WOLF - MUST change center               -------moving card? yes  ---------moving mark? no
+
+
+
+40: MYSTIC_WOLF             - MAY view player card           -------moving card? no  ---------moving mark? no
+41: MINION                  - MUST see                       -------moving card? no  ---------moving mark? no
+42: APPRENTICE_TANNER       - MUST see                       -------moving card? no  ---------moving mark? no
+43: MAD_SCIENTIST           - no open eyes only narration    -------moving card? no  ---------moving mark? no
+44: INTERN                  - MUST see                       -------moving card? no  ---------moving mark? no
+45: MASONS                  - MUST see                       -------moving card? no  ---------moving mark? no
+46: THING                   - MUST bump                      -------moving card? no  ---------moving mark? no
+47: ANNOYING_LAD            - MUST bump                      -------moving card? no  ---------moving mark? no
+48: SEER                    - MAY view player or center card -------moving card? no  ---------moving mark? no
+49: APPRENTICE_SEER         - MAY view center                -------moving card? no  ---------moving mark? no
+50: PARANORMAL_INVESTIGATOR - MAY view card(s)               -------moving card? no  ---------moving mark? no
+51: MARKSMAN                - MAY view card or mark          -------moving card? no  ---------moving mark? no 
+52: NOSTRADAMUS             - MUST view card(s)              -------moving card? no  ---------moving mark? no
+53: NOSTRADAMUS_REACTION    - MUST narration                 -------moving card? no  ---------moving mark? no
+54: PSYCHIC                 - MAY view card(s)               -------moving card? no  ---------moving mark? no
+55: DOPPELGÄNGER_PSYCHIC    - MAY view card(s)               -------moving card? no  ---------moving mark? no
+56: DETECTOR                - MAY view player or center card -------moving card? no  ---------moving mark? no
+
+
+
+57: ROBBER                  - MAY change and MUST view -------moving card? yes  ---------moving mark? no
+
+
+
+58: WITCH                   - MAY view and MUST change -------moving card? yes  ---------moving mark? no
+59: PICKPOCKET              - MAY change and MUST view -------moving card? no  ---------moving mark? yes
+
+
+
+60: DOPPELGÄNGER_PICKPOCKET - MAY change and MUST view -------moving card? no  ---------moving mark? yes
+
+
+
+61: ROLE_RETRIEVER          - MAY change and MUST view -------moving card? yes  ---------moving mark? no
+
+
+
+62: VOODOO_LOU              - MAY view and MUST change -------moving card? yes  ---------moving mark? no
+
+
+
+63: TROUBLEMAKER            - MAY change cards -------moving card? yes  ---------moving mark? no
+64: VILLAGE_IDIOT           - MAY move cards   -------moving card? yes  ---------moving mark? no
+65: AURA_SEER               - MUST see         -------moving card? no  ---------moving mark? no
+66: GREMLIN                 - MAY change mark or card -------moving card? yes  ---------moving mark? yes
+
+
+
+67: DOPPELGÄNGER_GREMLIN    - MAY change mark or card -------moving card? yes  ---------moving mark? yes
+
+
+
+68: RASCAL                  - MAY and/or MUST  -------moving card? yes  ---------moving mark? no
+69: DOPPELGÄNGER_RASCAL     - MAY and/or MUST  -------moving card? yes  ---------moving mark? no
+70: SWITCHEROO              - MAY change cards -------moving card? yes  ---------moving mark? no
+71: DRUNK                   - MUST change own  -------moving card? yes  ---------moving mark? no
+
+
+
+72: INSOMNIAC             - MUST view own card    -------moving card? no  ---------moving mark? no
+73: SELF_AWARENESS_GIRL   - MUST view own card    -------moving card? no  ---------moving mark? no
+74: SQUIRE                - MUST see and MAY view -------moving card? no  ---------moving mark? no
+75: BEHOLDER              - MUST see and MAY view -------moving card? no  ---------moving mark? no
+
+76: REVEALER              - MAY flip card (and MUST flip back) -------moving card? yes  ---------moving mark? no
+
+
+
+77: DOPPELGÄNGER_REVEALER - MAY flip card (and MUST flip back) -------moving card? yes  ---------moving mark? no
+
+
+
+78: EXPOSER               - MUST flip center card(s) -------moving card? yes  ---------moving mark? no
+
+
+
+79: DOPPELGÄNGER_EXPOSER  - MUST flip center card(s) -------moving card? yes  ---------moving mark? no
+
+
+
+80: FLIPPER               - MAY flip card (and MUST flip back) -------moving card? yes  ---------moving mark? no
+
+
+
+81: DOPPELGÄNGER_FLIPPER     - MAY flip card (and MUST flip back) -------moving card? yes  ---------moving mark? no
+
+
+
+82: EMPATH                   - MUST point closed eye -------moving card? no  ---------moving mark? no
+83: EMPATH_VOTE              - MUST see              -------moving card? no  ---------moving mark? no
+84: DOPPELGÄNGER_EMPATH      - MUST point            -------moving card? yes  ---------moving mark? no
+85: DOPPELGÄNGER_EMPATH_VOTE - MUST see              -------moving card? yes  ---------moving mark? no
+
+
+
+86: CURATOR                  - MAY place artifact    -------moving card? no  ---------moving mark? no ARTIFACT
+
+
+
+87: DOPPELGÄNGER_CURATOR     - MAY place artifact           -------moving card? no  ---------moving mark? no ARTIFACT
+88: BLOB                     - no open eyes only narration  -------moving card? no  ---------moving mark? no
+
+
+
+89: MORTICIAN                - MAY view                     -------moving card? no  ---------moving mark? no
+90: DOPPELGÄNGER_MORTICIAN   - MAY view                     -------moving card? no  ---------moving mark? no
+91: FAMILY_MAN               - no open eyes only narration  -------moving card? no  ---------moving mark? no
+92: RIPPLE - 
+93: JOKE - 

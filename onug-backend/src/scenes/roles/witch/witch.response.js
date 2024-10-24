@@ -35,7 +35,6 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
       selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 1, center: 0 } },
       showCards,
-      uniqueInformations: { witch: title === 'WITCH' ? [selected_card_positions[0]] : [], voodoo: title === 'VOODOO' ? [selected_card_positions[0]] : [], },
     })
 
     scene.push({ type: SCENE, title, token, interaction })
@@ -69,7 +68,6 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
 
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers],
-      uniqueInformations: { witch: title === 'WITCH' ? [newGamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0]] : [], voodoo: title === 'VOODOO' ? [newGamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0]] : [], },
     })
 
     scene.push({ type: SCENE, title, token, interaction })

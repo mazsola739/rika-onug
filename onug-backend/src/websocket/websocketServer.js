@@ -1,7 +1,7 @@
 
 import WebSocket from 'ws'
 import { logTrace, logError, logErrorWithStack } from '../log'
-import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_DEALING, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME, PAUSE_GAME, STOP_GAME, RELOAD, SCENE, ARRIVE_VOTING } from '../constants'
+import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_TABLE, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME, PAUSE_GAME, STOP_GAME, RELOAD, SCENE, ARRIVE_VOTE } from '../constants'
 import { hydrateRoom } from './hydrateRoom'
 import { reset } from './reset'
 import { updateRoom } from './updateRoom'
@@ -25,7 +25,7 @@ export const websocketServer = (port) => {
     const wss = new WebSocket.WebSocketServer({ port })
     wss.on('connection', function connection(ws) {
       ws.on('close', () => {
-        logTrace('Client disconnected')
+        logTrace(`client: ${ws.token} connection lost / disconnected`)
       })
       ws.onerror = function () {
         logError('Some Error occurred')
@@ -45,14 +45,14 @@ export const websocketServer = (port) => {
         if (message.type === LEAVE_TABLE)       return leaveTable(ws, message)
         if (message.type === RESET)             return reset(message)
         if (message.type === ARRIVE_ROOM)       return hydrateRoom(ws, message)
-        if (message.type === ARRIVE_DEALING)    return hydrateTable(ws, message)
+        if (message.type === ARRIVE_TABLE)      return hydrateTable(ws, message)
         if (message.type === READY)             return ready(message)
         if (message.type === START_GAME)        return startGame(ws, message)
         if (message.type === ARRIVE_GAME)       return hydrateGame(ws, message)
         if (message.type === PAUSE_GAME)        return pauseGame(message)
         if (message.type === STOP_GAME)         return stopGame(message)
         if (message.type === SCENE)             return interaction(ws)
-        if (message.type === ARRIVE_VOTING)     return hydrateVote(ws, message)
+        if (message.type === ARRIVE_VOTE)       return hydrateVote(ws, message)
       })
     })
   } catch (error) {

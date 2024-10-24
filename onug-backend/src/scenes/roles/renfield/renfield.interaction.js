@@ -27,6 +27,6 @@ export const renfieldInteraction = (gamestate, token, title) => {
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_vampires', 'interaction_mark_of_bat'],
-    uniqueInformations: { vampires, new_vampire: newVampire, mark_of_bat: [currentPlayerNumber] },
+    uniqueInformations: { vampires, new_vampire: newVampire, },
   })
 }

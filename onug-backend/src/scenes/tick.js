@@ -25,10 +25,7 @@ export const tick = async (room_id) => {
 
   const actualScene = {
     scene_number: newGamestate.actual_scene.scene_number,
-    scene_start_time: newGamestate.actual_scene.scene_start_time,
     scene_title: newGamestate.actual_scene.scene_title,
-    scene_end_time: newGamestate.actual_scene.scene_end_time,
-    remaining_time: tickTime,
   }
 
   newGamestate.actual_scene = actualScene

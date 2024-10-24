@@ -2,6 +2,8 @@ import { SCENE } from '../../../constants'
 import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
+
+//TODO uniqInformations
 export const oracleAnswerResponse = (gamestate, token, selected_card_positions, title) => {
     if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
       return gamestate
@@ -33,7 +35,6 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
   
       interaction = generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_swapped_cards', ...messageIdentifiers],
-        uniqueInformations: { oracle: [currentPlayerNumber, selected_card_positions[0]] },
       })
     } else if (oracleQuestion === 'oracle_viewcenter_text') {
       const limit = +oracleAftermath.replace('oracle_view_yes', '').replace('_text', '')
@@ -53,7 +54,6 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
       interaction = generateRoleInteraction(newGamestate, token, {
         private_message: message,
         showCards: selectedCards,
-        uniqueInformations: { nostradamus: selectedCardPositions },
       })
     }
   

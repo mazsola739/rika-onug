@@ -54,8 +54,10 @@ export const generateRoleInteraction = (gamestate, token, {
   return {
     private_message,
     ...informations,
-    player_name: gamestate.players[token].name,
-    player_number: gamestate.players[token].player_number,
-    ...gamestate.players[token].card,
+    player: {
+      player_name: gamestate.players[token].name,
+      player_number: gamestate.players[token].player_number,
+      ...gamestate.players[token].card,
+    },
   }
 }

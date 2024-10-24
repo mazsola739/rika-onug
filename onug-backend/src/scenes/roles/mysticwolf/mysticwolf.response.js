@@ -27,7 +27,6 @@ export const mysticwolfResponse = (gamestate, token, selected_card_positions, ti
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
       showCards: viewCards,
-      uniqueInformations: { mystic: title === 'MYSTIC_WOLF' ? [selected_card_positions[0]] : [], peeker: title === 'DR_PEEKER' ? [selected_card_positions[0]] : [], },
     })
   
     scene.push({ type: SCENE, title, token, interaction })

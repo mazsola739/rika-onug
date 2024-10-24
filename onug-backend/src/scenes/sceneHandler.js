@@ -3,7 +3,7 @@ import { logInfo } from '../log'
 import * as conditions from './conditions'
 
 //! todo save interaction identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
-//TODO delete 
+//TODO 
 //! TODO if must action, random selecting?
 //? TODO better private message, private message generator?
 
@@ -14,14 +14,14 @@ export const sceneHandler = gamestate => {
   const total_players = newGamestate.total_players
 
   switch (scene_title) {
-    case 'EPIC_BATTLE':
+    case 'EPIC_BATTLE': 
       if (conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players)) {
         newGamestate.actual_scene.started = true
         return roles.epicbattle(newGamestate, scene_title, conditions.hasEasterEgg(selected_cards, total_players), conditions.hasEpicBattle(selected_cards), total_players, !conditions.hasGoodGuys(selected_cards), !conditions.hasBadGuys(selected_cards))
       }
       break
 
-    case 'ORACLE_QUESTION':
+    case 'ORACLE_QUESTION': //MUST
       if (conditions.hasOracle(selected_cards)) {
         newGamestate.actual_scene.started = true
         return roles.oracleQuestion(newGamestate, scene_title)

@@ -1,6 +1,6 @@
-import { SCENE } from '../../../constants'
-import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
-import { validateCardSelection } from '../../validators'
+import { SCENE } from "../../../constants"
+import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from "../../sceneUtils"
+import { validateCardSelection } from "../../validators"
 
 export const exposerResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
@@ -30,7 +30,6 @@ export const exposerResponse = (gamestate, token, selected_card_positions, title
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_flipped_card', formatPlayerIdentifier(cardPositions)],
     showCards: revealedCards,
-    uniqueInformations: { idcard: cardPositions },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

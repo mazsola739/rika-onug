@@ -34,7 +34,6 @@ export const robberResponse = (gamestate, token, selected_card_positions, title)
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
     showCards,
-    uniqueInformations: { robber: title === 'ROBBER' ? [currentPlayerNumber, selected_card_positions[0]] : [], dog: title === 'ROLE_RETRIEVER' ? [currentPlayerNumber, selected_card_positions[0]] : [], },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

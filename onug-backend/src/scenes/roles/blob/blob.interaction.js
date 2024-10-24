@@ -8,13 +8,13 @@ export const blobInteraction = (gamestate, token, title) => {
   
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
-      blob: partOfBlob,
+      part_of_blob: partOfBlob,
     }
   
     const messageIdentifiers = formatPlayerIdentifier(partOfBlob)
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_part_of_blob', ...messageIdentifiers],
-      uniqueInformations: { blob: partOfBlob },
+      uniqueInformations: { part_of_blob: partOfBlob },
     })
   }

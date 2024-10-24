@@ -8,11 +8,11 @@ export const familymanInteraction = (gamestate, token, title) => {
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
-    family: partOfFamily,
+    part_of_family: partOfFamily,
   }
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_part_of_family'],
-    uniqueInformations: { family: partOfFamily, },
+    uniqueInformations: { part_of_family: partOfFamily, },
   })
 }

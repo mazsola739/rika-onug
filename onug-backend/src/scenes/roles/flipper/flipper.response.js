@@ -35,7 +35,6 @@ export const flipperResponse = (gamestate, token, selected_card_positions, title
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_flipped_card', formatPlayerIdentifier(selected_card_positions)[0]],
     showCards: revealedCard,
-    uniqueInformations: { idcard: [selected_card_positions[0]] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

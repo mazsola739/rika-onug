@@ -40,7 +40,6 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
 
       interaction = generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_swapped_cards', ...messageIdentifiers],
-        uniqueInformations: { prank: [position1, position2] },
       })
 
       break }
@@ -69,7 +68,6 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
           private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
           selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 1, center: 0 } },
           showCards,
-          uniqueInformations: { prank: [selected_card_positions[0]], witch_answer: true },
         })
 
       } else if (newGamestate.players[token].player_history[title].witch_answer) {
@@ -96,7 +94,6 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
 
         interaction = generateRoleInteraction(newGamestate, token, {
           private_message: ['interaction_swapped_cards', ...messageIdentifiers],
-          uniqueInformations: { prank: [newGamestate.players[token].player_history[title].selected_card, selected_card_positions[0]] },
         })
 
       }
@@ -132,7 +129,6 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
       interaction = generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_swapped_cards', ...messageIds, newGamestate.players[token].player_history[title].random === 'robber' ? 'interaction_own_card' : ''],
         showCards: newGamestate.players[token].player_history[title].random === 'robber' ? showCards : undefined,
-        uniqueInformations: { prank: [currentPlayerNumber, selectedPosition] },
       })
 
       break }

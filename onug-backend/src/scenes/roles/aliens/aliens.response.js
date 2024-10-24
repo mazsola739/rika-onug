@@ -31,7 +31,8 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
   
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
-      uniqueInformations: { aliens, alienhand: showCards },
+      showCards,
+      uniqueInformations: { aliens },
     })
   
     scene.push({ type: SCENE, title, token, interaction })

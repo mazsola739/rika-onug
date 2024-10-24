@@ -6,15 +6,15 @@ export const LEAVE_ROOM = 'LEAVE_ROOM'
 
 export const ARRIVE_LOBBY = 'ARRIVE_LOBBY'
 export const ARRIVE_ROOM = 'ARRIVE_ROOM'
-export const ARRIVE_DEALING = 'ARRIVE_DEALING'
+export const ARRIVE_TABLE = 'ARRIVE_TABLE'
 export const ARRIVE_GAME = 'ARRIVE_GAME'
-export const ARRIVE_VOTING = 'ARRIVE_VOTING'
+export const ARRIVE_VOTE = 'ARRIVE_VOTE'
 
 export const HYDRATE_LOBBY = 'HYDRATE_LOBBY'
 export const HYDRATE_ROOM = 'HYDRATE_ROOM'
 export const HYDRATE_TABLE = 'HYDRATE_TABLE'
 export const HYDRATE_GAME = 'HYDRATE_GAME'
-export const HYDRATE_VOTING = 'HYDRATE_VOTING'
+export const HYDRATE_VOTE = 'HYDRATE_VOTE'
 
 export const UPDATE_ROOM = 'UPDATE_ROOM'
 export const RESET = 'RESET'

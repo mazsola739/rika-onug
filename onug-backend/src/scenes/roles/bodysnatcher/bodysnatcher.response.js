@@ -37,7 +37,6 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
       showCards,
-      uniqueInformations: { swap: [currentPlayerNumber, selected_card_positions[0]], alienhand: [currentPlayerNumber] },
     })
   
     scene.push({ type: SCENE, title, token, interaction })

@@ -2,6 +2,8 @@ import { IDS, SCENE } from '../../../constants'
 import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
+
+//TODO show cards
 export const paranormalinvestigatorResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
@@ -45,7 +47,6 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length === 2 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     showCards,
-    uniqueInformations: { investigator: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
   })
 
   scene.push({ type: SCENE, title, token, interaction })

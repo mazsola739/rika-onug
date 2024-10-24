@@ -18,7 +18,6 @@ export const leaderZerbgroobInteraction = (gamestate, token, title) => {
 
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_zerbgroob', ...messageIdentifiers],
-      uniqueInformations: { groobzerb: zerbgroob },
     })
   } else {
     newGamestate.players[token].player_history[title] = {

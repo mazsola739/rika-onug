@@ -99,14 +99,12 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
       ...newGamestate.players[token].player_history[title],
       viewed_cards: showCards,
       selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: limit } },
-      uniqueInformations: { oracle: showCards },
     }
   
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: privateMessage,
       showCards,
       selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: limit } },
-      uniqueInformations: { oracle: showCards },
     })
   
     scene.push({ type: SCENE, title, token, interaction })
