@@ -39,7 +39,6 @@ export const useGame = () => {
 
     if (lastJsonMessage?.type === HYDRATE_GAME) {
       narrationStore.setTitle(lastJsonMessage.actual_scene.scene_title)
-      gamePlayStore.addRemainingTimeToStore(lastJsonMessage.actual_scene.remaining_time)
     }
 
     if (lastJsonMessage?.type === MESSAGE) {
@@ -51,7 +50,6 @@ export const useGame = () => {
     }
 
     if (lastJsonMessage?.type === PAUSE_GAME) {
-      gamePlayStore.addRemainingTimeToStore(lastJsonMessage.actual_scene.remaining_time)
       gamePlayStore.toggleIsRunning()
     }
   }, [lastJsonMessage, navigate])

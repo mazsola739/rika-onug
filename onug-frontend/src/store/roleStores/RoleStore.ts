@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { boardStore, interactionStore } from 'store'
+import { interactionStore } from 'store'
 import { WsJsonMessage } from 'types'
 
 class RoleStore {

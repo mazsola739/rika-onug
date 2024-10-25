@@ -1,4 +1,4 @@
-import { makeObservable, observable, action, observe } from 'mobx'
+import { makeObservable, observable, action } from 'mobx'
 import { WsJsonMessage } from 'types'
 import { doppelgangerStore, roleStore } from './roleStores'
 import * as constants from '../constant'

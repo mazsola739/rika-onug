@@ -30,7 +30,7 @@ export const seerResponse = (gamestate, token, selected_card_positions, title) =
 
   newGamestate.players[token].card_or_mark_action = true
 
-  const viewedCards = showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0]
+  /*TODO const viewedCards = showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] */
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],

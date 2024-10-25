@@ -22,24 +22,34 @@ export type ActualSceneType = {
   scene_title: string
 }
 
+type PlayerPosition = 'player_1' | 'player_2' | 'player_3' | 'player_4' | 'player_5' | 'player_6' | 'player_7' | 'player_8' | 'player_9' | 'player_10' | 'player_11' | 'player_12'
+
 export type InteractionType = {
+  title?: string
   private_message?: string[],
-  shielded_cards?: [],
-  artifacted_cards?: [],
-  show_cards?: [],
-  show_marks?: [],
+  shielded_cards?: string[],
+  artifacted_cards?: string[],
+  show_cards?: Record<PlayerPosition, number>[],
+  show_marks?: Record<PlayerPosition, string>[],
   selectable_cards?: string[],
   selectable_card_limit?: {
-      player?: number,
-      center?: number
+    player: number,
+    center: number
   },
+  selectable_mark_limit?: {
+    mark: number
+},
   player?: PlayerType
+
+  new_role_id?: number
+
+  answer_options?: string[]
 }
 
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
 export type WsJsonMessage = {
-  type: string,
+  type?: string,
   update?: boolean,
   message?: string,
   path?: string

@@ -24,11 +24,11 @@ export const useVote = () => {
   }, [sendJsonMessage, firstTime])
 
   useEffect(() => {
-    if (!lastJsonMessage?.player_history) return
+    if (!lastJsonMessage?.player.player_history) return
     setHistory(
-      Object.keys(lastJsonMessage.player_history).length === 0
+      Object.keys(lastJsonMessage.player.player_history).length === 0
         ? 'You have slept through the night'
-        : JSON.stringify(lastJsonMessage.player_history, null, 2)
+        : JSON.stringify(lastJsonMessage.player.player_history, null, 2)
     )
   }, [lastJsonMessage])
 

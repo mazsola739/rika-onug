@@ -1,19 +1,16 @@
-import { tick } from './tick'
+import { logTrace } from '../log'
 
-export const pauseScene = gamestate => {
-  const newGamestate = {...gamestate}
-  newGamestate.game_paused = !newGamestate.game_paused
+export const pauseScene = (gamestate) => {
 
-  const now = Date.now()
-  if (newGamestate.game_paused) {
-    const remainingTime = newGamestate.actual_scene.scene_end_time - now
-    newGamestate.actual_scene.remaining_time = remainingTime
+  gamestate.game_paused = !gamestate.game_paused
+
+  if (gamestate.game_paused) {
+    logTrace(`Game in room [${gamestate.room_id}] paused at scene ${gamestate.actual_scene.scene_title}`)
+    gamestate.actual_scene.started = false
   } else {
-    const newSceneEndTime = now + newGamestate.actual_scene.remaining_time
-    newGamestate.actual_scene.scene_end_time = newSceneEndTime
-
-    setTimeout(() => tick(newGamestate.room_id), newGamestate.actual_scene.remaining_time)
+    logTrace(`Game in room [${gamestate.room_id}] resumed at scene ${gamestate.actual_scene.scene_title}`)
+    gamestate.actual_scene.started = true
   }
 
-  return newGamestate
+  return gamestate
 }
