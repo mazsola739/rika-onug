@@ -1,6 +1,6 @@
 import { SCENE } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
-import { loverInteraction } from './lovers.interaction'
+import { loversInteraction } from './lovers.interaction'
 
 export const lovers = (gamestate, title) => {
   const newGamestate = { ...gamestate }
@@ -14,12 +14,13 @@ export const lovers = (gamestate, title) => {
     const player = newGamestate.players[token]
 
     if (player.player_mark === 'mark_of_love') {
-      interaction = loverInteraction(newGamestate, token, title)
+      interaction = loversInteraction(newGamestate, token, title)
     }
 
-    scene.push({ type: SCENE, title, token, narration, interaction })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
+  newGamestate.narration.push(narration)
   newGamestate.scene = scene
 
   return newGamestate

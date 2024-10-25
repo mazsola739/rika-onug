@@ -22,9 +22,10 @@ export const squire = (gamestate, title, hasDoppelganger) => {
       interaction = squireInteraction(newGamestate, token, title)
     }
 
-    scene.push({ type: SCENE, title, token, narration, interaction })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
+  newGamestate.narration.push(narration)
   newGamestate.scene = scene
 
   return newGamestate

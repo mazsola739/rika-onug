@@ -22,9 +22,10 @@ export const minion = (gamestate, title, hasDoppelganger) => {
       interaction = minionInteraction(newGamestate, token, title)
     }
 
-    scene.push({ type: SCENE, title, token, narration, interaction })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
+  newGamestate.narration.push(narration)
   newGamestate.scene = scene
 
   return newGamestate

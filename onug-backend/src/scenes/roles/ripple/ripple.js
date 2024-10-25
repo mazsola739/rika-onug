@@ -96,7 +96,7 @@ export const ripple = (oracleMadeSureRipple, totalPlayers) => {
 
         break
 
-      case 'random_ripple_shuffle':  //TODO just narration, we shuffle in backend
+      case 'random_ripple_shuffle':  //TODO just we shuffle in backend
         result.push(randomShuffle2Players[0], 'conjunction_and', randomShuffle2Players[1], 'ripple_doublevote_text', randomShuffle2Players[0])
         result.push(randomShuffle2Players[0], 'ripple_dualshuffle2_text', randomShuffle2Players[1], 'ripple_dualshuffle3_text')
 

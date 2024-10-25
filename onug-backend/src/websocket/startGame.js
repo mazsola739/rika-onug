@@ -22,13 +22,14 @@ export const startGame = async (ws, message) => {
     game_started: true,
     game_stopped: false,
     game_finished: false,
+    scene_locked: true,
+    narration: [],
   })
 
   logTrace(`Game started by player [${token}] in room [${room_id}]`)
   await upsertRoomState(newGamestate)
   
   broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` })
-  broadcast(room_id, newGamestate.actual_scene)
 
   return getNextScene(newGamestate)
 }

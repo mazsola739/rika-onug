@@ -23,9 +23,10 @@ export const apprenticeassassin = (gamestate, title, hasAssassin, prefix) => {
       }
     }
 
-    scene.push({ type: SCENE, title, token, narration, interaction })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
+  newGamestate.narration.push(narration)
   newGamestate.scene = scene
 
   return newGamestate

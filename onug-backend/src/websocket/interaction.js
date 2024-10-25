@@ -1,7 +1,6 @@
 import { logDebug, logError } from '../log'
 import { readGamestate, upsertRoomState } from '../repository'
 import { aliensResponse, alphawolfResponse, thingResponse, apprenticeseerResponse, apprenticeassassinResponse, assassinResponse, beholderResponse, bodysnatcherResponse, copycatResponse, curatorResponse, cupidResponse, seerResponse, diseasedResponse, doppelgangerResponse, doppelgangerinstantactionResponse, empathResponse, exposerResponse, revealerResponse, gremlinResponse, morticianResponse, pickpocketResponse, priestResponse, psychicResponse, rascalResponse, thecountResponse, mysticwolfResponse, drunkResponse, instigatorResponse, marksmanResponse, nostradamusResponse, oracleQuestionResponse, oracleAnswerResponse, paranormalinvestigatorResponse, robberResponse, sentinelResponse, squireResponse, troublemakerResponse, temptressResponse, vampiresResponse, villageidiotResponse, witchResponse, werewolvesResponse } from '../scenes/roles'
-import { webSocketServerConnectionsPerRoom } from './connections'
 
 export const interaction = async (message) => {
   try {
@@ -12,10 +11,6 @@ export const interaction = async (message) => {
     // TODO validate client request
 
     const newGamestate = generateInteractionResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer)
-
-    newGamestate?.scene.forEach((item) => {
-      webSocketServerConnectionsPerRoom[newGamestate.room_id][item.token].send(JSON.stringify(item))
-    })
 
     await upsertRoomState(newGamestate)
   } catch (error) {

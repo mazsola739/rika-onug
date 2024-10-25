@@ -11,6 +11,7 @@ export const nostradamusReaction = (gamestate, title) => {
 
   tokens.forEach((token) => { scene.push({ type: SCENE, title, token, narration })})
 
+  newGamestate.narration.push(narration)
   newGamestate.scene = scene
 
   return newGamestate

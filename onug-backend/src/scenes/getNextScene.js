@@ -1,5 +1,4 @@
-import { logErrorWithStack } from '../log'
-import { webSocketServerConnectionsPerRoom } from '../websocket/connections'
+import { logErrorWithStack, logTrace } from '../log'
 import { scene } from './scene'
 
 export const getNextScene = gamestate => {
@@ -14,17 +13,15 @@ export const getNextScene = gamestate => {
       return gamestate
     }
 
+    if (gamestate.scene_locked) {
+      logTrace(`Scene in room ${gamestate.room_id} is locked. Staying on the current scene.`)
+      return gamestate
+    }
+
     let newGamestate = { ...gamestate }
 
     newGamestate.actual_scene.scene_number++
     newGamestate = scene(newGamestate)
-
-    newGamestate.scene.forEach(item => {
-      const connection = webSocketServerConnectionsPerRoom[newGamestate.room_id]?.[item.token]
-      if (connection) {
-        connection.send(JSON.stringify(item))
-      }
-    })
 
     //TODO vote the last?
     if (newGamestate.actual_scene.scene_title === 'VOTE') {

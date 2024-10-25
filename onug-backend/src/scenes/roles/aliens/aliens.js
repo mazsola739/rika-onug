@@ -44,9 +44,10 @@ export const aliens = (gamestate, title) => {
       interaction = aliensInteraction(newGamestate, token, title)
     }
 
-    scene.push({ type: SCENE, title, token, narration, interaction })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
+  newGamestate.narration.push(narration)
   newGamestate.scene = scene
 
   return newGamestate

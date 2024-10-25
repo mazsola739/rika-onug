@@ -4,8 +4,7 @@ import { logDebug, logTrace } from '../log'
 import { sceneHandler } from './sceneHandler'
 
 //TODO RIPPLE
-
-export const scene = (gamestate) => {
+export const scene = gamestate => {
   const { room_id } = gamestate
   logTrace(`Scene playing for players in room: ${room_id}`)
 
@@ -14,7 +13,7 @@ export const scene = (gamestate) => {
 
   const currentSceneNumber = newGamestate.actual_scene.scene_number
   const currentScene = script[currentSceneNumber]
-  
+
   if (!currentScene) {
     logDebug(`No scene found for scene number: ${currentSceneNumber}`)
     return newGamestate

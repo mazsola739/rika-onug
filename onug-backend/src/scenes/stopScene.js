@@ -6,7 +6,10 @@ export const stopScene = (gamestate) => {
   gamestate.game_paused = false
   gamestate.game_stopped = true
   gamestate.game_finished = false
+  gamestate.scene_locked = true
 
+
+  delete gamestate.narration
   delete gamestate.game_start_time
   delete gamestate.actual_scene
   gamestate.players = resetPlayers(gamestate.players)

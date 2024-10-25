@@ -22,9 +22,10 @@ export const marksman = (gamestate, title, hasDoppelganger) => {
       interaction = marksmanInteraction(newGamestate, token, title)
     }
 
-    scene.push({ type: SCENE, title, token, narration, interaction })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
+  newGamestate.narration.push(narration)
   newGamestate.scene = scene
 
   return newGamestate

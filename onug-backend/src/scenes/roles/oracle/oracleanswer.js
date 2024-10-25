@@ -76,7 +76,7 @@ export const oracleAnswer = (gamestate, title) => {
         interaction = oracleAnswerAftermath(newGamestate, token, title)
       }
   
-      scene.push({ type: SCENE, title, token, narration, interaction })
+      scene.push({ type: SCENE, title, token, interaction })
     })
   
     return newGamestate
