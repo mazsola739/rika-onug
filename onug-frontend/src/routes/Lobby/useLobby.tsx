@@ -31,9 +31,9 @@ export const useLobby = () => {
 
     if (lastJsonMessage?.type === JOIN_ROOM) {
       if (lastJsonMessage.success) {
-        const { room_id, player_name } = lastJsonMessage
+        const { room_id, player } = lastJsonMessage
         sessionStorage.setItem('room_id', room_id)
-        sessionStorage.setItem('player_name', player_name)
+        sessionStorage.setItem('player_name', player.player_name)
         navigate(`/room/${room_id}`)
       } else {
         console.error(lastJsonMessage.errors)
