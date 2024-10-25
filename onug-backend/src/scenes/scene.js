@@ -3,6 +3,8 @@ import script from '../data/script.json'
 import { logDebug, logTrace } from '../log'
 import { sceneHandler } from './sceneHandler'
 
+//TODO RIPPLE
+
 export const scene = gamestate => {
   const { room_id } = gamestate
   logTrace(`Scene playing for players in room: ${room_id}`)
