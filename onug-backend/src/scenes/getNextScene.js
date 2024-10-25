@@ -4,7 +4,10 @@ import { scene } from './scene'
 
 export const getNextScene = gamestate => {
   try {
-    if (gamestate.game_stopped || !gamestate.actual_scene) return
+    if (gamestate.game_stopped || !gamestate.actual_scene) {
+      logErrorWithStack(`Game in room ${gamestate.room_id} has stopped or has no actual scene.`)
+      return gamestate
+    }
 
     if (gamestate.game_paused) {
       logErrorWithStack(`Game in room ${gamestate.room_id} is paused. No scene progression allowed.`)
@@ -16,14 +19,14 @@ export const getNextScene = gamestate => {
     newGamestate.actual_scene.scene_number++
     newGamestate = scene(newGamestate)
 
-    newGamestate.scene.forEach((item) => {
-      if (webSocketServerConnectionsPerRoom[newGamestate.room_id]?.[item.token]) {
-        webSocketServerConnectionsPerRoom[newGamestate.room_id][item.token].send(
-          JSON.stringify(item)
-        )
+    newGamestate.scene.forEach(item => {
+      const connection = webSocketServerConnectionsPerRoom[newGamestate.room_id]?.[item.token]
+      if (connection) {
+        connection.send(JSON.stringify(item))
       }
     })
 
+    //TODO vote the last?
     if (newGamestate.actual_scene.scene_title === 'VOTE') {
       newGamestate.game_finished = true
       return newGamestate

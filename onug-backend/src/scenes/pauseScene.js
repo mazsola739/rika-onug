@@ -1,7 +1,7 @@
 import { logTrace } from '../log'
 
 export const pauseScene = (gamestate) => {
-
+  
   gamestate.game_paused = !gamestate.game_paused
 
   if (gamestate.game_paused) {

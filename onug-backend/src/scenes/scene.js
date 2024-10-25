@@ -5,27 +5,43 @@ import { sceneHandler } from './sceneHandler'
 
 //TODO RIPPLE
 
-export const scene = gamestate => {
+export const scene = (gamestate) => {
   const { room_id } = gamestate
   logTrace(`Scene playing for players in room: ${room_id}`)
 
   let newGamestate = { ...gamestate }
   newGamestate.scene = []
 
-  newGamestate.actual_scene.scene_title = script[newGamestate.actual_scene.scene_number]?.scene_title
+  const currentSceneNumber = newGamestate.actual_scene.scene_number
+  const currentScene = script[currentSceneNumber]
+  
+  if (!currentScene) {
+    logDebug(`No scene found for scene number: ${currentSceneNumber}`)
+    return newGamestate
+  }
+
+  newGamestate.actual_scene.scene_title = currentScene.scene_title
 
   const entries = sceneHandler(newGamestate)
   Object.entries(entries).forEach(([key, value]) => _.update(newGamestate, key, () => value))
 
-  if (!entries['actual_scene.started']) {
-    newGamestate.actual_scene.started = false
-  }
+  newGamestate.actual_scene.started = !!entries['actual_scene.started']
 
-  if (newGamestate.actual_scene) {
-    newGamestate = sceneHandler(newGamestate)
-    logDebug(`SCENE_NUMBER: ${newGamestate.actual_scene.scene_number} - Scene Interaction Processed`)
+  logDebug(`SCENE_NUMBER: ${newGamestate.actual_scene.scene_number} - Scene Interaction Processed`)
+
+  if (newGamestate.actual_scene.started) {
+    newGamestate.actual_scene.scene_number++
+    const nextScene = script[newGamestate.actual_scene.scene_number]
+    
+    if (nextScene) {
+      newGamestate.actual_scene.scene_title = nextScene.scene_title
+      logDebug(`Moving to next scene: ${nextScene.scene_title}`)
+    } else {
+      logDebug(`No more scenes available. Game might be finished.`)
+      // TODO VOTE
+    }
   } else {
-    logDebug('No actual_scene found in gamestate.')
+    logDebug('Current scene is still in progress.')
   }
 
   logDebug(`SCENE_NUMBER: ${newGamestate.actual_scene.scene_number}, STARTED: ${newGamestate.actual_scene.started}, TITLE: ${newGamestate.actual_scene.scene_title}`)

@@ -1,19 +1,19 @@
-import { logTrace } from '../log';
-import { validateRoom } from '../validators';
-import { upsertRoomState } from '../repository';
-import { STAGES, REDIRECT } from '../constants';
-import { broadcast } from './connections';
-import { startScene } from '../scenes/startScene';
-import { getNextScene } from '../scenes/getNextScene';
+import { logTrace } from '../log'
+import { validateRoom } from '../validators'
+import { upsertRoomState } from '../repository'
+import { STAGES, REDIRECT } from '../constants'
+import { broadcast } from './connections'
+import { startScene } from '../scenes/startScene'
+import { getNextScene } from '../scenes/getNextScene'
 
 export const startGame = async (ws, message) => {
-  const { room_id, token } = message;
-  logTrace(`Starting game in room: ${room_id}`);
+  const { room_id, token } = message
+  logTrace(`Starting game in room: ${room_id}`)
 
-  const [roomIdValid, gamestate, errors] = await validateRoom(room_id);
-  if (!roomIdValid) return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }));
+  const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
+  if (!roomIdValid) return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
 
-  const startTime = Date.now();
+  const startTime = Date.now()
   let newGamestate = startScene({
     ...gamestate,
     stage: STAGES.GAME,
@@ -24,9 +24,11 @@ export const startGame = async (ws, message) => {
     game_finished: false,
   })
 
-  newGamestate =  getNextScene(newGamestate)
+  logTrace(`Game started by player [${token}] in room [${room_id}]`)
+  await upsertRoomState(newGamestate)
+  
+  broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` })
+  broadcast(room_id, newGamestate.actual_scene)
 
-  logTrace(`Game started by player [${token}] in room [${room_id}]`);
-  await upsertRoomState(newGamestate);
-  broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` });
+  return getNextScene(newGamestate)
 }
