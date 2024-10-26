@@ -14,6 +14,7 @@ export const HYDRATE_LOBBY = 'HYDRATE_LOBBY'
 export const HYDRATE_ROOM = 'HYDRATE_ROOM'
 export const HYDRATE_TABLE = 'HYDRATE_TABLE'
 export const HYDRATE_GAME = 'HYDRATE_GAME'
+export const HYDRATE_SCENE = 'HYDRATE_SCENE'
 export const HYDRATE_VOTE = 'HYDRATE_VOTE'
 
 export const UPDATE_ROOM = 'UPDATE_ROOM'

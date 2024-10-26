@@ -1,4 +1,4 @@
-0: GAME_START - 
+0: START_GAME - 
 1: EPIC_BATTLE - 
 
 
@@ -7,7 +7,7 @@
 4: COPYCAT                     - MUST center card view            -------moving card? no  ---------moving mark? no
 5: MIRROR_MAN                  - MUST center card view            -------moving card? no  ---------moving mark? no
 6: DOPPELGÄNGER                - MUST player card view            -------moving card? no  ---------moving mark? no
-7: DOPPELGÄNGER_INSTANT_ACTION - MUST can be any action           -------moving card? possible  ---------moving mark? possible
+7: DOPPELGÄNGER_INSTANT_ACTION - MUST can be any action           -------moving card? yes  ---------moving mark? yes
 
 
 

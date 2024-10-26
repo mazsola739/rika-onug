@@ -2,48 +2,30 @@ import _ from 'lodash'
 import script from '../data/script.json'
 import { logDebug, logTrace } from '../log'
 import { sceneHandler } from './sceneHandler'
+import { getNextScene } from './getNextScene'
 
 //TODO RIPPLE
-export const scene = gamestate => {
-  const { room_id } = gamestate
-  logTrace(`Scene playing for players in room: ${room_id}`)
+export const scene = (gamestate) => {
+  logTrace(`Scene playing for players in room: ${gamestate.room_id}`)
 
-  let newGamestate = { ...gamestate }
-  newGamestate.scene = []
-
-  const currentSceneNumber = newGamestate.actual_scene.scene_number
-  const currentScene = script[currentSceneNumber]
-
+  const currentScene = script.find(scene => scene.scene_number === gamestate.actual_scene.scene_number)
   if (!currentScene) {
-    logDebug(`No scene found for scene number: ${currentSceneNumber}`)
-    return newGamestate
+    logDebug(`No scene found for scene number: ${gamestate.actual_scene.scene_number}`)
+    return gamestate
   }
 
-  newGamestate.actual_scene.scene_title = currentScene.scene_title
-
+  let newGamestate = { ...gamestate, actual_scene: { ...gamestate.actual_scene, scene_title: currentScene.scene_title } }
   const entries = sceneHandler(newGamestate)
   Object.entries(entries).forEach(([key, value]) => _.update(newGamestate, key, () => value))
-
   newGamestate.actual_scene.started = !!entries['actual_scene.started']
 
-  logDebug(`SCENE_NUMBER: ${newGamestate.actual_scene.scene_number} - Scene Interaction Processed`)
-
   if (newGamestate.actual_scene.started) {
-    newGamestate.actual_scene.scene_number++
-    const nextScene = script[newGamestate.actual_scene.scene_number]
-    
-    if (nextScene) {
-      newGamestate.actual_scene.scene_title = nextScene.scene_title
-      logDebug(`Moving to next scene: ${nextScene.scene_title}`)
-    } else {
-      logDebug(`No more scenes available. Game might be finished.`)
-      // TODO VOTE
-    }
+    const updatedGameState = getNextScene(newGamestate)
+    logDebug(`Moving to next scene: ${updatedGameState.actual_scene.scene_title}`)
+    return updatedGameState
   } else {
     logDebug('Current scene is still in progress.')
   }
-
-  logDebug(`SCENE_NUMBER: ${newGamestate.actual_scene.scene_number}, STARTED: ${newGamestate.actual_scene.started}, TITLE: ${newGamestate.actual_scene.scene_title}`)
 
   return newGamestate
 }

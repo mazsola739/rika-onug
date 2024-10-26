@@ -1,1 +1,0 @@
-export { scene } from './scene'

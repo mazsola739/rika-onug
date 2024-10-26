@@ -1,7 +1,7 @@
 
 import WebSocket from 'ws'
 import { logTrace, logError, logErrorWithStack } from '../log'
-import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_TABLE, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME, PAUSE_GAME, STOP_GAME, RELOAD, SCENE, ARRIVE_VOTE } from '../constants'
+import { UPDATE_ROOM, READY, RESET, NEWBIE, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, ARRIVE_TABLE, ARRIVE_ROOM, START_GAME, DEAL, ARRIVE_GAME, PAUSE_GAME, STOP_GAME, RELOAD, ARRIVE_VOTE, HYDRATE_SCENE } from '../constants'
 import { hydrateRoom } from './hydrateRoom'
 import { reset } from './reset'
 import { updateRoom } from './updateRoom'
@@ -16,9 +16,9 @@ import { dealCards } from './dealCards'
 import { hydrateGame } from './hydrateGame'
 import { stopGame } from './stopGame'
 import { reload } from './reload'
-import { interaction } from './interaction'
 import { hydrateVote } from './hydrateVote'
 import { pauseGame } from './pauseGame'
+import { hydrateScene } from './hydrateScene'
 
 export const websocketServer = (port) => {
   try {
@@ -51,7 +51,7 @@ export const websocketServer = (port) => {
         if (message.type === ARRIVE_GAME)       return hydrateGame(ws, message)
         if (message.type === PAUSE_GAME)        return pauseGame(message)
         if (message.type === STOP_GAME)         return stopGame(message)
-        if (message.type === SCENE)             return interaction(ws)
+        if (message.type === HYDRATE_SCENE)     return hydrateScene(ws, message)
         if (message.type === ARRIVE_VOTE)       return hydrateVote(ws, message)
       })
     })

@@ -3,15 +3,7 @@
     "room_id": "archives",
     "room_name": "Archives",
     "stage": "LOBBY",
-    "selected_cards": [
-      12,
-      13,
-      14,
-      9,
-      4,
-      1,
-      8
-  ],
+    "selected_cards": [ 12, 13, 14, 9, 4, 1, 8 ],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
     "vote_timer": 300000,
@@ -31,7 +23,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "armory",
@@ -57,7 +54,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "bottomless_pit",
@@ -83,7 +85,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "dungeon",
@@ -109,7 +116,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "dynamite_room",
@@ -135,7 +147,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "great_hall",
@@ -161,7 +178,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "guest_bedroom",
@@ -187,7 +209,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "kitchen",
@@ -213,7 +240,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "laboratory",
@@ -239,7 +271,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "observatory",
@@ -265,7 +302,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "panic_room",
@@ -291,7 +333,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "parlor",
@@ -317,7 +364,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "secret_passage",
@@ -343,7 +395,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "sitting_room",
@@ -369,7 +426,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "staff_quarters",
@@ -395,7 +457,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "study",
@@ -421,7 +488,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "venus_grotto",
@@ -447,7 +519,12 @@
     "vampire_votes": {},
     "alien_votes": {},
     "empath_votes": {},
-    "action_history": []
+    "action_history": [],
+    "game_paused": false,
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "scene_locked": true
   },
   {
     "room_id": "workshop",

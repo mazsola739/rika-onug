@@ -67,8 +67,6 @@ export type WsJsonMessage = {
   player?: PlayerType
 
   title?: string
-  narration?: string[]
-
 
   votes?: Record<string, number[]>
 

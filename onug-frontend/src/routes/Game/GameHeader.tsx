@@ -1,17 +1,14 @@
-import { Header, RoleImage } from 'components'
+import { Header } from 'components'
 import { observer } from 'mobx-react-lite'
-import { narrationStore } from 'store'
-import { Narration, StyledGameHeader } from './Game.styles'
+import { Moon, StyledGameHeader, Sun } from './Game.styles'
+import { useGame } from './useGame'
 
 export const GameHeader: React.FC = observer(() => {
-  const narration = narrationStore.getNarrationMessage()
-  const img = narrationStore.getNarrationImage()
-
   return (
     <Header>
       <StyledGameHeader>
-          {img && <RoleImage image={img} size={80} />}
-        <Narration>{narration}</Narration>
+        <Sun src="/assets/logos/sun.png" alt="sun" />
+        <Moon src="/assets/logos/moon.png" alt="moon" />
       </StyledGameHeader>
     </Header>
   )

@@ -1,50 +1,14 @@
 [
-  {
-    "id": 2,
-    "token_name": "claw_of_the_werewolf"
-  },
-  {
-    "id": 3,
-    "token_name": "brand_of_the_villager"
-  },
-  {
-    "id": 4,
-    "token_name": "cudgel_of_the_tanner"
-  },
-  {
-    "id": 5,
-    "token_name": "void_of_nothingness"
-  },
-  {
-    "id": 6,
-    "token_name": "mask_of_muting"
-  },
-  {
-    "id": 7,
-    "token_name": "shroud_of_shame"
-  },
-  {
-    "id": 8,
-    "token_name": "bow_of_the_hunter"
-  },
-  {
-    "id": 9,
-    "token_name": "cloak_of_the_prince"
-  },
-  {
-    "id": 10,
-    "token_name": "sword_of_the_bodyguard"
-  },
-  {
-    "id": 11,
-    "token_name": "mist_of_the_vampire"
-  },
-  {
-    "id": 12,
-    "token_name": "dagger_of_the_traitor"
-  },
-  {
-    "id": 13,
-    "token_name": "alien_artifact"
-  }
+  { "id": 2, "token_name": "claw_of_the_werewolf" },
+  { "id": 3, "token_name": "brand_of_the_villager" },
+  { "id": 4, "token_name": "cudgel_of_the_tanner" },
+  { "id": 5, "token_name": "void_of_nothingness" },
+  { "id": 6, "token_name": "mask_of_muting" },
+  { "id": 7, "token_name": "shroud_of_shame" },
+  { "id": 8, "token_name": "bow_of_the_hunter" },
+  { "id": 9, "token_name": "cloak_of_the_prince" },
+  { "id": 10, "token_name": "sword_of_the_bodyguard" },
+  { "id": 11, "token_name": "mist_of_the_vampire" },
+  { "id": 12, "token_name": "dagger_of_the_traitor" },
+  { "id": 13, "token_name": "alien_artifact" }
 ]

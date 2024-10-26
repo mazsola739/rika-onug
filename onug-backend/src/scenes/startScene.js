@@ -4,7 +4,7 @@ export const startScene = (gamestate) => ({
   ...gamestate,
   stage: STAGES.GAME,
   actual_scene: {
-    scene_title: 'GAME_START',
+    scene_title: 'START_GAME',
     scene_number: 0,
   },
 })

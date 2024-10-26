@@ -6,10 +6,10 @@ import { GameHeader } from "./GameHeader"
 import { useGame } from "./useGame"
 
 export const Game: React.FC = observer(() => {
-  const { players, left, middle, right } = useGame()
+  const { players, left, middle, right, nightMode, setTransitionCompleted } = useGame()
 
   return (
-    <StyledGame>
+    <StyledGame animate={nightMode} onAnimationEnd={() => setTransitionCompleted(true)}>
       <GameHeader />
       {players && <AroundTableSide players={left} />}
       {players && <AroundTableTop players={middle} />}

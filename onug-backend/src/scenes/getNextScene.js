@@ -1,40 +1,72 @@
-import { logErrorWithStack, logTrace } from '../log'
-import { scene } from './scene'
+import script from '../data/script.json'
+import { logDebug, logErrorWithStack, logTrace } from '../log'
 
-export const getNextScene = gamestate => {
+export const getNextScene = (gamestate) => {
+  logTrace(`Entering getNextScene for room ${gamestate.room_id} for ${gamestate.actual_scene.scene_title}`)
   try {
-    if (gamestate.game_stopped || !gamestate.actual_scene) {
-      logErrorWithStack(`Game in room ${gamestate.room_id} has stopped or has no actual scene.`)
+    if (gamestate.game_stopped || gamestate.game_paused || gamestate.scene_locked || !gamestate.actual_scene) {
+      const status = gamestate.game_stopped
+        ? 'stopped'
+        : gamestate.game_paused
+        ? 'paused'
+        : 'locked or no actual scene'
+      logErrorWithStack(`Game in room ${gamestate.room_id} is ${status}.`)
       return gamestate
     }
 
-    if (gamestate.game_paused) {
-      logErrorWithStack(`Game in room ${gamestate.room_id} is paused. No scene progression allowed.`)
+    logDebug(`Current scene in room ${gamestate.room_id} is ${JSON.stringify(gamestate.actual_scene)}`)
+
+    const currentSceneIndex = script.findIndex(scene => scene.scene_number === gamestate.actual_scene.scene_number)
+    if (currentSceneIndex === -1) {
+      logErrorWithStack("Error: Current scene not found in script.")
       return gamestate
     }
 
-    if (gamestate.scene_locked) {
-      logTrace(`Scene in room ${gamestate.room_id} is locked. Staying on the current scene.`)
-      return gamestate
+    logDebug(`Current scene index is ${currentSceneIndex} for room ${gamestate.room_id}`)
+  
+    const nextScene = script[currentSceneIndex + 1]
+    if (!nextScene) {
+      logTrace("End of scenes reached.")
+      return { ...gamestate, game_finished: true, actual_scene: { ...gamestate.actual_scene, scene_title: 'END' } }
     }
 
-    let newGamestate = { ...gamestate }
+    logDebug(`Transitioning to next scene: ${JSON.stringify(nextScene)} for room ${gamestate.room_id}`)
 
-    newGamestate.actual_scene.scene_number++
-    newGamestate = scene(newGamestate)
-
-    //TODO vote the last?
-    if (newGamestate.actual_scene.scene_title === 'VOTE') {
-      newGamestate.game_finished = true
-      return newGamestate
+    return {
+      ...gamestate,
+      actual_scene: {
+        ...gamestate.actual_scene,
+        scene_title: nextScene.scene_title,
+        scene_number: nextScene.scene_number
+      },
+      scene_locked: true
     }
-
-    if (!newGamestate.actual_scene.started) return getNextScene(newGamestate)
-
-    return newGamestate
 
   } catch (error) {
     logErrorWithStack(error)
-    return
+    return gamestate
   }
+}
+
+
+export const unlockScene = (gameState) => {
+  return { ...gameState, scene_locked: false }
+}
+
+export const updateGameState = (currentGameState) => {
+  logDebug("Attempting to progress to the next scene...")
+
+  let updatedGameState = getNextScene(currentGameState)
+
+  if (updatedGameState.actual_scene.scene_title !== currentGameState.actual_scene.scene_title) {
+    logDebug(`Transitioned to new scene: ${updatedGameState.actual_scene.scene_title}`)
+  } else {
+    logDebug("Scene transition not permitted in current game state.")
+  }
+
+  return updatedGameState
+}
+
+export const readyNextScene = (currentGameState) => {
+  return unlockScene(currentGameState) 
 }

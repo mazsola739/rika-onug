@@ -1,7 +1,41 @@
+import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
+import { GameProps } from './Game.types'
+
+const fadeOutSun = keyframes`
+  from { opacity: 1; }
+  to { opacity: 0; }
+`
+
+const fadeInMoon = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`
+
+const darkenBackground = keyframes`
+  from { background-color: transparent; }
+  to { background-color: rgba(0, 0, 0, 0.65); }
+`
 
 //GAME
-export const StyledGame = styled.div`
+export const StyledGame = styled.div<GameProps>`
+  animation: ${({ animate }) => (animate ? darkenBackground : 'none')} 3s
+    forwards;
+
+  > header {
+    > div {
+      > img:first-of-type {
+        animation: ${({ animate }) => (animate ? fadeOutSun : 'none')} 3s
+          forwards;
+      }
+
+      > img:nth-of-type(2) {
+        animation: ${({ animate }) => (animate ? fadeInMoon : 'none')} 3s
+          forwards;
+      }
+    }
+  }
+
   min-width: 100%;
   display: grid;
   grid-template-columns: 170px calc(100vw - 340px) 170px;
@@ -18,7 +52,7 @@ export const StyledGame = styled.div`
   }
   & > div:nth-of-type(3) {
     grid-area: 2 / 3 / 5 / 4;
-  } 
+  }
   main {
     grid-area: 3 / 2 / 4 / 3;
   }
@@ -34,11 +68,28 @@ export const StyledGameHeader = styled.div`
   color: white;
   justify-content: center;
   align-items: center;
+  position: relative;
+  height: 100%;
 `
 
-export const Narration = styled.div`
-  color: white;
-  font-size: 16px;
+export const Sun = styled.img`
+  border-radius: 50%;
+  box-shadow: 0 0 60px 10px #fff, 0 0 100px 20px red, 0 0 140px 30px gold;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 20%;
+  opacity: 1;
+`
+
+export const Moon = styled.img`
+  border-radius: 50%;
+  box-shadow: 0 0 60px 10px #000, 0 0 100px 20px blue, 0 0 140px 30px silver;
+  width: 35px;
+  height: 35px;
+  position: absolute;
+  top: 20%;
+  opacity: 0;
 `
 
 //MAIN
@@ -77,7 +128,7 @@ export const Player = styled.span`
 `
 
 export const Tokens = styled.div`
-  display: flex; 
+  display: flex;
 `
 
 export const GameContainer = styled.div`

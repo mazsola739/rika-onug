@@ -2,7 +2,7 @@ import { ScriptType } from 'types'
 
 export const script: ScriptType[] = [
   {
-    scene_title: 'GAME_START',
+    scene_title: 'START_GAME',
     scene_img: 'day',
     scene_number: 0,
   },
@@ -470,5 +470,10 @@ export const script: ScriptType[] = [
     scene_title: 'JOKE',
     scene_img: 'joke',
     scene_number: 93,
+  },
+  {
+    scene_title: 'END',
+    scene_img: 'day',
+    scene_number: 94,
   },
 ]
