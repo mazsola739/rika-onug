@@ -33,6 +33,11 @@ export const StyledGame = styled.div<GameProps>`
         animation: ${({ animate }) => (animate ? fadeInMoon : 'none')} 3s
           forwards;
       }
+
+      > span {
+        animation: ${({ animate }) => (animate ? fadeInMoon : 'none')} 3s
+          forwards;
+      }
     }
   }
 
@@ -70,6 +75,7 @@ export const StyledGameHeader = styled.div`
   align-items: center;
   position: relative;
   height: 100%;
+  width: 100%;
 `
 
 export const Sun = styled.img`
@@ -78,7 +84,7 @@ export const Sun = styled.img`
   width: 35px;
   height: 35px;
   position: absolute;
-  top: 20%;
+  top: 15%;
   opacity: 1;
 `
 
@@ -88,8 +94,15 @@ export const Moon = styled.img`
   width: 35px;
   height: 35px;
   position: absolute;
-  top: 20%;
+  top: 15%;
   opacity: 0;
+`
+
+export const Text = styled.span`
+  color: white;
+  position: absolute;
+  opacity: 0;
+  bottom: 10%;
 `
 
 //MAIN

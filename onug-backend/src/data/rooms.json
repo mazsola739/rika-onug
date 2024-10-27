@@ -28,7 +28,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "armory",
@@ -59,7 +59,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "bottomless_pit",
@@ -90,7 +90,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "dungeon",
@@ -121,7 +121,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "dynamite_room",
@@ -152,7 +152,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "great_hall",
@@ -183,7 +183,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "guest_bedroom",
@@ -214,7 +214,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "kitchen",
@@ -245,7 +245,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "laboratory",
@@ -276,7 +276,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "observatory",
@@ -307,7 +307,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "panic_room",
@@ -338,7 +338,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "parlor",
@@ -369,7 +369,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "secret_passage",
@@ -400,7 +400,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "sitting_room",
@@ -431,7 +431,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "staff_quarters",
@@ -462,7 +462,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "study",
@@ -493,7 +493,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "venus_grotto",
@@ -524,7 +524,7 @@
     "game_started": true,
     "game_stopped": false,
     "game_finished": false,
-    "scene_locked": true
+    "script_locked": true
   },
   {
     "room_id": "workshop",

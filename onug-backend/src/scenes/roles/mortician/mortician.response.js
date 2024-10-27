@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { getPlayerNumberWithMatchingToken, getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -44,8 +43,8 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
     showCards: viewCards,
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  scene.push({ [token]: { interaction } })
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }

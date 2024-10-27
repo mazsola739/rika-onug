@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { generateRoleInteraction } from '../../sceneUtils'
 import { validateAnswerSelection } from '../../validators'
 import { formatOracleAnswer } from './oracle.utils'
@@ -35,8 +34,8 @@ export const oracleQuestionResponse = (gamestate, token, selected_answer, title)
       private_message: ['interaction_oracle_answer', formatOracleAnswer(selected_answer)],
     })
   
-    scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    scene.push({ [token]: { interaction } })
+    newGamestate.scene[title] = scene
   
     return newGamestate
   }

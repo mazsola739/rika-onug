@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
@@ -51,8 +50,8 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
       private_message: ['interaction_mark_of_love', ...messageIdentifiers],
     })
   
-    scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    scene.push({ [token]: { interaction } })
+    newGamestate.scene[title] = scene
   
     return newGamestate
   }

@@ -1,4 +1,4 @@
-import { MESSAGE, SCENE } from '../../../constants'
+import { MESSAGE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
 import { getPlayerTokensByPlayerNumber, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
@@ -30,8 +30,8 @@ export const thingResponse = (gamestate, token, selected_card_positions, title) 
     private_message: ['interaction_tap', formatPlayerIdentifier(selected_card_positions)[0]],
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  scene.push({ [token]: { interaction } })
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }

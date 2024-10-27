@@ -1,4 +1,4 @@
-import { IDS, SCENE } from '../../../constants'
+import { IDS } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
 import { flipperInteraction } from './flipper.interaction'
 
@@ -23,11 +23,11 @@ export const flipper = (gamestate, title, prefix) => {
       }
     }
 
-    scene.push({ type: SCENE, title, token, interaction })
+    scene.push({ [token]: { interaction } })
   })
 
   newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }

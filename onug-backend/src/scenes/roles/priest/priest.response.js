@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
@@ -31,8 +30,8 @@ export const priestResponse = (gamestate, token, selected_mark_positions, title)
     private_message: ['interaction_mark_of_clarity', formatPlayerIdentifier(selected_mark_positions)[0]],
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  scene.push({ [token]: { interaction } })
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }

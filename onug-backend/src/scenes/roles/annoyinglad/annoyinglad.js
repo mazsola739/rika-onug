@@ -1,4 +1,4 @@
-import { IDS, SCENE } from '../../../constants'
+import { IDS } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
 import { thingInteraction } from '..'
 
@@ -17,11 +17,11 @@ export const annoyinglad = (gamestate, title) => {
       interaction = thingInteraction(newGamestate, token, title)
     }
 
-    scene.push({ type: SCENE, title, token, interaction })
+    scene.push({ [token]: { interaction } })
   })
 
   newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }

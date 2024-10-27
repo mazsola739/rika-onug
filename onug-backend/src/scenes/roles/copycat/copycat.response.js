@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -35,8 +34,8 @@ export const copycatResponse = (gamestate, token, selected_card_positions, title
       showCards,
     })
   
-    scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    scene.push({ [token]: { interaction } })
+    newGamestate.scene[title] = scene
   
     return newGamestate
   }

@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { oracleResponses } from './oracle.constants'
 import { oracleAnswerAftermath } from './oracleanswer.aftermath'
@@ -76,7 +75,7 @@ export const oracleAnswer = (gamestate, title) => {
         interaction = oracleAnswerAftermath(newGamestate, token, title)
       }
   
-      scene.push({ type: SCENE, title, token, interaction })
+      scene.push({ [token]: { interaction } })
     })
   
     return newGamestate

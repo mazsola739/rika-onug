@@ -1,4 +1,4 @@
-import { IDS, SCENE } from '../../../constants'
+import { IDS } from '../../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomMorticianInstructions, morticianKeys } from './mortician.constants'
 import { morticianInteraction } from './mortician.interaction'
@@ -36,11 +36,11 @@ export const mortician = (gamestate, title, prefix) => {
       }
     }
 
-    scene.push({ type: SCENE, title, token, interaction })
+    scene.push({ [token]: { interaction } })
   })
 
   newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }

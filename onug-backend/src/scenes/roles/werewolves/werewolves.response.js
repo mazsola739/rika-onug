@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -29,9 +28,9 @@ export const werewolvesResponse = (gamestate, token, selected_card_positions, ti
       showCards,
     })
   
-    scene.push({ type: SCENE, title, token, interaction })
+    scene.push({ [token]: { interaction } })
   
-    newGamestate.scene = scene
+    newGamestate.scene[title] = scene
   
     return newGamestate
   }

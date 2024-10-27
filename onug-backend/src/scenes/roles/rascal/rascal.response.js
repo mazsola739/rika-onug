@@ -1,4 +1,4 @@
-import { CENTER_CARD_POSITIONS, SCENE } from '../../../constants'
+import { CENTER_CARD_POSITIONS } from '../../../constants'
 import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPlayerNumbers } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -135,8 +135,8 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
   }
 
 
-  scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  scene.push({ [token]: { interaction } })
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }

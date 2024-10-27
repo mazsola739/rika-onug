@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -28,8 +27,8 @@ export const temptressResponse = (gamestate, token, selected_card_positions, tit
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  scene.push({ [token]: { interaction } })
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }

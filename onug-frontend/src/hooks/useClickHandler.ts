@@ -1,4 +1,4 @@
-import { JOIN_ROOM, LEAVE_ROOM, DEAL, RESET, START_GAME, READY, PAUSE_GAME, STOP_GAME, LEAVE_TABLE, HYDRATE_SCENE, UPDATE_ROOM } from 'constant'
+import { JOIN_ROOM, LEAVE_ROOM, DEAL, RESET, START_GAME, READY, PAUSE_GAME, STOP_GAME, LEAVE_TABLE, SCENE, UPDATE_ROOM } from 'constant'
 import { useCallback } from 'react'
 import { wsStore, gamePlayStore, roomStore, deckStore } from 'store'
 
@@ -82,7 +82,7 @@ export const useClickHandler = (room_id: string, token: string) => {
   const handleCardInteraction = useCallback(
     (selected_cards: string[]) => {
       sendJsonMessage?.({
-        type: HYDRATE_SCENE,
+        type: SCENE,
         room_id,
         token,
         selected_card_positions: selected_cards,
@@ -94,7 +94,7 @@ export const useClickHandler = (room_id: string, token: string) => {
   const handleMarkInteraction = useCallback(
     (selected_marks: string[]) => {
       sendJsonMessage?.({
-        type: HYDRATE_SCENE,
+        type: SCENE,
         room_id,
         token,
         selected_mark_positions: selected_marks,
@@ -106,7 +106,7 @@ export const useClickHandler = (room_id: string, token: string) => {
   const handleAnswerInteraction = useCallback(
     (selected_answer: string) => {
       sendJsonMessage?.({
-        type: HYDRATE_SCENE,
+        type: SCENE,
         room_id,
         token,
         selected_answer,

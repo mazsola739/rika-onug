@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { getPlayerTokensByPlayerNumber, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 import { getRandomArtifact } from './curator.utils'
@@ -28,8 +27,8 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
       private_message: ['interaction_placed_artifact', formatPlayerIdentifier(selected_card_positions)[0]],
     })
   
-    scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    scene.push({ [token]: { interaction } })
+    newGamestate.scene[title] = scene
   
     return newGamestate
   }

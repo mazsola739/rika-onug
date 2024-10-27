@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { getPlayerNumberWithMatchingToken, generateRoleInteraction } from '../../sceneUtils'
 import { validateAnswerSelection } from '../../validators'
 import { moveCardsButYourOwn } from './villageidiot.utils'
@@ -30,8 +29,8 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
     private_message: ['interaction_moved', selected_answer === 'left' ? 'direction_left' : 'direction_right'],
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  scene.push({ [token]: { interaction } })
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }

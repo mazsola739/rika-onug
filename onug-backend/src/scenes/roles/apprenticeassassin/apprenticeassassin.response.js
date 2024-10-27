@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { getPlayerNumberWithMatchingToken, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
@@ -45,8 +44,8 @@ export const apprenticeassassinResponse = (gamestate, token, selected_mark_posit
     private_message: ['interaction_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  scene.push({ [token]: { interaction } })
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }

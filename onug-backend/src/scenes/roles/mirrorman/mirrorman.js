@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
 import { copycatInteraction } from '../copycat/copycat.interaction'
 
@@ -17,11 +16,11 @@ export const mirrorman = (gamestate, title) => {
       interaction = copycatInteraction(newGamestate, token, title)
     }
 
-    scene.push({ type: SCENE, title, token, interaction })
+    scene.push({ [token]: { interaction } })
   })
 
   newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }

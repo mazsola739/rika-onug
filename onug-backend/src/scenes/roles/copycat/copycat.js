@@ -1,4 +1,3 @@
-import { SCENE } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
 import { copycatInteraction } from './copycat.interaction'
 
@@ -18,11 +17,11 @@ export const copycat = (gamestate, title) => {
       interaction = copycatInteraction(newGamestate, token, title)
     }
 
-    scene.push({ type: SCENE, title, token, interaction })
+    scene.push({ [token]: { interaction } })
   })
 
   newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.scene[title] = scene
 
   return newGamestate
 }
