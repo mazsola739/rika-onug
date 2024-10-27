@@ -1,4 +1,4 @@
-import { VOTE } from '../../../constants'
+import { VOTE, SCENE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
 import { addVote, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
@@ -39,8 +39,8 @@ export const empathResponse = (gamestate, token, selected_card_positions, title)
     private_message: ['interaction_voted', formatPlayerIdentifier(selected_card_positions)[0]],
   })
 
-  scene.push({ [token]: { interaction } })
-  newGamestate.scene[title] = scene
+  scene.push({ type: SCENE, title, token, interaction })
+  newGamestate.scene = scene
 
   return newGamestate
 }

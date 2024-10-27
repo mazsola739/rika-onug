@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../../conditions'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomOracleQuestions } from './oracle.constants'
@@ -61,11 +62,11 @@ export const oracleQuestion = (gamestate, title) => {
         console.log('do nothing')
       }
   
-      scene.push({ [token]: { interaction } })
+      scene.push({ type: SCENE, title, token, interaction })
     })
   
     newGamestate.narration.push(narration)
-    newGamestate.scene[title] = scene
+    newGamestate.scene = scene
   
     return newGamestate
   }

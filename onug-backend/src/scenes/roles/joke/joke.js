@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { random_joke } from './joke.constants'
 
@@ -10,11 +11,11 @@ export const joke = (gamestate, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    scene.push({ [token]: { interaction } })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
   newGamestate.narration.push(narration)
-  newGamestate.scene[title] = scene
+  newGamestate.scene = scene
 
   return newGamestate
 }

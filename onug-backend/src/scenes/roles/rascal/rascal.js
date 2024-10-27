@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { villageidiotInteraction } from '../villageidiot/villageidiot.interaction'
 import { randomRascalInstructions, rascalAnyTwoKeys, rascalAnyOneKeys } from './rascal.constants'
@@ -50,11 +50,11 @@ export const rascal = (gamestate, title, prefix) => {
       }
     }
 
-    scene.push({ [token]: { interaction } })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
   newGamestate.narration.push(narration)
-  newGamestate.scene[title] = scene
+  newGamestate.scene = scene
 
   return newGamestate
 }

@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -29,8 +30,8 @@ export const troublemakerResponse = (gamestate, token, selected_card_positions, 
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
   })
 
-  scene.push({ [token]: { interaction } })
-  newGamestate.scene[title] = scene
+  scene.push({ type: SCENE, title, token, interaction })
+  newGamestate.scene = scene
 
   return newGamestate
 }

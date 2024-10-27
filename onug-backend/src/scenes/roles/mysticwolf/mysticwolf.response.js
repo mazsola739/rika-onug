@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -28,8 +29,8 @@ export const mysticwolfResponse = (gamestate, token, selected_card_positions, ti
       showCards: viewCards,
     })
   
-    scene.push({ [token]: { interaction } })
-    newGamestate.scene[title] = scene
+    scene.push({ type: SCENE, title, token, interaction })
+    newGamestate.scene = scene
   
     return newGamestate
   }

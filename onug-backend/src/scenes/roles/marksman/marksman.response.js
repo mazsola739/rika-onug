@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { getCardIdsByPositions, getPlayerNumberWithMatchingToken, generateRoleInteraction, formatPlayerIdentifier, getMarksByPositions } from '../../sceneUtils'
 import { validateCardSelection, validateMarkSelection } from '../../validators'
 
@@ -106,8 +107,8 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
       viewed_marks: [selected_mark_positions[0]],
     }
 
-    scene.push({ [token]: { interaction } })
-    newGamestate.scene[title] = scene
+    scene.push({ type: SCENE, title, token, interaction })
+    newGamestate.scene = scene
 
     return newGamestate
   }

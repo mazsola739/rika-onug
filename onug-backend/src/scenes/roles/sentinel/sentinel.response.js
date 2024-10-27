@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { getPlayerTokensByPlayerNumber, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -25,8 +26,8 @@ export const sentinelResponse = (gamestate, token, selected_card_positions, titl
     private_message: ['interaction_placed_shield', formatPlayerIdentifier(selected_card_positions)[0]],
   })
 
-  scene.push({ [token]: { interaction } })
-  newGamestate.scene[title] = scene
+  scene.push({ type: SCENE, title, token, interaction })
+  newGamestate.scene = scene
 
   return newGamestate
 }

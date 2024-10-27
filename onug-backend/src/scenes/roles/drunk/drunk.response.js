@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -29,8 +30,8 @@ export const drunkResponse = (gamestate, token, selected_card_positions, title) 
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
   })
 
-  scene.push({ [token]: { interaction } })
-  newGamestate.scene[title] = scene
+  scene.push({ type: SCENE, title, token, interaction })
+  newGamestate.scene = scene
 
   return newGamestate
 }

@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
 import { sentinelInteraction } from './sentinel.interaction'
 
@@ -17,11 +17,11 @@ export const sentinel = (gamestate, title) => {
       interaction = sentinelInteraction(newGamestate, token, title)
     }
 
-    scene.push({ [token]: { interaction } })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
   newGamestate.narration.push(narration)
-  newGamestate.scene[title] = scene
+  newGamestate.scene = scene
 
   return newGamestate
 }

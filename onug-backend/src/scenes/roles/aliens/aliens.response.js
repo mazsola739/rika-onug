@@ -1,4 +1,4 @@
-import { VOTE } from '../../../constants'
+import { SCENE, VOTE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
 import { getAlienPlayerNumbersByRoleIds, getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier, addVote, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
@@ -35,8 +35,8 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
       uniqueInformations: { aliens },
     })
   
-    scene.push({ [token]: { interaction } })
-    newGamestate.scene[title] = scene
+    scene.push({ type: SCENE, title, token, interaction })
+    newGamestate.scene = scene
   
     return newGamestate
   }
@@ -68,8 +68,8 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
     uniqueInformations: { aliens },
   })
 
-  scene.push({ [token]: { interaction } })
-  newGamestate.scene[title] = scene
+  scene.push({ type: SCENE, title, token, interaction })
+  newGamestate.scene = scene
 
   return newGamestate
 }

@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { IDS, SCENE } from '../../../constants'
 import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -54,8 +54,8 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
     showCards,
   })
 
-  scene.push({ [token]: { interaction } })
-  newGamestate.scene[title] = scene
+  scene.push({ type: SCENE, title, token, interaction })
+  newGamestate.scene = scene
 
   return newGamestate
 }

@@ -1,4 +1,4 @@
-import { VOTE } from '../../../constants'
+import { VOTE, SCENE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
 import { addVote, getVampirePlayerNumbersByRoleIds, getPlayerTokensByPlayerNumber, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
@@ -39,8 +39,8 @@ export const vampiresResponse = (gamestate, token, selected_mark_positions, titl
     uniqueInformations: { vampires },
   })
 
-  scene.push({ [token]: { interaction } })
-  newGamestate.scene[title] = scene
+  scene.push({ type: SCENE, title, token, interaction })
+  newGamestate.scene = scene
 
   return newGamestate
 }

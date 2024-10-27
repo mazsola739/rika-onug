@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 import { validateAnswerSelection } from '../../validators'
 
@@ -39,8 +40,8 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
       })
     }
   
-    scene.push({ [token]: { interaction } })
-    newGamestate.scene[title] = scene
+    scene.push({ type: SCENE, title, token, interaction })
+    newGamestate.scene = scene
   
     return newGamestate
   }

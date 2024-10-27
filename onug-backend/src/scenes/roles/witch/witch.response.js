@@ -1,4 +1,4 @@
-import { CENTER_CARD_POSITIONS } from '../../../constants'
+import { CENTER_CARD_POSITIONS, SCENE } from '../../../constants'
 import { getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleInteraction, formatPlayerIdentifier, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -37,8 +37,8 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
       showCards,
     })
 
-    scene.push({ [token]: { interaction } })
-    newGamestate.scene[title] = scene
+    scene.push({ type: SCENE, title, token, interaction })
+    newGamestate.scene = scene
 
     return newGamestate
 
@@ -70,8 +70,8 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
       private_message: ['interaction_swapped_cards', ...messageIdentifiers],
     })
 
-    scene.push({ [token]: { interaction } })
-    newGamestate.scene[title] = scene
+    scene.push({ type: SCENE, title, token, interaction })
+    newGamestate.scene = scene
 
     return newGamestate
   }

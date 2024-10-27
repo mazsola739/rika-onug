@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
 import { loversInteraction } from './lovers.interaction'
 
@@ -16,11 +17,11 @@ export const lovers = (gamestate, title) => {
       interaction = loversInteraction(newGamestate, token, title)
     }
 
-    scene.push({ [token]: { interaction } })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
   newGamestate.narration.push(narration)
-  newGamestate.scene[title] = scene
+  newGamestate.scene = scene
 
   return newGamestate
 }

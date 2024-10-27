@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomExposerInstructions } from './exposer.constants'
 import { exposerInteraction } from './exposer.interaction'
@@ -32,11 +32,11 @@ export const exposer = (gamestate, title, prefix) => {
       }
     }
 
-    scene.push({ [token]: { interaction } })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
   newGamestate.narration.push(narration)
-  newGamestate.scene[title] = scene
+  newGamestate.scene = scene
 
   return newGamestate
 }

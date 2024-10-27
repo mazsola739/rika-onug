@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
 import { internInteraction } from './intern.interaction'
 
@@ -22,11 +22,11 @@ export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
       interaction = internInteraction(newGamestate, token, title)
     }
 
-    scene.push({ [token]: { interaction } })
+    scene.push({ type: SCENE, title, token, interaction })
   })
 
   newGamestate.narration.push(narration)
-  newGamestate.scene[title] = scene
+  newGamestate.scene = scene
 
   return newGamestate
 }

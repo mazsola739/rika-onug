@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { getCardIdsByPositions, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 import { validateAnswerSelection } from '../../validators'
 import { getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield } from './squire.utils'
@@ -46,8 +47,8 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     })
   }
 
-  scene.push({ [token]: { interaction } })
-  newGamestate.scene[title] = scene
+  scene.push({ type: SCENE, title, token, interaction })
+  newGamestate.scene = scene
 
   return newGamestate
 }

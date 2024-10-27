@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { getPlayerNumberWithMatchingToken, getMarksByPositions, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
@@ -34,8 +35,8 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
     showMarks: viewMarks,
   })
 
-  scene.push({ [token]: { interaction } })
-  newGamestate.scene[title] = scene
+  scene.push({ type: SCENE, title, token, interaction })
+  newGamestate.scene = scene
 
   return newGamestate
 }

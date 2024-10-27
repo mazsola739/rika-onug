@@ -32,8 +32,8 @@ export const exposerResponse = (gamestate, token, selected_card_positions, title
     showCards: revealedCards,
   })
 
-  scene.push({ [token]: { interaction } })
-  newGamestate.scene[title] = scene
+  scene.push({ type: SCENE, title, token, interaction })
+  newGamestate.scene = scene
 
   return newGamestate
 }

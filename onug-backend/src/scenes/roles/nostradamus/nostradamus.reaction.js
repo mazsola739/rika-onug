@@ -1,3 +1,4 @@
+import { SCENE } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
 import { getNostradamusTeam } from './nostradamus.utils'
 
@@ -8,10 +9,10 @@ export const nostradamusReaction = (gamestate, title) => {
   const nostradamusTeam = getNostradamusTeam(newGamestate.nostradamus_team)
   const narration = ['nostradamus_teamstart_text', nostradamusTeam]
 
-  tokens.forEach((token) => { scene.push({ type: title, token, narration })})
+  tokens.forEach((token) => { scene.push({ type: SCENE, title, token, narration })})
 
   newGamestate.narration.push(narration)
-  newGamestate.scene[title] = scene
+  newGamestate.scene = scene
 
   return newGamestate
 }
