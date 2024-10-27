@@ -1,17 +1,17 @@
 import { STAGES } from '../constants'
 
-export const stopScene = (gamestate) => {
+export const stopScene = gamestate => {
   gamestate.stage = STAGES.ROOM
   gamestate.game_started = false
   gamestate.game_paused = false
   gamestate.game_stopped = true
   gamestate.game_finished = false
-  gamestate.scene_locked = true
-
+  gamestate.script_locked = true
+  gamestate.actual_scenes = []
 
   delete gamestate.narration
   delete gamestate.game_start_time
-  delete gamestate.actual_scene
+
   gamestate.players = resetPlayers(gamestate.players)
 
   return gamestate

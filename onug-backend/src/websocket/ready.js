@@ -23,10 +23,7 @@ export const ready = async (message) => {
 
     await upsertRoomState(newGamestate)
 
-    return broadcast(room_id, {
-      type: HYDRATE_READY,
-      players
-    })
+    return broadcast(room_id, { type: HYDRATE_READY, players })
   } catch (error) {
     logError(error)
   }

@@ -1,5 +1,5 @@
 import { ROOM_NAMES } from '../constants'
-import { logDebug, logTrace } from '../log'
+import { logDebug, logError, logTrace } from '../log'
 
 export const webSocketServerConnectionsPerRoom = {}
 export const initWebSocketConnections = () => ROOM_NAMES.forEach((roomName) => (webSocketServerConnectionsPerRoom[roomName] = {}))
@@ -24,11 +24,12 @@ export const broadcast = (room_id, jsonMessage) => {
   Object.values(webSocketServerConnectionsPerRoom[room_id]).forEach(ws => ws.send(JSON.stringify(jsonMessage)))
 }
 
-export const sendInteractionSceneToPlayer = gamestate => {
-  const interactionScenes = gamestate.interactionScenes?.[gamestate.scene_number]
-  const wsInRoom = webSocketServerConnectionsPerRoom?.[gamestate.room_id]
-  interactionScenes.forEach(interactionScene => {
-    logTrace(`interactionScene.sent: ${interactionScene.sent}`)
-    !interactionScene.sent && wsInRoom?.[interactionScene.token]?.send(JSON.stringify(interactionScene))
-  })
-}
+export const sendMessageToPlayer = (room_id, token, jsonMessage) => {
+  const playerConnection = webSocketServerConnectionsPerRoom?.[room_id]?.[token];
+  if (playerConnection) {
+    logDebug(`Sending message to user [${room_id}][${token}] with message [${JSON.stringify(jsonMessage)}]`);
+    playerConnection.send(JSON.stringify(jsonMessage));
+  } else {
+    logError(`No active WebSocket connection found for user [${room_id}][${token}]`);
+  }
+};

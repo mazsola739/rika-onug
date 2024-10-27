@@ -29,7 +29,7 @@ export const useGame = () => {
 
   useEffect(() => {
     if (transitionCompleted) {
-      sendJsonMessage?.({ type: SCENE, room_id, token, scene_finished: true }); //TYPE? TITLE?
+      sendJsonMessage?.({ type: SCENE, room_id, token, player_ready: true })
     }
   }, [sendJsonMessage, transitionCompleted])
 
@@ -37,11 +37,11 @@ export const useGame = () => {
     if (lastJsonMessage?.type === HYDRATE_SCENE) {
       interactionStore.setLastJsonMessage(lastJsonMessage)
 
-      if (Object.keys(lastJsonMessage.interaction).length > 0) {
+/*       if (Object.keys(lastJsonMessage.interaction).length > 0) {
         interactionStore.setMessage(lastJsonMessage.interaction.private_message)
         interactionStore.setInteraction(lastJsonMessage.interaction.title)
         interactionStore.toggleMessageBoxStatus(true)
-      }
+      } */
     }
 
     if (lastJsonMessage?.type === HYDRATE_GAME) {

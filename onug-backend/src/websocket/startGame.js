@@ -1,20 +1,23 @@
-import { logTrace } from '../log'
-import { validateRoom } from '../validators'
+import { REDIRECT, STAGES } from '../constants'
+import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { STAGES, REDIRECT } from '../constants'
+import { startScene } from '../scenes'
+import { validateRoom } from '../validators'
 import { broadcast } from './connections'
-import { startScene } from '../scenes/startScene'
-import { getNextScene } from '../scenes/getNextScene'
 
+// TODO: Implement random delay to confuse players regarding first role play
 export const startGame = async (ws, message) => {
   const { room_id, token } = message
-  logTrace(`Starting game in room: ${room_id}`)
+  logTrace(`Attempting to start game in room: ${room_id}`)
 
   const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
-  if (!roomIdValid) return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
+  if (!roomIdValid) {
+    logError(`Room validation failed for room: ${room_id}`)
+    return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
+  }
 
   const startTime = Date.now()
-  let newGamestate = startScene({
+  let newGamestate = {
     ...gamestate,
     stage: STAGES.GAME,
     game_start_time: startTime,
@@ -22,14 +25,33 @@ export const startGame = async (ws, message) => {
     game_started: true,
     game_stopped: false,
     game_finished: false,
-    scene_locked: true,
+    script_locked: true,
     narration: [],
-  })
+    scene: [],
+  }
 
-  logTrace(`Game started by player [${token}] in room [${room_id}]`)
-  await upsertRoomState(newGamestate)
-  
-  broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` })
+  const { players } = newGamestate
+  const allPlayersReady = Object.values(players).every(player => player.ready)
 
-  return getNextScene(newGamestate)
+  if (!allPlayersReady) {
+    logError(`Not all players are ready. Current readiness: ${JSON.stringify(players)}`)
+
+    return broadcast(room_id, { type: 'ERROR', message: 'All players must be ready to start the game.' })
+  }
+
+  newGamestate = startScene(newGamestate)
+
+  try {
+    logTrace(`Game started successfully in room [${room_id}] by player [${token}]`)
+
+    await upsertRoomState(newGamestate)
+
+    return broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` })
+  } catch (error) {
+    logError(`Error saving initial game state for room [${room_id}]: ${error.message}`)
+
+    ws.send(JSON.stringify({ type: 'ERROR', message: 'Game start failed. Please try again.' }))
+  }
+
+  return newGamestate
 }

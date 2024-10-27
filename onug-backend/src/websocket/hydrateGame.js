@@ -10,18 +10,14 @@ export const hydrateGame = async (ws, message) => {
   const gamestate = await readGamestate(room_id)
   const newGamestate = {...gamestate}
 
+  const { players } = newGamestate
+  Object.keys(players).forEach(playerId => players[playerId].ready = false)
+
   if (isGameStopped(gamestate))
-    return ws.send(
-      JSON.stringify({ type: REDIRECT, path: `/room/${room_id}` })
-    )
+    return ws.send(JSON.stringify({ type: REDIRECT, path: `/room/${room_id}` }))
 
   // TODO get actual scene based on scene_number and player token
-  const actual_scene = newGamestate.actual_scene
+  const actual_scene = newGamestate.actual_scenes[newGamestate.actual_scenes.length-1]
 
-  return ws.send(
-    JSON.stringify({
-      type: HYDRATE_GAME,
-      actual_scene,
-    })
-  )
+  return ws.send(JSON.stringify({ type: HYDRATE_GAME, actual_scene }))
 }

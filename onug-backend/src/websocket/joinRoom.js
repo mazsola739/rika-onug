@@ -70,32 +70,32 @@ export const joinRoom = async (ws, message) => {
 
     player_name = randomPlayerName(gamestate.available_names)
 
-    const isAdmin = Object.values(gamestate.players).every(player => !player.admin);
+    const isAdmin = Object.values(gamestate.players).every(player => !player.admin)
 
     if (isAdmin) {
       gamestate.players[token] = {
         name: player_name,
         admin: true,
         ready: false,
-      };
+      }
     } else {
       gamestate.players[token] = {
         name: player_name,
         admin: false,
         ready: false,
-      };
+      }
     }
 
     gamestate.available_names = gamestate.available_names.filter(
       (name) => name !== player_name
-    );
+    )
 
-    await upsertRoomState(gamestate);
+    await upsertRoomState(gamestate)
   }
 
-  addUserToRoom(ws, token, room_id);
+  addUserToRoom(ws, token, room_id)
 
-  const players = getPlayerNames(gamestate);
+  const players = getPlayerNames(gamestate)
 
   broadcast(room_id, { 
     type: HYDRATE_ROOM,
@@ -103,7 +103,7 @@ export const joinRoom = async (ws, message) => {
     selected_cards: gamestate.selected_cards, 
     selected_expansions: gamestate.selected_expansions,
     players,
-  });
+  })
 
   return ws.send(
     JSON.stringify({
@@ -113,5 +113,5 @@ export const joinRoom = async (ws, message) => {
       room_id,
       player: { player_name },
     })
-  );
-};
+  )
+}

@@ -1,6 +1,6 @@
 import { logTrace } from '../log'
 
-export const pauseScene = (gamestate) => {
+export const pauseScene = gamestate => {
   
   gamestate.game_paused = !gamestate.game_paused
 
