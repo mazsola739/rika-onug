@@ -4,6 +4,7 @@ import { useCallback } from 'react'
 import { NameBackground, PlayerName, StyledCard } from './Card.styles'
 import { CardProps } from './Card.types'
 
+//TODO player name?
 export const Card: React.FC<CardProps> = observer(({ image, size, playerName }) => {
   const isSelected = false //TODO
 

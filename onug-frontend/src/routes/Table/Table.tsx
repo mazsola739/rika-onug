@@ -4,6 +4,7 @@ import { StyledTable, TableCenter } from './Table.styles'
 import { TableFooter } from './TableFooter'
 import { TableHeader } from './TableHeader'
 import { useTable } from './useTable'
+import { TableInfoPanel } from './TableInfoPanel'
 
 export const Table: React.FC = observer(() => {
   const { players, left, middle, right } = useTable()
@@ -21,6 +22,7 @@ export const Table: React.FC = observer(() => {
       </Main>
       {players && <AroundTableSide players={right} />}
       <TableFooter />
+      <TableInfoPanel />
     </StyledTable>
   )
 })

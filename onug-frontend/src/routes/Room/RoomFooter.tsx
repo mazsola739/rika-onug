@@ -19,7 +19,6 @@ export const RoomFooter: React.FC = observer(() => {
 
   return (
     <Footer>
-
       <FooterButtons>
         <Button onClick={handleResetGame} buttonText={BUTTONS.reset_game_label} variant='blue' />
         <Button onClick={handleToGameTable} disabled={!deckStore.totalPlayers} buttonText={buttonText} variant='green' />

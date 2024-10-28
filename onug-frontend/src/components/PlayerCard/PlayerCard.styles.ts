@@ -8,7 +8,7 @@ export const StyledPlayerCard = styled.div`
 
 export const Tokens = styled.div`
   display: flex;
-  min-height: 150px;
+  min-height: 130px;
   flex-direction: column;
   gap: 3px;
 `

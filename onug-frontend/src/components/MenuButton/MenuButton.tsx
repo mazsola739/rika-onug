@@ -1,6 +1,6 @@
-import { observer } from 'mobx-react-lite';
-import { StyledMenuButton } from './MenuButton.styles';
-import { MenuButtonProps } from './MenuButton.types';
+import { observer } from 'mobx-react-lite'
+import { StyledMenuButton } from './MenuButton.styles'
+import { MenuButtonProps } from './MenuButton.types'
 
 export const MenuButton: React.FC<MenuButtonProps> = observer(({ isSelected, isActive, expansion, anchor }) => {
 
@@ -9,9 +9,9 @@ export const MenuButton: React.FC<MenuButtonProps> = observer(({ isSelected, isA
 
  /*  //nav
   const handleClick = (anchor: string) => {
-    const element = document.getElementById(anchor);
+    const element = document.getElementById(anchor)
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      element.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
@@ -38,5 +38,5 @@ export const MenuButton: React.FC<MenuButtonProps> = observer(({ isSelected, isA
   
   return (
     <StyledMenuButton isHighlighted={isHighlighted}>{buttonText}</StyledMenuButton>
-  );
-});
+  )
+})

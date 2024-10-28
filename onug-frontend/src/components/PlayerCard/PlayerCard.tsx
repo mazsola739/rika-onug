@@ -4,6 +4,7 @@ import { deckStore } from 'store'
 import { StyledPlayerCard, Tokens } from './PlayerCard.styles'
 import { PlayerCardProps } from './PlayerCard.types'
 
+//TODO strong refactor need!
 export const PlayerCard: React.FC<PlayerCardProps> = observer(
   ({  position, isCenter, id, ready, playerName  }) => {
     const { hasMarks } = deckStore
@@ -31,12 +32,12 @@ export const PlayerCard: React.FC<PlayerCardProps> = observer(
 
     return (
       <StyledPlayerCard>
-        <Card image={imgSrc} size={110} playerName={playerName}/>
+        <Card image={imgSrc} size={90} playerName={playerName}/>
         <Tokens>
           {!isCenter && <Token tokenName={playerNumberToken} size={35} />}
-          {!isCenter && hasMarks && <Token tokenName="mark_of_clarity" size={35} />}{/* TODO mark of clarity now, but later background! */}
-          {/* {!isCenter && hasShield && <Token tokenName="mark_of_clarity" size={35} />} TODO*/}
-          {/* {!isCenter && hasArtifact && <Token tokenName="mark_of_clarity" size={35} />} TODO*/}
+          {!isCenter && hasMarks && <Token tokenName='mark_back' size={35} />}{/* TODO mark of clarity now, but later background! */}
+          {/* {!isCenter && hasShield && <Token tokenName='mark_of_clarity' size={35} />} TODO*/}
+          {/* {!isCenter && hasArtifact && <Token tokenName='mark_of_clarity' size={35} />} TODO*/}
         </Tokens>
       </StyledPlayerCard>
     )

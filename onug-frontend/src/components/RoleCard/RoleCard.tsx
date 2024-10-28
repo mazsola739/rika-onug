@@ -38,7 +38,7 @@ export const RoleCard: React.FC<RoleCardProps> = observer(({ card }) => {
 
   return (
     <StyledRoleCard isSelected={isSelected} onClick={handleCardClick} data-testid={testId} >
-      <RoleImage src={imageSrc} alt={display_name} isSelected={isSelected} />
+      <RoleImage src={imageSrc} alt={display_name} isSelected={isSelected} /> {/* TODO roleimage component??? */}
       <RoleCardName isSelected={isSelected}>{display_name}</RoleCardName>
     </StyledRoleCard>
   )

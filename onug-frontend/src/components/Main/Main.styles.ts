@@ -1,28 +1,24 @@
 import styled from '@emotion/styled'
 
 export const StyledMain = styled.main`
+display: flex;
+  flex-direction: column;
   overflow-x: hidden;
   overflow-y: auto;
-  display: flex;
-  flex-direction: row;
 
-  /* width */
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
 
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+}
 
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: white;
-  }
-
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: grey;
-  }
+/* For Firefox */
+.scrollable {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
 `

@@ -33,6 +33,8 @@ export const StyledInfo = styled.div`
   flex-direction: column;
   gap: 5px;
   min-height: 105px;
+  border-bottom: 2px solid #969290;
+  padding-bottom: 5px;
   align-items: center;
   grid-template-areas:
     '. character'
@@ -81,6 +83,9 @@ export const StyledPlayerNames = styled.div`
 
   color: white;
   font-size: 14px;
+
+  border-bottom: 2px solid #969290;
+  padding-bottom: 5px;
 `
 
 export const Names = styled.div`
@@ -115,9 +120,6 @@ export const RoomCardList = styled.div`
   gap: 10px;
 
   & > section:last-child {
-    min-height: 100%;
+    min-height: 90vh;
   }
 `
-
-//INFOPANEL
-export const StyledRoomInfoPanel = styled.div``

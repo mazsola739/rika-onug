@@ -43,7 +43,7 @@ export const scene = async (ws, message) => {
 
     newGamestate = await sceneHandler(newGamestate)
 
-    const player = ws.token 
+    const player = ws.token
 
     newGamestate.scene.map(scene => scene.token === player && ws.send(JSON.stringify({ ...scene })))
 

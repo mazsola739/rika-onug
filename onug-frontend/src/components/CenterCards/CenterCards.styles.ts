@@ -4,7 +4,6 @@ export const StyledCenterCards = styled.div`
   align-items: flex-end;
   display: flex;
   flex-direction: row;
-  gap: 15px;
   justify-content: center;
 `
 
@@ -21,5 +20,4 @@ export const GroupTitle = styled.div`
 export const Cards = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 5px;
 `

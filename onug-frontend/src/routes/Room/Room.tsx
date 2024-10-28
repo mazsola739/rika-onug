@@ -7,6 +7,7 @@ import { RoomHeader } from './RoomHeader'
 import { RoomInfoPanel } from './RoomInfoPanel'
 import { useRoom } from './useRoom'
 
+//TODO searchbar?
 export const Room: React.FC = observer(() => {
   const { orderedTeams, anchorList } = useRoom()
 

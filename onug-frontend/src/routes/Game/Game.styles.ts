@@ -43,10 +43,10 @@ export const StyledGame = styled.div<GameProps>`
 
   min-width: 100%;
   display: grid;
-  grid-template-columns: 170px calc(100vw - 340px) 170px;
-  grid-template-rows: 80px 170px calc(100vh - 470px) 220px;
+  grid-template-columns: 170px calc(100vw - 740px) 170px 400px;
+  grid-template-rows: 80px 130px calc(100vh - 460px) 250px;
 
-  header {
+ header {
     grid-area: 1 / 1 / 2 / 4;
   }
   & > div:nth-of-type(1) {
@@ -57,6 +57,9 @@ export const StyledGame = styled.div<GameProps>`
   }
   & > div:nth-of-type(3) {
     grid-area: 2 / 3 / 5 / 4;
+  }
+  & > div:nth-of-type(4) {
+    grid-area: 1 / 4 / 5 / 5;
   }
   main {
     grid-area: 3 / 2 / 4 / 3;
@@ -108,43 +111,30 @@ export const Text = styled.span`
 //MAIN
 export const TableCenter = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
-  gap: 10px;
+  align-items: center;
+  gap: 5px;
 `
 
 //FOOTER
 export const StyledGameFooter = styled.div`
   display: grid;
-  grid-template-columns: 1fr 140px 1fr;
-  grid-template-rows: 1fr;
-  align-items: center;
-  justify-items: stretch;
-  gap: 10px;
-`
+  grid-template-columns: repeat(3, 1fr);
 
-export const PlayerInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  align-items: flex-end;
-`
-
-export const Player = styled.span`
-  color: white;
-  font-size: 24px;
-  display: inline-flex;
-  gap: 5px;
-  align-items: center;
+  & > :first-child {
+    grid-column: 2;
+  }
+  padding-bottom: 10px;
 `
 
 export const Tokens = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `
 
-export const GameContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`
+//INFOPANEL
+export const InterAction = styled.div``

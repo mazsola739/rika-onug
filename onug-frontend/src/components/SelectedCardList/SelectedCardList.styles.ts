@@ -6,27 +6,24 @@ export const StyledSelectedCardList = styled.div`
   justify-content: flex-start;
   align-items: center;
   min-width: 80%;
-  overflow-y: hidden;
+  flex-direction: row;
+
   overflow-x: auto;
+  overflow-y: hidden; 
 
-    /* height */
+  /* Custom Scrollbar Styles */
   ::-webkit-scrollbar {
-    height: 10px;
+    height: 8px; /* Height of horizontal scrollbar */
+    width: 8px; /* Width of vertical scrollbar */
   }
 
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: white;
-    max-width: 50px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
   }
 
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: grey;
-  }
+  /* For Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+
 `

@@ -3,7 +3,7 @@ import { StyledRoleCardProps } from './RoleCard.types'
 
 export const StyledRoleCard = styled.div<StyledRoleCardProps>`
   align-items: center;
-  background-color: ${({ isSelected }) => isSelected ? 'rgba(0, 0, 0, 0.3)' : 'transparent'};
+  background-color: ${({ isSelected }) => isSelected ? 'rgba(0, 0, 0, 0.2)' : 'transparent'};
   border: ${({ isSelected }) => isSelected ? '1px solid yellow' : '1px solid transparent'};
   display: flex;
   flex-direction: column;

@@ -14,14 +14,14 @@ const colorVariants: Record<AnchorTypes, string> = {
 };
 
 const imageVariants: Record<AnchorTypes, string> = {
-  'Village & Hero': '/assets/cards/villager.png',
-  'Village': '/assets/cards/villager.png',
-  'Hero': '/assets/cards/innocent_bystander.png',
-  'Own': '/assets/cards/tanner.png',
-  'Werewolf': '/assets/cards/werewolf.png',
-  'Vampire': '/assets/cards/vampire.png',
-  'Alien': '/assets/cards/alien.png',
-  'Villain': '/assets/cards/dr_peeker.png',
+  'Village & Hero': '/assets/playingcards/troublemaker_2.png',
+  'Village': '/assets/playingcards/troublemaker_2.png',
+  'Hero': '/assets/playingcards/innocent_bystander.png',
+  'Own': '/assets/playingcards/tanner_2.png',
+  'Werewolf': '/assets/playingcards/werewolf_2.png',
+  'Vampire': '/assets/playingcards/the_count.png',
+  'Alien': '/assets/playingcards/alien_female.png',
+  'Villain': '/assets/playingcards/temptress.png',
 };
 
 export interface NavListItemProps {
@@ -80,7 +80,8 @@ export const ListItem = styled.li<NavListItemProps>`
     filter: drop-shadow(3px 3px 3px black);
     background-color: ${({ anchor }) => getBackgroundColor(anchor)};
     background-image: url(${({ anchor }) => getBackgroundImage(anchor)});
+    background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: 0 -30px;
   }
 `;

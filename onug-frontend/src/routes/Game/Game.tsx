@@ -1,9 +1,11 @@
-import { AroundTableSide, AroundTableTop, CenterCards, CenterTokens, Main } from "components"
-import { observer } from "mobx-react-lite"
-import { StyledGame, TableCenter } from "./Game.styles"
-import { GameFooter } from "./GameFooter"
-import { GameHeader } from "./GameHeader"
-import { useGame } from "./useGame"
+import { AroundTableSide, AroundTableTop, CenterCards, CenterTokens, Main } from 'components'
+import { observer } from 'mobx-react-lite'
+import { TableInfoPanel } from 'routes/Table/TableInfoPanel'
+import { StyledGame, TableCenter } from './Game.styles'
+import { GameFooter } from './GameFooter'
+import { GameHeader } from './GameHeader'
+import { useGame } from './useGame'
+import { GameInfoPanel } from './GameInfoPanel'
 
 export const Game: React.FC = observer(() => {
   const { players, left, middle, right, nightMode, setTransitionCompleted } = useGame()
@@ -21,6 +23,7 @@ export const Game: React.FC = observer(() => {
       </Main>
       {players && <AroundTableSide players={right} />}
       <GameFooter />
+      <GameInfoPanel />
     </StyledGame>
   )
 })

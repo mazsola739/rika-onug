@@ -13,7 +13,6 @@ export const StyledAroundTableTop = styled.div`
   flex-direction: row;
   color: white;
   justify-content: space-around;
-`
-
-export const CardContainer = styled.div`
+  border-bottom: 2px solid #969290;
+  border-radius: 0 0 10px 10px;
 `

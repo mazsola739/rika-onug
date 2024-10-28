@@ -1,14 +1,14 @@
-import { Header, ReadyList } from 'components'
+import { Header } from 'components'
 import { observer } from 'mobx-react-lite'
-import { boardStore } from 'store'
-import { Ready } from './Table.styles'
+import { Sun } from './Table.styles'
+
 
 export const TableHeader: React.FC = observer(() => {
-    const { players } = boardStore
 
+//TODO
     return (
       <Header>
-        <Ready>{players && <ReadyList players={players} />}</Ready>
+        <Sun src="/assets/logos/sun.png" alt="sun" /> The sun is up!
       </Header>
     )
   }

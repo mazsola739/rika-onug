@@ -1,4 +1,5 @@
 //TODO better rules (wakes up no need)
+//TODO small guide
 export const rules_role: Record<string, string> = {
   rules_alien: 'Wake and look for the other aliens and then do the action as instructed by the app.',
   rules_alphawolf: 'Wake with the other werewolves, then wake again and give the center werewolf card to a non werewolf player.',
