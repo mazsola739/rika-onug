@@ -4,6 +4,7 @@ import { roomStore } from 'store'
 import { RoomCardList, StyledRoom } from './Room.styles'
 import { RoomFooter } from './RoomFooter'
 import { RoomHeader } from './RoomHeader'
+import { RoomInfoPanel } from './RoomInfoPanel'
 import { useRoom } from './useRoom'
 
 export const Room: React.FC = observer(() => {
@@ -22,6 +23,7 @@ export const Room: React.FC = observer(() => {
       </Main>
       <Filter />
       <RoomFooter />
+      <RoomInfoPanel />
     </StyledRoom>
   )
 })

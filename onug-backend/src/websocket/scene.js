@@ -43,7 +43,10 @@ export const scene = async (ws, message) => {
 
     newGamestate = await sceneHandler(newGamestate)
 
-    ws.send(JSON.stringify({ type: HYDRATE_SCENE, success: true }))
+    const player = ws.token 
+
+    newGamestate.scene.map(scene => scene.token === player && ws.send(JSON.stringify({ ...scene })))
+
     logTrace(`Scene interaction processed successfully for room: ${room_id}`)
 
   } catch (error) {

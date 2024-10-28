@@ -37,7 +37,7 @@ export const revealerResponse = (gamestate, token, selected_card_positions, titl
     showCards: revealedCard,
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
+  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   newGamestate.scene = scene
 
   return newGamestate

@@ -26,7 +26,7 @@ export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppel
       interaction = beholderInteraction(newGamestate, token, title)
     }
 
-    scene.push({ type: SCENE, title, token, interaction })
+    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   })
 
   newGamestate.narration.push(narration)

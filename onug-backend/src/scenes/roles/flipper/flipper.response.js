@@ -37,7 +37,7 @@ export const flipperResponse = (gamestate, token, selected_card_positions, title
     showCards: revealedCard,
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
+  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   newGamestate.scene = scene
 
   return newGamestate

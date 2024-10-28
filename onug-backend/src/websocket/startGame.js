@@ -30,14 +30,15 @@ export const startGame = async (ws, message) => {
     scene: [],
   }
 
-  const { players } = newGamestate
+  //TODO READY dont delete!!!!!!!!!!!!!!!!!
+/*   const { players } = newGamestate
   const allPlayersReady = Object.values(players).every(player => player.ready)
 
   if (!allPlayersReady) {
     logError(`Not all players are ready. Current readiness: ${JSON.stringify(players)}`)
 
     return broadcast(room_id, { type: 'ERROR', message: 'All players must be ready to start the game.' })
-  }
+  } */
 
   newGamestate = startScene(newGamestate)
 

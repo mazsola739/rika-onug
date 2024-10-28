@@ -34,6 +34,7 @@ class GamePlayStore {
     this.isGamePlayStopped = !this.isGamePlayStopped
   } //TODO do i need?
 
+  //TODO refactor!!!!!!
   resetGamePlay(): void {
     this.isGamePlayStarted = false
     this.isGamePlayStopped = true

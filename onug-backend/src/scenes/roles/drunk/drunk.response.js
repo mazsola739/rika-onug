@@ -30,7 +30,7 @@ export const drunkResponse = (gamestate, token, selected_card_positions, title) 
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
+  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   newGamestate.scene = scene
 
   return newGamestate

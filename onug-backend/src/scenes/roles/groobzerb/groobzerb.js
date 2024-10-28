@@ -22,7 +22,7 @@ export const groobzerb = (gamestate, title, hasDoppelganger) => {
       interaction = groobzerbInteraction(newGamestate, token, title)
     }
 
-    scene.push({ type: SCENE, title, token, interaction })
+    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   })
 
   newGamestate.narration.push(narration)

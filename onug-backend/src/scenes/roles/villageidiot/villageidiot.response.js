@@ -30,7 +30,7 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
     private_message: ['interaction_moved', selected_answer === 'left' ? 'direction_left' : 'direction_right'],
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
+  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   newGamestate.scene = scene
 
   return newGamestate

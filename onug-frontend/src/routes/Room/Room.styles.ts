@@ -4,62 +4,95 @@ import styled from '@emotion/styled'
 export const StyledRoom = styled.div`
   min-width: 100%;
   display: grid;
-  grid-template-columns: 160px calc(100vw - 330px) 160px;
-  grid-template-rows: 160px calc(100vh - 330px) 160px;
+  grid-template-columns: 160px calc(100vw - 670px) 160px 350px;
+  grid-template-rows: 120px calc(100vh - 200px) 80px;
 
   nav {
-    grid-area: 2 / 1 / 4 / 2;
+    grid-area: 2 / 1 / 3 / 2;
   }
   header {
-    grid-area: 1 / 1 / 2 / 4;
+    grid-area: 1 / 1 / 2 / 5;
   }
   main {
-     grid-area: 2 / 2 / 3 / 3;
+    grid-area: 2 / 2 / 3 / 3;
   }
   footer {
-    grid-area: 3 / 2 / 4 / 3;
+    grid-area: 3 / 1 / 4 / 5;
   }
   fieldset {
-     grid-area: 2 / 3 / 4 / 4;
+    grid-area: 2 / 3 / 3 / 4;
+  }
+  & > div:nth-of-type(1) {
+    grid-area: 2 / 4 / 3 / 5;
   }
 `
 
 //FOOTER
-export const StyledInfo  = styled.div`
-  display: flex;
+export const StyledInfo = styled.div`
+  display: grid;
   flex-direction: column;
-  gap: 10px;
-`
-
-export const RuleInfo = styled.div`
+  gap: 5px;
+  min-height: 105px;
   align-items: center;
-  display: flex;
-  flex-direction: row;
-  height: 75px;
+  grid-template-areas:
+    '. character'
+    'avatar rule';
+
+  img {
+    grid-area: avatar;
+  }
+  h4 {
+    grid-area: character;
+  }
+  p {
+    grid-area: rule;
+  }
 `
 
-export const RuleImage = styled.img`
-  width: 75px;
+export const Avatar = styled.img`
+  width: 80px;
   border: 1px solid yellow;
 `
 
-export const RuleInfoDescription = styled.p`
+export const Character = styled.h4`
   color: yellow;
-  font-size: 20px;
+  font-size: 14px;
   margin: 0;
-  padding: 5px;
+  padding: 0;
+  text-align: center;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
+`
+
+export const Rule = styled.p`
+  color: yellow;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
   text-align: left;
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
+    1px 1px 0 black;
 `
 
 export const StyledPlayerNames = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
-  gap: 5px;
+
   color: white;
   font-size: 14px;
-  margin-top: 10px;
+`
+
+export const Names = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: wrap;
+`
+
+export const Players = styled.h4`
+  text-align: center;
 `
 
 export const Player = styled.div`
@@ -85,3 +118,6 @@ export const RoomCardList = styled.div`
     min-height: 100%;
   }
 `
+
+//INFOPANEL
+export const StyledRoomInfoPanel = styled.div``

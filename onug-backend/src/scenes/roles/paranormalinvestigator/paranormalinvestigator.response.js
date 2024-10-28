@@ -49,7 +49,7 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
     showCards,
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
+  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   newGamestate.scene = scene
 
   return newGamestate

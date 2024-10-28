@@ -28,6 +28,6 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(
       roomStore.toggleInfo(id)
     }, [id, sendJsonMessage])
 
-    return <CardImage image={card.card_name} key={index} onClick={handleDeselect} size={85} />
+    return <CardImage image={card.card_name} key={index} onClick={handleDeselect} size={70} />
   }
 )

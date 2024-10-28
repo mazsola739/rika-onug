@@ -1,17 +1,14 @@
 import styled from '@emotion/styled'
 
-export const StyledSelectedCardList = styled.div`
+export const StyledInfoPanel = styled.div`
+overflow-x: hidden;
+  overflow-y: auto;
   display: flex;
-  gap: 3px;
-  justify-content: flex-start;
-  align-items: center;
-  min-width: 80%;
-  overflow-y: hidden;
-  overflow-x: auto;
+  flex-direction: column;
 
-    /* height */
+  /* width */
   ::-webkit-scrollbar {
-    height: 10px;
+    width: 10px;
   }
 
   /* Track */
@@ -22,7 +19,6 @@ export const StyledSelectedCardList = styled.div`
   /* Handle */
   ::-webkit-scrollbar-thumb {
     background: white;
-    max-width: 50px;
   }
 
   /* Handle on hover */

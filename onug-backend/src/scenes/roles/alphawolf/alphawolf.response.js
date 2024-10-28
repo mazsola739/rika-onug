@@ -28,7 +28,7 @@ export const alphawolfResponse = (gamestate, token, selected_card_positions, tit
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
+  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   newGamestate.scene = scene
 
   return newGamestate

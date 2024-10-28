@@ -29,7 +29,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     })
   }, [sendJsonMessage])
 
-  const handleResetGame = useCallback(() => {
+  const handleResetSelection = useCallback(() => {
     sendJsonMessage?.({
       type: RESET,
       room_id,
@@ -149,7 +149,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     handleLeaveRoom,
     handleToGameTable,
     handleLeaveTable,
-    handleResetGame,
+    handleResetGame: handleResetSelection,
     handleStartGame,
     handleReady,
     handlePauseGame,

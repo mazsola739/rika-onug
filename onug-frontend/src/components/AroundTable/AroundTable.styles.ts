@@ -4,7 +4,7 @@ export const StyledAroundTableSide = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 `
 

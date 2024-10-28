@@ -23,7 +23,7 @@ export const pickpocket = (gamestate, title, prefix) => {
       }
     }
 
-    scene.push({ type: SCENE, title, token, interaction })
+    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   })
 
   newGamestate.narration.push(narration)

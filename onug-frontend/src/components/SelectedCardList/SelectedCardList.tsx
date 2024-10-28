@@ -1,6 +1,6 @@
-import { SelectedCard } from 'components'
 import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
+import { SelectedCard } from './SelectedCard'
 import { StyledSelectedCardList } from './SelectedCardList.styles'
 
 export const SelectedCardList: React.FC = observer(() => {

@@ -29,7 +29,7 @@ export const psychicResponse = (gamestate, token, selected_card_positions, title
     showCards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0],
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
+  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   newGamestate.scene = scene
 
   return newGamestate

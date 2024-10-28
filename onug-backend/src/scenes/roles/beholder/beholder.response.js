@@ -40,7 +40,7 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
       })
     }
   
-    scene.push({ type: SCENE, title, token, interaction })
+    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
     newGamestate.scene = scene
   
     return newGamestate

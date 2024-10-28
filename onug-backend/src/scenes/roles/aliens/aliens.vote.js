@@ -17,7 +17,7 @@ export const aliensVote = (gamestate, title) => {
       interaction = aliensVoteResult(newGamestate, token, title)
     }
 
-    scene.push({ type: SCENE, title, token, interaction })
+    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   })
 
   newGamestate.narration.push(narration)

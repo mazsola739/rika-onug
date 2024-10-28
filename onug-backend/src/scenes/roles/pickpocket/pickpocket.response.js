@@ -35,7 +35,7 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
     showMarks: viewMarks,
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
+  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   newGamestate.scene = scene
 
   return newGamestate

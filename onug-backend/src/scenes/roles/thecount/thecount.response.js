@@ -35,7 +35,7 @@ export const thecountResponse = (gamestate, token, selected_mark_positions, titl
     private_message: ['interaction_mark_of_fear', formatPlayerIdentifier(selected_mark_positions)[0]],
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
+  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   newGamestate.scene = scene
 
   return newGamestate

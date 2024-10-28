@@ -26,7 +26,7 @@ export const sentinelResponse = (gamestate, token, selected_card_positions, titl
     private_message: ['interaction_placed_shield', formatPlayerIdentifier(selected_card_positions)[0]],
   })
 
-  scene.push({ type: SCENE, title, token, interaction })
+  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
   newGamestate.scene = scene
 
   return newGamestate
