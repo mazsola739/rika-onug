@@ -4,26 +4,26 @@ import styled from '@emotion/styled'
 export const StyledRoom = styled.div`
   min-width: 100%;
   display: grid;
-  grid-template-columns: 160px calc(100vw - 670px) 160px 350px;
+  grid-template-columns: 160px calc(100vw - 720px) 160px 400px;
   grid-template-rows: 120px calc(100vh - 200px) 80px;
 
   nav {
     grid-area: 2 / 1 / 3 / 2;
   }
   header {
-    grid-area: 1 / 1 / 2 / 5;
+    grid-area: 1 / 1 / 2 / 4;
   }
   main {
     grid-area: 2 / 2 / 3 / 3;
   }
   footer {
-    grid-area: 3 / 1 / 4 / 5;
+    grid-area: 3 / 1 / 4 / 4;
   }
   fieldset {
     grid-area: 2 / 3 / 3 / 4;
   }
   & > div:nth-of-type(1) {
-    grid-area: 2 / 4 / 3 / 5;
+    grid-area: 1 / 4 / 4 / 5;
   }
 `
 

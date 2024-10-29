@@ -2,8 +2,8 @@ import * as messages_text from 'constant/messages'
 import * as narration_text from 'constant/narrations'
 import { makeAutoObservable } from 'mobx'
 import { InteractionType, MessagesType, NarrationType } from 'types'
-import { playersStore } from './PlayersStore'
 import { deckStore } from './DeckStore'
+import { playersStore } from './PlayersStore'
 
 class InteractionStore {
   interaction: InteractionType
@@ -37,13 +37,6 @@ class InteractionStore {
     return this.privateMessageStr
   }
 
-  get player(): { player_name: string; player_number: number } {
-    return {
-      player_name: playersStore.player?.player_name || '',
-      player_number: playersStore.player?.player_number || 0
-    }
-  }
-
   closeYourEyes(): void {
     this.interaction = null
     this.narrationStr = ''
@@ -51,6 +44,14 @@ class InteractionStore {
 
     deckStore.clearPlayerCard()
     deckStore.clearPlayerMark()
+
+    const tablePlayer = playersStore.tablePlayer;
+    if (tablePlayer) {
+        tablePlayer.player_card_id = 0  
+        tablePlayer.player_mark = ''
+    }
+
+    playersStore.initializeTablePlayers()
   }
 
 }

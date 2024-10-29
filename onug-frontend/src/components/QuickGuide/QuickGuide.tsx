@@ -1,34 +1,47 @@
-
 import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
 import { Guide, Item, QuickGuideRule, StyledQuickGuide } from './QuickGuide.styles'
 import { QuickGuideToken } from './QuickGuideToken'
+import { CardType, TokenType } from 'types'
+import { getUniqueItems, isCardType } from './QuickGuide.utils'
 
 //TODO quick guide text
 export const QuickGuide: React.FC = observer(() => {
   const { selectedCards, selectedMarks, artifacts } = deckStore
 
+  const uniqueSelectedCards = getUniqueItems(
+    selectedCards,
+    (card) => card.display_name
+  )
+  const uniqueSelectedMarks = getUniqueItems(
+    selectedMarks,
+    (mark) => mark.token_name
+  )
+
+  const renderItem = (item: CardType | TokenType) => {
+    if (isCardType(item)) {
+      return (
+        <Item key={item.display_name} expansion={item.expansion}>
+          <QuickGuideToken image={item.card_name} expansion={item.expansion} />
+          <QuickGuideRule>{item.rules}</QuickGuideRule>
+        </Item>
+      )
+    } else {
+      return (
+        <Item key={item.token_name} expansion={item.expansion}>
+          <QuickGuideToken image={item.token_name} />
+          <QuickGuideRule>{item.rules}</QuickGuideRule>
+        </Item>
+      )
+    }
+  }
+
   return (
     <Guide>
       <StyledQuickGuide>QUICK GUIDE</StyledQuickGuide>
-      {selectedCards.map((card, index) => (
-        <Item key={index} expansion={card.expansion}>
-          <QuickGuideToken image={card.card_name} expansion={card.expansion} />
-          <QuickGuideRule>{card.rules}</QuickGuideRule>
-        </Item>
-      ))}
-      {selectedMarks.map((mark, index) => (
-        <Item key={index} expansion={mark.expansion}>
-          <QuickGuideToken image={mark.token_name} />
-          <QuickGuideRule>{mark.rules}</QuickGuideRule>
-          </Item>
-        ))}
-      {artifacts.map((artifact, index) => (
-        <Item key={index} expansion={artifact.expansion}>
-          <QuickGuideToken image={artifact.token_name} />
-          <QuickGuideRule>{artifact.rules}</QuickGuideRule>
-        </Item>
-      ))}
+      {uniqueSelectedCards.map((card) => renderItem(card))}
+      {uniqueSelectedMarks.map((mark) => renderItem(mark))}
+      {artifacts.map((artifact) => renderItem(artifact))}
     </Guide>
   )
 })

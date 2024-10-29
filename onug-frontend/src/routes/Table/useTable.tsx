@@ -43,10 +43,10 @@ export const useTable = () => {
     }
   }, [lastJsonMessage, playersStore.setPlayer, playersStore.setPlayers, navigate])
 
-  const { players, player } = playersStore
+  const { tablePlayers, tablePlayer } = playersStore
 
-  const sides = players && player ? splitPlayersToTable(players, player) : null
+  const sides = tablePlayers && tablePlayer ? splitPlayersToTable(tablePlayers, tablePlayer) : null
   const { left = [], middle = [], right = [] } = sides || {}
 
-  return { players, player, left, middle, right }
+  return { tablePlayers, tablePlayer, left, middle, right }
 }

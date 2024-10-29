@@ -3,7 +3,8 @@ import styled from '@emotion/styled'
 export const StyledPlayerCard = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  justify-content: center;
+  align-items: flex-start;
 `
 
 export const Tokens = styled.div`

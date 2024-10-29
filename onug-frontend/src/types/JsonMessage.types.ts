@@ -7,6 +7,17 @@ export type PlayersType = {
   ready?: boolean
 }
 
+export type PlayerPosition = 'player_1' | 'player_2' | 'player_3' | 'player_4' | 'player_5' | 'player_6' | 'player_7' | 'player_8' | 'player_9' | 'player_10' | 'player_11' | 'player_12'
+
+export type TablePlayerType = {
+  player_name: string
+  player_number?: PlayerPosition | ''
+  player_card_id?: number
+  player_mark?: string
+  artifact?: boolean
+  shield?: boolean
+}
+
 export type PlayerType = {
   player_name: string
   player_number?: number
@@ -24,7 +35,6 @@ export type ActualSceneType = {
   scene_title: string
 }
 
-type PlayerPosition = 'player_1' | 'player_2' | 'player_3' | 'player_4' | 'player_5' | 'player_6' | 'player_7' | 'player_8' | 'player_9' | 'player_10' | 'player_11' | 'player_12'
 
 export type InteractionType = {
   answer_options?: string[]

@@ -5,6 +5,7 @@
 /onug-backend/node_modules
 /onug-frontend/node_modules
 /onug-e2e/node_modules
+/onug-frontend/delete
 
 # testing
 /coverage

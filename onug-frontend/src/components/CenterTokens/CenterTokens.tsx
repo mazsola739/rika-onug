@@ -38,7 +38,7 @@ export const CenterTokens: React.FC = observer(() => {
             {artifacts.map(
               (artifact, index) =>
                 artifact.token_name !== 'shield' && (
-                  <Token key={index} tokenName={artifact.token_name} size={40} />
+                  <Token key={index} tokenName={"artifact_back"} size={40} />
                 )
             )}
           </Tokens>

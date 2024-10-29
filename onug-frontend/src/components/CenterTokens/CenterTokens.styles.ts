@@ -24,5 +24,5 @@ export const Tokens = styled.div`
   gap: 5px;
   align-content: center;
   justify-content: center;
-  max-width: 500px;
+  max-width: 200px;
 `

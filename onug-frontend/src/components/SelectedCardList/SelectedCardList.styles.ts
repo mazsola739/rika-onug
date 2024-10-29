@@ -5,7 +5,7 @@ export const StyledSelectedCardList = styled.div`
   gap: 3px;
   justify-content: flex-start;
   align-items: center;
-  min-width: 80%;
+  width: 100%;
   flex-direction: row;
 
   overflow-x: auto;

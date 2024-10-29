@@ -1,12 +1,14 @@
-import { default_card, default_player, default_token, TEAMS } from 'constant'
+import { default_card, default_player, default_table_player, default_token, TEAMS } from 'constant'
 import { deckStore } from 'store'
-import { CardType, PlayerType, TeamsType, TokenType } from 'types'
+import { CardType, PlayerType, TablePlayerType, TeamsType, TokenType } from 'types'
 
 export const createDefaultCard = (): CardType => default_card
 
 export const createDefaultToken = (): TokenType => default_token
 
 export const createDefaultPlayer = (): PlayerType => default_player
+
+export const createDefaultTablePlayer = (): TablePlayerType => default_table_player
 
 export const determineTotalPlayers = (totalCharacters: number): number => {
   const { hasAlphawolf, hasTemptress } = deckStore

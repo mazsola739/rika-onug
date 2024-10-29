@@ -5,19 +5,19 @@ export const StyledTable = styled.div`
   min-width: 100%;
   display: grid;
   grid-template-columns: 170px calc(100vw - 740px) 170px 400px;
-  grid-template-rows: 80px 130px calc(100vh - 460px) 250px;
+  grid-template-rows: 80px 130px calc(100vh - 290px) 80px;
 
   header {
     grid-area: 1 / 1 / 2 / 4;
   }
   & > div:nth-of-type(1) {
-    grid-area: 2 / 1 / 5 / 2;
+    grid-area: 2 / 1 / 4 / 2;
   }
   & > div:nth-of-type(2) {
     grid-area: 2 / 2 / 3 / 3;
   }
   & > div:nth-of-type(3) {
-    grid-area: 2 / 3 / 5 / 4;
+    grid-area: 2 / 3 / 4 / 4;
   }
   & > div:nth-of-type(4) {
     grid-area: 1 / 4 / 5 / 5;
@@ -26,7 +26,7 @@ export const StyledTable = styled.div`
     grid-area: 3 / 2 / 4 / 3;
   }
   footer {
-    grid-area: 4 / 2 / 5 / 3;
+    grid-area: 4 / 1 / 5 / 4;
   }
 `
 
@@ -52,21 +52,7 @@ export const TableCenter = styled.div`
 `
 
 //FOOTER
-export const StyledTableFooter = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
 
-  & > :first-of-type {
-    grid-column: 2;
-  }
-  padding-bottom: 10px;
-`
-
-export const Tokens = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`
 
 //INFOPANEL
 export const ReadyStatus = styled.div`

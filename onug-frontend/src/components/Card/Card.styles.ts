@@ -5,11 +5,13 @@ export const StyledCard = styled.div<StyledCardProps>`
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   position: relative;
   transition: 0.75s;
-  width: ${({ size }) => size+20}px;
+  width: ${({ size }) => size}px;
+  margin: 5px;
 `
 
 export const NameBackground = styled.img`

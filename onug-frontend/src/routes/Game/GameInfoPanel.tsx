@@ -23,7 +23,7 @@ export const GameInfoPanel: React.FC = observer(() => {
 
   return (
     <InfoPanel>
-      { narration ? <GlowingBorder><InterAction /></GlowingBorder> : <Placeholder /> }
+      { narration ? <GlowingBorder><InterAction /></GlowingBorder> : <Placeholder>TODO: fun texts like "Did you hear that?"</Placeholder> }
       <QuickGuide />
     </InfoPanel>
   )

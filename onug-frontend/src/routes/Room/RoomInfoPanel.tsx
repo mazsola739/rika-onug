@@ -46,8 +46,8 @@ const PlayerNames: React.FC = observer(() => {
 export const RoomInfoPanel: React.FC = observer(() => {
   return (
     <InfoPanel>
-      <Info />
       <PlayerNames />
+      <Info />
       <QuickGuide />
     </InfoPanel>
   )

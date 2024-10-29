@@ -4,12 +4,12 @@ import { deckStore } from 'store'
 import { StyledPlayerCard, Tokens } from './PlayerCard.styles'
 import { PlayerCardProps } from './PlayerCard.types'
 
-//TODO strong refactor need!
 export const PlayerCard: React.FC<PlayerCardProps> = observer(
-  ({  position, isCenter, id, ready, playerName  }) => {
+  ({ position, isCenter, id = 0, markName = 'mark_back', playerName, cardSize = 90, tokenSize = 35 }) => {
     const { hasMarks } = deckStore
+    
     const card = id === 0 ? '' : deckStore.getCardById(id)
-    const playerNumberToken = position.replace(/^player_/, '')
+    const playerNumberToken = position.replace(/player_/g, '') //TODO figure out why player_ is 2 times on position?
 
     let imgSrc = card && card.id !== 0 ? `${card.card_name}` : 'card_background'
 
@@ -29,13 +29,12 @@ export const PlayerCard: React.FC<PlayerCardProps> = observer(
       }
     }
 
-
     return (
       <StyledPlayerCard>
-        <Card image={imgSrc} size={90} playerName={playerName}/>
+        <Card image={imgSrc} size={cardSize} playerName={playerName}/>
         <Tokens>
-          {!isCenter && <Token tokenName={playerNumberToken} size={35} />}
-          {!isCenter && hasMarks && <Token tokenName='mark_back' size={35} />}{/* TODO mark of clarity now, but later background! */}
+          {!isCenter && <Token tokenName={playerNumberToken} size={tokenSize} />}
+          {!isCenter && hasMarks && <Token tokenName={markName} size={tokenSize} />}
           {/* {!isCenter && hasShield && <Token tokenName='mark_of_clarity' size={35} />} TODO*/}
           {/* {!isCenter && hasArtifact && <Token tokenName='mark_of_clarity' size={35} />} TODO*/}
         </Tokens>
