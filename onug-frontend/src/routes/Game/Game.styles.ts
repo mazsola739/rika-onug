@@ -124,7 +124,7 @@ export const StyledGameFooter = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 
-  & > :first-child {
+  & > :first-of-type {
     grid-column: 2;
   }
   padding-bottom: 10px;
@@ -137,4 +137,10 @@ export const Tokens = styled.div`
 `
 
 //INFOPANEL
-export const InterAction = styled.div``
+export const StyledInterAction = styled.div`
+  min-height: 300px;
+`
+
+export const Narration = styled.p`
+
+`

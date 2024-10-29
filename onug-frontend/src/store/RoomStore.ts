@@ -1,11 +1,11 @@
 import { TEAM } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { CardType, PlayersType } from 'types'
-import { createEmptyCard, getFilteredCardsForTeam as getSortedCardsByTeam, getOrderedTeams } from 'utils'
+import { createDefaultCard, getFilteredCardsForTeam as getSortedCardsByTeam, getOrderedTeams } from 'utils'
 import { deckStore } from 'store'
 
 class RoomStore {
-  detailedCardInfo: CardType = createEmptyCard()
+  detailedCardInfo: CardType = createDefaultCard()
   players: PlayersType[]
 
   constructor() {
@@ -44,7 +44,7 @@ class RoomStore {
   }
 
   resetDetailedCardInfo(): void {
-    this.detailedCardInfo = createEmptyCard()
+    this.detailedCardInfo = createDefaultCard()
   }
 
   toggleInfo(id: number): void {
@@ -54,7 +54,7 @@ class RoomStore {
     }
 
     const newCardInfo = deckStore.getCardById(id)
-    this.detailedCardInfo = newCardInfo || createEmptyCard()
+    this.detailedCardInfo = newCardInfo || createDefaultCard()
   }
 
   setPlayers(players: PlayersType[]): void {

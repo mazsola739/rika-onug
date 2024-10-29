@@ -13,6 +13,4 @@ export const StyledAroundTableTop = styled.div`
   flex-direction: row;
   color: white;
   justify-content: space-around;
-  border-bottom: 2px solid #969290;
-  border-radius: 0 0 10px 10px;
 `

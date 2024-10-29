@@ -95,7 +95,7 @@ export const dealCards = async (ws, message) => {
 
   await upsertRoomState(newGamestate)
 
-  const redirectToDealing = { type: REDIRECT, path: `/dealing/${room_id}` }
+  const redirectToTable = { type: REDIRECT, path: `/table/${room_id}` }
 
-  return broadcast(room_id, redirectToDealing)
+  return broadcast(room_id, redirectToTable)
 }

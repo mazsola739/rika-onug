@@ -1,7 +1,8 @@
-import { ARRIVE_GAME, HYDRATE_GAME, HYDRATE_SCENE, MESSAGE, PAUSE_GAME, REDIRECT, SCENE, STAGES } from 'constant'
+import { ARRIVE_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { boardStore, gamePlayStore, interactionStore, wsStore } from 'store'
+import { playersStore, gamePlayStore, interactionStore, wsStore } from 'store'
+import { InteractionType, NarrationType } from 'types'
 import { splitPlayersToTable } from 'utils'
 
 export const useGame = () => {
@@ -29,27 +30,19 @@ export const useGame = () => {
 
   useEffect(() => {
     if (transitionCompleted) {
+      interactionStore.closeYourEyes()
       sendJsonMessage?.({ type: SCENE, room_id, token, player_ready: true })
     }
   }, [sendJsonMessage, transitionCompleted])
 
   useEffect(() => {
-    if (lastJsonMessage?.type === HYDRATE_SCENE) {
-      interactionStore.setLastJsonMessage(lastJsonMessage)
-
-/*       if (Object.keys(lastJsonMessage.interaction).length > 0) {
-        interactionStore.setMessage(lastJsonMessage.interaction.private_message)
-        interactionStore.setInteraction(lastJsonMessage.interaction.title)
-        interactionStore.toggleMessageBoxStatus(true)
-      } */
+    if (lastJsonMessage?.type === SCENE) {
+      interactionStore.setNarration(lastJsonMessage.narration as NarrationType[])
+      interactionStore.setInteraction(lastJsonMessage.interaction as InteractionType)
     }
 
     if (lastJsonMessage?.type === HYDRATE_GAME) {
         setNightMode(true)
-    }
-
-    if (lastJsonMessage?.type === MESSAGE) {
-      interactionStore.toggleMessageBoxStatus(true)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
@@ -59,9 +52,10 @@ export const useGame = () => {
     if (lastJsonMessage?.type === PAUSE_GAME) {
       gamePlayStore.toggleIsRunning()
     }
+
   }, [lastJsonMessage, navigate])
   
-  const { players, player } = boardStore
+  const { players, player } = playersStore
 
   const sides = players && player ? splitPlayersToTable(players, player) : null
   const { left = [], middle = [], right = [] } = sides || {}

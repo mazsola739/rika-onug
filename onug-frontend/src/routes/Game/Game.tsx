@@ -1,6 +1,5 @@
 import { AroundTableSide, AroundTableTop, CenterCards, CenterTokens, Main } from 'components'
 import { observer } from 'mobx-react-lite'
-import { TableInfoPanel } from 'routes/Table/TableInfoPanel'
 import { StyledGame, TableCenter } from './Game.styles'
 import { GameFooter } from './GameFooter'
 import { GameHeader } from './GameHeader'

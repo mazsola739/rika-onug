@@ -1,8 +1,10 @@
+import * as narration_text from 'constant/narrations'
+import * as messages_text from 'constant/messages'
+
 export type PlayersType = {
   player_name: string
   player_number?: string
-  ready?: boolean  
-  voted?: boolean
+  ready?: boolean
 }
 
 export type PlayerType = {
@@ -25,52 +27,45 @@ export type ActualSceneType = {
 type PlayerPosition = 'player_1' | 'player_2' | 'player_3' | 'player_4' | 'player_5' | 'player_6' | 'player_7' | 'player_8' | 'player_9' | 'player_10' | 'player_11' | 'player_12'
 
 export type InteractionType = {
-  title?: string
-  private_message?: string[],
-  shielded_cards?: string[],
+  answer_options?: string[]
   artifacted_cards?: string[],
-  show_cards?: Record<PlayerPosition, number>[],
-  show_marks?: Record<PlayerPosition, string>[],
-  selectable_cards?: string[],
+  new_role_id?: number
+  player?: PlayerType
+  private_message?: string[],
   selectable_card_limit?: {
     player: number,
     center: number
   },
+  selectable_cards?: string[],
   selectable_mark_limit?: {
     mark: number
-},
-  player?: PlayerType
-
-  new_role_id?: number
-
-  answer_options?: string[]
+  },
+  shielded_cards?: string[],
+  show_cards?: Record<PlayerPosition, number>[],
+  show_marks?: Record<PlayerPosition, string>[],
 }
+
+export type NarrationType = keyof typeof narration_text
+export type MessagesType = keyof typeof messages_text
 
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
 export type WsJsonMessage = {
-  type?: string,
-  update?: boolean,
-  message?: string,
-  path?: string
-  success?: boolean
+  actual_scene?: ActualSceneType
   errors?: string[]
-  token?: string
-
+  interaction?: InteractionType
+  message?: string
+  narration?: NarrationType[]
+  path?: string
+  player?: PlayerType
+  players?: PlayersType[]
   room_id?: string
-  stage?: string
-
   selected_cards?: number[]
   selected_expansions?: string[]
-
-  players?: PlayersType[]
-  player?: PlayerType
-
+  stage?: string
+  success?: boolean
   title?: string
-
-  votes?: Record<string, number[]>
-
-  actual_scene?: ActualSceneType
-  
-  interaction?: InteractionType
+  token?: string
+  type?: string,
+  update?: boolean,
 }

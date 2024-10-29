@@ -1,8 +1,9 @@
-import { VAMPIRE_IDS, ASSASSIN_IDS, HAS_MARK_IDS } from 'constant'
-import { cards, marks, artifacts } from 'data'
+import { ASSASSIN_IDS, HAS_MARK_IDS, VAMPIRE_IDS } from 'constant'
+import { artifacts, cards, marks } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardType, TokenType } from 'types'
-import { createEmptyCard, findCardById, areAnyCardSelectedById, isCardSelectedById, determineTotalPlayers, checkCardPresence } from 'utils'
+import { areAnyCardSelectedById, checkCardPresence, createDefaultCard, determineTotalPlayers, findCardById } from 'utils'
+import { playersStore } from './PlayersStore'
 
 class DeckStore {
   deck: CardType[] = cards
@@ -11,13 +12,14 @@ class DeckStore {
   selectedCards: CardType[] = []
   selectedMarks: TokenType[] = []
   selectedExpansions: string[] = ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"]
+  playerCard: CardType = createDefaultCard()
 
   constructor() {
     makeAutoObservable(this)
   }
 
   getCardById(cardId: number): CardType {
-    return this.deck ? findCardById(this.deck, cardId) : createEmptyCard()
+    return this.deck ? findCardById(this.deck, cardId) : createDefaultCard()
   }
 
   setDeck(): void {
@@ -37,12 +39,20 @@ class DeckStore {
     this.setDeck()
   }
 
+  setPlayerCard(): void {
+    this.getCardById(playersStore.player.player_card_id)
+  }
+
   get totalCharacters(): number {
     return this.selectedCards.length
   }
 
   get totalPlayers(): number {
     return determineTotalPlayers(this.totalCharacters)
+  }
+
+  get card(): CardType {
+    return this.playerCard
   }
 
   get hasAlphawolf() { return checkCardPresence(this.selectedCards, 17) }

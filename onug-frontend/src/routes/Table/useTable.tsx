@@ -1,7 +1,7 @@
 import { ARRIVE_TABLE, HYDRATE_READY, HYDRATE_TABLE, REDIRECT, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { boardStore, wsStore } from 'store'
+import { playersStore, wsStore } from 'store'
 import { splitPlayersToTable } from 'utils'
 
 export const useTable = () => {
@@ -11,7 +11,7 @@ export const useTable = () => {
   const token = sessionStorage.getItem('token')
   const room_id = sessionStorage.getItem('room_id')
 
-  const { setPlayer, setPlayers, players, player } = boardStore
+  const { setPlayer, setPlayers, players, player } = playersStore
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
 
   useEffect(() => {

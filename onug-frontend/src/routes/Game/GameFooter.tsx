@@ -2,7 +2,7 @@ import { Button, Card, Footer, FooterButtons, Token } from 'components'
 import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
-import { boardStore, deckStore, gamePlayStore } from 'store'
+import { playersStore, deckStore, gamePlayStore } from 'store'
 import { StyledGameFooter, Tokens } from './Game.styles'
 
 export const GameFooter: React.FC = observer(() => {
@@ -11,16 +11,16 @@ export const GameFooter: React.FC = observer(() => {
   const buttonText = gamePlayStore.isGamePlayPaused ? BUTTONS.pause_button_alt_label : BUTTONS.pause_button_label
 
   const { handlePauseGame, handleStopGame } = useClickHandler(room_id, token)
-  const { player } = boardStore
+  const { player } = playersStore
 
-  const card = player?.player_card_id ? deckStore.getCardById(player.player_card_id) : null
-  const mark = player?.player_mark
+  const cardName = player?.player_card_id ? deckStore.getCardById(player.player_card_id).card_name : 'card_background'
+  const mark = player?.player_mark ? player?.player_mark : ''
 
   return (
     <Footer>
       {player && (
         <StyledGameFooter>
-          <Card image={card.card_name} size={130} />
+          <Card image={cardName} size={130} />
           <Tokens>
             <Token tokenName={`${player.player_number}`} size={50} />
             {mark && <Token tokenName={mark} size={50} />}

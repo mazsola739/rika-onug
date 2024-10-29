@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { interactionStore, boardStore } from 'store'
+import { interactionStore, playersStore } from 'store'
 import { WsJsonMessage } from 'types'
 
 class DoppelgangerStore {

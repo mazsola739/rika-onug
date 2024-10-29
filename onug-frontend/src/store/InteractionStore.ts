@@ -1,105 +1,54 @@
-import { makeObservable, observable, action } from 'mobx'
-import { WsJsonMessage } from 'types'
-import { doppelgangerStore, roleStore } from './roleStores'
-import * as constants from '../constant'
+import * as messages_text from 'constant/messages'
+import * as narration_text from 'constant/narrations'
+import { makeAutoObservable } from 'mobx'
+import { InteractionType, MessagesType, NarrationType } from 'types'
+import { playersStore } from './PlayersStore'
 
 class InteractionStore {
-  lastJsonMessage: WsJsonMessage = {}
-  hasMessageBox = false
-  selectedPlayerCards: string[] = []
-  selectedCenterCards: string[] = []
-  selectedCards: string[] = []
-  selectedMarks: string[] = []
-  selectablePlayerCardLimit = 0
-  selectableCenterCardLimit = 0
-  selectableMarkLimit = 0
-  message: string[] = []
+  interaction: InteractionType
+  narrationStr: string
+  privateMessageStr: string
 
   constructor() {
-    makeObservable(this, {
-      lastJsonMessage: observable,
-      hasMessageBox: observable,
-      selectedCenterCards: observable,
-      selectedPlayerCards: observable,
-      selectedCards: observable,
-      selectedMarks: observable,
-      selectablePlayerCardLimit: observable,
-      selectableCenterCardLimit: observable,
-      selectableMarkLimit: observable,
-
-      resetInteraction: action,
-      toggleMessageBoxStatus: action,
-      setSelectedCenterCards: action,
-      setSelectedPlayerCards: action,
-      setSelectedCards: action,
-      setSelectedMarks: action,
-      setLastJsonMessage: action,
-      setInteraction: action,
-    })
+    makeAutoObservable(this)
   }
 
-  resetInteraction(): void {
-    this.selectedCenterCards = []
-    this.selectedPlayerCards = []
-    this.selectedCards = []
-    this.selectedMarks = []
-    this.toggleMessageBoxStatus(false)
-    this.selectablePlayerCardLimit = 0
-    this.selectableCenterCardLimit = 0
-    this.selectableMarkLimit = 0
-  }
-
-  toggleMessageBoxStatus(boolean: boolean): void {
-    this.hasMessageBox = boolean
-  }
-
-  setSelectedCenterCards(positions: string[]): void {
-    this.selectedCenterCards = positions
-  }
-
-  setSelectedPlayerCards(positions: string[]): void {
-    this.selectedPlayerCards = positions
-  }
-
-  setSelectedCards(positions: string[]): void {
-    this.selectedCards = positions
-  }
-
-  setSelectedMarks(positions: string[]): void {
-    this.selectedMarks = positions
-  }
-
-  setLastJsonMessage(lastJsonMessage: WsJsonMessage): void {
-    this.lastJsonMessage = lastJsonMessage
-  }
-
-  setMessage(message: string[]): void {
-    this.message = message
-  }
-
-  getMessage(): string | undefined {
-    if (!this.message || this.message.length === 0) {
-      return ''
-    }
-
-    const message = this.message
-      .map((constantName) => constants[constantName as keyof typeof constants])
-      .filter((constantValue) => constantValue !== undefined)
-      .join(' ')
-
-    return message || ''
-  }
-
-  setInteraction(title: string): void {
-    switch (title) {
-      case 'DOPPELGÄNGER_INSTANT_ACTION':
-        doppelgangerStore.instantNightAction(this.lastJsonMessage)
-        break
-      default:
-        roleStore.openYourEyes(this.lastJsonMessage)
-        break
+  setInteraction(interaction: InteractionType): void {
+    this.interaction = interaction
+    if (interaction.private_message) {
+      this.setPrivateMessage(interaction.private_message as MessagesType[])
     }
   }
+
+  setNarration(narration_keys: NarrationType[]): void {
+    this.narrationStr = narration_keys.map((key) => narration_text[key]).join(' ')
+  }
+
+  setPrivateMessage(message_keys: MessagesType[]): void {
+    this.privateMessageStr = message_keys.map((key) => messages_text[key]).join(' ')
+  }
+
+  get narration(): string {
+    return this.narrationStr
+  }
+
+  get privateMessage(): string {
+    return this.privateMessageStr
+  }
+
+  get player(): { player_name: string; player_number: number } {
+    return {
+      player_name: playersStore.player?.player_name || '',
+      player_number: playersStore.player?.player_number || 0
+    }
+  }
+
+  closeYourEyes(): void {
+    this.interaction = null
+    this.narrationStr = ''
+    this.privateMessageStr = ''
+  }
+
 }
 
 export default InteractionStore

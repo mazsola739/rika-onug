@@ -17,7 +17,7 @@ export const cupid = (gamestate, title) => {
       interaction = cupidInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
+    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
   })
 
   newGamestate.narration.push(narration)

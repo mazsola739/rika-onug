@@ -6,7 +6,7 @@ export const StyledTable = styled.div`
   display: grid;
   grid-template-columns: 170px calc(100vw - 740px) 170px 400px;
   grid-template-rows: 80px 130px calc(100vh - 460px) 250px;
-  
+
   header {
     grid-area: 1 / 1 / 2 / 4;
   }
@@ -56,10 +56,10 @@ export const StyledTableFooter = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 
-  & > :first-child {
+  & > :first-of-type {
     grid-column: 2;
   }
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 `
 
 export const Tokens = styled.div`
@@ -71,7 +71,6 @@ export const Tokens = styled.div`
 //INFOPANEL
 export const ReadyStatus = styled.div`
   display: flex;
-
 `
 
 export const StyledOwnCard = styled.div`
@@ -82,49 +81,31 @@ export const StyledOwnCard = styled.div`
   gap: 10px;
   border-bottom: 2px solid #969290;
 
-  grid-template-areas: 
-    "number name"
-    "card team"
-    "card role"
-    "card rulez"
-    "token rule";
+  grid-template-areas:
+    'number name'
+    'card team'
+    'card role'
+    'card cardrule'
+    'token tokenrule';
 
-  & > :nth-child(1) {
+  & > img:nth-of-type(1) {
     grid-area: number;
     justify-self: end;
   }
 
-  & > :nth-child(2) {
-    grid-area: name;
-  }
-
-  & > :nth-child(3) {
+  & > img:nth-of-type(3) {
     grid-area: card;
   }
 
-  & > :nth-child(4) {
-    grid-area: team;
-  }
-
-  & > :nth-child(5) {
-    grid-area: role;
-  }
-
-  & > :nth-child(6) {
-    grid-area: rulez;
-  }
-
-  & > :nth-child(7) {
+  & > img:nth-of-type(7) {
     grid-area: token;
     justify-self: end;
   }
 
-  & > :nth-child(8) {
-    grid-area: rule;
-  }
 `
 
-export const OwnCardInfo = styled.span`
+export const OwnCardInfoName = styled.span`
+  grid-area: name;
   color: white;
   font-size: 14px;
   display: inline-flex;
@@ -132,7 +113,31 @@ export const OwnCardInfo = styled.span`
   align-items: center;
 `
 
-export const Rule = styled.span`
+export const OwnCardInfoTeam = styled.span`
+  grid-area: team;
+  color: white;
+  font-size: 14px;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+`
+export const OwnCardInfoRole = styled.span`
+ grid-area: role;
+  color: white;
+  font-size: 14px;
+  display: inline-flex;
+  gap: 5px;
+  align-items: center;
+`
+
+export const CardRule = styled.span`
+  grid-area: cardrule;
+  color: white;
+  font-size: 14px;
+`
+
+export const TokenRule = styled.span`
+  grid-area: tokenrule;
   color: white;
   font-size: 14px;
 `

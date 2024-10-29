@@ -1,4 +1,4 @@
-import { makeObservable, observable, action } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import { SendJsonMessageType, WsJsonMessage } from 'types'
 
 class WsStore {
@@ -6,16 +6,10 @@ class WsStore {
   lastJsonMessage: WsJsonMessage = {}
 
   constructor() {
-    makeObservable(this, {
-      sendJsonMessage: observable,
-      lastJsonMessage: observable,
-      setSendJsonMessage: action,
-      setLastJsonMessage: action,
-      getWsCommunicationsBridge: action,
-    })
+    makeAutoObservable(this)
   }
 
-  setSendJsonMessage<T>(sendJsonMessage: SendJsonMessageType<T>): void {
+  setSendJsonMessage(sendJsonMessage: SendJsonMessageType<unknown>): void {
     this.sendJsonMessage = sendJsonMessage
   }
 
@@ -25,12 +19,8 @@ class WsStore {
 
   getWsCommunicationsBridge() {
     return {
-      get sendJsonMessage() {
-        return wsStore.sendJsonMessage
-      },
-      get lastJsonMessage() {
-        return wsStore.lastJsonMessage
-      },
+      sendJsonMessage: this.sendJsonMessage,
+      lastJsonMessage: this.lastJsonMessage,
     }
   }
 }

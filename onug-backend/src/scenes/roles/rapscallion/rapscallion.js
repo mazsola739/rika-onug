@@ -17,7 +17,7 @@ export const rapscallion = (gamestate, title) => {
       interaction = apprenticeseerInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
+    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
   })
 
   newGamestate.narration.push(narration)

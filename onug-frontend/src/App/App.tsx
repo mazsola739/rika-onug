@@ -63,7 +63,7 @@ export const App: React.FC = observer(() => {
           <Route path="/" element={<Lobby />} />
           <Route path="/lobby" element={<Lobby />} />
           <Route path="/room/:room_id" element={<Room />} />
-          <Route path="/dealing/:room_id" element={<Table />} />
+          <Route path="/table/:room_id" element={<Table />} />
           <Route path="/game/:room_id" element={<Game />} />
           <Route path="/vote/:room_id" element={<Vote />} />
           <Route path="/god" element={<God />} />

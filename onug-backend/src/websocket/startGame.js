@@ -30,28 +30,41 @@ export const startGame = async (ws, message) => {
     scene: [],
   }
 
-  //TODO READY dont delete!!!!!!!!!!!!!!!!!
-/*   const { players } = newGamestate
-  const allPlayersReady = Object.values(players).every(player => player.ready)
+  const { players } = newGamestate
+  const allPlayersReady = Object.values(players).every((player) => player.ready)
 
   if (!allPlayersReady) {
-    logError(`Not all players are ready. Current readiness: ${JSON.stringify(players)}`)
+    logError(
+      `Not all players are ready. Current readiness: ${JSON.stringify(players)}`
+    )
 
-    return broadcast(room_id, { type: 'ERROR', message: 'All players must be ready to start the game.' })
-  } */
+    return broadcast(room_id, {
+      type: 'ERROR',
+      message: 'All players must be ready to start the game.',
+    })
+  }
 
   newGamestate = startScene(newGamestate)
 
   try {
-    logTrace(`Game started successfully in room [${room_id}] by player [${token}]`)
+    logTrace(
+      `Game started successfully in room [${room_id}] by player [${token}]`
+    )
 
     await upsertRoomState(newGamestate)
 
     return broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` })
   } catch (error) {
-    logError(`Error saving initial game state for room [${room_id}]: ${error.message}`)
+    logError(
+      `Error saving initial game state for room [${room_id}]: ${error.message}`
+    )
 
-    ws.send(JSON.stringify({ type: 'ERROR', message: 'Game start failed. Please try again.' }))
+    ws.send(
+      JSON.stringify({
+        type: 'ERROR',
+        message: 'Game start failed. Please try again.',
+      })
+    )
   }
 
   return newGamestate
