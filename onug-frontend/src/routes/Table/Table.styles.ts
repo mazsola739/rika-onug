@@ -93,11 +93,11 @@ export const StyledOwnCard = styled.div`
     justify-self: end;
   }
 
-  & > img:nth-of-type(3) {
+  & > img:nth-of-type(2) {
     grid-area: card;
   }
 
-  & > img:nth-of-type(7) {
+  & > img:nth-of-type(3) {
     grid-area: token;
     justify-self: end;
   }

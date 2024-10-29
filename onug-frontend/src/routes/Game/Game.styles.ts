@@ -46,7 +46,7 @@ export const StyledGame = styled.div<GameProps>`
   grid-template-columns: 170px calc(100vw - 740px) 170px 400px;
   grid-template-rows: 80px 130px calc(100vh - 460px) 250px;
 
- header {
+  header {
     grid-area: 1 / 1 / 2 / 4;
   }
   & > div:nth-of-type(1) {
@@ -137,10 +137,25 @@ export const Tokens = styled.div`
 `
 
 //INFOPANEL
-export const StyledInterAction = styled.div`
+
+export const Placeholder = styled.div`
   min-height: 300px;
 `
 
-export const Narration = styled.p`
+export const StyledInterAction = styled.div`
+  display: flex;
+  min-height: 300px;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 20px;
+/*   box-shadow: 0px 0px 50px 0px rgba(255,255,0,0.9); */
+  padding: 10px;
+`
 
+export const Narration = styled.span`
+  color: white;
+`
+
+export const Message = styled.p`
+  color: white;
 `

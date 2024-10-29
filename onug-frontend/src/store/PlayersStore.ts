@@ -5,7 +5,6 @@ import { createDefaultCard, createDefaultPlayer } from 'utils'
 class PlayersStore {
   player: PlayerType = createDefaultPlayer()
   players: PlayersType[]
-  playerCard: CardType = createDefaultCard()
 
   constructor() {
     makeAutoObservable(this)
@@ -17,6 +16,10 @@ class PlayersStore {
 
   setPlayers(players: PlayersType[]): void {
     this.players = players
+  }
+
+  clearPlayer(): void {
+    this.player = createDefaultPlayer()
   }
 }
 

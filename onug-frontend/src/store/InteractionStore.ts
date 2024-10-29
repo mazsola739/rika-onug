@@ -3,6 +3,7 @@ import * as narration_text from 'constant/narrations'
 import { makeAutoObservable } from 'mobx'
 import { InteractionType, MessagesType, NarrationType } from 'types'
 import { playersStore } from './PlayersStore'
+import { deckStore } from './DeckStore'
 
 class InteractionStore {
   interaction: InteractionType
@@ -47,6 +48,9 @@ class InteractionStore {
     this.interaction = null
     this.narrationStr = ''
     this.privateMessageStr = ''
+
+    deckStore.clearPlayerCard()
+    deckStore.clearPlayerMark()
   }
 
 }

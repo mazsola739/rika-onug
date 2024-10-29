@@ -1,4 +1,4 @@
-import { Footer, FooterButtons, Button } from "components"
+import { Footer, ButtonGroup, Button } from "components"
 import { observer } from "mobx-react-lite"
 import { useCallback } from "react"
 
@@ -9,9 +9,9 @@ export const VoteFooter: React.FC = observer(() => {
 
   return (
     <Footer>
-      <FooterButtons>
+      <ButtonGroup>
         <Button onClick={handleVoteNow} buttonText={'VOTE NOW'} variant="orange" />
-      </FooterButtons>
+      </ButtonGroup>
     </Footer>
   )
 })

@@ -1,26 +1,34 @@
 {
-    "type": "SCENE",
-    "title": "DOPPELGÄNGER",
-    "token": "d664081e-189e-4939-a104-b3b0b7cd9ec1",
-    "interaction": {
-        "private_message": [
-            "interaction_must_one_any_other"
-        ],
-        "shielded_cards": [],
-        "artifacted_cards": [],
-        "show_cards": [],
-        "show_marks": [],
-        "selectable_cards": [
-            "player_1",
-            "player_3",
-            "player_4"
-        ],
-        "selectable_card_limit": {
-            "player": 1,
-            "center": 0
-        }
+    "type": "HYDRATE_TABLE",
+    "player": {
+        "player_name": "Sötétség",
+        "player_number": 4,
+        "player_original_id": 9,
+        "player_card_id": 9,
+        "player_role": "SEER",
+        "player_role_id": 9,
+        "player_team": "village"
     },
-    "narration": [
-        "doppelganger_kickoff_text"
+    "players": [
+        {
+            "player_number": "player_1",
+            "player_name": "Ítélet",
+            "ready": false
+        },
+        {
+            "player_number": "player_2",
+            "player_name": "Szellem",
+            "ready": false
+        },
+        {
+            "player_number": "player_3",
+            "player_name": "Hírnök",
+            "ready": false
+        },
+        {
+            "player_number": "player_4",
+            "player_name": "Sötétség",
+            "ready": false
+        }
     ]
 }

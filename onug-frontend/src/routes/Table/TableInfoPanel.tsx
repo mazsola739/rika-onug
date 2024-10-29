@@ -6,9 +6,10 @@ import { CardRule, OwnCardInfoName, OwnCardInfoRole, OwnCardInfoTeam, ReadyStatu
 
 const OwnCard: React.FC = observer(() => {
   const { player } = playersStore
-  const card = player ? deckStore.getCardById(player.player_card_id) : null
+  
+  const card = deckStore.playerCard
+  const mark = deckStore.playerMark
   const roleName = player ? ROLES[`role_${player.player_role.toLowerCase().replace('_', '')}` as keyof typeof ROLES] : ''
-  const mark = player ? player.player_mark : ''
 
   return (
     player && (
@@ -19,8 +20,8 @@ const OwnCard: React.FC = observer(() => {
         <OwnCardInfoTeam>Team: {player.player_team}</OwnCardInfoTeam>
         <OwnCardInfoRole>Role: {roleName}</OwnCardInfoRole>
         <CardRule>{card.rules}</CardRule>
-        {mark && <Token tokenName={'mark_of_clarity'} size={50} />}
-        {mark && <TokenRule>{rules_mark.rules_clarity}</TokenRule>}
+        {mark && <Token tokenName={mark.token_name} size={50} />}
+        {mark && <TokenRule>{mark.rules}</TokenRule>}
       </StyledOwnCard>
     )
   )

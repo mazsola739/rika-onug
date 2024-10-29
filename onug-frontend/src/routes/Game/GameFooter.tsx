@@ -1,4 +1,4 @@
-import { Button, Card, Footer, FooterButtons, Token } from 'components'
+import { Button, Card, Footer, ButtonGroup, Token } from 'components'
 import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
@@ -13,8 +13,10 @@ export const GameFooter: React.FC = observer(() => {
   const { handlePauseGame, handleStopGame } = useClickHandler(room_id, token)
   const { player } = playersStore
 
-  const cardName = player?.player_card_id ? deckStore.getCardById(player.player_card_id).card_name : 'card_background'
-  const mark = player?.player_mark ? player?.player_mark : ''
+  const card = deckStore.playerCard
+  const cardName = card.card_name ? card.card_name : 'card_background'
+  const mark = deckStore.playerMark
+  const markName = mark.token_name ? mark.token_name : 'mark_back'
 
   return (
     <Footer>
@@ -23,16 +25,16 @@ export const GameFooter: React.FC = observer(() => {
           <Card image={cardName} size={130} />
           <Tokens>
             <Token tokenName={`${player.player_number}`} size={50} />
-            {mark && <Token tokenName={mark} size={50} />}
+            {mark && <Token tokenName={markName} size={50} />}
             {/* artifact */}
             {/* shield */}
           </Tokens>
         </StyledGameFooter>
       )}
-      <FooterButtons>
+      <ButtonGroup>
         <Button onClick={handlePauseGame} buttonText={buttonText} variant="orange" />
         <Button onClick={handleStopGame} buttonText={BUTTONS.stop_button_label} variant="red" />
-      </FooterButtons>
+      </ButtonGroup>
     </Footer>
   )
 })

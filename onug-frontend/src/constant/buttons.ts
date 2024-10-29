@@ -29,6 +29,8 @@ export const BUTTONS: Record<string, string> = {
   im_ready_label: "I'M READY!",
   leave_room_label: "LEAVE ROOM",
   leave_table_label: "LEAVE TABLE",
+  skip_label: "SKIP",
+  done_label: "DONE",
 }
 
 

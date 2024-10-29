@@ -22,7 +22,7 @@ export const RESET = 'RESET'
 export const DEAL = 'DEAL'
 export const HYDRATE_READY = 'HYDRATE_READY'
 export const LEAVE_TABLE = 'LEAVE_TABLE'
-export const UPDATE_DEALING = 'UPDATE_DEALING'
+export const UPDATE_TABLE = 'UPDATE_TABLE'
 export const READY = 'READY'
 export const REDIRECT = 'REDIRECT'
 export const START_GAME = 'START_GAME'
@@ -35,7 +35,7 @@ export const MESSAGE = 'MESSAGE'
 export const STAGES = {
   LOBBY: 'LOBBY',
   ROOM: 'ROOM',
-  DEALING: 'DEALING',
+  TABLE: 'TABLE',
   GAME: 'GAME',
   VOTING: 'VOTING',
 }

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
 
-export interface FooterButtonsProps {
+export interface ButtonGroupProps {
   children?: ReactNode
 }

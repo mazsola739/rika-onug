@@ -30,7 +30,7 @@ export const dealCards = async (ws, message) => {
 
   const newGamestate = {
     ...gamestate,
-    stage: STAGES.DEALING,
+    stage: STAGES.TABLE,
     total_players: totalPlayers,
     card_positions: {
       center_left: createCenterPositionCard(leftCard),

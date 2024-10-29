@@ -22,7 +22,7 @@ export const ROOM_NAMES = [
 export const STAGES = {
   LOBBY: 'LOBBY',
   ROOM: 'ROOM',
-  DEALING: 'DEALING',
+  TABLE: 'TABLE',
   GAME: 'GAME',
   VOTING: 'VOTING',
 }

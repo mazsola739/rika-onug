@@ -1,4 +1,4 @@
-import { Button, Footer, FooterButtons } from 'components'
+import { Button, Footer, ButtonGroup } from 'components'
 import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
@@ -14,16 +14,16 @@ export const RoomFooter: React.FC = observer(() => {
     ? `${BUTTONS.deal_label} FOR ${totalPlayers}`
     : BUTTONS.deal_label
 
-  const { handleResetGame, handleLeaveRoom, handleToGameTable } =
+  const { handleResetGame, handleLeaveRoom, handleToTable } =
     useClickHandler(room_id, token)
 
   return (
     <Footer>
-      <FooterButtons>
+      <ButtonGroup>
         <Button onClick={handleResetGame} buttonText={BUTTONS.reset_game_label} variant='blue' />
-        <Button onClick={handleToGameTable} disabled={!deckStore.totalPlayers} buttonText={buttonText} variant='green' />
+        <Button onClick={handleToTable} disabled={!deckStore.totalPlayers} buttonText={buttonText} variant='green' />
         <Button onClick={handleLeaveRoom} buttonText={BUTTONS.leave_room_label} variant='crimson' />
-      </FooterButtons>
+      </ButtonGroup>
     </Footer>
   )
 })

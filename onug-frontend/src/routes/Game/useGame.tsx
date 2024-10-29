@@ -30,7 +30,6 @@ export const useGame = () => {
 
   useEffect(() => {
     if (transitionCompleted) {
-      interactionStore.closeYourEyes()
       sendJsonMessage?.({ type: SCENE, room_id, token, player_ready: true })
     }
   }, [sendJsonMessage, transitionCompleted])

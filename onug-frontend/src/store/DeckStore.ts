@@ -2,7 +2,7 @@ import { ASSASSIN_IDS, HAS_MARK_IDS, VAMPIRE_IDS } from 'constant'
 import { artifacts, cards, marks } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardType, TokenType } from 'types'
-import { areAnyCardSelectedById, checkCardPresence, createDefaultCard, determineTotalPlayers, findCardById } from 'utils'
+import { areAnyCardSelectedById, checkCardPresence, createDefaultCard, createDefaultToken, determineTotalPlayers, findCardById } from 'utils'
 import { playersStore } from './PlayersStore'
 
 class DeckStore {
@@ -13,6 +13,7 @@ class DeckStore {
   selectedMarks: TokenType[] = []
   selectedExpansions: string[] = ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"]
   playerCard: CardType = createDefaultCard()
+  playerMark: TokenType = createDefaultToken()
 
   constructor() {
     makeAutoObservable(this)
@@ -20,6 +21,10 @@ class DeckStore {
 
   getCardById(cardId: number): CardType {
     return this.deck ? findCardById(this.deck, cardId) : createDefaultCard()
+  }
+
+  getMarkByName(markName: string): TokenType {
+    return this.deck ? marks.find(mark => mark.token_name === markName) || null : createDefaultToken()
   }
 
   setDeck(): void {
@@ -40,7 +45,13 @@ class DeckStore {
   }
 
   setPlayerCard(): void {
-    this.getCardById(playersStore.player.player_card_id)
+    const card = this.getCardById(playersStore.player.player_card_id)
+    this.playerCard = card
+  }
+
+  setPlayerMark(): void {
+    const mark = this.getMarkByName(playersStore.player.player_mark)
+    this.playerMark = mark
   }
 
   get totalCharacters(): number {
@@ -49,10 +60,6 @@ class DeckStore {
 
   get totalPlayers(): number {
     return determineTotalPlayers(this.totalCharacters)
-  }
-
-  get card(): CardType {
-    return this.playerCard
   }
 
   get hasAlphawolf() { return checkCardPresence(this.selectedCards, 17) }
@@ -95,6 +102,16 @@ class DeckStore {
             (this.hasCurator && artifact.token_name !== 'shield')
           )
           .sort((a, b) => a.id - b.id) as TokenType[]
+  }
+
+  clearPlayerCard(): void {
+    const card = createDefaultCard()
+    this.playerCard = card
+  }
+
+  clearPlayerMark(): void {
+    const mark = createDefaultToken()
+    this.playerMark = mark
   }
 }
 

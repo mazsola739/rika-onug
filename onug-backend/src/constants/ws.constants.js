@@ -22,7 +22,7 @@ export const HYDRATE_VOTE = 'HYDRATE_VOTE'
 export const UPDATE_ROOM = 'UPDATE_ROOM'
 export const RESET = 'RESET'
 export const DEAL = 'DEAL'
-export const UPDATE_DEALING = 'UPDATE_DEALING'
+export const UPDATE_TABLE = 'UPDATE_TABLE'
 export const REDIRECT = 'REDIRECT'
 export const READY = 'READY'
 
