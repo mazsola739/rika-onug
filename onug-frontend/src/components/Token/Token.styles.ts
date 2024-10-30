@@ -5,4 +5,5 @@ export const StyledToken = styled.img<StyledTokenProps>`
   height: ${({ size }) => size}px;
   width: ${({ size }) => size}px;
   opacity: ${({ ready }) => (ready ? 0.6 : 1)};
+  animation: glowingGold 1s ease-in-out infinite alternate;
 `
