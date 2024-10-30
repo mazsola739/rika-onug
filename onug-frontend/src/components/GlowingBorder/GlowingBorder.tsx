@@ -7,11 +7,11 @@ import {
 } from './GlowingBorder.styles'
 
 export const GlowingBorder: React.FC<GlowingBorderProps> = observer(
-  ({ children, radius, glowColor }) => {
+  ({ children, radius, glowColor, sizeH, sizeW }) => {
     return (
       <StyledGlowingBorder>
-        <OuterGlow radius={radius} glowColor={glowColor} />
-        <InnerContainer radius={radius} glowColor={glowColor}>{children}</InnerContainer>
+        <OuterGlow radius={radius} glowColor={glowColor} sizeH={sizeH} sizeW={sizeW}/>
+        <InnerContainer radius={radius} glowColor={glowColor} sizeH={sizeH} sizeW={sizeW}>{children}</InnerContainer>
       </StyledGlowingBorder>
     )
   }

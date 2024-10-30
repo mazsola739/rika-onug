@@ -9,16 +9,21 @@ const rotate = keyframes`
 `
 
 export const OuterGlow = styled.div<StyledGlowingBorderProps>`
-  position: absolute;
-  overflow: hidden;
-  border-radius: ${({ radius }) => radius || '15px'};
-  z-index: 0;
-  filter: blur(20px);
+    width: ${({ sizeW }) => sizeW+10}px;
+    height: ${({ sizeH }) => sizeH+10}px;
+
+    position: absolute;
+    overflow: hidden; 
+    z-index: 0;
+    border-radius: ${({ radius }) => radius || '15px'};
+
+    filter: blur(20px);
 
   &::before {
     content: '';
     z-index: -2;
     position: absolute;
+    text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(0deg);
@@ -33,15 +38,19 @@ export const OuterGlow = styled.div<StyledGlowingBorderProps>`
 `
 
 export const InnerContainer = styled.div<StyledGlowingBorderProps>`
-  position: absolute;
-  overflow: hidden;
-  border-radius: ${({ radius }) => radius || '15px'};
-  z-index: 0;
+    width: ${({ sizeW }) => sizeW+10}px;
+    height: ${({ sizeH }) => sizeH+10}px;
+
+    position: absolute;
+    overflow: hidden; 
+    z-index: 0;
+    border-radius: ${({ radius }) => radius || '15px'};
 
   &::before {
     content: '';
     z-index: -2;
     position: absolute;
+    text-align: center;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) rotate(0deg);
@@ -65,12 +74,16 @@ export const InnerContainer = styled.div<StyledGlowingBorderProps>`
     background: #292a2e;
     border-radius: ${({ radius }) => radius || '15px'};
   }
+
+  & > img {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+  }
 `
 
 export const StyledGlowingBorder = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  height: 40%;
+  height: 100%;
 `

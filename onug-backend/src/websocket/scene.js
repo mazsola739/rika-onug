@@ -44,8 +44,17 @@ export const scene = async (ws, message) => {
     newGamestate = await sceneHandler(newGamestate)
 
     const player = ws.token
+    const publicPlayers = Object.values(players).map((player) => ({
+      player_number: `player_${player.player_number}`,
+      player_name: player.name,
+      ready: player.ready,
+    }))
+    const publicPlayer = {
+      player_name: players[token].name,
+      player_number: `player_${players[token].player_number}`,
+    }
 
-    newGamestate.scene.map(scene => scene.token === player && ws.send(JSON.stringify({ ...scene })))
+    newGamestate.scene.map(scene => scene.token === player && ws.send(JSON.stringify({ ...scene,  player: publicPlayer, players: publicPlayers })))
 
     logTrace(`Scene interaction processed successfully for room: ${room_id}`)
 
