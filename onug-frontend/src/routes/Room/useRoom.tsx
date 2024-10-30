@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { ARRIVE_ROOM, STAGES, HYDRATE_ROOM, REDIRECT, LEAVE_ROOM, TEAM } from 'constant'
 import { useNavigate } from 'react-router-dom'
 import { wsStore, deckStore, roomStore } from 'store'
+import { Expansion } from 'types'
 
 export const useRoom = () => {
   const [firstTime, setFirstTime] = useState(true)
@@ -28,8 +29,8 @@ export const useRoom = () => {
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_ROOM && lastJsonMessage?.success) {
       deckStore.setSelectedCard(lastJsonMessage.selected_cards)
-      deckStore.setSelectedExpansions(lastJsonMessage.selected_expansions)
-      roomStore.setPlayers(lastJsonMessage.players)
+      deckStore.setSelectedExpansions(lastJsonMessage.selected_expansions as Expansion[])
+      roomStore.setRoomPlayers(lastJsonMessage.players)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {

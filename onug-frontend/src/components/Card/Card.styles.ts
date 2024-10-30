@@ -7,26 +7,15 @@ export const StyledCard = styled.div<StyledCardProps>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
-  position: relative;
-  transition: 0.75s;
   width: ${({ size }) => size}px;
   margin: 5px;
 `
 
-export const NameBackground = styled.img`
-  position: absolute;
-  width: 100%;
-  top: 33%;
-  z-index: 1;
-`
-
 export const PlayerName = styled.span`
-  font-size: 16px;
-  position: absolute;
+  font-size: 20px;
   text-align: center;
-  color: yellow;
-  font-weight: 900;
+  color: white;
+  font-weight: 600;
   top: 48%;
   z-index: 2;
 `

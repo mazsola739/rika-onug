@@ -1,4 +1,4 @@
-import { CardType, ExpansionType, ExpansionsType, PlayerType, TablePlayerType, TeamNames as TeamNamesTypes, TeamType, TeamsType, TokenType, WakeType } from 'types'
+import { ExpansionType, ExpansionsType, TeamNames as TeamNamesTypes, TeamType, TeamsType, WakeType } from 'types'
 
 export const TEAMS: TeamsType = {
   village: 0,
@@ -36,43 +36,6 @@ export const TEAM_NAMES: TeamNamesTypes = {
   mad: 'Mad',
   family: 'Family',
   traitor: 'Traitor',
-}
-
-export const default_player: PlayerType = {
-  player_name: '',
-  player_number: 0,
-  player_card_id: 0,
-  player_original_id: 0,
-  player_role: '',
-  player_role_id: 0,
-  player_team: '',
-  player_mark: '',
-}
-
-export const default_table_player: TablePlayerType = {
-  player_name: '',
-  player_number: '',
-  player_card_id: 0,
-  player_mark: '',
-  artifact: false,
-  shield: false
-}
-
-export const default_card: CardType = {
-  id: 0,
-  card_name: '',
-  display_name: '',
-  rules: '',
-  expansion: '',
-  team: '',
-  wake_up_time: '',
-}
-
-export const default_token: TokenType = {
-  id: 0,
-  token_name: '',
-  rules: '',
-  expansion: '',
 }
 
 export const WAKE: WakeType = {

@@ -22,7 +22,7 @@ const Info: React.FC = observer(() => {
 })
 
 const PlayerNames: React.FC = observer(() => {
-  const { players } = roomStore
+  const { roomPlayers: players } = roomStore
 
   return (
     <StyledPlayerNames>

@@ -1,7 +1,7 @@
-import { CardType } from 'types'
+import { CardJson } from 'types'
 
 export interface RoleCardProps {
-  card: CardType
+  card: CardJson
 }
 
 export interface StyledRoleCardProps {

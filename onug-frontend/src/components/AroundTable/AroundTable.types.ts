@@ -1,5 +1,5 @@
-import { TablePlayerType } from 'types'
+import { TablePlayerCard } from 'types'
 
 export interface AroundTableProps {
-  players: TablePlayerType[]
+  players: TablePlayerCard[]
 }

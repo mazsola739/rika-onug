@@ -1,5 +1,5 @@
-import { CardType } from 'types'
+import { CardJson } from 'types'
 
 export interface SelectedCardProps {
-  card: CardType
+  card: CardJson
 }

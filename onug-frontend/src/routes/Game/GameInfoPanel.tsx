@@ -1,11 +1,11 @@
 import { Button, ButtonGroup, GlowingBorder, InfoPanel, QuickGuide } from 'components'
 import { observer } from 'mobx-react-lite'
 import { Placeholder, StyledInterAction, Narration, Message } from './Game.styles'
-import { interactionStore } from 'store'
+import { messageStore } from 'store'
 import { BUTTONS } from 'constant'
 
 const InterAction: React.FC = observer(() => {
-  const { narration, privateMessage } = interactionStore
+  const { narration, privateMessage } = messageStore
   return (
     <StyledInterAction>
       <Narration>{narration}</Narration>
@@ -19,11 +19,11 @@ const InterAction: React.FC = observer(() => {
 })
 
 export const GameInfoPanel: React.FC = observer(() => {
-  const { narration } = interactionStore
+  const { narration } = messageStore
 
   return (
     <InfoPanel>
-      { narration ? <GlowingBorder><InterAction /></GlowingBorder> : <Placeholder>TODO: fun texts like "Did you hear that?"</Placeholder> }
+      { narration ? <GlowingBorder glowColor='#dc3545'><InterAction /></GlowingBorder> : <Placeholder>TODO: fun texts like "Did you hear that?"</Placeholder> }
       <QuickGuide />
     </InfoPanel>
   )

@@ -19,6 +19,7 @@ export const hydrateTable = async (ws, message) => {
     return ws.send(
       JSON.stringify({
         type: HYDRATE_TABLE,
+        success: true,
         player: {
           player_name: player?.name,
           player_number: player?.player_number,

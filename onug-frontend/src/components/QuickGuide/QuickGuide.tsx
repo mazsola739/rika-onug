@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
 import { Guide, Item, QuickGuideRule, StyledQuickGuide } from './QuickGuide.styles'
 import { QuickGuideToken } from './QuickGuideToken'
-import { CardType, TokenType } from 'types'
+import { CardJson, TokenJson } from 'types'
 import { getUniqueItems, isCardType } from './QuickGuide.utils'
 
 //TODO quick guide text
@@ -18,7 +18,7 @@ export const QuickGuide: React.FC = observer(() => {
     (mark) => mark.token_name
   )
 
-  const renderItem = (item: CardType | TokenType) => {
+  const renderItem = (item: CardJson | TokenJson) => {
     if (isCardType(item)) {
       return (
         <Item key={item.display_name} expansion={item.expansion}>

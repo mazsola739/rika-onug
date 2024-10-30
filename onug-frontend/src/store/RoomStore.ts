@@ -1,12 +1,12 @@
 import { TEAM } from 'constant'
 import { makeAutoObservable } from 'mobx'
-import { CardType, PlayersType } from 'types'
-import { createDefaultCard, getFilteredCardsForTeam as getSortedCardsByTeam, getOrderedTeams } from 'utils'
 import { deckStore } from 'store'
+import { CardJson, Player } from 'types'
+import { createDefaultCard, getOrderedTeams, getFilteredCardsForTeam as getSortedCardsByTeam } from 'utils'
 
 class RoomStore {
-  detailedCardInfo: CardType = createDefaultCard()
-  players: PlayersType[]
+  detailedCardInfo: CardJson = createDefaultCard()
+  roomPlayers: Player[]
 
   constructor() {
     makeAutoObservable(this)
@@ -16,17 +16,17 @@ class RoomStore {
     return getOrderedTeams(teamArray)
   }
 
-  getSortedCardsByTeam(team: string): CardType[] {
+  getSortedCardsByTeam(team: string): CardJson[] {
     return getSortedCardsByTeam(team, deckStore.deck)
   }
 
-  getTeamMembers(cards: CardType[]): CardType[] {
+  getTeamMembers(cards: CardJson[]): CardJson[] {
     return cards
       .slice()
       .sort((a, b) => a.display_name.localeCompare(b.display_name))
   }
 
-  getTeamName(cards: CardType[], team: string): string {
+  getTeamName(cards: CardJson[], team: string): string {
     const hasHero = cards.some((card) => card.team === TEAM.hero)
     const hasVillager = cards.some((card) => card.team === TEAM.village)
 
@@ -39,7 +39,7 @@ class RoomStore {
           : team
   }
 
-  getDetailedCardInfo(): CardType {
+  getDetailedCardInfo(): CardJson {
     return this.detailedCardInfo
   }
 
@@ -57,8 +57,8 @@ class RoomStore {
     this.detailedCardInfo = newCardInfo || createDefaultCard()
   }
 
-  setPlayers(players: PlayersType[]): void {
-    this.players = players
+  setRoomPlayers(players: Player[]): void {
+    this.roomPlayers = players
   }
 }
 

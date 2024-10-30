@@ -1,7 +1,7 @@
 import { EXPANSION, rules_mark } from 'constant'
-import { TokenType } from 'types'
+import { TokenJson } from 'types'
 
-export const marks: TokenType[] = [
+export const marks: TokenJson[] = [
   {
     id: 1,
     expansion: EXPANSION.vampire,

@@ -1,7 +1,7 @@
 import { EXPANSION, ROLES, rules_role, TEAM, WAKE } from 'constant'
-import { CardType } from 'types'
+import { CardJson } from 'types'
 
-export const cards: CardType[] = [
+export const cards: CardJson[] = [
   {
     id: 1,
     expansion: EXPANSION.werewolf,

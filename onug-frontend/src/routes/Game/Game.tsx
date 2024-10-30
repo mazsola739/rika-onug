@@ -7,21 +7,21 @@ import { GameInfoPanel } from './GameInfoPanel'
 import { useGame } from './useGame'
 
 export const Game: React.FC = observer(() => {
-  const { tablePlayers, tablePlayer, left, middle, right, nightMode, setTransitionCompleted } = useGame()
+  const { tablePlayerCards, tablePlayer, left, middle, right, nightMode, setTransitionCompleted } = useGame()
 
   return (
     <StyledGame animate={nightMode} onAnimationEnd={() => setTransitionCompleted(true)}>
       <GameHeader />
-      {tablePlayers && <AroundTableSide players={left} />}
-      {tablePlayers && <AroundTableTop players={middle} />}
+      {tablePlayerCards && <AroundTableSide players={left} />}
+      {tablePlayerCards && <AroundTableTop players={middle} />}
       <Main>
         <GameCenter>
           <CenterCards />
           <CenterTokens />
         </GameCenter>
-        {tablePlayer && <PlayerCard id={tablePlayer.player_card_id} markName={tablePlayer.player_mark} isCenter={false} cardSize={130} tokenSize={50} position={tablePlayer.player_number} />}
+        {tablePlayer && <PlayerCard card={tablePlayer} cardSize={130} tokenSize={50}  />}
       </Main>
-      {tablePlayers && <AroundTableSide players={right} />}
+      {tablePlayerCards && <AroundTableSide players={right} />}
       <GameFooter />
       <GameInfoPanel />
     </StyledGame>

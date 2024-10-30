@@ -1,4 +1,4 @@
-import { CardType, TokenType } from "types"
+import { CardJson, TokenJson } from "types"
 
 export const getUniqueItems = <T>(items: T[], key: (item: T) => string): T[] => {
   const seenKeys = new Set<string>()
@@ -16,6 +16,6 @@ export const getUniqueItems = <T>(items: T[], key: (item: T) => string): T[] => 
   })
 }
 
-export const isCardType = (item: CardType | TokenType): item is CardType => {
-    return (item as CardType).display_name !== undefined
+export const isCardType = (item: CardJson | TokenJson): item is CardJson => {
+    return (item as CardJson).display_name !== undefined
 }

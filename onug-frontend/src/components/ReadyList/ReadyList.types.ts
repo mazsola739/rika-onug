@@ -1,7 +1,7 @@
-import { PlayersType } from 'types'
+import { Player } from 'types'
 
 export interface ReadyListProps {
-  players: PlayersType[]
+  players: Player[]
 }
 
 export interface ReadyType {

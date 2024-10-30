@@ -1,7 +1,7 @@
-import { CardType, TablePlayerType } from 'types'
+import { CardJson, TablePlayerCard } from 'types'
 
 export const areAnyCardSelectedById = (
-  selectedCards: CardType[],
+  selectedCards: CardJson[],
   cardIds: number[]
 ): boolean =>
   cardIds.some((cardId) => isCardSelectedById(selectedCards, cardId))
@@ -14,18 +14,18 @@ export const findCardById = <T extends { id: number }>(
 }
 
 export const isCardSelectedById = (
-  selectedCards: CardType[],
+  selectedCards: CardJson[],
   cardId: number
 ): boolean => selectedCards.some((card) => card.id === cardId)
 
-export const checkCardPresence = (cards: CardType[], cardId: number): boolean =>
+export const checkCardPresence = (cards: CardJson[], cardId: number): boolean =>
   cards.some((card) => card.id === cardId)
 
 export const capitalize = (string: string) =>
   string && string[0].toUpperCase() + string.slice(1).toLowerCase()
 
-export const splitPlayersToTable = (players: TablePlayerType[], player: TablePlayerType) => {
-  const playerNumber = Number(`${player.player_number}`.replace("player_", ""))
+export const splitPlayersToTable = (players: TablePlayerCard[], player: TablePlayerCard) => {
+  const playerNumber = Number(`${player.position}`.replace("player_", ""))
   const playerIndex = playerNumber - 1
 
   const newPlayers = [...players.slice(playerIndex), ...players.slice(0, playerIndex)]

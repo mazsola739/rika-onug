@@ -1,45 +1,45 @@
 import { ASSASSIN_IDS, HAS_MARK_IDS, VAMPIRE_IDS } from 'constant'
 import { artifacts, cards, marks } from 'data'
 import { makeAutoObservable } from 'mobx'
-import { CardType, TokenType } from 'types'
+import { CardJson, Expansion, TokenJson } from 'types'
 import { areAnyCardSelectedById, checkCardPresence, createDefaultCard, createDefaultToken, determineTotalPlayers, findCardById } from 'utils'
 import { playersStore } from './PlayersStore'
 
 class DeckStore {
-  deck: CardType[] = cards
-  marks: TokenType[] = marks
-  artifacts: TokenType[] = artifacts
-  selectedCards: CardType[] = []
-  selectedMarks: TokenType[] = []
-  selectedExpansions: string[] = ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"]
-  playerCard: CardType = createDefaultCard()
-  playerMark: TokenType = createDefaultToken()
+  deck: CardJson[] = cards
+  marks: TokenJson[] = marks
+  artifacts: TokenJson[] = artifacts
+  selectedCards: CardJson[] = []
+  selectedMarks: TokenJson[] = []
+  selectedExpansions: Expansion[] = ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"]
+  playerCard: CardJson = createDefaultCard()
+  playerMark: TokenJson = createDefaultToken()
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  getCardById(cardId: number): CardType {
+  getCardById(cardId: number): CardJson {
     return this.deck ? findCardById(this.deck, cardId) : createDefaultCard()
   }
 
-  getMarkByName(markName: string): TokenType {
+  getMarkByName(markName: string): TokenJson {
     return this.deck ? marks.find(mark => mark.token_name === markName) || null : createDefaultToken()
   }
 
   setDeck(): void {
-    this.deck = cards.filter(card => this.selectedExpansions.includes(card.expansion))
+    this.deck = cards.filter(card => this.selectedExpansions.includes(card.expansion as Expansion))
   }
 
   setSelectedCard(cardIds: number[]): void {
     this.selectedCards = cardIds
-      .map((cardId) => this.getCardById(cardId) as CardType)
+      .map((cardId) => this.getCardById(cardId) as CardJson)
       .sort((a, b) => a.id - b.id)
     this.updateSelectedMarks()
     this.updateArtifacts()
   }
 
-  setSelectedExpansions(expansions: string[]): void {
+  setSelectedExpansions(expansions: Expansion[]): void {
     this.selectedExpansions = expansions
     this.setDeck()
   }
@@ -50,7 +50,7 @@ class DeckStore {
   }
 
   setPlayerMark(): void {
-    const mark = this.getMarkByName(playersStore.player.player_mark)
+    const mark = this.getMarkByName('mark_of_clarity')
     this.playerMark = mark
   }
 
@@ -90,7 +90,7 @@ class DeckStore {
 
     this.selectedMarks = this.marks
       .filter(mark => markConditions[mark.token_name] ?? false)
-      .sort((a, b) => a.id - b.id) as TokenType[]
+      .sort((a, b) => a.id - b.id) as TokenJson[]
   }
 
   updateArtifacts(): void {
@@ -101,7 +101,7 @@ class DeckStore {
             (this.hasSentinel && artifact.token_name === 'shield') ||
             (this.hasCurator && artifact.token_name !== 'shield')
           )
-          .sort((a, b) => a.id - b.id) as TokenType[]
+          .sort((a, b) => a.id - b.id) as TokenJson[]
   }
 
   clearPlayerCard(): void {

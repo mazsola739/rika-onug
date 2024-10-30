@@ -1,8 +1,8 @@
 import { ARRIVE_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { playersStore, gamePlayStore, interactionStore, wsStore } from 'store'
-import { InteractionType, NarrationType } from 'types'
+import { gamePlayStore, messageStore, playersStore, riseAndRestStore, wsStore } from 'store'
+import { MessagesType, NarrationType } from 'types'
 import { splitPlayersToTable } from 'utils'
 
 export const useGame = () => {
@@ -36,8 +36,9 @@ export const useGame = () => {
 
   useEffect(() => {
     if (lastJsonMessage?.type === SCENE) {
-      interactionStore.setNarration(lastJsonMessage.narration as NarrationType[])
-      interactionStore.setInteraction(lastJsonMessage.interaction as InteractionType)
+      messageStore.setNarration(lastJsonMessage.narration as NarrationType[])
+      messageStore.setPrivateMessage(lastJsonMessage.interaction.private_message as MessagesType[])
+
     }
 
     if (lastJsonMessage?.type === HYDRATE_GAME) {
@@ -54,10 +55,15 @@ export const useGame = () => {
 
   }, [lastJsonMessage, navigate])
   
-  const { tablePlayers, tablePlayer } = playersStore
+  const { tablePlayerCards } = riseAndRestStore
+  const { player } = playersStore
 
-  const sides = tablePlayers && tablePlayer ? splitPlayersToTable(tablePlayers, tablePlayer) : null
+  const tablePlayer = tablePlayerCards.find(
+    (tablePlayerCard) => tablePlayerCard.position === player.player_number
+  )
+
+  const sides = tablePlayerCards && tablePlayer ? splitPlayersToTable(tablePlayerCards, tablePlayer) : null
   const { left = [], middle = [], right = [] } = sides || {}
 
-  return { tablePlayers, tablePlayer, left, middle, right, nightMode, setTransitionCompleted }
+  return { tablePlayerCards, tablePlayer, left, middle, right, nightMode, setTransitionCompleted }
 }

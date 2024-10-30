@@ -1,6 +1,6 @@
-import { ScriptType } from 'types'
+import { ScriptJson } from 'types'
 
-export const script: ScriptType[] = [
+export const script: ScriptJson[] = [
   {
     scene_title: 'START_GAME',
     scene_img: 'day',

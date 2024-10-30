@@ -1,6 +1,6 @@
 import { JOIN_ROOM, LEAVE_ROOM, DEAL, RESET, START_GAME, READY, PAUSE_GAME, STOP_GAME, LEAVE_TABLE, SCENE, UPDATE_ROOM } from 'constant'
 import { useCallback } from 'react'
-import { wsStore, gamePlayStore, roomStore, deckStore, interactionStore } from 'store'
+import { wsStore, gamePlayStore, roomStore, deckStore, messageStore } from 'store'
 
 export const useClickHandler = (room_id: string, token: string) => {
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()

@@ -1,7 +1,7 @@
 import { DOPPELGANGER_INSTANT_ACTION_IDS } from 'constant'
-import { OrderType } from 'types'
+import { OrderJson } from 'types'
 
-export const order: OrderType[] = [
+export const order: OrderJson[] = [
   {
     scene_title: 'ORACLE_QUESTION',
     card_id: [50],

@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { interactionStore, playersStore } from 'store'
+import { messageStore } from 'store'
 import { WsJsonMessage } from 'types'
 
 class DoppelgangerStore {
@@ -9,7 +9,7 @@ class DoppelgangerStore {
 
   instantNightAction(lastJsonMessage: WsJsonMessage): void {
     const new_role_id = lastJsonMessage.interaction.new_role_id
-    const { setInteraction } = interactionStore
+    const { setInteraction } = messageStore
 
     if (new_role_id === 2) return setInteraction('DRUNK')
     if (new_role_id === 8) return setInteraction('ROBBER')

@@ -3,6 +3,7 @@ export * from './messages'
 export * from './losing'
 export * from './wining'
 
+export * from './dafaults'
 export * from './misc'
 export * from './env'
 
