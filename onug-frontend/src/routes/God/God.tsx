@@ -1,7 +1,7 @@
 import { API_HOST } from 'constant'
 import { observer } from 'mobx-react-lite'
-import { useState, useCallback } from 'react'
-import { StyledGod, LeftSide, GamestatesContainer, GodTitle, FormContainer, InputContainer, Label, Input, ButtonsContainer, Button, WSContainer, MetaContainer, RightSide, ResponseContainer, ResponsePre } from './God.styles'
+import { useCallback, useState } from 'react'
+import { Button, ButtonsContainer, FormContainer, GamestatesContainer, GodTitle, Input, InputContainer, Label, LeftSide, MetaContainer, ResponseContainer, ResponsePre, RightSide, StyledGod, WSContainer } from './God.styles'
 
 //TODO hack mode (send message to server)
 const gamestates = 'gamestates'

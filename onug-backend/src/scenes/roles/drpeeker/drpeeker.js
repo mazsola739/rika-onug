@@ -1,6 +1,6 @@
+import { mysticwolfInteraction } from '..'
 import { IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
-import { mysticwolfInteraction } from '..'
 
 export const drpeeker = (gamestate, title) => {
   const newGamestate = { ...gamestate }

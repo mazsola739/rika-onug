@@ -5,6 +5,16 @@ export const StyledPlayerCard = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+`
+
+export const PlayerName = styled.span`
+  font-size: 20px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
 `
 
 export const Tokens = styled.div`

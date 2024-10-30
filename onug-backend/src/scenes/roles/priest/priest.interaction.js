@@ -1,4 +1,4 @@
-import { getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 
 export const priestInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

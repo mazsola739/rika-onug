@@ -1,6 +1,6 @@
-import { VOTE, SCENE } from '../../../constants'
+import { SCENE, VOTE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
-import { addVote, getVampirePlayerNumbersByRoleIds, getPlayerTokensByPlayerNumber, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { addVote, formatPlayerIdentifier, generateRoleInteraction, getPlayerTokensByPlayerNumber, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const vampiresResponse = (gamestate, token, selected_mark_positions, title) => {

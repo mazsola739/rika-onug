@@ -1,4 +1,5 @@
 import { logWarn } from '../log'
+
 const validCardIdRange = [1, 86]
 
 const CARDS_ARE_NOT_AN_ARRAY = 'Cards were not provided as an array'

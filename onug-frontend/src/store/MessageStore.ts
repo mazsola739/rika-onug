@@ -20,7 +20,6 @@ class MessageStore {
     const message = message_keys.map((key) => messages_text[key]).join(' ')
     this.privateMessage = message
   }
-
 }
 
 export default MessageStore

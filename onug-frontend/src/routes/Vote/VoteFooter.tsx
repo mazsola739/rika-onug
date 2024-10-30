@@ -1,4 +1,4 @@
-import { Footer, ButtonGroup, Button } from "components"
+import { Button, ButtonGroup, Footer } from "components"
 import { observer } from "mobx-react-lite"
 import { useCallback } from "react"
 

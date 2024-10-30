@@ -1,5 +1,5 @@
 import { IDS, SCENE } from '../../../constants'
-import { getCardIdsByPositions, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 

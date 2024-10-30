@@ -1,4 +1,4 @@
-import { getSelectableOtherPlayerNumbersWithNoShield, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
 
 export const paranormalinvestigatorInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

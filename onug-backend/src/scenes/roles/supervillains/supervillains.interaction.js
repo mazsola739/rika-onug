@@ -1,4 +1,4 @@
-import { getVillainPlayerNumbersByRoleIds, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getVillainPlayerNumbersByRoleIds } from '../../sceneUtils'
 
 export const supervillainsInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

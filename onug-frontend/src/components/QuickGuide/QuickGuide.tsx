@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
-import { Guide, Item, QuickGuideRule, StyledQuickGuide } from './QuickGuide.styles'
-import { QuickGuideToken } from './QuickGuideToken'
 import { CardJson, TokenJson } from 'types'
+import { Guide, Item, QuickGuideRule, StyledQuickGuide } from './QuickGuide.styles'
 import { getUniqueItems, isCardType } from './QuickGuide.utils'
+import { QuickGuideToken } from './QuickGuideToken'
 
 //TODO quick guide text
 export const QuickGuide: React.FC = observer(() => {

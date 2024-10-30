@@ -1,5 +1,5 @@
-import * as narration_text from 'constant/narrations'
 import * as messages_text from 'constant/messages'
+import * as narration_text from 'constant/narrations'
 
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 

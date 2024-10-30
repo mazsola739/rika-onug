@@ -1,5 +1,5 @@
-import { NEWBIE, REDIRECT } from '../constants'
 import { v4 as uuidv4, validate } from 'uuid'
+import { NEWBIE, REDIRECT } from '../constants'
 import { logInfo } from '../log'
 
 export const newbie = (ws, message) => {

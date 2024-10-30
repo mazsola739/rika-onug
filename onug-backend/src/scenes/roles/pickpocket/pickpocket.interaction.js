@@ -1,4 +1,4 @@
-import { getPlayerNumbersWithNonMatchingTokens, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getPlayerNumbersWithNonMatchingTokens } from '../../sceneUtils'
 
 export const pickpocketInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

@@ -1,6 +1,6 @@
 import { IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
-import { randomBodysnatcherInstructions, bodysnatcherKeys } from './bodysnatcher.constants'
+import { bodysnatcherKeys, randomBodysnatcherInstructions } from './bodysnatcher.constants'
 import { bodysnatcherInteraction } from './bodysnatcher.interaction'
 
 export const bodysnatcher = (gamestate, title, prefix) => {

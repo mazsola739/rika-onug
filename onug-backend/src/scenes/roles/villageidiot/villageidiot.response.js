@@ -1,5 +1,5 @@
 import { SCENE } from '../../../constants'
-import { getPlayerNumberWithMatchingToken, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { validateAnswerSelection } from '../../validators'
 import { moveCardsButYourOwn } from './villageidiot.utils'
 

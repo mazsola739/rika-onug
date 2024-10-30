@@ -1,6 +1,6 @@
 import { readdir, unlink } from 'fs/promises';
-import { logTrace, logErrorWithStack } from '../../log';
 import path from 'path';
+import { logErrorWithStack, logTrace } from '../../log';
 
 export const metaDeleteAllOldLogFiles = async (req, res) => {
   try {

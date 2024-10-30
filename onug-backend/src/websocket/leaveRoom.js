@@ -1,9 +1,9 @@
-import roomsData from '../data/rooms.json'
-import { upsertRoomState, readGamestate } from '../repository'
-import { logTrace } from '../log'
 import { HYDRATE_ROOM, LEAVE_ROOM } from '../constants'
-import { broadcast, removeUserFromRoom } from './connections'
+import roomsData from '../data/rooms.json'
+import { logTrace } from '../log'
+import { readGamestate, upsertRoomState } from '../repository'
 import { getPlayerNames } from '../utils'
+import { broadcast, removeUserFromRoom } from './connections'
 
 export const leaveRoom = async (ws, message) => {
   logTrace(`leave-room requested with ${JSON.stringify(message)}`)

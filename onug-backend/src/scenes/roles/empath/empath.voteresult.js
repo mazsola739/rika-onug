@@ -1,4 +1,4 @@
-import { findMostVoted, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { findMostVoted, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 
 export const empathVoteResult = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

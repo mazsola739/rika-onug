@@ -1,8 +1,8 @@
-import { VOTE, SCENE } from '../../../constants'
+import { SCENE, VOTE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
-import { addVote, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { addVote, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
-import { getEmpathTokensByRoleIds, getDoppelgangerEmpathTokensByRoleIds } from './empath.utils'
+import { getDoppelgangerEmpathTokensByRoleIds, getEmpathTokensByRoleIds } from './empath.utils'
 
 
 //TODO empath votes ALL send

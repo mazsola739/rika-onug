@@ -1,4 +1,4 @@
-import { findMostVoted, generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { findMostVoted, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 
 
 //TODO better votes for new vampire

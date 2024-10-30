@@ -1,6 +1,6 @@
 import { IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
-import { randomAlienInstructions, alienAnyKeys, alienAllKeys } from './aliens.constants'
+import { alienAllKeys, alienAnyKeys, randomAlienInstructions } from './aliens.constants'
 import { aliensInteraction } from './aliens.interaction'
 
 export const aliens = (gamestate, title) => {

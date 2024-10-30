@@ -1,7 +1,7 @@
 import { ARRIVE_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { gamePlayStore, messageStore, playersStore, riseAndRestStore, wsStore } from 'store'
+import { gamePlayStore, messageStore, riseAndRestStore, wsStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
 import { splitPlayersToTable } from 'utils'
 
@@ -30,7 +30,6 @@ export const useGame = () => {
 
   useEffect(() => {
     if (transitionCompleted) {
-      riseAndRestStore.closeYourEyes()
       sendJsonMessage?.({ type: SCENE, room_id, token, player_ready: true })
     }
   }, [sendJsonMessage, transitionCompleted])
@@ -43,6 +42,7 @@ export const useGame = () => {
     }
 
     if (lastJsonMessage?.type === HYDRATE_GAME) {
+        riseAndRestStore.closeYourEyes()
         setNightMode(true)
     }
 

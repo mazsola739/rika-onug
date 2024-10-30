@@ -1,4 +1,4 @@
-import { logTrace, logErrorWithStack } from '../../log'
+import { logErrorWithStack, logTrace } from '../../log'
 import { removeRoomGamestateById } from '../../repository'
 
 export const deleteGamestateByRoomId = async (req, res) => {

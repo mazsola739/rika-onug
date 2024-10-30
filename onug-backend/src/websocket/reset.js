@@ -1,7 +1,7 @@
 import { HYDRATE_ROOM } from '../constants'
 import { logError, logTrace } from '../log'
-import { validateRoom } from '../validators'
 import { upsertRoomState } from '../repository'
+import { validateRoom } from '../validators'
 import { broadcast } from './connections'
 
 export const reset = async (message) => {

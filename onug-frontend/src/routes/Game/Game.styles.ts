@@ -142,7 +142,8 @@ export const Tokens = styled.div`
 //INFOPANEL
 
 export const Placeholder = styled.div`
-  min-height: 300px;
+  color: white;
+  min-height: 350px;
 `
 
 export const StyledInterAction = styled.div`

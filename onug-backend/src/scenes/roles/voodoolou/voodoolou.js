@@ -1,6 +1,6 @@
+import { witchInteraction } from '..'
 import { IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
-import { witchInteraction } from '..'
 
 export const voodoolou = (gamestate, title) => {
   const newGamestate = { ...gamestate }

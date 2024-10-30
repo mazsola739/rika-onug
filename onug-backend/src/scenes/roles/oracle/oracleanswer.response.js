@@ -1,5 +1,5 @@
 import { SCENE } from '../../../constants'
-import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 

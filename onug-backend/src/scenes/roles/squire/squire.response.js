@@ -1,5 +1,5 @@
 import { SCENE } from '../../../constants'
-import { getCardIdsByPositions, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions } from '../../sceneUtils'
 import { validateAnswerSelection } from '../../validators'
 import { getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield } from './squire.utils'
 

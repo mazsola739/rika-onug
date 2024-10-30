@@ -1,5 +1,5 @@
 import { SCENE } from '../../../constants'
-import { getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions } from '../../sceneUtils'
 import { validateAnswerSelection } from '../../validators'
 
 export const beholderResponse = (gamestate, token, selected_answer, title) => {

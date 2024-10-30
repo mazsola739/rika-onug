@@ -1,4 +1,4 @@
-import { getSelectableOtherPlayerNumbersWithNoShield, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
 
 export const flipperInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

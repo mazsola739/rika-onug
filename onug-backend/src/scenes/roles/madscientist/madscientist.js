@@ -1,6 +1,6 @@
 import { SCENE } from '../../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
-import { random_madscientist_intro, random_madscientist_therefore, random_madscientist_result, random_madscientist_transition } from './madscientist.constants'
+import { random_madscientist_intro, random_madscientist_result, random_madscientist_therefore, random_madscientist_transition } from './madscientist.constants'
 
 export const madscientist = (gamestate, title) => {
   const newGamestate = { ...gamestate }

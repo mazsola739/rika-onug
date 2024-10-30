@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
 import { ARRIVE_VOTE, STAGES } from 'constant'
-import { wsStore, playersStore } from 'store'
+import { useEffect, useState } from 'react'
+import { wsStore } from 'store'
 
 export const useVote = () => {
   const [firstTime, setFirstTime] = useState(true)

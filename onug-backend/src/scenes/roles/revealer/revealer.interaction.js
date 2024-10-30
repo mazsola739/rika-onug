@@ -1,4 +1,4 @@
-import { getSelectableOtherPlayerNumbersWithNoShield, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
 
 export const revealerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

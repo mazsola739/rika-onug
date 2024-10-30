@@ -1,4 +1,4 @@
-import { getWerewolfAndDreamwolfPlayerNumbersByRoleIds, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../sceneUtils'
 
 export const squireInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

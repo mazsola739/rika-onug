@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS, SCENE } from '../../../constants'
-import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getCardIdsByPlayerNumbers } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getAllPlayerTokens, getCardIdsByPlayerNumbers, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken, getSelectablePlayersWithNoShield } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const rascalResponse = (gamestate, token, selected_card_positions, title) => {

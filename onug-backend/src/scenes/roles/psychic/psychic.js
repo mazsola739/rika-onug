@@ -1,6 +1,6 @@
 import { IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
-import { randomPsychicInstructions, psychicKeys } from './psychic.constants'
+import { psychicKeys, randomPsychicInstructions } from './psychic.constants'
 import { psychicInteraction } from './psychic.interaction'
 
 export const psychic = (gamestate, title, prefix) => {

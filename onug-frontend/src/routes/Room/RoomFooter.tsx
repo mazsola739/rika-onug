@@ -1,4 +1,4 @@
-import { Button, Footer, ButtonGroup } from 'components'
+import { Button, ButtonGroup, Footer } from 'components'
 import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'

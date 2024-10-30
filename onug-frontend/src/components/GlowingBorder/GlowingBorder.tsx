@@ -1,10 +1,6 @@
 import { observer } from 'mobx-react-lite'
+import { InnerContainer, OuterGlow, StyledGlowingBorder } from './GlowingBorder.styles'
 import { GlowingBorderProps } from './GlowingBorder.types'
-import {
-  InnerContainer,
-  OuterGlow,
-  StyledGlowingBorder,
-} from './GlowingBorder.styles'
 
 export const GlowingBorder: React.FC<GlowingBorderProps> = observer(
   ({ children, radius, glowColor, sizeH, sizeW }) => {

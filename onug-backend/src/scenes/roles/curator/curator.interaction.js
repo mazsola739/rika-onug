@@ -1,4 +1,4 @@
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../sceneUtils'
 import { getSelectablePlayersWithNoArtifact } from './curator.utils'
 
 export const curatorInteraction = (gamestate, token, title) => {

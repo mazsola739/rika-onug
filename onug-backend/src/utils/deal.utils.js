@@ -1,7 +1,7 @@
+import { IDS } from '../constants'
 import cards from '../data/cards.json'
 import { logInfo } from '../log'
-import { IDS } from '../constants'
-import { stubbedCards, getCenterCardPositionByIndex } from '../omnipotent/stub/populateDeal'
+import { getCenterCardPositionByIndex, stubbedCards } from '../omnipotent/stub/populateDeal'
 
 const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(IDS.ALPHA_WOLF_ID)
 const hasTemptress = (selectedCardIds) => selectedCardIds.includes(IDS.TEMPTRESS_ID)

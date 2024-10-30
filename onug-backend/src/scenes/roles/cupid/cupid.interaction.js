@@ -1,4 +1,4 @@
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
 
 export const cupidInteraction = (gamestate, token, title) => {
     const newGamestate = { ...gamestate }

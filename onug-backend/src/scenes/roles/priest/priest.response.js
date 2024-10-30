@@ -1,5 +1,5 @@
 import { SCENE } from '../../../constants'
-import { generateRoleInteraction, formatPlayerIdentifier } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const priestResponse = (gamestate, token, selected_mark_positions, title) => {

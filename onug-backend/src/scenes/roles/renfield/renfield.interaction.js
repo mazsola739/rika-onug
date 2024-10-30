@@ -1,4 +1,4 @@
-import { getVampirePlayerNumbersByRoleIds, getPlayerNumberWithMatchingToken, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getPlayerNumberWithMatchingToken, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
 import { getVampirePlayerNumbersByMark } from './renfield.utils'
 
 export const renfieldInteraction = (gamestate, token, title) => {

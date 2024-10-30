@@ -1,11 +1,10 @@
-import { HYDRATE_ROOM, JOIN_ROOM } from '../constants'
+import { HYDRATE_ROOM, JOIN_ROOM, STAGES } from '../constants'
 import roomsData from '../data/rooms.json'
-import { validateRoom } from '../validators'
-import { upsertRoomState } from '../repository'
 import { logTrace } from '../log'
-import { STAGES } from '../constants'
-import { addUserToRoom, broadcast } from './connections'
+import { upsertRoomState } from '../repository'
 import { getPlayerNames } from '../utils'
+import { validateRoom } from '../validators'
+import { addUserToRoom, broadcast } from './connections'
 
 const randomPlayerName = (names = []) => names[~~(Math.random() * names.length)]
 

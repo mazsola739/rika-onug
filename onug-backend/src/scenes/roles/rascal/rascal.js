@@ -1,7 +1,7 @@
 import { IDS, SCENE } from '../../../constants'
 import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { villageidiotInteraction } from '../villageidiot/villageidiot.interaction'
-import { randomRascalInstructions, rascalAnyTwoKeys, rascalAnyOneKeys } from './rascal.constants'
+import { randomRascalInstructions, rascalAnyOneKeys, rascalAnyTwoKeys } from './rascal.constants'
 import { rascalInteraction } from './rascal.interaction'
 
 export const rascal = (gamestate, title, prefix) => {

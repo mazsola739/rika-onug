@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS, SCENE } from '../../../constants'
-import { getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleInteraction, formatPlayerIdentifier, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getAllPlayerTokens, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken, getSelectablePlayersWithNoShield } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const witchResponse = (gamestate, token, selected_card_positions, title) => {

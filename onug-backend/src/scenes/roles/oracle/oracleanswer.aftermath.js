@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS, SCENE } from '../../../constants'
-import { getPlayerNumberWithMatchingToken, getCardIdsByPositions, getRandomNumber, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getRandomNumber } from '../../sceneUtils'
 
 export const oracleAnswerAftermath = (gamestate, token, title) => {
     const newGamestate = { ...gamestate }
@@ -107,7 +107,7 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
       selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: limit } },
     })
   
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
     newGamestate.scene = scene
   
     return newGamestate

@@ -1,6 +1,6 @@
 import express from 'express'
-const router = express.Router()
 import { populateDeal } from './populateDeal'
+const router = express.Router()
 
 // populator
 router.post('/populate/deal', populateDeal)

@@ -1,4 +1,4 @@
-import { getPlayerNeighborsByToken, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getPlayerNeighborsByToken } from '../../sceneUtils'
 import { superVillainDetected } from './evilometer.constants'
 
 export const evilometerInteraction = (gamestate, token, title) => {

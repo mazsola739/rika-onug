@@ -1,13 +1,12 @@
-import { observer } from 'mobx-react-lite'
-import { Lobby, Room, Game, Vote, God, Stub, Table } from 'routes'
-import { wsStore } from 'store'
-import { ConnectionStatus, StyledApp } from './App.styles'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import useWebSocket, { ReadyState } from 'react-use-websocket'
-import { useEffect, useState } from 'react'
-import { NEWBIE, RELOAD, WS_HOST } from 'constant'
-import { Icon } from 'components'
 import { IconType } from 'components/Icon/Icon.types'
+import { NEWBIE, RELOAD, WS_HOST } from 'constant'
+import { observer } from 'mobx-react-lite'
+import { useEffect, useState } from 'react'
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
+import useWebSocket, { ReadyState } from 'react-use-websocket'
+import { Game, God, Lobby, Room, Stub, Table, Vote } from 'routes'
+import { wsStore } from 'store'
+import { StyledApp } from './App.styles'
 
 interface WebSocketMessage {
   type: string

@@ -1,4 +1,4 @@
-import { logTrace, logErrorWithStack } from '../../log'
+import { logErrorWithStack, logTrace } from '../../log'
 import { webSocketServerConnectionsPerRoom } from '../../websocket/connections'
 
 export const broadCastToAll = async (req, res) => {

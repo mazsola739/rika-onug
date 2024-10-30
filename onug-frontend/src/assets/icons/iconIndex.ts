@@ -44,8 +44,7 @@ import LoverIcon from './lover.svg?react'
 import MadIcon from './mad.svg?react'
 import MasonIcon from './mason.svg?react'
 import MorticianIcon from './mortician.svg?react'
-import MuteIcon from './mute.svg?react'
-import MysticIcon from './mute.svg?react'
+import { default as MuteIcon, default as MysticIcon } from './mute.svg?react'
 import NiceIcon from './nice.svg?react'
 import NightIcon from './night.svg?react'
 import NightvisionIcon from './nightvision.svg?react'
@@ -68,9 +67,8 @@ import SusIcon from './sus.svg?react'
 import SwapIcon from './swap.svg?react'
 import TannerIcon from './tanner.svg?react'
 import TapIcon from './tap.svg?react'
-import TargetIcon from './target.svg?react'
+import { default as TargetIcon, default as ThinkIcon } from './target.svg?react'
 import ThecountIcon from './thecount.svg?react'
-import ThinkIcon from './target.svg?react'
 import ThumbIcon from './thumb.svg?react'
 import TraitorIcon from './traitor.svg?react'
 import TrophyIcon from './trophy.svg?react'
@@ -165,5 +163,5 @@ export {
   VillainIcon,
   VoodooIcon,
   WerewolfIcon,
-  WitchIcon,
+  WitchIcon
 }

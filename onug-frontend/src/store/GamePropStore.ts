@@ -17,7 +17,7 @@ class GamePropStore {
   answer_options: string[] = []
   artifacted_cards: string[] = []
   selectable_card_limit: { player: number; center: number } = { player: 0, center: 0 }
-  selectable_cards: string[] = []
+  selectable_cards: CardPosition[] = []
   selectable_mark_limit: { mark: number } = { mark: 0 }
   shielded_cards: string[] = []
   show_cards: Record<CardPosition, number>[] = []

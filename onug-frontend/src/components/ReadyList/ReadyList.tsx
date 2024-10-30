@@ -1,6 +1,6 @@
 import { Token } from 'components'
 import { observer } from 'mobx-react-lite'
-import { ReadyInfo, Ready, StyledReadyList, Players } from './ReadyList.styles'
+import { Ready, ReadyInfo, StyledReadyList } from './ReadyList.styles'
 import { ReadyListProps } from './ReadyList.types'
 
 export const ReadyList: React.FC<ReadyListProps> = observer(({ players }) => (

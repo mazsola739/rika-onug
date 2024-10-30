@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken, generateRoleInteraction, getPlayerNeighborsByToken, getSelectablePlayersWithNoShield } from '../../sceneUtils'
+import { generateRoleInteraction, getPlayerNeighborsByToken, getPlayerNumberWithMatchingToken, getSelectablePlayersWithNoShield } from '../../sceneUtils'
 
 //TODO neighbors
 export const morticianInteraction = (gamestate, token, title, randomMorticianInstruction, morticianKey) => {

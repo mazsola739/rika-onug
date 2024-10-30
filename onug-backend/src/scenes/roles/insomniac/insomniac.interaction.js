@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken, getCardIdsByPlayerNumbers, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getCardIdsByPlayerNumbers, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 
 export const insomniacInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

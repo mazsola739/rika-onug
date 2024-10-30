@@ -1,6 +1,6 @@
-import { readGamestate } from '../repository'
-import { logWarn } from '../log'
 import { ROOM_NAMES } from '../constants'
+import { logWarn } from '../log'
+import { readGamestate } from '../repository'
 
 export const validateRoom = async (roomId) => {
   const errors = []

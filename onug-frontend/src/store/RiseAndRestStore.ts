@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { deckStore, gamePropStore, messageStore } from 'store'
-import { CardPosition, InteractionType, MessagesType, NarrationType, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
+import { CardPosition, InteractionType, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
 
 class RiseAndRestStore {
   tablePlayerCard: TablePlayerCard = {}
@@ -30,13 +30,14 @@ class RiseAndRestStore {
 
     const updatedTablePlayerCards = defaultTablePlayerCards.map(defaultTablePlayerCard => {
       const playerCard = players.find(player => defaultTablePlayerCard.position === player.player_number)
-
+      const isSelectableCard = gamePropStore.selectable_cards.some(selectable_card => selectable_card === defaultTablePlayerCard.position )
       if (playerCard) {
         const card = deckStore.getCardById(playerCard.player_card_id)
         return {
           ...defaultTablePlayerCard,
           player_name: playerCard.player_name,
           card_name: card ? card.card_name : '',
+          selectable: isSelectableCard,
         }
       }
 
@@ -54,7 +55,7 @@ class RiseAndRestStore {
       player_name: 'You',
       position: `player_${player.player_number}` as CardPosition,
       card_name: card ? card.card_name : '',
-      mark: 'mark_of_clarity',
+      mark: 'mark_of_clarity', //TODO fix it
       artifact: false,
       shield: false,
       selectable: false,

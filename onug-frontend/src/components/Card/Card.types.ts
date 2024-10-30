@@ -1,11 +1,11 @@
 export interface CardProps {
   image: string
+  isSelectable: boolean
   size: number
   playerName?: string
 }
 
 export interface StyledCardProps {
-  isSelected?: boolean
-  ready?: boolean
-  size: number
+  sizeW?: number
+  sizeH?: number
 }

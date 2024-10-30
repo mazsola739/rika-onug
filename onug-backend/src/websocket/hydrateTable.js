@@ -1,7 +1,7 @@
 import { HYDRATE_TABLE, REDIRECT } from '../constants'
-import { logTrace, logErrorWithStack } from '../log'
+import { logErrorWithStack, logTrace } from '../log'
 import { readGamestate } from '../repository'
-import { isTableClosed, getTableBoard } from '../utils'
+import { getTableBoard, isTableClosed } from '../utils'
 
 export const hydrateTable = async (ws, message) => {
   try {

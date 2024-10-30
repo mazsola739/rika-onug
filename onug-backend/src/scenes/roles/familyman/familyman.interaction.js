@@ -1,4 +1,4 @@
-import { getPartOfGroupByToken, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getPartOfGroupByToken } from '../../sceneUtils'
 
 export const familymanInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

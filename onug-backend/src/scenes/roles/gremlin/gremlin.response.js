@@ -1,5 +1,5 @@
 import { SCENE } from '../../../constants'
-import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { validateCardSelection, validateMarkSelection } from '../../validators'
 
 export const gremlinResponse = (gamestate, token, selected_card_positions, selected_mark_positions, title) => {

@@ -20,4 +20,5 @@ export const GroupTitle = styled.div`
 export const Cards = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 10px;
 `

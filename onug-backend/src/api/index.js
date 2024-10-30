@@ -2,7 +2,7 @@ import express from 'express'
 const router = express.Router()
 
 import { rooms } from './rooms'
-export { pageNotFoundError, internalServerError } from './error'
+export { internalServerError, pageNotFoundError } from './error'
 
 router.get('/rooms', rooms)
 

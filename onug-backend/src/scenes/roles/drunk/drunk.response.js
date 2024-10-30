@@ -1,5 +1,5 @@
 import { SCENE } from '../../../constants'
-import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const drunkResponse = (gamestate, token, selected_card_positions, title) => {

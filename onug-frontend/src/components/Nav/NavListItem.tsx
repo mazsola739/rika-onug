@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
-import { NavListItemProps } from './Nav.types'
 import { ListItem } from './Nav.styles'
+import { NavListItemProps } from './Nav.types'
 
 export const NavListItem: React.FC<NavListItemProps> = observer(
   ({ anchor }) => {

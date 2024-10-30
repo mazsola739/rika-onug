@@ -1,11 +1,10 @@
-import { DEAL, REDIRECT } from '../constants'
+import { DEAL, REDIRECT, STAGES } from '../constants'
 import { logTrace } from '../log'
-import { validateRoom } from '../validators'
 import { upsertRoomState } from '../repository'
-import { STAGES } from '../constants'
-import { broadcast } from './connections'
-import { determineTotalPlayers } from '../utils/player.utils'
 import { createCenterPositionCard, createPlayerCard, createPlayerPositionCard, dealCardIds, hasMark } from '../utils/deal.utils'
+import { determineTotalPlayers } from '../utils/player.utils'
+import { validateRoom } from '../validators'
+import { broadcast } from './connections'
 
 export const dealCards = async (ws, message) => {
   const { room_id } = message

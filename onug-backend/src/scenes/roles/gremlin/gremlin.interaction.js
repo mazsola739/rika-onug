@@ -1,4 +1,4 @@
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../sceneUtils'
 
 export const gremlinInteraction = (gamestate, token, title) => {
     const newGamestate = { ...gamestate }

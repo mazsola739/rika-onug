@@ -5,5 +5,5 @@ export const StyledInfoPanel = styled.div`
   flex-direction: column;
   border-left: 2px solid #969290;
   border-radius: 10px 0 0 10px;
-  padding: 10px;
+  padding: 5px;
 `
