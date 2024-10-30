@@ -30,15 +30,16 @@ export const useGame = () => {
 
   useEffect(() => {
     if (transitionCompleted) {
+      riseAndRestStore.closeYourEyes()
       sendJsonMessage?.({ type: SCENE, room_id, token, player_ready: true })
     }
   }, [sendJsonMessage, transitionCompleted])
 
   useEffect(() => {
     if (lastJsonMessage?.type === SCENE) {
-      messageStore.setNarration(lastJsonMessage.narration as NarrationType[])
+      riseAndRestStore.openYourEyes(lastJsonMessage)
+      messageStore.setNarration(lastJsonMessage?.narration as NarrationType[])
       messageStore.setPrivateMessage(lastJsonMessage.interaction.private_message as MessagesType[])
-
     }
 
     if (lastJsonMessage?.type === HYDRATE_GAME) {
@@ -55,15 +56,13 @@ export const useGame = () => {
 
   }, [lastJsonMessage, navigate])
   
-  const { tablePlayerCards } = riseAndRestStore
-  const { player } = playersStore
+  const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 
-  const tablePlayer = tablePlayerCards.find(
-    (tablePlayerCard) => tablePlayerCard.position === player.player_number
-  )
-
-  const sides = tablePlayerCards && tablePlayer ? splitPlayersToTable(tablePlayerCards, tablePlayer) : null
+  const sides =
+    tablePlayerCards && tablePlayerCard
+      ? splitPlayersToTable(tablePlayerCards, tablePlayerCard)
+      : null
   const { left = [], middle = [], right = [] } = sides || {}
 
-  return { tablePlayerCards, tablePlayer, left, middle, right, nightMode, setTransitionCompleted }
+  return { tablePlayerCards, tablePlayerCard, left, middle, right, nightMode, setTransitionCompleted }
 }

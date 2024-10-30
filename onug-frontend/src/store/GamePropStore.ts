@@ -31,28 +31,28 @@ class GamePropStore {
   setInteraction(interaction: InteractionType): void {
     this.interaction = interaction
 
-    if (interaction.answer_options) {
+    if (interaction?.answer_options) {
       this.setAnswerOptions(interaction.answer_options)
     }
-    if (interaction.artifacted_cards) {
+    if (interaction?.artifacted_cards) {
       this.setArtifactedCards(interaction.artifacted_cards)
     }
-    if (interaction.selectable_card_limit) {
+    if (interaction?.selectable_card_limit) {
       this.setSelectableCardLimit(interaction.selectable_card_limit)
     }
-    if (interaction.selectable_cards) {
+    if (interaction?.selectable_cards) {
       this.setSelectableCards(interaction.selectable_cards)
     }
-    if (interaction.selectable_mark_limit) {
+    if (interaction?.selectable_mark_limit) {
       this.setSelectableMarkLimit(interaction.selectable_mark_limit)
     }
-    if (interaction.shielded_cards) {
+    if (interaction?.shielded_cards) {
       this.setShieldedCards(interaction.shielded_cards)
     }
-    if (interaction.show_cards) {
+    if (interaction?.show_cards) {
       this.setShowCards(interaction.show_cards)
     }
-    if (interaction.show_marks) {
+    if (interaction?.show_marks) {
       this.setShowMarks(interaction.show_marks)
     }
   }
@@ -87,6 +87,29 @@ class GamePropStore {
 
   setShowMarks(show_marks: Record<CardPosition, string>[]): void {
     this.show_marks = show_marks
+  }
+
+  reset(): void {
+    this.interaction = {
+      answer_options: [],
+      artifacted_cards: [],
+      new_role_id: 0,
+      selectable_card_limit: { player: 0, center: 0 },
+      selectable_cards: [],
+      selectable_mark_limit: { mark: 0 },
+      shielded_cards: [],
+      show_cards: [],
+      show_marks: []
+    };
+
+    this.answer_options = [];
+    this.artifacted_cards = [];
+    this.selectable_card_limit = { player: 0, center: 0 };
+    this.selectable_cards = [];
+    this.selectable_mark_limit = { mark: 0 };
+    this.shielded_cards = [];
+    this.show_cards = [];
+    this.show_marks = [];
   }
 }
 

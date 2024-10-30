@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx'
 import { deckStore, gamePropStore, messageStore } from 'store'
-import { CardPosition, InteractionType, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
+import { CardPosition, InteractionType, MessagesType, NarrationType, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
 
 class RiseAndRestStore {
   tablePlayerCard: TablePlayerCard = {}
-  tablePlayerCards: TableCenterCard[] = []
+  tablePlayerCards: TablePlayerCard[] = []
   tableCenterCards: TableCenterCard[] = []
 
   constructor() {
@@ -109,15 +109,45 @@ class RiseAndRestStore {
   }
 
 
-  openYourEyes(interaction: InteractionType): void {
-    gamePropStore.setInteraction(interaction)
+  openYourEyes(lastJsonMessage: WsJsonMessage): void {
+    gamePropStore.setInteraction(lastJsonMessage?.interaction as InteractionType)
+    this.setTablePlayerCards(lastJsonMessage)
+    this.setTablePlayerCard(lastJsonMessage)
+    this.setTableCenterCards(lastJsonMessage)
   }
-
 
   closeYourEyes(): void {
-    messageStore.setPrivateMessage([])
-    messageStore.setNarration([])
+    this.tablePlayerCard = {
+      player_name: this.tablePlayerCard.player_name,
+      position: this.tablePlayerCard.position,
+      card_name: '',
+      mark: '',
+      artifact: false,
+      shield: false,
+      selectable: false,
+    };
+
+    this.tableCenterCards = this.tableCenterCards.map(centerCard => ({
+      position: centerCard.position,
+      card_name: '',
+      selectable: false,
+    }));
+
+    this.tablePlayerCards = this.tablePlayerCards.map(playerCard => ({
+      player_name: playerCard.player_name,
+      position: playerCard.position,
+      card_name: '',
+      mark: '',
+      artifact: false,
+      shield: false,
+      selectable: false,
+    }));
+
+    messageStore.setPrivateMessage([]);
+    messageStore.setNarration([]);
+    gamePropStore.reset();
   }
+
 }
 
 export default RiseAndRestStore

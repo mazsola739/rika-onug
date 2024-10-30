@@ -1,4 +1,4 @@
-import { AroundTableSide, AroundTableTop, CenterCards, CenterTokens, Main, PlayerCard } from 'components'
+import { AroundTableSide, AroundTableTop, CenterCards, Main, PlayerCard } from 'components'
 import { observer } from 'mobx-react-lite'
 import { GameCenter, StyledGame } from './Game.styles'
 import { GameFooter } from './GameFooter'
@@ -7,7 +7,7 @@ import { GameInfoPanel } from './GameInfoPanel'
 import { useGame } from './useGame'
 
 export const Game: React.FC = observer(() => {
-  const { tablePlayerCards, tablePlayer, left, middle, right, nightMode, setTransitionCompleted } = useGame()
+  const { tablePlayerCards, tablePlayerCard, left, middle, right, nightMode, setTransitionCompleted } = useGame()
 
   return (
     <StyledGame animate={nightMode} onAnimationEnd={() => setTransitionCompleted(true)}>
@@ -17,9 +17,8 @@ export const Game: React.FC = observer(() => {
       <Main>
         <GameCenter>
           <CenterCards />
-          <CenterTokens />
         </GameCenter>
-        {tablePlayer && <PlayerCard card={tablePlayer} cardSize={130} tokenSize={50}  />}
+        {tablePlayerCard && <PlayerCard card={tablePlayerCard} cardSize={130} tokenSize={50}  />}
       </Main>
       {tablePlayerCards && <AroundTableSide players={right} />}
       <GameFooter />

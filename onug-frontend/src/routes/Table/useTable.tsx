@@ -1,19 +1,7 @@
-import {
-  ARRIVE_TABLE,
-  HYDRATE_READY,
-  HYDRATE_TABLE,
-  REDIRECT,
-  STAGES,
-} from 'constant'
+import { ARRIVE_TABLE, HYDRATE_READY, HYDRATE_TABLE, REDIRECT, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import {
-  deckStore,
-  messageStore,
-  playersStore,
-  riseAndRestStore,
-  wsStore,
-} from 'store'
+import { deckStore, playersStore, riseAndRestStore, wsStore } from 'store'
 import { splitPlayersToTable } from 'utils'
 
 export const useTable = () => {
@@ -23,7 +11,8 @@ export const useTable = () => {
   const token = sessionStorage.getItem('token')
   const room_id = sessionStorage.getItem('room_id')
 
-  const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
+  const { sendJsonMessage, lastJsonMessage } =
+    wsStore.getWsCommunicationsBridge()
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -43,22 +32,9 @@ export const useTable = () => {
       playersStore.setPlayers(lastJsonMessage.players)
       deckStore.setPlayerCard()
       deckStore.setPlayerMark()
-      riseAndRestStore.setTablePlayerCard(lastJsonMessage)
-      riseAndRestStore.setTablePlayerCards(lastJsonMessage)
-      riseAndRestStore.setTableCenterCards(lastJsonMessage)
+      riseAndRestStore.openYourEyes(lastJsonMessage)
     }
-  }, [
-    lastJsonMessage,
-    playersStore.setPlayer,
-    playersStore.setPlayers,
-    deckStore.setPlayerCard,
-    deckStore.setPlayerMark,
-    riseAndRestStore.setTablePlayerCard,
-    riseAndRestStore.setTablePlayerCards,
-    riseAndRestStore.setTableCenterCards,
-  ])
 
-  useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_READY) {
       playersStore.setPlayers(lastJsonMessage.players)
     }
@@ -66,11 +42,22 @@ export const useTable = () => {
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [lastJsonMessage, playersStore.setPlayers, navigate])
+  }, [
+    lastJsonMessage,
+    riseAndRestStore.openYourEyes,
+    playersStore.setPlayer,
+    playersStore.setPlayers,
+    deckStore.setPlayerCard,
+    deckStore.setPlayerMark,
+    navigate,
+  ])
 
   const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 
-  const sides = tablePlayerCards && tablePlayerCard ? splitPlayersToTable(tablePlayerCards, tablePlayerCard) : null
+  const sides =
+    tablePlayerCards && tablePlayerCard
+      ? splitPlayersToTable(tablePlayerCards, tablePlayerCard)
+      : null
   const { left = [], middle = [], right = [] } = sides || {}
 
   return { tablePlayerCards, tablePlayerCard, left, middle, right }

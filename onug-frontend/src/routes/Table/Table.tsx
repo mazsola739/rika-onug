@@ -1,4 +1,4 @@
-import { AroundTableSide, AroundTableTop, CenterCards, CenterTokens, Main, PlayerCard } from 'components'
+import { AroundTableSide, AroundTableTop, CenterCards, Main, PlayerCard } from 'components'
 import { observer } from 'mobx-react-lite'
 import { StyledTable, TableCenter } from './Table.styles'
 import { TableFooter } from './TableFooter'
@@ -17,7 +17,6 @@ export const Table: React.FC = observer(() => {
       <Main>
         <TableCenter>
           <CenterCards />
-          <CenterTokens />
         </TableCenter>
         {tablePlayerCard && <PlayerCard card={tablePlayerCard} cardSize={130} tokenSize={50} />}
       </Main>
