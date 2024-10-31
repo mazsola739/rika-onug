@@ -48,22 +48,29 @@ export const PlayerCard: React.FC<PlayerCardProps> = observer(
 
     const position = card?.position || ''
     const isCenterCard = position.includes('center_')
+/*     const playerName = card?.player_name || '' */ //TODO fix name 
     const imgSrc = getCardImageSrc(card)
+
     const playerNumberToken = getPlayerNumberToken(position)
-    const markName = card?.mark || ''
-/*     const playerName = card?.player_name || '' */
-    const isSelectable = card?.selectable || false
+    const markName = card?.mark
+    const isShielded = card?.shield
+    const isArtifacted = card?.artifact
+    const isWerewolf = card?.werewolves
+    const isDreamwolf = card?.dreamwolf
+
+    const isSelectableCard = card?.selectable_card
+    const isSelectableMark = card?.selectable_mark
 
     return (
       <StyledPlayerCard>
         {/* {playerName && <PlayerName>{playerName}</PlayerName>} */}
-        <Card image={imgSrc} size={cardSize} isSelectable={isSelectable} />
+        <Card image={imgSrc} size={cardSize} isSelectable={isSelectableCard} werewolf={isWerewolf} dreamwolf={isDreamwolf} />
         {!isCenterCard && (
           <Tokens>
             <Token tokenName={playerNumberToken} size={tokenSize} />
-            {hasMarks && <Token tokenName={markName} size={tokenSize} />}
-            {card?.shield && hasSentinel && (<Token tokenName="shield" size={tokenSize} />)}
-            {card?.artifact && hasCurator && (<Token tokenName="artifact_back" size={tokenSize} />)}
+            {hasMarks && <Token tokenName={markName} size={tokenSize} isSelectable={isSelectableMark} />}
+            {isShielded && hasSentinel && (<Token tokenName="shield" size={tokenSize} />)}
+            {isArtifacted && hasCurator && (<Token tokenName="artifact_back" size={tokenSize} />)}
           </Tokens>
         )}
       </StyledPlayerCard>

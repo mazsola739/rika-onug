@@ -8,12 +8,16 @@ export const default_player: Player = {
   }
   
   export const default_table_player_card: TablePlayerCard = {
-    player_name: '',
-    card_name: '',
-    mark: '',
     artifact: false,
+    card_name: '',
+    dreamwolf: false,
+    mark: '',
+    player_name: '',
+    position: null,
+    selectable_card: false,
+    selectable_mark: false,
     shield: false,
-    selectable: false,
+    werewolves: false
   }
   
   export const default_card: CardJson = {

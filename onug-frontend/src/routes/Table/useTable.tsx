@@ -2,7 +2,7 @@ import { ARRIVE_TABLE, HYDRATE_READY, HYDRATE_TABLE, REDIRECT, STAGES } from 'co
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { deckStore, playersStore, riseAndRestStore, wsStore } from 'store'
-import { splitPlayersToTable } from 'utils'
+import { splitCardsToTable } from 'utils'
 
 export const useTable = () => {
   const [firstTime, setFirstTime] = useState(true)
@@ -56,7 +56,7 @@ export const useTable = () => {
 
   const sides =
     tablePlayerCards && tablePlayerCard
-      ? splitPlayersToTable(tablePlayerCards, tablePlayerCard)
+      ? splitCardsToTable(tablePlayerCards, tablePlayerCard)
       : null
   const { left = [], middle = [], right = [] } = sides || {}
 

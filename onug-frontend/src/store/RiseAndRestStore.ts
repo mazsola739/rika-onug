@@ -11,111 +11,85 @@ class RiseAndRestStore {
     makeAutoObservable(this)
   }
 
-  setTablePlayerCards(lastJsonMessage: WsJsonMessage): void {
-    const defaultTablePlayerCards: TablePlayerCard[] = []
+  getDefaultPlayerCards(): TablePlayerCard[] {
+    return Array.from({ length: deckStore.totalPlayers }, (_, i) => ({
+      player_name: '',
+      position: `player_${i + 1}` as CardPosition,
+      card_name: '',
+      mark: '',
+      artifact: false,
+      shield: false,
+      selectable_card: false,
+      selectable_mark: false,
+      werewolves: false,
+      dreamwolf: false,
+    }))
+  }
 
-    for (let i = 1; i <= deckStore.totalPlayers; i++) {
-      defaultTablePlayerCards.push({
-        player_name: '',
-        position: `player_${i}` as CardPosition,
-        card_name: '',
-        mark: '',
-        artifact: false,
-        shield: false,
-        selectable: false,
-      })
+  getDefaultCenterCards(): TableCenterCard[] {
+    const positions: CardPosition[] = ['center_wolf', 'center_left', 'center_middle', 'center_right', 'center_villain']
+    return positions.map(position => ({
+      position,
+      card_name: '',
+      selectable: false,
+    }))
+  }  
+
+  getCardStatus(position: CardPosition) {
+    return {
+      selectable_card: gamePropStore.selectable_cards.includes(position),
+      selectable_mark: gamePropStore.selectable_marks.includes(position),
+      artifact: gamePropStore.artifacted_cards.includes(position),
+      shield: gamePropStore.shielded_cards.includes(position),
+      werewolves: gamePropStore.werewolves.includes(position),
+      dreamwolf: gamePropStore.dreamwolf.includes(position),
     }
+  }
 
+  setTablePlayerCards(lastJsonMessage: WsJsonMessage): void {
     const players = lastJsonMessage.players
+    const defaultPlayerCards = this.getDefaultPlayerCards()
 
-    const updatedTablePlayerCards = defaultTablePlayerCards.map(defaultTablePlayerCard => {
-      const playerCard = players.find(player => defaultTablePlayerCard.position === player.player_number)
+    this.tablePlayerCards = defaultPlayerCards.map(defaultCard => {
+      const playerCard = players.find(player => defaultCard.position === player.player_number)
+      if (!playerCard) return defaultCard
 
-      const isSelectableCard = gamePropStore.selectable_cards.includes(defaultTablePlayerCard.position)
+      const card = deckStore.getCardById(playerCard.player_card_id)
       
-      if (playerCard) {
-        const card = deckStore.getCardById(playerCard.player_card_id)
-        return {
-          ...defaultTablePlayerCard,
-          player_name: playerCard.player_name,
-          card_name: card ? card.card_name : '',
-          selectable: isSelectableCard,
-        }
+      return {
+        ...defaultCard,
+        player_name: playerCard.player_name,
+        card_name: card ? card.card_name : '',
+        ...this.getCardStatus(defaultCard.position),
       }
-
-      return defaultTablePlayerCard
     })
-    console.log(JSON.stringify(updatedTablePlayerCards))
-    this.tablePlayerCards = updatedTablePlayerCards
   }
 
   setTablePlayerCard(lastJsonMessage: WsJsonMessage): void {
     const player = lastJsonMessage.player
     const card = deckStore.getCardById(player.player_card_id)
-
-    const isSelectableCard = gamePropStore.selectable_cards.includes(player.player_number)
-
-    const tablePlayerCard: TablePlayerCard = {
+    this.tablePlayerCard = {
       player_name: 'You',
       position: player.player_number,
       card_name: card ? card.card_name : '',
-      mark: 'mark_of_clarity', //TODO fix it
-      artifact: false,
-      shield: false,
-      selectable: isSelectableCard,
+      mark: player.player_mark || '',
+      ...this.getCardStatus(player.player_number),
     }
-    console.log(JSON.stringify(tablePlayerCard))
-    this.tablePlayerCard = tablePlayerCard
   }
 
   setTableCenterCards(lastJsonMessage: WsJsonMessage): void {
-    const defaultTableCenterCards: TableCenterCard[] = [
-      {
-        position: 'center_wolf',
-        card_name: '',
-        selectable: false,
-      },
-      {
-        position: 'center_left',
-        card_name: '',
-        selectable: false,
-      },
-      {
-        position: 'center_middle',
-        card_name: '',
-        selectable: false,
-      },
-      {
-        position: 'center_right',
-        card_name: '',
-        selectable: false,
-      },
-      {
-        position: 'center_villain',
-        card_name: '',
-        selectable: false,
-      },
-    ]
-
-    const updatedTableCenterCards = defaultTableCenterCards.map(centerCard => {
+    this.tableCenterCards = this.getDefaultCenterCards().map(centerCard => {
       const positionObject = gamePropStore.show_cards.find(obj => obj[centerCard.position])
-      const id = positionObject ? positionObject[centerCard.position] : null
-      const card = id ? deckStore.getCardById(id) : null
+      const cardId = positionObject ? positionObject[centerCard.position] : null
+      const card = cardId ? deckStore.getCardById(cardId) : null
 
-      const isSelectableCard = gamePropStore.selectable_cards.includes(centerCard.position )
-
-      const updatedCard = {
+      return {
         ...centerCard,
         card_name: card ? card.card_name : '',
-        selectable: isSelectableCard,
+        selectable_card: gamePropStore.selectable_cards.includes(centerCard.position),
       }
-
-      return updatedCard
     })
-console.log(JSON.stringify(updatedTableCenterCards))
-    this.tableCenterCards = updatedTableCenterCards
   }
-
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
     gamePropStore.setInteraction(lastJsonMessage?.interaction as InteractionType)
@@ -124,38 +98,34 @@ console.log(JSON.stringify(updatedTableCenterCards))
     this.setTableCenterCards(lastJsonMessage)
   }
 
-  closeYourEyes(): void {
-    this.tablePlayerCard = {
-      player_name: this.tablePlayerCard.player_name,
-      position: this.tablePlayerCard.position,
+  resetCards(): void {
+    const resetCardState = {
+      player_name: '',
       card_name: '',
       mark: '',
       artifact: false,
       shield: false,
-      selectable: false,
-    };
+      selectable_card: false,
+      selectable_mark: false,
+      werewolves: false,
+      dreamwolf: false,
+    }
 
+    this.tablePlayerCard = { ...resetCardState, position: this.tablePlayerCard.position }
+    this.tablePlayerCards = this.tablePlayerCards.map(card => ({ ...resetCardState, position: card.position }))
     this.tableCenterCards = this.tableCenterCards.map(centerCard => ({
-      position: centerCard.position,
+      ...centerCard,
       card_name: '',
       selectable: false,
-    }));
-
-    this.tablePlayerCards = this.tablePlayerCards.map(playerCard => ({
-      player_name: playerCard.player_name,
-      position: playerCard.position,
-      card_name: '',
-      mark: '',
-      artifact: false,
-      shield: false,
-      selectable: false,
-    }));
-
-    messageStore.setPrivateMessage([]);
-    messageStore.setNarration([]);
-    gamePropStore.reset();
+    }))
   }
 
+  closeYourEyes(): void {
+    this.resetCards()
+    messageStore.setPrivateMessage([])
+    messageStore.setNarration([])
+    gamePropStore.reset()
+  }
 }
 
 export default RiseAndRestStore

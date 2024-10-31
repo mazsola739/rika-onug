@@ -24,19 +24,21 @@ export const checkCardPresence = (cards: CardJson[], cardId: number): boolean =>
 export const capitalize = (string: string) =>
   string && string[0].toUpperCase() + string.slice(1).toLowerCase()
 
-export const splitPlayersToTable = (players: TablePlayerCard[], player: TablePlayerCard) => {
-  const playerNumber = Number(`${player.position}`.replace("player_", ""))
+
+//TODO if 3 player?
+export const splitCardsToTable = (tablePlayerCards: TablePlayerCard[], tablePlayerCard: TablePlayerCard) => {
+  const playerNumber = Number(`${tablePlayerCard.position}`.replace("player_", ""))
   const playerIndex = playerNumber - 1
 
-  const newPlayers = [...players.slice(playerIndex), ...players.slice(0, playerIndex)]
+  const newTablePlayerCards = [...tablePlayerCards.slice(playerIndex), ...tablePlayerCards.slice(0, playerIndex)]
 
-  const remainingPlayers = newPlayers.slice(1)
+  const remainingTablePlayerCards = newTablePlayerCards.slice(1)
 
-  const third = Math.floor(remainingPlayers.length / 3)
+  const third = Math.floor(remainingTablePlayerCards.length / 3)
 
-  const right = remainingPlayers.slice(0, third).reverse()
-  const left = remainingPlayers.slice(-third)
-  const middle = remainingPlayers.slice(third, -third).reverse()
+  const right = remainingTablePlayerCards.slice(0, third).reverse()
+  const left = remainingTablePlayerCards.slice(-third)
+  const middle = remainingTablePlayerCards.slice(third, -third).reverse()
 
   return { right, middle, left }
 }

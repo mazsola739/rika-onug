@@ -15,7 +15,7 @@ class GamePropStore {
     shielded_cards: [],
     show_cards: [],
     show_marks: [],
-    werewolf: []
+    werewolves: []
   }
 
   constructor() {
@@ -33,7 +33,7 @@ class GamePropStore {
   get shielded_cards() { return this.interaction.shielded_cards }
   get show_cards() { return this.interaction.show_cards }
   get show_marks() { return this.interaction.show_marks }
-  get werewolf() { return this.interaction.werewolf }
+  get werewolves() { return this.interaction.werewolves }
 
   setInteraction(interaction: InteractionType): void {
     this.interaction = { ...this.interaction, ...interaction }
@@ -53,7 +53,7 @@ class GamePropStore {
       shielded_cards: [],
       show_cards: [],
       show_marks: [],
-      werewolf: []
+      werewolves: []
     }
   }
 }

@@ -22,7 +22,7 @@ export const useLobby = () => {
 
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_LOBBY) {
-      console.log(lastJsonMessage)
+      console.log(HYDRATE_LOBBY)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {

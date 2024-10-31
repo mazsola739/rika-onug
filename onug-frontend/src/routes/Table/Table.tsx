@@ -12,15 +12,15 @@ export const Table: React.FC = observer(() => {
   return (
     <StyledTable>
       <TableHeader />
-      {tablePlayerCards && <AroundTableSide players={left} />}
-      {tablePlayerCards && <AroundTableTop players={middle} />}
+      {tablePlayerCards && <AroundTableSide cards={left} />}
+      {tablePlayerCards && <AroundTableTop cards={middle} />}
       <Main>
         <TableCenter>
           <CenterCards />
         </TableCenter>
         {tablePlayerCard && <PlayerCard card={tablePlayerCard} cardSize={130} tokenSize={50} />}
       </Main>
-      {tablePlayerCards && <AroundTableSide players={right} />}
+      {tablePlayerCards && <AroundTableSide cards={right} />}
       <TableFooter />
       <TableInfoPanel />
     </StyledTable>

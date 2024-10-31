@@ -39,7 +39,7 @@ export const hasTemptress              = (selected_cards) => selected_cards.incl
 export const hasDrPeeker               = (selected_cards) => selected_cards.includes(57)
 export const hasRapscallion            = (selected_cards) => selected_cards.includes(65)
 export const hasEvilometer             = (selected_cards) => selected_cards.includes(58)
-export const hasAnyWerewolf            = (selected_cards) => IDS.WEREVOLVES.some((id) => selected_cards.includes(id))
+export const hasAnyWerewolf            = (selected_cards) => IDS.ALL_WEREWOLF_IDS.some((id) => selected_cards.includes(id))
 export const hasDreamWolf              = (selected_cards) => selected_cards.includes(21)
 export const hasAlphaWolf              = (selected_cards) => selected_cards.includes(17)
 export const hasMysticWolf             = (selected_cards) => selected_cards.includes(22)

@@ -28,7 +28,7 @@ export const IDS = {
 
   //WOLF IDS
   ALL_WEREWOLF_IDS: [15, 16, 17, 21, 22],
-  WEREVOLVES: [15, 16, 21, 22],
+  WEREVOLVES: [15, 16, 17, 22],
   ALPHA_WOLF_ID: 17,
 
   //ALIEN IDS

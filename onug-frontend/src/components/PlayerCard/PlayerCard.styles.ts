@@ -5,9 +5,7 @@ export const StyledPlayerCard = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  width: 100%;
-  height: 100%;
-  gap: 20px;
+  gap: 15px;
 `
 
 export const PlayerName = styled.span`

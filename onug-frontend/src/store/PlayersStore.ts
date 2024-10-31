@@ -21,10 +21,8 @@ class PlayersStore {
   }
 
   get isPlayerReady(): boolean {
-    const playerNumberStr = `player_${this.player.player_number}`
-    
     const currentPlayer = this.players.find(
-      actualPlayer => actualPlayer.player_number === playerNumberStr
+      actualPlayer => actualPlayer.player_number === this.player.player_number
     )
     
     return currentPlayer ? currentPlayer.ready : false

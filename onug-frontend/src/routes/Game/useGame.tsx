@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { gamePlayStore, messageStore, riseAndRestStore, wsStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
-import { splitPlayersToTable } from 'utils'
+import { splitCardsToTable } from 'utils'
 
 export const useGame = () => {
   const [firstTime, setFirstTime] = useState(true)
@@ -60,7 +60,7 @@ export const useGame = () => {
 
   const sides =
     tablePlayerCards && tablePlayerCard
-      ? splitPlayersToTable(tablePlayerCards, tablePlayerCard)
+      ? splitCardsToTable(tablePlayerCards, tablePlayerCard)
       : null
   const { left = [], middle = [], right = [] } = sides || {}
 

@@ -4,20 +4,20 @@ import { StyledAroundTableSide, StyledAroundTableTop } from './AroundTable.style
 import { AroundTableProps } from './AroundTable.types'
 
 export const AroundTableSide: React.FC<AroundTableProps> = observer(
-  ({ players }) => (
+  ({ cards }) => (
     <StyledAroundTableSide>
-      {players.map((player, index) => (
-        <PlayerCard key={index} card={player} />
+      {cards.map((card, index) => (
+        <PlayerCard key={index} card={card} />
       ))}
     </StyledAroundTableSide>
   )
 )
 
 export const AroundTableTop: React.FC<AroundTableProps> = observer(
-  ({ players }) => (
+  ({ cards }) => (
     <StyledAroundTableTop>
-      {players.map((player, index) => (
-        <PlayerCard key={index} card={player}  />
+      {cards.map((card, index) => (
+        <PlayerCard key={index} card={card}  />
       ))}
     </StyledAroundTableTop>
   )

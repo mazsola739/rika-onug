@@ -4,9 +4,10 @@ import * as narration_text from 'constant/narrations'
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
 export type Player = {
+  player_card_id?: number
+  player_mark?: string
   player_name: string
   player_number?: CardPosition
-  player_card_id?: number
   ready?: boolean
 }
 
@@ -15,18 +16,22 @@ export type Expansion = "Werewolf" | "Daybreak" | "Vampire" | "Alien" | "Super V
 export type CardPosition = 'player_1' | 'player_2' | 'player_3' | 'player_4' | 'player_5' | 'player_6' | 'player_7' | 'player_8' | 'player_9' | 'player_10' | 'player_11' | 'player_12' | 'center_wolf' | 'center_left' | 'center_middle' | 'center_right' | 'center_villain'
 
 export type TablePlayerCard = {
+  artifact?: boolean
+  card_name?: string
+  dreamwolf?: boolean
+  mark?: string
   player_name?: string
   position?: CardPosition
-  card_name?: string
-  mark?: string
-  artifact?: boolean
+  selectable_card?: boolean
+  selectable_mark?: boolean
   shield?: boolean
-  selectable?: boolean
+  werewolves?: boolean
+
 }
 
-export type TableCenterCard = { 
+export type TableCenterCard = {
+  card_name?: string  
   position?: CardPosition
-  card_name?: string
   selectable?: boolean
 }
 
@@ -54,7 +59,7 @@ export type InteractionType = {
   shielded_cards?: CardPosition[]
   show_cards?: Record<CardPosition, number>[]
   show_marks?: Record<CardPosition, string>[]
-  werewolf?: CardPosition[]
+  werewolves?: CardPosition[]
 }
 
 export type NarrationType = keyof typeof narration_text

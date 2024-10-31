@@ -12,15 +12,15 @@ export const Game: React.FC = observer(() => {
   return (
     <StyledGame animate={nightMode} onAnimationEnd={() => setTransitionCompleted(true)}>
       <GameHeader />
-      {tablePlayerCards && <AroundTableSide players={left} />}
-      {tablePlayerCards && <AroundTableTop players={middle} />}
+      {tablePlayerCards && <AroundTableSide cards={left} />}
+      {tablePlayerCards && <AroundTableTop cards={middle} />}
       <Main>
         <GameCenter>
           <CenterCards />
         </GameCenter>
         {tablePlayerCard && <PlayerCard card={tablePlayerCard} cardSize={130} tokenSize={50}  />}
       </Main>
-      {tablePlayerCards && <AroundTableSide players={right} />}
+      {tablePlayerCards && <AroundTableSide cards={right} />}
       <GameFooter />
       <GameInfoPanel />
     </StyledGame>
