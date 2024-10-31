@@ -22,11 +22,13 @@ export const werewolvesResponse = (gamestate, token, selected_card_positions, ti
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
       viewed_cards: [selected_card_positions[0]],
+      obligatory: true
     }
   
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
       showCards,
+      obligatory: true
     })
   
     Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })

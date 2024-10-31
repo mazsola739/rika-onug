@@ -32,7 +32,7 @@ export const getTableBoard = gamestate => {
 
   const playersPublic = playersPrivate.map((player) => {
     return {
-      player_number: `player_${player.player_number}`,
+      player_number: player.player_number,
       player_name: player.name,
       ready: player.ready,
     }

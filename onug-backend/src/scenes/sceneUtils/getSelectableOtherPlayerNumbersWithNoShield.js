@@ -3,7 +3,7 @@ export const getSelectableOtherPlayerNumbersWithNoShield = (players, token) => {
   
     Object.keys(players).forEach((playerToken) => {
       if (playerToken !== token && players[playerToken].card.shield !== true) {
-        result.push(`player_${players[playerToken].player_number}`)
+        result.push(players[playerToken].player_number)
       }
     })
   

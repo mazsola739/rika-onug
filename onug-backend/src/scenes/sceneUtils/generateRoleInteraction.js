@@ -37,6 +37,7 @@ export const generateRoleInteraction = (gamestate, token, {
   selectableMarks = {},
   showCards = [],
   showMarks = [],
+  obligatory = false,
   uniqueInformations = {}
 }) => {
   updatePlayerCard(gamestate, token)
@@ -46,6 +47,7 @@ export const generateRoleInteraction = (gamestate, token, {
     artifacted_cards: getKeys(gamestate.artifact),
     show_cards: showCards !== null ? concatArraysWithUniqueElements(showCards, gamestate.flipped) : gamestate.flipped,
     show_marks: showMarks,
+    obligatory,
     ...selectableCards,
     ...selectableMarks,
     ...uniqueInformations,

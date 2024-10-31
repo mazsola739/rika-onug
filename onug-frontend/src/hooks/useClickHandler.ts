@@ -21,7 +21,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     })
   }, [sendJsonMessage])
 
-  const handleToTable = useCallback(() => {
+  const handleJoinTable = useCallback(() => {
     sendJsonMessage?.({
       type: DEAL,
       room_id,
@@ -147,7 +147,7 @@ export const useClickHandler = (room_id: string, token: string) => {
   return {
     handleJoinRoom,
     handleLeaveRoom,
-    handleToTable,
+    handleJoinTable,
     handleLeaveTable,
     handleResetGame,
     handleStartGame,

@@ -6,7 +6,7 @@ export const getWerewolfPlayerNumbersByRoleIds = players => {
   for (const token in players) {
     const player = players[token]
     if (IDS.WEREVOLVES.includes(player.card.player_role_id)) {
-      result.push(`player_${player.player_number}`)
+      result.push(player.player_number)
     }
   }
 
@@ -19,7 +19,7 @@ export const getDreamWolfPlayerNumberByRoleIds = players => {
   for (const token in players) {
     const player = players[token]
     if (players[token].card.player_role_id === 21) {
-      result.push(`player_${player.player_number}`)
+      result.push(player.player_number)
     }
   }
 

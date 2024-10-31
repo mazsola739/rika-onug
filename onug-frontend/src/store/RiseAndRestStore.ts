@@ -30,7 +30,9 @@ class RiseAndRestStore {
 
     const updatedTablePlayerCards = defaultTablePlayerCards.map(defaultTablePlayerCard => {
       const playerCard = players.find(player => defaultTablePlayerCard.position === player.player_number)
-      const isSelectableCard = gamePropStore.selectable_cards.some(selectable_card => selectable_card === defaultTablePlayerCard.position )
+
+      const isSelectableCard = gamePropStore.selectable_cards.includes(defaultTablePlayerCard.position)
+      
       if (playerCard) {
         const card = deckStore.getCardById(playerCard.player_card_id)
         return {
@@ -43,7 +45,7 @@ class RiseAndRestStore {
 
       return defaultTablePlayerCard
     })
-
+    console.log(JSON.stringify(updatedTablePlayerCards))
     this.tablePlayerCards = updatedTablePlayerCards
   }
 
@@ -51,15 +53,18 @@ class RiseAndRestStore {
     const player = lastJsonMessage.player
     const card = deckStore.getCardById(player.player_card_id)
 
+    const isSelectableCard = gamePropStore.selectable_cards.includes(player.player_number)
+
     const tablePlayerCard: TablePlayerCard = {
       player_name: 'You',
-      position: `player_${player.player_number}` as CardPosition,
+      position: player.player_number,
       card_name: card ? card.card_name : '',
       mark: 'mark_of_clarity', //TODO fix it
       artifact: false,
       shield: false,
-      selectable: false,
+      selectable: isSelectableCard,
     }
+    console.log(JSON.stringify(tablePlayerCard))
     this.tablePlayerCard = tablePlayerCard
   }
 
@@ -97,15 +102,17 @@ class RiseAndRestStore {
       const id = positionObject ? positionObject[centerCard.position] : null
       const card = id ? deckStore.getCardById(id) : null
 
+      const isSelectableCard = gamePropStore.selectable_cards.includes(centerCard.position )
+
       const updatedCard = {
         ...centerCard,
         card_name: card ? card.card_name : '',
-        selectable: gamePropStore.selectable_cards.includes(centerCard.position),
+        selectable: isSelectableCard,
       }
 
       return updatedCard
     })
-
+console.log(JSON.stringify(updatedTableCenterCards))
     this.tableCenterCards = updatedTableCenterCards
   }
 

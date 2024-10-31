@@ -2,7 +2,7 @@ import { Player, CardJson, TokenJson, TablePlayerCard } from "types"
 
 export const default_player: Player = {
     player_name: '',
-    player_number: '',
+    player_number: null,
     player_card_id: 0,
     ready: false,
   }

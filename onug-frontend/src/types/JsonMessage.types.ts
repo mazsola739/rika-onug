@@ -5,7 +5,7 @@ export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
 export type Player = {
   player_name: string
-  player_number?: string
+  player_number?: CardPosition
   player_card_id?: number
   ready?: boolean
 }
@@ -37,20 +37,24 @@ export type ActualSceneType = {
 
 export type InteractionType = {
   answer_options?: string[]
-  artifacted_cards?: string[]
-  new_role_id?: number,
+  artifacted_cards?: CardPosition[]
+  dreamwolf?: CardPosition[]
+  new_role_id?: number
+  obligatory?: boolean
   private_message?: string[]
   selectable_card_limit?: {
     player: number
     center: number
   }
-  selectable_cards?: string[]
+  selectable_cards?: CardPosition[]
   selectable_mark_limit?: {
     mark: number
   }
-  shielded_cards?: string[]
+  selectable_marks?: CardPosition[]
+  shielded_cards?: CardPosition[]
   show_cards?: Record<CardPosition, number>[]
   show_marks?: Record<CardPosition, string>[]
+  werewolf?: CardPosition[]
 }
 
 export type NarrationType = keyof typeof narration_text

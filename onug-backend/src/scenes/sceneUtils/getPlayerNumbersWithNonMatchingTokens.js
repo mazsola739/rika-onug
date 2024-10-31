@@ -3,6 +3,6 @@ export const getPlayerNumbersWithNonMatchingTokens = (players, tokens) => {
         .filter((token) => {
             return !tokens.includes(token)
         })
-        .map((token) => `player_${players[token].player_number}`)
+        .map((token) => players[token].player_number)
   }
   
