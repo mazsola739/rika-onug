@@ -1,0 +1,22 @@
+export const HACK_CONSANTS = {
+  gamestates: 'gamestates',
+  LABEL_ROOM_ID: 'room_id:',
+  LABEL_TOKEN: 'token:',
+  LABEL_MESSAGE: 'message:',
+  CHECK_GAMESTATES: 'Check gamestates',
+  CHECK_GAMESTATE_BY_ROOM_ID: 'Check gamestate by room_id',
+  DELETE_ALL_GAMESTATES: 'Delete all gamestates',
+  DELETE_GAMESTATE_BY_ROOM_ID: 'Delete gamestate by room_id',
+  RE_INIT_ALL_GAMESTATES: 'Re init all gamestates',
+  WS: 'WS',
+  CHECK_CONNECTIONS: 'Check connections',
+  REMOVE_PLAYER_BY_TOKEN: 'Remove player by token',
+  REMOVE_ALL_PLAYERS: 'Remove all player (drop connection)',
+  BROADCAST_TO_ALL: 'Broadcast to all',
+  BROADCAST_TO_ALL_IN_ROOM: 'Broadcast to all in room by room_id',
+  SEND_MESSAGE_TO_PLAYER: 'Send message to player by token',
+  META: 'Meta',
+  LIST_ONUG_ENV_VARS: 'List ONUG_* env vars',
+  DELETE_ALL_OLD_LOG_FILES: 'Delete all old log files',
+  RESPONSE: 'Response'
+}

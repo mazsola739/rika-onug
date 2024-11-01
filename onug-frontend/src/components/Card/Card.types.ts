@@ -1,6 +1,8 @@
 export interface CardProps {
   image: string
+  onClick?: () => void
   isSelectable: boolean
+  isSelected: boolean
   werewolf: boolean
   dreamwolf: boolean
   size: number

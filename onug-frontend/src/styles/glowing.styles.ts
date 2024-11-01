@@ -50,15 +50,16 @@ export const glowingVibrantPink = keyframes`
   }
 `;
 
-// Werewolves Assassins
+// Darker Red Glow for Werewolves Assassins
 export const glowingRed = keyframes`
   from {
-    box-shadow: 0 0 5px #dc3545, 0 0 10px #dc3545, 0 0 15px #dc3545, 0 0 20px #dc3545, 0 0 25px #dc3545;
+    box-shadow: 0 0 5px #8b0000, 0 0 10px #8b0000, 0 0 15px #8b0000, 0 0 20px #8b0000, 0 0 25px #8b0000;
   }
   to {
-    box-shadow: 0 0 8px #ff6b7a, 0 0 12px #ff6b7a, 0 0 18px #ff6b7a, 0 0 24px #ff6b7a, 0 0 30px #ff6b7a;
+    box-shadow: 0 0 8px #b22222, 0 0 12px #b22222, 0 0 18px #b22222, 0 0 24px #b22222, 0 0 30px #b22222;
   }
 `;
+
 
 // Tanner
 export const glowingOrange = keyframes`

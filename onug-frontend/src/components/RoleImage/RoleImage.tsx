@@ -3,5 +3,7 @@ import { StyledRoleImage } from './RoleImage.styles'
 import { RoleImageProps } from './RoleImage.types'
 
 export const RoleImage: React.FC<RoleImageProps> = observer(
-  ({ image, onClick, size }) => <StyledRoleImage onClick={onClick} src={`/assets/cards/${image}.png`} alt={image} size={size} />
+  ({ image, onClick, size }) => (
+    <StyledRoleImage onClick={onClick} src={`/assets/cards/${image}.png`} alt={image} size={size} />
+  )
 )

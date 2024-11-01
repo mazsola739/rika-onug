@@ -6,7 +6,7 @@ import { validateRoom } from '../validators'
 import { broadcast } from './connections'
 
 export const scene = async (ws, message) => {
-  const { room_id, token, selected_card_positions, selected_mark_positions, selected_answer, player_ready } = message
+  const { room_id, token, selected_card_positions, selected_mark_positions, selected_answer, player_ready, title } = message
   logTrace(`Processing scene interaction in room: ${room_id}`)
 
   try {
@@ -36,7 +36,7 @@ export const scene = async (ws, message) => {
 
     } else {
       logTrace(`Handling player actions in room: ${room_id}`)
-      responseHandler(newGamestate, token, selected_card_positions, selected_mark_positions, selected_answer)
+      responseHandler(newGamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title)
 
       await upsertRoomState(newGamestate)
     }

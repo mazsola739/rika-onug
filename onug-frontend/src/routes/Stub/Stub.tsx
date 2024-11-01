@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { useCallback, useState } from 'react'
 import { DEAL_POPULATOR, LABELS, POPULATE, RESPONSE, ROLEMAPPING, TEST_CASE } from './Stub.constants'
 import { Button, ButtonsContainer, FormContainer, Input, InputContainer, InputField, Label, LeftSide, PopulatorContainer, PositionContainer, ResponseContainer, ResponsePre, RightSide, RoleName, StubTitle, StyledStub } from './Stub.styles'
-import { dealStubDoppelganger } from './TestCases/test-case-doppelganger-01'
+import { testCase } from './TestCases/testCase'
 
 // TODO security, protected routing and sending a secure GOD token
 export const Stub: React.FC = observer(() => {
@@ -64,13 +64,13 @@ export const Stub: React.FC = observer(() => {
   }, [dealStub])
 
   const useTestCase = useCallback(async () => {
-    setDealStub(dealStubDoppelganger)
+    setDealStub(testCase)
     setInputValues(
       LABELS.map((label) =>
-        Object.keys(dealStubDoppelganger).find(
+        Object.keys(testCase).find(
           (testCaseLabel) => testCaseLabel === label
         )
-          ? dealStubDoppelganger[label]
+          ? testCase[label]
           : 0
       )
     )
@@ -80,7 +80,7 @@ export const Stub: React.FC = observer(() => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(dealStubDoppelganger),
+      body: JSON.stringify(testCase),
     })
     const json = await res.json()
     setResponse(json)

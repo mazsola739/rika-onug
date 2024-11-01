@@ -2,6 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { InteractionType } from 'types'
 
 class GamePropStore {
+  title: string = ''
   interaction: InteractionType = {
     answer_options: [],
     artifacted_cards: [],
@@ -17,6 +18,7 @@ class GamePropStore {
     show_marks: [],
     werewolves: []
   }
+
 
   constructor() {
     makeAutoObservable(this)
@@ -37,6 +39,10 @@ class GamePropStore {
 
   setInteraction(interaction: InteractionType): void {
     this.interaction = { ...this.interaction, ...interaction }
+  }
+
+  setTitle(title: string): void {
+    this.title = title
   }
 
   reset(): void {

@@ -93,6 +93,7 @@ class RiseAndRestStore {
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
     gamePropStore.setInteraction(lastJsonMessage?.interaction as InteractionType)
+    gamePropStore.setTitle(lastJsonMessage.title)
     this.setTablePlayerCards(lastJsonMessage)
     this.setTablePlayerCard(lastJsonMessage)
     this.setTableCenterCards(lastJsonMessage)

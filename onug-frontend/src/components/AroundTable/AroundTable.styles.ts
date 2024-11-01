@@ -12,7 +12,6 @@ export const StyledAroundTableTop = styled.div`
   display: flex;
   flex-direction: row;
   color: white;
-  align-content: space-around;
-  flex-wrap: wrap;
-  justify-content: center;
+  align-items: center;
+  justify-content: space-around;
 `

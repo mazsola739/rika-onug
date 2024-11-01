@@ -75,7 +75,7 @@ export const StyledGameHeader = styled.div`
   flex-direction: row;
   color: white;
   justify-content: center;
-  align-items: center;
+  align-items: center; 
   position: relative;
   height: 100%;
   width: 100%;
@@ -143,22 +143,5 @@ export const Tokens = styled.div`
 
 export const Placeholder = styled.div`
   color: white;
-  min-height: 350px;
-`
-
-export const StyledInterAction = styled.div`
-  display: flex;
-  min-height: 300px;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 20px;
-  padding: 10px;
-`
-
-export const Narration = styled.span`
-  color: white;
-`
-
-export const Message = styled.p`
-  color: white;
+  min-height: 400px;
 `

@@ -1,6 +1,6 @@
 import { DEAL, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, PAUSE_GAME, READY, RESET, SCENE, START_GAME, STOP_GAME, UPDATE_ROOM } from 'constant'
 import { useCallback } from 'react'
-import { deckStore, gamePlayStore, roomStore, wsStore } from 'store'
+import { deckStore, gameStatusStore, roomStore, wsStore } from 'store'
 
 export const useClickHandler = (room_id: string, token: string) => {
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
@@ -35,7 +35,7 @@ export const useClickHandler = (room_id: string, token: string) => {
       room_id,
       token,
     })
-    gamePlayStore.resetGamePlay()
+    gameStatusStore.resetStatus()
   }, [sendJsonMessage])
 
   const handleStartGame = useCallback(() => {
@@ -44,6 +44,7 @@ export const useClickHandler = (room_id: string, token: string) => {
       room_id,
       token,
     })
+    gameStatusStore.toggleStart()
   }, [sendJsonMessage])
 
   const handleReady = useCallback(() => {
@@ -60,7 +61,7 @@ export const useClickHandler = (room_id: string, token: string) => {
       room_id,
       token,
     })
-    gamePlayStore.togglePauseStatus()
+    gameStatusStore.togglePause()
   }, [sendJsonMessage])
 
   const handleStopGame = useCallback(() => {
@@ -69,6 +70,7 @@ export const useClickHandler = (room_id: string, token: string) => {
       room_id,
       token,
     })
+    gameStatusStore.toggleStop()
   }, [sendJsonMessage])
 
   const handleLeaveTable = useCallback(() => {
@@ -80,9 +82,10 @@ export const useClickHandler = (room_id: string, token: string) => {
   }, [sendJsonMessage])
 
   const handleCardInteraction = useCallback(
-    (selected_cards: string[]) => {
+    (selected_cards: string[], title: string) => {
       sendJsonMessage?.({
         type: SCENE,
+        title,
         room_id,
         token,
         selected_card_positions: selected_cards,

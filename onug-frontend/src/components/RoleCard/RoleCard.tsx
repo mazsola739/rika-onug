@@ -14,10 +14,6 @@ export const RoleCard: React.FC<RoleCardProps> = observer(({ card }) => {
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
   const isSelected = deckStore.selectedCards.some((selectedCard) => selectedCard.id === id)
 
-  const testId = `${display_name.replace(/ /g, '-')}--${
-    isSelected ? 'selected' : 'not-selected'
-  }`
-
   const handleCardClick = useCallback(() => {
     sendJsonMessage?.({
       type: UPDATE_ROOM,
@@ -25,7 +21,6 @@ export const RoleCard: React.FC<RoleCardProps> = observer(({ card }) => {
       room_id,
       token,
     })
-
     roomStore.toggleInfo(id)
   }, [
     card_name,
@@ -37,7 +32,7 @@ export const RoleCard: React.FC<RoleCardProps> = observer(({ card }) => {
   const imageSrc = useMemo(() => `/assets/cards/${card_name}.png`, [card_name])
 
   return (
-    <StyledRoleCard isSelected={isSelected} onClick={handleCardClick} data-testid={testId} >
+    <StyledRoleCard isSelected={isSelected} onClick={handleCardClick} >
       <RoleImage src={imageSrc} alt={display_name} isSelected={isSelected} /> {/* TODO roleimage component??? */}
       <RoleCardName isSelected={isSelected}>{display_name}</RoleCardName>
     </StyledRoleCard>

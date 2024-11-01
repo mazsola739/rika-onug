@@ -5,7 +5,7 @@ import { glowingGreen, glowingVibrantPink, glowingRed } from 'styles';
 
 export const StyledCard = styled.div<StyledCardProps>`
   width: ${({ sizeW }) => sizeW}px;
-  border-radius: 15px;
+  border-radius: 10px;
   display: flex;
 
   ${({ werewolf, dreamwolf, isSelectable }) => {

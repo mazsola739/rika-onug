@@ -1,7 +1,7 @@
 import { ARRIVE_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { gamePlayStore, messageStore, riseAndRestStore, wsStore } from 'store'
+import { gameStatusStore, messageStore, riseAndRestStore, wsStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
 import { splitCardsToTable } from 'utils'
 
@@ -51,7 +51,7 @@ export const useGame = () => {
     }
 
     if (lastJsonMessage?.type === PAUSE_GAME) {
-      gamePlayStore.toggleIsRunning()
+      gameStatusStore.toggleIsRunning()
     }
 
   }, [lastJsonMessage, navigate])
