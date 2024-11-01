@@ -1,13 +1,12 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens } from '../../sceneUtils'
-import { aliensVoteResult } from './aliens.voteresult'
+import { IDS } from "../../../constants"
+import { createAndSendSceneMessage, getAllPlayerTokens } from "../../sceneUtils"
+import { aliensVoteResult } from "./aliens.voteresult"
 
 export const aliensVote = (gamestate, title) => {
   const newGamestate = { ...gamestate }
   const narration = ['aliens_vote_result_text']
   const tokens = getAllPlayerTokens(newGamestate.players)
-  const scene = []
-
+  
   tokens.forEach((token) => {
     let interaction = {}
 
@@ -17,11 +16,10 @@ export const aliensVote = (gamestate, title) => {
       interaction = aliensVoteResult(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

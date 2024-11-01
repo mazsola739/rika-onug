@@ -1,11 +1,9 @@
-import { SCENE } from '../../../constants'
-import { getAllPlayerTokens } from '../../sceneUtils'
+import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { doppelgangerInteraction } from './doppelganger.interaction'
 
 //TODO if oracle is oracle team
 export const doppelganger = (gamestate, title) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['doppelganger_kickoff_text']
 
@@ -18,11 +16,10 @@ export const doppelganger = (gamestate, title) => {
       interaction = doppelgangerInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

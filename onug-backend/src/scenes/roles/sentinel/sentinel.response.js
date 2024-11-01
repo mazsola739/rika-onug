@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 export const sentinelResponse = (gamestate, token, selected_card_positions, title) => {
@@ -8,7 +8,6 @@ export const sentinelResponse = (gamestate, token, selected_card_positions, titl
   }
   
   const newGamestate = { ...gamestate }
-  const scene = []
 
   const shieldedPlayerToken = getPlayerTokensByPlayerNumber(newGamestate.players, selected_card_positions[0])
 
@@ -26,8 +25,9 @@ export const sentinelResponse = (gamestate, token, selected_card_positions, titl
     private_message: ['interaction_placed_shield', formatPlayerIdentifier(selected_card_positions)[0]],
   })
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  const narration = getNarrationByTitle(title, newGamestate.narration)
+
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

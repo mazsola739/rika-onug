@@ -1,6 +1,7 @@
-import { SCENE, VOTE } from '../../../constants'
+import { VOTE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
-import { addVote, formatPlayerIdentifier, generateRoleInteraction, getAlienPlayerNumbersByRoleIds, getCardIdsByPositions, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
+import { addVote, formatPlayerIdentifier, generateRoleInteraction, getAlienPlayerNumbersByRoleIds, getCardIdsByPositions, getNarrationByTitle, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 
@@ -10,8 +11,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
   }
 
   const newGamestate = { ...gamestate }
-  const scene = []
-
+  const narration = getNarrationByTitle(title, newGamestate.narration)
   const randomAlienInstruction = newGamestate.alien.instruction
   const aliens = getAlienPlayerNumbersByRoleIds(newGamestate.players)
 
@@ -35,8 +35,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
       uniqueInformations: { aliens },
     })
   
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   
     return newGamestate
   }
@@ -47,7 +46,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
   newGamestate.alien_votes = votes
 
   const alienTokens = getPlayerTokensByPlayerNumber(newGamestate.players, aliens)
-
+//TODO better vote
   alienTokens.forEach((alienToken) => {
     webSocketServerConnectionsPerRoom[newGamestate.room_id][alienToken].send(
       JSON.stringify({
@@ -68,8 +67,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
     uniqueInformations: { aliens },
   })
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

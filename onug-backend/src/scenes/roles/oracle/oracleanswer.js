@@ -1,13 +1,11 @@
-import { SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { oracleResponses } from './oracle.constants'
 import { oracleAnswerAftermath } from './oracleanswer.aftermath'
 
 //ORACLE_ANSWER
 export const oracleAnswer = (gamestate, title) => {
     const newGamestate = { ...gamestate }
-    const scene = []
-    const tokens = getAllPlayerTokens(newGamestate.players)
+        const tokens = getAllPlayerTokens(newGamestate.players)
     const oracleQuestion = newGamestate.oracle.question
     const oracleAnswer = newGamestate.oracle.answer
   
@@ -76,7 +74,7 @@ export const oracleAnswer = (gamestate, title) => {
         interaction = oracleAnswerAftermath(newGamestate, token, title)
       }
   
-      Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+      createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
     })
   
     return newGamestate

@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getMarksByPositions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getMarksByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateMarkSelection } from '../../validators'
 
 export const pickpocketResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -8,7 +8,6 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
   }
   
   const newGamestate = { ...gamestate }
-  const scene = []
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
   const currentPlayerMark = newGamestate.card_positions[currentPlayerNumber].mark 
@@ -35,8 +34,9 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
     showMarks: viewMarks,
   })
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  const narration = getNarrationByTitle(title, newGamestate.narration)
+
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

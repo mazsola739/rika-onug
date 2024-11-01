@@ -1,10 +1,8 @@
-import { SCENE } from '../../../constants'
-import { getAllPlayerTokens } from '../../sceneUtils'
+import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { everyonemarkInteraction } from './everyonemark.interaction'
 
 export const everyonemark = (gamestate, title) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['everyone_mark_text']
 
@@ -14,11 +12,10 @@ export const everyonemark = (gamestate, title) => {
     interaction = everyonemarkInteraction(newGamestate, token, title)
 
     newGamestate.players[token].player_history[title].scene_title = title
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

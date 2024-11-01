@@ -1,11 +1,10 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
-import { randomBlobKickoffText } from './blob.constants'
-import { blobInteraction } from './blob.interaction'
+import { IDS } from "../../../constants"
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from "../../sceneUtils"
+import { randomBlobKickoffText } from "./blob.constants"
+import { blobInteraction } from "./blob.interaction"
 
 export const blob = (gamestate, title) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const total_players = newGamestate.total_players
 
@@ -34,11 +33,10 @@ export const blob = (gamestate, title) => {
       interaction = blobInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

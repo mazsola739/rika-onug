@@ -1,15 +1,16 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection, validateMarkSelection } from '../../validators'
 
 export const gremlinResponse = (gamestate, token, selected_card_positions, selected_mark_positions, title) => {
+    const narration = getNarrationByTitle(title, gamestate.narration)
+
     if (selected_card_positions && selected_card_positions.length > 0) {
       if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
         return gamestate
       }
   
       const newGamestate = { ...gamestate }
-      const scene = []
   
       const [position1, position2] = selected_card_positions
       const playerOneCard = { ...newGamestate.card_positions[position1].card }
@@ -37,8 +38,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
         private_message: ['interaction_swapped_cards', ...messageIdentifiers],
       })
   
-      Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-      newGamestate.scene = scene
+      createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   
       return newGamestate
   
@@ -48,7 +48,6 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       }
   
       const newGamestate = { ...gamestate }
-      const scene = []
   
       const [position1, position2] = selected_mark_positions
       const playerOneMark = { ...newGamestate.card_positions[position1].mark }
@@ -76,8 +75,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
         private_message: ['interaction_swapped_marks', ...messageIdentifiers],
       })
   
-      Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-      newGamestate.scene = scene
+      createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   
       return newGamestate
     }

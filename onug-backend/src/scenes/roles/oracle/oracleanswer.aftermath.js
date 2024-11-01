@@ -1,14 +1,13 @@
-import { CENTER_CARD_POSITIONS, SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getPlayerNumberWithMatchingToken, getRandomNumber } from '../../sceneUtils'
+import { CENTER_CARD_POSITIONS } from '../../../constants'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken, getRandomNumber } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 
 export const oracleAnswerAftermath = (gamestate, token, title) => {
     const newGamestate = { ...gamestate }
-    const scene = []
-  
+      
     const oracleQuestion = newGamestate.oracle.question
     const oracleAnswer = newGamestate.oracle.answer
     const oracleAftermath = newGamestate.oracle.aftermath
-  
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
     const currentPlayerCard = { ...newGamestate.card_positions[currentPlayerNumber].card }
   
@@ -107,8 +106,9 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
       selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: limit } },
     })
   
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    const narration = getNarrationByTitle(title, newGamestate.narration)
+
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   
     return newGamestate
   }

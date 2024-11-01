@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateMarkSelection } from '../../validators'
 
 export const cupidResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -8,7 +8,6 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
     }
     
     const newGamestate = { ...gamestate }
-    const scene = []
   
     if (gamestate.players[token].card.player_original_id === 1) {
       const loveOnePosition = newGamestate.doppelganger_mark_positions.love_1
@@ -51,8 +50,9 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
       private_message: ['interaction_mark_of_love', ...messageIdentifiers],
     })
   
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    const narration = getNarrationByTitle(title, newGamestate.narration)
+
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   
     return newGamestate
   }

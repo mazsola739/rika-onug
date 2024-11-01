@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getMarksByPositions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getMarksByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection, validateMarkSelection } from '../../validators'
 
 export const marksmanResponse = (gamestate, token, selected_card_positions = [], selected_mark_positions = [], title) => {
@@ -9,8 +9,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
     }
 
     const newGamestate = { ...gamestate }
-    const scene = []
-
+    
     const viewCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
     const selectedPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
@@ -55,8 +54,9 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
       viewed_cards: [selected_mark_positions[0]],
     }
 
-    scene.push({ [token]: { interaction } })
-    newGamestate.scene[title] = scene
+    const narration = getNarrationByTitle(title, newGamestate.narration)
+
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
     return newGamestate
 
@@ -66,8 +66,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
     }
 
     const newGamestate = { ...gamestate }
-    const scene = []
-
+    
     const viewMarks = getMarksByPositions(newGamestate.card_positions, [selected_mark_positions[0]])
     const selectedPositionMark = newGamestate.card_positions[selected_mark_positions[0]].mark
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
@@ -107,8 +106,9 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
       viewed_marks: [selected_mark_positions[0]],
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    const narration = getNarrationByTitle(title, newGamestate.narration)
+
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
     return newGamestate
   }

@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 export const temptressResponse = (gamestate, token, selected_card_positions, title) => {
@@ -8,7 +8,6 @@ export const temptressResponse = (gamestate, token, selected_card_positions, tit
   }
 
   const newGamestate = { ...gamestate }
-  const scene = []
 
   const centerVillain = { ...newGamestate.card_positions.center_villain.card }
   const selectedCard = { ...newGamestate.card_positions[selected_card_positions[0]].card }
@@ -27,9 +26,10 @@ export const temptressResponse = (gamestate, token, selected_card_positions, tit
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
   })
+  
+  const narration = getNarrationByTitle(title, newGamestate.narration)
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

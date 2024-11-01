@@ -1,5 +1,6 @@
-import { IDS, SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions } from '../../sceneUtils'
+import { IDS } from '../../../constants'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 
@@ -10,7 +11,6 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
   }
   
   const newGamestate = { ...gamestate }
-  const scene = []
 
   const selectedCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0], selected_card_positions[1]])
   const playerOneCardId = selectedCards[0][selected_card_positions[0]]
@@ -49,8 +49,9 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
     showCards,
   })
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  const narration = getNarrationByTitle(title, newGamestate.narration)
+
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

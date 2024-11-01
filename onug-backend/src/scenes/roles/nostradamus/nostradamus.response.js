@@ -1,5 +1,6 @@
-import { IDS, SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions } from '../../sceneUtils'
+import { IDS } from '../../../constants'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 export const nostradamusResponse = (gamestate, token, selected_card_positions, title) => {
@@ -8,7 +9,6 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
   }
   
   const newGamestate = { ...gamestate }
-  const scene = []
 
   const selectedCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0], selected_card_positions[1], selected_card_positions[2]])
   const playerOneCardId = selectedCards[0][selected_card_positions[0]]
@@ -54,8 +54,9 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
     showCards,
   })
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  const narration = getNarrationByTitle(title, newGamestate.narration)
+
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

@@ -1,15 +1,13 @@
-import { SCENE } from '../../../constants'
-import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../../conditions'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
-import { randomOracleQuestions } from './oracle.constants'
-import { thinkRandomNumber } from './oracle.utils'
-import { oracleQuestionRaising } from './oraclequestion.raising'
+import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from "../../conditions"
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from "../../sceneUtils"
+import { randomOracleQuestions } from "./oracle.constants"
+import { thinkRandomNumber } from "./oracle.utils"
+import { oracleQuestionRaising } from "./oraclequestion.raising"
 
 //ORACLE_QUESTION
 export const oracleQuestion = (gamestate, title) => {
     const newGamestate = { ...gamestate }
-    const scene = []
-    const tokens = getAllPlayerTokens(newGamestate.players)
+        const tokens = getAllPlayerTokens(newGamestate.players)
     const selectedCards = newGamestate.selected_cards
   
     let availableOracleQuestionOptions = []
@@ -62,11 +60,10 @@ export const oracleQuestion = (gamestate, title) => {
         console.log('do nothing')
       }
   
-      Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+      createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
     })
   
-    newGamestate.narration.push(narration)
-    newGamestate.scene = scene
+    newGamestate.narration.push({[title]: narration})
   
     return newGamestate
   }

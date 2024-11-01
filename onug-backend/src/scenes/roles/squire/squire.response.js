@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
 import { getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield } from './squire.utils'
 
@@ -9,7 +9,6 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
   }
 
   const newGamestate = { ...gamestate }
-  const scene = []
 
   let interaction = {}
 
@@ -47,8 +46,9 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     })
   }
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  const narration = getNarrationByTitle(title, newGamestate.narration)
+
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

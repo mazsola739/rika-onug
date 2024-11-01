@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 export const alphawolfResponse = (gamestate, token, selected_card_positions, title) => {
@@ -8,7 +8,6 @@ export const alphawolfResponse = (gamestate, token, selected_card_positions, tit
   }
 
   const newGamestate = { ...gamestate }
-  const scene = []
 
   const centerWolf = { ...newGamestate.card_positions.center_wolf.card }
   const selectedCard = { ...newGamestate.card_positions[selected_card_positions[0]].card }
@@ -28,8 +27,9 @@ export const alphawolfResponse = (gamestate, token, selected_card_positions, tit
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
   })
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  const narration = getNarrationByTitle(title, newGamestate.narration)
+
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

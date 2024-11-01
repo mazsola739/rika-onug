@@ -3,7 +3,7 @@
     "room_id": "archives",
     "room_name": "Archives",
     "stage": "LOBBY",
-    "selected_cards": [12, 13, 14, 15],
+    "selected_cards": [12, 13, 14, 15, 79, 61],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
     "vote_timer": 300000,
@@ -29,8 +29,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "armory",
@@ -62,8 +61,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "bottomless_pit",
@@ -95,8 +93,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "dungeon",
@@ -128,8 +125,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "dynamite_room",
@@ -161,8 +157,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "great_hall",
@@ -194,8 +189,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "guest_bedroom",
@@ -227,8 +221,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "kitchen",
@@ -260,8 +253,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "laboratory",
@@ -293,8 +285,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "observatory",
@@ -326,8 +317,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "panic_room",
@@ -359,8 +349,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "parlor",
@@ -392,8 +381,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "secret_passage",
@@ -425,8 +413,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "sitting_room",
@@ -458,8 +445,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "staff_quarters",
@@ -491,8 +477,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "study",
@@ -524,8 +509,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "venus_grotto",
@@ -557,8 +541,7 @@
     "game_stopped": false,
     "game_finished": false,
     "script_locked": true,
-    "actual_scenes": [],
-    "scene": []
+    "actual_scenes": []
   },
   {
     "room_id": "workshop",

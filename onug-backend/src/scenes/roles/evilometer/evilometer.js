@@ -1,11 +1,10 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens } from '../../sceneUtils'
+import { IDS } from '../../../constants'
+import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { evilometerInteraction } from './evilometer.interaction'
 
 //TODO super villains can see evilometer
 export const evilometer = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     hasDoppelganger
@@ -23,11 +22,10 @@ export const evilometer = (gamestate, title, hasDoppelganger) => {
       interaction = evilometerInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

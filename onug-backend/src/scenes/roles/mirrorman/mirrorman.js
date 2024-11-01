@@ -1,10 +1,8 @@
-import { SCENE } from '../../../constants'
-import { getAllPlayerTokens } from '../../sceneUtils'
+import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { copycatInteraction } from '../copycat/copycat.interaction'
 
 export const mirrorman = (gamestate, title) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['mirrorman_kickoff_text']
 
@@ -17,11 +15,10 @@ export const mirrorman = (gamestate, title) => {
       interaction = copycatInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

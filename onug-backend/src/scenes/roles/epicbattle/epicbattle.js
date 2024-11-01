@@ -1,5 +1,4 @@
-import { SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { everyonemarkInteraction } from '../everyonemark/everyonemark.interaction'
 import { random_easteregg_nobadguys, random_easteregg_nogoodguys } from './epicbattle.constants'
 
@@ -9,7 +8,6 @@ export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalP
   }
   
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = []
 
@@ -28,11 +26,10 @@ export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalP
 
     interaction = everyonemarkInteraction(newGamestate, token, title)
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

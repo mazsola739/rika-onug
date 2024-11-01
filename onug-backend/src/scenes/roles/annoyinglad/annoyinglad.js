@@ -1,10 +1,9 @@
-import { thingInteraction } from '..'
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens } from '../../sceneUtils'
+import { IDS } from "../../../constants"
+import { getAllPlayerTokens, createAndSendSceneMessage } from "../../sceneUtils"
+import { thingInteraction } from "../thing/thing.interaction"
 
 export const annoyinglad = (gamestate, title) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['annoyinglad_kickoff_text']
 
@@ -17,11 +16,10 @@ export const annoyinglad = (gamestate, title) => {
       interaction = thingInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

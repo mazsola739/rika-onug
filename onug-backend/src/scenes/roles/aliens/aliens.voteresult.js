@@ -2,6 +2,7 @@ import { MESSAGE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
 import { findMostVoted, formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPlayerNumbers, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
 
+//TODO ?  const narration = getNarrationByTitle(title, newGamestate.narration) createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 export const aliensVoteResult = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   

@@ -1,10 +1,9 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens } from '../../sceneUtils'
-import { werewolvesInteraction } from './werewolves.interaction'
+import { IDS } from "../../../constants"
+import { createAndSendSceneMessage, getAllPlayerTokens } from "../../sceneUtils"
+import { werewolvesInteraction } from "./werewolves.interaction"
 
 export const werewolves = (gamestate, title, hasDreamWolf) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     hasDreamWolf
@@ -21,11 +20,10 @@ export const werewolves = (gamestate, title, hasDreamWolf) => {
       interaction = werewolvesInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

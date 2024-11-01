@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 export const copycatResponse = (gamestate, token, selected_card_positions, title) => {
@@ -8,7 +8,6 @@ export const copycatResponse = (gamestate, token, selected_card_positions, title
     }
     
     const newGamestate = { ...gamestate }
-    const scene = []
   
     newGamestate.players[token].card.player_role_id = newGamestate.card_positions[selected_card_positions[0]].card.id
       
@@ -34,9 +33,10 @@ export const copycatResponse = (gamestate, token, selected_card_positions, title
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_you_are_that_role', `${newGamestate.players[token]?.card.player_role}`],
       showCards,
     })
-  
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    
+    const narration = getNarrationByTitle(title, newGamestate.narration)
+
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   
     return newGamestate
   }

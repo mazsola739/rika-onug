@@ -1,5 +1,6 @@
-import { CENTER_CARD_POSITIONS, SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getAllPlayerTokens, getCardIdsByPlayerNumbers, getCardIdsByPositions, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken, getSelectablePlayersWithNoShield } from '../../sceneUtils'
+import { CENTER_CARD_POSITIONS } from '../../../constants'
+import { formatPlayerIdentifier, generateRoleInteraction, getAllPlayerTokens, getCardIdsByPlayerNumbers, getCardIdsByPositions, getNarrationByTitle, getPlayerNumbersWithMatchingTokens, getPlayerNumberWithMatchingToken, getSelectablePlayersWithNoShield } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 export const rascalResponse = (gamestate, token, selected_card_positions, title) => {
@@ -8,7 +9,6 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
   }
 
   const newGamestate = { ...gamestate }
-  const scene = []
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
   const currentPlayerCard = { ...newGamestate.card_positions[currentPlayerNumber].card }
@@ -134,9 +134,9 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
       break }
   }
 
+  const narration = getNarrationByTitle(title, newGamestate.narration)
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

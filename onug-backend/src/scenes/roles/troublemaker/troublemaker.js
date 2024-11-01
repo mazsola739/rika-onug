@@ -1,11 +1,11 @@
-import { IDS, SCENE } from '../../../constants'
+import { IDS } from '../../../constants'
 import { getAllPlayerTokens } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { troublemakerInteraction } from './troublemaker.interaction'
 
 //todo why see?
 export const troublemaker = (gamestate, title) => {
   const newGamestate = { ...gamestate }
-  const scene = []  
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['troublemaker_kickoff_text']
 
@@ -18,11 +18,10 @@ export const troublemaker = (gamestate, title) => {
       interaction = troublemakerInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

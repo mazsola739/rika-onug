@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 //TODO neighbors
@@ -9,7 +9,6 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
   }
 
   const newGamestate = { ...gamestate }
-  const scene = []
 
   const cardPositions = selected_card_positions.slice(0, gamestate.players[token].player_history[title].selectable_card_limit.player)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
@@ -44,8 +43,9 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
     showCards: viewCards,
   })
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  const narration = getNarrationByTitle(title, newGamestate.narration)
+
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

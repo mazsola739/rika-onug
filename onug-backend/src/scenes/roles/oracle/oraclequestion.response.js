@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleInteraction, getNarrationByTitle } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
 import { formatOracleAnswer } from './oracle.utils'
 
@@ -9,7 +9,6 @@ export const oracleQuestionResponse = (gamestate, token, selected_answer, title)
     }
   
     const newGamestate = { ...gamestate }
-    const scene = []
   
     const oracleQuestion = newGamestate.oracle.question
   
@@ -35,8 +34,9 @@ export const oracleQuestionResponse = (gamestate, token, selected_answer, title)
       private_message: ['interaction_oracle_answer', formatOracleAnswer(selected_answer)],
     })
   
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    const narration = getNarrationByTitle(title, newGamestate.narration)
+
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   
     return newGamestate
   }

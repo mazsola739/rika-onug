@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 export const doppelgangerResponse = (gamestate, token, selected_card_positions, title) => {
@@ -8,7 +8,6 @@ export const doppelgangerResponse = (gamestate, token, selected_card_positions, 
     }
     
     const newGamestate = { ...gamestate }
-    const scene = []
   
     newGamestate.players[token].card.player_role_id = newGamestate.card_positions[selected_card_positions[0]].card.id
       
@@ -35,8 +34,9 @@ export const doppelgangerResponse = (gamestate, token, selected_card_positions, 
       showCards,
     })
   
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    const narration = getNarrationByTitle(title, newGamestate.narration)
+
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   
     return newGamestate
   }

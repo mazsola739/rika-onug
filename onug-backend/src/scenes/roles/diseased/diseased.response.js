@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateMarkSelection } from '../../validators'
 
 export const diseasedResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -8,7 +8,6 @@ export const diseasedResponse = (gamestate, token, selected_mark_positions, titl
     }
     
     const newGamestate = { ...gamestate }
-    const scene = []
   
     if (gamestate.players[token].card.player_original_id === 1) {
       const diseasePosition = newGamestate.doppelganger_mark_positions.disease
@@ -35,8 +34,9 @@ export const diseasedResponse = (gamestate, token, selected_mark_positions, titl
       private_message: ['interaction_mark_of_disease', formatPlayerIdentifier(selected_mark_positions)[0]],
     })
   
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    const narration = getNarrationByTitle(title, newGamestate.narration)
+
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   
     return newGamestate
   }

@@ -1,11 +1,10 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens } from '../../sceneUtils'
-import { cowInteraction } from './cow.interaction'
+import { IDS } from "../../../constants"
+import { createAndSendSceneMessage, getAllPlayerTokens } from "../../sceneUtils"
+import { cowInteraction } from "./cow.interaction"
 
 //TODO aliens can see cow
 export const cow = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     hasDoppelganger 
@@ -23,11 +22,10 @@ export const cow = (gamestate, title, hasDoppelganger) => {
       interaction = cowInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

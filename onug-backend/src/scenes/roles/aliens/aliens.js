@@ -1,11 +1,11 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
-import { alienAllKeys, alienAnyKeys, randomAlienInstructions } from './aliens.constants'
-import { aliensInteraction } from './aliens.interaction'
+import { IDS } from "../../../constants"
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from "../../sceneUtils"
+import { alienAllKeys, alienAnyKeys, randomAlienInstructions } from "./aliens.constants"
+import { aliensInteraction } from "./aliens.interaction"
+
 
 export const aliens = (gamestate, title) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['aliens_kickoff_text']
   const randomAlienInstruction = newGamestate.alienexchange ? getRandomItemFromArray(['aliens_left_text', 'aliens_right_text']) : getRandomItemFromArray(randomAlienInstructions)
@@ -44,11 +44,10 @@ export const aliens = (gamestate, title) => {
       interaction = aliensInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

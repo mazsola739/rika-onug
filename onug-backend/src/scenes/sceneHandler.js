@@ -55,7 +55,6 @@ export const sceneHandler = async (gamestate) => {
     for (const actualScene of newGamestate.actual_scenes) {
         logTrace(`Processing action for scene: ${actualScene.scene_title}`)
         newGamestate = await actionHandler(newGamestate, actualScene.scene_title)
-        await upsertRoomState(newGamestate)
     }
 
     await upsertRoomState(newGamestate)

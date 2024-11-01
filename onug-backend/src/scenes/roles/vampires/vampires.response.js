@@ -1,6 +1,7 @@
-import { SCENE, VOTE } from '../../../constants'
+import { VOTE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
-import { addVote, formatPlayerIdentifier, generateRoleInteraction, getPlayerTokensByPlayerNumber, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
+import { addVote, formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerTokensByPlayerNumber, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateMarkSelection } from '../../validators'
 
 export const vampiresResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -9,7 +10,6 @@ export const vampiresResponse = (gamestate, token, selected_mark_positions, titl
   }
 
   const newGamestate = { ...gamestate }
-  const scene = []
 
   const votes = addVote(newGamestate.players[token].player_number, selected_mark_positions[0], newGamestate.vampire_votes)
 
@@ -39,8 +39,9 @@ export const vampiresResponse = (gamestate, token, selected_mark_positions, titl
     uniqueInformations: { vampires },
   })
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  const narration = getNarrationByTitle(title, newGamestate.narration)
+
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

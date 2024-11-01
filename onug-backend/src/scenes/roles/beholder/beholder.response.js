@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
 
 export const beholderResponse = (gamestate, token, selected_answer, title) => {
@@ -8,7 +8,6 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
     }
   
     const newGamestate = { ...gamestate }
-    const scene = []
   
     let interaction = {}
   
@@ -40,8 +39,9 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
       })
     }
   
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-    newGamestate.scene = scene
+    const narration = getNarrationByTitle(title, newGamestate.narration)
+
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   
     return newGamestate
   }

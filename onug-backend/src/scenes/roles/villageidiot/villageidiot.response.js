@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { generateRoleInteraction, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { generateRoleInteraction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
 import { moveCardsButYourOwn } from './villageidiot.utils'
 
@@ -9,7 +9,6 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
   }
 
   const newGamestate = { ...gamestate }
-  const scene = []
 
   const currentPlayer = getPlayerNumberWithMatchingToken(newGamestate.players, token)
   const updatedPlayerCards = moveCardsButYourOwn(newGamestate.card_positions, selected_answer, currentPlayer)
@@ -30,8 +29,9 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
     private_message: ['interaction_moved', selected_answer === 'left' ? 'direction_left' : 'direction_right'],
   })
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  const narration = getNarrationByTitle(title, newGamestate.narration)
+
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

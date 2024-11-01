@@ -1,13 +1,12 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens } from '../../sceneUtils'
+import { IDS } from '../../../constants'
+import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { vampiresVoteResult } from './vampires.voteresult'
 
 export const vampiresVote = (gamestate, title) => {
   const newGamestate = { ...gamestate }
   const narration = ['vampires_vote_result_text']
   const tokens = getAllPlayerTokens(newGamestate.players)
-  const scene = []
-
+  
   tokens.forEach((token) => {
     let interaction = {}
 
@@ -18,11 +17,10 @@ export const vampiresVote = (gamestate, title) => {
     }
 
     newGamestate.players[token].player_history[title].scene_title = title
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

@@ -1,5 +1,5 @@
-import { SCENE } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 export const seerResponse = (gamestate, token, selected_card_positions, title) => {
@@ -8,7 +8,6 @@ export const seerResponse = (gamestate, token, selected_card_positions, title) =
   }
  
   const newGamestate = { ...gamestate }
-  const scene = []
 
   let showCards = []
 
@@ -41,9 +40,10 @@ export const seerResponse = (gamestate, token, selected_card_positions, title) =
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     showCards,
   })
+  
+  const narration = getNarrationByTitle(title, newGamestate.narration)
 
-  Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction })
-  newGamestate.scene = scene
+  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
   return newGamestate
 }

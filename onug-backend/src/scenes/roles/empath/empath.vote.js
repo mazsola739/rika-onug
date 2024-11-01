@@ -1,10 +1,9 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens } from '../../sceneUtils'
+import { IDS } from '../../../constants'
+import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { empathVoteResult } from './empath.voteresult'
 
 export const empathVote = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)  
   const narration =  [`${prefix}_kickoff_text`, 'empath_kickoff2_text']
 
@@ -23,11 +22,10 @@ export const empathVote = (gamestate, title, prefix) => {
       }
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

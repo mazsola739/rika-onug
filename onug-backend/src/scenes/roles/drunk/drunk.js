@@ -1,10 +1,9 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens } from '../../sceneUtils'
+import { IDS } from '../../../constants'
+import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { drunkInteraction } from './drunk.interaction'
 
 export const drunk = (gamestate, title) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['drunk_kickoff_text']
 
@@ -17,11 +16,10 @@ export const drunk = (gamestate, title) => {
       interaction = drunkInteraction(newGamestate, token, title)
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

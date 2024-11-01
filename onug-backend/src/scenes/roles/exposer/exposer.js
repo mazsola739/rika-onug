@@ -1,11 +1,10 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
+import { IDS } from '../../../constants'
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomExposerInstructions } from './exposer.constants'
 import { exposerInteraction } from './exposer.interaction'
 
 export const exposer = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
  //todo better narration
 
@@ -32,11 +31,10 @@ export const exposer = (gamestate, title, prefix) => {
       }
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

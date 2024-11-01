@@ -1,10 +1,8 @@
-import { SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { random_madscientist_intro, random_madscientist_result, random_madscientist_therefore, random_madscientist_transition } from './madscientist.constants'
 
 export const madscientist = (gamestate, title) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [
     'madscientist_kickoff_text',
@@ -18,11 +16,10 @@ export const madscientist = (gamestate, title) => {
   tokens.forEach((token) => {
     let interaction = {}
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

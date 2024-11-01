@@ -1,12 +1,11 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
+import { IDS } from '../../../constants'
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { empathKeys, randomEmpathInstructions } from './empath.constants'
 import { empathInteraction } from './empath.interaction'
 import { empathNumbers } from './empath.utils'
 
 export const empath = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)  
   const totalPlayers = newGamestate.total_players
   const randomKey = getRandomItemFromArray(empathKeys)
@@ -42,11 +41,10 @@ export const empath = (gamestate, title, prefix) => {
       }
     }
     
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }

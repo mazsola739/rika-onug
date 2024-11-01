@@ -1,11 +1,10 @@
-import { IDS, SCENE } from '../../../constants'
-import { getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
+import { IDS } from '../../../constants'
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { morticianKeys, randomMorticianInstructions } from './mortician.constants'
 import { morticianInteraction } from './mortician.interaction'
 
 export const mortician = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
-  const scene = []
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [`${prefix}_kickoff_text`]
 //TODO
@@ -36,11 +35,10 @@ export const mortician = (gamestate, title, prefix) => {
       }
     }
 
-    Object.keys(interaction).length !== 0 && scene.push({ type: SCENE, title, token, interaction, narration })
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push(narration)
-  newGamestate.scene = scene
+  newGamestate.narration.push({[title]: narration})
 
   return newGamestate
 }
