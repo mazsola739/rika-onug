@@ -24,8 +24,6 @@ export const checkCardPresence = (cards: CardJson[], cardId: number): boolean =>
 export const capitalize = (string: string) =>
   string && string[0].toUpperCase() + string.slice(1).toLowerCase()
 
-
-//TODO if 3 player?
 export const splitCardsToTable = (tablePlayerCards: TablePlayerCard[], tablePlayerCard: TablePlayerCard) => {
   const playerNumber = Number(`${tablePlayerCard.position}`.replace("player_", ""))
   const playerIndex = playerNumber - 1
@@ -34,8 +32,12 @@ export const splitCardsToTable = (tablePlayerCards: TablePlayerCard[], tablePlay
 
   const remainingTablePlayerCards = newTablePlayerCards.slice(1)
 
-  const third = Math.floor(remainingTablePlayerCards.length / 3)
+  if (remainingTablePlayerCards.length === 2) {
+    const [rightCard, leftCard] = remainingTablePlayerCards
+    return { right: [rightCard], middle: [], left: [leftCard] }
+  }
 
+  const third = Math.floor(remainingTablePlayerCards.length / 3)
   const right = remainingTablePlayerCards.slice(0, third).reverse()
   const left = remainingTablePlayerCards.slice(-third)
   const middle = remainingTablePlayerCards.slice(third, -third).reverse()

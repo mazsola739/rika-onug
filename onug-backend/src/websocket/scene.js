@@ -5,7 +5,7 @@ import { responseHandler, sceneHandler, scriptHandler } from '../scenes'
 import { validateRoom } from '../validators'
 
 export const scene = async (ws, message) => {
-  const { room_id, token, selected_card_positions, selected_mark_positions, selected_answer, player_ready, title } = message
+  const { room_id, token, selected_card_positions, selected_mark_positions, selected_answer, player_ready, title, done } = message
   logTrace(`Processing scene interaction in room: ${room_id}`)
 
   try {
@@ -30,8 +30,9 @@ export const scene = async (ws, message) => {
       } else {
         logError(`Not all players are ready in room: ${room_id}. Current readiness: ${JSON.stringify(players)}`)
       }
-
-
+    } else if(done) {
+        players[token].player_history[title].finished = true
+        newGamestate = await sceneHandler(newGamestate)
     } else {
       logTrace(`Handling player actions in room: ${room_id}`)
 

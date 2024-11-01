@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { deckStore, gamePropStore, messageStore } from 'store'
+import { deckStore, gamePropStore, messageStore, selectionStore } from 'store'
 import { CardPosition, InteractionType, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
 
 class RiseAndRestStore {
@@ -91,14 +91,7 @@ class RiseAndRestStore {
     })
   }
 
-  openYourEyes(lastJsonMessage: WsJsonMessage): void {
-    gamePropStore.setInteraction(lastJsonMessage?.interaction as InteractionType)
-    gamePropStore.setTitle(lastJsonMessage.title)
-    this.setTablePlayerCards(lastJsonMessage)
-    this.setTablePlayerCard(lastJsonMessage)
-    this.setTableCenterCards(lastJsonMessage)
-  }
-
+  
   resetCards(): void {
     const resetCardState = {
       player_name: '',
@@ -117,15 +110,31 @@ class RiseAndRestStore {
     this.tableCenterCards = this.tableCenterCards.map(centerCard => ({
       ...centerCard,
       card_name: '',
-      selectable: false,
+      selectable_card: false,
     }))
   }
 
-  closeYourEyes(): void {
+  resetScene(): void {
     this.resetCards()
+    gamePropStore.reset()
+    selectionStore.resetSelection()
+  }
+
+  openYourEyes(lastJsonMessage: WsJsonMessage): void {
+    this.resetCards()
+    gamePropStore.reset()
+    selectionStore.resetSelection()
+    gamePropStore.setInteraction(lastJsonMessage?.interaction as InteractionType)
+    gamePropStore.setTitle(lastJsonMessage.title)
+    this.setTablePlayerCards(lastJsonMessage)
+    this.setTablePlayerCard(lastJsonMessage)
+    this.setTableCenterCards(lastJsonMessage)
+  }
+
+  closeYourEyes(): void {
+    this.resetScene()
     messageStore.setPrivateMessage([])
     messageStore.setNarration([])
-    gamePropStore.reset()
   }
 }
 

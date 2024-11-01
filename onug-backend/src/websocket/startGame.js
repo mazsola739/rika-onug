@@ -34,9 +34,7 @@ export const startGame = async (ws, message) => {
   const allPlayersReady = Object.values(players).every((player) => player.ready)
 
   if (!allPlayersReady) {
-    logError(
-      `Not all players are ready. Current readiness: ${JSON.stringify(players)}`
-    )
+    logError(`Not all players are ready. Current readiness: ${JSON.stringify(players)}`)
 
     return broadcast(room_id, {
       type: 'ERROR',

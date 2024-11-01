@@ -27,7 +27,8 @@ export const werewolvesResponse = (gamestate, token, selected_card_positions, ti
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
       showCards,
-      obligatory: true
+      obligatory: true,
+      uniqueInformations: { scene_end: true }
     })
 
     const narration = getNarrationByTitle(title, newGamestate.narration)

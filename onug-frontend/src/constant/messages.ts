@@ -1,3 +1,5 @@
+export * from './narrations/identifier'
+
 //TODO better messages
 //messages
 export const message_tapped = 'You got tapped by your neighbor'

@@ -11,6 +11,7 @@ export const werewolvesInteraction = (gamestate, token, title) => {
     const selectable_cards = loneWolf ? CENTER_CARD_POSITIONS : []
     const selectable_card_limit = { player: 0, center: loneWolf ? 1 : 0 }
     const obligatory = loneWolf ? false : true
+    const scene_end = loneWolf ? false : true
   
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
@@ -24,6 +25,6 @@ export const werewolvesInteraction = (gamestate, token, title) => {
       private_message: [loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves'],
       selectableCards: { selectable_cards, selectable_card_limit},
       obligatory,
-      uniqueInformations: { werewolves, dreamwolf },
+      uniqueInformations: { werewolves, dreamwolf, scene_end},
     })
   }

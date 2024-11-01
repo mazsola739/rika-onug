@@ -1,5 +1,6 @@
 import * as messages_text from 'constant/messages'
 import * as narration_text from 'constant/narrations'
+import * as identifier from 'constant/narrations/identifier'
 
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
@@ -47,6 +48,7 @@ export type InteractionType = {
   new_role_id?: number
   obligatory?: boolean
   private_message?: string[]
+  scene_end?: boolean
   selectable_card_limit?: {
     player: number
     center: number
@@ -65,6 +67,8 @@ export type InteractionType = {
 export type NarrationType = keyof typeof narration_text
 
 export type MessagesType = keyof typeof messages_text
+
+export type IdentifierType = keyof typeof identifier
 
 export type WsJsonMessage = {
   actual_scene?: ActualSceneType

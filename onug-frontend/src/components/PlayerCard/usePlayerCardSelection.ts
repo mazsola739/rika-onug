@@ -35,6 +35,7 @@ export const usePlayerCardSelection = (card: TablePlayerCard) => {
     isSelected: isCardSelected,
     werewolf: isWerewolf,
     dreamwolf: isDreamwolf,
+    position
   }
 
   const markProps = {
@@ -45,6 +46,7 @@ export const usePlayerCardSelection = (card: TablePlayerCard) => {
   }
 
   return {
+    position,
     playerNumberToken,
     isCenterCard,
     cardProps, 

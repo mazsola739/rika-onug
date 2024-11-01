@@ -1,7 +1,7 @@
 import { ARRIVE_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { gameStatusStore, messageStore, riseAndRestStore, wsStore } from 'store'
+import { gamePropStore, gameStatusStore, messageStore, riseAndRestStore, wsStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
 import { splitCardsToTable } from 'utils'
 
@@ -40,21 +40,21 @@ export const useGame = () => {
       messageStore.setNarration(lastJsonMessage?.narration as NarrationType[])
       messageStore.setPrivateMessage(lastJsonMessage.interaction.private_message as MessagesType[])
     }
-
+  
     if (lastJsonMessage?.type === HYDRATE_GAME) {
-        riseAndRestStore.closeYourEyes()
-        setNightMode(true)
+      riseAndRestStore.closeYourEyes()
+      setNightMode(true)
     }
-
+  
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-
+  
     if (lastJsonMessage?.type === PAUSE_GAME) {
-      gameStatusStore.togglePause() //TODO check if its working properly
+      gameStatusStore.togglePause()
     }
-
   }, [lastJsonMessage, navigate])
+  
   
   const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 

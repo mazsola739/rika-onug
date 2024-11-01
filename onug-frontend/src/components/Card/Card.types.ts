@@ -7,6 +7,7 @@ export interface CardProps {
   dreamwolf: boolean
   size: number
   playerName?: string
+  position?: string
 }
 
 export interface StyledCardProps {

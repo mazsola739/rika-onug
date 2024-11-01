@@ -39,6 +39,11 @@ class SelectionStore {
       this.selectedMarks = [...this.selectedMarks, position]
     }
   }
+
+  resetSelection() {
+    this.selectedCards = []
+    this.selectedMarks = []
+  }
 }
 
 export const selectionStore = new SelectionStore()

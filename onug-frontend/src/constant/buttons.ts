@@ -31,6 +31,7 @@ export const BUTTONS: Record<string, string> = {
   leave_table_label: "LEAVE TABLE",
   skip_label: "SKIP",
   done_label: "DONE",
+  finish_label: "FINISH",
 }
 
 

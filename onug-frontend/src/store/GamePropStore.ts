@@ -3,6 +3,7 @@ import { InteractionType } from 'types'
 
 class GamePropStore {
   title: string = ''
+  scene_end: boolean = false
   interaction: InteractionType = {
     answer_options: [],
     artifacted_cards: [],
@@ -18,7 +19,6 @@ class GamePropStore {
     show_marks: [],
     werewolves: []
   }
-
 
   constructor() {
     makeAutoObservable(this)
@@ -46,6 +46,8 @@ class GamePropStore {
   }
 
   reset(): void {
+    this.title = ''
+    this.scene_end = false
     this.interaction = {
       answer_options: [],
       artifacted_cards: [],
