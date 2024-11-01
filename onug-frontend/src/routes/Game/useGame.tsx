@@ -51,7 +51,7 @@ export const useGame = () => {
     }
 
     if (lastJsonMessage?.type === PAUSE_GAME) {
-      gameStatusStore.toggleIsRunning()
+      gameStatusStore.togglePause() //TODO check if its working properly
     }
 
   }, [lastJsonMessage, navigate])
