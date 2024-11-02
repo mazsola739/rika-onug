@@ -32,10 +32,12 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
         private_message: ['interaction_saw_card', ...messageIdentifiers],
         showCards: viewCards,
         uniqueInformations: { seers },
+        scene_end: true,
       })
     } else if (selected_answer === 'no') {
       interaction = generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_nothing'],
+        scene_end: true,
       })
     }
   

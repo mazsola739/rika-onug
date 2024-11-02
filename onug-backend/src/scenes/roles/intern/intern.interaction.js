@@ -14,6 +14,7 @@ export const internInteraction = (gamestate, token, title) => {
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     madscientist,
+    scene_end: true,
   }
 
   const messageIdentifiers = formatPlayerIdentifier(madscientist)
@@ -21,5 +22,6 @@ export const internInteraction = (gamestate, token, title) => {
   return generateRoleInteraction(newGamestate, token, {
     private_message: [madscientist.length === 0 ? 'interaction_mad_now' : 'interaction_mad', ...messageIdentifiers],
     uniqueInformations: { madscientist },
+    scene_end: true,
   })
 }

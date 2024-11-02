@@ -10,11 +10,13 @@ export const everyonemarkInteraction = (gamestate, token, title) => {
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
-    viewed_marks: [currentPlayerNumber]
+    viewed_marks: [currentPlayerNumber],
+    scene_end: true,
   }
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_own_mark'],
     showMarks: viewMarks,
+    scene_end: true,
   })
 }

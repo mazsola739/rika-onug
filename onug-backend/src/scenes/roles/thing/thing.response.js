@@ -28,6 +28,7 @@ export const thingResponse = (gamestate, token, selected_card_positions, title) 
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_tap', formatPlayerIdentifier(selected_card_positions)[0]],
+    scene_end: true,
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

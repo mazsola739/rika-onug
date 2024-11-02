@@ -19,6 +19,7 @@ export const insomniacInteraction = (gamestate, token, title) => {
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_own_card'],
       showCards,
+      scene_end: true,
     })
   } else {
     newGamestate.players[token].player_history[title] = {
@@ -28,7 +29,7 @@ export const insomniacInteraction = (gamestate, token, title) => {
 
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_shielded'],
-
+      scene_end: true,
     })
   }
 }

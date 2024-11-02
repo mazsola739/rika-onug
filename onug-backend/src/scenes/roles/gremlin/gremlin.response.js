@@ -30,12 +30,14 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       newGamestate.players[token].player_history[title] = {
         ...newGamestate.players[token].player_history[title],
         swapped_cards: [position1, position2],
+        scene_end: true,
       }
   
       const messageIdentifiers = formatPlayerIdentifier([position1, position2])
   
       const interaction = generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+        scene_end: true,
       })
   
       createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
@@ -67,12 +69,14 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       newGamestate.players[token].player_history[title] = {
         ...newGamestate.players[token].player_history[title],
         swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]],
+        scene_end: true,
       }
   
       const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
   
       const interaction = generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_swapped_marks', ...messageIdentifiers],
+        scene_end: true,
       })
   
       createAndSendSceneMessage(newGamestate, token, title, interaction, narration)

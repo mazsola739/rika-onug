@@ -50,11 +50,13 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
       ...selectableCards,
+      obligatory: true,
     }
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: [interactionMessage],
       selectableCards,
+      obligatory: true,
     })
   }
   

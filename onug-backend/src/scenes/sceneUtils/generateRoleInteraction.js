@@ -38,6 +38,7 @@ export const generateRoleInteraction = (gamestate, token, {
   showCards = [],
   showMarks = [],
   obligatory = false,
+  scene_end = false,
   uniqueInformations = {}
 }) => {
   updatePlayerCard(gamestate, token)
@@ -48,6 +49,7 @@ export const generateRoleInteraction = (gamestate, token, {
     show_cards: showCards !== null ? concatArraysWithUniqueElements(showCards, gamestate.flipped) : gamestate.flipped,
     show_marks: showMarks,
     obligatory,
+    scene_end,
     ...selectableCards,
     ...selectableMarks,
     ...uniqueInformations,

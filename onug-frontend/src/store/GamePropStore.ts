@@ -2,23 +2,8 @@ import { makeAutoObservable } from 'mobx'
 import { InteractionType } from 'types'
 
 class GamePropStore {
-  title: string = ''
-  scene_end: boolean = false
-  interaction: InteractionType = {
-    answer_options: [],
-    artifacted_cards: [],
-    dreamwolf: [],
-    new_role_id: 0,
-    obligatory: false,
-    selectable_card_limit: { player: 0, center: 0 },
-    selectable_cards: [],
-    selectable_mark_limit: { mark: 0 },
-    selectable_marks: [],
-    shielded_cards: [],
-    show_cards: [],
-    show_marks: [],
-    werewolves: []
-  }
+  title: string
+  interaction: InteractionType
 
   constructor() {
     makeAutoObservable(this)
@@ -27,6 +12,7 @@ class GamePropStore {
   get answer_options() { return this.interaction.answer_options }
   get artifacted_cards() { return this.interaction.artifacted_cards }
   get dreamwolf() { return this.interaction.dreamwolf }
+  get scene_end() { return this.interaction.scene_end }
   get obligatory() { return this.interaction.obligatory }
   get selectable_card_limit() { return this.interaction.selectable_card_limit }
   get selectable_cards() { return this.interaction.selectable_cards }
@@ -47,11 +33,11 @@ class GamePropStore {
 
   reset(): void {
     this.title = ''
-    this.scene_end = false
     this.interaction = {
       answer_options: [],
       artifacted_cards: [],
       dreamwolf: [],
+      scene_end: false,
       obligatory: false,
       new_role_id: 0,
       selectable_card_limit: { player: 0, center: 0 },

@@ -35,7 +35,6 @@ export const usePlayerCardSelection = (card: TablePlayerCard) => {
     isSelected: isCardSelected,
     werewolf: isWerewolf,
     dreamwolf: isDreamwolf,
-    position
   }
 
   const markProps = {

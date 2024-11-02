@@ -4,9 +4,7 @@ import { StyledCard } from './Card.styles'
 import { CardProps } from './Card.types'
 
 export const Card: React.FC<CardProps> = observer(
-  ({ image, isSelectable, werewolf, dreamwolf, size, onClick, position }) => {
-
-    console.log(`${position}: `, isSelectable)
+  ({ image, isSelectable, werewolf, dreamwolf, size, onClick }) => {
     return (
       <StyledCard sizeW={size} isSelectable={isSelectable} werewolf={werewolf} dreamwolf={dreamwolf} onClick={onClick}>
           <CardImage image={image} size={size} />

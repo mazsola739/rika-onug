@@ -25,6 +25,7 @@ export const alphawolfResponse = (gamestate, token, selected_card_positions, tit
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+    scene_end: true,
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

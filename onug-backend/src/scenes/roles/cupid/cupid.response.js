@@ -42,12 +42,14 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
       mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]],
+      scene_end: true,
     }
   
     const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
   
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_mark_of_love', ...messageIdentifiers],
+      scene_end: true,
     })
   
     const narration = getNarrationByTitle(title, newGamestate.narration)

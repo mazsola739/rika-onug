@@ -21,10 +21,12 @@ export const apprenticetannerInteraction = (gamestate, token, title) => {
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     tanner,
+    scene_end: true,
   }
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: privateMessage,
     uniqueInformations: { tanner },
+    scene_end: true,
   })
 }

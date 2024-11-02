@@ -61,7 +61,7 @@ export const sceneHandler = async (gamestate) => {
       flagsState.shield = flagsState.shield || scene.shield
       flagsState.artifact = flagsState.artifact || scene.artifact
 
-      logTrace(`_______________________flags: ${flagsState}`)
+      logTrace(`_______________________flags: ${JSON.stringify(flagsState)}`)
 
       if (scene.player_card_shifting || scene.center_card_shifting || scene.mark_shifting || scene.shield || scene.artifact) {
         break 

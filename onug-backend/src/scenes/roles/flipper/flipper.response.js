@@ -23,6 +23,7 @@ export const flipperResponse = (gamestate, token, selected_card_positions, title
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
+    scene_end: true,
   }
 
   if (isTown) {
@@ -35,6 +36,7 @@ export const flipperResponse = (gamestate, token, selected_card_positions, title
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_flipped_card', formatPlayerIdentifier(selected_card_positions)[0]],
     showCards: revealedCard,
+    scene_end: true,
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

@@ -9,6 +9,7 @@ export const beholderInteraction = (gamestate, token, title) => {
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
       seers,
+      obligatory: false,
     }
   
     const messageIdentifiers = formatPlayerIdentifier(seers)
@@ -16,6 +17,7 @@ export const beholderInteraction = (gamestate, token, title) => {
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_seers', ...messageIdentifiers, 'interaction_may_look'],
       uniqueInformations: { seers, answer_options: ['yes', 'no'] },
+      obligatory: false,
     })
   }
   

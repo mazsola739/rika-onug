@@ -80,6 +80,7 @@ export type WsJsonMessage = {
   player?: Player
   players?: Player[]
   room_id?: string
+  scene_end?: boolean
   selected_cards?: number[]
   selected_expansions?: string[]
   stage?: string

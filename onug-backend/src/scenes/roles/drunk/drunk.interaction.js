@@ -8,20 +8,24 @@ export const drunkInteraction = (gamestate, token, title) => {
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
       selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: 1 },
+      obligatory: true,
     }
 
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_must_one_center'],
       selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 0, center: 1 } },
+      obligatory: true,
     })
   } else {
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
       shielded: true,
+      scene_end: true,
     }
 
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_shielded'],
+      scene_end: true,
     })
   }
 }

@@ -21,12 +21,14 @@ export const drunkResponse = (gamestate, token, selected_card_positions, title) 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
+    scene_end: true,
   }
 
   const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+    scene_end: true,
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

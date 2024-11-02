@@ -140,7 +140,6 @@ export const Tokens = styled.div`
 `
 
 //INFOPANEL
-
 export const Placeholder = styled.div`
   color: white;
   min-height: 400px;

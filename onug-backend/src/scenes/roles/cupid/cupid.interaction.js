@@ -9,10 +9,12 @@ export const cupidInteraction = (gamestate, token, title) => {
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
       selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 2 },
+      obligatory: true,
     }
   
     return generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_must_two_any'],
       selectableMarks: { selectable_marks: selectablePlayerNumbers, selectable_mark_limit: { mark: 2 } },
+      obligatory: true,
     })
   }

@@ -1,7 +1,10 @@
 import * as messages_text from 'constant/messages'
 import * as narration_text from 'constant/narrations'
+import { script } from 'data'
 import { makeAutoObservable } from 'mobx'
+import { gamePropStore, riseAndRestStore, selectionStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
+import { formatPosition, formatPositionSimply } from 'utils'
 
 class MessageStore {
   narration: string
@@ -19,6 +22,49 @@ class MessageStore {
   setPrivateMessage(message_keys: MessagesType[]): void {
     const message = message_keys.map((key) => messages_text[key]).join(' ')
     this.privateMessage = message
+  }
+
+  get playerCardLimit() { return gamePropStore.selectable_card_limit.player }
+  get centerCardLimit() { return gamePropStore.selectable_card_limit.center }
+  get isCardSelection() { return gamePropStore.selectable_cards.length > 0 }
+  get isSelectableCards() { return this.allSelectableCards.length > 0 }
+
+  get isIdentification () {
+    return gamePropStore.title === 'MINION'
+  }
+
+  get disabled() {
+    const { selectedCards } = selectionStore
+    const selectedCardCount = selectedCards.length
+    return this.isCardSelection
+      ? this.playerCardLimit > selectedCardCount
+      : this.centerCardLimit > selectedCardCount
+  }
+
+  get narrationImage(): string {
+    const scene = script.find((scene) => scene.scene_title === gamePropStore.title)
+    return scene ? scene.scene_img : ''
+  }
+
+  get allSelectableCards(): Record<string, string>[] {
+    const selectablePlayerCards = riseAndRestStore.tablePlayerCards.filter((card) => card.selectable_card)
+    const selectableCenterCards = riseAndRestStore.tableCenterCards.filter((card) => card.selectable)
+
+    const collectedCards = [...selectablePlayerCards, ...selectableCenterCards].map((card) => ({
+      position: card.position,
+      name: formatPositionSimply(card.position),
+    }))
+
+    return collectedCards
+  }
+  
+  get allSelectedCards(): Record<string, string>[] {
+    const formattedSelectedCards = selectionStore.selectedCards.map((position) => ({
+      position,
+      name: formatPositionSimply(position),
+    }))
+
+    return formattedSelectedCards
   }
 }
 

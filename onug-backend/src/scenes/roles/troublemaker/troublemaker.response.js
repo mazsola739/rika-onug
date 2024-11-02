@@ -21,12 +21,14 @@ export const troublemakerResponse = (gamestate, token, selected_card_positions, 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     swapped_cards: [position1, position2],
+    scene_end: true,
   }
 
   const messageIdentifiers = formatPlayerIdentifier([position1, position2])
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+    scene_end: true,
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

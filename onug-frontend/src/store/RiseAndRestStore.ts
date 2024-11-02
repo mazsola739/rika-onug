@@ -78,19 +78,27 @@ class RiseAndRestStore {
   }
 
   setTableCenterCards(lastJsonMessage: WsJsonMessage): void {
-    this.tableCenterCards = this.getDefaultCenterCards().map(centerCard => {
+    const { hasAlphawolf, hasTemptress } = deckStore
+  
+    const defaultCenterCards = this.getDefaultCenterCards()
+      .filter(centerCard => {
+        if (centerCard.position === 'center_wolf' && !hasAlphawolf) return false
+        if (centerCard.position === 'center_villain' && !hasTemptress) return false
+        return true
+      })
+  
+    this.tableCenterCards = defaultCenterCards.map(centerCard => {
       const positionObject = gamePropStore.show_cards.find(obj => obj[centerCard.position])
       const cardId = positionObject ? positionObject[centerCard.position] : null
       const card = cardId ? deckStore.getCardById(cardId) : null
-
+  
       return {
-        ...centerCard,
+        position: centerCard.position,
         card_name: card ? card.card_name : '',
-        selectable_card: gamePropStore.selectable_cards.includes(centerCard.position),
+        selectable: gamePropStore.selectable_cards.includes(centerCard.position),
       }
     })
   }
-
   
   resetCards(): void {
     const resetCardState = {

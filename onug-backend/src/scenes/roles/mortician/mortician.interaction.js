@@ -16,11 +16,13 @@ export const morticianInteraction = (gamestate, token, title, randomMorticianIns
       return generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_may_look_yourself'],
         selectableCards: { selectable_cards: [currentPlayerNumber], selectable_card_limit: { player: 1, center: 0 } },
+        scene_end: true,
       })
     } else {
       newGamestate.players[token].player_history[title] = {
         ...newGamestate.players[token].player_history[title],
         shielded: true,
+        scene_end: true,
       }
 
       return generateRoleInteraction(newGamestate, token, {
@@ -40,7 +42,7 @@ export const morticianInteraction = (gamestate, token, title, randomMorticianIns
 
     return generateRoleInteraction(newGamestate, token, {
       private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : `interaction_may_${morticianKey.replace('identifier_', '').replace('_text', '')}`],
-      selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 }, }
+      selectableCards: { selectable_cards: selectablePlayerNumbers, selectable_card_limit: { player: limit, center: 0 }, },
     })
   }
 }

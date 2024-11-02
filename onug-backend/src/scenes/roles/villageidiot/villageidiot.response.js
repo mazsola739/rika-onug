@@ -23,10 +23,12 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     direction: selected_answer,
+    scene_end: true,
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_moved', selected_answer === 'left' ? 'direction_left' : 'direction_right'],
+    scene_end: true,
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

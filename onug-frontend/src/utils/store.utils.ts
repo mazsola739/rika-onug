@@ -1,6 +1,6 @@
 import { default_card, default_player, default_table_player_card, default_token, TEAMS } from 'constant'
 import { deckStore } from 'store'
-import { CardJson, Player, TablePlayerCard, TeamsType, TokenJson } from 'types'
+import { CardJson, CardPosition, Player, TablePlayerCard, TeamsType, TokenJson } from 'types'
 
 export const createDefaultCard = (): CardJson => default_card
 export const createDefaultToken = (): TokenJson => default_token
@@ -20,6 +20,10 @@ export const determineTotalPlayers = (totalCharacters: number): number => {
 }
 
 export const filterByExpansions = <T extends { expansion: string }>(list: T[], expansions: string[]): T[] => list.filter((item) => expansions.includes(item.expansion))
+
+export const formatPosition = (position: string) => position.replace(/player_/g, ' ').replace(/center_/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+
+export const formatPositionSimply = (position: string) => position.replace(/_/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
 
 export const getFilteredCardsForTeam = (team: string, deck: CardJson[]): CardJson[] => {
   const validTeams = team === 'village' ? ['hero', 'village'] : [team]

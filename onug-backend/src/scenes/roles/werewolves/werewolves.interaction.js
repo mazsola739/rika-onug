@@ -25,6 +25,7 @@ export const werewolvesInteraction = (gamestate, token, title) => {
       private_message: [loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves'],
       selectableCards: { selectable_cards, selectable_card_limit},
       obligatory,
-      uniqueInformations: { werewolves, dreamwolf, scene_end},
+      scene_end,
+      uniqueInformations: { werewolves, dreamwolf,  },
     })
   }

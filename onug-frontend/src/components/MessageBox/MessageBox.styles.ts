@@ -17,9 +17,40 @@ export const Narration = styled.div`
   align-items: center;
 `
 
+export const MessageText = styled.p`
+  color: yellow;
+`
+
 export const Message = styled.div`
   display: flex;
   flex-direction: column;
   color: white;
   padding: 5px;
+`
+
+export const StyledMessageBoxCards = styled.div`
+  display: flex;
+  gap: 5px;
+      flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+`
+
+export const MessageBoxCard = styled.div`
+display: flex;
+flex-direction: column;
+`
+
+export const CardPosition = styled.p`
+font-size: 10px;
+padding: 0;
+margin: 0;
+`
+
+export const StyledSelectable = styled.div`
+display: flex;
+flex-direction: column;
+`
+
+export const MessageBoxTitle = styled.p`
 `

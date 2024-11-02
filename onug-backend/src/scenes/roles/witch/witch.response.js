@@ -30,12 +30,14 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
       selectable_cards: selectablePlayersWithNoShield, selectable_card_limit: { player: 1, center: 0 },
       viewed_cards: [selected_card_positions[0]],
       selected_center_card: selected_card_positions[0],
+      obligatory: true,
     }
 
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
       selectableCards: { selectable_cards: CENTER_CARD_POSITIONS, selectable_card_limit: { player: 1, center: 0 } },
       showCards,
+      obligatory: true,
     })
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
@@ -62,12 +64,14 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
       swapped_cards: [newGamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0]],
+      scene_end: true,
     }
 
     const messageIdentifiers = formatPlayerIdentifier([`${newGamestate.players[token].player_history[title].selected_center_card}`, selected_card_positions[0]])
 
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+      scene_end: true,
     })
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)

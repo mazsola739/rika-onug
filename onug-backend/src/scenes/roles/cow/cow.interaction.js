@@ -10,10 +10,12 @@ export const cowInteraction = (gamestate, token, title) => {
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     alien_neighbor: neighborIsAlien ? neighbors : [],
+    scene_end: true,
   }
 
   return generateRoleInteraction(newGamestate, token, {
     private_message:  [neighborIsAlien ? 'interaction_got_tapped_by_alien' : 'interaction_no_tap'],
-    uniqueInformations: { alien_neighbor: neighborIsAlien ? neighbors : [], }
+    uniqueInformations: { alien_neighbor: neighborIsAlien ? neighbors : [], },
+    scene_end: true,
   })
 }

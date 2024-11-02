@@ -29,6 +29,7 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
       ...newGamestate.players[token].player_history[title],
       swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
       viewed_cards: [currentPlayerNumber],
+      scene_end: true,
     }
   
     const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_card_positions[0]])
@@ -36,6 +37,7 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
       showCards,
+      scene_end: true,
     })
   
     const narration = getNarrationByTitle(title, newGamestate.narration)

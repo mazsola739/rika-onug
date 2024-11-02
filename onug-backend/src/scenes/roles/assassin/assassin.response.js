@@ -34,10 +34,12 @@ export const assassinResponse = (gamestate, token, selected_mark_positions, titl
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     mark_of_assassin: [selected_mark_positions[0]],
+    scene_end: true,
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
+    scene_end: true,
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

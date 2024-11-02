@@ -28,10 +28,12 @@ export const thecountResponse = (gamestate, token, selected_mark_positions, titl
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     mark_of_fear: [selected_mark_positions[0]],
+    scene_end: true,
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_mark_of_fear', formatPlayerIdentifier(selected_mark_positions)[0]],
+    scene_end: true,
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

@@ -95,6 +95,20 @@ export const useClickHandler = (room_id: string, token: string) => {
     [sendJsonMessage]
   )
 
+  const handleSkip = useCallback(
+    (title: string) => {
+      sendJsonMessage?.({
+        type: SCENE,
+        title,
+        room_id,
+        token,
+        skip: true,
+      })
+      riseAndRestStore.closeYourEyes()
+    },
+    [sendJsonMessage]
+  )
+
   const handleCardInteraction = useCallback(
     (selected_cards: string[], title: string) => {
       sendJsonMessage?.({
@@ -172,6 +186,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     handlePauseGame,
     handleStopGame,
     handleFinish,
+    handleSkip,
     handleCardInteraction,
     handleMarkInteraction,
     handleAnswerInteraction,
