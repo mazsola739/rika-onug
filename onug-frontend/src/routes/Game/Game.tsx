@@ -5,12 +5,13 @@ import { GameFooter } from './GameFooter'
 import { GameHeader } from './GameHeader'
 import { GameInfoPanel } from './GameInfoPanel'
 import { useGame } from './useGame'
+import { gamePropStore } from 'store'
 
 export const Game: React.FC = observer(() => {
-  const { tablePlayerCards, tablePlayerCard, left, middle, right, nightMode, setTransitionCompleted } = useGame()
+  const { tablePlayerCards, tablePlayerCard, left, middle, right, setTransitionCompleted } = useGame()
 
   return (
-    <StyledGame animate={nightMode} onAnimationEnd={() => setTransitionCompleted(true)}>
+    <StyledGame nightfall={gamePropStore.nightfall} sunrise={gamePropStore.sunrise} onAnimationEnd={()=>setTransitionCompleted(true)}>
       <GameHeader />
       {tablePlayerCards && <AroundTableSide cards={left} />}
       {tablePlayerCards && <AroundTableTop cards={middle} />}

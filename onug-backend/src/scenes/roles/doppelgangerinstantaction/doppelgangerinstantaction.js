@@ -24,6 +24,7 @@ export const doppelgangerinstantaction = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 1) {
+      newGamestate.players[token].action_finished = false
       interaction = doppelgangerinstantactionInteraction(newGamestate, token, title)
     }
 

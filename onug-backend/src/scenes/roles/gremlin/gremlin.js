@@ -14,10 +14,12 @@ export const gremlin = (gamestate, title, prefix) => {
 
     if (prefix === 'gremlin') {
       if (card.player_original_id === 33 || (card.player_role_id === 33 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+        newGamestate.players[token].action_finished = false
         interaction = gremlinInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_gremlin') {
       if (card.player_role_id === 33 && card.player_original_id === 1) {
+        newGamestate.players[token].action_finished = false
         interaction = gremlinInteraction(newGamestate, token, title)
       }
     }

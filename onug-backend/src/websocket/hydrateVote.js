@@ -14,6 +14,15 @@ export const hydrateVote = async (ws, message) => {
   return ws.send(
     JSON.stringify({
       type: HYDRATE_VOTE,
+      player: {
+        player_name: gamestate.players[token].name,
+        player_number: gamestate.players[token].player_number,
+      },
+      players: Object.values(gamestate.players).map((player) => ({
+        player_number: player.player_number,
+        player_name: player.name,
+      })),
+      card: gamestate.players[token].card,
       player_history
     })
   )

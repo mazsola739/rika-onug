@@ -23,10 +23,12 @@ export const exposer = (gamestate, title, prefix) => {
 
     if (prefix === 'exposer') {
       if (card.player_original_id === 46 || (card.player_role_id === 46 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+        newGamestate.players[token].action_finished = false
         interaction = exposerInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_exposer') {
       if (card.player_role_id === 46 && card.player_original_id === 1) {
+        newGamestate.players[token].action_finished = false
         interaction = exposerInteraction(newGamestate, token, title)
       }
     }

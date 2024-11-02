@@ -1,4 +1,4 @@
-import { DEAL, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, PAUSE_GAME, READY, RESET, SCENE, START_GAME, STOP_GAME, UPDATE_ROOM } from 'constant'
+import { DEAL, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, PAUSE_GAME, READY, READY_VOTE, RESET, SCENE, START_GAME, STOP_GAME, UPDATE_ROOM } from 'constant'
 import { useCallback } from 'react'
 import { deckStore, gameStatusStore, riseAndRestStore, roomStore, wsStore } from 'store'
 
@@ -175,6 +175,17 @@ export const useClickHandler = (room_id: string, token: string) => {
     [roomStore, sendJsonMessage]
   )
 
+  const handleVoteNow = useCallback(
+    () => {
+      sendJsonMessage?.({
+        type: READY_VOTE,
+        room_id,
+        token,
+      })
+    },
+    [sendJsonMessage]
+  )
+
   return {
     handleJoinRoom,
     handleLeaveRoom,
@@ -192,5 +203,6 @@ export const useClickHandler = (room_id: string, token: string) => {
     handleAnswerInteraction,
     handleDeselect,
     handleCardClick,
+    handleVoteNow,
   }
 }

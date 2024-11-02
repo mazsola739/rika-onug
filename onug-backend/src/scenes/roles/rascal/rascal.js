@@ -43,8 +43,10 @@ export const rascal = (gamestate, title, prefix) => {
     if ((prefix === 'rascal' && (card.player_original_id === 52 || (card.player_role_id === 52 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id)))) ||
       (prefix === 'doppelganger_rascal' && card.player_role_id === 52 && card.player_original_id === 1)) {
       if (randomRascalInstruction === 'rascal_idiot_text') {
+        newGamestate.players[token].action_finished = false
         interaction = villageidiotInteraction(newGamestate, token, title)
       } else {
+        newGamestate.players[token].action_finished = false
         interaction = rascalInteraction(newGamestate, token, title)
       }
     }

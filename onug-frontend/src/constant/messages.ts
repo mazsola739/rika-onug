@@ -1,4 +1,5 @@
 export * from './narrations/identifier'
+export * from './role'
 
 //TODO better messages
 //messages

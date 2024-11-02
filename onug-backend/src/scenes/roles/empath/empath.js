@@ -37,6 +37,7 @@ export const empath = (gamestate, title, prefix) => {
       const isNotDoppelgangerEmpath = prefix === 'doppelganger_empath' && (card.player_role_id !== 20 && card.player_original_id === 1);
     
       if (isNotEmpath || isNotDoppelgangerEmpath) {
+        newGamestate.players[token].action_finished = false
         interaction = empathInteraction(newGamestate, token, title);
       }
     }

@@ -13,6 +13,7 @@ export const thing = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 85 || (card.player_role_id === 85 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = thingInteraction(newGamestate, token, title)
     }
 

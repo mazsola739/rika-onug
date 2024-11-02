@@ -1,4 +1,4 @@
-import { ARRIVE_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, STAGES } from 'constant'
+import { ARRIVE_GAME, END_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { gamePropStore, gameStatusStore, messageStore, riseAndRestStore, wsStore } from 'store'
@@ -7,7 +7,6 @@ import { splitCardsToTable } from 'utils'
 
 export const useGame = () => {
   const [firstTime, setFirstTime] = useState(true)
-  const [nightMode, setNightMode] = useState(false);
   const [transitionCompleted, setTransitionCompleted] = useState(false);
   const navigate = useNavigate()
 
@@ -29,8 +28,13 @@ export const useGame = () => {
   }, [sendJsonMessage, firstTime, room_id, token])
 
   useEffect(() => {
-    if (transitionCompleted) {
-      sendJsonMessage?.({ type: SCENE, room_id, token, player_ready: true })
+    if (transitionCompleted && gamePropStore.nightfall) {
+      sendJsonMessage?.({ type: SCENE, room_id, token, night_ready: true })
+      setTransitionCompleted(false)
+    }
+    if (transitionCompleted && gamePropStore.sunrise) {
+      sendJsonMessage?.({ type: SCENE, room_id, token, day_ready: true })
+      setTransitionCompleted(false)
     }
   }, [sendJsonMessage, transitionCompleted])
 
@@ -43,7 +47,7 @@ export const useGame = () => {
   
     if (lastJsonMessage?.type === HYDRATE_GAME) {
       riseAndRestStore.closeYourEyes()
-      setNightMode(true)
+      gamePropStore.setNightfall(lastJsonMessage?.night_mode)
     }
   
     if (lastJsonMessage?.type === REDIRECT) {
@@ -52,6 +56,11 @@ export const useGame = () => {
   
     if (lastJsonMessage?.type === PAUSE_GAME) {
       gameStatusStore.togglePause()
+    }
+
+    if (lastJsonMessage?.type === END_GAME) {
+      riseAndRestStore.closeYourEyes()
+      gamePropStore.setSunrise(lastJsonMessage?.day_mode)
     }
   }, [lastJsonMessage, navigate])
   
@@ -64,5 +73,5 @@ export const useGame = () => {
       : null
   const { left = [], middle = [], right = [] } = sides || {}
 
-  return { tablePlayerCards, tablePlayerCard, left, middle, right, nightMode, setTransitionCompleted }
+  return { tablePlayerCards, tablePlayerCard, left, middle, right, setTransitionCompleted }
 }

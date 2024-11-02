@@ -26,10 +26,12 @@ export const bodysnatcher = (gamestate, title, prefix) => {
 
     if (prefix === 'bodysnatcher') {
       if (card.player_original_id === 74 || (card.player_role_id === 74 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+        newGamestate.players[token].action_finished = false
         interaction = bodysnatcherInteraction(newGamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey)
       }
     } else if (prefix === 'doppelganger_bodysnatcher') {
       if (card.player_role_id === 74 && card.player_original_id === 1) {
+        newGamestate.players[token].action_finished = false
         interaction = bodysnatcherInteraction(newGamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey)
       }
     }

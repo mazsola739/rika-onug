@@ -13,6 +13,7 @@ export const rapscallion = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 65 || (card.player_role_id === 65 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = apprenticeseerInteraction(newGamestate, token, title)
     }
 

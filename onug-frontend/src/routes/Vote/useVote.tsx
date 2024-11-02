@@ -1,10 +1,12 @@
-import { ARRIVE_VOTE, STAGES } from 'constant'
+import { ARRIVE_VOTE, REDIRECT, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
-import { wsStore } from 'store'
+import { useNavigate } from 'react-router-dom'
+import { riseAndRestStore, wsStore } from 'store'
+import { splitCardsToTable } from 'utils'
 
 export const useVote = () => {
   const [firstTime, setFirstTime] = useState(true)
-  const [history, setHistory] = useState('')
+  const navigate = useNavigate()
 
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
 
@@ -23,14 +25,32 @@ export const useVote = () => {
     }
   }, [sendJsonMessage, firstTime])
 
+
   useEffect(() => {
+    if (lastJsonMessage?.type === REDIRECT) {
+      navigate(lastJsonMessage.path)
+    }
+
+  }, [lastJsonMessage, navigate])
+  
+  
+  const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
+
+  const sides =
+    tablePlayerCards && tablePlayerCard
+      ? splitCardsToTable(tablePlayerCards, tablePlayerCard)
+      : null
+  const { left = [], middle = [], right = [] } = sides || {}
+
+
+/*   useEffect(() => {
     if (!lastJsonMessage?.player.player_history) return
     setHistory(
       Object.keys(lastJsonMessage.player.player_history).length === 0
         ? 'You have slept through the night'
-        : JSON.stringify(lastJsonMessage.player.player_history, null, 2)
+        : JSON.stringify(lastJsonMessage.player.player_history)
     )
-  }, [lastJsonMessage])
+  }, [lastJsonMessage]) */
 
-  return { history }
+  return { tablePlayerCards, tablePlayerCard, left, middle, right }
 }

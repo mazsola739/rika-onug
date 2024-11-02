@@ -13,6 +13,7 @@ export const paranormalinvestigator = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 23 || (card.player_role_id === 23 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = paranormalinvestigatorInteraction(newGamestate, token, title)
     }
 

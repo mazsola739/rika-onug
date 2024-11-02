@@ -34,6 +34,7 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 78 || (card.player_role_id === 78 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = familymanInteraction(newGamestate, token, title)
     }
 

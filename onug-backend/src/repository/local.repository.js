@@ -15,7 +15,7 @@ const DELETE_STATUS = { status: 'gamestate removed' }
 export const upsertRoomState = async (state) => {
   logTrace('upsertRoomState')
   const filePath = ROOM_GAMESTATE_FILE(state.room_id)
-  const roomState = JSON.stringify(state, null, 4)
+  const roomState = JSON.stringify(state, null, 2)
 
   try {
     writeFileSync(filePath, roomState, WRITE_OPTIONS)

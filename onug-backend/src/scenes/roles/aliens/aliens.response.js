@@ -23,14 +23,17 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
     if (newGamestate.players[token].card.player_original_id === selectedPositionCard.id) {
       newGamestate.players[token].card.player_card_id = 0
     }
-  
+
+    const private_message = ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]]
+
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
+      private_message,
       viewed_cards: showCards,
     }
-  
+
     const interaction = generateRoleInteraction(newGamestate, token, {
-      private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
+      private_message,
       showCards,
       uniqueInformations: { aliens },
     })
@@ -56,14 +59,17 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
     )
   })
 
+  const private_message = ['interaction_voted', formatPlayerIdentifier(selected_card_positions)[0]]
+
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
+    private_message,
     aliens,
     alien_vote: [selected_card_positions[0]],
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_voted', formatPlayerIdentifier(selected_card_positions)[0]],
+    private_message,
     uniqueInformations: { aliens },
   })
 

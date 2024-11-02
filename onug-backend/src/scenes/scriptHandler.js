@@ -6,7 +6,7 @@ export const scriptHandler = (gamestate) => {
   logTrace(`scriptHandler in room [${gamestate.room_id}]`)
   const newGamestate = { ...gamestate }
   const selected_cards = newGamestate.selected_cards
-  const total_players = newGamestate.total_players
+/*   const total_players = newGamestate.total_players */ //TODO epic battle ect...
   const role_scenes = []
 
   const addScript = (scene_title) => {
@@ -19,7 +19,7 @@ export const scriptHandler = (gamestate) => {
   }
 
   const roleOrder = [
-    { condition: () => conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players), scripts: ['EPIC_BATTLE'] },
+    /* { condition: () => conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players), scripts: ['EPIC_BATTLE'] }, */
     { condition: () => conditions.hasOracle(selected_cards), scripts: ['ORACLE_QUESTION', 'ORACLE_ANSWER'] },
     { condition: () => conditions.hasCopycat(selected_cards), scripts: ['COPYCAT'] },
     { condition: () => conditions.hasMirrorMan(selected_cards), scripts: ['MIRROR_MAN'] },
@@ -104,7 +104,7 @@ export const scriptHandler = (gamestate) => {
     }
   })
 
-  addScript('JOKE')
+  /* addScript('JOKE') */ //TODO into narration
 
   newGamestate.scripts = [...role_scenes]
 

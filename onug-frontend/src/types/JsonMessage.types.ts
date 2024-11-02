@@ -33,7 +33,7 @@ export type TablePlayerCard = {
 export type TableCenterCard = {
   card_name?: string  
   position?: CardPosition
-  selectable?: boolean
+  selectable_card?: boolean
 }
 
 export type ActualSceneType = {
@@ -72,10 +72,12 @@ export type IdentifierType = keyof typeof identifier
 
 export type WsJsonMessage = {
   actual_scene?: ActualSceneType
+  day_mode?: boolean
   errors?: string[]
   interaction?: InteractionType
   message?: string
   narration?: NarrationType[]
+  night_mode?: boolean
   path?: string
   player?: Player
   players?: Player[]

@@ -30,10 +30,12 @@ export const psychic = (gamestate, title, prefix) => {
 
     if (prefix === 'psychic') {
       if (card.player_original_id === 51 || (card.player_role_id === 51 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+        newGamestate.players[token].action_finished = false
         interaction = psychicInteraction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
       }
     } else if (prefix === 'doppelganger_psychic') {
       if (card.player_role_id === 51 && card.player_original_id === 1) {
+        newGamestate.players[token].action_finished = false
         interaction = psychicInteraction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
       }
     }

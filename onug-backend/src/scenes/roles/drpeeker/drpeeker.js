@@ -13,6 +13,7 @@ export const drpeeker = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 57 || (card.player_role_id === 57 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = mysticwolfInteraction(newGamestate, token, title)
     }
 

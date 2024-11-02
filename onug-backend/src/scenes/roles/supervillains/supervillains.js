@@ -13,6 +13,7 @@ export const supervillains = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (IDS.ALL_SUPER_VILLAIN_IDS.some((id) => card.player_role_id === id && [id, ...IDS.ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = supervillainsInteraction(newGamestate, token, title)
     }
 

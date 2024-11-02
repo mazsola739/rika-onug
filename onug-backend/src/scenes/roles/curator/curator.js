@@ -14,10 +14,12 @@ export const curator = (gamestate, title, prefix) => {
 
     if (prefix === 'curator') {
       if (card.player_original_id === 20 || (card.player_role_id === 20 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+        newGamestate.players[token].action_finished = false
         interaction = curatorInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_curator') {
       if (card.player_role_id === 20 && card.player_original_id === 1) {
+        newGamestate.players[token].action_finished = false
         interaction = curatorInteraction(newGamestate, token, title)
       }
     }

@@ -55,6 +55,7 @@ export const oracleQuestion = (gamestate, title) => {
   
       if (card.player_original_id === 50) {
         newGamestate.players[token].player_history[title].oracle = narration[1]
+        newGamestate.players[token].action_finished = false
         interaction = oracleQuestionRaising(newGamestate, token, title)
       } else {
         console.log('do nothing')

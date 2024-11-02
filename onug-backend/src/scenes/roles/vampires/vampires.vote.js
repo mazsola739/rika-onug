@@ -13,6 +13,7 @@ export const vampiresVote = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (IDS.ALL_VAMPIRE_IDS.some((id) => card.player_role_id === id && [id, ...IDS.ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = vampiresVoteResult(newGamestate, token, title)
     }
 

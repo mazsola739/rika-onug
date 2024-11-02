@@ -91,6 +91,7 @@ export const aliensInteraction = (gamestate, token, title) => {
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     ...selectableCards,
+    private_message: privateMessage,
     aliens,
   }
 

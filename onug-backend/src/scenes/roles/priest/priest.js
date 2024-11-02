@@ -14,10 +14,12 @@ export const priest = (gamestate, title, prefix) => {
 
     if (prefix === 'priest') {
       if (card.player_original_id === 37 || (card.player_role_id === 37 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+        newGamestate.players[token].action_finished = false
         interaction = priestInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_priest') {
       if (card.player_role_id === 37 && card.player_original_id === 1) {
+        newGamestate.players[token].action_finished = false
         interaction = priestInteraction(newGamestate, token, title)
       }
     }

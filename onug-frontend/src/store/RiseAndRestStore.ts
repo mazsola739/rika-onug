@@ -51,10 +51,11 @@ class RiseAndRestStore {
     const defaultPlayerCards = this.getDefaultPlayerCards()
 
     this.tablePlayerCards = defaultPlayerCards.map(defaultCard => {
+      const positionObject = gamePropStore.show_cards.find(obj => obj[defaultCard.position])
+      const cardId = positionObject ? positionObject[defaultCard.position] : null
+      const card = cardId ? deckStore.getCardById(cardId) : null
       const playerCard = players.find(player => defaultCard.position === player.player_number)
       if (!playerCard) return defaultCard
-
-      const card = deckStore.getCardById(playerCard.player_card_id)
       
       return {
         ...defaultCard,
@@ -95,7 +96,7 @@ class RiseAndRestStore {
       return {
         position: centerCard.position,
         card_name: card ? card.card_name : '',
-        selectable: gamePropStore.selectable_cards.includes(centerCard.position),
+        selectable_card: gamePropStore.selectable_cards.includes(centerCard.position),
       }
     })
   }

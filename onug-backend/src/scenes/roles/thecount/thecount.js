@@ -14,10 +14,12 @@ export const thecount = (gamestate, title, prefix) => {
 
     if (prefix === 'thecount') {
       if (card.player_original_id === 39 || (card.player_role_id === 39 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+        newGamestate.players[token].action_finished = false
         interaction = thecountInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_thecount') {
       if (card.player_role_id === 39 && card.player_original_id === 1) {
+        newGamestate.players[token].action_finished = false
         interaction = thecountInteraction(newGamestate, token, title)
       }
     }

@@ -18,6 +18,7 @@ export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 62 || (card.player_role_id === 62 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = internInteraction(newGamestate, token, title)
     }
 

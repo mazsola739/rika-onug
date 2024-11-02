@@ -12,6 +12,7 @@ export const lovers = (gamestate, title) => {
     const player = newGamestate.players[token]
 
     if (player.player_mark === 'mark_of_love') {
+      newGamestate.players[token].action_finished = false
       interaction = loversInteraction(newGamestate, token, title)
     }
 

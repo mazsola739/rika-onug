@@ -18,6 +18,7 @@ export const groobzerb = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (IDS.GROOB_AND_ZERB_IDS.some((id) => card.player_role_id === id && [id, ...IDS.ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = groobzerbInteraction(newGamestate, token, title)
     }
 

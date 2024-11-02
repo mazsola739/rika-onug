@@ -34,12 +34,27 @@ class MessageStore {
   }
 
   get disabled() {
-    const { selectedCards } = selectionStore
-    const selectedCardCount = selectedCards.length
-    return this.isCardSelection
-      ? this.playerCardLimit > selectedCardCount
-      : this.centerCardLimit > selectedCardCount
+    const { selectedCards } = selectionStore;
+    const selectedPlayerCards = selectedCards.filter(card => card.includes('player_')).length
+    const selectedCenterCards = selectedCards.filter(card => card.includes('center_')).length
+  
+    const playerCardLimit = this.playerCardLimit
+    const centerCardLimit = this.centerCardLimit
+  
+    const isSelectingPlayerCards = this.isCardSelection
+    const isSelectingCenterCards = !this.isCardSelection
+  
+    if (isSelectingPlayerCards) {
+      return selectedPlayerCards < playerCardLimit
+    }
+  
+    if (isSelectingCenterCards) {
+      return selectedCenterCards < centerCardLimit
+    }
+  
+    return true
   }
+  
 
   get narrationImage(): string {
     const scene = script.find((scene) => scene.scene_title === gamePropStore.title)
@@ -48,7 +63,7 @@ class MessageStore {
 
   get allSelectableCards(): Record<string, string>[] {
     const selectablePlayerCards = riseAndRestStore.tablePlayerCards.filter((card) => card.selectable_card)
-    const selectableCenterCards = riseAndRestStore.tableCenterCards.filter((card) => card.selectable)
+    const selectableCenterCards = riseAndRestStore.tableCenterCards.filter((card) => card.selectable_card)
 
     const collectedCards = [...selectablePlayerCards, ...selectableCenterCards].map((card) => ({
       position: card.position,

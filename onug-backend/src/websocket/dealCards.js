@@ -87,6 +87,7 @@ export const dealCards = async (ws, message) => {
       player_number: `player_${index + 1}`,
       card: createPlayerCard(playerCards[index], selectedCards),
       card_or_mark_action: false,
+      action_finished: true,
       player_history: {},
     }
     if (hasShield) { newGamestate.players[token].shield = false }

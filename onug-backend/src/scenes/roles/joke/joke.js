@@ -9,7 +9,8 @@ export const joke = (gamestate, title) => {
 
   tokens.forEach((token) => {
     let interaction = {}
-
+    
+    newGamestate.players[token].action_finished = false
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 

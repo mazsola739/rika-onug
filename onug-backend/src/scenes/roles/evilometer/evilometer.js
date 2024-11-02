@@ -19,6 +19,7 @@ export const evilometer = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 58 || (card.player_role_id === 58 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = evilometerInteraction(newGamestate, token, title)
     }
 

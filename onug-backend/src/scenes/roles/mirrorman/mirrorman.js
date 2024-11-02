@@ -12,6 +12,7 @@ export const mirrorman = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 64) {
+      newGamestate.players[token].action_finished = false
       interaction = copycatInteraction(newGamestate, token, title)
     }
 

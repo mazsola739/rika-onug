@@ -23,6 +23,7 @@ export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppel
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 73 || (card.player_role_id === 73 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = beholderInteraction(newGamestate, token, title)
     }
 

@@ -1,5 +1,8 @@
+import { END_GAME } from '../constants'
 import { logTrace } from '../log'
 import { upsertRoomState } from '../repository'
+import { allPlayersStateCheck } from '../utils'
+import { broadcast } from '../websocket/connections'
 import { actionHandler } from './actionHandler'
 
 export const sceneHandler = async (gamestate) => {
@@ -25,24 +28,19 @@ export const sceneHandler = async (gamestate) => {
       view_center_card,
     } = scene
 
-    const playerShiftConflict = player_card_shifting && flagsState.player_card_shifting
-    const centerShiftConflict = center_card_shifting && flagsState.center_card_shifting
-    const markShiftConflict = mark_shifting && flagsState.mark_shifting
-    const shieldConflict = shield && flagsState.shield
-    const artifactConflict = artifact && flagsState.artifact
+    const conflicts = [
+      player_card_shifting && flagsState.player_card_shifting,
+      center_card_shifting && flagsState.center_card_shifting,
+      mark_shifting && flagsState.mark_shifting,
+      shield && flagsState.shield,
+      artifact && flagsState.artifact,
+    ]
 
-    if (playerShiftConflict || centerShiftConflict || markShiftConflict || shieldConflict || artifactConflict) {
+    if (conflicts.some(Boolean)) {
       return false
     }
 
-    if (view_player_card && !flagsState.player_card_shifting) {
-      return true
-    }
-    if (view_center_card && !flagsState.center_card_shifting) {
-      return true
-    }
-
-    return true 
+    return (view_player_card && !flagsState.player_card_shifting) || (view_center_card && !flagsState.center_card_shifting) || true
   }
 
   for (const scene of newGamestate.scripts) {
@@ -55,15 +53,13 @@ export const sceneHandler = async (gamestate) => {
       })
       logTrace(`Added to actual_scenes: ${scene.scene_title}`)
 
-      flagsState.player_card_shifting = flagsState.player_card_shifting || scene.player_card_shifting
-      flagsState.center_card_shifting = flagsState.center_card_shifting || scene.center_card_shifting
-      flagsState.mark_shifting = flagsState.mark_shifting || scene.mark_shifting
-      flagsState.shield = flagsState.shield || scene.shield
-      flagsState.artifact = flagsState.artifact || scene.artifact
+      flagsState.player_card_shifting ||= scene.player_card_shifting
+      flagsState.center_card_shifting ||= scene.center_card_shifting
+      flagsState.mark_shifting ||= scene.mark_shifting
+      flagsState.shield ||= scene.shield
+      flagsState.artifact ||= scene.artifact
 
-      logTrace(`_______________________flags: ${JSON.stringify(flagsState)}`)
-
-      if (scene.player_card_shifting || scene.center_card_shifting || scene.mark_shifting || scene.shield || scene.artifact) {
+      if (Object.values(flagsState).some(Boolean)) {
         break 
       }
     }
@@ -82,6 +78,21 @@ export const sceneHandler = async (gamestate) => {
   for (const actualScene of newGamestate.actual_scenes) {
     logTrace(`Processing action for scene: ${actualScene.scene_title}`)
     newGamestate = await actionHandler(newGamestate, actualScene.scene_title)
+  }
+
+  const allActionsComplete = newGamestate.scripts.length === 0
+  const noPendingPlayerActions = allPlayersStateCheck(newGamestate.players, 'action_finished')
+  const gameCanEnd = allActionsComplete && noPendingPlayerActions
+
+  if (gameCanEnd) {
+    logTrace(`All scripts processed. Broadcasting END_GAME message.`)
+    broadcast(newGamestate.room_id, {
+      type: END_GAME,
+      success: true,
+      day_mode: true,
+      night_mode: false,
+      message: 'Successfully finished the game',
+    })
   }
 
   await upsertRoomState(newGamestate)

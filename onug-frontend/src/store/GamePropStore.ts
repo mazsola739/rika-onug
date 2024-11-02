@@ -3,6 +3,8 @@ import { InteractionType } from 'types'
 
 class GamePropStore {
   title: string
+  nightfall: boolean
+  sunrise: boolean
   interaction: InteractionType
 
   constructor() {
@@ -29,6 +31,16 @@ class GamePropStore {
 
   setTitle(title: string): void {
     this.title = title
+  }
+
+  setNightfall(nightfall: boolean): void {
+    this.nightfall = nightfall
+    this.sunrise = !nightfall
+  }
+
+  setSunrise(sunrise: boolean): void {
+    this.sunrise = sunrise
+    this.nightfall = !sunrise
   }
 
   reset(): void {

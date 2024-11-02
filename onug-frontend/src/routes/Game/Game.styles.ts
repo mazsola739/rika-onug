@@ -2,6 +2,7 @@ import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import { GameProps } from './Game.types'
 
+//NIGHTMODE
 const fadeOutSun = keyframes`
   from { opacity: 1; }
   to { opacity: 0; }
@@ -17,25 +18,42 @@ const darkenBackground = keyframes`
   to { background-color: rgba(0, 0, 0, 0.65); }
 `
 
+//DAYMODE
+const fadeInSun = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`
+
+const fadeOutMoon = keyframes`
+  from { opacity: 1; }
+  to { opacity: 0; }
+`
+
+const lightenBackground = keyframes`
+  from { background-color: rgba(0, 0, 0, 0.65); }
+  to { background-color: transparent; }
+`
+
+
 //GAME
 export const StyledGame = styled.div<GameProps>`
-  animation: ${({ animate }) => (animate ? darkenBackground : 'none')} 3s
+  animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? darkenBackground : lightenBackground)} 3s
     forwards;
 
   > header {
     > div {
       > img:first-of-type {
-        animation: ${({ animate }) => (animate ? fadeOutSun : 'none')} 3s
+        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeOutSun : fadeInSun)} 3s
           forwards;
       }
 
       > img:nth-of-type(2) {
-        animation: ${({ animate }) => (animate ? fadeInMoon : 'none')} 3s
+        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 3s
           forwards;
       }
 
       > span {
-        animation: ${({ animate }) => (animate ? fadeInMoon : 'none')} 3s
+        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 3s
           forwards;
       }
     }
@@ -65,7 +83,7 @@ export const StyledGame = styled.div<GameProps>`
     grid-area: 3 / 2 / 4 / 3;
   }
   footer {
-    grid-area: 4 / 1 / 5 / 4;
+    grid-area: 4 / 1 / 4 / 4;
   }
 `
 

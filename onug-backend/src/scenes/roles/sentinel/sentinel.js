@@ -13,6 +13,7 @@ export const sentinel = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 25 || (card.player_role_id === 25 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = sentinelInteraction(newGamestate, token, title)
     }
 

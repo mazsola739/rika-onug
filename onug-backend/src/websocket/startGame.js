@@ -25,9 +25,8 @@ export const startGame = async (ws, message) => {
     game_started: true,
     game_stopped: false,
     game_finished: false,
-    script_locked: true,
+    script_locked: false,
     narration: [],
-    scene: [],
   }
 
   const { players } = newGamestate
@@ -45,17 +44,16 @@ export const startGame = async (ws, message) => {
   newGamestate = startScene(newGamestate)
 
   try {
-    logTrace(
-      `Game started successfully in room [${room_id}] by player [${token}]`
-    )
+    logTrace(`Game started successfully in room [${room_id}] by player [${token}]`)
 
+    Object.keys(players).forEach(playerToken => {
+      players[playerToken].ready = false
+    })
     await upsertRoomState(newGamestate)
 
     return broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` })
   } catch (error) {
-    logError(
-      `Error saving initial game state for room [${room_id}]: ${error.message}`
-    )
+    logError(`Error saving initial game state for room [${room_id}]: ${error.message}`)
 
     ws.send(
       JSON.stringify({

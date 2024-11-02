@@ -14,10 +14,12 @@ export const empathVote = (gamestate, title, prefix) => {
 
     if (prefix === 'empath') {
       if (card.player_original_id === 77 || (card.player_role_id === 77 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+        newGamestate.players[token].action_finished = false
         interaction = empathVoteResult(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_empath') {
       if (card.player_role_id === 77 && card.player_original_id === 1) {
+        newGamestate.players[token].action_finished = false
         interaction = empathVoteResult(newGamestate, token, title)
       }
     }

@@ -18,6 +18,7 @@ export const insomniac = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 4 || (card.player_role_id === 4 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = insomniacInteraction(newGamestate, token, title)
     }
 

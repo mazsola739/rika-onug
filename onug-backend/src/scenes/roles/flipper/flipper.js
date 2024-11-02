@@ -14,10 +14,12 @@ export const flipper = (gamestate, title, prefix) => {
 
     if (prefix === 'flipper') {
       if (card.player_original_id === 59 || (card.player_role_id === 59 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+        newGamestate.players[token].action_finished = false
         interaction = flipperInteraction(newGamestate, token, title)
       }
     } else if (prefix === 'doppelganger_flipper') {
       if (card.player_role_id === 59 && card.player_original_id === 1) {
+        newGamestate.players[token].action_finished = false
         interaction = flipperInteraction(newGamestate, token, title)
       }
     }

@@ -13,6 +13,7 @@ export const witch = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 27 || (card.player_role_id === 27 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = witchInteraction(newGamestate, token, title)
     }
 

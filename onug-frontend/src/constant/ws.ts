@@ -4,11 +4,13 @@ export const KEEP_ALIVE = 'KEEP_ALIVE'
 export const RESET = 'RESET'
 export const DEAL = 'DEAL'
 export const READY = 'READY'
+export const READY_VOTE = 'READY_VOTE'
 export const REDIRECT = 'REDIRECT'
 export const SCENE = 'SCENE'
 export const MESSAGE = 'MESSAGE'
 
 export const JOIN_ROOM = 'JOIN_ROOM'
+export const JOIN_VOTE = 'JOIN_ROOM'
 
 export const ARRIVE_LOBBY = 'ARRIVE_LOBBY'
 export const ARRIVE_ROOM = 'ARRIVE_ROOM'
@@ -35,6 +37,7 @@ export const LEAVE_GAME = 'LEAVE_GAME'
 export const LEAVE_VOTE = 'LEAVE_VOTE'
 
 export const START_GAME = 'START_GAME'
+export const END_GAME = 'END_GAME'
 export const STOP_GAME = 'STOP_GAME'
 export const PAUSE_GAME = 'PAUSE_GAME'
 

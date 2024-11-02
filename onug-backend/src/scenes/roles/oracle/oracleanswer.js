@@ -71,6 +71,7 @@ export const oracleAnswer = (gamestate, title) => {
   
       if (aftermath && card.player_original_id === 50) {
         newGamestate.oracle.aftermath = narration[0]
+        newGamestate.players[token].action_finished = false
         interaction = oracleAnswerAftermath(newGamestate, token, title)
       }
   

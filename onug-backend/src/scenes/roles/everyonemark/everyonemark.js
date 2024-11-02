@@ -8,7 +8,8 @@ export const everyonemark = (gamestate, title) => {
 
   tokens.forEach((token) => {
     let interaction = {}
-
+    
+    newGamestate.players[token].action_finished = false
     interaction = everyonemarkInteraction(newGamestate, token, title)
 
     newGamestate.players[token].player_history[title].scene_title = title

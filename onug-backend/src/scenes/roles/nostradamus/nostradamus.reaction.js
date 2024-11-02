@@ -7,7 +7,9 @@ export const nostradamusReaction = (gamestate, title) => {
   const nostradamusTeam = getNostradamusTeam(newGamestate.nostradamus_team)
   const narration = ['nostradamus_teamstart_text', nostradamusTeam]
 
-/*   tokens.forEach((token) => { createAndSendSceneMessage(newGamestate, token, title, interaction, narration)}) */
+/*   
+tokens.forEach((token) => { newGamestate.players[token].action_finished = false
+createAndSendSceneMessage(newGamestate, token, title, interaction, narration)}) */
 
   newGamestate.narration.push({[title]: narration})
 

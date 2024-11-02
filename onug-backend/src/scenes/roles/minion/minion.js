@@ -18,6 +18,7 @@ export const minion = (gamestate, title, hasDoppelganger) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 7 || (card.player_role_id === 7 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = minionInteraction(newGamestate, token, title)
     }
 

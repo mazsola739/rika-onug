@@ -18,6 +18,7 @@ export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 72 || (card.player_role_id === 72 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = auraseerInteraction(newGamestate, token, title)
     }
 

@@ -13,6 +13,7 @@ export const nostradamus = (gamestate, title) => {
     const card = newGamestate.players[token].card
 
     if (card.player_original_id === 80 || (card.player_role_id === 80 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      newGamestate.players[token].action_finished = false
       interaction = nostradamusInteraction(newGamestate, token, title)
     }
 
