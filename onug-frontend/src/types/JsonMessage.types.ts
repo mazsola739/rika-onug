@@ -25,9 +25,11 @@ export type TablePlayerCard = {
   mark?: string
   player_name?: string
   position?: CardPosition
+  role?: string
   selectable_card?: boolean
   selectable_mark?: boolean
   shield?: boolean
+  team?: string
   werewolves?: boolean
 
 }
@@ -79,12 +81,18 @@ export type WsJsonMessage = {
   interaction?: InteractionType
   message?: string
   narration?: NarrationType[]
+  narrations?: Record<string, NarrationType[]>[]
   night_mode?: boolean
   path?: string
   player?: Player
   players?: Player[]
   room_id?: string
   scene_end?: boolean
+  selectable_card_limit?: {
+    player: number
+    center: number
+  }
+  selectable_cards?: CardPosition[]
   selected_cards?: number[]
   selected_expansions?: string[]
   stage?: string

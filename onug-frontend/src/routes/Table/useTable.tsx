@@ -33,6 +33,7 @@ export const useTable = () => {
       deckStore.setPlayerCard()
       deckStore.setPlayerMark()
       riseAndRestStore.openYourEyes(lastJsonMessage)
+      riseAndRestStore.setTablePlayerCard(lastJsonMessage)
     }
 
     if (lastJsonMessage?.type === HYDRATE_READY) {
@@ -42,15 +43,7 @@ export const useTable = () => {
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  }, [
-    lastJsonMessage,
-    riseAndRestStore.openYourEyes,
-    playersStore.setPlayer,
-    playersStore.setPlayers,
-    deckStore.setPlayerCard,
-    deckStore.setPlayerMark,
-    navigate,
-  ])
+  }, [lastJsonMessage, navigate])
 
   const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 

@@ -4,7 +4,7 @@ import { script } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { gamePropStore, riseAndRestStore, selectionStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
-import { formatPosition, formatPositionSimply } from 'utils'
+import { formatPositionSimply } from 'utils'
 
 class MessageStore {
   narration: string

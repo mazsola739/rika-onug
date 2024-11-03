@@ -26,6 +26,8 @@ export const UPDATE_TABLE = 'UPDATE_TABLE'
 export const REDIRECT = 'REDIRECT'
 export const READY = 'READY'
 export const READY_VOTE = 'READY_VOTE'
+export const START_VOTE = 'START_VOTE'
+export const RESULT = 'RESULT'
 
 export const START_GAME = 'START_GAME'
 export const END_GAME = 'END_GAME'

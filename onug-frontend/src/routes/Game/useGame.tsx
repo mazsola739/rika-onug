@@ -41,13 +41,13 @@ export const useGame = () => {
   useEffect(() => {
     if (lastJsonMessage?.type === SCENE) {
       riseAndRestStore.openYourEyes(lastJsonMessage)
-      messageStore.setNarration(lastJsonMessage?.narration as NarrationType[])
+      messageStore.setNarration(lastJsonMessage.narration as NarrationType[])
       messageStore.setPrivateMessage(lastJsonMessage.interaction.private_message as MessagesType[])
     }
   
     if (lastJsonMessage?.type === HYDRATE_GAME) {
       riseAndRestStore.closeYourEyes()
-      gamePropStore.setNightfall(lastJsonMessage?.night_mode)
+      gamePropStore.setNightfall(lastJsonMessage.night_mode)
     }
   
     if (lastJsonMessage?.type === REDIRECT) {
@@ -60,7 +60,7 @@ export const useGame = () => {
 
     if (lastJsonMessage?.type === END_GAME) {
       riseAndRestStore.closeYourEyes()
-      gamePropStore.setSunrise(lastJsonMessage?.day_mode)
+      gamePropStore.setSunrise(lastJsonMessage.day_mode)
     }
   }, [lastJsonMessage, navigate])
   

@@ -6,7 +6,7 @@ import { validateRoom } from '../validators'
 import { sendMessageToPlayer } from './connections'
 
 export const vote = async (ws, message) => {
-  const { room_id, /* token, voted */ } = message
+  const { room_id } = message
   logTrace(`Processing vote in room: ${room_id}`)
 
   try {
@@ -30,7 +30,10 @@ export const vote = async (ws, message) => {
       const message = {
         type: VOTE,
         token,
-        selectable_players: otherPlayers,
+        interaction:{
+          selectable_cards: otherPlayers,
+          selectable_card_limit: {player: 1, center: 0},
+        },
         player: {
           player_name: player.name,
           player_number: player.player_number,

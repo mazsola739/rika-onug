@@ -1,5 +1,4 @@
 export * from './DeckStore'
-export * from './roleStores/DoppelgangerStore'
 export * from './GamePropStore'
 export * from './GameStatusStore'
 export * from './LobbyStore'

@@ -5,7 +5,6 @@ import { CardJson, Player, TablePlayerCard, TeamsType, TokenJson } from 'types'
 
 export const createDefaultCard = (): CardJson => default_card
 export const createDefaultToken = (): TokenJson => default_token
-
 export const createDefaultPlayer = (): Player => default_player
 export const createDefaultTablePlayerCard = (): TablePlayerCard => default_table_player_card
 
@@ -36,5 +35,4 @@ export const getFilteredCardsForTeam = (team: string, deck: CardJson[]): CardJso
 
 export const getMarkByName = (markName: string): TokenJson | null => marks.find(mark => mark.token_name === markName) || null
 
-export const getOrderedTeams = (teamArray: string[]): string[] => 
-  teamArray.sort((a, b) => TEAMS[a as keyof TeamsType] - TEAMS[b as keyof TeamsType])
+export const getOrderedTeams = (teamArray: string[]): string[] => teamArray.sort((a, b) => TEAMS[a as keyof TeamsType] - TEAMS[b as keyof TeamsType])

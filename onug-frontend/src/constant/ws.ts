@@ -6,6 +6,7 @@ export const DEAL = 'DEAL'
 export const REDIRECT = 'REDIRECT'
 export const SCENE = 'SCENE'
 export const MESSAGE = 'MESSAGE'
+export const RESULT = 'RESULT'
 
 export const JOIN_ROOM = 'JOIN_ROOM'
 export const JOIN_VOTE = 'JOIN_ROOM'
@@ -40,6 +41,9 @@ export const START_GAME = 'START_GAME'
 export const END_GAME = 'END_GAME'
 export const STOP_GAME = 'STOP_GAME'
 export const PAUSE_GAME = 'PAUSE_GAME'
+
+export const START_VOTE = 'START_VOTE'
+export const VOTE = 'VOTE'
 
 export const STAGES = {
   LOBBY: 'LOBBY',

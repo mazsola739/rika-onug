@@ -1,4 +1,4 @@
-import { TablePlayerCard } from "types"
+import { TablePlayerCard } from 'types'
 
 export interface PlayerCardProps {
   cardSize?: number

@@ -54,11 +54,17 @@ export const VoteCenter = styled.div`
 `
 
 //INFOPANEL
-export const Placeholder = styled.div`
-  color: white;
-  min-height: 400px;
-`
-
 export const ReadyStatus = styled.div`
   display: flex;
+`
+
+export const MessageText = styled.p`
+  color: yellow;
+`
+
+export const Narration = styled.div`
+  padding: 5px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
 `

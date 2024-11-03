@@ -31,7 +31,7 @@ const MessageBoxCards: React.FC<MessageBoxCardsProps> = observer(
           <MessageBoxCard key={index}>
             <CardPosition>{card.name}</CardPosition>
             <Card
-              image="card_background"
+              image='card_background'
               onClick={() => onCardClick(card.position)}
               size={40}
             />
@@ -65,12 +65,12 @@ export const MessageBox: React.FC = observer(() => {
       </Message>
       {!scene_end ? (
         <ButtonGroup>
-          <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
-          <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabled} buttonText={BUTTONS.done_label} variant="green" />
+          <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant='blue' />
+          <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabled} buttonText={BUTTONS.done_label} variant='green' />
         </ButtonGroup>
       ) : (
         <ButtonGroup>
-          <Button onClick={() => handleFinish(title)} buttonText={BUTTONS.finish_label} variant="purple" />
+          <Button onClick={() => handleFinish(title)} buttonText={BUTTONS.finish_label} variant='purple' />
         </ButtonGroup>
       )}
     </StyledMessageBox>

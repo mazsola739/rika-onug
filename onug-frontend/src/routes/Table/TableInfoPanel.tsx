@@ -9,7 +9,7 @@ export const TableInfoPanel: React.FC = observer(() => {
   return (
     <InfoPanel>
       <ReadyStatus>{players && <ReadyList players={players} />}</ReadyStatus>
-      <OwnCard card={deckStore.playerCard} mark={deckStore.playerMark}/>
+      {deckStore.playerCard && <OwnCard player={playersStore.player} card={deckStore.playerCard} mark={deckStore.playerMark}/>}
       <QuickGuide />
     </InfoPanel>
   )

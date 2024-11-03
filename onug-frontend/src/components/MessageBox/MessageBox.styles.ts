@@ -1,4 +1,4 @@
-import styled from "@emotion/styled"
+import styled from '@emotion/styled'
 
 export const StyledMessageBox = styled.div`
   display: flex;
@@ -10,7 +10,6 @@ export const StyledMessageBox = styled.div`
 `
 
 export const Narration = styled.div`
-  color: white;
   padding: 5px;
   display: flex;
   gap: 8px;

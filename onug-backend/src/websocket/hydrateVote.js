@@ -8,29 +8,29 @@ export const hydrateVote = async (ws, message) => {
   const { room_id, token } = message
   const gamestate = await readGamestate(room_id)
   const newGamestate = {...gamestate}
-  const { players } = newGamestate
 
-  const player_history = players[token].player_history
+  Object.keys(newGamestate.players).forEach(playerToken => newGamestate.players[playerToken].ready = false)
 
-  Object.keys(players).forEach(playerToken => {
-      players[playerToken].ready = false
-    })
+  const narrations = newGamestate.narration
 
   return ws.send(
     JSON.stringify({
       type: HYDRATE_VOTE,
       success: true,
       player: {
-        player_name: players[token].name,
-        player_number: players[token].player_number,
+        player_name: newGamestate.players[token].name,
+        player_number: newGamestate.players[token].player_number,
+        player_card_id: newGamestate.players[token].card.player_card_id,
+        player_role: newGamestate.players[token].card.player_role,
+        player_team: newGamestate.players[token].card.player_team,
+        player_mark: newGamestate.players[token].card.player_mark,
       },
-      players: Object.values(players).map((player) => ({
+      players: Object.values(newGamestate.players).map((player) => ({
         player_number: player.player_number,
         player_name: player.name,
         ready: player.ready,
       })),
-      card: players[token].card,
-      player_history
+      narrations,
     })
   )
 }

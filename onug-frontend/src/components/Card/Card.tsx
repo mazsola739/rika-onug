@@ -7,7 +7,7 @@ export const Card: React.FC<CardProps> = observer(
   ({ image, isSelectable, werewolf, dreamwolf, size, onClick }) => {
     return (
       <StyledCard sizeW={size} isSelectable={isSelectable} werewolf={werewolf} dreamwolf={dreamwolf} onClick={onClick}>
-          <CardImage image={image} size={size} />
+        <CardImage image={image} size={size} />
       </StyledCard>
     )
   }
@@ -15,4 +15,4 @@ export const Card: React.FC<CardProps> = observer(
 
 /*height: ${({ sizeH }) => sizeH}px;
   const sizeH = Math.round(size * 1.37367)
-  const glowColor = isSelectable ? "#28a745" : "transparent" */
+  const glowColor = isSelectable ? '#28a745' : 'transparent' */

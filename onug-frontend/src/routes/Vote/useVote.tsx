@@ -1,7 +1,7 @@
-import { ARRIVE_VOTE, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, STAGES } from 'constant'
+import { ARRIVE_VOTE, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { deckStore, playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
+import { playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
 import { splitCardsToTable } from 'utils'
 
 export const useVote = () => {
@@ -25,14 +25,24 @@ export const useVote = () => {
     }
   }, [sendJsonMessage, firstTime])
 
-
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_VOTE && lastJsonMessage?.success) {
       voteStore.setKnownPlayer(lastJsonMessage.player)
+      voteStore.setNarrations(lastJsonMessage.narrations)
       playersStore.setPlayers(lastJsonMessage.players)
-      voteStore.setKnownPlayerCard()
-      voteStore.setKnownPlayerMark()
+    }
+
+    if (lastJsonMessage?.type === VOTE) {
+      voteStore.setKnownPlayer(lastJsonMessage.player)
+      voteStore.setNarrations(lastJsonMessage.narrations)
+      playersStore.setPlayers(lastJsonMessage.players)
       riseAndRestStore.openYourEyes(lastJsonMessage)
+    }
+
+    if (lastJsonMessage?.type === RESULT) {
+      riseAndRestStore.openYourEyes(lastJsonMessage)
+      voteStore.setKnownPlayer(lastJsonMessage.player)
+      riseAndRestStore.setTablePlayerCard(lastJsonMessage)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
@@ -42,12 +52,7 @@ export const useVote = () => {
     if (lastJsonMessage?.type === HYDRATE_READY) {
       playersStore.setPlayers(lastJsonMessage.players)
     }
-  }, [
-    lastJsonMessage,
-    playersStore.setPlayer,
-    playersStore.setPlayers,
-    navigate,
-  ])
+  }, [lastJsonMessage, navigate])
   
   
   const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
@@ -57,16 +62,6 @@ export const useVote = () => {
       ? splitCardsToTable(tablePlayerCards, tablePlayerCard)
       : null
   const { left = [], middle = [], right = [] } = sides || {}
-
-
-/*   useEffect(() => {
-    if (!lastJsonMessage?.player.player_history) return
-    setHistory(
-      Object.keys(lastJsonMessage.player.player_history).length === 0
-        ? 'You have slept through the night'
-        : JSON.stringify(lastJsonMessage.player.player_history)
-    )
-  }, [lastJsonMessage]) */
 
   return { tablePlayerCards, tablePlayerCard, left, middle, right }
 }

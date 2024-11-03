@@ -12,29 +12,31 @@ class RiseAndRestStore {
     makeAutoObservable(this)
   }
 
-  getDefaultPlayerCards(): TablePlayerCard[] {
-    return Array.from({ length: deckStore.totalPlayers }, (_, i) => ({
+  createEmptyPlayerCard(position: CardPosition): TablePlayerCard {
+    return {
       player_name: '',
-      position: `player_${i + 1}` as CardPosition,
+      position,
       card_name: '',
       mark: '',
+      role: '',
+      team: '',
       artifact: false,
       shield: false,
       selectable_card: false,
       selectable_mark: false,
       werewolves: false,
       dreamwolf: false,
-    }))
+    }
   }
 
-  getDefaultCenterCards(): TableCenterCard[] {
+  createDefaultCenterCards(): TableCenterCard[] {
     const positions: CardPosition[] = ['center_wolf', 'center_left', 'center_middle', 'center_right', 'center_villain']
-    return positions.map(position => ({
-      position,
-      card_name: '',
-      selectable: false,
-    }))
-  }  
+    const { hasAlphawolf, hasTemptress } = deckStore
+
+    return positions
+      .filter(pos => !(pos === 'center_wolf' && !hasAlphawolf || pos === 'center_villain' && !hasTemptress))
+      .map(pos => ({ position: pos, card_name: '', selectable: false }))
+  }
 
   getCardStatus(position: CardPosition) {
     return {
@@ -49,20 +51,22 @@ class RiseAndRestStore {
 
   setTablePlayerCards(lastJsonMessage: WsJsonMessage): void {
     const players = lastJsonMessage.players
-    const defaultPlayerCards = this.getDefaultPlayerCards()
+    this.tablePlayerCards = Array.from({ length: deckStore.totalPlayers }, (_, i) => {
+      const position = `player_${i + 1}` as CardPosition
+      const defaultCard = this.createEmptyPlayerCard(position)
 
-    this.tablePlayerCards = defaultPlayerCards.map(defaultCard => {
-      const positionObject = gamePropStore.show_cards.find(obj => obj[defaultCard.position])
-      const cardId = positionObject ? positionObject[defaultCard.position] : null
-      const card = cardId ? getCardById(cardId) : null
-      const playerCard = players.find(player => defaultCard.position === player.player_number)
+      const playerCard = players.find(player => position === player.player_number)
       if (!playerCard) return defaultCard
-      
+
+      const card = getCardById(playerCard.player_card_id)
       return {
         ...defaultCard,
         player_name: playerCard.player_name,
         card_name: card ? card.card_name : '',
-        ...this.getCardStatus(defaultCard.position),
+        mark: playerCard.player_mark || '',
+        role: playerCard.player_role || '',
+        team: playerCard.player_team || '',
+        ...this.getCardStatus(position),
       }
     })
   }
@@ -75,27 +79,20 @@ class RiseAndRestStore {
       position: player.player_number,
       card_name: card ? card.card_name : '',
       mark: player.player_mark || '',
+      role: player.player_role || '',
+      team: player.player_team || '',
       ...this.getCardStatus(player.player_number),
     }
   }
 
   setTableCenterCards(lastJsonMessage: WsJsonMessage): void {
-    const { hasAlphawolf, hasTemptress } = deckStore
-  
-    const defaultCenterCards = this.getDefaultCenterCards()
-      .filter(centerCard => {
-        if (centerCard.position === 'center_wolf' && !hasAlphawolf) return false
-        if (centerCard.position === 'center_villain' && !hasTemptress) return false
-        return true
-      })
-  
-    this.tableCenterCards = defaultCenterCards.map(centerCard => {
+    this.tableCenterCards = this.createDefaultCenterCards().map(centerCard => {
       const positionObject = gamePropStore.show_cards.find(obj => obj[centerCard.position])
       const cardId = positionObject ? positionObject[centerCard.position] : null
       const card = cardId ? getCardById(cardId) : null
-  
+
       return {
-        position: centerCard.position,
+        ...centerCard,
         card_name: card ? card.card_name : '',
         selectable_card: gamePropStore.selectable_cards.includes(centerCard.position),
       }
@@ -103,18 +100,7 @@ class RiseAndRestStore {
   }
   
   resetCards(): void {
-    const resetCardState = {
-      player_name: '',
-      card_name: '',
-      mark: '',
-      artifact: false,
-      shield: false,
-      selectable_card: false,
-      selectable_mark: false,
-      werewolves: false,
-      dreamwolf: false,
-    }
-
+    const resetCardState = this.createEmptyPlayerCard(null)
     this.tablePlayerCard = { ...resetCardState, position: this.tablePlayerCard.position }
     this.tablePlayerCards = this.tablePlayerCards.map(card => ({ ...resetCardState, position: card.position }))
     this.tableCenterCards = this.tableCenterCards.map(centerCard => ({
@@ -131,13 +117,10 @@ class RiseAndRestStore {
   }
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
-    this.resetCards()
-    gamePropStore.reset()
-    selectionStore.resetSelection()
+    this.resetScene()
     gamePropStore.setInteraction(lastJsonMessage?.interaction as InteractionType)
     gamePropStore.setTitle(lastJsonMessage.title)
     this.setTablePlayerCards(lastJsonMessage)
-    this.setTablePlayerCard(lastJsonMessage)
     this.setTableCenterCards(lastJsonMessage)
   }
 
