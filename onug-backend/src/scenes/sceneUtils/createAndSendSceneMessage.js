@@ -18,7 +18,7 @@ export const createAndSendSceneMessage = (gamestate, token, title, interaction, 
     players: Object.values(gamestate.players).map((player) => ({
       player_number: player.player_number,
       player_name: player.name,
-      ready: player.ready,
+      flag: player.flag,
     })),
   }
 

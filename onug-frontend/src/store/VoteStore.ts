@@ -1,14 +1,13 @@
 import * as narration_text from 'constant/narrations'
 import { script } from 'data'
 import { computed, makeAutoObservable } from 'mobx'
-import { CardJson, CardPosition, NarrationType, Player, TokenJson } from 'types'
+import { CardJson, NarrationType, Player, TokenJson } from 'types'
 import { createDefaultPlayer, getCardById, getMarkByName } from 'utils'
 import { playersStore } from './PlayersStore'
 
 class VoteStore {
   knownPlayer: Player = createDefaultPlayer()
   narrations: Record<string, NarrationType[]>[]
-  votablePlayers: CardPosition[]
 
   constructor() {
     makeAutoObservable(this, {
@@ -24,10 +23,6 @@ class VoteStore {
     this.narrations = narrations
   }
 
-  setVotablePlayers(votablePlayers: CardPosition[]): void {
-    this.votablePlayers = votablePlayers
-  }
-
   get knownPlayerCard(): CardJson { return getCardById(this.knownPlayer.player_card_id) }
   get knownPlayerMark(): TokenJson { return getMarkByName(this.knownPlayer.player_mark) }
   get isPlayerReady(): boolean {
@@ -35,7 +30,7 @@ class VoteStore {
       actualPlayer => actualPlayer.player_number === this.knownPlayer.player_number
     )
 
-    return currentPlayer ? currentPlayer.ready : false
+    return currentPlayer ? currentPlayer.flag : false
   }
 
  get voteNarration(): { image: string, text: string }[] {

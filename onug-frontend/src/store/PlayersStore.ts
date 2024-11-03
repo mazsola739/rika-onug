@@ -25,7 +25,7 @@ class PlayersStore {
       actualPlayer => actualPlayer.player_number === this.player.player_number
     )
     
-    return currentPlayer ? currentPlayer.ready : false
+    return currentPlayer ? currentPlayer.flag : false
   }
 }
 

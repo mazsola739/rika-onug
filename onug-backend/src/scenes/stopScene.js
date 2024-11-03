@@ -22,7 +22,7 @@ const resetPlayers = (players) => {
     Object.entries(players).map(([token, player]) => [
       token,
       { ...player, 
-        ready: false, 
+        flag: false, 
         card: null, 
         player_number: null, 
         card_or_mark_action: false,

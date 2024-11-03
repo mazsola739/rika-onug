@@ -11,7 +11,7 @@ export type Player = {
   player_mark?: string
   player_name: string
   player_number?: CardPosition
-  ready?: boolean
+  flag?: boolean
 }
 
 export type Expansion = "Werewolf" | "Daybreak" | "Vampire" | "Alien" | "Super Villains" | "Bonus Roles"

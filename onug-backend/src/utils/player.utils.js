@@ -34,7 +34,7 @@ export const getTableBoard = gamestate => {
     return {
       player_number: player.player_number,
       player_name: player.name,
-      ready: player.ready,
+      flag: player.flag,
     }
   })
   

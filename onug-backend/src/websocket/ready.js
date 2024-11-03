@@ -13,9 +13,9 @@ export const ready = async (message) => {
     const newGamestate = { ...gamestate }
     // TODO validate client request
 
-    newGamestate.players[token].ready = !gamestate.players[token].ready
+    newGamestate.players[token].flag = !gamestate.players[token].flag
 
-    logDebug(`gamestate.players[token].ready: ${gamestate.players[token].ready}`)
+    logDebug(`gamestate.players[token].flag: ${gamestate.players[token].flag}`)
 
     const players = getTableBoard(newGamestate) //TODO player and other ws functions
 

@@ -7,18 +7,18 @@ import { validateRoom } from '../validators'
 import { broadcast } from './connections'
 
 const setPlayerReady = (players, token) => {
-  players[token].ready = true
+  players[token].flag = true
 }
 
 const resetPlayerReadiness = (players) => {
   Object.keys(players).forEach(playerToken => {
-    players[playerToken].ready = false
+    players[playerToken].flag = false
   })
 }
 
 const handleNightReady = async (room_id, newGamestate, players, token) => {
   setPlayerReady(players, token)
-  if (allPlayersStateCheck(players, 'ready')) {
+  if (allPlayersStateCheck(players, 'flag')) {
     logTrace(`All players are ready for night in room: ${room_id}. Processing script and scene handlers.`)
     newGamestate = await scriptHandler(newGamestate)
     newGamestate = await sceneHandler(newGamestate)
@@ -31,7 +31,7 @@ const handleNightReady = async (room_id, newGamestate, players, token) => {
 
 const handleDayReady = async (room_id, newGamestate, players, token) => {
   setPlayerReady(players, token)
-  if (allPlayersStateCheck(players, 'ready')) {
+  if (allPlayersStateCheck(players, 'flag')) {
     logTrace(`All players are ready for day in room: ${room_id}. Redirecting to Vote.`)
     await upsertRoomState(newGamestate)
     broadcast(room_id, { type: REDIRECT, path: `/vote/${room_id}` })

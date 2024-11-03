@@ -20,7 +20,7 @@ const initializeGameState = (gamestate) => {
   }
 }
 
-const areAllPlayersReady = (players) => Object.values(players).every(player => player.ready)
+const areAllPlayersReady = (players) => Object.values(players).every(player => player.flag)
 
 const broadcastError = (room_id, message) => {
   broadcast(room_id, { type: 'ERROR', message })
@@ -28,7 +28,7 @@ const broadcastError = (room_id, message) => {
 
 const resetPlayerReadiness = (players) => {
   Object.keys(players).forEach(playerToken => {
-    players[playerToken].ready = false
+    players[playerToken].flag = false
   })
 }
 

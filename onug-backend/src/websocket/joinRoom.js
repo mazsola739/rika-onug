@@ -48,7 +48,7 @@ export const joinRoom = async (ws, message) => {
       selected_expansions: room.selected_expansions,
       stage: STAGES.ROOM,
       players: {
-        [token]: { name: player_name, admin: true, ready: false },
+        [token]: { name: player_name, admin: true, flag: false },
       },
       available_names: room.available_names.filter(
         (name) => name !== player_name
@@ -75,13 +75,13 @@ export const joinRoom = async (ws, message) => {
       gamestate.players[token] = {
         name: player_name,
         admin: true,
-        ready: false,
+        flag: false,
       }
     } else {
       gamestate.players[token] = {
         name: player_name,
         admin: false,
-        ready: false,
+        flag: false,
       }
     }
 

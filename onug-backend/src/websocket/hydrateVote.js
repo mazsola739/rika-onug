@@ -9,7 +9,7 @@ export const hydrateVote = async (ws, message) => {
   const gamestate = await readGamestate(room_id)
   const newGamestate = {...gamestate}
 
-  Object.keys(newGamestate.players).forEach(playerToken => newGamestate.players[playerToken].ready = false)
+  Object.keys(newGamestate.players).forEach(playerToken => newGamestate.players[playerToken].flag = false)
 
   const narrations = newGamestate.narration
 
@@ -28,7 +28,7 @@ export const hydrateVote = async (ws, message) => {
       players: Object.values(newGamestate.players).map((player) => ({
         player_number: player.player_number,
         player_name: player.name,
-        ready: player.ready,
+        flag: player.flag,
       })),
       narrations,
     })

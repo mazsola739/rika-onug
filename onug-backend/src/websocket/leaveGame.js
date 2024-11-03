@@ -37,7 +37,7 @@ export const leaveGame = async (ws, message) => {
     delete newGamestate.players[token].player_start_card_id
     delete newGamestate.players[token].card
     delete newGamestate.players[token].player_number
-    newGamestate.players[token].ready = false
+    newGamestate.players[token].flag = false
   })
 
   await upsertRoomState(newGamestate)

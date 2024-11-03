@@ -11,7 +11,7 @@ export const hydrateGame = async (ws, message) => {
   const newGamestate = {...gamestate}
 
   const { players } = newGamestate
-  Object.keys(players).forEach(playerId => players[playerId].ready = false)
+  Object.keys(players).forEach(playerId => players[playerId].flag = false)
 
   if (isGameStopped(gamestate))
     return ws.send(JSON.stringify({ type: REDIRECT, path: `/room/${room_id}` }))

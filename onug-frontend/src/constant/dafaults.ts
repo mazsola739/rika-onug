@@ -7,7 +7,7 @@ export const default_player: Player = {
     player_mark: '',
     player_role: '',
     player_team: '',
-    ready: false,
+    flag: false,
   }
   
   export const default_table_player_card: TablePlayerCard = {

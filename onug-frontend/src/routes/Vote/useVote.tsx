@@ -41,7 +41,6 @@ export const useVote = () => {
 
     if (lastJsonMessage?.type === RESULT) {
       riseAndRestStore.openYourEyes(lastJsonMessage)
-      voteStore.setKnownPlayer(lastJsonMessage.player)
       riseAndRestStore.setTablePlayerCard(lastJsonMessage)
     }
 

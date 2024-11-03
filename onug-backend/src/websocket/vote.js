@@ -14,41 +14,47 @@ export const vote = async (ws, message) => {
 
     if (!roomIdValid) {
       logError(`Room validation failed for room: ${room_id}`)
-      return ws.send(JSON.stringify({ type: ERROR, success: false, errors }))
+      return ws.send(
+        JSON.stringify({ type: ERROR, success: false, errors })
+      )
     }
 
-    let newGamestate = { ...gamestate }
-    const { players } = newGamestate
+    const { players } = gamestate
     const tokens = getAllPlayerTokens(players)
+    const newGamestate = {
+      ...gamestate,
+      players: {
+        ...players,
+        ...Object.fromEntries(tokens.map(token => [token, { ...players[token], flag: false }]))
+      }
+    }
 
     tokens.forEach((token) => {
-      newGamestate.players[token].voted = false
+      const player = players[token]
       const otherPlayers = getPlayerNumbersWithNonMatchingTokens(players, [token])
 
-      const player = players[token]
-      
-      const message = {
+      const voteMessage = {
         type: VOTE,
         token,
-        interaction:{
+        interaction: {
           selectable_cards: otherPlayers,
-          selectable_card_limit: {player: 1, center: 0},
+          selectable_card_limit: { player: 1, center: 0 },
         },
         player: {
           player_name: player.name,
           player_number: player.player_number,
           player_card_id: player.card.player_card_id,
           player_role: player.card.player_role,
-          player_team: player.card.player_team
+          player_team: player.card.player_team,
         },
-        players: Object.values(gamestate.players).map((player) => ({
-          player_number: player.player_number,
-          player_name: player.name,
-          ready: player.ready,
+        players: tokens.map((t) => ({
+          player_number: players[t].player_number,
+          player_name: players[t].name,
+          flag: players[t].flag,
         })),
       }
 
-      sendMessageToPlayer(gamestate.room_id, token, message)
+      sendMessageToPlayer(room_id, token, voteMessage)
     })
 
     await upsertRoomState(newGamestate)
