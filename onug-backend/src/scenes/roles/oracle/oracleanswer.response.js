@@ -22,7 +22,7 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
       newGamestate.card_positions[currentPlayerNumber].card = selectedCard
       newGamestate.card_positions[selected_card_positions[0]].card = currentPlayerCard
   
-      newGamestate.players[token].card.player_card_id = 0
+      newGamestate.players[token].card.player_card_id = 87
       newGamestate.players[token].card_or_mark_action = true
   
       newGamestate.players[token].player_history[title] = {

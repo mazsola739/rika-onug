@@ -28,7 +28,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
       newGamestate.players[token].card_or_mark_action = true
 
       if (currentPlayerNumber === position1 || currentPlayerNumber === position2) {
-        newGamestate.players[token].card.player_card_id = 0
+        newGamestate.players[token].card.player_card_id = 87
       }
 
       newGamestate.players[token].player_history[title] = {
@@ -50,7 +50,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
         const selectedCardPosition = newGamestate.card_positions[selected_card_positions[0]].card
 
         if (newGamestate.players[token].card.player_original_id === selectedCardPosition.id) {
-          newGamestate.players[token].card.player_card_id = 0
+          newGamestate.players[token].card.player_card_id = 87
         }
 
         const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
@@ -108,7 +108,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
       newGamestate.card_positions[selectedPosition].card = currentPlayerCard
 
       if (newGamestate.players[token].player_history[title].random === 'drunk') {
-        newGamestate.players[token].card.player_card_id = 0
+        newGamestate.players[token].card.player_card_id = 87
       } else {
         newGamestate.players[token].card.player_card_id = newGamestate.card_positions[currentPlayerNumber].card.id
         newGamestate.players[token].card.player_team = newGamestate.card_positions[currentPlayerNumber].card.team

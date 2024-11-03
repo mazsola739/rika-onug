@@ -13,7 +13,7 @@ export const apprenticeseerResponse = (gamestate, token, selected_card_positions
   const selectedPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
 
   if (newGamestate.players[token].card.player_original_id === selectedPositionCard.id) {
-    newGamestate.players[token].card.player_card_id = 0
+    newGamestate.players[token].card.player_card_id = 87
   }
 
   newGamestate.players[token].card_or_mark_action = true

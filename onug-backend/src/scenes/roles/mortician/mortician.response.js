@@ -25,7 +25,7 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
   }
 
   if (shouldResetPlayerCardId()) {
-    newGamestate.players[token].card.player_card_id = 0
+    newGamestate.players[token].card.player_card_id = 87
   } else {
     newGamestate.players[token].card.player_card_id = newGamestate.card_positions[currentPlayerNumber].card.id
     newGamestate.players[token].card.player_team = newGamestate.card_positions[currentPlayerNumber].card.team

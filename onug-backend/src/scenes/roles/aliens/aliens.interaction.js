@@ -62,7 +62,7 @@ export const aliensInteraction = (gamestate, token, title) => {
         const card = newGamestate.card_positions[key].card
 
         if (newGamestate.players[token]?.card?.original_id === card.id && currentPlayerNumber !== key) {
-          newGamestate.players[token].card.player_card_id = 0
+          newGamestate.players[token].card.player_card_id = 87
         } else if (currentPlayerNumber === key) {
           newGamestate.players[token].card.player_card_id = card.id
           newGamestate.players[token].card.player_team = card.team

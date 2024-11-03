@@ -21,7 +21,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
     const selectedPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
 
     if (newGamestate.players[token].card.player_original_id === selectedPositionCard.id) {
-      newGamestate.players[token].card.player_card_id = 0
+      newGamestate.players[token].card.player_card_id = 87
     }
 
     const private_message = ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]]

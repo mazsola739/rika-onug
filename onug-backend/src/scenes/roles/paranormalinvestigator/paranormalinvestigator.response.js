@@ -26,7 +26,7 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
     } else {
       showCards = selectedCards
       if (newGamestate.players[token].card.player_original_id === playerOneCardId || newGamestate.players[token].card.player_original_id === playerTwoCardId) {
-        newGamestate.players[token].card.player_card_id = 0
+        newGamestate.players[token].card.player_card_id = 87
       }
     }
   } else {

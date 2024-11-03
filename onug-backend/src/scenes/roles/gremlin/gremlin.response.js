@@ -24,7 +24,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
   
       if (currentPlayerNumber === selected_card_positions[0] || currentPlayerNumber === selected_card_positions[1]) {
-        newGamestate.players[token].card.player_card_id = 0
+        newGamestate.players[token].card.player_card_id = 87
       }
   
       newGamestate.players[token].player_history[title] = {

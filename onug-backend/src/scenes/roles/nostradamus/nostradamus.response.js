@@ -31,7 +31,7 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
         showCards = selectedCards
         newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[2]].card.team
         if (newGamestate.players[token].card.player_original_id === playerOneCardId || newGamestate.players[token].card.player_original_id === playerTwoCardId || newGamestate.players[token].card.player_original_id === playerThreeCardId) {
-          newGamestate.players[token].card.player_card_id = 0
+          newGamestate.players[token].card.player_card_id = 87
         }
       }
     }

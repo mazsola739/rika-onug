@@ -2,7 +2,7 @@ import { ASSASSIN_IDS, HAS_MARK_IDS, VAMPIRE_IDS } from 'constant'
 import { artifacts, cards, marks } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardJson, Expansion, TokenJson } from 'types'
-import { areAnyCardSelectedById, checkCardPresence, createDefaultCard, createDefaultToken, determineTotalPlayers, findCardById } from 'utils'
+import { areAnyCardSelectedById, checkCardPresence, createDefaultCard, createDefaultToken, determineTotalPlayers, getCardById, getMarkByName } from 'utils'
 import { playersStore } from './PlayersStore'
 
 class DeckStore {
@@ -19,21 +19,13 @@ class DeckStore {
     makeAutoObservable(this)
   }
 
-  getCardById(cardId: number): CardJson {
-    return this.deck ? findCardById(this.deck, cardId) : createDefaultCard()
-  }
-
-  getMarkByName(markName: string): TokenJson {
-    return this.deck ? marks.find(mark => mark.token_name === markName) || null : createDefaultToken()
-  }
-
   setDeck(): void {
     this.deck = cards.filter(card => this.selectedExpansions.includes(card.expansion as Expansion))
   }
 
   setSelectedCard(cardIds: number[]): void {
     this.selectedCards = cardIds
-      .map((cardId) => this.getCardById(cardId) as CardJson)
+      .map((cardId) => getCardById(cardId) as CardJson)
       .sort((a, b) => a.id - b.id)
     this.updateSelectedMarks()
     this.updateArtifacts()
@@ -45,12 +37,12 @@ class DeckStore {
   }
 
   setPlayerCard(): void {
-    const card = this.getCardById(playersStore.player.player_card_id)
+    const card = getCardById(playersStore.player.player_card_id)
     this.playerCard = card
   }
 
   setPlayerMark(): void {
-    const mark = this.getMarkByName('mark_of_clarity')
+    const mark = getMarkByName('mark_of_clarity')
     this.playerMark = mark
   }
 

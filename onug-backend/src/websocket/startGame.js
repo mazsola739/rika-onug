@@ -5,19 +5,9 @@ import { startScene } from '../scenes'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
 
-// TODO: Implement random delay to confuse players regarding first role play
-export const startGame = async (ws, message) => {
-  const { room_id, token } = message
-  logTrace(`Attempting to start game in room: ${room_id}`)
-
-  const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
-  if (!roomIdValid) {
-    logError(`Room validation failed for room: ${room_id}`)
-    return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
-  }
-
+const initializeGameState = (gamestate) => {
   const startTime = Date.now()
-  let newGamestate = {
+  return {
     ...gamestate,
     stage: STAGES.GAME,
     game_start_time: startTime,
@@ -28,33 +18,60 @@ export const startGame = async (ws, message) => {
     script_locked: false,
     narration: [],
   }
+}
 
-  const { players } = newGamestate
-  const allPlayersReady = Object.values(players).every((player) => player.ready)
+const areAllPlayersReady = (players) => Object.values(players).every(player => player.ready)
 
-  if (!allPlayersReady) {
-    logError(`Not all players are ready. Current readiness: ${JSON.stringify(players)}`)
+const broadcastError = (room_id, message) => {
+  broadcast(room_id, { type: 'ERROR', message })
+}
 
-    return broadcast(room_id, {
-      type: 'ERROR',
-      message: 'All players must be ready to start the game.',
-    })
-  }
+const resetPlayerReadiness = (players) => {
+  Object.keys(players).forEach(playerToken => {
+    players[playerToken].ready = false
+  })
+}
 
-  newGamestate = startScene(newGamestate)
+export const startGame = async (ws, message) => {
+  const { room_id, token } = message
+  logTrace(`Attempting to start game in room: ${room_id}`)
 
   try {
+  
+    const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
+
+    if (!roomIdValid) {
+      logError(`Room validation failed for room: ${room_id}`)
+      return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
+    }
+
+  
+    let newGamestate = initializeGameState(gamestate)
+    const { players } = newGamestate
+
+  
+    if (!areAllPlayersReady(players)) {
+      logError(`Not all players are ready. Current readiness: ${JSON.stringify(players)}`)
+      return broadcastError(room_id, 'All players must be ready to start the game.')
+    }
+
+  
+    newGamestate = startScene(newGamestate)
+
+  
+    resetPlayerReadiness(players)
+
+  
+    await upsertRoomState(newGamestate)
     logTrace(`Game started successfully in room [${room_id}] by player [${token}]`)
 
-    Object.keys(players).forEach(playerToken => {
-      players[playerToken].ready = false
-    })
-    await upsertRoomState(newGamestate)
-
+  
     return broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` })
-  } catch (error) {
-    logError(`Error saving initial game state for room [${room_id}]: ${error.message}`)
 
+  } catch (error) {
+  
+    logError(`Error starting game in room [${room_id}]: ${error.message}`)
+    logError(JSON.stringify(error.stack))
     ws.send(
       JSON.stringify({
         type: 'ERROR',
@@ -62,6 +79,4 @@ export const startGame = async (ws, message) => {
       })
     )
   }
-
-  return newGamestate
 }

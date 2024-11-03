@@ -4,6 +4,9 @@ export const default_player: Player = {
     player_name: '',
     player_number: null,
     player_card_id: 0,
+    player_mark: '',
+    player_role: '',
+    player_team: '',
     ready: false,
   }
   

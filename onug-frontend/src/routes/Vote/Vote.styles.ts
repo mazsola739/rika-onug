@@ -52,3 +52,13 @@ export const VoteCenter = styled.div`
   align-items: center;
   gap: 5px;
 `
+
+//INFOPANEL
+export const Placeholder = styled.div`
+  color: white;
+  min-height: 400px;
+`
+
+export const ReadyStatus = styled.div`
+  display: flex;
+`

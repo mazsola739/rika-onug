@@ -3,7 +3,7 @@ export const RELOAD = 'RELOAD'
 export const JOIN_ROOM = 'JOIN_ROOM'
 
 export const LEAVE_ROOM = 'LEAVE_ROOM'
-export const LEAVE_TABLE = 'LEAVE_TABLE'
+export const LEAVE_GAME = 'LEAVE_GAME'
 
 export const ARRIVE_LOBBY = 'ARRIVE_LOBBY'
 export const ARRIVE_ROOM = 'ARRIVE_ROOM'

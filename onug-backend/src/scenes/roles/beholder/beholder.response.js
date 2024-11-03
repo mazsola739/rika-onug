@@ -16,7 +16,7 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
       const viewCards = getCardIdsByPositions(newGamestate.card_positions, seers)
   
       if ( seers.some(seer => newGamestate.card_positions[seer].card.id === newGamestate.players[token]?.card?.original_id)  ) {
-        newGamestate.players[token].card.player_card_id = 0
+        newGamestate.players[token].card.player_card_id = 87
       }
   
       newGamestate.players[token].card_or_mark_action = true

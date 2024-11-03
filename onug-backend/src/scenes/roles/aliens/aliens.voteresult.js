@@ -25,7 +25,7 @@ export const aliensVoteResult = (gamestate, token, title) => {
     const selectedPositionCard = newGamestate.card_positions[mostVotedPlayer[0]].card
     
     if (newGamestate.players[token].card.player_original_id === selectedPositionCard.id) {
-      newGamestate.players[token].card.player_card_id = 0
+      newGamestate.players[token].card.player_card_id = 87
     }
 
     newGamestate.players[selectedPlayer[0]].card.player_team = 'alien'

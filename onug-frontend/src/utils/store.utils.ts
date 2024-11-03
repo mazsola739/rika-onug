@@ -1,6 +1,7 @@
 import { default_card, default_player, default_table_player_card, default_token, TEAMS } from 'constant'
+import { marks } from 'data'
 import { deckStore } from 'store'
-import { CardJson, CardPosition, Player, TablePlayerCard, TeamsType, TokenJson } from 'types'
+import { CardJson, Player, TablePlayerCard, TeamsType, TokenJson } from 'types'
 
 export const createDefaultCard = (): CardJson => default_card
 export const createDefaultToken = (): TokenJson => default_token
@@ -25,11 +26,15 @@ export const formatPosition = (position: string) => position.replace(/player_/g,
 
 export const formatPositionSimply = (position: string) => position.replace(/_/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
 
+export const getCardById = (cardId: number): CardJson | null => deckStore.deck.find(card => card.id === cardId) || null
+
 export const getFilteredCardsForTeam = (team: string, deck: CardJson[]): CardJson[] => {
   const validTeams = team === 'village' ? ['hero', 'village'] : [team]
 
   return deck.filter((card) => validTeams.includes(card.team))
 }
+
+export const getMarkByName = (markName: string): TokenJson | null => marks.find(mark => mark.token_name === markName) || null
 
 export const getOrderedTeams = (teamArray: string[]): string[] => 
   teamArray.sort((a, b) => TEAMS[a as keyof TeamsType] - TEAMS[b as keyof TeamsType])

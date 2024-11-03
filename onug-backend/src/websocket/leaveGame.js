@@ -3,7 +3,7 @@ import { logTrace } from '../log'
 import { readGamestate, upsertRoomState } from '../repository'
 import { broadcast } from './connections'
 
-export const leaveTable = async (ws, message) => {
+export const leaveGame = async (ws, message) => {
   logTrace(`leave-table requested with ${JSON.stringify(message)}`)
 
   const { room_id, token } = message

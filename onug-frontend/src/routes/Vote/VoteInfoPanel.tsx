@@ -1,15 +1,16 @@
 import { InfoPanel, OwnCard, QuickGuide, ReadyList } from 'components'
 import { observer } from 'mobx-react-lite'
-import { deckStore, playersStore } from 'store'
-import { ReadyStatus } from './Table.styles'
+import { playersStore, voteStore } from 'store'
+import { Placeholder, ReadyStatus } from './Vote.styles'
 
-export const TableInfoPanel: React.FC = observer(() => {
+export const VoteInfoPanel: React.FC = observer(() => {
   const { players } = playersStore
 
   return (
     <InfoPanel>
+      <Placeholder>egyelőre semmi</Placeholder>
       <ReadyStatus>{players && <ReadyList players={players} />}</ReadyStatus>
-      <OwnCard card={deckStore.playerCard} mark={deckStore.playerMark}/>
+      <OwnCard card={voteStore.knownPlayerCard} mark={voteStore.knownPlayerMark} />
       <QuickGuide />
     </InfoPanel>
   )

@@ -16,7 +16,7 @@ export const revealerResponse = (gamestate, token, selected_card_positions, titl
   const isTown = revealedCard.every((card) => IDS.GOOD_GUY_IDS.includes(Object.values(card)[0]))
 
   if (newGamestate.players[token].card?.original_id === selectedPositionCard.id) {
-    newGamestate.players[token].card.player_card_id = 0
+    newGamestate.players[token].card.player_card_id = 87
   }
 
   newGamestate.players[token].card_or_mark_action = true

@@ -1,10 +1,10 @@
-import { AroundTableSide, AroundTableTop, Main, PlayerCard, CenterCards } from 'components'
+import { AroundTableSide, AroundTableTop, CenterCards, Main, PlayerCard } from 'components'
 import { observer } from 'mobx-react-lite'
-import { GameInfoPanel } from 'routes/Game/GameInfoPanel'
+import { useVote } from './useVote'
 import { StyledVote, VoteCenter } from './Vote.styles'
 import { VoteFooter } from './VoteFooter'
 import { VoteHeader } from './VoteHeader'
-import { useVote } from './useVote'
+import { VoteInfoPanel } from './VoteInfoPanel'
 
 export const Vote: React.FC = observer(() => {
   const { tablePlayerCards, tablePlayerCard, left, middle, right } = useVote()
@@ -22,7 +22,7 @@ export const Vote: React.FC = observer(() => {
       </Main>
       {tablePlayerCards && <AroundTableSide cards={right} />}
       <VoteFooter />
-      <GameInfoPanel />
+      <VoteInfoPanel />
     </StyledVote>
   )
 })

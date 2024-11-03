@@ -776,14 +776,13 @@ export const cards: CardJson[] = [
     card_name: 'windy_wendy',
     rules: rules_role.rules_windywendy,
   },
-
-  /* {
-id: 87,
-expansion: '',
-display_name: '',
-team: '',
-wake_up_time: '',
-card_name: '',
- 1
-    }, */
+  {
+    id: 87,
+    expansion: '',
+    display_name: 'Unknown',
+    team: 'unknown',
+    wake_up_time: WAKE.day,
+    card_name: 'empty',
+    rules: 'unknown',
+  },
 ]

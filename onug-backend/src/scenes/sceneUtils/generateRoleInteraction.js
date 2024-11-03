@@ -27,7 +27,7 @@ const updatePlayerCard = (gamestate, token) => {
     playerCard.player_role = currentCard.role
     playerCard.player_team = currentCard.team
   } else if (iSeeMyCardElsewhere) {
-    playerCard.player_card_id = 0
+    playerCard.player_card_id = 87
   }
 }
 

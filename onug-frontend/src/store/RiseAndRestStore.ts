@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { deckStore, gamePropStore, messageStore, selectionStore } from 'store'
 import { CardPosition, InteractionType, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
+import { getCardById } from 'utils'
 
 class RiseAndRestStore {
   tablePlayerCard: TablePlayerCard = {}
@@ -53,7 +54,7 @@ class RiseAndRestStore {
     this.tablePlayerCards = defaultPlayerCards.map(defaultCard => {
       const positionObject = gamePropStore.show_cards.find(obj => obj[defaultCard.position])
       const cardId = positionObject ? positionObject[defaultCard.position] : null
-      const card = cardId ? deckStore.getCardById(cardId) : null
+      const card = cardId ? getCardById(cardId) : null
       const playerCard = players.find(player => defaultCard.position === player.player_number)
       if (!playerCard) return defaultCard
       
@@ -68,7 +69,7 @@ class RiseAndRestStore {
 
   setTablePlayerCard(lastJsonMessage: WsJsonMessage): void {
     const player = lastJsonMessage.player
-    const card = deckStore.getCardById(player.player_card_id)
+    const card = getCardById(player.player_card_id)
     this.tablePlayerCard = {
       player_name: 'You',
       position: player.player_number,
@@ -91,7 +92,7 @@ class RiseAndRestStore {
     this.tableCenterCards = defaultCenterCards.map(centerCard => {
       const positionObject = gamePropStore.show_cards.find(obj => obj[centerCard.position])
       const cardId = positionObject ? positionObject[centerCard.position] : null
-      const card = cardId ? deckStore.getCardById(cardId) : null
+      const card = cardId ? getCardById(cardId) : null
   
       return {
         position: centerCard.position,

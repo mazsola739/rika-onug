@@ -4,8 +4,9 @@ import { readGamestate } from '../repository'
 import { getTableBoard, isTableClosed } from '../utils'
 
 export const hydrateTable = async (ws, message) => {
-  try {
+  try { 
     logTrace(`hydrate game table requested with ${JSON.stringify(message)}`)
+    
     const { room_id, token } = message
     const gamestate = await readGamestate(room_id)
 
@@ -23,7 +24,10 @@ export const hydrateTable = async (ws, message) => {
         player: {
           player_name: player?.name,
           player_number: player?.player_number,
-          ...playerCard,
+          player_card_id: playerCard.player_card_id,
+          player_mark: playerCard.player_mark,
+          player_role: playerCard.player_role,
+          player_team: playerCard.player_team
         },
         players,
       })

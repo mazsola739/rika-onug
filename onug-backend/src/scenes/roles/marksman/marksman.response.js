@@ -15,7 +15,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
 
     if (newGamestate.players[token].card.player_original_id === selectedPositionCard.id && currentPlayerNumber !== selected_card_positions[0]) {
-      newGamestate.players[token].card.player_card_id = 0
+      newGamestate.players[token].card.player_card_id = 87
     }
     if (currentPlayerNumber === selected_card_positions[0]) {
       newGamestate.players[token].card.player_card_id = selectedPositionCard.id

@@ -1,7 +1,7 @@
-import { ARRIVE_VOTE, REDIRECT, STAGES } from 'constant'
+import { ARRIVE_VOTE, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { riseAndRestStore, wsStore } from 'store'
+import { deckStore, playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
 import { splitCardsToTable } from 'utils'
 
 export const useVote = () => {
@@ -27,11 +27,27 @@ export const useVote = () => {
 
 
   useEffect(() => {
+    if (lastJsonMessage?.type === HYDRATE_VOTE && lastJsonMessage?.success) {
+      voteStore.setKnownPlayer(lastJsonMessage.player)
+      playersStore.setPlayers(lastJsonMessage.players)
+      voteStore.setKnownPlayerCard()
+      voteStore.setKnownPlayerMark()
+      riseAndRestStore.openYourEyes(lastJsonMessage)
+    }
+
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
 
-  }, [lastJsonMessage, navigate])
+    if (lastJsonMessage?.type === HYDRATE_READY) {
+      playersStore.setPlayers(lastJsonMessage.players)
+    }
+  }, [
+    lastJsonMessage,
+    playersStore.setPlayer,
+    playersStore.setPlayers,
+    navigate,
+  ])
   
   
   const { tablePlayerCards, tablePlayerCard } = riseAndRestStore

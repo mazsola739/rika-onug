@@ -2,7 +2,7 @@ import { TEAM } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { deckStore } from 'store'
 import { CardJson, Player } from 'types'
-import { createDefaultCard, getOrderedTeams, getFilteredCardsForTeam as getSortedCardsByTeam } from 'utils'
+import { createDefaultCard, getCardById, getOrderedTeams, getFilteredCardsForTeam as getSortedCardsByTeam } from 'utils'
 
 class RoomStore {
   detailedCardInfo: CardJson = createDefaultCard()
@@ -53,7 +53,7 @@ class RoomStore {
       return
     }
 
-    const newCardInfo = deckStore.getCardById(id)
+    const newCardInfo = getCardById(id)
     this.detailedCardInfo = newCardInfo || createDefaultCard()
   }
 

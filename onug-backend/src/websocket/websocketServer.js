@@ -1,6 +1,6 @@
 
 import WebSocket from 'ws'
-import { ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VOTE, DEAL, JOIN_ROOM, LEAVE_ROOM, LEAVE_TABLE, NEWBIE, PAUSE_GAME, READY, RELOAD, RESET, SCENE, START_GAME, STOP_GAME, UPDATE_ROOM } from '../constants'
+import { ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VOTE, DEAL, JOIN_ROOM, LEAVE_ROOM, LEAVE_GAME, NEWBIE, PAUSE_GAME, READY, RELOAD, RESET, SCENE, START_GAME, STOP_GAME, UPDATE_ROOM, VOTE } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { dealCards } from './dealCards'
 import { hydrateGame } from './hydrateGame'
@@ -9,7 +9,7 @@ import { hydrateTable } from './hydrateTable'
 import { hydrateVote } from './hydrateVote'
 import { joinRoom } from './joinRoom'
 import { leaveRoom } from './leaveRoom'
-import { leaveTable } from './leaveTable'
+import { leaveGame } from './leaveGame'
 import { newbie } from './newbie'
 import { pauseGame } from './pauseGame'
 import { ready } from './ready'
@@ -19,6 +19,7 @@ import { scene } from './scene'
 import { startGame } from './startGame'
 import { stopGame } from './stopGame'
 import { updateRoom } from './updateRoom'
+import { vote } from './vote'
 
 export const websocketServer = (port) => {
   try {
@@ -42,17 +43,18 @@ export const websocketServer = (port) => {
         if (message.type === LEAVE_ROOM)        return leaveRoom(ws, message)
         if (message.type === UPDATE_ROOM)       return updateRoom(message)
         if (message.type === DEAL)              return dealCards(ws, message)
-        if (message.type === LEAVE_TABLE)       return leaveTable(ws, message)
+        if (message.type === LEAVE_GAME)        return leaveGame(ws, message)
         if (message.type === RESET)             return reset(message)
         if (message.type === ARRIVE_ROOM)       return hydrateRoom(ws, message)
-        if (message.type === ARRIVE_TABLE)      return hydrateTable(ws, message)
         if (message.type === READY)             return ready(message)
+        if (message.type === ARRIVE_TABLE)      return hydrateTable(ws, message)
         if (message.type === START_GAME)        return startGame(ws, message)
         if (message.type === ARRIVE_GAME)       return hydrateGame(ws, message)
         if (message.type === PAUSE_GAME)        return pauseGame(message)
         if (message.type === STOP_GAME)         return stopGame(message)
         if (message.type === SCENE)             return scene(ws, message)
         if (message.type === ARRIVE_VOTE)       return hydrateVote(ws, message)
+        if (message.type === VOTE)              return vote(ws, message)
       })
     })
   } catch (error) {

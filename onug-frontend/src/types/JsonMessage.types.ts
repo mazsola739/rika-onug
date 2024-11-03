@@ -6,6 +6,8 @@ export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
 export type Player = {
   player_card_id?: number
+  player_role?: string
+  player_team?: string
   player_mark?: string
   player_name: string
   player_number?: CardPosition
