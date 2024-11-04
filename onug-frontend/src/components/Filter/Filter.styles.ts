@@ -42,10 +42,10 @@ export const StyledFilterButton = styled.button<FilterButtonProps>`
   }
 `
 
-export const StyledFilterButtons = styled.div`
+export const FilterButtons = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 10px;
   width: 100%; 
 `

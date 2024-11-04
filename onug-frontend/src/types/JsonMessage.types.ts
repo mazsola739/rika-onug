@@ -60,6 +60,7 @@ export type InteractionType = {
   answer_options?: string[]
   artifacted_cards?: CardPosition[]
   dreamwolf?: CardPosition[]
+  masons?: CardPosition[]
   new_role_id?: number
   obligatory?: boolean
   private_message?: string[]

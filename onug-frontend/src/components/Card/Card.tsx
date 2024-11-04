@@ -12,7 +12,3 @@ export const Card: React.FC<CardProps> = observer(
     )
   }
 )
-
-/*height: ${({ sizeH }) => sizeH}px;
-  const sizeH = Math.round(size * 1.37367)
-  const glowColor = isSelectable ? '#28a745' : 'transparent' */

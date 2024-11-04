@@ -45,27 +45,20 @@ export const startGame = async (ws, message) => {
       return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
     }
 
-  
     let newGamestate = initializeGameState(gamestate)
     const { players } = newGamestate
 
-  
     if (!areAllPlayersReady(players)) {
       logError(`Not all players are ready. Current readiness: ${JSON.stringify(players)}`)
       return broadcastError(room_id, 'All players must be ready to start the game.')
     }
-
-  
     newGamestate = startScene(newGamestate)
-
-  
+    
     resetPlayerReadiness(players)
 
-  
     await upsertRoomState(newGamestate)
     logTrace(`Game started successfully in room [${room_id}] by player [${token}]`)
 
-  
     return broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` })
 
   } catch (error) {

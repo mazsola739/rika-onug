@@ -1,10 +1,6 @@
 export interface MenuButtonProps {
-  isSelected?: boolean
-  isActive?: boolean
-  expansion?: string
-  anchor?: string
-}
-
-export interface StyledMenuButtonProps {
-  isHighlighted: boolean
+  bgColor?: string;
+  bgImg?: string;
+  isSelected?: boolean;
+  onClick?: () => void;
 }

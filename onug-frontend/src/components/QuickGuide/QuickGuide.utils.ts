@@ -1,6 +1,6 @@
 import { CardJson, TokenJson } from 'types'
 
-export const getUniqueItems = <T>(items: T[], key: (item: T) => string): T[] => {
+export const getUniqueGuide = <T>(items: T[], key: (item: T) => string): T[] => {
   const seenKeys = new Set<string>()
 
   return items.filter((item) => {

@@ -21,7 +21,7 @@ const imageVariants: Record<AnchorTypes, string> = {
   'Werewolf': '/assets/playingcards/werewolf_2.png',
   'Vampire': '/assets/playingcards/the_count.png',
   'Alien': '/assets/playingcards/alien_female.png',
-  'Villain': '/assets/playingcards/temptress.png',
+  'Villain': '/assets/playingcards/henchman_7.png',
 };
 
 export interface NavListItemProps {
@@ -32,14 +32,14 @@ const isAnchorType = (anchor: string): anchor is AnchorTypes => {
   return anchor in colorVariants;
 };
 
-const getBackgroundColor = (anchor: string): string => {
+export const getBackgroundColor = (anchor: string): string => {
   if (isAnchorType(anchor)) {
     return colorVariants[anchor];
   }
   return colorVariants['Village'];
 };
 
-const getBackgroundImage = (anchor: string): string => {
+export const getBackgroundImage = (anchor: string): string => {
   if (isAnchorType(anchor)) {
     return imageVariants[anchor];
   }
@@ -53,12 +53,12 @@ export const StyledNav = styled.nav`
   margin: 10px;
 `
 
-export const UnorderedLists = styled.ul`
+export const NavButtons = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0;
-  margin: 0;
-  width: 150px;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%; 
 `
 
 export const ListItem = styled.li<NavListItemProps>`

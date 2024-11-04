@@ -2,7 +2,7 @@ import { HYDRATE_SCENE, REDIRECT } from '../constants'
 import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
 import { responseHandler, sceneHandler, scriptHandler } from '../scenes'
-import { allPlayersStateCheck } from '../utils'
+import { allPlayersStateCheck, randomDelay } from '../utils'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
 
@@ -20,6 +20,10 @@ const handleNightReady = async (room_id, newGamestate, players, token) => {
   setPlayerReady(players, token)
   if (allPlayersStateCheck(players, 'flag')) {
     logTrace(`All players are ready for night in room: ${room_id}. Processing script and scene handlers.`)
+    
+    //TODO uncomment delay
+    /* await randomDelay() */
+
     newGamestate = await scriptHandler(newGamestate)
     newGamestate = await sceneHandler(newGamestate)
     resetPlayerReadiness(players)

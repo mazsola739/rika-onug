@@ -2,23 +2,23 @@ import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
 import { CardJson, TokenJson } from 'types'
 import { Guide, Item, QuickGuideRule, StyledQuickGuide } from './QuickGuide.styles'
-import { getUniqueItems, isCardType } from './QuickGuide.utils'
+import { getUniqueGuide, isCardType } from './QuickGuide.utils'
 import { QuickGuideToken } from './QuickGuideToken'
 
-//TODO quick guide text
+//TODO better quick guide text!!!!
 export const QuickGuide: React.FC = observer(() => {
   const { selectedCards, selectedMarks, artifacts } = deckStore
 
-  const uniqueSelectedCards = getUniqueItems(
+  const uniqueSelectedCards = getUniqueGuide(
     selectedCards,
     (card) => card.display_name
   )
-  const uniqueSelectedMarks = getUniqueItems(
+  const uniqueSelectedMarks = getUniqueGuide(
     selectedMarks,
     (mark) => mark.token_name
   )
 
-  const renderItem = (item: CardJson | TokenJson) => {
+  const renderGuide = (item: CardJson | TokenJson) => {
     if (isCardType(item)) {
       return (
         <Item key={item.display_name} expansion={item.expansion}>
@@ -39,9 +39,9 @@ export const QuickGuide: React.FC = observer(() => {
   return (
     <Guide>
       <StyledQuickGuide>QUICK GUIDE</StyledQuickGuide>
-      {uniqueSelectedCards.map((card) => renderItem(card))}
-      {uniqueSelectedMarks.map((mark) => renderItem(mark))}
-      {artifacts.map((artifact) => renderItem(artifact))}
+      {uniqueSelectedCards.map((card) => renderGuide(card))}
+      {uniqueSelectedMarks.map((mark) => renderGuide(mark))}
+      {artifacts.map((artifact) => renderGuide(artifact))}
     </Guide>
   )
 })

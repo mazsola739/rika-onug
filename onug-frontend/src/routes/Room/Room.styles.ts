@@ -64,7 +64,7 @@ export const Character = styled.h4`
   color: yellow;
   padding: 0;
   margin: 0;
-  text-align: center;
+  text-align: left;
 `
 
 export const Rule = styled.p`

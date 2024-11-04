@@ -1,52 +1,60 @@
 import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
-import { StyledNav, UnorderedLists } from './Nav.styles'
+import { NavButtons, StyledNav } from './Nav.styles'
 import { NavProps } from './Nav.types'
-import { NavListItem } from './NavListItem'
+import { NavButton } from './NavButton'
 
-//TODO menubuttons - common component with filter
 export const Nav: React.FC<NavProps> = observer(({ anchorList }) => {
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null)
 
+  //TODO fix it, right now not refreshing the anchor isactive status
   useEffect(() => {
-    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveAnchor(entry.target.id)
+    const sections = anchorList.map(anchor => document.getElementById(anchor)).filter(Boolean)
+    const navLinks = document.querySelectorAll(".navbar .nav-container button")
+
+    const updateActiveSection = () => {
+      let activeSectionId: string | null = null
+      let closestDistance = Number.POSITIVE_INFINITY
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect()
+        
+        const distanceFromTop = rect.top 
+
+        if (distanceFromTop >= 0 && distanceFromTop < closestDistance) {
+          closestDistance = distanceFromTop
+          activeSectionId = section.id
         }
       })
+
+      navLinks.forEach((link) => {
+        link.classList.remove("active")
+        if (link.classList.contains(activeSectionId || "")) {
+          link.classList.add("active")
+        }
+      })
+
+      setActiveAnchor(activeSectionId)
     }
 
-    const observer = new IntersectionObserver(handleIntersection, {
-      root: null,
-      rootMargin: '0px',
-      threshold: 1,
-    })
+    window.addEventListener("scroll", updateActiveSection)
+    window.addEventListener("resize", updateActiveSection)
 
-    anchorList.forEach((anchor) => {
-      const element = document.getElementById(anchor)
-      if (element) {
-        observer.observe(element)
-      }
-    })
+    updateActiveSection()
 
     return () => {
-      anchorList.forEach((anchor) => {
-        const element = document.getElementById(anchor)
-        if (element) {
-          observer.unobserve(element)
-        }
-      })
+      window.removeEventListener("scroll", updateActiveSection)
+      window.removeEventListener("resize", updateActiveSection)
     }
   }, [anchorList])
 
   return (
-    <StyledNav>
-      <UnorderedLists>
+    <StyledNav className="navbar">
+      <NavButtons className="nav-container">
         {anchorList.map((anchor, index) => (
-          <NavListItem key={index} anchor={anchor} isActive={activeAnchor === anchor} />
+          <NavButton key={index} anchor={anchor} isActive={activeAnchor === anchor} />
         ))}
-      </UnorderedLists>
+      </NavButtons>
     </StyledNav>
   )
 })

@@ -1,7 +1,7 @@
 import { END_GAME } from '../constants'
 import { logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { allPlayersStateCheck } from '../utils'
+import { allPlayersStateCheck, randomDelay } from '../utils'
 import { broadcast } from '../websocket/connections'
 import { actionHandler } from './actionHandler'
 
@@ -86,6 +86,10 @@ export const sceneHandler = async (gamestate) => {
 
   if (gameCanEnd) {
     logTrace(`All scripts processed. Broadcasting END_GAME message.`)
+
+        //TODO uncomment delay
+    /* await randomDelay() */
+    
     broadcast(newGamestate.room_id, {
       type: END_GAME,
       success: true,

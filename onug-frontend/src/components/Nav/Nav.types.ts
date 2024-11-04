@@ -2,7 +2,7 @@ export interface NavProps {
   anchorList: string[]
 }
 
-export interface NavListItemProps {
+export interface NavButtonProps {
   anchor: string
   isActive: boolean
 }

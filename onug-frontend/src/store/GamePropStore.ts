@@ -24,6 +24,7 @@ class GamePropStore {
   get show_cards() { return this.interaction.show_cards }
   get show_marks() { return this.interaction.show_marks }
   get werewolves() { return this.interaction.werewolves }
+  get masons() { return this.interaction.masons }
 
   setInteraction(interaction: InteractionType): void {
     this.interaction = { ...this.interaction, ...interaction }
@@ -51,6 +52,7 @@ class GamePropStore {
       dreamwolf: [],
       scene_end: false,
       obligatory: false,
+      masons: [],
       new_role_id: 0,
       selectable_card_limit: { player: 0, center: 0 },
       selectable_cards: [],
