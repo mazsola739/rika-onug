@@ -37,6 +37,7 @@ sudo iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
 cd /rika-onug/onug-backend
 yarn
 nohup yarn start &
+// nohup yarn start > prod__nohup.txt &
 
 ## start frontend
 cd /rika-onug/onug-frontend
