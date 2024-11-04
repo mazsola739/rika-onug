@@ -37,23 +37,23 @@ const lightenBackground = keyframes`
 
 //GAME
 export const StyledGame = styled.div<GameProps>`
-  animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? darkenBackground : lightenBackground)} 3s
+  animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? darkenBackground : lightenBackground)} 1s
     forwards;
 
   > header {
     > div {
       > img:first-of-type {
-        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeOutSun : fadeInSun)} 3s
+        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeOutSun : fadeInSun)} 1s
           forwards;
       }
 
       > img:nth-of-type(2) {
-        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 3s
+        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 1s
           forwards;
       }
 
       > span {
-        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 3s
+        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 1s
           forwards;
       }
     }

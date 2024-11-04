@@ -50,16 +50,28 @@ class RiseAndRestStore {
     }
   }
 
+  getShowCardsMap(): Record<CardPosition, number> {
+    const showCards = gamePropStore.show_cards
+    if (Array.isArray(showCards)) {
+      return showCards.reduce((acc, card) => ({ ...acc, ...card }), {} as Record<CardPosition, number>)
+    }
+    return showCards as Record<CardPosition, number>
+  }
+
   setTablePlayerCards(lastJsonMessage: WsJsonMessage): void {
-    const players = lastJsonMessage.players;
+    const players = lastJsonMessage.players
+    const showCards = this.getShowCardsMap()
+
     this.tablePlayerCards = Array.from({ length: deckStore.totalPlayers }, (_, i) => {
-      const position = `player_${i + 1}` as CardPosition;
-      const defaultCard = this.createEmptyPlayerCard(position);
+      const position = `player_${i + 1}` as CardPosition
+      const defaultCard = this.createEmptyPlayerCard(position)
 
-      const playerCard = players.find(player => position === player.player_number);
-      if (!playerCard) return defaultCard;
+      const playerCard = players.find(player => position === player.player_number)
+      if (!playerCard) return defaultCard
 
-      const card = getCardById(playerCard.player_card_id);
+      const cardId = showCards[position] || playerCard.player_card_id
+      const card = getCardById(cardId)
+
       return {
         ...defaultCard,
         player_name: playerCard.player_name,
@@ -69,32 +81,36 @@ class RiseAndRestStore {
         team: playerCard.player_team || '',
         selected: false,
         ...this.getCardStatus(position),
-      };
-    });
+      }
+    })
   }
-
 
   setTablePlayerCard(lastJsonMessage: WsJsonMessage): void {
     const player = lastJsonMessage.player
-    const card = getCardById(player.player_card_id)
+    const cardId = player.player_card_id
+    const card = getCardById(cardId)
+
     this.tablePlayerCard = {
-      player_name: 'You',
+      player_name: player.player_name || 'You',
       position: player.player_number,
       card_name: card ? card.card_name : '',
       mark: player.player_mark || '',
       role: player.player_role || '',
       team: player.player_team || '',
+      selected: false,
       ...this.getCardStatus(player.player_number),
     }
   }
 
   setTableCenterCards(lastJsonMessage: WsJsonMessage): void {
     const incomingCenterCards = lastJsonMessage.center_cards || []
+    const showCards = this.getShowCardsMap()
     const centerCardsMap = Object.fromEntries(incomingCenterCards.map(card => [card.card_position, card]))
 
     this.tableCenterCards = this.createDefaultCenterCards().map(centerCard => {
       const incomingCard = centerCardsMap[centerCard.position]
-      const card = incomingCard ? getCardById(incomingCard.card_id) : null
+      const cardId = showCards[centerCard.position] || (incomingCard ? incomingCard.card_id : null)
+      const card = cardId ? getCardById(cardId) : null
 
       return {
         ...centerCard,
@@ -106,7 +122,7 @@ class RiseAndRestStore {
       }
     })
   }
-  
+
   resetCards(): void {
     const resetCardState = this.createEmptyPlayerCard(null)
     this.tablePlayerCard = { ...resetCardState, position: this.tablePlayerCard.position }

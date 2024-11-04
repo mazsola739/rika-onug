@@ -56,6 +56,17 @@ export const VoteCenter = styled.div`
 //INFOPANEL
 export const ReadyStatus = styled.div`
   display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+`
+
+export const ReadyTitle = styled.h3`
+  grid-area: title;
+  color: yellow;
+  padding: 0;
+  margin: 0;
+  padding: 10px 0;
+  text-align: center;
 `
 
 export const MessageText = styled.p`

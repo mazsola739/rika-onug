@@ -7,7 +7,7 @@ import { VoteHeader } from './VoteHeader'
 import { VoteInfoPanel } from './VoteInfoPanel'
 
 export const Vote: React.FC = observer(() => {
-  const { tablePlayerCards, tablePlayerCard, left, middle, right } = useVote()
+  const { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard } = useVote()
 
   return (
     <StyledVote>
@@ -18,7 +18,7 @@ export const Vote: React.FC = observer(() => {
       <VoteCenter>
         <CenterCards />
       </VoteCenter>
-      {tablePlayerCard && <PlayerCard card={tablePlayerCard} cardSize={130} tokenSize={50}  />}
+      {tablePlayerCard && <PlayerCard card={ownCard} cardSize={130} tokenSize={50}  />}
       </Main>
       {tablePlayerCards && <AroundTableSide cards={right} />}
       <VoteFooter />

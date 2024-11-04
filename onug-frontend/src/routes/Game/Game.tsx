@@ -8,7 +8,7 @@ import { useGame } from './useGame'
 import { gamePropStore } from 'store'
 
 export const Game: React.FC = observer(() => {
-  const { tablePlayerCards, tablePlayerCard, left, middle, right, setTransitionCompleted } = useGame()
+  const { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard, setTransitionCompleted } = useGame()
 
   return (
     <StyledGame nightfall={gamePropStore.nightfall} sunrise={gamePropStore.sunrise} onAnimationEnd={()=>setTransitionCompleted(true)}>
@@ -19,7 +19,7 @@ export const Game: React.FC = observer(() => {
         <GameCenter>
           <CenterCards />
         </GameCenter>
-        {tablePlayerCard && <PlayerCard card={tablePlayerCard} cardSize={130} tokenSize={50}  />}
+        {tablePlayerCard && <PlayerCard card={ownCard} cardSize={130} tokenSize={50}  />}
       </Main>
       {tablePlayerCards && <AroundTableSide cards={right} />}
       <GameFooter />

@@ -1,4 +1,4 @@
-import { GlowingBorder, InfoPanel, MessageBox, QuickGuide } from 'components'
+import { InfoPanel, MessageBox, QuickGuide } from 'components'
 import { observer } from 'mobx-react-lite'
 import { messageStore } from 'store'
 import { Placeholder } from './Game.styles'
@@ -9,7 +9,7 @@ export const GameInfoPanel: React.FC = observer(() => {
   return (
     <InfoPanel>
       <Placeholder>
-        { narration && <GlowingBorder glowColor='#dc3545'><MessageBox /></GlowingBorder> }
+        { narration && <MessageBox /> }
       </Placeholder>
       <QuickGuide />
     </InfoPanel>

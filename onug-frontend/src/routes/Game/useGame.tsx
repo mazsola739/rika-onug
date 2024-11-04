@@ -71,7 +71,7 @@ export const useGame = () => {
     tablePlayerCards && tablePlayerCard
       ? splitCardsToTable(tablePlayerCards, tablePlayerCard)
       : null
-  const { left = [], middle = [], right = [] } = sides || {}
+  const { left = [], middle = [], right = [], ownCard } = sides || {}
 
-  return { tablePlayerCards, tablePlayerCard, left, middle, right, setTransitionCompleted }
+  return { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard, setTransitionCompleted }
 }
