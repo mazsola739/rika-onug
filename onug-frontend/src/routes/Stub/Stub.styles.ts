@@ -1,137 +1,98 @@
 import styled from '@emotion/styled'
 
-const primaryColor = '#00FFFF'
-const secondaryColor = '#00BFFF'
-const buttonTextColor = 'black'
-
-export const StyledStub = styled.div`
-  margin: auto;
+export const StubContainer = styled.div`
   display: flex;
-  flex-direction: row;
-  font-family: 'Josefin Sans', sans-serif;
-  height: 92%;
-  width: 100%;
-`
-
-export const LeftSide = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
   padding: 20px;
-  width: 60%;
-`
-
-export const RightSide = styled.div`
-  height: 100%;
-  padding: 20px;
-  width: 40%;
-`
-
-export const PositionContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  padding: 3px;
-  justify-content: flex-end;
-`
-
-export const PopulatorContainer = styled.div`
-  display: flex;
-  flex-direction: row;
   gap: 20px;
-  width: 100%;
+  width: 90%;
+  max-height: 90%;
+  font-family: 'Roboto', sans-serif;
 `
 
-export const MetaContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`
-
-export const ResponseContainer = styled.div`
-  border: 1px solid white;
-  border-radius: 5px;
-  height: 85%;
-  overflow-y: auto;
+export const Container = styled.div`
+  flex: 1;
+  border-radius: 12px;
   padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 `
 
-export const StubTitle = styled.h4`
+export const StubTitle = styled.h3`
   color: white;
-  margin-bottom: 10px;
-  margin: 5px;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
 `
 
 export const FormContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
+  min-width: 100%;
 `
 
-export const InputContainer = styled.div`
+export const InputsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
+  min-width: 100%;
+`
+
+export const ButtonsWrapper = styled.div`
+ display: flex;
+  flex-direction: column;
+  gap: 5px;
+`
+
+export const Grid = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: flex-start;
+  min-width: 100%;
 `
 
 export const Label = styled.label`
   color: white;
+  font-size: 0.9rem;
+  min-width: 90px;
 `
 
-export const Input = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-end;
-
-  gap: 10px;
-  justify-content: flex-end;
-`
 export const InputField = styled.input`
-  border: 1px solid white;
-  border-radius: 5px;
-  height: 15px;
-  width: 55px;
-`
-
-export const RoleName = styled.span`
-  color: white;
-  min-width: 300px;
-`
-
-export const ButtonsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  width: 50px;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background-color: #fff;
+  font-size: 1rem;
 `
 
 export const Button = styled.button`
-  align-items: center;
-  background-color: ${primaryColor};
+  padding: 10px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: black;
   border: none;
-  border-radius: 5px;
-  color: ${buttonTextColor};
+  border-radius: 3px;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 15px;
-  padding: 2px;
-  text-align: center;
-  width: 100px;
-  height: 25px;
-  justify-content: center;
+  transition: background 0.3s;
 
   &:hover {
-    background-color: ${secondaryColor};
+    background-color: grey;
+  }
+
+  &:disabled {
+    background-color: transparent;
   }
 `
 
-export const ResponsePre = styled.pre`
+export const RoleDisplay = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  font-size: 14px;
   color: white;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 12px;
-  margin: 0;
-  text-align: left;
-  white-space: pre-wrap;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  overflow-y: auto;
+  max-height: 250px;
 `
