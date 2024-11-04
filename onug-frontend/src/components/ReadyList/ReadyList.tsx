@@ -5,8 +5,7 @@ import { ReadyListProps } from './ReadyList.types'
 
 export const ReadyList: React.FC<ReadyListProps> = observer(({ players }) => (
   <StyledReadyList>
-{/* TODO fix    <Players>Player(s) in the room</Players> */}
-    {players.map(({ player_name, ready, player_number }, index) => {
+    {players.map(({ player_name, flag: ready, player_number }, index) => {
       const playerTokenName = ready
         ? `selected_${player_number}`
         : player_number

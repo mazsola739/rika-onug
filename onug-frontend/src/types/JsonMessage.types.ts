@@ -14,6 +14,13 @@ export type Player = {
   flag?: boolean
 }
 
+export type CenterCard = {
+  card_position: CardPosition,
+  card_id: number,
+  card_role: string,
+  card_team: string
+}
+
 export type Expansion = "Werewolf" | "Daybreak" | "Vampire" | "Alien" | "Super Villains" | "Bonus Roles"
 
 export type CardPosition = 'player_1' | 'player_2' | 'player_3' | 'player_4' | 'player_5' | 'player_6' | 'player_7' | 'player_8' | 'player_9' | 'player_10' | 'player_11' | 'player_12' | 'center_wolf' | 'center_left' | 'center_middle' | 'center_right' | 'center_villain'
@@ -28,6 +35,7 @@ export type TablePlayerCard = {
   role?: string
   selectable_card?: boolean
   selectable_mark?: boolean
+  selected?: boolean
   shield?: boolean
   team?: string
   werewolves?: boolean
@@ -37,7 +45,10 @@ export type TablePlayerCard = {
 export type TableCenterCard = {
   card_name?: string  
   position?: CardPosition
+  role?: string
   selectable_card?: boolean
+  selected?: boolean
+  team?: string
 }
 
 export type ActualSceneType = {
@@ -76,6 +87,7 @@ export type IdentifierType = keyof typeof identifier
 
 export type WsJsonMessage = {
   actual_scene?: ActualSceneType
+  center_cards?: CenterCard[]
   day_mode?: boolean
   errors?: string[]
   interaction?: InteractionType

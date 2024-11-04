@@ -15,27 +15,27 @@ const Info: React.FC = observer(() => {
   return (
     <StyledInfo>
       {imgSrc && <Avatar src={imgSrc} alt="info" />}
-      <Character>{detailedCardInfo.display_name}</Character>
+      <Character>{detailedCardInfo.display_name.toLocaleUpperCase()}</Character>
       <Rule>{detailedCardInfo.rules}</Rule>
     </StyledInfo>
   )
 })
 
 const PlayerNames: React.FC = observer(() => {
+  const room_id = sessionStorage.getItem('room_id')
   const { roomPlayers: players } = roomStore
 
   return (
     <StyledPlayerNames>
-      <Players>Player(s) in the room</Players>
+      <Players>PLAYER(S) IN THE {room_id.toLocaleUpperCase().replace('_', ' ')}</Players>
       <Names>
         {players &&
           players.map(({ player_name }, index) => (
             <Fragment key={index}>
               <Player>
-                <Token tokenName={`${index + 1}`} size={30} />
+                <Token tokenName={`${index + 1}`} size={20} />
                 <PlayerName>{player_name}</PlayerName>
               </Player>
-              {index < players.length - 1 && ', '}
             </Fragment>
           ))}
       </Names>

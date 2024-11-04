@@ -50,12 +50,13 @@ export const Guide = styled.div`
   align-items: center;
   gap: 5px;
   color: white;
-  font-size: 14px;
 `
 
 export const StyledQuickGuide = styled.h3`
+  color: yellow;
+  padding: 10px 0;
+  margin: 0;
   text-align: center;
-  border-bottom: 1px solid #969290;
 `
 
 export const Item = styled.div<StyledQuickGuideTokenProps>`

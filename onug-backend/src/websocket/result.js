@@ -47,7 +47,6 @@ export const result = async (ws, message) => {
 
       const center_cards = filterCenterCards(newGamestate.card_positions)
 
-    
       const resultMessage = createResultMessage(playerToken, newGamestate, vote_result, center_cards)
       sendMessageToPlayer(room_id, playerToken, resultMessage)
     })

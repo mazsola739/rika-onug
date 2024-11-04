@@ -31,13 +31,16 @@ export const StyledRoom = styled.div`
 export const StyledInfo = styled.div`
   display: grid;
   flex-direction: column;
-  gap: 5px;
-  min-height: 105px;
-  border-bottom: 2px solid #969290;
-  padding-bottom: 5px;
   align-items: center;
+  justify-content: start;
+  gap: 5px;
+  min-height: 90px;
+  border-bottom: 2px solid #969290;
+  padding: 10px 0 5px 0;
+  grid-template-columns: 80px 300px;
+  grid-template-rows: 20px 60px;
   grid-template-areas:
-    '. character'
+    'avatar character'
     'avatar rule';
 
   img {
@@ -57,29 +60,26 @@ export const Avatar = styled.img`
 `
 
 export const Character = styled.h4`
+  grid-area: title;
   color: yellow;
-  font-size: 14px;
-  margin: 0;
   padding: 0;
+  margin: 0;
   text-align: center;
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-    1px 1px 0 black;
 `
 
 export const Rule = styled.p`
-  color: yellow;
+  color: white;
   font-size: 14px;
   margin: 0;
   padding: 0;
   text-align: left;
-  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
-    1px 1px 0 black;
 `
 
 export const StyledPlayerNames = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 180px;
 
   color: white;
   font-size: 14px;
@@ -89,20 +89,26 @@ export const StyledPlayerNames = styled.div`
 `
 
 export const Names = styled.div`
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(6, auto);
+  gap: 5px;
   align-items: center;
-  gap: 3px;
-  flex-wrap: wrap;
+  min-width: 388px;
 `
 
-export const Players = styled.h4`
+export const Players = styled.h3`
+  grid-area: title;
+  color: yellow;
+  padding: 10px 0;
+  margin: 0;
   text-align: center;
 `
 
 export const Player = styled.div`
   align-items: center;
   display: flex;
+  font-size: 20px;
   flex-direction: row;
   align-items: center;
   gap: 5px;

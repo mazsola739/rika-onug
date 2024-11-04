@@ -24,6 +24,7 @@ class RiseAndRestStore {
       shield: false,
       selectable_card: false,
       selectable_mark: false,
+      selected: false,
       werewolves: false,
       dreamwolf: false,
     }
@@ -35,7 +36,7 @@ class RiseAndRestStore {
 
     return positions
       .filter(pos => !(pos === 'center_wolf' && !hasAlphawolf || pos === 'center_villain' && !hasTemptress))
-      .map(pos => ({ position: pos, card_name: '', selectable: false }))
+      .map(pos => ({ position: pos, card_name: '', role: '', team: '', selectable_card: false, selected: false }))
   }
 
   getCardStatus(position: CardPosition) {
@@ -50,15 +51,15 @@ class RiseAndRestStore {
   }
 
   setTablePlayerCards(lastJsonMessage: WsJsonMessage): void {
-    const players = lastJsonMessage.players
+    const players = lastJsonMessage.players;
     this.tablePlayerCards = Array.from({ length: deckStore.totalPlayers }, (_, i) => {
-      const position = `player_${i + 1}` as CardPosition
-      const defaultCard = this.createEmptyPlayerCard(position)
+      const position = `player_${i + 1}` as CardPosition;
+      const defaultCard = this.createEmptyPlayerCard(position);
 
-      const playerCard = players.find(player => position === player.player_number)
-      if (!playerCard) return defaultCard
+      const playerCard = players.find(player => position === player.player_number);
+      if (!playerCard) return defaultCard;
 
-      const card = getCardById(playerCard.player_card_id)
+      const card = getCardById(playerCard.player_card_id);
       return {
         ...defaultCard,
         player_name: playerCard.player_name,
@@ -66,10 +67,12 @@ class RiseAndRestStore {
         mark: playerCard.player_mark || '',
         role: playerCard.player_role || '',
         team: playerCard.player_team || '',
+        selected: false,
         ...this.getCardStatus(position),
-      }
-    })
+      };
+    });
   }
+
 
   setTablePlayerCard(lastJsonMessage: WsJsonMessage): void {
     const player = lastJsonMessage.player
@@ -86,15 +89,20 @@ class RiseAndRestStore {
   }
 
   setTableCenterCards(lastJsonMessage: WsJsonMessage): void {
+    const incomingCenterCards = lastJsonMessage.center_cards || []
+    const centerCardsMap = Object.fromEntries(incomingCenterCards.map(card => [card.card_position, card]))
+
     this.tableCenterCards = this.createDefaultCenterCards().map(centerCard => {
-      const positionObject = gamePropStore.show_cards.find(obj => obj[centerCard.position])
-      const cardId = positionObject ? positionObject[centerCard.position] : null
-      const card = cardId ? getCardById(cardId) : null
+      const incomingCard = centerCardsMap[centerCard.position]
+      const card = incomingCard ? getCardById(incomingCard.card_id) : null
 
       return {
         ...centerCard,
         card_name: card ? card.card_name : '',
+        role: incomingCard ? incomingCard.card_role : '',
+        team: incomingCard ? incomingCard.card_team : '',
         selectable_card: gamePropStore.selectable_cards.includes(centerCard.position),
+        selected: false,
       }
     })
   }
@@ -107,6 +115,7 @@ class RiseAndRestStore {
       ...centerCard,
       card_name: '',
       selectable_card: false,
+      selected: false,
     }))
   }
 

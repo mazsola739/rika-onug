@@ -1,16 +1,19 @@
 
 import { CardImage, Token } from 'components'
 import { observer } from 'mobx-react-lite'
-import { CardRule, OwnCardInfoName, OwnCardInfoRole, OwnCardInfoTeam, StyledOwnCard, TokenRule } from './OwnCard.styles'
+import { CardRule, KnownCard, OwnCardInfoName, OwnCardInfoRole, OwnCardInfoTeam, StyledOwnCard, TokenRule } from './OwnCard.styles'
 import { OwnCardProps } from './OwnCard.types'
 
 export const OwnCard: React.FC<OwnCardProps> = observer(({ card, mark, player }) => {
+
+  const playerNumber = player?.player_number?.replace(/^player_/, "")
   
     return (
       player && (
         <StyledOwnCard>
-          <Token tokenName={player.player_number} size={30} />
-          <OwnCardInfoName>Name: {player.player_name}</OwnCardInfoName>
+          <KnownCard>YOUR KNOWN CARD</KnownCard>
+          <Token tokenName={playerNumber} size={25} />
+          <OwnCardInfoName>{player.player_name}</OwnCardInfoName>
           <CardImage image={card.card_name} size={100} />
           <OwnCardInfoTeam>Team: {player.player_team}</OwnCardInfoTeam>
           <OwnCardInfoRole>Role: {player.player_role}</OwnCardInfoRole>

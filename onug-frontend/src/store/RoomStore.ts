@@ -7,6 +7,7 @@ import { createDefaultCard, getCardById, getOrderedTeams, getFilteredCardsForTea
 class RoomStore {
   detailedCardInfo: CardJson = createDefaultCard()
   roomPlayers: Player[]
+  roomId: string
 
   constructor() {
     makeAutoObservable(this)

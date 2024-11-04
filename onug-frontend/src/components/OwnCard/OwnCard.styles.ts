@@ -2,18 +2,20 @@ import styled from '@emotion/styled'
 
 export const StyledOwnCard = styled.div`
   display: grid;
-  justify-content: center;
-  grid-template-columns: 100px 270px;
-  grid-template-rows: 30px 20px 20px 77px 55px;
-  gap: 10px;
+  justify-content: center;  
   border-bottom: 2px solid #969290;
+  grid-template-columns: 100px 20px 250px;
+  grid-template-rows: 20px 20px 20px 20px 77px 55px;
+  gap: 10px;
+  padding: 10px 0;
 
   grid-template-areas:
-    'number name'
-    'card team'
-    'card role'
-    'card cardrule'
-    'token tokenrule';
+    'title title title'
+    'card number name'
+    'card team team'
+    'card role role'
+    'card cardrule cardrule'
+    'token tokenrule tokenrule';
 
   & > img:nth-of-type(1) {
     grid-area: number;
@@ -29,6 +31,14 @@ export const StyledOwnCard = styled.div`
     justify-self: end;
   }
 
+`
+
+export const KnownCard = styled.h3`
+  grid-area: title;
+  color: yellow;
+  padding: 0;
+  margin: 0;
+  text-align: center;
 `
 
 export const OwnCardInfoName = styled.span`
