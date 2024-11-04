@@ -11,7 +11,7 @@ export const StubContainer = styled.div`
   padding: 20px;
   gap: 20px;
   height: 90%;
-  width: 90%;
+  width: 95%;
   font-family: 'Roboto', sans-serif;
   background-color: ${backgroundColor};
 `

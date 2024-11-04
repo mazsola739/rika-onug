@@ -11,7 +11,7 @@ export const StyledGod = styled.div`
   flex-direction: row;
   font-family: 'Roboto', sans-serif;
   height: 90%;
-  width: 90%;
+  width: 95%;
   padding: 20px;
   gap: 20px;
   background-color: ${backgroundColor};

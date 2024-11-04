@@ -25,6 +25,8 @@
 .env.test.local
 .env.production.local
 /onug-backend/src/gamestate/*.json
+.idea
+*.iml
 
 npm-debug.log*
 yarn-debug.log*

@@ -9,4 +9,15 @@ export const StyledFooter = styled.footer`
   border-radius: 10px 10px 0 0;
   padding: 5px;
   margin: 5px;
+  position: relative;
+`
+
+export const CopyrightText = styled.div`
+  font-size: 0.6rem; 
+  color: rgba(255, 255, 255, 0.5); 
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
 `
