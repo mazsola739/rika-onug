@@ -1,31 +1,39 @@
 import styled from '@emotion/styled'
 
-const primaryColor = '#00FFFF'
-const secondaryColor = '#00BFFF'
-const textColor = 'white'
-const buttonTextColor = 'black'
+const primaryColor = '#00AACC';
+const secondaryColor = '#0088AA';
+const textColor = 'white';
+const buttonTextColor = 'white';
+const backgroundColor = '#20232a';
 
 export const StyledGod = styled.div`
-  margin: auto;
   display: flex;
   flex-direction: row;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Roboto', sans-serif;
   height: 90%;
-  width: 100%;
+  width: 90%;
+  padding: 20px;
+  gap: 20px;
+  background-color: ${backgroundColor};
 `
 
 export const LeftSide = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  gap: 20px;
   padding: 20px;
   width: 40%;
+  background-color: #282C34;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 `
 
 export const RightSide = styled.div`
-  height: 100%;
   padding: 20px;
   width: 60%;
+  background-color: #282C34;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 `
 
 export const GamestatesContainer = styled.div`
@@ -47,40 +55,45 @@ export const MetaContainer = styled.div`
 `
 
 export const ResponseContainer = styled.div`
-  border: 1px solid ${textColor};
-  border-radius: 5px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
   height: 85%;
   overflow-y: auto;
-  padding: 20px;
+  background-color: #333;
 `
 
 export const GodTitle = styled.h4`
   color: ${textColor};
-  margin-bottom: 10px;
-  margin: 5px;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
 `
 
 export const FormContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 20px;
   width: 100%;
 `
 
 export const InputContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 100%;
 `
 
 export const Label = styled.label`
   color: ${textColor};
+  font-size: 0.9rem;
 `
 
 export const Input = styled.input`
-  border: 1px solid ${textColor};
+  padding: 8px;
+  border: 1px solid #ddd;
   border-radius: 5px;
-  height: 25px;
+  font-size: 1rem;
+  background-color: #fff;
 `
 
 export const ButtonsContainer = styled.div`
@@ -90,30 +103,30 @@ export const ButtonsContainer = styled.div`
 `
 
 export const Button = styled.button`
-  align-items: center;
+  padding: 8px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: ${textColor};
   background-color: ${primaryColor};
   border: none;
   border-radius: 5px;
-  color: ${buttonTextColor};
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 15px;
-  padding: 2px;
-  text-align: center;
-  width: 100%;
+  transition: background 0.3s;
 
   &:hover {
     background-color: ${secondaryColor};
+  }
+
+  &:disabled {
+    background-color: transparent;
+    color: #aaa;
   }
 `
 
 export const ResponsePre = styled.pre`
   color: ${textColor};
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
   margin: 0;
-  text-align: left;
   white-space: pre-wrap;
 `

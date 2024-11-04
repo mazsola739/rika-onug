@@ -1,6 +1,6 @@
 import { API_HOST } from 'constant'
 import { useCallback, useState } from 'react'
-import { LABELS } from './Stub.constants'
+import { labels } from './Stub.constants'
 import { testCase } from './TestCases/testCase'
 
 interface ServerResponse {
@@ -17,7 +17,7 @@ interface UseStubLogicReturn {
 }
 
 export const useStub = (): UseStubLogicReturn => {
-  const [inputValues, setInputValues] = useState<number[]>(Array(LABELS.length).fill(0))
+  const [inputValues, setInputValues] = useState<number[]>(Array(labels.length).fill(0))
   const [response, setResponse] = useState<ServerResponse>({ serverResponse: 'will be populated here' })
   const [dealStub, setDealStub] = useState<Record<string, number>>({})
 
@@ -49,7 +49,7 @@ export const useStub = (): UseStubLogicReturn => {
 
     setDealStub((prevStub) => ({
       ...prevStub,
-      [LABELS[index]]: parsedValue || null,
+      [labels[index]]: parsedValue || null,
     }))
   }, [])
 
@@ -59,13 +59,13 @@ export const useStub = (): UseStubLogicReturn => {
 
   const resetStub = useCallback(async () => {
     setDealStub({})
-    setInputValues(Array(LABELS.length).fill(0))
+    setInputValues(Array(labels.length).fill(0))
     await updateResponse({ reset: true })
   }, [])
 
   const useTestCase = useCallback(async () => {
     setDealStub(testCase)
-    setInputValues(LABELS.map((label) => testCase[label] || 0))
+    setInputValues(labels.map((label) => testCase[label] || 0))
     await updateResponse(testCase)
   }, [])
 

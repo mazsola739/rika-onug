@@ -1,9 +1,4 @@
-export const DEAL_POPULATOR = 'Deal populator'
-export const POPULATE = 'populate'
-export const RESET = 'reset'
-export const TEST_CASE = 'test case'
-export const RESPONSE = 'Response'
-export const LABELS = [
+export const labels = [
   'Player1',
   'Player2',
   'Player3',
@@ -23,7 +18,7 @@ export const LABELS = [
   'CenterVillain',
 ]
 
-export const ROLEMAPPING: Record<number, string> = {
+export const role_map: Record<number, string> = {
   1: 'Doppelganger',
   2: 'Drunk',
   3: 'Hunter',
