@@ -6,7 +6,7 @@ export const StyledApp = styled.div`
   height: 100vh;
 
   background-image: radial-gradient(ellipse at top, #9a9a9aBF, #000000E6),
-    url('/assets/backgrounds/wood.png');
+    url('/assets/backgrounds/wood.webp');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;

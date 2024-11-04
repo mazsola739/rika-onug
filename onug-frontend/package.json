@@ -11,7 +11,8 @@
     "build:prod": "tsc && vite build --mode prod",
     "serve": "vite preview",
     "test": "vitest",
-    "test:coverage": "vitest run --coverage --watch=false"
+    "test:coverage": "vitest run --coverage --watch=false",
+    "imageCompress": "node scripts/imageCompress.cjs"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -38,7 +39,8 @@
     "@types/node": "^22.7.6",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.1",
-    "@typescript-eslint/parser": "^8.9.0"
+    "@typescript-eslint/parser": "^8.9.0",
+    "sharp": "^0.33.5"
   },
   "browserslist": {
     "production": [

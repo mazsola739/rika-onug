@@ -16,27 +16,36 @@ add executable permission to sh script
 or if sudo needed:
 >sudo chmod +x
 
+for instance
+```
+chmod +x killFe.sh
+chmod +x killBe.sh
+
+./killFe.sh
+./killBe.sh
+```
+
 manual restart
 go into app
 > cd app/rika-onug 
 check running state of the fe and be
 > sudo lsof -i -P -n | grep LISTEN
-
-
  
 kill fe
-> use ./killFe.sh
+> ../onug-devops//killFe.sh
 
 kill be 
-> use ./killFe.sh
+> ../onug-devops/killBe.sh
 
 re-start be
-> cd onug-backend
-> 
-> yarn
-> 
-> nohup yarn start > prod__nohup.txt &
-
+```
+cd onug-backend
+../onug-devops/killBe.sh
+yarn
+rm prod__nohup.txt
+nohup yarn start > prod__nohup.txt &
+cat prod__nohup.txt
+```
 to see be console logs
 > cat prod__nohup.txt &
 
@@ -52,11 +61,16 @@ backend is running
 
 
 re-start fe
-> cd onug-frontend
->
-> yarn
->
-> nohup yarn start:prod > prod__nohup.txt &
+```
+cd onug-frontend
+../onug-devops/killFe.sh
+yarn
+yarn build:prod
+rm prod__nohup.txt
+nohup yarn start:prod > prod__nohup.txt &
+cat prod__nohup.txt
+sudo lsof -i -P -n | grep LISTEN
+```
 
 to see fe console logs
 > cat prod__nohup.txt &
