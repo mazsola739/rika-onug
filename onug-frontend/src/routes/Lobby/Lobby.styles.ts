@@ -16,7 +16,7 @@ export const StyledLobby = styled.div`
 `
 
 export const StyledLobbyButton = styled.button<StyledLobbyProps>`
-  background: ${({ img }) => `url(/assets/rooms/${img}.png)`} center center/cover no-repeat;
+  background: ${({ img }) => `url(/assets/rooms/${img}.webp)`} center center/cover no-repeat;
   border-radius: 50%;
   color: white;
   text-shadow: 2px 2px 2px black;

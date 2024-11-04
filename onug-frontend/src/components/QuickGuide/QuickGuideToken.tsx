@@ -24,10 +24,10 @@ export const QuickGuideToken: React.FC<QuickGuideTokenProps> = ({ image, expansi
     const actualExpansion = isSuperhero ? 'Super Heroes' : expansion
     const imageName = actualExpansion ? `${actualExpansion.toLowerCase().replace(/ /g, '')}_${randomNumber}` : image
 
-    return `/assets/backgrounds/token_${imageName}.png`
+    return `/assets/backgrounds/token_${imageName}.webp`
   }, [image, expansion])
 
   return (
-    <StyledQuickGuideToken src={`/assets/${folder}/${image}.png`} alt={image} backgroundImage={backgroundImage} />
+    <StyledQuickGuideToken src={`/assets/${folder}/${image}.webp`} alt={image} backgroundImage={backgroundImage} />
   )
 }

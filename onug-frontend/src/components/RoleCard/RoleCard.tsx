@@ -29,7 +29,7 @@ export const RoleCard: React.FC<RoleCardProps> = observer(({ card }) => {
     sendJsonMessage,
   ])
 
-  const imageSrc = useMemo(() => `/assets/cards/${card_name}.png`, [card_name])
+  const imageSrc = useMemo(() => `/assets/cards/${card_name}.webp`, [card_name])
 
   return (
     <StyledRoleCard isSelected={isSelected} onClick={handleCardClick} >

@@ -14,7 +14,7 @@ export const StyledFilterButton = styled.button<FilterButtonProps>`
   align-items: center;
   align-content: center;
   background-image: ${({ expansion }) =>
-    `url(/assets/backgrounds/expansion_${expansion.toLocaleLowerCase().replace(' ', '')}.png)`};
+    `url(/assets/backgrounds/expansion_${expansion.toLocaleLowerCase().replace(' ', '')}.webp)`};
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 100% auto;

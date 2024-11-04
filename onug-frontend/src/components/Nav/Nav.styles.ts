@@ -14,14 +14,14 @@ const colorVariants: Record<AnchorTypes, string> = {
 };
 
 const imageVariants: Record<AnchorTypes, string> = {
-  'Village & Hero': '/assets/playingcards/troublemaker_2.png',
-  'Village': '/assets/playingcards/troublemaker_2.png',
-  'Hero': '/assets/playingcards/innocent_bystander.png',
-  'Own': '/assets/playingcards/tanner_2.png',
-  'Werewolf': '/assets/playingcards/werewolf_2.png',
-  'Vampire': '/assets/playingcards/the_count.png',
-  'Alien': '/assets/playingcards/alien_female.png',
-  'Villain': '/assets/playingcards/henchman_7.png',
+  'Village & Hero': '/assets/playingcards/troublemaker_2.webp',
+  'Village': '/assets/playingcards/troublemaker_2.webp',
+  'Hero': '/assets/playingcards/innocent_bystander.webp',
+  'Own': '/assets/playingcards/tanner_2.webp',
+  'Werewolf': '/assets/playingcards/werewolf_2.webp',
+  'Vampire': '/assets/playingcards/the_count.webp',
+  'Alien': '/assets/playingcards/alien_female.webp',
+  'Villain': '/assets/playingcards/henchman_7.webp',
 };
 
 export interface NavListItemProps {

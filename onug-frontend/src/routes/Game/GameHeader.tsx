@@ -6,8 +6,8 @@ export const GameHeader: React.FC = observer(() => {
   return (
     <Header>
       <StyledGameHeader>
-        <Sun src="/assets/logos/sun.png" alt="sun" />
-        <Moon src="/assets/logos/moon.png" alt="moon" />
+        <Sun src="/assets/logos/sun.webp" alt="sun" />
+        <Moon src="/assets/logos/moon.webp" alt="moon" />
         <Text>Night has fallen</Text>
       </StyledGameHeader>
     </Header>

@@ -8,7 +8,7 @@ export const TableHeader: React.FC = observer(() => {
 //TODO
     return (
       <Header>
-        <Sun src="/assets/logos/sun.png" alt="sun" /> The sun is up!
+        <Sun src="/assets/logos/sun.webp" alt="sun" /> The sun is up!
       </Header>
     )
   }

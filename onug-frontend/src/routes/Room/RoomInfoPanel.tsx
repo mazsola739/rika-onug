@@ -9,7 +9,7 @@ const Info: React.FC = observer(() => {
 
   const imgSrc =
     detailedCardInfo.id !== 0
-      ? `/assets/cards/${detailedCardInfo.card_name}.png`
+      ? `/assets/cards/${detailedCardInfo.card_name}.webp`
       : ''
 
   return (

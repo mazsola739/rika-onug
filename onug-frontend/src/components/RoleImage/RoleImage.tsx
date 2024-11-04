@@ -4,6 +4,6 @@ import { RoleImageProps } from './RoleImage.types'
 
 export const RoleImage: React.FC<RoleImageProps> = observer(
   ({ image, onClick, size }) => (
-    <StyledRoleImage onClick={onClick} src={`/assets/cards/${image}.png`} alt={image} size={size} />
+    <StyledRoleImage onClick={onClick} src={`/assets/cards/${image}.webp`} alt={image} size={size} />
   )
 )
