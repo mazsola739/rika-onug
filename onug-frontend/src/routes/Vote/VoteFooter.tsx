@@ -10,7 +10,6 @@ export const VoteFooter: React.FC = observer(() => {
 
   const { handleReady, handleLeaveGame, handleVoteNow, handleDone } = useClickHandler(room_id, token)
   const { selectedCards } = selectionStore
-  console.log(JSON.stringify(selectedCards))
 
   const isReady = playersStore.isPlayerReady
 

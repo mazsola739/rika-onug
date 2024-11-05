@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { COPY_PLAYER } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { villageidiotInteraction } from '../villageidiot/villageidiot.interaction'
 import { randomRascalInstructions, rascalAnyOneKeys, rascalAnyTwoKeys } from './rascal.constants'
@@ -40,7 +40,7 @@ export const rascal = (gamestate, title, prefix) => {
     let interaction = {}
     const card = newGamestate.players[token].card
 
-    if ((prefix === 'rascal' && (card.player_original_id === 52 || (card.player_role_id === 52 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id)))) ||
+    if ((prefix === 'rascal' && (card.player_original_id === 52 || (card.player_role_id === 52 && COPY_PLAYER.includes(card.player_original_id)))) ||
       (prefix === 'doppelganger_rascal' && card.player_role_id === 52 && card.player_original_id === 1)) {
       if (randomRascalInstruction === 'rascal_idiot_text') {
         newGamestate.players[token].action_finished = false

@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { ALL_COPY_PLAYER } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { evilometerInteraction } from './evilometer.interaction'
 
@@ -18,7 +18,7 @@ export const evilometer = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 58 || (card.player_role_id === 58 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 58 || (card.player_role_id === 58 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
       newGamestate.players[token].action_finished = false
       interaction = evilometerInteraction(newGamestate, token, title)
     }

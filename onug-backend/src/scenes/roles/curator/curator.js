@@ -1,4 +1,4 @@
-import { IDS } from "../../../constants"
+import { COPY_PLAYER } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens } from "../../sceneUtils"
 import { curatorInteraction } from "./curator.interaction"
 
@@ -13,7 +13,7 @@ export const curator = (gamestate, title, prefix) => {
     const card = newGamestate.players[token].card
 
     if (prefix === 'curator') {
-      if (card.player_original_id === 20 || (card.player_role_id === 20 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      if (card.player_original_id === 20 || (card.player_role_id === 20 && COPY_PLAYER.includes(card.player_original_id))) {
         newGamestate.players[token].action_finished = false
         interaction = curatorInteraction(newGamestate, token, title)
       }

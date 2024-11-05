@@ -1,7 +1,7 @@
 import { END_GAME } from '../constants'
 import { logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { allPlayersStateCheck, randomDelay } from '../utils'
+import { allPlayersStateCheck, /* randomDelay */ } from '../utils'
 import { broadcast } from '../websocket/connections'
 import { actionHandler } from './actionHandler'
 
@@ -27,21 +27,34 @@ export const sceneHandler = async (gamestate) => {
       view_player_card,
       view_center_card,
     } = scene
-
+  
     const conflicts = [
       player_card_shifting && flagsState.player_card_shifting,
       center_card_shifting && flagsState.center_card_shifting,
       mark_shifting && flagsState.mark_shifting,
       shield && flagsState.shield,
       artifact && flagsState.artifact,
+      (view_center_card && flagsState.center_card_shifting) || 
+      (center_card_shifting && flagsState.view_center_card),
+      (view_player_card && flagsState.player_card_shifting) || 
+      (player_card_shifting && flagsState.view_player_card)
     ]
-
+  
     if (conflicts.some(Boolean)) {
       return false
     }
-
-    return (view_player_card && !flagsState.player_card_shifting) || (view_center_card && !flagsState.center_card_shifting) || true
+  
+    if (view_player_card) flagsState.view_player_card = true
+    if (view_center_card) flagsState.view_center_card = true
+    if (player_card_shifting) flagsState.player_card_shifting = true
+    if (center_card_shifting) flagsState.center_card_shifting = true
+    if (mark_shifting) flagsState.mark_shifting = true
+    if (shield) flagsState.shield = true
+    if (artifact) flagsState.artifact = true
+  
+    return true
   }
+  
 
   for (const scene of newGamestate.scripts) {
     logTrace(`Checking scene: ${scene.scene_title}`)

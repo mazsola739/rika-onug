@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { COPY_PLAYER } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { priestInteraction } from './priest.interaction'
 
@@ -13,7 +13,7 @@ export const priest = (gamestate, title, prefix) => {
     const card = newGamestate.players[token].card
 
     if (prefix === 'priest') {
-      if (card.player_original_id === 37 || (card.player_role_id === 37 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      if (card.player_original_id === 37 || (card.player_role_id === 37 && COPY_PLAYER.includes(card.player_original_id))) {
         newGamestate.players[token].action_finished = false
         interaction = priestInteraction(newGamestate, token, title)
       }

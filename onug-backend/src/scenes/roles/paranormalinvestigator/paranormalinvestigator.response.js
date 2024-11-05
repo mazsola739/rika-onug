@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { GOOD_GUY } from "../../../constants"
 import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
@@ -18,8 +18,8 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
 
   let showCards = []
 
-  if (IDS.GOOD_GUY_IDS.includes(playerOneCardId)) {
-    if (!IDS.GOOD_GUY_IDS.includes(playerTwoCardId)) {
+  if (GOOD_GUY.includes(playerOneCardId)) {
+    if (!GOOD_GUY.includes(playerTwoCardId)) {
       showCards = selectedCards
       newGamestate.players[token].card.player_role = newGamestate.card_positions[selected_card_positions[1]].card.role
       newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[1]].card.team
@@ -30,7 +30,7 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
       }
     }
   } else {
-    if (!IDS.GOOD_GUY_IDS.includes(playerOneCardId)) {
+    if (!GOOD_GUY.includes(playerOneCardId)) {
       showCards = [selectedCards[0]]
       newGamestate.players[token].card.player_role = newGamestate.card_positions[selected_card_positions[0]].card.role
       newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[0]].card.team

@@ -30,6 +30,7 @@ export type TablePlayerCard = {
   card_name?: string
   dreamwolf?: boolean
   mark?: string
+  masons?: boolean
   player_name?: string
   position?: CardPosition
   role?: string

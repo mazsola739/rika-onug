@@ -1,10 +1,10 @@
 import { alphawolfInteraction, apprenticeseerInteraction, cupidInteraction, diseasedInteraction, drunkInteraction, instigatorInteraction, mysticwolfInteraction, paranormalinvestigatorInteraction, robberInteraction, seerInteraction, sentinelInteraction, temptressInteraction, thingInteraction, troublemakerInteraction, villageidiotInteraction, witchInteraction } from '..'
-import { IDS } from '../../../constants'
+import { DOPPELGANGER_INSTANT_ACTION } from '../../../constants'
 
 export const doppelgangerinstantactionInteraction = (gamestate, token, title) => {
   const new_role_id = gamestate.players[token]?.new_role_id
 
-  if (!IDS.DOPPELGANGER_INSTANT_ACTION_IDS.includes(new_role_id)) return {}
+  if (!DOPPELGANGER_INSTANT_ACTION.includes(new_role_id)) return {}
 
   let interaction = {}
 

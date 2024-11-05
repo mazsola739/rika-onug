@@ -1,4 +1,4 @@
-import { IDS } from '../constants'
+import { SUPER_VILLAIN_TO_CHECK, WEREVOLVES_TO_CHECK } from '../constants'
 import cards from '../data/cards.json'
 
 const specialCardsDefaultToAddLookupMap = {
@@ -48,18 +48,18 @@ const handleSelectCard = (selectedCards, cardId) => {
   let newSelectedCards = [...selectedCards]
   newSelectedCards.push(cardId)
 
-  if (cardId === IDS.ALPHA_WOLF_ID) {
-    handleCardById(newSelectedCards, IDS.WEREVOLVES, IDS.ALPHA_WOLF_ID)
-  } else if (cardId === IDS.TEMPTRESS_ID) {
-    handleCardById(newSelectedCards, IDS.SUPER_VILLAINS, IDS.TEMPTRESS_ID)
+  if (cardId === 17) {
+    handleCardById(newSelectedCards, WEREVOLVES_TO_CHECK, 17)
+  } else if (cardId === 69) {
+    handleCardById(newSelectedCards, SUPER_VILLAIN_TO_CHECK, 69)
   } else if (
-    cardId === IDS.MIRROR_MAN_ID && containsByIdsToCheck(selectedCards, [IDS.COPY_CAT_ID])
+    cardId === 64 && containsByIdsToCheck(selectedCards, [30])
   ) {
-    newSelectedCards = newSelectedCards.filter((id) => id !== IDS.COPY_CAT_ID)
+    newSelectedCards = newSelectedCards.filter((id) => id !== 30)
   } else if (
-    cardId === IDS.COPY_CAT_ID && containsByIdsToCheck(selectedCards, [IDS.MIRROR_MAN_ID])
+    cardId === 30 && containsByIdsToCheck(selectedCards, [64])
   ) {
-    newSelectedCards = newSelectedCards.filter((id) => id !== IDS.MIRROR_MAN_ID)
+    newSelectedCards = newSelectedCards.filter((id) => id !== 64)
   }
 
   return newSelectedCards
@@ -68,9 +68,9 @@ const handleSelectCard = (selectedCards, cardId) => {
 const handleDeselectCard = (selectedCards, cardId) => {
   let newSelectedCards = [...selectedCards]
   if (prohibitDeselectingWerewolf(selectedCards, cardId)) {
-    handleCardById(newSelectedCards, IDS.WEREVOLVES, IDS.ALPHA_WOLF_ID)
+    handleCardById(newSelectedCards, WEREVOLVES_TO_CHECK, 17)
   } else if (prohibitDeselectingSupervillain(selectedCards, cardId)) {
-    handleCardById(newSelectedCards, IDS.SUPER_VILLAINS, IDS.TEMPTRESS_ID)
+    handleCardById(newSelectedCards, SUPER_VILLAIN_TO_CHECK, 69)
   } else {
     newSelectedCards = selectedCards.filter((id) => id !== cardId)
   }
@@ -86,25 +86,25 @@ const handleCardById = (selectedCards, idsToCheck, specialCardId) => {
 
 const prohibitDeselectingWerewolf = (selectedCards, cardId) => {
   const numberOfSelectedWolfCards = selectedCards.filter((cardId) =>
-    IDS.WEREVOLVES.includes(cardId)
+    WEREVOLVES_TO_CHECK.includes(cardId)
   ).length
 
   return (
     numberOfSelectedWolfCards === 1 &&
-    containsByIdsToCheck(selectedCards, [IDS.ALPHA_WOLF_ID]) &&
-    IDS.WEREVOLVES.includes(cardId)
+    containsByIdsToCheck(selectedCards, [17]) &&
+    WEREVOLVES_TO_CHECK.includes(cardId)
   )
 }
 
 const prohibitDeselectingSupervillain = (selectedCards, card) => {
   const numberOfSelectedVillainCards = selectedCards.filter((id) =>
-    IDS.SUPER_VILLAINS.includes(id)
+    SUPER_VILLAIN_TO_CHECK.includes(id)
   ).length
 
   return (
     numberOfSelectedVillainCards === 1 &&
-    containsByIdsToCheck(selectedCards, [IDS.TEMPTRESS_ID]) &&
-    IDS.SUPER_VILLAINS.includes(card)
+    containsByIdsToCheck(selectedCards, [69]) &&
+    SUPER_VILLAIN_TO_CHECK.includes(card)
   )
 }
 
@@ -126,11 +126,11 @@ export const distributeCards = (selectedCardIds) => {
   let cardIds = [...selectedCardIds]
 
   const newWolfCardId = hasAlphaWolf(selectedCardIds)
-    ? getRandomItemFromArray(filterCardsByIds(cardIds, IDS.WEREVOLVES))
+    ? getRandomItemFromArray(filterCardsByIds(cardIds, WEREVOLVES_TO_CHECK))
     : undefined
 
   const newVillainCardId = hasTemptress(selectedCardIds)
-    ? getRandomItemFromArray(filterCardsByIds(cardIds, IDS.SUPER_VILLAINS))
+    ? getRandomItemFromArray(filterCardsByIds(cardIds, SUPER_VILLAIN_TO_CHECK))
     : undefined
 
   if (newWolfCardId)

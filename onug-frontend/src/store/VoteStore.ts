@@ -3,6 +3,7 @@ import { script } from 'data'
 import { computed, makeAutoObservable } from 'mobx'
 import { CardJson, NarrationType, Player, TokenJson } from 'types'
 import { createDefaultPlayer, getCardById, getMarkByName } from 'utils'
+import { deckStore } from './DeckStore'
 import { playersStore } from './PlayersStore'
 
 class VoteStore {
@@ -23,6 +24,19 @@ class VoteStore {
     this.narrations = narrations
   }
 
+  get voteTokens(): { image: string; expansion: string }[] {
+    const cards = deckStore.selectedCards
+    const voteTokens: { image: string; expansion: string }[] = []
+    cards.map(card => {
+      const token = {
+        image: card.card_name,
+        expansion: card.expansion
+      }
+      voteTokens.push(token)
+    })
+    return voteTokens
+  }
+
   get knownPlayerCard(): CardJson { return getCardById(this.knownPlayer.player_card_id) }
   get knownPlayerMark(): TokenJson { return getMarkByName(this.knownPlayer.player_mark) }
   get isPlayerReady(): boolean {
@@ -33,7 +47,7 @@ class VoteStore {
     return currentPlayer ? currentPlayer.flag : false
   }
 
- get voteNarration(): { image: string, text: string }[] {
+  get voteNarration(): { image: string, text: string }[] {
     const voteNarration = this.narrations.map(narration => {
       const title = Object.keys(narration)[0]
       const narrationKeys = Object.values(narration)[0] as string[]

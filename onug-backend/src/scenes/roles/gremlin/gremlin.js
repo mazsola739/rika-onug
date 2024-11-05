@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { COPY_PLAYER } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { gremlinInteraction } from './gremlin.interaction'
 
@@ -13,7 +13,7 @@ export const gremlin = (gamestate, title, prefix) => {
     const card = newGamestate.players[token].card
 
     if (prefix === 'gremlin') {
-      if (card.player_original_id === 33 || (card.player_role_id === 33 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      if (card.player_original_id === 33 || (card.player_role_id === 33 && COPY_PLAYER.includes(card.player_original_id))) {
         newGamestate.players[token].action_finished = false
         interaction = gremlinInteraction(newGamestate, token, title)
       }

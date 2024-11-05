@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { COPY_PLAYER } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { pickpocketInteraction } from './pickpocket.interaction'
 
@@ -13,7 +13,7 @@ export const pickpocket = (gamestate, title, prefix) => {
     const card = newGamestate.players[token].card
 
     if (prefix === 'pickpocket') {
-      if (card.player_original_id === 36 || (card.player_role_id === 36 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      if (card.player_original_id === 36 || (card.player_role_id === 36 && COPY_PLAYER.includes(card.player_original_id))) {
         newGamestate.players[token].action_finished = false
         interaction = pickpocketInteraction(newGamestate, token, title)
       }

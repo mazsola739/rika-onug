@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { ALL_COPY_PLAYER, MASONS } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { masonsInteraction } from './masons.interaction'
 
@@ -12,7 +12,7 @@ export const masons = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (IDS.MASONS.some((id) => card.player_role_id === id && [id, ...IDS.ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
+    if (MASONS.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))) {
       newGamestate.players[token].action_finished = false
       interaction = masonsInteraction(newGamestate, token, title)
     }

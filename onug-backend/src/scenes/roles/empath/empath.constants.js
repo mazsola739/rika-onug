@@ -1,5 +1,5 @@
 export const empathKeys = [
-  'identifier_everyone_text',
+  'identifier.everyone_text',
   'identifier_oddplayers_text',
   'identifier_evenplayers_text',
   'activePlayers',

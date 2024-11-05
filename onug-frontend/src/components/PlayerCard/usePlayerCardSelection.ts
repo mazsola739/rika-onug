@@ -15,6 +15,7 @@ export const usePlayerCardSelection = (card: TablePlayerCard) => {
   const isArtifacted = card?.artifact
   const isWerewolf = card?.werewolves
   const isDreamwolf = card?.dreamwolf
+  const isMason = card?.masons
 
   const isSelectableCard = card?.selectable_card
   const isSelectableMark = card?.selectable_mark
@@ -35,6 +36,7 @@ export const usePlayerCardSelection = (card: TablePlayerCard) => {
     isSelected: isCardSelected,
     werewolf: isWerewolf,
     dreamwolf: isDreamwolf,
+    masons: isMason,
   }
 
   const markProps = {

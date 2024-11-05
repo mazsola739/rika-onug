@@ -18,7 +18,7 @@ export const QuickGuideToken: React.FC<QuickGuideTokenProps> = ({ image, expansi
   const segments = ['_of_', 'artifact', 'shield']
   const folder = segments.some(segment => image.includes(segment)) ? 'tokens' : 'cards'
 
-  const backgroundImage = useMemo(() => {
+  const bgImg = useMemo(() => {
     const randomNumber = Math.floor(Math.random() * 2) + 1
     const isSuperhero = expansion === 'Super Villains' && SUPERHERO_IMAGES.includes(image)
     const actualExpansion = isSuperhero ? 'Super Heroes' : expansion
@@ -28,6 +28,6 @@ export const QuickGuideToken: React.FC<QuickGuideTokenProps> = ({ image, expansi
   }, [image, expansion])
 
   return (
-    <StyledQuickGuideToken src={`/assets/${folder}/${image}.webp`} alt={image} backgroundImage={backgroundImage} />
+    <StyledQuickGuideToken src={`/assets/${folder}/${image}.webp`} alt={image} bgImg={bgImg} />
   )
 }

@@ -1,4 +1,4 @@
-import { IDS } from "../../../constants"
+import { COPY_PLAYER } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens } from "../../sceneUtils"
 import { cupidInteraction } from "./cupid.interaction"
 
@@ -12,7 +12,7 @@ export const cupid = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 31 || (card.player_role_id === 31 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 31 || (card.player_role_id === 31 && COPY_PLAYER.includes(card.player_original_id))) {
       newGamestate.players[token].action_finished = false
       interaction = cupidInteraction(newGamestate, token, title)
     }

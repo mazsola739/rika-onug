@@ -83,7 +83,7 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
 `
 
 export const StyledQuickGuideToken = styled.img<StyledQuickGuideTokenProps>`
-  background-image: ${({ backgroundImage }) => `url(${backgroundImage})`};
+  background-image: ${({ bgImg }) => `url(${bgImg})`};
   border-radius: 50%;
   width: 50px;
   height: 50px;

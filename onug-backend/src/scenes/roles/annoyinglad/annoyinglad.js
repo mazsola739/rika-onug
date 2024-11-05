@@ -1,5 +1,5 @@
-import { IDS } from "../../../constants"
-import { getAllPlayerTokens, createAndSendSceneMessage } from "../../sceneUtils"
+import { ALL_COPY_PLAYER } from "../../../constants"
+import { createAndSendSceneMessage, getAllPlayerTokens } from "../../sceneUtils"
 import { thingInteraction } from "../thing/thing.interaction"
 
 export const annoyinglad = (gamestate, title) => {
@@ -12,7 +12,7 @@ export const annoyinglad = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 55 || (card.player_role_id === 55 && IDS.ALL_COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 55 || (card.player_role_id === 55 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
       newGamestate.players[token].action_finished = false
       interaction = thingInteraction(newGamestate, token, title)
     }

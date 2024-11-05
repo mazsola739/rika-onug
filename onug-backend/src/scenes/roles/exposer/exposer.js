@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { COPY_PLAYER } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomExposerInstructions } from './exposer.constants'
 import { exposerInteraction } from './exposer.interaction'
@@ -22,7 +22,7 @@ export const exposer = (gamestate, title, prefix) => {
     const card = newGamestate.players[token].card
 
     if (prefix === 'exposer') {
-      if (card.player_original_id === 46 || (card.player_role_id === 46 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      if (card.player_original_id === 46 || (card.player_role_id === 46 && COPY_PLAYER.includes(card.player_original_id))) {
         newGamestate.players[token].action_finished = false
         interaction = exposerInteraction(newGamestate, token, title)
       }

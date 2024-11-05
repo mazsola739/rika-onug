@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { COPY_PLAYER } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { morticianKeys, randomMorticianInstructions } from './mortician.constants'
 import { morticianInteraction } from './mortician.interaction'
@@ -26,7 +26,7 @@ export const mortician = (gamestate, title, prefix) => {
     const card = newGamestate.players[token].card
 
     if (prefix === 'mortician') {
-      if (card.player_original_id === 49 || (card.player_role_id === 49 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+      if (card.player_original_id === 49 || (card.player_role_id === 49 && COPY_PLAYER.includes(card.player_original_id))) {
         newGamestate.players[token].action_finished = false
         interaction = morticianInteraction(newGamestate, token, title, randomMorticianInstruction, morticianKey)
       }

@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { ALL_ALIEN } from '../../../constants'
 
 export const findUniqueElementsInArrays = (array1, array2) => {
   const set = new Set(array1)
@@ -14,7 +14,7 @@ export const getAlienPlayerNumbersByRoleIdsWithNoShield = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (IDS.ALL_ALIEN_IDS.includes(player.card.player_role_id) && !(player.card?.shield)) {
+    if (ALL_ALIEN.includes(player.card.player_role_id) && !(player.card?.shield)) {
       result.push(player.player_number)
     }
   }

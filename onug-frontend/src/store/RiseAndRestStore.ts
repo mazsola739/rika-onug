@@ -18,6 +18,7 @@ class RiseAndRestStore {
       position,
       card_name: '',
       mark: '',
+      masons: false,
       role: '',
       team: '',
       artifact: false,
@@ -47,6 +48,7 @@ class RiseAndRestStore {
       shield: gamePropStore.shielded_cards.includes(position),
       werewolves: gamePropStore.werewolves.includes(position),
       dreamwolf: gamePropStore.dreamwolf.includes(position),
+      masons: gamePropStore.masons.includes(position)
     }
   }
 

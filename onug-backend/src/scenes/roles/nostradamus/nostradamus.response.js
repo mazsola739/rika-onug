@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { GOOD_GUY } from "../../../constants"
 import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
@@ -17,13 +17,13 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
 
   let showCards = []
 
-  if (IDS.GOOD_GUY_IDS.includes(playerOneCardId)) {
-    if (!IDS.GOOD_GUY_IDS.includes(playerTwoCardId)) {
+  if (GOOD_GUY.includes(playerOneCardId)) {
+    if (!GOOD_GUY.includes(playerTwoCardId)) {
       showCards = [selectedCards[0], selectedCards[1]]
       newGamestate.players[token].card.player_role = newGamestate.card_positions[selected_card_positions[1]].card.role
       newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[1]].card.team
-    } else if (IDS.GOOD_GUY_IDS.includes(playerTwoCardId)) {
-      if (!IDS.GOOD_GUY_IDS.includes(playerThreeCardId)) {
+    } else if (GOOD_GUY.includes(playerTwoCardId)) {
+      if (!GOOD_GUY.includes(playerThreeCardId)) {
         showCards = selectedCards
         newGamestate.players[token].card.player_role = newGamestate.card_positions[selected_card_positions[2]].card.role
         newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[2]].card.team
@@ -35,7 +35,7 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
         }
       }
     }
-  } else if (!IDS.GOOD_GUY_IDS.includes(playerOneCardId)) {
+  } else if (!GOOD_GUY.includes(playerOneCardId)) {
     showCards = [selectedCards[0]]
     newGamestate.players[token].card.player_role = newGamestate.card_positions[selected_card_positions[0]].card.role
     newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[0]].card.team

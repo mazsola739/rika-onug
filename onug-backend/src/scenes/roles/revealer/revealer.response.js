@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { GOOD_GUY } from "../../../constants"
 import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
@@ -13,7 +13,7 @@ export const revealerResponse = (gamestate, token, selected_card_positions, titl
 
   const selectedPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
   const revealedCard = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
-  const isTown = revealedCard.every((card) => IDS.GOOD_GUY_IDS.includes(Object.values(card)[0]))
+  const isTown = revealedCard.every((card) => GOOD_GUY.includes(Object.values(card)[0]))
 
   if (newGamestate.players[token].card?.original_id === selectedPositionCard.id) {
     newGamestate.players[token].card.player_card_id = 87

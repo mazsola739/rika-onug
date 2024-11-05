@@ -21,7 +21,7 @@ export const FilterButton: React.FC<FilterButtonProps> = observer(({ expansion }
     });
   }, [sendJsonMessage, room_id, expansion]);
 
-  const backgroundImage = `/assets/backgrounds/expansion_${expansion.toLocaleLowerCase().replace(' ', '')}.webp`
+  const bgImg = `/assets/backgrounds/expansion_${expansion.toLocaleLowerCase().replace(' ', '')}.webp`
 
-  return <MenuButton bgImg={backgroundImage} isSelected={isSelected} onClick={handleClick} />
+  return <MenuButton bgImg={bgImg} isSelected={isSelected} onClick={handleClick} />
 });

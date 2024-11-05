@@ -9,7 +9,7 @@ export const MESSAGE = 'MESSAGE'
 export const RESULT = 'RESULT'
 
 export const JOIN_ROOM = 'JOIN_ROOM'
-export const JOIN_VOTE = 'JOIN_ROOM'
+export const JOIN_VOTE = 'JOIN_VOTE'
 
 export const READY = 'READY'
 export const READY_VOTE = 'READY_VOTE'

@@ -6,12 +6,16 @@ import { gamePropStore, riseAndRestStore, selectionStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
 import { formatPositionSimply } from 'utils'
 
+type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons'
+
 class MessageStore {
   narration: string
   privateMessage: string
 
   constructor() {
     makeAutoObservable(this)
+    this.narration = ''
+    this.privateMessage = ''
   }
 
   setNarration(narration_keys: NarrationType[]): void {
@@ -29,32 +33,32 @@ class MessageStore {
   get isCardSelection() { return gamePropStore.selectable_cards.length > 0 }
   get isSelectableCards() { return this.allSelectableCards.length > 0 }
 
-  get isIdentification () {
-    return gamePropStore.title === 'MINION'
+  get isIdentification() {
+    const title = gamePropStore.title;
+    return title === 'MINION' || title === 'WEREWOLF' || title === 'MASONS';
   }
 
   get disabled() {
-    const { selectedCards } = selectionStore;
+    const { selectedCards } = selectionStore
     const selectedPlayerCards = selectedCards.filter(card => card.includes('player_')).length
     const selectedCenterCards = selectedCards.filter(card => card.includes('center_')).length
-  
+
     const playerCardLimit = this.playerCardLimit
     const centerCardLimit = this.centerCardLimit
-  
+
     const isSelectingPlayerCards = this.isCardSelection
     const isSelectingCenterCards = !this.isCardSelection
-  
+
     if (isSelectingPlayerCards) {
       return selectedPlayerCards < playerCardLimit
     }
-  
+
     if (isSelectingCenterCards) {
       return selectedCenterCards < centerCardLimit
     }
-  
+
     return true
   }
-  
 
   get narrationImage(): string {
     const scene = script.find((scene) => scene.scene_title === gamePropStore.title)
@@ -65,21 +69,53 @@ class MessageStore {
     const selectablePlayerCards = riseAndRestStore.tablePlayerCards.filter((card) => card.selectable_card)
     const selectableCenterCards = riseAndRestStore.tableCenterCards.filter((card) => card.selectable_card)
 
-    const collectedCards = [...selectablePlayerCards, ...selectableCenterCards].map((card) => ({
+    return [...selectablePlayerCards, ...selectableCenterCards].map((card) => ({
       position: card.position,
       name: formatPositionSimply(card.position),
     }))
-
-    return collectedCards
   }
-  
+
   get allSelectedCards(): Record<string, string>[] {
-    const formattedSelectedCards = selectionStore.selectedCards.map((position) => ({
+    return selectionStore.selectedCards.map((position) => ({
       position,
       name: formatPositionSimply(position),
     }))
+  }
 
-    return formattedSelectedCards
+  getRoles(): RoleKeys[] {
+    const title = gamePropStore.title
+
+    switch (title) {
+      case 'MINION':
+        return ['werewolves']
+      case 'WEREWOLF':
+        return ['werewolves', 'dreamwolf']
+      case 'MASONS':
+        return ['masons']
+      default:
+        return []
+    }
+  }
+
+  get identifiedCards() {
+    const roleKeys = this.getRoles()
+
+    if (roleKeys.length > 0) {
+      const identifiedCards = roleKeys.flatMap((roleKey: RoleKeys) => {
+        const cards = gamePropStore[roleKey] as string[]
+
+        return cards.map((card: string) => ({
+          position: card,
+          name: formatPositionSimply(card),
+        }))
+      })
+
+      return {
+        roles: roleKeys,
+        cards: identifiedCards,
+      }
+    }
+    return {}
   }
 }
 

@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { COPY_PLAYER } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { temptressInteraction } from './temptress.interaction'
 
@@ -12,7 +12,7 @@ export const temptress = (gamestate, title) => {
  
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 69 || (card.player_role_id === 69 && IDS.COPY_PLAYER_IDS.includes(card.player_original_id))) {
+    if (card.player_original_id === 69 || (card.player_role_id === 69 && COPY_PLAYER.includes(card.player_original_id))) {
       newGamestate.players[token].action_finished = false
       interaction = temptressInteraction(newGamestate, token, title)
     }

@@ -1,4 +1,4 @@
-import { IDS } from '../../../constants'
+import { ALL_COPY_PLAYER, ALL_VAMPIRE } from '../../../constants'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { vampiresInteraction } from './vampires.interaction'
 
@@ -12,7 +12,7 @@ export const vampires = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (IDS.ALL_VAMPIRE_IDS.some((id) => card.player_role_id === id && [id, ...IDS.ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
+    if (ALL_VAMPIRE.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))) {
       newGamestate.players[token].action_finished = false
       interaction = vampiresInteraction(newGamestate, token, title)
     }

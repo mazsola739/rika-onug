@@ -7,7 +7,7 @@ export const StyledRoleCardList = styled.section`
   gap: 10px;
 `
 
-export const RoleCardListTitle = styled.p`
+export const RoleCardListTitle = styled.span`
   filter: drop-shadow(3px 3px 3px black);
   color: white;
   font-size: 24px;

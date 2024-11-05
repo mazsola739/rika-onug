@@ -7,7 +7,7 @@ import { TableInfoPanel } from './TableInfoPanel'
 import { useTable } from './useTable'
 
 export const Table: React.FC = observer(() => {
-  const { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard } = useTable()
+  const { tablePlayerCards, tablePlayerCard, left, middle, right } = useTable()
 
   return (
     <StyledTable>
@@ -18,7 +18,7 @@ export const Table: React.FC = observer(() => {
         <TableCenter>
           <CenterCards />
         </TableCenter>
-        {tablePlayerCard && <PlayerCard card={ownCard} cardSize={130} tokenSize={50} />}
+        {tablePlayerCard && <PlayerCard card={tablePlayerCard} cardSize={130} tokenSize={50} />}
       </Main>
       {tablePlayerCards && <AroundTableSide cards={right} />}
       <TableFooter />

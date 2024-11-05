@@ -1,7 +1,7 @@
 import { InfoPanel, OwnCard, ReadyList, RoleImage } from 'components'
 import { observer } from 'mobx-react-lite'
 import { gamePropStore, playersStore, selectionStore, voteStore } from 'store'
-import { MessageText, Narration, ReadyStatus, ReadyTitle } from './Vote.styles'
+import { NarrationText, Narration, ReadyStatus, ReadyTitle, NarrationImage } from './Vote.styles'
 
 export const VoteInfoPanel: React.FC = observer(() => {
   const { players } = playersStore
@@ -16,8 +16,8 @@ export const VoteInfoPanel: React.FC = observer(() => {
       {voteStore.narrations &&
         voteStore.voteNarration.map((scene, index) => (
           <Narration key={index}>
-            <RoleImage image={scene.image} size={80} />
-            <MessageText>{scene.text}</MessageText>
+            <NarrationImage src={`/assets/cards/${scene.image}.webp`} alt="info" />
+            <NarrationText>{scene.text}</NarrationText>
           </Narration>
         ))}
     </InfoPanel>

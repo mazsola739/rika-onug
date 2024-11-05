@@ -47,8 +47,8 @@ export const VoteCenter = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   gap: 5px;
 `
@@ -69,14 +69,14 @@ export const ReadyTitle = styled.h3`
   text-align: center;
 `
 
-export const MessageText = styled.p`
-  color: yellow;
+export const NarrationText = styled.span`
+  color: white;
+  font-size: 14px;
 `
 
 export const Narration = styled.div`
-  padding: 5px;
   display: flex;
-  gap: 8px;
+  gap: 5px;
   align-items: center;
 
     ::-webkit-scrollbar {
@@ -100,4 +100,9 @@ export const Narration = styled.div`
     scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* Thumb color and track color */
   }
 
+`
+
+export const NarrationImage = styled.img`
+  width: 50px;
+  border: 1px solid white;
 `

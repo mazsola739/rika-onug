@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { StyledCardProps } from './Card.types';
-import { glowingGreen, glowingVibrantPink, glowingRed } from 'styles';
+import { glowingGreen, glowingVibrantPink, glowingRed, glowingBlue } from 'styles';
 
 export const StyledCard = styled.div<StyledCardProps>`
   width: ${({ sizeW }) => sizeW}px;
@@ -9,7 +9,7 @@ export const StyledCard = styled.div<StyledCardProps>`
   display: flex;
   filter: drop-shadow(3px 3px 3px black);
 
-  ${({ werewolf, dreamwolf, isSelectable }) => {
+  ${({ werewolf, dreamwolf, masons, isSelectable }) => {
     if (isSelectable) {
       return css`
         animation: ${glowingGreen} 1s ease-in-out infinite alternate;
@@ -23,6 +23,11 @@ export const StyledCard = styled.div<StyledCardProps>`
     if (werewolf) {
       return css`
         animation: ${glowingRed} 1s ease-in-out infinite alternate;
+      `;
+    }
+    if (masons) {
+      return css`
+        animation: ${glowingBlue} 1s ease-in-out infinite alternate;
       `;
     }
     return null;

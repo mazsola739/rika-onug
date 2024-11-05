@@ -12,8 +12,8 @@ export const StyledOwnCard = styled.div`
   grid-template-areas:
     'title title title'
     'card number name'
-    'card team team'
     'card role role'
+    'card team team'
     'card cardrule cardrule'
     'token tokenrule tokenrule';
 
@@ -59,7 +59,7 @@ export const OwnCardInfoTeam = styled.span`
   align-items: center;
 `
 export const OwnCardInfoRole = styled.span`
- grid-area: role;
+  grid-area: role;
   color: white;
   font-size: 14px;
   display: inline-flex;

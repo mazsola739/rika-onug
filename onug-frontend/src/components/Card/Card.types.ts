@@ -5,6 +5,7 @@ export interface CardProps {
   isSelected?: boolean
   werewolf?: boolean
   dreamwolf?: boolean
+  masons?: boolean
   size: number
   playerName?: string
 }
@@ -15,4 +16,5 @@ export interface StyledCardProps {
   isSelectable: boolean
   werewolf: boolean
   dreamwolf: boolean
+  masons: boolean
 }

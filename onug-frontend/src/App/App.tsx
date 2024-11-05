@@ -4,7 +4,7 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { ReadyState } from 'react-use-websocket'
 import { Game, God, Lobby, Room, Stub, Table, Vote } from 'routes'
 import { ConnectionStatus, StyledApp } from './App.styles'
-import { useApp } from './usaApp'
+import { useApp } from './useApp'
 import { Icon } from 'components'
 
 export const App: React.FC = observer(() => {

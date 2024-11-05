@@ -67,7 +67,7 @@ export const Character = styled.h4`
   text-align: left;
 `
 
-export const Rule = styled.p`
+export const Rule = styled.span`
   color: white;
   font-size: 14px;
   margin: 0;

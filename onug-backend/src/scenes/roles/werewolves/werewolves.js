@@ -1,4 +1,4 @@
-import { IDS } from "../../../constants"
+import { ALL_COPY_PLAYER, WEREVOLVES } from "../../../constants"
 import { createAndSendSceneMessage, getAllPlayerTokens } from "../../sceneUtils"
 import { werewolvesInteraction } from "./werewolves.interaction"
 
@@ -16,7 +16,7 @@ export const werewolves = (gamestate, title, hasDreamWolf) => {
 
     const card = newGamestate.players[token].card
 
-    if (IDS.WEREVOLVES.some((id) => card.player_role_id === id && [id, ...IDS.ALL_COPY_PLAYER_IDS].includes(card.player_original_id))) {
+    if (WEREVOLVES.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))) {
       newGamestate.players[token].action_finished = false
       interaction = werewolvesInteraction(newGamestate, token, title)
     }

@@ -1,4 +1,4 @@
-import { AroundTableSide, AroundTableTop, CenterCards, Main, PlayerCard } from 'components'
+import { AroundTableSide, AroundTableTop, CenterCards, Main, PlayerCard, RoleTokenList } from 'components'
 import { observer } from 'mobx-react-lite'
 import { useVote } from './useVote'
 import { StyledVote, VoteCenter } from './Vote.styles'
@@ -17,6 +17,7 @@ export const Vote: React.FC = observer(() => {
       <Main>
       <VoteCenter>
         <CenterCards />
+        <RoleTokenList />
       </VoteCenter>
       {tablePlayerCard && <PlayerCard card={ownCard} cardSize={130} tokenSize={50}  />}
       </Main>

@@ -1,5 +1,5 @@
 import { default_card, default_player, default_table_player_card, default_token, TEAMS } from 'constant'
-import { marks } from 'data'
+import { cards, marks } from 'data'
 import { deckStore } from 'store'
 import { CardJson, Player, TablePlayerCard, TeamsType, TokenJson } from 'types'
 
@@ -25,7 +25,13 @@ export const formatPosition = (position: string) => position.replace(/player_/g,
 
 export const formatPositionSimply = (position: string) => position.replace(/_/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
 
-export const getCardById = (cardId: number): CardJson | null => deckStore.deck.find(card => card.id === cardId) || null
+export const getCardById = (cardId: number): CardJson | null => {
+  if (cardId === 87) {
+    return cards.find(card => card.id === 87) || null
+  }
+
+  return deckStore.deck.find(card => card.id === cardId) || null
+}
 
 export const getFilteredCardsForTeam = (team: string, deck: CardJson[]): CardJson[] => {
   const validTeams = team === 'village' ? ['hero', 'village'] : [team]

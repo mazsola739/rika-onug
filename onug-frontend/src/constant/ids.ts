@@ -18,7 +18,7 @@ export const WOLF_IDS_TO_CHECK: number[] = [15, 16, 21, 22]
 export const ALIEN_IDS: number[] = [42, 43, 47, 53, 54, 74]
 export const VAMPIRE_IDS: number[] = [39, 40, 41]
 export const SUPER_VILLAIN_IDS: number[] = [57, 60, 65, 69]
-export const SUPER_vILLAIN_IDS_TO_CHECK: number[] = [57, 60, 65]
+export const SUPER_VILLAIN_IDS_TO_CHECK: number[] = [57, 60, 65]
 export const ASSASSIN_IDS: number[] = [28, 29]
 
 export const ALPHA_WOLF_ID: number = 15

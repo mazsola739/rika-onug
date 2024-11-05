@@ -4,6 +4,6 @@ export interface QuickGuideTokenProps {
 }
 
 export interface StyledQuickGuideTokenProps {
-  backgroundImage?: string
+  bgImg?: string
   expansion?: string
 }

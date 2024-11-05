@@ -16,3 +16,8 @@ export interface SelectableProps {
   selectable: Record<string, string>[]
   selected: Record<string, string>[]
 }
+
+export interface LookProps {
+  roles: string[]
+  cards: Record<string, string>[]
+}
