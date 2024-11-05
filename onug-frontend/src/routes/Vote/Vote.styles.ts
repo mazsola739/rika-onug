@@ -48,9 +48,8 @@ export const VoteCenter = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  gap: 5px;
 `
 
 //INFOPANEL

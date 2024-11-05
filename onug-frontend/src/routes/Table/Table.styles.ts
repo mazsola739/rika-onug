@@ -45,10 +45,9 @@ export const TableCenter = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 5px;
 `
 
 //FOOTER

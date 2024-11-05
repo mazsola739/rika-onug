@@ -69,6 +69,9 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
     width: 100%;
     border-radius: 200px 100px 100px 200px;
     text-align: left;
+    & > img {
+      filter: drop-shadow(8px 5px 5px black);
+    }
   }
 
   &:nth-of-type(even) {
@@ -76,6 +79,9 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
     width: 100%;
     border-radius: 100px 200px 200px 100px;
     text-align: right;
+     & > img {
+      filter: drop-shadow(-8px 5px 5px black);
+    }
   }
 
   gap: 10px;
@@ -87,7 +93,7 @@ export const StyledQuickGuideToken = styled.img<StyledQuickGuideTokenProps>`
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  filter: drop-shadow(8px 5px 5px black);
+
 `
 
 export const QuickGuideRule = styled.span`

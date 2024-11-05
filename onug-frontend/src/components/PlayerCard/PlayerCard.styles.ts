@@ -17,7 +17,14 @@ export const PlayerName = styled.span`
 
 export const Tokens = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 3px;
   height: 100%;
+`
+
+export const GuessTokens = styled.div<{ width?: number }>`
+  min-width: ${({ width }) => width}px;
+  display: flex;
   flex-direction: column;
   gap: 3px;
 `

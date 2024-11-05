@@ -1,9 +1,8 @@
-import { deckStore, selectionStore } from 'store'
+import { selectionStore } from 'store'
 import { TablePlayerCard } from 'types'
 import { getCardImageSrc, getPlayerNumberToken } from './PlayerCards.utils'
 
 export const usePlayerCardSelection = (card: TablePlayerCard) => {
-  const { hasMarks, hasSentinel, hasCurator } = deckStore
   const { selectedCards, selectedMarks } = selectionStore
 
   const position = card?.position || ''
@@ -57,8 +56,5 @@ export const usePlayerCardSelection = (card: TablePlayerCard) => {
     isWerewolf,
     isDreamwolf,
     onCardClick,
-    hasMarks,
-    hasSentinel,
-    hasCurator,
   }
 }
