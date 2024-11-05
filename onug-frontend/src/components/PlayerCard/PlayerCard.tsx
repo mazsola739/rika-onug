@@ -13,7 +13,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = observer(
 
     return (
       <StyledPlayerCard>
-        <GuessTokens width={tokenSize}> </GuessTokens>
+        <GuessTokens width={tokenSize}>{/* here comes tokens */}</GuessTokens>
         <Card {...cardProps} onClick={onCardClick} size={cardSize} />
         {!isCenterCard && (
           <Tokens>

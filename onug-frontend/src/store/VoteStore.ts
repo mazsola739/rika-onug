@@ -1,14 +1,19 @@
 import * as narration_text from 'constant/narrations'
 import { script } from 'data'
 import { computed, makeAutoObservable } from 'mobx'
-import { CardJson, NarrationType, Player, TokenJson } from 'types'
+import { CardJson, CardPosition, NarrationType, Player, TokenJson } from 'types'
 import { createDefaultPlayer, getCardById, getMarkByName } from 'utils'
 import { deckStore } from './DeckStore'
 import { playersStore } from './PlayersStore'
+import { wsStore } from './WsStore'
+import { UPDATE_GUESS } from 'constant'
 
 class VoteStore {
   knownPlayer: Player = createDefaultPlayer()
   narrations: Record<string, NarrationType[]>[]
+  isGuessing: boolean = false
+  guessedId: number | null = null
+  guessedCardPosition: CardPosition | '' = ''
 
   constructor() {
     makeAutoObservable(this, {
@@ -24,17 +29,47 @@ class VoteStore {
     this.narrations = narrations
   }
 
-  get voteTokens(): { image: string; expansion: string }[] {
+  setIsGuessing(value: boolean): void {
+    this.isGuessing = value
+  }
+
+  selectGuessId(id: number) {
+    this.guessedId = id
+    this.checkAndSendGuess()
+  }
+
+  selectGuessCardPosition(position: CardPosition) {
+    this.guessedCardPosition = position
+    this.checkAndSendGuess()
+  }
+
+  checkAndSendGuess() {
+    const room_id = sessionStorage.getItem('room_id')
+    const token = sessionStorage.getItem('token')
+
+    if (this.guessedId !== null && this.guessedCardPosition !== null) {
+      wsStore.sendJsonMessage({
+        type: UPDATE_GUESS,
+        guess: {
+          position: this.guessedCardPosition,
+          id: this.guessedId,
+        },
+        room_id,
+        token,
+      })
+
+      this.guessedId = null
+      this.guessedCardPosition = null
+    }
+  }
+
+  get guessTokens(): { image: string; expansion: string, id: number }[] {
     const cards = deckStore.selectedCards
-    const voteTokens: { image: string; expansion: string }[] = []
-    cards.map(card => {
-      const token = {
-        image: card.card_name,
-        expansion: card.expansion
-      }
-      voteTokens.push(token)
-    })
-    return voteTokens
+    return cards.map(card => ({
+      image: card.card_name,
+      expansion: card.expansion,
+      id: card.id,
+    }))
   }
 
   get knownPlayerCard(): CardJson { return getCardById(this.knownPlayer.player_card_id) }

@@ -24,5 +24,5 @@ export const RoleToken: React.FC<RoleTokenProps> = ({ token, size = 35 }) => {
     return `/assets/backgrounds/token_${imageName}.webp`
   }
 
-  return (<StyledRoleToken src={`/assets/cards/${token.image}.webp`} alt={token.image} bgImg={bgImg()} isSelected={false} />)
+  return (<StyledRoleToken src={`/assets/cards/${token.image}.webp`} alt={token.image} bgImg={bgImg()} isSelected={false} size={size} />)
 }

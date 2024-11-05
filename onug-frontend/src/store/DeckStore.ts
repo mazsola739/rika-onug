@@ -24,9 +24,7 @@ class DeckStore {
   }
 
   setSelectedCard(cardIds: number[]): void {
-    this.selectedCards = cardIds
-      .map((cardId) => getCardById(cardId) as CardJson)
-      .sort((a, b) => a.id - b.id)
+    this.selectedCards = cardIds.map((cardId) => getCardById(cardId) as CardJson)
     this.updateSelectedMarks()
     this.updateArtifacts()
   }
@@ -80,20 +78,13 @@ class DeckStore {
       'mark_of_assassin': this.hasAssassin
     }
 
-    this.selectedMarks = this.marks
-      .filter(mark => markConditions[mark.token_name] ?? false)
-      .sort((a, b) => a.id - b.id) as TokenJson[]
+    this.selectedMarks = this.marks.filter(mark => markConditions[mark.token_name] ?? false)
   }
 
   updateArtifacts(): void {
     this.artifacts = this.hasSentinel && this.hasCurator 
-      ? artifacts.sort((a, b) => a.id - b.id) 
-      : artifacts
-          .filter(artifact =>
-            (this.hasSentinel && artifact.token_name === 'shield') ||
-            (this.hasCurator && artifact.token_name !== 'shield')
-          )
-          .sort((a, b) => a.id - b.id) as TokenJson[]
+      ? artifacts
+      : artifacts.filter(artifact => (this.hasSentinel && artifact.token_name === 'shield') || (this.hasCurator && artifact.token_name !== 'shield'))   
   }
 
   clearPlayerCard(): void {

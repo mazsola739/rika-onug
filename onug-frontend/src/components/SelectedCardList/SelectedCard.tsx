@@ -8,9 +8,7 @@ import { SelectedCardProps } from './SelectedCard.types'
 export const SelectedCard: React.FC<SelectedCardProps> = observer(
   ({ card }, index) => {
     const { id } = card
-    const isSelected = deckStore.selectedCards.some(
-      (selectedCard) => selectedCard.id === id
-    )
+    const isSelected = deckStore.selectedCards.some((selectedCard) => selectedCard.id === id)
     const room_id = sessionStorage.getItem('room_id')
     const token = sessionStorage.getItem('token')
     const action = isSelected ? 'CARD_DESELECT' : 'CARD_SELECT'

@@ -27,11 +27,13 @@ export const HYDRATE_READY = 'HYDRATE_READY'
 export const HYDRATE_GAME = 'HYDRATE_GAME'
 export const HYDRATE_SCENE = 'HYDRATE_SCENE'
 export const HYDRATE_VOTE = 'HYDRATE_VOTE'
+export const HYDRATE_GUESS = 'HYDRATE_GUESS'
 
 export const UPDATE_ROOM = 'UPDATE_ROOM'
 export const UPDATE_TABLE = 'UPDATE_TABLE'
 export const UPDATE_GAME = 'UPDATE_GAME'
 export const UPDATE_VOTE = 'UPDATE_VOTE'
+export const UPDATE_GUESS = 'UPDATE_GUESS'
 
 export const LEAVE_ROOM = 'LEAVE_ROOM'
 export const LEAVE_GAME = 'LEAVE_GAME'

@@ -1,5 +1,5 @@
-import { selectionStore } from 'store'
-import { TablePlayerCard } from 'types'
+import { selectionStore, voteStore } from 'store'
+import { CardPosition, TablePlayerCard } from 'types'
 import { getCardImageSrc, getPlayerNumberToken } from './PlayerCards.utils'
 
 export const usePlayerCardSelection = (card: TablePlayerCard) => {
@@ -22,6 +22,9 @@ export const usePlayerCardSelection = (card: TablePlayerCard) => {
   const isMarkSelected = selectedMarks.includes(position)
 
   const onCardClick = () => {
+    if (voteStore.isGuessing) { 
+      voteStore.selectGuessCardPosition(position as CardPosition)
+    }
     if (isSelectableCard) selectionStore.toggleCardSelection(position)
   }
 

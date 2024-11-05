@@ -47,7 +47,7 @@ export const Guide = styled.div`
     scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* Thumb color and track color */
   }
 
-  align-items: center;
+  align-items: flex-start;
   gap: 5px;
   color: white;
 `
@@ -57,6 +57,7 @@ export const StyledQuickGuide = styled.h3`
   padding: 10px 0;
   margin: 0;
   text-align: center;
+  width: 378px;
 `
 
 export const Item = styled.div<StyledQuickGuideTokenProps>`
@@ -66,7 +67,7 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
 
   &:nth-of-type(odd) {
     flex-direction: row;
-    width: 100%;
+    width: 378px;
     border-radius: 200px 100px 100px 200px;
     text-align: left;
     & > img {
@@ -76,7 +77,7 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
 
   &:nth-of-type(even) {
     flex-direction: row-reverse;
-    width: 100%;
+    width: 378px;
     border-radius: 100px 200px 200px 100px;
     text-align: right;
      & > img {

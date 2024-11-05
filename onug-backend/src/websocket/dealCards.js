@@ -12,10 +12,10 @@ export const dealCards = async (ws, message) => {
   logTrace(`Dealing cards for players in room: ${room_id}`)
 
   const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
-
   if (!roomIdValid) return ws.send(JSON.stringify({ type: DEAL, success: false, errors }))
 
-  const selectedCards = gamestate.selected_cards
+  const selectedCards = [...gamestate.selected_cards]
+
   const {
     playerCards,
     leftCard,
@@ -25,7 +25,7 @@ export const dealCards = async (ws, message) => {
     newVillainCard,
   } = dealCardIds(selectedCards)
 
-  const totalPlayers = determineTotalPlayers(gamestate.selected_cards.length, gamestate.selected_cards)
+  const totalPlayers = determineTotalPlayers(selectedCards.length, selectedCards)
 
   const newGamestate = {
     ...gamestate,
@@ -39,14 +39,14 @@ export const dealCards = async (ws, message) => {
       center_villain: createCenterPositionCard(newVillainCard),
       ...playerCards.reduce((positions, playerCard, index) => {
         positions[`player_${index + 1}`] = createPlayerPositionCard(playerCard, selectedCards)
-
         return positions
       }, {}),
     },
   }
 
-  const hasPlayerMark = hasMark(selectedCards)
-  const hasDoppelganger = selectedCards.includes(1)
+  const clonedSelectedCards = [...selectedCards]
+  const hasPlayerMark = hasMark(clonedSelectedCards)
+  const hasDoppelganger = clonedSelectedCards.includes(1)
 
   if (hasPlayerMark) {
     newGamestate.mark_positions = {
@@ -76,7 +76,7 @@ export const dealCards = async (ws, message) => {
     }
   }
 
-  newGamestate.selected_cards = Object.values(newGamestate.card_positions).filter(value => value.card.id).map((value) => value.card.id)
+  newGamestate.selected_cards = [...selectedCards]
 
   const playerTokens = Object.keys(gamestate.players)
   const hasShield = selectedCards.includes(25)
@@ -90,12 +90,13 @@ export const dealCards = async (ws, message) => {
       action_finished: true,
       player_history: {},
     }
-    if (hasShield) { newGamestate.players[token].shield = false }
+    if (hasShield) {
+      newGamestate.players[token].shield = false
+    }
   })
 
   await upsertRoomState(newGamestate)
 
   const redirectToTable = { type: REDIRECT, path: `/table/${room_id}` }
-
   return broadcast(room_id, redirectToTable)
 }

@@ -1,4 +1,4 @@
-import { ARRIVE_VOTE, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
+import { ARRIVE_VOTE, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
@@ -30,6 +30,11 @@ export const useVote = () => {
       voteStore.setKnownPlayer(lastJsonMessage.player)
       voteStore.setNarrations(lastJsonMessage.narrations)
       playersStore.setPlayers(lastJsonMessage.players)
+      voteStore.setIsGuessing(true)
+    }
+
+    if (lastJsonMessage?.type === HYDRATE_GUESS && lastJsonMessage?.success) {
+      
     }
 
     if (lastJsonMessage?.type === VOTE) {
@@ -37,6 +42,7 @@ export const useVote = () => {
       voteStore.setNarrations(lastJsonMessage.narrations)
       playersStore.setPlayers(lastJsonMessage.players)
       riseAndRestStore.openYourEyes(lastJsonMessage)
+      voteStore.setIsGuessing(false)
     }
 
     if (lastJsonMessage?.type === RESULT) {
