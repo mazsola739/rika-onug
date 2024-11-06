@@ -1,20 +1,49 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getMarksByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import {
+  formatPlayerIdentifier,
+  generateRoleInteraction,
+  getCardIdsByPositions,
+  getMarksByPositions,
+  getNarrationByTitle,
+  getPlayerNumberWithMatchingToken,
+} from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection, validateMarkSelection } from '../../validators'
 
-export const marksmanResponse = (gamestate, token, selected_card_positions = [], selected_mark_positions = [], title) => {
+export const marksmanResponse = (
+  gamestate,
+  token,
+  selected_card_positions = [],
+  selected_mark_positions = [],
+  title
+) => {
   if (selected_card_positions && selected_card_positions.length > 0) {
-    if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+    if (
+      !validateCardSelection(
+        selected_card_positions,
+        gamestate.players[token].player_history,
+        title
+      )
+    ) {
       return gamestate
     }
 
     const newGamestate = { ...gamestate }
-    
-    const viewCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
-    const selectedPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
-    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
 
-    if (newGamestate.players[token].card.player_original_id === selectedPositionCard.id && currentPlayerNumber !== selected_card_positions[0]) {
+    const viewCards = getCardIdsByPositions(newGamestate.card_positions, [
+      selected_card_positions[0],
+    ])
+    const selectedPositionCard =
+      newGamestate.card_positions[selected_card_positions[0]].card
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(
+      newGamestate.players,
+      token
+    )
+
+    if (
+      newGamestate.players[token].card.player_original_id ===
+        selectedPositionCard.id &&
+      currentPlayerNumber !== selected_card_positions[0]
+    ) {
       newGamestate.players[token].card.player_card_id = 87
     }
     if (currentPlayerNumber === selected_card_positions[0]) {
@@ -26,26 +55,38 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
 
     let interaction = {}
 
-    if (newGamestate.players[token].player_history[title].viewed_marks) { 
+    if (newGamestate.players[token].player_history[title].viewed_marks) {
       interaction = generateRoleInteraction(newGamestate, token, {
-        private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
+        private_message: [
+          'interaction_saw_card',
+          formatPlayerIdentifier(selected_card_positions)[0],
+        ],
         showCards: viewCards,
       })
     } else {
-      let selectableMarks = newGamestate.players[token].player_history[title].selectable_marks
+      let selectableMarks =
+        newGamestate.players[token].player_history[title].selectable_marks
       const indexToRemove = selectableMarks.indexOf(selected_card_positions[0])
       if (indexToRemove !== -1) {
         selectableMarks.splice(indexToRemove, 1)
       }
 
-      newGamestate.players[token].player_history[title].selectable_marks = selectableMarks
-      newGamestate.players[token].player_history[title].selectable_mark_limit = { mark: 1 }
-
+      newGamestate.players[token].player_history[title].selectable_marks =
+        selectableMarks
+      newGamestate.players[token].player_history[title].selectable_mark_limit =
+        { mark: 1 }
 
       interaction = generateRoleInteraction(newGamestate, token, {
-        private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
+        private_message: [
+          'interaction_saw_card',
+          formatPlayerIdentifier(selected_card_positions)[0],
+          'interaction_must_one_any',
+        ],
         showCards: viewCards,
-        selectableMarks: { selectable_marks: selectableMarks, selectable_mark_limit: { mark: 1 } },
+        selectableMarks: {
+          selectable_marks: selectableMarks,
+          selectable_mark_limit: { mark: 1 },
+        },
       })
     }
 
@@ -56,20 +97,37 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
 
     const narration = getNarrationByTitle(title, newGamestate.narration)
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
 
     return newGamestate
-
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
-    if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+    if (
+      !validateMarkSelection(
+        selected_mark_positions,
+        gamestate.players[token].player_history,
+        title
+      )
+    ) {
       return gamestate
     }
 
     const newGamestate = { ...gamestate }
-    
-    const viewMarks = getMarksByPositions(newGamestate.card_positions, [selected_mark_positions[0]])
-    const selectedPositionMark = newGamestate.card_positions[selected_mark_positions[0]].mark
-    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+
+    const viewMarks = getMarksByPositions(newGamestate.card_positions, [
+      selected_mark_positions[0],
+    ])
+    const selectedPositionMark =
+      newGamestate.card_positions[selected_mark_positions[0]].mark
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(
+      newGamestate.players,
+      token
+    )
 
     if (currentPlayerNumber === selected_mark_positions[0]) {
       newGamestate.players[token].card.player_mark = selectedPositionMark
@@ -81,23 +139,36 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
 
     if (newGamestate.players[token].player_history[title].viewed_cards) {
       interaction = generateRoleInteraction(newGamestate, token, {
-        private_message: ['interaction_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0]],
+        private_message: [
+          'interaction_saw_mark',
+          formatPlayerIdentifier(selected_mark_positions)[0],
+        ],
         showMarks: viewMarks,
       })
     } else {
-      let selectableCards = newGamestate.players[token].player_history[title].selectable_cards
+      let selectableCards =
+        newGamestate.players[token].player_history[title].selectable_cards
       const indexToRemove = selectableCards.indexOf(selected_mark_positions[0])
       if (indexToRemove !== -1) {
         selectableCards.splice(indexToRemove, 1)
       }
 
-      newGamestate.players[token].player_history[title].selectable_cards = selectableCards
-      newGamestate.players[token].player_history[title].selectable_card_limit = { player: 1, center: 0 }
+      newGamestate.players[token].player_history[title].selectable_cards =
+        selectableCards
+      newGamestate.players[token].player_history[title].selectable_card_limit =
+        { player: 1, center: 0 }
 
       interaction = generateRoleInteraction(newGamestate, token, {
-        private_message: ['interaction_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0], 'interaction_must_one_any'],
+        private_message: [
+          'interaction_saw_mark',
+          formatPlayerIdentifier(selected_mark_positions)[0],
+          'interaction_must_one_any',
+        ],
         showMarks: viewMarks,
-        selectableCards: { selectable_cards: selectableCards, selectable_card_limit: { player: 1, center: 0 } },
+        selectableCards: {
+          selectable_cards: selectableCards,
+          selectable_card_limit: { player: 1, center: 0 },
+        },
       })
     }
 
@@ -108,7 +179,13 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
 
     const narration = getNarrationByTitle(title, newGamestate.narration)
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
 
     return newGamestate
   }

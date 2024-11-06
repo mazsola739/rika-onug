@@ -1,14 +1,7 @@
 import styled from '@emotion/styled'
 import { StyledQuickGuideTokenProps } from './QuickGuide.types'
 
-type ExpansionTypes =
-  | 'Werewolf'
-  | 'Bonus Roles'
-  | 'Daybreak'
-  | 'Vampire'
-  | 'Alien'
-  | 'Super Villains'
-  | 'default'
+type ExpansionTypes = 'Werewolf' | 'Bonus Roles' | 'Daybreak' | 'Vampire' | 'Alien' | 'Super Villains' | 'default'
 
 const colorVariants: Record<ExpansionTypes, string> = {
   Werewolf: '#364C5463',
@@ -17,7 +10,7 @@ const colorVariants: Record<ExpansionTypes, string> = {
   Vampire: '#48397A63',
   Alien: '#A4CA6363',
   'Super Villains': '#469FDF63',
-  default: 'rgba(0, 0, 0, 0.3)',
+  default: 'rgba(0, 0, 0, 0.3)'
 }
 
 export const Guide = styled.div`
@@ -32,12 +25,7 @@ export const Guide = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: rgba(
-      150,
-      146,
-      144,
-      0.2
-    ); /* Semi-transparent scrollbar thumb */
+    background-color: rgba(150, 146, 144, 0.2); /* Semi-transparent scrollbar thumb */
     border-radius: 10px; /* Rounded corners for the scrollbar thumb */
   }
 
@@ -62,8 +50,7 @@ export const StyledQuickGuide = styled.h3`
 
 export const Item = styled.div<StyledQuickGuideTokenProps>`
   display: flex;
-  background-color: ${({ expansion }) =>
-    colorVariants[expansion as ExpansionTypes] || colorVariants.default};
+  background-color: ${({ expansion }) => colorVariants[expansion as ExpansionTypes] || colorVariants.default};
 
   &:nth-of-type(odd) {
     flex-direction: row;
@@ -80,7 +67,7 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
     width: 378px;
     border-radius: 100px 200px 200px 100px;
     text-align: right;
-     & > img {
+    & > img {
       filter: drop-shadow(-8px 5px 5px black);
     }
   }
@@ -94,7 +81,6 @@ export const StyledQuickGuideToken = styled.img<StyledQuickGuideTokenProps>`
   border-radius: 50%;
   width: 50px;
   height: 50px;
-
 `
 
 export const QuickGuideRule = styled.span`

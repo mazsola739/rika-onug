@@ -3,7 +3,11 @@ export const getRolesNames = (selectedCardIds, actionIds, roles) =>
 
 export const addVerboseOr = (rolesFromIds) => {
   if (rolesFromIds.length > 1) {
-    rolesFromIds.splice(rolesFromIds.length - 1, 0, 'doppelganger_verbose_or_text')
+    rolesFromIds.splice(
+      rolesFromIds.length - 1,
+      0,
+      'doppelganger_verbose_or_text'
+    )
   }
   rolesFromIds
 }

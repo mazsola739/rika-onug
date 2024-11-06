@@ -14,7 +14,7 @@ export const useApp = () => {
   const socketUrl = WS_HOST
   const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket<WebSocketMessage>(socketUrl, {
     onOpen: () => setFirstTime(true),
-    shouldReconnect: () => true,
+    shouldReconnect: () => true
   })
 
   useEffect(() => {

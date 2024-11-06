@@ -11,12 +11,11 @@ const colorVariants = {
   blue: '#007bff',
   crimson: '#dc3545',
   orange: '#ff9800',
-  yellow: '#FFFF00',
+  yellow: '#FFFF00'
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
-  background-color: ${({ variant }) =>
-    colorVariants[variant as ColorVariant] || colorVariants.default};
+  background-color: ${({ variant }) => colorVariants[variant as ColorVariant] || colorVariants.default};
   border: none;
   border-radius: 5px;
   color: white;
@@ -35,11 +34,7 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
   &:hover:not(:disabled) {
     transition: 0.75s;
-    background-color: ${({ variant }) =>
-      lightenDarkenColor(
-        colorVariants[variant as ColorVariant] || colorVariants.default,
-        -50
-      )};
+    background-color: ${({ variant }) => lightenDarkenColor(colorVariants[variant as ColorVariant] || colorVariants.default, -50)};
   }
 `
 

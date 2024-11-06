@@ -1,7 +1,7 @@
-import { InfoPanel, OwnCard, ReadyList, RoleImage } from 'components'
+import { InfoPanel, OwnCard, ReadyList } from 'components'
 import { observer } from 'mobx-react-lite'
 import { gamePropStore, playersStore, selectionStore, voteStore } from 'store'
-import { NarrationText, Narration, ReadyStatus, ReadyTitle, NarrationImage } from './Vote.styles'
+import { Narration, NarrationImage, NarrationText, ReadyStatus, ReadyTitle } from './Vote.styles'
 
 export const VoteInfoPanel: React.FC = observer(() => {
   const { players } = playersStore
@@ -9,10 +9,15 @@ export const VoteInfoPanel: React.FC = observer(() => {
 
   return (
     <InfoPanel>
-      {gamePropStore.selectable_cards.length === 0 ? (<ReadyStatus><ReadyTitle>VOTE NOW?</ReadyTitle>{players && <ReadyList players={players} />}</ReadyStatus>) : (<span>Selected cards: {selectedCards}</span>)}
-      {voteStore.knownPlayerCard && (
-        <OwnCard player={voteStore.knownPlayer} card={voteStore.knownPlayerCard} mark={voteStore.knownPlayerMark} />
+      {gamePropStore.selectable_cards.length === 0 ? (
+        <ReadyStatus>
+          <ReadyTitle>VOTE NOW?</ReadyTitle>
+          {players && <ReadyList players={players} />}
+        </ReadyStatus>
+      ) : (
+        <span>Selected cards: {selectedCards}</span>
       )}
+      {voteStore.knownPlayerCard && <OwnCard player={voteStore.knownPlayer} card={voteStore.knownPlayerCard} mark={voteStore.knownPlayerMark} />}
       {voteStore.narrations &&
         voteStore.voteNarration.map((scene, index) => (
           <Narration key={index}>

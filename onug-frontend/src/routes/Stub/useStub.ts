@@ -18,21 +18,23 @@ interface UseStubLogicReturn {
 
 export const useStub = (): UseStubLogicReturn => {
   const [inputValues, setInputValues] = useState<number[]>(Array(labels.length).fill(0))
-  const [response, setResponse] = useState<ServerResponse>({ serverResponse: 'will be populated here' })
+  const [response, setResponse] = useState<ServerResponse>({
+    serverResponse: 'will be populated here'
+  })
   const [dealStub, setDealStub] = useState<Record<string, number>>({})
 
   const fetchOptions = {
     method: 'POST',
     headers: {
       Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
+      'Content-Type': 'application/json'
+    }
   }
 
   const updateResponse = async (body: object) => {
     const res = await fetch(`${API_HOST}/stub/populate/deal`, {
       ...fetchOptions,
-      body: JSON.stringify(body),
+      body: JSON.stringify(body)
     })
     setResponse(await res.json())
   }
@@ -41,15 +43,15 @@ export const useStub = (): UseStubLogicReturn => {
     const parsedValue = Number(value)
     if (isNaN(parsedValue) || parsedValue < 0 || parsedValue > 86) return
 
-    setInputValues((prev) => {
+    setInputValues(prev => {
       const newValues = [...prev]
       newValues[index] = parsedValue
       return newValues
     })
 
-    setDealStub((prevStub) => ({
+    setDealStub(prevStub => ({
       ...prevStub,
-      [labels[index]]: parsedValue || null,
+      [labels[index]]: parsedValue || null
     }))
   }, [])
 
@@ -65,7 +67,7 @@ export const useStub = (): UseStubLogicReturn => {
 
   const useTestCase = useCallback(async () => {
     setDealStub(testCase)
-    setInputValues(labels.map((label) => testCase[label] || 0))
+    setInputValues(labels.map(label => testCase[label] || 0))
     await updateResponse(testCase)
   }, [])
 
@@ -75,6 +77,6 @@ export const useStub = (): UseStubLogicReturn => {
     handleInputChange,
     populateStub,
     resetStub,
-    useTestCase,
+    useTestCase
   }
 }

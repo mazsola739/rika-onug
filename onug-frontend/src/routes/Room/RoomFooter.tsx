@@ -11,9 +11,7 @@ export const RoomFooter: React.FC = observer(() => {
   const totalPlayers = deckStore.totalPlayers
   const playersInGame = roomStore.roomPlayers?.length || 0
 
-  const buttonText = totalPlayers > 0 
-    ? `${BUTTONS.deal_label} FOR ${totalPlayers}` 
-    : BUTTONS.deal_label
+  const buttonText = totalPlayers > 0 ? `${BUTTONS.deal_label} FOR ${totalPlayers}` : BUTTONS.deal_label
 
   const { handleResetGame, handleLeaveRoom, handleJoinTable } = useClickHandler(room_id, token)
 
@@ -24,9 +22,9 @@ export const RoomFooter: React.FC = observer(() => {
   return (
     <Footer>
       <ButtonGroup>
-        <Button onClick={handleResetGame} buttonText={BUTTONS.reset_game_label} variant='blue' />
-        <Button onClick={handleJoinTable} disabled={isButtonDisabled} buttonText={buttonText} variant='green' />
-        <Button onClick={handleLeaveRoom} buttonText={BUTTONS.leave_room_label} variant='crimson' />
+        <Button onClick={handleResetGame} buttonText={BUTTONS.reset_game_label} variant="blue" />
+        <Button onClick={handleJoinTable} disabled={isButtonDisabled} buttonText={buttonText} variant="green" />
+        <Button onClick={handleLeaveRoom} buttonText={BUTTONS.leave_room_label} variant="crimson" />
       </ButtonGroup>
     </Footer>
   )

@@ -1,4 +1,4 @@
-export const getMadScientistPlayerNumberByRoleIds = players => {
+export const getMadScientistPlayerNumberByRoleIds = (players) => {
   const result = []
 
   for (const token in players) {

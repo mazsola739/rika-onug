@@ -15,7 +15,7 @@ export const labels = [
   'CenterMiddle',
   'CenterRight',
   'CenterWolf',
-  'CenterVillain',
+  'CenterVillain'
 ]
 
 export const role_map: Record<number, string> = {
@@ -104,5 +104,5 @@ export const role_map: Record<number, string> = {
   83: 'Squire',
   84: 'The Sponge',
   85: 'Thing',
-  86: 'Windy Wendy',
+  86: 'Windy Wendy'
 }

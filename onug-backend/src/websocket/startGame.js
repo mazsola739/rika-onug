@@ -20,14 +20,15 @@ const initializeGameState = (gamestate) => {
   }
 }
 
-const areAllPlayersReady = (players) => Object.values(players).every(player => player.flag)
+const areAllPlayersReady = (players) =>
+  Object.values(players).every((player) => player.flag)
 
 const broadcastError = (room_id, message) => {
   broadcast(room_id, { type: 'ERROR', message })
 }
 
 const resetPlayerReadiness = (players) => {
-  Object.keys(players).forEach(playerToken => {
+  Object.keys(players).forEach((playerToken) => {
     players[playerToken].flag = false
   })
 }
@@ -37,7 +38,6 @@ export const startGame = async (ws, message) => {
   logTrace(`Attempting to start game in room: ${room_id}`)
 
   try {
-  
     const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
 
     if (!roomIdValid) {
@@ -49,20 +49,27 @@ export const startGame = async (ws, message) => {
     const { players } = newGamestate
 
     if (!areAllPlayersReady(players)) {
-      logError(`Not all players are ready. Current readiness: ${JSON.stringify(players)}`)
-      return broadcastError(room_id, 'All players must be ready to start the game.')
+      logError(
+        `Not all players are ready. Current readiness: ${JSON.stringify(
+          players
+        )}`
+      )
+      return broadcastError(
+        room_id,
+        'All players must be ready to start the game.'
+      )
     }
     newGamestate = startScene(newGamestate)
-    
+
     resetPlayerReadiness(players)
 
     await upsertRoomState(newGamestate)
-    logTrace(`Game started successfully in room [${room_id}] by player [${token}]`)
+    logTrace(
+      `Game started successfully in room [${room_id}] by player [${token}]`
+    )
 
     return broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` })
-
   } catch (error) {
-  
     logError(`Error starting game in room [${room_id}]: ${error.message}`)
     logError(JSON.stringify(error.stack))
     ws.send(

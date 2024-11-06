@@ -13,8 +13,8 @@ export const StyledFooter = styled.footer`
 `
 
 export const CopyrightText = styled.div`
-  font-size: 0.6rem; 
-  color: rgba(255, 255, 255, 0.5); 
+  font-size: 0.6rem;
+  color: rgba(255, 255, 255, 0.5);
   position: absolute;
   bottom: 3px;
   left: 50%;

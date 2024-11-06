@@ -1,9 +1,8 @@
 {
-    "compilerOptions": {
-      "checkJs": true,
-      "resolveJsonModule": true,
-      "downlevelIteration": true,
-    },
-    "exclude": ["node_modules", "**/node_modules/*"]
-  }
-  
+  "compilerOptions": {
+    "checkJs": true,
+    "resolveJsonModule": true,
+    "downlevelIteration": true
+  },
+  "exclude": ["node_modules", "**/node_modules/*"]
+}

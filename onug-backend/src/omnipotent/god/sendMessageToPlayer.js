@@ -4,7 +4,10 @@ import { webSocketServerConnectionsPerRoom } from '../../websocket/connections'
 export const sendMessageToPlayer = async (req, res) => {
   try {
     const { message, token } = req.body
-    logTrace('GOD send message to player endpoint triggered', `${message}, ${token}`)
+    logTrace(
+      'GOD send message to player endpoint triggered',
+      `${message}, ${token}`
+    )
     Object.keys(webSocketServerConnectionsPerRoom).forEach((room) => {
       const connectionsEntry = Object.entries(
         webSocketServerConnectionsPerRoom[room]

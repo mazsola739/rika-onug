@@ -1,4 +1,7 @@
-import { getAlienPlayerNumbersByRoleIds, getNeighborPlayerNumbersByToken } from '../../sceneUtils'
+import {
+  getAlienPlayerNumbersByRoleIds,
+  getNeighborPlayerNumbersByToken,
+} from '../../sceneUtils'
 
 export const alienAbducted = (players, cowToken) => {
   const cowNeighbors = getNeighborPlayerNumbersByToken(players, cowToken)

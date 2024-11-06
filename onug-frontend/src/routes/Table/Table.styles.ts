@@ -35,7 +35,10 @@ export const StyledTableHeader = styled.div``
 
 export const Sun = styled.img`
   border-radius: 50%;
-  box-shadow: 0 0 60px 10px #fff, 0 0 100px 20px red, 0 0 140px 30px gold;
+  box-shadow:
+    0 0 60px 10px #fff,
+    0 0 100px 20px red,
+    0 0 140px 30px gold;
   width: 35px;
   height: 35px;
 `
@@ -51,7 +54,6 @@ export const TableCenter = styled.div`
 `
 
 //FOOTER
-
 
 //INFOPANEL
 export const ReadyStatus = styled.div`

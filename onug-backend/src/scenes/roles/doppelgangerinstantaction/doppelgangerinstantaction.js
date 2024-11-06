@@ -1,4 +1,3 @@
-
 import { DOPPELGANGER_INSTANT_ACTION } from '../../../constants'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { instantRoleIds } from './doppelgangerinstantaction.constants'
@@ -7,11 +6,15 @@ import { addVerboseOr, getRolesNames } from './doppelgangerinstantaction.utils'
 
 export const doppelgangerinstantaction = (gamestate, title) => {
   const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)  
-  const rolesFromIds = getRolesNames(newGamestate.selected_cards, DOPPELGANGER_INSTANT_ACTION, instantRoleIds)
+  const tokens = getAllPlayerTokens(newGamestate.players)
+  const rolesFromIds = getRolesNames(
+    newGamestate.selected_cards,
+    DOPPELGANGER_INSTANT_ACTION,
+    instantRoleIds
+  )
 
   addVerboseOr(rolesFromIds)
-  
+
   const narration = [
     'doppelganger_verbose_intro_text',
     ...rolesFromIds,
@@ -25,13 +28,23 @@ export const doppelgangerinstantaction = (gamestate, title) => {
 
     if (card.player_original_id === 1) {
       newGamestate.players[token].action_finished = false
-      interaction = doppelgangerinstantactionInteraction(newGamestate, token, title)
+      interaction = doppelgangerinstantactionInteraction(
+        newGamestate,
+        token,
+        title
+      )
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
   })
 
-  newGamestate.narration.push({[title]: narration})
+  newGamestate.narration.push({ [title]: narration })
 
   return newGamestate
 }

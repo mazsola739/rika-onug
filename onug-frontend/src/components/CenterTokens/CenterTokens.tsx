@@ -12,7 +12,7 @@ export const CenterTokens: React.FC = observer(() => {
       <TokenGroup>
         <GroupTitle>{title}</GroupTitle>
         <Tokens>
-          <Token tokenName='shield' size={40} />
+          <Token tokenName="shield" size={40} />
         </Tokens>
       </TokenGroup>
     )
@@ -35,12 +35,7 @@ export const CenterTokens: React.FC = observer(() => {
         <TokenGroup>
           <GroupTitle>Artifacts</GroupTitle>
           <Tokens>
-            {artifacts.map(
-              (artifact, index) =>
-                artifact.token_name !== 'shield' && (
-                  <Token key={index} tokenName={'artifact_back'} size={40} />
-                )
-            )}
+            {artifacts.map((artifact, index) => artifact.token_name !== 'shield' && <Token key={index} tokenName={'artifact_back'} size={40} />)}
           </Tokens>
         </TokenGroup>
       )}

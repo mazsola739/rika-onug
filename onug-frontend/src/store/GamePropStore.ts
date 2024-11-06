@@ -11,20 +11,48 @@ class GamePropStore {
     makeAutoObservable(this)
   }
 
-  get answer_options() { return this.interaction.answer_options }
-  get artifacted_cards() { return this.interaction.artifacted_cards }
-  get dreamwolf() { return this.interaction.dreamwolf }
-  get scene_end() { return this.interaction.scene_end }
-  get obligatory() { return this.interaction.obligatory }
-  get selectable_card_limit() { return this.interaction.selectable_card_limit }
-  get selectable_cards() { return this.interaction.selectable_cards }
-  get selectable_mark_limit() { return this.interaction.selectable_mark_limit }
-  get selectable_marks() { return this.interaction.selectable_marks }
-  get shielded_cards() { return this.interaction.shielded_cards }
-  get show_cards() { return this.interaction.show_cards }
-  get show_marks() { return this.interaction.show_marks }
-  get werewolves() { return this.interaction.werewolves }
-  get masons() { return this.interaction.masons }
+  get answer_options() {
+    return this.interaction.answer_options
+  }
+  get artifacted_cards() {
+    return this.interaction.artifacted_cards
+  }
+  get dreamwolf() {
+    return this.interaction.dreamwolf
+  }
+  get scene_end() {
+    return this.interaction.scene_end
+  }
+  get obligatory() {
+    return this.interaction.obligatory
+  }
+  get selectable_card_limit() {
+    return this.interaction.selectable_card_limit
+  }
+  get selectable_cards() {
+    return this.interaction.selectable_cards
+  }
+  get selectable_mark_limit() {
+    return this.interaction.selectable_mark_limit
+  }
+  get selectable_marks() {
+    return this.interaction.selectable_marks
+  }
+  get shielded_cards() {
+    return this.interaction.shielded_cards
+  }
+  get show_cards() {
+    return this.interaction.show_cards
+  }
+  get show_marks() {
+    return this.interaction.show_marks
+  }
+  get werewolves() {
+    return this.interaction.werewolves
+  }
+  get masons() {
+    return this.interaction.masons
+  }
 
   setInteraction(interaction: InteractionType): void {
     this.interaction = { ...this.interaction, ...interaction }

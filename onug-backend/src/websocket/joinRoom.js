@@ -69,7 +69,9 @@ export const joinRoom = async (ws, message) => {
 
     player_name = randomPlayerName(gamestate.available_names)
 
-    const isAdmin = Object.values(gamestate.players).every(player => !player.admin)
+    const isAdmin = Object.values(gamestate.players).every(
+      (player) => !player.admin
+    )
 
     if (isAdmin) {
       gamestate.players[token] = {
@@ -96,10 +98,10 @@ export const joinRoom = async (ws, message) => {
 
   const players = getPlayerNames(gamestate)
 
-  broadcast(room_id, { 
+  broadcast(room_id, {
     type: HYDRATE_ROOM,
     success: true,
-    selected_cards: gamestate.selected_cards, 
+    selected_cards: gamestate.selected_cards,
     selected_expansions: gamestate.selected_expansions,
     players,
   })

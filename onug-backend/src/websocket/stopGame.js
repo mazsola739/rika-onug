@@ -13,7 +13,7 @@ export const stopGame = async (message) => {
   if (!roomIdValid) return broadcast({ type: REDIRECT, path: '/lobby', errors })
 
   // TODO validate if player is admin and in the room
-  
+
   let newGamestate = stopScene(gamestate)
 
   logTrace(`Game stopped by player [${token}], in room [${room_id}]`)

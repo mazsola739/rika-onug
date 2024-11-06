@@ -1,4 +1,4 @@
 export interface GameProps {
-    nightfall: boolean
-    sunrise: boolean
+  nightfall: boolean
+  sunrise: boolean
 }

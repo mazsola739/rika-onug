@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 
 export const StyledOwnCard = styled.div`
   display: grid;
-  justify-content: center;  
+  justify-content: center;
   border-bottom: 2px solid #969290;
   grid-template-columns: 100px 20px 250px;
   grid-template-rows: 20px 20px 20px 20px 77px 55px;
@@ -30,7 +30,6 @@ export const StyledOwnCard = styled.div`
     grid-area: token;
     justify-self: end;
   }
-
 `
 
 export const KnownCard = styled.h3`

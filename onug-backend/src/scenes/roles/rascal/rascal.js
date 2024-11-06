@@ -1,14 +1,27 @@
-import { COPY_PLAYER } from "../../../constants"
-import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
+import { COPY_PLAYER } from '../../../constants'
+import {
+  createAndSendSceneMessage,
+  getAllPlayerTokens,
+  getRandomItemFromArray,
+} from '../../sceneUtils'
 import { villageidiotInteraction } from '../villageidiot/villageidiot.interaction'
-import { randomRascalInstructions, rascalAnyOneKeys, rascalAnyTwoKeys } from './rascal.constants'
+import {
+  randomRascalInstructions,
+  rascalAnyOneKeys,
+  rascalAnyTwoKeys,
+} from './rascal.constants'
 import { rascalInteraction } from './rascal.interaction'
 
 export const rascal = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
   const tokens = getAllPlayerTokens(newGamestate.players)
-  const randomRascalInstruction = getRandomItemFromArray(randomRascalInstructions)
-  const rascalKey = randomRascalInstruction === 'rascal_troublemaker_text' ? getRandomItemFromArray(rascalAnyTwoKeys) : getRandomItemFromArray(rascalAnyOneKeys)
+  const randomRascalInstruction = getRandomItemFromArray(
+    randomRascalInstructions
+  )
+  const rascalKey =
+    randomRascalInstruction === 'rascal_troublemaker_text'
+      ? getRandomItemFromArray(rascalAnyTwoKeys)
+      : getRandomItemFromArray(rascalAnyOneKeys)
   const narration = [`${prefix}_kickoff_text`]
 
   switch (randomRascalInstruction) {
@@ -40,8 +53,15 @@ export const rascal = (gamestate, title, prefix) => {
     let interaction = {}
     const card = newGamestate.players[token].card
 
-    if ((prefix === 'rascal' && (card.player_original_id === 52 || (card.player_role_id === 52 && COPY_PLAYER.includes(card.player_original_id)))) ||
-      (prefix === 'doppelganger_rascal' && card.player_role_id === 52 && card.player_original_id === 1)) {
+    if (
+      (prefix === 'rascal' &&
+        (card.player_original_id === 52 ||
+          (card.player_role_id === 52 &&
+            COPY_PLAYER.includes(card.player_original_id)))) ||
+      (prefix === 'doppelganger_rascal' &&
+        card.player_role_id === 52 &&
+        card.player_original_id === 1)
+    ) {
       if (randomRascalInstruction === 'rascal_idiot_text') {
         newGamestate.players[token].action_finished = false
         interaction = villageidiotInteraction(newGamestate, token, title)
@@ -51,10 +71,16 @@ export const rascal = (gamestate, title, prefix) => {
       }
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
   })
 
-  newGamestate.narration.push({[title]: narration})
+  newGamestate.narration.push({ [title]: narration })
 
   return newGamestate
 }

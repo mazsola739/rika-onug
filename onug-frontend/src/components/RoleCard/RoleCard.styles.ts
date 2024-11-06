@@ -3,8 +3,8 @@ import { StyledRoleCardProps } from './RoleCard.types'
 
 export const StyledRoleCard = styled.div<StyledRoleCardProps>`
   align-items: center;
-  background-color: ${({ isSelected }) => isSelected ? 'rgba(0, 0, 0, 0.2)' : 'transparent'};
-  border: ${({ isSelected }) => isSelected ? '1px solid yellow' : '1px solid transparent'};
+  background-color: ${({ isSelected }) => (isSelected ? 'rgba(0, 0, 0, 0.2)' : 'transparent')};
+  border: ${({ isSelected }) => (isSelected ? '1px solid yellow' : '1px solid transparent')};
   display: flex;
   flex-direction: column;
   height: 90px;
@@ -21,7 +21,7 @@ export const RoleImage = styled.img<{ isSelected?: boolean }>`
   width: 90px;
   z-index: 1;
 
-  filter: ${({ isSelected }) => isSelected ? 'drop-shadow(8px 5px 5px black);' : ''};
+  filter: ${({ isSelected }) => (isSelected ? 'drop-shadow(8px 5px 5px black);' : '')};
 
   &:hover {
     transition: 0.75s;
@@ -37,8 +37,8 @@ export const RoleImage = styled.img<{ isSelected?: boolean }>`
 `
 
 export const RoleCardName = styled.span<StyledRoleCardProps>`
-  color: ${({ isSelected }) => isSelected ? 'rgba(255,255,255, 1)' : 'rgba(255,255,255, 0.4)'};
-  text-shadow: ${({ isSelected }) => isSelected ? '2px 2px 2px black' : ''};
+  color: ${({ isSelected }) => (isSelected ? 'rgba(255,255,255, 1)' : 'rgba(255,255,255, 0.4)')};
+  text-shadow: ${({ isSelected }) => (isSelected ? '2px 2px 2px black' : '')};
   font-size: 12px;
   font-weight: 500;
   left: 50%;

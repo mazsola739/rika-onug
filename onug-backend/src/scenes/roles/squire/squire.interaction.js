@@ -1,9 +1,14 @@
-import { generateRoleInteraction, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../sceneUtils'
+import {
+  generateRoleInteraction,
+  getWerewolfAndDreamwolfPlayerNumbersByRoleIds,
+} from '../../sceneUtils'
 
 export const squireInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
-  
-  const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(newGamestate.players)
+
+  const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(
+    newGamestate.players
+  )
 
   if (werewolves.length === 0) {
     newGamestate.players[token].card.player_team = 'squire'

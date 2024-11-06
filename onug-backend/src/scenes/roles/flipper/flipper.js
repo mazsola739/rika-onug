@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from "../../../constants"
+import { COPY_PLAYER } from '../../../constants'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { flipperInteraction } from './flipper.interaction'
 
@@ -13,7 +13,11 @@ export const flipper = (gamestate, title, prefix) => {
     const card = newGamestate.players[token].card
 
     if (prefix === 'flipper') {
-      if (card.player_original_id === 59 || (card.player_role_id === 59 && COPY_PLAYER.includes(card.player_original_id))) {
+      if (
+        card.player_original_id === 59 ||
+        (card.player_role_id === 59 &&
+          COPY_PLAYER.includes(card.player_original_id))
+      ) {
         newGamestate.players[token].action_finished = false
         interaction = flipperInteraction(newGamestate, token, title)
       }
@@ -24,10 +28,16 @@ export const flipper = (gamestate, title, prefix) => {
       }
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
   })
 
-  newGamestate.narration.push({[title]: narration})
+  newGamestate.narration.push({ [title]: narration })
 
   return newGamestate
 }

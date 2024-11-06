@@ -1,6 +1,6 @@
 import { STAGES } from '../constants'
 
-export const stopScene = gamestate => {
+export const stopScene = (gamestate) => {
   gamestate.stage = STAGES.ROOM
   gamestate.game_started = false
   gamestate.game_paused = false
@@ -21,13 +21,15 @@ const resetPlayers = (players) => {
   return Object.fromEntries(
     Object.entries(players).map(([token, player]) => [
       token,
-      { ...player, 
-        flag: false, 
-        card: null, 
-        player_number: null, 
+      {
+        ...player,
+        flag: false,
+        card: null,
+        player_number: null,
         card_or_mark_action: false,
         action_finished: true,
-        player_history: {} },
+        player_history: {},
+      },
     ])
   )
 }

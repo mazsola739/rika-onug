@@ -76,7 +76,7 @@ export const interaction_must_one_any_non_villain = 'You must choose any other n
 export const interaction_must_one_any_non_alien = 'You must choose any other non-alien player'
 
 export const interaction_no_selectable_player = 'You cannot choose any player based on these criteria'
-  
+
 export const interaction_may_direction = 'You may choose a direction to move other players cards'
 export const interaction_may_look = 'You may look at the cards'
 export const interaction_may_look_yourself = 'You may look at your cards'
@@ -98,7 +98,7 @@ export const interaction_shielded = 'You are unable to do your action, you have 
 export const interaction_you_are_that_role = 'You are now this role:'
 //intern
 export const interaction_mad_now = 'You are Mad Scientist now'
-//apprenticetanner 
+//apprenticetanner
 export const interaction_tanner_now = 'You are Tanner now'
 //sentinel
 export const interaction_placed_shield = 'You placed a shield front of'

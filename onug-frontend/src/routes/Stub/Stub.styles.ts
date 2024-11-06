@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 
-const primaryColor = '#00AACC';
-const secondaryColor = '#0088AA';
-const textColor = 'white';
-const backgroundColor = '#20232a';
-const inputBorderColor = '#ddd';
+const primaryColor = '#00AACC'
+const secondaryColor = '#0088AA'
+const textColor = 'white'
+const backgroundColor = '#20232a'
+const inputBorderColor = '#ddd'
 
 export const StubContainer = styled.div`
   display: flex;
@@ -20,7 +20,7 @@ export const Container = styled.div`
   flex: 1;
   border-radius: 12px;
   padding: 20px;
-  background-color: #282C34;
+  background-color: #282c34;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 `
 
@@ -104,7 +104,7 @@ export const RoleDisplay = styled.div`
   border-radius: 3px;
   overflow-y: auto;
   max-height: 300px;
-  background-color: #282C34;
+  background-color: #282c34;
 `
 
 export const PreDisplay = styled.div`
@@ -113,5 +113,5 @@ export const PreDisplay = styled.div`
   overflow-y: auto;
   color: ${textColor};
   border: 1px solid ${inputBorderColor};
-  background-color: #282C34;
+  background-color: #282c34;
 `

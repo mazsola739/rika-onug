@@ -2,14 +2,11 @@ import { Header } from 'components'
 import { observer } from 'mobx-react-lite'
 import { Sun } from './Table.styles'
 
-
 export const TableHeader: React.FC = observer(() => {
-
-//TODO
-    return (
-      <Header>
-        <Sun src="/assets/logos/sun.webp" alt="sun" /> The sun is up!
-      </Header>
-    )
-  }
-)
+  //TODO
+  return (
+    <Header>
+      <Sun src="/assets/logos/sun.webp" alt="sun" /> The sun is up!
+    </Header>
+  )
+})

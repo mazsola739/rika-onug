@@ -9,7 +9,7 @@ export const StyledSelectedCardList = styled.div`
   flex-direction: row;
 
   overflow-x: auto;
-  overflow-y: hidden; 
+  overflow-y: hidden;
 
   /* Custom Scrollbar Styles */
   ::-webkit-scrollbar {
@@ -25,5 +25,4 @@ export const StyledSelectedCardList = styled.div`
   /* For Firefox */
   scrollbar-width: thin;
   scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
-
 `

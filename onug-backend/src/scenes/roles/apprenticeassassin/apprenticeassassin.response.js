@@ -1,12 +1,28 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import {
+  formatPlayerIdentifier,
+  generateRoleInteraction,
+  getNarrationByTitle,
+  getPlayerNumberWithMatchingToken,
+} from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateMarkSelection } from '../../validators'
 
-export const apprenticeassassinResponse = (gamestate, token, selected_mark_positions, title) => {
-  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+export const apprenticeassassinResponse = (
+  gamestate,
+  token,
+  selected_mark_positions,
+  title
+) => {
+  if (
+    !validateMarkSelection(
+      selected_mark_positions,
+      gamestate.players[token].player_history,
+      title
+    )
+  ) {
     return gamestate
   }
-  
+
   const newGamestate = { ...gamestate }
 
   if (gamestate.players[token].card.player_original_id === 1) {
@@ -27,7 +43,10 @@ export const apprenticeassassinResponse = (gamestate, token, selected_mark_posit
       assassinPosition
   }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(
+    newGamestate.players,
+    token
+  )
 
   if (currentPlayerNumber === selected_mark_positions[0]) {
     newGamestate.players[token].card.player_mark = 'mark_of_assassin'
@@ -42,7 +61,10 @@ export const apprenticeassassinResponse = (gamestate, token, selected_mark_posit
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
+    private_message: [
+      'interaction_mark_of_assassin',
+      formatPlayerIdentifier(selected_mark_positions)[0],
+    ],
     scene_end: true,
   })
 

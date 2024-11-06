@@ -1,5 +1,8 @@
 //TODO newGamestate.ripple true or false
-export const ripple_sure_repeat = ['random_ripple_repeat', 'random_ripple_repeat1p']
+export const ripple_sure_repeat = [
+  'random_ripple_repeat',
+  'random_ripple_repeat1p',
+]
 
 export const ripple_random = [
   'random_ripple_none',
@@ -24,7 +27,10 @@ export const ripple_random = [
   'random_ripple_iamalien',
 ]
 
-export const random_ripple_dualview = ['ripple_dualseer_text', 'ripple_view2_text']
+export const random_ripple_dualview = [
+  'ripple_dualseer_text',
+  'ripple_view2_text',
+]
 
 export const rippleAnyKeys = [
   'identifier_any_text',

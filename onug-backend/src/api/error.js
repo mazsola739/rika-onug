@@ -3,7 +3,7 @@ import { logError, logErrorWithStack } from '../log'
 export const pageNotFoundError = (req, res) => {
   try {
     throw new Error(`page not found: ${req.originalUrl}`)
-  } catch(error) {
+  } catch (error) {
     logErrorWithStack(error)
     res.status(404).send('error')
   }

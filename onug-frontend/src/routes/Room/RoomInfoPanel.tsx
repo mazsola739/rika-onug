@@ -7,10 +7,7 @@ import { Avatar, Character, Names, Player, PlayerName, Players, Rule, StyledInfo
 const Info: React.FC = observer(() => {
   const detailedCardInfo = roomStore.getDetailedCardInfo()
 
-  const imgSrc =
-    detailedCardInfo.id !== 0
-      ? `/assets/cards/${detailedCardInfo.card_name}.webp`
-      : ''
+  const imgSrc = detailedCardInfo.id !== 0 ? `/assets/cards/${detailedCardInfo.card_name}.webp` : ''
 
   return (
     <StyledInfo>

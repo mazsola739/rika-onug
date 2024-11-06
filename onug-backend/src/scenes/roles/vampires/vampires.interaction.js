@@ -1,4 +1,8 @@
-import { generateRoleInteraction, getNonVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
+import {
+  generateRoleInteraction,
+  getNonVampirePlayerNumbersByRoleIds,
+  getVampirePlayerNumbersByRoleIds,
+} from '../../sceneUtils'
 
 export const vampiresInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
@@ -8,13 +12,20 @@ export const vampiresInteraction = (gamestate, token, title) => {
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
-    selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 },
+    selectable_marks: nonVampires,
+    selectable_mark_limit: { mark: 1 },
     vampires,
   }
 
   return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_vampires', 'interaction_must_one_any_non_vampire'],
-    selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
+    private_message: [
+      'interaction_vampires',
+      'interaction_must_one_any_non_vampire',
+    ],
+    selectableMarks: {
+      selectable_marks: nonVampires,
+      selectable_mark_limit: { mark: 1 },
+    },
     uniqueInformations: { vampires },
   })
 }

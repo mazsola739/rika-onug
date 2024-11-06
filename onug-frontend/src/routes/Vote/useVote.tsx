@@ -1,13 +1,4 @@
-import {
-  ARRIVE_VOTE,
-  HYDRATE_GUESS,
-  HYDRATE_READY,
-  HYDRATE_VOTE,
-  REDIRECT,
-  RESULT,
-  STAGES,
-  VOTE,
-} from 'constant'
+import { ARRIVE_VOTE, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
@@ -17,8 +8,7 @@ export const useVote = () => {
   const [firstTime, setFirstTime] = useState(true)
   const navigate = useNavigate()
 
-  const { sendJsonMessage, lastJsonMessage } =
-    wsStore.getWsCommunicationsBridge()
+  const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
 
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
@@ -30,7 +20,7 @@ export const useVote = () => {
         type: ARRIVE_VOTE,
         stage: STAGES.VOTING,
         room_id,
-        token,
+        token
       })
     }
   }, [sendJsonMessage, firstTime])
@@ -74,10 +64,7 @@ export const useVote = () => {
 
   const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 
-  const sides =
-    tablePlayerCards && tablePlayerCard
-      ? splitCardsToTable(tablePlayerCards, tablePlayerCard)
-      : null
+  const sides = tablePlayerCards && tablePlayerCard ? splitCardsToTable(tablePlayerCards, tablePlayerCard) : null
   const { left = [], middle = [], right = [], ownCard } = sides || {}
 
   return { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard }

@@ -9,15 +9,15 @@ const rotate = keyframes`
 `
 
 export const OuterGlow = styled.div<StyledGlowingBorderProps>`
-    width: ${({ sizeW }) => sizeW+10}px;
-    height: ${({ sizeH }) => sizeH+10}px;
+  width: ${({ sizeW }) => sizeW + 10}px;
+  height: ${({ sizeH }) => sizeH + 10}px;
 
-    position: absolute;
-    overflow: hidden; 
-    z-index: 0;
-    border-radius: ${({ radius }) => radius || '15px'};
+  position: absolute;
+  overflow: hidden;
+  z-index: 0;
+  border-radius: ${({ radius }) => radius || '15px'};
 
-    filter: blur(20px);
+  filter: blur(20px);
 
   &::before {
     content: '';
@@ -38,13 +38,13 @@ export const OuterGlow = styled.div<StyledGlowingBorderProps>`
 `
 
 export const InnerContainer = styled.div<StyledGlowingBorderProps>`
-    width: ${({ sizeW }) => sizeW+10}px;
-    height: ${({ sizeH }) => sizeH+10}px;
+  width: ${({ sizeW }) => sizeW + 10}px;
+  height: ${({ sizeH }) => sizeH + 10}px;
 
-    position: absolute;
-    overflow: hidden; 
-    z-index: 0;
-    border-radius: ${({ radius }) => radius || '15px'};
+  position: absolute;
+  overflow: hidden;
+  z-index: 0;
+  border-radius: ${({ radius }) => radius || '15px'};
 
   &::before {
     content: '';

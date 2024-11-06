@@ -1,23 +1,40 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle } from '../../sceneUtils'
+import {
+  formatPlayerIdentifier,
+  generateRoleInteraction,
+  getNarrationByTitle,
+} from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateMarkSelection } from '../../validators'
 
-export const thecountResponse = (gamestate, token, selected_mark_positions, title) => {
-  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+export const thecountResponse = (
+  gamestate,
+  token,
+  selected_mark_positions,
+  title
+) => {
+  if (
+    !validateMarkSelection(
+      selected_mark_positions,
+      gamestate.players[token].player_history,
+      title
+    )
+  ) {
     return gamestate
   }
-  
+
   const newGamestate = { ...gamestate }
 
   if (gamestate.players[token].card.player_original_id === 1) {
     const fearPosition = newGamestate.doppelganger_mark_positions.fear
-    const selectedPosition = newGamestate.card_positions[selected_mark_positions[0]].mark
+    const selectedPosition =
+      newGamestate.card_positions[selected_mark_positions[0]].mark
 
     newGamestate.doppelganger_mark_positions.fear = selectedPosition
     newGamestate.card_positions[selected_mark_positions[0]].mark = fearPosition
   } else {
     const fearPosition = newGamestate.mark_positions.fear
-    const selectedPosition = newGamestate.card_positions[selected_mark_positions[0]].mark
+    const selectedPosition =
+      newGamestate.card_positions[selected_mark_positions[0]].mark
 
     newGamestate.mark_positions.fear = selectedPosition
     newGamestate.card_positions[selected_mark_positions[0]].mark = fearPosition
@@ -32,7 +49,10 @@ export const thecountResponse = (gamestate, token, selected_mark_positions, titl
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_mark_of_fear', formatPlayerIdentifier(selected_mark_positions)[0]],
+    private_message: [
+      'interaction_mark_of_fear',
+      formatPlayerIdentifier(selected_mark_positions)[0],
+    ],
     scene_end: true,
   })
 

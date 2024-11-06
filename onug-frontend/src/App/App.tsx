@@ -8,17 +8,17 @@ import { useApp } from './useApp'
 import { Icon } from 'components'
 
 export const App: React.FC = observer(() => {
-  const { readyState } = useApp();
+  const { readyState } = useApp()
 
   const iconMapping: { [key: string]: IconType } = {
     [ReadyState.CONNECTING]: 'connecting',
     [ReadyState.OPEN]: 'open',
     [ReadyState.CLOSING]: 'closing',
     [ReadyState.CLOSED]: 'closed',
-    [ReadyState.UNINSTANTIATED]: 'uninstantiated',
-  };
+    [ReadyState.UNINSTANTIATED]: 'uninstantiated'
+  }
 
-  const iconName: IconType = iconMapping[readyState];
+  const iconName: IconType = iconMapping[readyState]
 
   return (
     <StyledApp>

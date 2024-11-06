@@ -7,7 +7,7 @@ import { broadcast } from './connections'
 export const ready = async (message) => {
   try {
     logDebug(`ready/not ready requested with ${JSON.stringify(message)}`)
-    
+
     const { room_id, token } = message
     const gamestate = await readGamestate(room_id)
     const newGamestate = { ...gamestate }

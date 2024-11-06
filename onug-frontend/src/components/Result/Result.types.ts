@@ -1,2 +1,1 @@
-export interface ResultProps {
-}
+export interface ResultProps {}

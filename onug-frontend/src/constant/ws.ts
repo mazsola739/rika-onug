@@ -52,7 +52,7 @@ export const STAGES = {
   ROOM: 'ROOM',
   TABLE: 'TABLE',
   GAME: 'GAME',
-  VOTING: 'VOTING',
+  VOTING: 'VOTING'
 }
 
 export const API_SERVER_HOST = 'http://ec2-3-90-213-104.compute-1.amazonaws.com:7654'

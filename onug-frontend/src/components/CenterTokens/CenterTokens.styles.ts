@@ -1,11 +1,11 @@
 import styled from '@emotion/styled'
 
 export const StyledCenterTokens = styled.div`
-align-items: flex-start;
-display: flex;
-flex-direction: row;
-gap: 15px;
-justify-content: center;
+  align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: center;
 `
 
 export const TokenGroup = styled.div`

@@ -1,6 +1,6 @@
-import { ALL_COPY_PLAYER, WEREVOLVES } from "../../../constants"
-import { createAndSendSceneMessage, getAllPlayerTokens } from "../../sceneUtils"
-import { werewolvesInteraction } from "./werewolves.interaction"
+import { ALL_COPY_PLAYER, WEREVOLVES } from '../../../constants'
+import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
+import { werewolvesInteraction } from './werewolves.interaction'
 
 export const werewolves = (gamestate, title, hasDreamWolf) => {
   const newGamestate = { ...gamestate }
@@ -16,15 +16,27 @@ export const werewolves = (gamestate, title, hasDreamWolf) => {
 
     const card = newGamestate.players[token].card
 
-    if (WEREVOLVES.some((id) => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))) {
+    if (
+      WEREVOLVES.some(
+        (id) =>
+          card.player_role_id === id &&
+          [id, ...ALL_COPY_PLAYER].includes(card.player_original_id)
+      )
+    ) {
       newGamestate.players[token].action_finished = false
       interaction = werewolvesInteraction(newGamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
   })
 
-  newGamestate.narration.push({[title]: narration})
+  newGamestate.narration.push({ [title]: narration })
 
   return newGamestate
 }

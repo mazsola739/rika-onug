@@ -1,23 +1,49 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getMarksByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import {
+  formatPlayerIdentifier,
+  generateRoleInteraction,
+  getMarksByPositions,
+  getNarrationByTitle,
+  getPlayerNumberWithMatchingToken,
+} from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateMarkSelection } from '../../validators'
 
-export const pickpocketResponse = (gamestate, token, selected_mark_positions, title) => {
-  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+export const pickpocketResponse = (
+  gamestate,
+  token,
+  selected_mark_positions,
+  title
+) => {
+  if (
+    !validateMarkSelection(
+      selected_mark_positions,
+      gamestate.players[token].player_history,
+      title
+    )
+  ) {
     return gamestate
   }
-  
+
   const newGamestate = { ...gamestate }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
-  const currentPlayerMark = newGamestate.card_positions[currentPlayerNumber].mark 
-  const selectedMark = newGamestate.card_positions[selected_mark_positions[0]].mark 
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(
+    newGamestate.players,
+    token
+  )
+  const currentPlayerMark =
+    newGamestate.card_positions[currentPlayerNumber].mark
+  const selectedMark =
+    newGamestate.card_positions[selected_mark_positions[0]].mark
   newGamestate.card_positions[currentPlayerNumber].mark = selectedMark
-  newGamestate.card_positions[selected_mark_positions[0]].mark = currentPlayerMark
+  newGamestate.card_positions[selected_mark_positions[0]].mark =
+    currentPlayerMark
 
-  newGamestate.players[token].card.player_mark = newGamestate.card_positions[currentPlayerNumber].mark
+  newGamestate.players[token].card.player_mark =
+    newGamestate.card_positions[currentPlayerNumber].mark
 
-  const viewMarks = getMarksByPositions(newGamestate.card_positions, [currentPlayerNumber])
+  const viewMarks = getMarksByPositions(newGamestate.card_positions, [
+    currentPlayerNumber,
+  ])
 
   newGamestate.players[token].card_or_mark_action = true
 
@@ -27,10 +53,17 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
     viewed_marks: [currentPlayerNumber],
   }
 
-  const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_mark_positions[0]])
+  const messageIdentifiers = formatPlayerIdentifier([
+    currentPlayerNumber,
+    selected_mark_positions[0],
+  ])
 
   const interaction = generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_swapped_marks', ...messageIdentifiers, 'interaction_own_mark'],
+    private_message: [
+      'interaction_swapped_marks',
+      ...messageIdentifiers,
+      'interaction_own_mark',
+    ],
     showMarks: viewMarks,
   })
 

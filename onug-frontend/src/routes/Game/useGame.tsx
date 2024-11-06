@@ -7,7 +7,7 @@ import { splitCardsToTable } from 'utils'
 
 export const useGame = () => {
   const [firstTime, setFirstTime] = useState(true)
-  const [transitionCompleted, setTransitionCompleted] = useState(false);
+  const [transitionCompleted, setTransitionCompleted] = useState(false)
   const navigate = useNavigate()
 
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
@@ -22,7 +22,7 @@ export const useGame = () => {
         type: ARRIVE_GAME,
         stage: STAGES.GAME,
         room_id,
-        token,
+        token
       })
     }
   }, [sendJsonMessage, firstTime, room_id, token])
@@ -44,16 +44,16 @@ export const useGame = () => {
       messageStore.setNarration(lastJsonMessage.narration as NarrationType[])
       messageStore.setPrivateMessage(lastJsonMessage.interaction.private_message as MessagesType[])
     }
-  
+
     if (lastJsonMessage?.type === HYDRATE_GAME) {
       riseAndRestStore.closeYourEyes()
       gamePropStore.setNightfall(lastJsonMessage.night_mode)
     }
-  
+
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
-  
+
     if (lastJsonMessage?.type === PAUSE_GAME) {
       gameStatusStore.togglePause()
     }
@@ -63,15 +63,19 @@ export const useGame = () => {
       gamePropStore.setSunrise(lastJsonMessage.day_mode)
     }
   }, [lastJsonMessage, navigate])
-  
-  
+
   const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 
-  const sides =
-    tablePlayerCards && tablePlayerCard
-      ? splitCardsToTable(tablePlayerCards, tablePlayerCard)
-      : null
+  const sides = tablePlayerCards && tablePlayerCard ? splitCardsToTable(tablePlayerCards, tablePlayerCard) : null
   const { left = [], middle = [], right = [], ownCard } = sides || {}
 
-  return { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard, setTransitionCompleted }
+  return {
+    tablePlayerCards,
+    tablePlayerCard,
+    left,
+    middle,
+    right,
+    ownCard,
+    setTransitionCompleted
+  }
 }

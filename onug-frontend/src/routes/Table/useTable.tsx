@@ -11,8 +11,7 @@ export const useTable = () => {
   const token = sessionStorage.getItem('token')
   const room_id = sessionStorage.getItem('room_id')
 
-  const { sendJsonMessage, lastJsonMessage } =
-    wsStore.getWsCommunicationsBridge()
+  const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -21,7 +20,7 @@ export const useTable = () => {
         type: ARRIVE_TABLE,
         stage: STAGES.TABLE,
         token,
-        room_id,
+        room_id
       })
     }
   }, [sendJsonMessage, firstTime, room_id, token])
@@ -47,10 +46,7 @@ export const useTable = () => {
 
   const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 
-  const sides =
-    tablePlayerCards && tablePlayerCard
-      ? splitCardsToTable(tablePlayerCards, tablePlayerCard)
-      : null
+  const sides = tablePlayerCards && tablePlayerCard ? splitCardsToTable(tablePlayerCards, tablePlayerCard) : null
   const { left = [], middle = [], right = [], ownCard } = sides || {}
 
   return { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard }

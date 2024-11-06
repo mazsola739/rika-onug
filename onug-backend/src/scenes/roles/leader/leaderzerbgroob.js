@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from "../../../constants"
+import { ALL_COPY_PLAYER } from '../../../constants'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { leaderZerbgroobInteraction } from './leaderzerbgroob.interaction'
 
@@ -12,15 +12,25 @@ export const leaderzerbgroob = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 48 || (card.player_role_id === 48 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (
+      card.player_original_id === 48 ||
+      (card.player_role_id === 48 &&
+        ALL_COPY_PLAYER.includes(card.player_original_id))
+    ) {
       newGamestate.players[token].action_finished = false
       interaction = leaderZerbgroobInteraction(newGamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
   })
 
-  newGamestate.narration.push({[title]: narration})
+  newGamestate.narration.push({ [title]: narration })
 
   return newGamestate
 }

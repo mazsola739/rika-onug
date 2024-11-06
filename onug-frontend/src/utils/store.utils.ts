@@ -19,11 +19,16 @@ export const determineTotalPlayers = (totalCharacters: number): number => {
   return Math.max(totalPlayers, 0)
 }
 
-export const filterByExpansions = <T extends { expansion: string }>(list: T[], expansions: string[]): T[] => list.filter((item) => expansions.includes(item.expansion))
+export const filterByExpansions = <T extends { expansion: string }>(list: T[], expansions: string[]): T[] =>
+  list.filter(item => expansions.includes(item.expansion))
 
-export const formatPosition = (position: string) => position.replace(/player_/g, ' ').replace(/center_/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+export const formatPosition = (position: string) =>
+  position
+    .replace(/player_/g, ' ')
+    .replace(/center_/g, ' ')
+    .replace(/\b\w/g, char => char.toUpperCase())
 
-export const formatPositionSimply = (position: string) => position.replace(/_/g, ' ').replace(/\b\w/g, (char) => char.toUpperCase())
+export const formatPositionSimply = (position: string) => position.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())
 
 export const getCardById = (cardId: number): CardJson | null => {
   if (cardId === 87) {
@@ -36,7 +41,7 @@ export const getCardById = (cardId: number): CardJson | null => {
 export const getFilteredCardsForTeam = (team: string, deck: CardJson[]): CardJson[] => {
   const validTeams = team === 'village' ? ['hero', 'village'] : [team]
 
-  return deck.filter((card) => validTeams.includes(card.team))
+  return deck.filter(card => validTeams.includes(card.team))
 }
 
 export const getMarkByName = (markName: string): TokenJson | null => marks.find(mark => mark.token_name === markName) || null

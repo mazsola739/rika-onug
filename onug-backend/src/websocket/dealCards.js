@@ -1,7 +1,13 @@
 import { DEAL, REDIRECT, STAGES } from '../constants'
 import { logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { createCenterPositionCard, createPlayerCard, createPlayerPositionCard, dealCardIds, hasMark } from '../utils/deal.utils'
+import {
+  createCenterPositionCard,
+  createPlayerCard,
+  createPlayerPositionCard,
+  dealCardIds,
+  hasMark,
+} from '../utils/deal.utils'
 import { determineTotalPlayers } from '../utils/player.utils'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
@@ -12,7 +18,8 @@ export const dealCards = async (ws, message) => {
   logTrace(`Dealing cards for players in room: ${room_id}`)
 
   const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
-  if (!roomIdValid) return ws.send(JSON.stringify({ type: DEAL, success: false, errors }))
+  if (!roomIdValid)
+    return ws.send(JSON.stringify({ type: DEAL, success: false, errors }))
 
   const selectedCards = [...gamestate.selected_cards]
 
@@ -25,7 +32,10 @@ export const dealCards = async (ws, message) => {
     newVillainCard,
   } = dealCardIds(selectedCards)
 
-  const totalPlayers = determineTotalPlayers(selectedCards.length, selectedCards)
+  const totalPlayers = determineTotalPlayers(
+    selectedCards.length,
+    selectedCards
+  )
 
   const newGamestate = {
     ...gamestate,
@@ -38,7 +48,10 @@ export const dealCards = async (ws, message) => {
       center_wolf: createCenterPositionCard(newWolfCard),
       center_villain: createCenterPositionCard(newVillainCard),
       ...playerCards.reduce((positions, playerCard, index) => {
-        positions[`player_${index + 1}`] = createPlayerPositionCard(playerCard, selectedCards)
+        positions[`player_${index + 1}`] = createPlayerPositionCard(
+          playerCard,
+          selectedCards
+        )
         return positions
       }, {}),
     },

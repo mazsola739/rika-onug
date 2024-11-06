@@ -1,11 +1,11 @@
-import { COPY_PLAYER } from "../../../constants"
+import { COPY_PLAYER } from '../../../constants'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { empathVoteResult } from './empath.voteresult'
 
 export const empathVote = (gamestate, title, prefix) => {
   const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)  
-  const narration =  [`${prefix}_kickoff_text`, 'empath_kickoff2_text']
+  const tokens = getAllPlayerTokens(newGamestate.players)
+  const narration = [`${prefix}_kickoff_text`, 'empath_kickoff2_text']
 
   tokens.forEach((token) => {
     let interaction = {}
@@ -13,7 +13,11 @@ export const empathVote = (gamestate, title, prefix) => {
     const card = newGamestate.players[token].card
 
     if (prefix === 'empath') {
-      if (card.player_original_id === 77 || (card.player_role_id === 77 && COPY_PLAYER.includes(card.player_original_id))) {
+      if (
+        card.player_original_id === 77 ||
+        (card.player_role_id === 77 &&
+          COPY_PLAYER.includes(card.player_original_id))
+      ) {
         newGamestate.players[token].action_finished = false
         interaction = empathVoteResult(newGamestate, token, title)
       }
@@ -24,10 +28,16 @@ export const empathVote = (gamestate, title, prefix) => {
       }
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
   })
 
-  newGamestate.narration.push({[title]: narration})
+  newGamestate.narration.push({ [title]: narration })
 
   return newGamestate
 }

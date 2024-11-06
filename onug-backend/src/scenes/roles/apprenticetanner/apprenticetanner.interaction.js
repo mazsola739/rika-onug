@@ -1,9 +1,13 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import {
+  formatPlayerIdentifier,
+  generateRoleInteraction,
+  getPlayerNumberWithMatchingToken,
+} from '../../sceneUtils'
 import { getTannerPlayerNumbersByRoleIds } from './apprenticetanner.utils'
 
 export const apprenticetannerInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
-  
+
   let tanner = getTannerPlayerNumbersByRoleIds(newGamestate.players)
 
   const messageIdentifiers = formatPlayerIdentifier(tanner)

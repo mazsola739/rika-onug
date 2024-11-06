@@ -26,5 +26,5 @@ export const rascalAnyTwoKeys = [
   'identifier_any2lower_text',
   'identifier_2leftneighbors_text',
   'identifier_2rightneighbors_text',
-  'identifier_bothneighbors_text'
+  'identifier_bothneighbors_text',
 ]

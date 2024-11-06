@@ -29,10 +29,10 @@ export const losing_role: Record<string, string> = {
   losing_vs_nopresent: '. If no present, and anyone gets killed from your team',
 
   losing_vs_hunter: " or in case of Hunter's death, the Hunter does point at you",
-  losing_vs_ricochetrhino: " or in case of Ricochet Rhino gets most votes, Ricochet Rhino does point at you",
+  losing_vs_ricochetrhino: ' or in case of Ricochet Rhino gets most votes, Ricochet Rhino does point at you',
   losing_vs_tanner: ' or Tanner dies',
   losing_vs_madscientist: ', or Mad Scientist(s) dies',
-  
+
   losing_vs_oracle: 'You can lose if Oracle survive',
 
   //mark override card, artifact override mark or card
@@ -41,5 +41,5 @@ export const losing_role: Record<string, string> = {
   losing_with_traitor_token: "You can lose, if anyone from your team doesn't get killed, or you die",
   losing_with_alien_token: 'You can lose with the alien team, even if you stay alive',
   losing_with_village_token: 'You can lose with the village team, even if you stay alive',
-  losing_with_werewolf_token: 'You can lose with the werewolf team, even if you stay alive',
+  losing_with_werewolf_token: 'You can lose with the werewolf team, even if you stay alive'
 }

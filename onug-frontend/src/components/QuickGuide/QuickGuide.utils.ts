@@ -3,7 +3,7 @@ import { CardJson, TokenJson } from 'types'
 export const getUniqueGuide = <T>(items: T[], key: (item: T) => string): T[] => {
   const seenKeys = new Set<string>()
 
-  return items.filter((item) => {
+  return items.filter(item => {
     const keyValue = key(item)
 
     if (seenKeys.has(keyValue)) {
@@ -17,5 +17,5 @@ export const getUniqueGuide = <T>(items: T[], key: (item: T) => string): T[] => 
 }
 
 export const isCardType = (item: CardJson | TokenJson): item is CardJson => {
-    return (item as CardJson).display_name !== undefined
+  return (item as CardJson).display_name !== undefined
 }

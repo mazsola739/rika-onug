@@ -1,4 +1,4 @@
-import { keyframes } from "@emotion/react";
+import { keyframes } from '@emotion/react'
 
 // Mad Scientist
 export const glowingGreen = keyframes`
@@ -8,7 +8,7 @@ export const glowingGreen = keyframes`
   to {
     box-shadow: 0 0 8px #9ae6b4, 0 0 12px #9ae6b4, 0 0 18px #9ae6b4, 0 0 24px #9ae6b4, 0 0 30px #9ae6b4;
   }
-`;
+`
 
 // Glowing Blue
 export const glowingBlue = keyframes`
@@ -18,7 +18,7 @@ export const glowingBlue = keyframes`
   to {
     box-shadow: 0 0 8px #66b2ff, 0 0 12px #66b2ff, 0 0 18px #66b2ff, 0 0 24px #66b2ff, 0 0 30px #66b2ff;
   }
-`;
+`
 
 // Did Actions
 export const glowingLightBlue = keyframes`
@@ -28,7 +28,7 @@ export const glowingLightBlue = keyframes`
   to {
     box-shadow: 0 0 8px #66d3e0, 0 0 12px #66d3e0, 0 0 18px #66d3e0, 0 0 24px #66d3e0, 0 0 30px #66d3e0;
   }
-`;
+`
 
 // Vampires
 export const glowingPurple = keyframes`
@@ -38,7 +38,7 @@ export const glowingPurple = keyframes`
   to {
     box-shadow: 0 0 8px #9c33ff, 0 0 12px #9c33ff, 0 0 18px #9c33ff, 0 0 24px #9c33ff, 0 0 30px #9c33ff;
   }
-`;
+`
 
 // Villains Dreamwolf
 export const glowingVibrantPink = keyframes`
@@ -48,7 +48,7 @@ export const glowingVibrantPink = keyframes`
   to {
     box-shadow: 0 0 8px #ff66b2, 0 0 12px #ff66b2, 0 0 18px #ff66b2, 0 0 24px #ff66b2, 0 0 30px #ff66b2;
   }
-`;
+`
 
 // Darker Red Glow for Werewolves Assassins
 export const glowingRed = keyframes`
@@ -58,8 +58,7 @@ export const glowingRed = keyframes`
   to {
     box-shadow: 0 0 8px #b22222, 0 0 12px #b22222, 0 0 18px #b22222, 0 0 24px #b22222, 0 0 30px #b22222;
   }
-`;
-
+`
 
 // Tanner
 export const glowingOrange = keyframes`
@@ -69,4 +68,4 @@ export const glowingOrange = keyframes`
   to {
     box-shadow: 0 0 8px #ffb266, 0 0 12px #ffb266, 0 0 18px #ffb266, 0 0 24px #ffb266, 0 0 30px #ff9800;
   }
-`;
+`

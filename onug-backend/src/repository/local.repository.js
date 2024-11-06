@@ -6,7 +6,8 @@ import { logError, logErrorWithStack, logTrace } from '../log'
 import { webSocketServerConnectionsPerRoom } from '../websocket/connections'
 
 const FILE_PATH_TEMPLATE = `${__dirname}/../gamestate/`
-const ROOM_GAMESTATE_FILE = (room_id) => `${FILE_PATH_TEMPLATE}${room_id}_gamestate.json`
+const ROOM_GAMESTATE_FILE = (room_id) =>
+  `${FILE_PATH_TEMPLATE}${room_id}_gamestate.json`
 
 const ENCODING = 'utf8'
 const WRITE_OPTIONS = { flag: 'w' }

@@ -52,5 +52,5 @@ export const wining_role: Record<string, string> = {
   wining_with_alien_token: 'You can win with the alien team, even if you get killed',
   wining_with_village_token: 'You can win with the village team, even if you get killed',
   wining_with_werewolf_token: 'You can win with the werewolf team, even if you get killed',
-  wining_vs_disease_token: ", and the owner of the Mark of Disease doesn't point at you",
+  wining_vs_disease_token: ", and the owner of the Mark of Disease doesn't point at you"
 }

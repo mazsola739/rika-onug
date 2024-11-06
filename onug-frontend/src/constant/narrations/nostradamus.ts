@@ -1,4 +1,5 @@
-export const nostradamus_kickoff_text = "NOSTRADAMUS, look at up to three cards. If you see any role that isn't on the villager team, stop. The last card you look at is the team you are on."
+export const nostradamus_kickoff_text =
+  "NOSTRADAMUS, look at up to three cards. If you see any role that isn't on the villager team, stop. The last card you look at is the team you are on."
 
 export const nostradamus_teamstart_text = 'Nostradamus is on the '
 

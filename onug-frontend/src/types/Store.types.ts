@@ -4,7 +4,3 @@ export type RoomType = {
   selectedCards: number[]
   players: string[]
 }
-
-
-
-

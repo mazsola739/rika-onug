@@ -26,7 +26,12 @@ export const toggleExpansions = (selectedExpansions, expansion) => {
   return newSelectedExpansions
 }
 
-export const toggleCardSelect = (selectedCards, selectedExpansions, cardId, totalPlayers) => {
+export const toggleCardSelect = (
+  selectedCards,
+  selectedExpansions,
+  cardId,
+  totalPlayers
+) => {
   let newSelectedCards = [...selectedCards]
   const card = getCardById(cardId)
 
@@ -40,9 +45,11 @@ export const toggleCardSelect = (selectedCards, selectedExpansions, cardId, tota
   return newSelectedCards
 }
 
-const containsByIdsToCheck = (selectedCards, idsToCheck) => idsToCheck.some((id) => containsById(selectedCards, id))
+const containsByIdsToCheck = (selectedCards, idsToCheck) =>
+  idsToCheck.some((id) => containsById(selectedCards, id))
 
-const containsById = (selectedCards, cardId) => selectedCards.some((id) => id === cardId)
+const containsById = (selectedCards, cardId) =>
+  selectedCards.some((id) => id === cardId)
 
 const handleSelectCard = (selectedCards, cardId) => {
   let newSelectedCards = [...selectedCards]
@@ -52,13 +59,9 @@ const handleSelectCard = (selectedCards, cardId) => {
     handleCardById(newSelectedCards, WEREVOLVES_TO_CHECK, 17)
   } else if (cardId === 69) {
     handleCardById(newSelectedCards, SUPER_VILLAIN_TO_CHECK, 69)
-  } else if (
-    cardId === 64 && containsByIdsToCheck(selectedCards, [30])
-  ) {
+  } else if (cardId === 64 && containsByIdsToCheck(selectedCards, [30])) {
     newSelectedCards = newSelectedCards.filter((id) => id !== 30)
-  } else if (
-    cardId === 30 && containsByIdsToCheck(selectedCards, [64])
-  ) {
+  } else if (cardId === 30 && containsByIdsToCheck(selectedCards, [64])) {
     newSelectedCards = newSelectedCards.filter((id) => id !== 64)
   }
 
@@ -111,16 +114,22 @@ const prohibitDeselectingSupervillain = (selectedCards, card) => {
 const shuffle = (selectedCardIds) => {
   for (let i = selectedCardIds.length - 1; i > 0; i--) {
     const j = ~~(Math.random() * (i + 1))
-      ;[selectedCardIds[i], selectedCardIds[j]] = [selectedCardIds[j], selectedCardIds[i]]
+    ;[selectedCardIds[i], selectedCardIds[j]] = [
+      selectedCardIds[j],
+      selectedCardIds[i],
+    ]
   }
   return selectedCardIds
 }
 
-export const filterCardsByIds = (selectedCardIds, idsToCheck) => selectedCardIds.filter((cardId) => idsToCheck.includes(cardId))
-export const hasAlphaWolf = selectedCardIds => selectedCardIds.includes(17)
-export const hasTemptress = selectedCardIds => selectedCardIds.includes(69)
-export const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
-export const getRandomItemFromArray = array => array[getRandomNumber(0, array.length - 1)]
+export const filterCardsByIds = (selectedCardIds, idsToCheck) =>
+  selectedCardIds.filter((cardId) => idsToCheck.includes(cardId))
+export const hasAlphaWolf = (selectedCardIds) => selectedCardIds.includes(17)
+export const hasTemptress = (selectedCardIds) => selectedCardIds.includes(69)
+export const getRandomNumber = (min, max) =>
+  ~~(Math.random() * (max - min + 1)) + min
+export const getRandomItemFromArray = (array) =>
+  array[getRandomNumber(0, array.length - 1)]
 
 export const distributeCards = (selectedCardIds) => {
   let cardIds = [...selectedCardIds]
@@ -154,6 +163,8 @@ export const distributeCards = (selectedCardIds) => {
   }
 }
 
-export const getCardById = card_id => cards.find((card) => card.id === card_id)
+export const getCardById = (card_id) =>
+  cards.find((card) => card.id === card_id)
 
-export const isCardSelectedById = (cardIds, cardId) => cardIds.some((id) => id === cardId)
+export const isCardSelectedById = (cardIds, cardId) =>
+  cardIds.some((id) => id === cardId)

@@ -5,9 +5,8 @@ import { FilterButton } from './FilterButton'
 import { Expansion } from 'types'
 
 export const Filter: React.FC = observer(() => {
-
   const expansionNames = Object.values(EXPANSIONS)
-  
+
   return (
     <StyledFilter>
       <FilterButtons>
@@ -16,5 +15,5 @@ export const Filter: React.FC = observer(() => {
         ))}
       </FilterButtons>
     </StyledFilter>
-  )}
-)
+  )
+})

@@ -1,4 +1,9 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getGroobPlayerNumberByRoleIds, getZerbPlayerNumberByRoleIds } from '../../sceneUtils'
+import {
+  formatPlayerIdentifier,
+  generateRoleInteraction,
+  getGroobPlayerNumberByRoleIds,
+  getZerbPlayerNumberByRoleIds,
+} from '../../sceneUtils'
 
 export const leaderZerbgroobInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }

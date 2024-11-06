@@ -9,14 +9,8 @@ import { QuickGuideToken } from './QuickGuideToken'
 export const QuickGuide: React.FC = observer(() => {
   const { selectedCards, selectedMarks, artifacts } = deckStore
 
-  const uniqueSelectedCards = getUniqueGuide(
-    selectedCards,
-    (card) => card.display_name
-  )
-  const uniqueSelectedMarks = getUniqueGuide(
-    selectedMarks,
-    (mark) => mark.token_name
-  )
+  const uniqueSelectedCards = getUniqueGuide(selectedCards, card => card.display_name)
+  const uniqueSelectedMarks = getUniqueGuide(selectedMarks, mark => mark.token_name)
 
   const renderGuide = (item: CardJson | TokenJson) => {
     if (isCardType(item)) {
@@ -39,9 +33,9 @@ export const QuickGuide: React.FC = observer(() => {
   return (
     <Guide>
       <StyledQuickGuide>QUICK GUIDE</StyledQuickGuide>
-      {uniqueSelectedCards.map((card) => renderGuide(card))}
-      {uniqueSelectedMarks.map((mark) => renderGuide(mark))}
-      {artifacts.map((artifact) => renderGuide(artifact))}
+      {uniqueSelectedCards.map(card => renderGuide(card))}
+      {uniqueSelectedMarks.map(mark => renderGuide(mark))}
+      {artifacts.map(artifact => renderGuide(artifact))}
     </Guide>
   )
 })

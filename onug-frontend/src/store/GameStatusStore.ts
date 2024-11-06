@@ -9,13 +9,11 @@ class GameStatusStore {
     makeAutoObservable(this)
   }
 
-
   resetStatus(): void {
     this.isGamePlayStarted = false
     this.isGamePlayStopped = false
     this.isGamePlayPaused = false
   }
-
 
   toggleStart(): void {
     if (!this.isGamePlayStarted) {
@@ -26,7 +24,6 @@ class GameStatusStore {
     }
   }
 
-
   toggleStop(): void {
     if (!this.isGamePlayStopped) {
       this.resetStatus()
@@ -35,7 +32,6 @@ class GameStatusStore {
       this.isGamePlayStarted = true
     }
   }
-
 
   togglePause(): void {
     if (!this.isGamePlayPaused) {

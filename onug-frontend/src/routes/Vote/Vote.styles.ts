@@ -78,18 +78,13 @@ export const Narration = styled.div`
   gap: 5px;
   align-items: center;
 
-    ::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 8px; /* Width of vertical scrollbar */
     height: 8px; /* Height of horizontal scrollbar */
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: rgba(
-      150,
-      146,
-      144,
-      0.2
-    ); /* Semi-transparent scrollbar thumb */
+    background-color: rgba(150, 146, 144, 0.2); /* Semi-transparent scrollbar thumb */
     border-radius: 10px; /* Rounded corners for the scrollbar thumb */
   }
 
@@ -98,7 +93,6 @@ export const Narration = styled.div`
     scrollbar-width: thin; /* Use 'thin' for thin scrollbar */
     scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* Thumb color and track color */
   }
-
 `
 
 export const NarrationImage = styled.img`

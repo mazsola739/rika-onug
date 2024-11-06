@@ -24,7 +24,8 @@ export const leaveRoom = async (ws, message) => {
 
   const playerTokens = Object.keys(gamestate.players)
 
-  if (player.admin && playerTokens.length > 1) gamestate.players[playerTokens[1]].admin = true
+  if (player.admin && playerTokens.length > 1)
+    gamestate.players[playerTokens[1]].admin = true
 
   gamestate.available_names.push(player.name)
   delete gamestate.players[token]
@@ -50,14 +51,14 @@ export const leaveRoom = async (ws, message) => {
 
   const players = getPlayerNames(gamestate)
 
-  broadcast(room_id, { 
+  broadcast(room_id, {
     type: HYDRATE_ROOM,
     success: true,
-    selected_cards: gamestate.selected_cards, 
+    selected_cards: gamestate.selected_cards,
     selected_expansions: gamestate.selected_expansions,
     players,
   })
-  
+
   return ws.send(
     JSON.stringify({
       type: LEAVE_ROOM,

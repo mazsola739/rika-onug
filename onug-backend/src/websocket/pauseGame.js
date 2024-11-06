@@ -15,5 +15,9 @@ export const pauseGame = async (message) => {
   const newGamestate = pauseScene(gamestate)
   await upsertRoomState(newGamestate)
 
-  broadcast(room_id, { type: PAUSE_GAME, success: true, message: 'pause toggled' })
+  broadcast(room_id, {
+    type: PAUSE_GAME,
+    success: true,
+    message: 'pause toggled',
+  })
 }

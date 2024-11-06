@@ -9,7 +9,9 @@ export const hydrateGuess = async (ws, message) => {
 
   const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
   if (!roomIdValid) {
-    return ws.send(JSON.stringify({ type: HYDRATE_GUESS, success: false, errors }))
+    return ws.send(
+      JSON.stringify({ type: HYDRATE_GUESS, success: false, errors })
+    )
   }
 
   const newGamestate = { ...gamestate }
@@ -17,7 +19,13 @@ export const hydrateGuess = async (ws, message) => {
   if (!newGamestate.guess_cards) {
     newGamestate.guess_cards = [...new Set(newGamestate.selected_cards)]
   } else {
-    newGamestate.guess_cards = [...new Set(newGamestate.guess_cards.filter(id => newGamestate.selected_cards.includes(id)))]
+    newGamestate.guess_cards = [
+      ...new Set(
+        newGamestate.guess_cards.filter((id) =>
+          newGamestate.selected_cards.includes(id)
+        )
+      ),
+    ]
   }
 
   Object.keys(newGamestate.card_positions).forEach((key) => {
@@ -27,13 +35,6 @@ export const hydrateGuess = async (ws, message) => {
   })
 
   if (position && id !== undefined) {
-    Object.keys(newGamestate.card_positions).forEach((key) => {
-      const roleIndex = newGamestate.card_positions[key].guessed_roles.indexOf(id)
-      if (roleIndex > -1) {
-        newGamestate.card_positions[key].guessed_roles.splice(roleIndex, 1)
-      }
-    })
-
     const target = newGamestate.card_positions[position]
 
     if (target && target.guessed_roles) {
@@ -46,7 +47,9 @@ export const hydrateGuess = async (ws, message) => {
         }
       } else {
         target.guessed_roles.push(id)
-        newGamestate.guess_cards = newGamestate.guess_cards.filter(token => token !== id)
+        newGamestate.guess_cards = newGamestate.guess_cards.filter(
+          (token) => token !== id
+        )
       }
     }
   }

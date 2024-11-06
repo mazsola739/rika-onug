@@ -9,7 +9,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.twilight,
     card_name: 'doppelganger',
-    rules: rules_role.rules_doppelganger,
+    rules: rules_role.rules_doppelganger
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'drunk',
-    rules: rules_role.rules_drunk,
+    rules: rules_role.rules_drunk
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.day,
     card_name: 'hunter',
-    rules: rules_role.rules_hunter,
+    rules: rules_role.rules_hunter
   },
   {
     id: 4,
@@ -36,7 +36,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'insomniac',
-    rules: rules_role.rules_insomniac,
+    rules: rules_role.rules_insomniac
   },
   {
     id: 5,
@@ -45,7 +45,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'mason',
-    rules: rules_role.rules_mason,
+    rules: rules_role.rules_mason
   },
   {
     id: 6,
@@ -54,7 +54,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'mason',
-    rules: rules_role.rules_mason,
+    rules: rules_role.rules_mason
   },
   {
     id: 7,
@@ -63,7 +63,7 @@ export const cards: CardJson[] = [
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
     card_name: 'minion',
-    rules: rules_role.rules_minion,
+    rules: rules_role.rules_minion
   },
   {
     id: 8,
@@ -72,7 +72,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'robber',
-    rules: rules_role.rules_robber,
+    rules: rules_role.rules_robber
   },
   {
     id: 9,
@@ -81,7 +81,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'seer',
-    rules: rules_role.rules_seer,
+    rules: rules_role.rules_seer
   },
   {
     id: 10,
@@ -90,7 +90,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.day,
     card_name: 'tanner',
-    rules: rules_role.rules_tanner,
+    rules: rules_role.rules_tanner
   },
   {
     id: 11,
@@ -99,7 +99,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'troublemaker',
-    rules: rules_role.rules_troublemaker,
+    rules: rules_role.rules_troublemaker
   },
   {
     id: 12,
@@ -108,7 +108,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.day,
     card_name: 'villager',
-    rules: rules_role.rules_villager,
+    rules: rules_role.rules_villager
   },
   {
     id: 13,
@@ -117,7 +117,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.day,
     card_name: 'villager',
-    rules: rules_role.rules_villager,
+    rules: rules_role.rules_villager
   },
   {
     id: 14,
@@ -126,7 +126,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.day,
     card_name: 'villager',
-    rules: rules_role.rules_villager,
+    rules: rules_role.rules_villager
   },
   {
     id: 15,
@@ -135,7 +135,7 @@ export const cards: CardJson[] = [
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
     card_name: 'werewolf',
-    rules: rules_role.rules_werewolf,
+    rules: rules_role.rules_werewolf
   },
   {
     id: 16,
@@ -144,7 +144,7 @@ export const cards: CardJson[] = [
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
     card_name: 'werewolf',
-    rules: rules_role.rules_werewolf,
+    rules: rules_role.rules_werewolf
   },
   {
     id: 17,
@@ -153,7 +153,7 @@ export const cards: CardJson[] = [
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
     card_name: 'alpha_wolf',
-    rules: rules_role.rules_alphawolf,
+    rules: rules_role.rules_alphawolf
   },
   {
     id: 18,
@@ -162,7 +162,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'apprentice_seer',
-    rules: rules_role.rules_appseer,
+    rules: rules_role.rules_appseer
   },
   {
     id: 19,
@@ -171,7 +171,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.day,
     card_name: 'bodyguard',
-    rules: rules_role.rules_bodyguard,
+    rules: rules_role.rules_bodyguard
   },
   {
     id: 20,
@@ -180,7 +180,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'curator',
-    rules: rules_role.rules_curator,
+    rules: rules_role.rules_curator
   },
   {
     id: 21,
@@ -189,7 +189,7 @@ export const cards: CardJson[] = [
     team: TEAM.werewolf,
     wake_up_time: WAKE.day,
     card_name: 'dream_wolf',
-    rules: rules_role.rules_dreamwolf,
+    rules: rules_role.rules_dreamwolf
   },
   {
     id: 22,
@@ -198,7 +198,7 @@ export const cards: CardJson[] = [
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
     card_name: 'mystic_wolf',
-    rules: rules_role.rules_mysticwolf,
+    rules: rules_role.rules_mysticwolf
   },
   {
     id: 23,
@@ -207,7 +207,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'paranormal_investigator',
-    rules: rules_role.rules_pi,
+    rules: rules_role.rules_pi
   },
   {
     id: 24,
@@ -216,7 +216,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'revealer',
-    rules: rules_role.rules_revealer,
+    rules: rules_role.rules_revealer
   },
   {
     id: 25,
@@ -225,7 +225,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'sentinel',
-    rules: rules_role.rules_sentinel,
+    rules: rules_role.rules_sentinel
   },
   {
     id: 26,
@@ -234,7 +234,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'village_idiot',
-    rules: rules_role.rules_vidiot,
+    rules: rules_role.rules_vidiot
   },
   {
     id: 27,
@@ -243,7 +243,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'witch',
-    rules: rules_role.rules_witch,
+    rules: rules_role.rules_witch
   },
   {
     id: 28,
@@ -252,7 +252,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.dusk,
     card_name: 'apprentice_assassin',
-    rules: rules_role.rules_appassassin,
+    rules: rules_role.rules_appassassin
   },
   {
     id: 29,
@@ -261,7 +261,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.dusk,
     card_name: 'assassin',
-    rules: rules_role.rules_assassin,
+    rules: rules_role.rules_assassin
   },
   {
     id: 30,
@@ -270,7 +270,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.twilight,
     card_name: 'copycat',
-    rules: rules_role.rules_copycat,
+    rules: rules_role.rules_copycat
   },
   {
     id: 31,
@@ -279,7 +279,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.dusk,
     card_name: 'cupid',
-    rules: rules_role.rules_cupid,
+    rules: rules_role.rules_cupid
   },
   {
     id: 32,
@@ -288,7 +288,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.dusk,
     card_name: 'diseased',
-    rules: rules_role.rules_diseased,
+    rules: rules_role.rules_diseased
   },
   {
     id: 33,
@@ -297,7 +297,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'gremlin',
-    rules: rules_role.rules_gremlin,
+    rules: rules_role.rules_gremlin
   },
   {
     id: 34,
@@ -306,7 +306,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.dusk,
     card_name: 'instigator',
-    rules: rules_role.rules_instigator,
+    rules: rules_role.rules_instigator
   },
   {
     id: 35,
@@ -315,7 +315,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'marksman',
-    rules: rules_role.rules_marksman,
+    rules: rules_role.rules_marksman
   },
   {
     id: 36,
@@ -324,7 +324,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'pickpocket',
-    rules: rules_role.rules_pickpocket,
+    rules: rules_role.rules_pickpocket
   },
   {
     id: 37,
@@ -333,7 +333,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.dusk,
     card_name: 'priest',
-    rules: rules_role.rules_priest,
+    rules: rules_role.rules_priest
   },
   {
     id: 38,
@@ -342,7 +342,7 @@ export const cards: CardJson[] = [
     team: TEAM.vampire,
     wake_up_time: WAKE.dusk,
     card_name: 'renfield',
-    rules: rules_role.rules_renfield,
+    rules: rules_role.rules_renfield
   },
   {
     id: 39,
@@ -351,7 +351,7 @@ export const cards: CardJson[] = [
     team: TEAM.vampire,
     wake_up_time: WAKE.dusk,
     card_name: 'the_count',
-    rules: rules_role.rules_count,
+    rules: rules_role.rules_count
   },
   {
     id: 40,
@@ -360,7 +360,7 @@ export const cards: CardJson[] = [
     team: TEAM.vampire,
     wake_up_time: WAKE.dusk,
     card_name: 'the_master',
-    rules: rules_role.rules_master,
+    rules: rules_role.rules_master
   },
   {
     id: 41,
@@ -369,7 +369,7 @@ export const cards: CardJson[] = [
     team: TEAM.vampire,
     wake_up_time: WAKE.dusk,
     card_name: 'vampire',
-    rules: rules_role.rules_vampire,
+    rules: rules_role.rules_vampire
   },
   {
     id: 42,
@@ -378,7 +378,7 @@ export const cards: CardJson[] = [
     team: TEAM.alien,
     wake_up_time: WAKE.night,
     card_name: 'alien',
-    rules: rules_role.rules_alien,
+    rules: rules_role.rules_alien
   },
   {
     id: 43,
@@ -387,7 +387,7 @@ export const cards: CardJson[] = [
     team: TEAM.alien,
     wake_up_time: WAKE.night,
     card_name: 'alien',
-    rules: rules_role.rules_alien,
+    rules: rules_role.rules_alien
   },
   {
     id: 44,
@@ -396,7 +396,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.night,
     card_name: 'blob',
-    rules: rules_role.rules_blob,
+    rules: rules_role.rules_blob
   },
   {
     id: 45,
@@ -405,7 +405,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'cow',
-    rules: rules_role.rules_cow,
+    rules: rules_role.rules_cow
   },
   {
     id: 46,
@@ -414,7 +414,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'exposer',
-    rules: rules_role.rules_exposer,
+    rules: rules_role.rules_exposer
   },
   {
     id: 47,
@@ -423,7 +423,7 @@ export const cards: CardJson[] = [
     team: TEAM.alien,
     wake_up_time: WAKE.night,
     card_name: 'groob',
-    rules: rules_role.rules_groob,
+    rules: rules_role.rules_groob
   },
   {
     id: 48,
@@ -432,7 +432,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'leader',
-    rules: rules_role.rules_leader,
+    rules: rules_role.rules_leader
   },
   {
     id: 49,
@@ -441,7 +441,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.night,
     card_name: 'mortician',
-    rules: rules_role.rules_mortician,
+    rules: rules_role.rules_mortician
   },
   {
     id: 50,
@@ -450,7 +450,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.twilight,
     card_name: 'oracle',
-    rules: rules_role.rules_oracle,
+    rules: rules_role.rules_oracle
   },
   {
     id: 51,
@@ -459,7 +459,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'psychic',
-    rules: rules_role.rules_psychic,
+    rules: rules_role.rules_psychic
   },
   {
     id: 52,
@@ -468,7 +468,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'rascal',
-    rules: rules_role.rules_rascal,
+    rules: rules_role.rules_rascal
   },
   {
     id: 53,
@@ -477,7 +477,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.night,
     card_name: 'synthetic_alien',
-    rules: rules_role.rules_synthetic,
+    rules: rules_role.rules_synthetic
   },
   {
     id: 54,
@@ -486,7 +486,7 @@ export const cards: CardJson[] = [
     team: TEAM.alien,
     wake_up_time: WAKE.night,
     card_name: 'zerb',
-    rules: rules_role.rules_zerb,
+    rules: rules_role.rules_zerb
   },
   {
     id: 55,
@@ -495,7 +495,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.night,
     card_name: 'annoying_lad',
-    rules: rules_role.rules_annoylad,
+    rules: rules_role.rules_annoylad
   },
   {
     id: 56,
@@ -504,7 +504,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.night,
     card_name: 'detector',
-    rules: rules_role.rules_detector,
+    rules: rules_role.rules_detector
   },
   {
     id: 57,
@@ -513,7 +513,7 @@ export const cards: CardJson[] = [
     team: TEAM.villain,
     wake_up_time: WAKE.night,
     card_name: 'dr_peeker',
-    rules: rules_role.rules_drpeeker,
+    rules: rules_role.rules_drpeeker
   },
   {
     id: 58,
@@ -522,7 +522,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.night,
     card_name: 'evilometer',
-    rules: rules_role.rules_evilometer,
+    rules: rules_role.rules_evilometer
   },
   {
     id: 59,
@@ -531,7 +531,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.night,
     card_name: 'flipper',
-    rules: rules_role.rules_flipper,
+    rules: rules_role.rules_flipper
   },
   {
     id: 60,
@@ -540,7 +540,7 @@ export const cards: CardJson[] = [
     team: TEAM.villain,
     wake_up_time: WAKE.night,
     card_name: 'henchman_7',
-    rules: rules_role.rules_henchman,
+    rules: rules_role.rules_henchman
   },
   {
     id: 61,
@@ -549,7 +549,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.day,
     card_name: 'innocent_bystander',
-    rules: rules_role.rules_innocentbystander,
+    rules: rules_role.rules_innocentbystander
   },
   {
     id: 62,
@@ -558,7 +558,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.night,
     card_name: 'intern',
-    rules: rules_role.rules_intern,
+    rules: rules_role.rules_intern
   },
   {
     id: 63,
@@ -567,7 +567,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.day,
     card_name: 'mad_scientist',
-    rules: rules_role.rules_madscientist,
+    rules: rules_role.rules_madscientist
   },
   {
     id: 64,
@@ -576,7 +576,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.twilight,
     card_name: 'mirror_man',
-    rules: rules_role.rules_mirrorman,
+    rules: rules_role.rules_mirrorman
   },
   {
     id: 65,
@@ -585,7 +585,7 @@ export const cards: CardJson[] = [
     team: TEAM.villain,
     wake_up_time: WAKE.night,
     card_name: 'rapscallion',
-    rules: rules_role.rules_rapscallion,
+    rules: rules_role.rules_rapscallion
   },
   {
     id: 66,
@@ -594,7 +594,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.night,
     card_name: 'role_retriever',
-    rules: rules_role.rules_roleretriever,
+    rules: rules_role.rules_roleretriever
   },
   {
     id: 67,
@@ -603,7 +603,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.night,
     card_name: 'self_awareness_girl',
-    rules: rules_role.rules_selfag,
+    rules: rules_role.rules_selfag
   },
   {
     id: 68,
@@ -612,7 +612,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.night,
     card_name: 'switcheroo',
-    rules: rules_role.rules_switcheroo,
+    rules: rules_role.rules_switcheroo
   },
   {
     id: 69,
@@ -621,7 +621,7 @@ export const cards: CardJson[] = [
     team: TEAM.villain,
     wake_up_time: WAKE.night,
     card_name: 'temptress',
-    rules: rules_role.rules_temptress,
+    rules: rules_role.rules_temptress
   },
   {
     id: 70,
@@ -630,7 +630,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.night,
     card_name: 'voodoo_lou',
-    rules: rules_role.rules_voodoolou,
+    rules: rules_role.rules_voodoolou
   },
   {
     id: 71,
@@ -639,7 +639,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.night,
     card_name: 'apprentice_tanner',
-    rules: rules_role.rules_apptanner,
+    rules: rules_role.rules_apptanner
   },
   {
     id: 72,
@@ -648,7 +648,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'aura_seer',
-    rules: rules_role.rules_auraseer,
+    rules: rules_role.rules_auraseer
   },
   {
     id: 73,
@@ -657,7 +657,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'beholder',
-    rules: rules_role.rules_beholder,
+    rules: rules_role.rules_beholder
   },
   {
     id: 74,
@@ -666,7 +666,7 @@ export const cards: CardJson[] = [
     team: TEAM.alien,
     wake_up_time: WAKE.night,
     card_name: 'body_snatcher',
-    rules: rules_role.rules_bodysnatcher,
+    rules: rules_role.rules_bodysnatcher
   },
   {
     id: 75,
@@ -675,7 +675,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.day,
     card_name: 'cursed',
-    rules: rules_role.rules_cursed,
+    rules: rules_role.rules_cursed
   },
   {
     id: 76,
@@ -684,7 +684,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.day,
     card_name: 'defender_er',
-    rules: rules_role.rules_defenderer,
+    rules: rules_role.rules_defenderer
   },
   {
     id: 77,
@@ -693,7 +693,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'empath',
-    rules: rules_role.rules_empath,
+    rules: rules_role.rules_empath
   },
   {
     id: 78,
@@ -702,7 +702,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.night,
     card_name: 'family_man',
-    rules: rules_role.rules_familyman,
+    rules: rules_role.rules_familyman
   },
   {
     id: 79,
@@ -711,7 +711,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.day,
     card_name: 'innocent_bystander',
-    rules: rules_role.rules_innocentbystander,
+    rules: rules_role.rules_innocentbystander
   },
   {
     id: 80,
@@ -720,7 +720,7 @@ export const cards: CardJson[] = [
     team: TEAM.own,
     wake_up_time: WAKE.night,
     card_name: 'nostradamus',
-    rules: rules_role.rules_nostradamus,
+    rules: rules_role.rules_nostradamus
   },
   {
     id: 81,
@@ -729,7 +729,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.day,
     card_name: 'prince',
-    rules: rules_role.rules_prince,
+    rules: rules_role.rules_prince
   },
   {
     id: 82,
@@ -738,7 +738,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.day,
     card_name: 'ricochet_rhino',
-    rules: rules_role.rules_rhino,
+    rules: rules_role.rules_rhino
   },
   {
     id: 83,
@@ -747,7 +747,7 @@ export const cards: CardJson[] = [
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
     card_name: 'squire',
-    rules: rules_role.rules_squire,
+    rules: rules_role.rules_squire
   },
   {
     id: 84,
@@ -756,7 +756,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.day,
     card_name: 'the_sponge',
-    rules: rules_role.rules_thesponge,
+    rules: rules_role.rules_thesponge
   },
   {
     id: 85,
@@ -765,7 +765,7 @@ export const cards: CardJson[] = [
     team: TEAM.village,
     wake_up_time: WAKE.night,
     card_name: 'thing',
-    rules: rules_role.rules_thing,
+    rules: rules_role.rules_thing
   },
   {
     id: 86,
@@ -774,7 +774,7 @@ export const cards: CardJson[] = [
     team: TEAM.hero,
     wake_up_time: WAKE.day,
     card_name: 'windy_wendy',
-    rules: rules_role.rules_windywendy,
+    rules: rules_role.rules_windywendy
   },
   {
     id: 87,
@@ -783,6 +783,6 @@ export const cards: CardJson[] = [
     team: 'unknown',
     wake_up_time: WAKE.day,
     card_name: 'empty',
-    rules: 'unknown',
-  },
+    rules: 'unknown'
+  }
 ]

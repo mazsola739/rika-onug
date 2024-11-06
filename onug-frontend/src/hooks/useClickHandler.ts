@@ -1,4 +1,19 @@
-import { DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, PAUSE_GAME, READY, RESET, SCENE, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VOTE } from 'constant'
+import {
+  DEAL,
+  JOIN_ROOM,
+  LEAVE_GAME,
+  LEAVE_ROOM,
+  PAUSE_GAME,
+  READY,
+  RESET,
+  SCENE,
+  START_GAME,
+  START_VOTE,
+  STOP_GAME,
+  UPDATE_GUESS,
+  UPDATE_ROOM,
+  VOTE
+} from 'constant'
 import { useCallback } from 'react'
 import { deckStore, gameStatusStore, riseAndRestStore, roomStore, wsStore } from 'store'
 
@@ -9,7 +24,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     sendJsonMessage?.({
       type: JOIN_ROOM,
       room_id,
-      token,
+      token
     })
   }
 
@@ -17,7 +32,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     sendJsonMessage?.({
       type: LEAVE_ROOM,
       room_id,
-      token,
+      token
     })
   }, [sendJsonMessage])
 
@@ -25,7 +40,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     sendJsonMessage?.({
       type: DEAL,
       room_id,
-      token,
+      token
     })
   }, [sendJsonMessage])
 
@@ -33,7 +48,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     sendJsonMessage?.({
       type: RESET,
       room_id,
-      token,
+      token
     })
     gameStatusStore.resetStatus()
   }, [sendJsonMessage])
@@ -42,7 +57,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     sendJsonMessage?.({
       type: START_GAME,
       room_id,
-      token,
+      token
     })
     gameStatusStore.toggleStart()
   }, [sendJsonMessage])
@@ -51,7 +66,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     sendJsonMessage?.({
       type: READY,
       token,
-      room_id,
+      room_id
     })
   }, [sendJsonMessage])
 
@@ -59,7 +74,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     sendJsonMessage?.({
       type: PAUSE_GAME,
       room_id,
-      token,
+      token
     })
     gameStatusStore.togglePause()
   }, [sendJsonMessage])
@@ -68,7 +83,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     sendJsonMessage?.({
       type: STOP_GAME,
       room_id,
-      token,
+      token
     })
     gameStatusStore.toggleStop()
   }, [sendJsonMessage])
@@ -77,7 +92,7 @@ export const useClickHandler = (room_id: string, token: string) => {
     sendJsonMessage?.({
       type: LEAVE_GAME,
       room_id,
-      token,
+      token
     })
   }, [sendJsonMessage])
 
@@ -88,7 +103,7 @@ export const useClickHandler = (room_id: string, token: string) => {
         title,
         room_id,
         token,
-        done: true,
+        done: true
       })
       riseAndRestStore.closeYourEyes()
     },
@@ -102,7 +117,7 @@ export const useClickHandler = (room_id: string, token: string) => {
         title,
         room_id,
         token,
-        skip: true,
+        skip: true
       })
       riseAndRestStore.closeYourEyes()
     },
@@ -116,7 +131,7 @@ export const useClickHandler = (room_id: string, token: string) => {
         title,
         room_id,
         token,
-        selected_card_positions: selected_cards,
+        selected_card_positions: selected_cards
       })
     },
     [sendJsonMessage]
@@ -128,7 +143,7 @@ export const useClickHandler = (room_id: string, token: string) => {
         type: SCENE,
         room_id,
         token,
-        selected_mark_positions: selected_marks,
+        selected_mark_positions: selected_marks
       })
     },
     [sendJsonMessage]
@@ -140,7 +155,7 @@ export const useClickHandler = (room_id: string, token: string) => {
         type: SCENE,
         room_id,
         token,
-        selected_answer,
+        selected_answer
       })
     },
     [sendJsonMessage]
@@ -153,7 +168,7 @@ export const useClickHandler = (room_id: string, token: string) => {
         card_id: id,
         room_id,
         token,
-        action,
+        action
       })
 
       roomStore.toggleInfo(id)
@@ -167,7 +182,7 @@ export const useClickHandler = (room_id: string, token: string) => {
         type: UPDATE_ROOM,
         card_id: id,
         room_id,
-        token,
+        token
       })
 
       roomStore.toggleInfo(id)
@@ -175,16 +190,13 @@ export const useClickHandler = (room_id: string, token: string) => {
     [roomStore, sendJsonMessage]
   )
 
-  const handleVoteNow = useCallback(
-    () => {
-      sendJsonMessage?.({
-        type: START_VOTE,
-        room_id,
-        token,
-      })
-    },
-    [sendJsonMessage]
-  )
+  const handleVoteNow = useCallback(() => {
+    sendJsonMessage?.({
+      type: START_VOTE,
+      room_id,
+      token
+    })
+  }, [sendJsonMessage])
 
   const handleDone = useCallback(
     (selected_cards: string[]) => {
@@ -192,7 +204,7 @@ export const useClickHandler = (room_id: string, token: string) => {
         type: VOTE,
         room_id,
         token,
-        selected_card_positions: selected_cards,
+        selected_card_positions: selected_cards
       })
     },
     [sendJsonMessage]
@@ -216,6 +228,6 @@ export const useClickHandler = (room_id: string, token: string) => {
     handleDeselect,
     handleCardClick,
     handleVoteNow,
-    handleDone,
+    handleDone
   }
 }

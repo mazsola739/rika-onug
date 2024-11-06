@@ -12,7 +12,7 @@ import {
   ButtonsContainer,
   Button,
   ResponseContainer,
-  ResponsePre,
+  ResponsePre
 } from './God.styles'
 
 export const God: React.FC = observer(() => {
@@ -36,7 +36,7 @@ export const God: React.FC = observer(() => {
     broadcastToAllInRoom,
     sendMessageToPlayer,
     listOnugEnvVars,
-    deleteAllOldLogFiles,
+    deleteAllOldLogFiles
   } = useGod()
 
   return (
@@ -47,11 +47,11 @@ export const God: React.FC = observer(() => {
         <FormContainer>
           <InputContainer>
             <Label htmlFor="room_id">Room ID:</Label>
-            <Input type="text" id="room_id" value={roomId} onChange={(e) => setRoomId(e.target.value)} />
+            <Input type="text" id="room_id" value={roomId} onChange={e => setRoomId(e.target.value)} />
           </InputContainer>
           <InputContainer>
             <Label htmlFor="token">Token:</Label>
-            <Input type="text" id="token" value={token} onChange={(e) => setToken(e.target.value)} />
+            <Input type="text" id="token" value={token} onChange={e => setToken(e.target.value)} />
           </InputContainer>
         </FormContainer>
         <ButtonsContainer>
@@ -67,7 +67,7 @@ export const God: React.FC = observer(() => {
         <FormContainer>
           <InputContainer>
             <Label htmlFor="message">Message:</Label>
-            <textarea id="message" value={JSON.stringify(message)} onChange={(e) => setMessageHandler(e.target.value)} />
+            <textarea id="message" value={JSON.stringify(message)} onChange={e => setMessageHandler(e.target.value)} />
           </InputContainer>
         </FormContainer>
         <ButtonsContainer>

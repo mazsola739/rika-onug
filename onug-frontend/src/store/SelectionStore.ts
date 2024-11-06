@@ -21,10 +21,7 @@ class SelectionStore {
 
     if (isSelected) {
       this.selectedCards = this.selectedCards.filter(card => card !== position)
-    } else if (
-      (isPlayerCard && playerCardsCount < playerCardLimit) ||
-      (isCenterCard && centerCardsCount < centerCardLimit)
-    ) {
+    } else if ((isPlayerCard && playerCardsCount < playerCardLimit) || (isCenterCard && centerCardsCount < centerCardLimit)) {
       this.selectedCards = [...this.selectedCards, position]
     }
   }

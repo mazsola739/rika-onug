@@ -1,18 +1,40 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import {
+  formatPlayerIdentifier,
+  generateRoleInteraction,
+  getCardIdsByPositions,
+  getNarrationByTitle,
+} from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
-export const apprenticeseerResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+export const apprenticeseerResponse = (
+  gamestate,
+  token,
+  selected_card_positions,
+  title
+) => {
+  if (
+    !validateCardSelection(
+      selected_card_positions,
+      gamestate.players[token].player_history,
+      title
+    )
+  ) {
     return gamestate
   }
-  
+
   const newGamestate = { ...gamestate }
 
-  const viewCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
-  const selectedPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
+  const viewCards = getCardIdsByPositions(newGamestate.card_positions, [
+    selected_card_positions[0],
+  ])
+  const selectedPositionCard =
+    newGamestate.card_positions[selected_card_positions[0]].card
 
-  if (newGamestate.players[token].card.player_original_id === selectedPositionCard.id) {
+  if (
+    newGamestate.players[token].card.player_original_id ===
+    selectedPositionCard.id
+  ) {
     newGamestate.players[token].card.player_card_id = 87
   }
 
@@ -25,7 +47,10 @@ export const apprenticeseerResponse = (gamestate, token, selected_card_positions
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
+    private_message: [
+      'interaction_saw_card',
+      formatPlayerIdentifier(selected_card_positions)[0],
+    ],
     showCards: viewCards,
     scene_end: true,
   })

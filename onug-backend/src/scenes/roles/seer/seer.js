@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from "../../../constants"
+import { COPY_PLAYER } from '../../../constants'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { seerInteraction } from './seer.interaction'
 
@@ -12,15 +12,25 @@ export const seer = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 9 || (card.player_role_id === 9 && COPY_PLAYER.includes(card.player_original_id))) {
+    if (
+      card.player_original_id === 9 ||
+      (card.player_role_id === 9 &&
+        COPY_PLAYER.includes(card.player_original_id))
+    ) {
       newGamestate.players[token].action_finished = false
       interaction = seerInteraction(newGamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
   })
 
-  newGamestate.narration.push({[title]: narration})
+  newGamestate.narration.push({ [title]: narration })
 
   return newGamestate
 }

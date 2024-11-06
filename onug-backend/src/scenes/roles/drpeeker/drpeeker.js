@@ -1,5 +1,5 @@
 import { mysticwolfInteraction } from '..'
-import { COPY_PLAYER } from "../../../constants"
+import { COPY_PLAYER } from '../../../constants'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 
 export const drpeeker = (gamestate, title) => {
@@ -12,15 +12,25 @@ export const drpeeker = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 57 || (card.player_role_id === 57 && COPY_PLAYER.includes(card.player_original_id))) {
+    if (
+      card.player_original_id === 57 ||
+      (card.player_role_id === 57 &&
+        COPY_PLAYER.includes(card.player_original_id))
+    ) {
       newGamestate.players[token].action_finished = false
       interaction = mysticwolfInteraction(newGamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
   })
 
-  newGamestate.narration.push({[title]: narration})
+  newGamestate.narration.push({ [title]: narration })
 
   return newGamestate
 }

@@ -1,5 +1,6 @@
 export const ripple_1minute_text = 'You will only have one minute before you have to vote.'
-export const ripple_app_text = 'When it is time to vote, you may vote for the app instead of a player. If the app receives the most votes, no one is killed.'
+export const ripple_app_text =
+  'When it is time to vote, you may vote for the app instead of a player. If the app receives the most votes, no one is killed.'
 export const ripple_doublevote_text = 'When it is time to vote, use two hands to point, with each hand counting as one vote.'
 export const ripple_drunk_text = 'You must exchange your card with a card from'
 export const ripple_drunk_end_text = 'but you may not look at either card.'
@@ -14,7 +15,8 @@ export const ripple_intro_text = 'There has been a ripple in the space-time cont
 export const ripple_nospeak_text = 'You may not speak until after the vote.'
 export const ripple_openeyes_text = 'Keep your eyes open from this point forward.'
 export const ripple_repeat_text = "You've entered a time loop and must repeat the entire night."
-export const ripple_repeatrole_text = 'you get to repeat your night action. Whatever you did when you woke up before, do exactly same again, right now'
+export const ripple_repeatrole_text =
+  'you get to repeat your night action. Whatever you did when you woke up before, do exactly same again, right now'
 export const ripple_repeat_2_text = 'Some roles may not wake up during the time loop.'
 export const ripple_revealer_text = 'You may turn over one card from'
 export const ripple_revealer_end_text = 'If that card is on the Villager/Hero team, leave it face up. Otherwise, turn it back over, face down.'

@@ -5,15 +5,15 @@ import viteTsconfigPaths from 'vite-tsconfig-paths'
 import path from 'path'
 import { readdirSync } from 'fs'
 
-const absolutePathAliases: { [key: string]: string } = {};
+const absolutePathAliases: { [key: string]: string } = {}
 // Root resources folder
-const srcPath = path.resolve('./src/');
+const srcPath = path.resolve('./src/')
 // Adjust the regex here to include  .js, .jsx, etc.. files from the resources/ folder
-const srcRootContent = readdirSync(srcPath, { withFileTypes: true }).map((dirent) => dirent.name.replace(/(\.ts){1}(x?)/, ''));
+const srcRootContent = readdirSync(srcPath, { withFileTypes: true }).map(dirent => dirent.name.replace(/(\.ts){1}(x?)/, ''))
 
-srcRootContent.forEach((directory) => {
-  absolutePathAliases[directory] = path.join(srcPath, directory);
-});
+srcRootContent.forEach(directory => {
+  absolutePathAliases[directory] = path.join(srcPath, directory)
+})
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -25,20 +25,16 @@ export default defineConfig({
       ...absolutePathAliases
     }
   },
-  plugins: [
-    react(),
-    viteTsconfigPaths(),
-    svgr()
-  ],
+  plugins: [react(), viteTsconfigPaths(), svgr()],
   server: {
     // this ensures that the browser opens upon server start
     open: true,
     // this sets a default port to 3000
-    port: 3000,
+    port: 3000
   },
   preview: {
     open: false,
-    port: 3000,
+    port: 3000
   },
   test: {
     globals: true,
@@ -49,8 +45,8 @@ export default defineConfig({
     coverage: {
       reporter: ['text', 'json', 'html'],
       include: ['src/**/*'],
-      exclude: [],
-    },
+      exclude: []
+    }
   },
   build: {
     // it's needed, because the root setting for the defineConfig. Otherwise dist folder would be created under /src

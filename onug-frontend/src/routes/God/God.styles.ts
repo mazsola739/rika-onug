@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
 
-const primaryColor = '#00AACC';
-const secondaryColor = '#0088AA';
-const textColor = 'white';
-const buttonTextColor = 'white';
-const backgroundColor = '#20232a';
+const primaryColor = '#00AACC'
+const secondaryColor = '#0088AA'
+const textColor = 'white'
+const buttonTextColor = 'white'
+const backgroundColor = '#20232a'
 
 export const StyledGod = styled.div`
   display: flex;
@@ -23,7 +23,7 @@ export const LeftSide = styled.div`
   gap: 20px;
   padding: 20px;
   width: 40%;
-  background-color: #282C34;
+  background-color: #282c34;
   border-radius: 12px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 `
@@ -31,7 +31,7 @@ export const LeftSide = styled.div`
 export const RightSide = styled.div`
   padding: 20px;
   width: 60%;
-  background-color: #282C34;
+  background-color: #282c34;
   border-radius: 12px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 `

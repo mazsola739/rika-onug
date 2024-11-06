@@ -19,23 +19,31 @@ class MessageStore {
   }
 
   setNarration(narration_keys: NarrationType[]): void {
-    const narration = narration_keys.map((key) => narration_text[key]).join(' ')
+    const narration = narration_keys.map(key => narration_text[key]).join(' ')
     this.narration = narration
   }
 
   setPrivateMessage(message_keys: MessagesType[]): void {
-    const message = message_keys.map((key) => messages_text[key]).join(' ')
+    const message = message_keys.map(key => messages_text[key]).join(' ')
     this.privateMessage = message
   }
 
-  get playerCardLimit() { return gamePropStore.selectable_card_limit.player }
-  get centerCardLimit() { return gamePropStore.selectable_card_limit.center }
-  get isCardSelection() { return gamePropStore.selectable_cards.length > 0 }
-  get isSelectableCards() { return this.allSelectableCards.length > 0 }
+  get playerCardLimit() {
+    return gamePropStore.selectable_card_limit.player
+  }
+  get centerCardLimit() {
+    return gamePropStore.selectable_card_limit.center
+  }
+  get isCardSelection() {
+    return gamePropStore.selectable_cards.length > 0
+  }
+  get isSelectableCards() {
+    return this.allSelectableCards.length > 0
+  }
 
   get isIdentification() {
-    const title = gamePropStore.title;
-    return title === 'MINION' || title === 'WEREWOLF' || title === 'MASONS';
+    const title = gamePropStore.title
+    return title === 'MINION' || title === 'WEREWOLF' || title === 'MASONS'
   }
 
   get disabled() {
@@ -61,24 +69,24 @@ class MessageStore {
   }
 
   get narrationImage(): string {
-    const scene = script.find((scene) => scene.scene_title === gamePropStore.title)
+    const scene = script.find(scene => scene.scene_title === gamePropStore.title)
     return scene ? scene.scene_img : ''
   }
 
   get allSelectableCards(): Record<string, string>[] {
-    const selectablePlayerCards = riseAndRestStore.tablePlayerCards.filter((card) => card.selectable_card)
-    const selectableCenterCards = riseAndRestStore.tableCenterCards.filter((card) => card.selectable_card)
+    const selectablePlayerCards = riseAndRestStore.tablePlayerCards.filter(card => card.selectable_card)
+    const selectableCenterCards = riseAndRestStore.tableCenterCards.filter(card => card.selectable_card)
 
-    return [...selectablePlayerCards, ...selectableCenterCards].map((card) => ({
+    return [...selectablePlayerCards, ...selectableCenterCards].map(card => ({
       position: card.position,
-      name: formatPositionSimply(card.position),
+      name: formatPositionSimply(card.position)
     }))
   }
 
   get allSelectedCards(): Record<string, string>[] {
-    return selectionStore.selectedCards.map((position) => ({
+    return selectionStore.selectedCards.map(position => ({
       position,
-      name: formatPositionSimply(position),
+      name: formatPositionSimply(position)
     }))
   }
 
@@ -106,13 +114,13 @@ class MessageStore {
 
         return cards.map((card: string) => ({
           position: card,
-          name: formatPositionSimply(card),
+          name: formatPositionSimply(card)
         }))
       })
 
       return {
         roles: roleKeys,
-        cards: identifiedCards,
+        cards: identifiedCards
       }
     }
     return {}

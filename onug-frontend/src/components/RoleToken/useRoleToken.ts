@@ -1,4 +1,4 @@
-import { voteStore } from "store"
+import { voteStore } from 'store'
 
 export const useRoleTokens = (token: any) => {
   const handleGuessClick = () => {
@@ -17,8 +17,8 @@ export const useRoleTokens = (token: any) => {
       'switcheroo',
       'voodoo_lou',
       'self_awareness_girl'
-    ];
-    
+    ]
+
     const isSuperhero = token.expansion === 'Super Villains' && SUPERHERO_IMAGES.includes(token.image)
     const actualExpansion = isSuperhero ? 'Super Heroes' : token.expansion
     const imageName = actualExpansion ? `${actualExpansion.toLowerCase().replace(/ /g, '')}_${randomNumber}` : token.image

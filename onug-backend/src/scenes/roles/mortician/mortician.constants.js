@@ -1,4 +1,7 @@
-export const randomMorticianInstructions = ['mortician_1card_text', 'mortician_2cards_text']
+export const randomMorticianInstructions = [
+  'mortician_1card_text',
+  'mortician_2cards_text',
+]
 
 export const morticianKeys = [
   'identifier_leftneighbor_text',

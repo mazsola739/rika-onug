@@ -20,7 +20,7 @@ class WsStore {
   getWsCommunicationsBridge() {
     return {
       sendJsonMessage: this.sendJsonMessage,
-      lastJsonMessage: this.lastJsonMessage,
+      lastJsonMessage: this.lastJsonMessage
     }
   }
 }

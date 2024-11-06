@@ -10,16 +10,16 @@ export const Nav: React.FC<NavProps> = observer(({ anchorList }) => {
   //TODO fix it, right now not refreshing the anchor isactive status
   useEffect(() => {
     const sections = anchorList.map(anchor => document.getElementById(anchor)).filter(Boolean)
-    const navLinks = document.querySelectorAll(".navbar .nav-container button")
+    const navLinks = document.querySelectorAll('.navbar .nav-container button')
 
     const updateActiveSection = () => {
       let activeSectionId: string | null = null
       let closestDistance = Number.POSITIVE_INFINITY
 
-      sections.forEach((section) => {
+      sections.forEach(section => {
         const rect = section.getBoundingClientRect()
-        
-        const distanceFromTop = rect.top 
+
+        const distanceFromTop = rect.top
 
         if (distanceFromTop >= 0 && distanceFromTop < closestDistance) {
           closestDistance = distanceFromTop
@@ -27,24 +27,24 @@ export const Nav: React.FC<NavProps> = observer(({ anchorList }) => {
         }
       })
 
-      navLinks.forEach((link) => {
-        link.classList.remove("active")
-        if (link.classList.contains(activeSectionId || "")) {
-          link.classList.add("active")
+      navLinks.forEach(link => {
+        link.classList.remove('active')
+        if (link.classList.contains(activeSectionId || '')) {
+          link.classList.add('active')
         }
       })
 
       setActiveAnchor(activeSectionId)
     }
 
-    window.addEventListener("scroll", updateActiveSection)
-    window.addEventListener("resize", updateActiveSection)
+    window.addEventListener('scroll', updateActiveSection)
+    window.addEventListener('resize', updateActiveSection)
 
     updateActiveSection()
 
     return () => {
-      window.removeEventListener("scroll", updateActiveSection)
-      window.removeEventListener("resize", updateActiveSection)
+      window.removeEventListener('scroll', updateActiveSection)
+      window.removeEventListener('resize', updateActiveSection)
     }
   }, [anchorList])
 

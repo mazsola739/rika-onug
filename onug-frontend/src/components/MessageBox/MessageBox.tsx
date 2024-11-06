@@ -3,51 +3,56 @@ import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { gamePropStore, messageStore, selectionStore } from 'store'
-import { CardPosition, NarrationText, Message, MessageBoxCard, MessageBoxTitle, MessageText, Narration, StyledMessageBox, StyledMessageBoxCards, StyledSelectable } from './MessageBox.styles'
+import {
+  CardPosition,
+  NarrationText,
+  Message,
+  MessageBoxCard,
+  MessageBoxTitle,
+  MessageText,
+  Narration,
+  StyledMessageBox,
+  StyledMessageBoxCards,
+  StyledSelectable
+} from './MessageBox.styles'
 import { LookProps, MessageBoxCardsProps, SelectableProps } from './MessageBox.types'
 
-const Selectable: React.FC<SelectableProps> = observer(
-  ({ selectable, selected }) => {
-    return (
-      <StyledSelectable>
-        <MessageBoxTitle>Selectable</MessageBoxTitle>
-        <MessageBoxCards cards={selectable} />
-        <MessageBoxTitle>Selected</MessageBoxTitle>
-        <MessageBoxCards cards={selected} />
-      </StyledSelectable>
-    )
-  }
-)
+const Selectable: React.FC<SelectableProps> = observer(({ selectable, selected }) => {
+  return (
+    <StyledSelectable>
+      <MessageBoxTitle>Selectable</MessageBoxTitle>
+      <MessageBoxCards cards={selectable} />
+      <MessageBoxTitle>Selected</MessageBoxTitle>
+      <MessageBoxCards cards={selected} />
+    </StyledSelectable>
+  )
+})
 
-const Look: React.FC<LookProps> = observer(
-  ({ roles, cards }) => {
-    return (
-      <StyledSelectable>
-        <MessageBoxTitle>{roles.join(', ')}</MessageBoxTitle>
-        <MessageBoxCards cards={cards} />
-      </StyledSelectable>
-    )
-  }
-)
+const Look: React.FC<LookProps> = observer(({ roles, cards }) => {
+  return (
+    <StyledSelectable>
+      <MessageBoxTitle>{roles.join(', ')}</MessageBoxTitle>
+      <MessageBoxCards cards={cards} />
+    </StyledSelectable>
+  )
+})
 
-const MessageBoxCards: React.FC<MessageBoxCardsProps> = observer(
-  ({ cards }) => {
-    const onCardClick = (position: string) => {
-      selectionStore.toggleCardSelection(position)
-    }
-
-    return (
-      <StyledMessageBoxCards>
-        {cards.map((card, index) => (
-          <MessageBoxCard key={index}>
-            <CardPosition>{card.name}</CardPosition>
-            <Card image='card_background' onClick={() => onCardClick(card.position)} size={40} />
-          </MessageBoxCard>
-        ))}
-      </StyledMessageBoxCards>
-    )
+const MessageBoxCards: React.FC<MessageBoxCardsProps> = observer(({ cards }) => {
+  const onCardClick = (position: string) => {
+    selectionStore.toggleCardSelection(position)
   }
-)
+
+  return (
+    <StyledMessageBoxCards>
+      {cards.map((card, index) => (
+        <MessageBoxCard key={index}>
+          <CardPosition>{card.name}</CardPosition>
+          <Card image="card_background" onClick={() => onCardClick(card.position)} size={40} />
+        </MessageBoxCard>
+      ))}
+    </StyledMessageBoxCards>
+  )
+})
 
 export const MessageBox: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
@@ -66,21 +71,17 @@ export const MessageBox: React.FC = observer(() => {
       </Narration>
       <Message>
         <MessageText>{privateMessage}</MessageText>
-        {isSelectableCards && (
-          <Selectable selectable={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />
-        )}
-        {isIdentification && (
-          <Look roles={identifiedCards.roles} cards={identifiedCards.cards} />
-        )}
+        {isSelectableCards && <Selectable selectable={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />}
+        {isIdentification && <Look roles={identifiedCards.roles} cards={identifiedCards.cards} />}
       </Message>
       {!scene_end ? (
         <ButtonGroup>
-          <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant='blue' />
-          <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabled} buttonText={BUTTONS.done_label} variant='green' />
+          <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
+          <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabled} buttonText={BUTTONS.done_label} variant="green" />
         </ButtonGroup>
       ) : (
         <ButtonGroup>
-          <Button onClick={() => handleFinish(title)} buttonText={BUTTONS.finish_label} variant='purple' />
+          <Button onClick={() => handleFinish(title)} buttonText={BUTTONS.finish_label} variant="purple" />
         </ButtonGroup>
       )}
     </StyledMessageBox>

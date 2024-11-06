@@ -2,7 +2,9 @@ import { useCallback, useState } from 'react'
 import { API_HOST } from 'constant'
 
 export const useGod = () => {
-  const [response, setResponse] = useState({ serverResponse: 'will be populated here' })
+  const [response, setResponse] = useState({
+    serverResponse: 'will be populated here'
+  })
   const [roomId, setRoomId] = useState('')
   const [token, setToken] = useState('')
   const [message, setMessage] = useState({ type: 'REDIRECT', path: '/lobby' })
@@ -23,31 +25,42 @@ export const useGod = () => {
   const listOnugEnvVars = () => fetchWrapper('list_onug_env_vars')
   const deleteAllOldLogFiles = () => fetchWrapper('delete_all_old_log_files')
 
-  const broadcastToAll = useCallback(() =>
-    fetchWrapper('broadcast_to_all', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message }),
-    }), [message])
+  const broadcastToAll = useCallback(
+    () =>
+      fetchWrapper('broadcast_to_all', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      }),
+    [message]
+  )
 
-  const broadcastToAllInRoom = useCallback(() =>
-    fetchWrapper('broadcast_to_all_in_room', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message, room_id: roomId }),
-    }), [message, roomId])
+  const broadcastToAllInRoom = useCallback(
+    () =>
+      fetchWrapper('broadcast_to_all_in_room', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, room_id: roomId })
+      }),
+    [message, roomId]
+  )
 
-  const sendMessageToPlayer = useCallback(() =>
-    fetchWrapper('send_message_to_player', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message, token }),
-    }), [message, token])
+  const sendMessageToPlayer = useCallback(
+    () =>
+      fetchWrapper('send_message_to_player', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, token })
+      }),
+    [message, token]
+  )
 
   const setMessageHandler = (value: string) => {
     try {
       setMessage(JSON.parse(value))
-    } catch (error) { /* Handle JSON parse error */ }
+    } catch (error) {
+      /* Handle JSON parse error */
+    }
   }
 
   return {
@@ -70,6 +83,6 @@ export const useGod = () => {
     broadcastToAllInRoom,
     sendMessageToPlayer,
     listOnugEnvVars,
-    deleteAllOldLogFiles,
+    deleteAllOldLogFiles
   }
 }

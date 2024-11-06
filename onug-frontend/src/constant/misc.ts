@@ -7,7 +7,7 @@ export const TEAMS: TeamsType = {
   werewolf: 3,
   vampire: 4,
   alien: 5,
-  villain: 6,
+  villain: 6
 }
 
 export const EXPANSIONS: ExpansionsType = {
@@ -16,7 +16,7 @@ export const EXPANSIONS: ExpansionsType = {
   vampire: 'Vampire',
   alien: 'Alien',
   supervillains: 'Super Villains',
-  bonusroles: 'Bonus Roles',
+  bonusroles: 'Bonus Roles'
 }
 
 export const TEAM_NAMES: TeamNamesTypes = {
@@ -35,14 +35,14 @@ export const TEAM_NAMES: TeamNamesTypes = {
   nostradamus: 'Nostradamus',
   mad: 'Mad',
   family: 'Family',
-  traitor: 'Traitor',
+  traitor: 'Traitor'
 }
 
 export const WAKE: WakeType = {
   day: 'day',
   twilight: 'twilight',
   dusk: 'dusk',
-  night: 'night',
+  night: 'night'
 }
 
 export const EXPANSION: ExpansionType = {
@@ -61,7 +61,7 @@ export const TEAM: TeamType = {
   werewolf: 'werewolf',
   vampire: 'vampire',
   alien: 'alien',
-  villain: 'villain',
+  villain: 'villain'
 }
 
 export const conjunction_and = 'and'

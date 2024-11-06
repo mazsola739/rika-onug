@@ -8,7 +8,6 @@ import { godRouter } from './omnipotent/god'
 import { stubRouter } from './omnipotent/stub'
 import { websocketServer } from './websocket'
 
-
 const app = express()
 const PORT = 7654
 const WEBSOCKET_PORT = 7655
@@ -31,5 +30,5 @@ app.use(pageNotFoundError)
 app.use(internalServerError)
 
 ViteExpress.listen(app, PORT, () =>
-    logDebug(`Server is listening on port: ${PORT}`)
+  logDebug(`Server is listening on port: ${PORT}`)
 )

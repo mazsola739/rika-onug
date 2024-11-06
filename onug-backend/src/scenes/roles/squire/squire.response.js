@@ -1,10 +1,21 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import {
+  formatPlayerIdentifier,
+  generateRoleInteraction,
+  getCardIdsByPositions,
+  getNarrationByTitle,
+} from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
 import { getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield } from './squire.utils'
 
 export const squireResponse = (gamestate, token, selected_answer, title) => {
-  if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+  if (
+    !validateAnswerSelection(
+      selected_answer,
+      gamestate.players[token].player_history,
+      title
+    )
+  ) {
     return gamestate
   }
 
@@ -13,10 +24,22 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
   let interaction = {}
 
   if (selected_answer === 'yes') {
-    const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield(newGamestate.players)
-    const viewCards = getCardIdsByPositions(newGamestate.card_positions, werewolves)
+    const werewolves =
+      getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield(
+        newGamestate.players
+      )
+    const viewCards = getCardIdsByPositions(
+      newGamestate.card_positions,
+      werewolves
+    )
 
-    if ( werewolves.some(wolf => newGamestate.card_positions[wolf].card.id === newGamestate.players[token]?.card?.original_id)  ) {
+    if (
+      werewolves.some(
+        (wolf) =>
+          newGamestate.card_positions[wolf].card.id ===
+          newGamestate.players[token]?.card?.original_id
+      )
+    ) {
       newGamestate.players[token].card.player_card_id = 87
     }
 
@@ -29,7 +52,7 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     }
 
     const messageIdentifiers = formatPlayerIdentifier(werewolves)
-  
+
     interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_saw_card', ...messageIdentifiers],
       showCards: viewCards,

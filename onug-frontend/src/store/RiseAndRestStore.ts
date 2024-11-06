@@ -27,7 +27,7 @@ class RiseAndRestStore {
       selectable_mark: false,
       selected: false,
       werewolves: false,
-      dreamwolf: false,
+      dreamwolf: false
     }
   }
 
@@ -36,8 +36,15 @@ class RiseAndRestStore {
     const { hasAlphawolf, hasTemptress } = deckStore
 
     return positions
-      .filter(pos => !(pos === 'center_wolf' && !hasAlphawolf || pos === 'center_villain' && !hasTemptress))
-      .map(pos => ({ position: pos, card_name: '', role: '', team: '', selectable_card: false, selected: false }))
+      .filter(pos => !((pos === 'center_wolf' && !hasAlphawolf) || (pos === 'center_villain' && !hasTemptress)))
+      .map(pos => ({
+        position: pos,
+        card_name: '',
+        role: '',
+        team: '',
+        selectable_card: false,
+        selected: false
+      }))
   }
 
   getCardStatus(position: CardPosition) {
@@ -73,24 +80,24 @@ class RiseAndRestStore {
       role: player.player_role || '',
       team: player.player_team || '',
       selected: false,
-      ...this.getCardStatus(player.player_number),
+      ...this.getCardStatus(player.player_number)
     }
   }
 
   setTablePlayerCards(lastJsonMessage: WsJsonMessage): void {
-    const players = lastJsonMessage.players || [];
-    const showCards = this.getShowCardsMap();
-  
+    const players = lastJsonMessage.players || []
+    const showCards = this.getShowCardsMap()
+
     this.tablePlayerCards = Array.from({ length: deckStore.totalPlayers }, (_, i) => {
-      const position = `player_${i + 1}` as CardPosition;
-      const defaultCard = this.createEmptyPlayerCard(position);
-  
-      const playerCard = players.find(player => position === player.player_number);
-      if (!playerCard) return defaultCard;
-  
-      const cardId = showCards[position] || playerCard.player_card_id;
-      const card = getCardById(cardId);
-  
+      const position = `player_${i + 1}` as CardPosition
+      const defaultCard = this.createEmptyPlayerCard(position)
+
+      const playerCard = players.find(player => position === player.player_number)
+      if (!playerCard) return defaultCard
+
+      const cardId = showCards[position] || playerCard.player_card_id
+      const card = getCardById(cardId)
+
       return {
         ...defaultCard,
         player_name: playerCard.player_name,
@@ -99,20 +106,20 @@ class RiseAndRestStore {
         role: playerCard.player_role || '',
         team: playerCard.player_team || '',
         selected: false,
-        ...this.getCardStatus(position),
-      };
-    });
+        ...this.getCardStatus(position)
+      }
+    })
   }
-  
+
   setTableCenterCards(lastJsonMessage: WsJsonMessage): void {
-    const incomingCenterCards = lastJsonMessage.center_cards || [];
-    const showCards = this.getShowCardsMap();
-    const centerCardsMap = Object.fromEntries(incomingCenterCards.map(card => [card.card_position, card]));
-  
+    const incomingCenterCards = lastJsonMessage.center_cards || []
+    const showCards = this.getShowCardsMap()
+    const centerCardsMap = Object.fromEntries(incomingCenterCards.map(card => [card.card_position, card]))
+
     this.tableCenterCards = this.createDefaultCenterCards().map(centerCard => {
-      const incomingCard = centerCardsMap[centerCard.position];
-      const cardId = showCards[centerCard.position] || (incomingCard ? incomingCard.card_id : null);
-      const card = cardId ? getCardById(cardId) : null;
+      const incomingCard = centerCardsMap[centerCard.position]
+      const cardId = showCards[centerCard.position] || (incomingCard ? incomingCard.card_id : null)
+      const card = cardId ? getCardById(cardId) : null
 
       return {
         ...centerCard,
@@ -120,20 +127,26 @@ class RiseAndRestStore {
         role: incomingCard ? incomingCard.card_role : '',
         team: incomingCard ? incomingCard.card_team : '',
         selectable_card: gamePropStore.selectable_cards.includes(centerCard.position),
-        selected: false,
-      };
-    });
+        selected: false
+      }
+    })
   }
-  
+
   resetCards(): void {
     const resetCardState = this.createEmptyPlayerCard(null)
-    this.tablePlayerCard = { ...resetCardState, position: this.tablePlayerCard.position }
-    this.tablePlayerCards = this.tablePlayerCards.map(card => ({ ...resetCardState, position: card.position }))
+    this.tablePlayerCard = {
+      ...resetCardState,
+      position: this.tablePlayerCard.position
+    }
+    this.tablePlayerCards = this.tablePlayerCards.map(card => ({
+      ...resetCardState,
+      position: card.position
+    }))
     this.tableCenterCards = this.tableCenterCards.map(centerCard => ({
       ...centerCard,
       card_name: '',
       selectable_card: false,
-      selected: false,
+      selected: false
     }))
   }
 

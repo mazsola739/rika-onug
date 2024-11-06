@@ -173,5 +173,5 @@ export const ROLES = {
   role_werewolves,
   role_windywendy,
   role_witch,
-  role_zerb,
+  role_zerb
 }

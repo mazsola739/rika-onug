@@ -15,7 +15,7 @@ export const useLobby = () => {
       setFirstTime(false)
       sendJsonMessage?.({
         type: HYDRATE_LOBBY,
-        stage: STAGES.LOBBY,
+        stage: STAGES.LOBBY
       })
     }
   }, [sendJsonMessage, firstTime])
@@ -51,12 +51,12 @@ export const useLobby = () => {
     sendJsonMessage?.({
       type: JOIN_ROOM,
       room_id,
-      token,
+      token
     })
   }
 
   return {
     lobbyStore,
-    handleJoinRoom,
+    handleJoinRoom
   }
 }

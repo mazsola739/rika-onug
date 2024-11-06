@@ -34,27 +34,22 @@ const lightenBackground = keyframes`
   to { background-color: transparent; }
 `
 
-
 //GAME
 export const StyledGame = styled.div<GameProps>`
-  animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? darkenBackground : lightenBackground)} 1s
-    forwards;
+  animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? darkenBackground : lightenBackground)} 1s forwards;
 
   > header {
     > div {
       > img:first-of-type {
-        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeOutSun : fadeInSun)} 1s
-          forwards;
+        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeOutSun : fadeInSun)} 1s forwards;
       }
 
       > img:nth-of-type(2) {
-        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 1s
-          forwards;
+        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 1s forwards;
       }
 
       > span {
-        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 1s
-          forwards;
+        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 1s forwards;
       }
     }
   }
@@ -93,7 +88,7 @@ export const StyledGameHeader = styled.div`
   flex-direction: row;
   color: white;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   position: relative;
   height: 100%;
   width: 100%;
@@ -101,7 +96,10 @@ export const StyledGameHeader = styled.div`
 
 export const Sun = styled.img`
   border-radius: 50%;
-  box-shadow: 0 0 60px 10px #fff, 0 0 100px 20px red, 0 0 140px 30px gold;
+  box-shadow:
+    0 0 60px 10px #fff,
+    0 0 100px 20px red,
+    0 0 140px 30px gold;
   width: 35px;
   height: 35px;
   position: absolute;
@@ -111,7 +109,10 @@ export const Sun = styled.img`
 
 export const Moon = styled.img`
   border-radius: 50%;
-  box-shadow: 0 0 60px 10px #000, 0 0 100px 20px blue, 0 0 140px 30px silver;
+  box-shadow:
+    0 0 60px 10px #000,
+    0 0 100px 20px blue,
+    0 0 140px 30px silver;
   width: 35px;
   height: 35px;
   position: absolute;
@@ -144,7 +145,7 @@ export const StyledGameFooter = styled.div`
   & > :first-of-type {
     grid-column: 2;
   }
-  
+
   padding-bottom: 10px;
   height: 100%;
   width: 100%;

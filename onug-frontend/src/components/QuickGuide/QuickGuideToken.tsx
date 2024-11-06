@@ -27,7 +27,5 @@ export const QuickGuideToken: React.FC<QuickGuideTokenProps> = ({ image, expansi
     return `/assets/backgrounds/token_${imageName}.webp`
   }, [image, expansion])
 
-  return (
-    <StyledQuickGuideToken src={`/assets/${folder}/${image}.webp`} alt={image} bgImg={bgImg} />
-  )
+  return <StyledQuickGuideToken src={`/assets/${folder}/${image}.webp`} alt={image} bgImg={bgImg} />
 }

@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from "../../../constants"
+import { COPY_PLAYER } from '../../../constants'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { paranormalinvestigatorInteraction } from './paranormalinvestigator.interaction'
 
@@ -12,15 +12,29 @@ export const paranormalinvestigator = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 23 || (card.player_role_id === 23 && COPY_PLAYER.includes(card.player_original_id))) {
+    if (
+      card.player_original_id === 23 ||
+      (card.player_role_id === 23 &&
+        COPY_PLAYER.includes(card.player_original_id))
+    ) {
       newGamestate.players[token].action_finished = false
-      interaction = paranormalinvestigatorInteraction(newGamestate, token, title)
+      interaction = paranormalinvestigatorInteraction(
+        newGamestate,
+        token,
+        title
+      )
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
   })
 
-  newGamestate.narration.push({[title]: narration})
+  newGamestate.narration.push({ [title]: narration })
 
   return newGamestate
 }

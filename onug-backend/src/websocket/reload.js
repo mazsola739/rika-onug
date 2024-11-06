@@ -11,7 +11,8 @@ export const reload = (ws, message) => {
 
       const room_ids = Object.keys(webSocketServerConnectionsPerRoom)
       room_ids.forEach((room_id) => {
-        if (webSocketServerConnectionsPerRoom[room_id][token]) webSocketServerConnectionsPerRoom[room_id][token] = ws
+        if (webSocketServerConnectionsPerRoom[room_id][token])
+          webSocketServerConnectionsPerRoom[room_id][token] = ws
       })
     }
   } catch (error) {

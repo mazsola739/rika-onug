@@ -22,7 +22,7 @@ export const usePlayerCard = (card: TablePlayerCard) => {
   const isMarkSelected = selectedMarks.includes(position)
 
   const onCardClick = () => {
-    if (voteStore.isGuessing) { 
+    if (voteStore.isGuessing) {
       voteStore.selectGuessCardPosition(position as CardPosition)
     }
     if (isSelectableCard) selectionStore.toggleCardSelection(position)
@@ -44,22 +44,22 @@ export const usePlayerCard = (card: TablePlayerCard) => {
     isSelected: isCardSelected,
     werewolf: isWerewolf,
     dreamwolf: isDreamwolf,
-    masons: isMason,
+    masons: isMason
   }
 
   const markProps = {
     tokenName: markName,
     isSelectable: isSelectableMark,
     isSelected: isMarkSelected,
-    onClick: onMarkClick,
+    onClick: onMarkClick
   }
 
   return {
     position,
     playerNumberToken,
     isCenterCard,
-    cardProps, 
-    markProps, 
+    cardProps,
+    markProps,
     isShielded,
     isArtifacted,
     isWerewolf,

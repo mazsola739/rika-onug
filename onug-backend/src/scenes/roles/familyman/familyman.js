@@ -1,5 +1,9 @@
-import { ALL_COPY_PLAYER } from "../../../constants"
-import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
+import { ALL_COPY_PLAYER } from '../../../constants'
+import {
+  createAndSendSceneMessage,
+  getAllPlayerTokens,
+  getRandomItemFromArray,
+} from '../../sceneUtils'
 import { randomFamilyman } from './familyman.constants'
 import { familymanInteraction } from './familyman.interaction'
 
@@ -11,12 +15,21 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
   let availableFamilyManOptions = []
 
   if (total_players === 3) {
-    availableFamilyManOptions = randomFamilyman.filter(option => !option.includes('2eachside') || !option.includes('3') || !option.includes('4'))
-  }else if (total_players >= 4 && total_players < 5) {
-    availableFamilyManOptions = randomFamilyman.filter(option => !option.includes('2eachside') || !option.includes('4'))
+    availableFamilyManOptions = randomFamilyman.filter(
+      (option) =>
+        !option.includes('2eachside') ||
+        !option.includes('3') ||
+        !option.includes('4')
+    )
+  } else if (total_players >= 4 && total_players < 5) {
+    availableFamilyManOptions = randomFamilyman.filter(
+      (option) => !option.includes('2eachside') || !option.includes('4')
+    )
   }
 
-  const randomAvailableOption = getRandomItemFromArray(availableFamilyManOptions)
+  const randomAvailableOption = getRandomItemFromArray(
+    availableFamilyManOptions
+  )
 
   const narration = [
     hasDoppelganger
@@ -33,15 +46,25 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 78 || (card.player_role_id === 78 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (
+      card.player_original_id === 78 ||
+      (card.player_role_id === 78 &&
+        ALL_COPY_PLAYER.includes(card.player_original_id))
+    ) {
       newGamestate.players[token].action_finished = false
       interaction = familymanInteraction(newGamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
   })
 
-  newGamestate.narration.push({[title]: narration})
+  newGamestate.narration.push({ [title]: narration })
 
   return newGamestate
 }

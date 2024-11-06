@@ -1,6 +1,6 @@
 import { STAGES } from '../constants'
 
-export const startScene = gamestate => ({
+export const startScene = (gamestate) => ({
   ...gamestate,
   stage: STAGES.GAME,
   actual_scenes: [

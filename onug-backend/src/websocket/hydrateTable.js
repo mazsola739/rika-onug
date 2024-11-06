@@ -4,13 +4,16 @@ import { readGamestate } from '../repository'
 import { getTableBoard, isTableClosed } from '../utils'
 
 export const hydrateTable = async (ws, message) => {
-  try { 
+  try {
     logTrace(`hydrate game table requested with ${JSON.stringify(message)}`)
-    
+
     const { room_id, token } = message
     const gamestate = await readGamestate(room_id)
 
-    if (isTableClosed(gamestate)) return ws.send(JSON.stringify({ type: REDIRECT, path: `/room/${room_id}`  }))
+    if (isTableClosed(gamestate))
+      return ws.send(
+        JSON.stringify({ type: REDIRECT, path: `/room/${room_id}` })
+      )
 
     const playersByToken = gamestate.players
     const player = playersByToken[token]
@@ -27,12 +30,12 @@ export const hydrateTable = async (ws, message) => {
           player_card_id: playerCard.player_card_id,
           player_mark: playerCard.player_mark,
           player_role: playerCard.player_role,
-          player_team: playerCard.player_team
+          player_team: playerCard.player_team,
         },
         players,
       })
     )
-  } catch (error) { 
+  } catch (error) {
     logErrorWithStack(error)
   }
 }

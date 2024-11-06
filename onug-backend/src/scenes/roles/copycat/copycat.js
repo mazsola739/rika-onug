@@ -1,5 +1,5 @@
-import { createAndSendSceneMessage, getAllPlayerTokens } from "../../sceneUtils"
-import { copycatInteraction } from "./copycat.interaction"
+import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
+import { copycatInteraction } from './copycat.interaction'
 
 //TODO if oracle is oracle team
 export const copycat = (gamestate, title) => {
@@ -17,10 +17,16 @@ export const copycat = (gamestate, title) => {
       interaction = copycatInteraction(newGamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(
+      newGamestate,
+      token,
+      title,
+      interaction,
+      narration
+    )
   })
 
-  newGamestate.narration.push({[title]: narration})
+  newGamestate.narration.push({ [title]: narration })
 
   return newGamestate
 }

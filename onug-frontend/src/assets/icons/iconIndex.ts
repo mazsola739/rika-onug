@@ -4,10 +4,4 @@ import ConnectingIcon from './connecting.svg?react'
 import OpenIcon from './open.svg?react'
 import UninstantiatedIcon from './uninstantiated.svg?react'
 
-export {
-  ClosedIcon,
-  ClosingIcon,
-  ConnectingIcon,
-  OpenIcon,
-  UninstantiatedIcon,
-}
+export { ClosedIcon, ClosingIcon, ConnectingIcon, OpenIcon, UninstantiatedIcon }

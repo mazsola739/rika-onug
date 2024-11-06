@@ -1,4 +1,4 @@
-import { Expansion } from "types";
+import { Expansion } from 'types'
 
 export interface FilterButtonProps {
   expansion: Expansion

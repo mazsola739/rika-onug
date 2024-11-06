@@ -1,4 +1,7 @@
-import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import {
+  formatPlayerIdentifier,
+  generateRoleInteraction,
+} from '../../sceneUtils'
 import { getLoversPlayerNumbersByMark } from './lovers.utils'
 
 export const loversInteraction = (gamestate, token, title) => {

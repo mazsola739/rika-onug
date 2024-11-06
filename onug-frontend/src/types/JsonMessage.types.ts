@@ -23,14 +23,31 @@ export type CenterCard = {
   guess_cards?: number[]
 }
 
-export type Expansion = "Werewolf" | "Daybreak" | "Vampire" | "Alien" | "Super Villains" | "Bonus Roles"
+export type Expansion = 'Werewolf' | 'Daybreak' | 'Vampire' | 'Alien' | 'Super Villains' | 'Bonus Roles'
 
-export type CardPosition = 'player_1' | 'player_2' | 'player_3' | 'player_4' | 'player_5' | 'player_6' | 'player_7' | 'player_8' | 'player_9' | 'player_10' | 'player_11' | 'player_12' | 'center_wolf' | 'center_left' | 'center_middle' | 'center_right' | 'center_villain'
+export type CardPosition =
+  | 'player_1'
+  | 'player_2'
+  | 'player_3'
+  | 'player_4'
+  | 'player_5'
+  | 'player_6'
+  | 'player_7'
+  | 'player_8'
+  | 'player_9'
+  | 'player_10'
+  | 'player_11'
+  | 'player_12'
+  | 'center_wolf'
+  | 'center_left'
+  | 'center_middle'
+  | 'center_right'
+  | 'center_villain'
 
 export type GuessToken = {
-  image: string,
-  expansion: string,
-  id: number,
+  image: string
+  expansion: string
+  id: number
 }
 
 export type GuessedCard = {
@@ -53,7 +70,6 @@ export type TablePlayerCard = {
   shield?: boolean
   team?: string
   werewolves?: boolean
-
 }
 
 export type TableCenterCard = {

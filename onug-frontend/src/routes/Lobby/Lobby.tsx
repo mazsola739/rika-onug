@@ -3,7 +3,6 @@ import { StyledLobby } from './Lobby.styles'
 import { LobbyButton } from './LobbyButton'
 import { useLobby } from './useLobby'
 
-
 export const Lobby: React.FC = observer(() => {
   const { lobbyStore, handleJoinRoom } = useLobby()
 

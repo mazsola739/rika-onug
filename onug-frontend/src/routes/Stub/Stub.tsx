@@ -1,6 +1,19 @@
 import { observer } from 'mobx-react-lite'
 import { labels, role_map } from './Stub.constants'
-import { Button, ButtonsWrapper, Container, FormContainer, Grid, InputField, InputsWrapper, Label, PreDisplay, RoleDisplay, StubContainer, StubTitle } from './Stub.styles'
+import {
+  Button,
+  ButtonsWrapper,
+  Container,
+  FormContainer,
+  Grid,
+  InputField,
+  InputsWrapper,
+  Label,
+  PreDisplay,
+  RoleDisplay,
+  StubContainer,
+  StubTitle
+} from './Stub.styles'
 import { useStub } from './useStub'
 
 export const Stub: React.FC = observer(() => {
@@ -16,10 +29,15 @@ export const Stub: React.FC = observer(() => {
             {labels.map((label, index) => (
               <Grid key={index}>
                 <Label htmlFor={label}>{label}</Label>
-                <InputField type="text" inputMode="numeric" id={label} name={label} value={inputValues[index]} onChange={(e) => handleInputChange(index, parseInt(e.target.value) || 0)} />
-                <small style={{ marginLeft: '8px', color: '#888' }}>
-                  {getRoleName(inputValues[index])}
-                </small>
+                <InputField
+                  type="text"
+                  inputMode="numeric"
+                  id={label}
+                  name={label}
+                  value={inputValues[index]}
+                  onChange={e => handleInputChange(index, parseInt(e.target.value) || 0)}
+                />
+                <small style={{ marginLeft: '8px', color: '#888' }}>{getRoleName(inputValues[index])}</small>
               </Grid>
             ))}
           </InputsWrapper>
@@ -41,7 +59,9 @@ export const Stub: React.FC = observer(() => {
             </span>
           ))}
         </RoleDisplay>
-        <PreDisplay><pre>{JSON.stringify(response, null, 2)}</pre></PreDisplay>
+        <PreDisplay>
+          <pre>{JSON.stringify(response, null, 2)}</pre>
+        </PreDisplay>
       </Container>
     </StubContainer>
   )

@@ -16,7 +16,9 @@ export const Room: React.FC = observer(() => {
       <RoomHeader />
       <Nav anchorList={anchorList} />
       <Main>
-        <RoomCardList> {/* TODO just like centercards or centertokens */}
+        <RoomCardList>
+          {' '}
+          {/* TODO just like centercards or centertokens */}
           {orderedTeams.map((teamName, index) => (
             <RoleCardList key={index} team={teamName} cards={roomStore.getSortedCardsByTeam(teamName)} />
           ))}

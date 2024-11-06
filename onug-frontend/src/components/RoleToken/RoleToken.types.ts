@@ -1,7 +1,7 @@
 export interface RoleTokenProps {
-  token: { 
+  token: {
     image: string
-    expansion: string 
+    expansion: string
     id: number
   }
   size?: number

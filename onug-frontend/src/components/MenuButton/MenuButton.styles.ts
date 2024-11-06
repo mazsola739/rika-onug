@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { MenuButtonProps } from "./MenuButton.types";
+import { MenuButtonProps } from './MenuButton.types'
 
 export const StyledMenuButton = styled.button<MenuButtonProps>`
   display: flex;
@@ -9,8 +9,7 @@ export const StyledMenuButton = styled.button<MenuButtonProps>`
   cursor: pointer;
   width: 140px;
   height: 50px;
-  border: ${({ isSelected }) =>
-    isSelected ? '1px solid white' : '1px solid transparent'};
+  border: ${({ isSelected }) => (isSelected ? '1px solid white' : '1px solid transparent')};
   background-color: ${({ bgColor }) => bgColor || 'transparent'};
   background-image: url(${({ bgImg }) => bgImg});
   background-size: 102%;
@@ -23,4 +22,4 @@ export const StyledMenuButton = styled.button<MenuButtonProps>`
   &:hover:not(:disabled) {
     opacity: 1;
   }
-`;
+`

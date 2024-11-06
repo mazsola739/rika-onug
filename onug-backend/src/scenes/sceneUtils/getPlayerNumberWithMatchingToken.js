@@ -1,1 +1,2 @@
-export const getPlayerNumberWithMatchingToken = (players, token) => players[token].player_number
+export const getPlayerNumberWithMatchingToken = (players, token) =>
+  players[token].player_number

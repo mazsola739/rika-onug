@@ -1,29 +1,52 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import {
+  formatPlayerIdentifier,
+  generateRoleInteraction,
+  getNarrationByTitle,
+  getPlayerNumberWithMatchingToken,
+} from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateMarkSelection } from '../../validators'
 
-export const instigatorResponse = (gamestate, token, selected_mark_positions, title) => {
-  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+export const instigatorResponse = (
+  gamestate,
+  token,
+  selected_mark_positions,
+  title
+) => {
+  if (
+    !validateMarkSelection(
+      selected_mark_positions,
+      gamestate.players[token].player_history,
+      title
+    )
+  ) {
     return gamestate
   }
-  
+
   const newGamestate = { ...gamestate }
 
   if (gamestate.players[token].card.player_original_id === 1) {
     const traitorPosition = newGamestate.doppelganger_mark_positions.traitor
-    const selectedPosition = newGamestate.card_positions[selected_mark_positions[0]].mark
+    const selectedPosition =
+      newGamestate.card_positions[selected_mark_positions[0]].mark
 
     newGamestate.doppelganger_mark_positions.traitor = selectedPosition
-    newGamestate.card_positions[selected_mark_positions[0]].mark = traitorPosition
+    newGamestate.card_positions[selected_mark_positions[0]].mark =
+      traitorPosition
   } else {
     const traitorPosition = newGamestate.mark_positions.traitor
-    const selectedPosition = newGamestate.card_positions[selected_mark_positions[0]].mark
+    const selectedPosition =
+      newGamestate.card_positions[selected_mark_positions[0]].mark
 
     newGamestate.mark_positions.traitor = selectedPosition
-    newGamestate.card_positions[selected_mark_positions[0]].mark = traitorPosition
+    newGamestate.card_positions[selected_mark_positions[0]].mark =
+      traitorPosition
   }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(
+    newGamestate.players,
+    token
+  )
 
   if (currentPlayerNumber === selected_mark_positions[0]) {
     newGamestate.players[token].card.player_mark = 'mark_of_traitor'
@@ -38,7 +61,10 @@ export const instigatorResponse = (gamestate, token, selected_mark_positions, ti
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_mark_of_traitor', formatPlayerIdentifier(selected_mark_positions)[0]],
+    private_message: [
+      'interaction_mark_of_traitor',
+      formatPlayerIdentifier(selected_mark_positions)[0],
+    ],
     scene_end: true,
   })
 

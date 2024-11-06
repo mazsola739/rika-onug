@@ -29,7 +29,7 @@ export const leaveGame = async (ws, message) => {
   delete newGamestate.mark_positions
 
   const playerTokens = Object.keys(newGamestate.players)
-  
+
   playerTokens.forEach((token) => {
     newGamestate.players[token] = {
       ...newGamestate.players[token],

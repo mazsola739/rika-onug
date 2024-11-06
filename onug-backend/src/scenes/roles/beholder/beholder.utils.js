@@ -1,4 +1,4 @@
-export const getAnySeerPlayerNumbersByRoleIds = players => {
+export const getAnySeerPlayerNumbersByRoleIds = (players) => {
   const result = []
 
   for (const token in players) {

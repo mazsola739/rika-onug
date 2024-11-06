@@ -1,6 +1,10 @@
 import styled from '@emotion/styled'
 
-export const StyledRoleToken = styled.img<{bgImg: string, isSelected: boolean, size: number}>`
+export const StyledRoleToken = styled.img<{
+  bgImg: string
+  isSelected: boolean
+  size: number
+}>`
   opacity: ${({ isSelected }) => (isSelected ? '1' : '0.8')};
   background-image: ${({ bgImg }) => `url(${bgImg})`};
   transition: 0.75s;
@@ -15,5 +19,3 @@ export const StyledRoleToken = styled.img<{bgImg: string, isSelected: boolean, s
     opacity: 1;
   }
 `
-
-

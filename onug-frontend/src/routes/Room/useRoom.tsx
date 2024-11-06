@@ -21,7 +21,7 @@ export const useRoom = () => {
         type: ARRIVE_ROOM,
         stage: STAGES.ROOM,
         token,
-        room_id,
+        room_id
       })
     }
   }, [sendJsonMessage, firstTime, room_id, token])
@@ -49,27 +49,14 @@ export const useRoom = () => {
   }, [lastJsonMessage, navigate])
 
   const teamArray = useMemo(
-    () => [
-      ...new Set(
-        deck.map((card) =>
-          card.team === TEAM.hero || card.team === TEAM.village
-            ? TEAM.village
-            : card.team
-        )
-      ),
-    ],
+    () => [...new Set(deck.map(card => (card.team === TEAM.hero || card.team === TEAM.village ? TEAM.village : card.team)))],
     [deck]
   )
 
-  const orderedTeams = useMemo(
-    () => roomStore.getOrderedTeams(teamArray),
-    [roomStore, teamArray]
-  )
+  const orderedTeams = useMemo(() => roomStore.getOrderedTeams(teamArray), [roomStore, teamArray])
 
   const anchorList = orderedTeams.map(team =>
-    roomStore
-      .getTeamName(roomStore.getSortedCardsByTeam(team), team)
-      .replace(/\b\w/g, l => l.toUpperCase())
+    roomStore.getTeamName(roomStore.getSortedCardsByTeam(team), team).replace(/\b\w/g, l => l.toUpperCase())
   )
 
   return { orderedTeams, anchorList }

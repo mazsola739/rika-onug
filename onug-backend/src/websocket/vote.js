@@ -1,7 +1,10 @@
 import { ERROR, VOTE } from '../constants'
 import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens } from '../scenes/sceneUtils'
+import {
+  getAllPlayerTokens,
+  getPlayerNumbersWithNonMatchingTokens,
+} from '../scenes/sceneUtils'
 import { validateRoom } from '../validators'
 import { sendMessageToPlayer } from './connections'
 
@@ -14,9 +17,7 @@ export const vote = async (ws, message) => {
 
     if (!roomIdValid) {
       logError(`Room validation failed for room: ${room_id}`)
-      return ws.send(
-        JSON.stringify({ type: ERROR, success: false, errors })
-      )
+      return ws.send(JSON.stringify({ type: ERROR, success: false, errors }))
     }
 
     const { players } = gamestate
@@ -25,13 +26,17 @@ export const vote = async (ws, message) => {
       ...gamestate,
       players: {
         ...players,
-        ...Object.fromEntries(tokens.map(token => [token, { ...players[token], flag: false }]))
-      }
+        ...Object.fromEntries(
+          tokens.map((token) => [token, { ...players[token], flag: false }])
+        ),
+      },
     }
 
     tokens.forEach((token) => {
       const player = players[token]
-      const otherPlayers = getPlayerNumbersWithNonMatchingTokens(players, [token])
+      const otherPlayers = getPlayerNumbersWithNonMatchingTokens(players, [
+        token,
+      ])
 
       const voteMessage = {
         type: VOTE,
@@ -59,7 +64,9 @@ export const vote = async (ws, message) => {
 
     await upsertRoomState(newGamestate)
   } catch (error) {
-    logError(`Error processing vote in room: ${room_id}. Error: ${error.message}`)
+    logError(
+      `Error processing vote in room: ${room_id}. Error: ${error.message}`
+    )
     logError(JSON.stringify(error.stack))
 
     ws.send(

@@ -15,11 +15,11 @@ export const Vote: React.FC = observer(() => {
       {tablePlayerCards && <AroundTableSide cards={left} />}
       {tablePlayerCards && <AroundTableTop cards={middle} />}
       <Main>
-      <VoteCenter>
-        <CenterCards />
-        <RoleTokenList />
-      </VoteCenter>
-      {tablePlayerCard && <PlayerCard card={ownCard} cardSize={130} tokenSize={50}  />}
+        <VoteCenter>
+          <CenterCards />
+          <RoleTokenList />
+        </VoteCenter>
+        {tablePlayerCard && <PlayerCard card={ownCard} cardSize={130} tokenSize={50} />}
       </Main>
       {tablePlayerCards && <AroundTableSide cards={right} />}
       <VoteFooter />

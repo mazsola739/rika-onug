@@ -3,7 +3,7 @@ import { getMasonPlayerNumbersByRoleIds } from './masons.utils'
 
 export const masonsInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
-  
+
   const masons = getMasonPlayerNumbersByRoleIds(newGamestate.players)
 
   newGamestate.players[token].player_history[title] = {

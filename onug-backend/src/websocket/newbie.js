@@ -9,16 +9,19 @@ export const newbie = (ws, message) => {
   if (token && !ws.token && validate(token)) {
     ws.token = token
     ws.send(
-      JSON.stringify({ type: NEWBIE, update: false, message: 'client successfully rejoined' })
+      JSON.stringify({
+        type: NEWBIE,
+        update: false,
+        message: 'client successfully rejoined',
+      })
     )
-    return ws.send(
-      JSON.stringify({ type: REDIRECT, path: '/lobby' })
-    )
-  
-     // TODO maybe? from gamestate, after redirected to lobby, redirect to the right path
+    return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby' }))
+
+    // TODO maybe? from gamestate, after redirected to lobby, redirect to the right path
   }
 
-  if (!token || !ws.token || ws.token !== token) { // should validate token in EVERY OTHER request not here
+  if (!token || !ws.token || ws.token !== token) {
+    // should validate token in EVERY OTHER request not here
     const newToken = uuidv4()
     ws.token = newToken
     logInfo(`newToken: ${newToken}`)

@@ -4,5 +4,5 @@ export const TIME: Record<string, string> = {
   timerscreen_label_1_text: 'TIME',
   timerscreen_label_2_text: 'REMAINING BEFORE VOTE',
   one_minwar_text: '1 minute remaining',
-  thirty_secwar_text: 'Only 30 seconds left',
+  thirty_secwar_text: 'Only 30 seconds left'
 }
