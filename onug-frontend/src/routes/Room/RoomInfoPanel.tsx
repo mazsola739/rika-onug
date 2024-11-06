@@ -30,7 +30,7 @@ const PlayerNames: React.FC = observer(() => {
           players.map(({ player_name }, index) => (
             <Fragment key={index}>
               <Player>
-                <Token tokenName={`${index + 1}`} size={20} />
+                <Token tokenName={`${index + 1}`} size={25} />
                 <PlayerName>{player_name}</PlayerName>
               </Player>
             </Fragment>

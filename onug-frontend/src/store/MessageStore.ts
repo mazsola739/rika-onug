@@ -54,17 +54,12 @@ class MessageStore {
     const playerCardLimit = this.playerCardLimit
     const centerCardLimit = this.centerCardLimit
 
-    const isSelectingPlayerCards = this.isCardSelection
-    const isSelectingCenterCards = !this.isCardSelection
+    if (selectedPlayerCards > 0 && selectedCenterCards > 0) return false
 
-    if (isSelectingPlayerCards) {
-      return selectedPlayerCards < playerCardLimit
-    }
+    if (selectedPlayerCards > 0 && selectedPlayerCards === playerCardLimit) return false
 
-    if (isSelectingCenterCards) {
-      return selectedCenterCards < centerCardLimit
-    }
-
+    if (selectedCenterCards > 0 && selectedCenterCards === centerCardLimit) return false
+  
     return true
   }
 

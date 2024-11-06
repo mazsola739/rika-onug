@@ -13,6 +13,8 @@ import {
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
+
+//TODO fix obligatory and scene end
 export const rascalResponse = (
   gamestate,
   token,
@@ -63,12 +65,14 @@ export const rascalResponse = (
       newGamestate.players[token].player_history[title] = {
         ...newGamestate.players[token].player_history[title],
         swapped_cards: [position1, position2],
+        scene_end: true,
       }
 
       const messageIdentifiers = formatPlayerIdentifier([position1, position2])
 
       interaction = generateRoleInteraction(newGamestate, token, {
         private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+        scene_end: true,
       })
 
       break
@@ -151,6 +155,8 @@ export const rascalResponse = (
             newGamestate.players[token].player_history[title].selected_card,
             selected_card_positions[0],
           ],
+          obligatory: newGamestate.players[token].player_history[title].random === 'witch',
+          scene_end: true,
         }
 
         const messageIdentifiers = formatPlayerIdentifier([
@@ -160,7 +166,10 @@ export const rascalResponse = (
 
         interaction = generateRoleInteraction(newGamestate, token, {
           private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+          obligatory: newGamestate.players[token].player_history[title].random === 'witch',
+          scene_end: true,
         })
+        
       }
       break
 
@@ -195,6 +204,7 @@ export const rascalResponse = (
         ...newGamestate.players[token].player_history[title],
         swapped_cards: [currentPlayerNumber, selectedPosition],
         viewed_cards: [currentPlayerNumber],
+        obligatory: newGamestate.players[token].player_history[title].random === 'robber'
       }
 
       const messageIds = formatPlayerIdentifier([
@@ -214,6 +224,7 @@ export const rascalResponse = (
           newGamestate.players[token].player_history[title].random === 'robber'
             ? showCards
             : undefined,
+            obligatory: newGamestate.players[token].player_history[title].random === 'robber'
       })
 
       break

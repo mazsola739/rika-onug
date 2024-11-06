@@ -15,10 +15,6 @@ export const CardGroup = styled.div`
   flex-direction: column;
 `
 
-export const GroupTitle = styled.div`
-  color: white;
-`
-
 export const Cards = styled.div`
   display: flex;
   flex-direction: row;

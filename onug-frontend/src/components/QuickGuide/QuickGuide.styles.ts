@@ -55,7 +55,7 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
   &:nth-of-type(odd) {
     flex-direction: row;
     width: 378px;
-    border-radius: 200px 100px 100px 200px;
+    border-radius: 200px 50px 50px 200px;
     text-align: left;
     & > img {
       filter: drop-shadow(8px 5px 5px black);
@@ -65,7 +65,7 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
   &:nth-of-type(even) {
     flex-direction: row-reverse;
     width: 378px;
-    border-radius: 100px 200px 200px 100px;
+    border-radius: 50px 200px 200px 50px;
     text-align: right;
     & > img {
       filter: drop-shadow(-8px 5px 5px black);
@@ -78,9 +78,11 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
 
 export const StyledQuickGuideToken = styled.img<StyledQuickGuideTokenProps>`
   background-image: ${({ bgImg }) => `url(${bgImg})`};
+  background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 75px;
+  height: 75px;
 `
 
 export const QuickGuideRule = styled.span`

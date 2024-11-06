@@ -64,7 +64,7 @@ export const ReadyTitle = styled.h3`
   color: yellow;
   padding: 0;
   margin: 0;
-  padding: 10px 0;
+  padding: 0 0 10px 0;
   text-align: center;
 `
 
@@ -96,6 +96,5 @@ export const Narration = styled.div`
 `
 
 export const NarrationImage = styled.img`
-  width: 50px;
-  border: 1px solid white;
+  width: 70px;
 `

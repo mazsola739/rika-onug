@@ -36,7 +36,7 @@ export const StyledInfo = styled.div`
   gap: 5px;
   min-height: 90px;
   border-bottom: 2px solid #969290;
-  padding: 10px 0 5px 0;
+  padding: 5px 0;
   grid-template-columns: 80px 300px;
   grid-template-rows: 20px 60px;
   grid-template-areas:

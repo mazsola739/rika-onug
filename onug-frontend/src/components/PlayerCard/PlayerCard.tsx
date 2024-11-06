@@ -21,8 +21,8 @@ export const PlayerCard: React.FC<PlayerCardProps> = observer(({ card, cardSize 
 
   return (
     <StyledPlayerCard>
-      <GuessTokens width={tokenSize}>
-        {guessTokens && guessTokens.map(token => <RoleToken key={token.id} size={tokenSize} token={token} />)}
+      <GuessTokens width={40}>
+        {guessTokens && guessTokens.map(token => <RoleToken key={token.id} size={40} token={token} />)}
       </GuessTokens>
       <Card {...cardProps} onClick={onCardClick} size={cardSize} />
       {!isCenterCard && (

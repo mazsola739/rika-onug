@@ -19,10 +19,19 @@ class SelectionStore {
 
     const { player: playerCardLimit, center: centerCardLimit } = gamePropStore.selectable_card_limit
 
+    const selectedPlayerCards = playerCardsCount > 0
+    const selectedCenterCards = centerCardsCount > 0
+
+    if (!isSelected && ((isPlayerCard && selectedCenterCards) || (isCenterCard && selectedPlayerCards))) {
+      return
+    }
+
     if (isSelected) {
       this.selectedCards = this.selectedCards.filter(card => card !== position)
-    } else if ((isPlayerCard && playerCardsCount < playerCardLimit) || (isCenterCard && centerCardsCount < centerCardLimit)) {
-      this.selectedCards = [...this.selectedCards, position]
+    } else {
+      if ((isPlayerCard && playerCardsCount < playerCardLimit) || (isCenterCard && centerCardsCount < centerCardLimit)) {
+        this.selectedCards = [...this.selectedCards, position]
+      }
     }
   }
 

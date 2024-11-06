@@ -7,18 +7,18 @@ export const StyledRoleCard = styled.div<StyledRoleCardProps>`
   border: ${({ isSelected }) => (isSelected ? '1px solid yellow' : '1px solid transparent')};
   display: flex;
   flex-direction: column;
-  height: 90px;
+  height: 100px;
   justify-content: flex-start;
   overflow: hidden;
   position: relative;
-  width: 90px;
+  width: 100px;
   transition: 0.75s;
 `
 
 export const RoleImage = styled.img<{ isSelected?: boolean }>`
   opacity: ${({ isSelected }) => (isSelected ? '1' : '0.6')};
   transition: 0.75s;
-  width: 90px;
+  width: 100px;
   z-index: 1;
 
   filter: ${({ isSelected }) => (isSelected ? 'drop-shadow(8px 5px 5px black);' : '')};
