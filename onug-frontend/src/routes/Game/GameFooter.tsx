@@ -5,10 +5,7 @@ import { observer } from 'mobx-react-lite'
 import { gameStatusStore } from 'store'
 
 export const GameFooter: React.FC = observer(() => {
-  const room_id = sessionStorage.getItem('room_id')
-  const token = sessionStorage.getItem('token')
-
-  const { handlePauseGame, handleStopGame } = useClickHandler(room_id, token)
+  const { handlePauseGame, handleStopGame } = useClickHandler()
 
   const buttonText = gameStatusStore.isGamePlayPaused ? BUTTONS.pause_button_alt_label : BUTTONS.pause_button_label
 

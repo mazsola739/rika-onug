@@ -55,10 +55,7 @@ const MessageBoxCards: React.FC<MessageBoxCardsProps> = observer(({ cards }) => 
 })
 
 export const MessageBox: React.FC = observer(() => {
-  const room_id = sessionStorage.getItem('room_id')
-  const token = sessionStorage.getItem('token')
-
-  const { handleCardInteraction, handleFinish, handleSkip } = useClickHandler(room_id, token)
+  const { handleCardInteraction, handleFinish, handleSkip } = useClickHandler()
   const { narration, privateMessage, narrationImage, disabled, isSelectableCards, isIdentification, identifiedCards } = messageStore
   const { obligatory, scene_end, title } = gamePropStore
   const { selectedCards } = selectionStore

@@ -5,10 +5,7 @@ import { observer } from 'mobx-react-lite'
 import { gamePropStore, playersStore, selectionStore } from 'store'
 
 export const VoteFooter: React.FC = observer(() => {
-  const room_id = sessionStorage.getItem('room_id')
-  const token = sessionStorage.getItem('token')
-
-  const { handleReady, handleLeaveGame, handleVoteNow, handleDone } = useClickHandler(room_id, token)
+  const { handleReady, handleLeaveGame, handleVoteNow, handleDone } = useClickHandler()
   const { selectedCards } = selectionStore
 
   const isReady = playersStore.isPlayerReady

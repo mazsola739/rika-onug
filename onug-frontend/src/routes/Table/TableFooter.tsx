@@ -5,10 +5,7 @@ import { observer } from 'mobx-react-lite'
 import { playersStore } from 'store'
 
 export const TableFooter: React.FC = observer(() => {
-  const room_id = sessionStorage.getItem('room_id')
-  const token = sessionStorage.getItem('token')
-
-  const { handleLeaveGame, handleStartGame, handleReady } = useClickHandler(room_id, token)
+  const { handleLeaveGame, handleStartGame, handleReady } = useClickHandler()
 
   const isReady = playersStore.isPlayerReady
 

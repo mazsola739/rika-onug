@@ -10,19 +10,21 @@ import {
   START_GAME,
   START_VOTE,
   STOP_GAME,
-  UPDATE_GUESS,
   UPDATE_ROOM,
   VOTE
 } from 'constant'
 import { useCallback } from 'react'
 import { deckStore, gameStatusStore, riseAndRestStore, roomStore, wsStore } from 'store'
 
-export const useClickHandler = (room_id: string, token: string) => {
+export const useClickHandler = () => {
+  const room_id = sessionStorage.getItem('room_id')
+  const token = sessionStorage.getItem('token')
+
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
 
   const handleJoinRoom = (room_id: string) => {
     sendJsonMessage?.({
-      type: JOIN_ROOM,
+      type: JOIN_ROOM,/*  */
       room_id,
       token
     })

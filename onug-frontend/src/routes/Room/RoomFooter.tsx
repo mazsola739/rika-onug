@@ -5,15 +5,12 @@ import { observer } from 'mobx-react-lite'
 import { deckStore, roomStore } from 'store'
 
 export const RoomFooter: React.FC = observer(() => {
-  const room_id = sessionStorage.getItem('room_id')
-  const token = sessionStorage.getItem('token')
+  const { handleResetGame, handleLeaveRoom, handleJoinTable } = useClickHandler()
 
   const totalPlayers = deckStore.totalPlayers
   const playersInGame = roomStore.roomPlayers?.length || 0
 
   const buttonText = totalPlayers > 0 ? `${BUTTONS.deal_label} FOR ${totalPlayers}` : BUTTONS.deal_label
-
-  const { handleResetGame, handleLeaveRoom, handleJoinTable } = useClickHandler(room_id, token)
 
   //TODO unlock the 3 players
   const isButtonDisabled = /* playersInGame < 3 ||  */ playersInGame !== totalPlayers

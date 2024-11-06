@@ -6,14 +6,14 @@ import { MessagesType, NarrationType } from 'types'
 import { splitCardsToTable } from 'utils'
 
 export const useGame = () => {
+  const room_id = sessionStorage.getItem('room_id')
+  const token = sessionStorage.getItem('token')
+
   const [firstTime, setFirstTime] = useState(true)
   const [transitionCompleted, setTransitionCompleted] = useState(false)
   const navigate = useNavigate()
 
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
-
-  const room_id = sessionStorage.getItem('room_id')
-  const token = sessionStorage.getItem('token')
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
