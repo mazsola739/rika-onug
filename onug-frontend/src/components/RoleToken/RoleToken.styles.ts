@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { RoleTokenProps } from './RoleToken.types'
 
 export const StyledRoleToken = styled.img<{bgImg: string, isSelected: boolean, size: number}>`
   opacity: ${({ isSelected }) => (isSelected ? '1' : '0.8')};

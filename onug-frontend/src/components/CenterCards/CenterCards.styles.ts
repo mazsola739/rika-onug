@@ -6,6 +6,7 @@ export const StyledCenterCards = styled.div`
   flex-direction: row;
   justify-content: center;
   gap: 20px;
+  padding: 10px;
 `
 
 export const CardGroup = styled.div`

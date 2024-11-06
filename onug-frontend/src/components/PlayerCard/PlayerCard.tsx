@@ -1,19 +1,32 @@
-import { Card, Token } from 'components'
+import { Card, RoleToken, Token } from 'components'
 import { observer } from 'mobx-react-lite'
 import { GuessTokens, StyledPlayerCard, Tokens } from './PlayerCard.styles'
 import { PlayerCardProps } from './PlayerCard.types'
-import { usePlayerCardSelection } from './usePlayerCardSelection'
-import { deckStore } from 'store'
+import { usePlayerCard } from './usePlayerCard'
 
 export const PlayerCard: React.FC<PlayerCardProps> = observer(
-  ({ card, cardSize = 90, tokenSize = 35 }) => {
-    const { playerNumberToken, markProps,  isShielded, isArtifacted, isCenterCard, onCardClick, cardProps } = usePlayerCardSelection(card)
-    const { hasMarks, hasSentinel, hasCurator } = deckStore
-    console.log(JSON.stringify(markProps))
+  ({ card, cardSize = 90, tokenSize = 28 }) => {
+    const { 
+      playerNumberToken, 
+      markProps, 
+      isShielded, 
+      isArtifacted, 
+      isCenterCard, 
+      onCardClick, 
+      cardProps,
+      guessTokens, 
+      hasMarks, 
+      hasSentinel, 
+      hasCurator 
+    } = usePlayerCard(card)
 
     return (
       <StyledPlayerCard>
-        <GuessTokens width={tokenSize}>{/* here comes tokens */}</GuessTokens>
+        <GuessTokens width={tokenSize}>
+          {guessTokens && guessTokens.map(token => (
+            <RoleToken key={token.id} size={tokenSize} token={token} />
+          ))}
+        </GuessTokens>
         <Card {...cardProps} onClick={onCardClick} size={cardSize} />
         {!isCenterCard && (
           <Tokens>

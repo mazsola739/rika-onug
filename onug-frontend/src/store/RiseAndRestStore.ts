@@ -60,33 +60,6 @@ class RiseAndRestStore {
     return showCards as Record<CardPosition, number>
   }
 
-  setTablePlayerCards(lastJsonMessage: WsJsonMessage): void {
-    const players = lastJsonMessage.players
-    const showCards = this.getShowCardsMap()
-
-    this.tablePlayerCards = Array.from({ length: deckStore.totalPlayers }, (_, i) => {
-      const position = `player_${i + 1}` as CardPosition
-      const defaultCard = this.createEmptyPlayerCard(position)
-
-      const playerCard = players.find(player => position === player.player_number)
-      if (!playerCard) return defaultCard
-
-      const cardId = showCards[position] || playerCard.player_card_id
-      const card = getCardById(cardId)
-
-      return {
-        ...defaultCard,
-        player_name: playerCard.player_name,
-        card_name: card ? card.card_name : '',
-        mark: playerCard.player_mark || '',
-        role: playerCard.player_role || '',
-        team: playerCard.player_team || '',
-        selected: false,
-        ...this.getCardStatus(position),
-      }
-    })
-  }
-
   setTablePlayerCard(lastJsonMessage: WsJsonMessage): void {
     const player = lastJsonMessage.player
     const cardId = player.player_card_id
@@ -104,15 +77,42 @@ class RiseAndRestStore {
     }
   }
 
+  setTablePlayerCards(lastJsonMessage: WsJsonMessage): void {
+    const players = lastJsonMessage.players || [];
+    const showCards = this.getShowCardsMap();
+  
+    this.tablePlayerCards = Array.from({ length: deckStore.totalPlayers }, (_, i) => {
+      const position = `player_${i + 1}` as CardPosition;
+      const defaultCard = this.createEmptyPlayerCard(position);
+  
+      const playerCard = players.find(player => position === player.player_number);
+      if (!playerCard) return defaultCard;
+  
+      const cardId = showCards[position] || playerCard.player_card_id;
+      const card = getCardById(cardId);
+  
+      return {
+        ...defaultCard,
+        player_name: playerCard.player_name,
+        card_name: card ? card.card_name : '',
+        mark: playerCard.player_mark || '',
+        role: playerCard.player_role || '',
+        team: playerCard.player_team || '',
+        selected: false,
+        ...this.getCardStatus(position),
+      };
+    });
+  }
+  
   setTableCenterCards(lastJsonMessage: WsJsonMessage): void {
-    const incomingCenterCards = lastJsonMessage.center_cards || []
-    const showCards = this.getShowCardsMap()
-    const centerCardsMap = Object.fromEntries(incomingCenterCards.map(card => [card.card_position, card]))
-
+    const incomingCenterCards = lastJsonMessage.center_cards || [];
+    const showCards = this.getShowCardsMap();
+    const centerCardsMap = Object.fromEntries(incomingCenterCards.map(card => [card.card_position, card]));
+  
     this.tableCenterCards = this.createDefaultCenterCards().map(centerCard => {
-      const incomingCard = centerCardsMap[centerCard.position]
-      const cardId = showCards[centerCard.position] || (incomingCard ? incomingCard.card_id : null)
-      const card = cardId ? getCardById(cardId) : null
+      const incomingCard = centerCardsMap[centerCard.position];
+      const cardId = showCards[centerCard.position] || (incomingCard ? incomingCard.card_id : null);
+      const card = cardId ? getCardById(cardId) : null;
 
       return {
         ...centerCard,
@@ -121,10 +121,10 @@ class RiseAndRestStore {
         team: incomingCard ? incomingCard.card_team : '',
         selectable_card: gamePropStore.selectable_cards.includes(centerCard.position),
         selected: false,
-      }
-    })
+      };
+    });
   }
-
+  
   resetCards(): void {
     const resetCardState = this.createEmptyPlayerCard(null)
     this.tablePlayerCard = { ...resetCardState, position: this.tablePlayerCard.position }

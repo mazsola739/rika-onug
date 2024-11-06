@@ -1,17 +1,19 @@
+import { UPDATE_GUESS } from 'constant'
 import * as narration_text from 'constant/narrations'
 import { script } from 'data'
 import { computed, makeAutoObservable } from 'mobx'
-import { CardJson, CardPosition, NarrationType, Player, TokenJson } from 'types'
+import { CardJson, CardPosition, GuessedCard, GuessToken, NarrationType, Player, TokenJson } from 'types'
 import { createDefaultPlayer, getCardById, getMarkByName } from 'utils'
-import { deckStore } from './DeckStore'
 import { playersStore } from './PlayersStore'
 import { wsStore } from './WsStore'
-import { UPDATE_GUESS } from 'constant'
 
 class VoteStore {
   knownPlayer: Player = createDefaultPlayer()
   narrations: Record<string, NarrationType[]>[]
   isGuessing: boolean = false
+  guessedCards: GuessedCard[] = []
+  guessCards: number[] = []
+  //selection
   guessedId: number | null = null
   guessedCardPosition: CardPosition | '' = ''
 
@@ -33,6 +35,14 @@ class VoteStore {
     this.isGuessing = value
   }
 
+  setGuessedCards(guessedCards: GuessedCard[]): void {
+    this.guessedCards = guessedCards
+  }
+
+  setGuessCards(guessCards: number[]): void {
+    this.guessCards = guessCards
+  }
+
   selectGuessId(id: number) {
     this.guessedId = id
     this.checkAndSendGuess()
@@ -46,8 +56,8 @@ class VoteStore {
   checkAndSendGuess() {
     const room_id = sessionStorage.getItem('room_id')
     const token = sessionStorage.getItem('token')
-
-    if (this.guessedId !== null && this.guessedCardPosition !== null) {
+  
+    if (this.guessedId !== null && this.guessedCardPosition !== null && this.guessedCardPosition !== '') {
       wsStore.sendJsonMessage({
         type: UPDATE_GUESS,
         guess: {
@@ -57,21 +67,23 @@ class VoteStore {
         room_id,
         token,
       })
-
+  
       this.guessedId = null
       this.guessedCardPosition = null
     }
   }
 
   get guessTokens(): { image: string; expansion: string, id: number }[] {
-    const cards = deckStore.selectedCards
-    return cards.map(card => ({
+    const cards = this.guessCards
+    const tokens =  cards.map(card => getCardById(card)).map(card => ({
       image: card.card_name,
       expansion: card.expansion,
       id: card.id,
     }))
-  }
 
+    return tokens
+  }
+  
   get knownPlayerCard(): CardJson { return getCardById(this.knownPlayer.player_card_id) }
   get knownPlayerMark(): TokenJson { return getMarkByName(this.knownPlayer.player_mark) }
   get isPlayerReady(): boolean {
@@ -94,6 +106,29 @@ class VoteStore {
     })
 
     return voteNarration
+  }
+
+  getGuessTokensByPosition(position: CardPosition): GuessToken[] {
+    const guessedCard = this.guessedCards.find(card => card.position === position)
+
+    if (!guessedCard) return []
+
+    return guessedCard.guessed_roles.map(id => {
+      const card = getCardById(id)
+      return {
+        image: card.card_name,
+        expansion: card.expansion,
+        id: card.id,
+      }
+    })
+  }
+
+  resetGuesses(): void {
+    this.guessedCards = []
+    this.guessCards = []
+    this.guessedId = null
+    this.guessedCardPosition = ''
+    this.isGuessing = false
   }
 }
 

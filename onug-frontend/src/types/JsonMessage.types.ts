@@ -12,18 +12,31 @@ export type Player = {
   player_name: string
   player_number?: CardPosition
   flag?: boolean
+  guess_cards?: number[]
 }
 
 export type CenterCard = {
-  card_position: CardPosition,
-  card_id: number,
-  card_role: string,
+  card_position: CardPosition
+  card_id: number
+  card_role: string
   card_team: string
+  guess_cards?: number[]
 }
 
 export type Expansion = "Werewolf" | "Daybreak" | "Vampire" | "Alien" | "Super Villains" | "Bonus Roles"
 
 export type CardPosition = 'player_1' | 'player_2' | 'player_3' | 'player_4' | 'player_5' | 'player_6' | 'player_7' | 'player_8' | 'player_9' | 'player_10' | 'player_11' | 'player_12' | 'center_wolf' | 'center_left' | 'center_middle' | 'center_right' | 'center_villain'
+
+export type GuessToken = {
+  image: string,
+  expansion: string,
+  id: number,
+}
+
+export type GuessedCard = {
+  position: CardPosition
+  guessed_roles: number[]
+}
 
 export type TablePlayerCard = {
   artifact?: boolean
@@ -44,7 +57,7 @@ export type TablePlayerCard = {
 }
 
 export type TableCenterCard = {
-  card_name?: string  
+  card_name?: string
   position?: CardPosition
   role?: string
   selectable_card?: boolean
@@ -92,6 +105,8 @@ export type WsJsonMessage = {
   center_cards?: CenterCard[]
   day_mode?: boolean
   errors?: string[]
+  guess_cards?: number[]
+  guessed_cards?: GuessedCard[]
   interaction?: InteractionType
   message?: string
   narration?: NarrationType[]

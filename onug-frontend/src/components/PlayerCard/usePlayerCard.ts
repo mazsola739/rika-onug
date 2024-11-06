@@ -1,8 +1,8 @@
-import { selectionStore, voteStore } from 'store'
+import { selectionStore, voteStore, deckStore } from 'store'
 import { CardPosition, TablePlayerCard } from 'types'
 import { getCardImageSrc, getPlayerNumberToken } from './PlayerCards.utils'
 
-export const usePlayerCardSelection = (card: TablePlayerCard) => {
+export const usePlayerCard = (card: TablePlayerCard) => {
   const { selectedCards, selectedMarks } = selectionStore
 
   const position = card?.position || ''
@@ -32,6 +32,12 @@ export const usePlayerCardSelection = (card: TablePlayerCard) => {
     if (isSelectableMark) selectionStore.toggleMarkSelection(position)
   }
 
+  // Additional moved properties
+  const guessTokens = voteStore.isGuessing ? voteStore.getGuessTokensByPosition(card.position) : null
+  const hasMarks = deckStore.hasMarks
+  const hasSentinel = deckStore.hasSentinel
+  const hasCurator = deckStore.hasCurator
+
   const cardProps = {
     image,
     isSelectable: isSelectableCard,
@@ -59,5 +65,9 @@ export const usePlayerCardSelection = (card: TablePlayerCard) => {
     isWerewolf,
     isDreamwolf,
     onCardClick,
+    guessTokens,
+    hasMarks,
+    hasSentinel,
+    hasCurator
   }
 }

@@ -1,4 +1,13 @@
-import { ARRIVE_VOTE, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
+import {
+  ARRIVE_VOTE,
+  HYDRATE_GUESS,
+  HYDRATE_READY,
+  HYDRATE_VOTE,
+  REDIRECT,
+  RESULT,
+  STAGES,
+  VOTE,
+} from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
@@ -8,7 +17,8 @@ export const useVote = () => {
   const [firstTime, setFirstTime] = useState(true)
   const navigate = useNavigate()
 
-  const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
+  const { sendJsonMessage, lastJsonMessage } =
+    wsStore.getWsCommunicationsBridge()
 
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')
@@ -31,18 +41,21 @@ export const useVote = () => {
       voteStore.setNarrations(lastJsonMessage.narrations)
       playersStore.setPlayers(lastJsonMessage.players)
       voteStore.setIsGuessing(true)
+      voteStore.setGuessCards(lastJsonMessage.guess_cards)
     }
 
     if (lastJsonMessage?.type === HYDRATE_GUESS && lastJsonMessage?.success) {
-      
+      voteStore.setIsGuessing(true)
+      voteStore.setGuessedCards(lastJsonMessage.guessed_cards)
+      voteStore.setGuessCards(lastJsonMessage.guess_cards)
     }
 
     if (lastJsonMessage?.type === VOTE) {
       voteStore.setKnownPlayer(lastJsonMessage.player)
       voteStore.setNarrations(lastJsonMessage.narrations)
       playersStore.setPlayers(lastJsonMessage.players)
+      voteStore.resetGuesses()
       riseAndRestStore.openYourEyes(lastJsonMessage)
-      voteStore.setIsGuessing(false)
     }
 
     if (lastJsonMessage?.type === RESULT) {
@@ -58,8 +71,7 @@ export const useVote = () => {
       playersStore.setPlayers(lastJsonMessage.players)
     }
   }, [lastJsonMessage, navigate])
-  
-  
+
   const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 
   const sides =

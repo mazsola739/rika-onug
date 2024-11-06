@@ -15,6 +15,8 @@ export const sceneHandler = async (gamestate) => {
     mark_shifting: false,
     shield: false,
     artifact: false,
+    view_player_card: false,
+    view_center_card: false,
   }
 
   const canAddScene = (scene) => {
@@ -27,7 +29,7 @@ export const sceneHandler = async (gamestate) => {
       view_player_card,
       view_center_card,
     } = scene
-  
+
     const conflicts = [
       player_card_shifting && flagsState.player_card_shifting,
       center_card_shifting && flagsState.center_card_shifting,
@@ -39,11 +41,14 @@ export const sceneHandler = async (gamestate) => {
       (view_player_card && flagsState.player_card_shifting) || 
       (player_card_shifting && flagsState.view_player_card)
     ]
-  
-    if (conflicts.some(Boolean)) {
+
+    const noFlagsSet = Object.values(flagsState).every(val => !val)
+    const onlyViewingFlagsSet = (view_player_card || view_center_card) && ![player_card_shifting, center_card_shifting, mark_shifting, shield, artifact].some(Boolean)
+
+    if (conflicts.some(Boolean) || (!noFlagsSet && !onlyViewingFlagsSet)) {
       return false
     }
-  
+
     if (view_player_card) flagsState.view_player_card = true
     if (view_center_card) flagsState.view_center_card = true
     if (player_card_shifting) flagsState.player_card_shifting = true
@@ -51,10 +56,9 @@ export const sceneHandler = async (gamestate) => {
     if (mark_shifting) flagsState.mark_shifting = true
     if (shield) flagsState.shield = true
     if (artifact) flagsState.artifact = true
-  
+
     return true
   }
-  
 
   for (const scene of newGamestate.scripts) {
     logTrace(`Checking scene: ${scene.scene_title}`)
@@ -71,6 +75,8 @@ export const sceneHandler = async (gamestate) => {
       flagsState.mark_shifting ||= scene.mark_shifting
       flagsState.shield ||= scene.shield
       flagsState.artifact ||= scene.artifact
+      flagsState.view_player_card ||= scene.view_player_card
+      flagsState.view_center_card ||= scene.view_center_card
 
       if (Object.values(flagsState).some(Boolean)) {
         break 
@@ -100,7 +106,7 @@ export const sceneHandler = async (gamestate) => {
   if (gameCanEnd) {
     logTrace(`All scripts processed. Broadcasting END_GAME message.`)
 
-        //TODO uncomment delay
+    //TODO uncomment delay
     /* await randomDelay() */
     
     broadcast(newGamestate.room_id, {
