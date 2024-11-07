@@ -1,27 +1,10 @@
-import {
-  formatPlayerIdentifier,
-  generateRoleInteraction,
-  getCardIdsByPositions,
-  getNarrationByTitle,
-  getPlayerNumberWithMatchingToken,
-} from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
 //TODO uniqInformations
-export const oracleAnswerResponse = (
-  gamestate,
-  token,
-  selected_card_positions,
-  title
-) => {
-  if (
-    !validateCardSelection(
-      selected_card_positions,
-      gamestate.players[token].player_history,
-      title
-    )
-  ) {
+export const oracleAnswerResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 
@@ -32,51 +15,39 @@ export const oracleAnswerResponse = (
   const oracleAftermath = newGamestate.oracle.aftermath
 
   if (oracleQuestion === 'oracle_centerexchange_text') {
-    const currentPlayerNumber = getPlayerNumberWithMatchingToken(
-      newGamestate.players,
-      token
-    )
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
     const currentPlayerCard = {
-      ...newGamestate.card_positions[currentPlayerNumber].card,
+      ...newGamestate.card_positions[currentPlayerNumber].card
     }
     const selectedCard = {
-      ...newGamestate.card_positions[selected_card_positions[0]].card,
+      ...newGamestate.card_positions[selected_card_positions[0]].card
     }
     newGamestate.card_positions[currentPlayerNumber].card = selectedCard
-    newGamestate.card_positions[selected_card_positions[0]].card =
-      currentPlayerCard
+    newGamestate.card_positions[selected_card_positions[0]].card = currentPlayerCard
 
     newGamestate.players[token].card.player_card_id = 87
     newGamestate.players[token].card_or_mark_action = true
 
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
-      swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
+      swapped_cards: [currentPlayerNumber, selected_card_positions[0]]
     }
 
-    const messageIdentifiers = formatPlayerIdentifier([
-      selected_card_positions[0],
-      currentPlayerNumber,
-    ])
+    const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])
 
     interaction = generateRoleInteraction(newGamestate, token, {
-      private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+      private_message: ['interaction_swapped_cards', ...messageIdentifiers]
     })
   } else if (oracleQuestion === 'oracle_viewcenter_text') {
-    const limit = +oracleAftermath
-      .replace('oracle_view_yes', '')
-      .replace('_text', '')
+    const limit = +oracleAftermath.replace('oracle_view_yes', '').replace('_text', '')
     const selectedCardPositions = selected_card_positions.slice(0, limit)
-    const selectedCards = getCardIdsByPositions(
-      newGamestate.card_positions,
-      selectedCardPositions
-    )
+    const selectedCards = getCardIdsByPositions(newGamestate.card_positions, selectedCardPositions)
 
     newGamestate.players[token].card_or_mark_action = true
 
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
-      viewed_cards: selectedCards,
+      viewed_cards: selectedCards
     }
 
     const identifiers = formatPlayerIdentifier(selectedCardPositions)
@@ -84,7 +55,7 @@ export const oracleAnswerResponse = (
 
     interaction = generateRoleInteraction(newGamestate, token, {
       private_message: message,
-      showCards: selectedCards,
+      showCards: selectedCards
     })
   }
 

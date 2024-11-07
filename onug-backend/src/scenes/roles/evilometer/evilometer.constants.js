@@ -1,13 +1,7 @@
-import {
-  getNeighborPlayerNumbersByToken,
-  getVillainPlayerNumbersByRoleIds,
-} from '../../sceneUtils'
+import { getNeighborPlayerNumbersByToken, getVillainPlayerNumbersByRoleIds } from '../../sceneUtils'
 
 export const superVillainDetected = (players, evilometerToken) => {
-  const evilometerNeighbors = getNeighborPlayerNumbersByToken(
-    players,
-    evilometerToken
-  )
+  const evilometerNeighbors = getNeighborPlayerNumbersByToken(players, evilometerToken)
   const superVillains = getVillainPlayerNumbersByRoleIds(players)
 
   for (let villain of superVillains) {

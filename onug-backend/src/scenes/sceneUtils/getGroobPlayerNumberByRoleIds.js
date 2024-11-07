@@ -1,4 +1,4 @@
-export const getGroobPlayerNumberByRoleIds = (players) => {
+export const getGroobPlayerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {

@@ -1,17 +1,10 @@
 import { logTrace } from '../../log'
 
 //TODO actual scene (timestamp)
-export const validateAnswerSelection = (
-  selected_answer,
-  player_history,
-  title
-) => {
+export const validateAnswerSelection = (selected_answer, player_history, title) => {
   logTrace(`validateAnswerSelection called when actual scene is: ${title}`)
 
-  if (
-    !selected_answer ||
-    !player_history[title].answer_options.includes(selected_answer)
-  ) {
+  if (!selected_answer || !player_history[title].answer_options.includes(selected_answer)) {
     return false
   }
 

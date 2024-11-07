@@ -1,8 +1,4 @@
-import {
-  createAndSendSceneMessage,
-  getAllPlayerTokens,
-  getRandomItemFromArray,
-} from '../../sceneUtils'
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { oracleResponses } from './oracle.constants'
 import { oracleAnswerAftermath } from './oracleanswer.aftermath'
 
@@ -62,16 +58,14 @@ export const oracleAnswer = (gamestate, title) => {
     default:
       if (oracleAnswer === 'yes') {
         aftermath = true
-        narration = [
-          getRandomItemFromArray(oracleResponses[oracleQuestion].yes),
-        ]
+        narration = [getRandomItemFromArray(oracleResponses[oracleQuestion].yes)]
       } else {
         narration = [getRandomItemFromArray(oracleResponses[oracleQuestion].no)]
       }
       break
   }
 
-  tokens.forEach((token) => {
+  tokens.forEach(token => {
     let interaction = {}
 
     const card = newGamestate.players[token].card
@@ -82,13 +76,7 @@ export const oracleAnswer = (gamestate, title) => {
       interaction = oracleAnswerAftermath(newGamestate, token, title)
     }
 
-    createAndSendSceneMessage(
-      newGamestate,
-      token,
-      title,
-      interaction,
-      narration
-    )
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
   return newGamestate

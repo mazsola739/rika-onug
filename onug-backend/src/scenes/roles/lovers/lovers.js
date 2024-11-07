@@ -6,7 +6,7 @@ export const lovers = (gamestate, title) => {
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['lovers_kickoff_text']
 
-  tokens.forEach((token) => {
+  tokens.forEach(token => {
     let interaction = {}
 
     const player = newGamestate.players[token]
@@ -16,13 +16,7 @@ export const lovers = (gamestate, title) => {
       interaction = loversInteraction(newGamestate, token, title)
     }
 
-    createAndSendSceneMessage(
-      newGamestate,
-      token,
-      title,
-      interaction,
-      narration
-    )
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
   newGamestate.narration.push({ [title]: narration })

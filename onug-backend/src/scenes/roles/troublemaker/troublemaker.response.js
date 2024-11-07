@@ -1,24 +1,9 @@
-import {
-  formatPlayerIdentifier,
-  generateRoleInteraction,
-  getNarrationByTitle,
-} from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
-export const troublemakerResponse = (
-  gamestate,
-  token,
-  selected_card_positions,
-  title
-) => {
-  if (
-    !validateCardSelection(
-      selected_card_positions,
-      gamestate.players[token].player_history,
-      title
-    )
-  ) {
+export const troublemakerResponse = (gamestate, token, selected_card_positions, title) => {
+  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 
@@ -36,14 +21,14 @@ export const troublemakerResponse = (
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     swapped_cards: [position1, position2],
-    scene_end: true,
+    scene_end: true
   }
 
   const messageIdentifiers = formatPlayerIdentifier([position1, position2])
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
-    scene_end: true,
+    scene_end: true
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

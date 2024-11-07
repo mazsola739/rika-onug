@@ -1,4 +1,4 @@
-export const getTannerPlayerNumbersByRoleIds = (players) => {
+export const getTannerPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {

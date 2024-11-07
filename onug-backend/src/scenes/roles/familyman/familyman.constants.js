@@ -8,5 +8,5 @@ export const randomFamilyman = [
   'familyman_3pright_text',
   'familyman_4pleft_text',
   'familyman_4pright_text',
-  'familyman_2eachside_text',
+  'familyman_2eachside_text'
 ]

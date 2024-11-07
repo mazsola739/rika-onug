@@ -19,7 +19,7 @@ import {
   STOP_GAME,
   UPDATE_GUESS,
   UPDATE_ROOM,
-  VOTE,
+  VOTE
 } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { dealCards } from './dealCards'
@@ -43,7 +43,7 @@ import { vote } from './vote'
 import { result } from './result'
 import { hydrateGuess } from './hydrateGuess'
 
-export const websocketServer = (port) => {
+export const websocketServer = port => {
   try {
     const wss = new WebSocket.WebSocketServer({ port })
     wss.on('connection', function connection(ws) {
@@ -54,9 +54,7 @@ export const websocketServer = (port) => {
         logError('Some Error occurred')
       }
       ws.on('message', async (rawMessage, client, client2) => {
-        logTrace(
-          `Received message ${rawMessage} from user ${client} ${client2}`
-        )
+        logTrace(`Received message ${rawMessage} from user ${client} ${client2}`)
         const message = JSON.parse(rawMessage)
         logTrace(`msg received: ${rawMessage}`)
 

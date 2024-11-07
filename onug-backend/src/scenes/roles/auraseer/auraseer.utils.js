@@ -1,4 +1,4 @@
-export const getPlayerNumbersWithCardOrMarkActionTrue = (players) => {
+export const getPlayerNumbersWithCardOrMarkActionTrue = players => {
   const result = []
 
   for (const token in players) {

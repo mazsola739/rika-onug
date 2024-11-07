@@ -1,10 +1,4 @@
-export const randomRascalInstructions = [
-  'rascal_idiot_text',
-  'rascal_troublemaker_text',
-  'rascal_witch_text',
-  'rascal_drunk_text',
-  'rascal_robber_text',
-]
+export const randomRascalInstructions = ['rascal_idiot_text', 'rascal_troublemaker_text', 'rascal_witch_text', 'rascal_drunk_text', 'rascal_robber_text']
 
 export const rascalAnyOneKeys = [
   'identifier_higher_text',
@@ -15,7 +9,7 @@ export const rascalAnyOneKeys = [
   'identifier_oneneighbor_text',
   'identifier_center_text',
   'identifier_leftneighbor_text',
-  'identifier_rightneighbor_text',
+  'identifier_rightneighbor_text'
 ]
 
 export const rascalAnyTwoKeys = [
@@ -26,5 +20,5 @@ export const rascalAnyTwoKeys = [
   'identifier_any2lower_text',
   'identifier_2leftneighbors_text',
   'identifier_2rightneighbors_text',
-  'identifier_bothneighbors_text',
+  'identifier_bothneighbors_text'
 ]

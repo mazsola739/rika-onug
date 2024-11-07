@@ -1,13 +1,7 @@
 import { DEAL, REDIRECT, STAGES } from '../constants'
 import { logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import {
-  createCenterPositionCard,
-  createPlayerCard,
-  createPlayerPositionCard,
-  dealCardIds,
-  hasMark,
-} from '../utils/deal.utils'
+import { createCenterPositionCard, createPlayerCard, createPlayerPositionCard, dealCardIds, hasMark } from '../utils/deal.utils'
 import { determineTotalPlayers } from '../utils/player.utils'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
@@ -18,24 +12,13 @@ export const dealCards = async (ws, message) => {
   logTrace(`Dealing cards for players in room: ${room_id}`)
 
   const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
-  if (!roomIdValid)
-    return ws.send(JSON.stringify({ type: DEAL, success: false, errors }))
+  if (!roomIdValid) return ws.send(JSON.stringify({ type: DEAL, success: false, errors }))
 
   const selectedCards = [...gamestate.selected_cards]
 
-  const {
-    playerCards,
-    leftCard,
-    middleCard,
-    rightCard,
-    newWolfCard,
-    newVillainCard,
-  } = dealCardIds(selectedCards)
+  const { playerCards, leftCard, middleCard, rightCard, newWolfCard, newVillainCard } = dealCardIds(selectedCards)
 
-  const totalPlayers = determineTotalPlayers(
-    selectedCards.length,
-    selectedCards
-  )
+  const totalPlayers = determineTotalPlayers(selectedCards.length, selectedCards)
 
   const newGamestate = {
     ...gamestate,
@@ -48,13 +31,10 @@ export const dealCards = async (ws, message) => {
       center_wolf: createCenterPositionCard(newWolfCard),
       center_villain: createCenterPositionCard(newVillainCard),
       ...playerCards.reduce((positions, playerCard, index) => {
-        positions[`player_${index + 1}`] = createPlayerPositionCard(
-          playerCard,
-          selectedCards
-        )
+        positions[`player_${index + 1}`] = createPlayerPositionCard(playerCard, selectedCards)
         return positions
-      }, {}),
-    },
+      }, {})
+    }
   }
 
   const clonedSelectedCards = [...selectedCards]
@@ -72,7 +52,7 @@ export const dealCards = async (ws, message) => {
       traitor: 'mark_of_traitor',
       clarity_1: 'mark_of_clarity',
       clarity_2: 'mark_of_clarity',
-      assassin: 'mark_of_assassin',
+      assassin: 'mark_of_assassin'
     }
     if (hasDoppelganger) {
       newGamestate.doppelganger_mark_positions = {
@@ -84,7 +64,7 @@ export const dealCards = async (ws, message) => {
         traitor: 'mark_of_traitor',
         clarity_1: 'mark_of_clarity',
         clarity_2: 'mark_of_clarity',
-        assassin: 'mark_of_assassin',
+        assassin: 'mark_of_assassin'
       }
     }
   }
@@ -101,7 +81,7 @@ export const dealCards = async (ws, message) => {
       card: createPlayerCard(playerCards[index], selectedCards),
       card_or_mark_action: false,
       action_finished: true,
-      player_history: {},
+      player_history: {}
     }
     if (hasShield) {
       newGamestate.players[token].shield = false

@@ -4,7 +4,7 @@ import { readGamestate, upsertRoomState } from '../repository'
 import { getTableBoard } from '../utils'
 import { broadcast } from './connections'
 
-export const ready = async (message) => {
+export const ready = async message => {
   try {
     logDebug(`ready/not ready requested with ${JSON.stringify(message)}`)
 

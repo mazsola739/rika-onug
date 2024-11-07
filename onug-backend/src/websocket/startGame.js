@@ -5,7 +5,7 @@ import { startScene } from '../scenes'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
 
-const initializeGameState = (gamestate) => {
+const initializeGameState = gamestate => {
   const startTime = Date.now()
   return {
     ...gamestate,
@@ -16,19 +16,18 @@ const initializeGameState = (gamestate) => {
     game_stopped: false,
     game_finished: false,
     script_locked: false,
-    narration: [],
+    narration: []
   }
 }
 
-const areAllPlayersReady = (players) =>
-  Object.values(players).every((player) => player.flag)
+const areAllPlayersReady = players => Object.values(players).every(player => player.flag)
 
 const broadcastError = (room_id, message) => {
   broadcast(room_id, { type: 'ERROR', message })
 }
 
-const resetPlayerReadiness = (players) => {
-  Object.keys(players).forEach((playerToken) => {
+const resetPlayerReadiness = players => {
+  Object.keys(players).forEach(playerToken => {
     players[playerToken].flag = false
   })
 }
@@ -49,24 +48,15 @@ export const startGame = async (ws, message) => {
     const { players } = newGamestate
 
     if (!areAllPlayersReady(players)) {
-      logError(
-        `Not all players are ready. Current readiness: ${JSON.stringify(
-          players
-        )}`
-      )
-      return broadcastError(
-        room_id,
-        'All players must be ready to start the game.'
-      )
+      logError(`Not all players are ready. Current readiness: ${JSON.stringify(players)}`)
+      return broadcastError(room_id, 'All players must be ready to start the game.')
     }
     newGamestate = startScene(newGamestate)
 
     resetPlayerReadiness(players)
 
     await upsertRoomState(newGamestate)
-    logTrace(
-      `Game started successfully in room [${room_id}] by player [${token}]`
-    )
+    logTrace(`Game started successfully in room [${room_id}] by player [${token}]`)
 
     return broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` })
   } catch (error) {
@@ -75,7 +65,7 @@ export const startGame = async (ws, message) => {
     ws.send(
       JSON.stringify({
         type: 'ERROR',
-        message: 'Game start failed. Please try again.',
+        message: 'Game start failed. Please try again.'
       })
     )
   }

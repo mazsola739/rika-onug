@@ -7,30 +7,18 @@ export const vampiresVote = (gamestate, title) => {
   const narration = ['vampires_vote_result_text']
   const tokens = getAllPlayerTokens(newGamestate.players)
 
-  tokens.forEach((token) => {
+  tokens.forEach(token => {
     let interaction = {}
 
     const card = newGamestate.players[token].card
 
-    if (
-      ALL_VAMPIRE.some(
-        (id) =>
-          card.player_role_id === id &&
-          [id, ...ALL_COPY_PLAYER].includes(card.player_original_id)
-      )
-    ) {
+    if (ALL_VAMPIRE.some(id => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))) {
       newGamestate.players[token].action_finished = false
       interaction = vampiresVoteResult(newGamestate, token, title)
     }
 
     newGamestate.players[token].player_history[title].scene_title = title
-    createAndSendSceneMessage(
-      newGamestate,
-      token,
-      title,
-      interaction,
-      narration
-    )
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
   newGamestate.narration.push({ [title]: narration })

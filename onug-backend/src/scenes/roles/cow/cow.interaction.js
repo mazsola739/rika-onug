@@ -1,7 +1,4 @@
-import {
-  generateRoleInteraction,
-  getPlayerNeighborsByToken,
-} from '../../sceneUtils'
+import { generateRoleInteraction, getPlayerNeighborsByToken } from '../../sceneUtils'
 import { alienAbducted } from './cow.utils'
 
 export const cowInteraction = (gamestate, token, title) => {
@@ -13,16 +10,12 @@ export const cowInteraction = (gamestate, token, title) => {
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     alien_neighbor: neighborIsAlien ? neighbors : [],
-    scene_end: true,
+    scene_end: true
   }
 
   return generateRoleInteraction(newGamestate, token, {
-    private_message: [
-      neighborIsAlien
-        ? 'interaction_got_tapped_by_alien'
-        : 'interaction_no_tap',
-    ],
+    private_message: [neighborIsAlien ? 'interaction_got_tapped_by_alien' : 'interaction_no_tap'],
     uniqueInformations: { alien_neighbor: neighborIsAlien ? neighbors : [] },
-    scene_end: true,
+    scene_end: true
   })
 }

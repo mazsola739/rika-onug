@@ -1,1 +1,1 @@
-export const getAllPlayerTokens = (players) => Object.keys(players)
+export const getAllPlayerTokens = players => Object.keys(players)

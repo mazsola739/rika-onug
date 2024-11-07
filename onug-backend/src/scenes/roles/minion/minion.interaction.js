@@ -1,14 +1,8 @@
-import {
-  formatPlayerIdentifier,
-  generateRoleInteraction,
-  getWerewolfAndDreamwolfPlayerNumbersByRoleIds,
-} from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../sceneUtils'
 
 export const minionInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
-  const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(
-    newGamestate.players
-  )
+  const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(newGamestate.players)
 
   if (werewolves.length === 0) {
     newGamestate.players[token].card.player_team = 'minion'
@@ -17,7 +11,7 @@ export const minionInteraction = (gamestate, token, title) => {
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     scene_end: true,
-    werewolves,
+    werewolves
   }
 
   const messageIdentifiers = formatPlayerIdentifier(werewolves)
@@ -25,6 +19,6 @@ export const minionInteraction = (gamestate, token, title) => {
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_werewolves', ...messageIdentifiers],
     scene_end: true,
-    uniqueInformations: { werewolves, scene_end: true },
+    uniqueInformations: { werewolves, scene_end: true }
   })
 }

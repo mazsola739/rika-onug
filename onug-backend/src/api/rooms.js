@@ -6,12 +6,12 @@ export const rooms = (req, res) => {
     logTrace('Rooms endpoint called')
     return res.send({
       message: 'Successfully fetched',
-      data: roomsData,
+      data: roomsData
     })
   } catch (error) {
     logErrorWithStack(error)
     return res.send({
-      message: 'Failed to fetch rooms',
+      message: 'Failed to fetch rooms'
     })
   }
 }

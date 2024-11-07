@@ -9,9 +9,7 @@ export const hydrateGuess = async (ws, message) => {
 
   const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
   if (!roomIdValid) {
-    return ws.send(
-      JSON.stringify({ type: HYDRATE_GUESS, success: false, errors })
-    )
+    return ws.send(JSON.stringify({ type: HYDRATE_GUESS, success: false, errors }))
   }
 
   const newGamestate = { ...gamestate }
@@ -19,16 +17,10 @@ export const hydrateGuess = async (ws, message) => {
   if (!newGamestate.guess_cards) {
     newGamestate.guess_cards = [...new Set(newGamestate.selected_cards)]
   } else {
-    newGamestate.guess_cards = [
-      ...new Set(
-        newGamestate.guess_cards.filter((id) =>
-          newGamestate.selected_cards.includes(id)
-        )
-      ),
-    ]
+    newGamestate.guess_cards = [...new Set(newGamestate.guess_cards.filter(id => newGamestate.selected_cards.includes(id)))]
   }
 
-  Object.keys(newGamestate.card_positions).forEach((key) => {
+  Object.keys(newGamestate.card_positions).forEach(key => {
     if (!newGamestate.card_positions[key].guessed_roles) {
       newGamestate.card_positions[key].guessed_roles = []
     }
@@ -47,19 +39,15 @@ export const hydrateGuess = async (ws, message) => {
         }
       } else {
         target.guessed_roles.push(id)
-        newGamestate.guess_cards = newGamestate.guess_cards.filter(
-          (token) => token !== id
-        )
+        newGamestate.guess_cards = newGamestate.guess_cards.filter(token => token !== id)
       }
     }
   }
 
-  const guessed_cards = Object.keys(newGamestate.card_positions).map(
-    (position) => ({
-      position,
-      guessed_roles: newGamestate.card_positions[position].guessed_roles,
-    })
-  )
+  const guessed_cards = Object.keys(newGamestate.card_positions).map(position => ({
+    position,
+    guessed_roles: newGamestate.card_positions[position].guessed_roles
+  }))
 
   await upsertRoomState(newGamestate)
 
@@ -67,6 +55,6 @@ export const hydrateGuess = async (ws, message) => {
     type: HYDRATE_GUESS,
     success: true,
     guess_cards: newGamestate.guess_cards,
-    guessed_cards,
+    guessed_cards
   })
 }

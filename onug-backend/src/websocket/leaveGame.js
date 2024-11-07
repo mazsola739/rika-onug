@@ -15,14 +15,14 @@ export const leaveGame = async (ws, message) => {
       JSON.stringify({
         type: HYDRATE_TABLE,
         success: false,
-        errors: ['Player not found at the table.'],
+        errors: ['Player not found at the table.']
       })
     )
   }
 
   const newGamestate = {
     ...gamestate,
-    stage: STAGES.ROOM,
+    stage: STAGES.ROOM
   }
 
   delete newGamestate.card_positions
@@ -30,9 +30,9 @@ export const leaveGame = async (ws, message) => {
 
   const playerTokens = Object.keys(newGamestate.players)
 
-  playerTokens.forEach((token) => {
+  playerTokens.forEach(token => {
     newGamestate.players[token] = {
-      ...newGamestate.players[token],
+      ...newGamestate.players[token]
     }
     delete newGamestate.players[token].player_start_card_id
     delete newGamestate.players[token].card

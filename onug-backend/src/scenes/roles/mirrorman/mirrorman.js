@@ -6,7 +6,7 @@ export const mirrorman = (gamestate, title) => {
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['mirrorman_kickoff_text']
 
-  tokens.forEach((token) => {
+  tokens.forEach(token => {
     let interaction = {}
 
     const card = newGamestate.players[token].card
@@ -16,13 +16,7 @@ export const mirrorman = (gamestate, title) => {
       interaction = copycatInteraction(newGamestate, token, title)
     }
 
-    createAndSendSceneMessage(
-      newGamestate,
-      token,
-      title,
-      interaction,
-      narration
-    )
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
   newGamestate.narration.push({ [title]: narration })

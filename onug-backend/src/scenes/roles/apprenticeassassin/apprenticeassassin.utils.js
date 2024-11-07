@@ -1,4 +1,4 @@
-export const getAssassinPlayerNumbersByRoleIds = (players) => {
+export const getAssassinPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {

@@ -16,7 +16,7 @@ export const ROOM_NAMES = [
   'staff_quarters',
   'study',
   'venus_grotto',
-  'workshop',
+  'workshop'
 ]
 
 export const STAGES = {
@@ -24,13 +24,7 @@ export const STAGES = {
   ROOM: 'ROOM',
   TABLE: 'TABLE',
   GAME: 'GAME',
-  VOTING: 'VOTING',
+  VOTING: 'VOTING'
 }
 
-export const CENTER_CARD_POSITIONS = [
-  'center_left',
-  'center_middle',
-  'center_right',
-  'center_wolf',
-  'center_villain',
-]
+export const CENTER_CARD_POSITIONS = ['center_left', 'center_middle', 'center_right', 'center_wolf', 'center_villain']

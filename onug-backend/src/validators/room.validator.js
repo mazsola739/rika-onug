@@ -2,7 +2,7 @@ import { ROOM_NAMES } from '../constants'
 import { logWarn } from '../log'
 import { readGamestate } from '../repository'
 
-export const validateRoom = async (roomId) => {
+export const validateRoom = async roomId => {
   const errors = []
 
   const roomIdExists = ROOM_NAMES.includes(roomId)

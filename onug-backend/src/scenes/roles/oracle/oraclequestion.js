@@ -1,9 +1,5 @@
 import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../../conditions'
-import {
-  createAndSendSceneMessage,
-  getAllPlayerTokens,
-  getRandomItemFromArray,
-} from '../../sceneUtils'
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomOracleQuestions } from './oracle.constants'
 import { thinkRandomNumber } from './oracle.utils'
 import { oracleQuestionRaising } from './oraclequestion.raising'
@@ -17,17 +13,11 @@ export const oracleQuestion = (gamestate, title) => {
   let availableOracleQuestionOptions = []
 
   if (!hasAnyAlien(selectedCards)) {
-    availableOracleQuestionOptions = randomOracleQuestions.filter(
-      (question) => !question.includes('alien') || !question.includes('ripple')
-    )
+    availableOracleQuestionOptions = randomOracleQuestions.filter(question => !question.includes('alien') || !question.includes('ripple'))
   } else if (!hasAnyVampire(selectedCards)) {
-    availableOracleQuestionOptions = randomOracleQuestions.filter(
-      (question) => !question.includes('vampire')
-    )
+    availableOracleQuestionOptions = randomOracleQuestions.filter(question => !question.includes('vampire'))
   } else if (!hasAnyWerewolf(selectedCards)) {
-    availableOracleQuestionOptions = randomOracleQuestions.filter(
-      (question) => !question.includes('werewolf')
-    )
+    availableOracleQuestionOptions = randomOracleQuestions.filter(question => !question.includes('werewolf'))
   }
 
   const oracleQuestion = getRandomItemFromArray(availableOracleQuestionOptions)
@@ -38,7 +28,7 @@ export const oracleQuestion = (gamestate, title) => {
   newGamestate.oracle = {
     question: '',
     answer: '',
-    aftermath: '',
+    aftermath: ''
   }
   newGamestate.oracle.question = oracleQuestion
 
@@ -58,7 +48,7 @@ export const oracleQuestion = (gamestate, title) => {
       break
   }
 
-  tokens.forEach((token) => {
+  tokens.forEach(token => {
     let interaction = {}
 
     const card = newGamestate.players[token].card
@@ -71,13 +61,7 @@ export const oracleQuestion = (gamestate, title) => {
       console.log('do nothing')
     }
 
-    createAndSendSceneMessage(
-      newGamestate,
-      token,
-      title,
-      interaction,
-      narration
-    )
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
   newGamestate.narration.push({ [title]: narration })

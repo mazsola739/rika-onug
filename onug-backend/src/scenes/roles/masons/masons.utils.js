@@ -1,6 +1,6 @@
 import { MASONS } from '../../../constants'
 
-export const getMasonPlayerNumbersByRoleIds = (players) => {
+export const getMasonPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {

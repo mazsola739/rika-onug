@@ -1,7 +1,7 @@
 export const getCardIdsByPositions = (cardPositions, selectedPositions) => {
   const result = []
 
-  selectedPositions.forEach((position) => {
+  selectedPositions.forEach(position => {
     const cardId = cardPositions[position].card.id
     result.push({ [position]: cardId })
   })

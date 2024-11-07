@@ -1,7 +1,7 @@
 export const getPlayerTokensByPlayerNumber = (players, playerNumbers) => {
   const result = []
 
-  playerNumbers.forEach((player) => {
+  playerNumbers.forEach(player => {
     const number = parseInt(player.match(/\d+/)[0])
 
     for (const token in players) {

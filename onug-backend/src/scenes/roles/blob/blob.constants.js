@@ -8,5 +8,5 @@ export const randomBlobKickoffText = [
   'blob_3pright_text',
   'blob_4pleft_text',
   'blob_4pright_text',
-  'blob_2eachside_text',
+  'blob_2eachside_text'
 ]

@@ -7,18 +7,9 @@ export const randomAlienInstructions = [
   'aliens_show_text',
   'aliens_timer_text',
   'aliens_newalien_text',
-  'aliens_alienhelper_text',
+  'aliens_alienhelper_text'
 ]
 
-export const alienAnyKeys = [
-  'identifier_any_text',
-  'identifier_anyeven_text',
-  'identifier_anyodd_text',
-  'activePlayers',
-]
+export const alienAnyKeys = ['identifier_any_text', 'identifier_anyeven_text', 'identifier_anyodd_text', 'activePlayers']
 
-export const alienAllKeys = [
-  'identifier.everyone_text',
-  'identifier_oddplayers_text',
-  'identifier_evenplayers_text',
-]
+export const alienAllKeys = ['identifier.everyone_text', 'identifier_oddplayers_text', 'identifier_evenplayers_text']

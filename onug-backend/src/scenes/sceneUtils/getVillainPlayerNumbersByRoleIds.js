@@ -1,6 +1,6 @@
 import { ALL_SUPER_VILLAIN } from '../../constants'
 
-export const getVillainPlayerNumbersByRoleIds = (players) => {
+export const getVillainPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {

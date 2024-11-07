@@ -4,9 +4,7 @@ import * as roles from './roles'
 
 //! todo save interaction identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
 export const actionHandler = (gamestate, scene_title) => {
-  logTrace(
-    `actionHandler in room [${gamestate.room_id}] called when actual scene is: ${scene_title}`
-  )
+  logTrace(`actionHandler in room [${gamestate.room_id}] called when actual scene is: ${scene_title}`)
 
   let newGamestate = { ...gamestate }
   const selected_cards = newGamestate.selected_cards
@@ -26,42 +24,22 @@ export const actionHandler = (gamestate, scene_title) => {
       return roles.annoyinglad(newGamestate, scene_title)
     }
     /* MUST & MAY*/ case 'APPRENTICE_ASSASSIN': {
-      return roles.apprenticeassassin(
-        newGamestate,
-        scene_title,
-        conditions.hasAssassin(selected_cards),
-        'apprenticeassassin'
-      )
+      return roles.apprenticeassassin(newGamestate, scene_title, conditions.hasAssassin(selected_cards), 'apprenticeassassin')
     }
     case 'APPRENTICE_SEER': {
       return roles.apprenticeseer(newGamestate, scene_title)
     }
     /* MUST */ case 'APPRENTICE_TANNER': {
-      return roles.apprenticetanner(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.apprenticetanner(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     /* MUST */ case 'ASSASSIN': {
       return roles.assassin(newGamestate, scene_title, 'assassin')
     }
     /* MUST */ case 'AURA_SEER': {
-      return roles.auraseer(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards),
-        conditions.hasMarks(selected_cards)
-      )
+      return roles.auraseer(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards), conditions.hasMarks(selected_cards))
     }
     /* MUST & MAY*/ case 'BEHOLDER': {
-      return roles.beholder(
-        newGamestate,
-        scene_title,
-        conditions.hasSeer(selected_cards),
-        conditions.hasApprenticeSeer(selected_cards),
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.beholder(newGamestate, scene_title, conditions.hasSeer(selected_cards), conditions.hasApprenticeSeer(selected_cards), conditions.hasDoppelganger(selected_cards))
     }
     case 'BLOB': {
       return roles.blob(newGamestate, scene_title)
@@ -73,11 +51,7 @@ export const actionHandler = (gamestate, scene_title) => {
       return roles.copycat(newGamestate, scene_title)
     }
     /* MUST */ case 'COW': {
-      return roles.cow(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.cow(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     /* MUST */ case 'CUPID': {
       return roles.cupid(newGamestate, scene_title)
@@ -95,22 +69,13 @@ export const actionHandler = (gamestate, scene_title) => {
       return roles.doppelganger(newGamestate, scene_title)
     }
     /* MUST & MAY*/ case 'DOPPELGÄNGER_APPRENTICE_ASSASSIN': {
-      return roles.apprenticeassassin(
-        newGamestate,
-        scene_title,
-        conditions.hasAssassin(selected_cards),
-        'doppelganger_apprenticeassassin'
-      )
+      return roles.apprenticeassassin(newGamestate, scene_title, conditions.hasAssassin(selected_cards), 'doppelganger_apprenticeassassin')
     }
     /* MUST */ case 'DOPPELGÄNGER_ASSASSIN': {
       return roles.assassin(newGamestate, scene_title, 'doppelganger_assassin')
     }
     /* MUST */ case 'DOPPELGÄNGER_BODY_SNATCHER': {
-      return roles.bodysnatcher(
-        newGamestate,
-        scene_title,
-        'doppelganger_bodysnatcher'
-      )
+      return roles.bodysnatcher(newGamestate, scene_title, 'doppelganger_bodysnatcher')
     }
     case 'DOPPELGÄNGER_CURATOR': {
       return roles.curator(newGamestate, scene_title, 'doppelganger_curator')
@@ -134,18 +99,10 @@ export const actionHandler = (gamestate, scene_title) => {
       return roles.doppelgangerinstantaction(newGamestate, scene_title)
     }
     case 'DOPPELGÄNGER_MORTICIAN': {
-      return roles.mortician(
-        newGamestate,
-        scene_title,
-        'doppelganger_mortician'
-      )
+      return roles.mortician(newGamestate, scene_title, 'doppelganger_mortician')
     }
     case 'DOPPELGÄNGER_PICKPOCKET': {
-      return roles.pickpocket(
-        newGamestate,
-        scene_title,
-        'doppelganger_pickpocket'
-      )
+      return roles.pickpocket(newGamestate, scene_title, 'doppelganger_pickpocket')
     }
     /* MUST & MAY*/ case 'DOPPELGÄNGER_PRIEST': {
       return roles.priest(newGamestate, scene_title, 'doppelganger_priest')
@@ -189,21 +146,13 @@ export const actionHandler = (gamestate, scene_title) => {
       return roles.everyonemark(newGamestate, scene_title)
     }
     /* MUST */ case 'EVILOMETER': {
-      return roles.evilometer(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.evilometer(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     /* MUST */ case 'EXPOSER': {
       return roles.exposer(newGamestate, scene_title, 'exposer')
     }
     case 'FAMILY_MAN': {
-      return roles.familyman(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.familyman(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     case 'FLIPPER': {
       return roles.flipper(newGamestate, scene_title, 'flipper')
@@ -212,39 +161,22 @@ export const actionHandler = (gamestate, scene_title) => {
       return roles.gremlin(newGamestate, scene_title, 'gremlin')
     }
     /* MUST */ case 'GROOB_ZERB': {
-      return roles.groobzerb(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.groobzerb(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     /* MUST */ case 'INSOMNIAC': {
-      return roles.insomniac(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.insomniac(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     case 'INSTIGATOR': {
       return roles.instigator(newGamestate, scene_title)
     }
     /* MUST */ case 'INTERN': {
-      return roles.intern(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards),
-        conditions.hasMadScientist(selected_cards)
-      )
+      return roles.intern(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards), conditions.hasMadScientist(selected_cards))
     }
     case 'JOKE': {
       return roles.joke(newGamestate, scene_title)
     }
     /* MUST */ case 'LEADER': {
-      return roles.leader(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.leader(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     /* MUST */ case 'LEADER_ZERB_GROOB': {
       return roles.leaderzerbgroob(newGamestate, scene_title)
@@ -256,21 +188,13 @@ export const actionHandler = (gamestate, scene_title) => {
       return roles.madscientist(newGamestate, scene_title)
     }
     case 'MARKSMAN': {
-      return roles.marksman(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.marksman(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     /* MUST */ case 'MASONS': {
       return roles.masons(newGamestate, scene_title)
     }
     /* MUST */ case 'MINION': {
-      return roles.minion(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.minion(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     /* MUST */ case 'MIRROR_MAN': {
       return roles.mirrorman(newGamestate, scene_title)
@@ -312,11 +236,7 @@ export const actionHandler = (gamestate, scene_title) => {
       return roles.rascal(newGamestate, scene_title, 'rascal')
     }
     /* MUST */ case 'RENFIELD': {
-      return roles.renfield(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.renfield(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     case 'REVEALER': {
       return roles.revealer(newGamestate, scene_title, 'revealer')
@@ -334,21 +254,13 @@ export const actionHandler = (gamestate, scene_title) => {
       return roles.seer(newGamestate, scene_title)
     }
     /* MUST */ case 'SELF_AWARENESS_GIRL': {
-      return roles.selfawarenessgirl(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.selfawarenessgirl(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     case 'SENTINEL': {
       return roles.sentinel(newGamestate, scene_title)
     }
     /* MUST & MAY*/ case 'SQUIRE': {
-      return roles.squire(
-        newGamestate,
-        scene_title,
-        conditions.hasDoppelganger(selected_cards)
-      )
+      return roles.squire(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     /* MUST */ case 'SUPER_VILLAINS': {
       return roles.supervillains(newGamestate, scene_title)
@@ -381,19 +293,13 @@ export const actionHandler = (gamestate, scene_title) => {
       return roles.voodoolou(newGamestate, scene_title)
     }
     /* MUST / MAY */ case 'WEREWOLVES': {
-      return roles.werewolves(
-        newGamestate,
-        scene_title,
-        conditions.hasDreamWolf(selected_cards)
-      )
+      return roles.werewolves(newGamestate, scene_title, conditions.hasDreamWolf(selected_cards))
     }
     case 'WITCH': {
       return roles.witch(newGamestate, scene_title)
     }
     default:
-      logInfo(
-        `ACTION_HANDLER_DEFAULT case: no role found for: [action scene title ${scene_title}]`
-      )
+      logInfo(`ACTION_HANDLER_DEFAULT case: no role found for: [action scene title ${scene_title}]`)
   }
 
   return newGamestate

@@ -8,15 +8,15 @@ export const copycatInteraction = (gamestate, token, title) => {
     ...newGamestate.players[token].player_history[title],
     selectable_cards: CENTER_CARD_POSITIONS,
     selectable_card_limit: { player: 0, center: 1 },
-    obligatory: true,
+    obligatory: true
   }
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_must_one_center'],
     selectableCards: {
       selectable_cards: CENTER_CARD_POSITIONS,
-      selectable_card_limit: { player: 0, center: 1 },
+      selectable_card_limit: { player: 0, center: 1 }
     },
-    obligatory: true,
+    obligatory: true
   })
 }

@@ -1,8 +1,4 @@
-import {
-  formatPlayerIdentifier,
-  generateRoleInteraction,
-  getVillainPlayerNumbersByRoleIds,
-} from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getVillainPlayerNumbersByRoleIds } from '../../sceneUtils'
 
 export const supervillainsInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
@@ -11,13 +7,13 @@ export const supervillainsInteraction = (gamestate, token, title) => {
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
-    villains,
+    villains
   }
 
   const messageIdentifiers = formatPlayerIdentifier(villains)
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_villains', ...messageIdentifiers],
-    uniqueInformations: { villains },
+    uniqueInformations: { villains }
   })
 }

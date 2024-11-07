@@ -1,6 +1,6 @@
 import { ALL_VAMPIRE } from '../../constants'
 
-export const getVampirePlayerNumbersByRoleIds = (players) => {
+export const getVampirePlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {

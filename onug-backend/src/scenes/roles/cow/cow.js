@@ -6,32 +6,19 @@ import { cowInteraction } from './cow.interaction'
 export const cow = (gamestate, title, hasDoppelganger) => {
   const newGamestate = { ...gamestate }
   const tokens = getAllPlayerTokens(newGamestate.players)
-  const narration = [
-    hasDoppelganger ? 'doppelganger_cow_kickoff_text' : 'cow_kickoff_text',
-    'cow_kickoff2_text',
-  ]
+  const narration = [hasDoppelganger ? 'doppelganger_cow_kickoff_text' : 'cow_kickoff_text', 'cow_kickoff2_text']
 
-  tokens.forEach((token) => {
+  tokens.forEach(token => {
     let interaction = {}
 
     const card = newGamestate.players[token].card
 
-    if (
-      card.player_original_id === 45 ||
-      (card.player_role_id === 45 &&
-        ALL_COPY_PLAYER.includes(card.player_original_id))
-    ) {
+    if (card.player_original_id === 45 || (card.player_role_id === 45 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
       newGamestate.players[token].action_finished = false
       interaction = cowInteraction(newGamestate, token, title)
     }
 
-    createAndSendSceneMessage(
-      newGamestate,
-      token,
-      title,
-      interaction,
-      narration
-    )
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
   newGamestate.narration.push({ [title]: narration })

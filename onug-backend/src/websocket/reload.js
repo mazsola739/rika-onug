@@ -10,9 +10,8 @@ export const reload = (ws, message) => {
       logTrace(`refreshing websocket reference for token [${token}]`)
 
       const room_ids = Object.keys(webSocketServerConnectionsPerRoom)
-      room_ids.forEach((room_id) => {
-        if (webSocketServerConnectionsPerRoom[room_id][token])
-          webSocketServerConnectionsPerRoom[room_id][token] = ws
+      room_ids.forEach(room_id => {
+        if (webSocketServerConnectionsPerRoom[room_id][token]) webSocketServerConnectionsPerRoom[room_id][token] = ws
       })
     }
   } catch (error) {

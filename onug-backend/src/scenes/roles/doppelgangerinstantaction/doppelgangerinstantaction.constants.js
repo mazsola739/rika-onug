@@ -21,5 +21,5 @@ export const instantRoleIds = {
   11: 'role_troublemaker',
   26: 'role_villageidiot',
   70: 'role_voodoolou',
-  27: 'role_witch',
+  27: 'role_witch'
 }

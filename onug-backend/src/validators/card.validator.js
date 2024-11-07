@@ -6,7 +6,7 @@ const CARDS_ARE_NOT_AN_ARRAY = 'Cards were not provided as an array'
 const CARD_NOT_IN_VALID_RANGE = 'Card IDs were not in the right ID range'
 const DUPLICATED_CARD = 'Card IDs were duplicated.'
 
-export const validateCards = (cards) => {
+export const validateCards = cards => {
   const errors = []
 
   const cardsStructIsArray = Array.isArray(cards)
@@ -15,9 +15,7 @@ export const validateCards = (cards) => {
     return [false, errors]
   }
 
-  const cardsAreInTheRightIdRange = cards.every(
-    (card) => card >= validCardIdRange[0] && card <= validCardIdRange[1]
-  )
+  const cardsAreInTheRightIdRange = cards.every(card => card >= validCardIdRange[0] && card <= validCardIdRange[1])
   if (!cardsAreInTheRightIdRange) errors.push(CARD_NOT_IN_VALID_RANGE)
 
   const duplicates = new Set(cards).size !== cards.length

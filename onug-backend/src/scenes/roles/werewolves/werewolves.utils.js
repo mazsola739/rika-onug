@@ -1,6 +1,6 @@
 import { WEREVOLVES } from '../../../constants'
 
-export const getWerewolfPlayerNumbersByRoleIds = (players) => {
+export const getWerewolfPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {
@@ -13,7 +13,7 @@ export const getWerewolfPlayerNumbersByRoleIds = (players) => {
   return result
 }
 
-export const getDreamWolfPlayerNumberByRoleIds = (players) => {
+export const getDreamWolfPlayerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {

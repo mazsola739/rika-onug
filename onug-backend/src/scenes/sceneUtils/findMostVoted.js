@@ -1,4 +1,4 @@
-export const findMostVoted = (votes) => {
+export const findMostVoted = votes => {
   let maxVotes = 0
   let mostVotedPlayers = []
 

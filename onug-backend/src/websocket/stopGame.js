@@ -5,7 +5,7 @@ import { stopScene } from '../scenes'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
 
-export const stopGame = async (message) => {
+export const stopGame = async message => {
   const { room_id, token } = message
   logTrace(`Stopping game in room: ${room_id}`)
   const [roomIdValid, gamestate, errors] = await validateRoom(room_id)

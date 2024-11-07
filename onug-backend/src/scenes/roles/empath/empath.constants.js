@@ -1,9 +1,4 @@
-export const empathKeys = [
-  'identifier.everyone_text',
-  'identifier_oddplayers_text',
-  'identifier_evenplayers_text',
-  'activePlayers',
-]
+export const empathKeys = ['identifier.everyone_text', 'identifier_oddplayers_text', 'identifier_evenplayers_text', 'activePlayers']
 
 export const randomEmpathInstructions = [
   'empath_action1_text',
@@ -19,5 +14,5 @@ export const randomEmpathInstructions = [
   'empath_action11_text',
   'empath_action12_text',
   'empath_action13_text',
-  'empath_action14_text',
+  'empath_action14_text'
 ]

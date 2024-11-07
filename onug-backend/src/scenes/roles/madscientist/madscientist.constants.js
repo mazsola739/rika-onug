@@ -12,7 +12,7 @@ export const random_madscientist_intro = [
   'madscientist_intro_11_text',
   'madscientist_intro_12_text',
   'madscientist_intro_13_text',
-  'madscientist_intro_14_text',
+  'madscientist_intro_14_text'
 ]
 
 export const random_madscientist_therefore = [
@@ -20,7 +20,7 @@ export const random_madscientist_therefore = [
   'madscientist_therefore_2_text',
   'madscientist_therefore_3_text',
   'madscientist_therefore_4_text',
-  'madscientist_therefore_5_text',
+  'madscientist_therefore_5_text'
 ]
 
 export const random_madscientist_result = [
@@ -34,7 +34,7 @@ export const random_madscientist_result = [
   'madscientist_result_8_text',
   'madscientist_result_9_text',
   'madscientist_result_10_text',
-  'madscientist_result_11_text',
+  'madscientist_result_11_text'
 ]
 
 export const random_madscientist_transition = [
@@ -58,5 +58,5 @@ export const random_madscientist_transition = [
   'madscientist_transition_18_text',
   'madscientist_transition_19_text',
   'madscientist_transition_20_text',
-  'madscientist_transition_21_text',
+  'madscientist_transition_21_text'
 ]

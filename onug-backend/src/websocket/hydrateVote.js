@@ -8,11 +8,11 @@ export const hydrateVote = async (ws, message) => {
   const { room_id, token } = message
   const gamestate = await readGamestate(room_id)
 
-  Object.values(gamestate.players).forEach((player) => {
+  Object.values(gamestate.players).forEach(player => {
     player.flag = false
   })
 
-  Object.values(gamestate.card_positions).forEach((card) => {
+  Object.values(gamestate.card_positions).forEach(card => {
     if (!card.guessed_roles) {
       card.guessed_roles = []
     }
@@ -26,16 +26,14 @@ export const hydrateVote = async (ws, message) => {
     player_card_id: gamestate.players[token].card.player_card_id,
     player_role: gamestate.players[token].card.player_role,
     player_team: gamestate.players[token].card.player_team,
-    player_mark: gamestate.players[token].card.player_mark,
+    player_mark: gamestate.players[token].card.player_mark
   }
 
-  const players = Object.values(gamestate.players).map(
-    ({ player_number, name }) => ({
-      player_number,
-      player_name: name,
-      flag: false,
-    })
-  )
+  const players = Object.values(gamestate.players).map(({ player_number, name }) => ({
+    player_number,
+    player_name: name,
+    flag: false
+  }))
 
   return ws.send(
     JSON.stringify({
@@ -44,7 +42,7 @@ export const hydrateVote = async (ws, message) => {
       guess_cards,
       player,
       players,
-      narrations: gamestate.narration,
+      narrations: gamestate.narration
     })
   )
 }

@@ -7,10 +7,7 @@ export const hydrateRoom = async (ws, message) => {
   const { room_id } = message
   const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
 
-  if (!roomIdValid)
-    return ws.send(
-      JSON.stringify({ type: HYDRATE_ROOM, success: false, errors })
-    )
+  if (!roomIdValid) return ws.send(JSON.stringify({ type: HYDRATE_ROOM, success: false, errors }))
 
   const players = getPlayerNames(gamestate)
 
@@ -20,7 +17,7 @@ export const hydrateRoom = async (ws, message) => {
     room_id: gamestate.room_id,
     selected_cards: gamestate.selected_cards,
     selected_expansions: gamestate.selected_expansions,
-    players,
+    players
   })
 
   logTrace(`sending message to client, hydrate room`, hydrateRoom)

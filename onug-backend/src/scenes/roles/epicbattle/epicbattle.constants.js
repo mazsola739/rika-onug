@@ -8,7 +8,7 @@ export const random_easteregg_nobadguys = [
   'easteregg_nobadguys_text_7',
   'easteregg_nobadguys_text_8',
   'easteregg_nobadguys_text_9',
-  'easteregg_nobadguys_text_10',
+  'easteregg_nobadguys_text_10'
 ]
 
 export const random_easteregg_nogoodguys = [
@@ -21,5 +21,5 @@ export const random_easteregg_nogoodguys = [
   'easteregg_nogoodguys_text_7',
   'easteregg_nogoodguys_text_8',
   'easteregg_nogoodguys_text_9',
-  'easteregg_nogoodguys_text_10',
+  'easteregg_nogoodguys_text_10'
 ]

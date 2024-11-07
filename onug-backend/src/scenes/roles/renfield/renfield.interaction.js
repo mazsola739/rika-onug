@@ -1,20 +1,12 @@
-import {
-  generateRoleInteraction,
-  getPlayerNumberWithMatchingToken,
-  getVampirePlayerNumbersByRoleIds,
-} from '../../sceneUtils'
+import { generateRoleInteraction, getPlayerNumberWithMatchingToken, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
 import { getVampirePlayerNumbersByMark } from './renfield.utils'
 
 export const renfieldInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const vampires = getVampirePlayerNumbersByRoleIds(newGamestate.players)
   const newVampire = getVampirePlayerNumbersByMark(newGamestate.players)
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(
-    newGamestate.players,
-    token
-  )
-  const currentPlayerMark =
-    newGamestate.card_positions[currentPlayerNumber].mark
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const currentPlayerMark = newGamestate.card_positions[currentPlayerNumber].mark
 
   if (gamestate.players[token].card.player_original_id === 1) {
     const batPosition = newGamestate.doppelganger_mark_positions.bat
@@ -30,11 +22,11 @@ export const renfieldInteraction = (gamestate, token, title) => {
     ...newGamestate.players[token].player_history[title],
     vampires,
     new_vampire: newVampire,
-    mark_of_bat: [currentPlayerNumber],
+    mark_of_bat: [currentPlayerNumber]
   }
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_vampires', 'interaction_mark_of_bat'],
-    uniqueInformations: { vampires, new_vampire: newVampire },
+    uniqueInformations: { vampires, new_vampire: newVampire }
   })
 }

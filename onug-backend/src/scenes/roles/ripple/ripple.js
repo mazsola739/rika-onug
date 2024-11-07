@@ -1,51 +1,24 @@
-import {
-  getRandomItemFromArray,
-  pickRandomUpToThreePlayers,
-} from '../../sceneUtils'
-import {
-  random_ripple_dualview,
-  ripple_random,
-  ripple_sure_repeat,
-  rippleAllKeys,
-  rippleAnyKeys,
-  rippleCenterAnyKeys,
-  rippleNeighborKeys,
-} from './ripple.constants'
-import {
-  pickRandomOnePlayer,
-  pickRandomTwoPlayers,
-  pickRandomTwoPlayersArray,
-} from './ripple.utils'
+import { getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
+import { random_ripple_dualview, ripple_random, ripple_sure_repeat, rippleAllKeys, rippleAnyKeys, rippleCenterAnyKeys, rippleNeighborKeys } from './ripple.constants'
+import { pickRandomOnePlayer, pickRandomTwoPlayers, pickRandomTwoPlayersArray } from './ripple.utils'
 
 export const ripple = (oracleMadeSureRipple, totalPlayers) => {
   const result = []
 
-  const randomRipple = oracleMadeSureRipple
-    ? getRandomItemFromArray(ripple_sure_repeat)
-    : getRandomItemFromArray(ripple_random)
+  const randomRipple = oracleMadeSureRipple ? getRandomItemFromArray(ripple_sure_repeat) : getRandomItemFromArray(ripple_random)
 
   const randomRippleAllKey = getRandomItemFromArray(rippleAllKeys)
   const randomRippleAnyKey = getRandomItemFromArray(rippleAnyKeys)
 
   const random1PlayerIdentifier = pickRandomOnePlayer(totalPlayers)
   const random2PlayersIdentifier = pickRandomTwoPlayers(totalPlayers)
-  const randomRippleAllIdentifier =
-    randomRippleAllKey === 'activePlayers'
-      ? pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and')
-      : randomRippleAllKey
-  const randomRippleAnyIdentifier =
-    randomRippleAnyKey === 'activePlayers'
-      ? pickRandomUpToThreePlayers(totalPlayers, 'conjunction_or')
-      : randomRippleAnyKey
-  const randomRippleNeighborIdentifier =
-    getRandomItemFromArray(rippleNeighborKeys)
-  const randomRippleCenterAnyIdentifier =
-    getRandomItemFromArray(rippleCenterAnyKeys)
+  const randomRippleAllIdentifier = randomRippleAllKey === 'activePlayers' ? pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and') : randomRippleAllKey
+  const randomRippleAnyIdentifier = randomRippleAnyKey === 'activePlayers' ? pickRandomUpToThreePlayers(totalPlayers, 'conjunction_or') : randomRippleAnyKey
+  const randomRippleNeighborIdentifier = getRandomItemFromArray(rippleNeighborKeys)
+  const randomRippleCenterAnyIdentifier = getRandomItemFromArray(rippleCenterAnyKeys)
 
   const randomDualview = getRandomItemFromArray(random_ripple_dualview)
-  const randomShuffle2Players = pickRandomTwoPlayersArray(
-    random2PlayersIdentifier
-  )
+  const randomShuffle2Players = pickRandomTwoPlayersArray(random2PlayersIdentifier)
 
   if (randomRipple === 'random_ripple_none') {
     //TODO in this case jump to the next scene?
@@ -64,12 +37,7 @@ export const ripple = (oracleMadeSureRipple, totalPlayers) => {
         break
 
       case 'random_ripple_repeat1p':
-        result.push(
-          'ripple_repeat_text',
-          'ripple_repeat_2_text',
-          random1PlayerIdentifier,
-          'ripple_openeyes_text'
-        )
+        result.push('ripple_repeat_text', 'ripple_repeat_2_text', random1PlayerIdentifier, 'ripple_openeyes_text')
 
         break
 
@@ -89,68 +57,37 @@ export const ripple = (oracleMadeSureRipple, totalPlayers) => {
         break
 
       case 'random_ripple_troublemaker':
-        result.push(
-          random1PlayerIdentifier,
-          'ripple_troublemaker_text',
-          random2PlayersIdentifier,
-          'ripple_troublemaker_end_text'
-        )
+        result.push(random1PlayerIdentifier, 'ripple_troublemaker_text', random2PlayersIdentifier, 'ripple_troublemaker_end_text')
 
         break
 
       case 'random_ripple_steal':
-        result.push(
-          random1PlayerIdentifier,
-          'ripple_robber_text',
-          randomRippleAnyIdentifier,
-          'ripple_robber_end_text'
-        )
+        result.push(random1PlayerIdentifier, 'ripple_robber_text', randomRippleAnyIdentifier, 'ripple_robber_end_text')
 
         break
 
       case 'random_ripple_witch':
-        result.push(
-          random1PlayerIdentifier,
-          'ripple_witch_text',
-          randomRippleAnyIdentifier
-        )
+        result.push(random1PlayerIdentifier, 'ripple_witch_text', randomRippleAnyIdentifier)
 
         break
 
       case 'random_ripple_view1':
-        result.push(
-          random1PlayerIdentifier,
-          'ripple_view1_text',
-          randomRippleAnyIdentifier
-        )
+        result.push(random1PlayerIdentifier, 'ripple_view1_text', randomRippleAnyIdentifier)
 
         break
 
       case 'random_ripple_view2':
-        result.push(
-          random1PlayerIdentifier,
-          'ripple_view2_text',
-          randomRippleAnyIdentifier
-        )
+        result.push(random1PlayerIdentifier, 'ripple_view2_text', randomRippleAnyIdentifier)
 
         break
 
       case 'random_ripple_reveal':
-        result.push(
-          random1PlayerIdentifier,
-          'ripple_revealer_text',
-          randomRippleNeighborIdentifier,
-          'ripple_revealer_end_text'
-        )
+        result.push(random1PlayerIdentifier, 'ripple_revealer_text', randomRippleNeighborIdentifier, 'ripple_revealer_end_text')
 
         break
 
       case 'random_ripple_dualview':
-        result.push(
-          random2PlayersIdentifier,
-          randomDualview,
-          randomRippleCenterAnyIdentifier
-        )
+        result.push(random2PlayersIdentifier, randomDualview, randomRippleCenterAnyIdentifier)
 
         break
 
@@ -160,29 +97,13 @@ export const ripple = (oracleMadeSureRipple, totalPlayers) => {
         break
 
       case 'random_ripple_shuffle': //TODO just we shuffle in backend
-        result.push(
-          randomShuffle2Players[0],
-          'conjunction_and',
-          randomShuffle2Players[1],
-          'ripple_doublevote_text',
-          randomShuffle2Players[0]
-        )
-        result.push(
-          randomShuffle2Players[0],
-          'ripple_dualshuffle2_text',
-          randomShuffle2Players[1],
-          'ripple_dualshuffle3_text'
-        )
+        result.push(randomShuffle2Players[0], 'conjunction_and', randomShuffle2Players[1], 'ripple_doublevote_text', randomShuffle2Players[0])
+        result.push(randomShuffle2Players[0], 'ripple_dualshuffle2_text', randomShuffle2Players[1], 'ripple_dualshuffle3_text')
 
         break
 
       case 'random_ripple_drunk':
-        result.push(
-          random1PlayerIdentifier,
-          'ripple_drunk_text',
-          randomRippleAnyIdentifier,
-          'ripple_drunk_end_text'
-        )
+        result.push(random1PlayerIdentifier, 'ripple_drunk_text', randomRippleAnyIdentifier, 'ripple_drunk_end_text')
 
         break
 

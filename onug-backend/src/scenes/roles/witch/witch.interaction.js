@@ -7,14 +7,14 @@ export const witchInteraction = (gamestate, token, title) => {
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_cards: CENTER_CARD_POSITIONS,
-    selectable_card_limit: { player: 0, center: 1 },
+    selectable_card_limit: { player: 0, center: 1 }
   }
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_may_one_center'],
     selectableCards: {
       selectable_cards: CENTER_CARD_POSITIONS,
-      selectable_card_limit: { player: 0, center: 1 },
-    },
+      selectable_card_limit: { player: 0, center: 1 }
+    }
   })
 }

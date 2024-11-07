@@ -12,10 +12,7 @@ export const oracleQuestionRaising = (gamestate, token, title) => {
       answerOptions = createNumberArray(newGamestate.total_players)
       break
     case 'oracle_evenodd_text': {
-      const isCurrentPlayerEven = isCurrentPlayerNumberEven(
-        newGamestate.players,
-        token
-      )
+      const isCurrentPlayerEven = isCurrentPlayerNumberEven(newGamestate.players, token)
       newGamestate.oracle.answer = isCurrentPlayerEven ? 'even' : 'odd'
       break
     }
@@ -29,10 +26,10 @@ export const oracleQuestionRaising = (gamestate, token, title) => {
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
-    answer_options: answerOptions,
+    answer_options: answerOptions
   }
 
   return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_oracle_question'],
+    private_message: ['interaction_oracle_question']
   })
 }

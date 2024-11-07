@@ -17,21 +17,20 @@ export const leaveRoom = async (ws, message) => {
       JSON.stringify({
         type: LEAVE_ROOM,
         success: false,
-        errors: ['Player not found in the room.'],
+        errors: ['Player not found in the room.']
       })
     )
   }
 
   const playerTokens = Object.keys(gamestate.players)
 
-  if (player.admin && playerTokens.length > 1)
-    gamestate.players[playerTokens[1]].admin = true
+  if (player.admin && playerTokens.length > 1) gamestate.players[playerTokens[1]].admin = true
 
   gamestate.available_names.push(player.name)
   delete gamestate.players[token]
 
   if (playerTokens.length === 1) {
-    const defaultRoom = roomsData.find((room) => room.room_id === room_id)
+    const defaultRoom = roomsData.find(room => room.room_id === room_id)
 
     if (defaultRoom) {
       gamestate.selected_cards = defaultRoom.selected_cards
@@ -56,7 +55,7 @@ export const leaveRoom = async (ws, message) => {
     success: true,
     selected_cards: gamestate.selected_cards,
     selected_expansions: gamestate.selected_expansions,
-    players,
+    players
   })
 
   return ws.send(
@@ -64,7 +63,7 @@ export const leaveRoom = async (ws, message) => {
       type: LEAVE_ROOM,
       success: true,
       message: 'Successfully left the room',
-      room_id,
+      room_id
     })
   )
 }

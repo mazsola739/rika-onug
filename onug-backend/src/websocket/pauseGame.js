@@ -5,7 +5,7 @@ import { pauseScene } from '../scenes'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
 
-export const pauseGame = async (message) => {
+export const pauseGame = async message => {
   const { room_id, token } = message
   logTrace(`Toggling game pause in room: ${room_id} by player: ${token}`)
 
@@ -18,6 +18,6 @@ export const pauseGame = async (message) => {
   broadcast(room_id, {
     type: PAUSE_GAME,
     success: true,
-    message: 'pause toggled',
+    message: 'pause toggled'
   })
 }

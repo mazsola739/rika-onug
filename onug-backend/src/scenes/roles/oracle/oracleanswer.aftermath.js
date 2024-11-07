@@ -1,12 +1,5 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import {
-  formatPlayerIdentifier,
-  generateRoleInteraction,
-  getCardIdsByPositions,
-  getNarrationByTitle,
-  getPlayerNumberWithMatchingToken,
-  getRandomNumber,
-} from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken, getRandomNumber } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 
 export const oracleAnswerAftermath = (gamestate, token, title) => {
@@ -15,12 +8,9 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
   const oracleQuestion = newGamestate.oracle.question
   const oracleAnswer = newGamestate.oracle.answer
   const oracleAftermath = newGamestate.oracle.aftermath
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(
-    newGamestate.players,
-    token
-  )
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
   const currentPlayerCard = {
-    ...newGamestate.card_positions[currentPlayerNumber].card,
+    ...newGamestate.card_positions[currentPlayerNumber].card
   }
 
   let showCards = []
@@ -44,23 +34,13 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
       newGamestate.players[token].card_or_mark_action = true
 
       if (oracleAftermath.includes('yes')) {
-        showCards = getCardIdsByPositions(newGamestate.card_positions, [
-          `player_${oracleAnswer}`,
-        ])
+        showCards = getCardIdsByPositions(newGamestate.card_positions, [`player_${oracleAnswer}`])
       } else {
-        const randomPlayerNumber = getRandomNumber(
-          1,
-          newGamestate.total_players
-        )
-        showCards = getCardIdsByPositions(newGamestate.card_positions, [
-          `player_${randomPlayerNumber}`,
-        ])
+        const randomPlayerNumber = getRandomNumber(1, newGamestate.total_players)
+        showCards = getCardIdsByPositions(newGamestate.card_positions, [`player_${randomPlayerNumber}`])
       }
 
-      privateMessage = [
-        'interaction_selected_card',
-        formatPlayerIdentifier(showCards),
-      ]
+      privateMessage = ['interaction_selected_card', formatPlayerIdentifier(showCards)]
       break
     case 'oracle_alienteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
@@ -121,8 +101,8 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
     viewed_cards: showCards,
     selectableCards: {
       selectable_cards: CENTER_CARD_POSITIONS,
-      selectable_card_limit: { player: 0, center: limit },
-    },
+      selectable_card_limit: { player: 0, center: limit }
+    }
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
@@ -130,8 +110,8 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
     showCards,
     selectableCards: {
       selectable_cards: CENTER_CARD_POSITIONS,
-      selectable_card_limit: { player: 0, center: limit },
-    },
+      selectable_card_limit: { player: 0, center: limit }
+    }
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

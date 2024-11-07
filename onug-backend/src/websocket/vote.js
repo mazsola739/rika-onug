@@ -1,10 +1,7 @@
 import { ERROR, VOTE } from '../constants'
 import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import {
-  getAllPlayerTokens,
-  getPlayerNumbersWithNonMatchingTokens,
-} from '../scenes/sceneUtils'
+import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens } from '../scenes/sceneUtils'
 import { validateRoom } from '../validators'
 import { sendMessageToPlayer } from './connections'
 
@@ -26,40 +23,36 @@ export const vote = async (ws, message) => {
       ...gamestate,
       players: {
         ...players,
-        ...Object.fromEntries(
-          tokens.map((token) => [token, { ...players[token], flag: false }])
-        ),
-      },
+        ...Object.fromEntries(tokens.map(token => [token, { ...players[token], flag: false }]))
+      }
     }
 
     //TODO fix to check artifact if you have (revealingFate) and sending to client before vote
     //TODO fix if you cant speak, or cant see table
 
-    tokens.forEach((token) => {
+    tokens.forEach(token => {
       const player = players[token]
-      const otherPlayers = getPlayerNumbersWithNonMatchingTokens(players, [
-        token,
-      ])
+      const otherPlayers = getPlayerNumbersWithNonMatchingTokens(players, [token])
 
       const voteMessage = {
         type: VOTE,
         token,
         interaction: {
           selectable_cards: otherPlayers,
-          selectable_card_limit: { player: 1, center: 0 },
+          selectable_card_limit: { player: 1, center: 0 }
         },
         player: {
           player_name: player.name,
           player_number: player.player_number,
           player_card_id: player.card.player_card_id,
           player_role: player.card.player_role,
-          player_team: player.card.player_team,
+          player_team: player.card.player_team
         },
-        players: tokens.map((t) => ({
+        players: tokens.map(t => ({
           player_number: players[t].player_number,
           player_name: players[t].name,
-          flag: players[t].flag,
-        })),
+          flag: players[t].flag
+        }))
       }
 
       sendMessageToPlayer(room_id, token, voteMessage)
@@ -67,16 +60,14 @@ export const vote = async (ws, message) => {
 
     await upsertRoomState(newGamestate)
   } catch (error) {
-    logError(
-      `Error processing vote in room: ${room_id}. Error: ${error.message}`
-    )
+    logError(`Error processing vote in room: ${room_id}. Error: ${error.message}`)
     logError(JSON.stringify(error.stack))
 
     ws.send(
       JSON.stringify({
         type: ERROR,
         success: false,
-        message: 'Failed to process vote. Please try again.',
+        message: 'Failed to process vote. Please try again.'
       })
     )
   }

@@ -1,16 +1,7 @@
-import {
-  isEveryoneInSameTeam,
-  isCircleVote,
-  isMostVotedPlayer,
-} from './conditions'
-import {
-  countVotes,
-  buildVoteResult,
-  getTopVotes,
-  getActiveAndInactiveCards,
-} from './winingAndLosing.utils'
+import { isEveryoneInSameTeam, isCircleVote, isMostVotedPlayer } from './conditions'
+import { countVotes, buildVoteResult, getTopVotes, getActiveAndInactiveCards } from './winingAndLosing.utils'
 
-export const getWinnersAndLosers = (gamestate) => {
+export const getWinnersAndLosers = gamestate => {
   const players = gamestate.players
   const cardPositions = gamestate.card_positions
 
@@ -22,9 +13,9 @@ export const getWinnersAndLosers = (gamestate) => {
   // CIRCLE VOTE WIN
   if (isEveryoneInSameTeam(activeCards)) {
     if (isCircleVote(countedVotes)) {
-      voteResult.forEach((item) => (item.win = true))
+      voteResult.forEach(item => (item.win = true))
     } else {
-      voteResult.forEach((item) => {
+      voteResult.forEach(item => {
         item.survived = !isMostVotedPlayer(item.player_number, mostVoted)
         item.win = false
       })
@@ -32,7 +23,7 @@ export const getWinnersAndLosers = (gamestate) => {
   }
 
   // GENERIC WIN BASED ON VOTING
-  voteResult.forEach((player) => {
+  voteResult.forEach(player => {
     if (isMostVotedPlayer(player.player_number, mostVoted)) {
       player.survived = false
       player.win = false
@@ -69,40 +60,34 @@ export const getWinnersAndLosers = (gamestate) => {
   })
 
   // DEAD STATUS CHECKS
-  const tannerDead = tannerRole.some((player) => !player.survived)
-  const werewolfDead = werewolfRole.some((player) => !player.survived)
+  const tannerDead = tannerRole.some(player => !player.survived)
+  const werewolfDead = werewolfRole.some(player => !player.survived)
 
   // TANNER WIN CONDITION
-  tannerRole.forEach((player) => {
+  tannerRole.forEach(player => {
     player.win = !player.survived
   })
 
   // WEREWOLF TEAM WIN CONDITION
-  werewolfTeam.forEach((player) => {
+  werewolfTeam.forEach(player => {
     player.win = !werewolfDead && !tannerDead
   })
 
   // MINION WIN CONDITION
-  minionRole.forEach((player) => {
+  minionRole.forEach(player => {
     player.win = !werewolfDead && !tannerDead
   })
 
   // VILLAGE TEAM WIN CONDITION
-  villageTeam.forEach((player) => {
+  villageTeam.forEach(player => {
     player.win = werewolfDead && !tannerDead
   })
 
   // SET WINNER TEAMS BASED ON THE FINAL WIN STATUS
-  const winnerTeams = Array.from(
-    new Set(
-      voteResult
-        .filter((player) => player.win && activeCards[player.player_number])
-        .map((player) => activeCards[player.player_number].team)
-    )
-  )
+  const winnerTeams = Array.from(new Set(voteResult.filter(player => player.win && activeCards[player.player_number]).map(player => activeCards[player.player_number].team)))
 
   return {
     voteResult,
-    winnerTeams,
+    winnerTeams
   }
 }

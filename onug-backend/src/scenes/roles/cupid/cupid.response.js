@@ -1,25 +1,9 @@
-import {
-  formatPlayerIdentifier,
-  generateRoleInteraction,
-  getNarrationByTitle,
-  getPlayerNumberWithMatchingToken,
-} from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateMarkSelection } from '../../validators'
 
-export const cupidResponse = (
-  gamestate,
-  token,
-  selected_mark_positions,
-  title
-) => {
-  if (
-    !validateMarkSelection(
-      selected_mark_positions,
-      gamestate.players[token].player_history,
-      title
-    )
-  ) {
+export const cupidResponse = (gamestate, token, selected_mark_positions, title) => {
+  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 
@@ -28,42 +12,28 @@ export const cupidResponse = (
   if (gamestate.players[token].card.player_original_id === 1) {
     const loveOnePosition = newGamestate.doppelganger_mark_positions.love_1
     const loveTwoPosition = newGamestate.doppelganger_mark_positions.love_2
-    const selectedOnePosition =
-      newGamestate.card_positions[selected_mark_positions[0]].mark
-    const selectedTwoPosition =
-      newGamestate.card_positions[selected_mark_positions[1]].mark
+    const selectedOnePosition = newGamestate.card_positions[selected_mark_positions[0]].mark
+    const selectedTwoPosition = newGamestate.card_positions[selected_mark_positions[1]].mark
 
     newGamestate.doppelganger_mark_positions.love_1 = selectedOnePosition
     newGamestate.doppelganger_mark_positions.love_2 = selectedTwoPosition
-    newGamestate.card_positions[selected_mark_positions[0]].mark =
-      loveOnePosition
-    newGamestate.card_positions[selected_mark_positions[1]].mark =
-      loveTwoPosition
+    newGamestate.card_positions[selected_mark_positions[0]].mark = loveOnePosition
+    newGamestate.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
   } else {
     const loveOnePosition = newGamestate.mark_positions.love_1
     const loveTwoPosition = newGamestate.mark_positions.love_2
-    const selectedOnePosition =
-      newGamestate.card_positions[selected_mark_positions[0]].mark
-    const selectedTwoPosition =
-      newGamestate.card_positions[selected_mark_positions[1]].mark
+    const selectedOnePosition = newGamestate.card_positions[selected_mark_positions[0]].mark
+    const selectedTwoPosition = newGamestate.card_positions[selected_mark_positions[1]].mark
 
     newGamestate.mark_positions.love_1 = selectedOnePosition
     newGamestate.mark_positions.love_2 = selectedTwoPosition
-    newGamestate.card_positions[selected_mark_positions[0]].mark =
-      loveOnePosition
-    newGamestate.card_positions[selected_mark_positions[1]].mark =
-      loveTwoPosition
+    newGamestate.card_positions[selected_mark_positions[0]].mark = loveOnePosition
+    newGamestate.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
   }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(
-    newGamestate.players,
-    token
-  )
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
 
-  if (
-    currentPlayerNumber[0] === selected_mark_positions[0] ||
-    currentPlayerNumber[0] === selected_mark_positions[1]
-  ) {
+  if (currentPlayerNumber[0] === selected_mark_positions[0] || currentPlayerNumber[0] === selected_mark_positions[1]) {
     newGamestate.players[token].card.player_mark = 'mark_of_love'
   }
 
@@ -72,17 +42,14 @@ export const cupidResponse = (
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]],
-    scene_end: true,
+    scene_end: true
   }
 
-  const messageIdentifiers = formatPlayerIdentifier([
-    selected_mark_positions[0],
-    selected_mark_positions[1],
-  ])
+  const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_mark_of_love', ...messageIdentifiers],
-    scene_end: true,
+    scene_end: true
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

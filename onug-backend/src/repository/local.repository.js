@@ -6,14 +6,13 @@ import { logError, logErrorWithStack, logTrace } from '../log'
 import { webSocketServerConnectionsPerRoom } from '../websocket/connections'
 
 const FILE_PATH_TEMPLATE = `${__dirname}/../gamestate/`
-const ROOM_GAMESTATE_FILE = (room_id) =>
-  `${FILE_PATH_TEMPLATE}${room_id}_gamestate.json`
+const ROOM_GAMESTATE_FILE = room_id => `${FILE_PATH_TEMPLATE}${room_id}_gamestate.json`
 
 const ENCODING = 'utf8'
 const WRITE_OPTIONS = { flag: 'w' }
 const DELETE_STATUS = { status: 'gamestate removed' }
 
-export const upsertRoomState = async (state) => {
+export const upsertRoomState = async state => {
   logTrace('upsertRoomState')
   const filePath = ROOM_GAMESTATE_FILE(state.room_id)
   const roomState = JSON.stringify(state, null, 2)
@@ -26,7 +25,7 @@ export const upsertRoomState = async (state) => {
   }
 }
 
-export const readGamestate = async (room_id) => {
+export const readGamestate = async room_id => {
   logTrace('read gamestate')
   const filePath = ROOM_GAMESTATE_FILE(room_id)
 
@@ -60,7 +59,7 @@ export const readAllGamestates = async () => {
   return gamestates
 }
 
-export const readGamestateByRoomId = async (room_id) => {
+export const readGamestateByRoomId = async room_id => {
   logTrace('read gamestate by room_id')
   const gamestate = {}
   const filePath = ROOM_GAMESTATE_FILE(room_id)
@@ -91,7 +90,7 @@ export const removeAllGamestates = async () => {
   return { status: 'gamestates removed' }
 }
 
-export const removeRoomGamestateById = async (room_id) => {
+export const removeRoomGamestateById = async room_id => {
   logTrace('remove gamestate by room_id')
   const filePath = ROOM_GAMESTATE_FILE(room_id)
 
@@ -115,16 +114,11 @@ export const removeAllPlayers = async () => {
       const rawData = await readFile(filePath, { encoding: ENCODING })
       const newGamestate = JSON.parse(rawData)
 
-      Object.keys(newGamestate.players).forEach(
-        (token) => delete newGamestate.players[token]
-      )
+      Object.keys(newGamestate.players).forEach(token => delete newGamestate.players[token])
       await upsertRoomState(newGamestate)
       gamestates[room_id] = newGamestate
     } catch (error) {
-      logTrace(
-        `Could not remove all players. No gamestate found for room_id: ${room_id}`,
-        error
-      )
+      logTrace(`Could not remove all players. No gamestate found for room_id: ${room_id}`, error)
       gamestates[room_id] = `No gamestate found for room_id: ${room_id}`
     }
   }
@@ -132,7 +126,7 @@ export const removeAllPlayers = async () => {
   return { status: 'players removed from rooms', gamestates }
 }
 
-export const removePlayerByToken = async (token) => {
+export const removePlayerByToken = async token => {
   logTrace('remove player by token')
   const gamestates = {}
 
@@ -151,10 +145,7 @@ export const removePlayerByToken = async (token) => {
         delete webSocketServerConnectionsPerRoom[room_id][token]
       }
     } catch (error) {
-      logTrace(
-        `Could not remove all players. No gamestate found for room_id: ${room_id}`,
-        error
-      )
+      logTrace(`Could not remove all players. No gamestate found for room_id: ${room_id}`, error)
       gamestates[room_id] = `No gamestate found for room_id: ${room_id}`
     }
   }

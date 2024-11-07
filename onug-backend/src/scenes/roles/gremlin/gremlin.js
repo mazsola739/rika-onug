@@ -7,17 +7,13 @@ export const gremlin = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = [`${prefix}_kickoff_text`, 'gremlin_kickoff2_text']
 
-  tokens.forEach((token) => {
+  tokens.forEach(token => {
     let interaction = {}
 
     const card = newGamestate.players[token].card
 
     if (prefix === 'gremlin') {
-      if (
-        card.player_original_id === 33 ||
-        (card.player_role_id === 33 &&
-          COPY_PLAYER.includes(card.player_original_id))
-      ) {
+      if (card.player_original_id === 33 || (card.player_role_id === 33 && COPY_PLAYER.includes(card.player_original_id))) {
         newGamestate.players[token].action_finished = false
         interaction = gremlinInteraction(newGamestate, token, title)
       }
@@ -28,13 +24,7 @@ export const gremlin = (gamestate, title, prefix) => {
       }
     }
 
-    createAndSendSceneMessage(
-      newGamestate,
-      token,
-      title,
-      interaction,
-      narration
-    )
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
   newGamestate.narration.push({ [title]: narration })

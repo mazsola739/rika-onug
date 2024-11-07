@@ -7,27 +7,17 @@ export const leaderzerbgroob = (gamestate, title) => {
   const tokens = getAllPlayerTokens(newGamestate.players)
   const narration = ['leader_zerbgroob_text']
 
-  tokens.forEach((token) => {
+  tokens.forEach(token => {
     let interaction = {}
 
     const card = newGamestate.players[token].card
 
-    if (
-      card.player_original_id === 48 ||
-      (card.player_role_id === 48 &&
-        ALL_COPY_PLAYER.includes(card.player_original_id))
-    ) {
+    if (card.player_original_id === 48 || (card.player_role_id === 48 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
       newGamestate.players[token].action_finished = false
       interaction = leaderZerbgroobInteraction(newGamestate, token, title)
     }
 
-    createAndSendSceneMessage(
-      newGamestate,
-      token,
-      title,
-      interaction,
-      narration
-    )
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
   newGamestate.narration.push({ [title]: narration })

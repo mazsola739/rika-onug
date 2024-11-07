@@ -18,5 +18,5 @@ export const random_joke = [
   'joke_17_text',
   'joke_18_text',
   'joke_19_text',
-  'joke_20_text',
+  'joke_20_text'
 ]

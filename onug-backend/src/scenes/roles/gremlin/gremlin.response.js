@@ -1,29 +1,12 @@
-import {
-  formatPlayerIdentifier,
-  generateRoleInteraction,
-  getNarrationByTitle,
-  getPlayerNumberWithMatchingToken,
-} from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection, validateMarkSelection } from '../../validators'
 
-export const gremlinResponse = (
-  gamestate,
-  token,
-  selected_card_positions,
-  selected_mark_positions,
-  title
-) => {
+export const gremlinResponse = (gamestate, token, selected_card_positions, selected_mark_positions, title) => {
   const narration = getNarrationByTitle(title, gamestate.narration)
 
   if (selected_card_positions && selected_card_positions.length > 0) {
-    if (
-      !validateCardSelection(
-        selected_card_positions,
-        gamestate.players[token].player_history,
-        title
-      )
-    ) {
+    if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
       return gamestate
     }
 
@@ -38,48 +21,30 @@ export const gremlinResponse = (
 
     newGamestate.players[token].card_or_mark_action = true
 
-    const currentPlayerNumber = getPlayerNumberWithMatchingToken(
-      newGamestate.players,
-      token
-    )
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
 
-    if (
-      currentPlayerNumber === selected_card_positions[0] ||
-      currentPlayerNumber === selected_card_positions[1]
-    ) {
+    if (currentPlayerNumber === selected_card_positions[0] || currentPlayerNumber === selected_card_positions[1]) {
       newGamestate.players[token].card.player_card_id = 87
     }
 
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
       swapped_cards: [position1, position2],
-      scene_end: true,
+      scene_end: true
     }
 
     const messageIdentifiers = formatPlayerIdentifier([position1, position2])
 
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers],
-      scene_end: true,
+      scene_end: true
     })
 
-    createAndSendSceneMessage(
-      newGamestate,
-      token,
-      title,
-      interaction,
-      narration
-    )
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
     return newGamestate
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
-    if (
-      !validateMarkSelection(
-        selected_mark_positions,
-        gamestate.players[token].player_history,
-        title
-      )
-    ) {
+    if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
       return gamestate
     }
 
@@ -94,41 +59,26 @@ export const gremlinResponse = (
 
     newGamestate.players[token].card_or_mark_action = true
 
-    const currentPlayerNumber = getPlayerNumberWithMatchingToken(
-      newGamestate.players,
-      token
-    )
+    const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
 
-    if (
-      currentPlayerNumber === selected_mark_positions[0] ||
-      currentPlayerNumber === selected_mark_positions[1]
-    ) {
+    if (currentPlayerNumber === selected_mark_positions[0] || currentPlayerNumber === selected_mark_positions[1]) {
       newGamestate.players[token].card.player_mark = ''
     }
 
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
       swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]],
-      scene_end: true,
+      scene_end: true
     }
 
-    const messageIdentifiers = formatPlayerIdentifier([
-      selected_mark_positions[0],
-      selected_mark_positions[1],
-    ])
+    const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
 
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_swapped_marks', ...messageIdentifiers],
-      scene_end: true,
+      scene_end: true
     })
 
-    createAndSendSceneMessage(
-      newGamestate,
-      token,
-      title,
-      interaction,
-      narration
-    )
+    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
 
     return newGamestate
   }

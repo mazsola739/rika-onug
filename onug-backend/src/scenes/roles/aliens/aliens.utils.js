@@ -2,22 +2,19 @@ import { ALL_ALIEN } from '../../../constants'
 
 export const findUniqueElementsInArrays = (array1, array2) => {
   const set = new Set(array1)
-  const uniqueFromArray2 = array2.filter((item) => !set.has(item))
-  const uniqueFromArray1 = array1.filter((item) => !array2.includes(item))
+  const uniqueFromArray2 = array2.filter(item => !set.has(item))
+  const uniqueFromArray1 = array1.filter(item => !array2.includes(item))
   const uniqueElements = uniqueFromArray1.concat(uniqueFromArray2)
 
   return uniqueElements
 }
 
-export const getAlienPlayerNumbersByRoleIdsWithNoShield = (players) => {
+export const getAlienPlayerNumbersByRoleIdsWithNoShield = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
-    if (
-      ALL_ALIEN.includes(player.card.player_role_id) &&
-      !player.card?.shield
-    ) {
+    if (ALL_ALIEN.includes(player.card.player_role_id) && !player.card?.shield) {
       result.push(player.player_number)
     }
   }
@@ -25,11 +22,7 @@ export const getAlienPlayerNumbersByRoleIdsWithNoShield = (players) => {
   return result
 }
 
-export const getNeighborByPosition = (
-  players,
-  currentPlayerNumber,
-  direction
-) => {
+export const getNeighborByPosition = (players, currentPlayerNumber, direction) => {
   const currentPlayer = players.indexOf(currentPlayerNumber)
   let neighborIndex
 
@@ -42,10 +35,10 @@ export const getNeighborByPosition = (
   return players[neighborIndex]
 }
 
-export const getSelectableAnyPlayerNumbersWithNoShield = (players) => {
+export const getSelectableAnyPlayerNumbersWithNoShield = players => {
   const result = []
 
-  Object.keys(players).forEach((token) => {
+  Object.keys(players).forEach(token => {
     if (players[token].card.shield !== true) {
       result.push(`player_${players[token].player_number}`)
     }
@@ -55,25 +48,20 @@ export const getSelectableAnyPlayerNumbersWithNoShield = (players) => {
 }
 
 export const moveCards = (cards, direction, movablePlayers) => {
-  const playerCards = Object.fromEntries(
-    Object.entries(cards).filter(([key]) => key.startsWith('player_'))
-  )
-  const staticCards = Object.fromEntries(
-    Object.entries(playerCards).filter(([key]) => !movablePlayers.includes(key))
-  )
+  const playerCards = Object.fromEntries(Object.entries(cards).filter(([key]) => key.startsWith('player_')))
+  const staticCards = Object.fromEntries(Object.entries(playerCards).filter(([key]) => !movablePlayers.includes(key)))
   const movableCards = {}
-  movablePlayers.forEach((player) => {
+  movablePlayers.forEach(player => {
     movableCards[player] = playerCards[player]
   })
 
-  const shiftAmount =
-    direction === 'right' ? 1 : Object.keys(movableCards).length - 1
+  const shiftAmount = direction === 'right' ? 1 : Object.keys(movableCards).length - 1
 
   const shiftedCards = {}
   Object.keys(movableCards).forEach((key, index) => {
     const newIndex = (index + shiftAmount) % Object.keys(movableCards).length
     shiftedCards[`player_${newIndex + 2}`] = {
-      mark: cards[`player_${newIndex + 2}`].mark,
+      mark: cards[`player_${newIndex + 2}`].mark
     }
     shiftedCards[`player_${newIndex + 2}`].card = movableCards[key].card
   })

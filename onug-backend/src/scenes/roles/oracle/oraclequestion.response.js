@@ -3,19 +3,8 @@ import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMe
 import { validateAnswerSelection } from '../../validators'
 import { formatOracleAnswer } from './oracle.utils'
 
-export const oracleQuestionResponse = (
-  gamestate,
-  token,
-  selected_answer,
-  title
-) => {
-  if (
-    !validateAnswerSelection(
-      selected_answer,
-      gamestate.players[token].player_history,
-      title
-    )
-  ) {
+export const oracleQuestionResponse = (gamestate, token, selected_answer, title) => {
+  if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 
@@ -38,14 +27,11 @@ export const oracleQuestionResponse = (
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     question: oracleQuestion,
-    answer: selected_answer,
+    answer: selected_answer
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
-    private_message: [
-      'interaction_oracle_answer',
-      formatOracleAnswer(selected_answer),
-    ],
+    private_message: ['interaction_oracle_answer', formatOracleAnswer(selected_answer)]
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

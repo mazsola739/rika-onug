@@ -12,7 +12,7 @@ export const newbie = (ws, message) => {
       JSON.stringify({
         type: NEWBIE,
         update: false,
-        message: 'client successfully rejoined',
+        message: 'client successfully rejoined'
       })
     )
     return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby' }))
@@ -26,9 +26,7 @@ export const newbie = (ws, message) => {
     ws.token = newToken
     logInfo(`newToken: ${newToken}`)
 
-    return ws.send(
-      JSON.stringify({ type: NEWBIE, update: true, token: newToken })
-    )
+    return ws.send(JSON.stringify({ type: NEWBIE, update: true, token: newToken }))
   }
 
   return

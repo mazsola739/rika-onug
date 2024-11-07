@@ -1,6 +1,6 @@
 import { ALL_ALIEN } from '../../constants'
 
-export const getAlienPlayerNumbersByRoleIds = (players) => {
+export const getAlienPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {

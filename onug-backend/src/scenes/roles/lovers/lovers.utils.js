@@ -1,4 +1,4 @@
-export const getLoversPlayerNumbersByMark = (players) => {
+export const getLoversPlayerNumbersByMark = players => {
   const result = []
 
   for (const token in players) {

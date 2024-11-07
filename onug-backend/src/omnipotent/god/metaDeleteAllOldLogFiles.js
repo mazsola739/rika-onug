@@ -9,9 +9,7 @@ export const metaDeleteAllOldLogFiles = async (req, res) => {
     const logDir = path.resolve(__dirname, '../../../logs')
     const allFilesInLogDir = await readdir(logDir, { withFileTypes: true })
 
-    const logFiles = allFilesInLogDir
-      .filter((item) => !item.isDirectory() && item.name !== 'placeholder.md')
-      .map((item) => path.join(logDir, item.name))
+    const logFiles = allFilesInLogDir.filter(item => !item.isDirectory() && item.name !== 'placeholder.md').map(item => path.join(logDir, item.name))
 
     if (logFiles.length > 0) {
       logFiles.pop()
@@ -19,13 +17,11 @@ export const metaDeleteAllOldLogFiles = async (req, res) => {
 
     logTrace(`META DELETE ALL: ${JSON.stringify(logFiles)}`)
 
-    await Promise.all(logFiles.map(async (filePath) => unlink(filePath)))
+    await Promise.all(logFiles.map(async filePath => unlink(filePath)))
 
     return res.send({ message: 'done', logFiles })
   } catch (error) {
     logErrorWithStack(error)
-    return res
-      .status(500)
-      .send({ error: 'An error occurred while deleting log files.' })
+    return res.status(500).send({ error: 'An error occurred while deleting log files.' })
   }
 }

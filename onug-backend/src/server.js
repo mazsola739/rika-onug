@@ -29,6 +29,4 @@ app.use('/stub', stubRouter)
 app.use(pageNotFoundError)
 app.use(internalServerError)
 
-ViteExpress.listen(app, PORT, () =>
-  logDebug(`Server is listening on port: ${PORT}`)
-)
+ViteExpress.listen(app, PORT, () => logDebug(`Server is listening on port: ${PORT}`))

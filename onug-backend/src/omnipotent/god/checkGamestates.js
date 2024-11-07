@@ -10,7 +10,7 @@ export const checkGamestates = async (req, res) => {
     logTrace(`sending back gamestates: ${JSON.stringify(gamestates)}`)
 
     return res.send({
-      gamestates,
+      gamestates
     })
   } catch (error) {
     logErrorWithStack(error)

@@ -4,14 +4,9 @@ import { webSocketServerConnectionsPerRoom } from '../../websocket/connections'
 export const sendMessageToPlayer = async (req, res) => {
   try {
     const { message, token } = req.body
-    logTrace(
-      'GOD send message to player endpoint triggered',
-      `${message}, ${token}`
-    )
-    Object.keys(webSocketServerConnectionsPerRoom).forEach((room) => {
-      const connectionsEntry = Object.entries(
-        webSocketServerConnectionsPerRoom[room]
-      )
+    logTrace('GOD send message to player endpoint triggered', `${message}, ${token}`)
+    Object.keys(webSocketServerConnectionsPerRoom).forEach(room => {
+      const connectionsEntry = Object.entries(webSocketServerConnectionsPerRoom[room])
       for (let [playerToken, ws] of connectionsEntry)
         if (playerToken === token) {
           ws.send(JSON.stringify(message))
@@ -19,7 +14,7 @@ export const sendMessageToPlayer = async (req, res) => {
         }
     })
     return res.send({
-      message: 'has been sent to player',
+      message: 'has been sent to player'
     })
   } catch (error) {
     logErrorWithStack(error)

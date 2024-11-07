@@ -1,8 +1,4 @@
-import {
-  formatPlayerIdentifier,
-  generateRoleInteraction,
-  getAlienPlayerNumbersByRoleIds,
-} from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getAlienPlayerNumbersByRoleIds } from '../../sceneUtils'
 
 export const leaderInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
@@ -11,13 +7,13 @@ export const leaderInteraction = (gamestate, token, title) => {
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
-    aliens,
+    aliens
   }
 
   const messageIdentifiers = formatPlayerIdentifier(aliens)
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_aliens', ...messageIdentifiers],
-    uniqueInformations: { aliens },
+    uniqueInformations: { aliens }
   })
 }

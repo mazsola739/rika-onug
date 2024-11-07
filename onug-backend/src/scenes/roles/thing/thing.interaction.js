@@ -1,7 +1,4 @@
-import {
-  generateRoleInteraction,
-  getPlayerNeighborsByToken,
-} from '../../sceneUtils'
+import { generateRoleInteraction, getPlayerNeighborsByToken } from '../../sceneUtils'
 
 export const thingInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
@@ -12,15 +9,15 @@ export const thingInteraction = (gamestate, token, title) => {
     ...newGamestate.players[token].player_history[title],
     selectable_cards: neighbors,
     selectable_card_limit: { player: 1, center: 0 },
-    obligatory: true,
+    obligatory: true
   }
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_must_one_neighbor'],
     selectableCards: {
       selectable_cards: neighbors,
-      selectable_card_limit: { player: 1, center: 0 },
+      selectable_card_limit: { player: 1, center: 0 }
     },
-    obligatory: true,
+    obligatory: true
   })
 }

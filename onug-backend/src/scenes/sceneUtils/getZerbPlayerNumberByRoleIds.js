@@ -1,4 +1,4 @@
-export const getZerbPlayerNumberByRoleIds = (players) => {
+export const getZerbPlayerNumberByRoleIds = players => {
   const result = []
 
   for (const token in players) {

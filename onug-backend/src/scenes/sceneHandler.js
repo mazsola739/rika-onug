@@ -5,7 +5,7 @@ import { allPlayersStateCheck /* randomDelay */ } from '../utils'
 import { broadcast } from '../websocket/connections'
 import { actionHandler } from './actionHandler'
 
-export const sceneHandler = async (gamestate) => {
+export const sceneHandler = async gamestate => {
   logTrace(`sceneHandler in room [${gamestate.room_id}]`)
 
   let newGamestate = { ...gamestate, actual_scenes: [] }
@@ -16,19 +16,11 @@ export const sceneHandler = async (gamestate) => {
     shield: false,
     artifact: false,
     view_player_card: false,
-    view_center_card: false,
+    view_center_card: false
   }
 
-  const canAddScene = (scene) => {
-    const {
-      player_card_shifting,
-      center_card_shifting,
-      mark_shifting,
-      shield,
-      artifact,
-      view_player_card,
-      view_center_card,
-    } = scene
+  const canAddScene = scene => {
+    const { player_card_shifting, center_card_shifting, mark_shifting, shield, artifact, view_player_card, view_center_card } = scene
 
     logTrace(`Evaluating scene: ${scene.scene_title}`)
     logTrace(`Current flags state: ${JSON.stringify(flagsState)}`)
@@ -39,10 +31,8 @@ export const sceneHandler = async (gamestate) => {
       mark_shifting && flagsState.mark_shifting,
       shield && flagsState.shield,
       artifact && flagsState.artifact,
-      (view_center_card && flagsState.center_card_shifting) ||
-        (center_card_shifting && flagsState.view_center_card),
-      (view_player_card && flagsState.player_card_shifting) ||
-        (player_card_shifting && flagsState.view_player_card),
+      (view_center_card && flagsState.center_card_shifting) || (center_card_shifting && flagsState.view_center_card),
+      (view_player_card && flagsState.player_card_shifting) || (player_card_shifting && flagsState.view_player_card)
     ]
 
     if (conflicts.some(Boolean)) {
@@ -50,29 +40,13 @@ export const sceneHandler = async (gamestate) => {
       return false
     }
 
-    const noFlagsSet = Object.values(flagsState).every((val) => !val)
-    const onlyViewingFlagsSet =
-      (view_player_card || view_center_card) &&
-      ![
-        player_card_shifting,
-        center_card_shifting,
-        mark_shifting,
-        shield,
-        artifact,
-      ].some(Boolean)
+    const noFlagsSet = Object.values(flagsState).every(val => !val)
+    const onlyViewingFlagsSet = (view_player_card || view_center_card) && ![player_card_shifting, center_card_shifting, mark_shifting, shield, artifact].some(Boolean)
 
     if (
       noFlagsSet ||
       onlyViewingFlagsSet ||
-      (view_player_card === false &&
-        view_center_card === false &&
-        ![
-          player_card_shifting,
-          center_card_shifting,
-          mark_shifting,
-          shield,
-          artifact,
-        ].some(Boolean))
+      (view_player_card === false && view_center_card === false && ![player_card_shifting, center_card_shifting, mark_shifting, shield, artifact].some(Boolean))
     ) {
       if (view_player_card) flagsState.view_player_card = true
       if (view_center_card) flagsState.view_center_card = true
@@ -96,7 +70,7 @@ export const sceneHandler = async (gamestate) => {
     if (canAddScene(scene)) {
       newGamestate.actual_scenes.push({
         scene_title: scene.scene_title,
-        scene_number: scene.scene_number,
+        scene_number: scene.scene_number
       })
       logTrace(`Added to actual_scenes: ${scene.scene_title}`)
 
@@ -110,15 +84,8 @@ export const sceneHandler = async (gamestate) => {
     }
   }
 
-  newGamestate.scripts = newGamestate.scripts.filter(
-    (scene) =>
-      !newGamestate.actual_scenes.some(
-        (actualScene) => actualScene.scene_title === scene.scene_title
-      )
-  )
-  logTrace(
-    `Remaining scripts after filtering: ${JSON.stringify(newGamestate.scripts)}`
-  )
+  newGamestate.scripts = newGamestate.scripts.filter(scene => !newGamestate.actual_scenes.some(actualScene => actualScene.scene_title === scene.scene_title))
+  logTrace(`Remaining scripts after filtering: ${JSON.stringify(newGamestate.scripts)}`)
 
   for (const actualScene of newGamestate.actual_scenes) {
     logTrace(`Processing action for scene: ${actualScene.scene_title}`)
@@ -126,10 +93,7 @@ export const sceneHandler = async (gamestate) => {
   }
 
   const allActionsComplete = newGamestate.scripts.length === 0
-  const noPendingPlayerActions = allPlayersStateCheck(
-    newGamestate.players,
-    'action_finished'
-  )
+  const noPendingPlayerActions = allPlayersStateCheck(newGamestate.players, 'action_finished')
   const gameCanEnd = allActionsComplete && noPendingPlayerActions
 
   if (gameCanEnd) {
@@ -143,7 +107,7 @@ export const sceneHandler = async (gamestate) => {
       success: true,
       day_mode: true,
       night_mode: false,
-      message: 'Successfully finished the game',
+      message: 'Successfully finished the game'
     })
   }
 

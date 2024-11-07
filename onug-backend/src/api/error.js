@@ -11,7 +11,5 @@ export const pageNotFoundError = (req, res) => {
 
 export const internalServerError = (error, req, res) => {
   logError(`ERROR occurred: ${error.stack}`)
-  res
-    .status(500)
-    .send(`500 | Sorry, the app could not handle the request properly`)
+  res.status(500).send(`500 | Sorry, the app could not handle the request properly`)
 }
