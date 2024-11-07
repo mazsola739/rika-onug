@@ -30,7 +30,7 @@ export const doppelgangerResponse = (
 
   if (
     newGamestate.card_positions[selected_card_positions[0]].card.id === 30 ||
-    newGamestate.card_positions[selected_card_positions[0]].card.id === 64
+    newGamestate.card_positions[selected_card_positions[0]].card.id === 64 
   ) {
     newGamestate.players[token].card.player_role = 'VILLAGER'
     newGamestate.players[token].card.player_team = 'villager'

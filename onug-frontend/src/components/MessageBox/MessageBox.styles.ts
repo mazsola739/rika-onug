@@ -39,7 +39,7 @@ export const Message = styled.div`
 
 export const StyledMessageBoxCards = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 3px;
   flex-direction: row;
   flex-wrap: wrap;
 `

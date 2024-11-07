@@ -15,6 +15,11 @@ import {
   moveCards,
 } from './aliens.utils'
 
+/* New Alien
+Some players, via app, put their fist out. Aliens collectively choose one to tap who becomes an Alien and loses their original power
+Alien Helper
+Some players, via app, put their fist out. Aliens collectively choose one to tap who joins the Alien team but retains their original power */
+
 export const aliensInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 

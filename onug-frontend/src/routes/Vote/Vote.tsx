@@ -19,7 +19,7 @@ export const Vote: React.FC = observer(() => {
           <CenterCards />
           <RoleTokenList />
         </VoteCenter>
-        {tablePlayerCard && <PlayerCard card={ownCard} cardSize={130} tokenSize={50} />}
+        {tablePlayerCard && <PlayerCard card={ownCard} cardSize={120} tokenSize={50} />}
       </Main>
       {tablePlayerCards && <AroundTableSide cards={right} />}
       <VoteFooter />

@@ -1,7 +1,7 @@
 import { ARRIVE_VOTE, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
+import { gamePropStore, playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
 import { splitCardsToTable } from 'utils'
 
 export const useVote = () => {
@@ -49,8 +49,11 @@ export const useVote = () => {
     }
 
     if (lastJsonMessage?.type === RESULT) {
+      gamePropStore.setEnd(true)
       riseAndRestStore.openYourEyes(lastJsonMessage)
       riseAndRestStore.setTablePlayerCard(lastJsonMessage)
+      gamePropStore.setVoteResult(lastJsonMessage.vote_result)
+      gamePropStore.setWinnerTeams(lastJsonMessage.winner_teams)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {

@@ -32,6 +32,9 @@ export const vote = async (ws, message) => {
       },
     }
 
+    //TODO fix to check artifact if you have (revealingFate) and sending to client before vote
+    //TODO fix if you cant speak, or cant see table
+
     tokens.forEach((token) => {
       const player = players[token]
       const otherPlayers = getPlayerNumbersWithNonMatchingTokens(players, [

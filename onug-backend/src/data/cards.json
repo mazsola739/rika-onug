@@ -25,6 +25,7 @@
   { "id": 14, "expansion": "Werewolf", "role": "VILLAGER", "team": "village" },
   { "id": 15, "expansion": "Werewolf", "role": "WEREWOLF", "team": "werewolf" },
   { "id": 16, "expansion": "Werewolf", "role": "WEREWOLF", "team": "werewolf" },
+
   {
     "id": 17,
     "expansion": "Daybreak",
@@ -66,6 +67,7 @@
     "team": "village"
   },
   { "id": 27, "expansion": "Daybreak", "role": "WITCH", "team": "village" },
+  
   {
     "id": 28,
     "expansion": "Vampire",
@@ -85,6 +87,7 @@
   { "id": 39, "expansion": "Vampire", "role": "THE_COUNT", "team": "vampire" },
   { "id": 40, "expansion": "Vampire", "role": "THE_MASTER", "team": "vampire" },
   { "id": 41, "expansion": "Vampire", "role": "VAMPIRE", "team": "vampire" },
+
   { "id": 42, "expansion": "Alien", "role": "ALIEN", "team": "alien" },
   { "id": 43, "expansion": "Alien", "role": "ALIEN", "team": "alien" },
   { "id": 44, "expansion": "Alien", "role": "BLOB", "team": "blob" },

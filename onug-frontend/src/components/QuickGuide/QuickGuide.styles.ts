@@ -81,8 +81,8 @@ export const StyledQuickGuideToken = styled.img<StyledQuickGuideTokenProps>`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
-  width: 75px;
-  height: 75px;
+  width: 60px;
+  height: 60px;
 `
 
 export const QuickGuideRule = styled.span`

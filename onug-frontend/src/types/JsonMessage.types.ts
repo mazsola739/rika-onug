@@ -81,12 +81,12 @@ export type TableCenterCard = {
   team?: string
 }
 
-export type ActualSceneType = {
+export type ActualScene = {
   scene_number: number
   scene_title: string
 }
 
-export type InteractionType = {
+export type Interaction = {
   answer_options?: string[]
   artifacted_cards?: CardPosition[]
   dreamwolf?: CardPosition[]
@@ -110,6 +110,14 @@ export type InteractionType = {
   werewolves?: CardPosition[]
 }
 
+export type Result = {
+  player_number: CardPosition
+  name: string
+  voters: CardPosition[] | []
+  win: boolean
+  survived: boolean
+}
+
 export type NarrationType = keyof typeof narration_text
 
 export type MessagesType = keyof typeof messages_text
@@ -117,13 +125,13 @@ export type MessagesType = keyof typeof messages_text
 export type IdentifierType = keyof typeof identifier
 
 export type WsJsonMessage = {
-  actual_scene?: ActualSceneType
+  actual_scene?: ActualScene
   center_cards?: CenterCard[]
   day_mode?: boolean
   errors?: string[]
   guess_cards?: number[]
   guessed_cards?: GuessedCard[]
-  interaction?: InteractionType
+  interaction?: Interaction
   message?: string
   narration?: NarrationType[]
   narrations?: Record<string, NarrationType[]>[]
@@ -146,4 +154,6 @@ export type WsJsonMessage = {
   token?: string
   type?: string
   update?: boolean
+  vote_result?: Result[]
+  winner_teams?: string[]
 }

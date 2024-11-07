@@ -9,6 +9,7 @@ export const werewolvesInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const werewolves = getWerewolfPlayerNumbersByRoleIds(newGamestate.players)
+  //TODO MARK OF FEAR
   const dreamwolf = getDreamWolfPlayerNumberByRoleIds(newGamestate.players)
   const loneWolf = werewolves.length + dreamwolf.length === 1
   const selectable_cards = loneWolf ? CENTER_CARD_POSITIONS : []

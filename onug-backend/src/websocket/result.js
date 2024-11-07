@@ -1,11 +1,14 @@
 import { ERROR, RESULT } from '../constants'
 import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
+import { getAllPlayerTokens } from '../scenes/sceneUtils'
 import {
-  getAllPlayerTokens,
-  getPlayerNumberWithMatchingToken,
-} from '../scenes/sceneUtils'
+  assignRoleFromArtifact,
+  getPlayerInfo,
+  updatePlayerRoleFromMark,
+} from '../utils/result.utils'
 import { validateRoom } from '../validators'
+import { getWinnersAndLosers } from '../winingAndLosing/getWinnersAndLosers'
 import { sendMessageToPlayer } from './connections'
 
 export const result = async (ws, message) => {
@@ -20,46 +23,62 @@ export const result = async (ws, message) => {
     }
 
     let newGamestate = { ...gamestate }
-    newGamestate.players[token].flag = true
-    newGamestate.players[token].vote = selected_card_positions
+    const currentPlayer = newGamestate.players[token]
+    currentPlayer.flag = true
+    currentPlayer.vote = selected_card_positions
 
-    const allVoted = Object.values(newGamestate.players).every(
-      (player) => player.flag === true
+    const playerCardPosition =
+      newGamestate.card_positions[currentPlayer.player_number]
+
+    currentPlayer.card.player_card_id = playerCardPosition.card.id
+    currentPlayer.card.player_mark = playerCardPosition.mark
+    updatePlayerRoleFromMark(
+      currentPlayer,
+      playerCardPosition.card,
+      playerCardPosition.mark
     )
-    if (!allVoted) {
+
+    newGamestate.artifact.forEach((artifact) => {
+      const card = newGamestate.card_positions[artifact.id]?.card
+      if (card) {
+        Object.assign(card, assignRoleFromArtifact(artifact))
+      }
+    })
+
+    const center_cards = Object.entries(newGamestate.card_positions)
+      .filter(
+        ([position, { card }]) => position.startsWith('center') && card.id > 0
+      )
+      .map(([position, { card }]) => ({
+        card_position: position,
+        card_id: card.id,
+        card_role: card.role,
+        card_team: card.team,
+      }))
+
+    if (!Object.values(newGamestate.players).every((p) => p.flag)) {
       await upsertRoomState(newGamestate)
       return
     }
 
-    const vote_result = countVotes(newGamestate.players)
-    newGamestate.vote_result = vote_result
+    const {voteResult, winnerTeams} = getWinnersAndLosers(newGamestate)
+    newGamestate.vote_result = voteResult
 
-    getAllPlayerTokens(newGamestate.players).forEach((playerToken) => {
+    const tokens = getAllPlayerTokens(newGamestate.players)
+
+    tokens.forEach((playerToken) => {
       const player = newGamestate.players[playerToken]
       player.flag = false
 
-      const playerNumber = getPlayerNumberWithMatchingToken(
-        newGamestate.players,
-        playerToken
-      )
-      const cardPosition = newGamestate.card_positions[playerNumber]
-
-      player.card = {
-        player_card_id: cardPosition.card.id,
-        player_role: cardPosition.card.role,
-        player_team: cardPosition.card.team,
-        player_mark: cardPosition.mark,
-      }
-
-      const center_cards = filterCenterCards(newGamestate.card_positions)
-
-      const resultMessage = createResultMessage(
-        playerToken,
-        newGamestate,
-        vote_result,
-        center_cards
-      )
-      sendMessageToPlayer(room_id, playerToken, resultMessage)
+      sendMessageToPlayer(room_id, playerToken, {
+        type: RESULT,
+        token: playerToken,
+        vote_result: voteResult,
+        winner_teams: winnerTeams,
+        center_cards,
+        player: getPlayerInfo(player),
+        players: Object.values(newGamestate.players).map(getPlayerInfo),
+      })
     })
 
     await upsertRoomState(newGamestate)
@@ -75,63 +94,5 @@ export const result = async (ws, message) => {
         message: 'Failed to process result. Please try again.',
       })
     )
-  }
-}
-
-const countVotes = (players) => {
-  const voteCounts = Object.fromEntries(
-    Object.keys(players).map((id) => [players[id].player_number, []])
-  )
-
-  Object.values(players).forEach((player) => {
-    player.vote.forEach((target) => {
-      if (voteCounts[target]) voteCounts[target].push(player.player_number)
-    })
-  })
-
-  return voteCounts
-}
-
-const filterCenterCards = (cardPositions) => {
-  return Object.entries(cardPositions)
-    .filter(
-      ([position, { card }]) => position.startsWith('center') && card.id > 0
-    )
-    .map(([position, { card }]) => ({
-      card_position: position,
-      card_id: card.id,
-      card_role: card.role,
-      card_team: card.team,
-    }))
-}
-
-const createResultMessage = (
-  playerToken,
-  gamestate,
-  vote_result,
-  center_cards
-) => {
-  const player = gamestate.players[playerToken]
-  return {
-    type: RESULT,
-    token: playerToken,
-    vote_result,
-    center_cards,
-    player: {
-      player_name: player.name,
-      player_number: player.player_number,
-      player_card_id: player.card.player_card_id,
-      player_role: player.card.player_role,
-      player_team: player.card.player_team,
-      player_mark: player.card.player_mark,
-    },
-    players: Object.values(gamestate.players).map((player) => ({
-      player_name: player.name,
-      player_number: player.player_number,
-      player_card_id: player.card.player_card_id,
-      player_role: player.card.player_role,
-      player_team: player.card.player_team,
-      player_mark: player.card.player_mark,
-    })),
   }
 }

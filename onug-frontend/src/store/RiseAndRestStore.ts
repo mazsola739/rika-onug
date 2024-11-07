@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { deckStore, gamePropStore, messageStore, selectionStore } from 'store'
-import { CardPosition, InteractionType, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
+import { CardPosition, Interaction, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
 import { getCardById } from 'utils'
 
 class RiseAndRestStore {
@@ -158,7 +158,7 @@ class RiseAndRestStore {
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
     this.resetScene()
-    gamePropStore.setInteraction(lastJsonMessage?.interaction as InteractionType)
+    gamePropStore.setInteraction(lastJsonMessage?.interaction as Interaction)
     gamePropStore.setTitle(lastJsonMessage.title)
     this.setTablePlayerCards(lastJsonMessage)
     this.setTableCenterCards(lastJsonMessage)

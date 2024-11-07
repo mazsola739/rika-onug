@@ -1,11 +1,14 @@
 import { makeAutoObservable } from 'mobx'
-import { InteractionType } from 'types'
+import { Interaction, Result } from 'types'
 
 class GamePropStore {
   title: string
   nightfall: boolean
   sunrise: boolean
-  interaction: InteractionType
+  interaction: Interaction
+  end: boolean = false
+  voteResult: Result[]
+  winnerTeams: string[]
 
   constructor() {
     makeAutoObservable(this)
@@ -54,7 +57,7 @@ class GamePropStore {
     return this.interaction.masons
   }
 
-  setInteraction(interaction: InteractionType): void {
+  setInteraction(interaction: Interaction): void {
     this.interaction = { ...this.interaction, ...interaction }
   }
 
@@ -70,6 +73,17 @@ class GamePropStore {
   setSunrise(sunrise: boolean): void {
     this.sunrise = sunrise
     this.nightfall = !sunrise
+  }
+
+  setEnd(end: boolean): void {
+    this.end = end
+  }
+
+  setVoteResult(voteResult: Result[]) : void {
+    this.voteResult = voteResult
+  }
+  setWinnerTeams(winnerTeams: string[]): void {
+    this.winnerTeams = winnerTeams
   }
 
   reset(): void {

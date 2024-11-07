@@ -1,3 +1,5 @@
+import { validateRoom } from '../validators'
+import { broadcast } from './connections'
 import { HYDRATE_ROOM } from '../constants'
 import { upsertRoomState } from '../repository'
 import {
@@ -7,8 +9,6 @@ import {
   toggleCardSelect,
   toggleExpansions,
 } from '../utils'
-import { validateRoom } from '../validators'
-import { broadcast } from './connections'
 
 export const updateRoom = async (message) => {
   const { room_id, card_id, expansion } = message

@@ -88,6 +88,8 @@ export const interaction_must_two_center = 'You must choose two center cards'
 export const interaction_must_three_center = 'You must choose three center cards'
 
 //responses
+//villager
+export const interaction_villager = 'You are villager'
 //nothing
 export const interaction_nothing = 'You chose to do nothing'
 //timer

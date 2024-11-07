@@ -19,7 +19,7 @@ export const Game: React.FC = observer(() => {
         <GameCenter>
           <CenterCards />
         </GameCenter>
-        {tablePlayerCard && <PlayerCard card={ownCard} cardSize={130} tokenSize={50} />}
+        {tablePlayerCard && <PlayerCard card={ownCard} cardSize={120} tokenSize={50} />}
       </Main>
       {tablePlayerCards && <AroundTableSide cards={right} />}
       <GameFooter />
