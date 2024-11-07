@@ -37,15 +37,13 @@ export const order: OrderJson[] = [
     scene_title: 'VAMPIRES',
     card_id: [39, 40, 41, 1],
     scene_number: 8,
-    condition: selectedCards =>
-      selectedCards.some(card => card.id === 39) || selectedCards.some(card => card.id === 40) || selectedCards.some(card => card.id === 41)
+    condition: selectedCards => selectedCards.some(card => card.id === 39) || selectedCards.some(card => card.id === 40) || selectedCards.some(card => card.id === 41)
   },
   {
     scene_title: 'VAMPIRES_VOTE',
     card_id: [39, 40, 41, 1],
     scene_number: 9,
-    condition: selectedCards =>
-      selectedCards.some(card => card.id === 39) || selectedCards.some(card => card.id === 40) || selectedCards.some(card => card.id === 41)
+    condition: selectedCards => selectedCards.some(card => card.id === 39) || selectedCards.some(card => card.id === 40) || selectedCards.some(card => card.id === 41)
   },
   {
     scene_title: 'THE_COUNT',
@@ -182,10 +180,7 @@ export const order: OrderJson[] = [
     card_id: [57, 60, 65, 69, 1],
     scene_number: 33,
     condition: selectedCards =>
-      selectedCards.some(card => card.id === 57) ||
-      selectedCards.some(card => card.id === 60) ||
-      selectedCards.some(card => card.id === 65) ||
-      selectedCards.some(card => card.id === 69)
+      selectedCards.some(card => card.id === 57) || selectedCards.some(card => card.id === 60) || selectedCards.some(card => card.id === 65) || selectedCards.some(card => card.id === 69)
   },
   {
     scene_title: 'TEMPTRESS',
@@ -213,10 +208,7 @@ export const order: OrderJson[] = [
     card_id: [15, 16, 17, 21, 22, 1],
     scene_number: 38,
     condition: selectedCards =>
-      selectedCards.some(card => card.id === 15) ||
-      selectedCards.some(card => card.id === 16) ||
-      selectedCards.some(card => card.id === 17) ||
-      selectedCards.some(card => card.id === 22)
+      selectedCards.some(card => card.id === 15) || selectedCards.some(card => card.id === 16) || selectedCards.some(card => card.id === 17) || selectedCards.some(card => card.id === 22)
   },
   {
     scene_title: 'ALPHA_WOLF',

@@ -20,7 +20,8 @@ export const VoteInfoPanel: React.FC = observer(() => {
         <span>Selected cards: {selectedCards}</span>
       )}
       {!end && voteStore.knownPlayerCard && <OwnCard player={voteStore.knownPlayer} card={voteStore.knownPlayerCard} mark={voteStore.knownPlayerMark} />}
-      {!end && voteStore.narrations &&
+      {!end &&
+        voteStore.narrations &&
         voteStore.voteNarration.map((scene, index) => (
           <Narration key={index}>
             <NarrationImage src={`/assets/cards/${scene.image}.webp`} alt="info" />

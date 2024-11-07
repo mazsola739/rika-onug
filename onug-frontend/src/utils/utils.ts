@@ -1,7 +1,6 @@
 import { CardJson, TablePlayerCard } from 'types'
 
-export const areAnyCardSelectedById = (selectedCards: CardJson[], cardIds: number[]): boolean =>
-  cardIds.some(cardId => isCardSelectedById(selectedCards, cardId))
+export const areAnyCardSelectedById = (selectedCards: CardJson[], cardIds: number[]): boolean => cardIds.some(cardId => isCardSelectedById(selectedCards, cardId))
 
 export const findCardById = <T extends { id: number }>(list: T[], id: number): T | undefined => {
   return list.find(item => item.id === id)

@@ -2,15 +2,7 @@ import { ASSASSIN_IDS, HAS_MARK_IDS, VAMPIRE_IDS } from 'constant'
 import { artifacts, cards, marks } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardJson, Expansion, TokenJson } from 'types'
-import {
-  areAnyCardSelectedById,
-  checkCardPresence,
-  createDefaultCard,
-  createDefaultToken,
-  determineTotalPlayers,
-  getCardById,
-  getMarkByName
-} from 'utils'
+import { areAnyCardSelectedById, checkCardPresence, createDefaultCard, createDefaultToken, determineTotalPlayers, getCardById, getMarkByName } from 'utils'
 import { playersStore } from './PlayersStore'
 
 class DeckStore {
@@ -117,11 +109,7 @@ class DeckStore {
 
   updateArtifacts(): void {
     this.artifacts =
-      this.hasSentinel && this.hasCurator
-        ? artifacts
-        : artifacts.filter(
-            artifact => (this.hasSentinel && artifact.token_name === 'shield') || (this.hasCurator && artifact.token_name !== 'shield')
-          )
+      this.hasSentinel && this.hasCurator ? artifacts : artifacts.filter(artifact => (this.hasSentinel && artifact.token_name === 'shield') || (this.hasCurator && artifact.token_name !== 'shield'))
   }
 
   clearPlayerCard(): void {

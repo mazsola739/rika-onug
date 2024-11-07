@@ -17,8 +17,7 @@ export const QG = {
   Hunter: 'If he is voted to die, he can chose one player to also die',
   Insomniac: "Looks at her own card, but does not gain its power, just the team alliance. Can't if it has a Shield on it",
   Instigator: 'Give any player (including herself) a Mark of the Traitor; they only win if someone on their team dies',
-  Leader:
-    'Aliens must stick out thumb for him to see. if all Aliens vote the Leader, they win, even if an Alien is killed. If Groob and Zerb are in play, he is on his own team wins if they survive ',
+  Leader: 'Aliens must stick out thumb for him to see. if all Aliens vote the Leader, they win, even if an Alien is killed. If Groob and Zerb are in play, he is on his own team wins if they survive ',
   Marksman: "Looks at one other player's card and a different player's mark",
   Mason: 'Wakes up and looks for the other fellow Mason',
   Oracle: 'App asks her a question, she enters it on the app, when then reveals what she did to everyone',
@@ -44,8 +43,7 @@ export const QG = {
   'Mystic Wolf': "Wakes with other Werewolves. Wakes after and looks at any other player's card (not center or own)",
   Squire: 'All Werewolf team (not Minion/Squire) stick up their thumb for him to see, who may look at their cards',
   Werewolf: 'Open their eyes and view their fellow Werewolves (including Mystic and Alpha)',
-  'Apprentice Tanner':
-    'Tanner sticks out his thumb for him to see. Only wins if another Tanner dies. Multiple Apprentice Tanners are on the same team ',
+  'Apprentice Tanner': 'Tanner sticks out his thumb for him to see. Only wins if another Tanner dies. Multiple Apprentice Tanners are on the same team ',
   Tanner: 'Only wins if he dies. Multiple Tanners are on separate teams',
   Alien: ' View their fellow Aliens (including Body Snatcher, Synthetic, Groob and Zerb) and do the action app says',
   Bodysnatcher: 'Wakes with other aliens. Wakes after and swaps cards via app. New card is on the Alien team.',
@@ -55,16 +53,13 @@ export const QG = {
   Renfield: 'With their eyes closed, sees who Vampires gave Mark of the Vampire; then gives himself Mark of the Bat',
   'The Master': 'Cannot die if another Vampire votes for him; Go to the next highest voted',
   'The Count': 'Gives a non-Vampire the Mark of Fear; this prevents that player from doing their night action',
-  Vampire:
-    'Open their eyes and view their fellow Vampires (including The Count and The Master). Then decide together to give one non-Vampire the Mark of the Vampire, which turns them into a Vampire',
+  Vampire: 'Open their eyes and view their fellow Vampires (including The Count and The Master). Then decide together to give one non-Vampire the Mark of the Vampire, which turns them into a Vampire',
   Blob: ' Wins if no player part of him (left, right or both), via app, dies',
   Mortician: 'Looks at 1-2 neighbor cards (left or right), via app. Wins if at least one of his neighbors is killed',
   Assassin: 'Gives the Mark of the Assassin to any player (not himself); he can only win if that player dies',
-  'Apprentice Assassin':
-    'Wakes up to see who the Assassin is; he can only win if the Assassin  dies. If there is no Assassin, he becomes the Assassin',
+  'Apprentice Assassin': 'Wakes up to see who the Assassin is; he can only win if the Assassin  dies. If there is no Assassin, he becomes the Assassin',
   Traitor: "The player who has the Mark of the Traitor (given by the Instigator): 'Only wins if someone on their team dies'",
-  Nostradamus:
-    "Team less. Looks at up to 3 cards. As soon as he sees a non-villager card, he stops. The last card he looks at: if that team wins, he wins but only if he doesn't die",
+  Nostradamus: "Team less. Looks at up to 3 cards. As soon as he sees a non-villager card, he stops. The last card he looks at: if that team wins, he wins but only if he doesn't die",
   'Alien Artifact': 'The player is now an Alien',
   'Bow of the Hunter': 'the player is now a Hunter',
   'Brand of the Villager': 'the player is now a Villager',

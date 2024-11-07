@@ -61,7 +61,7 @@ export const result = async (ws, message) => {
       return
     }
 
-    const {voteResult, winnerTeams} = getWinnersAndLosers(newGamestate)
+    const { voteResult, winnerTeams } = getWinnersAndLosers(newGamestate)
     newGamestate.vote_result = voteResult
 
     const tokens = getAllPlayerTokens(newGamestate.players)

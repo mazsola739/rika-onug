@@ -6,7 +6,5 @@ import { StyledRoleTokenList } from './RoleTokenList.styles'
 export const RoleTokenList: React.FC = observer(() => {
   const { isGuessing, guessTokens } = voteStore
 
-  return (
-    <StyledRoleTokenList>{isGuessing && guessTokens.map((token, index) => <RoleToken key={index} token={token} size={40} />)}</StyledRoleTokenList>
-  )
+  return <StyledRoleTokenList>{isGuessing && guessTokens.map((token, index) => <RoleToken key={index} token={token} size={40} />)}</StyledRoleTokenList>
 })

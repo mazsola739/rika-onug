@@ -1,19 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { useGod } from './useGod'
-import {
-  StyledGod,
-  LeftSide,
-  RightSide,
-  GodTitle,
-  FormContainer,
-  InputContainer,
-  Label,
-  Input,
-  ButtonsContainer,
-  Button,
-  ResponseContainer,
-  ResponsePre
-} from './God.styles'
+import { StyledGod, LeftSide, RightSide, GodTitle, FormContainer, InputContainer, Label, Input, ButtonsContainer, Button, ResponseContainer, ResponsePre } from './God.styles'
 
 export const God: React.FC = observer(() => {
   const {

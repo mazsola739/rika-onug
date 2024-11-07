@@ -13,8 +13,7 @@ export const madscientist_intro_8_text = 'After inoculating yourself with banana
 export const madscientist_intro_9_text = 'You listened to Taylor Swift backwards.'
 export const madscientist_intro_10_text = 'You lied to your friends repeatedly without remorse while playing a game of One Night.'
 export const madscientist_intro_11_text = "You put on your shoes before your socks because you didn't want to be just like everyone else."
-export const madscientist_intro_12_text =
-  'You judged a book by its cover. In your defense, the cover had a daffodil on it, and you despise daffodils.'
+export const madscientist_intro_12_text = 'You judged a book by its cover. In your defense, the cover had a daffodil on it, and you despise daffodils.'
 export const madscientist_intro_13_text = "A 'you' from next week's experiment in time travel devoured your goldfish."
 export const madscientist_intro_14_text = 'Your high powered magnet ray wiped your hard drive.'
 

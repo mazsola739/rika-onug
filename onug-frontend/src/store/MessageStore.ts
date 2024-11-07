@@ -59,7 +59,7 @@ class MessageStore {
     if (selectedPlayerCards > 0 && selectedPlayerCards === playerCardLimit) return false
 
     if (selectedCenterCards > 0 && selectedCenterCards === centerCardLimit) return false
-  
+
     return true
   }
 

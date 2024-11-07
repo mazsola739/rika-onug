@@ -21,26 +21,23 @@ export const ResultRow = styled.div<{ isHeader?: boolean }>`
 
 // Result cell with padding and borders
 export const ResultCell = styled.div<{ isFixedWidth?: boolean; isMaxWidth?: boolean; isFixedHeight?: boolean }>`
-  flex: ${({ isFixedWidth, isMaxWidth }) => 
-    isFixedWidth ? '0 0 45px' : 
-    isMaxWidth ? '0 0 120px' : 
-    '1'}; 
+  flex: ${({ isFixedWidth, isMaxWidth }) => (isFixedWidth ? '0 0 45px' : isMaxWidth ? '0 0 120px' : '1')};
   color: white;
   height: ${({ isFixedHeight }) => (isFixedHeight ? '30px' : '50px')};
   border: 1px solid white;
   overflow: hidden;
   white-space: nowrap;
   display: flex;
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 `
 
 // Header cell with bold text
 export const ResultHeaderCell = styled(ResultCell)`
   font-weight: bold;
   display: flex;
-    align-items: center;
-    justify-content: center;
+  align-items: center;
+  justify-content: center;
 `
 
 // Voters cell (allowing wrap of voter names)

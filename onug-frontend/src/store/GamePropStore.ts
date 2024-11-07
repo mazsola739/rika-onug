@@ -79,7 +79,7 @@ class GamePropStore {
     this.end = end
   }
 
-  setVoteResult(voteResult: Result[]) : void {
+  setVoteResult(voteResult: Result[]): void {
     this.voteResult = voteResult
   }
   setWinnerTeams(winnerTeams: string[]): void {

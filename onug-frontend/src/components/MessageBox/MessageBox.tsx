@@ -3,18 +3,7 @@ import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { gamePropStore, messageStore, selectionStore } from 'store'
-import {
-  CardPosition,
-  NarrationText,
-  Message,
-  MessageBoxCard,
-  MessageBoxTitle,
-  MessageText,
-  Narration,
-  StyledMessageBox,
-  StyledMessageBoxCards,
-  StyledSelectable
-} from './MessageBox.styles'
+import { CardPosition, NarrationText, Message, MessageBoxCard, MessageBoxTitle, MessageText, Narration, StyledMessageBox, StyledMessageBoxCards, StyledSelectable } from './MessageBox.styles'
 import { LookProps, MessageBoxCardsProps, SelectableProps } from './MessageBox.types'
 
 const Selectable: React.FC<SelectableProps> = observer(({ selectable, selected }) => {

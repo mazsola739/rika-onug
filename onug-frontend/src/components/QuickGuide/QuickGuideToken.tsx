@@ -2,17 +2,7 @@ import { useMemo } from 'react'
 import { StyledQuickGuideToken } from './QuickGuide.styles'
 import { QuickGuideTokenProps } from './QuickGuide.types'
 
-const SUPERHERO_IMAGES = [
-  'annoying_lad',
-  'detector',
-  'evilometer',
-  'flipper',
-  'mirror_man',
-  'role_retriever',
-  'switcheroo',
-  'voodoo_lou',
-  'self_awareness_girl'
-]
+const SUPERHERO_IMAGES = ['annoying_lad', 'detector', 'evilometer', 'flipper', 'mirror_man', 'role_retriever', 'switcheroo', 'voodoo_lou', 'self_awareness_girl']
 
 export const QuickGuideToken: React.FC<QuickGuideTokenProps> = ({ image, expansion }) => {
   const segments = ['_of_', 'artifact', 'shield']

@@ -7,17 +7,7 @@ export const useRoleTokens = (token: any) => {
 
   const getBackgroundImage = () => {
     const randomNumber = Math.floor(Math.random() * 2) + 1
-    const SUPERHERO_IMAGES = [
-      'annoying_lad',
-      'detector',
-      'evilometer',
-      'flipper',
-      'mirror_man',
-      'role_retriever',
-      'switcheroo',
-      'voodoo_lou',
-      'self_awareness_girl'
-    ]
+    const SUPERHERO_IMAGES = ['annoying_lad', 'detector', 'evilometer', 'flipper', 'mirror_man', 'role_retriever', 'switcheroo', 'voodoo_lou', 'self_awareness_girl']
 
     const isSuperhero = token.expansion === 'Super Villains' && SUPERHERO_IMAGES.includes(token.image)
     const actualExpansion = isSuperhero ? 'Super Heroes' : token.expansion

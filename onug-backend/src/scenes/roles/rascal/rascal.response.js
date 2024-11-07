@@ -13,7 +13,6 @@ import {
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
-
 //TODO fix obligatory and scene end
 export const rascalResponse = (
   gamestate,
@@ -155,7 +154,9 @@ export const rascalResponse = (
             newGamestate.players[token].player_history[title].selected_card,
             selected_card_positions[0],
           ],
-          obligatory: newGamestate.players[token].player_history[title].random === 'witch',
+          obligatory:
+            newGamestate.players[token].player_history[title].random ===
+            'witch',
           scene_end: true,
         }
 
@@ -166,10 +167,11 @@ export const rascalResponse = (
 
         interaction = generateRoleInteraction(newGamestate, token, {
           private_message: ['interaction_swapped_cards', ...messageIdentifiers],
-          obligatory: newGamestate.players[token].player_history[title].random === 'witch',
+          obligatory:
+            newGamestate.players[token].player_history[title].random ===
+            'witch',
           scene_end: true,
         })
-        
       }
       break
 
@@ -204,7 +206,8 @@ export const rascalResponse = (
         ...newGamestate.players[token].player_history[title],
         swapped_cards: [currentPlayerNumber, selectedPosition],
         viewed_cards: [currentPlayerNumber],
-        obligatory: newGamestate.players[token].player_history[title].random === 'robber'
+        obligatory:
+          newGamestate.players[token].player_history[title].random === 'robber',
       }
 
       const messageIds = formatPlayerIdentifier([
@@ -224,7 +227,8 @@ export const rascalResponse = (
           newGamestate.players[token].player_history[title].random === 'robber'
             ? showCards
             : undefined,
-            obligatory: newGamestate.players[token].player_history[title].random === 'robber'
+        obligatory:
+          newGamestate.players[token].player_history[title].random === 'robber',
       })
 
       break

@@ -19,8 +19,7 @@ export const determineTotalPlayers = (totalCharacters: number): number => {
   return Math.max(totalPlayers, 0)
 }
 
-export const filterByExpansions = <T extends { expansion: string }>(list: T[], expansions: string[]): T[] =>
-  list.filter(item => expansions.includes(item.expansion))
+export const filterByExpansions = <T extends { expansion: string }>(list: T[], expansions: string[]): T[] => list.filter(item => expansions.includes(item.expansion))
 
 export const formatPosition = (position: string) =>
   position

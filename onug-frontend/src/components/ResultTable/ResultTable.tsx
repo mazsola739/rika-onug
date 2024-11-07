@@ -1,15 +1,5 @@
 import React from 'react'
-import {
-  PlayerName,
-  ResultCell,
-  ResultContainer,
-  ResultHeaderCell,
-  ResultRow,
-  ResultTitle,
-  StyledImage,
-  VoterName,
-  VotersCell
-} from './ResultTable.styles'
+import { PlayerName, ResultCell, ResultContainer, ResultHeaderCell, ResultRow, ResultTitle, StyledImage, VoterName, VotersCell } from './ResultTable.styles'
 import { gamePropStore, riseAndRestStore } from 'store'
 import { Result } from 'types'
 
@@ -18,7 +8,7 @@ export const ResultTable: React.FC = () => {
 
   const sortedVotes = [...voteResult].sort((a, b) => b.voters.length - a.voters.length)
 
-  const isActualPlayerWin = voteResult.find(player => player.player_number === riseAndRestStore.tablePlayerCard.position)?.win;
+  const isActualPlayerWin = voteResult.find(player => player.player_number === riseAndRestStore.tablePlayerCard.position)?.win
 
   const groupedVotes: { votes: number; players: Result[] }[] = []
 

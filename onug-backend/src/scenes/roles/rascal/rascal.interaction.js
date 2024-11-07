@@ -163,14 +163,14 @@ export const rascalInteraction = (gamestate, token, title) => {
     .replace('rascal_', '')
     .replace('_text', '')
 
-  const obligatory = randomRascalInstruction === 'rascal_drunk_text' 
+  const obligatory = randomRascalInstruction === 'rascal_drunk_text'
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_cards: selectableCards,
     selectable_card_limit: selectableLimit,
     random,
-    obligatory
+    obligatory,
   }
 
   return generateRoleInteraction(newGamestate, token, {
@@ -179,6 +179,6 @@ export const rascalInteraction = (gamestate, token, title) => {
       selectable_cards: selectableCards,
       selectable_card_limit: selectableLimit,
     },
-    obligatory
+    obligatory,
   })
 }
