@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { gamePropStore, playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
 import { splitCardsToTable } from 'utils'
 
-export const useVote = () => {
+export const useCouncil = () => {
   const [firstTime, setFirstTime] = useState(true)
   const navigate = useNavigate()
 
@@ -52,7 +52,7 @@ export const useVote = () => {
       gamePropStore.setEnd(true)
       riseAndRestStore.openYourEyes(lastJsonMessage)
       riseAndRestStore.setTablePlayerCard(lastJsonMessage)
-      gamePropStore.setVoteResult(lastJsonMessage.vote_result)
+      gamePropStore.setCouncilResult(lastJsonMessage.vote_result)
       gamePropStore.setWinnerTeams(lastJsonMessage.winner_teams)
     }
 

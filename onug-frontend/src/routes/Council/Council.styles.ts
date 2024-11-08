@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const StyledVote = styled.div`
+export const StyledCouncil = styled.div`
   min-width: 100%;
   display: grid;
   grid-template-columns: 170px calc(100vw - 740px) 170px 400px;
@@ -36,14 +36,14 @@ export const GameArea = styled.div`
   overflow: hidden;
 `
 
-export const Voted = styled.div`
+export const Councild = styled.div`
   min-width: 320px;
   display: flex;
   align-items: flex-end;
   padding: 10px;
 `
 
-export const VoteCenter = styled.div`
+export const CouncilCenter = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -77,6 +77,19 @@ export const Narration = styled.div`
   display: flex;
   gap: 5px;
   align-items: center;
+`
+
+export const NarrationImage = styled.img`
+  width: 70px;
+`
+
+export const StyledCouncilNarration = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  overflow-x: hidden;
+  overflow-y: auto;
 
   ::-webkit-scrollbar {
     width: 8px; /* Width of vertical scrollbar */
@@ -95,6 +108,40 @@ export const Narration = styled.div`
   }
 `
 
-export const NarrationImage = styled.img`
-  width: 70px;
+export const StyledSuspicion = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 150px;
+  border-bottom: 2px solid #969290;
+  padding: 10px;
+`
+
+export const SelectedTitle = styled.h4`
+  padding: 0;
+  margin: 0;
+  color: white;
+  text-align: center;
+`
+
+export const StyledSelectedCards = styled.div`
+  display: flex;
+  gap: 3px;
+  flex-direction: row;
+  flex-wrap: wrap;
+`
+
+export const MessageBoxCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`
+
+export const CardPosition = styled.span`
+  font-size: 10px;
+  font-weight: lighter;
+  padding: 5px 0;
+  margin: 0;
+  color: white;
 `

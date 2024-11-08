@@ -8,31 +8,24 @@ export const CenterCards: React.FC = observer(() => {
   const { hasAlphawolf, hasTemptress } = deckStore
   const { tableCenterCards } = riseAndRestStore
 
-  const wolfCard = tableCenterCards.find(card => card.position === 'center_wolf') || { position: 'center_wolf', selectable: false }
-  const leftCard = tableCenterCards.find(card => card.position === 'center_left') || { position: 'center_left', selectable: false }
-  const middleCard = tableCenterCards.find(card => card.position === 'center_middle') || { position: 'center_middle', selectable: false }
-  const rightCard = tableCenterCards.find(card => card.position === 'center_right') || { position: 'center_right', selectable: false }
-  const villainCard = tableCenterCards.find(card => card.position === 'center_villain') || { position: 'center_villain', selectable: false }
+  const getCard = (position: string) => tableCenterCards.find(card => card.position === position) || { position, selectable: false }
 
-  const renderCenterCard = (centerCard: TableCenterCard) => (
+  const renderCards = (positions: string[]) => (
     <CardGroup>
       <Cards>
-        <PlayerCard card={centerCard} />
+        {positions.map(position => {
+          const card = getCard(position)
+          return <PlayerCard key={position} card={card as TableCenterCard} cardSize={75} />
+        })}
       </Cards>
     </CardGroup>
   )
 
   return (
     <StyledCenterCards>
-      {hasAlphawolf && renderCenterCard(wolfCard)}
-      <CardGroup>
-        <Cards>
-          {[leftCard, middleCard, rightCard].map(card => (
-            <PlayerCard key={card.position} card={card} />
-          ))}
-        </Cards>
-      </CardGroup>
-      {hasTemptress && renderCenterCard(villainCard)}
+      {hasAlphawolf && renderCards(['center_wolf'])}
+      {renderCards(['center_left', 'center_middle', 'center_right'])}
+      {hasTemptress && renderCards(['center_villain'])}
     </StyledCenterCards>
   )
 })

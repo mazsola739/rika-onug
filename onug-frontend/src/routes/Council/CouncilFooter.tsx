@@ -4,7 +4,7 @@ import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { gamePropStore, playersStore, selectionStore } from 'store'
 
-export const VoteFooter: React.FC = observer(() => {
+export const CouncilFooter: React.FC = observer(() => {
   const { handleReady, handleLeaveGame, handleVoteNow, handleDone } = useClickHandler()
   const { selectedCards } = selectionStore
   const { players } = playersStore

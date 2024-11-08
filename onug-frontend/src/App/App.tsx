@@ -2,7 +2,7 @@ import { IconType } from 'components/Icon/Icon.types'
 import { observer } from 'mobx-react-lite'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { ReadyState } from 'react-use-websocket'
-import { Game, God, Lobby, Room, Stub, Table, Vote } from 'routes'
+import { Game, God, Lobby, Room, Stub, Table, Council, Verdict } from 'routes'
 import { ConnectionStatus, StyledApp } from './App.styles'
 import { useApp } from './useApp'
 import { Icon } from 'components'
@@ -32,7 +32,8 @@ export const App: React.FC = observer(() => {
           <Route path="/room/:room_id" element={<Room />} />
           <Route path="/table/:room_id" element={<Table />} />
           <Route path="/game/:room_id" element={<Game />} />
-          <Route path="/vote/:room_id" element={<Vote />} />
+          <Route path="/council/:room_id" element={<Council />} />
+          <Route path="/verdict/:room_id" element={<Verdict />} />
           <Route path="/god" element={<God />} />
           <Route path="/stub" element={<Stub />} />
           {/* 404 Not Found Route    */}

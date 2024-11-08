@@ -42,7 +42,7 @@ const handleDayReady = async (room_id, newGamestate, players, token) => {
   if (allPlayersStateCheck(players, 'flag')) {
     logTrace(`All players are ready for day in room: ${room_id}. Redirecting to Vote.`)
     await upsertRoomState(newGamestate)
-    broadcast(room_id, { type: REDIRECT, path: `/vote/${room_id}` })
+    broadcast(room_id, { type: REDIRECT, path: `/council/${room_id}` })
     resetPlayerReadiness(players)
   }
   return newGamestate
