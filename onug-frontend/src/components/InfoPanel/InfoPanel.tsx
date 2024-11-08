@@ -1,33 +1,31 @@
+import { Button, ButtonGroup, Card, Token } from 'components'
+import { BUTTONS } from 'constant'
+import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
+import { Fragment } from 'react'
+import { roomStore, selectionStore, voteStore } from 'store'
 import {
+  Avatar,
   CardPosition,
+  Character,
   MessageBoxCard,
+  Names,
   Narration,
   NarrationImage,
   NarrationText,
-  StyledReadyStatus,
-  ReadyTitle,
-  SelectedTitle,
-  StyledCouncilNarration,
-  StyledInfoPanel,
-  StyledSelectedCards,
-  StyledSuspicion,
-  Avatar,
-  Character,
-  Names,
   Player,
   PlayerName,
   Players,
   Rule,
+  SelectedTitle,
+  StyledCouncilNarration,
   StyledInfo,
-  StyledPlayerNames
+  StyledInfoPanel,
+  StyledPlayerNames,
+  StyledSelectedCards,
+  StyledSuspicion
 } from './InfoPanel.styles'
 import { InfoPanelProps } from './InfoPanel.types'
-import { useClickHandler } from 'hooks'
-import { playersStore, roomStore, selectionStore, voteStore } from 'store'
-import { Button, ButtonGroup, Card, ReadyList, Token } from 'components'
-import { BUTTONS } from 'constant'
-import { Fragment } from 'react'
 
 export const InfoPanel: React.FC<InfoPanelProps> = observer(({ children }) => <StyledInfoPanel>{children}</StyledInfoPanel>)
 
@@ -37,7 +35,7 @@ export const Suspicion: React.FC = observer(() => {
   //TODO ℹ️ 🛈 ⓘ ❓tooltipp: you cant vote yourself
   return (
     <StyledSuspicion>
-      <SelectedTitle>YOUR SUSPECT</SelectedTitle>
+      <SelectedTitle>{'Your Prime Suspect!'}</SelectedTitle>
       <SelectedCards />
       <ButtonGroup>
         <Button onClick={() => handleDone(selectedCards)} variant="green" buttonText={BUTTONS.done_label} />
@@ -78,16 +76,6 @@ export const CouncilNarration: React.FC = observer(() => {
   )
 })
 
-export const ReasyStatus: React.FC = observer(() => {
-  const { players } = playersStore
-  return (
-    <StyledReadyStatus>
-      <ReadyTitle>VOTE NOW?</ReadyTitle>
-      {players && <ReadyList players={players} />}
-    </StyledReadyStatus>
-  )
-})
-
 export const Info: React.FC = observer(() => {
   const detailedCardInfo = roomStore.getDetailedCardInfo()
 
@@ -108,7 +96,7 @@ export const PlayerNames: React.FC = observer(() => {
 
   return (
     <StyledPlayerNames>
-      <Players>PLAYER(S) IN THE {room_id.toLocaleUpperCase().replace('_', ' ')}</Players>
+      <Players>Locked in {room_id.toLocaleUpperCase().replace('_', ' ')} together with</Players>
       <Names>
         {players &&
           players.map(({ player_name }, index) => (

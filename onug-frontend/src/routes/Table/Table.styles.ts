@@ -62,11 +62,3 @@ export const ReadyStatus = styled.div`
   padding: 10px 0;
 `
 
-export const ReadyTitle = styled.h3`
-  grid-area: title;
-  color: yellow;
-  padding: 0;
-  margin: 0;
-  padding: 10px 0;
-  text-align: center;
-`

@@ -9,7 +9,7 @@ export const OwnCard: React.FC<OwnCardProps> = observer(({ card, mark, player })
   return (
     player && (
       <StyledOwnCard>
-        <KnownCard>YOUR KNOWN CARD</KnownCard>
+        <KnownCard>The Card You Think is Yours...</KnownCard>
         <Token tokenName={playerNumber} size={25} />
         <OwnCardInfoName>{player.player_name}</OwnCardInfoName>
         <CardImage image={card.card_name} size={100} />

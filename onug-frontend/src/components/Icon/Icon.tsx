@@ -2,7 +2,7 @@ import { ClosedIcon, ClosingIcon, ConnectingIcon, OpenIcon, UninstantiatedIcon }
 import { StyledIcon } from './Icon.styles'
 import { IconProps, IconType } from './Icon.types'
 
-export const Icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = {
+const Icons: Record<IconType, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
   closed: ClosedIcon,
   closing: ClosingIcon,
   connecting: ConnectingIcon,
@@ -10,4 +10,8 @@ export const Icons: Record<IconType, React.FC<React.SVGProps<SVGSVGElement>>> = 
   uninstantiated: UninstantiatedIcon
 }
 
-export const Icon: React.FC<IconProps> = ({ iconName, size }) => <StyledIcon as={Icons[iconName]} size={size} />
+export const Icon: React.FC<IconProps> = ({ iconName, size }) => {
+  const IconComponent = Icons[iconName]
+
+  return <StyledIcon as={IconComponent} size={size} />
+}

@@ -26,6 +26,7 @@ class RoomStore {
   }
 
   getTeamName(cards: CardJson[], team: string): string {
+    //TODO better names
     const hasHero = cards.some(card => card.team === TEAM.hero)
     const hasVillager = cards.some(card => card.team === TEAM.village)
 

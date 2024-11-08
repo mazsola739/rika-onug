@@ -64,6 +64,17 @@ export const TEAM: TeamType = {
   villain: 'villain'
 }
 
+//TODO
+export const TEAMNAME = {
+  village: 'The Townfolk',
+  hero: 'The Bravehearts',
+  own: 'The Inner Circle',
+  werewolf: 'The Pack',
+  vampire: 'The Coven',
+  alien: 'The Cosmic Collective',
+  villain: "The Rogue's Gallery"
+}
+
 export const conjunction_and = 'and'
 export const conjunction_or = 'or'
 
