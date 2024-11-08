@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { gamePropStore } from 'store'
+import { propStore } from 'store'
 
 class SelectionStore {
   selectedCards: string[] = []
@@ -17,7 +17,7 @@ class SelectionStore {
     const playerCardsCount = this.selectedCards.filter(card => card.startsWith('player_')).length
     const centerCardsCount = this.selectedCards.filter(card => card.startsWith('center_')).length
 
-    const { player: playerCardLimit, center: centerCardLimit } = gamePropStore.selectable_card_limit
+    const { player: playerCardLimit, center: centerCardLimit } = propStore.selectable_card_limit
 
     const selectedPlayerCards = playerCardsCount > 0
     const selectedCenterCards = centerCardsCount > 0
@@ -37,7 +37,7 @@ class SelectionStore {
 
   toggleMarkSelection(position: string) {
     const isSelected = this.selectedMarks.includes(position)
-    const { mark: markLimit } = gamePropStore.selectable_mark_limit
+    const { mark: markLimit } = propStore.selectable_mark_limit
 
     if (isSelected) {
       this.selectedMarks = this.selectedMarks.filter(mark => mark !== position)

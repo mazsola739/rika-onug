@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { Interaction, Result } from 'types'
 
-class GamePropStore {
+class PropStore {
   title: string
   nightfall: boolean
   sunrise: boolean
@@ -108,5 +108,5 @@ class GamePropStore {
   }
 }
 
-export default GamePropStore
-export const gamePropStore = new GamePropStore()
+export default PropStore
+export const propStore = new PropStore()

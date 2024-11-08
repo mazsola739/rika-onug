@@ -2,7 +2,7 @@ import * as messages_text from 'constant/messages'
 import * as narration_text from 'constant/narrations'
 import { script } from 'data'
 import { makeAutoObservable } from 'mobx'
-import { gamePropStore, riseAndRestStore, selectionStore } from 'store'
+import { propStore, riseAndRestStore, selectionStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
 import { formatPositionSimply } from 'utils'
 
@@ -29,20 +29,20 @@ class MessageStore {
   }
 
   get playerCardLimit() {
-    return gamePropStore.selectable_card_limit.player
+    return propStore.selectable_card_limit.player
   }
   get centerCardLimit() {
-    return gamePropStore.selectable_card_limit.center
+    return propStore.selectable_card_limit.center
   }
   get isCardSelection() {
-    return gamePropStore.selectable_cards.length > 0
+    return propStore.selectable_cards.length > 0
   }
   get isSelectableCards() {
     return this.allSelectableCards.length > 0
   }
 
   get isIdentification() {
-    const title = gamePropStore.title
+    const title = propStore.title
     return title === 'MINION' || title === 'WEREWOLF' || title === 'MASONS'
   }
 
@@ -64,7 +64,7 @@ class MessageStore {
   }
 
   get narrationImage(): string {
-    const scene = script.find(scene => scene.scene_title === gamePropStore.title)
+    const scene = script.find(scene => scene.scene_title === propStore.title)
     return scene ? scene.scene_img : ''
   }
 
@@ -86,7 +86,7 @@ class MessageStore {
   }
 
   getRoles(): RoleKeys[] {
-    const title = gamePropStore.title
+    const title = propStore.title
 
     switch (title) {
       case 'MINION':
@@ -105,7 +105,7 @@ class MessageStore {
 
     if (roleKeys.length > 0) {
       const identifiedCards = roleKeys.flatMap((roleKey: RoleKeys) => {
-        const cards = gamePropStore[roleKey] as string[]
+        const cards = propStore[roleKey] as string[]
 
         return cards.map((card: string) => ({
           position: card,

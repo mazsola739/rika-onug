@@ -1,24 +1,25 @@
-import { ARRIVE_VOTE, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
+import { ARRIVE_COUNCIL, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { gamePropStore, playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
+import { playersStore, propStore, riseAndRestStore, voteStore, wsStore } from 'store'
 import { splitCardsToTable } from 'utils'
 
 export const useCouncil = () => {
+  const room_id = sessionStorage.getItem('room_id')
+  const token = sessionStorage.getItem('token')
+
   const [firstTime, setFirstTime] = useState(true)
   const navigate = useNavigate()
 
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
-
-  const room_id = sessionStorage.getItem('room_id')
-  const token = sessionStorage.getItem('token')
+  const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       sendJsonMessage?.({
-        type: ARRIVE_VOTE,
-        stage: STAGES.VOTING,
+        type: ARRIVE_COUNCIL,
+        stage: STAGES.COUNCIL,
         room_id,
         token
       })
@@ -49,11 +50,11 @@ export const useCouncil = () => {
     }
 
     if (lastJsonMessage?.type === RESULT) {
-      gamePropStore.setEnd(true)
+      propStore.setEnd(true)
       riseAndRestStore.openYourEyes(lastJsonMessage)
       riseAndRestStore.setTablePlayerCard(lastJsonMessage)
-      gamePropStore.setCouncilResult(lastJsonMessage.vote_result)
-      gamePropStore.setWinnerTeams(lastJsonMessage.winner_teams)
+      propStore.setVoteResult(lastJsonMessage.vote_result)
+      propStore.setWinnerTeams(lastJsonMessage.winner_teams)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
@@ -64,8 +65,6 @@ export const useCouncil = () => {
       playersStore.setPlayers(lastJsonMessage.players)
     }
   }, [lastJsonMessage, navigate])
-
-  const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 
   const sides = tablePlayerCards && tablePlayerCard ? splitCardsToTable(tablePlayerCards, tablePlayerCard) : null
   const { left = [], middle = [], right = [], ownCard } = sides || {}

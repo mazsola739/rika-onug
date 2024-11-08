@@ -1,8 +1,7 @@
-import { ARRIVE_VOTE, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
+import { ARRIVE_VERDICT, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { gamePropStore, playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
-import { splitCardsToTable } from 'utils'
+import { playersStore, propStore, riseAndRestStore, voteStore, wsStore } from 'store'
 
 export const useVerdict = () => {
   const [firstTime, setFirstTime] = useState(true)
@@ -17,8 +16,8 @@ export const useVerdict = () => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       sendJsonMessage?.({
-        type: ARRIVE_VOTE,
-        stage: STAGES.VOTING,
+        type: ARRIVE_VERDICT,
+        stage: STAGES.VERDICT,
         room_id,
         token
       })
@@ -49,11 +48,11 @@ export const useVerdict = () => {
     }
 
     if (lastJsonMessage?.type === RESULT) {
-      gamePropStore.setEnd(true)
+      propStore.setEnd(true)
       riseAndRestStore.openYourEyes(lastJsonMessage)
       riseAndRestStore.setTablePlayerCard(lastJsonMessage)
-      gamePropStore.setVoteResult(lastJsonMessage.vote_result)
-      gamePropStore.setWinnerTeams(lastJsonMessage.winner_teams)
+      propStore.setVoteResult(lastJsonMessage.vote_result)
+      propStore.setWinnerTeams(lastJsonMessage.winner_teams)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
@@ -65,10 +64,8 @@ export const useVerdict = () => {
     }
   }, [lastJsonMessage, navigate])
 
-  const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
+  const { players } = playersStore
+  const disabled = players.some(player => player.flag === false)
 
-  const sides = tablePlayerCards && tablePlayerCard ? splitCardsToTable(tablePlayerCards, tablePlayerCard) : null
-  const { left = [], middle = [], right = [], ownCard } = sides || {}
-
-  return { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard }
+  return { disabled }
 }

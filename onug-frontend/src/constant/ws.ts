@@ -19,6 +19,8 @@ export const ARRIVE_ROOM = 'ARRIVE_ROOM'
 export const ARRIVE_TABLE = 'ARRIVE_TABLE'
 export const ARRIVE_GAME = 'ARRIVE_GAME'
 export const ARRIVE_VOTE = 'ARRIVE_VOTE'
+export const ARRIVE_COUNCIL = 'ARRIVE_VOTE'
+export const ARRIVE_VERDICT = 'ARRIVE_VOTE'
 
 export const HYDRATE_LOBBY = 'HYDRATE_LOBBY'
 export const HYDRATE_ROOM = 'HYDRATE_ROOM'
@@ -52,7 +54,8 @@ export const STAGES = {
   ROOM: 'ROOM',
   TABLE: 'TABLE',
   GAME: 'GAME',
-  VOTING: 'VOTING'
+  COUNCIL: 'COUNCIL',
+  VERDICT: 'VERDICT',
 }
 
 export const API_SERVER_HOST = 'http://ec2-3-90-213-104.compute-1.amazonaws.com:7654'

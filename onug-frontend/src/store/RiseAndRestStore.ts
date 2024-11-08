@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { deckStore, gamePropStore, messageStore, selectionStore } from 'store'
+import { deckStore, propStore, messageStore, selectionStore } from 'store'
 import { CardPosition, Interaction, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
 import { getCardById } from 'utils'
 
@@ -49,18 +49,18 @@ class RiseAndRestStore {
 
   getCardStatus(position: CardPosition) {
     return {
-      selectable_card: gamePropStore.selectable_cards.includes(position),
-      selectable_mark: gamePropStore.selectable_marks.includes(position),
-      artifact: gamePropStore.artifacted_cards.includes(position),
-      shield: gamePropStore.shielded_cards.includes(position),
-      werewolves: gamePropStore.werewolves.includes(position),
-      dreamwolf: gamePropStore.dreamwolf.includes(position),
-      masons: gamePropStore.masons.includes(position)
+      selectable_card: propStore.selectable_cards.includes(position),
+      selectable_mark: propStore.selectable_marks.includes(position),
+      artifact: propStore.artifacted_cards.includes(position),
+      shield: propStore.shielded_cards.includes(position),
+      werewolves: propStore.werewolves.includes(position),
+      dreamwolf: propStore.dreamwolf.includes(position),
+      masons: propStore.masons.includes(position)
     }
   }
 
   getShowCardsMap(): Record<CardPosition, number> {
-    const showCards = gamePropStore.show_cards
+    const showCards = propStore.show_cards
     if (Array.isArray(showCards)) {
       return showCards.reduce((acc, card) => ({ ...acc, ...card }), {} as Record<CardPosition, number>)
     }
@@ -126,7 +126,7 @@ class RiseAndRestStore {
         card_name: card ? card.card_name : '',
         role: incomingCard ? incomingCard.card_role : '',
         team: incomingCard ? incomingCard.card_team : '',
-        selectable_card: gamePropStore.selectable_cards.includes(centerCard.position),
+        selectable_card: propStore.selectable_cards.includes(centerCard.position),
         selected: false
       }
     })
@@ -152,14 +152,14 @@ class RiseAndRestStore {
 
   resetScene(): void {
     this.resetCards()
-    gamePropStore.reset()
+    propStore.reset()
     selectionStore.resetSelection()
   }
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
     this.resetScene()
-    gamePropStore.setInteraction(lastJsonMessage?.interaction as Interaction)
-    gamePropStore.setTitle(lastJsonMessage.title)
+    propStore.setInteraction(lastJsonMessage?.interaction as Interaction)
+    propStore.setTitle(lastJsonMessage.title)
     this.setTablePlayerCards(lastJsonMessage)
     this.setTableCenterCards(lastJsonMessage)
   }

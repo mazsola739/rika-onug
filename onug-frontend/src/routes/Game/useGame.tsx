@@ -1,7 +1,7 @@
 import { ARRIVE_GAME, END_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, STAGES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { gamePropStore, gameStatusStore, messageStore, riseAndRestStore, wsStore } from 'store'
+import { propStore, gameStatusStore, messageStore, riseAndRestStore, wsStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
 import { splitCardsToTable } from 'utils'
 
@@ -11,6 +11,7 @@ export const useGame = () => {
 
   const [firstTime, setFirstTime] = useState(true)
   const [transitionCompleted, setTransitionCompleted] = useState(false)
+  
   const navigate = useNavigate()
 
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
@@ -28,11 +29,11 @@ export const useGame = () => {
   }, [sendJsonMessage, firstTime, room_id, token])
 
   useEffect(() => {
-    if (transitionCompleted && gamePropStore.nightfall) {
+    if (transitionCompleted && propStore.nightfall) {
       sendJsonMessage?.({ type: SCENE, room_id, token, night_ready: true })
       setTransitionCompleted(false)
     }
-    if (transitionCompleted && gamePropStore.sunrise) {
+    if (transitionCompleted && propStore.sunrise) {
       sendJsonMessage?.({ type: SCENE, room_id, token, day_ready: true })
       setTransitionCompleted(false)
     }
@@ -47,7 +48,7 @@ export const useGame = () => {
 
     if (lastJsonMessage?.type === HYDRATE_GAME) {
       riseAndRestStore.closeYourEyes()
-      gamePropStore.setNightfall(lastJsonMessage.night_mode)
+      propStore.setNightfall(lastJsonMessage.night_mode)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
@@ -60,7 +61,7 @@ export const useGame = () => {
 
     if (lastJsonMessage?.type === END_GAME) {
       riseAndRestStore.closeYourEyes()
-      gamePropStore.setSunrise(lastJsonMessage.day_mode)
+      propStore.setSunrise(lastJsonMessage.day_mode)
     }
   }, [lastJsonMessage, navigate])
 

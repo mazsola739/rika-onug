@@ -1,10 +1,10 @@
 import React from 'react'
 import { PlayerName, ResultCell, ResultContainer, ResultHeaderCell, ResultRow, ResultTitle, StyledImage, VoterName, VotersCell } from './ResultTable.styles'
-import { gamePropStore, riseAndRestStore } from 'store'
+import { propStore, riseAndRestStore } from 'store'
 import { Result } from 'types'
 
 export const ResultTable: React.FC = () => {
-  const { voteResult, winnerTeams } = gamePropStore
+  const { voteResult, winnerTeams } = propStore
 
   const sortedVotes = [...voteResult].sort((a, b) => b.voters.length - a.voters.length)
 

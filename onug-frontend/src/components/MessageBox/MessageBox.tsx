@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Card, RoleImage } from 'components'
 import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
-import { gamePropStore, messageStore, selectionStore } from 'store'
+import { propStore, messageStore, selectionStore } from 'store'
 import { CardPosition, NarrationText, Message, MessageBoxCard, MessageBoxTitle, MessageText, Narration, StyledMessageBox, StyledMessageBoxCards, StyledSelectable } from './MessageBox.styles'
 import { LookProps, MessageBoxCardsProps, SelectableProps } from './MessageBox.types'
 
@@ -46,7 +46,7 @@ const MessageBoxCards: React.FC<MessageBoxCardsProps> = observer(({ cards }) => 
 export const MessageBox: React.FC = observer(() => {
   const { handleCardInteraction, handleFinish, handleSkip } = useClickHandler()
   const { narration, privateMessage, narrationImage, disabled, isSelectableCards, isIdentification, identifiedCards } = messageStore
-  const { obligatory, scene_end, title } = gamePropStore
+  const { obligatory, scene_end, title } = propStore
   const { selectedCards } = selectionStore
 
   return (
