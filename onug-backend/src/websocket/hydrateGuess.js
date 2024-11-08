@@ -27,9 +27,15 @@ export const hydrateGuess = async (ws, message) => {
   })
 
   if (position && id !== undefined) {
-    const target = newGamestate.card_positions[position]
+    Object.values(newGamestate.card_positions).forEach(card => {
+      const index = card.guessed_roles.indexOf(id)
+      if (index > -1) {
+        card.guessed_roles.splice(index, 1)
+      }
+    })
 
-    if (target && target.guessed_roles) {
+    const target = newGamestate.card_positions[position]
+    if (target) {
       const roleIndex = target.guessed_roles.indexOf(id)
 
       if (roleIndex > -1) {

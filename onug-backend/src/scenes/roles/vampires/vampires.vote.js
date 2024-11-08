@@ -1,22 +1,23 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { werewolvesInteraction } from './werewolves.interaction'
+import { vampiresVoteResult } from './vampires.voteresult'
 
-export const werewolves = (gamestate, title, hasDreamWolf) => {
+export const vampiresVote = (gamestate, title) => {
   const newGamestate = { ...gamestate }
+  const narration = ['vampires_vote_result_text']
   const tokens = getAllPlayerTokens(newGamestate.players)
-  const narration = [hasDreamWolf ? 'werewolves_dreamwolf_kickoff_text' : 'werewolves_kickoff_text']
 
   tokens.forEach(token => {
     let interaction = {}
 
     const card = newGamestate.players[token].card
 
-    if (isActivePlayer(card).WEREWOLVES) {
+    if (isActivePlayer(card).VAMPIRES_VOTE) {
       newGamestate.players[token].action_finished = false
-      interaction = werewolvesInteraction(newGamestate, token, title)
+      interaction = vampiresVoteResult(newGamestate, token, title)
     }
 
+    newGamestate.players[token].player_history[title].scene_title = title
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 

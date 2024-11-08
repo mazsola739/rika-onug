@@ -1,11 +1,11 @@
-import { WEREVOLVES } from '../../../constants'
+import { ALL_WEREWOLF } from '../../../constants'
 
 export const getWerewolfPlayerNumbersByRoleIds = players => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
-    if (WEREVOLVES.includes(player.card.player_role_id)) {
+    if (ALL_WEREWOLF.includes(player.card.player_role_id)) {
       result.push(player.player_number)
     }
   }

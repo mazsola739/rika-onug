@@ -31,7 +31,8 @@ export const DOPPELGANGER_TEAM_ID = [1]
 
 //WOLF IDS
 export const ALL_WEREWOLF = [15, 16, 17, 21, 22]
-export const WEREVOLVES = [15, 16, 17, 22]
+export const WEREWOLVES = [15, 16, 21, 22]
+export const WEREVOLVES_WITHOUT_DREAMWOLF = [15, 16, 17, 22]
 export const WEREVOLVES_TO_CHECK = [15, 16, 21, 22]
 
 //ALIEN IDS

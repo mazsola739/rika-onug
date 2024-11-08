@@ -1,4 +1,4 @@
-const { ALL_ALIEN, ALL_COPY_PLAYER, COPY_PLAYER, ALL_VAMPIRE, WEREVOLVES, ALL_SUPER_VILLAIN, MASONS, GROOB_AND_ZERB } = require('../constants')
+import { ALL_ALIEN, ALL_COPY_PLAYER, ALL_SUPER_VILLAIN, ALL_VAMPIRE, ALL_WEREWOLF, COPY_PLAYER, GROOB_AND_ZERB, MASONS } from '../constants'
 
 const isRoleOrCopyPlayer = (card, roleIdArray) => {
   return roleIdArray.some(id => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))
@@ -102,7 +102,7 @@ export const isActivePlayer = card => {
     VAMPIRES_VOTE: isRoleOrCopyPlayer(card, ALL_VAMPIRE),
     VILLAGE_IDIOT: isSpecificRole(card, 26),
     VOODOO_LOU: isSpecificRole(card, 70),
-    WEREWOLVES: isRoleOrCopyPlayer(card, WEREVOLVES),
+    WEREWOLVES: isRoleOrCopyPlayer(card, ALL_WEREWOLF),
     WITCH: isSpecificRole(card, 27)
   }
 }
