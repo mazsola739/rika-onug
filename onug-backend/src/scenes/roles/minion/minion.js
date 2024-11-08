@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { minionInteraction } from './minion.interaction'
 
@@ -12,7 +12,7 @@ export const minion = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 7 || (card.player_role_id === 7 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).MINION) {
       newGamestate.players[token].action_finished = false
       interaction = minionInteraction(newGamestate, token, title)
     }

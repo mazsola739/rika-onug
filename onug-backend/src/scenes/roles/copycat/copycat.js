@@ -1,3 +1,4 @@
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { copycatInteraction } from './copycat.interaction'
 
@@ -12,7 +13,7 @@ export const copycat = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 30) {
+    if (isActivePlayer(card).COPYCAT) {
       newGamestate.players[token].action_finished = false
       interaction = copycatInteraction(newGamestate, token, title)
     }

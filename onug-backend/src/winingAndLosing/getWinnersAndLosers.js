@@ -13,25 +13,18 @@ export const getWinnersAndLosers = gamestate => {
   // CIRCLE VOTE WIN
   if (isEveryoneInSameTeam(activeCards)) {
     if (isCircleVote(countedVotes)) {
-      voteResult.forEach(item => (item.win = true))
+      voteResult.forEach(item => {
+        item.win = false
+        item.survived = true
+      })
+      return { voteResult, winnerTeams: [] }
     } else {
       voteResult.forEach(item => {
         item.survived = !isMostVotedPlayer(item.player_number, mostVoted)
-        item.win = false
+        item.win = false 
       })
     }
   }
-
-  // GENERIC WIN BASED ON VOTING
-  voteResult.forEach(player => {
-    if (isMostVotedPlayer(player.player_number, mostVoted)) {
-      player.survived = false
-      player.win = false
-    } else {
-      player.survived = true
-      player.win = true
-    }
-  })
 
   // TEAMS AND ROLES SETUP
   const werewolfTeam = voteResult.filter(({ player_number }) => {

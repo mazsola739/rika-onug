@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { bodysnatcherKeys, randomBodysnatcherInstructions } from './bodysnatcher.constants'
 import { bodysnatcherInteraction } from './bodysnatcher.interaction'
@@ -24,16 +24,12 @@ export const bodysnatcher = (gamestate, title, prefix) => {
 
     const card = newGamestate.players[token].card
 
-    if (prefix === 'bodysnatcher') {
-      if (card.player_original_id === 74 || (card.player_role_id === 74 && COPY_PLAYER.includes(card.player_original_id))) {
-        newGamestate.players[token].action_finished = false
-        interaction = bodysnatcherInteraction(newGamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey)
-      }
-    } else if (prefix === 'doppelganger_bodysnatcher') {
-      if (card.player_role_id === 74 && card.player_original_id === 1) {
-        newGamestate.players[token].action_finished = false
-        interaction = bodysnatcherInteraction(newGamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey)
-      }
+    if (prefix === 'bodysnatcher' && isActivePlayer(card).BODY_SNATCHER) {
+      newGamestate.players[token].action_finished = false
+      interaction = bodysnatcherInteraction(newGamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey)
+    } else if (prefix === 'doppelganger_bodysnatcher' && isActivePlayer(card).DOPPELGÄNGER_BODY_SNATCHER) {
+      newGamestate.players[token].action_finished = false
+      interaction = bodysnatcherInteraction(newGamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey)
     }
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)

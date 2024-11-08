@@ -1,20 +1,20 @@
-import { ALL_ALIEN, ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { aliensVoteResult } from './aliens.voteresult'
+import { leaderZerbgroobInteraction } from './leaderzerbgroob.interaction'
 
-export const aliensVote = (gamestate, title) => {
+export const leaderzerbgroob = (gamestate, title) => {
   const newGamestate = { ...gamestate }
-  const narration = ['aliens_vote_result_text']
   const tokens = getAllPlayerTokens(newGamestate.players)
+  const narration = ['leader_zerbgroob_text']
 
   tokens.forEach(token => {
     let interaction = {}
 
     const card = newGamestate.players[token].card
 
-    if (ALL_ALIEN.some(id => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))) {
+    if (isActivePlayer(card).LEADER_ZERB_GROOB) {
       newGamestate.players[token].action_finished = false
-      interaction = aliensVoteResult(newGamestate, token, title)
+      interaction = leaderZerbgroobInteraction(newGamestate, token, title)
     }
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)

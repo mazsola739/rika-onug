@@ -1,3 +1,4 @@
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { oracleResponses } from './oracle.constants'
 import { oracleAnswerAftermath } from './oracleanswer.aftermath'
@@ -70,7 +71,7 @@ export const oracleAnswer = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (aftermath && card.player_original_id === 50) {
+    if (aftermath && isActivePlayer(card).ORACLE_ANSWER) {
       newGamestate.oracle.aftermath = narration[0]
       newGamestate.players[token].action_finished = false
       interaction = oracleAnswerAftermath(newGamestate, token, title)

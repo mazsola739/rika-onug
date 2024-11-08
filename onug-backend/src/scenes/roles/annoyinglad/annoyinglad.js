@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { thingInteraction } from '../thing/thing.interaction'
 
@@ -12,7 +12,7 @@ export const annoyinglad = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 55 || (card.player_role_id === 55 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).ANNOYING_LAD) {
       newGamestate.players[token].action_finished = false
       interaction = thingInteraction(newGamestate, token, title)
     }

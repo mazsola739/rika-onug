@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { apprenticetannerInteraction } from './apprenticetanner.interaction'
 
@@ -12,7 +12,7 @@ export const apprenticetanner = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 71 || (card.player_role_id === 71 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).APPRENTICE_TANNER) {
       newGamestate.players[token].action_finished = false
       interaction = apprenticetannerInteraction(newGamestate, token, title)
     }

@@ -1,4 +1,4 @@
-import { ALL_ALIEN, ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { alienAllKeys, alienAnyKeys, randomAlienInstructions } from './aliens.constants'
 import { aliensInteraction } from './aliens.interaction'
@@ -39,7 +39,7 @@ export const aliens = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (ALL_ALIEN.some(id => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))) {
+    if (isActivePlayer(card).ALIENS) {
       newGamestate.players[token].action_finished = false
       interaction = aliensInteraction(newGamestate, token, title)
     }

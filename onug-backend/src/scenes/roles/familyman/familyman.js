@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomFamilyman } from './familyman.constants'
 import { familymanInteraction } from './familyman.interaction'
@@ -29,7 +29,7 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 78 || (card.player_role_id === 78 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).FAMILY_MAN) {
       newGamestate.players[token].action_finished = false
       interaction = familymanInteraction(newGamestate, token, title)
     }

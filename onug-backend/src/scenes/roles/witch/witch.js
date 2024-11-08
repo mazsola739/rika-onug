@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { witchInteraction } from './witch.interaction'
 
@@ -12,7 +12,7 @@ export const witch = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 27 || (card.player_role_id === 27 && COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).WITCH) {
       newGamestate.players[token].action_finished = false
       interaction = witchInteraction(newGamestate, token, title)
     }

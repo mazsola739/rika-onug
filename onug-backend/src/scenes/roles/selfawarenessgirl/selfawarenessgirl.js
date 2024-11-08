@@ -1,5 +1,5 @@
 import { insomniacInteraction } from '..'
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 
 export const selfawarenessgirl = (gamestate, title, hasDoppelganger) => {
@@ -12,7 +12,7 @@ export const selfawarenessgirl = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 67 || (card.player_role_id === 67 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).SELF_AWARENESS_GIRL) {
       newGamestate.players[token].action_finished = false
       interaction = insomniacInteraction(newGamestate, token, title)
     }

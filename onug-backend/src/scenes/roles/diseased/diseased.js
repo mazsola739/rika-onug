@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { diseasedInteraction } from './diseased.interaction'
 
@@ -12,7 +12,7 @@ export const diseased = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 32 || (card.player_role_id === 32 && COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).DISEASED) {
       newGamestate.players[token].action_finished = false
       interaction = diseasedInteraction(newGamestate, token, title)
     }

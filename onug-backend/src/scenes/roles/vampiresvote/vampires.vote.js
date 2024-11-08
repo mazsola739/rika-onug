@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER, ALL_VAMPIRE } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { vampiresVoteResult } from './vampires.voteresult'
 
@@ -12,7 +12,7 @@ export const vampiresVote = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (ALL_VAMPIRE.some(id => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))) {
+    if (isActivePlayer(card).VAMPIRES_VOTE) {
       newGamestate.players[token].action_finished = false
       interaction = vampiresVoteResult(newGamestate, token, title)
     }

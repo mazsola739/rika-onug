@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { internInteraction } from './intern.interaction'
 
@@ -12,7 +12,7 @@ export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 62 || (card.player_role_id === 62 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).INTERN) {
       newGamestate.players[token].action_finished = false
       interaction = internInteraction(newGamestate, token, title)
     }

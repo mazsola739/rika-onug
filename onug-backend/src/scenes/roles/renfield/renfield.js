@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { renfieldInteraction } from './renfield.interaction'
 
@@ -13,7 +13,7 @@ export const renfield = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 38 || (card.player_role_id === 38 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).RENFIELD) {
       newGamestate.players[token].action_finished = false
       interaction = renfieldInteraction(newGamestate, token, title)
     }

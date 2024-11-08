@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { getAllPlayerTokens } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { beholderInteraction } from './beholder.interaction'
@@ -16,7 +16,7 @@ export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppel
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 73 || (card.player_role_id === 73 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).BEHOLDER) {
       newGamestate.players[token].action_finished = false
       interaction = beholderInteraction(newGamestate, token, title)
     }

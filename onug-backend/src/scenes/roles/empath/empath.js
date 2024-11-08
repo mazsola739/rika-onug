@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { empathKeys, randomEmpathInstructions } from './empath.constants'
 import { empathInteraction } from './empath.interaction'
@@ -33,8 +33,8 @@ export const empath = (gamestate, title, prefix) => {
 
     if (activePlayerNumbers.includes(playerNumber)) {
       const card = newGamestate.players[token].card
-      const isNotEmpath = prefix === 'empath' && (card.player_original_id !== 77 || (card.player_role_id !== 20 && COPY_PLAYER.includes(card.player_original_id)))
-      const isNotDoppelgangerEmpath = prefix === 'doppelganger_empath' && card.player_role_id !== 20 && card.player_original_id === 1
+      const isNotEmpath = prefix === 'empath' && isActivePlayer(card).EMPATH
+      const isNotDoppelgangerEmpath = prefix === 'doppelganger_empath' && isActivePlayer(card).DOPPELGÄNGER_EMPATH
 
       if (isNotEmpath || isNotDoppelgangerEmpath) {
         newGamestate.players[token].action_finished = false

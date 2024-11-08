@@ -21,6 +21,10 @@ const handleNightReady = async (room_id, newGamestate, players, token) => {
   if (allPlayersStateCheck(players, 'flag')) {
     logTrace(`All players are ready for night in room: ${room_id}. Processing script and scene handlers.`)
 
+    Object.keys(players).forEach(playerToken => {
+      players[playerToken].action_finished = true
+    })
+
     //TODO uncomment delay
     /* await randomDelay() */
 

@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { squireInteraction } from './squire.interaction'
 
@@ -12,7 +12,7 @@ export const squire = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 83 || (card.player_role_id === 27 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).SQUIRE) {
       newGamestate.players[token].action_finished = false
       interaction = squireInteraction(newGamestate, token, title)
     }

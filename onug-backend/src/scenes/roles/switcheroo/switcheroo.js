@@ -1,5 +1,5 @@
 import { troublemakerInteraction } from '..'
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 
 export const switcheroo = (gamestate, title) => {
@@ -12,7 +12,7 @@ export const switcheroo = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 68 || (card.player_role_id === 68 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).SWITCHEROO) {
       newGamestate.players[token].action_finished = false
       interaction = troublemakerInteraction(newGamestate, token, title)
     }

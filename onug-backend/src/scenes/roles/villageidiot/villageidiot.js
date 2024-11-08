@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { villageidiotInteraction } from './villageidiot.interaction'
 
@@ -12,7 +12,7 @@ export const villageidiot = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 26 || (card.player_role_id === 26 && COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).VILLAGE_IDIOT) {
       newGamestate.players[token].action_finished = false
       interaction = villageidiotInteraction(newGamestate, token, title)
     }

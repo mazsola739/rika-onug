@@ -1,3 +1,4 @@
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { doppelgangerInteraction } from './doppelganger.interaction'
 
@@ -12,7 +13,7 @@ export const doppelganger = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 1) {
+    if (isActivePlayer(card).DOPPELGÄNGER) {
       newGamestate.players[token].action_finished = false
       interaction = doppelgangerInteraction(newGamestate, token, title)
     }

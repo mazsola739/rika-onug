@@ -1,3 +1,4 @@
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { copycatInteraction } from '../copycat/copycat.interaction'
 
@@ -11,7 +12,7 @@ export const mirrorman = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 64) {
+    if (isActivePlayer(card).MIRROR_MAN) {
       newGamestate.players[token].action_finished = false
       interaction = copycatInteraction(newGamestate, token, title)
     }

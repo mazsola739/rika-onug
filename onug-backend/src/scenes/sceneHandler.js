@@ -1,14 +1,17 @@
 import { END_GAME } from '../constants'
 import { logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { allPlayersStateCheck /* randomDelay */ } from '../utils'
+import { allPlayersStateCheck } from '../utils'
 import { broadcast } from '../websocket/connections'
 import { actionHandler } from './actionHandler'
+import { isActivePlayer } from './activePlayer'
 
 export const sceneHandler = async gamestate => {
   logTrace(`sceneHandler in room [${gamestate.room_id}]`)
 
   let newGamestate = { ...gamestate, actual_scenes: [] }
+  newGamestate.scripts = newGamestate.scripts.sort((a, b) => a.scene_number - b.scene_number)
+
   const flagsState = {
     player_card_shifting: false,
     center_card_shifting: false,
@@ -20,9 +23,24 @@ export const sceneHandler = async gamestate => {
   }
 
   const canAddScene = scene => {
-    const { player_card_shifting, center_card_shifting, mark_shifting, shield, artifact, view_player_card, view_center_card } = scene
+    const players = Array.isArray(gamestate.players) ? gamestate.players : []
 
-    logTrace(`Evaluating scene: ${scene.scene_title}`)
+    const hasActivePlayer = players.some(player => {
+      const card = player.card
+      return isActivePlayer(card)[scene.scene_title]
+    })
+
+    const {
+      player_card_shifting = false,
+      center_card_shifting = false,
+      mark_shifting = false,
+      shield = false,
+      artifact = false,
+      view_player_card = false,
+      view_center_card = false
+    } = hasActivePlayer ? scene : {}
+
+    logTrace(`Evaluating scene: ${scene.scene_title} with active player: ${hasActivePlayer}`)
     logTrace(`Current flags state: ${JSON.stringify(flagsState)}`)
 
     const conflicts = [
@@ -48,13 +66,15 @@ export const sceneHandler = async gamestate => {
       onlyViewingFlagsSet ||
       (view_player_card === false && view_center_card === false && ![player_card_shifting, center_card_shifting, mark_shifting, shield, artifact].some(Boolean))
     ) {
-      if (view_player_card) flagsState.view_player_card = true
-      if (view_center_card) flagsState.view_center_card = true
-      if (player_card_shifting) flagsState.player_card_shifting = true
-      if (center_card_shifting) flagsState.center_card_shifting = true
-      if (mark_shifting) flagsState.mark_shifting = true
-      if (shield) flagsState.shield = true
-      if (artifact) flagsState.artifact = true
+      if (hasActivePlayer) {
+        if (view_player_card) flagsState.view_player_card = true
+        if (view_center_card) flagsState.view_center_card = true
+        if (player_card_shifting) flagsState.player_card_shifting = true
+        if (center_card_shifting) flagsState.center_card_shifting = true
+        if (mark_shifting) flagsState.mark_shifting = true
+        if (shield) flagsState.shield = true
+        if (artifact) flagsState.artifact = true
+      }
 
       logTrace(`Scene added: ${scene.scene_title}`)
       return true
@@ -73,14 +93,6 @@ export const sceneHandler = async gamestate => {
         scene_number: scene.scene_number
       })
       logTrace(`Added to actual_scenes: ${scene.scene_title}`)
-
-      flagsState.player_card_shifting ||= scene.player_card_shifting
-      flagsState.center_card_shifting ||= scene.center_card_shifting
-      flagsState.mark_shifting ||= scene.mark_shifting
-      flagsState.shield ||= scene.shield
-      flagsState.artifact ||= scene.artifact
-      flagsState.view_player_card ||= scene.view_player_card
-      flagsState.view_center_card ||= scene.view_center_card
     }
   }
 
@@ -99,8 +111,7 @@ export const sceneHandler = async gamestate => {
   if (gameCanEnd) {
     logTrace(`All scripts processed. Broadcasting END_GAME message.`)
 
-    // uncomment the delay here
-    /* await randomDelay() */
+    /* await randomDelay(); */
 
     broadcast(newGamestate.room_id, {
       type: END_GAME,

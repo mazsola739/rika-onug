@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { leaderInteraction } from './leader.interaction'
 
@@ -12,7 +12,7 @@ export const leader = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 48 || (card.player_role_id === 48 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).LEADER) {
       newGamestate.players[token].action_finished = false
       interaction = leaderInteraction(newGamestate, token, title)
     }

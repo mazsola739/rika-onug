@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { empathVoteResult } from './empath.voteresult'
 
@@ -12,17 +12,15 @@ export const empathVote = (gamestate, title, prefix) => {
 
     const card = newGamestate.players[token].card
 
-    if (prefix === 'empath') {
-      if (card.player_original_id === 77 || (card.player_role_id === 77 && COPY_PLAYER.includes(card.player_original_id))) {
+    if (prefix === 'empath' && isActivePlayer(card).EMPATH_VOTE) {
+        newGamestate.players[token].action_finished = false
+        interaction = empathVoteResult(newGamestate, token, title)
+      
+    } else if (prefix === 'doppelganger_empath' && isActivePlayer(card).EMPATH_VOTE) {
         newGamestate.players[token].action_finished = false
         interaction = empathVoteResult(newGamestate, token, title)
       }
-    } else if (prefix === 'doppelganger_empath') {
-      if (card.player_role_id === 77 && card.player_original_id === 1) {
-        newGamestate.players[token].action_finished = false
-        interaction = empathVoteResult(newGamestate, token, title)
-      }
-    }
+    
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })

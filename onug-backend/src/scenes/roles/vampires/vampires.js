@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER, ALL_VAMPIRE } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { vampiresInteraction } from './vampires.interaction'
 
@@ -12,7 +12,7 @@ export const vampires = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (ALL_VAMPIRE.some(id => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))) {
+    if (isActivePlayer(card).VAMPIRES) {
       newGamestate.players[token].action_finished = false
       interaction = vampiresInteraction(newGamestate, token, title)
     }

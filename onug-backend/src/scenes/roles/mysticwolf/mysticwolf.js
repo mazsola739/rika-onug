@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { mysticwolfInteraction } from './mysticwolf.interaction'
 
@@ -12,7 +12,7 @@ export const mysticwolf = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 22 || (card.player_role_id === 22 && COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).MYSTIC_WOLF) {
       newGamestate.players[token].action_finished = false
       interaction = mysticwolfInteraction(newGamestate, token, title)
     }

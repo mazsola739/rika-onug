@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { morticianKeys, randomMorticianInstructions } from './mortician.constants'
 import { morticianInteraction } from './mortician.interaction'
@@ -24,15 +24,11 @@ export const mortician = (gamestate, title, prefix) => {
 
     const card = newGamestate.players[token].card
 
-    if (prefix === 'mortician') {
-      if (card.player_original_id === 49 || (card.player_role_id === 49 && COPY_PLAYER.includes(card.player_original_id))) {
-        newGamestate.players[token].action_finished = false
-        interaction = morticianInteraction(newGamestate, token, title, randomMorticianInstruction, morticianKey)
-      }
-    } else if (prefix === 'doppelganger_mortician') {
-      if (card.player_role_id === 49 && card.player_original_id === 1) {
-        interaction = morticianInteraction(newGamestate, token, title, randomMorticianInstruction, morticianKey)
-      }
+    if (prefix === 'mortician' && isActivePlayer(card).MORTICIAN) {
+      newGamestate.players[token].action_finished = false
+      interaction = morticianInteraction(newGamestate, token, title, randomMorticianInstruction, morticianKey)
+    } else if (prefix === 'doppelganger_mortician' && isActivePlayer(card).DOPPELGÄNGER_MORTICIAN) {
+      interaction = morticianInteraction(newGamestate, token, title, randomMorticianInstruction, morticianKey)
     }
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)

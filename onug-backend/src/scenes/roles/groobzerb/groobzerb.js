@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER, GROOB_AND_ZERB } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { groobzerbInteraction } from './groobzerb.interaction'
 
@@ -12,7 +12,7 @@ export const groobzerb = (gamestate, title, hasDoppelganger) => {
 
     const card = newGamestate.players[token].card
 
-    if (GROOB_AND_ZERB.some(id => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))) {
+    if (isActivePlayer(card).GROOB_ZERB) {
       newGamestate.players[token].action_finished = false
       interaction = groobzerbInteraction(newGamestate, token, title)
     }

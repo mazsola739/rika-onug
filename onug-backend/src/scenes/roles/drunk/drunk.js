@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { drunkInteraction } from './drunk.interaction'
 
@@ -12,7 +12,7 @@ export const drunk = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 2 || (card.player_role_id === 2 && COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).DRUNK) {
       newGamestate.players[token].action_finished = false
       interaction = drunkInteraction(newGamestate, token, title)
     }

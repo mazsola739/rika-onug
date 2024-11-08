@@ -1,4 +1,5 @@
 import { DOPPELGANGER_INSTANT_ACTION } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { instantRoleIds } from './doppelgangerinstantaction.constants'
 import { doppelgangerinstantactionInteraction } from './doppelgangerinstantaction.interaction'
@@ -18,7 +19,7 @@ export const doppelgangerinstantaction = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 1) {
+    if (isActivePlayer(card).DOPPELGÄNGER) {
       newGamestate.players[token].action_finished = false
       interaction = doppelgangerinstantactionInteraction(newGamestate, token, title)
     }

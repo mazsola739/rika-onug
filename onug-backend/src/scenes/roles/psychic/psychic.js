@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { psychicKeys, randomPsychicInstructions } from './psychic.constants'
 import { psychicInteraction } from './psychic.interaction'
@@ -28,16 +28,12 @@ export const psychic = (gamestate, title, prefix) => {
 
     const card = newGamestate.players[token].card
 
-    if (prefix === 'psychic') {
-      if (card.player_original_id === 51 || (card.player_role_id === 51 && COPY_PLAYER.includes(card.player_original_id))) {
-        newGamestate.players[token].action_finished = false
-        interaction = psychicInteraction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
-      }
-    } else if (prefix === 'doppelganger_psychic') {
-      if (card.player_role_id === 51 && card.player_original_id === 1) {
-        newGamestate.players[token].action_finished = false
-        interaction = psychicInteraction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
-      }
+    if (prefix === 'psychic' && isActivePlayer(card).PSYCHIC) {
+      newGamestate.players[token].action_finished = false
+      interaction = psychicInteraction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
+    } else if (prefix === 'doppelganger_psychic' && isActivePlayer(card).DOPPELGÄNGER_PSYCHIC) {
+      newGamestate.players[token].action_finished = false
+      interaction = psychicInteraction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
     }
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)

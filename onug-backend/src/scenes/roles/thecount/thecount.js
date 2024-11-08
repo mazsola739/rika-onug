@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { thecountInteraction } from './thecount.interaction'
 
@@ -12,16 +12,12 @@ export const thecount = (gamestate, title, prefix) => {
 
     const card = newGamestate.players[token].card
 
-    if (prefix === 'thecount') {
-      if (card.player_original_id === 39 || (card.player_role_id === 39 && COPY_PLAYER.includes(card.player_original_id))) {
-        newGamestate.players[token].action_finished = false
-        interaction = thecountInteraction(newGamestate, token, title)
-      }
-    } else if (prefix === 'doppelganger_thecount') {
-      if (card.player_role_id === 39 && card.player_original_id === 1) {
-        newGamestate.players[token].action_finished = false
-        interaction = thecountInteraction(newGamestate, token, title)
-      }
+    if (prefix === 'thecount' && isActivePlayer(card).THE_COUNT) {
+      newGamestate.players[token].action_finished = false
+      interaction = thecountInteraction(newGamestate, token, title)
+    } else if (prefix === 'doppelganger_thecount' && isActivePlayer(card).DOPPELGÄNGER_THE_COUNT) {
+      newGamestate.players[token].action_finished = false
+      interaction = thecountInteraction(newGamestate, token, title)
     }
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)

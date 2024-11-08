@@ -1,3 +1,4 @@
+import { isActivePlayer } from '../../activePlayer'
 import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../../conditions'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomOracleQuestions } from './oracle.constants'
@@ -53,7 +54,7 @@ export const oracleQuestion = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 50) {
+    if (isActivePlayer(card).ORACLE_QUESTION) {
       newGamestate.players[token].player_history[title].oracle = narration[1]
       newGamestate.players[token].action_finished = false
       interaction = oracleQuestionRaising(newGamestate, token, title)

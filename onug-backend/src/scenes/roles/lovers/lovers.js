@@ -1,3 +1,4 @@
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { loversInteraction } from './lovers.interaction'
 
@@ -9,9 +10,9 @@ export const lovers = (gamestate, title) => {
   tokens.forEach(token => {
     let interaction = {}
 
-    const player = newGamestate.players[token]
+    const card = newGamestate.players[token].card
 
-    if (player.player_mark === 'mark_of_love') {
+    if (isActivePlayer(card).LOVERS) {
       newGamestate.players[token].action_finished = false
       interaction = loversInteraction(newGamestate, token, title)
     }

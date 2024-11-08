@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { assassinInteraction } from './assassin.interaction'
 
@@ -12,16 +12,12 @@ export const assassin = (gamestate, title, prefix) => {
 
     const card = newGamestate.players[token].card
 
-    if (prefix === 'assassin') {
-      if (card.player_original_id === 29 || (card.player_role_id === 29 && COPY_PLAYER.includes(card.player_original_id))) {
-        newGamestate.players[token].action_finished = false
-        interaction = assassinInteraction(newGamestate, token, title)
-      }
-    } else if (prefix === 'doppelganger_assassin') {
-      if (card.player_role_id === 29 && card.player_original_id === 1) {
-        newGamestate.players[token].action_finished = false
-        interaction = assassinInteraction(newGamestate, token, title)
-      }
+    if (prefix === 'assassin' && isActivePlayer(card).ASSASSIN) {
+      newGamestate.players[token].action_finished = false
+      interaction = assassinInteraction(newGamestate, token, title)
+    } else if (prefix === 'doppelganger_assassin' && isActivePlayer(card).DOPPELGÄNGER_ASSASSIN) {
+      newGamestate.players[token].action_finished = false
+      interaction = assassinInteraction(newGamestate, token, title)
     }
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)

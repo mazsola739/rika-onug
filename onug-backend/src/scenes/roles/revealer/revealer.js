@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { revealerInteraction } from './revealer.interaction'
 
@@ -12,16 +12,12 @@ export const revealer = (gamestate, title, prefix) => {
 
     const card = newGamestate.players[token].card
 
-    if (prefix === 'revealer') {
-      if (card.player_original_id === 24 || (card.player_role_id === 24 && COPY_PLAYER.includes(card.player_original_id))) {
-        newGamestate.players[token].action_finished = false
-        interaction = revealerInteraction(newGamestate, token, title)
-      }
-    } else if (prefix === 'doppelganger_revealer') {
-      if (card.player_role_id === 24 && card.player_original_id === 1) {
-        newGamestate.players[token].action_finished = false
-        interaction = revealerInteraction(newGamestate, token, title)
-      }
+    if (prefix === 'revealer' && isActivePlayer(card).REVEALER) {
+      newGamestate.players[token].action_finished = false
+      interaction = revealerInteraction(newGamestate, token, title)
+    } else if (prefix === 'doppelganger_revealer' && isActivePlayer(card).DOPPELGÄNGER_REVEALER) {
+      newGamestate.players[token].action_finished = false
+      interaction = revealerInteraction(newGamestate, token, title)
     }
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)

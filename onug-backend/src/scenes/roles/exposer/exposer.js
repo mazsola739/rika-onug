@@ -1,4 +1,4 @@
-import { COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomExposerInstructions } from './exposer.constants'
 import { exposerInteraction } from './exposer.interaction'
@@ -21,16 +21,12 @@ export const exposer = (gamestate, title, prefix) => {
 
     const card = newGamestate.players[token].card
 
-    if (prefix === 'exposer') {
-      if (card.player_original_id === 46 || (card.player_role_id === 46 && COPY_PLAYER.includes(card.player_original_id))) {
-        newGamestate.players[token].action_finished = false
-        interaction = exposerInteraction(newGamestate, token, title)
-      }
-    } else if (prefix === 'doppelganger_exposer') {
-      if (card.player_role_id === 46 && card.player_original_id === 1) {
-        newGamestate.players[token].action_finished = false
-        interaction = exposerInteraction(newGamestate, token, title)
-      }
+    if (prefix === 'exposer' && isActivePlayer(card).EXPOSER) {
+      newGamestate.players[token].action_finished = false
+      interaction = exposerInteraction(newGamestate, token, title)
+    } else if (prefix === 'doppelganger_exposer' && isActivePlayer(card).DOPPELGÄNGER_EXPOSER) {
+      newGamestate.players[token].action_finished = false
+      interaction = exposerInteraction(newGamestate, token, title)
     }
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)

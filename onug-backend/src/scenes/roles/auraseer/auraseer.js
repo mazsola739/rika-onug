@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { auraseerInteraction } from './auraseer.interaction'
 
@@ -12,7 +12,7 @@ export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 72 || (card.player_role_id === 72 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).AURA_SEER) {
       newGamestate.players[token].action_finished = false
       interaction = auraseerInteraction(newGamestate, token, title)
     }

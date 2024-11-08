@@ -11,49 +11,62 @@ export const actionHandler = (gamestate, scene_title) => {
   const total_players = newGamestate.total_players
 
   switch (scene_title) {
-    /* MUST */ case 'ALIENS': {
+    case 'ALIENS': {
+      /* MUST */
       return roles.aliens(newGamestate, scene_title)
     }
-    /* MUST & MAY*/ case 'ALIENS_VOTE': {
+    case 'ALIENS_VOTE': {
+      /* MUST & MAY*/
       return roles.aliensVote(newGamestate, scene_title)
     }
-    /* MUST */ case 'ALPHA_WOLF': {
+    case 'ALPHA_WOLF': {
+      /* MUST */
       return roles.alphawolf(newGamestate, scene_title)
     }
-    /* MUST */ case 'ANNOYING_LAD': {
+    case 'ANNOYING_LAD': {
+      /* MUST */
       return roles.annoyinglad(newGamestate, scene_title)
     }
-    /* MUST & MAY*/ case 'APPRENTICE_ASSASSIN': {
+    case 'APPRENTICE_ASSASSIN': {
+      /* MUST & MAY*/
       return roles.apprenticeassassin(newGamestate, scene_title, conditions.hasAssassin(selected_cards), 'apprenticeassassin')
     }
     case 'APPRENTICE_SEER': {
       return roles.apprenticeseer(newGamestate, scene_title)
     }
-    /* MUST */ case 'APPRENTICE_TANNER': {
+    case 'APPRENTICE_TANNER': {
+      /* MUST */
       return roles.apprenticetanner(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
-    /* MUST */ case 'ASSASSIN': {
+    case 'ASSASSIN': {
+      /* MUST */
       return roles.assassin(newGamestate, scene_title, 'assassin')
     }
-    /* MUST */ case 'AURA_SEER': {
+    case 'AURA_SEER': {
+      /* MUST */
       return roles.auraseer(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards), conditions.hasMarks(selected_cards))
     }
-    /* MUST & MAY*/ case 'BEHOLDER': {
+    case 'BEHOLDER': {
+      /* MUST & MAY*/
       return roles.beholder(newGamestate, scene_title, conditions.hasSeer(selected_cards), conditions.hasApprenticeSeer(selected_cards), conditions.hasDoppelganger(selected_cards))
     }
     case 'BLOB': {
       return roles.blob(newGamestate, scene_title)
     }
-    /* MUST */ case 'BODY_SNATCHER': {
+    case 'BODY_SNATCHER': {
+      /* MUST */
       return roles.bodysnatcher(newGamestate, scene_title, 'bodysnatcher')
     }
-    /* MUST */ case 'COPYCAT': {
+    case 'COPYCAT': {
+      /* MUST */
       return roles.copycat(newGamestate, scene_title)
     }
-    /* MUST */ case 'COW': {
+    case 'COW': {
+      /* MUST */
       return roles.cow(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
-    /* MUST */ case 'CUPID': {
+    case 'CUPID': {
+      /* MUST */
       return roles.cupid(newGamestate, scene_title)
     }
     case 'CURATOR': {
@@ -62,31 +75,39 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'DETECTOR': {
       return roles.detector(newGamestate, scene_title)
     }
-    /* MUST */ case 'DISEASED': {
+    case 'DISEASED': {
+      /* MUST */
       return roles.diseased(newGamestate, scene_title)
     }
-    /* MUST */ case 'DOPPELGÄNGER': {
+    case 'DOPPELGÄNGER': {
+      /* MUST */
       return roles.doppelganger(newGamestate, scene_title)
     }
-    /* MUST & MAY*/ case 'DOPPELGÄNGER_APPRENTICE_ASSASSIN': {
+    case 'DOPPELGÄNGER_APPRENTICE_ASSASSIN': {
+      /* MUST & MAY*/
       return roles.apprenticeassassin(newGamestate, scene_title, conditions.hasAssassin(selected_cards), 'doppelganger_apprenticeassassin')
     }
-    /* MUST */ case 'DOPPELGÄNGER_ASSASSIN': {
+    case 'DOPPELGÄNGER_ASSASSIN': {
+      /* MUST */
       return roles.assassin(newGamestate, scene_title, 'doppelganger_assassin')
     }
-    /* MUST */ case 'DOPPELGÄNGER_BODY_SNATCHER': {
+    case 'DOPPELGÄNGER_BODY_SNATCHER': {
+      /* MUST */
       return roles.bodysnatcher(newGamestate, scene_title, 'doppelganger_bodysnatcher')
     }
     case 'DOPPELGÄNGER_CURATOR': {
       return roles.curator(newGamestate, scene_title, 'doppelganger_curator')
     }
-    /* MUST */ case 'DOPPELGÄNGER_EMPATH': {
+    case 'DOPPELGÄNGER_EMPATH': {
+      /* MUST */
       return roles.empath(newGamestate, scene_title, 'doppelganger_empath')
     }
-    /* MUST */ case 'DOPPELGÄNGER_EMPATH_VOTE': {
+    case 'DOPPELGÄNGER_EMPATH_VOTE': {
+      /* MUST */
       return roles.empathVote(newGamestate, scene_title, 'doppelganger_empath')
     }
-    /* MUST */ case 'DOPPELGÄNGER_EXPOSER': {
+    case 'DOPPELGÄNGER_EXPOSER': {
+      /* MUST */
       return roles.exposer(newGamestate, scene_title, 'doppelganger_exposer')
     }
     case 'DOPPELGÄNGER_FLIPPER': {
@@ -95,7 +116,8 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'DOPPELGÄNGER_GREMLIN': {
       return roles.gremlin(newGamestate, scene_title, 'doppelganger_gremlin')
     }
-    /* MUST */ case 'DOPPELGÄNGER_INSTANT_ACTION': {
+    case 'DOPPELGÄNGER_INSTANT_ACTION': {
+      /* MUST */
       return roles.doppelgangerinstantaction(newGamestate, scene_title)
     }
     case 'DOPPELGÄNGER_MORTICIAN': {
@@ -104,31 +126,37 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'DOPPELGÄNGER_PICKPOCKET': {
       return roles.pickpocket(newGamestate, scene_title, 'doppelganger_pickpocket')
     }
-    /* MUST & MAY*/ case 'DOPPELGÄNGER_PRIEST': {
+    case 'DOPPELGÄNGER_PRIEST': {
+      /* MUST & MAY*/
       return roles.priest(newGamestate, scene_title, 'doppelganger_priest')
     }
     case 'DOPPELGÄNGER_PSYCHIC': {
       return roles.psychic(newGamestate, scene_title, 'doppelganger_psychic')
     }
-    /* MUST / MAY*/ case 'DOPPELGÄNGER_RASCAL': {
+    case 'DOPPELGÄNGER_RASCAL': {
+      /* MUST / MAY*/
       return roles.rascal(newGamestate, scene_title, 'doppelganger_rascal')
     }
     case 'DOPPELGÄNGER_REVEALER': {
       return roles.revealer(newGamestate, scene_title, 'doppelganger_revealer')
     }
-    /* MUST */ case 'DOPPELGÄNGER_THE_COUNT': {
+    case 'DOPPELGÄNGER_THE_COUNT': {
+      /* MUST */
       return roles.thecount(newGamestate, scene_title, 'doppelganger_thecount')
     }
     case 'DR_PEEKER': {
       return roles.drpeeker(newGamestate, scene_title)
     }
-    /* MUST */ case 'DRUNK': {
+    case 'DRUNK': {
+      /* MUST */
       return roles.drunk(newGamestate, scene_title)
     }
-    /* MUST */ case 'EMPATH': {
+    case 'EMPATH': {
+      /* MUST */
       return roles.empath(newGamestate, scene_title, 'empath')
     }
-    /* MUST */ case 'EMPATH_VOTE': {
+    case 'EMPATH_VOTE': {
+      /* MUST */
       return roles.empathVote(newGamestate, scene_title, 'empath')
     }
     case 'EPIC_BATTLE': {
@@ -142,13 +170,16 @@ export const actionHandler = (gamestate, scene_title) => {
         !conditions.hasBadGuys(selected_cards)
       )
     }
-    /* MUST */ case 'EVERYONE_MARK': {
+    case 'EVERYONE_MARK': {
+      /* MUST */
       return roles.everyonemark(newGamestate, scene_title)
     }
-    /* MUST */ case 'EVILOMETER': {
+    case 'EVILOMETER': {
+      /* MUST */
       return roles.evilometer(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
-    /* MUST */ case 'EXPOSER': {
+    case 'EXPOSER': {
+      /* MUST */
       return roles.exposer(newGamestate, scene_title, 'exposer')
     }
     case 'FAMILY_MAN': {
@@ -160,28 +191,34 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'GREMLIN': {
       return roles.gremlin(newGamestate, scene_title, 'gremlin')
     }
-    /* MUST */ case 'GROOB_ZERB': {
+    case 'GROOB_ZERB': {
+      /* MUST */
       return roles.groobzerb(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
-    /* MUST */ case 'INSOMNIAC': {
+    case 'INSOMNIAC': {
+      /* MUST */
       return roles.insomniac(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     case 'INSTIGATOR': {
       return roles.instigator(newGamestate, scene_title)
     }
-    /* MUST */ case 'INTERN': {
+    case 'INTERN': {
+      /* MUST */
       return roles.intern(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards), conditions.hasMadScientist(selected_cards))
     }
     case 'JOKE': {
       return roles.joke(newGamestate, scene_title)
     }
-    /* MUST */ case 'LEADER': {
+    case 'LEADER': {
+      /* MUST */
       return roles.leader(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
-    /* MUST */ case 'LEADER_ZERB_GROOB': {
+    case 'LEADER_ZERB_GROOB': {
+      /* MUST */
       return roles.leaderzerbgroob(newGamestate, scene_title)
     }
-    /* MUST */ case 'LOVERS': {
+    case 'LOVERS': {
+      /* MUST */
       return roles.lovers(newGamestate, scene_title)
     }
     case 'MAD_SCIENTIST': {
@@ -190,13 +227,16 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'MARKSMAN': {
       return roles.marksman(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
-    /* MUST */ case 'MASONS': {
+    case 'MASONS': {
+      /* MUST */
       return roles.masons(newGamestate, scene_title)
     }
-    /* MUST */ case 'MINION': {
+    case 'MINION': {
+      /* MUST */
       return roles.minion(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
-    /* MUST */ case 'MIRROR_MAN': {
+    case 'MIRROR_MAN': {
+      /* MUST */
       return roles.mirrorman(newGamestate, scene_title)
     }
     case 'MORTICIAN': {
@@ -205,16 +245,19 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'MYSTIC_WOLF': {
       return roles.mysticwolf(newGamestate, scene_title)
     }
-    /* MUST */ case 'NOSTRADAMUS': {
+    case 'NOSTRADAMUS': {
+      /* MUST */
       return roles.nostradamus(newGamestate, scene_title)
     }
     case 'NOSTRADAMUS_REACTION': {
       return roles.nostradamusReaction(newGamestate, scene_title)
     }
-    /* MUST */ case 'ORACLE_ANSWER': {
+    case 'ORACLE_ANSWER': {
+      /* MUST */
       return roles.oracleAnswer(newGamestate, scene_title)
     }
-    /* MUST */ case 'ORACLE_QUESTION': {
+    case 'ORACLE_QUESTION': {
+      /* MUST */
       return roles.oracleQuestion(newGamestate, scene_title)
     }
     case 'PARANORMAL_INVESTIGATOR': {
@@ -223,7 +266,8 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'PICKPOCKET': {
       return roles.pickpocket(newGamestate, scene_title, 'pickpocket')
     }
-    /* MUST & MAY*/ case 'PRIEST': {
+    case 'PRIEST': {
+      /* MUST & MAY*/
       return roles.priest(newGamestate, scene_title, 'priest')
     }
     case 'PSYCHIC': {
@@ -232,10 +276,12 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'RAPSCALLION': {
       return roles.rapscallion(newGamestate, scene_title)
     }
-    /* MUST / MAY*/ case 'RASCAL': {
+    case 'RASCAL': {
+      /* MUST / MAY*/
       return roles.rascal(newGamestate, scene_title, 'rascal')
     }
-    /* MUST */ case 'RENFIELD': {
+    case 'RENFIELD': {
+      /* MUST */
       return roles.renfield(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     case 'REVEALER': {
@@ -253,37 +299,45 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'SEER': {
       return roles.seer(newGamestate, scene_title)
     }
-    /* MUST */ case 'SELF_AWARENESS_GIRL': {
+    case 'SELF_AWARENESS_GIRL': {
+      /* MUST */
       return roles.selfawarenessgirl(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     case 'SENTINEL': {
       return roles.sentinel(newGamestate, scene_title)
     }
-    /* MUST & MAY*/ case 'SQUIRE': {
+    case 'SQUIRE': {
+      /* MUST & MAY*/
       return roles.squire(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
-    /* MUST */ case 'SUPER_VILLAINS': {
+    case 'SUPER_VILLAINS': {
+      /* MUST */
       return roles.supervillains(newGamestate, scene_title)
     }
     case 'SWITCHEROO': {
       return roles.switcheroo(newGamestate, scene_title)
     }
-    /* MUST */ case 'TEMPTRESS': {
+    case 'TEMPTRESS': {
+      /* MUST */
       return roles.temptress(newGamestate, scene_title)
     }
-    /* MUST */ case 'THE_COUNT': {
+    case 'THE_COUNT': {
+      /* MUST */
       return roles.thecount(newGamestate, scene_title, 'thecount')
     }
-    /* MUST */ case 'THING': {
+    case 'THING': {
+      /* MUST */
       return roles.thing(newGamestate, scene_title)
     }
     case 'TROUBLEMAKER': {
       return roles.troublemaker(newGamestate, scene_title)
     }
-    /* MUST */ case 'VAMPIRES': {
+    case 'VAMPIRES': {
+      /* MUST */
       return roles.vampires(newGamestate, scene_title)
     }
-    /* MUST */ case 'VAMPIRES_VOTE': {
+    case 'VAMPIRES_VOTE': {
+      /* MUST */
       return roles.vampiresVote(newGamestate, scene_title)
     }
     case 'VILLAGE_IDIOT': {
@@ -292,7 +346,8 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'VOODOO_LOU': {
       return roles.voodoolou(newGamestate, scene_title)
     }
-    /* MUST / MAY */ case 'WEREWOLVES': {
+    case 'WEREWOLVES': {
+      /* MUST / MAY */
       return roles.werewolves(newGamestate, scene_title, conditions.hasDreamWolf(selected_cards))
     }
     case 'WITCH': {

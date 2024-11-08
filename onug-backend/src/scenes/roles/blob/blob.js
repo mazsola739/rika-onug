@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomBlobKickoffText } from './blob.constants'
 import { blobInteraction } from './blob.interaction'
@@ -24,7 +24,7 @@ export const blob = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (card.player_original_id === 44 || (card.player_role_id === 44 && ALL_COPY_PLAYER.includes(card.player_original_id))) {
+    if (isActivePlayer(card).BLOB) {
       newGamestate.players[token].action_finished = false
       interaction = blobInteraction(newGamestate, token, title)
     }

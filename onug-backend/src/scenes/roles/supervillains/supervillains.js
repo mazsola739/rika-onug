@@ -1,4 +1,4 @@
-import { ALL_COPY_PLAYER, ALL_SUPER_VILLAIN } from '../../../constants'
+import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { supervillainsInteraction } from './supervillains.interaction'
 
@@ -12,7 +12,7 @@ export const supervillains = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (ALL_SUPER_VILLAIN.some(id => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))) {
+    if (isActivePlayer(card).SUPER_VILLAINS) {
       newGamestate.players[token].action_finished = false
       interaction = supervillainsInteraction(newGamestate, token, title)
     }

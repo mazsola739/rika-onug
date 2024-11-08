@@ -3,8 +3,9 @@ export * from './aliens/aliens.interaction'
 export * from './aliens/aliens'
 export * from './aliens/aliens.response'
 export * from './aliens/aliens.utils'
-export * from './aliens/aliens.vote'
-export * from './aliens/aliens.voteresult'
+
+export * from './aliensvote/aliens.vote'
+export * from './aliensvote/aliens.voteresult'
 
 export * from './alphawolf/alphawolf.interaction'
 export * from './alphawolf/alphawolf'
@@ -93,8 +94,9 @@ export * from './empath/empath.interaction'
 export * from './empath/empath'
 export * from './empath/empath.response'
 export * from './empath/empath.utils'
-export * from './empath/empath.vote'
-export * from './empath/empath.voteresult'
+
+export * from './empathvote/empath.vote'
+export * from './empathvote/empath.voteresult'
 
 export * from './epicbattle/epicbattle.constants'
 export * from './epicbattle/epicbattle'
@@ -142,8 +144,9 @@ export * from './joke/joke'
 
 export * from './leader/leader.interaction'
 export * from './leader/leader'
-export * from './leader/leaderzerbgroob.interaction'
-export * from './leader/leaderzerbgroob'
+
+export * from './leaderzerbgroob/leaderzerbgroob.interaction'
+export * from './leaderzerbgroob/leaderzerbgroob'
 
 export * from './lovers/lovers.interaction'
 export * from './lovers/lovers'
@@ -272,8 +275,9 @@ export * from './troublemaker/troublemaker.response'
 export * from './vampires/vampires.interaction'
 export * from './vampires/vampires'
 export * from './vampires/vampires.response'
-export * from './vampires/vampires.vote'
-export * from './vampires/vampires.voteresult'
+
+export * from './vampiresvote/vampires.vote'
+export * from './vampiresvote/vampires.voteresult'
 
 export * from './villageidiot/villageidiot.interaction'
 export * from './villageidiot/villageidiot'
