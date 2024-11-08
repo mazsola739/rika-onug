@@ -2,6 +2,11 @@ import scripts from '../data/script.json'
 import { logTrace } from '../log'
 import * as conditions from './conditions'
 
+//! todo save interaction identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
+//TODO
+//! TODO if must action, random selecting?
+//? TODO better private message, private message generator?
+
 export const scriptHandler = gamestate => {
   logTrace(`scriptHandler in room [${gamestate.room_id}]`)
   const newGamestate = { ...gamestate }
@@ -20,9 +25,14 @@ export const scriptHandler = gamestate => {
 
   const roleOrder = [
     /* { condition: () => conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players), scripts: ['EPIC_BATTLE'] }, */
+
     {
       condition: () => conditions.hasOracle(selected_cards),
-      scripts: ['ORACLE_QUESTION', 'ORACLE_ANSWER']
+      scripts: ['ORACLE_QUESTION']
+    },
+    {
+      condition: () => conditions.hasOracle(selected_cards),
+      scripts: ['ORACLE_ANSWER']
     },
     {
       condition: () => conditions.hasCopycat(selected_cards),
@@ -42,7 +52,11 @@ export const scriptHandler = gamestate => {
     },
     {
       condition: () => conditions.hasAnyVampire(selected_cards),
-      scripts: ['VAMPIRES', 'VAMPIRES_VOTE']
+      scripts: ['VAMPIRES']
+    },
+    {
+      condition: () => conditions.hasAnyVampire(selected_cards),
+      scripts: ['VAMPIRES_VOTE']
     },
     {
       condition: () => conditions.hasTheCount(selected_cards),
@@ -62,7 +76,7 @@ export const scriptHandler = gamestate => {
     },
     {
       condition: () => conditions.hasCupid(selected_cards),
-      scripts: ['CUPID', 'LOVERS']
+      scripts: ['CUPID']
     },
     {
       condition: () => conditions.hasInstigator(selected_cards),
@@ -97,6 +111,10 @@ export const scriptHandler = gamestate => {
       scripts: ['EVERYONE_MARK']
     },
     {
+      condition: () => conditions.hasCupid(selected_cards),
+      scripts: ['LOVERS']
+    },
+    {
       condition: () => conditions.hasSentinel(selected_cards),
       scripts: ['SENTINEL']
     },
@@ -108,7 +126,10 @@ export const scriptHandler = gamestate => {
       condition: () => conditions.hasAnyVampire(selected_cards) && newGamestate.alien.vote,
       scripts: ['ALIENS_VOTE']
     },
-    { condition: () => conditions.hasCow(selected_cards), scripts: ['COW'] },
+    {
+      condition: () => conditions.hasCow(selected_cards),
+      scripts: ['COW']
+    },
     {
       condition: () => conditions.hasGroobAndZerb(selected_cards),
       scripts: ['GROOB_ZERB']
@@ -189,7 +210,10 @@ export const scriptHandler = gamestate => {
       condition: () => conditions.hasAnnoyingLad(selected_cards),
       scripts: ['ANNOYING_LAD']
     },
-    { condition: () => conditions.hasSeer(selected_cards), scripts: ['SEER'] },
+    {
+      condition: () => conditions.hasSeer(selected_cards),
+      scripts: ['SEER']
+    },
     {
       condition: () => conditions.hasApprenticeSeer(selected_cards),
       scripts: ['APPRENTICE_SEER']
@@ -204,7 +228,11 @@ export const scriptHandler = gamestate => {
     },
     {
       condition: () => conditions.hasNostradamus(selected_cards),
-      scripts: ['NOSTRADAMUS', 'NOSTRADAMUS_REACTION']
+      scripts: ['NOSTRADAMUS']
+    },
+    {
+      condition: () => conditions.hasNostradamus(selected_cards),
+      scripts: ['NOSTRADAMUS_REACTION']
     },
     {
       condition: () => conditions.hasPsychic(selected_cards),
@@ -311,12 +339,56 @@ export const scriptHandler = gamestate => {
       scripts: ['DOPPELGÄNGER_EXPOSER']
     },
     {
+      condition: () => conditions.hasFlipper(selected_cards),
+      scripts: ['FLIPPER']
+    },
+    {
+      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasFlipper(selected_cards),
+      scripts: ['DOPPELGÄNGER_FLIPPER']
+    },
+    {
+      condition: () => conditions.hasEmpath(selected_cards),
+      scripts: ['EMPATH']
+    },
+    {
+      condition: () => conditions.hasEmpath(selected_cards),
+      scripts: ['EMPATH_VOTE']
+    },
+    {
+      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasEmpath(selected_cards),
+      scripts: ['DOPPELGÄNGER_EMPATH']
+    },
+    {
+      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasEmpath(selected_cards),
+      scripts: ['DOPPELGÄNGER_EMPATH_VOTE']
+    },
+    {
+      condition: () => conditions.hasCurator(selected_cards),
+      scripts: ['CURATOR']
+    },
+    {
+      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasCurator(selected_cards),
+      scripts: ['DOPPELGÄNGER_CURATOR']
+    },
+    {
+      condition: () => conditions.hasBlob(selected_cards),
+      scripts: ['BLOB']
+    },
+    {
       condition: () => conditions.hasMortician(selected_cards),
       scripts: ['MORTICIAN']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasMortician(selected_cards),
+      condition: () => conditions.hasMortician(selected_cards) && conditions.hasDoppelganger(selected_cards),
       scripts: ['DOPPELGÄNGER_MORTICIAN']
+    },
+    {
+      condition: () => conditions.hasFamilyMan(selected_cards),
+      scripts: ['FAMILY_MAN']
+    },
+    {
+      condition: () => conditions.hasRipple(selected_cards),
+      scripts: ['RIPPLE']
     }
   ]
 
@@ -328,7 +400,7 @@ export const scriptHandler = gamestate => {
 
   /* addScript('JOKE') */ //TODO into narration
 
-  newGamestate.scripts = [...role_scenes]
+  newGamestate.scripts = role_scenes.sort((a, b) => a.scene_number - b.scene_number)
 
   return newGamestate
 }

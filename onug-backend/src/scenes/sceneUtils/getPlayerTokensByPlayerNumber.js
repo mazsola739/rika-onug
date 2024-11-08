@@ -1,11 +1,9 @@
 export const getPlayerTokensByPlayerNumber = (players, playerNumbers) => {
   const result = []
 
-  playerNumbers.forEach(player => {
-    const number = parseInt(player.match(/\d+/)[0])
-
+  playerNumbers.forEach(playerNumber => {
     for (const token in players) {
-      if (players[token].player_number === number) {
+      if (players[token].player_number === playerNumber) {
         result.push(token)
       }
     }

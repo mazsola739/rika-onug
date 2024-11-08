@@ -3,7 +3,13 @@
     "room_id": "archives",
     "room_name": "Archives",
     "stage": "LOBBY",
-    "selected_cards": [12, 13, 14, 1, 9],
+    "selected_cards": [
+      18,
+      20,
+      23,
+      24,
+      25
+    ],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
     "vote_timer": 300000,

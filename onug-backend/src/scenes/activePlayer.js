@@ -1,10 +1,14 @@
 import { ALL_ALIEN, ALL_COPY_PLAYER, ALL_SUPER_VILLAIN, ALL_VAMPIRE, ALL_WEREWOLF, COPY_PLAYER, GROOB_AND_ZERB, MASONS } from '../constants'
+import { logTrace } from '../log'
 
 const isRoleOrCopyPlayer = (card, roleIdArray) => {
   return roleIdArray.some(id => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))
 }
 
 const isSpecificRole = (card, roleId) => {
+  logTrace(`isSpecificRole: im here with ${roleId}`)
+  logTrace(`isSpecificRole: im here with ${card.player_original_id === roleId}`)
+  logTrace(`isSpecificRole: im here with ${card.player_role_id === roleId && COPY_PLAYER.includes(card.player_original_id)}`)
   return card.player_original_id === roleId || (card.player_role_id === roleId && COPY_PLAYER.includes(card.player_original_id))
 }
 

@@ -11,7 +11,7 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
   const newGamestate = { ...gamestate }
 
   const newArtifact = getRandomArtifact(newGamestate.artifact)
-  const artifactedPlayersToken = getPlayerTokensByPlayerNumber(newGamestate.players, selected_card_positions[0])
+  const artifactedPlayersToken = getPlayerTokensByPlayerNumber(newGamestate.players, [selected_card_positions[0]])
 
   if (artifactedPlayersToken) {
     newGamestate.artifact.push({ [selected_card_positions[0]]: newArtifact })
@@ -20,11 +20,13 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
-    new_artifact_card: selected_card_positions[0]
+    new_artifact_card: selected_card_positions[0],
+    scene_end: true
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_placed_artifact', formatPlayerIdentifier(selected_card_positions)[0]]
+    private_message: ['interaction_placed_artifact', formatPlayerIdentifier(selected_card_positions)[0]],
+    scene_end: true
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)
