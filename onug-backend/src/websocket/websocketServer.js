@@ -3,7 +3,7 @@ import {
   ARRIVE_GAME,
   ARRIVE_ROOM,
   ARRIVE_TABLE,
-  ARRIVE_VOTE,
+  ARRIVE_COUNCIL,
   DEAL,
   JOIN_ROOM,
   LEAVE_GAME,
@@ -26,7 +26,7 @@ import { dealCards } from './dealCards'
 import { hydrateGame } from './hydrateGame'
 import { hydrateRoom } from './hydrateRoom'
 import { hydrateTable } from './hydrateTable'
-import { hydrateVote } from './hydrateVote'
+import { hydrateCouncil } from './hydrateCouncil'
 import { joinRoom } from './joinRoom'
 import { leaveGame } from './leaveGame'
 import { leaveRoom } from './leaveRoom'
@@ -75,7 +75,7 @@ export const websocketServer = port => {
         if (message.type === PAUSE_GAME) return pauseGame(message)
         if (message.type === STOP_GAME) return stopGame(message)
         if (message.type === SCENE) return scene(ws, message)
-        if (message.type === ARRIVE_VOTE) return hydrateVote(ws, message)
+        if (message.type === ARRIVE_COUNCIL) return hydrateCouncil(ws, message)
         if (message.type === UPDATE_GUESS) return hydrateGuess(ws, message)
         if (message.type === START_VOTE) return vote(ws, message)
         if (message.type === VOTE) return result(ws, message)

@@ -25,6 +25,11 @@ export const sceneHandler = async gamestate => {
   const activePlayersInScenes = new Set()
 
   const hasConflict = scene => {
+    if (flagsState.artifact || flagsState.shield) {
+      logTrace(`Conflict due to active artifact or shield flag, halting scene processing.`)
+      return true
+    }
+    
     return (
       (scene.player_card_shifting && flagsState.player_card_shifting) ||
       (scene.center_card_shifting && flagsState.center_card_shifting) ||

@@ -49,12 +49,13 @@ export const SelectedCards: React.FC = observer(() => {
     selectionStore.toggleCardSelection(position)
   }
   const { selectedCards } = selectionStore
+  
 
   return (
     <StyledSelectedCards>
       {selectedCards.map((card, index) => (
         <MessageBoxCard key={index}>
-          <CardPosition>{card}</CardPosition>
+          <CardPosition>{`card`}</CardPosition>
           <Card image="card_background" onClick={() => onCardClick(card)} size={40} />
         </MessageBoxCard>
       ))}

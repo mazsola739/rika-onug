@@ -3,9 +3,7 @@ import { logTrace } from '../log'
 import * as conditions from './conditions'
 
 //! todo save interaction identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
-//TODO
-//! TODO if must action, random selecting?
-//? TODO better private message, private message generator?
+//TODO fix epic battle, and joke
 
 export const scriptHandler = gamestate => {
   logTrace(`scriptHandler in room [${gamestate.room_id}]`)

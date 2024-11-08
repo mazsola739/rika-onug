@@ -15,7 +15,6 @@ export const RoomFooter: React.FC = observer(() => {
   //TODO unlock the 3 players
   const isButtonDisabled = /* playersInGame < 3 ||  */ playersInGame !== totalPlayers
 
-  //TODO reset button reset players in the room - fix it
   return (
     <Footer>
       <ButtonGroup>

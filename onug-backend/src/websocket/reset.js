@@ -1,6 +1,7 @@
 import { HYDRATE_ROOM } from '../constants'
 import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
+import { getPlayerNames } from '../utils'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
 
@@ -21,11 +22,14 @@ export const reset = async message => {
 
     logTrace(`selectedCards reseted, new gamestate: ${JSON.stringify(newGamestate)}`)
 
+    const players = getPlayerNames(newGamestate)
+
     return broadcast(room_id, {
       type: HYDRATE_ROOM,
       success: true,
       selected_cards: [],
-      selected_expansions: ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles']
+      selected_expansions: ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles'],
+      players,
     })
   } catch (error) {
     logError(error)

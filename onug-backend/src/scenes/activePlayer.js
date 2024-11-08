@@ -37,8 +37,6 @@ export const isActivePlayer = card => {
     DETECTOR: isSpecificRole(card, 56),
     DISEASED: isSpecificRole(card, 32),
     DOPPELGÄNGER: card.player_original_id === 1,
-
-    // DOPPELGÄNGER roles
     DOPPELGÄNGER_APPRENTICE_ASSASSIN: isCopyPlayerRole(card, 28),
     DOPPELGÄNGER_ASSASSIN: isCopyPlayerRole(card, 29),
     DOPPELGÄNGER_BODY_SNATCHER: isCopyPlayerRole(card, 74),
@@ -56,7 +54,6 @@ export const isActivePlayer = card => {
     DOPPELGÄNGER_RASCAL: isCopyPlayerRole(card, 52),
     DOPPELGÄNGER_REVEALER: isCopyPlayerRole(card, 24),
     DOPPELGÄNGER_THE_COUNT: isCopyPlayerRole(card, 39),
-
     DR_PEEKER: isSpecificRole(card, 57),
     DRUNK: isSpecificRole(card, 2),
     EMPATH: card.player_original_id !== 77 || (card.player_role_id !== 20 && COPY_PLAYER.includes(card.player_original_id)),

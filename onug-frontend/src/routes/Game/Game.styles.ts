@@ -34,7 +34,7 @@ const lightenBackground = keyframes`
   to { background-color: transparent; }
 `
 
-//GAME
+//GAME //TODO set 1s to desired long sun rize or night fall!!!!
 export const StyledGame = styled.div<GameProps>`
   animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? darkenBackground : lightenBackground)} 1s forwards;
 
@@ -48,8 +48,12 @@ export const StyledGame = styled.div<GameProps>`
         animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 1s forwards;
       }
 
-      > span {
+      > span:first-of-type {
         animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeInMoon : fadeOutMoon)} 1s forwards;
+      }
+
+      > span:nth-of-type(2) {
+        animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? fadeOutSun : fadeInSun)} 1s forwards;
       }
     }
   }
@@ -83,49 +87,6 @@ export const StyledGame = styled.div<GameProps>`
 `
 
 //HEADER
-export const StyledGameHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  color: white;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  height: 100%;
-  width: 100%;
-`
-
-export const Sun = styled.img`
-  border-radius: 50%;
-  box-shadow:
-    0 0 60px 10px #fff,
-    0 0 100px 20px red,
-    0 0 140px 30px gold;
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  top: 15%;
-  opacity: 1;
-`
-
-export const Moon = styled.img`
-  border-radius: 50%;
-  box-shadow:
-    0 0 60px 10px #000,
-    0 0 100px 20px blue,
-    0 0 140px 30px silver;
-  width: 35px;
-  height: 35px;
-  position: absolute;
-  top: 15%;
-  opacity: 0;
-`
-
-export const Text = styled.span`
-  color: white;
-  position: absolute;
-  opacity: 0;
-  bottom: 10%;
-`
 
 //MAIN
 export const GameCenter = styled.div`
