@@ -8,28 +8,32 @@ export const validateRoom = async roomId => {
   const roomIdExists = ROOM_NAMES.includes(roomId)
   if (!roomIdExists) {
     errors.push('Invalid room id')
-
     return [false, {}, errors]
   }
 
-  const gamestate = await readGamestate(roomId)
+  let gamestate
 
-  if (!gamestate) {
-    errors.push('Room does not exist')
-  }
+  try {
+    gamestate = await readGamestate(roomId)
 
-  const closed = gamestate?.closed
-  if (closed) {
-    errors.push('gamestate is already closed for that room id')
-  }
+    if (!gamestate) {
+      errors.push('Room does not exist')
+    } else {
+      if (gamestate.closed) {
+        errors.push('Gamestate is already closed for that room id')
+      }
 
-  const playersFull = gamestate?.players?.length === 12
-  if (playersFull) {
-    errors.push('Room is already full')
+      if (Object.keys(gamestate.players || {}).length >= 12) {
+        errors.push('Room is already full')
+      }
+    }
+  } catch (error) {
+    logWarn(`Error reading gamestate for roomId ${roomId}: ${error.message}`)
+    errors.push('An error occurred while retrieving the room data')
   }
 
   const validity = errors.length === 0
   if (!validity) logWarn(`Validation errors: ${errors}`)
 
-  return [validity, gamestate, errors]
+  return [validity, gamestate || {}, errors]
 }

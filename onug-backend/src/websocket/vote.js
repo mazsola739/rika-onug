@@ -1,5 +1,5 @@
-import { ERROR, VOTE } from '../constants'
-import { logError, logTrace } from '../log'
+import { ERROR, HYDRATE_VOTE, VOTE } from '../constants'
+import { logError, logErrorWithStack, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
 import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens } from '../scenes/sceneUtils'
 import { validateRoom } from '../validators'
@@ -60,14 +60,13 @@ export const vote = async (ws, message) => {
 
     await upsertRoomState(newGamestate)
   } catch (error) {
-    logError(`Error processing vote in room: ${room_id}. Error: ${error.message}`)
-    logError(JSON.stringify(error.stack))
-
+    logErrorWithStack(error)
+    //TODO fix this part
     ws.send(
       JSON.stringify({
-        type: ERROR,
+        type: HYDRATE_VOTE,
         success: false,
-        message: 'Failed to process vote. Please try again.'
+        errors: ['An unexpected error occurred. Please try again.']
       })
     )
   }

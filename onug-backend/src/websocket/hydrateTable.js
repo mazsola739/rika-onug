@@ -34,5 +34,13 @@ export const hydrateTable = async (ws, message) => {
     )
   } catch (error) {
     logErrorWithStack(error)
+
+    ws.send(
+      JSON.stringify({
+        type: HYDRATE_TABLE,
+        success: false,
+        errors: ['An unexpected error occurred. Please try again.']
+      })
+    )
   }
 }
