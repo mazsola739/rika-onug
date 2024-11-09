@@ -43,8 +43,10 @@ cd onug-backend
 ../onug-devops/killBe.sh
 yarn
 rm prod__nohup.txt
-nohup yarn start:ec2 > prod__nohup.txt </dev/null 2>&1 &
+nohup yarn run start:ec2 > prod__nohup.txt </dev/null 2>.src/prod__crash.txt &
 cat prod__nohup.txt
+cat ./src/prod__crash.txt
+
 ```
 to see be console logs
 > cat prod__nohup.txt &
@@ -108,5 +110,8 @@ Note that it's also possible to run systemd services as a user. See for example 
 after updating onug service file, copy the modified file to systemclt
 ```
 sudo cp onug-devops/onug.service /etc/systemd/system
+
+sudo systemctl start onug.service
+
 sudo systemctl daemon-reload
 ```
