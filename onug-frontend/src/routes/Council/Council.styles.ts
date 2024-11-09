@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 
+//COUNCIL
 export const StyledCouncil = styled.div`
   min-width: 100%;
   display: grid;
@@ -29,20 +30,9 @@ export const StyledCouncil = styled.div`
   }
 `
 
-export const GameArea = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
-`
+//HEADER
 
-export const Councild = styled.div`
-  min-width: 320px;
-  display: flex;
-  align-items: flex-end;
-  padding: 10px;
-`
-
+//MAIN
 export const CouncilCenter = styled.div`
   width: 100%;
   height: 100%;
@@ -51,3 +41,7 @@ export const CouncilCenter = styled.div`
   justify-content: space-between;
   align-items: center;
 `
+
+//FOOTER
+
+//COUNCIL INFO

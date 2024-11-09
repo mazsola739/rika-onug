@@ -44,5 +44,5 @@ export const TableCenter = styled.div`
 
 //FOOTER
 
-//INFOPANEL
+//TABLE INFO
 

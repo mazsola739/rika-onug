@@ -99,24 +99,6 @@ export const GameCenter = styled.div`
 `
 
 //FOOTER
-export const StyledGameFooter = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 150px 1fr;
-
-  & > :first-of-type {
-    grid-column: 2;
-  }
-
-  padding-bottom: 10px;
-  height: 100%;
-  width: 100%;
-`
-
-export const Tokens = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`
 
 //INFOPANEL
 export const Placeholder = styled.div`

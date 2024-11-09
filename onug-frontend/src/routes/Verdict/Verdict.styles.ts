@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 
+//VERDICT
 export const StyledVerdict = styled.div`
   min-width: 100%;
   display: grid;
@@ -15,3 +16,11 @@ export const StyledVerdict = styled.div`
     grid-area: 4 / 1 / 4 / 4;
   }
 `
+
+//HEADER
+
+//MAIN
+
+//FOOTER
+
+//VERDICT INFO

@@ -56,7 +56,7 @@ export const NarrationImage = styled.img`
   width: 70px;
 `
 
-export const StyledCouncilNarration = styled.div`
+export const StyledNightHistory = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -103,7 +103,7 @@ export const CardPosition = styled.span`
   color: white;
 `
 
-export const StyledInfo = styled.div`
+export const StyledRuleInfo = styled.div`
   display: grid;
   flex-direction: column;
   align-items: center;

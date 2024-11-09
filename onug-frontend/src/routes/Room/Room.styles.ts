@@ -26,9 +26,7 @@ export const StyledRoom = styled.div`
     grid-area: 1 / 4 / 4 / 5;
   }
 `
-
-//FOOTER
-
+//HEADER
 
 //MAIN
 export const RoomCardList = styled.div`
@@ -41,3 +39,7 @@ export const RoomCardList = styled.div`
     min-height: 90vh;
   }
 `
+
+//FOOTER
+
+//ROOM INFO
