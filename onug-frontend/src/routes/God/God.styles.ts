@@ -98,13 +98,13 @@ export const Input = styled.input`
 
 export const ButtonsContainer = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 `
 
 export const Button = styled.button`
   padding: 8px;
-  font-size: 0.75rem;
+  font-size: 0.6rem;
   font-weight: bold;
   color: ${textColor};
   background-color: ${primaryColor};
