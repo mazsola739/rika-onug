@@ -2,7 +2,7 @@
 Description=onug backend app
 
 [Service]
-ExecStart=/home/ubuntu/app/rika-onug/onug-backend/src/server.js
+ExecStart=/bin/bash -c '/home/ubuntu/app/rika-onug/onug-backend/src/server.js'
 Restart=always
 User=nobody
 # Note Debian/Ubuntu uses 'nogroup', RHEL/Fedora uses 'nobody'
