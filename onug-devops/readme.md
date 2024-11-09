@@ -84,3 +84,19 @@ node      415825            root   20u  IPv6 4848920      0t0  TCP *:3000 (LISTE
 ```
 frontend is running
 
+
+
+### troubleshotting
+https://stackoverflow.com/questions/4018154/how-do-i-run-a-node-js-app-as-a-background-service
+
+Copy your service file into the
+> /etc/systemd/system
+
+Start it with
+> systemctl start onug
+
+Enable it to run on boot with
+> systemctl enable onug
+
+
+Note that it's also possible to run systemd services as a user. See for example this tutorial. You can put your service file in ~/.config/systemd/user, start it with systemctl --user start myapp, enable it with systemctl --user enable myapp
