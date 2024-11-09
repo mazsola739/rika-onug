@@ -1,7 +1,7 @@
-import { ARRIVE_GAME, END_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, STAGES } from 'constant'
+import { ARRIVE_GAME, END_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { propStore, gameStatusStore, messageStore, riseAndRestStore, wsStore } from 'store'
+import { gameStatusStore, messageStore, propStore, riseAndRestStore, wsStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
 import { splitCardsToTable } from 'utils'
 
@@ -11,7 +11,7 @@ export const useGame = () => {
 
   const [firstTime, setFirstTime] = useState(true)
   const [transitionCompleted, setTransitionCompleted] = useState(false)
-  
+
   const navigate = useNavigate()
 
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
@@ -21,7 +21,6 @@ export const useGame = () => {
       setFirstTime(false)
       sendJsonMessage?.({
         type: ARRIVE_GAME,
-        stage: STAGES.GAME,
         room_id,
         token
       })

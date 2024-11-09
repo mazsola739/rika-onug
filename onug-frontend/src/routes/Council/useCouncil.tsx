@@ -1,4 +1,4 @@
-import { ARRIVE_COUNCIL, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
+import { ARRIVE_COUNCIL, HYDRATE_COUNCIL, HYDRATE_GUESS, HYDRATE_READY, REDIRECT, RESULT, VOTE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { playersStore, propStore, riseAndRestStore, voteStore, wsStore } from 'store'
@@ -19,7 +19,6 @@ export const useCouncil = () => {
       setFirstTime(false)
       sendJsonMessage?.({
         type: ARRIVE_COUNCIL,
-        stage: STAGES.COUNCIL,
         room_id,
         token
       })
@@ -27,7 +26,7 @@ export const useCouncil = () => {
   }, [sendJsonMessage, firstTime])
 
   useEffect(() => {
-    if (lastJsonMessage?.type === HYDRATE_VOTE && lastJsonMessage?.success) {
+    if (lastJsonMessage?.type === HYDRATE_COUNCIL && lastJsonMessage?.success) {
       voteStore.setKnownPlayer(lastJsonMessage.player)
       voteStore.setNarrations(lastJsonMessage.narrations)
       playersStore.setPlayers(lastJsonMessage.players)

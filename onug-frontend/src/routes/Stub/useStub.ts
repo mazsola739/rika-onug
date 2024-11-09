@@ -1,7 +1,7 @@
 import { API_HOST } from 'constant'
 import { useCallback, useState } from 'react'
 import { labels } from './Stub.constants'
-import { testCase } from './TestCases/testCase'
+import { testCase } from './StubTestCases'
 
 interface ServerResponse {
   serverResponse: string

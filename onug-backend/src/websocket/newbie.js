@@ -1,5 +1,5 @@
 import { v4 as uuidv4, validate } from 'uuid'
-import { NEWBIE, REDIRECT } from '../constants'
+import { NEWBIE } from '../constants'
 import { logInfo } from '../log'
 
 export const newbie = (ws, message) => {
@@ -15,7 +15,6 @@ export const newbie = (ws, message) => {
         message: 'client successfully rejoined'
       })
     )
-    return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby' }))
 
     // TODO maybe? from gamestate, after redirected to lobby, redirect to the right path
   }

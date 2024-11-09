@@ -12,6 +12,7 @@ export const hydrateGame = async (ws, message) => {
     const newGamestate = { ...gamestate }
 
     const { players } = newGamestate
+    // TODO recheck, maybe it would be better to only update the current player's flag instead of all players flag, to avoid async issues on (re-)join the room
     Object.keys(players).forEach(playerId => (players[playerId].flag = false))
 
     if (isGameStopped(gamestate)) {

@@ -20,7 +20,7 @@ export const RoomFooter: React.FC = observer(() => {
       <ButtonGroup>
         <Button onClick={handleResetGame} buttonText={BUTTONS.reset_game_label} variant="blue" />
         <Button onClick={handleJoinTable} disabled={isButtonDisabled} buttonText={buttonText} variant="green" />
-        <Button onClick={handleLeaveRoom} buttonText={BUTTONS.leave_room_label} variant="crimson" />
+        <Button onClick={handleLeaveRoom} buttonText={BUTTONS.leave_label} variant="crimson" />
       </ButtonGroup>
     </Footer>
   )

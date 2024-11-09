@@ -6,7 +6,7 @@ import { propStore, playersStore, selectionStore, voteStore } from 'store'
 
 export const CouncilFooter: React.FC = observer(() => {
   const { handleReady, handleLeaveGame, handleVoteNow, handleAccuse } = useClickHandler()
-  const { selectedCards} = selectionStore
+  const { selectedCards } = selectionStore
   const { players } = playersStore
 
   //TODO FIX ready
@@ -21,7 +21,7 @@ export const CouncilFooter: React.FC = observer(() => {
         </ButtonGroup>
       ) : (
         <ButtonGroup>
-          <Button onClick={handleLeaveGame} buttonText={BUTTONS.leave_game_label} variant="red" />
+          <Button onClick={handleLeaveGame} buttonText={BUTTONS.back_label} variant="red" />
           <Button onClick={handleVoteNow} buttonText={BUTTONS.votenow_button_label} disabled={disabled} variant="orange" />
           <Button onClick={handleReady} variant={isReady ? 'blue' : 'green'} buttonText={isReady ? BUTTONS.im_ready_label : BUTTONS.ready_label} />
         </ButtonGroup>

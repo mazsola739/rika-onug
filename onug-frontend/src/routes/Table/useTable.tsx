@@ -1,4 +1,4 @@
-import { ARRIVE_TABLE, HYDRATE_READY, HYDRATE_TABLE, REDIRECT, STAGES } from 'constant'
+import { ARRIVE_TABLE, HYDRATE_READY, HYDRATE_TABLE, REDIRECT } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { deckStore, playersStore, riseAndRestStore, wsStore } from 'store'
@@ -18,7 +18,6 @@ export const useTable = () => {
       setFirstTime(false)
       sendJsonMessage({
         type: ARRIVE_TABLE,
-        stage: STAGES.TABLE,
         token,
         room_id
       })

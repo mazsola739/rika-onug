@@ -9,7 +9,7 @@ export const VerdictFooter: React.FC = observer(() => {
   return (
     <Footer>
       <ButtonGroup>
-        <Button onClick={handleLeaveGame} buttonText={BUTTONS.leave_game_label} variant="green" />
+        <Button onClick={handleLeaveGame} buttonText={BUTTONS.back_label} variant="green" />
       </ButtonGroup>
     </Footer>
   )

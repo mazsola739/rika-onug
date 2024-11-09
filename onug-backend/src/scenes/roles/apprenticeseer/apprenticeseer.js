@@ -12,7 +12,7 @@ export const apprenticeseer = (gamestate, title) => {
 
     const card = newGamestate.players[token].card
 
-    if (isActivePlayer(card).APPRENTICE_ASSASSIN) {
+    if (isActivePlayer(card).APPRENTICE_SEER) {
       newGamestate.players[token].action_finished = false
       interaction = apprenticeseerInteraction(newGamestate, token, title)
     }

@@ -19,8 +19,8 @@ export const ARRIVE_ROOM = 'ARRIVE_ROOM'
 export const ARRIVE_TABLE = 'ARRIVE_TABLE'
 export const ARRIVE_GAME = 'ARRIVE_GAME'
 export const ARRIVE_VOTE = 'ARRIVE_VOTE'
-export const ARRIVE_COUNCIL = 'ARRIVE_VOTE'
-export const ARRIVE_VERDICT = 'ARRIVE_VOTE'
+export const ARRIVE_COUNCIL = 'ARRIVE_COUNCIL'
+export const ARRIVE_VERDICT = 'ARRIVE_VERDICT'
 
 export const HYDRATE_LOBBY = 'HYDRATE_LOBBY'
 export const HYDRATE_ROOM = 'HYDRATE_ROOM'
@@ -30,6 +30,7 @@ export const HYDRATE_GAME = 'HYDRATE_GAME'
 export const HYDRATE_SCENE = 'HYDRATE_SCENE'
 export const HYDRATE_VOTE = 'HYDRATE_VOTE'
 export const HYDRATE_GUESS = 'HYDRATE_GUESS'
+export const HYDRATE_COUNCIL = 'HYDRATE_COUNCIL'
 
 export const UPDATE_ROOM = 'UPDATE_ROOM'
 export const UPDATE_TABLE = 'UPDATE_TABLE'
@@ -48,17 +49,3 @@ export const PAUSE_GAME = 'PAUSE_GAME'
 
 export const START_VOTE = 'START_VOTE'
 export const VOTE = 'VOTE'
-
-export const STAGES = {
-  LOBBY: 'LOBBY',
-  ROOM: 'ROOM',
-  TABLE: 'TABLE',
-  GAME: 'GAME',
-  COUNCIL: 'COUNCIL',
-  VERDICT: 'VERDICT',
-}
-
-export const API_SERVER_HOST = 'http://ec2-3-90-213-104.compute-1.amazonaws.com:7654'
-export const API_LOCALHOST = 'http://localhost:7654'
-export const WS_SERVER_HOST = 'ws://ec2-3-90-213-104.compute-1.amazonaws.com:7655/'
-export const WS_LOCALHOST = 'ws://localhost:7655/'

@@ -1,4 +1,4 @@
-import { ARRIVE_VERDICT, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, STAGES, VOTE } from 'constant'
+import { ARRIVE_VERDICT, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, VOTE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { playersStore, propStore, riseAndRestStore, voteStore, wsStore } from 'store'
@@ -17,7 +17,6 @@ export const useVerdict = () => {
       setFirstTime(false)
       sendJsonMessage?.({
         type: ARRIVE_VERDICT,
-        stage: STAGES.VERDICT,
         room_id,
         token
       })

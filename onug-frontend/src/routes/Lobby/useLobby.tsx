@@ -1,4 +1,4 @@
-import { HYDRATE_LOBBY, JOIN_ROOM, REDIRECT, STAGES } from 'constant'
+import { HYDRATE_LOBBY, JOIN_ROOM, REDIRECT } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { lobbyStore, wsStore } from 'store'
@@ -14,7 +14,6 @@ export const useLobby = () => {
       setFirstTime(false)
       sendJsonMessage?.({
         type: HYDRATE_LOBBY,
-        stage: STAGES.LOBBY
       })
     }
   }, [sendJsonMessage, firstTime])
