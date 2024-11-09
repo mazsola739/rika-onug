@@ -43,7 +43,7 @@ cd onug-backend
 ../onug-devops/killBe.sh
 yarn
 rm prod__nohup.txt
-nohup yarn start > prod__nohup.txt &
+nohup yarn start:ec2 > prod__nohup.txt </dev/null 2>&1 &
 cat prod__nohup.txt
 ```
 to see be console logs
@@ -68,7 +68,7 @@ cd onug-frontend
 yarn
 yarn build:prod
 rm prod__nohup.txt
-nohup yarn start:prod > prod__nohup.txt &
+nohup yarn start:prod > prod__nohup.txt </dev/null 2>&1 &
 cat prod__nohup.txt
 sudo lsof -i -P -n | grep LISTEN
 ```

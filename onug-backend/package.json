@@ -7,7 +7,7 @@
   "main": "server.js",
   "scripts": {
     "start": "cross-env ONUG_REPOSITORY_TYPE=local ONUG_LOG_LEVEL=WARN nodemon -w src -x tsx ./src/server.js",
-    "start:ec2": "cross-env ONUG_REPOSITORY_TYPE=local ONUG_LOG_LEVEL=WARN nodemon -w src -x tsx ./src/server.js || touch ./src/server.js",
+    "start:ec2": "cross-env ONUG_REPOSITORY_TYPE=local ONUG_LOG_LEVEL=WARN nodemon -w src -x tsx './src/server.js || touch ./src/server.js'",
     "test": "node --test --experimental-test-coverage",
     "build": "vite build",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,md}'"
