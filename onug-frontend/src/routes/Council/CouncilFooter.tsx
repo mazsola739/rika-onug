@@ -2,13 +2,14 @@ import { Button, ButtonGroup, Footer } from 'components'
 import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
-import { propStore, playersStore, selectionStore } from 'store'
+import { propStore, playersStore, selectionStore, voteStore } from 'store'
 
 export const CouncilFooter: React.FC = observer(() => {
-  const { handleReady, handleLeaveGame, handleVoteNow, handleDone } = useClickHandler()
-  const { selectedCards } = selectionStore
+  const { handleReady, handleLeaveGame, handleVoteNow, handleAccuse } = useClickHandler()
+  const { selectedCards} = selectionStore
   const { players } = playersStore
 
+  //TODO FIX ready
   const isReady = playersStore.isPlayerReady
   const disabled = players.some(player => player.flag === false)
 
@@ -16,7 +17,7 @@ export const CouncilFooter: React.FC = observer(() => {
     <Footer>
       {propStore.selectable_cards.length > 0 ? (
         <ButtonGroup>
-          <Button onClick={() => handleDone(selectedCards)} variant="green" buttonText={BUTTONS.done_label} />
+          <Button onClick={() => handleAccuse(selectedCards)} variant="green" buttonText={BUTTONS.done_label} />
         </ButtonGroup>
       ) : (
         <ButtonGroup>

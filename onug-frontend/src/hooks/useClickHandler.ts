@@ -1,4 +1,4 @@
-import { DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, PAUSE_GAME, READY, RESET, SCENE, START_GAME, START_VOTE, STOP_GAME, UPDATE_ROOM, VOTE } from 'constant'
+import { DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, PAUSE_GAME, READY, RESET, SCENE, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, UPDATE_VOTE, VOTE } from 'constant'
 import { useCallback } from 'react'
 import { deckStore, gameStatusStore, riseAndRestStore, roomStore, wsStore } from 'store'
 
@@ -8,6 +8,25 @@ export const useClickHandler = () => {
 
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
 
+  //ARE YOU READY?
+  const handleReady = useCallback(() => {
+    sendJsonMessage?.({
+      type: READY,
+      token,
+      room_id
+    })
+  }, [sendJsonMessage])
+
+  //BACK TO ROOM
+  const handleLeaveGame = useCallback(() => {
+    sendJsonMessage?.({
+      type: LEAVE_GAME,
+      room_id,
+      token
+    })
+  }, [sendJsonMessage])
+
+  //LOBBY
   const handleJoinRoom = (room_id: string) => {
     sendJsonMessage?.({
       type: JOIN_ROOM /*  */,
@@ -16,6 +35,7 @@ export const useClickHandler = () => {
     })
   }
 
+  //ROOM
   const handleLeaveRoom = useCallback(() => {
     sendJsonMessage?.({
       type: LEAVE_ROOM,
@@ -41,6 +61,22 @@ export const useClickHandler = () => {
     gameStatusStore.resetStatus()
   }, [sendJsonMessage])
 
+  //CARD SELECTION / DESELECTION
+  const handleSelectAndDeselect = useCallback(
+    (id: number) => {
+      sendJsonMessage?.({
+        type: UPDATE_ROOM,
+        card_id: id,
+        room_id,
+        token
+      })
+
+      roomStore.toggleInfo(id)
+    },
+    [roomStore, sendJsonMessage]
+  )
+
+  //TABLE
   const handleStartGame = useCallback(() => {
     sendJsonMessage?.({
       type: START_GAME,
@@ -48,14 +84,6 @@ export const useClickHandler = () => {
       token
     })
     gameStatusStore.toggleStart()
-  }, [sendJsonMessage])
-
-  const handleReady = useCallback(() => {
-    sendJsonMessage?.({
-      type: READY,
-      token,
-      room_id
-    })
   }, [sendJsonMessage])
 
   const handlePauseGame = useCallback(() => {
@@ -76,14 +104,28 @@ export const useClickHandler = () => {
     gameStatusStore.toggleStop()
   }, [sendJsonMessage])
 
-  const handleLeaveGame = useCallback(() => {
+  //COUNCIL
+  const handleVoteNow = useCallback(() => {
     sendJsonMessage?.({
-      type: LEAVE_GAME,
+      type: START_VOTE,
       room_id,
       token
     })
   }, [sendJsonMessage])
 
+  const handleAccuse = useCallback(
+    (selected_cards: string[]) => {
+      sendJsonMessage({
+        type: UPDATE_VOTE,
+        room_id,
+        token,
+        selected_card_positions: selected_cards
+      })
+    },
+    [sendJsonMessage]
+  )
+
+  //GAME
   const handleFinish = useCallback(
     (title: string) => {
       sendJsonMessage?.({
@@ -149,55 +191,6 @@ export const useClickHandler = () => {
     [sendJsonMessage]
   )
 
-  const handleDeselect = useCallback(
-    (id: number, action: string) => {
-      sendJsonMessage?.({
-        type: UPDATE_ROOM,
-        card_id: id,
-        room_id,
-        token,
-        action
-      })
-
-      roomStore.toggleInfo(id)
-    },
-    [deckStore, roomStore, sendJsonMessage]
-  )
-
-  const handleCardClick = useCallback(
-    (id: number) => {
-      sendJsonMessage?.({
-        type: UPDATE_ROOM,
-        card_id: id,
-        room_id,
-        token
-      })
-
-      roomStore.toggleInfo(id)
-    },
-    [roomStore, sendJsonMessage]
-  )
-
-  const handleVoteNow = useCallback(() => {
-    sendJsonMessage?.({
-      type: START_VOTE,
-      room_id,
-      token
-    })
-  }, [sendJsonMessage])
-
-  const handleDone = useCallback(
-    (selected_cards: string[]) => {
-      sendJsonMessage?.({
-        type: VOTE,
-        room_id,
-        token,
-        selected_card_positions: selected_cards
-      })
-    },
-    [sendJsonMessage]
-  )
-
   return {
     handleJoinRoom,
     handleLeaveRoom,
@@ -213,9 +206,8 @@ export const useClickHandler = () => {
     handleCardInteraction,
     handleMarkInteraction,
     handleAnswerInteraction,
-    handleDeselect,
-    handleCardClick,
+    handleSelectAndDeselect,
     handleVoteNow,
-    handleDone
+    handleAccuse
   }
 }

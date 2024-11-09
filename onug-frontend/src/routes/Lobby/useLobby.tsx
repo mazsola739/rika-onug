@@ -7,7 +7,6 @@ export const useLobby = () => {
   const [firstTime, setFirstTime] = useState(true)
   const navigate = useNavigate()
 
-  const token = sessionStorage.getItem('token')
   const { lastJsonMessage, sendJsonMessage } = wsStore.getWsCommunicationsBridge()
 
   useEffect(() => {
@@ -47,16 +46,7 @@ export const useLobby = () => {
     })
   }, [])
 
-  const handleJoinRoom = (room_id: string) => {
-    sendJsonMessage?.({
-      type: JOIN_ROOM,
-      room_id,
-      token
-    })
-  }
-
   return {
-    lobbyStore,
-    handleJoinRoom
+    lobbyStore
   }
 }

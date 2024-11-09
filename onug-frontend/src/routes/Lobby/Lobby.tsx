@@ -1,10 +1,12 @@
+import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { StyledLobby } from './Lobby.styles'
 import { LobbyButton } from './LobbyButton'
 import { useLobby } from './useLobby'
 
 export const Lobby: React.FC = observer(() => {
-  const { lobbyStore, handleJoinRoom } = useLobby()
+  const { lobbyStore } = useLobby()
+  const { handleJoinRoom } = useClickHandler()
 
   return lobbyStore.isLoading ? (
     <div>Loading...</div>

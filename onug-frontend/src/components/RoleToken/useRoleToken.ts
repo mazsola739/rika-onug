@@ -1,6 +1,7 @@
 import { voteStore } from 'store'
 
 export const useRoleTokens = (token: any) => {
+  //TODO refactor
   const handleGuessClick = () => {
     voteStore.selectGuessId(token.id)
   }

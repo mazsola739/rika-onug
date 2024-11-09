@@ -23,6 +23,7 @@ export const usePlayerCard = (card: TablePlayerCard) => {
 
   const onCardClick = () => {
     if (voteStore.isGuessing) {
+      //TODO REFACTOR
       voteStore.selectGuessCardPosition(position as CardPosition)
     }
     if (isSelectableCard) selectionStore.toggleCardSelection(position)
@@ -32,7 +33,6 @@ export const usePlayerCard = (card: TablePlayerCard) => {
     if (isSelectableMark) selectionStore.toggleMarkSelection(position)
   }
 
-  // Additional moved properties
   const guessTokens = voteStore.isGuessing ? voteStore.getGuessTokensByPosition(card.position) : null
   const hasMarks = deckStore.hasMarks
   const hasSentinel = deckStore.hasSentinel
