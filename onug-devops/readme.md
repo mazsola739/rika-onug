@@ -51,6 +51,7 @@ to see be console logs
 
 to check running state of app 
 > sudo lsof -i -P -n | grep LISTEN
+
 if something like this is shown in the terminal:
 ```
 node      416846          ubuntu   31u  IPv6 4881063      0t0  TCP *:7655 (LISTEN)
