@@ -21,7 +21,7 @@ export const CouncilFooter: React.FC = observer(() => {
         </ButtonGroup>
       ) : (
         <ButtonGroup>
-          <Button onClick={handleLeaveGame} buttonText={BUTTONS.leave_table_label} variant="red" />
+          <Button onClick={handleLeaveGame} buttonText={BUTTONS.leave_game_label} variant="red" />
           <Button onClick={handleVoteNow} buttonText={BUTTONS.votenow_button_label} disabled={disabled} variant="orange" />
           <Button onClick={handleReady} variant={isReady ? 'blue' : 'green'} buttonText={isReady ? BUTTONS.im_ready_label : BUTTONS.ready_label} />
         </ButtonGroup>

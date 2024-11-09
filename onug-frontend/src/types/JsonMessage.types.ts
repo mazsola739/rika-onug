@@ -56,19 +56,30 @@ export type GuessedCard = {
 }
 
 export type TablePlayerCard = {
+  aliens?: boolean
   artifact?: boolean
+  assassins?: boolean
   card_name?: string
   dreamwolf?: boolean
+  groobzerb?: boolean
+  lovers?: boolean
+  madscientist?: boolean
   mark?: string
   masons?: boolean
+  part_of_blob?: boolean
+  part_of_family?: boolean
   player_name?: string
   position?: CardPosition
   role?: string
+  seers?: boolean
   selectable_card?: boolean
   selectable_mark?: boolean
   selected?: boolean
   shield?: boolean
+  tanner?: boolean
   team?: string
+  vampires?: boolean
+  villains?: boolean
   werewolves?: boolean
 }
 
@@ -87,13 +98,21 @@ export type ActualScene = {
 }
 
 export type Interaction = {
+  aliens?: CardPosition[]
   answer_options?: string[]
   artifacted_cards?: CardPosition[]
+  assassins?: CardPosition[]
   dreamwolf?: CardPosition[]
+  groobzerb?: CardPosition[]
+  lovers?: CardPosition[]
+  madscientist?: CardPosition[]
   masons?: CardPosition[]
   new_role_id?: number
   obligatory?: boolean
+  part_of_blob?: CardPosition[]
+  part_of_family?: CardPosition[]
   private_message?: string[]
+  seers?: CardPosition[]
   scene_end?: boolean
   selectable_card_limit?: {
     player: number
@@ -107,6 +126,9 @@ export type Interaction = {
   shielded_cards?: CardPosition[]
   show_cards?: Record<CardPosition, number>[]
   show_marks?: Record<CardPosition, string>[]
+  tanner?: CardPosition[]
+  vampires?: CardPosition[]
+  villains?: CardPosition[]
   werewolves?: CardPosition[]
 }
 

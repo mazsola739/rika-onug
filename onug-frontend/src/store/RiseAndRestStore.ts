@@ -27,7 +27,14 @@ class RiseAndRestStore {
       selectable_mark: false,
       selected: false,
       werewolves: false,
-      dreamwolf: false
+      dreamwolf: false,
+      vampires: false,
+      aliens: false,
+      groobzerb: false,
+      villains: false,
+      tanner: false,
+      assassins: false,
+      madscientist: false,
     }
   }
 
@@ -55,7 +62,18 @@ class RiseAndRestStore {
       shield: propStore.shielded_cards.includes(position),
       werewolves: propStore.werewolves.includes(position),
       dreamwolf: propStore.dreamwolf.includes(position),
-      masons: propStore.masons.includes(position)
+      masons: propStore.masons.includes(position),
+      vampires: propStore.vampires.includes(position),
+      aliens: propStore.aliens.includes(position),
+      groobzerb: propStore.groobzerb.includes(position),
+      villains: propStore.villains.includes(position),
+      tanner: propStore.tanner.includes(position),
+      assassins: propStore.assassins.includes(position),
+      madscientist: propStore.madscientist.includes(position),
+      seers: propStore.seers.includes(position),
+      lovers: propStore.lovers.includes(position),
+      part_of_blob: propStore.part_of_blob.includes(position),
+      part_of_family: propStore.part_of_family.includes(position),
     }
   }
 

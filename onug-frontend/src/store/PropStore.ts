@@ -56,6 +56,39 @@ class PropStore {
   get masons() {
     return this.interaction.masons
   }
+  get vampires() {
+    return this.interaction.vampires
+  }
+  get aliens() {
+    return this.interaction.aliens
+  }
+  get groobzerb() {
+    return this.interaction.groobzerb
+  }
+  get villains() {
+    return this.interaction.villains
+  }
+  get tanner() {
+    return this.interaction.tanner
+  }
+  get assassins() {
+    return this.interaction.assassins
+  }
+  get madscientist() {
+    return this.interaction.madscientist
+  }
+  get seers() {
+    return this.interaction.seers
+  }
+  get lovers() {
+    return this.interaction.lovers
+  }
+  get part_of_blob() {
+    return this.interaction.part_of_blob
+  }
+  get part_of_family() {
+    return this.interaction.part_of_family
+  }
 
   setInteraction(interaction: Interaction): void {
     this.interaction = { ...this.interaction, ...interaction }
@@ -89,11 +122,15 @@ class PropStore {
   reset(): void {
     this.title = ''
     this.interaction = {
+      aliens: [],
+      assassins: [],
       answer_options: [],
       artifacted_cards: [],
       dreamwolf: [],
+      groobzerb: [],
       scene_end: false,
       obligatory: false,
+      madscientist: [],
       masons: [],
       new_role_id: 0,
       selectable_card_limit: { player: 0, center: 0 },
@@ -103,6 +140,13 @@ class PropStore {
       shielded_cards: [],
       show_cards: [],
       show_marks: [],
+      vampires: [],
+      villains: [],
+      tanner: [],
+      seers: [],
+      lovers: [],
+      part_of_blob: [],
+      part_of_family: [],
       werewolves: []
     }
   }

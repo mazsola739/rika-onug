@@ -3,16 +3,9 @@
     "room_id": "archives",
     "room_name": "Archives",
     "stage": "LOBBY",
-    "selected_cards": [
-      18,
-      20,
-      23,
-      24,
-      25
-    ],
+    "selected_cards": [18, 20, 23, 24, 25],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -44,7 +37,6 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -76,7 +68,6 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -108,7 +99,6 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -140,7 +130,6 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -172,7 +161,6 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -204,7 +192,6 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -236,7 +223,6 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -268,7 +254,6 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -300,7 +285,6 @@
     "selected_cards": [],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -332,7 +316,6 @@
     "selected_cards": [25, 15, 17, 22, 18, 23, 27, 11, 24],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -364,7 +347,6 @@
     "selected_cards": [25, 15, 9, 8, 11, 83, 73, 81],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -396,7 +378,6 @@
     "selected_cards": [31, 41, 32, 34, 29, 35, 36, 33],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -428,7 +409,6 @@
     "selected_cards": [50, 42, 53, 43, 52, 46, 77, 44],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -460,7 +440,6 @@
     "selected_cards": [25, 22, 5, 6, 9, 23, 8, 27, 11, 24, 20, 3, 10],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -492,7 +471,6 @@
     "selected_cards": [25, 15, 7, 71, 72, 70, 80, 27, 11, 82, 20, 71, 75],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -524,7 +502,6 @@
     "selected_cards": [50, 30, 42, 53, 15, 22, 85, 9, 27, 11, 33, 4, 20],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
@@ -556,7 +533,6 @@
     "selected_cards": [25, 53, 47, 54, 48, 51, 27, 52, 46, 20, 44, 49, 19],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Halálsikoly", "Rém", "Árny", "Szellem", "Lidérc", "Ítélet", "Hírnök", "Csend", "Lélek", "Sötétség", "Fenevad", "Átok"],
-    "vote_timer": 300000,
     "players": {},
     "card_positions": {
       "center_left": {},
