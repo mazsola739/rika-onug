@@ -93,13 +93,20 @@ Copy your service file into the
 > /etc/systemd/system
 
 Start it with
-> systemctl start onug
+>   
 
 Enable it to run on boot with
-> systemctl enable onug
+> sudo systemctl enable onug
 
 
 see output
 > journalctl -u onug.service
 
 Note that it's also possible to run systemd services as a user. See for example this tutorial. You can put your service file in ~/.config/systemd/user, start it with systemctl --user start myapp, enable it with systemctl --user enable myapp
+
+
+after updating onug service file, copy the modified file to systemclt
+```
+sudo cp onug-devops/onug.service /etc/systemd/system
+sudo systemctl daemon-reload
+```

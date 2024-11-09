@@ -4,9 +4,9 @@ Description=onug backend app
 [Service]
 ExecStart=/bin/bash -c '/home/ubuntu/app/rika-onug/onug-backend/src/server.js'
 Restart=always
-User=nobody
+User=ubuntu
 # Note Debian/Ubuntu uses 'nogroup', RHEL/Fedora uses 'nobody'
-Group=nogroup
+Group=ubuntu
 Environment=PATH=/usr/bin:/usr/local/bin
 Environment=NODE_ENV=production
 Environment=ONUG_REPOSITORY_TYPE=local
