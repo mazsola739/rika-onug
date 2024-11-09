@@ -12,6 +12,7 @@ import { metaDeleteAllOldLogFiles } from './metaDeleteAllOldLogFiles'
 import { metaListOnugEnv } from './metaListOnugEnv'
 import { reInitAllGamestates } from './reInitAllGamestates'
 import { sendMessageToPlayer } from './sendMessageToPlayer'
+import { readNohup } from './readNohup'
 
 const router = express.Router()
 
@@ -36,5 +37,9 @@ router.get('/delete_player_by_token', deletePlayerByToken)
 // meta
 router.get('/list_onug_env_vars', metaListOnugEnv)
 router.get('/delete_all_old_log_files', metaDeleteAllOldLogFiles)
+
+//nohup
+router.get('/read_nohup_fe', readNohup)
+router.get('/read_nohup_be', readNohup)
 
 export const godRouter = router

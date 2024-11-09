@@ -24,6 +24,8 @@ export const useGod = () => {
   const removeAllPlayers = () => fetchWrapper('delete_all_players')
   const listOnugEnvVars = () => fetchWrapper('list_onug_env_vars')
   const deleteAllOldLogFiles = () => fetchWrapper('delete_all_old_log_files')
+  const readNohupFE = () => fetchWrapper('read_nohup_fe?service=frontend')
+  const readNohupBE = () => fetchWrapper('read_nohup_be?service=backend')
 
   const broadcastToAll = useCallback(
     () =>
@@ -83,6 +85,8 @@ export const useGod = () => {
     broadcastToAllInRoom,
     sendMessageToPlayer,
     listOnugEnvVars,
-    deleteAllOldLogFiles
+    deleteAllOldLogFiles,
+    readNohupFE,
+    readNohupBE
   }
 }

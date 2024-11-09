@@ -23,7 +23,9 @@ export const God: React.FC = observer(() => {
     broadcastToAllInRoom,
     sendMessageToPlayer,
     listOnugEnvVars,
-    deleteAllOldLogFiles
+    deleteAllOldLogFiles,
+    readNohupFE,
+    readNohupBE
   } = useGod()
 
   return (
@@ -71,6 +73,13 @@ export const God: React.FC = observer(() => {
         <ButtonsContainer>
           <Button onClick={listOnugEnvVars}>List Env Vars</Button>
           <Button onClick={deleteAllOldLogFiles}>Delete Old Log Files</Button>
+        </ButtonsContainer>
+
+        {/* Nohup Section */}
+        <GodTitle>Nohup</GodTitle>
+        <ButtonsContainer>
+          <Button onClick={readNohupFE}>Nohup FE</Button>
+          <Button onClick={readNohupBE}>Nohup BE</Button>
         </ButtonsContainer>
       </LeftSide>
 

@@ -171,3 +171,20 @@ export const reInitializeAllGamestates = async () => {
 
   return { status: 'ERROR during re-initializing gamestates' }
 }
+
+export const readNohupByService = async service => {
+  logTrace(`readNohupByService ${service}`)
+
+  const FE_PATH = `${__dirname}/../../../onug-frontend/prod__nohup.txt`
+  const BE_PATH = `${__dirname}/../../prod__nohup.txt`
+  const filePath = service === 'frontend' ? FE_PATH : BE_PATH
+
+  let rawData = ''
+  try {
+    rawData = await readFile(filePath, { encoding: ENCODING })
+  } catch (error) {
+    logTrace(`Could not read nohup for ${service}`, error)
+  }
+
+  return rawData
+}
