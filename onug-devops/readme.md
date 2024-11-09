@@ -43,9 +43,9 @@ cd onug-backend
 ../onug-devops/killBe.sh
 yarn
 rm prod__nohup.txt
-nohup yarn run start:ec2 > prod__nohup.txt </dev/null 2>.src/prod__crash.txt &
+nohup yarn run start > prod__nohup.txt </dev/null 2>src/prod__crash.js &
 cat prod__nohup.txt
-cat ./src/prod__crash.txt
+cat src/prod__crash.js
 
 ```
 to see be console logs
@@ -61,6 +61,16 @@ node      416846          ubuntu   32u  IPv6 4881064      0t0  TCP *:7654 (LISTE
 ```
 backend is running
 
+
+check running node instances
+```
+ps aux | grep node
+```
+
+kill node based on instanceId
+```
+sudo kill -9 INSTANCE_ID_FROM_PREVIOUS_PS_AUX_COMMAND
+```
 
 
 re-start fe
@@ -87,31 +97,18 @@ node      415825            root   20u  IPv6 4848920      0t0  TCP *:3000 (LISTE
 frontend is running
 
 
-
-### troubleshotting
+## nohup and nodemon important knowledge
 https://stackoverflow.com/questions/4018154/how-do-i-run-a-node-js-app-as-a-background-service
 
-Copy your service file into the
-> /etc/systemd/system
-
-Start it with
->   
-
-Enable it to run on boot with
-> sudo systemctl enable onug
-
-
-see output
-> journalctl -u onug.service
-
-Note that it's also possible to run systemd services as a user. See for example this tutorial. You can put your service file in ~/.config/systemd/user, start it with systemctl --user start myapp, enable it with systemctl --user enable myapp
-
-
-after updating onug service file, copy the modified file to systemclt
+- 2>&1 is usually used, to append error logs in to the same log file, but we want to differenciate it from the normal logs. Creating a js file inside src for backend, to trigger nodemon restart functionality.
+- -x tsx is used in yarn start to make sure that the imports can be used instead of requirejs.
+- viteconfig is needed to make sure that the backend app is not throwing errors on startup, because it would trigger nodemon restart as well, in an infinite loop. Make sure to check that the app DOES NOT logs error on startup, to avoid this case in the future.
+BE start script is:
 ```
-sudo cp onug-devops/onug.service /etc/systemd/system
-
-sudo systemctl start onug.service
-
-sudo systemctl daemon-reload
+nohup yarn run start > prod__nohup.txt </dev/null 2>src/prod__crash.js &
+where nohup is no hangup
+yarn run start is the command to run the start script from pacakge json
+> prod__nohup.txt is the normal logs for the BE service
+2>src/prod__crash.js is the error logs
+ & gives back the terminal, and does not stuck inside the running script
 ```

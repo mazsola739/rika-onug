@@ -176,12 +176,20 @@ export const readNohupByService = async service => {
   logTrace(`readNohupByService ${service}`)
 
   const FE_PATH = `${__dirname}/../../../onug-frontend/prod__nohup.txt`
-  const BE_PATH = `${__dirname}/../../prod__nohup.txt`
-  const filePath = service === 'frontend' ? FE_PATH : BE_PATH
+  const BE_PATH_TXT = `${__dirname}/../../prod__nohup.txt`
+  const BE_PATH_CRASH = `${__dirname}/../prod__crash.js`
 
-  let rawData = ''
+  let rawData = {}
+
   try {
-    rawData = await readFile(filePath, { encoding: ENCODING })
+    if (service === 'frontend') {
+      rawData = await readFile(FE_PATH, { encoding: ENCODING })
+    } else {
+      const logData = await readFile(BE_PATH_TXT, { encoding: ENCODING })
+      const crashData = await readFile(BE_PATH_CRASH, { encoding: ENCODING })
+      
+      rawData = { logs: logData, crash: crashData }
+    }
   } catch (error) {
     logTrace(`Could not read nohup for ${service}`, error)
   }
