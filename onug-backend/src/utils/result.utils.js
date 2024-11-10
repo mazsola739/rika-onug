@@ -17,7 +17,7 @@ export const assignRoleFromMark = (mark, card) => {
   return markRoleMap[mark] || { role: card.role, team: card.team }
 }
 
-export const assignRoleFromArtifact = artifact => {
+export const assignRoleFromArtifact = (artifact, card) => {
   const artifactRoleMap = {
     claw_of_the_werewolf: { role: 'WEREWOLF', team: 'werewolf' },
     brand_of_the_villager: { role: 'VILLAGER', team: 'village' },
@@ -29,20 +29,20 @@ export const assignRoleFromArtifact = artifact => {
     dagger_of_the_traitor: { role: 'TRAITOR' },
     alien_artifact: { role: 'ALIEN', team: 'alien' }
   }
-  return artifactRoleMap[artifact.token_name] || {}
+  return artifactRoleMap[artifact.token_name] || { role: card.role, team: card.team }
 }
 
-export const updatePlayerRoleFromMark = (player, card, mark) => {
-  const { role, team } = assignRoleFromMark(mark, card)
-  player.card.player_role = role
-  player.card.player_team = team
+export const updatePlayerRoleAndTeam = (player, card) => {
+  player.card.player_role = card.role
+  player.card.player_team = card.team
 }
 
 export const getPlayerInfo = player => ({
-  playeformatPlayerInfor_name: player.name,
+  player_name: player.name,
   player_number: player.player_number,
   player_card_id: player.card.player_card_id,
   player_role: player.card.player_role,
   player_team: player.card.player_team,
-  player_mark: player.card.player_mark
+  player_mark: player.card.player_mark,
+  player_artifact: player.card.player_artifact
 })

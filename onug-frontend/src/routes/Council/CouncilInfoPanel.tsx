@@ -5,12 +5,12 @@ import { propStore, voteStore } from 'store'
 export const CouncilInfoPanel = observer(() => {
   const { selectable_cards } = propStore
   const { knownPlayer, knownPlayerCard, knownPlayerMark } = voteStore
-
+  const { end } = propStore
 
   return (
     <InfoPanel>
-      {selectable_cards.length === 0 ? <ReadyStatus title={"Are you ready to vote... or are you hiding something? Let's find out!"} /> : <SuspicionCards />}
       {knownPlayerCard && <OwnCard player={knownPlayer} card={knownPlayerCard} mark={knownPlayerMark} />}
+      {!end && selectable_cards.length === 0 ? <ReadyStatus title={"Are you ready to vote... or are you hiding something? Let's find out!"} /> : !end && <SuspicionCards />}
       <NightHistory />
     </InfoPanel>
   )

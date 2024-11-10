@@ -8,9 +8,10 @@ export type Player = {
   player_card_id?: number
   player_role?: string
   player_team?: string
-  player_mark?: string
   player_name: string
   player_number?: CardPosition
+  player_mark?: string
+  player_artifact?: number
   flag?: boolean
   guess_cards?: number[]
 }

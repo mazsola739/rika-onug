@@ -1,4 +1,4 @@
-import { ERROR, REDIRECT } from '../constants'
+import { ERROR, HYDRATE_VOTE, REDIRECT, VOTE_ACCEPTED } from '../constants'
 import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
 import { validateRoom } from '../validators'
@@ -19,15 +19,21 @@ export const verdict = async (ws, message) => {
     newGamestate.players[token].flag = true
 
     const allPlayersVoted = Object.values(newGamestate.players).every(player => player.flag)
+    await upsertRoomState(newGamestate)
 
-    if (allPlayersVoted) {
-      logTrace(`All players are sent accusation: ${room_id}. Redirecting to result.`)
-      await upsertRoomState(newGamestate)
-      broadcast(JSON.stringify({ type: REDIRECT, path: `/verdict/${room_id}` }))
+    if (!allPlayersVoted) {
+      logTrace(`Not all players are sent accusation: ${room_id}.`)
+      return ws.send(
+        JSON.stringify({
+          type: HYDRATE_VOTE,
+          success: true,
+        })
+      )
     }
 
-    await upsertRoomState(newGamestate)
-    return newGamestate
+    logTrace(`All players are sent accusation: ${room_id}. Redirecting to result.`)
+
+    return broadcast(room_id, { type: REDIRECT, path: `/verdict/${room_id}` })
   } catch (error) {
     logError(`Error processing verdict in room: ${room_id}. Error: ${error.message}`)
     ws.send(

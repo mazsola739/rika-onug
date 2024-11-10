@@ -1,29 +1,5 @@
 import WebSocket from 'ws'
 import {
-  ARRIVE_COUNCIL,
-  ARRIVE_GAME,
-  ARRIVE_ROOM,
-  ARRIVE_TABLE,
-  ARRIVE_VOTE,
-  DEAL,
-  JOIN_ROOM,
-  LEAVE_GAME,
-  LEAVE_ROOM,
-  NEWBIE,
-  PAUSE_GAME,
-  READY,
-  RELOAD,
-  RESET,
-  SCENE,
-  START_GAME,
-  START_VOTE,
-  STOP_GAME,
-  UPDATE_GUESS,
-  UPDATE_ROOM,
-  VOTE
-} from '../constants'
-import { logError, logErrorWithStack, logTrace } from '../log'
-import {
   dealCards,
   hydrateCouncil,
   hydrateGame,
@@ -46,6 +22,30 @@ import {
   updateRoom,
   verdict
 } from '.'
+import {
+  ARRIVE_COUNCIL,
+  ARRIVE_GAME,
+  ARRIVE_ROOM,
+  ARRIVE_TABLE,
+  ARRIVE_VERDICT,
+  DEAL,
+  JOIN_ROOM,
+  LEAVE_GAME,
+  LEAVE_ROOM,
+  NEWBIE,
+  PAUSE_GAME,
+  READY,
+  RELOAD,
+  RESET,
+  SCENE,
+  START_GAME,
+  START_VOTE,
+  STOP_GAME,
+  UPDATE_GUESS,
+  UPDATE_ROOM,
+  VOTE
+} from '../constants'
+import { logError, logErrorWithStack, logTrace } from '../log'
 
 export const websocketServer = port => {
   try {
@@ -83,7 +83,7 @@ export const websocketServer = port => {
         if (message.type === UPDATE_GUESS) return hydrateGuess(ws, message)
         if (message.type === START_VOTE) return startVote(ws, message)
         if (message.type === VOTE) return verdict(ws, message)
-        if (message.type === ARRIVE_VOTE) return result(ws, message)
+        if (message.type === ARRIVE_VERDICT) return result(ws, message)
       })
     })
   } catch (error) {

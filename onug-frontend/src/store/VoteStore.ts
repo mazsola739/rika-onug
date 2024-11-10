@@ -2,7 +2,7 @@ import { UPDATE_GUESS } from 'constant'
 import * as narration_text from 'constant/narrations'
 import { script } from 'data'
 import { computed, makeAutoObservable } from 'mobx'
-import { CardJson, CardPosition, GuessedCard, GuessToken, NarrationType, Player, TokenJson } from 'types'
+import { CardJson, CardPosition, GuessedCard, GuessToken, NarrationType, Player, TokenJson, WsJsonMessage } from 'types'
 import { createDefaultPlayer, getCardById, getMarkByName } from 'utils'
 import { playersStore } from './PlayersStore'
 import { wsStore } from './WsStore'
@@ -16,6 +16,8 @@ class VoteStore {
   //selection
   guessedId: number | null = null
   guessedCardPosition: CardPosition | '' = ''
+
+  resultPlayers: Player[] = []
 
   constructor() {
     makeAutoObservable(this, {
@@ -125,6 +127,10 @@ class VoteStore {
         id: card.id
       }
     })
+  }
+
+  revealResult(lastJsonMessage: WsJsonMessage): void {
+    this.resultPlayers = lastJsonMessage.players
   }
 
   resetGuesses(): void {

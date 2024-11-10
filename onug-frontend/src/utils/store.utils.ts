@@ -1,5 +1,5 @@
 import { default_card, default_player, default_table_player_card, default_token, TEAMS } from 'constant'
-import { cards, marks } from 'data'
+import { artifacts, cards, marks } from 'data'
 import { deckStore } from 'store'
 import { CardJson, Player, TablePlayerCard, TeamsType, TokenJson } from 'types'
 
@@ -44,5 +44,9 @@ export const getFilteredCardsForTeam = (team: string, deck: CardJson[]): CardJso
 }
 
 export const getMarkByName = (markName: string): TokenJson | null => marks.find(mark => mark.token_name === markName) || null
+
+export const getMarkById = (id: number): TokenJson | null => marks.find(mark => mark.id === id) || null
+
+export const getArtifactById = (id: number): TokenJson | null => artifacts.find(artifact => artifact.id === id) || null
 
 export const getOrderedTeams = (teamArray: string[]): string[] => teamArray.sort((a, b) => TEAMS[a as keyof TeamsType] - TEAMS[b as keyof TeamsType])

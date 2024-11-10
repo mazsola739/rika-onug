@@ -1,7 +1,7 @@
-import { ARRIVE_COUNCIL, HYDRATE_COUNCIL, HYDRATE_GUESS, HYDRATE_READY, REDIRECT, VOTE } from 'constant'
+import { ARRIVE_COUNCIL, HYDRATE_COUNCIL, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, VOTE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
+import { playersStore, propStore, riseAndRestStore, voteStore, wsStore } from 'store'
 import { splitCardsToTable } from 'utils'
 
 export const useCouncil = () => {
@@ -54,6 +54,11 @@ export const useCouncil = () => {
 
     if (lastJsonMessage?.type === HYDRATE_READY) {
       playersStore.setPlayers(lastJsonMessage.players)
+    }
+
+    if (lastJsonMessage?.type === HYDRATE_VOTE  && lastJsonMessage?.success) {
+      propStore.setEnd(true)
+      riseAndRestStore.closeYourEyes()
     }
   }, [lastJsonMessage, navigate])
 

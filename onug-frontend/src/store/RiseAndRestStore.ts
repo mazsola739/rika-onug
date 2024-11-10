@@ -95,6 +95,7 @@ class RiseAndRestStore {
       position: player.player_number,
       card_name: card ? card.card_name : '',
       mark: player.player_mark || '',
+      artifact: player.player_artifact || null,
       role: player.player_role || '',
       team: player.player_team || '',
       selected: false,

@@ -7,8 +7,8 @@ class PropStore {
   sunrise: boolean
   interaction: Interaction
   end: boolean = false
-  voteResult: Result[]
-  winnerTeams: string[]
+  voteResult: Result[] = []
+  winnerTeams: string[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -115,6 +115,7 @@ class PropStore {
   setVoteResult(voteResult: Result[]): void {
     this.voteResult = voteResult
   }
+
   setWinnerTeams(winnerTeams: string[]): void {
     this.winnerTeams = winnerTeams
   }
@@ -149,6 +150,8 @@ class PropStore {
       part_of_family: [],
       werewolves: []
     }
+    this.voteResult = []
+    this.winnerTeams = []
   }
 }
 

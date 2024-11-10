@@ -1,10 +1,11 @@
 import { generateRoleInteraction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
 
+//TODO fix limit
 export const paranormalinvestigatorInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGamestate.players, token)
 
-  const limit = selectablePlayerNumbers.length < 2 ? 1 : 2
+  const limit = selectablePlayerNumbers.length === 1 ? 1 : 2
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],

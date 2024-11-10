@@ -5,21 +5,33 @@ export const StyledVerdict = styled.div`
   min-width: 100%;
   display: grid;
   grid-template-rows: 80px calc(100vh - 160px) 80px;
+  grid-template-columns: calc(100vw - 400px) 400px;
 
   header {
-    grid-area: 1 / 1 / 2 / 4;
+    grid-area: 1 / 1 / 2 / 2;
   }
   main {
-    grid-area: 3 / 2 / 4 / 3;
+    grid-area: 2 / 1 / 3 / 2;
   }
   footer {
-    grid-area: 4 / 1 / 4 / 4;
+    grid-area: 3 / 1 / 4 / 2;
+  }
+  div {
+    grid-area: 1 / 2 / 4 / 3;
   }
 `
 
 //HEADER
 
 //MAIN
+export const VerdictCenter = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`
 
 //FOOTER
 

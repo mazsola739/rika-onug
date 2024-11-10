@@ -1,5 +1,5 @@
 import { DEAL, REDIRECT, STAGES } from '../constants'
-import { logErrorWithStack, logTrace } from '../log'; // Assuming you have logError function for error logging
+import { logErrorWithStack, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
 import { createCenterPositionCard, createPlayerCard, createPlayerPositionCard, dealCardIds, hasMark } from '../utils/deal.utils'
 import { determineTotalPlayers } from '../utils/player.utils'

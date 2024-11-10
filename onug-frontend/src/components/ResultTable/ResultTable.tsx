@@ -1,14 +1,12 @@
 import React from 'react'
-import { PlayerName, ResultCell, ResultContainer, ResultHeaderCell, ResultRow, ResultTitle, StyledImage, VoterName, VotersCell } from './ResultTable.styles'
 import { propStore, riseAndRestStore } from 'store'
 import { Result } from 'types'
+import { Cell, CellHeader, PlayerName, Rank, Row, StyledResultTable, TableTitle, VoterName, VotersCell } from './ResultTable.styles'
 
 export const ResultTable: React.FC = () => {
-  const { voteResult, winnerTeams } = propStore
+  const sortedVotes = [...propStore.voteResult].sort((a, b) => b.voters.length - a.voters.length)
 
-  const sortedVotes = [...voteResult].sort((a, b) => b.voters.length - a.voters.length)
-
-  const isActualPlayerWin = voteResult.find(player => player.player_number === riseAndRestStore.tablePlayerCard.position)?.win
+  const isActualPlayerWin = sortedVotes.find(player => player.player_number === riseAndRestStore.tablePlayerCard.position)?.win
 
   const groupedVotes: { votes: number; players: Result[] }[] = []
 
@@ -20,38 +18,38 @@ export const ResultTable: React.FC = () => {
       groupedVotes.push({ votes: player.voters.length, players: [player] })
     }
   })
-  console.log(JSON.stringify(riseAndRestStore.tablePlayerCard), isActualPlayerWin)
+
   //`teamName team {'won'} - You {'won' ? 'won' : 'lost'} the game`
   return (
-    <ResultContainer>
-      <ResultTitle>{`${winnerTeams.join(', ')} won! - You ${isActualPlayerWin ? 'won' : 'lost'} the game`}</ResultTitle>
-      <ResultRow isHeader>
-        <ResultHeaderCell isFixedWidth isFixedHeight>
+    <StyledResultTable>
+      <TableTitle>{`${propStore.winnerTeams.join(', ')} won! - You ${isActualPlayerWin ? 'won' : 'lost'} the game`}</TableTitle>
+      <Row isHeader>
+        <CellHeader isFixedWidth isFixedHeight>
           #
-        </ResultHeaderCell>
-        <ResultHeaderCell isMaxWidth isFixedHeight>
+        </CellHeader>
+        <CellHeader isMaxWidth isFixedHeight>
           Player
-        </ResultHeaderCell>
-        <ResultHeaderCell isFixedWidth isFixedHeight>
+        </CellHeader>
+        <CellHeader isFixedWidth isFixedHeight>
           Votes
-        </ResultHeaderCell>
-        <ResultHeaderCell isFixedHeight>Voters</ResultHeaderCell>
-      </ResultRow>
+        </CellHeader>
+        <CellHeader isFixedHeight>Voters</CellHeader>
+      </Row>
       <div>
         {groupedVotes.map((group, groupIndex) => {
           const voteImage = groupIndex === 0 ? '/assets/tokens/1st_votes.webp' : groupIndex === 1 ? '/assets/tokens/2nd_votes.webp' : null
 
           return group.players.map((playerVote, playerIndex) => (
-            <ResultRow key={`${groupIndex}-${playerIndex}`}>
-              <ResultCell isFixedWidth>{voteImage && <StyledImage src={voteImage} alt="vote token" />}</ResultCell>
-              <ResultCell isMaxWidth>
+            <Row key={`${groupIndex}-${playerIndex}`}>
+              <Cell isFixedWidth>{voteImage && <Rank src={voteImage} alt="vote token" />}</Cell>
+              <Cell isMaxWidth>
                 <PlayerName>
                   {!playerVote.survived ? '💀' : ''}
                   {playerVote.player_number}
                   {playerVote.win ? '🏆' : ''}
                 </PlayerName>
-              </ResultCell>
-              <ResultCell isFixedWidth>{playerVote.voters.length}</ResultCell>
+              </Cell>
+              <Cell isFixedWidth>{playerVote.voters.length}</Cell>
               <VotersCell>
                 {playerVote.voters.map((voter, i) => (
                   <VoterName key={i}>
@@ -60,10 +58,10 @@ export const ResultTable: React.FC = () => {
                   </VoterName>
                 ))}
               </VotersCell>
-            </ResultRow>
+            </Row>
           ))
         })}
       </div>
-    </ResultContainer>
+    </StyledResultTable>
   )
 }

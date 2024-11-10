@@ -64,54 +64,64 @@ export const dealCardIds = selectedCardIds => {
   }
 }
 
-const createBasePlayerCard = (card, additionalProps = {}) => ({
-  player_original_id: card.id,
-  player_card_id: card.id,
-  player_role: card.role,
-  player_role_id: card.id,
-  player_team: card.team,
-  ...additionalProps
-})
+export const createPlayerCard = (card, selected_cards) => {
+  if (!card || typeof card !== 'object' || !card.id)
+    return {
+      player_original_id: 0,
+      player_card_id: 0,
+      player_role: '',
+      player_role_id: 0,
+      player_team: ''
+    }
 
-export const createPlayerCard = (card, selectedCards) => {
-  if (!card || typeof card !== 'object' || !card.id) {
-    return createBasePlayerCard({ id: 0, role: '', team: '' })
+  const playerCard = {
+    player_original_id: card.id,
+    player_card_id: card.id,
+    player_role: card.role,
+    player_role_id: card.id,
+    player_team: card.team
   }
 
-  const hasPlayerMark = hasMark(selectedCards)
-  const hasPlayerArtifact = hasCurator(selectedCards)
+  const hasPlayerMark = hasMark(selected_cards)
+  const hasPlayerArtifact = hasCurator(selected_cards)
 
-  return hasPlayerArtifact ? createBasePlayerCard(card, { player_mark: hasPlayerMark ? 'mark_of_clarity' : undefined, player_artifact: 0 }) : createBasePlayerCard(card)
+  if (hasPlayerArtifact) {
+    playerCard.player_artifact= 0
+  }
+  if (hasPlayerMark) {
+    playerCard.player_mark= 'mark_of_clarity'
+
+  }
+
+  return playerCard
 }
 
 export const createPlayerPositionCard = (card, selected_cards) => {
-  if (!card || typeof card !== 'object' || !card.id) return { card: { id: 0, role: '', team: '' } }
-
-  let positionCard
-
-  const hasPlayerMark = hasMark(selected_cards)
-
-  if (hasPlayerMark) {
-    positionCard = {
-      card: {
-        id: card.id,
-        role: card.role,
-        team: card.team
-      },
-      mark: 'mark_of_clarity'
-    }
-  } else {
-    positionCard = {
-      card: {
-        id: card.id,
-        role: card.role,
-        team: card.team
-      }
-    }
+  if (!card || typeof card !== 'object' || !card.id) {
+    return { card: { id: 0, role: '', team: '' } };
   }
 
-  return positionCard
-}
+  const hasPlayerMark = hasMark(selected_cards);
+  const hasPlayerArtifact = hasCurator(selected_cards);
+
+  const positionCard = {
+    card: {
+      id: card.id,
+      role: card.role,
+      team: card.team
+    }
+  };
+
+  if (hasPlayerArtifact) {
+    positionCard.artifact = 0;
+  }
+  if (hasPlayerMark) {
+    positionCard.mark = 'mark_of_clarity';
+  }
+
+  return positionCard;
+};
+
 
 export const createCenterPositionCard = card => {
   if (!card || typeof card !== 'object' || !card.id) return { card: { id: 0, role: '', team: '' } }

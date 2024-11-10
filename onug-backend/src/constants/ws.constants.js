@@ -33,6 +33,8 @@ export const READY = 'READY'
 export const READY_VOTE = 'READY_VOTE'
 export const START_VOTE = 'START_VOTE'
 export const RESULT = 'RESULT'
+export const VOTE_ACCEPTED = 'VOTE_ACCEPTED'
+
 
 export const START_GAME = 'START_GAME'
 export const END_GAME = 'END_GAME'
