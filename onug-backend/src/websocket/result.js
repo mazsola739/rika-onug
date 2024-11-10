@@ -20,7 +20,6 @@ export const result = async (ws, message) => {
 
     let newGamestate = { ...gamestate }
     const currentPlayer = newGamestate.players[token]
-    currentPlayer.flag = true
     currentPlayer.vote = selected_card_positions
 
     const playerCardPosition = newGamestate.card_positions[currentPlayer.player_number]

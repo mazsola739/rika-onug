@@ -1,9 +1,10 @@
 import WebSocket from 'ws'
 import {
+  ARRIVE_COUNCIL,
   ARRIVE_GAME,
   ARRIVE_ROOM,
   ARRIVE_TABLE,
-  ARRIVE_COUNCIL,
+  ARRIVE_VOTE,
   DEAL,
   JOIN_ROOM,
   LEAVE_GAME,
@@ -22,26 +23,29 @@ import {
   VOTE
 } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
-import { dealCards } from './dealCards'
-import { hydrateGame } from './hydrateGame'
-import { hydrateRoom } from './hydrateRoom'
-import { hydrateTable } from './hydrateTable'
-import { hydrateCouncil } from './hydrateCouncil'
-import { joinRoom } from './joinRoom'
-import { leaveGame } from './leaveGame'
-import { leaveRoom } from './leaveRoom'
-import { newbie } from './newbie'
-import { pauseGame } from './pauseGame'
-import { ready } from './ready'
-import { reload } from './reload'
-import { reset } from './reset'
-import { scene } from './scene'
-import { startGame } from './startGame'
-import { stopGame } from './stopGame'
-import { updateRoom } from './updateRoom'
-import { vote } from './vote'
-import { result } from './result'
-import { hydrateGuess } from './hydrateGuess'
+import {
+  dealCards,
+  hydrateCouncil,
+  hydrateGame,
+  hydrateGuess,
+  hydrateReady,
+  hydrateRoom,
+  hydrateTable,
+  joinRoom,
+  leaveGame,
+  leaveRoom,
+  newbie,
+  pauseGame,
+  reload,
+  reset,
+  result,
+  scene,
+  startGame,
+  startVote,
+  stopGame,
+  updateRoom,
+  verdict
+} from '.'
 
 export const websocketServer = port => {
   try {
@@ -68,7 +72,7 @@ export const websocketServer = port => {
         if (message.type === LEAVE_GAME) return leaveGame(ws, message)
         if (message.type === RESET) return reset(message)
         if (message.type === ARRIVE_ROOM) return hydrateRoom(ws, message)
-        if (message.type === READY) return ready(message)
+        if (message.type === READY) return hydrateReady(message)
         if (message.type === ARRIVE_TABLE) return hydrateTable(ws, message)
         if (message.type === START_GAME) return startGame(ws, message)
         if (message.type === ARRIVE_GAME) return hydrateGame(ws, message)
@@ -77,8 +81,9 @@ export const websocketServer = port => {
         if (message.type === SCENE) return scene(ws, message)
         if (message.type === ARRIVE_COUNCIL) return hydrateCouncil(ws, message)
         if (message.type === UPDATE_GUESS) return hydrateGuess(ws, message)
-        if (message.type === START_VOTE) return vote(ws, message)
-        if (message.type === VOTE) return result(ws, message)
+        if (message.type === START_VOTE) return startVote(ws, message)
+        if (message.type === VOTE) return verdict(ws, message)
+        if (message.type === ARRIVE_VOTE) return result(ws, message)
       })
     })
   } catch (error) {

@@ -24,7 +24,8 @@ export const STAGES = {
   ROOM: 'ROOM',
   TABLE: 'TABLE',
   GAME: 'GAME',
-  VOTING: 'VOTING'
+  COUNCIL: 'COUNCIL',
+  VERDICT: 'VERDICT'
 }
 
 export const CENTER_CARD_POSITIONS = ['center_left', 'center_middle', 'center_right', 'center_wolf', 'center_villain']

@@ -1,7 +1,7 @@
-import { HYDRATE_GAME, REDIRECT } from '../constants'
+import { HYDRATE_GAME, STAGES } from '../constants'
 import { logErrorWithStack, logTrace } from '../log'
 import { readGamestate } from '../repository'
-import { isGameStopped } from '../utils'
+import { areAllPlayersReady, resetPlayerReadiness } from '../utils'
 
 export const hydrateGame = async (ws, message) => {
   try {
@@ -9,18 +9,15 @@ export const hydrateGame = async (ws, message) => {
 
     const { room_id } = message
     const gamestate = await readGamestate(room_id)
-    const newGamestate = { ...gamestate }
+    const newGamestate = { ...gamestate, stage: STAGES.GAME }
 
     const { players } = newGamestate
-    // TODO recheck, maybe it would be better to only update the current player's flag instead of all players flag, to avoid async issues on (re-)join the room
-    Object.keys(players).forEach(playerId => (players[playerId].flag = false))
 
-    if (isGameStopped(gamestate)) {
-      return ws.send(JSON.stringify({ type: REDIRECT, path: `/room/${room_id}` }))
+    if (areAllPlayersReady(players)) {
+      resetPlayerReadiness(players)
     }
 
     // TODO get actual scene based on scene_number and player token
-
     const actual_scene = newGamestate.actual_scenes[newGamestate.actual_scenes.length - 1]
 
     return ws.send(

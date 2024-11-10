@@ -5,6 +5,7 @@ import { pauseScene } from '../scenes'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
 
+//TODO do i need? fix it?
 export const pauseGame = async message => {
   const { room_id, token } = message
   logTrace(`Toggling game pause in room: ${room_id} by player: ${token}`)

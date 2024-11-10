@@ -4,7 +4,7 @@ import { readGamestate, upsertRoomState } from '../repository'
 import { getTableBoard } from '../utils'
 import { broadcast } from './connections'
 
-export const ready = async message => {
+export const hydrateReady = async message => {
   try {
     logDebug(`ready/not ready requested with ${JSON.stringify(message)}`)
 
@@ -17,7 +17,7 @@ export const ready = async message => {
 
     logDebug(`gamestate.players[token].flag: ${gamestate.players[token].flag}`)
 
-    const players = getTableBoard(newGamestate) //TODO player and other ws functions
+    const players = getTableBoard(newGamestate)
 
     await upsertRoomState(newGamestate)
 

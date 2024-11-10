@@ -15,7 +15,7 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
 
   if (artifactedPlayersToken) {
     newGamestate.artifact.push({ [selected_card_positions[0]]: newArtifact })
-    newGamestate.players[artifactedPlayersToken[0]].artifact = true
+    newGamestate.players[artifactedPlayersToken[0]].card.player_artifact = newArtifact
   }
 
   newGamestate.players[token].player_history[title] = {

@@ -1,7 +1,7 @@
-import { ARRIVE_VERDICT, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, RESULT, VOTE } from 'constant'
+import { ARRIVE_VERDICT, REDIRECT, RESULT } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { playersStore, propStore, riseAndRestStore, voteStore, wsStore } from 'store'
+import { propStore, riseAndRestStore, wsStore } from 'store'
 
 export const useVerdict = () => {
   const [firstTime, setFirstTime] = useState(true)
@@ -24,27 +24,6 @@ export const useVerdict = () => {
   }, [sendJsonMessage, firstTime])
 
   useEffect(() => {
-    if (lastJsonMessage?.type === HYDRATE_VOTE && lastJsonMessage?.success) {
-      voteStore.setKnownPlayer(lastJsonMessage.player)
-      voteStore.setNarrations(lastJsonMessage.narrations)
-      playersStore.setPlayers(lastJsonMessage.players)
-      voteStore.setIsGuessing(true)
-      voteStore.setGuessCards(lastJsonMessage.guess_cards)
-    }
-
-    if (lastJsonMessage?.type === HYDRATE_GUESS && lastJsonMessage?.success) {
-      voteStore.setIsGuessing(true)
-      voteStore.setGuessedCards(lastJsonMessage.guessed_cards)
-      voteStore.setGuessCards(lastJsonMessage.guess_cards)
-    }
-
-    if (lastJsonMessage?.type === VOTE) {
-      voteStore.setKnownPlayer(lastJsonMessage.player)
-      voteStore.setNarrations(lastJsonMessage.narrations)
-      playersStore.setPlayers(lastJsonMessage.players)
-      voteStore.resetGuesses()
-      riseAndRestStore.openYourEyes(lastJsonMessage)
-    }
 
     if (lastJsonMessage?.type === RESULT) {
       propStore.setEnd(true)
@@ -58,13 +37,5 @@ export const useVerdict = () => {
       navigate(lastJsonMessage.path)
     }
 
-    if (lastJsonMessage?.type === HYDRATE_READY) {
-      playersStore.setPlayers(lastJsonMessage.players)
-    }
   }, [lastJsonMessage, navigate])
-
-  const { players } = playersStore
-  const disabled = players.some(player => player.flag === false)
-
-  return { disabled }
 }

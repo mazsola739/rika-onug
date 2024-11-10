@@ -12,7 +12,7 @@ export const Verdict: React.FC = observer(() => {
       <VerdictHeader />
 
       <Main>
-      <ResultTable />
+      {/* <ResultTable /> */}Lalalala
       </Main>
 
       <VerdictFooter />

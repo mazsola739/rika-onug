@@ -27,7 +27,6 @@ export const apprenticeassassinResponse = (gamestate, token, selected_mark_posit
 
   if (currentPlayerNumber === selected_mark_positions[0]) {
     newGamestate.players[token].card.player_mark = 'mark_of_assassin'
-    newGamestate.players[token].card.player_mark
   }
 
   newGamestate.players[token].card_or_mark_action = true

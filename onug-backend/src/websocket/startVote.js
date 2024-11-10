@@ -1,13 +1,13 @@
-import { ERROR, HYDRATE_VOTE, VOTE } from '../constants'
+import { ERROR, VOTE } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
 import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens } from '../scenes/sceneUtils'
 import { validateRoom } from '../validators'
 import { sendMessageToPlayer } from './connections'
 
-export const vote = async (ws, message) => {
+export const startVote = async (ws, message) => {
   const { room_id } = message
-  logTrace(`Processing vote in room: ${room_id}`)
+  logTrace(`Processing verdict in room: ${room_id}`)
 
   try {
     const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
@@ -27,15 +27,14 @@ export const vote = async (ws, message) => {
       }
     }
 
-    //TODO fix to check artifact if you have (revealingFate) and sending to client before vote
-    //TODO fix if you cant speak, or cant see table
-
+    //TODO vote restrict
     tokens.forEach(token => {
       const player = players[token]
       const otherPlayers = getPlayerNumbersWithNonMatchingTokens(players, [token])
 
       const voteMessage = {
         type: VOTE,
+        success: true,
         token,
         interaction: {
           selectable_cards: otherPlayers,
@@ -64,7 +63,7 @@ export const vote = async (ws, message) => {
     //TODO fix this part
     ws.send(
       JSON.stringify({
-        type: HYDRATE_VOTE,
+        type: VOTE,
         success: false,
         errors: ['An unexpected error occurred. Please try again.']
       })

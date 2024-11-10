@@ -16,7 +16,7 @@ const resetPlayerReadiness = players => {
   })
 }
 
-const handleNightReady = async (room_id, newGamestate, players, token) => {
+const handleNightReady = async (room_id, gamestate, players, token) => {
   setPlayerReady(players, token)
   if (allPlayersStateCheck(players, 'flag')) {
     logTrace(`All players are ready for night in room: ${room_id}. Processing script and scene handlers.`)
@@ -28,13 +28,13 @@ const handleNightReady = async (room_id, newGamestate, players, token) => {
     //TODO uncomment delay
     /* await randomDelay() */
 
-    newGamestate = await scriptHandler(newGamestate)
-    newGamestate = await sceneHandler(newGamestate)
+    gamestate = await scriptHandler(gamestate)
+    gamestate = await sceneHandler(gamestate)
     resetPlayerReadiness(players)
   } else {
     logTrace(`Waiting for all players to be ready for night in room: ${room_id}.`)
   }
-  return newGamestate
+  return gamestate
 }
 
 const handleDayReady = async (room_id, newGamestate, players, token) => {

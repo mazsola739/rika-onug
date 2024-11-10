@@ -2,6 +2,7 @@ import { HAS_MARK, SUPER_VILLAIN_TO_CHECK, WEREVOLVES_TO_CHECK } from '../consta
 import cards from '../data/cards.json'
 import { logInfo } from '../log'
 import { getCenterCardPositionByIndex, stubbedCards } from '../omnipotent/stub/populateDeal'
+import { hasCurator } from '../scenes'
 
 const hasAlphaWolf = selectedCardIds => selectedCardIds.includes(17)
 const hasTemptress = selectedCardIds => selectedCardIds.includes(69)
@@ -63,40 +64,24 @@ export const dealCardIds = selectedCardIds => {
   }
 }
 
-export const createPlayerCard = (card, selected_cards) => {
-  if (!card || typeof card !== 'object' || !card.id)
-    return {
-      player_original_id: 0,
-      player_card_id: 0,
-      player_role: '',
-      player_role_id: 0,
-      team: ''
-    }
+const createBasePlayerCard = (card, additionalProps = {}) => ({
+  player_original_id: card.id,
+  player_card_id: card.id,
+  player_role: card.role,
+  player_role_id: card.id,
+  player_team: card.team,
+  ...additionalProps
+})
 
-  let playerCard
-
-  const hasPlayerMark = hasMark(selected_cards)
-
-  if (hasPlayerMark) {
-    playerCard = {
-      player_original_id: card.id,
-      player_card_id: card.id,
-      player_role: card.role,
-      player_role_id: card.id,
-      player_team: card.team,
-      player_mark: 'mark_of_clarity'
-    }
-  } else {
-    playerCard = {
-      player_original_id: card.id,
-      player_card_id: card.id,
-      player_role: card.role,
-      player_role_id: card.id,
-      player_team: card.team
-    }
+export const createPlayerCard = (card, selectedCards) => {
+  if (!card || typeof card !== 'object' || !card.id) {
+    return createBasePlayerCard({ id: 0, role: '', team: '' })
   }
 
-  return playerCard
+  const hasPlayerMark = hasMark(selectedCards)
+  const hasPlayerArtifact = hasCurator(selectedCards)
+
+  return hasPlayerArtifact ? createBasePlayerCard(card, { player_mark: hasPlayerMark ? 'mark_of_clarity' : undefined, player_artifact: 0 }) : createBasePlayerCard(card)
 }
 
 export const createPlayerPositionCard = (card, selected_cards) => {

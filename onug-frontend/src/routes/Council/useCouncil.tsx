@@ -1,7 +1,7 @@
-import { ARRIVE_COUNCIL, HYDRATE_COUNCIL, HYDRATE_GUESS, HYDRATE_READY, REDIRECT, RESULT, VOTE } from 'constant'
+import { ARRIVE_COUNCIL, HYDRATE_COUNCIL, HYDRATE_GUESS, HYDRATE_READY, REDIRECT, VOTE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { playersStore, propStore, riseAndRestStore, voteStore, wsStore } from 'store'
+import { playersStore, riseAndRestStore, voteStore, wsStore } from 'store'
 import { splitCardsToTable } from 'utils'
 
 export const useCouncil = () => {
@@ -34,13 +34,7 @@ export const useCouncil = () => {
       voteStore.setGuessCards(lastJsonMessage.guess_cards)
     }
 
-    if (lastJsonMessage?.type === HYDRATE_GUESS && lastJsonMessage?.success) {
-      voteStore.setIsGuessing(true)
-      voteStore.setGuessedCards(lastJsonMessage.guessed_cards)
-      voteStore.setGuessCards(lastJsonMessage.guess_cards)
-    }
-
-    if (lastJsonMessage?.type === VOTE) {
+    if (lastJsonMessage?.type === VOTE && lastJsonMessage?.success) {
       voteStore.setKnownPlayer(lastJsonMessage.player)
       voteStore.setNarrations(lastJsonMessage.narrations)
       playersStore.setPlayers(lastJsonMessage.players)
@@ -48,12 +42,10 @@ export const useCouncil = () => {
       riseAndRestStore.openYourEyes(lastJsonMessage)
     }
 
-    if (lastJsonMessage?.type === RESULT) {
-      propStore.setEnd(true)
-      riseAndRestStore.openYourEyes(lastJsonMessage)
-      riseAndRestStore.setTablePlayerCard(lastJsonMessage)
-      propStore.setVoteResult(lastJsonMessage.vote_result)
-      propStore.setWinnerTeams(lastJsonMessage.winner_teams)
+    if (lastJsonMessage?.type === HYDRATE_GUESS && lastJsonMessage?.success) {
+      voteStore.setIsGuessing(true)
+      voteStore.setGuessedCards(lastJsonMessage.guessed_cards)
+      voteStore.setGuessCards(lastJsonMessage.guess_cards)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {

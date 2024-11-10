@@ -1,4 +1,4 @@
-import { HYDRATE_ROOM } from '../constants'
+import { HYDRATE_ROOM, STAGES } from '../constants'
 import { logErrorWithStack, logTrace } from '../log'
 import { getPlayerNames } from '../utils'
 import { validateRoom } from '../validators'
@@ -11,15 +11,16 @@ export const hydrateRoom = async (ws, message) => {
     if (!roomIdValid) {
       return ws.send(JSON.stringify({ type: HYDRATE_ROOM, success: false, errors }))
     }
+    const newGamestate = {...gamestate, stage: STAGES.ROOM}
 
-    const players = getPlayerNames(gamestate)
+    const players = getPlayerNames(newGamestate)
 
     const hydrateRoom = JSON.stringify({
       type: HYDRATE_ROOM,
       success: true,
-      room_id: gamestate.room_id,
-      selected_cards: gamestate.selected_cards,
-      selected_expansions: gamestate.selected_expansions,
+      room_id: newGamestate.room_id,
+      selected_cards: newGamestate.selected_cards,
+      selected_expansions: newGamestate.selected_expansions,
       players
     })
 

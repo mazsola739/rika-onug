@@ -1,7 +1,7 @@
-import { HYDRATE_TABLE, REDIRECT } from '../constants'
+import { HYDRATE_TABLE, STAGES } from '../constants'
 import { logErrorWithStack, logTrace } from '../log'
 import { readGamestate } from '../repository'
-import { getTableBoard, isTableClosed } from '../utils'
+import { getTableBoard } from '../utils'
 
 export const hydrateTable = async (ws, message) => {
   try {
@@ -9,13 +9,12 @@ export const hydrateTable = async (ws, message) => {
 
     const { room_id, token } = message
     const gamestate = await readGamestate(room_id)
+    const newGamestate = {...gamestate, stage: STAGES.TABLE}
 
-    if (isTableClosed(gamestate)) return ws.send(JSON.stringify({ type: REDIRECT, path: `/room/${room_id}` }))
-
-    const playersByToken = gamestate.players
+    const playersByToken = newGamestate.players
     const player = playersByToken[token]
     const playerCard = player.card
-    const players = getTableBoard(gamestate)
+    const players = getTableBoard(newGamestate)
 
     return ws.send(
       JSON.stringify({

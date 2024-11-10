@@ -1,36 +1,10 @@
-import { REDIRECT, STAGES } from '../constants'
+import { ERROR, REDIRECT, STAGES } from '../constants'
 import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
 import { startScene } from '../scenes'
+import { areAllPlayersReady, resetPlayerReadiness } from '../utils'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
-
-const initializeGameState = gamestate => {
-  const startTime = Date.now()
-  return {
-    ...gamestate,
-    stage: STAGES.GAME,
-    game_start_time: startTime,
-    game_paused: false,
-    game_started: true,
-    game_stopped: false,
-    game_finished: false,
-    script_locked: false,
-    narration: []
-  }
-}
-
-const areAllPlayersReady = players => Object.values(players).every(player => player.flag)
-
-const broadcastError = (room_id, message) => {
-  broadcast(room_id, { type: 'ERROR', message })
-}
-
-const resetPlayerReadiness = players => {
-  Object.keys(players).forEach(playerToken => {
-    players[playerToken].flag = false
-  })
-}
 
 export const startGame = async (ws, message) => {
   const { room_id, token } = message
@@ -44,12 +18,25 @@ export const startGame = async (ws, message) => {
       return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
     }
 
-    let newGamestate = initializeGameState(gamestate)
+    const startTime = Date.now()
+    let newGamestate = {
+      ...gamestate,
+      stage: STAGES.GAME,
+      game_start_time: startTime,
+      game_paused: false,
+      game_started: true,
+      game_stopped: false,
+      game_finished: false,
+      script_locked: false,
+      narration: []
+    }
+
     const { players } = newGamestate
 
     if (!areAllPlayersReady(players)) {
       logError(`Not all players are ready. Current readiness: ${JSON.stringify(players)}`)
-      return broadcastError(room_id, 'All players must be ready to start the game.')
+
+      return broadcast(room_id, { type: ERROR, message: 'All players must be ready to start the game.' })
     }
     newGamestate = startScene(newGamestate)
 

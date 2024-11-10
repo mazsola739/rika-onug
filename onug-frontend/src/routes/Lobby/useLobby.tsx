@@ -9,6 +9,7 @@ export const useLobby = () => {
 
   const { lastJsonMessage, sendJsonMessage } = wsStore.getWsCommunicationsBridge()
 
+  //TODO Do i need??
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)

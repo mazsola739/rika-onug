@@ -3,6 +3,7 @@ import { logTrace, logErrorWithStack } from '../log'
 import { readGamestate, upsertRoomState } from '../repository'
 import { broadcast } from './connections'
 
+//TODO fix if leave from vote stages
 export const leaveGame = async (ws, message) => {
   try {
     logTrace(`leave-table requested with ${JSON.stringify(message)}`)
