@@ -4,6 +4,7 @@ import { propStore } from 'store'
 class SelectionStore {
   selectedCards: string[] = []
   selectedMarks: string[] = []
+  selectedAnswer: string = ''
 
   constructor() {
     makeAutoObservable(this)
@@ -43,6 +44,16 @@ class SelectionStore {
       this.selectedMarks = this.selectedMarks.filter(mark => mark !== position)
     } else if (this.selectedMarks.length < markLimit) {
       this.selectedMarks = [...this.selectedMarks, position]
+    }
+  }
+
+  toggleAnswerSelection(answer: string) {
+    const isSelected = this.selectedAnswer === answer
+
+    if (isSelected) {
+      this.selectedAnswer = ''
+    } else {
+      this.selectedAnswer = answer
     }
   }
 

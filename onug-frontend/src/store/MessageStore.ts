@@ -40,6 +40,9 @@ class MessageStore {
   get isSelectableCards() {
     return this.allSelectableCards.length > 0
   }
+  get isAnswerOptions() {
+    return propStore.answer_options.length > 0
+  }
 
   get isIdentification() {
     const title = propStore.title

@@ -12,6 +12,10 @@ export interface MessageBoxCardsProps {
   cards: Record<string, string>[]
 }
 
+export interface AnswersProps {
+  answer_options: string[]
+}
+
 export interface SelectableProps {
   selectable: Record<string, string>[]
   selected: Record<string, string>[]

@@ -44,6 +44,13 @@ export const StyledMessageBoxCards = styled.div`
   flex-wrap: wrap;
 `
 
+export const StyledAnswer = styled.div`
+  display: flex;
+  gap: 3px;
+  flex-direction: row;
+  flex-wrap: wrap;
+`
+
 export const MessageBoxCard = styled.div`
   display: flex;
   flex-direction: column;
