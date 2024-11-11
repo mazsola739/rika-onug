@@ -3,7 +3,7 @@ import * as narration_text from 'constant/narrations'
 import { script } from 'data'
 import { computed, makeAutoObservable } from 'mobx'
 import { CardJson, CardPosition, GuessedCard, GuessToken, NarrationType, Player, TokenJson, WsJsonMessage } from 'types'
-import { createDefaultPlayer, getCardById, getMarkByName } from 'utils'
+import { createDefaultPlayer, getArtifactById, getCardById, getMarkByName } from 'utils'
 import { playersStore } from './PlayersStore'
 import { wsStore } from './WsStore'
 
@@ -93,6 +93,9 @@ class VoteStore {
   }
   get knownPlayerMark(): TokenJson {
     return getMarkByName(this.knownPlayer.player_mark)
+  }
+  get knownPlayerArtifact(): TokenJson {
+    return getArtifactById(this.knownPlayer.player_artifact)
   }
   get isPlayerReady(): boolean {
     const currentPlayer = playersStore.players.find(actualPlayer => actualPlayer.player_number === this.knownPlayer.player_number)

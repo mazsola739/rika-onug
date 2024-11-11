@@ -1,6 +1,6 @@
 import { getPlayerNumberWithMatchingToken } from './getPlayerNumberWithMatchingToken'
 
-const getKeys = array => array.map(obj => Object.keys(obj)[0])
+export const getKeys = array => array.map(obj => Object.keys(obj)[0])
 
 const concatArraysWithUniqueElements = (array1, array2) => [...new Set([...array1, ...array2])]
 

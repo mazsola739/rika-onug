@@ -44,14 +44,21 @@ export const getWinnersAndLosers = gamestate => {
     return playerCard && playerCard.role === 'TANNER' && !player.survived
   })
 
-  const werewolfDead = voteResult.some(player => {
+  const werewolfRoles = ['WEREWOLF', 'MYSTIC_WOLF', 'DREAMWOLF', 'ALPHA_WOLF']
+
+  /* const werewolfDead = voteResult.every(player => {
     const playerCard = activeCards.find(card => card.position === player.player_number)
-    return playerCard && !player.survived && (playerCard.role === 'WEREWOLF' || [15, 16, 17, 21, 22].includes(playerCard.id))
+    return playerCard && !player.survived && (werewolfRoles.includes(playerCard.role))
+  })  */
+
+  const werewolfSurvived = voteResult.some(player => {
+    const playerCard = activeCards.find(card => card.position === player.player_number)
+    return playerCard && player.survived && werewolfRoles.includes(playerCard.role)
   })
 
   const werewolfAllSurvive = voteResult.every(player => {
     const playerCard = activeCards.find(card => card.position === player.player_number)
-    return playerCard && player.survived && (playerCard.role === 'WEREWOLF' || [15, 16, 17, 21, 22].includes(playerCard.id))
+    return playerCard && player.survived && werewolfRoles.includes(playerCard.role)
   })
 
   // TANNER WIN CONDITION: Tanner wins if they are dead.
@@ -66,7 +73,7 @@ export const getWinnersAndLosers = gamestate => {
   voteResult.map(player => {
     const playerCard = activeCards.find(card => card.position === player.player_number)
     if (playerCard && playerCard.team === 'werewolf') {
-      player.win = werewolfAllSurvive && !tannerDead
+      player.win = (werewolfAllSurvive && !tannerDead) || werewolfAllSurvive
     }
   })
 
@@ -82,7 +89,7 @@ export const getWinnersAndLosers = gamestate => {
   voteResult.map(player => {
     const playerCard = activeCards.find(card => card.position === player.player_number)
     if (playerCard && playerCard.team === 'village') {
-      player.win = werewolfDead && !tannerDead
+      player.win = !werewolfSurvived && !tannerDead
     }
   })
 

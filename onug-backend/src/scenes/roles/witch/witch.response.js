@@ -1,4 +1,3 @@
-import { CENTER_CARD_POSITIONS } from '../../../constants'
 import {
   formatPlayerIdentifier,
   generateRoleInteraction,
@@ -44,7 +43,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     const interaction = generateRoleInteraction(newGamestate, token, {
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
       selectableCards: {
-        selectable_cards: CENTER_CARD_POSITIONS,
+        selectable_cards: selectablePlayersWithNoShield,
         selectable_card_limit: { player: 1, center: 0 }
       },
       showCards,

@@ -13,7 +13,6 @@ export const useCouncil = () => {
   const navigate = useNavigate()
 
   const { sendJsonMessage, lastJsonMessage } = wsStore.getWsCommunicationsBridge()
-  const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
@@ -28,11 +27,12 @@ export const useCouncil = () => {
 
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_COUNCIL && lastJsonMessage?.success) {
+      propStore.setInteraction(lastJsonMessage?.interaction as Interaction)
       voteStore.setKnownPlayer(lastJsonMessage.player)
       voteStore.setNarrations(lastJsonMessage.narrations)
       playersStore.setPlayers(lastJsonMessage.players)
-      propStore.setInteraction(lastJsonMessage?.interaction as Interaction)
       riseAndRestStore.setTablePlayerCards(lastJsonMessage)
+      riseAndRestStore.setTablePlayerCard(lastJsonMessage)
       voteStore.setIsGuessing(true)
       voteStore.setGuessCards(lastJsonMessage.guess_cards)
     }
@@ -59,11 +59,13 @@ export const useCouncil = () => {
       playersStore.setPlayers(lastJsonMessage.players)
     }
 
-    if (lastJsonMessage?.type === HYDRATE_VOTE  && lastJsonMessage?.success) {
+    if (lastJsonMessage?.type === HYDRATE_VOTE && lastJsonMessage?.success) {
       propStore.setEnd(true)
       riseAndRestStore.closeYourEyes()
     }
   }, [lastJsonMessage, navigate])
+
+  const { tablePlayerCards, tablePlayerCard } = riseAndRestStore
 
   const sides = tablePlayerCards && tablePlayerCard ? splitCardsToTable(tablePlayerCards, tablePlayerCard) : null
   const { left = [], middle = [], right = [], ownCard } = sides || {}

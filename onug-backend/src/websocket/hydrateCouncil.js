@@ -4,6 +4,7 @@ import { readGamestate, upsertRoomState } from '../repository'
 import { getTableBoard } from '../utils'
 import cardsData from '../data/cards.json'
 import artifactsData from '../data/artifacts.json'
+import { getKeys } from '../scenes/sceneUtils'
 
 export const hydrateCouncil = async (ws, message) => {
   try {
@@ -58,6 +59,7 @@ export const hydrateCouncil = async (ws, message) => {
       }
       newGamestate.players[token].card.player_role = newGamestate.card_positions[playerNumber].card.role
       newGamestate.players[token].card.player_team = newGamestate.card_positions[playerNumber].card.team
+      newGamestate.players[token].card.player_artifact = newGamestate.card_positions[playerNumber].artifact
     }
 
     const players = getTableBoard(newGamestate)
@@ -82,7 +84,7 @@ export const hydrateCouncil = async (ws, message) => {
         players,
         narrations: newGamestate.narration,
         interaction: {
-          artifacted_cards: Object.keys(newGamestate.artifact),
+          artifacted_cards: getKeys(gamestate.artifact),
           shielded_cards: newGamestate.shield,
           show_cards: newGamestate.flipped
         }

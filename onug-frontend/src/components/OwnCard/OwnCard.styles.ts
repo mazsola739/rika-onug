@@ -7,6 +7,7 @@ export const StyledOwnCard = styled.div`
   grid-template-columns: 100px 20px 250px;
   grid-template-rows: 20px 20px 20px 20px;
   gap: 10px;
+  padding: 10px;
 
   grid-template-areas:
     'title title title'

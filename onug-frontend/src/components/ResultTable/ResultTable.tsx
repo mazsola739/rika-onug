@@ -20,7 +20,7 @@ export const ResultTable: React.FC = observer(() => {
     }
   })
 
-/*   const winners = propStore.winnerTeams.join(', ') +' won!'
+  /*   const winners = propStore.winnerTeams.join(', ') +' won!'
   const losers = propStore.loserTeams.join(', ') +' lost!'${winners} ${losers}  */
 
   //`teamName team {'won'} - You {'won' ? 'won' : 'lost'} the game`
@@ -48,9 +48,9 @@ export const ResultTable: React.FC = observer(() => {
               <Cell isFixedWidth>{voteImage && <Rank src={voteImage} alt="vote token" />}</Cell>
               <Cell isMaxWidth>
                 <PlayerName>
-                  {!playerVote.survived ? '💀' : ''}
+                  {!playerVote.survived ? '💀 ' : ''}
+                  {playerVote.win ? '🏆 ' : ''}
                   {playerVote.player_number}
-                  {playerVote.win ? '🏆' : ''}
                 </PlayerName>
               </Cell>
               <Cell isFixedWidth>{playerVote.voters.length}</Cell>

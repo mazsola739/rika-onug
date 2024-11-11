@@ -5,6 +5,18 @@ import { getCardImageSrc, getPlayerNumberToken } from './PlayerCards.utils'
 export const usePlayerCard = (card: TablePlayerCard) => {
   const { selectedCards, selectedMarks } = selectionStore
 
+  const onCardClick = () => {
+    if (voteStore.isGuessing) {
+      //TODO REFACTOR
+      voteStore.selectGuessCardPosition(position as CardPosition)
+    }
+    if (isSelectableCard) selectionStore.toggleCardSelection(position)
+  }
+
+  const onMarkClick = () => {
+    if (isSelectableMark) selectionStore.toggleMarkSelection(position)
+  }
+
   const position = card?.position || ''
   const isCenterCard = position.startsWith('center_')
   const image = getCardImageSrc(card)
@@ -20,18 +32,6 @@ export const usePlayerCard = (card: TablePlayerCard) => {
   const isSelectableMark = card?.selectable_mark
   const isCardSelected = selectedCards.includes(position)
   const isMarkSelected = selectedMarks.includes(position)
-
-  const onCardClick = () => {
-    if (voteStore.isGuessing) {
-      //TODO REFACTOR
-      voteStore.selectGuessCardPosition(position as CardPosition)
-    }
-    if (isSelectableCard) selectionStore.toggleCardSelection(position)
-  }
-
-  const onMarkClick = () => {
-    if (isSelectableMark) selectionStore.toggleMarkSelection(position)
-  }
 
   const guessTokens = voteStore.isGuessing ? voteStore.getGuessTokensByPosition(card.position) : null
   const hasMarks = deckStore.hasMarks

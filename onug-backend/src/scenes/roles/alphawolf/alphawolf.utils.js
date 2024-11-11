@@ -5,7 +5,7 @@ export const getNonWerewolfPlayerNumbersByRoleIdsWithNoShield = players => {
 
   for (const token in players) {
     const player = players[token]
-    if (!ALL_WEREWOLF.includes(player.card.player_role_id) && !player.card?.shield) {
+    if (!ALL_WEREWOLF.includes(player.card.player_role_id) && !player.shield) {
       result.push(player.player_number)
     }
   }
