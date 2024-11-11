@@ -20,13 +20,13 @@ export const ResultTable: React.FC = observer(() => {
     }
   })
 
-  const winners = propStore.winnerTeams.join(', ') +' won!'
-  const losers = propStore.loserTeams.join(', ') +' lost!'
+/*   const winners = propStore.winnerTeams.join(', ') +' won!'
+  const losers = propStore.loserTeams.join(', ') +' lost!'${winners} ${losers}  */
 
   //`teamName team {'won'} - You {'won' ? 'won' : 'lost'} the game`
   return (
     <StyledResultTable>
-      <TableTitle>{`${winners} ${losers} - You ${isActualPlayerWin ? 'won' : 'lost'} the game`}</TableTitle>
+      <TableTitle>{`- You ${isActualPlayerWin ? 'won' : 'lost'} the game`}</TableTitle>
       <Row isHeader>
         <CellHeader isFixedWidth isFixedHeight>
           #

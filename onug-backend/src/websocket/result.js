@@ -41,6 +41,7 @@ export const result = async (ws, message) => {
     })
 
     const { voteResult, winnerTeams, loserTeam } = await getWinnersAndLosers(newGamestate)
+
     newGamestate.vote_result = voteResult
     newGamestate.winner_teams = winnerTeams
     newGamestate.loser_teams = loserTeam

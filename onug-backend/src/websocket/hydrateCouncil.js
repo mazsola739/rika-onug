@@ -1,7 +1,9 @@
 import { HYDRATE_COUNCIL, STAGES } from '../constants'
 import { logErrorWithStack, logTrace } from '../log'
 import { readGamestate, upsertRoomState } from '../repository'
-import { assignRoleFromArtifact, assignRoleFromMark, getTableBoard, updatePlayerRoleAndTeam } from '../utils'
+import { getTableBoard } from '../utils'
+import cardsData from '../data/cards.json'
+import artifactsData from '../data/artifacts.json'
 
 export const hydrateCouncil = async (ws, message) => {
   try {
@@ -10,18 +12,52 @@ export const hydrateCouncil = async (ws, message) => {
     const { room_id, token } = message
     const gamestate = await readGamestate(room_id)
     const newGamestate = { ...gamestate, stage: STAGES.COUNCIL }
-    const playerNumber = newGamestate.players[token].player_number
-    const playerArtifact = newGamestate.card_positions[playerNumber].artifact
-    const playerMark = newGamestate.card_positions[playerNumber].mark
-    const playerCard = newGamestate.card_positions[playerNumber].card
 
-    if (playerMark) {
-      assignRoleFromMark(playerMark, playerCard)
+    const playerNumber = newGamestate.players[token].player_number
+
+    if (newGamestate.card_positions[playerNumber].mark) {
+      const markRoleMap = {
+        mark_of_vampire: { role: 'VAMPIRE', team: 'vampire' },
+        mark_of_disease: { role: 'DISEASED' },
+        mark_of_love: { role: 'LOVER' },
+        mark_of_traitor: { role: 'TRAITOR' },
+        mark_of_assassin: { role: 'TARGET' }
+      }
+
+      if (newGamestate.card_positions[playerNumber].mark === 'mark_of_clarity') {
+        const clarityCard = cardsData.find(({ id }) => id === newGamestate.card_positions[playerNumber].card.id)
+        if (clarityCard) {
+          newGamestate.card_positions[playerNumber].card.role = clarityCard.role
+          newGamestate.card_positions[playerNumber].card.team = clarityCard.team
+        }
+      } else if (markRoleMap[newGamestate.card_positions[playerNumber].mark]) {
+        const { role, team } = markRoleMap[newGamestate.card_positions[playerNumber].mark]
+        newGamestate.card_positions[playerNumber].card.role = role || newGamestate.card_positions[playerNumber].card.role
+        newGamestate.card_positions[playerNumber].card.team = team || newGamestate.card_positions[playerNumber].card.team
+      }
     }
 
-    if (playerArtifact) {
-      assignRoleFromArtifact(playerArtifact, playerCard)
-      updatePlayerRoleAndTeam(playerCard, newGamestate.players[token])
+    if (newGamestate.card_positions[playerNumber].artifact) {
+      const artifactRoleMap = {
+        claw_of_the_werewolf: { role: 'WEREWOLF', team: 'werewolf' },
+        brand_of_the_villager: { role: 'VILLAGER', team: 'village' },
+        cudgel_of_the_tanner: { role: 'TANNER', team: 'tanner' },
+        bow_of_the_hunter: { role: 'HUNTER', team: 'village' },
+        cloak_of_the_prince: { role: 'PRINCE', team: 'village' },
+        sword_of_the_bodyguard: { role: 'BODYGUARD', team: 'village' },
+        mist_of_the_vampire: { role: 'VAMPIRE', team: 'vampire' },
+        dagger_of_the_traitor: { role: 'TRAITOR' },
+        alien_artifact: { role: 'ALIEN', team: 'alien' }
+      }
+
+      const artifact = artifactsData.find(artifact => artifact.id === newGamestate.card_positions[playerNumber].artifact)
+      if (artifactRoleMap[artifact.token_name]) {
+        const { role, team } = artifactRoleMap[artifact.token_name]
+        newGamestate.card_positions[playerNumber].card.role = role || newGamestate.card_positions[playerNumber].card.role
+        newGamestate.card_positions[playerNumber].card.team = team || newGamestate.card_positions[playerNumber].card.team
+      }
+      newGamestate.players[token].card.player_role = newGamestate.card_positions[playerNumber].card.role
+      newGamestate.players[token].card.player_team = newGamestate.card_positions[playerNumber].card.team
     }
 
     const players = getTableBoard(newGamestate)
@@ -45,11 +81,10 @@ export const hydrateCouncil = async (ws, message) => {
         },
         players,
         narrations: newGamestate.narration,
-        interaction: { 
-          artifacted_cards: Object.keys(newGamestate.artifact), 
-          shielded_cards: newGamestate.shield, 
-          show_cards: newGamestate.flipped, 
-          
+        interaction: {
+          artifacted_cards: Object.keys(newGamestate.artifact),
+          shielded_cards: newGamestate.shield,
+          show_cards: newGamestate.flipped
         }
       })
     )

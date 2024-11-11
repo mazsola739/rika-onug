@@ -11,10 +11,15 @@ export const assignRoleFromMark = (mark, card) => {
 
   if (mark === 'mark_of_clarity') {
     const clarityCard = cardsData.find(({ id }) => id === card.id)
-    return clarityCard ? { role: clarityCard.role, team: clarityCard.team } : {}
+    if (clarityCard) {
+      card.role = clarityCard.role
+      card.team = clarityCard.team
+    }
+  } else if (markRoleMap[mark]) {
+    const { role, team } = markRoleMap[mark]
+    card.role = role || card.role
+    card.team = team || card.team
   }
-
-  return markRoleMap[mark] || { role: card.role, team: card.team }
 }
 
 export const assignRoleFromArtifact = (artifact, card) => {
@@ -29,7 +34,12 @@ export const assignRoleFromArtifact = (artifact, card) => {
     dagger_of_the_traitor: { role: 'TRAITOR' },
     alien_artifact: { role: 'ALIEN', team: 'alien' }
   }
-  return artifactRoleMap[artifact.token_name] || { role: card.role, team: card.team }
+
+  if (artifactRoleMap[artifact.token_name]) {
+    const { role, team } = artifactRoleMap[artifact.token_name]
+    card.role = role || card.role
+    card.team = team || card.team
+  }
 }
 
 export const updatePlayerRoleAndTeam = (player, card) => {

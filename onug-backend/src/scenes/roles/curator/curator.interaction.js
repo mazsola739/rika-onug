@@ -12,7 +12,8 @@ export const curatorInteraction = (gamestate, token, title) => {
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_cards: selectablePlayersWithNoArtifact,
-    selectable_card_limit: { player: 1, center: 0 }
+    selectable_card_limit: { player: 1, center: 0 },
+    scene_end: selectablePlayerNumbers.length === 0,
   }
 
   return generateRoleInteraction(newGamestate, token, {
@@ -20,6 +21,7 @@ export const curatorInteraction = (gamestate, token, title) => {
     selectableCards: {
       selectable_cards: selectablePlayersWithNoArtifact,
       selectable_card_limit: { player: 1, center: 0 }
-    }
+    },
+    scene_end: selectablePlayerNumbers.length === 0,
   })
 }

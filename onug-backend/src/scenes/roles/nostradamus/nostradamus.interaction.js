@@ -9,7 +9,8 @@ export const nostradamusInteraction = (gamestate, token, title) => {
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_cards: selectablePlayersWithNoShield,
-    selectable_card_limit: { player: 3, center: 0 }
+    selectable_card_limit: { player: 3, center: 0 },
+    scene_end: selectablePlayerNumbers.length === 0,
   }
 
   return generateRoleInteraction(newGamestate, token, {
@@ -17,6 +18,7 @@ export const nostradamusInteraction = (gamestate, token, title) => {
     selectableCards: {
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 3, center: 0 }
-    }
+    },
+    scene_end: selectablePlayerNumbers.length === 0,
   })
 }

@@ -16,6 +16,7 @@ export const rascalInteraction = (gamestate, token, title) => {
   let limit = 1
   let selectableCards
   let selectableLimit
+  //TODO  scene_end: selectablePlayerNumbers.length === 0
   const randomRascalInstruction = newGamestate.oracle.instruction
   const rascalKey = newGamestate.oracle.key
 
@@ -115,7 +116,7 @@ export const rascalInteraction = (gamestate, token, title) => {
     selectable_cards: selectableCards,
     selectable_card_limit: selectableLimit,
     random,
-    obligatory
+    obligatory,
   }
 
   return generateRoleInteraction(newGamestate, token, {

@@ -6,3 +6,4 @@ export const testCase: Record<string, number> = {
   CenterRight: 21,
   CenterWolf: 15
 }
+

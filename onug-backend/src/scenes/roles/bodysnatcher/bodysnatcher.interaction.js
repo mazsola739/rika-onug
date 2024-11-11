@@ -19,6 +19,7 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
   let selectablePlayers
   let selectableCards
   let interactionMessage
+  let scene_end = false
 
   if (randomBodysnatcherInstruction === 'bodysnatcher_steal_text') {
     switch (bodysnatcherKey) {
@@ -47,6 +48,7 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
       selectable_card_limit: { player: 1, center: 0 }
     }
     interactionMessage = selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_must_one_any_non_alien'
+    scene_end = selectablePlayerNumbers.length === 0
   } else if (randomBodysnatcherInstruction === 'bodysnatcher_center_text') {
     selectableCards = {
       selectable_cards: CENTER_CARD_POSITIONS,
@@ -58,12 +60,14 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     ...selectableCards,
-    obligatory: true
+    obligatory: true,
+    scene_end,
   }
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: [interactionMessage],
     selectableCards,
-    obligatory: true
+    obligatory: true,
+    scene_end,
   })
 }

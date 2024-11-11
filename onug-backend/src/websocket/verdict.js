@@ -1,4 +1,4 @@
-import { ERROR, HYDRATE_VOTE, REDIRECT, VOTE_ACCEPTED } from '../constants'
+import { ERROR, HYDRATE_VOTE, REDIRECT } from '../constants'
 import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
 import { validateRoom } from '../validators'
@@ -26,7 +26,7 @@ export const verdict = async (ws, message) => {
       return ws.send(
         JSON.stringify({
           type: HYDRATE_VOTE,
-          success: true,
+          success: true
         })
       )
     }
