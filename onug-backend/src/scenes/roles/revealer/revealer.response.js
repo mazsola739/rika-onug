@@ -26,7 +26,7 @@ export const revealerResponse = (gamestate, token, selected_card_positions, titl
     scene_end: true
   }
 
-  if (isTown) {
+  if (!isTown) {
     newGamestate.flipped.push(revealedCard[0])
     newGamestate.players[token].player_history[title].flipped_cards = revealedCard
   } else {

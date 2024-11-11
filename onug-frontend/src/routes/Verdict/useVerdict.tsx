@@ -26,6 +26,7 @@ export const useVerdict = () => {
     if (lastJsonMessage?.type === RESULT && lastJsonMessage.success) {
       propStore.setVoteResult(lastJsonMessage.vote_result)
       propStore.setWinnerTeams(lastJsonMessage.winner_teams)
+      propStore.setWinnerTeams(lastJsonMessage.loser_teams)
       riseAndRestStore.setTableCenterCards(lastJsonMessage)
       voteStore.revealResult(lastJsonMessage)
     }

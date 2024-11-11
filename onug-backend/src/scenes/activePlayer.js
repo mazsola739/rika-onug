@@ -16,7 +16,7 @@ export const isActivePlayer = card => {
   return {
     ALIENS: isRoleOrCopyPlayer(card, ALL_ALIEN),
     ALIENS_VOTE: isRoleOrCopyPlayer(card, ALL_ALIEN),
-    ALPHA_WOLF: isRoleOrCopyPlayer(card, ALL_ALIEN),
+    ALPHA_WOLF: isSpecificRole(card, 17),
     ANNOYING_LAD: isSpecificRole(card, 55),
     APPRENTICE_ASSASSIN: isSpecificRole(card, 28),
     APPRENTICE_SEER: isSpecificRole(card, 18),

@@ -11,20 +11,23 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
 
   const newGamestate = { ...gamestate }
 
-  const selectedCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0], selected_card_positions[1]])
+  const selectedCards = getCardIdsByPositions(newGamestate.card_positions, selected_card_positions)
   const playerOneCardId = selectedCards[0][selected_card_positions[0]]
-  const playerTwoCardId = selectedCards[1][selected_card_positions[1]]
+  const playerTwoCardId = selected_card_positions[1] ? selectedCards[1][selected_card_positions[1]] : null
 
   let showCards = []
 
   if (GOOD_GUY.includes(playerOneCardId)) {
-    if (!GOOD_GUY.includes(playerTwoCardId)) {
+    if (playerTwoCardId && !GOOD_GUY.includes(playerTwoCardId)) {
       showCards = selectedCards
       newGamestate.players[token].card.player_role = newGamestate.card_positions[selected_card_positions[1]].card.role
       newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[1]].card.team
     } else {
       showCards = selectedCards
-      if (newGamestate.players[token].card.player_original_id === playerOneCardId || newGamestate.players[token].card.player_original_id === playerTwoCardId) {
+      if (
+        newGamestate.players[token].card.player_original_id === playerOneCardId ||
+        (playerTwoCardId && newGamestate.players[token].card.player_original_id === playerTwoCardId)
+      ) {
         newGamestate.players[token].card.player_card_id = 87
       }
     }
@@ -36,16 +39,19 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
     }
   }
 
+
   newGamestate.players[token].card_or_mark_action = true
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
-    viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0]
+    viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0],
+    scene_end: true
   }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length === 2 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
-    showCards
+    showCards,
+    scene_end: true
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

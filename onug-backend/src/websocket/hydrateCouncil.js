@@ -44,9 +44,13 @@ export const hydrateCouncil = async (ws, message) => {
           player_artifact: newGamestate.players[token].card.player_artifact
         },
         players,
-        artifact: Object.keys(newGamestate.artifact),
-        shield: newGamestate.shield,
-        narrations: newGamestate.narration
+        narrations: newGamestate.narration,
+        interaction: { 
+          artifacted_cards: Object.keys(newGamestate.artifact), 
+          shielded_cards: newGamestate.shield, 
+          show_cards: newGamestate.flipped, 
+          
+        }
       })
     )
   } catch (error) {

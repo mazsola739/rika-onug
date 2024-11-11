@@ -1,10 +1,11 @@
 import { useMemo } from 'react'
 import { StyledQuickGuideToken } from './QuickGuide.styles'
 import { QuickGuideTokenProps } from './QuickGuide.types'
+import { observer } from 'mobx-react-lite'
 
 const SUPERHERO_IMAGES = ['annoying_lad', 'detector', 'evilometer', 'flipper', 'mirror_man', 'role_retriever', 'switcheroo', 'voodoo_lou', 'self_awareness_girl']
 
-export const QuickGuideToken: React.FC<QuickGuideTokenProps> = ({ image, expansion }) => {
+export const QuickGuideToken: React.FC<QuickGuideTokenProps> = observer(({ image, expansion }) => {
   const segments = ['_of_', 'artifact', 'shield']
   const folder = segments.some(segment => image.includes(segment)) ? 'tokens' : 'cards'
 
@@ -18,4 +19,4 @@ export const QuickGuideToken: React.FC<QuickGuideTokenProps> = ({ image, expansi
   }, [image, expansion])
 
   return <StyledQuickGuideToken src={`/assets/${folder}/${image}.webp`} alt={image} bgImg={bgImg} />
-}
+})

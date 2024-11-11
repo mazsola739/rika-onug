@@ -2,8 +2,9 @@ import React from 'react'
 import { propStore, riseAndRestStore } from 'store'
 import { Result } from 'types'
 import { Cell, CellHeader, PlayerName, Rank, Row, StyledResultTable, TableTitle, VoterName, VotersCell } from './ResultTable.styles'
+import { observer } from 'mobx-react-lite'
 
-export const ResultTable: React.FC = () => {
+export const ResultTable: React.FC = observer(() => {
   const sortedVotes = [...propStore.voteResult].sort((a, b) => b.voters.length - a.voters.length)
 
   const isActualPlayerWin = sortedVotes.find(player => player.player_number === riseAndRestStore.tablePlayerCard.position)?.win
@@ -19,10 +20,13 @@ export const ResultTable: React.FC = () => {
     }
   })
 
+  const winners = propStore.winnerTeams.join(', ') +' won!'
+  const losers = propStore.loserTeams.join(', ') +' lost!'
+
   //`teamName team {'won'} - You {'won' ? 'won' : 'lost'} the game`
   return (
     <StyledResultTable>
-      <TableTitle>{`${propStore.winnerTeams.join(', ')} won! - You ${isActualPlayerWin ? 'won' : 'lost'} the game`}</TableTitle>
+      <TableTitle>{`${winners} ${losers} - You ${isActualPlayerWin ? 'won' : 'lost'} the game`}</TableTitle>
       <Row isHeader>
         <CellHeader isFixedWidth isFixedHeight>
           #
@@ -64,4 +68,4 @@ export const ResultTable: React.FC = () => {
       </div>
     </StyledResultTable>
   )
-}
+})

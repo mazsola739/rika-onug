@@ -9,6 +9,7 @@ class PropStore {
   end: boolean = false
   voteResult: Result[] = []
   winnerTeams: string[] = []
+  loserTeams: string[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -118,6 +119,10 @@ class PropStore {
 
   setWinnerTeams(winnerTeams: string[]): void {
     this.winnerTeams = winnerTeams
+  }
+
+  setLoserTeams(loserTeams: string[]): void {
+    this.loserTeams = loserTeams
   }
 
   reset(): void {

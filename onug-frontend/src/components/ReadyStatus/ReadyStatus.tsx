@@ -4,7 +4,7 @@ import { playersStore } from 'store'
 import { Ready, ReadyPlayerList, ReadyTitle, StyledReadyPlayer, StyledReadyStatus } from './ReadyStatus.styles'
 import { ReadyPlayerProps, ReadyStatusProps } from './ReadyStatus.types'
 
-const ReadyPlayer: React.FC<ReadyPlayerProps> = ({ player_name, ready, player_number }) => {
+const ReadyPlayer: React.FC<ReadyPlayerProps> =  observer(({ player_name, ready, player_number }) => {
   const playerTokenName = ready ? `selected_${player_number}` : player_number
 
   return (
@@ -15,7 +15,7 @@ const ReadyPlayer: React.FC<ReadyPlayerProps> = ({ player_name, ready, player_nu
       </Ready>
     </StyledReadyPlayer>
   )
-}
+})
 
 export const ReadyStatus: React.FC<ReadyStatusProps> = observer(({ title }) => {
   const { players } = playersStore

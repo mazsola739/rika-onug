@@ -2,6 +2,7 @@ import { ARRIVE_COUNCIL, HYDRATE_COUNCIL, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { playersStore, propStore, riseAndRestStore, voteStore, wsStore } from 'store'
+import { Interaction } from 'types'
 import { splitCardsToTable } from 'utils'
 
 export const useCouncil = () => {
@@ -30,6 +31,8 @@ export const useCouncil = () => {
       voteStore.setKnownPlayer(lastJsonMessage.player)
       voteStore.setNarrations(lastJsonMessage.narrations)
       playersStore.setPlayers(lastJsonMessage.players)
+      propStore.setInteraction(lastJsonMessage?.interaction as Interaction)
+      riseAndRestStore.setTablePlayerCards(lastJsonMessage)
       voteStore.setIsGuessing(true)
       voteStore.setGuessCards(lastJsonMessage.guess_cards)
     }

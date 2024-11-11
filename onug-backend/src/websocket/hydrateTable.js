@@ -9,11 +9,7 @@ export const hydrateTable = async (ws, message) => {
 
     const { room_id, token } = message
     const gamestate = await readGamestate(room_id)
-    const newGamestate = {...gamestate, stage: STAGES.TABLE}
-
-    const playersByToken = newGamestate.players
-    const player = playersByToken[token]
-    const playerCard = player.card
+    const newGamestate = { ...gamestate, stage: STAGES.TABLE }
     const players = getTableBoard(newGamestate)
 
     return ws.send(
@@ -21,12 +17,12 @@ export const hydrateTable = async (ws, message) => {
         type: HYDRATE_TABLE,
         success: true,
         player: {
-          player_name: player?.name,
-          player_number: player?.player_number,
-          player_card_id: playerCard.player_card_id,
-          player_mark: playerCard.player_mark,
-          player_role: playerCard.player_role,
-          player_team: playerCard.player_team
+          player_name: newGamestate.players[token].name,
+          player_number: newGamestate.players[token].player_number,
+          player_card_id: newGamestate.players[token].card.player_card_id,
+          player_mark: newGamestate.players[token].card.player_mark,
+          player_role: newGamestate.players[token].card.player_role,
+          player_team: newGamestate.players[token].card.player_team
         },
         players
       })

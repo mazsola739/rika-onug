@@ -149,12 +149,14 @@ export type IdentifierType = keyof typeof identifier
 
 export type WsJsonMessage = {
   actual_scene?: ActualScene
+  artifacted_cards?: CardPosition[]
   center_cards?: CenterCard[]
   day_mode?: boolean
   errors?: string[]
   guess_cards?: number[]
   guessed_cards?: GuessedCard[]
   interaction?: Interaction
+  loser_teams?: string[]
   message?: string
   narration?: NarrationType[]
   narrations?: Record<string, NarrationType[]>[]
@@ -171,6 +173,8 @@ export type WsJsonMessage = {
   selectable_cards?: CardPosition[]
   selected_cards?: number[]
   selected_expansions?: string[]
+  shielded_cards?: CardPosition[]
+  show_cards?: Record<CardPosition, number>[]
   stage?: string
   success?: boolean
   title?: string
