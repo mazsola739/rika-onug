@@ -90,7 +90,7 @@ export const MessageBox: React.FC = observer(() => {
       </Message>
       {!scene_end && isAnswerOptions && (
         <ButtonGroup>
-          <Button onClick={() => handleAnswerInteraction(selectedAnswer)} disabled={selectedAnswer.length === 0} buttonText={BUTTONS.done_label} variant="green" />
+          <Button onClick={() => handleAnswerInteraction(selectedAnswer, title)} disabled={selectedAnswer.length === 0} buttonText={BUTTONS.done_label} variant="green" />
         </ButtonGroup>
       )}
       {!scene_end && isSelectableCards && (

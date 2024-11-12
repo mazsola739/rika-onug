@@ -21,6 +21,7 @@ export * from './getPlayerNeighborsByToken'
 export * from './getPlayerNumberWithMatchingToken'
 export * from './getPlayerNumbersWithMatchingTokens'
 export * from './getPlayerNumbersWithNonMatchingTokens'
+export * from './getPlayerTokenByPlayerNumber'
 export * from './getPlayerTokensByPlayerNumber'
 export * from './getRandomItemFromArray'
 export * from './getRandomItemsFromArray' //TODO do i need?

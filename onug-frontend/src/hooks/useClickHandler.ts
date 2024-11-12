@@ -1,6 +1,6 @@
 import { DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, PAUSE_GAME, READY, RESET, SCENE, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VOTE } from 'constant'
 import { useCallback } from 'react'
-import { deckStore, gameStatusStore, riseAndRestStore, roomStore, wsStore } from 'store'
+import { gameStatusStore, riseAndRestStore, roomStore, wsStore } from 'store'
 
 export const useClickHandler = () => {
   const room_id = sessionStorage.getItem('room_id')
@@ -168,9 +168,10 @@ export const useClickHandler = () => {
   )
 
   const handleMarkInteraction = useCallback(
-    (selected_marks: string[]) => {
+    (selected_marks: string[], title: string) => {
       sendJsonMessage?.({
         type: SCENE,
+        title,
         room_id,
         token,
         selected_mark_positions: selected_marks
@@ -180,9 +181,10 @@ export const useClickHandler = () => {
   )
 
   const handleAnswerInteraction = useCallback(
-    (selected_answer: string) => {
+    (selected_answer: string, title: string) => {
       sendJsonMessage?.({
         type: SCENE,
+        title,
         room_id,
         token,
         selected_answer
