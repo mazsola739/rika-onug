@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
-import { deckStore, propStore, messageStore, selectionStore, playersStore } from 'store'
-import { CardPosition, Interaction, MessagesType, NarrationType, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
+import { deckStore, propStore, messageStore, selectionStore } from 'store'
+import { CardPosition, Interaction, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
 import { getCardById } from 'utils'
 
 class RiseAndRestStore {
@@ -173,16 +173,11 @@ class RiseAndRestStore {
     this.resetCards()
     propStore.emptyValues()
     selectionStore.resetSelection()
-    messageStore.deleteMessage()
   }
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
     this.clearMemory()
-    playersStore.setPlayer(lastJsonMessage.player)
-    playersStore.setPlayers(lastJsonMessage.players)
-    deckStore.setPlayerCard()
-    deckStore.setPlayerMark()
-    propStore.setInteraction(lastJsonMessage.interaction as Interaction)
+    propStore.setInteraction(lastJsonMessage?.interaction as Interaction)
     propStore.setTitle(lastJsonMessage.title)
     this.setTablePlayerCards(lastJsonMessage)
     this.setTableCenterCards(lastJsonMessage)
@@ -191,6 +186,8 @@ class RiseAndRestStore {
 
   closeYourEyes(): void {
     this.clearMemory()
+    messageStore.setPrivateMessage([])
+    messageStore.setNarration([])
   }
 }
 

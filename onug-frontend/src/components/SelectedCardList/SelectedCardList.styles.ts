@@ -2,27 +2,25 @@ import styled from '@emotion/styled'
 
 export const StyledSelectedCardList = styled.div`
   display: flex;
-  gap: 3px;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
   flex-direction: row;
+  gap: 8px;
+  flex-wrap: wrap;
+  overflow-x: hidden;
+  overflow-y: auto;
 
-  overflow-x: auto;
-  overflow-y: hidden;
-
-  /* Custom Scrollbar Styles */
   ::-webkit-scrollbar {
-    height: 8px; /* Height of horizontal scrollbar */
     width: 8px; /* Width of vertical scrollbar */
+    height: 8px; /* Height of horizontal scrollbar */
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+    background-color: rgba(150, 146, 144, 0.2); /* Semi-transparent scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the scrollbar thumb */
   }
 
   /* For Firefox */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  .scrollable {
+    scrollbar-width: thin; /* Use 'thin' for thin scrollbar */
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent; /* Thumb color and track color */
+  }
 `

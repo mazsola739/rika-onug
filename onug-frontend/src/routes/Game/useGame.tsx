@@ -2,7 +2,7 @@ import { ARRIVE_GAME, END_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE } from
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { gameStatusStore, messageStore, propStore, riseAndRestStore, wsStore } from 'store'
-import { MessagesType, NarrationType } from 'types'
+import { NarrationType, MessagesType } from 'types'
 import { splitCardsToTable } from 'utils'
 
 export const useGame = () => {
@@ -39,7 +39,7 @@ export const useGame = () => {
   }, [sendJsonMessage, transitionCompleted])
 
   useEffect(() => {
-    if (lastJsonMessage?.type === SCENE) {
+    if (lastJsonMessage?.type === SCENE && lastJsonMessage?.success) {
       riseAndRestStore.openYourEyes(lastJsonMessage)
       messageStore.setNarration(lastJsonMessage.narration as NarrationType[])
       messageStore.setPrivateMessage(lastJsonMessage.interaction.private_message as MessagesType[])
@@ -58,7 +58,7 @@ export const useGame = () => {
       navigate(lastJsonMessage.path)
     }
 
-    if (lastJsonMessage?.type === PAUSE_GAME) { //TODO do i need
+    if (lastJsonMessage?.type === PAUSE_GAME) { //TODO do i need?
       gameStatusStore.togglePause()
     }
   }, [lastJsonMessage, navigate])

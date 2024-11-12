@@ -5,7 +5,7 @@ export const StyledRoom = styled.div`
   min-width: 100%;
   display: grid;
   grid-template-columns: 160px calc(100vw - 720px) 160px 400px;
-  grid-template-rows: 120px calc(100vh - 200px) 80px;
+  grid-template-rows: 80px calc(100vh - 160px) 80px;
 
   nav {
     grid-area: 2 / 1 / 3 / 2;

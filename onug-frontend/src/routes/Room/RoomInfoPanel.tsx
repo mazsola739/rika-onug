@@ -1,4 +1,4 @@
-import { RuleInfo, InfoPanel, Squad, QuickGuide } from 'components'
+import { InfoPanel, RuleInfo, SelectedCardList, Squad } from 'components'
 import { observer } from 'mobx-react-lite'
 
 export const RoomInfoPanel: React.FC = observer(() => {
@@ -6,7 +6,7 @@ export const RoomInfoPanel: React.FC = observer(() => {
     <InfoPanel>
       <Squad />
       <RuleInfo />
-      <QuickGuide />
+      <SelectedCardList />
     </InfoPanel>
   )
 })

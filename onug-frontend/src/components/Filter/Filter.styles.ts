@@ -9,6 +9,14 @@ export const StyledFilter = styled.fieldset`
   margin: 10px;
 `
 
+export const ExpansionTitle = styled.h3`
+  grid-area: title;
+  color: yellow;
+  padding: 10px 0;
+  margin: 0;
+  text-align: center;
+`
+
 export const StyledFilterButton = styled.button<FilterButtonProps>`
   filter: drop-shadow(3px 3px 3px black);
   align-items: center;

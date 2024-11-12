@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite'
 import { useEffect, useState } from 'react'
-import { NavButtons, StyledNav } from './Nav.styles'
+import { NavButtons, StyledNav, TeamsTitle } from './Nav.styles'
 import { NavProps } from './Nav.types'
 import { NavButton } from './NavButton'
 
@@ -50,6 +50,7 @@ export const Nav: React.FC<NavProps> = observer(({ anchorList }) => {
 
   return (
     <StyledNav className="navbar">
+      <TeamsTitle>TEAMS</TeamsTitle>
       <NavButtons className="nav-container">
         {anchorList.map((anchor, index) => (
           <NavButton key={index} anchor={anchor} isActive={activeAnchor === anchor} />

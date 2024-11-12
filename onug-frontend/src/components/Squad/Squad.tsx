@@ -14,7 +14,7 @@ export const Squad: React.FC = observer(() => {
         {players &&
           players.map(({ player_name }, index) => (
             <Member key={index}>
-              <Token tokenName={`${index + 1}`} size={25} />
+              <Token tokenName={`${index + 1}`} size={20} />
               <MemberName>{player_name}</MemberName>
             </Member>
           ))}

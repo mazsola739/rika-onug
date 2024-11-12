@@ -5,11 +5,9 @@ export const StyledSquad = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: 180px;
-
   color: white;
   font-size: 14px;
-
-  border-bottom: 2px solid #969290;
+    border-bottom: 2px solid #969290;
   padding-bottom: 5px;
 `
 
@@ -33,7 +31,7 @@ export const SquadMembers = styled.div`
 export const Member = styled.div`
   align-items: center;
   display: flex;
-  font-size: 20px;
+  font-size: 16px;
   flex-direction: row;
   align-items: center;
   gap: 5px;
