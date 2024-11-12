@@ -7,6 +7,7 @@ export const createAndSendSceneMessage = (gamestate, token, title, interaction, 
 
   const message = {
     type: 'SCENE',
+    success: true,
     title,
     token,
     interaction,

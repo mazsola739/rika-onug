@@ -9,13 +9,11 @@ import { formatPositionSimply } from 'utils'
 type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons'
 
 class MessageStore {
-  narration: string
-  privateMessage: string
+  narration: string = ''
+  privateMessage: string = ''
 
   constructor() {
     makeAutoObservable(this)
-    this.narration = ''
-    this.privateMessage = ''
   }
 
   setNarration(narration_keys: NarrationType[]): void {
@@ -28,25 +26,14 @@ class MessageStore {
     this.privateMessage = message
   }
 
-  get playerCardLimit() {
-    return propStore.selectable_card_limit.player
-  }
-  get centerCardLimit() {
-    return propStore.selectable_card_limit.center
-  }
-  get isCardSelection() {
-    return propStore.selectable_cards.length > 0
-  }
-  get isSelectableCards() {
-    return this.allSelectableCards.length > 0
-  }
-  get isAnswerOptions() {
-    return propStore.answer_options.length > 0
+  deleteMessage(): void {
+    this.narration = ''
+    this.privateMessage = ''
   }
 
-  get isIdentification() {
-    const title = propStore.title
-    return title === 'MINION' || title === 'WEREWOLF' || title === 'MASONS'
+  get narrationImage(): string {
+    const scene = script.find(scene => scene.scene_title === propStore.title)
+    return scene ? scene.scene_img : ''
   }
 
   get disabled() {
@@ -66,11 +53,25 @@ class MessageStore {
     return true
   }
 
-  get narrationImage(): string {
-    const scene = script.find(scene => scene.scene_title === propStore.title)
-    return scene ? scene.scene_img : ''
+  get playerCardLimit() {
+    return propStore.selectable_card_limit.player
   }
-
+  get centerCardLimit() {
+    return propStore.selectable_card_limit.center
+  }
+  get isCardSelection() {
+    return propStore.selectable_cards.length > 0
+  }
+  get isSelectableCards() {
+    return this.allSelectableCards.length > 0
+  }
+  get isAnswerOptions() {
+    return propStore.answer_options.length > 0
+  }
+  get isIdentification() {
+    const title = propStore.title
+    return title === 'MINION' || title === 'WEREWOLF' || title === 'MASONS'
+  }
   get allSelectableCards(): Record<string, string>[] {
     const selectablePlayerCards = riseAndRestStore.tablePlayerCards.filter(card => card.selectable_card)
     const selectableCenterCards = riseAndRestStore.tableCenterCards.filter(card => card.selectable_card)
@@ -80,7 +81,6 @@ class MessageStore {
       name: formatPositionSimply(card.position)
     }))
   }
-
   get allSelectedCards(): Record<string, string>[] {
     return selectionStore.selectedCards.map(position => ({
       position,
@@ -102,7 +102,6 @@ class MessageStore {
         return []
     }
   }
-
   get identifiedCards() {
     const roleKeys = this.getRoles()
 

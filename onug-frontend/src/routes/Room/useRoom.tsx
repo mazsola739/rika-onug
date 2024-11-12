@@ -2,7 +2,6 @@ import { ARRIVE_ROOM, HYDRATE_ROOM, LEAVE_ROOM, REDIRECT, TEAM } from 'constant'
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { deckStore, roomStore, wsStore } from 'store'
-import { Expansion } from 'types'
 
 export const useRoom = () => {
   const [firstTime, setFirstTime] = useState(true)
@@ -27,9 +26,7 @@ export const useRoom = () => {
 
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_ROOM && lastJsonMessage?.success) {
-      deckStore.setSelectedCard(lastJsonMessage.selected_cards)
-      deckStore.setSelectedExpansions(lastJsonMessage.selected_expansions as Expansion[])
-      roomStore.setRoomPlayers(lastJsonMessage.players)
+      roomStore.equipRoom(lastJsonMessage)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
@@ -39,7 +36,8 @@ export const useRoom = () => {
     if (lastJsonMessage?.type === LEAVE_ROOM) {
       if (lastJsonMessage.success) {
         sessionStorage.setItem('room_id', '')
-        sessionStorage.setItem('player_name', '')
+        sessionStorage.setItem('player_name', '') //TODO dont delete player name? //TODO clear setRoom?
+        roomStore.clearRoom()
         navigate('/lobby')
       } else {
         console.error(lastJsonMessage.errors)

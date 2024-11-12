@@ -1,6 +1,6 @@
 import { computed, makeAutoObservable } from 'mobx'
-import { Player } from 'types'
-import { createDefaultPlayer } from 'utils'
+import { CardJson, Player, TokenJson } from 'types'
+import { createDefaultPlayer, getArtifactById, getCardById, getMarkByName } from 'utils'
 
 class PlayersStore {
   player: Player = createDefaultPlayer()
@@ -20,9 +20,19 @@ class PlayersStore {
     this.players = players
   }
 
+  get knownPlayerCard(): CardJson {
+    return getCardById(this.player.player_card_id)
+  }
+  get knownPlayerMark(): TokenJson {
+    return getMarkByName(this.player.player_mark)
+  }
+  get knownPlayerArtifact(): TokenJson {
+    return getArtifactById(this.player.player_artifact)
+  }
+
   get isPlayerReady(): boolean {
     const currentPlayer = this.players.find(actualPlayer => actualPlayer.player_number === this.player.player_number)
-
+    
     return currentPlayer ? currentPlayer.flag : false
   }
 }

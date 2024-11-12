@@ -125,7 +125,7 @@ class PropStore {
     this.loserTeams = loserTeams
   }
 
-  reset(): void {
+  emptyValues(): void {
     this.title = ''
     this.interaction = {
       aliens: [],

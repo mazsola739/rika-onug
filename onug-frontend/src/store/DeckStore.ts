@@ -14,6 +14,7 @@ class DeckStore {
   selectedExpansions: Expansion[] = ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles']
   playerCard: CardJson = createDefaultCard()
   playerMark: TokenJson = createDefaultToken()
+  playerArtifact: TokenJson = createDefaultToken()
 
   constructor() {
     makeAutoObservable(this)
@@ -47,11 +48,9 @@ class DeckStore {
   get totalCharacters(): number {
     return this.selectedCards.length
   }
-
   get totalPlayers(): number {
     return determineTotalPlayers(this.totalCharacters)
   }
-
   get hasAlphawolf() {
     return checkCardPresence(this.selectedCards, 17)
   }
@@ -112,14 +111,10 @@ class DeckStore {
       this.hasSentinel && this.hasCurator ? artifacts : artifacts.filter(artifact => (this.hasSentinel && artifact.token_name === 'shield') || (this.hasCurator && artifact.token_name !== 'shield'))
   }
 
-  clearPlayerCard(): void {
-    const card = createDefaultCard()
-    this.playerCard = card
-  }
-
-  clearPlayerMark(): void {
-    const mark = createDefaultToken()
-    this.playerMark = mark
+  clearSelections(): void {
+    this.selectedCards = []
+    this.selectedMarks = []
+    this.selectedExpansions = []
   }
 }
 

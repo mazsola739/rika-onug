@@ -45,22 +45,21 @@ export const useGame = () => {
       messageStore.setPrivateMessage(lastJsonMessage.interaction.private_message as MessagesType[])
     }
 
-    if (lastJsonMessage?.type === HYDRATE_GAME) {
+    if (lastJsonMessage?.type === HYDRATE_GAME && lastJsonMessage?.success) {
       riseAndRestStore.closeYourEyes()
       propStore.setNightfall(lastJsonMessage.night_mode)
+    }
+    if (lastJsonMessage?.type === END_GAME && lastJsonMessage?.success) {
+      riseAndRestStore.closeYourEyes()
+      propStore.setSunrise(lastJsonMessage.day_mode)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }
 
-    if (lastJsonMessage?.type === PAUSE_GAME) {
+    if (lastJsonMessage?.type === PAUSE_GAME) { //TODO do i need
       gameStatusStore.togglePause()
-    }
-
-    if (lastJsonMessage?.type === END_GAME) {
-      riseAndRestStore.closeYourEyes()
-      propStore.setSunrise(lastJsonMessage.day_mode)
     }
   }, [lastJsonMessage, navigate])
 

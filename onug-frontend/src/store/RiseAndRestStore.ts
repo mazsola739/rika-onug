@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
-import { deckStore, propStore, messageStore, selectionStore } from 'store'
-import { CardPosition, Interaction, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
+import { deckStore, propStore, messageStore, selectionStore, playersStore } from 'store'
+import { CardPosition, Interaction, MessagesType, NarrationType, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
 import { getCardById } from 'utils'
 
 class RiseAndRestStore {
@@ -34,7 +34,7 @@ class RiseAndRestStore {
       villains: false,
       tanner: false,
       assassins: false,
-      madscientist: false,
+      madscientist: false
     }
   }
 
@@ -73,7 +73,7 @@ class RiseAndRestStore {
       seers: propStore.seers.includes(position),
       lovers: propStore.lovers.includes(position),
       part_of_blob: propStore.part_of_blob.includes(position),
-      part_of_family: propStore.part_of_family.includes(position),
+      part_of_family: propStore.part_of_family.includes(position)
     }
   }
 
@@ -169,24 +169,28 @@ class RiseAndRestStore {
     }))
   }
 
-  resetScene(): void {
+  clearMemory(): void {
     this.resetCards()
-    propStore.reset()
+    propStore.emptyValues()
     selectionStore.resetSelection()
+    messageStore.deleteMessage()
   }
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
-    this.resetScene()
-    propStore.setInteraction(lastJsonMessage?.interaction as Interaction)
+    this.clearMemory()
+    playersStore.setPlayer(lastJsonMessage.player)
+    playersStore.setPlayers(lastJsonMessage.players)
+    deckStore.setPlayerCard()
+    deckStore.setPlayerMark()
+    propStore.setInteraction(lastJsonMessage.interaction as Interaction)
     propStore.setTitle(lastJsonMessage.title)
     this.setTablePlayerCards(lastJsonMessage)
     this.setTableCenterCards(lastJsonMessage)
+    this.setTablePlayerCard(lastJsonMessage)
   }
 
   closeYourEyes(): void {
-    this.resetScene()
-    messageStore.setPrivateMessage([])
-    messageStore.setNarration([])
+    this.clearMemory()
   }
 }
 

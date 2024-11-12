@@ -2,13 +2,14 @@ import { UPDATE_GUESS } from 'constant'
 import * as narration_text from 'constant/narrations'
 import { script } from 'data'
 import { computed, makeAutoObservable } from 'mobx'
-import { CardJson, CardPosition, GuessedCard, GuessToken, NarrationType, Player, TokenJson, WsJsonMessage } from 'types'
-import { createDefaultPlayer, getArtifactById, getCardById, getMarkByName } from 'utils'
+import { CardPosition, GuessedCard, GuessToken, NarrationType, Player, WsJsonMessage } from 'types'
+import { getCardById } from 'utils'
 import { playersStore } from './PlayersStore'
 import { wsStore } from './WsStore'
+import { propStore } from './PropStore'
+import { riseAndRestStore } from './RiseAndRestStore'
 
 class VoteStore {
-  knownPlayer: Player = createDefaultPlayer()
   narrations: Record<string, NarrationType[]>[]
   isGuessing: boolean = false
   guessedCards: GuessedCard[] = []
@@ -20,13 +21,7 @@ class VoteStore {
   resultPlayers: Player[] = []
 
   constructor() {
-    makeAutoObservable(this, {
-      isPlayerReady: computed
-    })
-  }
-
-  setKnownPlayer(player: Player): void {
-    this.knownPlayer = player
+    makeAutoObservable(this)
   }
 
   setNarrations(narrations: Record<string, NarrationType[]>[]): void {
@@ -88,21 +83,6 @@ class VoteStore {
     return tokens
   }
 
-  get knownPlayerCard(): CardJson {
-    return getCardById(this.knownPlayer.player_card_id)
-  }
-  get knownPlayerMark(): TokenJson {
-    return getMarkByName(this.knownPlayer.player_mark)
-  }
-  get knownPlayerArtifact(): TokenJson {
-    return getArtifactById(this.knownPlayer.player_artifact)
-  }
-  get isPlayerReady(): boolean {
-    const currentPlayer = playersStore.players.find(actualPlayer => actualPlayer.player_number === this.knownPlayer.player_number)
-
-    return currentPlayer ? currentPlayer.flag : false
-  }
-
   get voteNarration(): { image: string; text: string }[] {
     const voteNarration = this.narrations.map(narration => {
       const title = Object.keys(narration)[0]
@@ -133,7 +113,12 @@ class VoteStore {
   }
 
   revealResult(lastJsonMessage: WsJsonMessage): void {
+    this.resetGuesses()
     this.resultPlayers = lastJsonMessage.players
+    propStore.setVoteResult(lastJsonMessage.vote_result)
+    propStore.setWinnerTeams(lastJsonMessage.winner_teams)
+    propStore.setLoserTeams(lastJsonMessage.loser_teams)
+    riseAndRestStore.setTableCenterCards(lastJsonMessage)
   }
 
   resetGuesses(): void {

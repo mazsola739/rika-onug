@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 
+//TODO do i need?
 class GameStatusStore {
   isGamePlayStarted = false
   isGamePlayStopped = true

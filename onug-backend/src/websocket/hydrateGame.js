@@ -23,6 +23,7 @@ export const hydrateGame = async (ws, message) => {
     return ws.send(
       JSON.stringify({
         type: HYDRATE_GAME,
+        success: true,
         actual_scene,
         day_mode: false,
         night_mode: true

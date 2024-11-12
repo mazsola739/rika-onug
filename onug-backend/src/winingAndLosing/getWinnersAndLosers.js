@@ -1,6 +1,6 @@
 import { getPlayerTokenByPlayerNumber } from '../scenes/sceneUtils'
-import { isCircleVote, isEveryoneInSameTeam, isMostVotedPlayer } from './conditions'
-import { buildVoteResult, countVotes, getActiveAndInactiveCards, getTopVotes } from './winingAndLosing.utils'
+import { isEveryoneInSameTeam, isCircleVote, isMostVotedPlayer } from './conditions'
+import { countVotes, buildVoteResult, getTopVotes, getActiveAndInactiveCards } from './winingAndLosing.utils'
 
 export const getWinnersAndLosers = gamestate => {
   const players = gamestate.players
@@ -36,25 +36,28 @@ export const getWinnersAndLosers = gamestate => {
     })
   }
 
-  //BODYGUARD
-  const bodyguard = voteResult.find(player => {
+  // BODYGUARD(S)
+  const bodyguards = voteResult.filter(player => {
     const playerCard = activeCards.find(card => card.position === player.player_number)
     return playerCard?.role === 'BODYGUARD'
   })
 
-  let protectedPlayer = null
-  if (bodyguard) {
-    const bodyguardToken = getPlayerTokenByPlayerNumber(players, bodyguard.player_number)
-    protectedPlayer = players[bodyguardToken].vote
+  let protectedPlayers = []
+
+  if (bodyguards.length > 0) {
+    bodyguards.forEach(bodyguard => {
+      const bodyguardToken = getPlayerTokenByPlayerNumber(players, bodyguard.player_number)
+      const protectedPlayer = players[bodyguardToken].vote
+      protectedPlayers.push(protectedPlayer)
+    })
 
     voteResult.forEach(player => {
-      if (player.player_number === protectedPlayer) {
+      if (protectedPlayers.includes(player.player_number)) {
         player.survived = true
       }
     })
   }
 
-  //SECOND MOSTVOTED?
   let playersToProcess = [...mostVoted]
 
   if (
@@ -65,9 +68,14 @@ export const getWinnersAndLosers = gamestate => {
   ) {
     playersToProcess = [...secondMostVoted]
   }
+
   voteResult.forEach(item => {
-    item.survived = !isMostVotedPlayer(item.player_number, playersToProcess)
-    item.win = !isMostVotedPlayer(item.player_number, playersToProcess)
+    if (protectedPlayers.includes(item.player_number)) {
+      item.survived = true
+    } else {
+      item.survived = !playersToProcess.includes(item.player_number)
+      item.win = !playersToProcess.includes(item.player_number)
+    }
   })
 
   // HUNTER
@@ -81,7 +89,7 @@ export const getWinnersAndLosers = gamestate => {
     const hunterVote = players[hunterToken].vote
 
     voteResult.forEach(player => {
-      if (hunterVote.includes(player.player_number) && player.player_number !== protectedPlayer) {
+      if (hunterVote.includes(player.player_number) && !protectedPlayers.includes(player.player_number)) {
         player.survived = false
       }
     })

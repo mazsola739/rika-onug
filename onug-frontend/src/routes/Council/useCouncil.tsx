@@ -28,19 +28,19 @@ export const useCouncil = () => {
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_COUNCIL && lastJsonMessage?.success) {
       propStore.setInteraction(lastJsonMessage?.interaction as Interaction)
-      voteStore.setKnownPlayer(lastJsonMessage.player)
-      voteStore.setNarrations(lastJsonMessage.narrations)
+      playersStore.setPlayer(lastJsonMessage.player)
       playersStore.setPlayers(lastJsonMessage.players)
       riseAndRestStore.setTablePlayerCards(lastJsonMessage)
       riseAndRestStore.setTablePlayerCard(lastJsonMessage)
+      voteStore.setNarrations(lastJsonMessage.narrations)
       voteStore.setIsGuessing(true)
       voteStore.setGuessCards(lastJsonMessage.guess_cards)
     }
 
     if (lastJsonMessage?.type === VOTE && lastJsonMessage?.success) {
-      voteStore.setKnownPlayer(lastJsonMessage.player)
-      voteStore.setNarrations(lastJsonMessage.narrations)
+      playersStore.setPlayer(lastJsonMessage.player)
       playersStore.setPlayers(lastJsonMessage.players)
+      voteStore.setNarrations(lastJsonMessage.narrations)
       voteStore.resetGuesses()
       riseAndRestStore.openYourEyes(lastJsonMessage)
     }
