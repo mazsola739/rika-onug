@@ -3,6 +3,9 @@ import { generateRoleInteraction, getNonVampirePlayerNumbersByRoleIds, getVampir
 export const vampiresInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
+  /* // TODO   Uses the Robber or Witch and swaps with a Werewolf or Vampire 
+Does not wake up with the Werewolves/Vampires */
+
   const vampires = getVampirePlayerNumbersByRoleIds(newGamestate.players)
   const nonVampires = getNonVampirePlayerNumbersByRoleIds(newGamestate)
 

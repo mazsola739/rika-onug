@@ -9,17 +9,15 @@ export const Nav: React.FC<NavProps> = observer(({ anchorList }) => {
 
   //TODO fix it, right now not refreshing the anchor isactive status
   useEffect(() => {
-    const sections = anchorList.map(anchor => document.getElementById(anchor)).filter(Boolean)
-    const navLinks = document.querySelectorAll('.navbar .nav-container button')
+    const sections = anchorList.map(anchor => document.getElementById(anchor)).filter(Boolean) as HTMLElement[]
+    const navButtons = document.querySelectorAll('.navbar .nav-container button') as NodeListOf<HTMLButtonElement>
 
     const updateActiveSection = () => {
       let activeSectionId: string | null = null
       let closestDistance = Number.POSITIVE_INFINITY
 
       sections.forEach(section => {
-        const rect = section.getBoundingClientRect()
-
-        const distanceFromTop = rect.top
+        const distanceFromTop = section.getBoundingClientRect().top
 
         if (distanceFromTop >= 0 && distanceFromTop < closestDistance) {
           closestDistance = distanceFromTop
@@ -27,10 +25,11 @@ export const Nav: React.FC<NavProps> = observer(({ anchorList }) => {
         }
       })
 
-      navLinks.forEach(link => {
-        link.classList.remove('active')
-        if (link.classList.contains(activeSectionId || '')) {
-          link.classList.add('active')
+      navButtons.forEach(button => {
+        if (button.id === activeSectionId) {
+          button.setAttribute('id', 'active')
+        } else {
+          button.removeAttribute('id')
         }
       })
 

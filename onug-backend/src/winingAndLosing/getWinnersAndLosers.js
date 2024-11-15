@@ -1,154 +1,118 @@
-import { getPlayerTokenByPlayerNumber } from '../scenes/sceneUtils'
-import { isEveryoneInSameTeam, isCircleVote, isMostVotedPlayer } from './conditions'
-import { countVotes, buildVoteResult, getTopVotes, getActiveAndInactiveCards } from './winingAndLosing.utils'
+import { getTeamStatus, isCircleVote } from './conditions'
+import { getFallens } from './getFallens'
+import { getLosers } from './getLosers'
+import { getSurvivors } from './getSurvivors'
+import { getWinners } from './getWinners'
+import { buildVoteResult, countVotes, getActiveAndInactiveCards, getTopVotes } from './utils'
 
-export const getWinnersAndLosers = gamestate => {
-  const players = gamestate.players
-  const cardPositions = gamestate.card_positions
-
-  const countedVotes = countVotes(players)
-  let voteResult = buildVoteResult(countedVotes, players)
-
+export const getWinnersAndLosers = async gamestate => {
+  const countedVotes = countVotes(gamestate.players)
+  let voteResult = buildVoteResult(countedVotes, gamestate.players)
   const { mostVoted, secondMostVoted } = getTopVotes(countedVotes)
-  const { activeCards } = getActiveAndInactiveCards(cardPositions)
+  const { activeCards } = getActiveAndInactiveCards(gamestate.card_positions)
 
-  const sameTeam = isEveryoneInSameTeam(activeCards)
+  const { isSameTeam, teams } = getTeamStatus(activeCards)
   const circleVote = isCircleVote(countedVotes)
 
+  let playerStates = {
+    SURVIVOR_PLAYERS: [],
+    KILLED_PLAYERS: [],
+    WINNER_PLAYERS: [],
+    LOSER_PLAYERS: []
+  }
+
   // Circle Vote
-  if (sameTeam) {
-    if (circleVote) {
-      voteResult.forEach(item => {
-        item.win = true
-        item.survived = true
+  if (circleVote && isSameTeam) {
+    voteResult.forEach(player => {
+      player.survived = true
+      player.win = true
+    })
+    return { voteResult, winnerTeams: [...teams], loserTeam: [] }
+  } else if (circleVote && !isSameTeam) {
+    voteResult.forEach(player => {
+      player.survived = true
+      player.win = false
+    })
+    return { voteResult, winnerTeams: [], loserTeam: [...teams] }
+  }
+
+  if (mostVoted.length === 0) {
+    voteResult.forEach(player => {
+      player.survived = true
+      player.win = false
+    })
+    return { voteResult, winnerTeams: [], loserTeam: [] }
+  }
+
+  voteResult.forEach(p => {
+    if (mostVoted.includes(p.player_number)) {
+      playerStates.KILLED_PLAYERS.push(p.player_number)
+    } else {
+      playerStates.SURVIVOR_PLAYERS.push(p.player_number)
+    }
+  })
+
+  playerStates = await getSurvivors(voteResult, gamestate, playerStates)
+  playerStates = await getFallens(voteResult, gamestate, playerStates)
+
+  const killedFromMostVotedGroup = playerStates.KILLED_PLAYERS.some(player => mostVoted.includes(player))
+  if (!killedFromMostVotedGroup) {
+    if (secondMostVoted.length === 0) {
+      voteResult.forEach(player => {
+        if (playerStates.SURVIVOR_PLAYERS.includes(player.player_number)) {
+          player.survived = true
+        }
+        if (playerStates.KILLED_PLAYERS.includes(player.player_number)) {
+          player.survived = false
+        }
       })
       return { voteResult, winnerTeams: [], loserTeam: [] }
-    } else {
-      voteResult.forEach(item => {
-        item.survived = !isMostVotedPlayer(item.player_number, mostVoted)
-        item.win = false
+    }
+
+    playerStates.KILLED_PLAYERS = []
+    playerStates.SURVIVOR_PLAYERS = []
+
+    voteResult.forEach(p => {
+      if (secondMostVoted.includes(p.player_number)) {
+        playerStates.KILLED_PLAYERS.push(p.player_number)
+      } else {
+        playerStates.SURVIVOR_PLAYERS.push(p.player_number)
+      }
+    })
+
+    playerStates = await getSurvivors(voteResult, gamestate, playerStates)
+    playerStates = await getFallens(voteResult, gamestate, playerStates)
+
+    const killedFromSecondMostVotedGroup = playerStates.KILLED_PLAYERS.some(player => secondMostVoted.includes(player))
+
+    if (!killedFromSecondMostVotedGroup) {
+      voteResult.forEach(player => {
+        if (playerStates.SURVIVOR_PLAYERS.includes(player.player_number)) {
+          player.survived = true
+        }
+        if (playerStates.KILLED_PLAYERS.includes(player.player_number)) {
+          player.survived = false
+        }
       })
+      return { voteResult, winnerTeams: [], loserTeam: [] }
     }
-  } else if (!sameTeam) {
-    voteResult.forEach(item => {
-      item.survived = !isMostVotedPlayer(item.player_number, mostVoted)
-      item.win = !isMostVotedPlayer(item.player_number, mostVoted)
-    })
   }
 
-  // BODYGUARD(S)
-  const bodyguards = voteResult.filter(player => {
-    const playerCard = activeCards.find(card => card.position === player.player_number)
-    return playerCard?.role === 'BODYGUARD'
-  })
+  playerStates = await getWinners(voteResult, gamestate, playerStates)
+  playerStates = await getLosers(voteResult, gamestate, playerStates)
 
-  let protectedPlayers = []
-
-  if (bodyguards.length > 0) {
-    bodyguards.forEach(bodyguard => {
-      const bodyguardToken = getPlayerTokenByPlayerNumber(players, bodyguard.player_number)
-      const protectedPlayer = players[bodyguardToken].vote
-      protectedPlayers.push(protectedPlayer)
-    })
-
-    voteResult.forEach(player => {
-      if (protectedPlayers.includes(player.player_number)) {
-        player.survived = true
-      }
-    })
-  }
-
-  let playersToProcess = [...mostVoted]
-
-  if (
-    mostVoted.every(player => {
-      const targetPlayer = voteResult.find(p => p.player_number === player)
-      return targetPlayer && targetPlayer.survived === true
-    })
-  ) {
-    playersToProcess = [...secondMostVoted]
-  }
-
-  voteResult.forEach(item => {
-    if (protectedPlayers.includes(item.player_number)) {
-      item.survived = true
-    } else {
-      item.survived = !playersToProcess.includes(item.player_number)
-      item.win = !playersToProcess.includes(item.player_number)
+  voteResult.forEach(player => {
+    if (playerStates.SURVIVOR_PLAYERS.includes(player.player_number)) {
+      player.survived = true
     }
-  })
-
-  // HUNTER
-  const hunter = voteResult.find(player => {
-    const playerCard = activeCards.find(card => card.position === player.player_number)
-    return isMostVotedPlayer(player.player_number, playersToProcess) && playerCard?.role === 'HUNTER'
-  })
-
-  if (hunter) {
-    const hunterToken = getPlayerTokenByPlayerNumber(players, hunter.player_number)
-    const hunterVote = players[hunterToken].vote
-
-    voteResult.forEach(player => {
-      if (hunterVote.includes(player.player_number) && !protectedPlayers.includes(player.player_number)) {
-        player.survived = false
-      }
-    })
-  }
-
-  // Dead status checks
-  const tannerDead = voteResult.some(player => {
-    const playerCard = activeCards.find(card => card.position === player.player_number)
-    const isTanner = playerCard && playerCard.role === 'TANNER'
-    return isTanner ? !player.survived : true
-  })
-
-  const werewolfRoles = ['WEREWOLF', 'MYSTIC_WOLF', 'DREAMWOLF', 'ALPHA_WOLF']
-
-  const werewolfDead = voteResult.every(player => {
-    const playerCard = activeCards.find(card => card.position === player.player_number)
-    const isWerewolf = playerCard && werewolfRoles.includes(playerCard.role)
-    return isWerewolf ? !player.survived : true
-  })
-
-  const werewolfSurvived = voteResult.some(player => {
-    const playerCard = activeCards.find(card => card.position === player.player_number)
-    const isWerewolf = playerCard && werewolfRoles.includes(playerCard.role)
-    return isWerewolf && player.survived
-  })
-
-  // TANNER WIN CONDITION
-  voteResult.map(player => {
-    const playerCard = activeCards.find(card => card.position === player.player_number)
-    const isTanner = playerCard && playerCard.role === 'TANNER'
-    if (isTanner) {
-      player.win = !player.survived
+    if (playerStates.KILLED_PLAYERS.includes(player.player_number)) {
+      player.survived = false
     }
-  })
-
-  // WEREWOLF TEAM WIN CONDITION
-  voteResult.map(player => {
-    const playerCard = activeCards.find(card => card.position === player.player_number)
-    const isWerewolfTeam = playerCard && playerCard.team === 'werewolf'
-    if (isWerewolfTeam) {
-      player.win = !werewolfDead && !tannerDead
+    if (playerStates.WINNER_PLAYERS.includes(player.player_number)) {
+      player.win = true
     }
-  })
-
-  // MINION WIN CONDITION
-  voteResult.map(player => {
-    const playerCard = activeCards.find(card => card.position === player.player_number)
-    const isMinion = playerCard && playerCard.role === 'MINION'
-    if (isMinion) {
-      player.win = !werewolfDead && !tannerDead
-    }
-  })
-
-  // VILLAGE TEAM WIN CONDITION
-  voteResult.map(player => {
-    const playerCard = activeCards.find(card => card.position === player.player_number)
-    const isVillageTeam = playerCard && playerCard.team === 'village'
-    if (isVillageTeam) {
-      player.win = !werewolfSurvived && !tannerDead
+    if (playerStates.LOSER_PLAYERS.includes(player.player_number)) {
+      player.win = false
     }
   })
 
@@ -176,9 +140,5 @@ export const getWinnersAndLosers = gamestate => {
     )
   )
 
-  return {
-    voteResult,
-    winnerTeams,
-    loserTeam
-  }
+  return { voteResult, winnerTeams, loserTeam }
 }

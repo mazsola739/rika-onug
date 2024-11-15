@@ -1,6 +1,7 @@
 import { generateRoleInteraction, getPlayerNumberWithMatchingToken, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
 import { getVampirePlayerNumbersByMark } from './renfield.utils'
 
+//TODO if no vampire he is villager
 export const renfieldInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
   const vampires = getVampirePlayerNumbersByRoleIds(newGamestate.players)

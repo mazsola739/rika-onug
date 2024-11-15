@@ -5,7 +5,7 @@ export const apprenticeassassinInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const assassins = getAssassinPlayerNumbersByRoleIds(newGamestate.players)
-
+  //TODO no assassin app.assassin is the asssassin
   if (assassins.length > 0) {
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],

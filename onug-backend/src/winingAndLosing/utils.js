@@ -1,5 +1,5 @@
 export const countVotes = players => {
-  const voteCounts = Object.fromEntries(Object.keys(players).map(id => [players[id].player_number, []]))
+  const voteCounts = Object.fromEntries(Object.keys(players).map(token => [players[token].player_number, []]))
 
   Object.values(players).forEach(player => {
     player.vote.forEach(target => {
@@ -23,12 +23,13 @@ export const getTopVotes = countedVotes => {
 
   if (voteEntries.length > 0) {
     const highestVotes = voteEntries[0].votes
+
     const secondHighestVotes = voteEntries.find(entry => entry.votes < highestVotes)?.votes
 
-    mostVoted.push(...voteEntries.filter(entry => entry.votes === highestVotes).map(entry => entry.player))
+    mostVoted.push(...voteEntries.filter(entry => entry.votes >= 2 && entry.votes === highestVotes).map(entry => entry.player))
 
     if (secondHighestVotes !== undefined) {
-      secondMostVoted.push(...voteEntries.filter(entry => entry.votes === secondHighestVotes).map(entry => entry.player))
+      secondMostVoted.push(...voteEntries.filter(entry => entry.votes >= 2 && entry.votes === secondHighestVotes).map(entry => entry.player))
     }
   }
 
@@ -72,4 +73,24 @@ export const buildVoteResult = (countedVotes, players) => {
   })
 
   return voteResult
+}
+
+export const getPlayerNeighbors = (voteResult, player_number, distance = 1) => {
+  const playerCount = voteResult.length
+  const targetIndex = voteResult.findIndex(player => player.player_number === player_number)
+  const neighbors = []
+
+  if (targetIndex === -1) {
+    return neighbors
+  }
+
+  for (let i = 1; i <= distance; i++) {
+    const leftNeighborIndex = (targetIndex - i + playerCount) % playerCount
+    const rightNeighborIndex = (targetIndex + i) % playerCount
+
+    neighbors.push(voteResult[leftNeighborIndex].player_number)
+    neighbors.push(voteResult[rightNeighborIndex].player_number)
+  }
+
+  return neighbors
 }

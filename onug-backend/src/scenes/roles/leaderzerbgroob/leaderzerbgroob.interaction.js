@@ -6,6 +6,8 @@ export const leaderZerbgroobInteraction = (gamestate, token, title) => {
   const zerb = getZerbPlayerNumberByRoleIds(newGamestate.players)
   const groob = getGroobPlayerNumberByRoleIds(newGamestate.players)
 
+  //TODO leader team
+
   if (groob.length >= 1 && zerb.length >= 1) {
     const zerbgroob = zerb.concat(groob)
 

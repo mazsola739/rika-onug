@@ -58,6 +58,12 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     const selectedPlayerPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
 
     const selectedCenterCard = { ...selectedCenterPositionCard }
+    const specialVillagerIds = [30, 1, 29, 28, 64]
+    if (specialVillagerIds.includes(selectedCenterCard.id)) {
+      selectedCenterCard.role = "VILLAGER"
+      selectedCenterCard.team = "village"
+    }
+
     const selectedPlayerCard = { ...selectedPlayerPositionCard }
     newGamestate.card_positions[newGamestate.players[token].player_history[title].selected_center_card].card = selectedPlayerCard
     newGamestate.card_positions[selected_card_positions[0]].card = selectedCenterCard

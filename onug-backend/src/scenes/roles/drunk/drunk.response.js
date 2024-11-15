@@ -16,6 +16,13 @@ export const drunkResponse = (gamestate, token, selected_card_positions, title) 
   const selectedCard = {
     ...newGamestate.card_positions[selected_card_positions[0]].card
   }
+
+  const specialVillagerIds = [30, 1, 29, 28, 64]
+  if (specialVillagerIds.includes(selectedCard.id)) {
+    selectedCard.role = "VILLAGER"
+    selectedCard.team = "village"
+  }
+
   newGamestate.card_positions[currentPlayerNumber].card = selectedCard
   newGamestate.card_positions[selected_card_positions[0]].card = currentPlayerCard
 

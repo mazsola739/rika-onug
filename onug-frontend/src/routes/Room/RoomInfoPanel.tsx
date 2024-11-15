@@ -6,6 +6,7 @@ export const RoomInfoPanel: React.FC = observer(() => {
     <InfoPanel>
       <Squad />
       <RuleInfo />
+      <span>SELECTED CARDS</span>
       <SelectedCardList />
     </InfoPanel>
   )
