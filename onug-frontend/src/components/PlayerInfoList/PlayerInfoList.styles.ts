@@ -2,12 +2,19 @@ import styled from '@emotion/styled'
 
 export const StyledPlayerInfoList = styled.div`
   display: flex;
-  flex-direction: column;
-  padding: 10px;
+  flex-direction: row;
+  padding: 10px 0;
   gap: 10px;
+  flex-wrap: wrap;
 
   overflow-x: hidden;
   overflow-y: auto;
+
+  & > * {
+  flex-basis: 185px; 
+  flex-grow: 0;
+  flex-shrink: 0;
+}
 
   ::-webkit-scrollbar {
     width: 8px; /* Width of vertical scrollbar */

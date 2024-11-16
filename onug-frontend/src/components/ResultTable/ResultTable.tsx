@@ -1,14 +1,12 @@
-import React from 'react'
-import { propStore, riseAndRestStore } from 'store'
-import { Result } from 'types'
-import { Cell, CellHeader, PlayerName, Rank, Row, StyledResultTable, TableTitle, VoterName, VotersCell } from './ResultTable.styles'
 import { observer } from 'mobx-react-lite'
+import React from 'react'
+import { playersStore, propStore } from 'store'
+import { Result } from 'types'
+import { Cell, CellHeader, Icon, Name, PlayerName, Rank, Row, StyledResultTable, TableTitle, VoterName, VotersCell } from './ResultTable.styles'
 
 export const ResultTable: React.FC = observer(() => {
+  const { player } = playersStore
   const sortedVotes = [...propStore.voteResult].sort((a, b) => b.voters.length - a.voters.length)
-
-  const isActualPlayerWin = sortedVotes.find(player => player.player_number === riseAndRestStore.tablePlayerCard.position)?.win
-
   const groupedVotes: { votes: number; players: Result[] }[] = []
 
   sortedVotes.forEach(player => {
@@ -20,14 +18,11 @@ export const ResultTable: React.FC = observer(() => {
     }
   })
 
-  const winners = (propStore.winnerTeams.length > 0 ? propStore.winnerTeams.join(', ') : 'None') + ' won!';
-  const losers = (propStore.loserTeams.length > 0 ? propStore.loserTeams.join(', ') : 'None') + ' lost!';
-  
+  const yourResult = propStore.voteResult.find(p => p.player_number === player.player_number)?.win
 
-  //`teamName team {'won'} - You {'won' ? 'won' : 'lost'} the game`
   return (
     <StyledResultTable>
-      <TableTitle>{`${winners} ${losers}`}</TableTitle>
+      <TableTitle yourResult={yourResult}>{`The night ${yourResult ? "couldn't stop you... Well done!" : 'has got you... Game over!'}`}</TableTitle>
       <Row isHeader>
         <CellHeader isFixedWidth isFixedHeight>
           #
@@ -46,12 +41,16 @@ export const ResultTable: React.FC = observer(() => {
 
           return group.players.map((playerVote, playerIndex) => (
             <Row key={`${groupIndex}-${playerIndex}`}>
-              <Cell isFixedWidth>{voteImage && <Rank src={voteImage} alt="vote token" />}</Cell>
+              <Cell isFixedWidth>
+                <Icon>
+                  {playerVote.win ? '🏆 ' : ''}
+                  {!playerVote.survived ? '💀 ' : ''}
+                </Icon>
+              </Cell>
               <Cell isMaxWidth>
                 <PlayerName>
-                  {!playerVote.survived ? '💀 ' : ''}
-                  {playerVote.win ? '🏆 ' : ''}
-                  {playerVote.player_number}
+                  {voteImage && <Rank src={voteImage} alt="vote token" />}
+                  <Name>{playerVote.name}</Name>
                 </PlayerName>
               </Cell>
               <Cell isFixedWidth>{playerVote.voters.length}</Cell>

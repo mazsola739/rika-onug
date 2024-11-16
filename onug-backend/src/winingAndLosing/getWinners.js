@@ -12,6 +12,8 @@ import {
   anyWerewolfDead,
   anyZerbDead,
   groobAlive,
+  hasActiveVampire,
+  hasActiveWerewolf,
   isAlienTeam,
   isApprenticeAssassin,
   isAssassin,
@@ -204,11 +206,18 @@ export const getWinners = (voteResult, gamestate, playerStates) => {
     }
 
     // MINION WIN CONDITION
-    if (isMinion(playerCard) && !anyWerewolfDead(activeCards, fallens) && !anyTannerDead(activeCards, fallens)) {
-      if (!winners.includes(playerCard.position)) {
-        winners.push(playerCard.position)
+    if (isMinion(playerCard)) {
+      if (hasActiveWerewolf(activeCards) && !anyWerewolfDead(activeCards, fallens) && !anyTannerDead(activeCards, fallens)) {
+        if (!winners.includes(playerCard.position)) {
+          winners.push(playerCard.position);
+        }
+        losers = losers.filter(p => p !== playerNumber);
+      } else {
+        if (!losers.includes(playerCard.position)) {
+          losers.push(playerCard.position);
+        }
+        winners = winners.filter(p => p !== playerCard.position);
       }
-      losers = losers.filter(p => p !== playerNumber)
     }
 
     // VAMPIRE TEAM WIN CONDITION
@@ -226,10 +235,12 @@ export const getWinners = (voteResult, gamestate, playerStates) => {
 
     // RENFIELD WIN CONDITION
     if (isRenfield(playerCard) && !anyVampireDead(activeCards, fallens) && !anyTannerDead(activeCards, fallens)) {
-      if (!winners.includes(playerCard.position)) {
-        winners.push(playerCard.position)
+      if (hasActiveVampire(activeCards)) {
+        if (!winners.includes(playerCard.position)) {
+          winners.push(playerCard.position)
+        }
+        losers = losers.filter(p => p !== playerNumber)
       }
-      losers = losers.filter(p => p !== playerNumber)
     }
 
     // ALIEN TEAM WIN CONDITION

@@ -28,20 +28,12 @@ export const getWinnersAndLosers = async gamestate => {
       player.win = true
     })
     return { voteResult, winnerTeams: [...teams], loserTeam: [] }
-  } else if (circleVote && !isSameTeam) {
-    voteResult.forEach(player => {
-      player.survived = true
-      player.win = false
-    })
-    return { voteResult, winnerTeams: [], loserTeam: [...teams] }
   }
 
   if (mostVoted.length === 0) {
     voteResult.forEach(player => {
       player.survived = true
-      player.win = false
     })
-    return { voteResult, winnerTeams: [], loserTeam: [] }
   }
 
   voteResult.forEach(p => {
@@ -59,14 +51,8 @@ export const getWinnersAndLosers = async gamestate => {
   if (!killedFromMostVotedGroup) {
     if (secondMostVoted.length === 0) {
       voteResult.forEach(player => {
-        if (playerStates.SURVIVOR_PLAYERS.includes(player.player_number)) {
-          player.survived = true
-        }
-        if (playerStates.KILLED_PLAYERS.includes(player.player_number)) {
-          player.survived = false
-        }
+        player.survived = true
       })
-      return { voteResult, winnerTeams: [], loserTeam: [] }
     }
 
     playerStates.KILLED_PLAYERS = []
@@ -94,7 +80,6 @@ export const getWinnersAndLosers = async gamestate => {
           player.survived = false
         }
       })
-      return { voteResult, winnerTeams: [], loserTeam: [] }
     }
   }
 

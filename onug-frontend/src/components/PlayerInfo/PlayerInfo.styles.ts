@@ -1,12 +1,16 @@
 import styled from '@emotion/styled'
 
-export const StyledPlayerInfo = styled.div`
+export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
   display: grid;
   justify-content: center;
   gap: 5px;
 
-  grid-template-columns: 100px 30px 1fr;
-  grid-template-rows: 30px 20px 20px 1fr;
+  background-color: ${({ result }) =>
+    result ? '#28a74580' : '#dc354580'};
+  border-radius: 10px;
+
+  grid-template-columns: 80px 25px 1fr;
+  grid-template-rows: 25px 20px 20px 1fr;
   grid-template-areas:
     'card number name'
     'card role role'
@@ -33,7 +37,7 @@ export const StyledPlayerInfo = styled.div`
 export const PlayerInfoName = styled.span`
   grid-area: name;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   display: inline-flex;
   gap: 5px;
   align-items: center;
@@ -42,7 +46,7 @@ export const PlayerInfoName = styled.span`
 export const PlayerInfoTeam = styled.span`
   grid-area: team;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   display: inline-flex;
   gap: 5px;
   align-items: center;
@@ -50,7 +54,7 @@ export const PlayerInfoTeam = styled.span`
 export const PlayerInfoRole = styled.span`
   grid-area: role;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   display: inline-flex;
   gap: 5px;
   align-items: center;

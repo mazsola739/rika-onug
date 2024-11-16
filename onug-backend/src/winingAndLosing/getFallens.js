@@ -14,12 +14,14 @@ export const getFallens = (voteResult, gamestate, playerStates) => {
     const playerCard = activeCards.find(card => card.position === player.player_number)
     return isHunter(playerCard) && fallens.includes(player.player_number)
   })
+
   hunters.forEach(hunter => {
     const hunterToken = getPlayerTokenByPlayerNumber(players, hunter.player_number)
     const hunterVote = players[hunterToken].vote
 
     hunterVote.forEach(votedPlayer => {
-      if (!fallens.includes(votedPlayer) && !survivors.includes(votedPlayer)) {
+      if (survivors.includes(votedPlayer) && !fallens.includes(votedPlayer)) {
+        survivors = survivors.filter(player => player !== votedPlayer)
         fallens.push(votedPlayer)
       }
     })

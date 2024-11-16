@@ -35,16 +35,12 @@ const diseased = card => card.role === 'DISEASED'
 const traitor = card => card.role === 'TRAITOR'
 
 const villageTeam = card => card.team === 'village'
-const werewolfTeam = card => card.team === 'werewolf' || werewolfRoles.includes(card.role)
-const vampireTeam = card => card.team === 'vampire' || vampireRoles.includes(card.role)
-const alienTeam = card => card.team === 'alien' || alienRoles.includes(card.role)
-
-const notWerewolf = card => ![7, 83].includes(card.id)
-const notVampire = card => card.id !== 38
-
-const werewolves = card => werewolfTeam(card) && notWerewolf(card)
-const vampires = card => vampireTeam(card) && notVampire(card)
-const aliens = card => alienTeam(card)
+const werewolfTeam = card => card.team === 'werewolf'
+const vampireTeam = card => card.team === 'vampire'
+const alienTeam = card => card.team === 'alien'
+const isWerewolfRole = card => werewolfRoles.includes(card.role)
+const isVampireRole = card => vampireRoles.includes(card.role)
+const isAlienRole = card => alienRoles.includes(card.role)
 
 export const isBodyguard = playerCard => playerCard && bodyguard(playerCard)
 export const isMaster = playerCard => playerCard && master(playerCard)
@@ -66,9 +62,9 @@ export const isDiseased = playerCard => playerCard && diseased(playerCard)
 export const isTraitor = playerCard => playerCard && traitor(playerCard)
 
 export const isVillageTeam = playerCard => playerCard && villageTeam(playerCard)
-export const isWerewolfTeam = playerCard => playerCard && werewolfTeam(playerCard)
-export const isVampireTeam = playerCard => playerCard && vampireTeam(playerCard)
-export const isAlienTeam = playerCard => playerCard && alienTeam(playerCard)
+export const isWerewolfTeam = playerCard => playerCard && isWerewolfRole(playerCard)
+export const isVampireTeam = playerCard => playerCard && isVampireRole(playerCard)
+export const isAlienTeam = playerCard => playerCard && isAlienRole(playerCard)
 
 const isAnySurvivor = (survivors, player_number) => survivors.some(survivor => survivor.position === player_number)
 const isSurvivor = (card, survivors) => survivors.includes(card.position)
@@ -89,9 +85,16 @@ export const anyAssassinDead = (activeCards, fallens) => activeCards.some(card =
 export const anyTannerDead = (activeCards, fallens) => activeCards.filter(card => tanner(card)).some(card => isFallen(card, fallens))
 export const anySyntheticDead = (activeCards, fallens) => activeCards.filter(card => synthetic(card)).some(card => isFallen(card, fallens))
 
-export const anyWerewolfDead = (activeCards, fallens) => activeCards.filter(card => werewolves(card)).some(card => isFallen(card, fallens))
-export const anyVampireDead = (activeCards, fallens) => activeCards.filter(card => vampires(card)).some(card => isFallen(card, fallens))
-export const anyAlienDead = (activeCards, fallens) => activeCards.filter(card => aliens(card)).some(card => isFallen(card, fallens))
+export const hasActiveWerewolf = activeCards => {
+  return activeCards.some(card => werewolfRoles.includes(card.role))
+}
+export const hasActiveVampire = activeCards => {
+  return activeCards.some(card => vampireRoles.includes(card.role))
+}
+
+export const anyWerewolfDead = (activeCards, fallens) => activeCards.filter(card => werewolfTeam(card)).some(card => isFallen(card, fallens))
+export const anyVampireDead = (activeCards, fallens) => activeCards.filter(card => vampireTeam(card)).some(card => isFallen(card, fallens))
+export const anyAlienDead = (activeCards, fallens) => activeCards.filter(card => alienTeam(card)).some(card => isFallen(card, fallens))
 
 export const villageWins = (activeCards, fallens) =>
   (anyWerewolfDead(activeCards, fallens) || anyVampireDead(activeCards, fallens) || anyAlienDead(activeCards, fallens)) &&
