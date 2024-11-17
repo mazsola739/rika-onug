@@ -6,7 +6,7 @@ import { Member, MemberName, SquadMembers, StyledSquad } from './Squad.styles'
 export const Squad: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
   const { roomPlayers: players } = roomStore
-  const title = `Locked in ${room_id.toLocaleUpperCase().replace('_', ' ')} together with`
+  const title = `LOCKED IN ${room_id.toLocaleUpperCase().replace('_', ' ')} TOGETHER WITH`
 
   return (
     <StyledSquad>

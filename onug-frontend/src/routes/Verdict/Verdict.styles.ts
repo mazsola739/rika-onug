@@ -2,9 +2,8 @@ import styled from '@emotion/styled'
 
 //VERDICT
 export const StyledVerdict = styled.div`
-  min-width: 100%;
   display: grid;
-  grid-template-rows: 80px calc(100vh - 160px) 80px;
+  grid-template-rows: 5rem calc(100vh - 13.75rem) 5rem;
   grid-template-columns: calc(100vw - 400px) 400px;
 
   header {

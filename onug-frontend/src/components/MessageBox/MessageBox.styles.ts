@@ -5,13 +5,13 @@ export const StyledMessageBox = styled.div`
   min-height: 400px;
   flex-direction: column;
   justify-content: space-between;
-  border-radius: 20px;
+  border-radius: 1.25rem;
 `
 
 export const Narration = styled.div`
-  padding: 5px;
+  padding: 0.3125rem;
   display: flex;
-  gap: 8px;
+  gap: 0.5rem;
   align-items: center;
 `
 
@@ -25,23 +25,23 @@ export const MessageText = styled.span`
 
 export const Message = styled.div`
   display: flex;
-  padding: 5px;
+  padding: 0.3125rem;
   min-height: 265px;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 1.25rem;
 `
 
 export const StyledMessageBoxCards = styled.div`
   display: flex;
-  gap: 3px;
+  gap: 0.1875rem;
   flex-direction: row;
   flex-wrap: wrap;
 `
 
 export const StyledAnswer = styled.div`
   display: flex;
-  gap: 3px;
+  gap: 0.1875rem;
   flex-direction: row;
   flex-wrap: wrap;
 `
@@ -53,14 +53,14 @@ export const MessageBoxCard = styled.div`
 `
 
 export const CardPosition = styled.span`
-  font-size: 10px;
+  font-size: 0.625rem;
   font-weight: lighter;
-  padding: 5px 0;
+  padding: 0.3125rem 0;
 `
 
 export const StyledSelectable = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 0.625rem;
 `

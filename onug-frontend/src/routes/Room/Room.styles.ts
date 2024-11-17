@@ -2,7 +2,6 @@ import styled from '@emotion/styled'
 
 //ROOM
 export const StyledRoom = styled.div`
-  min-width: 100%;
   display: grid;
   grid-template-columns: 160px calc(100vw - 720px) 160px 400px;
   grid-template-rows: 80px calc(100vh - 160px) 80px;
@@ -33,10 +32,10 @@ export const RoomCardList = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 10px;
+  gap: 0.625rem;
 
   & > section:last-child {
-    min-height: 90vh;
+    min-height: 80vh;
   }
 `
 

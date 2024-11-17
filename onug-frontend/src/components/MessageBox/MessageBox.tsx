@@ -9,9 +9,9 @@ import { AnswersProps, LookProps, MessageBoxCardsProps, SelectableProps } from '
 const Selectable: React.FC<SelectableProps> = observer(({ selectable, selected }) => {
   return (
     <StyledSelectable>
-      <Title title={'Selectable'} />
+      <Title title={'SELECTABLE'} />
       <MessageBoxCards cards={selectable} />
-      <Title title={'Selected'} />
+      <Title title={'SELECTED'} />
       <MessageBoxCards cards={selected} />
     </StyledSelectable>
   )

@@ -20,7 +20,7 @@ export const ResultTable: React.FC = observer(() => {
   })
 
   const yourResult = propStore.voteResult.find(p => p.player_number === player.player_number)?.win
-  const title = `The night ${yourResult ? "couldn't stop you... Well done!" : 'has got you... Game over!'}`
+  const title = `THE NIGHT ${yourResult ? "COULDN'T STOP YOU... WELL DONE!" : 'HAS GOT YOU... GAME OVER!'}`
 
   return (
     <StyledResultTable>

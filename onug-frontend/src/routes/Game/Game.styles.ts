@@ -58,7 +58,6 @@ export const StyledGame = styled.div<GameProps>`
     }
   }
 
-  min-width: 100%;
   display: grid;
   grid-template-columns: 170px calc(100vw - 740px) 170px 400px;
   grid-template-rows: 80px 130px calc(100vh - 290px) 80px;

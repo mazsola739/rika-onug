@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
 
 export const StyledResultTable = styled.div`
-  border-radius: 5px;
-  border: 3px solid white;
+  border-radius: 0.3125rem;
+  border: 0.1875rem solid white;
   width: calc(100% - 400px);
 `
 
@@ -14,8 +14,8 @@ export const Row = styled.div<{ isHeader?: boolean }>`
 
 export const Cell = styled.div<{ isFixedWidth?: boolean; isMaxWidth?: boolean; isFixedHeight?: boolean }>`
   flex: ${({ isFixedWidth, isMaxWidth }) => (isFixedWidth ? '0 0 50px' : isMaxWidth ? '0 0 200px' : '1')};
-  height: ${({ isFixedHeight }) => (isFixedHeight ? '30px' : '50px')};
-  border: 1px solid white;
+  height: ${({ isFixedHeight }) => (isFixedHeight ? '1.875rem' : '50px')};
+  border: 0.0625rem solid white;
   overflow: hidden;
   white-space: nowrap;
   display: flex;
@@ -33,7 +33,7 @@ export const CellHeader = styled(Cell)`
 export const VotersCell = styled(Cell)`
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 0.25rem;
 `
 
 export const PlayerName = styled.div`
@@ -43,12 +43,11 @@ export const PlayerName = styled.div`
   align-items: center;
   justify-items: start;
   justify-content: center;
-  padding-left: 10px;
+  padding-left: 0.625rem;
 `
 
 export const Icon = styled.span`
   grid-area: icon;
-  font-size: 16px;
 `
 export const Name = styled.span`
   grid-area: name;

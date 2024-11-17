@@ -12,52 +12,52 @@ export const StyledGod = styled.div`
   font-family: 'Roboto', sans-serif;
   height: 100%;
   width: 100%;
-  padding: 20px;
-  gap: 20px;
+  padding: 1.25rem;
+  gap: 1.25rem;
   background-color: ${backgroundColor};
 `
 
 export const LeftSide = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px;
+  gap: 1.25rem;
+  padding: 1.25rem;
   width: 40%;
   background-color: #282c34;
-  border-radius: 12px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 `
 
 export const RightSide = styled.div`
-  padding: 20px;
+  padding: 1.25rem;
   width: 60%;
   background-color: #282c34;
-  border-radius: 12px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0.75rem;
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 `
 
 export const GamestatesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
 `
 
 export const WSContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
 `
 
 export const MetaContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
 `
 
 export const ResponseContainer = styled.div`
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  padding: 20px;
+  border: 0.0625rem solid #ddd;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
   height: 95%;
   overflow-y: auto;
   background-color: #333;
@@ -65,14 +65,13 @@ export const ResponseContainer = styled.div`
 
 export const GodTitle = styled.h4`
   color: ${textColor};
-  font-size: 1.2rem;
-  font-weight: bold;
+  text-align: center;
 `
 
 export const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 20px;
+  gap: 0.625rem 1.25rem;
   width: 100%;
 `
 
@@ -88,9 +87,9 @@ export const Label = styled.label`
 `
 
 export const Input = styled.input`
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 0.5rem;
+  border: 0.0625rem solid #ddd;
+  border-radius: 0.3125rem;
   font-size: 1rem;
   background-color: #fff;
 `
@@ -98,16 +97,15 @@ export const Input = styled.input`
 export const ButtonsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
+  gap: 0.625rem;
 `
 
 export const Button = styled.button`
-  padding: 10px;
+  padding: 0.625rem;
   font-size: 0.7rem;
   color: ${textColor};
   background-color: ${primaryColor};
-  border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   cursor: pointer;
   transition: background 0.3s;
 

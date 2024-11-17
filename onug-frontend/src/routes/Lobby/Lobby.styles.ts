@@ -8,7 +8,7 @@ export const StyledLobby = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 150px);
   grid-template-rows: repeat(3, 150px);
-  gap: 5px;
+  gap: 0.3125rem;
   justify-items: center;
   align-items: center;
   justify-content: center;
@@ -18,15 +18,15 @@ export const StyledLobby = styled.div`
 export const StyledLobbyButton = styled.button<StyledLobbyProps>`
   background: ${({ img }) => `url(/assets/rooms/${img}.webp)`} center center/cover no-repeat;
   border-radius: 50%;
-  text-shadow: 2px 2px 2px black;
+  text-shadow: 0.125rem 0.125rem 0.125rem black;
   cursor: pointer;
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 14px;
+  font-size: 0.875rem;
   font-weight: 900;
-  height: 140px;
-  width: 140px;
+  height: 8.75rem;
+  width: 8.75rem;
   &:hover {
     transition: 0.75s;
-    filter: drop-shadow(8px 5px 5px black);
+    filter: drop-shadow(0.5rem 0.3125rem 0.3125rem black);
   }
 `

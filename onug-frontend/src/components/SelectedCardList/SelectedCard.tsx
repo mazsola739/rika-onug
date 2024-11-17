@@ -7,5 +7,5 @@ export const SelectedCard: React.FC<SelectedCardProps> = observer(({ card }, ind
   const { id } = card
   const { handleSelectAndDeselect } = useClickHandler()
 
-  return <CardImage image={card.card_name} key={index} onClick={() => handleSelectAndDeselect(id)} size={70} />
+  return <CardImage image={card.card_name} key={index} onClick={() => handleSelectAndDeselect(id)} size={65} />
 })

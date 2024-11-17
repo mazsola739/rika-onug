@@ -7,8 +7,8 @@ export const TableInfoPanel: React.FC = observer(() => {
 
   return (
     <InfoPanel>
-      <ReadyStatus title={"Ready? No Turning Back!"} />
-      {knownPlayerCard && <OwnCard player={player} card={knownPlayerCard} mark={knownPlayerMark} title={'The card you begin the night with'} />}
+      <ReadyStatus title={"READY? NO TURNING BACK!"} />
+      {knownPlayerCard && <OwnCard player={player} card={knownPlayerCard} mark={knownPlayerMark} title={'THE CARD YOU BEGIN THE NIGHT WITH'} />}
       <QuickGuide />
     </InfoPanel>
   )

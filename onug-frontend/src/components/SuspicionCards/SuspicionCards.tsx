@@ -13,7 +13,7 @@ export const SuspicionCards: React.FC = observer(() => {
   //TODO ℹ️ 🛈 ⓘ ❓tooltipp: you cant vote yourself
   return (
     <StyledSuspicionCards>
-      <Title title={'Your Prime Suspect!'} />
+      <Title title={'YOUR PRIME SUSPECT!'} />
       <AccusedCards />
       <ButtonGroup>
         <Button onClick={() => handleAccuse(selectedCards)} variant="green" buttonText={BUTTONS.done_label} disabled={disabled} />

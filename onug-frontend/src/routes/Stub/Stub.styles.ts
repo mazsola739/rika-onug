@@ -8,8 +8,8 @@ const inputBorderColor = '#ddd'
 
 export const StubContainer = styled.div`
   display: flex;
-  padding: 20px;
-  gap: 20px;
+  padding: 1.25rem;
+  gap: 1.25rem;
   height: 100%;
   width: 100%;
   font-family: 'Roboto', sans-serif;
@@ -18,48 +18,44 @@ export const StubContainer = styled.div`
 
 export const Container = styled.div`
   flex: 1;
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
   background-color: #282c34;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 1.25rem;
 `
 
 export const StubTitle = styled.h3`
   color: ${textColor};
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   font-size: 1.4rem;
 `
 
 export const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px 20px;
-  min-width: 100%;
+  gap: 0.625rem 1.25rem;
 `
 
 export const InputsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-
-  min-width: 100%;
-  gap: 5px;
+  gap: 0.3125rem;
 `
 
 export const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 0.3125rem;
 `
 
 export const Grid = styled.div`
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 0.3125rem;
   justify-content: flex-start;
-  min-width: 100%;
 `
 
 export const Label = styled.label`
@@ -70,21 +66,20 @@ export const Label = styled.label`
 
 export const InputField = styled.input`
   width: 50px;
-  padding: 5px;
-  border: 1px solid ${inputBorderColor};
-  border-radius: 5px;
+  padding: 0.3125rem;
+  border: 0.0625rem solid ${inputBorderColor};
+  border-radius: 0.3125rem;
   background-color: #fff;
   font-size: 1rem;
 `
 
 export const Button = styled.button`
-  padding: 8px;
+  padding: 0.5rem;
   font-size: 0.75rem;
   font-weight: bold;
   color: ${textColor};
   background-color: ${primaryColor};
-  border: none;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   cursor: pointer;
   transition: background 0.3s;
 
@@ -101,12 +96,12 @@ export const Button = styled.button`
 export const RoleDisplay = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3px;
-  font-size: 14px;
+  gap: 0.1875rem;
+  font-size: 0.875rem;
   color: ${textColor};
-  padding: 10px;
-  border: 1px solid ${inputBorderColor};
-  border-radius: 3px;
+  padding: 0.625rem;
+  border: 0.0625rem solid ${inputBorderColor};
+  border-radius: 0.1875rem;
   overflow-y: auto;
   max-height: 300px;
   background-color: #282c34;
@@ -117,6 +112,6 @@ export const PreDisplay = styled.div`
   max-height: 200px;
   overflow-y: auto;
   color: ${textColor};
-  border: 1px solid ${inputBorderColor};
+  border: 0.0625rem solid ${inputBorderColor};
   background-color: #282c34;
 `

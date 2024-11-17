@@ -5,8 +5,8 @@ export const StyledHeader = styled.header`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  border-bottom: 2px solid #969290;
-  border-radius: 0 0 10px 10px;
-  padding: 5px;
-  margin: 5px;
+  border-bottom: 0.125rem solid #969290;
+  border-radius: 0 0 0.625rem 0.625rem;
+  padding: 0.3125rem;
+  margin: 0.3125rem;
 `

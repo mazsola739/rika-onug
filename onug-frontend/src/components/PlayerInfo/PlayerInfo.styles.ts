@@ -3,10 +3,10 @@ import styled from '@emotion/styled'
 export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
   display: grid;
   justify-content: center;
-  gap: 5px;
+  gap: 0.3125rem;
 
   background-color: ${({ result }) => (result ? '#28a74580' : '#dc354580')};
-  border-radius: 10px;
+  border-radius: 0.625rem;
 
   grid-template-columns: 80px 25px 1fr;
   grid-template-rows: 25px 20px 20px 1fr;
@@ -35,23 +35,23 @@ export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
 
 export const PlayerInfoName = styled.span`
   grid-area: name;
-  font-size: 12px;
+  font-size: 0.75rem;
   display: inline-flex;
-  gap: 5px;
+  gap: 0.3125rem;
   align-items: center;
 `
 
 export const PlayerInfoTeam = styled.span`
   grid-area: team;
-  font-size: 12px;
+  font-size: 0.75rem;
   display: inline-flex;
-  gap: 5px;
+  gap: 0.3125rem;
   align-items: center;
 `
 export const PlayerInfoRole = styled.span`
   grid-area: role;
-  font-size: 12px;
+  font-size: 0.75rem;
   display: inline-flex;
-  gap: 5px;
+  gap: 0.3125rem;
   align-items: center;
 `

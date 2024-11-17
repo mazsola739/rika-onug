@@ -3,10 +3,10 @@ import styled from '@emotion/styled'
 export const StyledOwnCard = styled.div`
   display: grid;
   justify-content: center;
-  border-bottom: 2px solid #969290;
+  border-bottom: 0.125rem solid #969290;
   grid-template-columns: 100px 20px 1fr;
-  grid-template-rows: 40px 20px 20px 20px 1fr 50px;
-  gap: 10px;
+  grid-template-rows: 40px 20px 20px 20px 1fr 70px;
+  gap: 0.625rem;
 
   grid-template-areas:
     'title title title'
@@ -30,40 +30,40 @@ export const StyledOwnCard = styled.div`
     justify-self: end;
   }
 
-  & > h3:nth-of-type(1) {
+  & > h4:nth-of-type(1) {
     grid-area: title;
   }
 `
 
 export const OwnCardInfoName = styled.span`
   grid-area: name;
-  font-size: 14px;
+  font-size: 0.875rem;
   display: inline-flex;
-  gap: 5px;
+  gap: 0.3125rem;
   align-items: center;
 `
 
 export const OwnCardInfoTeam = styled.span`
   grid-area: team;
-  font-size: 14px;
+  font-size: 0.875rem;
   display: inline-flex;
-  gap: 5px;
+  gap: 0.3125rem;
   align-items: center;
 `
 export const OwnCardInfoRole = styled.span`
   grid-area: role;
-  font-size: 14px;
+  font-size: 0.875rem;
   display: inline-flex;
-  gap: 5px;
+  gap: 0.3125rem;
   align-items: center;
 `
 
 export const CardRule = styled.span`
   grid-area: cardrule;
-  font-size: 14px;
+  font-size: 0.875rem;
 `
 
 export const TokenRule = styled.span`
   grid-area: tokenrule;
-  font-size: 14px;
+  font-size: 0.875rem;
 `

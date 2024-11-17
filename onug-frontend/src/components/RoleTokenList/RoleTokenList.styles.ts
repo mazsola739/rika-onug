@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 export const StyledRoleTokenList = styled.div`
   width: 100%;
   display: flex;
-  gap: 5px;
+  gap: 0.3125rem;
   justify-content: center;
-  padding: 10px;
+  padding: 0.625rem;
 `
