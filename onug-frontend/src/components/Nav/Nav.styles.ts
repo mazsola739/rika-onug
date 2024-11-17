@@ -55,7 +55,6 @@ export const StyledNav = styled.nav`
 `
 
 export const TeamsTitle = styled.h3`
-  grid-area: title;
   color: yellow;
   padding: 10px 0;
   margin: 0;

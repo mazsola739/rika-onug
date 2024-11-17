@@ -10,7 +10,6 @@ export const StyledFilter = styled.fieldset`
 `
 
 export const ExpansionTitle = styled.h3`
-  grid-area: title;
   color: yellow;
   padding: 10px 0;
   margin: 0;

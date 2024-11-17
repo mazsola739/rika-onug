@@ -32,7 +32,6 @@ export const Avatar = styled.img`
 `
 
 export const Character = styled.h4`
-  grid-area: title;
   color: yellow;
   padding: 0;
   margin: 0;

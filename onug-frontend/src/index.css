@@ -1,4 +1,10 @@
 body {
   margin: 0;
   font-family: 'Josefin Sans', sans-serif;
+  color: white;
+}
+
+* {
+  margin: 0;
+  padding: 0;
 }

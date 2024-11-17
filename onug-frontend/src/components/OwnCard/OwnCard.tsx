@@ -1,6 +1,6 @@
 import { CardImage, Token } from 'components'
 import { observer } from 'mobx-react-lite'
-import { CardRule, KnownCard, OwnCardInfoName, OwnCardInfoRole, OwnCardInfoTeam, StyledOwnCard, TokenRule } from './OwnCard.styles'
+import { CardRule, OwnCardInfoName, OwnCardInfoRole, OwnCardInfoTeam, StyledOwnCard, TokenRule } from './OwnCard.styles'
 import { OwnCardProps } from './OwnCard.types'
 
 export const OwnCard: React.FC<OwnCardProps> = observer(({ card, mark, player, artifact }) => {
@@ -10,7 +10,6 @@ export const OwnCard: React.FC<OwnCardProps> = observer(({ card, mark, player, a
   return (
     player && (
       <StyledOwnCard>
-        <KnownCard>The Card You Think is Yours...</KnownCard>
         <Token tokenName={playerNumber} size={25} />
         <OwnCardInfoName>{player.player_name}</OwnCardInfoName>
         <CardImage image={card.card_name} size={100} />

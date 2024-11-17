@@ -7,7 +7,6 @@ export const StyledReadyStatus = styled.div`
 `
 
 export const ReadyTitle = styled.h3`
-  grid-area: title;
   color: yellow;
   padding: 0;
   margin: 0;

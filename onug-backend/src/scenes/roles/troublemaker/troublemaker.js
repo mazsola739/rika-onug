@@ -3,7 +3,6 @@ import { getAllPlayerTokens } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { troublemakerInteraction } from './troublemaker.interaction'
 
-//todo why see?
 export const troublemaker = (gamestate, title) => {
   const newGamestate = { ...gamestate }
   const tokens = getAllPlayerTokens(newGamestate.players)
