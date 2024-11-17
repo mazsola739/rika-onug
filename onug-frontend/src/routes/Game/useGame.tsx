@@ -58,7 +58,8 @@ export const useGame = () => {
       navigate(lastJsonMessage.path)
     }
 
-    if (lastJsonMessage?.type === PAUSE_GAME) { //TODO do i need?
+    if (lastJsonMessage?.type === PAUSE_GAME) {
+      //TODO do i need?
       gameStatusStore.togglePause()
     }
   }, [lastJsonMessage, navigate])

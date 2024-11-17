@@ -10,10 +10,9 @@ export const QuickGuideToken: React.FC<QuickGuideTokenProps> = observer(({ image
   const folder = segments.some(segment => image.includes(segment)) ? 'tokens' : 'cards'
 
   const bgImg = useMemo(() => {
-    const randomNumber = Math.floor(Math.random() * 2) + 1
     const isSuperhero = expansion === 'Super Villains' && SUPERHERO_IMAGES.includes(image)
     const actualExpansion = isSuperhero ? 'Super Heroes' : expansion
-    const imageName = actualExpansion ? `${actualExpansion.toLowerCase().replace(/ /g, '')}_${randomNumber}` : image
+    const imageName = actualExpansion ? `${actualExpansion.toLowerCase().replace(/ /g, '')}` : image
 
     return `/assets/backgrounds/token_${imageName}.webp`
   }, [image, expansion])

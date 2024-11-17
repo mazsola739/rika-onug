@@ -16,7 +16,7 @@ export const SquadMembers = styled.div`
   grid-template-rows: repeat(6, auto);
   gap: 0.3125rem;
   align-items: center;
-    min-width: 100%;
+  min-width: 100%;
 `
 
 export const Member = styled.div`

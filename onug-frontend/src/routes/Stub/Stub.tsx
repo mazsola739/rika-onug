@@ -16,7 +16,20 @@ export const Stub: React.FC = observer(() => {
             {labels.map((label, index) => (
               <Grid key={index}>
                 <Label htmlFor={label}>{label}</Label>
-                <InputField type="text" inputMode="numeric" id={label} name={label} value={inputValues[index]} onChange={e => handleInputChange(index, parseInt(e.target.value) || 0)} />
+                <InputField
+                  type="number"
+                  min="0"
+                  step="1"
+                  inputMode="numeric"
+                  id={label}
+                  name={label}
+                  value={inputValues[index]}
+                  onChange={e => {
+                    const value = e.target.value === '' ? 0 : parseInt(e.target.value, 10)
+                    handleInputChange(index, value)
+                  }}
+                />
+
                 <small style={{ marginLeft: '0.5rem', color: '#888' }}>{getRoleName(inputValues[index])}</small>
               </Grid>
             ))}

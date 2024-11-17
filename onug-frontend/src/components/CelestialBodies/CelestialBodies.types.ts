@@ -1,4 +1,4 @@
-export interface CelestialBodiesProps  {
+export interface CelestialBodiesProps {
   dusk?: string
   dawn: string
 }

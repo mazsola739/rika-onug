@@ -12,16 +12,16 @@ export const StyledGod = styled.div`
   font-family: 'Roboto', sans-serif;
   height: 100%;
   width: 100%;
-  padding: 1.25rem;
-  gap: 1.25rem;
+  padding: 0.625rem;
+  gap: 0.625rem;
   background-color: ${backgroundColor};
 `
 
 export const LeftSide = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
-  padding: 1.25rem;
+  gap: 0.625rem;
+  padding: 0.625rem;
   width: 40%;
   background-color: #282c34;
   border-radius: 0.75rem;
@@ -29,7 +29,7 @@ export const LeftSide = styled.div`
 `
 
 export const RightSide = styled.div`
-  padding: 1.25rem;
+  padding: 0.625rem;
   width: 60%;
   background-color: #282c34;
   border-radius: 0.75rem;
@@ -39,25 +39,25 @@ export const RightSide = styled.div`
 export const GamestatesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.625rem;
 `
 
 export const WSContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.625rem;
 `
 
 export const MetaContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.625rem;
 `
 
 export const ResponseContainer = styled.div`
   border: 0.0625rem solid #ddd;
   border-radius: 0.75rem;
-  padding: 1.25rem;
+  padding: 0.625rem;
   height: 95%;
   overflow-y: auto;
   background-color: #333;
@@ -71,7 +71,7 @@ export const GodTitle = styled.h4`
 export const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.625rem 1.25rem;
+  gap: 0.625rem 0.625rem;
   width: 100%;
 `
 

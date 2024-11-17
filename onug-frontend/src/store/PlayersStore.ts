@@ -32,7 +32,7 @@ class PlayersStore {
 
   get isPlayerReady(): boolean {
     const currentPlayer = this.players.find(actualPlayer => actualPlayer.player_number === this.player.player_number)
-    
+
     return currentPlayer ? currentPlayer.flag : false
   }
 }

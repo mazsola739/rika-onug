@@ -25,7 +25,6 @@ export const useVerdict = () => {
   useEffect(() => {
     if (lastJsonMessage?.type === RESULT && lastJsonMessage.success) {
       voteStore.revealResult(lastJsonMessage)
-
     }
 
     if (lastJsonMessage?.type === REDIRECT) {

@@ -18,15 +18,15 @@ export const CouncilFooter: React.FC = observer(() => {
   return (
     <Footer>
       {propStore.selectable_cards.length > 0 ? (
-        <ButtonGroup>
-          {!end && <Button onClick={() => handleAccuse(selectedCards)} variant="green" buttonText={BUTTONS.done_label} disabled={disabled} />}
-        </ButtonGroup>
+        <ButtonGroup>{!end && <Button onClick={() => handleAccuse(selectedCards)} variant="green" buttonText={BUTTONS.done_label} disabled={disabled} />}</ButtonGroup>
       ) : (
-        !end && <ButtonGroup>
-          <Button onClick={handleLeaveGame} buttonText={BUTTONS.back_label} variant="red" />
-          <Button onClick={handleVoteNow} buttonText={BUTTONS.votenow_button_label} disabled={disabledVote} variant="orange" />
-          <Button onClick={handleReady} variant={isReady ? 'blue' : 'green'} buttonText={isReady ? BUTTONS.im_ready_label : BUTTONS.ready_label} />
-        </ButtonGroup>
+        !end && (
+          <ButtonGroup>
+            <Button onClick={handleLeaveGame} buttonText={BUTTONS.back_label} variant="red" />
+            <Button onClick={handleVoteNow} buttonText={BUTTONS.votenow_button_label} disabled={disabledVote} variant="orange" />
+            <Button onClick={handleReady} variant={isReady ? 'blue' : 'green'} buttonText={isReady ? BUTTONS.im_ready_label : BUTTONS.ready_label} />
+          </ButtonGroup>
+        )
       )}
     </Footer>
   )

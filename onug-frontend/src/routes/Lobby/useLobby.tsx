@@ -14,7 +14,7 @@ export const useLobby = () => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
       sendJsonMessage?.({
-        type: HYDRATE_LOBBY,
+        type: HYDRATE_LOBBY
       })
     }
   }, [sendJsonMessage, firstTime])

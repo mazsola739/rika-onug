@@ -8,8 +8,8 @@ const inputBorderColor = '#ddd'
 
 export const StubContainer = styled.div`
   display: flex;
-  padding: 1.25rem;
-  gap: 1.25rem;
+  padding: 0.625rem;
+  gap: 0.625rem;
   height: 100%;
   width: 100%;
   font-family: 'Roboto', sans-serif;
@@ -19,24 +19,24 @@ export const StubContainer = styled.div`
 export const Container = styled.div`
   flex: 1;
   border-radius: 0.75rem;
-  padding: 1.25rem;
+  padding: 0.625rem;
   background-color: #282c34;
   box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 0.625rem;
 `
 
 export const StubTitle = styled.h3`
   color: ${textColor};
-  margin-bottom: 1.25rem;
+  margin-bottom: 0.625rem;
   font-size: 1.4rem;
 `
 
 export const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.625rem 1.25rem;
+  gap: 0.625rem 0.625rem;
 `
 
 export const InputsWrapper = styled.div`
@@ -66,10 +66,11 @@ export const Label = styled.label`
 
 export const InputField = styled.input`
   width: 50px;
-  padding: 0.3125rem;
+  padding: 0.375rem;
   border: 0.0625rem solid ${inputBorderColor};
   border-radius: 0.3125rem;
   background-color: #fff;
+  color: black;
   font-size: 1rem;
 `
 
