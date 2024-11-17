@@ -5,7 +5,3 @@ export interface CardImageProps extends ImgHTMLAttributes<HTMLImageElement> {
   size: number
   onClick?: () => void
 }
-
-export interface StyledCardImageProps {
-  size: number
-}

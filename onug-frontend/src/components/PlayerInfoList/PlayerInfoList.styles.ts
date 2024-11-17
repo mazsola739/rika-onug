@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 export const StyledPlayerInfoList = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px 0;
   gap: 10px;
   flex-wrap: wrap;
 

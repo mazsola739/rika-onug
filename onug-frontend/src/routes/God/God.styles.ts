@@ -10,8 +10,8 @@ export const StyledGod = styled.div`
   display: flex;
   flex-direction: row;
   font-family: 'Roboto', sans-serif;
-  height: 90%;
-  width: 95%;
+  height: 100%;
+  width: 100%;
   padding: 20px;
   gap: 20px;
   background-color: ${backgroundColor};
@@ -58,14 +58,13 @@ export const ResponseContainer = styled.div`
   border: 1px solid #ddd;
   border-radius: 12px;
   padding: 20px;
-  height: 85%;
+  height: 95%;
   overflow-y: auto;
   background-color: #333;
 `
 
 export const GodTitle = styled.h4`
   color: ${textColor};
-  margin: 0;
   font-size: 1.2rem;
   font-weight: bold;
 `
@@ -103,9 +102,8 @@ export const ButtonsContainer = styled.div`
 `
 
 export const Button = styled.button`
-  padding: 8px;
-  font-size: 0.6rem;
-  font-weight: bold;
+  padding: 10px;
+  font-size: 0.7rem;
   color: ${textColor};
   background-color: ${primaryColor};
   border: none;
@@ -127,6 +125,5 @@ export const ResponsePre = styled.pre`
   color: ${textColor};
   font-family: 'Roboto', sans-serif;
   font-size: 0.9rem;
-  margin: 0;
   white-space: pre-wrap;
 `

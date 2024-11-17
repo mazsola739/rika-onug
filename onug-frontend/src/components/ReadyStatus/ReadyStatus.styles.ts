@@ -3,15 +3,6 @@ import styled from '@emotion/styled'
 export const StyledReadyStatus = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 10px 0;
-`
-
-export const ReadyTitle = styled.h3`
-  color: yellow;
-  padding: 0;
-  margin: 0;
-  padding: 10px 0;
-  text-align: center;
 `
 
 export const ReadyPlayerList = styled.div`
@@ -27,7 +18,6 @@ export const ReadyPlayerList = styled.div`
 export const StyledReadyPlayer = styled.div`
   align-items: center;
   display: flex;
-  color: white;
   flex-direction: row;
   gap: 5px;
 `

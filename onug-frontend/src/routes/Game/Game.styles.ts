@@ -102,6 +102,5 @@ export const GameCenter = styled.div`
 
 //INFOPANEL
 export const Placeholder = styled.div`
-  color: white;
   min-height: 420px;
 `

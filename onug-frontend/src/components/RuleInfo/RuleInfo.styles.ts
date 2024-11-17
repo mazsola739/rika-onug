@@ -5,12 +5,12 @@ export const StyledRuleInfo = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: start;
+  padding: 10px 0;
   gap: 5px;
   min-height: 90px;
   border-bottom: 2px solid #969290;
-  padding: 5px 0;
-  grid-template-columns: 80px 300px;
-  grid-template-rows: 20px 60px;
+  grid-template-columns: 80px 1fr;
+  grid-template-rows: 20px 1fr;
   grid-template-areas:
     'avatar character'
     'avatar rule';
@@ -18,7 +18,7 @@ export const StyledRuleInfo = styled.div`
   img {
     grid-area: avatar;
   }
-  h4 {
+  h3 {
     grid-area: character;
   }
   p {
@@ -30,18 +30,12 @@ export const Avatar = styled.img`
   width: 80px;
   border: 1px solid yellow;
 `
-
-export const Character = styled.h4`
+export const Character = styled.h3`
   color: yellow;
-  padding: 0;
-  margin: 0;
   text-align: left;
 `
 
 export const Rule = styled.span`
-  color: white;
   font-size: 14px;
-  margin: 0;
-  padding: 0;
   text-align: left;
 `

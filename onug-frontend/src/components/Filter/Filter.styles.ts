@@ -3,17 +3,9 @@ import { FilterButtonProps } from './Filter.types'
 
 export const StyledFilter = styled.fieldset`
   width: 150px;
-  margin: 0;
   border: none;
   padding: 0;
   margin: 10px;
-`
-
-export const ExpansionTitle = styled.h3`
-  color: yellow;
-  padding: 10px 0;
-  margin: 0;
-  text-align: center;
 `
 
 export const StyledFilterButton = styled.button<FilterButtonProps>`
@@ -30,7 +22,6 @@ export const StyledFilterButton = styled.button<FilterButtonProps>`
   cursor: pointer;
   font-size: 20px;
   justify-content: center;
-  margin: 0;
   padding: 0;
   opacity: ${({ isSelected }) => (isSelected ? '1' : '0.5')};
   display: flex;

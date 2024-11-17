@@ -9,7 +9,5 @@ export interface TokenProps {
 }
 
 export interface StyledTokenProps {
-  size: number
-  ready?: boolean
   isSelectable?: boolean
 }

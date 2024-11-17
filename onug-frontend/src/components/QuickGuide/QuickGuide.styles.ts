@@ -16,6 +16,7 @@ const colorVariants: Record<ExpansionTypes, string> = {
 export const Guide = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -37,15 +38,6 @@ export const Guide = styled.div`
 
   align-items: flex-start;
   gap: 5px;
-  color: white;
-`
-
-export const StyledQuickGuide = styled.h3`
-  color: yellow;
-  padding: 10px 0;
-  margin: 0;
-  text-align: center;
-  width: 378px;
 `
 
 export const Item = styled.div<StyledQuickGuideTokenProps>`
@@ -54,7 +46,7 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
 
   &:nth-of-type(odd) {
     flex-direction: row;
-    width: 378px;
+    width: 100%;
     border-radius: 200px 50px 50px 200px;
     text-align: left;
     & > img {
@@ -64,7 +56,7 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
 
   &:nth-of-type(even) {
     flex-direction: row-reverse;
-    width: 378px;
+    width: 100%;
     border-radius: 50px 200px 200px 50px;
     text-align: right;
     & > img {
@@ -86,6 +78,5 @@ export const StyledQuickGuideToken = styled.img<StyledQuickGuideTokenProps>`
 `
 
 export const QuickGuideRule = styled.span`
-  color: white;
   font-size: 14px;
 `

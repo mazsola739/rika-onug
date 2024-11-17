@@ -1,6 +1,5 @@
 import styled from '@emotion/styled'
-import { StyledCardImageProps } from './CardImage.types'
 
-export const StyledCardImage = styled.img<StyledCardImageProps>`
+export const StyledCardImage = styled.img<{ size: number }>`
   width: ${({ size }) => size}px;
 `

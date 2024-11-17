@@ -9,8 +9,8 @@ export const CouncilInfoPanel = observer(() => {
 
   return (
     <InfoPanel>
-      {knownPlayerCard && <OwnCard player={player} card={knownPlayerCard} mark={knownPlayerMark} artifact={knownPlayerArtifact} />}
-      {!end && selectable_cards.length === 0 ? <ReadyStatus title={"Are you ready to vote... or are you hiding something? Let's find out!"} /> : !end && <SuspicionCards />}
+      {knownPlayerCard && <OwnCard player={player} card={knownPlayerCard} mark={knownPlayerMark} artifact={knownPlayerArtifact} title={'The card you believe to be yours...'} />}
+      {!end && selectable_cards.length === 0 ? <ReadyStatus title={"Ready to Vote and Unmask?"} /> : !end && <SuspicionCards />}
       <NightHistory />
     </InfoPanel>
   )

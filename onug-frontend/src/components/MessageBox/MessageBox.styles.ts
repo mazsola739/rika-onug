@@ -6,7 +6,6 @@ export const StyledMessageBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 20px;
-  padding: 10px;
 `
 
 export const Narration = styled.div`
@@ -19,17 +18,13 @@ export const Narration = styled.div`
 export const NarrationText = styled.span`
   color: yellow;
   padding: 0;
-  margin: 0;
 `
 export const MessageText = styled.span`
-  color: white;
   padding: 0;
-  margin: 0;
 `
 
 export const Message = styled.div`
   display: flex;
-  color: white;
   padding: 5px;
   min-height: 265px;
   flex-direction: column;
@@ -61,7 +56,6 @@ export const CardPosition = styled.span`
   font-size: 10px;
   font-weight: lighter;
   padding: 5px 0;
-  margin: 0;
 `
 
 export const StyledSelectable = styled.div`
@@ -69,9 +63,4 @@ export const StyledSelectable = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
-`
-
-export const MessageBoxTitle = styled.h4`
-  padding: 0;
-  margin: 0;
 `

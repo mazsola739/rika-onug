@@ -54,13 +54,6 @@ export const StyledNav = styled.nav`
   flex-direction: column;
 `
 
-export const TeamsTitle = styled.h3`
-  color: yellow;
-  padding: 10px 0;
-  margin: 0;
-  text-align: center;
-`
-
 export const NavButtons = styled.div`
   display: flex;
   flex-direction: column;
@@ -79,11 +72,7 @@ export const ListItem = styled.li<NavListItemProps>`
     margin: 0 0 10px 0;
     height: 48.4px;
     color: white;
-    text-shadow:
-      -1px -1px 0 black,
-      1px -1px 0 black,
-      -1px 1px 0 black,
-      1px 1px 0 black;
+    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
     width: 138.4px;
     cursor: pointer;
     font-size: 20px;

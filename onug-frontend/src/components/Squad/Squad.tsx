@@ -1,15 +1,16 @@
-import { Token } from 'components'
+import { Title, Token } from 'components'
 import { observer } from 'mobx-react-lite'
 import { roomStore } from 'store'
-import { Member, MemberName, SquadMembers, SquadTitle, StyledSquad } from './Squad.styles'
+import { Member, MemberName, SquadMembers, StyledSquad } from './Squad.styles'
 
 export const Squad: React.FC = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
   const { roomPlayers: players } = roomStore
+  const title = `Locked in ${room_id.toLocaleUpperCase().replace('_', ' ')} together with`
 
   return (
     <StyledSquad>
-      <SquadTitle>Locked in {room_id.toLocaleUpperCase().replace('_', ' ')} together with</SquadTitle>
+      <Title title={title} />
       <SquadMembers>
         {players &&
           players.map(({ player_name }, index) => (

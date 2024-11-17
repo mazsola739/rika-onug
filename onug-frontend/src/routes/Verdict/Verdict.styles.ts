@@ -36,6 +36,3 @@ export const VerdictCenter = styled.div`
 //FOOTER
 
 //VERDICT INFO
-export const FinalMessage = styled.h3`
-color: yellow;
-`

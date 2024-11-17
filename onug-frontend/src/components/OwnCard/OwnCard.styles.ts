@@ -5,11 +5,11 @@ export const StyledOwnCard = styled.div`
   justify-content: center;
   border-bottom: 2px solid #969290;
   grid-template-columns: 100px 20px 1fr;
-  grid-template-rows: 20px 20px 20px 20px 60px;
+  grid-template-rows: 40px 20px 20px 20px 1fr 50px;
   gap: 10px;
-  padding: 10px;
 
   grid-template-areas:
+    'title title title'
     'card number name'
     'card role role'
     'card team team'
@@ -29,11 +29,14 @@ export const StyledOwnCard = styled.div`
     grid-area: token;
     justify-self: end;
   }
+
+  & > h3:nth-of-type(1) {
+    grid-area: title;
+  }
 `
 
 export const OwnCardInfoName = styled.span`
   grid-area: name;
-  color: white;
   font-size: 14px;
   display: inline-flex;
   gap: 5px;
@@ -42,7 +45,6 @@ export const OwnCardInfoName = styled.span`
 
 export const OwnCardInfoTeam = styled.span`
   grid-area: team;
-  color: white;
   font-size: 14px;
   display: inline-flex;
   gap: 5px;
@@ -50,7 +52,6 @@ export const OwnCardInfoTeam = styled.span`
 `
 export const OwnCardInfoRole = styled.span`
   grid-area: role;
-  color: white;
   font-size: 14px;
   display: inline-flex;
   gap: 5px;
@@ -59,12 +60,10 @@ export const OwnCardInfoRole = styled.span`
 
 export const CardRule = styled.span`
   grid-area: cardrule;
-  color: white;
   font-size: 14px;
 `
 
 export const TokenRule = styled.span`
   grid-area: tokenrule;
-  color: white;
   font-size: 14px;
 `

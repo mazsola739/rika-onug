@@ -18,7 +18,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
   background-color: ${({ variant }) => colorVariants[variant as ColorVariant] || colorVariants.default};
   border: none;
   border-radius: 5px;
-  color: white;
   cursor: pointer;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 500;

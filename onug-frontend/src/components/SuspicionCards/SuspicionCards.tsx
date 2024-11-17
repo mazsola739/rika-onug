@@ -1,10 +1,10 @@
-import { Button, ButtonGroup } from 'components'
+import { Button, ButtonGroup, Title } from 'components'
 import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
-import { messageStore, selectionStore, voteStore } from 'store'
+import { messageStore, selectionStore } from 'store'
 import { AccusedCards } from './AccusedCards'
-import { StyledSuspicionCards, SuspicionTitle } from './SuspicionCards.styles'
+import { StyledSuspicionCards } from './SuspicionCards.styles'
 
 export const SuspicionCards: React.FC = observer(() => {
   const { handleAccuse } = useClickHandler()
@@ -13,7 +13,7 @@ export const SuspicionCards: React.FC = observer(() => {
   //TODO ℹ️ 🛈 ⓘ ❓tooltipp: you cant vote yourself
   return (
     <StyledSuspicionCards>
-      <SuspicionTitle>{'Your Prime Suspect!'}</SuspicionTitle>
+      <Title title={'Your Prime Suspect!'} />
       <AccusedCards />
       <ButtonGroup>
         <Button onClick={() => handleAccuse(selectedCards)} variant="green" buttonText={BUTTONS.done_label} disabled={disabled} />

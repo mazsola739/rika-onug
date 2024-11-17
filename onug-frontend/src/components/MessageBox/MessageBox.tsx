@@ -1,29 +1,17 @@
-import { Button, ButtonGroup, Card, RoleImage } from 'components'
+import { Button, ButtonGroup, Card, RoleImage, Title } from 'components'
 import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
-import { propStore, messageStore, selectionStore } from 'store'
-import {
-  CardPosition,
-  NarrationText,
-  Message,
-  MessageBoxCard,
-  MessageBoxTitle,
-  MessageText,
-  Narration,
-  StyledMessageBox,
-  StyledMessageBoxCards,
-  StyledSelectable,
-  StyledAnswer
-} from './MessageBox.styles'
-import { LookProps, AnswersProps, MessageBoxCardsProps, SelectableProps } from './MessageBox.types'
+import { messageStore, propStore, selectionStore } from 'store'
+import { CardPosition, Message, MessageBoxCard, MessageText, Narration, NarrationText, StyledAnswer, StyledMessageBox, StyledMessageBoxCards, StyledSelectable } from './MessageBox.styles'
+import { AnswersProps, LookProps, MessageBoxCardsProps, SelectableProps } from './MessageBox.types'
 
 const Selectable: React.FC<SelectableProps> = observer(({ selectable, selected }) => {
   return (
     <StyledSelectable>
-      <MessageBoxTitle>Selectable</MessageBoxTitle>
+      <Title title={'Selectable'} />
       <MessageBoxCards cards={selectable} />
-      <MessageBoxTitle>Selected</MessageBoxTitle>
+      <Title title={'Selected'} />
       <MessageBoxCards cards={selected} />
     </StyledSelectable>
   )
@@ -32,7 +20,7 @@ const Selectable: React.FC<SelectableProps> = observer(({ selectable, selected }
 const Look: React.FC<LookProps> = observer(({ roles, cards }) => {
   return (
     <StyledSelectable>
-      <MessageBoxTitle>{roles.join(', ')}</MessageBoxTitle>
+      <Title title={roles.join(', ')} />
       <MessageBoxCards cards={cards} />
     </StyledSelectable>
   )

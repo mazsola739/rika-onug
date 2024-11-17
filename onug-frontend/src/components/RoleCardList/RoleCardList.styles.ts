@@ -9,13 +9,11 @@ export const StyledRoleCardList = styled.section`
 
 export const RoleCardListTitle = styled.span`
   filter: drop-shadow(3px 3px 3px black);
-  color: white;
   font-size: 24px;
   font-weight: bold;
   letter-spacing: 1px;
   text-align: center;
   text-transform: uppercase;
-  margin: 0;
 `
 
 export const RoleCardListGrid = styled.div`

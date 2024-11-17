@@ -36,6 +36,5 @@ export const NarrationImage = styled.img`
 `
 
 export const NarrationText = styled.span`
-  color: white;
   font-size: 14px;
 `

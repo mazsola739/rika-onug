@@ -5,8 +5,7 @@ export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
   justify-content: center;
   gap: 5px;
 
-  background-color: ${({ result }) =>
-    result ? '#28a74580' : '#dc354580'};
+  background-color: ${({ result }) => (result ? '#28a74580' : '#dc354580')};
   border-radius: 10px;
 
   grid-template-columns: 80px 25px 1fr;
@@ -36,7 +35,6 @@ export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
 
 export const PlayerInfoName = styled.span`
   grid-area: name;
-  color: white;
   font-size: 12px;
   display: inline-flex;
   gap: 5px;
@@ -45,7 +43,6 @@ export const PlayerInfoName = styled.span`
 
 export const PlayerInfoTeam = styled.span`
   grid-area: team;
-  color: white;
   font-size: 12px;
   display: inline-flex;
   gap: 5px;
@@ -53,7 +50,6 @@ export const PlayerInfoTeam = styled.span`
 `
 export const PlayerInfoRole = styled.span`
   grid-area: role;
-  color: white;
   font-size: 12px;
   display: inline-flex;
   gap: 5px;

@@ -10,8 +10,8 @@ export const StubContainer = styled.div`
   display: flex;
   padding: 20px;
   gap: 20px;
-  height: 90%;
-  width: 95%;
+  height: 100%;
+  width: 100%;
   font-family: 'Roboto', sans-serif;
   background-color: ${backgroundColor};
 `
@@ -22,6 +22,9 @@ export const Container = styled.div`
   padding: 20px;
   background-color: #282c34;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 `
 
 export const StubTitle = styled.h3`
@@ -40,7 +43,9 @@ export const FormContainer = styled.div`
 export const InputsWrapper = styled.div`
   display: flex;
   flex-direction: column;
+
   min-width: 100%;
+  gap: 5px;
 `
 
 export const ButtonsWrapper = styled.div`

@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 export const StyledCenterCardsRevealed = styled.div`
   display: flex;
   flex-direction: row;
-  padding: 10px 0;
   border-bottom: 2px solid #969290;
   gap: 10px;
 `

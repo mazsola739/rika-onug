@@ -4,7 +4,6 @@ import { StyledCardProps } from './Card.types'
 import { glowingGreen, glowingVibrantPink, glowingRed, glowingBlue } from 'styles'
 
 export const StyledCard = styled.div<StyledCardProps>`
-  width: ${({ sizeW }) => sizeW}px;
   border-radius: 10px;
   display: flex;
   filter: drop-shadow(3px 3px 3px black);

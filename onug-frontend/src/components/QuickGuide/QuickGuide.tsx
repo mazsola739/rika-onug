@@ -1,9 +1,10 @@
 import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
 import { CardJson, TokenJson } from 'types'
-import { Guide, Item, QuickGuideRule, StyledQuickGuide } from './QuickGuide.styles'
+import { Guide, Item, QuickGuideRule } from './QuickGuide.styles'
 import { getUniqueGuide, isCardType } from './QuickGuide.utils'
 import { QuickGuideToken } from './QuickGuideToken'
+import { Title } from 'components'
 
 //TODO better quick guide text!!!!
 export const QuickGuide: React.FC = observer(() => {
@@ -32,7 +33,7 @@ export const QuickGuide: React.FC = observer(() => {
 
   return (
     <Guide>
-      <StyledQuickGuide>QUICK GUIDE</StyledQuickGuide>
+      <Title title={'QUICK GUIDE'} />
       {uniqueSelectedCards.map(card => renderGuide(card))}
       {uniqueSelectedMarks.map(mark => renderGuide(mark))}
       {artifacts.map(artifact => renderGuide(artifact))}

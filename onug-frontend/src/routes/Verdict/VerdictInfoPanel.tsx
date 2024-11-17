@@ -1,4 +1,4 @@
-import { CenterCardsRevealed, InfoPanel, OwnCard, PlayerInfoList } from 'components'
+import { CenterCardsRevealed, InfoPanel, OwnCard, PlayerInfoList, Title } from 'components'
 import { observer } from 'mobx-react-lite'
 import { playersStore } from 'store'
 
@@ -7,10 +7,10 @@ export const VerdictInfoPanel: React.FC = observer(() => {
 
   return (
     <InfoPanel>
-      {knownPlayerCard && <OwnCard player={player} card={knownPlayerCard} mark={knownPlayerMark} artifact={knownPlayerArtifact} />}
-      <span>Center cards</span>
+      {knownPlayerCard && <OwnCard player={player} card={knownPlayerCard} mark={knownPlayerMark} artifact={knownPlayerArtifact} title={'The card last known to be yours'}/>}
+      <Title title={'Center cards'} />
       <CenterCardsRevealed />
-      <span>Players</span>
+      <Title title={'Players'} />
       <PlayerInfoList />
     </InfoPanel>
   )

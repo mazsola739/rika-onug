@@ -1,8 +1,9 @@
+import { Title } from 'components/Title/Title'
 import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { playersStore, propStore } from 'store'
 import { Result } from 'types'
-import { Cell, CellHeader, Icon, Name, PlayerName, Rank, Row, StyledResultTable, TableTitle, VoterName, VotersCell } from './ResultTable.styles'
+import { Cell, CellHeader, Icon, Name, PlayerName, Rank, Row, StyledResultTable, VoterName, VotersCell } from './ResultTable.styles'
 
 export const ResultTable: React.FC = observer(() => {
   const { player } = playersStore
@@ -19,10 +20,11 @@ export const ResultTable: React.FC = observer(() => {
   })
 
   const yourResult = propStore.voteResult.find(p => p.player_number === player.player_number)?.win
+  const title = `The night ${yourResult ? "couldn't stop you... Well done!" : 'has got you... Game over!'}`
 
   return (
     <StyledResultTable>
-      <TableTitle yourResult={yourResult}>{`The night ${yourResult ? "couldn't stop you... Well done!" : 'has got you... Game over!'}`}</TableTitle>
+      <Title yourResult={yourResult} title={title} />
       <Row isHeader>
         <CellHeader isFixedWidth isFixedHeight>
           #

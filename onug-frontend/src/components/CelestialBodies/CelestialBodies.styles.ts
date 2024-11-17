@@ -3,7 +3,6 @@ import styled from '@emotion/styled'
 export const StyledCelestialBodies = styled.div`
   display: flex;
   flex-direction: row;
-  color: white;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -23,7 +22,6 @@ export const Sun = styled.img`
 `
 
 export const MorningSky = styled.span`
-  color: white;
   position: absolute;
   opacity: 1;
   bottom: 45%;
@@ -42,7 +40,6 @@ export const Moon = styled.img`
 `
 
 export const EveningSky = styled.span`
-  color: white;
   position: absolute;
   opacity: 0;
   bottom: 45%;

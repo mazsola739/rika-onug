@@ -5,17 +5,9 @@ export const StyledSquad = styled.div`
   flex-direction: column;
   align-items: center;
   min-height: 180px;
-  color: white;
   font-size: 14px;
   border-bottom: 2px solid #969290;
   padding-bottom: 5px;
-`
-
-export const SquadTitle = styled.h3`
-  color: yellow;
-  padding: 10px 0;
-  margin: 0;
-  text-align: center;
 `
 
 export const SquadMembers = styled.div`
