@@ -1,4 +1,4 @@
-import { generateRoleInteraction, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../sceneUtils'
 
 export const squireInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
@@ -14,8 +14,10 @@ export const squireInteraction = (gamestate, token, title) => {
     werewolves
   }
 
+  const messageIdentifiers = formatPlayerIdentifier(werewolves)
+
   return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_werewolves', 'interaction_may_look'],
+    private_message: werewolves.length > 0 ? [...'interaction_werewolves', 'interaction_may_look', ...messageIdentifiers] : ['interaction_no_werewolves'],
     uniqueInformations: { werewolves, answer_options: ['yes', 'no'] }
   })
 }

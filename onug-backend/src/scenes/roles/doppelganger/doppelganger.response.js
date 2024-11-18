@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
@@ -8,6 +8,7 @@ export const doppelgangerResponse = (gamestate, token, selected_card_positions, 
   }
 
   const newGamestate = { ...gamestate }
+  const playerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
 
   newGamestate.players[token].card.player_role_id = newGamestate.card_positions[selected_card_positions[0]].card.id
 
@@ -18,6 +19,9 @@ export const doppelgangerResponse = (gamestate, token, selected_card_positions, 
     newGamestate.players[token].card.player_role = newGamestate.card_positions[selected_card_positions[0]].card.role
     newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[0]].card.team
   }
+
+  newGamestate.card_positions[playerNumber].card.role = newGamestate.card_positions[selected_card_positions[0]].card.role
+  newGamestate.card_positions[playerNumber].card.team = newGamestate.card_positions[selected_card_positions[0]].card.team
 
   const showCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
 

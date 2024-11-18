@@ -59,6 +59,7 @@ export type GuessedCard = {
 export type TablePlayerCard = {
   aliens?: boolean
   artifact?: boolean
+  apprenticeassassins?: boolean
   assassins?: boolean
   card_name?: string
   dreamwolf?: boolean
@@ -102,6 +103,7 @@ export type Interaction = {
   aliens?: CardPosition[]
   answer_options?: string[]
   artifacted_cards?: CardPosition[]
+  apprenticeassassins?: CardPosition[]
   assassins?: CardPosition[]
   dreamwolf?: CardPosition[]
   groobzerb?: CardPosition[]

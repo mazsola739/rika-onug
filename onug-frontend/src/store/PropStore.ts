@@ -75,6 +75,9 @@ class PropStore {
   get assassins() {
     return this.interaction.assassins
   }
+  get apprenticeassassins() {
+    return this.interaction.apprenticeassassins
+  }
   get madscientist() {
     return this.interaction.madscientist
   }
@@ -129,6 +132,7 @@ class PropStore {
     this.title = ''
     this.interaction = {
       aliens: [],
+      apprenticeassassins: [],
       assassins: [],
       answer_options: [],
       artifacted_cards: [],

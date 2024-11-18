@@ -34,6 +34,7 @@ class RiseAndRestStore {
       villains: false,
       tanner: false,
       assassins: false,
+      apprenticeassassins: false,
       madscientist: false
     }
   }
@@ -68,6 +69,7 @@ class RiseAndRestStore {
       groobzerb: propStore.groobzerb.includes(position),
       villains: propStore.villains.includes(position),
       tanner: propStore.tanner.includes(position),
+      apprenticeassassins: propStore.apprenticeassassins.includes(position),
       assassins: propStore.assassins.includes(position),
       madscientist: propStore.madscientist.includes(position),
       seers: propStore.seers.includes(position),

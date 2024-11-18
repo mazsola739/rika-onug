@@ -25,7 +25,9 @@ export const aliensInteraction = (gamestate, token, title) => {
 
   let selectableCards = {}
   let showCards = []
-  let privateMessage = ['interaction_aliens']
+
+  const messageIdentifiers = formatPlayerIdentifier(aliens)
+  let privateMessage = aliens.length === 1 ? ['interaction_no_aliens'] : ['interaction_aliens', ...messageIdentifiers]
 
   if (alienKey.length > 1) {
     const selectablePlayerNumbers = alienKey.filter(key => key.includes('identifier_player')).map(key => key.replace('identifier_', ''))

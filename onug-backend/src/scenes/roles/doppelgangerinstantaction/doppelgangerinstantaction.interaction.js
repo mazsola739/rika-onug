@@ -17,11 +17,23 @@ import {
   witchInteraction
 } from '..'
 import { DOPPELGANGER_INSTANT_ACTION } from '../../../constants'
+import { generateRoleInteraction } from '../../sceneUtils'
 
 export const doppelgangerinstantactionInteraction = (gamestate, token, title) => {
   const new_role_id = gamestate.players[token]?.new_role_id
 
-  if (!DOPPELGANGER_INSTANT_ACTION.includes(new_role_id)) return {}
+  if (!DOPPELGANGER_INSTANT_ACTION.includes(new_role_id)) {
+    const newGamestate = { ...gamestate }
+    newGamestate.players[token].player_history[title] = {
+      ...newGamestate.players[token].player_history[title],
+      scene_end: true
+    }
+
+    return generateRoleInteraction(newGamestate, token, {
+      private_message: ['no_night_action'],
+      scene_end: true
+    })
+  }
 
   let interaction = {}
 

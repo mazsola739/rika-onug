@@ -1,4 +1,4 @@
-import { generateRoleInteraction, getPlayerNumberWithMatchingToken, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getPlayerNumberWithMatchingToken, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
 import { getVampirePlayerNumbersByMark } from './renfield.utils'
 
 //TODO if no vampire he is villager
@@ -27,8 +27,11 @@ export const renfieldInteraction = (gamestate, token, title) => {
     scene_end: true
   }
 
+  const messageIdentifiers = formatPlayerIdentifier(vampires)
+  const privateMessage = vampires.length > 0 ? ['interaction_vampires', ...messageIdentifiers] : ['interaction_no_vampires']
+''
   return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_vampires', 'interaction_mark_of_bat'],
+    private_message: [...privateMessage, 'interaction_mark_of_bat'],
     uniqueInformations: { vampires, new_vampire: newVampire },
     scene_end: true
   })

@@ -5,6 +5,7 @@ export const StyledCenterCardsRevealed = styled.div`
   flex-direction: row;
   border-bottom: 0.125rem solid #969290;
   gap: 0.625rem;
+  padding: 0 0 1rem 0;
 `
 
 export const CenterCard = styled.div`

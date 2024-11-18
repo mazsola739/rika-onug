@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { generateRoleInteraction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
 import { getDreamWolfPlayerNumberByRoleIds, getWerewolfPlayerNumbersByRoleIds } from './werewolves.utils'
 
 export const werewolvesInteraction = (gamestate, token, title) => {
@@ -25,8 +25,23 @@ Does not wake up with the Werewolves/Vampires */
     obligatory
   }
 
+  const messageIdentifiersWerewolves = formatPlayerIdentifier(werewolves)
+  const messageIdentifiersDreamWolves = formatPlayerIdentifier(dreamwolf)
+
+  let privateMessage = []
+
+  if (loneWolf) {
+    privateMessage = ['interaction_may_one_center']
+  } else if (werewolves.length > 0 && dreamwolf.length === 0) {
+    privateMessage = ['interaction_werewolves', ...messageIdentifiersWerewolves]
+  } else if (werewolves.length === 1 && dreamwolf.length > 0) {
+    privateMessage = ['interaction_no_werewolves', 'interaction_dreamwolf', ...messageIdentifiersDreamWolves]
+  } else if (werewolves.length > 0 && dreamwolf.length > 0) {
+    privateMessage = ['interaction_werewolves', ...messageIdentifiersWerewolves, 'interaction_dreamwolf', ...messageIdentifiersDreamWolves]
+  }
+
   return generateRoleInteraction(newGamestate, token, {
-    private_message: [loneWolf ? 'interaction_may_one_center' : 'interaction_werewolves'],
+    private_message: privateMessage,
     selectableCards: { selectable_cards, selectable_card_limit },
     obligatory,
     scene_end,

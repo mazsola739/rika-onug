@@ -7,7 +7,7 @@ export const StyledRuleInfo = styled.div`
   justify-content: start;
   padding: 0.625rem 0;
 
-  min-height: 95px;
+  min-height: 110px;
   border-bottom: 0.125rem solid #969290;
   grid-template-columns: 90px calc(100% - 90px);
   grid-template-rows: 30px 1fr;

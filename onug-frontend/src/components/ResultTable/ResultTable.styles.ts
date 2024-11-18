@@ -4,6 +4,7 @@ export const StyledResultTable = styled.div`
   border-radius: 0.3125rem;
   border: 0.1875rem solid white;
   width: calc(100% - 400px);
+  margin: 1rem;
 `
 
 export const Row = styled.div<{ isHeader?: boolean }>`

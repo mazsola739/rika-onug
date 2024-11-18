@@ -40,7 +40,7 @@ export const actionHandler = (gamestate, scene_title) => {
     }
     case 'ASSASSIN': {
       /* MUST */
-      return roles.assassin(newGamestate, scene_title, 'assassin')
+      return roles.assassin(newGamestate, scene_title, conditions.hasApprenticeAssassin(selected_cards), 'assassin')
     }
     case 'AURA_SEER': {
       /* MUST */

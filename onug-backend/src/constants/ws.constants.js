@@ -35,7 +35,6 @@ export const START_VOTE = 'START_VOTE'
 export const RESULT = 'RESULT'
 export const VOTE_ACCEPTED = 'VOTE_ACCEPTED'
 
-
 export const START_GAME = 'START_GAME'
 export const END_GAME = 'END_GAME'
 export const UPDATE_GAME = 'UPDATE_GAME'

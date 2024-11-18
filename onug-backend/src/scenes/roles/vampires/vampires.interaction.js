@@ -1,4 +1,4 @@
-import { generateRoleInteraction, getNonVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getNonVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
 
 export const vampiresInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
@@ -16,8 +16,11 @@ Does not wake up with the Werewolves/Vampires */
     vampires
   }
 
+  const messageIdentifiers = formatPlayerIdentifier(vampires)
+  const privateMessage = vampires.length === 1 ? ['interaction_no_vampires'] : ['interaction_vampires', ...messageIdentifiers]
+
   return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_vampires', 'interaction_must_one_any_non_vampire'],
+    private_message: [...privateMessage, 'interaction_must_one_any_non_vampire'],
     selectableMarks: {
       selectable_marks: nonVampires,
       selectable_mark_limit: { mark: 1 }

@@ -5,7 +5,7 @@ export const StyledOwnCard = styled.div`
   justify-content: center;
   border-bottom: 0.125rem solid #969290;
   grid-template-columns: 100px 20px 1fr;
-  grid-template-rows: 40px 20px 20px 20px 1fr 70px;
+  grid-template-rows: 48px 20px 20px 20px 1fr 70px;
   gap: 0.625rem;
 
   grid-template-areas:

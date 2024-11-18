@@ -13,7 +13,7 @@ export const leaderInteraction = (gamestate, token, title) => {
   const messageIdentifiers = formatPlayerIdentifier(aliens)
 
   return generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_aliens', ...messageIdentifiers],
+    private_message: aliens.length > 0 ? ['interaction_aliens', ...messageIdentifiers] : ['interaction_no_aliens'],
     uniqueInformations: { aliens }
   })
 }
