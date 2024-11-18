@@ -307,7 +307,7 @@
     "view_player_card": false,
     "view_center_card": false,
     "mark_shifting": false,
-    "view_mark": false,
+    "view_mark": true,
     "shield": false,
     "artifact": false
   },

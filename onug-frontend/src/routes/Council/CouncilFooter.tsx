@@ -8,7 +8,7 @@ export const CouncilFooter: React.FC = observer(() => {
   const { handleReady, handleLeaveGame, handleVoteNow, handleAccuse } = useClickHandler()
   const { selectedCards } = selectionStore
   const { players } = playersStore
-  const { disabled } = messageStore
+  const { disabledCards: disabled } = messageStore
   const { end } = propStore
 
   //TODO FIX ready

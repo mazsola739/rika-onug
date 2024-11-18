@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { deckStore, propStore, messageStore, selectionStore } from 'store'
 import { CardPosition, Interaction, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
-import { getCardById } from 'utils'
+import { getCardById, getMarkById, getMarkByName } from 'utils'
 
 class RiseAndRestStore {
   tablePlayerCard: TablePlayerCard = {}
@@ -35,7 +35,8 @@ class RiseAndRestStore {
       tanner: false,
       assassins: false,
       apprenticeassassins: false,
-      madscientist: false
+      madscientist: false,
+      lovers: false,
     }
   }
 
@@ -86,6 +87,13 @@ class RiseAndRestStore {
     }
     return showCards as Record<CardPosition, number>
   }
+  getShowMarksMap(): Record<CardPosition, string> {
+    const showMarks = propStore.show_marks
+    if (Array.isArray(showMarks)) {
+      return showMarks.reduce((acc, mark) => ({ ...acc, ...mark }), {} as Record<CardPosition, string>)
+    }
+    return showMarks as Record<CardPosition, string>
+  }
 
   setTablePlayerCard(lastJsonMessage: WsJsonMessage): void {
     const player = lastJsonMessage.player
@@ -108,6 +116,7 @@ class RiseAndRestStore {
   setTablePlayerCards(lastJsonMessage: WsJsonMessage): void {
     const players = lastJsonMessage.players || []
     const showCards = this.getShowCardsMap()
+    const showMarks = this.getShowMarksMap()
 
     this.tablePlayerCards = Array.from({ length: deckStore.totalPlayers }, (_, i) => {
       const position = `player_${i + 1}` as CardPosition
@@ -119,11 +128,14 @@ class RiseAndRestStore {
       const cardId = showCards[position] || playerCard.player_card_id
       const card = getCardById(cardId)
 
+      const markName = showMarks[position] || playerCard.player_mark
+      const mark = getMarkByName(markName)
+
       return {
         ...defaultCard,
         player_name: playerCard.player_name,
         card_name: card ? card.card_name : '',
-        mark: playerCard.player_mark || '',
+        mark: mark ? markName : '',
         role: playerCard.player_role || '',
         team: playerCard.player_team || '',
         selected: false,

@@ -9,7 +9,7 @@ import { StyledSuspicionCards } from './SuspicionCards.styles'
 export const SuspicionCards: React.FC = observer(() => {
   const { handleAccuse } = useClickHandler()
   const { selectedCards } = selectionStore
-  const { disabled } = messageStore
+  const { disabledCards: disabled } = messageStore
   //TODO ℹ️ 🛈 ⓘ ❓tooltipp: you cant vote yourself
   return (
     <StyledSuspicionCards>

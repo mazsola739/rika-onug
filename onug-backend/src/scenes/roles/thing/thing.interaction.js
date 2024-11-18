@@ -3,7 +3,7 @@ import { generateRoleInteraction, getPlayerNeighborsByToken } from '../../sceneU
 export const thingInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
-  const neighbors = getPlayerNeighborsByToken(newGamestate.players, token)
+  const neighbors = getPlayerNeighborsByToken(newGamestate.players, token, 'both', 1)
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],

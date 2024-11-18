@@ -42,7 +42,7 @@ export const rascalInteraction = (gamestate, token, title) => {
       case 'identifier_bothneighbors_text': {
         const directionTwo = rascalKey.includes('left') ? 'left' : rascalKey.includes('right') ? 'right' : 'both'
         const amountTwo = rascalKey.includes('2') ? 2 : 1
-        return getPlayerNeighborsByToken(newGamestate.players, directionTwo, amountTwo)
+        return getPlayerNeighborsByToken(newGamestate.players, token, directionTwo, amountTwo)
       }
     }
   }
@@ -68,7 +68,7 @@ export const rascalInteraction = (gamestate, token, title) => {
       case 'identifier_leftneighbor_text':
       case 'identifier_rightneighbor_text': {
         const directionOne = rascalKey.includes('left') ? 'left' : rascalKey.includes('right') ? 'right' : 'both'
-        return getPlayerNeighborsByToken(newGamestate.players, directionOne, 1)
+        return getPlayerNeighborsByToken(newGamestate.players, token, directionOne, 1)
       }
     }
   }
@@ -116,7 +116,7 @@ export const rascalInteraction = (gamestate, token, title) => {
     selectable_cards: selectableCards,
     selectable_card_limit: selectableLimit,
     random,
-    obligatory,
+    obligatory
   }
 
   return generateRoleInteraction(newGamestate, token, {

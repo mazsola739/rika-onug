@@ -33,7 +33,7 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
       case 'identifier_rightneighbor_text':
       case 'identifier_oneneighbor_text': {
         const direction = bodysnatcherKey.includes('left') ? 'left' : bodysnatcherKey.includes('right') ? 'right' : 'both'
-        selectablePlayers = getPlayerNeighborsByToken(newGamestate.players, direction, 1)
+        selectablePlayers = getPlayerNeighborsByToken(newGamestate.players, token, direction, 1)
         break
       }
       case 'identifier_any_text':

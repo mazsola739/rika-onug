@@ -27,6 +27,7 @@ export const usePlayerCard = (card: TablePlayerCard) => {
   const isWerewolf = card?.werewolves
   const isDreamwolf = card?.dreamwolf
   const isMason = card?.masons
+  const isLovers = card?.lovers
 
   const isSelectableCard = card?.selectable_card
   const isSelectableMark = card?.selectable_mark
@@ -51,6 +52,7 @@ export const usePlayerCard = (card: TablePlayerCard) => {
     tokenName: markName,
     isSelectable: isSelectableMark,
     isSelected: isMarkSelected,
+    lovers: isLovers,
     onClick: onMarkClick
   }
 

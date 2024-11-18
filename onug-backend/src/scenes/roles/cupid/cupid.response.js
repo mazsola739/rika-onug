@@ -33,7 +33,7 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
 
-  if (currentPlayerNumber[0] === selected_mark_positions[0] || currentPlayerNumber[0] === selected_mark_positions[1]) {
+  if (currentPlayerNumber === selected_mark_positions[0] || currentPlayerNumber === selected_mark_positions[1]) {
     newGamestate.players[token].card.player_mark = 'mark_of_love'
   }
 

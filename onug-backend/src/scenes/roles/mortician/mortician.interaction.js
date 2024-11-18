@@ -35,7 +35,7 @@ export const morticianInteraction = (gamestate, token, title, randomMorticianIns
     }
   } else if (morticianKey.includes('neighbor')) {
     const direction = morticianKey.includes('left') ? 'left' : morticianKey.includes('right') ? 'right' : 'both'
-    const selectablePlayers = getPlayerNeighborsByToken(newGamestate.players, direction, 1)
+    const selectablePlayers = getPlayerNeighborsByToken(newGamestate.players, token, direction, 1)
     const selectablePlayerNumbers = getSelectablePlayersWithNoShield(selectablePlayers)
     const limit = randomMorticianInstruction.includes('1') ? 1 : 2
 
@@ -43,7 +43,7 @@ export const morticianInteraction = (gamestate, token, title, randomMorticianIns
       ...newGamestate.players[token].player_history[title],
       selectable_cards: selectablePlayerNumbers,
       selectable_card_limit: { player: limit, center: 0 },
-      scene_end: selectablePlayerNumbers.length === 0,
+      scene_end: selectablePlayerNumbers.length === 0
     }
 
     return generateRoleInteraction(newGamestate, token, {
@@ -52,7 +52,7 @@ export const morticianInteraction = (gamestate, token, title, randomMorticianIns
         selectable_cards: selectablePlayerNumbers,
         selectable_card_limit: { player: limit, center: 0 }
       },
-      scene_end: selectablePlayerNumbers.length === 0,
+      scene_end: selectablePlayerNumbers.length === 0
     })
   }
 }

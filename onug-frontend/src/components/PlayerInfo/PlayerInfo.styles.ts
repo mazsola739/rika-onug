@@ -9,7 +9,7 @@ export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
   border-radius: 0.625rem;
 
   grid-template-columns: 80px 25px 1fr;
-  grid-template-rows: 25px 20px 20px 1fr;
+  grid-template-rows: 25px 15px 15px 1fr;
   grid-template-areas:
     'card number name'
     'card role role'

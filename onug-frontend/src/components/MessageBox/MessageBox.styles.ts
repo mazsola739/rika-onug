@@ -46,13 +46,13 @@ export const StyledAnswer = styled.div`
   flex-wrap: wrap;
 `
 
-export const MessageBoxCard = styled.div`
+export const MessageBoxItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 `
 
-export const CardPosition = styled.span`
+export const ItemPosition = styled.span`
   font-size: 0.625rem;
   font-weight: lighter;
   padding: 0.3125rem 0;

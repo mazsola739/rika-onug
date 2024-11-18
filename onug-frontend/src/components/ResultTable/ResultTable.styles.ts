@@ -5,6 +5,11 @@ export const StyledResultTable = styled.div`
   border: 0.1875rem solid white;
   width: calc(100% - 400px);
   margin: 1rem;
+
+  & > h4:nth-of-type(1) {
+    padding: 15px 0;
+    align-content: center;
+  }
 `
 
 export const Row = styled.div<{ isHeader?: boolean }>`

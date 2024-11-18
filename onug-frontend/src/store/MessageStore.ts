@@ -6,7 +6,7 @@ import { propStore, riseAndRestStore, selectionStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
 import { formatPositionSimply } from 'utils'
 
-type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons'
+type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'vampires'
 
 class MessageStore {
   narration: string = ''
@@ -36,7 +36,7 @@ class MessageStore {
     return scene ? scene.scene_img : ''
   }
 
-  get disabled() {
+  get disabledCards() {
     const { selectedCards } = selectionStore
     const selectedPlayerCards = selectedCards.filter(card => card.includes('player_')).length
     const selectedCenterCards = selectedCards.filter(card => card.includes('center_')).length
@@ -52,12 +52,23 @@ class MessageStore {
 
     return true
   }
+  get disabledMarks() {
+    const { selectedMarks } = selectionStore
 
+    const markLimit = this.markLimit
+
+    if (selectedMarks.length > 0 && selectedMarks.length === markLimit) return false
+
+    return true
+  }
   get playerCardLimit() {
     return propStore.selectable_card_limit.player
   }
   get centerCardLimit() {
     return propStore.selectable_card_limit.center
+  }
+  get markLimit() {
+    return propStore.selectable_mark_limit.mark
   }
   get isCardSelection() {
     return propStore.selectable_cards.length > 0
@@ -65,12 +76,15 @@ class MessageStore {
   get isSelectableCards() {
     return this.allSelectableCards.length > 0
   }
+  get isSelectableMarks() {
+    return this.allSelectableMarks.length > 0
+  }
   get isAnswerOptions() {
     return propStore.answer_options.length > 0
   }
-  get isIdentification() {
+  get isCardIdentification() {
     const title = propStore.title
-    return title === 'MINION' || title === 'WEREWOLF' || title === 'MASONS'
+    return ['MINION', 'WEREWOLVES', 'MASONS', 'VAMPIRES', 'ALIENS'].includes(title)
   }
   get allSelectableCards(): Record<string, string>[] {
     const selectablePlayerCards = riseAndRestStore.tablePlayerCards.filter(card => card.selectable_card)
@@ -88,16 +102,35 @@ class MessageStore {
     }))
   }
 
+  get allSelectableMarks(): Record<string, string>[] {
+    const selectableMarks = riseAndRestStore.tablePlayerCards.filter(card => card.selectable_mark)
+
+    return [...selectableMarks].map(card => ({
+      position: card.position,
+      name: formatPositionSimply(card.position)
+    }))
+  }
+  get allSelectedMarks(): Record<string, string>[] {
+    return selectionStore.selectedMarks.map(position => ({
+      position,
+      name: formatPositionSimply(position)
+    }))
+  }
+
   getRoles(): RoleKeys[] {
     const title = propStore.title
 
     switch (title) {
       case 'MINION':
         return ['werewolves']
-      case 'WEREWOLF':
+      case 'WEREWOLVES':
         return ['werewolves', 'dreamwolf']
       case 'MASONS':
         return ['masons']
+      case 'ALIENS':
+        return ['aliens']
+      case 'VAMPIRES':
+        return ['vampires']
       default:
         return []
     }

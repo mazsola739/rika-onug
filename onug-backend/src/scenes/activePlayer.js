@@ -12,6 +12,12 @@ const isCopyPlayerRole = (card, roleId) => {
   return card.player_role_id === roleId && card.player_original_id === 1
 }
 
+const isEveryOne = true
+
+const isLovers = card => {
+  return card.player_mark === 'mark_of_love'
+}
+
 export const isActivePlayer = card => {
   return {
     ALIENS: isRoleOrCopyPlayer(card, ALL_ALIEN),
@@ -54,6 +60,7 @@ export const isActivePlayer = card => {
     DRUNK: isSpecificRole(card, 2),
     EMPATH: card.player_original_id !== 77 || (card.player_role_id !== 20 && COPY_PLAYER.includes(card.player_original_id)),
     EMPATH_VOTE: isSpecificRole(card, 77),
+    EVERYONE_MARK: isEveryOne,
     EVILOMETER: isSpecificRole(card, 58),
     EXPOSER: isSpecificRole(card, 46),
     FAMILY_MAN: isSpecificRole(card, 78),
@@ -65,7 +72,7 @@ export const isActivePlayer = card => {
     INTERN: isSpecificRole(card, 62),
     LEADER: isSpecificRole(card, 48),
     LEADER_ZERB_GROOB: isSpecificRole(card, 48),
-    LOVERS: card.player_mark === 'mark_of_love',
+    LOVERS: isLovers(card),
     MARKSMAN: isSpecificRole(card, 35),
     MASONS: isRoleOrCopyPlayer(card, MASONS),
     MINION: isSpecificRole(card, 7),

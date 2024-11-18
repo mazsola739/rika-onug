@@ -1,28 +1,82 @@
-import { Button, ButtonGroup, Card, RoleImage, Title } from 'components'
+import { Button, ButtonGroup, CardImage, RoleImage, Title, TokenImage } from 'components'
 import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { messageStore, propStore, selectionStore } from 'store'
-import { CardPosition, Message, MessageBoxCard, MessageText, Narration, NarrationText, StyledAnswer, StyledMessageBox, StyledMessageBoxCards, StyledSelectable } from './MessageBox.styles'
-import { AnswersProps, LookProps, MessageBoxCardsProps, SelectableProps } from './MessageBox.types'
+import { ItemPosition, Message, MessageBoxItem, MessageText, Narration, NarrationText, StyledAnswer, StyledMessageBox, StyledMessageBoxCards, StyledSelectable } from './MessageBox.styles'
+import { AnswersProps, LookProps, MessageBoxProps, SelectableProps } from './MessageBox.types'
 
-const Selectable: React.FC<SelectableProps> = observer(({ selectable, selected }) => {
+const SelectableCards: React.FC<SelectableProps> = observer(({ selectableCards, selected }) => {
   return (
     <StyledSelectable>
-      <Title title={'SELECTABLE'} />
-      <MessageBoxCards cards={selectable} />
-      <Title title={'SELECTED'} />
+      <Title title={'SELECTABLE CARDS'} />
+      <MessageBoxCards cards={selectableCards} />
+      <Title title={'SELECTED CARDS'} />
       <MessageBoxCards cards={selected} />
     </StyledSelectable>
   )
 })
 
-const Look: React.FC<LookProps> = observer(({ roles, cards }) => {
+const SelectableMarks: React.FC<SelectableProps> = observer(({ selectableMarks, selected }) => {
+  return (
+    <StyledSelectable>
+      <Title title={'SELECTABLE MARKS'} />
+      <MessageBoxMarks marks={selectableMarks} />
+      <Title title={'SELECTED MARKS'} />
+      <MessageBoxMarks marks={selected} />
+    </StyledSelectable>
+  )
+})
+
+const LookCards: React.FC<LookProps> = observer(({ roles, cards }) => {
   return (
     <StyledSelectable>
       <Title title={roles.join(', ')} />
       <MessageBoxCards cards={cards} />
     </StyledSelectable>
+  )
+})
+
+const LookMarks: React.FC<LookProps> = observer(({ roles, marks }) => {
+  return (
+    <StyledSelectable>
+      <Title title={roles.join(', ')} />
+      <MessageBoxMarks marks={marks} />
+    </StyledSelectable>
+  )
+})
+
+const MessageBoxCards: React.FC<MessageBoxProps> = observer(({ cards }) => {
+  const onCardClick = (position: string) => {
+    selectionStore.toggleCardSelection(position)
+  }
+
+  return (
+    <StyledMessageBoxCards>
+      {cards.map((card, index) => (
+        <MessageBoxItem key={index}>
+          <ItemPosition>{card.name}</ItemPosition>
+          <CardImage image="card_background" onClick={() => onCardClick(card.position)} size={40} />
+        </MessageBoxItem>
+      ))}
+    </StyledMessageBoxCards>
+  )
+})
+
+const MessageBoxMarks: React.FC<MessageBoxProps> = observer(({ marks }) => {
+  const onMarkClick = (position: string) => {
+    selectionStore.toggleMarkSelection(position)
+  }
+
+  return (
+    <StyledMessageBoxCards>
+      {marks.map((mark, index) => (
+        <MessageBoxItem key={index}>
+          <ItemPosition>{mark.name}</ItemPosition>
+          <TokenImage image="mark_back" onClick={() => onMarkClick(mark.position)} size={40} />
+        </MessageBoxItem>
+      ))}
+    </StyledMessageBoxCards>
   )
 })
 
@@ -41,28 +95,11 @@ const Answer: React.FC<AnswersProps> = observer(({ answer_options }) => {
   )
 })
 
-const MessageBoxCards: React.FC<MessageBoxCardsProps> = observer(({ cards }) => {
-  const onCardClick = (position: string) => {
-    selectionStore.toggleCardSelection(position)
-  }
-
-  return (
-    <StyledMessageBoxCards>
-      {cards.map((card, index) => (
-        <MessageBoxCard key={index}>
-          <CardPosition>{card.name}</CardPosition>
-          <Card image="card_background" onClick={() => onCardClick(card.position)} size={40} />
-        </MessageBoxCard>
-      ))}
-    </StyledMessageBoxCards>
-  )
-})
-
 export const MessageBox: React.FC = observer(() => {
-  const { handleCardInteraction, handleFinish, handleSkip, handleAnswerInteraction } = useClickHandler()
-  const { narration, privateMessage, narrationImage, disabled, isSelectableCards, isIdentification, identifiedCards, isAnswerOptions } = messageStore
+  const { handleCardInteraction, handleMarkInteraction, handleFinish, handleSkip, handleAnswerInteraction } = useClickHandler()
+  const { narration, privateMessage, narrationImage, disabledCards, disabledMarks, isSelectableCards, isSelectableMarks, isCardIdentification, identifiedCards, isAnswerOptions } = messageStore
   const { obligatory, scene_end, title, answer_options } = propStore
-  const { selectedCards, selectedAnswer } = selectionStore
+  const { selectedCards, selectedMarks, selectedAnswer } = selectionStore
 
   return (
     <StyledMessageBox>
@@ -72,8 +109,9 @@ export const MessageBox: React.FC = observer(() => {
       </Narration>
       <Message>
         <MessageText>{privateMessage}</MessageText>
-        {isSelectableCards && <Selectable selectable={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />}
-        {isIdentification && <Look roles={identifiedCards.roles} cards={identifiedCards.cards} />}
+        {isSelectableCards && <SelectableCards selectableCards={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />}
+        {isSelectableMarks && <SelectableMarks selectableMarks={messageStore.allSelectableMarks} selected={messageStore.allSelectedMarks} />}
+        {isCardIdentification && <LookCards roles={identifiedCards.roles} cards={identifiedCards.cards} />}
         {isAnswerOptions && <Answer answer_options={answer_options} />}
       </Message>
       {!scene_end && isAnswerOptions && (
@@ -84,7 +122,13 @@ export const MessageBox: React.FC = observer(() => {
       {!scene_end && isSelectableCards && (
         <ButtonGroup>
           <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
-          <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabled} buttonText={BUTTONS.done_label} variant="green" />
+          <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabledCards} buttonText={BUTTONS.done_label} variant="green" />
+        </ButtonGroup>
+      )}
+      {!scene_end && isSelectableMarks && (
+        <ButtonGroup>
+          <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
+          <Button onClick={() => handleMarkInteraction(selectedMarks, title)} disabled={disabledMarks} buttonText={BUTTONS.done_label} variant="green" />
         </ButtonGroup>
       )}
       {scene_end && (

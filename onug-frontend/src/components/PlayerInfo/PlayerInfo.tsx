@@ -1,4 +1,4 @@
-import { CardImage, Token } from 'components'
+import { CardImage, Token, TokenImage } from 'components'
 import { observer } from 'mobx-react-lite'
 import { PlayerInfoName, PlayerInfoRole, PlayerInfoTeam, StyledPlayerInfo } from './PlayerInfo.styles'
 import { PlayerInfoProps } from './PlayerInfo.types'
@@ -11,12 +11,12 @@ export const PlayerInfo: React.FC<PlayerInfoProps> = observer(({ card_name, mark
     player && (
       <StyledPlayerInfo result={result}>
         <CardImage image={card_name} size={80} />
-        <Token tokenName={playerNumber} size={25} />
+        <TokenImage image={playerNumber} size={25} />
         <PlayerInfoName>{player.player_name}</PlayerInfoName>
-        <PlayerInfoRole>Role: {player.player_role}</PlayerInfoRole>
+        <PlayerInfoRole>{player.player_role}</PlayerInfoRole>
         <PlayerInfoTeam>Team: {player.player_team}</PlayerInfoTeam>
-        {mark && <Token tokenName={mark} size={30} />}
-        {artifact && <Token tokenName={artifact} size={30} />}
+        {mark && <TokenImage image={mark} size={35} />}
+        {artifact && <TokenImage image={artifact} size={35} />}
       </StyledPlayerInfo>
     )
   )

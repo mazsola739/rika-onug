@@ -8,8 +8,9 @@ export interface ReadyType {
   ready: boolean
 }
 
-export interface MessageBoxCardsProps {
-  cards: Record<string, string>[]
+export interface MessageBoxProps {
+  cards?: Record<string, string>[]
+  marks?: Record<string, string>[]
 }
 
 export interface AnswersProps {
@@ -17,11 +18,13 @@ export interface AnswersProps {
 }
 
 export interface SelectableProps {
-  selectable: Record<string, string>[]
+  selectableCards?: Record<string, string>[]
+  selectableMarks?: Record<string, string>[]
   selected: Record<string, string>[]
 }
 
 export interface LookProps {
   roles: string[]
-  cards: Record<string, string>[]
+  cards?: Record<string, string>[]
+  marks?: Record<string, string>[]
 }
