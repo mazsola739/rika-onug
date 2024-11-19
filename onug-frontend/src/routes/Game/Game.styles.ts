@@ -59,7 +59,7 @@ export const StyledGame = styled.div<GameProps>`
   }
 
   display: grid;
-  grid-template-columns: 170px calc(100vw - 740px) 170px 400px;
+  grid-template-columns: 190px calc(100vw - 780px) 190px 400px;
   grid-template-rows: 80px 130px calc(100vh - 290px) 80px;
 
   header {
@@ -101,5 +101,5 @@ export const GameCenter = styled.div`
 
 //INFOPANEL
 export const Placeholder = styled.div`
-  min-height: 420px;
+  min-height: 200px;
 `

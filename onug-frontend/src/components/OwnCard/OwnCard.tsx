@@ -17,9 +17,9 @@ export const OwnCard: React.FC<OwnCardProps> = observer(({ card, mark, player, a
         <OwnCardInfoRole>Role: {player.player_role}</OwnCardInfoRole>
         <OwnCardInfoTeam>Team: {player.player_team}</OwnCardInfoTeam>
         <CardRule>{card.rules}</CardRule>
-        {mark && <TokenImage image={mark.token_name} size={50} />}
+        {mark && <TokenImage image={mark.token_name} size={60} />}
         {mark && <TokenRule>{mark.rules}</TokenRule>}
-        {artifact && <TokenImage image={artifact.token_name} size={50} />}
+        {artifact && <TokenImage image={artifact.token_name} size={60} />}
         {artifact && <TokenRule>{artifact.rules}</TokenRule>}
       </StyledOwnCard>
     )

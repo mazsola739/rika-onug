@@ -1,4 +1,4 @@
-import { Token, Title } from 'components'
+import { Title, TokenImage } from 'components'
 import { observer } from 'mobx-react-lite'
 import { playersStore } from 'store'
 import { Ready, ReadyPlayerList, StyledReadyPlayer, StyledReadyStatus } from './ReadyStatus.styles'
@@ -9,7 +9,7 @@ const ReadyPlayer: React.FC<ReadyPlayerProps> = observer(({ player_name, ready, 
 
   return (
     <StyledReadyPlayer>
-      <Token tokenName={playerTokenName} size={25} ready={ready} />
+      <TokenImage image={playerTokenName} size={25} ready={ready} />
       <Ready ready={ready}>
         {player_name} is {ready ? 'ready' : 'not ready'}
       </Ready>

@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { Interaction, Result } from 'types'
+import { CardPosition, Interaction, Result } from 'types'
 
 class PropStore {
   title: string
@@ -10,6 +10,7 @@ class PropStore {
   voteResult: Result[] = []
   winnerTeams: string[] = []
   loserTeams: string[] = []
+  vampireVotes: Record<CardPosition, CardPosition[]>
 
   constructor() {
     makeAutoObservable(this)
@@ -116,6 +117,10 @@ class PropStore {
     this.end = end
   }
 
+  setVampireVotes(vampireVotes: Record<CardPosition, CardPosition[]>): void {
+    this.vampireVotes = vampireVotes
+  }
+
   setVoteResult(voteResult: Result[]): void {
     this.voteResult = voteResult
   }
@@ -161,6 +166,7 @@ class PropStore {
     }
     this.voteResult = []
     this.winnerTeams = []
+    this.vampireVotes = null
   }
 }
 

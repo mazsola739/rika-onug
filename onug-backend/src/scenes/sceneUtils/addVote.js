@@ -2,9 +2,9 @@ export const addVote = (playerNumber, selectedPosition, votes) => {
   const updatedVotes = { ...votes }
 
   if (votes[selectedPosition]) {
-    updatedVotes[selectedPosition].push(`player_${playerNumber}`)
+    updatedVotes[selectedPosition].push(playerNumber)
   } else {
-    updatedVotes[selectedPosition] = [`player_${playerNumber}`]
+    updatedVotes[selectedPosition] = [playerNumber]
   }
 
   return updatedVotes

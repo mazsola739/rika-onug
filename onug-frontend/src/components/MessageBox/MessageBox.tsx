@@ -3,8 +3,21 @@ import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { messageStore, propStore, selectionStore } from 'store'
-import { ItemPosition, Message, MessageBoxItem, MessageText, Narration, NarrationText, StyledAnswer, StyledMessageBox, StyledMessageBoxCards, StyledSelectable } from './MessageBox.styles'
-import { AnswersProps, LookProps, MessageBoxProps, SelectableProps } from './MessageBox.types'
+import {
+  ItemPosition,
+  Message,
+  MessageBoxItem,
+  MessageText,
+  Narration,
+  NarrationText,
+  PlayerPosition,
+  StyledAnswer,
+  StyledMessageBox,
+  StyledMessageBoxCards,
+  StyledSelectable,
+  StyledVoteResult
+} from './MessageBox.styles'
+import { AnswersProps, LookProps, MessageBoxProps, SelectableProps, VoteResultProps } from './MessageBox.types'
 
 const SelectableCards: React.FC<SelectableProps> = observer(({ selectableCards, selected }) => {
   return (
@@ -95,10 +108,27 @@ const Answer: React.FC<AnswersProps> = observer(({ answer_options }) => {
   )
 })
 
+const VoteResult: React.FC<VoteResultProps> = observer(({ votes }) => {
+  return (
+    <StyledVoteResult>
+      {Object.entries(votes).map(([key, values]) => (
+        <div key={key}>
+          <PlayerPosition>{key}</PlayerPosition>
+          <div>
+            {values.map((value) => (
+              <TokenImage key={value} image={value} size={40}  />
+            ))}
+          </div>
+        </div>
+      ))}
+    </StyledVoteResult>
+  )
+})
+
 export const MessageBox: React.FC = observer(() => {
   const { handleCardInteraction, handleMarkInteraction, handleFinish, handleSkip, handleAnswerInteraction } = useClickHandler()
-  const { narration, privateMessage, narrationImage, disabledCards, disabledMarks, isSelectableCards, isSelectableMarks, isCardIdentification, identifiedCards, isAnswerOptions } = messageStore
-  const { obligatory, scene_end, title, answer_options } = propStore
+  const { narration, privateMessage, narrationImage, disabledCards, disabledMarks, isSelectableCards, isSelectableMarks, isCardIdentification, identifiedCards, isAnswerOptions, isVoteResult } = messageStore
+  const { obligatory, scene_end, title, answer_options, vampireVotes } = propStore
   const { selectedCards, selectedMarks, selectedAnswer } = selectionStore
 
   return (
@@ -112,6 +142,7 @@ export const MessageBox: React.FC = observer(() => {
         {isSelectableCards && <SelectableCards selectableCards={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />}
         {isSelectableMarks && <SelectableMarks selectableMarks={messageStore.allSelectableMarks} selected={messageStore.allSelectedMarks} />}
         {isCardIdentification && <LookCards roles={identifiedCards.roles} cards={identifiedCards.cards} />}
+        {isVoteResult && <VoteResult votes={vampireVotes} />}
         {isAnswerOptions && <Answer answer_options={answer_options} />}
       </Message>
       {!scene_end && isAnswerOptions && (

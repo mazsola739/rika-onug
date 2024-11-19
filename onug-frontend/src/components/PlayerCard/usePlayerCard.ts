@@ -28,6 +28,7 @@ export const usePlayerCard = (card: TablePlayerCard) => {
   const isDreamwolf = card?.dreamwolf
   const isMason = card?.masons
   const isLovers = card?.lovers
+  const isVampire = card?.vampires
 
   const isSelectableCard = card?.selectable_card
   const isSelectableMark = card?.selectable_mark
@@ -45,7 +46,8 @@ export const usePlayerCard = (card: TablePlayerCard) => {
     isSelected: isCardSelected,
     werewolf: isWerewolf,
     dreamwolf: isDreamwolf,
-    masons: isMason
+    masons: isMason,
+    vampires: isVampire
   }
 
   const markProps = {

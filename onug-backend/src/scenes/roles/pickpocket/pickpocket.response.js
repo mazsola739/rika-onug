@@ -24,14 +24,16 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     swapped_marks: [currentPlayerNumber, selected_mark_positions[0]],
-    viewed_marks: [currentPlayerNumber]
+    viewed_marks: [currentPlayerNumber],
+    scene_end: true
   }
 
   const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_mark_positions[0]])
 
   const interaction = generateRoleInteraction(newGamestate, token, {
     private_message: ['interaction_swapped_marks', ...messageIdentifiers, 'interaction_own_mark'],
-    showMarks: viewMarks
+    showMarks: viewMarks,
+    scene_end: true
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

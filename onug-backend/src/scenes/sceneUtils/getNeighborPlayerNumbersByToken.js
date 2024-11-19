@@ -1,14 +1,15 @@
 export const getNeighborPlayerNumbersByToken = (players, token) => {
   const tokens = Object.keys(players)
   const playerCount = tokens.length
-  const playerNumber = players[token].player_number
-  const neighbors = []
+  const playerNumberString = players[token].player_number
+  const currentPlayerIndex = parseInt(playerNumberString.split('_')[1], 10)
 
-  const prevNeighborNumber = playerNumber === 1 ? playerCount : playerNumber - 1
-  const nextNeighborNumber = playerNumber === playerCount ? 1 : playerNumber + 1
+  const prevNeighborIndex = currentPlayerIndex === 1 ? playerCount : currentPlayerIndex - 1
+  const nextNeighborIndex = currentPlayerIndex === playerCount ? 1 : currentPlayerIndex + 1
 
-  neighbors.push(`player_${prevNeighborNumber}`)
-  neighbors.push(`player_${nextNeighborNumber}`)
+  const prevNeighbor = `player_${prevNeighborIndex}`
+  const nextNeighbor = `player_${nextNeighborIndex}`
 
-  return neighbors
+  return [prevNeighbor, nextNeighbor]
 }
+

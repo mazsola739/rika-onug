@@ -21,10 +21,15 @@ export const priestResponse = (gamestate, token, selected_mark_positions, title)
     newGamestate.mark_positions.clarity_2 = selectedPositionMark
   }
 
-  newGamestate.players[token].player_history[title].mark_of_clarity = [...newGamestate.players[token].player_history[title].mark_of_clarity, selected_mark_positions[0]]
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
+    mark_of_clarity: selected_mark_positions[0],
+    scene_end: true
+  }
 
   const interaction = generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_mark_of_clarity', formatPlayerIdentifier(selected_mark_positions)[0]]
+    private_message: ['interaction_mark_of_clarity', formatPlayerIdentifier(selected_mark_positions)[0]],
+    scene_end: true
   })
 
   const narration = getNarrationByTitle(title, newGamestate.narration)

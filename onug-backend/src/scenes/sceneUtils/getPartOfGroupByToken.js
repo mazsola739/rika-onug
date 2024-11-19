@@ -1,7 +1,8 @@
 export const getPartOfGroupByToken = (players, token, randomInstruction) => {
   const tokens = Object.keys(players)
   const totalPlayers = tokens.length
-  const groupHeadsNumber = players[token].player_number
+
+  const groupHeadsNumber = parseInt(players[token].player_number.split('_')[1], 10)
   const partOfGroup = [`player_${groupHeadsNumber}`]
 
   const side = randomInstruction.includes('left') ? 'left' : randomInstruction.includes('right') ? 'right' : 'each'

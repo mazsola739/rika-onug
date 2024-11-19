@@ -1,13 +1,12 @@
 import { UPDATE_GUESS } from 'constant'
 import * as narration_text from 'constant/narrations'
 import { script } from 'data'
-import { computed, makeAutoObservable } from 'mobx'
+import { makeAutoObservable } from 'mobx'
 import { CardPosition, GuessedCard, GuessToken, NarrationType, Player, WsJsonMessage } from 'types'
 import { getCardById } from 'utils'
-import { playersStore } from './PlayersStore'
-import { wsStore } from './WsStore'
 import { propStore } from './PropStore'
 import { riseAndRestStore } from './RiseAndRestStore'
+import { wsStore } from './WsStore'
 
 class VoteStore {
   narrations: Record<string, NarrationType[]>[]

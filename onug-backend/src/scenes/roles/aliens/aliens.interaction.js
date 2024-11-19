@@ -115,13 +115,15 @@ export const aliensInteraction = (gamestate, token, title) => {
     ...newGamestate.players[token].player_history[title],
     ...selectableCards,
     private_message: privateMessage,
-    aliens
+    aliens,
+    obligatory: true
   }
 
   return generateRoleInteraction(newGamestate, token, {
     private_message: privateMessage,
     showCards,
     selectableCards,
-    uniqueInformations: { aliens }
+    uniqueInformations: { aliens },
+    obligatory: true
   })
 }

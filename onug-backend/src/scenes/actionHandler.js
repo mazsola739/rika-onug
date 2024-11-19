@@ -336,10 +336,6 @@ export const actionHandler = (gamestate, scene_title) => {
       /* MUST */
       return roles.vampires(newGamestate, scene_title)
     }
-    case 'VAMPIRES_VOTE': {
-      /* MUST */
-      return roles.vampiresVote(newGamestate, scene_title)
-    }
     case 'VILLAGE_IDIOT': {
       return roles.villageidiot(newGamestate, scene_title)
     }

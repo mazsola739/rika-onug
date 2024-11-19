@@ -82,6 +82,9 @@ class MessageStore {
   get isAnswerOptions() {
     return propStore.answer_options.length > 0
   }
+  get isVoteResult() {
+    return propStore.vampireVotes //|| propStore.alienVotes
+  }
   get isCardIdentification() {
     const title = propStore.title
     return ['MINION', 'WEREWOLVES', 'MASONS', 'VAMPIRES', 'ALIENS'].includes(title)

@@ -50,3 +50,5 @@ export const PAUSE_GAME = 'PAUSE_GAME'
 export const START_VOTE = 'START_VOTE'
 export const VOTE = 'VOTE'
 export const VOTE_ACCEPTED = 'VOTE_ACCEPTED'
+
+export const VAMPIRE_VOTE = 'VAMPIRE_VOTE'

@@ -6,7 +6,7 @@ export const getVampirePlayerNumbersByRoleIds = players => {
   for (const token in players) {
     const player = players[token]
     if (ALL_VAMPIRE.includes(player.card.player_role_id)) {
-      result.push(`player_${player.player_number}`)
+      result.push(player.player_number)
     }
   }
 

@@ -1,10 +1,10 @@
 import { formatPlayerIdentifier, generateRoleInteraction, getNonVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
 
+/* // TODO   Uses the Robber or Witch and swaps with a Werewolf or Vampire 
+Does not wake up with the Werewolves/Vampires */
+
 export const vampiresInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
-
-  /* // TODO   Uses the Robber or Witch and swaps with a Werewolf or Vampire 
-Does not wake up with the Werewolves/Vampires */
 
   const vampires = getVampirePlayerNumbersByRoleIds(newGamestate.players)
   const nonVampires = getNonVampirePlayerNumbersByRoleIds(newGamestate)
@@ -13,7 +13,8 @@ Does not wake up with the Werewolves/Vampires */
     ...newGamestate.players[token].player_history[title],
     selectable_marks: nonVampires,
     selectable_mark_limit: { mark: 1 },
-    vampires
+    vampires,
+    obligatory: true
   }
 
   const messageIdentifiers = formatPlayerIdentifier(vampires)
@@ -25,6 +26,7 @@ Does not wake up with the Werewolves/Vampires */
       selectable_marks: nonVampires,
       selectable_mark_limit: { mark: 1 }
     },
-    uniqueInformations: { vampires }
+    uniqueInformations: { vampires },
+    obligatory: true
   })
 }

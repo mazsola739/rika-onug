@@ -183,6 +183,7 @@ export type WsJsonMessage = {
   token?: string
   type?: string
   update?: boolean
+  vampire_votes?: Record<CardPosition, CardPosition[]>
   vote_result?: Result[]
   winner_teams?: string[]
 }

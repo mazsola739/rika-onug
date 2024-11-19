@@ -8,7 +8,7 @@ export const GameInfoPanel: React.FC = observer(() => {
 
   return (
     <InfoPanel>
-      <Placeholder>{narration && <MessageBox />}</Placeholder>
+      {narration && <MessageBox />}
       <QuickGuide />
     </InfoPanel>
   )

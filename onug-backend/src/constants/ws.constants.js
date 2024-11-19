@@ -51,3 +51,5 @@ export const SCENE = 'SCENE'
 
 export const KEEP_ALIVE = 'KEEP_ALIVE'
 export const AUTH = 'AUTH'
+
+export const VAMPIRE_VOTE = 'VAMPIRE_VOTE'

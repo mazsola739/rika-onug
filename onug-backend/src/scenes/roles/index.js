@@ -276,9 +276,6 @@ export * from './vampires/vampires.interaction'
 export * from './vampires/vampires'
 export * from './vampires/vampires.response'
 
-export * from './vampiresvote/vampires.vote'
-export * from './vampiresvote/vampires.voteresult'
-
 export * from './villageidiot/villageidiot.interaction'
 export * from './villageidiot/villageidiot'
 export * from './villageidiot/villageidiot.response'

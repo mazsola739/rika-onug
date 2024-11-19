@@ -1,36 +1,22 @@
 export const getPlayerNeighborsByToken = (players, token, direction, amount) => {
   const tokens = Object.keys(players)
   const playerCount = tokens.length
-  const playerNumber = players[token].player_number
-  const neighbors = {}
+  const currentPlayerNumber = parseInt(players[token].player_number.split('_')[1], 10)
+  const neighbors = { left: [], right: [] }
 
   if (direction === 'left' || direction === 'both') {
-    let prevNeighborNumber = playerNumber - 1
-    while (prevNeighborNumber !== playerNumber - amount && prevNeighborNumber !== playerNumber) {
-      if (prevNeighborNumber < 1) {
-        prevNeighborNumber = playerCount
-      }
-      const prevNeighborId = Object.keys(players).find(key => players[key].player_number === prevNeighborNumber)
-      if (prevNeighborId) {
-        neighbors['left'] = neighbors['left'] || []
-        neighbors['left'].push(players[prevNeighborId])
-      }
-      prevNeighborNumber--
+    let prevNeighborNumber = currentPlayerNumber
+    for (let i = 0; i < amount; i++) {
+      prevNeighborNumber = ((prevNeighborNumber - 2 + playerCount) % playerCount) + 1
+      neighbors.left.push(`player_${prevNeighborNumber}`)
     }
   }
 
   if (direction === 'right' || direction === 'both') {
-    let nextNeighborNumber = playerNumber + 1
-    while (nextNeighborNumber !== playerNumber + amount && nextNeighborNumber !== playerNumber) {
-      if (nextNeighborNumber > playerCount) {
-        nextNeighborNumber = 1
-      }
-      const nextNeighborId = Object.keys(players).find(key => players[key].player_number === nextNeighborNumber)
-      if (nextNeighborId) {
-        neighbors['right'] = neighbors['right'] || []
-        neighbors['right'].push(players[nextNeighborId])
-      }
-      nextNeighborNumber++
+    let nextNeighborNumber = currentPlayerNumber
+    for (let i = 0; i < amount; i++) {
+      nextNeighborNumber = (nextNeighborNumber % playerCount) + 1
+      neighbors.right.push(`player_${nextNeighborNumber}`)
     }
   }
 

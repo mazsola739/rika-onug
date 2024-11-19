@@ -2,10 +2,10 @@ import styled from '@emotion/styled'
 
 export const StyledMessageBox = styled.div`
   display: flex;
-  min-height: 400px;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1.25rem;
+  background-color: rgba(100, 100, 100, 0.2);
 `
 
 export const Narration = styled.div`
@@ -26,7 +26,6 @@ export const MessageText = styled.span`
 export const Message = styled.div`
   display: flex;
   padding: 0.3125rem;
-  min-height: 265px;
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
@@ -58,9 +57,17 @@ export const ItemPosition = styled.span`
   padding: 0.3125rem 0;
 `
 
+export const PlayerPosition = styled.span`
+  font-size: 10px;
+  font-weight: lighter;
+  padding: 0.3125rem 0;
+`
+
 export const StyledSelectable = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 0.625rem;
 `
+
+export const StyledVoteResult = styled.div``

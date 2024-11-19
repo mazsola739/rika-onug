@@ -17,7 +17,6 @@ export const vampires = (gamestate, title) => {
       interaction = vampiresInteraction(newGamestate, token, title)
     }
 
-    newGamestate.players[token].player_history[title].scene_title = title
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
   })
 
