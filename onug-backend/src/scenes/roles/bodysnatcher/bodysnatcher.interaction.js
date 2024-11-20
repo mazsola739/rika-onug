@@ -43,6 +43,8 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
 
     const selectablePlayerNumbers = getNonAlienPlayerNumbersByRoleIdsWithNoShield(selectablePlayers)
 
+      //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+
     selectableCards = {
       selectable_cards: selectablePlayerNumbers,
       selectable_card_limit: { player: 1, center: 0 }

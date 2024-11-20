@@ -6,6 +6,8 @@ export const robberInteraction = (gamestate, token, title) => {
   if (!newGamestate.players[token].shield) {
     const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGamestate.players, token)
 
+      //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+
     newGamestate.players[token].player_history[title] = {
       ...newGamestate.players[token].player_history[title],
       selectable_cards: selectablePlayerNumbers,

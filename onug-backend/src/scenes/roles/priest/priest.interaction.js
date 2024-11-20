@@ -19,6 +19,8 @@ export const priestInteraction = (gamestate, token, title) => {
 
   newGamestate.players[token].card.player_mark = 'mark_of_clarity'
 
+    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers,

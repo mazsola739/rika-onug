@@ -4,6 +4,8 @@ import { generateRoleInteraction, getPlayerNeighborsByToken, getPlayerNumberWith
 export const morticianInteraction = (gamestate, token, title, randomMorticianInstruction, morticianKey) => {
   const newGamestate = { ...gamestate }
 
+    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+
   if (morticianKey === 'identifier_yourself_text') {
     if (!newGamestate.players[token].shield) {
       const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)

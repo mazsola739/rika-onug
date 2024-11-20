@@ -47,7 +47,7 @@ export const dealCards = async (ws, message) => {
     const markPositions = {
       vampire: 'mark_of_vampire',
       fear: 'mark_of_fear',
-      bat: 'mark_of_bat',
+      bat: 'mark_of_the_bat',
       disease: 'mark_of_disease',
       love_1: 'mark_of_love',
       love_2: 'mark_of_love',

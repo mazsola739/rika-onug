@@ -86,9 +86,6 @@ class MessageStore {
   get isVoteResult() {
     return propStore.vampireVotes //|| propStore.alienVotes || propStore.emapthVote || propStore.doppelgangerempathVote
   }
-  get isSelectedMarks() {
-    return propStore.selected_marks.length > 0
-  }
   get isCardIdentification() {
     const title = propStore.title
     return ['MINION', 'WEREWOLVES', 'MASONS', 'VAMPIRES', 'ALIENS'].includes(title)
@@ -122,12 +119,6 @@ class MessageStore {
       position,
       name: formatPositionSimply(position)
     }))
-  }
-
-  get selectableOptions(): string[] {
-    const selectableOptions = propStore.selectable_options
-
-    return selectableOptions
   }
 
   getRoles(): RoleKeys[] {

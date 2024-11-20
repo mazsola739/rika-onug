@@ -6,6 +6,8 @@ export const alphawolfInteraction = (gamestate, token, title) => {
 
   const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIdsWithNoShield(newGamestate.players)
 
+  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_cards: selectablePlayerNumbers,

@@ -7,6 +7,8 @@ export const doppelgangerInteraction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(newGamestate.players, [token])
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGamestate.shield)
 
+  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_cards: selectablePlayersWithNoShield,

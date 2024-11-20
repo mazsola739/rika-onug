@@ -3,6 +3,7 @@ import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { messageStore, propStore, selectionStore } from 'store'
+import { formatPositionSimply } from 'utils'
 import {
   ItemPosition,
   Message,
@@ -17,8 +18,7 @@ import {
   StyledSelectable,
   StyledVoteResult
 } from './MessageBox.styles'
-import { AnswersProps, LookProps, MessageBoxProps, SelectableProps, SelectedMarksProps, VoteProps, VoteResultProps } from './MessageBox.types'
-import { formatPositionSimply } from 'utils'
+import { AnswersProps, LookProps, MessageBoxProps, SelectableProps, VoteProps, VoteResultProps } from './MessageBox.types'
 
 const SelectableCards: React.FC<SelectableProps> = observer(({ selectableCards, selected }) => {
   return (
@@ -39,28 +39,6 @@ const SelectableMarks: React.FC<SelectableProps> = observer(({ selectableMarks, 
       <Title title={'SELECTED MARKS'} />
       <MessageBoxMarks marks={selected} />
     </StyledSelectable>
-  )
-})
-
-const SelectedMarks: React.FC<SelectedMarksProps> = observer(({ selectedMarks }) => {
-  return (
-    <StyledSelectable>
-      <Title title={'SELECTED MARKS'} />
-      <MessageBoxSelectedMarks selectedMarks={selectedMarks} />
-    </StyledSelectable>
-  )
-})
-
-const MessageBoxSelectedMarks: React.FC<SelectedMarksProps> = observer(({ selectedMarks }) => {
-  return (
-    <StyledMessageBoxCards>
-      {selectedMarks.map((mark, index) => (
-        <MessageBoxItem key={index}>
-          <ItemPosition>{mark}</ItemPosition>
-          <TokenImage image="mark_back"  size={40} />
-        </MessageBoxItem>
-      ))}
-    </StyledMessageBoxCards>
   )
 })
 
@@ -163,21 +141,9 @@ const VoteResult: React.FC<VoteResultProps> = observer(({ votes }) => {
 
 export const MessageBox: React.FC = observer(() => {
   const { handleCardInteraction, handleMarkInteraction, handleFinish, handleSkip, handleAnswerInteraction, handleVote } = useClickHandler()
-  const {
-    narration,
-    privateMessage,
-    narrationImage,
-    disabledCards,
-    disabledMarks,
-    isSelectableCards,
-    isSelectableMarks,
-    isCardIdentification,
-    identifiedCards,
-    isAnswerOptions,
-    isVoteResult,
-    isSelectedMarks
-  } = messageStore
-  const { obligatory, scene_end, title, answer_options, vampireVotes, isVote, selected_marks } = propStore
+  const { narration, privateMessage, narrationImage, disabledCards, disabledMarks, isSelectableCards, isSelectableMarks, isCardIdentification, identifiedCards, isAnswerOptions, isVoteResult } =
+    messageStore
+  const { obligatory, scene_end, title, answer_options, vampireVotes, isVote } = propStore
   const { selectedCards, selectedMarks, selectedAnswer } = selectionStore
 
   return (
@@ -190,33 +156,33 @@ export const MessageBox: React.FC = observer(() => {
         <MessageText>{privateMessage}</MessageText>
         {isCardIdentification && <LookCards roles={identifiedCards.roles} cards={identifiedCards.cards} />}
 
-        {isSelectedMarks && !isVote &&<SelectedMarks selectedMarks={selected_marks} />}
+        {isSelectableCards && <SelectableCards selectableCards={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />}
+        {isSelectableMarks && <SelectableMarks selectableMarks={messageStore.allSelectableMarks} selected={messageStore.allSelectedMarks} />}
+        {isAnswerOptions && <Answer answer_options={answer_options} />}
 
-        {isSelectableCards && !isVote && <SelectableCards selectableCards={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />}
-        {isSelectableMarks && !isVote && <SelectableMarks selectableMarks={messageStore.allSelectableMarks} selected={messageStore.allSelectedMarks} />}
-        {isAnswerOptions && !isVote && <Answer answer_options={answer_options} />}
-
-        {isVote && <Vote options={messageStore.selectableOptions} />}
         {isVoteResult && <VoteResult votes={vampireVotes} />}
       </Message>
-      {!scene_end && isVote && (
-        <ButtonGroup>
-          <Button onClick={() => handleVote(selectedAnswer, title)} disabled={selectedAnswer.length === 0} buttonText={BUTTONS.done_label} variant="green" />
-        </ButtonGroup>
-      )}
-      {!scene_end && isSelectableCards && !isVote && (
+      {!scene_end && isSelectableCards && (
         <ButtonGroup>
           <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
-          <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabledCards} buttonText={BUTTONS.done_label} variant="green" />
+          {isVote ? (
+            <Button onClick={() => handleVote(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={BUTTONS.vote_label} variant="yellow" />
+          ) : (
+            <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabledCards} buttonText={BUTTONS.done_label} variant="green" />
+          )}
         </ButtonGroup>
       )}
-      {!scene_end && (isSelectableMarks || isSelectedMarks) && !isVote && (
+      {!scene_end && isSelectableMarks && (
         <ButtonGroup>
           <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
-          <Button onClick={() => handleMarkInteraction(selectedMarks, title)} disabled={disabledMarks} buttonText={BUTTONS.done_label} variant="green" />
+          {isVote ? (
+            <Button onClick={() => handleVote(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={BUTTONS.vote_label} variant="yellow" />
+          ) : (
+            <Button onClick={() => handleMarkInteraction(selectedMarks, title)} disabled={disabledMarks} buttonText={BUTTONS.done_label} variant="green" />
+          )}
         </ButtonGroup>
       )}
-      {!scene_end && isAnswerOptions && !isVote && (
+      {!scene_end && isAnswerOptions && (
         <ButtonGroup>
           <Button onClick={() => handleAnswerInteraction(selectedAnswer, title)} disabled={selectedAnswer.length === 0} buttonText={BUTTONS.done_label} variant="green" />
         </ButtonGroup>

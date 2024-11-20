@@ -143,6 +143,9 @@ export const interaction_turned_newalien = 'You turned to alien:'
 export const interaction_moved = 'You moved cards to'
 export const interaction_moved_yours = 'You moved your card to'
 
+//vote
+export const interaction_voted_together = 'The team decided, team and '
+
 //mark_of_vampire
 export const interaction_mark_of_vampire = 'You placed Mark of Vampire front of'
 //mark_of_fear

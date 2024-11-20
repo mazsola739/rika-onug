@@ -1,4 +1,3 @@
-import { logTrace } from '../../../log'
 import { generateRoleInteraction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
 
 //TODO fix limit
@@ -7,7 +6,8 @@ export const paranormalinvestigatorInteraction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(newGamestate.players, token)
 
   const limit = selectablePlayerNumbers.length === 1 ? 1 : 2
-  logTrace(limit)
+
+    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],

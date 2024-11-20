@@ -5,6 +5,8 @@ export const instigatorInteraction = (gamestate, token, title) => {
   const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGamestate.players, allPlayerTokens)
 
+    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers,

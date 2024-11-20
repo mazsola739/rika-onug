@@ -111,6 +111,8 @@ export const rascalInteraction = (gamestate, token, title) => {
 
   const obligatory = randomRascalInstruction === 'rascal_drunk_text'
 
+    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_cards: selectableCards,

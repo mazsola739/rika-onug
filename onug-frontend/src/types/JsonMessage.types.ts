@@ -126,8 +126,6 @@ export type Interaction = {
     mark: number
   }
   selectable_marks?: CardPosition[]
-  selectable_options?: CardPosition[]
-  selected_marks?: CardPosition[]
   shielded_cards?: CardPosition[]
   show_cards?: Record<CardPosition, number>[]
   show_marks?: Record<CardPosition, string>[]

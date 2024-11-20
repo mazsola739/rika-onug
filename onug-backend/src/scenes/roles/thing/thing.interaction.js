@@ -5,6 +5,8 @@ export const thingInteraction = (gamestate, token, title) => {
 
   const neighbors = getPlayerNeighborsByToken(newGamestate.players, token, 'both', 1)
 
+    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_cards: neighbors,

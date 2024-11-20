@@ -36,10 +36,6 @@ export interface SelectableProps {
   selected: Record<string, string>[]
 }
 
-export interface SelectedMarksProps {
-  selectedMarks: string[]
-}
-
 export interface LookProps {
   roles: string[]
   cards?: Record<string, string>[]

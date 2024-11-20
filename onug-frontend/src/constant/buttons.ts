@@ -31,7 +31,8 @@ export const BUTTONS: Record<string, string> = {
   back_label: 'BACK',
   skip_label: 'SKIP',
   done_label: 'DONE',
-  finish_label: 'FINISH'
+  finish_label: 'FINISH',
+  vote_label: 'VOTE',
 }
 
 /* "YES" and "PLAY": Green (#4CAF50) "START"

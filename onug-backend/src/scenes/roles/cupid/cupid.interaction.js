@@ -6,6 +6,8 @@ export const cupidInteraction = (gamestate, token, title) => {
   const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGamestate.players, allPlayerTokens)
 
+  //const isTwoSelectable = selectablePlayerNumbers.length === 2
+
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers,

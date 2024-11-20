@@ -43,12 +43,6 @@ class PropStore {
   get selectable_marks() {
     return this.interaction.selectable_marks
   }
-  get selected_marks() {
-    return this.interaction.selected_marks
-  }
-  get selectable_options() {
-    return this.interaction.selectable_options
-  }
   get shielded_cards() {
     return this.interaction.shielded_cards
   }
@@ -161,7 +155,6 @@ class PropStore {
       selectable_cards: [],
       selectable_mark_limit: { mark: 0 },
       selectable_marks: [],
-      selected_marks: [],
       shielded_cards: [],
       show_cards: [],
       show_marks: [],

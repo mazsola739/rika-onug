@@ -1,7 +1,15 @@
 import { VAMPIRES_VOTE } from '../../../constants'
 import { readGamestate, upsertRoomState } from '../../../repository'
 import { sendMessageToPlayer } from '../../../websocket'
-import { createAndSendSceneMessage, generateRoleInteraction, getPlayerNumberWithMatchingToken, getPlayerTokensByPlayerNumber, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
+import {
+  createAndSendSceneMessage,
+  formatPlayerIdentifier,
+  generateRoleInteraction,
+  getPlayerNumberWithMatchingToken,
+  getPlayerTokenByPlayerNumber,
+  getPlayerTokensByPlayerNumber,
+  getVampirePlayerNumbersByRoleIds
+} from '../../sceneUtils'
 
 export const vampiresvoteHydrate = async message => {
   const { room_id, token, selected_vote, title } = message
@@ -18,10 +26,6 @@ export const vampiresvoteHydrate = async message => {
 
     const vampire_votes = { ...newGamestate.vampire_votes }
 
-    if (!vampire_votes[selected_vote]) {
-      vampire_votes[selected_vote] = []
-    }
-
     Object.keys(vampire_votes).forEach(key => {
       const voters = vampire_votes[key]
       const index = voters.indexOf(currentPlayerNumber)
@@ -30,9 +34,14 @@ export const vampiresvoteHydrate = async message => {
       }
     })
 
-    if (!vampire_votes[selected_vote].includes(currentPlayerNumber)) {
-      vampire_votes[selected_vote].push(currentPlayerNumber)
-    }
+    selected_vote.forEach(vote => {
+      if (!vampire_votes[vote]) {
+        vampire_votes[vote] = []
+      }
+      if (!vampire_votes[vote].includes(currentPlayerNumber)) {
+        vampire_votes[vote].push(currentPlayerNumber)
+      }
+    })
 
     newGamestate.players[token].vampire_vote = selected_vote
     newGamestate.vampire_votes = vampire_votes
@@ -42,20 +51,34 @@ export const vampiresvoteHydrate = async message => {
     if (unanimousVote) {
       const unanimousPlayerNumber = unanimousVote[0]
 
+      const vampirePosition = newGamestate.mark_positions.vampire
+      const selectedPosition = newGamestate.card_positions[unanimousPlayerNumber].mark
+
+      const victimToken = getPlayerTokenByPlayerNumber(newGamestate.players, unanimousPlayerNumber)
+      const isSwappedAlready = vampirePosition === newGamestate.players[victimToken].card.player_mark
+
+      if (!isSwappedAlready) {
+        newGamestate.mark_positions.vampire = selectedPosition
+        newGamestate.card_positions[unanimousPlayerNumber].mark = vampirePosition
+      }
+
+      newGamestate.players[token].card_or_mark_action = true
+
       vampiresTokens.forEach(vampireToken => {
         newGamestate.players[vampireToken].player_history[title] = {
           ...newGamestate.players[vampireToken].player_history[title],
-          selected_mark: [unanimousPlayerNumber],
-          vote: false,
+          mark_of_vampire: [unanimousPlayerNumber],
           scene_end: true
         }
+
         const interaction = generateRoleInteraction(newGamestate, vampireToken, {
-          private_message: ['interaction_must_one_any_non_vampire'],
-          uniqueInformations: { vote: false, selected_marks: [unanimousPlayerNumber] },
+          private_message: ['interaction_voted_together', 'interaction_mark_of_vampire', formatPlayerIdentifier([unanimousPlayerNumber])[0]],
           scene_end: true
         })
 
-        createAndSendSceneMessage(newGamestate, vampireToken, title, interaction)
+        const narration = ['vampires_vote_text']
+
+        createAndSendSceneMessage(newGamestate, vampireToken, title, interaction, narration)
       })
     } else {
       vampiresTokens.forEach(vampireToken => {

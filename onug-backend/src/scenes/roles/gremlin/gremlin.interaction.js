@@ -7,6 +7,8 @@ export const gremlinInteraction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGamestate.players, allPlayerTokens)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGamestate.shield)
 
+  //TODO const isTwoSelectable = selectablePlayerNumbers.length === 2
+
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers,
