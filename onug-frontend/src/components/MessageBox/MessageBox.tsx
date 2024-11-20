@@ -157,36 +157,39 @@ export const MessageBox: React.FC = observer(() => {
         {isCardIdentification && <LookCards roles={identifiedCards.roles} cards={identifiedCards.cards} />}
 
         {isSelectableCards && <SelectableCards selectableCards={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />}
+        {!scene_end && isSelectableCards && (
+          <ButtonGroup>
+            <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
+            {isVote ? (
+              <Button onClick={() => handleVote(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={BUTTONS.vote_label} variant="yellow" />
+            ) : (
+              <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabledCards} buttonText={BUTTONS.done_label} variant="green" />
+            )}
+          </ButtonGroup>
+        )}
+
         {isSelectableMarks && <SelectableMarks selectableMarks={messageStore.allSelectableMarks} selected={messageStore.allSelectedMarks} />}
+        {!scene_end && isSelectableMarks && (
+          <ButtonGroup>
+            <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
+            {isVote ? (
+              <Button onClick={() => handleVote(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={BUTTONS.vote_label} variant="yellow" />
+            ) : (
+              <Button onClick={() => handleMarkInteraction(selectedMarks, title)} disabled={disabledMarks} buttonText={BUTTONS.done_label} variant="green" />
+            )}
+          </ButtonGroup>
+        )}
+
         {isAnswerOptions && <Answer answer_options={answer_options} />}
+        {!scene_end && isAnswerOptions && (
+          <ButtonGroup>
+            <Button onClick={() => handleAnswerInteraction(selectedAnswer, title)} disabled={selectedAnswer.length === 0} buttonText={BUTTONS.done_label} variant="green" />
+          </ButtonGroup>
+        )}
 
         {isVoteResult && <VoteResult votes={vampireVotes} />}
       </Message>
-      {!scene_end && isSelectableCards && (
-        <ButtonGroup>
-          <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
-          {isVote ? (
-            <Button onClick={() => handleVote(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={BUTTONS.vote_label} variant="yellow" />
-          ) : (
-            <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabledCards} buttonText={BUTTONS.done_label} variant="green" />
-          )}
-        </ButtonGroup>
-      )}
-      {!scene_end && isSelectableMarks && (
-        <ButtonGroup>
-          <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
-          {isVote ? (
-            <Button onClick={() => handleVote(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={BUTTONS.vote_label} variant="yellow" />
-          ) : (
-            <Button onClick={() => handleMarkInteraction(selectedMarks, title)} disabled={disabledMarks} buttonText={BUTTONS.done_label} variant="green" />
-          )}
-        </ButtonGroup>
-      )}
-      {!scene_end && isAnswerOptions && (
-        <ButtonGroup>
-          <Button onClick={() => handleAnswerInteraction(selectedAnswer, title)} disabled={selectedAnswer.length === 0} buttonText={BUTTONS.done_label} variant="green" />
-        </ButtonGroup>
-      )}
+
       {scene_end && (
         <ButtonGroup>
           <Button onClick={() => handleFinish(title)} buttonText={BUTTONS.finish_label} variant="purple" />

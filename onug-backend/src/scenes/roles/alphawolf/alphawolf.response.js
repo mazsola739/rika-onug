@@ -36,3 +36,29 @@ export const alphawolfResponse = (gamestate, token, selected_card_positions, tit
 
   return newGamestate
 }
+
+/* const responseAction = ( gamestate, token, selected_card_position, title) => {
+  const newGamestate = { ...gamestate }
+
+  const centerWolf = { ...newGamestate.card_positions.center_wolf.card }
+  const selectedCard = {
+    ...newGamestate.card_positions[selected_card_position].card
+  }
+  newGamestate.card_positions.center_wolf.card = selectedCard
+  newGamestate.card_positions[selected_card_position].card = centerWolf
+
+  newGamestate.players[token].card_or_mark_action = true
+
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
+    swapped_cards: [selected_card_position, 'center_wolf']
+  }
+
+  const messageIdentifiers = formatPlayerIdentifier([selected_card_position, 'center_wolf'])
+
+  const interaction = generateRoleInteraction(newGamestate, token, {
+    private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+    scene_end: true
+  })
+}
+ */

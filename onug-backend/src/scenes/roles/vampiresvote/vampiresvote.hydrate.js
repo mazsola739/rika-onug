@@ -5,6 +5,7 @@ import {
   createAndSendSceneMessage,
   formatPlayerIdentifier,
   generateRoleInteraction,
+  getNarrationByTitle,
   getPlayerNumberWithMatchingToken,
   getPlayerTokenByPlayerNumber,
   getPlayerTokensByPlayerNumber,
@@ -76,7 +77,7 @@ export const vampiresvoteHydrate = async message => {
           scene_end: true
         })
 
-        const narration = ['vampires_vote_text']
+        const narration = getNarrationByTitle(title, newGamestate.narration)
 
         createAndSendSceneMessage(newGamestate, vampireToken, title, interaction, narration)
       })

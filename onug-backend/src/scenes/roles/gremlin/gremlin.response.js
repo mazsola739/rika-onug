@@ -51,8 +51,8 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
     const newGamestate = { ...gamestate }
 
     const [position1, position2] = selected_mark_positions
-    const playerOneMark = { ...newGamestate.card_positions[position1].mark }
-    const playerTwoMark = { ...newGamestate.card_positions[position2].mark }
+    const playerOneMark = newGamestate.card_positions[position1].mark 
+    const playerTwoMark = newGamestate.card_positions[position2].mark
 
     newGamestate.card_positions[position1].mark = playerTwoMark
     newGamestate.card_positions[position2].mark = playerOneMark

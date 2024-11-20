@@ -6,7 +6,8 @@ export const marksmanInteraction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGamestate.players, allPlayerTokens)
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGamestate.shield)
 
-    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+  //TODO if no marks only cards
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
@@ -14,7 +15,7 @@ export const marksmanInteraction = (gamestate, token, title) => {
     selectable_mark_limit: { mark: 1 },
     selectable_cards: selectablePlayersWithNoShield,
     selectable_card_limit: { player: 1, center: 0 },
-    scene_end: true
+    obligatory: true
   }
 
   return generateRoleInteraction(newGamestate, token, {
@@ -27,6 +28,6 @@ export const marksmanInteraction = (gamestate, token, title) => {
       selectable_cards: selectablePlayersWithNoShield,
       selectable_card_limit: { player: 1, center: 0 }
     },
-    scene_end: true
+    obligatory: true
   })
 }

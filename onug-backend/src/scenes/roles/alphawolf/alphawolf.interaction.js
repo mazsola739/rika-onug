@@ -6,14 +6,17 @@ export const alphawolfInteraction = (gamestate, token, title) => {
 
   const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIdsWithNoShield(newGamestate.players)
 
-  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+  /* TODO   const isSingleSelectable = selectablePlayerNumbers.length === 1
+
+  if (isSingleSelectable) {
+  } */
 
   newGamestate.players[token].player_history[title] = {
     ...newGamestate.players[token].player_history[title],
     selectable_cards: selectablePlayerNumbers,
     selectable_card_limit: { player: 1, center: 0 },
     obligatory: true,
-    scene_end: selectablePlayerNumbers.length === 0,
+    scene_end: selectablePlayerNumbers.length === 0
   }
 
   return generateRoleInteraction(newGamestate, token, {
@@ -23,6 +26,6 @@ export const alphawolfInteraction = (gamestate, token, title) => {
       selectable_card_limit: { player: 1, center: 0 }
     },
     obligatory: true,
-    scene_end: selectablePlayerNumbers.length === 0,
+    scene_end: selectablePlayerNumbers.length === 0
   })
 }

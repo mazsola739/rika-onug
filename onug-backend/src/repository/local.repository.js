@@ -187,7 +187,7 @@ export const readNohupByService = async service => {
     } else {
       const logData = await readFile(BE_PATH_TXT, { encoding: ENCODING })
       const crashData = await readFile(BE_PATH_CRASH, { encoding: ENCODING })
-      
+
       rawData = { logs: logData, crash: crashData }
     }
   } catch (error) {
