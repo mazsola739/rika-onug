@@ -193,6 +193,19 @@ export const useClickHandler = () => {
     [sendJsonMessage]
   )
 
+  const handleVote = useCallback(
+    (selected_vote: string, title: string) => {
+      sendJsonMessage?.({
+        type: title,
+        title,
+        room_id,
+        token,
+        selected_vote
+      })
+    },
+    [sendJsonMessage]
+  )
+
   return {
     handleJoinRoom,
     handleLeaveRoom,
@@ -210,6 +223,7 @@ export const useClickHandler = () => {
     handleAnswerInteraction,
     handleSelectAndDeselect,
     handleVoteNow,
+    handleVote,
     handleAccuse
   }
 }

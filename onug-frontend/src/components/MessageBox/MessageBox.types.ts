@@ -1,4 +1,4 @@
-import { CardPosition, Player } from 'types'
+import { Player, VoteType } from 'types'
 
 export interface ReadyListProps {
   players: Player[]
@@ -13,18 +13,31 @@ export interface MessageBoxProps {
   marks?: Record<string, string>[]
 }
 
+export interface MessageBoxProps {
+  cards?: Record<string, string>[]
+  marks?: Record<string, string>[]
+}
+
 export interface AnswersProps {
   answer_options: string[]
 }
 
+export interface VoteProps {
+  options: string[]
+}
+
 export interface VoteResultProps {
-  votes: Record<CardPosition, CardPosition[]>
+  votes: VoteType
 }
 
 export interface SelectableProps {
   selectableCards?: Record<string, string>[]
   selectableMarks?: Record<string, string>[]
   selected: Record<string, string>[]
+}
+
+export interface SelectedMarksProps {
+  selectedMarks: string[]
 }
 
 export interface LookProps {

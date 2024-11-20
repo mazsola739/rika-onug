@@ -5,7 +5,7 @@ export const StyledMessageBox = styled.div`
   flex-direction: column;
   justify-content: space-between;
   border-radius: 1.25rem;
-  background-color: rgba(100, 100, 100, 0.2);
+  background-color: rgba(150, 146, 144, 0.2);
 `
 
 export const Narration = styled.div`
@@ -42,6 +42,7 @@ export const StyledAnswer = styled.div`
   display: flex;
   gap: 0.1875rem;
   flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;
 `
 
@@ -58,7 +59,7 @@ export const ItemPosition = styled.span`
 `
 
 export const PlayerPosition = styled.span`
-  font-size: 10px;
+  font-size: 1.5rem;
   font-weight: lighter;
   padding: 0.3125rem 0;
 `
@@ -70,4 +71,6 @@ export const StyledSelectable = styled.div`
   gap: 0.625rem;
 `
 
-export const StyledVoteResult = styled.div``
+export const StyledVoteResult = styled.div`
+  display: flex;
+`

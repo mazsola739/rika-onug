@@ -43,9 +43,11 @@ import {
   STOP_GAME,
   UPDATE_GUESS,
   UPDATE_ROOM,
+  VAMPIRES_VOTE,
   VOTE
 } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
+import { vampiresvoteHydrate } from '../scenes/roles'
 
 export const websocketServer = port => {
   try {
@@ -75,6 +77,7 @@ export const websocketServer = port => {
         if (message.type === READY) return hydrateReady(message)
         if (message.type === ARRIVE_TABLE) return hydrateTable(ws, message)
         if (message.type === START_GAME) return startGame(ws, message)
+        if (message.type === VAMPIRES_VOTE) return vampiresvoteHydrate(message)
         if (message.type === ARRIVE_GAME) return hydrateGame(ws, message)
         if (message.type === PAUSE_GAME) return pauseGame(message)
         if (message.type === STOP_GAME) return stopGame(message)

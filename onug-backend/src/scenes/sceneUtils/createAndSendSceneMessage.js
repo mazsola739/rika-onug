@@ -1,7 +1,7 @@
 import { SCENE } from '../../constants'
 import { sendMessageToPlayer } from '../../websocket/connections'
 
-export const createAndSendSceneMessage = (gamestate, token, title, interaction, narration) => {
+export const createAndSendSceneMessage = (gamestate, token, title, interaction, narration = []) => {
   if (Object.keys(interaction).length === 0) return
 
   const player = gamestate.players[token]

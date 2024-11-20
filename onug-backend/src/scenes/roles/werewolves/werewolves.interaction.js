@@ -6,10 +6,7 @@ export const werewolvesInteraction = (gamestate, token, title) => {
   const newGamestate = { ...gamestate }
 
   const werewolves = getWerewolfPlayerNumbersByRoleIds(newGamestate.players)
-  /* // TODO   Uses the Robber or Witch and swaps with a Werewolf or Vampire 
-Does not wake up with the Werewolves/Vampires */
-  //TODO MARK OF FEAR
-  const dreamwolf = getDreamWolfPlayerNumberByRoleIds(newGamestate.players) //TODO fear of mark - cant show here thumb
+  const dreamwolf = getDreamWolfPlayerNumberByRoleIds(newGamestate.players)
   const loneWolf = werewolves.length + dreamwolf.length === 1
   const selectable_cards = loneWolf ? CENTER_CARD_POSITIONS : []
   const selectable_card_limit = { player: 0, center: loneWolf ? 1 : 0 }

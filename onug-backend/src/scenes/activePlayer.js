@@ -103,6 +103,7 @@ export const isActivePlayer = card => {
     THING: isSpecificRole(card, 85),
     TROUBLEMAKER: isSpecificRole(card, 11),
     VAMPIRES: isRoleOrCopyPlayer(card, ALL_VAMPIRE),
+    VAMPIRES_VOTE: isRoleOrCopyPlayer(card, ALL_VAMPIRE),
     VILLAGE_IDIOT: isSpecificRole(card, 26),
     VOODOO_LOU: isSpecificRole(card, 70),
     WEREWOLVES: isRoleOrCopyPlayer(card, ALL_WEREWOLF),

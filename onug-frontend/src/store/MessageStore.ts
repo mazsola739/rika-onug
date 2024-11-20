@@ -1,3 +1,4 @@
+import { ALIENS_VOTE, DOPPELGÄNGER_EMPATH_VOTE, EMPATH_VOTE, VAMPIRES_VOTE } from 'constant'
 import * as messages_text from 'constant/messages'
 import * as narration_text from 'constant/narrations'
 import { script } from 'data'
@@ -83,7 +84,10 @@ class MessageStore {
     return propStore.answer_options.length > 0
   }
   get isVoteResult() {
-    return propStore.vampireVotes //|| propStore.alienVotes
+    return propStore.vampireVotes //|| propStore.alienVotes || propStore.emapthVote || propStore.doppelgangerempathVote
+  }
+  get isSelectedMarks() {
+    return propStore.selected_marks.length > 0
   }
   get isCardIdentification() {
     const title = propStore.title
@@ -118,6 +122,12 @@ class MessageStore {
       position,
       name: formatPositionSimply(position)
     }))
+  }
+
+  get selectableOptions(): string[] {
+    const selectableOptions = propStore.selectable_options
+
+    return selectableOptions
   }
 
   getRoles(): RoleKeys[] {

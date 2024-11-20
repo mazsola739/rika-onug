@@ -1,23 +1,20 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { werewolvesInteraction } from './werewolves.interaction'
+import { vampiresvoteInteraction } from './vampiresvote.interaction'
 
-/* // TODO   Uses the Robber or Witch and swaps with a Werewolf or Vampire 
-Does not wake up with the Werewolves/Vampires */
-
-export const werewolves = (gamestate, title, hasDreamWolf) => {
+export const vampiresvote = (gamestate, title) => {
   const newGamestate = { ...gamestate }
+  const narration = ['vampires_vote_text']
   const tokens = getAllPlayerTokens(newGamestate.players)
-  const narration = [hasDreamWolf ? 'werewolves_dreamwolf_kickoff_text' : 'werewolves_kickoff_text']
 
   tokens.forEach(token => {
     let interaction = {}
 
     const card = newGamestate.players[token].card
 
-    if (isActivePlayer(card).WEREWOLVES) {
+    if (isActivePlayer(card).VAMPIRES_VOTE) {
       newGamestate.players[token].action_finished = false
-      interaction = werewolvesInteraction(newGamestate, token, title)
+      interaction = vampiresvoteInteraction(newGamestate, token, title)
     }
 
     createAndSendSceneMessage(newGamestate, token, title, interaction, narration)

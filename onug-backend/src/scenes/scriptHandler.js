@@ -53,6 +53,10 @@ export const scriptHandler = gamestate => {
       scripts: ['VAMPIRES']
     },
     {
+      condition: () => conditions.hasAnyVampire(selected_cards),
+      scripts: ['VAMPIRES_VOTE']
+    },
+    {
       condition: () => conditions.hasTheCount(selected_cards),
       scripts: ['THE_COUNT']
     },

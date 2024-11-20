@@ -51,4 +51,7 @@ export const START_VOTE = 'START_VOTE'
 export const VOTE = 'VOTE'
 export const VOTE_ACCEPTED = 'VOTE_ACCEPTED'
 
-export const VAMPIRE_VOTE = 'VAMPIRE_VOTE'
+export const VAMPIRES_VOTE = 'VAMPIRES_VOTE'
+export const ALIENS_VOTE = 'ALIENS_VOTE'
+export const EMPATH_VOTE = 'EMPATH_VOTE'
+export const DOPPELGÄNGER_EMPATH_VOTE = 'DOPPELGÄNGER_EMPATH_VOTE'

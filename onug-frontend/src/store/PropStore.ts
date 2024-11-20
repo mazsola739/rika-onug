@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { CardPosition, Interaction, Result } from 'types'
+import { CardPosition, Interaction, Result, VoteType } from 'types'
 
 class PropStore {
   title: string
@@ -10,7 +10,7 @@ class PropStore {
   voteResult: Result[] = []
   winnerTeams: string[] = []
   loserTeams: string[] = []
-  vampireVotes: Record<CardPosition, CardPosition[]>
+  vampireVotes: VoteType = {}
 
   constructor() {
     makeAutoObservable(this)
@@ -42,6 +42,12 @@ class PropStore {
   }
   get selectable_marks() {
     return this.interaction.selectable_marks
+  }
+  get selected_marks() {
+    return this.interaction.selected_marks
+  }
+  get selectable_options() {
+    return this.interaction.selectable_options
   }
   get shielded_cards() {
     return this.interaction.shielded_cards
@@ -94,6 +100,9 @@ class PropStore {
   get part_of_family() {
     return this.interaction.part_of_family
   }
+  get isVote() {
+    return this.interaction.vote
+  }
 
   setInteraction(interaction: Interaction): void {
     this.interaction = { ...this.interaction, ...interaction }
@@ -117,7 +126,7 @@ class PropStore {
     this.end = end
   }
 
-  setVampireVotes(vampireVotes: Record<CardPosition, CardPosition[]>): void {
+  setVampireVotes(vampireVotes: VoteType): void {
     this.vampireVotes = vampireVotes
   }
 
@@ -152,6 +161,7 @@ class PropStore {
       selectable_cards: [],
       selectable_mark_limit: { mark: 0 },
       selectable_marks: [],
+      selected_marks: [],
       shielded_cards: [],
       show_cards: [],
       show_marks: [],
@@ -162,11 +172,12 @@ class PropStore {
       lovers: [],
       part_of_blob: [],
       part_of_family: [],
-      werewolves: []
+      werewolves: [],
+      vote: false
     }
     this.voteResult = []
     this.winnerTeams = []
-    this.vampireVotes = null
+    this.vampireVotes = {}
   }
 }
 

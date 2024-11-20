@@ -2,6 +2,9 @@ import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { vampiresInteraction } from './vampires.interaction'
 
+/* // TODO   Uses the Robber or Witch and swaps with a Werewolf or Vampire 
+Does not wake up with the Werewolves/Vampires */
+
 export const vampires = (gamestate, title) => {
   const newGamestate = { ...gamestate }
   const narration = ['vampires_kickoff_text']

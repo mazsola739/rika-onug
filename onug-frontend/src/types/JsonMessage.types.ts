@@ -126,13 +126,31 @@ export type Interaction = {
     mark: number
   }
   selectable_marks?: CardPosition[]
+  selectable_options?: CardPosition[]
+  selected_marks?: CardPosition[]
   shielded_cards?: CardPosition[]
   show_cards?: Record<CardPosition, number>[]
   show_marks?: Record<CardPosition, string>[]
   tanner?: CardPosition[]
   vampires?: CardPosition[]
   villains?: CardPosition[]
+  vote?: boolean
   werewolves?: CardPosition[]
+}
+
+export type VoteType = {
+  player_1?: CardPosition[]
+  player_2?: CardPosition[]
+  player_3?: CardPosition[]
+  player_4?: CardPosition[]
+  player_5?: CardPosition[]
+  player_6?: CardPosition[]
+  player_7?: CardPosition[]
+  player_8?: CardPosition[]
+  player_9?: CardPosition[]
+  player_10?: CardPosition[]
+  player_11?: CardPosition[]
+  player_12?: CardPosition[]
 }
 
 export type Result = {
@@ -183,7 +201,7 @@ export type WsJsonMessage = {
   token?: string
   type?: string
   update?: boolean
-  vampire_votes?: Record<CardPosition, CardPosition[]>
+  vampire_votes?: VoteType
   vote_result?: Result[]
   winner_teams?: string[]
 }

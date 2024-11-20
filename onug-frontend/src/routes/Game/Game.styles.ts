@@ -100,6 +100,3 @@ export const GameCenter = styled.div`
 //FOOTER
 
 //INFOPANEL
-export const Placeholder = styled.div`
-  min-height: 200px;
-`

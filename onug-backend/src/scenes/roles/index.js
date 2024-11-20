@@ -274,7 +274,11 @@ export * from './troublemaker/troublemaker.response'
 
 export * from './vampires/vampires.interaction'
 export * from './vampires/vampires'
-export * from './vampires/vampires.response'
+
+export * from './vampiresvote/vampiresvote.hydrate'
+export * from './vampiresvote/vampiresvote.interaction'
+export * from './vampiresvote/vampiresvote'
+export * from './vampiresvote/vampiresvote.response'
 
 export * from './villageidiot/villageidiot.interaction'
 export * from './villageidiot/villageidiot'
