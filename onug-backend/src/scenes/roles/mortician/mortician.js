@@ -4,37 +4,36 @@ import { morticianKeys, randomMorticianInstructions } from './mortician.constant
 import { morticianInteraction } from './mortician.interaction'
 
 export const mortician = (gamestate, title, prefix) => {
-  const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)
+  const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [`${prefix}_kickoff_text`]
   //TODO
   const randomMorticianInstruction = getRandomItemFromArray(randomMorticianInstructions)
   const morticianKey = randomMorticianInstruction === 'mortician_2cards_text' ? 'identifier_bothneighbors_text' : getRandomItemFromArray(morticianKeys)
   // narration.push(randomMorticianInstruction, morticianKey)
 
-  /*   newGamestate.bodysnatcher = {
+  /*   gamestate.bodysnatcher = {
     instruction: '',
     key: '',
   }
-  newGamestate.bodysnatcher.instruction = randomAlienInstruction
-  newGamestate.bodysnatcher.key = alienKey */
+  gamestate.bodysnatcher.instruction = randomAlienInstruction
+  gamestate.bodysnatcher.key = alienKey */
 
   tokens.forEach(token => {
     let interaction = {}
 
-    const card = newGamestate.players[token].card
+    const card = gamestate.players[token].card
 
     if (prefix === 'mortician' && isActivePlayer(card).MORTICIAN) {
-      newGamestate.players[token].action_finished = false
-      interaction = morticianInteraction(newGamestate, token, title, randomMorticianInstruction, morticianKey)
+      gamestate.players[token].action_finished = false
+      interaction = morticianInteraction(gamestate, token, title, randomMorticianInstruction, morticianKey)
     } else if (prefix === 'doppelganger_mortician' && isActivePlayer(card).DOPPELGÄNGER_MORTICIAN) {
-      interaction = morticianInteraction(newGamestate, token, title, randomMorticianInstruction, morticianKey)
+      interaction = morticianInteraction(gamestate, token, title, randomMorticianInstruction, morticianKey)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push({ [title]: narration })
+  gamestate.narration.push({ [title]: narration })
 
-  return newGamestate
+  return gamestate
 }

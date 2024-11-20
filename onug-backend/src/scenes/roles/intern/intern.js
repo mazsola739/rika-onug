@@ -3,24 +3,23 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { internInteraction } from './intern.interaction'
 
 export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
-  const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)
+  const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_intern_kickoff_text' : 'intern_kickoff_text', hasMadScientist ? 'intern_kickoff2_text' : 'intern_kickoff_alone_text']
 
   tokens.forEach(token => {
     let interaction = {}
 
-    const card = newGamestate.players[token].card
+    const card = gamestate.players[token].card
 
     if (isActivePlayer(card).INTERN) {
-      newGamestate.players[token].action_finished = false
-      interaction = internInteraction(newGamestate, token, title)
+      gamestate.players[token].action_finished = false
+      interaction = internInteraction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push({ [title]: narration })
+  gamestate.narration.push({ [title]: narration })
 
-  return newGamestate
+  return gamestate
 }

@@ -6,57 +6,52 @@ export const alphawolfResponse = (gamestate, token, selected_card_positions, tit
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
-
-  const newGamestate = { ...gamestate }
-
-  const centerWolf = { ...newGamestate.card_positions.center_wolf.card }
+  const centerWolf = { ...gamestate.card_positions.center_wolf.card }
   const selectedCard = {
-    ...newGamestate.card_positions[selected_card_positions[0]].card
+    ...gamestate.card_positions[selected_card_positions[0]].card
   }
-  newGamestate.card_positions.center_wolf.card = selectedCard
-  newGamestate.card_positions[selected_card_positions[0]].card = centerWolf
+  gamestate.card_positions.center_wolf.card = selectedCard
+  gamestate.card_positions[selected_card_positions[0]].card = centerWolf
 
-  newGamestate.players[token].card_or_mark_action = true
+  gamestate.players[token].card_or_mark_action = true
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     swapped_cards: [selected_card_positions[0], 'center_wolf']
   }
 
   const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], 'center_wolf'])
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }
 
 /* const responseAction = ( gamestate, token, selected_card_position, title) => {
-  const newGamestate = { ...gamestate }
-
-  const centerWolf = { ...newGamestate.card_positions.center_wolf.card }
+  const centerWolf = { ...gamestate.card_positions.center_wolf.card }
   const selectedCard = {
-    ...newGamestate.card_positions[selected_card_position].card
+    ...gamestate.card_positions[selected_card_position].card
   }
-  newGamestate.card_positions.center_wolf.card = selectedCard
-  newGamestate.card_positions[selected_card_position].card = centerWolf
+  gamestate.card_positions.center_wolf.card = selectedCard
+  gamestate.card_positions[selected_card_position].card = centerWolf
 
-  newGamestate.players[token].card_or_mark_action = true
+  gamestate.players[token].card_or_mark_action = true
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     swapped_cards: [selected_card_position, 'center_wolf']
   }
 
   const messageIdentifiers = formatPlayerIdentifier([selected_card_position, 'center_wolf'])
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
     scene_end: true
   })

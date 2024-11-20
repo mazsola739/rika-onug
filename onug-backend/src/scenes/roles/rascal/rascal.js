@@ -5,8 +5,7 @@ import { randomRascalInstructions, rascalAnyOneKeys, rascalAnyTwoKeys } from './
 import { rascalInteraction } from './rascal.interaction'
 
 export const rascal = (gamestate, title, prefix) => {
-  const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)
+  const tokens = getAllPlayerTokens(gamestate.players)
   const randomRascalInstruction = getRandomItemFromArray(randomRascalInstructions)
   const rascalKey = randomRascalInstruction === 'rascal_troublemaker_text' ? getRandomItemFromArray(rascalAnyTwoKeys) : getRandomItemFromArray(rascalAnyOneKeys)
   const narration = [`${prefix}_kickoff_text`]
@@ -29,33 +28,31 @@ export const rascal = (gamestate, title, prefix) => {
       break
   }
 
-  newGamestate.rascal = {
+  gamestate.rascal = {
     instruction: '',
     key: ''
   }
-  newGamestate.oracle.instruction = randomRascalInstruction
-  newGamestate.oracle.key = rascalKey
+  gamestate.oracle.instruction = randomRascalInstruction
+  gamestate.oracle.key = rascalKey
 
   tokens.forEach(token => {
     let interaction = {}
-    const card = newGamestate.players[token].card
+    const card = gamestate.players[token].card
 
-    if (
-      (prefix === 'rascal' && isActivePlayer(card).RASCAL) ||
-      (prefix === 'doppelganger_rascal' && isActivePlayer(card).DOPPELGÄNGER_RASCAL)) {
+    if ((prefix === 'rascal' && isActivePlayer(card).RASCAL) || (prefix === 'doppelganger_rascal' && isActivePlayer(card).DOPPELGÄNGER_RASCAL)) {
       if (randomRascalInstruction === 'rascal_idiot_text') {
-        newGamestate.players[token].action_finished = false
-        interaction = villageidiotInteraction(newGamestate, token, title)
+        gamestate.players[token].action_finished = false
+        interaction = villageidiotInteraction(gamestate, token, title)
       } else {
-        newGamestate.players[token].action_finished = false
-        interaction = rascalInteraction(newGamestate, token, title)
+        gamestate.players[token].action_finished = false
+        interaction = rascalInteraction(gamestate, token, title)
       }
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push({ [title]: narration })
+  gamestate.narration.push({ [title]: narration })
 
-  return newGamestate
+  return gamestate
 }

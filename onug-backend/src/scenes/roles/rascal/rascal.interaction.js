@@ -10,31 +10,29 @@ import {
 import { getAnyHigherOrLowerPlayerNumbersByToken } from './rascal.utils'
 
 export const rascalInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-
   let privateMessage
   let limit = 1
   let selectableCards
   let selectableLimit
   //TODO  scene_end: selectablePlayerNumbers.length === 0
-  const randomRascalInstruction = newGamestate.oracle.instruction
-  const rascalKey = newGamestate.oracle.key
+  const randomRascalInstruction = gamestate.oracle.instruction
+  const rascalKey = gamestate.oracle.key
 
   const getSelectableTwoPlayers = rascalKey => {
     switch (rascalKey) {
       case 'identifier_any2_text':
-        return getAllPlayerTokens(newGamestate.players)
+        return getAllPlayerTokens(gamestate.players)
 
       case 'identifier_any2even_text':
       case 'identifier_any2odd_text': {
         const evenOrOddTwo = rascalKey.replace('identifier_any2', '').replace('_text', '')
-        return getAnyEvenOrOddPlayers(newGamestate.players, evenOrOddTwo)
+        return getAnyEvenOrOddPlayers(gamestate.players, evenOrOddTwo)
       }
 
       case 'identifier_any2higher_text':
       case 'identifier_any2lower_text': {
         const higherOrLowerTwo = rascalKey.replace('identifier_any2', '').replace('_text', '')
-        return getAnyHigherOrLowerPlayerNumbersByToken(newGamestate.players, higherOrLowerTwo)
+        return getAnyHigherOrLowerPlayerNumbersByToken(gamestate.players, higherOrLowerTwo)
       }
 
       case 'identifier_2leftneighbors_text':
@@ -42,7 +40,7 @@ export const rascalInteraction = (gamestate, token, title) => {
       case 'identifier_bothneighbors_text': {
         const directionTwo = rascalKey.includes('left') ? 'left' : rascalKey.includes('right') ? 'right' : 'both'
         const amountTwo = rascalKey.includes('2') ? 2 : 1
-        return getPlayerNeighborsByToken(newGamestate.players, token, directionTwo, amountTwo)
+        return getPlayerNeighborsByToken(gamestate.players, token, directionTwo, amountTwo)
       }
     }
   }
@@ -52,23 +50,23 @@ export const rascalInteraction = (gamestate, token, title) => {
       case 'identifier_higher_text':
       case 'identifier_lower_text': {
         const higherOrLowerOne = rascalKey.replace('identifier_', '').replace('_text', '')
-        return getAnyHigherOrLowerPlayerNumbersByToken(newGamestate.players, higherOrLowerOne)
+        return getAnyHigherOrLowerPlayerNumbersByToken(gamestate.players, higherOrLowerOne)
       }
 
       case 'identifier_any_text':
-        return getAllPlayerTokens(newGamestate.players)
+        return getAllPlayerTokens(gamestate.players)
 
       case 'identifier_anyeven_text':
       case 'identifier_anyodd_text': {
         const evenOrOddOne = rascalKey.replace('identifier_any', '').replace('_text', '')
-        return getAnyEvenOrOddPlayers(newGamestate.players, evenOrOddOne)
+        return getAnyEvenOrOddPlayers(gamestate.players, evenOrOddOne)
       }
 
       case 'identifier_oneneighbor_text':
       case 'identifier_leftneighbor_text':
       case 'identifier_rightneighbor_text': {
         const directionOne = rascalKey.includes('left') ? 'left' : rascalKey.includes('right') ? 'right' : 'both'
-        return getPlayerNeighborsByToken(newGamestate.players, token, directionOne, 1)
+        return getPlayerNeighborsByToken(gamestate.players, token, directionOne, 1)
       }
     }
   }
@@ -81,13 +79,13 @@ export const rascalInteraction = (gamestate, token, title) => {
     limit = selectableCards.length >= 2 ? 2 : 0
     privateMessage = [selectableCards.length >= 2 ? 'interaction_may_two_any' : 'interaction_no_selectable_player']
   } else if (randomRascalInstruction === 'rascal_drunk_text' || randomRascalInstruction === 'rascal_robber_text') {
-    if (newGamestate.players[token].shield) {
-      newGamestate.players[token].player_history[title] = {
-        ...newGamestate.players[token].player_history[title],
+    if (gamestate.players[token].shield) {
+      gamestate.players[token].player_history[title] = {
+        ...gamestate.players[token].player_history[title],
         shielded: true
       }
 
-      return generateRoleInteraction(newGamestate, token, {
+      return generateRoleInteraction(gamestate, token, {
         private_message: ['interaction_shielded']
       })
     } else {
@@ -111,17 +109,17 @@ export const rascalInteraction = (gamestate, token, title) => {
 
   const obligatory = randomRascalInstruction === 'rascal_drunk_text'
 
-    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     selectable_cards: selectableCards,
     selectable_card_limit: selectableLimit,
     random,
     obligatory
   }
 
-  return generateRoleInteraction(newGamestate, token, {
+  return generateRoleInteraction(gamestate, token, {
     private_message: privateMessage,
     selectableCards: {
       selectable_cards: selectableCards,

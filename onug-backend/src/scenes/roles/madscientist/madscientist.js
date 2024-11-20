@@ -2,8 +2,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { random_madscientist_intro, random_madscientist_result, random_madscientist_therefore, random_madscientist_transition } from './madscientist.constants'
 
 export const madscientist = (gamestate, title) => {
-  const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)
+  const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [
     'madscientist_kickoff_text',
     getRandomItemFromArray(random_madscientist_intro),
@@ -16,11 +15,11 @@ export const madscientist = (gamestate, title) => {
   tokens.forEach(token => {
     let interaction = {}
 
-    newGamestate.players[token].action_finished = false
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    gamestate.players[token].action_finished = false
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push({ [title]: narration })
+  gamestate.narration.push({ [title]: narration })
 
-  return newGamestate
+  return gamestate
 }

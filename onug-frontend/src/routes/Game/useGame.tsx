@@ -1,4 +1,4 @@
-import { ARRIVE_GAME, END_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, VAMPIRES_VOTE } from 'constant'
+import { ARRIVE_GAME, END_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, VAMPIRES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { gameStatusStore, messageStore, propStore, riseAndRestStore, wsStore } from 'store'
@@ -54,7 +54,7 @@ export const useGame = () => {
       propStore.setSunrise(lastJsonMessage.day_mode)
     }
 
-    if (lastJsonMessage?.type === VAMPIRES_VOTE && lastJsonMessage?.success) {
+    if (lastJsonMessage?.type === VAMPIRES && lastJsonMessage?.success) {
       propStore.setVampireVotes(lastJsonMessage.vampire_votes)
     }
 

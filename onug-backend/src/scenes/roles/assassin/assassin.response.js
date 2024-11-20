@@ -8,47 +8,46 @@ export const assassinResponse = (gamestate, token, selected_mark_positions, titl
     return gamestate
   }
 
-  const newGamestate = { ...gamestate }
-  const apprenticeassassins = getApprenticeAssassinPlayerNumbersByRoleIds(newGamestate.players)
+  const apprenticeassassins = getApprenticeAssassinPlayerNumbersByRoleIds(gamestate.players)
 
   if (gamestate.players[token].card.player_original_id === 1) {
-    const assassinPosition = newGamestate.doppelganger_mark_positions.assassin
-    const selectedPosition = newGamestate.card_positions[selected_mark_positions[0]].mark
+    const assassinPosition = gamestate.doppelganger_mark_positions.assassin
+    const selectedPosition = gamestate.card_positions[selected_mark_positions[0]].mark
 
-    newGamestate.doppelganger_mark_positions.assassin = selectedPosition
-    newGamestate.card_positions[selected_mark_positions[0]].mark = assassinPosition
+    gamestate.doppelganger_mark_positions.assassin = selectedPosition
+    gamestate.card_positions[selected_mark_positions[0]].mark = assassinPosition
   } else {
-    const assassinPosition = newGamestate.mark_positions.assassin
-    const selectedPosition = newGamestate.card_positions[selected_mark_positions[0]].mark
+    const assassinPosition = gamestate.mark_positions.assassin
+    const selectedPosition = gamestate.card_positions[selected_mark_positions[0]].mark
 
-    newGamestate.mark_positions.assassin = selectedPosition
-    newGamestate.card_positions[selected_mark_positions[0]].mark = assassinPosition
+    gamestate.mark_positions.assassin = selectedPosition
+    gamestate.card_positions[selected_mark_positions[0]].mark = assassinPosition
   }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
 
   if (currentPlayerNumber === selected_mark_positions[0]) {
-    newGamestate.players[token].card.player_mark = 'mark_of_assassin'
+    gamestate.players[token].card.player_mark = 'mark_of_assassin'
   }
 
-  newGamestate.players[token].card_or_mark_action = true
+  gamestate.players[token].card_or_mark_action = true
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     mark_of_assassin: [selected_mark_positions[0]],
     apprenticeassassins: apprenticeassassins.length > 0 ? apprenticeassassins : [],
     scene_end: true
   }
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
     uniqueInformations: { apprenticeassassins: apprenticeassassins.length > 0 ? apprenticeassassins : [] },
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

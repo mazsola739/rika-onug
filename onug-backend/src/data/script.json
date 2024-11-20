@@ -126,22 +126,8 @@
     "vote": false
   },
   {
-    "scene_title": "VAMPIRES_VOTE",
-    "scene_number": 9,
-    "scene_started": false,
-    "player_card_shifting": false,
-    "center_card_shifting": false,
-    "view_player_card": false,
-    "view_center_card": false,
-    "mark_shifting": true,
-    "view_mark": false,
-    "shield": false,
-    "artifact": false,
-    "vote": true
-  },
-  {
     "scene_title": "THE_COUNT",
-    "scene_number": 10,
+    "scene_number": 9,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -155,7 +141,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_THE_COUNT",
-    "scene_number": 11,
+    "scene_number": 10,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -169,7 +155,7 @@
   },
   {
     "scene_title": "RENFIELD",
-    "scene_number": 12,
+    "scene_number": 11,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -183,7 +169,7 @@
   },
   {
     "scene_title": "DISEASED",
-    "scene_number": 13,
+    "scene_number": 12,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -197,7 +183,7 @@
   },
   {
     "scene_title": "CUPID",
-    "scene_number": 14,
+    "scene_number": 13,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -211,7 +197,7 @@
   },
   {
     "scene_title": "INSTIGATOR",
-    "scene_number": 15,
+    "scene_number": 14,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -225,7 +211,7 @@
   },
   {
     "scene_title": "PRIEST",
-    "scene_number": 16,
+    "scene_number": 15,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -239,7 +225,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_PRIEST",
-    "scene_number": 17,
+    "scene_number": 16,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -253,7 +239,7 @@
   },
   {
     "scene_title": "ASSASSIN",
-    "scene_number": 18,
+    "scene_number": 17,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -267,7 +253,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_ASSASSIN",
-    "scene_number": 19,
+    "scene_number": 18,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -281,7 +267,7 @@
   },
   {
     "scene_title": "APPRENTICE_ASSASSIN",
-    "scene_number": 20,
+    "scene_number": 19,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -295,7 +281,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_APPRENTICE_ASSASSIN",
-    "scene_number": 21,
+    "scene_number": 20,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -309,7 +295,7 @@
   },
   {
     "scene_title": "EVERYONE_MARK",
-    "scene_number": 22,
+    "scene_number": 21,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -323,7 +309,7 @@
   },
   {
     "scene_title": "LOVERS",
-    "scene_number": 23,
+    "scene_number": 22,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -337,7 +323,7 @@
   },
   {
     "scene_title": "SENTINEL",
-    "scene_number": 24,
+    "scene_number": 23,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -351,7 +337,7 @@
   },
   {
     "scene_title": "ALIENS",
-    "scene_number": 25,
+    "scene_number": 24,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": false,
@@ -364,22 +350,8 @@
     "vote": false
   },
   {
-    "scene_title": "ALIENS_VOTE",
-    "scene_number": 26,
-    "scene_started": false,
-    "player_card_shifting": false,
-    "center_card_shifting": false,
-    "view_player_card": false,
-    "view_center_card": false,
-    "mark_shifting": false,
-    "view_mark": false,
-    "shield": false,
-    "artifact": false,
-    "vote": false
-  },
-  {
     "scene_title": "COW",
-    "scene_number": 27,
+    "scene_number": 25,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -393,7 +365,7 @@
   },
   {
     "scene_title": "GROOB_ZERB",
-    "scene_number": 28,
+    "scene_number": 26,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -407,7 +379,7 @@
   },
   {
     "scene_title": "LEADER",
-    "scene_number": 29,
+    "scene_number": 27,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -421,7 +393,7 @@
   },
   {
     "scene_title": "LEADER_ZERB_GROOB",
-    "scene_number": 30,
+    "scene_number": 28,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -435,7 +407,7 @@
   },
   {
     "scene_title": "BODY_SNATCHER",
-    "scene_number": 31,
+    "scene_number": 29,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": true,
@@ -449,7 +421,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_BODY_SNATCHER",
-    "scene_number": 32,
+    "scene_number": 30,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": true,
@@ -463,7 +435,7 @@
   },
   {
     "scene_title": "SUPER_VILLAINS",
-    "scene_number": 33,
+    "scene_number": 31,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -477,7 +449,7 @@
   },
   {
     "scene_title": "TEMPTRESS",
-    "scene_number": 34,
+    "scene_number": 32,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": true,
@@ -491,7 +463,7 @@
   },
   {
     "scene_title": "DR_PEEKER",
-    "scene_number": 35,
+    "scene_number": 33,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -505,7 +477,7 @@
   },
   {
     "scene_title": "RAPSCALLION",
-    "scene_number": 36,
+    "scene_number": 34,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -519,7 +491,7 @@
   },
   {
     "scene_title": "EVILOMETER",
-    "scene_number": 37,
+    "scene_number": 35,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -533,7 +505,7 @@
   },
   {
     "scene_title": "WEREWOLVES",
-    "scene_number": 38,
+    "scene_number": 36,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -547,7 +519,7 @@
   },
   {
     "scene_title": "ALPHA_WOLF",
-    "scene_number": 39,
+    "scene_number": 37,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": true,
@@ -561,7 +533,7 @@
   },
   {
     "scene_title": "MYSTIC_WOLF",
-    "scene_number": 40,
+    "scene_number": 38,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -575,7 +547,7 @@
   },
   {
     "scene_title": "MINION",
-    "scene_number": 41,
+    "scene_number": 39,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -589,7 +561,7 @@
   },
   {
     "scene_title": "APPRENTICE_TANNER",
-    "scene_number": 42,
+    "scene_number": 40,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -603,7 +575,7 @@
   },
   {
     "scene_title": "MAD_SCIENTIST",
-    "scene_number": 43,
+    "scene_number": 41,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -617,7 +589,7 @@
   },
   {
     "scene_title": "INTERN",
-    "scene_number": 44,
+    "scene_number": 42,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -631,7 +603,7 @@
   },
   {
     "scene_title": "MASONS",
-    "scene_number": 45,
+    "scene_number": 43,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -645,7 +617,7 @@
   },
   {
     "scene_title": "THING",
-    "scene_number": 46,
+    "scene_number": 44,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -659,7 +631,7 @@
   },
   {
     "scene_title": "ANNOYING_LAD",
-    "scene_number": 47,
+    "scene_number": 45,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -673,7 +645,7 @@
   },
   {
     "scene_title": "SEER",
-    "scene_number": 48,
+    "scene_number": 46,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -687,7 +659,7 @@
   },
   {
     "scene_title": "APPRENTICE_SEER",
-    "scene_number": 49,
+    "scene_number": 47,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -701,7 +673,7 @@
   },
   {
     "scene_title": "PARANORMAL_INVESTIGATOR",
-    "scene_number": 50,
+    "scene_number": 48,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -715,7 +687,7 @@
   },
   {
     "scene_title": "MARKSMAN",
-    "scene_number": 51,
+    "scene_number": 49,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -729,7 +701,7 @@
   },
   {
     "scene_title": "NOSTRADAMUS",
-    "scene_number": 52,
+    "scene_number": 50,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -743,7 +715,7 @@
   },
   {
     "scene_title": "NOSTRADAMUS_REACTION",
-    "scene_number": 53,
+    "scene_number": 51,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -757,7 +729,7 @@
   },
   {
     "scene_title": "PSYCHIC",
-    "scene_number": 54,
+    "scene_number": 52,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -771,7 +743,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_PSYCHIC",
-    "scene_number": 55,
+    "scene_number": 53,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -785,7 +757,7 @@
   },
   {
     "scene_title": "DETECTOR",
-    "scene_number": 56,
+    "scene_number": 54,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -799,7 +771,7 @@
   },
   {
     "scene_title": "ROBBER",
-    "scene_number": 57,
+    "scene_number": 55,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": false,
@@ -813,7 +785,7 @@
   },
   {
     "scene_title": "WITCH",
-    "scene_number": 58,
+    "scene_number": 56,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": true,
@@ -827,7 +799,7 @@
   },
   {
     "scene_title": "PICKPOCKET",
-    "scene_number": 59,
+    "scene_number": 57,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -841,7 +813,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_PICKPOCKET",
-    "scene_number": 60,
+    "scene_number": 58,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -855,7 +827,7 @@
   },
   {
     "scene_title": "ROLE_RETRIEVER",
-    "scene_number": 61,
+    "scene_number": 59,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": false,
@@ -869,7 +841,7 @@
   },
   {
     "scene_title": "VOODOO_LOU",
-    "scene_number": 62,
+    "scene_number": 60,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": true,
@@ -883,7 +855,7 @@
   },
   {
     "scene_title": "TROUBLEMAKER",
-    "scene_number": 63,
+    "scene_number": 61,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": false,
@@ -897,7 +869,7 @@
   },
   {
     "scene_title": "VILLAGE_IDIOT",
-    "scene_number": 64,
+    "scene_number": 62,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": false,
@@ -911,7 +883,7 @@
   },
   {
     "scene_title": "AURA_SEER",
-    "scene_number": 65,
+    "scene_number": 63,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -925,7 +897,7 @@
   },
   {
     "scene_title": "GREMLIN",
-    "scene_number": 66,
+    "scene_number": 64,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": false,
@@ -939,7 +911,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_GREMLIN",
-    "scene_number": 67,
+    "scene_number": 65,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": false,
@@ -953,7 +925,7 @@
   },
   {
     "scene_title": "RASCAL",
-    "scene_number": 68,
+    "scene_number": 66,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": true,
@@ -967,7 +939,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_RASCAL",
-    "scene_number": 69,
+    "scene_number": 67,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": true,
@@ -981,7 +953,7 @@
   },
   {
     "scene_title": "SWITCHEROO",
-    "scene_number": 70,
+    "scene_number": 68,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": false,
@@ -995,7 +967,7 @@
   },
   {
     "scene_title": "DRUNK",
-    "scene_number": 71,
+    "scene_number": 69,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": true,
@@ -1009,7 +981,7 @@
   },
   {
     "scene_title": "INSOMNIAC",
-    "scene_number": 72,
+    "scene_number": 70,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1023,7 +995,7 @@
   },
   {
     "scene_title": "SELF_AWARENESS_GIRL",
-    "scene_number": 73,
+    "scene_number": 71,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1037,7 +1009,7 @@
   },
   {
     "scene_title": "SQUIRE",
-    "scene_number": 74,
+    "scene_number": 72,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1051,7 +1023,7 @@
   },
   {
     "scene_title": "BEHOLDER",
-    "scene_number": 75,
+    "scene_number": 73,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1065,7 +1037,7 @@
   },
   {
     "scene_title": "REVEALER",
-    "scene_number": 76,
+    "scene_number": 74,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": false,
@@ -1079,7 +1051,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_REVEALER",
-    "scene_number": 77,
+    "scene_number": 75,
     "scene_started": false,
     "player_card_shifting": true,
     "center_card_shifting": false,
@@ -1093,7 +1065,7 @@
   },
   {
     "scene_title": "EXPOSER",
-    "scene_number": 78,
+    "scene_number": 76,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": true,
@@ -1107,7 +1079,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_EXPOSER",
-    "scene_number": 79,
+    "scene_number": 77,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": true,
@@ -1121,7 +1093,7 @@
   },
   {
     "scene_title": "FLIPPER",
-    "scene_number": 80,
+    "scene_number": 78,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": true,
@@ -1135,7 +1107,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_FLIPPER",
-    "scene_number": 81,
+    "scene_number": 79,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1149,21 +1121,7 @@
   },
   {
     "scene_title": "EMPATH",
-    "scene_number": 82,
-    "scene_started": false,
-    "player_card_shifting": false,
-    "center_card_shifting": false,
-    "view_player_card": false,
-    "view_center_card": false,
-    "mark_shifting": false,
-    "view_mark": false,
-    "shield": false,
-    "artifact": false,
-    "vote": false
-  },
-  {
-    "scene_title": "EMPATH_VOTE",
-    "scene_number": 83,
+    "scene_number": 80,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1177,7 +1135,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_EMPATH",
-    "scene_number": 84,
+    "scene_number": 81,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1190,22 +1148,8 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_EMPATH_VOTE",
-    "scene_number": 85,
-    "scene_started": false,
-    "player_card_shifting": false,
-    "center_card_shifting": false,
-    "view_player_card": false,
-    "view_center_card": false,
-    "mark_shifting": false,
-    "view_mark": false,
-    "shield": false,
-    "artifact": false,
-    "vote": true
-  },
-  {
     "scene_title": "CURATOR",
-    "scene_number": 86,
+    "scene_number": 82,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1219,7 +1163,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_CURATOR",
-    "scene_number": 87,
+    "scene_number": 83,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1233,7 +1177,7 @@
   },
   {
     "scene_title": "BLOB",
-    "scene_number": 88,
+    "scene_number": 84,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1247,7 +1191,7 @@
   },
   {
     "scene_title": "MORTICIAN",
-    "scene_number": 89,
+    "scene_number": 85,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1261,7 +1205,7 @@
   },
   {
     "scene_title": "DOPPELGÄNGER_MORTICIAN",
-    "scene_number": 90,
+    "scene_number": 86,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1275,7 +1219,7 @@
   },
   {
     "scene_title": "FAMILY_MAN",
-    "scene_number": 91,
+    "scene_number": 87,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1289,7 +1233,7 @@
   },
   {
     "scene_title": "RIPPLE",
-    "scene_number": 92,
+    "scene_number": 88,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1303,7 +1247,7 @@
   },
   {
     "scene_title": "JOKE",
-    "scene_number": 93,
+    "scene_number": 89,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,
@@ -1317,7 +1261,7 @@
   },
   {
     "scene_title": "END",
-    "scene_number": 94,
+    "scene_number": 90,
     "scene_started": false,
     "player_card_shifting": false,
     "center_card_shifting": false,

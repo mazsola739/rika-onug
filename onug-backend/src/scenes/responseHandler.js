@@ -190,8 +190,8 @@ export const responseHandler = (gamestate, token, selected_card_positions, selec
     case 'TROUBLEMAKER':
       newGamestate = roles.troublemakerResponse(gamestate, token, selected_card_positions, scene_title)
       break
-    case 'VAMPIRES_VOTE':
-      newGamestate = roles.vampiresvoteResponse(gamestate, token, selected_mark_positions, scene_title)
+    case 'VAMPIRES':
+      newGamestate = roles.vampiresResponse(gamestate, token, selected_mark_positions, scene_title)
       break
     case 'VILLAGE_IDIOT':
       newGamestate = roles.villageidiotResponse(gamestate, token, selected_answer, scene_title)

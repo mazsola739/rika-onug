@@ -3,24 +3,23 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { mysticwolfInteraction } from './mysticwolf.interaction'
 
 export const mysticwolf = (gamestate, title) => {
-  const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)
+  const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['mysticwolf_kickoff_text']
 
   tokens.forEach(token => {
     let interaction = {}
 
-    const card = newGamestate.players[token].card
+    const card = gamestate.players[token].card
 
     if (isActivePlayer(card).MYSTIC_WOLF) {
-      newGamestate.players[token].action_finished = false
-      interaction = mysticwolfInteraction(newGamestate, token, title)
+      gamestate.players[token].action_finished = false
+      interaction = mysticwolfInteraction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push({ [title]: narration })
+  gamestate.narration.push({ [title]: narration })
 
-  return newGamestate
+  return gamestate
 }

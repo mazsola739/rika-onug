@@ -15,13 +15,11 @@ Alien Helper
 Some players, via app, put their fist out. Aliens collectively choose one to tap who joins the Alien team but retains their original power */
 
 export const aliensInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-
-  const aliens = getAlienPlayerNumbersByRoleIds(newGamestate.players)
-  const aliensWithoutShield = getAlienPlayerNumbersByRoleIdsWithNoShield(newGamestate.players)
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
-  const randomAlienInstruction = newGamestate.alien.instruction
-  const alienKey = newGamestate.alien.key
+  const aliens = getAlienPlayerNumbersByRoleIds(gamestate.players)
+  const aliensWithoutShield = getAlienPlayerNumbersByRoleIdsWithNoShield(gamestate.players)
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+  const randomAlienInstruction = gamestate.alien.instruction
+  const alienKey = gamestate.alien.key
 
   let selectableCards = {}
   let showCards = []
@@ -31,7 +29,7 @@ export const aliensInteraction = (gamestate, token, title) => {
 
   if (alienKey.length > 1) {
     const selectablePlayerNumbers = alienKey.filter(key => key.includes('identifier_player')).map(key => key.replace('identifier_', ''))
-    const playerNumbersWithNoShield = getSelectableAnyPlayerNumbersWithNoShield(newGamestate.players)
+    const playerNumbersWithNoShield = getSelectableAnyPlayerNumbersWithNoShield(gamestate.players)
     const selectablePlayers = findUniqueElementsInArrays(playerNumbersWithNoShield, selectablePlayerNumbers)
     selectableCards = {
       selectable_cards: selectablePlayers,
@@ -39,7 +37,7 @@ export const aliensInteraction = (gamestate, token, title) => {
     }
   } else {
     const evenOrOdd = alienKey.length === 1 && (alienKey[0].includes('even') ? 'even' : 'odd')
-    const evenOrOddPlayers = evenOrOdd ? getAnyEvenOrOddPlayers(newGamestate.players, evenOrOdd) : newGamestate.players
+    const evenOrOddPlayers = evenOrOdd ? getAnyEvenOrOddPlayers(gamestate.players, evenOrOdd) : gamestate.players
     const selectableNonAlienPlayers =
       randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text'
         ? getSelectableAnyPlayerNumbersWithNoShield(evenOrOddPlayers)
@@ -53,8 +51,8 @@ export const aliensInteraction = (gamestate, token, title) => {
   switch (randomAlienInstruction) {
     case 'aliens_view_text':
     case 'aliens_allview_text':
-      if (newGamestate.players[token].shield) {
-        newGamestate.players[token].player_history[title].shielded = true
+      if (gamestate.players[token].shield) {
+        gamestate.players[token].player_history[title].shielded = true
         privateMessage.push('interaction_shielded')
       } else {
         privateMessage.push('interaction_may_one_any')
@@ -63,16 +61,16 @@ export const aliensInteraction = (gamestate, token, title) => {
       break
     case 'aliens_left_text':
     case 'aliens_right_text':
-      if (newGamestate.players[token].shield) {
-        newGamestate.players[token].player_history[title].shielded = true
+      if (gamestate.players[token].shield) {
+        gamestate.players[token].player_history[title].shielded = true
         privateMessage.push('interaction_shielded')
       } else {
         const direction = randomAlienInstruction.includes('left') ? 'left' : 'right'
         const neighbor = getNeighborByPosition(aliensWithoutShield, currentPlayerNumber, direction)
-        const updatedPlayerCards = moveCards(newGamestate.card_positions, direction, aliensWithoutShield)
-        newGamestate.players[token].card_or_mark_action = true
-        newGamestate.card_positions = {
-          ...newGamestate.card_positions,
+        const updatedPlayerCards = moveCards(gamestate.card_positions, direction, aliensWithoutShield)
+        gamestate.players[token].card_or_mark_action = true
+        gamestate.card_positions = {
+          ...gamestate.card_positions,
           ...updatedPlayerCards
         }
         privateMessage.push('interaction_moved_yours', formatPlayerIdentifier([neighbor])[0])
@@ -80,20 +78,20 @@ export const aliensInteraction = (gamestate, token, title) => {
 
       break
     case 'aliens_show_text':
-      showCards = getCardIdsByPlayerNumbers(newGamestate.card_positions, aliensWithoutShield)
+      showCards = getCardIdsByPlayerNumbers(gamestate.card_positions, aliensWithoutShield)
       showCards.forEach(key => {
-        const card = newGamestate.card_positions[key].card
+        const card = gamestate.card_positions[key].card
 
-        if (newGamestate.players[token]?.card?.original_id === card.id && currentPlayerNumber !== key) {
-          newGamestate.players[token].card.player_card_id = 87
+        if (gamestate.players[token]?.card?.original_id === card.id && currentPlayerNumber !== key) {
+          gamestate.players[token].card.player_card_id = 87
         } else if (currentPlayerNumber === key) {
-          newGamestate.players[token].card.player_card_id = card.id
-          newGamestate.players[token].card.player_team = card.team
+          gamestate.players[token].card.player_card_id = card.id
+          gamestate.players[token].card.player_team = card.team
         }
       })
 
-      if (newGamestate.players[token].shield) {
-        newGamestate.players[token].player_history[title].shielded = true
+      if (gamestate.players[token].shield) {
+        gamestate.players[token].player_history[title].shielded = true
         privateMessage.push('interaction_shielded')
       } else {
         privateMessage.push(...formatPlayerIdentifier(aliensWithoutShield))
@@ -101,7 +99,7 @@ export const aliensInteraction = (gamestate, token, title) => {
 
       break
     case 'aliens_timer_text':
-      newGamestate.vote_timer /= 2
+      gamestate.vote_timer /= 2
       privateMessage.push('interaction_timer')
 
       break
@@ -111,15 +109,15 @@ export const aliensInteraction = (gamestate, token, title) => {
       break
   }
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     ...selectableCards,
     private_message: privateMessage,
     aliens,
     obligatory: true
   }
 
-  return generateRoleInteraction(newGamestate, token, {
+  return generateRoleInteraction(gamestate, token, {
     private_message: privateMessage,
     showCards,
     selectableCards,

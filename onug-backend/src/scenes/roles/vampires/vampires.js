@@ -6,24 +6,23 @@ import { vampiresInteraction } from './vampires.interaction'
 Does not wake up with the Werewolves/Vampires */
 
 export const vampires = (gamestate, title) => {
-  const newGamestate = { ...gamestate }
-  const narration = ['vampires_kickoff_text']
-  const tokens = getAllPlayerTokens(newGamestate.players)
+  const narration = ['vampires_kickoff_text', 'vampires_vote_text']
+  const tokens = getAllPlayerTokens(gamestate.players)
 
   tokens.forEach(token => {
     let interaction = {}
 
-    const card = newGamestate.players[token].card
+    const card = gamestate.players[token].card
 
     if (isActivePlayer(card).VAMPIRES) {
-      newGamestate.players[token].action_finished = false
-      interaction = vampiresInteraction(newGamestate, token, title)
+      gamestate.players[token].action_finished = false
+      interaction = vampiresInteraction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push({ [title]: narration })
+  gamestate.narration.push({ [title]: narration })
 
-  return newGamestate
+  return gamestate
 }

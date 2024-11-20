@@ -10,16 +10,15 @@ export const hydrateReady = async message => {
 
     const { room_id, token } = message
     const gamestate = await readGamestate(room_id)
-    const newGamestate = { ...gamestate }
     // TODO validate client request
 
-    newGamestate.players[token].flag = !gamestate.players[token].flag
+    gamestate.players[token].flag = !gamestate.players[token].flag
 
     logDebug(`gamestate.players[token].flag: ${gamestate.players[token].flag}`)
 
-    const players = getTableBoard(newGamestate)
+    const players = getTableBoard(gamestate)
 
-    await upsertRoomState(newGamestate)
+    await upsertRoomState(gamestate)
 
     return broadcast(room_id, { type: HYDRATE_READY, players })
   } catch (error) {

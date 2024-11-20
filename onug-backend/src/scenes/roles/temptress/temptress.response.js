@@ -7,31 +7,29 @@ export const temptressResponse = (gamestate, token, selected_card_positions, tit
     return gamestate
   }
 
-  const newGamestate = { ...gamestate }
-
-  const centerVillain = { ...newGamestate.card_positions.center_villain.card }
+  const centerVillain = { ...gamestate.card_positions.center_villain.card }
   const selectedCard = {
-    ...newGamestate.card_positions[selected_card_positions[0]].card
+    ...gamestate.card_positions[selected_card_positions[0]].card
   }
-  newGamestate.card_positions.center_villain.card = selectedCard
-  newGamestate.card_positions[selected_card_positions[0]].card = centerVillain
+  gamestate.card_positions.center_villain.card = selectedCard
+  gamestate.card_positions[selected_card_positions[0]].card = centerVillain
 
-  newGamestate.players[token].card_or_mark_action = true
+  gamestate.players[token].card_or_mark_action = true
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     swapped_cards: [selected_card_positions[0], 'center_villain']
   }
 
   const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], 'center_villain'])
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers]
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

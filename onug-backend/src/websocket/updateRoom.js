@@ -9,19 +9,19 @@ export const updateRoom = async message => {
   const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
 
   if (!roomIdValid) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors })
-  const newGamestate = { ...gamestate }
-  let totalPlayers = determineTotalPlayers(newGamestate.selected_cards.length, newGamestate.selected_cards)
+
+  let totalPlayers = determineTotalPlayers(gamestate.selected_cards.length, gamestate.selected_cards)
   // TODO validate if player is admin
   if (expansion) {
-    newGamestate.selected_expansions = toggleExpansions(newGamestate.selected_expansions, expansion)
-    newGamestate.selected_cards = filterCardsByExpansions(newGamestate.selected_cards, newGamestate.selected_expansions)
+    gamestate.selected_expansions = toggleExpansions(gamestate.selected_expansions, expansion)
+    gamestate.selected_cards = filterCardsByExpansions(gamestate.selected_cards, gamestate.selected_expansions)
   }
 
   if (card_id) {
-    newGamestate.selected_cards = toggleCardSelect(newGamestate.selected_cards, newGamestate.selected_expansions, card_id, totalPlayers)
+    gamestate.selected_cards = toggleCardSelect(gamestate.selected_cards, gamestate.selected_expansions, card_id, totalPlayers)
   }
 
-  totalPlayers = determineTotalPlayers(newGamestate.selected_cards.length, newGamestate.selected_cards)
+  totalPlayers = determineTotalPlayers(gamestate.selected_cards.length, gamestate.selected_cards)
 
   if (totalPlayers > 12)
     return broadcast(room_id, {
@@ -30,15 +30,15 @@ export const updateRoom = async message => {
       errors: ['Cannot have more than 12 players.']
     })
 
-  const players = getPlayerNames(newGamestate)
+  const players = getPlayerNames(gamestate)
 
-  upsertRoomState(newGamestate)
+  upsertRoomState(gamestate)
 
   return broadcast(room_id, {
     type: HYDRATE_ROOM,
     success: true,
-    selected_cards: newGamestate.selected_cards,
-    selected_expansions: newGamestate.selected_expansions,
+    selected_cards: gamestate.selected_cards,
+    selected_expansions: gamestate.selected_expansions,
     players
   })
 }

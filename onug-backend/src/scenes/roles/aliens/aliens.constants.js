@@ -12,4 +12,4 @@ export const randomAlienInstructions = [
 
 export const alienAnyKeys = ['identifier_any_text', 'identifier_anyeven_text', 'identifier_anyodd_text', 'activePlayers']
 
-export const alienAllKeys = ['identifier.everyone_text', 'identifier_oddplayers_text', 'identifier_evenplayers_text']
+export const alienAllKeys = ['identifier_everyone_text', 'identifier_oddplayers_text', 'identifier_evenplayers_text']

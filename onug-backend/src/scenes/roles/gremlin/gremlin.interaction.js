@@ -1,17 +1,15 @@
 import { generateRoleInteraction, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../sceneUtils'
 
 export const gremlinInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-
-  const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
-  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGamestate.players, allPlayerTokens)
-  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, newGamestate.shield)
+  const allPlayerTokens = getAllPlayerTokens(gamestate.players)
+  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
+  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shield)
 
   //TODO const isTwoSelectable = selectablePlayerNumbers.length === 2,
   //TODO if no marks only cards
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers,
     selectable_mark_limit: { mark: 2 },
     selectable_cards: selectablePlayersWithNoShield,
@@ -19,7 +17,7 @@ export const gremlinInteraction = (gamestate, token, title) => {
     obligatory: true
   }
 
-  return generateRoleInteraction(newGamestate, token, {
+  return generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_must_two_any'],
     selectableMarks: {
       selectable_marks: selectablePlayerNumbers,

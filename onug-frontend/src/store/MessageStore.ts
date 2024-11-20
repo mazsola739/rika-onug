@@ -1,4 +1,4 @@
-import { ALIENS_VOTE, DOPPELGÄNGER_EMPATH_VOTE, EMPATH_VOTE, VAMPIRES_VOTE } from 'constant'
+import { ALIENS, DOPPELGÄNGER_EMPATH, EMPATH, VAMPIRES } from 'constant'
 import * as messages_text from 'constant/messages'
 import * as narration_text from 'constant/narrations'
 import { script } from 'data'

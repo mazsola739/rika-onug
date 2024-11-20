@@ -7,9 +7,8 @@ import { oracleQuestionRaising } from './oraclequestion.raising'
 
 //ORACLE_QUESTION
 export const oracleQuestion = (gamestate, title) => {
-  const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)
-  const selectedCards = newGamestate.selected_cards
+  const tokens = getAllPlayerTokens(gamestate.players)
+  const selectedCards = gamestate.selected_cards
 
   let availableOracleQuestionOptions = []
 
@@ -26,46 +25,46 @@ export const oracleQuestion = (gamestate, title) => {
 
   const narration = ['oracle_kickoff_text', oracleQuestion]
 
-  newGamestate.oracle = {
+  gamestate.oracle = {
     question: '',
     answer: '',
     aftermath: ''
   }
-  newGamestate.oracle.question = oracleQuestion
+  gamestate.oracle.question = oracleQuestion
 
   switch (oracleQuestion) {
     case 'oracle_viewplayer_text':
-      newGamestate.oracle.answer = '1'
+      gamestate.oracle.answer = '1'
       break
     case 'oracle_evenodd_text':
-      newGamestate.oracle.answer = 'even'
+      gamestate.oracle.answer = 'even'
       break
     case 'oracle_guessnumber_text':
-      newGamestate.oracle.number = `${theNumberIThinkingOf}`
-      newGamestate.oracle.answer = 'failure'
+      gamestate.oracle.number = `${theNumberIThinkingOf}`
+      gamestate.oracle.answer = 'failure'
       break
     default:
-      newGamestate.oracle.answer = 'no'
+      gamestate.oracle.answer = 'no'
       break
   }
 
   tokens.forEach(token => {
     let interaction = {}
 
-    const card = newGamestate.players[token].card
+    const card = gamestate.players[token].card
 
     if (isActivePlayer(card).ORACLE_QUESTION) {
-      newGamestate.players[token].player_history[title].oracle = narration[1]
-      newGamestate.players[token].action_finished = false
-      interaction = oracleQuestionRaising(newGamestate, token, title)
+      gamestate.players[token].player_history[title].oracle = narration[1]
+      gamestate.players[token].action_finished = false
+      interaction = oracleQuestionRaising(gamestate, token, title)
     } else {
       console.log('do nothing')
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push({ [title]: narration })
+  gamestate.narration.push({ [title]: narration })
 
-  return newGamestate
+  return gamestate
 }

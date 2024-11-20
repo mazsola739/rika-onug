@@ -7,42 +7,40 @@ export const copycatResponse = (gamestate, token, selected_card_positions, title
     return gamestate
   }
 
-  const newGamestate = { ...gamestate }
-
-  newGamestate.players[token].card.player_role_id = newGamestate.card_positions[selected_card_positions[0]].card.id
+  gamestate.players[token].card.player_role_id = gamestate.card_positions[selected_card_positions[0]].card.id
 
   if (
-    newGamestate.card_positions[selected_card_positions[0]].card.id === 1 ||
-    newGamestate.card_positions[selected_card_positions[0]].card.id === 30 ||
-    newGamestate.card_positions[selected_card_positions[0]].card.id === 64
+    gamestate.card_positions[selected_card_positions[0]].card.id === 1 ||
+    gamestate.card_positions[selected_card_positions[0]].card.id === 30 ||
+    gamestate.card_positions[selected_card_positions[0]].card.id === 64
   ) {
-    newGamestate.players[token].card.player_role = 'VILLAGER'
-    newGamestate.players[token].card.player_team = 'villager'
+    gamestate.players[token].card.player_role = 'VILLAGER'
+    gamestate.players[token].card.player_team = 'villager'
   } else {
-    newGamestate.players[token].card.player_role = newGamestate.card_positions[selected_card_positions[0]].card.role
-    newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[0]].card.team
+    gamestate.players[token].card.player_role = gamestate.card_positions[selected_card_positions[0]].card.role
+    gamestate.players[token].card.player_team = gamestate.card_positions[selected_card_positions[0]].card.team
   }
 
-  const showCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
+  const showCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
 
-  newGamestate.players[token].new_role_id = newGamestate.players[token].card.player_role_id
-  newGamestate.players[token].card_or_mark_action = true
+  gamestate.players[token].new_role_id = gamestate.players[token].card.player_role_id
+  gamestate.players[token].card_or_mark_action = true
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     viewed_cards: [selected_card_positions[0]],
     scene_end: true
   }
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
-    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_you_are_that_role', `${newGamestate.players[token]?.card.player_role}`],
+  const interaction = generateRoleInteraction(gamestate, token, {
+    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_you_are_that_role', `${gamestate.players[token]?.card.player_role}`],
     showCards,
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

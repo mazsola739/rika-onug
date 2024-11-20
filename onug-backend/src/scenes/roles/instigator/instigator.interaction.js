@@ -1,20 +1,19 @@
 import { generateRoleInteraction, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
 
 export const instigatorInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-  const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
-  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGamestate.players, allPlayerTokens)
+  const allPlayerTokens = getAllPlayerTokens(gamestate.players)
+  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
 
-    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers,
     selectable_mark_limit: { mark: 1 },
     obligatory: true
   }
 
-  return generateRoleInteraction(newGamestate, token, {
+  return generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_must_one_any'],
     selectableMarks: {
       selectable_marks: selectablePlayerNumbers,

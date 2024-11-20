@@ -3,14 +3,12 @@ import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions,
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 
 export const oracleAnswerAftermath = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-
-  const oracleQuestion = newGamestate.oracle.question
-  const oracleAnswer = newGamestate.oracle.answer
-  const oracleAftermath = newGamestate.oracle.aftermath
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const oracleQuestion = gamestate.oracle.question
+  const oracleAnswer = gamestate.oracle.answer
+  const oracleAftermath = gamestate.oracle.aftermath
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
   const currentPlayerCard = {
-    ...newGamestate.card_positions[currentPlayerNumber].card
+    ...gamestate.card_positions[currentPlayerNumber].card
   }
 
   let showCards = []
@@ -20,34 +18,34 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
   switch (oracleQuestion) {
     case 'oracle_guessnumber_text':
       if (oracleAftermath.includes('success')) {
-        newGamestate.oracle_eyes_open = true
+        gamestate.oracle_eyes_open = true
         privateMessage = ['interaction_oracle_open_you_eyes']
       } else {
-        newGamestate.oracle_target = true
+        gamestate.oracle_target = true
 
-        newGamestate.players[token].card.player_team = 'oracle'
+        gamestate.players[token].card.player_team = 'oracle'
         currentPlayerCard.team = 'oracle'
         privateMessage = ['interaction_oracle_team']
       }
       break
     case 'oracle_viewplayer_text':
-      newGamestate.players[token].card_or_mark_action = true
+      gamestate.players[token].card_or_mark_action = true
 
       if (oracleAftermath.includes('yes')) {
-        showCards = getCardIdsByPositions(newGamestate.card_positions, [`player_${oracleAnswer}`])
+        showCards = getCardIdsByPositions(gamestate.card_positions, [`player_${oracleAnswer}`])
       } else {
-        const randomPlayerNumber = getRandomNumber(1, newGamestate.total_players)
-        showCards = getCardIdsByPositions(newGamestate.card_positions, [`player_${randomPlayerNumber}`])
+        const randomPlayerNumber = getRandomNumber(1, gamestate.total_players)
+        showCards = getCardIdsByPositions(gamestate.card_positions, [`player_${randomPlayerNumber}`])
       }
 
       privateMessage = ['interaction_selected_card', formatPlayerIdentifier(showCards)]
       break
     case 'oracle_alienteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
-        newGamestate.players[token].card.player_team = 'alien'
+        gamestate.players[token].card.player_team = 'alien'
         privateMessage = ['interaction_alien_team']
         if (oracleAftermath.includes('yes2')) {
-          newGamestate.players[token].card.player_role = 'ALIEN'
+          gamestate.players[token].card.player_role = 'ALIEN'
           currentPlayerCard.role = 'ALIEN'
           currentPlayerCard.team = 'alien'
           privateMessage = ['interaction_alien_role']
@@ -58,7 +56,7 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
       break
     case 'oracle_werewolfteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
-        newGamestate.players[token].card.player_team = 'werewolf'
+        gamestate.players[token].card.player_team = 'werewolf'
         currentPlayerCard.team = 'werewolf'
         privateMessage = ['interaction_werewolf_team']
       } else {
@@ -67,7 +65,7 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
       break
     case 'oracle_vampireteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
-        newGamestate.players[token].card.player_team = 'vampire'
+        gamestate.players[token].card.player_team = 'vampire'
         currentPlayerCard.team = 'vampire'
         privateMessage = ['interaction_vampire_team']
       } else {
@@ -96,8 +94,8 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
       break
   }
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     viewed_cards: showCards,
     selectableCards: {
       selectable_cards: CENTER_CARD_POSITIONS,
@@ -105,7 +103,7 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
     }
   }
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message: privateMessage,
     showCards,
     selectableCards: {
@@ -114,9 +112,9 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
     }
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

@@ -7,9 +7,8 @@ import * as conditions from './conditions'
 
 export const scriptHandler = gamestate => {
   logTrace(`scriptHandler in room [${gamestate.room_id}]`)
-  const newGamestate = { ...gamestate }
-  const selected_cards = newGamestate.selected_cards
-  /*   const total_players = newGamestate.total_players */ //TODO epic battle ect...
+  const selected_cards = gamestate.selected_cards
+  /*   const total_players = gamestate.total_players */ //TODO epic battle ect...
   const role_scenes = []
 
   const addScript = scene_title => {
@@ -51,10 +50,6 @@ export const scriptHandler = gamestate => {
     {
       condition: () => conditions.hasAnyVampire(selected_cards),
       scripts: ['VAMPIRES']
-    },
-    {
-      condition: () => conditions.hasAnyVampire(selected_cards),
-      scripts: ['VAMPIRES_VOTE']
     },
     {
       condition: () => conditions.hasTheCount(selected_cards),
@@ -120,10 +115,7 @@ export const scriptHandler = gamestate => {
       condition: () => conditions.hasAnyAlien(selected_cards),
       scripts: ['ALIENS']
     },
-    {
-      condition: () => conditions.hasAnyAlien(selected_cards),
-      scripts: ['ALIENS_VOTE']
-    },
+
     {
       condition: () => conditions.hasCow(selected_cards),
       scripts: ['COW']
@@ -349,16 +341,8 @@ export const scriptHandler = gamestate => {
       scripts: ['EMPATH']
     },
     {
-      condition: () => conditions.hasEmpath(selected_cards),
-      scripts: ['EMPATH_VOTE']
-    },
-    {
       condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasEmpath(selected_cards),
       scripts: ['DOPPELGÄNGER_EMPATH']
-    },
-    {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasEmpath(selected_cards),
-      scripts: ['DOPPELGÄNGER_EMPATH_VOTE']
     },
     {
       condition: () => conditions.hasCurator(selected_cards),
@@ -398,7 +382,7 @@ export const scriptHandler = gamestate => {
 
   /* addScript('JOKE') */ //TODO into narration
 
-  newGamestate.scripts = role_scenes.sort((a, b) => a.scene_number - b.scene_number)
+  gamestate.scripts = role_scenes.sort((a, b) => a.scene_number - b.scene_number)
 
-  return newGamestate
+  return gamestate
 }

@@ -2,18 +2,16 @@ import { generateRoleInteraction, getPlayerNeighborsByToken } from '../../sceneU
 import { superVillainDetected } from './evilometer.constants'
 
 export const evilometerInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
+  const neighborIsSuperVillain = superVillainDetected(gamestate.players, token)
+  const neighbors = getPlayerNeighborsByToken(gamestate.players, token, 'both', 1)
 
-  const neighborIsSuperVillain = superVillainDetected(newGamestate.players, token)
-  const neighbors = getPlayerNeighborsByToken(newGamestate.players, token, 'both', 1)
-
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     villain_neighbor: neighborIsSuperVillain ? neighbors : [],
     scene_end: true
   }
 
-  return generateRoleInteraction(newGamestate, token, {
+  return generateRoleInteraction(gamestate, token, {
     private_message: [neighborIsSuperVillain ? 'interaction_got_tapped_by_villain' : 'interaction_no_tap'],
     uniqueInformations: {
       villain_neighbor: neighborIsSuperVillain ? neighbors : []

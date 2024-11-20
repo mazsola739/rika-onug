@@ -4,9 +4,8 @@ import { psychicKeys, randomPsychicInstructions } from './psychic.constants'
 import { psychicInteraction } from './psychic.interaction'
 
 export const psychic = (gamestate, title, prefix) => {
-  const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)
-  const total_players = newGamestate.total_players
+  const tokens = getAllPlayerTokens(gamestate.players)
+  const total_players = gamestate.total_players
 
   let availablePsychicOptions = []
 
@@ -14,32 +13,32 @@ export const psychic = (gamestate, title, prefix) => {
     availablePsychicOptions = randomPsychicInstructions.filter(option => !option.includes('view2'))
   }
   //todo better narration and save into constants
-  /*   newGamestate.bodysnatcher = {
+  /*   gamestate.bodysnatcher = {
     instruction: '',
     key: '',
   }
-  newGamestate.bodysnatcher.instruction = randomAlienInstruction
-  newGamestate.bodysnatcher.key = alienKey */
+  gamestate.bodysnatcher.instruction = randomAlienInstruction
+  gamestate.bodysnatcher.key = alienKey */
 
   const narration = [`${prefix}_kickoff_text`, getRandomItemFromArray(availablePsychicOptions), getRandomItemFromArray(psychicKeys)]
 
   tokens.forEach(token => {
     let interaction = {}
 
-    const card = newGamestate.players[token].card
+    const card = gamestate.players[token].card
 
     if (prefix === 'psychic' && isActivePlayer(card).PSYCHIC) {
-      newGamestate.players[token].action_finished = false
-      interaction = psychicInteraction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
+      gamestate.players[token].action_finished = false
+      interaction = psychicInteraction(gamestate, token, title, randomPsychicInstructions, psychicKeys)
     } else if (prefix === 'doppelganger_psychic' && isActivePlayer(card).DOPPELGÄNGER_PSYCHIC) {
-      newGamestate.players[token].action_finished = false
-      interaction = psychicInteraction(newGamestate, token, title, randomPsychicInstructions, psychicKeys)
+      gamestate.players[token].action_finished = false
+      interaction = psychicInteraction(gamestate, token, title, randomPsychicInstructions, psychicKeys)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push({ [title]: narration })
+  gamestate.narration.push({ [title]: narration })
 
-  return newGamestate
+  return gamestate
 }

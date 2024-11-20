@@ -1,15 +1,13 @@
 import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
 
 export const empathInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-
-  const allPlayerTokens = getAllPlayerTokens(newGamestate.players)
-  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(newGamestate.players, allPlayerTokens)
+  const allPlayerTokens = getAllPlayerTokens(gamestate.players)
+  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
 
   //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     selectable_cards: selectablePlayerNumbers,
     selectable_card_limit: { player: 1, center: 0 }
   }
@@ -18,8 +16,8 @@ export const empathInteraction = (gamestate, token, title) => {
     private_message: ['interaction_may_one_any'],
     selectable_cards: selectablePlayerNumbers,
     selectable_card_limit: { player: 1, center: 0 },
-    player_name: newGamestate.players[token].name,
-    player_number: newGamestate.players[token].player_number,
-    ...newGamestate.players[token].card
+    player_name: gamestate.players[token].name,
+    player_number: gamestate.players[token].player_number,
+    ...gamestate.players[token].card
   }
 }

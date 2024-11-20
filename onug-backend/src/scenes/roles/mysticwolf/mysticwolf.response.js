@@ -7,32 +7,30 @@ export const mysticwolfResponse = (gamestate, token, selected_card_positions, ti
     return gamestate
   }
 
-  const newGamestate = { ...gamestate }
+  const selectedPositionCard = gamestate.card_positions[selected_card_positions[0]].card
+  const viewCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
 
-  const selectedPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
-  const viewCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
-
-  if (newGamestate.players[token]?.card?.original_id === selectedPositionCard.id) {
-    newGamestate.players[token].card.player_card_id = 87
+  if (gamestate.players[token]?.card?.original_id === selectedPositionCard.id) {
+    gamestate.players[token].card.player_card_id = 87
   }
 
-  newGamestate.players[token].card_or_mark_action = true
+  gamestate.players[token].card_or_mark_action = true
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     viewed_cards: [selected_card_positions[0]],
     scene_end: true
   }
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
     showCards: viewCards,
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

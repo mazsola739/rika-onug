@@ -7,50 +7,49 @@ export const doppelgangerResponse = (gamestate, token, selected_card_positions, 
     return gamestate
   }
 
-  const newGamestate = { ...gamestate }
-  const playerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const playerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
 
-  newGamestate.players[token].card.player_role_id = newGamestate.card_positions[selected_card_positions[0]].card.id
+  gamestate.players[token].card.player_role_id = gamestate.card_positions[selected_card_positions[0]].card.id
 
-  if (newGamestate.card_positions[selected_card_positions[0]].card.id === 30 || newGamestate.card_positions[selected_card_positions[0]].card.id === 64) {
-    newGamestate.players[token].card.player_role = 'VILLAGER'
-    newGamestate.players[token].card.player_team = 'villager'
+  if (gamestate.card_positions[selected_card_positions[0]].card.id === 30 || gamestate.card_positions[selected_card_positions[0]].card.id === 64) {
+    gamestate.players[token].card.player_role = 'VILLAGER'
+    gamestate.players[token].card.player_team = 'villager'
   } else {
-    newGamestate.players[token].card.player_role = newGamestate.card_positions[selected_card_positions[0]].card.role
-    newGamestate.players[token].card.player_team = newGamestate.card_positions[selected_card_positions[0]].card.team
+    gamestate.players[token].card.player_role = gamestate.card_positions[selected_card_positions[0]].card.role
+    gamestate.players[token].card.player_team = gamestate.card_positions[selected_card_positions[0]].card.team
   }
 
-  newGamestate.card_positions[playerNumber].card.role = newGamestate.card_positions[selected_card_positions[0]].card.role
-  newGamestate.card_positions[playerNumber].card.team = newGamestate.card_positions[selected_card_positions[0]].card.team
+  gamestate.card_positions[playerNumber].card.role = gamestate.card_positions[selected_card_positions[0]].card.role
+  gamestate.card_positions[playerNumber].card.team = gamestate.card_positions[selected_card_positions[0]].card.team
 
-  const showCards = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
+  const showCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
 
-  ;(newGamestate.players[token].player_history[title].show_cards = showCards), (newGamestate.players[token].new_role_id = newGamestate.players[token].card.player_role_id)
-  newGamestate.players[token].card_or_mark_action = true
+  ;(gamestate.players[token].player_history[title].show_cards = showCards), (gamestate.players[token].new_role_id = gamestate.players[token].card.player_role_id)
+  gamestate.players[token].card_or_mark_action = true
 
   const private_message = [
     'interaction_saw_card',
     formatPlayerIdentifier(selected_card_positions)[0],
     'interaction_you_are_that_role',
-    `role_${newGamestate.players[token]?.card.player_role.toLowerCase()}`
+    `role_${gamestate.players[token]?.card.player_role.toLowerCase()}`
   ]
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     viewed_cards: [selected_card_positions[0]],
     private_message,
     scene_end: true
   }
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message,
     showCards,
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

@@ -3,24 +3,23 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { loversInteraction } from './lovers.interaction'
 
 export const lovers = (gamestate, title) => {
-  const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)
+  const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['lovers_kickoff_text']
 
   tokens.forEach(token => {
     let interaction = {}
 
-    const card = newGamestate.players[token].card
+    const card = gamestate.players[token].card
 
     if (isActivePlayer(card).LOVERS) {
-      newGamestate.players[token].action_finished = false
-      interaction = loversInteraction(newGamestate, token, title)
+      gamestate.players[token].action_finished = false
+      interaction = loversInteraction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push({ [title]: narration })
+  gamestate.narration.push({ [title]: narration })
 
-  return newGamestate
+  return gamestate
 }

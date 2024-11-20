@@ -4,8 +4,7 @@ import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMe
 import { beholderInteraction } from './beholder.interaction'
 
 export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
-  const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)
+  const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [
     hasDoppelganger ? 'doppelganger_beholder_kickoff_text' : 'beholder_seer_kickoff_text',
     hasSeer && hasApprenticeSeer ? 'beholder_seer_apprenticeseer_kickoff_text' : hasSeer ? 'beholder_seer_kickoff_text' : 'beholder_apprenticeseer_kickoff_text'
@@ -14,17 +13,17 @@ export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppel
   tokens.forEach(token => {
     let interaction = {}
 
-    const card = newGamestate.players[token].card
+    const card = gamestate.players[token].card
 
     if (isActivePlayer(card).BEHOLDER) {
-      newGamestate.players[token].action_finished = false
-      interaction = beholderInteraction(newGamestate, token, title)
+      gamestate.players[token].action_finished = false
+      interaction = beholderInteraction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push({ [title]: narration })
+  gamestate.narration.push({ [title]: narration })
 
-  return newGamestate
+  return gamestate
 }

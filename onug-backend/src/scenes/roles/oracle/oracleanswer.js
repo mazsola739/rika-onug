@@ -5,10 +5,9 @@ import { oracleAnswerAftermath } from './oracleanswer.aftermath'
 
 //ORACLE_ANSWER
 export const oracleAnswer = (gamestate, title) => {
-  const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)
-  const oracleQuestion = newGamestate.oracle.question
-  const oracleAnswer = newGamestate.oracle.answer
+  const tokens = getAllPlayerTokens(gamestate.players)
+  const oracleQuestion = gamestate.oracle.question
+  const oracleAnswer = gamestate.oracle.answer
 
   let narration = []
   let aftermath = false
@@ -39,20 +38,20 @@ export const oracleAnswer = (gamestate, title) => {
     case 'oracle_alienexchange_text':
       aftermath = true
       if (oracleAnswer === 'yes') {
-        newGamestate.alienexchange = true
+        gamestate.alienexchange = true
         narration = ['oracle_alienexchange_yes_text']
       } else {
-        newGamestate.alienexchange = false
+        gamestate.alienexchange = false
         narration = ['oracle_alienexchange_no_text']
       }
       break
     case 'oracle_ripple_text':
       aftermath = true
       if (oracleAnswer === 'yes') {
-        newGamestate.ripple = true
+        gamestate.ripple = true
         narration = ['oracle_ripple_yes_text']
       } else {
-        newGamestate.ripple = false
+        gamestate.ripple = false
         narration = ['oracle_ripple_no_text']
       }
       break
@@ -69,16 +68,16 @@ export const oracleAnswer = (gamestate, title) => {
   tokens.forEach(token => {
     let interaction = {}
 
-    const card = newGamestate.players[token].card
+    const card = gamestate.players[token].card
 
     if (aftermath && isActivePlayer(card).ORACLE_ANSWER) {
-      newGamestate.oracle.aftermath = narration[0]
-      newGamestate.players[token].action_finished = false
-      interaction = oracleAnswerAftermath(newGamestate, token, title)
+      gamestate.oracle.aftermath = narration[0]
+      gamestate.players[token].action_finished = false
+      interaction = oracleAnswerAftermath(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  return newGamestate
+  return gamestate
 }

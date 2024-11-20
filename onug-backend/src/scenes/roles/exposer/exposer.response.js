@@ -7,35 +7,33 @@ export const exposerResponse = (gamestate, token, selected_card_positions, title
     return gamestate
   }
 
-  const newGamestate = { ...gamestate }
-
   const cardPositions = selected_card_positions.slice(0, gamestate.players[token].player_history[title].selectable_card_limit.center)
-  const revealedCards = getCardIdsByPositions(newGamestate.card_positions, cardPositions)
+  const revealedCards = getCardIdsByPositions(gamestate.card_positions, cardPositions)
 
-  newGamestate.flipped.push(...revealedCards)
+  gamestate.flipped.push(...revealedCards)
 
-  if (revealedCards.some(card => newGamestate.players[token].card.player_original_id === card.id)) {
-    newGamestate.players[token].card.player_card_id = 87
+  if (revealedCards.some(card => gamestate.players[token].card.player_original_id === card.id)) {
+    gamestate.players[token].card.player_card_id = 87
   }
 
-  newGamestate.players[token].card_or_mark_action = true
+  gamestate.players[token].card_or_mark_action = true
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     viewed_cards: cardPositions,
     flipped_cards: revealedCards,
     scene_end: true
   }
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_flipped_card', formatPlayerIdentifier(cardPositions)],
     showCards: revealedCards,
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

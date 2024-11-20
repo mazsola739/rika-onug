@@ -1,22 +1,84 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleInteraction, getNonVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
 
 export const vampiresInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
+  const nonVampires = getNonVampirePlayerNumbersByRoleIds(gamestate)
+  const vampires = getVampirePlayerNumbersByRoleIds(gamestate.players)
 
-  const vampires = getVampirePlayerNumbersByRoleIds(newGamestate.players)
-
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
-    vampires,
-    scene_end: true
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
+    vampires
   }
 
-  const messageIdentifiers = formatPlayerIdentifier(vampires)
-  const privateMessage = vampires.length === 1 ? ['interaction_no_vampires'] : ['interaction_vampires', ...messageIdentifiers]
+  const isSingleNonVampire = nonVampires.length === 1
+  const isSingleVampire = vampires.length === 1
 
-  return generateRoleInteraction(newGamestate, token, {
-    private_message: [...privateMessage],
-    uniqueInformations: { vampires },
-    scene_end: true
+  const messageVampireIdentifiers = formatPlayerIdentifier(vampires)
+  const privateMessage = isSingleVampire ? ['interaction_no_vampires'] : ['interaction_vampires', ...messageVampireIdentifiers]
+
+  if (isSingleNonVampire) {
+    const vampirePosition = gamestate.mark_positions.vampire
+    const selectedPosition = gamestate.card_positions[nonVampires[0]].mark
+
+    const isSwappedAlready = vampirePosition === selectedPosition
+
+    if (!isSwappedAlready) {
+      gamestate.mark_positions.vampire = selectedPosition
+      gamestate.card_positions[nonVampires[0]].mark = vampirePosition
+    }
+
+    gamestate.players[token].card_or_mark_action = true
+
+    gamestate.players[token].player_history[title] = {
+      ...gamestate.players[token].player_history[title],
+      mark_of_vampire: [nonVampires[0]],
+      vampires,
+      scene_end: true
+    }
+
+    const messageVictimIdentifiers = formatPlayerIdentifier([nonVampires[0]])[0]
+    privateMessage.push('interaction_mark_of_vampire')
+    privateMessage.push(...messageVictimIdentifiers)
+
+    return generateRoleInteraction(gamestate, token, {
+      private_message: privateMessage,
+      uniqueInformations: { vampires },
+      scene_end: true
+    })
+  }
+
+  if (isSingleVampire) {
+    gamestate.players[token].player_history[title] = {
+      ...gamestate.players[token].player_history[title],
+      selectable_marks: nonVampires,
+      selectable_mark_limit: { mark: 1 },
+      vampires,
+      vote: false,
+      obligatory: true
+    }
+
+    return generateRoleInteraction(gamestate, token, {
+      private_message: ['interaction_must_one_any_non_vampire'],
+      selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
+      uniqueInformations: { vote: false, vampires },
+      obligatory: true
+    })
+  }
+
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
+    selectable_marks: nonVampires,
+    selectable_mark_limit: { mark: 1 },
+    vampires,
+    vote: true,
+    obligatory: true
+  }
+
+  privateMessage.push('interaction_must_one_any_non_vampire')
+
+  return generateRoleInteraction(gamestate, token, {
+    private_message: privateMessage,
+    selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
+    uniqueInformations: { vote: true, vampires },
+    obligatory: true
   })
 }

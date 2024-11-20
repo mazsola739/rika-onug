@@ -21,7 +21,6 @@ const isLovers = card => {
 export const isActivePlayer = card => {
   return {
     ALIENS: isRoleOrCopyPlayer(card, ALL_ALIEN),
-    ALIENS_VOTE: isRoleOrCopyPlayer(card, ALL_ALIEN),
     ALPHA_WOLF: isSpecificRole(card, 17),
     ANNOYING_LAD: isSpecificRole(card, 55),
     APPRENTICE_ASSASSIN: isSpecificRole(card, 28),
@@ -44,7 +43,6 @@ export const isActivePlayer = card => {
     DOPPELGÄNGER_BODY_SNATCHER: isCopyPlayerRole(card, 74),
     DOPPELGÄNGER_CURATOR: isCopyPlayerRole(card, 20),
     DOPPELGÄNGER_EMPATH: isCopyPlayerRole(card, 20),
-    DOPPELGÄNGER_EMPATH_VOTE: isCopyPlayerRole(card, 77),
     DOPPELGÄNGER_EXPOSER: isCopyPlayerRole(card, 46),
     DOPPELGÄNGER_FLIPPER: isCopyPlayerRole(card, 59),
     DOPPELGÄNGER_GREMLIN: isCopyPlayerRole(card, 33),
@@ -59,7 +57,6 @@ export const isActivePlayer = card => {
     DR_PEEKER: isSpecificRole(card, 57),
     DRUNK: isSpecificRole(card, 2),
     EMPATH: card.player_original_id !== 77 || (card.player_role_id !== 20 && COPY_PLAYER.includes(card.player_original_id)),
-    EMPATH_VOTE: isSpecificRole(card, 77),
     EVERYONE_MARK: isEveryOne,
     EVILOMETER: isSpecificRole(card, 58),
     EXPOSER: isSpecificRole(card, 46),
@@ -103,7 +100,6 @@ export const isActivePlayer = card => {
     THING: isSpecificRole(card, 85),
     TROUBLEMAKER: isSpecificRole(card, 11),
     VAMPIRES: isRoleOrCopyPlayer(card, ALL_VAMPIRE),
-    VAMPIRES_VOTE: isRoleOrCopyPlayer(card, ALL_VAMPIRE),
     VILLAGE_IDIOT: isSpecificRole(card, 26),
     VOODOO_LOU: isSpecificRole(card, 70),
     WEREWOLVES: isRoleOrCopyPlayer(card, ALL_WEREWOLF),

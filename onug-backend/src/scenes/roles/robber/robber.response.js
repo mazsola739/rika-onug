@@ -7,27 +7,25 @@ export const robberResponse = (gamestate, token, selected_card_positions, title)
     return gamestate
   }
 
-  const newGamestate = { ...gamestate }
-
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
   const currentPlayerCard = {
-    ...newGamestate.card_positions[currentPlayerNumber].card
+    ...gamestate.card_positions[currentPlayerNumber].card
   }
   const selectedCard = {
-    ...newGamestate.card_positions[selected_card_positions[0]].card
+    ...gamestate.card_positions[selected_card_positions[0]].card
   }
-  newGamestate.card_positions[currentPlayerNumber].card = selectedCard
-  newGamestate.card_positions[selected_card_positions[0]].card = currentPlayerCard
+  gamestate.card_positions[currentPlayerNumber].card = selectedCard
+  gamestate.card_positions[selected_card_positions[0]].card = currentPlayerCard
 
-  newGamestate.players[token].card.player_card_id = newGamestate.card_positions[currentPlayerNumber].card.id
-  newGamestate.players[token].card.player_team = newGamestate.card_positions[currentPlayerNumber].card.team
+  gamestate.players[token].card.player_card_id = gamestate.card_positions[currentPlayerNumber].card.id
+  gamestate.players[token].card.player_team = gamestate.card_positions[currentPlayerNumber].card.team
 
-  const showCards = getCardIdsByPlayerNumbers(newGamestate.card_positions, [currentPlayerNumber])
+  const showCards = getCardIdsByPlayerNumbers(gamestate.card_positions, [currentPlayerNumber])
 
-  newGamestate.players[token].card_or_mark_action = true
+  gamestate.players[token].card_or_mark_action = true
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
     viewed_cards: [currentPlayerNumber],
     scene_end: true
@@ -35,15 +33,15 @@ export const robberResponse = (gamestate, token, selected_card_positions, title)
 
   const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_card_positions[0]])
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
     showCards,
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

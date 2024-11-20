@@ -4,9 +4,8 @@ import { randomBlobKickoffText } from './blob.constants'
 import { blobInteraction } from './blob.interaction'
 
 export const blob = (gamestate, title) => {
-  const newGamestate = { ...gamestate }
-  const tokens = getAllPlayerTokens(newGamestate.players)
-  const total_players = newGamestate.total_players
+  const tokens = getAllPlayerTokens(gamestate.players)
+  const total_players = gamestate.total_players
 
   let availableBlobOptions = []
 
@@ -22,17 +21,17 @@ export const blob = (gamestate, title) => {
   tokens.forEach(token => {
     let interaction = {}
 
-    const card = newGamestate.players[token].card
+    const card = gamestate.players[token].card
 
     if (isActivePlayer(card).BLOB) {
-      newGamestate.players[token].action_finished = false
-      interaction = blobInteraction(newGamestate, token, title)
+      gamestate.players[token].action_finished = false
+      interaction = blobInteraction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
   })
 
-  newGamestate.narration.push({ [title]: narration })
+  gamestate.narration.push({ [title]: narration })
 
-  return newGamestate
+  return gamestate
 }

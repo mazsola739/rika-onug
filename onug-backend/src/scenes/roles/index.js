@@ -4,9 +4,6 @@ export * from './aliens/aliens'
 export * from './aliens/aliens.response'
 export * from './aliens/aliens.utils'
 
-export * from './aliensvote/aliens.vote'
-export * from './aliensvote/aliens.voteresult'
-
 export * from './alphawolf/alphawolf.interaction'
 export * from './alphawolf/alphawolf'
 export * from './alphawolf/alphawolf.response'
@@ -94,9 +91,6 @@ export * from './empath/empath.interaction'
 export * from './empath/empath'
 export * from './empath/empath.response'
 export * from './empath/empath.utils'
-
-export * from './empathvote/empath.vote'
-export * from './empathvote/empath.voteresult'
 
 export * from './epicbattle/epicbattle.constants'
 export * from './epicbattle/epicbattle'
@@ -274,11 +268,8 @@ export * from './troublemaker/troublemaker.response'
 
 export * from './vampires/vampires.interaction'
 export * from './vampires/vampires'
-
-export * from './vampiresvote/vampiresvote.hydrate'
-export * from './vampiresvote/vampiresvote.interaction'
-export * from './vampiresvote/vampiresvote'
-export * from './vampiresvote/vampiresvote.response'
+export * from './vampires/vampires.response'
+export * from './vampires/vampires.votehydrate'
 
 export * from './villageidiot/villageidiot.interaction'
 export * from './villageidiot/villageidiot'

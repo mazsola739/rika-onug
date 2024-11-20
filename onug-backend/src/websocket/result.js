@@ -16,10 +16,9 @@ export const result = async (ws, message) => {
       return ws.send(JSON.stringify({ type: ERROR, success: false, errors }))
     }
 
-    const newGamestate = { ...gamestate }
-    const card_positions = newGamestate.card_positions
+    const card_positions = gamestate.card_positions
 
-    const center_cards = Object.entries(newGamestate.card_positions)
+    const center_cards = Object.entries(gamestate.card_positions)
       .filter(([position, { card }]) => position.startsWith('center') && card.id > 0)
       .map(([position, { card }]) => ({
         card_position: position,
@@ -28,7 +27,7 @@ export const result = async (ws, message) => {
         card_team: card.team
       }))
 
-    Object.values(newGamestate.players).forEach(player => {
+    Object.values(gamestate.players).forEach(player => {
       const playerCard = card_positions[player.player_number].card
       player.card = {
         ...player.card,
@@ -40,13 +39,13 @@ export const result = async (ws, message) => {
       }
     })
 
-    const { voteResult, winnerTeams, loserTeam } = await getWinnersAndLosers(newGamestate)
+    const { voteResult, winnerTeams, loserTeam } = await getWinnersAndLosers(gamestate)
 
-    newGamestate.vote_result = voteResult
-    newGamestate.winner_teams = winnerTeams
-    newGamestate.loser_teams = loserTeam
+    gamestate.vote_result = voteResult
+    gamestate.winner_teams = winnerTeams
+    gamestate.loser_teams = loserTeam
 
-    await upsertRoomState(newGamestate)
+    await upsertRoomState(gamestate)
 
     return ws.send(
       JSON.stringify({
@@ -57,8 +56,8 @@ export const result = async (ws, message) => {
         winner_teams: winnerTeams,
         loser_teams: loserTeam,
         center_cards,
-        player: getPlayerInfo(newGamestate.players[token]),
-        players: Object.values(newGamestate.players).map(player => getPlayerInfo(player))
+        player: getPlayerInfo(gamestate.players[token]),
+        players: Object.values(gamestate.players).map(player => getPlayerInfo(player))
       })
     )
   } catch (error) {

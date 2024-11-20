@@ -1,19 +1,19 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { cupidInteraction } from './cupid.interaction'
+import { aliensVoteResult } from './aliens.voteresult'
 
-export const cupid = (gamestate, title) => {
+export const aliensVote = (gamestate, title) => {
+  const narration = ['aliens_vote_result_text']
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['cupid_kickoff_text']
 
   tokens.forEach(token => {
     let interaction = {}
 
     const card = gamestate.players[token].card
 
-    if (isActivePlayer(card).CUPID) {
+    if (isActivePlayer(card).ALIENS) {
       gamestate.players[token].action_finished = false
-      interaction = cupidInteraction(gamestate, token, title)
+      interaction = aliensVoteResult(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, interaction, narration)

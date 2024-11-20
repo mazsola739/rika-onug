@@ -14,55 +14,53 @@ export const hydrateGuess = async (ws, message) => {
       return ws.send(JSON.stringify({ type: HYDRATE_GUESS, success: false, errors }))
     }
 
-    const newGamestate = { ...gamestate }
-
-    if (!newGamestate.guess_cards) {
-      newGamestate.guess_cards = [...new Set(newGamestate.selected_cards)]
+    if (!gamestate.guess_cards) {
+      gamestate.guess_cards = [...new Set(gamestate.selected_cards)]
     } else {
-      newGamestate.guess_cards = [...new Set(newGamestate.guess_cards.filter(id => newGamestate.selected_cards.includes(id)))]
+      gamestate.guess_cards = [...new Set(gamestate.guess_cards.filter(id => gamestate.selected_cards.includes(id)))]
     }
 
-    Object.keys(newGamestate.card_positions).forEach(key => {
-      if (!newGamestate.card_positions[key].guessed_roles) {
-        newGamestate.card_positions[key].guessed_roles = []
+    Object.keys(gamestate.card_positions).forEach(key => {
+      if (!gamestate.card_positions[key].guessed_roles) {
+        gamestate.card_positions[key].guessed_roles = []
       }
     })
 
     if (position && id !== undefined) {
-      Object.values(newGamestate.card_positions).forEach(card => {
+      Object.values(gamestate.card_positions).forEach(card => {
         const index = card.guessed_roles.indexOf(id)
         if (index > -1) {
           card.guessed_roles.splice(index, 1)
         }
       })
 
-      const target = newGamestate.card_positions[position]
+      const target = gamestate.card_positions[position]
       if (target) {
         const roleIndex = target.guessed_roles.indexOf(id)
 
         if (roleIndex > -1) {
           target.guessed_roles.splice(roleIndex, 1)
-          if (!newGamestate.guess_cards.includes(id)) {
-            newGamestate.guess_cards.push(id)
+          if (!gamestate.guess_cards.includes(id)) {
+            gamestate.guess_cards.push(id)
           }
         } else {
           target.guessed_roles.push(id)
-          newGamestate.guess_cards = newGamestate.guess_cards.filter(token => token !== id)
+          gamestate.guess_cards = gamestate.guess_cards.filter(token => token !== id)
         }
       }
     }
 
-    const guessed_cards = Object.keys(newGamestate.card_positions).map(position => ({
+    const guessed_cards = Object.keys(gamestate.card_positions).map(position => ({
       position,
-      guessed_roles: newGamestate.card_positions[position].guessed_roles
+      guessed_roles: gamestate.card_positions[position].guessed_roles
     }))
 
-    await upsertRoomState(newGamestate)
+    await upsertRoomState(gamestate)
 
     return broadcast(room_id, {
       type: HYDRATE_GUESS,
       success: true,
-      guess_cards: newGamestate.guess_cards,
+      guess_cards: gamestate.guess_cards,
       guessed_cards
     })
   } catch (error) {

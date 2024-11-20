@@ -7,33 +7,31 @@ export const troublemakerResponse = (gamestate, token, selected_card_positions, 
     return gamestate
   }
 
-  const newGamestate = { ...gamestate }
-
   const [position1, position2] = selected_card_positions.slice(0, 2)
-  const playerOneCard = { ...newGamestate.card_positions[position1].card }
-  const playerTwoCard = { ...newGamestate.card_positions[position2].card }
+  const playerOneCard = { ...gamestate.card_positions[position1].card }
+  const playerTwoCard = { ...gamestate.card_positions[position2].card }
 
-  newGamestate.card_positions[position1].card = playerTwoCard
-  newGamestate.card_positions[position2].card = playerOneCard
+  gamestate.card_positions[position1].card = playerTwoCard
+  gamestate.card_positions[position2].card = playerOneCard
 
-  newGamestate.players[token].card_or_mark_action = true
+  gamestate.players[token].card_or_mark_action = true
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     swapped_cards: [position1, position2],
     scene_end: true
   }
 
   const messageIdentifiers = formatPlayerIdentifier([position1, position2])
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_swapped_cards', ...messageIdentifiers],
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

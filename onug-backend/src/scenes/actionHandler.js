@@ -15,10 +15,6 @@ export const actionHandler = (gamestate, scene_title) => {
       /* MUST */
       return roles.aliens(newGamestate, scene_title)
     }
-    case 'ALIENS_VOTE': {
-      /* MUST & MAY*/
-      return roles.aliensVote(newGamestate, scene_title)
-    }
     case 'ALPHA_WOLF': {
       /* MUST */
       return roles.alphawolf(newGamestate, scene_title)
@@ -102,10 +98,6 @@ export const actionHandler = (gamestate, scene_title) => {
       /* MUST */
       return roles.empath(newGamestate, scene_title, 'doppelganger_empath')
     }
-    case 'DOPPELGÄNGER_EMPATH_VOTE': {
-      /* MUST */
-      return roles.empathVote(newGamestate, scene_title, 'doppelganger_empath')
-    }
     case 'DOPPELGÄNGER_EXPOSER': {
       /* MUST */
       return roles.exposer(newGamestate, scene_title, 'doppelganger_exposer')
@@ -154,10 +146,6 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'EMPATH': {
       /* MUST */
       return roles.empath(newGamestate, scene_title, 'empath')
-    }
-    case 'EMPATH_VOTE': {
-      /* MUST */
-      return roles.empathVote(newGamestate, scene_title, 'empath')
     }
     case 'EPIC_BATTLE': {
       return roles.epicbattle(
@@ -335,10 +323,6 @@ export const actionHandler = (gamestate, scene_title) => {
     case 'VAMPIRES': {
       /* MUST */
       return roles.vampires(newGamestate, scene_title)
-    }
-    case 'VAMPIRES_VOTE': {
-      /* MUST */
-      return roles.vampiresvote(newGamestate, scene_title)
     }
     case 'VILLAGE_IDIOT': {
       return roles.villageidiot(newGamestate, scene_title)

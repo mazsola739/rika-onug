@@ -3,15 +3,13 @@ import { generateRoleInteraction, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbe
 import { getAnyOtherPlayersByToken } from './bodysnatcher.utils'
 
 export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey) => {
-  const newGamestate = { ...gamestate }
-
-  if (newGamestate.players[token].shield) {
-    newGamestate.players[token].player_history[title] = {
-      ...newGamestate.players[token].player_history[title],
+  if (gamestate.players[token].shield) {
+    gamestate.players[token].player_history[title] = {
+      ...gamestate.players[token].player_history[title],
       shielded: true
     }
 
-    return generateRoleInteraction(newGamestate, token, {
+    return generateRoleInteraction(gamestate, token, {
       private_message: ['interaction_shielded']
     })
   }
@@ -26,24 +24,24 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
       case 'identifier_anyeven_text':
       case 'identifier_anyodd_text': {
         const evenOrOdd = bodysnatcherKey.replace('identifier_', '').replace('_text', '').replace('any', '')
-        selectablePlayers = getAnyEvenOrOddPlayers(newGamestate.players, evenOrOdd)
+        selectablePlayers = getAnyEvenOrOddPlayers(gamestate.players, evenOrOdd)
         break
       }
       case 'identifier_leftneighbor_text':
       case 'identifier_rightneighbor_text':
       case 'identifier_oneneighbor_text': {
         const direction = bodysnatcherKey.includes('left') ? 'left' : bodysnatcherKey.includes('right') ? 'right' : 'both'
-        selectablePlayers = getPlayerNeighborsByToken(newGamestate.players, token, direction, 1)
+        selectablePlayers = getPlayerNeighborsByToken(gamestate.players, token, direction, 1)
         break
       }
       case 'identifier_any_text':
-        selectablePlayers = getAnyOtherPlayersByToken(newGamestate.players)
+        selectablePlayers = getAnyOtherPlayersByToken(gamestate.players)
         break
     }
 
     const selectablePlayerNumbers = getNonAlienPlayerNumbersByRoleIdsWithNoShield(selectablePlayers)
 
-      //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
+    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
 
     selectableCards = {
       selectable_cards: selectablePlayerNumbers,
@@ -59,17 +57,17 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
     interactionMessage = 'interaction_must_one_center'
   }
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     ...selectableCards,
     obligatory: true,
-    scene_end,
+    scene_end
   }
 
-  return generateRoleInteraction(newGamestate, token, {
+  return generateRoleInteraction(gamestate, token, {
     private_message: [interactionMessage],
     selectableCards,
     obligatory: true,
-    scene_end,
+    scene_end
   })
 }

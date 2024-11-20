@@ -9,39 +9,37 @@ export const flipperResponse = (gamestate, token, selected_card_positions, title
     return gamestate
   }
 
-  const newGamestate = { ...gamestate }
-
-  const selectedPositionCard = newGamestate.card_positions[selected_card_positions[0]].card
-  const revealedCard = getCardIdsByPositions(newGamestate.card_positions, [selected_card_positions[0]])
+  const selectedPositionCard = gamestate.card_positions[selected_card_positions[0]].card
+  const revealedCard = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
   const isTown = revealedCard.every(card => GOOD_GUY.includes(Object.values(card)[0]))
 
-  if (newGamestate.players[token].card?.original_id === selectedPositionCard.id) {
-    newGamestate.players[token].card.player_card_id = 87
+  if (gamestate.players[token].card?.original_id === selectedPositionCard.id) {
+    gamestate.players[token].card.player_card_id = 87
   }
 
-  newGamestate.players[token].card_or_mark_action = true
+  gamestate.players[token].card_or_mark_action = true
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     scene_end: true
   }
 
   if (isTown) {
-    newGamestate.flipped.push(revealedCard[0])
-    newGamestate.players[token].player_history[title].flipped_cards = revealedCard
+    gamestate.flipped.push(revealedCard[0])
+    gamestate.players[token].player_history[title].flipped_cards = revealedCard
   } else {
-    newGamestate.players[token].player_history[title].show_cards = revealedCard
+    gamestate.players[token].player_history[title].show_cards = revealedCard
   }
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_flipped_card', formatPlayerIdentifier(selected_card_positions)[0]],
     showCards: revealedCard,
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

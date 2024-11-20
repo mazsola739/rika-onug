@@ -9,31 +9,29 @@ export const thingResponse = (gamestate, token, selected_card_positions, title) 
     return gamestate
   }
 
-  const newGamestate = { ...gamestate }
-
-  const tappedPlayerToken = getPlayerTokensByPlayerNumber(newGamestate.players, [selected_card_positions[0]])
+  const tappedPlayerToken = getPlayerTokensByPlayerNumber(gamestate.players, [selected_card_positions[0]])
   //TODO only 1 player
 
-  webSocketServerConnectionsPerRoom[newGamestate.room_id][tappedPlayerToken[0]].send(
+  webSocketServerConnectionsPerRoom[gamestate.room_id][tappedPlayerToken[0]].send(
     JSON.stringify({
       type: MESSAGE,
       message: ['message_tapped']
     })
   )
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     tapped: [selected_card_positions[0]]
   }
 
-  const interaction = generateRoleInteraction(newGamestate, token, {
+  const interaction = generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_tap', formatPlayerIdentifier(selected_card_positions)[0]],
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

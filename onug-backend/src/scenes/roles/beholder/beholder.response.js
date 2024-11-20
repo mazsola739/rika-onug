@@ -7,43 +7,41 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
     return gamestate
   }
 
-  const newGamestate = { ...gamestate }
-
   let interaction = {}
 
   if (selected_answer === 'yes') {
-    const seers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(newGamestate.players)
-    const viewCards = getCardIdsByPositions(newGamestate.card_positions, seers)
+    const seers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(gamestate.players)
+    const viewCards = getCardIdsByPositions(gamestate.card_positions, seers)
 
-    if (seers.some(seer => newGamestate.card_positions[seer].card.id === newGamestate.players[token]?.card?.original_id)) {
-      newGamestate.players[token].card.player_card_id = 87
+    if (seers.some(seer => gamestate.card_positions[seer].card.id === gamestate.players[token]?.card?.original_id)) {
+      gamestate.players[token].card.player_card_id = 87
     }
 
-    newGamestate.players[token].card_or_mark_action = true
+    gamestate.players[token].card_or_mark_action = true
 
-    newGamestate.players[token].player_history[title] = {
-      ...newGamestate.players[token].player_history[title],
+    gamestate.players[token].player_history[title] = {
+      ...gamestate.players[token].player_history[title],
       viewed_cards: seers
     }
 
     const messageIdentifiers = formatPlayerIdentifier(seers)
 
-    interaction = generateRoleInteraction(newGamestate, token, {
+    interaction = generateRoleInteraction(gamestate, token, {
       private_message: ['interaction_saw_card', ...messageIdentifiers],
       showCards: viewCards,
       uniqueInformations: { seers },
       scene_end: true
     })
   } else if (selected_answer === 'no') {
-    interaction = generateRoleInteraction(newGamestate, token, {
+    interaction = generateRoleInteraction(gamestate, token, {
       private_message: ['interaction_nothing'],
       scene_end: true
     })
   }
 
-  const narration = getNarrationByTitle(title, newGamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(newGamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
 
-  return newGamestate
+  return gamestate
 }

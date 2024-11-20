@@ -1,20 +1,18 @@
 import { generateRoleInteraction, getPlayerNeighborsByToken } from '../../sceneUtils'
 
 export const diseasedInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-
-  const neighbors = getPlayerNeighborsByToken(newGamestate.players, token, 'both', 1)
+  const neighbors = getPlayerNeighborsByToken(gamestate.players, token, 'both', 1)
 
   //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     selectable_marks: [...neighbors.left, ...neighbors.right],
     selectable_mark_limit: { mark: 1 },
     obligatory: true
   }
 
-  return generateRoleInteraction(newGamestate, token, {
+  return generateRoleInteraction(gamestate, token, {
     private_message: ['interaction_must_one_neighbor'],
     selectableCards: {
       selectable_marks: [...neighbors.left, ...neighbors.right],

@@ -3,18 +3,16 @@ import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtil
 import { getDreamWolfPlayerNumberByRoleIds, getWerewolfPlayerNumbersByRoleIds } from './werewolves.utils'
 
 export const werewolvesInteraction = (gamestate, token, title) => {
-  const newGamestate = { ...gamestate }
-
-  const werewolves = getWerewolfPlayerNumbersByRoleIds(newGamestate.players)
-  const dreamwolf = getDreamWolfPlayerNumberByRoleIds(newGamestate.players)
+  const werewolves = getWerewolfPlayerNumbersByRoleIds(gamestate.players)
+  const dreamwolf = getDreamWolfPlayerNumberByRoleIds(gamestate.players)
   const loneWolf = werewolves.length + dreamwolf.length === 1
   const selectable_cards = loneWolf ? CENTER_CARD_POSITIONS : []
   const selectable_card_limit = { player: 0, center: loneWolf ? 1 : 0 }
   const obligatory = loneWolf ? false : true
   const scene_end = loneWolf ? false : true
 
-  newGamestate.players[token].player_history[title] = {
-    ...newGamestate.players[token].player_history[title],
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
     selectable_cards,
     selectable_card_limit,
     werewolves,
@@ -37,7 +35,7 @@ export const werewolvesInteraction = (gamestate, token, title) => {
     privateMessage = ['interaction_werewolves', ...messageIdentifiersWerewolves, 'interaction_dreamwolf', ...messageIdentifiersDreamWolves]
   }
 
-  return generateRoleInteraction(newGamestate, token, {
+  return generateRoleInteraction(gamestate, token, {
     private_message: privateMessage,
     selectableCards: { selectable_cards, selectable_card_limit },
     obligatory,
