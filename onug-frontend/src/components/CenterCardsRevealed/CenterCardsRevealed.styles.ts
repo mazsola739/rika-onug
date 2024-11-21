@@ -5,13 +5,17 @@ export const StyledCenterCardsRevealed = styled.div`
   flex-direction: row;
   border-bottom: 2px solid #969290;
   gap: 10px;
-  padding: 0 0 1rem 0;
+  padding: 0 0 10px 0;
+  justify-content: center;
 `
 
 export const CenterCard = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `
 
-export const CardPosition = styled.span``
+export const CardPosition = styled.span`
+  font-size: 14px;
+`

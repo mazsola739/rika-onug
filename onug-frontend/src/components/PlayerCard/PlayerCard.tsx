@@ -9,7 +9,7 @@ export const PlayerCard: React.FC<PlayerCardProps> = observer(({ card, cardSize 
 
   return (
     <StyledPlayerCard ownCard={ownCard}>
-      {ownCard && <GuessTokens ownCard={ownCard} width={50}>{guessTokens && guessTokens.map(token => <RoleToken key={token.id} size={50} token={token} />)}</GuessTokens>}
+      {ownCard && <GuessTokens ownCard={ownCard} width={40}>{guessTokens && guessTokens.map(token => <RoleToken key={token.id} size={40} token={token} />)}</GuessTokens>}
       <CardContainer>
         <Card {...cardProps} onClick={onCardClick} size={cardSize} />
         {!isCenterCard && (
@@ -22,8 +22,8 @@ export const PlayerCard: React.FC<PlayerCardProps> = observer(({ card, cardSize 
         )}
       </CardContainer>
       {!ownCard && (
-        <GuessTokens ownCard={ownCard} width={50}>
-          {guessTokens && guessTokens.map(token => <RoleToken key={token.id} size={50} token={token} />)}
+        <GuessTokens ownCard={ownCard} width={40}>
+          {guessTokens && guessTokens.map(token => <RoleToken key={token.id} size={40} token={token} />)}
         </GuessTokens>
       )}
     </StyledPlayerCard>

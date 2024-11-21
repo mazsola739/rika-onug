@@ -3,8 +3,8 @@ import styled from '@emotion/styled'
 //TABLE
 export const StyledTable = styled.div`
   display: grid;
-  grid-template-columns: 180px calc(100vw - 720px) 180px 360px;
-  grid-template-rows: 70px 170px calc(100vh - 310px) 70px;
+  grid-template-columns: 150px 1fr 150px 360px;
+  grid-template-rows: 70px 160px 1fr 70px;
 
   header {
     grid-area: 1 / 1 / 2 / 4;

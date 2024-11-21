@@ -14,8 +14,8 @@ export const StyledCelestialBodies = styled.div`
 export const Sun = styled.img`
   border-radius: 50%;
   box-shadow: 0 0 3.75rem 10px #fff, 0 0 6.25rem 1.25rem red, 0 0 8.75rem 1.875rem gold;
-  width: 2.1875rem;
-  height: 2.1875rem;
+  width: 35px;
+  height: 35px;
   position: absolute;
   top: 15%;
   opacity: 1;
@@ -32,8 +32,8 @@ export const MorningSky = styled.span`
 export const Moon = styled.img`
   border-radius: 50%;
   box-shadow: 0 0 3.75rem 10px #000, 0 0 6.25rem 1.25rem blue, 0 0 8.75rem 1.875rem silver;
-  width: 2.1875rem;
-  height: 2.1875rem;
+  width: 35px;
+  height: 35px;
   position: absolute;
   top: 15%;
   opacity: 0;

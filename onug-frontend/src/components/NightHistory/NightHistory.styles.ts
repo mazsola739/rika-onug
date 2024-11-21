@@ -32,7 +32,7 @@ export const Narration = styled.div`
 `
 
 export const NarrationImage = styled.img`
-  width: 4.375rem;
+  width: 50px;
 `
 
 export const NarrationText = styled.span`

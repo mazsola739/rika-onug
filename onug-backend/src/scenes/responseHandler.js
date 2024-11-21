@@ -119,7 +119,7 @@ export const responseHandler = (gamestate, token, selected_card_positions, selec
       newGamestate = roles.instigatorResponse(gamestate, token, selected_mark_positions, scene_title)
       break
     case 'MARKSMAN':
-      newGamestate = roles.marksmanResponse(gamestate, token, selected_card_positions, selected_mark_positions, scene_title)
+      newGamestate = roles.marksmanResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title)
       break
     case 'MIRROR_MAN':
       newGamestate = roles.copycatResponse(gamestate, token, selected_card_positions, scene_title)

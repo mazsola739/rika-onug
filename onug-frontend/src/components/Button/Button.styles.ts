@@ -19,8 +19,8 @@ export const StyledButton = styled.button<StyledButtonProps>`
   border-radius: 5px;
   cursor: pointer;
   padding: 2px 0 0 0;
-  width: 8.125rem;
-  height: 2.1875rem;
+  width: ${({ size }) => size ? size : 130}px;
+  height: ${({ size }) => size ? size : 35}px;
   transition: 0.75s;
   filter: drop-shadow(3px 3px 3px black);
   font-size: 12px;

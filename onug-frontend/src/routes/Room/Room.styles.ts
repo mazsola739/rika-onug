@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 //ROOM
 export const StyledRoom = styled.div`
   display: grid;
-  grid-template-columns: 160px calc(100vw - 680px) 160px 360px;
+  grid-template-columns: 160px 1fr 160px 360px;
   grid-template-rows: 70px calc(100vh - 140px) 70px;
 
   nav {

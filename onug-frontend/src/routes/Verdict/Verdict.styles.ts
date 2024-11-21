@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 export const StyledVerdict = styled.div`
   display: grid;
   grid-template-rows: 70px calc(100vh - 140px) 70px;
-  grid-template-columns: calc(100vw - 360px) 360px;
+  grid-template-columns: 1fr 360px;
 
   header {
     grid-area: 1 / 1 / 2 / 2;

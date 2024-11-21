@@ -4,6 +4,7 @@ export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
   display: grid;
   justify-content: center;
   gap: 5px;
+  max-width: 48%;
 
   background-color: ${({ result }) => (result ? '#28a74580' : '#dc354580')};
   border-radius: 10px;

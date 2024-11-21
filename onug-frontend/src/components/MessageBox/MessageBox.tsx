@@ -103,7 +103,7 @@ const Answer: React.FC<AnswersProps> = observer(({ answer_options }) => {
     <StyledAnswer>
       {answer_options.map((answer_option, index) => {
         const isSelected = answer_option === selectionStore.selectedAnswer
-        return <Button key={index} onClick={() => onAnswerClick(answer_option)} variant={isSelected ? 'orange' : 'yellow'} buttonText={answer_option} />
+        return <Button key={index} onClick={() => onAnswerClick(answer_option)} size={60} variant={isSelected ? 'magenta' : 'orange'} buttonText={answer_option} />
       })}
     </StyledAnswer>
   )
@@ -118,7 +118,7 @@ const Vote: React.FC<VoteProps> = observer(({ options }) => {
     <StyledAnswer>
       {options.map((option, index) => {
         const isSelected = option === selectionStore.selectedAnswer
-        return <Button key={index} onClick={() => onAnswerClick(option)} variant={isSelected ? 'orange' : 'yellow'} buttonText={formatPositionSimply(option)} />
+        return <Button key={index} onClick={() => onAnswerClick(option)} size={60} variant={isSelected ? 'magenta' : 'orange'} buttonText={formatPositionSimply(option)} />
       })}
     </StyledAnswer>
   )
