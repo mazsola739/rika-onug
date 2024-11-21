@@ -19,7 +19,6 @@ import {
 
 export const doppelgangerinstantactionResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
   const new_role_id = gamestate.players[token]?.new_role_id
-  let gamestate = { ...gamestate }
 
   if (new_role_id === 2) gamestate = drunkResponse(gamestate, token, selected_card_positions, title)
   if (new_role_id === 8) gamestate = robberResponse(gamestate, token, selected_card_positions, title)

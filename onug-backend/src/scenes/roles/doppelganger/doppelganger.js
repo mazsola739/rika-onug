@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { doppelgangerInteraction } from './doppelganger.interaction'
+import { doppelgangerInteraction } from './doppelganger.action'
 
 //TODO if oracle is oracle team
 export const doppelganger = (gamestate, title) => {
@@ -8,16 +8,16 @@ export const doppelganger = (gamestate, title) => {
   const narration = ['doppelganger_kickoff_text']
 
   tokens.forEach(token => {
-    let interaction = {}
+    let action = {}
 
     const card = gamestate.players[token].card
 
     if (isActivePlayer(card).DOPPELGÄNGER) {
       gamestate.players[token].action_finished = false
-      interaction = doppelgangerInteraction(gamestate, token, title)
+      action = doppelgangerInteraction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

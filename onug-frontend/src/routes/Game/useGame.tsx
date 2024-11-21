@@ -42,7 +42,7 @@ export const useGame = () => {
     if (lastJsonMessage?.type === SCENE && lastJsonMessage?.success) {
       riseAndRestStore.openYourEyes(lastJsonMessage)
       messageStore.setNarration(lastJsonMessage.narration as NarrationType[])
-      messageStore.setPrivateMessage(lastJsonMessage.interaction.private_message as MessagesType[])
+      messageStore.setPrivateMessage(lastJsonMessage.action.private_message as MessagesType[])
     }
 
     if (lastJsonMessage?.type === HYDRATE_GAME && lastJsonMessage?.success) {

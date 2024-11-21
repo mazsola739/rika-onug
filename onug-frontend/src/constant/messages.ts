@@ -6,9 +6,6 @@ export * from './role'
 export const message_tapped = 'You got tapped by your neighbor'
 export const no_night_action = 'No such a night action, sorry'
 
-export const interaction_voted = 'You voted for'
-export const interaction_vote_result = 'Look for vote result'
-
 export const interaction_oracle_question = 'Answer the question'
 export const interaction_oracle_answer = 'Your answer'
 export const interaction_oracle_open_you_eyes = 'You can open your eyes for the next scene'

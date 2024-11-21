@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
@@ -8,7 +8,7 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
     return gamestate
   }
 
-  let interaction = {}
+  let action = {}
 
   const oracleQuestion = gamestate.oracle.question
   const oracleAftermath = gamestate.oracle.aftermath
@@ -34,7 +34,7 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
 
     const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])
 
-    interaction = generateRoleInteraction(gamestate, token, {
+    action = generateRoleAction(gamestate, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers]
     })
   } else if (oracleQuestion === 'oracle_viewcenter_text') {
@@ -52,7 +52,7 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
     const identifiers = formatPlayerIdentifier(selectedCardPositions)
     const message = ['interaction_saw_card', ...identifiers]
 
-    interaction = generateRoleInteraction(gamestate, token, {
+    action = generateRoleAction(gamestate, token, {
       private_message: message,
       showCards: selectedCards
     })
@@ -60,7 +60,7 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

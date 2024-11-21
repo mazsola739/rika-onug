@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { cowInteraction } from './cow.interaction'
+import { cowInteraction } from './cow.action'
 
 //TODO aliens can see cow
 export const cow = (gamestate, title, hasDoppelganger) => {
@@ -8,16 +8,16 @@ export const cow = (gamestate, title, hasDoppelganger) => {
   const narration = [hasDoppelganger ? 'doppelganger_cow_kickoff_text' : 'cow_kickoff_text', 'cow_kickoff2_text']
 
   tokens.forEach(token => {
-    let interaction = {}
+    let action = {}
 
     const card = gamestate.players[token].card
 
     if (isActivePlayer(card).COW) {
       gamestate.players[token].action_finished = false
-      interaction = cowInteraction(gamestate, token, title)
+      action = cowInteraction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

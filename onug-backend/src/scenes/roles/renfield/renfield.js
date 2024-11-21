@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { renfieldInteraction } from './renfield.interaction'
+import { renfieldInteraction } from './renfield.action'
 
 //TODO no vampire he is villager
 export const renfield = (gamestate, title, hasDoppelganger) => {
@@ -8,16 +8,16 @@ export const renfield = (gamestate, title, hasDoppelganger) => {
   const narration = [hasDoppelganger ? 'doppelganger_renfield_kickoff_text' : 'renfield_kickoff_text', 'renfield_kickoff2_text']
 
   tokens.forEach(token => {
-    let interaction = {}
+    let action = {}
 
     const card = gamestate.players[token].card
 
     if (isActivePlayer(card).RENFIELD) {
       gamestate.players[token].action_finished = false
-      interaction = renfieldInteraction(gamestate, token, title)
+      action = renfieldInteraction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

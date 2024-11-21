@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 import { getRandomArtifact } from './curator.utils'
@@ -22,14 +22,14 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
     scene_end: true
   }
 
-  const interaction = generateRoleInteraction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, {
     private_message: ['interaction_placed_artifact', formatPlayerIdentifier(selected_card_positions)[0]],
     scene_end: true
   })
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

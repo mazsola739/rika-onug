@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
 import { getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield } from './squire.utils'
@@ -8,7 +8,7 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     return gamestate
   }
 
-  let interaction = {}
+  let action = {}
 
   if (selected_answer === 'yes') {
     const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield(gamestate.players)
@@ -28,7 +28,7 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
 
     const messageIdentifiers = formatPlayerIdentifier(werewolves)
 
-    interaction = generateRoleInteraction(gamestate, token, {
+    action = generateRoleAction(gamestate, token, {
       private_message: ['interaction_saw_card', ...messageIdentifiers],
       showCards: viewCards,
       uniqueInformations: { werewolves }
@@ -39,14 +39,14 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
       answer: [selected_answer[0]]
     }
 
-    interaction = generateRoleInteraction(gamestate, token, {
+    action = generateRoleAction(gamestate, token, {
       private_message: ['interaction_nothing']
     })
   }
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

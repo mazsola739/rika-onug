@@ -5,7 +5,7 @@ class PropStore {
   title: string
   nightfall: boolean
   sunrise: boolean
-  interaction: Interaction
+  action: Interaction
   end: boolean = false
   voteResult: Result[] = []
   winnerTeams: string[] = []
@@ -17,89 +17,89 @@ class PropStore {
   }
 
   get answer_options() {
-    return this.interaction.answer_options
+    return this.action.answer_options
   }
   get artifacted_cards() {
-    return this.interaction.artifacted_cards
+    return this.action.artifacted_cards
   }
   get dreamwolf() {
-    return this.interaction.dreamwolf
+    return this.action.dreamwolf
   }
   get scene_end() {
-    return this.interaction.scene_end
+    return this.action.scene_end
   }
   get obligatory() {
-    return this.interaction.obligatory
+    return this.action.obligatory
   }
   get selectable_card_limit() {
-    return this.interaction.selectable_card_limit
+    return this.action.selectable_card_limit
   }
   get selectable_cards() {
-    return this.interaction.selectable_cards
+    return this.action.selectable_cards
   }
   get selectable_mark_limit() {
-    return this.interaction.selectable_mark_limit
+    return this.action.selectable_mark_limit
   }
   get selectable_marks() {
-    return this.interaction.selectable_marks
+    return this.action.selectable_marks
   }
   get shielded_cards() {
-    return this.interaction.shielded_cards
+    return this.action.shielded_cards
   }
   get show_cards() {
-    return this.interaction.show_cards
+    return this.action.show_cards
   }
   get show_marks() {
-    return this.interaction.show_marks
+    return this.action.show_marks
   }
   get werewolves() {
-    return this.interaction.werewolves
+    return this.action.werewolves
   }
   get masons() {
-    return this.interaction.masons
+    return this.action.masons
   }
   get vampires() {
-    return this.interaction.vampires
+    return this.action.vampires
   }
   get aliens() {
-    return this.interaction.aliens
+    return this.action.aliens
   }
   get groobzerb() {
-    return this.interaction.groobzerb
+    return this.action.groobzerb
   }
   get villains() {
-    return this.interaction.villains
+    return this.action.villains
   }
   get tanner() {
-    return this.interaction.tanner
+    return this.action.tanner
   }
   get assassins() {
-    return this.interaction.assassins
+    return this.action.assassins
   }
   get apprenticeassassins() {
-    return this.interaction.apprenticeassassins
+    return this.action.apprenticeassassins
   }
   get madscientist() {
-    return this.interaction.madscientist
+    return this.action.madscientist
   }
   get seers() {
-    return this.interaction.seers
+    return this.action.seers
   }
   get lovers() {
-    return this.interaction.lovers
+    return this.action.lovers
   }
   get part_of_blob() {
-    return this.interaction.part_of_blob
+    return this.action.part_of_blob
   }
   get part_of_family() {
-    return this.interaction.part_of_family
+    return this.action.part_of_family
   }
   get isVote() {
-    return this.interaction.vote
+    return this.action.vote
   }
 
-  setInteraction(interaction: Interaction): void {
-    this.interaction = { ...this.interaction, ...interaction }
+  setInteraction(action: Interaction): void {
+    this.action = { ...this.action, ...action }
   }
 
   setTitle(title: string): void {
@@ -138,7 +138,7 @@ class PropStore {
 
   emptyValues(): void {
     this.title = ''
-    this.interaction = {
+    this.action = {
       aliens: [],
       apprenticeassassins: [],
       assassins: [],

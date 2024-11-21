@@ -4,7 +4,7 @@ import { sendMessageToPlayer } from '../../../websocket'
 import {
   createAndSendSceneMessage,
   formatPlayerIdentifier,
-  generateRoleInteraction,
+  generateRoleAction,
   getNarrationByTitle,
   getPlayerNumberWithMatchingToken,
   getPlayerTokensByPlayerNumber,
@@ -68,14 +68,14 @@ export const vampiresVotehydrate = async message => {
           scene_end: true
         }
 
-        const interaction = generateRoleInteraction(gamestate, vampireToken, {
+        const action = generateRoleAction(gamestate, vampireToken, {
           private_message: ['interaction_voted_together', 'interaction_mark_of_vampire', formatPlayerIdentifier([unanimousPlayerNumber])[0]],
           scene_end: true
         })
 
         const narration = getNarrationByTitle(title, gamestate.narration)
 
-        createAndSendSceneMessage(gamestate, vampireToken, title, interaction, narration)
+        createAndSendSceneMessage(gamestate, vampireToken, title, action, narration)
       })
     } else {
       vampiresTokens.forEach(vampireToken => {

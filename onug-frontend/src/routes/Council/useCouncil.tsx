@@ -27,7 +27,7 @@ export const useCouncil = () => {
 
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_COUNCIL && lastJsonMessage?.success) {
-      propStore.setInteraction(lastJsonMessage?.interaction as Interaction)
+      propStore.setInteraction(lastJsonMessage?.action as Interaction)
       playersStore.setPlayer(lastJsonMessage.player)
       playersStore.setPlayers(lastJsonMessage.players)
       riseAndRestStore.setTablePlayerCards(lastJsonMessage)

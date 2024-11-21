@@ -1,6 +1,6 @@
 import { MESSAGE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
-import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
@@ -24,14 +24,14 @@ export const thingResponse = (gamestate, token, selected_card_positions, title) 
     tapped: [selected_card_positions[0]]
   }
 
-  const interaction = generateRoleInteraction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, {
     private_message: ['interaction_tap', formatPlayerIdentifier(selected_card_positions)[0]],
     scene_end: true
   })
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

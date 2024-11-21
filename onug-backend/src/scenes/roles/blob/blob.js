@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomBlobKickoffText } from './blob.constants'
-import { blobInteraction } from './blob.interaction'
+import { blobInteraction } from './blob.action'
 
 export const blob = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -19,16 +19,16 @@ export const blob = (gamestate, title) => {
   const narration = [randomKickoff, randomKickoff.includes('1p') ? 'blob_is_end_text' : 'blob_are_end_text']
 
   tokens.forEach(token => {
-    let interaction = {}
+    let action = {}
 
     const card = gamestate.players[token].card
 
     if (isActivePlayer(card).BLOB) {
       gamestate.players[token].action_finished = false
-      interaction = blobInteraction(gamestate, token, title)
+      action = blobInteraction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

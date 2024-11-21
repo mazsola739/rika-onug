@@ -36,7 +36,7 @@ class RiseAndRestStore {
       assassins: false,
       apprenticeassassins: false,
       madscientist: false,
-      lovers: false,
+      lovers: false
     }
   }
 
@@ -191,7 +191,7 @@ class RiseAndRestStore {
 
   openYourEyes(lastJsonMessage: WsJsonMessage): void {
     this.clearMemory()
-    propStore.setInteraction(lastJsonMessage?.interaction as Interaction)
+    propStore.setInteraction(lastJsonMessage?.action as Interaction)
     propStore.setTitle(lastJsonMessage.title)
     this.setTablePlayerCards(lastJsonMessage)
     this.setTableCenterCards(lastJsonMessage)

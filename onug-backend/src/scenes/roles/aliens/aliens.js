@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { alienAllKeys, alienAnyKeys, randomAlienInstructions } from './aliens.constants'
-import { aliensInteraction } from './aliens.interaction'
+import { aliensInteraction } from './aliens.action'
 
 export const aliens = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -26,24 +26,22 @@ export const aliens = (gamestate, title) => {
 
   gamestate.alien = {
     instruction: '',
-    key: '',
-    vote: false
+    key: ''
   }
   gamestate.alien.instruction = randomAlienInstruction
   gamestate.alien.key = alienKey
-  gamestate.alien.vote = randomAlienInstruction === 'aliens_allview_text' || randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text'
 
   tokens.forEach(token => {
-    let interaction = {}
+    let action = {}
 
     const card = gamestate.players[token].card
 
     if (isActivePlayer(card).ALIENS) {
       gamestate.players[token].action_finished = false
-      interaction = aliensInteraction(gamestate, token, title)
+      action = aliensInteraction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

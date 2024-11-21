@@ -1,5 +1,5 @@
 import { GOOD_GUY } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
@@ -31,7 +31,7 @@ export const flipperResponse = (gamestate, token, selected_card_positions, title
     gamestate.players[token].player_history[title].show_cards = revealedCard
   }
 
-  const interaction = generateRoleInteraction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, {
     private_message: ['interaction_flipped_card', formatPlayerIdentifier(selected_card_positions)[0]],
     showCards: revealedCard,
     scene_end: true
@@ -39,7 +39,7 @@ export const flipperResponse = (gamestate, token, selected_card_positions, title
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

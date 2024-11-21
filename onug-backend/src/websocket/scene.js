@@ -1,7 +1,7 @@
 import { HYDRATE_SCENE, REDIRECT } from '../constants'
 import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { responseHandler, sceneHandler, scriptHandler } from '../scenes'
+import { responseHandler, chapterHandler, scriptHandler } from '../scenes'
 import { allPlayersStateCheck /* randomDelay */ } from '../utils'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
@@ -29,7 +29,7 @@ const handleNightReady = async (room_id, gamestate, players, token) => {
     /* await randomDelay() */
 
     gamestate = await scriptHandler(gamestate)
-    gamestate = await sceneHandler(gamestate)
+    gamestate = await chapterHandler(gamestate)
     resetPlayerReadiness(players)
   } else {
     logTrace(`Waiting for all players to be ready for night in room: ${room_id}.`)
@@ -53,7 +53,7 @@ const handleDoneOrSkip = async (room_id, newGamestate, players, token, title, ac
   players[token].action_finished = true
 
   if (allPlayersStateCheck(players, 'action_finished')) {
-    newGamestate = await sceneHandler(newGamestate)
+    newGamestate = await chapterHandler(newGamestate)
   } else {
     logTrace(`Waiting for all players to finish actions in room: ${room_id}.`)
   }
@@ -67,7 +67,7 @@ const handleResponseAction = async (newGamestate, token, selected_card_positions
 
 export const scene = async (ws, message) => {
   const { room_id, token, selected_card_positions, selected_mark_positions, selected_answer, night_ready, day_ready, title, done, skip } = message
-  logTrace(`Processing scene interaction in room: ${room_id}`)
+  logTrace(`Processing scene action in room: ${room_id}`)
 
   try {
     const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
@@ -93,9 +93,9 @@ export const scene = async (ws, message) => {
     }
 
     await upsertRoomState(newGamestate)
-    logTrace(`Scene interaction processed successfully for room: ${room_id}`)
+    logTrace(`Scene action processed successfully for room: ${room_id}`)
   } catch (error) {
-    logError(`Error processing scene interaction in room: ${room_id}. Error: ${error.message}`)
+    logError(`Error processing scene action in room: ${room_id}. Error: ${error.message}`)
     logError(JSON.stringify(error.stack))
   }
 }

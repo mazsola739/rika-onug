@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateMarkSelection } from '../../validators'
 
@@ -45,14 +45,14 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
 
   const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
 
-  const interaction = generateRoleInteraction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, {
     private_message: ['interaction_mark_of_love', ...messageIdentifiers],
     scene_end: true
   })
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

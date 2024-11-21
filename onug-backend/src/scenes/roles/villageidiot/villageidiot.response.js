@@ -1,4 +1,4 @@
-import { generateRoleInteraction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { generateRoleAction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
 import { moveCardsButYourOwn } from './villageidiot.utils'
@@ -24,14 +24,14 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
     scene_end: true
   }
 
-  const interaction = generateRoleInteraction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, {
     private_message: ['interaction_moved', selected_answer === 'left' ? 'direction_left' : 'direction_right'],
     scene_end: true
   })
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

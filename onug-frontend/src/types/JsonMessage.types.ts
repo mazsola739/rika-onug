@@ -173,7 +173,7 @@ export type WsJsonMessage = {
   errors?: string[]
   guess_cards?: number[]
   guessed_cards?: GuessedCard[]
-  interaction?: Interaction
+  action?: Interaction
   loser_teams?: string[]
   message?: string
   narration?: NarrationType[]

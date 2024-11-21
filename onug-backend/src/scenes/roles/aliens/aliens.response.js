@@ -1,6 +1,4 @@
-import { VOTE } from '../../../constants'
-import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
-import { addVote, formatPlayerIdentifier, generateRoleInteraction, getAlienPlayerNumbersByRoleIds, getCardIdsByPositions, getNarrationByTitle, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
@@ -9,68 +7,67 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
     return gamestate
   }
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
   const randomAlienInstruction = gamestate.alien.instruction
-  const aliens = getAlienPlayerNumbersByRoleIds(gamestate.players)
 
-  if (randomAlienInstruction === 'aliens_view_text') {
-    const showCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
-    const selectedPositionCard = gamestate.card_positions[selected_card_positions[0]].card
+  let showCards = []
+  let viewCards = []
+  let new_alien = []
+  let new_alien_helper = []
+  let private_message = []
 
-    if (gamestate.players[token].card.player_original_id === selectedPositionCard.id) {
-      gamestate.players[token].card.player_card_id = 87
-    }
+  switch (randomAlienInstruction) {
+    case 'aliens_view_text':
+      showCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
+      if (gamestate.players[token].card.player_original_id === gamestate.card_positions[selected_card_positions[0]].card.id) {
+        gamestate.players[token].card.player_card_id = 87
+      }
 
-    const private_message = ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]]
+      private_message = ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]]
 
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      private_message,
-      viewed_cards: showCards
-    }
+      break
+    case 'aliens_allview_text':
+      gamestate.players[token].card_or_mark_action = true
+      if (gamestate.players[token].card.player_original_id === gamestate.card_positions[selected_card_positions[0]].card.id) {
+        gamestate.players[token].card.player_card_id = 87
+      }
+      showCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
+      viewCards = [selected_card_positions[0]]
+      private_message = ['interaction_voted_together', 'interaction_saw_card', formatPlayerIdentifier([selected_card_positions[0]])[0]]
 
-    const interaction = generateRoleInteraction(gamestate, token, {
-      private_message,
-      showCards,
-      uniqueInformations: { aliens }
-    })
+      break
+    case 'aliens_newalien_text':
+      gamestate.card_positions[selected_card_positions[0]].card.role = 'ALIEN'
+      gamestate.card_positions[selected_card_positions[0]].card.team = 'alien'
+      new_alien = [selected_card_positions[0]]
+      private_message = ['interaction_voted_together', 'interaction_turned_newalien', formatPlayerIdentifier([selected_card_positions[0]])[0]]
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+      break
+    case 'aliens_alienhelper_text':
+      gamestate.card_positions[selected_card_positions[0]].card.team = 'alien'
+      new_alien_helper = [selected_card_positions[0]]
+      private_message = ['interaction_voted_together', 'interaction_turned_alienhelper', formatPlayerIdentifier([selected_card_positions[0]])[0]]
 
-    return gamestate
+      break
   }
-
-  const votes = addVote(gamestate.players[token].player_number, selected_card_positions[0], gamestate.alien_votes)
-
-  gamestate.players[token].alien_vote = selected_card_positions[0]
-  gamestate.alien_votes = votes
-
-  const alienTokens = getPlayerTokensByPlayerNumber(gamestate.players, aliens)
-  //TODO better vote
-  alienTokens.forEach(alienToken => {
-    webSocketServerConnectionsPerRoom[gamestate.room_id][alienToken].send(
-      JSON.stringify({
-        type: VOTE,
-        votes
-      })
-    )
-  })
-
-  const private_message = ['interaction_voted', formatPlayerIdentifier(selected_card_positions)[0]]
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    private_message,
-    aliens,
-    alien_vote: [selected_card_positions[0]]
+    viewed_cards: viewCards,
+    new_alien,
+    new_alien_helper,
+    scene_end: true
   }
 
-  const interaction = generateRoleInteraction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, {
     private_message,
-    uniqueInformations: { aliens }
+    showCards,
+    uniqueInformations: { new_alien, new_alien_helper },
+    scene_end: true
   })
 
-  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+  const narration = getNarrationByTitle(title, gamestate.narration)
+
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

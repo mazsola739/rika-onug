@@ -13,10 +13,10 @@ export const madscientist = (gamestate, title) => {
   ]
 
   tokens.forEach(token => {
-    let interaction = {}
+    let action = {}
 
     gamestate.players[token].action_finished = false
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

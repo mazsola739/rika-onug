@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
 
@@ -7,7 +7,7 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
     return gamestate
   }
 
-  let interaction = {}
+  let action = {}
 
   if (selected_answer === 'yes') {
     const seers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(gamestate.players)
@@ -26,14 +26,14 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
 
     const messageIdentifiers = formatPlayerIdentifier(seers)
 
-    interaction = generateRoleInteraction(gamestate, token, {
+    action = generateRoleAction(gamestate, token, {
       private_message: ['interaction_saw_card', ...messageIdentifiers],
       showCards: viewCards,
       uniqueInformations: { seers },
       scene_end: true
     })
   } else if (selected_answer === 'no') {
-    interaction = generateRoleInteraction(gamestate, token, {
+    action = generateRoleAction(gamestate, token, {
       private_message: ['interaction_nothing'],
       scene_end: true
     })
@@ -41,7 +41,7 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

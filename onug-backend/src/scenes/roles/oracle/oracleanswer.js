@@ -66,17 +66,17 @@ export const oracleAnswer = (gamestate, title) => {
   }
 
   tokens.forEach(token => {
-    let interaction = {}
+    let action = {}
 
     const card = gamestate.players[token].card
 
     if (aftermath && isActivePlayer(card).ORACLE_ANSWER) {
       gamestate.oracle.aftermath = narration[0]
       gamestate.players[token].action_finished = false
-      interaction = oracleAnswerAftermath(gamestate, token, title)
+      action = oracleAnswerAftermath(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   return gamestate

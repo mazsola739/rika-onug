@@ -2,7 +2,7 @@ import scripts from '../data/script.json'
 import { logTrace } from '../log'
 import * as conditions from './conditions'
 
-//! todo save interaction identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
+//! todo save action identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
 //TODO fix epic battle, and joke
 
 export const scriptHandler = gamestate => {

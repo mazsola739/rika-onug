@@ -8,7 +8,7 @@ export const nostradamusReaction = (gamestate, title) => {
 
   /*   
 tokens.forEach((token) => { gamestate.players[token].action_finished = false
-createAndSendSceneMessage(gamestate, token, title, interaction, narration)}) */
+createAndSendSceneMessage(gamestate, token, title, action, narration)}) */
 
   gamestate.narration.push({ [title]: narration })
 

@@ -1,7 +1,6 @@
 import { ERROR, REDIRECT, STAGES } from '../constants'
 import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { startScene } from '../scenes'
 import { areAllPlayersReady, resetPlayerReadiness } from '../utils'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
@@ -28,6 +27,12 @@ export const startGame = async (ws, message) => {
       game_stopped: false,
       game_finished: false,
       script_locked: false,
+      actual_scenes: [
+        {
+          scene_title: 'START_GAME',
+          scene_number: 0
+        }
+      ],
       narration: []
     }
 
@@ -38,7 +43,6 @@ export const startGame = async (ws, message) => {
 
       return broadcast(room_id, { type: ERROR, message: 'All players must be ready to start the game.' })
     }
-    newGamestate = startScene(newGamestate)
 
     resetPlayerReadiness(players)
 

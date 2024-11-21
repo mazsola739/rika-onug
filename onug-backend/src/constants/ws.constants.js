@@ -53,3 +53,4 @@ export const KEEP_ALIVE = 'KEEP_ALIVE'
 export const AUTH = 'AUTH'
 
 export const VAMPIRES = 'VAMPIRES'
+export const ALIENS = 'ALIENS'

@@ -49,19 +49,19 @@ export const oracleQuestion = (gamestate, title) => {
   }
 
   tokens.forEach(token => {
-    let interaction = {}
+    let action = {}
 
     const card = gamestate.players[token].card
 
     if (isActivePlayer(card).ORACLE_QUESTION) {
       gamestate.players[token].player_history[title].oracle = narration[1]
       gamestate.players[token].action_finished = false
-      interaction = oracleQuestionRaising(gamestate, token, title)
+      action = oracleQuestionRaising(gamestate, token, title)
     } else {
       console.log('do nothing')
     }
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

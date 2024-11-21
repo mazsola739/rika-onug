@@ -1,6 +1,6 @@
 import {
   formatPlayerIdentifier,
-  generateRoleInteraction,
+  generateRoleAction,
   getAllPlayerTokens,
   getCardIdsByPositions,
   getNarrationByTitle,
@@ -41,7 +41,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
       obligatory: true
     }
 
-    const interaction = generateRoleInteraction(gamestate, token, {
+    const action = generateRoleAction(gamestate, token, {
       private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
       selectableCards: {
         selectable_cards: selectablePlayersWithNoShield,
@@ -51,7 +51,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
       obligatory: true
     })
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
 
     return gamestate
   } else if (selected_card_positions[0].includes('player_')) {
@@ -85,12 +85,12 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
 
     const messageIdentifiers = formatPlayerIdentifier([`${gamestate.players[token].player_history[title].selected_center_card}`, selected_card_positions[0]])
 
-    const interaction = generateRoleInteraction(gamestate, token, {
+    const action = generateRoleAction(gamestate, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers],
       scene_end: true
     })
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
 
     return gamestate
   }

@@ -1,10 +1,7 @@
-export * from './addVote'
 export * from './createAndSendSceneMessage'
-export * from './findMostVoted'
 export * from './formatPlayerIdentifier'
-export * from './generateRoleInteraction'
+export * from './generateRoleAction'
 export * from './getAlienPlayerNumbersByRoleIds'
-export * from './getAlienTokensByRoleIds' //TODO do i need?
 export * from './getAllPlayerTokens'
 export * from './getAnyEvenOrOddPlayers'
 export * from './getAnySeerPlayerNumbersByRoleIdsWithNoShield'
@@ -24,15 +21,12 @@ export * from './getPlayerNumbersWithNonMatchingTokens'
 export * from './getPlayerTokenByPlayerNumber'
 export * from './getPlayerTokensByPlayerNumber'
 export * from './getRandomItemFromArray'
-export * from './getRandomItemsFromArray' //TODO do i need?
 export * from './getRandomNumber'
 export * from './getSelectableOtherPlayerNumbersWithNoShield'
 export * from './getSelectablePlayersWithNoShield'
 export * from './getVampirePlayerNumbersByRoleIds'
-export * from './getVampireTokensByRoleIds' //TODO do i need?
 export * from './getVillainPlayerNumbersByRoleIds'
 export * from './getWerewolfAndDreamwolfPlayerNumbersByRoleIds'
 export * from './getZerbPlayerNumberByRoleIds'
 export * from './pickRandomUpToThreePlayers'
-export * from './removeVote' //TODO do i need?
 export * from './shufflePlayers'

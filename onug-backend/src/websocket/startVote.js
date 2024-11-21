@@ -36,7 +36,7 @@ export const startVote = async (ws, message) => {
         type: VOTE,
         success: true,
         token,
-        interaction: {
+        action: {
           selectable_cards: otherPlayers,
           selectable_card_limit: { player: 1, center: 0 }
         },

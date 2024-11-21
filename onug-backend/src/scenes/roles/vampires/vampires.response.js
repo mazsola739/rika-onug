@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleInteraction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const vampiresResponse = async (gamestate, token, selected_mark_positions, title) => {
@@ -24,7 +24,7 @@ export const vampiresResponse = async (gamestate, token, selected_mark_positions
     scene_end: true
   }
 
-  return generateRoleInteraction(gamestate, token, {
+  return generateRoleAction(gamestate, token, {
     private_message: ['interaction_mark_of_vampire', formatPlayerIdentifier([selected_mark_positions[0]])[0]],
     scene_end: true
   })

@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getMarksByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getMarksByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateMarkSelection } from '../../validators'
 
@@ -28,7 +28,7 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
 
   const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_mark_positions[0]])
 
-  const interaction = generateRoleInteraction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, {
     private_message: ['interaction_swapped_marks', ...messageIdentifiers, 'interaction_own_mark'],
     showMarks: viewMarks,
     scene_end: true
@@ -36,7 +36,7 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

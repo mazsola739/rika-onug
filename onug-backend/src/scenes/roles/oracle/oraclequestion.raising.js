@@ -1,4 +1,4 @@
-import { generateRoleInteraction } from '../../sceneUtils'
+import { generateRoleAction } from '../../sceneUtils'
 import { createNumberArray, isCurrentPlayerNumberEven } from './oracle.utils'
 
 export const oracleQuestionRaising = (gamestate, token, title) => {
@@ -28,7 +28,7 @@ export const oracleQuestionRaising = (gamestate, token, title) => {
     answer_options: answerOptions
   }
 
-  return generateRoleInteraction(gamestate, token, {
+  return generateRoleAction(gamestate, token, {
     private_message: ['interaction_oracle_question']
   })
 }

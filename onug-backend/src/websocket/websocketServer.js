@@ -11,7 +11,6 @@ import {
   leaveGame,
   leaveRoom,
   newbie,
-  pauseGame,
   reload,
   reset,
   result,
@@ -23,6 +22,7 @@ import {
   verdict
 } from '.'
 import {
+  ALIENS,
   ARRIVE_COUNCIL,
   ARRIVE_GAME,
   ARRIVE_ROOM,
@@ -33,7 +33,6 @@ import {
   LEAVE_GAME,
   LEAVE_ROOM,
   NEWBIE,
-  PAUSE_GAME,
   READY,
   RELOAD,
   RESET,
@@ -47,7 +46,7 @@ import {
   VOTE
 } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
-import { vampiresVotehydrate } from '../scenes/roles'
+import { aliensVotehydrate, vampiresVotehydrate } from '../scenes/roles'
 
 export const websocketServer = port => {
   try {
@@ -77,9 +76,9 @@ export const websocketServer = port => {
         if (message.type === READY) return hydrateReady(message)
         if (message.type === ARRIVE_TABLE) return hydrateTable(ws, message)
         if (message.type === START_GAME) return startGame(ws, message)
+        if (message.type === ALIENS) return aliensVotehydrate(message)
         if (message.type === VAMPIRES) return vampiresVotehydrate(message)
         if (message.type === ARRIVE_GAME) return hydrateGame(ws, message)
-        if (message.type === PAUSE_GAME) return pauseGame(message)
         if (message.type === STOP_GAME) return stopGame(message)
         if (message.type === SCENE) return scene(ws, message)
         if (message.type === ARRIVE_COUNCIL) return hydrateCouncil(ws, message)

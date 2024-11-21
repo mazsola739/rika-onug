@@ -1,7 +1,6 @@
-import { REDIRECT } from '../constants'
+import { REDIRECT, STAGES } from '../constants'
 import { logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { stopScene } from '../scenes'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
 
@@ -14,6 +13,40 @@ export const stopGame = async message => {
   if (!roomIdValid) return broadcast({ type: REDIRECT, path: '/lobby', errors })
 
   // TODO validate if player is admin and in the room
+
+  const stopScene = gamestate => {
+    gamestate.stage = STAGES.ROOM
+    gamestate.game_started = false
+    gamestate.game_paused = false
+    gamestate.game_stopped = true
+    gamestate.game_finished = false
+    gamestate.script_locked = true
+    gamestate.actual_scenes = []
+
+    delete gamestate.narration
+    delete gamestate.game_start_time
+
+    gamestate.players = resetPlayers(gamestate.players)
+
+    return gamestate
+  }
+
+  const resetPlayers = players => {
+    return Object.fromEntries(
+      Object.entries(players).map(([token, player]) => [
+        token,
+        {
+          ...player,
+          flag: false,
+          card: null,
+          player_number: null,
+          card_or_mark_action: false,
+          action_finished: true,
+          player_history: {}
+        }
+      ])
+    )
+  }
 
   let newGamestate = stopScene(gamestate)
 

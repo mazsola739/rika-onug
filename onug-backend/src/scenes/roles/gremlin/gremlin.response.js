@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection, validateMarkSelection } from '../../validators'
 
@@ -33,12 +33,12 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     const messageIdentifiers = formatPlayerIdentifier([position1, position2])
 
-    const interaction = generateRoleInteraction(gamestate, token, {
+    const action = generateRoleAction(gamestate, token, {
       private_message: ['interaction_swapped_cards', ...messageIdentifiers],
       scene_end: true
     })
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
 
     return gamestate
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
@@ -69,12 +69,12 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
 
-    const interaction = generateRoleInteraction(gamestate, token, {
+    const action = generateRoleAction(gamestate, token, {
       private_message: ['interaction_swapped_marks', ...messageIdentifiers],
       scene_end: true
     })
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
 
     return gamestate
   }

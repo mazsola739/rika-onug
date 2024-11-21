@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { empathKeys, randomEmpathInstructions } from './empath.constants'
-import { empathInteraction } from './empath.interaction'
+import { empathInteraction } from './empath.action'
 import { empathNumbers } from './empath.utils'
 
 export const empath = (gamestate, title, prefix) => {
@@ -27,7 +27,7 @@ export const empath = (gamestate, title, prefix) => {
   gamestate.empath.instruction = randomEmpathInstruction
 
   tokens.forEach(token => {
-    let interaction = {}
+    let action = {}
     const playerNumber = gamestate.players[token].player_number
 
     if (activePlayerNumbers.includes(playerNumber)) {
@@ -37,11 +37,11 @@ export const empath = (gamestate, title, prefix) => {
 
       if (isNotEmpath || isNotDoppelgangerEmpath) {
         gamestate.players[token].action_finished = false
-        interaction = empathInteraction(gamestate, token, title)
+        action = empathInteraction(gamestate, token, title)
       }
     }
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

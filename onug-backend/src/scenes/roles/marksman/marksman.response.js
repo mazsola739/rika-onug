@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleInteraction, getCardIdsByPositions, getMarksByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getMarksByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection, validateMarkSelection } from '../../validators'
 
@@ -22,10 +22,10 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
 
     gamestate.players[token].card_or_mark_action = true
 
-    let interaction = {}
+    let action = {}
 
     if (gamestate.players[token].player_history[title].viewed_marks) {
-      interaction = generateRoleInteraction(gamestate, token, {
+      action = generateRoleAction(gamestate, token, {
         private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
         showCards: viewCards,
         scene_end: true
@@ -40,7 +40,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
       gamestate.players[token].player_history[title].selectable_marks = selectableMarks
       gamestate.players[token].player_history[title].selectable_mark_limit = { mark: 1 }
 
-      interaction = generateRoleInteraction(gamestate, token, {
+      action = generateRoleAction(gamestate, token, {
         private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
         showCards: viewCards,
         selectableMarks: {
@@ -58,7 +58,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
 
     const narration = getNarrationByTitle(title, gamestate.narration)
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
 
     return gamestate
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
@@ -76,10 +76,10 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
 
     gamestate.players[token].card_or_mark_action = true
 
-    let interaction = {}
+    let action = {}
 
     if (gamestate.players[token].player_history[title].viewed_cards) {
-      interaction = generateRoleInteraction(gamestate, token, {
+      action = generateRoleAction(gamestate, token, {
         private_message: ['interaction_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0]],
         showMarks: viewMarks,
         scene_end: true
@@ -94,7 +94,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
       gamestate.players[token].player_history[title].selectable_cards = selectableCards
       gamestate.players[token].player_history[title].selectable_card_limit = { player: 1, center: 0 }
 
-      interaction = generateRoleInteraction(gamestate, token, {
+      action = generateRoleAction(gamestate, token, {
         private_message: ['interaction_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0], 'interaction_must_one_any'],
         showMarks: viewMarks,
         selectableCards: {
@@ -112,7 +112,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
 
     const narration = getNarrationByTitle(title, gamestate.narration)
 
-    createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
 
     return gamestate
   }

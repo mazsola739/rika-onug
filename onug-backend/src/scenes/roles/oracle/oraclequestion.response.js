@@ -1,4 +1,4 @@
-import { generateRoleInteraction, getNarrationByTitle } from '../../sceneUtils'
+import { generateRoleAction, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
 import { formatOracleAnswer } from './oracle.utils'
@@ -28,13 +28,13 @@ export const oracleQuestionResponse = (gamestate, token, selected_answer, title)
     answer: selected_answer
   }
 
-  const interaction = generateRoleInteraction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, {
     private_message: ['interaction_oracle_answer', formatOracleAnswer(selected_answer)]
   })
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, interaction, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }
