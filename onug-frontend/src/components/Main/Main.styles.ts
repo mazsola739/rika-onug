@@ -8,13 +8,13 @@ export const StyledMain = styled.main`
   overflow-y: auto;
 
   ::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 0.5rem;
+    width: 8px;
+    height: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 0.625rem;
+    border-radius: 10px;
   }
 
   /* For Firefox */

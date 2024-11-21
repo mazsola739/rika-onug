@@ -113,7 +113,7 @@ export const responseHandler = (gamestate, token, selected_card_positions, selec
       newGamestate = roles.revealerResponse(gamestate, token, selected_card_positions, scene_title)
       break
     case 'GREMLIN':
-      newGamestate = roles.gremlinResponse(gamestate, token, selected_card_positions, selected_mark_positions, scene_title)
+      newGamestate = roles.gremlinResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title)
       break
     case 'INSTIGATOR':
       newGamestate = roles.instigatorResponse(gamestate, token, selected_mark_positions, scene_title)

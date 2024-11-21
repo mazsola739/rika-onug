@@ -7,7 +7,7 @@ export const StyledToken = styled.div<StyledTokenProps>`
   display: flex;
   border-radius: 50%;
   border: 5px solid transparent;
-  filter: drop-shadow(0.1875rem 0.1875rem 0.1875rem black);
+  filter: drop-shadow(3px 3px 3px black);
 
   ${({ isSelectable, lovers }) => {
     if (isSelectable) {

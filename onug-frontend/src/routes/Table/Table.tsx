@@ -18,7 +18,7 @@ export const Table: React.FC = observer(() => {
         <TableCenter>
           <CenterCards />
         </TableCenter>
-        {tablePlayerCard && <PlayerCard card={tablePlayerCard} cardSize={120} tokenSize={50} />}
+        {tablePlayerCard && <PlayerCard ownCard={true} card={tablePlayerCard} cardSize={100} tokenSize={40} />}
       </Main>
       {tablePlayerCards && <AroundTableSide cards={right} />}
       <TableFooter />

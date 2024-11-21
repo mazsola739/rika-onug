@@ -1,12 +1,12 @@
 import styled from '@emotion/styled'
 
 export const StyledResultTable = styled.div`
-  border-radius: 0.3125rem;
-  border: 0.1875rem solid white;
+  border-radius: 5px;
+  border: 3px solid white;
   width: calc(100% - 400px);
   margin: 1rem;
 
-  & > h4:nth-of-type(1) {
+  & > h5:nth-of-type(1) {
     padding: 15px 0;
     align-content: center;
   }
@@ -49,7 +49,7 @@ export const PlayerName = styled.div`
   align-items: center;
   justify-items: start;
   justify-content: center;
-  padding-left: 0.625rem;
+  padding-left: 10px;
 `
 
 export const Icon = styled.span`

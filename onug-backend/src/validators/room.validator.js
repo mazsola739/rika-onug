@@ -23,7 +23,7 @@ export const validateRoom = async roomId => {
         errors.push('Gamestate is already closed for that room id')
       }
 
-      if (Object.keys(gamestate.players || {}).length >= 12) {
+      if (Object.keys(gamestate.players || {}).length > 12) {
         errors.push('Room is already full')
       }
     }

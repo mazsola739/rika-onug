@@ -21,7 +21,7 @@ export const RoleImage = styled.img<{ isSelected?: boolean }>`
   width: 6.25rem;
   z-index: 1;
 
-  filter: ${({ isSelected }) => (isSelected ? 'drop-shadow(0.5rem 0.3125rem 0.3125rem black);' : '')};
+  filter: ${({ isSelected }) => (isSelected ? 'drop-shadow(8px 5px 5px black);' : '')};
 
   &:hover {
     transition: 0.75s;
@@ -31,18 +31,18 @@ export const RoleImage = styled.img<{ isSelected?: boolean }>`
     + span {
       color: rgba(255, 255, 255, 1);
       opacity: 1;
-      text-shadow: 0.125rem 0.125rem 0.125rem black;
+      text-shadow: 2px 2px 2px black;
     }
   }
 `
 
 export const RoleCardName = styled.span<StyledRoleCardProps>`
   color: ${({ isSelected }) => (isSelected ? 'rgba(255,255,255, 1)' : 'rgba(255,255,255, 0.4)')};
-  text-shadow: ${({ isSelected }) => (isSelected ? '0.125rem 0.125rem 0.125rem black' : '')};
-  font-size: 0.75rem;
+  text-shadow: ${({ isSelected }) => (isSelected ? '2px 2px 2px black' : '')};
+  font-size: 12px;
   left: 50%;
   transition: 0.75s;
-  padding: 0 0.3125rem;
+  padding: 0 5px;
   position: absolute;
   text-align: center;
   top: 85%;

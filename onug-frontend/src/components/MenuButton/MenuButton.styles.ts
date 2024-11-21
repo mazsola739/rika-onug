@@ -5,7 +5,6 @@ export const StyledMenuButton = styled.button<MenuButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
   cursor: pointer;
   width: 8.75rem;
   height: 3.125rem;
@@ -16,7 +15,7 @@ export const StyledMenuButton = styled.button<MenuButtonProps>`
   background-position: center;
   background-repeat: no-repeat;
   transition: 0.75s;
-  filter: drop-shadow(0.1875rem 0.1875rem 0.1875rem black);
+  filter: drop-shadow(3px 3px 3px black);
   opacity: ${({ isSelected }) => (isSelected ? '1' : '0.7')};
 
   &:hover:not(:disabled) {

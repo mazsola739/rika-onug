@@ -1,4 +1,4 @@
-import { ARRIVE_GAME, END_GAME, HYDRATE_GAME, PAUSE_GAME, REDIRECT, SCENE, VAMPIRES } from 'constant'
+import { ARRIVE_GAME, END_GAME, HYDRATE_GAME, REDIRECT, SCENE, VAMPIRES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { gameStatusStore, messageStore, propStore, riseAndRestStore, wsStore } from 'store'
@@ -60,11 +60,6 @@ export const useGame = () => {
 
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
-    }
-
-    if (lastJsonMessage?.type === PAUSE_GAME) {
-      //TODO do i need?
-      gameStatusStore.togglePause()
     }
   }, [lastJsonMessage, navigate])
 

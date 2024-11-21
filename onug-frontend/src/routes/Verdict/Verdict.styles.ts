@@ -3,8 +3,8 @@ import styled from '@emotion/styled'
 //VERDICT
 export const StyledVerdict = styled.div`
   display: grid;
-  grid-template-rows: 5rem calc(100vh - 10rem) 5rem;
-  grid-template-columns: calc(100vw - 400px) 400px;
+  grid-template-rows: 70px calc(100vh - 140px) 70px;
+  grid-template-columns: calc(100vw - 360px) 360px;
 
   header {
     grid-area: 1 / 1 / 2 / 2;

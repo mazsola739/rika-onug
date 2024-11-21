@@ -5,7 +5,10 @@ export const StyledCenterCards = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding: 0.625rem;
+  padding: 10px;
+  height: 100%;
+  align-content: center;
+  flex-wrap: wrap;
 `
 
 export const CardGroup = styled.div`

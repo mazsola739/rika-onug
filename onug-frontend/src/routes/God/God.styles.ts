@@ -12,52 +12,52 @@ export const StyledGod = styled.div`
   font-family: 'Roboto', sans-serif;
   height: 100%;
   width: 100%;
-  padding: 0.625rem;
-  gap: 0.625rem;
+  padding: 10px;
+  gap: 10px;
   background-color: ${backgroundColor};
 `
 
 export const LeftSide = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
-  padding: 0.625rem;
+  gap: 10px;
+  padding: 10px;
   width: 40%;
   background-color: #282c34;
   border-radius: 0.75rem;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.25rem 8px rgba(0, 0, 0, 0.1);
 `
 
 export const RightSide = styled.div`
-  padding: 0.625rem;
+  padding: 10px;
   width: 60%;
   background-color: #282c34;
   border-radius: 0.75rem;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.25rem 8px rgba(0, 0, 0, 0.1);
 `
 
 export const GamestatesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 10px;
 `
 
 export const WSContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 10px;
 `
 
 export const MetaContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 10px;
 `
 
 export const ResponseContainer = styled.div`
   border: 0.0625rem solid #ddd;
   border-radius: 0.75rem;
-  padding: 0.625rem;
+  padding: 10px;
   height: 95%;
   overflow-y: auto;
   background-color: #333;
@@ -71,7 +71,7 @@ export const GodTitle = styled.h4`
 export const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.625rem 0.625rem;
+  gap: 10px 10px;
   width: 100%;
 `
 
@@ -87,9 +87,9 @@ export const Label = styled.label`
 `
 
 export const Input = styled.input`
-  padding: 0.5rem;
+  padding: 8px;
   border: 0.0625rem solid #ddd;
-  border-radius: 0.3125rem;
+  border-radius: 5px;
   font-size: 1rem;
   background-color: #fff;
 `
@@ -97,15 +97,15 @@ export const Input = styled.input`
 export const ButtonsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.625rem;
+  gap: 10px;
 `
 
 export const Button = styled.button`
-  padding: 0.625rem;
+  padding: 10px;
   font-size: 0.7rem;
   color: ${textColor};
   background-color: ${primaryColor};
-  border-radius: 0.3125rem;
+  border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s;
 

@@ -8,8 +8,8 @@ const inputBorderColor = '#ddd'
 
 export const StubContainer = styled.div`
   display: flex;
-  padding: 0.625rem;
-  gap: 0.625rem;
+  padding: 10px;
+  gap: 10px;
   height: 100%;
   width: 100%;
   font-family: 'Roboto', sans-serif;
@@ -19,42 +19,42 @@ export const StubContainer = styled.div`
 export const Container = styled.div`
   flex: 1;
   border-radius: 0.75rem;
-  padding: 0.625rem;
+  padding: 10px;
   background-color: #282c34;
-  box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.25rem 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 10px;
 `
 
 export const StubTitle = styled.h3`
   color: ${textColor};
-  margin-bottom: 0.625rem;
+  margin-bottom: 10px;
   font-size: 1.4rem;
 `
 
 export const FormContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.625rem 0.625rem;
+  gap: 10px 10px;
 `
 
 export const InputsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.3125rem;
+  gap: 5px;
 `
 
 export const ButtonsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.3125rem;
+  gap: 5px;
 `
 
 export const Grid = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.3125rem;
+  gap: 5px;
   justify-content: flex-start;
 `
 
@@ -68,19 +68,19 @@ export const InputField = styled.input`
   width: 50px;
   padding: 0.375rem;
   border: 0.0625rem solid ${inputBorderColor};
-  border-radius: 0.3125rem;
+  border-radius: 5px;
   background-color: #fff;
   color: black;
   font-size: 1rem;
 `
 
 export const Button = styled.button`
-  padding: 0.5rem;
+  padding: 8px;
   font-size: 0.75rem;
   font-weight: bold;
   color: ${textColor};
   background-color: ${primaryColor};
-  border-radius: 0.3125rem;
+  border-radius: 5px;
   cursor: pointer;
   transition: background 0.3s;
 
@@ -97,12 +97,12 @@ export const Button = styled.button`
 export const RoleDisplay = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0.1875rem;
+  gap: 3px;
   font-size: 0.875rem;
   color: ${textColor};
-  padding: 0.625rem;
+  padding: 10px;
   border: 0.0625rem solid ${inputBorderColor};
-  border-radius: 0.1875rem;
+  border-radius: 3px;
   overflow-y: auto;
   max-height: 300px;
   background-color: #282c34;

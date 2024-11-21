@@ -15,7 +15,7 @@ export const CenterCards: React.FC = observer(() => {
       <Cards>
         {positions.map(position => {
           const card = getCard(position)
-          return <PlayerCard key={position} card={card as TableCenterCard} cardSize={75} />
+          return <PlayerCard key={position} card={card as TableCenterCard} cardSize={70} />
         })}
       </Cards>
     </CardGroup>

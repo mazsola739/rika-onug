@@ -21,13 +21,13 @@ export const Guide = styled.div`
   overflow-y: auto;
 
   ::-webkit-scrollbar {
-    width: 0.5rem; /* Width of vertical scrollbar */
-    height: 0.5rem; /* Height of horizontal scrollbar */
+    width: 8px; /* Width of vertical scrollbar */
+    height: 8px; /* Height of horizontal scrollbar */
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: rgba(150, 146, 144, 0.2); /* Semi-transparent scrollbar thumb */
-    border-radius: 0.625rem; /* Rounded corners for the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the scrollbar thumb */
   }
 
   /* For Firefox */
@@ -37,7 +37,7 @@ export const Guide = styled.div`
   }
 
   align-items: flex-start;
-  gap: 0.3125rem;
+  gap: 5px;
 `
 
 export const Item = styled.div<StyledQuickGuideTokenProps>`
@@ -50,7 +50,7 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
     border-radius: 200px 50px 50px 200px;
     text-align: left;
     & > img {
-      filter: drop-shadow(0.5rem 0.3125rem 0.3125rem black);
+      filter: drop-shadow(8px 5px 5px black);
     }
   }
 
@@ -60,11 +60,11 @@ export const Item = styled.div<StyledQuickGuideTokenProps>`
     border-radius: 50px 200px 200px 50px;
     text-align: right;
     & > img {
-      filter: drop-shadow(-0.5rem 0.3125rem 0.3125rem black);
+      filter: drop-shadow(-8px 5px 5px black);
     }
   }
 
-  gap: 0.625rem;
+  gap: 10px;
   align-items: center;
 `
 
@@ -73,10 +73,10 @@ export const StyledQuickGuideToken = styled.img<StyledQuickGuideTokenProps>`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 50%;
-  width: 3.75rem;
-  height: 3.75rem;
+  width: 50px;
+  height: 50px;
 `
 
 export const QuickGuideRule = styled.span`
-  font-size: 0.875rem;
+  font-size: 12px;
 `

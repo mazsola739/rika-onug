@@ -4,21 +4,18 @@ export const StyledRoleCardList = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.625rem;
+  gap: 10px;
 `
 
 export const RoleCardListTitle = styled.h2`
-  filter: drop-shadow(0.1875rem 0.1875rem 0.1875rem black);
-  font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 0.0625rem;
+  filter: drop-shadow(3px 3px 3px black);
   text-align: center;
   text-transform: uppercase;
 `
 
 export const RoleCardListGrid = styled.div`
   display: grid;
-  gap: 0.3125rem;
+  gap: 5px;
   grid-template-columns: repeat(auto-fill, minmax(110px, 110px));
   justify-content: center;
 `

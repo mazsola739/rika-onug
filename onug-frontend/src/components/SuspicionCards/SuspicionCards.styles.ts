@@ -5,12 +5,12 @@ export const StyledSuspicionCards = styled.div`
   flex-direction: column;
   justify-content: space-between;
   min-height: 150px;
-  border-bottom: 0.125rem solid #969290;
+  border-bottom: 2px solid #969290;
 `
 
 export const StyledAccusedCards = styled.div`
   display: flex;
-  gap: 0.1875rem;
+  gap: 3px;
   flex-direction: row;
   flex-wrap: wrap;
 `
@@ -23,7 +23,7 @@ export const AccusedCard = styled.div`
 `
 
 export const CardPosition = styled.span`
-  font-size: 0.625rem;
+  font-size: 10px;
   font-weight: lighter;
-  padding: 0.3125rem 0;
+  padding: 5px 0;
 `

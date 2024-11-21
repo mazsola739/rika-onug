@@ -3,8 +3,8 @@ import styled from '@emotion/styled'
 export const StyledCenterCardsRevealed = styled.div`
   display: flex;
   flex-direction: row;
-  border-bottom: 0.125rem solid #969290;
-  gap: 0.625rem;
+  border-bottom: 2px solid #969290;
+  gap: 10px;
   padding: 0 0 1rem 0;
 `
 

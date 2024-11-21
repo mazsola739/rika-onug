@@ -12,7 +12,7 @@ export const StyledApp = styled.div`
 `
 
 export const ConnectionStatus = styled.div`
-  bottom: 0.3125rem;
+  bottom: 5px;
   position: absolute;
-  left: 0.3125rem;
+  left: 5px;
 `

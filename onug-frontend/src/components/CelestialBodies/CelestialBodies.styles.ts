@@ -13,10 +13,7 @@ export const StyledCelestialBodies = styled.div`
 //DAY
 export const Sun = styled.img`
   border-radius: 50%;
-  box-shadow:
-    0 0 3.75rem 0.625rem #fff,
-    0 0 6.25rem 1.25rem red,
-    0 0 8.75rem 1.875rem gold;
+  box-shadow: 0 0 3.75rem 10px #fff, 0 0 6.25rem 1.25rem red, 0 0 8.75rem 1.875rem gold;
   width: 2.1875rem;
   height: 2.1875rem;
   position: absolute;
@@ -34,10 +31,7 @@ export const MorningSky = styled.span`
 //NIGHT
 export const Moon = styled.img`
   border-radius: 50%;
-  box-shadow:
-    0 0 3.75rem 0.625rem #000,
-    0 0 6.25rem 1.25rem blue,
-    0 0 8.75rem 1.875rem silver;
+  box-shadow: 0 0 3.75rem 10px #000, 0 0 6.25rem 1.25rem blue, 0 0 8.75rem 1.875rem silver;
   width: 2.1875rem;
   height: 2.1875rem;
   position: absolute;

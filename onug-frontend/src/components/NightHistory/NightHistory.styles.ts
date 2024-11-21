@@ -3,19 +3,19 @@ import styled from '@emotion/styled'
 export const StyledNightHistory = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 
   overflow-x: hidden;
   overflow-y: auto;
 
   ::-webkit-scrollbar {
-    width: 0.5rem; /* Width of vertical scrollbar */
-    height: 0.5rem; /* Height of horizontal scrollbar */
+    width: 8px; /* Width of vertical scrollbar */
+    height: 8px; /* Height of horizontal scrollbar */
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: rgba(150, 146, 144, 0.2); /* Semi-transparent scrollbar thumb */
-    border-radius: 0.625rem; /* Rounded corners for the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the scrollbar thumb */
   }
 
   /* For Firefox */
@@ -27,7 +27,7 @@ export const StyledNightHistory = styled.div`
 
 export const Narration = styled.div`
   display: flex;
-  gap: 0.3125rem;
+  gap: 5px;
   align-items: center;
 `
 
@@ -36,5 +36,5 @@ export const NarrationImage = styled.img`
 `
 
 export const NarrationText = styled.span`
-  font-size: 0.875rem;
+  font-size: 12px;
 `

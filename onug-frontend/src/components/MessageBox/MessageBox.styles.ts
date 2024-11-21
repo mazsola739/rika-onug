@@ -9,9 +9,9 @@ export const StyledMessageBox = styled.div`
 `
 
 export const Narration = styled.div`
-  padding: 0.3125rem;
+  padding: 5px;
   display: flex;
-  gap: 0.5rem;
+  gap: 8px;
   align-items: center;
 `
 
@@ -25,7 +25,7 @@ export const MessageText = styled.span`
 
 export const Message = styled.div`
   display: flex;
-  padding: 0.3125rem;
+  padding: 5px;
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
@@ -33,14 +33,14 @@ export const Message = styled.div`
 
 export const StyledMessageBoxCards = styled.div`
   display: flex;
-  gap: 0.1875rem;
+  gap: 3px;
   flex-direction: row;
   flex-wrap: wrap;
 `
 
 export const StyledAnswer = styled.div`
   display: flex;
-  gap: 0.1875rem;
+  gap: 3px;
   flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
@@ -53,22 +53,21 @@ export const MessageBoxItem = styled.div`
 `
 
 export const ItemPosition = styled.span`
-  font-size: 0.625rem;
+  font-size: 12px;
   font-weight: lighter;
-  padding: 0.3125rem 0;
+  padding: 5px 0;
 `
 
 export const PlayerPosition = styled.span`
-  font-size: 1.5rem;
   font-weight: lighter;
-  padding: 0.3125rem 0;
+  padding: 5px 0;
 `
 
 export const StyledSelectable = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.625rem;
+  gap: 10px;
 `
 
 export const StyledVoteResult = styled.div`

@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 
-export const StyledTitle = styled.h4<{ yourResult?: boolean }>`
+export const StyledTitle = styled.h5<{ yourResult?: boolean }>`
   color: yellow;
   text-align: center;
   width: 100%;

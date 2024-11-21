@@ -30,7 +30,7 @@ export const Stub: React.FC = observer(() => {
                   }}
                 />
 
-                <small style={{ marginLeft: '0.5rem', color: '#888' }}>{getRoleName(inputValues[index])}</small>
+                <small style={{ marginLeft: '8px', color: '#888' }}>{getRoleName(inputValues[index])}</small>
               </Grid>
             ))}
           </InputsWrapper>

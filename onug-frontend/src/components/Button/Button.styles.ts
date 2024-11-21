@@ -16,14 +16,14 @@ const colorVariants = {
 
 export const StyledButton = styled.button<StyledButtonProps>`
   background-color: ${({ variant }) => colorVariants[variant as ColorVariant] || colorVariants.default};
-  border-radius: 0.3125rem;
+  border-radius: 5px;
   cursor: pointer;
-  padding: 0.125rem 0 0 0;
+  padding: 2px 0 0 0;
   width: 8.125rem;
   height: 2.1875rem;
   transition: 0.75s;
-  filter: drop-shadow(0.1875rem 0.1875rem 0.1875rem black);
-  font-size: 0.875rem;
+  filter: drop-shadow(3px 3px 3px black);
+  font-size: 12px;
   &:disabled {
     cursor: not-allowed;
     opacity: 0.6;

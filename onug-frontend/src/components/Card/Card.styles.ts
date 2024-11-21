@@ -4,9 +4,9 @@ import { glowingBlue, glowingGreen, glowingPurple, glowingRed, glowingVibrantPin
 import { StyledCardProps } from './Card.types'
 
 export const StyledCard = styled.div<StyledCardProps>`
-  border-radius: 0.625rem;
+  border-radius: 10px;
   display: flex;
-  filter: drop-shadow(0.1875rem 0.1875rem 0.1875rem black);
+  filter: drop-shadow(3px 3px 3px black);
   border: 5px solid transparent;
 
   ${({ werewolf, dreamwolf, masons, aliens, vampires, isSelectable }) => {

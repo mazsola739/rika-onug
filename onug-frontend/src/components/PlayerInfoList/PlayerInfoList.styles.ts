@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 export const StyledPlayerInfoList = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 0.625rem;
+  gap: 10px;
   flex-wrap: wrap;
 
   overflow-x: hidden;
@@ -16,13 +16,13 @@ export const StyledPlayerInfoList = styled.div`
   }
 
   ::-webkit-scrollbar {
-    width: 0.5rem; /* Width of vertical scrollbar */
-    height: 0.5rem; /* Height of horizontal scrollbar */
+    width: 8px; /* Width of vertical scrollbar */
+    height: 8px; /* Height of horizontal scrollbar */
   }
 
   ::-webkit-scrollbar-thumb {
     background-color: rgba(150, 146, 144, 0.2); /* Semi-transparent scrollbar thumb */
-    border-radius: 0.625rem; /* Rounded corners for the scrollbar thumb */
+    border-radius: 10px; /* Rounded corners for the scrollbar thumb */
   }
 
   /* For Firefox */

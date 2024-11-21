@@ -59,8 +59,8 @@ export const StyledGame = styled.div<GameProps>`
   }
 
   display: grid;
-  grid-template-columns: 190px calc(100vw - 780px) 190px 400px;
-  grid-template-rows: 80px 130px calc(100vh - 290px) 80px;
+  grid-template-columns: 180px calc(100vw - 720px) 180px 360px;
+  grid-template-rows: 70px 170px calc(100vh - 310px) 70px;
 
   header {
     grid-area: 1 / 1 / 2 / 4;

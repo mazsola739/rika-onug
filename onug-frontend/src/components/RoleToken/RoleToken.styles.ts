@@ -13,8 +13,8 @@ export const StyledRoleToken = styled.img<{
   width: ${({ size }) => size}px;
   z-index: 20;
   border-radius: 50%;
-  border: 0.1875rem solid white;
-  filter: drop-shadow(0.1875rem 0.1875rem 0.1875rem black);
+  border: 3px solid white;
+  filter: drop-shadow(3px 3px 3px black);
 
   &:hover {
     transition: 0.75s;

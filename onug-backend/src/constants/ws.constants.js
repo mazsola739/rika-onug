@@ -39,7 +39,6 @@ export const START_GAME = 'START_GAME'
 export const END_GAME = 'END_GAME'
 export const UPDATE_GAME = 'UPDATE_GAME'
 export const PLAY_GAME = 'PLAY_GAME'
-export const PAUSE_GAME = 'PAUSE_GAME'
 export const STOP_GAME = 'STOP_GAME'
 
 export const ERROR = 'ERROR'

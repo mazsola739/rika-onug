@@ -1,4 +1,4 @@
-import { DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, PAUSE_GAME, READY, RESET, SCENE, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VOTE } from 'constant'
+import { DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, READY, RESET, SCENE, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VOTE } from 'constant'
 import { useCallback } from 'react'
 import { gameStatusStore, riseAndRestStore, roomStore, wsStore } from 'store'
 
@@ -84,15 +84,6 @@ export const useClickHandler = () => {
       token
     })
     gameStatusStore.toggleStart()
-  }, [sendJsonMessage])
-
-  const handlePauseGame = useCallback(() => {
-    sendJsonMessage?.({
-      type: PAUSE_GAME,
-      room_id,
-      token
-    })
-    gameStatusStore.togglePause()
   }, [sendJsonMessage])
 
   const handleStopGame = useCallback(() => {
@@ -214,7 +205,6 @@ export const useClickHandler = () => {
     handleResetGame,
     handleStartGame,
     handleReady,
-    handlePauseGame,
     handleStopGame,
     handleFinish,
     handleSkip,

@@ -4,7 +4,6 @@ import { makeAutoObservable } from 'mobx'
 class GameStatusStore {
   isGamePlayStarted = false
   isGamePlayStopped = true
-  isGamePlayPaused = false
 
   constructor() {
     makeAutoObservable(this)
@@ -13,7 +12,6 @@ class GameStatusStore {
   resetStatus(): void {
     this.isGamePlayStarted = false
     this.isGamePlayStopped = false
-    this.isGamePlayPaused = false
   }
 
   toggleStart(): void {
@@ -31,15 +29,6 @@ class GameStatusStore {
       this.isGamePlayStopped = true
     } else {
       this.isGamePlayStarted = true
-    }
-  }
-
-  togglePause(): void {
-    if (!this.isGamePlayPaused) {
-      this.resetStatus()
-      this.isGamePlayPaused = true
-    } else {
-      this.isGamePlayStopped = true
     }
   }
 }
