@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { copycatInteraction } from './copycat.action'
+import { copycatAction } from './copycat.action'
 
 //TODO if oracle is oracle team
 export const copycat = (gamestate, title) => {
@@ -14,7 +14,7 @@ export const copycat = (gamestate, title) => {
 
     if (isActivePlayer(card).COPYCAT) {
       gamestate.players[token].action_finished = false
-      action = copycatInteraction(gamestate, token, title)
+      action = copycatAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

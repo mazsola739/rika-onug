@@ -29,6 +29,7 @@ export const usePlayerCard = (card: TablePlayerCard) => {
   const isMason = card?.masons
   const isLovers = card?.lovers
   const isVampire = card?.vampires
+  const isAlien = card?.aliens
 
   const isSelectableCard = card?.selectable_card
   const isSelectableMark = card?.selectable_mark
@@ -47,7 +48,8 @@ export const usePlayerCard = (card: TablePlayerCard) => {
     werewolf: isWerewolf,
     dreamwolf: isDreamwolf,
     masons: isMason,
-    vampires: isVampire
+    vampires: isVampire,
+    aliens: isAlien
   }
 
   const markProps = {
@@ -68,6 +70,7 @@ export const usePlayerCard = (card: TablePlayerCard) => {
     isArtifacted,
     isWerewolf,
     isDreamwolf,
+    isAlien,
     onCardClick,
     guessTokens,
     hasMarks,

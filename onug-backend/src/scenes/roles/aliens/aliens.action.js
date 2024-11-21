@@ -3,13 +3,13 @@ import {
   generateRoleAction,
   getAlienPlayerNumbersByRoleIds,
   getAnyEvenOrOddPlayers,
-  getCardIdsByPlayerNumbers,
+  getCardIdsByPositions,
   getNonAlienPlayerNumbersByRoleIdsWithNoShield,
   getPlayerNumberWithMatchingToken
 } from '../../sceneUtils'
 import { findUniqueElementsInArrays, getAlienPlayerNumbersByRoleIdsWithNoShield, getNeighborByPosition, getSelectableAnyPlayerNumbersWithNoShield, moveCards } from './aliens.utils'
 
-export const aliensInteraction = (gamestate, token, title) => {
+export const aliensAction = (gamestate, token, title) => {
   const aliens = getAlienPlayerNumbersByRoleIds(gamestate.players)
   const aliensWithoutShield = getAlienPlayerNumbersByRoleIdsWithNoShield(gamestate.players)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
@@ -88,8 +88,9 @@ export const aliensInteraction = (gamestate, token, title) => {
 
       break
     case 'aliens_show_text':
-      showCards = getCardIdsByPlayerNumbers(gamestate.card_positions, aliensWithoutShield)
+      showCards = getCardIdsByPositions(gamestate.card_positions, aliensWithoutShield)
       showCards.forEach(key => {
+        console.log(key)
         const card = gamestate.card_positions[key].card
 
         if (gamestate.players[token]?.card?.original_id === card.id && currentPlayerNumber !== key) {

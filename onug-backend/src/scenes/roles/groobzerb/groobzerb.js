@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { groobzerbInteraction } from './groobzerb.action'
+import { groobzerbAction } from './groobzerb.action'
 
 export const groobzerb = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const groobzerb = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).GROOB_ZERB) {
       gamestate.players[token].action_finished = false
-      action = groobzerbInteraction(gamestate, token, title)
+      action = groobzerbAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

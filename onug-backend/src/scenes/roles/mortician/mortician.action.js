@@ -1,7 +1,7 @@
 import { generateRoleAction, getPlayerNeighborsByToken, getPlayerNumberWithMatchingToken, getSelectablePlayersWithNoShield } from '../../sceneUtils'
 
 //TODO neighbors
-export const morticianInteraction = (gamestate, token, title, randomMorticianInstruction, morticianKey) => {
+export const morticianAction = (gamestate, token, title, randomMorticianInstruction, morticianKey) => {
   if (morticianKey === 'identifier_yourself_text') {
     if (!gamestate.players[token].shield) {
       const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)

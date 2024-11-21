@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { mysticwolfInteraction } from './mysticwolf.action'
+import { mysticwolfAction } from './mysticwolf.action'
 
 export const mysticwolf = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const mysticwolf = (gamestate, title) => {
 
     if (isActivePlayer(card).MYSTIC_WOLF) {
       gamestate.players[token].action_finished = false
-      action = mysticwolfInteraction(gamestate, token, title)
+      action = mysticwolfAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

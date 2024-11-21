@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { robberInteraction } from './robber.action'
+import { robberAction } from './robber.action'
 
 export const robber = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const robber = (gamestate, title) => {
 
     if (isActivePlayer(card).ROBBER) {
       gamestate.players[token].action_finished = false
-      action = robberInteraction(gamestate, token, title)
+      action = robberAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { pickpocketInteraction } from './pickpocket.action'
+import { pickpocketAction } from './pickpocket.action'
 
 export const pickpocket = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,10 +13,10 @@ export const pickpocket = (gamestate, title, prefix) => {
 
     if (prefix === 'pickpocket' && isActivePlayer(card).PICKPOCKET) {
       gamestate.players[token].action_finished = false
-      action = pickpocketInteraction(gamestate, token, title)
+      action = pickpocketAction(gamestate, token, title)
     } else if (prefix === 'doppelganger_pickpocket' && isActivePlayer(card).DOPPELGÄNGER_PICKPOCKET) {
       gamestate.players[token].action_finished = false
-      action = pickpocketInteraction(gamestate, token, title)
+      action = pickpocketAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

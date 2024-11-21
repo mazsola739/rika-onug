@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { diseasedInteraction } from './diseased.action'
+import { diseasedAction } from './diseased.action'
 
 export const diseased = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const diseased = (gamestate, title) => {
 
     if (isActivePlayer(card).DISEASED) {
       gamestate.players[token].action_finished = false
-      action = diseasedInteraction(gamestate, token, title)
+      action = diseasedAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

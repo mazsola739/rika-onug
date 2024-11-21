@@ -2,7 +2,7 @@ import { formatPlayerIdentifier, generateRoleAction, getPlayerNumberWithMatching
 import { getVampirePlayerNumbersByMark } from './renfield.utils'
 
 //TODO if no vampire he is villager
-export const renfieldInteraction = (gamestate, token, title) => {
+export const renfieldAction = (gamestate, token, title) => {
   const vampires = getVampirePlayerNumbersByRoleIds(gamestate.players)
   const newVampire = getVampirePlayerNumbersByMark(gamestate.players)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)

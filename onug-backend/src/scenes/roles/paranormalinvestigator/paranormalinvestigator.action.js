@@ -1,7 +1,7 @@
 import { generateRoleAction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
 
 //TODO fix limit
-export const paranormalinvestigatorInteraction = (gamestate, token, title) => {
+export const paranormalinvestigatorAction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(gamestate.players, token)
 
   const limit = selectablePlayerNumbers.length === 1 ? 1 : 2

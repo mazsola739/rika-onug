@@ -1,6 +1,6 @@
 import { formatPlayerIdentifier, generateRoleAction, getNonVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
 
-export const vampiresInteraction = (gamestate, token, title) => {
+export const vampiresAction = (gamestate, token, title) => {
   const nonVampires = getNonVampirePlayerNumbersByRoleIds(gamestate)
   const vampires = getVampirePlayerNumbersByRoleIds(gamestate.players)
 

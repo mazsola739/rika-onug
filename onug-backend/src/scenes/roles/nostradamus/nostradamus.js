@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { nostradamusInteraction } from './nostradamus.action'
+import { nostradamusAction } from './nostradamus.action'
 
 export const nostradamus = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const nostradamus = (gamestate, title) => {
 
     if (isActivePlayer(card).NOSTRADAMUS) {
       gamestate.players[token].action_finished = false
-      action = nostradamusInteraction(gamestate, token, title)
+      action = nostradamusAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

@@ -1,7 +1,7 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
 import { generateRoleAction } from '../../sceneUtils'
 
-export const witchInteraction = (gamestate, token, title) => {
+export const witchAction = (gamestate, token, title) => {
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     selectable_cards: CENTER_CARD_POSITIONS,

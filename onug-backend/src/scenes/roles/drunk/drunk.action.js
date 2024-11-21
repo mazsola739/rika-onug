@@ -1,7 +1,7 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
 import { generateRoleAction } from '../../sceneUtils'
 
-export const drunkInteraction = (gamestate, token, title) => {
+export const drunkAction = (gamestate, token, title) => {
   if (!gamestate.players[token].shield) {
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],

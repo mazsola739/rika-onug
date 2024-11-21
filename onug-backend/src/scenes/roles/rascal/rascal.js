@@ -1,8 +1,8 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
-import { villageidiotInteraction } from '../villageidiot/villageidiot.action'
+import { villageidiotAction } from '../villageidiot/villageidiot.action'
 import { randomRascalInstructions, rascalAnyOneKeys, rascalAnyTwoKeys } from './rascal.constants'
-import { rascalInteraction } from './rascal.action'
+import { rascalAction } from './rascal.action'
 
 export const rascal = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -42,10 +42,10 @@ export const rascal = (gamestate, title, prefix) => {
     if ((prefix === 'rascal' && isActivePlayer(card).RASCAL) || (prefix === 'doppelganger_rascal' && isActivePlayer(card).DOPPELGÄNGER_RASCAL)) {
       if (randomRascalInstruction === 'rascal_idiot_text') {
         gamestate.players[token].action_finished = false
-        action = villageidiotInteraction(gamestate, token, title)
+        action = villageidiotAction(gamestate, token, title)
       } else {
         gamestate.players[token].action_finished = false
-        action = rascalInteraction(gamestate, token, title)
+        action = rascalAction(gamestate, token, title)
       }
     }
 

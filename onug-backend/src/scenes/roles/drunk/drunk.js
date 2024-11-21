@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { drunkInteraction } from './drunk.action'
+import { drunkAction } from './drunk.action'
 
 export const drunk = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const drunk = (gamestate, title) => {
 
     if (isActivePlayer(card).DRUNK) {
       gamestate.players[token].action_finished = false
-      action = drunkInteraction(gamestate, token, title)
+      action = drunkAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

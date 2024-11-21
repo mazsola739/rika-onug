@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { marksmanInteraction } from './marksman.action'
+import { marksmanAction } from './marksman.action'
 
 export const marksman = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const marksman = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).MARKSMAN) {
       gamestate.players[token].action_finished = false
-      action = marksmanInteraction(gamestate, token, title)
+      action = marksmanAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

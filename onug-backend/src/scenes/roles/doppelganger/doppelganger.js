@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { doppelgangerInteraction } from './doppelganger.action'
+import { doppelgangerAction } from './doppelganger.action'
 
 //TODO if oracle is oracle team
 export const doppelganger = (gamestate, title) => {
@@ -14,7 +14,7 @@ export const doppelganger = (gamestate, title) => {
 
     if (isActivePlayer(card).DOPPELGÄNGER) {
       gamestate.players[token].action_finished = false
-      action = doppelgangerInteraction(gamestate, token, title)
+      action = doppelgangerAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

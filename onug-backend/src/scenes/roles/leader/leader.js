@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { leaderInteraction } from './leader.action'
+import { leaderAction } from './leader.action'
 
 export const leader = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const leader = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).LEADER) {
       gamestate.players[token].action_finished = false
-      action = leaderInteraction(gamestate, token, title)
+      action = leaderAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

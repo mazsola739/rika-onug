@@ -1,6 +1,6 @@
 import { generateRoleAction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
 
-export const troublemakerInteraction = (gamestate, token, title) => {
+export const troublemakerAction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(gamestate.players, token)
 
   gamestate.players[token].player_history[title] = {

@@ -2,7 +2,7 @@ import { DOPPELGANGER_INSTANT_ACTION } from '../../../constants'
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { instantRoleIds } from './doppelgangerinstantaction.constants'
-import { doppelgangerinstantactionInteraction } from './doppelgangerinstantaction.action'
+import { doppelgangerinstantactionAction } from './doppelgangerinstantaction.action'
 import { addVerboseOr, getRolesNames } from './doppelgangerinstantaction.utils'
 
 export const doppelgangerinstantaction = (gamestate, title) => {
@@ -20,7 +20,7 @@ export const doppelgangerinstantaction = (gamestate, title) => {
 
     if (isActivePlayer(card).DOPPELGÄNGER) {
       gamestate.players[token].action_finished = false
-      action = doppelgangerinstantactionInteraction(gamestate, token, title)
+      action = doppelgangerinstantactionAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

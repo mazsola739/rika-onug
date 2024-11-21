@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { internInteraction } from './intern.action'
+import { internAction } from './intern.action'
 
 export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
 
     if (isActivePlayer(card).INTERN) {
       gamestate.players[token].action_finished = false
-      action = internInteraction(gamestate, token, title)
+      action = internAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

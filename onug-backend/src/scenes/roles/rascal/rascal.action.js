@@ -9,7 +9,7 @@ import {
 } from '../../sceneUtils'
 import { getAnyHigherOrLowerPlayerNumbersByToken } from './rascal.utils'
 
-export const rascalInteraction = (gamestate, token, title) => {
+export const rascalAction = (gamestate, token, title) => {
   let privateMessage
   let limit = 1
   let selectableCards

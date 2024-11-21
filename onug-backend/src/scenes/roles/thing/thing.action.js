@@ -1,6 +1,6 @@
 import { generateRoleAction, getPlayerNeighborsByToken } from '../../sceneUtils'
 
-export const thingInteraction = (gamestate, token, title) => {
+export const thingAction = (gamestate, token, title) => {
   const neighbors = getPlayerNeighborsByToken(gamestate.players, token, 'both', 1)
 
   /* TODO const isSingleSelectable = selectablePlayerNumbers.length === 1

@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { evilometerInteraction } from './evilometer.action'
+import { evilometerAction } from './evilometer.action'
 
 //TODO super villains can see evilometer
 export const evilometer = (gamestate, title, hasDoppelganger) => {
@@ -14,7 +14,7 @@ export const evilometer = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).EVILOMETER) {
       gamestate.players[token].action_finished = false
-      action = evilometerInteraction(gamestate, token, title)
+      action = evilometerAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

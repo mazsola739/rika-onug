@@ -1,4 +1,4 @@
-import { witchInteraction } from '..'
+import { witchAction } from '..'
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 
@@ -13,7 +13,7 @@ export const voodoolou = (gamestate, title) => {
 
     if (isActivePlayer(card).VOODOO_LOU) {
       gamestate.players[token].action_finished = false
-      action = witchInteraction(gamestate, token, title)
+      action = witchAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

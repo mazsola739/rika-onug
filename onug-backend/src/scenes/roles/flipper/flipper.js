@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { flipperInteraction } from './flipper.action'
+import { flipperAction } from './flipper.action'
 
 export const flipper = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,10 +13,10 @@ export const flipper = (gamestate, title, prefix) => {
 
     if (prefix === 'flipper' && isActivePlayer(card).FLIPPER) {
       gamestate.players[token].action_finished = false
-      action = flipperInteraction(gamestate, token, title)
+      action = flipperAction(gamestate, token, title)
     } else if (prefix === 'doppelganger_flipper' && isActivePlayer(card).DOPPELGÄNGER_FLIPPER) {
       gamestate.players[token].action_finished = false
-      action = flipperInteraction(gamestate, token, title)
+      action = flipperAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

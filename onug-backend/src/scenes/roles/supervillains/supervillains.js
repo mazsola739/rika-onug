@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { supervillainsInteraction } from './supervillains.action'
+import { supervillainsAction } from './supervillains.action'
 
 export const supervillains = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const supervillains = (gamestate, title) => {
 
     if (isActivePlayer(card).SUPER_VILLAINS) {
       gamestate.players[token].action_finished = false
-      action = supervillainsInteraction(gamestate, token, title)
+      action = supervillainsAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

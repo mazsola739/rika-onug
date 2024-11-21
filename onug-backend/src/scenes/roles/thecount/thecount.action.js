@@ -1,6 +1,6 @@
 import { generateRoleAction, getNonVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
 
-export const thecountInteraction = (gamestate, token, title) => {
+export const thecountAction = (gamestate, token, title) => {
   const nonVampires = getNonVampirePlayerNumbersByRoleIds(gamestate)
 
   gamestate.players[token].player_history[title] = {

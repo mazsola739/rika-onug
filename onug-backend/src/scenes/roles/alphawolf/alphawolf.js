@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { alphawolfInteraction } from './alphawolf.action'
+import { alphawolfAction } from './alphawolf.action'
 
 export const alphawolf = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const alphawolf = (gamestate, title) => {
 
     if (isActivePlayer(card).ALPHA_WOLF) {
       gamestate.players[token].action_finished = false
-      action = alphawolfInteraction(gamestate, token, title)
+      action = alphawolfAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

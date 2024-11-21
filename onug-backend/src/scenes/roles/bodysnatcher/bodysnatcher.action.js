@@ -2,7 +2,7 @@ import { CENTER_CARD_POSITIONS } from '../../../constants'
 import { generateRoleAction, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNeighborsByToken } from '../../sceneUtils'
 import { getAnyOtherPlayersByToken } from './bodysnatcher.utils'
 
-export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey) => {
+export const bodysnatcherAction = (gamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey) => {
   if (gamestate.players[token].shield) {
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],

@@ -1,4 +1,4 @@
-import { robberInteraction } from '..'
+import { robberAction } from '..'
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 
@@ -13,7 +13,7 @@ export const roleretriever = (gamestate, title) => {
 
     if (isActivePlayer(card).ROLE_RETRIEVER) {
       gamestate.players[token].action_finished = false
-      action = robberInteraction(gamestate, token, title)
+      action = robberAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

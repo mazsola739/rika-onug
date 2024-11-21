@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { masonsInteraction } from './masons.action'
+import { masonsAction } from './masons.action'
 
 export const masons = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const masons = (gamestate, title) => {
 
     if (isActivePlayer(card).MASONS) {
       gamestate.players[token].action_finished = false
-      action = masonsInteraction(gamestate, token, title)
+      action = masonsAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

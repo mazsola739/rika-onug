@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomBlobKickoffText } from './blob.constants'
-import { blobInteraction } from './blob.action'
+import { blobAction } from './blob.action'
 
 export const blob = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -25,7 +25,7 @@ export const blob = (gamestate, title) => {
 
     if (isActivePlayer(card).BLOB) {
       gamestate.players[token].action_finished = false
-      action = blobInteraction(gamestate, token, title)
+      action = blobAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

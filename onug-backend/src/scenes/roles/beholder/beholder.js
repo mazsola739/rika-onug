@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { getAllPlayerTokens } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { beholderInteraction } from './beholder.action'
+import { beholderAction } from './beholder.action'
 
 export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -17,7 +17,7 @@ export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppel
 
     if (isActivePlayer(card).BEHOLDER) {
       gamestate.players[token].action_finished = false
-      action = beholderInteraction(gamestate, token, title)
+      action = beholderAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

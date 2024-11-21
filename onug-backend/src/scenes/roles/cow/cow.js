@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { cowInteraction } from './cow.action'
+import { cowAction } from './cow.action'
 
 //TODO aliens can see cow
 export const cow = (gamestate, title, hasDoppelganger) => {
@@ -14,7 +14,7 @@ export const cow = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).COW) {
       gamestate.players[token].action_finished = false
-      action = cowInteraction(gamestate, token, title)
+      action = cowAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

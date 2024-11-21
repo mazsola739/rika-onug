@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { cupidInteraction } from './cupid.action'
+import { cupidAction } from './cupid.action'
 
 export const cupid = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const cupid = (gamestate, title) => {
 
     if (isActivePlayer(card).CUPID) {
       gamestate.players[token].action_finished = false
-      action = cupidInteraction(gamestate, token, title)
+      action = cupidAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

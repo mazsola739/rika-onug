@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { alienAllKeys, alienAnyKeys, randomAlienInstructions } from './aliens.constants'
-import { aliensInteraction } from './aliens.action'
+import { aliensAction } from './aliens.action'
 
 export const aliens = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -38,7 +38,7 @@ export const aliens = (gamestate, title) => {
 
     if (isActivePlayer(card).ALIENS) {
       gamestate.players[token].action_finished = false
-      action = aliensInteraction(gamestate, token, title)
+      action = aliensAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { instigatorInteraction } from './instigator.action'
+import { instigatorAction } from './instigator.action'
 
 export const instigator = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const instigator = (gamestate, title) => {
 
     if (isActivePlayer(card).INSTIGATOR) {
       gamestate.players[token].action_finished = false
-      action = instigatorInteraction(gamestate, token, title)
+      action = instigatorAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { leaderZerbgroobInteraction } from './leaderzerbgroob.action'
+import { leaderZerbgroobAction } from './leaderzerbgroob.action'
 
 export const leaderzerbgroob = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const leaderzerbgroob = (gamestate, title) => {
 
     if (isActivePlayer(card).LEADER_ZERB_GROOB) {
       gamestate.players[token].action_finished = false
-      action = leaderZerbgroobInteraction(gamestate, token, title)
+      action = leaderZerbgroobAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

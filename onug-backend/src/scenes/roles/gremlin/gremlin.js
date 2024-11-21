@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { gremlinInteraction } from './gremlin.action'
+import { gremlinAction } from './gremlin.action'
 
 export const gremlin = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,10 +13,10 @@ export const gremlin = (gamestate, title, prefix) => {
 
     if (prefix === 'gremlin' && isActivePlayer(card).GREMLIN) {
       gamestate.players[token].action_finished = false
-      action = gremlinInteraction(gamestate, token, title)
+      action = gremlinAction(gamestate, token, title)
     } else if (prefix === 'doppelganger_gremlin' && isActivePlayer(card).DOPPELGÄNGER_GREMLIN) {
       gamestate.players[token].action_finished = false
-      action = gremlinInteraction(gamestate, token, title)
+      action = gremlinAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

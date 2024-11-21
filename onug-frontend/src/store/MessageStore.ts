@@ -38,9 +38,8 @@ class MessageStore {
   }
 
   get disabledCards() {
-    const { selectedCards } = selectionStore
-    const selectedPlayerCards = selectedCards.filter(card => card.includes('player_')).length
-    const selectedCenterCards = selectedCards.filter(card => card.includes('center_')).length
+    const selectedPlayerCards = selectionStore.selectedCards.filter(card => card.includes('player_')).length
+    const selectedCenterCards = selectionStore.selectedCards.filter(card => card.includes('center_')).length
 
     const playerCardLimit = this.playerCardLimit
     const centerCardLimit = this.centerCardLimit
@@ -53,6 +52,7 @@ class MessageStore {
 
     return true
   }
+
   get disabledMarks() {
     const { selectedMarks } = selectionStore
 

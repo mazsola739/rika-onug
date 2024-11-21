@@ -1,6 +1,6 @@
 import { generateRoleAction, getMarksByPositions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 
-export const everyonemarkInteraction = (gamestate, token, title) => {
+export const everyonemarkAction = (gamestate, token, title) => {
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
   const viewMarks = getMarksByPositions(gamestate.card_positions, [currentPlayerNumber])
 

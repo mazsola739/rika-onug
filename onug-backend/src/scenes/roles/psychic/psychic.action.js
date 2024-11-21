@@ -1,6 +1,6 @@
 import { generateRoleAction, getAnyEvenOrOddPlayers, getAnySeerPlayerNumbersByRoleIdsWithNoShield } from '../../sceneUtils'
 
-export const psychicInteraction = (gamestate, token, title, randomPsychicInstructions, psychicKeys) => {
+export const psychicAction = (gamestate, token, title, randomPsychicInstructions, psychicKeys) => {
   const evenOrOdd = psychicKeys.replace('identifier_', '').replace('_text', '').replace('any', '')
   const selectablePlayers = getAnyEvenOrOddPlayers(gamestate.players, evenOrOdd)
   const selectablePlayerNumbers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(selectablePlayers)

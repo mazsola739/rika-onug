@@ -1,6 +1,6 @@
 import { generateRoleAction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
 
-export const mysticwolfInteraction = (gamestate, token, title) => {
+export const mysticwolfAction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(gamestate.players, token)
 
   gamestate.players[token].player_history[title] = {

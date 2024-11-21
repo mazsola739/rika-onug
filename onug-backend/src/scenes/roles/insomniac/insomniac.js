@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { insomniacInteraction } from './insomniac.action'
+import { insomniacAction } from './insomniac.action'
 
 export const insomniac = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const insomniac = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).INSOMNIAC) {
       gamestate.players[token].action_finished = false
-      action = insomniacInteraction(gamestate, token, title)
+      action = insomniacAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

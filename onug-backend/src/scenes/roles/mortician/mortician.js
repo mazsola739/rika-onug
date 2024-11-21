@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { morticianKeys, randomMorticianInstructions } from './mortician.constants'
-import { morticianInteraction } from './mortician.action'
+import { morticianAction } from './mortician.action'
 
 export const mortician = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -25,9 +25,9 @@ export const mortician = (gamestate, title, prefix) => {
 
     if (prefix === 'mortician' && isActivePlayer(card).MORTICIAN) {
       gamestate.players[token].action_finished = false
-      action = morticianInteraction(gamestate, token, title, randomMorticianInstruction, morticianKey)
+      action = morticianAction(gamestate, token, title, randomMorticianInstruction, morticianKey)
     } else if (prefix === 'doppelganger_mortician' && isActivePlayer(card).DOPPELGÄNGER_MORTICIAN) {
-      action = morticianInteraction(gamestate, token, title, randomMorticianInstruction, morticianKey)
+      action = morticianAction(gamestate, token, title, randomMorticianInstruction, morticianKey)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

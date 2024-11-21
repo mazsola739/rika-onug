@@ -1,6 +1,6 @@
 import { generateRoleAction, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 
-export const priestInteraction = (gamestate, token, title) => {
+export const priestAction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(gamestate.players, [token])
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)

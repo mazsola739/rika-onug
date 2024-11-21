@@ -1,6 +1,6 @@
 import { formatPlayerIdentifier, generateRoleAction, getAlienPlayerNumbersByRoleIds } from '../../sceneUtils'
 
-export const leaderInteraction = (gamestate, token, title) => {
+export const leaderAction = (gamestate, token, title) => {
   const aliens = getAlienPlayerNumbersByRoleIds(gamestate.players)
 
   gamestate.players[token].player_history[title] = {

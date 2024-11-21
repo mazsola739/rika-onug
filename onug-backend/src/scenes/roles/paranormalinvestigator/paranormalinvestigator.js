@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { paranormalinvestigatorInteraction } from './paranormalinvestigator.action'
+import { paranormalinvestigatorAction } from './paranormalinvestigator.action'
 
 export const paranormalinvestigator = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const paranormalinvestigator = (gamestate, title) => {
 
     if (isActivePlayer(card).PARANORMAL_INVESTIGATOR) {
       gamestate.players[token].action_finished = false
-      action = paranormalinvestigatorInteraction(gamestate, token, title)
+      action = paranormalinvestigatorAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

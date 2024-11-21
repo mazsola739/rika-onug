@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { seerInteraction } from './seer.action'
+import { seerAction } from './seer.action'
 
 export const seer = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const seer = (gamestate, title) => {
 
     if (isActivePlayer(card).SEER) {
       gamestate.players[token].action_finished = false
-      action = seerInteraction(gamestate, token, title)
+      action = seerAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

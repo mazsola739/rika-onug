@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { auraseerInteraction } from './auraseer.action'
+import { auraseerAction } from './auraseer.action'
 
 export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
 
     if (isActivePlayer(card).AURA_SEER) {
       gamestate.players[token].action_finished = false
-      action = auraseerInteraction(gamestate, token, title)
+      action = auraseerAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

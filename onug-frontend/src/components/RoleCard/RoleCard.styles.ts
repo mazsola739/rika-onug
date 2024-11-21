@@ -49,3 +49,16 @@ export const RoleCardName = styled.span<StyledRoleCardProps>`
   transform: translate(-50%, -50%);
   z-index: 2;
 `
+
+export const WakeUp = styled.span<StyledRoleCardProps>`
+  text-shadow: ${({ isSelected }) => (isSelected ? '2px 2px 2px black' : '')};
+  opacity: ${({ isSelected }) => (isSelected ? '1' : '0')};
+  font-size: 14px;
+  top: 10px;
+  left: 85px;
+  transition: 0.75s;
+  padding: 2px;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+`

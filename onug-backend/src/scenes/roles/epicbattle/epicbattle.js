@@ -1,5 +1,5 @@
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
-import { everyonemarkInteraction } from '../everyonemark/everyonemark.action'
+import { everyonemarkAction } from '../everyonemark/everyonemark.action'
 import { random_easteregg_nobadguys, random_easteregg_nogoodguys } from './epicbattle.constants'
 
 export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
@@ -24,7 +24,7 @@ export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalP
     let action = {}
 
     gamestate.players[token].action_finished = false
-    action = everyonemarkInteraction(gamestate, token, title)
+    action = everyonemarkAction(gamestate, token, title)
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })

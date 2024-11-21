@@ -1,6 +1,6 @@
 import { formatPlayerIdentifier, generateRoleAction, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../sceneUtils'
 
-export const minionInteraction = (gamestate, token, title) => {
+export const minionAction = (gamestate, token, title) => {
   const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(gamestate.players)
 
   if (werewolves.length === 0) {

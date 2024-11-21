@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
 import { getAssassinPlayerNumbersByRoleIds } from './apprenticeassassin.utils'
 
-export const apprenticeassassinInteraction = (gamestate, token, title) => {
+export const apprenticeassassinAction = (gamestate, token, title) => {
   const assassins = getAssassinPlayerNumbersByRoleIds(gamestate.players)
 
   if (assassins.length > 0) {

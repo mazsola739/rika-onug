@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { vampiresInteraction } from './vampires.action'
+import { vampiresAction } from './vampires.action'
 
 /* // TODO   Uses the Robber or Witch and swaps with a Werewolf or Vampire 
 Does not wake up with the Werewolves/Vampires */
@@ -16,7 +16,7 @@ export const vampires = (gamestate, title) => {
 
     if (isActivePlayer(card).VAMPIRES) {
       gamestate.players[token].action_finished = false
-      action = vampiresInteraction(gamestate, token, title)
+      action = vampiresAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

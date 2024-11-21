@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomFamilyman } from './familyman.constants'
-import { familymanInteraction } from './familyman.action'
+import { familymanAction } from './familyman.action'
 
 export const familyman = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -30,7 +30,7 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).FAMILY_MAN) {
       gamestate.players[token].action_finished = false
-      action = familymanInteraction(gamestate, token, title)
+      action = familymanAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

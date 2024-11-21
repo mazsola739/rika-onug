@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { temptressInteraction } from './temptress.action'
+import { temptressAction } from './temptress.action'
 
 export const temptress = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const temptress = (gamestate, title) => {
 
     if (isActivePlayer(card).TEMPTRESS) {
       gamestate.players[token].action_finished = false
-      action = temptressInteraction(gamestate, token, title)
+      action = temptressAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

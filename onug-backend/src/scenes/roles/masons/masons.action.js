@@ -1,7 +1,7 @@
 import { generateRoleAction } from '../../sceneUtils'
 import { getMasonPlayerNumbersByRoleIds } from './masons.utils'
 
-export const masonsInteraction = (gamestate, token, title) => {
+export const masonsAction = (gamestate, token, title) => {
   const masons = getMasonPlayerNumbersByRoleIds(gamestate.players)
 
   gamestate.players[token].player_history[title] = {

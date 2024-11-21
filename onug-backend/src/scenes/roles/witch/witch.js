@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { witchInteraction } from './witch.action'
+import { witchAction } from './witch.action'
 
 export const witch = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const witch = (gamestate, title) => {
 
     if (isActivePlayer(card).WITCH) {
       gamestate.players[token].action_finished = false
-      action = witchInteraction(gamestate, token, title)
+      action = witchAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

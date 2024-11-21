@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { assassinInteraction } from './assassin.action'
+import { assassinAction } from './assassin.action'
 
 export const assassin = (gamestate, title, hasApprenticeAssassin, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,10 +13,10 @@ export const assassin = (gamestate, title, hasApprenticeAssassin, prefix) => {
 
     if (prefix === 'assassin' && isActivePlayer(card).ASSASSIN) {
       gamestate.players[token].action_finished = false
-      action = assassinInteraction(gamestate, token, title)
+      action = assassinAction(gamestate, token, title)
     } else if (prefix === 'doppelganger_assassin' && isActivePlayer(card).DOPPELGÄNGER_ASSASSIN) {
       gamestate.players[token].action_finished = false
-      action = assassinInteraction(gamestate, token, title)
+      action = assassinAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

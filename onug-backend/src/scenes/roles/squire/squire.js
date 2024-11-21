@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { squireInteraction } from './squire.action'
+import { squireAction } from './squire.action'
 
 export const squire = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const squire = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).SQUIRE) {
       gamestate.players[token].action_finished = false
-      action = squireInteraction(gamestate, token, title)
+      action = squireAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

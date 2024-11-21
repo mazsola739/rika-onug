@@ -1,7 +1,8 @@
 import { logInfo, logTrace } from '../log'
+import { upsertRoomState } from '../repository'
 import * as roles from './roles'
 
-export const responseHandler = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title) => {
+export const responseHandler = async (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title) => {
   logTrace(`responseHandler in room [${gamestate.room_id}] called when actual scene is: ${scene_title}`)
 
   let newGamestate = { ...gamestate }
@@ -208,6 +209,8 @@ export const responseHandler = (gamestate, token, selected_card_positions, selec
     default:
       logInfo(`RESPONSE_HANDLER_DEFAULT case: no role found for: [response scene title: ${scene_title}]`)
   }
+
+  await upsertRoomState(newGamestate)
 
   return newGamestate
 }

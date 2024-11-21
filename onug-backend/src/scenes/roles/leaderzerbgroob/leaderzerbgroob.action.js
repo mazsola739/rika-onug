@@ -1,6 +1,6 @@
 import { formatPlayerIdentifier, generateRoleAction, getGroobPlayerNumberByRoleIds, getZerbPlayerNumberByRoleIds } from '../../sceneUtils'
 
-export const leaderZerbgroobInteraction = (gamestate, token, title) => {
+export const leaderZerbgroobAction = (gamestate, token, title) => {
   const zerb = getZerbPlayerNumberByRoleIds(gamestate.players)
   const groob = getGroobPlayerNumberByRoleIds(gamestate.players)
 

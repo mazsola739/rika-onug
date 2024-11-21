@@ -1,4 +1,4 @@
-import { troublemakerInteraction } from '..'
+import { troublemakerAction } from '..'
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 
@@ -13,7 +13,7 @@ export const switcheroo = (gamestate, title) => {
 
     if (isActivePlayer(card).SWITCHEROO) {
       gamestate.players[token].action_finished = false
-      action = troublemakerInteraction(gamestate, token, title)
+      action = troublemakerAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

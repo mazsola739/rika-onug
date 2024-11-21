@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { thecountInteraction } from './thecount.action'
+import { thecountAction } from './thecount.action'
 
 export const thecount = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,10 +13,10 @@ export const thecount = (gamestate, title, prefix) => {
 
     if (prefix === 'thecount' && isActivePlayer(card).THE_COUNT) {
       gamestate.players[token].action_finished = false
-      action = thecountInteraction(gamestate, token, title)
+      action = thecountAction(gamestate, token, title)
     } else if (prefix === 'doppelganger_thecount' && isActivePlayer(card).DOPPELGÄNGER_THE_COUNT) {
       gamestate.players[token].action_finished = false
-      action = thecountInteraction(gamestate, token, title)
+      action = thecountAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

@@ -1,9 +1,9 @@
 export const testCase: Record<string, number> = {
-  Player1: 33,
-  Player2: 35,
-  Player3: 5,
-  Player4: 31,
-  CenterLeft: 12,
-  CenterMiddle: 13,
-  CenterRight: 14
+  Player1: 45,
+  Player2: 46,
+  Player3: 43,
+  Player4: 42,
+  CenterLeft: 48,
+  CenterMiddle: 47,
+  CenterRight: 54
 }

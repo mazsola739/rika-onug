@@ -1,6 +1,6 @@
 import { generateRoleAction, getPlayerNeighborsByToken } from '../../sceneUtils'
 
-export const diseasedInteraction = (gamestate, token, title) => {
+export const diseasedAction = (gamestate, token, title) => {
   const neighbors = getPlayerNeighborsByToken(gamestate.players, token, 'both', 1)
 
   gamestate.players[token].player_history[title] = {

@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { everyonemarkInteraction } from './everyonemark.action'
+import { everyonemarkAction } from './everyonemark.action'
 
 export const everyonemark = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const everyonemark = (gamestate, title) => {
 
     if (isActivePlayer(card).EVERYONE_MARK) {
       gamestate.players[token].action_finished = false
-      action = everyonemarkInteraction(gamestate, token, title)
+      action = everyonemarkAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

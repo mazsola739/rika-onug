@@ -1,6 +1,6 @@
 import { generateRoleAction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
 
-export const robberInteraction = (gamestate, token, title) => {
+export const robberAction = (gamestate, token, title) => {
   if (!gamestate.players[token].shield) {
     const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(gamestate.players, token)
 

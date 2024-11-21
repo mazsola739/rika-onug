@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { psychicKeys, randomPsychicInstructions } from './psychic.constants'
-import { psychicInteraction } from './psychic.action'
+import { psychicAction } from './psychic.action'
 
 export const psychic = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -29,10 +29,10 @@ export const psychic = (gamestate, title, prefix) => {
 
     if (prefix === 'psychic' && isActivePlayer(card).PSYCHIC) {
       gamestate.players[token].action_finished = false
-      action = psychicInteraction(gamestate, token, title, randomPsychicInstructions, psychicKeys)
+      action = psychicAction(gamestate, token, title, randomPsychicInstructions, psychicKeys)
     } else if (prefix === 'doppelganger_psychic' && isActivePlayer(card).DOPPELGÄNGER_PSYCHIC) {
       gamestate.players[token].action_finished = false
-      action = psychicInteraction(gamestate, token, title, randomPsychicInstructions, psychicKeys)
+      action = psychicAction(gamestate, token, title, randomPsychicInstructions, psychicKeys)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

@@ -1,7 +1,7 @@
 import { generateRoleAction } from '../../sceneUtils'
 import { getNonVillainPlayerNumbersByRoleIdsWithNoShield } from './temptress.utils'
 
-export const temptressInteraction = (gamestate, token, title) => {
+export const temptressAction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getNonVillainPlayerNumbersByRoleIdsWithNoShield(gamestate.players)
 
   gamestate.players[token].player_history[title] = {

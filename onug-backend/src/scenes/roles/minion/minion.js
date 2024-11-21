@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { minionInteraction } from './minion.action'
+import { minionAction } from './minion.action'
 
 export const minion = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const minion = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).MINION) {
       gamestate.players[token].action_finished = false
-      action = minionInteraction(gamestate, token, title)
+      action = minionAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

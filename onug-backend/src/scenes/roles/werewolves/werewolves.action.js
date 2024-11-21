@@ -2,7 +2,7 @@ import { CENTER_CARD_POSITIONS } from '../../../constants'
 import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
 import { getDreamWolfPlayerNumberByRoleIds, getWerewolfPlayerNumbersByRoleIds } from './werewolves.utils'
 
-export const werewolvesInteraction = (gamestate, token, title) => {
+export const werewolvesAction = (gamestate, token, title) => {
   const werewolves = getWerewolfPlayerNumbersByRoleIds(gamestate.players)
   const dreamwolf = getDreamWolfPlayerNumberByRoleIds(gamestate.players)
   const loneWolf = werewolves.length + dreamwolf.length === 1

@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomExposerInstructions } from './exposer.constants'
-import { exposerInteraction } from './exposer.action'
+import { exposerAction } from './exposer.action'
 
 export const exposer = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -22,10 +22,10 @@ export const exposer = (gamestate, title, prefix) => {
 
     if (prefix === 'exposer' && isActivePlayer(card).EXPOSER) {
       gamestate.players[token].action_finished = false
-      action = exposerInteraction(gamestate, token, title)
+      action = exposerAction(gamestate, token, title)
     } else if (prefix === 'doppelganger_exposer' && isActivePlayer(card).DOPPELGÄNGER_EXPOSER) {
       gamestate.players[token].action_finished = false
-      action = exposerInteraction(gamestate, token, title)
+      action = exposerAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

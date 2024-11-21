@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { empathKeys, randomEmpathInstructions } from './empath.constants'
-import { empathInteraction } from './empath.action'
+import { empathAction } from './empath.action'
 import { empathNumbers } from './empath.utils'
 
 export const empath = (gamestate, title, prefix) => {
@@ -37,7 +37,7 @@ export const empath = (gamestate, title, prefix) => {
 
       if (isNotEmpath || isNotDoppelgangerEmpath) {
         gamestate.players[token].action_finished = false
-        action = empathInteraction(gamestate, token, title)
+        action = empathAction(gamestate, token, title)
       }
     }
 

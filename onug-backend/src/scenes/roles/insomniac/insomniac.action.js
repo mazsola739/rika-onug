@@ -1,6 +1,6 @@
 import { generateRoleAction, getCardIdsByPlayerNumbers, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 
-export const insomniacInteraction = (gamestate, token, title) => {
+export const insomniacAction = (gamestate, token, title) => {
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
   const currentCard = gamestate.card_positions[currentPlayerNumber].card
 

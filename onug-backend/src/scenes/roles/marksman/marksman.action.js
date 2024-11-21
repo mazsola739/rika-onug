@@ -1,6 +1,6 @@
 import { generateRoleAction } from '../../sceneUtils'
 
-export const marksmanInteraction = (gamestate, token, title) => {
+export const marksmanAction = (gamestate, token, title) => {
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     answer_options: ['cards', 'marks'],

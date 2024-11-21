@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { renfieldInteraction } from './renfield.action'
+import { renfieldAction } from './renfield.action'
 
 //TODO no vampire he is villager
 export const renfield = (gamestate, title, hasDoppelganger) => {
@@ -14,7 +14,7 @@ export const renfield = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).RENFIELD) {
       gamestate.players[token].action_finished = false
-      action = renfieldInteraction(gamestate, token, title)
+      action = renfieldAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

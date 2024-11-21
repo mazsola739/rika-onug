@@ -1,6 +1,6 @@
 import { generateRoleAction, getPlayerNumbersWithNonMatchingTokens } from '../../sceneUtils'
 
-export const pickpocketInteraction = (gamestate, token, title) => {
+export const pickpocketAction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(gamestate.players, [token])
 
   gamestate.players[token].player_history[title] = {

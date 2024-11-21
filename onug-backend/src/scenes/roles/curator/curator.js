@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { curatorInteraction } from './curator.action'
+import { curatorAction } from './curator.action'
 
 export const curator = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,10 +13,10 @@ export const curator = (gamestate, title, prefix) => {
 
     if (prefix === 'curator' && isActivePlayer(card).CURATOR) {
       gamestate.players[token].action_finished = false
-      action = curatorInteraction(gamestate, token, title)
+      action = curatorAction(gamestate, token, title)
     } else if (prefix === 'doppelganger_curator' && isActivePlayer(card).DOPPELGÄNGER_CURATOR) {
       gamestate.players[token].action_finished = false
-      action = curatorInteraction(gamestate, token, title)
+      action = curatorAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

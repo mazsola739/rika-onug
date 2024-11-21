@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
 import { getMadScientistPlayerNumberByRoleIds } from './intern.utils'
 
-export const internInteraction = (gamestate, token, title) => {
+export const internAction = (gamestate, token, title) => {
   const madscientist = getMadScientistPlayerNumberByRoleIds(gamestate.players)
   const playerCard = gamestate.players[token]?.card
 

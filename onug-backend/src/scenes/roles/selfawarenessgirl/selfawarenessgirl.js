@@ -1,4 +1,4 @@
-import { insomniacInteraction } from '..'
+import { insomniacAction } from '..'
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 
@@ -13,7 +13,7 @@ export const selfawarenessgirl = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).SELF_AWARENESS_GIRL) {
       gamestate.players[token].action_finished = false
-      action = insomniacInteraction(gamestate, token, title)
+      action = insomniacAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

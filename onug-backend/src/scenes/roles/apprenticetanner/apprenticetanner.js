@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { apprenticetannerInteraction } from './apprenticetanner.action'
+import { apprenticetannerAction } from './apprenticetanner.action'
 
 export const apprenticetanner = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const apprenticetanner = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).APPRENTICE_TANNER) {
       gamestate.players[token].action_finished = false
-      action = apprenticetannerInteraction(gamestate, token, title)
+      action = apprenticetannerAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

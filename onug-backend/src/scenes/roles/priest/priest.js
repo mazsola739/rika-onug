@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { priestInteraction } from './priest.action'
+import { priestAction } from './priest.action'
 
 export const priest = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,10 +13,10 @@ export const priest = (gamestate, title, prefix) => {
 
     if (prefix === 'priest' && isActivePlayer(card).PRIEST) {
       gamestate.players[token].action_finished = false
-      action = priestInteraction(gamestate, token, title)
+      action = priestAction(gamestate, token, title)
     } else if (prefix === 'doppelganger_priest' && isActivePlayer(card).DOPPELGÄNGER_PRIEST) {
       gamestate.players[token].action_finished = false
-      action = priestInteraction(gamestate, token, title)
+      action = priestAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

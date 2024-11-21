@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { getAllPlayerTokens } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { troublemakerInteraction } from './troublemaker.action'
+import { troublemakerAction } from './troublemaker.action'
 
 export const troublemaker = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -14,7 +14,7 @@ export const troublemaker = (gamestate, title) => {
 
     if (isActivePlayer(card).TROUBLEMAKER) {
       gamestate.players[token].action_finished = false
-      action = troublemakerInteraction(gamestate, token, title)
+      action = troublemakerAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

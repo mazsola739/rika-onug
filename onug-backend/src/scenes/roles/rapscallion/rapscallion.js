@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { apprenticeseerInteraction } from '../apprenticeseer/apprenticeseer.action'
+import { apprenticeseerAction } from '../apprenticeseer/apprenticeseer.action'
 
 export const rapscallion = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const rapscallion = (gamestate, title) => {
 
     if (isActivePlayer(card).RAPSCALLION) {
       gamestate.players[token].action_finished = false
-      action = apprenticeseerInteraction(gamestate, token, title)
+      action = apprenticeseerAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

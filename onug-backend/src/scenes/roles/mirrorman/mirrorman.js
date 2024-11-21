@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { copycatInteraction } from '../copycat/copycat.action'
+import { copycatAction } from '../copycat/copycat.action'
 
 export const mirrorman = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
@@ -13,7 +13,7 @@ export const mirrorman = (gamestate, title) => {
 
     if (isActivePlayer(card).MIRROR_MAN) {
       gamestate.players[token].action_finished = false
-      action = copycatInteraction(gamestate, token, title)
+      action = copycatAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

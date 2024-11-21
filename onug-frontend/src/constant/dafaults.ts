@@ -21,7 +21,10 @@ export const default_table_player_card: TablePlayerCard = {
   selectable_card: false,
   selectable_mark: false,
   shield: false,
-  werewolves: false
+  werewolves: false,
+  aliens: false,
+  masons: false,
+  vampires: false,
 }
 
 export const default_card: CardJson = {
