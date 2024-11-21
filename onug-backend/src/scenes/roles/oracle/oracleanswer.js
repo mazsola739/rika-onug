@@ -73,6 +73,7 @@ export const oracleAnswer = (gamestate, title) => {
     if (aftermath && isActivePlayer(card).ORACLE_ANSWER) {
       gamestate.oracle.aftermath = narration[0]
       gamestate.players[token].action_finished = false
+
       action = oracleAnswerAftermath(gamestate, token, title)
     }
 

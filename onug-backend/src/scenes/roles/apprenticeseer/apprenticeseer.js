@@ -13,6 +13,7 @@ export const apprenticeseer = (gamestate, title) => {
 
     if (isActivePlayer(card).APPRENTICE_SEER) {
       gamestate.players[token].action_finished = false
+
       action = apprenticeseerAction(gamestate, token, title)
     }
 

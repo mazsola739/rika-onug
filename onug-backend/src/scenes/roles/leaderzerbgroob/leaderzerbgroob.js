@@ -13,6 +13,7 @@ export const leaderzerbgroob = (gamestate, title) => {
 
     if (isActivePlayer(card).LEADER_ZERB_GROOB) {
       gamestate.players[token].action_finished = false
+
       action = leaderZerbgroobAction(gamestate, token, title)
     }
 

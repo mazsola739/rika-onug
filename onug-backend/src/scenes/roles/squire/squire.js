@@ -13,6 +13,7 @@ export const squire = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).SQUIRE) {
       gamestate.players[token].action_finished = false
+
       action = squireAction(gamestate, token, title)
     }
 

@@ -17,6 +17,7 @@ export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppel
 
     if (isActivePlayer(card).BEHOLDER) {
       gamestate.players[token].action_finished = false
+
       action = beholderAction(gamestate, token, title)
     }
 

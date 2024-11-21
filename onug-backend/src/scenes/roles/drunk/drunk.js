@@ -13,6 +13,7 @@ export const drunk = (gamestate, title) => {
 
     if (isActivePlayer(card).DRUNK) {
       gamestate.players[token].action_finished = false
+
       action = drunkAction(gamestate, token, title)
     }
 

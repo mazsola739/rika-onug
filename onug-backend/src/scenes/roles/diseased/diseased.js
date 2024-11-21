@@ -13,6 +13,7 @@ export const diseased = (gamestate, title) => {
 
     if (isActivePlayer(card).DISEASED) {
       gamestate.players[token].action_finished = false
+
       action = diseasedAction(gamestate, token, title)
     }
 

@@ -13,6 +13,7 @@ export const mysticwolf = (gamestate, title) => {
 
     if (isActivePlayer(card).MYSTIC_WOLF) {
       gamestate.players[token].action_finished = false
+
       action = mysticwolfAction(gamestate, token, title)
     }
 

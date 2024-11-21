@@ -13,9 +13,11 @@ export const pickpocket = (gamestate, title, prefix) => {
 
     if (prefix === 'pickpocket' && isActivePlayer(card).PICKPOCKET) {
       gamestate.players[token].action_finished = false
+
       action = pickpocketAction(gamestate, token, title)
     } else if (prefix === 'doppelganger_pickpocket' && isActivePlayer(card).DOPPELGÄNGER_PICKPOCKET) {
       gamestate.players[token].action_finished = false
+
       action = pickpocketAction(gamestate, token, title)
     }
 

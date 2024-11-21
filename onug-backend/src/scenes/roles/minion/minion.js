@@ -13,6 +13,7 @@ export const minion = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).MINION) {
       gamestate.players[token].action_finished = false
+
       action = minionAction(gamestate, token, title)
     }
 

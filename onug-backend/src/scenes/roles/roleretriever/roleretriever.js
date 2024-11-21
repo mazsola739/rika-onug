@@ -13,6 +13,7 @@ export const roleretriever = (gamestate, title) => {
 
     if (isActivePlayer(card).ROLE_RETRIEVER) {
       gamestate.players[token].action_finished = false
+
       action = robberAction(gamestate, token, title)
     }
 

@@ -13,6 +13,7 @@ export const cupid = (gamestate, title) => {
 
     if (isActivePlayer(card).CUPID) {
       gamestate.players[token].action_finished = false
+
       action = cupidAction(gamestate, token, title)
     }
 

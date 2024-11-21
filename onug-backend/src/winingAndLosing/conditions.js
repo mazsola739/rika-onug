@@ -5,7 +5,11 @@ export const isCircleVote = countedVotes => {
 }
 
 export const getTeamStatus = activeCards => {
-  const teams = [...new Set(activeCards.map(card => card.team))]
+  const normalizedTeams = activeCards.map(card => {
+    return card.team === 'hero' ? 'village' : card.team
+  })
+
+  const teams = [...new Set(normalizedTeams)]
   const isSameTeam = teams.length === 1
 
   return {
@@ -75,8 +79,20 @@ export const isLoser = (card, losers) => losers.includes(card.position)
 export const groobAlive = (playerCard, survivors, player_number) => isGroob(playerCard) && isAnySurvivor(survivors, player_number)
 export const zerbAlive = (playerCard, survivors, player_number) => isZerb(playerCard) && isAnySurvivor(survivors, player_number)
 
-export const allGroobAlive = (activeCards, survivors) => activeCards.filter(card => groob(card)).every(card => isSurvivor(card, survivors))
-export const allZerbsAlive = (activeCards, survivors) => activeCards.filter(card => zerb(card)).every(card => isSurvivor(card, survivors))
+export const allGroobAlive = (activeCards, survivors) => {
+  console.log(survivors)
+  console.log(activeCards)
+  console.log(activeCards.filter(card => groob(card)))
+  console.log(activeCards.filter(card => groob(card)).every(card => isSurvivor(card, survivors)))
+  return activeCards.filter(card => groob(card)).every(card => isSurvivor(card, survivors))
+}
+export const allZerbsAlive = (activeCards, survivors) => {
+  console.log(survivors)
+  console.log(activeCards)
+  console.log(activeCards.filter(card => zerb(card)))
+  console.log(activeCards.filter(card => zerb(card)).every(card => isSurvivor(card, survivors)))
+  return activeCards.filter(card => zerb(card)).every(card => isSurvivor(card, survivors))
+}
 
 export const anyTargetDead = (activeCards, fallens) => activeCards.some(card => target(card) && isFallen(card, fallens))
 export const anyZerbDead = (activeCards, survivors) => !activeCards.some(card => zerb(card) && isSurvivor(card, survivors))

@@ -16,6 +16,7 @@ export const werewolves = (gamestate, title, hasDreamWolf) => {
 
     if (isActivePlayer(card).WEREWOLVES) {
       gamestate.players[token].action_finished = false
+
       action = werewolvesAction(gamestate, token, title)
     }
 

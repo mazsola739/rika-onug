@@ -37,6 +37,7 @@ export const empath = (gamestate, title, prefix) => {
 
       if (isNotEmpath || isNotDoppelgangerEmpath) {
         gamestate.players[token].action_finished = false
+
         action = empathAction(gamestate, token, title)
       }
     }

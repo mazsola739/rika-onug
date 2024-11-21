@@ -13,6 +13,7 @@ export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
 
     if (isActivePlayer(card).INTERN) {
       gamestate.players[token].action_finished = false
+
       action = internAction(gamestate, token, title)
     }
 

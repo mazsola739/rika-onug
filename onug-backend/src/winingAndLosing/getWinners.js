@@ -52,7 +52,9 @@ export const getWinners = (voteResult, gamestate, playerStates) => {
 
     if (isAlienTeam(playerCard)) {
       const playerToken = getPlayerTokenByPlayerNumber(players, player.player_number)
-      return players[playerToken].vote.includes(leader.player_number)
+      if (!playerToken || !players[playerToken]) return false
+
+      return players[playerToken].vote?.includes(leader?.player_number)
     }
     return true
   })
@@ -146,6 +148,8 @@ export const getWinners = (voteResult, gamestate, playerStates) => {
 
     // LEADER win condition
     if (isLeader(playerCard) && allGroobAlive(activeCards, survivors) && allZerbsAlive(activeCards, survivors)) {
+      console.log(survivors)
+      console.log(activeCards)
       if (!winners.includes(playerCard.position)) {
         winners.push(playerCard.position)
       }
@@ -209,14 +213,14 @@ export const getWinners = (voteResult, gamestate, playerStates) => {
     if (isMinion(playerCard)) {
       if (hasActiveWerewolf(activeCards) && !anyWerewolfDead(activeCards, fallens) && !anyTannerDead(activeCards, fallens)) {
         if (!winners.includes(playerCard.position)) {
-          winners.push(playerCard.position);
+          winners.push(playerCard.position)
         }
-        losers = losers.filter(p => p !== playerNumber);
+        losers = losers.filter(p => p !== playerNumber)
       } else {
         if (!losers.includes(playerCard.position)) {
-          losers.push(playerCard.position);
+          losers.push(playerCard.position)
         }
-        winners = winners.filter(p => p !== playerCard.position);
+        winners = winners.filter(p => p !== playerCard.position)
       }
     }
 

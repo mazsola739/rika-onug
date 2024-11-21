@@ -25,6 +25,7 @@ export const mortician = (gamestate, title, prefix) => {
 
     if (prefix === 'mortician' && isActivePlayer(card).MORTICIAN) {
       gamestate.players[token].action_finished = false
+
       action = morticianAction(gamestate, token, title, randomMorticianInstruction, morticianKey)
     } else if (prefix === 'doppelganger_mortician' && isActivePlayer(card).DOPPELGÄNGER_MORTICIAN) {
       action = morticianAction(gamestate, token, title, randomMorticianInstruction, morticianKey)

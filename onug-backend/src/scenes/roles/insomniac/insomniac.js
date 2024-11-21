@@ -13,6 +13,7 @@ export const insomniac = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).INSOMNIAC) {
       gamestate.players[token].action_finished = false
+
       action = insomniacAction(gamestate, token, title)
     }
 

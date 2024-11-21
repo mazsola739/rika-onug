@@ -14,6 +14,7 @@ export const copycat = (gamestate, title) => {
 
     if (isActivePlayer(card).COPYCAT) {
       gamestate.players[token].action_finished = false
+
       action = copycatAction(gamestate, token, title)
     }
 

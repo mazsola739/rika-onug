@@ -13,6 +13,7 @@ export const alphawolf = (gamestate, title) => {
 
     if (isActivePlayer(card).ALPHA_WOLF) {
       gamestate.players[token].action_finished = false
+
       action = alphawolfAction(gamestate, token, title)
     }
 

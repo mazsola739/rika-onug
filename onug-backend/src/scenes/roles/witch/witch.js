@@ -13,6 +13,7 @@ export const witch = (gamestate, title) => {
 
     if (isActivePlayer(card).WITCH) {
       gamestate.players[token].action_finished = false
+
       action = witchAction(gamestate, token, title)
     }
 

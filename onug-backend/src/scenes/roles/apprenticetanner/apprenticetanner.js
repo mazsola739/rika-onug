@@ -13,6 +13,7 @@ export const apprenticetanner = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).APPRENTICE_TANNER) {
       gamestate.players[token].action_finished = false
+
       action = apprenticetannerAction(gamestate, token, title)
     }
 

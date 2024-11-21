@@ -13,6 +13,7 @@ export const villageidiot = (gamestate, title) => {
 
     if (isActivePlayer(card).VILLAGE_IDIOT) {
       gamestate.players[token].action_finished = false
+
       action = villageidiotAction(gamestate, token, title)
     }
 

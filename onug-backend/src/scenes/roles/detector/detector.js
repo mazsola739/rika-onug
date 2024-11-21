@@ -13,6 +13,7 @@ export const detector = (gamestate, title) => {
 
     if (isActivePlayer(card).DETECTOR) {
       gamestate.players[token].action_finished = false
+
       action = seerAction(gamestate, token, title)
     }
 

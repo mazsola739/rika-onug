@@ -13,6 +13,7 @@ export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
 
     if (isActivePlayer(card).AURA_SEER) {
       gamestate.players[token].action_finished = false
+
       action = auraseerAction(gamestate, token, title)
     }
 

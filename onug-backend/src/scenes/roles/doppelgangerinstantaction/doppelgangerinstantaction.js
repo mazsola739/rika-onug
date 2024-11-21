@@ -20,6 +20,7 @@ export const doppelgangerinstantaction = (gamestate, title) => {
 
     if (isActivePlayer(card).DOPPELGÄNGER) {
       gamestate.players[token].action_finished = false
+
       action = doppelgangerinstantactionAction(gamestate, token, title)
     }
 

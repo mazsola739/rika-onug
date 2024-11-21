@@ -13,6 +13,7 @@ export const sentinel = (gamestate, title) => {
 
     if (isActivePlayer(card).SENTINEL) {
       gamestate.players[token].action_finished = false
+
       action = sentinelAction(gamestate, token, title)
     }
 

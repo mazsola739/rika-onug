@@ -13,6 +13,7 @@ export const voodoolou = (gamestate, title) => {
 
     if (isActivePlayer(card).VOODOO_LOU) {
       gamestate.players[token].action_finished = false
+
       action = witchAction(gamestate, token, title)
     }
 

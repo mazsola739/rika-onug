@@ -16,6 +16,7 @@ export const vampires = (gamestate, title) => {
 
     if (isActivePlayer(card).VAMPIRES) {
       gamestate.players[token].action_finished = false
+
       action = vampiresAction(gamestate, token, title)
     }
 

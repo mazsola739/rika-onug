@@ -13,6 +13,7 @@ export const mirrorman = (gamestate, title) => {
 
     if (isActivePlayer(card).MIRROR_MAN) {
       gamestate.players[token].action_finished = false
+
       action = copycatAction(gamestate, token, title)
     }
 

@@ -56,6 +56,7 @@ export const oracleQuestion = (gamestate, title) => {
     if (isActivePlayer(card).ORACLE_QUESTION) {
       gamestate.players[token].player_history[title].oracle = narration[1]
       gamestate.players[token].action_finished = false
+
       action = oracleQuestionRaising(gamestate, token, title)
     } else {
       console.log('do nothing')

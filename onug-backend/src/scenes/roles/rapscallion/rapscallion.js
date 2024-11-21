@@ -13,6 +13,7 @@ export const rapscallion = (gamestate, title) => {
 
     if (isActivePlayer(card).RAPSCALLION) {
       gamestate.players[token].action_finished = false
+
       action = apprenticeseerAction(gamestate, token, title)
     }
 

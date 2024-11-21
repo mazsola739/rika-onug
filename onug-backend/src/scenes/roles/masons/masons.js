@@ -13,6 +13,7 @@ export const masons = (gamestate, title) => {
 
     if (isActivePlayer(card).MASONS) {
       gamestate.players[token].action_finished = false
+
       action = masonsAction(gamestate, token, title)
     }
 

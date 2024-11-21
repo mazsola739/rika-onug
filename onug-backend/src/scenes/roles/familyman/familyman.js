@@ -30,6 +30,7 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).FAMILY_MAN) {
       gamestate.players[token].action_finished = false
+
       action = familymanAction(gamestate, token, title)
     }
 

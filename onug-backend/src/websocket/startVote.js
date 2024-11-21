@@ -38,7 +38,8 @@ export const startVote = async (ws, message) => {
         token,
         action: {
           selectable_cards: otherPlayers,
-          selectable_card_limit: { player: 1, center: 0 }
+          selectable_card_limit: { player: 1, center: 0 },
+          show_cards: newGamestate.flipped
         },
         player: {
           player_name: player.name,

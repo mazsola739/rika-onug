@@ -14,6 +14,7 @@ export const troublemaker = (gamestate, title) => {
 
     if (isActivePlayer(card).TROUBLEMAKER) {
       gamestate.players[token].action_finished = false
+
       action = troublemakerAction(gamestate, token, title)
     }
 

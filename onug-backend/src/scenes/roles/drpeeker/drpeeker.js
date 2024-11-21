@@ -13,6 +13,7 @@ export const drpeeker = (gamestate, title) => {
 
     if (isActivePlayer(card).DR_PEEKER) {
       gamestate.players[token].action_finished = false
+
       action = mysticwolfAction(gamestate, token, title)
     }
 

@@ -14,6 +14,7 @@ export const cow = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).COW) {
       gamestate.players[token].action_finished = false
+
       action = cowAction(gamestate, token, title)
     }
 

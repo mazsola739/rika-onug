@@ -14,6 +14,7 @@ export const evilometer = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).EVILOMETER) {
       gamestate.players[token].action_finished = false
+
       action = evilometerAction(gamestate, token, title)
     }
 

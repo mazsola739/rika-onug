@@ -14,6 +14,7 @@ export const doppelganger = (gamestate, title) => {
 
     if (isActivePlayer(card).DOPPELGÄNGER) {
       gamestate.players[token].action_finished = false
+
       action = doppelgangerAction(gamestate, token, title)
     }
 

@@ -13,6 +13,7 @@ export const supervillains = (gamestate, title) => {
 
     if (isActivePlayer(card).SUPER_VILLAINS) {
       gamestate.players[token].action_finished = false
+
       action = supervillainsAction(gamestate, token, title)
     }
 

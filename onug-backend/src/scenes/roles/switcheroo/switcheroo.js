@@ -13,6 +13,7 @@ export const switcheroo = (gamestate, title) => {
 
     if (isActivePlayer(card).SWITCHEROO) {
       gamestate.players[token].action_finished = false
+
       action = troublemakerAction(gamestate, token, title)
     }
 

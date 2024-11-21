@@ -13,6 +13,7 @@ export const groobzerb = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).GROOB_ZERB) {
       gamestate.players[token].action_finished = false
+
       action = groobzerbAction(gamestate, token, title)
     }
 

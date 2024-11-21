@@ -24,6 +24,7 @@ export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalP
     let action = {}
 
     gamestate.players[token].action_finished = false
+
     action = everyonemarkAction(gamestate, token, title)
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

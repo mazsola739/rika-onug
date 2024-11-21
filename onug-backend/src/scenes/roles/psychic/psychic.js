@@ -29,9 +29,11 @@ export const psychic = (gamestate, title, prefix) => {
 
     if (prefix === 'psychic' && isActivePlayer(card).PSYCHIC) {
       gamestate.players[token].action_finished = false
+
       action = psychicAction(gamestate, token, title, randomPsychicInstructions, psychicKeys)
     } else if (prefix === 'doppelganger_psychic' && isActivePlayer(card).DOPPELGÄNGER_PSYCHIC) {
       gamestate.players[token].action_finished = false
+
       action = psychicAction(gamestate, token, title, randomPsychicInstructions, psychicKeys)
     }
 

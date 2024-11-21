@@ -25,6 +25,7 @@ export const blob = (gamestate, title) => {
 
     if (isActivePlayer(card).BLOB) {
       gamestate.players[token].action_finished = false
+
       action = blobAction(gamestate, token, title)
     }
 

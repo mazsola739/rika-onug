@@ -13,6 +13,7 @@ export const lovers = (gamestate, title) => {
 
     if (isActivePlayer(card).LOVERS) {
       gamestate.players[token].action_finished = false
+
       action = loversAction(gamestate, token, title)
     }
 

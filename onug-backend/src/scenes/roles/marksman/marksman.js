@@ -13,6 +13,7 @@ export const marksman = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).MARKSMAN) {
       gamestate.players[token].action_finished = false
+
       action = marksmanAction(gamestate, token, title)
     }
 

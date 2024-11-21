@@ -13,6 +13,7 @@ export const leader = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).LEADER) {
       gamestate.players[token].action_finished = false
+
       action = leaderAction(gamestate, token, title)
     }
 

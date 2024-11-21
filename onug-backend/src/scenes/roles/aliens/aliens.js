@@ -38,6 +38,7 @@ export const aliens = (gamestate, title) => {
 
     if (isActivePlayer(card).ALIENS) {
       gamestate.players[token].action_finished = false
+
       action = aliensAction(gamestate, token, title)
     }
 

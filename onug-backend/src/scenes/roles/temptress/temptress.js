@@ -13,6 +13,7 @@ export const temptress = (gamestate, title) => {
 
     if (isActivePlayer(card).TEMPTRESS) {
       gamestate.players[token].action_finished = false
+
       action = temptressAction(gamestate, token, title)
     }
 

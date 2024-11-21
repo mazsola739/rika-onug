@@ -13,6 +13,7 @@ export const paranormalinvestigator = (gamestate, title) => {
 
     if (isActivePlayer(card).PARANORMAL_INVESTIGATOR) {
       gamestate.players[token].action_finished = false
+
       action = paranormalinvestigatorAction(gamestate, token, title)
     }
 

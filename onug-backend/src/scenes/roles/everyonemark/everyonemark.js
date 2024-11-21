@@ -13,6 +13,7 @@ export const everyonemark = (gamestate, title) => {
 
     if (isActivePlayer(card).EVERYONE_MARK) {
       gamestate.players[token].action_finished = false
+
       action = everyonemarkAction(gamestate, token, title)
     }
 

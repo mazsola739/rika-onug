@@ -13,6 +13,7 @@ export const nostradamus = (gamestate, title) => {
 
     if (isActivePlayer(card).NOSTRADAMUS) {
       gamestate.players[token].action_finished = false
+
       action = nostradamusAction(gamestate, token, title)
     }
 

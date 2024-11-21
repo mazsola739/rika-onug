@@ -3,112 +3,137 @@ import { logTrace } from '../log'
 import { upsertRoomState } from '../repository'
 import { allPlayersStateCheck } from '../utils'
 import { broadcast } from '../websocket'
-import { sceneHandler } from './sceneHandler'
 import { isActivePlayer } from './activePlayer'
+import { sceneHandler } from './sceneHandler'
 
 export const chapterHandler = async gamestate => {
-  logTrace(`chapterHandler in room [${gamestate.room_id}]`)
+  try {
+    logTrace(`chapterHandler in room [${gamestate.room_id}]`)
 
-  const playersArray = Object.values(gamestate.players)
-  let newGamestate = { ...gamestate, actual_scenes: [] }
+    const playersArray = Object.values(gamestate.players || {})
+    let newGamestate = { ...gamestate, actual_scenes: [] }
 
-  let flagsState = {
-    player_card_shifting: false,
-    center_card_shifting: false,
-    view_player_card: false,
-    view_center_card: false,
-    mark_shifting: false,
-    view_mark: false,
-    shield: false,
-    artifact: false
-  }
-
-  const activePlayersInScenes = new Set()
-
-  const hasConflict = scene => {
-    const { player_card_shifting, center_card_shifting, view_player_card, view_center_card, mark_shifting, view_mark, shield, artifact } = scene
-
-    if (flagsState.artifact || flagsState.shield) {
-      logTrace(`Conflict due to active artifact or shield flag, halting scene processing.`)
-      return true
-    }
-    if (flagsState.view_mark) {
-      logTrace(`Conflict due to active view_mark, halting scene processing.`)
-      return true
+    let flagsState = {
+      player_card_shifting: false,
+      center_card_shifting: false,
+      view_player_card: false,
+      view_center_card: false,
+      mark_shifting: false,
+      view_mark: false,
+      shield: false,
+      artifact: false
     }
 
-    return (
-      (player_card_shifting && flagsState.player_card_shifting) ||
-      (center_card_shifting && flagsState.center_card_shifting) ||
-      (mark_shifting && flagsState.mark_shifting) ||
-      (mark_shifting && flagsState.view_mark) ||
-      (view_mark && flagsState.mark_shifting) ||
-      (view_mark && flagsState.view_mark) ||
-      (shield && flagsState.shield) ||
-      (artifact && flagsState.artifact) ||
-      (view_center_card && flagsState.center_card_shifting) ||
-      (center_card_shifting && flagsState.view_center_card) ||
-      (view_player_card && flagsState.player_card_shifting) ||
-      (player_card_shifting && flagsState.view_player_card)
-    )
-  }
+    const activePlayersInScenes = new Set()
 
-  for (const scene of newGamestate.scripts) {
-    const scenePlayers = playersArray.filter(player => isActivePlayer(player.card)[scene.scene_title])
-    const overlapExists = scenePlayers.some(player => activePlayersInScenes.has(player.player_number))
+    const hasConflict = scene => {
+      const { player_card_shifting, center_card_shifting, view_player_card, view_center_card, mark_shifting, view_mark, shield, artifact } = scene
 
-    if (overlapExists) {
-      logTrace(`Overlap detected with scene: ${scene.scene_title}. Stopping further processing.`)
-      break
+      if (flagsState.artifact || flagsState.shield) {
+        logTrace(`Conflict due to active artifact or shield flag, halting scene processing.`)
+        return true
+      }
+      if (flagsState.view_mark) {
+        logTrace(`Conflict due to active view_mark, halting scene processing.`)
+        return true
+      }
+
+      return (
+        (player_card_shifting && flagsState.player_card_shifting) ||
+        (center_card_shifting && flagsState.center_card_shifting) ||
+        (mark_shifting && flagsState.mark_shifting) ||
+        (mark_shifting && flagsState.view_mark) ||
+        (view_mark && flagsState.mark_shifting) ||
+        (view_mark && flagsState.view_mark) ||
+        (shield && flagsState.shield) ||
+        (artifact && flagsState.artifact) ||
+        (view_center_card && flagsState.center_card_shifting) ||
+        (center_card_shifting && flagsState.view_center_card) ||
+        (view_player_card && flagsState.player_card_shifting) ||
+        (player_card_shifting && flagsState.view_player_card)
+      )
     }
 
-    if (hasConflict(scene)) {
-      logTrace(`Flag conflict detected in scene: ${scene.scene_title}. Stopping further processing.`)
-      break
+    if (!Array.isArray(newGamestate.scripts)) {
+      logTrace(`Scripts is not an array. Initializing to an empty array.`)
+      newGamestate.scripts = []
     }
 
-    if (scenePlayers.length > 0) {
-      newGamestate.actual_scenes.push({
-        scene_title: scene.scene_title,
-        scene_number: scene.scene_number
+    for (const scene of newGamestate.scripts) {
+      if (!scene || typeof scene.scene_title !== 'string' || typeof scene.scene_number !== 'number') {
+        logTrace(`Skipping invalid scene: ${JSON.stringify(scene)}`)
+        continue
+      }
+
+      const scenePlayers = Array.isArray(playersArray)
+        ? playersArray.filter(player => {
+            const isActive = isActivePlayer(player.card)
+            return isActive && isActive[scene.scene_title]
+          })
+        : []
+
+      if (!Array.isArray(scenePlayers)) {
+        logTrace(`scenePlayers is not an array: ${JSON.stringify(scenePlayers)}`)
+        continue
+      }
+
+      const overlapExists = scenePlayers.some(player => activePlayersInScenes.has(player.player_number))
+      if (overlapExists) {
+        logTrace(`Overlap detected with scene: ${scene.scene_title}. Stopping further processing.`)
+        break
+      }
+
+      if (hasConflict(scene)) {
+        logTrace(`Flag conflict detected in scene: ${scene.scene_title}. Stopping further processing.`)
+        break
+      }
+
+      if (scenePlayers.length > 0) {
+        newGamestate.actual_scenes.push({
+          scene_title: scene.scene_title,
+          scene_number: scene.scene_number
+        })
+        logTrace(`Scene added: ${scene.scene_title}`)
+        scenePlayers.forEach(player => activePlayersInScenes.add(player.player_number))
+        flagsState = { ...flagsState, ...scene }
+      } else {
+        newGamestate.actual_scenes.push({
+          scene_title: scene.scene_title,
+          scene_number: scene.scene_number
+        })
+        logTrace(`No active player for scene: ${scene.scene_title}, added without updating flags.`)
+      }
+    }
+
+    newGamestate.scripts = Array.isArray(newGamestate.scripts)
+      ? newGamestate.scripts.filter(scene => !newGamestate.actual_scenes.some(actualScene => actualScene.scene_title === scene.scene_title))
+      : []
+    logTrace(`Remaining scripts after filtering: ${JSON.stringify(newGamestate.scripts)}`)
+
+    for (const actualScene of newGamestate.actual_scenes) {
+      logTrace(`Processing action for scene: ${actualScene.scene_title}`)
+      newGamestate = await sceneHandler(newGamestate, actualScene.scene_title)
+    }
+
+    const allActionsComplete = Array.isArray(newGamestate.scripts) && newGamestate.scripts.length === 0
+    const noPendingPlayerActions = allPlayersStateCheck(playersArray, 'action_finished')
+    const gameCanEnd = allActionsComplete && noPendingPlayerActions
+
+    if (gameCanEnd) {
+      logTrace(`All scripts processed. Broadcasting END_GAME message.`)
+      broadcast(newGamestate.room_id, {
+        type: END_GAME,
+        success: true,
+        day_mode: true,
+        night_mode: false,
+        message: 'Successfully finished the game'
       })
-      logTrace(`Scene added: ${scene.scene_title}`)
-
-      scenePlayers.forEach(player => activePlayersInScenes.add(player.player_number))
-
-      flagsState = { ...flagsState, ...scene }
-    } else {
-      newGamestate.actual_scenes.push({
-        scene_title: scene.scene_title,
-        scene_number: scene.scene_number
-      })
-      logTrace(`No active player for scene: ${scene.scene_title}, added without updating flags.`)
     }
+
+    await upsertRoomState(newGamestate)
+    return newGamestate
+  } catch (error) {
+    logTrace(`Error in chapterHandler: ${error.message}`)
+    throw error
   }
-
-  newGamestate.scripts = newGamestate.scripts.filter(scene => !newGamestate.actual_scenes.some(actualScene => actualScene.scene_title === scene.scene_title))
-  logTrace(`Remaining scripts after filtering: ${JSON.stringify(newGamestate.scripts)}`)
-
-  for (const actualScene of newGamestate.actual_scenes) {
-    logTrace(`Processing action for scene: ${actualScene.scene_title}`)
-    newGamestate = await sceneHandler(newGamestate, actualScene.scene_title)
-  }
-
-  const allActionsComplete = newGamestate.scripts.length === 0
-  const noPendingPlayerActions = allPlayersStateCheck(playersArray, 'action_finished')
-  const gameCanEnd = allActionsComplete && noPendingPlayerActions
-
-  if (gameCanEnd) {
-    logTrace(`All scripts processed. Broadcasting END_GAME message.`)
-    broadcast(newGamestate.room_id, {
-      type: END_GAME,
-      success: true,
-      day_mode: true,
-      night_mode: false,
-      message: 'Successfully finished the game'
-    })
-  }
-
-  await upsertRoomState(newGamestate)
-  return newGamestate
 }

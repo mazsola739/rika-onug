@@ -14,6 +14,7 @@ export const renfield = (gamestate, title, hasDoppelganger) => {
 
     if (isActivePlayer(card).RENFIELD) {
       gamestate.players[token].action_finished = false
+
       action = renfieldAction(gamestate, token, title)
     }
 

@@ -42,9 +42,11 @@ export const rascal = (gamestate, title, prefix) => {
     if ((prefix === 'rascal' && isActivePlayer(card).RASCAL) || (prefix === 'doppelganger_rascal' && isActivePlayer(card).DOPPELGÄNGER_RASCAL)) {
       if (randomRascalInstruction === 'rascal_idiot_text') {
         gamestate.players[token].action_finished = false
+
         action = villageidiotAction(gamestate, token, title)
       } else {
         gamestate.players[token].action_finished = false
+
         action = rascalAction(gamestate, token, title)
       }
     }

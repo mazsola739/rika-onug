@@ -4,7 +4,7 @@ import { readGamestate, upsertRoomState } from '../repository'
 import { getTableBoard } from '../utils'
 import cardsData from '../data/cards.json'
 import artifactsData from '../data/artifacts.json'
-import { getKeys } from '../scenes/sceneUtils'
+import { getKeys, updatePlayerCard } from '../scenes/sceneUtils'
 
 export const hydrateCouncil = async (ws, message) => {
   try {
@@ -13,6 +13,8 @@ export const hydrateCouncil = async (ws, message) => {
     const { room_id, token } = message
     const gamestate = await readGamestate(room_id)
     const newGamestate = { ...gamestate, stage: STAGES.COUNCIL }
+
+    updatePlayerCard(newGamestate, token)
 
     const playerNumber = newGamestate.players[token].player_number
 

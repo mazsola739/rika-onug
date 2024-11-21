@@ -13,6 +13,7 @@ export const instigator = (gamestate, title) => {
 
     if (isActivePlayer(card).INSTIGATOR) {
       gamestate.players[token].action_finished = false
+
       action = instigatorAction(gamestate, token, title)
     }
 
