@@ -11,7 +11,7 @@ export const masonsInteraction = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: ['interaction_masons'],
+    private_message: ['action_masons'],
     uniqueInformations: { masons },
     scene_end: true
   })

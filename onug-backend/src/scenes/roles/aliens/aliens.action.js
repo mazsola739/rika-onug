@@ -29,7 +29,7 @@ export const aliensInteraction = (gamestate, token, title) => {
   let new_alien_helper = []
 
   const messageIdentifiers = formatPlayerIdentifier(aliens)
-  let privateMessage = isSingleAlien ? ['interaction_no_aliens'] : ['interaction_aliens', ...messageIdentifiers]
+  let privateMessage = isSingleAlien ? ['action_no_aliens'] : ['action_aliens', ...messageIdentifiers]
 
   if (alienKey.length > 1) {
     const selectablePlayerNumbers = alienKey.filter(key => key.includes('identifier_player')).map(key => key.replace('identifier_', ''))
@@ -59,9 +59,9 @@ export const aliensInteraction = (gamestate, token, title) => {
     case 'aliens_allview_text':
       if (gamestate.players[token].shield) {
         gamestate.players[token].player_history[title].shielded = true
-        privateMessage.push('interaction_shielded')
+        privateMessage.push('action_shielded')
       } else {
-        privateMessage.push('interaction_may_one_any')
+        privateMessage.push('action_may_one_any')
         if (randomAlienInstruction === 'aliens_allview_text') {
           vote = !isSingleAlien
         }
@@ -72,7 +72,7 @@ export const aliensInteraction = (gamestate, token, title) => {
     case 'aliens_right_text':
       if (gamestate.players[token].shield) {
         gamestate.players[token].player_history[title].shielded = true
-        privateMessage.push('interaction_shielded')
+        privateMessage.push('action_shielded')
       } else {
         const direction = randomAlienInstruction.includes('left') ? 'left' : 'right'
         const neighbor = getNeighborByPosition(aliensWithoutShield, currentPlayerNumber, direction)
@@ -82,7 +82,7 @@ export const aliensInteraction = (gamestate, token, title) => {
           ...gamestate.card_positions,
           ...updatedPlayerCards
         }
-        privateMessage.push('interaction_moved_yours', formatPlayerIdentifier([neighbor])[0])
+        privateMessage.push('action_moved_yours', formatPlayerIdentifier([neighbor])[0])
       }
       scene_end = true
 
@@ -102,7 +102,7 @@ export const aliensInteraction = (gamestate, token, title) => {
 
       if (gamestate.players[token].shield) {
         gamestate.players[token].player_history[title].shielded = true
-        privateMessage.push('interaction_shielded')
+        privateMessage.push('action_shielded')
       } else {
         privateMessage.push(...formatPlayerIdentifier(aliensWithoutShield))
       }
@@ -111,13 +111,13 @@ export const aliensInteraction = (gamestate, token, title) => {
       break
     case 'aliens_timer_text':
       gamestate.vote_timer /= 2
-      privateMessage.push('interaction_timer')
+      privateMessage.push('action_timer')
       scene_end = true
 
       break
     case 'aliens_newalien_text':
     case 'aliens_alienhelper_text':
-      privateMessage.push('interaction_must_one_any_other')
+      privateMessage.push('action_must_one_any_other')
       obligatory = true
       vote = !isSingleAlien
 
@@ -126,10 +126,10 @@ export const aliensInteraction = (gamestate, token, title) => {
         new_alien = [selectablePlayers[0]]
 
         scene_end = true
-        let message = ['interaction_turned_alienhelper', formatPlayerIdentifier([selectablePlayers[0]])[0]]
+        let message = ['action_turned_alienhelper', formatPlayerIdentifier([selectablePlayers[0]])[0]]
         if (randomAlienInstruction === 'aliens_newalien_text') {
           gamestate.card_positions[selectablePlayers[0]].card.role = 'ALIEN'
-          message = ['interaction_turned_newalien', formatPlayerIdentifier([selectablePlayers[0]])[0]]
+          message = ['action_turned_newalien', formatPlayerIdentifier([selectablePlayers[0]])[0]]
         }
         privateMessage.push(...message)
       }

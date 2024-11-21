@@ -10,7 +10,7 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
     }
 
     return generateRoleAction(gamestate, token, {
-      private_message: ['interaction_shielded']
+      private_message: ['action_shielded']
     })
   }
 
@@ -41,20 +41,18 @@ export const bodysnatcherInteraction = (gamestate, token, title, randomBodysnatc
 
     const selectablePlayerNumbers = getNonAlienPlayerNumbersByRoleIdsWithNoShield(selectablePlayers)
 
-    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
-
     selectableCards = {
       selectable_cards: selectablePlayerNumbers,
       selectable_card_limit: { player: 1, center: 0 }
     }
-    interactionMessage = selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_must_one_any_non_alien'
+    interactionMessage = selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : 'action_must_one_any_non_alien'
     scene_end = selectablePlayerNumbers.length === 0
   } else if (randomBodysnatcherInstruction === 'bodysnatcher_center_text') {
     selectableCards = {
       selectable_cards: CENTER_CARD_POSITIONS,
       selectable_card_limit: { player: 0, center: 1 }
     }
-    interactionMessage = 'interaction_must_one_center'
+    interactionMessage = 'action_must_one_center'
   }
 
   gamestate.players[token].player_history[title] = {

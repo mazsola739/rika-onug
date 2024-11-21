@@ -9,10 +9,8 @@ export const pickpocketInteraction = (gamestate, token, title) => {
     selectable_mark_limit: { mark: 1 }
   }
 
-  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
-
   return generateRoleAction(gamestate, token, {
-    private_message: ['interaction_may_one_any_other'],
+    private_message: ['action_may_one_any_other'],
     selectableMarks: {
       selectable_marks: selectablePlayerNumbers,
       selectable_mark_limit: { mark: 1 }

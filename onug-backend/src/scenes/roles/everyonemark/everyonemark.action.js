@@ -44,7 +44,7 @@ export const everyonemarkInteraction = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: ['interaction_own_mark'],
+    private_message: ['action_own_mark'],
     showMarks: viewMarks,
     obligatory: true,
     scene_end: true

@@ -7,8 +7,6 @@ export const psychicInteraction = (gamestate, token, title, randomPsychicInstruc
 
   const limit = +randomPsychicInstructions.replace('psychic_view', '').replace('_text', '')
 
-  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
-
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     selectable_cards: selectablePlayerNumbers,
@@ -17,7 +15,7 @@ export const psychicInteraction = (gamestate, token, title, randomPsychicInstruc
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : limit === 1 ? 'interaction_may_one_any_other' : 'interaction_may_two_any'],
+    private_message: [selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : limit === 1 ? 'action_may_one_any_other' : 'action_may_two_any'],
     selectableCards: {
       selectable_cards: selectablePlayerNumbers,
       selectable_card_limit: { player: limit, center: 0 }

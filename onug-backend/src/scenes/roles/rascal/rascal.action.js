@@ -77,7 +77,7 @@ export const rascalInteraction = (gamestate, token, title) => {
   if (randomRascalInstruction === 'rascal_troublemaker_text') {
     selectableCards = getSelectablePlayersWithNoShield(selectableTwoPlayers) <= 2 ? [] : getSelectablePlayersWithNoShield(selectableTwoPlayers)
     limit = selectableCards.length >= 2 ? 2 : 0
-    privateMessage = [selectableCards.length >= 2 ? 'interaction_may_two_any' : 'interaction_no_selectable_player']
+    privateMessage = [selectableCards.length >= 2 ? 'action_may_two_any' : 'action_no_selectable_player']
   } else if (randomRascalInstruction === 'rascal_drunk_text' || randomRascalInstruction === 'rascal_robber_text') {
     if (gamestate.players[token].shield) {
       gamestate.players[token].player_history[title] = {
@@ -86,17 +86,15 @@ export const rascalInteraction = (gamestate, token, title) => {
       }
 
       return generateRoleAction(gamestate, token, {
-        private_message: ['interaction_shielded']
+        private_message: ['action_shielded']
       })
     } else {
       selectableCards = rascalKey === 'identifier_center_text' ? CENTER_CARD_POSITIONS : getSelectableOtherPlayerNumbersWithNoShield(selectableOnePlayers, token)
-      privateMessage = [
-        selectableCards.length === 0 ? 'interaction_no_selectable_player' : randomRascalInstruction === 'rascal_drunk_text' ? 'interaction_must_one_any_other' : 'interaction_may_one_any_other'
-      ]
+      privateMessage = [selectableCards.length === 0 ? 'action_no_selectable_player' : randomRascalInstruction === 'rascal_drunk_text' ? 'action_must_one_any_other' : 'action_may_one_any_other']
     }
   } else {
     selectableCards = rascalKey === 'identifier_center_text' ? CENTER_CARD_POSITIONS : getSelectablePlayersWithNoShield(selectableOnePlayers)
-    privateMessage = [selectableCards.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any_other']
+    privateMessage = [selectableCards.length === 0 ? 'action_no_selectable_player' : 'action_may_one_any_other']
   }
 
   if (selectableCards === CENTER_CARD_POSITIONS) {
@@ -108,8 +106,6 @@ export const rascalInteraction = (gamestate, token, title) => {
   const random = randomRascalInstruction.replace('rascal_', '').replace('_text', '')
 
   const obligatory = randomRascalInstruction === 'rascal_drunk_text'
-
-  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

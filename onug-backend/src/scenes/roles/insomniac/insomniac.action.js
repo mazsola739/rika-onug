@@ -16,7 +16,7 @@ export const insomniacInteraction = (gamestate, token, title) => {
     }
 
     return generateRoleAction(gamestate, token, {
-      private_message: ['interaction_own_card'],
+      private_message: ['action_own_card'],
       showCards,
       scene_end: true
     })
@@ -27,7 +27,7 @@ export const insomniacInteraction = (gamestate, token, title) => {
     }
 
     return generateRoleAction(gamestate, token, {
-      private_message: ['interaction_shielded'],
+      private_message: ['action_shielded'],
       scene_end: true
     })
   }

@@ -17,7 +17,6 @@ export const stopGame = async message => {
   const stopScene = gamestate => {
     gamestate.stage = STAGES.ROOM
     gamestate.game_started = false
-    gamestate.game_paused = false
     gamestate.game_stopped = true
     gamestate.game_finished = false
     gamestate.script_locked = true

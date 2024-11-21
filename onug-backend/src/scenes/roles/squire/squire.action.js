@@ -15,7 +15,7 @@ export const squireInteraction = (gamestate, token, title) => {
   const messageIdentifiers = formatPlayerIdentifier(werewolves)
 
   return generateRoleAction(gamestate, token, {
-    private_message: werewolves.length > 0 ? [...'interaction_werewolves', 'interaction_may_look', ...messageIdentifiers] : ['interaction_no_werewolves'],
+    private_message: werewolves.length > 0 ? [...'action_werewolves', 'action_may_look', ...messageIdentifiers] : ['action_no_werewolves'],
     uniqueInformations: { werewolves, answer_options: ['yes', 'no'] }
   })
 }

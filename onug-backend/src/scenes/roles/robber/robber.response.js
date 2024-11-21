@@ -34,7 +34,7 @@ export const robberResponse = (gamestate, token, selected_card_positions, title)
   const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_card_positions[0]])
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_swapped_cards', ...messageIdentifiers, 'interaction_own_card'],
+    private_message: ['action_swapped_cards', ...messageIdentifiers, 'action_own_card'],
     showCards,
     scene_end: true
   })

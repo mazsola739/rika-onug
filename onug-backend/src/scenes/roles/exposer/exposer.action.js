@@ -12,7 +12,7 @@ export const exposerInteraction = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: [limit === 3 ? 'interaction_must_three_center' : limit === 2 ? 'interaction_must_two_center' : 'interaction_must_one_center'],
+    private_message: [limit === 3 ? 'action_must_three_center' : limit === 2 ? 'action_must_two_center' : 'action_must_one_center'],
     selectableCards: {
       selectable_cards: CENTER_CARD_POSITIONS,
       selectable_card_limit: { player: 0, center: limit }

@@ -16,7 +16,7 @@ export const minionInteraction = (gamestate, token, title) => {
   const messageIdentifiers = formatPlayerIdentifier(werewolves)
 
   return generateRoleAction(gamestate, token, {
-    private_message: werewolves.length > 0 ? ['interaction_werewolves', ...messageIdentifiers] : ['interaction_no_werewolves'],
+    private_message: werewolves.length > 0 ? ['action_werewolves', ...messageIdentifiers] : ['action_no_werewolves'],
     scene_end: true,
     uniqueInformations: { werewolves, scene_end: true }
   })

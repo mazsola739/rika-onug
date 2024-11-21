@@ -46,7 +46,7 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
   const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_mark_of_love', ...messageIdentifiers],
+    private_message: ['action_mark_of_love', ...messageIdentifiers],
     scene_end: true
   })
 

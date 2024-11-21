@@ -13,7 +13,7 @@ export const vampiresInteraction = (gamestate, token, title) => {
   const isSingleVampire = vampires.length === 1
 
   const messageVampireIdentifiers = formatPlayerIdentifier(vampires)
-  const privateMessage = isSingleVampire ? ['interaction_no_vampires'] : ['interaction_vampires', ...messageVampireIdentifiers]
+  const privateMessage = isSingleVampire ? ['action_no_vampires'] : ['action_vampires', ...messageVampireIdentifiers]
 
   if (isSingleNonVampire) {
     const vampirePosition = gamestate.mark_positions.vampire
@@ -36,7 +36,7 @@ export const vampiresInteraction = (gamestate, token, title) => {
     }
 
     const messageVictimIdentifiers = formatPlayerIdentifier([nonVampires[0]])[0]
-    privateMessage.push('interaction_mark_of_vampire')
+    privateMessage.push('action_mark_of_vampire')
     privateMessage.push(...messageVictimIdentifiers)
 
     return generateRoleAction(gamestate, token, {
@@ -57,7 +57,7 @@ export const vampiresInteraction = (gamestate, token, title) => {
     }
 
     return generateRoleAction(gamestate, token, {
-      private_message: ['interaction_must_one_any_non_vampire'],
+      private_message: ['action_must_one_any_non_vampire'],
       selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
       uniqueInformations: { vote: false, vampires },
       obligatory: true
@@ -73,7 +73,7 @@ export const vampiresInteraction = (gamestate, token, title) => {
     obligatory: true
   }
 
-  privateMessage.push('interaction_must_one_any_non_vampire')
+  privateMessage.push('action_must_one_any_non_vampire')
 
   return generateRoleAction(gamestate, token, {
     private_message: privateMessage,

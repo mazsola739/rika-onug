@@ -12,7 +12,7 @@ export const evilometerInteraction = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: [neighborIsSuperVillain ? 'interaction_got_tapped_by_villain' : 'interaction_no_tap'],
+    private_message: [neighborIsSuperVillain ? 'action_got_tapped_by_villain' : 'action_no_tap'],
     uniqueInformations: {
       villain_neighbor: neighborIsSuperVillain ? neighbors : []
     },

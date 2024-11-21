@@ -23,7 +23,7 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
   }
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_placed_artifact', formatPlayerIdentifier(selected_card_positions)[0]],
+    private_message: ['action_placed_artifact', formatPlayerIdentifier(selected_card_positions)[0]],
     scene_end: true
   })
 

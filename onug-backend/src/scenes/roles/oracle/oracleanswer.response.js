@@ -35,7 +35,7 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
     const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])
 
     action = generateRoleAction(gamestate, token, {
-      private_message: ['interaction_swapped_cards', ...messageIdentifiers]
+      private_message: ['action_swapped_cards', ...messageIdentifiers]
     })
   } else if (oracleQuestion === 'oracle_viewcenter_text') {
     const limit = +oracleAftermath.replace('oracle_view_yes', '').replace('_text', '')
@@ -50,7 +50,7 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
     }
 
     const identifiers = formatPlayerIdentifier(selectedCardPositions)
-    const message = ['interaction_saw_card', ...identifiers]
+    const message = ['action_saw_card', ...identifiers]
 
     action = generateRoleAction(gamestate, token, {
       private_message: message,

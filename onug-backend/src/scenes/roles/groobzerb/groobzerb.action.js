@@ -19,14 +19,14 @@ export const groobzerbInteraction = (gamestate, token, title) => {
       const messageIdentifiers = formatPlayerIdentifier(zerbPlayers)
 
       return generateRoleAction(gamestate, token, {
-        private_message: ['interaction_zerbgroob', ...messageIdentifiers],
+        private_message: ['action_zerbgroob', ...messageIdentifiers],
         uniqueInformations: { groobzerb: zerbPlayers }
       })
     } else {
       player.player_history = { ...player.player_history, scene_title: title }
 
       return generateRoleAction(gamestate, token, {
-        private_message: ['interaction_no_zerb']
+        private_message: ['action_no_zerb']
       })
     }
   } else if (player.player_role_id === 54) {
@@ -42,14 +42,14 @@ export const groobzerbInteraction = (gamestate, token, title) => {
       const messageIdentifiers = formatPlayerIdentifier(groobPlayers)
 
       return generateRoleAction(gamestate, token, {
-        private_message: ['interaction_zerbgroob', ...messageIdentifiers],
+        private_message: ['action_zerbgroob', ...messageIdentifiers],
         uniqueInformations: { groobzerb: groobPlayers }
       })
     } else {
       player.player_history = { ...player.player_history, scene_title: title }
 
       return generateRoleAction(gamestate, token, {
-        private_message: ['interaction_no_groob']
+        private_message: ['action_no_groob']
       })
     }
   }

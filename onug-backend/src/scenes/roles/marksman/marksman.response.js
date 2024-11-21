@@ -26,7 +26,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
 
     if (gamestate.players[token].player_history[title].viewed_marks) {
       action = generateRoleAction(gamestate, token, {
-        private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
+        private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
         showCards: viewCards,
         scene_end: true
       })
@@ -41,7 +41,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
       gamestate.players[token].player_history[title].selectable_mark_limit = { mark: 1 }
 
       action = generateRoleAction(gamestate, token, {
-        private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
+        private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'action_must_one_any'],
         showCards: viewCards,
         selectableMarks: {
           selectable_marks: selectableMarks,
@@ -80,7 +80,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
 
     if (gamestate.players[token].player_history[title].viewed_cards) {
       action = generateRoleAction(gamestate, token, {
-        private_message: ['interaction_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0]],
+        private_message: ['action_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0]],
         showMarks: viewMarks,
         scene_end: true
       })
@@ -95,7 +95,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions = [],
       gamestate.players[token].player_history[title].selectable_card_limit = { player: 1, center: 0 }
 
       action = generateRoleAction(gamestate, token, {
-        private_message: ['interaction_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0], 'interaction_must_one_any'],
+        private_message: ['action_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0], 'action_must_one_any'],
         showMarks: viewMarks,
         selectableCards: {
           selectable_cards: selectableCards,

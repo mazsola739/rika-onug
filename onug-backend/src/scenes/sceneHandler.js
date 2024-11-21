@@ -12,7 +12,6 @@ export const sceneHandler = (gamestate, scene_title) => {
 
   switch (scene_title) {
     case 'ALIENS': {
-      /* MUST */
       return roles.aliens(newGamestate, scene_title)
     }
     case 'ALPHA_WOLF': {
@@ -31,7 +30,6 @@ export const sceneHandler = (gamestate, scene_title) => {
       return roles.apprenticeseer(newGamestate, scene_title)
     }
     case 'APPRENTICE_TANNER': {
-      /* MUST */
       return roles.apprenticetanner(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
     }
     case 'ASSASSIN': {
@@ -39,11 +37,9 @@ export const sceneHandler = (gamestate, scene_title) => {
       return roles.assassin(newGamestate, scene_title, conditions.hasApprenticeAssassin(selected_cards), 'assassin')
     }
     case 'AURA_SEER': {
-      /* MUST */
       return roles.auraseer(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards), conditions.hasMarks(selected_cards))
     }
     case 'BEHOLDER': {
-      /* MUST & MAY*/
       return roles.beholder(newGamestate, scene_title, conditions.hasSeer(selected_cards), conditions.hasApprenticeSeer(selected_cards), conditions.hasDoppelganger(selected_cards))
     }
     case 'BLOB': {
@@ -54,7 +50,6 @@ export const sceneHandler = (gamestate, scene_title) => {
       return roles.bodysnatcher(newGamestate, scene_title, 'bodysnatcher')
     }
     case 'COPYCAT': {
-      /* MUST */
       return roles.copycat(newGamestate, scene_title)
     }
     case 'COW': {

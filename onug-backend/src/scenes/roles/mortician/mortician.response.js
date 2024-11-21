@@ -37,7 +37,7 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
   }
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_saw_card', formatPlayerIdentifier(cardPositions)],
+    private_message: ['action_saw_card', formatPlayerIdentifier(cardPositions)],
     showCards: viewCards
   })
 

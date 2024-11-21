@@ -53,7 +53,7 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
 
   const action = generateRoleAction(gamestate, token, {
     private_message: [
-      'interaction_saw_card',
+      'action_saw_card',
       formatPlayerIdentifier(selected_card_positions)[0],
       showCards.length >= 2 ? formatPlayerIdentifier(selected_card_positions)[1] : '',
       showCards.length === 3 ? formatPlayerIdentifier(selected_card_positions)[2] : ''

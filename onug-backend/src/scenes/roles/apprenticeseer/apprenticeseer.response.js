@@ -23,7 +23,7 @@ export const apprenticeseerResponse = (gamestate, token, selected_card_positions
   }
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
+    private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
     showCards: viewCards,
     scene_end: true
   })

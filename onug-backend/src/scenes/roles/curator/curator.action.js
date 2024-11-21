@@ -7,8 +7,6 @@ export const curatorInteraction = (gamestate, token, title) => {
   const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shield)
   const selectablePlayersWithNoArtifact = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, gamestate.artifact)
 
-  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
-
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     selectable_cards: selectablePlayersWithNoArtifact,
@@ -17,7 +15,7 @@ export const curatorInteraction = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : 'interaction_may_one_any'],
+    private_message: [selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : 'action_may_one_any'],
     selectableCards: {
       selectable_cards: selectablePlayersWithNoArtifact,
       selectable_card_limit: { player: 1, center: 0 }

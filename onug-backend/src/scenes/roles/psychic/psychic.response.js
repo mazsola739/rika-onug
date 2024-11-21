@@ -22,7 +22,7 @@ export const psychicResponse = (gamestate, token, selected_card_positions, title
   }
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
+    private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     showCards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0]
   })
 

@@ -2,8 +2,6 @@ import { generateRoleAction, getPlayerNeighborsByToken, getPlayerNumberWithMatch
 
 //TODO neighbors
 export const morticianInteraction = (gamestate, token, title, randomMorticianInstruction, morticianKey) => {
-  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
-
   if (morticianKey === 'identifier_yourself_text') {
     if (!gamestate.players[token].shield) {
       const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
@@ -15,7 +13,7 @@ export const morticianInteraction = (gamestate, token, title, randomMorticianIns
       }
 
       return generateRoleAction(gamestate, token, {
-        private_message: ['interaction_may_look_yourself'],
+        private_message: ['action_may_look_yourself'],
         selectableCards: {
           selectable_cards: [currentPlayerNumber],
           selectable_card_limit: { player: 1, center: 0 }
@@ -30,7 +28,7 @@ export const morticianInteraction = (gamestate, token, title, randomMorticianIns
       }
 
       return generateRoleAction(gamestate, token, {
-        private_message: ['interaction_shielded']
+        private_message: ['action_shielded']
       })
     }
   } else if (morticianKey.includes('neighbor')) {
@@ -47,7 +45,7 @@ export const morticianInteraction = (gamestate, token, title, randomMorticianIns
     }
 
     return generateRoleAction(gamestate, token, {
-      private_message: [selectablePlayerNumbers.length === 0 ? 'interaction_no_selectable_player' : `interaction_may_${morticianKey.replace('identifier_', '').replace('_text', '')}`],
+      private_message: [selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : `action_may_${morticianKey.replace('identifier_', '').replace('_text', '')}`],
       selectableCards: {
         selectable_cards: selectablePlayerNumbers,
         selectable_card_limit: { player: limit, center: 0 }

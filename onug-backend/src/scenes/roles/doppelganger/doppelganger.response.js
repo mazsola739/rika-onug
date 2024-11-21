@@ -27,12 +27,7 @@ export const doppelgangerResponse = (gamestate, token, selected_card_positions, 
   ;(gamestate.players[token].player_history[title].show_cards = showCards), (gamestate.players[token].new_role_id = gamestate.players[token].card.player_role_id)
   gamestate.players[token].card_or_mark_action = true
 
-  const private_message = [
-    'interaction_saw_card',
-    formatPlayerIdentifier(selected_card_positions)[0],
-    'interaction_you_are_that_role',
-    `role_${gamestate.players[token]?.card.player_role.toLowerCase()}`
-  ]
+  const private_message = ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'action_you_are_that_role', `role_${gamestate.players[token]?.card.player_role.toLowerCase()}`]
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

@@ -36,7 +36,7 @@ export const apprenticeassassinResponse = (gamestate, token, selected_mark_posit
   }
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
+    private_message: ['action_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
     scene_end: true
   })
 

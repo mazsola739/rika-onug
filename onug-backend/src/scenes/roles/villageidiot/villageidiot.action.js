@@ -7,7 +7,7 @@ export const villageidiotInteraction = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: ['interaction_may_direction'],
+    private_message: ['action_may_direction'],
     uniqueInformations: { answer_options: ['left', 'right'] }
   })
 }

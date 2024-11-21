@@ -29,7 +29,7 @@ export const empathResponse = (gamestate, token, selected_card_positions, title)
   }
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_voted', formatPlayerIdentifier(selected_card_positions)[0]]
+    private_message: ['action_voted', formatPlayerIdentifier(selected_card_positions)[0]]
   })
 
   const narration = getNarrationByTitle(title, gamestate.narration)

@@ -30,8 +30,6 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
     const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shield)
 
-    //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
-
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],
       selectable_cards: selectablePlayersWithNoShield,
@@ -42,7 +40,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     }
 
     const action = generateRoleAction(gamestate, token, {
-      private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'interaction_must_one_any'],
+      private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'action_must_one_any'],
       selectableCards: {
         selectable_cards: selectablePlayersWithNoShield,
         selectable_card_limit: { player: 1, center: 0 }
@@ -86,7 +84,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     const messageIdentifiers = formatPlayerIdentifier([`${gamestate.players[token].player_history[title].selected_center_card}`, selected_card_positions[0]])
 
     const action = generateRoleAction(gamestate, token, {
-      private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+      private_message: ['action_swapped_cards', ...messageIdentifiers],
       scene_end: true
     })
 

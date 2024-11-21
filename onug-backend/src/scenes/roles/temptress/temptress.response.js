@@ -24,7 +24,7 @@ export const temptressResponse = (gamestate, token, selected_card_positions, tit
   const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], 'center_villain'])
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_swapped_cards', ...messageIdentifiers]
+    private_message: ['action_swapped_cards', ...messageIdentifiers]
   })
 
   const narration = getNarrationByTitle(title, gamestate.narration)

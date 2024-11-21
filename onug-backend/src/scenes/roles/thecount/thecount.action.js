@@ -11,7 +11,7 @@ export const thecountInteraction = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: ['interaction_must_one_any_non_vampire'],
+    private_message: ['action_must_one_any_non_vampire'],
     selectableCards: {
       selectable_marks: nonVampires,
       selectable_mark_limit: { mark: 1 }

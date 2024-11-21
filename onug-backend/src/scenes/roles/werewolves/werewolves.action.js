@@ -26,13 +26,13 @@ export const werewolvesInteraction = (gamestate, token, title) => {
   let privateMessage = []
 
   if (loneWolf) {
-    privateMessage = ['interaction_may_one_center']
+    privateMessage = ['action_may_one_center']
   } else if (werewolves.length > 0 && dreamwolf.length === 0) {
-    privateMessage = ['interaction_werewolves', ...messageIdentifiersWerewolves]
+    privateMessage = ['action_werewolves', ...messageIdentifiersWerewolves]
   } else if (werewolves.length === 1 && dreamwolf.length > 0) {
-    privateMessage = ['interaction_no_werewolves', 'interaction_dreamwolf', ...messageIdentifiersDreamWolves]
+    privateMessage = ['action_no_werewolves', 'action_dreamwolf', ...messageIdentifiersDreamWolves]
   } else if (werewolves.length > 0 && dreamwolf.length > 0) {
-    privateMessage = ['interaction_werewolves', ...messageIdentifiersWerewolves, 'interaction_dreamwolf', ...messageIdentifiersDreamWolves]
+    privateMessage = ['action_werewolves', ...messageIdentifiersWerewolves, 'action_dreamwolf', ...messageIdentifiersDreamWolves]
   }
 
   return generateRoleAction(gamestate, token, {

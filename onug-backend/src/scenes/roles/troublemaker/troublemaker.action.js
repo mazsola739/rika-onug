@@ -3,8 +3,6 @@ import { generateRoleAction, getSelectableOtherPlayerNumbersWithNoShield } from 
 export const troublemakerInteraction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(gamestate.players, token)
 
-  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
-
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     selectable_cards: selectablePlayerNumbers,
@@ -13,7 +11,7 @@ export const troublemakerInteraction = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: [selectablePlayerNumbers.length >= 2 ? 'interaction_may_two_any_other' : 'interaction_no_selectable_player'],
+    private_message: [selectablePlayerNumbers.length >= 2 ? 'action_may_two_any_other' : 'action_no_selectable_player'],
     selectableCards: {
       selectable_cards: selectablePlayerNumbers.length >= 2 ? selectablePlayerNumbers : [],
       selectable_card_limit: {

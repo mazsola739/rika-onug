@@ -19,13 +19,13 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
     case 'oracle_guessnumber_text':
       if (oracleAftermath.includes('success')) {
         gamestate.oracle_eyes_open = true
-        privateMessage = ['interaction_oracle_open_you_eyes']
+        privateMessage = ['action_oracle_open_you_eyes']
       } else {
         gamestate.oracle_target = true
 
         gamestate.players[token].card.player_team = 'oracle'
         currentPlayerCard.team = 'oracle'
-        privateMessage = ['interaction_oracle_team']
+        privateMessage = ['action_oracle_team']
       }
       break
     case 'oracle_viewplayer_text':
@@ -38,58 +38,58 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
         showCards = getCardIdsByPositions(gamestate.card_positions, [`player_${randomPlayerNumber}`])
       }
 
-      privateMessage = ['interaction_selected_card', formatPlayerIdentifier(showCards)]
+      privateMessage = ['action_selected_card', formatPlayerIdentifier(showCards)]
       break
     case 'oracle_alienteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
         gamestate.players[token].card.player_team = 'alien'
-        privateMessage = ['interaction_alien_team']
+        privateMessage = ['action_alien_team']
         if (oracleAftermath.includes('yes2')) {
           gamestate.players[token].card.player_role = 'ALIEN'
           currentPlayerCard.role = 'ALIEN'
           currentPlayerCard.team = 'alien'
-          privateMessage = ['interaction_alien_role']
+          privateMessage = ['action_alien_role']
         }
       } else {
-        privateMessage = ['interaction_stay_oracle']
+        privateMessage = ['action_stay_oracle']
       }
       break
     case 'oracle_werewolfteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
         gamestate.players[token].card.player_team = 'werewolf'
         currentPlayerCard.team = 'werewolf'
-        privateMessage = ['interaction_werewolf_team']
+        privateMessage = ['action_werewolf_team']
       } else {
-        privateMessage = ['interaction_stay_oracle']
+        privateMessage = ['action_stay_oracle']
       }
       break
     case 'oracle_vampireteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
         gamestate.players[token].card.player_team = 'vampire'
         currentPlayerCard.team = 'vampire'
-        privateMessage = ['interaction_vampire_team']
+        privateMessage = ['action_vampire_team']
       } else {
-        privateMessage = ['interaction_stay_oracle']
+        privateMessage = ['action_stay_oracle']
       }
       break
     case 'oracle_centerexchange_text':
       if (!oracleAftermath.includes('yes2')) {
         limit = 1
-        privateMessage = ['interaction_must_one_center']
+        privateMessage = ['action_must_one_center']
       } else {
-        privateMessage = ['interaction_stay_oracle']
+        privateMessage = ['action_stay_oracle']
       }
       break
     case 'oracle_viewcenter_text':
       if (oracleAftermath.includes('yes1')) {
         limit = 1
-        privateMessage = ['interaction_must_one_center']
+        privateMessage = ['action_must_one_center']
       } else if (oracleAftermath.includes('yes2')) {
         limit = 2
-        privateMessage = ['interaction_must_two_center']
+        privateMessage = ['action_must_two_center']
       } else if (oracleAftermath.includes('yes3')) {
         limit = 3
-        privateMessage = ['interaction_must_three_center']
+        privateMessage = ['action_must_three_center']
       }
       break
   }

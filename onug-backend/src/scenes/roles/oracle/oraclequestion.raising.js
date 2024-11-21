@@ -29,6 +29,6 @@ export const oracleQuestionRaising = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: ['interaction_oracle_question']
+    private_message: ['action_oracle_question']
   })
 }

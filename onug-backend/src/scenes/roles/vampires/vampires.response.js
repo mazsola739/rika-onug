@@ -25,7 +25,7 @@ export const vampiresResponse = async (gamestate, token, selected_mark_positions
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: ['interaction_mark_of_vampire', formatPlayerIdentifier([selected_mark_positions[0]])[0]],
+    private_message: ['action_mark_of_vampire', formatPlayerIdentifier([selected_mark_positions[0]])[0]],
     scene_end: true
   })
 }

@@ -66,20 +66,20 @@ export const aliensVotehydrate = async message => {
 
           showCards = getCardIdsByPositions(gamestate.card_positions, [unanimousPlayerNumber])
           viewCards = [unanimousPlayerNumber]
-          message = 'interaction_saw_card'
+          message = 'action_saw_card'
 
           break
         case 'aliens_newalien_text':
           gamestate.card_positions[unanimousPlayerNumber].card.role = 'ALIEN'
           gamestate.card_positions[unanimousPlayerNumber].card.team = 'alien'
           new_alien = [unanimousPlayerNumber]
-          message = 'interaction_turned_newalien'
+          message = 'action_turned_newalien'
 
           break
         case 'aliens_alienhelper_text':
           gamestate.card_positions[unanimousPlayerNumber].card.team = 'alien'
           new_alien_helper = [unanimousPlayerNumber]
-          message = 'interaction_turned_alienhelper'
+          message = 'action_turned_alienhelper'
 
           break
       }
@@ -94,7 +94,7 @@ export const aliensVotehydrate = async message => {
         }
 
         const action = generateRoleAction(gamestate, alienToken, {
-          private_message: ['interaction_voted_together', message, formatPlayerIdentifier([unanimousPlayerNumber])[0]],
+          private_message: ['action_voted_together', message, formatPlayerIdentifier([unanimousPlayerNumber])[0]],
           showCards,
           uniqueInformations: { new_alien, new_alien_helper },
           scene_end: true

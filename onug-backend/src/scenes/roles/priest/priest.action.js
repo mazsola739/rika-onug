@@ -18,8 +18,6 @@ export const priestInteraction = (gamestate, token, title) => {
 
   gamestate.players[token].card.player_mark = 'mark_of_clarity'
 
-  //TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
-
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     selectable_marks: selectablePlayerNumbers,
@@ -28,7 +26,7 @@ export const priestInteraction = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: ['interaction_may_one_any_other'],
+    private_message: ['action_may_one_any_other'],
     selectableMarks: {
       selectable_marks: selectablePlayerNumbers,
       selectable_mark_limit: { mark: 1 }

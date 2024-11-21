@@ -29,7 +29,7 @@ export const oracleQuestionResponse = (gamestate, token, selected_answer, title)
   }
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_oracle_answer', formatOracleAnswer(selected_answer)]
+    private_message: ['action_oracle_answer', formatOracleAnswer(selected_answer)]
   })
 
   const narration = getNarrationByTitle(title, gamestate.narration)

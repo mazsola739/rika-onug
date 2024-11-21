@@ -18,7 +18,7 @@ export const leaderZerbgroobInteraction = (gamestate, token, title) => {
     const messageIdentifiers = formatPlayerIdentifier(zerbgroob)
 
     return generateRoleAction(gamestate, token, {
-      private_message: ['interaction_zerbgroob', ...messageIdentifiers],
+      private_message: ['action_zerbgroob', ...messageIdentifiers],
       scene_end: true
     })
   } else {
@@ -28,7 +28,7 @@ export const leaderZerbgroobInteraction = (gamestate, token, title) => {
     }
 
     return generateRoleAction(gamestate, token, {
-      private_message: ['interaction_no_zerbgroob'],
+      private_message: ['action_no_zerbgroob'],
       scene_end: true
     })
   }

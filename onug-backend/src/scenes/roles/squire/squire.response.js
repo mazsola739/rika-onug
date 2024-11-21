@@ -29,7 +29,7 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     const messageIdentifiers = formatPlayerIdentifier(werewolves)
 
     action = generateRoleAction(gamestate, token, {
-      private_message: ['interaction_saw_card', ...messageIdentifiers],
+      private_message: ['action_saw_card', ...messageIdentifiers],
       showCards: viewCards,
       uniqueInformations: { werewolves }
     })
@@ -40,7 +40,7 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     }
 
     action = generateRoleAction(gamestate, token, {
-      private_message: ['interaction_nothing']
+      private_message: ['action_nothing']
     })
   }
 

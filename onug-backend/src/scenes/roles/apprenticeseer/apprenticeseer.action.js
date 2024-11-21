@@ -10,7 +10,7 @@ export const apprenticeseerInteraction = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: ['interaction_may_one_center'],
+    private_message: ['action_may_one_center'],
     selectableCards: {
       selectable_cards: CENTER_CARD_POSITIONS,
       selectable_card_limit: { player: 0, center: 1 }

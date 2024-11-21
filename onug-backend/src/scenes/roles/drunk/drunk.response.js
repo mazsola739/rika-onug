@@ -36,7 +36,7 @@ export const drunkResponse = (gamestate, token, selected_card_positions, title) 
   const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_swapped_cards', ...messageIdentifiers],
+    private_message: ['action_swapped_cards', ...messageIdentifiers],
     scene_end: true
   })
 

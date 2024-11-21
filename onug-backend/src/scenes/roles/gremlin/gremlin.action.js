@@ -18,7 +18,7 @@ export const gremlinInteraction = (gamestate, token, title) => {
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: ['interaction_must_two_any'],
+    private_message: ['action_must_two_any'],
     selectableMarks: {
       selectable_marks: selectablePlayerNumbers,
       selectable_mark_limit: { mark: 2 }

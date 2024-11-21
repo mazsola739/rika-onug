@@ -36,7 +36,7 @@ export const seerResponse = (gamestate, token, selected_card_positions, title) =
   }
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
+    private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     showCards,
     scene_end: true
   })

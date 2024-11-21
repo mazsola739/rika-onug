@@ -11,7 +11,7 @@ export const leaderInteraction = (gamestate, token, title) => {
   const messageIdentifiers = formatPlayerIdentifier(aliens)
 
   return generateRoleAction(gamestate, token, {
-    private_message: aliens.length > 0 ? ['interaction_aliens', ...messageIdentifiers] : ['interaction_no_aliens'],
+    private_message: aliens.length > 0 ? ['action_aliens', ...messageIdentifiers] : ['action_no_aliens'],
     uniqueInformations: { aliens }
   })
 }

@@ -27,14 +27,14 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
     const messageIdentifiers = formatPlayerIdentifier(seers)
 
     action = generateRoleAction(gamestate, token, {
-      private_message: ['interaction_saw_card', ...messageIdentifiers],
+      private_message: ['action_saw_card', ...messageIdentifiers],
       showCards: viewCards,
       uniqueInformations: { seers },
       scene_end: true
     })
   } else if (selected_answer === 'no') {
     action = generateRoleAction(gamestate, token, {
-      private_message: ['interaction_nothing'],
+      private_message: ['action_nothing'],
       scene_end: true
     })
   }

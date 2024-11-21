@@ -22,7 +22,6 @@ export const startGame = async (ws, message) => {
       ...gamestate,
       stage: STAGES.GAME,
       game_start_time: startTime,
-      game_paused: false,
       game_started: true,
       game_stopped: false,
       game_finished: false,

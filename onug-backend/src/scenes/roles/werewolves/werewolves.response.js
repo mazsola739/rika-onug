@@ -16,7 +16,7 @@ export const werewolvesResponse = (gamestate, token, selected_card_positions, ti
 
   gamestate.players[token].card_or_mark_action = true
 
-  const private_message = ['interaction_saw_card', formatPlayerIdentifier(selected_card_positions)[0]]
+  const private_message = ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]]
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
