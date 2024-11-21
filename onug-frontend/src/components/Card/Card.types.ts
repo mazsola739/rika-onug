@@ -16,6 +16,7 @@ export interface StyledCardProps {
   sizeW: number
   sizeH?: number
   isSelectable: boolean
+  isSelected: boolean
   werewolf: boolean
   dreamwolf: boolean
   masons: boolean

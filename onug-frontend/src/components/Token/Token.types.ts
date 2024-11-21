@@ -10,7 +10,8 @@ export interface TokenProps {
 }
 
 export interface StyledTokenProps {
-  isSelectable?: boolean
-  lovers?: boolean
+  isSelectable: boolean
+  isSelected: boolean
+  lovers: boolean
   size: number
 }

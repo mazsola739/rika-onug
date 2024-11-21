@@ -1,6 +1,4 @@
-import * as messages_text from 'constant/messages'
 import * as narration_text from 'constant/narrations'
-import * as identifier from 'constant/narrations/identifier'
 
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
@@ -54,44 +52,6 @@ export type GuessToken = {
 export type GuessedCard = {
   position: CardPosition
   guessed_roles: number[]
-}
-
-export type TablePlayerCard = {
-  aliens?: boolean
-  artifact?: boolean
-  apprenticeassassins?: boolean
-  assassins?: boolean
-  card_name?: string
-  dreamwolf?: boolean
-  groobzerb?: boolean
-  lovers?: boolean
-  madscientist?: boolean
-  mark?: string
-  masons?: boolean
-  part_of_blob?: boolean
-  part_of_family?: boolean
-  player_name?: string
-  position?: CardPosition
-  role?: string
-  seers?: boolean
-  selectable_card?: boolean
-  selectable_mark?: boolean
-  selected?: boolean
-  shield?: boolean
-  tanner?: boolean
-  team?: string
-  vampires?: boolean
-  villains?: boolean
-  werewolves?: boolean
-}
-
-export type TableCenterCard = {
-  card_name?: string
-  position?: CardPosition
-  role?: string
-  selectable_card?: boolean
-  selected?: boolean
-  team?: string
 }
 
 export type ActualScene = {
@@ -160,10 +120,6 @@ export type Result = {
 }
 
 export type NarrationType = keyof typeof narration_text
-
-export type MessagesType = keyof typeof messages_text
-
-export type IdentifierType = keyof typeof identifier
 
 export type WsJsonMessage = {
   actual_scene?: ActualScene

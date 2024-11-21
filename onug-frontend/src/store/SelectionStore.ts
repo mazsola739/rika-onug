@@ -57,6 +57,22 @@ class SelectionStore {
     }
   }
 
+  get selectedCardsMap() {
+    return new Set(this.selectedCards);
+  }
+  
+  get selectedMarksMap() {
+    return new Set(this.selectedMarks);
+  }
+  
+  isSelectedCard(position: string): boolean {
+    return this.selectedCardsMap.has(position);
+  }
+  
+  isSelectedMark(position: string): boolean {
+    return this.selectedMarksMap.has(position);
+  }
+
   resetSelection() {
     this.selectedCards = []
     this.selectedMarks = []

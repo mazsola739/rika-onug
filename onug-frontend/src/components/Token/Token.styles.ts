@@ -6,7 +6,7 @@ import { StyledTokenProps } from './Token.types'
 export const StyledToken = styled.div<StyledTokenProps>`
   display: flex;
   border-radius: 50%;
-  border: 5px solid transparent;
+  border: ${({ isSelected }) => (isSelected ? '3px solid red' : '3px solid transparent')};
   filter: drop-shadow(3px 3px 3px black);
 
   ${({ isSelectable, lovers }) => {

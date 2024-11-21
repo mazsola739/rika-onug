@@ -3,9 +3,14 @@ import { observer } from 'mobx-react-lite'
 import { GuessTokens, StyledPlayerCard, Tokens, CardContainer } from './PlayerCard.styles'
 import { PlayerCardProps } from './PlayerCard.types'
 import { usePlayerCard } from './usePlayerCard'
+import { selectionStore } from 'store'
 
 export const PlayerCard: React.FC<PlayerCardProps> = observer(({ card, cardSize = 80, tokenSize = 30, ownCard = false }) => {
   const { playerNumberToken, markProps, isShielded, isArtifacted, isCenterCard, onCardClick, cardProps, guessTokens, hasMarks, hasSentinel, hasCurator } = usePlayerCard(card)
+
+  const isCardSelected = selectionStore.isSelectedCard(card.position || '')
+  const isMarkSelected = markProps?.tokenName && selectionStore.isSelectedMark(markProps.tokenName)
+
 
   return (
     <StyledPlayerCard ownCard={ownCard}>

@@ -25,7 +25,8 @@ class RiseAndRestStore {
       shield: false,
       selectable_card: false,
       selectable_mark: false,
-      selected: false,
+      selected_card: false,
+      selected_mark: false,
       werewolves: false,
       dreamwolf: false,
       vampires: false,
@@ -108,7 +109,8 @@ class RiseAndRestStore {
       artifact: player.player_artifact || null,
       role: player.player_role || '',
       team: player.player_team || '',
-      selected: false,
+      selected_card: false,
+      selected_mark: false,
       ...this.getCardStatus(player.player_number)
     }
   }
