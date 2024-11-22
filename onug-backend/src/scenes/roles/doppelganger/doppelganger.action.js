@@ -3,7 +3,7 @@ import { generateRoleAction, getPlayerNumbersWithNonMatchingTokens, getSelectabl
 //TODO shield?
 export const doppelgangerAction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(gamestate.players, [token])
-  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shield)
+  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shielded_cards)
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

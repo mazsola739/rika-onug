@@ -20,7 +20,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     const allPlayerTokens = getAllPlayerTokens(gamestate.players)
     const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shield)
+    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shielded_cards)
 
     //TODO const isTwoSelectable = selectablePlayerNumbers.length === 2,
     //TODO if no marks only cards

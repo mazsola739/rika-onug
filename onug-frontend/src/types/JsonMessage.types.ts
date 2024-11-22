@@ -123,6 +123,7 @@ export type NarrationType = keyof typeof narration_text
 
 export type WsJsonMessage = {
   actual_scene?: ActualScene
+  alien_votes?: VoteType
   artifacted_cards?: CardPosition[]
   center_cards?: CenterCard[]
   day_mode?: boolean

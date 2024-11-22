@@ -7,7 +7,7 @@ import { propStore, riseAndRestStore, selectionStore } from 'store'
 import { MessagesType, NarrationType } from 'types'
 import { formatPositionSimply } from 'utils'
 
-type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'vampires'
+type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'groobzerb' | 'vampires'
 
 class MessageStore {
   narration: string = ''
@@ -88,7 +88,7 @@ class MessageStore {
   }
   get isCardIdentification() {
     const title = propStore.title
-    return ['MINION', 'WEREWOLVES', 'MASONS', 'VAMPIRES', 'ALIENS'].includes(title)
+    return ['MINION', 'WEREWOLVES', 'MASONS', 'VAMPIRES', 'ALIENS', 'GROOB_ZERB'].includes(title)
   }
   get allSelectableCards(): Record<string, string>[] {
     const selectablePlayerCards = riseAndRestStore.tablePlayerCards.filter(card => card.selectable_card)
@@ -133,6 +133,8 @@ class MessageStore {
         return ['masons']
       case 'ALIENS':
         return ['aliens']
+      case 'GROOB_ZERB':
+        return ['groobzerb']
       case 'VAMPIRES':
         return ['vampires']
       default:

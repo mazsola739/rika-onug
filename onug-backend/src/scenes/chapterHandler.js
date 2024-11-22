@@ -11,7 +11,7 @@ export const chapterHandler = async gamestate => {
     logTrace(`chapterHandler in room [${gamestate.room_id}]`)
 
     const playersArray = Object.values(gamestate.players || {})
-    let newGamestate = { ...gamestate, actual_scenes: [] }
+    let newGamestate = { ...gamestate, chapter: [] }
 
     let flagsState = {
       player_card_shifting: false,
@@ -24,10 +24,10 @@ export const chapterHandler = async gamestate => {
       artifact: false
     }
 
-    const activePlayersInScenes = new Set()
+    const activePlayersInChapter = new Set()
 
     const hasConflict = scene => {
-      const { player_card_shifting, center_card_shifting, view_player_card, view_center_card, mark_shifting, view_mark, shield, artifact } = scene
+      const { player_card_shifting, center_card_shifting, view_player_card, view_center_card, mark_shifting, view_mark, shield, artifact, /* vote */ } = scene
 
       if (flagsState.artifact || flagsState.shield) {
         logTrace(`Conflict due to active artifact or shield flag, halting scene processing.`)
@@ -77,7 +77,7 @@ export const chapterHandler = async gamestate => {
         continue
       }
 
-      const overlapExists = scenePlayers.some(player => activePlayersInScenes.has(player.player_number))
+      const overlapExists = scenePlayers.some(player => activePlayersInChapter.has(player.player_number))
       if (overlapExists) {
         logTrace(`Overlap detected with scene: ${scene.scene_title}. Stopping further processing.`)
         break
@@ -89,15 +89,15 @@ export const chapterHandler = async gamestate => {
       }
 
       if (scenePlayers.length > 0) {
-        newGamestate.actual_scenes.push({
+        newGamestate.chapter.push({
           scene_title: scene.scene_title,
           scene_number: scene.scene_number
         })
         logTrace(`Scene added: ${scene.scene_title}`)
-        scenePlayers.forEach(player => activePlayersInScenes.add(player.player_number))
+        scenePlayers.forEach(player => activePlayersInChapter.add(player.player_number))
         flagsState = { ...flagsState, ...scene }
       } else {
-        newGamestate.actual_scenes.push({
+        newGamestate.chapter.push({
           scene_title: scene.scene_title,
           scene_number: scene.scene_number
         })
@@ -105,12 +105,10 @@ export const chapterHandler = async gamestate => {
       }
     }
 
-    newGamestate.scripts = Array.isArray(newGamestate.scripts)
-      ? newGamestate.scripts.filter(scene => !newGamestate.actual_scenes.some(actualScene => actualScene.scene_title === scene.scene_title))
-      : []
+    newGamestate.scripts = Array.isArray(newGamestate.scripts) ? newGamestate.scripts.filter(scene => !newGamestate.chapter.some(actualScene => actualScene.scene_title === scene.scene_title)) : []
     logTrace(`Remaining scripts after filtering: ${JSON.stringify(newGamestate.scripts)}`)
 
-    for (const actualScene of newGamestate.actual_scenes) {
+    for (const actualScene of newGamestate.chapter) {
       logTrace(`Processing action for scene: ${actualScene.scene_title}`)
       newGamestate = await sceneHandler(newGamestate, actualScene.scene_title)
     }
@@ -121,6 +119,10 @@ export const chapterHandler = async gamestate => {
 
     if (gameCanEnd) {
       logTrace(`All scripts processed. Broadcasting END_GAME message.`)
+
+      //TODO uncomment delay
+      /* await randomDelay() */
+
       broadcast(newGamestate.room_id, {
         type: END_GAME,
         success: true,

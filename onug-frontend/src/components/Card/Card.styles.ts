@@ -4,13 +4,21 @@ import { glowingBlue, glowingGreen, glowingPurple, glowingRed, glowingVibrantPin
 import { StyledCardProps } from './Card.types'
 
 export const StyledCard = styled.div<StyledCardProps>`
-  border-radius: 13px;
+  border-radius: 15px;
   display: flex;
   filter: drop-shadow(3px 3px 3px black);
-  border: ${({ isSelected }) => (isSelected ? '3px solid red' : '3px solid transparent')};
+  border: ${({ isSelected, isSelectable }) => {
+    if (isSelected) {
+      return '5px solid yellow'
+    }
+    if (isSelectable) {
+      return '5px solid green'
+    }
+    return '5px solid transparent'
+  }};
 
-  ${({ werewolf, dreamwolf, masons, aliens, vampires, isSelectable }) => {
-    if (isSelectable || aliens) {
+  ${({ werewolf, dreamwolf, masons, aliens, vampires, groobzerb }) => {
+    if (aliens || groobzerb) {
       return css`
         animation: ${glowingGreen} 0.8s ease-in-out infinite alternate;
       `

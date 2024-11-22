@@ -8,11 +8,11 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
     return gamestate
   }
 
-  const newArtifact = getRandomArtifact(gamestate.artifact)
+  const newArtifact = getRandomArtifact(gamestate.artifacted_cards)
   const artifactedPlayersToken = getPlayerTokensByPlayerNumber(gamestate.players, [selected_card_positions[0]])
 
   if (artifactedPlayersToken) {
-    gamestate.artifact.push({ [selected_card_positions[0]]: newArtifact })
+    gamestate.artifacted_cards.push({ [selected_card_positions[0]]: newArtifact })
     gamestate.card_positions[selected_card_positions[0]].artifact = newArtifact
   }
 

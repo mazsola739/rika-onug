@@ -1,4 +1,4 @@
-import { ARRIVE_GAME, END_GAME, HYDRATE_GAME, REDIRECT, SCENE, VAMPIRES } from 'constant'
+import { ALIENS, ARRIVE_GAME, END_GAME, HYDRATE_GAME, REDIRECT, SCENE, VAMPIRES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { gameStatusStore, messageStore, propStore, riseAndRestStore, wsStore } from 'store'
@@ -56,6 +56,9 @@ export const useGame = () => {
 
     if (lastJsonMessage?.type === VAMPIRES && lastJsonMessage?.success) {
       propStore.setVampireVotes(lastJsonMessage.vampire_votes)
+    }
+    if (lastJsonMessage?.type === ALIENS && lastJsonMessage?.success) {
+      propStore.setAlienVotes(lastJsonMessage.alien_votes)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {

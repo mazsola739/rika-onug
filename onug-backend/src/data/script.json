@@ -123,7 +123,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "vote": true
   },
   {
     "scene_title": "THE_COUNT",
@@ -347,7 +347,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "vote": true
   },
   {
     "scene_title": "COW",

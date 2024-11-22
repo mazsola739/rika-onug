@@ -20,7 +20,7 @@ export const stopGame = async message => {
     gamestate.game_stopped = true
     gamestate.game_finished = false
     gamestate.script_locked = true
-    gamestate.actual_scenes = []
+    gamestate.chapter = []
 
     delete gamestate.narration
     delete gamestate.game_start_time

@@ -25,7 +25,7 @@ export const flipperResponse = (gamestate, token, selected_card_positions, title
   }
 
   if (isTown) {
-    gamestate.flipped.push(revealedCard[0])
+    gamestate.flipped_cards.push(revealedCard[0])
     gamestate.players[token].player_history[title].flipped_cards = revealedCard
   } else {
     gamestate.players[token].player_history[title].show_cards = revealedCard

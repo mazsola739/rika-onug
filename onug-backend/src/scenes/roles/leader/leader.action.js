@@ -5,13 +5,15 @@ export const leaderAction = (gamestate, token, title) => {
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    aliens
+    aliens,
+    scene_end: true
   }
 
   const messageIdentifiers = formatPlayerIdentifier(aliens)
 
   return generateRoleAction(gamestate, token, {
     private_message: aliens.length > 0 ? ['action_aliens', ...messageIdentifiers] : ['action_no_aliens'],
-    uniqueInformations: { aliens }
+    uniqueInformations: { aliens },
+    scene_end: true
   })
 }

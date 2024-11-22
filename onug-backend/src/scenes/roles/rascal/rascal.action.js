@@ -2,7 +2,7 @@ import { CENTER_CARD_POSITIONS } from '../../../constants'
 import {
   generateRoleAction,
   getAllPlayerTokens,
-  getAnyEvenOrOddPlayers,
+  getAnyEvenOrOddPlayerNumbers,
   getPlayerNeighborsByToken,
   getSelectableOtherPlayerNumbersWithNoShield,
   getSelectablePlayersWithNoShield
@@ -26,7 +26,7 @@ export const rascalAction = (gamestate, token, title) => {
       case 'identifier_any2even_text':
       case 'identifier_any2odd_text': {
         const evenOrOddTwo = rascalKey.replace('identifier_any2', '').replace('_text', '')
-        return getAnyEvenOrOddPlayers(gamestate.players, evenOrOddTwo)
+        return getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOddTwo)
       }
 
       case 'identifier_any2higher_text':
@@ -59,7 +59,7 @@ export const rascalAction = (gamestate, token, title) => {
       case 'identifier_anyeven_text':
       case 'identifier_anyodd_text': {
         const evenOrOddOne = rascalKey.replace('identifier_any', '').replace('_text', '')
-        return getAnyEvenOrOddPlayers(gamestate.players, evenOrOddOne)
+        return getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOddOne)
       }
 
       case 'identifier_oneneighbor_text':

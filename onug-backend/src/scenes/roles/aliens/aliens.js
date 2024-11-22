@@ -11,11 +11,13 @@ export const aliens = (gamestate, title) => {
 
   if (randomAlienInstruction.includes('view')) {
     alienKey = [getRandomItemFromArray(alienAnyKeys)]
+
     if (alienKey[0] === 'activePlayers') {
       alienKey = pickRandomUpToThreePlayers(gamestate.total_players, 'conjunction_and')
-      narration.push(...alienKey)
-      narration.push(randomAlienInstruction)
     }
+
+    narration.push(randomAlienInstruction)
+    narration.push(...alienKey)
   } else if (randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text') {
     alienKey = [getRandomItemFromArray(alienAllKeys)]
     narration.push(randomAlienInstruction)
@@ -24,12 +26,12 @@ export const aliens = (gamestate, title) => {
     narration.push(randomAlienInstruction)
   }
 
-  gamestate.alien = {
+  gamestate.aliens = {
     instruction: '',
-    key: ''
+    key: []
   }
-  gamestate.alien.instruction = randomAlienInstruction
-  gamestate.alien.key = alienKey
+  gamestate.aliens.instruction = randomAlienInstruction
+  gamestate.aliens.key = alienKey
 
   tokens.forEach(token => {
     let action = {}

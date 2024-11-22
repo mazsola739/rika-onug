@@ -1,13 +1,13 @@
-import { selectionStore, voteStore, deckStore } from 'store'
-import { CardPosition, TablePlayerCard } from 'types'
+import { selectionStore, deckStore } from 'store'
+import { voteStore } from 'store/VoteStore'
+import { TablePlayerCard, CardPosition } from 'types'
 import { getCardImageSrc, getPlayerNumberToken } from './PlayerCards.utils'
 
-export const usePlayerCard = (card: TablePlayerCard) => {
+export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
   const { selectedCards, selectedMarks } = selectionStore
 
   const onCardClick = () => {
     if (voteStore.isGuessing) {
-      //TODO REFACTOR
       voteStore.selectGuessCardPosition(position as CardPosition)
     }
     if (isSelectableCard) selectionStore.toggleCardSelection(position)
@@ -21,10 +21,12 @@ export const usePlayerCard = (card: TablePlayerCard) => {
   const isCenterCard = position.startsWith('center_')
   const image = getCardImageSrc(card)
   const playerNumberToken = getPlayerNumberToken(position)
+  let playerName = card?.player_name || ''
   const markName = card?.mark
   const isShielded = card?.shield
   const isArtifacted = card?.artifact
   const isWerewolf = card?.werewolves
+  const isGroobzerb = card?.groobzerb
   const isDreamwolf = card?.dreamwolf
   const isMason = card?.masons
   const isLovers = card?.lovers
@@ -41,6 +43,22 @@ export const usePlayerCard = (card: TablePlayerCard) => {
   const hasSentinel = deckStore.hasSentinel
   const hasCurator = deckStore.hasCurator
 
+  /* ⚡-villains, 🦇-vampire, 🛸-alien, 🐺-wolf,💤-dreamwolf, 👽-groob zerb, 🩷-lover, ⚒️-masons, 🗡️-assassin, 🧪-mad, 🦠-blob, 🩵-family, 👁️ -seer, 🪢-tanner, */
+  const roles = []
+  if (isWerewolf) roles.push('🐺')
+  if (isDreamwolf) roles.push('💤')
+  if (isMason) roles.push('⚒️')
+  if (isLovers) roles.push('🩷')
+  if (isVampire) roles.push('🦇')
+  if (isAlien) roles.push('🛸')
+  if (isGroobzerb) roles.push('👽')
+
+  if (ownCard) {
+    playerName = 'You'
+  }
+
+  const formattedPlayerName = `${playerName} ${roles.join(' ')}`
+
   const cardProps = {
     image,
     isSelectable: isSelectableCard,
@@ -49,7 +67,8 @@ export const usePlayerCard = (card: TablePlayerCard) => {
     dreamwolf: isDreamwolf,
     masons: isMason,
     vampires: isVampire,
-    aliens: isAlien
+    aliens: isAlien,
+    groobzerb: isGroobzerb,
   }
 
   const markProps = {
@@ -63,18 +82,16 @@ export const usePlayerCard = (card: TablePlayerCard) => {
   return {
     position,
     playerNumberToken,
+    playerName: formattedPlayerName,
     isCenterCard,
     cardProps,
     markProps,
     isShielded,
     isArtifacted,
-    isWerewolf,
-    isDreamwolf,
-    isAlien,
     onCardClick,
     guessTokens,
     hasMarks,
     hasSentinel,
-    hasCurator
+    hasCurator,
   }
 }

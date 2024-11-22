@@ -30,9 +30,9 @@ export const hydrateCouncil = async (ws, message) => {
         players,
         narrations: newGamestate.narration,
         action: {
-          artifacted_cards: getKeys(gamestate.artifact),
-          shielded_cards: newGamestate.shield,
-          show_cards: newGamestate.flipped
+          artifacted_cards: getKeys(gamestate.artifacted_cards),
+          shielded_cards: newGamestate.shielded_cards,
+          show_cards: newGamestate.flipped_cards
         }
       })
     )

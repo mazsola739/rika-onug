@@ -4,8 +4,6 @@ export const leaderZerbgroobAction = (gamestate, token, title) => {
   const zerb = getZerbPlayerNumberByRoleIds(gamestate.players)
   const groob = getGroobPlayerNumberByRoleIds(gamestate.players)
 
-  //TODO leader team
-
   if (groob.length >= 1 && zerb.length >= 1) {
     const zerbgroob = zerb.concat(groob)
 
@@ -19,6 +17,7 @@ export const leaderZerbgroobAction = (gamestate, token, title) => {
 
     return generateRoleAction(gamestate, token, {
       private_message: ['action_zerbgroob', ...messageIdentifiers],
+      uniqueInformations: { groobzerb: zerbgroob },
       scene_end: true
     })
   } else {

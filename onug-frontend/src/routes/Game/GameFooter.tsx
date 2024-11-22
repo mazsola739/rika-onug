@@ -17,7 +17,7 @@ export const GameFooter: React.FC = observer(() => {
           <Button onClick={handleStopGame} buttonText={BUTTONS.stop_button_label} variant="red" />
           <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
           {isVote ? (
-            <Button onClick={() => handleVote(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={BUTTONS.vote_label} variant="yellow" />
+            <Button onClick={() => handleVote(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={BUTTONS.vote_label} variant="purple" />
           ) : (
             <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabledCards} buttonText={BUTTONS.done_label} variant="green" />
           )}
@@ -29,7 +29,7 @@ export const GameFooter: React.FC = observer(() => {
           <Button onClick={handleStopGame} buttonText={BUTTONS.stop_button_label} variant="red" />
           <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
           {isVote ? (
-            <Button onClick={() => handleVote(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={BUTTONS.vote_label} variant="yellow" />
+            <Button onClick={() => handleVote(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={BUTTONS.vote_label} variant="purple" />
           ) : (
             <Button onClick={() => handleMarkInteraction(selectedMarks, title)} disabled={disabledMarks} buttonText={BUTTONS.done_label} variant="green" />
           )}

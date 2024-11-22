@@ -11,6 +11,7 @@ class PropStore {
   winnerTeams: string[] = []
   loserTeams: string[] = []
   vampireVotes: VoteType = {}
+  alienVotes: VoteType = {}
 
   constructor() {
     makeAutoObservable(this)
@@ -122,6 +123,9 @@ class PropStore {
 
   setVampireVotes(vampireVotes: VoteType): void {
     this.vampireVotes = vampireVotes
+  }
+  setAlienVotes(alienVotes: VoteType): void {
+    this.alienVotes = alienVotes
   }
 
   setVoteResult(voteResult: Result[]): void {

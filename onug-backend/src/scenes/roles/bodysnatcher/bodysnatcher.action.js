@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { generateRoleAction, getAnyEvenOrOddPlayers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNeighborsByToken } from '../../sceneUtils'
+import { generateRoleAction, getAnyEvenOrOddPlayerNumbers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNeighborsByToken } from '../../sceneUtils'
 import { getAnyOtherPlayersByToken } from './bodysnatcher.utils'
 
 export const bodysnatcherAction = (gamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey) => {
@@ -24,7 +24,7 @@ export const bodysnatcherAction = (gamestate, token, title, randomBodysnatcherIn
       case 'identifier_anyeven_text':
       case 'identifier_anyodd_text': {
         const evenOrOdd = bodysnatcherKey.replace('identifier_', '').replace('_text', '').replace('any', '')
-        selectablePlayers = getAnyEvenOrOddPlayers(gamestate.players, evenOrOdd)
+        selectablePlayers = getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd)
         break
       }
       case 'identifier_leftneighbor_text':
@@ -39,7 +39,7 @@ export const bodysnatcherAction = (gamestate, token, title, randomBodysnatcherIn
         break
     }
 
-    const selectablePlayerNumbers = getNonAlienPlayerNumbersByRoleIdsWithNoShield(selectablePlayers)
+    const selectablePlayerNumbers = getNonAlienPlayerNumbersByRoleIdsWithNoShield(selectablePlayers, gamestate.shielded_cards)
 
     selectableCards = {
       selectable_cards: selectablePlayerNumbers,

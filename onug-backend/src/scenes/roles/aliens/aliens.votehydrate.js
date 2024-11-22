@@ -49,7 +49,7 @@ export const aliensVotehydrate = async message => {
 
     if (unanimousVote) {
       const unanimousPlayerNumber = unanimousVote[0]
-      const randomAlienInstruction = gamestate.alien.instruction
+      const randomAlienInstruction = gamestate.aliens.instruction
 
       let showCards = []
       let viewCards = []

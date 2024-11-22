@@ -143,8 +143,10 @@ export const MessageBox: React.FC = observer(() => {
   const { handleCardInteraction, handleMarkInteraction, handleFinish, handleSkip, handleAnswerInteraction, handleVote } = useClickHandler()
   const { narration, privateMessage, narrationImage, disabledCards, disabledMarks, isSelectableCards, isSelectableMarks, isCardIdentification, identifiedCards, isAnswerOptions, isVoteResult } =
     messageStore
-  const { obligatory, scene_end, title, answer_options, vampireVotes, isVote } = propStore
+  const { obligatory, scene_end, title, answer_options, vampireVotes, alienVotes, isVote } = propStore
   const { selectedCards, selectedMarks, selectedAnswer } = selectionStore
+
+  const votes = alienVotes || vampireVotes
 
   return (
     <StyledMessageBox>
@@ -161,7 +163,7 @@ export const MessageBox: React.FC = observer(() => {
           <ButtonGroup>
             <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
             {isVote ? (
-              <Button onClick={() => handleVote(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={BUTTONS.vote_label} variant="yellow" />
+              <Button onClick={() => handleVote(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={BUTTONS.vote_label} variant="purple" />
             ) : (
               <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabledCards} buttonText={BUTTONS.done_label} variant="green" />
             )}
@@ -173,7 +175,7 @@ export const MessageBox: React.FC = observer(() => {
           <ButtonGroup>
             <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
             {isVote ? (
-              <Button onClick={() => handleVote(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={BUTTONS.vote_label} variant="yellow" />
+              <Button onClick={() => handleVote(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={BUTTONS.vote_label} variant="purple" />
             ) : (
               <Button onClick={() => handleMarkInteraction(selectedMarks, title)} disabled={disabledMarks} buttonText={BUTTONS.done_label} variant="green" />
             )}
@@ -187,7 +189,7 @@ export const MessageBox: React.FC = observer(() => {
           </ButtonGroup>
         )}
 
-        {isVoteResult && <VoteResult votes={vampireVotes} />}
+        {isVoteResult && <VoteResult votes={votes} />}
       </Message>
 
       {scene_end && (

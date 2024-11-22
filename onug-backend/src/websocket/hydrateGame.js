@@ -18,7 +18,7 @@ export const hydrateGame = async (ws, message) => {
     }
 
     // TODO get actual scene based on scene_number and player token
-    const actual_scene = newGamestate.actual_scenes[newGamestate.actual_scenes.length - 1]
+    const actual_scene = newGamestate.chapter[newGamestate.chapter.length - 1]
 
     return ws.send(
       JSON.stringify({

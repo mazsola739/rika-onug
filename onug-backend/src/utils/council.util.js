@@ -14,7 +14,7 @@ const isActivePlayersCardsFlipped = (flippedCards, playersPosition) => flippedCa
 export const updatePlayer = (gamestate, token) => {
   let newGamestate = { ...gamestate }
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
-  const flippedCards = newGamestate.flipped
+  const flippedCards = newGamestate.flipped_cards
 
   const playerCard = newGamestate.players[token].card
   const currentCard = newGamestate.card_positions[currentPlayerNumber]?.card

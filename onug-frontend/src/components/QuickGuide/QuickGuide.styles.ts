@@ -4,12 +4,12 @@ import { StyledQuickGuideTokenProps } from './QuickGuide.types'
 type ExpansionTypes = 'Werewolf' | 'Bonus Roles' | 'Daybreak' | 'Vampire' | 'Alien' | 'Super Villains' | 'default'
 
 const colorVariants: Record<ExpansionTypes, string> = {
-  Werewolf: '#364C5463',
-  'Bonus Roles': '#A12E6363',
-  Daybreak: '#CF463163',
-  Vampire: '#48397A63',
-  Alien: '#A4CA6363',
-  'Super Villains': '#469FDF63',
+  Werewolf: '#364C541A',
+  'Bonus Roles': '#A12E631A',
+  Daybreak: '#CF46311A',
+  Vampire: '#48397A1A',
+  Alien: '#A4CA631A',
+  'Super Villains': '#469FDF1A',
   default: 'rgba(0, 0, 0, 0.3)'
 }
 

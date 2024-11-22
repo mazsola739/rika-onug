@@ -99,7 +99,7 @@ class DeckStore {
       mark_of_disease: this.hasDiseased,
       mark_of_love: this.hasCupid,
       mark_of_traitor: this.hasInstigator,
-      mark_of_clarity: checkCardPresence(this.selectedCards, 37),
+      mark_of_clarity: checkCardPresence(this.selectedCards, 37) || this.hasMarks,
       mark_of_assassin: this.hasAssassin
     }
 
@@ -107,8 +107,22 @@ class DeckStore {
   }
 
   updateArtifacts(): void {
-    this.artifacts =
-      this.hasSentinel && this.hasCurator ? artifacts : artifacts.filter(artifact => (this.hasSentinel && artifact.token_name === 'shield') || (this.hasCurator && artifact.token_name !== 'shield'))
+    this.artifacts = artifacts.filter(artifact => {
+      const isExpansionSelected = this.selectedExpansions.includes(artifact.expansion as Expansion)
+
+      if (this.hasSentinel && this.hasCurator) {
+        return isExpansionSelected
+      }
+
+      if (this.hasSentinel) {
+        return isExpansionSelected && artifact.token_name === 'shield'
+      }
+
+      if (this.hasCurator) {
+        return isExpansionSelected && artifact.token_name !== 'shield'
+      }
+      return false
+    })
   }
 
   clearSelections(): void {

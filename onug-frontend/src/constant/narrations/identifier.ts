@@ -1,3 +1,9 @@
+export const conjunction_and = 'and'
+export const conjunction_or = 'or'
+
+export const direction_left = 'left'
+export const direction_right = 'right'
+
 export const identifier_everyone_text = 'Everyone'
 export const identifier_oddplayers_text = 'Odd Players'
 export const identifier_evenplayers_text = 'Even Players'

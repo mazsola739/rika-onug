@@ -6,15 +6,18 @@ import { StyledTokenProps } from './Token.types'
 export const StyledToken = styled.div<StyledTokenProps>`
   display: flex;
   border-radius: 50%;
-  border: ${({ isSelected }) => (isSelected ? '3px solid red' : '3px solid transparent')};
+    border: ${({ isSelected, isSelectable }) => {
+    if (isSelected) {
+      return '5px solid yellow'
+    }
+    if (isSelectable) {
+      return '5px solid green'
+    }
+    return '5px solid transparent'
+  }};
   filter: drop-shadow(3px 3px 3px black);
 
-  ${({ isSelectable, lovers }) => {
-    if (isSelectable) {
-      return css`
-        animation: ${glowingGreen} 0.8s ease-in-out infinite alternate;
-      `
-    }
+  ${({ lovers }) => {
     if (lovers) {
       return css`
         animation: ${glowingVibrantPink} 0.8s ease-in-out infinite alternate;

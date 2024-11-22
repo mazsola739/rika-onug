@@ -69,7 +69,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, title)
 
         const allPlayerTokens = getAllPlayerTokens(gamestate.players)
         const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-        const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shield)
+        const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shielded_cards)
 
         gamestate.players[token].player_history[title] = {
           ...gamestate.players[token].player_history[title],

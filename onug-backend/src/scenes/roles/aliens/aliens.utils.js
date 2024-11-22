@@ -9,12 +9,12 @@ export const findUniqueElementsInArrays = (array1, array2) => {
   return uniqueElements
 }
 
-export const getAlienPlayerNumbersByRoleIdsWithNoShield = players => {
+export const getAlienPlayerNumbersByRoleIdsWithNoShield = (players, shieldedCards) => {
   const result = []
 
   for (const token in players) {
     const player = players[token]
-    if (ALL_ALIEN.includes(player.card.player_role_id) && !player.card?.shield) {
+    if (ALL_ALIEN.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number)) {
       result.push(player.player_number)
     }
   }
@@ -35,14 +35,15 @@ export const getNeighborByPosition = (players, currentPlayerNumber, direction) =
   return players[neighborIndex]
 }
 
-export const getSelectableAnyPlayerNumbersWithNoShield = players => {
+export const getSelectableAnyPlayerNumbersWithNoShield = (players, shieldedCards) => {
   const result = []
 
-  Object.keys(players).forEach(token => {
-    if (players[token].card.shield !== true) {
-      result.push(players[token].player_number)
+  for (const token in players) {
+    const player = players[token]
+    if (!shieldedCards.includes(player.player_number)) {
+      result.push(player.player_number)
     }
-  })
+  }
 
   return result
 }
@@ -50,23 +51,17 @@ export const getSelectableAnyPlayerNumbersWithNoShield = players => {
 export const moveCards = (cards, direction, movablePlayers) => {
   const playerCards = Object.fromEntries(Object.entries(cards).filter(([key]) => key.startsWith('player_')))
   const staticCards = Object.fromEntries(Object.entries(playerCards).filter(([key]) => !movablePlayers.includes(key)))
-  const movableCards = {}
-  movablePlayers.forEach(player => {
-    movableCards[player] = playerCards[player]
-  })
+  const movableCards = movablePlayers.map(player => playerCards[player])
 
-  const shiftAmount = direction === 'right' ? 1 : Object.keys(movableCards).length - 1
+  const shiftAmount = direction === 'right' ? 1 : -1
 
-  const shiftedCards = {}
-  Object.keys(movableCards).forEach((key, index) => {
-    const newIndex = (index + shiftAmount) % Object.keys(movableCards).length
-    shiftedCards[`player_${newIndex + 2}`] = {
-      mark: cards[`player_${newIndex + 2}`].mark
-    }
-    shiftedCards[`player_${newIndex + 2}`].card = movableCards[key].card
-  })
+  const shiftedMovableCards = movablePlayers.reduce((acc, player, index) => {
+    const newIndex = (index + shiftAmount + movablePlayers.length) % movablePlayers.length
+    acc[movablePlayers[newIndex]] = movableCards[index]
+    return acc
+  }, {})
 
-  const updatedPlayerCards = { ...shiftedCards, ...staticCards }
+  const updatedPlayerCards = { ...playerCards, ...staticCards, ...shiftedMovableCards }
 
   return updatedPlayerCards
 }

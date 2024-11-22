@@ -18,7 +18,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
   //TODO if no marks only cards
   const allPlayerTokens = getAllPlayerTokens(gamestate.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shield)
+  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shielded_cards)
 
   if (selected_answer && selected_answer.length > 0) {
     if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {

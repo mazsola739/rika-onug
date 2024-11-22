@@ -5,6 +5,7 @@ export * from './role'
 //messages
 export const message_tapped = 'You got tapped by your neighbor'
 export const no_night_action = 'No such a night action, sorry'
+export const no_selectable_option = 'No selectable option, sorry'
 
 export const action_oracle_question = 'Answer the question'
 export const action_oracle_answer = 'Your answer'

@@ -7,6 +7,7 @@ export interface CardProps {
   dreamwolf?: boolean
   masons?: boolean
   aliens?: boolean
+  groobzerb?: boolean
   vampires?: boolean
   size: number
   playerName?: string
@@ -21,5 +22,6 @@ export interface StyledCardProps {
   dreamwolf: boolean
   masons: boolean
   aliens: boolean
+  groobzerb: boolean
   vampires: boolean
 }

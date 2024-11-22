@@ -10,7 +10,7 @@ export const sentinelResponse = (gamestate, token, selected_card_positions, titl
   const shieldedPlayerToken = getPlayerTokensByPlayerNumber(gamestate.players, [selected_card_positions[0]])
 
   if (shieldedPlayerToken) {
-    gamestate.shield.push(selected_card_positions[0])
+    gamestate.shielded_cards.push(selected_card_positions[0])
     gamestate.players[shieldedPlayerToken[0]].shield = true
   }
 

@@ -195,15 +195,12 @@ export const sceneHandler = async (gamestate, scene_title) => {
       newGamestate = roles.joke(newGamestate, scene_title)
       break
     case 'LEADER':
-      /* MUST */
       newGamestate = roles.leader(newGamestate, scene_title, conditions.hasDoppelganger(selected_cards))
       break
     case 'LEADER_ZERB_GROOB':
-      /* MUST */
       newGamestate = roles.leaderzerbgroob(newGamestate, scene_title)
       break
     case 'LOVERS':
-      /* MUST */
       newGamestate = roles.lovers(newGamestate, scene_title)
       break
     case 'MAD_SCIENTIST':

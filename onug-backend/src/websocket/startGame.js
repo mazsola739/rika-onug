@@ -26,7 +26,7 @@ export const startGame = async (ws, message) => {
       game_stopped: false,
       game_finished: false,
       script_locked: false,
-      actual_scenes: [
+      chapter: [
         {
           scene_title: 'START_GAME',
           scene_number: 0

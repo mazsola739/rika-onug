@@ -11,7 +11,7 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
   let action = {}
 
   if (selected_answer === 'yes') {
-    const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield(gamestate.players)
+    const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield(gamestate.players, gamestate.shielded_cards)
     const viewCards = getCardIdsByPositions(gamestate.card_positions, werewolves)
 
     if (werewolves.some(wolf => gamestate.card_positions[wolf].card.id === gamestate.players[token]?.card?.original_id)) {

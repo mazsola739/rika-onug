@@ -1,9 +1,9 @@
-import { generateRoleAction, getAnyEvenOrOddPlayers, getAnySeerPlayerNumbersByRoleIdsWithNoShield } from '../../sceneUtils'
+import { generateRoleAction, getAnyEvenOrOddPlayerNumbers, getAnySeerPlayerNumbersByRoleIdsWithNoShield } from '../../sceneUtils'
 
 export const psychicAction = (gamestate, token, title, randomPsychicInstructions, psychicKeys) => {
   const evenOrOdd = psychicKeys.replace('identifier_', '').replace('_text', '').replace('any', '')
-  const selectablePlayers = getAnyEvenOrOddPlayers(gamestate.players, evenOrOdd)
-  const selectablePlayerNumbers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(selectablePlayers)
+  const selectablePlayers = getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd)
+  const selectablePlayerNumbers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(selectablePlayers, gamestate.shielded_cards)
 
   const limit = +randomPsychicInstructions.replace('psychic_view', '').replace('_text', '')
 

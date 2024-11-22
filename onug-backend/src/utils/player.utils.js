@@ -45,14 +45,14 @@ export const getGameBoard = gamestate => {
     const playerCard = gamestate.card_positions[position].card
     if (playerCard.id > 0) {
       const card = { id: 0 }
-      const flippedCard = gamestate.flipped.find(flippedCard => flippedCard[position])
+      const flippedCard = gamestate.flippe_cards.find(flippedCard => flippedCard[position])
       if (flippedCard) {
         card.id = flippedCard[position]
       }
-      if (gamestate.artifact.includes(position)) {
+      if (gamestate.artifacted_cards.includes(position)) {
         card.artifact = true
       }
-      if (gamestate.shield.includes(position)) {
+      if (gamestate.shielded_cards.includes(position)) {
         card.shield = true
       }
 

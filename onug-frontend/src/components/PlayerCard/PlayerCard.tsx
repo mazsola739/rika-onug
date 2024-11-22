@@ -1,22 +1,25 @@
 import { Card, RoleToken, Token } from 'components'
 import { observer } from 'mobx-react-lite'
-import { GuessTokens, StyledPlayerCard, Tokens, CardContainer } from './PlayerCard.styles'
+import { CardContainer, GuessTokens, StyledPlayerCard, Tokens, PlayerName, CardHolder } from './PlayerCard.styles'
 import { PlayerCardProps } from './PlayerCard.types'
 import { usePlayerCard } from './usePlayerCard'
-import { selectionStore } from 'store'
 
 export const PlayerCard: React.FC<PlayerCardProps> = observer(({ card, cardSize = 80, tokenSize = 30, ownCard = false }) => {
-  const { playerNumberToken, markProps, isShielded, isArtifacted, isCenterCard, onCardClick, cardProps, guessTokens, hasMarks, hasSentinel, hasCurator } = usePlayerCard(card)
-
-  const isCardSelected = selectionStore.isSelectedCard(card.position || '')
-  const isMarkSelected = markProps?.tokenName && selectionStore.isSelectedMark(markProps.tokenName)
-
+  const { playerNumberToken, playerName, markProps, isShielded, isArtifacted, isCenterCard, onCardClick, cardProps, guessTokens, hasMarks, hasSentinel, hasCurator } = usePlayerCard(card, ownCard)
 
   return (
     <StyledPlayerCard ownCard={ownCard}>
-      {ownCard && <GuessTokens ownCard={ownCard} width={40}>{guessTokens && guessTokens.map(token => <RoleToken key={token.id} size={40} token={token} />)}</GuessTokens>}
+      {ownCard && (
+        <GuessTokens ownCard={ownCard} width={40}>
+          {guessTokens && guessTokens.map(token => <RoleToken key={token.id} size={40} token={token} />)}
+        </GuessTokens>
+      )}
       <CardContainer>
-        <Card {...cardProps} onClick={onCardClick} size={cardSize} />
+        <CardHolder>
+          <Card {...cardProps} onClick={onCardClick} size={cardSize} />
+          {!isCenterCard && <PlayerName>{playerName}</PlayerName>}
+        </CardHolder>
+
         {!isCenterCard && (
           <Tokens>
             <Token tokenName={playerNumberToken} size={tokenSize} />

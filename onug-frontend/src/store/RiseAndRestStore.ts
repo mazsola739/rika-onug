@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
-import { deckStore, propStore, messageStore, selectionStore } from 'store'
+import { deckStore, messageStore, propStore, selectionStore } from 'store'
 import { CardPosition, Interaction, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
-import { getCardById, getMarkById, getMarkByName } from 'utils'
+import { getCardById, getMarkByName } from 'utils'
 
 class RiseAndRestStore {
   tablePlayerCard: TablePlayerCard = {}
@@ -14,7 +14,6 @@ class RiseAndRestStore {
 
   createEmptyPlayerCard(position: CardPosition): TablePlayerCard {
     return {
-      player_name: '',
       position,
       card_name: '',
       mark: '',

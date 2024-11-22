@@ -5,5 +5,5 @@ export const StyledRoleTokenList = styled.div`
   display: flex;
   gap: 5px;
   justify-content: center;
-  padding: 10px;
+  padding: 5px;
 `
