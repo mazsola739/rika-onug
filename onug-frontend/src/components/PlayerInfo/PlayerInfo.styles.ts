@@ -3,14 +3,14 @@ import styled from '@emotion/styled'
 export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
   display: grid;
   justify-content: center;
-  gap: 5px;
+  gap: 3px;
   max-width: 48%;
 
   background-color: ${({ result }) => (result ? '#28a74580' : '#dc354580')};
   border-radius: 10px;
 
-  grid-template-columns: 80px 25px 1fr;
-  grid-template-rows: 25px 15px 15px 1fr;
+  grid-template-columns: 80px 20px 1fr;
+  grid-template-rows: 20px 15px 15px 1fr;
   grid-template-areas:
     'card number name'
     'card role role'

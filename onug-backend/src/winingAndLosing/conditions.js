@@ -80,18 +80,12 @@ export const groobAlive = (playerCard, survivors, player_number) => isGroob(play
 export const zerbAlive = (playerCard, survivors, player_number) => isZerb(playerCard) && isAnySurvivor(survivors, player_number)
 
 export const allGroobAlive = (activeCards, survivors) => {
-  console.log(survivors)
-  console.log(activeCards)
-  console.log(activeCards.filter(card => groob(card)))
-  console.log(activeCards.filter(card => groob(card)).every(card => isSurvivor(card, survivors)))
-  return activeCards.filter(card => groob(card)).every(card => isSurvivor(card, survivors))
+  const groobCards = activeCards.filter(card => groob(card))
+  return groobCards.length > 0 && groobCards.every(card => isSurvivor(card, survivors))
 }
 export const allZerbsAlive = (activeCards, survivors) => {
-  console.log(survivors)
-  console.log(activeCards)
-  console.log(activeCards.filter(card => zerb(card)))
-  console.log(activeCards.filter(card => zerb(card)).every(card => isSurvivor(card, survivors)))
-  return activeCards.filter(card => zerb(card)).every(card => isSurvivor(card, survivors))
+  const zerbCards = activeCards.filter(card => zerb(card))
+  return zerbCards.length > 0 && zerbCards.every(card => isSurvivor(card, survivors))
 }
 
 export const anyTargetDead = (activeCards, fallens) => activeCards.some(card => target(card) && isFallen(card, fallens))

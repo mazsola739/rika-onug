@@ -16,31 +16,39 @@ const combineUniqueObjects = (array1, array2) => {
   })
 }
 
-const isPlayersCardsFlipped = (flipped, playersPosition) => Object.keys(flipped).some(key => playersPosition === key)
+const isPlayersCardsFlipped = (flippedCards, playerCardId) => {
+  return flippedCards.some(obj => {
+    const key = Object.keys(obj)[0]
+    return obj[key] === playerCardId
+  })
+}
 
-const isActivePlayersCardsFlipped = (flipped, playersPosition) => flipped.some(obj => Object.keys(obj)[0] === playersPosition)
+const isActivePlayersCardsFlipped = (flippedCards, playersPosition) => flippedCards.some(obj => Object.keys(obj)[0] === playersPosition)
 
 export const updatePlayerCard = (gamestate, token) => {
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
-  const player = gamestate.players[token]
-  const flippedCards = gamestate.flipped
+  let newGamestate = { ...gamestate }
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
+  const flippedCards = newGamestate.flipped
 
-  const playerCard = player?.card
-  const currentCard = gamestate.card_positions[currentPlayerNumber].card
+  const playerCard = newGamestate.players[token].card
+  const currentCard = newGamestate.card_positions[currentPlayerNumber].card
 
   if (!playerCard || !currentCard) return
 
   const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, currentPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, currentPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, playerCard.player_card_id)
 
   if (iSeeMyCardIsFlipped) {
-    playerCard.player_card_id = currentCard.id
-    playerCard.player_role_id = currentCard.id
-    playerCard.player_role = currentCard.role
-    playerCard.player_team = currentCard.team
-  } else if (iSeeMyCardElsewhere) {
-    playerCard.player_card_id = 87
+    newGamestate.players[token].card.player_card_id = currentCard.id
+    newGamestate.players[token].card.player_role = currentCard.role
+    newGamestate.players[token].card.player_team = currentCard.team
   }
+
+  if (iSeeMyCardElsewhere) {
+    newGamestate.players[token].card.player_card_id = 87
+  }
+
+  return newGamestate
 }
 
 export const generateRoleAction = (
@@ -48,12 +56,12 @@ export const generateRoleAction = (
   token,
   { private_message, selectableCards = {}, selectableMarks = {}, showCards = [], showMarks = [], obligatory = false, scene_end = false, uniqueInformations = {} }
 ) => {
-  updatePlayerCard(gamestate, token)
-  const flippedCards = JSON.parse(JSON.stringify(gamestate.flipped))
+  let newGamestate = updatePlayerCard(gamestate, token)
+  const flippedCards = JSON.parse(JSON.stringify(newGamestate.flipped))
 
   const informations = {
-    shielded_cards: gamestate.shield,
-    artifacted_cards: getKeys(gamestate.artifact),
+    shielded_cards: newGamestate.shield,
+    artifacted_cards: getKeys(newGamestate.artifact),
     show_cards: showCards !== null ? combineUniqueObjects(showCards, flippedCards) : flippedCards,
     show_marks: showMarks,
     obligatory,

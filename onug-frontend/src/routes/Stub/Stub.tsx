@@ -4,7 +4,7 @@ import { Button, ButtonsWrapper, Container, FormContainer, Grid, InputField, Inp
 import { useStub } from './useStub'
 
 export const Stub: React.FC = observer(() => {
-  const { inputValues, response, handleInputChange, populateStub, resetStub, useTestCase } = useStub()
+  const { inputValues, response, handleInputChange, populateStub, resetStub, useTestCase1, useTestCase2, useTestCase3, useTestCase4, useTestCase5 } = useStub()
   const getRoleName = (value: number) => role_map[value] || 'Unknown'
 
   return (
@@ -37,7 +37,11 @@ export const Stub: React.FC = observer(() => {
           <ButtonsWrapper>
             <Button onClick={populateStub}>populate</Button>
             <Button onClick={resetStub}>reset</Button>
-            <Button onClick={useTestCase}>test case</Button>
+            <Button onClick={useTestCase1}>test case 1</Button>
+            <Button onClick={useTestCase2}>test case 2</Button>
+            <Button onClick={useTestCase3}>test case 3</Button>
+            <Button onClick={useTestCase4}>test case 4</Button>
+            <Button onClick={useTestCase5}>test case 5</Button>
             {/* TODO another test case button, hook, and file <Button onClick={useTestCase}>{TEST_CASE}</Button> */}
           </ButtonsWrapper>
         </FormContainer>

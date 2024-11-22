@@ -11,7 +11,7 @@ export const PlayerInfo: React.FC<PlayerInfoProps> = observer(({ card_name, mark
     player && (
       <StyledPlayerInfo result={result}>
         <CardImage image={card_name} size={80} />
-        <TokenImage image={playerNumber} size={25} />
+        <TokenImage image={playerNumber} size={20} />
         <PlayerInfoName>{player.player_name}</PlayerInfoName>
         <PlayerInfoRole>{player.player_role}</PlayerInfoRole>
         <PlayerInfoTeam>Team: {player.player_team}</PlayerInfoTeam>

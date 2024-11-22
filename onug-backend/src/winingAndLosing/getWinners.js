@@ -148,8 +148,6 @@ export const getWinners = (voteResult, gamestate, playerStates) => {
 
     // LEADER win condition
     if (isLeader(playerCard) && allGroobAlive(activeCards, survivors) && allZerbsAlive(activeCards, survivors)) {
-      console.log(survivors)
-      console.log(activeCards)
       if (!winners.includes(playerCard.position)) {
         winners.push(playerCard.position)
       }

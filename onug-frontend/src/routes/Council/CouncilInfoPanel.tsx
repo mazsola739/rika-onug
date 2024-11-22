@@ -6,6 +6,7 @@ export const CouncilInfoPanel = observer(() => {
   const { selectable_cards } = propStore
   const { player, knownPlayerCard, knownPlayerMark, knownPlayerArtifact } = playersStore
   const { end } = propStore
+  console.log(player)
 
   return (
     <InfoPanel>
