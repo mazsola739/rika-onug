@@ -1,6 +1,6 @@
 import { keyframes } from '@emotion/react'
 
-// Glowing Green - selectable, aliens, mad scientist
+// Glowing Green
 export const glowingGreen = keyframes`
   from {
     box-shadow: 0 0 5px #28a745, 0 0 8px #28a745, 0 0 10px #28a745, 0 0 0.75rem #28a745, 0 0 0.9375rem #28a745;
@@ -10,7 +10,7 @@ export const glowingGreen = keyframes`
   }
 `
 
-// Glowing Blue - masons
+// Glowing Blue
 export const glowingBlue = keyframes`
   from {
     box-shadow: 0 0 5px #007bff, 0 0 8px #007bff, 0 0 10px #007bff, 0 0 0.75rem #007bff, 0 0 0.9375rem #007bff;
@@ -30,7 +30,7 @@ export const glowingLightBlue = keyframes`
   }
 `
 
-// Glowing Purple - vampires
+// Glowing Purple
 export const glowingPurple = keyframes`
   from {
     box-shadow: 0 0 5px #7100e3, 0 0 8px #7100e3, 0 0 10px #7100e3, 0 0 0.75rem #7100e3, 0 0 0.9375rem #7100e3;
@@ -40,7 +40,7 @@ export const glowingPurple = keyframes`
   }
 `
 
-// Glowing Pink - dreamwolf, lovers
+// Glowing Pink
 export const glowingVibrantPink = keyframes`
   from {
     box-shadow: 0 0 5px #e40078, 0 0 8px #e40078, 0 0 10px #e40078, 0 0 0.75rem #e40078, 0 0 0.9375rem #e40078;
@@ -50,7 +50,7 @@ export const glowingVibrantPink = keyframes`
   }
 `
 
-// Glowing Red - werewolves
+// Glowing Red
 export const glowingRed = keyframes`
   from {
     box-shadow: 0 0 5px #8b0000, 0 0 8px #8b0000, 0 0 10px #8b0000, 0 0 0.75rem #8b0000, 0 0 0.9375rem #8b0000;

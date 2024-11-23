@@ -1,13 +1,10 @@
-import { ALIENS, DOPPELGÄNGER_EMPATH, EMPATH, VAMPIRES } from 'constant'
 import * as messages_text from 'constant/messages'
 import * as narration_text from 'constant/narrations'
 import { script } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { propStore, riseAndRestStore, selectionStore } from 'store'
-import { MessagesType, NarrationType } from 'types'
+import { MessagesType, NarrationType, RoleKeys } from 'types'
 import { formatPositionSimply } from 'utils'
-
-type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'groobzerb' | 'vampires'
 
 class MessageStore {
   narration: string = ''
@@ -62,6 +59,7 @@ class MessageStore {
 
     return true
   }
+
   get playerCardLimit() {
     return propStore.selectable_card_limit.player
   }
@@ -71,25 +69,29 @@ class MessageStore {
   get markLimit() {
     return propStore.selectable_mark_limit.mark
   }
+
   get isCardSelection() {
     return propStore.selectable_cards.length > 0
   }
+  get isAnswerOptions() {
+    return propStore.answer_options.length > 0
+  }
+
   get isSelectableCards() {
     return this.allSelectableCards.length > 0
   }
   get isSelectableMarks() {
     return this.allSelectableMarks.length > 0
   }
-  get isAnswerOptions() {
-    return propStore.answer_options.length > 0
-  }
+
   get isVoteResult() {
-    return propStore.vampireVotes //|| propStore.alienVotes || propStore.emapthVote || propStore.doppelgangerempathVote
+    return propStore.vampireVotes || propStore.alienVotes //|| propStore.emapthVote || propStore.doppelgangerempathVote
   }
-  get isCardIdentification() {
+  get isPlayerIdentification() {
     const title = propStore.title
-    return ['MINION', 'WEREWOLVES', 'MASONS', 'VAMPIRES', 'ALIENS', 'GROOB_ZERB'].includes(title)
+    return ['MINION', 'WEREWOLVES', 'MASONS', 'VAMPIRES', 'ALIENS', 'GROOB_ZERB', 'BLOB'].includes(title)
   }
+
   get allSelectableCards(): Record<string, string>[] {
     const selectablePlayerCards = riseAndRestStore.tablePlayerCards.filter(card => card.selectable_card)
     const selectableCenterCards = riseAndRestStore.tableCenterCards.filter(card => card.selectable_card)
@@ -132,31 +134,34 @@ class MessageStore {
       case 'MASONS':
         return ['masons']
       case 'ALIENS':
-        return ['aliens']
+        return ['aliens', 'cow']
       case 'GROOB_ZERB':
         return ['groobzerb']
       case 'VAMPIRES':
         return ['vampires']
+      case 'BLOB':
+        return ['part_of_blob']
       default:
         return []
     }
   }
-  get identifiedCards() {
+
+  get identifiedPlayers() {
     const roleKeys = this.getRoles()
 
     if (roleKeys.length > 0) {
-      const identifiedCards = roleKeys.flatMap((roleKey: RoleKeys) => {
-        const cards = propStore[roleKey] as string[]
+      const identifiedPlayers = roleKeys.flatMap((roleKey: RoleKeys) => {
+        const players = propStore[roleKey] as string[]
 
-        return cards.map((card: string) => ({
-          position: card,
-          name: formatPositionSimply(card)
+        return players.map((player: string) => ({
+          position: player.replace(/player_/g, ''),
+          name: roleKey.replace(/part_of_/g, '').replace(/\b\w/g, char => char.toUpperCase())
         }))
       })
 
       return {
-        roles: roleKeys,
-        cards: identifiedCards
+        roles: roleKeys.map(roleKey => roleKey.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())),
+        players: identifiedPlayers
       }
     }
     return {}

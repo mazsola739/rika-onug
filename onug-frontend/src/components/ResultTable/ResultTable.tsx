@@ -2,13 +2,13 @@ import { Title } from 'components/Title/Title'
 import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { playersStore, propStore } from 'store'
-import { Result } from 'types'
+import { ResultType } from 'types'
 import { Cell, CellHeader, Icon, Name, PlayerName, Rank, Row, StyledResultTable, VoterName, VotersCell } from './ResultTable.styles'
 
 export const ResultTable: React.FC = observer(() => {
   const { player } = playersStore
   const sortedVotes = [...propStore.voteResult].sort((a, b) => b.voters.length - a.voters.length)
-  const groupedVotes: { votes: number; players: Result[] }[] = []
+  const groupedVotes: { votes: number; players: ResultType[] }[] = []
 
   sortedVotes.forEach(player => {
     const group = groupedVotes.find(g => g.votes === player.voters.length)

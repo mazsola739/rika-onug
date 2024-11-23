@@ -9,10 +9,11 @@ import {
   getPlayerNumberWithMatchingToken,
   getSelectablePlayersWithNoShield
 } from '../../sceneUtils'
-import { getAlienPlayerNumbersByRoleIdsWithNoShield, getNeighborByPosition, moveCards } from './aliens.utils'
+import { getAlienPlayerNumbersByRoleIdsWithNoShield, getCowPlayerNumbersByRoleIds, getNeighborByPosition, moveCards } from './aliens.utils'
 
 export const aliensAction = (gamestate, token, title) => {
   const aliens = getAlienPlayerNumbersByRoleIds(gamestate.players)
+  const cow = getCowPlayerNumbersByRoleIds(gamestate.players)
   const aliensWithoutShield = getAlienPlayerNumbersByRoleIdsWithNoShield(gamestate.players, gamestate.shielded_cards)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
 
@@ -192,7 +193,7 @@ export const aliensAction = (gamestate, token, title) => {
     private_message: privateMessage,
     showCards,
     selectableCards,
-    uniqueInformations: { aliens, vote, new_alien, new_alien_helper },
+    uniqueInformations: { aliens, cow, vote, new_alien, new_alien_helper },
     obligatory,
     scene_end
   })

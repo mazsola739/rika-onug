@@ -2,7 +2,7 @@ import { ARRIVE_COUNCIL, HYDRATE_COUNCIL, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { playersStore, propStore, riseAndRestStore, voteStore, wsStore } from 'store'
-import { Interaction } from 'types'
+import { InteractionType } from 'types'
 import { splitCardsToTable } from 'utils'
 
 export const useCouncil = () => {
@@ -27,7 +27,7 @@ export const useCouncil = () => {
 
   useEffect(() => {
     if (lastJsonMessage?.type === HYDRATE_COUNCIL && lastJsonMessage?.success) {
-      propStore.setInteraction(lastJsonMessage?.action as Interaction)
+      propStore.setInteraction(lastJsonMessage?.action as InteractionType)
       playersStore.setPlayer(lastJsonMessage.player)
       playersStore.setPlayers(lastJsonMessage.players)
       riseAndRestStore.openYourEyes(lastJsonMessage)

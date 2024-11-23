@@ -6,6 +6,7 @@ export const StyledMessageBox = styled.div`
   justify-content: space-between;
   border-radius: 1.25rem;
   background-color: rgba(150, 146, 144, 0.2);
+  padding-bottom: 10px;
 `
 
 export const Narration = styled.div`
@@ -33,7 +34,7 @@ export const Message = styled.div`
 
 export const StyledMessageBoxCards = styled.div`
   display: flex;
-  gap: 3px;
+  gap: 5px;
   flex-direction: row;
   flex-wrap: wrap;
 `

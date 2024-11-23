@@ -1,25 +1,26 @@
 export const moveCardsButYourOwn = (cards, direction, currentPlayer) => {
   const playerCards = Object.fromEntries(Object.entries(cards).filter(([key]) => key.startsWith('player_')))
 
+  const currentPlayerData = playerCards[currentPlayer]
   const movableCards = { ...playerCards }
-  const currentPlayerData = movableCards[currentPlayer]
   delete movableCards[currentPlayer]
 
-  const shiftAmount = direction === 'right' ? 1 : Object.keys(movableCards).length - 1
+  const otherPlayerKeys = Object.keys(movableCards)
+  const totalPlayers = otherPlayerKeys.length
+
+  const shiftAmount = direction === 'right' ? 1 : -1
 
   const shiftedCards = {}
-  Object.keys(movableCards).forEach((key, index) => {
-    const newIndex = (index + shiftAmount) % Object.keys(movableCards).length
-    shiftedCards[`player_${newIndex + 2}`] = {
-      mark: cards[`player_${newIndex + 2}`].mark
-    }
-    shiftedCards[`player_${newIndex + 2}`].card = movableCards[key].card
+
+  otherPlayerKeys.forEach((key, index) => {
+    const newIndex = (index + shiftAmount + totalPlayers) % totalPlayers
+    const newKey = otherPlayerKeys[newIndex]
+
+    shiftedCards[newKey] = { ...movableCards[key] }
   })
 
-  const updatedPlayerCards = {
+  return {
     ...shiftedCards,
     [currentPlayer]: currentPlayerData
   }
-
-  return updatedPlayerCards
 }

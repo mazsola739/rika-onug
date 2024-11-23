@@ -1,6 +1,6 @@
-import { Player, CardJson, TokenJson, TablePlayerCard } from 'types'
+import { PlayerType, CardJson, TokenJson, TablePlayerCard } from 'types'
 
-export const default_player: Player = {
+export const default_player: PlayerType = {
   player_name: '',
   player_number: null,
   player_card_id: 0,
@@ -23,8 +23,9 @@ export const default_table_player_card: TablePlayerCard = {
   shield: false,
   werewolves: false,
   aliens: false,
+  cow: false,
   masons: false,
-  vampires: false,
+  vampires: false
 }
 
 export const default_card: CardJson = {

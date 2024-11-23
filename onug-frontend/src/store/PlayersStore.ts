@@ -1,10 +1,10 @@
 import { computed, makeAutoObservable } from 'mobx'
-import { CardJson, Player, TokenJson } from 'types'
+import { CardJson, PlayerType, TokenJson } from 'types'
 import { createDefaultPlayer, getArtifactById, getCardById, getMarkByName } from 'utils'
 
 class PlayersStore {
-  player: Player = createDefaultPlayer()
-  players: Player[] = []
+  player: PlayerType = createDefaultPlayer()
+  players: PlayerType[] = []
 
   constructor() {
     makeAutoObservable(this, {
@@ -12,11 +12,11 @@ class PlayersStore {
     })
   }
 
-  setPlayer(player: Player): void {
+  setPlayer(player: PlayerType): void {
     this.player = player
   }
 
-  setPlayers(players: Player[]): void {
+  setPlayers(players: PlayerType[]): void {
     this.players = players
   }
 

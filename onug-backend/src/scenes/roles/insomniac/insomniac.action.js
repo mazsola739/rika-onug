@@ -1,4 +1,4 @@
-import { generateRoleAction, getCardIdsByPlayerNumbers, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { generateRoleAction, getCardIdsByPositions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 
 export const insomniacAction = (gamestate, token, title) => {
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
@@ -8,7 +8,7 @@ export const insomniacAction = (gamestate, token, title) => {
     gamestate.players[token].card.player_card_id = currentCard.id
     gamestate.players[token].card.player_team = currentCard.team
 
-    const showCards = getCardIdsByPlayerNumbers(gamestate.card_positions, [currentPlayerNumber])
+    const showCards = getCardIdsByPositions(gamestate.card_positions, [currentPlayerNumber])
 
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],

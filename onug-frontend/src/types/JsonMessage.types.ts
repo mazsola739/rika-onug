@@ -1,30 +1,11 @@
 import * as narration_text from 'constant/narrations'
 
-export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
-
-export type Player = {
-  player_card_id?: number
-  player_role?: string
-  player_team?: string
-  player_name: string
-  player_number?: CardPosition
-  player_mark?: string
-  player_artifact?: number
-  flag?: boolean
-  guess_cards?: number[]
+export type ActualSceneType = {
+  scene_number: number
+  scene_title: string
 }
 
-export type CenterCard = {
-  card_position: CardPosition
-  card_id: number
-  card_role: string
-  card_team: string
-  guess_cards?: number[]
-}
-
-export type Expansion = 'Werewolf' | 'Daybreak' | 'Vampire' | 'Alien' | 'Super Villains' | 'Bonus Roles'
-
-export type CardPosition =
+export type CardPositionType =
   | 'player_1'
   | 'player_2'
   | 'player_3'
@@ -43,113 +24,124 @@ export type CardPosition =
   | 'center_right'
   | 'center_villain'
 
-export type GuessToken = {
-  image: string
-  expansion: string
-  id: number
+export type CenterCardType = {
+  card_id: number
+  card_position: CardPositionType
+  card_role: string
+  card_team: string
+  guess_cards?: number[]
 }
 
-export type GuessedCard = {
-  position: CardPosition
+export type GuessedCardType = {
   guessed_roles: number[]
+  position: CardPositionType
 }
-
-export type ActualScene = {
-  scene_number: number
-  scene_title: string
-}
-
-export type Interaction = {
-  aliens?: CardPosition[]
+export type InteractionType = {
+  aliens?: CardPositionType[]
   answer_options?: string[]
-  artifacted_cards?: CardPosition[]
-  apprenticeassassins?: CardPosition[]
-  assassins?: CardPosition[]
-  dreamwolf?: CardPosition[]
-  groobzerb?: CardPosition[]
-  lovers?: CardPosition[]
-  madscientist?: CardPosition[]
-  masons?: CardPosition[]
+  artifacted_cards?: CardPositionType[]
+  apprenticeassassins?: CardPositionType[]
+  assassins?: CardPositionType[]
+  cow?: CardPositionType[]
+  dreamwolf?: CardPositionType[]
+  groobzerb?: CardPositionType[]
+  lovers?: CardPositionType[]
+  madscientist?: CardPositionType[]
+  masons?: CardPositionType[]
   new_role_id?: number
   obligatory?: boolean
-  part_of_blob?: CardPosition[]
-  part_of_family?: CardPosition[]
+  part_of_blob?: CardPositionType[]
+  part_of_family?: CardPositionType[]
   private_message?: string[]
-  seers?: CardPosition[]
+  seers?: CardPositionType[]
   scene_end?: boolean
   selectable_card_limit?: {
     player: number
     center: number
   }
-  selectable_cards?: CardPosition[]
+  selectable_cards?: CardPositionType[]
   selectable_mark_limit?: {
     mark: number
   }
-  selectable_marks?: CardPosition[]
-  shielded_cards?: CardPosition[]
-  show_cards?: Record<CardPosition, number>[]
-  show_marks?: Record<CardPosition, string>[]
-  tanner?: CardPosition[]
-  vampires?: CardPosition[]
-  villains?: CardPosition[]
+  selectable_marks?: CardPositionType[]
+  shielded_cards?: CardPositionType[]
+  show_cards?: Record<CardPositionType, number>[]
+  show_marks?: Record<CardPositionType, string>[]
+  tanner?: CardPositionType[]
+  vampires?: CardPositionType[]
+  villains?: CardPositionType[]
   vote?: boolean
-  werewolves?: CardPosition[]
-}
-
-export type VoteType = {
-  player_1?: CardPosition[]
-  player_2?: CardPosition[]
-  player_3?: CardPosition[]
-  player_4?: CardPosition[]
-  player_5?: CardPosition[]
-  player_6?: CardPosition[]
-  player_7?: CardPosition[]
-  player_8?: CardPosition[]
-  player_9?: CardPosition[]
-  player_10?: CardPosition[]
-  player_11?: CardPosition[]
-  player_12?: CardPosition[]
-}
-
-export type Result = {
-  player_number: CardPosition
-  name: string
-  voters: CardPosition[] | []
-  win: boolean
-  survived: boolean
+  werewolves?: CardPositionType[]
 }
 
 export type NarrationType = keyof typeof narration_text
 
-export type WsJsonMessage = {
-  actual_scene?: ActualScene
+export type PlayerType = {
+  flag?: boolean
+  guess_cards?: number[]
+  player_artifact?: number
+  player_card_id?: number
+  player_mark?: string
+  player_name: string
+  player_number?: CardPositionType
+  player_role?: string
+  player_team?: string
+}
+
+export type ResultType = {
+  player_number: CardPositionType
+  name: string
+  voters: CardPositionType[] | []
+  win: boolean
+  survived: boolean
+}
+
+export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
+
+export type VoteType = {
+  player_1?: CardPositionType[]
+  player_2?: CardPositionType[]
+  player_3?: CardPositionType[]
+  player_4?: CardPositionType[]
+  player_5?: CardPositionType[]
+  player_6?: CardPositionType[]
+  player_7?: CardPositionType[]
+  player_8?: CardPositionType[]
+  player_9?: CardPositionType[]
+  player_10?: CardPositionType[]
+  player_11?: CardPositionType[]
+  player_12?: CardPositionType[]
+}
+
+export type WsJsonMessageType = {
+  actual_scene?: ActualSceneType
   alien_votes?: VoteType
-  artifacted_cards?: CardPosition[]
-  center_cards?: CenterCard[]
+  artifacted_cards?: CardPositionType[]
+  center_cards?: CenterCardType[]
   day_mode?: boolean
   errors?: string[]
   guess_cards?: number[]
-  guessed_cards?: GuessedCard[]
-  action?: Interaction
+  guessed_cards?: GuessedCardType[]
+  action?: InteractionType
   loser_teams?: string[]
   message?: string
   narration?: NarrationType[]
   narrations?: Record<string, NarrationType[]>[]
   night_mode?: boolean
   path?: string
-  player?: Player
-  players?: Player[]
+  player?: PlayerType
+  players?: PlayerType[]
   room_id?: string
   scene_end?: boolean
   selectable_card_limit?: {
     player: number
     center: number
   }
-  selectable_cards?: CardPosition[]
+  selectable_cards?: CardPositionType[]
   selected_cards?: number[]
   selected_expansions?: string[]
-  shielded_cards?: CardPosition[]
-  show_cards?: Record<CardPosition, number>[]
+  shielded_cards?: CardPositionType[]
+  show_cards?: Record<CardPositionType, number>[]
   stage?: string
   success?: boolean
   title?: string
@@ -157,6 +149,6 @@ export type WsJsonMessage = {
   type?: string
   update?: boolean
   vampire_votes?: VoteType
-  vote_result?: Result[]
+  vote_result?: ResultType[]
   winner_teams?: string[]
 }

@@ -1,7 +1,7 @@
-import { Player, VoteType } from 'types'
+import { PlayerType, VoteType } from 'types'
 
 export interface ReadyListProps {
-  players: Player[]
+  players: PlayerType[]
 }
 
 export interface ReadyType {
@@ -13,9 +13,8 @@ export interface MessageBoxProps {
   marks?: Record<string, string>[]
 }
 
-export interface MessageBoxProps {
-  cards?: Record<string, string>[]
-  marks?: Record<string, string>[]
+export interface MessageTokensProps {
+  players?: Record<string, string>[]
 }
 
 export interface AnswersProps {
@@ -38,6 +37,5 @@ export interface SelectableProps {
 
 export interface LookProps {
   roles: string[]
-  cards?: Record<string, string>[]
-  marks?: Record<string, string>[]
+  players?: Record<string, string>[]
 }

@@ -11,6 +11,8 @@ const isPlayersCardsFlipped = (flippedCards, playerCardId) => {
 
 const isActivePlayersCardsFlipped = (flippedCards, playersPosition) => flippedCards.some(obj => Object.keys(obj)[0] === playersPosition)
 
+//TODO groob team and zerb team if alone - then alien
+
 export const updatePlayer = (gamestate, token) => {
   let newGamestate = { ...gamestate }
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)

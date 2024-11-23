@@ -5,7 +5,7 @@ import { PlayerCardProps } from './PlayerCard.types'
 import { usePlayerCard } from './usePlayerCard'
 
 export const PlayerCard: React.FC<PlayerCardProps> = observer(({ card, cardSize = 80, tokenSize = 30, ownCard = false }) => {
-  const { playerNumberToken, playerName, markProps, isShielded, isArtifacted, isCenterCard, onCardClick, cardProps, guessTokens, hasMarks, hasSentinel, hasCurator } = usePlayerCard(card, ownCard)
+  const { playerNumberToken, playerName, markProps,playerNumberProps, isShielded, isArtifacted, isCenterCard, cardProps, guessTokens, hasMarks, hasSentinel, hasCurator } = usePlayerCard(card, ownCard)
 
   return (
     <StyledPlayerCard ownCard={ownCard}>
@@ -16,13 +16,13 @@ export const PlayerCard: React.FC<PlayerCardProps> = observer(({ card, cardSize 
       )}
       <CardContainer>
         <CardHolder>
-          <Card {...cardProps} onClick={onCardClick} size={cardSize} />
+          <Card {...cardProps} size={cardSize} />
           {!isCenterCard && <PlayerName>{playerName}</PlayerName>}
         </CardHolder>
 
         {!isCenterCard && (
           <Tokens>
-            <Token tokenName={playerNumberToken} size={tokenSize} />
+            <Token tokenName={playerNumberToken} size={tokenSize}  {...playerNumberProps} />
             {hasMarks && <Token size={tokenSize} {...markProps} />}
             {isShielded && hasSentinel && <Token tokenName="shield" size={tokenSize} />}
             {isArtifacted && hasCurator && <Token tokenName="artifact_back" size={tokenSize} />}

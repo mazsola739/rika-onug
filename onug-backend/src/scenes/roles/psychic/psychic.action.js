@@ -1,25 +1,29 @@
-import { generateRoleAction, getAnyEvenOrOddPlayerNumbers, getAnySeerPlayerNumbersByRoleIdsWithNoShield } from '../../sceneUtils'
+import { generateRoleAction, getAnyEvenOrOddPlayerNumbers } from '../../sceneUtils'
 
-export const psychicAction = (gamestate, token, title, randomPsychicInstructions, psychicKeys) => {
-  const evenOrOdd = psychicKeys.replace('identifier_', '').replace('_text', '').replace('any', '')
+export const psychicAction = (gamestate, token, title) => {
+  const randomPsychicInstruction = gamestate.psychic.instruction
+  const psychicKey = gamestate.psychic.key
+  const evenOrOdd = psychicKey.replace('identifier_', '').replace('_text', '').replace('any', '')
   const selectablePlayers = getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd)
-  const selectablePlayerNumbers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(selectablePlayers, gamestate.shielded_cards)
+  let limit = +randomPsychicInstruction.replace('psychic_view', '').replace('_text', '')
 
-  const limit = +randomPsychicInstructions.replace('psychic_view', '').replace('_text', '')
-
+  if (selectablePlayers.length === 1) {
+    limit = 1
+  }
+  
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    selectable_cards: selectablePlayerNumbers,
+    selectable_cards: selectablePlayers,
     selectable_card_limit: { player: limit, center: 0 },
-    scene_end: selectablePlayerNumbers.length === 0
+    scene_end: selectablePlayers.length === 0
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: [selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : limit === 1 ? 'action_may_one_any_other' : 'action_may_two_any'],
+    private_message: [selectablePlayers.length === 0 ? 'action_no_selectable_player' : limit === 1 ? 'action_may_one_any_other' : 'action_may_two_any'],
     selectableCards: {
-      selectable_cards: selectablePlayerNumbers,
+      selectable_cards: selectablePlayers,
       selectable_card_limit: { player: limit, center: 0 }
     },
-    scene_end: selectablePlayerNumbers.length === 0
+    scene_end: selectablePlayers.length === 0
   })
 }

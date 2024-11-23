@@ -3,12 +3,6 @@ export interface CardProps {
   onClick?: () => void
   isSelectable?: boolean
   isSelected?: boolean
-  werewolf?: boolean
-  dreamwolf?: boolean
-  masons?: boolean
-  aliens?: boolean
-  groobzerb?: boolean
-  vampires?: boolean
   size: number
   playerName?: string
 }
@@ -18,10 +12,4 @@ export interface StyledCardProps {
   sizeH?: number
   isSelectable: boolean
   isSelected: boolean
-  werewolf: boolean
-  dreamwolf: boolean
-  masons: boolean
-  aliens: boolean
-  groobzerb: boolean
-  vampires: boolean
 }

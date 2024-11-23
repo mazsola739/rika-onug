@@ -1,12 +1,12 @@
 import { TEAM } from 'constant'
 import { makeAutoObservable } from 'mobx'
 import { deckStore } from 'store'
-import { CardJson, Expansion, Player, WsJsonMessage } from 'types'
+import { CardJson, ExpansionType, PlayerType, WsJsonMessageType } from 'types'
 import { createDefaultCard, getCardById, getOrderedTeams, getFilteredCardsForTeam as getSortedCardsByTeam } from 'utils'
 
 class RoomStore {
   detailedCardInfo: CardJson = createDefaultCard()
-  roomPlayers: Player[] = []
+  roomPlayers: PlayerType[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -50,13 +50,13 @@ class RoomStore {
     this.detailedCardInfo = newCardInfo || createDefaultCard()
   }
 
-  setRoomPlayers(players: Player[]): void {
+  setRoomPlayers(players: PlayerType[]): void {
     this.roomPlayers = players
   }
 
-  equipRoom(lastJsonMessage: WsJsonMessage): void {
+  equipRoom(lastJsonMessage: WsJsonMessageType): void {
     deckStore.setSelectedCard(lastJsonMessage.selected_cards)
-    deckStore.setSelectedExpansions(lastJsonMessage.selected_expansions as Expansion[])
+    deckStore.setSelectedExpansions(lastJsonMessage.selected_expansions as ExpansionType[])
     this.setRoomPlayers(lastJsonMessage.players)
   }
 

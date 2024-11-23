@@ -1,11 +1,11 @@
 import { default_card, default_player, default_table_player_card, default_token, TEAMS } from 'constant'
 import { artifacts, cards, marks } from 'data'
 import { deckStore } from 'store'
-import { CardJson, Player, TablePlayerCard, TeamsType, TokenJson } from 'types'
+import { CardJson, PlayerType, TablePlayerCard, TeamsType, TokenJson } from 'types'
 
 export const createDefaultCard = (): CardJson => default_card
 export const createDefaultToken = (): TokenJson => default_token
-export const createDefaultPlayer = (): Player => default_player
+export const createDefaultPlayer = (): PlayerType => default_player
 export const createDefaultTablePlayerCard = (): TablePlayerCard => default_table_player_card
 
 export const determineTotalPlayers = (totalCharacters: number): number => {

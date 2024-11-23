@@ -1,12 +1,33 @@
 import * as messages_text from 'constant/messages'
 import * as identifier from 'constant/narrations/identifier'
-import { CardPosition } from './JsonMessage.types'
+import { CardPositionType } from './JsonMessage.types'
+
+export type GuessTokenType = {
+  expansion: string
+  id: number
+  image: string
+}
+
+export type IdentifierType = keyof typeof identifier
+
+export type MessagesType = keyof typeof messages_text
 
 export type RoomType = {
+  players: string[]
   room_id: string
   room_name: string
   selectedCards: number[]
-  players: string[]
+}
+
+export type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'cow' | 'groobzerb' | 'vampires' | 'part_of_blob'
+
+export type TableCenterCard = {
+  card_name?: string
+  position?: CardPositionType
+  role?: string
+  selectable_card?: boolean
+  selected_card?: boolean
+  team?: string
 }
 
 export type TablePlayerCard = {
@@ -15,6 +36,7 @@ export type TablePlayerCard = {
   apprenticeassassins?: boolean
   assassins?: boolean
   card_name?: string
+  cow?: boolean
   dreamwolf?: boolean
   groobzerb?: boolean
   lovers?: boolean
@@ -24,7 +46,7 @@ export type TablePlayerCard = {
   part_of_blob?: boolean
   part_of_family?: boolean
   player_name?: string
-  position?: CardPosition
+  position?: CardPositionType
   role?: string
   seers?: boolean
   selectable_card?: boolean
@@ -38,16 +60,3 @@ export type TablePlayerCard = {
   villains?: boolean
   werewolves?: boolean
 }
-
-export type TableCenterCard = {
-  card_name?: string
-  position?: CardPosition
-  role?: string
-  selectable_card?: boolean
-  selected_card?: boolean
-  team?: string
-}
-
-export type MessagesType = keyof typeof messages_text
-
-export type IdentifierType = keyof typeof identifier

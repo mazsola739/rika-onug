@@ -18,7 +18,7 @@ import {
   StyledSelectable,
   StyledVoteResult
 } from './MessageBox.styles'
-import { AnswersProps, LookProps, MessageBoxProps, SelectableProps, VoteProps, VoteResultProps } from './MessageBox.types'
+import { AnswersProps, LookProps, MessageBoxProps, MessageTokensProps, SelectableProps, VoteProps, VoteResultProps } from './MessageBox.types'
 
 const SelectableCards: React.FC<SelectableProps> = observer(({ selectableCards, selected }) => {
   return (
@@ -42,21 +42,25 @@ const SelectableMarks: React.FC<SelectableProps> = observer(({ selectableMarks, 
   )
 })
 
-const LookCards: React.FC<LookProps> = observer(({ roles, cards }) => {
+const Look: React.FC<LookProps> = observer(({ roles, players }) => {
   return (
     <StyledSelectable>
       <Title title={roles.join(', ')} />
-      <MessageBoxCards cards={cards} />
+      <MessageBoxTokens players={players} />
     </StyledSelectable>
   )
 })
 
-const LookMarks: React.FC<LookProps> = observer(({ roles, marks }) => {
+const MessageBoxTokens: React.FC<MessageTokensProps> = observer(({ players }) => {
   return (
-    <StyledSelectable>
-      <Title title={roles.join(', ')} />
-      <MessageBoxMarks marks={marks} />
-    </StyledSelectable>
+    <StyledMessageBoxCards>
+      {players.map((player, index) => (
+        <MessageBoxItem key={index}>
+          <TokenImage image={player.position} size={40} />
+          <ItemPosition>{player.name}</ItemPosition>
+        </MessageBoxItem>
+      ))}
+    </StyledMessageBoxCards>
   )
 })
 
@@ -87,7 +91,7 @@ const MessageBoxMarks: React.FC<MessageBoxProps> = observer(({ marks }) => {
       {marks.map((mark, index) => (
         <MessageBoxItem key={index}>
           <ItemPosition>{mark.name}</ItemPosition>
-          <TokenImage image="mark_back" onClick={() => onMarkClick(mark.position)} size={40} />
+          <TokenImage image="mark_back" onClick={() => onMarkClick(mark.position)} size={35} />
         </MessageBoxItem>
       ))}
     </StyledMessageBoxCards>
@@ -141,7 +145,7 @@ const VoteResult: React.FC<VoteResultProps> = observer(({ votes }) => {
 
 export const MessageBox: React.FC = observer(() => {
   const { handleCardInteraction, handleMarkInteraction, handleFinish, handleSkip, handleAnswerInteraction, handleVote } = useClickHandler()
-  const { narration, privateMessage, narrationImage, disabledCards, disabledMarks, isSelectableCards, isSelectableMarks, isCardIdentification, identifiedCards, isAnswerOptions, isVoteResult } =
+  const { narration, privateMessage, narrationImage, disabledCards, disabledMarks, isSelectableCards, isSelectableMarks, isPlayerIdentification, identifiedPlayers, isAnswerOptions, isVoteResult } =
     messageStore
   const { obligatory, scene_end, title, answer_options, vampireVotes, alienVotes, isVote } = propStore
   const { selectedCards, selectedMarks, selectedAnswer } = selectionStore
@@ -156,7 +160,7 @@ export const MessageBox: React.FC = observer(() => {
       </Narration>
       <Message>
         <MessageText>{privateMessage}</MessageText>
-        {isCardIdentification && <LookCards roles={identifiedCards.roles} cards={identifiedCards.cards} />}
+        {isPlayerIdentification && <Look roles={identifiedPlayers.roles} players={identifiedPlayers.players} />}
 
         {isSelectableCards && <SelectableCards selectableCards={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />}
         {!scene_end && isSelectableCards && (
@@ -185,6 +189,7 @@ export const MessageBox: React.FC = observer(() => {
         {isAnswerOptions && <Answer answer_options={answer_options} />}
         {!scene_end && isAnswerOptions && (
           <ButtonGroup>
+            <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
             <Button onClick={() => handleAnswerInteraction(selectedAnswer, title)} disabled={selectedAnswer.length === 0} buttonText={BUTTONS.done_label} variant="green" />
           </ButtonGroup>
         )}

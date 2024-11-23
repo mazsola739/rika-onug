@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPlayerNumbers, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
@@ -20,7 +20,7 @@ export const robberResponse = (gamestate, token, selected_card_positions, title)
   gamestate.players[token].card.player_card_id = gamestate.card_positions[currentPlayerNumber].card.id
   gamestate.players[token].card.player_team = gamestate.card_positions[currentPlayerNumber].card.team
 
-  const showCards = getCardIdsByPlayerNumbers(gamestate.card_positions, [currentPlayerNumber])
+  const showCards = getCardIdsByPositions(gamestate.card_positions, [currentPlayerNumber])
 
   gamestate.players[token].card_or_mark_action = true
 

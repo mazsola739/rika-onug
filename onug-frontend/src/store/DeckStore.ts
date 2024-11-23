@@ -9,9 +9,11 @@ class DeckStore {
   deck: CardJson[] = cards
   marks: TokenJson[] = marks
   artifacts: TokenJson[] = artifacts
+
   selectedCards: CardJson[] = []
   selectedMarks: TokenJson[] = []
   selectedExpansions: Expansion[] = ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles']
+
   playerCard: CardJson = createDefaultCard()
   playerMark: TokenJson = createDefaultToken()
   playerArtifact: TokenJson = createDefaultToken()
@@ -51,14 +53,24 @@ class DeckStore {
   get totalPlayers(): number {
     return determineTotalPlayers(this.totalCharacters)
   }
+
   get hasAlphawolf() {
     return checkCardPresence(this.selectedCards, 17)
   }
   get hasTemptress() {
     return checkCardPresence(this.selectedCards, 69)
   }
+
   get hasCurator() {
     return checkCardPresence(this.selectedCards, 20)
+  }
+
+  get hasSentinel() {
+    return checkCardPresence(this.selectedCards, 25)
+  }
+
+  get hasMarks() {
+    return areAnyCardSelectedById(this.selectedCards, HAS_MARK_IDS)
   }
   get hasVampire() {
     return areAnyCardSelectedById(this.selectedCards, VAMPIRE_IDS)
@@ -79,16 +91,10 @@ class DeckStore {
     return checkCardPresence(this.selectedCards, 34)
   }
   get hasPriest() {
-    return checkCardPresence(this.selectedCards, 34)
+    return checkCardPresence(this.selectedCards, 37)
   }
   get hasAssassin() {
     return areAnyCardSelectedById(this.selectedCards, ASSASSIN_IDS)
-  }
-  get hasSentinel() {
-    return checkCardPresence(this.selectedCards, 25)
-  }
-  get hasMarks() {
-    return areAnyCardSelectedById(this.selectedCards, HAS_MARK_IDS)
   }
 
   updateSelectedMarks(): void {
@@ -99,7 +105,7 @@ class DeckStore {
       mark_of_disease: this.hasDiseased,
       mark_of_love: this.hasCupid,
       mark_of_traitor: this.hasInstigator,
-      mark_of_clarity: checkCardPresence(this.selectedCards, 37) || this.hasMarks,
+      mark_of_clarity: this.hasPriest || this.hasMarks,
       mark_of_assassin: this.hasAssassin
     }
 

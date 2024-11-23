@@ -1,9 +1,9 @@
 import { makeAutoObservable } from 'mobx'
-import { SendJsonMessageType, WsJsonMessage } from 'types'
+import { SendJsonMessageType, WsJsonMessageType } from 'types'
 
 class WsStore {
   sendJsonMessage: SendJsonMessageType<unknown> | null = null
-  lastJsonMessage: WsJsonMessage = {}
+  lastJsonMessage: WsJsonMessageType = {}
 
   constructor() {
     makeAutoObservable(this)
@@ -13,7 +13,7 @@ class WsStore {
     this.sendJsonMessage = sendJsonMessage
   }
 
-  setLastJsonMessage(lastJsonMessage: WsJsonMessage): void {
+  setLastJsonMessage(lastJsonMessage: WsJsonMessageType): void {
     this.lastJsonMessage = lastJsonMessage
   }
 

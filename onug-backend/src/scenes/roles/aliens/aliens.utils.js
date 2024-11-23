@@ -1,5 +1,19 @@
 import { ALL_ALIEN } from '../../../constants'
 
+export const getCowPlayerNumbersByRoleIds = players => {
+  const result = []
+
+  for (const token in players) {
+    const player = players[token]
+    if (players[token].card.player_role_id === 45) {
+      result.push(player.player_number)
+    }
+  }
+
+  return result
+}
+
+
 export const findUniqueElementsInArrays = (array1, array2) => {
   const set = new Set(array1)
   const uniqueFromArray2 = array2.filter(item => !set.has(item))
@@ -55,7 +69,7 @@ export const moveCards = (cards, direction, movablePlayers) => {
 
   const shiftAmount = direction === 'right' ? 1 : -1
 
-  const shiftedMovableCards = movablePlayers.reduce((acc, player, index) => {
+  const shiftedMovableCards = movablePlayers.reduce((acc, _player, index) => {
     const newIndex = (index + shiftAmount + movablePlayers.length) % movablePlayers.length
     acc[movablePlayers[newIndex]] = movableCards[index]
     return acc

@@ -5,22 +5,19 @@ import { psychicAction } from './psychic.action'
 
 export const psychic = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const total_players = gamestate.total_players
+  const narration = [`${prefix}_kickoff_text`]
+  const randomPsychicInstruction = getRandomItemFromArray(randomPsychicInstructions)
+  const psychicKey = getRandomItemFromArray(psychicKeys)
 
-  let availablePsychicOptions = []
-
-  if (total_players === 3) {
-    availablePsychicOptions = randomPsychicInstructions.filter(option => !option.includes('view2'))
-  }
-  //todo better narration and save into constants
-  /*   gamestate.bodysnatcher = {
+  gamestate.psychic = {
     instruction: '',
     key: '',
   }
-  gamestate.bodysnatcher.instruction = randomAlienInstruction
-  gamestate.bodysnatcher.key = alienKey */
 
-  const narration = [`${prefix}_kickoff_text`, getRandomItemFromArray(availablePsychicOptions), getRandomItemFromArray(psychicKeys)]
+  gamestate.psychic.instruction = randomPsychicInstruction
+  gamestate.psychic.key = psychicKey
+
+  narration.push(...[randomPsychicInstruction, psychicKey])
 
   tokens.forEach(token => {
     let action = {}
@@ -30,11 +27,11 @@ export const psychic = (gamestate, title, prefix) => {
     if (prefix === 'psychic' && isActivePlayer(card).PSYCHIC) {
       gamestate.players[token].action_finished = false
 
-      action = psychicAction(gamestate, token, title, randomPsychicInstructions, psychicKeys)
+      action = psychicAction(gamestate, token, title)
     } else if (prefix === 'doppelganger_psychic' && isActivePlayer(card).DOPPELGÄNGER_PSYCHIC) {
       gamestate.players[token].action_finished = false
 
-      action = psychicAction(gamestate, token, title, randomPsychicInstructions, psychicKeys)
+      action = psychicAction(gamestate, token, title)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

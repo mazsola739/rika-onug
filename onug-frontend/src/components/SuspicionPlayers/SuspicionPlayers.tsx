@@ -3,21 +3,21 @@ import { BUTTONS } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { messageStore, selectionStore } from 'store'
-import { AccusedCards } from './AccusedCards'
-import { StyledSuspicionCards } from './SuspicionCards.styles'
+import { AccusedPlayers } from './AccusedPlayers'
+import { StyledSuspicionPlayers } from './SuspicionPlayers.styles'
 
-export const SuspicionCards: React.FC = observer(() => {
+export const SuspicionPlayers: React.FC = observer(() => {
   const { handleAccuse } = useClickHandler()
   const { selectedCards } = selectionStore
   const { disabledCards: disabled } = messageStore
   //TODO ℹ️ 🛈 ⓘ ❓tooltipp: you cant vote yourself
   return (
-    <StyledSuspicionCards>
+    <StyledSuspicionPlayers>
       <Title title={'YOUR PRIME SUSPECT!'} />
-      <AccusedCards />
+      <AccusedPlayers />
       <ButtonGroup>
         <Button onClick={() => handleAccuse(selectedCards)} variant="green" buttonText={BUTTONS.done_label} disabled={disabled} />
       </ButtonGroup>
-    </StyledSuspicionCards>
+    </StyledSuspicionPlayers>
   )
 })

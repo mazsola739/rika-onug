@@ -32,8 +32,8 @@ export const rascal = (gamestate, title, prefix) => {
     instruction: '',
     key: ''
   }
-  gamestate.oracle.instruction = randomRascalInstruction
-  gamestate.oracle.key = rascalKey
+  gamestate.rascal.instruction = randomRascalInstruction
+  gamestate.rascal.key = rascalKey
 
   tokens.forEach(token => {
     let action = {}

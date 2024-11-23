@@ -19,7 +19,7 @@ export const Row = styled.div<{ isHeader?: boolean }>`
 `
 
 export const Cell = styled.div<{ isFixedWidth?: boolean; isMaxWidth?: boolean; isFixedHeight?: boolean }>`
-  flex: ${({ isFixedWidth, isMaxWidth }) => (isFixedWidth ? '0 0 50px' : isMaxWidth ? '0 0 200px' : '1')};
+  flex: ${({ isFixedWidth, isMaxWidth }) => (isFixedWidth ? '0 0 50px' : isMaxWidth ? '0 0 150px' : '1')};
   height: ${({ isFixedHeight }) => (isFixedHeight ? '1.875rem' : '50px')};
   border: 0.0625rem solid white;
   overflow: hidden;
@@ -44,7 +44,7 @@ export const VotersCell = styled(Cell)`
 
 export const PlayerName = styled.div`
   display: grid;
-  grid-template-columns: 50px 150px;
+  grid-template-columns: 50px 100px;
   grid-template-areas: 'icon name';
   align-items: center;
   justify-items: start;

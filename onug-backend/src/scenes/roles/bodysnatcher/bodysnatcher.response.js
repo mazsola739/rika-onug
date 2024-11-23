@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPlayerNumbers, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
@@ -23,7 +23,7 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
   gamestate.players[token].card.player_team = gamestate.card_positions[currentPlayerNumber].card.team
   gamestate.players[token].card.player_role = gamestate.card_positions[currentPlayerNumber].card.role
 
-  const showCards = getCardIdsByPlayerNumbers(gamestate.card_positions, [currentPlayerNumber])
+  const showCards = getCardIdsByPositions(gamestate.card_positions, [currentPlayerNumber])
 
   gamestate.players[token].card_or_mark_action = true
 

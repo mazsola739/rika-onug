@@ -1,15 +1,6 @@
-export type TeamsType = {
-  village: number
-  hero: number
-  own: number
-  werewolf: number
-  vampire: number
-  alien: number
-  villain: number
-}
+export type Expansion = 'Werewolf' | 'Daybreak' | 'Vampire' | 'Alien' | 'Super Villains' | 'Bonus Roles'
 
-export type ExpansionsType = {
-  [key: string]: string
+export type ExpansionType = {
   werewolf: 'Werewolf'
   daybreak: 'Daybreak'
   vampire: 'Vampire'
@@ -18,33 +9,8 @@ export type ExpansionsType = {
   bonusroles: 'Bonus Roles'
 }
 
-export type TeamNames = {
-  werewolf: string
-  vampire: string
-  alien: string
-  villain: string
-  villager: string
-  hero: string
-  synthetic: string
-  tanner: string
-  assassin: string
-  apprenticeassassin: string
-  blob: string
-  mortician: string
-  nostradamus: string
-  mad: string
-  family: string
-  traitor: string
-}
-
-export type WakeType = {
-  day: 'day'
-  twilight: 'twilight'
-  dusk: 'dusk'
-  night: 'night'
-}
-
-export type ExpansionType = {
+export type ExpansionsType = {
+  [key: string]: string
   werewolf: 'Werewolf'
   daybreak: 'Daybreak'
   vampire: 'Vampire'
@@ -61,4 +27,40 @@ export type TeamType = {
   vampire: 'vampire'
   alien: 'alien'
   villain: 'villain'
+}
+
+export type TeamNames = {
+  alien: string
+  apprenticeassassin: string
+  assassin: string
+  blob: string
+  family: string
+  hero: string
+  mad: string
+  mortician: string
+  nostradamus: string
+  synthetic: string
+  tanner: string
+  traitor: string
+  vampire: string
+  villager: string
+  villain: string
+  werewolf: string
+}
+
+export type TeamsType = {
+  village: number
+  hero: number
+  own: number
+  werewolf: number
+  vampire: number
+  alien: number
+  villain: number
+}
+
+export type WakeType = {
+  day: 'day'
+  twilight: 'twilight'
+  dusk: 'dusk'
+  night: 'night'
 }

@@ -1,4 +1,4 @@
-export const randomRascalInstructions = ['rascal_idiot_text', 'rascal_troublemaker_text', 'rascal_witch_text', 'rascal_drunk_text', 'rascal_robber_text']
+export const randomRascalInstructions = ['rascal_idiot_text' /* 'rascal_troublemaker_text', 'rascal_witch_text', 'rascal_drunk_text', 'rascal_robber_text' */]
 
 export const rascalAnyOneKeys = [
   'identifier_higher_text',

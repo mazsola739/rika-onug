@@ -13,17 +13,20 @@ export const psychicResponse = (gamestate, token, selected_card_positions, title
   if (showCards.some(card => gamestate.players[token].card.player_original_id === card.id)) {
     gamestate.players[token].card.player_card_id = 87
   }
+  const viewCards = showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0]
 
   gamestate.players[token].card_or_mark_action = true
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0]
+    viewed_cards: viewCards,
+    scene_end: true
   }
 
   const action = generateRoleAction(gamestate, token, {
     private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
-    showCards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0]
+    showCards,
+    scene_end: true
   })
 
   const narration = getNarrationByTitle(title, gamestate.narration)

@@ -7,10 +7,10 @@ export const VerdictInfoPanel: React.FC = observer(() => {
 
   return (
     <InfoPanel>
-      {knownPlayerCard && <OwnCard player={player} card={knownPlayerCard} mark={knownPlayerMark} artifact={knownPlayerArtifact} title={'The card last known to be yours'} />}
-      <Title title={'Center cards'} />
+      {knownPlayerCard && <OwnCard player={player} card={knownPlayerCard} mark={knownPlayerMark} artifact={knownPlayerArtifact} title={'THE CARD LAST KNOWN TO BE YOURS...'} />}
+      <Title title={'CENTER CARDS'} />
       <CenterCardsRevealed />
-      <Title title={'Players'} />
+      <Title title={'PLAYER CARDS'} />
       <PlayerInfoList />
     </InfoPanel>
   )

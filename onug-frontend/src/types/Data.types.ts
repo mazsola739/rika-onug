@@ -8,24 +8,15 @@ export type CardJson = {
   rules: string
 }
 
-export type TokenJson = {
-  id: number
-  expansion: string
-  token_name: string
-  rules: string
-}
-
 export type ScriptJson = {
   scene_title: string
   scene_img: string
   scene_number: number
 }
 
-type ConditionFunction = (selectedCards: CardJson[]) => boolean
-
-export type OrderJson = {
-  scene_title: string
-  card_id: number[]
-  scene_number: number
-  condition?: ConditionFunction
+export type TokenJson = {
+  id: number
+  expansion: string
+  token_name: string
+  rules: string
 }

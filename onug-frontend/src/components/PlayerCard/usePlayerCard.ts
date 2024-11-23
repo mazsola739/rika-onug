@@ -1,6 +1,6 @@
 import { selectionStore, deckStore } from 'store'
 import { voteStore } from 'store/VoteStore'
-import { TablePlayerCard, CardPosition } from 'types'
+import { TablePlayerCard, CardPositionType } from 'types'
 import { getCardImageSrc, getPlayerNumberToken } from './PlayerCards.utils'
 
 export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
@@ -8,7 +8,7 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
 
   const onCardClick = () => {
     if (voteStore.isGuessing) {
-      voteStore.selectGuessCardPosition(position as CardPosition)
+      voteStore.selectGuessCardPosition(position as CardPositionType)
     }
     if (isSelectableCard) selectionStore.toggleCardSelection(position)
   }
@@ -32,6 +32,9 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
   const isLovers = card?.lovers
   const isVampire = card?.vampires
   const isAlien = card?.aliens
+  const isCow = card?.cow
+  const isPartOfBlob = card?.part_of_blob
+  const isPartOfFamily = card?.part_of_family
 
   const isSelectableCard = card?.selectable_card
   const isSelectableMark = card?.selectable_mark
@@ -43,7 +46,7 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
   const hasSentinel = deckStore.hasSentinel
   const hasCurator = deckStore.hasCurator
 
-  /* ⚡-villains, 🦇-vampire, 🛸-alien, 🐺-wolf,💤-dreamwolf, 👽-groob zerb, 🩷-lover, ⚒️-masons, 🗡️-assassin, 🧪-mad, 🦠-blob, 🩵-family, 👁️ -seer, 🪢-tanner, */
+  /* ⚡-villains, 🦇-vampire, 🛸-alien, 🐺-wolf,💤-dreamwolf, 👽-groob zerb, 🩷-lover, ⚒️-masons, 🗡️-assassin, 🧪-mad, 🦠-blob, 🩵-family, 👁️ -seer, 🪢-tanner, 🐄 - cow*/
   const roles = []
   if (isWerewolf) roles.push('🐺')
   if (isDreamwolf) roles.push('💤')
@@ -51,7 +54,10 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
   if (isLovers) roles.push('🩷')
   if (isVampire) roles.push('🦇')
   if (isAlien) roles.push('🛸')
+  if (isCow) roles.push('🐄')
   if (isGroobzerb) roles.push('👽')
+  if (isPartOfBlob) roles.push('🦠')
+  if (isPartOfFamily) roles.push('🩵')
 
   if (ownCard) {
     playerName = 'You'
@@ -63,20 +69,27 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
     image,
     isSelectable: isSelectableCard,
     isSelected: isCardSelected,
-    werewolf: isWerewolf,
-    dreamwolf: isDreamwolf,
-    masons: isMason,
-    vampires: isVampire,
-    aliens: isAlien,
-    groobzerb: isGroobzerb,
+    onClick: onCardClick
   }
 
   const markProps = {
     tokenName: markName,
     isSelectable: isSelectableMark,
     isSelected: isMarkSelected,
-    lovers: isLovers,
     onClick: onMarkClick
+  }
+
+  const playerNumberProps = {
+    lovers: isLovers,
+    werewolf: isWerewolf,
+    dreamwolf: isDreamwolf,
+    masons: isMason,
+    vampires: isVampire,
+    aliens: isAlien,
+    cow: isCow,
+    groobzerb: isGroobzerb,
+    part_of_blob: isPartOfBlob,
+    part_of_family: isPartOfFamily
   }
 
   return {
@@ -86,12 +99,12 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
     isCenterCard,
     cardProps,
     markProps,
+    playerNumberProps,
     isShielded,
     isArtifacted,
-    onCardClick,
     guessTokens,
     hasMarks,
     hasSentinel,
-    hasCurator,
+    hasCurator
   }
 }

@@ -90,7 +90,7 @@ export const responseHandler = async (gamestate, token, selected_card_positions,
       newGamestate = roles.psychicResponse(gamestate, token, selected_card_positions, scene_title)
       break
     case 'DOPPELGÄNGER_RASCAL':
-      newGamestate = roles.rascalResponse(gamestate, token, selected_card_positions, scene_title)
+      newGamestate = roles.rascalResponse(gamestate, token, selected_card_positions, selected_answer, scene_title)
       break
     case 'DOPPELGÄNGER_REVEALER':
       newGamestate = roles.revealerResponse(gamestate, token, selected_card_positions, scene_title)
@@ -156,7 +156,7 @@ export const responseHandler = async (gamestate, token, selected_card_positions,
       newGamestate = roles.apprenticeseerResponse(gamestate, token, selected_card_positions, scene_title)
       break
     case 'RASCAL':
-      newGamestate = roles.rascalResponse(gamestate, token, selected_card_positions, scene_title)
+      newGamestate = roles.rascalResponse(gamestate, token, selected_card_positions, selected_answer, scene_title)
       break
     case 'REVEALER':
       newGamestate = roles.revealerResponse(gamestate, token, selected_card_positions, scene_title)

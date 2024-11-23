@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { deckStore, messageStore, propStore, selectionStore } from 'store'
-import { CardPosition, Interaction, TableCenterCard, TablePlayerCard, WsJsonMessage } from 'types'
+import { CardPositionType, InteractionType, TableCenterCard, TablePlayerCard, WsJsonMessageType } from 'types'
 import { getCardById, getMarkByName } from 'utils'
 
 class RiseAndRestStore {
@@ -12,36 +12,40 @@ class RiseAndRestStore {
     makeAutoObservable(this)
   }
 
-  createEmptyPlayerCard(position: CardPosition): TablePlayerCard {
+  createEmptyPlayerCard(position: CardPositionType): TablePlayerCard {
     return {
       position,
+
+      aliens: false,
+      apprenticeassassins: false,
+      artifact: false,
+      assassins: false,
       card_name: '',
+      cow: false,
+      dreamwolf: false,
+      groobzerb: false,
+      lovers: false,
+      madscientist: false,
       mark: '',
       masons: false,
+      part_of_blob: false,
+      part_of_family: false,
       role: '',
-      team: '',
-      artifact: false,
-      shield: false,
       selectable_card: false,
       selectable_mark: false,
       selected_card: false,
       selected_mark: false,
-      werewolves: false,
-      dreamwolf: false,
-      vampires: false,
-      aliens: false,
-      groobzerb: false,
-      villains: false,
+      shield: false,
       tanner: false,
-      assassins: false,
-      apprenticeassassins: false,
-      madscientist: false,
-      lovers: false
+      team: '',
+      vampires: false,
+      villains: false,
+      werewolves: false
     }
   }
 
   createDefaultCenterCards(): TableCenterCard[] {
-    const positions: CardPosition[] = ['center_wolf', 'center_left', 'center_middle', 'center_right', 'center_villain']
+    const positions: CardPositionType[] = ['center_wolf', 'center_left', 'center_middle', 'center_right', 'center_villain']
     const { hasAlphawolf, hasTemptress } = deckStore
 
     return positions
@@ -56,46 +60,47 @@ class RiseAndRestStore {
       }))
   }
 
-  getCardStatus(position: CardPosition) {
+  getCardStatus(position: CardPositionType) {
     return {
+      aliens: propStore.aliens.includes(position),
+      apprenticeassassins: propStore.apprenticeassassins.includes(position),
+      artifact: propStore.artifacted_cards.includes(position),
+      assassins: propStore.assassins.includes(position),
+      cow: propStore.cow.includes(position),
+      dreamwolf: propStore.dreamwolf.includes(position),
+      groobzerb: propStore.groobzerb.includes(position),
+      lovers: propStore.lovers.includes(position),
+      madscientist: propStore.madscientist.includes(position),
+      masons: propStore.masons.includes(position),
+      part_of_blob: propStore.part_of_blob.includes(position),
+      part_of_family: propStore.part_of_family.includes(position),
+      seers: propStore.seers.includes(position),
       selectable_card: propStore.selectable_cards.includes(position),
       selectable_mark: propStore.selectable_marks.includes(position),
-      artifact: propStore.artifacted_cards.includes(position),
       shield: propStore.shielded_cards.includes(position),
-      werewolves: propStore.werewolves.includes(position),
-      dreamwolf: propStore.dreamwolf.includes(position),
-      masons: propStore.masons.includes(position),
-      vampires: propStore.vampires.includes(position),
-      aliens: propStore.aliens.includes(position),
-      groobzerb: propStore.groobzerb.includes(position),
-      villains: propStore.villains.includes(position),
       tanner: propStore.tanner.includes(position),
-      apprenticeassassins: propStore.apprenticeassassins.includes(position),
-      assassins: propStore.assassins.includes(position),
-      madscientist: propStore.madscientist.includes(position),
-      seers: propStore.seers.includes(position),
-      lovers: propStore.lovers.includes(position),
-      part_of_blob: propStore.part_of_blob.includes(position),
-      part_of_family: propStore.part_of_family.includes(position)
+      vampires: propStore.vampires.includes(position),
+      villains: propStore.villains.includes(position),
+      werewolves: propStore.werewolves.includes(position)
     }
   }
 
-  getShowCardsMap(): Record<CardPosition, number> {
+  getShowCardsMap(): Record<CardPositionType, number> {
     const showCards = propStore.show_cards
     if (Array.isArray(showCards)) {
-      return showCards.reduce((acc, card) => ({ ...acc, ...card }), {} as Record<CardPosition, number>)
+      return showCards.reduce((acc, card) => ({ ...acc, ...card }), {} as Record<CardPositionType, number>)
     }
-    return showCards as Record<CardPosition, number>
+    return showCards as Record<CardPositionType, number>
   }
-  getShowMarksMap(): Record<CardPosition, string> {
+  getShowMarksMap(): Record<CardPositionType, string> {
     const showMarks = propStore.show_marks
     if (Array.isArray(showMarks)) {
-      return showMarks.reduce((acc, mark) => ({ ...acc, ...mark }), {} as Record<CardPosition, string>)
+      return showMarks.reduce((acc, mark) => ({ ...acc, ...mark }), {} as Record<CardPositionType, string>)
     }
-    return showMarks as Record<CardPosition, string>
+    return showMarks as Record<CardPositionType, string>
   }
 
-  setTablePlayerCard(lastJsonMessage: WsJsonMessage): void {
+  setTablePlayerCard(lastJsonMessage: WsJsonMessageType): void {
     const player = lastJsonMessage.player
     const cardId = player.player_card_id
     const card = getCardById(cardId)
@@ -114,13 +119,13 @@ class RiseAndRestStore {
     }
   }
 
-  setTablePlayerCards(lastJsonMessage: WsJsonMessage): void {
+  setTablePlayerCards(lastJsonMessage: WsJsonMessageType): void {
     const players = lastJsonMessage.players || []
     const showCards = this.getShowCardsMap()
     const showMarks = this.getShowMarksMap()
 
     this.tablePlayerCards = Array.from({ length: deckStore.totalPlayers }, (_, i) => {
-      const position = `player_${i + 1}` as CardPosition
+      const position = `player_${i + 1}` as CardPositionType
       const defaultCard = this.createEmptyPlayerCard(position)
 
       const playerCard = players.find(player => position === player.player_number)
@@ -145,7 +150,7 @@ class RiseAndRestStore {
     })
   }
 
-  setTableCenterCards(lastJsonMessage: WsJsonMessage): void {
+  setTableCenterCards(lastJsonMessage: WsJsonMessageType): void {
     const incomingCenterCards = lastJsonMessage.center_cards || []
     const showCards = this.getShowCardsMap()
     const centerCardsMap = Object.fromEntries(incomingCenterCards.map(card => [card.card_position, card]))
@@ -190,9 +195,9 @@ class RiseAndRestStore {
     selectionStore.resetSelection()
   }
 
-  openYourEyes(lastJsonMessage: WsJsonMessage): void {
+  openYourEyes(lastJsonMessage: WsJsonMessageType): void {
     this.clearMemory()
-    propStore.setInteraction(lastJsonMessage?.action as Interaction)
+    propStore.setInteraction(lastJsonMessage?.action as InteractionType)
     propStore.setTitle(lastJsonMessage.title)
     this.setTablePlayerCards(lastJsonMessage)
     this.setTableCenterCards(lastJsonMessage)

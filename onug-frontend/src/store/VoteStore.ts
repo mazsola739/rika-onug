@@ -2,7 +2,7 @@ import { UPDATE_GUESS } from 'constant'
 import * as narration_text from 'constant/narrations'
 import { script } from 'data'
 import { makeAutoObservable } from 'mobx'
-import { CardPosition, GuessedCard, GuessToken, NarrationType, Player, WsJsonMessage } from 'types'
+import { CardPositionType, GuessedCardType, GuessTokenType, NarrationType, PlayerType, WsJsonMessageType } from 'types'
 import { getCardById } from 'utils'
 import { propStore } from './PropStore'
 import { riseAndRestStore } from './RiseAndRestStore'
@@ -11,13 +11,14 @@ import { wsStore } from './WsStore'
 class VoteStore {
   narrations: Record<string, NarrationType[]>[]
   isGuessing: boolean = false
-  guessedCards: GuessedCard[] = []
+  guessedCards: GuessedCardType[] = []
   guessCards: number[] = []
+
   //selection
   guessedId: number | null = null
-  guessedCardPosition: CardPosition | '' = ''
+  guessedCardPosition: CardPositionType | '' = ''
 
-  resultPlayers: Player[] = []
+  resultPlayers: PlayerType[] = []
 
   constructor() {
     makeAutoObservable(this)
@@ -31,7 +32,7 @@ class VoteStore {
     this.isGuessing = value
   }
 
-  setGuessedCards(guessedCards: GuessedCard[]): void {
+  setGuessedCards(guessedCards: GuessedCardType[]): void {
     this.guessedCards = guessedCards
   }
 
@@ -44,7 +45,7 @@ class VoteStore {
     this.checkAndSendGuess()
   }
 
-  selectGuessCardPosition(position: CardPosition) {
+  selectGuessCardPosition(position: CardPositionType) {
     this.guessedCardPosition = position
     this.checkAndSendGuess()
   }
@@ -96,7 +97,7 @@ class VoteStore {
     return voteNarration
   }
 
-  getGuessTokensByPosition(position: CardPosition): GuessToken[] {
+  getGuessTokensByPosition(position: CardPositionType): GuessTokenType[] {
     const guessedCard = this.guessedCards.find(card => card.position === position)
 
     if (!guessedCard) return []
@@ -111,7 +112,7 @@ class VoteStore {
     })
   }
 
-  revealResult(lastJsonMessage: WsJsonMessage): void {
+  revealResult(lastJsonMessage: WsJsonMessageType): void {
     this.resetGuesses()
     this.resultPlayers = lastJsonMessage.players
     propStore.setVoteResult(lastJsonMessage.vote_result)

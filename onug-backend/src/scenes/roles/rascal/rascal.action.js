@@ -15,8 +15,8 @@ export const rascalAction = (gamestate, token, title) => {
   let selectableCards
   let selectableLimit
   //TODO  scene_end: selectablePlayerNumbers.length === 0
-  const randomRascalInstruction = gamestate.oracle.instruction
-  const rascalKey = gamestate.oracle.key
+  const randomRascalInstruction = gamestate.rascal.instruction
+  const rascalKey = gamestate.rascal.key
 
   const getSelectableTwoPlayers = rascalKey => {
     switch (rascalKey) {

@@ -3,14 +3,14 @@ import styled from '@emotion/styled'
 export const StyledPlayerInfoList = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 8px;
   flex-wrap: wrap;
 
   overflow-x: hidden;
   overflow-y: auto;
 
   & > * {
-    flex-basis: 185px;
+    flex-basis: 165px;
     flex-grow: 0;
     flex-shrink: 0;
   }
