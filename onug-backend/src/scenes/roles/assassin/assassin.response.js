@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
+import { getApprenticeAssassinPlayerNumbersByRoleIds } from '../../sceneUtils/getApprenticeAssassinPlayerNumbersByRoleIds'
 import { validateMarkSelection } from '../../validators'
-import { getApprenticeAssassinPlayerNumbersByRoleIds } from './assassin.utils'
 
 export const assassinResponse = (gamestate, token, selected_mark_positions, title) => {
   if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {

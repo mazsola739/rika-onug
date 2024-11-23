@@ -1,4 +1,4 @@
-import { ALL_WEREWOLF } from '../../../constants'
+import { ALL_WEREWOLF } from '../../constants'
 
 export const getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield = (players, shieldedCards) => {
   const result = []

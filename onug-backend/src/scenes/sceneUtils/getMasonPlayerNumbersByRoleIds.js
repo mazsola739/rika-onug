@@ -1,4 +1,4 @@
-import { MASONS } from '../../../constants'
+import { MASONS } from '../../constants'
 
 export const getMasonPlayerNumbersByRoleIds = players => {
   const result = []

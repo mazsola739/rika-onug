@@ -3,7 +3,7 @@ import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { instantRoleIds } from './doppelgangerinstantaction.constants'
 import { doppelgangerinstantactionAction } from './doppelgangerinstantaction.action'
-import { addVerboseOr, getRolesNames } from './doppelgangerinstantaction.utils'
+import { addVerboseOr, getRolesNames } from '../../sceneUtils/addVerboseOr'
 
 export const doppelgangerinstantaction = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)

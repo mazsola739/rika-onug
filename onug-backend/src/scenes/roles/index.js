@@ -2,20 +2,17 @@ export * from './aliens/aliens.action'
 export * from './aliens/aliens.constants'
 export * from './aliens/aliens'
 export * from './aliens/aliens.response'
-export * from './aliens/aliens.utils'
 export * from './aliens/aliens.votehydrate'
 
 export * from './alphawolf/alphawolf.action'
 export * from './alphawolf/alphawolf'
 export * from './alphawolf/alphawolf.response'
-export * from './alphawolf/alphawolf.utils'
 
 export * from './annoyinglad/annoyinglad'
 
 export * from './apprenticeassassin/apprenticeassassin.action'
 export * from './apprenticeassassin/apprenticeassassin'
 export * from './apprenticeassassin/apprenticeassassin.response'
-export * from './apprenticeassassin/apprenticeassassin.utils'
 
 export * from './apprenticeseer/apprenticeseer.action'
 export * from './apprenticeseer/apprenticeseer'
@@ -23,7 +20,6 @@ export * from './apprenticeseer/apprenticeseer.response'
 
 export * from './apprenticetanner/apprenticetanner.action'
 export * from './apprenticetanner/apprenticetanner'
-export * from './apprenticetanner/apprenticetanner.utils'
 
 export * from './assassin/assassin.action'
 export * from './assassin/assassin'
@@ -31,12 +27,10 @@ export * from './assassin/assassin.response'
 
 export * from './auraseer/auraseer.action'
 export * from './auraseer/auraseer'
-export * from './auraseer/auraseer.utils'
 
 export * from './beholder/beholder.action'
 export * from './beholder/beholder'
 export * from './beholder/beholder.response'
-export * from './beholder/beholder.utils'
 
 export * from './blob/blob.action'
 export * from './blob/blob.constants'
@@ -46,7 +40,6 @@ export * from './bodysnatcher/bodysnatcher.action'
 export * from './bodysnatcher/bodysnatcher.constants'
 export * from './bodysnatcher/bodysnatcher'
 export * from './bodysnatcher/bodysnatcher.response'
-export * from './bodysnatcher/bodysnatcher.utils'
 
 export * from './copycat/copycat.action'
 export * from './copycat/copycat'
@@ -54,7 +47,6 @@ export * from './copycat/copycat.response'
 
 export * from './cow/cow.action'
 export * from './cow/cow'
-export * from './cow/cow.utils'
 
 export * from './cupid/cupid.action'
 export * from './cupid/cupid'
@@ -63,7 +55,6 @@ export * from './cupid/cupid.response'
 export * from './curator/curator.action'
 export * from './curator/curator'
 export * from './curator/curator.response'
-export * from './curator/curator.utils'
 
 export * from './detector/detector'
 
@@ -79,7 +70,6 @@ export * from './doppelgangerinstantaction/doppelgangerinstantaction.action'
 export * from './doppelgangerinstantaction/doppelgangerinstantaction.constants'
 export * from './doppelgangerinstantaction/doppelgangerinstantaction'
 export * from './doppelgangerinstantaction/doppelgangerinstantaction.response'
-export * from './doppelgangerinstantaction/doppelgangerinstantaction.utils'
 
 export * from './drpeeker/drpeeker'
 
@@ -91,7 +81,6 @@ export * from './empath/empath.action'
 export * from './empath/empath.constants'
 export * from './empath/empath'
 export * from './empath/empath.response'
-export * from './empath/empath.utils'
 export * from './empath/empath.votehydrate'
 
 export * from './epicbattle/epicbattle.constants'
@@ -133,7 +122,6 @@ export * from './instigator/instigator.response'
 
 export * from './intern/intern.action'
 export * from './intern/intern'
-export * from './intern/intern.utils'
 
 export * from './joke/joke.constants'
 export * from './joke/joke'
@@ -146,7 +134,6 @@ export * from './leaderzerbgroob/leaderzerbgroob'
 
 export * from './lovers/lovers.action'
 export * from './lovers/lovers'
-export * from './lovers/lovers.utils'
 
 export * from './madscientist/madscientist.constants'
 export * from './madscientist/madscientist'
@@ -157,7 +144,6 @@ export * from './marksman/marksman.response'
 
 export * from './masons/masons.action'
 export * from './masons/masons'
-export * from './masons/masons.utils'
 
 export * from './minion/minion.action'
 export * from './minion/minion'
@@ -177,10 +163,8 @@ export * from './nostradamus/nostradamus.action'
 export * from './nostradamus/nostradamus'
 export * from './nostradamus/nostradamus.reaction'
 export * from './nostradamus/nostradamus.response'
-export * from './nostradamus/nostradamus.utils'
 
 export * from './oracle/oracle.constants'
-export * from './oracle/oracle.utils'
 export * from './oracle/oracleanswer'
 export * from './oracle/oracleanswer.aftermath'
 export * from './oracle/oracleanswer.response'
@@ -211,11 +195,9 @@ export * from './rascal/rascal.action'
 export * from './rascal/rascal.constants'
 export * from './rascal/rascal'
 export * from './rascal/rascal.response'
-export * from './rascal/rascal.utils'
 
 export * from './renfield/renfield.action'
 export * from './renfield/renfield'
-export * from './renfield/renfield.utils'
 
 export * from './revealer/revealer.action'
 export * from './revealer/revealer'
@@ -223,7 +205,6 @@ export * from './revealer/revealer.response'
 
 export * from './ripple/ripple.constants'
 export * from './ripple/ripple'
-export * from './ripple/ripple.utils'
 
 export * from './robber/robber.action'
 export * from './robber/robber'
@@ -244,7 +225,6 @@ export * from './sentinel/sentinel.response'
 export * from './squire/squire.action'
 export * from './squire/squire'
 export * from './squire/squire.response'
-export * from './squire/squire.utils'
 
 export * from './supervillains/supervillains.action'
 export * from './supervillains/supervillains'
@@ -254,7 +234,6 @@ export * from './switcheroo/switcheroo'
 export * from './temptress/temptress.action'
 export * from './temptress/temptress'
 export * from './temptress/temptress.response'
-export * from './temptress/temptress.utils'
 
 export * from './thecount/thecount.action'
 export * from './thecount/thecount'
@@ -276,14 +255,12 @@ export * from './vampires/vampires.votehydrate'
 export * from './villageidiot/villageidiot.action'
 export * from './villageidiot/villageidiot'
 export * from './villageidiot/villageidiot.response'
-export * from './villageidiot/villageidiot.utils'
 
 export * from './voodoolou/voodoolou'
 
 export * from './werewolves/werewolves.action'
 export * from './werewolves/werewolves'
 export * from './werewolves/werewolves.response'
-export * from './werewolves/werewolves.utils'
 
 export * from './witch/witch.action'
 export * from './witch/witch'

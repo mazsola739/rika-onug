@@ -1,5 +1,5 @@
 import { generateRoleAction } from '../../sceneUtils'
-import { getNonWerewolfPlayerNumbersByRoleIdsWithNoShield } from './alphawolf.utils'
+import { getNonWerewolfPlayerNumbersByRoleIdsWithNoShield } from '../../sceneUtils/getNonWerewolfPlayerNumbersByRoleIdsWithNoShield'
 
 export const alphawolfAction = (gamestate, token, title) => {
   const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIdsWithNoShield(gamestate.players, gamestate.shielded_cards)

@@ -1,5 +1,5 @@
 import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
-import { getMadScientistPlayerNumberByRoleIds } from './intern.utils'
+import { getMadScientistPlayerNumberByRoleIds } from '../../sceneUtils/getMadScientistPlayerNumberByRoleIds'
 
 export const internAction = (gamestate, token, title) => {
   const madscientist = getMadScientistPlayerNumberByRoleIds(gamestate.players)

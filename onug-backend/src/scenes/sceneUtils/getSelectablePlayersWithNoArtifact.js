@@ -1,4 +1,4 @@
-import artifacts from '../../../data/artifacts.json'
+import artifacts from '../../data/artifacts.json'
 
 export const getSelectablePlayersWithNoArtifact = (players, artifactedCards) => players.filter(player => !artifactedCards.includes(player))
 

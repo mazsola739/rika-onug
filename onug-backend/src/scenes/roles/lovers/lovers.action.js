@@ -1,5 +1,5 @@
 import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
-import { getLoversPlayerNumbersByMark } from './lovers.utils'
+import { getLoversPlayerNumbersByMark } from '../../sceneUtils/getLoversPlayerNumbersByMark'
 
 export const loversAction = (gamestate, token, title) => {
   const lovers = getLoversPlayerNumbersByMark(gamestate.players)

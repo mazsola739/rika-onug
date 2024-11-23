@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { empathKeys, randomEmpathInstructions } from './empath.constants'
 import { empathAction } from './empath.action'
-import { empathNumbers } from './empath.utils'
+import { empathNumbers } from '../../sceneUtils/empathNumbers'
 
 export const empath = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)

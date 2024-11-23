@@ -9,7 +9,10 @@ import {
   getPlayerNumberWithMatchingToken,
   getSelectablePlayersWithNoShield
 } from '../../sceneUtils'
-import { getAlienPlayerNumbersByRoleIdsWithNoShield, getCowPlayerNumbersByRoleIds, getNeighborByPosition, moveCards } from './aliens.utils'
+import { getAlienPlayerNumbersByRoleIdsWithNoShield } from '../../sceneUtils/getAlienPlayerNumbersByRoleIdsWithNoShield'
+import { getCowPlayerNumbersByRoleIds } from '../../sceneUtils/getCowPlayerNumbersByRoleIds'
+import { getNeighborByPosition } from '../../sceneUtils/getNeighborByPosition'
+import { moveCards } from '../../sceneUtils/moveCards'
 
 export const aliensAction = (gamestate, token, title) => {
   const aliens = getAlienPlayerNumbersByRoleIds(gamestate.players)

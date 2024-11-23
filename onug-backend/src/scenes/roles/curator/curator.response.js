@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
+import { getRandomArtifact } from '../../sceneUtils/getSelectablePlayersWithNoArtifact'
 import { validateCardSelection } from '../../validators'
-import { getRandomArtifact } from './curator.utils'
 
 export const curatorResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {

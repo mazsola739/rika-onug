@@ -11,7 +11,7 @@ import {
 } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection, validateCardSelection } from '../../validators'
-import { moveCardsButYourOwn } from '../villageidiot/villageidiot.utils'
+import { moveCardsButYourOwn } from '../../sceneUtils/moveCardsButYourOwn'
 
 //TODO fix obligatory and scene end
 export const rascalResponse = (gamestate, token, selected_card_positions, selected_answer, title) => {

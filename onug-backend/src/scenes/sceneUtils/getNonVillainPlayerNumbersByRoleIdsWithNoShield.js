@@ -1,4 +1,4 @@
-import { ALL_SUPER_VILLAIN } from '../../../constants'
+import { ALL_SUPER_VILLAIN } from '../../constants'
 
 export const getNonVillainPlayerNumbersByRoleIdsWithNoShield = (players, shieldedCards) => {
   const result = []

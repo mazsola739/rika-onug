@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../activePlayer'
 import { hasAnyAlien, hasAnyVampire, hasAnyWerewolf } from '../../conditions'
 import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
 import { randomOracleQuestions } from './oracle.constants'
-import { thinkRandomNumber } from './oracle.utils'
+import { thinkRandomNumber } from '../../sceneUtils/thinkRandomNumber'
 import { oracleQuestionRaising } from './oraclequestion.raising'
 
 //ORACLE_QUESTION

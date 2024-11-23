@@ -1,6 +1,6 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
 import { generateRoleAction, getAnyEvenOrOddPlayerNumbers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNeighborsByToken } from '../../sceneUtils'
-import { getAnyOtherPlayersByToken } from './bodysnatcher.utils'
+import { getAnyOtherPlayersByToken } from '../../sceneUtils/getAnyOtherPlayersByToken'
 
 export const bodysnatcherAction = (gamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey) => {
   if (gamestate.players[token].shield) {

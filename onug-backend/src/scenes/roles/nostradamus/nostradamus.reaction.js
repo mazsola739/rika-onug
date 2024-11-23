@@ -1,5 +1,5 @@
 /* import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils' */
-import { getNostradamusTeam } from './nostradamus.utils'
+import { getNostradamusTeam } from '../../sceneUtils/getNostradamusTeam'
 
 export const nostradamusReaction = (gamestate, title) => {
   /*   const tokens = getAllPlayerTokens(gamestate.players)   */

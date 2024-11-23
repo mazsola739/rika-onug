@@ -1,5 +1,5 @@
 import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
-import { getAnySeerPlayerNumbersByRoleIds } from './beholder.utils'
+import { getAnySeerPlayerNumbersByRoleIds } from '../../sceneUtils/getAnySeerPlayerNumbersByRoleIds'
 
 export const beholderAction = (gamestate, token, title) => {
   const seers = getAnySeerPlayerNumbersByRoleIds(gamestate.players)

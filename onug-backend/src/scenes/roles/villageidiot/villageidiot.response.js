@@ -1,7 +1,7 @@
 import { generateRoleAction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
-import { moveCardsButYourOwn } from './villageidiot.utils'
+import { moveCardsButYourOwn } from '../../sceneUtils/moveCardsButYourOwn'
 
 export const villageidiotResponse = (gamestate, token, selected_answer, title) => {
   if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {

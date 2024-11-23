@@ -1,6 +1,8 @@
 import { getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { random_ripple_dualview, ripple_random, ripple_sure_repeat, rippleAllKeys, rippleAnyKeys, rippleCenterAnyKeys, rippleNeighborKeys } from './ripple.constants'
-import { pickRandomOnePlayer, pickRandomTwoPlayers, pickRandomTwoPlayersArray } from './ripple.utils'
+import {pickRandomTwoPlayersArray } from '../../sceneUtils/pickRandomTwoPlayersArray'
+import { pickRandomOnePlayer } from '../../sceneUtils/pickRandomOnePlayer'
+import { pickRandomTwoPlayers } from '../../sceneUtils/pickRandomTwoPlayers'
 
 export const ripple = (oracleMadeSureRipple, totalPlayers) => {
   const result = []

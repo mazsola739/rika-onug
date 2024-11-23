@@ -1,5 +1,5 @@
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
-import { getTannerPlayerNumbersByRoleIds } from './apprenticetanner.utils'
+import { getTannerPlayerNumbersByRoleIds } from '../../sceneUtils/getTannerPlayerNumbersByRoleIds'
 
 export const apprenticetannerAction = (gamestate, token, title) => {
   let tanner = getTannerPlayerNumbersByRoleIds(gamestate.players)
