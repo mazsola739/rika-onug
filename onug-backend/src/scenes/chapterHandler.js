@@ -21,24 +21,26 @@ export const chapterHandler = async gamestate => {
       mark_shifting: false,
       view_mark: false,
       shield: false,
-      artifact: false
+      artifact: false,
+      vote: false
     }
 
     const activePlayersInChapter = new Set()
 
     const hasConflict = scene => {
-      const { player_card_shifting, center_card_shifting, view_player_card, view_center_card, mark_shifting, view_mark, shield, artifact, /* vote */ } = scene
+      const { player_card_shifting, center_card_shifting, view_player_card, view_center_card, mark_shifting, view_mark, shield, artifact, vote } = scene
 
-      if (flagsState.artifact || flagsState.shield) {
-        logTrace(`Conflict due to active artifact or shield flag, halting scene processing.`)
+      if (flagsState.artifact || flagsState.shield || flagsState.vote) {
+        logTrace(`Conflict due to active artifact, shield, or vote flag. Halting scene processing.`)
         return true
       }
       if (flagsState.view_mark) {
-        logTrace(`Conflict due to active view_mark, halting scene processing.`)
+        logTrace(`Conflict due to active view_mark. Halting scene processing.`)
         return true
       }
 
       return (
+        (vote && flagsState.vote) ||
         (player_card_shifting && flagsState.player_card_shifting) ||
         (center_card_shifting && flagsState.center_card_shifting) ||
         (mark_shifting && flagsState.mark_shifting) ||
@@ -120,7 +122,7 @@ export const chapterHandler = async gamestate => {
     if (gameCanEnd) {
       logTrace(`All scripts processed. Broadcasting END_GAME message.`)
 
-      //TODO uncomment delay
+      // TODO uncomment delay
       /* await randomDelay() */
 
       broadcast(newGamestate.room_id, {

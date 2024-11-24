@@ -7,6 +7,9 @@ export const message_tapped = 'You got tapped by your neighbor'
 export const no_night_action = 'No such a night action, sorry'
 export const no_selectable_option = 'No selectable option, sorry'
 
+export const really_want = 'Is that you really want?'
+export const the_end = 'The end is near...'
+
 export const action_oracle_question = 'Answer the question'
 export const action_oracle_answer = 'Your answer'
 export const action_oracle_open_you_eyes = 'You can open your eyes for the next scene'

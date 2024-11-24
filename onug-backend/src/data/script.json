@@ -25,7 +25,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "vote": true
   },
   {
     "scene_title": "ORACLE_QUESTION",
@@ -1257,7 +1257,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "vote": true
   },
   {
     "scene_title": "END",

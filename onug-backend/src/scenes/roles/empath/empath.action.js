@@ -16,6 +16,5 @@ export const empathAction = (gamestate, token, title) => {
     selectable_card_limit: { player: 1, center: 0 },
     player_name: gamestate.players[token].name,
     player_number: gamestate.players[token].player_number,
-    ...gamestate.players[token].card
   }
 }

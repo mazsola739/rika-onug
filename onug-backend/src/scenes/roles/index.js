@@ -83,6 +83,7 @@ export * from './empath/empath'
 export * from './empath/empath.response'
 export * from './empath/empath.votehydrate'
 
+export * from './epicbattle/epicbattle.action'
 export * from './epicbattle/epicbattle.constants'
 export * from './epicbattle/epicbattle'
 
@@ -123,6 +124,7 @@ export * from './instigator/instigator.response'
 export * from './intern/intern.action'
 export * from './intern/intern'
 
+export * from './joke/joke.action'
 export * from './joke/joke.constants'
 export * from './joke/joke'
 

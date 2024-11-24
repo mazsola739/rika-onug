@@ -8,7 +8,7 @@ import * as conditions from './conditions'
 export const scriptHandler = gamestate => {
   logTrace(`scriptHandler in room [${gamestate.room_id}]`)
   const selected_cards = gamestate.selected_cards
-  /*   const total_players = gamestate.total_players */ //TODO epic battle ect...
+  const total_players = gamestate.total_players //TODO epic battle ect...
   const role_scenes = []
 
   const addScript = scene_title => {
@@ -21,7 +21,7 @@ export const scriptHandler = gamestate => {
   }
 
   const roleOrder = [
-    /* { condition: () => conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players), scripts: ['EPIC_BATTLE'] }, */
+    { condition: () => conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players), scripts: ['EPIC_BATTLE'] },
 
     {
       condition: () => conditions.hasOracle(selected_cards),
@@ -380,7 +380,7 @@ export const scriptHandler = gamestate => {
     }
   })
 
-  /* addScript('JOKE') */ //TODO into narration
+  addScript('JOKE')
 
   gamestate.scripts = role_scenes.sort((a, b) => a.scene_number - b.scene_number)
 

@@ -145,6 +145,10 @@ export const sceneHandler = async (gamestate, scene_title) => {
       newGamestate = roles.empath(newGamestate, scene_title, 'empath')
       break
     case 'EPIC_BATTLE':
+      console.log(`hasEasterEgg: `, conditions.hasEasterEgg(selected_cards, total_players))
+      console.log(`hasEpicBattle: `, conditions.hasEpicBattle(selected_cards))
+      console.log(`hasGoodGuys: `, !conditions.hasGoodGuys(selected_cards))
+      console.log(`hasBadGuys: `, !conditions.hasBadGuys(selected_cards))
       newGamestate = roles.epicbattle(
         newGamestate,
         scene_title,
