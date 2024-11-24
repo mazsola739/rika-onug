@@ -1,9 +1,8 @@
 import { VOTE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
-import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getDoppelgangerEmpathTokensByRoleIds, getEmpathTokensByRoleIds, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { getDoppelgangerEmpathTokensByRoleIds } from '../../sceneUtils/getDoppelgangerEmpathTokensByRoleIds'
-import { getEmpathTokensByRoleIds } from '../../sceneUtils/getEmpathTokensByRoleIds'
+
 import { validateCardSelection } from '../../validators'
 
 //TODO empath votes ALL send

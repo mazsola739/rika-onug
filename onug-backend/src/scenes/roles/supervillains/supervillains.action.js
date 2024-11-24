@@ -1,7 +1,7 @@
-import { formatPlayerIdentifier, generateRoleAction, getVillainPlayerNumbersByRoleIds } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const supervillainsAction = (gamestate, token, title) => {
-  const villains = getVillainPlayerNumbersByRoleIds(gamestate.players)
+  const villains = getPlayerNumbersByGivenConditions(gamestate.players, 'villain')
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

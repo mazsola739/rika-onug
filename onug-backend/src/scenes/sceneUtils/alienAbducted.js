@@ -1,8 +1,9 @@
-import { getAlienPlayerNumbersByRoleIds, getNeighborPlayerNumbersByToken } from '../sceneUtils'
+import { getNeighborPlayerNumbersByToken } from '../sceneUtils'
+import { getPlayerNumbersByGivenConditions } from './getPlayerNumbersByGivenConditions'
 
 export const alienAbducted = (players, cowToken) => {
   const cowNeighbors = getNeighborPlayerNumbersByToken(players, cowToken)
-  const aliens = getAlienPlayerNumbersByRoleIds(players)
+  const aliens = getPlayerNumbersByGivenConditions(players, 'aliens')
 
   for (let alien of aliens) {
     if (cowNeighbors.includes(alien)) {

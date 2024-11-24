@@ -1,6 +1,5 @@
-import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { getApprenticeAssassinPlayerNumbersByRoleIds } from '../../sceneUtils/getApprenticeAssassinPlayerNumbersByRoleIds'
 import { validateMarkSelection } from '../../validators'
 
 export const assassinResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -8,7 +7,7 @@ export const assassinResponse = (gamestate, token, selected_mark_positions, titl
     return gamestate
   }
 
-  const apprenticeassassins = getApprenticeAssassinPlayerNumbersByRoleIds(gamestate.players)
+  const apprenticeassassins = getPlayerNumbersByGivenConditions(gamestate.players, 'apprenticeAssassin')
 
   if (gamestate.players[token].card.player_original_id === 1) {
     const assassinPosition = gamestate.doppelganger_mark_positions.assassin

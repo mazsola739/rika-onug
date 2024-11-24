@@ -1,7 +1,6 @@
-import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
-import { getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield } from '../../sceneUtils/getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield'
 
 export const squireResponse = (gamestate, token, selected_answer, title) => {
   if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
@@ -11,7 +10,7 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
   let action = {}
 
   if (selected_answer === 'yes') {
-    const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIdsWithNoShield(gamestate.players, gamestate.shielded_cards)
+    const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolfWithoutShield', gamestate.shielded_cards)
     const viewCards = getCardIdsByPositions(gamestate.card_positions, werewolves)
 
     if (werewolves.some(wolf => gamestate.card_positions[wolf].card.id === gamestate.players[token]?.card?.original_id)) {

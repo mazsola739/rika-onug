@@ -5,9 +5,9 @@ import {
   createAndSendSceneMessage,
   formatPlayerIdentifier,
   generateRoleAction,
-  getAlienPlayerNumbersByRoleIds,
   getCardIdsByPositions,
   getNarrationByTitle,
+  getPlayerNumbersByGivenConditions,
   getPlayerNumberWithMatchingToken,
   getPlayerTokensByPlayerNumber
 } from '../../sceneUtils'
@@ -18,7 +18,7 @@ export const aliensVotehydrate = async message => {
   try {
     const gamestate = await readGamestate(room_id)
 
-    const aliens = getAlienPlayerNumbersByRoleIds(gamestate.players)
+    const aliens = getPlayerNumbersByGivenConditions(gamestate.players, 'alien')
     const aliensTokens = getPlayerTokensByPlayerNumber(gamestate.players, aliens)
     const alienCount = aliens.length
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)

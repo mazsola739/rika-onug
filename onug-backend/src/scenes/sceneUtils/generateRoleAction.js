@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken } from './getPlayerNumberWithMatchingToken'
+import { getPlayerNumberWithMatchingToken } from '.'
 
 export const getKeys = array => array.map(obj => Object.keys(obj)[0])
 

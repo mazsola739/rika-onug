@@ -3,11 +3,11 @@ import {
   generateRoleAction,
   getAllPlayerTokens,
   getAnyEvenOrOddPlayerNumbers,
+  getAnyHigherOrLowerPlayerNumbersByToken,
   getPlayerNeighborsByToken,
   getSelectableOtherPlayerNumbersWithNoShield,
   getSelectablePlayersWithNoShield
 } from '../../sceneUtils'
-import { getAnyHigherOrLowerPlayerNumbersByToken } from '../../sceneUtils/getAnyHigherOrLowerPlayerNumbersByToken'
 
 export const rascalAction = (gamestate, token, title) => {
   let privateMessage

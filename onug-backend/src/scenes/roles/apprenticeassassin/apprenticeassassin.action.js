@@ -1,8 +1,7 @@
-import { formatPlayerIdentifier, generateRoleAction, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
-import { getAssassinPlayerNumbersByRoleIds } from '../../sceneUtils/getAssassinPlayerNumbersByRoleIds'
+import { formatPlayerIdentifier, generateRoleAction, getAllPlayerTokens, getPlayerNumbersByGivenConditions, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
 
 export const apprenticeassassinAction = (gamestate, token, title) => {
-  const assassins = getAssassinPlayerNumbersByRoleIds(gamestate.players)
+  const assassins = getPlayerNumbersByGivenConditions(gamestate.players, 'assassin')
 
   if (assassins.length > 0) {
     gamestate.players[token].player_history[title] = {

@@ -1,8 +1,7 @@
-import { generateRoleAction } from '../../sceneUtils'
-import { getNonWerewolfPlayerNumbersByRoleIdsWithNoShield } from '../../sceneUtils/getNonWerewolfPlayerNumbersByRoleIdsWithNoShield'
+import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const alphawolfAction = (gamestate, token, title) => {
-  const selectablePlayerNumbers = getNonWerewolfPlayerNumbersByRoleIdsWithNoShield(gamestate.players, gamestate.shielded_cards)
+  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'nonWerewolfWithoutShield', gamestate.shielded_cards)
 
   /* TODO const isSingleSelectable = selectablePlayerNumbers.length === 1
 

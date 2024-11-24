@@ -1,6 +1,5 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { generateRoleAction, getAnyEvenOrOddPlayerNumbers, getNonAlienPlayerNumbersByRoleIdsWithNoShield, getPlayerNeighborsByToken } from '../../sceneUtils'
-import { getAnyOtherPlayersByToken } from '../../sceneUtils/getAnyOtherPlayersByToken'
+import { generateRoleAction, getAnyEvenOrOddPlayerNumbers, getAnyOtherPlayersByToken, getPlayerNeighborsByToken, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const bodysnatcherAction = (gamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey) => {
   if (gamestate.players[token].shield) {
@@ -39,7 +38,7 @@ export const bodysnatcherAction = (gamestate, token, title, randomBodysnatcherIn
         break
     }
 
-    const selectablePlayerNumbers = getNonAlienPlayerNumbersByRoleIdsWithNoShield(selectablePlayers, gamestate.shielded_cards)
+    const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(selectablePlayers, 'nonAlienWithoutShield', gamestate.shielded_cards)
 
     selectableCards = {
       selectable_cards: selectablePlayerNumbers,

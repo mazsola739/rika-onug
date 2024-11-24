@@ -1,23 +1,21 @@
 import {
   formatPlayerIdentifier,
   generateRoleAction,
-  getAlienPlayerNumbersByRoleIds,
-  getAllPlayerNumbers,
   getAnyEvenOrOddPlayerNumbers,
   getCardIdsByPositions,
+  getNeighborByPosition,
   getNonAlienPlayerNumbersWithNoShield,
+  getPlayerNumbersByGivenConditions,
   getPlayerNumberWithMatchingToken,
   getSelectablePlayersWithNoShield
 } from '../../sceneUtils'
-import { getAlienPlayerNumbersByRoleIdsWithNoShield } from '../../sceneUtils/getAlienPlayerNumbersByRoleIdsWithNoShield'
-import { getCowPlayerNumbersByRoleIds } from '../../sceneUtils/getCowPlayerNumbersByRoleIds'
-import { getNeighborByPosition } from '../../sceneUtils/getNeighborByPosition'
+
 import { moveCards } from '../../sceneUtils/moveCards'
 
 export const aliensAction = (gamestate, token, title) => {
-  const aliens = getAlienPlayerNumbersByRoleIds(gamestate.players)
-  const cow = getCowPlayerNumbersByRoleIds(gamestate.players)
-  const aliensWithoutShield = getAlienPlayerNumbersByRoleIdsWithNoShield(gamestate.players, gamestate.shielded_cards)
+  const aliens = getPlayerNumbersByGivenConditions(gamestate.players, 'alien')
+  const cow = getPlayerNumbersByGivenConditions(gamestate.players, 'cow')
+  const aliensWithoutShield = getPlayerNumbersByGivenConditions(gamestate.players, 'alienWithoutShield', gamestate.shielded_cards)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
 
   const randomAlienInstruction = gamestate.aliens.instruction
@@ -45,7 +43,7 @@ export const aliensAction = (gamestate, token, title) => {
   } else if (alienKey.length > 0) {
     const evenOrOdd = alienKey[0].includes('even') ? 'even' : alienKey[0].includes('odd') ? 'odd' : ''
 
-    const evenOrOddPlayerNumbers = evenOrOdd ? getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd) : getAllPlayerNumbers(gamestate.players)
+    const evenOrOddPlayerNumbers = evenOrOdd ? getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd) : getPlayerNumbersByGivenConditions(gamestate.players, 'player')
 
     if (randomAlienInstruction === 'aliens_alienhelper_text') {
       selectablePlayers = getNonAlienPlayerNumbersWithNoShield(evenOrOddPlayerNumbers, aliens, gamestate.shielded_cards)

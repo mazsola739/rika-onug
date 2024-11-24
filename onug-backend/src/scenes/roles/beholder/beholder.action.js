@@ -1,8 +1,7 @@
-import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
-import { getAnySeerPlayerNumbersByRoleIds } from '../../sceneUtils/getAnySeerPlayerNumbersByRoleIds'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const beholderAction = (gamestate, token, title) => {
-  const seers = getAnySeerPlayerNumbersByRoleIds(gamestate.players)
+  const seers = getPlayerNumbersByGivenConditions(gamestate.players, 'anySeer')
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

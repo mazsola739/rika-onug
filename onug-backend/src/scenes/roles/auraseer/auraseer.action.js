@@ -1,8 +1,7 @@
-import { getPlayerNumbersWithCardOrMarkActionTrue } from '..'
-import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const auraseerAction = (gamestate, token, title) => {
-  const playersWithCardOrMarkActionTrue = getPlayerNumbersWithCardOrMarkActionTrue(gamestate.players)
+  const playersWithCardOrMarkActionTrue = getPlayerNumbersByGivenConditions(gamestate.players, 'cardOrMarkActionTrue')
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

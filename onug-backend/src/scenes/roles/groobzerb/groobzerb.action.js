@@ -1,8 +1,8 @@
-import { formatPlayerIdentifier, generateRoleAction, getGroobPlayerNumberByRoleIds, getZerbPlayerNumberByRoleIds } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const groobzerbAction = (gamestate, token, title) => {
-  const zerbPlayers = getZerbPlayerNumberByRoleIds(gamestate.players)
-  const groobPlayers = getGroobPlayerNumberByRoleIds(gamestate.players)
+  const zerbPlayers = getPlayerNumbersByGivenConditions(gamestate.players, 'zerb')
+  const groobPlayers = getPlayerNumbersByGivenConditions(gamestate.players, 'groob')
 
   if (gamestate.players[token].card.player_role_id === 47) {
     if (zerbPlayers.length >= 1) {

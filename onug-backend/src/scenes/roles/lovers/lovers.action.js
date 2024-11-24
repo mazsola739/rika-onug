@@ -1,8 +1,7 @@
-import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
-import { getLoversPlayerNumbersByMark } from '../../sceneUtils/getLoversPlayerNumbersByMark'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const loversAction = (gamestate, token, title) => {
-  const lovers = getLoversPlayerNumbersByMark(gamestate.players)
+  const lovers = getPlayerNumbersByGivenConditions(gamestate.players, 'lover')
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

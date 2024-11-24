@@ -1,11 +1,7 @@
-import { formatPlayerIdentifier, generateRoleAction, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const squireAction = (gamestate, token, title) => {
-  const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(gamestate.players)
-
-  if (werewolves.length === 0) {
-    gamestate.players[token].card.player_team = 'squire'
-  }
+  const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolf')
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

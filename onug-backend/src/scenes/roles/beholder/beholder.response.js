@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleAction, getAnySeerPlayerNumbersByRoleIdsWithNoShield, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateAnswerSelection } from '../../validators'
 
@@ -10,7 +10,7 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
   let action = {}
 
   if (selected_answer === 'yes') {
-    const seers = getAnySeerPlayerNumbersByRoleIdsWithNoShield(gamestate.players, gamestate.shielded_cards)
+    const seers = getPlayerNumbersByGivenConditions(gamestate.players, 'anySeerWithoutShield', gamestate.shielded_cards)
     const viewCards = getCardIdsByPositions(gamestate.card_positions, seers)
 
     if (seers.some(seer => gamestate.card_positions[seer].card.id === gamestate.players[token]?.card?.original_id)) {

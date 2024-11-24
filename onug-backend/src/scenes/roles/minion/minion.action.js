@@ -1,7 +1,7 @@
-import { formatPlayerIdentifier, generateRoleAction, getWerewolfAndDreamwolfPlayerNumbersByRoleIds } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const minionAction = (gamestate, token, title) => {
-  const werewolves = getWerewolfAndDreamwolfPlayerNumbersByRoleIds(gamestate.players)
+  const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolf')
 
   if (werewolves.length === 0) {
     gamestate.players[token].card.player_team = 'minion'

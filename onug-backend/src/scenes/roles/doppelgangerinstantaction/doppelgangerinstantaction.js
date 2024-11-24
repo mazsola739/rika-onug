@@ -3,7 +3,15 @@ import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { instantRoleIds } from './doppelgangerinstantaction.constants'
 import { doppelgangerinstantactionAction } from './doppelgangerinstantaction.action'
-import { addVerboseOr, getRolesNames } from '../../sceneUtils/addVerboseOr'
+
+const getRolesNames = (selectedCardIds, actionIds, roles) => selectedCardIds.filter(id => actionIds.includes(id)).map(id => roles[id])
+
+const addVerboseOr = rolesFromIds => {
+  if (rolesFromIds.length > 1) {
+    rolesFromIds.splice(rolesFromIds.length - 1, 0, 'doppelganger_verbose_or_text')
+  }
+  rolesFromIds
+}
 
 export const doppelgangerinstantaction = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)

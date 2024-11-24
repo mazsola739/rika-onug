@@ -1,8 +1,8 @@
-import { formatPlayerIdentifier, generateRoleAction, getNonVampirePlayerNumbersByRoleIds, getVampirePlayerNumbersByRoleIds } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const vampiresAction = (gamestate, token, title) => {
-  const nonVampires = getNonVampirePlayerNumbersByRoleIds(gamestate)
-  const vampires = getVampirePlayerNumbersByRoleIds(gamestate.players)
+  const nonVampires = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire')
+  const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampire')
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

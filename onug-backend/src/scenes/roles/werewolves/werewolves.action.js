@@ -1,11 +1,9 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
-import { getDreamWolfPlayerNumberByRoleIds } from '../../sceneUtils/getDreamWolfPlayerNumberByRoleIds'
-import { getWerewolfPlayerNumbersByRoleIds } from '../../sceneUtils/getWerewolfPlayerNumbersByRoleIds'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const werewolvesAction = (gamestate, token, title) => {
-  const werewolves = getWerewolfPlayerNumbersByRoleIds(gamestate.players)
-  const dreamwolf = getDreamWolfPlayerNumberByRoleIds(gamestate.players)
+  const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolf')
+  const dreamwolf = getPlayerNumbersByGivenConditions(gamestate.players, 'dreamwolf')
   const loneWolf = werewolves.length + dreamwolf.length === 1
   const selectable_cards = loneWolf ? CENTER_CARD_POSITIONS : []
   const selectable_card_limit = { player: 0, center: loneWolf ? 1 : 0 }

@@ -1,11 +1,11 @@
-import { formatPlayerIdentifier, generateRoleAction, getGroobPlayerNumberByRoleIds, getZerbPlayerNumberByRoleIds } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const leaderZerbgroobAction = (gamestate, token, title) => {
-  const zerb = getZerbPlayerNumberByRoleIds(gamestate.players)
-  const groob = getGroobPlayerNumberByRoleIds(gamestate.players)
+  const zerbPlayers = getPlayerNumbersByGivenConditions(gamestate.players, 'zerb') 
+  const groobPlayers = getPlayerNumbersByGivenConditions(gamestate.players, 'groob')
 
-  if (groob.length >= 1 && zerb.length >= 1) {
-    const zerbgroob = zerb.concat(groob)
+  if (groobPlayers.length >= 1 && zerbPlayers.length >= 1) {
+    const zerbgroob = zerbPlayers.concat(groobPlayers)
 
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],
