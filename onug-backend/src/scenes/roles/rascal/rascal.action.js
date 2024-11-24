@@ -9,14 +9,15 @@ import {
   getSelectablePlayersWithNoShield
 } from '../../sceneUtils'
 
-export const rascalAction = (gamestate, token, title) => {
+export const rascalAction = (gamestate, token, title, prefix) => {
+  const randomRascalInstruction = gamestate[prefix].instruction
+  const rascalKey = gamestate[prefix].key
+
   let privateMessage
   let limit = 1
   let selectableCards
   let selectableLimit
   //TODO  scene_end: selectablePlayerNumbers.length === 0
-  const randomRascalInstruction = gamestate.rascal.instruction
-  const rascalKey = gamestate.rascal.key
 
   const getSelectableTwoPlayers = rascalKey => {
     switch (rascalKey) {

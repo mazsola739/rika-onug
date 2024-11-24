@@ -1,8 +1,9 @@
 import { generateRoleAction, getAnyEvenOrOddPlayerNumbers } from '../../sceneUtils'
 
-export const psychicAction = (gamestate, token, title) => {
-  const randomPsychicInstruction = gamestate.psychic.instruction
-  const psychicKey = gamestate.psychic.key
+export const psychicAction = (gamestate, token, title, prefix) => {
+  const randomPsychicInstruction = gamestate[prefix].instruction
+  const psychicKey = gamestate[prefix].key
+
   const evenOrOdd = psychicKey.replace('identifier_', '').replace('_text', '').replace('any', '')
   const selectablePlayers = getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd)
   let limit = +randomPsychicInstruction.replace('psychic_view', '').replace('_text', '')
@@ -10,7 +11,7 @@ export const psychicAction = (gamestate, token, title) => {
   if (selectablePlayers.length === 1) {
     limit = 1
   }
-  
+
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     selectable_cards: selectablePlayers,

@@ -11,11 +11,7 @@ export const priest = (gamestate, title, prefix) => {
 
     const card = gamestate.players[token].card
 
-    if (prefix === 'priest' && isActivePlayer(card).PRIEST) {
-      gamestate.players[token].action_finished = false
-
-      action = priestAction(gamestate, token, title)
-    } else if (prefix === 'doppelganger_priest' && isActivePlayer(card).DOPPELGÄNGER_PRIEST) {
+    if ((prefix === 'priest' && isActivePlayer(card).PRIEST) || (prefix === 'doppelganger_priest' && isActivePlayer(card).DOPPELGÄNGER_PRIEST)) {
       gamestate.players[token].action_finished = false
 
       action = priestAction(gamestate, token, title)

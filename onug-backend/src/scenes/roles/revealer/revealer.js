@@ -11,11 +11,7 @@ export const revealer = (gamestate, title, prefix) => {
 
     const card = gamestate.players[token].card
 
-    if (prefix === 'revealer' && isActivePlayer(card).REVEALER) {
-      gamestate.players[token].action_finished = false
-
-      action = revealerAction(gamestate, token, title)
-    } else if (prefix === 'doppelganger_revealer' && isActivePlayer(card).DOPPELGÄNGER_REVEALER) {
+    if ((prefix === 'revealer' && isActivePlayer(card).REVEALER) || (prefix === 'doppelganger_revealer' && isActivePlayer(card).DOPPELGÄNGER_REVEALER)) {
       gamestate.players[token].action_finished = false
 
       action = revealerAction(gamestate, token, title)

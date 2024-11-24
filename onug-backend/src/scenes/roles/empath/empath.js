@@ -20,10 +20,10 @@ export const empath = (gamestate, title, prefix) => {
     activePlayerNumbers = empathVotersPlayerNumbers(totalPlayers, evenOdd)
   }
 
-  gamestate.empath = {
+  gamestate[prefix] = {
     instruction: ''
   }
-  gamestate.empath.instruction = randomEmpathInstruction
+  gamestate[prefix].instruction = randomEmpathInstruction
 
   tokens.forEach(token => {
     let action = {}
@@ -37,7 +37,7 @@ export const empath = (gamestate, title, prefix) => {
       if (isNotEmpath || isNotDoppelgangerEmpath) {
         gamestate.players[token].action_finished = false
 
-        action = empathAction(gamestate, token, title)
+        action = empathAction(gamestate, token, title, prefix)
       }
     }
 

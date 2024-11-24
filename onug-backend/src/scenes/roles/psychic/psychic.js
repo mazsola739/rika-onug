@@ -9,13 +9,13 @@ export const psychic = (gamestate, title, prefix) => {
   const randomPsychicInstruction = getRandomItemFromArray(randomPsychicInstructions)
   const psychicKey = getRandomItemFromArray(psychicKeys)
 
-  gamestate.psychic = {
+  gamestate[prefix] = {
     instruction: '',
-    key: '',
+    key: ''
   }
 
-  gamestate.psychic.instruction = randomPsychicInstruction
-  gamestate.psychic.key = psychicKey
+  gamestate[prefix].instruction = randomPsychicInstruction
+  gamestate[prefix].key = psychicKey
 
   narration.push(...[randomPsychicInstruction, psychicKey])
 
@@ -24,14 +24,10 @@ export const psychic = (gamestate, title, prefix) => {
 
     const card = gamestate.players[token].card
 
-    if (prefix === 'psychic' && isActivePlayer(card).PSYCHIC) {
+    if ((prefix === 'psychic' && isActivePlayer(card).PSYCHIC) || (prefix === 'doppelganger_psychic' && isActivePlayer(card).DOPPELGÄNGER_PSYCHIC)) {
       gamestate.players[token].action_finished = false
 
-      action = psychicAction(gamestate, token, title)
-    } else if (prefix === 'doppelganger_psychic' && isActivePlayer(card).DOPPELGÄNGER_PSYCHIC) {
-      gamestate.players[token].action_finished = false
-
-      action = psychicAction(gamestate, token, title)
+      action = psychicAction(gamestate, token, title, prefix)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

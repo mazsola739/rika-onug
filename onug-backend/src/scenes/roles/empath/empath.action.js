@@ -1,6 +1,7 @@
 import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
 
-export const empathAction = (gamestate, token, title) => {
+export const empathAction = (gamestate, token, title, prefix) => {
+  console.log(prefix)
   const allPlayerTokens = getAllPlayerTokens(gamestate.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
 

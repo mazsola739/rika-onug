@@ -5,29 +5,25 @@ import { exposerAction } from './exposer.action'
 
 export const exposer = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  //todo better narration
 
   const randomExposerInstruction = getRandomItemFromArray(randomExposerInstructions)
   const narration = [`${prefix}_kickoff_text`, randomExposerInstruction]
 
-  gamestate.exposer = {
+  gamestate[prefix] = {
     instruction: ''
   }
-  gamestate.exposer.instruction = randomExposerInstruction
+
+  gamestate[prefix].instruction = randomExposerInstruction
 
   tokens.forEach(token => {
     let action = {}
 
     const card = gamestate.players[token].card
 
-    if (prefix === 'exposer' && isActivePlayer(card).EXPOSER) {
+    if ((prefix === 'exposer' && isActivePlayer(card).EXPOSER) || (prefix === 'doppelganger_exposer' && isActivePlayer(card).DOPPELGÄNGER_EXPOSER)) {
       gamestate.players[token].action_finished = false
 
-      action = exposerAction(gamestate, token, title)
-    } else if (prefix === 'doppelganger_exposer' && isActivePlayer(card).DOPPELGÄNGER_EXPOSER) {
-      gamestate.players[token].action_finished = false
-
-      action = exposerAction(gamestate, token, title)
+      action = exposerAction(gamestate, token, title, prefix)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

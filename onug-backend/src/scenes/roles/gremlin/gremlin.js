@@ -11,11 +11,7 @@ export const gremlin = (gamestate, title, prefix) => {
 
     const card = gamestate.players[token].card
 
-    if (prefix === 'gremlin' && isActivePlayer(card).GREMLIN) {
-      gamestate.players[token].action_finished = false
-
-      action = gremlinAction(gamestate, token, title)
-    } else if (prefix === 'doppelganger_gremlin' && isActivePlayer(card).DOPPELGÄNGER_GREMLIN) {
+    if ((prefix === 'gremlin' && isActivePlayer(card).GREMLIN) || (prefix === 'doppelganger_gremlin' && isActivePlayer(card).DOPPELGÄNGER_GREMLIN)) {
       gamestate.players[token].action_finished = false
 
       action = gremlinAction(gamestate, token, title)

@@ -1,7 +1,7 @@
 import { generateRoleAction, getPartOfGroupByToken } from '../../sceneUtils'
 
 export const familymanAction = (gamestate, token, title) => {
-  const randomInstruction = gamestate.scene.narration[1]
+  const randomInstruction = gamestate.familyman.instruction
 
   const partOfFamily = getPartOfGroupByToken(gamestate.players, token, randomInstruction)
 

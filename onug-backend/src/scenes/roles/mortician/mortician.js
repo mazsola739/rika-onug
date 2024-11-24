@@ -6,29 +6,26 @@ import { morticianAction } from './mortician.action'
 export const mortician = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [`${prefix}_kickoff_text`]
-  //TODO
   const randomMorticianInstruction = getRandomItemFromArray(randomMorticianInstructions)
   const morticianKey = randomMorticianInstruction === 'mortician_2cards_text' ? 'identifier_bothneighbors_text' : getRandomItemFromArray(morticianKeys)
-  // narration.push(randomMorticianInstruction, morticianKey)
+  narration.push(randomMorticianInstruction, morticianKey)
 
-  /*   gamestate.bodysnatcher = {
+  gamestate[prefix] = {
     instruction: '',
-    key: '',
+    key: ''
   }
-  gamestate.bodysnatcher.instruction = randomAlienInstruction
-  gamestate.bodysnatcher.key = alienKey */
+  gamestate[prefix].instruction = randomMorticianInstruction
+  gamestate[prefix].key = morticianKey
 
   tokens.forEach(token => {
     let action = {}
 
     const card = gamestate.players[token].card
 
-    if (prefix === 'mortician' && isActivePlayer(card).MORTICIAN) {
+    if ((prefix === 'mortician' && isActivePlayer(card).MORTICIAN) || (prefix === 'doppelganger_mortician' && isActivePlayer(card).DOPPELGÄNGER_MORTICIAN)) {
       gamestate.players[token].action_finished = false
 
-      action = morticianAction(gamestate, token, title, randomMorticianInstruction, morticianKey)
-    } else if (prefix === 'doppelganger_mortician' && isActivePlayer(card).DOPPELGÄNGER_MORTICIAN) {
-      action = morticianAction(gamestate, token, title, randomMorticianInstruction, morticianKey)
+      action = morticianAction(gamestate, token, title, prefix)
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

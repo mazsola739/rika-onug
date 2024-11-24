@@ -20,8 +20,13 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
   const narration = [
     hasDoppelganger ? 'doppelganger_familyman_kickoff_text' : 'familyman_kickoff_text',
     randomAvailableOption,
-    randomFamilyman.includes('1p') ? 'familyman_is_end_text' : 'familyman_are_end_text'
+    randomAvailableOption.includes('1p') ? 'familyman_is_end_text' : 'familyman_are_end_text'
   ]
+
+  gamestate.familyman = {
+    instruction: ''
+  }
+  gamestate.familyman.instruction = randomAvailableOption
 
   tokens.forEach(token => {
     let action = {}

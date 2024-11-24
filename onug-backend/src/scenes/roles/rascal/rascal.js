@@ -28,12 +28,12 @@ export const rascal = (gamestate, title, prefix) => {
       break
   }
 
-  gamestate.rascal = {
+  gamestate[prefix] = {
     instruction: '',
     key: ''
   }
-  gamestate.rascal.instruction = randomRascalInstruction
-  gamestate.rascal.key = rascalKey
+  gamestate[prefix].instruction = randomRascalInstruction
+  gamestate[prefix].key = rascalKey
 
   tokens.forEach(token => {
     let action = {}
@@ -47,7 +47,7 @@ export const rascal = (gamestate, title, prefix) => {
       } else {
         gamestate.players[token].action_finished = false
 
-        action = rascalAction(gamestate, token, title)
+        action = rascalAction(gamestate, token, title, prefix)
       }
     }
 

@@ -11,11 +11,7 @@ export const thecount = (gamestate, title, prefix) => {
 
     const card = gamestate.players[token].card
 
-    if (prefix === 'thecount' && isActivePlayer(card).THE_COUNT) {
-      gamestate.players[token].action_finished = false
-
-      action = thecountAction(gamestate, token, title)
-    } else if (prefix === 'doppelganger_thecount' && isActivePlayer(card).DOPPELGÄNGER_THE_COUNT) {
+    if ((prefix === 'thecount' && isActivePlayer(card).THE_COUNT) || (prefix === 'doppelganger_thecount' && isActivePlayer(card).DOPPELGÄNGER_THE_COUNT)) {
       gamestate.players[token].action_finished = false
 
       action = thecountAction(gamestate, token, title)

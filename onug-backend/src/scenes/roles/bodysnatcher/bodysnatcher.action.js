@@ -1,7 +1,7 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
 import { generateRoleAction, getAnyEvenOrOddPlayerNumbers, getAnyOtherPlayersByToken, getPlayerNeighborsByToken, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
-export const bodysnatcherAction = (gamestate, token, title, randomBodysnatcherInstruction, bodysnatcherKey) => {
+export const bodysnatcherAction = (gamestate, token, title, prefix) => {
   if (gamestate.players[token].shield) {
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],
@@ -12,6 +12,9 @@ export const bodysnatcherAction = (gamestate, token, title, randomBodysnatcherIn
       private_message: ['action_shielded']
     })
   }
+
+  const randomBodysnatcherInstruction = gamestate[prefix].instruction
+  const bodysnatcherKey = gamestate[prefix].key
 
   let selectablePlayers
   let selectableCards
