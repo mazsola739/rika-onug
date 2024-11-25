@@ -38,6 +38,9 @@ class PropStore {
   get cow() {
     return this.action.cow
   }
+  get current() {
+    return this.action.current
+  }
   get dreamwolf() {
     return this.action.dreamwolf
   }
@@ -55,6 +58,9 @@ class PropStore {
   }
   get obligatory() {
     return this.action.obligatory
+  }
+  get oracle() {
+    return this.action.oracle
   }
   get part_of_blob() {
     return this.action.part_of_blob
@@ -150,6 +156,7 @@ class PropStore {
       answer_options: [],
       artifacted_cards: [],
       cow: [],
+      current: [],
       dreamwolf: [],
       groobzerb: [],
       scene_end: false,
@@ -157,6 +164,7 @@ class PropStore {
       madscientist: [],
       masons: [],
       new_role_id: 0,
+      oracle: [],
       part_of_blob: [],
       selectable_card_limit: { player: 0, center: 0 },
       selectable_cards: [],

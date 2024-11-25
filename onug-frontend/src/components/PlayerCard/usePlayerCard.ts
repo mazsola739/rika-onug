@@ -1,6 +1,6 @@
-import { selectionStore, deckStore } from 'store'
+import { deckStore, selectionStore } from 'store'
 import { voteStore } from 'store/VoteStore'
-import { TablePlayerCard, CardPositionType } from 'types'
+import { CardPositionType, TablePlayerCard } from 'types'
 import { getCardImageSrc, getPlayerNumberToken } from './PlayerCards.utils'
 
 export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
@@ -19,45 +19,53 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
 
   const position = card?.position || ''
   const isCenterCard = position.startsWith('center_')
+
+  const hasMarks = deckStore.hasMarks
+  const hasSentinel = deckStore.hasSentinel
+  const hasCurator = deckStore.hasCurator
+
   const image = getCardImageSrc(card)
   const playerNumberToken = getPlayerNumberToken(position)
   let playerName = card?.player_name || ''
   const markName = card?.mark
+
   const isShielded = card?.shield
   const isArtifacted = card?.artifact
-  const isWerewolf = card?.werewolves
-  const isGroobzerb = card?.groobzerb
-  const isDreamwolf = card?.dreamwolf
-  const isMason = card?.masons
-  const isLovers = card?.lovers
-  const isVampire = card?.vampires
-  const isAlien = card?.aliens
-  const isCow = card?.cow
-  const isPartOfBlob = card?.part_of_blob
-  const isPartOfFamily = card?.part_of_family
 
   const isSelectableCard = card?.selectable_card
   const isSelectableMark = card?.selectable_mark
   const isCardSelected = selectedCards.includes(position)
   const isMarkSelected = selectedMarks.includes(position)
 
-  const guessTokens = voteStore.isGuessing ? voteStore.getGuessTokensByPosition(card.position) : null
-  const hasMarks = deckStore.hasMarks
-  const hasSentinel = deckStore.hasSentinel
-  const hasCurator = deckStore.hasCurator
+  const isAlien = card?.aliens
+  const isCow = card?.cow
+  const isCurrentPlayer = card?.current
+  const isDreamwolf = card?.dreamwolf
+  const isGroobzerb = card?.groobzerb
+  const isLovers = card?.lovers
+  const isMason = card?.masons
+  const isOracle = card?.oracle
+  const isPartOfBlob = card?.part_of_blob
+  const isPartOfFamily = card?.part_of_family
+  const isVampire = card?.vampires
+  const isWerewolf = card?.werewolves
 
-  /* ⚡-villains, 🦇-vampire, 🛸-alien, 🐺-wolf,💤-dreamwolf, 👽-groob zerb, 🩷-lover, ⚒️-masons, 🗡️-assassin, 🧪-mad, 🦠-blob, 🩵-family, 👁️ -seer, 🪢-tanner, 🐄 - cow*/
+  const guessTokens = voteStore.isGuessing ? voteStore.getGuessTokensByPosition(card.position) : null
+
+  /* ⚡-villains, 🗡️-assassin, 🧪-mad,  🔮 -seer, 🪢-tanner, */
   const roles = []
-  if (isWerewolf) roles.push('🐺')
-  if (isDreamwolf) roles.push('💤')
-  if (isMason) roles.push('⚒️')
-  if (isLovers) roles.push('🩷')
-  if (isVampire) roles.push('🦇')
   if (isAlien) roles.push('🛸')
   if (isCow) roles.push('🐄')
+  if (isCurrentPlayer) roles.push('🔦')
+  if (isDreamwolf) roles.push('💤')
   if (isGroobzerb) roles.push('👽')
+  if (isLovers) roles.push('🩷')
+  if (isMason) roles.push('⚒️')
+  if (isOracle) roles.push('🌟')
   if (isPartOfBlob) roles.push('🦠')
   if (isPartOfFamily) roles.push('🩵')
+  if (isVampire) roles.push('🦇')
+  if (isWerewolf) roles.push('🐺')
 
   if (ownCard) {
     playerName = 'You'
@@ -80,16 +88,18 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
   }
 
   const playerNumberProps = {
-    lovers: isLovers,
-    werewolf: isWerewolf,
-    dreamwolf: isDreamwolf,
-    masons: isMason,
-    vampires: isVampire,
     aliens: isAlien,
     cow: isCow,
+    current: isCurrentPlayer,
+    dreamwolf: isDreamwolf,
     groobzerb: isGroobzerb,
+    lovers: isLovers,
+    masons: isMason,
+    oracle: isOracle,
     part_of_blob: isPartOfBlob,
-    part_of_family: isPartOfFamily
+    part_of_family: isPartOfFamily,
+    vampires: isVampire,
+    werewolf: isWerewolf
   }
 
   return {

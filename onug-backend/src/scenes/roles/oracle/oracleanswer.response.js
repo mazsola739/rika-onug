@@ -2,8 +2,7 @@ import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getN
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'
 
-//TODO uniqInformations
-export const oracleAnswerResponse = (gamestate, token, selected_card_positions, title) => {
+export const oracleanswerResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
@@ -11,7 +10,6 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
   let action = {}
 
   const oracleQuestion = gamestate.oracle.question
-  const oracleAftermath = gamestate.oracle.aftermath
 
   if (oracleQuestion === 'oracle_centerexchange_text') {
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
@@ -38,7 +36,7 @@ export const oracleAnswerResponse = (gamestate, token, selected_card_positions, 
       private_message: ['action_swapped_cards', ...messageIdentifiers]
     })
   } else if (oracleQuestion === 'oracle_viewcenter_text') {
-    const limit = +oracleAftermath.replace('oracle_view_yes', '').replace('_text', '')
+    const limit = gamestate.players[token].player_history[title].selectable_card_limit.center
     const selectedCardPositions = selected_card_positions.slice(0, limit)
     const selectedCards = getCardIdsByPositions(gamestate.card_positions, selectedCardPositions)
 

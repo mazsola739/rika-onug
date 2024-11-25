@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, CardImage, RoleImage, Title, TokenImage } from 'components'
-import { BUTTONS } from 'constant'
+import { button_label_done, button_label_finish, button_label_skip, button_label_vote } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { messageStore, propStore, selectionStore } from 'store'
@@ -165,11 +165,11 @@ export const MessageBox: React.FC = observer(() => {
         {isSelectableCards && <SelectableCards selectableCards={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />}
         {!scene_end && isSelectableCards && (
           <ButtonGroup>
-            <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
+            <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant="blue" />
             {isVote ? (
-              <Button onClick={() => handleVote(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={BUTTONS.vote_label} variant="purple" />
+              <Button onClick={() => handleVote(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={button_label_vote} variant="purple" />
             ) : (
-              <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabledCards} buttonText={BUTTONS.done_label} variant="green" />
+              <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={disabledCards} buttonText={button_label_done} variant="green" />
             )}
           </ButtonGroup>
         )}
@@ -177,11 +177,11 @@ export const MessageBox: React.FC = observer(() => {
         {isSelectableMarks && <SelectableMarks selectableMarks={messageStore.allSelectableMarks} selected={messageStore.allSelectedMarks} />}
         {!scene_end && isSelectableMarks && (
           <ButtonGroup>
-            <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
+            <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant="blue" />
             {isVote ? (
-              <Button onClick={() => handleVote(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={BUTTONS.vote_label} variant="purple" />
+              <Button onClick={() => handleVote(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={button_label_vote} variant="purple" />
             ) : (
-              <Button onClick={() => handleMarkInteraction(selectedMarks, title)} disabled={disabledMarks} buttonText={BUTTONS.done_label} variant="green" />
+              <Button onClick={() => handleMarkInteraction(selectedMarks, title)} disabled={disabledMarks} buttonText={button_label_done} variant="green" />
             )}
           </ButtonGroup>
         )}
@@ -189,8 +189,8 @@ export const MessageBox: React.FC = observer(() => {
         {isAnswerOptions && <Answer answer_options={answer_options} />}
         {!scene_end && isAnswerOptions && (
           <ButtonGroup>
-            <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={BUTTONS.skip_label} variant="blue" />
-            <Button onClick={() => handleAnswerInteraction(selectedAnswer, title)} disabled={selectedAnswer.length === 0} buttonText={BUTTONS.done_label} variant="green" />
+            <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant="blue" />
+            <Button onClick={() => handleAnswerInteraction(selectedAnswer, title)} disabled={selectedAnswer.length === 0} buttonText={button_label_done} variant="green" />
           </ButtonGroup>
         )}
 
@@ -199,7 +199,7 @@ export const MessageBox: React.FC = observer(() => {
 
       {scene_end && (
         <ButtonGroup>
-          <Button onClick={() => handleFinish(title)} buttonText={BUTTONS.finish_label} variant="purple" />
+          <Button onClick={() => handleFinish(title)} buttonText={button_label_finish} variant="purple" />
         </ButtonGroup>
       )}
     </StyledMessageBox>

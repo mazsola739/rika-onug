@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, Title } from 'components'
-import { BUTTONS } from 'constant'
+import { button_label_done } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { messageStore, selectionStore } from 'store'
@@ -16,7 +16,7 @@ export const SuspicionPlayers: React.FC = observer(() => {
       <Title title={'YOUR PRIME SUSPECT!'} />
       <AccusedPlayers />
       <ButtonGroup>
-        <Button onClick={() => handleAccuse(selectedCards)} variant="green" buttonText={BUTTONS.done_label} disabled={disabled} />
+        <Button onClick={() => handleAccuse(selectedCards)} variant="green" buttonText={button_label_done} disabled={disabled} />
       </ButtonGroup>
     </StyledSuspicionPlayers>
   )

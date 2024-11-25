@@ -135,10 +135,10 @@ export const responseHandler = async (gamestate, token, selected_card_positions,
       newGamestate = roles.nostradamusResponse(gamestate, token, selected_card_positions, scene_title)
       break
     case 'ORACLE_QUESTION':
-      newGamestate = roles.oracleQuestionResponse(gamestate, token, selected_answer, scene_title)
+      newGamestate = roles.oraclequestionResponse(gamestate, token, selected_answer, scene_title)
       break
     case 'ORACLE_ANSWER':
-      newGamestate = roles.oracleAnswerResponse(gamestate, token, selected_card_positions, scene_title)
+      newGamestate = roles.oracleanswerResponse(gamestate, token, selected_card_positions, scene_title)
       break
     case 'PARANORMAL_INVESTIGATOR':
       newGamestate = roles.paranormalinvestigatorResponse(gamestate, token, selected_card_positions, scene_title)

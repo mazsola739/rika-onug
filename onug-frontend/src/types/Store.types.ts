@@ -37,12 +37,14 @@ export type TablePlayerCard = {
   assassins?: boolean
   card_name?: string
   cow?: boolean
+  current?: boolean
   dreamwolf?: boolean
   groobzerb?: boolean
   lovers?: boolean
   madscientist?: boolean
   mark?: string
   masons?: boolean
+  oracle?: boolean
   part_of_blob?: boolean
   part_of_family?: boolean
   player_name?: string

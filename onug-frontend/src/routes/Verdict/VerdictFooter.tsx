@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, Footer } from 'components'
-import { BUTTONS } from 'constant'
+import { button_label_back } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 
@@ -9,7 +9,7 @@ export const VerdictFooter: React.FC = observer(() => {
   return (
     <Footer>
       <ButtonGroup>
-        <Button onClick={handleLeaveGame} buttonText={BUTTONS.back_label} variant="green" />
+        <Button onClick={handleLeaveGame} buttonText={button_label_back} variant="green" />
       </ButtonGroup>
     </Footer>
   )

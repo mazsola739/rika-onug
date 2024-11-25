@@ -1,39 +1,37 @@
-export const BUTTONS: Record<string, string> = {
-  yes_button_label: 'YES',
-  no_button_label: 'NO',
-  even_button_label: 'EVEN',
-  odd_button_label: 'ODD',
-  left_button_label: 'LEFT',
-  right_button_label: 'RIGHT',
-  '1_button_label': '1',
-  '2_button_label': '2',
-  '3_button_label': '3',
-  '4_button_label': '4',
-  '5_button_label': '5',
-  '6_button_label': '6',
-  '7_button_label': '7',
-  '8_button_label': '8',
-  '9_button_label': '9',
-  '10_button_label': '10',
-  '11_button_label': '11',
-  '12_button_label': '12',
-  pause_button_label: 'PAUSE',
-  pause_button_alt_label: 'RESUME',
-  stop_button_label: 'STOP',
-  votenow_button_label: 'VOTE NOW!',
-  reset_game_label: 'RESET',
-  play_game_label: 'PLAY',
-  deal_label: 'DEAL ',
-  start_game_label: 'START',
-  ready_label: 'READY?',
-  im_ready_label: "I'M READY!",
-  leave_label: 'LEAVE',
-  back_label: 'BACK',
-  skip_label: 'SKIP',
-  done_label: 'DONE',
-  finish_label: 'FINISH',
-  vote_label: 'VOTE',
-}
+export const button_label_yes = 'YES'
+export const button_label_no = 'NO'
+export const button_label_even = 'EVEN'
+export const button_label_odd = 'ODD'
+export const button_label_left = 'LEFT'
+export const button_label_right = 'RIGHT'
+export const button_label_1 = '1'
+export const button_label_2 = '2'
+export const button_label_3 = '3'
+export const button_label_4 = '4'
+export const button_label_5 = '5'
+export const button_label_6 = '6'
+export const button_label_7 = '7'
+export const button_label_8 = '8'
+export const button_label_9 = '9'
+export const button_label_10 = '10'
+export const button_label_11 = '11'
+export const button_label_12 = '12'
+export const button_label_pause = 'PAUSE'
+export const button_label_pause_alt = 'RESUME'
+export const button_label_stop = 'STOP'
+export const button_label_votenow = 'VOTE NOW!'
+export const button_label_reset = 'RESET'
+export const button_label_play = 'PLAY'
+export const button_label_deal = 'DEAL'
+export const button_label_start = 'START'
+export const button_label_ready = 'READY?'
+export const button_label_im_ready = "I'M READY!"
+export const button_label_leave = 'LEAVE'
+export const button_label_back = 'BACK'
+export const button_label_skip = 'SKIP'
+export const button_label_done = 'DONE'
+export const button_label_finish = 'FINISH'
+export const button_label_vote = 'VOTE'
 
 /* "YES" and "PLAY": Green (#4CAF50) "START"
 "NO" and "STOP": Red (#F44336)

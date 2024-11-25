@@ -1,8 +1,8 @@
 import { Button, ButtonGroup, Footer } from 'components'
-import { BUTTONS } from 'constant'
+import { button_label_back, button_label_done, button_label_im_ready, button_label_ready, button_label_votenow } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
-import { propStore, playersStore, selectionStore, voteStore, messageStore } from 'store'
+import { messageStore, playersStore, propStore, selectionStore } from 'store'
 
 export const CouncilFooter: React.FC = observer(() => {
   const { handleReady, handleLeaveGame, handleVoteNow, handleAccuse } = useClickHandler()
@@ -18,13 +18,13 @@ export const CouncilFooter: React.FC = observer(() => {
   return (
     <Footer>
       {propStore.selectable_cards.length > 0 ? (
-        <ButtonGroup>{!end && <Button onClick={() => handleAccuse(selectedCards)} variant="green" buttonText={BUTTONS.done_label} disabled={disabled} />}</ButtonGroup>
+        <ButtonGroup>{!end && <Button onClick={() => handleAccuse(selectedCards)} variant="green" buttonText={button_label_done} disabled={disabled} />}</ButtonGroup>
       ) : (
         !end && (
           <ButtonGroup>
-            <Button onClick={handleLeaveGame} buttonText={BUTTONS.back_label} variant="red" />
-            <Button onClick={handleVoteNow} buttonText={BUTTONS.votenow_button_label} disabled={disabledVote} variant="orange" />
-            <Button onClick={handleReady} variant={isReady ? 'blue' : 'green'} buttonText={isReady ? BUTTONS.im_ready_label : BUTTONS.ready_label} />
+            <Button onClick={handleLeaveGame} buttonText={button_label_back} variant="red" />
+            <Button onClick={handleVoteNow} buttonText={button_label_votenow} disabled={disabledVote} variant="orange" />
+            <Button onClick={handleReady} variant={isReady ? 'blue' : 'green'} buttonText={isReady ? button_label_im_ready : button_label_ready} />
           </ButtonGroup>
         )
       )}

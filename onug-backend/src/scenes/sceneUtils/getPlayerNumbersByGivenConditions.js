@@ -4,7 +4,7 @@ import { ALL_ALIEN, ALL_SUPER_VILLAIN, ALL_VAMPIRE, ALL_WEREWOLF, MASONS, WEREVO
 const filters = {
   //no role
   playerWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number), //do i need
-  player: (player) => player.player_number, //do i need
+  player: player => player.player_number, //do i need
 
   //werwolves
   nonWerewolfWithoutShield: (player, shieldedCards) => !ALL_WEREWOLF.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
@@ -29,6 +29,9 @@ const filters = {
   nonVillainWithoutShield: (player, shieldedCards) => !ALL_SUPER_VILLAIN.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
   villain: player => ALL_SUPER_VILLAIN.includes(player.card.player_role_id),
 
+  //oracle
+  oracle: player => player.card.player_role_id === 50 && player.card.oracle_eyes_open,
+
   //masons
   mason: player => MASONS.includes(player.card.player_role_id),
 
@@ -46,14 +49,14 @@ const filters = {
   cow: player => player.card.player_role_id === 45,
 
   //seer
-  anySeer: player => player.card.player_role_id === 9 || player.card.player_role_id === 18, 
+  anySeer: player => player.card.player_role_id === 9 || player.card.player_role_id === 18,
   anySeerWithoutShield: (player, shieldedCards) => (player.card.player_role_id === 9 || player.card.player_role_id === 18) && !shieldedCards.includes(player.player_number),
 
   //mad
   madscientist: player => player.card.player_role_id === 63,
 
   //mark or card action done
-  cardOrMarkActionTrue: player => player.card_or_mark_action === true 
+  cardOrMarkActionTrue: player => player.card_or_mark_action === true
 }
 
 export const getPlayerNumbersByGivenConditions = (players, filter, shieldedCards = []) => {
@@ -71,7 +74,7 @@ export const getPlayerNumbersByGivenConditions = (players, filter, shieldedCards
 
 export const getSelectableOtherPlayerNumbersWithNoShield = (players, token) => {
   const result = []
-//!shieldedCards.includes(player.player_number)
+  //!shieldedCards.includes(player.player_number)
   Object.keys(players).forEach(playerToken => {
     if (playerToken !== token && players[playerToken].shield !== true) {
       result.push(players[playerToken].player_number)

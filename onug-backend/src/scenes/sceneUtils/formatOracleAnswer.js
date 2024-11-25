@@ -1,1 +1,1 @@
-export const formatOracleAnswer = answer => `${answer}_button_label`
+export const formatOracleAnswer = answer => `button_label_${answer}`

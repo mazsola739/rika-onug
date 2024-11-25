@@ -1,9 +1,8 @@
 import { generateRoleAction, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { formatOracleAnswer } from '../../sceneUtils/formatOracleAnswer'
 import { validateAnswerSelection } from '../../validators'
 
-export const oracleQuestionResponse = (gamestate, token, selected_answer, title) => {
+export const oraclequestionResponse = (gamestate, token, selected_answer, title) => {
   if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
     return gamestate
   }
@@ -11,7 +10,7 @@ export const oracleQuestionResponse = (gamestate, token, selected_answer, title)
   const oracleQuestion = gamestate.oracle.question
 
   if (oracleQuestion === 'oracle_guessnumber_text') {
-    const answer = selected_answer
+    const answer = +selected_answer
     const number = gamestate.oracle.number
     if (answer === number) {
       gamestate.oracle.answer = 'success'
@@ -25,11 +24,13 @@ export const oracleQuestionResponse = (gamestate, token, selected_answer, title)
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     question: oracleQuestion,
-    answer: selected_answer
+    answer: selected_answer,
+    scene_end: true
   }
 
   const action = generateRoleAction(gamestate, token, {
-    private_message: ['action_oracle_answer', formatOracleAnswer(selected_answer)]
+    private_message: ['action_oracle_answer', `button_label_${selected_answer}`],
+    scene_end: true
   })
 
   const narration = getNarrationByTitle(title, gamestate.narration)

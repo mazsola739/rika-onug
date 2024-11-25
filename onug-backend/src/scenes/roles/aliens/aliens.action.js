@@ -15,6 +15,7 @@ import { moveCards } from '../../sceneUtils/moveCards'
 export const aliensAction = (gamestate, token, title) => {
   const aliens = getPlayerNumbersByGivenConditions(gamestate.players, 'alien')
   const cow = getPlayerNumbersByGivenConditions(gamestate.players, 'cow')
+
   const aliensWithoutShield = getPlayerNumbersByGivenConditions(gamestate.players, 'alienWithoutShield', gamestate.shielded_cards)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
 

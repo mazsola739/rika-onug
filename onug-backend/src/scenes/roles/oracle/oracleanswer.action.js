@@ -1,44 +1,35 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumberWithMatchingToken, getRandomNumber } from '../../sceneUtils'
-import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 
-export const oracleAnswerAftermath = (gamestate, token, title) => {
+export const oracleanswerAction = (gamestate, token, title) => {
   const oracleQuestion = gamestate.oracle.question
   const oracleAnswer = gamestate.oracle.answer
   const oracleAftermath = gamestate.oracle.aftermath
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
-  const currentPlayerCard = {
-    ...gamestate.card_positions[currentPlayerNumber].card
-  }
 
   let showCards = []
-  let limit = 0
+  let selectableCards = {}
   let privateMessage = []
+  let scene_end = false
+  let obligatory = false
 
   switch (oracleQuestion) {
     case 'oracle_guessnumber_text':
-      if (oracleAftermath.includes('success')) {
-        gamestate.oracle_eyes_open = true
+      if (oracleAnswer.includes('success')) {
+        gamestate.players[token].card.oracle_eyes_open = true
         privateMessage = ['action_oracle_open_you_eyes']
       } else {
-        gamestate.oracle_target = true
-
         gamestate.players[token].card.player_team = 'oracle'
-        currentPlayerCard.team = 'oracle'
+        gamestate.card_positions[currentPlayerNumber].card.team = 'oracle'
         privateMessage = ['action_oracle_team']
       }
+      scene_end = true
       break
     case 'oracle_viewplayer_text':
       gamestate.players[token].card_or_mark_action = true
-
-      if (oracleAftermath.includes('yes')) {
-        showCards = getCardIdsByPositions(gamestate.card_positions, [`player_${oracleAnswer}`])
-      } else {
-        const randomPlayerNumber = getRandomNumber(1, gamestate.total_players)
-        showCards = getCardIdsByPositions(gamestate.card_positions, [`player_${randomPlayerNumber}`])
-      }
-
-      privateMessage = ['action_selected_card', formatPlayerIdentifier(showCards)]
+      showCards = getCardIdsByPositions(gamestate.card_positions, [`player_${oracleAnswer}`])
+      privateMessage = ['action_selected_card', formatPlayerIdentifier([`player_${oracleAnswer}`])[0]]
+      scene_end = true
       break
     case 'oracle_alienteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
@@ -46,50 +37,68 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
         privateMessage = ['action_alien_team']
         if (oracleAftermath.includes('yes2')) {
           gamestate.players[token].card.player_role = 'ALIEN'
-          currentPlayerCard.role = 'ALIEN'
-          currentPlayerCard.team = 'alien'
+          gamestate.card_positions[currentPlayerNumber].card.role = 'ALIEN'
+          gamestate.card_positions[currentPlayerNumber].card.team = 'alien'
           privateMessage = ['action_alien_role']
         }
       } else {
         privateMessage = ['action_stay_oracle']
       }
+      scene_end = true
       break
     case 'oracle_werewolfteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
         gamestate.players[token].card.player_team = 'werewolf'
-        currentPlayerCard.team = 'werewolf'
+        gamestate.card_positions[currentPlayerNumber].card.team = 'werewolf'
         privateMessage = ['action_werewolf_team']
       } else {
         privateMessage = ['action_stay_oracle']
       }
+      scene_end = true
       break
     case 'oracle_vampireteam_text':
       if (!oracleAftermath.includes('teamswitch_yes')) {
         gamestate.players[token].card.player_team = 'vampire'
-        currentPlayerCard.team = 'vampire'
+        gamestate.card_positions[currentPlayerNumber].card.team = 'vampire'
         privateMessage = ['action_vampire_team']
       } else {
         privateMessage = ['action_stay_oracle']
       }
+      scene_end = true
       break
     case 'oracle_centerexchange_text':
       if (!oracleAftermath.includes('yes2')) {
-        limit = 1
+        selectableCards = {
+          selectable_cards: CENTER_CARD_POSITIONS,
+          selectable_card_limit: { player: 0, center: 1 }
+        }
         privateMessage = ['action_must_one_center']
+        obligatory = true
       } else {
         privateMessage = ['action_stay_oracle']
+        scene_end = true
       }
       break
     case 'oracle_viewcenter_text':
       if (oracleAftermath.includes('yes1')) {
-        limit = 1
-        privateMessage = ['action_must_one_center']
+        selectableCards = {
+          selectable_cards: CENTER_CARD_POSITIONS,
+          selectable_card_limit: { player: 0, center: 1 }
+        }
+        privateMessage = ['action_may_one_center']
       } else if (oracleAftermath.includes('yes2')) {
-        limit = 2
-        privateMessage = ['action_must_two_center']
+        selectableCards = {
+          selectable_cards: CENTER_CARD_POSITIONS,
+          selectable_card_limit: { player: 0, center: 2 }
+        }
+        privateMessage = ['action_may_two_center']
       } else if (oracleAftermath.includes('yes3')) {
-        limit = 3
+        selectableCards = {
+          selectable_cards: CENTER_CARD_POSITIONS,
+          selectable_card_limit: { player: 0, center: 3 }
+        }
         privateMessage = ['action_must_three_center']
+        obligatory = true
       }
       break
   }
@@ -97,24 +106,15 @@ export const oracleAnswerAftermath = (gamestate, token, title) => {
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     viewed_cards: showCards,
-    selectableCards: {
-      selectable_cards: CENTER_CARD_POSITIONS,
-      selectable_card_limit: { player: 0, center: limit }
-    }
+    scene_end,
+    obligatory
   }
 
-  const action = generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, {
     private_message: privateMessage,
     showCards,
-    selectableCards: {
-      selectable_cards: CENTER_CARD_POSITIONS,
-      selectable_card_limit: { player: 0, center: limit }
-    }
+    selectableCards,
+    scene_end,
+    obligatory
   })
-
-  const narration = getNarrationByTitle(title, gamestate.narration)
-
-  createAndSendSceneMessage(gamestate, token, title, action, narration)
-
-  return gamestate
 }

@@ -43,6 +43,7 @@ export type InteractionType = {
   apprenticeassassins?: CardPositionType[]
   assassins?: CardPositionType[]
   cow?: CardPositionType[]
+  current?: CardPositionType[]
   dreamwolf?: CardPositionType[]
   groobzerb?: CardPositionType[]
   lovers?: CardPositionType[]
@@ -50,6 +51,7 @@ export type InteractionType = {
   masons?: CardPositionType[]
   new_role_id?: number
   obligatory?: boolean
+  oracle?: CardPositionType[]
   part_of_blob?: CardPositionType[]
   part_of_family?: CardPositionType[]
   private_message?: string[]

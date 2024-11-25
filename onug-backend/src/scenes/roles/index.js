@@ -167,11 +167,11 @@ export * from './nostradamus/nostradamus.reaction'
 export * from './nostradamus/nostradamus.response'
 
 export * from './oracle/oracle.constants'
+export * from './oracle/oracleanswer.action'
 export * from './oracle/oracleanswer'
-export * from './oracle/oracleanswer.aftermath'
 export * from './oracle/oracleanswer.response'
+export * from './oracle/oraclequestion.action'
 export * from './oracle/oraclequestion'
-export * from './oracle/oraclequestion.raising'
 export * from './oracle/oraclequestion.response'
 
 export * from './paranormalinvestigator/paranormalinvestigator.action'

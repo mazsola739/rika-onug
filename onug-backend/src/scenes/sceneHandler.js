@@ -3,7 +3,8 @@ import { upsertRoomState } from '../repository'
 import * as conditions from './conditions'
 import * as roles from './roles'
 
-//! todo save action identifiers for this: RIPPLE, aliens, blob, bodysnatcher, exposer, familyman, mortician, oracle, psychic, rascal
+//! todo save action identifiers for this: RIPPLE,  oracle,
+
 export const sceneHandler = async (gamestate, scene_title) => {
   logTrace(`sceneHandler in room [${gamestate.room_id}] called when actual scene is: ${scene_title}`)
 

@@ -1,3 +1,4 @@
+export * from './buttons'
 export * from './narrations/identifier'
 export * from './role'
 
@@ -10,8 +11,10 @@ export const no_selectable_option = 'No selectable option, sorry'
 export const really_want = 'Is that you really want?'
 export const the_end = 'The end is near...'
 
+export const look_oracle_answer = 'The Oracle is decided, look her answer'
+
 export const action_oracle_question = 'Answer the question'
-export const action_oracle_answer = 'Your answer'
+export const action_oracle_answer = 'Your answer:'
 export const action_oracle_open_you_eyes = 'You can open your eyes for the next scene'
 export const action_stay_oracle = 'Stay oracle'
 
@@ -97,6 +100,7 @@ export const action_may_look_yourself = 'You may look at your cards'
 
 //center card
 export const action_may_one_center = 'You may choose one center card'
+export const action_may_two_center = 'You may choose two center card'
 export const action_must_one_center = 'You must choose one center card'
 export const action_must_two_center = 'You must choose two center cards'
 export const action_must_three_center = 'You must choose three center cards'
