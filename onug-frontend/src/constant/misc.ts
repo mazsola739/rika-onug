@@ -19,6 +19,15 @@ export const EXPANSIONS: ExpansionsType = {
   bonusroles: 'Bonus Roles'
 }
 
+export const EXPANSION: ExpansionType = {
+  werewolf: 'Werewolf',
+  daybreak: 'Daybreak',
+  vampire: 'Vampire',
+  alien: 'Alien',
+  supervillains: 'Super Villains',
+  bonusroles: 'Bonus Roles'
+}
+
 export const TEAM_NAMES: TeamNamesTypes = {
   werewolf: 'Werewolf',
   vampire: 'Vampire',
@@ -43,15 +52,6 @@ export const WAKE: WakeType = {
   twilight: 'twilight',
   dusk: 'dusk',
   night: 'night'
-}
-
-export const EXPANSION: ExpansionType = {
-  werewolf: 'Werewolf',
-  daybreak: 'Daybreak',
-  vampire: 'Vampire',
-  alien: 'Alien',
-  supervillains: 'Super Villains',
-  bonusroles: 'Bonus Roles'
 }
 
 export const TEAM: TeamType = {

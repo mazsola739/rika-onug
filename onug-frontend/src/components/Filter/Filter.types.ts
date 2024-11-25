@@ -1,6 +1,6 @@
-import { ExpansionType } from 'types'
+import { Expansion } from 'types'
 
 export interface FilterButtonProps {
-  expansion: ExpansionType
+  expansion: Expansion
   isSelected?: boolean
 }

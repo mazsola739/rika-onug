@@ -2,7 +2,7 @@ import { EXPANSIONS } from 'constant'
 import { observer } from 'mobx-react-lite'
 import { StyledFilter, FilterButtons } from './Filter.styles'
 import { FilterButton } from './FilterButton'
-import { ExpansionType } from 'types'
+import { Expansion } from 'types'
 import { Title } from 'components'
 
 export const Filter: React.FC = observer(() => {
@@ -13,7 +13,7 @@ export const Filter: React.FC = observer(() => {
       <Title title={'EXPANSIONS'} />
       <FilterButtons>
         {expansionNames.map((expansion, index) => (
-          <FilterButton key={index} expansion={expansion as ExpansionType} isSelected={false} />
+          <FilterButton key={index} expansion={expansion as Expansion} isSelected={false} />
         ))}
       </FilterButtons>
     </StyledFilter>
