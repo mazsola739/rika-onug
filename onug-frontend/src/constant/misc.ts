@@ -74,9 +74,3 @@ export const TEAMNAME = {
   alien: 'The Cosmic Collective',
   villain: "The Rogue's Gallery"
 }
-
-export const conjunction_and = 'and'
-export const conjunction_or = 'or'
-
-export const direction_left = 'left'
-export const direction_right = 'right'
