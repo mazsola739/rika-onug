@@ -29,7 +29,6 @@ class RiseAndRestStore {
       madscientist: false,
       mark: '',
       masons: false,
-      oracle: false,
       part_of_blob: false,
       part_of_family: false,
       role: '',
@@ -42,7 +41,8 @@ class RiseAndRestStore {
       team: '',
       vampires: false,
       villains: false,
-      werewolves: false
+      werewolves: false,
+      witness: false
     }
   }
 
@@ -75,7 +75,6 @@ class RiseAndRestStore {
       lovers: propStore.lovers.includes(position),
       madscientist: propStore.madscientist.includes(position),
       masons: propStore.masons.includes(position),
-      oracle: propStore.oracle.includes(position),
       part_of_blob: propStore.part_of_blob.includes(position),
       part_of_family: propStore.part_of_family.includes(position),
       seers: propStore.seers.includes(position),
@@ -85,7 +84,8 @@ class RiseAndRestStore {
       tanner: propStore.tanner.includes(position),
       vampires: propStore.vampires.includes(position),
       villains: propStore.villains.includes(position),
-      werewolves: propStore.werewolves.includes(position)
+      werewolves: propStore.werewolves.includes(position),
+      witness: propStore.witness.includes(position)
     }
   }
 

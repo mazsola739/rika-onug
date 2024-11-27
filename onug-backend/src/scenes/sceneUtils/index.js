@@ -1,3 +1,4 @@
+export * from './alienAbducted'
 export * from './createAndSendSceneMessage'
 export * from './formatPlayerIdentifier'
 export * from './generateRoleAction'

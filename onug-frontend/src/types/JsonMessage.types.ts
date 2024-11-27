@@ -51,7 +51,6 @@ export type InteractionType = {
   masons?: CardPositionType[]
   new_role_id?: number
   obligatory?: boolean
-  oracle?: CardPositionType[]
   part_of_blob?: CardPositionType[]
   part_of_family?: CardPositionType[]
   private_message?: string[]
@@ -74,6 +73,7 @@ export type InteractionType = {
   villains?: CardPositionType[]
   vote?: boolean
   werewolves?: CardPositionType[]
+  witness?: CardPositionType[]
 }
 
 export type NarrationType = keyof typeof narration_text

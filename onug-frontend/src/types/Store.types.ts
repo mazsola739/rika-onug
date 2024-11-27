@@ -44,7 +44,6 @@ export type TablePlayerCard = {
   madscientist?: boolean
   mark?: string
   masons?: boolean
-  oracle?: boolean
   part_of_blob?: boolean
   part_of_family?: boolean
   player_name?: string
@@ -61,4 +60,5 @@ export type TablePlayerCard = {
   vampires?: boolean
   villains?: boolean
   werewolves?: boolean
+  witness?: boolean
 }

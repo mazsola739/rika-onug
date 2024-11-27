@@ -205,6 +205,7 @@ export * from './revealer/revealer.action'
 export * from './revealer/revealer'
 export * from './revealer/revealer.response'
 
+export * from './ripple/ripple.action'
 export * from './ripple/ripple.constants'
 export * from './ripple/ripple'
 

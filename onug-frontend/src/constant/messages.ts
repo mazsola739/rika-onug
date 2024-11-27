@@ -10,12 +10,13 @@ export const no_selectable_option = 'No selectable option, sorry'
 
 export const really_want = 'Is that you really want?'
 export const the_end = 'The end is near...'
-
-export const look_oracle_answer = 'The Oracle is decided, look her answer'
+export const ripple_start = 'Get ready for best night of your life!'
+export const action_open_you_eyes = 'You can open your eyes for the rest of the night'
+export const action_watch_or_skip = 'You can watch or skip the scene'
+export const action_no_active_player = 'No active player in the scene'
 
 export const action_oracle_question = 'Answer the question'
 export const action_oracle_answer = 'Your answer:'
-export const action_oracle_open_you_eyes = 'You can open your eyes for the next scene'
 export const action_stay_oracle = 'Stay oracle'
 
 //TEAM

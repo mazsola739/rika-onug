@@ -138,73 +138,73 @@ export const script: ScriptJson[] = [
     scene_number: 26
   },
   {
-    scene_title: 'LEADER',
-    scene_img: 'leader',
-    scene_number: 27
-  },
-  {
-    scene_title: 'LEADER_ZERB_GROOB',
-    scene_img: 'leader',
-    scene_number: 28
-  },
-  {
     scene_title: 'BODY_SNATCHER',
     scene_img: 'body_snatcher',
-    scene_number: 29
+    scene_number: 27
   },
   {
     scene_title: 'DOPPELGÄNGER_BODY_SNATCHER',
     scene_img: 'doppelganger',
-    scene_number: 30
+    scene_number: 28
   },
   {
     scene_title: 'SUPER_VILLAINS',
     scene_img: 'villains',
-    scene_number: 31
+    scene_number: 29
   },
   {
     scene_title: 'TEMPTRESS',
     scene_img: 'temptress',
-    scene_number: 32
+    scene_number: 30
   },
   {
     scene_title: 'DR_PEEKER',
     scene_img: 'dr_peeker',
-    scene_number: 33
+    scene_number: 31
   },
   {
     scene_title: 'RAPSCALLION',
     scene_img: 'rapscallion',
-    scene_number: 34
+    scene_number: 32
   },
   {
     scene_title: 'EVILOMETER',
     scene_img: 'evilometer',
-    scene_number: 35
+    scene_number: 33
   },
   {
     scene_title: 'WEREWOLVES',
     scene_img: 'werewolves',
-    scene_number: 36
+    scene_number: 34
   },
   {
     scene_title: 'ALPHA_WOLF',
     scene_img: 'alpha_wolf',
-    scene_number: 37
+    scene_number: 35
   },
   {
     scene_title: 'MYSTIC_WOLF',
     scene_img: 'mystic_wolf',
-    scene_number: 38
+    scene_number: 36
   },
   {
     scene_title: 'MINION',
     scene_img: 'minion',
-    scene_number: 39
+    scene_number: 37
   },
   {
     scene_title: 'APPRENTICE_TANNER',
     scene_img: 'apprentice_tanner',
+    scene_number: 38
+  },
+  {
+    scene_title: 'LEADER',
+    scene_img: 'leader',
+    scene_number: 39
+  },
+  {
+    scene_title: 'LEADER_ZERB_GROOB',
+    scene_img: 'leader',
     scene_number: 40
   },
   {
@@ -454,7 +454,7 @@ export const script: ScriptJson[] = [
   },
   {
     scene_title: 'END',
-    scene_img: 'day',
+    scene_img: 'heroes',
     scene_number: 90
   }
 ]

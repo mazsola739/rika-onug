@@ -1,4 +1,4 @@
-import { ALL_ALIEN, ALL_SUPER_VILLAIN, ALL_VAMPIRE, ALL_WEREWOLF, MASONS, WEREVOLVES_WITHOUT_DREAMWOLF } from '../../constants'
+import { ALIENS, SUPER_VILLAINS, VAMPIRES, MASONS, WEREVOLVES_WITHOUT_DREAMWOLF, WEREWOLVES } from '../../constants'
 
 //TODO finish
 const filters = {
@@ -7,30 +7,30 @@ const filters = {
   player: player => player.player_number, //do i need
 
   //werwolves
-  nonWerewolfWithoutShield: (player, shieldedCards) => !ALL_WEREWOLF.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
-  werewolfAndDreamwolf: player => ALL_WEREWOLF.includes(player.card.player_role_id),
-  werewolfAndDreamwolfWithoutShield: (player, shieldedCards) => ALL_WEREWOLF.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
+  nonWerewolfWithoutShield: (player, shieldedCards) => !WEREWOLVES.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
+  werewolfAndDreamwolf: player => WEREWOLVES.includes(player.card.player_role_id),
+  werewolfAndDreamwolfWithoutShield: (player, shieldedCards) => WEREWOLVES.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
   werewolf: player => WEREVOLVES_WITHOUT_DREAMWOLF.includes(player.card.player_role_id),
-  dreamWolf: player => player.card.player_role_id === 21 && player.card.player_mark !== 'mark_of_fear',
+  dreamwolf: player => player.card.player_role_id === 21 && player.card.player_mark !== 'mark_of_fear',
 
   //vampires
   vampireByMark: player => player.player_mark === 'mark_of_vampire',
-  vampire: player => ALL_VAMPIRE.includes(player.card.player_role_id),
-  nonVampire: player => !ALL_VAMPIRE.includes(player.card.player_role_id) && player.player_mark !== 'mark_of_vampire',
+  vampire: player => VAMPIRES.includes(player.card.player_role_id),
+  nonVampire: player => !VAMPIRES.includes(player.card.player_role_id) && player.player_mark !== 'mark_of_vampire',
 
   //aliens
-  alien: player => ALL_ALIEN.includes(player.card.player_role_id),
-  alienWithoutShield: (player, shieldedCards) => ALL_ALIEN.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
-  nonAlienWithoutShield: (player, shieldedCards) => !ALL_ALIEN.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
+  alien: player => ALIENS.includes(player.card.player_role_id),
+  alienWithoutShield: (player, shieldedCards) => ALIENS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
+  nonAlienWithoutShield: (player, shieldedCards) => !ALIENS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
   zerb: player => player.card.player_role_id === 54,
   groob: player => player.card.player_role_id === 47,
 
   //villains
-  nonVillainWithoutShield: (player, shieldedCards) => !ALL_SUPER_VILLAIN.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
-  villain: player => ALL_SUPER_VILLAIN.includes(player.card.player_role_id),
+  nonVillainWithoutShield: (player, shieldedCards) => !SUPER_VILLAINS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
+  villain: player => SUPER_VILLAINS.includes(player.card.player_role_id),
 
-  //oracle
-  oracle: player => player.card.player_role_id === 50 && player.card.oracle_eyes_open,
+  //witness
+  witness: player => player.card.eyes_open,
 
   //masons
   mason: player => MASONS.includes(player.card.player_role_id),

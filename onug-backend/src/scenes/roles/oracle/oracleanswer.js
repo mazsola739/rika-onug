@@ -29,10 +29,10 @@ export const oracleAnswer = (gamestate, title) => {
       break
     case 'oracle_ripple_text':
       if (oracleAnswer === 'yes') {
-        gamestate.ripple = true
+        gamestate.ripple = { force: true }
         narration = ['oracle_ripple_yes_text']
       } else {
-        gamestate.ripple = false
+        gamestate.ripple = { force: false }
         narration = ['oracle_ripple_no_text']
       }
       break
@@ -64,9 +64,7 @@ export const oracleAnswer = (gamestate, title) => {
       const no = oracleResponses[oracleQuestion].no
       const options = yes.concat(no)
       const randomApproval = getRandomItemFromArray(options)
-      const player = randomApproval === 'oracle_viewplayer_result_text' 
-        ? oracleAnswer 
-        : Math.floor(Math.random() * gamestate.total_players) + 1
+      const player = randomApproval === 'oracle_viewplayer_result_text' ? oracleAnswer : Math.floor(Math.random() * gamestate.total_players) + 1
       if (player !== oracleAnswer) {
         gamestate.oracle.answer = player
       }

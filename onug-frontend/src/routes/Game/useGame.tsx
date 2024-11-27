@@ -1,8 +1,8 @@
 import { ALIENS, ARRIVE_GAME, END_GAME, HYDRATE_GAME, REDIRECT, SCENE, VAMPIRES } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { gameStatusStore, messageStore, propStore, riseAndRestStore, wsStore } from 'store'
-import { NarrationType, MessagesType } from 'types'
+import { messageStore, propStore, riseAndRestStore, wsStore } from 'store'
+import { MessagesType, NarrationType } from 'types'
 import { splitCardsToTable } from 'utils'
 
 export const useGame = () => {

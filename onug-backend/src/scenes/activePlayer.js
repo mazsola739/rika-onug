@@ -1,18 +1,22 @@
-import { ALL_ALIEN, ALL_COPY_PLAYER, ALL_SUPER_VILLAIN, ALL_VAMPIRE, ALL_WEREWOLF, COPY_PLAYER, GROOB_AND_ZERB, MASONS } from '../constants'
+import { ALIENS, ALL_COPY_PLAYER, SUPER_VILLAINS, VAMPIRES, WEREVOLVES_WITHOUT_DREAMWOLF, COPY_PLAYER, GROOB_AND_ZERB, MASONS } from '../constants'
 
 const isEveryOne = true
-//TODO oracle
-/* const isOracleEyesOpen = (card) => card.player_original_id === 50  && card.oracle_eyes_open */
+//TODO eyes open
+const isWitness = card => card.eyes_open
 
-const isRoleOrCopyPlayer = (card, roleIdArray) => {
+const isRolePlayersOrAllCopyPlayers = (card, roleIdArray) => {
   return roleIdArray.some(id => card.player_role_id === id && [id, ...ALL_COPY_PLAYER].includes(card.player_original_id))
 }
 
-const isSpecificRole = (card, roleId) => {
+const IsRolePlayerOrCopyRolePlayer = (card, roleId) => {
   return card.player_original_id === roleId || (card.player_role_id === roleId && COPY_PLAYER.includes(card.player_original_id))
 }
 
-const isCopyPlayerRole = (card, roleId) => {
+const IsRolePlayerOrAllCopyRolePlayer = (card, roleId) => {
+  return card.player_original_id === roleId || (card.player_role_id === roleId && ALL_COPY_PLAYER.includes(card.player_original_id))
+}
+
+const isDoppelgangerRolePlayer = (card, roleId) => {
   return card.player_role_id === roleId && card.player_original_id === 1
 }
 
@@ -21,93 +25,111 @@ const isLovers = card => {
 }
 
 export const isActivePlayer = card => {
-/*   const oracle = isOracleEyesOpen(card) */
   return {
-    ALIENS: /* oracle ||  */isRoleOrCopyPlayer(card, ALL_ALIEN),
-    ALPHA_WOLF: /* oracle ||  */isSpecificRole(card, 17),
-    ANNOYING_LAD: /* oracle ||  */isSpecificRole(card, 55),
-    APPRENTICE_ASSASSIN: /* oracle ||  */isSpecificRole(card, 28),
-    APPRENTICE_SEER: /* oracle ||  */isSpecificRole(card, 18),
-    APPRENTICE_TANNER: /* oracle ||  */isSpecificRole(card, 71),
-    ASSASSIN: /* oracle ||  */isSpecificRole(card, 29),
-    AURA_SEER: /* oracle ||  */isSpecificRole(card, 72),
-    BEHOLDER: /* oracle ||  */isSpecificRole(card, 73),
-    BLOB: /* oracle ||  */isSpecificRole(card, 44),
-    BODY_SNATCHER: /* oracle ||  */isSpecificRole(card, 74),
-    COPYCAT: /* oracle ||  */card.player_original_id === 30,
-    COW: /* oracle ||  */isSpecificRole(card, 45),
-    CUPID: /* oracle ||  */isSpecificRole(card, 31),
-    CURATOR: /* oracle ||  */isSpecificRole(card, 20),
-    DETECTOR: /* oracle ||  */isSpecificRole(card, 56),
-    DISEASED: /* oracle ||  */isSpecificRole(card, 32),
-    DOPPELGÄNGER: /* oracle ||  */card.player_original_id === 1,
-    DOPPELGÄNGER_APPRENTICE_ASSASSIN: /* oracle ||  */isCopyPlayerRole(card, 28),
-    DOPPELGÄNGER_ASSASSIN: /* oracle ||  */isCopyPlayerRole(card, 29),
-    DOPPELGÄNGER_BODY_SNATCHER: /* oracle ||  */isCopyPlayerRole(card, 74),
-    DOPPELGÄNGER_CURATOR: /* oracle ||  */isCopyPlayerRole(card, 20),
-    DOPPELGÄNGER_EMPATH: /* oracle ||  */isCopyPlayerRole(card, 20),
-    DOPPELGÄNGER_EXPOSER: /* oracle ||  */isCopyPlayerRole(card, 46),
-    DOPPELGÄNGER_FLIPPER: /* oracle ||  */isCopyPlayerRole(card, 59),
-    DOPPELGÄNGER_GREMLIN: /* oracle ||  */isCopyPlayerRole(card, 33),
-    DOPPELGÄNGER_INSTANT_ACTION: /* oracle ||  */card.player_original_id === 1,
-    DOPPELGÄNGER_MORTICIAN: /* oracle ||  */isCopyPlayerRole(card, 49),
-    DOPPELGÄNGER_PICKPOCKET: /* oracle ||  */isCopyPlayerRole(card, 36),
-    DOPPELGÄNGER_PRIEST: /* oracle ||  */isCopyPlayerRole(card, 37),
-    DOPPELGÄNGER_PSYCHIC: /* oracle ||  */isCopyPlayerRole(card, 51),
-    DOPPELGÄNGER_RASCAL: /* oracle ||  */isCopyPlayerRole(card, 52),
-    DOPPELGÄNGER_REVEALER: /* oracle ||  */isCopyPlayerRole(card, 24),
-    DOPPELGÄNGER_THE_COUNT: /* oracle ||  */isCopyPlayerRole(card, 39),
-    DR_PEEKER: /* oracle ||  */isSpecificRole(card, 57),
-    DRUNK: /* oracle ||  */isSpecificRole(card, 2),
-    EMPATH: /* oracle ||  */card.player_original_id !== 77 || (card.player_role_id !== 20 && COPY_PLAYER.includes(card.player_original_id)),
+    ALIENS: isRolePlayersOrAllCopyPlayers(card, ALIENS),
+    ALPHA_WOLF: IsRolePlayerOrCopyRolePlayer(card, 17),
+    ANNOYING_LAD: IsRolePlayerOrAllCopyRolePlayer(card, 55),
+    APPRENTICE_ASSASSIN: IsRolePlayerOrCopyRolePlayer(card, 28),
+    APPRENTICE_SEER: IsRolePlayerOrAllCopyRolePlayer(card, 18),
+    APPRENTICE_TANNER: IsRolePlayerOrAllCopyRolePlayer(card, 71),
+    ASSASSIN: IsRolePlayerOrCopyRolePlayer(card, 29),
+    AURA_SEER: IsRolePlayerOrAllCopyRolePlayer(card, 72),
+    BEHOLDER: IsRolePlayerOrAllCopyRolePlayer(card, 73),
+    BLOB: IsRolePlayerOrAllCopyRolePlayer(card, 44),
+    BODY_SNATCHER: IsRolePlayerOrCopyRolePlayer(card, 74),
+    COPYCAT: card.player_original_id === 30,
+    COW: IsRolePlayerOrAllCopyRolePlayer(card, 45),
+    CUPID: IsRolePlayerOrCopyRolePlayer(card, 31),
+    CURATOR: IsRolePlayerOrCopyRolePlayer(card, 20),
+    DETECTOR: IsRolePlayerOrAllCopyRolePlayer(card, 56),
+    DISEASED: IsRolePlayerOrCopyRolePlayer(card, 32),
+    DOPPELGÄNGER: card.player_original_id === 1,
+    DOPPELGÄNGER_APPRENTICE_ASSASSIN: isDoppelgangerRolePlayer(card, 28),
+    DOPPELGÄNGER_ASSASSIN: isDoppelgangerRolePlayer(card, 29),
+    DOPPELGÄNGER_BODY_SNATCHER: isDoppelgangerRolePlayer(card, 74),
+    DOPPELGÄNGER_CURATOR: isDoppelgangerRolePlayer(card, 20),
+    DOPPELGÄNGER_EMPATH: isDoppelgangerRolePlayer(card, 77),
+    DOPPELGÄNGER_EXPOSER: isDoppelgangerRolePlayer(card, 46),
+    DOPPELGÄNGER_FLIPPER: isDoppelgangerRolePlayer(card, 59),
+    DOPPELGÄNGER_GREMLIN: isDoppelgangerRolePlayer(card, 33),
+    DOPPELGÄNGER_INSTANT_ACTION: card.player_original_id === 1,
+    DOPPELGÄNGER_MORTICIAN: isDoppelgangerRolePlayer(card, 49),
+    DOPPELGÄNGER_PICKPOCKET: isDoppelgangerRolePlayer(card, 36),
+    DOPPELGÄNGER_PRIEST: isDoppelgangerRolePlayer(card, 37),
+    DOPPELGÄNGER_PSYCHIC: isDoppelgangerRolePlayer(card, 51),
+    DOPPELGÄNGER_RASCAL: isDoppelgangerRolePlayer(card, 52),
+    DOPPELGÄNGER_REVEALER: isDoppelgangerRolePlayer(card, 24),
+    DOPPELGÄNGER_THE_COUNT: isDoppelgangerRolePlayer(card, 39),
+    DR_PEEKER: IsRolePlayerOrCopyRolePlayer(card, 57),
+    DRUNK: IsRolePlayerOrCopyRolePlayer(card, 2),
+    EMPATH: IsRolePlayerOrCopyRolePlayer(card, 77),
     EPIC_BATTLE: isEveryOne,
     EVERYONE_MARK: isEveryOne,
-    EVILOMETER: /* oracle ||  */isSpecificRole(card, 58),
-    EXPOSER: /* oracle ||  */isSpecificRole(card, 46),
-    FAMILY_MAN: /* oracle ||  */isSpecificRole(card, 78),
-    FLIPPER: /* oracle ||  */isSpecificRole(card, 59),
-    GREMLIN: /* oracle ||  */isSpecificRole(card, 33),
-    GROOB_ZERB: /* oracle ||  */isRoleOrCopyPlayer(card, GROOB_AND_ZERB),
-    INSOMNIAC: /* oracle ||  */isSpecificRole(card, 4),
-    INSTIGATOR: /* oracle ||  */isSpecificRole(card, 34),
-    INTERN: /* oracle ||  */isSpecificRole(card, 62),
+    EVILOMETER: IsRolePlayerOrAllCopyRolePlayer(card, 58),
+    EXPOSER: IsRolePlayerOrCopyRolePlayer(card, 46),
+    FAMILY_MAN: IsRolePlayerOrAllCopyRolePlayer(card, 78),
+    FLIPPER: IsRolePlayerOrCopyRolePlayer(card, 59),
+    GREMLIN: IsRolePlayerOrCopyRolePlayer(card, 33),
+    GROOB_ZERB: isRolePlayersOrAllCopyPlayers(card, GROOB_AND_ZERB),
+    INSOMNIAC: IsRolePlayerOrAllCopyRolePlayer(card, 4),
+    INSTIGATOR: IsRolePlayerOrCopyRolePlayer(card, 34),
+    INTERN: IsRolePlayerOrAllCopyRolePlayer(card, 62),
     JOKE: isEveryOne,
-    LEADER: /* oracle ||  */isSpecificRole(card, 48),
-    LEADER_ZERB_GROOB: /* oracle ||  */isSpecificRole(card, 48),
-    LOVERS: /* oracle ||  */isLovers(card),
-    MARKSMAN: /* oracle ||  */isSpecificRole(card, 35),
-    MASONS: /* oracle ||  */isRoleOrCopyPlayer(card, MASONS),
-    MINION: /* oracle ||  */isSpecificRole(card, 7),
-    MIRROR_MAN: /* oracle ||  */card.player_original_id === 64,
-    MORTICIAN: /* oracle ||  */isSpecificRole(card, 49),
-    MYSTIC_WOLF: /* oracle ||  */isSpecificRole(card, 22),
-    NOSTRADAMUS: /* oracle ||  */isSpecificRole(card, 80),
+    LEADER: IsRolePlayerOrAllCopyRolePlayer(card, 48),
+    LEADER_ZERB_GROOB: IsRolePlayerOrAllCopyRolePlayer(card, 48),
+    LOVERS: isLovers(card),
+    MARKSMAN: IsRolePlayerOrAllCopyRolePlayer(card, 35),
+    MASONS: isRolePlayersOrAllCopyPlayers(card, MASONS),
+    MINION: IsRolePlayerOrAllCopyRolePlayer(card, 7),
+    MIRROR_MAN: card.player_original_id === 64,
+    MORTICIAN: IsRolePlayerOrCopyRolePlayer(card, 49),
+    MYSTIC_WOLF: IsRolePlayerOrCopyRolePlayer(card, 22),
+    NOSTRADAMUS: IsRolePlayerOrAllCopyRolePlayer(card, 80),
     ORACLE_ANSWER: card.player_original_id === 50,
     ORACLE_QUESTION: card.player_original_id === 50,
-    PARANORMAL_INVESTIGATOR: /* oracle ||  */isSpecificRole(card, 23),
-    PICKPOCKET: /* oracle ||  */isSpecificRole(card, 36),
-    PRIEST: /* oracle ||  */isSpecificRole(card, 37),
-    PSYCHIC: /* oracle ||  */isSpecificRole(card, 51),
-    RAPSCALLION: /* oracle ||  */isSpecificRole(card, 65),
-    RASCAL: /* oracle ||  */isSpecificRole(card, 52),
-    RENFIELD: /* oracle ||  */isSpecificRole(card, 38),
-    REVEALER: /* oracle ||  */isSpecificRole(card, 24),
-    ROBBER: /* oracle ||  */isSpecificRole(card, 8),
-    ROLE_RETRIEVER: /* oracle ||  */isSpecificRole(card, 66),
-    SEER: /* oracle ||  */isSpecificRole(card, 9),
-    SELF_AWARENESS_GIRL: /* oracle ||  */isSpecificRole(card, 67),
-    SENTINEL: /* oracle ||  */isSpecificRole(card, 25),
-    SQUIRE: /* oracle ||  */isSpecificRole(card, 83),
-    SUPER_VILLAINS: /* oracle ||  */isRoleOrCopyPlayer(card, ALL_SUPER_VILLAIN),
-    SWITCHEROO: /* oracle ||  */isSpecificRole(card, 68),
-    TEMPTRESS: /* oracle ||  */isSpecificRole(card, 69),
-    THE_COUNT: /* oracle ||  */isSpecificRole(card, 39),
-    THING: /* oracle ||  */isSpecificRole(card, 85),
-    TROUBLEMAKER: /* oracle ||  */isSpecificRole(card, 11),
-    VAMPIRES: /* oracle ||  */isRoleOrCopyPlayer(card, ALL_VAMPIRE),
-    VILLAGE_IDIOT: /* oracle ||  */isSpecificRole(card, 26),
-    VOODOO_LOU: /* oracle ||  */isSpecificRole(card, 70),
-    WEREWOLVES: /* oracle ||  */isRoleOrCopyPlayer(card, ALL_WEREWOLF),
-    WITCH: /* oracle ||  */isSpecificRole(card, 27)
+    PARANORMAL_INVESTIGATOR: IsRolePlayerOrCopyRolePlayer(card, 23),
+    PICKPOCKET: IsRolePlayerOrCopyRolePlayer(card, 36),
+    PRIEST: IsRolePlayerOrCopyRolePlayer(card, 37),
+    PSYCHIC: IsRolePlayerOrCopyRolePlayer(card, 51),
+    RAPSCALLION: IsRolePlayerOrCopyRolePlayer(card, 65),
+    RASCAL: IsRolePlayerOrCopyRolePlayer(card, 52),
+    RENFIELD: IsRolePlayerOrAllCopyRolePlayer(card, 38),
+    REVEALER: IsRolePlayerOrCopyRolePlayer(card, 24),
+    RIPPLE: isEveryOne,
+    ROBBER: IsRolePlayerOrCopyRolePlayer(card, 8),
+    ROLE_RETRIEVER: IsRolePlayerOrAllCopyRolePlayer(card, 66),
+    SEER: IsRolePlayerOrCopyRolePlayer(card, 9),
+    SELF_AWARENESS_GIRL: IsRolePlayerOrAllCopyRolePlayer(card, 67),
+    SENTINEL: IsRolePlayerOrCopyRolePlayer(card, 25),
+    SQUIRE: IsRolePlayerOrAllCopyRolePlayer(card, 83),
+    SUPER_VILLAINS: isRolePlayersOrAllCopyPlayers(card, SUPER_VILLAINS),
+    SWITCHEROO: IsRolePlayerOrAllCopyRolePlayer(card, 68),
+    TEMPTRESS: IsRolePlayerOrCopyRolePlayer(card, 69),
+    THE_COUNT: IsRolePlayerOrCopyRolePlayer(card, 39),
+    THING: IsRolePlayerOrCopyRolePlayer(card, 85),
+    TROUBLEMAKER: IsRolePlayerOrCopyRolePlayer(card, 11),
+    VAMPIRES: isRolePlayersOrAllCopyPlayers(card, VAMPIRES),
+    VILLAGE_IDIOT: IsRolePlayerOrCopyRolePlayer(card, 26),
+    VOODOO_LOU: IsRolePlayerOrAllCopyRolePlayer(card, 70),
+    WEREWOLVES: isRolePlayersOrAllCopyPlayers(card, WEREVOLVES_WITHOUT_DREAMWOLF),
+    WITCH: IsRolePlayerOrCopyRolePlayer(card, 27),
+    WITNESS: isWitness(card)
+  }
+}
+
+export const thisPlayerActive = player => {
+  return {
+    PLAYER_1: player.player_number === 'player_1',
+    PLAYER_2: player.player_number === 'player_2',
+    PLAYER_3: player.player_number === 'player_3',
+    PLAYER_4: player.player_number === 'player_4',
+    PLAYER_5: player.player_number === 'player_5',
+    PLAYER_6: player.player_number === 'player_6',
+    PLAYER_7: player.player_number === 'player_7',
+    PLAYER_8: player.player_number === 'player_8',
+    PLAYER_9: player.player_number === 'player_9',
+    PLAYER_10: player.player_number === 'player_10',
+    PLAYER_11: player.player_number === 'player_11',
+    PLAYER_12: player.player_number === 'player_12'
   }
 }

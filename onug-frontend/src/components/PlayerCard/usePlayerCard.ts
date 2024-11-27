@@ -44,11 +44,11 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
   const isGroobzerb = card?.groobzerb
   const isLovers = card?.lovers
   const isMason = card?.masons
-  const isOracle = card?.oracle
   const isPartOfBlob = card?.part_of_blob
   const isPartOfFamily = card?.part_of_family
   const isVampire = card?.vampires
   const isWerewolf = card?.werewolves
+  const isWitness = card?.witness
 
   const guessTokens = voteStore.isGuessing ? voteStore.getGuessTokensByPosition(card.position) : null
 
@@ -61,7 +61,7 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
   if (isGroobzerb) roles.push('👽')
   if (isLovers) roles.push('🩷')
   if (isMason) roles.push('⚒️')
-  if (isOracle) roles.push('🌟')
+  if (isWitness) roles.push('👁️')
   if (isPartOfBlob) roles.push('🦠')
   if (isPartOfFamily) roles.push('🩵')
   if (isVampire) roles.push('🦇')
@@ -95,7 +95,7 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
     groobzerb: isGroobzerb,
     lovers: isLovers,
     masons: isMason,
-    oracle: isOracle,
+    witness: isWitness,
     part_of_blob: isPartOfBlob,
     part_of_family: isPartOfFamily,
     vampires: isVampire,

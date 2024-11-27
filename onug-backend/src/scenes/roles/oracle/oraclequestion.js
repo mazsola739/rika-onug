@@ -24,7 +24,7 @@ export const oracleQuestion = (gamestate, title) => {
   }
 
   const oracleQuestion = getRandomItemFromArray(availableOracleQuestionOptions)
-  const theNumberIThinkingOf = Math.floor(Math.random() * 10) + 1
+  const theNumberIThinkingOf = /* Math.floor(Math.random() * 10) + 1  //TODO eyes open */ 0
 
   const narration = ['oracle_kickoff_text', oracleQuestion]
 

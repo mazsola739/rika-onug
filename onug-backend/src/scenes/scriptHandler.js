@@ -6,8 +6,9 @@ import * as conditions from './conditions'
 
 export const scriptHandler = gamestate => {
   logTrace(`scriptHandler in room [${gamestate.room_id}]`)
-  const selected_cards = gamestate.selected_cards
- /*  const total_players = gamestate.total_players //TODO epic battle ect... */
+  logTrace(`scriptHandler in room [${gamestate.room_id}]`)
+  const selectedCards = gamestate.selected_cards
+  /*  const total_players = gamestate.total_players //TODO epic battle ect... */
   const role_scenes = []
 
   const addScript = scene_title => {
@@ -19,7 +20,7 @@ export const scriptHandler = gamestate => {
     }
   }
 
-  const roleOrder = [
+  const roleOrder = selected_cards => [
     /* TODO uncomment    { condition: () => conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players), scripts: ['EPIC_BATTLE'] }, */
 
     {
@@ -124,14 +125,6 @@ export const scriptHandler = gamestate => {
       scripts: ['GROOB_ZERB']
     },
     {
-      condition: () => conditions.hasLeader(selected_cards) && conditions.hasAnyAlien(selected_cards),
-      scripts: ['LEADER']
-    },
-    {
-      condition: () => conditions.hasLeader(selected_cards) && conditions.hasGroobAndZerb(selected_cards),
-      scripts: ['LEADER_ZERB_GROOB']
-    },
-    {
       condition: () => conditions.hasBodySnatcher(selected_cards),
       scripts: ['BODY_SNATCHER']
     },
@@ -178,6 +171,14 @@ export const scriptHandler = gamestate => {
     {
       condition: () => conditions.hasApprenticeTanner(selected_cards) && conditions.hasTanner(selected_cards),
       scripts: ['APPRENTICE_TANNER']
+    },
+    {
+      condition: () => conditions.hasLeader(selected_cards) && conditions.hasAnyAlien(selected_cards),
+      scripts: ['LEADER']
+    },
+    {
+      condition: () => conditions.hasLeader(selected_cards) && conditions.hasGroobAndZerb(selected_cards),
+      scripts: ['LEADER_ZERB_GROOB']
     },
     {
       condition: () => conditions.hasMadScientist(selected_cards),
@@ -373,15 +374,23 @@ export const scriptHandler = gamestate => {
     }
   ]
 
-  roleOrder.forEach(({ condition, scripts }) => {
+  roleOrder(selectedCards).forEach(({ condition, scripts }) => {
+    if (condition()) {
+      scripts.forEach(addScript)
+    }
+  })
+
+  gamestate.scripts = role_scenes.sort((a, b) => a.scene_number - b.scene_number)
+
+  const rippleSelectedCards = gamestate.ripple.roles
+
+  roleOrder(rippleSelectedCards).forEach(({ condition, scripts }) => {
     if (condition()) {
       scripts.forEach(addScript)
     }
   })
 
   /*TODO uncomment   addScript('JOKE') */
-
-  gamestate.scripts = role_scenes.sort((a, b) => a.scene_number - b.scene_number)
 
   return gamestate
 }

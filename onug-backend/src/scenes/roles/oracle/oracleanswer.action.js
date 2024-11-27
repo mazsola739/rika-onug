@@ -16,7 +16,7 @@ export const oracleanswerAction = (gamestate, token, title) => {
   switch (oracleQuestion) {
     case 'oracle_guessnumber_text':
       if (oracleAnswer.includes('success')) {
-        gamestate.players[token].card.oracle_eyes_open = true
+        gamestate.players[token].card.eyes_open = true
         privateMessage = ['action_oracle_open_you_eyes']
       } else {
         gamestate.players[token].card.player_team = 'oracle'

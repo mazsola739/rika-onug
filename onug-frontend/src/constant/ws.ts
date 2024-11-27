@@ -49,8 +49,3 @@ export const STOP_GAME = 'STOP_GAME'
 export const START_VOTE = 'START_VOTE'
 export const VOTE = 'VOTE'
 export const VOTE_ACCEPTED = 'VOTE_ACCEPTED'
-
-export const VAMPIRES = 'VAMPIRES'
-export const ALIENS = 'ALIENS'
-export const EMPATH = 'EMPATH'
-export const DOPPELGÄNGER_EMPATH = 'DOPPELGÄNGER_EMPATH'

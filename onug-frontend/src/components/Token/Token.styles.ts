@@ -16,7 +16,7 @@ export const StyledToken = styled.div<StyledTokenProps>`
     return '3px solid transparent'
   }};
   filter: drop-shadow(3px 3px 3px black);
-  ${({ aliens, cow, current, dreamwolf, groobzerb, lovers, masons, oracle, part_of_blob, part_of_family, vampires, werewolf }) => {
+  ${({ aliens, cow, current, dreamwolf, groobzerb, lovers, masons, part_of_blob, part_of_family, vampires, werewolf, witness }) => {
     if (masons) {
       return css`
         animation: ${glowingBlue} 0.8s ease-in-out infinite alternate;
@@ -32,7 +32,7 @@ export const StyledToken = styled.div<StyledTokenProps>`
         animation: ${glowingLightBlue} 0.8s ease-in-out infinite alternate;
       `
     }
-    if (cow || oracle) {
+    if (cow || witness) {
       return css`
         animation: ${glowingOrange} 0.8s ease-in-out infinite alternate;
       `

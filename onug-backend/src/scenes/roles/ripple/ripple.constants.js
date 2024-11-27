@@ -1,11 +1,11 @@
-//TODO gamestate.ripple true or false
-export const ripple_sure_repeat = ['random_ripple_repeat', 'random_ripple_repeat1p']
+//TODO gamestate.ripple.force true or false
+export const ripple_sure_repeat = ['random_ripple_repeat' /* 'random_ripple_repeat1p' //TODO eyes open */]
 
 export const ripple_random = [
   'random_ripple_none',
   'random_ripple_1minute',
   'random_ripple_repeat',
-  'random_ripple_repeat1p',
+  /* 'random_ripple_repeat1p', //TODO eyes open */
   'random_ripple_insomniac',
   'random_ripple_nospeak',
   'random_ripple_faceaway',
@@ -33,3 +33,7 @@ export const rippleAllKeys = ['identifier_everyone_text', 'identifier_oddplayers
 export const rippleNeighborKeys = ['identifier_leftneighbor_text', 'identifier_rightneighbor_text', 'identifier_oneneighbor_text', 'identifier_yourself_text']
 
 export const rippleCenterAnyKeys = ['identifier_any_text', 'identifier_anyeven_text', 'identifier_anyodd_text', 'identifier_center_text']
+
+export const rippleRepeatRoles = [
+  "ALIENS', 'ALPHA_WOLF', 'APPRENTICE_SEER', 'BODY_SNATCHER', 'DISEASED', 'DRUNK', 'EXPOSER', 'GREMLIN', 'INSOMNIAC', 'MARKSMAN', 'MASONS', 'MYSTIC_WOLF', 'NOSTRADAMUS', 'PARANORMAL_INVESTIGATOR', 'PICKPOCKET', 'PSYCHIC', 'REVEALER', 'ROBBER', 'RASCAL', 'SEER', 'THING', 'TROUBLEMAKER', 'VILLAGE_IDIOT', 'WEREWOLVES', 'WITCH"
+]

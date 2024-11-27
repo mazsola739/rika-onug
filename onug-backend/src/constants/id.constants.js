@@ -21,31 +21,29 @@ export const HAS_MARK = [28, 29, 31, 32, 34, 38, 39, 40, 41]
 export const ALIEN_TEAM = [42, 43, 47, 54, 74]
 export const WOLF_TEAM = [7, 15, 16, 17, 21, 22, 83]
 export const VAMPIRE_TEAM = [38, 39, 40, 41]
-export const ASSASSIN_TEAM_ID = [29]
+export const ASSASSIN_TEAM = [29]
 export const TANNER_TEAM = [10, 71]
-export const SYNTHETIC_TEAM_ID = [53]
-export const BLOB_TEAM_ID = [44]
-export const MORTICIAN_TEAM_ID = [49]
-export const APPRENTICE_ASSASSIN_TEAM_ID = [28]
-export const DOPPELGANGER_TEAM_ID = [1]
+export const SYNTHETIC_TEAM = [53]
+export const BLOB_TEAM = [44]
+export const MORTICIAN_TEAM = [49]
+export const APPRENTICE_ASSASSIN_TEAM = [28]
+export const DOPPELGANGER_TEAM = [1]
 
 //WOLF IDS
-export const ALL_WEREWOLF = [15, 16, 17, 22]
-export const WEREWOLVES = [15, 16, 21, 22]
+export const WEREWOLVES = [15, 16, 17, 21, 22]
 export const WEREVOLVES_WITHOUT_DREAMWOLF = [15, 16, 17, 22]
 export const WEREVOLVES_TO_CHECK = [15, 16, 21, 22]
 
 //ALIEN IDS
-export const ALL_ALIEN = [42, 43, 47, 53, 54, 74]
+export const ALIENS = [42, 43, 47, 53, 54, 74]
 export const GROOB_AND_ZERB = [47, 54]
 
 //VAMPIRE IDS
-export const ALL_VAMPIRE = [39, 40, 41]
+export const VAMPIRES = [39, 40, 41]
 
 //SUPERVILLAIN IDS
-export const ALL_SUPER_VILLAIN = [57, 60, 65, 69]
+export const SUPER_VILLAINS = [57, 60, 65, 69]
 export const SUPER_VILLAIN_TO_CHECK = [57, 60, 65]
-export const SUPER_VILLAINS = [57, 60, 65]
 
 //MISC IDS
 export const ASSASSINS = [28, 29]

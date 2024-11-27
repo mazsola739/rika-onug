@@ -59,9 +59,6 @@ class PropStore {
   get obligatory() {
     return this.action.obligatory
   }
-  get oracle() {
-    return this.action.oracle
-  }
   get part_of_blob() {
     return this.action.part_of_blob
   }
@@ -106,6 +103,9 @@ class PropStore {
   }
   get werewolves() {
     return this.action.werewolves
+  }
+  get witness() {
+    return this.action.witness
   }
   get isVote() {
     return this.action.vote
@@ -164,7 +164,6 @@ class PropStore {
       madscientist: [],
       masons: [],
       new_role_id: 0,
-      oracle: [],
       part_of_blob: [],
       selectable_card_limit: { player: 0, center: 0 },
       selectable_cards: [],
@@ -179,8 +178,9 @@ class PropStore {
       seers: [],
       lovers: [],
       part_of_family: [],
+      vote: false,
       werewolves: [],
-      vote: false
+      witness: []
     }
 
     this.vampireVotes = {}

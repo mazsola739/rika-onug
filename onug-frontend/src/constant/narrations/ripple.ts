@@ -1,3 +1,5 @@
+export const ripple_intro_text = 'There has been a ripple in the space-time continuum!'
+
 export const ripple_1minute_text = 'You will only have one minute before you have to vote.'
 export const ripple_app_text = 'When it is time to vote, you may vote for the app instead of a player. If the app receives the most votes, no one is killed.'
 export const ripple_doublevote_text = 'When it is time to vote, use two hands to point, with each hand counting as one vote.'
@@ -10,7 +12,6 @@ export const ripple_dualseer_text = 'together, you may view one card from'
 export const ripple_faceaway_text = 'You must face away from the table until after the vote.'
 export const ripple_iamalien_text = 'From now until the vote, you may only say this phrase: "I am an alien."'
 export const ripple_insomniac_text = 'You may secretly view your own card.'
-export const ripple_intro_text = 'There has been a ripple in the space-time continuum!'
 export const ripple_nospeak_text = 'You may not speak until after the vote.'
 export const ripple_openeyes_text = 'Keep your eyes open from this point forward.'
 export const ripple_repeat_text = "You've entered a time loop and must repeat the entire night."

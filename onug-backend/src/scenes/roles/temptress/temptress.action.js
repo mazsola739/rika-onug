@@ -7,7 +7,8 @@ export const temptressAction = (gamestate, token, title) => {
     ...gamestate.players[token].player_history[title],
     selectable_cards: selectablePlayerNumbers,
     selectable_card_limit: { player: 1, center: 0 },
-    scene_end: selectablePlayerNumbers.length === 0
+    scene_end: selectablePlayerNumbers.length === 0,
+    obligatory: true
   }
 
   return generateRoleAction(gamestate, token, {
@@ -16,6 +17,7 @@ export const temptressAction = (gamestate, token, title) => {
       selectable_cards: selectablePlayerNumbers,
       selectable_card_limit: { player: 1, center: 0 }
     },
-    scene_end: selectablePlayerNumbers.length === 0
+    scene_end: selectablePlayerNumbers.length === 0,
+    obligatory: true
   })
 }
