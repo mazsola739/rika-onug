@@ -1,5 +1,5 @@
 import { MESSAGE } from '../../../constants'
-import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
+import { webSocketServerConnectionsPerRoom } from '../../../utils/connections.utils'
 import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 import { validateCardSelection } from '../../validators'

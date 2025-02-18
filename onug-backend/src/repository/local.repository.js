@@ -3,7 +3,7 @@ import { readFile, unlink } from 'fs/promises'
 import { ROOM_NAMES } from '../constants'
 import rooms from '../data/rooms.json'
 import { logError, logErrorWithStack, logTrace } from '../log'
-import { webSocketServerConnectionsPerRoom } from '../websocket/connections'
+import { webSocketServerConnectionsPerRoom } from '../utils/connections.utils'
 
 const FILE_PATH_TEMPLATE = `${__dirname}/../gamestate/`
 const ROOM_GAMESTATE_FILE = room_id => `${FILE_PATH_TEMPLATE}${room_id}_gamestate.json`

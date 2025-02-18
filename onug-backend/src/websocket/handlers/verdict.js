@@ -1,8 +1,8 @@
-import { ERROR, HYDRATE_VOTE, REDIRECT } from '../constants'
-import { logError, logTrace } from '../log'
-import { upsertRoomState } from '../repository'
-import { validateRoom } from '../validators'
-import { broadcast } from './connections'
+import { ERROR, HYDRATE_VOTE, REDIRECT } from '../../constants'
+import { logError, logTrace } from '../../log'
+import { upsertRoomState } from '../../repository'
+import { validateRoom } from '../../validators'
+import { broadcast } from '../../utils/connections.utils'
 
 export const verdict = async (ws, message) => {
   const { room_id, token, selected_card_positions } = message

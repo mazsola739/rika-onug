@@ -1,8 +1,8 @@
-import { HYDRATE_GUESS } from '../constants'
-import { logErrorWithStack } from '../log'
-import { upsertRoomState } from '../repository'
-import { validateRoom } from '../validators'
-import { broadcast } from './connections'
+import { HYDRATE_GUESS } from '../../constants'
+import { logErrorWithStack } from '../../log'
+import { upsertRoomState } from '../../repository'
+import { validateRoom } from '../../validators'
+import { broadcast } from '../../utils/connections.utils'
 
 export const hydrateGuess = async (ws, message) => {
   try {

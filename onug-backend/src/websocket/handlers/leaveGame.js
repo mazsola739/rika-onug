@@ -1,7 +1,7 @@
-import { HYDRATE_TABLE, REDIRECT, STAGES } from '../constants'
-import { logTrace, logErrorWithStack } from '../log'
-import { readGamestate, upsertRoomState } from '../repository'
-import { broadcast } from './connections'
+import { HYDRATE_TABLE, REDIRECT, STAGES } from '../../constants'
+import { logTrace, logErrorWithStack } from '../../log'
+import { readGamestate, upsertRoomState } from '../../repository'
+import { broadcast } from '../../utils/connections.utils'
 
 //TODO fix if leave from vote stages
 export const leaveGame = async (ws, message) => {
@@ -47,7 +47,7 @@ export const leaveGame = async (ws, message) => {
     return broadcast(room_id, { type: REDIRECT, path: `/room/${room_id}` })
   } catch (error) {
     logErrorWithStack(error)
-    
+
     return ws.send(
       JSON.stringify({
         type: HYDRATE_TABLE,

@@ -1,5 +1,5 @@
 import { VOTE } from '../../../constants'
-import { webSocketServerConnectionsPerRoom } from '../../../websocket/connections'
+import { webSocketServerConnectionsPerRoom } from '../../../utils/connections.utils'
 import { formatPlayerIdentifier, generateRoleAction, getDoppelgangerEmpathTokensByRoleIds, getEmpathTokensByRoleIds, getNarrationByTitle } from '../../sceneUtils'
 import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
 

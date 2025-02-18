@@ -1,5 +1,5 @@
-import { logError, logTrace } from '../log'
-import { webSocketServerConnectionsPerRoom } from './connections'
+import { logError, logTrace } from '../../log'
+import { webSocketServerConnectionsPerRoom } from '../../utils/connections.utils'
 
 export const reload = (ws, message) => {
   try {

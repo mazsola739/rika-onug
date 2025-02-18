@@ -5,6 +5,6 @@ import { FooterProps } from './Footer.types'
 export const Footer: React.FC<FooterProps> = observer(({ children }) => (
   <StyledFooter>
     {children}
-    <CopyrightText>© 2024 Rika - ✨Pixels? They survived the night! This app runs solely on ☕ and 🦄 magic!✨</CopyrightText>
+    <CopyrightText>© 2023-2025 Rika - ✨Pixels? They survived the night! This app runs solely on ☕ and 🦄 magic!✨</CopyrightText>
   </StyledFooter>
 ))

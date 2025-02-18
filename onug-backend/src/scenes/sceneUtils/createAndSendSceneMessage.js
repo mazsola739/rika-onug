@@ -1,5 +1,5 @@
 import { SCENE } from '../../constants'
-import { sendMessageToPlayer } from '../../websocket/connections'
+import { sendMessageToPlayer } from '../../utils/connections.utils'
 
 export const createAndSendSceneMessage = (gamestate, token, title, action, narration = []) => {
   if (Object.keys(action).length === 0) return

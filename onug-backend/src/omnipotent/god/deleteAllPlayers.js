@@ -1,6 +1,6 @@
 import { logErrorWithStack, logTrace } from '../../log'
 import { removeAllPlayers } from '../../repository'
-import { initWebSocketConnections } from '../../websocket/connections'
+import { initWebSocketConnections } from '../../utils/connections.utils'
 
 export const deleteAllPlayers = async (req, res) => {
   try {

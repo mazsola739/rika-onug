@@ -1,9 +1,9 @@
-import { HYDRATE_COUNCIL, STAGES } from '../constants'
-import { logErrorWithStack, logTrace } from '../log'
-import { readGamestate, upsertRoomState } from '../repository'
-import { getTableBoard } from '../utils'
-import { getKeys } from '../scenes/sceneUtils'
-import { getKnownPlayer, updatePlayer } from '../utils/council.util'
+import { HYDRATE_COUNCIL, STAGES } from '../../constants'
+import { logErrorWithStack, logTrace } from '../../log'
+import { readGamestate, upsertRoomState } from '../../repository'
+import { getTableBoard } from '../../utils'
+import { getKeys } from '../../scenes/sceneUtils'
+import { getKnownPlayer, updatePlayer } from '../../utils/council.util'
 
 export const hydrateCouncil = async (ws, message) => {
   try {

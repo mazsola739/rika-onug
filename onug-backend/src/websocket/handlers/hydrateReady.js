@@ -1,8 +1,8 @@
-import { HYDRATE_READY } from '../constants'
-import { logDebug, logError } from '../log'
-import { readGamestate, upsertRoomState } from '../repository'
-import { getTableBoard } from '../utils'
-import { broadcast } from './connections'
+import { HYDRATE_READY } from '../../constants'
+import { logDebug, logError } from '../../log'
+import { readGamestate, upsertRoomState } from '../../repository'
+import { getTableBoard } from '../../utils'
+import { broadcast } from '../../utils/connections.utils'
 
 export const hydrateReady = async message => {
   try {

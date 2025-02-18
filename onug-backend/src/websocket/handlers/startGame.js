@@ -1,9 +1,9 @@
-import { ERROR, REDIRECT, STAGES } from '../constants'
-import { logError, logTrace } from '../log'
-import { upsertRoomState } from '../repository'
-import { areAllPlayersReady, resetPlayerReadiness } from '../utils'
-import { validateRoom } from '../validators'
-import { broadcast } from './connections'
+import { ERROR, REDIRECT, STAGES } from '../../constants'
+import { logError, logTrace } from '../../log'
+import { upsertRoomState } from '../../repository'
+import { areAllPlayersReady, resetPlayerReadiness } from '../../utils'
+import { validateRoom } from '../../validators'
+import { broadcast } from '../../utils/connections.utils'
 
 export const startGame = async (ws, message) => {
   const { room_id, token } = message

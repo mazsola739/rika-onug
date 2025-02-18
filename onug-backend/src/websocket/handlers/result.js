@@ -1,9 +1,9 @@
-import { ERROR, RESULT } from '../constants'
-import { logError, logTrace } from '../log'
-import { upsertRoomState } from '../repository'
-import { getPlayerInfo } from '../utils/result.utils'
-import { validateRoom } from '../validators'
-import { getWinnersAndLosers } from '../winingAndLosing/getWinnersAndLosers'
+import { ERROR, RESULT } from '../../constants'
+import { logError, logTrace } from '../../log'
+import { upsertRoomState } from '../../repository'
+import { getPlayerInfo } from '../../utils/result.utils'
+import { validateRoom } from '../../validators'
+import { getWinnersAndLosers } from '../../winingAndLosing/getWinnersAndLosers'
 
 export const result = async (ws, message) => {
   const { room_id, token } = message

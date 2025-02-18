@@ -1,7 +1,7 @@
-import { HYDRATE_TABLE, STAGES } from '../constants'
-import { logErrorWithStack, logTrace } from '../log'
-import { readGamestate } from '../repository'
-import { getTableBoard } from '../utils'
+import { HYDRATE_TABLE, STAGES } from '../../constants'
+import { logErrorWithStack, logTrace } from '../../log'
+import { readGamestate } from '../../repository'
+import { getTableBoard } from '../../utils'
 
 export const hydrateTable = async (ws, message) => {
   try {

@@ -1,26 +1,5 @@
 import WebSocket from 'ws'
-import {
-  dealCards,
-  hydrateCouncil,
-  hydrateGame,
-  hydrateGuess,
-  hydrateReady,
-  hydrateRoom,
-  hydrateTable,
-  joinRoom,
-  leaveGame,
-  leaveRoom,
-  newbie,
-  reload,
-  reset,
-  result,
-  scene,
-  startGame,
-  startVote,
-  stopGame,
-  updateRoom,
-  verdict
-} from '.'
+
 import {
   ALIENS,
   ARRIVE_COUNCIL,
@@ -47,6 +26,7 @@ import {
 } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { aliensVotehydrate, vampiresVotehydrate } from '../scenes/roles'
+import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, hydrateReady, hydrateRoom, hydrateTable, joinRoom, leaveGame, leaveRoom, newbie, reload, reset, result, scene, startGame, startVote, stopGame, updateRoom, verdict } from './handlers'
 
 export const websocketServer = port => {
   try {

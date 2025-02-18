@@ -1,6 +1,6 @@
 import { v4 as uuidv4, validate } from 'uuid'
-import { NEWBIE } from '../constants'
-import { logInfo } from '../log'
+import { NEWBIE } from '../../constants'
+import { logInfo } from '../../log'
 
 export const newbie = (ws, message) => {
   const { token } = message //TODO handle rejoin, user has valid token
