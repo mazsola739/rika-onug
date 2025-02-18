@@ -28,7 +28,7 @@
 .idea
 *.iml
 /onug-frontend/delete
-/onug-frontend/scripts
+/scripts
 
 npm-debug.log*
 yarn-debug.log*
