@@ -57,8 +57,8 @@ export const sceneHandler = async (gamestate, scene_title) => {
         conditions.hasEasterEgg(selected_cards, total_players),
         conditions.hasEpicBattle(selected_cards),
         total_players,
-        !conditions.hasGoodGuys(selected_cards),
-        !conditions.hasBadGuys(selected_cards)
+        conditions.hasGoodGuys(selected_cards),
+        conditions.hasBadGuys(selected_cards)
       ),
     EVERYONE_MARK: (gamestate, title) => roles.everyonemark(gamestate, title),
     EVILOMETER: (gamestate, title, selected_cards) => roles.evilometer(gamestate, title, conditions.hasDoppelganger(selected_cards)),

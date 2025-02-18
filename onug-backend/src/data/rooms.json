@@ -3,7 +3,7 @@
     "room_id": "archives",
     "room_name": "Archives",
     "stage": "LOBBY",
-    "selected_cards": [50, 42, 12, 13, 14],
+    "selected_cards": [50, 42, 4, 5, 6, 15, 16],
     "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
     "available_names": ["Scream", "Fright", "Shadow", "Spirit", "Wraith", "Judgment", "Messenger", "Silence", "Soul", "Darkness", "Beast", "Curse"],
     "players": {},

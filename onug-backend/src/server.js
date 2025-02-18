@@ -22,13 +22,14 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(cors())
 
-// API routing
+// routes
 app.use('/api', apiRouter)
 app.use('/god', godRouter)
 app.use('/stub', stubRouter)
 
-// Error handling
+// error handling
 app.use(pageNotFoundError)
 app.use(internalServerError)
 
+// start server
 ViteExpress.listen(app, PORT, () => logDebug(`Server is listening on port: ${PORT}`))

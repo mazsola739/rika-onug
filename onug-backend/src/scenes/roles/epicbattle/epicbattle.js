@@ -3,14 +3,12 @@ import { epicbattleAction } from './epicbattle.action'
 import { random_easteregg_nobadguys, random_easteregg_nogoodguys } from './epicbattle.constants'
 
 export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
-  if (hasEpicBattle) {
-    return ['everyone_epic_intro_text']
-  }
-
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = []
 
-  if (hasEasterEgg) {
+  if (hasEpicBattle) {
+    narration.push('everyone_epic_intro_text')
+  } else if (!hasEpicBattle && hasEasterEgg) {
     if (totalPlayers === 12) {
       narration.push('easteregg_really_text', 'easteregg_whatever_text')
     } else if (nobadguys) {

@@ -2,11 +2,10 @@ import scripts from '../data/script.json'
 import { logTrace } from '../log'
 import * as conditions from './conditions'
 
-export const scriptHandler = gamestate => {
-  logTrace(`scriptHandler in room [${gamestate.room_id}]`)
+export const rippleScriptHandler = gamestate => {
+  logTrace(`rippleScriptHandler in room [${gamestate.room_id}]`)
 
-  const selected_cards = gamestate.selected_cards
-  const total_players = gamestate.total_players
+  const selected_cards = gamestate.ripple.roles
   const role_scenes = []
 
   const addScript = scene_title => {
@@ -19,18 +18,6 @@ export const scriptHandler = gamestate => {
   }
 
   const roleOrder = [
-    {
-      condition: () => conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players),
-      scripts: ['EPIC_BATTLE']
-    },
-    {
-      condition: () => conditions.hasOracle(selected_cards),
-      scripts: ['ORACLE_QUESTION']
-    },
-    {
-      condition: () => conditions.hasOracle(selected_cards),
-      scripts: ['ORACLE_ANSWER']
-    },
     {
       condition: () => conditions.hasCopycat(selected_cards),
       scripts: ['COPYCAT']
@@ -367,10 +354,6 @@ export const scriptHandler = gamestate => {
       condition: () => conditions.hasFamilyMan(selected_cards),
       scripts: ['FAMILY_MAN']
     },
-    {
-      condition: () => conditions.hasRipple(selected_cards),
-      scripts: ['RIPPLE']
-    }
   ]
 
   roleOrder.forEach(({ condition, scripts }) => {
@@ -381,9 +364,7 @@ export const scriptHandler = gamestate => {
 
   gamestate.scripts = role_scenes.sort((a, b) => a.scene_number - b.scene_number)
 
-  if (gamestate.scripts.length === 0 || gamestate.scripts[gamestate.scripts.length - 1].scene_title !== 'RIPPLE') {
-    addScript('JOKE')
-  } 
+  addScript('JOKE')
 
   return gamestate
 }

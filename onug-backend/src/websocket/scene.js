@@ -2,6 +2,7 @@ import { HYDRATE_SCENE, REDIRECT } from '../constants'
 import { logError, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
 import { responseHandler, chapterHandler, scriptHandler } from '../scenes'
+import { rippleHandler } from '../scenes/rippleHandler'
 import { allPlayersStateCheck /* randomDelay */ } from '../utils'
 import { validateRoom } from '../validators'
 import { broadcast } from './connections'
@@ -29,6 +30,9 @@ const handleNightReady = async (room_id, gamestate, players, token) => {
     /* await randomDelay() */
 
     gamestate = await scriptHandler(gamestate)
+    if (gamestate.scripts[gamestate.scripts.length - 1].scene_title === 'RIPPLE') {
+      gamestate = await rippleHandler(gamestate)
+    }
     gamestate = await chapterHandler(gamestate)
     resetPlayerReadiness(players)
   } else {

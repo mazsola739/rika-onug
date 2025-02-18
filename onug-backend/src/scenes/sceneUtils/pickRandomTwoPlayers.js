@@ -1,7 +1,7 @@
 import { shufflePlayers } from '.'
 
-export const pickRandomTwoPlayers = (numPlayers, conjunction) => {
+export const pickRandomTwoPlayers = (numPlayers) => {
   const players = shufflePlayers(numPlayers)
 
-  return [players[0], conjunction, players[1]]
+  return [players[0], players[1]]
 }

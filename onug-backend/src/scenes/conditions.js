@@ -1,6 +1,7 @@
 import { ALIENS, SUPER_VILLAINS, VAMPIRES, WEREWOLVES, BAD_GUY, DOPPELGANGER_INSTANT_ACTION, GOOD_GUY, GROOB_AND_ZERB, HAS_MARK, MASONS, SEERS } from '../constants'
 
 export const hasEpicBattle = selected_cards => {
+  
   const battles = {
     vampire: VAMPIRES.some(id => selected_cards.includes(id)),
     alien: ALIENS.some(id => selected_cards.includes(id)),
@@ -8,7 +9,6 @@ export const hasEpicBattle = selected_cards => {
     villain: SUPER_VILLAINS.some(id => selected_cards.includes(id))
   }
   const trueCount = Object.values(battles).filter(val => val).length
-
   return trueCount >= 2
 }
 
