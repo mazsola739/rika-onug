@@ -2,8 +2,9 @@ import { ERROR, VOTE } from '../../constants'
 import { logError, logErrorWithStack, logTrace } from '../../log'
 import { upsertRoomState } from '../../repository'
 import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens } from '../../scenes/sceneUtils'
+import { sendMessageToPlayer } from '../../utils'
 import { validateRoom } from '../../validators'
-import { sendMessageToPlayer } from '../../utils/connections.utils'
+
 
 export const startVote = async (ws, message) => {
   const { room_id } = message

@@ -1,14 +1,13 @@
 import { VAMPIRES } from '../../../constants'
 import { readGamestate, upsertRoomState } from '../../../repository'
-import { sendMessageToPlayer } from '../../../websocket'
+import { sendMessageToPlayer } from '../../../utils'
 import {
   createAndSendSceneMessage,
   formatPlayerIdentifier,
   generateRoleAction,
   getNarrationByTitle,
   getPlayerNumberWithMatchingToken,
-  getPlayerTokensByPlayerNumber,
-  getVampirePlayerNumbersByRoleIds
+  getPlayerTokensByPlayerNumber
 } from '../../sceneUtils'
 
 export const vampiresVotehydrate = async message => {
@@ -17,7 +16,8 @@ export const vampiresVotehydrate = async message => {
   try {
     const gamestate = await readGamestate(room_id)
 
-    const vampires = getVampirePlayerNumbersByRoleIds(gamestate.players)
+    //TODO FIX THIS
+    const vampires = [0]
     const vampiresTokens = getPlayerTokensByPlayerNumber(gamestate.players, vampires)
     const vampireCount = vampires.length
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)

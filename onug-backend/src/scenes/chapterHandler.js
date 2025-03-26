@@ -1,8 +1,7 @@
 import { END_GAME } from '../constants'
 import { logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { allPlayersStateCheck } from '../utils'
-import { broadcast } from '../websocket'
+import { allPlayersStateCheck, broadcast } from '../utils'
 import { isActivePlayer } from './activePlayer'
 import { sceneHandler } from './sceneHandler'
 

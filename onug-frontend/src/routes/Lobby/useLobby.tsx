@@ -1,4 +1,4 @@
-import { HYDRATE_LOBBY, JOIN_ROOM, REDIRECT } from 'constant'
+import { JOIN_ROOM, REDIRECT } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { lobbyStore, wsStore } from 'store'
@@ -9,20 +9,7 @@ export const useLobby = () => {
 
   const { lastJsonMessage, sendJsonMessage } = wsStore.getWsCommunicationsBridge()
 
-  //TODO Do i need??
   useEffect(() => {
-    if (sendJsonMessage && firstTime) {
-      setFirstTime(false)
-      sendJsonMessage?.({
-        type: HYDRATE_LOBBY
-      })
-    }
-  }, [sendJsonMessage, firstTime])
-
-  useEffect(() => {
-    if (lastJsonMessage?.type === HYDRATE_LOBBY) {
-      console.log(HYDRATE_LOBBY)
-    }
 
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)

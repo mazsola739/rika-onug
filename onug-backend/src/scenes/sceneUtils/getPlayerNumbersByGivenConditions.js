@@ -1,4 +1,4 @@
-import { ALIENS, SUPER_VILLAINS, VAMPIRES, MASONS, WEREVOLVES_WITHOUT_DREAMWOLF, WEREWOLVES } from '../../constants'
+import { ALIEN_IDS, SUPER_VILLAINS, VAMPIRE_IDS, MASONS, WEREVOLVES_WITHOUT_DREAMWOLF, WEREWOLVES } from '../../constants'
 
 //TODO finish
 const filters = {
@@ -15,13 +15,13 @@ const filters = {
 
   //vampires
   vampireByMark: player => player.player_mark === 'mark_of_vampire',
-  vampire: player => VAMPIRES.includes(player.card.player_role_id),
-  nonVampire: player => !VAMPIRES.includes(player.card.player_role_id) && player.player_mark !== 'mark_of_vampire',
+  vampire: player => VAMPIRE_IDS.includes(player.card.player_role_id),
+  nonVampire: player => !VAMPIRE_IDS.includes(player.card.player_role_id) && player.player_mark !== 'mark_of_vampire',
 
   //aliens
-  alien: player => ALIENS.includes(player.card.player_role_id),
-  alienWithoutShield: (player, shieldedCards) => ALIENS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
-  nonAlienWithoutShield: (player, shieldedCards) => !ALIENS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
+  alien: player => ALIEN_IDS.includes(player.card.player_role_id),
+  alienWithoutShield: (player, shieldedCards) => ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
+  nonAlienWithoutShield: (player, shieldedCards) => !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
   zerb: player => player.card.player_role_id === 54,
   groob: player => player.card.player_role_id === 47,
 

@@ -1,6 +1,8 @@
-import { ALIENS } from '../../../constants'
+import { ALIEN_IDS } from '../../../constants'
 import { readGamestate, upsertRoomState } from '../../../repository'
-import { sendMessageToPlayer } from '../../../websocket'
+import { sendMessageToPlayer } from '../../../utils'
+
+
 import {
   createAndSendSceneMessage,
   formatPlayerIdentifier,
@@ -107,7 +109,7 @@ export const aliensVotehydrate = async message => {
     } else {
       aliensTokens.forEach(alienToken => {
         const stillVoteMessage = {
-          type: ALIENS,
+          type: ALIEN_IDS,
           success: true,
           alien_votes
         }

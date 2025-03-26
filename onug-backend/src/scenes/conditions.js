@@ -1,10 +1,10 @@
-import { ALIENS, SUPER_VILLAINS, VAMPIRES, WEREWOLVES, BAD_GUY, DOPPELGANGER_INSTANT_ACTION, GOOD_GUY, GROOB_AND_ZERB, HAS_MARK, MASONS, SEERS } from '../constants'
+import { ALIEN_IDS, SUPER_VILLAINS, VAMPIRE_IDS, WEREWOLVES, BAD_GUY, DOPPELGANGER_INSTANT_ACTION, GOOD_GUY, GROOB_AND_ZERB, HAS_MARK, MASONS, SEERS } from '../constants'
 
 export const hasEpicBattle = selected_cards => {
   
   const battles = {
-    vampire: VAMPIRES.some(id => selected_cards.includes(id)),
-    alien: ALIENS.some(id => selected_cards.includes(id)),
+    vampire: VAMPIRE_IDS.some(id => selected_cards.includes(id)),
+    alien: ALIEN_IDS.some(id => selected_cards.includes(id)),
     werewolf: WEREWOLVES.some(id => selected_cards.includes(id)),
     villain: SUPER_VILLAINS.some(id => selected_cards.includes(id))
   }
@@ -19,7 +19,7 @@ export const hasCopycat = selected_cards => selected_cards.includes(30)
 export const hasMirrorMan = selected_cards => selected_cards.includes(64)
 export const hasDoppelganger = selected_cards => selected_cards.includes(1)
 export const hasInstantAction = selected_cards => DOPPELGANGER_INSTANT_ACTION.some(id => selected_cards.includes(id))
-export const hasAnyVampire = selected_cards => VAMPIRES.some(id => selected_cards.includes(id))
+export const hasAnyVampire = selected_cards => VAMPIRE_IDS.some(id => selected_cards.includes(id))
 export const hasTheCount = selected_cards => selected_cards.includes(39)
 export const hasRenfield = selected_cards => selected_cards.includes(38)
 export const hasDiseased = selected_cards => selected_cards.includes(32)
@@ -29,7 +29,7 @@ export const hasPriest = selected_cards => selected_cards.includes(37)
 export const hasAssassin = selected_cards => selected_cards.includes(29)
 export const hasApprenticeAssassin = selected_cards => selected_cards.includes(28)
 export const hasSentinel = selected_cards => selected_cards.includes(25)
-export const hasAnyAlien = selected_cards => ALIENS.some(id => selected_cards.includes(id))
+export const hasAnyAlien = selected_cards => ALIEN_IDS.some(id => selected_cards.includes(id))
 export const hasCow = selected_cards => selected_cards.includes(45)
 export const hasGroobAndZerb = selected_cards => GROOB_AND_ZERB.every(cardId => selected_cards.includes(cardId))
 export const hasBodySnatcher = selected_cards => selected_cards.includes(74)
@@ -84,7 +84,7 @@ export const hasCurator = selected_cards => selected_cards.includes(20)
 export const hasBlob = selected_cards => selected_cards.includes(44)
 export const hasMortician = selected_cards => selected_cards.includes(49)
 export const hasFamilyMan = selected_cards => selected_cards.includes(78)
-export const hasRipple = selected_cards => ALIENS.some(id => selected_cards.includes(id))
+export const hasRipple = selected_cards => ALIEN_IDS.some(id => selected_cards.includes(id))
 
 export const hasEasterEgg = (selected_cards, totalPlayers) => !hasGoodGuys(selected_cards) || !hasBadGuys(selected_cards) || totalPlayers === 12
 export const haOneMasonAndDoppelganger = selected_cards => hasDoppelganger(selected_cards) && hasAnyMason(selected_cards)

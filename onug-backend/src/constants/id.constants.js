@@ -35,11 +35,11 @@ export const WEREVOLVES_WITHOUT_DREAMWOLF = [15, 16, 17, 22]
 export const WEREVOLVES_TO_CHECK = [15, 16, 21, 22]
 
 //ALIEN IDS
-export const ALIENS = [42, 43, 47, 53, 54, 74]
+export const ALIEN_IDS = [42, 43, 47, 53, 54, 74]
 export const GROOB_AND_ZERB = [47, 54]
 
 //VAMPIRE IDS
-export const VAMPIRES = [39, 40, 41]
+export const VAMPIRE_IDS = [39, 40, 41]
 
 //SUPERVILLAIN IDS
 export const SUPER_VILLAINS = [57, 60, 65, 69]

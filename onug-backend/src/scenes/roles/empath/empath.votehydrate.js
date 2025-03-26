@@ -1,11 +1,10 @@
 import { ALIENS } from '../../../constants'
 import { readGamestate, upsertRoomState } from '../../../repository'
-import { sendMessageToPlayer } from '../../../websocket'
+import { sendMessageToPlayer } from '../../../utils'
 import {
   createAndSendSceneMessage,
   formatPlayerIdentifier,
   generateRoleAction,
-  getAlienPlayerNumbersByRoleIds,
   getCardIdsByPositions,
   getNarrationByTitle,
   getPlayerNumberWithMatchingToken,
@@ -18,7 +17,8 @@ export const empathVotehydrate = async message => {
   try {
     const gamestate = await readGamestate(room_id)
 
-    const aliens = getAlienPlayerNumbersByRoleIds(gamestate.players)
+    //TODO FIX THIS
+    const aliens = [0]
     const aliensTokens = getPlayerTokensByPlayerNumber(gamestate.players, aliens)
     const alienCount = aliens.length
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)

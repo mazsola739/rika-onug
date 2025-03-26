@@ -1,4 +1,4 @@
-import { ALIENS, ALL_COPY_PLAYER, SUPER_VILLAINS, VAMPIRES, WEREVOLVES_WITHOUT_DREAMWOLF, COPY_PLAYER, GROOB_AND_ZERB, MASONS } from '../constants'
+import { ALIEN_IDS, ALL_COPY_PLAYER, SUPER_VILLAINS, VAMPIRE_IDS, WEREVOLVES_WITHOUT_DREAMWOLF, COPY_PLAYER, GROOB_AND_ZERB, MASONS } from '../constants'
 
 const isEveryOne = true
 //TODO eyes open
@@ -26,7 +26,7 @@ const isLovers = card => {
 
 export const isActivePlayer = card => {
   return {
-    ALIENS: isRolePlayersOrAllCopyPlayers(card, ALIENS),
+    ALIENS: isRolePlayersOrAllCopyPlayers(card, ALIEN_IDS),
     ALPHA_WOLF: IsRolePlayerOrCopyRolePlayer(card, 17),
     ANNOYING_LAD: IsRolePlayerOrAllCopyRolePlayer(card, 55),
     APPRENTICE_ASSASSIN: IsRolePlayerOrCopyRolePlayer(card, 28),
@@ -108,7 +108,7 @@ export const isActivePlayer = card => {
     THE_COUNT: IsRolePlayerOrCopyRolePlayer(card, 39),
     THING: IsRolePlayerOrCopyRolePlayer(card, 85),
     TROUBLEMAKER: IsRolePlayerOrCopyRolePlayer(card, 11),
-    VAMPIRES: isRolePlayersOrAllCopyPlayers(card, VAMPIRES),
+    VAMPIRES: isRolePlayersOrAllCopyPlayers(card, VAMPIRE_IDS),
     VILLAGE_IDIOT: IsRolePlayerOrCopyRolePlayer(card, 26),
     VOODOO_LOU: IsRolePlayerOrAllCopyRolePlayer(card, 70),
     WEREWOLVES: isRolePlayersOrAllCopyPlayers(card, WEREVOLVES_WITHOUT_DREAMWOLF),

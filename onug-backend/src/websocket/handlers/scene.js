@@ -1,4 +1,4 @@
-import { HYDRATE_SCENE, REDIRECT } from '../../constants'
+import { REDIRECT } from '../../constants'
 import { logError, logTrace } from '../../log'
 import { upsertRoomState } from '../../repository'
 import { responseHandler, chapterHandler, scriptHandler } from '../../scenes'
@@ -74,11 +74,7 @@ export const scene = async (ws, message) => {
   logTrace(`Processing scene action in room: ${room_id}`)
 
   try {
-    const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
-    if (!roomIdValid) {
-      logError(`Room validation failed for room: ${room_id}`)
-      return ws.send(JSON.stringify({ type: HYDRATE_SCENE, success: false, errors }))
-    }
+    const [ gamestate] = await validateRoom(room_id)
 
     let newGamestate = { ...gamestate }
     const { players } = newGamestate
