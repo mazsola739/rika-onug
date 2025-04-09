@@ -30,24 +30,24 @@
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.3",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.2",
+    "typescript": "^5.8.3",
     "uuid": "^11.1.0",
     "vite-express": "0.20.0",
     "ws": "^8.18.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.23.0",
+    "@eslint/js": "^9.24.0",
     "@types/express": "^5.0.1",
-    "@types/node": "^22.13.13",
-    "eslint": "^9.23.0",
-    "eslint-plugin-react": "^7.37.4",
+    "@types/node": "^22.14.0",
+    "eslint": "^9.24.0",
+    "eslint-plugin-react": "^7.37.5",
     "globals": "^16.0.0",
     "nodemon": "^3.1.9",
-    "vite": "^6.2.3"
+    "vite": "^6.2.5"
   }
 }
