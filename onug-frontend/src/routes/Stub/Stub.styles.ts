@@ -18,7 +18,7 @@ export const StubContainer = styled.div`
 
 export const Container = styled.div`
   flex: 1;
-  border-radius: 0.75rem;
+  border-radius: 5px;
   padding: 10px;
   background-color: #282c34;
   box-shadow: 0 0.25rem 8px rgba(0, 0, 0, 0.1);

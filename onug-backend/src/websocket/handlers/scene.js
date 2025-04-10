@@ -74,7 +74,7 @@ export const scene = async (ws, message) => {
   logTrace(`Processing scene action in room: ${room_id}`)
 
   try {
-    const [ gamestate] = await validateRoom(room_id)
+    const [roomIdValid, gamestate] = await validateRoom(room_id)
 
     let newGamestate = { ...gamestate }
     const { players } = newGamestate

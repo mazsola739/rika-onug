@@ -1,6 +1,7 @@
 import scripts from '../data/script.json'
 import { logTrace } from '../log'
-import * as conditions from './conditions'
+import { hasTemptress, hasAlphaWolf } from '../utils'
+import { hasEpicBattle, hasEasterEgg, hasOracle, hasCopycat, hasMirrorMan, hasDoppelganger, hasInstantAction, hasAnyVampire, hasTheCount, hasRenfield, hasDiseased, hasCupid, hasInstigator, hasPriest, hasAssassin, hasApprenticeAssassin, hasMarks, hasSentinel, hasAnyAlien, hasCow, hasGroobAndZerb, hasBodySnatcher, hasAnySuperVillains, hasDrPeeker, hasRapscallion, hasEvilometer, hasAnyWerewolf, hasMysticWolf, hasMinion, hasApprenticeTanner, hasTanner, hasLeader, hasMadScientist, hasIntern, hasMasons, hasThing, hasAnnoyingLad, hasSeer, hasApprenticeSeer, hasParanormalInvestigator, hasMarksman, hasNostradamus, hasPsychic, hasDetector, hasRobber, hasWitch, hasPickpocket, hasRoleRetriever, hasVoodooLou, hasTroublemaker, hasVillageIdiot, hasAuraSeer, hasGremlin, hasRascal, hasSwitcheroo, hasDrunk, hasInsomniac, hasSelfAwarenessGirl, hasSquire, hasBeholder, hasRevealer, hasExposer, hasFlipper, hasEmpath, hasCurator, hasBlob, hasMortician, hasFamilyMan, hasRipple } from './conditions'
 
 export const scriptHandler = gamestate => {
   logTrace(`scriptHandler in room [${gamestate.room_id}]`)
@@ -20,355 +21,355 @@ export const scriptHandler = gamestate => {
 
   const roleOrder = [
     {
-      condition: () => conditions.hasEpicBattle(selected_cards) || conditions.hasEasterEgg(selected_cards, total_players),
+      condition: () => hasEpicBattle(selected_cards) || hasEasterEgg(selected_cards, total_players),
       scripts: ['EPIC_BATTLE']
     },
     {
-      condition: () => conditions.hasOracle(selected_cards),
+      condition: () => hasOracle(selected_cards),
       scripts: ['ORACLE_QUESTION']
     },
     {
-      condition: () => conditions.hasOracle(selected_cards),
+      condition: () => hasOracle(selected_cards),
       scripts: ['ORACLE_ANSWER']
     },
     {
-      condition: () => conditions.hasCopycat(selected_cards),
+      condition: () => hasCopycat(selected_cards),
       scripts: ['COPYCAT']
     },
     {
-      condition: () => conditions.hasMirrorMan(selected_cards),
+      condition: () => hasMirrorMan(selected_cards),
       scripts: ['MIRROR_MAN']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards),
+      condition: () => hasDoppelganger(selected_cards),
       scripts: ['DOPPELGÄNGER']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasInstantAction(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasInstantAction(selected_cards),
       scripts: ['DOPPELGÄNGER_INSTANT_ACTION']
     },
     {
-      condition: () => conditions.hasAnyVampire(selected_cards),
+      condition: () => hasAnyVampire(selected_cards),
       scripts: ['VAMPIRES']
     },
     {
-      condition: () => conditions.hasTheCount(selected_cards),
+      condition: () => hasTheCount(selected_cards),
       scripts: ['THE_COUNT']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasTheCount(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasTheCount(selected_cards),
       scripts: ['DOPPELGÄNGER_THE_COUNT']
     },
     {
-      condition: () => conditions.hasRenfield(selected_cards),
+      condition: () => hasRenfield(selected_cards),
       scripts: ['RENFIELD']
     },
     {
-      condition: () => conditions.hasDiseased(selected_cards),
+      condition: () => hasDiseased(selected_cards),
       scripts: ['DISEASED']
     },
     {
-      condition: () => conditions.hasCupid(selected_cards),
+      condition: () => hasCupid(selected_cards),
       scripts: ['CUPID']
     },
     {
-      condition: () => conditions.hasInstigator(selected_cards),
+      condition: () => hasInstigator(selected_cards),
       scripts: ['INSTIGATOR']
     },
     {
-      condition: () => conditions.hasPriest(selected_cards),
+      condition: () => hasPriest(selected_cards),
       scripts: ['PRIEST']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasPriest(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasPriest(selected_cards),
       scripts: ['DOPPELGÄNGER_PRIEST']
     },
     {
-      condition: () => conditions.hasAssassin(selected_cards),
+      condition: () => hasAssassin(selected_cards),
       scripts: ['ASSASSIN']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasAssassin(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasAssassin(selected_cards),
       scripts: ['DOPPELGÄNGER_ASSASSIN']
     },
     {
-      condition: () => conditions.hasApprenticeAssassin(selected_cards),
+      condition: () => hasApprenticeAssassin(selected_cards),
       scripts: ['APPRENTICE_ASSASSIN']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasApprenticeAssassin(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasApprenticeAssassin(selected_cards),
       scripts: ['DOPPELGÄNGER_APPRENTICE_ASSASSIN']
     },
     {
-      condition: () => conditions.hasMarks(selected_cards),
+      condition: () => hasMarks(selected_cards),
       scripts: ['EVERYONE_MARK']
     },
     {
-      condition: () => conditions.hasCupid(selected_cards),
+      condition: () => hasCupid(selected_cards),
       scripts: ['LOVERS']
     },
     {
-      condition: () => conditions.hasSentinel(selected_cards),
+      condition: () => hasSentinel(selected_cards),
       scripts: ['SENTINEL']
     },
     {
-      condition: () => conditions.hasAnyAlien(selected_cards),
+      condition: () => hasAnyAlien(selected_cards),
       scripts: ['ALIENS']
     },
     {
-      condition: () => conditions.hasCow(selected_cards),
+      condition: () => hasCow(selected_cards),
       scripts: ['COW']
     },
     {
-      condition: () => conditions.hasGroobAndZerb(selected_cards),
+      condition: () => hasGroobAndZerb(selected_cards),
       scripts: ['GROOB_ZERB']
     },
     {
-      condition: () => conditions.hasBodySnatcher(selected_cards),
+      condition: () => hasBodySnatcher(selected_cards),
       scripts: ['BODY_SNATCHER']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasBodySnatcher(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasBodySnatcher(selected_cards),
       scripts: ['DOPPELGÄNGER_BODY_SNATCHER']
     },
     {
-      condition: () => conditions.hasAnySuperVillains(selected_cards),
+      condition: () => hasAnySuperVillains(selected_cards),
       scripts: ['SUPER_VILLAINS']
     },
     {
-      condition: () => conditions.hasTemptress(selected_cards),
+      condition: () => hasTemptress(selected_cards),
       scripts: ['TEMPTRESS']
     },
     {
-      condition: () => conditions.hasDrPeeker(selected_cards),
+      condition: () => hasDrPeeker(selected_cards),
       scripts: ['DR_PEEKER']
     },
     {
-      condition: () => conditions.hasRapscallion(selected_cards),
+      condition: () => hasRapscallion(selected_cards),
       scripts: ['RAPSCALLION']
     },
     {
-      condition: () => conditions.hasEvilometer(selected_cards),
+      condition: () => hasEvilometer(selected_cards),
       scripts: ['EVILOMETER']
     },
     {
-      condition: () => conditions.hasAnyWerewolf(selected_cards),
+      condition: () => hasAnyWerewolf(selected_cards),
       scripts: ['WEREWOLVES']
     },
     {
-      condition: () => conditions.hasAlphaWolf(selected_cards),
+      condition: () => hasAlphaWolf(selected_cards),
       scripts: ['ALPHA_WOLF']
     },
     {
-      condition: () => conditions.hasMysticWolf(selected_cards),
+      condition: () => hasMysticWolf(selected_cards),
       scripts: ['MYSTIC_WOLF']
     },
     {
-      condition: () => conditions.hasMinion(selected_cards),
+      condition: () => hasMinion(selected_cards),
       scripts: ['MINION']
     },
     {
-      condition: () => conditions.hasApprenticeTanner(selected_cards) && conditions.hasTanner(selected_cards),
+      condition: () => hasApprenticeTanner(selected_cards) && hasTanner(selected_cards),
       scripts: ['APPRENTICE_TANNER']
     },
     {
-      condition: () => conditions.hasLeader(selected_cards) && conditions.hasAnyAlien(selected_cards),
+      condition: () => hasLeader(selected_cards) && hasAnyAlien(selected_cards),
       scripts: ['LEADER']
     },
     {
-      condition: () => conditions.hasLeader(selected_cards) && conditions.hasGroobAndZerb(selected_cards),
+      condition: () => hasLeader(selected_cards) && hasGroobAndZerb(selected_cards),
       scripts: ['LEADER_ZERB_GROOB']
     },
     {
-      condition: () => conditions.hasMadScientist(selected_cards),
+      condition: () => hasMadScientist(selected_cards),
       scripts: ['MAD_SCIENTIST']
     },
     {
-      condition: () => conditions.hasIntern(selected_cards),
+      condition: () => hasIntern(selected_cards),
       scripts: ['INTERN']
     },
     {
-      condition: () => conditions.hasMasons(selected_cards),
+      condition: () => hasMasons(selected_cards),
       scripts: ['MASONS']
     },
     {
-      condition: () => conditions.hasThing(selected_cards),
+      condition: () => hasThing(selected_cards),
       scripts: ['THING']
     },
     {
-      condition: () => conditions.hasAnnoyingLad(selected_cards),
+      condition: () => hasAnnoyingLad(selected_cards),
       scripts: ['ANNOYING_LAD']
     },
     {
-      condition: () => conditions.hasSeer(selected_cards),
+      condition: () => hasSeer(selected_cards),
       scripts: ['SEER']
     },
     {
-      condition: () => conditions.hasApprenticeSeer(selected_cards),
+      condition: () => hasApprenticeSeer(selected_cards),
       scripts: ['APPRENTICE_SEER']
     },
     {
-      condition: () => conditions.hasParanormalInvestigator(selected_cards),
+      condition: () => hasParanormalInvestigator(selected_cards),
       scripts: ['PARANORMAL_INVESTIGATOR']
     },
     {
-      condition: () => conditions.hasMarksman(selected_cards),
+      condition: () => hasMarksman(selected_cards),
       scripts: ['MARKSMAN']
     },
     {
-      condition: () => conditions.hasNostradamus(selected_cards),
+      condition: () => hasNostradamus(selected_cards),
       scripts: ['NOSTRADAMUS']
     },
     {
-      condition: () => conditions.hasNostradamus(selected_cards),
+      condition: () => hasNostradamus(selected_cards),
       scripts: ['NOSTRADAMUS_REACTION']
     },
     {
-      condition: () => conditions.hasPsychic(selected_cards),
+      condition: () => hasPsychic(selected_cards),
       scripts: ['PSYCHIC']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasPsychic(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasPsychic(selected_cards),
       scripts: ['DOPPELGÄNGER_PSYCHIC']
     },
     {
-      condition: () => conditions.hasDetector(selected_cards),
+      condition: () => hasDetector(selected_cards),
       scripts: ['DETECTOR']
     },
     {
-      condition: () => conditions.hasRobber(selected_cards),
+      condition: () => hasRobber(selected_cards),
       scripts: ['ROBBER']
     },
     {
-      condition: () => conditions.hasWitch(selected_cards),
+      condition: () => hasWitch(selected_cards),
       scripts: ['WITCH']
     },
     {
-      condition: () => conditions.hasPickpocket(selected_cards),
+      condition: () => hasPickpocket(selected_cards),
       scripts: ['PICKPOCKET']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasPickpocket(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasPickpocket(selected_cards),
       scripts: ['DOPPELGÄNGER_PICKPOCKET']
     },
     {
-      condition: () => conditions.hasRoleRetriever(selected_cards),
+      condition: () => hasRoleRetriever(selected_cards),
       scripts: ['ROLE_RETRIEVER']
     },
     {
-      condition: () => conditions.hasVoodooLou(selected_cards),
+      condition: () => hasVoodooLou(selected_cards),
       scripts: ['VOODOO_LOU']
     },
     {
-      condition: () => conditions.hasTroublemaker(selected_cards),
+      condition: () => hasTroublemaker(selected_cards),
       scripts: ['TROUBLEMAKER']
     },
     {
-      condition: () => conditions.hasVillageIdiot(selected_cards),
+      condition: () => hasVillageIdiot(selected_cards),
       scripts: ['VILLAGE_IDIOT']
     },
     {
-      condition: () => conditions.hasAuraSeer(selected_cards),
+      condition: () => hasAuraSeer(selected_cards),
       scripts: ['AURA_SEER']
     },
     {
-      condition: () => conditions.hasGremlin(selected_cards),
+      condition: () => hasGremlin(selected_cards),
       scripts: ['GREMLIN']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasGremlin(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasGremlin(selected_cards),
       scripts: ['DOPPELGÄNGER_GREMLIN']
     },
     {
-      condition: () => conditions.hasRascal(selected_cards),
+      condition: () => hasRascal(selected_cards),
       scripts: ['RASCAL']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasRascal(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasRascal(selected_cards),
       scripts: ['DOPPELGÄNGER_RASCAL']
     },
     {
-      condition: () => conditions.hasSwitcheroo(selected_cards),
+      condition: () => hasSwitcheroo(selected_cards),
       scripts: ['SWITCHEROO']
     },
     {
-      condition: () => conditions.hasDrunk(selected_cards),
+      condition: () => hasDrunk(selected_cards),
       scripts: ['DRUNK']
     },
     {
-      condition: () => conditions.hasInsomniac(selected_cards),
+      condition: () => hasInsomniac(selected_cards),
       scripts: ['INSOMNIAC']
     },
     {
-      condition: () => conditions.hasSelfAwarenessGirl(selected_cards),
+      condition: () => hasSelfAwarenessGirl(selected_cards),
       scripts: ['SELF_AWARENESS_GIRL']
     },
     {
-      condition: () => conditions.hasSquire(selected_cards),
+      condition: () => hasSquire(selected_cards),
       scripts: ['SQUIRE']
     },
     {
-      condition: () => conditions.hasBeholder(selected_cards),
+      condition: () => hasBeholder(selected_cards),
       scripts: ['BEHOLDER']
     },
     {
-      condition: () => conditions.hasRevealer(selected_cards),
+      condition: () => hasRevealer(selected_cards),
       scripts: ['REVEALER']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasRevealer(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasRevealer(selected_cards),
       scripts: ['DOPPELGÄNGER_REVEALER']
     },
     {
-      condition: () => conditions.hasExposer(selected_cards),
+      condition: () => hasExposer(selected_cards),
       scripts: ['EXPOSER']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasExposer(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasExposer(selected_cards),
       scripts: ['DOPPELGÄNGER_EXPOSER']
     },
     {
-      condition: () => conditions.hasFlipper(selected_cards),
+      condition: () => hasFlipper(selected_cards),
       scripts: ['FLIPPER']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasFlipper(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasFlipper(selected_cards),
       scripts: ['DOPPELGÄNGER_FLIPPER']
     },
     {
-      condition: () => conditions.hasEmpath(selected_cards),
+      condition: () => hasEmpath(selected_cards),
       scripts: ['EMPATH']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasEmpath(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasEmpath(selected_cards),
       scripts: ['DOPPELGÄNGER_EMPATH']
     },
     {
-      condition: () => conditions.hasCurator(selected_cards),
+      condition: () => hasCurator(selected_cards),
       scripts: ['CURATOR']
     },
     {
-      condition: () => conditions.hasDoppelganger(selected_cards) && conditions.hasCurator(selected_cards),
+      condition: () => hasDoppelganger(selected_cards) && hasCurator(selected_cards),
       scripts: ['DOPPELGÄNGER_CURATOR']
     },
     {
-      condition: () => conditions.hasBlob(selected_cards),
+      condition: () => hasBlob(selected_cards),
       scripts: ['BLOB']
     },
     {
-      condition: () => conditions.hasMortician(selected_cards),
+      condition: () => hasMortician(selected_cards),
       scripts: ['MORTICIAN']
     },
     {
-      condition: () => conditions.hasMortician(selected_cards) && conditions.hasDoppelganger(selected_cards),
+      condition: () => hasMortician(selected_cards) && hasDoppelganger(selected_cards),
       scripts: ['DOPPELGÄNGER_MORTICIAN']
     },
     {
-      condition: () => conditions.hasFamilyMan(selected_cards),
+      condition: () => hasFamilyMan(selected_cards),
       scripts: ['FAMILY_MAN']
     },
     {
-      condition: () => conditions.hasRipple(selected_cards),
+      condition: () => hasRipple(selected_cards),
       scripts: ['RIPPLE']
     }
   ]
@@ -383,7 +384,7 @@ export const scriptHandler = gamestate => {
 
   if (gamestate.scripts.length === 0 || gamestate.scripts[gamestate.scripts.length - 1].scene_title !== 'RIPPLE') {
     addScript('JOKE')
-  } 
+  }
 
   return gamestate
 }

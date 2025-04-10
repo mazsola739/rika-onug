@@ -56,7 +56,7 @@ export const God: React.FC = observer(() => {
         <FormContainer>
           <InputContainer>
             <Label htmlFor="message">Message:</Label>
-            <textarea id="message" value={JSON.stringify(message)} onChange={e => setMessageHandler(e.target.value)} />
+            <textarea id="message" value={JSON.stringify(message)} onChange={e => setMessageHandler(e.target.value)} style={{ color: '#333', lineHeight: '2', borderRadius: '5px' }} />
           </InputContainer>
         </FormContainer>
         <ButtonsContainer>

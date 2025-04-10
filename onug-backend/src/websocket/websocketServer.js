@@ -31,8 +31,10 @@ import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, hydrateReady, hyd
 export const websocketServer = port => {
   try {
     const wss = new WebSocket.WebSocketServer({ port })
+   
     wss.on('connection', function connection(ws) {
       ws.on('close', () => {
+        // @ts-ignore
         logTrace(`client: ${ws.token} connection lost / disconnected`)
       })
       ws.onerror = function () {
@@ -44,6 +46,7 @@ export const websocketServer = port => {
         logTrace(`msg received: ${rawMessage}`)
 
         if (message.type === NEWBIE) return newbie(ws, message)
+        // @ts-ignore
         if (ws.token !== message.token) return
         if (message.type === RELOAD) return reload(ws, message)
         if (message.type === JOIN_ROOM) return joinRoom(ws, message)

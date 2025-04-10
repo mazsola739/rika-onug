@@ -24,7 +24,7 @@ export const LeftSide = styled.div`
   padding: 10px;
   width: 40%;
   background-color: #282c34;
-  border-radius: 0.75rem;
+  border-radius: 5px;
   box-shadow: 0 0.25rem 8px rgba(0, 0, 0, 0.1);
 `
 
@@ -32,7 +32,7 @@ export const RightSide = styled.div`
   padding: 10px;
   width: 60%;
   background-color: #282c34;
-  border-radius: 0.75rem;
+  border-radius: 5px;
   box-shadow: 0 0.25rem 8px rgba(0, 0, 0, 0.1);
 `
 
@@ -56,7 +56,7 @@ export const MetaContainer = styled.div`
 
 export const ResponseContainer = styled.div`
   border: 0.0625rem solid #ddd;
-  border-radius: 0.75rem;
+  border-radius: 5px;
   padding: 10px;
   height: 95%;
   overflow-y: auto;
@@ -92,6 +92,7 @@ export const Input = styled.input`
   border-radius: 5px;
   font-size: 1rem;
   background-color: #fff;
+  color: #333;
 `
 
 export const ButtonsContainer = styled.div`
