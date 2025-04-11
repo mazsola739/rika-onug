@@ -1,12 +1,12 @@
-import { ALIEN_IDS, SUPER_VILLAINS, VAMPIRE_IDS, WEREWOLVES, BAD_GUY, DOPPELGANGER_INSTANT_ACTION, GOOD_GUY, GROOB_AND_ZERB, HAS_MARK, MASONS, SEERS } from '../constants'
+import { ALIEN_IDS, SUPER_VILLAIN_IDS, VAMPIRE_IDS, WEREWOLVES, BAD_GUY, DOPPELGANGER_INSTANT_ACTION, GOOD_GUY, GROOB_AND_ZERB, HAS_MARK, MASONS, SEERS } from '../constants'
 
 export const hasEpicBattle = selected_cards => {
-  
+
   const battles = {
     vampire: VAMPIRE_IDS.some(id => selected_cards.includes(id)),
     alien: ALIEN_IDS.some(id => selected_cards.includes(id)),
     werewolf: WEREWOLVES.some(id => selected_cards.includes(id)),
-    villain: SUPER_VILLAINS.some(id => selected_cards.includes(id))
+    villain: SUPER_VILLAIN_IDS.some(id => selected_cards.includes(id))
   }
   const trueCount = Object.values(battles).filter(val => val).length
   return trueCount >= 2
@@ -33,7 +33,7 @@ export const hasAnyAlien = selected_cards => ALIEN_IDS.some(id => selected_cards
 export const hasCow = selected_cards => selected_cards.includes(45)
 export const hasGroobAndZerb = selected_cards => GROOB_AND_ZERB.every(cardId => selected_cards.includes(cardId))
 export const hasBodySnatcher = selected_cards => selected_cards.includes(74)
-export const hasAnySuperVillains = selected_cards => SUPER_VILLAINS.some(id => selected_cards.includes(id))
+export const hasAnySuperVillains = selected_cards => SUPER_VILLAIN_IDS.some(id => selected_cards.includes(id))
 export const hasTemptress = selected_cards => selected_cards.includes(69)
 export const hasDrPeeker = selected_cards => selected_cards.includes(57)
 export const hasRapscallion = selected_cards => selected_cards.includes(65)

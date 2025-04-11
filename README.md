@@ -1,9 +1,9 @@
-# Rika ONUG - One Night Ultimate Werewolf
+# Rika ONUG - One Night Ultimate Games
 
 Rika ONUG is a web-based implementation of the popular social deduction game "One Night Ultimate Werewolf." This project includes both frontend and backend components, as well as end-to-end testing.
 
 ## Features
-- Play One Night Ultimate Werewolf online with friends.
+- Play One Night Ultimate Games online with friends.
 - Role-based actions and game logic implemented in the backend.
 - Interactive user interface for seamless gameplay.
 

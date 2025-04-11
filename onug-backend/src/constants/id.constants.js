@@ -42,7 +42,7 @@ export const GROOB_AND_ZERB = [47, 54]
 export const VAMPIRE_IDS = [39, 40, 41]
 
 //SUPERVILLAIN IDS
-export const SUPER_VILLAINS = [57, 60, 65, 69]
+export const SUPER_VILLAIN_IDS = [57, 60, 65, 69]
 export const SUPER_VILLAIN_TO_CHECK = [57, 60, 65]
 
 //MISC IDS

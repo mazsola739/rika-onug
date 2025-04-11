@@ -1,4 +1,4 @@
-import { ALIEN_IDS, SUPER_VILLAINS, VAMPIRE_IDS, MASONS, WEREVOLVES_WITHOUT_DREAMWOLF, WEREWOLVES } from '../../constants'
+import { ALIEN_IDS, SUPER_VILLAIN_IDS, VAMPIRE_IDS, MASONS, WEREVOLVES_WITHOUT_DREAMWOLF, WEREWOLVES } from '../../constants'
 
 //TODO finish
 const filters = {
@@ -26,8 +26,8 @@ const filters = {
   groob: player => player.card.player_role_id === 47,
 
   //villains
-  nonVillainWithoutShield: (player, shieldedCards) => !SUPER_VILLAINS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
-  villain: player => SUPER_VILLAINS.includes(player.card.player_role_id),
+  nonVillainWithoutShield: (player, shieldedCards) => !SUPER_VILLAIN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
+  villain: player => SUPER_VILLAIN_IDS.includes(player.card.player_role_id),
 
   //witness
   witness: player => player.card.eyes_open,

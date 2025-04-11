@@ -1,4 +1,4 @@
-import { ALIEN_IDS, SUPER_VILLAINS, VAMPIRE_IDS, WEREWOLVES } from '../../constants'
+import { ALIEN_IDS, SUPER_VILLAIN_IDS, VAMPIRE_IDS, WEREWOLVES } from '../../constants'
 import cards from '../../data/cards.json'
 
 export const getSceneByCardId = newSelectedCards => {
@@ -11,7 +11,7 @@ export const getSceneByCardId = newSelectedCards => {
       return 'ALIENS'
     } else if (VAMPIRE_IDS.includes(cardId)) {
       return 'VAMPIRES'
-    } else if (SUPER_VILLAINS.includes(cardId)) {
+    } else if (SUPER_VILLAIN_IDS.includes(cardId)) {
       return 'SUPER_VILLAINS'
     } else {
       return role
