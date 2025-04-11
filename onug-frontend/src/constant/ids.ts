@@ -1,3 +1,5 @@
+//TODO invidually IDS for each role
+
 export const HAS_MARK_IDS: number[] = [28, 29, 31, 32, 34, 37, 38, 39, 40, 41]
 
 export const DOPPELGANGER_INSTANT_ACTION_IDS: number[] = [2, 8, 9, 11, 17, 18, 22, 23, 25, 26, 27, 31, 32, 34, 55, 56, 57, 65, 66, 68, 69, 70, 85]

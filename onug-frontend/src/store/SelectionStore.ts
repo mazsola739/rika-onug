@@ -58,19 +58,19 @@ class SelectionStore {
   }
 
   get selectedCardsMap() {
-    return new Set(this.selectedCards);
+    return new Set(this.selectedCards)
   }
   
   get selectedMarksMap() {
-    return new Set(this.selectedMarks);
+    return new Set(this.selectedMarks)
   }
   
   isSelectedCard(position: string): boolean {
-    return this.selectedCardsMap.has(position);
+    return this.selectedCardsMap.has(position)
   }
   
   isSelectedMark(position: string): boolean {
-    return this.selectedMarksMap.has(position);
+    return this.selectedMarksMap.has(position)
   }
 
   resetSelection() {

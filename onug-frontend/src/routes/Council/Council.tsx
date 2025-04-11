@@ -5,11 +5,9 @@ import { StyledCouncil, CouncilCenter } from './Council.styles'
 import { CouncilFooter } from './CouncilFooter'
 import { CouncilHeader } from './CouncilHeader'
 import { CouncilInfoPanel } from './CouncilInfoPanel'
-import { wsStore } from 'store'
 
 export const Council: React.FC = observer(() => {
   const { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard } = useCouncil()
-  console.log(wsStore.lastJsonMessage)
 
   return (
     <StyledCouncil>

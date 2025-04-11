@@ -3,7 +3,7 @@ export const nostradamus_kickoff_text = "NOSTRADAMUS, look at up to three cards.
 export const nostradamus_teamstart_text = 'Nostradamus is on the '
 
 export const nostradamus_team_alien_text = 'Alien team.'
-export const nostradamus_team_werewolf_text = 'Werewolf team;'
+export const nostradamus_team_werewolf_text = 'Werewolf team'
 export const nostradamus_team_vampire_text = 'Vampire team.'
 export const nostradamus_team_villain_text = 'Villain team.'
 export const nostradamus_team_villager_text = 'Villager team.'
