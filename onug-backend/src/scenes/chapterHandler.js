@@ -30,7 +30,7 @@ export const chapterHandler = async gamestate => {
       const { player_card_shifting, center_card_shifting, view_player_card, view_center_card, mark_shifting, view_mark, shield, artifact, vote } = scene
 
       if (flagsState.artifact || flagsState.shield || flagsState.vote) {
-        logTrace(`Conflict due to active artifact, shield, or vote flag. Halting scene processing.`)
+        logTrace(`Conflict in scene due to active flags [artifact: ${flagsState.artifact}, shield: ${flagsState.shield}, vote: ${flagsState.vote}]. Halting scene processing.`)
         return true
       }
       if (flagsState.view_mark) {
@@ -68,9 +68,9 @@ export const chapterHandler = async gamestate => {
 
       const scenePlayers = Array.isArray(playersArray)
         ? playersArray.filter(player => {
-            const isActive = isActivePlayer(player.card)
-            return isActive && isActive[scene.scene_title]
-          })
+          const isActive = isActivePlayer(player.card)
+          return isActive && isActive[scene.scene_title]
+        })
         : []
 
       if (!Array.isArray(scenePlayers)) {

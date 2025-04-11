@@ -1,10 +1,8 @@
-import { DEAL, REDIRECT, STAGES } from '../../constants'
-import { logErrorWithStack, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
-import { createCenterPositionCard, createPlayerCard, createPlayerPositionCard, dealCardIds, hasMark } from '../../utils/deal.utils'
-import { determineTotalPlayers } from '../../utils/player.utils'
-import { validateRoom } from '../../validators'
-import { broadcast } from '../../utils/connections.utils'
+import { DEAL, STAGES, markPositions, REDIRECT } from "../../constants"
+import { logTrace, logErrorWithStack } from "../../log"
+import { upsertRoomState } from "../../repository"
+import { dealCardIds, determineTotalPlayers, createCenterPositionCard, createPlayerPositionCard, hasMark, createPlayerCard, broadcast } from "../../utils"
+import { validateRoom } from "../../validators"
 
 export const dealCards = async (ws, message) => {
   try {
@@ -43,19 +41,6 @@ export const dealCards = async (ws, message) => {
     const clonedSelectedCards = [...selectedCards]
     const hasPlayerMark = hasMark(clonedSelectedCards)
     const hasDoppelganger = clonedSelectedCards.includes(1)
-
-    const markPositions = {
-      vampire: 'mark_of_vampire',
-      fear: 'mark_of_fear',
-      bat: 'mark_of_the_bat',
-      disease: 'mark_of_disease',
-      love_1: 'mark_of_love',
-      love_2: 'mark_of_love',
-      traitor: 'mark_of_traitor',
-      clarity_1: 'mark_of_clarity',
-      clarity_2: 'mark_of_clarity',
-      assassin: 'mark_of_assassin'
-    }
 
     if (hasPlayerMark) {
       newGamestate.mark_positions = markPositions

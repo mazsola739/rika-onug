@@ -1,6 +1,5 @@
 import { logTrace } from '../../log'
 
-//TODO actual scene (timestamp)
 export const validateCardSelection = (selected_card_positions, player_history, title) => {
   logTrace(`validateCardSelection called when actual scene is: ${title}`)
 

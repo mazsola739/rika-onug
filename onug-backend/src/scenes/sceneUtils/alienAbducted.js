@@ -1,5 +1,4 @@
-import { getNeighborPlayerNumbersByToken } from '../sceneUtils'
-import { getPlayerNumbersByGivenConditions } from './getPlayerNumbersByGivenConditions'
+import { getNeighborPlayerNumbersByToken, getPlayerNumbersByGivenConditions } from "."
 
 export const alienAbducted = (players, cowToken) => {
   const cowNeighbors = getNeighborPlayerNumbersByToken(players, cowToken)

@@ -1,6 +1,6 @@
 # Rika ONUG - One Night Ultimate Games
 
-Rika ONUG is a web-based implementation of the popular social deduction game "One Night Ultimate Werewolf." This project includes both frontend and backend components, as well as end-to-end testing.
+Rika ONUG is a web-based implementation of the popular social deduction game "One Night Ultimate Werewolf." This project includes both frontend and backend components.
 
 ## Features
 - Play One Night Ultimate Games online with friends.
@@ -24,19 +24,19 @@ yarn run install:all
 ## Usage
 
 ### Start the Frontend
-Navigate to the `onug-frontend` directory and start the development server:
+Start the frontend development server directly from the root folder:
 ```bash
-yarn run frontend
+yarn frontend
 ```
 
 ### Start the Backend
-Navigate to the `onug-backend` directory and start the backend server:
+Start the backend server directly from the root folder:
 ```bash
-yarn run backend
+yarn backend
 ```
 
 ## License
 This project is licensed under the MIT License.
 
 ## Author
-Rika
+<CopyrightText>© 2023-2025 Rika - ✨Pixels? They survived the night! This app runs solely on ☕ and 🦄 magic!✨</CopyrightText>
