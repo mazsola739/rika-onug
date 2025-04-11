@@ -6,7 +6,7 @@
     "frontend": "cd onug-frontend && yarn start",
     "build:frontend": "cd onug-frontend && yarn build",
     "backend": "cd onug-backend && yarn start",
-    "install:all": "cd onug-frontend && yarn install && cd ../onug-backend && yarn install && cd ../onug-e2e && yarn install"
+    "install:all": "cd onug-frontend && yarn install && cd ../onug-backend && yarn install"
   },
   "description": "One Night Ultimate Werewolf",
   "author": "Rika",

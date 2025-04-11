@@ -1,37 +1,15 @@
 import WebSocket from 'ws'
 
-import {
-  ALIENS,
-  ARRIVE_COUNCIL,
-  ARRIVE_GAME,
-  ARRIVE_ROOM,
-  ARRIVE_TABLE,
-  ARRIVE_VERDICT,
-  DEAL,
-  JOIN_ROOM,
-  LEAVE_GAME,
-  LEAVE_ROOM,
-  NEWBIE,
-  READY,
-  RELOAD,
-  RESET,
-  SCENE,
-  START_GAME,
-  START_VOTE,
-  STOP_GAME,
-  UPDATE_GUESS,
-  UPDATE_ROOM,
-  VAMPIRES,
-  VOTE
-} from '../constants'
+import { ALIENS, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, READY, RELOAD, RESET, SCENE, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES, VOTE } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { aliensVotehydrate, vampiresVotehydrate } from '../scenes/roles'
 import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, hydrateReady, hydrateRoom, hydrateTable, joinRoom, leaveGame, leaveRoom, newbie, reload, reset, result, scene, startGame, startVote, stopGame, updateRoom, verdict } from './handlers'
 
+
 export const websocketServer = port => {
   try {
     const wss = new WebSocket.WebSocketServer({ port })
-   
+
     wss.on('connection', function connection(ws) {
       ws.on('close', () => {
         // @ts-ignore
@@ -45,30 +23,41 @@ export const websocketServer = port => {
         const message = JSON.parse(rawMessage)
         logTrace(`msg received: ${rawMessage}`)
 
+        // Handle messages that don't require token validation
         if (message.type === NEWBIE) return newbie(ws, message)
+
         // @ts-ignore
-        if (ws.token !== message.token) return
-        if (message.type === RELOAD) return reload(ws, message)
-        if (message.type === JOIN_ROOM) return joinRoom(ws, message)
-        if (message.type === LEAVE_ROOM) return leaveRoom(ws, message)
-        if (message.type === UPDATE_ROOM) return updateRoom(message)
-        if (message.type === DEAL) return dealCards(ws, message)
-        if (message.type === LEAVE_GAME) return leaveGame(ws, message)
-        if (message.type === RESET) return reset(message)
-        if (message.type === ARRIVE_ROOM) return hydrateRoom(ws, message)
-        if (message.type === READY) return hydrateReady(message)
-        if (message.type === ARRIVE_TABLE) return hydrateTable(ws, message)
-        if (message.type === START_GAME) return startGame(ws, message)
-        if (message.type === ALIENS) return aliensVotehydrate(message)
-        if (message.type === VAMPIRES) return vampiresVotehydrate(message)
-        if (message.type === ARRIVE_GAME) return hydrateGame(ws, message)
-        if (message.type === STOP_GAME) return stopGame(message)
-        if (message.type === SCENE) return scene(ws, message)
-        if (message.type === ARRIVE_COUNCIL) return hydrateCouncil(ws, message)
-        if (message.type === UPDATE_GUESS) return hydrateGuess(ws, message)
-        if (message.type === START_VOTE) return startVote(ws, message)
-        if (message.type === VOTE) return verdict(ws, message)
-        if (message.type === ARRIVE_VERDICT) return result(ws, message)
+        if (ws.token !== message.token) {
+          logError(`Invalid token for message type: ${message.type}`)
+          return
+        }
+
+        // Handle messages that require token validation
+        switch (message.type) {
+          case RELOAD: return reload(ws, message)
+          case JOIN_ROOM: return joinRoom(ws, message)
+          case LEAVE_ROOM: return leaveRoom(ws, message)
+          case UPDATE_ROOM: return updateRoom(message)
+          case DEAL: return dealCards(ws, message)
+          case LEAVE_GAME: return leaveGame(ws, message)
+          case RESET: return reset(message)
+          case ARRIVE_ROOM: return hydrateRoom(ws, message)
+          case READY: return hydrateReady(message)
+          case ARRIVE_TABLE: return hydrateTable(ws, message)
+          case START_GAME: return startGame(ws, message)
+          case ALIENS: return aliensVotehydrate(message)
+          case VAMPIRES: return vampiresVotehydrate(message)
+          case ARRIVE_GAME: return hydrateGame(ws, message)
+          case STOP_GAME: return stopGame(message)
+          case SCENE: return scene(ws, message)
+          case ARRIVE_COUNCIL: return hydrateCouncil(ws, message)
+          case UPDATE_GUESS: return hydrateGuess(ws, message)
+          case START_VOTE: return startVote(ws, message)
+          case VOTE: return verdict(ws, message)
+          case ARRIVE_VERDICT: return result(ws, message)
+          default:
+            logError(`Unhandled message type: ${message.type}`)
+        }
       })
     })
   } catch (error) {
