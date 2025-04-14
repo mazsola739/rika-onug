@@ -1,5 +1,5 @@
 import { TablePlayerCard } from 'types'
 
-export interface AroundTableProps {
+export interface SeatsProps {
   cards: TablePlayerCard[]
 }

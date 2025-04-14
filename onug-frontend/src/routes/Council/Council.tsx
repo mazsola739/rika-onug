@@ -1,4 +1,4 @@
-import { AroundTableSide, AroundTableTop, CenterCards, Main, PlayerCard, RoleTokenList } from 'components'
+import { SideSeats, TopSeats, CenterCards, Main, PlayerCard, RoleTokenList } from 'components'
 import { observer } from 'mobx-react-lite'
 import { useCouncil } from './useCouncil'
 import { StyledCouncil, CouncilCenter } from './Council.styles'
@@ -12,8 +12,8 @@ export const Council: React.FC = observer(() => {
   return (
     <StyledCouncil>
       <CouncilHeader />
-      {tablePlayerCards && <AroundTableSide cards={left} />}
-      {tablePlayerCards && <AroundTableTop cards={middle} />}
+      {tablePlayerCards && <SideSeats cards={left} />}
+      {tablePlayerCards && <TopSeats cards={middle} />}
       <Main>
         <CouncilCenter>
           <CenterCards />
@@ -21,7 +21,7 @@ export const Council: React.FC = observer(() => {
         </CouncilCenter>
         {tablePlayerCard && <PlayerCard ownCard={true} card={ownCard} cardSize={100} tokenSize={40} />}
       </Main>
-      {tablePlayerCards && <AroundTableSide cards={right} />}
+      {tablePlayerCards && <SideSeats cards={right} />}
       <CouncilFooter />
       <CouncilInfoPanel />
     </StyledCouncil>
