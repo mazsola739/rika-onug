@@ -36,6 +36,4 @@ class PlayersStore {
     return currentPlayer ? currentPlayer.flag : false
   }
 }
-
-export default PlayersStore
 export const playersStore = new PlayersStore()

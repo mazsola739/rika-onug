@@ -1,7 +1,7 @@
 import { ARRIVE_VERDICT, REDIRECT, RESULT } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { propStore, riseAndRestStore, voteStore, wsStore } from 'store'
+import { voteStore, wsStore } from 'store'
 
 export const useVerdict = () => {
   const [firstTime, setFirstTime] = useState(true)

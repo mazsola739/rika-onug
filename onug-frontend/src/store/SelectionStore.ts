@@ -56,23 +56,6 @@ class SelectionStore {
       this.selectedAnswer = answer
     }
   }
-
-  get selectedCardsMap() {
-    return new Set(this.selectedCards)
-  }
-  
-  get selectedMarksMap() {
-    return new Set(this.selectedMarks)
-  }
-  
-  isSelectedCard(position: string): boolean {
-    return this.selectedCardsMap.has(position)
-  }
-  
-  isSelectedMark(position: string): boolean {
-    return this.selectedMarksMap.has(position)
-  }
-
   resetSelection() {
     this.selectedCards = []
     this.selectedMarks = []
@@ -80,4 +63,3 @@ class SelectionStore {
 }
 
 export const selectionStore = new SelectionStore()
-export default SelectionStore

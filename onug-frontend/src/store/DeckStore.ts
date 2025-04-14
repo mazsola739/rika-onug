@@ -1,9 +1,9 @@
-import { ASSASSIN_IDS, HAS_MARK_IDS, VAMPIRE_IDS } from 'constant'
-import { artifacts, cards, marks } from 'data'
-import { makeAutoObservable } from 'mobx'
-import { CardJson, Expansion, TokenJson } from 'types'
-import { areAnyCardSelectedById, checkCardPresence, createDefaultCard, createDefaultToken, determineTotalPlayers, getCardById, getMarkByName } from 'utils'
-import { playersStore } from './PlayersStore'
+import { HAS_MARK_IDS, VAMPIRE_IDS, ASSASSIN_IDS } from "constant"
+import { cards, marks, artifacts } from "data"
+import { makeAutoObservable } from "mobx"
+import { CardJson, TokenJson, Expansion } from "types"
+import { createDefaultCard, createDefaultToken, getCardById, getMarkByName, determineTotalPlayers, checkCardPresence, areAnyCardSelectedById } from "utils"
+import { playersStore } from "./PlayersStore"
 
 class DeckStore {
   deck: CardJson[] = cards
@@ -16,7 +16,6 @@ class DeckStore {
 
   playerCard: CardJson = createDefaultCard()
   playerMark: TokenJson = createDefaultToken()
-  playerArtifact: TokenJson = createDefaultToken()
 
   constructor() {
     makeAutoObservable(this)
@@ -38,13 +37,11 @@ class DeckStore {
   }
 
   setPlayerCard(): void {
-    const card = getCardById(playersStore.player.player_card_id)
-    this.playerCard = card
+    this.playerCard = getCardById(playersStore.player.player_card_id)
   }
 
   setPlayerMark(): void {
-    const mark = getMarkByName('mark_of_clarity')
-    this.playerMark = mark
+    this.playerMark = getMarkByName('mark_of_clarity')
   }
 
   get totalCharacters(): number {
@@ -138,5 +135,4 @@ class DeckStore {
   }
 }
 
-export default DeckStore
 export const deckStore = new DeckStore()

@@ -8,7 +8,7 @@ import { Title } from 'components'
 export const Nav: React.FC<NavProps> = observer(({ anchorList }) => {
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null)
 
-  //TODO fix it, right now not refreshing the anchor isactive status
+  //TODO fix it, right now not refreshing the anchor isActive status
   useEffect(() => {
     const sections = anchorList.map(anchor => document.getElementById(anchor)).filter(Boolean) as HTMLElement[]
     const navButtons = document.querySelectorAll('.navbar .nav-container button') as NodeListOf<HTMLButtonElement>

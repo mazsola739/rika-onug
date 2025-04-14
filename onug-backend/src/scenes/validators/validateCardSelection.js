@@ -13,6 +13,6 @@ export const validateCardSelection = (selected_card_positions, player_history, t
   if ((hasPlayerPositions && hasCenterPositions) || selected_card_positions.length !== player_history[title]?.selectable_card_limit[hasPlayerPositions ? 'player' : 'center']) {
     return false
   }
-  logTrace(`validateCardSelection finished and everything allright: ${title}`)
+  logTrace(`validateCardSelection finished and everything all right: ${title}`)
   return true
 }

@@ -29,11 +29,11 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards),
-      scripts: ['DOPPELGÄNGER']
+      scripts: ['DOPPELGANGER']
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasInstantAction(selected_cards),
-      scripts: ['DOPPELGÄNGER_INSTANT_ACTION']
+      scripts: ['DOPPELGANGER_INSTANT_ACTION']
     },
     {
       condition: () => hasAnyVampire(selected_cards),
@@ -45,7 +45,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasTheCount(selected_cards),
-      scripts: ['DOPPELGÄNGER_THE_COUNT']
+      scripts: ['DOPPELGANGER_THE_COUNT']
     },
     {
       condition: () => hasRenfield(selected_cards),
@@ -69,7 +69,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasPriest(selected_cards),
-      scripts: ['DOPPELGÄNGER_PRIEST']
+      scripts: ['DOPPELGANGER_PRIEST']
     },
     {
       condition: () => hasAssassin(selected_cards),
@@ -77,7 +77,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasAssassin(selected_cards),
-      scripts: ['DOPPELGÄNGER_ASSASSIN']
+      scripts: ['DOPPELGANGER_ASSASSIN']
     },
     {
       condition: () => hasApprenticeAssassin(selected_cards),
@@ -85,7 +85,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasApprenticeAssassin(selected_cards),
-      scripts: ['DOPPELGÄNGER_APPRENTICE_ASSASSIN']
+      scripts: ['DOPPELGANGER_APPRENTICE_ASSASSIN']
     },
     {
       condition: () => hasMarks(selected_cards),
@@ -117,7 +117,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasBodySnatcher(selected_cards),
-      scripts: ['DOPPELGÄNGER_BODY_SNATCHER']
+      scripts: ['DOPPELGANGER_BODY_SNATCHER']
     },
     {
       condition: () => hasAnySuperVillains(selected_cards),
@@ -217,7 +217,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasPsychic(selected_cards),
-      scripts: ['DOPPELGÄNGER_PSYCHIC']
+      scripts: ['DOPPELGANGER_PSYCHIC']
     },
     {
       condition: () => hasDetector(selected_cards),
@@ -237,7 +237,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasPickpocket(selected_cards),
-      scripts: ['DOPPELGÄNGER_PICKPOCKET']
+      scripts: ['DOPPELGANGER_PICKPOCKET']
     },
     {
       condition: () => hasRoleRetriever(selected_cards),
@@ -265,7 +265,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasGremlin(selected_cards),
-      scripts: ['DOPPELGÄNGER_GREMLIN']
+      scripts: ['DOPPELGANGER_GREMLIN']
     },
     {
       condition: () => hasRascal(selected_cards),
@@ -273,7 +273,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasRascal(selected_cards),
-      scripts: ['DOPPELGÄNGER_RASCAL']
+      scripts: ['DOPPELGANGER_RASCAL']
     },
     {
       condition: () => hasSwitcheroo(selected_cards),
@@ -305,7 +305,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasRevealer(selected_cards),
-      scripts: ['DOPPELGÄNGER_REVEALER']
+      scripts: ['DOPPELGANGER_REVEALER']
     },
     {
       condition: () => hasExposer(selected_cards),
@@ -313,7 +313,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasExposer(selected_cards),
-      scripts: ['DOPPELGÄNGER_EXPOSER']
+      scripts: ['DOPPELGANGER_EXPOSER']
     },
     {
       condition: () => hasFlipper(selected_cards),
@@ -321,7 +321,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasFlipper(selected_cards),
-      scripts: ['DOPPELGÄNGER_FLIPPER']
+      scripts: ['DOPPELGANGER_FLIPPER']
     },
     {
       condition: () => hasEmpath(selected_cards),
@@ -329,7 +329,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasEmpath(selected_cards),
-      scripts: ['DOPPELGÄNGER_EMPATH']
+      scripts: ['DOPPELGANGER_EMPATH']
     },
     {
       condition: () => hasCurator(selected_cards),
@@ -337,7 +337,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasDoppelganger(selected_cards) && hasCurator(selected_cards),
-      scripts: ['DOPPELGÄNGER_CURATOR']
+      scripts: ['DOPPELGANGER_CURATOR']
     },
     {
       condition: () => hasBlob(selected_cards),
@@ -349,7 +349,7 @@ export const rippleScriptHandler = gamestate => {
     },
     {
       condition: () => hasMortician(selected_cards) && hasDoppelganger(selected_cards),
-      scripts: ['DOPPELGÄNGER_MORTICIAN']
+      scripts: ['DOPPELGANGER_MORTICIAN']
     },
     {
       condition: () => hasFamilyMan(selected_cards),

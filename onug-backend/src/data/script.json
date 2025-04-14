@@ -84,7 +84,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER",
+    "scene_title": "DOPPELGANGER",
     "scene_number": 6,
     "scene_started": false,
     "player_card_shifting": true,
@@ -98,7 +98,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_INSTANT_ACTION",
+    "scene_title": "DOPPELGANGER_INSTANT_ACTION",
     "scene_number": 7,
     "scene_started": false,
     "player_card_shifting": true,
@@ -140,7 +140,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_THE_COUNT",
+    "scene_title": "DOPPELGANGER_THE_COUNT",
     "scene_number": 10,
     "scene_started": false,
     "player_card_shifting": false,
@@ -224,7 +224,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_PRIEST",
+    "scene_title": "DOPPELGANGER_PRIEST",
     "scene_number": 16,
     "scene_started": false,
     "player_card_shifting": false,
@@ -252,7 +252,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_ASSASSIN",
+    "scene_title": "DOPPELGANGER_ASSASSIN",
     "scene_number": 18,
     "scene_started": false,
     "player_card_shifting": false,
@@ -280,7 +280,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_APPRENTICE_ASSASSIN",
+    "scene_title": "DOPPELGANGER_APPRENTICE_ASSASSIN",
     "scene_number": 20,
     "scene_started": false,
     "player_card_shifting": false,
@@ -392,7 +392,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_BODY_SNATCHER",
+    "scene_title": "DOPPELGANGER_BODY_SNATCHER",
     "scene_number": 28,
     "scene_started": false,
     "player_card_shifting": true,
@@ -742,7 +742,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_PSYCHIC",
+    "scene_title": "DOPPELGANGER_PSYCHIC",
     "scene_number": 53,
     "scene_started": false,
     "player_card_shifting": false,
@@ -812,7 +812,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_PICKPOCKET",
+    "scene_title": "DOPPELGANGER_PICKPOCKET",
     "scene_number": 58,
     "scene_started": false,
     "player_card_shifting": false,
@@ -910,7 +910,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_GREMLIN",
+    "scene_title": "DOPPELGANGER_GREMLIN",
     "scene_number": 65,
     "scene_started": false,
     "player_card_shifting": true,
@@ -938,7 +938,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_RASCAL",
+    "scene_title": "DOPPELGANGER_RASCAL",
     "scene_number": 67,
     "scene_started": false,
     "player_card_shifting": true,
@@ -1050,7 +1050,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_REVEALER",
+    "scene_title": "DOPPELGANGER_REVEALER",
     "scene_number": 75,
     "scene_started": false,
     "player_card_shifting": true,
@@ -1078,7 +1078,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_EXPOSER",
+    "scene_title": "DOPPELGANGER_EXPOSER",
     "scene_number": 77,
     "scene_started": false,
     "player_card_shifting": false,
@@ -1106,7 +1106,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_FLIPPER",
+    "scene_title": "DOPPELGANGER_FLIPPER",
     "scene_number": 79,
     "scene_started": false,
     "player_card_shifting": false,
@@ -1134,7 +1134,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_EMPATH",
+    "scene_title": "DOPPELGANGER_EMPATH",
     "scene_number": 81,
     "scene_started": false,
     "player_card_shifting": false,
@@ -1162,7 +1162,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_CURATOR",
+    "scene_title": "DOPPELGANGER_CURATOR",
     "scene_number": 83,
     "scene_started": false,
     "player_card_shifting": false,
@@ -1204,7 +1204,7 @@
     "vote": false
   },
   {
-    "scene_title": "DOPPELGÄNGER_MORTICIAN",
+    "scene_title": "DOPPELGANGER_MORTICIAN",
     "scene_number": 86,
     "scene_started": false,
     "player_card_shifting": false,

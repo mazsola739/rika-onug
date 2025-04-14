@@ -72,19 +72,17 @@ class VoteStore {
 
   get guessTokens(): { image: string; expansion: string; id: number }[] {
     const cards = this.guessCards
-    const tokens = cards
+    return cards
       .map(card => getCardById(card))
       .map(card => ({
         image: card.card_name,
         expansion: card.expansion,
         id: card.id
       }))
-
-    return tokens
   }
 
   get voteNarration(): { image: string; text: string }[] {
-    const voteNarration = this.narrations.map(narration => {
+    return this.narrations.map(narration => {
       const title = Object.keys(narration)[0]
       const narrationKeys = Object.values(narration)[0] as string[]
       const image = script.find(s => s.scene_title === title)?.scene_img
@@ -93,8 +91,6 @@ class VoteStore {
 
       return { image, text }
     })
-
-    return voteNarration
   }
 
   getGuessTokensByPosition(position: CardPositionType): GuessTokenType[] {
@@ -129,6 +125,4 @@ class VoteStore {
     this.isGuessing = false
   }
 }
-
-export default VoteStore
 export const voteStore = new VoteStore()

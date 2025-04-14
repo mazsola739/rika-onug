@@ -32,12 +32,12 @@ export const script: ScriptJson[] = [
     scene_number: 5
   },
   {
-    scene_title: 'DOPPELGÄNGER',
+    scene_title: 'DOPPELGANGER',
     scene_img: 'doppelganger',
     scene_number: 6
   },
   {
-    scene_title: 'DOPPELGÄNGER_INSTANT_ACTION',
+    scene_title: 'DOPPELGANGER_INSTANT_ACTION',
     scene_img: 'doppelganger',
     scene_number: 7
   },
@@ -53,7 +53,7 @@ export const script: ScriptJson[] = [
     scene_number: 9
   },
   {
-    scene_title: 'DOPPELGÄNGER_THE_COUNT',
+    scene_title: 'DOPPELGANGER_THE_COUNT',
     scene_img: 'doppelganger',
     scene_number: 10
   },
@@ -83,7 +83,7 @@ export const script: ScriptJson[] = [
     scene_number: 15
   },
   {
-    scene_title: 'DOPPELGÄNGER_PRIEST',
+    scene_title: 'DOPPELGANGER_PRIEST',
     scene_img: 'doppelganger',
     scene_number: 16
   },
@@ -93,7 +93,7 @@ export const script: ScriptJson[] = [
     scene_number: 17
   },
   {
-    scene_title: 'DOPPELGÄNGER_ASSASSIN',
+    scene_title: 'DOPPELGANGER_ASSASSIN',
     scene_img: 'doppelganger',
     scene_number: 18
   },
@@ -103,7 +103,7 @@ export const script: ScriptJson[] = [
     scene_number: 19
   },
   {
-    scene_title: 'DOPPELGÄNGER_APPRENTICE_ASSASSIN',
+    scene_title: 'DOPPELGANGER_APPRENTICE_ASSASSIN',
     scene_img: 'doppelganger',
     scene_number: 20
   },
@@ -143,7 +143,7 @@ export const script: ScriptJson[] = [
     scene_number: 27
   },
   {
-    scene_title: 'DOPPELGÄNGER_BODY_SNATCHER',
+    scene_title: 'DOPPELGANGER_BODY_SNATCHER',
     scene_img: 'doppelganger',
     scene_number: 28
   },
@@ -268,7 +268,7 @@ export const script: ScriptJson[] = [
     scene_number: 52
   },
   {
-    scene_title: 'DOPPELGÄNGER_PSYCHIC',
+    scene_title: 'DOPPELGANGER_PSYCHIC',
     scene_img: 'doppelganger',
     scene_number: 53
   },
@@ -293,7 +293,7 @@ export const script: ScriptJson[] = [
     scene_number: 57
   },
   {
-    scene_title: 'DOPPELGÄNGER_PICKPOCKET',
+    scene_title: 'DOPPELGANGER_PICKPOCKET',
     scene_img: 'doppelganger',
     scene_number: 58
   },
@@ -328,7 +328,7 @@ export const script: ScriptJson[] = [
     scene_number: 64
   },
   {
-    scene_title: 'DOPPELGÄNGER_GREMLIN',
+    scene_title: 'DOPPELGANGER_GREMLIN',
     scene_img: 'doppelganger',
     scene_number: 65
   },
@@ -338,7 +338,7 @@ export const script: ScriptJson[] = [
     scene_number: 66
   },
   {
-    scene_title: 'DOPPELGÄNGER_RASCAL',
+    scene_title: 'DOPPELGANGER_RASCAL',
     scene_img: 'doppelganger',
     scene_number: 67
   },
@@ -378,7 +378,7 @@ export const script: ScriptJson[] = [
     scene_number: 74
   },
   {
-    scene_title: 'DOPPELGÄNGER_REVEALER',
+    scene_title: 'DOPPELGANGER_REVEALER',
     scene_img: 'doppelganger',
     scene_number: 75
   },
@@ -388,7 +388,7 @@ export const script: ScriptJson[] = [
     scene_number: 76
   },
   {
-    scene_title: 'DOPPELGÄNGER_EXPOSER',
+    scene_title: 'DOPPELGANGER_EXPOSER',
     scene_img: 'doppelganger',
     scene_number: 77
   },
@@ -398,7 +398,7 @@ export const script: ScriptJson[] = [
     scene_number: 78
   },
   {
-    scene_title: 'DOPPELGÄNGER_FLIPPER',
+    scene_title: 'DOPPELGANGER_FLIPPER',
     scene_img: 'doppelganger',
     scene_number: 79
   },
@@ -408,7 +408,7 @@ export const script: ScriptJson[] = [
     scene_number: 80
   },
   {
-    scene_title: 'DOPPELGÄNGER_EMPATH',
+    scene_title: 'DOPPELGANGER_EMPATH',
     scene_img: 'doppelganger',
     scene_number: 81
   },
@@ -418,7 +418,7 @@ export const script: ScriptJson[] = [
     scene_number: 82
   },
   {
-    scene_title: 'DOPPELGÄNGER_CURATOR',
+    scene_title: 'DOPPELGANGER_CURATOR',
     scene_img: 'doppelganger',
     scene_number: 83
   },
@@ -433,7 +433,7 @@ export const script: ScriptJson[] = [
     scene_number: 85
   },
   {
-    scene_title: 'DOPPELGÄNGER_MORTICIAN',
+    scene_title: 'DOPPELGANGER_MORTICIAN',
     scene_img: 'doppelganger',
     scene_number: 86
   },

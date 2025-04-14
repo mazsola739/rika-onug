@@ -32,7 +32,7 @@ export const empath = (gamestate, title, prefix) => {
     if (activePlayerNumbers.includes(playerNumber)) {
       const card = gamestate.players[token].card
       const isNotEmpath = prefix === 'empath' && isActivePlayer(card).EMPATH
-      const isNotDoppelgangerEmpath = prefix === 'doppelganger_empath' && isActivePlayer(card).DOPPELGÄNGER_EMPATH
+      const isNotDoppelgangerEmpath = prefix === 'doppelganger_empath' && isActivePlayer(card).DOPPELGANGER_EMPATH
 
       if (isNotEmpath || isNotDoppelgangerEmpath) {
         gamestate.players[token].action_finished = false

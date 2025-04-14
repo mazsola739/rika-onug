@@ -11,7 +11,7 @@ export const assassin = (gamestate, title, hasApprenticeAssassin, prefix) => {
 
     const card = gamestate.players[token].card
 
-    if ((prefix === 'assassin' && isActivePlayer(card).ASSASSIN) || (prefix === 'doppelganger_assassin' && isActivePlayer(card).DOPPELGÄNGER_ASSASSIN)) {
+    if ((prefix === 'assassin' && isActivePlayer(card).ASSASSIN) || (prefix === 'doppelganger_assassin' && isActivePlayer(card).DOPPELGANGER_ASSASSIN)) {
       gamestate.players[token].action_finished = false
 
       action = assassinAction(gamestate, token, title)

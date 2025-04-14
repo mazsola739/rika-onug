@@ -1,4 +1,4 @@
-import { Card, CardImage } from 'components'
+import { CardImage } from 'components'
 import { observer } from 'mobx-react-lite'
 import { riseAndRestStore } from 'store'
 import { CardPosition, CenterCard, StyledCenterCardsRevealed } from './CenterCardsRevealed.styles'

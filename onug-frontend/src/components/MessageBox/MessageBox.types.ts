@@ -1,12 +1,4 @@
-import { PlayerType, VoteType } from 'types'
-
-export interface ReadyListProps {
-  players: PlayerType[]
-}
-
-export interface ReadyType {
-  ready: boolean
-}
+import { VoteType } from 'types'
 
 export interface MessageBoxProps {
   cards?: Record<string, string>[]

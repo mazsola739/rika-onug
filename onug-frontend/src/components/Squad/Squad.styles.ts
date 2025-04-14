@@ -23,7 +23,6 @@ export const Member = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
   gap: 10px;
 `
 

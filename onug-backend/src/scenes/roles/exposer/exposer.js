@@ -20,7 +20,7 @@ export const exposer = (gamestate, title, prefix) => {
 
     const card = gamestate.players[token].card
 
-    if ((prefix === 'exposer' && isActivePlayer(card).EXPOSER) || (prefix === 'doppelganger_exposer' && isActivePlayer(card).DOPPELGÄNGER_EXPOSER)) {
+    if ((prefix === 'exposer' && isActivePlayer(card).EXPOSER) || (prefix === 'doppelganger_exposer' && isActivePlayer(card).DOPPELGANGER_EXPOSER)) {
       gamestate.players[token].action_finished = false
 
       action = exposerAction(gamestate, token, title, prefix)

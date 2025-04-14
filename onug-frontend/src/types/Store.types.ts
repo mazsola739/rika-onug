@@ -1,5 +1,4 @@
 import * as messages_text from 'constant/messages'
-import * as identifier from 'constant/narrations/identifier'
 import { CardPositionType } from './JsonMessage.types'
 
 export type GuessTokenType = {
@@ -7,8 +6,6 @@ export type GuessTokenType = {
   id: number
   image: string
 }
-
-export type IdentifierType = keyof typeof identifier
 
 export type MessagesType = keyof typeof messages_text
 

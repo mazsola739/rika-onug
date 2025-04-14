@@ -15,20 +15,12 @@ class MessageStore {
   }
 
   setNarration(narration_keys: NarrationType[]): void {
-    const narration = narration_keys.map(key => narration_text[key]).join(' ')
-    this.narration = narration
+    this.narration = narration_keys.map(key => narration_text[key]).join(' ')
   }
 
   setPrivateMessage(message_keys: MessagesType[]): void {
-    const message = message_keys.map(key => messages_text[key]).join(' ')
-    this.privateMessage = message
+    this.privateMessage = message_keys.map(key => messages_text[key]).join(' ')
   }
-
-  deleteMessage(): void {
-    this.narration = ''
-    this.privateMessage = ''
-  }
-
   get narrationImage(): string {
     const scene = script.find(scene => scene.scene_title === propStore.title)
     return scene ? scene.scene_img : ''
@@ -45,9 +37,9 @@ class MessageStore {
 
     if (selectedPlayerCards > 0 && selectedPlayerCards === playerCardLimit) return false
 
-    if (selectedCenterCards > 0 && selectedCenterCards === centerCardLimit) return false
+    return !(selectedCenterCards > 0 && selectedCenterCards === centerCardLimit);
 
-    return true
+
   }
 
   get disabledMarks() {
@@ -55,9 +47,9 @@ class MessageStore {
 
     const markLimit = this.markLimit
 
-    if (selectedMarks.length > 0 && selectedMarks.length === markLimit) return false
+    return !(selectedMarks.length > 0 && selectedMarks.length === markLimit);
 
-    return true
+
   }
 
   get playerCardLimit() {
@@ -68,10 +60,6 @@ class MessageStore {
   }
   get markLimit() {
     return propStore.selectable_mark_limit.mark
-  }
-
-  get isCardSelection() {
-    return propStore.selectable_cards.length > 0
   }
   get isAnswerOptions() {
     return propStore.answer_options.length > 0
@@ -85,7 +73,7 @@ class MessageStore {
   }
 
   get isVoteResult() {
-    return propStore.vampireVotes || propStore.alienVotes //|| propStore.emapthVote || propStore.doppelgangerempathVote
+    return propStore.vampireVotes || propStore.alienVotes //|| propStore.empathVote || propStore.doppelgangerempathVote
   }
   get isPlayerIdentification() {
     const title = propStore.title
@@ -167,6 +155,4 @@ class MessageStore {
     return {}
   }
 }
-
-export default MessageStore
 export const messageStore = new MessageStore()

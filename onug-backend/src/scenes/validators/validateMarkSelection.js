@@ -11,6 +11,6 @@ export const validateMarkSelection = (selected_mark_positions, player_history, t
     return false
   }
 
-  logTrace(`validateMarkSelection finished and everything allright: ${title}`)
+  logTrace(`validateMarkSelection finished and everything all right: ${title}`)
   return true
 }

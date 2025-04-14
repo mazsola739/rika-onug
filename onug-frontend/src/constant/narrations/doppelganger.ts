@@ -3,6 +3,7 @@ export const doppelganger_verbose_intro_text = 'If you viewed the'
 export const doppelganger_verbose_or_text = 'or'
 export const doppelganger_verbose_outro_text = 'card, do your action now.'
 
+//TODO check unused constants
 export const doppelganger_thecount_kickoff_text = 'DOPPELGANGER, if you viewed The Count card,'
 export const doppelganger_renfield_kickoff_text = 'RENFIELD and DOPPELGANGER, if you viewed the Renfield card,'
 export const doppelganger_priest_kickoff_text = 'DOPPELGANGER, if you viewed the Priest card,'

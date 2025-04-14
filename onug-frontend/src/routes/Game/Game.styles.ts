@@ -34,7 +34,7 @@ const lightenBackground = keyframes`
   to { background-color: transparent; }
 `
 
-//GAME //TODO set 1s to desired long sun rize or night fall!!!!
+//GAME //TODO set 1s to desired long sun rise or night fall!!!!
 export const StyledGame = styled.div<GameProps>`
   animation: ${({ nightfall, sunrise }) => (nightfall && !sunrise ? darkenBackground : lightenBackground)} 1s forwards;
 

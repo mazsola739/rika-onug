@@ -32,6 +32,4 @@ class GameStatusStore {
     }
   }
 }
-
-export default GameStatusStore
 export const gameStatusStore = new GameStatusStore()

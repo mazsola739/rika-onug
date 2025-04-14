@@ -12,7 +12,7 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolfWithoutShield', gamestate.shielded_cards)
     const viewCards = getCardIdsByPositions(gamestate.card_positions, werewolves)
 
-    if (werewolves.some(wolf => gamestate.card_positions[wolf].card.id === gamestate.players[token]?.card?.original_id)) {
+    if (werewolves.some(wolf => gamestate.card_positions[wolf].card.id === gamestate.players[token]?.card?.player_original_id)) {
       gamestate.players[token].card.player_card_id = 87
     }
 

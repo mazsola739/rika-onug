@@ -21,9 +21,4 @@ export const StyledMenuButton = styled.button<MenuButtonProps>`
   &:hover:not(:disabled) {
     opacity: 1;
   }
-
-  &#active {
-    border: 0.0625rem solid white;
-    opacity: 1;
-  }
 `

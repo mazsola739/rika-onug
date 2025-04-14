@@ -23,7 +23,7 @@ export const bodysnatcher = (gamestate, title, prefix) => {
 
     const card = gamestate.players[token].card
 
-    if ((prefix === 'bodysnatcher' && isActivePlayer(card).BODY_SNATCHER) || (prefix === 'doppelganger_bodysnatcher' && isActivePlayer(card).DOPPELGÄNGER_BODY_SNATCHER)) {
+    if ((prefix === 'bodysnatcher' && isActivePlayer(card).BODY_SNATCHER) || (prefix === 'doppelganger_bodysnatcher' && isActivePlayer(card).DOPPELGANGER_BODY_SNATCHER)) {
       gamestate.players[token].action_finished = false
 
       action = bodysnatcherAction(gamestate, token, title, prefix)

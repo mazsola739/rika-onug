@@ -12,7 +12,7 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
     const seers = getPlayerNumbersByGivenConditions(gamestate.players, 'anySeerWithoutShield', gamestate.shielded_cards)
     const viewCards = getCardIdsByPositions(gamestate.card_positions, seers)
 
-    if (seers.some(seer => gamestate.card_positions[seer].card.id === gamestate.players[token]?.card?.original_id)) {
+    if (seers.some(seer => gamestate.card_positions[seer].card.id === gamestate.players[token]?.card?.player_original_id)) {
       gamestate.players[token].card.player_card_id = 87
     }
 

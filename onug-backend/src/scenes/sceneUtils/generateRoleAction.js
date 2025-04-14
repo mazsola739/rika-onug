@@ -59,8 +59,8 @@ export const generateRoleAction = (
   let newGamestate = updatePlayerCard(gamestate, token)
   const flippedCards = JSON.parse(JSON.stringify(newGamestate.flipped_cards))
 
-  const informations = {
-    shielded_cards: newGamestate.shielded_cardsed_cards,
+  const information = {
+    shielded_cards: newGamestate.shielded_cards,
     artifacted_cards: getKeys(newGamestate.artifacted_cards),
     show_cards: showCards !== null ? combineUniqueObjects(showCards, flippedCards) : flippedCards,
     show_marks: showMarks,
@@ -73,6 +73,6 @@ export const generateRoleAction = (
 
   return {
     private_message,
-    ...informations
+    ...information
   }
 }

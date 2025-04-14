@@ -24,6 +24,4 @@ class WsStore {
     }
   }
 }
-
-export default WsStore
 export const wsStore = new WsStore()

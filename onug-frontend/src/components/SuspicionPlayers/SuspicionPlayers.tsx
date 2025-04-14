@@ -10,7 +10,7 @@ export const SuspicionPlayers: React.FC = observer(() => {
   const { handleAccuse } = useClickHandler()
   const { selectedCards } = selectionStore
   const { disabledCards: disabled } = messageStore
-  //TODO ℹ️ 🛈 ⓘ ❓tooltipp: you cant vote yourself
+  //TODO ℹ️ 🛈 ⓘ ❓tooltips: you cant vote yourself
   return (
     <StyledSuspicionPlayers>
       <Title title={'YOUR PRIME SUSPECT!'} />

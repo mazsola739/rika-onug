@@ -11,7 +11,7 @@ export const curator = (gamestate, title, prefix) => {
 
     const card = gamestate.players[token].card
 
-    if ((prefix === 'curator' && isActivePlayer(card).CURATOR) || (prefix === 'doppelganger_curator' && isActivePlayer(card).DOPPELGÄNGER_CURATOR)) {
+    if ((prefix === 'curator' && isActivePlayer(card).CURATOR) || (prefix === 'doppelganger_curator' && isActivePlayer(card).DOPPELGANGER_CURATOR)) {
       gamestate.players[token].action_finished = false
 
       action = curatorAction(gamestate, token, title)

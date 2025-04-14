@@ -7,16 +7,15 @@ export const assassinResponse = (gamestate, token, selected_mark_positions, titl
   }
 
   const apprenticeassassins = getPlayerNumbersByGivenConditions(gamestate.players, 'apprenticeAssassin')
+  const selectedPosition = gamestate.card_positions[selected_mark_positions[0]].mark
 
   if (gamestate.players[token].card.player_original_id === 1) {
     const assassinPosition = gamestate.doppelganger_mark_positions.assassin
-    const selectedPosition = gamestate.card_positions[selected_mark_positions[0]].mark
 
     gamestate.doppelganger_mark_positions.assassin = selectedPosition
     gamestate.card_positions[selected_mark_positions[0]].mark = assassinPosition
   } else {
     const assassinPosition = gamestate.mark_positions.assassin
-    const selectedPosition = gamestate.card_positions[selected_mark_positions[0]].mark
 
     gamestate.mark_positions.assassin = selectedPosition
     gamestate.card_positions[selected_mark_positions[0]].mark = assassinPosition

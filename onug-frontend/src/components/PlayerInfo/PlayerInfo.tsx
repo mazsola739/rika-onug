@@ -1,4 +1,4 @@
-import { CardImage, Token, TokenImage } from 'components'
+import { CardImage, TokenImage } from 'components'
 import { observer } from 'mobx-react-lite'
 import { PlayerInfoName, PlayerInfoRole, PlayerInfoTeam, StyledPlayerInfo } from './PlayerInfo.styles'
 import { PlayerInfoProps } from './PlayerInfo.types'

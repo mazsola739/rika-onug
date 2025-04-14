@@ -9,7 +9,7 @@ export const mysticwolfResponse = (gamestate, token, selected_card_positions, ti
   const selectedPositionCard = gamestate.card_positions[selected_card_positions[0]].card
   const viewCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
 
-  if (gamestate.players[token]?.card?.original_id === selectedPositionCard.id) {
+  if (gamestate.players[token]?.card?.player_original_id === selectedPositionCard.id) {
     gamestate.players[token].card.player_card_id = 87
   }
 

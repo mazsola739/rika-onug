@@ -66,6 +66,4 @@ class RoomStore {
     this.resetDetailedCardInfo()
   }
 }
-
-export default RoomStore
 export const roomStore = new RoomStore()

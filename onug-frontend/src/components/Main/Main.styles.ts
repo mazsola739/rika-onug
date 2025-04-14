@@ -16,10 +16,4 @@ export const StyledMain = styled.main`
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 10px;
   }
-
-  /* For Firefox */
-  .scrollable {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
-  }
 `

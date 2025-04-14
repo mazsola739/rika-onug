@@ -216,6 +216,4 @@ class RiseAndRestStore {
     messageStore.setNarration([])
   }
 }
-
-export default RiseAndRestStore
 export const riseAndRestStore = new RiseAndRestStore()

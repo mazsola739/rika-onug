@@ -11,7 +11,7 @@ export const flipper = (gamestate, title, prefix) => {
 
     const card = gamestate.players[token].card
 
-    if ((prefix === 'flipper' && isActivePlayer(card).FLIPPER) || (prefix === 'doppelganger_flipper' && isActivePlayer(card).DOPPELGÄNGER_FLIPPER)) {
+    if ((prefix === 'flipper' && isActivePlayer(card).FLIPPER) || (prefix === 'doppelganger_flipper' && isActivePlayer(card).DOPPELGANGER_FLIPPER)) {
       gamestate.players[token].action_finished = false
 
       action = flipperAction(gamestate, token, title)

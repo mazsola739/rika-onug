@@ -191,6 +191,4 @@ class PropStore {
     this.loserTeams = []
   }
 }
-
-export default PropStore
 export const propStore = new PropStore()

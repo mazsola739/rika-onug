@@ -1,18 +1,3 @@
-export interface IdentificationProps {
-  lovers?: boolean
-  werewolf?: boolean
-  dreamwolf?: boolean
-  masons?: boolean
-  aliens?: boolean
-  cow?: boolean
-  groobzerb?: boolean
-  vampires?: boolean
-  witness?: boolean
-  part_of_blob?: boolean
-  part_of_family?: boolean
-  current?: boolean
-}
-
 export interface TokenProps {
   tokenId?: number
   tokenName: string

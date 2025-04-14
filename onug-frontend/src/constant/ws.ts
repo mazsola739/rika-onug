@@ -4,11 +4,9 @@ export const RESET = 'RESET'
 export const DEAL = 'DEAL'
 export const REDIRECT = 'REDIRECT'
 export const SCENE = 'SCENE'
-export const MESSAGE = 'MESSAGE'
 export const RESULT = 'RESULT'
 
 export const JOIN_ROOM = 'JOIN_ROOM'
-export const JOIN_VOTE = 'JOIN_VOTE'
 
 export const READY = 'READY'
 
@@ -31,7 +29,6 @@ export const UPDATE_GUESS = 'UPDATE_GUESS'
 
 export const LEAVE_ROOM = 'LEAVE_ROOM'
 export const LEAVE_GAME = 'LEAVE_GAME'
-export const LEAVE_VOTE = 'LEAVE_VOTE'
 
 export const START_GAME = 'START_GAME'
 export const END_GAME = 'END_GAME'

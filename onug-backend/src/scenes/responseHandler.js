@@ -47,55 +47,55 @@ export const responseHandler = async (gamestate, token, selected_card_positions,
     case 'DISEASED':
       newGamestate = diseasedResponse(gamestate, token, selected_mark_positions, scene_title)
       break
-    case 'DOPPELGÄNGER':
+    case 'DOPPELGANGER':
       newGamestate = doppelgangerResponse(gamestate, token, selected_card_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_INSTANT_ACTION':
+    case 'DOPPELGANGER_INSTANT_ACTION':
       newGamestate = doppelgangerinstantactionResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title)
       break
-    case 'DOPPELGÄNGER_APPRENTICE_ASSASSIN':
+    case 'DOPPELGANGER_APPRENTICE_ASSASSIN':
       newGamestate = apprenticeassassinResponse(gamestate, token, selected_mark_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_ASSASSIN':
+    case 'DOPPELGANGER_ASSASSIN':
       newGamestate = assassinResponse(gamestate, token, selected_mark_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_BODY_SNATCHER':
+    case 'DOPPELGANGER_BODY_SNATCHER':
       newGamestate = bodysnatcherResponse(gamestate, token, selected_card_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_CURATOR':
+    case 'DOPPELGANGER_CURATOR':
       newGamestate = curatorResponse(gamestate, token, selected_card_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_EMPATH':
+    case 'DOPPELGANGER_EMPATH':
       newGamestate = empathResponse(gamestate, token, selected_card_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_EXPOSER':
+    case 'DOPPELGANGER_EXPOSER':
       newGamestate = exposerResponse(gamestate, token, selected_card_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_FLIPPER':
+    case 'DOPPELGANGER_FLIPPER':
       newGamestate = revealerResponse(gamestate, token, selected_card_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_GREMLIN':
+    case 'DOPPELGANGER_GREMLIN':
       newGamestate = gremlinResponse(gamestate, token, selected_card_positions, selected_mark_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_MORTICIAN':
+    case 'DOPPELGANGER_MORTICIAN':
       newGamestate = morticianResponse(gamestate, token, selected_card_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_PICKPOCKET':
+    case 'DOPPELGANGER_PICKPOCKET':
       newGamestate = pickpocketResponse(gamestate, token, selected_mark_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_PRIEST':
+    case 'DOPPELGANGER_PRIEST':
       newGamestate = priestResponse(gamestate, token, selected_mark_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_PSYCHIC':
+    case 'DOPPELGANGER_PSYCHIC':
       newGamestate = psychicResponse(gamestate, token, selected_card_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_RASCAL':
+    case 'DOPPELGANGER_RASCAL':
       newGamestate = rascalResponse(gamestate, token, selected_card_positions, selected_answer, scene_title)
       break
-    case 'DOPPELGÄNGER_REVEALER':
+    case 'DOPPELGANGER_REVEALER':
       newGamestate = revealerResponse(gamestate, token, selected_card_positions, scene_title)
       break
-    case 'DOPPELGÄNGER_THE_COUNT':
+    case 'DOPPELGANGER_THE_COUNT':
       newGamestate = thecountResponse(gamestate, token, selected_mark_positions, scene_title)
       break
     case 'DR_PEEKER':

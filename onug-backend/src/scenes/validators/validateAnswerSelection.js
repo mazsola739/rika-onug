@@ -7,6 +7,6 @@ export const validateAnswerSelection = (selected_answer, player_history, title) 
     return false
   }
 
-  logTrace(`validateAnswerSelection finished and everything allright: ${title}`)
+  logTrace(`validateAnswerSelection finished and everything all right: ${title}`)
   return true
 }

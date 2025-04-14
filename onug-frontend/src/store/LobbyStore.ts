@@ -32,6 +32,4 @@ class LobbyStore {
     }
   }
 }
-
-export default LobbyStore
 export const lobbyStore = new LobbyStore()
