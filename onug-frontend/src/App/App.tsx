@@ -7,6 +7,11 @@ import { ConnectionStatus, StyledApp } from './App.styles'
 import { useApp } from './useApp'
 import { Icon } from 'components'
 
+//TODO: Login page & fix admin
+//TODO: Error page and loading
+//TODO: Timer for vote
+//TODO: Settings for timer, roles ect.
+
 export const App: React.FC = observer(() => {
   const { readyState } = useApp()
 
@@ -34,10 +39,10 @@ export const App: React.FC = observer(() => {
           <Route path="/game/:room_id" element={<Game />} />
           <Route path="/council/:room_id" element={<Council />} />
           <Route path="/verdict/:room_id" element={<Verdict />} />
+
+          {/* God mode */}
           <Route path="/god" element={<God />} />
           <Route path="/stub" element={<Stub />} />
-          {/* 404 Not Found Route    */}
-          {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
       </Router>
     </StyledApp>

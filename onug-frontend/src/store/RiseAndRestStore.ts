@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { deckStore, messageStore, propStore, selectionStore } from 'store'
+import { deckStore, messageStore, playersStore, propStore, selectionStore } from 'store'
 import { CardPositionType, InteractionType, TableCenterCard, TablePlayerCard, WsJsonMessageType } from 'types'
 import { getCardById, getMarkByName } from 'utils'
 
@@ -123,8 +123,8 @@ class RiseAndRestStore {
     }
   }
 
-  setTablePlayerCards(lastJsonMessage: WsJsonMessageType): void {
-    const players = lastJsonMessage.players || []
+  setTablePlayerCards(): void {
+    const players = playersStore.players
     const showCards = this.getShowCardsMap()
     const showMarks = this.getShowMarksMap()
 
@@ -179,11 +179,13 @@ class RiseAndRestStore {
     const resetCardState = this.createEmptyPlayerCard(null)
     this.tablePlayerCard = {
       ...resetCardState,
-      position: this.tablePlayerCard.position
+      position: this.tablePlayerCard.position,
+      player_name: this.tablePlayerCard.player_name
     }
     this.tablePlayerCards = this.tablePlayerCards.map(card => ({
       ...resetCardState,
-      position: card.position
+      position: card.position,
+      player_name: card.player_name
     }))
     this.tableCenterCards = this.tableCenterCards.map(centerCard => ({
       ...centerCard,
@@ -203,7 +205,7 @@ class RiseAndRestStore {
     this.clearMemory()
     propStore.setInteraction(lastJsonMessage?.action as InteractionType)
     propStore.setTitle(lastJsonMessage.title)
-    this.setTablePlayerCards(lastJsonMessage)
+    this.setTablePlayerCards()
     this.setTableCenterCards(lastJsonMessage)
     this.setTablePlayerCard(lastJsonMessage)
   }

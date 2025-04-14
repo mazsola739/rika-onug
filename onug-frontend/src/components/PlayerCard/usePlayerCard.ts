@@ -26,7 +26,7 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
 
   const image = getCardImageSrc(card)
   const playerNumberToken = getPlayerNumberToken(position)
-  let playerName = card?.player_name || ''
+  let playerName = card?.player_name
   const markName = card?.mark
 
   const isShielded = card?.shield
