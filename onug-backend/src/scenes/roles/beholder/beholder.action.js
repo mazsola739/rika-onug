@@ -12,6 +12,6 @@ export const beholderAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_seers', ...messageIdentifiers, 'action_may_look'],
-    uniqueInformations: { seers, answer_options: ['yes', 'no'] }
+    uniqueInformation: { seers, answer_options: ['yes', 'no'] }
   })
 }

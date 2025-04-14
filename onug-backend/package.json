@@ -13,12 +13,6 @@
     "build": "vite build",
     "format": "prettier --write '**/*.{js,jsx,ts,tsx,json,css,md}'"
   },
-  "_moduleAliases": {
-    "@controllers": "src/controllers",
-    "@models": "src/models",
-    "@utils": "src/utils",
-    "@config": "src/config"
-  },
   "engines": {
     "node": ">=20.0.0"
   },

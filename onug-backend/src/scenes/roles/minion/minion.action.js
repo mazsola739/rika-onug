@@ -18,6 +18,6 @@ export const minionAction = (gamestate, token, title) => {
   return generateRoleAction(gamestate, token, {
     private_message: werewolves.length > 0 ? ['action_werewolves', ...messageIdentifiers] : ['action_no_werewolves'],
     scene_end: true,
-    uniqueInformations: { werewolves, scene_end: true }
+    uniqueInformation: { werewolves, scene_end: true }
   })
 }

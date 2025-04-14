@@ -1,16 +1,4 @@
-import {
-  formatPlayerIdentifier,
-  generateRoleAction,
-  getAnyEvenOrOddPlayerNumbers,
-  getCardIdsByPositions,
-  getNeighborByPosition,
-  getNonAlienPlayerNumbersWithNoShield,
-  getPlayerNumbersByGivenConditions,
-  getPlayerNumberWithMatchingToken,
-  getSelectablePlayersWithNoShield
-} from '../../sceneUtils'
-
-import { moveCards } from '../../sceneUtils/moveCards'
+import { getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getSelectablePlayersWithNoShield, getAnyEvenOrOddPlayerNumbers, getNonAlienPlayerNumbersWithNoShield, getNeighborByPosition, moveCards, getCardIdsByPositions, generateRoleAction } from "../../sceneUtils"
 
 export const aliensAction = (gamestate, token, title) => {
   const aliens = getPlayerNumbersByGivenConditions(gamestate.players, 'alien')
@@ -195,7 +183,7 @@ export const aliensAction = (gamestate, token, title) => {
     private_message: privateMessage,
     showCards,
     selectableCards,
-    uniqueInformations: { aliens, cow, vote, new_alien, new_alien_helper },
+    uniqueInformation: { aliens, cow, vote, new_alien, new_alien_helper },
     obligatory,
     scene_end
   })

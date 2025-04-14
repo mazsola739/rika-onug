@@ -1,6 +1,5 @@
-import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
-import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { validateMarkSelection } from '../../validators'
+import { getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from "../../sceneUtils"
+import { validateMarkSelection } from "../../validators"
 
 export const assassinResponse = (gamestate, token, selected_mark_positions, title) => {
   if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
@@ -40,7 +39,7 @@ export const assassinResponse = (gamestate, token, selected_mark_positions, titl
 
   const action = generateRoleAction(gamestate, token, {
     private_message: ['action_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
-    uniqueInformations: { apprenticeassassins: apprenticeassassins.length > 0 ? apprenticeassassins : [] },
+    uniqueInformation: { apprenticeassassins: apprenticeassassins.length > 0 ? apprenticeassassins : [] },
     scene_end: true
   })
 

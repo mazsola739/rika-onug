@@ -13,7 +13,7 @@ export const loversAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_mark_of_lover', ...messageIdentifiers],
-    uniqueInformations: { lovers },
+    uniqueInformation: { lovers },
     scene_end: true
   })
 }

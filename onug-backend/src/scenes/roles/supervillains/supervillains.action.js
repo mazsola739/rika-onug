@@ -12,6 +12,6 @@ export const supervillainsAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_villains', ...messageIdentifiers],
-    uniqueInformations: { villains }
+    uniqueInformation: { villains }
   })
 }

@@ -1,18 +1,7 @@
-import { ALIEN_IDS } from '../../../constants'
-import { readGamestate, upsertRoomState } from '../../../repository'
-import { sendMessageToPlayer } from '../../../utils'
-
-
-import {
-  createAndSendSceneMessage,
-  formatPlayerIdentifier,
-  generateRoleAction,
-  getCardIdsByPositions,
-  getNarrationByTitle,
-  getPlayerNumbersByGivenConditions,
-  getPlayerNumberWithMatchingToken,
-  getPlayerTokensByPlayerNumber
-} from '../../sceneUtils'
+import { ALIEN_IDS } from "../../../constants"
+import { readGamestate, upsertRoomState } from "../../../repository"
+import { sendMessageToPlayer } from "../../../utils"
+import { getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, getPlayerNumberWithMatchingToken, getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from "../../sceneUtils"
 
 export const aliensVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
@@ -98,7 +87,7 @@ export const aliensVotehydrate = async message => {
         const action = generateRoleAction(gamestate, alienToken, {
           private_message: ['action_voted_together', message, formatPlayerIdentifier([unanimousPlayerNumber])[0]],
           showCards,
-          uniqueInformations: { new_alien, new_alien_helper },
+          uniqueInformation: { new_alien, new_alien_helper },
           scene_end: true
         })
 

@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const leaderZerbgroobAction = (gamestate, token, title) => {
-  const zerbPlayers = getPlayerNumbersByGivenConditions(gamestate.players, 'zerb') 
+  const zerbPlayers = getPlayerNumbersByGivenConditions(gamestate.players, 'zerb')
   const groobPlayers = getPlayerNumbersByGivenConditions(gamestate.players, 'groob')
 
   if (groobPlayers.length >= 1 && zerbPlayers.length >= 1) {
@@ -17,7 +17,7 @@ export const leaderZerbgroobAction = (gamestate, token, title) => {
 
     return generateRoleAction(gamestate, token, {
       private_message: ['action_zerbgroob', ...messageIdentifiers],
-      uniqueInformations: { groobzerb: zerbgroob },
+      uniqueInformation: { groobzerb: zerbgroob },
       scene_end: true
     })
   } else {

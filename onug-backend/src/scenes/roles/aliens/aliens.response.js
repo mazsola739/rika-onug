@@ -1,6 +1,5 @@
-import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
-import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { validateCardSelection } from '../../validators'
+import { getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from "../../sceneUtils"
+import { validateCardSelection } from "../../validators"
 
 export const aliensResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
@@ -61,7 +60,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
   const action = generateRoleAction(gamestate, token, {
     private_message,
     showCards,
-    uniqueInformations: { new_alien, new_alien_helper },
+    uniqueInformation: { new_alien, new_alien_helper },
     scene_end: true
   })
 

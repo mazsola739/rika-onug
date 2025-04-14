@@ -23,7 +23,7 @@ export const apprenticetannerAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: privateMessage,
-    uniqueInformations: { tanner },
+    uniqueInformation: { tanner },
     scene_end: true
   })
 }

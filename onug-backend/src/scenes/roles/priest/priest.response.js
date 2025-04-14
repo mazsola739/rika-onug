@@ -1,6 +1,5 @@
-import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle } from '../../sceneUtils'
-import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { validateMarkSelection } from '../../validators'
+import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from "../../sceneUtils"
+import { validateMarkSelection } from "../../validators"
 
 export const priestResponse = (gamestate, token, selected_mark_positions, title) => {
   if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {

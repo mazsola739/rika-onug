@@ -15,7 +15,7 @@ export const blobAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_part_of_blob', ...messageIdentifiers],
-    uniqueInformations: { part_of_blob: partOfBlob },
+    uniqueInformation: { part_of_blob: partOfBlob },
     scene_end: true
   })
 }

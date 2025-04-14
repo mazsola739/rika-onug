@@ -1,16 +1,5 @@
-import {
-  formatPlayerIdentifier,
-  generateRoleAction,
-  getAllPlayerTokens,
-  getCardIdsByPositions,
-  getMarksByPositions,
-  getNarrationByTitle,
-  getPlayerNumbersWithMatchingTokens,
-  getPlayerNumberWithMatchingToken,
-  getSelectablePlayersWithNoShield
-} from '../../sceneUtils'
-import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../validators'
+import { getNarrationByTitle, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, createAndSendSceneMessage, getCardIdsByPositions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getMarksByPositions } from "../../sceneUtils"
+import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from "../../validators"
 
 export const marksmanResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
   const narration = getNarrationByTitle(title, gamestate.narration)

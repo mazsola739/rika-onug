@@ -1,7 +1,6 @@
-import { GOOD_GUY } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle } from '../../sceneUtils'
-import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { validateCardSelection } from '../../validators'
+import { GOOD_GUY } from "../../../constants"
+import { getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from "../../sceneUtils"
+import { validateCardSelection } from "../../validators"
 
 export const nostradamusResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {

@@ -19,7 +19,7 @@ export const groobzerbAction = (gamestate, token, title) => {
 
       return generateRoleAction(gamestate, token, {
         private_message: ['action_zerb', ...messageIdentifiers],
-        uniqueInformations: { groobzerb: zerbPlayers },
+        uniqueInformation: { groobzerb: zerbPlayers },
         scene_end: true
       })
     } else {
@@ -44,7 +44,7 @@ export const groobzerbAction = (gamestate, token, title) => {
 
       return generateRoleAction(gamestate, token, {
         private_message: ['action_groob', ...messageIdentifiers],
-        uniqueInformations: { groobzerb: groobPlayers },
+        uniqueInformation: { groobzerb: groobPlayers },
         scene_end: true
       })
     } else {

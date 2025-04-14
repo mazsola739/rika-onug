@@ -96,7 +96,7 @@ export const empathVotehydrate = async message => {
         const action = generateRoleAction(gamestate, alienToken, {
           private_message: ['action_voted_together', message, formatPlayerIdentifier([unanimousPlayerNumber])[0]],
           showCards,
-          uniqueInformations: { new_alien, new_alien_helper },
+          uniqueInformation: { new_alien, new_alien_helper },
           scene_end: true
         })
 

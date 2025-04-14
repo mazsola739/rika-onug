@@ -13,7 +13,7 @@ export const auraseerAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_card_or_mark_action', ...messageIdentifiers],
-    uniqueInformations: { auraseer: playersWithCardOrMarkActionTrue },
+    uniqueInformation: { auraseer: playersWithCardOrMarkActionTrue },
     scene_end: true
   })
 }

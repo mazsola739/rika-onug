@@ -19,7 +19,7 @@ export const internAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: [madscientist.length === 0 ? 'action_mad_now' : 'action_mad', ...messageIdentifiers],
-    uniqueInformations: { madscientist },
+    uniqueInformation: { madscientist },
     scene_end: true
   })
 }

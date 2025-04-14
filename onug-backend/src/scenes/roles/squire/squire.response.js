@@ -1,6 +1,5 @@
-import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
-import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { validateAnswerSelection } from '../../validators'
+import { getPlayerNumbersByGivenConditions, getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from "../../sceneUtils"
+import { validateAnswerSelection } from "../../validators"
 
 export const squireResponse = (gamestate, token, selected_answer, title) => {
   if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
@@ -30,7 +29,7 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     action = generateRoleAction(gamestate, token, {
       private_message: ['action_saw_card', ...messageIdentifiers],
       showCards: viewCards,
-      uniqueInformations: { werewolves }
+      uniqueInformation: { werewolves }
     })
   } else if (selected_answer === 'no') {
     gamestate.players[token].player_history[title] = {

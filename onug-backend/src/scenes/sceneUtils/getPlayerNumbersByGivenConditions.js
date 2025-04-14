@@ -6,7 +6,7 @@ const filters = {
   playerWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number), //do i need
   player: player => player.player_number, //do i need
 
-  //werwolves
+  //werewolves
   nonWerewolfWithoutShield: (player, shieldedCards) => !WEREWOLVES.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
   werewolfAndDreamwolf: player => WEREWOLVES.includes(player.card.player_role_id),
   werewolfAndDreamwolfWithoutShield: (player, shieldedCards) => WEREWOLVES.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),

@@ -1,7 +1,6 @@
-import { isActivePlayer } from '../../activePlayer'
-import { getAllPlayerTokens } from '../../sceneUtils'
-import { createAndSendSceneMessage } from '../../sceneUtils/createAndSendSceneMessage'
-import { troublemakerAction } from './troublemaker.action'
+import { isActivePlayer } from "../../activePlayer"
+import { getAllPlayerTokens, createAndSendSceneMessage } from "../../sceneUtils"
+import { troublemakerAction } from "./troublemaker.action"
 
 export const troublemaker = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)

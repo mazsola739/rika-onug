@@ -1,5 +1,4 @@
-import { generateRoleAction, getPlayerNeighborsByToken } from '../../sceneUtils'
-import { alienAbducted } from '../../sceneUtils/alienAbducted'
+import { alienAbducted, getPlayerNeighborsByToken, generateRoleAction } from "../../sceneUtils"
 
 export const cowAction = (gamestate, token, title) => {
   const neighborIsAlien = alienAbducted(gamestate.players, token)
@@ -13,7 +12,7 @@ export const cowAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: [neighborIsAlien ? 'action_got_tapped_by_alien' : 'action_no_tap'],
-    uniqueInformations: { alien_neighbor: neighborIsAlien ? neighbors : [] },
+    uniqueInformation: { alien_neighbor: neighborIsAlien ? neighbors : [] },
     scene_end: true
   })
 }

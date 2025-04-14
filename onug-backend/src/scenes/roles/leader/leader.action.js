@@ -13,7 +13,7 @@ export const leaderAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: aliens.length > 0 ? ['action_aliens', ...messageIdentifiers] : ['action_no_aliens'],
-    uniqueInformations: { aliens },
+    uniqueInformation: { aliens },
     scene_end: true
   })
 }

@@ -13,7 +13,7 @@ export const familymanAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_part_of_family'],
-    uniqueInformations: { part_of_family: partOfFamily },
+    uniqueInformation: { part_of_family: partOfFamily },
     scene_end: true
   })
 }

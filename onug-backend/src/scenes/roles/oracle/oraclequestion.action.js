@@ -37,7 +37,7 @@ export const oraclequestionAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_oracle_question'],
-    uniqueInformations: { answer_options: answerOptions },
+    uniqueInformation: { answer_options: answerOptions },
     scene_end,
     obligatory
   })

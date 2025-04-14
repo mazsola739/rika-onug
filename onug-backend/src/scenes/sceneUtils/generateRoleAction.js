@@ -54,7 +54,7 @@ export const updatePlayerCard = (gamestate, token) => {
 export const generateRoleAction = (
   gamestate,
   token,
-  { private_message, selectableCards = {}, selectableMarks = {}, showCards = [], showMarks = [], obligatory = false, scene_end = false, uniqueInformations = {} }
+  { private_message, selectableCards = {}, selectableMarks = {}, showCards = [], showMarks = [], obligatory = false, scene_end = false, uniqueInformation = {} }
 ) => {
   let newGamestate = updatePlayerCard(gamestate, token)
   const flippedCards = JSON.parse(JSON.stringify(newGamestate.flipped_cards))
@@ -68,7 +68,7 @@ export const generateRoleAction = (
     scene_end,
     ...selectableCards,
     ...selectableMarks,
-    ...uniqueInformations
+    ...uniqueInformation
   }
 
   return {

@@ -11,7 +11,7 @@ export const marksmanAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_must_one_any'],
-    uniqueInformations: { answer_options: ['cards', 'marks'] },
+    uniqueInformation: { answer_options: ['cards', 'marks'] },
     obligatory: true
   })
 }

@@ -11,7 +11,7 @@ export const gremlinAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_must_two_any'],
-    uniqueInformations: { answer_options: ['cards', 'marks'] },
+    uniqueInformation: { answer_options: ['cards', 'marks'] },
     obligatory: true
   })
 }

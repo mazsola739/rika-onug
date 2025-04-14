@@ -39,6 +39,6 @@ export const werewolvesAction = (gamestate, token, title) => {
     selectableCards: { selectable_cards, selectable_card_limit },
     obligatory,
     scene_end,
-    uniqueInformations: { werewolves, dreamwolf }
+    uniqueInformation: { werewolves, dreamwolf }
   })
 }

@@ -1,11 +1,7 @@
 import { logTrace } from '../log'
+import { getRandomItemFromArray } from '../utils'
 import { random_ripple_dualview, ripple_random, rippleAllKeys, rippleAnyKeys, rippleCenterAnyKeys, rippleNeighborKeys } from './roles'
-import { getRandomItemFromArray, pickRandomUpToThreePlayers } from './sceneUtils'
-import { getRandomSceneNumber } from './sceneUtils/getRandomSceneNumber'
-import { getRandomSceneNumbers } from './sceneUtils/getRandomSceneNumbers'
-import { getSceneByCardId } from './sceneUtils/getSceneByCardId'
-import { pickRandomOnePlayer } from './sceneUtils/pickRandomOnePlayer'
-import { pickRandomTwoPlayers } from './sceneUtils/pickRandomTwoPlayers'
+import { pickRandomUpToThreePlayers, pickRandomOnePlayer, pickRandomTwoPlayers, getRandomSceneNumbers, getRandomSceneNumber, getSceneByCardId } from './sceneUtils'
 
 export const rippleHandler = gamestate => {
   logTrace(`rippleHandler in room [${gamestate.room_id}]`)
