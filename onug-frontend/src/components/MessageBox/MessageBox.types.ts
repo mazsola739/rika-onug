@@ -9,12 +9,8 @@ export interface MessageTokensProps {
   players?: Record<string, string>[]
 }
 
-export interface AnswersProps {
+export interface MessageBoxAnswerProps {
   answer_options: string[]
-}
-
-export interface VoteProps {
-  options: string[]
 }
 
 export interface VoteResultProps {

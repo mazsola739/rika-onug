@@ -43,7 +43,7 @@ export const aliensAction = (gamestate, token, title) => {
   } else if (alienKey.length > 0) {
     const evenOrOdd = alienKey[0].includes('even') ? 'even' : alienKey[0].includes('odd') ? 'odd' : ''
 
-    const evenOrOddPlayerNumbers = evenOrOdd ? getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd) : getPlayerNumbersByGivenConditions(gamestate.players, 'player')
+    const evenOrOddPlayerNumbers = evenOrOdd ? getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd) : getPlayerNumberWithMatchingToken(gamestate.players, token)
 
     if (randomAlienInstruction === 'aliens_alienhelper_text') {
       selectablePlayers = getNonAlienPlayerNumbersWithNoShield(evenOrOddPlayerNumbers, aliens, gamestate.shielded_cards)

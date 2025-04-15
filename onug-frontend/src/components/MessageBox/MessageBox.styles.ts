@@ -39,7 +39,7 @@ export const StyledMessageBoxCards = styled.div`
   flex-wrap: wrap;
 `
 
-export const StyledAnswer = styled.div`
+export const StyledMessageBoxAnswer = styled.div`
   display: flex;
   gap: 3px;
   flex-direction: row;
@@ -71,6 +71,6 @@ export const StyledSelectable = styled.div`
   gap: 10px;
 `
 
-export const StyledVoteResult = styled.div`
+export const StyledMessageBoxVoteResult = styled.div`
   display: flex;
 `

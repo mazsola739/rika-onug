@@ -6,7 +6,7 @@ export const getPlayerNumbersWithNonMatchingTokens = (players, tokens) => {
     })
     .map(token => players[token].player_number)
 }
-export const getPlayerNumberWithMatchingToken = (players, token) => players[token].player_number
+
 export const getPlayerTokenByPlayerNumber = (players, playerNumber) => {
   for (const token in players) {
     if (players[token].player_number === playerNumber) {

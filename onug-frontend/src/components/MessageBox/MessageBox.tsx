@@ -3,7 +3,7 @@ import { button_label_skip, button_label_vote, button_label_done, button_label_f
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { messageStore, propStore, selectionStore } from 'store'
-import { Answer, Look, SelectableCards, SelectableMarks, VoteResult } from '.'
+import { MessageBoxAnswer, MessageBoxLook, MessageBoxSelectableCards, MessageBoxSelectableMarks, MessageBoxVoteResult } from '.'
 import { StyledMessageBox, Narration, NarrationText, Message, MessageText } from './MessageBox.styles'
 
 export const MessageBox: React.FC = observer(() => {
@@ -23,9 +23,10 @@ export const MessageBox: React.FC = observer(() => {
       </Narration>
       <Message>
         <MessageText>{privateMessage}</MessageText>
-        {isPlayerIdentification && <Look roles={identifiedPlayers.roles} players={identifiedPlayers.players} />}
+        {isPlayerIdentification && <MessageBoxLook roles={identifiedPlayers.roles} players={identifiedPlayers.players} />}
 
-        {isSelectableCards && <SelectableCards selectableCards={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />}
+        {isSelectableCards && <MessageBoxSelectableCards selectableCards={messageStore.allSelectableCards} selected={messageStore.allSelectedCards} />}
+
         {!scene_end && isSelectableCards && (
           <ButtonGroup>
             <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant="blue" />
@@ -37,7 +38,8 @@ export const MessageBox: React.FC = observer(() => {
           </ButtonGroup>
         )}
 
-        {isSelectableMarks && <SelectableMarks selectableMarks={messageStore.allSelectableMarks} selected={messageStore.allSelectedMarks} />}
+        {isSelectableMarks && <MessageBoxSelectableMarks selectableMarks={messageStore.allSelectableMarks} selected={messageStore.allSelectedMarks} />}
+
         {!scene_end && isSelectableMarks && (
           <ButtonGroup>
             <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant="blue" />
@@ -49,7 +51,8 @@ export const MessageBox: React.FC = observer(() => {
           </ButtonGroup>
         )}
 
-        {isAnswerOptions && <Answer answer_options={answer_options} />}
+        {isAnswerOptions && <MessageBoxAnswer answer_options={answer_options} />}
+
         {!scene_end && isAnswerOptions && (
           <ButtonGroup>
             <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant="blue" />
@@ -57,7 +60,7 @@ export const MessageBox: React.FC = observer(() => {
           </ButtonGroup>
         )}
 
-        {isVoteResult && <VoteResult votes={votes} />}
+        {isVoteResult && <MessageBoxVoteResult votes={votes} />}
       </Message>
 
       {scene_end && (

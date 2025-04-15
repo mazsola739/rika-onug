@@ -4,7 +4,7 @@ import { StyledSelectable } from './MessageBox.styles'
 import { SelectableProps } from './MessageBox.types'
 import { MessageBoxCards } from './MessageBoxCards'
 
-export const SelectableCards: React.FC<SelectableProps> = observer(({ selectableCards, selected }) => {
+export const MessageBoxSelectableCards: React.FC<SelectableProps> = observer(({ selectableCards, selected }) => {
   return (
     <StyledSelectable>
       <Title title={'SELECTABLE CARDS'} />

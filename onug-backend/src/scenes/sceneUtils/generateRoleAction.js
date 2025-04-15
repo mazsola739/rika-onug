@@ -1,6 +1,14 @@
 import { getPlayerNumberWithMatchingToken } from '.'
 import { getKeys, isActivePlayersCardsFlipped, isPlayersCardsFlipped } from '../../utils/council.util'
 
+//TODO fix history update, combine with card update?
+export const updatePlayerHistory = (gamestate, token, title, updates) => {
+  gamestate.players[token].player_history[title] = {
+      ...gamestate.players[token].player_history[title],
+      ...updates
+  }
+}
+
 const combineUniqueObjects = (array1, array2) => {
   const uniqueSet = new Set()
 

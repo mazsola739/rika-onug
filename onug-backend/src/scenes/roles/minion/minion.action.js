@@ -3,9 +3,9 @@ import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenCond
 export const minionAction = (gamestate, token, title) => {
   const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolf')
 
-  if (werewolves.length === 0) {
+  /* if (werewolves.length === 0) {
     gamestate.players[token].card.player_team = 'minion'
-  } /* TODO set it at the end? */
+  } TODO set it at the end? */
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

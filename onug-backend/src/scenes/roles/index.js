@@ -1,10 +1,3 @@
-//TODO
-//Step	                  Current	                 Suggested
-//1. Send action prompt	  troublemaker.action.js	 troublemaker.prompt.js or sendTroublemakerAction.js
-//2. Receive response	  troublemaker.response.js	 troublemaker.receive.js or handleTroublemakerResponse.js
-//3. Process action	      part of 2 maybe?	         troublemaker.process.js
-//4. Confirm outcome	  not shown	                 troublemaker.result.js or sendTroublemakerResult.js
-
 /* TODO only 1 selectable?  - obligatory: true
 
     const isSingleSelectable = selectablePlayerNumbers.length === 1

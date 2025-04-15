@@ -5,9 +5,7 @@ import { StyledMessageBoxCards, MessageBoxItem, ItemPosition } from './MessageBo
 import { MessageBoxProps } from './MessageBox.types'
 
 export const MessageBoxCards: React.FC<MessageBoxProps> = observer(({ cards }) => {
-  const onCardClick = (position: string) => {
-    selectionStore.toggleCardSelection(position)
-  }
+  const onCardClick = (position: string) => selectionStore.toggleCardSelection(position)
 
   return (
     <StyledMessageBoxCards>

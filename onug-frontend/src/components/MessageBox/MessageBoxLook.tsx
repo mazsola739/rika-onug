@@ -4,7 +4,7 @@ import { StyledSelectable } from './MessageBox.styles'
 import { LookProps } from './MessageBox.types'
 import { MessageBoxTokens } from './MessageBoxTokens'
 
-export const Look: React.FC<LookProps> = observer(({ roles, players }) => {
+export const MessageBoxLook: React.FC<LookProps> = observer(({ roles, players }) => {
   return (
     <StyledSelectable>
       <Title title={roles.join(', ')} />

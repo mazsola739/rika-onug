@@ -1,19 +1,18 @@
 //TODO better naming and organisation
 
 /* 
-Answer → AnswerOptions or ResponseOptions
-Look → PlayerRolesView or IdentifiedPlayersView
-SelectableCards → CardSelector or CardPicker
-SelectableMarks → MarkSelector or MarkPicker
-VoteResult → VotingResults or VoteSummary
+MessageBoxAnswer → AnswerOptions or ResponseOptions
+MessageBoxLook → PlayerRolesView or IdentifiedPlayersView
+MessageBoxSelectableCards → CardSelector or CardPicker
+MessageBoxSelectableMarks → MarkSelector or MarkPicker
+MessageBoxVoteResult → VotingResults or VoteSummary
 */
 
-export * from './Answer'
-export * from './Look'
+export * from './MessageBoxAnswer'
+export * from './MessageBoxLook'
 export * from './MessageBoxCards'
 export * from './MessageBoxMarks'
 export * from './MessageBoxTokens'
-export * from './SelectableCards'
-export * from './SelectableMarks'
-export * from './Vote'
-export * from './VoteResult'
+export * from './MessageBoxSelectableCards'
+export * from './MessageBoxSelectableMarks'
+export * from './MessageBoxVoteResult'
