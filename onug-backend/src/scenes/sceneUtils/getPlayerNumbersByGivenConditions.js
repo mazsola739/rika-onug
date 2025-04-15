@@ -71,4 +71,3 @@ export const getPlayerNumbersByGivenConditions = (players, filter, shieldedCards
   }
   return result
 }
-

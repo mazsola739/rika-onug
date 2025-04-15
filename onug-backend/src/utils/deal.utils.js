@@ -86,11 +86,10 @@ export const createPlayerCard = (card, selected_cards) => {
   const hasPlayerArtifact = hasCurator(selected_cards)
 
   if (hasPlayerArtifact) {
-    playerCard.player_artifact= 0
+    playerCard.player_artifact = 0
   }
   if (hasPlayerMark) {
-    playerCard.player_mark= 'mark_of_clarity'
-
+    playerCard.player_mark = 'mark_of_clarity'
   }
 
   return playerCard
@@ -98,11 +97,11 @@ export const createPlayerCard = (card, selected_cards) => {
 
 export const createPlayerPositionCard = (card, selected_cards) => {
   if (!card || typeof card !== 'object' || !card.id) {
-    return { card: { id: 0, role: '', team: '' } };
+    return { card: { id: 0, role: '', team: '' } }
   }
 
-  const hasPlayerMark = hasMark(selected_cards);
-  const hasPlayerArtifact = hasCurator(selected_cards);
+  const hasPlayerMark = hasMark(selected_cards)
+  const hasPlayerArtifact = hasCurator(selected_cards)
 
   const positionCard = {
     card: {
@@ -110,18 +109,17 @@ export const createPlayerPositionCard = (card, selected_cards) => {
       role: card.role,
       team: card.team
     }
-  };
+  }
 
   if (hasPlayerArtifact) {
-    positionCard.artifact = 0;
+    positionCard.artifact = 0
   }
   if (hasPlayerMark) {
-    positionCard.mark = 'mark_of_clarity';
+    positionCard.mark = 'mark_of_clarity'
   }
 
-  return positionCard;
-};
-
+  return positionCard
+}
 
 export const createCenterPositionCard = card => {
   if (!card || typeof card !== 'object' || !card.id) return { card: { id: 0, role: '', team: '' } }

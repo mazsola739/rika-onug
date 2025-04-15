@@ -1,9 +1,9 @@
-import { HAS_MARK_IDS, VAMPIRE_IDS, ASSASSIN_IDS } from "constant"
-import { cards, marks, artifacts } from "data"
-import { makeAutoObservable } from "mobx"
-import { CardJson, TokenJson, Expansion } from "types"
-import { createDefaultCard, createDefaultToken, getCardById, getMarkByName, determineTotalPlayers, checkCardPresence, areAnyCardSelectedById } from "utils"
-import { playersStore } from "./PlayersStore"
+import { HAS_MARK_IDS, VAMPIRE_IDS, ASSASSIN_IDS } from 'constant'
+import { cards, marks, artifacts } from 'data'
+import { makeAutoObservable } from 'mobx'
+import { CardJson, TokenJson, Expansion } from 'types'
+import { createDefaultCard, createDefaultToken, getCardById, getMarkByName, determineTotalPlayers, checkCardPresence, areAnyCardSelectedById } from 'utils'
+import { playersStore } from './PlayersStore'
 
 class DeckStore {
   deck: CardJson[] = cards

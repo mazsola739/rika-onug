@@ -1,8 +1,8 @@
-import { DEAL, STAGES, markPositions, REDIRECT } from "../../constants"
-import { logTrace, logErrorWithStack } from "../../log"
-import { upsertRoomState } from "../../repository"
-import { dealCardIds, determineTotalPlayers, createCenterPositionCard, createPlayerPositionCard, hasMark, createPlayerCard, broadcast } from "../../utils"
-import { validateRoom } from "../../validators"
+import { DEAL, STAGES, markPositions, REDIRECT } from '../../constants'
+import { logTrace, logErrorWithStack } from '../../log'
+import { upsertRoomState } from '../../repository'
+import { dealCardIds, determineTotalPlayers, createCenterPositionCard, createPlayerPositionCard, hasMark, createPlayerCard, broadcast } from '../../utils'
+import { validateRoom } from '../../validators'
 
 export const dealCards = async (ws, message) => {
   try {

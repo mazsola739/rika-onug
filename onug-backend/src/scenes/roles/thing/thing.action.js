@@ -7,11 +7,8 @@ export const thingAction = (gamestate, token, title) => {
   const isSingleSelectable = neighbors.length === 1
 
   if (isSingleSelectable) {
-
     thingResponse(gamestate, token, neighbors, title)
-
   } else if (neighbors.length > 1) {
-
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],
       selectable_cards: neighbors,

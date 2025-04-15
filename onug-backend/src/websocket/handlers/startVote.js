@@ -5,7 +5,6 @@ import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens } from '../..
 import { sendMessageToPlayer } from '../../utils'
 import { validateRoom } from '../../validators'
 
-
 export const startVote = async (ws, message) => {
   const { room_id } = message
   logTrace(`Processing verdict in room: ${room_id}`)

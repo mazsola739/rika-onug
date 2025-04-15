@@ -1,4 +1,4 @@
-import { alienAbducted, getPlayerNeighborsByToken, generateRoleAction } from "../../sceneUtils"
+import { alienAbducted, getPlayerNeighborsByToken, generateRoleAction } from '../../sceneUtils'
 
 export const cowAction = (gamestate, token, title) => {
   const neighborIsAlien = alienAbducted(gamestate.players, token)

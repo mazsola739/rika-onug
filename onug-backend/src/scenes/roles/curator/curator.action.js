@@ -1,4 +1,4 @@
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getSelectablePlayersWithNoArtifact, generateRoleAction } from "../../sceneUtils"
+import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, getSelectablePlayersWithNoArtifact, generateRoleAction } from '../../sceneUtils'
 
 export const curatorAction = (gamestate, token, title) => {
   const allPlayerTokens = getAllPlayerTokens(gamestate.players)

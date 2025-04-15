@@ -1,7 +1,73 @@
 import scripts from '../data/script.json'
 import { logTrace } from '../log'
 import { hasTemptress, hasAlphaWolf } from '../utils'
-import { hasCopycat, hasMirrorMan, hasDoppelganger, hasInstantAction, hasAnyVampire, hasTheCount, hasRenfield, hasDiseased, hasCupid, hasInstigator, hasPriest, hasAssassin, hasApprenticeAssassin, hasMarks, hasSentinel, hasAnyAlien, hasCow, hasGroobAndZerb, hasBodySnatcher, hasAnySuperVillains, hasDrPeeker, hasRapscallion, hasEvilometer, hasAnyWerewolf, hasMysticWolf, hasMinion, hasApprenticeTanner, hasTanner, hasLeader, hasMadScientist, hasIntern, hasMasons, hasThing, hasAnnoyingLad, hasSeer, hasApprenticeSeer, hasParanormalInvestigator, hasMarksman, hasNostradamus, hasPsychic, hasDetector, hasRobber, hasWitch, hasPickpocket, hasRoleRetriever, hasVoodooLou, hasTroublemaker, hasVillageIdiot, hasAuraSeer, hasGremlin, hasRascal, hasSwitcheroo, hasDrunk, hasInsomniac, hasSelfAwarenessGirl, hasSquire, hasBeholder, hasRevealer, hasExposer, hasFlipper, hasEmpath, hasCurator, hasBlob, hasMortician, hasFamilyMan } from './conditions'
+import {
+  hasCopycat,
+  hasMirrorMan,
+  hasDoppelganger,
+  hasInstantAction,
+  hasAnyVampire,
+  hasTheCount,
+  hasRenfield,
+  hasDiseased,
+  hasCupid,
+  hasInstigator,
+  hasPriest,
+  hasAssassin,
+  hasApprenticeAssassin,
+  hasMarks,
+  hasSentinel,
+  hasAnyAlien,
+  hasCow,
+  hasGroobAndZerb,
+  hasBodySnatcher,
+  hasAnySuperVillains,
+  hasDrPeeker,
+  hasRapscallion,
+  hasEvilometer,
+  hasAnyWerewolf,
+  hasMysticWolf,
+  hasMinion,
+  hasApprenticeTanner,
+  hasTanner,
+  hasLeader,
+  hasMadScientist,
+  hasIntern,
+  hasMasons,
+  hasThing,
+  hasAnnoyingLad,
+  hasSeer,
+  hasApprenticeSeer,
+  hasParanormalInvestigator,
+  hasMarksman,
+  hasNostradamus,
+  hasPsychic,
+  hasDetector,
+  hasRobber,
+  hasWitch,
+  hasPickpocket,
+  hasRoleRetriever,
+  hasVoodooLou,
+  hasTroublemaker,
+  hasVillageIdiot,
+  hasAuraSeer,
+  hasGremlin,
+  hasRascal,
+  hasSwitcheroo,
+  hasDrunk,
+  hasInsomniac,
+  hasSelfAwarenessGirl,
+  hasSquire,
+  hasBeholder,
+  hasRevealer,
+  hasExposer,
+  hasFlipper,
+  hasEmpath,
+  hasCurator,
+  hasBlob,
+  hasMortician,
+  hasFamilyMan
+} from './conditions'
 
 export const rippleScriptHandler = gamestate => {
   logTrace(`rippleScriptHandler in room [${gamestate.room_id}]`)
@@ -354,7 +420,7 @@ export const rippleScriptHandler = gamestate => {
     {
       condition: () => hasFamilyMan(selected_cards),
       scripts: ['FAMILY_MAN']
-    },
+    }
   ]
 
   roleOrder.forEach(({ condition, scripts }) => {

@@ -1,6 +1,6 @@
-import { isActivePlayer } from "../../activePlayer"
-import { getAllPlayerTokens, createAndSendSceneMessage } from "../../sceneUtils"
-import { beholderAction } from "./beholder.action"
+import { isActivePlayer } from '../../activePlayer'
+import { getAllPlayerTokens, createAndSendSceneMessage } from '../../sceneUtils'
+import { beholderAction } from './beholder.action'
 
 export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)

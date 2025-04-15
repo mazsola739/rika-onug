@@ -1,4 +1,4 @@
-import { getNostradamusTeam } from "../../sceneUtils"
+import { getNostradamusTeam } from '../../sceneUtils'
 
 export const nostradamusReaction = (gamestate, title) => {
   /*   const tokens = getAllPlayerTokens(gamestate.players)   */

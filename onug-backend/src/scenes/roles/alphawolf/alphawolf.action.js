@@ -7,11 +7,8 @@ export const alphawolfAction = (gamestate, token, title) => {
   const isSingleSelectable = selectablePlayerNumbers.length === 1
 
   if (isSingleSelectable) {
-
     alphawolfResponse(gamestate, token, selectablePlayerNumbers, title)
-
   } else if (selectablePlayerNumbers.length > 1) {
-
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],
       selectable_cards: selectablePlayerNumbers,

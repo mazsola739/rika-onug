@@ -10,7 +10,6 @@ export const useLobby = () => {
   const { lastJsonMessage, sendJsonMessage } = wsStore.getWsCommunicationsBridge()
 
   useEffect(() => {
-
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }

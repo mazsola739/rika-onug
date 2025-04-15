@@ -23,12 +23,12 @@ export const formatPositionSimply = (position: string) => {
     .split('_')
     .map((word, index) => {
       if (index === 0) {
-        if (word.toLowerCase() === 'player') return 'P';
-        if (word.toLowerCase() === 'center') return 'C';
+        if (word.toLowerCase() === 'player') return 'P'
+        if (word.toLowerCase() === 'center') return 'C'
       }
-      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
     })
-    .join(' ');
+    .join(' ')
 }
 
 export const getCardById = (cardId: number): CardJson | null => {

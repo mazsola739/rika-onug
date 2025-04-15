@@ -169,4 +169,3 @@ export const getAnyHigherOrLowerPlayerNumbersByToken = (players, token, higherOr
   return result
 }
 export const getAllPlayerTokens = players => Object.keys(players)
-

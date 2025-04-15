@@ -44,7 +44,7 @@ export const useApp = () => {
 
     if (lastJsonMessage?.type === NEWBIE && lastJsonMessage?.update) {
       sessionStorage.setItem('token', lastJsonMessage.token!)
-      //TODO save name 
+      //TODO save name
     }
   }, [sendJsonMessage, lastJsonMessage, firstTime])
 

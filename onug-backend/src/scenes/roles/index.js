@@ -1,4 +1,4 @@
-//TODO 
+//TODO
 //Step	                  Current	                 Suggested
 //1. Send action prompt	  troublemaker.action.js	 troublemaker.prompt.js or sendTroublemakerAction.js
 //2. Receive response	  troublemaker.response.js	 troublemaker.receive.js or handleTroublemakerResponse.js

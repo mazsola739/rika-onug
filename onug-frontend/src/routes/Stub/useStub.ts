@@ -1,7 +1,7 @@
 import { API_HOST } from 'constant'
 import { useCallback, useState } from 'react'
 import { labels } from './Stub.constants'
-import { testCase1,testCase2,testCase3,testCase4,testCase5 } from './StubTestCases'
+import { testCase1, testCase2, testCase3, testCase4, testCase5 } from './StubTestCases'
 
 interface ServerResponse {
   serverResponse: string
@@ -105,6 +105,6 @@ export const useStub = (): UseStubLogicReturn => {
     useTestCase2,
     useTestCase3,
     useTestCase4,
-    useTestCase5,
+    useTestCase5
   }
 }

@@ -1,5 +1,5 @@
-import { generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from "../../sceneUtils"
-import { validateAnswerSelection } from "../../validators"
+import { generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { validateAnswerSelection } from '../../validators'
 
 export const oraclequestionResponse = (gamestate, token, selected_answer, title) => {
   if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {

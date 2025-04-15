@@ -1,5 +1,5 @@
-import { getPlayerNumberWithMatchingToken, getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from "../../sceneUtils"
-import { validateCardSelection } from "../../validators"
+import { getPlayerNumberWithMatchingToken, getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { validateCardSelection } from '../../validators'
 
 export const robberResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {

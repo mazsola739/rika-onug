@@ -1,6 +1,17 @@
-import { CENTER_CARD_POSITIONS } from "../../../constants"
-import { getPlayerNumberWithMatchingToken, moveCardsButYourOwn, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, formatPlayerIdentifier, getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from "../../sceneUtils"
-import { validateAnswerSelection, validateCardSelection } from "../../validators"
+import { CENTER_CARD_POSITIONS } from '../../../constants'
+import {
+  getPlayerNumberWithMatchingToken,
+  moveCardsButYourOwn,
+  generateRoleAction,
+  getNarrationByTitle,
+  createAndSendSceneMessage,
+  formatPlayerIdentifier,
+  getCardIdsByPositions,
+  getAllPlayerTokens,
+  getPlayerNumbersWithMatchingTokens,
+  getSelectablePlayersWithNoShield
+} from '../../sceneUtils'
+import { validateAnswerSelection, validateCardSelection } from '../../validators'
 
 //TODO fix obligatory and scene end
 export const rascalResponse = (gamestate, token, selected_card_positions, selected_answer, title) => {

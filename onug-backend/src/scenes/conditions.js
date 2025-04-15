@@ -1,7 +1,6 @@
 import { ALIEN_IDS, SUPER_VILLAIN_IDS, VAMPIRE_IDS, WEREWOLVES, BAD_GUY, DOPPELGANGER_INSTANT_ACTION, GOOD_GUY, GROOB_AND_ZERB, HAS_MARK, MASONS, SEERS } from '../constants'
 
 export const hasEpicBattle = selected_cards => {
-
   const battles = {
     vampire: VAMPIRE_IDS.some(id => selected_cards.includes(id)),
     alien: ALIEN_IDS.some(id => selected_cards.includes(id)),

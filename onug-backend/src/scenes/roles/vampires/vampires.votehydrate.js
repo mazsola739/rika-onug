@@ -1,14 +1,7 @@
 import { VAMPIRES } from '../../../constants'
 import { readGamestate, upsertRoomState } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
-import {
-  createAndSendSceneMessage,
-  formatPlayerIdentifier,
-  generateRoleAction,
-  getNarrationByTitle,
-  getPlayerNumberWithMatchingToken,
-  getPlayerTokensByPlayerNumber
-} from '../../sceneUtils'
+import { createAndSendSceneMessage, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumberWithMatchingToken, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
 
 export const vampiresVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message

@@ -1,6 +1,6 @@
-import { GOOD_GUY } from "../../../constants"
-import { getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from "../../sceneUtils"
-import { validateCardSelection } from "../../validators"
+import { GOOD_GUY } from '../../../constants'
+import { getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { validateCardSelection } from '../../validators'
 
 //TODO better response message
 export const revealerResponse = (gamestate, token, selected_card_positions, title) => {

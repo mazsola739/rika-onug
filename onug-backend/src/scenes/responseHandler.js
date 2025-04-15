@@ -1,6 +1,49 @@
 import { logInfo, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { aliensResponse, alphawolfResponse, thingResponse, apprenticeseerResponse, apprenticeassassinResponse, assassinResponse, beholderResponse, bodysnatcherResponse, copycatResponse, curatorResponse, cupidResponse, seerResponse, diseasedResponse, doppelgangerResponse, doppelgangerinstantactionResponse, empathResponse, exposerResponse, revealerResponse, gremlinResponse, morticianResponse, pickpocketResponse, priestResponse, psychicResponse, rascalResponse, thecountResponse, mysticwolfResponse, drunkResponse, instigatorResponse, marksmanResponse, nostradamusResponse, oraclequestionResponse, oracleanswerResponse, paranormalinvestigatorResponse, robberResponse, sentinelResponse, squireResponse, troublemakerResponse, temptressResponse, vampiresResponse, villageidiotResponse, witchResponse, werewolvesResponse } from './roles'
+import {
+  aliensResponse,
+  alphawolfResponse,
+  thingResponse,
+  apprenticeseerResponse,
+  apprenticeassassinResponse,
+  assassinResponse,
+  beholderResponse,
+  bodysnatcherResponse,
+  copycatResponse,
+  curatorResponse,
+  cupidResponse,
+  seerResponse,
+  diseasedResponse,
+  doppelgangerResponse,
+  doppelgangerinstantactionResponse,
+  empathResponse,
+  exposerResponse,
+  revealerResponse,
+  gremlinResponse,
+  morticianResponse,
+  pickpocketResponse,
+  priestResponse,
+  psychicResponse,
+  rascalResponse,
+  thecountResponse,
+  mysticwolfResponse,
+  drunkResponse,
+  instigatorResponse,
+  marksmanResponse,
+  nostradamusResponse,
+  oraclequestionResponse,
+  oracleanswerResponse,
+  paranormalinvestigatorResponse,
+  robberResponse,
+  sentinelResponse,
+  squireResponse,
+  troublemakerResponse,
+  temptressResponse,
+  vampiresResponse,
+  villageidiotResponse,
+  witchResponse,
+  werewolvesResponse
+} from './roles'
 
 export const responseHandler = async (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title) => {
   logTrace(`responseHandler in room [${gamestate.room_id}] called when actual scene is: ${scene_title}`)

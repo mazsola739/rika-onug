@@ -1,7 +1,7 @@
 import { END_GAME } from '../constants'
 import { logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import { allPlayersStateCheck, broadcast, /* randomDelay */ } from '../utils'
+import { allPlayersStateCheck, broadcast /* randomDelay */ } from '../utils'
 import { isActivePlayer } from './activePlayer'
 import { sceneHandler } from './sceneHandler'
 
@@ -68,9 +68,9 @@ export const chapterHandler = async gamestate => {
 
       const scenePlayers = Array.isArray(playersArray)
         ? playersArray.filter(player => {
-          const isActive = isActivePlayer(player.card)
-          return isActive && isActive[scene.scene_title]
-        })
+            const isActive = isActivePlayer(player.card)
+            return isActive && isActive[scene.scene_title]
+          })
         : []
 
       if (!Array.isArray(scenePlayers)) {

@@ -11,7 +11,7 @@ export const RoleCard: React.FC<RoleCardProps> = observer(({ card }) => {
 
   const isSelected = deckStore.selectedCards.some(selectedCard => selectedCard.id === id)
   const imageSrc = useMemo(() => `/assets/cards/${card_name}.webp`, [card_name])
-  const wakeUp = wake_up_time === "day" ? '☀️' : '🌙'
+  const wakeUp = wake_up_time === 'day' ? '☀️' : '🌙'
 
   return (
     <StyledRoleCard isSelected={isSelected} onClick={() => handleSelectAndDeselect(id)}>

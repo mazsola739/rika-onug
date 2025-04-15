@@ -1,7 +1,7 @@
 import { generateRoleAction } from '../../sceneUtils'
 
 export const rippleAction = (gamestate, token, title) => {
-/*   const randomRipple = gamestate.ripple.ripple_action
+  /*   const randomRipple = gamestate.ripple.ripple_action
 
   switch (randomRipple) {
     case 'random_ripple_1minute':

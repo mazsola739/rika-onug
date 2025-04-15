@@ -37,9 +37,7 @@ class MessageStore {
 
     if (selectedPlayerCards > 0 && selectedPlayerCards === playerCardLimit) return false
 
-    return !(selectedCenterCards > 0 && selectedCenterCards === centerCardLimit);
-
-
+    return !(selectedCenterCards > 0 && selectedCenterCards === centerCardLimit)
   }
 
   get disabledMarks() {
@@ -47,9 +45,7 @@ class MessageStore {
 
     const markLimit = this.markLimit
 
-    return !(selectedMarks.length > 0 && selectedMarks.length === markLimit);
-
-
+    return !(selectedMarks.length > 0 && selectedMarks.length === markLimit)
   }
 
   get playerCardLimit() {

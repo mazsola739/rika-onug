@@ -1,4 +1,15 @@
-import { getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getSelectablePlayersWithNoShield, getAnyEvenOrOddPlayerNumbers, getNonAlienPlayerNumbersWithNoShield, getNeighborByPosition, moveCards, getCardIdsByPositions, generateRoleAction } from "../../sceneUtils"
+import {
+  getPlayerNumbersByGivenConditions,
+  getPlayerNumberWithMatchingToken,
+  formatPlayerIdentifier,
+  getSelectablePlayersWithNoShield,
+  getAnyEvenOrOddPlayerNumbers,
+  getNonAlienPlayerNumbersWithNoShield,
+  getNeighborByPosition,
+  moveCards,
+  getCardIdsByPositions,
+  generateRoleAction
+} from '../../sceneUtils'
 
 export const aliensAction = (gamestate, token, title) => {
   const aliens = getPlayerNumbersByGivenConditions(gamestate.players, 'alien')

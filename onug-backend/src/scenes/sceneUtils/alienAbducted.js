@@ -1,4 +1,4 @@
-import { getNeighborPlayerNumbersByToken, getPlayerNumbersByGivenConditions } from "."
+import { getNeighborPlayerNumbersByToken, getPlayerNumbersByGivenConditions } from '.'
 
 export const alienAbducted = (players, cowToken) => {
   const cowNeighbors = getNeighborPlayerNumbersByToken(players, cowToken)

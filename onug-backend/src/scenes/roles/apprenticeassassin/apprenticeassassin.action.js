@@ -27,11 +27,8 @@ export const apprenticeassassinAction = (gamestate, token, title) => {
     const isSingleSelectable = selectablePlayerNumbers.length === 1
 
     if (isSingleSelectable) {
-
       apprenticeassassinResponse(gamestate, token, selectablePlayerNumbers, title)
-
     } else if (selectablePlayerNumbers.length > 1) {
-
       gamestate.players[token].player_history[title] = {
         ...gamestate.players[token].player_history[title],
         selectable_marks: selectablePlayerNumbers,

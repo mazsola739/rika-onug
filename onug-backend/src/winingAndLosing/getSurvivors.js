@@ -1,5 +1,5 @@
-import { getActiveAndInactiveCards, isBodyguard, isMaster, isPrince, vampireRoles } from "."
-import { getPlayerTokenByPlayerNumber } from "../scenes/sceneUtils"
+import { getActiveAndInactiveCards, isBodyguard, isMaster, isPrince, vampireRoles } from '.'
+import { getPlayerTokenByPlayerNumber } from '../scenes/sceneUtils'
 
 export const getSurvivors = (voteResult, gamestate, playerStates) => {
   const { activeCards } = getActiveAndInactiveCards(gamestate.card_positions)
