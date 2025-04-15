@@ -9,7 +9,6 @@ export const thingResponse = (gamestate, token, selected_card_positions, title) 
   }
 
   const tappedPlayerToken = getPlayerTokensByPlayerNumber(gamestate.players, [selected_card_positions[0]])
-  //TODO only 1 player
 
   webSocketServerConnectionsPerRoom[gamestate.room_id][tappedPlayerToken[0]].send(
     JSON.stringify({

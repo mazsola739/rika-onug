@@ -1,9 +1,4 @@
-import { getTeamStatus, isCircleVote } from './conditions'
-import { getFallens } from './getFallens'
-import { getLosers } from './getLosers'
-import { getSurvivors } from './getSurvivors'
-import { getWinners } from './getWinners'
-import { buildVoteResult, countVotes, getActiveAndInactiveCards, getTopVotes } from './utils'
+import { buildVoteResult, countVotes, getActiveAndInactiveCards, getFallens, getLosers, getSurvivors, getTeamStatus, getTopVotes, getWinners, isCircleVote } from "."
 
 export const getWinnersAndLosers = async gamestate => {
   const countedVotes = countVotes(gamestate.players)

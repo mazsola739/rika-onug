@@ -1,6 +1,5 @@
-import { getPlayerTokenByPlayerNumber } from '../scenes/sceneUtils'
-import { isDiseased, isTraitor } from './conditions'
-import { getActiveAndInactiveCards } from './utils'
+import { getActiveAndInactiveCards, isDiseased, isTraitor } from "."
+import { getPlayerTokenByPlayerNumber } from "../scenes/sceneUtils"
 
 export const getLosers = (voteResult, gamestate, playerStates) => {
   const { activeCards } = getActiveAndInactiveCards(gamestate.card_positions)

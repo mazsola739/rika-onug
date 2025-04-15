@@ -1,5 +1,7 @@
 import { generateRoleAction } from '../../sceneUtils'
 
+//TODO break from here, if they dont want to play with this settings
+
 export const epicbattleAction = (gamestate, token, title) => {
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

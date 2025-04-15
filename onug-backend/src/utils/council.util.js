@@ -2,14 +2,16 @@ import { getPlayerNumberWithMatchingToken } from '../scenes/sceneUtils'
 import cardsData from '../data/cards.json'
 import artifactsData from '../data/artifacts.json'
 
-const isPlayersCardsFlipped = (flippedCards, playerCardId) => {
+export const isPlayersCardsFlipped = (flippedCards, playerCardId) => {
   return flippedCards.some(obj => {
     const key = Object.keys(obj)[0]
     return obj[key] === playerCardId
   })
 }
 
-const isActivePlayersCardsFlipped = (flippedCards, playersPosition) => flippedCards.some(obj => Object.keys(obj)[0] === playersPosition)
+export const isActivePlayersCardsFlipped = (flippedCards, playersPosition) => flippedCards.some(obj => Object.keys(obj)[0] === playersPosition)
+
+export const getKeys = array => array.map(obj => Object.keys(obj)[0])
 
 //TODO groob team and zerb team if alone - then alien
 

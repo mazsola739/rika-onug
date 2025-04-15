@@ -1,6 +1,5 @@
 import { getPlayerNumberWithMatchingToken } from '.'
-
-export const getKeys = array => array.map(obj => Object.keys(obj)[0])
+import { getKeys, isActivePlayersCardsFlipped, isPlayersCardsFlipped } from '../../utils/council.util'
 
 const combineUniqueObjects = (array1, array2) => {
   const uniqueSet = new Set()
@@ -16,16 +15,7 @@ const combineUniqueObjects = (array1, array2) => {
   })
 }
 
-const isPlayersCardsFlipped = (flippedCards, playerCardId) => {
-  return flippedCards.some(obj => {
-    const key = Object.keys(obj)[0]
-    return obj[key] === playerCardId
-  })
-}
-
-const isActivePlayersCardsFlipped = (flippedCards, playersPosition) => flippedCards.some(obj => Object.keys(obj)[0] === playersPosition)
-
-export const updatePlayerCard = (gamestate, token) => {
+const updatePlayerCard = (gamestate, token) => {
   let newGamestate = { ...gamestate }
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
   const flippedCards = newGamestate.flipped_cards

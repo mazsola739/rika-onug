@@ -1,6 +1,6 @@
 import { ALIEN_IDS, SUPER_VILLAIN_IDS, VAMPIRE_IDS, MASONS, WEREVOLVES_WITHOUT_DREAMWOLF, WEREWOLVES } from '../../constants'
 
-//TODO finish
+//TODO finish + util.js & refctor the role-files
 const filters = {
   //no role
   playerWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number), //do I need
@@ -72,51 +72,3 @@ export const getPlayerNumbersByGivenConditions = (players, filter, shieldedCards
   return result
 }
 
-export const getSelectableOtherPlayerNumbersWithNoShield = (players, token) => {
-  const result = []
-  //!shieldedCards.includes(player.player_number)
-  Object.keys(players).forEach(playerToken => {
-    if (playerToken !== token && players[playerToken].shield !== true) {
-      result.push(players[playerToken].player_number)
-    }
-  })
-
-  return result
-}
-
-export const getAnyEvenOrOddPlayerNumbers = (players, evenOrOdd) => {
-  const result = []
-
-  for (const token in players) {
-    const player = players[token]
-    const playerNumberValue = parseInt(player.player_number.replace('player_', ''), 10)
-
-    if ((evenOrOdd === 'even' && playerNumberValue % 2 === 0) || (evenOrOdd === 'odd' && playerNumberValue % 2 !== 0)) {
-      result.push(player.player_number)
-    }
-  }
-
-  return result
-}
-
-export const empathVotersPlayerNumbers = (totalPlayers, evenOdd = '') => {
-  const result = []
-
-  totalPlayers = Math.min(Math.max(1, totalPlayers), 12)
-
-  let start = 1
-  let step = 1
-  if (evenOdd === 'even') {
-    start = 2
-    step = 2
-  } else if (evenOdd === 'odd') {
-    start = 1
-    step = 2
-  }
-
-  for (let i = start; i <= totalPlayers; i += step) {
-    result.push(`player_${i}`)
-  }
-
-  return result
-}

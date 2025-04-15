@@ -1,38 +1,5 @@
-import { getPlayerTokenByPlayerNumber } from '../scenes/sceneUtils'
-import {
-  allGroobAlive,
-  allZerbsAlive,
-  anyAlienDead,
-  anyAssassinDead,
-  anyGroobDead,
-  anySyntheticDead,
-  anyTannerDead,
-  anyTargetDead,
-  anyVampireDead,
-  anyWerewolfDead,
-  anyZerbDead,
-  groobAlive,
-  hasActiveVampire,
-  hasActiveWerewolf,
-  isAlienTeam,
-  isApprenticeAssassin,
-  isAssassin,
-  isBlob,
-  isLeader,
-  isLoser,
-  isMinion,
-  isMortician,
-  isRenfield,
-  isSynthetic,
-  isTanner,
-  isVampireTeam,
-  isVillageTeam,
-  isWerewolfTeam,
-  isWinner,
-  villageWins,
-  zerbAlive
-} from './conditions'
-import { getActiveAndInactiveCards, getPlayerNeighbors } from './utils'
+import { getPlayerTokenByPlayerNumber } from "../scenes/sceneUtils"
+import { isLeader, isAlienTeam, isBlob, isMortician, isTanner, isSynthetic, groobAlive, anyZerbDead, zerbAlive, anyGroobDead, allGroobAlive, allZerbsAlive, isAssassin, anyTargetDead, isApprenticeAssassin, anyAssassinDead, isVillageTeam, villageWins, isWinner, isLoser, isWerewolfTeam, anyWerewolfDead, anySyntheticDead, anyTannerDead, isMinion, hasActiveWerewolf, isVampireTeam, anyVampireDead, isRenfield, hasActiveVampire, anyAlienDead, getActiveAndInactiveCards, getPlayerNeighbors } from "."
 
 export const getWinners = (voteResult, gamestate, playerStates) => {
   const { activeCards } = getActiveAndInactiveCards(gamestate.card_positions)

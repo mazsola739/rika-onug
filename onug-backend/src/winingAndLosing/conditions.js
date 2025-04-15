@@ -1,4 +1,4 @@
-import { alienRoles, vampireRoles, werewolfRoles } from './constants'
+import { alienRoles, vampireRoles, werewolfRoles } from '.'
 
 export const isCircleVote = countedVotes => {
   return Object.values(countedVotes).every(votes => votes.length === 1)
@@ -42,6 +42,7 @@ const villageTeam = card => card.team === 'village'
 const werewolfTeam = card => card.team === 'werewolf'
 const vampireTeam = card => card.team === 'vampire'
 const alienTeam = card => card.team === 'alien'
+
 const isWerewolfRole = card => werewolfRoles.includes(card.role)
 const isVampireRole = card => vampireRoles.includes(card.role)
 const isAlienRole = card => alienRoles.includes(card.role)

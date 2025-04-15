@@ -39,14 +39,12 @@ export const everyonemarkAction = (gamestate, token, title) => {
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     viewed_marks: viewMarks,
-    obligatory: true,
     scene_end: true
   }
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_own_mark'],
     showMarks: viewMarks,
-    obligatory: true,
     scene_end: true
   })
 }
