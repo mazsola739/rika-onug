@@ -9,16 +9,16 @@ export const StyledMessageBox = styled.div`
   padding-bottom: 10px;
 `
 
-export const MessageText = styled.span`
-  padding: 0;
-`
-
 export const Message = styled.div`
   display: flex;
   padding: 5px;
   flex-direction: column;
   align-items: center;
   gap: 1.25rem;
+`
+
+export const MessageText = styled.span`
+  padding: 0;
 `
 
 export const StyledMessageBoxCards = styled.div`
