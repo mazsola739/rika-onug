@@ -4,7 +4,6 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { randomOracleQuestions } from './oracle.constants'
 import { oraclequestionAction } from './oraclequestion.action'
 
-//ORACLE_QUESTION
 export const oracleQuestion = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const selectedCards = gamestate.selected_cards
@@ -24,7 +23,7 @@ export const oracleQuestion = (gamestate, title) => {
   }
 
   const oracleQuestion = getRandomItemFromArray(availableOracleQuestionOptions)
-  const theNumberIThinkingOf = /* Math.floor(Math.random() * 10) + 1  //TODO eyes open */ 0
+  const theNumberIThinkingOf = 0 //TODO eyes open!! Math.floor(Math.random() * 10) + 1
 
   const narration = ['oracle_kickoff_text', oracleQuestion]
 

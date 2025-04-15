@@ -4,8 +4,8 @@ import { getKeys, isActivePlayersCardsFlipped, isPlayersCardsFlipped } from '../
 //TODO fix history update, combine with card update?
 export const updatePlayerHistory = (gamestate, token, title, updates) => {
   gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      ...updates
+    ...gamestate.players[token].player_history[title],
+    ...updates
   }
 }
 

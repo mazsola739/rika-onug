@@ -58,7 +58,7 @@ export const aliensAction = (gamestate, token, title) => {
     case 'aliens_stare_text':
       scene_end = true
       break
-    case 'aliens_view_text':
+    case 'aliens_view_text': //TODO fix showcards
     case 'aliens_allview_text':
       if (gamestate.players[token].shield) {
         gamestate.players[token].player_history[title].shielded = true

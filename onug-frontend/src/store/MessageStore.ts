@@ -144,7 +144,7 @@ class MessageStore {
       })
 
       return {
-        roles: roleKeys.map(roleKey => roleKey.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())),
+        roles: roleKeys.map(roleKey => roleKey.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())), //TODO fix only show roles in game
         players: identifiedPlayers
       }
     }

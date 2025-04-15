@@ -1,4 +1,4 @@
-import { ALIEN_IDS } from '../../../constants'
+import { ALIENS } from '../../../constants'
 import { readGamestate, upsertRoomState } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
 import {
@@ -107,7 +107,7 @@ export const aliensVotehydrate = async message => {
     } else {
       aliensTokens.forEach(alienToken => {
         const stillVoteMessage = {
-          type: ALIEN_IDS,
+          type: ALIENS,
           success: true,
           alien_votes
         }

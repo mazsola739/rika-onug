@@ -9,17 +9,6 @@ export const StyledMessageBox = styled.div`
   padding-bottom: 10px;
 `
 
-export const Narration = styled.div`
-  padding: 5px;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-`
-
-export const NarrationText = styled.span`
-  color: yellow;
-  padding: 0;
-`
 export const MessageText = styled.span`
   padding: 0;
 `
