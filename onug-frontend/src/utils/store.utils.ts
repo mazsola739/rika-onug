@@ -18,7 +18,18 @@ export const determineTotalPlayers = (totalCharacters: number): number => {
   return Math.max(totalPlayers, 0)
 }
 
-export const formatPositionSimply = (position: string) => position.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase())
+export const formatPositionSimply = (position: string) => {
+  return position
+    .split('_')
+    .map((word, index) => {
+      if (index === 0) {
+        if (word.toLowerCase() === 'player') return 'P';
+        if (word.toLowerCase() === 'center') return 'C';
+      }
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    })
+    .join(' ');
+}
 
 export const getCardById = (cardId: number): CardJson | null => {
   if (cardId === 87) {
