@@ -1,103 +1,22 @@
 import { logInfo, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
-import {
-  aliens,
-  alphawolf,
-  annoyinglad,
-  apprenticeassassin,
-  apprenticeseer,
-  apprenticetanner,
-  assassin,
-  auraseer,
-  beholder,
-  blob,
-  bodysnatcher,
-  copycat,
-  cow,
-  cupid,
-  curator,
-  detector,
-  diseased,
-  doppelganger,
-  empath,
-  exposer,
-  flipper,
-  gremlin,
-  doppelgangerinstantaction,
-  mortician,
-  pickpocket,
-  priest,
-  psychic,
-  rascal,
-  revealer,
-  thecount,
-  drpeeker,
-  drunk,
-  epicbattle,
-  everyonemark,
-  evilometer,
-  familyman,
-  groobzerb,
-  insomniac,
-  instigator,
-  intern,
-  joke,
-  leader,
-  leaderzerbgroob,
-  lovers,
-  madscientist,
-  marksman,
-  masons,
-  minion,
-  mirrorman,
-  mysticwolf,
-  nostradamus,
-  nostradamusReaction,
-  oracleAnswer,
-  oracleQuestion,
-  paranormalinvestigator,
-  rapscallion,
-  renfield,
-  ripple,
-  robber,
-  roleretriever,
-  seer,
-  selfawarenessgirl,
-  sentinel,
-  squire,
-  supervillains,
-  switcheroo,
-  temptress,
-  thing,
-  troublemaker,
-  vampires,
-  villageidiot,
-  voodoolou,
-  werewolves,
-  witch
-} from './roles'
-import {
-  hasAssassin,
-  hasDoppelganger,
-  hasApprenticeAssassin,
-  hasMarks,
-  hasSeer,
-  hasApprenticeSeer,
-  hasEasterEgg,
-  hasEpicBattle,
-  hasGoodGuys,
-  hasBadGuys,
-  hasMadScientist,
-  hasDreamWolf
-} from './conditions'
+import { aliens, alphawolf, annoyinglad, apprenticeassassin, apprenticeseer, apprenticetanner, assassin, auraseer, beholder, blob, bodysnatcher, copycat, cow, cupid, curator, detector, diseased, doppelganger, empath, exposer, flipper, gremlin, doppelgangerinstantaction, mortician, pickpocket, priest, psychic, rascal, revealer, thecount, drpeeker, drunk, epicbattle, everyonemark, evilometer, familyman, groobzerb, insomniac, instigator, intern, joke, leader, leaderzerbgroob, lovers, madscientist, marksman, masons, minion, mirrorman, mysticwolf, nostradamus, nostradamusReaction, oracleAnswer, oracleQuestion, paranormalinvestigator, rapscallion, renfield, ripple, robber, roleretriever, seer, selfawarenessgirl, sentinel, squire, supervillains, switcheroo, temptress, thing, troublemaker, vampires, villageidiot, voodoolou, werewolves, witch } from './roles'
+import { hasAssassin, hasDoppelganger, hasApprenticeAssassin, hasMarks, hasSeer, hasApprenticeSeer, hasEasterEgg, hasEpicBattle, hasGoodGuys, hasBadGuys, hasMadScientist, hasDreamWolf } from './conditions'
 
 export const sceneHandler = async (gamestate, scene_title) => {
   logTrace(`sceneHandler in room [${gamestate.room_id}] called when actual scene is: ${scene_title}`)
-
   let newGamestate = { ...gamestate }
-
   const selected_cards = newGamestate.selected_cards
   const total_players = newGamestate.total_players
+
+  const handleEpicBattle = (gamestate, title, selected_cards, total_players) => {
+    const hasEasterEggFlag = hasEasterEgg(selected_cards, total_players)
+    const hasEpicBattleFlag = hasEpicBattle(selected_cards)
+    const hasGoodGuysFlag = hasGoodGuys(selected_cards)
+    const hasBadGuysFlag = hasBadGuys(selected_cards)
+
+    return epicbattle(gamestate, title, hasEasterEggFlag, hasEpicBattleFlag, total_players, hasGoodGuysFlag, hasBadGuysFlag)
+  }
 
   const roleHandlers = {
     ALIENS: (gamestate, title) => aliens(gamestate, title),
@@ -137,8 +56,7 @@ export const sceneHandler = async (gamestate, scene_title) => {
     DR_PEEKER: (gamestate, title) => drpeeker(gamestate, title),
     DRUNK: (gamestate, title) => drunk(gamestate, title),
     EMPATH: (gamestate, title) => empath(gamestate, title, 'empath'),
-    EPIC_BATTLE: (gamestate, title, selected_cards) =>
-      epicbattle(gamestate, title, hasEasterEgg(selected_cards, total_players), hasEpicBattle(selected_cards), total_players, hasGoodGuys(selected_cards), hasBadGuys(selected_cards)),
+    EPIC_BATTLE: (gamestate, title, selected_cards) => handleEpicBattle(gamestate, title, selected_cards, total_players),
     EVERYONE_MARK: (gamestate, title) => everyonemark(gamestate, title),
     EVILOMETER: (gamestate, title, selected_cards) => evilometer(gamestate, title, hasDoppelganger(selected_cards)),
     EXPOSER: (gamestate, title) => exposer(gamestate, title, 'exposer'),

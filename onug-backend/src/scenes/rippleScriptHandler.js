@@ -364,7 +364,9 @@ export const rippleScriptHandler = gamestate => {
 
   gamestate.scripts = role_scenes.sort((a, b) => a.scene_number - b.scene_number)
 
-  addScript('JOKE')
+  if (Math.random() < 0.5) { // 50% chance to add the "JOKE" script
+    addScript('JOKE')
+  }
 
   return gamestate
 }

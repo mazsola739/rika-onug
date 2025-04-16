@@ -1,6 +1,6 @@
 import { ALIEN_IDS, ALL_COPY_PLAYER, SUPER_VILLAIN_IDS, VAMPIRE_IDS, WEREVOLVES_WITHOUT_DREAMWOLF, COPY_PLAYER, GROOB_AND_ZERB, MASONS } from '../constants'
 
-const isEveryOne = true
+const isEveryOne = true //TODO better solution?
 //TODO eyes open
 const isWitness = card => card.eyes_open
 
