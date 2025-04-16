@@ -54,13 +54,6 @@ export const useGame = () => {
       propStore.setSunrise(lastJsonMessage.day_mode)
     }
 
-    if (lastJsonMessage?.type === VAMPIRES && lastJsonMessage?.success) {
-      propStore.setVampireVotes(lastJsonMessage.vampire_votes)
-    }
-    if (lastJsonMessage?.type === ALIENS && lastJsonMessage?.success) {
-      propStore.setAlienVotes(lastJsonMessage.alien_votes)
-    }
-
     if (lastJsonMessage?.type === REDIRECT) {
       navigate(lastJsonMessage.path)
     }

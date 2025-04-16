@@ -1,53 +1,7 @@
 import WebSocket from 'ws'
-
-import {
-  ALIENS,
-  ARRIVE_COUNCIL,
-  ARRIVE_GAME,
-  ARRIVE_ROOM,
-  ARRIVE_TABLE,
-  ARRIVE_VERDICT,
-  DEAL,
-  JOIN_ROOM,
-  LEAVE_GAME,
-  LEAVE_ROOM,
-  NEWBIE,
-  READY,
-  RELOAD,
-  RESET,
-  SCENE,
-  START_GAME,
-  START_VOTE,
-  STOP_GAME,
-  UPDATE_GUESS,
-  UPDATE_ROOM,
-  VAMPIRES,
-  VOTE
-} from '../constants'
+import { ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, READY, RELOAD, RESET, SCENE, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VOTE } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
-import { aliensVotehydrate, vampiresVotehydrate } from '../scenes/roles'
-import {
-  dealCards,
-  hydrateCouncil,
-  hydrateGame,
-  hydrateGuess,
-  hydrateReady,
-  hydrateRoom,
-  hydrateTable,
-  joinRoom,
-  leaveGame,
-  leaveRoom,
-  newbie,
-  reload,
-  reset,
-  result,
-  scene,
-  startGame,
-  startVote,
-  stopGame,
-  updateRoom,
-  verdict
-} from './handlers'
+import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, hydrateReady, hydrateRoom, hydrateTable, joinRoom, leaveGame, leaveRoom, newbie, reload, reset, result, scene, startGame, startVote, stopGame, updateRoom, verdict } from './handlers'
 
 export const websocketServer = port => {
   try {
@@ -99,10 +53,6 @@ export const websocketServer = port => {
             return hydrateTable(ws, message)
           case START_GAME:
             return startGame(ws, message)
-          case ALIENS:
-            return aliensVotehydrate(message)
-          case VAMPIRES:
-            return vampiresVotehydrate(message)
           case ARRIVE_GAME:
             return hydrateGame(ws, message)
           case STOP_GAME:

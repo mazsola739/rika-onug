@@ -1131,7 +1131,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "vote": true
   },
   {
     "scene_title": "DOPPELGANGER_EMPATH",
@@ -1145,7 +1145,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "vote": true
   },
   {
     "scene_title": "CURATOR",

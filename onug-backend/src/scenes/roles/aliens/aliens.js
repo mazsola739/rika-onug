@@ -4,6 +4,8 @@ import { alienAllKeys, alienAnyKeys, randomAlienInstructions } from './aliens.co
 import { aliensAction } from './aliens.action'
 import { hasCow } from '../../conditions'
 
+//TODO fix alien pick together player
+
 export const aliens = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['aliens_kickoff_text']

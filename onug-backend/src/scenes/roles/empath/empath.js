@@ -3,6 +3,8 @@ import { createAndSendSceneMessage, empathVotersPlayerNumbers, getAllPlayerToken
 import { empathAction } from './empath.action'
 import { empathKeys, randomEmpathInstructions } from './empath.constants'
 
+//TODO fix non-empaths voting
+
 export const empath = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const totalPlayers = gamestate.total_players

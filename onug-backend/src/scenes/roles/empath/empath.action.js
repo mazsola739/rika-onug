@@ -1,7 +1,8 @@
 import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
 
 export const empathAction = (gamestate, token, title, prefix) => {
-  console.log(prefix)
+  console.log(prefix) //TODO remove this line and fix?
+  
   const allPlayerTokens = getAllPlayerTokens(gamestate.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
 

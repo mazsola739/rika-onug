@@ -52,14 +52,13 @@ export const vampiresAction = (gamestate, token, title) => {
       selectable_marks: nonVampires,
       selectable_mark_limit: { mark: 1 },
       vampires,
-      vote: false,
       obligatory: true
     }
 
     return generateRoleAction(gamestate, token, {
       private_message: ['action_must_one_any_non_vampire'],
       selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
-      uniqueInformation: { vote: false, vampires },
+      uniqueInformation: { vampires },
       obligatory: true
     })
   }
@@ -69,16 +68,17 @@ export const vampiresAction = (gamestate, token, title) => {
     selectable_marks: nonVampires,
     selectable_mark_limit: { mark: 1 },
     vampires,
-    vote: true,
-    obligatory: true
+    obligatory: false, //todo change to true if fixed
+    scene_end: true //todo delete if fixed
   }
 
-  privateMessage.push('action_must_one_any_non_vampire')
+  privateMessage.push('FYI_TBD', 'action_must_one_any_non_vampire')
 
   return generateRoleAction(gamestate, token, {
     private_message: privateMessage,
     selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
-    uniqueInformation: { vote: true, vampires },
-    obligatory: true
+    uniqueInformation: { vampires },
+    obligatory: false, //todo change to true if fixed
+    scene_end: true //todo delete if fixed
   })
 }

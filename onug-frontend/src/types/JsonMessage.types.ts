@@ -100,24 +100,8 @@ export type ResultType = {
 
 export type SendJsonMessageType<T> = (jsonMessage: T, keep?: boolean) => void
 
-export type VoteType = {
-  player_1?: CardPositionType[]
-  player_2?: CardPositionType[]
-  player_3?: CardPositionType[]
-  player_4?: CardPositionType[]
-  player_5?: CardPositionType[]
-  player_6?: CardPositionType[]
-  player_7?: CardPositionType[]
-  player_8?: CardPositionType[]
-  player_9?: CardPositionType[]
-  player_10?: CardPositionType[]
-  player_11?: CardPositionType[]
-  player_12?: CardPositionType[]
-}
-
 export type WsJsonMessageType = {
   actual_scene?: ActualSceneType
-  alien_votes?: VoteType
   artifacted_cards?: CardPositionType[]
   center_cards?: CenterCardType[]
   day_mode?: boolean
@@ -150,7 +134,6 @@ export type WsJsonMessageType = {
   token?: string
   type?: string
   update?: boolean
-  vampire_votes?: VoteType
   vote_result?: ResultType[]
   winner_teams?: string[]
 }

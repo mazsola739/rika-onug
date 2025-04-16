@@ -1,7 +1,8 @@
 import { ERROR } from '../constants'
 import { logError } from '../log'
 
-//TODO
+//TODO update all related code for this
+
 export const sendResponse = (ws, type, success, additionalData = {}) => {
   ws.send(JSON.stringify({ type, success, ...additionalData }))
 }

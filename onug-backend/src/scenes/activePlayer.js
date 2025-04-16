@@ -117,7 +117,7 @@ export const isActivePlayer = card => {
   }
 }
 
-//TODO DO I NEED
+/* TODO DO I NEED
 export const thisPlayerActive = player => {
   return {
     PLAYER_1: player.player_number === 'player_1',
@@ -133,4 +133,4 @@ export const thisPlayerActive = player => {
     PLAYER_11: player.player_number === 'player_11',
     PLAYER_12: player.player_number === 'player_12'
   }
-}
+} */

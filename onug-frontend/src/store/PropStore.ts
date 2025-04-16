@@ -1,12 +1,9 @@
 import { makeAutoObservable } from 'mobx'
-import { InteractionType, ResultType, VoteType } from 'types'
+import { InteractionType, ResultType } from 'types'
 
 class PropStore {
   title: string
   action: InteractionType
-
-  vampireVotes: VoteType = {}
-  alienVotes: VoteType = {}
 
   nightfall: boolean
   sunrise: boolean
@@ -118,13 +115,6 @@ class PropStore {
     this.title = title
   }
 
-  setVampireVotes(vampireVotes: VoteType): void {
-    this.vampireVotes = vampireVotes
-  }
-  setAlienVotes(alienVotes: VoteType): void {
-    this.alienVotes = alienVotes
-  }
-
   setNightfall(nightfall: boolean): void {
     this.nightfall = nightfall
     this.sunrise = !nightfall
@@ -178,13 +168,9 @@ class PropStore {
       seers: [],
       lovers: [],
       part_of_family: [],
-      vote: false,
       werewolves: [],
       witness: []
     }
-
-    this.vampireVotes = {}
-    this.alienVotes = {}
 
     this.voteResult = []
     this.winnerTeams = []

@@ -2,6 +2,8 @@ export * from './buttons'
 export * from './narrations/identifier'
 export * from './role'
 
+export const FYI_TBD='FYI: TBD!!! ' 
+
 //TODO better messages
 //messages
 export const message_tapped = 'You got tapped by your neighbor'
