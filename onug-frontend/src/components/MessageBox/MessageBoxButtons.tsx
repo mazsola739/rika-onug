@@ -1,9 +1,10 @@
+import { observer } from 'mobx-react-lite'
 import { Button, ButtonGroup } from 'components'
 import { button_label_skip, button_label_vote, button_label_done, button_label_finish } from 'constant'
 import { useClickHandler } from 'hooks'
 import { propStore, selectionStore } from 'store'
 
-export const SelectableCardsButtons: React.ComponentType = () => {
+export const SelectableCardsButtons: React.ComponentType = observer(() => {
   const { handleSkip, handleVote, handleCardInteraction } = useClickHandler()
   const { obligatory, title, isVote } = propStore
   const { selectedCards } = selectionStore
@@ -18,9 +19,9 @@ export const SelectableCardsButtons: React.ComponentType = () => {
       )}
     </ButtonGroup>
   )
-}
+})
 
-export const SelectableMarksButtons: React.ComponentType = () => {
+export const SelectableMarksButtons: React.ComponentType = observer(() => {
   const { handleSkip, handleVote, handleMarkInteraction } = useClickHandler()
   const { obligatory, title, isVote } = propStore
   const { selectedMarks } = selectionStore
@@ -35,9 +36,9 @@ export const SelectableMarksButtons: React.ComponentType = () => {
       )}
     </ButtonGroup>
   )
-}
+})
 
-export const AnswerButtons: React.ComponentType = () => {
+export const AnswerButtons: React.ComponentType = observer(() => {
   const { handleSkip, handleAnswerInteraction } = useClickHandler()
   const { obligatory, title } = propStore
   const { selectedAnswer } = selectionStore
@@ -48,9 +49,9 @@ export const AnswerButtons: React.ComponentType = () => {
       <Button onClick={() => handleAnswerInteraction(selectedAnswer, title)} disabled={selectedAnswer.length === 0} buttonText={button_label_done} variant="green" />
     </ButtonGroup>
   )
-}
+})
 
-export const SceneEndButtons: React.ComponentType = () => {
+export const SceneEndButtons: React.ComponentType = observer(() => {
   const { handleFinish } = useClickHandler()
   const { title } = propStore
 
@@ -59,4 +60,4 @@ export const SceneEndButtons: React.ComponentType = () => {
       <Button onClick={() => handleFinish(title)} buttonText={button_label_finish} variant="purple" />
     </ButtonGroup>
   )
-}
+})
