@@ -32,7 +32,7 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
     const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])
 
     action = generateRoleAction(gamestate, token, {
-      private_message: ['action_swapped_cards', ...messageIdentifiers]
+      private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT']
     })
   } else if (oracleQuestion === 'oracle_viewcenter_text') {
     const limit = gamestate.players[token].player_history[title].selectable_card_limit.center

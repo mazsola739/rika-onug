@@ -18,7 +18,7 @@ export const internAction = (gamestate, token, title) => {
   const messageIdentifiers = formatPlayerIdentifier(madscientist)
 
   return generateRoleAction(gamestate, token, {
-    private_message: [madscientist.length === 0 ? 'action_mad_now' : 'action_mad', ...messageIdentifiers],
+    private_message: [madscientist.length === 0 ? 'action_mad_now' : 'action_mad', ...messageIdentifiers, 'POINT'],
     uniqueInformation: { madscientist },
     scene_end: true
   })

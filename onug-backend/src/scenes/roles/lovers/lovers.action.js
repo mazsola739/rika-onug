@@ -12,7 +12,7 @@ export const loversAction = (gamestate, token, title) => {
   const messageIdentifiers = formatPlayerIdentifier(lovers)
 
   return generateRoleAction(gamestate, token, {
-    private_message: ['action_mark_of_lover', ...messageIdentifiers],
+    private_message: ['action_mark_of_lover', ...messageIdentifiers, 'POINT'],
     uniqueInformation: { lovers },
     scene_end: true
   })

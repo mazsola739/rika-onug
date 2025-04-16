@@ -84,7 +84,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     const messageIdentifiers = formatPlayerIdentifier([`${gamestate.players[token].player_history[title].selected_center_card}`, selected_card_positions[0]])
 
     const action = generateRoleAction(gamestate, token, {
-      private_message: ['action_swapped_cards', ...messageIdentifiers],
+      private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
       scene_end: true
     })
 

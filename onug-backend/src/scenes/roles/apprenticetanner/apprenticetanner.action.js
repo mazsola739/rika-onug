@@ -4,7 +4,7 @@ export const apprenticetannerAction = (gamestate, token, title) => {
   let tanner = getPlayerNumbersByGivenConditions(gamestate.players, 'tanner')
 
   const messageIdentifiers = formatPlayerIdentifier(tanner)
-  let privateMessage = ['action_tanner', ...messageIdentifiers]
+  let privateMessage = ['action_tanner', ...messageIdentifiers, 'POINT']
 
   if (tanner.length > 0) {
     gamestate.players[token].card.player_team = 'apprenticetanner'

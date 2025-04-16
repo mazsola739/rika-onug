@@ -15,7 +15,7 @@ export const apprenticeassassinAction = (gamestate, token, title) => {
     const messageIdentifiers = formatPlayerIdentifier(assassins)
 
     return generateRoleAction(gamestate, token, {
-      private_message: ['action_assassin', ...messageIdentifiers],
+      private_message: ['action_assassin', ...messageIdentifiers, 'POINT'],
       uniqueInformation: { assassins },
       obligatory: true,
       scene_end: true

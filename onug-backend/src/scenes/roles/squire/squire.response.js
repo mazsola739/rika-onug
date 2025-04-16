@@ -27,7 +27,7 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     const messageIdentifiers = formatPlayerIdentifier(werewolves)
 
     action = generateRoleAction(gamestate, token, {
-      private_message: ['action_saw_card', ...messageIdentifiers],
+      private_message: ['action_saw_card', ...messageIdentifiers, 'POINT'],
       showCards: viewCards,
       uniqueInformation: { werewolves }
     })

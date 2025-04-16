@@ -30,7 +30,7 @@ export const aliensAction = (gamestate, token, title) => {
 
   // Format identifiers for private messages
   const messageIdentifiers = formatPlayerIdentifier(aliens)
-  let privateMessage = isSingleAlien ? ['action_no_aliens'] : ['action_aliens', ...messageIdentifiers]
+  let privateMessage = isSingleAlien ? ['action_no_aliens'] : ['action_aliens', ...messageIdentifiers, 'POINT']
 
   // Handle alien key logic for determining selectable players
   if (alienKey.length > 0 && alienKey[0].includes('identifier_player')) {

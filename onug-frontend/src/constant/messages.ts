@@ -3,6 +3,7 @@ export * from './narrations/identifier'
 export * from './role'
 
 export const FYI_TBD='FYI: TBD!!! ' 
+export const POINT='. ' 
 
 //TODO better messages
 //messages

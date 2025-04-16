@@ -83,7 +83,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
         const messageIdentifiers = formatPlayerIdentifier([position1, position2])
 
         action = generateRoleAction(gamestate, token, {
-          private_message: ['action_swapped_cards', ...messageIdentifiers],
+          private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
           scene_end: true
         })
 
@@ -145,7 +145,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
           const messageIdentifiers = formatPlayerIdentifier([`${gamestate.players[token].player_history[title].selected_card}`, selected_card_positions[0]])
 
           action = generateRoleAction(gamestate, token, {
-            private_message: ['action_swapped_cards', ...messageIdentifiers],
+            private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
             obligatory: gamestate.players[token].player_history[title].random === 'witch',
             scene_end: true
           })

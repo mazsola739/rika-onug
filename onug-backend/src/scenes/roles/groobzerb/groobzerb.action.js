@@ -18,7 +18,7 @@ export const groobzerbAction = (gamestate, token, title) => {
       const messageIdentifiers = formatPlayerIdentifier(zerbPlayers)
 
       return generateRoleAction(gamestate, token, {
-        private_message: ['action_zerb', ...messageIdentifiers],
+        private_message: ['action_zerb', ...messageIdentifiers, 'POINT'],
         uniqueInformation: { groobzerb: zerbPlayers },
         scene_end: true
       })
@@ -43,7 +43,7 @@ export const groobzerbAction = (gamestate, token, title) => {
       const messageIdentifiers = formatPlayerIdentifier(groobPlayers)
 
       return generateRoleAction(gamestate, token, {
-        private_message: ['action_groob', ...messageIdentifiers],
+        private_message: ['action_groob', ...messageIdentifiers, 'POINT'],
         uniqueInformation: { groobzerb: groobPlayers },
         scene_end: true
       })

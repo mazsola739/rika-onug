@@ -95,7 +95,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
     const messageIdentifiers = formatPlayerIdentifier([position1, position2])
 
     const action = generateRoleAction(gamestate, token, {
-      private_message: ['action_swapped_cards', ...messageIdentifiers],
+      private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
       scene_end: true
     })
 
@@ -131,7 +131,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
     const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
 
     const action = generateRoleAction(gamestate, token, {
-      private_message: ['action_swapped_marks', ...messageIdentifiers],
+      private_message: ['action_swapped_marks', ...messageIdentifiers, 'POINT'],
       scene_end: true
     })
 

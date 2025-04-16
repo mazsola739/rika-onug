@@ -29,7 +29,7 @@ export const renfieldAction = (gamestate, token, title) => {
   }
 
   const messageIdentifiers = formatPlayerIdentifier(vampires)
-  const privateMessage = vampires.length > 0 ? ['action_vampires', ...messageIdentifiers] : ['action_no_vampires']
+  const privateMessage = vampires.length > 0 ? ['action_vampires', ...messageIdentifiers, 'POINT'] : ['action_no_vampires']
   ;('')
   return generateRoleAction(gamestate, token, {
     private_message: [...privateMessage, 'action_mark_of_bat'],
