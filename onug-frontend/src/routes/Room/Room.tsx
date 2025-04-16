@@ -8,7 +8,7 @@ import { RoomInfoPanel } from './RoomInfoPanel'
 import { useRoom } from './useRoom'
 
 //TODO searchbar?
-export const Room: React.FC = observer(() => {
+export const Room: React.ComponentType = observer(() => {
   const { orderedTeams, anchorList } = useRoom()
 
   return (

@@ -4,7 +4,7 @@ import { deckStore, riseAndRestStore } from 'store'
 import { TableCenterCard } from 'types'
 import { CardGroup, Cards, StyledCenterCards } from './CenterCards.styles'
 
-export const CenterCards: React.FC = observer(() => {
+export const CenterCards: React.ComponentType = observer(() => {
   const { hasAlphawolf, hasTemptress } = deckStore
   const { tableCenterCards } = riseAndRestStore
 

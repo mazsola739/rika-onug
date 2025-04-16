@@ -4,7 +4,7 @@ import { CardContainer, GuessTokens, StyledPlayerCard, Tokens, PlayerName, CardH
 import { PlayerCardProps } from './PlayerCard.types'
 import { usePlayerCard } from './usePlayerCard'
 
-export const PlayerCard: React.FC<PlayerCardProps> = observer(({ card, cardSize = 80, tokenSize = 30, ownCard = false }) => {
+export const PlayerCard: React.ComponentType<PlayerCardProps> = observer(({ card, cardSize = 80, tokenSize = 30, ownCard = false }) => {
   const { playerNumberToken, playerName, isCenterCard, cardProps, markProps, playerNumberProps, isShielded, isArtifacted, guessTokens, hasMarks, hasSentinel, hasCurator } = usePlayerCard(
     card,
     ownCard

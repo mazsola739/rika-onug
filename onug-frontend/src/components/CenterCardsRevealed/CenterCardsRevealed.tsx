@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { riseAndRestStore } from 'store'
 import { CardPosition, CenterCard, StyledCenterCardsRevealed } from './CenterCardsRevealed.styles'
 
-export const CenterCardsRevealed: React.FC = observer(() => {
+export const CenterCardsRevealed: React.ComponentType = observer(() => {
   const { tableCenterCards } = riseAndRestStore
 
   return (

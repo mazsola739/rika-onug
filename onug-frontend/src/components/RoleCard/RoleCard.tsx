@@ -5,7 +5,7 @@ import { deckStore } from 'store'
 import { RoleCardName, RoleImage, StyledRoleCard, WakeUp } from './RoleCard.styles'
 import { RoleCardProps } from './RoleCard.types'
 
-export const RoleCard: React.FC<RoleCardProps> = observer(({ card }) => {
+export const RoleCard: React.ComponentType<RoleCardProps> = observer(({ card }) => {
   const { id, card_name, display_name, wake_up_time } = card
   const { handleSelectAndDeselect } = useClickHandler()
 

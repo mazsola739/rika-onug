@@ -6,7 +6,7 @@ import { MessageBoxProps, MessagePlayersProps } from './MessageBox.types'
 import { Button, CardImage, Title, TokenImage } from 'components'
 
 
-const MessageBoxCards: React.FC<MessageBoxProps> = observer(({ cards }) => {
+const MessageBoxCards: React.ComponentType<MessageBoxProps> = observer(({ cards }) => {
   const onCardClick = (position: string) => selectionStore.toggleCardSelection(position)
 
   return (
@@ -21,7 +21,7 @@ const MessageBoxCards: React.FC<MessageBoxProps> = observer(({ cards }) => {
   )
 })
 
-const MessageBoxMarks: React.FC<MessageBoxProps> = observer(({ marks }) => {
+const MessageBoxMarks: React.ComponentType<MessageBoxProps> = observer(({ marks }) => {
   const onMarkClick = (position: string) => selectionStore.toggleMarkSelection(position)
 
   return (
@@ -36,7 +36,7 @@ const MessageBoxMarks: React.FC<MessageBoxProps> = observer(({ marks }) => {
   )
 })
 
-const MessageBoxPlayers: React.FC<MessagePlayersProps> = observer(({ players }) => {
+const MessageBoxPlayers: React.ComponentType<MessagePlayersProps> = observer(({ players }) => {
   return (
     <StyledMessageBoxCards>
       {players.map((player, index) => (
@@ -49,7 +49,7 @@ const MessageBoxPlayers: React.FC<MessagePlayersProps> = observer(({ players }) 
   )
 })
 
-export const MessageBoxAnswer: React.FC = observer(() => {
+export const MessageBoxAnswer: React.ComponentType = observer(() => {
   const { answer_options } = propStore
   const onAnswerClick = (answer: string) => selectionStore.toggleAnswerSelection(answer)
 
@@ -63,7 +63,7 @@ export const MessageBoxAnswer: React.FC = observer(() => {
   )
 })
 
-export const MessageBoxLook: React.FC = observer(() => {
+export const MessageBoxLook: React.ComponentType = observer(() => {
   const { identifiedPlayers } = messageStore
 
   return (
@@ -74,7 +74,7 @@ export const MessageBoxLook: React.FC = observer(() => {
   )
 })
 
-export const MessageBoxSelectableCards: React.FC = observer(() => {
+export const MessageBoxSelectableCards: React.ComponentType = observer(() => {
   const { allSelectableCards, allSelectedCards } = messageStore
 
   return (
@@ -87,7 +87,7 @@ export const MessageBoxSelectableCards: React.FC = observer(() => {
   )
 })
 
-export const MessageBoxSelectableMarks: React.FC = observer(() => {
+export const MessageBoxSelectableMarks: React.ComponentType = observer(() => {
   const { allSelectableMarks, allSelectedMarks } = messageStore
 
   return (
@@ -100,7 +100,7 @@ export const MessageBoxSelectableMarks: React.FC = observer(() => {
   )
 })
 
-export const MessageBoxVoteResult: React.FC = observer(() => {
+export const MessageBoxVoteResult: React.ComponentType = observer(() => {
   const { vampireVotes, alienVotes } = propStore
   const votes = alienVotes || vampireVotes
 

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { selectionStore } from 'store'
 import { AccusedPlayer, StyledAccusedPlayers } from './SuspicionPlayers.styles'
 
-export const AccusedPlayers: React.FC = observer(() => {
+export const AccusedPlayers: React.ComponentType = observer(() => {
   const onCardClick = (position: string) => {
     selectionStore.toggleCardSelection(position)
   }

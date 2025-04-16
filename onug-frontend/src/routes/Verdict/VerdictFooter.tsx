@@ -3,7 +3,7 @@ import { button_label_back } from 'constant'
 import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 
-export const VerdictFooter: React.FC = observer(() => {
+export const VerdictFooter: React.ComponentType = observer(() => {
   const { handleLeaveGame } = useClickHandler()
 
   return (

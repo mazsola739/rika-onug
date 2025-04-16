@@ -5,7 +5,7 @@ import { playersStore, propStore } from 'store'
 import { ResultType } from 'types'
 import { Cell, CellHeader, Icon, Name, PlayerName, Rank, Row, StyledResultTable, VoterName, VotersCell } from './ResultTable.styles'
 
-export const ResultTable: React.FC = observer(() => {
+export const ResultTable: React.ComponentType = observer(() => {
   const { player } = playersStore
   const sortedVotes = [...propStore.voteResult].sort((a, b) => b.voters.length - a.voters.length)
   const groupedVotes: { votes: number; players: ResultType[] }[] = []

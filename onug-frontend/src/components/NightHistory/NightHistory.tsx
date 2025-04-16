@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { voteStore } from 'store'
 import { StyledNightHistory, Narration, NarrationImage, NarrationText } from './NightHistory.styles'
 
-export const NightHistory: React.FC = observer(() => {
+export const NightHistory: React.ComponentType = observer(() => {
   return (
     <StyledNightHistory>
       {voteStore.narrations &&

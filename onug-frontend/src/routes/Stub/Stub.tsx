@@ -3,7 +3,7 @@ import { labels, role_map } from './Stub.constants'
 import { Button, ButtonsWrapper, Container, FormContainer, Grid, InputField, InputsWrapper, Label, PreDisplay, RoleDisplay, StubContainer, StubTitle } from './Stub.styles'
 import { useStub } from './useStub'
 
-export const Stub: React.FC = observer(() => {
+export const Stub: React.ComponentType = observer(() => {
   const { inputValues, response, handleInputChange, populateStub, resetStub, useTestCase1, useTestCase2, useTestCase3, useTestCase4, useTestCase5 } = useStub()
   const getRoleName = (value: number) => role_map[value] || 'Unknown'
 

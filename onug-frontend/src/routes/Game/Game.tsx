@@ -7,7 +7,7 @@ import { GameInfoPanel } from './GameInfoPanel'
 import { useGame } from './useGame'
 import { propStore } from 'store'
 
-export const Game: React.FC = observer(() => {
+export const Game: React.ComponentType = observer(() => {
   const { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard, setTransitionCompleted } = useGame()
 
   return (

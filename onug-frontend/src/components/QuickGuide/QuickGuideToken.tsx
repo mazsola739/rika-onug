@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite'
 
 const SUPERHERO_IMAGES = ['annoying_lad', 'detector', 'evilometer', 'flipper', 'mirror_man', 'role_retriever', 'switcheroo', 'voodoo_lou', 'self_awareness_girl']
 
-export const QuickGuideToken: React.FC<QuickGuideTokenProps> = observer(({ image, expansion }) => {
+export const QuickGuideToken: React.ComponentType<QuickGuideTokenProps> = observer(({ image, expansion }) => {
   const segments = ['_of_', 'artifact', 'shield']
   const folder = segments.some(segment => image.includes(segment)) ? 'tokens' : 'cards'
 

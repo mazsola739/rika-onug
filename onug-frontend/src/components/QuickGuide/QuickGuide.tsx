@@ -7,7 +7,7 @@ import { QuickGuideToken } from './QuickGuideToken'
 import { Title } from 'components'
 
 //TODO better quick guide text!!!!
-export const QuickGuide: React.FC = observer(() => {
+export const QuickGuide: React.ComponentType = observer(() => {
   const { selectedCards, selectedMarks, artifacts } = deckStore
 
   const uniqueSelectedCards = getUniqueGuide(selectedCards, card => card.display_name)

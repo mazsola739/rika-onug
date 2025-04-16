@@ -1,7 +1,7 @@
 import { Header, Title } from 'components'
 import { observer } from 'mobx-react-lite'
 
-export const RoomHeader: React.FC = observer(() => {
+export const RoomHeader: React.ComponentType = observer(() => {
   const room_id = sessionStorage.getItem('room_id')
 
   return (

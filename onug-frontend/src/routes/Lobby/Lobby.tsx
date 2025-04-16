@@ -4,7 +4,7 @@ import { StyledLobby } from './Lobby.styles'
 import { LobbyButton } from './LobbyButton'
 import { useLobby } from './useLobby'
 
-export const Lobby: React.FC = observer(() => {
+export const Lobby: React.ComponentType = observer(() => {
   const { lobbyStore } = useLobby()
   const { handleJoinRoom } = useClickHandler()
 

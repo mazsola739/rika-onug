@@ -2,7 +2,7 @@ import { CenterCardsRevealed, InfoPanel, OwnCard, PlayerInfoList, Title } from '
 import { observer } from 'mobx-react-lite'
 import { playersStore } from 'store'
 
-export const VerdictInfoPanel: React.FC = observer(() => {
+export const VerdictInfoPanel: React.ComponentType = observer(() => {
   const { player, knownPlayerCard, knownPlayerMark, knownPlayerArtifact } = playersStore
 
   return (

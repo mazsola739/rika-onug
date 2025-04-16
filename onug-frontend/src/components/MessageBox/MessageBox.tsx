@@ -5,7 +5,7 @@ import { StyledMessageBox, Message, MessageText } from './MessageBox.styles'
 import { MessageBoxLook, MessageBoxSelectableCards, MessageBoxSelectableMarks, MessageBoxAnswer, MessageBoxVoteResult } from './MessageBoxComponents'
 import { SelectableCardsButtons, SelectableMarksButtons, AnswerButtons, SceneEndButtons } from './MessageBoxButtons'
 
-export const MessageBox: React.FC = observer(() => {
+export const MessageBox: React.ComponentType = observer(() => {
   const { narrationImage, narration, privateMessage, isSelectableCards, isSelectableMarks, isPlayerIdentification, isAnswerOptions, isVoteResult } = messageStore
   const { scene_end } = propStore
 

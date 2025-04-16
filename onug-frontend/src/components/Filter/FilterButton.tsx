@@ -5,7 +5,7 @@ import React, { useCallback } from 'react'
 import { deckStore, wsStore } from 'store'
 import { FilterButtonProps } from './Filter.types'
 
-export const FilterButton: React.FC<FilterButtonProps> = observer(({ expansion }) => {
+export const FilterButton: React.ComponentType<FilterButtonProps> = observer(({ expansion }) => {
   const { sendJsonMessage } = wsStore.getWsCommunicationsBridge()
   const room_id = sessionStorage.getItem('room_id')
   const token = sessionStorage.getItem('token')

@@ -5,7 +5,7 @@ import { FilterButton } from './FilterButton'
 import { Expansion } from 'types'
 import { Title } from 'components'
 
-export const Filter: React.FC = observer(() => {
+export const Filter: React.ComponentType = observer(() => {
   const expansionNames = Object.values(EXPANSIONS)
 
   return (

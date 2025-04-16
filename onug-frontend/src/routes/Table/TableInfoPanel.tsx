@@ -2,7 +2,7 @@ import { InfoPanel, OwnCard, QuickGuide, ReadyStatus } from 'components'
 import { observer } from 'mobx-react-lite'
 import { playersStore } from 'store'
 
-export const TableInfoPanel: React.FC = observer(() => {
+export const TableInfoPanel: React.ComponentType = observer(() => {
   const { player, knownPlayerCard, knownPlayerMark } = playersStore
 
   return (

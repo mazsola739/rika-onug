@@ -4,7 +4,7 @@ import { RoleCard } from '../RoleCard/RoleCard'
 import { RoleCardListGrid, RoleCardListTitle, StyledRoleCardList } from './RoleCardList.styles'
 import { RoleCardListProps } from './RoleCardList.types'
 
-export const RoleCardList: React.FC<RoleCardListProps> = observer(({ team, cards }) => {
+export const RoleCardList: React.ComponentType<RoleCardListProps> = observer(({ team, cards }) => {
   const { getTeamMembers, getTeamName } = roomStore
 
   const teamMembers = getTeamMembers(cards)

@@ -4,7 +4,7 @@ import { PlayerInfoName, PlayerInfoRole, PlayerInfoTeam, StyledPlayerInfo } from
 import { PlayerInfoProps } from './PlayerInfo.types'
 import { propStore } from 'store'
 
-export const PlayerInfo: React.FC<PlayerInfoProps> = observer(({ card_name, mark, artifact, player }) => {
+export const PlayerInfo: React.ComponentType<PlayerInfoProps> = observer(({ card_name, mark, artifact, player }) => {
   const playerNumber = player?.player_number?.replace(/^player_/, '')
   const result = propStore.voteResult.find(p => p.player_number === player.player_number)?.win
   return (

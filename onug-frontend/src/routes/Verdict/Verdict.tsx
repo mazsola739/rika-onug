@@ -6,7 +6,7 @@ import { VerdictHeader } from './VerdictHeader'
 import { VerdictInfoPanel } from './VerdictInfoPanel'
 import { useVerdict } from './useVerdict'
 
-export const Verdict: React.FC = observer(() => {
+export const Verdict: React.ComponentType = observer(() => {
   useVerdict()
 
   return (

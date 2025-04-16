@@ -4,7 +4,7 @@ import { voteStore } from 'store'
 import { getArtifactById, getCardById } from 'utils'
 import { StyledPlayerInfoList } from './PlayerInfoList.styles'
 
-export const PlayerInfoList: React.FC = observer(() => {
+export const PlayerInfoList: React.ComponentType = observer(() => {
   const players = voteStore.resultPlayers
 
   return (

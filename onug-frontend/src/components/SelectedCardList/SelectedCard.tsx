@@ -3,7 +3,7 @@ import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { SelectedCardProps } from './SelectedCard.types'
 
-export const SelectedCard: React.FC<SelectedCardProps> = observer(({ card, key }) => {
+export const SelectedCard: React.ComponentType<SelectedCardProps> = observer(({ card, key }) => {
   const { id } = card
   const { handleSelectAndDeselect } = useClickHandler()
 

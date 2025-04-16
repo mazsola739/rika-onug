@@ -4,7 +4,7 @@ import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { deckStore, roomStore } from 'store'
 
-export const RoomFooter: React.FC = observer(() => {
+export const RoomFooter: React.ComponentType = observer(() => {
   const { handleResetGame, handleLeaveRoom, handleJoinTable } = useClickHandler()
 
   const totalPlayers = deckStore.totalPlayers

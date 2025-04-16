@@ -3,7 +3,7 @@ import { button_label_skip, button_label_vote, button_label_done, button_label_f
 import { useClickHandler } from 'hooks'
 import { propStore, selectionStore } from 'store'
 
-export const SelectableCardsButtons: React.FC = () => {
+export const SelectableCardsButtons: React.ComponentType = () => {
   const { handleSkip, handleVote, handleCardInteraction } = useClickHandler()
   const { obligatory, title, isVote } = propStore
   const { selectedCards } = selectionStore
@@ -20,7 +20,7 @@ export const SelectableCardsButtons: React.FC = () => {
   )
 }
 
-export const SelectableMarksButtons: React.FC = () => {
+export const SelectableMarksButtons: React.ComponentType = () => {
   const { handleSkip, handleVote, handleMarkInteraction } = useClickHandler()
   const { obligatory, title, isVote } = propStore
   const { selectedMarks } = selectionStore
@@ -37,7 +37,7 @@ export const SelectableMarksButtons: React.FC = () => {
   )
 }
 
-export const AnswerButtons: React.FC = () => {
+export const AnswerButtons: React.ComponentType = () => {
   const { handleSkip, handleAnswerInteraction } = useClickHandler()
   const { obligatory, title } = propStore
   const { selectedAnswer } = selectionStore
@@ -50,7 +50,7 @@ export const AnswerButtons: React.FC = () => {
   )
 }
 
-export const SceneEndButtons: React.FC = () => {
+export const SceneEndButtons: React.ComponentType = () => {
   const { handleFinish } = useClickHandler()
   const { title } = propStore
 

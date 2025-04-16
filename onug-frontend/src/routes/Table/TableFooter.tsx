@@ -4,7 +4,7 @@ import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { playersStore } from 'store'
 
-export const TableFooter: React.FC = observer(() => {
+export const TableFooter: React.ComponentType = observer(() => {
   const { handleLeaveGame, handleStartGame, handleReady } = useClickHandler()
   const { players } = playersStore
 

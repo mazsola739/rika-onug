@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { CardRule, OwnCardInfoName, OwnCardInfoRole, OwnCardInfoTeam, StyledOwnCard, TokenContainer, TokenInfo, TokenRule } from './OwnCard.styles'
 import { OwnCardProps } from './OwnCard.types'
 
-export const OwnCard: React.FC<OwnCardProps> = observer(({ card, mark, player, artifact, title }) => {
+export const OwnCard: React.ComponentType<OwnCardProps> = observer(({ card, mark, player, artifact, title }) => {
   const playerNumber = player?.player_number?.replace(/^player_/, '')
 
   //TODO sort rule

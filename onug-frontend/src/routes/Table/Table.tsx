@@ -6,7 +6,7 @@ import { TableHeader } from './TableHeader'
 import { TableInfoPanel } from './TableInfoPanel'
 import { useTable } from './useTable'
 
-export const Table: React.FC = observer(() => {
+export const Table: React.ComponentType = observer(() => {
   const { tablePlayerCards, tablePlayerCard, left, middle, right } = useTable()
 
   return (

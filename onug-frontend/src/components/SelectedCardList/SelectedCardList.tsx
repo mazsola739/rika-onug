@@ -4,7 +4,7 @@ import { SelectedCard } from './SelectedCard'
 import { StyledSelectedCardList } from './SelectedCardList.styles'
 import { Title } from 'components/Title/Title'
 
-export const SelectedCardList: React.FC = observer(() => {
+export const SelectedCardList: React.ComponentType = observer(() => {
   const { selectedCards } = deckStore
 
   return (

@@ -10,7 +10,7 @@ const Icons: Record<IconType, React.ComponentType<React.SVGProps<SVGSVGElement>>
   uninstantiated: UninstantiatedIcon
 }
 
-export const Icon: React.FC<IconProps> = ({ iconName, size }) => {
+export const Icon: React.ComponentType<IconProps> = ({ iconName, size }) => {
   const IconComponent = Icons[iconName]
 
   return <StyledIcon as={IconComponent} size={size} />

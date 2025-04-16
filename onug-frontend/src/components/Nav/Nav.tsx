@@ -5,7 +5,7 @@ import { NavProps } from './Nav.types'
 import { NavButton } from './NavButton'
 import { Title } from 'components'
 
-export const Nav: React.FC<NavProps> = observer(({ anchorList }) => {
+export const Nav: React.ComponentType<NavProps> = observer(({ anchorList }) => {
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null)
 
   //TODO fix it, right now not refreshing the anchor isActive status

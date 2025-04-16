@@ -6,7 +6,7 @@ import { CouncilFooter } from './CouncilFooter'
 import { CouncilHeader } from './CouncilHeader'
 import { CouncilInfoPanel } from './CouncilInfoPanel'
 
-export const Council: React.FC = observer(() => {
+export const Council: React.ComponentType = observer(() => {
   const { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard } = useCouncil()
 
   return (

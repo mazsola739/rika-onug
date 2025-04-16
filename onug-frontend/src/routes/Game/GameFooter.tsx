@@ -4,7 +4,7 @@ import { useClickHandler } from 'hooks'
 import { observer } from 'mobx-react-lite'
 import { messageStore, propStore, selectionStore } from 'store'
 
-export const GameFooter: React.FC = observer(() => {
+export const GameFooter: React.ComponentType = observer(() => {
   const { handleStopGame, handleCardInteraction, handleMarkInteraction, handleFinish, handleSkip, handleAnswerInteraction, handleVote } = useClickHandler()
   const { disabledCards, disabledMarks, isSelectableCards, isSelectableMarks, isAnswerOptions } = messageStore
   const { obligatory, scene_end, title, isVote } = propStore

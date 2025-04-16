@@ -6,7 +6,7 @@ import { messageStore, selectionStore } from 'store'
 import { AccusedPlayers } from './AccusedPlayers'
 import { StyledSuspicionPlayers } from './SuspicionPlayers.styles'
 
-export const SuspicionPlayers: React.FC = observer(() => {
+export const SuspicionPlayers: React.ComponentType = observer(() => {
   const { handleAccuse } = useClickHandler()
   const { selectedCards } = selectionStore
   const { disabledCards: disabled } = messageStore

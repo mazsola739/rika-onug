@@ -12,7 +12,7 @@ import { Icon } from 'components'
 //TODO: Timer for vote
 //TODO: Settings for timer, roles ect.
 
-export const App: React.FC = observer(() => {
+export const App: React.ComponentType = observer(() => {
   const { readyState } = useApp()
 
   const iconMapping: { [key: string]: IconType } = {
