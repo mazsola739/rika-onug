@@ -67,10 +67,6 @@ class MessageStore {
   get isSelectableMarks() {
     return this.allSelectableMarks.length > 0
   }
-
-  get isVoteResult() {
-    return propStore.vampireVotes || propStore.alienVotes //|| propStore.empathVote || propStore.doppelgangerempathVote
-  }
   get isPlayerIdentification() {
     const title = propStore.title
     return ['MINION', 'WEREWOLVES', 'MASONS', 'VAMPIRES', 'ALIENS', 'GROOB_ZERB', 'BLOB'].includes(title)

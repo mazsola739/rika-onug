@@ -1,5 +1,5 @@
-import { isActivePlayer } from '../../../activePlayer'
-import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
+import { isActivePlayer } from '../../activePlayer'
+import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { vampiresAction } from './vampires.action'
 
 /* // TODO   Uses the Robber or Witch and swaps with a Werewolf or Vampire 

@@ -177,6 +177,9 @@ export * from './ONUB/nostradamus/nostradamus'
 export * from './ONUB/nostradamus/nostradamus.reaction'
 export * from './ONUB/nostradamus/nostradamus.response'
 
+export * from './openeyes/openeyes.action'
+export * from './openeyes/openeyes'
+
 export * from './ONUA/oracle/oracle.constants'
 export * from './ONUA/oracle/oracleanswer.action'
 export * from './ONUA/oracle/oracleanswer'
@@ -261,9 +264,9 @@ export * from './ONUW/troublemaker/troublemaker.action'
 export * from './ONUW/troublemaker/troublemaker'
 export * from './ONUW/troublemaker/troublemaker.response'
 
-export * from './ONUV/vampires/vampires.action'
-export * from './ONUV/vampires/vampires'
-export * from './ONUV/vampires/vampires.response'
+export * from './vampires/vampires.action'
+export * from './vampires/vampires'
+export * from './vampires/vampires.response'
 
 export * from './ONUD/villageidiot/villageidiot.action'
 export * from './ONUD/villageidiot/villageidiot'

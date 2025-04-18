@@ -169,10 +169,10 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
           obligatory: gamestate.players[token].player_history[title].random === 'robber'
         }
 
-        const messageIds = formatPlayerIdentifier([currentPlayerNumber, selectedPosition])
+        const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selectedPosition])
 
         action = generateRoleAction(gamestate, token, {
-          private_message: ['action_swapped_cards', ...messageIds, gamestate.players[token].player_history[title].random === 'robber' ? 'action_own_card' : ''],
+          private_message: ['action_swapped_cards', ...messageIdentifiers, gamestate.players[token].player_history[title].random === 'robber' ? 'action_own_card' : ''],
           showCards: gamestate.players[token].player_history[title].random === 'robber' ? showCards : undefined,
           obligatory: gamestate.players[token].player_history[title].random === 'robber'
         })

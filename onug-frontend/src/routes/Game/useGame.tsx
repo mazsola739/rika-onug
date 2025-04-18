@@ -1,4 +1,4 @@
-import { ALIENS, ARRIVE_GAME, END_GAME, HYDRATE_GAME, REDIRECT, SCENE, VAMPIRES } from 'constant'
+import { ALIENS, ARRIVE_GAME, END_GAME, HYDRATE_GAME, PICK, REDIRECT, SCENE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { messageStore, propStore, riseAndRestStore, wsStore } from 'store'
@@ -52,6 +52,11 @@ export const useGame = () => {
     if (lastJsonMessage?.type === END_GAME && lastJsonMessage?.success) {
       riseAndRestStore.closeYourEyes()
       propStore.setSunrise(lastJsonMessage.day_mode)
+    }
+
+    // TODO fix this voting system
+    if (lastJsonMessage?.type === PICK && lastJsonMessage?.success) {
+      propStore.setVampireVotes(lastJsonMessage.vampire_votes)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {

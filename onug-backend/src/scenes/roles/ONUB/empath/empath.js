@@ -1,6 +1,6 @@
 import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, empathVotersPlayerNumbers, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../../sceneUtils'
-import { empathAction } from './empath.action'
+import { empathAction, empathEveryoneAction } from './empath.action'
 import { empathKeys, randomEmpathInstructions } from './empath.constants'
 
 //TODO fix non-empaths voting
@@ -29,19 +29,15 @@ export const empath = (gamestate, title, prefix) => {
 
   tokens.forEach(token => {
     let action = {}
-    const playerNumber = gamestate.players[token].player_number
+    const card = gamestate.players[token].card
 
-    if (activePlayerNumbers.includes(playerNumber)) {
-      const card = gamestate.players[token].card
-      const isNotEmpath = prefix === 'empath' && isActivePlayer(card).EMPATH
-      const isNotDoppelgangerEmpath = prefix === 'doppelganger_empath' && isActivePlayer(card).DOPPELGANGER_EMPATH
-
-      if (isNotEmpath || isNotDoppelgangerEmpath) {
-        gamestate.players[token].action_finished = false
-
-        action = empathAction(gamestate, token, title, prefix)
-      }
+    if ((prefix === 'empath' && isActivePlayer(card).EMPATH) || (prefix === 'doppelganger_empath' && isActivePlayer(card).DOPPELGANGER_EMPATH)) {
+      action = empathAction(gamestate, token, title, prefix)
+    } else {
+      action = empathEveryoneAction(gamestate, token, title, prefix)
     }
+
+    gamestate.players[token].action_finished = false
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })

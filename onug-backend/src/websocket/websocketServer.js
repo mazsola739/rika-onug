@@ -59,6 +59,10 @@ export const websocketServer = port => {
             return stopGame(message)
           case SCENE:
             return scene(ws, message)
+/* TODO fix this          case ALIENS:
+            return aliensVotehydrate(message)
+          case VAMPIRES:
+            return vampiresVotehydrate(message) */
           case ARRIVE_COUNCIL:
             return hydrateCouncil(ws, message)
           case UPDATE_GUESS:

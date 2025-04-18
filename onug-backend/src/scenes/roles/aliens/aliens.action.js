@@ -78,7 +78,8 @@ export const aliensAction = (gamestate, token, title) => {
           }
         }
         if (randomAlienInstruction === 'aliens_allview_text') {
-          // TODO: Update logic for obligatory and scene_end
+          // TODO: Update logic for obligatory and scene_end 
+          //vote = true
           obligatory = false //todo change to true if fixed
           scene_end = true //todo delete if fixed
           privateMessage.push('FYI_TBD', 'action_must_one_any_other')
@@ -164,6 +165,7 @@ export const aliensAction = (gamestate, token, title) => {
     case 'aliens_newalien_text':
     case 'aliens_alienhelper_text':
       // Handle turning a player into a new alien or alien helper
+      // vote = true
       privateMessage.push('FYI_TBD', 'action_must_one_any_other')
       obligatory = false //todo change to true if fixed
       scene_end = true //todo delete if fixed

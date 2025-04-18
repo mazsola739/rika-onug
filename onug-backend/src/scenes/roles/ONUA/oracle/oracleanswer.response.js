@@ -46,8 +46,8 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
       viewed_cards: selectedCards
     }
 
-    const identifiers = formatPlayerIdentifier(selectedCardPositions)
-    const message = ['action_saw_card', ...identifiers]
+    const messageIdentifiers = formatPlayerIdentifier(selectedCardPositions)
+    const message = ['action_saw_card', ...messageIdentifiers]
 
     action = generateRoleAction(gamestate, token, {
       private_message: message,

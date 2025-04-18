@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const vampiresAction = (gamestate, token, title) => {
   const nonVampires = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire')
@@ -12,8 +12,8 @@ export const vampiresAction = (gamestate, token, title) => {
   const isSingleNonVampire = nonVampires.length === 1
   const isSingleVampire = vampires.length === 1
 
-  const messageVampireIdentifiers = formatPlayerIdentifier(vampires)
-  const privateMessage = isSingleVampire ? ['action_no_vampires'] : ['action_vampires', ...messageVampireIdentifiers]
+  const messageIdentifiers = formatPlayerIdentifier(vampires)
+  const privateMessage = isSingleVampire ? ['action_no_vampires'] : ['action_vampires', ...messageIdentifiers]
 
   if (isSingleNonVampire) {
     const vampirePosition = gamestate.mark_positions.vampire
@@ -35,9 +35,8 @@ export const vampiresAction = (gamestate, token, title) => {
       scene_end: true
     }
 
-    const messageVictimIdentifiers = formatPlayerIdentifier([nonVampires[0]])[0]
-    privateMessage.push('action_mark_of_vampire')
-    privateMessage.push(...messageVictimIdentifiers)
+    const messageIdentifiers = formatPlayerIdentifier([nonVampires[0]])[0]
+    privateMessage.push('action_mark_of_vampire', ...messageIdentifiers)
 
     return generateRoleAction(gamestate, token, {
       private_message: privateMessage,
@@ -51,6 +50,7 @@ export const vampiresAction = (gamestate, token, title) => {
       ...gamestate.players[token].player_history[title],
       selectable_marks: nonVampires,
       selectable_mark_limit: { mark: 1 },
+            //vote: false,
       vampires,
       obligatory: true
     }
@@ -58,7 +58,7 @@ export const vampiresAction = (gamestate, token, title) => {
     return generateRoleAction(gamestate, token, {
       private_message: ['action_must_one_any_non_vampire'],
       selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
-      uniqueInformation: { vampires },
+      uniqueInformation: { vampires },       //vote: false,
       obligatory: true
     })
   }
@@ -68,6 +68,7 @@ export const vampiresAction = (gamestate, token, title) => {
     selectable_marks: nonVampires,
     selectable_mark_limit: { mark: 1 },
     vampires,
+          //vote: false,
     obligatory: false, //todo change to true if fixed
     scene_end: true //todo delete if fixed
   }
@@ -77,7 +78,7 @@ export const vampiresAction = (gamestate, token, title) => {
   return generateRoleAction(gamestate, token, {
     private_message: privateMessage,
     selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
-    uniqueInformation: { vampires },
+    uniqueInformation: { vampires },       //vote: false,
     obligatory: false, //todo change to true if fixed
     scene_end: true //todo delete if fixed
   })

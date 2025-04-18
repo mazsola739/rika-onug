@@ -36,6 +36,4 @@ export const MESSAGE = 'MESSAGE'
 export const VOTE = 'VOTE'
 export const UPDATE_GUESS = 'UPDATE_GUESS'
 export const SCENE = 'SCENE'
-
-export const VAMPIRES = 'VAMPIRES'
-export const ALIENS = 'ALIENS'
+export const PICK = 'PICK'

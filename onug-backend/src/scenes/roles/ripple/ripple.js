@@ -3,6 +3,8 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { rippleAction } from './ripple.action'
 import { ripple_random, ripple_sure_repeat } from './ripple.constants'
 
+//TODO fix ripple
+
 export const ripple = (gamestate, title) => {
   const isOracleRipple = gamestate.ripple.force
 

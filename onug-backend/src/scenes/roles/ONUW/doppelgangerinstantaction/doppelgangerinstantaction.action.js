@@ -1,23 +1,11 @@
-import {
-  alphawolfAction,
-  apprenticeseerAction,
-  cupidAction,
-  diseasedAction,
-  drunkAction,
-  instigatorAction,
-  mysticwolfAction,
-  paranormalinvestigatorAction,
-  robberAction,
-  seerAction,
-  sentinelAction,
-  temptressAction,
-  thingAction,
-  troublemakerAction,
-  villageidiotAction,
-  witchAction
-} from '../..'
+import { alphawolfAction, apprenticeseerAction, cupidAction, diseasedAction, drunkAction, instigatorAction, mysticwolfAction, paranormalinvestigatorAction, robberAction, seerAction, sentinelAction, temptressAction, thingAction, troublemakerAction, villageidiotAction, witchAction } from '../..'
 import { DOPPELGANGER_INSTANT_ACTION } from '../../../../constants'
 import { generateRoleAction } from '../../../sceneUtils'
+
+/*
+ Doppelgänger instant night actions:
+ 2 Drunk, 8 Robber, 9 Seer , 11 Troublemaker, 17 Alpha wolf, 18 Apprenticeseer, 22 Mystic wolf, 23 Paranormal investigator, 25 Sentinel, 26 Village idiot, 27 Witch, 31 Cupid, 32 Diseased, 34 Instigator, 55 Annoyinglad, 56 Detector, 57 Dr peeker, 65 Rapscallion, 66 Role retriever, 68 Switcheroo, 69 Temptress, 70 Voodoolou, 85 Thing
+*/
 
 export const doppelgangerinstantactionAction = (gamestate, token, title) => {
   const new_role_id = gamestate.players[token]?.new_role_id
@@ -62,11 +50,3 @@ export const doppelgangerinstantactionAction = (gamestate, token, title) => {
 
   return action
 }
-
-/**
- * * Doppelgänger instant night actions:
- * ? 2 Drunk, 8 Robber, 9 Seer , 11 Troublemaker, 17 Alpha wolf, 18 Apprenticeseer, 22 Mystic wolf,
- * ? 23 Paranormal investigator, 25 Sentinel, 26 Village idiot, 27 Witch, 31 Cupid, 32 Diseased,
- * ? 34 Instigator, 55 Annoyinglad, 56 Detector, 57 Dr peeker, 65 Rapscallion, 66 Role retriever,
- * ? 68 Switcheroo, 69 Temptress, 70 Voodoolou, 85 Thing
- * */
