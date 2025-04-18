@@ -1,4 +1,3 @@
-import { PICK } from "../../../../constants"
 import { readGamestate, upsertRoomState } from "../../../../repository"
 import { sendMessageToPlayer } from "../../../../utils"
 import { getPlayerTokensByPlayerNumber, getPlayerNumberWithMatchingToken } from "../../../sceneUtils"
@@ -47,7 +46,7 @@ export const empathVotehydrate = async message => {
 
     emapthsTokens.forEach(emapthToken => {
       const stillVoteMessage = {
-        type: PICK,
+        type: title,
         success: true,
         emapth_votes,
         resultMessages

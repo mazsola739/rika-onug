@@ -1,4 +1,3 @@
-import { PICK } from '../../../constants'
 import { readGamestate, upsertRoomState } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
 import { getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, getPlayerNumberWithMatchingToken, getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
@@ -98,7 +97,7 @@ export const aliensVotehydrate = async message => {
     } else {
       aliensTokens.forEach(alienToken => {
         const stillVoteMessage = {
-          type: PICK,
+          type: title,
           success: true,
           alien_votes
         }

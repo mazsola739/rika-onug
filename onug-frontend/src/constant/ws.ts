@@ -4,7 +4,6 @@ export const RESET = 'RESET'
 export const DEAL = 'DEAL'
 export const REDIRECT = 'REDIRECT'
 export const SCENE = 'SCENE'
-export const PICK = 'PICK'
 export const RESULT = 'RESULT'
 
 export const JOIN_ROOM = 'JOIN_ROOM'

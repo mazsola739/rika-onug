@@ -1,7 +1,9 @@
 import WebSocket from 'ws'
-import { ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, READY, RELOAD, RESET, SCENE, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VOTE } from '../constants'
+import { ALIENS, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, READY, RELOAD, RESET, SCENE, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES, VOTE } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, hydrateReady, hydrateRoom, hydrateTable, joinRoom, leaveGame, leaveRoom, newbie, reload, reset, result, scene, startGame, startVote, stopGame, updateRoom, verdict } from './handlers'
+import { aliensVotehydrate } from '../scenes/roles/aliens/aliens.voteHydrate'
+import { vampiresVotehydrate } from '../scenes/roles/vampires/vampires.voteHydrate'
 
 export const websocketServer = port => {
   try {
@@ -59,10 +61,10 @@ export const websocketServer = port => {
             return stopGame(message)
           case SCENE:
             return scene(ws, message)
-/* TODO fix this          case ALIENS:
+          case ALIENS:
             return aliensVotehydrate(message)
           case VAMPIRES:
-            return vampiresVotehydrate(message) */
+            return vampiresVotehydrate(message)
           case ARRIVE_COUNCIL:
             return hydrateCouncil(ws, message)
           case UPDATE_GUESS:

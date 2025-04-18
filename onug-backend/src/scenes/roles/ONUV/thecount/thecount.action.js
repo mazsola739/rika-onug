@@ -1,7 +1,7 @@
 import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../../sceneUtils'
 
 export const thecountAction = (gamestate, token, title) => {
-  const nonVampires = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire')
+  const nonVampires = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire') //TODO fix on player not swapped the mark yet, so its not showing the fresh mark_of_vampire
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

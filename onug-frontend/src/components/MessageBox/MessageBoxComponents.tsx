@@ -101,8 +101,11 @@ export const MessageBoxSelectableMarks: React.ComponentType = observer(() => {
 })
 
 export const MessageBoxVoteResult: React.ComponentType = observer(() => {
-  const { vampireVotes, alienVotes } = propStore
-  const votes = alienVotes || vampireVotes
+  const votes = propStore.vampireVotes && Object.keys(propStore.vampireVotes).length > 0
+    ? propStore.vampireVotes
+    : propStore.alienVotes && Object.keys(propStore.alienVotes).length > 0 
+    ? propStore.alienVotes 
+    : {}
 
   return (
     <StyledMessageBoxVoteResult>

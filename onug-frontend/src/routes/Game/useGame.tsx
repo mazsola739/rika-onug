@@ -1,8 +1,8 @@
-import { ALIENS, ARRIVE_GAME, END_GAME, HYDRATE_GAME, PICK, REDIRECT, SCENE } from 'constant'
+import { ALIENS, VAMPIRES, ARRIVE_GAME, END_GAME, HYDRATE_GAME, REDIRECT, SCENE } from 'constant'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { messageStore, propStore, riseAndRestStore, wsStore } from 'store'
-import { MessagesType, NarrationType } from 'types'
+import { MessagesType, NarrationType, VoteType } from 'types'
 import { splitCardsToTable } from 'utils'
 
 export const useGame = () => {
@@ -55,8 +55,11 @@ export const useGame = () => {
     }
 
     // TODO fix this voting system
-    if (lastJsonMessage?.type === PICK && lastJsonMessage?.success) {
-      propStore.setVampireVotes(lastJsonMessage.vampire_votes)
+    if (lastJsonMessage?.type === VAMPIRES && lastJsonMessage?.success) {
+      propStore.setVampireVotes(lastJsonMessage.vampire_votes as VoteType)
+    }
+    if (lastJsonMessage?.type === ALIENS && lastJsonMessage?.success) {
+      propStore.setAlienVotes(lastJsonMessage.alien_votes)
     }
 
     if (lastJsonMessage?.type === REDIRECT) {

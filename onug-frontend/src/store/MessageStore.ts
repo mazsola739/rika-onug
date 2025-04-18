@@ -3,7 +3,7 @@ import * as narration_text from 'constant/narrations'
 import { script } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { propStore, riseAndRestStore, selectionStore } from 'store'
-import { MessagesType, NarrationType, RoleKeys } from 'types'
+import { MessagesType, NarrationType, RoleKeys, VoteType } from 'types'
 import { formatPositionSimply } from 'utils'
 
 class MessageStore {
@@ -87,7 +87,6 @@ class MessageStore {
       name: formatPositionSimply(position)
     }))
   }
-
   get allSelectableMarks(): Record<string, string>[] {
     const selectableMarks = riseAndRestStore.tablePlayerCards.filter(card => card.selectable_mark)
 
@@ -101,6 +100,13 @@ class MessageStore {
       position,
       name: formatPositionSimply(position)
     }))
+  }
+
+  get isVoteResult() {
+    const hasVotes = (votes: VoteType): boolean =>
+      votes ? Object.values(votes).some(playerVotes => playerVotes?.length > 0) : false
+
+    return hasVotes(propStore.vampireVotes) || hasVotes(propStore.alienVotes)
   }
 
   getRoles(): RoleKeys[] {
