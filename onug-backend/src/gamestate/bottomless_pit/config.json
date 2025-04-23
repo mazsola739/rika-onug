@@ -1,0 +1,13 @@
+{
+    "room_id": "bottomless_pit",
+    "room_name": "Bottomless Pit",
+    "stage": "LOBBY",
+    "selected_cards": [],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
+    "available_names": ["Amy", "Bob", "Clara", "David", "Emma", "Frank", "Grace", "Henry", "Isla", "Jack", "Kate", "Liam"],
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "script_locked": true,
+    "vote_timer": 300000
+}

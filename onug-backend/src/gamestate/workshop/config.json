@@ -1,0 +1,13 @@
+{
+    "room_id": "workshop",
+    "room_name": "Workshop",
+    "stage": "LOBBY",
+    "selected_cards": [25, 53, 47, 54, 48, 51, 27, 52, 46, 20, 44, 49, 19],
+    "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
+    "available_names": ["Amy", "Bob", "Clara", "David", "Emma", "Frank", "Grace", "Henry", "Isla", "Jack", "Kate", "Liam"],
+    "game_started": true,
+    "game_stopped": false,
+    "game_finished": false,
+    "script_locked": true,
+    "vote_timer": 300000
+}

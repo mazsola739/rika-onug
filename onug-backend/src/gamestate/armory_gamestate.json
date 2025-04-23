@@ -1,0 +1,51 @@
+{
+  "room_id": "armory",
+  "room_name": "Armory",
+  "stage": "LOBBY",
+  "selected_cards": [],
+  "selected_expansions": [
+    "Werewolf",
+    "Daybreak",
+    "Vampire",
+    "Alien",
+    "Super Villains",
+    "Bonus Roles"
+  ],
+  "available_names": [
+    "Amy",
+    "Bob",
+    "Clara",
+    "David",
+    "Emma",
+    "Frank",
+    "Grace",
+    "Henry",
+    "Isla",
+    "Jack",
+    "Kate",
+    "Liam"
+  ],
+  "players": {},
+  "card_positions": {
+    "center_left": {},
+    "center_middle": {},
+    "center_right": {},
+    "center_wolf": {},
+    "center_villain": {}
+  },
+  "mark_positions": {},
+  "doppelganger_mark_positions": {},
+  "flipped_cards": [],
+  "artifacted_cards": [],
+  "shielded_cards": [],
+  "vampire_votes": {},
+  "alien_votes": {},
+  "empath_votes": {},
+  "action_history": [],
+  "game_started": true,
+  "game_stopped": false,
+  "game_finished": false,
+  "script_locked": true,
+  "chapter": [],
+  "vote_timer": 300000
+}

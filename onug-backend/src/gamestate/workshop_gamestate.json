@@ -1,0 +1,59 @@
+{
+  "room_id": "workshop",
+  "room_name": "Workshop",
+  "stage": "LOBBY",
+  "selected_cards": [
+    25,
+    53,
+    47,
+    54,
+    48,
+    51,
+    27,
+    52,
+    46,
+    20,
+    44,
+    49,
+    19
+  ],
+  "selected_expansions": [
+    "Werewolf",
+    "Daybreak",
+    "Vampire",
+    "Alien",
+    "Super Villains",
+    "Bonus Roles"
+  ],
+  "available_names": [
+    "Amy",
+    "Bob",
+    "Clara",
+    "David",
+    "Emma",
+    "Frank",
+    "Grace",
+    "Henry",
+    "Isla",
+    "Jack",
+    "Kate",
+    "Liam"
+  ],
+  "players": {},
+  "card_positions": {
+    "center_left": {},
+    "center_middle": {},
+    "center_right": {},
+    "center_wolf": {},
+    "center_villain": {}
+  },
+  "mark_positions": {},
+  "doppelganger_mark_positions": {},
+  "flipped_cards": [],
+  "artifacted_cards": [],
+  "shielded_cards": [],
+  "vampire_votes": {},
+  "alien_votes": {},
+  "empath_votes": {},
+  "action_history": []
+}
