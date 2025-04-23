@@ -45,6 +45,9 @@ class PropStore {
   get dreamwolf() {
     return this.action.dreamwolf
   }
+  get evilometer() {
+    return this.action.evilometer
+  }
   get groobzerb() {
     return this.action.groobzerb
   }
@@ -163,6 +166,7 @@ class PropStore {
       current: [],
       dreamwolf: [],
       groobzerb: [],
+      evilometer: [],
       scene_end: false,
       obligatory: false,
       madscientist: [],

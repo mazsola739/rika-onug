@@ -61,14 +61,13 @@ class DeckStore {
   get hasCurator() {
     return checkCardPresence(this.selectedCards, 20)
   }
-
   get hasSentinel() {
     return checkCardPresence(this.selectedCards, 25)
   }
-
   get hasMarks() {
     return areAnyCardSelectedById(this.selectedCards, HAS_MARK_IDS)
   }
+  
   get hasVampire() {
     return areAnyCardSelectedById(this.selectedCards, VAMPIRE_IDS)
   }

@@ -1,14 +1,14 @@
 export const randomOracleQuestions = [
-  'oracle_alienteam_text',
+/*   'oracle_alienteam_text',
   'oracle_werewolfteam_text',
   'oracle_vampireteam_text',
   'oracle_alienexchange_text',
   'oracle_centerexchange_text',
-  'oracle_viewcenter_text',
+  'oracle_viewcenter_text', */
   'oracle_ripple_text',
-  'oracle_viewplayer_text',
+/*   'oracle_viewplayer_text',
   'oracle_evenodd_text',
-  'oracle_guessnumber_text'
+  'oracle_guessnumber_text' */
 ]
 
 export const oracleResponses = {

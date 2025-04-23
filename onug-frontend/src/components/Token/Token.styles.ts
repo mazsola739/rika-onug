@@ -16,8 +16,8 @@ export const StyledToken = styled.div<StyledTokenProps>`
     return '3px solid transparent'
   }};
   filter: drop-shadow(3px 3px 3px black);
-  ${({ aliens, cow, current, dreamwolf, groobzerb, lovers, masons, part_of_blob, part_of_family, vampires, werewolf, witness }) => {
-    if (masons) {
+  ${({ aliens, cow, current, dreamwolf, evilometer, groobzerb, lovers, masons, part_of_blob, part_of_family, vampires, werewolf, witness }) => {
+    if (masons || evilometer) {
       return css`
         animation: ${glowingBlue} 0.8s ease-in-out infinite alternate;
       `

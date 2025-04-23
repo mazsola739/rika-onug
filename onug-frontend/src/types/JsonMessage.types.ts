@@ -45,6 +45,7 @@ export type InteractionType = {
   cow?: CardPositionType[]
   current?: CardPositionType[]
   dreamwolf?: CardPositionType[]
+  evilometer?: CardPositionType[]
   groobzerb?: CardPositionType[]
   lovers?: CardPositionType[]
   madscientist?: CardPositionType[]

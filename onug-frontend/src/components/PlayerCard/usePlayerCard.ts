@@ -41,6 +41,7 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
   const isCow = card?.cow
   const isCurrentPlayer = card?.current
   const isDreamwolf = card?.dreamwolf
+  const isEvilometer = card?.evilometer
   const isGroobzerb = card?.groobzerb
   const isLovers = card?.lovers
   const isMason = card?.masons
@@ -58,6 +59,7 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
   if (isCow) roles.push('🐄')
   if (isCurrentPlayer) roles.push('🔦')
   if (isDreamwolf) roles.push('💤')
+  if (isEvilometer) roles.push('📡')
   if (isGroobzerb) roles.push('👽')
   if (isLovers) roles.push('🩷')
   if (isMason) roles.push('⚒️')
@@ -92,6 +94,7 @@ export const usePlayerCard = (card: TablePlayerCard, ownCard: boolean) => {
     cow: isCow,
     current: isCurrentPlayer,
     dreamwolf: isDreamwolf,
+    evilometer: isEvilometer,
     groobzerb: isGroobzerb,
     lovers: isLovers,
     masons: isMason,

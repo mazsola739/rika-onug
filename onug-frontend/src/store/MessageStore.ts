@@ -112,6 +112,7 @@ class MessageStore {
   getRoles(): RoleKeys[] {
     const title = propStore.title
 
+    //supervillains evilometer
     switch (title) {
       case 'MINION':
         return ['werewolves']

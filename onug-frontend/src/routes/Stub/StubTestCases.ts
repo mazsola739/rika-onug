@@ -35,11 +35,11 @@ export const testCase4: Record<string, number> = {
 }
 
 export const testCase5: Record<string, number> = {
-  Player1: 50,
-  Player2: 5,
-  Player3: 6,
-  Player4: 4,
-  CenterLeft: 42,
-  CenterMiddle: 15,
-  CenterRight: 16
+  Player1: 1,
+  Player2: 41,
+  Player3: 8,
+  Player4: 12,
+  CenterLeft: 10,
+  CenterMiddle: 13,
+  CenterRight: 14
 }

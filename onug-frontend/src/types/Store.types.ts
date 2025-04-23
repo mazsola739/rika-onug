@@ -16,7 +16,7 @@ export type RoomType = {
   selectedCards: number[]
 }
 
-export type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'cow' | 'groobzerb' | 'vampires' | 'part_of_blob'
+export type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'cow' |'evilometer' | 'groobzerb' | 'vampires' | 'part_of_blob'
 
 export type TableCenterCard = {
   card_name?: string
@@ -36,6 +36,7 @@ export type TablePlayerCard = {
   cow?: boolean
   current?: boolean
   dreamwolf?: boolean
+  evilometer?: boolean
   groobzerb?: boolean
   lovers?: boolean
   madscientist?: boolean

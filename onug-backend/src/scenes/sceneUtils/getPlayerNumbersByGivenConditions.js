@@ -44,6 +44,9 @@ const filters = {
   //cow
   cow: player => player.card.player_role_id === 45,
 
+  //evilometer
+  evilometer: player => player.card.player_role_id === 58,
+
   //seer
   anySeer: player => player.card.player_role_id === 9 || player.card.player_role_id === 18,
   anySeerWithoutShield: (player, shieldedCards) => (player.card.player_role_id === 9 || player.card.player_role_id === 18) && !shieldedCards.includes(player.player_number),

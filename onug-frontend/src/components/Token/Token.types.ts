@@ -12,6 +12,7 @@ export interface TokenProps {
   masons?: boolean
   aliens?: boolean
   cow?: boolean
+  evilometer?: boolean
   groobzerb?: boolean
   vampires?: boolean
   witness?: boolean
@@ -30,6 +31,7 @@ export interface StyledTokenProps {
   masons?: boolean
   aliens?: boolean
   cow?: boolean
+  evilometer?: boolean
   groobzerb?: boolean
   vampires?: boolean
   witness?: boolean
