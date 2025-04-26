@@ -1,0 +1,53 @@
+[
+  {
+    "config": {
+      "room_id": "archives",
+      "room_name": "Archives",
+      "stage": "LOBBY",
+      "selected_cards": [],
+      "selected_expansions": [ "Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles" ],
+      "nicknames": [],
+      "game_started": true,
+      "game_stopped": false,
+      "game_finished": false,
+      "script_locked": true,
+      "vote_timer": 300000
+    },
+    "players": {
+      "players": {}
+    },
+    "roles": {
+      "aliens": { "alien_votes": {}, "instruction": "", "key": [] },
+      "blob": { "instruction": "" },
+      "bodysnatcher": { "instruction": "", "key": "" },
+      "doppelganger_bodysnatcher": { "instruction": "", "key": "" },
+      "doppelganger_empath": { "empath_votes": {}, "instruction": "" },
+      "doppelganger_exposer": { "instruction": "" },
+      "doppelganger_mortician": { "instruction": "", "key": "" },
+      "doppelganger_psychic": { "instruction": "", "key": "" },
+      "doppelganger_rascal": { "instruction": "", "key": "" },
+      "empath": { "empath_votes": {}, "instruction": "" },
+      "exposer": { "instruction": "" },
+      "familyman": { "instruction": "" },
+      "mortician": { "instruction": "", "key": "" },
+      "oracle": { "question": "", "number": 0, "answer": "", "aftermath": "", "openeyes": false, "target": false },
+      "psychic": { "instruction": "", "key": "" },
+      "rascal": { "instruction": "", "key": "" },
+      "vampires": { "vampire_votes": {} }
+    },
+    "scene": {
+      "narration": [],
+      "action_history": [],
+      "chapter": [],
+      "scripts": []
+    },
+    "table": {
+      "card_positions": { "center_left": {}, "center_middle": {}, "center_right": {}, "center_wolf": {}, "center_villain": {} },
+      "mark_positions": {},
+      "doppelganger_mark_positions": {},
+      "flipped_cards": [],
+      "artifacted_cards": [],
+      "shielded_cards": []
+    }
+  }
+]

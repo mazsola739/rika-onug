@@ -4,6 +4,8 @@ import { upsertRoomState } from '../../repository'
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 
+//TODO repository => players
+
 export const verdict = async (ws, message) => {
   const { room_id, token, selected_card_positions } = message
   logTrace(`Processing verdict in room: ${room_id}`)

@@ -4,6 +4,8 @@ import { HYDRATE_ROOM } from '../../constants'
 import { upsertRoomState } from '../../repository'
 import { determineTotalPlayers, filterCardsByExpansions, getPlayerNames, toggleCardSelect, toggleExpansions } from '../../utils'
 
+//TODO repository => config
+
 export const updateRoom = async message => {
   const { room_id, card_id, expansion } = message
   const [roomIdValid, gamestate, errors] = await validateRoom(room_id)

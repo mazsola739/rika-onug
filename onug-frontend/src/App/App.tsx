@@ -2,7 +2,7 @@ import { IconType } from 'components/Icon/Icon.types'
 import { observer } from 'mobx-react-lite'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { ReadyState } from 'react-use-websocket'
-import { Game, God, Lobby, Room, Stub, Table, Council, Verdict } from 'routes'
+import { Game, God, Lobby, Room, Stub, Table, Council, Verdict, Lobbyy } from 'routes'
 import { ConnectionStatus, StyledApp } from './App.styles'
 import { useApp } from './useApp'
 import { Icon } from 'components'
@@ -34,6 +34,7 @@ export const App: React.ComponentType = observer(() => {
         <Routes>
           <Route path="/" element={<Lobby />} />
           <Route path="/lobby" element={<Lobby />} />
+          <Route path="/lobbyy" element={<Lobbyy />} />
           <Route path="/room/:room_id" element={<Room />} />
           <Route path="/table/:room_id" element={<Table />} />
           <Route path="/game/:room_id" element={<Game />} />

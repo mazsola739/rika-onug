@@ -4,6 +4,8 @@ import { upsertRoomState } from '../../repository'
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 
+//TODO repository => config, players, scene, table, roles
+
 //TODO do i need? fix it?
 export const stopGame = async message => {
   const { room_id, token } = message

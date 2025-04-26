@@ -1,518 +1,89 @@
 [
-  {
-    "id": 1,
-    "expansion": "Werewolf",
-    "role": "DOPPELGANGER",
-    "team": "village"
-  },
-  {
-    "id": 2,
-    "expansion": "Werewolf",
-    "role": "DRUNK",
-    "team": "village"
-  },
-  {
-    "id": 3,
-    "expansion": "Werewolf",
-    "role": "HUNTER",
-    "team": "village"
-  },
-  {
-    "id": 4,
-    "expansion": "Werewolf",
-    "role": "INSOMNIAC",
-    "team": "village"
-  },
-  {
-    "id": 5,
-    "expansion": "Werewolf",
-    "role": "MASON",
-    "team": "village"
-  },
-  {
-    "id": 6,
-    "expansion": "Werewolf",
-    "role": "MASON",
-    "team": "village"
-  },
-  {
-    "id": 7,
-    "expansion": "Werewolf",
-    "role": "MINION",
-    "team": "werewolf"
-  },
-  {
-    "id": 8,
-    "expansion": "Werewolf",
-    "role": "ROBBER",
-    "team": "village"
-  },
-  {
-    "id": 9,
-    "expansion": "Werewolf",
-    "role": "SEER",
-    "team": "village"
-  },
-  {
-    "id": 10,
-    "expansion": "Werewolf",
-    "role": "TANNER",
-    "team": "tanner"
-  },
-  {
-    "id": 11,
-    "expansion": "Werewolf",
-    "role": "TROUBLEMAKER",
-    "team": "village"
-  },
-  {
-    "id": 12,
-    "expansion": "Werewolf",
-    "role": "VILLAGER",
-    "team": "village"
-  },
-  {
-    "id": 13,
-    "expansion": "Werewolf",
-    "role": "VILLAGER",
-    "team": "village"
-  },
-  {
-    "id": 14,
-    "expansion": "Werewolf",
-    "role": "VILLAGER",
-    "team": "village"
-  },
-  {
-    "id": 15,
-    "expansion": "Werewolf",
-    "role": "WEREWOLF",
-    "team": "werewolf"
-  },
-  {
-    "id": 16,
-    "expansion": "Werewolf",
-    "role": "WEREWOLF",
-    "team": "werewolf"
-  },
-  {
-    "id": 17,
-    "expansion": "Daybreak",
-    "role": "ALPHA_WOLF",
-    "team": "werewolf"
-  },
-  {
-    "id": 18,
-    "expansion": "Daybreak",
-    "role": "APPRENTICE_SEER",
-    "team": "village"
-  },
-  {
-    "id": 19,
-    "expansion": "Daybreak",
-    "role": "BODYGUARD",
-    "team": "village"
-  },
-  {
-    "id": 20,
-    "expansion": "Daybreak",
-    "role": "CURATOR",
-    "team": "village"
-  },
-  {
-    "id": 21,
-    "expansion": "Daybreak",
-    "role": "DREAMWOLF",
-    "team": "werewolf"
-  },
-  {
-    "id": 22,
-    "expansion": "Daybreak",
-    "role": "MYSTIC_WOLF",
-    "team": "werewolf"
-  },
-  {
-    "id": 23,
-    "expansion": "Daybreak",
-    "role": "PARANORMAL_INVESTIGATOR",
-    "team": "village"
-  },
-  {
-    "id": 24,
-    "expansion": "Daybreak",
-    "role": "REVEALER",
-    "team": "village"
-  },
-  {
-    "id": 25,
-    "expansion": "Daybreak",
-    "role": "SENTINEL",
-    "team": "village"
-  },
-  {
-    "id": 26,
-    "expansion": "Daybreak",
-    "role": "VILLAGE_IDIOT",
-    "team": "village"
-  },
-  {
-    "id": 27,
-    "expansion": "Daybreak",
-    "role": "WITCH",
-    "team": "village"
-  },
-  {
-    "id": 28,
-    "expansion": "Vampire",
-    "role": "APPRENTICE_ASSASSIN",
-    "team": "apprentice assassin"
-  },
-  {
-    "id": 29,
-    "expansion": "Vampire",
-    "role": "ASSASSIN",
-    "team": "assassin"
-  },
-  {
-    "id": 30,
-    "expansion": "Vampire",
-    "role": "COPYCAT",
-    "team": "village"
-  },
-  {
-    "id": 31,
-    "expansion": "Vampire",
-    "role": "CUPID",
-    "team": "village"
-  },
-  {
-    "id": 32,
-    "expansion": "Vampire",
-    "role": "DISEASED",
-    "team": "village"
-  },
-  {
-    "id": 33,
-    "expansion": "Vampire",
-    "role": "GREMLIN",
-    "team": "village"
-  },
-  {
-    "id": 34,
-    "expansion": "Vampire",
-    "role": "INSTIGATOR",
-    "team": "village"
-  },
-  {
-    "id": 35,
-    "expansion": "Vampire",
-    "role": "MARKSMAN",
-    "team": "village"
-  },
-  {
-    "id": 36,
-    "expansion": "Vampire",
-    "role": "PICKPOCKET",
-    "team": "village"
-  },
-  {
-    "id": 37,
-    "expansion": "Vampire",
-    "role": "PRIEST",
-    "team": "village"
-  },
-  {
-    "id": 38,
-    "expansion": "Vampire",
-    "role": "RENFIELD",
-    "team": "vampire"
-  },
-  {
-    "id": 39,
-    "expansion": "Vampire",
-    "role": "THE_COUNT",
-    "team": "vampire"
-  },
-  {
-    "id": 40,
-    "expansion": "Vampire",
-    "role": "THE_MASTER",
-    "team": "vampire"
-  },
-  {
-    "id": 41,
-    "expansion": "Vampire",
-    "role": "VAMPIRE",
-    "team": "vampire"
-  },
-  {
-    "id": 42,
-    "expansion": "Alien",
-    "role": "ALIEN",
-    "team": "alien"
-  },
-  {
-    "id": 43,
-    "expansion": "Alien",
-    "role": "ALIEN",
-    "team": "alien"
-  },
-  {
-    "id": 44,
-    "expansion": "Alien",
-    "role": "BLOB",
-    "team": "blob"
-  },
-  {
-    "id": 45,
-    "expansion": "Alien",
-    "role": "COW",
-    "team": "village"
-  },
-  {
-    "id": 46,
-    "expansion": "Alien",
-    "role": "EXPOSER",
-    "team": "village"
-  },
-  {
-    "id": 47,
-    "expansion": "Alien",
-    "role": "GROOB",
-    "team": "groob"
-  },
-  {
-    "id": 48,
-    "expansion": "Alien",
-    "role": "LEADER",
-    "team": "village"
-  },
-  {
-    "id": 49,
-    "expansion": "Alien",
-    "role": "MORTICIAN",
-    "team": "mortician"
-  },
-  {
-    "id": 50,
-    "expansion": "Alien",
-    "role": "ORACLE",
-    "team": "village"
-  },
-  {
-    "id": 51,
-    "expansion": "Alien",
-    "role": "PSYCHIC",
-    "team": "village"
-  },
-  {
-    "id": 52,
-    "expansion": "Alien",
-    "role": "RASCAL",
-    "team": "village"
-  },
-  {
-    "id": 53,
-    "expansion": "Alien",
-    "role": "SYNTHETIC_ALIEN",
-    "team": "synthetic"
-  },
-  {
-    "id": 54,
-    "expansion": "Alien",
-    "role": "ZERB",
-    "team": "zerb"
-  },
-  {
-    "id": 55,
-    "expansion": "Super Villains",
-    "role": "ANNOYING_LAD",
-    "team": "hero"
-  },
-  {
-    "id": 56,
-    "expansion": "Super Villains",
-    "role": "DETECTOR",
-    "team": "hero"
-  },
-  {
-    "id": 57,
-    "expansion": "Super Villains",
-    "role": "DR_PEEKER",
-    "team": "villain"
-  },
-  {
-    "id": 58,
-    "expansion": "Super Villains",
-    "role": "EVILOMETER",
-    "team": "hero"
-  },
-  {
-    "id": 59,
-    "expansion": "Super Villains",
-    "role": "FLIPPER",
-    "team": "hero"
-  },
-  {
-    "id": 60,
-    "expansion": "Super Villains",
-    "role": "HENCHMAN",
-    "team": "villain"
-  },
-  {
-    "id": 61,
-    "expansion": "Super Villains",
-    "role": "INNOCENT_BYSTANDER",
-    "team": "innocent"
-  },
-  {
-    "id": 62,
-    "expansion": "Super Villains",
-    "role": "INTERN",
-    "team": "mad"
-  },
-  {
-    "id": 63,
-    "expansion": "Super Villains",
-    "role": "MAD_SCIENTIST",
-    "team": "mad"
-  },
-  {
-    "id": 64,
-    "expansion": "Super Villains",
-    "role": "MIRROR_MAN",
-    "team": "hero"
-  },
-  {
-    "id": 65,
-    "expansion": "Super Villains",
-    "role": "RAPSCALLION",
-    "team": "villain"
-  },
-  {
-    "id": 66,
-    "expansion": "Super Villains",
-    "role": "ROLE_RETRIEVER",
-    "team": "hero"
-  },
-  {
-    "id": 67,
-    "expansion": "Super Villains",
-    "role": "SELF_AWARENESS_GIRL",
-    "team": "hero"
-  },
-  {
-    "id": 68,
-    "expansion": "Super Villains",
-    "role": "SWITCHEROO",
-    "team": "hero"
-  },
-  {
-    "id": 69,
-    "expansion": "Super Villains",
-    "role": "TEMPTRESS",
-    "team": "villain"
-  },
-  {
-    "id": 70,
-    "expansion": "Super Villains",
-    "role": "VOODOO_LOU",
-    "team": "hero"
-  },
-  {
-    "id": 71,
-    "expansion": "Bonus Roles",
-    "role": "APPRENTICE_TANNER",
-    "team": "tanner"
-  },
-  {
-    "id": 72,
-    "expansion": "Bonus Roles",
-    "role": "AURA_SEER",
-    "team": "village"
-  },
-  {
-    "id": 73,
-    "expansion": "Bonus Roles",
-    "role": "BEHOLDER",
-    "team": "village"
-  },
-  {
-    "id": 74,
-    "expansion": "Bonus Roles",
-    "role": "BODY_SNATCHER",
-    "team": "alien"
-  },
-  {
-    "id": 75,
-    "expansion": "Bonus Roles",
-    "role": "CURSED",
-    "team": "village"
-  },
-  {
-    "id": 76,
-    "expansion": "Bonus Roles",
-    "role": "DEFENDERER",
-    "team": "hero"
-  },
-  {
-    "id": 77,
-    "expansion": "Bonus Roles",
-    "role": "EMPATH",
-    "team": "village"
-  },
-  {
-    "id": 78,
-    "expansion": "Bonus Roles",
-    "role": "FAMILY_MAN",
-    "team": "family"
-  },
-  {
-    "id": 79,
-    "expansion": "Bonus Roles",
-    "role": "INNOCENT_BYSTANDER",
-    "team": "innocent"
-  },
-  {
-    "id": 80,
-    "expansion": "Bonus Roles",
-    "role": "NOSTRADAMUS",
-    "team": "nostradamus"
-  },
-  {
-    "id": 81,
-    "expansion": "Bonus Roles",
-    "role": "PRINCE",
-    "team": "village"
-  },
-  {
-    "id": 82,
-    "expansion": "Bonus Roles",
-    "role": "RICOCHET_RHINO",
-    "team": "hero"
-  },
-  {
-    "id": 83,
-    "expansion": "Bonus Roles",
-    "role": "SQUIRE",
-    "team": "werewolf"
-  },
-  {
-    "id": 84,
-    "expansion": "Bonus Roles",
-    "role": "THE_SPONGE",
-    "team": "hero"
-  },
-  {
-    "id": 85,
-    "expansion": "Bonus Roles",
-    "role": "THING",
-    "team": "village"
-  },
-  {
-    "id": 86,
-    "expansion": "Bonus Roles",
-    "role": "WINDY_WENDY",
-    "team": "hero"
+  { "id": 1, "expansion": "Werewolf", "role": "DOPPELGANGER", "team": "village" },
+  { "id": 2, "expansion": "Werewolf", "role": "DRUNK", "team": "village" },
+  { "id": 3, "expansion": "Werewolf", "role": "HUNTER", "team": "village" },
+  { "id": 4, "expansion": "Werewolf", "role": "INSOMNIAC", "team": "village" },
+  { "id": 5, "expansion": "Werewolf", "role": "MASON", "team": "village" },
+  { "id": 6, "expansion": "Werewolf", "role": "MASON", "team": "village" },
+  { "id": 7, "expansion": "Werewolf", "role": "MINION", "team": "werewolf" },
+  { "id": 8, "expansion": "Werewolf", "role": "ROBBER", "team": "village" },
+  { "id": 9, "expansion": "Werewolf", "role": "SEER", "team": "village" },
+  { "id": 10, "expansion": "Werewolf", "role": "TANNER", "team": "tanner" },
+  { "id": 11, "expansion": "Werewolf", "role": "TROUBLEMAKER", "team": "village" },
+  { "id": 12, "expansion": "Werewolf", "role": "VILLAGER", "team": "village" },
+  { "id": 13, "expansion": "Werewolf", "role": "VILLAGER", "team": "village" },
+  { "id": 14, "expansion": "Werewolf", "role": "VILLAGER", "team": "village" },
+  { "id": 15, "expansion": "Werewolf", "role": "WEREWOLF", "team": "werewolf" },
+  { "id": 16, "expansion": "Werewolf", "role": "WEREWOLF", "team": "werewolf" },
+  { "id": 17, "expansion": "Daybreak", "role": "ALPHA_WOLF", "team": "werewolf" },
+  { "id": 18, "expansion": "Daybreak", "role": "APPRENTICE_SEER", "team": "village" },
+  { "id": 19, "expansion": "Daybreak", "role": "BODYGUARD", "team": "village" },
+  { "id": 20, "expansion": "Daybreak", "role": "CURATOR", "team": "village" },
+  { "id": 21, "expansion": "Daybreak", "role": "DREAMWOLF", "team": "werewolf" },
+  { "id": 22, "expansion": "Daybreak", "role": "MYSTIC_WOLF", "team": "werewolf" },
+  { "id": 23, "expansion": "Daybreak", "role": "PARANORMAL_INVESTIGATOR", "team": "village" },
+  { "id": 24, "expansion": "Daybreak", "role": "REVEALER", "team": "village" },
+  { "id": 25, "expansion": "Daybreak", "role": "SENTINEL", "team": "village" },
+  { "id": 26, "expansion": "Daybreak", "role": "VILLAGE_IDIOT", "team": "village" },
+  { "id": 27, "expansion": "Daybreak", "role": "WITCH", "team": "village" },
+  { "id": 28, "expansion": "Vampire", "role": "APPRENTICE_ASSASSIN", "team": "apprentice assassin" },
+  { "id": 29, "expansion": "Vampire", "role": "ASSASSIN", "team": "assassin" },
+  { "id": 30, "expansion": "Vampire", "role": "COPYCAT", "team": "village" },
+  { "id": 31, "expansion": "Vampire", "role": "CUPID", "team": "village" },
+  { "id": 32, "expansion": "Vampire", "role": "DISEASED", "team": "village" },
+  { "id": 33, "expansion": "Vampire", "role": "GREMLIN", "team": "village" },
+  { "id": 34, "expansion": "Vampire", "role": "INSTIGATOR", "team": "village" },
+  { "id": 35, "expansion": "Vampire", "role": "MARKSMAN", "team": "village" },
+  { "id": 36, "expansion": "Vampire", "role": "PICKPOCKET", "team": "village" },
+  { "id": 37, "expansion": "Vampire", "role": "PRIEST", "team": "village" },
+  { "id": 38, "expansion": "Vampire", "role": "RENFIELD", "team": "vampire" },
+  { "id": 39, "expansion": "Vampire", "role": "THE_COUNT", "team": "vampire" },
+  { "id": 40, "expansion": "Vampire", "role": "THE_MASTER", "team": "vampire" },
+  { "id": 41, "expansion": "Vampire", "role": "VAMPIRE", "team": "vampire" },
+  { "id": 42, "expansion": "Alien", "role": "ALIEN", "team": "alien" },
+  { "id": 43, "expansion": "Alien", "role": "ALIEN", "team": "alien" },
+  { "id": 44, "expansion": "Alien", "role": "BLOB", "team": "blob" },
+  { "id": 45, "expansion": "Alien", "role": "COW", "team": "village" },
+  { "id": 46, "expansion": "Alien", "role": "EXPOSER", "team": "village" },
+  { "id": 47, "expansion": "Alien", "role": "GROOB", "team": "groob" },
+  { "id": 48, "expansion": "Alien", "role": "LEADER", "team": "village" },
+  { "id": 49, "expansion": "Alien", "role": "MORTICIAN", "team": "mortician" },
+  { "id": 50, "expansion": "Alien", "role": "ORACLE", "team": "village" },
+  { "id": 51, "expansion": "Alien", "role": "PSYCHIC", "team": "village" },
+  { "id": 52, "expansion": "Alien", "role": "RASCAL", "team": "village" },
+  { "id": 53, "expansion": "Alien", "role": "SYNTHETIC_ALIEN", "team": "synthetic" },
+  { "id": 54, "expansion": "Alien", "role": "ZERB", "team": "zerb" },
+  { "id": 55, "expansion": "Super Villains", "role": "ANNOYING_LAD", "team": "hero" },
+  { "id": 56, "expansion": "Super Villains", "role": "DETECTOR", "team": "hero" },
+  { "id": 57, "expansion": "Super Villains", "role": "DR_PEEKER", "team": "villain" },
+  { "id": 58, "expansion": "Super Villains", "role": "EVILOMETER", "team": "hero" },
+  { "id": 59, "expansion": "Super Villains", "role": "FLIPPER", "team": "hero" },
+  { "id": 60, "expansion": "Super Villains", "role": "HENCHMAN", "team": "villain" },
+  { "id": 61, "expansion": "Super Villains", "role": "INNOCENT_BYSTANDER", "team": "innocent" },
+  { "id": 62, "expansion": "Super Villains", "role": "INTERN", "team": "mad" },
+  { "id": 63, "expansion": "Super Villains", "role": "MAD_SCIENTIST", "team": "mad" },
+  { "id": 64, "expansion": "Super Villains", "role": "MIRROR_MAN", "team": "hero" },
+  { "id": 65, "expansion": "Super Villains", "role": "RAPSCALLION", "team": "villain" },
+  { "id": 66, "expansion": "Super Villains", "role": "ROLE_RETRIEVER", "team": "hero" },
+  { "id": 67, "expansion": "Super Villains", "role": "SELF_AWARENESS_GIRL", "team": "hero" },
+  { "id": 68, "expansion": "Super Villains", "role": "SWITCHEROO", "team": "hero" },
+  { "id": 69, "expansion": "Super Villains", "role": "TEMPTRESS", "team": "villain" },
+  { "id": 70, "expansion": "Super Villains", "role": "VOODOO_LOU", "team": "hero" },
+  { "id": 71, "expansion": "Bonus Roles", "role": "APPRENTICE_TANNER", "team": "tanner" },
+  { "id": 72, "expansion": "Bonus Roles", "role": "AURA_SEER", "team": "village" },
+  { "id": 73, "expansion": "Bonus Roles", "role": "BEHOLDER", "team": "village" },
+  { "id": 74, "expansion": "Bonus Roles", "role": "BODY_SNATCHER", "team": "alien" },
+  { "id": 75, "expansion": "Bonus Roles", "role": "CURSED", "team": "village" },
+  { "id": 76, "expansion": "Bonus Roles", "role": "DEFENDERER", "team": "hero" },
+  { "id": 77, "expansion": "Bonus Roles", "role": "EMPATH", "team": "village" },
+  { "id": 78, "expansion": "Bonus Roles", "role": "FAMILY_MAN", "team": "family" },
+  { "id": 79, "expansion": "Bonus Roles", "role": "INNOCENT_BYSTANDER", "team": "innocent" },
+  { "id": 80, "expansion": "Bonus Roles", "role": "NOSTRADAMUS", "team": "nostradamus" },
+  { "id": 81, "expansion": "Bonus Roles", "role": "PRINCE", "team": "village" },
+  { "id": 82, "expansion": "Bonus Roles", "role": "RICOCHET_RHINO", "team": "hero" },
+  { "id": 83, "expansion": "Bonus Roles", "role": "SQUIRE", "team": "werewolf" },
+  { "id": 84, "expansion": "Bonus Roles", "role": "THE_SPONGE", "team": "hero" },
+  { "id": 85, "expansion": "Bonus Roles", "role": "THING", "team": "village" },
+  { "id": 86, "expansion": "Bonus Roles", "role": "WINDY_WENDY", "team": "hero"
   }
 ]

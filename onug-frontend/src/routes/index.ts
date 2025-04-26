@@ -1,6 +1,7 @@
 export * from './God/God'
 export * from './Stub/Stub'
 export * from './Lobby/Lobby'
+export * from './Lobbyy/Lobbyy'
 export * from './Room/Room'
 export * from './Table/Table'
 export * from './Game/Game'

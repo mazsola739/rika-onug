@@ -5,6 +5,8 @@ import { allPlayersStateCheck, broadcast /* randomDelay */ } from '../utils'
 import { isActivePlayer } from './activePlayer'
 import { sceneHandler } from './sceneHandler'
 
+//TODO repository => scene
+
 export const chapterHandler = async gamestate => {
   try {
     logTrace(`chapterHandler in room [${gamestate.room_id}]`)
