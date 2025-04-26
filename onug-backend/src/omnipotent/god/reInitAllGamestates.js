@@ -5,7 +5,7 @@ export const reInitAllGamestates = async (req, res) => {
   try {
     const { body } = req
     logTrace(`GOD re-initialize all gamestates endpoint triggered: ${JSON.stringify(body)}`)
-    const response = { gamestates: await reInitializeAllGamestates(), gamestates_: await reInitializeAllGamestates_() }
+    const response = { gamestates_: await reInitializeAllGamestates_(), gamestates: await reInitializeAllGamestates() }
 
     logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
 

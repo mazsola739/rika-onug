@@ -6,7 +6,7 @@ export const deleteGamestateByRoomId = async (req, res) => {
     const { body } = req
     logTrace(`GOD delete gamestate by room_id endpoint triggered: ${JSON.stringify(body)}`)
     const { room_id } = req.query
-    const response = { gamestates: await removeRoomGamestateById(room_id), gamestates_: await removeRoomGamestateById_(room_id) }
+    const response = { gamestates_: await removeRoomGamestateById_(room_id), gamestates: await removeRoomGamestateById(room_id) }
 
     logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
 

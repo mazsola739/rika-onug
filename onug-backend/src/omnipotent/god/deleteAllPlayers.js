@@ -6,7 +6,7 @@ export const deleteAllPlayers = async (req, res) => {
   try {
     const { body } = req
     logTrace('GOD delete all players endpoint triggered', body)
-    const response = { gamestates: await removeAllPlayers(), gamestates_: removeAllPlayers_() }
+    const response = { gamestates_: removeAllPlayers_() , gamestates: await removeAllPlayers()}
     initWebSocketConnections()
 
     logTrace(`sending back gamestates: ${JSON.stringify(response)}`)

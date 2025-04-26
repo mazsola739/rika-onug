@@ -1,1 +1,1 @@
-plan to split gamestate to smaller pieces
+to keep this folder as 'always existing one'

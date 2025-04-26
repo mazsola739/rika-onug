@@ -6,11 +6,15 @@ export const deleteAllGamestates = async (req, res) => {
     const { body } = req
     logTrace(`GOD delete all gamestates endpoint triggered: ${JSON.stringify(body)}`)
 
+    /* 'originally' here
+    const response = await removeAllGamestates()
+    const gamestates = await readAllGamestates()
+    response.gamestates = gamestates
+     */
+
     const response = {
-      ...await removeAllGamestates(),
-      ...await removeAllGamestates_(),
-      gamestates: await readAllGamestates(),
-      gamestates_: await readAllGamestates_()
+      gamestates_: { ...await removeAllGamestates_(), ...await readAllGamestates_() },
+      gamestates: { ...await removeAllGamestates(), ...await readAllGamestates() },
     }
 
     logTrace(`sending back gamestates: ${JSON.stringify(response)}`)

@@ -6,7 +6,7 @@ export const checkGamestateByRoomId = async (req, res) => {
     const { body } = req
     logTrace(`GOD check gamestate by room_id endpoint triggered: ${JSON.stringify(body)}`)
     const { room_id } = req.query
-    const response = { gamestates: await readGamestateByRoomId(room_id), gamestates_: readGamestateByRoomId_(room_id) }
+    const response = { gamestates_: readGamestateByRoomId_(room_id), gamestates: await readGamestateByRoomId(room_id) }
 
     logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
 
