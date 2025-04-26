@@ -10,7 +10,6 @@ const ROOM_GAMESTATE_FILE = room_id => `${FILE_PATH_TEMPLATE}${room_id}_gamestat
 
 const ENCODING = 'utf8'
 const WRITE_OPTIONS = { flag: 'w' }
-const DELETE_STATUS = { status: 'gamestate removed' }
 
 export const upsertRoomState = async state => {
   logTrace('upsertRoomState')
@@ -100,7 +99,7 @@ export const removeRoomGamestateById = async room_id => {
     logTrace(`Could not remove gamestate for filePath ${filePath}`, error)
   }
 
-  return DELETE_STATUS
+  return { status: 'gamestate removed' }
 }
 
 export const removeAllPlayers = async () => {

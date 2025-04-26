@@ -1,23 +1,21 @@
 [
   {
-    "roles": {
-      "aliens": { "alien_votes": {}, "instruction": "", "key": [] },
-      "blob": { "instruction": "" },
-      "bodysnatcher": { "instruction": "", "key": "" },
-      "doppelganger_bodysnatcher": { "instruction": "", "key": "" },
-      "doppelganger_empath": { "empath_votes": {}, "instruction": "" },
-      "doppelganger_exposer": { "instruction": "" },
-      "doppelganger_mortician": { "instruction": "", "key": "" },
-      "doppelganger_psychic": { "instruction": "", "key": "" },
-      "doppelganger_rascal": { "instruction": "", "key": "" },
-      "empath": { "empath_votes": {}, "instruction": "" },
-      "exposer": { "instruction": "" },
-      "familyman": { "instruction": "" },
-      "mortician": { "instruction": "", "key": "" },
-      "oracle": { "question": "", "number": 0, "answer": "", "aftermath": "", "openeyes": false, "target": false },
-      "psychic": { "instruction": "", "key": "" },
-      "rascal": { "instruction": "", "key": "" },
-      "vampires": { "vampire_votes": {} }
-    }
+    "aliens": { "alien_votes": {}, "instruction": "", "key": [] },
+    "blob": { "instruction": "" },
+    "bodysnatcher": { "instruction": "", "key": "" },
+    "doppelganger_bodysnatcher": { "instruction": "", "key": "" },
+    "doppelganger_empath": { "empath_votes": {}, "instruction": "" },
+    "doppelganger_exposer": { "instruction": "" },
+    "doppelganger_mortician": { "instruction": "", "key": "" },
+    "doppelganger_psychic": { "instruction": "", "key": "" },
+    "doppelganger_rascal": { "instruction": "", "key": "" },
+    "empath": { "empath_votes": {}, "instruction": "" },
+    "exposer": { "instruction": "" },
+    "familyman": { "instruction": "" },
+    "mortician": { "instruction": "", "key": "" },
+    "oracle": { "question": "", "number": 0, "answer": "", "aftermath": "", "openeyes": false, "target": false },
+    "psychic": { "instruction": "", "key": "" },
+    "rascal": { "instruction": "", "key": "" },
+    "vampires": { "vampire_votes": {} }
   }
 ]
