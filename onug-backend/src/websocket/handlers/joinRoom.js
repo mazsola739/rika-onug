@@ -6,13 +6,11 @@ import { getPlayerNames } from '../../utils'
 import { validateRoom } from '../../validators'
 import { addUserToRoom, broadcast } from '../../utils/connections.utils'
 
-const randomPlayerName = (names = []) => names[~~(Math.random() * names.length)]
-
 export const joinRoom = async (ws, message) => {
   logTrace(`join-room requested with ${JSON.stringify(message)}`)
 
   try {
-    const { room_id, token } = message
+    const { room_id, nickname, token } = message
     const roomIndex = roomsData.findIndex(room => room.room_id === room_id)
 
     if (roomIndex === -1) {
@@ -28,30 +26,25 @@ export const joinRoom = async (ws, message) => {
     const room = roomsData[roomIndex]
     const [roomIdValid, gamestate] = await validateRoom(room_id)
 
-    let player_name
+    if (gamestate && Object.keys(gamestate.players).length >= 12) {
+      return ws.send(
+        JSON.stringify({
+          type: JOIN_ROOM,
+          success: false,
+          errors: ['Room is full. No more players can join.']
+        })
+      )
+    }
 
     if (!roomIdValid) {
-      if (room.available_names.length === 0) {
-        return ws.send(
-          JSON.stringify({
-            type: JOIN_ROOM,
-            success: false,
-            errors: ['No more available names. Room is full.']
-          })
-        )
-      }
-
-      player_name = randomPlayerName(room.available_names)
-
       const newGamestate = {
         ...room,
         selected_cards: room.selected_cards,
         selected_expansions: room.selected_expansions,
         stage: STAGES.ROOM,
         players: {
-          [token]: { name: player_name, admin: true, flag: false }
-        },
-        available_names: room.available_names.filter(name => name !== player_name)
+          [token]: { name: nickname, admin: true, flag: false }
+        }
       }
 
       try {
@@ -67,27 +60,13 @@ export const joinRoom = async (ws, message) => {
         )
       }
     } else {
-      if (room.available_names.length === 0) {
-        return ws.send(
-          JSON.stringify({
-            type: JOIN_ROOM,
-            success: false,
-            errors: ['No more available names. Room is full.']
-          })
-        )
-      }
-
-      player_name = randomPlayerName(gamestate.available_names)
-
       const isAdmin = Object.values(gamestate.players).every(player => !player.admin)
 
       gamestate.players[token] = {
-        name: player_name,
+        name: nickname,
         admin: isAdmin,
         flag: false
       }
-
-      gamestate.available_names = gamestate.available_names.filter(name => name !== player_name)
 
       try {
         await upsertRoomState(gamestate)
@@ -121,7 +100,7 @@ export const joinRoom = async (ws, message) => {
         success: true,
         message: 'Successfully joined',
         room_id,
-        player: { player_name }
+        player: { name: nickname }
       })
     )
   } catch (error) {

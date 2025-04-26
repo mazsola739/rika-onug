@@ -5,6 +5,7 @@ export * from './wining'
 
 export * from './dafaults'
 export * from './misc'
+export * from './nicknames'
 export * from './env'
 
 export * from './buttons'

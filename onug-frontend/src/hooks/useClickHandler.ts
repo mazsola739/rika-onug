@@ -1,4 +1,4 @@
-import { DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, READY, RESET, SCENE, START_GAME, START_VOTE, STOP_GAME, UPDATE_ROOM, VOTE } from 'constant'
+import { DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, READY, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_ROOM, VOTE } from 'constant'
 import { useCallback } from 'react'
 import { gameStatusStore, riseAndRestStore, roomStore, wsStore } from 'store'
 
@@ -27,10 +27,20 @@ export const useClickHandler = () => {
   }, [sendJsonMessage])
 
   //LOBBY
-  const handleJoinRoom = (room_id: string) => {
+  const handleJoinRoom = (room_id: string, nickname: string) => {
     sendJsonMessage?.({
-      type: JOIN_ROOM /*  */,
+      type: JOIN_ROOM,
+      nickname,
       room_id,
+      token
+    })
+  }
+
+  const handleSelectRoom = (selected_room_id: string, nickname: string) => {
+    sendJsonMessage?.({
+      type: SELECT_ROOM,
+      room_id: selected_room_id,
+      nickname,
       token
     })
   }
@@ -201,6 +211,7 @@ export const useClickHandler = () => {
     handleJoinRoom,
     handleLeaveRoom,
     handleJoinTable,
+    handleSelectRoom,
     handleLeaveGame,
     handleResetGame,
     handleStartGame,

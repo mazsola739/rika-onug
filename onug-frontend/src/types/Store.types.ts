@@ -10,10 +10,8 @@ export type GuessTokenType = {
 export type MessagesType = keyof typeof messages_text
 
 export type RoomType = {
-  players: string[]
   room_id: string
   room_name: string
-  selectedCards: number[]
 }
 
 export type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'cow' |'evilometer' | 'groobzerb' | 'vampires' | 'part_of_blob'

@@ -1,4 +1,4 @@
-import roomsData from '../data/rooms.json'
+import roomsData from '../data/rooms_new.json'
 import { logErrorWithStack, logTrace } from '../log'
 
 export const rooms = (req, res) => {

@@ -135,6 +135,7 @@ export type WsJsonMessageType = {
   path?: string
   player?: PlayerType
   players?: PlayerType[]
+  player_names?: string[]
   room_id?: string
   scene_end?: boolean
   selectable_card_limit?: {
@@ -150,6 +151,7 @@ export type WsJsonMessageType = {
   success?: boolean
   title?: string
   token?: string
+  total_players?: number
   type?: string
   update?: boolean
   vampire_votes?: VoteType

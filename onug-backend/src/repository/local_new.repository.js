@@ -53,13 +53,13 @@ const readGamestateFile = filePath => {
 
 const upsertRoomFile = (room_id, type, newData = null) => {
   const filePath = ROOM_GAMESTATE_FILE_PATHS[type](room_id)
-  
+
   try {
     const existingData = readGamestateFile(filePath) || {}
     const updatedData = newData
       ? { ...existingData, ...newData }
       : existingData
-      
+
     upsertGamestateFile(filePath, updatedData)
     logTrace(`${type} file upserted for room_id: ${room_id}`)
   } catch (error) {
@@ -105,30 +105,30 @@ export const generateNewRoomConfig_ = room_id => {
 
 export const reInitializeAllGamestates_ = () => {
   try {
-    logTrace('Re-init all gamestates');
+    logTrace('Re-init all gamestates')
 
     for (const { room_id } of roomsData) {
-      const filePaths = getRoomFilePaths(room_id);
+      const filePaths = getRoomFilePaths(room_id)
 
       ROOM_GAMESTATE_FILE_TYPES.forEach(type => {
-        const filePath = filePaths[type];
+        const filePath = filePaths[type]
 
         if (type === 'config') {
-          generateNewRoomConfig_(room_id);
+          generateNewRoomConfig_(room_id)
         } else {
-          const defaultData = DEFAULT_DATA_MAP[type] || {};
-          upsertGamestateFile(filePath, defaultData);
-          logTrace(`${type} file initialized for room_id: ${room_id}`);
+          const defaultData = DEFAULT_DATA_MAP[type] || {}
+          upsertGamestateFile(filePath, defaultData)
+          logTrace(`${type} file initialized for room_id: ${room_id}`)
         }
-      });
+      })
     }
 
-    return { status: 'rooms re-initialized' };
+    return { status: 'rooms re-initialized' }
   } catch (error) {
-    logErrorWithStack(error);
-    return { status: 'ERROR during re-initializing gamestates' };
+    logErrorWithStack(error)
+    return { status: 'ERROR during re-initializing gamestates' }
   }
-};
+}
 
 export const readRoomConfig_ = room_id => readRoomData_(room_id, 'config')
 export const readRoomPlayers_ = room_id => readRoomData_(room_id, 'players')
@@ -140,7 +140,7 @@ export const readGamestateByRoomId_ = room_id => {
   logTrace('read gamestate by room_id')
   const filePaths = getRoomFilePaths(room_id)
   const gamestate = {}
-  
+
   Object.entries(filePaths).forEach(([key, filePath]) => {
     try {
       const rawData = readFileSync(filePath, { encoding: ENCODING })
@@ -150,7 +150,7 @@ export const readGamestateByRoomId_ = room_id => {
       gamestate[key] = DEFAULT_DATA_MAP[key] || null
     }
   })
-  
+
   return gamestate
 }
 

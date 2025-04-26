@@ -1,5 +1,6 @@
 export const NEWBIE = 'NEWBIE'
 export const RELOAD = 'RELOAD'
+export const SELECT_ROOM = 'SELECT_ROOM'
 export const RESET = 'RESET'
 export const DEAL = 'DEAL'
 export const REDIRECT = 'REDIRECT'

@@ -26,7 +26,6 @@ export const leaveRoom = async (ws, message) => {
 
   if (player.admin && playerTokens.length > 1) gamestate.players[playerTokens[1]].admin = true
 
-  gamestate.available_names.push(player.name)
   delete gamestate.players[token]
 
   if (playerTokens.length === 1) {
@@ -38,7 +37,6 @@ export const leaveRoom = async (ws, message) => {
       gamestate.players = {}
       gamestate.scene_number = 0
       gamestate.closed = false
-      gamestate.available_names = [...defaultRoom.available_names]
       delete gamestate.card_positions
       delete gamestate.mark_positions
     }
