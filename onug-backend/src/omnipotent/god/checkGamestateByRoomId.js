@@ -1,18 +1,16 @@
 import { logErrorWithStack, logTrace } from '../../log'
-import { readGamestateByRoomId } from '../../repository'
+import { readGamestateByRoomId, readGamestateByRoomId_ } from '../../repository'
 
 export const checkGamestateByRoomId = async (req, res) => {
   try {
     const { body } = req
     logTrace(`GOD check gamestate by room_id endpoint triggered: ${JSON.stringify(body)}`)
     const { room_id } = req.query
-    const gamestates = await readGamestateByRoomId(room_id)
+    const response = { gamestates: await readGamestateByRoomId(room_id), gamestates_: readGamestateByRoomId_(room_id) }
 
-    logTrace(`sending back gamestates: ${JSON.stringify(gamestates)}`)
+    logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
 
-    return res.send({
-      gamestates
-    })
+    return res.send(response)
   } catch (error) {
     logErrorWithStack(error)
   }

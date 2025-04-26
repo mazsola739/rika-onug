@@ -1,10 +1,8 @@
-[
-  {
-    "card_positions": { "center_left": {}, "center_middle": {}, "center_right": {}, "center_wolf": {}, "center_villain": {} },
-    "mark_positions": {},
-    "doppelganger_mark_positions": {},
-    "flipped_cards": [],
-    "artifacted_cards": [],
-    "shielded_cards": []
-  }
-]
+{
+  "card_positions": { "center_left": {}, "center_middle": {}, "center_right": {}, "center_wolf": {}, "center_villain": {} },
+  "mark_positions": {},
+  "doppelganger_mark_positions": {},
+  "flipped_cards": [],
+  "artifacted_cards": [],
+  "shielded_cards": []
+}

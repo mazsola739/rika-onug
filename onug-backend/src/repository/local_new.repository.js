@@ -105,8 +105,8 @@ export const reInitializeAllGamestates_ = async () => {
   try {
     logTrace('Re-init all gamestates')
 
-    for (let index = 0; index < roomsData.length; index++) {
-      const { room_id } = roomsData[index]
+    for (let i = 0; i < roomsData.length; i++) {
+      const { room_id } = roomsData[i]
 
       await generateNewRoomConfig_(room_id)
       await upsertRoomPlayers_(room_id)

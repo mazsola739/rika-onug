@@ -1,13 +1,11 @@
-[
-  {
-    "stage": "LOBBY",
-    "selected_cards": [],
-    "selected_expansions": [ "Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles" ],
-    "nicknames": [],
-    "game_started": true,
-    "game_stopped": false,
-    "game_finished": false,
-    "script_locked": true,
-    "vote_timer": 300000
-  }
-]
+{
+  "stage": "LOBBY",
+  "selected_cards": [],
+  "selected_expansions": [ "Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles" ],
+  "nicknames": [],
+  "game_started": true,
+  "game_stopped": false,
+  "game_finished": false,
+  "script_locked": true,
+  "vote_timer": 300000
+}
