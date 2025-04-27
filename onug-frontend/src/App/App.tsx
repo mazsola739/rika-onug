@@ -7,7 +7,7 @@ import { ConnectionStatus, StyledApp } from './App.styles'
 import { useApp } from './useApp'
 import { Icon } from 'components'
 
-//TODO: Login page & fix admin
+//TODO: Fix admin
 //TODO: Error page and loading
 //TODO: Timer for vote
 //TODO: Settings for timer, roles ect.
@@ -40,7 +40,7 @@ export const App: React.ComponentType = observer(() => {
           <Route path="/council/:room_id" element={<Council />} />
           <Route path="/verdict/:room_id" element={<Verdict />} />
 
-          {/* God mode */}
+          {/* God mode - todo delete */}
           <Route path="/god" element={<God />} />
           <Route path="/stub" element={<Stub />} />
         </Routes>

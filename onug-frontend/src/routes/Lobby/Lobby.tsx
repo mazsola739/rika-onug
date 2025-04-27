@@ -1,13 +1,12 @@
 import { observer } from 'mobx-react-lite'
-import { StyledLobby, FormContainer, Label, Input, Select, ButtonB, Selection, RoomBackground } from './Lobby.styles'
+import { StyledLobby, FormContainer, Label, Input, Select, Selection, RoomBackground } from './Lobby.styles'
 import { useLobby } from './useLobby'
-import { Button, ButtonGroup } from 'components'
+import { Button } from 'components'
 import { lobbyStore } from 'store'
-import { presetCards } from 'constant'
 
 export const Lobby: React.ComponentType = observer(() => {
-  const { rooms } = lobbyStore
-  const { selectedRoom, nickname, roomInfo, handleRoomChange, handleNicknameChange, regenerateNickname, handleLogin } = useLobby()
+  const { rooms, presets } = lobbyStore
+  const { selectedRoom, nickname, roomInfo, handleRoomChange, handleNicknameChange, regenerateNickname, handleLogin, handlePreset } = useLobby()
 
   return lobbyStore.isLoading ? (
     <div>Loading...</div>
@@ -19,20 +18,20 @@ export const Lobby: React.ComponentType = observer(() => {
         <FormContainer onSubmit={handleLogin}>
           <Label>
             Nickname:
-            <Input
-              type="text"
-              name="nickname"
-              placeholder="Enter your nickname"
-              value={nickname}
-              onChange={handleNicknameChange}
-              required
-              maxLength={20}
-              pattern="[a-zA-Z0-9]*"
-              title="Nickname can only contain letters and numbers, and must be 20 characters or fewer."
-            />
-            <ButtonB type="button" onClick={regenerateNickname}>
-              New Nickname
-            </ButtonB>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <Input
+                type="text"
+                name="nickname"
+                placeholder="Enter your nickname"
+                value={nickname}
+                onChange={handleNicknameChange}
+                required
+                maxLength={20}
+                pattern="[a-zA-Z0-9]*"
+                title="Nickname can only contain letters and numbers, and must be 20 characters or fewer."
+              />
+              <Button onClick={regenerateNickname} buttonText='New Nickname' variant="blue" />
+            </div>
           </Label>
           <Label>
             Room:
@@ -47,22 +46,27 @@ export const Lobby: React.ComponentType = observer(() => {
               ))}
             </Select>
           </Label>
-          <ButtonB type="submit">Join</ButtonB>
+          <Label>
+            Preselected cards:
+            <Select name="preset" onChange={handlePreset} defaultValue="">
+              <option value="" disabled>
+                Select a cards
+              </option>
+              {presets.map(preset => (
+                <option key={preset.description} value={preset.description} style={{ color: '#333' }}>
+                  {preset.description}
+                </option>
+              ))}
+            </Select>
+          </Label>
+          <Button onClick={() => handleLogin} buttonText='Join' variant="magenta" />
         </FormContainer>
 
-        <RoomBackground img={selectedRoom ? `/assets/rooms/${selectedRoom}.webp` : ''}>
-          {selectedRoom ? null : <p>No room selected</p>}
-        </RoomBackground>
+        <RoomBackground img={selectedRoom ? `/assets/rooms/${selectedRoom}.webp` : '/assets/rooms/room_back.webp'} />
 
         {/* Display room information */}
-        {roomInfo && <p style={{ color: 'blue' }}>{roomInfo}</p>}
+        {roomInfo && <p>{roomInfo}</p>}
       </Selection>
-      <h2>Preset Cards</h2>
-      <ButtonGroup>
-        {presetCards.map(preset => (
-          <Button key={preset.value} onClick={() => console.log(`Preset selected: ${preset.value}`)} buttonText={preset.label} variant="primary" />
-        ))}
-      </ButtonGroup>
     </StyledLobby>
   )
 })

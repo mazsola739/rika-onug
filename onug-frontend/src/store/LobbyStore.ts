@@ -1,9 +1,10 @@
-import { roomsRequest } from 'api'
+import { lobbyRequest } from 'api'
 import { makeAutoObservable, runInAction } from 'mobx'
-import { RoomType } from 'types'
+import { PresetType, RoomType } from 'types'
 
 class LobbyStore {
   rooms: RoomType[] = []
+  presets: PresetType[] = []
   errorMessage: string | null = null
   isLoading = false
 
@@ -11,19 +12,28 @@ class LobbyStore {
     makeAutoObservable(this)
   }
 
-  async fetchRooms() {
+  async fetchLobby() {
     runInAction(() => {
       this.isLoading = true
     })
 
     try {
-      const rooms = await roomsRequest()
+      const { rooms = [], presets = [] } = await lobbyRequest() // No `.data` here
+
       runInAction(() => {
-        this.rooms = rooms
+        this.rooms = rooms.map((room: RoomType) => ({
+          room_id: room.room_id,
+          room_name: room.room_name
+        }))
+
+        this.presets = presets.map((preset: PresetType) => ({
+          description: preset.description,
+          cards: preset.cards
+        }))
       })
     } catch (error) {
       runInAction(() => {
-        this.errorMessage = error.message
+        this.errorMessage = error.message || 'Failed to fetch lobby data'
       })
     } finally {
       runInAction(() => {

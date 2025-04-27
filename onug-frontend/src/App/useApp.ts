@@ -10,6 +10,8 @@ interface WebSocketMessage {
 }
 
 export const useApp = () => {
+  const token = sessionStorage.getItem('token')
+
   const [firstTime, setFirstTime] = useState(false)
   const socketUrl = WS_HOST
   const { readyState, sendJsonMessage, lastJsonMessage } = useWebSocket<WebSocketMessage>(socketUrl, {
@@ -32,7 +34,6 @@ export const useApp = () => {
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
-      const token = sessionStorage.getItem('token')
       sendJsonMessage({ type: NEWBIE, token })
       sendJsonMessage({ type: RELOAD, token })
       wsStore.setSendJsonMessage(sendJsonMessage)

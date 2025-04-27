@@ -20,8 +20,7 @@ export const Selection = styled.div`
   width: 100%;`
 
 export const FormContainer = styled.form`
-  width: 100%;
-  max-width: 400px;
+  width: 400px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -30,7 +29,7 @@ export const FormContainer = styled.form`
 export const Label = styled.label`
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 8px;
   font-size: 14px;
 `;
 
@@ -39,6 +38,7 @@ export const Input = styled.input`
   border-radius: 4px;
   font-size: 14px;
   color: #333;
+  filter: drop-shadow(3px 3px 3px black);
 `;
 
 export const Select = styled.select`
@@ -46,25 +46,7 @@ export const Select = styled.select`
   border-radius: 4px;
   font-size: 14px;
   color: #333;
-`;
-
-export const ButtonB = styled.button`
-  padding: 10px 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #007bff;
-  color: #fff;
-  font-size: 14px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #0056b3;
-  }
-
-  &:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
+  filter: drop-shadow(3px 3px 3px black);
 `;
 
 export const SelectedRoom = styled.div`
@@ -74,16 +56,12 @@ export const SelectedRoom = styled.div`
 `;
 
 export const RoomBackground = styled.div<{ img: string }>`
-  width: 200px;
-  height: 200px;
+  min-width: 200px;
+  min-height: 200px;
   background: ${({ img }) => `url(${img}) center center/cover no-repeat`};
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold;
-  border: 1px solid #ccc;
   border-radius: 50%;
-  margin-top: 20px;
+  filter: drop-shadow(5px 5px 5px black);
 `;

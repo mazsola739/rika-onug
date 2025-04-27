@@ -1,17 +1,21 @@
 import roomsData from '../data/rooms_new.json'
+import presetData from '../data/preset.json'
 import { logErrorWithStack, logTrace } from '../log'
 
-export const rooms = (req, res) => {
+export const lobby = (req, res) => {
   try {
-    logTrace('Rooms endpoint called')
+    logTrace('Lobby endpoint called')
     return res.send({
       message: 'Successfully fetched',
-      data: roomsData
+      data: {
+        rooms: roomsData,
+        presets: presetData
+      }
     })
   } catch (error) {
     logErrorWithStack(error)
     return res.send({
-      message: 'Failed to fetch rooms'
+      message: 'Failed to fetch lobby'
     })
   }
 }

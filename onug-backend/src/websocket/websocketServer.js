@@ -1,9 +1,10 @@
 import WebSocket from 'ws'
-import { ALIENS, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, READY, RELOAD, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES, VOTE } from '../constants'
+import { ALIENS, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, PRESELECT, READY, RELOAD, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES, VOTE } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, hydrateReady, hydrateRoom, hydrateTable, joinRoom, leaveGame, leaveRoom, newbie, reload, reset, result, scene, selectRoom, startGame, startVote, stopGame, updateRoom, verdict } from './handlers'
 import { aliensVotehydrate } from '../scenes/roles/aliens/aliens.voteHydrate'
 import { vampiresVotehydrate } from '../scenes/roles/vampires/vampires.voteHydrate'
+import { preselect } from './handlers/preselect'
 
 export const websocketServer = port => {
   try {
@@ -27,7 +28,8 @@ export const websocketServer = port => {
 
         // @ts-ignore
         if (ws.token !== message.token) {
-          logError(`Invalid token for message type: ${message.type}`)
+          // @ts-ignore
+          logError(`Invalid token for message type: ${message.type} - ws.token: ${ws.token}, message.token: ${message.token}`)
           return
         }
 
@@ -39,6 +41,8 @@ export const websocketServer = port => {
             return joinRoom(ws, message)
           case SELECT_ROOM:
             return selectRoom(ws, message)
+          case PRESELECT:
+            return preselect(ws, message)
           case LEAVE_ROOM:
             return leaveRoom(ws, message)
           case UPDATE_ROOM:

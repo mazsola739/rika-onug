@@ -14,6 +14,11 @@ export type RoomType = {
   room_name: string
 }
 
+export type PresetType = {
+  description: string
+  cards: string
+}
+
 export type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'cow' |'evilometer' | 'groobzerb' | 'vampires' | 'part_of_blob'
 
 export type TableCenterCard = {

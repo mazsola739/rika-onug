@@ -7,7 +7,7 @@ export const selectRoom = async (ws, message) => {
   logTrace(`select-room requested with ${JSON.stringify(message)}`)
 
   try {
-    const { room_id, token } = message
+    const { room_id, nickname, token } = message
     const roomIndex = roomsData.findIndex(room => room.room_id === room_id)
 
     if (roomIndex === -1) {
@@ -43,6 +43,17 @@ export const selectRoom = async (ws, message) => {
     }
 
     const playerNames = Object.values(gamestate.players).map(player => player.name)
+
+    if (playerNames.includes(nickname)) {
+      return ws.send(
+        JSON.stringify({
+          type: SELECT_ROOM,
+          success: false,
+          errors: ["Existing player name in the room, select a new nickname."]
+        })
+      )
+    }
+
     const playerCount = playerNames.length
 
     if (playerCount === 12) {
