@@ -15,7 +15,7 @@ export const selectRoom = async (ws, message) => {
         JSON.stringify({
           type: SELECT_ROOM,
           success: false,
-          errors: ["Room does not exist."]
+          errors: ["Room does not exist."],
         })
       )
     }
@@ -27,7 +27,7 @@ export const selectRoom = async (ws, message) => {
         JSON.stringify({
           type: SELECT_ROOM,
           success: false,
-          errors: ["Room is invalid."]
+          errors: ["Room is invalid."],
         })
       )
     }
@@ -37,7 +37,8 @@ export const selectRoom = async (ws, message) => {
         JSON.stringify({
           type: SELECT_ROOM,
           success: false,
-          errors: ["Room is closed / game started."]
+          errors: ["Room is closed / game started."],
+          stage: gamestate.stage
         })
       )
     }
@@ -49,7 +50,8 @@ export const selectRoom = async (ws, message) => {
         JSON.stringify({
           type: SELECT_ROOM,
           success: false,
-          errors: ["Existing player name in the room, select a new nickname."]
+          errors: ["Existing player name in the room, select a new nickname."],
+          stage: gamestate.stage
         })
       )
     }
@@ -61,7 +63,8 @@ export const selectRoom = async (ws, message) => {
         JSON.stringify({
           type: SELECT_ROOM,
           success: false,
-          errors: ["Room is full."]
+          errors: ["Room is full."],
+          stage: gamestate.stage
         })
       )
     }
@@ -85,7 +88,7 @@ export const selectRoom = async (ws, message) => {
       JSON.stringify({
         type: SELECT_ROOM,
         success: false,
-        errors: ["An unexpected error occurred. Please try again."]
+        errors: ["An unexpected error occurred. Please try again."],
       })
     )
   }

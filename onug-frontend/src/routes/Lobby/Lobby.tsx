@@ -6,7 +6,7 @@ import { lobbyStore } from 'store'
 
 export const Lobby: React.ComponentType = observer(() => {
   const { rooms, presets } = lobbyStore
-  const { selectedRoom, nickname, roomInfo, handleRoomChange, handleNicknameChange, regenerateNickname, handleLogin, handlePreset } = useLobby()
+  const { selectedRoom, nickname, roomInfo, stage, handleRoomChange, handleNicknameChange, regenerateNickname, handleLogin, handlePreset } = useLobby()
 
   return lobbyStore.isLoading ? (
     <div>Loading...</div>
@@ -50,7 +50,7 @@ export const Lobby: React.ComponentType = observer(() => {
             Preselected cards:
             <Select name="preset" onChange={handlePreset} defaultValue="">
               <option value="" disabled>
-                Select a cards
+                Select cards
               </option>
               {presets.map(preset => (
                 <option key={preset.description} value={preset.description} style={{ color: '#333' }}>
@@ -63,9 +63,8 @@ export const Lobby: React.ComponentType = observer(() => {
         </FormContainer>
 
         <RoomBackground img={selectedRoom ? `/assets/rooms/${selectedRoom}.webp` : '/assets/rooms/room_back.webp'} />
-
-        {/* Display room information */}
         {roomInfo && <p>{roomInfo}</p>}
+        {stage && <p>Game stage: {stage}</p>}
       </Selection>
     </StyledLobby>
   )

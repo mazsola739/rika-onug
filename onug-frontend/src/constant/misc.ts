@@ -1,5 +1,14 @@
 import { ExpansionType, ExpansionsType, TeamNames as TeamNamesTypes, TeamType, TeamsType, WakeType } from 'types'
 
+export const STAGES = {
+  LOBBY: 'LOBBY',
+  ROOM: 'ROOM',
+  TABLE: 'TABLE',
+  GAME: 'GAME',
+  COUNCIL: 'COUNCIL',
+  VERDICT: 'VERDICT'
+}
+
 export const TEAMS: TeamsType = {
   village: 0,
   hero: 1,

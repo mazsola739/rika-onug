@@ -18,7 +18,7 @@ class LobbyStore {
     })
 
     try {
-      const { rooms = [], presets = [] } = await lobbyRequest() // No `.data` here
+      const { rooms = [], presets = [] } = await lobbyRequest()
 
       runInAction(() => {
         this.rooms = rooms.map((room: RoomType) => ({

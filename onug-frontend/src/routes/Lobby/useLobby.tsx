@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useClickHandler } from 'hooks'
 import { lobbyStore, wsStore } from 'store'
-import { adjectives, JOIN_ROOM, nouns, PRESELECT, REDIRECT } from 'constant'
+import { adjectives, JOIN_ROOM, nouns, PRESELECT, REDIRECT, STAGES } from 'constant'
 import { useNavigate } from 'react-router-dom'
 
 export const useLobby = () => {
@@ -44,18 +44,23 @@ export const useLobby = () => {
   const [selectedRoom, setSelectedRoom] = useState('')
   const [nickname, setNickname] = useState(() => localStorage.getItem('nickname') || generateFunnyNickname())
   const [roomInfo, setRoomInfo] = useState<string | null>(null)
+  const [stage, setStage] = useState<string>(STAGES.LOBBY)
 
   useEffect(() => {
     try {
       if (lastJsonMessage) {
         if (!lastJsonMessage.success) {
-          setRoomInfo(lastJsonMessage.errors[0])
+          setRoomInfo(lastJsonMessage.errors?.[0] || 'An unknown error occurred.')
+          setStage(lastJsonMessage.stage)
         } else if (lastJsonMessage.total_players === 0) {
           setRoomInfo('This room has no players.')
+          setStage(lastJsonMessage.stage)
         } else if (Array.isArray(lastJsonMessage.player_names)) {
           setRoomInfo(`Players in this room: ${lastJsonMessage.player_names.join(', ')}`)
+          setStage(lastJsonMessage.stage)
         } else {
           setRoomInfo('Player information is unavailable.')
+          setStage(lastJsonMessage.stage)
         }
       }
     } catch (error) {
@@ -104,6 +109,7 @@ export const useLobby = () => {
       sendJsonMessage({
         type: PRESELECT,
         token,
+        room_id: selectedRoom,
         selected_cards: preset.cards,
       })
     }
@@ -113,6 +119,7 @@ export const useLobby = () => {
     selectedRoom,
     nickname,
     roomInfo,
+    stage,
     errorMessage,
     handleRoomChange,
     handleNicknameChange,
