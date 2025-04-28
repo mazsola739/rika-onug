@@ -1,12 +1,14 @@
 import { HYDRATE_GUESS } from '../../constants'
-import { logErrorWithStack } from '../../log'
+import { logErrorWithStack, logTrace } from '../../log'
 import { upsertRoomState } from '../../repository'
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 
 export const hydrateGuess = async (ws, message) => {
+  logTrace(`hydrate-guess requested with ${JSON.stringify(message)}`)
+  const { room_id, guess } = message
   try {
-    const { room_id, guess } = message
+
     const { position, id } = guess || {}
 
     const [roomIdValid, gamestate, errors] = await validateRoom(room_id)

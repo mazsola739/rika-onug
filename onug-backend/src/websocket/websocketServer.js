@@ -33,6 +33,7 @@ export const websocketServer = port => {
         }
 
         // Handle messages that require token validation
+        // TODO refactor handlers
         switch (message.type) {
           case RELOAD:
             return reload(ws, message)

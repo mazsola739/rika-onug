@@ -6,10 +6,10 @@ import { getKeys, getKnownPlayer, updatePlayer } from '../../utils/council.util'
 import { validateRoom_ } from '../../validators'
 
 export const hydrateCouncil = async (ws, message) => {
+  logTrace(`hydrate council ${JSON.stringify(message)}`)
+  const { room_id, token } = message
   try {
-    logTrace(`hydrate council ${JSON.stringify(message)}`)
 
-    const { room_id, token } = message
     const gamestate = await readGamestate(room_id)
     const [validity, config, errors] = await validateRoom_(room_id)
 

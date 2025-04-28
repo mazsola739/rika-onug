@@ -4,10 +4,11 @@ import { readGamestate } from '../../repository'
 import { areAllPlayersReady, resetPlayerReadiness } from '../../utils'
 
 export const hydrateGame = async (ws, message) => {
-  try {
-    logTrace(`hydrate game play ${JSON.stringify(message)}`)
+  logTrace(`hydrate game play ${JSON.stringify(message)}`)
 
-    const { room_id } = message
+  const { room_id } = message
+  try {
+
     const gamestate = await readGamestate(room_id)
     const newGamestate = { ...gamestate, stage: STAGES.GAME }
 

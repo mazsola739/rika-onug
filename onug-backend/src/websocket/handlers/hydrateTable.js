@@ -4,10 +4,11 @@ import { readGamestate } from '../../repository'
 import { getPublicPlayersInformation } from '../../utils'
 
 export const hydrateTable = async (ws, message) => {
-  try {
-    logTrace(`hydrate game table requested with ${JSON.stringify(message)}`)
+  logTrace(`hydrate game table requested with ${JSON.stringify(message)}`)
 
-    const { room_id, token } = message
+  const { room_id, token } = message
+  try {
+
     const gamestate = await readGamestate(room_id)
     const newGamestate = { ...gamestate, stage: STAGES.TABLE }
     const players = getPublicPlayersInformation(newGamestate)

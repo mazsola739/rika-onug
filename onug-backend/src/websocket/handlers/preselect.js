@@ -5,9 +5,9 @@ import { upsertGamestate_ } from "../../repository"
 
 export const preselect = async (ws, message) => {
   logTrace(`select-room requested with ${JSON.stringify(message)}`)
-
-  try {
     const { room_id, token, selected_cards } = message
+  try {
+
     const [validity, config, errors] = await validateRoom_(room_id)
 
     if (!validity) return ws.send(JSON.stringify({ type: PRESELECT, success: false, errors }))

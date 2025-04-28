@@ -5,12 +5,14 @@ import { dealCardIds, determineTotalPlayers, createCenterPositionCard, createPla
 import { validateRoom, validateRoom_ } from '../../validators'
 
 export const dealCards = async (ws, message) => {
+  const { room_id } = message
+  logTrace(`Dealing cards for players in room: ${room_id}`)
+
   try {
-    const { room_id } = message
-    logTrace(`Dealing cards for players in room: ${room_id}`)
+
     const [gamestate] = await validateRoom(room_id)
     const [validity, config, errors] = await validateRoom_(room_id)
-    
+
     if (!validity) return ws.send(JSON.stringify({ type: DEAL, success: false, errors }))
 
     const selectedCards = [...config.selected_cards]

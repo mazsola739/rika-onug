@@ -1,6 +1,7 @@
 import { HYDRATE_ROOM, STAGES } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
-import { getPlayerNames_ } from '../../utils'
+import { upsertRoomData_ } from '../../repository'
+import { getPlayerNames } from '../../utils'
 import { validateRoom_ } from '../../validators'
 
 export const hydrateRoom = async (ws, message) => {
@@ -12,8 +13,8 @@ export const hydrateRoom = async (ws, message) => {
 
     const newConfig = { ...config, stage: STAGES.ROOM }
 
-    const playersInGame = getPlayerNames_(players.players)
-    const nicknames = newConfig.nicknames
+    await upsertRoomData_(room_id, 'config', newConfig)
+    await upsertRoomData_(room_id, 'players', players) // Ensure players are updated
 
     const hydrateRoom = JSON.stringify({
       type: HYDRATE_ROOM,
@@ -21,8 +22,7 @@ export const hydrateRoom = async (ws, message) => {
       room_id: newConfig.room_id,
       selected_cards: newConfig.selected_cards,
       selected_expansions: newConfig.selected_expansions,
-      players: playersInGame,
-      nicknames
+      players: getPlayerNames(players.players) // Use updated players
     })
 
     logTrace(`sending message to client, hydrate room`, hydrateRoom)

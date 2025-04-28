@@ -5,9 +5,9 @@ import { SELECT_ROOM, STAGES } from "../../constants"
 
 export const selectRoom = async (ws, message) => {
   logTrace(`select-room requested with ${JSON.stringify(message)}`)
-
-  try {
     const { room_id, nickname, token } = message
+  try {
+
     const roomIndex = roomsData.findIndex(room => room.room_id === room_id)
 
     if (roomIndex === -1) {

@@ -5,10 +5,12 @@ import { broadcast } from '../../utils/connections.utils'
 
 //TODO fix if leave from vote stages
 export const leaveGame = async (ws, message) => {
+      logTrace(`leave-table requested with ${JSON.stringify(message)}`)
+      const { room_id, token } = message
   try {
-    logTrace(`leave-table requested with ${JSON.stringify(message)}`)
 
-    const { room_id, token } = message
+
+
     const gamestate = await readGamestate(room_id)
     const player = gamestate.players[token]
 

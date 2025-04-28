@@ -2,9 +2,11 @@ import { validateRoom_ } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 import { HYDRATE_ROOM } from '../../constants'
 import { upsertGamestate_ } from '../../repository'
-import { determineTotalPlayers, filterCardsByExpansions, getPlayerNames_, toggleCardSelect, toggleExpansions } from '../../utils'
+import { determineTotalPlayers, filterCardsByExpansions, getPlayerNames, toggleCardSelect, toggleExpansions } from '../../utils'
+import { logTrace } from '../../log'
 
 export const updateRoom = async message => {
+  logTrace(`update-room requested with ${JSON.stringify(message)}`)
   const { room_id, card_id, expansion } = message
   const [validity, config, players, errors] = await validateRoom_(room_id)
 
@@ -32,8 +34,7 @@ export const updateRoom = async message => {
       errors: ['Cannot have more than 12 players.']
     })
 
-  const playersInGame = getPlayerNames_(players.players)
-  const nicknames = config.nicknames || {}
+  const playersInGame = getPlayerNames(players.players)
 
   upsertGamestate_(room_id, "config", config)
 
@@ -42,7 +43,6 @@ export const updateRoom = async message => {
     success: true,
     selected_cards: config.selected_cards,
     selected_expansions: config.selected_expansions,
-    players: playersInGame,
-    nicknames
+    players: playersInGame
   })
 }

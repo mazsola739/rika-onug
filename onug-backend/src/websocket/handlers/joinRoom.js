@@ -3,15 +3,16 @@ import roomsData from '../../data/rooms_new.json'
 import configData from '../../data/gamestate_config.json'
 import { logErrorWithStack, logTrace, logWarn } from '../../log'
 import { upsertRoomData_ } from '../../repository'
-import { getPlayerNames_ } from '../../utils'
 import { validateRoom_ } from '../../validators'
 import { addUserToRoom, broadcast } from '../../utils/connections.utils'
+import { getPlayerNames, getNicknames } from '../../utils'
 
+//TODO bugfix the player names not visible when new joiner, or missing names
 export const joinRoom = async (ws, message) => {
   logTrace(`join-room requested with ${JSON.stringify(message)}`)
-
-  try {
     const { room_id, nickname, token } = message
+  try {
+
     const room_index = roomsData.findIndex(room => room.room_id === room_id)
 
     if (room_index === -1) {
@@ -37,16 +38,23 @@ export const joinRoom = async (ws, message) => {
     }
 
     if (!validity) {
+      const playerTokens = Object.keys(players.players)
+
+      const newPlayers = {
+        ...players,
+        players: {
+          ...players.players,
+          [token]: { name: nickname, admin: playerTokens.length === 0, flag: false }
+        },
+        total_players: playerTokens.length + 1
+      }
+
       const newConfig = {
         ...config,
         selected_cards: configData.selected_cards,
         selected_expansions: configData.selected_expansions,
         stage: STAGES.ROOM,
-      }
-
-      const newPlayers = {
-        ...players,
-        players: { [token]: { name: nickname, admin: Object.keys(players.players).length === 0, flag: false } }
+        nicknames: getNicknames(newPlayers.players)
       }
 
       try {
@@ -63,13 +71,24 @@ export const joinRoom = async (ws, message) => {
         )
       }
     } else {
+      const playerTokens = Object.keys(players.players)
       const updatedPlayers = {
         ...players,
-        players: { [token]: { name: nickname, admin: Object.keys(players.players).length === 0, flag: false } }
+        players: {
+          ...players.players,
+          [token]: { name: nickname, admin: playerTokens.length === 0, flag: false }
+        },
+        total_players: playerTokens.length + 1
+      }
+
+      const updatedConfig = {
+        ...config,
+        nicknames: getNicknames(updatedPlayers.players)
       }
 
       try {
         await upsertRoomData_(room_id, 'players', updatedPlayers)
+        await upsertRoomData_(room_id, 'config', updatedConfig)
       } catch (error) {
         logWarn(`Error updating players for room: ${error.message}`)
         return ws.send(
@@ -84,14 +103,13 @@ export const joinRoom = async (ws, message) => {
 
     addUserToRoom(ws, token, room_id)
 
-    const playersInGame = getPlayerNames_(players.players)
-
     broadcast(room_id, {
       type: HYDRATE_ROOM,
+      room_id,
       success: true,
       selected_cards: config.selected_cards,
       selected_expansions: config.selected_expansions,
-      players: playersInGame
+      players: getPlayerNames(players)
     })
 
     return ws.send(

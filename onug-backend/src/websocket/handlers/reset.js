@@ -1,7 +1,7 @@
 import { EXPANSIONS, HYDRATE_ROOM } from '../../constants'
 import { logError, logTrace } from '../../log'
 import { upsertGamestate_ } from '../../repository'
-import { getPlayerNames_ } from '../../utils'
+import { getPlayerNames } from '../../utils'
 import { validateRoom_ } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 
@@ -22,15 +22,14 @@ export const reset = async message => {
 
     logTrace(`selectedCards reseted, new config: ${JSON.stringify(newConfig)}`)
 
-    const playersInGame = getPlayerNames_(players.players)
+    const playersInGame = getPlayerNames(players.players)
 
     return broadcast(room_id, {
       type: HYDRATE_ROOM,
       success: true,
       selected_cards: newConfig.selected_cards,
       selected_expansions: newConfig.selected_expansions,
-      players: playersInGame,
-      nicknames: newConfig.nicknames
+      players: playersInGame
     })
   } catch (error) {
     logError(error)
