@@ -29,11 +29,11 @@ const handleNightReady = async (room_id, gamestate, players, token) => {
     //TODO uncomment delay
     /* await randomDelay() */
 
-    gamestate = await scriptHandler(gamestate)
+    gamestate = await scriptHandler(gamestate, room_id)
     if (gamestate.scripts[gamestate.scripts.length - 1].scene_title === 'RIPPLE') {
-      gamestate = await rippleHandler(gamestate)
+      gamestate = await rippleHandler(gamestate, room_id)
     }
-    gamestate = await chapterHandler(gamestate)
+    gamestate = await chapterHandler(gamestate, room_id)
     resetPlayerReadiness(players)
   } else {
     logTrace(`Waiting for all players to be ready for night in room: ${room_id}.`)
@@ -65,8 +65,8 @@ const handleDoneOrSkip = async (room_id, newGamestate, players, token, title, ac
   return newGamestate
 }
 
-const handleResponseAction = async (newGamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
-  await responseHandler(newGamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title)
+const handleResponseAction = async (newGamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title, room_id) => {
+  await responseHandler(newGamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title, room_id)
 }
 
 export const scene = async (ws, message) => {
@@ -75,6 +75,7 @@ export const scene = async (ws, message) => {
 
   try {
     const [roomIdValid, gamestate] = await validateRoom(room_id)
+    console.log(roomIdValid)
 
     let newGamestate = { ...gamestate }
     const { players } = newGamestate

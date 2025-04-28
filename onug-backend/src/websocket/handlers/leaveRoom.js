@@ -1,16 +1,18 @@
-import { HYDRATE_ROOM, LEAVE_ROOM } from '../../constants'
+import { EXPANSIONS, HYDRATE_ROOM, LEAVE_ROOM } from '../../constants'
 import roomsData from '../../data/rooms.json'
 import { logTrace } from '../../log'
-import { readGamestate, upsertRoomState } from '../../repository'
-import { getPlayerNames } from '../../utils'
+import { upsertRoomData_ } from '../../repository'
+import { getPlayerNames_ } from '../../utils'
 import { broadcast, removeUserFromRoom } from '../../utils/connections.utils'
+import { validateRoom_ } from '../../validators'
 
 export const leaveRoom = async (ws, message) => {
   logTrace(`leave-room requested with ${JSON.stringify(message)}`)
 
   const { room_id, token } = message
-  const gamestate = await readGamestate(room_id)
-  const player = gamestate.players[token]
+  const [config, players] = await validateRoom_(room_id)
+
+  const player = players.players[token]
 
   if (!player) {
     return ws.send(
@@ -22,38 +24,37 @@ export const leaveRoom = async (ws, message) => {
     )
   }
 
-  const playerTokens = Object.keys(gamestate.players)
+  const playerTokens = Object.keys(players)
 
-  if (player.admin && playerTokens.length > 1) gamestate.players[playerTokens[1]].admin = true
+  if (player.admin && playerTokens.length > 1) players[playerTokens[1]].admin = true
 
-  delete gamestate.players[token]
+  delete players[token]
 
   if (playerTokens.length === 1) {
     const defaultRoom = roomsData.find(room => room.room_id === room_id)
 
     if (defaultRoom) {
-      gamestate.selected_cards = defaultRoom.selected_cards
-      gamestate.selected_expansions = defaultRoom.selected_expansions
-      gamestate.players = {}
-      gamestate.scene_number = 0
-      gamestate.closed = false
-      delete gamestate.card_positions
-      delete gamestate.mark_positions
+      config.selected_cards = []
+      config.selected_expansions = EXPANSIONS
+      players.players = {}
+      players.total_players = 0
     }
   }
 
-  await upsertRoomState(gamestate)
+  await upsertRoomData_(room_id, 'config', config)
 
   removeUserFromRoom(token, room_id)
 
-  const players = getPlayerNames(gamestate)
+  const playersInGame = getPlayerNames_(players.players)
+  const nicknames = config.nicknames
 
   broadcast(room_id, {
     type: HYDRATE_ROOM,
     success: true,
-    selected_cards: gamestate.selected_cards,
-    selected_expansions: gamestate.selected_expansions,
-    players
+    selected_cards: config.selected_cards,
+    selected_expansions: config.selected_expansions,
+    players: playersInGame,
+    nicknames
   })
 
   return ws.send(

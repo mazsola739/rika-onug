@@ -1,7 +1,7 @@
 import { HYDRATE_READY } from '../../constants'
 import { logDebug, logError } from '../../log'
 import { readGamestate, upsertRoomState } from '../../repository'
-import { getTableBoard } from '../../utils'
+import { getPublicPlayersInformation } from '../../utils'
 import { broadcast } from '../../utils/connections.utils'
 
 export const hydrateReady = async message => {
@@ -16,7 +16,7 @@ export const hydrateReady = async message => {
 
     logDebug(`gamestate.players[token].flag: ${gamestate.players[token].flag}`)
 
-    const players = getTableBoard(gamestate)
+    const players = getPublicPlayersInformation(gamestate)
 
     await upsertRoomState(gamestate)
 

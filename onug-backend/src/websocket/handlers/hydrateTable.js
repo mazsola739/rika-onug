@@ -1,7 +1,7 @@
 import { HYDRATE_TABLE, STAGES } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
 import { readGamestate } from '../../repository'
-import { getTableBoard } from '../../utils'
+import { getPublicPlayersInformation } from '../../utils'
 
 export const hydrateTable = async (ws, message) => {
   try {
@@ -10,7 +10,7 @@ export const hydrateTable = async (ws, message) => {
     const { room_id, token } = message
     const gamestate = await readGamestate(room_id)
     const newGamestate = { ...gamestate, stage: STAGES.TABLE }
-    const players = getTableBoard(newGamestate)
+    const players = getPublicPlayersInformation(newGamestate)
 
     return ws.send(
       JSON.stringify({

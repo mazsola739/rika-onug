@@ -26,7 +26,17 @@ export const getPlayerNames = gamestate => {
   return players
 }
 
-export const getTableBoard = gamestate => {
+export const getPlayerNames_ = players => {
+  const playersFromGamestate = Object.values(players)
+
+  return playersFromGamestate.map(player => {
+    return {
+      player_name: player.name
+    }
+  })
+}
+
+export const getPublicPlayersInformation = gamestate => {
   const playersPrivate = Object.values(gamestate.players)
 
   const playersPublic = playersPrivate.map(player => {
@@ -40,29 +50,16 @@ export const getTableBoard = gamestate => {
   return playersPublic
 }
 
-export const getGameBoard = gamestate => {
-  const cardsOnBoard = Object.keys(gamestate?.card_positions).map(position => {
-    const playerCard = gamestate.card_positions[position].card
-    if (playerCard.id > 0) {
-      const card = { id: 0 }
-      const flippedCard = gamestate.flippe_cards.find(flippedCard => flippedCard[position])
-      if (flippedCard) {
-        card.id = flippedCard[position]
-      }
-      if (gamestate.artifacted_cards.includes(position)) {
-        card.artifact = true
-      }
-      if (gamestate.shielded_cards.includes(position)) {
-        card.shield = true
-      }
+export const getPublicPlayersInformation_ = players => {
+  const playersPrivate = Object.values(players.players)
 
-      return { position, card }
-    } else {
-      return { position, card: { id: null } }
+  const playersPublic = playersPrivate.map(player => {
+    return {
+      player_number: player.player_number,
+      player_name: player.name,
+      flag: player.flag
     }
   })
 
-  return {
-    gamePlayBoardCards: cardsOnBoard
-  }
+  return playersPublic
 }

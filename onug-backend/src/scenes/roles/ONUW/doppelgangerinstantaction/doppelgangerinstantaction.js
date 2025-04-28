@@ -13,9 +13,9 @@ const addVerboseOr = rolesFromIds => {
   rolesFromIds
 }
 
-export const doppelgangerinstantaction = (gamestate, title) => {
+export const doppelgangerinstantaction = (gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const rolesFromIds = getRolesNames(gamestate.selected_cards, DOPPELGANGER_INSTANT_ACTION, instantRoleIds)
+  const rolesFromIds = getRolesNames(selected_cards, DOPPELGANGER_INSTANT_ACTION, instantRoleIds)
 
   addVerboseOr(rolesFromIds)
 

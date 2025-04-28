@@ -1,37 +1,28 @@
 import { logTrace, logErrorWithStack } from "../../log"
-import { validateRoom } from "../../validators"
+import { validateRoom_ } from "../../validators"
 import { PRESELECT } from "../../constants"
-import { upsertRoomState } from "../../repository"
+import { upsertGamestate_ } from "../../repository"
 
 export const preselect = async (ws, message) => {
   logTrace(`select-room requested with ${JSON.stringify(message)}`)
 
   try {
     const { room_id, token, selected_cards } = message
+    const [validity, config, errors] = await validateRoom_(room_id)
 
-    const [roomIdValid, gamestate] = await validateRoom(room_id)
-
-    if (!roomIdValid) {
-      return ws.send(
-        JSON.stringify({
-          type: PRESELECT,
-          success: false,
-          errors: ["Room is invalid."]
-        })
-      )
-    }
+    if (!validity) return ws.send(JSON.stringify({ type: PRESELECT, success: false, errors }))
 
     if (Array.isArray(selected_cards)) {
-      gamestate.selected_cards = selected_cards
+      config.selected_cards = selected_cards
     }
 
-    await upsertRoomState(gamestate)
+    upsertGamestate_(room_id, "config", config)
 
     return ws.send(
       JSON.stringify({
         type: PRESELECT,
         success: true,
-        selected_cards: gamestate.selected_cards || [],
+        selected_cards: config.selected_cards || [],
         token
       })
     )

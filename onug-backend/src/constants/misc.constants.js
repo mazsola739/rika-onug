@@ -19,6 +19,8 @@ export const ROOM_NAMES = [
   'workshop'
 ]
 
+export const EXPANSIONS = ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles']
+
 export const STAGES = {
   LOBBY: 'LOBBY',
   ROOM: 'ROOM',

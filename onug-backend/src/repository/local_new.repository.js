@@ -12,19 +12,31 @@ const ENCODING = 'utf8'
 const WRITE_OPTIONS = { flag: 'w' }
 const ROOM_GAMESTATE_FILE_TYPES = ['config', 'players', 'roles', 'scene', 'table']
 
+/**
+ * Generates the file path for a specific room and file type.
+ */
 const getRoomFilePath = (room_id, type) => `${FILE_PATH_TEMPLATE}${room_id}/${type}.json`
 
+/**
+ * Generates all file paths for a specific room.
+ */
 const getRoomFilePaths = room_id =>
   ROOM_GAMESTATE_FILE_TYPES.reduce((paths, type) => {
     paths[type] = getRoomFilePath(room_id, type)
     return paths
   }, {})
 
+/**
+ * Generates a mapping of file types to their respective file path functions.
+ */
 const ROOM_GAMESTATE_FILE_PATHS = ROOM_GAMESTATE_FILE_TYPES.reduce((paths, type) => {
   paths[type] = room_id => getRoomFilePath(room_id, type)
   return paths
 }, {})
 
+/**
+ * Writes or updates a gamestate file with the provided data.
+ */
 const upsertGamestateFile = (filePath, data) => {
   try {
     writeFileSync(filePath, JSON.stringify(data, null, 2), WRITE_OPTIONS)
@@ -34,7 +46,11 @@ const upsertGamestateFile = (filePath, data) => {
   }
 }
 
-const readGamestateFile = filePath => {
+/**
+ * Reads a gamestate file and returns its content as JSON.
+ * If the file does not exist, creates it with default data.
+ */
+export const readGamestate_ = filePath => {
   try {
     const data = readFileSync(filePath, { encoding: ENCODING })
     return JSON.parse(data)
@@ -51,11 +67,14 @@ const readGamestateFile = filePath => {
   }
 }
 
-const upsertRoomFile = (room_id, type, newData = null) => {
+/**
+ * Updates or inserts data into a specific gamestate file for a room.
+ */
+export const upsertGamestate_ = (room_id, type, newData = null) => {
   const filePath = ROOM_GAMESTATE_FILE_PATHS[type](room_id)
 
   try {
-    const existingData = readGamestateFile(filePath) || {}
+    const existingData = readGamestate_(filePath) || {}
     const updatedData = newData
       ? { ...existingData, ...newData }
       : existingData
@@ -75,23 +94,26 @@ const DEFAULT_DATA_MAP = {
   table: tableData
 }
 
+/**
+ * Updates or inserts default or provided data into a specific room's gamestate file.
+ */
 export const upsertRoomData_ = (room_id, type, newData = null) => {
   const defaultData = DEFAULT_DATA_MAP[type]
   const dataToUpsert = newData || defaultData
-  upsertRoomFile(room_id, type, dataToUpsert)
+  upsertGamestate_(room_id, type, dataToUpsert)
 }
 
+/**
+ * Reads data from a specific gamestate file for a room.
+ */
 export const readRoomData_ = (room_id, type) => {
   const filePath = getRoomFilePath(room_id, type)
-  return readGamestateFile(filePath)
+  return readGamestate_(filePath)
 }
 
-export const upsertRoomConfig_ = (room_id, newData = null) => upsertRoomData_(room_id, 'config', newData)
-export const upsertRoomPlayers_ = (room_id, newData = null) => upsertRoomData_(room_id, 'players', newData)
-export const upsertRoomRoles_ = (room_id, newData = null) => upsertRoomData_(room_id, 'roles', newData)
-export const upsertRoomScene_ = (room_id, newData = null) => upsertRoomData_(room_id, 'scene', newData)
-export const upsertRoomTable_ = (room_id, newData = null) => upsertRoomData_(room_id, 'table', newData)
-
+/**
+ * Generates a new configuration file for a room with default and room-specific details.
+ */
 export const generateNewRoomConfig_ = room_id => {
   const filePath = getRoomFilePath(room_id, 'config')
   const roomDetails = roomsData.find(room => room.room_id === room_id) || { room_id, room_name: 'Unknown Room' }
@@ -103,6 +125,9 @@ export const generateNewRoomConfig_ = room_id => {
   upsertGamestateFile(filePath, updatedConfig)
 }
 
+/**
+ * Re-initializes all gamestate files for all rooms with default data.
+ */
 export const reInitializeAllGamestates_ = () => {
   try {
     logTrace('Re-init all gamestates')
@@ -130,12 +155,59 @@ export const reInitializeAllGamestates_ = () => {
   }
 }
 
+/**
+ * Updates or inserts configuration data for a specific room.
+ */
+export const upsertRoomConfig_ = (room_id, newData = null) => upsertRoomData_(room_id, 'config', newData)
+
+/**
+ * Updates or inserts players data for a specific room.
+ */
+export const upsertRoomPlayers_ = (room_id, newData = null) => upsertRoomData_(room_id, 'players', newData)
+
+/**
+ * Updates or inserts roles data for a specific room.
+ */
+export const upsertRoomRoles_ = (room_id, newData = null) => upsertRoomData_(room_id, 'roles', newData)
+
+/**
+ * Updates or inserts scene data for a specific room.
+ */
+export const upsertRoomScene_ = (room_id, newData = null) => upsertRoomData_(room_id, 'scene', newData)
+
+/**
+ * Updates or inserts table data for a specific room.
+ */
+export const upsertRoomTable_ = (room_id, newData = null) => upsertRoomData_(room_id, 'table', newData)
+
+/**
+ * Reads the configuration file for a specific room.
+ */
 export const readRoomConfig_ = room_id => readRoomData_(room_id, 'config')
+
+/**
+ * Reads the players file for a specific room.
+ */
 export const readRoomPlayers_ = room_id => readRoomData_(room_id, 'players')
+
+/**
+ * Reads the roles file for a specific room.
+ */
 export const readRoomRoles_ = room_id => readRoomData_(room_id, 'roles')
+
+/**
+ * Reads the scene file for a specific room.
+ */
 export const readRoomScene_ = room_id => readRoomData_(room_id, 'scene')
+
+/**
+ * Reads the table file for a specific room.
+ */
 export const readRoomTable_ = room_id => readRoomData_(room_id, 'table')
 
+/**
+ * Reads all gamestate files for a specific room and returns them as an object.
+ */
 export const readGamestateByRoomId_ = room_id => {
   logTrace('read gamestate by room_id')
   const filePaths = getRoomFilePaths(room_id)
@@ -154,6 +226,9 @@ export const readGamestateByRoomId_ = room_id => {
   return gamestate
 }
 
+/**
+ * Reads all gamestate files for all rooms and returns them as an object.
+ */
 export const readAllGamestates_ = () => {
   logTrace('read all gamestates')
   const gamestates = {}
@@ -165,6 +240,9 @@ export const readAllGamestates_ = () => {
   return gamestates
 }
 
+/**
+ * Removes all gamestate files for a specific room.
+ */
 export const removeRoomGamestateById_ = room_id => {
   logTrace('remove gamestate by room_id')
   const filePaths = Object.values(getRoomFilePaths(room_id))
@@ -186,6 +264,9 @@ export const removeRoomGamestateById_ = room_id => {
   return { status: 'gamestate removed' }
 }
 
+/**
+ * Removes all gamestate files for all rooms.
+ */
 export const removeAllGamestates_ = () => {
   logTrace('remove all gamestates')
   const results = {}
@@ -202,6 +283,9 @@ export const removeAllGamestates_ = () => {
   return { status: 'all gamestates removed', results }
 }
 
+/**
+ * Modifies the players in a specific room using a provided modification function.
+ */
 const modifyPlayersInRoom = (room_id, modifyFn) => {
   const filePath = getRoomFilePath(room_id, 'players')
 
@@ -219,6 +303,9 @@ const modifyPlayersInRoom = (room_id, modifyFn) => {
   }
 }
 
+/**
+ * Removes a player from all rooms by their token.
+ */
 export const removePlayerByToken_ = token => {
   logTrace(`remove player by id: ${token}`)
   const results = {}
@@ -234,6 +321,9 @@ export const removePlayerByToken_ = token => {
   return { status: `Player ${token} removal completed`, results }
 }
 
+/**
+ * Removes all players from all rooms.
+ */
 export const removeAllPlayers_ = () => {
   logTrace('remove all players')
   const results = {}

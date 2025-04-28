@@ -4,21 +4,20 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { randomOracleQuestions } from './oracle.constants'
 import { oraclequestionAction } from './oraclequestion.action'
 
-export const oracleQuestion = (gamestate, title) => {
+export const oracleQuestion = (gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const selectedCards = gamestate.selected_cards
 
   let availableOracleQuestionOptions = [...randomOracleQuestions]
 
-  if (!hasAnyAlien(selectedCards)) {
+  if (!hasAnyAlien(selected_cards)) {
     availableOracleQuestionOptions = availableOracleQuestionOptions.filter(question => !question.includes('alien') && !question.includes('ripple'))
   }
 
-  if (!hasAnyVampire(selectedCards)) {
+  if (!hasAnyVampire(selected_cards)) {
     availableOracleQuestionOptions = availableOracleQuestionOptions.filter(question => !question.includes('vampire'))
   }
 
-  if (!hasAnyWerewolf(selectedCards)) {
+  if (!hasAnyWerewolf(selected_cards)) {
     availableOracleQuestionOptions = availableOracleQuestionOptions.filter(question => !question.includes('werewolf'))
   }
 

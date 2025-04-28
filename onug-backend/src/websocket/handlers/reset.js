@@ -1,35 +1,36 @@
-import { HYDRATE_ROOM } from '../../constants'
+import { EXPANSIONS, HYDRATE_ROOM } from '../../constants'
 import { logError, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
-import { getPlayerNames } from '../../utils'
-import { validateRoom } from '../../validators'
+import { upsertGamestate_ } from '../../repository'
+import { getPlayerNames_ } from '../../utils'
+import { validateRoom_ } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 
 export const reset = async message => {
   try {
     const { room_id } = message
-    const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
+    const [validity, config, players, errors] = await validateRoom_(room_id)
 
-    if (!roomIdValid) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors })
+    if (!validity) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors_: errors })
 
-    const newGamestate = {
-      ...gamestate,
+    const newConfig = {
+      ...config,
       selected_cards: [],
-      selected_expansions: ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles']
+      selected_expansions: EXPANSIONS
     }
 
-    upsertRoomState(newGamestate)
+    await upsertGamestate_(room_id, "config", config)
 
-    logTrace(`selectedCards reseted, new gamestate: ${JSON.stringify(newGamestate)}`)
+    logTrace(`selectedCards reseted, new config: ${JSON.stringify(newConfig)}`)
 
-    const players = getPlayerNames(newGamestate)
+    const playersInGame = getPlayerNames_(players.players)
 
     return broadcast(room_id, {
       type: HYDRATE_ROOM,
       success: true,
-      selected_cards: [],
-      selected_expansions: ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles'],
-      players
+      selected_cards: newConfig.selected_cards,
+      selected_expansions: newConfig.selected_expansions,
+      players: playersInGame,
+      nicknames: newConfig.nicknames
     })
   } catch (error) {
     logError(error)

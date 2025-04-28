@@ -2,14 +2,19 @@ import { logInfo, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
 import { aliens, alphawolf, annoyinglad, apprenticeassassin, apprenticeseer, apprenticetanner, assassin, auraseer, beholder, blob, bodysnatcher, copycat, cow, cupid, curator, detector, diseased, doppelganger, empath, exposer, flipper, gremlin, doppelgangerinstantaction, mortician, pickpocket, priest, psychic, rascal, revealer, thecount, drpeeker, drunk, epicbattle, everyonemark, evilometer, familyman, groobzerb, insomniac, instigator, intern, joke, leader, leaderzerbgroob, lovers, madscientist, marksman, masons, minion, mirrorman, mysticwolf, nostradamus, nostradamusReaction, oracleAnswer, oracleQuestion, paranormalinvestigator, rapscallion, renfield, ripple, robber, roleretriever, seer, selfawarenessgirl, sentinel, squire, supervillains, switcheroo, temptress, thing, troublemaker, vampires, villageidiot, voodoolou, werewolves, witch } from './roles'
 import { hasAssassin, hasDoppelganger, hasApprenticeAssassin, hasMarks, hasSeer, hasApprenticeSeer, hasEasterEgg, hasEpicBattle, hasGoodGuys, hasBadGuys, hasMadScientist, hasDreamWolf } from './conditions'
+import { validateRoom_ } from '../validators'
 
 //TODO repository => scene
 
-export const sceneHandler = async (gamestate, scene_title) => {
+export const sceneHandler = async (gamestate, scene_title, room_id) => {
   logTrace(`sceneHandler in room [${gamestate.room_id}] called when actual scene is: ${scene_title}`)
+
+  console.log(room_id)
+  const [config] = await validateRoom_(room_id)
+
   let newGamestate = { ...gamestate }
-  const selected_cards = newGamestate.selected_cards
-  const total_players = newGamestate.total_players
+  const selected_cards = config.selected_cards
+  const total_players = config.total_players
 
   const handleEpicBattle = (gamestate, title, selected_cards, total_players) => {
     const hasEasterEggFlag = hasEasterEgg(selected_cards, total_players)
@@ -21,7 +26,7 @@ export const sceneHandler = async (gamestate, scene_title) => {
   }
 
   const roleHandlers = {
-    ALIENS: (gamestate, title) => aliens(gamestate, title),
+    ALIENS: (gamestate, title) => aliens(gamestate, title, selected_cards),
     ALPHA_WOLF: (gamestate, title) => alphawolf(gamestate, title),
     ANNOYING_LAD: (gamestate, title) => annoyinglad(gamestate, title),
     APPRENTICE_ASSASSIN: (gamestate, title, selected_cards) => apprenticeassassin(gamestate, title, hasAssassin(selected_cards), 'apprenticeassassin'),
@@ -47,7 +52,7 @@ export const sceneHandler = async (gamestate, scene_title) => {
     DOPPELGANGER_EXPOSER: (gamestate, title) => exposer(gamestate, title, 'doppelganger_exposer'),
     DOPPELGANGER_FLIPPER: (gamestate, title) => flipper(gamestate, title, 'doppelganger_flipper'),
     DOPPELGANGER_GREMLIN: (gamestate, title) => gremlin(gamestate, title, 'doppelganger_gremlin'),
-    DOPPELGANGER_INSTANT_ACTION: (gamestate, title) => doppelgangerinstantaction(gamestate, title),
+    DOPPELGANGER_INSTANT_ACTION: (gamestate, title) => doppelgangerinstantaction(gamestate, title, selected_cards),
     DOPPELGANGER_MORTICIAN: (gamestate, title) => mortician(gamestate, title, 'doppelganger_mortician'),
     DOPPELGANGER_PICKPOCKET: (gamestate, title) => pickpocket(gamestate, title, 'doppelganger_pickpocket'),
     DOPPELGANGER_PRIEST: (gamestate, title) => priest(gamestate, title, 'doppelganger_priest'),
@@ -83,7 +88,7 @@ export const sceneHandler = async (gamestate, scene_title) => {
     NOSTRADAMUS: (gamestate, title) => nostradamus(gamestate, title),
     NOSTRADAMUS_REACTION: (gamestate, title) => nostradamusReaction(gamestate, title),
     ORACLE_ANSWER: (gamestate, title) => oracleAnswer(gamestate, title),
-    ORACLE_QUESTION: (gamestate, title) => oracleQuestion(gamestate, title),
+    ORACLE_QUESTION: (gamestate, title) => oracleQuestion(gamestate, title, selected_cards),
     PARANORMAL_INVESTIGATOR: (gamestate, title) => paranormalinvestigator(gamestate, title),
     PICKPOCKET: (gamestate, title) => pickpocket(gamestate, title, 'pickpocket'),
     PRIEST: (gamestate, title) => priest(gamestate, title, 'priest'),

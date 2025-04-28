@@ -6,14 +6,13 @@ import { hasCow } from '../../conditions'
 
 //TODO fix alien pick together player
 
-export const aliens = (gamestate, title) => {
+export const aliens = (gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['aliens_kickoff_text']
-  const selectedCards = gamestate.selected_cards
 
-  if (hasCow(selectedCards)) {
+  if (hasCow(selected_cards)) {
     narration.push('aliens_kickoff_cow_text')
-  } else if (!hasCow(selectedCards)) {
+  } else if (!hasCow(selected_cards)) {
     narration.push('aliens_kickoff_aliens_text')
   }
 

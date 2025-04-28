@@ -1,9 +1,10 @@
 import { HYDRATE_ROOM, JOIN_ROOM, STAGES } from '../../constants'
-import roomsData from '../../data/rooms.json'
+import roomsData from '../../data/rooms_new.json'
+import configData from '../../data/gamestate_config.json'
 import { logErrorWithStack, logTrace, logWarn } from '../../log'
-import { upsertRoomState } from '../../repository'
-import { getPlayerNames } from '../../utils'
-import { validateRoom } from '../../validators'
+import { upsertRoomData_ } from '../../repository'
+import { getPlayerNames_ } from '../../utils'
+import { validateRoom_ } from '../../validators'
 import { addUserToRoom, broadcast } from '../../utils/connections.utils'
 
 export const joinRoom = async (ws, message) => {
@@ -11,9 +12,9 @@ export const joinRoom = async (ws, message) => {
 
   try {
     const { room_id, nickname, token } = message
-    const roomIndex = roomsData.findIndex(room => room.room_id === room_id)
+    const room_index = roomsData.findIndex(room => room.room_id === room_id)
 
-    if (roomIndex === -1) {
+    if (room_index === -1) {
       return ws.send(
         JSON.stringify({
           type: JOIN_ROOM,
@@ -23,10 +24,9 @@ export const joinRoom = async (ws, message) => {
       )
     }
 
-    const room = roomsData[roomIndex]
-    const [roomIdValid, gamestate] = await validateRoom(room_id)
+    const [validity, config, players] = await validateRoom_(room_id)
 
-    if (gamestate && Object.keys(gamestate.players).length >= 12) {
+    if (players.total_players >= 12) {
       return ws.send(
         JSON.stringify({
           type: JOIN_ROOM,
@@ -36,19 +36,22 @@ export const joinRoom = async (ws, message) => {
       )
     }
 
-    if (!roomIdValid) {
-      const newGamestate = {
-        ...room,
-        selected_cards: room.selected_cards,
-        selected_expansions: room.selected_expansions,
+    if (!validity) {
+      const newConfig = {
+        ...config,
+        selected_cards: configData.selected_cards,
+        selected_expansions: configData.selected_expansions,
         stage: STAGES.ROOM,
-        players: {
-          [token]: { name: nickname, admin: true, flag: false }
-        }
+      }
+
+      const newPlayers = {
+        ...players,
+        players: { [token]: { name: nickname, admin: Object.keys(players.players).length === 0, flag: false } }
       }
 
       try {
-        await upsertRoomState(newGamestate)
+        await upsertRoomData_(room_id, 'config', newConfig)
+        await upsertRoomData_(room_id, 'players', newPlayers)
       } catch (error) {
         logWarn(`Error updating room state for new room: ${error.message}`)
         return ws.send(
@@ -60,23 +63,20 @@ export const joinRoom = async (ws, message) => {
         )
       }
     } else {
-      const isAdmin = Object.values(gamestate.players).every(player => !player.admin)
-
-      gamestate.players[token] = {
-        name: nickname,
-        admin: isAdmin,
-        flag: false
+      const updatedPlayers = {
+        ...players,
+        players: { [token]: { name: nickname, admin: Object.keys(players.players).length === 0, flag: false } }
       }
 
       try {
-        await upsertRoomState(gamestate)
+        await upsertRoomData_(room_id, 'players', updatedPlayers)
       } catch (error) {
-        logWarn(`Error updating room state: ${error.message}`)
+        logWarn(`Error updating players for room: ${error.message}`)
         return ws.send(
           JSON.stringify({
             type: JOIN_ROOM,
             success: false,
-            errors: ['Failed to save room state. Please try again.']
+            errors: ['Failed to save player data. Please try again.']
           })
         )
       }
@@ -84,14 +84,14 @@ export const joinRoom = async (ws, message) => {
 
     addUserToRoom(ws, token, room_id)
 
-    const players = getPlayerNames(gamestate)
+    const playersInGame = getPlayerNames_(players.players)
 
     broadcast(room_id, {
       type: HYDRATE_ROOM,
       success: true,
-      selected_cards: gamestate.selected_cards,
-      selected_expansions: gamestate.selected_expansions,
-      players
+      selected_cards: config.selected_cards,
+      selected_expansions: config.selected_expansions,
+      players: playersInGame
     })
 
     return ws.send(

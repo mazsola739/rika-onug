@@ -1,30 +1,32 @@
 import { DEAL, STAGES, markPositions, REDIRECT } from '../../constants'
 import { logTrace, logErrorWithStack } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { upsertGamestate_, upsertRoomState } from '../../repository'
 import { dealCardIds, determineTotalPlayers, createCenterPositionCard, createPlayerPositionCard, hasMark, createPlayerCard, broadcast } from '../../utils'
-import { validateRoom } from '../../validators'
+import { validateRoom, validateRoom_ } from '../../validators'
 
 export const dealCards = async (ws, message) => {
   try {
     const { room_id } = message
-
     logTrace(`Dealing cards for players in room: ${room_id}`)
+    const [gamestate] = await validateRoom(room_id)
+    const [validity, config, errors] = await validateRoom_(room_id)
+    
+    if (!validity) return ws.send(JSON.stringify({ type: DEAL, success: false, errors }))
 
-    const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
-    if (!roomIdValid) {
-      return ws.send(JSON.stringify({ type: DEAL, success: false, errors }))
-    }
-
-    const selectedCards = [...gamestate.selected_cards]
+    const selectedCards = [...config.selected_cards]
 
     const { playerCards, leftCard, middleCard, rightCard, newWolfCard, newVillainCard } = dealCardIds(selectedCards)
 
     const totalPlayers = determineTotalPlayers(selectedCards.length, selectedCards)
 
-    const newGamestate = {
-      ...gamestate,
+    const newConfig = {
+      ...config,
       stage: STAGES.TABLE,
       total_players: totalPlayers,
+    }
+
+    const newGamestate = {
+      ...gamestate,
       card_positions: {
         center_left: createCenterPositionCard(leftCard),
         center_middle: createCenterPositionCard(middleCard),
@@ -49,7 +51,7 @@ export const dealCards = async (ws, message) => {
       }
     }
 
-    newGamestate.selected_cards = [...selectedCards]
+    newConfig.selected_cards = [...selectedCards]
 
     const playerTokens = Object.keys(gamestate.players)
     const hasShield = selectedCards.includes(25)
@@ -69,6 +71,7 @@ export const dealCards = async (ws, message) => {
     })
 
     await upsertRoomState(newGamestate)
+    await upsertGamestate_(room_id, "config", newConfig)
 
     const redirectToTable = { type: REDIRECT, path: `/table/${room_id}` }
     return broadcast(room_id, redirectToTable)
