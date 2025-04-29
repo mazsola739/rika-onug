@@ -10,8 +10,7 @@ export const leaveRoom = async (ws, message) => {
   logTrace(`leave-room requested with ${JSON.stringify(message)}`)
 
   const { room_id, token } = message
-  const [validity, config, players] = await validateRoom_(room_id)
-  console.log(validity)
+  const {roomState, players } = await validateRoom_(room_id)
 
   const player = players.players[token]
 
@@ -36,14 +35,14 @@ export const leaveRoom = async (ws, message) => {
     const defaultRoom = roomsData.find(room => room.room_id === room_id)
 
     if (defaultRoom) {
-      config.selected_cards = []
-      config.selected_expansions = EXPANSIONS
+      roomState.selected_cards = []
+      roomState.selected_expansions = EXPANSIONS
       players.players = {}
       players.total_players = 0
     }
   }
 
-  await upsertRoomState_(room_id, 'config', config)
+  await upsertRoomState_(room_id, 'roomState', roomState)
   await upsertRoomState_(room_id, 'players', players)
 
   removeUserFromRoom(token, room_id)
@@ -53,8 +52,8 @@ export const leaveRoom = async (ws, message) => {
   broadcast(room_id, {
     type: HYDRATE_ROOM,
     success: true,
-    selected_cards: config.selected_cards,
-    selected_expansions: config.selected_expansions,
+    selected_cards: roomState.selected_cards,
+    selected_expansions: roomState.selected_expansions,
     players: playersInGame
   })
 

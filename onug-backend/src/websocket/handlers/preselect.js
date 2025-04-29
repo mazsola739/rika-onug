@@ -8,21 +8,21 @@ export const preselect = async (ws, message) => {
   const { room_id, token, selected_cards } = message
   try {
 
-    const [validity, config, errors] = await validateRoom_(room_id)
+    const { validity, roomState, errors } = await validateRoom_(room_id)
 
     if (!validity) return ws.send(JSON.stringify({ type: PRESELECT, success: false, errors }))
 
     if (Array.isArray(selected_cards)) {
-      config.selected_cards = selected_cards
+      roomState.selected_cards = selected_cards
     }
 
-    upsertRoomState_(room_id, "config", config)
+    upsertRoomState_(room_id, "roomState", roomState)
 
     return ws.send(
       JSON.stringify({
         type: PRESELECT,
         success: true,
-        selected_cards: config.selected_cards || [],
+        selected_cards: roomState.selected_cards || [],
         token
       })
     )

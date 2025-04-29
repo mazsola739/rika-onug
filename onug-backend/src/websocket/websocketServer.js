@@ -56,7 +56,7 @@ export const websocketServer = port => {
           case ARRIVE_ROOM:
             return hydrateRoom(ws, message)
           case READY:
-            return hydrateReady(message)
+            return hydrateReady(ws, message)
           case ARRIVE_TABLE:
             return hydrateTable(ws, message)
           case START_GAME:

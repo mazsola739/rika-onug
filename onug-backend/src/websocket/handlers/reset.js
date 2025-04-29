@@ -1,6 +1,6 @@
 import { EXPANSIONS, HYDRATE_ROOM } from '../../constants'
 import { logError, logTrace } from '../../log'
-import { upsertGamestateByRoomId } from '../../repository'
+import { upsertRoomState_ } from '../../repository'
 import { getPlayerNames } from '../../utils'
 import { validateRoom_ } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
@@ -8,27 +8,27 @@ import { broadcast } from '../../utils/connections.utils'
 export const reset = async message => {
   try {
     const { room_id } = message
-    const [validity, config, players, errors] = await validateRoom_(room_id)
+    const { validity, roomState, players, errors } = await validateRoom_(room_id)
 
     if (!validity) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors_: errors })
 
-    const newConfig = {
-      ...config,
+    const newState = {
+      ...roomState,
       selected_cards: [],
       selected_expansions: EXPANSIONS
     }
 
-    await upsertGamestateByRoomId(room_id, "config", config)
+    await upsertRoomState_(room_id, "roomState", roomState)
 
-    logTrace(`selectedCards reseted, new config: ${JSON.stringify(newConfig)}`)
+    logTrace(`selectedCards reseted, new roomState: ${JSON.stringify(newState)}`)
 
     const playersInGame = getPlayerNames(players.players)
 
     return broadcast(room_id, {
       type: HYDRATE_ROOM,
       success: true,
-      selected_cards: newConfig.selected_cards,
-      selected_expansions: newConfig.selected_expansions,
+      selected_cards: newState.selected_cards,
+      selected_expansions: newState.selected_expansions,
       players: playersInGame
     })
   } catch (error) {

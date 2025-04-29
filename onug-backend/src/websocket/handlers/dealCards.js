@@ -1,34 +1,29 @@
 import { DEAL, STAGES, markPositions, REDIRECT } from '../../constants'
 import { logTrace, logErrorWithStack } from '../../log'
-import { upsertRoomState, upsertRoomState_ } from '../../repository'
-import { dealCardIds, determineTotalPlayers, createCenterPositionCard, createPlayerPositionCard, hasMark, createPlayerCard, broadcast } from '../../utils'
-import { validateRoom, validateRoom_ } from '../../validators'
+import { upsertRoomState_ } from '../../repository'
+import { dealCardIds, createCenterPositionCard, createPlayerPositionCard, hasMark, createPlayerCard, broadcast } from '../../utils'
+import { validateRoom_ } from '../../validators'
 
 export const dealCards = async (ws, message) => {
   const { room_id } = message
   logTrace(`Dealing cards for players in room: ${room_id}`)
 
   try {
-
-    const [gamestate] = await validateRoom(room_id)
-    const [validity, config, errors] = await validateRoom_(room_id)
+    const { validity, roomState, players, table, errors } = await validateRoom_(room_id)
 
     if (!validity) return ws.send(JSON.stringify({ type: DEAL, success: false, errors }))
 
-    const selectedCards = [...config.selected_cards]
+    const selectedCards = [...roomState.selected_cards]
 
     const { playerCards, leftCard, middleCard, rightCard, newWolfCard, newVillainCard } = dealCardIds(selectedCards)
 
-    const totalPlayers = determineTotalPlayers(selectedCards.length, selectedCards)
-
-    const newConfig = {
-      ...config,
+    const newState = {
+      ...roomState,
       stage: STAGES.TABLE,
-      total_players: totalPlayers,
     }
 
-    const newGamestate = {
-      ...gamestate,
+    const newTable = {
+      ...table,
       card_positions: {
         center_left: createCenterPositionCard(leftCard),
         center_middle: createCenterPositionCard(middleCard),
@@ -47,20 +42,24 @@ export const dealCards = async (ws, message) => {
     const hasDoppelganger = clonedSelectedCards.includes(1)
 
     if (hasPlayerMark) {
-      newGamestate.mark_positions = markPositions
+      newTable.mark_positions = markPositions
       if (hasDoppelganger) {
-        newGamestate.doppelganger_mark_positions = markPositions
+        newTable.doppelganger_mark_positions = markPositions
       }
     }
 
-    newConfig.selected_cards = [...selectedCards]
+    newState.selected_cards = [...selectedCards]
 
-    const playerTokens = Object.keys(gamestate.players)
+    const playerTokens = Object.keys(players.players)
     const hasShield = selectedCards.includes(25)
 
+    const newPlayers = {
+      ...players,
+    }
+
     playerTokens.forEach((token, index) => {
-      newGamestate.players[token] = {
-        ...gamestate.players[token],
+      newPlayers.players[token] = {
+        ...players.players[token],
         player_number: `player_${index + 1}`,
         card: createPlayerCard(playerCards[index], selectedCards),
         card_or_mark_action: false,
@@ -68,12 +67,13 @@ export const dealCards = async (ws, message) => {
         player_history: {}
       }
       if (hasShield) {
-        newGamestate.players[token].shield = false
+        newPlayers.players[token].shield = false
       }
     })
 
-    await upsertRoomState(newGamestate)
-    await upsertRoomState_(room_id, "config", newConfig)
+    await upsertRoomState_(room_id, "roomState", newState)
+    await upsertRoomState_(room_id, "players", newPlayers)
+    await upsertRoomState_(room_id, "table", newTable)
 
     const redirectToTable = { type: REDIRECT, path: `/table/${room_id}` }
     return broadcast(room_id, redirectToTable)

@@ -11,20 +11,20 @@ export const hydrateCouncil = async (ws, message) => {
   try {
 
     const gamestate = await readGamestate(room_id)
-    const [validity, config, errors] = await validateRoom_(room_id)
+    const { validity, roomState, errors } = await validateRoom_(room_id)
 
     if (!validity) return ws.send(JSON.stringify({ type: HYDRATE_COUNCIL, success: false, errors }))
 
     let newGamestate = { ...gamestate, stage: STAGES.COUNCIL }
-    let newConfig = { ...config, stage: STAGES.COUNCIL }
+    let newState = { ...roomState, stage: STAGES.COUNCIL }
 
     newGamestate = updatePlayer(newGamestate, token)
 
     await upsertRoomState(newGamestate)
-    await upsertRoomState_(room_id, "config", newConfig)
+    await upsertRoomState_(room_id, "roomState", newState)
 
     const player = getKnownPlayer(newGamestate, token)
-    const guess_cards = [...newConfig.selected_cards]
+    const guess_cards = [...newState.selected_cards]
     const players = getPublicPlayersInformation(newGamestate)
 
     return ws.send(

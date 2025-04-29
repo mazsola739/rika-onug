@@ -1,4 +1,4 @@
-export const determineTotalPlayers = (totalCharacters, selectedCards) => {
+export const determineNeedingPlayerNumbers = (totalCharacters, selectedCards) => {
   const hasAlphaWolf = selectedCards.includes(17)
   const hasTemptress = selectedCards.includes(69)
 
@@ -28,8 +28,8 @@ export const getNicknames = players => {
   return Object.values(players).map(player => player.name)
 }
 
-export const getPublicPlayersInformation = gamestate => {
-  const playersPrivate = Object.values(gamestate.players)
+export const getPublicPlayersInformation = players => {
+  const playersPrivate = Object.values(players.players)
 
   const playersPublic = playersPrivate.map(player => {
     return {

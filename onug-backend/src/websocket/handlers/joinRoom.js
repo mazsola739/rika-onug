@@ -9,7 +9,7 @@ export const joinRoom = async (ws, message) => {
   const { room_id, nickname, token } = message
 
   try {
-    const [validity, config, players] = await validateRoom_(room_id)
+    const { validity, roomState, players } = await validateRoom_(room_id)
 
     if (!validity) {
       return ws.send(
@@ -42,13 +42,13 @@ export const joinRoom = async (ws, message) => {
     }
 
     const updatedConfig = {
-      ...config,
+      ...roomState,
       nicknames: Object.values(updatedPlayers.players).map(player => player.name)
     }
 
     try {
       await upsertRoomState_(room_id, 'players', updatedPlayers)
-      await upsertRoomState_(room_id, 'config', updatedConfig)
+      await upsertRoomState_(room_id, 'roomState', updatedConfig)
 
       const extractPlayerNames = (playersObj) => {
         return Object.values(playersObj).map(player => {

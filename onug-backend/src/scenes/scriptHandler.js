@@ -8,10 +8,10 @@ export const scriptHandler = async (gamestate, room_id) => {
   logTrace(`scriptHandler in room [${gamestate.room_id}]`)
 
   console.log(room_id)
-  const [config] = await validateRoom_(room_id)
+  const { roomState } = await validateRoom_(room_id)
 
-  const selected_cards = config.selected_cards
-  const total_players = config.total_players
+  const selected_cards = roomState.selected_cards
+  const total_players = roomState.total_players
   const role_scenes = []
 
   const addScript = scene_title => {

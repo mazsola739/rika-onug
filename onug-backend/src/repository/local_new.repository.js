@@ -1,7 +1,7 @@
 import { writeFileSync, readFileSync, unlinkSync } from 'fs'
 import { ROOM_NAMES } from '../constants'
 import roomsData from '../data/rooms_new.json'
-import configData from '../data/gamestate_config.json'
+import configData from '../data/gamestate_roomState.json'
 import playersData from '../data/gamestate_players.json'
 import rolesData from '../data/gamestate_roles.json'
 import sceneData from '../data/gamestate_scene.json'
@@ -11,9 +11,9 @@ import { webSocketServerConnectionsPerRoom } from '../utils/connections.utils'
 
 const FILE_PATH_TEMPLATE = `${__dirname}/../gamestate/`
 const ROOM_GAMESTATE_FILE = (room_id, type) => `${FILE_PATH_TEMPLATE}/${room_id}/${type}.json`
-const ROOM_GAMESTATE_FILE_TYPES = ['config', 'players', 'roles', 'scene', 'table']
+const ROOM_GAMESTATE_FILE_TYPES = ['roomState', 'players', 'roles', 'scene', 'table']
 const DEFAULT_DATA_MAP = {
-  config: configData,
+  roomState: configData,
   players: playersData,
   roles: rolesData,
   scene: sceneData,
@@ -182,7 +182,7 @@ export const reInitializeAllGamestates_ = async () => {
       for (const type of ROOM_GAMESTATE_FILE_TYPES) {
         const filePath = ROOM_GAMESTATE_FILE(room_id, type)
 
-        if (type === 'config') {
+        if (type === 'roomState') {
           consolidatedGamestate[type] = {
             room_id: roomDetails.room_id,
             room_name: roomDetails.room_name,

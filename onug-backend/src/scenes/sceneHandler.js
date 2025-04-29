@@ -10,11 +10,11 @@ export const sceneHandler = async (gamestate, scene_title, room_id) => {
   logTrace(`sceneHandler in room [${gamestate.room_id}] called when actual scene is: ${scene_title}`)
 
   console.log(room_id)
-  const [config] = await validateRoom_(room_id)
+  const { roomState } = await validateRoom_(room_id)
 
   let newGamestate = { ...gamestate }
-  const selected_cards = config.selected_cards
-  const total_players = config.total_players
+  const selected_cards = roomState.selected_cards
+  const total_players = roomState.total_players
 
   const handleEpicBattle = (gamestate, title, selected_cards, total_players) => {
     const hasEasterEggFlag = hasEasterEgg(selected_cards, total_players)

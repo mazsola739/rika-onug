@@ -2,32 +2,29 @@ import { validateRoom_ } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 import { HYDRATE_ROOM } from '../../constants'
 import { upsertRoomState_ } from '../../repository'
-import { determineTotalPlayers, filterCardsByExpansions, getPlayerNames, toggleCardSelect, toggleExpansions } from '../../utils'
+import { filterCardsByExpansions, getPlayerNames, toggleCardSelect, toggleExpansions } from '../../utils'
 import { logTrace } from '../../log'
 
 export const updateRoom = async message => {
   logTrace(`update-room requested with ${JSON.stringify(message)}`)
   const { room_id, card_id, expansion } = message
-  const [validity, config, players, errors] = await validateRoom_(room_id)
+  const { validity, roomState, players, errors } = await validateRoom_(room_id)
 
   if (!validity) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors_: errors })
 
-  let totalPlayers = determineTotalPlayers(config.selected_cards.length, config.selected_cards)
-  let total_players = config.total_players || 0
+  let total_players = roomState.total_players || 0
 
   // TODO validate if player is admin
   if (expansion) {
-    config.selected_expansions = toggleExpansions(config.selected_expansions, expansion)
-    config.selected_cards = filterCardsByExpansions(config.selected_cards, config.selected_expansions)
+    roomState.selected_expansions = toggleExpansions(roomState.selected_expansions, expansion)
+    roomState.selected_cards = filterCardsByExpansions(roomState.selected_cards, roomState.selected_expansions)
   }
 
   if (card_id) {
-    config.selected_cards = toggleCardSelect(config.selected_cards, config.selected_expansions, card_id, total_players)
+    roomState.selected_cards = toggleCardSelect(roomState.selected_cards, roomState.selected_expansions, card_id, total_players)
   }
 
-  totalPlayers = determineTotalPlayers(config.selected_cards.length, config.selected_cards)
-
-  if (totalPlayers > 12)
+  if (total_players > 12)
     return broadcast(room_id, {
       type: HYDRATE_ROOM,
       success: false,
@@ -36,13 +33,13 @@ export const updateRoom = async message => {
 
   const playersInGame = getPlayerNames(players.players)
 
-  upsertRoomState_(room_id, "config", config)
+  upsertRoomState_(room_id, "roomState", roomState)
 
   return broadcast(room_id, {
     type: HYDRATE_ROOM,
     success: true,
-    selected_cards: config.selected_cards,
-    selected_expansions: config.selected_expansions,
+    selected_cards: roomState.selected_cards,
+    selected_expansions: roomState.selected_expansions,
     players: playersInGame
   })
 }

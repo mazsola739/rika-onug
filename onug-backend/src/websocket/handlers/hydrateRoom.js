@@ -6,7 +6,7 @@ import { validateRoom_ } from '../../validators'
 export const hydrateRoom = async (ws, message) => {
   try {
     const { room_id } = message
-    const [validity, config, players, errors] = await validateRoom_(room_id)
+    const { validity, roomState, players, errors } = await validateRoom_(room_id)
 
     if (!validity) {
       return ws.send(
@@ -18,9 +18,9 @@ export const hydrateRoom = async (ws, message) => {
       )
     }
 
-    const newConfig = { ...config, stage: STAGES.ROOM }
+    const newState = { ...roomState, stage: STAGES.ROOM }
 
-    await upsertRoomState_(room_id, 'config', newConfig)
+    await upsertRoomState_(room_id, 'roomState', newState)
     await upsertRoomState_(room_id, 'players', players)
 
     const extractPlayerNames = (playersObj) => {
@@ -36,9 +36,9 @@ export const hydrateRoom = async (ws, message) => {
     const hydrateRoomMessage = JSON.stringify({
       type: HYDRATE_ROOM,
       success: true,
-      room_id: newConfig.room_id,
-      selected_cards: newConfig.selected_cards,
-      selected_expansions: newConfig.selected_expansions,
+      room_id: newState.room_id,
+      selected_cards: newState.selected_cards,
+      selected_expansions: newState.selected_expansions,
       players: newUpdatedPlayers
     })
 
