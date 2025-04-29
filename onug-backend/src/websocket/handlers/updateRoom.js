@@ -1,7 +1,7 @@
 import { validateRoom_ } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 import { HYDRATE_ROOM } from '../../constants'
-import { upsertGamestate_ } from '../../repository'
+import { upsertRoomState_ } from '../../repository'
 import { determineTotalPlayers, filterCardsByExpansions, getPlayerNames, toggleCardSelect, toggleExpansions } from '../../utils'
 import { logTrace } from '../../log'
 
@@ -36,7 +36,7 @@ export const updateRoom = async message => {
 
   const playersInGame = getPlayerNames(players.players)
 
-  upsertGamestate_(room_id, "config", config)
+  upsertRoomState_(room_id, "config", config)
 
   return broadcast(room_id, {
     type: HYDRATE_ROOM,

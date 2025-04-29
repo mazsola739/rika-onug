@@ -1,91 +1,17 @@
 import { writeFileSync, readFileSync, unlinkSync } from 'fs'
-import { logError, logErrorWithStack, logTrace } from '../log'
+import { ROOM_NAMES } from '../constants'
 import roomsData from '../data/rooms_new.json'
 import configData from '../data/gamestate_config.json'
 import playersData from '../data/gamestate_players.json'
 import rolesData from '../data/gamestate_roles.json'
 import sceneData from '../data/gamestate_scene.json'
 import tableData from '../data/gamestate_table.json'
+import { logError, logErrorWithStack, logTrace } from '../log'
+import { webSocketServerConnectionsPerRoom } from '../utils/connections.utils'
 
 const FILE_PATH_TEMPLATE = `${__dirname}/../gamestate/`
-const ENCODING = 'utf8'
-const WRITE_OPTIONS = { flag: 'w' }
+const ROOM_GAMESTATE_FILE = (room_id, type) => `${FILE_PATH_TEMPLATE}/${room_id}/${type}.json`
 const ROOM_GAMESTATE_FILE_TYPES = ['config', 'players', 'roles', 'scene', 'table']
-
-/**
- * Generates the file path for a specific room and file type.
- */
-const getRoomFilePath = (room_id, type) => `${FILE_PATH_TEMPLATE}${room_id}/${type}.json`
-
-/**
- * Generates all file paths for a specific room.
- */
-const getRoomFilePaths = room_id =>
-  ROOM_GAMESTATE_FILE_TYPES.reduce((paths, type) => {
-    paths[type] = getRoomFilePath(room_id, type)
-    return paths
-  }, {})
-
-/**
- * Generates a mapping of file types to their respective file path functions.
- */
-const ROOM_GAMESTATE_FILE_PATHS = ROOM_GAMESTATE_FILE_TYPES.reduce((paths, type) => {
-  paths[type] = room_id => getRoomFilePath(room_id, type)
-  return paths
-}, {})
-
-/**
- * Writes or updates a gamestate file with the provided data.
- */
-const upsertGamestateFile = (filePath, data) => {
-  try {
-    writeFileSync(filePath, JSON.stringify(data, null, 2), WRITE_OPTIONS)
-    logTrace(`${filePath} updated`)
-  } catch (error) {
-    logError(error)
-  }
-}
-
-/**
- * Reads a gamestate file and returns its content as JSON.
- * If the file does not exist, creates it with default data.
- */
-export const readGamestate_ = filePath => {
-  try {
-    const data = readFileSync(filePath, { encoding: ENCODING })
-    return JSON.parse(data)
-  } catch (error) {
-    if (error.code === 'ENOENT') {
-      logTrace(`File not found: ${filePath}. Creating with default data.`)
-      const type = filePath.split('/').pop().replace('.json', '')
-      const defaultData = DEFAULT_DATA_MAP[type] || {}
-      writeFileSync(filePath, JSON.stringify(defaultData, null, 2), WRITE_OPTIONS)
-      return defaultData
-    }
-    logError(`###>>> READ_GAMESTATE_FILE_ERROR: ${filePath}`, error)
-    return null
-  }
-}
-
-/**
- * Updates or inserts data into a specific gamestate file for a room.
- */
-export const upsertGamestate_ = (room_id, type, newData = null) => {
-  const filePath = ROOM_GAMESTATE_FILE_PATHS[type](room_id)
-
-  try {
-    const existingData = readGamestate_(filePath) || {}
-    const updatedData = newData
-      ? { ...existingData, ...newData }
-      : existingData
-
-    upsertGamestateFile(filePath, updatedData)
-    logTrace(`${type} file upserted for room_id: ${room_id}`)
-  } catch (error) {
-    logError(`Error upserting ${type} file for room_id: ${room_id}`, error)
-  }
-}
-
 const DEFAULT_DATA_MAP = {
   config: configData,
   players: playersData,
@@ -93,266 +19,213 @@ const DEFAULT_DATA_MAP = {
   scene: sceneData,
   table: tableData
 }
+const ENCODING = 'utf8'
+const WRITE_OPTIONS = { flag: 'w' }
 
-/**
- * Updates or inserts default or provided data into a specific room's gamestate file.
- */
-export const upsertRoomData_ = (room_id, type, newData = null) => {
-  const defaultData = DEFAULT_DATA_MAP[type]
-  const dataToUpsert = newData || defaultData
-  upsertGamestate_(room_id, type, dataToUpsert)
-}
+export const upsertRoomState_ = async (room_id, type, state) => {
+  logTrace(`upsertRoomState: room_id=${room_id}, type=${type}`)
+  const filePath = ROOM_GAMESTATE_FILE(room_id, type)
+  const roomState = JSON.stringify(state, null, 2)
 
-/**
- * Reads data from a specific gamestate file for a room.
- */
-export const readRoomData_ = (room_id, type) => {
-  const filePath = getRoomFilePath(room_id, type)
-  return readGamestate_(filePath)
-}
-
-/**
- * Generates a new configuration file for a room with default and room-specific details.
- */
-export const generateNewRoomConfig_ = room_id => {
-  const filePath = getRoomFilePath(room_id, 'config')
-  const roomDetails = roomsData.find(room => room.room_id === room_id) || { room_id, room_name: 'Unknown Room' }
-  const updatedConfig = {
-    room_id: roomDetails.room_id,
-    room_name: roomDetails.room_name,
-    ...configData
-  }
-  upsertGamestateFile(filePath, updatedConfig)
-}
-
-/**
- * Re-initializes all gamestate files for all rooms with default data.
- */
-export const reInitializeAllGamestates_ = () => {
   try {
-    logTrace('Re-init all gamestates')
-
-    for (const { room_id } of roomsData) {
-      const filePaths = getRoomFilePaths(room_id)
-
-      ROOM_GAMESTATE_FILE_TYPES.forEach(type => {
-        const filePath = filePaths[type]
-
-        if (type === 'config') {
-          generateNewRoomConfig_(room_id)
-        } else {
-          const defaultData = DEFAULT_DATA_MAP[type] || {}
-          upsertGamestateFile(filePath, defaultData)
-          logTrace(`${type} file initialized for room_id: ${room_id}`)
-        }
-      })
-    }
-
-    return { status: 'rooms re-initialized' }
-  } catch (error) {
-    logErrorWithStack(error)
-    return { status: 'ERROR during re-initializing gamestates' }
+    writeFileSync(filePath, roomState, WRITE_OPTIONS)
+    logTrace(`Room state updated for room_id=${room_id}, type=${type}`)
+  } catch (e) {
+    logError(`Failed to update room state for room_id=${room_id}, type=${type}`, e)
   }
 }
 
-/**
- * Updates or inserts configuration data for a specific room.
- */
-export const upsertRoomConfig_ = (room_id, newData = null) => upsertRoomData_(room_id, 'config', newData)
+export const readGamestate_ = async (room_id, type) => {
+  logTrace(`readGamestate: room_id=${room_id}, type=${type}`)
+  const filePath = ROOM_GAMESTATE_FILE(room_id, type)
 
-/**
- * Updates or inserts players data for a specific room.
- */
-export const upsertRoomPlayers_ = (room_id, newData = null) => upsertRoomData_(room_id, 'players', newData)
-
-/**
- * Updates or inserts roles data for a specific room.
- */
-export const upsertRoomRoles_ = (room_id, newData = null) => upsertRoomData_(room_id, 'roles', newData)
-
-/**
- * Updates or inserts scene data for a specific room.
- */
-export const upsertRoomScene_ = (room_id, newData = null) => upsertRoomData_(room_id, 'scene', newData)
-
-/**
- * Updates or inserts table data for a specific room.
- */
-export const upsertRoomTable_ = (room_id, newData = null) => upsertRoomData_(room_id, 'table', newData)
-
-/**
- * Reads the configuration file for a specific room.
- */
-export const readRoomConfig_ = room_id => readRoomData_(room_id, 'config')
-
-/**
- * Reads the players file for a specific room.
- */
-export const readRoomPlayers_ = room_id => readRoomData_(room_id, 'players')
-
-/**
- * Reads the roles file for a specific room.
- */
-export const readRoomRoles_ = room_id => readRoomData_(room_id, 'roles')
-
-/**
- * Reads the scene file for a specific room.
- */
-export const readRoomScene_ = room_id => readRoomData_(room_id, 'scene')
-
-/**
- * Reads the table file for a specific room.
- */
-export const readRoomTable_ = room_id => readRoomData_(room_id, 'table')
-
-/**
- * Reads all gamestate files for a specific room and returns them as an object.
- */
-export const readGamestateByRoomId_ = room_id => {
-  logTrace('read gamestate by room_id')
-  const filePaths = getRoomFilePaths(room_id)
-  const gamestate = {}
-
-  Object.entries(filePaths).forEach(([key, filePath]) => {
-    try {
-      const rawData = readFileSync(filePath, { encoding: ENCODING })
-      gamestate[key] = JSON.parse(rawData)
-    } catch (error) {
-      logTrace(`Could not read ${key} gamestate for room_id: ${room_id}`, error)
-      gamestate[key] = DEFAULT_DATA_MAP[key] || null
-    }
-  })
-
-  return gamestate
+  try {
+    const data = readFileSync(filePath, { encoding: ENCODING })
+    return JSON.parse(data)
+  } catch (error) {
+    logError(`Failed to read gamestate for room_id=${room_id}, type=${type}`, error)
+    return null
+  }
 }
 
-/**
- * Reads all gamestate files for all rooms and returns them as an object.
- */
-export const readAllGamestates_ = () => {
-  logTrace('read all gamestates')
+export const readAllGamestates_ = async () => {
+  logTrace('readAllGamestates')
   const gamestates = {}
+  for (const room_id of ROOM_NAMES) {
+    const consolidatedGamestate = {}
 
-  roomsData.forEach(({ room_id }) => {
-    gamestates[room_id] = readGamestateByRoomId_(room_id)
-  })
+    for (const type of ROOM_GAMESTATE_FILE_TYPES) {
+      const filePath = ROOM_GAMESTATE_FILE(room_id, type)
 
+      try {
+        const rawData = readFileSync(filePath, { encoding: ENCODING })
+        consolidatedGamestate[type] = JSON.parse(rawData)
+      } catch (error) {
+        logTrace(`Could not read ${type} for room_id=${room_id}`, error)
+        consolidatedGamestate[type] = null
+      }
+    }
+
+    gamestates[room_id] = consolidatedGamestate
+  }
   return gamestates
 }
 
-/**
- * Removes all gamestate files for a specific room.
- */
-export const removeRoomGamestateById_ = room_id => {
-  logTrace('remove gamestate by room_id')
-  const filePaths = Object.values(getRoomFilePaths(room_id))
+export const readGamestateByRoomId_ = async room_id => {
+  logTrace('read gamestate by room_id')
+  const consolidatedGamestate = {}
 
-  try {
-    filePaths.forEach(filePath => {
+  for (const type of ROOM_GAMESTATE_FILE_TYPES) {
+    const filePath = ROOM_GAMESTATE_FILE(room_id, type)
+
+    try {
+      const rawData = await readFileSync(filePath, { encoding: ENCODING })
+      consolidatedGamestate[type] = JSON.parse(rawData)
+    } catch (error) {
+      logTrace(`Could not read ${type} for room_id ${room_id}`, error)
+      consolidatedGamestate[type] = `No ${type} found for room_id: ${room_id}`
+    }
+  }
+
+  return consolidatedGamestate
+}
+
+export const removeAllGamestates_ = async () => {
+  logTrace('removeAllGamestates')
+  for (const room_id of ROOM_NAMES) {
+    for (const type of ROOM_GAMESTATE_FILE_TYPES) {
+      const filePath = ROOM_GAMESTATE_FILE(room_id, type)
+
       try {
         unlinkSync(filePath)
-        logTrace(`Removed file: ${filePath}`)
+        logTrace(`Removed ${type} for room_id=${room_id}`)
       } catch (error) {
-        logTrace(`Could not remove file: ${filePath}`, error)
+        logTrace(`Could not remove ${type} for room_id=${room_id}`, error)
       }
-    })
-    logTrace(`All gamestate files removed for room_id: ${room_id}`)
-  } catch (error) {
-    logTrace(`Error removing gamestate files for room_id: ${room_id}`, error)
-  }
-
-  return { status: 'gamestate removed' }
-}
-
-/**
- * Removes all gamestate files for all rooms.
- */
-export const removeAllGamestates_ = () => {
-  logTrace('remove all gamestates')
-  const results = {}
-
-  roomsData.forEach(({ room_id }) => {
-    try {
-      results[room_id] = removeRoomGamestateById_(room_id)
-    } catch (error) {
-      logTrace(`Could not remove gamestate for room_id: ${room_id}`, error)
-      results[room_id] = `Error removing gamestate: ${error.message}`
     }
-  })
-
-  return { status: 'all gamestates removed', results }
-}
-
-/**
- * Modifies the players in a specific room using a provided modification function.
- */
-const modifyPlayersInRoom = (room_id, modifyFn) => {
-  const filePath = getRoomFilePath(room_id, 'players')
-
-  try {
-    const rawData = readFileSync(filePath, { encoding: ENCODING })
-    const gamestate = JSON.parse(rawData)
-
-    modifyFn(gamestate.players)
-
-    upsertGamestateFile(filePath, gamestate)
-    return { status: 'success', room_id }
-  } catch (error) {
-    logTrace(`Could not modify players for room_id: ${room_id}`, error)
-    return { status: 'error', room_id, message: error.message }
   }
+  return { status: 'All gamestates removed for all rooms' }
 }
 
-/**
- * Removes a player from all rooms by their token.
- */
-export const removePlayerByToken_ = token => {
-  logTrace(`remove player by id: ${token}`)
-  const results = {}
+export const removeRoomGamestateById_ = async room_id => {
+  logTrace(`removeRoomGamestateById: room_id=${room_id}`)
+  for (const type of ROOM_GAMESTATE_FILE_TYPES) {
+    const filePath = ROOM_GAMESTATE_FILE(room_id, type)
 
-  roomsData.forEach(({ room_id }) => {
-    results[room_id] = modifyPlayersInRoom(room_id, players => {
+    try {
+      unlinkSync(filePath)
+      logTrace(`Removed ${type} for room_id=${room_id}`)
+    } catch (error) {
+      logTrace(`Could not remove ${type} for room_id=${room_id}`, error)
+    }
+  }
+  return { status: `All gamestates removed for room_id=${room_id}` }
+}
+
+export const removeAllPlayers_ = async () => {
+  logTrace('removeAllPlayers')
+  const gamestates = {}
+
+  for (const room_id of ROOM_NAMES) {
+    const filePath = ROOM_GAMESTATE_FILE(room_id, 'players')
+
+    try {
+      const newPlayers = {}
+      writeFileSync(filePath, JSON.stringify(newPlayers, null, 2), WRITE_OPTIONS)
+      gamestates[room_id] = newPlayers
+      logTrace(`Removed all players for room_id=${room_id}`)
+    } catch (error) {
+      logTrace(`Could not remove players for room_id=${room_id}`, error)
+      gamestates[room_id] = null
+    }
+  }
+
+  return { status: 'Players removed from all rooms', gamestates }
+}
+
+export const removePlayerByToken_ = async token => {
+  logTrace(`removePlayerByToken: token=${token}`)
+  const gamestates = {}
+
+  for (const room_id of ROOM_NAMES) {
+    const filePath = ROOM_GAMESTATE_FILE(room_id, 'players')
+
+    try {
+      const rawData = readFileSync(filePath, { encoding: ENCODING })
+      const players = JSON.parse(rawData)
+
       if (players[token]) {
         delete players[token]
+        writeFileSync(filePath, JSON.stringify(players, null, 2), WRITE_OPTIONS)
+        gamestates[room_id] = players
+        delete webSocketServerConnectionsPerRoom[room_id][token]
+        logTrace(`Removed player with token=${token} from room_id=${room_id}`)
       }
-    })
-  })
+    } catch (error) {
+      logTrace(`Could not remove player with token=${token} for room_id=${room_id}`, error)
+      gamestates[room_id] = null
+    }
+  }
 
-  return { status: `Player ${token} removal completed`, results }
+  return { status: `Player with token=${token} removed from all rooms`, gamestates }
 }
 
-/**
- * Removes all players from all rooms.
- */
-export const removeAllPlayers_ = () => {
-  logTrace('remove all players')
-  const results = {}
+export const reInitializeAllGamestates_ = async () => {
+  try {
+    logTrace('reInitializeAllGamestates')
+    const gamestates = {}
 
-  roomsData.forEach(({ room_id }) => {
-    results[room_id] = modifyPlayersInRoom(room_id, players => {
-      Object.keys(players).forEach(playerId => delete players[playerId])
-    })
-  })
+    for (const room_id of ROOM_NAMES) {
+      const roomDetails = roomsData.find(room => room.room_id === room_id) || { room_id, room_name: 'Unknown Room' }
+      const consolidatedGamestate = {}
 
-  return { status: 'players removed from all rooms', results }
+      for (const type of ROOM_GAMESTATE_FILE_TYPES) {
+        const filePath = ROOM_GAMESTATE_FILE(room_id, type)
+
+        if (type === 'config') {
+          consolidatedGamestate[type] = {
+            room_id: roomDetails.room_id,
+            room_name: roomDetails.room_name,
+            ...DEFAULT_DATA_MAP[type]
+          }
+        } else {
+          consolidatedGamestate[type] = DEFAULT_DATA_MAP[type] || {}
+        }
+
+        const freshData = JSON.stringify(consolidatedGamestate[type], null, 2)
+        try {
+          writeFileSync(filePath, freshData, WRITE_OPTIONS)
+          logTrace(`Regenerated and saved fresh ${type} data for room_id=${room_id}`)
+        } catch (error) {
+          logError(`Failed to write ${type} data for room_id=${room_id}`, error)
+        }
+      }
+
+      gamestates[room_id] = consolidatedGamestate
+    }
+
+    return { status: 'Rooms re-initialized', gamestates }
+  } catch (error) {
+    logErrorWithStack(error)
+    return { status: 'ERROR during re-initializing gamestates', error }
+  }
 }
 
-/* //TODO
-export const readNohupByService = service => {
+export const readNohupByService_ = async service => {
   logTrace(`readNohupByService ${service}`)
 
-  const FE_PATH = process.env.FE_NOHUP_PATH || `${__dirname}/../../../onug-frontend/prod__nohup.txt`
-  const BE_PATH_TXT = process.env.BE_NOHUP_PATH || `${__dirname}/../../prod__nohup.txt`
-  const BE_PATH_CRASH = process.env.BE_CRASH_PATH || `${__dirname}/../prod__crash.js`
+  const FE_PATH = `${__dirname}/../../../onug-frontend/prod__nohup.txt`
+  const BE_PATH_TXT = `${__dirname}/../../prod__nohup.txt`
+  const BE_PATH_CRASH = `${__dirname}/../prod__crash.js`
 
   let rawData = {}
 
   try {
     if (service === 'frontend') {
-      rawData = readFileSync(FE_PATH, { encoding: ENCODING })
+      rawData = await readFileSync(FE_PATH, { encoding: ENCODING })
     } else {
-      const logData = readFileSync(BE_PATH_TXT, { encoding: ENCODING })
-      const crashData = readFileSync(BE_PATH_CRASH, { encoding: ENCODING })
+      const logData = await readFileSync(BE_PATH_TXT, { encoding: ENCODING })
+      const crashData = await readFileSync(BE_PATH_CRASH, { encoding: ENCODING })
 
       rawData = { logs: logData, crash: crashData }
     }
@@ -362,4 +235,3 @@ export const readNohupByService = service => {
 
   return rawData
 }
- */

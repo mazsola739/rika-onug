@@ -1,11 +1,11 @@
 import { logTrace, logErrorWithStack } from "../../log"
 import { validateRoom_ } from "../../validators"
 import { PRESELECT } from "../../constants"
-import { upsertGamestate_ } from "../../repository"
+import { upsertRoomState_ } from "../../repository"
 
 export const preselect = async (ws, message) => {
   logTrace(`select-room requested with ${JSON.stringify(message)}`)
-    const { room_id, token, selected_cards } = message
+  const { room_id, token, selected_cards } = message
   try {
 
     const [validity, config, errors] = await validateRoom_(room_id)
@@ -16,7 +16,7 @@ export const preselect = async (ws, message) => {
       config.selected_cards = selected_cards
     }
 
-    upsertGamestate_(room_id, "config", config)
+    upsertRoomState_(room_id, "config", config)
 
     return ws.send(
       JSON.stringify({

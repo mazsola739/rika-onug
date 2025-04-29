@@ -15,7 +15,7 @@ export const Lobby: React.ComponentType = observer(() => {
   ) : (
     <StyledLobby>
       <Selection>
-        <FormContainer onSubmit={handleLogin}>
+        <FormContainer>
           <Label>
             Nickname:
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -59,7 +59,7 @@ export const Lobby: React.ComponentType = observer(() => {
               ))}
             </Select>
           </Label>
-          <Button onClick={() => handleLogin} buttonText='Join' variant="magenta" />
+          <Button onClick={handleLogin} buttonText='Join' variant="magenta" />
         </FormContainer>
 
         <RoomBackground img={selectedRoom ? `/assets/rooms/${selectedRoom}.webp` : '/assets/rooms/room_back.webp'} />

@@ -19,7 +19,7 @@ export const Selection = styled.div`
   align-items: center;
   width: 100%;`
 
-export const FormContainer = styled.form`
+export const FormContainer = styled.div`
   width: 400px;
   display: flex;
   flex-direction: column;

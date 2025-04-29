@@ -3,7 +3,7 @@ import { NEWBIE } from '../../constants'
 import { logInfo } from '../../log'
 
 export const newbie = (ws, message) => {
-  const { token } = message //TODO handle rejoin, user has valid token
+  const { token } = message
   logInfo(`newbie requested with ${JSON.stringify(message)}`)
   // reconnect, already existing token from client, no token on server side
   if (token && !ws.token && validate(token)) {

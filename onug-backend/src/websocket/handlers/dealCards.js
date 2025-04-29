@@ -1,6 +1,6 @@
 import { DEAL, STAGES, markPositions, REDIRECT } from '../../constants'
 import { logTrace, logErrorWithStack } from '../../log'
-import { upsertGamestate_, upsertRoomState } from '../../repository'
+import { upsertRoomState, upsertRoomState_ } from '../../repository'
 import { dealCardIds, determineTotalPlayers, createCenterPositionCard, createPlayerPositionCard, hasMark, createPlayerCard, broadcast } from '../../utils'
 import { validateRoom, validateRoom_ } from '../../validators'
 
@@ -73,7 +73,7 @@ export const dealCards = async (ws, message) => {
     })
 
     await upsertRoomState(newGamestate)
-    await upsertGamestate_(room_id, "config", newConfig)
+    await upsertRoomState_(room_id, "config", newConfig)
 
     const redirectToTable = { type: REDIRECT, path: `/table/${room_id}` }
     return broadcast(room_id, redirectToTable)

@@ -89,8 +89,7 @@ export const useLobby = () => {
     setNickname(generateFunnyNickname())
   }
 
-  const handleLogin = (event: React.FormEvent) => {
-    event.preventDefault()
+  const handleLogin = () => {
     localStorage.setItem('nickname', nickname)
     handleJoinRoom(selectedRoom, nickname)
   }

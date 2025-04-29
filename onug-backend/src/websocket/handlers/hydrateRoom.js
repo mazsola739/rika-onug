@@ -1,7 +1,6 @@
 import { HYDRATE_ROOM, STAGES } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
-import { upsertRoomData_ } from '../../repository'
-import { getPlayerNames } from '../../utils'
+import { upsertRoomState_ } from '../../repository'
 import { validateRoom_ } from '../../validators'
 
 export const hydrateRoom = async (ws, message) => {
@@ -9,25 +8,43 @@ export const hydrateRoom = async (ws, message) => {
     const { room_id } = message
     const [validity, config, players, errors] = await validateRoom_(room_id)
 
-    if (!validity) return ws.send(JSON.stringify({ type: HYDRATE_ROOM, success: false, errors_: errors }))
+    if (!validity) {
+      return ws.send(
+        JSON.stringify({
+          type: HYDRATE_ROOM,
+          success: false,
+          errors_: errors
+        })
+      )
+    }
 
     const newConfig = { ...config, stage: STAGES.ROOM }
 
-    await upsertRoomData_(room_id, 'config', newConfig)
-    await upsertRoomData_(room_id, 'players', players) // Ensure players are updated
+    await upsertRoomState_(room_id, 'config', newConfig)
+    await upsertRoomState_(room_id, 'players', players)
 
-    const hydrateRoom = JSON.stringify({
+    const extractPlayerNames = (playersObj) => {
+      return Object.values(playersObj).map(player => {
+        return {
+          player_name: player.name
+        }
+      })
+    }
+
+    const newUpdatedPlayers = extractPlayerNames(players.players)
+
+    const hydrateRoomMessage = JSON.stringify({
       type: HYDRATE_ROOM,
       success: true,
       room_id: newConfig.room_id,
       selected_cards: newConfig.selected_cards,
       selected_expansions: newConfig.selected_expansions,
-      players: getPlayerNames(players.players) // Use updated players
+      players: newUpdatedPlayers
     })
 
-    logTrace(`sending message to client, hydrate room`, hydrateRoom)
+    logTrace(`sending message to client, hydrate room`, hydrateRoomMessage)
 
-    return ws.send(hydrateRoom)
+    ws.send(hydrateRoomMessage)
   } catch (error) {
     logErrorWithStack(error)
 

@@ -1,7 +1,6 @@
 import { ROOM_NAMES } from '../constants'
 import { logWarn } from '../log'
-import { readGamestate } from '../repository'
-import { readRoomData_ } from '../repository/local_new.repository'
+import { readGamestate, readGamestate_ } from '../repository'
 
 export const validateRoom = async roomId => {
   const errors = []
@@ -52,12 +51,12 @@ export const validateRoom_ = async roomId => {
 
   try {
     // TODO handle here all small pieces of gamestate??
-    config = readRoomData_(roomId, 'config')
+    config = await readGamestate_(roomId, 'config')
     if (!config || config.room_id !== roomId) {
       errors.push('Room configuration is missing or invalid')
     }
 
-    players = readRoomData_(roomId, 'players')
+    players = await readGamestate_(roomId, 'players')
     if (!players || (players.players.lenght || players.total_players) >= 12 ) {
       errors.push('Room is already full')
     }
