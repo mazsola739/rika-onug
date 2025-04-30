@@ -5,6 +5,8 @@ import { areAllPlayersReady, resetPlayerReadiness } from '../../utils'
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 
+//TODO dont allow if less then 3 players in game?
+
 export const startGame = async (ws, message) => {
   const { room_id, token } = message
   logTrace(`Attempting to start game in room: ${room_id}`)

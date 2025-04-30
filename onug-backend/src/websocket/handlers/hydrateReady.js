@@ -22,7 +22,7 @@ export const hydrateReady = async (ws, message) => {
 
     logDebug(`gamestate.players[token].flag: ${newGamestate.players[token].flag}`)
 
-    const playersPublicInformations = getPublicPlayersInformation(newGamestate)
+    const playersPublicInformations = getPublicPlayersInformation(newGamestate.players)
 
 
     await upsertRoomState(newGamestate)

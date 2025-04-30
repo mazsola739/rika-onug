@@ -1,7 +1,6 @@
-import { IconType } from 'components/Icon/Icon.types'
 import { observer } from 'mobx-react-lite'
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
-import { ReadyState } from 'react-use-websocket'
+
 import { Game, God, Lobby, Room, Stub, Table, Council, Verdict } from 'routes'
 import { ConnectionStatus, StyledApp } from './App.styles'
 import { useApp } from './useApp'
@@ -13,17 +12,9 @@ import { Icon } from 'components'
 //TODO: Settings for timer, roles ect.
 
 export const App: React.ComponentType = observer(() => {
-  const { readyState } = useApp()
+  const { readyState, iconMapping } = useApp()
 
-  const iconMapping: { [key: string]: IconType } = {
-    [ReadyState.CONNECTING]: 'connecting',
-    [ReadyState.OPEN]: 'open',
-    [ReadyState.CLOSING]: 'closing',
-    [ReadyState.CLOSED]: 'closed',
-    [ReadyState.UNINSTANTIATED]: 'uninstantiated'
-  }
-
-  const iconName: IconType = iconMapping[readyState]
+  const iconName = iconMapping[readyState]
 
   return (
     <StyledApp>

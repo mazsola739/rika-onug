@@ -21,7 +21,7 @@ export const hydrateCouncil = async (ws, message) => {
 
     const player = getKnownPlayer(newGamestate, token)
     const guess_cards = [...newGamestate.selected_cards]
-    const players = getPublicPlayersInformation(newGamestate)
+    const players = getPublicPlayersInformation(newGamestate.players)
 
     return ws.send(
       JSON.stringify({

@@ -86,7 +86,7 @@ export const useClickHandler = () => {
     [roomStore, sendJsonMessage]
   )
 
-  //TABLE
+  //TABLE //TODO dont allow if less then 3 players in game
   const handleStartGame = useCallback(() => {
     sendJsonMessage?.({
       type: START_GAME,

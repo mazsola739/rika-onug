@@ -1,6 +1,7 @@
+import { IconType } from 'components/Icon/Icon.types'
 import { NEWBIE, RELOAD, WS_HOST } from 'constant'
 import { useEffect, useState } from 'react'
-import useWebSocket from 'react-use-websocket'
+import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { wsStore } from 'store'
 
 interface WebSocketMessage {
@@ -18,6 +19,14 @@ export const useApp = () => {
     onOpen: () => setFirstTime(true),
     shouldReconnect: () => true
   })
+
+  const iconMapping: { [key: string]: IconType } = {
+    [ReadyState.CONNECTING]: 'connecting',
+    [ReadyState.OPEN]: 'open',
+    [ReadyState.CLOSING]: 'closing',
+    [ReadyState.CLOSED]: 'closed',
+    [ReadyState.UNINSTANTIATED]: 'uninstantiated'
+  }
 
   useEffect(() => {
     const handleRightClick = (event: MouseEvent) => {
@@ -49,5 +58,5 @@ export const useApp = () => {
     }
   }, [sendJsonMessage, lastJsonMessage, firstTime])
 
-  return { readyState, sendJsonMessage }
+  return { readyState, iconMapping, sendJsonMessage }
 }
