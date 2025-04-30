@@ -1,4 +1,4 @@
-import roomsData from '../data/rooms_new.json'
+import roomsData from '../data/rooms.json'
 import presetData from '../data/preset.json'
 import { logErrorWithStack, logTrace } from '../log'
 

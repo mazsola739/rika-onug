@@ -29,21 +29,7 @@ export const getNicknames = players => {
 }
 
 export const getPublicPlayersInformation = players => {
-  const playersPrivate = Object.values(players.players)
-
-  const playersPublic = playersPrivate.map(player => {
-    return {
-      player_number: player.player_number,
-      player_name: player.name,
-      flag: player.flag
-    }
-  })
-
-  return playersPublic
-}
-
-export const getPublicPlayersInformation_ = players => {
-  const playersPrivate = Object.values(players.players)
+  const playersPrivate = Object.values(players)
 
   const playersPublic = playersPrivate.map(player => {
     return {
