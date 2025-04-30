@@ -4,9 +4,7 @@ import { random_ripple_dualview, ripple_random, rippleAllKeys, rippleAnyKeys, ri
 import { pickRandomUpToThreePlayers, pickRandomOnePlayer, pickRandomTwoPlayers, getRandomSceneNumbers, getRandomSceneNumber, getSceneByCardId } from './sceneUtils'
 
 export const rippleHandler = (gamestate, room_id) => {
-  logTrace(`rippleHandler in room [${gamestate.room_id}]`)
-
-  console.log(room_id)
+  logTrace(`rippleHandler in room [${room_id}]`)
 
   gamestate.ripple = {
     force: false,

@@ -3,9 +3,7 @@ import { logTrace } from '../log'
 import { hasCopycat, hasMirrorMan, hasDoppelganger, hasInstantAction, hasAnyVampire, hasTheCount, hasRenfield, hasDiseased, hasCupid, hasInstigator, hasPriest, hasAssassin, hasApprenticeAssassin, hasMarks, hasSentinel, hasAnyAlien, hasCow, hasGroobAndZerb, hasBodySnatcher, hasAnySuperVillains, hasDrPeeker, hasRapscallion, hasEvilometer, hasAnyWerewolf, hasMysticWolf, hasMinion, hasApprenticeTanner, hasTanner, hasLeader, hasMadScientist, hasIntern, hasMasons, hasThing, hasAnnoyingLad, hasSeer, hasApprenticeSeer, hasParanormalInvestigator, hasMarksman, hasNostradamus, hasPsychic, hasDetector, hasRobber, hasWitch, hasPickpocket, hasRoleRetriever, hasVoodooLou, hasTroublemaker, hasVillageIdiot, hasAuraSeer, hasGremlin, hasRascal, hasSwitcheroo, hasDrunk, hasInsomniac, hasSelfAwarenessGirl, hasSquire, hasBeholder, hasRevealer, hasExposer, hasFlipper, hasEmpath, hasCurator, hasBlob, hasMortician, hasFamilyMan, hasTemptress, hasAlphaWolf } from './conditions'
 
 export const rippleScriptHandler = (gamestate, room_id) => {
-  logTrace(`rippleScriptHandler in room [${gamestate.room_id}]`)
-
-  console.log(room_id)
+  logTrace(`rippleScriptHandler in room [${room_id}]`)
 
   const selected_cards = gamestate.ripple.roles
   const role_scenes = []

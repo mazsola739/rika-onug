@@ -4,9 +4,8 @@ import { validateRoom } from './room.validator'
 export const validatePlayer = async (room_id, player_name) => {
   try {
     const [validity, gamestate, errors] = await validateRoom(room_id)
-    console.log(errors)
 
-    if (!validity) return [false, 'Invalid room']
+    if (!validity) return [false, errors]
 
     const isPlayerAlreadyInRoom = gamestate?.players?.some(player => player.name === player_name)
 

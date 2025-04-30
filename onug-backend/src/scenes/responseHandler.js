@@ -5,9 +5,7 @@ import { aliensResponse, alphawolfResponse, thingResponse, apprenticeseerRespons
 //TODO repository => scene
 
 export const responseHandler = async (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title, room_id) => {
-  logTrace(`responseHandler in room [${gamestate.room_id}] called when actual scene is: ${scene_title}`)
-
-  console.log(room_id)
+  logTrace(`responseHandler in room [${room_id}] called when actual scene is: ${scene_title}`)
 
   let newGamestate = { ...gamestate }
 

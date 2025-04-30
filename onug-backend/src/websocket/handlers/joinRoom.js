@@ -10,9 +10,8 @@ export const joinRoom = async (ws, message) => {
 
   try {
     const [validity, gamestate, errors] = await validateRoom(room_id)
-    console.log(errors)
 
-    if (!validity) return ws.send(JSON.stringify({ type: JOIN_ROOM, success: false, errors: ['Invalid room. Please try again.'] }))
+    if (!validity) return ws.send(JSON.stringify({ type: JOIN_ROOM, success: false, errors}))
 
     if (gamestate.total_players >= 12) return ws.send(JSON.stringify({ type: JOIN_ROOM, success: false, errors: ['Room is full. No more players can join.'] }))
 

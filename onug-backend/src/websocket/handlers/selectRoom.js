@@ -21,14 +21,13 @@ export const selectRoom = async (ws, message) => {
     }
 
     const [validity, gamestate, errors] = await validateRoom(room_id)
-    console.log(errors)
 
     if (!validity) {
       return ws.send(
         JSON.stringify({
           type: SELECT_ROOM,
           success: false,
-          errors: ["Room is invalid."],
+          errors,
         })
       )
     }

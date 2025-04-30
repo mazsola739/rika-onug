@@ -11,7 +11,8 @@ export const leaveRoom = async (ws, message) => {
 
   const { room_id, token } = message
   const [validity, gamestate, errors] = await validateRoom(room_id)
-  console.log(validity, errors)
+
+  if (!validity) return ws.send(JSON.stringify({ type: LEAVE_ROOM, success: false, errors }))
 
   let newGamestate = { ...gamestate }
   const player = newGamestate.players[token]

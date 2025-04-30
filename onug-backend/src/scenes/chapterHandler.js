@@ -8,9 +8,8 @@ import { sceneHandler } from './sceneHandler'
 //TODO repository => scene
 
 export const chapterHandler = async (gamestate, room_id) => {
-  console.log(room_id)
   try {
-    logTrace(`chapterHandler in room [${gamestate.room_id}]`)
+    logTrace(`chapterHandler in room [${room_id}]`)
 
     const playersArray = Object.values(gamestate.players || {})
     let newGamestate = { ...gamestate, chapter: [] }

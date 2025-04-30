@@ -6,9 +6,7 @@ import { hasAssassin, hasDoppelganger, hasApprenticeAssassin, hasMarks, hasSeer,
 //TODO repository => scene
 
 export const sceneHandler = async (gamestate, scene_title, room_id) => {
-  logTrace(`sceneHandler in room [${gamestate.room_id}] called when actual scene is: ${scene_title}`)
-
-  console.log(room_id)
+  logTrace(`sceneHandler in room [${room_id}] called when actual scene is: ${scene_title}`)
 
   let newGamestate = { ...gamestate }
   const selected_cards = gamestate.selected_cards
