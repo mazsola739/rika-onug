@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useClickHandler } from 'hooks'
 import { lobbyStore, wsStore } from 'store'
-import { adjectives, JOIN_ROOM, nouns, PRESELECT, REDIRECT, STAGES } from 'constant'
+import { adjectives, JOIN_ROOM, nouns, PRESELECT, REDIRECT, SELECT_ROOM, STAGES } from 'constant'
 import { useNavigate } from 'react-router-dom'
+
+//TODO clickhandler
+//TODO handling all error message properly
 
 export const useLobby = () => {
   const token = sessionStorage.getItem('token')
@@ -11,27 +14,43 @@ export const useLobby = () => {
   const navigate = useNavigate()
 
   const { lastJsonMessage, sendJsonMessage } = wsStore.getWsCommunicationsBridge()
+  const [selectedRoom, setSelectedRoom] = useState('')
+  const [nickname, setNickname] = useState(() => localStorage.getItem('nickname') || generateFunnyNickname())
+  const [roomInfo, setRoomInfo] = useState<string | null>(null)
+  const [stage, setStage] = useState<string>(STAGES.LOBBY)
+
 
   useEffect(() => {
-    try {
-      if (lastJsonMessage?.type === REDIRECT) {
-        navigate(lastJsonMessage.path)
-      }
-
-      if (lastJsonMessage?.type === JOIN_ROOM) {
-        if (lastJsonMessage.success) {
-          const { room_id, player } = lastJsonMessage
-          sessionStorage.setItem('room_id', room_id)
-          sessionStorage.setItem('player_name', player.player_name)
-          navigate(`/room/${room_id}`)
-        } else {
-          console.error(lastJsonMessage.errors)
-        }
-      }
-    } catch (error) {
-      console.error(error)
-      setErrorMessage(error.message || 'An unexpected error occurred.')
+    if (lastJsonMessage?.type === REDIRECT) {
+      navigate(lastJsonMessage.path)
     }
+    if (lastJsonMessage?.type === JOIN_ROOM) {
+      if (lastJsonMessage.success) {
+        const { room_id, player } = lastJsonMessage
+        sessionStorage.setItem('room_id', room_id)
+        sessionStorage.setItem('player_name', player.player_name)
+        navigate(`/room/${room_id}`)
+      } else {
+        console.error(lastJsonMessage.errors)
+      }
+    }
+    
+    if (lastJsonMessage) {
+      if (lastJsonMessage?.type === SELECT_ROOM && !lastJsonMessage.success) {
+        setRoomInfo(lastJsonMessage.errors?.[0] || 'No room selected.')
+        setStage(lastJsonMessage.stage)
+      } else if (lastJsonMessage.total_players === 0) {
+        setRoomInfo('This room has no players.')
+        setStage(lastJsonMessage.stage)
+      } else if (Array.isArray(lastJsonMessage.player_names)) {
+        setRoomInfo(`Players in this room: ${lastJsonMessage.player_names.join(', ')}`)
+        setStage(lastJsonMessage.stage)
+      } else {
+        setRoomInfo('Player information is unavailable.')
+        setStage(lastJsonMessage.stage)
+      }
+    }
+
   }, [lastJsonMessage, navigate])
   const { handleSelectRoom, handleJoinRoom } = useClickHandler()
 
@@ -40,34 +59,6 @@ export const useLobby = () => {
     const randomNoun = nouns[Math.floor(Math.random() * nouns.length)]
     return `${randomAdjective}${randomNoun}`
   }
-
-  const [selectedRoom, setSelectedRoom] = useState('')
-  const [nickname, setNickname] = useState(() => localStorage.getItem('nickname') || generateFunnyNickname())
-  const [roomInfo, setRoomInfo] = useState<string | null>(null)
-  const [stage, setStage] = useState<string>(STAGES.LOBBY)
-
-  useEffect(() => {
-    try {
-      if (lastJsonMessage) {
-        if (!lastJsonMessage.success) {
-          setRoomInfo(lastJsonMessage.errors?.[0] || 'An unknown error occurred.')
-          setStage(lastJsonMessage.stage)
-        } else if (lastJsonMessage.total_players === 0) {
-          setRoomInfo('This room has no players.')
-          setStage(lastJsonMessage.stage)
-        } else if (Array.isArray(lastJsonMessage.player_names)) {
-          setRoomInfo(`Players in this room: ${lastJsonMessage.player_names.join(', ')}`)
-          setStage(lastJsonMessage.stage)
-        } else {
-          setRoomInfo('Player information is unavailable.')
-          setStage(lastJsonMessage.stage)
-        }
-      }
-    } catch (error) {
-      console.error(error)
-      setErrorMessage(error.message || 'An unexpected error occurred.')
-    }
-  }, [lastJsonMessage])
 
   const handleRoomChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedRoomId = event.target.value

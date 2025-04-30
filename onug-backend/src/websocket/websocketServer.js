@@ -37,12 +37,12 @@ export const websocketServer = port => {
         switch (message.type) {
           case RELOAD:
             return reload(ws, message)
-          case JOIN_ROOM:
-            return joinRoom(ws, message)
           case SELECT_ROOM:
             return selectRoom(ws, message)
           case PRESELECT:
             return preselect(ws, message)
+          case JOIN_ROOM:
+            return joinRoom(ws, message)
           case LEAVE_ROOM:
             return leaveRoom(ws, message)
           case UPDATE_ROOM:

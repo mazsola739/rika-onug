@@ -4,6 +4,9 @@ import { useLobby } from './useLobby'
 import { Button } from 'components'
 import { lobbyStore } from 'store'
 
+//TODO better styled components, better design
+//TODO react yup for form
+
 export const Lobby: React.ComponentType = observer(() => {
   const { rooms, presets } = lobbyStore
   const { selectedRoom, nickname, roomInfo, stage, handleRoomChange, handleNicknameChange, regenerateNickname, handleLogin, handlePreset } = useLobby()
