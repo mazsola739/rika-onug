@@ -11,8 +11,8 @@ export const hydrateGuess = async (ws, message) => {
 
     const { position, id } = guess || {}
 
-    const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
-    if (!roomIdValid) {
+    const [validity, gamestate, errors] = await validateRoom(room_id)
+    if (!validity) {
       return ws.send(JSON.stringify({ type: HYDRATE_GUESS, success: false, errors }))
     }
 

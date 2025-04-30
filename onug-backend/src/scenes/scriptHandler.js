@@ -1,17 +1,13 @@
 import scripts from '../data/script.json'
 import { logTrace } from '../log'
 import { hasTemptress, hasAlphaWolf } from '../utils'
-import { validateRoom_ } from '../validators'
 import { hasEpicBattle, hasEasterEgg, hasOracle, hasCopycat, hasMirrorMan, hasDoppelganger, hasInstantAction, hasAnyVampire, hasTheCount, hasRenfield, hasDiseased, hasCupid, hasInstigator, hasPriest, hasAssassin, hasApprenticeAssassin, hasMarks, hasSentinel, hasAnyAlien, hasCow, hasGroobAndZerb, hasBodySnatcher, hasAnySuperVillains, hasDrPeeker, hasRapscallion, hasEvilometer, hasAnyWerewolf, hasMysticWolf, hasMinion, hasApprenticeTanner, hasTanner, hasLeader, hasMadScientist, hasIntern, hasMasons, hasThing, hasAnnoyingLad, hasSeer, hasApprenticeSeer, hasParanormalInvestigator, hasMarksman, hasNostradamus, hasPsychic, hasDetector, hasRobber, hasWitch, hasPickpocket, hasRoleRetriever, hasVoodooLou, hasTroublemaker, hasVillageIdiot, hasAuraSeer, hasGremlin, hasRascal, hasSwitcheroo, hasDrunk, hasInsomniac, hasSelfAwarenessGirl, hasSquire, hasBeholder, hasRevealer, hasExposer, hasFlipper, hasEmpath, hasCurator, hasBlob, hasMortician, hasFamilyMan, hasRipple } from './conditions'
 
 export const scriptHandler = async (gamestate, room_id) => {
-  logTrace(`scriptHandler in room [${gamestate.room_id}]`)
+  logTrace(`scriptHandler in room [${room_id}]`)
 
-  console.log(room_id)
-  const { roomState } = await validateRoom_(room_id)
-
-  const selected_cards = roomState.selected_cards
-  const total_players = roomState.total_players
+  const selected_cards = gamestate.selected_cards
+  const total_players = gamestate.total_players
   const role_scenes = []
 
   const addScript = scene_title => {

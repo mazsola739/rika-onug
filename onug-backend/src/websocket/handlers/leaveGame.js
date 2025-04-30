@@ -1,8 +1,8 @@
 import { HYDRATE_TABLE, REDIRECT, STAGES } from '../../constants'
 import { logTrace, logErrorWithStack } from '../../log'
-import { upsertRoomState_ } from '../../repository'
+import { upsertRoomState } from '../../repository'
 import { broadcast } from '../../utils/connections.utils'
-import { validateRoom_ } from '../../validators'
+import { validateRoom } from '../../validators'
 
 //TODO fix if leave from vote stages
 export const leaveGame = async (ws, message) => {
@@ -10,43 +10,32 @@ export const leaveGame = async (ws, message) => {
   const { room_id } = message
   try {
 
-    const { validity, roomState, players, table, errors } = await validateRoom_(room_id)
+    const [validity, gamestate, errors] = await validateRoom(room_id)
 
     if (!validity) return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
 
-    const newState = {
-      ...roomState,
+    const newGamestate = {
+      ...gamestate,
       stage: STAGES.ROOM
     }
-
-    const newPlayers = {
-      ...players
-    }
-
-    const newTable = {
-      ...table
-    }
-
     //TODO reset other stuffs? different way to reset?
 
-    delete newTable.card_positions
-    delete newTable.mark_positions
+    delete newGamestate.card_positions
+    delete newGamestate.mark_positions
 
-    const playerTokens = Object.keys(players.players)
+    const playerTokens = Object.keys(newGamestate.players)
 
     playerTokens.forEach(token => {
-      newPlayers.players[token] = {
-        ...newPlayers.players[token]
+      newGamestate.players[token] = {
+        ...newGamestate.players[token]
       }
-      delete newPlayers.players[token].player_start_card_id
-      delete newPlayers.players[token].card
-      delete newPlayers.players[token].player_number
-      newPlayers.players[token].flag = false
+      delete newGamestate.players[token].player_start_card_id
+      delete newGamestate.players[token].card
+      delete newGamestate.players[token].player_number
+      newGamestate.players[token].flag = false
     })
 
-    await upsertRoomState_(room_id, "roomState", newState)
-    await upsertRoomState_(room_id, "players", newPlayers)
-    await upsertRoomState_(room_id, "players", newTable)
+    await upsertRoomState(newGamestate)
 
     return broadcast(room_id, { type: REDIRECT, path: `/room/${room_id}` })
   } catch (error) {

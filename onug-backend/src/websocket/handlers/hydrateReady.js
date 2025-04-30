@@ -1,9 +1,9 @@
 import { HYDRATE_READY } from '../../constants'
 import { logDebug, logError } from '../../log'
-import { upsertRoomState_ } from '../../repository'
+import { upsertRoomState } from '../../repository'
 import { getPublicPlayersInformation } from '../../utils'
 import { broadcast } from '../../utils/connections.utils'
-import { validateRoom_ } from '../../validators'
+import { validateRoom } from '../../validators'
 
 export const hydrateReady = async (ws, message) => {
   logDebug(`ready/not ready requested with ${JSON.stringify(message)}`)
@@ -11,21 +11,21 @@ export const hydrateReady = async (ws, message) => {
   const { room_id, token } = message
   try {
 
-    const { validity, players, errors } = await validateRoom_(room_id)
+    const [validity, gamestate, errors] = await validateRoom(room_id)
 
     if (!validity) return ws.send(JSON.stringify({ type: HYDRATE_READY, success: false, errors }))
 
-    const newPlayers = {
-      ...players
+    const newGamestate = {
+      ...gamestate
     }
-    newPlayers.players[token].flag = !newPlayers.players[token].flag
+    newGamestate.players[token].flag = !newGamestate.players[token].flag
 
-    logDebug(`gamestate.players[token].flag: ${newPlayers.players[token].flag}`)
+    logDebug(`gamestate.players[token].flag: ${newGamestate.players[token].flag}`)
 
-    const playersPublicInformations = getPublicPlayersInformation(newPlayers)
+    const playersPublicInformations = getPublicPlayersInformation(newGamestate)
 
 
-    await upsertRoomState_(room_id, "players", newPlayers)
+    await upsertRoomState(newGamestate)
 
 
     return broadcast(room_id, { type: HYDRATE_READY, players: playersPublicInformations })

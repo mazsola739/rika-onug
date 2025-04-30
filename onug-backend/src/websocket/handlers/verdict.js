@@ -1,26 +1,26 @@
-import { ERROR, HYDRATE_VOTE, REDIRECT } from '../../constants'
+import { ERROR, HYDRATE_VOTE, REDIRECT, STAGES } from '../../constants'
 import { logError, logTrace } from '../../log'
 import { upsertRoomState } from '../../repository'
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
-
-//TODO repository => players
 
 export const verdict = async (ws, message) => {
   const { room_id, token, selected_card_positions } = message
   logTrace(`Processing verdict in room: ${room_id}`)
 
   try {
-    const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
-    if (!roomIdValid) {
-      return ws.send(JSON.stringify({ type: ERROR, success: false, errors }))
-    }
 
-    let newGamestate = { ...gamestate }
+    const [validity, gamestate, errors] = await validateRoom(room_id)
+
+    if (!validity) return ws.send(JSON.stringify({ type: ERROR, success: false, errors }))
+
+    let newGamestate = { ...gamestate, stage: STAGES.VERDICT }
+
     newGamestate.players[token].vote = selected_card_positions || []
     newGamestate.players[token].flag = true
 
     const allPlayersVoted = Object.values(newGamestate.players).every(player => player.flag)
+
     await upsertRoomState(newGamestate)
 
     if (!allPlayersVoted) {

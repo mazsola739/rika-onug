@@ -1,7 +1,7 @@
 import { HYDRATE_ROOM, JOIN_ROOM } from '../../constants'
 import { logErrorWithStack, logTrace, logWarn } from '../../log'
-import { upsertRoomState_ } from '../../repository'
-import { validateRoom_ } from '../../validators'
+import { upsertRoomState } from '../../repository'
+import { validateRoom } from '../../validators'
 import { addUserToRoom, broadcast } from '../../utils/connections.utils'
 
 export const joinRoom = async (ws, message) => {
@@ -9,46 +9,30 @@ export const joinRoom = async (ws, message) => {
   const { room_id, nickname, token } = message
 
   try {
-    const { validity, roomState, players } = await validateRoom_(room_id)
+    const [validity, gamestate, errors] = await validateRoom(room_id)
+    console.log(errors)
 
-    if (!validity) {
-      return ws.send(
-        JSON.stringify({
-          type: JOIN_ROOM,
-          success: false,
-          errors: ['Invalid room. Please try again.']
-        })
-      )
-    }
+    if (!validity) return ws.send(JSON.stringify({ type: JOIN_ROOM, success: false, errors: ['Invalid room. Please try again.'] }))
 
-    if (players.total_players >= 12) {
-      return ws.send(
-        JSON.stringify({
-          type: JOIN_ROOM,
-          success: false,
-          errors: ['Room is full. No more players can join.']
-        })
-      )
-    }
+    if (gamestate.total_players >= 12) return ws.send(JSON.stringify({ type: JOIN_ROOM, success: false, errors: ['Room is full. No more players can join.'] }))
 
-    const playerTokens = Object.keys(players.players)
-    const updatedPlayers = {
-      ...players,
+    const playerTokens = Object.keys(gamestate.players)
+    const newGamstate = {
+      ...gamestate,
       players: {
-        ...players.players,
+        ...gamestate.players,
         [token]: { name: nickname, admin: playerTokens.length === 0, flag: false }
       },
       total_players: playerTokens.length + 1
     }
 
     const updatedConfig = {
-      ...roomState,
-      nicknames: Object.values(updatedPlayers.players).map(player => player.name)
+      ...gamestate,
+      nicknames: Object.values(newGamstate.players).map(player => player.name)
     }
 
     try {
-      await upsertRoomState_(room_id, 'players', updatedPlayers)
-      await upsertRoomState_(room_id, 'roomState', updatedConfig)
+      await upsertRoomState(newGamstate)
 
       const extractPlayerNames = (playersObj) => {
         return Object.values(playersObj).map(player => {
@@ -58,7 +42,7 @@ export const joinRoom = async (ws, message) => {
         })
       }
 
-      const newUpdatedPlayers = extractPlayerNames(updatedPlayers.players)
+      const newPlayers = extractPlayerNames(newGamstate.players)
 
       broadcast(room_id, {
         type: HYDRATE_ROOM,
@@ -66,7 +50,7 @@ export const joinRoom = async (ws, message) => {
         success: true,
         selected_cards: updatedConfig.selected_cards,
         selected_expansions: updatedConfig.selected_expansions,
-        players: newUpdatedPlayers
+        players: newPlayers
       })
     } catch (error) {
       logWarn(`Error updating room state: ${error.message}`)

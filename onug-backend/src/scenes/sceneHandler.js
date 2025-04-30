@@ -2,7 +2,6 @@ import { logInfo, logTrace } from '../log'
 import { upsertRoomState } from '../repository'
 import { aliens, alphawolf, annoyinglad, apprenticeassassin, apprenticeseer, apprenticetanner, assassin, auraseer, beholder, blob, bodysnatcher, copycat, cow, cupid, curator, detector, diseased, doppelganger, empath, exposer, flipper, gremlin, doppelgangerinstantaction, mortician, pickpocket, priest, psychic, rascal, revealer, thecount, drpeeker, drunk, epicbattle, everyonemark, evilometer, familyman, groobzerb, insomniac, instigator, intern, joke, leader, leaderzerbgroob, lovers, madscientist, marksman, masons, minion, mirrorman, mysticwolf, nostradamus, nostradamusReaction, oracleAnswer, oracleQuestion, paranormalinvestigator, rapscallion, renfield, ripple, robber, roleretriever, seer, selfawarenessgirl, sentinel, squire, supervillains, switcheroo, temptress, thing, troublemaker, vampires, villageidiot, voodoolou, werewolves, witch } from './roles'
 import { hasAssassin, hasDoppelganger, hasApprenticeAssassin, hasMarks, hasSeer, hasApprenticeSeer, hasEasterEgg, hasEpicBattle, hasGoodGuys, hasBadGuys, hasMadScientist, hasDreamWolf } from './conditions'
-import { validateRoom_ } from '../validators'
 
 //TODO repository => scene
 
@@ -10,11 +9,10 @@ export const sceneHandler = async (gamestate, scene_title, room_id) => {
   logTrace(`sceneHandler in room [${gamestate.room_id}] called when actual scene is: ${scene_title}`)
 
   console.log(room_id)
-  const { roomState } = await validateRoom_(room_id)
 
   let newGamestate = { ...gamestate }
-  const selected_cards = roomState.selected_cards
-  const total_players = roomState.total_players
+  const selected_cards = gamestate.selected_cards
+  const total_players = gamestate.total_players
 
   const handleEpicBattle = (gamestate, title, selected_cards, total_players) => {
     const hasEasterEggFlag = hasEasterEgg(selected_cards, total_players)

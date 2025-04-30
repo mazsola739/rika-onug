@@ -10,9 +10,9 @@ export const startVote = async (ws, message) => {
   logTrace(`Processing verdict in room: ${room_id}`)
 
   try {
-    const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
+    const [validity, gamestate, errors] = await validateRoom(room_id)
 
-    if (!roomIdValid) {
+    if (!validity) {
       logError(`Room validation failed for room: ${room_id}`)
       return ws.send(JSON.stringify({ type: ERROR, success: false, errors }))
     }

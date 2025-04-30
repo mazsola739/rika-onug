@@ -5,7 +5,7 @@ import { SELECT_ROOM, STAGES } from "../../constants"
 
 export const selectRoom = async (ws, message) => {
   logTrace(`select-room requested with ${JSON.stringify(message)}`)
-    const { room_id, nickname, token } = message
+  const { room_id, nickname, token } = message
   try {
 
     const roomIndex = roomsData.findIndex(room => room.room_id === room_id)
@@ -20,9 +20,10 @@ export const selectRoom = async (ws, message) => {
       )
     }
 
-    const [roomIdValid, gamestate] = await validateRoom(room_id)
+    const [validity, gamestate, errors] = await validateRoom(room_id)
+    console.log(errors)
 
-    if (!roomIdValid) {
+    if (!validity) {
       return ws.send(
         JSON.stringify({
           type: SELECT_ROOM,

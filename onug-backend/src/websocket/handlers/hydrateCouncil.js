@@ -1,30 +1,26 @@
 import { HYDRATE_COUNCIL, STAGES } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
-import { readGamestate, upsertRoomState, upsertRoomState_ } from '../../repository'
+import { upsertRoomState } from '../../repository'
 import { getPublicPlayersInformation } from '../../utils'
 import { getKeys, getKnownPlayer, updatePlayer } from '../../utils/council.util'
-import { validateRoom_ } from '../../validators'
+import { validateRoom } from '../../validators'
 
 export const hydrateCouncil = async (ws, message) => {
   logTrace(`hydrate council ${JSON.stringify(message)}`)
   const { room_id, token } = message
   try {
-
-    const gamestate = await readGamestate(room_id)
-    const { validity, roomState, errors } = await validateRoom_(room_id)
+    const [validity, gamestate, errors] = await validateRoom(room_id)
 
     if (!validity) return ws.send(JSON.stringify({ type: HYDRATE_COUNCIL, success: false, errors }))
 
     let newGamestate = { ...gamestate, stage: STAGES.COUNCIL }
-    let newState = { ...roomState, stage: STAGES.COUNCIL }
 
     newGamestate = updatePlayer(newGamestate, token)
 
     await upsertRoomState(newGamestate)
-    await upsertRoomState_(room_id, "roomState", newState)
 
     const player = getKnownPlayer(newGamestate, token)
-    const guess_cards = [...newState.selected_cards]
+    const guess_cards = [...newGamestate.selected_cards]
     const players = getPublicPlayersInformation(newGamestate)
 
     return ws.send(

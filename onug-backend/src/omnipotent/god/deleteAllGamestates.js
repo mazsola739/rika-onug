@@ -1,5 +1,5 @@
 import { logErrorWithStack, logTrace } from '../../log'
-import { readAllGamestates, readAllGamestates_, removeAllGamestates, removeAllGamestates_ } from '../../repository'
+import { readAllGamestates, removeAllGamestates } from '../../repository'
 
 export const deleteAllGamestates = async (req, res) => {
   try {
@@ -12,10 +12,7 @@ export const deleteAllGamestates = async (req, res) => {
     response.gamestates = gamestates
      */
 
-    const response = {
-      gamestates_: { ...await removeAllGamestates_(), ...await readAllGamestates_() },
-      gamestates: { ...await removeAllGamestates(), ...await readAllGamestates() },
-    }
+    const response = { ...await removeAllGamestates(), ...await readAllGamestates() }
 
     logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
 

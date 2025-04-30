@@ -4,19 +4,17 @@ import { upsertRoomState } from '../../repository'
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 
-//TODO repository => roomState, players, scene, table, roles
-
-//TODO do i need? fix it?
 export const stopGame = async message => {
   const { room_id, token } = message
   logTrace(`Stopping game in room: ${room_id}`)
-  const [roomIdValid, gamestate, errors] = await validateRoom(room_id)
 
-  if (!roomIdValid) return broadcast({ type: REDIRECT, path: '/lobby', errors })
+  const [validity, gamestate, errors] = await validateRoom(room_id)
+
+  if (!validity) return broadcast({ type: REDIRECT, path: '/lobby', errors })
 
   // TODO validate if player is admin and in the room
 
-  const stopScene = gamestate => {
+  const stopScene = (gamestate) => {
     gamestate.stage = STAGES.ROOM
     gamestate.game_started = false
     gamestate.game_stopped = true

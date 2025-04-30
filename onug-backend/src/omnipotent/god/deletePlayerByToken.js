@@ -1,12 +1,12 @@
 import { logErrorWithStack, logTrace } from '../../log'
-import { removePlayerByToken, removePlayerByToken_ } from '../../repository'
+import { removePlayerByToken } from '../../repository'
 
 export const deletePlayerByToken = async (req, res) => {
   try {
     const { body } = req
     logTrace(`GOD delete all players endpoint triggered: ${JSON.stringify(body)}`)
     const { token } = req.query
-    const response = { gamestates_: await removePlayerByToken_(token) , gamestates: await removePlayerByToken(token)}
+    const response = await removePlayerByToken(token)
 
     logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
 

@@ -1,12 +1,12 @@
 import { HYDRATE_ROOM, STAGES } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
-import { upsertRoomState_ } from '../../repository'
-import { validateRoom_ } from '../../validators'
+import { upsertRoomState } from '../../repository'
+import { validateRoom } from '../../validators'
 
 export const hydrateRoom = async (ws, message) => {
   try {
     const { room_id } = message
-    const { validity, roomState, players, errors } = await validateRoom_(room_id)
+    const [validity, gamestate, errors] = await validateRoom(room_id)
 
     if (!validity) {
       return ws.send(
@@ -18,10 +18,9 @@ export const hydrateRoom = async (ws, message) => {
       )
     }
 
-    const newState = { ...roomState, stage: STAGES.ROOM }
+    const newGamestate = { ...gamestate, stage: STAGES.ROOM }
 
-    await upsertRoomState_(room_id, 'roomState', newState)
-    await upsertRoomState_(room_id, 'players', players)
+    await upsertRoomState(newGamestate)
 
     const extractPlayerNames = (playersObj) => {
       return Object.values(playersObj).map(player => {
@@ -31,14 +30,14 @@ export const hydrateRoom = async (ws, message) => {
       })
     }
 
-    const newUpdatedPlayers = extractPlayerNames(players.players)
+    const newUpdatedPlayers = extractPlayerNames(newGamestate.players)
 
     const hydrateRoomMessage = JSON.stringify({
       type: HYDRATE_ROOM,
       success: true,
-      room_id: newState.room_id,
-      selected_cards: newState.selected_cards,
-      selected_expansions: newState.selected_expansions,
+      room_id: newGamestate.room_id,
+      selected_cards: newGamestate.selected_cards,
+      selected_expansions: newGamestate.selected_expansions,
       players: newUpdatedPlayers
     })
 
