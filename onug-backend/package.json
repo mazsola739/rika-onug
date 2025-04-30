@@ -7,7 +7,7 @@
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
-    "start": "cross-env ONUG_REPOSITORY_TYPE=local ONUG_LOG_LEVEL=WARN nodemon -w src -x tsx ./src/server.js",
+    "start": "cross-env ONUG_REPOSITORY_TYPE=dynamoDB ONUG_LOG_LEVEL=WARN nodemon -w src -x tsx ./src/server.js",
     "start:ec2": "cross-env ONUG_REPOSITORY_TYPE=local ONUG_LOG_LEVEL=WARN nodemon -w src -x tsx ./src/server.js",
     "test": "node --test --experimental-test-coverage",
     "build": "vite build",
@@ -21,10 +21,13 @@
     "backend"
   ],
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.799.0",
+    "@aws-sdk/util-dynamodb": "^3.799.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
     "express": "^5.1.0",
+    "json-tabifier": "^1.0.3",
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "module-alias": "^2.2.3",

@@ -2231,6 +2231,11 @@ json-parse-even-better-errors@^2.3.0:
   resolved "https://registry.yarnpkg.com/json-parse-even-better-errors/-/json-parse-even-better-errors-2.3.1.tgz#7c47805a94319928e05777405dc12e1f7a4ee02d"
   integrity sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==
 
+json-tabifier@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/json-tabifier/-/json-tabifier-1.0.3.tgz#6023be934f0e395c1e9ba113d6ebc9eecbb747bf"
+  integrity sha512-qDRma1pMzZqfz9h5tQ7l8IWeNEH18BHZ8wdOijo+vB2TM6NVtdTyqPIo/8zKwY7MTTnVfoNUK8tqtzWnHongYQ==
+
 json5@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/json5/-/json5-1.0.2.tgz#63d98d60f21b313b77c4d6da18bfa69d80e1d593"

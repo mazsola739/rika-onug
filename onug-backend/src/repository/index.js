@@ -1,9 +1,16 @@
 import { logDebug } from '../log'
 
-const repositoryType = process.env.ONUG_REPOSITORY_TYPE || 'memory'
-/* const repositoryPath = `../repository/${repositoryType}.repository` */
+export const repositoryType = process.env.ONUG_REPOSITORY_TYPE || 'local'
+
 
 export * from './local.repository'
-/* export * from './local_new.repository' */
+
+import * as local from './local.repository'
+import * as dynamoDB from './dynamodb.repository'
 
 logDebug(`Chosen repository type: ${repositoryType}`)
+
+export const repo = {
+    local,
+    dynamoDB,
+}
