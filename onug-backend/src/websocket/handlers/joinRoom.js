@@ -1,6 +1,6 @@
 import { HYDRATE_ROOM, JOIN_ROOM } from '../../constants'
 import { logErrorWithStack, logTrace, logWarn } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { validateRoom } from '../../validators'
 import { addUserToRoom, broadcast } from '../../utils/connections.utils'
 
@@ -16,7 +16,7 @@ export const joinRoom = async (ws, message) => {
     if (gamestate.total_players >= 12) return ws.send(JSON.stringify({ type: JOIN_ROOM, success: false, errors: ['Room is full. No more players can join.'] }))
 
     const playerTokens = Object.keys(gamestate.players)
-    const newGamstate = {
+    let newGamestate = {
       ...gamestate,
       players: {
         ...gamestate.players,
@@ -25,14 +25,12 @@ export const joinRoom = async (ws, message) => {
       total_players: playerTokens.length + 1
     }
 
-    const updatedConfig = {
-      ...gamestate,
-      nicknames: Object.values(newGamstate.players).map(player => player.name)
+     newGamestate = {
+      ...newGamestate,
+      nicknames: Object.values(newGamestate.players).map(player => player.name)
     }
 
     try {
-      await upsertRoomState(newGamstate)
-
       const extractPlayerNames = (playersObj) => {
         return Object.values(playersObj).map(player => {
           return {
@@ -41,14 +39,14 @@ export const joinRoom = async (ws, message) => {
         })
       }
 
-      const newPlayers = extractPlayerNames(newGamstate.players)
-
+      const newPlayers = extractPlayerNames(newGamestate.players)
+      await repo[repositoryType].upsertRoomState(newGamestate)
       broadcast(room_id, {
         type: HYDRATE_ROOM,
         room_id,
         success: true,
-        selected_cards: updatedConfig.selected_cards,
-        selected_expansions: updatedConfig.selected_expansions,
+        selected_cards: newGamestate.selected_cards,
+        selected_expansions: newGamestate.selected_expansions,
         players: newPlayers
       })
     } catch (error) {

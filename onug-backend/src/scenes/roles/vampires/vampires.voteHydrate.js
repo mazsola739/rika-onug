@@ -1,4 +1,4 @@
-import { readGamestate, upsertRoomState } from '../../../repository'
+import { repo, repositoryType } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
 import { createAndSendSceneMessage, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
 
@@ -6,7 +6,7 @@ export const vampiresVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
 
   try {
-    const gamestate = await readGamestate(room_id)
+    const gamestate = await repo[repositoryType].readGamestate(room_id)
 
     const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampire')
     const vampiresTokens = getPlayerTokensByPlayerNumber(gamestate.players, vampires)
@@ -80,7 +80,7 @@ export const vampiresVotehydrate = async message => {
       })
     }
 
-    await upsertRoomState(gamestate)
+    await repo[repositoryType].upsertRoomState(gamestate)
   } catch (error) {
     console.error('Error handling vampire vote:', error)
   }

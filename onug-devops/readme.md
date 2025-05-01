@@ -112,3 +112,30 @@ yarn run start is the command to run the start script from pacakge json
 2>src/prod__crash.js is the error logs
  & gives back the terminal, and does not stuck inside the running script
 ```
+
+# GUI Extension for Database Management
+
+For easier management of your DynamoDB database, you can use the `dynamodb-admin` GUI extension. Follow these steps to set it up:
+
+1. Install `dynamodb-admin` globally:
+   ```
+   npm install -g dynamodb-admin
+   ```
+
+2. Set the required environment variables:
+   ```
+   export AWS_ACCESS_KEY_ID=your-access-key-id
+   export AWS_SECRET_ACCESS_KEY=your-secret-access-key
+   export AWS_REGION=your-region
+   export DYNAMO_ENDPOINT=http://localhost:8000
+   ```
+
+3. Start the `dynamodb-admin` GUI:
+   ```
+   dynamodb-admin
+   ```
+
+4. Access the GUI in your browser at:
+   ```
+   http://localhost:8001
+   ```

@@ -1,6 +1,6 @@
 import { ERROR, REDIRECT, STAGES } from '../../constants'
 import { logError, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { areAllPlayersReady, resetPlayerReadiness } from '../../utils'
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
@@ -43,7 +43,7 @@ export const startGame = async (ws, message) => {
 
     resetPlayerReadiness(newGamestate.players)
 
-    await upsertRoomState(newGamestate)
+    await repo[repositoryType].upsertRoomState(newGamestate)
     logTrace(`Game started successfully in room [${room_id}] by player [${token}]`)
 
     return broadcast(room_id, { type: REDIRECT, path: `/game/${room_id}` })

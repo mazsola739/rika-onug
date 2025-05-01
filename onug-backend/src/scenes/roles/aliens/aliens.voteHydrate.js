@@ -1,4 +1,5 @@
-import { readGamestate, upsertRoomState } from '../../../repository'
+
+import { repo, repositoryType } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
 import { getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, getPlayerNumberWithMatchingToken, getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
 
@@ -6,7 +7,7 @@ export const aliensVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
 
   try {
-    const gamestate = await readGamestate(room_id)
+    const gamestate = await repo[repositoryType].readGamestate(room_id)
 
     const aliens = getPlayerNumbersByGivenConditions(gamestate.players, 'alien')
     const aliensTokens = getPlayerTokensByPlayerNumber(gamestate.players, aliens)
@@ -106,7 +107,7 @@ export const aliensVotehydrate = async message => {
       })
     }
 
-    await upsertRoomState(gamestate)
+    await repo[repositoryType].upsertRoomState(gamestate)
   } catch (error) {
     console.error('Error handling alien vote:', error)
   }

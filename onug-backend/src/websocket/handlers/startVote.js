@@ -1,6 +1,6 @@
 import { ERROR, VOTE } from '../../constants'
 import { logError, logErrorWithStack, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens } from '../../scenes/sceneUtils'
 import { sendMessageToPlayer } from '../../utils'
 import { validateRoom } from '../../validators'
@@ -48,7 +48,7 @@ export const startVote = async (ws, message) => {
           player_role: player.card.player_role,
           player_team: player.card.player_team
         },
-        players: tokens.map(t => ({
+        players: tokens.map(t => ({ //TODO save into gamestate?
           player_number: players[t].player_number,
           player_name: players[t].name,
           flag: players[t].flag
@@ -58,7 +58,7 @@ export const startVote = async (ws, message) => {
       sendMessageToPlayer(room_id, token, voteMessage)
     })
 
-    await upsertRoomState(newGamestate)
+    await repo[repositoryType].upsertRoomState(newGamestate)
   } catch (error) {
     logErrorWithStack(error)
     //TODO fix this part

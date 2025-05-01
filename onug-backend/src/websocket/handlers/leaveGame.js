@@ -1,6 +1,6 @@
 import { HYDRATE_TABLE, REDIRECT, STAGES } from '../../constants'
 import { logTrace, logErrorWithStack } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { broadcast } from '../../utils/connections.utils'
 import { validateRoom } from '../../validators'
 
@@ -35,7 +35,7 @@ export const leaveGame = async (ws, message) => {
       newGamestate.players[token].flag = false
     })
 
-    await upsertRoomState(newGamestate)
+    await repo[repositoryType].upsertRoomState(newGamestate)
 
     return broadcast(room_id, { type: REDIRECT, path: `/room/${room_id}` })
   } catch (error) {

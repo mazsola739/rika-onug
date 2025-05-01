@@ -1,6 +1,6 @@
 import { REDIRECT, STAGES } from '../../constants'
 import { logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 
@@ -51,7 +51,7 @@ export const stopGame = async message => {
 
   logTrace(`Game stopped by player [${token}], in room [${room_id}]`)
 
-  await upsertRoomState(newGamestate)
+  await repo[repositoryType].upsertRoomState(newGamestate)
 
   broadcast(room_id, { type: REDIRECT, path: `/room/${room_id}` })
 }

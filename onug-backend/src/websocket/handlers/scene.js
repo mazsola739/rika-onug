@@ -1,6 +1,6 @@
 import { REDIRECT, SCENE } from '../../constants'
 import { logError, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { responseHandler, chapterHandler, scriptHandler } from '../../scenes'
 import { rippleHandler } from '../../scenes/rippleHandler'
 import { allPlayersStateCheck /* randomDelay */ } from '../../utils'
@@ -49,7 +49,7 @@ export const scene = async (ws, message) => {
     setPlayerReady(players, token)
     if (allPlayersStateCheck(players, 'flag')) {
       logTrace(`All players are ready for day in room: ${room_id}. Redirecting to Vote.`)
-      await upsertRoomState(newGamestate)
+      await repo[repositoryType].upsertRoomState(newGamestate)
       broadcast(room_id, { type: REDIRECT, path: `/council/${room_id}` })
       resetPlayerReadiness(players)
     }
@@ -90,7 +90,7 @@ export const scene = async (ws, message) => {
       await responseHandler(newGamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title, room_id)
     }
 
-    await upsertRoomState(newGamestate)
+    await repo[repositoryType].upsertRoomState(newGamestate)
     logTrace(`Scene action processed successfully for room: ${room_id}`)
   } catch (error) {
     logError(`Error processing scene action in room: ${room_id}. Error: ${error.message}`)

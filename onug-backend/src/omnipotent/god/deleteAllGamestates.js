@@ -1,18 +1,12 @@
 import { logErrorWithStack, logTrace } from '../../log'
-import { readAllGamestates, removeAllGamestates } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 
 export const deleteAllGamestates = async (req, res) => {
   try {
     const { body } = req
     logTrace(`GOD delete all gamestates endpoint triggered: ${JSON.stringify(body)}`)
 
-    /* 'originally' here
-    const response = await removeAllGamestates()
-    const gamestates = await readAllGamestates()
-    response.gamestates = gamestates
-     */
-
-    const response = { ...await removeAllGamestates(), ...await readAllGamestates() }
+    const response = { ...await repo[repositoryType].removeAllGamestates(), ...await repo[repositoryType].readAllGamestates() }
 
     logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
 

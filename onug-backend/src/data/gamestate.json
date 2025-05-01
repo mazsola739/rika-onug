@@ -8,6 +8,7 @@
   "game_finished": false,
   "vote_timer": 300000,
   "total_players": 0,
+  "public_players": [],
   "players": {},
   "card_positions": { "center_left": {}, "center_middle": {}, "center_right": {}, "center_wolf": {}, "center_villain": {} },
   "mark_positions": {},

@@ -1,6 +1,6 @@
 import { ERROR, HYDRATE_VOTE, REDIRECT, STAGES } from '../../constants'
 import { logError, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 
@@ -21,7 +21,7 @@ export const verdict = async (ws, message) => {
 
     const allPlayersVoted = Object.values(newGamestate.players).every(player => player.flag)
 
-    await upsertRoomState(newGamestate)
+    await repo[repositoryType].upsertRoomState(newGamestate)
 
     if (!allPlayersVoted) {
       logTrace(`Not all players are sent accusation: ${room_id}.`)

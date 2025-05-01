@@ -1,5 +1,5 @@
 import { logInfo, logTrace } from '../log'
-import { upsertRoomState } from '../repository'
+import { repo, repositoryType } from '../repository'
 import { aliensResponse, alphawolfResponse, thingResponse, apprenticeseerResponse, apprenticeassassinResponse, assassinResponse, beholderResponse, bodysnatcherResponse, copycatResponse, curatorResponse, cupidResponse, seerResponse, diseasedResponse, doppelgangerResponse, doppelgangerinstantactionResponse, empathResponse, exposerResponse, revealerResponse, gremlinResponse, morticianResponse, pickpocketResponse, priestResponse, psychicResponse, rascalResponse, thecountResponse, mysticwolfResponse, drunkResponse, instigatorResponse, marksmanResponse, nostradamusResponse, oraclequestionResponse, oracleanswerResponse, paranormalinvestigatorResponse, robberResponse, sentinelResponse, squireResponse, troublemakerResponse, temptressResponse, vampiresResponse, villageidiotResponse, witchResponse, werewolvesResponse } from './roles'
 
 export const responseHandler = async (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title, room_id) => {
@@ -210,7 +210,7 @@ export const responseHandler = async (gamestate, token, selected_card_positions,
       logInfo(`RESPONSE_HANDLER_DEFAULT case: no role found for: [response scene title: ${scene_title}]`)
   }
 
-  await upsertRoomState(newGamestate)
+  await repo[repositoryType].upsertRoomState(newGamestate)
 
   return newGamestate
 }

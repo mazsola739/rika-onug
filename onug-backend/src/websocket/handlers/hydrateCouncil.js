@@ -1,6 +1,6 @@
 import { HYDRATE_COUNCIL, STAGES } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { getPublicPlayersInformation } from '../../utils'
 import { getKeys, getKnownPlayer, updatePlayer } from '../../utils/council.util'
 import { validateRoom } from '../../validators'
@@ -17,7 +17,7 @@ export const hydrateCouncil = async (ws, message) => {
 
     newGamestate = updatePlayer(newGamestate, token)
 
-    await upsertRoomState(newGamestate)
+    await repo[repositoryType].upsertRoomState(newGamestate)
 
     const player = getKnownPlayer(newGamestate, token)
     const guess_cards = [...newGamestate.selected_cards]

@@ -1,6 +1,6 @@
 import { HYDRATE_TABLE, STAGES } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { getPublicPlayersInformation } from '../../utils'
 import { validateRoom } from '../../validators'
 
@@ -22,9 +22,9 @@ export const hydrateTable = async (ws, message) => {
   try {
 
     const newGamestate = { ...gamestate, stage: STAGES.TABLE }
-    await upsertRoomState(newGamestate)
+    await repo[repositoryType].upsertRoomState(newGamestate)
 
-    const playersPublicInformations = getPublicPlayersInformation(newGamestate.players)
+    const playersPublicInformations = getPublicPlayersInformation(newGamestate.players) //TODO save into gamestate?
 
     return ws.send(
       JSON.stringify({

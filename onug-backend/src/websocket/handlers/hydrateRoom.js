@@ -1,12 +1,14 @@
 import { HYDRATE_ROOM, STAGES } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { validateRoom } from '../../validators'
 
 export const hydrateRoom = async (ws, message) => {
   try {
     const { room_id } = message
     const [validity, gamestate, errors] = await validateRoom(room_id)
+
+
 
     if (!validity) {
       return ws.send(
@@ -20,7 +22,7 @@ export const hydrateRoom = async (ws, message) => {
 
     const newGamestate = { ...gamestate, stage: STAGES.ROOM }
 
-    await upsertRoomState(newGamestate)
+    await repo[repositoryType].upsertRoomState(newGamestate)
 
     const extractPlayerNames = (playersObj) => {
       return Object.values(playersObj).map(player => {

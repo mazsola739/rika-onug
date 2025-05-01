@@ -1,7 +1,7 @@
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 import { HYDRATE_ROOM } from '../../constants'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { filterCardsByExpansions, getPlayerNames, toggleCardSelect, toggleExpansions } from '../../utils'
 import { logTrace } from '../../log'
 
@@ -32,9 +32,9 @@ export const updateRoom = async message => {
       errors: ['Cannot have more than 12 players.']
     })
 
-  const playersInGame = getPlayerNames(newGamestate.players)
+  const playersInGame = getPlayerNames(newGamestate.players) //TODO save into gamestate?
 
-  await upsertRoomState(newGamestate)
+  await repo[repositoryType].upsertRoomState(newGamestate)
 
   return broadcast(room_id, {
     type: HYDRATE_ROOM,

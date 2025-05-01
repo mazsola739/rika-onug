@@ -1,6 +1,6 @@
 import { HYDRATE_READY } from '../../constants'
 import { logDebug, logError } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { getPublicPlayersInformation } from '../../utils'
 import { broadcast } from '../../utils/connections.utils'
 import { validateRoom } from '../../validators'
@@ -24,11 +24,9 @@ export const hydrateReady = async (ws, message) => {
 
     const playersPublicInformations = getPublicPlayersInformation(newGamestate.players)
 
+    await repo[repositoryType].upsertRoomState(newGamestate)
 
-    await upsertRoomState(newGamestate)
-
-
-    return broadcast(room_id, { type: HYDRATE_READY, players: playersPublicInformations })
+    return broadcast(room_id, { type: HYDRATE_READY, players: playersPublicInformations }) //TODO save into gamestate?
   } catch (error) {
     logError(error)
   }

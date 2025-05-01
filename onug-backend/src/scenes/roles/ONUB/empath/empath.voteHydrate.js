@@ -1,4 +1,4 @@
-import { readGamestate, upsertRoomState } from "../../../../repository"
+import { repo, repositoryType } from "../../../../repository"
 import { sendMessageToPlayer } from "../../../../utils"
 import { getPlayerTokensByPlayerNumber, getPlayerNumberWithMatchingToken } from "../../../sceneUtils"
 import { randomEmpathInstructions } from "./empath.constants"
@@ -7,7 +7,7 @@ export const empathVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
 
   try {
-    const gamestate = await readGamestate(room_id)
+    const gamestate = await repo[repositoryType].readGamestate(room_id)
 
     const emapths = [0] // Assuming Empath is player 0; adjust logic as needed
     const emapthsTokens = getPlayerTokensByPlayerNumber(gamestate.players, emapths)
@@ -55,7 +55,7 @@ export const empathVotehydrate = async message => {
       sendMessageToPlayer(gamestate.room_id, emapthToken, stillVoteMessage)
     })
 
-    await upsertRoomState(gamestate)
+    await repo[repositoryType].upsertRoomState(gamestate)
   } catch (error) {
     console.error('Error handling emapth vote:', error)
   }

@@ -1,7 +1,7 @@
 import { EXPANSIONS, HYDRATE_ROOM, LEAVE_ROOM } from '../../constants'
 import roomsData from '../../data/rooms.json'
 import { logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { getPlayerNames } from '../../utils'
 import { broadcast, removeUserFromRoom } from '../../utils/connections.utils'
 import { validateRoom } from '../../validators'
@@ -45,7 +45,7 @@ export const leaveRoom = async (ws, message) => {
     }
   }
 
-  await upsertRoomState(newGamestate)
+  await repo[repositoryType].upsertRoomState(newGamestate)
 
   removeUserFromRoom(token, room_id)
 

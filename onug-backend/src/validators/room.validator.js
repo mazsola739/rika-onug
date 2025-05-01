@@ -1,11 +1,11 @@
 import { ROOM_NAMES } from '../constants'
 import { logWarn } from '../log'
-import { readGamestate } from '../repository'
+import { repo, repositoryType } from '../repository'
 
-export const validateRoom = async roomId => {
+export const validateRoom = async room_id => {
   const errors = []
 
-  const roomIdExists = ROOM_NAMES.includes(roomId)
+  const roomIdExists = ROOM_NAMES.includes(room_id)
   if (!roomIdExists) {
     errors.push('Invalid room id')
     return [false, {}, errors]
@@ -14,8 +14,7 @@ export const validateRoom = async roomId => {
   let gamestate
 
   try {
-    gamestate = await readGamestate(roomId)
-
+    gamestate = await repo[repositoryType].readGamestate(room_id)
     if (!gamestate) {
       errors.push('Room does not exist')
     } else {
@@ -28,7 +27,7 @@ export const validateRoom = async roomId => {
       }
     }
   } catch (error) {
-    logWarn(`Error reading gamestate for roomId ${roomId}: ${error.message}`)
+    logWarn(`Error reading gamestate for room_id ${room_id}: ${error.message}`)
     errors.push('An error occurred while retrieving the room data')
   }
 

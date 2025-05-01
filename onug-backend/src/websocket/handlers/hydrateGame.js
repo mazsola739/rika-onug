@@ -1,6 +1,6 @@
 import { HYDRATE_GAME, STAGES } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
-import { readGamestate } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { areAllPlayersReady, resetPlayerReadiness } from '../../utils'
 
 export const hydrateGame = async (ws, message) => {
@@ -9,7 +9,7 @@ export const hydrateGame = async (ws, message) => {
   const { room_id } = message
   try {
 
-    const gamestate = await readGamestate(room_id)
+    const gamestate = await repo[repositoryType].readGamestate(room_id)
     const newGamestate = { ...gamestate, stage: STAGES.GAME }
 
     const { players } = newGamestate

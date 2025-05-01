@@ -1,6 +1,6 @@
 import { HYDRATE_GUESS } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 
@@ -57,7 +57,7 @@ export const hydrateGuess = async (ws, message) => {
       guessed_roles: gamestate.card_positions[position].guessed_roles
     }))
 
-    await upsertRoomState(gamestate)
+    await repo[repositoryType].upsertRoomState(gamestate)
 
     return broadcast(room_id, {
       type: HYDRATE_GUESS,

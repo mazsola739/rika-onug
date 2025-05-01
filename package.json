@@ -6,7 +6,9 @@
     "frontend": "cd onug-frontend && yarn start",
     "build:frontend": "cd onug-frontend && yarn build",
     "backend": "cd onug-backend && yarn start",
-    "install:all": "cd onug-frontend && yarn install && cd ../onug-backend && yarn install"
+    "install:all": "cd onug-frontend && yarn install && cd ../onug-backend && yarn install",
+    
+    "cgm": "cd scripts && node createGamestateMappings.mjs"
   },
   "description": "One Night Ultimate Werewolf",
   "author": "Rika",

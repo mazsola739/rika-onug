@@ -1,6 +1,6 @@
 import { EXPANSIONS, HYDRATE_ROOM } from '../../constants'
 import { logError, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { getPlayerNames } from '../../utils'
 import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
@@ -18,7 +18,7 @@ export const reset = async message => {
       selected_expansions: EXPANSIONS
     }
 
-    await upsertRoomState(newGamestate)
+    await repo[repositoryType].upsertRoomState(newGamestate)
 
     logTrace(`selectedCards reseted, new gamestate: ${JSON.stringify(newGamestate)}`)
 

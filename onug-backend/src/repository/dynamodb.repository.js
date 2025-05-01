@@ -1,24 +1,13 @@
-import { readFile, unlink } from 'fs/promises'
+import { readFile } from 'fs/promises'
 import { ROOM_NAMES } from '../constants'
 import rooms from '../data/rooms.json'
 import gamestate from '../data/gamestate.json'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { webSocketServerConnectionsPerRoom } from '../utils/connections.utils'
-//import { DynamoDBClient, GetItemCommand, PutItemCommand, DeleteItemCommand } from '@aws-sdk/client-dynamodb'
-import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb'
-import { marshall } from '@aws-sdk/util-dynamodb'
+import { DynamoDBClient, GetItemCommand, PutItemCommand, DeleteItemCommand } from '@aws-sdk/client-dynamodb'
+import { marshall, unmarshall } from '@aws-sdk/util-dynamodb'
 
 const client = new DynamoDBClient({ region: 'us-west-2', endpoint: "http://localhost:8000" }) // TODO check, update
-/*
-// something like this
-const readCommand = new GetItemCommand({}) // instead of readfile
-const writeCommand = new PutItemCommand({}) // instead of writefile
-const deleteCommand = new DeleteItemCommand({}) // instead of unlink
-const results = await client.send(command)
-
-*/
-const FILE_PATH_TEMPLATE = `${__dirname}/../gamestate/`
-const ROOM_GAMESTATE_FILE = room_id => `${FILE_PATH_TEMPLATE}${room_id}_gamestate.json`
 
 const ENCODING = 'utf8'
 
@@ -43,77 +32,109 @@ export const upsertRoomState = async state => {
 
 export const readGamestate = async room_id => {
   logTrace('read gamestate')
-  const filePath = ROOM_GAMESTATE_FILE(room_id)
 
   try {
-    const data = await readFile(filePath, { encoding: ENCODING })
-    return JSON.parse(data)
+    const readCommand = new GetItemCommand({
+      TableName: 'gamestate',
+      Key: marshall({ room_id }),
+    })
+    const result = await client.send(readCommand)
+
+    if (result.Item) {
+      return unmarshall(result.Item)
+    } else {
+      logTrace(`No gamestate found for room_id: ${room_id}`)
+      return null
+    }
   } catch (error) {
-    return logError(
-      `###>>> READ_GAMESTATE_ERROR
-###>>> `,
-      error
-    )
+    logError(`###>>> READ_GAMESTATE_ERROR ###>>>`, error)
+    return null
   }
 }
 
 export const readAllGamestates = async () => {
   logTrace('read all gamestates')
   const gamestates = {}
+
   for (let i = 0; i < ROOM_NAMES.length; i++) {
-    let room_id = ROOM_NAMES[i]
-    const filePath = ROOM_GAMESTATE_FILE(room_id)
+    const room_id = ROOM_NAMES[i]
 
     try {
-      const rawData = await readFile(filePath, { encoding: ENCODING })
-      gamestates[room_id] = JSON.parse(rawData)
+      const readCommand = new GetItemCommand({
+        TableName: 'gamestate',
+        Key: marshall({ room_id }),
+      })
+      const result = await client.send(readCommand)
+
+      if (result.Item) {
+        gamestates[room_id] = unmarshall(result.Item)
+      } else {
+        logTrace(`No gamestate found for room_id: ${room_id}`)
+        gamestates[room_id] = `No gamestate found for room_id: ${room_id}`
+      }
     } catch (error) {
-      logTrace('Could not read all gamestates', error)
-      gamestates[room_id] = `No gamestate found for room_id: ${room_id}`
+      logTrace(`Could not read gamestate for room_id: ${room_id}`, error)
+      gamestates[room_id] = `Error reading gamestate for room_id: ${room_id}`
     }
   }
+
   return gamestates
 }
 
 export const readGamestateByRoomId = async room_id => {
   logTrace('read gamestate by room_id')
-  const gamestate = {}
-  const filePath = ROOM_GAMESTATE_FILE(room_id)
 
   try {
-    const rawData = await readFile(filePath, { encoding: ENCODING })
-    gamestate[room_id] = JSON.parse(rawData)
-  } catch (error) {
-    logTrace(`Could not read gamestate for room_id ${room_id}`, error)
-    gamestate[room_id] = `No gamestate found for room_id: ${room_id}`
-  }
+    const readCommand = new GetItemCommand({
+      TableName: 'gamestate',
+      Key: marshall({ room_id }),
+    })
+    const result = await client.send(readCommand)
 
-  return gamestate
+    if (result.Item) {
+      const unmarshalledData = unmarshall(result.Item)
+      return { [room_id]: unmarshalledData }
+    } else {
+      logTrace(`No gamestate found for room_id: ${room_id}`)
+      return { [room_id]: `No gamestate found for room_id: ${room_id}` }
+    }
+  } catch (error) {
+    logTrace(`Could not read gamestate for room_id: ${room_id}`, error)
+    return { [room_id]: `Error reading gamestate for room_id: ${room_id}` }
+  }
 }
 
 export const removeAllGamestates = async () => {
   logTrace('remove all gamestates')
+
   for (let i = 0; i < ROOM_NAMES.length; i++) {
-    let room_id = ROOM_NAMES[i]
-    const filePath = ROOM_GAMESTATE_FILE(room_id)
+    const room_id = ROOM_NAMES[i]
 
     try {
-      await unlink(filePath)
+      const deleteCommand = new DeleteItemCommand({
+        TableName: 'gamestate',
+        Key: marshall({ room_id }),
+      })
+      await client.send(deleteCommand)
     } catch (error) {
-      logTrace(`Could not remove gamestate for filePath ${filePath}`, error)
+      logTrace(`Could not remove gamestate for room_id: ${room_id}`, error)
     }
   }
+
   return { status: 'gamestates removed' }
 }
 
 export const removeRoomGamestateById = async room_id => {
   logTrace('remove gamestate by room_id')
-  const filePath = ROOM_GAMESTATE_FILE(room_id)
 
   try {
-    await unlink(filePath)
+    const deleteCommand = new DeleteItemCommand({
+      TableName: 'gamestate',
+      Key: marshall({ room_id }),
+    })
+    await client.send(deleteCommand)
   } catch (error) {
-    logTrace(`Could not remove gamestate for filePath ${filePath}`, error)
+    logTrace(`Could not remove gamestate for room_id: ${room_id}`, error)
   }
 
   return { status: 'gamestate removed' }
@@ -122,20 +143,30 @@ export const removeRoomGamestateById = async room_id => {
 export const removeAllPlayers = async () => {
   logTrace('remove all players')
   const gamestates = {}
+
   for (let i = 0; i < ROOM_NAMES.length; i++) {
-    let room_id = ROOM_NAMES[i]
-    const filePath = ROOM_GAMESTATE_FILE(room_id)
+    const room_id = ROOM_NAMES[i]
 
     try {
-      const rawData = await readFile(filePath, { encoding: ENCODING })
-      const newGamestate = JSON.parse(rawData)
+      const readCommand = new GetItemCommand({
+        TableName: 'gamestate',
+        Key: marshall({ room_id }),
+      })
+      const result = await client.send(readCommand)
 
-      Object.keys(newGamestate.players).forEach(token => delete newGamestate.players[token])
-      await upsertRoomState(newGamestate)
-      gamestates[room_id] = newGamestate
+      if (result.Item) {
+        const newGamestate = unmarshall(result.Item)
+        Object.keys(newGamestate.players).forEach(token => delete newGamestate.players[token])
+
+        await upsertRoomState(newGamestate)
+        gamestates[room_id] = newGamestate
+      } else {
+        logTrace(`No gamestate found for room_id: ${room_id}`)
+        gamestates[room_id] = `No gamestate found for room_id: ${room_id}`
+      }
     } catch (error) {
-      logTrace(`Could not remove all players. No gamestate found for room_id: ${room_id}`, error)
-      gamestates[room_id] = `No gamestate found for room_id: ${room_id}`
+      logTrace(`Could not remove players for room_id: ${room_id}`, error)
+      gamestates[room_id] = `Error removing players for room_id: ${room_id}`
     }
   }
 
@@ -147,22 +178,31 @@ export const removePlayerByToken = async token => {
   const gamestates = {}
 
   for (let i = 0; i < ROOM_NAMES.length; i++) {
-    let room_id = ROOM_NAMES[i]
-    const filePath = ROOM_GAMESTATE_FILE(room_id)
+    const room_id = ROOM_NAMES[i]
 
     try {
-      const rawData = await readFile(filePath, { encoding: ENCODING })
-      const newGamestate = JSON.parse(rawData)
+      const readCommand = new GetItemCommand({
+        TableName: 'gamestate',
+        Key: marshall({ room_id }),
+      })
+      const result = await client.send(readCommand)
 
-      if (newGamestate.players[token]) {
-        delete newGamestate.players[token]
-        await upsertRoomState(newGamestate)
-        gamestates[room_id] = newGamestate
-        delete webSocketServerConnectionsPerRoom[room_id][token]
+      if (result.Item) {
+        const newGamestate = unmarshall(result.Item)
+
+        if (newGamestate.players[token]) {
+          delete newGamestate.players[token]
+          await upsertRoomState(newGamestate)
+          gamestates[room_id] = newGamestate
+          delete webSocketServerConnectionsPerRoom[room_id][token]
+        }
+      } else {
+        logTrace(`No gamestate found for room_id: ${room_id}`)
+        gamestates[room_id] = `No gamestate found for room_id: ${room_id}`
       }
     } catch (error) {
-      logTrace(`Could not remove all players. No gamestate found for room_id: ${room_id}`, error)
-      gamestates[room_id] = `No gamestate found for room_id: ${room_id}`
+      logTrace(`Could not remove player for room_id: ${room_id}`, error)
+      gamestates[room_id] = `Error removing player for room_id: ${room_id}`
     }
   }
 

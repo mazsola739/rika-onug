@@ -1,17 +1,17 @@
 import { logErrorWithStack, logTrace } from '../../log'
-import { readNohupByService } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 
 export const readNohup = async (req, res) => {
   try {
     const { body } = req
     logTrace(`GOD check readNohup triggered: ${JSON.stringify(body)}`)
     const { service } = req.query
-    const nohup = await readNohupByService(service)
+    const response = await repo[repositoryType].readNohupByService(service)
 
-    logTrace(`sending back nohup: ${nohup}`)
+    logTrace(`sending back nohup: ${response}`)
 
     return res.send({
-      nohup
+      response
     })
   } catch (error) {
     logErrorWithStack(error)

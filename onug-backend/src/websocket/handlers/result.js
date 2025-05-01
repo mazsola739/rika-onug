@@ -1,6 +1,6 @@
 import { ERROR, RESULT } from '../../constants'
 import { logError, logTrace } from '../../log'
-import { upsertRoomState } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 import { getPlayerInfo } from '../../utils/result.utils'
 import { validateRoom } from '../../validators'
 import { getWinnersAndLosers } from '../../winingAndLosing/getWinnersAndLosers'
@@ -45,7 +45,7 @@ export const result = async (ws, message) => {
     newGamestate.winner_teams = winnerTeams
     newGamestate.loser_teams = loserTeam
 
-    await upsertRoomState(newGamestate)
+    await repo[repositoryType].upsertRoomState(newGamestate)
 
     return ws.send(
       JSON.stringify({

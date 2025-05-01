@@ -132,6 +132,7 @@ export type WsJsonMessageType = {
   narration?: NarrationType[]
   narrations?: Record<string, NarrationType[]>[]
   night_mode?: boolean
+  nicknames?: string[]
   path?: string
   player?: PlayerType
   players?: PlayerType[]
@@ -158,4 +159,3 @@ export type WsJsonMessageType = {
   vote_result?: ResultType[]
   winner_teams?: string[]
 }
-

@@ -1,11 +1,11 @@
 import { logErrorWithStack, logTrace } from '../../log'
-import { readAllGamestates } from '../../repository'
+import { repo, repositoryType } from '../../repository'
 
 export const checkGamestates = async (req, res) => {
   try {
     const { body } = req
     logTrace(`GOD check gamestates endpoint triggered: ${JSON.stringify(body)}`)
-    const response = await readAllGamestates()
+    const response = await repo[repositoryType].readAllGamestates()
 
     logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
 

@@ -1,6 +1,6 @@
 import { END_GAME } from '../constants'
 import { logTrace } from '../log'
-import { upsertRoomState } from '../repository'
+import { repo, repositoryType } from '../repository'
 import { allPlayersStateCheck, broadcast /* randomDelay */ } from '../utils'
 import { isActivePlayer } from './activePlayer'
 import { sceneHandler } from './sceneHandler'
@@ -133,7 +133,8 @@ export const chapterHandler = async (gamestate, room_id) => {
       })
     }
 
-    await upsertRoomState(newGamestate)
+    await repo[repositoryType].upsertRoomState(newGamestate)
+
     return newGamestate
   } catch (error) {
     logTrace(`Error in chapterHandler: ${error.message}`)
