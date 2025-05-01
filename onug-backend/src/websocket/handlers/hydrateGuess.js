@@ -2,19 +2,16 @@ import { HYDRATE_GUESS } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
 import { repo, repositoryType } from '../../repository'
 import { validateRoom } from '../../validators'
-import { broadcast } from '../../utils/connections.utils'
+import { broadcast, sendMessage } from '../../utils/connections.utils'
 
 export const hydrateGuess = async (ws, message) => {
   logTrace(`hydrate-guess requested with ${JSON.stringify(message)}`)
   const { room_id, guess } = message
   try {
-
     const { position, id } = guess || {}
 
     const [validity, gamestate, errors] = await validateRoom(room_id)
-    if (!validity) {
-      return ws.send(JSON.stringify({ type: HYDRATE_GUESS, success: false, errors }))
-    }
+    if (!validity) return sendMessage(ws, { type: HYDRATE_GUESS, success: false, errors })
 
     if (!gamestate.guess_cards) {
       gamestate.guess_cards = [...new Set(gamestate.selected_cards)]
@@ -68,12 +65,6 @@ export const hydrateGuess = async (ws, message) => {
   } catch (error) {
     logErrorWithStack(error)
 
-    ws.send(
-      JSON.stringify({
-        type: HYDRATE_GUESS,
-        success: false,
-        errors: ['An unexpected error occurred. Please try again.']
-      })
-    )
+    sendMessage(ws, { type: HYDRATE_GUESS, success: false, errors: ['An unexpected error occurred. Please try again.'] })
   }
 }

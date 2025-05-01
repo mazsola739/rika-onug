@@ -2,6 +2,7 @@ import WebSocket from 'ws'
 import { ALIENS, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, PRESELECT, READY, RELOAD, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES, VOTE } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, hydrateReady, hydrateRoom, hydrateTable, joinRoom, leaveGame, leaveRoom, newbie, preselect, reload, reset, result, scene, selectRoom, startGame, startVote, stopGame, updateRoom, verdict } from './handlers'
+import { decodeJsonKeys } from '../utils'
 import { aliensVotehydrate } from '../scenes/roles/aliens/aliens.voteHydrate'
 import { vampiresVotehydrate } from '../scenes/roles/vampires/vampires.voteHydrate'
 
@@ -19,8 +20,8 @@ export const websocketServer = port => {
       }
       ws.on('message', async (rawMessage, client, client2) => {
         logTrace(`Received message ${rawMessage} from user ${client} ${client2}`)
-        const message = JSON.parse(rawMessage)
-        logTrace(`msg received: ${rawMessage}`)
+        const message = decodeJsonKeys(rawMessage)
+        logTrace(`Decoded message: ${JSON.stringify(message)}`)
 
         // Handle messages that don't require token validation
         if (message.type === NEWBIE) return newbie(ws, message)

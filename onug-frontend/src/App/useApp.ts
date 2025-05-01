@@ -3,6 +3,9 @@ import { NEWBIE, RELOAD, WS_HOST } from 'constant'
 import { useEffect, useState } from 'react'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { wsStore } from 'store'
+import { encodeJsonKeys, decodeJsonKeys } from 'utils'
+
+//TODO type move from here
 
 interface WebSocketMessage {
   type: string
@@ -19,6 +22,15 @@ export const useApp = () => {
     onOpen: () => setFirstTime(true),
     shouldReconnect: () => true
   })
+
+  const wrappedSendJsonMessage = (message: WebSocketMessage) => {
+    const encodedMessage = encodeJsonKeys(message)
+    console.log(message)
+    console.log(encodedMessage)
+    sendJsonMessage(encodedMessage)
+  }
+
+  const decodedLastJsonMessage = lastJsonMessage ? decodeJsonKeys(lastJsonMessage) : null
 
   const iconMapping: { [key: string]: IconType } = {
     [ReadyState.CONNECTING]: 'connecting',
@@ -41,22 +53,22 @@ export const useApp = () => {
   }, [])
 
   useEffect(() => {
-    if (sendJsonMessage && firstTime) {
+    if (wrappedSendJsonMessage && firstTime) {
       setFirstTime(false)
-      sendJsonMessage({ type: NEWBIE, token })
-      sendJsonMessage({ type: RELOAD, token })
-      wsStore.setSendJsonMessage(sendJsonMessage)
+      wrappedSendJsonMessage({ type: NEWBIE, token })
+      wrappedSendJsonMessage({ type: RELOAD, token })
+      wsStore.setSendJsonMessage(wrappedSendJsonMessage)
     }
 
-    if (lastJsonMessage) {
-      wsStore.setLastJsonMessage(lastJsonMessage)
+    if (decodedLastJsonMessage) {
+      wsStore.setLastJsonMessage(decodedLastJsonMessage)
     }
 
-    if (lastJsonMessage?.type === NEWBIE && lastJsonMessage?.update) {
-      sessionStorage.setItem('token', lastJsonMessage.token!)
+    if (decodedLastJsonMessage?.type === NEWBIE && decodedLastJsonMessage?.update) {
+      sessionStorage.setItem('token', decodedLastJsonMessage.token!)
       //TODO save name
     }
-  }, [sendJsonMessage, lastJsonMessage, firstTime])
+  }, [wrappedSendJsonMessage, decodedLastJsonMessage, firstTime])
 
-  return { readyState, iconMapping, sendJsonMessage }
+  return { readyState, iconMapping, sendJsonMessage: wrappedSendJsonMessage }
 }

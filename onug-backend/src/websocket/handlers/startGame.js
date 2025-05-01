@@ -3,7 +3,7 @@ import { logError, logTrace } from '../../log'
 import { repo, repositoryType } from '../../repository'
 import { areAllPlayersReady, resetPlayerReadiness } from '../../utils'
 import { validateRoom } from '../../validators'
-import { broadcast } from '../../utils/connections.utils'
+import { broadcast, sendMessage } from '../../utils/connections.utils'
 
 //TODO dont allow if less then 3 players in game?
 
@@ -14,10 +14,10 @@ export const startGame = async (ws, message) => {
   try {
     const [validity, gamestate, errors] = await validateRoom(room_id)
 
-    if (!validity) return ws.send(JSON.stringify({ type: REDIRECT, path: '/lobby', errors }))
+    if (!validity) return sendMessage(ws, { type: REDIRECT, path: '/lobby', errors })
 
     const startTime = Date.now()
-    
+
     let newGamestate = {
       ...gamestate,
       stage: STAGES.GAME,
@@ -50,11 +50,6 @@ export const startGame = async (ws, message) => {
   } catch (error) {
     logError(`Error starting game in room [${room_id}]: ${error.message}`)
     logError(JSON.stringify(error.stack))
-    ws.send(
-      JSON.stringify({
-        type: 'ERROR',
-        message: 'Game start failed. Please try again.'
-      })
-    )
+    sendMessage(ws, { type: 'ERROR', message: 'Game start failed. Please try again.' })
   }
 }

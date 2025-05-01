@@ -1,7 +1,7 @@
 import { DEAL, STAGES, markPositions, REDIRECT } from '../../constants'
 import { logTrace, logErrorWithStack } from '../../log'
 import { repo, repositoryType } from '../../repository'
-import { dealCardIds, createCenterPositionCard, createPlayerPositionCard, hasMark, createPlayerCard, broadcast } from '../../utils'
+import { dealCardIds, createCenterPositionCard, createPlayerPositionCard, hasMark, createPlayerCard, broadcast, sendMessage } from '../../utils'
 import { validateRoom } from '../../validators'
 
 export const dealCards = async (ws, message) => {
@@ -11,7 +11,7 @@ export const dealCards = async (ws, message) => {
   try {
     const [validity, gamestate, errors] = await validateRoom(room_id)
 
-    if (!validity) return ws.send(JSON.stringify({ type: DEAL, success: false, errors }))
+    if (!validity) return sendMessage(ws, { type: DEAL, success: false, errors })
 
     const selectedCards = [...gamestate.selected_cards]
 

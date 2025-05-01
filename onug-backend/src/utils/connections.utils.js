@@ -1,5 +1,6 @@
 import { ROOM_NAMES } from '../constants'
 import { logDebug, logError, logTrace } from '../log'
+import { encodeJsonKeys } from './json.utils'
 
 export const webSocketServerConnectionsPerRoom = {}
 export const initWebSocketConnections = () => ROOM_NAMES.forEach(roomName => (webSocketServerConnectionsPerRoom[roomName] = {}))
@@ -21,7 +22,7 @@ export const broadcast = (room_id, jsonMessage) => {
   logDebug(`broadcast to all users in room [${room_id}] with message [${JSON.stringify(jsonMessage)}]`)
   logTrace(`active connections in room [${room_id}]: ${JSON.stringify(Object.keys(webSocketServerConnectionsPerRoom?.[room_id]))}`)
 
-  Object.values(webSocketServerConnectionsPerRoom[room_id]).forEach(ws => ws.send(JSON.stringify(jsonMessage)))
+  Object.values(webSocketServerConnectionsPerRoom[room_id]).forEach(ws => sendMessage(ws, jsonMessage))
 }
 
 export const sendMessageToPlayer = (room_id, token, jsonMessage) => {
@@ -31,5 +32,14 @@ export const sendMessageToPlayer = (room_id, token, jsonMessage) => {
     playerConnection.send(JSON.stringify(jsonMessage))
   } else {
     logError(`No active WebSocket connection found for user [${room_id}][${token}]`)
+  }
+}
+
+export const sendMessage = (ws, message) => {
+  try {
+    const encodedMessage = encodeJsonKeys(message)
+    ws.send(JSON.stringify(encodedMessage))
+  } catch (error) {
+    console.error('Error sending message:', error)
   }
 }

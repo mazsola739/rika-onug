@@ -2,7 +2,7 @@ import { HYDRATE_ROOM, JOIN_ROOM } from '../../constants'
 import { logErrorWithStack, logTrace, logWarn } from '../../log'
 import { repo, repositoryType } from '../../repository'
 import { validateRoom } from '../../validators'
-import { addUserToRoom, broadcast } from '../../utils/connections.utils'
+import { addUserToRoom, broadcast, sendMessage } from '../../utils/connections.utils'
 
 export const joinRoom = async (ws, message) => {
   logTrace(`join-room requested with ${JSON.stringify(message)}`)
@@ -11,9 +11,9 @@ export const joinRoom = async (ws, message) => {
   try {
     const [validity, gamestate, errors] = await validateRoom(room_id)
 
-    if (!validity) return ws.send(JSON.stringify({ type: JOIN_ROOM, success: false, errors}))
+    if (!validity) return sendMessage(ws, { type: JOIN_ROOM, success: false, errors })
 
-    if (gamestate.total_players >= 12) return ws.send(JSON.stringify({ type: JOIN_ROOM, success: false, errors: ['Room is full. No more players can join.'] }))
+    if (gamestate.total_players >= 12) return sendMessage(ws, { type: JOIN_ROOM, success: false, errors: ['Room is full. No more players can join.'] })
 
     const playerTokens = Object.keys(gamestate.players)
     let newGamestate = {
@@ -25,13 +25,13 @@ export const joinRoom = async (ws, message) => {
       total_players: playerTokens.length + 1
     }
 
-     newGamestate = {
+    newGamestate = {
       ...newGamestate,
       nicknames: Object.values(newGamestate.players).map(player => player.name)
     }
 
     try {
-      const extractPlayerNames = (playersObj) => {
+      const extractPlayerNames = playersObj => {
         return Object.values(playersObj).map(player => {
           return {
             player_name: player.name
@@ -51,35 +51,15 @@ export const joinRoom = async (ws, message) => {
       })
     } catch (error) {
       logWarn(`Error updating room state: ${error.message}`)
-      return ws.send(
-        JSON.stringify({
-          type: JOIN_ROOM,
-          success: false,
-          errors: ['Failed to save room state. Please try again.']
-        })
-      )
+      return sendMessage(ws, { type: JOIN_ROOM, success: false, errors: ['Failed to save room state. Please try again.'] })
     }
 
     addUserToRoom(ws, token, room_id)
 
-    return ws.send(
-      JSON.stringify({
-        type: JOIN_ROOM,
-        success: true,
-        message: 'Successfully joined',
-        room_id,
-        player: { name: nickname }
-      })
-    )
+    return sendMessage(ws, { type: JOIN_ROOM, success: true, message: 'Successfully joined', room_id, player: { name: nickname } })
   } catch (error) {
     logErrorWithStack(error)
 
-    ws.send(
-      JSON.stringify({
-        type: JOIN_ROOM,
-        success: false,
-        errors: ['An unexpected error occurred. Please try again.']
-      })
-    )
+    sendMessage(ws, { type: JOIN_ROOM, success: false, errors: ['An unexpected error occurred. Please try again.'] })
   }
 }

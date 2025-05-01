@@ -1,12 +1,12 @@
 import { logErrorWithStack, logTrace } from '../../log'
-import { webSocketServerConnectionsPerRoom } from '../../utils/connections.utils'
+import { sendMessage, webSocketServerConnectionsPerRoom } from '../../utils/connections.utils'
 
 export const broadCastToAll = async (req, res) => {
   try {
     const { message } = req.body
     logTrace('GOD broadcast to all endpoint triggered', message)
     Object.keys(webSocketServerConnectionsPerRoom).forEach(room => {
-      Object.values(webSocketServerConnectionsPerRoom[room]).forEach(ws => ws.send(JSON.stringify(message)))
+      Object.values(webSocketServerConnectionsPerRoom[room]).forEach(ws => sendMessage(ws, message))
     })
 
     return res.send({
