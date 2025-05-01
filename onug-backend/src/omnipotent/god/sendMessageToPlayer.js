@@ -1,5 +1,5 @@
 import { logErrorWithStack, logTrace } from '../../log'
-import { webSocketServerConnectionsPerRoom } from '../../utils/connections.utils'
+import { sendMessage, webSocketServerConnectionsPerRoom } from '../../utils/connections.utils'
 
 export const sendMessageToPlayer = async (req, res) => {
   try {
@@ -9,7 +9,7 @@ export const sendMessageToPlayer = async (req, res) => {
       const connectionsEntry = Object.entries(webSocketServerConnectionsPerRoom[room])
       for (let [playerToken, ws] of connectionsEntry)
         if (playerToken === token) {
-          ws.send(JSON.stringify(message))
+          sendMessage(ws, message)
           break
         }
     })

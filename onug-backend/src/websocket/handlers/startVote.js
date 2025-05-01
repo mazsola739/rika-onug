@@ -2,7 +2,7 @@ import { ERROR, VOTE } from '../../constants'
 import { logError, logErrorWithStack, logTrace } from '../../log'
 import { repo, repositoryType } from '../../repository'
 import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens } from '../../scenes/sceneUtils'
-import { sendMessageToPlayer } from '../../utils'
+import { sendMessage, sendMessageToPlayer } from '../../utils'
 import { validateRoom } from '../../validators'
 
 export const startVote = async (ws, message) => {
@@ -14,7 +14,7 @@ export const startVote = async (ws, message) => {
 
     if (!validity) {
       logError(`Room validation failed for room: ${room_id}`)
-      return ws.send(JSON.stringify({ type: ERROR, success: false, errors }))
+      return sendMessage(ws, { type: ERROR, success: false, errors })
     }
 
     const { players } = gamestate
@@ -48,7 +48,8 @@ export const startVote = async (ws, message) => {
           player_role: player.card.player_role,
           player_team: player.card.player_team
         },
-        players: tokens.map(t => ({ //TODO save into gamestate?
+        players: tokens.map(t => ({
+          //TODO save into gamestate?
           player_number: players[t].player_number,
           player_name: players[t].name,
           flag: players[t].flag
@@ -62,12 +63,6 @@ export const startVote = async (ws, message) => {
   } catch (error) {
     logErrorWithStack(error)
     //TODO fix this part
-    ws.send(
-      JSON.stringify({
-        type: VOTE,
-        success: false,
-        errors: ['An unexpected error occurred. Please try again.']
-      })
-    )
+    sendMessage(ws, { type: VOTE, success: false, errors: ['An unexpected error occurred. Please try again.'] })
   }
 }

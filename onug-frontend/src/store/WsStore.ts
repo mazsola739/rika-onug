@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { SendJsonMessageType, WsJsonMessageType } from 'types'
+import { encodeJsonKeys, decodeJsonKeys } from 'utils'
 
 class WsStore {
   sendJsonMessage: SendJsonMessageType<unknown> | null = null
@@ -10,11 +11,13 @@ class WsStore {
   }
 
   setSendJsonMessage(sendJsonMessage: SendJsonMessageType<unknown>): void {
-    this.sendJsonMessage = sendJsonMessage
+    this.sendJsonMessage = (message: unknown) => {
+      sendJsonMessage(encodeJsonKeys(message))
+    }
   }
 
   setLastJsonMessage(lastJsonMessage: WsJsonMessageType): void {
-    this.lastJsonMessage = lastJsonMessage
+    this.lastJsonMessage = decodeJsonKeys(lastJsonMessage)
   }
 
   getWsCommunicationsBridge() {

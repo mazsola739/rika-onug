@@ -3,29 +3,23 @@ import roomsData from '../../data/rooms.json'
 import { logTrace } from '../../log'
 import { repo, repositoryType } from '../../repository'
 import { getPlayerNames } from '../../utils'
-import { broadcast, removeUserFromRoom } from '../../utils/connections.utils'
+import { broadcast, removeUserFromRoom, sendMessage } from '../../utils/connections.utils'
 import { validateRoom } from '../../validators'
 
 export const leaveRoom = async (ws, message) => {
-  logTrace(`leave-room requested with ${JSON.stringify(message)}`)
+
 
   const { room_id, token } = message
+
+  logTrace(`leave-room requested in ${room_id}`)
   const [validity, gamestate, errors] = await validateRoom(room_id)
 
-  if (!validity) return ws.send(JSON.stringify({ type: LEAVE_ROOM, success: false, errors }))
+  if (!validity) return sendMessage(ws, { type: LEAVE_ROOM, success: false, errors })
 
   let newGamestate = { ...gamestate }
   const player = newGamestate.players[token]
 
-  if (!player) {
-    return ws.send(
-      JSON.stringify({
-        type: LEAVE_ROOM,
-        success: false,
-        errors: ['Player not found in the room.']
-      })
-    )
-  }
+  if (!player) return sendMessage(ws, { type: LEAVE_ROOM, success: false, errors: ['Player not found in the room.'] })
 
   const playerTokens = Object.keys(newGamestate.players)
 
@@ -59,12 +53,5 @@ export const leaveRoom = async (ws, message) => {
     players: playersInGame
   })
 
-  return ws.send(
-    JSON.stringify({
-      type: LEAVE_ROOM,
-      success: true,
-      message: 'Successfully left the room',
-      room_id
-    })
-  )
+  return sendMessage(ws, { type: LEAVE_ROOM, success: true, message: 'Successfully left the room', room_id })
 }

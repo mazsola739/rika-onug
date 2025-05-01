@@ -3,6 +3,7 @@ import { NEWBIE, RELOAD, WS_HOST } from 'constant'
 import { useEffect, useState } from 'react'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { wsStore } from 'store'
+import { encodeJsonKeys, decodeJsonKeys } from 'utils'
 
 interface WebSocketMessage {
   type: string
@@ -43,8 +44,8 @@ export const useApp = () => {
   useEffect(() => {
     if (sendJsonMessage && firstTime) {
       setFirstTime(false)
-      sendJsonMessage({ type: NEWBIE, token })
-      sendJsonMessage({ type: RELOAD, token })
+      sendJsonMessage(encodeJsonKeys({ type: NEWBIE, token }))
+      sendJsonMessage(encodeJsonKeys({ type: RELOAD, token }))
       wsStore.setSendJsonMessage(sendJsonMessage)
     }
 

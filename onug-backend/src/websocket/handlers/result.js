@@ -1,6 +1,7 @@
 import { ERROR, RESULT } from '../../constants'
 import { logError, logTrace } from '../../log'
 import { repo, repositoryType } from '../../repository'
+import { sendMessage } from '../../utils'
 import { getPlayerInfo } from '../../utils/result.utils'
 import { validateRoom } from '../../validators'
 import { getWinnersAndLosers } from '../../winingAndLosing/getWinnersAndLosers'
@@ -13,7 +14,7 @@ export const result = async (ws, message) => {
     const [validity, gamestate, errors] = await validateRoom(room_id)
     if (!validity) {
       logError(`Room validation failed for room: ${room_id}`)
-      return ws.send(JSON.stringify({ type: ERROR, success: false, errors }))
+      return sendMessage(ws, { type: ERROR, success: false, errors })
     }
 
     let newGamestate = { ...gamestate }
@@ -47,8 +48,7 @@ export const result = async (ws, message) => {
 
     await repo[repositoryType].upsertRoomState(newGamestate)
 
-    return ws.send(
-      JSON.stringify({
+    return sendMessage(ws, {
         type: RESULT,
         success: true,
         token,
@@ -59,16 +59,9 @@ export const result = async (ws, message) => {
         player: getPlayerInfo(newGamestate.players[token]),
         players: Object.values(newGamestate.players).map(player => getPlayerInfo(player))
       })
-    )
   } catch (error) {
     logError(`Error processing result in room: ${room_id}. Error: ${error.message}`)
     logError(JSON.stringify(error.stack))
-    ws.send(
-      JSON.stringify({
-        type: ERROR,
-        success: false,
-        message: 'Failed to process result. Please try again.'
-      })
-    )
+    sendMessage(ws, { type: ERROR, success: false, message: 'Failed to process result. Please try again.' })
   }
 }

@@ -2,7 +2,7 @@ import { HYDRATE_READY } from '../../constants'
 import { logDebug, logError } from '../../log'
 import { repo, repositoryType } from '../../repository'
 import { getPublicPlayersInformation } from '../../utils'
-import { broadcast } from '../../utils/connections.utils'
+import { broadcast, sendMessage } from '../../utils/connections.utils'
 import { validateRoom } from '../../validators'
 
 export const hydrateReady = async (ws, message) => {
@@ -13,7 +13,7 @@ export const hydrateReady = async (ws, message) => {
 
     const [validity, gamestate, errors] = await validateRoom(room_id)
 
-    if (!validity) return ws.send(JSON.stringify({ type: HYDRATE_READY, success: false, errors }))
+    if (!validity) return sendMessage(ws, { type: HYDRATE_READY, success: false, errors })
 
     const newGamestate = {
       ...gamestate

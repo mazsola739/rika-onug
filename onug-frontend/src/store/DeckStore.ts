@@ -5,6 +5,7 @@ import { CardJson, TokenJson, Expansion } from 'types'
 import { createDefaultCard, createDefaultToken, getCardById, getMarkByName, determineTotalPlayers, checkCardPresence, areAnyCardSelectedById } from 'utils'
 import { playersStore } from './PlayersStore'
 
+//TODO fix unable to select more then '12' players cards
 class DeckStore {
   deck: CardJson[] = cards
   marks: TokenJson[] = marks

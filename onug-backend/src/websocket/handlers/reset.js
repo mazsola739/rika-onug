@@ -8,6 +8,7 @@ import { broadcast } from '../../utils/connections.utils'
 export const reset = async message => {
   try {
     const { room_id } = message
+    logTrace(`reset called in ${room_id}`)
     const [validity, gamestate, errors] = await validateRoom(room_id)
 
     if (!validity) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors_: errors })
@@ -20,7 +21,7 @@ export const reset = async message => {
 
     await repo[repositoryType].upsertRoomState(newGamestate)
 
-    logTrace(`selectedCards reseted, new gamestate: ${JSON.stringify(newGamestate)}`)
+
 
     const playersInGame = getPlayerNames(newGamestate.players)
 

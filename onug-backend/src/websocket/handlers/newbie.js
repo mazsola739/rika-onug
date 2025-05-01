@@ -1,6 +1,7 @@
 import { v4 as uuidv4, validate } from 'uuid'
 import { NEWBIE } from '../../constants'
 import { logInfo } from '../../log'
+import { sendMessage } from '../../utils'
 
 export const newbie = (ws, message) => {
   const { token } = message
@@ -8,13 +9,7 @@ export const newbie = (ws, message) => {
   // reconnect, already existing token from client, no token on server side
   if (token && !ws.token && validate(token)) {
     ws.token = token
-    ws.send(
-      JSON.stringify({
-        type: NEWBIE,
-        update: false,
-        message: 'client successfully rejoined'
-      })
-    )
+    sendMessage(ws, { type: NEWBIE, update: false, message: 'client successfully rejoined' })
 
     // TODO maybe? from gamestate, after redirected to lobby, redirect to the right path
   }
@@ -25,7 +20,7 @@ export const newbie = (ws, message) => {
     ws.token = newToken
     logInfo(`newToken: ${newToken}`)
 
-    return ws.send(JSON.stringify({ type: NEWBIE, update: true, token: newToken }))
+    return sendMessage(ws, { type: NEWBIE, update: true, token: newToken })
   }
 
   return
