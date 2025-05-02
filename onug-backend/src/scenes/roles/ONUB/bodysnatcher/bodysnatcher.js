@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { bodysnatcherKeys, randomBodysnatcherInstructions } from './bodysnatcher.constants'
 import { bodysnatcherAction } from './bodysnatcher.action'
 
-export const bodysnatcher = (ws, gamestate, title, prefix) => {
+export const bodysnatcher = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
 
   const randomBodysnatcherInstruction = getRandomItemFromArray(randomBodysnatcherInstructions)
@@ -29,7 +29,7 @@ export const bodysnatcher = (ws, gamestate, title, prefix) => {
       action = bodysnatcherAction(gamestate, token, title, prefix)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

@@ -5,7 +5,7 @@ import { allPlayersStateCheck, broadcast /* randomDelay */ } from '../utils'
 import { isActivePlayer } from './activePlayer'
 import { sceneHandler } from './sceneHandler'
 
-export const chapterHandler = async (ws, gamestate, room_id) => {
+export const chapterHandler = async (gamestate, room_id) => {
   try {
     logTrace(`chapterHandler in room [${room_id}]`)
 
@@ -111,7 +111,7 @@ export const chapterHandler = async (ws, gamestate, room_id) => {
 
     for (const actualScene of newGamestate.chapter) {
       logTrace(`Processing action for scene: ${actualScene.scene_title}`)
-      newGamestate = await sceneHandler(ws, newGamestate, actualScene.scene_title)
+      newGamestate = await sceneHandler(newGamestate, actualScene.scene_title)
     }
 
     const allActionsComplete = Array.isArray(newGamestate.scripts) && newGamestate.scripts.length === 0

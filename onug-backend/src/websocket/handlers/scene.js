@@ -37,7 +37,7 @@ export const scene = async (ws, message) => {
       if (gamestate.scripts[gamestate.scripts.length - 1].scene_title === 'RIPPLE') {
         gamestate = await rippleHandler(gamestate, room_id)
       }
-      gamestate = await chapterHandler(ws, gamestate, room_id)
+      gamestate = await chapterHandler(gamestate, room_id)
       resetPlayerReadiness(players)
     } else {
       logTrace(`Waiting for all players to be ready for night in room: ${room_id}.`)
@@ -61,7 +61,7 @@ export const scene = async (ws, message) => {
     players[token].action_finished = true
 
     if (allPlayersStateCheck(players, 'action_finished')) {
-      newGamestate = await chapterHandler(ws, newGamestate)
+      newGamestate = await chapterHandler(newGamestate)
     } else {
       logTrace(`Waiting for all players to finish actions in room: ${room_id}.`)
     }

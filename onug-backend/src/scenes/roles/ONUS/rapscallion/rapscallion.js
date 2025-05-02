@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { apprenticeseerAction } from '../..'
 
-export const rapscallion = (ws, gamestate, title) => {
+export const rapscallion = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['rapscallion_kickoff_text']
 
@@ -17,7 +17,7 @@ export const rapscallion = (ws, gamestate, title) => {
       action = apprenticeseerAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

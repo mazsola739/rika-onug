@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { internAction } from './intern.action'
 
-export const intern = (ws, gamestate, title, hasDoppelganger, hasMadScientist) => {
+export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_intern_kickoff_text' : 'intern_kickoff_text', hasMadScientist ? 'intern_kickoff2_text' : 'intern_kickoff_alone_text']
 
@@ -17,7 +17,7 @@ export const intern = (ws, gamestate, title, hasDoppelganger, hasMadScientist) =
       action = internAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

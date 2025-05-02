@@ -4,7 +4,7 @@ import { oracleResponses } from './oracle.constants'
 import { oracleanswerAction } from './oracleanswer.action'
 
 //ORACLE_ANSWER
-export const oracleAnswer = (ws, gamestate, title) => {
+export const oracleAnswer = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const oracleQuestion = gamestate.oracle.question
   const oracleAnswer = gamestate.oracle.answer
@@ -83,7 +83,7 @@ export const oracleAnswer = (ws, gamestate, title) => {
       action = oracleanswerAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   return gamestate

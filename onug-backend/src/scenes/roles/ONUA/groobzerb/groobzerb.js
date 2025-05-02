@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { groobzerbAction } from './groobzerb.action'
 
-export const groobzerb = (ws, gamestate, title, hasDoppelganger) => {
+export const groobzerb = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_groobzerb_kickoff_text' : 'groobzerb_kickoff_text', 'groobzerb_kickoff2_text']
 
@@ -17,7 +17,7 @@ export const groobzerb = (ws, gamestate, title, hasDoppelganger) => {
       action = groobzerbAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

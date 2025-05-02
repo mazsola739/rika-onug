@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { mysticwolfAction } from './mysticwolf.action'
 
-export const mysticwolf = (ws, gamestate, title) => {
+export const mysticwolf = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['mysticwolf_kickoff_text']
 
@@ -17,7 +17,7 @@ export const mysticwolf = (ws, gamestate, title) => {
       action = mysticwolfAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

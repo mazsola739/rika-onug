@@ -1,7 +1,9 @@
+
 import { repo, repositoryType } from '../../../repository'
+import { sendMessageToPlayer } from '../../../utils'
 import { getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, getPlayerNumberWithMatchingToken, getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
 
-export const aliensVotehydrate = async (ws, message) => {
+export const aliensVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
 
   try {
@@ -91,9 +93,9 @@ export const aliensVotehydrate = async (ws, message) => {
 
         const narration = getNarrationByTitle(title, gamestate.narration)
 
-        createAndSendSceneMessage(ws, gamestate, alienToken, title, action, narration)
+        createAndSendSceneMessage(gamestate, alienToken, title, action, narration)
       })
-    } /* TODO FIX!!!!! else {
+    } else {
       aliensTokens.forEach(alienToken => {
         const stillVoteMessage = {
           type: title,
@@ -103,7 +105,7 @@ export const aliensVotehydrate = async (ws, message) => {
 
         sendMessageToPlayer(gamestate.room_id, alienToken, stillVoteMessage)
       })
-    } */
+    }
 
     await repo[repositoryType].upsertRoomState(gamestate)
   } catch (error) {

@@ -6,7 +6,7 @@ import { hasCow } from '../../conditions'
 
 //TODO fix alien pick together player
 
-export const aliens = (ws, gamestate, title, selected_cards) => {
+export const aliens = (gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['aliens_kickoff_text']
 
@@ -54,7 +54,7 @@ export const aliens = (ws, gamestate, title, selected_cards) => {
       action = aliensAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

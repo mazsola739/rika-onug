@@ -5,7 +5,7 @@ import { empathKeys, randomEmpathInstructions } from './empath.constants'
 
 //TODO fix non-empaths voting
 
-export const empath = (ws, gamestate, title, prefix) => {
+export const empath = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const totalPlayers = gamestate.total_players
   const randomKey = getRandomItemFromArray(empathKeys)
@@ -39,7 +39,7 @@ export const empath = (ws, gamestate, title, prefix) => {
 
     gamestate.players[token].action_finished = false
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

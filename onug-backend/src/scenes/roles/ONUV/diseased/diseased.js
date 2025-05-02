@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { diseasedAction } from './diseased.action'
 
-export const diseased = (ws, gamestate, title) => {
+export const diseased = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['diseased_kickoff_text']
 
@@ -17,7 +17,7 @@ export const diseased = (ws, gamestate, title) => {
       action = diseasedAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

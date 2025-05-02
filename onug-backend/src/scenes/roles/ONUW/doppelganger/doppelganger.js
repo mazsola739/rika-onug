@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUti
 import { doppelgangerAction } from './doppelganger.action'
 
 //TODO if oracle is oracle team
-export const doppelganger = (ws, gamestate, title) => {
+export const doppelganger = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['doppelganger_kickoff_text']
 
@@ -18,7 +18,7 @@ export const doppelganger = (ws, gamestate, title) => {
       action = doppelgangerAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

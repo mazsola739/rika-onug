@@ -25,6 +25,19 @@ export const broadcast = (room_id, jsonMessage) => {
   Object.values(webSocketServerConnectionsPerRoom[room_id]).forEach(ws => sendMessage(ws, jsonMessage))
 }
 
+//TODO why not working? :(
+
+export const sendMessageToPlayer = (room_id, token, jsonMessage) => {
+  const playerConnection = webSocketServerConnectionsPerRoom?.[room_id]?.[token]
+  if (playerConnection) {
+    logDebug(`Sending message to user [${room_id}][${token}] with message [${JSON.stringify(jsonMessage)}]`)
+    const encodedMessage = encodeJsonKeys(jsonMessage)
+    playerConnection.send(encodedMessage)
+  } else {
+    logError(`No active WebSocket connection found for user [${room_id}][${token}]`)
+  }
+}
+
 export const sendMessage = (ws, message) => {
   try {
     const encodedMessage = encodeJsonKeys(message)

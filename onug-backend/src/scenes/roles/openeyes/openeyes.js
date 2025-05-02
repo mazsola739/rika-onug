@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { openeyesAction } from './openeyes.action'
 //TODO
-export const openeyes = (ws, gamestate, title) => {
+export const openeyes = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['']
 
@@ -17,7 +17,7 @@ export const openeyes = (ws, gamestate, title) => {
       action = openeyesAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

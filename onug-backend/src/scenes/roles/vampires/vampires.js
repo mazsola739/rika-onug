@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { vampiresAction } from './vampires.action'
 
-export const vampires = (ws, gamestate, title) => {
+export const vampires = (gamestate, title) => {
   const narration = ['vampires_kickoff_text', 'vampires_vote_text']
   const tokens = getAllPlayerTokens(gamestate.players)
 
@@ -17,7 +17,7 @@ export const vampires = (ws, gamestate, title) => {
       action = vampiresAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

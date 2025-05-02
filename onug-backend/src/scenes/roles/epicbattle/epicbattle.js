@@ -2,7 +2,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { epicbattleAction } from './epicbattle.action'
 import { random_easteregg_nobadguys, random_easteregg_nogoodguys } from './epicbattle.constants'
 
-export const epicbattle = (ws, gamestate, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
+export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalPlayers, nogoodguys, nobadguys) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = []
 
@@ -25,7 +25,7 @@ export const epicbattle = (ws, gamestate, title, hasEasterEgg, hasEpicBattle, to
 
     action = epicbattleAction(gamestate, token, title)
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

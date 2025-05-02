@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { copycatAction } from '../..'
 
-export const mirrorman = (ws, gamestate, title) => {
+export const mirrorman = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['mirrorman_kickoff_text']
 
@@ -17,7 +17,7 @@ export const mirrorman = (ws, gamestate, title) => {
       action = copycatAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

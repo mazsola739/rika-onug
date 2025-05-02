@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { loversAction } from './lovers.action'
 
-export const lovers = (ws, gamestate, title) => {
+export const lovers = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['lovers_kickoff_text']
 
@@ -17,7 +17,7 @@ export const lovers = (ws, gamestate, title) => {
       action = loversAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

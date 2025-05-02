@@ -49,7 +49,7 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

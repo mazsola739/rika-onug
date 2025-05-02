@@ -2,7 +2,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { jokeAction } from './joke.action'
 import { random_joke } from './joke.constants'
 
-export const joke = (ws, gamestate, title) => {
+export const joke = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [getRandomItemFromArray(random_joke)]
 
@@ -13,7 +13,7 @@ export const joke = (ws, gamestate, title) => {
 
     action = jokeAction(gamestate, token, title)
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

@@ -2,7 +2,7 @@ import { ERROR, VOTE } from '../../constants'
 import { logError, logErrorWithStack, logTrace } from '../../log'
 import { repo, repositoryType } from '../../repository'
 import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens } from '../../scenes/sceneUtils'
-import { sendMessage } from '../../utils'
+import { sendMessage, sendMessageToPlayer } from '../../utils'
 import { validateRoom } from '../../validators'
 
 export const startVote = async (ws, message) => {
@@ -56,7 +56,7 @@ export const startVote = async (ws, message) => {
         }))
       }
 
-      /* TODO FIX!!!!! sendMessageToPlayer(room_id, token, voteMessage) */
+      sendMessageToPlayer(room_id, token, voteMessage)
     })
 
     await repo[repositoryType].upsertRoomState(newGamestate)

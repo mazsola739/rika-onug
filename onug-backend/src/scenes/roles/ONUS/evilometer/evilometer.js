@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUti
 import { evilometerAction } from './evilometer.action'
 
 //TODO super villains can see evilometer
-export const evilometer = (ws, gamestate, title, hasDoppelganger) => {
+export const evilometer = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_evilometer_kickoff_text' : 'evilometer_kickoff_text', 'evilometer_kickoff2_text']
 
@@ -18,7 +18,7 @@ export const evilometer = (ws, gamestate, title, hasDoppelganger) => {
       action = evilometerAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

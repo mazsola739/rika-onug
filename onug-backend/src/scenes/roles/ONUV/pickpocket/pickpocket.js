@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { pickpocketAction } from './pickpocket.action'
 
-export const pickpocket = (ws, gamestate, title, prefix) => {
+export const pickpocket = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [`${prefix}_kickoff_text`, 'pickpocket_kickoff2_text']
 
@@ -17,7 +17,7 @@ export const pickpocket = (ws, gamestate, title, prefix) => {
       action = pickpocketAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { revealerAction } from './revealer.action'
 
-export const revealer = (ws, gamestate, title, prefix) => {
+export const revealer = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [`${prefix}_kickoff_text`, 'revealer_kickoff2_text']
 
@@ -17,7 +17,7 @@ export const revealer = (ws, gamestate, title, prefix) => {
       action = revealerAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

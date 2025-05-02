@@ -1,13 +1,4 @@
-import {
-  getNarrationByTitle,
-  getAllPlayerTokens,
-  getPlayerNumbersWithMatchingTokens,
-  getSelectablePlayersWithNoShield,
-  generateRoleAction,
-  createAndSendSceneMessage,
-  getPlayerNumberWithMatchingToken,
-  formatPlayerIdentifier
-} from '../../../sceneUtils'
+import { getNarrationByTitle, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, createAndSendSceneMessage, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../../validators'
 
 export const gremlinResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
@@ -42,7 +33,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
         obligatory: true
       })
 
-      createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+      createAndSendSceneMessage(gamestate, token, title, action, narration)
 
       return gamestate
     } else if (selected_answer === 'marks') {
@@ -62,7 +53,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
         obligatory: true
       })
 
-      createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+      createAndSendSceneMessage(gamestate, token, title, action, narration)
 
       return gamestate
     }
@@ -99,7 +90,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       scene_end: true
     })
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
 
     return gamestate
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
@@ -135,7 +126,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       scene_end: true
     })
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
 
     return gamestate
   }

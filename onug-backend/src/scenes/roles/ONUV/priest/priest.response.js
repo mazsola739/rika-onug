@@ -31,7 +31,7 @@ export const priestResponse = (gamestate, token, selected_mark_positions, title)
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

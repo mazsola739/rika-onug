@@ -28,7 +28,7 @@ export const temptressResponse = (gamestate, token, selected_card_positions, tit
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

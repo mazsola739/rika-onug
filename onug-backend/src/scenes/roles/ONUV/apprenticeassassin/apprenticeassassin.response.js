@@ -41,7 +41,7 @@ export const apprenticeassassinResponse = (gamestate, token, selected_mark_posit
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
 
   return gamestate
 }

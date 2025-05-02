@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { morticianKeys, randomMorticianInstructions } from './mortician.constants'
 import { morticianAction } from './mortician.action'
 
-export const mortician = (ws, gamestate, title, prefix) => {
+export const mortician = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [`${prefix}_kickoff_text`]
   const randomMorticianInstruction = getRandomItemFromArray(randomMorticianInstructions)
@@ -28,7 +28,7 @@ export const mortician = (ws, gamestate, title, prefix) => {
       action = morticianAction(gamestate, token, title, prefix)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

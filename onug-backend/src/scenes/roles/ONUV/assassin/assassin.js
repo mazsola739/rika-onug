@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { assassinAction } from './assassin.action'
 
-export const assassin = (ws, gamestate, title, hasApprenticeAssassin, prefix) => {
+export const assassin = (gamestate, title, hasApprenticeAssassin, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [`${prefix}_kickoff_text`, 'assassin_kickoff2_text', hasApprenticeAssassin && 'assassin_appassassin_assassin_text']
 
@@ -17,7 +17,7 @@ export const assassin = (ws, gamestate, title, hasApprenticeAssassin, prefix) =>
       action = assassinAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

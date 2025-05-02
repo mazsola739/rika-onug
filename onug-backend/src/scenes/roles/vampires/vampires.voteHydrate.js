@@ -1,7 +1,8 @@
 import { repo, repositoryType } from '../../../repository'
+import { sendMessageToPlayer } from '../../../utils'
 import { createAndSendSceneMessage, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
 
-export const vampiresVotehydrate = async (ws, message) => {
+export const vampiresVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
 
   try {
@@ -65,9 +66,9 @@ export const vampiresVotehydrate = async (ws, message) => {
 
         const narration = getNarrationByTitle(title, gamestate.narration)
 
-        createAndSendSceneMessage(ws, gamestate, vampireToken, title, action, narration)
+        createAndSendSceneMessage(gamestate, vampireToken, title, action, narration)
       })
-    } /* TODO FIX!!!!! else {
+    } else {
       vampiresTokens.forEach(vampireToken => {
         const stillVoteMessage = {
           type: title,
@@ -77,7 +78,7 @@ export const vampiresVotehydrate = async (ws, message) => {
 
         sendMessageToPlayer(gamestate.room_id, vampireToken, stillVoteMessage)
       })
-    } */
+    }
 
     await repo[repositoryType].upsertRoomState(gamestate)
   } catch (error) {

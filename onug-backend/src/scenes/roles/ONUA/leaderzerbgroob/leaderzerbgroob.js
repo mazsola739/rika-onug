@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { leaderZerbgroobAction } from './leaderzerbgroob.action'
 
-export const leaderzerbgroob = (ws, gamestate, title) => {
+export const leaderzerbgroob = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['leader_zerbgroob_text']
 
@@ -17,7 +17,7 @@ export const leaderzerbgroob = (ws, gamestate, title) => {
       action = leaderZerbgroobAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

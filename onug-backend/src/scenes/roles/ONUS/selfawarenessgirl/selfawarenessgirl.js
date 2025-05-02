@@ -2,7 +2,7 @@ import { insomniacAction } from '../..'
 import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 
-export const selfawarenessgirl = (ws, gamestate, title, hasDoppelganger) => {
+export const selfawarenessgirl = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_selfawarenessgirl_kickoff_text' : 'selfawarenessgirl_kickoff_text', 'selfawarenessgirl_kickoff2_text']
 
@@ -17,7 +17,7 @@ export const selfawarenessgirl = (ws, gamestate, title, hasDoppelganger) => {
       action = insomniacAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

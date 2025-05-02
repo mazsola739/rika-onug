@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { priestAction } from './priest.action'
 
-export const priest = (ws, gamestate, title, prefix) => {
+export const priest = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [`${prefix}_kickoff_text`, 'priest_kickoff2_text']
 
@@ -17,7 +17,7 @@ export const priest = (ws, gamestate, title, prefix) => {
       action = priestAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { squireAction } from './squire.action'
 
-export const squire = (ws, gamestate, title, hasDoppelganger) => {
+export const squire = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_squire_kickoff_text' : 'squire_kickoff_text', 'squire_kickoff2_text']
 
@@ -17,7 +17,7 @@ export const squire = (ws, gamestate, title, hasDoppelganger) => {
       action = squireAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

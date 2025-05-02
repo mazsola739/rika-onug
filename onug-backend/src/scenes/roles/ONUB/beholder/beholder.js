@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { getAllPlayerTokens, createAndSendSceneMessage } from '../../../sceneUtils'
 import { beholderAction } from './beholder.action'
 
-export const beholder = (ws, gamestate, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
+export const beholder = (gamestate, title, hasSeer, hasApprenticeSeer, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [
     hasDoppelganger ? 'doppelganger_beholder_kickoff_text' : 'beholder_seer_kickoff_text',
@@ -20,7 +20,7 @@ export const beholder = (ws, gamestate, title, hasSeer, hasApprenticeSeer, hasDo
       action = beholderAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

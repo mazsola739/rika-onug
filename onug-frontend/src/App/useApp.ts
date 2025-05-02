@@ -50,12 +50,12 @@ export const useApp = () => {
     }
 
     if (lastJsonMessage) {
-      const decodedMessage = decodeJsonKeys(lastJsonMessage)
       wsStore.setLastJsonMessage(lastJsonMessage)
-      if (decodedMessage?.type === NEWBIE && decodedMessage?.update) {
-        sessionStorage.setItem('token', decodedMessage.token!)
-        //TODO save name
-      }
+    }
+
+    if (lastJsonMessage?.type === NEWBIE && lastJsonMessage?.update) {
+      sessionStorage.setItem('token', lastJsonMessage.token!)
+      //TODO save name
     }
   }, [sendJsonMessage, lastJsonMessage, firstTime])
 

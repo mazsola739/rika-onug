@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { auraseerAction } from './auraseer.action'
 
-export const auraseer = (ws, gamestate, title, hasDoppelganger, hasMarks) => {
+export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_auraseer_kickoff_text' : 'auraseer_kickoff_text', hasMarks ? 'auraseer_marks_and_cards_text' : 'auraseer_cards_text']
 
@@ -17,7 +17,7 @@ export const auraseer = (ws, gamestate, title, hasDoppelganger, hasMarks) => {
       action = auraseerAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

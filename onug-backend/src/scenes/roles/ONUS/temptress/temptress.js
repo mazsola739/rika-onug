@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { temptressAction } from './temptress.action'
 
-export const temptress = (ws, gamestate, title) => {
+export const temptress = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['temptress_kickoff_text']
 
@@ -17,7 +17,7 @@ export const temptress = (ws, gamestate, title) => {
       action = temptressAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUti
 import { cowAction } from './cow.action'
 
 //TODO aliens can see cow
-export const cow = (ws, gamestate, title, hasDoppelganger) => {
+export const cow = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_cow_kickoff_text' : 'cow_kickoff_text', 'cow_kickoff2_text']
 
@@ -18,7 +18,7 @@ export const cow = (ws, gamestate, title, hasDoppelganger) => {
       action = cowAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

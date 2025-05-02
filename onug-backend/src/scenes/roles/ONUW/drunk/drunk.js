@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { drunkAction } from './drunk.action'
 
-export const drunk = (ws, gamestate, title) => {
+export const drunk = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['drunk_kickoff_text']
 
@@ -17,7 +17,7 @@ export const drunk = (ws, gamestate, title) => {
       action = drunkAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
+    createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })
