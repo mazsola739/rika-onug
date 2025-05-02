@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { sentinelAction } from './sentinel.action'
 
-export const sentinel = (gamestate, title) => {
+export const sentinel = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['sentinel_kickoff_text']
 
@@ -17,7 +17,7 @@ export const sentinel = (gamestate, title) => {
       action = sentinelAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

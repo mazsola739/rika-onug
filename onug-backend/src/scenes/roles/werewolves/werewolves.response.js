@@ -33,7 +33,7 @@ export const werewolvesResponse = (gamestate, token, selected_card_positions, ti
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, action, narration)
+  createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
   return gamestate
 }

@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { seerAction } from './seer.action'
 
-export const seer = (gamestate, title) => {
+export const seer = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['seer_kickoff_text']
 
@@ -17,7 +17,7 @@ export const seer = (gamestate, title) => {
       action = seerAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

@@ -1,12 +1,12 @@
 import { SCENE } from '../../constants'
-import { sendMessageToPlayer } from '../../utils'
+import { sendMessage } from '../../utils'
 
-export const createAndSendSceneMessage = (gamestate, token, title, action, narration = []) => {
+export const createAndSendSceneMessage = (ws, gamestate, token, title, action, narration = []) => {
   if (Object.keys(action).length === 0) return
 
   const player = gamestate.players[token]
 
-  const message = JSON.stringify({
+  const message = {
     type: SCENE,
     success: true,
     title,
@@ -22,7 +22,7 @@ export const createAndSendSceneMessage = (gamestate, token, title, action, narra
       player_name: player.name,
       flag: player.flag
     }))
-  })
+  }
 
-  sendMessageToPlayer(gamestate.room_id, token, message)
+  sendMessage(ws, message)
 }

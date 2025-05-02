@@ -1,9 +1,8 @@
 import { repo, repositoryType } from "../../../../repository"
-import { sendMessageToPlayer } from "../../../../utils"
 import { getPlayerTokensByPlayerNumber, getPlayerNumberWithMatchingToken } from "../../../sceneUtils"
 import { randomEmpathInstructions } from "./empath.constants"
 
-export const empathVotehydrate = async message => {
+export const empathVotehydrate = async (ws, message) => {
   const { room_id, token, selected_vote, title } = message
 
   try {
@@ -44,7 +43,7 @@ export const empathVotehydrate = async message => {
       return `${instructionKey}_result: ${voters.join(', ')}`
     })
 
-    emapthsTokens.forEach(emapthToken => {
+    /* TODO FIX!!!!!  emapthsTokens.forEach(emapthToken => {
       const stillVoteMessage = {
         type: title,
         success: true,
@@ -52,8 +51,8 @@ export const empathVotehydrate = async message => {
         resultMessages
       }
 
-      sendMessageToPlayer(gamestate.room_id, emapthToken, stillVoteMessage)
-    })
+      sendMessageToPlayer(gamestate.room_id, emapthToken, stillVoteMessage) 
+    })*/
 
     await repo[repositoryType].upsertRoomState(gamestate)
   } catch (error) {

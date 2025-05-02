@@ -13,7 +13,7 @@ const addVerboseOr = rolesFromIds => {
   rolesFromIds
 }
 
-export const doppelgangerinstantaction = (gamestate, title, selected_cards) => {
+export const doppelgangerinstantaction = (ws, gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const rolesFromIds = getRolesNames(selected_cards, DOPPELGANGER_INSTANT_ACTION, instantRoleIds)
 
@@ -32,7 +32,7 @@ export const doppelgangerinstantaction = (gamestate, title, selected_cards) => {
       action = doppelgangerinstantactionAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

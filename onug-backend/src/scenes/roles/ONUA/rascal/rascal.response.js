@@ -1,5 +1,16 @@
 import { CENTER_CARD_POSITIONS } from '../../../../constants'
-import { getPlayerNumberWithMatchingToken, moveCardsButYourOwn, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, formatPlayerIdentifier, getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../../sceneUtils'
+import {
+  getPlayerNumberWithMatchingToken,
+  moveCardsButYourOwn,
+  generateRoleAction,
+  getNarrationByTitle,
+  createAndSendSceneMessage,
+  formatPlayerIdentifier,
+  getCardIdsByPositions,
+  getAllPlayerTokens,
+  getPlayerNumbersWithMatchingTokens,
+  getSelectablePlayersWithNoShield
+} from '../../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection } from '../../../validators'
 
 //TODO fix obligatory and scene end
@@ -32,7 +43,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
 
     const narration = getNarrationByTitle(title, gamestate.narration)
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
     return gamestate
   } else if (selected_card_positions && selected_card_positions.length > 0) {
@@ -183,7 +194,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
 
     const narration = getNarrationByTitle(title, gamestate.narration)
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
     return gamestate
   }

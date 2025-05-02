@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { nostradamusAction } from './nostradamus.action'
 
-export const nostradamus = (gamestate, title) => {
+export const nostradamus = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['nostradamus_kickoff_text']
 
@@ -17,7 +17,7 @@ export const nostradamus = (gamestate, title) => {
       action = nostradamusAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

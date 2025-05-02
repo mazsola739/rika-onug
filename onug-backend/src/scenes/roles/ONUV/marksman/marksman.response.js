@@ -1,4 +1,15 @@
-import { getNarrationByTitle, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, createAndSendSceneMessage, getCardIdsByPositions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getMarksByPositions } from '../../../sceneUtils'
+import {
+  getNarrationByTitle,
+  getAllPlayerTokens,
+  getPlayerNumbersWithMatchingTokens,
+  getSelectablePlayersWithNoShield,
+  generateRoleAction,
+  createAndSendSceneMessage,
+  getCardIdsByPositions,
+  getPlayerNumberWithMatchingToken,
+  formatPlayerIdentifier,
+  getMarksByPositions
+} from '../../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../../validators'
 
 export const marksmanResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
@@ -31,7 +42,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
         obligatory: true
       })
 
-      createAndSendSceneMessage(gamestate, token, title, action, narration)
+      createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
       return gamestate
     } else if (selected_answer === 'marks') {
@@ -51,7 +62,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
         obligatory: true
       })
 
-      createAndSendSceneMessage(gamestate, token, title, action, narration)
+      createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
       return gamestate
     }
@@ -108,7 +119,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       viewed_cards: [selected_card_positions[0]]
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
     return gamestate
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
@@ -160,7 +171,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       viewed_marks: [selected_mark_positions[0]]
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
     return gamestate
   }

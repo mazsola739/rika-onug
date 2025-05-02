@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { alphawolfAction } from './alphawolf.action'
 
-export const alphawolf = (gamestate, title) => {
+export const alphawolf = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['alphawolf_kickoff_text']
 
@@ -17,7 +17,7 @@ export const alphawolf = (gamestate, title) => {
       action = alphawolfAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

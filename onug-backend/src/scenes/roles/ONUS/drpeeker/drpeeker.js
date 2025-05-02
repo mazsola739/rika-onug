@@ -2,7 +2,7 @@ import { mysticwolfAction } from '../..'
 import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 
-export const drpeeker = (gamestate, title) => {
+export const drpeeker = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['drpeeker_kickoff_text']
 
@@ -17,7 +17,7 @@ export const drpeeker = (gamestate, title) => {
       action = mysticwolfAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

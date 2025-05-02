@@ -2,7 +2,7 @@ import { troublemakerAction } from '../..'
 import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 
-export const switcheroo = (gamestate, title) => {
+export const switcheroo = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['switcheroo_kickoff_text']
 
@@ -17,7 +17,7 @@ export const switcheroo = (gamestate, title) => {
       action = troublemakerAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

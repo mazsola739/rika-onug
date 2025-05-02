@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { villageidiotAction } from './villageidiot.action'
 
-export const villageidiot = (gamestate, title) => {
+export const villageidiot = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['villageidiot_kickoff_text']
 
@@ -17,7 +17,7 @@ export const villageidiot = (gamestate, title) => {
       action = villageidiotAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { thecountAction } from './thecount.action'
 
-export const thecount = (gamestate, title, prefix) => {
+export const thecount = (ws, gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [`${prefix}_kickoff_text`, 'thecount_kickoff2_text']
 
@@ -17,7 +17,7 @@ export const thecount = (gamestate, title, prefix) => {
       action = thecountAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

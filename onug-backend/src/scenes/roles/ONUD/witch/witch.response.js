@@ -1,4 +1,14 @@
-import { getNarrationByTitle, getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, formatPlayerIdentifier, createAndSendSceneMessage, getPlayerNumberWithMatchingToken } from '../../../sceneUtils'
+import {
+  getNarrationByTitle,
+  getCardIdsByPositions,
+  getAllPlayerTokens,
+  getPlayerNumbersWithMatchingTokens,
+  getSelectablePlayersWithNoShield,
+  generateRoleAction,
+  formatPlayerIdentifier,
+  createAndSendSceneMessage,
+  getPlayerNumberWithMatchingToken
+} from '../../../sceneUtils'
 import { validateCardSelection } from '../../../validators'
 
 export const witchResponse = (gamestate, token, selected_card_positions, title) => {
@@ -39,7 +49,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
       obligatory: true
     })
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
     return gamestate
   } else if (selected_card_positions[0].includes('player_')) {
@@ -78,7 +88,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
       scene_end: true
     })
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
     return gamestate
   }

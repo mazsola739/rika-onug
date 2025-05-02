@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUti
 import { renfieldAction } from './renfield.action'
 
 //TODO no vampire he is villager
-export const renfield = (gamestate, title, hasDoppelganger) => {
+export const renfield = (ws, gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_renfield_kickoff_text' : 'renfield_kickoff_text', 'renfield_kickoff2_text']
 
@@ -18,7 +18,7 @@ export const renfield = (gamestate, title, hasDoppelganger) => {
       action = renfieldAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

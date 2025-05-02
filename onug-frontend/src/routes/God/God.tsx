@@ -3,30 +3,7 @@ import { useGod } from './useGod'
 import { StyledGod, LeftSide, RightSide, GodTitle, FormContainer, InputContainer, Label, Input, ButtonsContainer, Button, ResponseContainer, ResponsePre } from './God.styles'
 
 export const God: React.ComponentType = observer(() => {
-  const {
-    response,
-    roomId,
-    token,
-    message,
-    setRoomId,
-    setToken,
-    setMessageHandler,
-    checkGamestates,
-    checkGamestateByRoomId,
-    deleteAllGamestates,
-    deleteGamestateByRoomId,
-    reInitAllGamestates,
-    checkConnections,
-    removePlayerByToken,
-    removeAllPlayers,
-    broadcastToAll,
-    broadcastToAllInRoom,
-    sendMessageToPlayer,
-    listOnugEnvVars,
-    deleteAllOldLogFiles,
-    readNohupFE,
-    readNohupBE
-  } = useGod()
+  const { response, roomId, token, message, setRoomId, setToken, setMessageHandler, checkGamestates, checkGamestateByRoomId, deleteAllGamestates, deleteGamestateByRoomId, reInitAllGamestates, checkConnections, removePlayerByToken, removeAllPlayers, broadcastToAll, broadcastToAllInRoom, sendMessageToPlayer, listOnugEnvVars, deleteAllOldLogFiles, readNohupFE, readNohupBE } = useGod()
 
   return (
     <StyledGod>

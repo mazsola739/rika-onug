@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { randomExposerInstructions } from './exposer.constants'
 import { exposerAction } from './exposer.action'
 
-export const exposer = (gamestate, title, prefix) => {
+export const exposer = (ws, gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
 
   const randomExposerInstruction = getRandomItemFromArray(randomExposerInstructions)
@@ -26,7 +26,7 @@ export const exposer = (gamestate, title, prefix) => {
       action = exposerAction(gamestate, token, title, prefix)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

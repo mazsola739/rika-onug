@@ -5,7 +5,7 @@ import { ripple_random, ripple_sure_repeat } from './ripple.constants'
 
 //TODO fix ripple
 
-export const ripple = (gamestate, title) => {
+export const ripple = (ws, gamestate, title) => {
   const isOracleRipple = gamestate.ripple.force
 
   if (!gamestate.ripple.force) return gamestate
@@ -30,7 +30,7 @@ export const ripple = (gamestate, title) => {
       action = rippleAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

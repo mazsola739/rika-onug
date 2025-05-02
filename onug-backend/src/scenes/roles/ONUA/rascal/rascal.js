@@ -4,7 +4,7 @@ import { villageidiotAction } from '../..'
 import { randomRascalInstructions, rascalAnyOneKeys, rascalAnyTwoKeys } from './rascal.constants'
 import { rascalAction } from './rascal.action'
 
-export const rascal = (gamestate, title, prefix) => {
+export const rascal = (ws, gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const randomRascalInstruction = getRandomItemFromArray(randomRascalInstructions)
   const rascalKey = randomRascalInstruction === 'rascal_troublemaker_text' ? getRandomItemFromArray(rascalAnyTwoKeys) : getRandomItemFromArray(rascalAnyOneKeys)
@@ -51,7 +51,7 @@ export const rascal = (gamestate, title, prefix) => {
       }
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

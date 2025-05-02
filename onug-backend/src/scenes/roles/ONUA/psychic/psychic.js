@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { psychicKeys, randomPsychicInstructions } from './psychic.constants'
 import { psychicAction } from './psychic.action'
 
-export const psychic = (gamestate, title, prefix) => {
+export const psychic = (ws, gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [`${prefix}_kickoff_text`]
   const randomPsychicInstruction = getRandomItemFromArray(randomPsychicInstructions)
@@ -30,7 +30,7 @@ export const psychic = (gamestate, title, prefix) => {
       action = psychicAction(gamestate, token, title, prefix)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

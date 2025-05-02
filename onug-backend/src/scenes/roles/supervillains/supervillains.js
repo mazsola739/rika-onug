@@ -4,7 +4,7 @@ import { supervillainsAction } from './supervillains.action'
 
 //TODO fix supervillains to see eachother's actions
 
-export const supervillains = (gamestate, title) => {
+export const supervillains = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['supervillains_kickoff_text']
 
@@ -19,7 +19,7 @@ export const supervillains = (gamestate, title) => {
       action = supervillainsAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

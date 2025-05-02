@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { randomFamilyman } from './familyman.constants'
 import { familymanAction } from './familyman.action'
 
-export const familyman = (gamestate, title, hasDoppelganger) => {
+export const familyman = (ws, gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const total_players = gamestate.total_players
 
@@ -39,7 +39,7 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
       action = familymanAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

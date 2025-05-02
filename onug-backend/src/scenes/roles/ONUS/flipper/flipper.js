@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { flipperAction } from './flipper.action'
 
-export const flipper = (gamestate, title, prefix) => {
+export const flipper = (ws, gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [`${prefix}_kickoff_text`, 'flipper_kickoff2_text']
 
@@ -17,7 +17,7 @@ export const flipper = (gamestate, title, prefix) => {
       action = flipperAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

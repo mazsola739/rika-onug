@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { randomBlobKickoffText } from './blob.constants'
 import { blobAction } from './blob.action'
 
-export const blob = (gamestate, title) => {
+export const blob = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const total_players = gamestate.total_players
 
@@ -34,7 +34,7 @@ export const blob = (gamestate, title) => {
       action = blobAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

@@ -29,7 +29,7 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, action, narration)
+  createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
   return gamestate
 }

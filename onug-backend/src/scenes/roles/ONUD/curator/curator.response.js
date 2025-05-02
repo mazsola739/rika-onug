@@ -27,7 +27,7 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, action, narration)
+  createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
   return gamestate
 }

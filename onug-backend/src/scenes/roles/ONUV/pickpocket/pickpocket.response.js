@@ -35,7 +35,7 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
 
   const narration = getNarrationByTitle(title, gamestate.narration)
 
-  createAndSendSceneMessage(gamestate, token, title, action, narration)
+  createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
 
   return gamestate
 }

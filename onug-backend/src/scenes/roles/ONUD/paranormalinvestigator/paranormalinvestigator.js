@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 import { paranormalinvestigatorAction } from './paranormalinvestigator.action'
 
-export const paranormalinvestigator = (gamestate, title) => {
+export const paranormalinvestigator = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['paranormalinvestigator_kickoff_text']
 
@@ -17,7 +17,7 @@ export const paranormalinvestigator = (gamestate, title) => {
       action = paranormalinvestigatorAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

@@ -2,7 +2,7 @@ import { robberAction } from '../..'
 import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 
-export const roleretriever = (gamestate, title) => {
+export const roleretriever = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['roleretriever_kickoff_text']
 
@@ -17,7 +17,7 @@ export const roleretriever = (gamestate, title) => {
       action = robberAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

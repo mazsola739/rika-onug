@@ -2,7 +2,7 @@ import { witchAction } from '../..'
 import { isActivePlayer } from '../../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUtils'
 
-export const voodoolou = (gamestate, title) => {
+export const voodoolou = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['voodoolou_kickoff_text']
 
@@ -17,7 +17,7 @@ export const voodoolou = (gamestate, title) => {
       action = witchAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

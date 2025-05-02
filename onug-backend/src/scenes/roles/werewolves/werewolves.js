@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { werewolvesAction } from './werewolves.action'
 
-export const werewolves = (gamestate, title, hasDreamWolf) => {
+export const werewolves = (ws, gamestate, title, hasDreamWolf) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDreamWolf ? 'werewolves_dreamwolf_kickoff_text' : 'werewolves_kickoff_text']
 
@@ -17,7 +17,7 @@ export const werewolves = (gamestate, title, hasDreamWolf) => {
       action = werewolvesAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

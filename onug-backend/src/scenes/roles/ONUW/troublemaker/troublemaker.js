@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../../activePlayer'
 import { getAllPlayerTokens, createAndSendSceneMessage } from '../../../sceneUtils'
 import { troublemakerAction } from './troublemaker.action'
 
-export const troublemaker = (gamestate, title) => {
+export const troublemaker = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['troublemaker_kickoff_text']
 
@@ -17,7 +17,7 @@ export const troublemaker = (gamestate, title) => {
       action = troublemakerAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

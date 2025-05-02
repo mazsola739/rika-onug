@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../../sceneUti
 import { copycatAction } from './copycat.action'
 
 //TODO if oracle is oracle team
-export const copycat = (gamestate, title) => {
+export const copycat = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['copycat_kickoff_text']
 
@@ -18,7 +18,7 @@ export const copycat = (gamestate, title) => {
       action = copycatAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

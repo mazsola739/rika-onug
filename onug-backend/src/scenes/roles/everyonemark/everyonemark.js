@@ -2,7 +2,7 @@ import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { everyonemarkAction } from './everyonemark.action'
 
-export const everyonemark = (gamestate, title) => {
+export const everyonemark = (ws, gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['everyone_mark_text']
 
@@ -17,7 +17,7 @@ export const everyonemark = (gamestate, title) => {
       action = everyonemarkAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })

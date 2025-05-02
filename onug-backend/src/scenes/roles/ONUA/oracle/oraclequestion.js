@@ -4,7 +4,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray }
 import { randomOracleQuestions } from './oracle.constants'
 import { oraclequestionAction } from './oraclequestion.action'
 
-export const oracleQuestion = (gamestate, title, selected_cards) => {
+export const oracleQuestion = (ws, gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
 
   let availableOracleQuestionOptions = [...randomOracleQuestions]
@@ -62,7 +62,7 @@ export const oracleQuestion = (gamestate, title, selected_cards) => {
       action = oraclequestionAction(gamestate, token, title)
     }
 
-    createAndSendSceneMessage(gamestate, token, title, action, narration)
+    createAndSendSceneMessage(ws, gamestate, token, title, action, narration)
   })
 
   gamestate.narration.push({ [title]: narration })
