@@ -28,11 +28,11 @@ export const broadcast = (room_id, jsonMessage) => {
 //TODO why not working? :(
 
 export const sendMessageToPlayer = (room_id, token, jsonMessage) => {
-  const playerConnection = webSocketServerConnectionsPerRoom?.[room_id]?.[token]
-  if (playerConnection) {
+  const ws = webSocketServerConnectionsPerRoom?.[room_id]?.[token]
+  if (ws) {
     logDebug(`Sending message to user [${room_id}][${token}] with message [${JSON.stringify(jsonMessage)}]`)
     const encodedMessage = encodeJsonKeys(jsonMessage)
-    playerConnection.send(encodedMessage)
+    ws.send(JSON.stringify(encodedMessage))
   } else {
     logError(`No active WebSocket connection found for user [${room_id}][${token}]`)
   }

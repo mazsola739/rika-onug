@@ -6,7 +6,7 @@ export const createAndSendSceneMessage = (gamestate, token, title, action, narra
 
   const player = gamestate.players[token]
 
-  const message = JSON.stringify({
+  const message = {
     type: SCENE,
     success: true,
     title,
@@ -22,7 +22,7 @@ export const createAndSendSceneMessage = (gamestate, token, title, action, narra
       player_name: player.name,
       flag: player.flag
     }))
-  })
+  }
 
   sendMessageToPlayer(gamestate.room_id, token, message)
 }

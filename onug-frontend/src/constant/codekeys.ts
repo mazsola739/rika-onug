@@ -1,4 +1,6 @@
-export const ENCODE: { [key: string]: string } = {
+export type KeyMapping = Record<string, string>
+
+export const ENCODE: KeyMapping = {
   action: 'aa',
   actual_scene: 'ab',
   alien_votes: 'ac',
@@ -13,15 +15,18 @@ export const ENCODE: { [key: string]: string } = {
   cow: 'cd',
   current: 'ce',
   day_mode: 'da',
-  dreamwolf: 'db',
+  day_ready: 'db',
+  done: 'dc',
+  dreamwolf: 'dd',
   empath_votes: 'ea',
   errors: 'eb',
   evilometer: 'ec',
   expansion: 'ed',
   flag: 'fa',
   groobzerb: 'ga',
-  guess_cards: 'gb',
-  guessed_cards: 'gc',
+  guess: 'gb',
+  guess_cards: 'gc',
+  guessed_cards: 'gd',
   lovers: 'la',
   loser_teams: 'lb',
   madscientist: 'ma',
@@ -81,6 +86,7 @@ export const ENCODE: { [key: string]: string } = {
   show_marks: 'sn',
   stage: 'so',
   success: 'sp',
+  survived: 'sq',
   tanner: 'ta',
   title: 'tb',
   token: 'tc',
@@ -91,13 +97,15 @@ export const ENCODE: { [key: string]: string } = {
   vampires: 'vb',
   villains: 'vc',
   vote: 'vd',
-  vote_result: 've',
+  voters: 've',
+  vote_result: 'vf',
   werewolves: 'wa',
-  winner_teams: 'wb',
-  witness: 'wc'
+  win: 'wb',
+  winner_teams: 'wc',
+  witness: 'wd'
 }
 
-export const DECODE: { [key: string]: string } = {
+export const DECODE: KeyMapping = {
   aa: 'action',
   ab: 'actual_scene',
   ac: 'alien_votes',
@@ -112,15 +120,18 @@ export const DECODE: { [key: string]: string } = {
   cd: 'cow',
   ce: 'current',
   da: 'day_mode',
-  db: 'dreamwolf',
+  db: 'day_ready',
+  dc: 'done',
+  dd: 'dreamwolf',
   ea: 'empath_votes',
   eb: 'errors',
   ec: 'evilometer',
   ed: 'expansion',
   fa: 'flag',
   ga: 'groobzerb',
-  gb: 'guess_cards',
-  gc: 'guessed_cards',
+  gb: 'guess',
+  gc: 'guess_cards',
+  gd: 'guessed_cards',
   la: 'lovers',
   lb: 'loser_teams',
   ma: 'madscientist',
@@ -180,6 +191,7 @@ export const DECODE: { [key: string]: string } = {
   sn: 'show_marks',
   so: 'stage',
   sp: 'success',
+  sq: 'survived',
   ta: 'tanner',
   tb: 'title',
   tc: 'token',
@@ -190,8 +202,10 @@ export const DECODE: { [key: string]: string } = {
   vb: 'vampires',
   vc: 'villains',
   vd: 'vote',
-  ve: 'vote_result',
+  ve: 'voters',
+  vf: 'vote_result',
   wa: 'werewolves',
-  wb: 'winner_teams',
-  wc: 'witness'
+  wb: 'win',
+  wc: 'winner_teams',
+  wd: 'witness'
 }
