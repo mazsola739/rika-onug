@@ -1,7 +1,6 @@
 import { DECODE, ENCODE } from '../constants'
 
 const processKeysRecursively = (input, mapping, logMessage) => {
-  console.log("input", input)
   if (Array.isArray(input)) {
     return input.map(item => processKeysRecursively(item, mapping, logMessage))
   } else if (input && typeof input === 'object') {

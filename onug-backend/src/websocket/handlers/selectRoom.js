@@ -4,10 +4,8 @@ import roomsData from '../../data/rooms.json'
 import { SELECT_ROOM, STAGES } from '../../constants'
 import { sendMessage } from '../../utils'
 
-
-//TODO fix Lobby related infos here 
+//TODO fix Lobby related infos here
 export const selectRoom = async (ws, message) => {
-
   const { room_id, nickname, token } = message
   logTrace(`select-room requested in ${room_id} from ${nickname}`)
   try {
@@ -19,7 +17,8 @@ export const selectRoom = async (ws, message) => {
 
     if (!validity) return sendMessage(ws, { type: SELECT_ROOM, success: false, errors })
 
-    if (gamestate.stage !== STAGES.LOBBY && gamestate.stage !== STAGES.ROOM) return sendMessage(ws, { type: SELECT_ROOM, success: false, errors: ['Room is closed / game started.'], stage: gamestate.stage })
+    if (gamestate.stage !== STAGES.LOBBY && gamestate.stage !== STAGES.ROOM)
+      return sendMessage(ws, { type: SELECT_ROOM, success: false, errors: ['Room is closed / game started.'], stage: gamestate.stage })
 
     const playerNames = Object.values(gamestate.players).map(player => player.name)
 

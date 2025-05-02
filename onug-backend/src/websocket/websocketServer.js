@@ -21,7 +21,7 @@ export const websocketServer = port => {
       ws.on('message', async (rawMessage, client, client2) => {
         logTrace(`Received message ${rawMessage} from user ${client} ${client2}`)
         const message = decodeJsonKeys(JSON.parse(rawMessage))
-        
+
         // Handle messages that don't require token validation
         if (message.type === NEWBIE) return newbie(ws, message)
 

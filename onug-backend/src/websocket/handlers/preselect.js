@@ -4,10 +4,8 @@ import { PRESELECT } from '../../constants'
 import { repo, repositoryType } from '../../repository'
 import { sendMessage } from '../../utils'
 
-
-//TODO fix Lobby related infos here 
+//TODO fix Lobby related infos here
 export const preselect = async (ws, message) => {
-
   const { room_id, token, selected_cards } = message
   logTrace(`select-room requested in ${room_id}`)
   try {
