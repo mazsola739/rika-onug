@@ -5,7 +5,6 @@ import { validateRoom } from '../../validators'
 import { addUserToRoom, broadcast, sendMessage } from '../../utils/connections.utils'
 
 export const joinRoom = async (ws, message) => {
-
   const { room_id, nickname, token } = message
   logTrace(`join-room requested in ${room_id} by ${token}`)
 

@@ -1,26 +1,38 @@
-import { DECODE, ENCODE } from 'constant'
+import { DECODE, ENCODE } from "constant"
 
-const processKeysRecursively = (input: any, mapping: Record<string, string>, logMessage: string): any => {
-  if (Array.isArray(input)) {
-    return input.map(item => processKeysRecursively(item, mapping, logMessage))
-  } else if (input && typeof input === 'object') {
-    const processedObject: Record<string, any> = {}
-    for (const [key, value] of Object.entries(input)) {
-      const mappedKey = mapping[key]
-      if (!mappedKey) {
-        console.log(`${logMessage}: ${key}`)
-      }
-      processedObject[mappedKey || key] = processKeysRecursively(value, mapping, logMessage)
-    }
-    return processedObject
+
+export const encodeJsonKeys = (data: Record<string, any>): Record<string, any> | null => {
+  try {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => {
+        const encodedKey = ENCODE[key]
+        if (!encodedKey) {
+          console.warn(`No encoded key found for: ${key}, using original key.`)
+          return [key, value]
+        }
+        return [encodedKey, value]
+      })
+    )
+  } catch (error) {
+    console.error('Error encoding JSON keys:', error)
+    return null
   }
-  return input
 }
 
-export const decodeJsonKeys = (input: any): any => {
-  return processKeysRecursively(input, DECODE, 'No decoded key found for')
-}
-
-export const encodeJsonKeys = (input: any): any => {
-  return processKeysRecursively(input, ENCODE, 'No encoded key found for')
+export const decodeJsonKeys = (data: Record<string, any>): Record<string, any> | null => {
+  try {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => {
+        const decodedKey = DECODE[key]
+        if (!decodedKey) {
+          console.warn(`No decoded key found for: ${key}, using original key.`)
+          return [key, value]
+        }
+        return [decodedKey, value]
+      })
+    )
+  } catch (error) {
+    console.error('Error decoding JSON keys:', error)
+    return null
+  }
 }

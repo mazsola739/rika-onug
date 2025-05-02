@@ -1,4 +1,4 @@
-export const ENCODE = {
+export const ENCODE: { [key: string]: string } = {
   action: 'aa',
   actual_scene: 'ab',
   alien_votes: 'ac',
@@ -97,7 +97,7 @@ export const ENCODE = {
   witness: 'wc'
 }
 
-export const DECODE = {
+export const DECODE: { [key: string]: string } = {
   aa: 'action',
   ab: 'actual_scene',
   ac: 'alien_votes',

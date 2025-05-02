@@ -1,26 +1,38 @@
 import { DECODE, ENCODE } from '../constants'
 
-const processKeysRecursively = (input, mapping, logMessage) => {
-  if (Array.isArray(input)) {
-    return input.map(item => processKeysRecursively(item, mapping, logMessage))
-  } else if (input && typeof input === 'object') {
-    const processedObject = {}
-    for (const [key, value] of Object.entries(input)) {
-      const mappedKey = mapping[key]
-      if (!mappedKey) {
-        console.log(`${logMessage}: ${key}`)
-      }
-      processedObject[mappedKey || key] = processKeysRecursively(value, mapping, logMessage)
-    }
-    return processedObject
+export const encodeJsonKeys = (data) => {
+  try {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => {
+        const encodedKey = ENCODE[key]
+        if (!encodedKey) {
+          console.warn(`No encoded key found for: ${key}, using original key.`)
+          return [key, value]
+        }
+        return [encodedKey, value]
+      })
+    )
+  } catch (error) {
+    console.error('Error encoding JSON keys:', error)
+    return null
   }
-  return input
 }
 
-export const decodeJsonKeys = input => {
-  return processKeysRecursively(input, DECODE, 'No decoded key found for')
+export const decodeJsonKeys = (data) => {
+  try {
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => {
+        const decodedKey = DECODE[key]
+        if (!decodedKey) {
+          console.warn(`No decoded key found for: ${key}, using original key.`)
+          return [key, value]
+        }
+        return [decodedKey, value]
+      })
+    )
+  } catch (error) {
+    console.error('Error decoding JSON keys:', error)
+    return null
+  }
 }
 
-export const encodeJsonKeys = input => {
-  return processKeysRecursively(input, ENCODE, 'No encoded key found for')
-}
