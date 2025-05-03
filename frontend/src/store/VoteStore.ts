@@ -1,5 +1,5 @@
-import { UPDATE_GUESS } from 'constant'
-import * as narration_text from 'constant/narrations'
+import { UPDATE_GUESS } from 'constants'
+import * as narration_text from 'constants/narrations'
 import { script } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardPositionType, GuessedCardType, GuessTokenType, NarrationType, PlayerType, WsJsonMessageType } from 'types'

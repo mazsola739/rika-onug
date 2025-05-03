@@ -1,4 +1,4 @@
-import { ARRIVE_VERDICT, REDIRECT, RESULT } from 'constant'
+import { ARRIVE_VERDICT, REDIRECT, RESULT } from 'constants'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { voteStore, wsStore } from 'store'

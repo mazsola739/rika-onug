@@ -1,5 +1,5 @@
 import { ButtonGroup, Button } from 'components'
-import { button_label_done, button_label_back, button_label_votenow, button_label_im_ready, button_label_ready } from 'constant'
+import { button_label_done, button_label_back, button_label_votenow, button_label_im_ready, button_label_ready } from 'constants'
 import { useClickHandler } from 'hooks'
 import { Footer } from 'layouts'
 import { observer } from 'mobx-react-lite'

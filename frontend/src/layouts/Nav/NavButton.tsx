@@ -1,4 +1,4 @@
-import { MenuButton } from 'components/MenuButton/MenuButton'
+import { MenuButton } from 'components'
 import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { getBackgroundColor, getBackgroundImage } from './Nav.styles'

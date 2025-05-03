@@ -1,4 +1,4 @@
-import { TokenImage } from 'components/TokenImage/TokenImage'
+import { TokenImage } from 'components'
 import { observer } from 'mobx-react-lite'
 import { selectionStore } from 'store'
 import { AccusedPlayer, StyledAccusedPlayers } from './SuspicionPlayers.styles'

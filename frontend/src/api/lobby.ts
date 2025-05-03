@@ -1,4 +1,4 @@
-import { API_HOST } from 'constant'
+import { API_HOST } from 'constants'
 
 export const lobbyRequest = async () => {
   try {

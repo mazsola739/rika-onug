@@ -1,4 +1,4 @@
-import * as messages_text from 'constant/messages'
+import * as messages_text from 'constants/messages'
 import { CardPositionType } from './JsonMessage.types'
 
 export type GuessTokenType = {
@@ -19,7 +19,7 @@ export type PresetType = {
   cards: string
 }
 
-export type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'cow' |'evilometer' | 'groobzerb' | 'vampires' | 'part_of_blob'
+export type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'cow' | 'evilometer' | 'groobzerb' | 'vampires' | 'part_of_blob'
 
 export type TableCenterCard = {
   card_name?: string

@@ -1,5 +1,5 @@
-import * as messages_text from 'constant/messages'
-import * as narration_text from 'constant/narrations'
+import * as messages_text from 'constants/messages'
+import * as narration_text from 'constants/narrations'
 import { script } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { propStore, riseAndRestStore, selectionStore } from 'store'
@@ -103,8 +103,7 @@ class MessageStore {
   }
 
   get isVoteResult() {
-    const hasVotes = (votes: VoteType): boolean =>
-      votes ? Object.values(votes).some(playerVotes => playerVotes?.length > 0) : false
+    const hasVotes = (votes: VoteType): boolean => (votes ? Object.values(votes).some(playerVotes => playerVotes?.length > 0) : false)
 
     return hasVotes(propStore.vampireVotes) || hasVotes(propStore.alienVotes)
   }

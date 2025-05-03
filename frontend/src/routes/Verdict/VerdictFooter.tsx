@@ -1,5 +1,5 @@
 import { ButtonGroup, Button } from 'components'
-import { button_label_back } from 'constant'
+import { button_label_back } from 'constants'
 import { useClickHandler } from 'hooks'
 import { Footer } from 'layouts'
 import { observer } from 'mobx-react-lite'

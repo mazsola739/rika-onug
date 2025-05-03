@@ -1,4 +1,4 @@
-import { API_HOST } from 'constant'
+import { API_HOST } from 'constants'
 import { useCallback, useState } from 'react'
 import { labels } from './Stub.constants'
 import { testCase1, testCase2, testCase3, testCase4, testCase5 } from './StubTestCases'

@@ -1,4 +1,4 @@
-import { DECODE, ENCODE, KeyMapping } from 'constant'
+import { DECODE, ENCODE, KeyMapping } from 'constants'
 
 export const encodeJsonKeys = (data: Record<string, any>): Record<string, any> | null => {
   try {

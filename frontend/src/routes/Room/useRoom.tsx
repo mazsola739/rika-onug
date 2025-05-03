@@ -1,4 +1,4 @@
-import { ARRIVE_ROOM, HYDRATE_ROOM, LEAVE_ROOM, REDIRECT, TEAM } from 'constant'
+import { ARRIVE_ROOM, HYDRATE_ROOM, LEAVE_ROOM, REDIRECT, TEAM } from 'constants'
 import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { deckStore, roomStore, wsStore } from 'store'

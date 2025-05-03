@@ -1,4 +1,4 @@
-import { EXPANSION, rules_mark } from 'constant'
+import { EXPANSION, rules_mark } from 'constants'
 import { TokenJson } from 'types'
 
 export const marks: TokenJson[] = [

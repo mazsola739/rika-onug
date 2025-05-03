@@ -1,4 +1,4 @@
-import { EXPANSION, rules_artifact, rules_shield } from 'constant'
+import { EXPANSION, rules_artifact, rules_shield } from 'constants'
 import { TokenJson } from 'types'
 
 export const artifacts: TokenJson[] = [

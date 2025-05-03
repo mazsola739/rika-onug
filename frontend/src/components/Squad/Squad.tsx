@@ -1,7 +1,8 @@
-import { Title, TokenImage } from 'components'
+import { TokenImage } from 'components'
 import { observer } from 'mobx-react-lite'
 import { roomStore } from 'store'
-import { Member, MemberName, SquadMembers, StyledSquad } from './Squad.styles'
+import { Title } from 'typography'
+import { StyledSquad, SquadMembers, Member, MemberName } from './Squad.styles'
 
 export const Squad: React.ComponentType = observer(() => {
   const room_id = sessionStorage.getItem('room_id')

@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { API_HOST } from 'constant'
+import { API_HOST } from 'constants'
 
 export const useGod = () => {
   const [response, setResponse] = useState({

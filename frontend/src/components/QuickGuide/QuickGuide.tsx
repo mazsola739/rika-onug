@@ -1,10 +1,10 @@
 import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
 import { CardJson, TokenJson } from 'types'
-import { Guide, Item, QuickGuideRule } from './QuickGuide.styles'
+import { Title } from 'typography'
+import { Item, QuickGuideRule, Guide } from './QuickGuide.styles'
 import { getUniqueGuide, isCardType } from './QuickGuide.utils'
 import { QuickGuideToken } from './QuickGuideToken'
-import { Title } from 'components'
 
 //TODO better quick guide text!!!!
 export const QuickGuide: React.ComponentType = observer(() => {

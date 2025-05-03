@@ -1,9 +1,9 @@
 import { observer } from 'mobx-react-lite'
-import { useEffect, useState } from 'react'
-import { NavButtons, StyledNav } from './Nav.styles'
+import { useState, useEffect } from 'react'
+import { Title } from 'typography'
+import { StyledNav, NavButtons } from './Nav.styles'
 import { NavProps } from './Nav.types'
 import { NavButton } from './NavButton'
-import { Title } from 'components'
 
 export const Nav: React.ComponentType<NavProps> = observer(({ anchorList }) => {
   const [activeAnchor, setActiveAnchor] = useState<string | null>(null)
@@ -49,9 +49,9 @@ export const Nav: React.ComponentType<NavProps> = observer(({ anchorList }) => {
   }, [anchorList])
 
   return (
-    <StyledNav className="navbar">
+    <StyledNav className='navbar'>
       <Title title={'TEAMS'} />
-      <NavButtons className="nav-container">
+      <NavButtons className='nav-container'>
         {anchorList.map((anchor, index) => (
           <NavButton key={index} anchor={anchor} isActive={activeAnchor === anchor} />
         ))}

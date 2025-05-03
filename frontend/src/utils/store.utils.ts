@@ -1,4 +1,4 @@
-import { default_card, default_player, default_token, TEAMS } from 'constant'
+import { default_card, default_player, default_token, TEAMS } from 'constants'
 import { artifacts, cards, marks } from 'data'
 import { deckStore } from 'store'
 import { CardJson, PlayerType, TeamsType, TokenJson } from 'types'

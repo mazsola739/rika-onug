@@ -1,10 +1,10 @@
+import { CardImage, TokenImage, Button } from 'components'
 import { observer } from 'mobx-react-lite'
+import { selectionStore, propStore, messageStore } from 'store'
+import { Title } from 'typography'
 import { formatPositionSimply } from 'utils'
-import { messageStore, propStore, selectionStore } from 'store'
-import { StyledMessageBoxAnswer, StyledMessageBoxCards, MessageBoxItem, ItemPosition, StyledSelectable, StyledMessageBoxVoteResult, PlayerPosition } from './MessageBox.styles'
+import { StyledMessageBoxCards, MessageBoxItem, ItemPosition, StyledMessageBoxAnswer, StyledSelectable, StyledMessageBoxVoteResult, PlayerPosition } from './MessageBox.styles'
 import { MessageBoxProps, MessagePlayersProps } from './MessageBox.types'
-import { Button, CardImage, Title, TokenImage } from 'components'
-
 
 const MessageBoxCards: React.ComponentType<MessageBoxProps> = observer(({ cards }) => {
   const onCardClick = (position: string) => selectionStore.toggleCardSelection(position)
@@ -14,7 +14,7 @@ const MessageBoxCards: React.ComponentType<MessageBoxProps> = observer(({ cards 
       {cards.map((card, index) => (
         <MessageBoxItem key={index}>
           <ItemPosition>{card.name}</ItemPosition>
-          <CardImage image="card_background" onClick={() => onCardClick(card.position)} size={40} />
+          <CardImage image='card_background' onClick={() => onCardClick(card.position)} size={40} />
         </MessageBoxItem>
       ))}
     </StyledMessageBoxCards>
@@ -29,7 +29,7 @@ const MessageBoxMarks: React.ComponentType<MessageBoxProps> = observer(({ marks 
       {marks.map((mark, index) => (
         <MessageBoxItem key={index}>
           <ItemPosition>{mark.name}</ItemPosition>
-          <TokenImage image="mark_back" onClick={() => onMarkClick(mark.position)} size={35} />
+          <TokenImage image='mark_back' onClick={() => onMarkClick(mark.position)} size={35} />
         </MessageBoxItem>
       ))}
     </StyledMessageBoxCards>

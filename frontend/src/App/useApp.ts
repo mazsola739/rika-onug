@@ -1,5 +1,5 @@
 import { IconType } from 'components/Icon/Icon.types'
-import { NEWBIE, RELOAD, WS_HOST } from 'constant'
+import { NEWBIE, RELOAD, WS_HOST } from 'constants'
 import { useEffect, useState } from 'react'
 import useWebSocket, { ReadyState } from 'react-use-websocket'
 import { wsStore } from 'store'

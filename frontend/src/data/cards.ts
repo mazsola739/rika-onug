@@ -1,4 +1,4 @@
-import { EXPANSION, ROLES, rules_role, TEAM, WAKE } from 'constant'
+import { EXPANSION, ROLES, rules_role, TEAM, WAKE } from 'constants'
 import { CardJson } from 'types'
 
 export const cards: CardJson[] = [

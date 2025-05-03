@@ -1,4 +1,4 @@
-import { ARRIVE_COUNCIL, HYDRATE_COUNCIL, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, VOTE } from 'constant'
+import { ARRIVE_COUNCIL, HYDRATE_COUNCIL, HYDRATE_GUESS, HYDRATE_READY, HYDRATE_VOTE, REDIRECT, VOTE } from 'constants'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { playersStore, propStore, riseAndRestStore, voteStore, wsStore } from 'store'

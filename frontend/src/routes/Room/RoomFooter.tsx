@@ -1,5 +1,5 @@
 import { ButtonGroup, Button } from 'components'
-import { button_label_deal, button_label_reset, button_label_leave } from 'constant'
+import { button_label_deal, button_label_reset, button_label_leave } from 'constants'
 import { useClickHandler } from 'hooks'
 import { Footer } from 'layouts'
 import { observer } from 'mobx-react-lite'

@@ -3,7 +3,7 @@ import { StyledLobby, FormContainer, Label, Input, Select, Selection, RoomBackgr
 import { useLobby } from './useLobby'
 import { Button, DropdownMenu, InputField } from 'components'
 import { lobbyStore } from 'store'
-import { button_label_join, button_label_renick_me } from 'constant'
+import { button_label_join, button_label_renick_me } from 'constants'
 
 //TODO better styled components, better design
 //TODO generate 'common' options for dropdown

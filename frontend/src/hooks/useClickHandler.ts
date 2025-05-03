@@ -1,4 +1,4 @@
-import { DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, READY, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_ROOM, VOTE } from 'constant'
+import { DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, READY, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_ROOM, VOTE } from 'constants'
 import { useCallback } from 'react'
 import { gameStatusStore, riseAndRestStore, roomStore, wsStore } from 'store'
 

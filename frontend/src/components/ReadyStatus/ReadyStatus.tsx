@@ -1,7 +1,8 @@
-import { Title, TokenImage } from 'components'
+import { TokenImage } from 'components'
 import { observer } from 'mobx-react-lite'
 import { playersStore } from 'store'
-import { Ready, ReadyPlayerList, StyledReadyPlayer, StyledReadyStatus } from './ReadyStatus.styles'
+import { Title } from 'typography'
+import { StyledReadyPlayer, Ready, StyledReadyStatus, ReadyPlayerList } from './ReadyStatus.styles'
 import { ReadyPlayerProps, ReadyStatusProps } from './ReadyStatus.types'
 
 const ReadyPlayer: React.ComponentType<ReadyPlayerProps> = observer(({ player_name, ready, player_number }) => {

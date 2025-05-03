@@ -1,9 +1,9 @@
-import { EXPANSIONS } from 'constant'
+import { EXPANSIONS } from 'constants'
 import { observer } from 'mobx-react-lite'
+import { Expansion } from 'types'
+import { Title } from 'typography'
 import { StyledFilter, FilterButtons } from './Filter.styles'
 import { FilterButton } from './FilterButton'
-import { Expansion } from 'types'
-import { Title } from 'components'
 
 export const Filter: React.ComponentType = observer(() => {
   const expansionNames = Object.values(EXPANSIONS)

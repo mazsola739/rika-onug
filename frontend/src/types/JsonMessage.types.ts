@@ -1,4 +1,4 @@
-import * as narration_text from 'constant/narrations'
+import * as narration_text from 'constants/narrations'
 
 export type ActualSceneType = {
   scene_number: number

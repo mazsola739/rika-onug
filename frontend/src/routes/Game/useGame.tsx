@@ -1,4 +1,4 @@
-import { ALIENS, VAMPIRES, ARRIVE_GAME, END_GAME, HYDRATE_GAME, REDIRECT, SCENE } from 'constant'
+import { ALIENS, VAMPIRES, ARRIVE_GAME, END_GAME, HYDRATE_GAME, REDIRECT, SCENE } from 'constants'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { messageStore, propStore, riseAndRestStore, wsStore } from 'store'

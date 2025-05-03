@@ -1,4 +1,4 @@
-import { HAS_MARK_IDS, VAMPIRE_IDS, ASSASSIN_IDS } from 'constant'
+import { HAS_MARK_IDS, VAMPIRE_IDS, ASSASSIN_IDS } from 'constants'
 import { cards, marks, artifacts } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardJson, TokenJson, Expansion } from 'types'

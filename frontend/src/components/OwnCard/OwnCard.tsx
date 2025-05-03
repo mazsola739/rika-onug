@@ -1,6 +1,7 @@
-import { CardImage, Title, TokenImage } from 'components'
+import { CardImage, TokenImage } from 'components'
 import { observer } from 'mobx-react-lite'
-import { CardRule, OwnCardInfoName, OwnCardInfoRole, OwnCardInfoTeam, StyledOwnCard, TokenContainer, TokenInfo, TokenRule } from './OwnCard.styles'
+import { Title } from 'typography'
+import { StyledOwnCard, OwnCardInfoName, OwnCardInfoRole, OwnCardInfoTeam, CardRule, TokenContainer, TokenInfo, TokenRule } from './OwnCard.styles'
 import { OwnCardProps } from './OwnCard.types'
 
 export const OwnCard: React.ComponentType<OwnCardProps> = observer(({ card, mark, player, artifact, title }) => {

@@ -1,4 +1,4 @@
-import { RoleToken } from 'components/RoleToken/RoleToken'
+import { RoleToken } from 'components'
 import { observer } from 'mobx-react-lite'
 import { voteStore } from 'store'
 import { StyledRoleTokenList } from './RoleTokenList.styles'

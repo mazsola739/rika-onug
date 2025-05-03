@@ -1,4 +1,4 @@
-import { TEAM } from 'constant'
+import { TEAM } from 'constants'
 import { makeAutoObservable } from 'mobx'
 import { deckStore } from 'store'
 import { CardJson, Expansion, PlayerType, WsJsonMessageType } from 'types'

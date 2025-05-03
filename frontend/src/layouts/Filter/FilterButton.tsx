@@ -1,5 +1,5 @@
-import { MenuButton } from 'components/MenuButton/MenuButton'
-import { UPDATE_ROOM } from 'constant'
+import { MenuButton } from 'components'
+import { UPDATE_ROOM } from 'constants'
 import { observer } from 'mobx-react-lite'
 import React, { useCallback } from 'react'
 import { deckStore, wsStore } from 'store'

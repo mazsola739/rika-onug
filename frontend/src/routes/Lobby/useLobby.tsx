@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useClickHandler } from 'hooks'
 import { lobbyStore, wsStore } from 'store'
-import { ADJECTIVES, JOIN_ROOM, NOUNS, PRESELECT, REDIRECT, SELECT_ROOM, STAGES } from 'constant'
+import { ADJECTIVES, JOIN_ROOM, NOUNS, PRESELECT, REDIRECT, SELECT_ROOM, STAGES } from 'constants'
 import { useNavigate } from 'react-router-dom'
 
 //TODO clickhandler
