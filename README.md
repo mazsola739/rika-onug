@@ -8,8 +8,8 @@ Rika ONUG is a web-based implementation of the popular social deduction game "On
 - Interactive user interface for seamless gameplay.
 
 ## Project Structure
-- **onug-frontend**: The frontend application built with React.
-- **onug-backend**: The backend server handling game logic and API.
+- **frontend**: The frontend application built with React.
+- **backend**: The backend server handling game logic and API.
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/) (v14 or higher)

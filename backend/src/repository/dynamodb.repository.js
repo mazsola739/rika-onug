@@ -231,7 +231,7 @@ export const reInitializeAllGamestates = async () => {
 export const readNohupByService = async service => {
   logTrace(`readNohupByService ${service}`)
 
-  const FE_PATH = `${__dirname}/../../../onug-frontend/prod__nohup.txt`
+  const FE_PATH = `${__dirname}/../../../frontend/prod__nohup.txt`
   const BE_PATH_TXT = `${__dirname}/../../prod__nohup.txt`
   const BE_PATH_CRASH = `${__dirname}/../prod__crash.js`
 

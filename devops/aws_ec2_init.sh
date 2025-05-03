@@ -34,13 +34,13 @@ sudo iptables -A INPUT -p tcp --dport 7655 -j ACCEPT
 sudo iptables -A INPUT -p tcp --dport 3000 -j ACCEPT
 
 ## start backend
-cd /rika-onug/onug-backend
+cd /rika-onug/backend
 yarn
 nohup yarn start &
 // nohup yarn start > prod__nohup.txt &
 
 ## start frontend
-cd /rika-onug/onug-frontend
+cd /rika-onug/frontend
 nohup yarn start --host
 
 ## kill service

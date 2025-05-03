@@ -32,15 +32,15 @@ check running state of the fe and be
 > sudo lsof -i -P -n | grep LISTEN
  
 kill fe
-> ../onug-devops//killFe.sh
+> ../devops//killFe.sh
 
 kill be 
-> ../onug-devops/killBe.sh
+> ../devops/killBe.sh
 
 re-start be
 ```
-cd onug-backend
-../onug-devops/killBe.sh
+cd backend
+../devops/killBe.sh
 yarn
 rm prod__nohup.txt
 nohup yarn run start > prod__nohup.txt </dev/null 2>src/prod__crash.js &
@@ -75,8 +75,8 @@ sudo kill -9 INSTANCE_ID_FROM_PREVIOUS_PS_AUX_COMMAND
 
 re-start fe
 ```
-cd onug-frontend
-../onug-devops/killFe.sh
+cd frontend
+../devops/killFe.sh
 yarn
 yarn build:prod
 rm prod__nohup.txt

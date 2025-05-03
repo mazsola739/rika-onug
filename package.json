@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "frontend": "cd onug-frontend && yarn start",
-    "build:frontend": "cd onug-frontend && yarn build",
-    "backend": "cd onug-backend && yarn start",
-    "install:all": "cd onug-frontend && yarn install && cd ../onug-backend && yarn install",
+    "frontend": "cd frontend && yarn start",
+    "build:frontend": "cd frontend && yarn build",
+    "backend": "cd backend && yarn start",
+    "install:all": "cd frontend && yarn install && cd ../backend && yarn install",
     
     "cgm": "cd scripts && node createGamestateMappings.mjs"
   },

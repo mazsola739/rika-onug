@@ -2,25 +2,25 @@
 
 # dependencies
 /node_modules
-/onug-backend/node_modules
-/onug-frontend/node_modules
-/onug-e2e/node_modules
+/backend/node_modules
+/frontend/node_modules
+/e2e/node_modules
 
 
 # testing
 /coverage
 
 # production
-/onug-frontend/build
-/onug-frontend/dist
-/onug-backend/dist
+/frontend/build
+/frontend/dist
+/backend/dist
 
 # logs
-/onug-backend/logs/*.txt
+/backend/logs/*.txt
 
 # database
-/onug-backend/src/gamestate/*/*.json
-/onug-backend/src/gamestate/*.json
+/backend/src/gamestate/*/*.json
+/backend/src/gamestate/*.json
 
 # misc
 .DS_Store
@@ -30,7 +30,7 @@
 .env.production.local
 .idea
 *.iml
-/onug-frontend/delete
+/frontend/delete
 /scripts
 
 npm-debug.log*

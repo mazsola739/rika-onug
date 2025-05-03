@@ -46,7 +46,7 @@ for everything related to gamestate management, every gamestate update, delete, 
 
 ### log
 
-logging utility, handles console logs and writing to log files (under onug-backend/logs)
+logging utility, handles console logs and writing to log files (under backend/logs)
 
 ### god
 

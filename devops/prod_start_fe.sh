@@ -8,7 +8,7 @@ killport 3000
 cd ..
 git fetch -u && git pull
 
-cd onug-frontend
+cd frontend
 
 yarn install
 yarn build:prod
