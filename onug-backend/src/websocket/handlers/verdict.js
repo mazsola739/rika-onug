@@ -6,6 +6,7 @@ import { broadcast, sendMessage } from '../../utils/connections.utils'
 
 export const verdict = async (ws, message) => {
   const { room_id, token, selected_card_positions } = message
+
   logTrace(`Processing verdict in room: ${room_id}`)
 
   try {
@@ -14,7 +15,6 @@ export const verdict = async (ws, message) => {
     if (!validity) return sendMessage(ws, { type: ERROR, success: false, errors })
 
     let newGamestate = { ...gamestate, stage: STAGES.VERDICT }
-
     newGamestate.players[token].vote = selected_card_positions || []
     newGamestate.players[token].flag = true
 

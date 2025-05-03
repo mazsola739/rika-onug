@@ -1,8 +1,10 @@
-import { Button, ButtonGroup, Footer } from 'components'
-import { button_label_deal, button_label_leave, button_label_reset } from 'constant'
+import { ButtonGroup, Button } from 'components'
+import { button_label_deal, button_label_reset, button_label_leave } from 'constant'
 import { useClickHandler } from 'hooks'
+import { Footer } from 'layouts'
 import { observer } from 'mobx-react-lite'
 import { deckStore, roomStore } from 'store'
+
 
 export const RoomFooter: React.ComponentType = observer(() => {
   const { handleResetGame, handleLeaveRoom, handleJoinTable } = useClickHandler()
@@ -18,9 +20,9 @@ export const RoomFooter: React.ComponentType = observer(() => {
   return (
     <Footer>
       <ButtonGroup>
-        <Button onClick={handleResetGame} buttonText={button_label_reset} variant="blue" />
-        <Button onClick={handleJoinTable} disabled={isButtonDisabled} buttonText={buttonText} variant="green" />
-        <Button onClick={handleLeaveRoom} buttonText={button_label_leave} variant="crimson" />
+        <Button onClick={handleResetGame} buttonText={button_label_reset} variant='blue' />
+        <Button onClick={handleJoinTable} disabled={isButtonDisabled} buttonText={buttonText} variant='green' />
+        <Button onClick={handleLeaveRoom} buttonText={button_label_leave} variant='crimson' />
       </ButtonGroup>
     </Footer>
   )

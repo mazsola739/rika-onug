@@ -17,7 +17,6 @@ export const dealCards = async (ws, message) => {
 
     const { playerCards, leftCard, middleCard, rightCard, newWolfCard, newVillainCard } = dealCardIds(selectedCards)
 
-
     const newGamestate = {
       ...gamestate,
       stage: STAGES.TABLE,

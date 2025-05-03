@@ -1,5 +1,6 @@
-import { Header, Title } from 'components'
+import { Header } from 'layouts'
 import { observer } from 'mobx-react-lite'
+import { Title } from 'typography'
 
 export const RoomHeader: React.ComponentType = observer(() => {
   const room_id = sessionStorage.getItem('room_id')

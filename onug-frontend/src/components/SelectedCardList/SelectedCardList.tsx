@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite'
 import { deckStore } from 'store'
 import { SelectedCard } from './SelectedCard'
 import { StyledSelectedCardList } from './SelectedCardList.styles'
-import { Title } from 'components/Title/Title'
+import { Title } from 'typography/Title/Title'
 
 export const SelectedCardList: React.ComponentType = observer(() => {
   const { selectedCards } = deckStore

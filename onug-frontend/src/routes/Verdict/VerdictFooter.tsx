@@ -1,6 +1,7 @@
-import { Button, ButtonGroup, Footer } from 'components'
+import { ButtonGroup, Button } from 'components'
 import { button_label_back } from 'constant'
 import { useClickHandler } from 'hooks'
+import { Footer } from 'layouts'
 import { observer } from 'mobx-react-lite'
 
 export const VerdictFooter: React.ComponentType = observer(() => {
@@ -9,7 +10,7 @@ export const VerdictFooter: React.ComponentType = observer(() => {
   return (
     <Footer>
       <ButtonGroup>
-        <Button onClick={handleLeaveGame} buttonText={button_label_back} variant="green" />
+        <Button onClick={handleLeaveGame} buttonText={button_label_back} variant='green' />
       </ButtonGroup>
     </Footer>
   )

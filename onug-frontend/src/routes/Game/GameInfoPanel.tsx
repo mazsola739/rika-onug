@@ -1,4 +1,5 @@
-import { InfoPanel, MessageBox, QuickGuide } from 'components'
+import { QuickGuide } from 'components'
+import { InfoPanel, MessageBox } from 'layouts'
 import { observer } from 'mobx-react-lite'
 import { messageStore } from 'store'
 

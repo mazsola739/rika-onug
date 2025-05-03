@@ -83,3 +83,25 @@ export const TEAMNAME = {
   alien: 'The Cosmic Collective',
   villain: "The Rogue's Gallery"
 }
+
+export const roomNames = [
+  { room_id: '', room_name: '' },
+  { room_id: 'archives', room_name: 'Archives' },
+  { room_id: 'armory', room_name: 'Armory' },
+  { room_id: 'bottomless_pit', room_name: 'Bottomless Pit' },
+  { room_id: 'dungeon', room_name: 'Dungeon' },
+  { room_id: 'dynamite_room', room_name: 'Dynamite Room' },
+  { room_id: 'great_hall', room_name: 'Great Hall' },
+  { room_id: 'guest_bedroom', room_name: 'Guest Bedroom' },
+  { room_id: 'kitchen', room_name: 'Kitchen' },
+  { room_id: 'laboratory', room_name: 'Laboratory' },
+  { room_id: 'observatory', room_name: 'Observatory' },
+  { room_id: 'panic_room', room_name: 'Panic Room' },
+  { room_id: 'parlor', room_name: 'Parlor' },
+  { room_id: 'secret_passage', room_name: 'Secret Passage' },
+  { room_id: 'sitting_room', room_name: 'Sitting Room' },
+  { room_id: 'staff_quarters', room_name: 'Staff Quarters' },
+  { room_id: 'study', room_name: 'Study' },
+  { room_id: 'venus_grotto', room_name: 'Venus Grotto' },
+  { room_id: 'workshop', room_name: 'Workshop' }
+]

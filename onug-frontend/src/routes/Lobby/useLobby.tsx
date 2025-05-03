@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useClickHandler } from 'hooks'
 import { lobbyStore, wsStore } from 'store'
-import { adjectives, JOIN_ROOM, nouns, PRESELECT, REDIRECT, SELECT_ROOM, STAGES } from 'constant'
+import { ADJECTIVES, JOIN_ROOM, NOUNS, PRESELECT, REDIRECT, SELECT_ROOM, STAGES } from 'constant'
 import { useNavigate } from 'react-router-dom'
 
 //TODO clickhandler
@@ -29,12 +29,13 @@ export const useLobby = () => {
         const { room_id, player } = lastJsonMessage
         sessionStorage.setItem('room_id', room_id)
         sessionStorage.setItem('player_name', player.player_name)
+        //todo last selected room?
         navigate(`/room/${room_id}`)
       } else {
         console.error(lastJsonMessage.errors)
       }
     }
-    
+
     if (lastJsonMessage) {
       if (lastJsonMessage?.type === SELECT_ROOM && !lastJsonMessage.success) {
         setRoomInfo(lastJsonMessage.errors?.[0] || 'No room selected.')
@@ -55,8 +56,8 @@ export const useLobby = () => {
   const { handleSelectRoom, handleJoinRoom } = useClickHandler()
 
   const generateFunnyNickname = () => {
-    const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)]
-    const randomNoun = nouns[Math.floor(Math.random() * nouns.length)]
+    const randomAdjective = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)]
+    const randomNoun = NOUNS[Math.floor(Math.random() * NOUNS.length)]
     return `${randomAdjective}${randomNoun}`
   }
 

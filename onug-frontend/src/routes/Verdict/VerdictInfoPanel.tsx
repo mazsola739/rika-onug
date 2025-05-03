@@ -1,6 +1,8 @@
-import { CenterCardsRevealed, InfoPanel, OwnCard, PlayerInfoList, Title } from 'components'
+import { OwnCard, CenterCardsRevealed, PlayerInfoList } from 'components'
+import { InfoPanel } from 'layouts'
 import { observer } from 'mobx-react-lite'
 import { playersStore } from 'store'
+import { Title } from 'typography'
 
 export const VerdictInfoPanel: React.ComponentType = observer(() => {
   const { player, knownPlayerCard, knownPlayerMark, knownPlayerArtifact } = playersStore

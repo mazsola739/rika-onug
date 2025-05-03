@@ -17,10 +17,10 @@ export const Stub: React.ComponentType = observer(() => {
               <Grid key={index}>
                 <Label htmlFor={label}>{label}</Label>
                 <InputField
-                  type="number"
-                  min="0"
-                  step="1"
-                  inputMode="numeric"
+                  type='number'
+                  min='0'
+                  step='1'
+                  inputMode='numeric'
                   id={label}
                   name={label}
                   value={inputValues[index]}

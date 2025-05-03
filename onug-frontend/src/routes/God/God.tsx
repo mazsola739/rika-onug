@@ -3,30 +3,7 @@ import { useGod } from './useGod'
 import { StyledGod, LeftSide, RightSide, GodTitle, FormContainer, InputContainer, Label, Input, ButtonsContainer, Button, ResponseContainer, ResponsePre } from './God.styles'
 
 export const God: React.ComponentType = observer(() => {
-  const {
-    response,
-    roomId,
-    token,
-    message,
-    setRoomId,
-    setToken,
-    setMessageHandler,
-    checkGamestates,
-    checkGamestateByRoomId,
-    deleteAllGamestates,
-    deleteGamestateByRoomId,
-    reInitAllGamestates,
-    checkConnections,
-    removePlayerByToken,
-    removeAllPlayers,
-    broadcastToAll,
-    broadcastToAllInRoom,
-    sendMessageToPlayer,
-    listOnugEnvVars,
-    deleteAllOldLogFiles,
-    readNohupFE,
-    readNohupBE
-  } = useGod()
+  const { response, roomId, token, message, setRoomId, setToken, setMessageHandler, checkGamestates, checkGamestateByRoomId, deleteAllGamestates, deleteGamestateByRoomId, reInitAllGamestates, checkConnections, removePlayerByToken, removeAllPlayers, broadcastToAll, broadcastToAllInRoom, sendMessageToPlayer, listOnugEnvVars, deleteAllOldLogFiles, readNohupFE, readNohupBE } = useGod()
 
   return (
     <StyledGod>
@@ -35,12 +12,12 @@ export const God: React.ComponentType = observer(() => {
         <GodTitle>Game States</GodTitle>
         <FormContainer>
           <InputContainer>
-            <Label htmlFor="room_id">Room ID:</Label>
-            <Input type="text" id="room_id" value={roomId} onChange={e => setRoomId(e.target.value)} />
+            <Label htmlFor='room_id'>Room ID:</Label>
+            <Input type='text' id='room_id' value={roomId} onChange={e => setRoomId(e.target.value)} />
           </InputContainer>
           <InputContainer>
-            <Label htmlFor="token">Token:</Label>
-            <Input type="text" id="token" value={token} onChange={e => setToken(e.target.value)} />
+            <Label htmlFor='token'>Token:</Label>
+            <Input type='text' id='token' value={token} onChange={e => setToken(e.target.value)} />
           </InputContainer>
         </FormContainer>
         <ButtonsContainer>
@@ -55,8 +32,8 @@ export const God: React.ComponentType = observer(() => {
         <GodTitle>WebSocket</GodTitle>
         <FormContainer>
           <InputContainer>
-            <Label htmlFor="message">Message:</Label>
-            <textarea id="message" value={JSON.stringify(message)} onChange={e => setMessageHandler(e.target.value)} style={{ color: '#333', lineHeight: '2', borderRadius: '5px' }} />
+            <Label htmlFor='message'>Message:</Label>
+            <textarea id='message' value={JSON.stringify(message)} onChange={e => setMessageHandler(e.target.value)} style={{ color: '#333', lineHeight: '2', borderRadius: '5px' }} />
           </InputContainer>
         </FormContainer>
         <ButtonsContainer>

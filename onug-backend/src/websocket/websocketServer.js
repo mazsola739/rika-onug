@@ -1,10 +1,11 @@
 import WebSocket from 'ws'
-import { ALIENS, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, PRESELECT, READY, RELOAD, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES, VOTE } from '../constants'
+import { ALIENS, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, HYDRATE_LOBBY, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, PRESELECT, READY, RELOAD, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES, VOTE } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, hydrateReady, hydrateRoom, hydrateTable, joinRoom, leaveGame, leaveRoom, newbie, preselect, reload, reset, result, scene, selectRoom, startGame, startVote, stopGame, updateRoom, verdict } from './handlers'
 import { decodeJsonKeys } from '../utils'
 import { aliensVotehydrate } from '../scenes/roles/aliens/aliens.voteHydrate'
 import { vampiresVotehydrate } from '../scenes/roles/vampires/vampires.voteHydrate'
+import { hydrateLobby } from './handlers/hydrateLobby'
 
 export const websocketServer = port => {
   try {
@@ -33,7 +34,7 @@ export const websocketServer = port => {
         }
 
         // Handle messages that require token validation
-        // TODO refactor handlers
+        // TODO refactor handlers - make common logtrace text ect
         // TODO create hydrate lobby?
         switch (message.type) {
           case RELOAD:
@@ -42,6 +43,8 @@ export const websocketServer = port => {
             return selectRoom(ws, message)
           case PRESELECT:
             return preselect(ws, message)
+          case HYDRATE_LOBBY:
+            return hydrateLobby(ws, message)
           case JOIN_ROOM:
             return joinRoom(ws, message)
           case LEAVE_ROOM:

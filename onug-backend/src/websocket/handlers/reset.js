@@ -21,8 +21,6 @@ export const reset = async message => {
 
     await repo[repositoryType].upsertRoomState(newGamestate)
 
-
-
     const playersInGame = getPlayerNames(newGamestate.players)
 
     return broadcast(room_id, {

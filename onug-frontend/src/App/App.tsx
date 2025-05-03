@@ -8,6 +8,7 @@ import { Icon } from 'components'
 
 //TODO: Fix admin
 //TODO: Error page and loading
+//TODO: typography?
 //TODO: Timer for vote
 //TODO: Settings for timer, roles ect.
 

@@ -1,4 +1,5 @@
-import { InfoPanel, OwnCard, QuickGuide, ReadyStatus } from 'components'
+import { ReadyStatus, OwnCard, QuickGuide } from 'components'
+import { InfoPanel } from 'layouts'
 import { observer } from 'mobx-react-lite'
 import { playersStore } from 'store'
 

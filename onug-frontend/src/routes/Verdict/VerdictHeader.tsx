@@ -1,6 +1,7 @@
-import { Header, Title } from 'components'
+import { Header } from 'layouts'
 import { observer } from 'mobx-react-lite'
 import { propStore } from 'store'
+import { Title } from 'typography'
 
 export const VerdictHeader: React.ComponentType = observer(() => {
   const winners =

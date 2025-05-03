@@ -1,10 +1,11 @@
-import { SideSeats, TopSeats, CenterCards, Main, PlayerCard, RoleTokenList } from 'components'
+import { PlayerCard } from 'components'
+import { SideSeats, TopSeats, Main, CenterCards, RoleTokenList } from 'layouts'
 import { observer } from 'mobx-react-lite'
-import { useCouncil } from './useCouncil'
 import { StyledCouncil, CouncilCenter } from './Council.styles'
 import { CouncilFooter } from './CouncilFooter'
 import { CouncilHeader } from './CouncilHeader'
 import { CouncilInfoPanel } from './CouncilInfoPanel'
+import { useCouncil } from './useCouncil'
 
 export const Council: React.ComponentType = observer(() => {
   const { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard } = useCouncil()

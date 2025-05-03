@@ -1,5 +1,6 @@
-import { CelestialBodies, Header } from 'components'
-import { observer } from 'mobx-react-lite'
+import { CelestialBodies } from 'components';
+import { Header } from 'layouts';
+import { observer } from 'mobx-react-lite';
 
 export const CouncilHeader: React.ComponentType = observer(() => (
   <Header>

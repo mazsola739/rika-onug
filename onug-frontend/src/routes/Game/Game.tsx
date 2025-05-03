@@ -1,11 +1,12 @@
-import { SideSeats, TopSeats, CenterCards, Main, PlayerCard } from 'components'
+import { PlayerCard } from 'components'
+import { SideSeats, TopSeats, Main, CenterCards } from 'layouts'
 import { observer } from 'mobx-react-lite'
-import { GameCenter, StyledGame } from './Game.styles'
+import { propStore } from 'store'
+import { StyledGame, GameCenter } from './Game.styles'
 import { GameFooter } from './GameFooter'
 import { GameHeader } from './GameHeader'
 import { GameInfoPanel } from './GameInfoPanel'
 import { useGame } from './useGame'
-import { propStore } from 'store'
 
 export const Game: React.ComponentType = observer(() => {
   const { tablePlayerCards, tablePlayerCard, left, middle, right, ownCard, setTransitionCompleted } = useGame()

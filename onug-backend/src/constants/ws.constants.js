@@ -13,6 +13,7 @@ export const ARRIVE_GAME = 'ARRIVE_GAME'
 export const ARRIVE_COUNCIL = 'ARRIVE_COUNCIL'
 export const ARRIVE_VERDICT = 'ARRIVE_VERDICT'
 
+export const HYDRATE_LOBBY = 'HYDRATE_LOBBY'
 export const HYDRATE_ROOM = 'HYDRATE_ROOM'
 export const HYDRATE_TABLE = 'HYDRATE_TABLE'
 export const HYDRATE_READY = 'HYDRATE_READY'
@@ -39,6 +40,7 @@ export const VOTE = 'VOTE'
 export const UPDATE_GUESS = 'UPDATE_GUESS'
 export const SCENE = 'SCENE'
 
+//TODO RENAME THIS?
 export const ALIENS = 'ALIENS'
 export const VAMPIRES = 'VAMPIRES'
 export const EMPATH = 'EMPATH'

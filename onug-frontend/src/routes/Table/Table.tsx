@@ -1,4 +1,5 @@
-import { SideSeats, TopSeats, CenterCards, Main, PlayerCard } from 'components'
+import { PlayerCard } from 'components'
+import { SideSeats, TopSeats, Main, CenterCards } from 'layouts'
 import { observer } from 'mobx-react-lite'
 import { StyledTable, TableCenter } from './Table.styles'
 import { TableFooter } from './TableFooter'

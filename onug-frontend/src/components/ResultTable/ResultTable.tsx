@@ -1,4 +1,4 @@
-import { Title } from 'components/Title/Title'
+import { Title } from 'typography/Title/Title'
 import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { playersStore, propStore } from 'store'

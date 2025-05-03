@@ -1,6 +1,8 @@
-import { InfoPanel, NightHistory, OwnCard, ReadyStatus, SuspicionPlayers, Title } from 'components'
+import { OwnCard, ReadyStatus, SuspicionPlayers, NightHistory } from 'components'
+import { InfoPanel } from 'layouts'
 import { observer } from 'mobx-react-lite'
-import { playersStore, propStore } from 'store'
+import { propStore, playersStore } from 'store'
+import { Title } from 'typography'
 
 export const CouncilInfoPanel = observer(() => {
   const { selectable_cards } = propStore
