@@ -3,9 +3,24 @@ import { useClickHandler } from 'hooks'
 import { lobbyStore, wsStore } from 'store'
 import { ADJECTIVES, JOIN_ROOM, NOUNS, PRESELECT, REDIRECT, SELECT_ROOM, STAGES } from 'constants'
 import { useNavigate } from 'react-router-dom'
+import { LobbyDataType, PresetType, RoomType } from 'types'
 
 //TODO clickhandler
 //TODO handling all error message properly
+
+const lobbyData = (rooms: RoomType[], presets: PresetType[]) => {
+  const newRooms = rooms.map(room => ({
+    option: room.room_name,
+    value: room.room_id
+  }))
+
+  const newPresets = presets.map(preset => ({
+    option: preset.description,
+    value: preset.description
+  }))
+
+  return { newRooms, newPresets }
+}
 
 export const useLobby = () => {
   const token = sessionStorage.getItem('token')
@@ -19,6 +34,9 @@ export const useLobby = () => {
   const [roomInfo, setRoomInfo] = useState<string | null>(null)
   const [stage, setStage] = useState<string>(STAGES.LOBBY)
 
+  const { rooms, presets } = lobbyStore
+
+  const { newRooms, newPresets } = lobbyData(rooms, presets)
 
   useEffect(() => {
     if (lastJsonMessage?.type === REDIRECT) {
@@ -53,7 +71,16 @@ export const useLobby = () => {
     }
 
   }, [lastJsonMessage, navigate])
-  const { handleSelectRoom, handleJoinRoom } = useClickHandler()
+  const { handleJoinRoom } = useClickHandler()
+
+  const handleSelectRoom = (selected_room_id: string, nickname: string) => {
+    sendJsonMessage?.({
+      type: SELECT_ROOM,
+      room_id: selected_room_id,
+      nickname,
+      token
+    })
+  }
 
   const generateFunnyNickname = () => {
     const randomAdjective = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)]
@@ -94,7 +121,7 @@ export const useLobby = () => {
 
   const handlePreset = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedPresetDescription = event.target.value
-    const preset = lobbyStore.presets.find(p => p.description === selectedPresetDescription)
+    const preset = presets.find(p => p.description === selectedPresetDescription)
 
     if (preset) {
       sendJsonMessage({
@@ -117,6 +144,9 @@ export const useLobby = () => {
     regenerateNickname,
     handleLogin,
     setRoomInfo,
-    handlePreset
+    handlePreset,
+    handleSelectRoom,
+    newRooms,
+    newPresets
   }
 }

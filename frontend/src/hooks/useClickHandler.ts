@@ -36,15 +36,6 @@ export const useClickHandler = () => {
     })
   }
 
-  const handleSelectRoom = (selected_room_id: string, nickname: string) => {
-    sendJsonMessage?.({
-      type: SELECT_ROOM,
-      room_id: selected_room_id,
-      nickname,
-      token
-    })
-  }
-
   //ROOM
   const handleLeaveRoom = useCallback(() => {
     sendJsonMessage?.({
@@ -211,7 +202,6 @@ export const useClickHandler = () => {
     handleJoinRoom,
     handleLeaveRoom,
     handleJoinTable,
-    handleSelectRoom,
     handleLeaveGame,
     handleResetGame,
     handleStartGame,

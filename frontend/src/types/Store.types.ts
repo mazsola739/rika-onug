@@ -16,7 +16,12 @@ export type RoomType = {
 
 export type PresetType = {
   description: string
-  cards: string
+  cards: number[]
+}
+
+export type LobbyDataType = {
+  option: string
+  value: string
 }
 
 export type RoleKeys = 'werewolves' | 'dreamwolf' | 'masons' | 'aliens' | 'cow' | 'evilometer' | 'groobzerb' | 'vampires' | 'part_of_blob'

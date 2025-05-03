@@ -6,4 +6,7 @@ export interface InputFieldProps {
   value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   required: boolean
+  maxLength: number
+  pattern: string
+  title: string
 }
