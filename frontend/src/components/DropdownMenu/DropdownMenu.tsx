@@ -3,7 +3,7 @@ import { Option, Select, StyledDropdownMenu } from './DropdownMenu.styles'
 import { DropdownMenuProps } from './DropdownMenu.types'
 import { Label } from 'routes/God/God.styles'
 
-export const DropdownMenu: React.ComponentType<DropdownMenuProps> = observer(({ label, name, onChange, required, defaultValue="", options}) => (
+export const DropdownMenu: React.ComponentType<DropdownMenuProps> = observer(({ label, name, onChange, required, defaultValue = '', options }) => (
   <StyledDropdownMenu>
     <Label>{label}</Label>
     <Select name={name} onChange={onChange} required={required} defaultValue={defaultValue}>

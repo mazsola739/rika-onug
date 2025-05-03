@@ -27,8 +27,8 @@ export const PlayerCard: React.ComponentType<PlayerCardProps> = observer(({ card
           <Tokens>
             <Token tokenName={playerNumberToken} size={tokenSize} {...playerNumberProps} />
             {hasMarks && <Token size={tokenSize} {...markProps} />}
-            {isShielded && hasSentinel && <Token tokenName="shield" size={tokenSize} />}
-            {isArtifacted && hasCurator && <Token tokenName="artifact_back" size={tokenSize} />}
+            {isShielded && hasSentinel && <Token tokenName='shield' size={tokenSize} />}
+            {isArtifacted && hasCurator && <Token tokenName='artifact_back' size={tokenSize} />}
           </Tokens>
         )}
       </CardContainer>

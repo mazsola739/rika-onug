@@ -1,7 +1,77 @@
 import scripts from '../data/script.json'
 import { logTrace } from '../log'
 import { hasTemptress, hasAlphaWolf } from '../utils'
-import { hasEpicBattle, hasEasterEgg, hasOracle, hasCopycat, hasMirrorMan, hasDoppelganger, hasInstantAction, hasAnyVampire, hasTheCount, hasRenfield, hasDiseased, hasCupid, hasInstigator, hasPriest, hasAssassin, hasApprenticeAssassin, hasMarks, hasSentinel, hasAnyAlien, hasCow, hasGroobAndZerb, hasBodySnatcher, hasAnySuperVillains, hasDrPeeker, hasRapscallion, hasEvilometer, hasAnyWerewolf, hasMysticWolf, hasMinion, hasApprenticeTanner, hasTanner, hasLeader, hasMadScientist, hasIntern, hasMasons, hasThing, hasAnnoyingLad, hasSeer, hasApprenticeSeer, hasParanormalInvestigator, hasMarksman, hasNostradamus, hasPsychic, hasDetector, hasRobber, hasWitch, hasPickpocket, hasRoleRetriever, hasVoodooLou, hasTroublemaker, hasVillageIdiot, hasAuraSeer, hasGremlin, hasRascal, hasSwitcheroo, hasDrunk, hasInsomniac, hasSelfAwarenessGirl, hasSquire, hasBeholder, hasRevealer, hasExposer, hasFlipper, hasEmpath, hasCurator, hasBlob, hasMortician, hasFamilyMan, hasRipple } from './conditions'
+import {
+  hasEpicBattle,
+  hasEasterEgg,
+  hasOracle,
+  hasCopycat,
+  hasMirrorMan,
+  hasDoppelganger,
+  hasInstantAction,
+  hasAnyVampire,
+  hasTheCount,
+  hasRenfield,
+  hasDiseased,
+  hasCupid,
+  hasInstigator,
+  hasPriest,
+  hasAssassin,
+  hasApprenticeAssassin,
+  hasMarks,
+  hasSentinel,
+  hasAnyAlien,
+  hasCow,
+  hasGroobAndZerb,
+  hasBodySnatcher,
+  hasAnySuperVillains,
+  hasDrPeeker,
+  hasRapscallion,
+  hasEvilometer,
+  hasAnyWerewolf,
+  hasMysticWolf,
+  hasMinion,
+  hasApprenticeTanner,
+  hasTanner,
+  hasLeader,
+  hasMadScientist,
+  hasIntern,
+  hasMasons,
+  hasThing,
+  hasAnnoyingLad,
+  hasSeer,
+  hasApprenticeSeer,
+  hasParanormalInvestigator,
+  hasMarksman,
+  hasNostradamus,
+  hasPsychic,
+  hasDetector,
+  hasRobber,
+  hasWitch,
+  hasPickpocket,
+  hasRoleRetriever,
+  hasVoodooLou,
+  hasTroublemaker,
+  hasVillageIdiot,
+  hasAuraSeer,
+  hasGremlin,
+  hasRascal,
+  hasSwitcheroo,
+  hasDrunk,
+  hasInsomniac,
+  hasSelfAwarenessGirl,
+  hasSquire,
+  hasBeholder,
+  hasRevealer,
+  hasExposer,
+  hasFlipper,
+  hasEmpath,
+  hasCurator,
+  hasBlob,
+  hasMortician,
+  hasFamilyMan,
+  hasRipple
+} from './conditions'
 
 export const scriptHandler = async (gamestate, room_id) => {
   logTrace(`scriptHandler in room [${room_id}]`)
@@ -383,7 +453,8 @@ export const scriptHandler = async (gamestate, room_id) => {
   gamestate.scripts = role_scenes.sort((a, b) => a.scene_number - b.scene_number)
 
   if (gamestate.scripts.length === 0 || gamestate.scripts[gamestate.scripts.length - 1].scene_title !== 'RIPPLE') {
-    if (Math.random() < 0.5) { // 50% chance to add the "JOKE" script
+    if (Math.random() < 0.5) {
+      // 50% chance to add the 'JOKE' script
       addScript('JOKE')
     }
   }

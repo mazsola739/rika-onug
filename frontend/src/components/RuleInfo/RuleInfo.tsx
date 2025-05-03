@@ -9,7 +9,7 @@ export const RuleInfo: React.ComponentType = observer(() => {
 
   return (
     <StyledRuleInfo>
-      {imgSrc && <Avatar src={imgSrc} alt="info" />}
+      {imgSrc && <Avatar src={imgSrc} alt='info' />}
       <Character>{detailedCardInfo.display_name.toLocaleUpperCase()}</Character>
       <Rule>{detailedCardInfo.rules}</Rule>
     </StyledRuleInfo>

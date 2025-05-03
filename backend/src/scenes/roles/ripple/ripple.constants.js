@@ -35,5 +35,29 @@ export const rippleNeighborKeys = ['identifier_leftneighbor_text', 'identifier_r
 export const rippleCenterAnyKeys = ['identifier_any_text', 'identifier_anyeven_text', 'identifier_anyodd_text', 'identifier_center_text']
 
 export const rippleRepeatRoles = [
-  "ALIENS', 'ALPHA_WOLF', 'APPRENTICE_SEER', 'BODY_SNATCHER', 'DISEASED', 'DRUNK', 'EXPOSER', 'GREMLIN', 'INSOMNIAC', 'MARKSMAN', 'MASONS', 'MYSTIC_WOLF', 'NOSTRADAMUS', 'PARANORMAL_INVESTIGATOR', 'PICKPOCKET', 'PSYCHIC', 'REVEALER', 'ROBBER', 'RASCAL', 'SEER', 'THING', 'TROUBLEMAKER', 'VILLAGE_IDIOT', 'WEREWOLVES', 'WITCH"
+  'ALIENS',
+  'ALPHA_WOLF',
+  'APPRENTICE_SEER',
+  'BODY_SNATCHER',
+  'DISEASED',
+  'DRUNK',
+  'EXPOSER',
+  'GREMLIN',
+  'INSOMNIAC',
+  'MARKSMAN',
+  'MASONS',
+  'MYSTIC_WOLF',
+  'NOSTRADAMUS',
+  'PARANORMAL_INVESTIGATOR',
+  'PICKPOCKET',
+  'PSYCHIC',
+  'REVEALER',
+  'ROBBER',
+  'RASCAL',
+  'SEER',
+  'THING',
+  'TROUBLEMAKER',
+  'VILLAGE_IDIOT',
+  'WEREWOLVES',
+  'WITCH'
 ]

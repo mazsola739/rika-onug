@@ -11,11 +11,11 @@ export const SelectableCardsButtons: React.ComponentType = observer(() => {
 
   return (
     <ButtonGroup>
-      <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant="blue" />
+      <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant='blue' />
       {isVote ? (
-        <Button onClick={() => handleVote(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={button_label_vote} variant="purple" />
+        <Button onClick={() => handleVote(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={button_label_vote} variant='purple' />
       ) : (
-        <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={button_label_done} variant="green" />
+        <Button onClick={() => handleCardInteraction(selectedCards, title)} disabled={selectedCards.length === 0} buttonText={button_label_done} variant='green' />
       )}
     </ButtonGroup>
   )
@@ -28,11 +28,11 @@ export const SelectableMarksButtons: React.ComponentType = observer(() => {
 
   return (
     <ButtonGroup>
-      <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant="blue" />
+      <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant='blue' />
       {isVote ? (
-        <Button onClick={() => handleVote(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={button_label_vote} variant="purple" />
+        <Button onClick={() => handleVote(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={button_label_vote} variant='purple' />
       ) : (
-        <Button onClick={() => handleMarkInteraction(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={button_label_done} variant="green" />
+        <Button onClick={() => handleMarkInteraction(selectedMarks, title)} disabled={selectedMarks.length === 0} buttonText={button_label_done} variant='green' />
       )}
     </ButtonGroup>
   )
@@ -45,8 +45,8 @@ export const AnswerButtons: React.ComponentType = observer(() => {
 
   return (
     <ButtonGroup>
-      <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant="blue" />
-      <Button onClick={() => handleAnswerInteraction(selectedAnswer, title)} disabled={selectedAnswer.length === 0} buttonText={button_label_done} variant="green" />
+      <Button onClick={() => handleSkip(title)} disabled={obligatory} buttonText={button_label_skip} variant='blue' />
+      <Button onClick={() => handleAnswerInteraction(selectedAnswer, title)} disabled={selectedAnswer.length === 0} buttonText={button_label_done} variant='green' />
     </ButtonGroup>
   )
 })
@@ -57,7 +57,7 @@ export const SceneEndButtons: React.ComponentType = observer(() => {
 
   return (
     <ButtonGroup>
-      <Button onClick={() => handleFinish(title)} buttonText={button_label_finish} variant="purple" />
+      <Button onClick={() => handleFinish(title)} buttonText={button_label_finish} variant='purple' />
     </ButtonGroup>
   )
 })

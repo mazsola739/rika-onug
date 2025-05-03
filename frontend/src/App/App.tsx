@@ -24,17 +24,17 @@ export const App: React.ComponentType = observer(() => {
       </ConnectionStatus>
       <Router>
         <Routes>
-          <Route path="/" element={<Lobby />} />
-          <Route path="/lobby" element={<Lobby />} />
-          <Route path="/room/:room_id" element={<Room />} />
-          <Route path="/table/:room_id" element={<Table />} />
-          <Route path="/game/:room_id" element={<Game />} />
-          <Route path="/council/:room_id" element={<Council />} />
-          <Route path="/verdict/:room_id" element={<Verdict />} />
+          <Route path='/' element={<Lobby />} />
+          <Route path='/lobby' element={<Lobby />} />
+          <Route path='/room/:room_id' element={<Room />} />
+          <Route path='/table/:room_id' element={<Table />} />
+          <Route path='/game/:room_id' element={<Game />} />
+          <Route path='/council/:room_id' element={<Council />} />
+          <Route path='/verdict/:room_id' element={<Verdict />} />
 
           {/* God mode - todo delete */}
-          <Route path="/god" element={<God />} />
-          <Route path="/stub" element={<Stub />} />
+          <Route path='/god' element={<God />} />
+          <Route path='/stub' element={<Stub />} />
         </Routes>
       </Router>
     </StyledApp>

@@ -51,7 +51,7 @@ export const ResultTable: React.ComponentType = observer(() => {
               </Cell>
               <Cell isMaxWidth>
                 <PlayerName>
-                  {voteImage && <Rank src={voteImage} alt="vote token" />}
+                  {voteImage && <Rank src={voteImage} alt='vote token' />}
                   <Name>{playerVote.name}</Name>
                 </PlayerName>
               </Cell>

@@ -8,7 +8,7 @@ export const NightHistory: React.ComponentType = observer(() => {
       {voteStore.narrations &&
         voteStore.voteNarration.map((scene, index) => (
           <Narration key={index}>
-            <NarrationImage src={`/assets/cards/${scene.image}.webp`} alt="info" />
+            <NarrationImage src={`/assets/cards/${scene.image}.webp`} alt='info' />
             <NarrationText>{scene.text}</NarrationText>
           </Narration>
         ))}
