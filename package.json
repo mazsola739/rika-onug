@@ -7,6 +7,7 @@
     "build:frontend": "cd frontend && yarn build",
     "backend": "cd backend && yarn start",
     "install:all": "cd frontend && yarn install && cd ../backend && yarn install",
+    "up": "cd frontend && yarn upgrade --latest && cd ../backend && yarn upgrade --latest && cd ../e2e && yarn upgrade --latest",
     
     "cgm": "cd scripts && node createGamestateMappings.mjs"
   },
