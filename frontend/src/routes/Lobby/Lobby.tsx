@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite'
 import { StyledLobby, FormContainer, Selection, RoomBackground, Nickname, InfoContainer } from './Lobby.styles'
 import { useLobby } from './useLobby'
-import { Button, ButtonGroup, DropdownMenu, InputField } from 'components'
+import { Button, ButtonGroup, DropdownMenu, InputField, SelectedCardList } from 'components'
 import { lobbyStore } from 'store'
 import { button_label_join, button_label_renick_me } from 'constants'
 
@@ -32,7 +32,8 @@ export const Lobby: React.ComponentType = observer(() => {
         <InfoContainer>
           {roomInfo && <p>{roomInfo}</p>}
           {stage && <p>Game stage: {stage}</p>}
-          {/* Todo: visualize preselected cards? */}
+          {/* Todo: visualize preselected cards? FIX!!!!! */}
+          <SelectedCardList />
           <ButtonGroup>
             <Button onClick={handleLogin} buttonText={button_label_join} variant='magenta' />
           </ButtonGroup>

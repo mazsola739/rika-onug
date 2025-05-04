@@ -6,7 +6,7 @@ import { Label } from 'routes/God/God.styles'
 //TODO react yup for form?
 export const InputField: React.ComponentType<InputFieldProps> = observer(({ label, type = 'text', name, placeholder, value, onChange, required, maxLength, pattern, title }) => (
   <StyledInputField>
-    <Label>{label}</Label>
+    {label && <Label>{label}</Label>}
     <Input
       type={type}
       name={name}
