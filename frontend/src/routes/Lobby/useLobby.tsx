@@ -5,7 +5,7 @@ import { ADJECTIVES, JOIN_ROOM, NOUNS, PRESELECT, REDIRECT, SELECT_ROOM, STAGES 
 import { useNavigate } from 'react-router-dom'
 import { LobbyDataType, PresetType, RoomType } from 'types'
 
-//TODO clickhandler
+//TODO useclickhandler, usechnagehandler
 //TODO handling all error message properly
 
 const lobbyData = (rooms: RoomType[], presets: PresetType[]) => {

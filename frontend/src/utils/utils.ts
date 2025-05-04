@@ -1,4 +1,5 @@
-import { CardJson, TablePlayerCard } from 'types'
+import { ADJECTIVES, NOUNS } from 'constants'
+import { CardJson, PresetType, RoomType, TablePlayerCard } from 'types'
 
 export const areAnyCardSelectedById = (selectedCards: CardJson[], cardIds: number[]): boolean => cardIds.some(cardId => isCardSelectedById(selectedCards, cardId))
 
@@ -30,4 +31,25 @@ export const splitCardsToTable = (tablePlayerCards: TablePlayerCard[], tablePlay
   const middle = remainingTablePlayerCards.slice(third, -third).reverse()
 
   return { right, middle, left, ownCard: newTablePlayerCards[0] }
+}
+
+export const generateFunnyNickname = () => {
+  const randomAdjective = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)]
+  const randomNoun = NOUNS[Math.floor(Math.random() * NOUNS.length)]
+  return `${randomAdjective}${randomNoun}`
+}
+
+
+export const lobbyData = (rooms: RoomType[], presets: PresetType[]) => {
+  const newRooms = rooms.map(room => ({
+    option: room.room_name,
+    value: room.room_id
+  }))
+
+  const newPresets = presets.map(preset => ({
+    option: preset.description,
+    value: preset.description
+  }))
+
+  return { newRooms, newPresets }
 }

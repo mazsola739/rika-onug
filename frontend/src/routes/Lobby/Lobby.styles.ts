@@ -17,43 +17,37 @@ export const Selection = styled.div`
   gap: 30px;
   justify-content: center;
   align-items: center;
-  width: 100%;`
+  width: 100%;
+`
 
 export const FormContainer = styled.div`
-  width: 400px;
+  min-width: 300px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-`;
+`
 
-export const Label = styled.label`
+export const InfoContainer = styled.div`
+  min-width: 300px;
   display: flex;
   flex-direction: column;
+  gap: 15px;
+  align-items: flex-end;
+`
+
+export const Nickname = styled.div`
+  min-width: 300px;
+  display: flex;
+  flex-direction: row;
   gap: 8px;
-  font-size: 14px;
-`;
-
-export const Input = styled.input`
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #333;
-  filter: drop-shadow(3px 3px 3px black);
-`;
-
-export const Select = styled.select`
-  padding: 10px;
-  border-radius: 4px;
-  font-size: 14px;
-  color: #333;
-  filter: drop-shadow(3px 3px 3px black);
-`;
+  align-items: flex-end;
+`
 
 export const SelectedRoom = styled.div`
   margin-top: 20px;
   font-size: 16px;
   font-weight: bold;
-`;
+`
 
 export const RoomBackground = styled.div<{ img: string }>`
   min-width: 200px;
@@ -64,4 +58,4 @@ export const RoomBackground = styled.div<{ img: string }>`
   align-items: center;
   border-radius: 50%;
   filter: drop-shadow(5px 5px 5px black);
-`;
+`
