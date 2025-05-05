@@ -24,12 +24,14 @@ const combineUniqueObjects = (array1, array2) => {
 }
 
 const updatePlayerCard = (gamestate, token) => {
-  let newGamestate = { ...gamestate }
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
-  const flippedCards = newGamestate.positions.flipped_cards
+  let newPlayers = { ...gamestate.players }
+  let newPositions = { ...gamestate.positions }
 
-  const playerCard = newGamestate.players[token].card
-  const currentCard = newGamestate.positions.card_positions[currentPlayerNumber].card
+  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newPlayers, token)
+  const flippedCards = newPositions.flipped_cards
+
+  const playerCard = newPlayers[token].card
+  const currentCard = newPositions.card_positions[currentPlayerNumber].card
 
   if (!playerCard || !currentCard) return
 
@@ -37,13 +39,19 @@ const updatePlayerCard = (gamestate, token) => {
   const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, playerCard.player_card_id)
 
   if (iSeeMyCardIsFlipped) {
-    newGamestate.players[token].card.player_card_id = currentCard.id
-    newGamestate.players[token].card.player_role = currentCard.role
-    newGamestate.players[token].card.player_team = currentCard.team
+    newPlayers[token].card.player_card_id = currentCard.id
+    newPlayers[token].card.player_role = currentCard.role
+    newPlayers[token].card.player_team = currentCard.team
   }
 
   if (iSeeMyCardElsewhere) {
-    newGamestate.players[token].card.player_card_id = 87
+    newPlayers[token].card.player_card_id = 87
+  }
+
+  const newGamestate = {
+    ...gamestate,
+    players: newPlayers,
+    positions: newPositions
   }
 
   return newGamestate

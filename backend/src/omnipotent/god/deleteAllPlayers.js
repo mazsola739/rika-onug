@@ -10,7 +10,7 @@ export const deleteAllPlayers = async (req, res) => {
     const response = await repo[repositoryType].removeAllPlayers()
     initWebSocketConnections()
 
-    logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
+    /* logTrace(`sending back gamestates: ${JSON.stringify(response)}`) */
 
     return res.send(response)
   } catch (error) {

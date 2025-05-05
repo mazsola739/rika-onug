@@ -8,7 +8,7 @@ export const checkGamestateByRoomId = async (req, res) => {
     const { room_id } = req.query
     const response = await repo[repositoryType].readGamestateByRoomId(room_id)
 
-    logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
+    /* logTrace(`sending back gamestates: ${JSON.stringify(response)}`) */
 
     return res.send(response)
   } catch (error) {

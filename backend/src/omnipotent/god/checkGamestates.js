@@ -7,7 +7,7 @@ export const checkGamestates = async (req, res) => {
     logTrace(`GOD check gamestates endpoint triggered: ${JSON.stringify(body)}`)
     const response = await repo[repositoryType].readAllGamestates()
 
-    logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
+    /* logTrace(`sending back gamestates: ${JSON.stringify(response)}`) */
 
     return res.send(response)
   } catch (error) {

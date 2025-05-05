@@ -24,17 +24,15 @@ export const startGame = async (ws, message) => {
       game_start_time: startTime,
       game_started: true,
       game_stopped: false,
-      game_finished: false,
-      scenes: {
-        chapter: [
-          {
-            scene_title: 'START_GAME',
-            scene_number: 0
-          }
-        ],
-        narration: []
-      }
+      game_finished: false
     }
+    newGamestate.scenes.chapter = [
+      {
+        scene_title: 'START_GAME',
+        scene_number: 0
+      }
+    ]
+    newGamestate.scenes.narration = []
 
     if (!areAllPlayersReady(newGamestate.players)) {
       logError(`Not all players are ready. Current readiness: ${JSON.stringify(newGamestate)}`)

@@ -20,16 +20,19 @@ export const dealCards = async (ws, message) => {
     const newGamestate = {
       ...gamestate,
       stage: STAGES.TABLE,
-      card_positions: {
-        center_left: createCenterPositionCard(leftCard),
-        center_middle: createCenterPositionCard(middleCard),
-        center_right: createCenterPositionCard(rightCard),
-        center_wolf: createCenterPositionCard(newWolfCard),
-        center_villain: createCenterPositionCard(newVillainCard),
-        ...playerCards.reduce((positions, playerCard, index) => {
-          positions[`player_${index + 1}`] = createPlayerPositionCard(playerCard, selectedCards)
-          return positions
-        }, {})
+      positions: {
+        ...gamestate.positions,
+        card_positions: {
+          center_left: createCenterPositionCard(leftCard),
+          center_middle: createCenterPositionCard(middleCard),
+          center_right: createCenterPositionCard(rightCard),
+          center_wolf: createCenterPositionCard(newWolfCard),
+          center_villain: createCenterPositionCard(newVillainCard),
+          ...playerCards.reduce((positions, playerCard, index) => {
+            positions[`player_${index + 1}`] = createPlayerPositionCard(playerCard, selectedCards)
+            return positions
+          }, {})
+        }
       }
     }
 

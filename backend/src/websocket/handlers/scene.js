@@ -34,7 +34,7 @@ export const scene = async (ws, message) => {
       /* await randomDelay() */
 
       gamestate = await scriptHandler(gamestate, room_id)
-      if (gamestate.scripts[gamestate.scripts.length - 1].scene_title === 'RIPPLE') {
+      if (gamestate.scenes.scripts[gamestate.scenes.scripts.length - 1].scene_title === 'RIPPLE') {
         gamestate = await rippleHandler(gamestate, room_id)
       }
       gamestate = await chapterHandler(gamestate, room_id)

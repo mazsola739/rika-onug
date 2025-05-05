@@ -10,7 +10,8 @@ export const chapterHandler = async (gamestate, room_id) => {
     logTrace(`chapterHandler in room [${room_id}]`)
 
     const playersArray = Object.values(gamestate.players || {})
-    let newGamestate = { ...gamestate, scenes: { chapter: [] } }
+    let newGamestate = { ...gamestate }
+    newGamestate.scenes.chapter = []
 
     let flagsState = {
       player_card_shifting: false,

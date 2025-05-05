@@ -8,7 +8,7 @@ export const deletePlayerByToken = async (req, res) => {
     const { token } = req.query
     const response = await repo[repositoryType].removePlayerByToken(token)
 
-    logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
+    /* logTrace(`sending back gamestates: ${JSON.stringify(response)}`) */
 
     return res.send(response)
   } catch (error) {

@@ -7,7 +7,7 @@ export const reInitAllGamestates = async (req, res) => {
     logTrace(`GOD re-initialize all gamestates endpoint triggered: ${JSON.stringify(body)}`)
     const response = await repo[repositoryType].reInitializeAllGamestates()
 
-    logTrace(`sending back gamestates: ${JSON.stringify(response)}`)
+    /* logTrace(`sending back gamestates: ${JSON.stringify(response)}`) */
 
     return res.send(response)
   } catch (error) {
