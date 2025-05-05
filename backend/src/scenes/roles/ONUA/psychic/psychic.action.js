@@ -1,8 +1,8 @@
 import { generateRoleAction, getAnyEvenOrOddPlayerNumbers } from '../../../sceneUtils'
 
 export const psychicAction = (gamestate, token, title, prefix) => {
-  const randomPsychicInstruction = gamestate[prefix].instruction
-  const psychicKey = gamestate[prefix].key
+  const randomPsychicInstruction = gamestate.roles[prefix].instruction
+  const psychicKey = gamestate.roles[prefix].key
 
   const evenOrOdd = psychicKey.replace('identifier_', '').replace('_text', '').replace('any', '')
   const selectablePlayers = getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd)

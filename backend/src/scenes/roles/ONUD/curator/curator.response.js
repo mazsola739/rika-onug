@@ -6,12 +6,12 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
     return gamestate
   }
 
-  const newArtifact = getRandomArtifact(gamestate.artifacted_cards)
+  const newArtifact = getRandomArtifact(gamestate.positions.artifacted_cards)
   const artifactedPlayersToken = getPlayerTokensByPlayerNumber(gamestate.players, [selected_card_positions[0]])
 
   if (artifactedPlayersToken) {
-    gamestate.artifacted_cards.push({ [selected_card_positions[0]]: newArtifact })
-    gamestate.card_positions[selected_card_positions[0]].artifact = newArtifact
+    gamestate.positions.artifacted_cards.push({ [selected_card_positions[0]]: newArtifact })
+    gamestate.positions.card_positions[selected_card_positions[0]].artifact = newArtifact
   }
 
   gamestate.players[token].player_history[title] = {
@@ -25,7 +25,7 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

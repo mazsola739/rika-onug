@@ -10,12 +10,8 @@ export const mortician = (gamestate, title, prefix) => {
   const morticianKey = randomMorticianInstruction === 'mortician_2cards_text' ? 'identifier_bothneighbors_text' : getRandomItemFromArray(morticianKeys)
   narration.push(randomMorticianInstruction, morticianKey)
 
-  gamestate[prefix] = {
-    instruction: '',
-    key: ''
-  }
-  gamestate[prefix].instruction = randomMorticianInstruction
-  gamestate[prefix].key = morticianKey
+  gamestate.roles[prefix].instruction = randomMorticianInstruction
+  gamestate.roles[prefix].key = morticianKey
 
   tokens.forEach(token => {
     let action = {}
@@ -31,7 +27,7 @@ export const mortician = (gamestate, title, prefix) => {
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
-  gamestate.narration.push({ [title]: narration })
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

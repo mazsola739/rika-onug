@@ -7,25 +7,25 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
   }
 
   if (gamestate.players[token].card.player_original_id === 1) {
-    const loveOnePosition = gamestate.doppelganger_mark_positions.love_1
-    const loveTwoPosition = gamestate.doppelganger_mark_positions.love_2
-    const selectedOnePosition = gamestate.card_positions[selected_mark_positions[0]].mark
-    const selectedTwoPosition = gamestate.card_positions[selected_mark_positions[1]].mark
+    const loveOnePosition = gamestate.positions.doppelganger_mark_positions.love_1
+    const loveTwoPosition = gamestate.positions.doppelganger_mark_positions.love_2
+    const selectedOnePosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
+    const selectedTwoPosition = gamestate.positions.card_positions[selected_mark_positions[1]].mark
 
-    gamestate.doppelganger_mark_positions.love_1 = selectedOnePosition
-    gamestate.doppelganger_mark_positions.love_2 = selectedTwoPosition
-    gamestate.card_positions[selected_mark_positions[0]].mark = loveOnePosition
-    gamestate.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
+    gamestate.positions.doppelganger_mark_positions.love_1 = selectedOnePosition
+    gamestate.positions.doppelganger_mark_positions.love_2 = selectedTwoPosition
+    gamestate.positions.card_positions[selected_mark_positions[0]].mark = loveOnePosition
+    gamestate.positions.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
   } else {
-    const loveOnePosition = gamestate.mark_positions.love_1
-    const loveTwoPosition = gamestate.mark_positions.love_2
-    const selectedOnePosition = gamestate.card_positions[selected_mark_positions[0]].mark
-    const selectedTwoPosition = gamestate.card_positions[selected_mark_positions[1]].mark
+    const loveOnePosition = gamestate.positions.mark_positions.love_1
+    const loveTwoPosition = gamestate.positions.mark_positions.love_2
+    const selectedOnePosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
+    const selectedTwoPosition = gamestate.positions.card_positions[selected_mark_positions[1]].mark
 
-    gamestate.mark_positions.love_1 = selectedOnePosition
-    gamestate.mark_positions.love_2 = selectedTwoPosition
-    gamestate.card_positions[selected_mark_positions[0]].mark = loveOnePosition
-    gamestate.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
+    gamestate.positions.mark_positions.love_1 = selectedOnePosition
+    gamestate.positions.mark_positions.love_2 = selectedTwoPosition
+    gamestate.positions.card_positions[selected_mark_positions[0]].mark = loveOnePosition
+    gamestate.positions.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
   }
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
@@ -49,7 +49,7 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

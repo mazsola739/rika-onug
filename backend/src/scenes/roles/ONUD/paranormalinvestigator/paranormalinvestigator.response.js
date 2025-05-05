@@ -8,7 +8,7 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
     return gamestate
   }
 
-  const selectedCards = getCardIdsByPositions(gamestate.card_positions, selected_card_positions)
+  const selectedCards = getCardIdsByPositions(gamestate.positions.card_positions, selected_card_positions)
   const playerOneCardId = selectedCards[0][selected_card_positions[0]]
   const playerTwoCardId = selected_card_positions[1] ? selectedCards[1][selected_card_positions[1]] : null
 
@@ -17,8 +17,8 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
   if (GOOD_GUY.includes(playerOneCardId)) {
     if (playerTwoCardId && !GOOD_GUY.includes(playerTwoCardId)) {
       showCards = selectedCards
-      gamestate.players[token].card.player_role = gamestate.card_positions[selected_card_positions[1]].card.role
-      gamestate.players[token].card.player_team = gamestate.card_positions[selected_card_positions[1]].card.team
+      gamestate.players[token].card.player_role = gamestate.positions.card_positions[selected_card_positions[1]].card.role
+      gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[1]].card.team
     } else {
       showCards = selectedCards
       if (gamestate.players[token].card.player_original_id === playerOneCardId || (playerTwoCardId && gamestate.players[token].card.player_original_id === playerTwoCardId)) {
@@ -28,8 +28,8 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
   } else {
     if (!GOOD_GUY.includes(playerOneCardId)) {
       showCards = [selectedCards[0]]
-      gamestate.players[token].card.player_role = gamestate.card_positions[selected_card_positions[0]].card.role
-      gamestate.players[token].card.player_team = gamestate.card_positions[selected_card_positions[0]].card.team
+      gamestate.players[token].card.player_role = gamestate.positions.card_positions[selected_card_positions[0]].card.role
+      gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[0]].card.team
     }
   }
 
@@ -47,7 +47,7 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

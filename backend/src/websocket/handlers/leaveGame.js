@@ -6,7 +6,6 @@ import { validateRoom } from '../../validators'
 
 //TODO fix if leave from vote stages
 export const leaveGame = async (ws, message) => {
-
   const { room_id } = message
   logTrace(`leave-table requested in ${room_id}`)
   try {
@@ -20,8 +19,8 @@ export const leaveGame = async (ws, message) => {
     }
     //TODO reset other stuffs? different way to reset?
 
-    delete newGamestate.card_positions
-    delete newGamestate.mark_positions
+    delete newGamestate.positions.card_positions
+    delete newGamestate.positions.mark_positions
 
     const playerTokens = Object.keys(newGamestate.players)
 

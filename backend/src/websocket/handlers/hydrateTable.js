@@ -15,7 +15,7 @@ export const hydrateTable = async (ws, message) => {
     const newGamestate = { ...gamestate, stage: STAGES.TABLE }
     await repo[repositoryType].upsertRoomState(newGamestate)
 
-    const playersPublicInformations = getPublicPlayersInformation(newGamestate.players) //TODO save into gamestate?
+    const playersPublicInformations = getPublicPlayersInformation(newGamestate.players) //TODO save into gamestate as publicinformation?
 
     return sendMessage(ws, {
       type: HYDRATE_TABLE,

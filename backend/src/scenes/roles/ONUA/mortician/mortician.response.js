@@ -9,7 +9,7 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
 
   const cardPositions = selected_card_positions.slice(0, gamestate.players[token].player_history[title].selectable_card_limit.player)
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
-  const viewCards = getCardIdsByPositions(gamestate.card_positions, cardPositions)
+  const viewCards = getCardIdsByPositions(gamestate.positions.card_positions, cardPositions)
 
   const shouldResetPlayerCardId = () => {
     if (viewCards.some(card => gamestate.players[token].card.player_original_id === card.id)) {
@@ -24,8 +24,8 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
   if (shouldResetPlayerCardId()) {
     gamestate.players[token].card.player_card_id = 87
   } else {
-    gamestate.players[token].card.player_card_id = gamestate.card_positions[currentPlayerNumber].card.id
-    gamestate.players[token].card.player_team = gamestate.card_positions[currentPlayerNumber].card.team
+    gamestate.players[token].card.player_card_id = gamestate.positions.card_positions[currentPlayerNumber].card.id
+    gamestate.players[token].card.player_team = gamestate.positions.card_positions[currentPlayerNumber].card.team
   }
 
   gamestate.players[token].card_or_mark_action = true
@@ -40,7 +40,7 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
     showCards: viewCards
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

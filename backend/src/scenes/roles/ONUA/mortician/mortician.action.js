@@ -1,8 +1,8 @@
 import { generateRoleAction, getPlayerNeighborsByToken, getPlayerNumberWithMatchingToken, getSelectablePlayersWithNoShield } from '../../../sceneUtils'
 
 export const morticianAction = (gamestate, token, title, prefix) => {
-  const randomMorticianInstruction = gamestate[prefix].instruction
-  const morticianKey = gamestate[prefix].key
+  const randomMorticianInstruction = gamestate.roles[prefix].instruction
+  const morticianKey = gamestate.roles[prefix].key
 
   if (morticianKey === 'identifier_yourself_text') {
     if (!gamestate.players[token].shield) {

@@ -30,7 +30,7 @@ export const empathResponse = (gamestate, token, selected_card_positions, title)
     private_message: ['action_voted', formatPlayerIdentifier(selected_card_positions)[0]]
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

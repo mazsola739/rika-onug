@@ -17,7 +17,8 @@ export const createAndSendSceneMessage = (gamestate, token, title, action, narra
       player_name: player.name,
       player_number: player.player_number
     },
-    players: Object.values(gamestate.players).map(player => ({ //TODO save into gamestate?
+    players: Object.values(gamestate.players).map(player => ({
+      //TODO save into gamestate as publicinformation?
       player_number: player.player_number,
       player_name: player.name,
       flag: player.flag

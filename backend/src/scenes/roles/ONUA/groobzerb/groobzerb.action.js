@@ -7,7 +7,7 @@ export const groobzerbAction = (gamestate, token, title) => {
   if (gamestate.players[token].card.player_role_id === 47) {
     if (zerbPlayers.length >= 1) {
       gamestate.players[token].card.player_team = 'groob'
-      groobPlayers.forEach(groob => (gamestate.card_positions[groob].team = 'groob'))
+      groobPlayers.forEach(groob => (gamestate.positions.card_positions[groob].team = 'groob'))
 
       gamestate.players[token].player_history[title] = {
         ...gamestate.players[token].player_history[title],
@@ -32,7 +32,7 @@ export const groobzerbAction = (gamestate, token, title) => {
   } else if (gamestate.players[token].card.player_role_id === 54) {
     if (groobPlayers.length >= 1) {
       gamestate.players[token].card.player_team = 'zerb'
-      zerbPlayers.forEach(zerb => (gamestate.card_positions[zerb].team = 'zerb'))
+      zerbPlayers.forEach(zerb => (gamestate.positions.card_positions[zerb].team = 'zerb'))
 
       gamestate.players[token].player_history[title] = {
         ...gamestate.players[token].player_history[title],

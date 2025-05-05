@@ -20,13 +20,13 @@ export const oracleanswerAction = (gamestate, token, title) => {
         privateMessage = ['action_oracle_open_you_eyes']
       } else {
         gamestate.players[token].card.player_team = 'oracle'
-        gamestate.card_positions[currentPlayerNumber].card.team = 'oracle'
+        gamestate.positions.card_positions[currentPlayerNumber].card.team = 'oracle'
         privateMessage = ['action_oracle_team']
       }
       break
     case 'oracle_viewplayer_text':
       gamestate.players[token].card_or_mark_action = true
-      showCards = getCardIdsByPositions(gamestate.card_positions, [`player_${oracleAnswer}`])
+      showCards = getCardIdsByPositions(gamestate.positions.card_positions, [`player_${oracleAnswer}`])
       privateMessage = ['action_selected_card', formatPlayerIdentifier([`player_${oracleAnswer}`])[0]]
       break
     case 'oracle_alienteam_text':
@@ -35,8 +35,8 @@ export const oracleanswerAction = (gamestate, token, title) => {
         privateMessage = ['action_alien_team']
         if (oracleAftermath.includes('alienteam_yes2')) {
           gamestate.players[token].card.player_role = 'ALIEN'
-          gamestate.card_positions[currentPlayerNumber].card.role = 'ALIEN'
-          gamestate.card_positions[currentPlayerNumber].card.team = 'alien'
+          gamestate.positions.card_positions[currentPlayerNumber].card.role = 'ALIEN'
+          gamestate.positions.card_positions[currentPlayerNumber].card.team = 'alien'
           privateMessage = ['action_alien_role']
         }
       } else {
@@ -46,7 +46,7 @@ export const oracleanswerAction = (gamestate, token, title) => {
     case 'oracle_werewolfteam_text':
       if (oracleAftermath.includes('werewolfteam')) {
         gamestate.players[token].card.player_team = 'werewolf'
-        gamestate.card_positions[currentPlayerNumber].card.team = 'werewolf'
+        gamestate.positions.card_positions[currentPlayerNumber].card.team = 'werewolf'
         privateMessage = ['action_werewolf_team']
       } else {
         privateMessage = ['action_stay_oracle']
@@ -55,7 +55,7 @@ export const oracleanswerAction = (gamestate, token, title) => {
     case 'oracle_vampireteam_text':
       if (oracleAftermath.includes('vampireteam')) {
         gamestate.players[token].card.player_team = 'vampire'
-        gamestate.card_positions[currentPlayerNumber].card.team = 'vampire'
+        gamestate.positions.card_positions[currentPlayerNumber].card.team = 'vampire'
         privateMessage = ['action_vampire_team']
       } else {
         privateMessage = ['action_stay_oracle']

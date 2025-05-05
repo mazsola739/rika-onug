@@ -1,8 +1,17 @@
-import { getNarrationByTitle, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, createAndSendSceneMessage, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../../sceneUtils'
+import {
+  getNarrationByTitle,
+  getAllPlayerTokens,
+  getPlayerNumbersWithMatchingTokens,
+  getSelectablePlayersWithNoShield,
+  generateRoleAction,
+  createAndSendSceneMessage,
+  getPlayerNumberWithMatchingToken,
+  formatPlayerIdentifier
+} from '../../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../../validators'
 
 export const gremlinResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   if (selected_answer && selected_answer.length > 0) {
     if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
@@ -11,7 +20,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     const allPlayerTokens = getAllPlayerTokens(gamestate.players)
     const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shielded_cards)
+    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
 
     //TODO const isTwoSelectable = selectablePlayerNumbers.length === 2,
     //TODO if no marks only cards
@@ -63,11 +72,11 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
     }
 
     const [position1, position2] = selected_card_positions
-    const playerOneCard = { ...gamestate.card_positions[position1].card }
-    const playerTwoCard = { ...gamestate.card_positions[position2].card }
+    const playerOneCard = { ...gamestate.positions.card_positions[position1].card }
+    const playerTwoCard = { ...gamestate.positions.card_positions[position2].card }
 
-    gamestate.card_positions[position1].card = playerTwoCard
-    gamestate.card_positions[position2].card = playerOneCard
+    gamestate.positions.card_positions[position1].card = playerTwoCard
+    gamestate.positions.card_positions[position2].card = playerOneCard
 
     gamestate.players[token].card_or_mark_action = true
 
@@ -99,11 +108,11 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
     }
 
     const [position1, position2] = selected_mark_positions
-    const playerOneMark = gamestate.card_positions[position1].mark
-    const playerTwoMark = gamestate.card_positions[position2].mark
+    const playerOneMark = gamestate.positions.card_positions[position1].mark
+    const playerTwoMark = gamestate.positions.card_positions[position2].mark
 
-    gamestate.card_positions[position1].mark = playerTwoMark
-    gamestate.card_positions[position2].mark = playerOneMark
+    gamestate.positions.card_positions[position1].mark = playerTwoMark
+    gamestate.positions.card_positions[position2].mark = playerOneMark
 
     gamestate.players[token].card_or_mark_action = true
 

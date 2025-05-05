@@ -4,7 +4,7 @@ export const getWinnersAndLosers = async gamestate => {
   const countedVotes = countVotes(gamestate.players)
   let voteResult = buildVoteResult(countedVotes, gamestate.players)
   const { mostVoted, secondMostVoted } = getTopVotes(countedVotes)
-  const { activeCards } = getActiveAndInactiveCards(gamestate.card_positions)
+  const { activeCards } = getActiveAndInactiveCards(gamestate.positions.card_positions)
 
   const { isSameTeam, teams } = getTeamStatus(activeCards)
   const circleVote = isCircleVote(countedVotes)

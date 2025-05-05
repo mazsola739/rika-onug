@@ -18,10 +18,7 @@ export const blob = (gamestate, title) => {
   const randomKickoff = getRandomItemFromArray(availableBlobOptions)
   const narration = [randomKickoff, randomKickoff.includes('1p') ? 'blob_is_end_text' : 'blob_are_end_text']
 
-  gamestate.blob = {
-    instruction: ''
-  }
-  gamestate.blob.instruction = randomKickoff
+  gamestate.roles.blob.instruction = randomKickoff
 
   tokens.forEach(token => {
     let action = {}
@@ -37,7 +34,7 @@ export const blob = (gamestate, title) => {
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
-  gamestate.narration.push({ [title]: narration })
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

@@ -22,10 +22,7 @@ export const empath = (gamestate, title, prefix) => {
     activePlayerNumbers = empathVotersPlayerNumbers(totalPlayers, evenOdd)
   }
 
-  gamestate[prefix] = {
-    instruction: ''
-  }
-  gamestate[prefix].instruction = randomEmpathInstruction
+  gamestate.roles[prefix].instruction = randomEmpathInstruction
 
   tokens.forEach(token => {
     let action = {}
@@ -42,7 +39,7 @@ export const empath = (gamestate, title, prefix) => {
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
-  gamestate.narration.push({ [title]: narration })
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

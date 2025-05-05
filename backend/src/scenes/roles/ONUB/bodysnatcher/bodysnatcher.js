@@ -10,13 +10,8 @@ export const bodysnatcher = (gamestate, title, prefix) => {
   const bodysnatcherKey = getRandomItemFromArray(bodysnatcherKeys)
   const narration = [`${prefix}_kickoff_text`, randomBodysnatcherInstruction, randomBodysnatcherInstruction === 'bodysnatcher_steal_text' ? bodysnatcherKey : '', 'bodysnatcher_end_text']
 
-  gamestate[prefix] = {
-    instruction: '',
-    key: ''
-  }
-
-  gamestate[prefix].instruction = randomBodysnatcherInstruction
-  gamestate[prefix].key = bodysnatcherKey
+  gamestate.roles[prefix].instruction = randomBodysnatcherInstruction
+  gamestate.roles[prefix].key = bodysnatcherKey
 
   tokens.forEach(token => {
     let action = {}
@@ -32,7 +27,7 @@ export const bodysnatcher = (gamestate, title, prefix) => {
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
-  gamestate.narration.push({ [title]: narration })
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

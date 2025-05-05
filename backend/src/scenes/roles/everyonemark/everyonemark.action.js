@@ -2,9 +2,9 @@ import { generateRoleAction, getMarksByPositions, getPlayerNumberWithMatchingTok
 
 export const everyonemarkAction = (gamestate, token, title) => {
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
-  const viewMarks = getMarksByPositions(gamestate.card_positions, [currentPlayerNumber])
+  const viewMarks = getMarksByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
 
-  switch (gamestate.card_positions[currentPlayerNumber].mark) {
+  switch (gamestate.positions.card_positions[currentPlayerNumber].mark) {
     case 'mark_of_clarity':
       gamestate.players[token].card.player_mark = 'mark_of_clarity'
       break

@@ -7,11 +7,11 @@ export const troublemakerResponse = (gamestate, token, selected_card_positions, 
   }
 
   const [position1, position2] = selected_card_positions.slice(0, 2)
-  const playerOneCard = { ...gamestate.card_positions[position1].card }
-  const playerTwoCard = { ...gamestate.card_positions[position2].card }
+  const playerOneCard = { ...gamestate.positions.card_positions[position1].card }
+  const playerTwoCard = { ...gamestate.positions.card_positions[position2].card }
 
-  gamestate.card_positions[position1].card = playerTwoCard
-  gamestate.card_positions[position2].card = playerOneCard
+  gamestate.positions.card_positions[position1].card = playerTwoCard
+  gamestate.positions.card_positions[position2].card = playerOneCard
 
   gamestate.players[token].card_or_mark_action = true
 
@@ -28,7 +28,7 @@ export const troublemakerResponse = (gamestate, token, selected_card_positions, 
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

@@ -39,7 +39,7 @@ export const startVote = async (ws, message) => {
         action: {
           selectable_cards: otherPlayers,
           selectable_card_limit: { player: 1, center: 0 },
-          show_cards: newGamestate.flipped_cards
+          show_cards: newGamestate.positions.flipped_cards
         },
         player: {
           player_name: player.name,
@@ -49,7 +49,7 @@ export const startVote = async (ws, message) => {
           player_team: player.card.player_team
         },
         players: tokens.map(t => ({
-          //TODO save into gamestate?
+          //TODO save into gamestate as publicinformation?
           player_number: players[t].player_number,
           player_name: players[t].name,
           flag: players[t].flag

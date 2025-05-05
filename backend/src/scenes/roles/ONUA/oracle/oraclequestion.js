@@ -26,14 +26,7 @@ export const oracleQuestion = (gamestate, title, selected_cards) => {
 
   const narration = ['oracle_kickoff_text', oracleQuestion]
 
-  gamestate.oracle = {
-    question: '',
-    number: theNumberIThinkingOf,
-    answer: '',
-    aftermath: '',
-    openeyes: false,
-    target: false
-  }
+  gamestate.oracle.number = theNumberIThinkingOf
   gamestate.oracle.question = oracleQuestion
 
   switch (oracleQuestion) {
@@ -65,7 +58,7 @@ export const oracleQuestion = (gamestate, title, selected_cards) => {
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
-  gamestate.narration.push({ [title]: narration })
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

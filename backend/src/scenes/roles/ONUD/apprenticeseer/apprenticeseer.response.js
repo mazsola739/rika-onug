@@ -6,8 +6,8 @@ export const apprenticeseerResponse = (gamestate, token, selected_card_positions
     return gamestate
   }
 
-  const viewCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
-  const selectedPositionCard = gamestate.card_positions[selected_card_positions[0]].card
+  const viewCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
+  const selectedPositionCard = gamestate.positions.card_positions[selected_card_positions[0]].card
 
   if (gamestate.players[token].card.player_original_id === selectedPositionCard.id) {
     gamestate.players[token].card.player_card_id = 87
@@ -27,7 +27,7 @@ export const apprenticeseerResponse = (gamestate, token, selected_card_positions
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

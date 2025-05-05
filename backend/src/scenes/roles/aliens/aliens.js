@@ -36,12 +36,8 @@ export const aliens = (gamestate, title, selected_cards) => {
     narration.push(randomAlienInstruction)
   }
 
-  gamestate.aliens = {
-    instruction: '',
-    key: []
-  }
-  gamestate.aliens.instruction = randomAlienInstruction
-  gamestate.aliens.key = alienKey
+  gamestate.roles.aliens.instruction = randomAlienInstruction
+  gamestate.roles.aliens.key = alienKey
 
   tokens.forEach(token => {
     let action = {}
@@ -57,7 +53,7 @@ export const aliens = (gamestate, title, selected_cards) => {
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
-  gamestate.narration.push({ [title]: narration })
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

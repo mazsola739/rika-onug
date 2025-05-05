@@ -16,14 +16,14 @@ export const vampiresAction = (gamestate, token, title) => {
   const privateMessage = isSingleVampire ? ['action_no_vampires'] : ['action_vampires', ...messageIdentifiers]
 
   if (isSingleNonVampire) {
-    const vampirePosition = gamestate.mark_positions.vampire
-    const selectedPosition = gamestate.card_positions[nonVampires[0]].mark
+    const vampirePosition = gamestate.positions.mark_positions.vampire
+    const selectedPosition = gamestate.positions.card_positions[nonVampires[0]].mark
 
     const isSwappedAlready = vampirePosition === selectedPosition
 
     if (!isSwappedAlready) {
-      gamestate.mark_positions.vampire = selectedPosition
-      gamestate.card_positions[nonVampires[0]].mark = vampirePosition
+      gamestate.positions.mark_positions.vampire = selectedPosition
+      gamestate.positions.card_positions[nonVampires[0]].mark = vampirePosition
     }
 
     gamestate.players[token].card_or_mark_action = true

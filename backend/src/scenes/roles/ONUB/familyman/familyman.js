@@ -23,10 +23,7 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
     randomAvailableOption.includes('1p') ? 'familyman_is_end_text' : 'familyman_are_end_text'
   ]
 
-  gamestate.familyman = {
-    instruction: ''
-  }
-  gamestate.familyman.instruction = randomAvailableOption
+  gamestate.roles.familyman.instruction = randomAvailableOption
 
   tokens.forEach(token => {
     let action = {}
@@ -42,7 +39,7 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
-  gamestate.narration.push({ [title]: narration })
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

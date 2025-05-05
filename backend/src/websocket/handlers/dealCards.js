@@ -38,9 +38,9 @@ export const dealCards = async (ws, message) => {
     const hasDoppelganger = clonedSelectedCards.includes(1)
 
     if (hasPlayerMark) {
-      newGamestate.mark_positions = markPositions
+      newGamestate.positions.mark_positions = markPositions
       if (hasDoppelganger) {
-        newGamestate.doppelganger_mark_positions = markPositions
+        newGamestate.positions.doppelganger_mark_positions = markPositions
       }
     }
 

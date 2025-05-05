@@ -10,7 +10,6 @@ export const hydrateReady = async (ws, message) => {
 
   const { room_id, token } = message
   try {
-
     const [validity, gamestate, errors] = await validateRoom(room_id)
 
     if (!validity) return sendMessage(ws, { type: HYDRATE_READY, success: false, errors })
@@ -26,7 +25,7 @@ export const hydrateReady = async (ws, message) => {
 
     await repo[repositoryType].upsertRoomState(newGamestate)
 
-    return broadcast(room_id, { type: HYDRATE_READY, players: playersPublicInformations }) //TODO save into gamestate?
+    return broadcast(room_id, { type: HYDRATE_READY, players: playersPublicInformations }) //TODO save into gamestate as publicinformation?
   } catch (error) {
     logError(error)
   }

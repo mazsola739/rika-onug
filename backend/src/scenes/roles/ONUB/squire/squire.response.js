@@ -9,10 +9,10 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
   let action = {}
 
   if (selected_answer === 'yes') {
-    const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolfWithoutShield', gamestate.shielded_cards)
-    const viewCards = getCardIdsByPositions(gamestate.card_positions, werewolves)
+    const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolfWithoutShield', gamestate.positions.shielded_cards)
+    const viewCards = getCardIdsByPositions(gamestate.positions.card_positions, werewolves)
 
-    if (werewolves.some(wolf => gamestate.card_positions[wolf].card.id === gamestate.players[token]?.card?.player_original_id)) {
+    if (werewolves.some(wolf => gamestate.positions.card_positions[wolf].card.id === gamestate.players[token]?.card?.player_original_id)) {
       gamestate.players[token].card.player_card_id = 87
     }
 
@@ -42,7 +42,7 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     })
   }
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

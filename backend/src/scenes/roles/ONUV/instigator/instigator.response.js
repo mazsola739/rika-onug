@@ -7,17 +7,17 @@ export const instigatorResponse = (gamestate, token, selected_mark_positions, ti
   }
 
   if (gamestate.players[token].card.player_original_id === 1) {
-    const traitorPosition = gamestate.doppelganger_mark_positions.traitor
-    const selectedPosition = gamestate.card_positions[selected_mark_positions[0]].mark
+    const traitorPosition = gamestate.positions.doppelganger_mark_positions.traitor
+    const selectedPosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
 
-    gamestate.doppelganger_mark_positions.traitor = selectedPosition
-    gamestate.card_positions[selected_mark_positions[0]].mark = traitorPosition
+    gamestate.positions.doppelganger_mark_positions.traitor = selectedPosition
+    gamestate.positions.card_positions[selected_mark_positions[0]].mark = traitorPosition
   } else {
-    const traitorPosition = gamestate.mark_positions.traitor
-    const selectedPosition = gamestate.card_positions[selected_mark_positions[0]].mark
+    const traitorPosition = gamestate.positions.mark_positions.traitor
+    const selectedPosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
 
-    gamestate.mark_positions.traitor = selectedPosition
-    gamestate.card_positions[selected_mark_positions[0]].mark = traitorPosition
+    gamestate.positions.mark_positions.traitor = selectedPosition
+    gamestate.positions.card_positions[selected_mark_positions[0]].mark = traitorPosition
   }
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
@@ -39,7 +39,7 @@ export const instigatorResponse = (gamestate, token, selected_mark_positions, ti
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

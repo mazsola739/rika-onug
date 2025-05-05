@@ -8,21 +8,21 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
   const currentPlayerCard = {
-    ...gamestate.card_positions[currentPlayerNumber].card
+    ...gamestate.positions.card_positions[currentPlayerNumber].card
   }
   const selectedCard = {
-    ...gamestate.card_positions[selected_card_positions[0]].card
+    ...gamestate.positions.card_positions[selected_card_positions[0]].card
   }
-  gamestate.card_positions[currentPlayerNumber].card = selectedCard
-  gamestate.card_positions[selected_card_positions[0]].card = currentPlayerCard
-  gamestate.card_positions[currentPlayerNumber].card.team = 'alien'
-  gamestate.card_positions[currentPlayerNumber].card.role = 'ALIEN'
+  gamestate.positions.card_positions[currentPlayerNumber].card = selectedCard
+  gamestate.positions.card_positions[selected_card_positions[0]].card = currentPlayerCard
+  gamestate.positions.card_positions[currentPlayerNumber].card.team = 'alien'
+  gamestate.positions.card_positions[currentPlayerNumber].card.role = 'ALIEN'
 
-  gamestate.players[token].card.player_card_id = gamestate.card_positions[currentPlayerNumber].card.id
-  gamestate.players[token].card.player_team = gamestate.card_positions[currentPlayerNumber].card.team
-  gamestate.players[token].card.player_role = gamestate.card_positions[currentPlayerNumber].card.role
+  gamestate.players[token].card.player_card_id = gamestate.positions.card_positions[currentPlayerNumber].card.id
+  gamestate.players[token].card.player_team = gamestate.positions.card_positions[currentPlayerNumber].card.team
+  gamestate.players[token].card.player_role = gamestate.positions.card_positions[currentPlayerNumber].card.role
 
-  const showCards = getCardIdsByPositions(gamestate.card_positions, [currentPlayerNumber])
+  const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
 
   gamestate.players[token].card_or_mark_action = true
 
@@ -41,7 +41,7 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

@@ -32,7 +32,7 @@ export const updateRoom = async message => {
       errors: ['Cannot have more than 12 players.']
     })
 
-  const playersInGame = getPlayerNames(newGamestate.players) //TODO save into gamestate?
+  const playersInGame = getPlayerNames(newGamestate.players) //TODO save into gamestate as publicinformation?
 
   await repo[repositoryType].upsertRoomState(newGamestate)
 

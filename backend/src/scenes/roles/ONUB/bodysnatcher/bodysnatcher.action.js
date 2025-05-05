@@ -13,8 +13,8 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
     })
   }
 
-  const randomBodysnatcherInstruction = gamestate[prefix].instruction
-  const bodysnatcherKey = gamestate[prefix].key
+  const randomBodysnatcherInstruction = gamestate.roles[prefix].instruction
+  const bodysnatcherKey = gamestate.roles[prefix].key
 
   let selectablePlayers
   let selectableCards
@@ -41,7 +41,7 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
         break
     }
 
-    const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(selectablePlayers, 'nonAlienWithoutShield', gamestate.shielded_cards)
+    const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(selectablePlayers, 'nonAlienWithoutShield', gamestate.positions.shielded_cards)
 
     selectableCards = {
       selectable_cards: selectablePlayerNumbers,

@@ -9,11 +9,7 @@ export const exposer = (gamestate, title, prefix) => {
   const randomExposerInstruction = getRandomItemFromArray(randomExposerInstructions)
   const narration = [`${prefix}_kickoff_text`, randomExposerInstruction]
 
-  gamestate[prefix] = {
-    instruction: ''
-  }
-
-  gamestate[prefix].instruction = randomExposerInstruction
+  gamestate.roles[prefix].instruction = randomExposerInstruction
 
   tokens.forEach(token => {
     let action = {}
@@ -29,7 +25,7 @@ export const exposer = (gamestate, title, prefix) => {
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
-  gamestate.narration.push({ [title]: narration })
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

@@ -7,14 +7,14 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
   }
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
-  const currentPlayerMark = gamestate.card_positions[currentPlayerNumber].mark
-  const selectedMark = gamestate.card_positions[selected_mark_positions[0]].mark
-  gamestate.card_positions[currentPlayerNumber].mark = selectedMark
-  gamestate.card_positions[selected_mark_positions[0]].mark = currentPlayerMark
+  const currentPlayerMark = gamestate.positions.card_positions[currentPlayerNumber].mark
+  const selectedMark = gamestate.positions.card_positions[selected_mark_positions[0]].mark
+  gamestate.positions.card_positions[currentPlayerNumber].mark = selectedMark
+  gamestate.positions.card_positions[selected_mark_positions[0]].mark = currentPlayerMark
 
-  gamestate.players[token].card.player_mark = gamestate.card_positions[currentPlayerNumber].mark
+  gamestate.players[token].card.player_mark = gamestate.positions.card_positions[currentPlayerNumber].mark
 
-  const viewMarks = getMarksByPositions(gamestate.card_positions, [currentPlayerNumber])
+  const viewMarks = getMarksByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
 
   gamestate.players[token].card_or_mark_action = true
 
@@ -33,7 +33,7 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

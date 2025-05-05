@@ -32,7 +32,7 @@ export const oraclequestionResponse = (gamestate, token, selected_answer, title)
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

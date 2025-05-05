@@ -7,7 +7,7 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
     return gamestate
   }
 
-  const selectedCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0], selected_card_positions[1], selected_card_positions[2]])
+  const selectedCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0], selected_card_positions[1], selected_card_positions[2]])
   const playerOneCardId = selectedCards[0][selected_card_positions[0]]
   const playerTwoCardId = selectedCards[1][selected_card_positions[1]]
   const playerThreeCardId = selectedCards[2][selected_card_positions[2]]
@@ -17,16 +17,16 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
   if (GOOD_GUY.includes(playerOneCardId)) {
     if (!GOOD_GUY.includes(playerTwoCardId)) {
       showCards = [selectedCards[0], selectedCards[1]]
-      gamestate.players[token].card.player_role = gamestate.card_positions[selected_card_positions[1]].card.role
-      gamestate.players[token].card.player_team = gamestate.card_positions[selected_card_positions[1]].card.team
+      gamestate.players[token].card.player_role = gamestate.positions.card_positions[selected_card_positions[1]].card.role
+      gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[1]].card.team
     } else if (GOOD_GUY.includes(playerTwoCardId)) {
       if (!GOOD_GUY.includes(playerThreeCardId)) {
         showCards = selectedCards
-        gamestate.players[token].card.player_role = gamestate.card_positions[selected_card_positions[2]].card.role
-        gamestate.players[token].card.player_team = gamestate.card_positions[selected_card_positions[2]].card.team
+        gamestate.players[token].card.player_role = gamestate.positions.card_positions[selected_card_positions[2]].card.role
+        gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[2]].card.team
       } else {
         showCards = selectedCards
-        gamestate.players[token].card.player_team = gamestate.card_positions[selected_card_positions[2]].card.team
+        gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[2]].card.team
         if (
           gamestate.players[token].card.player_original_id === playerOneCardId ||
           gamestate.players[token].card.player_original_id === playerTwoCardId ||
@@ -38,8 +38,8 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
     }
   } else if (!GOOD_GUY.includes(playerOneCardId)) {
     showCards = [selectedCards[0]]
-    gamestate.players[token].card.player_role = gamestate.card_positions[selected_card_positions[0]].card.role
-    gamestate.players[token].card.player_team = gamestate.card_positions[selected_card_positions[0]].card.team
+    gamestate.players[token].card.player_role = gamestate.positions.card_positions[selected_card_positions[0]].card.role
+    gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[0]].card.team
   }
 
   gamestate.players[token].card_or_mark_action = true
@@ -60,7 +60,7 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
     showCards
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

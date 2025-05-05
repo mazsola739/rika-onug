@@ -14,15 +14,14 @@ export const stopGame = async message => {
 
   // TODO validate if player is admin and in the room
 
-  const stopScene = (gamestate) => {
+  const stopScene = gamestate => {
     gamestate.stage = STAGES.ROOM
     gamestate.game_started = false
     gamestate.game_stopped = true
     gamestate.game_finished = false
-    gamestate.script_locked = true
-    gamestate.chapter = []
+    gamestate.scenes.chapter = []
 
-    delete gamestate.narration
+    delete gamestate.scenes.narration
     delete gamestate.game_start_time
 
     gamestate.players = resetPlayers(gamestate.players)

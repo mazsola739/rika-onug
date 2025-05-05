@@ -19,9 +19,9 @@ export const result = async (ws, message) => {
 
     let newGamestate = { ...gamestate }
 
-    const card_positions = newGamestate.card_positions
+    const card_positions = newGamestate.positions.card_positions
 
-    const center_cards = Object.entries(newGamestate.card_positions)
+    const center_cards = Object.entries(newGamestate.positions.card_positions)
       .filter(([position, { card }]) => position.startsWith('center') && card.id > 0)
       .map(([position, { card }]) => ({
         card_position: position,
@@ -49,16 +49,16 @@ export const result = async (ws, message) => {
     await repo[repositoryType].upsertRoomState(newGamestate)
 
     return sendMessage(ws, {
-        type: RESULT,
-        success: true,
-        token,
-        vote_result: voteResult,
-        winner_teams: winnerTeams,
-        loser_teams: loserTeam,
-        center_cards,
-        player: getPlayerInfo(newGamestate.players[token]),
-        players: Object.values(newGamestate.players).map(player => getPlayerInfo(player))
-      })
+      type: RESULT,
+      success: true,
+      token,
+      vote_result: voteResult,
+      winner_teams: winnerTeams,
+      loser_teams: loserTeam,
+      center_cards,
+      player: getPlayerInfo(newGamestate.players[token]),
+      players: Object.values(newGamestate.players).map(player => getPlayerInfo(player))
+    })
   } catch (error) {
     logError(`Error processing result in room: ${room_id}. Error: ${error.message}`)
     logError(JSON.stringify(error.stack))

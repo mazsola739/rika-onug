@@ -2,7 +2,7 @@ import { CENTER_CARD_POSITIONS } from '../../../../constants'
 import { generateRoleAction } from '../../../sceneUtils'
 
 export const exposerAction = (gamestate, token, title, prefix) => {
-  const randomExposerInstruction = gamestate[prefix].instruction
+  const randomExposerInstruction = gamestate.roles[prefix].instruction
   const limit = +randomExposerInstruction.replace('exposer_flip', '').replace('_text', '')
 
   gamestate.players[token].player_history[title] = {

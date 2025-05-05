@@ -1,7 +1,15 @@
-
 import { repo, repositoryType } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
-import { getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, getPlayerNumberWithMatchingToken, getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import {
+  getPlayerNumbersByGivenConditions,
+  getPlayerTokensByPlayerNumber,
+  getPlayerNumberWithMatchingToken,
+  getCardIdsByPositions,
+  generateRoleAction,
+  formatPlayerIdentifier,
+  getNarrationByTitle,
+  createAndSendSceneMessage
+} from '../../sceneUtils'
 
 export const aliensVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
@@ -14,7 +22,7 @@ export const aliensVotehydrate = async message => {
     const alienCount = aliens.length
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
 
-    const alien_votes = { ...gamestate.alien_votes }
+    const alien_votes = { ...gamestate.roles.aliens.alien_votes }
 
     Object.keys(alien_votes).forEach(key => {
       const voters = alien_votes[key]
@@ -34,13 +42,13 @@ export const aliensVotehydrate = async message => {
     })
 
     gamestate.players[token].alien_vote = selected_vote
-    gamestate.alien_votes = alien_votes
+    gamestate.roles.aliens.alien_votes = alien_votes
 
     const unanimousVote = Object.entries(alien_votes).find(([, voters]) => voters.length === alienCount)
 
     if (unanimousVote) {
       const unanimousPlayerNumber = unanimousVote[0]
-      const randomAlienInstruction = gamestate.aliens.instruction
+      const randomAlienInstruction = gamestate.roles.aliens.instruction
 
       let showCards = []
       let viewCards = []
@@ -51,24 +59,24 @@ export const aliensVotehydrate = async message => {
       switch (randomAlienInstruction) {
         case 'aliens_allview_text':
           gamestate.players[token].card_or_mark_action = true
-          if (gamestate.players[token].card.player_original_id === gamestate.card_positions[unanimousPlayerNumber].card.id) {
+          if (gamestate.players[token].card.player_original_id === gamestate.positions.card_positions[unanimousPlayerNumber].card.id) {
             gamestate.players[token].card.player_card_id = 87
           }
 
-          showCards = getCardIdsByPositions(gamestate.card_positions, [unanimousPlayerNumber])
+          showCards = getCardIdsByPositions(gamestate.positions.card_positions, [unanimousPlayerNumber])
           viewCards = [unanimousPlayerNumber]
           message = 'action_saw_card'
 
           break
         case 'aliens_newalien_text':
-          gamestate.card_positions[unanimousPlayerNumber].card.role = 'ALIEN'
-          gamestate.card_positions[unanimousPlayerNumber].card.team = 'alien'
+          gamestate.positions.card_positions[unanimousPlayerNumber].card.role = 'ALIEN'
+          gamestate.positions.card_positions[unanimousPlayerNumber].card.team = 'alien'
           new_alien = [unanimousPlayerNumber]
           message = 'action_turned_newalien'
 
           break
         case 'aliens_alienhelper_text':
-          gamestate.card_positions[unanimousPlayerNumber].card.team = 'alien'
+          gamestate.positions.card_positions[unanimousPlayerNumber].card.team = 'alien'
           new_alien_helper = [unanimousPlayerNumber]
           message = 'action_turned_alienhelper'
 
@@ -91,7 +99,7 @@ export const aliensVotehydrate = async message => {
           scene_end: true
         })
 
-        const narration = getNarrationByTitle(title, gamestate.narration)
+        const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
         createAndSendSceneMessage(gamestate, alienToken, title, action, narration)
       })

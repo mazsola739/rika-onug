@@ -2,7 +2,7 @@ import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../../
 import { alphawolfResponse } from './alphawolf.response'
 
 export const alphawolfAction = (gamestate, token, title) => {
-  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'nonWerewolfWithoutShield', gamestate.shielded_cards)
+  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'nonWerewolfWithoutShield', gamestate.positions.shielded_cards)
 
   const isSingleSelectable = selectablePlayerNumbers.length === 1
 

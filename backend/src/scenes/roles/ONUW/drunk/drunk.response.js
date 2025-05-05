@@ -8,20 +8,21 @@ export const drunkResponse = (gamestate, token, selected_card_positions, title) 
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
   const currentPlayerCard = {
-    ...gamestate.card_positions[currentPlayerNumber].card
+    ...gamestate.positions.card_positions[currentPlayerNumber].card
   }
   const selectedCard = {
-    ...gamestate.card_positions[selected_card_positions[0]].card
+    ...gamestate.positions.card_positions[selected_card_positions[0]].card
   }
 
+  //TODO move it to the constants
   const specialVillagerIds = [30, 1, 29, 28, 64]
   if (specialVillagerIds.includes(selectedCard.id)) {
     selectedCard.role = 'VILLAGER'
     selectedCard.team = 'village'
   }
 
-  gamestate.card_positions[currentPlayerNumber].card = selectedCard
-  gamestate.card_positions[selected_card_positions[0]].card = currentPlayerCard
+  gamestate.positions.card_positions[currentPlayerNumber].card = selectedCard
+  gamestate.positions.card_positions[selected_card_positions[0]].card = currentPlayerCard
 
   gamestate.players[token].card.player_card_id = 87
   gamestate.players[token].card_or_mark_action = true
@@ -39,7 +40,7 @@ export const drunkResponse = (gamestate, token, selected_card_positions, title) 
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

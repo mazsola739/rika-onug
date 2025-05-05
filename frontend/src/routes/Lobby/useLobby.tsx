@@ -127,6 +127,7 @@ export const useLobby = () => {
       sendJsonMessage({
         type: PRESELECT,
         token,
+        nickname,
         room_id: selectedRoom,
         selected_cards: preset.cards,
       })

@@ -16,8 +16,8 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
 
   switch (randomAlienInstruction) {
     case 'aliens_view_text':
-      showCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
-      if (gamestate.players[token].card.player_original_id === gamestate.card_positions[selected_card_positions[0]].card.id) {
+      showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
+      if (gamestate.players[token].card.player_original_id === gamestate.positions.card_positions[selected_card_positions[0]].card.id) {
         gamestate.players[token].card.player_card_id = 87
       }
 
@@ -26,23 +26,23 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
       break
     case 'aliens_allview_text':
       gamestate.players[token].card_or_mark_action = true
-      if (gamestate.players[token].card.player_original_id === gamestate.card_positions[selected_card_positions[0]].card.id) {
+      if (gamestate.players[token].card.player_original_id === gamestate.positions.card_positions[selected_card_positions[0]].card.id) {
         gamestate.players[token].card.player_card_id = 87
       }
-      showCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
+      showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
       viewCards = [selected_card_positions[0]]
       private_message = ['action_voted_together', 'action_saw_card', formatPlayerIdentifier([selected_card_positions[0]])[0]]
 
       break
     case 'aliens_newalien_text':
-      gamestate.card_positions[selected_card_positions[0]].card.role = 'ALIEN'
-      gamestate.card_positions[selected_card_positions[0]].card.team = 'alien'
+      gamestate.positions.card_positions[selected_card_positions[0]].card.role = 'ALIEN'
+      gamestate.positions.card_positions[selected_card_positions[0]].card.team = 'alien'
       new_alien = [selected_card_positions[0]]
       private_message = ['action_voted_together', 'action_turned_newalien', formatPlayerIdentifier([selected_card_positions[0]])[0]]
 
       break
     case 'aliens_alienhelper_text':
-      gamestate.card_positions[selected_card_positions[0]].card.team = 'alien'
+      gamestate.positions.card_positions[selected_card_positions[0]].card.team = 'alien'
       new_alien_helper = [selected_card_positions[0]]
       private_message = ['action_voted_together', 'action_turned_alienhelper', formatPlayerIdentifier([selected_card_positions[0]])[0]]
 
@@ -64,7 +64,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

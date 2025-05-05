@@ -1,4 +1,14 @@
-import { getNarrationByTitle, getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, formatPlayerIdentifier, createAndSendSceneMessage, getPlayerNumberWithMatchingToken } from '../../../sceneUtils'
+import {
+  getNarrationByTitle,
+  getCardIdsByPositions,
+  getAllPlayerTokens,
+  getPlayerNumbersWithMatchingTokens,
+  getSelectablePlayersWithNoShield,
+  generateRoleAction,
+  formatPlayerIdentifier,
+  createAndSendSceneMessage,
+  getPlayerNumberWithMatchingToken
+} from '../../../sceneUtils'
 import { validateCardSelection } from '../../../validators'
 
 export const witchResponse = (gamestate, token, selected_card_positions, title) => {
@@ -6,11 +16,11 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     return gamestate
   }
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   if (selected_card_positions[0].includes('center_')) {
-    const showCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
-    const selectedCenterCardPosition = gamestate.card_positions[selected_card_positions[0]].card
+    const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
+    const selectedCenterCardPosition = gamestate.positions.card_positions[selected_card_positions[0]].card
 
     if (gamestate.players[token].card.player_original_id === selectedCenterCardPosition.id) {
       gamestate.players[token].card.player_card_id = 87
@@ -18,7 +28,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
 
     const allPlayerTokens = getAllPlayerTokens(gamestate.players)
     const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shielded_cards)
+    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
 
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],
@@ -43,8 +53,8 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
 
     return gamestate
   } else if (selected_card_positions[0].includes('player_')) {
-    const selectedCenterPositionCard = gamestate.card_positions[gamestate.players[token].player_history[title].selected_center_card].card
-    const selectedPlayerPositionCard = gamestate.card_positions[selected_card_positions[0]].card
+    const selectedCenterPositionCard = gamestate.positions.card_positions[gamestate.players[token].player_history[title].selected_center_card].card
+    const selectedPlayerPositionCard = gamestate.positions.card_positions[selected_card_positions[0]].card
 
     const selectedCenterCard = { ...selectedCenterPositionCard }
     const specialVillagerIds = [30, 1, 29, 28, 64]
@@ -54,13 +64,13 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     }
 
     const selectedPlayerCard = { ...selectedPlayerPositionCard }
-    gamestate.card_positions[gamestate.players[token].player_history[title].selected_center_card].card = selectedPlayerCard
-    gamestate.card_positions[selected_card_positions[0]].card = selectedCenterCard
+    gamestate.positions.card_positions[gamestate.players[token].player_history[title].selected_center_card].card = selectedPlayerCard
+    gamestate.positions.card_positions[selected_card_positions[0]].card = selectedCenterCard
 
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
 
     if (selected_card_positions[0] === currentPlayerNumber[0]) {
-      const currentCard = gamestate.card_positions[currentPlayerNumber[0]].card
+      const currentCard = gamestate.positions.card_positions[currentPlayerNumber[0]].card
       gamestate.players[token].card.player_card_id = currentCard.id
       gamestate.players[token].card.player_team = currentCard.team
     }

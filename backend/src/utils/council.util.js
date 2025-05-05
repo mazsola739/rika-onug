@@ -18,10 +18,10 @@ export const getKeys = array => array.map(obj => Object.keys(obj)[0])
 export const updatePlayer = (gamestate, token) => {
   let newGamestate = { ...gamestate }
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
-  const flippedCards = newGamestate.flipped_cards
+  const flippedCards = newGamestate.positions.flipped_cards
 
   const playerCard = newGamestate.players[token].card
-  const currentCard = newGamestate.card_positions[currentPlayerNumber]?.card
+  const currentCard = newGamestate.positions.card_positions[currentPlayerNumber]?.card
 
   if (!playerCard || !currentCard) return newGamestate
 
@@ -38,7 +38,7 @@ export const updatePlayer = (gamestate, token) => {
     newGamestate.players[token].card.player_card_id = 87
   }
 
-  if (newGamestate.card_positions[currentPlayerNumber]?.mark) {
+  if (newGamestate.positions.card_positions[currentPlayerNumber]?.mark) {
     const markRoleMap = {
       mark_of_vampire: { role: 'VAMPIRE', team: 'vampire' },
       mark_of_disease: { role: 'DISEASED' },
@@ -47,20 +47,20 @@ export const updatePlayer = (gamestate, token) => {
       mark_of_assassin: { role: 'TARGET' }
     }
 
-    if (newGamestate.card_positions[currentPlayerNumber].mark === 'mark_of_clarity') {
-      const clarityCard = cardsData.find(({ id }) => id === newGamestate.card_positions[currentPlayerNumber].card.id)
+    if (newGamestate.positions.card_positions[currentPlayerNumber].mark === 'mark_of_clarity') {
+      const clarityCard = cardsData.find(({ id }) => id === newGamestate.positions.card_positions[currentPlayerNumber].card.id)
       if (clarityCard) {
-        newGamestate.card_positions[currentPlayerNumber].card.role = clarityCard.role
-        newGamestate.card_positions[currentPlayerNumber].card.team = clarityCard.team
+        newGamestate.positions.card_positions[currentPlayerNumber].card.role = clarityCard.role
+        newGamestate.positions.card_positions[currentPlayerNumber].card.team = clarityCard.team
       }
-    } else if (markRoleMap[newGamestate.card_positions[currentPlayerNumber].mark]) {
-      const { role, team } = markRoleMap[newGamestate.card_positions[currentPlayerNumber].mark]
-      newGamestate.card_positions[currentPlayerNumber].card.role = role || newGamestate.card_positions[currentPlayerNumber].card.role
-      newGamestate.card_positions[currentPlayerNumber].card.team = team || newGamestate.card_positions[currentPlayerNumber].card.team
+    } else if (markRoleMap[newGamestate.positions.card_positions[currentPlayerNumber].mark]) {
+      const { role, team } = markRoleMap[newGamestate.positions.card_positions[currentPlayerNumber].mark]
+      newGamestate.positions.card_positions[currentPlayerNumber].card.role = role || newGamestate.positions.card_positions[currentPlayerNumber].card.role
+      newGamestate.positions.card_positions[currentPlayerNumber].card.team = team || newGamestate.positions.card_positions[currentPlayerNumber].card.team
     }
   }
 
-  if (newGamestate.card_positions[currentPlayerNumber]?.artifact) {
+  if (newGamestate.positions.card_positions[currentPlayerNumber]?.artifact) {
     const artifactRoleMap = {
       claw_of_the_werewolf: { role: 'WEREWOLF', team: 'werewolf' },
       brand_of_the_villager: { role: 'VILLAGER', team: 'village' },
@@ -73,15 +73,15 @@ export const updatePlayer = (gamestate, token) => {
       alien_artifact: { role: 'ALIEN', team: 'alien' }
     }
 
-    const artifact = artifactsData.find(artifact => artifact.id === newGamestate.card_positions[currentPlayerNumber]?.artifact)
+    const artifact = artifactsData.find(artifact => artifact.id === newGamestate.positions.card_positions[currentPlayerNumber]?.artifact)
     if (artifactRoleMap[artifact?.token_name]) {
       const { role, team } = artifactRoleMap[artifact.token_name]
-      newGamestate.card_positions[currentPlayerNumber].card.role = role || newGamestate.card_positions[currentPlayerNumber].card.role
-      newGamestate.card_positions[currentPlayerNumber].card.team = team || newGamestate.card_positions[currentPlayerNumber].card.team
+      newGamestate.positions.card_positions[currentPlayerNumber].card.role = role || newGamestate.positions.card_positions[currentPlayerNumber].card.role
+      newGamestate.positions.card_positions[currentPlayerNumber].card.team = team || newGamestate.positions.card_positions[currentPlayerNumber].card.team
     }
-    newGamestate.players[token].card.player_role = newGamestate.card_positions[currentPlayerNumber].card.role
-    newGamestate.players[token].card.player_team = newGamestate.card_positions[currentPlayerNumber].card.team
-    newGamestate.players[token].card.player_artifact = newGamestate.card_positions[currentPlayerNumber].artifact
+    newGamestate.players[token].card.player_role = newGamestate.positions.card_positions[currentPlayerNumber].card.role
+    newGamestate.players[token].card.player_team = newGamestate.positions.card_positions[currentPlayerNumber].card.team
+    newGamestate.players[token].card.player_artifact = newGamestate.positions.card_positions[currentPlayerNumber].artifact
   }
 
   return newGamestate

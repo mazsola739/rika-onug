@@ -8,8 +8,8 @@ export const revealerResponse = (gamestate, token, selected_card_positions, titl
     return gamestate
   }
 
-  const selectedPositionCard = gamestate.card_positions[selected_card_positions[0]].card
-  const revealedCard = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
+  const selectedPositionCard = gamestate.positions.card_positions[selected_card_positions[0]].card
+  const revealedCard = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
   const isTown = revealedCard.every(card => GOOD_GUY.includes(Object.values(card)[0]))
 
   if (gamestate.players[token].card?.player_original_id === selectedPositionCard.id) {
@@ -24,7 +24,7 @@ export const revealerResponse = (gamestate, token, selected_card_positions, titl
   }
 
   if (!isTown) {
-    gamestate.flipped_cards.push(revealedCard[0])
+    gamestate.positions.flipped_cards.push(revealedCard[0])
     gamestate.players[token].player_history[title].flipped_cards = revealedCard
   } else {
     gamestate.players[token].player_history[title].show_cards = revealedCard
@@ -36,7 +36,7 @@ export const revealerResponse = (gamestate, token, selected_card_positions, titl
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

@@ -1,9 +1,17 @@
 import { CENTER_CARD_POSITIONS } from '../../../../constants'
-import { generateRoleAction, getAllPlayerTokens, getAnyEvenOrOddPlayerNumbers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectableOtherPlayerNumbersWithNoShield, getSelectablePlayersWithNoShield } from '../../../sceneUtils'
+import {
+  generateRoleAction,
+  getAllPlayerTokens,
+  getAnyEvenOrOddPlayerNumbers,
+  getAnyHigherOrLowerPlayerNumbersByToken,
+  getPlayerNeighborsByToken,
+  getSelectableOtherPlayerNumbersWithNoShield,
+  getSelectablePlayersWithNoShield
+} from '../../../sceneUtils'
 
 export const rascalAction = (gamestate, token, title, prefix) => {
-  const randomRascalInstruction = gamestate[prefix].instruction
-  const rascalKey = gamestate[prefix].key
+  const randomRascalInstruction = gamestate.roles[prefix].instruction
+  const rascalKey = gamestate.roles[prefix].key
 
   let privateMessage
   let limit = 1

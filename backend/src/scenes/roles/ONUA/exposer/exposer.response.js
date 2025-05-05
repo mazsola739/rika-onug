@@ -7,9 +7,9 @@ export const exposerResponse = (gamestate, token, selected_card_positions, title
   }
 
   const cardPositions = selected_card_positions.slice(0, gamestate.players[token].player_history[title].selectable_card_limit.center)
-  const revealedCards = getCardIdsByPositions(gamestate.card_positions, cardPositions)
+  const revealedCards = getCardIdsByPositions(gamestate.positions.card_positions, cardPositions)
 
-  gamestate.flipped_cards.push(...revealedCards)
+  gamestate.positions.flipped_cards.push(...revealedCards)
 
   if (revealedCards.some(card => gamestate.players[token].card.player_original_id === card.id)) {
     gamestate.players[token].card.player_card_id = 87
@@ -30,7 +30,7 @@ export const exposerResponse = (gamestate, token, selected_card_positions, title
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

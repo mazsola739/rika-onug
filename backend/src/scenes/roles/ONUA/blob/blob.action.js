@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction, getPartOfGroupByToken } from '../../../sceneUtils'
 
 export const blobAction = (gamestate, token, title) => {
-  const randomInstruction = gamestate.blob.instruction
+  const randomInstruction = gamestate.roles.blob.instruction
 
   const partOfBlob = getPartOfGroupByToken(gamestate.players, token, randomInstruction)
 

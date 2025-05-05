@@ -7,12 +7,12 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
   }
 
   const currentPlayer = getPlayerNumberWithMatchingToken(gamestate.players, token)
-  const updatedPlayerCards = moveCardsButYourOwn(gamestate.card_positions, selected_answer, currentPlayer)
+  const updatedPlayerCards = moveCardsButYourOwn(gamestate.positions.card_positions, selected_answer, currentPlayer)
 
   gamestate.players[token].card_or_mark_action = true
 
-  gamestate.card_positions = {
-    ...gamestate.card_positions,
+  gamestate.positions.card_positions = {
+    ...gamestate.positions.card_positions,
     ...updatedPlayerCards
   }
 
@@ -27,7 +27,7 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

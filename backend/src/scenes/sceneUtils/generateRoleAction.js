@@ -26,10 +26,10 @@ const combineUniqueObjects = (array1, array2) => {
 const updatePlayerCard = (gamestate, token) => {
   let newGamestate = { ...gamestate }
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(newGamestate.players, token)
-  const flippedCards = newGamestate.flipped_cards
+  const flippedCards = newGamestate.positions.flipped_cards
 
   const playerCard = newGamestate.players[token].card
-  const currentCard = newGamestate.card_positions[currentPlayerNumber].card
+  const currentCard = newGamestate.positions.card_positions[currentPlayerNumber].card
 
   if (!playerCard || !currentCard) return
 
@@ -55,11 +55,11 @@ export const generateRoleAction = (
   { private_message, selectableCards = {}, selectableMarks = {}, showCards = [], showMarks = [], obligatory = false, scene_end = false, uniqueInformation = {} }
 ) => {
   let newGamestate = updatePlayerCard(gamestate, token)
-  const flippedCards = JSON.parse(JSON.stringify(newGamestate.flipped_cards))
+  const flippedCards = JSON.parse(JSON.stringify(newGamestate.positions.flipped_cards))
 
   const information = {
-    shielded_cards: newGamestate.shielded_cards,
-    artifacted_cards: getKeys(newGamestate.artifacted_cards),
+    shielded_cards: newGamestate.positions.shielded_cards,
+    artifacted_cards: getKeys(newGamestate.positions.artifacted_cards),
     show_cards: showCards !== null ? combineUniqueObjects(showCards, flippedCards) : flippedCards,
     show_marks: showMarks,
     obligatory,

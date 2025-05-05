@@ -9,7 +9,7 @@ export const sentinelResponse = (gamestate, token, selected_card_positions, titl
   const shieldedPlayerToken = getPlayerTokensByPlayerNumber(gamestate.players, [selected_card_positions[0]])
 
   if (shieldedPlayerToken) {
-    gamestate.shielded_cards.push(selected_card_positions[0])
+    gamestate.positions.shielded_cards.push(selected_card_positions[0])
     gamestate.players[shieldedPlayerToken[0]].shield = true
   }
 
@@ -24,7 +24,7 @@ export const sentinelResponse = (gamestate, token, selected_card_positions, titl
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

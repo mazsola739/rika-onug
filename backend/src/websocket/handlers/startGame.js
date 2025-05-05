@@ -25,14 +25,15 @@ export const startGame = async (ws, message) => {
       game_started: true,
       game_stopped: false,
       game_finished: false,
-      script_locked: false,
-      chapter: [
-        {
-          scene_title: 'START_GAME',
-          scene_number: 0
-        }
-      ],
-      narration: []
+      scenes: {
+        chapter: [
+          {
+            scene_title: 'START_GAME',
+            scene_number: 0
+          }
+        ],
+        narration: []
+      }
     }
 
     if (!areAllPlayersReady(newGamestate.players)) {

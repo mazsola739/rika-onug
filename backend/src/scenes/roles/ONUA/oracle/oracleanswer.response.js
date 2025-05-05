@@ -13,13 +13,13 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
   if (oracleQuestion === 'oracle_centerexchange_text') {
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
     const currentPlayerCard = {
-      ...gamestate.card_positions[currentPlayerNumber].card
+      ...gamestate.positions.card_positions[currentPlayerNumber].card
     }
     const selectedCard = {
-      ...gamestate.card_positions[selected_card_positions[0]].card
+      ...gamestate.positions.card_positions[selected_card_positions[0]].card
     }
-    gamestate.card_positions[currentPlayerNumber].card = selectedCard
-    gamestate.card_positions[selected_card_positions[0]].card = currentPlayerCard
+    gamestate.positions.card_positions[currentPlayerNumber].card = selectedCard
+    gamestate.positions.card_positions[selected_card_positions[0]].card = currentPlayerCard
 
     gamestate.players[token].card.player_card_id = 87
     gamestate.players[token].card_or_mark_action = true
@@ -37,7 +37,7 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
   } else if (oracleQuestion === 'oracle_viewcenter_text') {
     const limit = gamestate.players[token].player_history[title].selectable_card_limit.center
     const selectedCardPositions = selected_card_positions.slice(0, limit)
-    const selectedCards = getCardIdsByPositions(gamestate.card_positions, selectedCardPositions)
+    const selectedCards = getCardIdsByPositions(gamestate.positions.card_positions, selectedCardPositions)
 
     gamestate.players[token].card_or_mark_action = true
 
@@ -55,7 +55,7 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
     })
   }
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

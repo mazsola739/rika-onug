@@ -1,7 +1,7 @@
 import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../../sceneUtils'
 
 export const temptressAction = (gamestate, token, title) => {
-  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVillainWithoutShield', gamestate.shielded_cards)
+  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVillainWithoutShield', gamestate.positions.shielded_cards)
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

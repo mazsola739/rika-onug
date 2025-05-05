@@ -5,12 +5,12 @@ export const alphawolfResponse = (gamestate, token, selected_card_positions, tit
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
-  const centerWolf = { ...gamestate.card_positions.center_wolf.card }
+  const centerWolf = { ...gamestate.positions.card_positions.center_wolf.card }
   const selectedCard = {
-    ...gamestate.card_positions[selected_card_positions[0]].card
+    ...gamestate.positions.card_positions[selected_card_positions[0]].card
   }
-  gamestate.card_positions.center_wolf.card = selectedCard
-  gamestate.card_positions[selected_card_positions[0]].card = centerWolf
+  gamestate.positions.card_positions.center_wolf.card = selectedCard
+  gamestate.positions.card_positions[selected_card_positions[0]].card = centerWolf
 
   gamestate.players[token].card_or_mark_action = true
 
@@ -26,7 +26,7 @@ export const alphawolfResponse = (gamestate, token, selected_card_positions, tit
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

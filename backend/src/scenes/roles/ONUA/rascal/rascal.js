@@ -28,12 +28,8 @@ export const rascal = (gamestate, title, prefix) => {
       break
   }
 
-  gamestate[prefix] = {
-    instruction: '',
-    key: ''
-  }
-  gamestate[prefix].instruction = randomRascalInstruction
-  gamestate[prefix].key = rascalKey
+  gamestate.roles[prefix].instruction = randomRascalInstruction
+  gamestate.roles[prefix].key = rascalKey
 
   tokens.forEach(token => {
     let action = {}
@@ -54,7 +50,7 @@ export const rascal = (gamestate, title, prefix) => {
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
-  gamestate.narration.push({ [title]: narration })
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

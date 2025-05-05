@@ -1,13 +1,24 @@
-import { getNarrationByTitle, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, createAndSendSceneMessage, getCardIdsByPositions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getMarksByPositions } from '../../../sceneUtils'
+import {
+  getNarrationByTitle,
+  getAllPlayerTokens,
+  getPlayerNumbersWithMatchingTokens,
+  getSelectablePlayersWithNoShield,
+  generateRoleAction,
+  createAndSendSceneMessage,
+  getCardIdsByPositions,
+  getPlayerNumberWithMatchingToken,
+  formatPlayerIdentifier,
+  getMarksByPositions
+} from '../../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../../validators'
 
 export const marksmanResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   //TODO if no marks only cards
   const allPlayerTokens = getAllPlayerTokens(gamestate.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shielded_cards)
+  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
 
   if (selected_answer && selected_answer.length > 0) {
     if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
@@ -60,8 +71,8 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       return gamestate
     }
 
-    const viewCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
-    const selectedPositionCard = gamestate.card_positions[selected_card_positions[0]].card
+    const viewCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
+    const selectedPositionCard = gamestate.positions.card_positions[selected_card_positions[0]].card
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
 
     if (gamestate.players[token].card.player_original_id === selectedPositionCard.id && currentPlayerNumber !== selected_card_positions[0]) {
@@ -116,8 +127,8 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       return gamestate
     }
 
-    const viewMarks = getMarksByPositions(gamestate.card_positions, [selected_mark_positions[0]])
-    const selectedPositionMark = gamestate.card_positions[selected_mark_positions[0]].mark
+    const viewMarks = getMarksByPositions(gamestate.positions.card_positions, [selected_mark_positions[0]])
+    const selectedPositionMark = gamestate.positions.card_positions[selected_mark_positions[0]].mark
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
 
     if (currentPlayerNumber === selected_mark_positions[0]) {

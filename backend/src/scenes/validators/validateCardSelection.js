@@ -1,5 +1,7 @@
 import { logTrace } from '../../log'
 
+//TODO get gamestate from origin, not as varriant
+
 export const validateCardSelection = (selected_card_positions, player_history, title) => {
   logTrace(`validateCardSelection called when actual scene is: ${title}`)
 

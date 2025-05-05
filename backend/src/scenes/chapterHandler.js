@@ -10,7 +10,7 @@ export const chapterHandler = async (gamestate, room_id) => {
     logTrace(`chapterHandler in room [${room_id}]`)
 
     const playersArray = Object.values(gamestate.players || {})
-    let newGamestate = { ...gamestate, chapter: [] }
+    let newGamestate = { ...gamestate, scenes: { chapter: [] } }
 
     let flagsState = {
       player_card_shifting: false,
@@ -55,12 +55,12 @@ export const chapterHandler = async (gamestate, room_id) => {
       )
     }
 
-    if (!Array.isArray(newGamestate.scripts)) {
+    if (!Array.isArray(newGamestate.scenes.scripts)) {
       logTrace(`Scripts is not an array. Initializing to an empty array.`)
-      newGamestate.scripts = []
+      newGamestate.scenes.scripts = []
     }
 
-    for (const scene of newGamestate.scripts) {
+    for (const scene of newGamestate.scenes.scripts) {
       if (!scene || typeof scene.scene_title !== 'string' || typeof scene.scene_number !== 'number') {
         logTrace(`Skipping invalid scene: ${JSON.stringify(scene)}`)
         continue
@@ -90,7 +90,7 @@ export const chapterHandler = async (gamestate, room_id) => {
       }
 
       if (scenePlayers.length > 0) {
-        newGamestate.chapter.push({
+        newGamestate.scenes.chapter.push({
           scene_title: scene.scene_title,
           scene_number: scene.scene_number
         })
@@ -98,7 +98,7 @@ export const chapterHandler = async (gamestate, room_id) => {
         scenePlayers.forEach(player => activePlayersInChapter.add(player.player_number))
         flagsState = { ...flagsState, ...scene }
       } else {
-        newGamestate.chapter.push({
+        newGamestate.scenes.chapter.push({
           scene_title: scene.scene_title,
           scene_number: scene.scene_number
         })
@@ -106,15 +106,17 @@ export const chapterHandler = async (gamestate, room_id) => {
       }
     }
 
-    newGamestate.scripts = Array.isArray(newGamestate.scripts) ? newGamestate.scripts.filter(scene => !newGamestate.chapter.some(actualScene => actualScene.scene_title === scene.scene_title)) : []
-    logTrace(`Remaining scripts after filtering: ${JSON.stringify(newGamestate.scripts)}`)
+    newGamestate.scenes.scripts = Array.isArray(newGamestate.scenes.scripts)
+      ? newGamestate.scenes.scripts.filter(scene => !newGamestate.scenes.chapter.some(actualScene => actualScene.scene_title === scene.scene_title))
+      : []
+    logTrace(`Remaining scripts after filtering: ${JSON.stringify(newGamestate.scenes.scripts)}`)
 
-    for (const actualScene of newGamestate.chapter) {
+    for (const actualScene of newGamestate.scenes.chapter) {
       logTrace(`Processing action for scene: ${actualScene.scene_title}`)
       newGamestate = await sceneHandler(newGamestate, actualScene.scene_title)
     }
 
-    const allActionsComplete = Array.isArray(newGamestate.scripts) && newGamestate.scripts.length === 0
+    const allActionsComplete = Array.isArray(newGamestate.scenes.scripts) && newGamestate.scenes.scripts.length === 0
     const noPendingPlayerActions = allPlayersStateCheck(playersArray, 'action_finished')
     const gameCanEnd = allActionsComplete && noPendingPlayerActions
 

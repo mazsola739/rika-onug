@@ -2,7 +2,7 @@ import { getActiveAndInactiveCards, isHunter, isLover } from '.'
 import { getPlayerTokenByPlayerNumber } from '../scenes/sceneUtils'
 
 export const getFallens = (voteResult, gamestate, playerStates) => {
-  const { activeCards } = getActiveAndInactiveCards(gamestate.card_positions)
+  const { activeCards } = getActiveAndInactiveCards(gamestate.positions.card_positions)
   const players = gamestate.players
 
   let survivors = [...playerStates.SURVIVOR_PLAYERS]

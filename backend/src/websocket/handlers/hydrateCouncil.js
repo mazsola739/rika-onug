@@ -6,7 +6,6 @@ import { getKeys, getKnownPlayer, updatePlayer } from '../../utils/council.util'
 import { validateRoom } from '../../validators'
 
 export const hydrateCouncil = async (ws, message) => {
-
   const { room_id, token } = message
   logTrace(`hydrate council in ${room_id}`)
   try {
@@ -30,11 +29,11 @@ export const hydrateCouncil = async (ws, message) => {
       guess_cards,
       player,
       players,
-      narrations: newGamestate.narration,
+      narrations: newGamestate.scenes.narration,
       action: {
-        artifacted_cards: getKeys(gamestate.artifacted_cards),
-        shielded_cards: newGamestate.shielded_cards,
-        show_cards: newGamestate.flipped_cards
+        artifacted_cards: getKeys(gamestate.positions.artifacted_cards),
+        shielded_cards: newGamestate.positions.shielded_cards,
+        show_cards: newGamestate.positions.flipped_cards
       }
     })
   } catch (error) {

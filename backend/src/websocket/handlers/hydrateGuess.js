@@ -19,21 +19,21 @@ export const hydrateGuess = async (ws, message) => {
       gamestate.guess_cards = [...new Set(gamestate.guess_cards.filter(id => gamestate.selected_cards.includes(id)))]
     }
 
-    Object.keys(gamestate.card_positions).forEach(key => {
-      if (!gamestate.card_positions[key].guessed_roles) {
-        gamestate.card_positions[key].guessed_roles = []
+    Object.keys(gamestate.positions.card_positions).forEach(key => {
+      if (!gamestate.positions.card_positions[key].guessed_roles) {
+        gamestate.positions.card_positions[key].guessed_roles = []
       }
     })
 
     if (position && id !== undefined) {
-      Object.values(gamestate.card_positions).forEach(card => {
+      Object.values(gamestate.positions.card_positions).forEach(card => {
         const index = card.guessed_roles.indexOf(id)
         if (index > -1) {
           card.guessed_roles.splice(index, 1)
         }
       })
 
-      const target = gamestate.card_positions[position]
+      const target = gamestate.positions.card_positions[position]
       if (target) {
         const roleIndex = target.guessed_roles.indexOf(id)
 
@@ -49,9 +49,9 @@ export const hydrateGuess = async (ws, message) => {
       }
     }
 
-    const guessed_cards = Object.keys(gamestate.card_positions).map(position => ({
+    const guessed_cards = Object.keys(gamestate.positions.card_positions).map(position => ({
       position,
-      guessed_roles: gamestate.card_positions[position].guessed_roles
+      guessed_roles: gamestate.positions.card_positions[position].guessed_roles
     }))
 
     await repo[repositoryType].upsertRoomState(gamestate)

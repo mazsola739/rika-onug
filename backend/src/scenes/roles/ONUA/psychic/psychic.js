@@ -9,13 +9,8 @@ export const psychic = (gamestate, title, prefix) => {
   const randomPsychicInstruction = getRandomItemFromArray(randomPsychicInstructions)
   const psychicKey = getRandomItemFromArray(psychicKeys)
 
-  gamestate[prefix] = {
-    instruction: '',
-    key: ''
-  }
-
-  gamestate[prefix].instruction = randomPsychicInstruction
-  gamestate[prefix].key = psychicKey
+  gamestate.roles[prefix].instruction = randomPsychicInstruction
+  gamestate.roles[prefix].key = psychicKey
 
   narration.push(...[randomPsychicInstruction, psychicKey])
 
@@ -33,7 +28,7 @@ export const psychic = (gamestate, title, prefix) => {
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
 
-  gamestate.narration.push({ [title]: narration })
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

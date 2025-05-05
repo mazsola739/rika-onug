@@ -6,16 +6,16 @@ export const priestResponse = (gamestate, token, selected_mark_positions, title)
     return gamestate
   }
 
-  const selectedPositionMark = gamestate.card_positions[selected_mark_positions[0]].mark
+  const selectedPositionMark = gamestate.positions.card_positions[selected_mark_positions[0]].mark
 
   if (gamestate.players[token].card.player_original_id === 1) {
-    const clarityTwoPosition = gamestate.doppelganger_mark_positions.clarity_2
-    gamestate.card_positions[selected_mark_positions[0]].mark = clarityTwoPosition
-    gamestate.doppelganger_mark_positions.clarity_2 = selectedPositionMark
+    const clarityTwoPosition = gamestate.positions.doppelganger_mark_positions.clarity_2
+    gamestate.positions.card_positions[selected_mark_positions[0]].mark = clarityTwoPosition
+    gamestate.positions.doppelganger_mark_positions.clarity_2 = selectedPositionMark
   } else {
-    const clarityTwoPosition = gamestate.mark_positions.clarity_2
-    gamestate.card_positions[selected_mark_positions[0]].mark = clarityTwoPosition
-    gamestate.mark_positions.clarity_2 = selectedPositionMark
+    const clarityTwoPosition = gamestate.positions.mark_positions.clarity_2
+    gamestate.positions.card_positions[selected_mark_positions[0]].mark = clarityTwoPosition
+    gamestate.positions.mark_positions.clarity_2 = selectedPositionMark
   }
 
   gamestate.players[token].player_history[title] = {
@@ -29,7 +29,7 @@ export const priestResponse = (gamestate, token, selected_mark_positions, title)
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

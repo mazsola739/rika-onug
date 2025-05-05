@@ -7,17 +7,17 @@ export const diseasedResponse = (gamestate, token, selected_mark_positions, titl
   }
 
   if (gamestate.players[token].card.player_original_id === 1) {
-    const diseasePosition = gamestate.doppelganger_mark_positions.disease
-    const selectedPosition = gamestate.card_positions[selected_mark_positions[0]].mark
+    const diseasePosition = gamestate.positions.doppelganger_mark_positions.disease
+    const selectedPosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
 
-    gamestate.doppelganger_mark_positions.disease = selectedPosition
-    gamestate.card_positions[selected_mark_positions[0]].mark = diseasePosition
+    gamestate.positions.doppelganger_mark_positions.disease = selectedPosition
+    gamestate.positions.card_positions[selected_mark_positions[0]].mark = diseasePosition
   } else {
-    const diseasePosition = gamestate.mark_positions.disease
-    const selectedPosition = gamestate.card_positions[selected_mark_positions[0]].mark
+    const diseasePosition = gamestate.positions.mark_positions.disease
+    const selectedPosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
 
-    gamestate.mark_positions.disease = selectedPosition
-    gamestate.card_positions[selected_mark_positions[0]].mark = diseasePosition
+    gamestate.positions.mark_positions.disease = selectedPosition
+    gamestate.positions.card_positions[selected_mark_positions[0]].mark = diseasePosition
   }
 
   gamestate.players[token].card_or_mark_action = true
@@ -33,7 +33,7 @@ export const diseasedResponse = (gamestate, token, selected_mark_positions, titl
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

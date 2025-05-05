@@ -7,17 +7,17 @@ export const apprenticeassassinResponse = (gamestate, token, selected_mark_posit
   }
 
   if (gamestate.players[token].card.player_original_id === 1) {
-    const assassinPosition = gamestate.doppelganger_mark_positions.assassin
-    const selectedPosition = gamestate.card_positions[selected_mark_positions[0]].mark
+    const assassinPosition = gamestate.positions.doppelganger_mark_positions.assassin
+    const selectedPosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
 
-    gamestate.doppelganger_mark_positions.assassin = selectedPosition
-    gamestate.card_positions[selected_mark_positions[0]].mark = assassinPosition
+    gamestate.positions.doppelganger_mark_positions.assassin = selectedPosition
+    gamestate.positions.card_positions[selected_mark_positions[0]].mark = assassinPosition
   } else {
-    const assassinPosition = gamestate.mark_positions.assassin
-    const selectedPosition = gamestate.card_positions[selected_mark_positions[0]].mark
+    const assassinPosition = gamestate.positions.mark_positions.assassin
+    const selectedPosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
 
-    gamestate.mark_positions.assassin = selectedPosition
-    gamestate.card_positions[selected_mark_positions[0]].mark = assassinPosition
+    gamestate.positions.mark_positions.assassin = selectedPosition
+    gamestate.positions.card_positions[selected_mark_positions[0]].mark = assassinPosition
   }
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
@@ -39,7 +39,7 @@ export const apprenticeassassinResponse = (gamestate, token, selected_mark_posit
     scene_end: true
   })
 
-  const narration = getNarrationByTitle(title, gamestate.narration)
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   createAndSendSceneMessage(gamestate, token, title, action, narration)
 

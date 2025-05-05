@@ -1,5 +1,16 @@
 import { CENTER_CARD_POSITIONS } from '../../../../constants'
-import { getPlayerNumberWithMatchingToken, moveCardsButYourOwn, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, formatPlayerIdentifier, getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../../sceneUtils'
+import {
+  getPlayerNumberWithMatchingToken,
+  moveCardsButYourOwn,
+  generateRoleAction,
+  getNarrationByTitle,
+  createAndSendSceneMessage,
+  formatPlayerIdentifier,
+  getCardIdsByPositions,
+  getAllPlayerTokens,
+  getPlayerNumbersWithMatchingTokens,
+  getSelectablePlayersWithNoShield
+} from '../../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection } from '../../../validators'
 
 //TODO fix obligatory and scene end
@@ -10,12 +21,12 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
     }
 
     const currentPlayer = getPlayerNumberWithMatchingToken(gamestate.players, token)
-    const updatedPlayerCards = moveCardsButYourOwn(gamestate.card_positions, selected_answer, currentPlayer)
+    const updatedPlayerCards = moveCardsButYourOwn(gamestate.positions.card_positions, selected_answer, currentPlayer)
 
     gamestate.players[token].card_or_mark_action = true
 
-    gamestate.card_positions = {
-      ...gamestate.card_positions,
+    gamestate.positions.card_positions = {
+      ...gamestate.positions.card_positions,
       ...updatedPlayerCards
     }
 
@@ -30,7 +41,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
       scene_end: true
     })
 
-    const narration = getNarrationByTitle(title, gamestate.narration)
+    const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
 
@@ -42,7 +53,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
 
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
     const currentPlayerCard = {
-      ...gamestate.card_positions[currentPlayerNumber].card
+      ...gamestate.positions.card_positions[currentPlayerNumber].card
     }
 
     let action
@@ -51,11 +62,11 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
       case 'troublemaker': {
         const [position1, position2] = selected_card_positions.slice(0, 2)
 
-        const playerOneCard = { ...gamestate.card_positions[position1].card }
-        const playerTwoCard = { ...gamestate.card_positions[position2].card }
+        const playerOneCard = { ...gamestate.positions.card_positions[position1].card }
+        const playerTwoCard = { ...gamestate.positions.card_positions[position2].card }
 
-        gamestate.card_positions[position1].card = playerTwoCard
-        gamestate.card_positions[position2].card = playerOneCard
+        gamestate.positions.card_positions[position1].card = playerTwoCard
+        gamestate.positions.card_positions[position2].card = playerOneCard
 
         gamestate.players[token].card_or_mark_action = true
 
@@ -81,8 +92,8 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
 
       case 'witch':
         if (!gamestate.players[token].player_history[title].witch_answer) {
-          const showCards = getCardIdsByPositions(gamestate.card_positions, [selected_card_positions[0]])
-          const selectedCardPosition = gamestate.card_positions[selected_card_positions[0]].card
+          const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
+          const selectedCardPosition = gamestate.positions.card_positions[selected_card_positions[0]].card
 
           if (gamestate.players[token].card.player_original_id === selectedCardPosition.id) {
             gamestate.players[token].card.player_card_id = 87
@@ -90,7 +101,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
 
           const allPlayerTokens = getAllPlayerTokens(gamestate.players)
           const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-          const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.shielded_cards)
+          const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
 
           gamestate.players[token].player_history[title] = {
             ...gamestate.players[token].player_history[title],
@@ -110,16 +121,16 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
             showCards
           })
         } else if (gamestate.players[token].player_history[title].witch_answer) {
-          const firstSelectedPositionCard = gamestate.card_positions[gamestate.players[token].player_history[title].selected_card].card
-          const secondSelectedPositionCard = gamestate.card_positions[selected_card_positions[0]].card
+          const firstSelectedPositionCard = gamestate.positions.card_positions[gamestate.players[token].player_history[title].selected_card].card
+          const secondSelectedPositionCard = gamestate.positions.card_positions[selected_card_positions[0]].card
 
           const selectedCenterCard = { ...firstSelectedPositionCard }
           const selectedPlayerCard = { ...secondSelectedPositionCard }
-          gamestate.card_positions[gamestate.players[token].player_history[title].selected_card].card = selectedPlayerCard
-          gamestate.card_positions[selected_card_positions[0]].card = selectedCenterCard
+          gamestate.positions.card_positions[gamestate.players[token].player_history[title].selected_card].card = selectedPlayerCard
+          gamestate.positions.card_positions[selected_card_positions[0]].card = selectedCenterCard
 
           if (selected_card_positions[0] === currentPlayerNumber[0]) {
-            const currentCard = gamestate.card_positions[currentPlayerNumber[0]].card
+            const currentCard = gamestate.positions.card_positions[currentPlayerNumber[0]].card
             gamestate.players[token].card.player_card_id = currentCard.id
             gamestate.players[token].card.player_team = currentCard.team
           }
@@ -145,20 +156,20 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
       case 'robber': {
         const selectedPosition = selected_card_positions[0]
         const selectedCard = {
-          ...gamestate.card_positions[selectedPosition].card
+          ...gamestate.positions.card_positions[selectedPosition].card
         }
 
-        gamestate.card_positions[currentPlayerNumber].card = selectedCard
-        gamestate.card_positions[selectedPosition].card = currentPlayerCard
+        gamestate.positions.card_positions[currentPlayerNumber].card = selectedCard
+        gamestate.positions.card_positions[selectedPosition].card = currentPlayerCard
 
         if (gamestate.players[token].player_history[title].random === 'drunk') {
           gamestate.players[token].card.player_card_id = 87
         } else {
-          gamestate.players[token].card.player_card_id = gamestate.card_positions[currentPlayerNumber].card.id
-          gamestate.players[token].card.player_team = gamestate.card_positions[currentPlayerNumber].card.team
+          gamestate.players[token].card.player_card_id = gamestate.positions.card_positions[currentPlayerNumber].card.id
+          gamestate.players[token].card.player_team = gamestate.positions.card_positions[currentPlayerNumber].card.team
         }
 
-        const showCards = getCardIdsByPositions(gamestate.card_positions, [currentPlayerNumber])
+        const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
 
         gamestate.players[token].card_or_mark_action = true
 
@@ -181,7 +192,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
       }
     }
 
-    const narration = getNarrationByTitle(title, gamestate.narration)
+    const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
 

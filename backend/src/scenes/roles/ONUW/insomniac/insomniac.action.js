@@ -2,13 +2,13 @@ import { generateRoleAction, getCardIdsByPositions, getPlayerNumberWithMatchingT
 
 export const insomniacAction = (gamestate, token, title) => {
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
-  const currentCard = gamestate.card_positions[currentPlayerNumber].card
+  const currentCard = gamestate.positions.card_positions[currentPlayerNumber].card
 
   if (!gamestate.players[token].shield) {
     gamestate.players[token].card.player_card_id = currentCard.id
     gamestate.players[token].card.player_team = currentCard.team
 
-    const showCards = getCardIdsByPositions(gamestate.card_positions, [currentPlayerNumber])
+    const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
 
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],
