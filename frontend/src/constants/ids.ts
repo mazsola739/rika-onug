@@ -1,4 +1,4 @@
-//TODO individually IDS for each role
+//TODO individually IDS for each role - fyi: already done on backend
 
 export const HAS_MARK_IDS: number[] = [28, 29, 31, 32, 34, 37, 38, 39, 40, 41]
 

@@ -2,8 +2,6 @@ import { SCENE } from '../../constants'
 import { sendMessageToPlayer } from '../../utils'
 
 export const createAndSendSceneMessage = (gamestate, token, title, action, narration = []) => {
-
-  console.log(action)
   if (Object.keys(action).length === 0) return
 
   const player = gamestate.players[token]

@@ -7,7 +7,7 @@ export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
   background-color: ${({ result }) => (result ? '#28a74580' : '#dc354580')};
   border-radius: 10px;
   align-items: center;
-  grid-template-columns: 80px 20px 1fr;
+  grid-template-columns: 65px 20px 1fr;
   grid-template-rows: 30px 15px 15px 1fr;
   grid-template-areas:
     'card number name'
