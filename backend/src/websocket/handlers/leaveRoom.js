@@ -1,5 +1,5 @@
 import { EXPANSIONS, HYDRATE_ROOM, LEAVE_ROOM } from '../../constants'
-import roomsData from '../../data/rooms.json'
+import { roomsJson } from '../../data'
 import { logTrace } from '../../log'
 import { repo, repositoryType } from '../../repository'
 import { getPlayerNames } from '../../utils'
@@ -29,7 +29,7 @@ export const leaveRoom = async (ws, message) => {
   newGamestate.total_players = playerTokens.length - 1
 
   if (playerTokens.length === 1) {
-    const defaultRoom = roomsData.find(room => room.room_id === room_id)
+    const defaultRoom = roomsJson.find(room => room.room_id === room_id)
 
     if (defaultRoom) {
       newGamestate.selected_cards = []

@@ -1,11 +1,10 @@
 import WebSocket from 'ws'
-import { ALIENS, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, HYDRATE_LOBBY, JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, PRESELECT, READY, RELOAD, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES, VOTE } from '../constants'
+import { ALIENS, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, /* HYDRATE_LOBBY, */ JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, PRESELECT, READY, RELOAD, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES, VOTE } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
-import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, hydrateReady, hydrateRoom, hydrateTable, joinRoom, leaveGame, leaveRoom, newbie, preselect, reload, reset, result, scene, selectRoom, startGame, startVote, stopGame, updateRoom, verdict } from './handlers'
+import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, /* hydrateLobby, */ hydrateReady, hydrateRoom, hydrateTable, joinRoom, leaveGame, leaveRoom, newbie, preselect, reload, reset, result, scene, selectRoom, startGame, startVote, stopGame, updateRoom, verdict } from './handlers'
 import { decodeJsonKeys } from '../utils'
 import { aliensVotehydrate } from '../scenes/roles/aliens/aliens.voteHydrate'
 import { vampiresVotehydrate } from '../scenes/roles/vampires/vampires.voteHydrate'
-import { hydrateLobby } from './handlers/hydrateLobby'
 
 export const websocketServer = port => {
   try {
@@ -36,58 +35,41 @@ export const websocketServer = port => {
         // Handle messages that require token validation
         // TODO refactor handlers - make common logtrace text ect
         // TODO create hydrate lobby?
-        switch (message.type) {
-          case RELOAD:
-            return reload(ws, message)
-          case SELECT_ROOM:
-            return selectRoom(ws, message)
-          case PRESELECT:
-            return preselect(ws, message)
-          case HYDRATE_LOBBY:
-            return hydrateLobby(ws, message)
-          case JOIN_ROOM:
-            return joinRoom(ws, message)
-          case LEAVE_ROOM:
-            return leaveRoom(ws, message)
-          case UPDATE_ROOM:
-            return updateRoom(message)
-          case DEAL:
-            return dealCards(ws, message)
-          case LEAVE_GAME:
-            return leaveGame(ws, message)
-          case RESET:
-            return reset(message)
-          case ARRIVE_ROOM:
-            return hydrateRoom(ws, message)
-          case READY:
-            return hydrateReady(ws, message)
-          case ARRIVE_TABLE:
-            return hydrateTable(ws, message)
-          case START_GAME:
-            return startGame(ws, message)
-          case ARRIVE_GAME:
-            return hydrateGame(ws, message)
-          case STOP_GAME:
-            return stopGame(message)
-          case SCENE:
-            return scene(ws, message)
-          case ALIENS:
-            return aliensVotehydrate(message)
-          case VAMPIRES:
-            return vampiresVotehydrate(message)
-          case ARRIVE_COUNCIL:
-            return hydrateCouncil(ws, message)
-          case UPDATE_GUESS:
-            return hydrateGuess(ws, message)
-          case START_VOTE:
-            return startVote(ws, message)
-          case VOTE:
-            return verdict(ws, message)
-          case ARRIVE_VERDICT:
-            return result(ws, message)
-          default:
-            logError(`Unhandled message type: ${message.type}`)
+        const messageHandlers = {
+          [RELOAD]: () => reload(ws, message),
+          [SELECT_ROOM]: () => selectRoom(ws, message),
+          [PRESELECT]: () => preselect(ws, message),
+          //[HYDRATE_LOBBY]: () => hydrateLobby(ws, message),
+          [JOIN_ROOM]: () => joinRoom(ws, message),
+          [LEAVE_ROOM]: () => leaveRoom(ws, message),
+          [UPDATE_ROOM]: () => updateRoom(message),
+          [DEAL]: () => dealCards(ws, message),
+          [LEAVE_GAME]: () => leaveGame(ws, message),
+          [RESET]: () => reset(message),
+          [ARRIVE_ROOM]: () => hydrateRoom(ws, message),
+          [READY]: () => hydrateReady(ws, message),
+          [ARRIVE_TABLE]: () => hydrateTable(ws, message),
+          [START_GAME]: () => startGame(ws, message),
+          [ARRIVE_GAME]: () => hydrateGame(ws, message),
+          [STOP_GAME]: () => stopGame(message),
+          [SCENE]: () => scene(ws, message),
+          [ALIENS]: () => aliensVotehydrate(message),
+          [VAMPIRES]: () => vampiresVotehydrate(message),
+          [ARRIVE_COUNCIL]: () => hydrateCouncil(ws, message),
+          [UPDATE_GUESS]: () => hydrateGuess(ws, message),
+          [START_VOTE]: () => startVote(ws, message),
+          [VOTE]: () => verdict(ws, message),
+          [ARRIVE_VERDICT]: () => result(ws, message)
         }
+
+        const handler = messageHandlers[message.type]
+
+        if (handler) {
+          return handler()
+        }
+
+        logError(`Unhandled message type: ${message.type}`)
+        
       })
     })
   } catch (error) {

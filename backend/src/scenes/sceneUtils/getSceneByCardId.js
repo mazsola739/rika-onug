@@ -1,9 +1,9 @@
 import { ALIEN_IDS, SUPER_VILLAIN_IDS, VAMPIRE_IDS, WEREWOLVES } from '../../constants'
-import cards from '../../data/cards.json'
+import { cardsJson } from '../../data'
 
 export const getSceneByCardId = newSelectedCards => {
   return newSelectedCards.map(cardId => {
-    const role = cards.find(card => card.id === cardId).role
+    const role = cardsJson.find(card => card.id === cardId).role
 
     if (WEREWOLVES.includes(cardId)) {
       return 'WEREWOLVES'

@@ -1,5 +1,5 @@
 import { SUPER_VILLAIN_TO_CHECK, WEREVOLVES_TO_CHECK } from '../constants'
-import cards from '../data/cards.json'
+import { cardsJson } from '../data'
 
 const specialCardsDefaultToAddLookupMap = {
   17: 15,
@@ -132,6 +132,6 @@ export const distributeCards = selectedCardIds => {
   }
 }
 
-export const getCardById = card_id => cards.find(card => card.id === card_id)
+export const getCardById = card_id => cardsJson.find(card => card.id === card_id)
 
 export const isCardSelectedById = (cardIds, cardId) => cardIds.some(id => id === cardId)

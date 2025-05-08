@@ -1,4 +1,4 @@
-import cardsData from '../data/cards.json'
+import { cardsJson } from '../data'
 
 export const assignRoleFromMark = (mark, card) => {
   const markRoleMap = {
@@ -10,7 +10,7 @@ export const assignRoleFromMark = (mark, card) => {
   }
 
   if (mark === 'mark_of_clarity') {
-    const clarityCard = cardsData.find(({ id }) => id === card.id)
+    const clarityCard = cardsJson.find(({ id }) => id === card.id)
     if (clarityCard) {
       card.role = clarityCard.role
       card.team = clarityCard.team

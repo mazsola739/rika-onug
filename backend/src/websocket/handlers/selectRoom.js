@@ -1,6 +1,6 @@
 import { logTrace, logErrorWithStack } from '../../log'
 import { validateRoom } from '../../validators'
-import roomsData from '../../data/rooms.json'
+import { roomsJson } from '../../data'
 import { SELECT_ROOM, STAGES } from '../../constants'
 import { sendMessage } from '../../utils'
 
@@ -9,7 +9,7 @@ export const selectRoom = async (ws, message) => {
   const { room_id, nickname, token } = message
   logTrace(`select-room requested in ${room_id} from ${nickname}`)
   try {
-    const roomIndex = roomsData.findIndex(room => room.room_id === room_id)
+    const roomIndex = roomsJson.findIndex(room => room.room_id === room_id)
 
     if (roomIndex === -1) return sendMessage(ws, { type: SELECT_ROOM, success: false, errors: ['Room does not exist.'] })
 

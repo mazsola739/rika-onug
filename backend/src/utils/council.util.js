@@ -1,6 +1,5 @@
 import { getPlayerNumberWithMatchingToken } from '../scenes/sceneUtils'
-import cardsData from '../data/cards.json'
-import artifactsData from '../data/artifacts.json'
+import { cardsJson, artifactsJson } from '../data'
 
 export const isPlayersCardsFlipped = (flippedCards, playerCardId) => {
   return flippedCards.some(obj => {
@@ -50,7 +49,7 @@ export const updatePlayer = (gamestate, token) => {
     }
 
     if (newPositions.card_positions[currentPlayerNumber].mark === 'mark_of_clarity') {
-      const clarityCard = cardsData.find(({ id }) => id === newPositions.card_positions[currentPlayerNumber].card.id)
+      const clarityCard = cardsJson.find(({ id }) => id === newPositions.card_positions[currentPlayerNumber].card.id)
       if (clarityCard) {
         newPositions.card_positions[currentPlayerNumber].card.role = clarityCard.role
         newPositions.card_positions[currentPlayerNumber].card.team = clarityCard.team
@@ -75,7 +74,7 @@ export const updatePlayer = (gamestate, token) => {
       alien_artifact: { role: 'ALIEN', team: 'alien' }
     }
 
-    const artifact = artifactsData.find(artifact => artifact.id === newPositions.card_positions[currentPlayerNumber]?.artifact)
+    const artifact = artifactsJson.find(artifact => artifact.id === newPositions.card_positions[currentPlayerNumber]?.artifact)
     if (artifactRoleMap[artifact?.token_name]) {
       const { role, team } = artifactRoleMap[artifact.token_name]
       newPositions.card_positions[currentPlayerNumber].card.role = role || newPositions.card_positions[currentPlayerNumber].card.role

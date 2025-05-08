@@ -1,16 +1,4 @@
-import {
-  getPlayerNumbersByGivenConditions,
-  getPlayerNumberWithMatchingToken,
-  formatPlayerIdentifier,
-  getSelectablePlayersWithNoShield,
-  getAnyEvenOrOddPlayerNumbers,
-  getNonAlienPlayerNumbersWithNoShield,
-  getNeighborByPosition,
-  moveCards,
-  getCardIdsByPositions,
-  generateRoleAction,
-  getAllPlayerTokens
-} from '../../sceneUtils'
+import { getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getSelectablePlayersWithNoShield, getAnyEvenOrOddPlayerNumbers, getNonAlienPlayerNumbersWithNoShield, getNeighborByPosition, moveCards, getCardIdsByPositions, generateRoleAction, getAllPlayerTokens } from '../../sceneUtils'
 
 export const aliensAction = (gamestate, token, title) => {
   // TODO fix: only work with cow, if in the selected cards

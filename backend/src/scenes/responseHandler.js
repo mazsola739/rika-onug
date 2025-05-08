@@ -7,208 +7,81 @@ export const responseHandler = async (gamestate, token, selected_card_positions,
 
   let newGamestate = { ...gamestate }
 
-  switch (scene_title) {
-    case 'ALIENS':
-      newGamestate = aliensResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'ALPHA_WOLF':
-      newGamestate = alphawolfResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'ANNOYING_LAD':
-      newGamestate = thingResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'APPRENTICE_SEER':
-      newGamestate = apprenticeseerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'APPRENTICE_ASSASSIN':
-      newGamestate = apprenticeassassinResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'ASSASSIN':
-      newGamestate = assassinResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'BEHOLDER':
-      newGamestate = beholderResponse(gamestate, token, selected_answer, scene_title)
-      break
-    case 'BODY_SNATCHER':
-      newGamestate = bodysnatcherResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'COPYCAT':
-      newGamestate = copycatResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'CURATOR':
-      newGamestate = curatorResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'CUPID':
-      newGamestate = cupidResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'DETECTOR':
-      newGamestate = seerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'DISEASED':
-      newGamestate = diseasedResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'DOPPELGANGER':
-      newGamestate = doppelgangerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'DOPPELGANGER_INSTANT_ACTION':
-      newGamestate = doppelgangerinstantactionResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title)
-      break
-    case 'DOPPELGANGER_APPRENTICE_ASSASSIN':
-      newGamestate = apprenticeassassinResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'DOPPELGANGER_ASSASSIN':
-      newGamestate = assassinResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'DOPPELGANGER_BODY_SNATCHER':
-      newGamestate = bodysnatcherResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'DOPPELGANGER_CURATOR':
-      newGamestate = curatorResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'DOPPELGANGER_EMPATH':
-      newGamestate = empathResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'DOPPELGANGER_EXPOSER':
-      newGamestate = exposerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'DOPPELGANGER_FLIPPER':
-      newGamestate = revealerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'DOPPELGANGER_GREMLIN':
-      newGamestate = gremlinResponse(gamestate, token, selected_card_positions, selected_mark_positions, scene_title)
-      break
-    case 'DOPPELGANGER_MORTICIAN':
-      newGamestate = morticianResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'DOPPELGANGER_PICKPOCKET':
-      newGamestate = pickpocketResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'DOPPELGANGER_PRIEST':
-      newGamestate = priestResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'DOPPELGANGER_PSYCHIC':
-      newGamestate = psychicResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'DOPPELGANGER_RASCAL':
-      newGamestate = rascalResponse(gamestate, token, selected_card_positions, selected_answer, scene_title)
-      break
-    case 'DOPPELGANGER_REVEALER':
-      newGamestate = revealerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'DOPPELGANGER_THE_COUNT':
-      newGamestate = thecountResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'DR_PEEKER':
-      newGamestate = mysticwolfResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'DRUNK':
-      newGamestate = drunkResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'EMPATH':
-      newGamestate = empathResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'EXPOSER':
-      newGamestate = exposerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'FLIPPER':
-      newGamestate = revealerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'GREMLIN':
-      newGamestate = gremlinResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title)
-      break
-    case 'INSTIGATOR':
-      newGamestate = instigatorResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'MARKSMAN':
-      newGamestate = marksmanResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title)
-      break
-    case 'MIRROR_MAN':
-      newGamestate = copycatResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'MORTICIAN':
-      newGamestate = morticianResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'MYSTIC_WOLF':
-      newGamestate = mysticwolfResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'NOSTRADAMUS':
-      newGamestate = nostradamusResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'ORACLE_QUESTION':
-      newGamestate = oraclequestionResponse(gamestate, token, selected_answer, scene_title)
-      break
-    case 'ORACLE_ANSWER':
-      newGamestate = oracleanswerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'PARANORMAL_INVESTIGATOR':
-      newGamestate = paranormalinvestigatorResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'PICKPOCKET':
-      newGamestate = pickpocketResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'PRIEST':
-      newGamestate = priestResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'PSYCHIC':
-      newGamestate = psychicResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'RAPSCALLION':
-      newGamestate = apprenticeseerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'RASCAL':
-      newGamestate = rascalResponse(gamestate, token, selected_card_positions, selected_answer, scene_title)
-      break
-    case 'REVEALER':
-      newGamestate = revealerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'ROBBER':
-      newGamestate = robberResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'ROLE_RETRIEVER':
-      newGamestate = robberResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'SEER':
-      newGamestate = seerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'SENTINEL':
-      newGamestate = sentinelResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'SQUIRE':
-      newGamestate = squireResponse(gamestate, token, selected_answer, scene_title)
-      break
-    case 'SWITCHEROO':
-      newGamestate = troublemakerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'TEMPTRESS':
-      newGamestate = temptressResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'THE_COUNT':
-      newGamestate = thecountResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'THING':
-      newGamestate = thingResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'TROUBLEMAKER':
-      newGamestate = troublemakerResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'VAMPIRES':
-      newGamestate = vampiresResponse(gamestate, token, selected_mark_positions, scene_title)
-      break
-    case 'VILLAGE_IDIOT':
-      newGamestate = villageidiotResponse(gamestate, token, selected_answer, scene_title)
-      break
-    case 'VOODOO_LOU':
-      newGamestate = witchResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'WITCH':
-      newGamestate = witchResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    case 'WEREWOLVES':
-      newGamestate = werewolvesResponse(gamestate, token, selected_card_positions, scene_title)
-      break
-    default:
-      logInfo(`RESPONSE_HANDLER_DEFAULT case: no role found for: [response scene title: ${scene_title}]`)
+  const roleResponseHandlers = {
+    ALIENS: () => aliensResponse(gamestate, token, selected_card_positions, scene_title),
+    ALPHA_WOLF: () => alphawolfResponse(gamestate, token, selected_card_positions, scene_title),
+    ANNOYING_LAD: () => thingResponse(gamestate, token, selected_card_positions, scene_title),
+    APPRENTICE_SEER: () => apprenticeseerResponse(gamestate, token, selected_card_positions, scene_title),
+    APPRENTICE_ASSASSIN: () => apprenticeassassinResponse(gamestate, token, selected_mark_positions, scene_title),
+    ASSASSIN: () => assassinResponse(gamestate, token, selected_mark_positions, scene_title),
+    BEHOLDER: () => beholderResponse(gamestate, token, selected_answer, scene_title),
+    BODY_SNATCHER: () => bodysnatcherResponse(gamestate, token, selected_card_positions, scene_title),
+    COPYCAT: () => copycatResponse(gamestate, token, selected_card_positions, scene_title),
+    CURATOR: () => curatorResponse(gamestate, token, selected_card_positions, scene_title),
+    CUPID: () => cupidResponse(gamestate, token, selected_mark_positions, scene_title),
+    DETECTOR: () => seerResponse(gamestate, token, selected_card_positions, scene_title),
+    DISEASED: () => diseasedResponse(gamestate, token, selected_mark_positions, scene_title),
+    DOPPELGANGER: () => doppelgangerResponse(gamestate, token, selected_card_positions, scene_title),
+    DOPPELGANGER_INSTANT_ACTION: () => doppelgangerinstantactionResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title),
+    DOPPELGANGER_APPRENTICE_ASSASSIN: () => apprenticeassassinResponse(gamestate, token, selected_mark_positions, scene_title),
+    DOPPELGANGER_ASSASSIN: () => assassinResponse(gamestate, token, selected_mark_positions, scene_title),
+    DOPPELGANGER_BODY_SNATCHER: () => bodysnatcherResponse(gamestate, token, selected_card_positions, scene_title),
+    DOPPELGANGER_CURATOR: () => curatorResponse(gamestate, token, selected_card_positions, scene_title),
+    DOPPELGANGER_EMPATH: () => empathResponse(gamestate, token, selected_card_positions, scene_title),
+    DOPPELGANGER_EXPOSER: () => exposerResponse(gamestate, token, selected_card_positions, scene_title),
+    DOPPELGANGER_FLIPPER: () => revealerResponse(gamestate, token, selected_card_positions, scene_title),
+    DOPPELGANGER_GREMLIN: () => gremlinResponse(gamestate, token, selected_card_positions, selected_mark_positions, scene_title),
+    DOPPELGANGER_MORTICIAN: () => morticianResponse(gamestate, token, selected_card_positions, scene_title),
+    DOPPELGANGER_PICKPOCKET: () => pickpocketResponse(gamestate, token, selected_mark_positions, scene_title),
+    DOPPELGANGER_PRIEST: () => priestResponse(gamestate, token, selected_mark_positions, scene_title),
+    DOPPELGANGER_PSYCHIC: () => psychicResponse(gamestate, token, selected_card_positions, scene_title),
+    DOPPELGANGER_RASCAL: () => rascalResponse(gamestate, token, selected_card_positions, selected_answer, scene_title),
+    DOPPELGANGER_REVEALER: () => revealerResponse(gamestate, token, selected_card_positions, scene_title),
+    DOPPELGANGER_THE_COUNT: () => thecountResponse(gamestate, token, selected_mark_positions, scene_title),
+    DR_PEEKER: () => mysticwolfResponse(gamestate, token, selected_card_positions, scene_title),
+    DRUNK: () => drunkResponse(gamestate, token, selected_card_positions, scene_title),
+    EMPATH: () => empathResponse(gamestate, token, selected_card_positions, scene_title),
+    EXPOSER: () => exposerResponse(gamestate, token, selected_card_positions, scene_title),
+    FLIPPER: () => revealerResponse(gamestate, token, selected_card_positions, scene_title),
+    GREMLIN: () => gremlinResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title),
+    INSTIGATOR: () => instigatorResponse(gamestate, token, selected_mark_positions, scene_title),
+    MARKSMAN: () => marksmanResponse(gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, scene_title),
+    MIRROR_MAN: () => copycatResponse(gamestate, token, selected_card_positions, scene_title),
+    MORTICIAN: () => morticianResponse(gamestate, token, selected_card_positions, scene_title),
+    MYSTIC_WOLF: () => mysticwolfResponse(gamestate, token, selected_card_positions, scene_title),
+    NOSTRADAMUS: () => nostradamusResponse(gamestate, token, selected_card_positions, scene_title),
+    ORACLE_QUESTION: () => oraclequestionResponse(gamestate, token, selected_answer, scene_title),
+    ORACLE_ANSWER: () => oracleanswerResponse(gamestate, token, selected_card_positions, scene_title),
+    PARANORMAL_INVESTIGATOR: () => paranormalinvestigatorResponse(gamestate, token, selected_card_positions, scene_title),
+    PICKPOCKET: () => pickpocketResponse(gamestate, token, selected_mark_positions, scene_title),
+    PRIEST: () => priestResponse(gamestate, token, selected_mark_positions, scene_title),
+    PSYCHIC: () => psychicResponse(gamestate, token, selected_card_positions, scene_title),
+    RAPSCALLION: () => apprenticeseerResponse(gamestate, token, selected_card_positions, scene_title),
+    RASCAL: () => rascalResponse(gamestate, token, selected_card_positions, selected_answer, scene_title),
+    REVEALER: () => revealerResponse(gamestate, token, selected_card_positions, scene_title),
+    ROBBER: () => robberResponse(gamestate, token, selected_card_positions, scene_title),
+    ROLE_RETRIEVER: () => robberResponse(gamestate, token, selected_card_positions, scene_title),
+    SEER: () => seerResponse(gamestate, token, selected_card_positions, scene_title),
+    SENTINEL: () => sentinelResponse(gamestate, token, selected_card_positions, scene_title),
+    SQUIRE: () => squireResponse(gamestate, token, selected_answer, scene_title),
+    SWITCHEROO: () => troublemakerResponse(gamestate, token, selected_card_positions, scene_title),
+    TEMPTRESS: () => temptressResponse(gamestate, token, selected_card_positions, scene_title),
+    THE_COUNT: () => thecountResponse(gamestate, token, selected_mark_positions, scene_title),
+    THING: () => thingResponse(gamestate, token, selected_card_positions, scene_title),
+    TROUBLEMAKER: () => troublemakerResponse(gamestate, token, selected_card_positions, scene_title),
+    VAMPIRES: () => vampiresResponse(gamestate, token, selected_mark_positions, scene_title),
+    VILLAGE_IDIOT: () => villageidiotResponse(gamestate, token, selected_answer, scene_title),
+    VOODOO_LOU: () => witchResponse(gamestate, token, selected_card_positions, scene_title),
+    WITCH: () => witchResponse(gamestate, token, selected_card_positions, scene_title),
+    WEREWOLVES: () => werewolvesResponse(gamestate, token, selected_card_positions, scene_title)
   }
+
+  const defaultHandler = () => {
+    logInfo(`RESPONSE_HANDLER_DEFAULT case: no role found for: [response scene title: ${scene_title}]`)
+    return gamestate
+  }
+
+  newGamestate = (roleResponseHandlers[scene_title] || defaultHandler)()
 
   await repo[repositoryType].upsertRoomState(newGamestate)
 

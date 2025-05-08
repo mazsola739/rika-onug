@@ -1,4 +1,4 @@
-import scripts from '../data/script.json'
+import { scriptJson } from '../data'
 import { logTrace } from '../log'
 import { hasTemptress, hasAlphaWolf } from '../utils'
 import { hasEpicBattle, hasEasterEgg, hasOracle, hasCopycat, hasMirrorMan, hasDoppelganger, hasInstantAction, hasAnyVampire, hasTheCount, hasRenfield, hasDiseased, hasCupid, hasInstigator, hasPriest, hasAssassin, hasApprenticeAssassin, hasMarks, hasSentinel, hasAnyAlien, hasCow, hasGroobAndZerb, hasBodySnatcher, hasAnySuperVillains, hasDrPeeker, hasRapscallion, hasEvilometer, hasAnyWerewolf, hasMysticWolf, hasMinion, hasApprenticeTanner, hasTanner, hasLeader, hasMadScientist, hasIntern, hasMasons, hasThing, hasAnnoyingLad, hasSeer, hasApprenticeSeer, hasParanormalInvestigator, hasMarksman, hasNostradamus, hasPsychic, hasDetector, hasRobber, hasWitch, hasPickpocket, hasRoleRetriever, hasVoodooLou, hasTroublemaker, hasVillageIdiot, hasAuraSeer, hasGremlin, hasRascal, hasSwitcheroo, hasDrunk, hasInsomniac, hasSelfAwarenessGirl, hasSquire, hasBeholder, hasRevealer, hasExposer, hasFlipper, hasEmpath, hasCurator, hasBlob, hasMortician, hasFamilyMan, hasRipple } from './conditions'
@@ -11,7 +11,7 @@ export const scriptHandler = async (gamestate, room_id) => {
   const role_scenes = []
 
   const addScript = scene_title => {
-    const scene = scripts.find(scene => scene.scene_title === scene_title)
+    const scene = scriptJson.find(scene => scene.scene_title === scene_title)
     if (scene) {
       role_scenes.push({ ...scene })
     } else {
@@ -19,364 +19,100 @@ export const scriptHandler = async (gamestate, room_id) => {
     }
   }
 
-  const roleOrder = [
-    {
-      condition: () => hasEpicBattle(selected_cards) || hasEasterEgg(selected_cards, total_players),
-      scripts: ['EPIC_BATTLE']
-    },
-    {
-      condition: () => hasOracle(selected_cards),
-      scripts: ['ORACLE_QUESTION']
-    },
-    {
-      condition: () => hasOracle(selected_cards),
-      scripts: ['ORACLE_ANSWER']
-    },
-    {
-      condition: () => hasCopycat(selected_cards),
-      scripts: ['COPYCAT']
-    },
-    {
-      condition: () => hasMirrorMan(selected_cards),
-      scripts: ['MIRROR_MAN']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards),
-      scripts: ['DOPPELGANGER']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasInstantAction(selected_cards),
-      scripts: ['DOPPELGANGER_INSTANT_ACTION']
-    },
-    {
-      condition: () => hasAnyVampire(selected_cards),
-      scripts: ['VAMPIRES']
-    },
-    {
-      condition: () => hasTheCount(selected_cards),
-      scripts: ['THE_COUNT']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasTheCount(selected_cards),
-      scripts: ['DOPPELGANGER_THE_COUNT']
-    },
-    {
-      condition: () => hasRenfield(selected_cards),
-      scripts: ['RENFIELD']
-    },
-    {
-      condition: () => hasDiseased(selected_cards),
-      scripts: ['DISEASED']
-    },
-    {
-      condition: () => hasCupid(selected_cards),
-      scripts: ['CUPID']
-    },
-    {
-      condition: () => hasInstigator(selected_cards),
-      scripts: ['INSTIGATOR']
-    },
-    {
-      condition: () => hasPriest(selected_cards),
-      scripts: ['PRIEST']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasPriest(selected_cards),
-      scripts: ['DOPPELGANGER_PRIEST']
-    },
-    {
-      condition: () => hasAssassin(selected_cards),
-      scripts: ['ASSASSIN']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasAssassin(selected_cards),
-      scripts: ['DOPPELGANGER_ASSASSIN']
-    },
-    {
-      condition: () => hasApprenticeAssassin(selected_cards),
-      scripts: ['APPRENTICE_ASSASSIN']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasApprenticeAssassin(selected_cards),
-      scripts: ['DOPPELGANGER_APPRENTICE_ASSASSIN']
-    },
-    {
-      condition: () => hasMarks(selected_cards),
-      scripts: ['EVERYONE_MARK']
-    },
-    {
-      condition: () => hasCupid(selected_cards),
-      scripts: ['LOVERS']
-    },
-    {
-      condition: () => hasSentinel(selected_cards),
-      scripts: ['SENTINEL']
-    },
-    {
-      condition: () => hasAnyAlien(selected_cards),
-      scripts: ['ALIENS']
-    },
-    {
-      condition: () => hasCow(selected_cards),
-      scripts: ['COW']
-    },
-    {
-      condition: () => hasGroobAndZerb(selected_cards),
-      scripts: ['GROOB_ZERB']
-    },
-    {
-      condition: () => hasBodySnatcher(selected_cards),
-      scripts: ['BODY_SNATCHER']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasBodySnatcher(selected_cards),
-      scripts: ['DOPPELGANGER_BODY_SNATCHER']
-    },
-    {
-      condition: () => hasAnySuperVillains(selected_cards),
-      scripts: ['SUPER_VILLAINS']
-    },
-    {
-      condition: () => hasTemptress(selected_cards),
-      scripts: ['TEMPTRESS']
-    },
-    {
-      condition: () => hasDrPeeker(selected_cards),
-      scripts: ['DR_PEEKER']
-    },
-    {
-      condition: () => hasRapscallion(selected_cards),
-      scripts: ['RAPSCALLION']
-    },
-    {
-      condition: () => hasEvilometer(selected_cards),
-      scripts: ['EVILOMETER']
-    },
-    {
-      condition: () => hasAnyWerewolf(selected_cards),
-      scripts: ['WEREWOLVES']
-    },
-    {
-      condition: () => hasAlphaWolf(selected_cards),
-      scripts: ['ALPHA_WOLF']
-    },
-    {
-      condition: () => hasMysticWolf(selected_cards),
-      scripts: ['MYSTIC_WOLF']
-    },
-    {
-      condition: () => hasMinion(selected_cards),
-      scripts: ['MINION']
-    },
-    {
-      condition: () => hasApprenticeTanner(selected_cards) && hasTanner(selected_cards),
-      scripts: ['APPRENTICE_TANNER']
-    },
-    {
-      condition: () => hasLeader(selected_cards) && hasAnyAlien(selected_cards),
-      scripts: ['LEADER']
-    },
-    {
-      condition: () => hasLeader(selected_cards) && hasGroobAndZerb(selected_cards),
-      scripts: ['LEADER_ZERB_GROOB']
-    },
-    {
-      condition: () => hasMadScientist(selected_cards),
-      scripts: ['MAD_SCIENTIST']
-    },
-    {
-      condition: () => hasIntern(selected_cards),
-      scripts: ['INTERN']
-    },
-    {
-      condition: () => hasMasons(selected_cards),
-      scripts: ['MASONS']
-    },
-    {
-      condition: () => hasThing(selected_cards),
-      scripts: ['THING']
-    },
-    {
-      condition: () => hasAnnoyingLad(selected_cards),
-      scripts: ['ANNOYING_LAD']
-    },
-    {
-      condition: () => hasSeer(selected_cards),
-      scripts: ['SEER']
-    },
-    {
-      condition: () => hasApprenticeSeer(selected_cards),
-      scripts: ['APPRENTICE_SEER']
-    },
-    {
-      condition: () => hasParanormalInvestigator(selected_cards),
-      scripts: ['PARANORMAL_INVESTIGATOR']
-    },
-    {
-      condition: () => hasMarksman(selected_cards),
-      scripts: ['MARKSMAN']
-    },
-    {
-      condition: () => hasNostradamus(selected_cards),
-      scripts: ['NOSTRADAMUS']
-    },
-    {
-      condition: () => hasNostradamus(selected_cards),
-      scripts: ['NOSTRADAMUS_REACTION']
-    },
-    {
-      condition: () => hasPsychic(selected_cards),
-      scripts: ['PSYCHIC']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasPsychic(selected_cards),
-      scripts: ['DOPPELGANGER_PSYCHIC']
-    },
-    {
-      condition: () => hasDetector(selected_cards),
-      scripts: ['DETECTOR']
-    },
-    {
-      condition: () => hasRobber(selected_cards),
-      scripts: ['ROBBER']
-    },
-    {
-      condition: () => hasWitch(selected_cards),
-      scripts: ['WITCH']
-    },
-    {
-      condition: () => hasPickpocket(selected_cards),
-      scripts: ['PICKPOCKET']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasPickpocket(selected_cards),
-      scripts: ['DOPPELGANGER_PICKPOCKET']
-    },
-    {
-      condition: () => hasRoleRetriever(selected_cards),
-      scripts: ['ROLE_RETRIEVER']
-    },
-    {
-      condition: () => hasVoodooLou(selected_cards),
-      scripts: ['VOODOO_LOU']
-    },
-    {
-      condition: () => hasTroublemaker(selected_cards),
-      scripts: ['TROUBLEMAKER']
-    },
-    {
-      condition: () => hasVillageIdiot(selected_cards),
-      scripts: ['VILLAGE_IDIOT']
-    },
-    {
-      condition: () => hasAuraSeer(selected_cards),
-      scripts: ['AURA_SEER']
-    },
-    {
-      condition: () => hasGremlin(selected_cards),
-      scripts: ['GREMLIN']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasGremlin(selected_cards),
-      scripts: ['DOPPELGANGER_GREMLIN']
-    },
-    {
-      condition: () => hasRascal(selected_cards),
-      scripts: ['RASCAL']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasRascal(selected_cards),
-      scripts: ['DOPPELGANGER_RASCAL']
-    },
-    {
-      condition: () => hasSwitcheroo(selected_cards),
-      scripts: ['SWITCHEROO']
-    },
-    {
-      condition: () => hasDrunk(selected_cards),
-      scripts: ['DRUNK']
-    },
-    {
-      condition: () => hasInsomniac(selected_cards),
-      scripts: ['INSOMNIAC']
-    },
-    {
-      condition: () => hasSelfAwarenessGirl(selected_cards),
-      scripts: ['SELF_AWARENESS_GIRL']
-    },
-    {
-      condition: () => hasSquire(selected_cards),
-      scripts: ['SQUIRE']
-    },
-    {
-      condition: () => hasBeholder(selected_cards),
-      scripts: ['BEHOLDER']
-    },
-    {
-      condition: () => hasRevealer(selected_cards),
-      scripts: ['REVEALER']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasRevealer(selected_cards),
-      scripts: ['DOPPELGANGER_REVEALER']
-    },
-    {
-      condition: () => hasExposer(selected_cards),
-      scripts: ['EXPOSER']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasExposer(selected_cards),
-      scripts: ['DOPPELGANGER_EXPOSER']
-    },
-    {
-      condition: () => hasFlipper(selected_cards),
-      scripts: ['FLIPPER']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasFlipper(selected_cards),
-      scripts: ['DOPPELGANGER_FLIPPER']
-    },
-    {
-      condition: () => hasEmpath(selected_cards),
-      scripts: ['EMPATH']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasEmpath(selected_cards),
-      scripts: ['DOPPELGANGER_EMPATH']
-    },
-    {
-      condition: () => hasCurator(selected_cards),
-      scripts: ['CURATOR']
-    },
-    {
-      condition: () => hasDoppelganger(selected_cards) && hasCurator(selected_cards),
-      scripts: ['DOPPELGANGER_CURATOR']
-    },
-    {
-      condition: () => hasBlob(selected_cards),
-      scripts: ['BLOB']
-    },
-    {
-      condition: () => hasMortician(selected_cards),
-      scripts: ['MORTICIAN']
-    },
-    {
-      condition: () => hasMortician(selected_cards) && hasDoppelganger(selected_cards),
-      scripts: ['DOPPELGANGER_MORTICIAN']
-    },
-    {
-      condition: () => hasFamilyMan(selected_cards),
-      scripts: ['FAMILY_MAN']
-    },
-    {
-      condition: () => hasRipple(selected_cards),
-      scripts: ['RIPPLE']
-    }
-  ]
+  const roleMapping = {
+    EPIC_BATTLE: () => hasEpicBattle(selected_cards) || hasEasterEgg(selected_cards, total_players),
+    ORACLE_QUESTION: () => hasOracle(selected_cards),
+    ORACLE_ANSWER: () => hasOracle(selected_cards),
+    COPYCAT: () => hasCopycat(selected_cards),
+    MIRROR_MAN: () => hasMirrorMan(selected_cards),
+    DOPPELGANGER: () => hasDoppelganger(selected_cards),
+    DOPPELGANGER_INSTANT_ACTION: () => hasDoppelganger(selected_cards) && hasInstantAction(selected_cards),
+    VAMPIRES: () => hasAnyVampire(selected_cards),
+    THE_COUNT: () => hasTheCount(selected_cards),
+    DOPPELGANGER_THE_COUNT: () => hasDoppelganger(selected_cards) && hasTheCount(selected_cards),
+    RENFIELD: () => hasRenfield(selected_cards),
+    DISEASED: () => hasDiseased(selected_cards),
+    CUPID: () => hasCupid(selected_cards),
+    LOVERS: () => hasCupid(selected_cards),
+    INSTIGATOR: () => hasInstigator(selected_cards),
+    PRIEST: () => hasPriest(selected_cards),
+    DOPPELGANGER_PRIEST: () => hasDoppelganger(selected_cards) && hasPriest(selected_cards),
+    ASSASSIN: () => hasAssassin(selected_cards),
+    DOPPELGANGER_ASSASSIN: () => hasDoppelganger(selected_cards) && hasAssassin(selected_cards),
+    APPRENTICE_ASSASSIN: () => hasApprenticeAssassin(selected_cards),
+    DOPPELGANGER_APPRENTICE_ASSASSIN: () => hasDoppelganger(selected_cards) && hasApprenticeAssassin(selected_cards),
+    EVERYONE_MARK: () => hasMarks(selected_cards),
+    SENTINEL: () => hasSentinel(selected_cards),
+    ALIENS: () => hasAnyAlien(selected_cards),
+    COW: () => hasCow(selected_cards),
+    GROOB_ZERB: () => hasGroobAndZerb(selected_cards),
+    BODY_SNATCHER: () => hasBodySnatcher(selected_cards),
+    DOPPELGANGER_BODY_SNATCHER: () => hasDoppelganger(selected_cards) && hasBodySnatcher(selected_cards),
+    TEMPTRESS: () => hasTemptress(selected_cards),
+    DR_PEEKER: () => hasDrPeeker(selected_cards),
+    RAPSCALLION: () => hasRapscallion(selected_cards),
+    EVILOMETER: () => hasEvilometer(selected_cards),
+    WEREWOLVES: () => hasAnyWerewolf(selected_cards),
+    ALPHA_WOLF: () => hasAlphaWolf(selected_cards),
+    MYSTIC_WOLF: () => hasMysticWolf(selected_cards),
+    MINION: () => hasMinion(selected_cards),
+    APPRENTICE_TANNER: () => hasApprenticeTanner(selected_cards) && hasTanner(selected_cards),
+    LEADER: () => hasLeader(selected_cards) && hasAnyAlien(selected_cards),
+    LEADER_ZERB_GROOB: () => hasLeader(selected_cards) && hasGroobAndZerb(selected_cards),
+    MAD_SCIENTIST: () => hasMadScientist(selected_cards),
+    INTERN: () => hasIntern(selected_cards),
+    MASONS: () => hasMasons(selected_cards),
+    THING: () => hasThing(selected_cards),
+    ANNOYING_LAD: () => hasAnnoyingLad(selected_cards),
+    SEER: () => hasSeer(selected_cards),
+    APPRENTICE_SEER: () => hasApprenticeSeer(selected_cards),
+    PARANORMAL_INVESTIGATOR: () => hasParanormalInvestigator(selected_cards),
+    MARKSMAN: () => hasMarksman(selected_cards),
+    NOSTRADAMUS: () => hasNostradamus(selected_cards),
+    NOSTRADAMUS_REACTION: () => hasNostradamus(selected_cards),
+    PSYCHIC: () => hasPsychic(selected_cards),
+    DOPPELGANGER_PSYCHIC: () => hasDoppelganger(selected_cards) && hasPsychic(selected_cards),
+    DETECTOR: () => hasDetector(selected_cards),
+    ROBBER: () => hasRobber(selected_cards),
+    WITCH: () => hasWitch(selected_cards),
+    PICKPOCKET: () => hasPickpocket(selected_cards),
+    DOPPELGANGER_PICKPOCKET: () => hasDoppelganger(selected_cards) && hasPickpocket(selected_cards),
+    ROLE_RETRIEVER: () => hasRoleRetriever(selected_cards),
+    VOODOO_LOU: () => hasVoodooLou(selected_cards),
+    TROUBLEMAKER: () => hasTroublemaker(selected_cards),
+    VILLAGE_IDIOT: () => hasVillageIdiot(selected_cards),
+    AURA_SEER: () => hasAuraSeer(selected_cards),
+    GREMLIN: () => hasGremlin(selected_cards),
+    DOPPELGANGER_GREMLIN: () => hasDoppelganger(selected_cards) && hasGremlin(selected_cards),
+    RASCAL: () => hasRascal(selected_cards),
+    DOPPELGANGER_RASCAL: () => hasDoppelganger(selected_cards) && hasRascal(selected_cards),
+    SWITCHEROO: () => hasSwitcheroo(selected_cards),
+    DRUNK: () => hasDrunk(selected_cards),
+    INSOMNIAC: () => hasInsomniac(selected_cards),
+    SELF_AWARENESS_GIRL: () => hasSelfAwarenessGirl(selected_cards),
+    SQUIRE: () => hasSquire(selected_cards),
+    BEHOLDER: () => hasBeholder(selected_cards),
+    REVEALER: () => hasRevealer(selected_cards),
+    DOPPELGANGER_REVEALER: () => hasDoppelganger(selected_cards) && hasRevealer(selected_cards),
+    EXPOSER: () => hasExposer(selected_cards),
+    DOPPELGANGER_EXPOSER: () => hasDoppelganger(selected_cards) && hasExposer(selected_cards),
+    FLIPPER: () => hasFlipper(selected_cards),
+    DOPPELGANGER_FLIPPER: () => hasDoppelganger(selected_cards) && hasFlipper(selected_cards),
+    EMPATH: () => hasEmpath(selected_cards),
+    DOPPELGANGER_EMPATH: () => hasDoppelganger(selected_cards) && hasEmpath(selected_cards),
+    CURATOR: () => hasCurator(selected_cards),
+    DOPPELGANGER_CURATOR: () => hasDoppelganger(selected_cards) && hasCurator(selected_cards),
+    BLOB: () => hasBlob(selected_cards),
+    MORTICIAN: () => hasMortician(selected_cards),
+    DOPPELGANGER_MORTICIAN: () => hasMortician(selected_cards) && hasDoppelganger(selected_cards),
+    FAMILY_MAN: () => hasFamilyMan(selected_cards),
+    RIPPLE: () => hasRipple(selected_cards),
+    SUPER_VILLAINS: () => hasAnySuperVillains(selected_cards)
+  }
 
-  roleOrder.forEach(({ condition, scripts }) => {
+  Object.entries(roleMapping).forEach(([script, condition]) => {
     if (condition()) {
-      scripts.forEach(addScript)
+      addScript(script)
     }
   })
 

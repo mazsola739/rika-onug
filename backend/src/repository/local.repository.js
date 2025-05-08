@@ -1,8 +1,7 @@
 import { writeFileSync } from 'fs'
 import { readFile, unlink } from 'fs/promises'
 import { ROOM_NAMES } from '../constants'
-import rooms from '../data/rooms.json'
-import gamestate from '../data/gamestate.json'
+import { roomsJson, gamestateJson } from '../data'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { webSocketServerConnectionsPerRoom } from '../utils/connections.utils'
 
@@ -158,8 +157,8 @@ export const reInitializeAllGamestates = async () => {
     logTrace('Re-init all gamestates')
     const gamestates = {}
 
-    for (const { room_id, room_name } of rooms) {
-      const roomGamestate = { room_id, room_name, ...gamestate }
+    for (const { room_id, room_name } of roomsJson) {
+      const roomGamestate = { room_id, room_name, ...gamestateJson }
       await upsertRoomState(roomGamestate)
       gamestates[room_id] = roomGamestate
     }

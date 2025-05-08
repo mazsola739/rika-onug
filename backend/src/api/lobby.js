@@ -1,5 +1,4 @@
-import roomsData from '../data/rooms.json'
-import presetData from '../data/preset.json'
+import { roomsJson, presetJson } from '../data'
 import { logErrorWithStack, logTrace } from '../log'
 
 export const lobby = (req, res) => {
@@ -8,8 +7,8 @@ export const lobby = (req, res) => {
     return res.send({
       message: 'Successfully fetched',
       data: {
-        rooms: roomsData,
-        presets: presetData
+        rooms: roomsJson,
+        presets: presetJson
       }
     })
   } catch (error) {

@@ -1,5 +1,5 @@
 import { HAS_MARK, SUPER_VILLAIN_TO_CHECK, WEREVOLVES_TO_CHECK } from '../constants'
-import cards from '../data/cards.json'
+import { cardsJson } from '../data'
 import { logInfo } from '../log'
 import { getCenterCardPositionByIndex, stubbedCards } from '../omnipotent/stub/populateDeal'
 import { hasCurator } from '../scenes'
@@ -8,7 +8,7 @@ const hasAlphaWolf = selectedCardIds => selectedCardIds.includes(17)
 const hasTemptress = selectedCardIds => selectedCardIds.includes(69)
 export const hasMark = selectedCardIds => HAS_MARK.some(id => selectedCardIds.includes(id))
 
-const getCardById = card_id => cards.find(card => card.id === card_id)
+const getCardById = card_id => cardsJson.find(card => card.id === card_id)
 const getRandomNumber = (min, max) => ~~(Math.random() * (max - min + 1)) + min
 const getRandomItemFromArray = array => array[getRandomNumber(0, array.length - 1)]
 const filterCardsByIds = (selectedCardIds, idsToCheck) => selectedCardIds.filter(cardId => idsToCheck.includes(cardId))

@@ -1,0 +1,7 @@
+export { default as artifactsJson } from './artifacts.json'
+export { default as cardsJson } from './cards.json'
+export { default as gamestateJson } from './gamestate.json'
+export { default as marksJson } from './marks.json'
+export { default as presetJson } from './preset.json'
+export { default as roomsJson } from './rooms.json'
+export { default as scriptJson } from './script.json'
