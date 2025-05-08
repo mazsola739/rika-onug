@@ -1,12 +1,11 @@
 import styled from '@emotion/styled'
 
 export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
+  /* Flexbox/Grid */
   display: grid;
   justify-content: center;
-  gap: 3px;
-  background-color: ${({ result }) => (result ? '#28a74580' : '#dc354580')};
-  border-radius: 10px;
   align-items: center;
+  gap: 3px;
   grid-template-columns: 65px 20px 1fr;
   grid-template-rows: 30px 15px 15px 1fr;
   grid-template-areas:
@@ -14,6 +13,10 @@ export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
     'card role role'
     'card team team'
     'card mark artifact';
+
+  /* Visuals */
+  background-color: ${({ result }) => (result ? '#28a74580' : '#dc354580')};
+  border-radius: 10px;
 
   & > img:nth-of-type(1) {
     grid-area: card;
@@ -33,21 +36,31 @@ export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
 `
 
 export const PlayerInfoName = styled.span`
+  /* Flexbox/Grid */
   grid-area: name;
-  font-size: 12px;
   display: inline-flex;
   align-items: center;
+
+  /* Typography */
+  font-size: 12px;
 `
 
 export const PlayerInfoTeam = styled.span`
+  /* Flexbox/Grid */
   grid-area: team;
-  font-size: 12px;
   display: inline-flex;
   align-items: center;
+
+  /* Typography */
+  font-size: 12px;
 `
+
 export const PlayerInfoRole = styled.span`
+  /* Flexbox/Grid */
   grid-area: role;
-  font-size: 12px;
   display: inline-flex;
   align-items: center;
+
+  /* Typography */
+  font-size: 12px;
 `

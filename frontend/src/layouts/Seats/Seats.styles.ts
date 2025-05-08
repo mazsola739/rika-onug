@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
 export const StyledSideSeats = styled.div`
+  /* Flexbox/Grid */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,6 +9,7 @@ export const StyledSideSeats = styled.div`
 `
 
 export const StyledTopSeats = styled.div`
+  /* Flexbox/Grid */
   display: flex;
   flex-direction: row;
   align-items: center;

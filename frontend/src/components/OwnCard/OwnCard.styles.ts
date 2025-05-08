@@ -1,13 +1,15 @@
 import styled from '@emotion/styled'
 
 export const StyledOwnCard = styled.div`
+  /* Box Model */
+  border-bottom: 2px solid #969290;
+  
+  /* Flexbox/Grid */
   display: grid;
   justify-content: center;
-  border-bottom: 2px solid #969290;
   grid-template-columns: 100px 20px 1fr;
   grid-template-rows: 36px 20px 20px 20px 1fr auto;
   gap: 10px;
-
   grid-template-areas:
     'title title title'
     'card number name'
@@ -32,44 +34,61 @@ export const StyledOwnCard = styled.div`
 `
 
 export const OwnCardInfoName = styled.span`
+  /* Flexbox/Grid */
   grid-area: name;
-  font-size: 12px;
   display: inline-flex;
   gap: 5px;
   align-items: center;
+
+  /* Typography */
+  font-size: 12px;
 `
 
 export const OwnCardInfoTeam = styled.span`
+  /* Flexbox/Grid */
   grid-area: team;
-  font-size: 12px;
   display: inline-flex;
   gap: 5px;
   align-items: center;
+
+  /* Typography */
+  font-size: 12px;
 `
+
 export const OwnCardInfoRole = styled.span`
+  /* Flexbox/Grid */
   grid-area: role;
-  font-size: 12px;
   display: inline-flex;
   gap: 5px;
   align-items: center;
+
+  /* Typography */
+  font-size: 12px;
 `
 
 export const CardRule = styled.span`
+  /* Flexbox/Grid */
   grid-area: cardrule;
+
+  /* Typography */
   font-size: 12px;
 `
 
 export const TokenRule = styled.span`
+  /* Typography */
   font-size: 12px;
 `
 
 export const TokenContainer = styled.div`
+  /* Flexbox/Grid */
   grid-area: token;
   display: flex;
   flex-direction: column;
   gap: 10px;
 `
+
 export const TokenInfo = styled.div`
+  /* Flexbox/Grid */
   display: flex;
   flex-direction: row;
   gap: 10px;

@@ -1,10 +1,13 @@
 import styled from '@emotion/styled'
 
 export const StyledButtonGroup = styled.div`
-  align-items: center;
+  /* Box Model */
+  width: 100%;
+
+  /* Flexbox/Grid */
   display: flex;
   flex-direction: row;
-  gap: 5px;
   justify-content: center;
-  width: 100%;
+  align-items: center;
+  gap: 5px;
 `

@@ -4,7 +4,7 @@ import { glowingBlue, glowingGreen, glowingLightBlue, glowingOrange, glowingPurp
 import { StyledTokenProps } from './Token.types'
 
 export const StyledToken = styled.div<StyledTokenProps>`
-  display: flex;
+  /* Box Model */
   border-radius: 50%;
   border: ${({ isSelected, isSelectable }) => {
     if (isSelected) {
@@ -15,7 +15,14 @@ export const StyledToken = styled.div<StyledTokenProps>`
     }
     return '3px solid transparent'
   }};
+
+  /* Flexbox/Grid */
+  display: flex;
+
+  /* Visuals */
   filter: drop-shadow(3px 3px 3px black);
+
+  /* Animation/Transition */
   ${({ aliens, cow, current, dreamwolf, evilometer, groobzerb, lovers, masons, part_of_blob, part_of_family, vampires, werewolf, witness }) => {
     if (masons || evilometer) {
       return css`

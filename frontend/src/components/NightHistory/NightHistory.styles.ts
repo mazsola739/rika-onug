@@ -1,13 +1,16 @@
 import styled from '@emotion/styled'
 
 export const StyledNightHistory = styled.div`
+  /* Box Model */
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  /* Flexbox/Grid */
   display: flex;
   flex-direction: column;
   gap: 8px;
 
-  overflow-x: hidden;
-  overflow-y: auto;
-
+  /* Visuals */
   ::-webkit-scrollbar {
     width: 8px; /* Width of vertical scrollbar */
     height: 8px; /* Height of horizontal scrollbar */
@@ -20,15 +23,18 @@ export const StyledNightHistory = styled.div`
 `
 
 export const Narration = styled.div`
+  /* Flexbox/Grid */
   display: flex;
   gap: 5px;
   align-items: center;
 `
 
 export const NarrationImage = styled.img`
+  /* Box Model */
   width: 50px;
 `
 
 export const NarrationText = styled.span`
+  /* Typography */
   font-size: 12px;
 `

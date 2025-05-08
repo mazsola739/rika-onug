@@ -1,13 +1,17 @@
 import styled from '@emotion/styled'
 
 export const StyledSelectedCardList = styled.div`
+  /* Box Model */
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  /* Flexbox/Grid */
   display: flex;
   flex-direction: row;
   gap: 5px;
   flex-wrap: wrap;
-  overflow-x: hidden;
-  overflow-y: auto;
 
+  /* Visuals */
   ::-webkit-scrollbar {
     width: 8px; /* Width of vertical scrollbar */
     height: 8px; /* Height of horizontal scrollbar */
