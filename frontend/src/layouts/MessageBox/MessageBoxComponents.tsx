@@ -11,8 +11,8 @@ const MessageBoxCards: React.ComponentType<MessageBoxProps> = observer(({ cards 
 
   return (
     <StyledMessageBoxCards>
-      {cards.map((card, index) => (
-        <MessageBoxItem key={index}>
+      {cards.map((card) => (
+        <MessageBoxItem key={card.position}>
           <ItemPosition>{card.name}</ItemPosition>
           <CardImage image='card_background' onClick={() => onCardClick(card.position)} size={40} />
         </MessageBoxItem>
@@ -26,8 +26,8 @@ const MessageBoxMarks: React.ComponentType<MessageBoxProps> = observer(({ marks 
 
   return (
     <StyledMessageBoxCards>
-      {marks.map((mark, index) => (
-        <MessageBoxItem key={index}>
+      {marks.map((mark) => (
+        <MessageBoxItem key={mark.position}>
           <ItemPosition>{mark.name}</ItemPosition>
           <TokenImage image='mark_back' onClick={() => onMarkClick(mark.position)} size={35} />
         </MessageBoxItem>
@@ -39,8 +39,8 @@ const MessageBoxMarks: React.ComponentType<MessageBoxProps> = observer(({ marks 
 const MessageBoxPlayers: React.ComponentType<MessagePlayersProps> = observer(({ players }) => {
   return (
     <StyledMessageBoxCards>
-      {players.map((player, index) => (
-        <MessageBoxItem key={index}>
+      {players.map((player) => (
+        <MessageBoxItem key={player.position}>
           <TokenImage image={player.position} size={40} />
           <ItemPosition>{player.name}</ItemPosition>
         </MessageBoxItem>
@@ -55,9 +55,9 @@ export const MessageBoxAnswer: React.ComponentType = observer(() => {
 
   return (
     <StyledMessageBoxAnswer>
-      {answer_options.map((answer_option, index) => {
+      {answer_options.map((answer_option) => {
         const isSelected = answer_option === selectionStore.selectedAnswer
-        return <Button key={index} onClick={() => onAnswerClick(answer_option)} size={60} variant={isSelected ? 'magenta' : 'orange'} buttonText={answer_option} />
+        return <Button key={answer_option} onClick={() => onAnswerClick(answer_option)} size={60} variant={isSelected ? 'magenta' : 'orange'} buttonText={answer_option} />
       })}
     </StyledMessageBoxAnswer>
   )

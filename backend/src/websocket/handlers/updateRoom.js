@@ -10,7 +10,7 @@ export const updateRoom = async message => {
   const { room_id, card_id, expansion } = message
   const [validity, gamestate, errors] = await validateRoom(room_id)
 
-  if (!validity) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors: errors })
+  if (!validity) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors })
 
   let newGamestate = { ...gamestate }
   let total_players = newGamestate.total_players || 0

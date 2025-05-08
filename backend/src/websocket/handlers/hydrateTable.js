@@ -9,7 +9,7 @@ export const hydrateTable = async (ws, message) => {
   logTrace(`hydrate game table requested in ${room_id}`)
   const [validity, gamestate, errors] = await validateRoom(room_id)
 
-  if (!validity) return sendMessage(ws, { type: HYDRATE_TABLE, success: false, errors_: errors })
+  if (!validity) return sendMessage(ws, { type: HYDRATE_TABLE, success: false, errors })
 
   try {
     const newGamestate = { ...gamestate, stage: STAGES.TABLE }

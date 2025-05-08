@@ -17,8 +17,8 @@ export const Room: React.ComponentType = observer(() => {
       <Nav anchorList={anchorList} />
       <Main>
         <RoomCardList>
-          {orderedTeams.map((teamName, index) => (
-            <RoleCardList key={index} team={teamName} cards={roomStore.getSortedCardsByTeam(teamName)} />
+          {orderedTeams.map((teamName) => (
+            <RoleCardList key={teamName} team={teamName} cards={roomStore.getSortedCardsByTeam(teamName)} />
           ))}
         </RoomCardList>
       </Main>

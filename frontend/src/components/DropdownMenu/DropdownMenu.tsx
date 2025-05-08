@@ -10,8 +10,8 @@ export const DropdownMenu: React.ComponentType<DropdownMenuProps> = observer(({ 
       <Option value={defaultValue} disabled>
         {placeholder}
       </Option>
-      {options.map(({ value, option }, index) => (
-        <Option key={index} value={value}>
+      {options.map(({ value, option }) => (
+        <Option key={option} value={value}>
           {option}
         </Option>
       ))}

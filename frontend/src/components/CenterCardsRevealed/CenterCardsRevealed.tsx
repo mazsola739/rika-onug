@@ -9,9 +9,9 @@ export const CenterCardsRevealed: React.ComponentType = observer(() => {
   return (
     <StyledCenterCardsRevealed>
       {tableCenterCards &&
-        tableCenterCards.map((card, index) => {
+        tableCenterCards.map((card) => {
           return (
-            <CenterCard key={index}>
+            <CenterCard key={card.position}>
               <CardPosition>{card.position.replace('center_', '').replace(/^\w/, c => c.toUpperCase())}</CardPosition>
               <CardImage image={card.card_name} size={60} />
             </CenterCard>

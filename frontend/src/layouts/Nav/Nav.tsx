@@ -52,8 +52,8 @@ export const Nav: React.ComponentType<NavProps> = observer(({ anchorList }) => {
     <StyledNav className='navbar'>
       <Title title={'TEAMS'} />
       <NavButtons className='nav-container'>
-        {anchorList.map((anchor, index) => (
-          <NavButton key={index} anchor={anchor} isActive={activeAnchor === anchor} />
+        {anchorList.map((anchor) => (
+          <NavButton key={anchor} anchor={anchor} isActive={activeAnchor === anchor} />
         ))}
       </NavButtons>
     </StyledNav>

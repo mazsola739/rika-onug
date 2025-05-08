@@ -11,7 +11,7 @@ export const reset = async message => {
     logTrace(`reset called in ${room_id}`)
     const [validity, gamestate, errors] = await validateRoom(room_id)
 
-    if (!validity) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors_: errors })
+    if (!validity) return broadcast(room_id, { type: HYDRATE_ROOM, success: false, errors })
 
     const newGamestate = {
       ...gamestate,

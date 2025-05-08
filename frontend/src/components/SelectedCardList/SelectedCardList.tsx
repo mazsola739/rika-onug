@@ -10,8 +10,8 @@ export const SelectedCardList: React.ComponentType = observer(() => {
   return (
     <StyledSelectedCardList>
       <Title title={'SELECTED CARDS'} />
-      {selectedCards.map((card, index) => (
-        <SelectedCard key={index} card={card} />
+      {selectedCards.map((card) => (
+        <SelectedCard key={card.id} card={card} />
       ))}
     </StyledSelectedCardList>
   )

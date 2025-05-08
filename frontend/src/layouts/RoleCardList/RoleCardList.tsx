@@ -14,8 +14,8 @@ export const RoleCardList: React.ComponentType<RoleCardListProps> = observer(({ 
     <StyledRoleCardList id={`${teamName}`}>
       <RoleCardListTitle>{`${teamName} TEAM`}</RoleCardListTitle>
       <RoleCardListGrid>
-        {teamMembers.map((card, index) => (
-          <RoleCard key={index} card={card} />
+        {teamMembers.map((card) => (
+          <RoleCard key={card.id} card={card} />
         ))}
       </RoleCardListGrid>
     </StyledRoleCardList>

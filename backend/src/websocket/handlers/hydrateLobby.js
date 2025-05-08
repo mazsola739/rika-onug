@@ -10,7 +10,7 @@ export const hydrateLobby = async (ws, message) => {
     logTrace(`hydrateLobby requested in ${room_id}`)
     const [validity, gamestate, errors] = await validateRoom(room_id)
 
-    if (!validity) return sendMessage(ws, { type: HYDRATE_LOBBY, success: false, errors_: errors })
+    if (!validity) return sendMessage(ws, { type: HYDRATE_LOBBY, success: false, errors })
 
     const newGamestate = { ...gamestate, stage: STAGES.ROOM }
 

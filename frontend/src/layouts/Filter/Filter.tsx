@@ -12,8 +12,8 @@ export const Filter: React.ComponentType = observer(() => {
     <StyledFilter>
       <Title title={'EXPANSIONS'} />
       <FilterButtons>
-        {expansionNames.map((expansion, index) => (
-          <FilterButton key={index} expansion={expansion as Expansion} isSelected={false} />
+        {expansionNames.map((expansion) => (
+          <FilterButton key={expansion} expansion={expansion as Expansion} isSelected={false} />
         ))}
       </FilterButtons>
     </StyledFilter>
