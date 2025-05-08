@@ -4,7 +4,7 @@ import { diseasedAction } from './diseased.action'
 
 export const diseased = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['diseased_kickoff_text']
+  const narration = ['diseased_kickoff']
 
   tokens.forEach(token => {
     let action = {}

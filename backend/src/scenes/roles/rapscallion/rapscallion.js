@@ -4,7 +4,7 @@ import { apprenticeseerAction } from '..'
 
 export const rapscallion = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['rapscallion_kickoff_text']
+  const narration = ['rapscallion_kickoff']
 
   tokens.forEach(token => {
     let action = {}

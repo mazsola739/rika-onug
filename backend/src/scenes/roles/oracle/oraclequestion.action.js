@@ -8,17 +8,17 @@ export const oraclequestionAction = (gamestate, token, title) => {
   let obligatory = false
 
   switch (oracleQuestion) {
-    case 'oracle_viewplayer_text':
+    case 'oracle_viewplayer':
       answerOptions = Array.from({ length: gamestate.total_players }, (_, i) => `${i + 1}`)
       obligatory = true
       break
-    case 'oracle_evenodd_text': {
+    case 'oracle_evenodd': {
       const isCurrentPlayerEven = parseInt(gamestate.players[token].player_number.split('_')[1], 10) % 2 === 0
       gamestate.oracle.answer = isCurrentPlayerEven ? 'even' : 'odd'
       scene_end = true
       break
     }
-    case 'oracle_guessnumber_text':
+    case 'oracle_guessnumber':
       answerOptions = Array.from({ length: 10 }, (_, i) => `${i + 1}`)
       obligatory = true
       break

@@ -4,7 +4,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 
 export const roleretriever = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['roleretriever_kickoff_text']
+  const narration = ['roleretriever_kickoff']
 
   tokens.forEach(token => {
     let action = {}

@@ -5,7 +5,7 @@ import { doppelgangerAction } from './doppelganger.action'
 //TODO if oracle is oracle team
 export const doppelganger = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['doppelganger_kickoff_text']
+  const narration = ['doppelganger_kickoff']
 
   tokens.forEach(token => {
     let action = {}

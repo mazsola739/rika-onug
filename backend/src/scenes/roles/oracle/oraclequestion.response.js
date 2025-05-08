@@ -8,7 +8,7 @@ export const oraclequestionResponse = (gamestate, token, selected_answer, title)
 
   const oracleQuestion = gamestate.oracle.question
 
-  if (oracleQuestion === 'oracle_guessnumber_text') {
+  if (oracleQuestion === 'oracle_guessnumber') {
     const answer = +selected_answer
     const number = gamestate.oracle.number
     if (answer === number) {

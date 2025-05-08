@@ -4,7 +4,7 @@ import { loversAction } from './lovers.action'
 
 export const lovers = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['lovers_kickoff_text']
+  const narration = ['lovers_kickoff']
 
   tokens.forEach(token => {
     let action = {}

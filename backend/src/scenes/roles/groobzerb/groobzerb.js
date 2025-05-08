@@ -4,7 +4,7 @@ import { groobzerbAction } from './groobzerb.action'
 
 export const groobzerb = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_groobzerb_kickoff_text' : 'groobzerb_kickoff_text', 'groobzerb_kickoff2_text']
+  const narration = [hasDoppelganger ? 'doppelganger_groobzerb_kickoff' : 'groobzerb_kickoff', 'groobzerb_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

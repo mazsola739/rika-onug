@@ -1,2 +1,2 @@
-export const groobzerb_kickoff_text = 'GROOB AND ZERB,'
-export const groobzerb_kickoff2_text = 'look at each other.'
+export const groobzerb_kickoff = 'GROOB AND ZERB,'
+export const groobzerb_kickoff2 = 'look at each other.'

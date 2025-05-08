@@ -57,17 +57,17 @@ export const rippleHandler = (gamestate, room_id) => {
     roles: []
   }
 
-  narration.push('ripple_intro_text')
+  narration.push('ripple_intro')
 
   const getRandomSceneNumber = selectedCards => {
     const result = []
     const filteredArray = selectedCards.filter(card => card !== 50)
-  
+
     if (filteredArray.length === 0) return result
-  
+
     const randomIndex = Math.floor(Math.random() * filteredArray.length)
     result.push(filteredArray[randomIndex])
-  
+
     return result
   }
 
@@ -84,7 +84,7 @@ export const rippleHandler = (gamestate, room_id) => {
   const getSceneByCardId = newSelectedCards => {
     return newSelectedCards.map(cardId => {
       const role = cardsJson.find(card => card.id === cardId).role
-  
+
       if (WEREWOLVES.includes(cardId)) {
         return 'WEREWOLVES'
       } else if (ALIEN_IDS.includes(cardId)) {
@@ -98,47 +98,46 @@ export const rippleHandler = (gamestate, room_id) => {
       }
     })
   }
-  
 
   const rippleActions = {
-    random_ripple_1minute: () => narration.push('ripple_1minute_text'),
+    random_ripple_1minute: () => narration.push('ripple_1minute'),
     random_ripple_repeat: () => {
       const newSelectedCards = getRandomSceneNumbers(selectedCards)
       gamestate.ripple.roles = newSelectedCards
-      narration.push('ripple_repeat_text', 'ripple_repeat_2_text')
+      narration.push('ripple_repeat', 'ripple_repeat_2')
     },
-    random_ripple_repeat1p: () => narration.push('ripple_repeat_text', 'ripple_repeat_2_text', identifiers.onePlayer, 'ripple_openeyes_text'),
-    random_ripple_insomniac: () => narration.push(identifiers.all, 'ripple_insomniac_text'),
-    random_ripple_nospeak: () => narration.push(identifiers.all, 'ripple_nospeak_text'),
-    random_ripple_faceaway: () => narration.push(identifiers.all, 'ripple_faceaway_text'),
+    random_ripple_repeat1p: () => narration.push('ripple_repeat', 'ripple_repeat_2', identifiers.onePlayer, 'ripple_openeyes'),
+    random_ripple_insomniac: () => narration.push(identifiers.all, 'ripple_insomniac'),
+    random_ripple_nospeak: () => narration.push(identifiers.all, 'ripple_nospeak'),
+    random_ripple_faceaway: () => narration.push(identifiers.all, 'ripple_faceaway'),
     random_ripple_troublemaker: () => {
       const twoPlayers = identifiers.twoPlayers
-      narration.push(identifiers.onePlayer, 'ripple_troublemaker_text', twoPlayers[0], 'conjunction_and', twoPlayers[1], 'ripple_troublemaker_end_text')
+      narration.push(identifiers.onePlayer, 'ripple_troublemaker', twoPlayers[0], 'conjunction_and', twoPlayers[1], 'ripple_troublemaker_end')
     },
-    random_ripple_steal: () => narration.push(identifiers.onePlayer, 'ripple_robber_text', identifiers.any, 'ripple_robber_end_text'),
-    random_ripple_witch: () => narration.push(identifiers.onePlayer, 'ripple_witch_text', identifiers.any),
-    random_ripple_view1: () => narration.push(identifiers.onePlayer, 'ripple_view1_text', identifiers.any),
-    random_ripple_view2: () => narration.push(identifiers.onePlayer, 'ripple_view2_text', identifiers.any),
-    random_ripple_reveal: () => narration.push(identifiers.onePlayer, 'ripple_revealer_text', identifiers.neighbor, 'ripple_revealer_end_text'),
+    random_ripple_steal: () => narration.push(identifiers.onePlayer, 'ripple_robber', identifiers.any, 'ripple_robber_end'),
+    random_ripple_witch: () => narration.push(identifiers.onePlayer, 'ripple_witch', identifiers.any),
+    random_ripple_view1: () => narration.push(identifiers.onePlayer, 'ripple_view1', identifiers.any),
+    random_ripple_view2: () => narration.push(identifiers.onePlayer, 'ripple_view2', identifiers.any),
+    random_ripple_reveal: () => narration.push(identifiers.onePlayer, 'ripple_revealer', identifiers.neighbor, 'ripple_revealer_end'),
     random_ripple_dualview: () => {
       const twoPlayers = identifiers.twoPlayers
       narration.push(twoPlayers[0], 'conjunction_and', twoPlayers[1], identifiers.dualView, identifiers.center)
     },
-    random_ripple_twovote: () => narration.push(identifiers.all, 'ripple_doublevote_text'),
+    random_ripple_twovote: () => narration.push(identifiers.all, 'ripple_doublevote'),
     random_ripple_shuffle: () => {
       const twoPlayers = identifiers.twoPlayers
-      narration.push(twoPlayers[0], 'conjunction_and', twoPlayers[1], 'ripple_dualshuffle1_text', twoPlayers[0])
-      narration.push(twoPlayers[0], 'ripple_dualshuffle2_text', twoPlayers[1], 'ripple_dualshuffle3_text')
+      narration.push(twoPlayers[0], 'conjunction_and', twoPlayers[1], 'ripple_dualshuffle1', twoPlayers[0])
+      narration.push(twoPlayers[0], 'ripple_dualshuffle2', twoPlayers[1], 'ripple_dualshuffle3')
     },
-    random_ripple_drunk: () => narration.push(identifiers.onePlayer, 'ripple_drunk_text', identifiers.any, 'ripple_drunk_end_text'),
-    random_ripple_voteapp: () => narration.push('ripple_app_text'),
+    random_ripple_drunk: () => narration.push(identifiers.onePlayer, 'ripple_drunk', identifiers.any, 'ripple_drunk_end'),
+    random_ripple_voteapp: () => narration.push('ripple_app'),
     random_ripple_repeatrole: () => {
       const newSelectedCard = getRandomSceneNumber(selectedCards)
       const role = getSceneByCardId(newSelectedCard)
-      narration.push(role[0], 'ripple_repeatrole_text')
+      narration.push(role[0], 'ripple_repeatrole')
       gamestate.ripple.roles = [newSelectedCard]
     },
-    random_ripple_iamalien: () => narration.push(identifiers.all, 'ripple_iamalien_text')
+    random_ripple_iamalien: () => narration.push(identifiers.all, 'ripple_iamalien')
   }
 
   if (rippleActions[randomRipple]) {

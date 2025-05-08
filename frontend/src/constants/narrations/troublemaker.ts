@@ -1,1 +1,1 @@
-export const troublemaker_kickoff_text = 'TROUBLEMAKER, you may exchange cards between two other players.'
+export const troublemaker_kickoff = 'TROUBLEMAKER, you may exchange cards between two other players.'

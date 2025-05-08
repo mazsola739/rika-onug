@@ -24,19 +24,19 @@ export const oracleQuestion = (gamestate, title, selected_cards) => {
   const oracleQuestion = getRandomItemFromArray(availableOracleQuestionOptions)
   const theNumberIThinkingOf = 0 //TODO eyes open!! Math.floor(Math.random() * 10) + 1
 
-  const narration = ['oracle_kickoff_text', oracleQuestion]
+  const narration = ['oracle_kickoff', oracleQuestion]
 
   gamestate.oracle.number = theNumberIThinkingOf
   gamestate.oracle.question = oracleQuestion
 
   switch (oracleQuestion) {
-    case 'oracle_viewplayer_text':
+    case 'oracle_viewplayer':
       gamestate.oracle.answer = '1'
       break
-    case 'oracle_evenodd_text':
+    case 'oracle_evenodd':
       gamestate.oracle.answer = 'even'
       break
-    case 'oracle_guessnumber_text':
+    case 'oracle_guessnumber':
       gamestate.oracle.answer = 'failure'
       break
     default:

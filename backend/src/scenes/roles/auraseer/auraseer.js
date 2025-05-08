@@ -4,7 +4,7 @@ import { auraseerAction } from './auraseer.action'
 
 export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_auraseer_kickoff_text' : 'auraseer_kickoff_text', hasMarks ? 'auraseer_marks_and_cards_text' : 'auraseer_cards_text']
+  const narration = [hasDoppelganger ? 'doppelganger_auraseer_kickoff' : 'auraseer_kickoff', hasMarks ? 'auraseer_marks_and_cards' : 'auraseer_cards']
 
   tokens.forEach(token => {
     let action = {}

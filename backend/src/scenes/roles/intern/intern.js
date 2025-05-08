@@ -4,7 +4,7 @@ import { internAction } from './intern.action'
 
 export const intern = (gamestate, title, hasDoppelganger, hasMadScientist) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_intern_kickoff_text' : 'intern_kickoff_text', hasMadScientist ? 'intern_kickoff2_text' : 'intern_kickoff_alone_text']
+  const narration = [hasDoppelganger ? 'doppelganger_intern_kickoff' : 'intern_kickoff', hasMadScientist ? 'intern_kickoff2' : 'intern_kickoff_alone']
 
   tokens.forEach(token => {
     let action = {}

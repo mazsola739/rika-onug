@@ -4,9 +4,9 @@ export const psychicAction = (gamestate, token, title, prefix) => {
   const randomPsychicInstruction = gamestate.roles[prefix].instruction
   const psychicKey = gamestate.roles[prefix].key
 
-  const evenOrOdd = psychicKey.replace('identifier_', '').replace('_text', '').replace('any', '')
+  const evenOrOdd = psychicKey.replace('identifier_', '').replace('any', '')
   const selectablePlayers = getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd)
-  let limit = +randomPsychicInstruction.replace('psychic_view', '').replace('_text', '')
+  let limit = +randomPsychicInstruction.replace('psychic_view', '')
 
   if (selectablePlayers.length === 1) {
     limit = 1

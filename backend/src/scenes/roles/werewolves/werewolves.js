@@ -4,7 +4,7 @@ import { werewolvesAction } from './werewolves.action'
 
 export const werewolves = (gamestate, title, hasDreamWolf) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDreamWolf ? 'werewolves_dreamwolf_kickoff_text' : 'werewolves_kickoff_text']
+  const narration = [hasDreamWolf ? 'werewolves_dreamwolf_kickoff' : 'werewolves_kickoff']
 
   tokens.forEach(token => {
     let action = {}

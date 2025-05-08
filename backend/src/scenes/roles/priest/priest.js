@@ -4,7 +4,7 @@ import { priestAction } from './priest.action'
 
 export const priest = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [`${prefix}_kickoff_text`, 'priest_kickoff2_text']
+  const narration = [`${prefix}_kickoff`, 'priest_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

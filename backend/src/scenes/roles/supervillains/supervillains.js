@@ -6,7 +6,7 @@ import { supervillainsAction } from './supervillains.action'
 
 export const supervillains = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['supervillains_kickoff_text']
+  const narration = ['supervillains_kickoff']
 
   tokens.forEach(token => {
     let action = {}

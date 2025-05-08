@@ -8,7 +8,7 @@ const getRolesNames = (selectedCardIds, actionIds, roles) => selectedCardIds.fil
 
 const addVerboseOr = rolesFromIds => {
   if (rolesFromIds.length > 1) {
-    rolesFromIds.splice(rolesFromIds.length - 1, 0, 'doppelganger_verbose_or_text')
+    rolesFromIds.splice(rolesFromIds.length - 1, 0, 'doppelganger_verbose_or')
   }
   rolesFromIds
 }
@@ -19,7 +19,7 @@ export const doppelgangerinstantaction = (gamestate, title, selected_cards) => {
 
   addVerboseOr(rolesFromIds)
 
-  const narration = ['doppelganger_verbose_intro_text', ...rolesFromIds, 'doppelganger_verbose_outro_text']
+  const narration = ['doppelganger_verbose_intro', ...rolesFromIds, 'doppelganger_verbose_outro']
 
   tokens.forEach(token => {
     let action = {}

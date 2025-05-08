@@ -4,7 +4,7 @@ import { witchAction } from './witch.action'
 
 export const witch = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['witch_kickoff_text']
+  const narration = ['witch_kickoff']
 
   tokens.forEach(token => {
     let action = {}

@@ -4,7 +4,7 @@ import { revealerAction } from './revealer.action'
 
 export const revealer = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [`${prefix}_kickoff_text`, 'revealer_kickoff2_text']
+  const narration = [`${prefix}_kickoff`, 'revealer_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

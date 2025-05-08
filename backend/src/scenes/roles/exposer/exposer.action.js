@@ -3,7 +3,7 @@ import { generateRoleAction } from '../../sceneUtils'
 
 export const exposerAction = (gamestate, token, title, prefix) => {
   const randomExposerInstruction = gamestate.roles[prefix].instruction
-  const limit = +randomExposerInstruction.replace('exposer_flip', '').replace('_text', '')
+  const limit = +randomExposerInstruction.replace('exposer_flip', '')
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

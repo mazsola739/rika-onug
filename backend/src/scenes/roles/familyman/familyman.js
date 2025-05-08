@@ -17,11 +17,7 @@ export const familyman = (gamestate, title, hasDoppelganger) => {
 
   const randomAvailableOption = getRandomItemFromArray(availableFamilyManOptions)
 
-  const narration = [
-    hasDoppelganger ? 'doppelganger_familyman_kickoff_text' : 'familyman_kickoff_text',
-    randomAvailableOption,
-    randomAvailableOption.includes('1p') ? 'familyman_is_end_text' : 'familyman_are_end_text'
-  ]
+  const narration = [hasDoppelganger ? 'doppelganger_familyman_kickoff' : 'familyman_kickoff', randomAvailableOption, randomAvailableOption.includes('1p') ? 'familyman_is_end' : 'familyman_are_end']
 
   gamestate.roles.familyman.instruction = randomAvailableOption
 

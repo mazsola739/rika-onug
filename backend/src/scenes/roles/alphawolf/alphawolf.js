@@ -4,7 +4,7 @@ import { alphawolfAction } from './alphawolf.action'
 
 export const alphawolf = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['alphawolf_kickoff_text']
+  const narration = ['alphawolf_kickoff']
 
   tokens.forEach(token => {
     let action = {}

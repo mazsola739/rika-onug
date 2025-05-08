@@ -4,7 +4,7 @@ import { instigatorAction } from './instigator.action'
 
 export const instigator = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['instigator_kickoff_text']
+  const narration = ['instigator_kickoff']
 
   tokens.forEach(token => {
     let action = {}

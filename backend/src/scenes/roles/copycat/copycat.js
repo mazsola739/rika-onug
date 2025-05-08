@@ -5,7 +5,7 @@ import { copycatAction } from './copycat.action'
 //TODO if oracle is oracle team
 export const copycat = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['copycat_kickoff_text']
+  const narration = ['copycat_kickoff']
 
   tokens.forEach(token => {
     let action = {}

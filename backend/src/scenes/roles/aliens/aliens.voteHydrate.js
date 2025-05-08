@@ -48,7 +48,7 @@ export const aliensVotehydrate = async message => {
       let message = ''
 
       switch (randomAlienInstruction) {
-        case 'aliens_allview_text':
+        case 'aliens_allview':
           gamestate.players[token].card_or_mark_action = true
           if (gamestate.players[token].card.player_original_id === gamestate.positions.card_positions[unanimousPlayerNumber].card.id) {
             gamestate.players[token].card.player_card_id = 87
@@ -59,14 +59,14 @@ export const aliensVotehydrate = async message => {
           message = 'action_saw_card'
 
           break
-        case 'aliens_newalien_text':
+        case 'aliens_newalien':
           gamestate.positions.card_positions[unanimousPlayerNumber].card.role = 'ALIEN'
           gamestate.positions.card_positions[unanimousPlayerNumber].card.team = 'alien'
           new_alien = [unanimousPlayerNumber]
           message = 'action_turned_newalien'
 
           break
-        case 'aliens_alienhelper_text':
+        case 'aliens_alienhelper':
           gamestate.positions.card_positions[unanimousPlayerNumber].card.team = 'alien'
           new_alien_helper = [unanimousPlayerNumber]
           message = 'action_turned_alienhelper'

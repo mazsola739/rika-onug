@@ -4,7 +4,7 @@ import { sentinelAction } from './sentinel.action'
 
 export const sentinel = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['sentinel_kickoff_text']
+  const narration = ['sentinel_kickoff']
 
   tokens.forEach(token => {
     let action = {}

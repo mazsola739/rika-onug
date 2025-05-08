@@ -4,7 +4,7 @@ import { masonsAction } from './masons.action'
 
 export const masons = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['masons_kickoff_text']
+  const narration = ['masons_kickoff']
 
   tokens.forEach(token => {
     let action = {}

@@ -4,7 +4,7 @@ import { flipperAction } from './flipper.action'
 
 export const flipper = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [`${prefix}_kickoff_text`, 'flipper_kickoff2_text']
+  const narration = [`${prefix}_kickoff`, 'flipper_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

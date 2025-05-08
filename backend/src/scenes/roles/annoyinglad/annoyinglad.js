@@ -4,7 +4,7 @@ import { thingAction } from '..'
 
 export const annoyinglad = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['annoyinglad_kickoff_text']
+  const narration = ['annoyinglad_kickoff']
 
   tokens.forEach(token => {
     let action = {}

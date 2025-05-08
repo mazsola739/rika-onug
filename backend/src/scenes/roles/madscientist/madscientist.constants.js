@@ -1,62 +1,7 @@
-export const random_madscientist_intro = [
-  'madscientist_intro_1_text',
-  'madscientist_intro_2_text',
-  'madscientist_intro_3_text',
-  'madscientist_intro_4_text',
-  'madscientist_intro_5_text',
-  'madscientist_intro_6_text',
-  'madscientist_intro_7_text',
-  'madscientist_intro_8_text',
-  'madscientist_intro_9_text',
-  'madscientist_intro_10_text',
-  'madscientist_intro_11_text',
-  'madscientist_intro_12_text',
-  'madscientist_intro_13_text',
-  'madscientist_intro_14_text'
-]
+export const random_madscientist_intro = ['madscientist_intro_1', 'madscientist_intro_2', 'madscientist_intro_3', 'madscientist_intro_4', 'madscientist_intro_5', 'madscientist_intro_6', 'madscientist_intro_7', 'madscientist_intro_8', 'madscientist_intro_9', 'madscientist_intro_10', 'madscientist_intro_11', 'madscientist_intro_12', 'madscientist_intro_13', 'madscientist_intro_14']
 
-export const random_madscientist_therefore = [
-  'madscientist_therefore_1_text',
-  'madscientist_therefore_2_text',
-  'madscientist_therefore_3_text',
-  'madscientist_therefore_4_text',
-  'madscientist_therefore_5_text'
-]
+export const random_madscientist_therefore = ['madscientist_therefore_1', 'madscientist_therefore_2', 'madscientist_therefore_3', 'madscientist_therefore_4', 'madscientist_therefore_5']
 
-export const random_madscientist_result = [
-  'madscientist_result_1_text',
-  'madscientist_result_2_text',
-  'madscientist_result_3_text',
-  'madscientist_result_4_text',
-  'madscientist_result_5_text',
-  'madscientist_result_6_text',
-  'madscientist_result_7_text',
-  'madscientist_result_8_text',
-  'madscientist_result_9_text',
-  'madscientist_result_10_text',
-  'madscientist_result_11_text'
-]
+export const random_madscientist_result = ['madscientist_result_1', 'madscientist_result_2', 'madscientist_result_3', 'madscientist_result_4', 'madscientist_result_5', 'madscientist_result_6', 'madscientist_result_7', 'madscientist_result_8', 'madscientist_result_9', 'madscientist_result_10', 'madscientist_result_11']
 
-export const random_madscientist_transition = [
-  'madscientist_transition_1_text',
-  'madscientist_transition_2_text',
-  'madscientist_transition_3_text',
-  'madscientist_transition_4_text',
-  'madscientist_transition_5_text',
-  'madscientist_transition_6_text',
-  'madscientist_transition_7_text',
-  'madscientist_transition_8_text',
-  'madscientist_transition_9_text',
-  'madscientist_transition_10_text',
-  'madscientist_transition_11_text',
-  'madscientist_transition_12_text',
-  'madscientist_transition_13_text',
-  'madscientist_transition_14_text',
-  'madscientist_transition_15_text',
-  'madscientist_transition_16_text',
-  'madscientist_transition_17_text',
-  'madscientist_transition_18_text',
-  'madscientist_transition_19_text',
-  'madscientist_transition_20_text',
-  'madscientist_transition_21_text'
-]
+export const random_madscientist_transition = ['madscientist_transition_1', 'madscientist_transition_2', 'madscientist_transition_3', 'madscientist_transition_4', 'madscientist_transition_5', 'madscientist_transition_6', 'madscientist_transition_7', 'madscientist_transition_8', 'madscientist_transition_9', 'madscientist_transition_10', 'madscientist_transition_11', 'madscientist_transition_12', 'madscientist_transition_13', 'madscientist_transition_14', 'madscientist_transition_15', 'madscientist_transition_16', 'madscientist_transition_17', 'madscientist_transition_18', 'madscientist_transition_19', 'madscientist_transition_20', 'madscientist_transition_21']

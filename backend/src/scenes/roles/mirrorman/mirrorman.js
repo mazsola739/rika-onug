@@ -4,7 +4,7 @@ import { copycatAction } from '..'
 
 export const mirrorman = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['mirrorman_kickoff_text']
+  const narration = ['mirrorman_kickoff']
 
   tokens.forEach(token => {
     let action = {}

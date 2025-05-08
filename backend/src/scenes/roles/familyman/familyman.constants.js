@@ -1,12 +1,1 @@
-export const randomFamilyman = [
-  'familyman_1pleft_text',
-  'familyman_1pright_text',
-  'familyman_eachside_text',
-  'familyman_2pleft_text',
-  'familyman_2pright_text',
-  'familyman_3pleft_text',
-  'familyman_3pright_text',
-  'familyman_4pleft_text',
-  'familyman_4pright_text',
-  'familyman_2eachside_text'
-]
+export const randomFamilyman = ['familyman_1pleft', 'familyman_1pright', 'familyman_eachside', 'familyman_2pleft', 'familyman_2pright', 'familyman_3pleft', 'familyman_3pright', 'familyman_4pleft', 'familyman_4pright', 'familyman_2eachside']

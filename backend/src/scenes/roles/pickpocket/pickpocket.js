@@ -4,7 +4,7 @@ import { pickpocketAction } from './pickpocket.action'
 
 export const pickpocket = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [`${prefix}_kickoff_text`, 'pickpocket_kickoff2_text']
+  const narration = [`${prefix}_kickoff`, 'pickpocket_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

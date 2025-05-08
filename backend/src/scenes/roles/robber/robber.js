@@ -4,7 +4,7 @@ import { robberAction } from './robber.action'
 
 export const robber = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['robber_kickoff_text']
+  const narration = ['robber_kickoff']
 
   tokens.forEach(token => {
     let action = {}

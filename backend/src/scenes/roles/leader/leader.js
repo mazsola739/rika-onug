@@ -4,7 +4,7 @@ import { leaderAction } from './leader.action'
 
 export const leader = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_leader_kickoff_text' : 'leader_kickoff_text', 'leader_kickoff2_text']
+  const narration = [hasDoppelganger ? 'doppelganger_leader_kickoff' : 'leader_kickoff', 'leader_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

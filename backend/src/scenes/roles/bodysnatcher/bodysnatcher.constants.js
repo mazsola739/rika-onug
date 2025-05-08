@@ -1,10 +1,3 @@
-export const randomBodysnatcherInstructions = ['bodysnatcher_steal_text', 'bodysnatcher_center_text']
+export const randomBodysnatcherInstructions = ['bodysnatcher_steal', 'bodysnatcher_center']
 
-export const bodysnatcherKeys = [
-  'identifier_any_text',
-  'identifier_anyeven_text',
-  'identifier_anyodd_text',
-  'identifier_leftneighbor_text',
-  'identifier_rightneighbor_text',
-  'identifier_oneneighbor_text'
-]
+export const bodysnatcherKeys = ['identifier_any', 'identifier_anyeven', 'identifier_anyodd', 'identifier_leftneighbor', 'identifier_rightneighbor', 'identifier_oneneighbor']

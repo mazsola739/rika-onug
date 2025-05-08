@@ -15,7 +15,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
   let private_message = []
 
   switch (randomAlienInstruction) {
-    case 'aliens_view_text':
+    case 'aliens_view':
       showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
       if (gamestate.players[token].card.player_original_id === gamestate.positions.card_positions[selected_card_positions[0]].card.id) {
         gamestate.players[token].card.player_card_id = 87
@@ -24,7 +24,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
       private_message = ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]]
 
       break
-    case 'aliens_allview_text':
+    case 'aliens_allview':
       gamestate.players[token].card_or_mark_action = true
       if (gamestate.players[token].card.player_original_id === gamestate.positions.card_positions[selected_card_positions[0]].card.id) {
         gamestate.players[token].card.player_card_id = 87
@@ -34,14 +34,14 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
       private_message = ['action_voted_together', 'action_saw_card', formatPlayerIdentifier([selected_card_positions[0]])[0]]
 
       break
-    case 'aliens_newalien_text':
+    case 'aliens_newalien':
       gamestate.positions.card_positions[selected_card_positions[0]].card.role = 'ALIEN'
       gamestate.positions.card_positions[selected_card_positions[0]].card.team = 'alien'
       new_alien = [selected_card_positions[0]]
       private_message = ['action_voted_together', 'action_turned_newalien', formatPlayerIdentifier([selected_card_positions[0]])[0]]
 
       break
-    case 'aliens_alienhelper_text':
+    case 'aliens_alienhelper':
       gamestate.positions.card_positions[selected_card_positions[0]].card.team = 'alien'
       new_alien_helper = [selected_card_positions[0]]
       private_message = ['action_voted_together', 'action_turned_alienhelper', formatPlayerIdentifier([selected_card_positions[0]])[0]]

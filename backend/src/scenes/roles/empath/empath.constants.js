@@ -1,18 +1,18 @@
-export const empathKeys = ['identifier_everyone_text', 'identifier_oddplayers_text', 'identifier_evenplayers_text', 'activePlayers']
+export const empathKeys = ['identifier_everyone', 'identifier_oddplayers', 'identifier_evenplayers', 'activePlayers']
 
 export const randomEmpathInstructions = [
-  'empath_action1_text',
-  'empath_action2_text',
-  'empath_action3_text',
-  'empath_action4_text',
-  'empath_action5_text',
-  'empath_action6_text',
-  'empath_action7_text',
-  'empath_action8_text',
-  'empath_action9_text',
-  'empath_action10_text',
-  'empath_action11_text',
-  'empath_action12_text',
-  'empath_action13_text',
-  'empath_action14_text'
+  'empath_action1',
+  'empath_action2',
+  'empath_action3',
+  'empath_action4',
+  'empath_action5',
+  'empath_action6',
+  'empath_action7',
+  'empath_action8',
+  'empath_action9',
+  'empath_action10',
+  'empath_action11',
+  'empath_action12',
+  'empath_action13',
+  'empath_action14'
 ]

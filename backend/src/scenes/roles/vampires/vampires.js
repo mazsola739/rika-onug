@@ -3,7 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { vampiresAction } from './vampires.action'
 
 export const vampires = (gamestate, title) => {
-  const narration = ['vampires_kickoff_text', 'vampires_vote_text']
+  const narration = ['vampires_kickoff', 'vampires_vote']
   const tokens = getAllPlayerTokens(gamestate.players)
 
   tokens.forEach(token => {

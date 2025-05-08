@@ -4,7 +4,7 @@ import { everyonemarkAction } from './everyonemark.action'
 
 export const everyonemark = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['everyone_mark_text']
+  const narration = ['everyone_mark']
 
   tokens.forEach(token => {
     let action = {}

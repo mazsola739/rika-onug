@@ -4,7 +4,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 
 export const voodoolou = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['voodoolou_kickoff_text']
+  const narration = ['voodoolou_kickoff']
 
   tokens.forEach(token => {
     let action = {}

@@ -4,7 +4,7 @@ export const morticianAction = (gamestate, token, title, prefix) => {
   const randomMorticianInstruction = gamestate.roles[prefix].instruction
   const morticianKey = gamestate.roles[prefix].key
 
-  if (morticianKey === 'identifier_yourself_text') {
+  if (morticianKey === 'identifier_yourself') {
     if (!gamestate.players[token].shield) {
       const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
 
@@ -47,7 +47,7 @@ export const morticianAction = (gamestate, token, title, prefix) => {
     }
 
     return generateRoleAction(gamestate, token, {
-      private_message: [selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : `action_may_${morticianKey.replace('identifier_', '').replace('_text', '')}`],
+      private_message: [selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : `action_may_${morticianKey.replace('identifier_', '')}`],
       selectableCards: {
         selectable_cards: selectablePlayerNumbers,
         selectable_card_limit: { player: limit, center: 0 }

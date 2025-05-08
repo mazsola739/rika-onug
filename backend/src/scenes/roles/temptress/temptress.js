@@ -4,7 +4,7 @@ import { temptressAction } from './temptress.action'
 
 export const temptress = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['temptress_kickoff_text']
+  const narration = ['temptress_kickoff']
 
   tokens.forEach(token => {
     let action = {}

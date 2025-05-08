@@ -4,7 +4,7 @@ import { marksmanAction } from './marksman.action'
 
 export const marksman = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_marksman_kickoff_text' : 'marksman_kickoff_text', 'marksman_kickoff2_text']
+  const narration = [hasDoppelganger ? 'doppelganger_marksman_kickoff' : 'marksman_kickoff', 'marksman_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

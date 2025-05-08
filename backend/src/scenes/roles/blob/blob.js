@@ -16,7 +16,7 @@ export const blob = (gamestate, title) => {
   }
 
   const randomKickoff = getRandomItemFromArray(availableBlobOptions)
-  const narration = [randomKickoff, randomKickoff.includes('1p') ? 'blob_is_end_text' : 'blob_are_end_text']
+  const narration = [randomKickoff, randomKickoff.includes('1p') ? 'blob_is_end' : 'blob_are_end']
 
   gamestate.roles.blob.instruction = randomKickoff
 

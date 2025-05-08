@@ -5,7 +5,7 @@ import { psychicAction } from './psychic.action'
 
 export const psychic = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [`${prefix}_kickoff_text`]
+  const narration = [`${prefix}_kickoff`]
   const randomPsychicInstruction = getRandomItemFromArray(randomPsychicInstructions)
   const psychicKey = getRandomItemFromArray(psychicKeys)
 

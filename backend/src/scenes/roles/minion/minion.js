@@ -4,7 +4,7 @@ import { minionAction } from './minion.action'
 
 export const minion = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_minion_kickoff_text' : 'minion_kickoff_text', 'minion_kickoff2_text']
+  const narration = [hasDoppelganger ? 'doppelganger_minion_kickoff' : 'minion_kickoff', 'minion_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

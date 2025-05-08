@@ -4,7 +4,7 @@ import { apprenticetannerAction } from './apprenticetanner.action'
 
 export const apprenticetanner = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_apprenticetanner_kickoff_text' : 'apprenticetanner_kickoff_text', 'apprenticetanner_kickoff2_text']
+  const narration = [hasDoppelganger ? 'doppelganger_apprenticetanner_kickoff' : 'apprenticetanner_kickoff', 'apprenticetanner_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

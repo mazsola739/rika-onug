@@ -4,7 +4,7 @@ import { seerAction } from './seer.action'
 
 export const seer = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['seer_kickoff_text']
+  const narration = ['seer_kickoff']
 
   tokens.forEach(token => {
     let action = {}

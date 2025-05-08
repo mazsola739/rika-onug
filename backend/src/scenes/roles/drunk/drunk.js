@@ -4,7 +4,7 @@ import { drunkAction } from './drunk.action'
 
 export const drunk = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['drunk_kickoff_text']
+  const narration = ['drunk_kickoff']
 
   tokens.forEach(token => {
     let action = {}

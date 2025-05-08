@@ -16,39 +16,39 @@ export const rascalAction = (gamestate, token, title, prefix) => {
     const result = {}
 
     if (higherOrLower === 'lower') {
-        for (let i = playerNumber - 1; i >= 1; i--) {
-            result[i] = players[Object.keys(players).find(key => players[key].player_number === `player_${i}`)]
-        }
+      for (let i = playerNumber - 1; i >= 1; i--) {
+        result[i] = players[Object.keys(players).find(key => players[key].player_number === `player_${i}`)]
+      }
     } else if (higherOrLower === 'higher') {
-        const totalPlayers = Object.keys(players).length
-        for (let i = playerNumber + 1; i <= totalPlayers; i++) {
-            result[i] = players[Object.keys(players).find(key => players[key].player_number === `player_${i}`)]
-        }
+      const totalPlayers = Object.keys(players).length
+      for (let i = playerNumber + 1; i <= totalPlayers; i++) {
+        result[i] = players[Object.keys(players).find(key => players[key].player_number === `player_${i}`)]
+      }
     }
 
     return result
-}
+  }
 
   const getSelectableTwoPlayers = rascalKey => {
     switch (rascalKey) {
-      case 'identifier_any2_text':
+      case 'identifier_any2':
         return getAllPlayerTokens(gamestate.players)
 
-      case 'identifier_any2even_text':
-      case 'identifier_any2odd_text': {
-        const evenOrOddTwo = rascalKey.replace('identifier_any2', '').replace('_text', '')
+      case 'identifier_any2even':
+      case 'identifier_any2odd': {
+        const evenOrOddTwo = rascalKey.replace('identifier_any2', '')
         return getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOddTwo)
       }
 
-      case 'identifier_any2higher_text':
-      case 'identifier_any2lower_text': {
-        const higherOrLowerTwo = rascalKey.replace('identifier_any2', '').replace('_text', '')
+      case 'identifier_any2higher':
+      case 'identifier_any2lower': {
+        const higherOrLowerTwo = rascalKey.replace('identifier_any2', '')
         return getAnyHigherOrLowerPlayerNumbersByToken(gamestate.players, higherOrLowerTwo)
       }
 
-      case 'identifier_2leftneighbors_text':
-      case 'identifier_2rightneighbors_text':
-      case 'identifier_bothneighbors_text': {
+      case 'identifier_2leftneighbors':
+      case 'identifier_2rightneighbors':
+      case 'identifier_bothneighbors': {
         const directionTwo = rascalKey.includes('left') ? 'left' : rascalKey.includes('right') ? 'right' : 'both'
         const amountTwo = rascalKey.includes('2') ? 2 : 1
         return getPlayerNeighborsByToken(gamestate.players, token, directionTwo, amountTwo)
@@ -58,24 +58,24 @@ export const rascalAction = (gamestate, token, title, prefix) => {
 
   const getSelectableOnePlayers = rascalKey => {
     switch (rascalKey) {
-      case 'identifier_higher_text':
-      case 'identifier_lower_text': {
-        const higherOrLowerOne = rascalKey.replace('identifier_', '').replace('_text', '')
+      case 'identifier_higher':
+      case 'identifier_lower': {
+        const higherOrLowerOne = rascalKey.replace('identifier_', '')
         return getAnyHigherOrLowerPlayerNumbersByToken(gamestate.players, higherOrLowerOne)
       }
 
-      case 'identifier_any_text':
+      case 'identifier_any':
         return getAllPlayerTokens(gamestate.players)
 
-      case 'identifier_anyeven_text':
-      case 'identifier_anyodd_text': {
-        const evenOrOddOne = rascalKey.replace('identifier_any', '').replace('_text', '')
+      case 'identifier_anyeven':
+      case 'identifier_anyodd': {
+        const evenOrOddOne = rascalKey.replace('identifier_any', '')
         return getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOddOne)
       }
 
-      case 'identifier_oneneighbor_text':
-      case 'identifier_leftneighbor_text':
-      case 'identifier_rightneighbor_text': {
+      case 'identifier_oneneighbor':
+      case 'identifier_leftneighbor':
+      case 'identifier_rightneighbor': {
         const directionOne = rascalKey.includes('left') ? 'left' : rascalKey.includes('right') ? 'right' : 'both'
         return getPlayerNeighborsByToken(gamestate.players, token, directionOne, 1)
       }
@@ -85,11 +85,11 @@ export const rascalAction = (gamestate, token, title, prefix) => {
   const selectableTwoPlayers = getSelectableTwoPlayers(rascalKey)
   const selectableOnePlayers = getSelectableOnePlayers(rascalKey)
 
-  if (randomRascalInstruction === 'rascal_troublemaker_text') {
+  if (randomRascalInstruction === 'rascal_troublemaker') {
     selectableCards = getSelectablePlayersWithNoShield(selectableTwoPlayers) <= 2 ? [] : getSelectablePlayersWithNoShield(selectableTwoPlayers)
     limit = selectableCards.length >= 2 ? 2 : 0
     privateMessage = [selectableCards.length >= 2 ? 'action_may_two_any' : 'action_no_selectable_player']
-  } else if (randomRascalInstruction === 'rascal_drunk_text' || randomRascalInstruction === 'rascal_robber_text') {
+  } else if (randomRascalInstruction === 'rascal_drunk' || randomRascalInstruction === 'rascal_robber') {
     if (gamestate.players[token].shield) {
       gamestate.players[token].player_history[title] = {
         ...gamestate.players[token].player_history[title],
@@ -100,11 +100,11 @@ export const rascalAction = (gamestate, token, title, prefix) => {
         private_message: ['action_shielded']
       })
     } else {
-      selectableCards = rascalKey === 'identifier_center_text' ? CENTER_CARD_POSITIONS : getSelectableOtherPlayerNumbersWithNoShield(selectableOnePlayers, token)
-      privateMessage = [selectableCards.length === 0 ? 'action_no_selectable_player' : randomRascalInstruction === 'rascal_drunk_text' ? 'action_must_one_any_other' : 'action_may_one_any_other']
+      selectableCards = rascalKey === 'identifier_center' ? CENTER_CARD_POSITIONS : getSelectableOtherPlayerNumbersWithNoShield(selectableOnePlayers, token)
+      privateMessage = [selectableCards.length === 0 ? 'action_no_selectable_player' : randomRascalInstruction === 'rascal_drunk' ? 'action_must_one_any_other' : 'action_may_one_any_other']
     }
   } else {
-    selectableCards = rascalKey === 'identifier_center_text' ? CENTER_CARD_POSITIONS : getSelectablePlayersWithNoShield(selectableOnePlayers)
+    selectableCards = rascalKey === 'identifier_center' ? CENTER_CARD_POSITIONS : getSelectablePlayersWithNoShield(selectableOnePlayers)
     privateMessage = [selectableCards.length === 0 ? 'action_no_selectable_player' : 'action_may_one_any_other']
   }
 
@@ -114,9 +114,9 @@ export const rascalAction = (gamestate, token, title, prefix) => {
     selectableLimit = { player: limit, center: 0 }
   }
 
-  const random = randomRascalInstruction.replace('rascal_', '').replace('_text', '')
+  const random = randomRascalInstruction.replace('rascal_', '')
 
-  const obligatory = randomRascalInstruction === 'rascal_drunk_text'
+  const obligatory = randomRascalInstruction === 'rascal_drunk'
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

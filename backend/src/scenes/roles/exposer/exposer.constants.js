@@ -1,1 +1,1 @@
-export const randomExposerInstructions = ['exposer_flip1_text', 'exposer_flip2_text', 'exposer_flip3_text']
+export const randomExposerInstructions = ['exposer_flip1', 'exposer_flip2', 'exposer_flip3']

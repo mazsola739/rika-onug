@@ -4,7 +4,7 @@ import { paranormalinvestigatorAction } from './paranormalinvestigator.action'
 
 export const paranormalinvestigator = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['paranormalinvestigator_kickoff_text']
+  const narration = ['paranormalinvestigator_kickoff']
 
   tokens.forEach(token => {
     let action = {}

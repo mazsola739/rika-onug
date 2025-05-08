@@ -4,7 +4,7 @@ import { apprenticeseerAction } from './apprenticeseer.action'
 
 export const apprenticeseer = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['apprenticeseer_kickoff_text']
+  const narration = ['apprenticeseer_kickoff']
 
   tokens.forEach(token => {
     let action = {}

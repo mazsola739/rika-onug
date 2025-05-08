@@ -4,7 +4,7 @@ import { troublemakerAction } from './troublemaker.action'
 
 export const troublemaker = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['troublemaker_kickoff_text']
+  const narration = ['troublemaker_kickoff']
 
   tokens.forEach(token => {
     let action = {}

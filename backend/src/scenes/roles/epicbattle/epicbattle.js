@@ -7,14 +7,14 @@ export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalP
   const narration = []
 
   if (hasEpicBattle) {
-    narration.push('everyone_epic_intro_text')
+    narration.push('everyone_epic_intro')
   } else if (!hasEpicBattle && hasEasterEgg) {
     if (totalPlayers === 12) {
-      narration.push('easteregg_really_text', 'easteregg_whatever_text')
+      narration.push('easteregg_really', 'easteregg_whatever')
     } else if (nobadguys) {
-      narration.push(getRandomItemFromArray(random_easteregg_nobadguys), 'easteregg_whatever_text')
+      narration.push(getRandomItemFromArray(random_easteregg_nobadguys), 'easteregg_whatever')
     } else if (nogoodguys) {
-      narration.push(getRandomItemFromArray(random_easteregg_nogoodguys), 'easteregg_whatever_text')
+      narration.push(getRandomItemFromArray(random_easteregg_nogoodguys), 'easteregg_whatever')
     }
   }
 

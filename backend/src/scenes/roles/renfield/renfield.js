@@ -5,7 +5,7 @@ import { renfieldAction } from './renfield.action'
 //TODO no vampire he is villager
 export const renfield = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_renfield_kickoff_text' : 'renfield_kickoff_text', 'renfield_kickoff2_text']
+  const narration = [hasDoppelganger ? 'doppelganger_renfield_kickoff' : 'renfield_kickoff', 'renfield_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

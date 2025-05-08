@@ -4,7 +4,7 @@ import { assassinAction } from './assassin.action'
 
 export const assassin = (gamestate, title, hasApprenticeAssassin, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [`${prefix}_kickoff_text`, 'assassin_kickoff2_text', hasApprenticeAssassin && 'assassin_appassassin_assassin_text']
+  const narration = [`${prefix}_kickoff`, 'assassin_kickoff2', hasApprenticeAssassin && 'assassin_appassassin_assassin']
 
   tokens.forEach(token => {
     let action = {}

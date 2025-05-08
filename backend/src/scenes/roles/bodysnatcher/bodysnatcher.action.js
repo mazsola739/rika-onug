@@ -21,7 +21,7 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
   let interactionMessage
   let scene_end = false
 
-  if (randomBodysnatcherInstruction === 'bodysnatcher_steal_text') {
+  if (randomBodysnatcherInstruction === 'bodysnatcher_steal') {
     const getAnyOtherPlayersByToken = (players, token) => {
       const result = {}
 
@@ -35,20 +35,20 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
     }
 
     switch (bodysnatcherKey) {
-      case 'identifier_anyeven_text':
-      case 'identifier_anyodd_text': {
-        const evenOrOdd = bodysnatcherKey.replace('identifier_', '').replace('_text', '').replace('any', '')
+      case 'identifier_anyeven':
+      case 'identifier_anyodd': {
+        const evenOrOdd = bodysnatcherKey.replace('identifier_', '').replace('any', '')
         selectablePlayers = getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd)
         break
       }
-      case 'identifier_leftneighbor_text':
-      case 'identifier_rightneighbor_text':
-      case 'identifier_oneneighbor_text': {
+      case 'identifier_leftneighbor':
+      case 'identifier_rightneighbor':
+      case 'identifier_oneneighbor': {
         const direction = bodysnatcherKey.includes('left') ? 'left' : bodysnatcherKey.includes('right') ? 'right' : 'both'
         selectablePlayers = getPlayerNeighborsByToken(gamestate.players, token, direction, 1)
         break
       }
-      case 'identifier_any_text':
+      case 'identifier_any':
         selectablePlayers = getAnyOtherPlayersByToken(gamestate.players)
         break
     }
@@ -61,7 +61,7 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
     }
     interactionMessage = selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : 'action_must_one_any_non_alien'
     scene_end = selectablePlayerNumbers.length === 0
-  } else if (randomBodysnatcherInstruction === 'bodysnatcher_center_text') {
+  } else if (randomBodysnatcherInstruction === 'bodysnatcher_center') {
     selectableCards = {
       selectable_cards: CENTER_CARD_POSITIONS,
       selectable_card_limit: { player: 0, center: 1 }

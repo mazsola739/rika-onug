@@ -7,7 +7,7 @@ export const exposer = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
 
   const randomExposerInstruction = getRandomItemFromArray(randomExposerInstructions)
-  const narration = [`${prefix}_kickoff_text`, randomExposerInstruction]
+  const narration = [`${prefix}_kickoff`, randomExposerInstruction]
 
   gamestate.roles[prefix].instruction = randomExposerInstruction
 

@@ -4,7 +4,7 @@ import { curatorAction } from './curator.action'
 
 export const curator = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [`${prefix}_kickoff_text`, 'curator_kickoff2_text']
+  const narration = [`${prefix}_kickoff`, 'curator_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

@@ -5,7 +5,7 @@ import { evilometerAction } from './evilometer.action'
 //TODO super villains can see evilometer
 export const evilometer = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_evilometer_kickoff_text' : 'evilometer_kickoff_text', 'evilometer_kickoff2_text']
+  const narration = [hasDoppelganger ? 'doppelganger_evilometer_kickoff' : 'evilometer_kickoff', 'evilometer_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

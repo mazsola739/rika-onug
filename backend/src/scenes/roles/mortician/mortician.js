@@ -5,9 +5,9 @@ import { morticianAction } from './mortician.action'
 
 export const mortician = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [`${prefix}_kickoff_text`]
+  const narration = [`${prefix}_kickoff`]
   const randomMorticianInstruction = getRandomItemFromArray(randomMorticianInstructions)
-  const morticianKey = randomMorticianInstruction === 'mortician_2cards_text' ? 'identifier_bothneighbors_text' : getRandomItemFromArray(morticianKeys)
+  const morticianKey = randomMorticianInstruction === 'mortician_2cards' ? 'identifier_bothneighbors' : getRandomItemFromArray(morticianKeys)
   narration.push(randomMorticianInstruction, morticianKey)
 
   gamestate.roles[prefix].instruction = randomMorticianInstruction

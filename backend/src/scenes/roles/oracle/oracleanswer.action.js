@@ -14,7 +14,7 @@ export const oracleanswerAction = (gamestate, token, title) => {
   let obligatory = false
 
   switch (oracleQuestion) {
-    case 'oracle_guessnumber_text':
+    case 'oracle_guessnumber':
       if (oracleAnswer.includes('success')) {
         gamestate.players[token].card.eyes_open = true
         privateMessage = ['action_oracle_open_you_eyes']
@@ -24,12 +24,12 @@ export const oracleanswerAction = (gamestate, token, title) => {
         privateMessage = ['action_oracle_team']
       }
       break
-    case 'oracle_viewplayer_text':
+    case 'oracle_viewplayer':
       gamestate.players[token].card_or_mark_action = true
       showCards = getCardIdsByPositions(gamestate.positions.card_positions, [`player_${oracleAnswer}`])
       privateMessage = ['action_selected_card', formatPlayerIdentifier([`player_${oracleAnswer}`])[0]]
       break
-    case 'oracle_alienteam_text':
+    case 'oracle_alienteam':
       if (oracleAftermath.includes('alienteam_yes')) {
         gamestate.players[token].card.player_team = 'alien'
         privateMessage = ['action_alien_team']
@@ -43,7 +43,7 @@ export const oracleanswerAction = (gamestate, token, title) => {
         privateMessage = ['action_stay_oracle']
       }
       break
-    case 'oracle_werewolfteam_text':
+    case 'oracle_werewolfteam':
       if (oracleAftermath.includes('werewolfteam')) {
         gamestate.players[token].card.player_team = 'werewolf'
         gamestate.positions.card_positions[currentPlayerNumber].card.team = 'werewolf'
@@ -52,7 +52,7 @@ export const oracleanswerAction = (gamestate, token, title) => {
         privateMessage = ['action_stay_oracle']
       }
       break
-    case 'oracle_vampireteam_text':
+    case 'oracle_vampireteam':
       if (oracleAftermath.includes('vampireteam')) {
         gamestate.players[token].card.player_team = 'vampire'
         gamestate.positions.card_positions[currentPlayerNumber].card.team = 'vampire'
@@ -61,7 +61,7 @@ export const oracleanswerAction = (gamestate, token, title) => {
         privateMessage = ['action_stay_oracle']
       }
       break
-    case 'oracle_centerexchange_text':
+    case 'oracle_centerexchange':
       if (oracleAftermath.includes('yes1')) {
         selectableCards = {
           selectable_cards: CENTER_CARD_POSITIONS,
@@ -74,7 +74,7 @@ export const oracleanswerAction = (gamestate, token, title) => {
         privateMessage = ['action_stay_oracle']
       }
       break
-    case 'oracle_viewcenter_text':
+    case 'oracle_viewcenter':
       if (oracleAftermath.includes('yes1')) {
         selectableCards = {
           selectable_cards: CENTER_CARD_POSITIONS,

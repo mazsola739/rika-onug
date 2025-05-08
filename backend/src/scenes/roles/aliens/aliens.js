@@ -8,15 +8,15 @@ import { hasCow } from '../../conditions'
 
 export const aliens = (gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['aliens_kickoff_text']
+  const narration = ['aliens_kickoff']
 
   if (hasCow(selected_cards)) {
-    narration.push('aliens_kickoff_cow_text')
+    narration.push('aliens_kickoff_cow')
   } else if (!hasCow(selected_cards)) {
-    narration.push('aliens_kickoff_aliens_text')
+    narration.push('aliens_kickoff_aliens')
   }
 
-  const randomAlienInstruction = gamestate.alienexchange ? getRandomItemFromArray(['aliens_left_text', 'aliens_right_text']) : getRandomItemFromArray(randomAlienInstructions)
+  const randomAlienInstruction = gamestate.alienexchange ? getRandomItemFromArray(['aliens_left', 'aliens_right']) : getRandomItemFromArray(randomAlienInstructions)
   let alienKey = []
 
   if (randomAlienInstruction.includes('view')) {
@@ -28,7 +28,7 @@ export const aliens = (gamestate, title, selected_cards) => {
 
     narration.push(randomAlienInstruction)
     narration.push(...alienKey)
-  } else if (randomAlienInstruction === 'aliens_newalien_text' || randomAlienInstruction === 'aliens_alienhelper_text') {
+  } else if (randomAlienInstruction === 'aliens_newalien' || randomAlienInstruction === 'aliens_alienhelper') {
     alienKey = [getRandomItemFromArray(alienAllKeys)]
     narration.push(randomAlienInstruction)
     narration.push(...alienKey)

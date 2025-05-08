@@ -10,7 +10,7 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
 
   const oracleQuestion = gamestate.oracle.question
 
-  if (oracleQuestion === 'oracle_centerexchange_text') {
+  if (oracleQuestion === 'oracle_centerexchange') {
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
     const currentPlayerCard = {
       ...gamestate.positions.card_positions[currentPlayerNumber].card
@@ -34,7 +34,7 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
     action = generateRoleAction(gamestate, token, {
       private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT']
     })
-  } else if (oracleQuestion === 'oracle_viewcenter_text') {
+  } else if (oracleQuestion === 'oracle_viewcenter') {
     const limit = gamestate.players[token].player_history[title].selectable_card_limit.center
     const selectedCardPositions = selected_card_positions.slice(0, limit)
     const selectedCards = getCardIdsByPositions(gamestate.positions.card_positions, selectedCardPositions)

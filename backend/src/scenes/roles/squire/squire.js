@@ -4,7 +4,7 @@ import { squireAction } from './squire.action'
 
 export const squire = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_squire_kickoff_text' : 'squire_kickoff_text', 'squire_kickoff2_text']
+  const narration = [hasDoppelganger ? 'doppelganger_squire_kickoff' : 'squire_kickoff', 'squire_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

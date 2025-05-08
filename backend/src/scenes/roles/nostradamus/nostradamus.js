@@ -4,7 +4,7 @@ import { nostradamusAction } from './nostradamus.action'
 
 export const nostradamus = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['nostradamus_kickoff_text']
+  const narration = ['nostradamus_kickoff']
 
   tokens.forEach(token => {
     let action = {}

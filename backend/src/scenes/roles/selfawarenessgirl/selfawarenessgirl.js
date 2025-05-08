@@ -4,7 +4,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 
 export const selfawarenessgirl = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_selfawarenessgirl_kickoff_text' : 'selfawarenessgirl_kickoff_text', 'selfawarenessgirl_kickoff2_text']
+  const narration = [hasDoppelganger ? 'doppelganger_selfawarenessgirl_kickoff' : 'selfawarenessgirl_kickoff', 'selfawarenessgirl_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

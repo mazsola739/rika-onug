@@ -4,7 +4,7 @@ import { villageidiotAction } from './villageidiot.action'
 
 export const villageidiot = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['villageidiot_kickoff_text']
+  const narration = ['villageidiot_kickoff']
 
   tokens.forEach(token => {
     let action = {}

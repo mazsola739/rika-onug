@@ -5,7 +5,7 @@ import { cowAction } from './cow.action'
 //TODO aliens can see cow
 export const cow = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_cow_kickoff_text' : 'cow_kickoff_text', 'cow_kickoff2_text']
+  const narration = [hasDoppelganger ? 'doppelganger_cow_kickoff' : 'cow_kickoff', 'cow_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

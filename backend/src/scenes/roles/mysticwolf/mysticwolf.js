@@ -4,7 +4,7 @@ import { mysticwolfAction } from './mysticwolf.action'
 
 export const mysticwolf = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['mysticwolf_kickoff_text']
+  const narration = ['mysticwolf_kickoff']
 
   tokens.forEach(token => {
     let action = {}

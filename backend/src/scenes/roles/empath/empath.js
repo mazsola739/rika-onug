@@ -16,9 +16,9 @@ export const empath = (gamestate, title, prefix) => {
 
   const empathVotersPlayerNumbers = (totalPlayers, evenOdd = '') => {
     const result = []
-  
+
     totalPlayers = Math.min(Math.max(1, totalPlayers), 12)
-  
+
     let start = 1
     let step = 1
     if (evenOdd === 'even') {
@@ -28,20 +28,21 @@ export const empath = (gamestate, title, prefix) => {
       start = 1
       step = 2
     }
-  
+
     for (let i = start; i <= totalPlayers; i += step) {
       result.push(`player_${i}`)
     }
-  
+
     return result
   }
 
   let activePlayerNumbers = []
   if (randomKey === 'activePlayers') {
-    activePlayerNumbers = [...randomPlayers.map(player => player.replace('identifier_player', 'player_').replace('_text', ''))]
-  } else if (randomKey === 'identifier_oddplayers_text' || randomKey === 'identifier_evenplayers_text' || randomKey === 'identifier_everyone_text') {
+    activePlayerNumbers = [...randomPlayers.map(player => player.replace('identifier_player', 'player_'))]
+  } else if (randomKey === 'identifier_oddplayers' || randomKey === 'identifier_evenplayers' || randomKey === 'identifier_everyone') {
     const evenOdd = randomKey.includes('even') ? 'even' : randomKey.includes('odd') ? 'odd' : ''
 
+    //TODO fix!
     activePlayerNumbers = empathVotersPlayerNumbers(totalPlayers, evenOdd)
   }
 

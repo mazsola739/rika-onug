@@ -4,7 +4,7 @@ import { insomniacAction } from './insomniac.action'
 
 export const insomniac = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [hasDoppelganger ? 'doppelganger_insomniac_kickoff_text' : 'insomniac_kickoff_text', 'insomniac_kickoff2_text']
+  const narration = [hasDoppelganger ? 'doppelganger_insomniac_kickoff' : 'insomniac_kickoff', 'insomniac_kickoff2']
 
   tokens.forEach(token => {
     let action = {}

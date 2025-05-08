@@ -1,2 +1,2 @@
-export const apprenticetanner_kickoff_text = 'APPRENTICE TANNER,'
-export const apprenticetanner_kickoff2_text = 'look for Tanner'
+export const apprenticetanner_kickoff = 'APPRENTICE TANNER,'
+export const apprenticetanner_kickoff2 = 'look for Tanner'
