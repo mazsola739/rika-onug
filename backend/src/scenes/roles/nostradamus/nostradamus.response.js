@@ -43,7 +43,7 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
   }
 
   gamestate.players[token].card_or_mark_action = true
-  gamestate.nostradamus_team = gamestate.players[token].card.player_team
+  gamestate.roles.nostradamus.team = gamestate.players[token].card.player_team
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

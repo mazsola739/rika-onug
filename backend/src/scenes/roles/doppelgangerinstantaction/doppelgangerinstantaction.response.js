@@ -1,21 +1,4 @@
-import {
-  alphawolfResponse,
-  apprenticeseerResponse,
-  cupidResponse,
-  diseasedResponse,
-  drunkResponse,
-  instigatorResponse,
-  mysticwolfResponse,
-  paranormalinvestigatorResponse,
-  robberResponse,
-  seerResponse,
-  sentinelResponse,
-  temptressResponse,
-  thingResponse,
-  troublemakerResponse,
-  villageidiotResponse,
-  witchResponse
-} from '..'
+import { alphawolfResponse, apprenticeseerResponse, cupidResponse, diseasedResponse, drunkResponse, instigatorResponse, mysticwolfResponse, paranormalinvestigatorResponse, robberResponse, seerResponse, sentinelResponse, temptressResponse, thingResponse, troublemakerResponse, villageidiotResponse, witchResponse } from '..'
 
 export const doppelgangerinstantactionResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
   const new_role_id = gamestate.players[token]?.new_role_id

@@ -1,8 +1,7 @@
-import { getNostradamusTeam } from '../../sceneUtils'
-
 export const nostradamusReaction = (gamestate, title) => {
   /*   const tokens = getAllPlayerTokens(gamestate.players)   */
-  const nostradamusTeam = getNostradamusTeam(gamestate.nostradamus_team)
+  const team = gamestate.roles.nostradamus.team
+  const nostradamusTeam = !team ? 'nostradamus_team_villager_text' : `nostradamus_team_${team}_text`
   const narration = ['nostradamus_teamstart_text', nostradamusTeam]
 
   /*   

@@ -1,3 +1,4 @@
+//TODO uncomment
 export const randomAlienInstructions = [
   'aliens_view_text',
   /* 'aliens_allview_text', */

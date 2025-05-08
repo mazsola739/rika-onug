@@ -1,6 +1,6 @@
 import { VOTE } from '../../../constants'
 import { webSocketServerConnectionsPerRoom } from '../../../utils'
-import { getEmpathTokensByRoleIds, getDoppelgangerEmpathTokensByRoleIds, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 //TODO empath votes ALL send
@@ -10,6 +10,31 @@ export const empathResponse = (gamestate, token, selected_card_positions, title)
   }
 
   gamestate.players[token].empath_vote = selected_card_positions[0]
+
+  const getEmpathTokensByRoleIds = players => {
+    const result = []
+
+    for (const token in players) {
+      const player = players[token]
+      if (player.card.player_role_id === 77 && player.card.player_original_id !== 1) {
+        result.push(token)
+      }
+    }
+
+    return result
+  }
+  const getDoppelgangerEmpathTokensByRoleIds = players => {
+    const result = []
+
+    for (const token in players) {
+      const player = players[token]
+      if (player.card.player_role_id === 77 && player.card.player_original_id === 1) {
+        result.push(token)
+      }
+    }
+
+    return result
+  }
 
   const empathTokens = title === 'empath' ? getEmpathTokensByRoleIds(gamestate.plyers) : getDoppelgangerEmpathTokensByRoleIds(gamestate.plyers)
 

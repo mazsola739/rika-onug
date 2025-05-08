@@ -1,4 +1,4 @@
-import { getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getSelectablePlayersWithNoShield, getAnyEvenOrOddPlayerNumbers, getNonAlienPlayerNumbersWithNoShield, getNeighborByPosition, moveCards, getCardIdsByPositions, generateRoleAction, getAllPlayerTokens } from '../../sceneUtils'
+import { getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getSelectablePlayersWithNoShield, getAnyEvenOrOddPlayerNumbers, getCardIdsByPositions, generateRoleAction, getAllPlayerTokens } from '../../sceneUtils'
 
 export const aliensAction = (gamestate, token, title) => {
   // TODO fix: only work with cow, if in the selected cards
@@ -37,6 +37,8 @@ export const aliensAction = (gamestate, token, title) => {
     const evenOrOddPlayerNumbers = evenOrOdd ? getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd) : getAllPlayerTokens(gamestate.players)
 
     if (randomAlienInstruction === 'aliens_alienhelper_text') {
+      const getNonAlienPlayerNumbersWithNoShield = (players, aliens, shieldedCards) =>
+        players.filter(player => !aliens.includes(player) && !shieldedCards.includes(player))
       selectablePlayers = getNonAlienPlayerNumbersWithNoShield(evenOrOddPlayerNumbers, aliens, gamestate.positions.shielded_cards)
     } else {
       selectablePlayers = getSelectablePlayersWithNoShield(evenOrOddPlayerNumbers, gamestate.positions.shielded_cards)
@@ -44,6 +46,19 @@ export const aliensAction = (gamestate, token, title) => {
   }
 
   const isSingleSelectionOption = selectablePlayers.length === 1
+
+  const getNeighborByPosition = (players, currentPlayerNumber, direction) => {
+    const currentPlayer = players.indexOf(currentPlayerNumber)
+    let neighborIndex
+
+    if (direction === 'left') {
+        neighborIndex = (currentPlayer - 1 + players.length) % players.length
+    } else if (direction === 'right') {
+        neighborIndex = (currentPlayer + 1) % players.length
+    }
+
+    return players[neighborIndex]
+}
 
   switch (randomAlienInstruction) {
     case 'aliens_stare_text':
@@ -86,6 +101,25 @@ export const aliensAction = (gamestate, token, title) => {
       } else {
         const direction = randomAlienInstruction.includes('left') ? 'left' : 'right'
         const neighbor = getNeighborByPosition(aliensWithoutShield, currentPlayerNumber, direction)
+
+        const moveCards = (cards, direction, movablePlayers) => {
+          const playerCards = Object.fromEntries(Object.entries(cards).filter(([key]) => key.startsWith('player_')))
+          const staticCards = Object.fromEntries(Object.entries(playerCards).filter(([key]) => !movablePlayers.includes(key)))
+          const movableCards = movablePlayers.map(player => playerCards[player])
+        
+          const shiftAmount = direction === 'right' ? 1 : -1
+        
+          const shiftedMovableCards = movablePlayers.reduce((acc, _player, index) => {
+            const newIndex = (index + shiftAmount + movablePlayers.length) % movablePlayers.length
+            acc[movablePlayers[newIndex]] = movableCards[index]
+            return acc
+          }, {})
+        
+          const updatedPlayerCards = { ...playerCards, ...staticCards, ...shiftedMovableCards }
+        
+          return updatedPlayerCards
+        }
+        
         const updatedPlayerCards = moveCards(gamestate.positions.card_positions, direction, aliensWithoutShield)
         gamestate.players[token].card_or_mark_action = true
 

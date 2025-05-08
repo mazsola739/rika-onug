@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { generateRoleAction, getAnyEvenOrOddPlayerNumbers, getAnyOtherPlayersByToken, getPlayerNeighborsByToken, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
+import { generateRoleAction, getAnyEvenOrOddPlayerNumbers, getPlayerNeighborsByToken, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const bodysnatcherAction = (gamestate, token, title, prefix) => {
   if (gamestate.players[token].shield) {
@@ -22,6 +22,18 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
   let scene_end = false
 
   if (randomBodysnatcherInstruction === 'bodysnatcher_steal_text') {
+    const getAnyOtherPlayersByToken = (players, token) => {
+      const result = {}
+
+      for (const player in players) {
+        if (player !== token) {
+          result[player] = players[player]
+        }
+      }
+
+      return result
+    }
+
     switch (bodysnatcherKey) {
       case 'identifier_anyeven_text':
       case 'identifier_anyodd_text': {

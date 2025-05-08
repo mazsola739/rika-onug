@@ -1,13 +1,4 @@
-import {
-  getNarrationByTitle,
-  getAllPlayerTokens,
-  getPlayerNumbersWithMatchingTokens,
-  getSelectablePlayersWithNoShield,
-  generateRoleAction,
-  createAndSendSceneMessage,
-  getPlayerNumberWithMatchingToken,
-  formatPlayerIdentifier
-} from '../../sceneUtils'
+import { getNarrationByTitle, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, createAndSendSceneMessage, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../validators'
 
 export const gremlinResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {

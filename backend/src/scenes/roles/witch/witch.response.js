@@ -1,14 +1,4 @@
-import {
-  getNarrationByTitle,
-  getCardIdsByPositions,
-  getAllPlayerTokens,
-  getPlayerNumbersWithMatchingTokens,
-  getSelectablePlayersWithNoShield,
-  generateRoleAction,
-  formatPlayerIdentifier,
-  createAndSendSceneMessage,
-  getPlayerNumberWithMatchingToken
-} from '../../sceneUtils'
+import { getNarrationByTitle, getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, formatPlayerIdentifier, createAndSendSceneMessage, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const witchResponse = (gamestate, token, selected_card_positions, title) => {

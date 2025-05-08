@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { generateRoleAction, getAllPlayerTokens, getAnyEvenOrOddPlayerNumbers, getAnyHigherOrLowerPlayerNumbersByToken, getPlayerNeighborsByToken, getSelectableOtherPlayerNumbersWithNoShield, getSelectablePlayersWithNoShield } from '../../sceneUtils'
+import { generateRoleAction, getAllPlayerTokens, getAnyEvenOrOddPlayerNumbers, getPlayerNeighborsByToken, getSelectableOtherPlayerNumbersWithNoShield, getSelectablePlayersWithNoShield } from '../../sceneUtils'
 
 export const rascalAction = (gamestate, token, title, prefix) => {
   const randomRascalInstruction = gamestate.roles[prefix].instruction
@@ -10,6 +10,24 @@ export const rascalAction = (gamestate, token, title, prefix) => {
   let selectableCards
   let selectableLimit
   //TODO  scene_end: selectablePlayerNumbers.length === 0
+
+  const getAnyHigherOrLowerPlayerNumbersByToken = (players, token, higherOrLower) => {
+    const playerNumber = parseInt(players[token].player_number.replace('player_', ''), 10)
+    const result = {}
+
+    if (higherOrLower === 'lower') {
+        for (let i = playerNumber - 1; i >= 1; i--) {
+            result[i] = players[Object.keys(players).find(key => players[key].player_number === `player_${i}`)]
+        }
+    } else if (higherOrLower === 'higher') {
+        const totalPlayers = Object.keys(players).length
+        for (let i = playerNumber + 1; i <= totalPlayers; i++) {
+            result[i] = players[Object.keys(players).find(key => players[key].player_number === `player_${i}`)]
+        }
+    }
+
+    return result
+}
 
   const getSelectableTwoPlayers = rascalKey => {
     switch (rascalKey) {

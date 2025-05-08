@@ -1,6 +1,19 @@
-import { alienAbducted, getPlayerNeighborsByToken, generateRoleAction } from '../../sceneUtils'
+import { getPlayerNeighborsByToken, generateRoleAction, getNeighborPlayerNumbersByToken, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const cowAction = (gamestate, token, title) => {
+  const alienAbducted = (players, cowToken) => {
+    const cowNeighbors = getNeighborPlayerNumbersByToken(players, cowToken)
+    const aliens = getPlayerNumbersByGivenConditions(players, 'aliens')
+  
+    for (let alien of aliens) {
+      if (cowNeighbors.includes(alien)) {
+        return true
+      }
+    }
+  
+    return false
+  }
+  
   const neighborIsAlien = alienAbducted(gamestate.players, token)
   const neighbors = getPlayerNeighborsByToken(gamestate.players, token, 'both', 1)
 

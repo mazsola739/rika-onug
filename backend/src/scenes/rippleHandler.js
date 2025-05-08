@@ -1,7 +1,9 @@
+import { WEREWOLVES, ALIEN_IDS, VAMPIRE_IDS, SUPER_VILLAIN_IDS } from '../constants'
+import { cardsJson } from '../data'
 import { logTrace } from '../log'
 import { getRandomItemFromArray } from '../utils'
 import { random_ripple_dualview, ripple_random, rippleAllKeys, rippleAnyKeys, rippleCenterAnyKeys, rippleNeighborKeys } from './roles'
-import { pickRandomUpToThreePlayers, pickRandomOnePlayer, pickRandomTwoPlayers, getRandomSceneNumbers, getRandomSceneNumber, getSceneByCardId } from './sceneUtils'
+import { pickRandomUpToThreePlayers, pickRandomOnePlayer, pickRandomTwoPlayers } from './sceneUtils'
 
 export const rippleHandler = (gamestate, room_id) => {
   logTrace(`rippleHandler in room [${room_id}]`)
@@ -56,6 +58,47 @@ export const rippleHandler = (gamestate, room_id) => {
   }
 
   narration.push('ripple_intro_text')
+
+  const getRandomSceneNumber = selectedCards => {
+    const result = []
+    const filteredArray = selectedCards.filter(card => card !== 50)
+  
+    if (filteredArray.length === 0) return result
+  
+    const randomIndex = Math.floor(Math.random() * filteredArray.length)
+    result.push(filteredArray[randomIndex])
+  
+    return result
+  }
+
+  const getRandomSceneNumbers = selectedCards => {
+    const result = []
+    selectedCards.forEach(card => {
+      if (card !== 50 && Math.random() < 0.5) {
+        result.push(card)
+      }
+    })
+    return result
+  }
+
+  const getSceneByCardId = newSelectedCards => {
+    return newSelectedCards.map(cardId => {
+      const role = cardsJson.find(card => card.id === cardId).role
+  
+      if (WEREWOLVES.includes(cardId)) {
+        return 'WEREWOLVES'
+      } else if (ALIEN_IDS.includes(cardId)) {
+        return 'ALIENS'
+      } else if (VAMPIRE_IDS.includes(cardId)) {
+        return 'VAMPIRES'
+      } else if (SUPER_VILLAIN_IDS.includes(cardId)) {
+        return 'SUPER_VILLAINS'
+      } else {
+        return role
+      }
+    })
+  }
+  
 
   const rippleActions = {
     random_ripple_1minute: () => narration.push('ripple_1minute_text'),

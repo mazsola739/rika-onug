@@ -1,5 +1,5 @@
 import { isActivePlayer } from '../../activePlayer'
-import { createAndSendSceneMessage, empathVotersPlayerNumbers, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
+import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 import { empathAction, empathEveryoneAction } from './empath.action'
 import { empathKeys, randomEmpathInstructions } from './empath.constants'
 
@@ -14,11 +14,34 @@ export const empath = (gamestate, title, prefix) => {
   const randomEmpathInstruction = getRandomItemFromArray(randomEmpathInstructions)
   const narration = [...empathKey, randomEmpathInstruction]
 
+  const empathVotersPlayerNumbers = (totalPlayers, evenOdd = '') => {
+    const result = []
+  
+    totalPlayers = Math.min(Math.max(1, totalPlayers), 12)
+  
+    let start = 1
+    let step = 1
+    if (evenOdd === 'even') {
+      start = 2
+      step = 2
+    } else if (evenOdd === 'odd') {
+      start = 1
+      step = 2
+    }
+  
+    for (let i = start; i <= totalPlayers; i += step) {
+      result.push(`player_${i}`)
+    }
+  
+    return result
+  }
+
   let activePlayerNumbers = []
   if (randomKey === 'activePlayers') {
     activePlayerNumbers = [...randomPlayers.map(player => player.replace('identifier_player', 'player_').replace('_text', ''))]
   } else if (randomKey === 'identifier_oddplayers_text' || randomKey === 'identifier_evenplayers_text' || randomKey === 'identifier_everyone_text') {
     const evenOdd = randomKey.includes('even') ? 'even' : randomKey.includes('odd') ? 'odd' : ''
+
     activePlayerNumbers = empathVotersPlayerNumbers(totalPlayers, evenOdd)
   }
 
