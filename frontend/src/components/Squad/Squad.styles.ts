@@ -28,7 +28,6 @@ export const SquadMembers = styled.div`
 export const Member = styled.div`
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 10px;
 `

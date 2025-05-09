@@ -1,8 +1,12 @@
+import { GuessTokenType } from "types"
+
 export interface RoleTokenProps {
-  token: {
-    image: string
-    expansion: string
-    id: number
-  }
+  token: GuessTokenType
   size?: number
+}
+
+export interface StyledRoleTokenProps {
+  bgImg: string
+  isSelected: boolean
+  size: number
 }

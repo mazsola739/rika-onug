@@ -7,3 +7,7 @@ export interface ReadyPlayerProps {
   ready: boolean
   player_number: string
 }
+
+export interface ReadyProps {
+  ready: boolean
+}

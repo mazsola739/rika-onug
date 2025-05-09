@@ -7,7 +7,6 @@ export const StyledCenterCardsRevealed = styled.div`
 
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   justify-content: center;
   gap: 10px;
 `

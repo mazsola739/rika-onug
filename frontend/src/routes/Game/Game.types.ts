@@ -1,4 +1,4 @@
-export interface GameProps {
+export interface StyledGameProps {
   nightfall: boolean
   sunrise: boolean
 }

@@ -3,7 +3,10 @@ export interface QuickGuideTokenProps {
   expansion?: string
 }
 
+export interface QuickGuideItemProps {
+  expansion: string
+}
+
 export interface StyledQuickGuideTokenProps {
-  bgImg?: string
-  expansion?: string
+  bgImg: string
 }

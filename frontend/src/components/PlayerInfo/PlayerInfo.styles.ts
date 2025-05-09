@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
+import { StyledPlayerInfoProps } from './PlayerInfo.types'
 
-export const StyledPlayerInfo = styled.div<{ result?: boolean }>`
+export const StyledPlayerInfo = styled.div<StyledPlayerInfoProps>`
   /* Flexbox/Grid */
   display: grid;
   justify-content: center;

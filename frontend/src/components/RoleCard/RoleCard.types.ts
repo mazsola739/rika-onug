@@ -4,6 +4,6 @@ export interface RoleCardProps {
   card: CardJson
 }
 
-export interface StyledRoleCardProps {
+export interface RoleCardStylesProps {
   isSelected: boolean
 }

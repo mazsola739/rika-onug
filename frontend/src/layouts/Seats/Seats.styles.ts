@@ -11,7 +11,6 @@ export const StyledSideSeats = styled.div`
 export const StyledTopSeats = styled.div`
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: space-around;
 `

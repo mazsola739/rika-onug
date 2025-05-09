@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
+import { GuessTokensProps, StyledPlayerCardProps } from './PlayerCard.types'
 
-export const StyledPlayerCard = styled.div<{ ownCard?: boolean }>`
+export const StyledPlayerCard = styled.div<StyledPlayerCardProps>`
   /* Flexbox/Grid */
   display: flex;
   flex-direction: ${({ ownCard }) => (ownCard ? `row` : `column`)};
@@ -11,7 +12,6 @@ export const StyledPlayerCard = styled.div<{ ownCard?: boolean }>`
 export const CardContainer = styled.div`
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: flex-start;
 `
@@ -46,7 +46,7 @@ export const Tokens = styled.div`
   gap: 2px;
 `
 
-export const GuessTokens = styled.div<{ width?: number; ownCard?: boolean }>`
+export const GuessTokens = styled.div<GuessTokensProps>`
   /* Box Model */
   min-width: ${({ width }) => width}px;
   min-height: ${({ width }) => width}px;

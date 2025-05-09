@@ -4,3 +4,8 @@ export interface TokenImageProps {
   ready?: boolean
   onClick?: () => void
 }
+
+export interface StyledTokenImageProps {
+  size: number
+  ready: boolean
+}

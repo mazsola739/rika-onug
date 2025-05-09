@@ -1,10 +1,8 @@
 import styled from '@emotion/styled'
+import { StyledRoleTokenProps } from './RoleToken.types'
 
-export const StyledRoleToken = styled.img<{
-  bgImg: string
-  isSelected: boolean
-  size: number
-}>`
+//TODO type
+export const StyledRoleToken = styled.img<StyledRoleTokenProps>`
   /* Positioning */
   z-index: 20;
 

@@ -1,6 +1,6 @@
 import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
-import { GameProps } from './Game.types'
+import { StyledGameProps } from './Game.types'
 
 //NIGHTMODE
 const fadeOutSun = keyframes`
@@ -35,7 +35,7 @@ const lightenBackground = keyframes`
 `
 
 //GAME //TODO set 1s to desired long sun rise or night fall!!!!
-export const StyledGame = styled.div<GameProps>`
+export const StyledGame = styled.div<StyledGameProps>`
   /* Flexbox/Grid */
   display: grid;
   grid-template-columns: 150px 1fr 150px 360px;

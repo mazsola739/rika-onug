@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { ResultTableCellProps, ResultTableRowProps } from './ResultTable.types'
 
 export const StyledResultTable = styled.div`
   /* Box Model */
@@ -14,7 +15,7 @@ export const StyledResultTable = styled.div`
   }
 `
 
-export const Row = styled.div<{ isHeader?: boolean }>`
+export const ResultTableRow = styled.div<ResultTableRowProps>`
   /* Flexbox/Grid */
   display: flex;
 
@@ -25,7 +26,7 @@ export const Row = styled.div<{ isHeader?: boolean }>`
   background-color: ${({ isHeader }) => (isHeader ? 'rgba(0, 0, 0, 0.5)' : 'transparent')};
 `
 
-export const Cell = styled.div<{ isFixedWidth?: boolean; isMaxWidth?: boolean; isFixedHeight?: boolean }>`
+export const ResultTableCell = styled.div<ResultTableCellProps>`
   /* Box Model */
   flex: ${({ isFixedWidth, isMaxWidth }) => (isFixedWidth ? '0 0 50px' : isMaxWidth ? '0 0 150px' : '1')};
   height: ${({ isFixedHeight }) => (isFixedHeight ? '1.875rem' : '50px')};
@@ -39,7 +40,7 @@ export const Cell = styled.div<{ isFixedWidth?: boolean; isMaxWidth?: boolean; i
   justify-content: center;
 `
 
-export const CellHeader = styled(Cell)`
+export const CellHeader = styled(ResultTableCell)`
   /* Flexbox/Grid */
   display: flex;
   align-items: center;
@@ -49,7 +50,7 @@ export const CellHeader = styled(Cell)`
   font-weight: bold;
 `
 
-export const VotersCell = styled(Cell)`
+export const VotersCell = styled(ResultTableCell)`
   /* Flexbox/Grid */
   display: flex;
   flex-wrap: wrap;

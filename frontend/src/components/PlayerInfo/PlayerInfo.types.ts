@@ -6,3 +6,7 @@ export interface PlayerInfoProps {
   artifact?: string
   player: PlayerType
 }
+
+export interface StyledPlayerInfoProps {
+  result?: boolean
+}

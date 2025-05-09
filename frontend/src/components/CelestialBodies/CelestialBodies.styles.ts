@@ -10,7 +10,6 @@ export const StyledCelestialBodies = styled.div`
 
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
 `

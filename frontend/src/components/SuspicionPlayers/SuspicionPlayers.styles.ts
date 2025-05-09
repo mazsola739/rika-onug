@@ -15,7 +15,6 @@ export const StyledSuspicionPlayers = styled.div`
 export const StyledAccusedPlayers = styled.div`
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
   gap: 3px;

@@ -7,7 +7,6 @@ export const StyledPlayerInfoList = styled.div`
 
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   gap: 8px;
   flex-wrap: wrap;
   /* Visuals */

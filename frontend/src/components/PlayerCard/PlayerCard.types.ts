@@ -6,3 +6,12 @@ export interface PlayerCardProps {
   card?: TablePlayerCard
   ownCard?: boolean
 }
+
+export interface StyledPlayerCardProps {
+  ownCard?: boolean
+}
+
+export interface GuessTokensProps {
+  width?: number
+  ownCard?: boolean 
+}

@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import React from 'react'
 import { playersStore, propStore } from 'store'
 import { ResultType } from 'types'
-import { Cell, CellHeader, Icon, Name, PlayerName, Rank, Row, StyledResultTable, VoterName, VotersCell } from './ResultTable.styles'
+import { ResultTableCell, CellHeader, Icon, Name, PlayerName, Rank, ResultTableRow, StyledResultTable, VoterName, VotersCell } from './ResultTable.styles'
 
 export const ResultTable: React.ComponentType = observer(() => {
   const { player } = playersStore
@@ -25,7 +25,7 @@ export const ResultTable: React.ComponentType = observer(() => {
   return (
     <StyledResultTable>
       <Title yourResult={yourResult} title={title} />
-      <Row isHeader>
+      <ResultTableRow isHeader>
         <CellHeader isFixedWidth isFixedHeight>
           #
         </CellHeader>
@@ -36,26 +36,26 @@ export const ResultTable: React.ComponentType = observer(() => {
           Votes
         </CellHeader>
         <CellHeader isFixedHeight>Voters</CellHeader>
-      </Row>
+      </ResultTableRow>
       <div>
         {groupedVotes.map((group, groupIndex) => {
           const voteImage = groupIndex === 0 ? '/assets/tokens/1st_votes.webp' : groupIndex === 1 ? '/assets/tokens/2nd_votes.webp' : null
 
           return group.players.map((playerVote, playerIndex) => (
-            <Row key={`${groupIndex}-${playerIndex}`}>
-              <Cell isFixedWidth>
+            <ResultTableRow key={`${groupIndex}-${playerIndex}`}>
+              <ResultTableCell isFixedWidth>
                 <Icon>
                   {playerVote.win ? '🏆 ' : ''}
                   {!playerVote.survived ? '💀 ' : ''}
                 </Icon>
-              </Cell>
-              <Cell isMaxWidth>
+              </ResultTableCell>
+              <ResultTableCell isMaxWidth>
                 <PlayerName>
                   {voteImage && <Rank src={voteImage} alt='vote token' />}
                   <Name>{playerVote.name}</Name>
                 </PlayerName>
-              </Cell>
-              <Cell isFixedWidth>{playerVote.voters.length}</Cell>
+              </ResultTableCell>
+              <ResultTableCell isFixedWidth>{playerVote.voters.length}</ResultTableCell>
               <VotersCell>
                 {playerVote.voters.map((voter, i) => (
                   <VoterName key={i}>
@@ -64,7 +64,7 @@ export const ResultTable: React.ComponentType = observer(() => {
                   </VoterName>
                 ))}
               </VotersCell>
-            </Row>
+            </ResultTableRow>
           ))
         })}
       </div>

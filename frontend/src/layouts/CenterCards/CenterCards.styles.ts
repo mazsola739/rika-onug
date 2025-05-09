@@ -7,7 +7,6 @@ export const StyledCenterCards = styled.div`
 
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   align-items: flex-end;
   justify-content: center;
   align-content: center;
@@ -24,6 +23,5 @@ export const CardGroup = styled.div`
 export const Cards = styled.div`
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   gap: 0.4375rem;
 `

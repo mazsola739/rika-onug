@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { RoomBackgroundProps } from './Lobby.types'
 
 export const StyledLobby = styled.div`
   /* Positioning */
@@ -23,7 +24,6 @@ export const Selection = styled.div`
 
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 30px;
@@ -56,7 +56,6 @@ export const Nickname = styled.div`
 
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   align-items: flex-end;
   gap: 8px;
 `
@@ -70,7 +69,7 @@ export const SelectedRoom = styled.div`
   font-weight: bold;
 `
 
-export const RoomBackground = styled.div<{ img: string }>`
+export const RoomBackground = styled.div<RoomBackgroundProps>`
   /* Box Model */
   min-width: 200px;
   min-height: 200px;

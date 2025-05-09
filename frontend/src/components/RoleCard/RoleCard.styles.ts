@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { StyledRoleCardProps } from './RoleCard.types'
+import { RoleCardStylesProps } from './RoleCard.types'
 
-export const StyledRoleCard = styled.div<StyledRoleCardProps>`
+export const StyledRoleCard = styled.div<RoleCardStylesProps>`
   /* Positioning */
   position: relative;
 
@@ -21,7 +21,7 @@ export const StyledRoleCard = styled.div<StyledRoleCardProps>`
   transition: 0.75s;
 `
 
-export const RoleImage = styled.img<{ isSelected?: boolean }>`
+export const RoleImage = styled.img<RoleCardStylesProps>`
   /* Positioning */
   z-index: 1;
 
@@ -46,7 +46,7 @@ export const RoleImage = styled.img<{ isSelected?: boolean }>`
   }
 `
 
-export const RoleCardName = styled.span<StyledRoleCardProps>`
+export const RoleCardName = styled.span<RoleCardStylesProps>`
   /* Typography */
   color: ${({ isSelected }) => (isSelected ? 'rgba(255,255,255, 1)' : 'rgba(255,255,255, 0.4)')};
   text-shadow: ${({ isSelected }) => (isSelected ? '2px 2px 2px black' : '')};
@@ -67,7 +67,7 @@ export const RoleCardName = styled.span<StyledRoleCardProps>`
   transition: 0.75s;
 `
 
-export const WakeUp = styled.span<StyledRoleCardProps>`
+export const WakeUp = styled.span<RoleCardStylesProps>`
   /* Typography */
   text-shadow: ${({ isSelected }) => (isSelected ? '2px 2px 2px black' : '')};
   font-size: 14px;

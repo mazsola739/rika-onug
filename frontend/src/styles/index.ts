@@ -1,4 +1,4 @@
-export * from './glowing.styles'
+export * from './Glowing.styles'
 
 /* TODO!!!!
 1. Positioning

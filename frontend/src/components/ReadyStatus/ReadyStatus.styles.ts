@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { ReadyProps } from './ReadyStatus.types'
 
 export const StyledReadyStatus = styled.div`
   /* Flexbox/Grid */
@@ -21,12 +22,11 @@ export const ReadyPlayerList = styled.div`
 export const StyledReadyPlayer = styled.div`
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 5px;
 `
 
-export const Ready = styled.span<{ ready: boolean }>`
+export const Ready = styled.span<ReadyProps>`
   /* Typography */
   color: ${({ ready }) => (ready ? 'white' : 'rgba(255, 255, 255, 0.6)')};
   font-size: 12px;

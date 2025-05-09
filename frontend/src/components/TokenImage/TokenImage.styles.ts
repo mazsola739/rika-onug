@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
+import { StyledTokenImageProps } from './TokenImage.types'
 
-export const StyledTokenImage = styled.img<{ size: number; ready: boolean }>`
+export const StyledTokenImage = styled.img<StyledTokenImageProps>`
   /* Box Model */
   height: ${({ size }) => size}px;
   width: ${({ size }) => size}px;

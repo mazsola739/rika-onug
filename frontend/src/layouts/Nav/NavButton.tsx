@@ -1,8 +1,7 @@
-import { MenuButton } from 'components'
-import { observer } from 'mobx-react-lite'
-import React from 'react'
-import { getBackgroundColor, getBackgroundImage } from './Nav.styles'
-import { NavButtonProps } from './Nav.types'
+import { MenuButton } from "components"
+import { observer } from "mobx-react-lite"
+import { getBackgroundColor, getBackgroundImage } from "utils"
+import { NavButtonProps } from "./Nav.types"
 
 export const NavButton: React.ComponentType<NavButtonProps> = observer(({ anchor, isActive }) => {
   const handleClick = () => {

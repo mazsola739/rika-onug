@@ -22,6 +22,7 @@ export const StyledToken = styled.div<StyledTokenProps>`
   /* Visuals */
   filter: drop-shadow(3px 3px 3px black);
 
+  //TODO better solution??
   /* Animation/Transition */
   ${({ aliens, cow, current, dreamwolf, evilometer, groobzerb, lovers, masons, part_of_blob, part_of_family, vampires, werewolf, witness }) => {
     if (masons || evilometer) {

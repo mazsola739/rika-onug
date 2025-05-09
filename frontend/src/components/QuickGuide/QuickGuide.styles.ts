@@ -1,19 +1,8 @@
 import styled from '@emotion/styled'
-import { StyledQuickGuideTokenProps } from './QuickGuide.types'
+import { expansionColorVariants, ExpansionTypes } from 'types'
+import { QuickGuideItemProps, StyledQuickGuideTokenProps } from './QuickGuide.types'
 
-type ExpansionTypes = 'Werewolf' | 'Bonus Roles' | 'Daybreak' | 'Vampire' | 'Alien' | 'Super Villains' | 'default'
-
-const colorVariants: Record<ExpansionTypes, string> = {
-  Werewolf: '#364C541A',
-  'Bonus Roles': '#A12E631A',
-  Daybreak: '#CF46311A',
-  Vampire: '#48397A1A',
-  Alien: '#A4CA631A',
-  'Super Villains': '#469FDF1A',
-  default: 'rgba(0, 0, 0, 0.3)'
-}
-
-export const Guide = styled.div`
+export const StyledQuickGuide = styled.div`
   /* Box Model */
   width: 100%;
   overflow-x: hidden;
@@ -37,20 +26,18 @@ export const Guide = styled.div`
   }
 `
 
-export const Item = styled.div<StyledQuickGuideTokenProps>`
+export const QuickGuideItem = styled.div<QuickGuideItemProps>`
   /* Flexbox/Grid */
   display: flex;
   align-items: center;
   gap: 10px;
 
   /* Visuals */
-  background-color: ${({ expansion }) => colorVariants[expansion as ExpansionTypes] || colorVariants.default};
+  background-color: ${({ expansion }) => expansionColorVariants[expansion as ExpansionTypes] || expansionColorVariants.default};
 
   &:nth-of-type(odd) {
     width: 100%;
     border-radius: 200px 50px 50px 200px;
-
-    flex-direction: row;
 
     text-align: left;
 

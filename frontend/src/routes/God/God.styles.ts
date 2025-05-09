@@ -8,7 +8,6 @@ const backgroundColor = '#20232a'
 
 export const StyledGod = styled.div`
   display: flex;
-  flex-direction: row;
   font-family: 'Roboto', sans-serif;
   height: 100%;
   width: 100%;

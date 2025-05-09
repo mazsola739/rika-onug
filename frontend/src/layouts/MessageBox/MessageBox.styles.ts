@@ -33,7 +33,6 @@ export const MessageText = styled.span`
 export const StyledMessageBoxCards = styled.div`
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   gap: 5px;
 `
@@ -41,7 +40,6 @@ export const StyledMessageBoxCards = styled.div`
 export const StyledMessageBoxAnswer = styled.div`
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   justify-content: center;
   flex-wrap: wrap;
   gap: 3px;

@@ -90,6 +90,5 @@ export const TokenContainer = styled.div`
 export const TokenInfo = styled.div`
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   gap: 10px;
 `

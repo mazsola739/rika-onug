@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
-import { MenuButtonProps } from './MenuButton.types'
+import { StyledMenuButtonProps } from './MenuButton.types'
 
-export const StyledMenuButton = styled.button<MenuButtonProps>`
+export const StyledMenuButton = styled.button<StyledMenuButtonProps>`
   /* Box Model */
   width: 8.75rem;
   height: 3.125rem;

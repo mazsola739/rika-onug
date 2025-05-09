@@ -7,7 +7,6 @@ export const StyledSelectedCardList = styled.div`
 
   /* Flexbox/Grid */
   display: flex;
-  flex-direction: row;
   gap: 5px;
   flex-wrap: wrap;
 
