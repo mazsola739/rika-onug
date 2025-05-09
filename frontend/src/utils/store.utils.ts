@@ -3,6 +3,7 @@ import { artifacts, cards, marks } from 'data'
 import { deckStore } from 'store'
 import { CardJson, PlayerType, TeamsType, TokenJson } from 'types'
 
+//TODO check if need this 3
 export const createDefaultCard = (): CardJson => default_card
 export const createDefaultToken = (): TokenJson => default_token
 export const createDefaultPlayer = (): PlayerType => default_player

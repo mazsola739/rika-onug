@@ -6,6 +6,7 @@ import { RoleCardName, RoleImage, StyledRoleCard, WakeUp } from './RoleCard.styl
 import { RoleCardProps } from './RoleCard.types'
 
 export const RoleCard: React.ComponentType<RoleCardProps> = observer(({ card }) => {
+  const totalPlayers = deckStore.totalPlayers
   const { id, card_name, display_name, wake_up_time } = card
   const { handleSelectAndDeselect } = useClickHandler()
 

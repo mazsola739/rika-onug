@@ -28,8 +28,6 @@ export const useTable = () => {
     if (lastJsonMessage?.type === HYDRATE_TABLE && lastJsonMessage?.success) {
       playersStore.setPlayer(lastJsonMessage.player)
       playersStore.setPlayers(lastJsonMessage.players)
-      deckStore.setPlayerCard()
-      deckStore.setPlayerMark()
       riseAndRestStore.openYourEyes(lastJsonMessage)
       riseAndRestStore.setTablePlayerCard(lastJsonMessage)
     }

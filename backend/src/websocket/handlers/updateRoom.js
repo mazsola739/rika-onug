@@ -2,7 +2,7 @@ import { validateRoom } from '../../validators'
 import { broadcast } from '../../utils/connections.utils'
 import { HYDRATE_ROOM } from '../../constants'
 import { repo, repositoryType } from '../../repository'
-import { filterCardsByExpansions, getPlayerNames, toggleCardSelect, toggleExpansions } from '../../utils'
+import { determineTotalPlayers, filterCardsByExpansions, getPlayerNames, toggleCardSelect, toggleExpansions } from '../../utils'
 import { logTrace } from '../../log'
 
 export const updateRoom = async message => {
@@ -22,7 +22,20 @@ export const updateRoom = async message => {
   }
 
   if (card_id) {
-    newGamestate.selected_cards = toggleCardSelect(newGamestate.selected_cards, newGamestate.selected_expansions, card_id, total_players)
+    const hasAlphawolf = newGamestate.selected_cards.includes(17)
+    const hasTemptress = newGamestate.selected_cards.includes(69) 
+
+    const totalPlayers = determineTotalPlayers(newGamestate.selected_cards.length, hasAlphawolf, hasTemptress)
+
+    if (totalPlayers >= 12 && !newGamestate.selected_cards.includes(card_id)) {
+      return broadcast(room_id, {
+        type: HYDRATE_ROOM,
+        success: false,
+        errors: ['Cannot select more cards. Maximum players reached.']
+      })
+    }
+
+    newGamestate.selected_cards = toggleCardSelect(newGamestate.selected_cards, newGamestate.selected_expansions, card_id, totalPlayers)
   }
 
   if (total_players > 12)

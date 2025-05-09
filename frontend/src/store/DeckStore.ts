@@ -2,10 +2,8 @@ import { HAS_MARK_IDS, VAMPIRE_IDS, ASSASSIN_IDS } from 'constants'
 import { cards, marks, artifacts } from 'data'
 import { makeAutoObservable } from 'mobx'
 import { CardJson, TokenJson, Expansion } from 'types'
-import { createDefaultCard, createDefaultToken, getCardById, getMarkByName, determineTotalPlayers, checkCardPresence, areAnyCardSelectedById } from 'utils'
-import { playersStore } from './PlayersStore'
+import { getCardById, determineTotalPlayers, checkCardPresence, areAnyCardSelectedById } from 'utils'
 
-//TODO fix unable to select more then '12' players cards
 class DeckStore {
   deck: CardJson[] = cards
   marks: TokenJson[] = marks
@@ -14,9 +12,6 @@ class DeckStore {
   selectedCards: CardJson[] = []
   selectedMarks: TokenJson[] = []
   selectedExpansions: Expansion[] = ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles']
-
-  playerCard: CardJson = createDefaultCard()
-  playerMark: TokenJson = createDefaultToken()
 
   constructor() {
     makeAutoObservable(this)
@@ -37,19 +32,8 @@ class DeckStore {
     this.setDeck()
   }
 
-  setPlayerCard(): void {
-    this.playerCard = getCardById(playersStore.player.player_card_id)
-  }
-
-  setPlayerMark(): void {
-    this.playerMark = getMarkByName('mark_of_clarity')
-  }
-
-  get totalCharacters(): number {
-    return this.selectedCards.length
-  }
   get totalPlayers(): number {
-    return determineTotalPlayers(this.totalCharacters)
+    return determineTotalPlayers(this.selectedCards.length)
   }
 
   get hasAlphawolf() {
@@ -68,7 +52,7 @@ class DeckStore {
   get hasMarks() {
     return areAnyCardSelectedById(this.selectedCards, HAS_MARK_IDS)
   }
-  
+
   get hasVampire() {
     return areAnyCardSelectedById(this.selectedCards, VAMPIRE_IDS)
   }
