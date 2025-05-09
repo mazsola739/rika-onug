@@ -1,9 +1,11 @@
 import { generateRoleAction } from '../../sceneUtils'
 
 export const gremlinAction = (gamestate, token, title) => {
+  const answer_options = ['cards', 'marks']
+
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    answer_options: ['cards', 'marks'],
+    answer_options,
     obligatory: true
   }
 
@@ -11,7 +13,7 @@ export const gremlinAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_must_two_any'],
-    uniqueInformation: { answer_options: ['cards', 'marks'] },
+    uniqueInformation: { answer_options },
     obligatory: true
   })
 }

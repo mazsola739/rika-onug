@@ -1,4 +1,4 @@
-import { ALIENS, VAMPIRES, ARRIVE_GAME, END_GAME, HYDRATE_GAME, REDIRECT, SCENE } from 'constants'
+import { ALIENS_VOTE, ARRIVE_GAME, END_GAME, HYDRATE_GAME, REDIRECT, SCENE, VAMPIRES_VOTE } from 'constants'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { messageStore, propStore, riseAndRestStore, wsStore } from 'store'
@@ -55,10 +55,10 @@ export const useGame = () => {
     }
 
     // TODO fix this voting system
-    if (lastJsonMessage?.type === VAMPIRES && lastJsonMessage?.success) {
+    if (lastJsonMessage?.type === VAMPIRES_VOTE && lastJsonMessage?.success) {
       propStore.setVampireVotes(lastJsonMessage.vampire_votes as VoteType)
     }
-    if (lastJsonMessage?.type === ALIENS && lastJsonMessage?.success) {
+    if (lastJsonMessage?.type === ALIENS_VOTE && lastJsonMessage?.success) {
       propStore.setAlienVotes(lastJsonMessage.alien_votes)
     }
 

@@ -1,7 +1,8 @@
 import { generateRoleAction, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 
 export const priestAction = (gamestate, token, title) => {
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(gamestate.players, [token])
+  const selectable_marks = getPlayerNumbersWithNonMatchingTokens(gamestate.players, [token])
+  const selectable_mark_limit = { mark: 1 }
 
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
   const currentPlayerMark = gamestate.positions.card_positions[currentPlayerNumber].mark
@@ -20,16 +21,13 @@ export const priestAction = (gamestate, token, title) => {
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    selectable_marks: selectablePlayerNumbers,
-    selectable_mark_limit: { mark: 1 },
+    selectable_marks,
+    selectable_mark_limit,
     mark_of_clarity: [currentPlayerNumber]
   }
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_may_one_any_other'],
-    selectableMarks: {
-      selectable_marks: selectablePlayerNumbers,
-      selectable_mark_limit: { mark: 1 }
-    }
+    selectableMarks: { selectable_marks, selectable_mark_limit }
   })
 }

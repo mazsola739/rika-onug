@@ -6,18 +6,18 @@ export const oraclequestionResponse = (gamestate, token, selected_answer, title)
     return gamestate
   }
 
-  const oracleQuestion = gamestate.oracle.question
+  const oracleQuestion = gamestate.roles.oracle.question
 
   if (oracleQuestion === 'oracle_guessnumber') {
     const answer = +selected_answer
-    const number = gamestate.oracle.number
+    const number = gamestate.roles.oracle.number
     if (answer === number) {
-      gamestate.oracle.answer = 'success'
+      gamestate.roles.oracle.answer = 'success'
     } else {
-      gamestate.oracle.answer = 'failure'
+      gamestate.roles.oracle.answer = 'failure'
     }
   } else {
-    gamestate.oracle.answer = selected_answer
+    gamestate.roles.oracle.answer = selected_answer
   }
 
   gamestate.players[token].player_history[title] = {

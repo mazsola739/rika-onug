@@ -38,7 +38,7 @@
     "familyman": { "instruction": "" },
     "mortician": { "instruction": "", "key": "" },
     "nostradamus": { "team": "" },
-    "oracle": { "question": "", "number": 0, "answer": "", "aftermath": "", "openeyes": false, "target": false },
+    "oracle": { "question": "", "answer":"", "aftermath": "","number": 0, "openeyes": false, "target": false },
     "psychic": { "instruction": "", "key": "" },
     "rascal": { "instruction": "", "key": "" },
     "vampires": { "vampire_votes": {} }

@@ -4,6 +4,9 @@ export const vampiresAction = (gamestate, token, title) => {
   const nonVampires = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire')
   const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampire')
 
+  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire')
+  const selectable_mark_limit = { mark: 1 }
+
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     vampires
@@ -48,8 +51,8 @@ export const vampiresAction = (gamestate, token, title) => {
   if (isSingleVampire) {
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],
-      selectable_marks: nonVampires,
-      selectable_mark_limit: { mark: 1 },
+      selectable_marks,
+      selectable_mark_limit,
       vote: false,
       vampires,
       obligatory: true
@@ -57,7 +60,7 @@ export const vampiresAction = (gamestate, token, title) => {
 
     return generateRoleAction(gamestate, token, {
       private_message: ['action_must_one_any_non_vampire'],
-      selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
+      selectableMarks: { selectable_marks, selectable_mark_limit },
       uniqueInformation: { vote: false, vampires },
       obligatory: true
     })
@@ -65,8 +68,8 @@ export const vampiresAction = (gamestate, token, title) => {
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    selectable_marks: nonVampires,
-    selectable_mark_limit: { mark: 1 },
+    selectable_marks,
+    selectable_mark_limit,
     vampires,
     vote: true,
     obligatory: true
@@ -76,7 +79,7 @@ export const vampiresAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: privateMessage,
-    selectableMarks: { selectable_marks: nonVampires, selectable_mark_limit: { mark: 1 } },
+    selectableMarks: { selectable_marks, selectable_mark_limit },
     uniqueInformation: { vote: true, vampires },
     obligatory: true
   })

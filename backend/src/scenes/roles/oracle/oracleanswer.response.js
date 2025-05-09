@@ -8,7 +8,7 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
 
   let action = {}
 
-  const oracleQuestion = gamestate.oracle.question
+  const oracleQuestion = gamestate.roles.oracle.question
 
   if (oracleQuestion === 'oracle_centerexchange') {
     const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)

@@ -4,6 +4,7 @@ import { makeAutoObservable } from 'mobx'
 import { CardJson, TokenJson, Expansion } from 'types'
 import { getCardById, determineTotalPlayers, checkCardPresence, areAnyCardSelectedById } from 'utils'
 
+//TODO fix unable to select more then '12' players cards
 class DeckStore {
   deck: CardJson[] = cards
   marks: TokenJson[] = marks
@@ -32,8 +33,11 @@ class DeckStore {
     this.setDeck()
   }
 
+  get totalCharacters(): number {
+    return this.selectedCards.length
+  }
   get totalPlayers(): number {
-    return determineTotalPlayers(this.selectedCards.length)
+    return determineTotalPlayers(this.totalCharacters)
   }
 
   get hasAlphawolf() {
@@ -52,7 +56,7 @@ class DeckStore {
   get hasMarks() {
     return areAnyCardSelectedById(this.selectedCards, HAS_MARK_IDS)
   }
-
+  
   get hasVampire() {
     return areAnyCardSelectedById(this.selectedCards, VAMPIRE_IDS)
   }

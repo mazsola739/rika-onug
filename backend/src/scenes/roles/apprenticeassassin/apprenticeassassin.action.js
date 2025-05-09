@@ -1,5 +1,4 @@
 import { formatPlayerIdentifier, generateRoleAction, getAllPlayerTokens, getPlayerNumbersByGivenConditions, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
-import { apprenticeassassinResponse } from './apprenticeassassin.response'
 
 export const apprenticeassassinAction = (gamestate, token, title) => {
   const assassins = getPlayerNumbersByGivenConditions(gamestate.players, 'assassin')
@@ -22,26 +21,20 @@ export const apprenticeassassinAction = (gamestate, token, title) => {
     })
   } else if (assassins.length === 0) {
     const allPlayerTokens = getAllPlayerTokens(gamestate.players)
-    const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
+    const selectable_marks = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
+    const selectable_mark_limit = { mark: 1 }
 
-    const isSingleSelectable = selectablePlayerNumbers.length === 1
-
-    if (isSingleSelectable) {
-      apprenticeassassinResponse(gamestate, token, selectablePlayerNumbers, title)
-    } else if (selectablePlayerNumbers.length > 1) {
+    if (selectable_marks.length > 1) {
       gamestate.players[token].player_history[title] = {
         ...gamestate.players[token].player_history[title],
-        selectable_marks: selectablePlayerNumbers,
-        selectable_mark_limit: { mark: 1 },
+        selectable_marks,
+        selectable_mark_limit,
         obligatory: false
       }
 
       return generateRoleAction(gamestate, token, {
         private_message: ['action_may_one_any'],
-        selectableMarks: {
-          selectable_marks: selectablePlayerNumbers,
-          selectable_mark_limit: { mark: 1 }
-        },
+        selectableMarks: { selectable_marks, selectable_mark_limit },
         obligatory: false
       })
     }

@@ -40,8 +40,7 @@ export const VOTE = 'VOTE'
 export const UPDATE_GUESS = 'UPDATE_GUESS'
 export const SCENE = 'SCENE'
 
-//TODO RENAME THIS?
-export const ALIENS = 'ALIENS'
-export const VAMPIRES = 'VAMPIRES'
-export const EMPATH = 'EMPATH'
-export const DOPPELGANGER_EMPATH = 'DOPPELGANGER_EMPATH'
+export const ALIENS_VOTE = 'ALIENS_VOTE'
+export const VAMPIRES_VOTE = 'VAMPIRES_VOTE'
+export const EMPATH_VOTE = 'EMPATH_VOTE'
+export const DOPPELGANGER_EMPATH_VOTE = 'DOPPELGANGER_EMPATH_VOTE'

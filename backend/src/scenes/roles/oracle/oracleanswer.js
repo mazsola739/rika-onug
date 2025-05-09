@@ -6,8 +6,8 @@ import { oracleanswerAction } from './oracleanswer.action'
 //ORACLE_ANSWER
 export const oracleAnswer = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const oracleQuestion = gamestate.oracle.question
-  const oracleAnswer = gamestate.oracle.answer
+  const oracleQuestion = gamestate.roles.oracle.question
+  const oracleAnswer = gamestate.roles.oracle.answer
 
   let narration = []
 
@@ -53,9 +53,9 @@ export const oracleAnswer = (gamestate, title) => {
       if (oracleAnswer === 'yes') {
         const randomAfthermath = getRandomItemFromArray(oracleResponses[oracleQuestion].yes)
         narration = [randomAfthermath]
-        gamestate.oracle.aftermath = randomAfthermath
+        gamestate.roles.oracle.aftermath = randomAfthermath
       } else if (oracleAnswer === 'no') {
-        gamestate.oracle.aftermath = oracleResponses[oracleQuestion].no
+        gamestate.roles.oracle.aftermath = oracleResponses[oracleQuestion].no
         narration = [oracleResponses[oracleQuestion].no]
       }
       break
@@ -66,7 +66,7 @@ export const oracleAnswer = (gamestate, title) => {
       const randomApproval = getRandomItemFromArray(options)
       const player = randomApproval === 'oracle_viewplayer_result' ? oracleAnswer : Math.floor(Math.random() * gamestate.total_players) + 1
       if (player !== oracleAnswer) {
-        gamestate.oracle.answer = player
+        gamestate.roles.oracle.answer = player
       }
       narration = [randomApproval, formatPlayerIdentifier([`player_${player}`])[0]]
       break

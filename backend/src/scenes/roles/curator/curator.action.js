@@ -7,21 +7,19 @@ export const curatorAction = (gamestate, token, title) => {
 
   const getSelectablePlayersWithNoArtifact = (players, artifactedCards) => players.filter(player => !artifactedCards.includes(player))
 
-  const selectablePlayersWithNoArtifact = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, gamestate.positions.artifacted_cards)
+  const selectable_cards = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, gamestate.positions.artifacted_cards)
+  const selectable_card_limit = { player: 1, center: 0 }
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    selectable_cards: selectablePlayersWithNoArtifact,
-    selectable_card_limit: { player: 1, center: 0 },
+    selectable_cards,
+    selectable_card_limit,
     scene_end: selectablePlayerNumbers.length === 0
   }
 
   return generateRoleAction(gamestate, token, {
     private_message: [selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : 'action_may_one_any'],
-    selectableCards: {
-      selectable_cards: selectablePlayersWithNoArtifact,
-      selectable_card_limit: { player: 1, center: 0 }
-    },
+    selectableCards: { selectable_cards, selectable_card_limit },
     scene_end: selectablePlayerNumbers.length === 0
   })
 }

@@ -3,21 +3,21 @@ import { generateRoleAction, getAllPlayerTokens, getPlayerNumbersWithMatchingTok
 export const nostradamusAction = (gamestate, token, title) => {
   const allPlayerTokens = getAllPlayerTokens(gamestate.players)
   const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
+
+  const selectable_cards = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
+  const selectable_card_limit = { player: 3, center: 0 }
+  const scene_end = selectable_cards.length === 0
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    selectable_cards: selectablePlayersWithNoShield,
-    selectable_card_limit: { player: 3, center: 0 },
-    scene_end: selectablePlayerNumbers.length === 0
+    selectable_cards,
+    selectable_card_limit,
+    scene_end
   }
 
   return generateRoleAction(gamestate, token, {
-    private_message: [selectablePlayerNumbers.length < 3 ? 'action_no_selectable_player' : 'action_must_three_any'],
-    selectableCards: {
-      selectable_cards: selectablePlayersWithNoShield,
-      selectable_card_limit: { player: 3, center: 0 }
-    },
-    scene_end: selectablePlayerNumbers.length === 0
+    private_message: [selectable_cards.length < 3 ? 'action_no_selectable_player' : 'action_must_three_any'],
+    selectableCards: { selectable_cards, selectable_card_limit },
+    scene_end
   })
 }

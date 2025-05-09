@@ -39,3 +39,8 @@ export const MESSAGE = 'MESSAGE'
 export const VOTE = 'VOTE'
 export const UPDATE_GUESS = 'UPDATE_GUESS'
 export const SCENE = 'SCENE'
+
+export const ALIENS_VOTE = 'ALIENS_VOTE'
+export const VAMPIRES_VOTE = 'VAMPIRES_VOTE'
+export const EMPATH_VOTE = 'EMPATH_VOTE'
+export const DOPPELGANGER_EMPATH_VOTE = 'DOPPELGANGER_EMPATH_VOTE'

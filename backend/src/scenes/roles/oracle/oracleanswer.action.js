@@ -2,16 +2,35 @@ import { CENTER_CARD_POSITIONS } from '../../../constants'
 import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
 
 export const oracleanswerAction = (gamestate, token, title) => {
-  const oracleQuestion = gamestate.oracle.question
-  const oracleAnswer = gamestate.oracle.answer
-  const oracleAftermath = gamestate.oracle.aftermath
+  const oracleQuestion = gamestate.roles.oracle.question
+  const oracleAnswer = gamestate.roles.oracle.answer
+  const oracleAftermath = gamestate.roles.oracle.aftermath
   const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
 
   let showCards = []
-  let selectableCards = {}
+  let selectable_cards = []
+  let selectable_card_limit = { player: 0, center: 0 }
   let privateMessage = []
   let scene_end = true
   let obligatory = false
+
+  const setPlayerRoleAndTeam = (team, role = null, message) => {
+    gamestate.players[token].card.player_team = team
+    gamestate.positions.card_positions[currentPlayerNumber].card.team = team
+    if (role) {
+      gamestate.players[token].card.player_role = role
+      gamestate.positions.card_positions[currentPlayerNumber].card.role = role
+    }
+    privateMessage = [message]
+  }
+
+  const configureRoleAction = (centerLimit, message, mustObligatory = false) => {
+    selectable_cards = CENTER_CARD_POSITIONS
+    selectable_card_limit = { player: 0, center: centerLimit }
+    privateMessage = [message]
+    scene_end = false
+    obligatory = mustObligatory
+  }
 
   switch (oracleQuestion) {
     case 'oracle_guessnumber':
@@ -19,9 +38,7 @@ export const oracleanswerAction = (gamestate, token, title) => {
         gamestate.players[token].card.eyes_open = true
         privateMessage = ['action_oracle_open_you_eyes']
       } else {
-        gamestate.players[token].card.player_team = 'oracle'
-        gamestate.positions.card_positions[currentPlayerNumber].card.team = 'oracle'
-        privateMessage = ['action_oracle_team']
+        setPlayerRoleAndTeam('oracle', null, 'action_oracle_team')
       }
       break
     case 'oracle_viewplayer':
@@ -31,13 +48,9 @@ export const oracleanswerAction = (gamestate, token, title) => {
       break
     case 'oracle_alienteam':
       if (oracleAftermath.includes('alienteam_yes')) {
-        gamestate.players[token].card.player_team = 'alien'
-        privateMessage = ['action_alien_team']
+        setPlayerRoleAndTeam('alien', null, 'action_alien_team')
         if (oracleAftermath.includes('alienteam_yes2')) {
-          gamestate.players[token].card.player_role = 'ALIEN'
-          gamestate.positions.card_positions[currentPlayerNumber].card.role = 'ALIEN'
-          gamestate.positions.card_positions[currentPlayerNumber].card.team = 'alien'
-          privateMessage = ['action_alien_role']
+          setPlayerRoleAndTeam('alien', 'ALIEN', 'action_alien_role')
         }
       } else {
         privateMessage = ['action_stay_oracle']
@@ -45,58 +58,32 @@ export const oracleanswerAction = (gamestate, token, title) => {
       break
     case 'oracle_werewolfteam':
       if (oracleAftermath.includes('werewolfteam')) {
-        gamestate.players[token].card.player_team = 'werewolf'
-        gamestate.positions.card_positions[currentPlayerNumber].card.team = 'werewolf'
-        privateMessage = ['action_werewolf_team']
+        setPlayerRoleAndTeam('werewolf', null, 'action_werewolf_team')
       } else {
         privateMessage = ['action_stay_oracle']
       }
       break
     case 'oracle_vampireteam':
       if (oracleAftermath.includes('vampireteam')) {
-        gamestate.players[token].card.player_team = 'vampire'
-        gamestate.positions.card_positions[currentPlayerNumber].card.team = 'vampire'
-        privateMessage = ['action_vampire_team']
+        setPlayerRoleAndTeam('vampire', null, 'action_vampire_team')
       } else {
         privateMessage = ['action_stay_oracle']
       }
       break
     case 'oracle_centerexchange':
       if (oracleAftermath.includes('yes1')) {
-        selectableCards = {
-          selectable_cards: CENTER_CARD_POSITIONS,
-          selectable_card_limit: { player: 0, center: 1 }
-        }
-        privateMessage = ['action_must_one_center']
-        scene_end = false
-        obligatory = true
+        configureRoleAction(1, 'action_must_one_center', true)
       } else {
         privateMessage = ['action_stay_oracle']
       }
       break
     case 'oracle_viewcenter':
       if (oracleAftermath.includes('yes1')) {
-        selectableCards = {
-          selectable_cards: CENTER_CARD_POSITIONS,
-          selectable_card_limit: { player: 0, center: 1 }
-        }
-        privateMessage = ['action_may_one_center']
-        scene_end = false
+        configureRoleAction(1, 'action_may_one_center')
       } else if (oracleAftermath.includes('yes2')) {
-        selectableCards = {
-          selectable_cards: CENTER_CARD_POSITIONS,
-          selectable_card_limit: { player: 0, center: 2 }
-        }
-        privateMessage = ['action_may_two_center']
-        scene_end = false
+        configureRoleAction(2, 'action_may_two_center')
       } else if (oracleAftermath.includes('yes3')) {
-        selectableCards = {
-          selectable_cards: CENTER_CARD_POSITIONS,
-          selectable_card_limit: { player: 0, center: 3 }
-        }
-        privateMessage = ['action_must_three_center']
-        scene_end = false
-        obligatory = true
+        configureRoleAction(3, 'action_must_three_center', true)
       }
       break
   }
@@ -104,6 +91,8 @@ export const oracleanswerAction = (gamestate, token, title) => {
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
     viewed_cards: showCards,
+    selectable_cards,
+    selectable_card_limit,
     scene_end,
     obligatory
   }
@@ -111,7 +100,7 @@ export const oracleanswerAction = (gamestate, token, title) => {
   return generateRoleAction(gamestate, token, {
     private_message: privateMessage,
     showCards,
-    selectableCards,
+    selectableCards: { selectable_cards, selectable_card_limit },
     scene_end,
     obligatory
   })

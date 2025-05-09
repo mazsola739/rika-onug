@@ -1,4 +1,5 @@
-/* TODO only 1 selectable?  - obligatory: true
+/* TODO only 1 selectable?  - with obligatory: true, if false, we dont need to set this
+    also in this case if we call role Response function: TODO need to fix playerhistory for validator
 
     const isSingleSelectable = selectablePlayerNumbers.length === 1
   
@@ -8,6 +9,32 @@
   
       } else if (selectablePlayerNumbers.length > 1) { 
 */
+
+/* TODO consider Object.assign in case like this:      
+gamestate.players[token].card.player_team = 'tanner'
+gamestate.players[token].card.player_role = 'TANNER' 
+
+ Object.assign(gamestate.players[token].card, {
+    player_team: 'tanner',
+    player_role: 'TANNER'
+  })
+*/
+
+/* TODO consider this solution for reset the players card, like at drunk
+
+  const shouldResetPlayerCardId = () => {
+    if (viewCards.some(card => gamestate.players[token].card.player_original_id === card.id)) {
+      return true
+    }
+    if (cardPositions.length === 1 && currentPlayerNumber === cardPositions[0] && viewCards[0].card.id === gamestate.players[token].card.player_original_id) {
+      return false
+    }
+    return true
+  }
+    
+  */
+
+//TODO check everywhere scene_end and/or obligatory set on value?
 
 //TODO dreamwolf?
 

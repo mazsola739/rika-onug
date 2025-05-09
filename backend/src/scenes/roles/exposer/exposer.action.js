@@ -5,10 +5,13 @@ export const exposerAction = (gamestate, token, title, prefix) => {
   const randomExposerInstruction = gamestate.roles[prefix].instruction
   const limit = +randomExposerInstruction.replace('exposer_flip', '')
 
+  const selectable_cards = CENTER_CARD_POSITIONS
+  const selectable_card_limit = { player: 0, center: limit }
+
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    selectable_cards: CENTER_CARD_POSITIONS,
-    selectable_card_limit: { player: 0, center: limit },
+    selectable_cards,
+    selectable_card_limit,
     obligatory: true
   }
 
@@ -16,10 +19,7 @@ export const exposerAction = (gamestate, token, title, prefix) => {
 
   return generateRoleAction(gamestate, token, {
     private_message: [message],
-    selectableCards: {
-      selectable_cards: CENTER_CARD_POSITIONS,
-      selectable_card_limit: { player: 0, center: limit }
-    },
+    selectableCards: { selectable_cards, selectable_card_limit },
     obligatory: true
   })
 }

@@ -1,43 +1,42 @@
 import { generateRoleAction } from '../../sceneUtils'
 
-export const oraclequestionAction = (gamestate, token, title) => {
-  const oracleQuestion = gamestate.oracle.question
+const generateAnswerOptions = length => Array.from({ length }, (_, i) => `${i + 1}`)
 
-  let answerOptions = []
+export const oraclequestionAction = (gamestate, token, title) => {
+  const oracleQuestion = gamestate.roles.oracle.question
+
+  let answer_options = []
   let scene_end = false
-  let obligatory = false
+  const obligatory = ['oracle_viewplayer', 'oracle_guessnumber', 'default'].includes(oracleQuestion)
 
   switch (oracleQuestion) {
     case 'oracle_viewplayer':
-      answerOptions = Array.from({ length: gamestate.total_players }, (_, i) => `${i + 1}`)
-      obligatory = true
+      answer_options = generateAnswerOptions(gamestate.total_players)
       break
     case 'oracle_evenodd': {
       const isCurrentPlayerEven = parseInt(gamestate.players[token].player_number.split('_')[1], 10) % 2 === 0
-      gamestate.oracle.answer = isCurrentPlayerEven ? 'even' : 'odd'
+      gamestate.roles.oracle.answer = isCurrentPlayerEven ? 'even' : 'odd'
       scene_end = true
       break
     }
     case 'oracle_guessnumber':
-      answerOptions = Array.from({ length: 10 }, (_, i) => `${i + 1}`)
-      obligatory = true
+      answer_options = generateAnswerOptions(10)
       break
     default:
-      answerOptions = ['yes', 'no']
-      obligatory = true
+      answer_options = ['yes', 'no']
       break
   }
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    answer_options: answerOptions,
+    answer_options,
     scene_end,
     obligatory
   }
 
   return generateRoleAction(gamestate, token, {
     private_message: ['action_oracle_question'],
-    uniqueInformation: { answer_options: answerOptions },
+    uniqueInformation: { answer_options },
     scene_end,
     obligatory
   })

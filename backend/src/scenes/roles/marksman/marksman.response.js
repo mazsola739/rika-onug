@@ -1,6 +1,18 @@
-import { getNarrationByTitle, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, createAndSendSceneMessage, getCardIdsByPositions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getMarksByPositions } from '../../sceneUtils'
+import {
+  getNarrationByTitle,
+  getAllPlayerTokens,
+  getPlayerNumbersWithMatchingTokens,
+  getSelectablePlayersWithNoShield,
+  generateRoleAction,
+  createAndSendSceneMessage,
+  getCardIdsByPositions,
+  getPlayerNumberWithMatchingToken,
+  formatPlayerIdentifier,
+  getMarksByPositions
+} from '../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../validators'
 
+//TODO selectable stuffs simlify
 export const marksmanResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
   const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
@@ -83,22 +95,20 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
         scene_end: true
       })
     } else {
-      let selectableMarks = selectablePlayerNumbers
-      const indexToRemove = selectableMarks.indexOf(selected_card_positions[0])
+      let selectable_marks = selectablePlayerNumbers
+      const selectable_mark_limit = { mark: 1 }
+      const indexToRemove = selectable_marks.indexOf(selected_card_positions[0])
       if (indexToRemove !== -1) {
-        selectableMarks.splice(indexToRemove, 1)
+        selectable_marks.splice(indexToRemove, 1)
       }
 
-      gamestate.players[token].player_history[title].selectable_marks = selectableMarks
+      gamestate.players[token].player_history[title].selectable_marks = selectable_marks
       gamestate.players[token].player_history[title].selectable_mark_limit = { mark: 1 }
 
       action = generateRoleAction(gamestate, token, {
         private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'action_must_one_any'],
         showCards: viewCards,
-        selectableMarks: {
-          selectable_marks: selectableMarks,
-          selectable_mark_limit: { mark: 1 }
-        },
+        selectableMarks: { selectable_marks, selectable_mark_limit },
         obligatory: true
       })
     }

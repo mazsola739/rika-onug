@@ -135,12 +135,3 @@ export const distributeCards = selectedCardIds => {
 export const getCardById = card_id => cardsJson.find(card => card.id === card_id)
 
 export const isCardSelectedById = (cardIds, cardId) => cardIds.some(id => id === cardId)
-
-export const determineTotalPlayers = (totalCharacters, hasAlphawolf, hasTemptress) => {
-  let totalPlayers
-  if (hasAlphawolf && hasTemptress) totalPlayers = totalCharacters - 5
-  else if (hasAlphawolf || hasTemptress) totalPlayers = totalCharacters - 4
-  else totalPlayers = totalCharacters - 3
-
-  return Math.max(totalPlayers, 0)
-}

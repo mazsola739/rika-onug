@@ -1,4 +1,13 @@
-import { getNarrationByTitle, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, createAndSendSceneMessage, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../sceneUtils'
+import {
+  getNarrationByTitle,
+  getAllPlayerTokens,
+  getPlayerNumbersWithMatchingTokens,
+  getSelectablePlayersWithNoShield,
+  generateRoleAction,
+  createAndSendSceneMessage,
+  getPlayerNumberWithMatchingToken,
+  formatPlayerIdentifier
+} from '../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../validators'
 
 export const gremlinResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
@@ -10,8 +19,10 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
     }
 
     const allPlayerTokens = getAllPlayerTokens(gamestate.players)
-    const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
+    const selectable_marks = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
+    const selectable_mark_limit = { mark: 2 }
+    const selectable_cards = getSelectablePlayersWithNoShield(selectable_marks, gamestate.positions.shielded_cards)
+    const selectable_card_limit = { player: 2, center: 0 }
 
     //TODO const isTwoSelectable = selectablePlayerNumbers.length === 2,
     //TODO if no marks only cards
@@ -19,17 +30,14 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
     if (selected_answer === 'cards') {
       gamestate.players[token].player_history[title] = {
         ...gamestate.players[token].player_history[title],
-        selectable_cards: selectablePlayersWithNoShield,
-        selectable_card_limit: { player: 2, center: 0 },
+        selectable_cards,
+        selectable_card_limit,
         obligatory: true
       }
 
       const action = generateRoleAction(gamestate, token, {
         private_message: ['action_must_two_any'],
-        selectableCards: {
-          selectable_cards: selectablePlayersWithNoShield,
-          selectable_card_limit: { player: 2, center: 0 }
-        },
+        selectableCards: { selectable_cards, selectable_card_limit },
         obligatory: true
       })
 
@@ -39,17 +47,14 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
     } else if (selected_answer === 'marks') {
       gamestate.players[token].player_history[title] = {
         ...gamestate.players[token].player_history[title],
-        selectable_marks: selectablePlayerNumbers,
-        selectable_mark_limit: { mark: 2 },
+        selectable_marks,
+        selectable_mark_limit,
         obligatory: true
       }
 
       const action = generateRoleAction(gamestate, token, {
         private_message: ['action_must_two_any'],
-        selectableMarks: {
-          selectable_marks: selectablePlayerNumbers,
-          selectable_mark_limit: { mark: 2 }
-        },
+        selectableMarks: { selectable_marks, selectable_mark_limit },
         obligatory: true
       })
 

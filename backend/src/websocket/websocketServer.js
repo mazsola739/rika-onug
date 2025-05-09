@@ -1,5 +1,5 @@
 import WebSocket from 'ws'
-import { ALIENS, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, /* HYDRATE_LOBBY, */ JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, PRESELECT, READY, RELOAD, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES, VOTE } from '../constants'
+import { ALIENS_VOTE, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, /* HYDRATE_LOBBY, */ JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, PRESELECT, READY, RELOAD, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES_VOTE, VOTE } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, /* hydrateLobby, */ hydrateReady, hydrateRoom, hydrateTable, joinRoom, leaveGame, leaveRoom, newbie, preselect, reload, reset, result, scene, selectRoom, startGame, startVote, stopGame, updateRoom, verdict } from './handlers'
 import { decodeJsonKeys } from '../utils'
@@ -53,8 +53,8 @@ export const websocketServer = port => {
           [ARRIVE_GAME]: () => hydrateGame(ws, message),
           [STOP_GAME]: () => stopGame(message),
           [SCENE]: () => scene(ws, message),
-          [ALIENS]: () => aliensVotehydrate(message),
-          [VAMPIRES]: () => vampiresVotehydrate(message),
+          [ALIENS_VOTE]: () => aliensVotehydrate(message),
+          [VAMPIRES_VOTE]: () => vampiresVotehydrate(message),
           [ARRIVE_COUNCIL]: () => hydrateCouncil(ws, message),
           [UPDATE_GUESS]: () => hydrateGuess(ws, message),
           [START_VOTE]: () => startVote(ws, message),
@@ -69,7 +69,6 @@ export const websocketServer = port => {
         }
 
         logError(`Unhandled message type: ${message.type}`)
-        
       })
     })
   } catch (error) {

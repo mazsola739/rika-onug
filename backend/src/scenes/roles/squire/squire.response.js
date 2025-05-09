@@ -6,13 +6,15 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     return gamestate
   }
 
+  const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolf', gamestate.positions.shielded_cards)
+
   let action = {}
 
   if (selected_answer === 'yes') {
-    const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolfWithoutShield', gamestate.positions.shielded_cards)
+    const werewolvesWithoutShield = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolfWithoutShield', gamestate.positions.shielded_cards)
     const viewCards = getCardIdsByPositions(gamestate.positions.card_positions, werewolves)
 
-    if (werewolves.some(wolf => gamestate.positions.card_positions[wolf].card.id === gamestate.players[token]?.card?.player_original_id)) {
+    if (werewolvesWithoutShield.some(wolf => gamestate.positions.card_positions[wolf].card.id === gamestate.players[token]?.card?.player_original_id)) {
       gamestate.players[token].card.player_card_id = 87
     }
 
@@ -21,10 +23,11 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],
       answer: [selected_answer[0]],
-      viewed_cards: werewolves
+      viewed_cards: viewCards,
+      werewolves
     }
 
-    const messageIdentifiers = formatPlayerIdentifier(werewolves)
+    const messageIdentifiers = formatPlayerIdentifier(werewolvesWithoutShield)
 
     action = generateRoleAction(gamestate, token, {
       private_message: ['action_saw_card', ...messageIdentifiers, 'POINT'],
@@ -34,11 +37,13 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
   } else if (selected_answer === 'no') {
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],
+      werewolves,
       answer: [selected_answer[0]]
     }
 
     action = generateRoleAction(gamestate, token, {
-      private_message: ['action_nothing']
+      private_message: ['action_nothing'],
+      uniqueInformation: { werewolves }
     })
   }
 

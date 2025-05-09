@@ -26,21 +26,21 @@ export const oracleQuestion = (gamestate, title, selected_cards) => {
 
   const narration = ['oracle_kickoff', oracleQuestion]
 
-  gamestate.oracle.number = theNumberIThinkingOf
-  gamestate.oracle.question = oracleQuestion
+  gamestate.roles.oracle.number = theNumberIThinkingOf
+  gamestate.roles.oracle.question = oracleQuestion
 
   switch (oracleQuestion) {
     case 'oracle_viewplayer':
-      gamestate.oracle.answer = '1'
+      gamestate.roles.oracle.answer = '1'
       break
     case 'oracle_evenodd':
-      gamestate.oracle.answer = 'even'
+      gamestate.roles.oracle.answer = 'even'
       break
     case 'oracle_guessnumber':
-      gamestate.oracle.answer = 'failure'
+      gamestate.roles.oracle.answer = 'failure'
       break
     default:
-      gamestate.oracle.answer = 'no'
+      gamestate.roles.oracle.answer = 'no'
       break
   }
 
