@@ -44,7 +44,7 @@ class MessageStore {
     const { selectedMarks } = selectionStore
 
     const markLimit = this.markLimit
-
+ 
     return !(selectedMarks.length > 0 && selectedMarks.length === markLimit)
   }
 

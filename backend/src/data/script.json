@@ -11,7 +11,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "EPIC_BATTLE",
@@ -25,7 +25,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "ORACLE_QUESTION",
@@ -39,7 +39,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "ORACLE_ANSWER",
@@ -53,7 +53,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": true
+    "group_action": true
   },
   {
     "scene_title": "COPYCAT",
@@ -67,7 +67,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "MIRROR_MAN",
@@ -81,7 +81,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER",
@@ -95,7 +95,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_INSTANT_ACTION",
@@ -109,7 +109,7 @@
     "view_mark": false,
     "shield": true,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "VAMPIRES",
@@ -123,7 +123,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": true
+    "group_action": true
   },
   {
     "scene_title": "THE_COUNT",
@@ -137,7 +137,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_THE_COUNT",
@@ -151,7 +151,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "RENFIELD",
@@ -165,7 +165,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DISEASED",
@@ -179,7 +179,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "CUPID",
@@ -193,7 +193,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "INSTIGATOR",
@@ -207,7 +207,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "PRIEST",
@@ -221,7 +221,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_PRIEST",
@@ -235,7 +235,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "ASSASSIN",
@@ -249,7 +249,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_ASSASSIN",
@@ -263,7 +263,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "APPRENTICE_ASSASSIN",
@@ -277,7 +277,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_APPRENTICE_ASSASSIN",
@@ -291,7 +291,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "EVERYONE_MARK",
@@ -305,7 +305,7 @@
     "view_mark": true,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "LOVERS",
@@ -319,7 +319,7 @@
     "view_mark": true,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "SENTINEL",
@@ -333,7 +333,7 @@
     "view_mark": false,
     "shield": true,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "ALIENS",
@@ -347,7 +347,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": true
+    "group_action": true
   },
   {
     "scene_title": "COW",
@@ -361,7 +361,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "GROOB_ZERB",
@@ -375,7 +375,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "BODY_SNATCHER",
@@ -389,7 +389,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_BODY_SNATCHER",
@@ -403,7 +403,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "SUPER_VILLAINS",
@@ -417,7 +417,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "TEMPTRESS",
@@ -431,7 +431,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DR_PEEKER",
@@ -445,7 +445,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "RAPSCALLION",
@@ -459,7 +459,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "EVILOMETER",
@@ -473,7 +473,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "WEREWOLVES",
@@ -487,7 +487,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "ALPHA_WOLF",
@@ -501,7 +501,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "MYSTIC_WOLF",
@@ -515,7 +515,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "MINION",
@@ -529,7 +529,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "APPRENTICE_TANNER",
@@ -543,7 +543,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "LEADER",
@@ -557,7 +557,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "LEADER_ZERB_GROOB",
@@ -571,7 +571,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "MAD_SCIENTIST",
@@ -585,7 +585,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "INTERN",
@@ -599,7 +599,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "MASONS",
@@ -613,7 +613,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "THING",
@@ -627,7 +627,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "ANNOYING_LAD",
@@ -641,7 +641,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "SEER",
@@ -655,7 +655,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "APPRENTICE_SEER",
@@ -669,7 +669,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "PARANORMAL_INVESTIGATOR",
@@ -683,7 +683,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "MARKSMAN",
@@ -697,7 +697,7 @@
     "view_mark": true,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "NOSTRADAMUS",
@@ -711,7 +711,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "NOSTRADAMUS_REACTION",
@@ -725,7 +725,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "PSYCHIC",
@@ -739,7 +739,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_PSYCHIC",
@@ -753,7 +753,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DETECTOR",
@@ -767,7 +767,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "ROBBER",
@@ -781,7 +781,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "WITCH",
@@ -795,7 +795,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "PICKPOCKET",
@@ -809,7 +809,7 @@
     "view_mark": true,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_PICKPOCKET",
@@ -823,7 +823,7 @@
     "view_mark": true,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "ROLE_RETRIEVER",
@@ -837,7 +837,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "VOODOO_LOU",
@@ -851,7 +851,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "TROUBLEMAKER",
@@ -865,7 +865,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "VILLAGE_IDIOT",
@@ -879,7 +879,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "AURA_SEER",
@@ -893,7 +893,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "GREMLIN",
@@ -907,7 +907,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_GREMLIN",
@@ -921,7 +921,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "RASCAL",
@@ -935,7 +935,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_RASCAL",
@@ -949,7 +949,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "SWITCHEROO",
@@ -963,7 +963,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DRUNK",
@@ -977,7 +977,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "INSOMNIAC",
@@ -991,7 +991,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "SELF_AWARENESS_GIRL",
@@ -1005,7 +1005,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "SQUIRE",
@@ -1019,7 +1019,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "BEHOLDER",
@@ -1033,7 +1033,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "REVEALER",
@@ -1047,7 +1047,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_REVEALER",
@@ -1061,7 +1061,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "EXPOSER",
@@ -1075,7 +1075,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_EXPOSER",
@@ -1089,7 +1089,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "FLIPPER",
@@ -1103,7 +1103,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_FLIPPER",
@@ -1117,7 +1117,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "EMPATH",
@@ -1131,7 +1131,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": true
+    "group_action": true
   },
   {
     "scene_title": "DOPPELGANGER_EMPATH",
@@ -1145,7 +1145,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": true
+    "group_action": true
   },
   {
     "scene_title": "CURATOR",
@@ -1159,7 +1159,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": true,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_CURATOR",
@@ -1173,7 +1173,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": true,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "BLOB",
@@ -1187,7 +1187,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "MORTICIAN",
@@ -1201,7 +1201,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "DOPPELGANGER_MORTICIAN",
@@ -1215,7 +1215,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "FAMILY_MAN",
@@ -1229,7 +1229,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "RIPPLE",
@@ -1243,7 +1243,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   },
   {
     "scene_title": "JOKE",
@@ -1257,7 +1257,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": true
+    "group_action": true
   },
   {
     "scene_title": "END",
@@ -1271,6 +1271,6 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "vote": false
+    "group_action": false
   }
 ]

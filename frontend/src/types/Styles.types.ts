@@ -23,7 +23,7 @@ export const expansionColorVariants: Record<ExpansionTypes, string> = {
 }
 
 export type AnchorTypes = 'Village & Hero' | 'Village' | 'Hero' | 'Own' | 'Werewolf' | 'Vampire' | 'Alien' | 'Villain'
-export const anchorColorVariants: Record<AnchorTypes, string> = {
+export const anchorColorVariants: Record<AnchorTypes, string> = { //TODO do i need color?
   'Village & Hero': 'royalblue',
   Village: 'royalblue',
   Hero: 'royalblue',

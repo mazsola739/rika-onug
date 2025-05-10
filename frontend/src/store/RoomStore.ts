@@ -2,7 +2,7 @@ import { TEAM } from 'constants'
 import { makeAutoObservable } from 'mobx'
 import { deckStore } from 'store'
 import { CardJson, Expansion, PlayerType, WsJsonMessageType } from 'types'
-import { createDefaultCard, getCardById, getOrderedTeams, getFilteredCardsForTeam as getSortedCardsByTeam } from 'utils'
+import { createDefaultCard, getCardById, getOrderedTeams, getFilteredCardsForTeam } from 'utils'
 
 class RoomStore {
   detailedCardInfo: CardJson = createDefaultCard()
@@ -17,7 +17,7 @@ class RoomStore {
   }
 
   getSortedCardsByTeam(team: string): CardJson[] {
-    return getSortedCardsByTeam(team, deckStore.deck)
+    return getFilteredCardsForTeam(team, deckStore.deck)
   }
 
   getTeamMembers(cards: CardJson[]): CardJson[] {
@@ -25,12 +25,24 @@ class RoomStore {
   }
 
   getTeamName(cards: CardJson[], team: string): string {
-    //TODO better names
     const hasHero = cards.some(card => card.team === TEAM.hero)
     const hasVillager = cards.some(card => card.team === TEAM.village)
 
     return hasHero && hasVillager ? 'Village & Hero' : hasHero ? 'Hero' : hasVillager ? 'Village' : team
   }
+
+  /*   
+  //TODO better names
+  getTeamName(cards: CardJson[], team: keyof typeof TEAMNAME): string {
+    const hasHero = cards.some(card => card.team === TEAM.hero)
+    const hasVillager = cards.some(card => card.team === TEAM.village)
+
+    if (hasHero && hasVillager) return `${TEAMNAME.village} & ${TEAMNAME.hero}`
+    if (hasHero) return TEAMNAME.hero
+    if (hasVillager) return TEAMNAME.village
+    return TEAMNAME[team] || team
+  } 
+  */
 
   getDetailedCardInfo(): CardJson {
     return this.detailedCardInfo

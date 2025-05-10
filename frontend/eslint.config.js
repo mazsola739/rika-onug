@@ -11,5 +11,5 @@ export default [
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
-  pluginPrettier.configs.recommended // Add Prettier integration
+  pluginPrettier.configs.recommended
 ]

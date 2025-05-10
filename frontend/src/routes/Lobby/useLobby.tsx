@@ -3,7 +3,7 @@ import { useClickHandler } from 'hooks'
 import { lobbyStore, wsStore } from 'store'
 import { ADJECTIVES, JOIN_ROOM, NOUNS, PRESELECT, REDIRECT, SELECT_ROOM, STAGES } from 'constants'
 import { useNavigate } from 'react-router-dom'
-import { LobbyDataType, PresetType, RoomType } from 'types'
+import { PresetType, RoomType } from 'types'
 
 //TODO useclickhandler, usechnagehandler
 //TODO handling all error message properly
@@ -20,6 +20,12 @@ const lobbyData = (rooms: RoomType[], presets: PresetType[]) => {
   }))
 
   return { newRooms, newPresets }
+}
+
+const generateFunnyNickname = () => {
+  const randomAdjective = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)]
+  const randomNoun = NOUNS[Math.floor(Math.random() * NOUNS.length)]
+  return `${randomAdjective}${randomNoun}`
 }
 
 export const useLobby = () => {
@@ -80,12 +86,6 @@ export const useLobby = () => {
       nickname,
       token
     })
-  }
-
-  const generateFunnyNickname = () => {
-    const randomAdjective = ADJECTIVES[Math.floor(Math.random() * ADJECTIVES.length)]
-    const randomNoun = NOUNS[Math.floor(Math.random() * NOUNS.length)]
-    return `${randomAdjective}${randomNoun}`
   }
 
   const handleRoomChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

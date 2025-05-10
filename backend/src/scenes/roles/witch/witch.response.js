@@ -18,12 +18,13 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
 
     const allPlayerTokens = getAllPlayerTokens(gamestate.players)
     const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-    const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
+    const selectable_cards = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
+    const selectable_card_limit = { player: 1, center: 0 }
 
     gamestate.players[token].player_history[title] = {
       ...gamestate.players[token].player_history[title],
-      selectable_cards: selectablePlayersWithNoShield,
-      selectable_card_limit: { player: 1, center: 0 },
+      selectable_cards,
+      selectable_card_limit,
       viewed_cards: [selected_card_positions[0]],
       selected_center_card: selected_card_positions[0],
       obligatory: true
@@ -31,10 +32,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
 
     const action = generateRoleAction(gamestate, token, {
       private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'action_must_one_any'],
-      selectableCards: {
-        selectable_cards: selectablePlayersWithNoShield,
-        selectable_card_limit: { player: 1, center: 0 }
-      },
+      selectableCards: { selectable_cards, selectable_card_limit },
       showCards,
       obligatory: true
     })

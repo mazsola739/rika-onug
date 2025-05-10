@@ -7,7 +7,7 @@ export const StyledPlayerInfo = styled.div<StyledPlayerInfoProps>`
   justify-content: center;
   align-items: center;
   gap: 3px;
-  grid-template-columns: 65px 20px 1fr;
+  grid-template-columns: 80px 20px 70px;
   grid-template-rows: 30px 15px 15px 1fr;
   grid-template-areas:
     'card number name'
@@ -18,6 +18,8 @@ export const StyledPlayerInfo = styled.div<StyledPlayerInfoProps>`
   /* Visuals */
   background-color: ${({ result }) => (result ? '#28a74580' : '#dc354580')};
   border-radius: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   & > img:nth-of-type(1) {
     grid-area: card;

@@ -45,7 +45,7 @@ export const useRoom = () => {
     }
   }, [lastJsonMessage, navigate])
 
-  const teamArray = useMemo(() => [...new Set(deck.map(card => (card.team === TEAM.hero || card.team === TEAM.village ? TEAM.village : card.team)))], [deck])
+  const teamArray = useMemo(() => [...new Set(deck.filter(card => card.id !== 87).map(card => (card.team === TEAM.hero || card.team === TEAM.village ? TEAM.village : card.team)))], [deck])
 
   const orderedTeams = useMemo(() => roomStore.getOrderedTeams(teamArray), [roomStore, teamArray])
 

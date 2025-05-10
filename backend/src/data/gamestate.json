@@ -10,6 +10,9 @@
   "total_players": 0,
   "public_players": [],
   "players": {},
+  "vote_result": [],
+  "winner_teams": [],
+  "loser_teams": [],
   "positions":{
     "card_positions": { "center_left": {}, "center_middle": {}, "center_right": {}, "center_wolf": {}, "center_villain": {} },
     "mark_positions": {},
@@ -21,6 +24,7 @@
   "scenes": {
     "narration": [],
     "chapter": [],
+    "chapter_history": [],
     "scripts": []
   },
   "roles": {

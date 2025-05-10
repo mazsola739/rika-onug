@@ -29,6 +29,16 @@ export type TeamType = {
   villain: 'villain'
 }
 
+export type TeamNameType = {
+  village: 'The Townfolk'
+  hero: 'The Bravehearts'
+  own: 'The Inner Circle'
+  werewolf: 'The Pack'
+  vampire: 'The Coven'
+  alien: 'The Cosmic Collective'
+  villain: "The Rogue's Gallery"
+}
+
 export type TeamNames = {
   alien: string
   apprenticeassassin: string

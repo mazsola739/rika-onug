@@ -1,15 +1,4 @@
-import {
-  getNarrationByTitle,
-  getAllPlayerTokens,
-  getPlayerNumbersWithMatchingTokens,
-  getSelectablePlayersWithNoShield,
-  generateRoleAction,
-  createAndSendSceneMessage,
-  getCardIdsByPositions,
-  getPlayerNumberWithMatchingToken,
-  formatPlayerIdentifier,
-  getMarksByPositions
-} from '../../sceneUtils'
+import { getNarrationByTitle, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, createAndSendSceneMessage, getCardIdsByPositions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getMarksByPositions } from '../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../validators'
 
 //TODO selectable stuffs simlify
@@ -18,8 +7,10 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
 
   //TODO if no marks only cards
   const allPlayerTokens = getAllPlayerTokens(gamestate.players)
-  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-  const selectablePlayersWithNoShield = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
+  const selectable_marks = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
+  const selectable_mark_limit = { mark: 1 }
+  const selectable_cards = getSelectablePlayersWithNoShield(selectable_marks, gamestate.positions.shielded_cards)
+  const selectable_card_limit = { player: 1, center: 0 }
 
   if (selected_answer && selected_answer.length > 0) {
     if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
@@ -29,17 +20,14 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
     if (selected_answer === 'cards') {
       gamestate.players[token].player_history[title] = {
         ...gamestate.players[token].player_history[title],
-        selectable_cards: selectablePlayersWithNoShield,
-        selectable_card_limit: { player: 1, center: 0 },
+        selectable_cards,
+        selectable_card_limit,
         obligatory: true
       }
 
       const action = generateRoleAction(gamestate, token, {
         private_message: ['action_must_one_any'],
-        selectableCards: {
-          selectable_cards: selectablePlayersWithNoShield,
-          selectable_card_limit: { player: 1, center: 0 }
-        },
+        selectableCards: { selectable_cards, selectable_card_limit },
         obligatory: true
       })
 
@@ -49,17 +37,14 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
     } else if (selected_answer === 'marks') {
       gamestate.players[token].player_history[title] = {
         ...gamestate.players[token].player_history[title],
-        selectable_marks: selectablePlayerNumbers,
-        selectable_mark_limit: { mark: 1 },
+        selectable_marks,
+        selectable_mark_limit,
         obligatory: true
       }
 
       const action = generateRoleAction(gamestate, token, {
         private_message: ['action_must_one_any'],
-        selectableMarks: {
-          selectable_marks: selectablePlayerNumbers,
-          selectable_mark_limit: { mark: 1 }
-        },
+        selectableMarks: { selectable_marks, selectable_mark_limit },
         obligatory: true
       })
 
@@ -95,8 +80,6 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
         scene_end: true
       })
     } else {
-      let selectable_marks = selectablePlayerNumbers
-      const selectable_mark_limit = { mark: 1 }
       const indexToRemove = selectable_marks.indexOf(selected_card_positions[0])
       if (indexToRemove !== -1) {
         selectable_marks.splice(indexToRemove, 1)
@@ -145,22 +128,18 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
         scene_end: true
       })
     } else {
-      let selectableCards = selectablePlayersWithNoShield
-      const indexToRemove = selectableCards.indexOf(selected_mark_positions[0])
+      const indexToRemove = selectable_cards.indexOf(selected_mark_positions[0])
       if (indexToRemove !== -1) {
-        selectableCards.splice(indexToRemove, 1)
+        selectable_cards.splice(indexToRemove, 1)
       }
 
-      gamestate.players[token].player_history[title].selectable_cards = selectableCards
+      gamestate.players[token].player_history[title].selectable_cards = selectable_cards
       gamestate.players[token].player_history[title].selectable_card_limit = { player: 1, center: 0 }
 
       action = generateRoleAction(gamestate, token, {
         private_message: ['action_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0], 'action_must_one_any'],
         showMarks: viewMarks,
-        selectableCards: {
-          selectable_cards: selectableCards,
-          selectable_card_limit: { player: 1, center: 0 }
-        },
+        selectableCards: { selectable_cards, selectable_card_limit },
         obligatory: true
       })
     }

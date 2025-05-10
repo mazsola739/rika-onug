@@ -1,4 +1,4 @@
-import { ExpansionType, ExpansionsType, TeamNames as TeamNamesTypes, TeamType, TeamsType, WakeType } from 'types'
+import { ExpansionType, ExpansionsType, TeamNameType, TeamNames as TeamNamesTypes, TeamType, TeamsType, WakeType } from 'types'
 
 export const STAGES = {
   LOBBY: 'LOBBY',
@@ -73,8 +73,8 @@ export const TEAM: TeamType = {
   villain: 'villain'
 }
 
-//TODO
-export const TEAMNAME = {
+//TODO teamnames
+export const TEAMNAME: TeamNameType = {
   village: 'The Townfolk',
   hero: 'The Bravehearts',
   own: 'The Inner Circle',
