@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken, getMarksByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { getMarksByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const pickpocketResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -6,7 +6,7 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
     return gamestate
   }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
   const currentPlayerMark = gamestate.positions.card_positions[currentPlayerNumber].mark
   const selectedMark = gamestate.positions.card_positions[selected_mark_positions[0]].mark
   gamestate.positions.card_positions[currentPlayerNumber].mark = selectedMark

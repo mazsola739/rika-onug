@@ -14,7 +14,7 @@ export const oracleQuestion = (gamestate, title, selected_cards) => {
   }
 
   if (!hasAnyVampire(selected_cards)) {
-    availableOracleQuestionOptions = availableOracleQuestionOptions.filter(question => !question.includes('vampire'))
+    availableOracleQuestionOptions = availableOracleQuestionOptions.filter(question => !question.includes('vampires'))
   }
 
   if (!hasAnyWerewolf(selected_cards)) {

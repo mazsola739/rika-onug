@@ -1,8 +1,8 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { generateRoleAction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
+import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const seerAction = (gamestate, token, title) => {
-  const selecatblePlayers = getSelectableOtherPlayerNumbersWithNoShield(gamestate.players, token)
+  const selecatblePlayers = getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayersWithoutShield', gamestate.positions.shielded_cards, token)
   const selectable_cards = [...selecatblePlayers, ...CENTER_CARD_POSITIONS]
   const selectable_card_limit = { player: 1, center: 2 }
 

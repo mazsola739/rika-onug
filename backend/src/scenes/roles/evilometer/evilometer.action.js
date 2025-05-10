@@ -1,9 +1,12 @@
-import { generateRoleAction, getPlayerNeighborsByToken } from '../../sceneUtils'
-import { superVillainDetected } from './evilometer.constants'
+import { generateRoleAction, getPlayerNeighborsByToken, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const evilometerAction = (gamestate, token, title) => {
-  const neighborIsSuperVillain = superVillainDetected(gamestate.players, token)
   const neighbors = getPlayerNeighborsByToken(gamestate.players, token, 'both', 1)
+  const superVillainDetected = (players, neighbors) => {
+    const superVillains = getPlayerNumbersByGivenConditions(players, 'villain')
+    return neighbors.some(neighbor => superVillains.includes(neighbor))
+  }
+  const neighborIsSuperVillain = superVillainDetected(gamestate.players, neighbors)
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

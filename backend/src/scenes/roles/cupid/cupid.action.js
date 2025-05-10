@@ -1,8 +1,7 @@
-import { generateRoleAction, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
+import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const cupidAction = (gamestate, token, title) => {
-  const allPlayerTokens = getAllPlayerTokens(gamestate.players)
-  const selectable_marks = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
+  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
   const selectable_mark_limit = { mark: 2 }
 
   //const isTwoSelectable = selectablePlayerNumbers.length === 2

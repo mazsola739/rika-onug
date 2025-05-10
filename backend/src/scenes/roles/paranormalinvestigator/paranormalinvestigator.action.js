@@ -1,8 +1,8 @@
-import { generateRoleAction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
+import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 //TODO fix limit
 export const paranormalinvestigatorAction = (gamestate, token, title) => {
-  const selectable_cards = getSelectableOtherPlayerNumbersWithNoShield(gamestate.players, token)
+  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayersWithoutShield', gamestate.positions.shielded_cards, token)
   const limit = selectable_cards.length === 1 ? 1 : 2
   const selectable_card_limit = { player: limit, center: 0 }
   const scene_end = selectable_cards.length === 0

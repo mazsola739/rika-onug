@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { generateRoleAction, getAllPlayerTokens, getAnyEvenOrOddPlayerNumbers, getPlayerNeighborsByToken, getSelectableOtherPlayerNumbersWithNoShield, getSelectablePlayersWithNoShield } from '../../sceneUtils'
+import { generateRoleAction, getAllPlayerTokens, getAnyEvenOrOddPlayerNumbers, getPlayerNeighborsByToken, getPlayerNumbersByGivenConditions, getSelectablePlayersWithNoShield } from '../../sceneUtils'
 
 export const rascalAction = (gamestate, token, title, prefix) => {
   const randomRascalInstruction = gamestate.roles[prefix].instruction
@@ -100,7 +100,7 @@ export const rascalAction = (gamestate, token, title, prefix) => {
         private_message: ['action_shielded']
       })
     } else {
-      selectable_cards = rascalKey === 'identifier_center' ? CENTER_CARD_POSITIONS : getSelectableOtherPlayerNumbersWithNoShield(selectableOnePlayers, token)
+      selectable_cards = rascalKey === 'identifier_center' ? CENTER_CARD_POSITIONS : getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayersWithoutShield', gamestate.positions.shielded_cards, token)
       privateMessage = [selectable_cards.length === 0 ? 'action_no_selectable_player' : randomRascalInstruction === 'rascal_drunk' ? 'action_must_one_any_other' : 'action_may_one_any_other']
     }
   } else {

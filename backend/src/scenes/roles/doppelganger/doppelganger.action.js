@@ -1,9 +1,8 @@
-import { generateRoleAction, getPlayerNumbersWithNonMatchingTokens, getSelectablePlayersWithNoShield } from '../../sceneUtils'
+import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 //TODO shield?
 export const doppelgangerAction = (gamestate, token, title) => {
-  const selectablePlayerNumbers = getPlayerNumbersWithNonMatchingTokens(gamestate.players, [token])
-  const selectable_cards = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
+  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayersWithoutShield', gamestate.positions.shielded_cards, token)
   const selectable_card_limit = { player: 1, center: 0 }
 
   gamestate.players[token].player_history[title] = {

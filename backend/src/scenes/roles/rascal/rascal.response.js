@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken, moveCardsButYourOwn, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, formatPlayerIdentifier, getCardIdsByPositions, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield } from '../../sceneUtils'
+import { moveCardsButYourOwn, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, formatPlayerIdentifier, getCardIdsByPositions, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection } from '../../validators'
 
 //TODO fix obligatory and scene end
@@ -8,8 +8,8 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
       return gamestate
     }
 
-    const currentPlayer = getPlayerNumberWithMatchingToken(gamestate.players, token)
-    const updatedPlayerCards = moveCardsButYourOwn(gamestate.positions.card_positions, selected_answer, currentPlayer)
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)
+    const updatedPlayerCards = moveCardsButYourOwn(gamestate.positions.card_positions, selected_answer, currentPlayerNumber)
 
     gamestate.players[token].card_or_mark_action = true
 
@@ -39,9 +39,9 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
       return gamestate
     }
 
-    const currentPlayer = getPlayerNumberWithMatchingToken(gamestate.players, token)
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
     const currentPlayerCard = {
-      ...gamestate.positions.card_positions[currentPlayer].card
+      ...gamestate.positions.card_positions[currentPlayerNumber].card
     }
 
     let action
@@ -58,7 +58,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
 
         gamestate.players[token].card_or_mark_action = true
 
-        if (currentPlayer === position1 || currentPlayer === position2) {
+        if (currentPlayerNumber === position1 || currentPlayerNumber === position2) {
           gamestate.players[token].card.player_card_id = 87
         }
 
@@ -87,10 +87,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
             gamestate.players[token].card.player_card_id = 87
           }
 
-          const allPlayerTokens = getAllPlayerTokens(gamestate.players)
-          const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
-
-          const selectable_cards = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
+          const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayersWithoutShield', gamestate.positions.shielded_cards, token)
           const selectable_card_limit = { player: 1, center: 0 }
 
           gamestate.players[token].player_history[title] = {
@@ -116,8 +113,8 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
           gamestate.positions.card_positions[gamestate.players[token].player_history[title].selected_card].card = selectedPlayerCard
           gamestate.positions.card_positions[selected_card_positions[0]].card = selectedCenterCard
 
-          if (selected_card_positions[0] === currentPlayer[0]) {
-            const currentCard = gamestate.positions.card_positions[currentPlayer[0]].card
+          if (selected_card_positions[0] === currentPlayerNumber) {
+            const currentCard = gamestate.positions.card_positions[currentPlayerNumber].card
             gamestate.players[token].card.player_card_id = currentCard.id
             gamestate.players[token].card.player_team = currentCard.team
           }
@@ -146,28 +143,28 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
           ...gamestate.positions.card_positions[selectedPosition].card
         }
 
-        gamestate.positions.card_positions[currentPlayer].card = selectedCard
+        gamestate.positions.card_positions[currentPlayerNumber].card = selectedCard
         gamestate.positions.card_positions[selectedPosition].card = currentPlayerCard
 
         if (gamestate.players[token].player_history[title].random === 'drunk') {
           gamestate.players[token].card.player_card_id = 87
         } else {
-          gamestate.players[token].card.player_card_id = gamestate.positions.card_positions[currentPlayer].card.id
-          gamestate.players[token].card.player_team = gamestate.positions.card_positions[currentPlayer].card.team
+          gamestate.players[token].card.player_card_id = gamestate.positions.card_positions[currentPlayerNumber].card.id
+          gamestate.players[token].card.player_team = gamestate.positions.card_positions[currentPlayerNumber].card.team
         }
 
-        const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [currentPlayer])
+        const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
 
         gamestate.players[token].card_or_mark_action = true
 
         gamestate.players[token].player_history[title] = {
           ...gamestate.players[token].player_history[title],
-          swapped_cards: [currentPlayer, selectedPosition],
-          viewed_cards: [currentPlayer],
+          swapped_cards: [currentPlayerNumber, selectedPosition],
+          viewed_cards: [currentPlayerNumber],
           obligatory: gamestate.players[token].player_history[title].random === 'robber'
         }
 
-        const messageIdentifiers = formatPlayerIdentifier([currentPlayer, selectedPosition])
+        const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selectedPosition])
 
         action = generateRoleAction(gamestate, token, {
           private_message: ['action_swapped_cards', ...messageIdentifiers, gamestate.players[token].player_history[title].random === 'robber' ? 'action_own_card' : ''],

@@ -129,7 +129,6 @@ export * from './everyonemark/everyonemark.action'
 export * from './everyonemark/everyonemark'
 
 export * from './evilometer/evilometer.action'
-export * from './evilometer/evilometer.constants'
 export * from './evilometer/evilometer'
 
 export * from './exposer/exposer.action'

@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { getPlayerNumbersByGivenConditions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const apprenticeassassinResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -20,7 +20,7 @@ export const apprenticeassassinResponse = (gamestate, token, selected_mark_posit
     gamestate.positions.card_positions[selected_mark_positions[0]].mark = assassinPosition
   }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
 
   if (currentPlayerNumber === selected_mark_positions[0]) {
     gamestate.players[token].card.player_mark = 'mark_of_assassin'

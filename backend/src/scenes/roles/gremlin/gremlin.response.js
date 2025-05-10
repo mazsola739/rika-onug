@@ -1,4 +1,4 @@
-import { getNarrationByTitle, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens, getSelectablePlayersWithNoShield, generateRoleAction, createAndSendSceneMessage, getPlayerNumberWithMatchingToken, formatPlayerIdentifier } from '../../sceneUtils'
+import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAction, createAndSendSceneMessage, formatPlayerIdentifier } from '../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../validators'
 
 export const gremlinResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
@@ -9,10 +9,9 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       return gamestate
     }
 
-    const allPlayerTokens = getAllPlayerTokens(gamestate.players)
-    const selectable_marks = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
+    const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
     const selectable_mark_limit = { mark: 2 }
-    const selectable_cards = getSelectablePlayersWithNoShield(selectable_marks, gamestate.positions.shielded_cards)
+    const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayersWithoutShield', gamestate.positions.shielded_cards, token)
     const selectable_card_limit = { player: 2, center: 0 }
 
     //TODO const isTwoSelectable = selectablePlayerNumbers.length === 2,
@@ -67,7 +66,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     gamestate.players[token].card_or_mark_action = true
 
-    const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
 
     if (currentPlayerNumber === selected_card_positions[0] || currentPlayerNumber === selected_card_positions[1]) {
       gamestate.players[token].card.player_card_id = 87
@@ -103,7 +102,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     gamestate.players[token].card_or_mark_action = true
 
-    const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)
 
     if (currentPlayerNumber === selected_mark_positions[0] || currentPlayerNumber === selected_mark_positions[1]) {
       gamestate.players[token].card.player_mark = ''

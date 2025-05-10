@@ -1,4 +1,4 @@
-import { generateRoleAction, getPlayerNeighborsByToken, getPlayerNumberWithMatchingToken, getSelectablePlayersWithNoShield } from '../../sceneUtils'
+import { generateRoleAction, getPlayerNeighborsByToken, getPlayerNumbersByGivenConditions, getSelectablePlayersWithNoShield } from '../../sceneUtils'
 
 export const morticianAction = (gamestate, token, title, prefix) => {
   const randomMorticianInstruction = gamestate.roles[prefix].instruction
@@ -8,9 +8,9 @@ export const morticianAction = (gamestate, token, title, prefix) => {
 
   if (morticianKey === 'identifier_yourself') {
     if (!gamestate.players[token].shield) {
-      const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+      const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)
 
-      selectable_cards = [currentPlayerNumber]
+      selectable_cards = currentPlayerNumber
       selectable_card_limit = { player: 1, center: 0 }
 
       gamestate.players[token].player_history[title] = {

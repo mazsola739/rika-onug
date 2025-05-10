@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken } from '../scenes/sceneUtils'
+import { getPlayerNumbersByGivenConditions } from '../scenes/sceneUtils'
 import { cardsJson, artifactsJson } from '../data'
 
 export const isPlayersCardsFlipped = (flippedCards, playerCardId) => {
@@ -18,7 +18,7 @@ export const updatePlayer = (gamestate, token) => {
   let newPlayers = { ...gamestate.players }
   let newPositions = { ...gamestate.positions }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newPlayers, token)
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
   const flippedCards = newPositions.flipped_cards
 
   const playerCard = newPlayers[token].card

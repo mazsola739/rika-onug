@@ -1,7 +1,7 @@
 import { ERROR, VOTE } from '../../constants'
 import { logError, logErrorWithStack, logTrace } from '../../log'
 import { repo, repositoryType } from '../../repository'
-import { getAllPlayerTokens, getPlayerNumbersWithNonMatchingTokens } from '../../scenes/sceneUtils'
+import { getAllPlayerTokens, getPlayerNumbersByGivenConditions } from '../../scenes/sceneUtils'
 import { sendMessage, sendMessageToPlayer } from '../../utils'
 import { validateRoom } from '../../validators'
 
@@ -30,14 +30,14 @@ export const startVote = async (ws, message) => {
     //TODO vote restrict
     tokens.forEach(token => {
       const player = players[token]
-      const otherPlayers = getPlayerNumbersWithNonMatchingTokens(players, [token])
+      const otherPlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayers', [], token)
 
       const voteMessage = {
         type: VOTE,
         success: true,
         token,
         action: {
-          selectable_cards: otherPlayers,
+          selectable_cards: otherPlayerNumbers,
           selectable_card_limit: { player: 1, center: 0 },
           show_cards: newGamestate.positions.flipped_cards
         },

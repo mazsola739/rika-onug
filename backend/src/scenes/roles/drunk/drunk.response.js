@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import {  formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const drunkResponse = (gamestate, token, selected_card_positions, title) => {
@@ -6,7 +6,7 @@ export const drunkResponse = (gamestate, token, selected_card_positions, title) 
     return gamestate
   }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
   const currentPlayerCard = {
     ...gamestate.positions.card_positions[currentPlayerNumber].card
   }

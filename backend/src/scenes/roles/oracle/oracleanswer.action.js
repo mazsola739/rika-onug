@@ -1,11 +1,11 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const oracleanswerAction = (gamestate, token, title) => {
   const oracleQuestion = gamestate.roles.oracle.question
   const oracleAnswer = gamestate.roles.oracle.answer
   const oracleAftermath = gamestate.roles.oracle.aftermath
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
 
   let showCards = []
   let selectable_cards = []

@@ -1,6 +1,6 @@
 import { repo, repositoryType } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
-import { createAndSendSceneMessage, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
+import { createAndSendSceneMessage, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
 
 export const vampiresVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
@@ -8,10 +8,10 @@ export const vampiresVotehydrate = async message => {
   try {
     const gamestate = await repo[repositoryType].readGamestate(room_id)
 
-    const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampire')
+    const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampires')
     const vampiresTokens = getPlayerTokensByPlayerNumber(gamestate.players, vampires)
     const vampireCount = vampires.length
-    const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
 
     const vampire_votes = { ...gamestate.roles.vampires.vampire_votes }
 

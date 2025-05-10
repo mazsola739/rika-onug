@@ -1,10 +1,10 @@
-import { generateRoleAction, getPlayerNumbersWithNonMatchingTokens, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const priestAction = (gamestate, token, title) => {
-  const selectable_marks = getPlayerNumbersWithNonMatchingTokens(gamestate.players, [token])
+  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayers', [], token)
   const selectable_mark_limit = { mark: 1 }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
   const currentPlayerMark = gamestate.positions.card_positions[currentPlayerNumber].mark
 
   if (gamestate.players[token].card.player_original_id === 1) {

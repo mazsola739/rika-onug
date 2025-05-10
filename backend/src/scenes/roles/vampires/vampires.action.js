@@ -2,7 +2,7 @@ import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenCond
 
 export const vampiresAction = (gamestate, token, title) => {
   const nonVampires = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire')
-  const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampire')
+  const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampires')
 
   const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire')
   const selectable_mark_limit = { mark: 1 }

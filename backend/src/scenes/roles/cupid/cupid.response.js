@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import {  formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const cupidResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -28,7 +28,7 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
     gamestate.positions.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
   }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
 
   if (currentPlayerNumber === selected_mark_positions[0] || currentPlayerNumber === selected_mark_positions[1]) {
     gamestate.players[token].card.player_mark = 'mark_of_love'

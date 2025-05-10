@@ -2,6 +2,17 @@ import { ALIEN_IDS, SUPER_VILLAIN_IDS, VAMPIRE_IDS, MASONS, WEREVOLVES_WITHOUT_D
 
 //TODO finish + util.js & refctor the role-files
 const filters = {
+  //current player
+  currentPlayer: (player, _, token) => player.token === token,
+
+  //other players
+  otherPlayers: (player, _, token) => player.token !== token,
+  otherPlayersWithoutShield: (player, shieldedCards, token) => player.token !== token && player.shield !== true && !shieldedCards.includes(player.player_number),
+
+  //all players
+  allPlayers: () => true,
+  allPlayersWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number) && player.shield !== true,
+
   //werewolves
   nonWerewolfWithoutShield: (player, shieldedCards) => !WEREWOLVES.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
   werewolfAndDreamwolf: player => WEREWOLVES.includes(player.card.player_role_id),
@@ -58,13 +69,13 @@ const filters = {
   cardOrMarkActionTrue: player => player.card_or_mark_action === true
 }
 
-export const getPlayerNumbersByGivenConditions = (players, filter, shieldedCards = []) => {
+export const getPlayerNumbersByGivenConditions = (players, filter, shieldedCards = [], token = null) => {
   const condition = filters[filter]
 
   const result = []
-  for (const token in players) {
-    const player = players[token]
-    if (condition(player, shieldedCards)) {
+  for (const playerToken in players) {
+    const player = players[playerToken]
+    if (condition(player, shieldedCards, token)) {
       result.push(player.player_number)
     }
   }

@@ -1,7 +1,7 @@
-import { generateRoleAction, getSelectableOtherPlayerNumbersWithNoShield } from '../../sceneUtils'
+import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const troublemakerAction = (gamestate, token, title) => {
-  const selectablePlayerNumbers = getSelectableOtherPlayerNumbersWithNoShield(gamestate.players, token)
+  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayersWithoutShield', gamestate.positions.shielded_cards, token)
   const selectable_cards = selectablePlayerNumbers.length >= 2 ? selectablePlayerNumbers : []
   const selectable_card_limit = { player: selectablePlayerNumbers.length >= 2 ? 2 : 0, center: 0 }
   const scene_end = selectablePlayerNumbers.length === 0

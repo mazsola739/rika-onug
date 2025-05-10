@@ -6,7 +6,7 @@ export const supervillainsAction = (gamestate, token, title) => {
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    villains, 
+    villains,
     evilometer
   }
 

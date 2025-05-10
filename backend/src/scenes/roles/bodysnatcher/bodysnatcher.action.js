@@ -17,7 +17,8 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
   const bodysnatcherKey = gamestate.roles[prefix].key
 
   let selectablePlayers
-  let selectableCards
+  let selectable_cards = []
+  let selectable_card_limit = { player: 0, center: 0 }
   let interactionMessage
   let scene_end = false
 
@@ -55,30 +56,29 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
 
     const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(selectablePlayers, 'nonAlienWithoutShield', gamestate.positions.shielded_cards)
 
-    selectableCards = {
-      selectable_cards: selectablePlayerNumbers,
-      selectable_card_limit: { player: 1, center: 0 }
-    }
+    selectable_cards = selectablePlayerNumbers
+    selectable_card_limit = { player: 1, center: 0 }
+
     interactionMessage = selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : 'action_must_one_any_non_alien'
     scene_end = selectablePlayerNumbers.length === 0
   } else if (randomBodysnatcherInstruction === 'bodysnatcher_center') {
-    selectableCards = {
-      selectable_cards: CENTER_CARD_POSITIONS,
-      selectable_card_limit: { player: 0, center: 1 }
-    }
+    selectable_cards = CENTER_CARD_POSITIONS
+    selectable_card_limit = { player: 0, center: 1 }
+
     interactionMessage = 'action_must_one_center'
   }
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    ...selectableCards,
+    selectable_cards,
+    selectable_card_limit,
     obligatory: true,
     scene_end
   }
 
   return generateRoleAction(gamestate, token, {
     private_message: [interactionMessage],
-    selectableCards,
+    selectableCards: { selectable_cards, selectable_card_limit },
     obligatory: true,
     scene_end
   })

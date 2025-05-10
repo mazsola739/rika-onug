@@ -1,10 +1,9 @@
-import { getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
+import { getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const empathEveryoneAction = (gamestate, token, title, prefix) => {
   console.log(prefix) //TODO remove this line and fix?
 
-  const allPlayerTokens = getAllPlayerTokens(gamestate.players)
-  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
+  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
@@ -24,8 +23,7 @@ export const empathEveryoneAction = (gamestate, token, title, prefix) => {
 export const empathAction = (gamestate, token, title, prefix) => {
   console.log(prefix) //TODO remove this line and fix?
 
-  const allPlayerTokens = getAllPlayerTokens(gamestate.players)
-  const selectablePlayerNumbers = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
+  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],

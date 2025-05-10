@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken, formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const oracleanswerResponse = (gamestate, token, selected_card_positions, title) => {
@@ -11,7 +11,7 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
   const oracleQuestion = gamestate.roles.oracle.question
 
   if (oracleQuestion === 'oracle_centerexchange') {
-    const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
     const currentPlayerCard = {
       ...gamestate.positions.card_positions[currentPlayerNumber].card
     }

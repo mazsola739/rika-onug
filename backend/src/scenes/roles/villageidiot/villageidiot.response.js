@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken, moveCardsButYourOwn, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { moveCardsButYourOwn, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 import { validateAnswerSelection } from '../../validators'
 
 export const villageidiotResponse = (gamestate, token, selected_answer, title) => {
@@ -6,8 +6,8 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
     return gamestate
   }
 
-  const currentPlayer = getPlayerNumberWithMatchingToken(gamestate.players, token)
-  const updatedPlayerCards = moveCardsButYourOwn(gamestate.positions.card_positions, selected_answer, currentPlayer)
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const updatedPlayerCards = moveCardsButYourOwn(gamestate.positions.card_positions, selected_answer, currentPlayerNumber)
 
   gamestate.players[token].card_or_mark_action = true
 

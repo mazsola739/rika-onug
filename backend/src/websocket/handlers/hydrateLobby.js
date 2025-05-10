@@ -1,9 +1,9 @@
-import { HYDRATE_LOBBY, STAGES } from '../../constants'
+import { HYDRATE_LOBBY } from '../../constants'
 import { logErrorWithStack, logTrace } from '../../log'
-import { repo, repositoryType } from '../../repository'
 import { sendMessage } from '../../utils'
 import { validateRoom } from '../../validators'
 
+//TODO finish it
 export const hydrateLobby = async (ws, message) => {
   try {
     const { room_id } = message
@@ -12,25 +12,14 @@ export const hydrateLobby = async (ws, message) => {
 
     if (!validity) return sendMessage(ws, { type: HYDRATE_LOBBY, success: false, errors })
 
-    const newGamestate = { ...gamestate, stage: STAGES.ROOM }
-
-    await repo[repositoryType].upsertRoomState(newGamestate)
-
-    const extractPlayerNames = playersObj => {
-      return Object.values(playersObj).map(player => {
-        return { player_name: player.name }
-      })
-    }
-
-    const newUpdatedPlayers = extractPlayerNames(newGamestate.players)
+    const playerNames = Object.values(gamestate.players).map(player => player.name)
 
     const hydrateLobbyMessage = {
       type: HYDRATE_LOBBY,
       success: true,
-      room_id: newGamestate.room_id,
-      selected_cards: newGamestate.selected_cards,
-      selected_expansions: newGamestate.selected_expansions,
-      players: newUpdatedPlayers
+      room_id: gamestate.room_id,
+      selected_cards: gamestate.selected_cards,
+      player_names: playerNames
     }
 
     sendMessage(ws, hydrateLobbyMessage)

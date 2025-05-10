@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken } from '.'
+import { getPlayerNumbersByGivenConditions } from '.'
 import { getKeys, isActivePlayersCardsFlipped, isPlayersCardsFlipped } from '../../utils/council.util'
 
 //TODO fix history update, combine with card update?
@@ -27,7 +27,7 @@ const updatePlayerCard = (gamestate, token) => {
   let newPlayers = { ...gamestate.players }
   let newPositions = { ...gamestate.positions }
 
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(newPlayers, token)
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
   const flippedCards = newPositions.flipped_cards
 
   const playerCard = newPlayers[token].card

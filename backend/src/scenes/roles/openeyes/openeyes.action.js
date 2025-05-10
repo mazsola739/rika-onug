@@ -1,4 +1,4 @@
-import { generateRoleAction, getMarksByPositions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { generateRoleAction } from '../../sceneUtils'
 //TODO
 export const openeyesAction = (gamestate, token, title) => {
 

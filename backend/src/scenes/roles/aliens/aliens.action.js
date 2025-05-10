@@ -1,4 +1,12 @@
-import { getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken, formatPlayerIdentifier, getSelectablePlayersWithNoShield, getAnyEvenOrOddPlayerNumbers, getCardIdsByPositions, generateRoleAction, getAllPlayerTokens } from '../../sceneUtils'
+import {
+  getPlayerNumbersByGivenConditions,
+  formatPlayerIdentifier,
+  getSelectablePlayersWithNoShield,
+  getAnyEvenOrOddPlayerNumbers,
+  getCardIdsByPositions,
+  generateRoleAction,
+  getAllPlayerTokens
+} from '../../sceneUtils'
 
 export const aliensAction = (gamestate, token, title) => {
   // TODO fix: only work with cow, if in the selected cards
@@ -6,14 +14,15 @@ export const aliensAction = (gamestate, token, title) => {
   const cow = getPlayerNumbersByGivenConditions(gamestate.players, 'cow')
 
   const aliensWithoutShield = getPlayerNumbersByGivenConditions(gamestate.players, 'alienWithoutShield', gamestate.positions.shielded_cards)
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
 
   const randomAlienInstruction = gamestate.roles.aliens.instruction
   const alienKey = gamestate.roles.aliens.key
 
   const isSingleAlien = aliens.length === 1
 
-  let selectableCards = {}
+  let selectable_cards = []
+  let selectable_card_limit = { player: 0, center: 0 }
   let selectablePlayers = []
   let showCards = []
   let obligatory = false
@@ -27,7 +36,7 @@ export const aliensAction = (gamestate, token, title) => {
   let privateMessage = isSingleAlien ? ['action_no_aliens'] : ['action_aliens', ...messageIdentifiers, 'POINT']
 
   if (alienKey.length > 0 && alienKey[0].includes('identifier_player')) {
-    const selectablePlayerNumbers = alienKey.filter(key => key.includes('identifier_player')).map(key => `player_${key.replace('identifier_player', '')}`)
+    const selectablePlayerNumbers = alienKey.filter(key => key.includes('identifier_player')).map(key => key.replace('identifier_player', 'player_'))
 
     selectablePlayers = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
   } else if (alienKey.length > 0) {
@@ -72,10 +81,8 @@ export const aliensAction = (gamestate, token, title) => {
       } else {
         privateMessage.push('action_may_one_any')
         if (!isSingleSelectionOption) {
-          selectableCards = {
-            selectable_cards: selectablePlayers,
-            selectable_card_limit: { player: 1, center: 0 }
-          }
+          selectable_cards = selectablePlayers
+          selectable_card_limit = { player: 1, center: 0 }
         }
         if (randomAlienInstruction === 'aliens_allview') {
           // TODO: Update logic for obligatory and scene_end
@@ -86,7 +93,6 @@ export const aliensAction = (gamestate, token, title) => {
           if (selectablePlayers.length === 0) {
             privateMessage.push('no_selectable_option')
             scene_end = true
-            selectableCards = {}
           }
         }
       }
@@ -197,10 +203,8 @@ export const aliensAction = (gamestate, token, title) => {
         privateMessage.push('no_selectable_option')
         scene_end = true
       } else {
-        selectableCards = {
-          selectable_cards: selectablePlayers,
-          selectable_card_limit: { player: 1, center: 0 }
-        }
+        selectable_cards = selectablePlayers
+        selectable_card_limit = { player: 1, center: 0 }
       }
 
       break
@@ -208,7 +212,8 @@ export const aliensAction = (gamestate, token, title) => {
 
   gamestate.players[token].player_history[title] = {
     ...gamestate.players[token].player_history[title],
-    ...selectableCards,
+    selectable_cards,
+    selectable_card_limit,
     private_message: privateMessage,
     aliens,
     obligatory,
@@ -222,7 +227,7 @@ export const aliensAction = (gamestate, token, title) => {
   return generateRoleAction(gamestate, token, {
     private_message: privateMessage,
     showCards,
-    selectableCards,
+    selectableCards: { selectable_cards, selectable_card_limit },
     uniqueInformation: { aliens, cow, vote, new_alien, new_alien_helper },
     obligatory,
     scene_end

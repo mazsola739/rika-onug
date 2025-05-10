@@ -1,4 +1,4 @@
-import { getPlayerNumberWithMatchingToken, getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import {  getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const doppelgangerResponse = (gamestate, token, selected_card_positions, title) => {
@@ -6,7 +6,7 @@ export const doppelgangerResponse = (gamestate, token, selected_card_positions, 
     return gamestate
   }
 
-  const playerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
 
   gamestate.players[token].card.player_role_id = gamestate.positions.card_positions[selected_card_positions[0]].card.id
 
@@ -18,8 +18,8 @@ export const doppelgangerResponse = (gamestate, token, selected_card_positions, 
     gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[0]].card.team
   }
 
-  gamestate.positions.card_positions[playerNumber].card.role = gamestate.positions.card_positions[selected_card_positions[0]].card.role
-  gamestate.positions.card_positions[playerNumber].card.team = gamestate.positions.card_positions[selected_card_positions[0]].card.team
+  gamestate.positions.card_positions[currentPlayerNumber].card.role = gamestate.positions.card_positions[selected_card_positions[0]].card.role
+  gamestate.positions.card_positions[currentPlayerNumber].card.team = gamestate.positions.card_positions[selected_card_positions[0]].card.team
 
   const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
 

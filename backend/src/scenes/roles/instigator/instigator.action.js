@@ -1,8 +1,7 @@
-import { generateRoleAction, getAllPlayerTokens, getPlayerNumbersWithMatchingTokens } from '../../sceneUtils'
+import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const instigatorAction = (gamestate, token, title) => {
-  const allPlayerTokens = getAllPlayerTokens(gamestate.players)
-  const selectable_marks = getPlayerNumbersWithMatchingTokens(gamestate.players, allPlayerTokens)
+  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
   const selectable_mark_limit = { mark: 1 }
 
   gamestate.players[token].player_history[title] = {

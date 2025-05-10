@@ -1,5 +1,5 @@
 export const shufflePlayers = totalPlayers => {
-  const players = Array.from({ length: totalPlayers }, (_, i) => `identifier_player${i + 1}`)
+  const players = Array.from({ length: totalPlayers }, (_, i) => i)
 
   for (let i = players.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1))
@@ -22,18 +22,14 @@ export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
   }
 }
 
-export const pickRandomTwoPlayersArray = numPlayers => {
-  const players = shufflePlayers(numPlayers)
-
-  return [players[0], players[1]]
-}
-
 export const pickRandomTwoPlayers = numPlayers => {
   const players = shufflePlayers(numPlayers)
 
-  return [players[0], players[1]]
+  return players.slice(0, 2)
 }
 
 export const pickRandomOnePlayer = numPlayers => {
-  return shufflePlayers(numPlayers)[0]
+  const players = shufflePlayers(numPlayers)
+
+  return players.slice(0, 1)
 }

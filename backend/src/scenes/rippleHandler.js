@@ -12,7 +12,7 @@ export const rippleHandler = (gamestate, room_id) => {
     force: false,
     ripple_action: '',
     narration: [],
-    '1p': '',
+    '1p': [],
     '2p': [],
     all_identifier: [],
     any_identifier: [],

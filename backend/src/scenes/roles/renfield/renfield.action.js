@@ -1,10 +1,10 @@
-import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions, getPlayerNumberWithMatchingToken } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 //TODO if no vampire he is villager
 export const renfieldAction = (gamestate, token, title) => {
-  const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampire')
+  const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampires')
   const newVampire = getPlayerNumbersByGivenConditions(gamestate.players, 'vampireByMark')
-  const currentPlayerNumber = getPlayerNumberWithMatchingToken(gamestate.players, token)
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
   const currentPlayerMark = gamestate.positions.card_positions[currentPlayerNumber].mark
 
   if (gamestate.players[token].card.player_original_id === 1) {
