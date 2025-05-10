@@ -3,15 +3,9 @@ import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenCond
 export const auraseerAction = (gamestate, token, title) => {
   const playersWithCardOrMarkActionTrue = getPlayerNumbersByGivenConditions(gamestate.players, 'cardOrMarkActionTrue')
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    auraseer: playersWithCardOrMarkActionTrue,
-    scene_end: true
-  }
-
   const messageIdentifiers = formatPlayerIdentifier(playersWithCardOrMarkActionTrue)
 
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: ['action_card_or_mark_action', ...messageIdentifiers, 'POINT'],
     uniqueInformation: { auraseer: playersWithCardOrMarkActionTrue },
     scene_end: true

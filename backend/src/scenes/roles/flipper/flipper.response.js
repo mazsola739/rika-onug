@@ -18,21 +18,14 @@ export const flipperResponse = (gamestate, token, selected_card_positions, title
 
   gamestate.players[token].card_or_mark_action = true
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    scene_end: true
-  }
-
   if (isTown) {
     gamestate.positions.flipped_cards.push(revealedCard[0])
-    gamestate.players[token].player_history[title].flipped_cards = revealedCard
-  } else {
-    gamestate.players[token].player_history[title].show_cards = revealedCard
   }
 
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_flipped_card', formatPlayerIdentifier(selected_card_positions)[0]],
     showCards: revealedCard,
+    uniqueInformation: { [isTown ? 'flipped_cards' : 'show_cards']: revealedCard },
     scene_end: true
   })
 

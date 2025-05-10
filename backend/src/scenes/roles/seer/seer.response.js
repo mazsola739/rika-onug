@@ -28,15 +28,10 @@ export const seerResponse = (gamestate, token, selected_card_positions, title) =
 
   /*TODO const viewedCards = showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] */
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    viewed_cards: showCards,
-    scene_end: true
-  }
-
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     showCards,
+    uniqueInformation: { viewed_cards: showCards },
     scene_end: true
   })
 

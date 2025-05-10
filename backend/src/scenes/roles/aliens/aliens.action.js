@@ -28,9 +28,10 @@ export const aliensAction = (gamestate, token, title) => {
   let obligatory = false
   let scene_end = false
   let vote = false
-  let viewCards = []
+  let viewed_cards = [] //TODO missing here
   let new_alien = []
   let new_alien_helper = []
+  let shielded = false
 
   const messageIdentifiers = formatPlayerIdentifier(aliens)
   let privateMessage = isSingleAlien ? ['action_no_aliens'] : ['action_aliens', ...messageIdentifiers, 'POINT']
@@ -75,7 +76,7 @@ export const aliensAction = (gamestate, token, title) => {
     case 'aliens_view': //TODO fix showcards
     case 'aliens_allview':
       if (gamestate.players[token].shield) {
-        gamestate.players[token].player_history[title].shielded = true
+        shielded = true
         privateMessage.push('action_shielded')
         scene_end = true
       } else {
@@ -101,7 +102,7 @@ export const aliensAction = (gamestate, token, title) => {
     case 'aliens_left':
     case 'aliens_right':
       if (gamestate.players[token].shield) {
-        gamestate.players[token].player_history[title].shielded = true
+        shielded = true
         privateMessage.push('action_shielded')
       } else {
         const direction = randomAlienInstruction.includes('left') ? 'left' : 'right'
@@ -166,7 +167,7 @@ export const aliensAction = (gamestate, token, title) => {
       })
 
       if (gamestate.players[token].shield) {
-        gamestate.players[token].player_history[title].shielded = true
+        shielded = true
         privateMessage.push('action_shielded')
       } else {
         privateMessage.push(...formatPlayerIdentifier(aliensWithoutShield))
@@ -210,25 +211,13 @@ export const aliensAction = (gamestate, token, title) => {
       break
   }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    selectable_cards,
-    selectable_card_limit,
-    private_message: privateMessage,
-    aliens,
-    obligatory,
-    viewed_cards: viewCards,
-    new_alien,
-    new_alien_helper,
-    scene_end,
-    vote
-  }
+  const uniqueInformation = { aliens, cow, vote, new_alien, new_alien_helper, viewed_cards, shielded }
 
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: privateMessage,
     showCards,
     selectableCards: { selectable_cards, selectable_card_limit },
-    uniqueInformation: { aliens, cow, vote, new_alien, new_alien_helper },
+    uniqueInformation,
     obligatory,
     scene_end
   })

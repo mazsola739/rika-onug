@@ -12,15 +12,6 @@ export const werewolvesAction = (gamestate, token, title) => {
   const selectable_cards = loneWolf ? CENTER_CARD_POSITIONS : []
   const selectable_card_limit = { player: 0, center: loneWolf ? 1 : 0 }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    selectable_cards,
-    selectable_card_limit,
-    werewolves,
-    dreamwolf,
-    obligatory
-  }
-
   const messageIdentifiersWerewolves = formatPlayerIdentifier(werewolves)
   const messageIdentifiersDreamWolves = formatPlayerIdentifier(dreamwolf)
 
@@ -29,7 +20,7 @@ export const werewolvesAction = (gamestate, token, title) => {
 
   const privateMessage = loneWolf ? ['action_may_one_center'] : [...werewolvesMessage, ...dreamwolfMessage, 'POINT']
 
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: privateMessage,
     selectableCards: { selectable_cards, selectable_card_limit },
     obligatory,

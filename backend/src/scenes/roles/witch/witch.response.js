@@ -19,18 +19,10 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayersWithoutShield', gamestate.positions.shielded_cards, token)
     const selectable_card_limit = { player: 1, center: 0 }
 
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      selectable_cards,
-      selectable_card_limit,
-      viewed_cards: [selected_card_positions[0]],
-      selected_center_card: selected_card_positions[0],
-      obligatory: true
-    }
-
-    const action = generateRoleAction(gamestate, token, {
+    const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'action_must_one_any'],
       selectableCards: { selectable_cards, selectable_card_limit },
+      uniqueInformation: { viewed_cards: [selected_card_positions[0]], selected_center_card: selected_card_positions[0] },
       showCards,
       obligatory: true
     })
@@ -61,16 +53,11 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
       gamestate.players[token].card.player_team = currentCard.team
     }
 
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      swapped_cards: [gamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0]],
-      scene_end: true
-    }
-
     const messageIdentifiers = formatPlayerIdentifier([`${gamestate.players[token].player_history[title].selected_center_card}`, selected_card_positions[0]])
 
-    const action = generateRoleAction(gamestate, token, {
+    const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
+      uniqueInformation: { swapped_cards: [gamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0]] },
       scene_end: true
     })
 

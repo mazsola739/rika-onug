@@ -15,13 +15,7 @@ export const apprenticetannerAction = (gamestate, token, title) => {
     privateMessage = ['action_tanner_now']
   }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    tanner,
-    scene_end: true
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: privateMessage,
     uniqueInformation: { tanner },
     scene_end: true

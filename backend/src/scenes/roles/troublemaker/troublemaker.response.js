@@ -15,16 +15,11 @@ export const troublemakerResponse = (gamestate, token, selected_card_positions, 
 
   gamestate.players[token].card_or_mark_action = true
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    swapped_cards: [position1, position2],
-    scene_end: true
-  }
-
   const messageIdentifiers = formatPlayerIdentifier([position1, position2])
 
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
+    uniqueInformation: { swapped_cards: [position1, position2] },
     scene_end: true
   })
 

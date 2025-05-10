@@ -26,18 +26,14 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
 
   gamestate.players[token].card_or_mark_action = true
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
-    viewed_cards: [currentPlayerNumber],
-    scene_end: true
-  }
+  const uniqueInformation = { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], viewed_cards: [currentPlayerNumber] }
 
   const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_card_positions[0]])
 
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_swapped_cards', ...messageIdentifiers, 'action_own_card'],
     showCards,
+    uniqueInformation,
     scene_end: true
   })
 

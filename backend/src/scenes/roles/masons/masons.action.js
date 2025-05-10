@@ -3,13 +3,7 @@ import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sce
 export const masonsAction = (gamestate, token, title) => {
   const masons = getPlayerNumbersByGivenConditions(gamestate.players, 'mason')
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    masons,
-    scene_end: true
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: ['action_masons'],
     uniqueInformation: { masons },
     scene_end: true

@@ -15,14 +15,9 @@ export const mysticwolfResponse = (gamestate, token, selected_card_positions, ti
 
   gamestate.players[token].card_or_mark_action = true
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    viewed_cards: [selected_card_positions[0]],
-    scene_end: true
-  }
-
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
+    uniqueInformation: { viewed_cards: [selected_card_positions[0]] },
     showCards: viewCards,
     scene_end: true
   })

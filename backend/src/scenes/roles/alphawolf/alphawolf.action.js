@@ -11,18 +11,10 @@ export const alphawolfAction = (gamestate, token, title) => {
   const selectable_cards = selectablePlayerNumbers
   const selectable_card_limit = { player: 1, center: 0 }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    selectable_cards,
-    selectable_card_limit,
-    obligatory,
-    scene_end
-  }
-
   if (isSingleSelectable) {
     alphawolfResponse(gamestate, token, selectablePlayerNumbers, title)
   } else {
-    return generateRoleAction(gamestate, token, {
+    return generateRoleAction(gamestate, token, title, {
       private_message: [selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : 'action_must_one_any_non_werewolf'],
       selectableCards: { selectable_cards, selectable_card_limit },
       obligatory,

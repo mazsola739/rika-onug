@@ -1,4 +1,12 @@
-import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAction, createAndSendSceneMessage, getCardIdsByPositions,  formatPlayerIdentifier, getMarksByPositions } from '../../sceneUtils'
+import {
+  getNarrationByTitle,
+  getPlayerNumbersByGivenConditions,
+  generateRoleAction,
+  createAndSendSceneMessage,
+  getCardIdsByPositions,
+  formatPlayerIdentifier,
+  getMarksByPositions
+} from '../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../validators'
 
 //TODO selectable stuffs simlify
@@ -17,14 +25,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
     }
 
     if (selected_answer === 'cards') {
-      gamestate.players[token].player_history[title] = {
-        ...gamestate.players[token].player_history[title],
-        selectable_cards,
-        selectable_card_limit,
-        obligatory: true
-      }
-
-      const action = generateRoleAction(gamestate, token, {
+      const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_one_any'],
         selectableCards: { selectable_cards, selectable_card_limit },
         obligatory: true
@@ -34,14 +35,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
 
       return gamestate
     } else if (selected_answer === 'marks') {
-      gamestate.players[token].player_history[title] = {
-        ...gamestate.players[token].player_history[title],
-        selectable_marks,
-        selectable_mark_limit,
-        obligatory: true
-      }
-
-      const action = generateRoleAction(gamestate, token, {
+      const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_one_any'],
         selectableMarks: { selectable_marks, selectable_mark_limit },
         obligatory: true
@@ -72,8 +66,10 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
 
     let action = {}
 
-    if (gamestate.players[token].player_history[title].viewed_marks) {
-      action = generateRoleAction(gamestate, token, {
+    const itViewedMarks = gamestate.players[token].player_history[title].viewed_marks
+
+    if (itViewedMarks) {
+      action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
         showCards: viewCards,
         scene_end: true
@@ -84,20 +80,13 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
         selectable_marks.splice(indexToRemove, 1)
       }
 
-      gamestate.players[token].player_history[title].selectable_marks = selectable_marks
-      gamestate.players[token].player_history[title].selectable_mark_limit = { mark: 1 }
-
-      action = generateRoleAction(gamestate, token, {
+      action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'action_must_one_any'],
         showCards: viewCards,
+        uniqueInformation: { viewed_cards: [selected_card_positions[0]] },
         selectableMarks: { selectable_marks, selectable_mark_limit },
         obligatory: true
       })
-    }
-
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      viewed_cards: [selected_card_positions[0]]
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
@@ -120,8 +109,10 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
 
     let action = {}
 
-    if (gamestate.players[token].player_history[title].viewed_cards) {
-      action = generateRoleAction(gamestate, token, {
+    const itViewedCards = gamestate.players[token].player_history[title].viewed_cards
+
+    if (itViewedCards) {
+      action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0]],
         showMarks: viewMarks,
         scene_end: true
@@ -132,20 +123,13 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
         selectable_cards.splice(indexToRemove, 1)
       }
 
-      gamestate.players[token].player_history[title].selectable_cards = selectable_cards
-      gamestate.players[token].player_history[title].selectable_card_limit = { player: 1, center: 0 }
-
-      action = generateRoleAction(gamestate, token, {
+      action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0], 'action_must_one_any'],
         showMarks: viewMarks,
         selectableCards: { selectable_cards, selectable_card_limit },
+        uniqueInformation: { viewed_marks: [selected_mark_positions[0]] },
         obligatory: true
       })
-    }
-
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      viewed_marks: [selected_mark_positions[0]]
     }
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)

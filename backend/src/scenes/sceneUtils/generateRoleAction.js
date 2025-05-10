@@ -1,14 +1,6 @@
 import { getPlayerNumbersByGivenConditions } from '.'
 import { getKeys, isActivePlayersCardsFlipped, isPlayersCardsFlipped } from '../../utils/council.util'
 
-//TODO fix history update, combine with card update?
-export const updatePlayerHistory = (gamestate, token, title, updates) => {
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    ...updates
-  }
-}
-
 const combineUniqueObjects = (array1, array2) => {
   const uniqueSet = new Set()
 
@@ -23,35 +15,33 @@ const combineUniqueObjects = (array1, array2) => {
   })
 }
 
+const updatePlayerHistory = (gamestate, token, title, updates) => {
+  gamestate.players[token].player_history[title] = {
+    ...gamestate.players[token].player_history[title],
+    ...updates
+  }
+}
+
 const updatePlayerCard = (gamestate, token) => {
-  let newPlayers = { ...gamestate.players }
-  let newPositions = { ...gamestate.positions }
+  const newGamestate = { ...gamestate }
 
   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
-  const flippedCards = newPositions.flipped_cards
+  const currentPlayerKnownCard = newGamestate.players[token].card
+  const currentPlayerCard = newGamestate.positions.card_positions[currentPlayerNumber].card
 
-  const playerCard = newPlayers[token].card
-  const currentCard = newPositions.card_positions[currentPlayerNumber].card
+  if (!currentPlayerKnownCard || !currentPlayerCard) return
 
-  if (!playerCard || !currentCard) return
-
-  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(flippedCards, currentPlayerNumber)
-  const iSeeMyCardElsewhere = isPlayersCardsFlipped(flippedCards, playerCard.player_card_id)
+  const iSeeMyCardIsFlipped = isActivePlayersCardsFlipped(newGamestate.positions.flipped_cards, currentPlayerNumber)
+  const iSeeMyCardElsewhere = isPlayersCardsFlipped(newGamestate.positions.flipped_cards, currentPlayerKnownCard.player_card_id)
 
   if (iSeeMyCardIsFlipped) {
-    newPlayers[token].card.player_card_id = currentCard.id
-    newPlayers[token].card.player_role = currentCard.role
-    newPlayers[token].card.player_team = currentCard.team
+    newGamestate.players[token].card.player_card_id = currentPlayerCard.id
+    newGamestate.players[token].card.player_role = currentPlayerCard.role
+    newGamestate.players[token].card.player_team = currentPlayerCard.team
   }
 
   if (iSeeMyCardElsewhere) {
-    newPlayers[token].card.player_card_id = 87
-  }
-
-  const newGamestate = {
-    ...gamestate,
-    players: newPlayers,
-    positions: newPositions
+    newGamestate.players[token].card.player_card_id = 87
   }
 
   return newGamestate
@@ -60,21 +50,79 @@ const updatePlayerCard = (gamestate, token) => {
 export const generateRoleAction = (
   gamestate,
   token,
+  title,
   { private_message, selectableCards = {}, selectableMarks = {}, showCards = [], showMarks = [], obligatory = false, scene_end = false, uniqueInformation = {} }
 ) => {
   let newGamestate = updatePlayerCard(gamestate, token)
   const flippedCards = JSON.parse(JSON.stringify(newGamestate.positions.flipped_cards))
+  const show_cards = showCards !== null ? combineUniqueObjects(showCards, flippedCards) : flippedCards
+  const show_marks = showMarks
 
-  const information = {
-    shielded_cards: newGamestate.positions.shielded_cards,
-    artifacted_cards: getKeys(newGamestate.positions.artifacted_cards),
-    show_cards: showCards !== null ? combineUniqueObjects(showCards, flippedCards) : flippedCards,
-    show_marks: showMarks,
+  /* TODO gamestate.players[token].player_history[title]
+  aliens, 
+  cow,
+  vote, 
+  new_alien, 
+  new_alien_helper,
+  viewed_cards, 
+  swapped_cards, 
+  assassins, 
+  mark_of_assassin, 
+  tanner, 
+  apprenticeassassins,
+  auraseer,
+  answer_options,
+  seers,
+  part_of_blob,
+  alien_neighbor,
+  mark_of_love,
+  new_artifact_card,
+  mark_of_disease,
+  shielded,
+  empath_vote,
+  viewed_marks,
+  villain_neighbor,
+  flipped_cards,
+  part_of_family,
+  swapped_marks
+  groobzerb,
+  zerb,
+  groob,
+  mark_of_traitor,
+  madscientist,
+  lovers,
+  masons,
+  werewolves,
+  mark_of_clarity,
+  random,
+  direction,
+  new_vampire,
+  mark_of_bat,
+  vampires,
+  new_shield_card,
+  villains,
+  evilometer,
+  mark_of_fear,
+  mark_of_vampire,
+  dreamwolf,
+  selected_center_card
+   */
+
+  const historyParts = {
+    show_cards,
+    show_marks,
     obligatory,
     scene_end,
     ...selectableCards,
     ...selectableMarks,
     ...uniqueInformation
+  }
+  newGamestate = updatePlayerHistory(gamestate, token, title, historyParts)
+
+  const information = {
+    shielded_cards: newGamestate.positions.shielded_cards,
+    artifacted_cards: getKeys(newGamestate.positions.artifacted_cards),
+    ...historyParts
   }
 
   return {

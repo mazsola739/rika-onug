@@ -8,13 +8,7 @@ export const cowAction = (gamestate, token, title) => {
   }
   const neighborIsAlien = alienAbducted(gamestate.players, neighbors)
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    alien_neighbor: neighborIsAlien ? neighbors : [],
-    scene_end: true
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: [neighborIsAlien ? 'action_got_tapped_by_alien' : 'action_no_tap'],
     uniqueInformation: { alien_neighbor: neighborIsAlien ? neighbors : [] },
     scene_end: true

@@ -13,14 +13,9 @@ export const sentinelResponse = (gamestate, token, selected_card_positions, titl
     gamestate.players[shieldedPlayerToken[0]].shield = true
   }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    new_shield_card: [selected_card_positions[0]],
-    scene_end: true
-  }
-
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_placed_shield', formatPlayerIdentifier(selected_card_positions)[0]],
+    uniqueInformation: { new_shield_card: [selected_card_positions[0]] },
     scene_end: true
   })
 

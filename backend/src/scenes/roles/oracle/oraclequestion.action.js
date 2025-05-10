@@ -27,14 +27,7 @@ export const oraclequestionAction = (gamestate, token, title) => {
       break
   }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    answer_options,
-    scene_end,
-    obligatory
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: ['action_oracle_question'],
     uniqueInformation: { answer_options },
     scene_end,

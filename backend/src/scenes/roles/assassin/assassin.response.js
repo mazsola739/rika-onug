@@ -29,16 +29,9 @@ export const assassinResponse = (gamestate, token, selected_mark_positions, titl
 
   gamestate.players[token].card_or_mark_action = true
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    mark_of_assassin: [selected_mark_positions[0]],
-    apprenticeassassins: apprenticeassassins.length > 0 ? apprenticeassassins : [],
-    scene_end: true
-  }
-
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_mark_of_assassin', formatPlayerIdentifier(selected_mark_positions)[0]],
-    uniqueInformation: { apprenticeassassins: apprenticeassassins.length > 0 ? apprenticeassassins : [] },
+    uniqueInformation: { mark_of_assassin: [selected_mark_positions[0]], apprenticeassassins },
     scene_end: true
   })
 

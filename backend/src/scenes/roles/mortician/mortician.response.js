@@ -6,8 +6,9 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
+  const limit = gamestate.players[token].player_history[title].selectable_card_limit.player
 
-  const cardPositions = selected_card_positions.slice(0, gamestate.players[token].player_history[title].selectable_card_limit.player)
+  const cardPositions = selected_card_positions.slice(0, limit)
   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
   const viewCards = getCardIdsByPositions(gamestate.positions.card_positions, cardPositions)
 
@@ -30,13 +31,9 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
 
   gamestate.players[token].card_or_mark_action = true
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    viewed_cards: cardPositions
-  }
-
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_saw_card', formatPlayerIdentifier(cardPositions)],
+    uniqueInformation: { viewed_cards: cardPositions },
     showCards: viewCards
   })
 

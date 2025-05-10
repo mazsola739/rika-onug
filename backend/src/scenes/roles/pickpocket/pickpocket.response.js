@@ -18,18 +18,12 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
 
   gamestate.players[token].card_or_mark_action = true
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    swapped_marks: [currentPlayerNumber, selected_mark_positions[0]],
-    viewed_marks: [currentPlayerNumber],
-    scene_end: true
-  }
-
   const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_mark_positions[0]])
 
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_swapped_marks', ...messageIdentifiers, 'POINT', 'action_own_mark'],
     showMarks: viewMarks,
+    uniqueInformation: { swapped_marks: [currentPlayerNumber, selected_mark_positions[0]], viewed_marks: [currentPlayerNumber] },
     scene_end: true
   })
 

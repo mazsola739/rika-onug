@@ -13,26 +13,15 @@ export const morticianAction = (gamestate, token, title, prefix) => {
       selectable_cards = currentPlayerNumber
       selectable_card_limit = { player: 1, center: 0 }
 
-      gamestate.players[token].player_history[title] = {
-        ...gamestate.players[token].player_history[title],
-        selectable_cards,
-        selectable_card_limit
-      }
-
-      return generateRoleAction(gamestate, token, {
+      return generateRoleAction(gamestate, token, title, {
         private_message: ['action_may_look_yourself'],
         selectableCards: { selectable_cards, selectable_card_limit },
         scene_end
       })
     } else {
-      gamestate.players[token].player_history[title] = {
-        ...gamestate.players[token].player_history[title],
-        shielded: true,
-        scene_end
-      }
-
-      return generateRoleAction(gamestate, token, {
-        private_message: ['action_shielded']
+      return generateRoleAction(gamestate, token, title, {
+        private_message: ['action_shielded'],
+        uniqueInformation: { shielded: true }
       })
     }
   } else if (morticianKey.includes('neighbor')) {
@@ -45,14 +34,7 @@ export const morticianAction = (gamestate, token, title, prefix) => {
     selectable_card_limit = { player: limit, center: 0 }
     scene_end = selectable_cards.length === 0
 
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      selectable_cards,
-      selectable_card_limit,
-      scene_end
-    }
-
-    return generateRoleAction(gamestate, token, {
+    return generateRoleAction(gamestate, token, title, {
       private_message: [scene_end ? 'action_no_selectable_player' : `action_may_${morticianKey.replace('identifier_', '')}`],
       selectableCards: { selectable_cards, selectable_card_limit },
       scene_end

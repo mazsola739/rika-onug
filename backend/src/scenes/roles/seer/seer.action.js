@@ -6,13 +6,7 @@ export const seerAction = (gamestate, token, title) => {
   const selectable_cards = [...selecatblePlayers, ...CENTER_CARD_POSITIONS]
   const selectable_card_limit = { player: 1, center: 2 }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    selectable_cards,
-    selectable_card_limit
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: ['action_may_one_any_other', 'conjunction_or', 'action_seer_end'],
     selectableCards: { selectable_cards, selectable_card_limit }
   })

@@ -1,5 +1,1 @@
-export const formatPlayerIdentifier = playerNumbers => {
-  const formattedPlayerNumbers = [...playerNumbers]
-
-  return formattedPlayerNumbers.map(player => `identifier_${player.replace('_', '')}`)
-}
+export const formatPlayerIdentifier = playerNumbers => playerNumbers.map(player => `identifier_${player.replace('_', '')}`)

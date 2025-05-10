@@ -1,4 +1,4 @@
-import {  formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const drunkResponse = (gamestate, token, selected_card_positions, title) => {
@@ -27,16 +27,11 @@ export const drunkResponse = (gamestate, token, selected_card_positions, title) 
   gamestate.players[token].card.player_card_id = 87
   gamestate.players[token].card_or_mark_action = true
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    swapped_cards: [currentPlayerNumber, selected_card_positions[0]],
-    scene_end: true
-  }
-
   const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])
 
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
+    uniqueInformation : { swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
     scene_end: true
   })
 

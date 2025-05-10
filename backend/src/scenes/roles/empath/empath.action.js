@@ -5,8 +5,7 @@ export const empathEveryoneAction = (gamestate, token, title, prefix) => {
 
   const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
+  const uniqueInformation = {
     selectable_cards: selectablePlayerNumbers,
     selectable_card_limit: { player: 1, center: 0 }
   }
@@ -25,8 +24,7 @@ export const empathAction = (gamestate, token, title, prefix) => {
 
   const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
+  const uniqueInformation = {
     selectable_cards: selectablePlayerNumbers,
     selectable_card_limit: { player: 1, center: 0 }
   }

@@ -46,13 +46,9 @@ export const empathResponse = (gamestate, token, selected_card_positions, title)
     )
   })
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    empath_vote: [selected_card_positions[0]]
-  }
-
-  const action = generateRoleAction(gamestate, token, {
-    private_message: ['action_voted', formatPlayerIdentifier(selected_card_positions)[0]]
+  const action = generateRoleAction(gamestate, token, title, {
+    private_message: ['action_voted', formatPlayerIdentifier(selected_card_positions)[0]],
+    uniqueInformation: { empath_vote: [selected_card_positions[0]] }
   })
 
   const narration = getNarrationByTitle(title, gamestate.scenes.narration)

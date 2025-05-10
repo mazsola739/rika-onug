@@ -91,16 +91,13 @@ export const rascalAction = (gamestate, token, title, prefix) => {
     privateMessage = [selectable_cards.length >= 2 ? 'action_may_two_any' : 'action_no_selectable_player']
   } else if (randomRascalInstruction === 'rascal_drunk' || randomRascalInstruction === 'rascal_robber') {
     if (gamestate.players[token].shield) {
-      gamestate.players[token].player_history[title] = {
-        ...gamestate.players[token].player_history[title],
-        shielded: true
-      }
-
-      return generateRoleAction(gamestate, token, {
-        private_message: ['action_shielded']
+      return generateRoleAction(gamestate, token, title, {
+        private_message: ['action_shielded'],
+        uniqueInformation: { shielded: true }
       })
     } else {
-      selectable_cards = rascalKey === 'identifier_center' ? CENTER_CARD_POSITIONS : getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayersWithoutShield', gamestate.positions.shielded_cards, token)
+      selectable_cards =
+        rascalKey === 'identifier_center' ? CENTER_CARD_POSITIONS : getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayersWithoutShield', gamestate.positions.shielded_cards, token)
       privateMessage = [selectable_cards.length === 0 ? 'action_no_selectable_player' : randomRascalInstruction === 'rascal_drunk' ? 'action_must_one_any_other' : 'action_may_one_any_other']
     }
   } else {
@@ -115,20 +112,12 @@ export const rascalAction = (gamestate, token, title, prefix) => {
   }
 
   const random = randomRascalInstruction.replace('rascal_', '')
-
   const obligatory = randomRascalInstruction === 'rascal_drunk'
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    selectable_cards,
-    selectable_card_limit,
-    random,
-    obligatory
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: privateMessage,
     selectableCards: { selectable_cards, selectable_card_limit },
+    uniqueInformation: { random },
     obligatory
   })
 }

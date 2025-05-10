@@ -15,15 +15,11 @@ export const temptressResponse = (gamestate, token, selected_card_positions, tit
 
   gamestate.players[token].card_or_mark_action = true
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    swapped_cards: [selected_card_positions[0], 'center_villain']
-  }
-
   const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], 'center_villain'])
 
-  const action = generateRoleAction(gamestate, token, {
-    private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT']
+  const action = generateRoleAction(gamestate, token, title, {
+    private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
+    uniqueInformation: { swapped_cards: [selected_card_positions[0], 'center_villain'] }
   })
 
   const narration = getNarrationByTitle(title, gamestate.scenes.narration)

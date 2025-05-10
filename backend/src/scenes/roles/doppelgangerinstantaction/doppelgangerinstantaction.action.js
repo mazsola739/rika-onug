@@ -6,12 +6,7 @@ export const doppelgangerinstantactionAction = (gamestate, token, title) => {
   const new_role_id = gamestate.players[token]?.new_role_id
 
   if (!DOPPELGANGER_INSTANT_ACTION.includes(new_role_id)) {
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      scene_end: true
-    }
-
-    return generateRoleAction(gamestate, token, {
+    return generateRoleAction(gamestate, token, title, {
       private_message: ['no_night_action'],
       scene_end: true
     })

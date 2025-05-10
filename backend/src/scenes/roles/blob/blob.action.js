@@ -3,19 +3,13 @@ import { formatPlayerIdentifier, generateRoleAction, getPartOfGroupByToken } fro
 export const blobAction = (gamestate, token, title) => {
   const randomInstruction = gamestate.roles.blob.instruction
 
-  const partOfBlob = getPartOfGroupByToken(gamestate.players, token, randomInstruction)
+  const part_of_blob = getPartOfGroupByToken(gamestate.players, token, randomInstruction)
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    part_of_blob: partOfBlob,
-    scene_end: true
-  }
+  const messageIdentifiers = formatPlayerIdentifier(part_of_blob)
 
-  const messageIdentifiers = formatPlayerIdentifier(partOfBlob)
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: ['action_part_of_blob', ...messageIdentifiers, 'POINT'],
-    uniqueInformation: { part_of_blob: partOfBlob },
+    uniqueInformation: { part_of_blob },
     scene_end: true
   })
 }

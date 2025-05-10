@@ -17,16 +17,10 @@ export const werewolvesResponse = (gamestate, token, selected_card_positions, ti
 
   const private_message = ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]]
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    viewed_cards: [selected_card_positions[0]],
-    private_message,
-    obligatory: true
-  }
-
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message,
     showCards,
+    uniqueInformation: { viewed_cards: [selected_card_positions[0]] },
     obligatory: true,
     scene_end: true
   })

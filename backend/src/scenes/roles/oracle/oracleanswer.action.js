@@ -88,19 +88,11 @@ export const oracleanswerAction = (gamestate, token, title) => {
       break
   }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    viewed_cards: showCards,
-    selectable_cards,
-    selectable_card_limit,
-    scene_end,
-    obligatory
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: privateMessage,
     showCards,
     selectableCards: { selectable_cards, selectable_card_limit },
+    uniqueInformation: { viewed_cards: showCards },
     scene_end,
     obligatory
   })

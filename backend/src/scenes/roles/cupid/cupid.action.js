@@ -6,14 +6,7 @@ export const cupidAction = (gamestate, token, title) => {
 
   //const isTwoSelectable = selectablePlayerNumbers.length === 2
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    selectable_marks,
-    selectable_mark_limit,
-    obligatory: true
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: ['action_must_two_any'],
     selectableMarks: { selectable_marks, selectable_mark_limit },
     obligatory: true

@@ -24,15 +24,11 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
     gamestate.players[token].card.player_card_id = 87
     gamestate.players[token].card_or_mark_action = true
 
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      swapped_cards: [currentPlayerNumber, selected_card_positions[0]]
-    }
-
     const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])
 
-    action = generateRoleAction(gamestate, token, {
-      private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT']
+    action = generateRoleAction(gamestate, token, title, {
+      private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
+      uniqueInformation: {  swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
     })
   } else if (oracleQuestion === 'oracle_viewcenter') {
     const limit = gamestate.players[token].player_history[title].selectable_card_limit.center
@@ -41,16 +37,13 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
 
     gamestate.players[token].card_or_mark_action = true
 
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      viewed_cards: selectedCards
-    }
 
     const messageIdentifiers = formatPlayerIdentifier(selectedCardPositions)
     const message = ['action_saw_card', ...messageIdentifiers]
 
-    action = generateRoleAction(gamestate, token, {
+    action = generateRoleAction(gamestate, token, title, {
       private_message: message,
+      uniqueInformation: { viewed_cards: selectedCards },
       showCards: selectedCards
     })
   }

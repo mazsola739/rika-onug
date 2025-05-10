@@ -3,12 +3,7 @@ import { generateRoleAction, getAnyEvenOrOddPlayerNumbers, getPlayerNeighborsByT
 
 export const bodysnatcherAction = (gamestate, token, title, prefix) => {
   if (gamestate.players[token].shield) {
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      shielded: true
-    }
-
-    return generateRoleAction(gamestate, token, {
+    return generateRoleAction(gamestate, token, title, {
       private_message: ['action_shielded']
     })
   }
@@ -68,15 +63,7 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
     interactionMessage = 'action_must_one_center'
   }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    selectable_cards,
-    selectable_card_limit,
-    obligatory: true,
-    scene_end
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: [interactionMessage],
     selectableCards: { selectable_cards, selectable_card_limit },
     obligatory: true,

@@ -16,14 +16,9 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
     ...updatedPlayerCards
   }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    direction: selected_answer,
-    scene_end: true
-  }
-
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_moved', selected_answer === 'left' ? 'direction_left' : 'direction_right'],
+    uniqueInformation: { direction: selected_answer },
     scene_end: true
   })
 

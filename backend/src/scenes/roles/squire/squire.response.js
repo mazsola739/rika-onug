@@ -20,30 +20,17 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
 
     gamestate.players[token].card_or_mark_action = true
 
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      answer: [selected_answer[0]],
-      viewed_cards: viewCards,
-      werewolves
-    }
-
     const messageIdentifiers = formatPlayerIdentifier(werewolvesWithoutShield)
 
-    action = generateRoleAction(gamestate, token, {
+    action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_saw_card', ...messageIdentifiers, 'POINT'],
       showCards: viewCards,
-      uniqueInformation: { werewolves }
+      uniqueInformation: { werewolves, answer: [selected_answer[0]], viewed_cards: viewCards }
     })
   } else if (selected_answer === 'no') {
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      werewolves,
-      answer: [selected_answer[0]]
-    }
-
-    action = generateRoleAction(gamestate, token, {
+    action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_nothing'],
-      uniqueInformation: { werewolves }
+      uniqueInformation: { werewolves, answer: [selected_answer[0]] }
     })
   }
 

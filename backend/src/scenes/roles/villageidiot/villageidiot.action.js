@@ -3,13 +3,8 @@ import { generateRoleAction } from '../../sceneUtils'
 export const villageidiotAction = (gamestate, token, title) => {
   const answer_options = ['left', 'right']
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    answer_options,
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: ['action_may_direction'],
-    uniqueInformation: { answer_options },
+    uniqueInformation: { answer_options }
   })
 }

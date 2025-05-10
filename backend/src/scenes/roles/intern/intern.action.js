@@ -9,15 +9,9 @@ export const internAction = (gamestate, token, title) => {
     playerCard.player_role = 'MAD_SCIENTIST'
   }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    madscientist,
-    scene_end: true
-  }
-
   const messageIdentifiers = formatPlayerIdentifier(madscientist)
 
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: [madscientist.length === 0 ? 'action_mad_now' : 'action_mad', ...messageIdentifiers, 'POINT'],
     uniqueInformation: { madscientist },
     scene_end: true

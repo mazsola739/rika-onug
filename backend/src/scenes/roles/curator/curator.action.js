@@ -1,5 +1,6 @@
 import { getPlayerNumbersByGivenConditions, generateRoleAction } from '../../sceneUtils'
 
+//TODO util function?
 export const curatorAction = (gamestate, token, title) => {
   const selectablePlayersWithNoShield = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayersWithoutShield', gamestate.positions.shielded_cards, token)
   const getSelectablePlayersWithNoArtifact = (players, artifactedCards) => players.filter(player => !artifactedCards.includes(player))
@@ -8,14 +9,7 @@ export const curatorAction = (gamestate, token, title) => {
   const selectable_card_limit = { player: 1, center: 0 }
   const scene_end = selectable_cards.length === 0
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    selectable_cards,
-    selectable_card_limit,
-    scene_end
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: [scene_end ? 'action_no_selectable_player' : 'action_may_one_any'],
     selectableCards: { selectable_cards, selectable_card_limit },
     scene_end

@@ -19,15 +19,9 @@ export const priestAction = (gamestate, token, title) => {
 
   gamestate.players[token].card.player_mark = 'mark_of_clarity'
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    selectable_marks,
-    selectable_mark_limit,
-    mark_of_clarity: [currentPlayerNumber]
-  }
-
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: ['action_may_one_any_other'],
-    selectableMarks: { selectable_marks, selectable_mark_limit }
+    selectableMarks: { selectable_marks, selectable_mark_limit },
+    uniqueInformation: { mark_of_clarity: [currentPlayerNumber] }
   })
 }

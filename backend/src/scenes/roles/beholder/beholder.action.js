@@ -4,17 +4,16 @@ export const beholderAction = (gamestate, token, title) => {
   const seers = getPlayerNumbersByGivenConditions(gamestate.players, 'anySeer')
   const answer_options = ['yes', 'no']
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
+  const uniqueInformation = {
     answer_options,
     seers
   }
 
   const messageIdentifiers = formatPlayerIdentifier(seers)
 
-  return generateRoleAction(gamestate, token, {
+  return generateRoleAction(gamestate, token, title, {
     private_message: ['action_seers', ...messageIdentifiers, 'action_may_look'],
-    uniqueInformation: { seers, answer_options }
+    uniqueInformation
   })
 }
-// 
+//

@@ -9,7 +9,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
   const randomAlienInstruction = gamestate.alien.instruction
 
   let showCards = []
-  let viewCards = []
+  let viewed_cards = []
   let new_alien = []
   let new_alien_helper = []
   let private_message = []
@@ -30,7 +30,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
         gamestate.players[token].card.player_card_id = 87
       }
       showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
-      viewCards = [selected_card_positions[0]]
+      viewed_cards = [selected_card_positions[0]]
       private_message = ['action_voted_together', 'action_saw_card', formatPlayerIdentifier([selected_card_positions[0]])[0]]
 
       break
@@ -49,18 +49,16 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
       break
   }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    viewed_cards: viewCards,
+  const uniqueInformation = {
+    viewed_cards,
     new_alien,
-    new_alien_helper,
-    scene_end: true
+    new_alien_helper
   }
 
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message,
     showCards,
-    uniqueInformation: { new_alien, new_alien_helper },
+    uniqueInformation,
     scene_end: true
   })
 

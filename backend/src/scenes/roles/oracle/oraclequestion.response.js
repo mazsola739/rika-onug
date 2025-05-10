@@ -20,15 +20,9 @@ export const oraclequestionResponse = (gamestate, token, selected_answer, title)
     gamestate.roles.oracle.answer = selected_answer
   }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    question: oracleQuestion,
-    answer: selected_answer,
-    scene_end: true
-  }
-
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_oracle_answer', `button_label_${selected_answer}`],
+    uniqueInformation: { question: oracleQuestion, answer: selected_answer },
     scene_end: true
   })
 

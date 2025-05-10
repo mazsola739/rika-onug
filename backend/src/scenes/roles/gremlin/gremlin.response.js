@@ -18,14 +18,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
     //TODO if no marks only cards
 
     if (selected_answer === 'cards') {
-      gamestate.players[token].player_history[title] = {
-        ...gamestate.players[token].player_history[title],
-        selectable_cards,
-        selectable_card_limit,
-        obligatory: true
-      }
-
-      const action = generateRoleAction(gamestate, token, {
+      const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_two_any'],
         selectableCards: { selectable_cards, selectable_card_limit },
         obligatory: true
@@ -35,14 +28,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
       return gamestate
     } else if (selected_answer === 'marks') {
-      gamestate.players[token].player_history[title] = {
-        ...gamestate.players[token].player_history[title],
-        selectable_marks,
-        selectable_mark_limit,
-        obligatory: true
-      }
-
-      const action = generateRoleAction(gamestate, token, {
+      const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_two_any'],
         selectableMarks: { selectable_marks, selectable_mark_limit },
         obligatory: true
@@ -72,16 +58,11 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       gamestate.players[token].card.player_card_id = 87
     }
 
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      swapped_cards: [position1, position2],
-      scene_end: true
-    }
-
     const messageIdentifiers = formatPlayerIdentifier([position1, position2])
 
-    const action = generateRoleAction(gamestate, token, {
+    const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
+      uniqueInformation: { swapped_cards: [position1, position2] },
       scene_end: true
     })
 
@@ -108,16 +89,11 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       gamestate.players[token].card.player_mark = ''
     }
 
-    gamestate.players[token].player_history[title] = {
-      ...gamestate.players[token].player_history[title],
-      swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]],
-      scene_end: true
-    }
-
     const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
 
-    const action = generateRoleAction(gamestate, token, {
+    const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_swapped_marks', ...messageIdentifiers, 'POINT'],
+      uniqueInformation: { swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]] },
       scene_end: true
     })
 

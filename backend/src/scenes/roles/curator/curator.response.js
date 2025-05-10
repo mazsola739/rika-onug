@@ -2,18 +2,19 @@ import { artifactsJson } from '../../../data'
 import { getPlayerTokensByPlayerNumber, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
+//TODO util function?
 export const curatorResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
 
   const getRandomArtifact = playerArtifacts => {
-  const assignedArtifacts = playerArtifacts.map(obj => Object.values(obj)[0])
-  const availableArtifacts = artifactsJson.filter(artifact => !assignedArtifacts.includes(artifact.id))
-  const randomIndex = Math.floor(Math.random() * availableArtifacts.length)
+    const assignedArtifacts = playerArtifacts.map(obj => Object.values(obj)[0])
+    const availableArtifacts = artifactsJson.filter(artifact => !assignedArtifacts.includes(artifact.id))
+    const randomIndex = Math.floor(Math.random() * availableArtifacts.length)
 
-  return availableArtifacts[randomIndex].id
-}
+    return availableArtifacts[randomIndex].id
+  }
 
   const newArtifact = getRandomArtifact(gamestate.positions.artifacted_cards)
   const artifactedPlayersToken = getPlayerTokensByPlayerNumber(gamestate.players, [selected_card_positions[0]])
@@ -23,14 +24,9 @@ export const curatorResponse = (gamestate, token, selected_card_positions, title
     gamestate.positions.card_positions[selected_card_positions[0]].artifact = newArtifact
   }
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    new_artifact_card: selected_card_positions[0],
-    scene_end: true
-  }
-
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_placed_artifact', formatPlayerIdentifier(selected_card_positions)[0]],
+    uniqueInformation: { new_artifact_card: selected_card_positions[0] },
     scene_end: true
   })
 

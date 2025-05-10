@@ -45,18 +45,14 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
   gamestate.players[token].card_or_mark_action = true
   gamestate.roles.nostradamus.team = gamestate.players[token].card.player_team
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : [selected_card_positions[0]]
-  }
-
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: [
       'action_saw_card',
       formatPlayerIdentifier(selected_card_positions)[0],
       showCards.length >= 2 ? formatPlayerIdentifier(selected_card_positions)[1] : '',
       showCards.length === 3 ? formatPlayerIdentifier(selected_card_positions)[2] : ''
     ],
+    uniqueInformation: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : [selected_card_positions[0]] },
     showCards
   })
 

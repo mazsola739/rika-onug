@@ -1,4 +1,4 @@
-import {  formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const cupidResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -36,16 +36,11 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
 
   gamestate.players[token].card_or_mark_action = true
 
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
-    mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]],
-    scene_end: true
-  }
-
   const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
 
-  const action = generateRoleAction(gamestate, token, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_mark_of_love', ...messageIdentifiers, 'POINT'],
+    uniqueInformation: { mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]] },
     scene_end: true
   })
 
