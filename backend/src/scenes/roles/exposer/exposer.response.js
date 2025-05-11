@@ -11,7 +11,7 @@ export const exposerResponse = (gamestate, token, selected_card_positions, title
   gamestate.positions.flipped_cards.push(...showCards)
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_flipped_card', formatPlayerIdentifier(selected_card_positions.slice(0, limit))],
+    private_message: ['action_flipped_card', ...formatPlayerIdentifier(selected_card_positions.slice(0, limit))],
     showCards,
     scene_end: true
   })

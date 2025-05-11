@@ -56,7 +56,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
 
     if (itViewedMarks) {
       action = generateRoleAction(gamestate, token, title, {
-        private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
+        private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])],
         showCards,
         scene_end: true
       })
@@ -67,7 +67,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       }
 
       action = generateRoleAction(gamestate, token, title, {
-        private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'action_must_one_any'],
+        private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_must_one_any'],
         showCards: showCards,
         selectableMarks: { selectable_marks, selectable_mark_limit },
         obligatory: true
@@ -98,7 +98,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
 
     if (itViewedCards) {
       action = generateRoleAction(gamestate, token, title, {
-        private_message: ['action_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0]],
+        private_message: ['action_saw_mark', ...formatPlayerIdentifier([selected_mark_positions[0]])],
         showMarks,
         scene_end: true
       })
@@ -109,7 +109,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       }
 
       action = generateRoleAction(gamestate, token, title, {
-        private_message: ['action_saw_mark', formatPlayerIdentifier(selected_mark_positions)[0], 'action_must_one_any'],
+        private_message: ['action_saw_mark', ...formatPlayerIdentifier([selected_mark_positions[0]]), 'action_must_one_any'],
         showMarks,
         selectableCards: { selectable_cards, selectable_card_limit },
         obligatory: true

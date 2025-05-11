@@ -17,7 +17,7 @@ export const revealerResponse = (gamestate, token, selected_card_positions, titl
   }
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_flipped_card', formatPlayerIdentifier(selected_card_positions)[0]],
+    private_message: ['action_flipped_card', ...formatPlayerIdentifier([selected_card_positions[0]])],
     showCards,
     scene_end: true
   })

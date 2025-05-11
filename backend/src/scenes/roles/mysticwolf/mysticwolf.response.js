@@ -9,7 +9,7 @@ export const mysticwolfResponse = (gamestate, token, selected_card_positions, ti
   const showCards = sawCards(gamestate, [selected_card_positions[0]], token)
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]],
+    private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])],
     showCards,
     scene_end: true
   })

@@ -9,7 +9,7 @@ export const werewolvesResponse = (gamestate, token, selected_card_positions, ti
 
   const showCards = sawCards(gamestate, [selected_card_positions[0]], token)
 
-  const private_message = ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]]
+  const private_message = ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])]
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message,

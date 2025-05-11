@@ -1,4 +1,4 @@
-import { getPlayerNumbersByGivenConditions, formatPlayerIdentifier, getSelectablePlayersWithNoShield, getAnyEvenOrOddPlayerNumbers, getCardIdsByPositions, generateRoleAction, getAllPlayerTokens } from '../../sceneUtils'
+import { getPlayerNumbersByGivenConditions, formatPlayerIdentifier, getSelectablePlayersWithNoShield, getAnyEvenOrOddPlayerNumbers, getCardIdsByPositions, generateRoleAction, getAllPlayerTokens, updateCardRoleAndTeam } from '../../sceneUtils'
 
 export const aliensAction = (gamestate, token, title) => {
   // TODO fix: only work with cow, if in the selected cards
@@ -74,7 +74,7 @@ export const aliensAction = (gamestate, token, title) => {
           selectable_cards = selectablePlayers
           selectable_card_limit = { player: 1, center: 0 }
         }
-        if (randomAlienInstruction === 'aliens_allview') { 
+        if (randomAlienInstruction === 'aliens_allview') {
           // TODO: Update logic for obligatory and scene_end
           //vote = true
           obligatory = false //todo change to true if fixed
@@ -128,13 +128,14 @@ export const aliensAction = (gamestate, token, title) => {
         }
         gamestate.players[token].card.player_card_id = 87
 
-        privateMessage.push('action_moved_yours', formatPlayerIdentifier([neighbor])[0])
+        privateMessage.push('action_moved_yours', ...formatPlayerIdentifier([neighbor]))
       }
       scene_end = true
 
       break
     case 'aliens_show': //aliens_show = 'Show your alien card to the other aliens.'
-    //TODO const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
+      //TODO const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
+      //    updatePlayerKnownCard(gamestate, token, gamestate.players[token].card.player_card_id, 'TANNER', gamestate.players[token].card.player_role_id, 'tanner')
       showCards = getCardIdsByPositions(gamestate.positions.card_positions, aliensWithoutShield)
 
       showCards.forEach(entry => {
@@ -181,11 +182,11 @@ export const aliensAction = (gamestate, token, title) => {
         new_alien = [selectablePlayers[0]]
 
         scene_end = true
-        let message = ['action_turned_alienhelper', formatPlayerIdentifier([selectablePlayers[0]])[0]]
+        let message = ['action_turned_alienhelper', ...formatPlayerIdentifier([selectablePlayers[0]])]
 
         if (randomAlienInstruction === 'aliens_newalien') {
-          gamestate.positions.card_positions[selectablePlayers[0]].card.role = 'ALIEN'
-          message = ['action_turned_newalien', formatPlayerIdentifier([selectablePlayers[0]])[0]]
+          updateCardRoleAndTeam(gamestate, selectablePlayers[0], gamestate.positions.card_positions[selectablePlayers[0]].card.role, 'alien')
+          message = ['action_turned_newalien', ...formatPlayerIdentifier([selectablePlayers[0]])]
         }
         privateMessage.push(...message)
       } else if (selectablePlayers.length === 0) {

@@ -60,7 +60,7 @@ export const vampiresVotehydrate = async message => {
         }
 
         const action = generateRoleAction(gamestate, vampireToken, {
-          private_message: ['action_voted_together', 'action_mark_of_vampire', formatPlayerIdentifier([unanimousPlayerNumber])[0]],
+          private_message: ['action_voted_together', 'action_mark_of_vampire', ...formatPlayerIdentifier([unanimousPlayerNumber])],
           scene_end: true
         })
 

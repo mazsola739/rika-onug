@@ -1,4 +1,4 @@
-import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAction, formatPlayerIdentifier, createAndSendSceneMessage, swapCards, sawCards } from '../../sceneUtils'
+import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAction, formatPlayerIdentifier, createAndSendSceneMessage, swapCards, sawCards, updateCardRoleAndTeam } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const witchResponse = (gamestate, token, selected_card_positions, title) => {
@@ -15,7 +15,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     const selectable_card_limit = { player: 1, center: 0 }
 
     const action = generateRoleAction(gamestate, token, title, {
-      private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'action_must_one_any'],
+      private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_must_one_any'],
       selectableCards: { selectable_cards, selectable_card_limit },
       uniqueInformation: { selected_center_card: selected_card_positions[0] },
       showCards,
@@ -32,8 +32,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     //TODO move it to the constants - common with drunk
     const specialVillagerIds = [30, 1, 29, 28, 64]
     if (specialVillagerIds.includes(gamestate.positions.card_positions[currentPlayerNumber].card.id)) {
-      gamestate.positions.card_positions[currentPlayerNumber].card.role = 'VILLAGER'
-      gamestate.positions.card_positions[currentPlayerNumber].card.team = 'village'
+      updateCardRoleAndTeam(gamestate, currentPlayerNumber, 'VILLAGER', 'village')
     }
 
     if (selected_card_positions[0] === currentPlayerNumber) {

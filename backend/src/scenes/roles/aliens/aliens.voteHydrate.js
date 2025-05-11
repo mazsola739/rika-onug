@@ -1,6 +1,6 @@
 import { repo, repositoryType } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
-import { getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, sawCards } from '../../sceneUtils'
+import { getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, sawCards, updateCardRoleAndTeam } from '../../sceneUtils'
 
 export const aliensVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
@@ -53,14 +53,13 @@ export const aliensVotehydrate = async message => {
 
           break
         case 'aliens_newalien':
-          gamestate.positions.card_positions[unanimousPlayerNumber].card.role = 'ALIEN'
-          gamestate.positions.card_positions[unanimousPlayerNumber].card.team = 'alien'
+          updateCardRoleAndTeam(gamestate, unanimousPlayerNumber, 'ALIEN', 'alien')
           new_alien = [unanimousPlayerNumber]
           message = 'action_turned_newalien'
 
           break
         case 'aliens_alienhelper':
-          gamestate.positions.card_positions[unanimousPlayerNumber].card.team = 'alien'
+          updateCardRoleAndTeam(gamestate, unanimousPlayerNumber, gamestate.positions.card_positions[unanimousPlayerNumber].card.role, 'alien')
           new_alien_helper = [unanimousPlayerNumber]
           message = 'action_turned_alienhelper'
 
@@ -76,7 +75,7 @@ export const aliensVotehydrate = async message => {
         }
 
         const action = generateRoleAction(gamestate, alienToken, {
-          private_message: ['action_voted_together', message, formatPlayerIdentifier([unanimousPlayerNumber])[0]],
+          private_message: ['action_voted_together', message, ...formatPlayerIdentifier([unanimousPlayerNumber])],
           showCards,
           uniqueInformation: { new_alien, new_alien_helper },
           scene_end: true

@@ -1,4 +1,13 @@
-import { moveCardsButYourOwn, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, formatPlayerIdentifier, getPlayerNumbersByGivenConditions, swapCards, sawCards } from '../../sceneUtils'
+import {
+  moveCardsButYourOwn,
+  generateRoleAction,
+  getNarrationByTitle,
+  createAndSendSceneMessage,
+  formatPlayerIdentifier,
+  getPlayerNumbersByGivenConditions,
+  swapCards,
+  sawCards
+} from '../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection } from '../../validators'
 
 //TODO fix obligatory and scene end
@@ -65,7 +74,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
           const uniqueInformation = { selected_card: selected_card_positions[0], witch_answer: true }
 
           action = generateRoleAction(gamestate, token, title, {
-            private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'action_must_one_any'],
+            private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_must_one_any'],
             selectableCards: { selectable_cards, selectable_card_limit },
             uniqueInformation,
             showCards
@@ -97,7 +106,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
         if (gamestate.players[token].player_history[title].random !== 'drunk') {
           gamestate.players[token].card.player_card_id = gamestate.positions.card_positions[currentPlayerNumber].card.id
           gamestate.players[token].card.player_team = gamestate.positions.card_positions[currentPlayerNumber].card.team
-        } 
+        }
 
         const showCards = sawCards(gamestate, [currentPlayerNumber], token)
 

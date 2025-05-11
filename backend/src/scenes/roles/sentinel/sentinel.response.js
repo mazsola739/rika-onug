@@ -14,7 +14,7 @@ export const sentinelResponse = (gamestate, token, selected_card_positions, titl
   }
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_placed_shield', formatPlayerIdentifier(selected_card_positions)[0]],
+    private_message: ['action_placed_shield', ...formatPlayerIdentifier([selected_card_positions[0]])],
     uniqueInformation: { new_shield_card: [selected_card_positions[0]] },
     scene_end: true
   })

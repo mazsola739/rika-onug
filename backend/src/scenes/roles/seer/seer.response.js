@@ -19,9 +19,9 @@ export const seerResponse = (gamestate, token, selected_card_positions, title) =
   } else {
     return gamestate
   }
-
+  //TODO private message
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
+    private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     showCards,
     scene_end: true
   })

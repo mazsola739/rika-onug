@@ -1,4 +1,4 @@
-import { getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, sawCards, updateCardRoleAndTeam } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const aliensResponse = (gamestate, token, selected_card_positions, title) => {
@@ -15,37 +15,25 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
 
   switch (randomAlienInstruction) {
     case 'aliens_view':
-      //TODO const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
-      showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
-      if (gamestate.players[token].card.player_original_id === gamestate.positions.card_positions[selected_card_positions[0]].card.id) {
-        gamestate.players[token].card.player_card_id = 87
-      }
-
-      private_message = ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]]
-
-      break
     case 'aliens_allview':
-      gamestate.players[token].card_or_mark_action = true
-      if (gamestate.players[token].card.player_original_id === gamestate.positions.card_positions[selected_card_positions[0]].card.id) {
-        gamestate.players[token].card.player_card_id = 87
-      }
-      //TODO const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
-      showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
-      private_message = ['action_voted_together', 'action_saw_card', formatPlayerIdentifier([selected_card_positions[0]])[0]]
-
+      showCards = sawCards(gamestate, [selected_card_positions[0]], token)
+      private_message = [...(randomAlienInstruction === 'aliens_allview' ? ['action_voted_together'] : []), 'action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])]
       break
+
     case 'aliens_newalien':
-      gamestate.positions.card_positions[selected_card_positions[0]].card.role = 'ALIEN'
-      gamestate.positions.card_positions[selected_card_positions[0]].card.team = 'alien'
+      updateCardRoleAndTeam(gamestate, selected_card_positions[0], 'ALIEN', 'alien')
       new_alien = [selected_card_positions[0]]
-      private_message = ['action_voted_together', 'action_turned_newalien', formatPlayerIdentifier([selected_card_positions[0]])[0]]
-
+      private_message = ['action_voted_together', 'action_turned_newalien', ...formatPlayerIdentifier([selected_card_positions[0]])]
       break
-    case 'aliens_alienhelper':
-      gamestate.positions.card_positions[selected_card_positions[0]].card.team = 'alien'
-      new_alien_helper = [selected_card_positions[0]]
-      private_message = ['action_voted_together', 'action_turned_alienhelper', formatPlayerIdentifier([selected_card_positions[0]])[0]]
 
+    case 'aliens_alienhelper':
+      updateCardRoleAndTeam(gamestate, selected_card_positions[0], gamestate.positions.card_positions[selected_card_positions[0]].card.role, 'alien')
+      new_alien_helper = [selected_card_positions[0]]
+      private_message = ['action_voted_together', 'action_turned_alienhelper', ...formatPlayerIdentifier([selected_card_positions[0]])]
+      break
+
+    default:
+      console.warn(`Unknown alien instruction: ${randomAlienInstruction}`)
       break
   }
 

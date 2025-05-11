@@ -1,14 +1,15 @@
-import { generateRoleAction, getCardIdsByPositions, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
+import { generateRoleAction, getCardIdsByPositions, getPlayerNumbersByGivenConditions, updatePlayerKnownCard } from '../../sceneUtils'
 
 export const insomniacAction = (gamestate, token, title) => {
   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
-  const currentCard = gamestate.positions.card_positions[currentPlayerNumber].card
 
   if (!gamestate.players[token].shield) {
-    gamestate.players[token].card.player_card_id = currentCard.id
-    gamestate.players[token].card.player_team = currentCard.team
-
     const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
+
+    const { id, team } = gamestate.positions.card_positions[currentPlayerNumber].card
+    const { player_role, player_role_id } = gamestate.players[token].card
+    updatePlayerKnownCard(gamestate, token, id, player_role, player_role_id, team)
+
     return generateRoleAction(gamestate, token, title, {
       private_message: ['action_own_card'],
       showCards,

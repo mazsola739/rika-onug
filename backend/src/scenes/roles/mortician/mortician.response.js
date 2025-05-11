@@ -10,7 +10,7 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
   const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions.slice(0, limit))],
+    private_message: ['action_saw_card', ...formatPlayerIdentifier(selected_card_positions.slice(0, limit))],
     showCards
   })
 

@@ -68,7 +68,7 @@ export const oracleAnswer = (gamestate, title) => {
       if (player !== oracleAnswer) {
         gamestate.roles.oracle.answer = player
       }
-      narration = [randomApproval, formatPlayerIdentifier([`player_${player}`])[0]]
+      narration = [randomApproval, ...formatPlayerIdentifier([`player_${player}`])]
       break
     }
   }

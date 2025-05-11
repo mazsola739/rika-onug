@@ -10,16 +10,6 @@
       } else if (selectablePlayerNumbers.length > 1) { 
 */
 
-/* TODO consider Object.assign in case like this:      
-gamestate.players[token].card.player_team = 'tanner'
-gamestate.players[token].card.player_role = 'TANNER' 
-
- Object.assign(gamestate.players[token].card, {
-    player_team: 'tanner',
-    player_role: 'TANNER'
-  })
-*/
-
 /* TODO consider this solution for reset the players card, like at drunk
 
   const shouldResetPlayerCardId = () => {

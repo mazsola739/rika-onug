@@ -15,6 +15,7 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
   let showCards = []
 
   //TODO!!! const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
+  //    updatePlayerRoleAndTeam(gamestate, token, 'TANNER', 'tanner')
 
   if (GOOD_GUY.includes(playerOneCardId)) {
     if (playerTwoCardId && !GOOD_GUY.includes(playerTwoCardId)) {
@@ -34,9 +35,9 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
       gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[0]].card.team
     }
   }
-
+  //TODO private message
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length === 2 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
+    private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])[0], showCards.length === 2 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     showCards,
     scene_end: true
   })

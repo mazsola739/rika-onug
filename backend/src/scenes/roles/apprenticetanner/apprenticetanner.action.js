@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions, updatePlayerKnownCard } from '../../sceneUtils'
 
 export const apprenticetannerAction = (gamestate, token, title) => {
   let tanner = getPlayerNumbersByGivenConditions(gamestate.players, 'tanner')
@@ -10,8 +10,10 @@ export const apprenticetannerAction = (gamestate, token, title) => {
     gamestate.players[token].card.player_team = 'apprenticetanner'
   } else if (tanner.length === 0) {
     tanner = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)
-    gamestate.players[token].card.player_team = 'tanner'
-    gamestate.players[token].card.player_role = 'TANNER'
+
+    const { player_card_id, player_role_id } = gamestate.players[token].card
+    updatePlayerKnownCard(gamestate, token, player_card_id, 'TANNER', player_role_id, 'tanner')
+    
     privateMessage = ['action_tanner_now']
   }
 

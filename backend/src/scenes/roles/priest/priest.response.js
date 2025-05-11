@@ -19,7 +19,7 @@ export const priestResponse = (gamestate, token, selected_mark_positions, title)
   }
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_mark_of_clarity', formatPlayerIdentifier(selected_mark_positions)[0]],
+    private_message: ['action_mark_of_clarity', ...formatPlayerIdentifier([selected_mark_positions[0]])],
     uniqueInformation: { mark_of_clarity: selected_mark_positions[0] },
     scene_end: true
   })

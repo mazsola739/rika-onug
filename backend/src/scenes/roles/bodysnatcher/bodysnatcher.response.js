@@ -1,4 +1,14 @@
-import { getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions, swapCards } from '../../sceneUtils'
+import {
+  getCardIdsByPositions,
+  formatPlayerIdentifier,
+  generateRoleAction,
+  getNarrationByTitle,
+  createAndSendSceneMessage,
+  getPlayerNumbersByGivenConditions,
+  swapCards,
+  updateCardRoleAndTeam,
+  updatePlayerKnownCard
+} from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const bodysnatcherResponse = (gamestate, token, selected_card_positions, title) => {
@@ -9,13 +19,11 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
 
   swapCards(gamestate, currentPlayerNumber, selected_card_positions[0], token)
+  updateCardRoleAndTeam(gamestate, currentPlayerNumber, 'ALIEN', 'alien')
 
-  gamestate.positions.card_positions[currentPlayerNumber].card.team = 'alien'
-  gamestate.positions.card_positions[currentPlayerNumber].card.role = 'ALIEN'
-
-  gamestate.players[token].card.player_card_id = gamestate.positions.card_positions[currentPlayerNumber].card.id
-  gamestate.players[token].card.player_team = gamestate.positions.card_positions[currentPlayerNumber].card.team
-  gamestate.players[token].card.player_role = gamestate.positions.card_positions[currentPlayerNumber].card.role
+  const { id, role, team } = gamestate.positions.card_positions[currentPlayerNumber].card
+  const { player_role_id } = gamestate.players[token].card
+  updatePlayerKnownCard(gamestate, token, id, role, player_role_id, team)
 
   const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
 
@@ -24,7 +32,7 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_swapped_cards', ...messageIdentifiers, 'action_own_card'],
     showCards,
-    uniqueInformation:  { swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
+    uniqueInformation: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
     scene_end: true
   })
 

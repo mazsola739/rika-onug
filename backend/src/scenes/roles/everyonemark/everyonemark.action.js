@@ -4,6 +4,8 @@ export const everyonemarkAction = (gamestate, token, title) => {
   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
   const showMarks = getMarksByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
 
+  //    updatePlayerRoleAndTeam(gamestate, token, 'TANNER', 'tanner')
+
   switch (gamestate.positions.card_positions[currentPlayerNumber].mark) {
     case 'mark_of_clarity':
       gamestate.players[token].card.player_mark = 'mark_of_clarity'

@@ -24,7 +24,7 @@ export const vampiresAction = (gamestate, token, title) => {
 
     gamestate.players[token].card_or_mark_action = true
 
-    const messageIdentifiers = formatPlayerIdentifier([selectable_marks[0]])[0]
+    const messageIdentifiers = formatPlayerIdentifier([selectable_marks[0]])
     privateMessage.push('action_mark_of_vampire', ...messageIdentifiers)
 
     return generateRoleAction(gamestate, token, title, {

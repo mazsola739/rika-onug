@@ -18,7 +18,7 @@ export const thingResponse = (gamestate, token, selected_card_positions, title) 
   )
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_tap', formatPlayerIdentifier(selected_card_positions)[0]],
+    private_message: ['action_tap', ...formatPlayerIdentifier([selected_card_positions[0]])],
     uniqueInformation: { tapped: [selected_card_positions[0]] },
     scene_end: true
   })
