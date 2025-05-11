@@ -1,4 +1,5 @@
-import { getMarksByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions, swapMarks } from '../../sceneUtils'
+import { sawMarks } from '../../sceneUtils/sawMarks'
 import { validateMarkSelection } from '../../validators'
 
 export const pickpocketResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -7,16 +8,8 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
   }
 
   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
-  const currentPlayerMark = gamestate.positions.card_positions[currentPlayerNumber].mark
-  const selectedMark = gamestate.positions.card_positions[selected_mark_positions[0]].mark
-  gamestate.positions.card_positions[currentPlayerNumber].mark = selectedMark
-  gamestate.positions.card_positions[selected_mark_positions[0]].mark = currentPlayerMark
-
-  gamestate.players[token].card.player_mark = gamestate.positions.card_positions[currentPlayerNumber].mark
-
-  const showMarks = getMarksByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
-
-  gamestate.players[token].card_or_mark_action = true
+  swapMarks(gamestate, token, currentPlayerNumber, selected_mark_positions[0], true)
+  const showMarks = sawMarks(gamestate, [currentPlayerNumber], token)
 
   const messageIdentifiers = formatPlayerIdentifier([currentPlayerNumber, selected_mark_positions[0]])
 

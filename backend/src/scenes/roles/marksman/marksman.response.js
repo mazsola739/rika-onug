@@ -1,4 +1,5 @@
-import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAction, createAndSendSceneMessage, formatPlayerIdentifier, getMarksByPositions, sawCards } from '../../sceneUtils'
+import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAction, createAndSendSceneMessage, formatPlayerIdentifier, sawCards } from '../../sceneUtils'
+import { sawMarks } from '../../sceneUtils/sawMarks'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../validators'
 
 export const marksmanResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
@@ -82,15 +83,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       return gamestate
     }
 
-    const showMarks = getMarksByPositions(gamestate.positions.card_positions, [selected_mark_positions[0]])
-    const selectedPositionMark = gamestate.positions.card_positions[selected_mark_positions[0]].mark
-    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
-
-    if (currentPlayerNumber === selected_mark_positions[0]) {
-      gamestate.players[token].card.player_mark = selectedPositionMark
-    }
-
-    gamestate.players[token].card_or_mark_action = true
+    const showMarks = sawMarks(gamestate, [selected_card_positions[0]], token)
 
     let action = {}
 

@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions, updateMark, updatePlayerKnownMark } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const cupidResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -6,35 +6,12 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
     return gamestate
   }
 
-  if (gamestate.players[token].card.player_original_id === 1) {
-    const loveOnePosition = gamestate.positions.doppelganger_mark_positions.love_1
-    const loveTwoPosition = gamestate.positions.doppelganger_mark_positions.love_2
-    const selectedOnePosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
-    const selectedTwoPosition = gamestate.positions.card_positions[selected_mark_positions[1]].mark
-
-    gamestate.positions.doppelganger_mark_positions.love_1 = selectedOnePosition
-    gamestate.positions.doppelganger_mark_positions.love_2 = selectedTwoPosition
-    gamestate.positions.card_positions[selected_mark_positions[0]].mark = loveOnePosition
-    gamestate.positions.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
-  } else {
-    const loveOnePosition = gamestate.positions.mark_positions.love_1
-    const loveTwoPosition = gamestate.positions.mark_positions.love_2
-    const selectedOnePosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
-    const selectedTwoPosition = gamestate.positions.card_positions[selected_mark_positions[1]].mark
-
-    gamestate.positions.mark_positions.love_1 = selectedOnePosition
-    gamestate.positions.mark_positions.love_2 = selectedTwoPosition
-    gamestate.positions.card_positions[selected_mark_positions[0]].mark = loveOnePosition
-    gamestate.positions.card_positions[selected_mark_positions[1]].mark = loveTwoPosition
-  }
-
   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  updateMark(gamestate, token, [selected_mark_positions[0], selected_mark_positions[1]], ['love_1, love_2'])
 
   if (currentPlayerNumber === selected_mark_positions[0] || currentPlayerNumber === selected_mark_positions[1]) {
-    gamestate.players[token].card.player_mark = 'mark_of_love'
+    updatePlayerKnownMark(gamestate, token, 'mark_of_love')
   }
-
-  gamestate.players[token].card_or_mark_action = true
 
   const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
 

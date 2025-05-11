@@ -1,4 +1,4 @@
-import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions, updateMark, updatePlayerKnownMark } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const priestResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -6,21 +6,13 @@ export const priestResponse = (gamestate, token, selected_mark_positions, title)
     return gamestate
   }
 
-  const selectedPositionMark = gamestate.positions.card_positions[selected_mark_positions[0]].mark
-
-  if (gamestate.players[token].card.player_original_id === 1) {
-    const clarityTwoPosition = gamestate.positions.doppelganger_mark_positions.clarity_2
-    gamestate.positions.card_positions[selected_mark_positions[0]].mark = clarityTwoPosition
-    gamestate.positions.doppelganger_mark_positions.clarity_2 = selectedPositionMark
-  } else {
-    const clarityTwoPosition = gamestate.positions.mark_positions.clarity_2
-    gamestate.positions.card_positions[selected_mark_positions[0]].mark = clarityTwoPosition
-    gamestate.positions.mark_positions.clarity_2 = selectedPositionMark
-  }
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  updateMark(gamestate, token, [currentPlayerNumber, selected_mark_positions[0]], ['clarity_1, clarity_2'])
+  updatePlayerKnownMark(gamestate, token, 'mark_of_clarity')
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_mark_of_clarity', ...formatPlayerIdentifier([selected_mark_positions[0]])],
-    uniqueInformation: { mark_of_clarity: selected_mark_positions[0] },
+    private_message: ['action_mark_of_clarity', ...formatPlayerIdentifier([currentPlayerNumber, selected_mark_positions[0]])],
+    uniqueInformation: { mark_of_clarity: [currentPlayerNumber, selected_mark_positions[0]] },
     scene_end: true
   })
 

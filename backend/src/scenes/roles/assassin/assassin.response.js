@@ -1,4 +1,4 @@
-import { getPlayerNumbersByGivenConditions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { getPlayerNumbersByGivenConditions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, updateMark, updatePlayerKnownMark } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const assassinResponse = (gamestate, token, selected_mark_positions, title) => {
@@ -7,27 +7,13 @@ export const assassinResponse = (gamestate, token, selected_mark_positions, titl
   }
 
   const apprenticeassassins = getPlayerNumbersByGivenConditions(gamestate.players, 'apprenticeAssassin')
-  const selectedPosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
-
-  if (gamestate.players[token].card.player_original_id === 1) {
-    const assassinPosition = gamestate.positions.doppelganger_mark_positions.assassin
-
-    gamestate.positions.doppelganger_mark_positions.assassin = selectedPosition
-    gamestate.positions.card_positions[selected_mark_positions[0]].mark = assassinPosition
-  } else {
-    const assassinPosition = gamestate.positions.mark_positions.assassin
-
-    gamestate.positions.mark_positions.assassin = selectedPosition
-    gamestate.positions.card_positions[selected_mark_positions[0]].mark = assassinPosition
-  }
 
   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  updateMark(gamestate, token, [selected_mark_positions[0]], ['assassin'])
 
   if (currentPlayerNumber === selected_mark_positions[0]) {
-    gamestate.players[token].card.player_mark = 'mark_of_assassin'
+    updatePlayerKnownMark(gamestate, token, 'mark_of_assassin')
   }
-
-  gamestate.players[token].card_or_mark_action = true
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_mark_of_assassin', ...formatPlayerIdentifier([selected_mark_positions[0]])],

@@ -1,4 +1,4 @@
-import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAction, createAndSendSceneMessage, formatPlayerIdentifier, swapCards } from '../../sceneUtils'
+import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAction, createAndSendSceneMessage, formatPlayerIdentifier, swapCards, swapMarks } from '../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection, validateMarkSelection } from '../../validators'
 
 export const gremlinResponse = (gamestate, token, selected_card_positions, selected_mark_positions, selected_answer, title) => {
@@ -63,20 +63,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       return gamestate
     }
 
-    const [position1, position2] = selected_mark_positions
-    const playerOneMark = gamestate.positions.card_positions[position1].mark
-    const playerTwoMark = gamestate.positions.card_positions[position2].mark
-
-    gamestate.positions.card_positions[position1].mark = playerTwoMark
-    gamestate.positions.card_positions[position2].mark = playerOneMark
-
-    gamestate.players[token].card_or_mark_action = true
-
-    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)
-
-    if (currentPlayerNumber === selected_mark_positions[0] || currentPlayerNumber === selected_mark_positions[1]) {
-      gamestate.players[token].card.player_mark = ''
-    }
+    swapMarks(gamestate, token, selected_mark_positions[0], selected_mark_positions[1], false)
 
     const messageIdentifiers = formatPlayerIdentifier([selected_mark_positions[0], selected_mark_positions[1]])
 

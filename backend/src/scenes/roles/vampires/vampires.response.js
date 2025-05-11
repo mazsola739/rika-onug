@@ -11,6 +11,7 @@ export const vampiresResponse = async (gamestate, token, selected_mark_positions
 
   const isSwappedAlready = vampirePosition === selectedPosition
 
+  //TODO updateMark use here?
   if (!isSwappedAlready) {
     gamestate.positions.mark_positions.vampire = selectedPosition
     gamestate.positions.card_positions[selected_mark_positions[0]].mark = vampirePosition
