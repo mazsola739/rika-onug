@@ -16,16 +16,20 @@ const combineUniqueObjects = (array1, array2) => {
 }
 
 const updatePlayerHistory = (gamestate, token, title, updates) => {
-  gamestate.players[token].player_history[title] = {
-    ...gamestate.players[token].player_history[title],
+  const newGamestate = { ...gamestate }
+  
+  newGamestate.players[token].player_history[title] = {
+    ...newGamestate.players[token].player_history[title],
     ...updates
   }
+
+  return newGamestate
 }
 
 const updatePlayerCard = (gamestate, token) => {
   const newGamestate = { ...gamestate }
 
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(newGamestate.players, 'currentPlayer', [], token)[0]
   const currentPlayerKnownCard = newGamestate.players[token].card
   const currentPlayerCard = newGamestate.positions.card_positions[currentPlayerNumber].card
 
@@ -54,7 +58,7 @@ export const generateRoleAction = (
   { private_message, selectableCards = {}, selectableMarks = {}, showCards = [], showMarks = [], obligatory = false, scene_end = false, uniqueInformation = {} }
 ) => {
   let newGamestate = updatePlayerCard(gamestate, token)
-  const flippedCards = JSON.parse(JSON.stringify(newGamestate.positions.flipped_cards))
+  const flippedCards = newGamestate.positions.flipped_cards
   const show_cards = showCards !== null ? combineUniqueObjects(showCards, flippedCards) : flippedCards
   const show_marks = showMarks
 
@@ -117,7 +121,7 @@ export const generateRoleAction = (
     ...selectableMarks,
     ...uniqueInformation
   }
-  newGamestate = updatePlayerHistory(gamestate, token, title, historyParts)
+  newGamestate = updatePlayerHistory(newGamestate, token, title, historyParts)
 
   const information = {
     shielded_cards: newGamestate.positions.shielded_cards,

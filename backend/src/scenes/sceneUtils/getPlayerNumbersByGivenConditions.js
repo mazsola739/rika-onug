@@ -3,10 +3,10 @@ import { ALIEN_IDS, SUPER_VILLAIN_IDS, VAMPIRE_IDS, MASONS, WEREVOLVES_WITHOUT_D
 //TODO finish + util.js & refctor the role-files
 const filters = {
   //current player
-  currentPlayer: (player, _, token) => player.token === token,
+  currentPlayer: (player, shieldedCards, token, playerToken) => playerToken === token,
 
   //other players
-  otherPlayers: (player, _, token) => player.token !== token,
+  otherPlayers: (player, shieldedCards, token, playerToken) => playerToken !== token,
   otherPlayersWithoutShield: (player, shieldedCards, token) => player.token !== token && player.shield !== true && !shieldedCards.includes(player.player_number),
 
   //all players
@@ -75,7 +75,7 @@ export const getPlayerNumbersByGivenConditions = (players, filter, shieldedCards
   const result = []
   for (const playerToken in players) {
     const player = players[playerToken]
-    if (condition(player, shieldedCards, token)) {
+    if (condition(player, shieldedCards, token, playerToken)) {
       result.push(player.player_number)
     }
   }
