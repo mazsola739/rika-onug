@@ -4,6 +4,7 @@ export const blobAction = (gamestate, token, title) => {
   const randomInstruction = gamestate.roles.blob.instruction
 
   const part_of_blob = getPartOfGroupByToken(gamestate.players, token, randomInstruction)
+  gamestate.roles.blob.part_of_blob = part_of_blob
 
   const messageIdentifiers = formatPlayerIdentifier(part_of_blob)
 

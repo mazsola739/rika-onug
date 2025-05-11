@@ -1,6 +1,6 @@
 import { ALIEN_IDS, SUPER_VILLAIN_IDS, VAMPIRE_IDS, MASONS, WEREVOLVES_WITHOUT_DREAMWOLF, WEREWOLVES } from '../../constants'
 
-//TODO finish + util.js & refctor the role-files
+//TODO REFACTOR MAYBE ONLY GAMSTATE NEED? 
 const filters = {
   //current player
   currentPlayer: (player, shieldedCards, token, playerToken) => playerToken === token,

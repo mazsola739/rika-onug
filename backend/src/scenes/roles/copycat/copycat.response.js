@@ -1,32 +1,25 @@
-import { getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, updatePlayerKnownCard, sawCards } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const copycatResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
+  
+  const { id, role, team } = gamestate.positions.card_positions[selected_card_positions[0]].card
+  const { player_card_id, player_role_id, player_role } = gamestate.players[token].card
 
-  gamestate.players[token].card.player_role_id = gamestate.positions.card_positions[selected_card_positions[0]].card.id
-
-  if (
-    gamestate.positions.card_positions[selected_card_positions[0]].card.id === 1 ||
-    gamestate.positions.card_positions[selected_card_positions[0]].card.id === 30 ||
-    gamestate.positions.card_positions[selected_card_positions[0]].card.id === 64
-  ) {
-    gamestate.players[token].card.player_role = 'VILLAGER'
-    gamestate.players[token].card.player_team = 'villager'
+  if (id === 1 || id === 30 || id === 64) {
+    updatePlayerKnownCard(gamestate, token, id, 'VILLAGER', id, 'villager')
   } else {
-    gamestate.players[token].card.player_role = gamestate.positions.card_positions[selected_card_positions[0]].card.role
-    gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[0]].card.team
+    updatePlayerKnownCard(gamestate, token, player_card_id, role, id, team)
   }
+  const showCards = sawCards(gamestate, [selected_card_positions[0]], token)
 
-  const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
-
-  gamestate.players[token].new_role_id = gamestate.players[token].card.player_role_id
-  gamestate.players[token].card_or_mark_action = true
+  gamestate.players[token].new_role_id = player_role_id
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_you_are_that_role', `${gamestate.players[token]?.card.player_role}`],
+    private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_you_are_that_role', `${player_role}`],
     showCards,
     scene_end: true
   })

@@ -29,7 +29,7 @@
   },
   "roles": {
     "aliens": { "alienexchange": false, "alien_votes": {}, "instruction": "", "key": [] },
-    "blob": { "instruction": "" },
+    "blob": { "instruction": "", "part_of_blob": [] },
     "bodysnatcher": { "instruction": "", "key": "" },
     "doppelganger_bodysnatcher": { "instruction": "", "key": "" },
     "doppelganger_empath": { "empath_votes": {}, "instruction": "" },
