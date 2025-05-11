@@ -1,4 +1,4 @@
-import { getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
+import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, sawCards } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 //TODO neighbors
@@ -7,34 +7,11 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
     return gamestate
   }
   const limit = gamestate.players[token].player_history[title].selectable_card_limit.player
-
-  const cardPositions = selected_card_positions.slice(0, limit)
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
-  const viewCards = getCardIdsByPositions(gamestate.positions.card_positions, cardPositions)
-
-  const shouldResetPlayerCardId = () => {
-    if (viewCards.some(card => gamestate.players[token].card.player_original_id === card.id)) {
-      return true
-    }
-    if (cardPositions.length === 1 && currentPlayerNumber === cardPositions[0] && viewCards[0].card.id === gamestate.players[token].card.player_original_id) {
-      return false
-    }
-    return true
-  }
-
-  if (shouldResetPlayerCardId()) {
-    gamestate.players[token].card.player_card_id = 87
-  } else {
-    gamestate.players[token].card.player_card_id = gamestate.positions.card_positions[currentPlayerNumber].card.id
-    gamestate.players[token].card.player_team = gamestate.positions.card_positions[currentPlayerNumber].card.team
-  }
-
-  gamestate.players[token].card_or_mark_action = true
+  const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_saw_card', formatPlayerIdentifier(cardPositions)],
-    uniqueInformation: { viewed_cards: cardPositions },
-    showCards: viewCards
+    private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions.slice(0, limit))],
+    showCards
   })
 
   const narration = getNarrationByTitle(title, gamestate.scenes.narration)

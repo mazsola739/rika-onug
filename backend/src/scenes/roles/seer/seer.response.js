@@ -1,4 +1,4 @@
-import { getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, sawCards } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const seerResponse = (gamestate, token, selected_card_positions, title) => {
@@ -13,25 +13,16 @@ export const seerResponse = (gamestate, token, selected_card_positions, title) =
   const playerHistory = gamestate.players[token].player_history[title].selectable_cards
 
   if (playerCards && !centerCards && playerHistory.includes(selected_card_positions[0])) {
-    showCards = getCardIdsByPositions(gamestate?.card_positions, [selected_card_positions[0]])
+    showCards = sawCards(gamestate, [selected_card_positions[0]], token)
   } else if (centerCards && !playerCards && selected_card_positions.every(position => playerHistory.includes(position))) {
-    showCards = getCardIdsByPositions(gamestate?.card_positions, selected_card_positions.slice(0, 2))
+    showCards = sawCards(gamestate, selected_card_positions.slice(0, 2), token)
   } else {
     return gamestate
   }
 
-  if (showCards.some(card => gamestate.players[token].card.player_original_id === card.id)) {
-    gamestate.players[token].card.player_card_id = 87
-  }
-
-  gamestate.players[token].card_or_mark_action = true
-
-  /*TODO const viewedCards = showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] */
-
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     showCards,
-    uniqueInformation: { viewed_cards: showCards },
     scene_end: true
   })
 

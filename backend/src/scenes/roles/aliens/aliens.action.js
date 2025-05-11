@@ -1,12 +1,4 @@
-import {
-  getPlayerNumbersByGivenConditions,
-  formatPlayerIdentifier,
-  getSelectablePlayersWithNoShield,
-  getAnyEvenOrOddPlayerNumbers,
-  getCardIdsByPositions,
-  generateRoleAction,
-  getAllPlayerTokens
-} from '../../sceneUtils'
+import { getPlayerNumbersByGivenConditions, formatPlayerIdentifier, getSelectablePlayersWithNoShield, getAnyEvenOrOddPlayerNumbers, getCardIdsByPositions, generateRoleAction, getAllPlayerTokens } from '../../sceneUtils'
 
 export const aliensAction = (gamestate, token, title) => {
   // TODO fix: only work with cow, if in the selected cards
@@ -28,10 +20,8 @@ export const aliensAction = (gamestate, token, title) => {
   let obligatory = false
   let scene_end = false
   let vote = false
-  let viewed_cards = [] //TODO missing here
   let new_alien = []
   let new_alien_helper = []
-  let shielded = false
 
   const messageIdentifiers = formatPlayerIdentifier(aliens)
   let privateMessage = isSingleAlien ? ['action_no_aliens'] : ['action_aliens', ...messageIdentifiers, 'POINT']
@@ -70,13 +60,12 @@ export const aliensAction = (gamestate, token, title) => {
   }
 
   switch (randomAlienInstruction) {
-    case 'aliens_stare':
+    case 'aliens_stare': //aliens_stare = 'Just stare at each other.'
       scene_end = true
       break
-    case 'aliens_view': //TODO fix showcards
-    case 'aliens_allview':
+    case 'aliens_view': //TODO fix showcards //aliens_view = 'Each alien may secretly view a card from: '
+    case 'aliens_allview': //aliens_allview = 'All aliens together may view a card from: '
       if (gamestate.players[token].shield) {
-        shielded = true
         privateMessage.push('action_shielded')
         scene_end = true
       } else {
@@ -85,11 +74,11 @@ export const aliensAction = (gamestate, token, title) => {
           selectable_cards = selectablePlayers
           selectable_card_limit = { player: 1, center: 0 }
         }
-        if (randomAlienInstruction === 'aliens_allview') {
+        if (randomAlienInstruction === 'aliens_allview') { 
           // TODO: Update logic for obligatory and scene_end
           //vote = true
           obligatory = false //todo change to true if fixed
-          scene_end = true //todo delete if fixed
+          scene_end = true //todo
           privateMessage.push('FYI_TBD', 'action_must_one_any_other')
           if (selectablePlayers.length === 0) {
             privateMessage.push('no_selectable_option')
@@ -99,10 +88,9 @@ export const aliensAction = (gamestate, token, title) => {
       }
       break
     //TODO fix if no possible alien to move
-    case 'aliens_left':
-    case 'aliens_right':
+    case 'aliens_left': //aliens_left = 'Give your card to the alien on your left.'
+    case 'aliens_right': //aliens_right = 'Give your card to the alien on your right.'
       if (gamestate.players[token].shield) {
-        shielded = true
         privateMessage.push('action_shielded')
       } else {
         const direction = randomAlienInstruction.includes('left') ? 'left' : 'right'
@@ -145,7 +133,8 @@ export const aliensAction = (gamestate, token, title) => {
       scene_end = true
 
       break
-    case 'aliens_show':
+    case 'aliens_show': //aliens_show = 'Show your alien card to the other aliens.'
+    //TODO const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
       showCards = getCardIdsByPositions(gamestate.positions.card_positions, aliensWithoutShield)
 
       showCards.forEach(entry => {
@@ -167,7 +156,6 @@ export const aliensAction = (gamestate, token, title) => {
       })
 
       if (gamestate.players[token].shield) {
-        shielded = true
         privateMessage.push('action_shielded')
       } else {
         privateMessage.push(...formatPlayerIdentifier(aliensWithoutShield))
@@ -175,14 +163,14 @@ export const aliensAction = (gamestate, token, title) => {
 
       scene_end = true
       break
-    case 'aliens_timer':
+    case 'aliens_timer': //aliens_timer = 'You have shortened the game timer by one half.'
       gamestate.vote_timer /= 2
       privateMessage.push('action_timer')
       scene_end = true
 
       break
-    case 'aliens_newalien':
-    case 'aliens_alienhelper':
+    case 'aliens_newalien': //aliens_newalien = 'Tap one of the fists to turn that player into an alien from: '
+    case 'aliens_alienhelper': //aliens_alienhelper = "Tap one of the fists to turn that player into alien team, but isn't an alien from: "
       // vote = true
       privateMessage.push('FYI_TBD', 'action_must_one_any_other')
       obligatory = false //todo change to true if fixed
@@ -211,7 +199,7 @@ export const aliensAction = (gamestate, token, title) => {
       break
   }
 
-  const uniqueInformation = { aliens, cow, vote, new_alien, new_alien_helper, viewed_cards, shielded }
+  const uniqueInformation = { aliens, cow, vote, new_alien, new_alien_helper }
 
   return generateRoleAction(gamestate, token, title, {
     private_message: privateMessage,

@@ -14,6 +14,7 @@ export const vampiresResponse = async (gamestate, token, selected_mark_positions
   if (!isSwappedAlready) {
     gamestate.positions.mark_positions.vampire = selectedPosition
     gamestate.positions.card_positions[selected_mark_positions[0]].mark = vampirePosition
+    gamestate.roles.vampires.new_vampire.push(selected_mark_positions[0])
   }
 
   gamestate.players[token].card_or_mark_action = true

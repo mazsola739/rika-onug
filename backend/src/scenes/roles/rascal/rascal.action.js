@@ -93,7 +93,6 @@ export const rascalAction = (gamestate, token, title, prefix) => {
     if (gamestate.players[token].shield) {
       return generateRoleAction(gamestate, token, title, {
         private_message: ['action_shielded'],
-        uniqueInformation: { shielded: true }
       })
     } else {
       selectable_cards =

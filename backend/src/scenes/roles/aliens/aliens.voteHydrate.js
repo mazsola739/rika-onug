@@ -1,6 +1,6 @@
 import { repo, repositoryType } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
-import { getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, sawCards } from '../../sceneUtils'
 
 export const aliensVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
@@ -42,20 +42,13 @@ export const aliensVotehydrate = async message => {
       const randomAlienInstruction = gamestate.roles.aliens.instruction
 
       let showCards = []
-      let viewCards = []
       let new_alien = []
       let new_alien_helper = []
       let message = ''
 
       switch (randomAlienInstruction) {
         case 'aliens_allview':
-          gamestate.players[token].card_or_mark_action = true
-          if (gamestate.players[token].card.player_original_id === gamestate.positions.card_positions[unanimousPlayerNumber].card.id) {
-            gamestate.players[token].card.player_card_id = 87
-          }
-
-          showCards = getCardIdsByPositions(gamestate.positions.card_positions, [unanimousPlayerNumber])
-          viewCards = [unanimousPlayerNumber]
+          showCards = sawCards(gamestate, [unanimousPlayerNumber], token)
           message = 'action_saw_card'
 
           break
@@ -77,7 +70,6 @@ export const aliensVotehydrate = async message => {
       aliensTokens.forEach(alienToken => {
         gamestate.players[alienToken].player_history[title] = {
           ...gamestate.players[alienToken].player_history[title],
-          viewed_cards: viewCards,
           new_alien,
           new_alien_helper,
           scene_end: true

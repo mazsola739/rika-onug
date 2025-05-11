@@ -1,15 +1,4 @@
-export const randomOracleQuestions = [
-  /*   'oracle_alienteam',
-  'oracle_werewolfteam',
-  'oracle_vampireteam',
-  'oracle_alienexchange',
-  'oracle_centerexchange',
-  'oracle_viewcenter', */
-  'oracle_ripple'
-  /*   'oracle_viewplayer',
-  'oracle_evenodd',
-  'oracle_guessnumber' */
-]
+export const randomOracleQuestions = [/*'oracle_alienteam', 'oracle_werewolfteam', 'oracle_vampireteam', 'oracle_alienexchange', 'oracle_centerexchange', 'oracle_viewcenter', */ 'oracle_ripple' /*'oracle_viewplayer', 'oracle_evenodd', 'oracle_guessnumber' */]
 
 export const oracleResponses = {
   oracle_alienteam: {

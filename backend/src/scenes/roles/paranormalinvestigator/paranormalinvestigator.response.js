@@ -14,6 +14,8 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
 
   let showCards = []
 
+  //TODO!!! const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
+
   if (GOOD_GUY.includes(playerOneCardId)) {
     if (playerTwoCardId && !GOOD_GUY.includes(playerTwoCardId)) {
       showCards = selectedCards
@@ -33,12 +35,9 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
     }
   }
 
-  gamestate.players[token].card_or_mark_action = true
-
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length === 2 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
     showCards,
-    uniqueInformation: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : selected_card_positions[0] },
     scene_end: true
   })
 

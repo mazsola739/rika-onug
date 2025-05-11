@@ -45,6 +45,6 @@
     "oracle": { "question": "", "answer":"", "aftermath": "","number": 0, "openeyes": false, "target": false },
     "psychic": { "instruction": "", "key": "" },
     "rascal": { "instruction": "", "key": "" },
-    "vampires": { "vampire_votes": {} }
+    "vampires": { "vampire_votes": {}, "new_vampire": [] }
   }
 }

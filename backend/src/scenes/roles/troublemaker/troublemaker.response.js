@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, swapCards } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const troublemakerResponse = (gamestate, token, selected_card_positions, title) => {
@@ -7,13 +7,8 @@ export const troublemakerResponse = (gamestate, token, selected_card_positions, 
   }
 
   const [position1, position2] = selected_card_positions.slice(0, 2)
-  const playerOneCard = { ...gamestate.positions.card_positions[position1].card }
-  const playerTwoCard = { ...gamestate.positions.card_positions[position2].card }
 
-  gamestate.positions.card_positions[position1].card = playerTwoCard
-  gamestate.positions.card_positions[position2].card = playerOneCard
-
-  gamestate.players[token].card_or_mark_action = true
+  swapCards(gamestate, position1, position2, token)
 
   const messageIdentifiers = formatPlayerIdentifier([position1, position2])
 

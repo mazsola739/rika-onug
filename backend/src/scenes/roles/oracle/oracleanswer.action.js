@@ -92,7 +92,6 @@ export const oracleanswerAction = (gamestate, token, title) => {
     private_message: privateMessage,
     showCards,
     selectableCards: { selectable_cards, selectable_card_limit },
-    uniqueInformation: { viewed_cards: showCards },
     scene_end,
     obligatory
   })

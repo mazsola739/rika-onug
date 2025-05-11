@@ -1,4 +1,4 @@
-import { getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, sawCards } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const exposerResponse = (gamestate, token, selected_card_positions, title) => {
@@ -6,22 +6,13 @@ export const exposerResponse = (gamestate, token, selected_card_positions, title
     return gamestate
   }
   const limit = gamestate.players[token].player_history[title].selectable_card_limit.center
+  const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
 
-  const cardPositions = selected_card_positions.slice(0, limit)
-  const revealedCards = getCardIdsByPositions(gamestate.positions.card_positions, cardPositions)
-
-  gamestate.positions.flipped_cards.push(...revealedCards)
-
-  if (revealedCards.some(card => gamestate.players[token].card.player_original_id === card.id)) {
-    gamestate.players[token].card.player_card_id = 87
-  }
-
-  gamestate.players[token].card_or_mark_action = true
+  gamestate.positions.flipped_cards.push(...showCards)
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_flipped_card', formatPlayerIdentifier(cardPositions)],
-    showCards: revealedCards,
-    uniqueInformation: { viewed_cards: cardPositions, flipped_cards: revealedCards },
+    private_message: ['action_flipped_card', formatPlayerIdentifier(selected_card_positions.slice(0, limit))],
+    showCards,
     scene_end: true
   })
 

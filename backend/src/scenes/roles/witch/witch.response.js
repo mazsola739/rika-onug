@@ -1,4 +1,4 @@
-import { getNarrationByTitle, getCardIdsByPositions, getPlayerNumbersByGivenConditions, generateRoleAction, formatPlayerIdentifier, createAndSendSceneMessage } from '../../sceneUtils'
+import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAction, formatPlayerIdentifier, createAndSendSceneMessage, swapCards, sawCards } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const witchResponse = (gamestate, token, selected_card_positions, title) => {
@@ -9,12 +9,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
   const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   if (selected_card_positions[0].includes('center_')) {
-    const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
-    const selectedCenterCardPosition = gamestate.positions.card_positions[selected_card_positions[0]].card
-
-    if (gamestate.players[token].card.player_original_id === selectedCenterCardPosition.id) {
-      gamestate.players[token].card.player_card_id = 87
-    }
+    const showCards = sawCards(gamestate, [selected_card_positions[0]], token)
 
     const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayersWithoutShield', gamestate.positions.shielded_cards, token)
     const selectable_card_limit = { player: 1, center: 0 }
@@ -22,7 +17,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], 'action_must_one_any'],
       selectableCards: { selectable_cards, selectable_card_limit },
-      uniqueInformation: { viewed_cards: [selected_card_positions[0]], selected_center_card: selected_card_positions[0] },
+      uniqueInformation: { selected_center_card: selected_card_positions[0] },
       showCards,
       obligatory: true
     })
@@ -31,21 +26,15 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
 
     return gamestate
   } else if (selected_card_positions[0].includes('player_')) {
-    const selectedCenterPositionCard = gamestate.positions.card_positions[gamestate.players[token].player_history[title].selected_center_card].card
-    const selectedPlayerPositionCard = gamestate.positions.card_positions[selected_card_positions[0]].card
-
-    const selectedCenterCard = { ...selectedCenterPositionCard }
-    const specialVillagerIds = [30, 1, 29, 28, 64]
-    if (specialVillagerIds.includes(selectedCenterCard.id)) {
-      selectedCenterCard.role = 'VILLAGER'
-      selectedCenterCard.team = 'village'
-    }
-
-    const selectedPlayerCard = { ...selectedPlayerPositionCard }
-    gamestate.positions.card_positions[gamestate.players[token].player_history[title].selected_center_card].card = selectedPlayerCard
-    gamestate.positions.card_positions[selected_card_positions[0]].card = selectedCenterCard
+    swapCards(gamestate, gamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0], token)
 
     const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+    //TODO move it to the constants - common with drunk
+    const specialVillagerIds = [30, 1, 29, 28, 64]
+    if (specialVillagerIds.includes(gamestate.positions.card_positions[currentPlayerNumber].card.id)) {
+      gamestate.positions.card_positions[currentPlayerNumber].card.role = 'VILLAGER'
+      gamestate.positions.card_positions[currentPlayerNumber].card.team = 'village'
+    }
 
     if (selected_card_positions[0] === currentPlayerNumber) {
       const currentCard = gamestate.positions.card_positions[currentPlayerNumber].card

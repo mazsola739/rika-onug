@@ -21,7 +21,6 @@ export const morticianAction = (gamestate, token, title, prefix) => {
     } else {
       return generateRoleAction(gamestate, token, title, {
         private_message: ['action_shielded'],
-        uniqueInformation: { shielded: true }
       })
     }
   } else if (morticianKey.includes('neighbor')) {

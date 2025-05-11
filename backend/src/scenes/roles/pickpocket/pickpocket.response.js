@@ -14,7 +14,7 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
 
   gamestate.players[token].card.player_mark = gamestate.positions.card_positions[currentPlayerNumber].mark
 
-  const viewMarks = getMarksByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
+  const showMarks = getMarksByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
 
   gamestate.players[token].card_or_mark_action = true
 
@@ -22,8 +22,8 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_swapped_marks', ...messageIdentifiers, 'POINT', 'action_own_mark'],
-    showMarks: viewMarks,
-    uniqueInformation: { swapped_marks: [currentPlayerNumber, selected_mark_positions[0]], viewed_marks: [currentPlayerNumber] },
+    showMarks,
+    uniqueInformation: { swapped_marks: [currentPlayerNumber, selected_mark_positions[0]] },
     scene_end: true
   })
 

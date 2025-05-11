@@ -1,4 +1,4 @@
-import { getPlayerNumbersByGivenConditions, getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { getPlayerNumbersByGivenConditions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, sawCards } from '../../sceneUtils'
 import { validateAnswerSelection } from '../../validators'
 
 export const squireResponse = (gamestate, token, selected_answer, title) => {
@@ -12,20 +12,14 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
 
   if (selected_answer === 'yes') {
     const werewolvesWithoutShield = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolfWithoutShield', gamestate.positions.shielded_cards)
-    const viewCards = getCardIdsByPositions(gamestate.positions.card_positions, werewolves)
-
-    if (werewolvesWithoutShield.some(wolf => gamestate.positions.card_positions[wolf].card.id === gamestate.players[token]?.card?.player_original_id)) {
-      gamestate.players[token].card.player_card_id = 87
-    }
-
-    gamestate.players[token].card_or_mark_action = true
+    const showCards = sawCards(gamestate, werewolvesWithoutShield, token)
 
     const messageIdentifiers = formatPlayerIdentifier(werewolvesWithoutShield)
 
     action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_saw_card', ...messageIdentifiers, 'POINT'],
-      showCards: viewCards,
-      uniqueInformation: { werewolves, answer: [selected_answer[0]], viewed_cards: viewCards }
+      showCards,
+      uniqueInformation: { werewolves, answer: [selected_answer[0]] }
     })
   } else if (selected_answer === 'no') {
     action = generateRoleAction(gamestate, token, title, {

@@ -2,7 +2,7 @@ import { generateRoleAction, getMarksByPositions, getPlayerNumbersByGivenConditi
 
 export const everyonemarkAction = (gamestate, token, title) => {
   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
-  const viewMarks = getMarksByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
+  const showMarks = getMarksByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
 
   switch (gamestate.positions.card_positions[currentPlayerNumber].mark) {
     case 'mark_of_clarity':
@@ -38,8 +38,7 @@ export const everyonemarkAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, title, {
     private_message: ['action_own_mark'],
-    showMarks: viewMarks,
-    uniqueInformation: { viewed_marks: viewMarks },
+    showMarks,
     scene_end: true
   })
 }

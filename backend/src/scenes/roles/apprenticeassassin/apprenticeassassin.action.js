@@ -9,7 +9,6 @@ export const apprenticeassassinAction = (gamestate, token, title) => {
     return generateRoleAction(gamestate, token, title, {
       private_message: ['action_assassin', ...messageIdentifiers, 'POINT'],
       uniqueInformation: { assassins },
-      obligatory: true,
       scene_end: true
     })
   } else if (assassins.length === 0) {

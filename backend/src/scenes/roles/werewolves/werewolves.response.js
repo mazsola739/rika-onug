@@ -1,4 +1,5 @@
-import { getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { sawCards } from '../../sceneUtils/sawCards'
 import { validateCardSelection } from '../../validators'
 
 export const werewolvesResponse = (gamestate, token, selected_card_positions, title) => {
@@ -6,21 +7,13 @@ export const werewolvesResponse = (gamestate, token, selected_card_positions, ti
     return gamestate
   }
 
-  const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0]])
-  const selectedPositionCard = gamestate.positions.card_positions[selected_card_positions[0]].card
-
-  if (gamestate.players[token].card.player_original_id === selectedPositionCard.id) {
-    gamestate.players[token].card.player_card_id = 87
-  }
-
-  gamestate.players[token].card_or_mark_action = true
+  const showCards = sawCards(gamestate, [selected_card_positions[0]], token)
 
   const private_message = ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0]]
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message,
     showCards,
-    uniqueInformation: { viewed_cards: [selected_card_positions[0]] },
     obligatory: true,
     scene_end: true
   })

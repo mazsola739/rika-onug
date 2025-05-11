@@ -1,7 +1,10 @@
 import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const thecountAction = (gamestate, token, title) => {
-  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire') //TODO fix on player not swapped the mark yet, so its not showing the fresh mark_of_vampire
+  const nonVampires = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire')
+  const new_vampire = gamestate.roles.vampires.new_vampire
+
+  const selectable_marks = nonVampires.filter(position => !new_vampire.includes(position))
   const selectable_mark_limit = { mark: 1 }
 
   return generateRoleAction(gamestate, token, title, {

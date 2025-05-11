@@ -13,6 +13,7 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
   const playerThreeCardId = selectedCards[2][selected_card_positions[2]]
 
   let showCards = []
+  //TODO const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
 
   if (GOOD_GUY.includes(playerOneCardId)) {
     if (!GOOD_GUY.includes(playerTwoCardId)) {
@@ -46,13 +47,7 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
   gamestate.roles.nostradamus.team = gamestate.players[token].card.player_team
 
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: [
-      'action_saw_card',
-      formatPlayerIdentifier(selected_card_positions)[0],
-      showCards.length >= 2 ? formatPlayerIdentifier(selected_card_positions)[1] : '',
-      showCards.length === 3 ? formatPlayerIdentifier(selected_card_positions)[2] : ''
-    ],
-    uniqueInformation: { viewed_cards: showCards.length > 1 ? selected_card_positions.slice(0, 2) : [selected_card_positions[0]] },
+    private_message: ['action_saw_card', formatPlayerIdentifier(selected_card_positions)[0], showCards.length >= 2 ? formatPlayerIdentifier(selected_card_positions)[1] : '', showCards.length === 3 ? formatPlayerIdentifier(selected_card_positions)[2] : ''],
     showCards
   })
 

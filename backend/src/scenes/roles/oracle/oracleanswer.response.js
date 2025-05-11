@@ -1,4 +1,4 @@
-import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions, swapCards } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const oracleanswerResponse = (gamestate, token, selected_card_positions, title) => {
@@ -12,23 +12,14 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
 
   if (oracleQuestion === 'oracle_centerexchange') {
     const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
-    const currentPlayerCard = {
-      ...gamestate.positions.card_positions[currentPlayerNumber].card
-    }
-    const selectedCard = {
-      ...gamestate.positions.card_positions[selected_card_positions[0]].card
-    }
-    gamestate.positions.card_positions[currentPlayerNumber].card = selectedCard
-    gamestate.positions.card_positions[selected_card_positions[0]].card = currentPlayerCard
 
-    gamestate.players[token].card.player_card_id = 87
-    gamestate.players[token].card_or_mark_action = true
+    swapCards(gamestate, currentPlayerNumber, selected_card_positions[0], token)
 
     const messageIdentifiers = formatPlayerIdentifier([selected_card_positions[0], currentPlayerNumber])
 
     action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
-      uniqueInformation: {  swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
+      uniqueInformation: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]] }
     })
   } else if (oracleQuestion === 'oracle_viewcenter') {
     const limit = gamestate.players[token].player_history[title].selectable_card_limit.center
@@ -37,13 +28,11 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
 
     gamestate.players[token].card_or_mark_action = true
 
-
     const messageIdentifiers = formatPlayerIdentifier(selectedCardPositions)
     const message = ['action_saw_card', ...messageIdentifiers]
 
     action = generateRoleAction(gamestate, token, title, {
       private_message: message,
-      uniqueInformation: { viewed_cards: selectedCards },
       showCards: selectedCards
     })
   }

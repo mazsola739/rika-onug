@@ -3,14 +3,7 @@ import { random_madscientist_intro, random_madscientist_result, random_madscient
 
 export const madscientist = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [
-    'madscientist_kickoff',
-    getRandomItemFromArray(random_madscientist_intro),
-    getRandomItemFromArray(random_madscientist_therefore),
-    getRandomItemFromArray(random_madscientist_result),
-    getRandomItemFromArray(random_madscientist_transition),
-    'madscientist_close'
-  ]
+  const narration = ['madscientist_kickoff', getRandomItemFromArray(random_madscientist_intro), getRandomItemFromArray(random_madscientist_therefore), getRandomItemFromArray(random_madscientist_result), getRandomItemFromArray(random_madscientist_transition), 'madscientist_close']
 
   tokens.forEach(token => {
     let action = {}

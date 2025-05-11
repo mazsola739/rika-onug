@@ -14,7 +14,6 @@ export const robberAction = (gamestate, token, title) => {
   } else {
     return generateRoleAction(gamestate, token, title, {
       private_message: ['action_shielded'],
-      uniqueInformation: { shielded: true },
       scene_end: true
     })
   }

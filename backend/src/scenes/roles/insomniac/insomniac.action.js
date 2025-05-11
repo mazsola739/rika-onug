@@ -12,13 +12,11 @@ export const insomniacAction = (gamestate, token, title) => {
     return generateRoleAction(gamestate, token, title, {
       private_message: ['action_own_card'],
       showCards,
-      uniqueInformation: { viewed_cards: [currentPlayerNumber] },
       scene_end: true
     })
   } else {
     return generateRoleAction(gamestate, token, title, {
       private_message: ['action_shielded'],
-      uniqueInformation: { shielded: true },
       scene_end: true
     })
   }

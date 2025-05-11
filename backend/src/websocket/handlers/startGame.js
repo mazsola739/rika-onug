@@ -26,12 +26,7 @@ export const startGame = async (ws, message) => {
       game_stopped: false,
       game_finished: false
     }
-    newGamestate.scenes.chapter = [
-      {
-        scene_title: 'START_GAME',
-        scene_number: 0
-      }
-    ]
+    newGamestate.scenes.chapter = [{ scene_title: 'START_GAME', scene_number: 0 }]
     newGamestate.scenes.narration = []
 
     if (!areAllPlayersReady(newGamestate.players)) {

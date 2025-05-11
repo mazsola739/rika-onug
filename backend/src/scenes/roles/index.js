@@ -23,10 +23,10 @@ gamestate.players[token].card.player_role = 'TANNER'
 /* TODO consider this solution for reset the players card, like at drunk
 
   const shouldResetPlayerCardId = () => {
-    if (viewCards.some(card => gamestate.players[token].card.player_original_id === card.id)) {
+    if (showCards.some(card => gamestate.players[token].card.player_original_id === card.id)) {
       return true
     }
-    if (cardPositions.length === 1 && currentPlayerNumber === cardPositions[0] && viewCards[0].card.id === gamestate.players[token].card.player_original_id) {
+    if (cardPositions.length === 1 && currentPlayerNumber === cardPositions[0] && showCards[0].card.id === gamestate.players[token].card.player_original_id) {
       return false
     }
     return true
