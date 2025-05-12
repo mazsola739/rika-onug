@@ -1,17 +1,11 @@
 import { isActivePlayer } from '../../activePlayer'
-import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
-import { bodysnatcherKeys, randomBodysnatcherInstructions } from './bodysnatcher.constants'
+import { getAllPlayerTokens, createAndSendSceneMessage } from '../../sceneUtils'
 import { bodysnatcherAction } from './bodysnatcher.action'
+import { bodysnatcherNarration } from './bodysnatcher.narration'
 
 export const bodysnatcher = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-
-  const randomBodysnatcherInstruction = getRandomItemFromArray(randomBodysnatcherInstructions)
-  const bodysnatcherKey = getRandomItemFromArray(bodysnatcherKeys)
-  const narration = [`${prefix}_kickoff`, randomBodysnatcherInstruction, randomBodysnatcherInstruction === 'bodysnatcher_steal' ? bodysnatcherKey : '', 'bodysnatcher_end']
-
-  gamestate.roles[prefix].instruction = randomBodysnatcherInstruction
-  gamestate.roles[prefix].key = bodysnatcherKey
+  const narration = bodysnatcherNarration(gamestate, prefix)
 
   tokens.forEach(token => {
     let action = {}

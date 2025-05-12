@@ -1,52 +1,13 @@
 import { isActivePlayer } from '../../activePlayer'
-import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
+import { getAllPlayerTokens, createAndSendSceneMessage } from '../../sceneUtils'
 import { empathAction, empathEveryoneAction } from './empath.action'
-import { empathKeys, randomEmpathInstructions } from './empath.constants'
+import { empathNarration } from './empath.narration'
 
 //TODO fix non-empaths voting
 
 export const empath = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const totalPlayers = gamestate.total_players
-  const randomKey = getRandomItemFromArray(empathKeys)
-  const randomPlayers = pickRandomUpToThreePlayers(totalPlayers, 'conjunction_and')
-  const empathKey = randomKey === 'activePlayers' ? randomPlayers : [randomKey]
-  const randomEmpathInstruction = getRandomItemFromArray(randomEmpathInstructions)
-  const narration = [...empathKey, randomEmpathInstruction]
-
-  const empathVotersPlayerNumbers = (totalPlayers, evenOdd = '') => {
-    const result = []
-
-    totalPlayers = Math.min(Math.max(1, totalPlayers), 12)
-
-    let start = 1
-    let step = 1
-    if (evenOdd === 'even') {
-      start = 2
-      step = 2
-    } else if (evenOdd === 'odd') {
-      start = 1
-      step = 2
-    }
-
-    for (let i = start; i <= totalPlayers; i += step) {
-      result.push(`player_${i}`)
-    }
-
-    return result
-  }
-
-  let activePlayerNumbers = []
-  if (randomKey === 'activePlayers') {
-    activePlayerNumbers = [...randomPlayers.map(player => player.replace('identifier_player', 'player_'))]
-  } else if (randomKey === 'identifier_oddplayers' || randomKey === 'identifier_evenplayers' || randomKey === 'identifier_everyone') {
-    const evenOdd = randomKey.includes('even') ? 'even' : randomKey.includes('odd') ? 'odd' : ''
-
-    //TODO fix!
-    activePlayerNumbers = empathVotersPlayerNumbers(totalPlayers, evenOdd)
-  }
-
-  gamestate.roles[prefix].instruction = randomEmpathInstruction
+  const narration = empathNarration(gamestate, prefix)
 
   tokens.forEach(token => {
     let action = {}

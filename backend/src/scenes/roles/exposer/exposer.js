@@ -1,15 +1,11 @@
 import { isActivePlayer } from '../../activePlayer'
-import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
-import { randomExposerInstructions } from './exposer.constants'
+import { getAllPlayerTokens, createAndSendSceneMessage } from '../../sceneUtils'
 import { exposerAction } from './exposer.action'
+import { exposerNarration } from './exposer.narration'
 
 export const exposer = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-
-  const randomExposerInstruction = getRandomItemFromArray(randomExposerInstructions)
-  const narration = [`${prefix}_kickoff`, randomExposerInstruction]
-
-  gamestate.roles[prefix].instruction = randomExposerInstruction
+  const narration = exposerNarration(gamestate, prefix)
 
   tokens.forEach(token => {
     let action = {}

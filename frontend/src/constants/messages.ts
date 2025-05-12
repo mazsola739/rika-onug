@@ -43,6 +43,11 @@ export const action_must_one_any = 'You must choose any player (including yourse
 export const action_must_two_any = 'You must choose any two players (including yourself)'
 export const action_must_three_any = 'You must choose any three players (including yourself)'
 
+//even or odd
+export const action_may_one_any_even = 'You may choose any even player (including yourself)'
+export const action_may_one_any_odd = 'You may choose any odd player (including yourself)'
+
+
 //neighbor
 export const action_must_one_neighbor = 'You must choose any player of your neighbors'
 export const action_may_oneneighbor = 'You may choose any player of your neighbors'
@@ -97,6 +102,9 @@ export const action_must_one_any_non_werewolf = 'You must choose any other non-w
 export const action_must_one_any_non_vampire = 'You must choose any other non-vampire player'
 export const action_must_one_any_non_villain = 'You must choose any other non-villain player'
 export const action_must_one_any_non_alien = 'You must choose any other non-alien player'
+export const action_must_one_any_non_alien_even = 'You must choose any other non-alien even player'
+export const action_must_one_any_non_alien_odd = 'You must choose any other non-alien odd player'
+export const action_must_one_non_alien_from = 'You must choose non-alien player from: '
 
 export const action_no_selectable_player = 'You cannot choose any player based on these criteria'
 

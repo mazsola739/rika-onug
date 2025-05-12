@@ -1,18 +1,11 @@
 import { isActivePlayer } from '../../activePlayer'
-import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray } from '../../sceneUtils'
-import { psychicKeys, randomPsychicInstructions } from './psychic.constants'
+import { getAllPlayerTokens, createAndSendSceneMessage } from '../../sceneUtils'
 import { psychicAction } from './psychic.action'
+import { psychicNarration } from './psychic.narration'
 
 export const psychic = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = [`${prefix}_kickoff`]
-  const randomPsychicInstruction = getRandomItemFromArray(randomPsychicInstructions)
-  const psychicKey = getRandomItemFromArray(psychicKeys)
-
-  gamestate.roles[prefix].instruction = randomPsychicInstruction
-  gamestate.roles[prefix].key = psychicKey
-
-  narration.push(...[randomPsychicInstruction, psychicKey])
+  const narration = psychicNarration(gamestate, prefix)
 
   tokens.forEach(token => {
     let action = {}

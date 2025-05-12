@@ -6,7 +6,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
     return gamestate
   }
 
-  const randomAlienInstruction = gamestate.alien.instruction
+   const { instruction: randomAlienInstruction } = gamestate.roles.aliens
 
   let showCards = []
   let new_alien = []

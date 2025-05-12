@@ -15,23 +15,29 @@ export const aliensAction = (gamestate, token, title) => {
   const aliensWithoutShield = getPlayerNumbersByGivenConditions(gamestate, 'alienWithoutShield')
   const aliensWithoutShieldIdentifiers = formatPlayerIdentifier(aliensWithoutShield)
 
-  let possiblePositions = []
+  let messageInstruction = ''
+  let messagePositions = []
 
   if (alienKey[0] === 'identifier_any') {
-    possiblePositions = getPlayerNumbersByGivenConditions(gamestate, 'allPlayersWithoutShield')
+    messageInstruction = 'action_may_one_any'
+    messagePositions = getPlayerNumbersByGivenConditions(gamestate, 'allPlayersWithoutShield')
   } else if (['identifier_anyeven', 'identifier_anyodd'].includes(alienKey[0])) {
     const evenOrOdd = alienKey[0].includes('even') ? 'even' : 'odd'
-    possiblePositions = getPlayerNumbersByGivenConditions(gamestate, `${evenOrOdd}WithoutShield`)
+    messagePositions = getPlayerNumbersByGivenConditions(gamestate, `${evenOrOdd}WithoutShield`)
+    messageInstruction = `action_may_one_any_${evenOrOdd}`
   } else if (alienKey[0] === 'identifier_everyone') {
-    possiblePositions = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
+    messagePositions = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
+    messageInstruction = 'action_must_one_any_non_alien'
   } else if (['identifier_oddplayers', 'identifier_evenplayers'].includes(alienKey[0])) {
     const evenOrOdd = alienKey[0].includes('even') ? 'Even' : 'Odd'
-    possiblePositions = getPlayerNumbersByGivenConditions(gamestate, `nonAlien${evenOrOdd}`)
+    messagePositions = getPlayerNumbersByGivenConditions(gamestate, `nonAlien${evenOrOdd}`)
+    messageInstruction = `action_must_one_any_non_alien_${evenOrOdd}`
   } else {
-    possiblePositions = alienKey.filter(key => key.includes('identifier_player')).map(key => key.replace('identifier_player', 'player_'))
+    messagePositions = alienKey.filter(key => key.includes('identifier_player')).map(key => key.replace('identifier_player', 'player_'))
+    messageInstruction = 'action_must_one_non_alien_from'
   }
 
-  const possibleIdentifier = formatPlayerIdentifier(possiblePositions)
+  const possibleIdentifier = formatPlayerIdentifier(messagePositions)
   let selectable_cards = []
   let showCards = []
   let vote = false
@@ -41,19 +47,15 @@ export const aliensAction = (gamestate, token, title) => {
   switch (randomAlienInstruction) {
     case 'aliens_view': // 'Each alien may secretly view a card from: '
     case 'aliens_allview': // 'All aliens together may view a card from: '
-    case 'aliens_newalien': // 'Tap one of the fists to turn that player into an alien from: '
-    case 'aliens_alienhelper': // "Tap one of the fists to turn that player into alien team, but isn't an alien from: "
-      if (possiblePositions.left === 0) {
+      vote = randomAlienInstruction !== 'aliens_view'
+      if (messagePositions.left === 0) {
         privateMessage.push('action_no_selectable_player')
         scene_end = true
-      } else if (possiblePositions.left === 1) {
-        gamestate.players[token].player_history[title].selectable_cards = selectable_cards
-        aliensResponse(gamestate, token, selectable_cards, title)
       } else {
-        selectable_cards = possiblePositions
-        privateMessage.push(...possibleIdentifier)
+        selectable_cards = messagePositions
+        privateMessage.push(messageInstruction, ...possibleIdentifier)
+        scene_end = false
       }
-      vote = randomAlienInstruction !== 'aliens_view'
       break
     case 'aliens_left': // 'Give your card to the alien on your left.'
     case 'aliens_right': // 'Give your card to the alien on your right.'
@@ -77,6 +79,20 @@ export const aliensAction = (gamestate, token, title) => {
     case 'aliens_timer': // 'You have shortened the game timer by one half.'
       gamestate.vote_timer /= 2
       privateMessage.push('action_timer')
+      break
+    case 'aliens_newalien': // 'Tap one of the fists to turn that player into an alien from: '
+    case 'aliens_alienhelper': // "Tap one of the fists to turn that player into alien team, but isn't an alien from: "
+      vote = randomAlienInstruction !== 'aliens_view'
+      if (messagePositions.left === 0) {
+        privateMessage.push('action_no_selectable_player')
+        scene_end = true
+      } else if (messagePositions.left === 1) {
+        gamestate.players[token].player_history[title].selectable_cards = selectable_cards
+        aliensResponse(gamestate, token, selectable_cards, title)
+      } else {
+        selectable_cards = messagePositions
+        privateMessage.push(messageInstruction, ...possibleIdentifier)
+      }
       break
   }
 

@@ -188,7 +188,7 @@ export const useClickHandler = () => {
   const handleVote = useCallback(
     (selected_vote: string[], title: string) => {
       sendJsonMessage?.({
-        type: title,
+        type: `${title}_VOTE`,
         title,
         room_id,
         token,

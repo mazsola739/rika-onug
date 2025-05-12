@@ -1,45 +1,11 @@
 import { isActivePlayer } from '../../activePlayer'
-import { createAndSendSceneMessage, getAllPlayerTokens, getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
-import { alienAllKeys, alienAnyKeys, randomAlienInstructions } from './aliens.constants'
+import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
+import { getAliensNarration } from './aliens.narration'
 import { aliensAction } from './aliens.action'
-import { hasCow } from '../../conditions'
-
-//TODO fix alien pick together player
 
 export const aliens = (gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = ['aliens_kickoff']
-
-  if (hasCow(selected_cards)) {
-    narration.push('aliens_kickoff_cow')
-  } else if (!hasCow(selected_cards)) {
-    narration.push('aliens_kickoff_aliens')
-  }
-
-  const randomAlienInstruction = gamestate.alienexchange ? getRandomItemFromArray(['aliens_left', 'aliens_right']) : getRandomItemFromArray(randomAlienInstructions)
-  let alienKey = []
-
-  if (randomAlienInstruction.includes('view')) {
-    alienKey = [getRandomItemFromArray(alienAnyKeys)]
-
-    if (alienKey[0] === 'activePlayers') {
-      alienKey = pickRandomUpToThreePlayers(gamestate.total_players, 'conjunction_and')
-    }
-
-    narration.push(randomAlienInstruction)
-    narration.push(...alienKey)
-  } else if (randomAlienInstruction === 'aliens_newalien' || randomAlienInstruction === 'aliens_alienhelper') {
-    alienKey = [getRandomItemFromArray(alienAllKeys)]
-    narration.push(randomAlienInstruction)
-    narration.push(...alienKey)
-  } else {
-    narration.push(randomAlienInstruction)
-  }
-  console.log("randomAlienInstruction: ", randomAlienInstruction)
-  console.log("alienKey: ", alienKey)
-
-  gamestate.roles.aliens.instruction = randomAlienInstruction
-  gamestate.roles.aliens.key = alienKey
+  const narration = getAliensNarration(gamestate, selected_cards)
 
   tokens.forEach(token => {
     let action = {}
@@ -59,3 +25,4 @@ export const aliens = (gamestate, title, selected_cards) => {
 
   return gamestate
 }
+   
