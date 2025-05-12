@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const beholderAction = (gamestate, token, title) => {
-  const seers = getPlayerNumbersByGivenConditions(gamestate.players, 'anySeer')
+  const seers = getPlayerNumbersByGivenConditions(gamestate, 'anySeer')
   const answer_options = ['yes', 'no']
 
   const messageIdentifiers = formatPlayerIdentifier(seers)

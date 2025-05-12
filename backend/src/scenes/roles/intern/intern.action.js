@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions, updatePlayerKnownCard } from '../../sceneUtils'
 
 export const internAction = (gamestate, token, title) => {
-  const madscientist = getPlayerNumbersByGivenConditions(gamestate.players, 'madscientist', gamestate.positions.shielded_cards)
+  const madscientist = getPlayerNumbersByGivenConditions(gamestate, 'madscientist')
 
   if (madscientist.length === 0) {
     const { player_card_id, player_role } = gamestate.players[token].card

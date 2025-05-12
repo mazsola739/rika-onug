@@ -1,8 +1,8 @@
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const groobzerbAction = (gamestate, token, title) => {
-  const zerb = getPlayerNumbersByGivenConditions(gamestate.players, 'zerb')
-  const groob = getPlayerNumbersByGivenConditions(gamestate.players, 'groob')
+  const zerb = getPlayerNumbersByGivenConditions(gamestate, 'zerb')
+  const groob = getPlayerNumbersByGivenConditions(gamestate, 'groob')
 
   if (gamestate.players[token].card.player_role_id === 47) {
     if (zerb.length >= 1) {
@@ -35,7 +35,8 @@ export const groobzerbAction = (gamestate, token, title) => {
       })
     } else {
       return generateRoleAction(gamestate, token, title, {
-        private_message: ['action_no_groob']
+        private_message: ['action_no_groob'],
+        scene_end: true
       })
     }
   }

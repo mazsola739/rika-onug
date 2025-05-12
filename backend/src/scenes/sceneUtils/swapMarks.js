@@ -7,7 +7,7 @@ export const swapMarks = (gamestate, token, position1, position2, canSee) => {
   gamestate.positions.card_positions[position1].mark = mark2
   gamestate.positions.card_positions[position2].mark = mark1
 
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
   if (currentPlayerNumber === position1 || currentPlayerNumber === position2) {
     const mark = canSee ? gamestate.positions.card_positions[position1].mark : ''

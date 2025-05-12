@@ -6,7 +6,7 @@ export const priestResponse = (gamestate, token, selected_mark_positions, title)
     return gamestate
   }
 
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
   updateMark(gamestate, token, [currentPlayerNumber, selected_mark_positions[0]], ['clarity_1, clarity_2'])
   updatePlayerKnownMark(gamestate, token, 'mark_of_clarity')
 

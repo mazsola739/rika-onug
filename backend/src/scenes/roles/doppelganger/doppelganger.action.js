@@ -2,7 +2,7 @@ import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sce
 import { doppelgangerResponse } from './doppelganger.response'
 
 export const doppelgangerAction = (gamestate, token, title) => {
-  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayersWithoutShield', gamestate.positions.shielded_cards, token)
+  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate, 'otherPlayersWithoutShield', token)
   const selectable_card_limit = { player: 1, center: 0 }
   const scene_end = selectable_cards.length === 0
 

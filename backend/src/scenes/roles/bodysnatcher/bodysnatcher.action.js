@@ -35,7 +35,7 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
       case 'identifier_anyeven':
       case 'identifier_anyodd': {
         const evenOrOdd = bodysnatcherKey.replace('identifier_', '').replace('any', '')
-        selectablePlayers = getPlayerNumbersByGivenConditions(gamestate.players, evenOrOdd)
+        selectablePlayers = getPlayerNumbersByGivenConditions(gamestate, evenOrOdd)
         break
       }
       case 'identifier_leftneighbor':
@@ -50,7 +50,7 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
         break
     }
 
-    const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(selectablePlayers, 'nonAlienWithoutShield', gamestate.positions.shielded_cards)
+    const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(selectablePlayers, 'nonAlienWithoutShield')
 
     selectable_cards = selectablePlayerNumbers
     selectable_card_limit = { player: 1, center: 0 }

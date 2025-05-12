@@ -1,6 +1,6 @@
 import { repo, repositoryType } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
-import { getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, sawCards, updateCardRoleAndTeam } from '../../sceneUtils'
+import {getPlayerNumbersByGivenConditions,getPlayerTokensByPlayerNumber,generateRoleAction,formatPlayerIdentifier,getNarrationByTitle,createAndSendSceneMessage,sawCards,updateCardRoleAndTeam } from '../../sceneUtils'
 
 export const aliensVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
@@ -8,10 +8,10 @@ export const aliensVotehydrate = async message => {
   try {
     const gamestate = await repo[repositoryType].readGamestate(room_id)
 
-    const aliens = getPlayerNumbersByGivenConditions(gamestate.players, 'alien')
+    const aliens = getPlayerNumbersByGivenConditions(gamestate, 'alien')
     const aliensTokens = getPlayerTokensByPlayerNumber(gamestate.players, aliens)
     const alienCount = aliens.length
-    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
     const alien_votes = { ...gamestate.roles.aliens.alien_votes }
 

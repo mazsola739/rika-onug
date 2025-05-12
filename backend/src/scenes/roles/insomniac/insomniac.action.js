@@ -1,7 +1,7 @@
 import { generateRoleAction, getCardIdsByPositions, getPlayerNumbersByGivenConditions, updatePlayerKnownCard } from '../../sceneUtils'
 
 export const insomniacAction = (gamestate, token, title) => {
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
   if (!gamestate.players[token].shield) {
     const showCards = getCardIdsByPositions(gamestate.positions.card_positions, [currentPlayerNumber])

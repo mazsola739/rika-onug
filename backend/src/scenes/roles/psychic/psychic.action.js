@@ -5,7 +5,7 @@ export const psychicAction = (gamestate, token, title, prefix) => {
   const psychicKey = gamestate.roles[prefix].key
   const evenOrOdd = psychicKey.replace('identifier_', '').replace('any', '')
 
-  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, evenOrOdd)
+  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate, evenOrOdd)
   let limit = +randomPsychicInstruction.replace('psychic_view', '')
 
   if (selectable_cards.length === 1) {

@@ -1,7 +1,7 @@
 import { getMarksByPositions, getPlayerNumbersByGivenConditions, updatePlayerKnownMark } from '.'
 
 export const sawMarks = (gamestate, position, token) => {
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
   const selectedPositionMark = gamestate.positions.card_positions[position].mark
 
   if (currentPlayerNumber === position) {

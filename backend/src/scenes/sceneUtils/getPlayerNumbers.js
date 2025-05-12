@@ -28,8 +28,8 @@ const filters = {
   //aliens
   alien: player => ALIEN_IDS.includes(player.card.player_role_id),
   alienWithoutShield: (player, shieldedCards) => ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
-  nonAlienEven: (player) => !ALIEN_IDS.includes(player.card.player_role_id) && parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
-  nonAlienOdd: (player) => !ALIEN_IDS.includes(player.card.player_role_id) && parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
+  nonAlienEven: player => !ALIEN_IDS.includes(player.card.player_role_id) && parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
+  nonAlienOdd: player => !ALIEN_IDS.includes(player.card.player_role_id) && parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
   nonAlienWithoutShield: (player, shieldedCards) => !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
   nonAlienWithoutShieldEven: (player, shieldedCards) => !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
   nonAlienWithoutShieldOdd: (player, shieldedCards) => !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
@@ -74,16 +74,20 @@ const filters = {
 
   //even or odd players
   even: player => parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
-  odd: player => parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0
+  odd: player => parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
+  evenWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
+  oddWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0
 }
 
-export const getPlayerNumbersByGivenConditions = (players, filter, shieldedCards = [], token = null) => {
+export const getPlayerNumbersByGivenConditions = (gamestate, filter, token = null) => {
+  const players = gamestate.players
+  const shielded_cards = gamestate.positions.shielded_cards
   const condition = filters[filter]
 
   const result = []
   for (const playerToken in players) {
     const player = players[playerToken]
-    if (condition(player, shieldedCards, token, playerToken)) {
+    if (condition(player, shielded_cards, token, playerToken)) {
       result.push(player.player_number)
     }
   }

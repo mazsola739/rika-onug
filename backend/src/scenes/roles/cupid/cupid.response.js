@@ -6,7 +6,7 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
     return gamestate
   }
 
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
   updateMark(gamestate, token, [selected_mark_positions[0], selected_mark_positions[1]], ['love_1, love_2'])
 
   if (currentPlayerNumber === selected_mark_positions[0] || currentPlayerNumber === selected_mark_positions[1]) {

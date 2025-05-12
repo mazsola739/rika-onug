@@ -8,7 +8,7 @@ export const morticianAction = (gamestate, token, title, prefix) => {
 
   if (morticianKey === 'identifier_yourself') {
     if (!gamestate.players[token].shield) {
-      const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)
+      const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)
 
       selectable_cards = currentPlayerNumber
       selectable_card_limit = { player: 1, center: 0 }
@@ -20,7 +20,7 @@ export const morticianAction = (gamestate, token, title, prefix) => {
       })
     } else {
       return generateRoleAction(gamestate, token, title, {
-        private_message: ['action_shielded'],
+        private_message: ['action_shielded']
       })
     }
   } else if (morticianKey.includes('neighbor')) {

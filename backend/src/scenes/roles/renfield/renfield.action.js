@@ -2,9 +2,9 @@ import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenCond
 
 //TODO if no vampire he is villager
 export const renfieldAction = (gamestate, token, title) => {
-  const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampires')
-  const new_vampire = getPlayerNumbersByGivenConditions(gamestate.players, 'vampireByMark')
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const vampires = getPlayerNumbersByGivenConditions(gamestate, 'vampires')
+  const new_vampire = getPlayerNumbersByGivenConditions(gamestate, 'vampireByMark')
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
   updateMark(gamestate, token, [currentPlayerNumber], ['bat'])
 

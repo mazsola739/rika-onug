@@ -6,7 +6,7 @@ export const instigatorResponse = (gamestate, token, selected_mark_positions, ti
     return gamestate
   }
 
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
   updateMark(gamestate, token, [selected_mark_positions[0]], ['traitor'])
 
   if (currentPlayerNumber === selected_mark_positions[0]) {

@@ -7,7 +7,7 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
     return gamestate
   }
 
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
   swapMarks(gamestate, token, currentPlayerNumber, selected_mark_positions[0], true)
   const showMarks = sawMarks(gamestate, [currentPlayerNumber], token)
 

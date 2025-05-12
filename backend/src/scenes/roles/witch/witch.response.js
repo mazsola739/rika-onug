@@ -12,7 +12,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
   if (selected_card_positions[0].includes('center_')) {
     const showCards = sawCards(gamestate, [selected_card_positions[0]], token)
 
-    const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayersWithoutShield', gamestate.positions.shielded_cards, token)
+    const selectable_cards = getPlayerNumbersByGivenConditions(gamestate, 'allPlayersWithoutShield', token)
     const selectable_card_limit = { player: 1, center: 0 }
 
     const action = generateRoleAction(gamestate, token, title, {
@@ -29,7 +29,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
   } else if (selected_card_positions[0].includes('player_')) {
     swapCards(gamestate, gamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0], token)
 
-    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
     if (SPECIAL_VILLAGER_IDS.includes(gamestate.positions.card_positions[currentPlayerNumber].card.id)) {
       updateCardRoleAndTeam(gamestate, currentPlayerNumber, 'VILLAGER', 'village')

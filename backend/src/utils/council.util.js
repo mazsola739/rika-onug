@@ -18,7 +18,7 @@ export const updatePlayer = (gamestate, token) => {
   let newPlayers = { ...gamestate.players }
   let newPositions = { ...gamestate.positions }
 
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
   const flippedCards = newPositions.flipped_cards
 
   const playerCard = newPlayers[token].card

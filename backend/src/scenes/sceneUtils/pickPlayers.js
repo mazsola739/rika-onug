@@ -14,22 +14,22 @@ export const pickRandomUpToThreePlayers = (totalPlayers, conjunction) => {
   const numPlayersToPick = Math.floor(Math.random() * 3) + 1
 
   if (numPlayersToPick === 1) {
-    return [players[0]]
+    return [`identifier_player${players[0] + 1}`]
   } else if (numPlayersToPick === 2) {
-    return [players[0], conjunction, players[1]]
+    return [`identifier_player${players[0] + 1}`, conjunction, `identifier_player${players[1] + 1}`]
   } else {
-    return [players[0], players[1], conjunction, players[2]]
+    return [`identifier_player${players[0] + 1}`, `identifier_player${players[1] + 1}`, conjunction, `identifier_player${players[2] + 1}`]
   }
 }
 
 export const pickRandomTwoPlayers = numPlayers => {
   const players = shufflePlayers(numPlayers)
 
-  return players.slice(0, 2)
+  return players.slice(0, 2).map(player => `identifier_player${player + 1}`)
 }
 
 export const pickRandomOnePlayer = numPlayers => {
   const players = shufflePlayers(numPlayers)
 
-  return players.slice(0, 1)
+  return [`identifier_player${players[0] + 1}`]
 }

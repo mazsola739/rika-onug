@@ -2,7 +2,7 @@ import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sce
 import { temptressResponse } from './temptress.response'
 
 export const temptressAction = (gamestate, token, title) => {
-  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVillainWithoutShield', gamestate.positions.shielded_cards)
+  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate, 'nonVillainWithoutShield')
   const selectable_card_limit = { player: 1, center: 0 }
   const scene_end = selectable_cards.length === 0
 

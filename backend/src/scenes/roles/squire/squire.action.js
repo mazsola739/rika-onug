@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const squireAction = (gamestate, token, title) => {
-  const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolf')
+  const werewolves = getPlayerNumbersByGivenConditions(gamestate, 'werewolfAndDreamwolf')
   const answer_options = ['yes', 'no']
 
   const messageIdentifiers = formatPlayerIdentifier(werewolves)

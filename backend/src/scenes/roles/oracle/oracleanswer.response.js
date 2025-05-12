@@ -11,7 +11,7 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
   const oracleQuestion = gamestate.roles.oracle.question
 
   if (oracleQuestion === 'oracle_centerexchange') {
-    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
     swapCards(gamestate, currentPlayerNumber, selected_card_positions[0], token)
 

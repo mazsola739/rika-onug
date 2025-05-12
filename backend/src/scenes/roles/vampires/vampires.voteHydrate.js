@@ -8,10 +8,10 @@ export const vampiresVotehydrate = async message => {
   try {
     const gamestate = await repo[repositoryType].readGamestate(room_id)
 
-    const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampires')
+    const vampires = getPlayerNumbersByGivenConditions(gamestate, 'vampires')
     const vampiresTokens = getPlayerTokensByPlayerNumber(gamestate.players, vampires)
     const vampireCount = vampires.length
-    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
     const vampire_votes = { ...gamestate.roles.vampires.vampire_votes }
 

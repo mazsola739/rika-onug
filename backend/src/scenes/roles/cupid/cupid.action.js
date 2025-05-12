@@ -2,7 +2,7 @@ import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sce
 import { cupidResponse } from './cupid.response'
 
 export const cupidAction = (gamestate, token, title) => {
-  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
+  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
   const selectable_mark_limit = { mark: 2 }
   const scene_end = selectable_marks.length === 0
 

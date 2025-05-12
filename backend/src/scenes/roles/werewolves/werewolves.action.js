@@ -2,8 +2,8 @@ import { CENTER_CARD_POSITIONS } from '../../../constants'
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const werewolvesAction = (gamestate, token, title) => {
-  const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolf')
-  const dreamwolf = getPlayerNumbersByGivenConditions(gamestate.players, 'dreamwolf')
+  const werewolves = getPlayerNumbersByGivenConditions(gamestate, 'werewolf')
+  const dreamwolf = getPlayerNumbersByGivenConditions(gamestate, 'dreamwolf')
 
   const loneWolf = werewolves.length + dreamwolf.length === 1
   const scene_end = !loneWolf

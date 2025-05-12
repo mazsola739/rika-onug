@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const loversAction = (gamestate, token, title) => {
-  const lovers = getPlayerNumbersByGivenConditions(gamestate.players, 'lover')
+  const lovers = getPlayerNumbersByGivenConditions(gamestate, 'lover')
 
   const messageIdentifiers = formatPlayerIdentifier(lovers)
 

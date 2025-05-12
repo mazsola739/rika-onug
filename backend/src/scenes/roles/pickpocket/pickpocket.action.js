@@ -1,7 +1,7 @@
 import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const pickpocketAction = (gamestate, token, title) => {
-  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayers', [], token)
+  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate, 'otherPlayers', token)
   const selectable_mark_limit = { mark: 1 }
 
   return generateRoleAction(gamestate, token, title, {

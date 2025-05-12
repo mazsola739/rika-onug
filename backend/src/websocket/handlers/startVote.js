@@ -30,7 +30,7 @@ export const startVote = async (ws, message) => {
     //TODO vote restrict
     tokens.forEach(token => {
       const player = players[token]
-      const otherPlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayers', [], token)
+      const otherPlayerNumbers = getPlayerNumbersByGivenConditions(gamestate, 'otherPlayers', token)
 
       const voteMessage = {
         type: VOTE,

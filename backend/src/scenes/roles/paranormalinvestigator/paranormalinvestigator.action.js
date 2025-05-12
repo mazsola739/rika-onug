@@ -2,7 +2,7 @@ import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sce
 
 //TODO fix limit
 export const paranormalinvestigatorAction = (gamestate, token, title) => {
-  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayersWithoutShield', gamestate.positions.shielded_cards, token)
+  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate, 'otherPlayersWithoutShield', token)
   const limit = selectable_cards.length === 1 ? 1 : 2
   const selectable_card_limit = { player: limit, center: 0 }
   const scene_end = selectable_cards.length === 0

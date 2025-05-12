@@ -1,13 +1,4 @@
-import {
-  moveCardsButYourOwn,
-  generateRoleAction,
-  getNarrationByTitle,
-  createAndSendSceneMessage,
-  formatPlayerIdentifier,
-  getPlayerNumbersByGivenConditions,
-  swapCards,
-  sawCards
-} from '../../sceneUtils'
+import { moveCardsButYourOwn, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, formatPlayerIdentifier, getPlayerNumbersByGivenConditions, swapCards, sawCards } from '../../sceneUtils'
 import { validateAnswerSelection, validateCardSelection } from '../../validators'
 
 //TODO fix obligatory and scene end
@@ -17,7 +8,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
       return gamestate
     }
 
-    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)
     const updatedPlayerCards = moveCardsButYourOwn(gamestate.positions.card_positions, selected_answer, currentPlayerNumber)
 
     gamestate.players[token].card_or_mark_action = true
@@ -43,7 +34,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
       return gamestate
     }
 
-    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
     let action
 
@@ -68,7 +59,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
         if (!gamestate.players[token].player_history[title].witch_answer) {
           const showCards = sawCards(gamestate, [selected_card_positions[0]], token)
 
-          const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayersWithoutShield', gamestate.positions.shielded_cards, token)
+          const selectable_cards = getPlayerNumbersByGivenConditions(gamestate, 'allPlayersWithoutShield', token)
           const selectable_card_limit = { player: 1, center: 0 }
 
           const uniqueInformation = { selected_card: selected_card_positions[0], witch_answer: true }

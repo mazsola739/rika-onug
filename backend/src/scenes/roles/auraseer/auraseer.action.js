@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const auraseerAction = (gamestate, token, title) => {
-  const playersWithCardOrMarkActionTrue = getPlayerNumbersByGivenConditions(gamestate.players, 'cardOrMarkActionTrue')
+  const playersWithCardOrMarkActionTrue = getPlayerNumbersByGivenConditions(gamestate, 'cardOrMarkActionTrue')
 
   const messageIdentifiers = formatPlayerIdentifier(playersWithCardOrMarkActionTrue)
 

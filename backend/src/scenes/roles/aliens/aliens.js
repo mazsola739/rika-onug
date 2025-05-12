@@ -35,6 +35,8 @@ export const aliens = (gamestate, title, selected_cards) => {
   } else {
     narration.push(randomAlienInstruction)
   }
+  console.log("randomAlienInstruction: ", randomAlienInstruction)
+  console.log("alienKey: ", alienKey)
 
   gamestate.roles.aliens.instruction = randomAlienInstruction
   gamestate.roles.aliens.key = alienKey

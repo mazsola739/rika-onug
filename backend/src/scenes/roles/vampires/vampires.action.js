@@ -1,8 +1,8 @@
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const vampiresAction = (gamestate, token, title) => {
-  const vampires = getPlayerNumbersByGivenConditions(gamestate.players, 'vampires')
-  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire')
+  const vampires = getPlayerNumbersByGivenConditions(gamestate, 'vampires')
+  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate, 'nonVampire')
   const selectable_mark_limit = { mark: 1 }
 
   const isSingleNonVampire = selectable_marks.length === 1
@@ -11,7 +11,7 @@ export const vampiresAction = (gamestate, token, title) => {
   const messageIdentifiers = formatPlayerIdentifier(vampires)
   const privateMessage = isSingleVampire ? ['action_no_vampires'] : ['action_vampires', ...messageIdentifiers]
 
-  //TODO fix singleselection 
+  //TODO fix singleselection
   if (isSingleNonVampire) {
     const vampirePosition = gamestate.positions.mark_positions.vampire
     const selectedPosition = gamestate.positions.card_positions[selectable_marks[0]].mark
@@ -30,7 +30,7 @@ export const vampiresAction = (gamestate, token, title) => {
 
     return generateRoleAction(gamestate, token, title, {
       private_message: privateMessage,
-      uniqueInformation: { vampires,  mark_of_vampire: [selectable_marks[0]],},
+      uniqueInformation: { vampires, mark_of_vampire: [selectable_marks[0]] },
       scene_end: true
     })
   }

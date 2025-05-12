@@ -1,7 +1,7 @@
 import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const mysticwolfAction = (gamestate, token, title) => {
-  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayersWithoutShield', gamestate.positions.shielded_cards, token)
+  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate, 'otherPlayersWithoutShield', token)
   const selectable_card_limit = { player: 1, center: 0 }
   const scene_end = selectable_cards.length === 0
 

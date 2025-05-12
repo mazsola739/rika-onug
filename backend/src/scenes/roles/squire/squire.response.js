@@ -6,12 +6,12 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     return gamestate
   }
 
-  const werewolves = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolf', gamestate.positions.shielded_cards)
+  const werewolves = getPlayerNumbersByGivenConditions(gamestate, 'werewolfAndDreamwolf')
 
   let action = {}
 
   if (selected_answer === 'yes') {
-    const werewolvesWithoutShield = getPlayerNumbersByGivenConditions(gamestate.players, 'werewolfAndDreamwolfWithoutShield', gamestate.positions.shielded_cards)
+    const werewolvesWithoutShield = getPlayerNumbersByGivenConditions(gamestate, 'werewolfAndDreamwolfWithoutShield')
     const showCards = sawCards(gamestate, werewolvesWithoutShield, token)
 
     const messageIdentifiers = formatPlayerIdentifier(werewolvesWithoutShield)

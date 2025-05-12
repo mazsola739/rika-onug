@@ -1,7 +1,7 @@
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const apprenticeassassinAction = (gamestate, token, title) => {
-  const assassins = getPlayerNumbersByGivenConditions(gamestate.players, 'assassin')
+  const assassins = getPlayerNumbersByGivenConditions(gamestate, 'assassin')
 
   if (assassins.length > 0) {
     const messageIdentifiers = formatPlayerIdentifier(assassins)
@@ -12,7 +12,7 @@ export const apprenticeassassinAction = (gamestate, token, title) => {
       scene_end: true
     })
   } else if (assassins.length === 0) {
-    const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
+    const selectable_marks = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
     const selectable_mark_limit = { mark: 1 }
 
     if (selectable_marks.length > 1) {

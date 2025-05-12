@@ -2,7 +2,7 @@ import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sce
 import { thecountResponse } from './thecount.response'
 
 export const thecountAction = (gamestate, token, title) => {
-  const nonVampires = getPlayerNumbersByGivenConditions(gamestate.players, 'nonVampire')
+  const nonVampires = getPlayerNumbersByGivenConditions(gamestate, 'nonVampire')
   const new_vampire = gamestate.roles.vampires.new_vampire
 
   const selectable_marks = nonVampires.filter(position => !new_vampire.includes(position))

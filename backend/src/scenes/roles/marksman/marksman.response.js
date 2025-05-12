@@ -6,9 +6,9 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
   const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   //TODO if no marks only cards
-  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
+  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
   const selectable_mark_limit = { mark: 1 }
-  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayersWithoutShield', gamestate.positions.shielded_cards, token)
+  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate, 'allPlayersWithoutShield', token)
   const selectable_card_limit = { player: 1, center: 0 }
 
   if (selected_answer && selected_answer.length > 0) {
@@ -44,7 +44,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
 
     const showCards = sawCards(gamestate, [selected_card_positions[0]], token)
 
-    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
     if (currentPlayerNumber === selected_card_positions[0]) {
       gamestate.players[token].card.player_card_id = gamestate.positions.card_positions[selected_card_positions[0]].card.id

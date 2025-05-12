@@ -1,7 +1,7 @@
 import { generateRoleAction, getMarksByPositions, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const everyonemarkAction = (gamestate, token, title) => {
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
   const showMarks = getMarksByPositions(gamestate.positions.card_positions, [currentPlayerNumber])
 
   //    updatePlayerRoleAndTeam(gamestate, token, 'TANNER', 'tanner')

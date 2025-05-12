@@ -2,7 +2,7 @@ import { getPlayerNumbersByGivenConditions, generateRoleAction } from '../../sce
 
 //TODO util function?
 export const curatorAction = (gamestate, token, title) => {
-  const selectablePlayersWithNoShield = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayersWithoutShield', gamestate.positions.shielded_cards, token)
+  const selectablePlayersWithNoShield = getPlayerNumbersByGivenConditions(gamestate, 'allPlayersWithoutShield', token)
   const getSelectablePlayersWithNoArtifact = (players, artifactedCards) => players.filter(player => !artifactedCards.includes(player))
 
   const selectable_cards = getSelectablePlayersWithNoArtifact(selectablePlayersWithNoShield, gamestate.positions.artifacted_cards)

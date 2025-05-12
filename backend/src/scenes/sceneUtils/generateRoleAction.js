@@ -29,7 +29,7 @@ const updatePlayerHistory = (gamestate, token, title, updates) => {
 const updatePlayerCard = (gamestate, token) => {
   const newGamestate = { ...gamestate }
 
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(newGamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(newGamestate, 'currentPlayer', token)[0]
   const currentPlayerKnownCard = newGamestate.players[token].card
   const currentPlayerCard = newGamestate.positions.card_positions[currentPlayerNumber].card
 

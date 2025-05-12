@@ -3,7 +3,7 @@ import { getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 export const empathEveryoneAction = (gamestate, token, title, prefix) => {
   console.log(prefix) //TODO remove this line and fix?
 
-  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
+  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
 
   const uniqueInformation = {
     selectable_cards: selectablePlayerNumbers,
@@ -22,7 +22,7 @@ export const empathEveryoneAction = (gamestate, token, title, prefix) => {
 export const empathAction = (gamestate, token, title, prefix) => {
   console.log(prefix) //TODO remove this line and fix?
 
-  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
+  const selectablePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
 
   const uniqueInformation = {
     selectable_cards: selectablePlayerNumbers,

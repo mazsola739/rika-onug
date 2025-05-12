@@ -6,9 +6,9 @@ export const assassinResponse = (gamestate, token, selected_mark_positions, titl
     return gamestate
   }
 
-  const apprenticeassassins = getPlayerNumbersByGivenConditions(gamestate.players, 'apprenticeAssassin')
+  const apprenticeassassins = getPlayerNumbersByGivenConditions(gamestate, 'apprenticeAssassin')
 
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
   updateMark(gamestate, token, [selected_mark_positions[0]], ['assassin'])
 
   if (currentPlayerNumber === selected_mark_positions[0]) {

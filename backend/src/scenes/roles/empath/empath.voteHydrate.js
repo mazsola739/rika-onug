@@ -11,7 +11,7 @@ export const empathVotehydrate = async message => {
 
     const emapths = [0] // Assuming Empath is player 0; adjust logic as needed
     const emapthsTokens = getPlayerTokensByPlayerNumber(gamestate.players, emapths)
-    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+    const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
     const emapth_votes = { ...gamestate.emapth_votes }
 

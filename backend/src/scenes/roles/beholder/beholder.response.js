@@ -9,7 +9,7 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
   let action = {}
 
   if (selected_answer === 'yes') {
-    const seers = getPlayerNumbersByGivenConditions(gamestate.players, 'anySeerWithoutShield', gamestate.positions.shielded_cards)
+    const seers = getPlayerNumbersByGivenConditions(gamestate, 'anySeerWithoutShield')
     const showCards = sawCards(gamestate, seers, token)
 
     const messageIdentifiers = formatPlayerIdentifier(seers)

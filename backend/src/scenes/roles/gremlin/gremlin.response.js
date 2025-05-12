@@ -9,9 +9,9 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       return gamestate
     }
 
-    const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
+    const selectable_marks = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
     const selectable_mark_limit = { mark: 2 }
-    const selectable_cards = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayersWithoutShield', gamestate.positions.shielded_cards, token)
+    const selectable_cards = getPlayerNumbersByGivenConditions(gamestate, 'allPlayersWithoutShield', token)
     const selectable_card_limit = { player: 2, center: 0 }
 
     //TODO const isTwoSelectable = selectablePlayerNumbers.length === 2,

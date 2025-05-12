@@ -37,7 +37,7 @@ export const rascalAction = (gamestate, token, title, prefix) => {
       case 'identifier_any2even':
       case 'identifier_any2odd': {
         const evenOrOddTwo = rascalKey.replace('identifier_any2', '')
-        return getPlayerNumbersByGivenConditions(gamestate.players, evenOrOddTwo)
+        return getPlayerNumbersByGivenConditions(gamestate, evenOrOddTwo)
       }
 
       case 'identifier_any2higher':
@@ -70,7 +70,7 @@ export const rascalAction = (gamestate, token, title, prefix) => {
       case 'identifier_anyeven':
       case 'identifier_anyodd': {
         const evenOrOddOne = rascalKey.replace('identifier_any', '')
-        return getPlayerNumbersByGivenConditions(gamestate.players, evenOrOddOne)
+        return getPlayerNumbersByGivenConditions(gamestate, evenOrOddOne)
       }
 
       case 'identifier_oneneighbor':
@@ -92,11 +92,11 @@ export const rascalAction = (gamestate, token, title, prefix) => {
   } else if (randomRascalInstruction === 'rascal_drunk' || randomRascalInstruction === 'rascal_robber') {
     if (gamestate.players[token].shield) {
       return generateRoleAction(gamestate, token, title, {
-        private_message: ['action_shielded'],
+        private_message: ['action_shielded']
       })
     } else {
       selectable_cards =
-        rascalKey === 'identifier_center' ? CENTER_CARD_POSITIONS : getPlayerNumbersByGivenConditions(gamestate.players, 'otherPlayersWithoutShield', gamestate.positions.shielded_cards, token)
+        rascalKey === 'identifier_center' ? CENTER_CARD_POSITIONS : getPlayerNumbersByGivenConditions(gamestate, 'otherPlayersWithoutShield', token)
       privateMessage = [selectable_cards.length === 0 ? 'action_no_selectable_player' : randomRascalInstruction === 'rascal_drunk' ? 'action_must_one_any_other' : 'action_may_one_any_other']
     }
   } else {

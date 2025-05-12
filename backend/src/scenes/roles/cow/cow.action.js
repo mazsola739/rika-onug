@@ -2,7 +2,7 @@ import { getPlayerNeighborsByToken, generateRoleAction, getPlayerNumbersByGivenC
 
 const alienAbduction = (gamestate, token) => {
   const neighbors = getPlayerNeighborsByToken(gamestate.players, token, 'both', 1)
-  const aliens = getPlayerNumbersByGivenConditions(gamestate.players, 'alien')
+  const aliens = getPlayerNumbersByGivenConditions(gamestate, 'alien')
   return neighbors.some(neighbor => aliens.includes(neighbor))
 }
 

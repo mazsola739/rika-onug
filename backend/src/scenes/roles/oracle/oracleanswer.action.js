@@ -5,7 +5,7 @@ export const oracleanswerAction = (gamestate, token, title) => {
   const oracleQuestion = gamestate.roles.oracle.question
   const oracleAnswer = gamestate.roles.oracle.answer
   const oracleAftermath = gamestate.roles.oracle.aftermath
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
   let showCards = []
   let selectable_cards = []

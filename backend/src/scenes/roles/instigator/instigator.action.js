@@ -1,7 +1,7 @@
 import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const instigatorAction = (gamestate, token, title) => {
-  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
+  const selectable_marks = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
   const selectable_mark_limit = { mark: 1 }
 
   return generateRoleAction(gamestate, token, title, {
