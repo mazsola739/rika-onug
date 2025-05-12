@@ -11,6 +11,7 @@ export const vampiresAction = (gamestate, token, title) => {
   const messageIdentifiers = formatPlayerIdentifier(vampires)
   const privateMessage = isSingleVampire ? ['action_no_vampires'] : ['action_vampires', ...messageIdentifiers]
 
+  //TODO fix singleselection 
   if (isSingleNonVampire) {
     const vampirePosition = gamestate.positions.mark_positions.vampire
     const selectedPosition = gamestate.positions.card_positions[selectable_marks[0]].mark

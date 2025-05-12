@@ -16,6 +16,7 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
   let selectable_card_limit = { player: 0, center: 0 }
   let interactionMessage
   let scene_end = false
+  let obligatory = true
 
   if (randomBodysnatcherInstruction === 'bodysnatcher_steal') {
     const getAnyOtherPlayersByToken = (players, token) => {
@@ -29,7 +30,7 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
 
       return result
     }
-
+    //TODO fix the utils here
     switch (bodysnatcherKey) {
       case 'identifier_anyeven':
       case 'identifier_anyodd': {
@@ -56,6 +57,7 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
 
     interactionMessage = selectablePlayerNumbers.length === 0 ? 'action_no_selectable_player' : 'action_must_one_any_non_alien'
     scene_end = selectablePlayerNumbers.length === 0
+    obligatory = false
   } else if (randomBodysnatcherInstruction === 'bodysnatcher_center') {
     selectable_cards = CENTER_CARD_POSITIONS
     selectable_card_limit = { player: 0, center: 1 }
@@ -66,7 +68,7 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
   return generateRoleAction(gamestate, token, title, {
     private_message: [interactionMessage],
     selectableCards: { selectable_cards, selectable_card_limit },
-    obligatory: true,
+    obligatory,
     scene_end
   })
 }

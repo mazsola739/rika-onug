@@ -1,3 +1,4 @@
+import { SPECIAL_VILLAGER_IDS } from '../../../constants'
 import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAction, formatPlayerIdentifier, createAndSendSceneMessage, swapCards, sawCards, updateCardRoleAndTeam } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
@@ -29,9 +30,8 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     swapCards(gamestate, gamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0], token)
 
     const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
-    //TODO move it to the constants - common with drunk
-    const specialVillagerIds = [30, 1, 29, 28, 64]
-    if (specialVillagerIds.includes(gamestate.positions.card_positions[currentPlayerNumber].card.id)) {
+
+    if (SPECIAL_VILLAGER_IDS.includes(gamestate.positions.card_positions[currentPlayerNumber].card.id)) {
       updateCardRoleAndTeam(gamestate, currentPlayerNumber, 'VILLAGER', 'village')
     }
 

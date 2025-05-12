@@ -8,6 +8,10 @@
         apprenticeassassinResponse(gamestate, token, selectablePlayerNumbers, title)
   
       } else if (selectablePlayerNumbers.length > 1) { 
+
+
+      obligatories: aliens_left, aliens_right, aliens_show, aliens_newalien, aliens_alienhelper, alphawolf, assassin, bodysnatcher, copycat, cupid, diseased, doppelganger, drunk, exposer, nostradamus, oracle, rascal_witchend, rascal_drunk, temptress, thecount, thing, vampires, witch after looked centercard
+
 */
 
 /* TODO consider this solution for reset the players card, like at drunk
@@ -27,6 +31,9 @@
 //TODO check everywhere scene_end and/or obligatory set on value?
 
 //TODO dreamwolf?
+
+/* export const priest_kickoff = 'PRIEST,'
+export const priest_kickoff2 = 'give yourself a Mark of Clarity. You may also give any other player a Mark of Clarity.' */
 
 export * from './aliens/aliens.action'
 export * from './aliens/aliens.constants'

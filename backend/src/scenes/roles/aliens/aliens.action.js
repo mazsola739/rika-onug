@@ -58,7 +58,7 @@ export const aliensAction = (gamestate, token, title) => {
 
     return players[neighborIndex]
   }
-
+ //TODO obligatories: aliens_left, aliens_right, aliens_show, aliens_newalien, aliens_alienhelper
   switch (randomAlienInstruction) {
     case 'aliens_stare': //aliens_stare = 'Just stare at each other.'
       scene_end = true
