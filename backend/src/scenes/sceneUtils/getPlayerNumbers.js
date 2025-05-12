@@ -1,6 +1,6 @@
 import { ALIEN_IDS, SUPER_VILLAIN_IDS, VAMPIRE_IDS, MASONS, WEREVOLVES_WITHOUT_DREAMWOLF, WEREWOLVES } from '../../constants'
 
-//TODO REFACTOR MAYBE ONLY GAMSTATE NEED? 
+//TODO REFACTOR MAYBE ONLY GAMSTATE NEED?
 const filters = {
   //current player
   currentPlayer: (player, shieldedCards, token, playerToken) => playerToken === token,
@@ -28,7 +28,11 @@ const filters = {
   //aliens
   alien: player => ALIEN_IDS.includes(player.card.player_role_id),
   alienWithoutShield: (player, shieldedCards) => ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
+  nonAlienEven: (player) => !ALIEN_IDS.includes(player.card.player_role_id) && parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
+  nonAlienOdd: (player) => !ALIEN_IDS.includes(player.card.player_role_id) && parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
   nonAlienWithoutShield: (player, shieldedCards) => !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
+  nonAlienWithoutShieldEven: (player, shieldedCards) => !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
+  nonAlienWithoutShieldOdd: (player, shieldedCards) => !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
   zerb: player => player.card.player_role_id === 54,
   groob: player => player.card.player_role_id === 47,
 
@@ -66,7 +70,11 @@ const filters = {
   madscientist: player => player.card.player_role_id === 63,
 
   //mark or card action done
-  cardOrMarkActionTrue: player => player.card_or_mark_action === true
+  cardOrMarkActionTrue: player => player.card_or_mark_action === true,
+
+  //even or odd players
+  even: player => parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
+  odd: player => parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0
 }
 
 export const getPlayerNumbersByGivenConditions = (players, filter, shieldedCards = [], token = null) => {
@@ -80,4 +88,41 @@ export const getPlayerNumbersByGivenConditions = (players, filter, shieldedCards
     }
   }
   return result
+}
+
+export const getPartOfGroupByToken = (players, token, randomInstruction) => {
+  const tokens = Object.keys(players)
+  const totalPlayers = tokens.length
+
+  const groupHeadsNumber = parseInt(players[token].player_number.split('_')[1], 10)
+  const partOfGroup = [`player_${groupHeadsNumber}`]
+
+  const side = randomInstruction.includes('left') ? 'left' : randomInstruction.includes('right') ? 'right' : 'each'
+  const amount = randomInstruction.includes('4') ? 4 : randomInstruction.includes('3') ? 3 : randomInstruction.includes('2') ? 2 : 1
+
+  const getPartOfGroupNumber = index => {
+    let partOfGroupNumber = groupHeadsNumber + index
+    if (partOfGroupNumber <= 0) {
+      partOfGroupNumber += totalPlayers
+    } else if (partOfGroupNumber > totalPlayers) {
+      partOfGroupNumber -= totalPlayers
+    }
+    return partOfGroupNumber
+  }
+
+  if (side === 'each' || side === 'left') {
+    for (let i = 1; i <= amount; i++) {
+      const partOfGroupLeftSideNumber = getPartOfGroupNumber(-i)
+      partOfGroup.push(`player_${partOfGroupLeftSideNumber}`)
+    }
+  }
+
+  if (side === 'each' || side === 'right') {
+    for (let i = 1; i <= amount; i++) {
+      const partOfGroupRightSideNumber = getPartOfGroupNumber(i)
+      partOfGroup.push(`player_${partOfGroupRightSideNumber}`)
+    }
+  }
+
+  return partOfGroup
 }

@@ -31,10 +31,6 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
       new_alien_helper = [selected_card_positions[0]]
       private_message = ['action_voted_together', 'action_turned_alienhelper', ...formatPlayerIdentifier([selected_card_positions[0]])]
       break
-
-    default:
-      console.warn(`Unknown alien instruction: ${randomAlienInstruction}`)
-      break
   }
 
   const action = generateRoleAction(gamestate, token, title, {

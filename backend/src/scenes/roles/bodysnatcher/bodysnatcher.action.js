@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { generateRoleAction, getAnyEvenOrOddPlayerNumbers, getPlayerNeighborsByToken, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
+import { generateRoleAction, getPlayerNeighborsByToken, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const bodysnatcherAction = (gamestate, token, title, prefix) => {
   if (gamestate.players[token].shield) {
@@ -35,7 +35,7 @@ export const bodysnatcherAction = (gamestate, token, title, prefix) => {
       case 'identifier_anyeven':
       case 'identifier_anyodd': {
         const evenOrOdd = bodysnatcherKey.replace('identifier_', '').replace('any', '')
-        selectablePlayers = getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd)
+        selectablePlayers = getPlayerNumbersByGivenConditions(gamestate.players, evenOrOdd)
         break
       }
       case 'identifier_leftneighbor':

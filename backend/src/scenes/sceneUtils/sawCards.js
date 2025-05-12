@@ -1,4 +1,4 @@
-import { getCardIdsByPositions } from './getCardIdsByPositions'
+import { getCardIdsByPositions } from './getCardIds'
 
 export const sawCards = (gamestate, positions, token) => {
   if (positions.some(position => gamestate.positions.card_positions[position].card.id === gamestate.players[token].card.player_original_id)) {

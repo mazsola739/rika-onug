@@ -1,5 +1,5 @@
-import { getPlayerNumbersByGivenConditions } from './getPlayerNumbersByGivenConditions'
-import { updatePlayerKnownMark } from './updatePlayerKnownMark'
+import { getPlayerNumbersByGivenConditions } from './getPlayerNumbers'
+import { updatePlayerKnownMark } from './updateMark'
 
 export const swapMarks = (gamestate, token, position1, position2, canSee) => {
   const mark1 = { ...gamestate.positions.card_positions[position1].mark }

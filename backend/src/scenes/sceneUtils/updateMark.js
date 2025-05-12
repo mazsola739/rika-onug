@@ -18,3 +18,7 @@ export const updateMark = (gamestate, token, positions, marks) => {
 
   gamestate.players[token].card_or_mark_action = true
 }
+
+export const updatePlayerKnownMark = (gamestate, token, mark) => {
+  gamestate.players[token].card.player_mark = mark
+}

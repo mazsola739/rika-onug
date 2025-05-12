@@ -1,93 +1,58 @@
-import { getPlayerNumbersByGivenConditions, formatPlayerIdentifier, getSelectablePlayersWithNoShield, getAnyEvenOrOddPlayerNumbers, getCardIdsByPositions, generateRoleAction, getAllPlayerTokens, updateCardRoleAndTeam } from '../../sceneUtils'
+import { hasCow } from '../../conditions'
+import { getPlayerNumbersByGivenConditions, formatPlayerIdentifier, generateRoleAction, sawCards, getNeighborByPosition, moveCards } from '../../sceneUtils'
 
 export const aliensAction = (gamestate, token, title) => {
-  // TODO fix: only work with cow, if in the selected cards
   const aliens = getPlayerNumbersByGivenConditions(gamestate.players, 'alien')
-  const cow = getPlayerNumbersByGivenConditions(gamestate.players, 'cow')
 
-  const aliensWithoutShield = getPlayerNumbersByGivenConditions(gamestate.players, 'alienWithoutShield', gamestate.positions.shielded_cards)
-  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const cow = hasCow ? getPlayerNumbersByGivenConditions(gamestate.players, 'cow') : []
+  const alienIdentifiers = formatPlayerIdentifier(aliens)
+
+  const cowIdentifiers = formatPlayerIdentifier(cow)
+  const cowMessage = [hasCow ? 'action_no_cow' : 'action_cow', ...cowIdentifiers, 'POINT']
+  const privateMessage = aliens.length === 1 ? ['action_no_aliens', ...cowMessage] : ['action_aliens', ...alienIdentifiers, 'POINT', ...cowMessage]
 
   const randomAlienInstruction = gamestate.roles.aliens.instruction
   const alienKey = gamestate.roles.aliens.key
 
-  const isSingleAlien = aliens.length === 1
-
   let selectable_cards = []
   let selectable_card_limit = { player: 0, center: 0 }
-  let selectablePlayers = []
   let showCards = []
-  let obligatory = false
-  let scene_end = false
   let vote = false
   let new_alien = []
   let new_alien_helper = []
 
-  const messageIdentifiers = formatPlayerIdentifier(aliens)
-  let privateMessage = isSingleAlien ? ['action_no_aliens'] : ['action_aliens', ...messageIdentifiers, 'POINT']
+  
+  const evenOrOdd = alienKey[0].includes('even') ? 'Even' : 'Odd'
+  const isEvenOrOdd = alienKey[0].includes('even') || alienKey[0].includes('odd')
+  const isAny = alienKey[0].includes('any')
+  const isPlayer = alienKey[0].includes('identifier_player')
 
-  if (alienKey.length > 0 && alienKey[0].includes('identifier_player')) {
-    const selectablePlayerNumbers = alienKey.filter(key => key.includes('identifier_player')).map(key => key.replace('identifier_player', 'player_'))
+  const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate.players, 'currentPlayer', [], token)[0]
+  const aliensWithoutShield = getPlayerNumbersByGivenConditions(gamestate.players, 'alienWithoutShield', gamestate.positions.shielded_cards)
+  const aliensWithoutShieldIdentifiers = formatPlayerIdentifier(aliensWithoutShield)
+  
+  const anyWihtoutShield = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayersWithoutShield', gamestate.positions.shielded_cards)
+  const anyWihtoutShieldIdentifiers = formatPlayerIdentifier(anyWihtoutShield)
+  const evenOrOddPlayers = getPlayerNumbersByGivenConditions(gamestate.players, `nonAlien${evenOrOdd}`)
+  const evenOrOddPlayersIdentifiers = formatPlayerIdentifier(evenOrOddPlayers)
+  const selectablePlayerNumbers = isPlayer ? alienKey.filter(key => key.includes('identifier_player')).map(key => key.replace('identifier_player', 'player_')) : []
+  const alienKeyIdentifiers = formatPlayerIdentifier(selectablePlayerNumbers)
+  const message = isEvenOrOdd ? evenOrOddPlayersIdentifiers : isAny ? anyWihtoutShieldIdentifiers : alienKeyIdentifiers
 
-    selectablePlayers = getSelectablePlayersWithNoShield(selectablePlayerNumbers, gamestate.positions.shielded_cards)
-  } else if (alienKey.length > 0) {
-    //TODO fix alien non alien, odd even or everyone part.
-    const evenOrOdd = alienKey[0].includes('even') ? 'even' : alienKey[0].includes('odd') ? 'odd' : ''
+  const evenOrOddWithoutShield = getPlayerNumbersByGivenConditions(gamestate.players, `nonAlienWithoutShield${evenOrOdd}`, gamestate.positions.shielded_cards)
+  const evenOrOddWithoutShieldIdentifiers = formatPlayerIdentifier(evenOrOddWithoutShield)
+  const anyPlayers = getPlayerNumbersByGivenConditions(gamestate.players, 'allPlayers')
+  const anyPlayersIdentifiers = formatPlayerIdentifier(anyPlayers)
+  const newMessage = isEvenOrOdd ? evenOrOddWithoutShieldIdentifiers : anyPlayersIdentifiers
 
-    const evenOrOddPlayerNumbers = evenOrOdd ? getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOdd) : getAllPlayerTokens(gamestate.players)
 
-    if (randomAlienInstruction === 'aliens_alienhelper') {
-      const getNonAlienPlayerNumbersWithNoShield = (players, aliens, shieldedCards) => players.filter(player => !aliens.includes(player) && !shieldedCards.includes(player))
-      selectablePlayers = getNonAlienPlayerNumbersWithNoShield(evenOrOddPlayerNumbers, aliens, gamestate.positions.shielded_cards)
-    } else {
-      selectablePlayers = getSelectablePlayersWithNoShield(evenOrOddPlayerNumbers, gamestate.positions.shielded_cards)
-    }
-  }
-
-  const isSingleSelectionOption = selectablePlayers.length === 1
-
-  const getNeighborByPosition = (players, currentPlayerNumber, direction) => {
-    const currentPlayer = players.indexOf(currentPlayerNumber)
-    let neighborIndex
-
-    if (direction === 'left') {
-      neighborIndex = (currentPlayer - 1 + players.length) % players.length
-    } else if (direction === 'right') {
-      neighborIndex = (currentPlayer + 1) % players.length
-    }
-
-    return players[neighborIndex]
-  }
- //TODO obligatories: aliens_left, aliens_right, aliens_show, aliens_newalien, aliens_alienhelper
   switch (randomAlienInstruction) {
-    case 'aliens_stare': //aliens_stare = 'Just stare at each other.'
-      scene_end = true
-      break
-    case 'aliens_view': //TODO fix showcards //aliens_view = 'Each alien may secretly view a card from: '
+    case 'aliens_view': //aliens_view = 'Each alien may secretly view a card from: '
     case 'aliens_allview': //aliens_allview = 'All aliens together may view a card from: '
-      if (gamestate.players[token].shield) {
-        privateMessage.push('action_shielded')
-        scene_end = true
-      } else {
-        privateMessage.push('action_may_one_any')
-        if (!isSingleSelectionOption) {
-          selectable_cards = selectablePlayers
-          selectable_card_limit = { player: 1, center: 0 }
-        }
-        if (randomAlienInstruction === 'aliens_allview') {
-          // TODO: Update logic for obligatory and scene_end
-          //vote = true
-          obligatory = false //todo change to true if fixed
-          scene_end = true //todo
-          privateMessage.push('FYI_TBD', 'action_must_one_any_other')
-          if (selectablePlayers.length === 0) {
-            privateMessage.push('no_selectable_option')
-            scene_end = true
-          }
-        }
-      }
+      selectable_cards = isEvenOrOdd ? evenOrOddPlayers : isAny ? anyWihtoutShield : selectablePlayerNumbers
+      privateMessage.push(...message)
       break
-    //TODO fix if no possible alien to move
+
     case 'aliens_left': //aliens_left = 'Give your card to the alien on your left.'
     case 'aliens_right': //aliens_right = 'Give your card to the alien on your right.'
       if (gamestate.players[token].shield) {
@@ -95,119 +60,35 @@ export const aliensAction = (gamestate, token, title) => {
       } else {
         const direction = randomAlienInstruction.includes('left') ? 'left' : 'right'
         const neighbor = getNeighborByPosition(aliensWithoutShield, currentPlayerNumber, direction)
-
-        const moveCards = (cards, direction, movablePlayers) => {
-          const playerCards = Object.fromEntries(Object.entries(cards).filter(([key]) => key.startsWith('player_')))
-          const staticCards = Object.fromEntries(Object.entries(playerCards).filter(([key]) => !movablePlayers.includes(key)))
-          const movableCards = movablePlayers.map(player => playerCards[player])
-
-          const shiftAmount = direction === 'right' ? 1 : -1
-
-          const shiftedMovableCards = movablePlayers.reduce((acc, _player, index) => {
-            const newIndex = (index + shiftAmount + movablePlayers.length) % movablePlayers.length
-            acc[movablePlayers[newIndex]] = movableCards[index]
-            return acc
-          }, {})
-
-          const updatedPlayerCards = { ...playerCards, ...staticCards, ...shiftedMovableCards }
-
-          return updatedPlayerCards
-        }
-
-        const updatedPlayerCards = moveCards(gamestate.positions.card_positions, direction, aliensWithoutShield)
-        gamestate.players[token].card_or_mark_action = true
-
-        if (!gamestate.players[token].moved_card) {
-          gamestate.positions.card_positions = {
-            ...gamestate.positions.card_positions,
-            ...updatedPlayerCards
-          }
-          Object.keys(gamestate.players).forEach(playerToken => {
-            gamestate.players[playerToken].moved_card = true
-          })
-        }
-        gamestate.players[token].card.player_card_id = 87
-
+        moveCards(gamestate, token, direction, aliensWithoutShield)
         privateMessage.push('action_moved_yours', ...formatPlayerIdentifier([neighbor]))
       }
-      scene_end = true
-
       break
     case 'aliens_show': //aliens_show = 'Show your alien card to the other aliens.'
-      //TODO const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
-      //    updatePlayerKnownCard(gamestate, token, gamestate.players[token].card.player_card_id, 'TANNER', gamestate.players[token].card.player_role_id, 'tanner')
-      showCards = getCardIdsByPositions(gamestate.positions.card_positions, aliensWithoutShield)
-
-      showCards.forEach(entry => {
-        const key = Object.keys(entry)[0]
-        const cardId = entry[key]
-
-        const playerCardPosition = gamestate.positions.card_positions[key]
-
-        if (playerCardPosition && playerCardPosition.card) {
-          const card = playerCardPosition.card
-
-          if (gamestate.players[token].card.player_original_id === cardId && currentPlayerNumber !== key) {
-            gamestate.players[token].card.player_card_id = 87
-          } else if (currentPlayerNumber === key) {
-            gamestate.players[token].card.player_card_id = card.id
-            gamestate.players[token].card.player_team = card.team
-          }
-        }
-      })
-
-      if (gamestate.players[token].shield) {
-        privateMessage.push('action_shielded')
-      } else {
-        privateMessage.push(...formatPlayerIdentifier(aliensWithoutShield))
-      }
-
-      scene_end = true
+      showCards = sawCards(gamestate, aliensWithoutShield, token)
+      privateMessage.push('action_saw_card', ...aliensWithoutShieldIdentifiers)
       break
     case 'aliens_timer': //aliens_timer = 'You have shortened the game timer by one half.'
       gamestate.vote_timer /= 2
       privateMessage.push('action_timer')
-      scene_end = true
-
       break
     case 'aliens_newalien': //aliens_newalien = 'Tap one of the fists to turn that player into an alien from: '
-    case 'aliens_alienhelper': //aliens_alienhelper = "Tap one of the fists to turn that player into alien team, but isn't an alien from: "
-      // vote = true
-      privateMessage.push('FYI_TBD', 'action_must_one_any_other')
-      obligatory = false //todo change to true if fixed
-      scene_end = true //todo delete if fixed
+    case 'aliens_alienhelper':
+      //aliens_alienhelper = "Tap one of the fists to turn that player into alien team, but isn't an alien from: "
 
-      if (isSingleSelectionOption) {
-        gamestate.positions.card_positions[selectablePlayers[0]].card.team = 'alien'
-        new_alien = [selectablePlayers[0]]
-
-        scene_end = true
-        let message = ['action_turned_alienhelper', ...formatPlayerIdentifier([selectablePlayers[0]])]
-
-        if (randomAlienInstruction === 'aliens_newalien') {
-          updateCardRoleAndTeam(gamestate, selectablePlayers[0], gamestate.positions.card_positions[selectablePlayers[0]].card.role, 'alien')
-          message = ['action_turned_newalien', ...formatPlayerIdentifier([selectablePlayers[0]])]
-        }
-        privateMessage.push(...message)
-      } else if (selectablePlayers.length === 0) {
-        privateMessage.push('no_selectable_option')
-        scene_end = true
-      } else {
-        selectable_cards = selectablePlayers
-        selectable_card_limit = { player: 1, center: 0 }
-      }
-
+      selectable_cards = isEvenOrOdd ? evenOrOddWithoutShield : anyPlayers
+      privateMessage.push(...newMessage)
       break
   }
 
-  const uniqueInformation = { aliens, cow, vote, new_alien, new_alien_helper }
+  const obligatory = ['aliens_left', 'aliens_right', 'aliens_show', 'aliens_newalien', 'aliens_alienhelper'].includes(randomAlienInstruction)
 
   return generateRoleAction(gamestate, token, title, {
     private_message: privateMessage,
     showCards,
     selectableCards: { selectable_cards, selectable_card_limit },
-    uniqueInformation,
+    uniqueInformation: { aliens, cow, vote, new_alien, new_alien_helper },
     obligatory,
-    scene_end
+    scene_end: !obligatory
   })
 }

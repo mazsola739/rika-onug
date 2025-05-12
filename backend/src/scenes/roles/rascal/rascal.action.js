@@ -1,5 +1,5 @@
 import { CENTER_CARD_POSITIONS } from '../../../constants'
-import { generateRoleAction, getAllPlayerTokens, getAnyEvenOrOddPlayerNumbers, getPlayerNeighborsByToken, getPlayerNumbersByGivenConditions, getSelectablePlayersWithNoShield } from '../../sceneUtils'
+import { generateRoleAction, getAllPlayerTokens, getPlayerNeighborsByToken, getPlayerNumbersByGivenConditions, getSelectablePlayersWithNoShield } from '../../sceneUtils'
 
 export const rascalAction = (gamestate, token, title, prefix) => {
   const randomRascalInstruction = gamestate.roles[prefix].instruction
@@ -37,7 +37,7 @@ export const rascalAction = (gamestate, token, title, prefix) => {
       case 'identifier_any2even':
       case 'identifier_any2odd': {
         const evenOrOddTwo = rascalKey.replace('identifier_any2', '')
-        return getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOddTwo)
+        return getPlayerNumbersByGivenConditions(gamestate.players, evenOrOddTwo)
       }
 
       case 'identifier_any2higher':
@@ -70,7 +70,7 @@ export const rascalAction = (gamestate, token, title, prefix) => {
       case 'identifier_anyeven':
       case 'identifier_anyodd': {
         const evenOrOddOne = rascalKey.replace('identifier_any', '')
-        return getAnyEvenOrOddPlayerNumbers(gamestate.players, evenOrOddOne)
+        return getPlayerNumbersByGivenConditions(gamestate.players, evenOrOddOne)
       }
 
       case 'identifier_oneneighbor':

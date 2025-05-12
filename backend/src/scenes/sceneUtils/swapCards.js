@@ -1,4 +1,4 @@
-import { getPlayerNumbersByGivenConditions } from './getPlayerNumbersByGivenConditions'
+import { getPlayerNumbersByGivenConditions } from './getPlayerNumbers'
 
 export const swapCards = (gamestate, position1, position2, token) => {
   const card1 = { ...gamestate.positions.card_positions[position1].card }
