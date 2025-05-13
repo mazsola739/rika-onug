@@ -5,7 +5,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
   const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   if (selected_answer && selected_answer.length > 0) {
-    if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+    if (!validateAnswerSelection(selected_answer, gamestate, token, title)) {
       return gamestate
     }
 
@@ -21,7 +21,6 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_two_any'],
         selectableCards: { selectable_cards, selectable_card_limit },
-        uniqueInformation: { selected_answer },
         obligatory: true
       })
 
@@ -32,7 +31,6 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_two_any'],
         selectableMarks: { selectable_marks, selectable_mark_limit },
-        uniqueInformation: { selected_answer },
         obligatory: true
       })
 
@@ -41,7 +39,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       return gamestate
     }
   } else if (selected_card_positions && selected_card_positions.length > 0) {
-    if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+    if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
       return gamestate
     }
 
@@ -53,7 +51,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
-      uniqueInformation: { swapped_cards: [position1, position2], selected_card_positions },
+      uniqueInformation: { swapped_cards: [position1, position2] },
       scene_end: true
     })
 
@@ -61,7 +59,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     return gamestate
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
-    if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+    if (!validateMarkSelection(selected_mark_positions, gamestate, token, title)) {
       return gamestate
     }
 
@@ -71,7 +69,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_swapped_marks', ...messageIdentifiers, 'POINT'],
-      uniqueInformation: { swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]], selected_mark_positions },
+      uniqueInformation: { swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]] },
       scene_end: true
     })
 

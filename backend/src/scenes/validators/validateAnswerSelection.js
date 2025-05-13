@@ -1,14 +1,16 @@
 import { logTrace } from '../../log'
 
-//TODO get gamestate from origin, not as varriant
-
-export const validateAnswerSelection = (selected_answer, player_history, title) => {
+export const validateAnswerSelection = (selected_answer, gamestate, token, title) => {
   logTrace(`validateAnswerSelection called when actual scene is: ${title}`)
 
-  if (!selected_answer || !player_history[title].answer_options.includes(selected_answer)) {
+  const player_history = gamestate.players[token]?.player_history[title]
+
+  if (!selected_answer || !player_history.answer_options.includes(selected_answer)) {
     return false
   }
 
-  logTrace(`validateAnswerSelection finished and everything all right: ${title}`)
+  gamestate.players[token].player_history[title].selected_answer = selected_answer
+
+  logTrace(`validateAnswerSelection finished successfully for scene: ${title}`)
   return true
 }

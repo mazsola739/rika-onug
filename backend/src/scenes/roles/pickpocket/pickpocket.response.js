@@ -3,7 +3,7 @@ import { sawMarks } from '../../sceneUtils/sawMarks'
 import { validateMarkSelection } from '../../validators'
 
 export const pickpocketResponse = (gamestate, token, selected_mark_positions, title) => {
-  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+  if (!validateMarkSelection(selected_mark_positions, gamestate, token, title)) {
     return gamestate
   }
 
@@ -16,7 +16,7 @@ export const pickpocketResponse = (gamestate, token, selected_mark_positions, ti
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_swapped_marks', ...messageIdentifiers, 'POINT', 'action_own_mark'],
     showMarks,
-    uniqueInformation: { swapped_marks: [currentPlayerNumber, selected_mark_positions[0]], selected_mark_positions },
+    uniqueInformation: { swapped_marks: [currentPlayerNumber, selected_mark_positions[0]] },
     scene_end: true
   })
 

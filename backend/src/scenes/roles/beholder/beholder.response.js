@@ -2,7 +2,7 @@ import { getPlayerNumbersByGivenConditions, formatPlayerIdentifier, generateRole
 import { validateAnswerSelection } from '../../validators'
 
 export const beholderResponse = (gamestate, token, selected_answer, title) => {
-  if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+  if (!validateAnswerSelection(selected_answer, gamestate, token, title)) {
     return gamestate
   }
 
@@ -17,13 +17,12 @@ export const beholderResponse = (gamestate, token, selected_answer, title) => {
     action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_saw_card', ...messageIdentifiers],
       showCards,
-      uniqueInformation: { seers, selected_answer },
+      uniqueInformation: { seers },
       scene_end: true
     })
   } else if (selected_answer === 'no') {
     action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_nothing'],
-      uniqueInformation: { selected_answer },
       scene_end: true
     })
   }

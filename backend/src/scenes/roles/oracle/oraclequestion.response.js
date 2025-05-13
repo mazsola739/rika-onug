@@ -2,7 +2,7 @@ import { generateRoleAction, getNarrationByTitle, createAndSendSceneMessage } fr
 import { validateAnswerSelection } from '../../validators'
 
 export const oraclequestionResponse = (gamestate, token, selected_answer, title) => {
-  if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+  if (!validateAnswerSelection(selected_answer, gamestate, token, title)) {
     return gamestate
   }
 
@@ -22,7 +22,6 @@ export const oraclequestionResponse = (gamestate, token, selected_answer, title)
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_oracle_answer', `button_label_${selected_answer}`],
-    uniqueInformation: { question: oracleQuestion, selected_answer },
     scene_end: true
   })
 

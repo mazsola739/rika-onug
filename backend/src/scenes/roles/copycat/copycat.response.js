@@ -2,10 +2,10 @@ import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, create
 import { validateCardSelection } from '../../validators'
 
 export const copycatResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
     return gamestate
   }
-  
+
   const { id, role, team } = gamestate.positions.card_positions[selected_card_positions[0]].card
   const { player_card_id, player_role_id, player_role } = gamestate.players[token].card
 
@@ -20,7 +20,6 @@ export const copycatResponse = (gamestate, token, selected_card_positions, title
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_you_are_that_role', `${player_role}`],
-    uniqueInformation: { selected_card_positions },
     showCards,
     scene_end: true
   })

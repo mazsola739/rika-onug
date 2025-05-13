@@ -4,7 +4,7 @@ import { validateCardSelection } from '../../validators'
 
 //TODO refact
 export const paranormalinvestigatorResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
     return gamestate
   }
 
@@ -33,7 +33,6 @@ export const paranormalinvestigatorResponse = (gamestate, token, selected_card_p
   //TODO private message
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])[0], showCards.length === 2 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
-    uniqueInformation: { selected_card_positions },
     showCards,
     scene_end: true
   })

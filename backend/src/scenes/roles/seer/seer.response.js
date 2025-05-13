@@ -2,7 +2,7 @@ import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, create
 import { validateCardSelection } from '../../validators'
 
 export const seerResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
     return gamestate
   }
 
@@ -22,7 +22,6 @@ export const seerResponse = (gamestate, token, selected_card_positions, title) =
   //TODO private message
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])[0], showCards.length > 1 ? formatPlayerIdentifier(selected_card_positions)[1] : ''],
-    uniqueInformation: { selected_card_positions },
     showCards,
     scene_end: true
   })

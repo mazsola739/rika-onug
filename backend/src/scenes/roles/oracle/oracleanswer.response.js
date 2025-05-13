@@ -2,7 +2,7 @@ import { formatPlayerIdentifier, generateRoleAction, getCardIdsByPositions, getN
 import { validateCardSelection } from '../../validators'
 
 export const oracleanswerResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
     return gamestate
   }
 
@@ -33,7 +33,6 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
 
     action = generateRoleAction(gamestate, token, title, {
       private_message: message,
-      uniqueInformation: { selected_card_positions },
       showCards: selectedCards
     })
   }

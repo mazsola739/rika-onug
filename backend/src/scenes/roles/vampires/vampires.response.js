@@ -2,7 +2,7 @@ import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const vampiresResponse = async (gamestate, token, selected_mark_positions, title) => {
-  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+  if (!validateMarkSelection(selected_mark_positions, gamestate, token, title)) {
     return gamestate
   }
 
@@ -22,7 +22,6 @@ export const vampiresResponse = async (gamestate, token, selected_mark_positions
 
   return generateRoleAction(gamestate, token, title, {
     private_message: ['action_mark_of_vampire', ...formatPlayerIdentifier([selected_mark_positions[0]])],
-    uniqueInformation: { mark_of_vampire: [selected_mark_positions[0]], selected_mark_positions },
     scene_end: true
   })
 }

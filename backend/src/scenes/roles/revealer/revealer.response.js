@@ -4,7 +4,7 @@ import { validateCardSelection } from '../../validators'
 
 //TODO better response message
 export const revealerResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
     return gamestate
   }
 
@@ -19,7 +19,6 @@ export const revealerResponse = (gamestate, token, selected_card_positions, titl
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_flipped_card', ...formatPlayerIdentifier([selected_card_positions[0]])],
     showCards,
-    uniqueInformation: { selected_card_positions },
     scene_end: true
   })
 

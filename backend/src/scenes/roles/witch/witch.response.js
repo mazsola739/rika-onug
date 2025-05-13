@@ -3,7 +3,7 @@ import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAct
 import { validateCardSelection } from '../../validators'
 
 export const witchResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
     return gamestate
   }
 
@@ -18,7 +18,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_must_one_any'],
       selectableCards: { selectable_cards, selectable_card_limit },
-      uniqueInformation: { selected_center_card: selected_card_positions[0], selected_card_positions },
+      uniqueInformation: { selected_center_card: selected_card_positions[0] },
       showCards,
       obligatory: true
     })
@@ -45,7 +45,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
 
     const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
-      uniqueInformation: { swapped_cards: [gamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0]], selected_card_positions },
+      uniqueInformation: { swapped_cards: [gamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0]] },
       scene_end: true
     })
 

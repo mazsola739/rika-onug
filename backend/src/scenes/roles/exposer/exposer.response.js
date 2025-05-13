@@ -2,7 +2,7 @@ import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, create
 import { validateCardSelection } from '../../validators'
 
 export const exposerResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
     return gamestate
   }
   const limit = gamestate.players[token].player_history[title].selectable_card_limit.center
@@ -13,7 +13,6 @@ export const exposerResponse = (gamestate, token, selected_card_positions, title
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_flipped_card', ...formatPlayerIdentifier(selected_card_positions.slice(0, limit))],
     showCards,
-    uniqueInformation: { selected_card_positions },
     scene_end: true
   })
 

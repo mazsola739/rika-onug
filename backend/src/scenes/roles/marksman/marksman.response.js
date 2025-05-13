@@ -12,7 +12,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
   const selectable_card_limit = { player: 1, center: 0 }
 
   if (selected_answer && selected_answer.length > 0) {
-    if (!validateAnswerSelection(selected_answer, gamestate.players[token].player_history, title)) {
+    if (!validateAnswerSelection(selected_answer, gamestate, token, title)) {
       return gamestate
     }
 
@@ -20,7 +20,6 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_one_any'],
         selectableCards: { selectable_cards, selectable_card_limit },
-        uniqueInformation: { selected_answer },
         obligatory: true
       })
 
@@ -31,7 +30,6 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_one_any'],
         selectableMarks: { selectable_marks, selectable_mark_limit },
-        uniqueInformation: { selected_answer },
         obligatory: true
       })
 
@@ -40,7 +38,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       return gamestate
     }
   } else if (selected_card_positions && selected_card_positions.length > 0) {
-    if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+    if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
       return gamestate
     }
 
@@ -61,7 +59,6 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])],
         showCards,
-        uniqueInformation: { selected_card_positions },
         scene_end: true
       })
     } else {
@@ -73,7 +70,6 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_must_one_any'],
         showCards: showCards,
-        uniqueInformation: { selected_card_positions },
         selectableMarks: { selectable_marks, selectable_mark_limit },
         obligatory: true
       })
@@ -83,7 +79,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
 
     return gamestate
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
-    if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+    if (!validateMarkSelection(selected_mark_positions, gamestate, token, title)) {
       return gamestate
     }
 
@@ -109,7 +105,6 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
         private_message: ['action_saw_mark', ...formatPlayerIdentifier([selected_mark_positions[0]]), 'action_must_one_any'],
         showMarks,
         selectableCards: { selectable_cards, selectable_card_limit },
-        uniqueInformation: { selected_mark_positions },
         obligatory: true
       })
     }

@@ -4,7 +4,7 @@ import { validateCardSelection } from '../../validators'
 
 //TODO refact
 export const nostradamusResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
     return gamestate
   }
   let limit
@@ -50,7 +50,6 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
       showCards.length >= 2 ? formatPlayerIdentifier(selected_card_positions)[1] : '',
       showCards.length === 3 ? formatPlayerIdentifier(selected_card_positions)[2] : ''
     ],
-    uniqueInformation: { selected_card_positions },
     showCards
   })
 

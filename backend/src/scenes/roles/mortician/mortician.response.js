@@ -3,7 +3,7 @@ import { validateCardSelection } from '../../validators'
 
 //TODO neighbors
 export const morticianResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
     return gamestate
   }
   const limit = gamestate.players[token].player_history[title].selectable_card_limit.player
@@ -11,7 +11,6 @@ export const morticianResponse = (gamestate, token, selected_card_positions, tit
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_saw_card', ...formatPlayerIdentifier(selected_card_positions.slice(0, limit))],
-    uniqueInformation: { selected_card_positions },
     showCards
   })
 

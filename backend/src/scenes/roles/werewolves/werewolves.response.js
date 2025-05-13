@@ -3,7 +3,7 @@ import { sawCards } from '../../sceneUtils/sawCards'
 import { validateCardSelection } from '../../validators'
 
 export const werewolvesResponse = (gamestate, token, selected_card_positions, title) => {
-  if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
+  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
     return gamestate
   }
 
@@ -13,7 +13,6 @@ export const werewolvesResponse = (gamestate, token, selected_card_positions, ti
   const action = generateRoleAction(gamestate, token, title, {
     private_message,
     showCards,
-    uniqueInformation: { selected_card_positions },
     scene_end: true
   })
 

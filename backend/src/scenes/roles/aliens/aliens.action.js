@@ -83,7 +83,7 @@ export const aliensAction = (gamestate, token, title) => {
     }
     case 'aliens_newalien': // 'Tap one of the fists to turn that player into an alien from: '
     case 'aliens_alienhelper': // "Tap one of the fists to turn that player into alien team, but isn't an alien from: "
-      vote = randomAlienInstruction !== 'aliens_view'
+      vote = true
       if (messagePositions.left === 0) {
         privateMessage.push('action_no_selectable_player')
       } else if (messagePositions.left === 1) {

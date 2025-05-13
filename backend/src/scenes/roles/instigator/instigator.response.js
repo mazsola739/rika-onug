@@ -2,7 +2,7 @@ import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, create
 import { validateMarkSelection } from '../../validators'
 
 export const instigatorResponse = (gamestate, token, selected_mark_positions, title) => {
-  if (!validateMarkSelection(selected_mark_positions, gamestate.players[token].player_history, title)) {
+  if (!validateMarkSelection(selected_mark_positions, gamestate, token, title)) {
     return gamestate
   }
 
@@ -15,7 +15,6 @@ export const instigatorResponse = (gamestate, token, selected_mark_positions, ti
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_mark_of_traitor', ...formatPlayerIdentifier([selected_mark_positions[0]])],
-    uniqueInformation: { mark_of_traitor: [selected_mark_positions[0]], selected_mark_positions },
     scene_end: true
   })
 

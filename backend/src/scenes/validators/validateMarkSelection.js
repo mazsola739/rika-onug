@@ -1,18 +1,22 @@
 import { logTrace } from '../../log'
 
-//TODO get gamestate from origin, not as varriant
-
-export const validateMarkSelection = (selected_mark_positions, player_history, title) => {
+export const validateMarkSelection = (selected_mark_positions, gamestate, token, title) => {
   logTrace(`validateMarkSelection called when actual scene is: ${title}`)
 
-  if (selected_mark_positions.length === 0 || !selected_mark_positions.every(position => player_history[title].selectable_marks.includes(position))) {
+  const player_history = gamestate.players[token]?.player_history[title]
+  const playerHistorySelectableMarks = player_history.selectable_marks || []
+  const selectableMarkLimit = player_history.selectable_mark_limit || {}
+
+  if (selected_mark_positions.length === 0 || !selected_mark_positions.every(position => playerHistorySelectableMarks.includes(position))) {
     return false
   }
 
-  if (selected_mark_positions.length !== player_history[title].selectable_mark_limit.mark) {
+  if (selected_mark_positions.length !== selectableMarkLimit.mark) {
     return false
   }
 
-  logTrace(`validateMarkSelection finished and everything all right: ${title}`)
+  gamestate.players[token].player_history[title].selected_mark_positions = selected_mark_positions
+
+  logTrace(`validateMarkSelection finished successfully for scene: ${title}`)
   return true
 }
