@@ -47,7 +47,6 @@ export const action_must_three_any = 'You must choose any three players (includi
 export const action_may_one_any_even = 'You may choose any even player (including yourself)'
 export const action_may_one_any_odd = 'You may choose any odd player (including yourself)'
 
-
 //neighbor
 export const action_must_one_neighbor = 'You must choose any player of your neighbors'
 export const action_may_oneneighbor = 'You may choose any player of your neighbors'

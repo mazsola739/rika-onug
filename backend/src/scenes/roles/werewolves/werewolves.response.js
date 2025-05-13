@@ -13,6 +13,7 @@ export const werewolvesResponse = (gamestate, token, selected_card_positions, ti
   const action = generateRoleAction(gamestate, token, title, {
     private_message,
     showCards,
+    uniqueInformation: { selected_card_positions },
     scene_end: true
   })
 

@@ -11,6 +11,7 @@ export const apprenticeseerResponse = (gamestate, token, selected_card_positions
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])],
     showCards,
+    uniqueInformation: { selected_card_positions },
     scene_end: true
   })
 

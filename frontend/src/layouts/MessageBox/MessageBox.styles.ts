@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { ResultTableCellProps } from './MessageBox.types'
 
 export const StyledMessageBox = styled.div`
   /* Flexbox/Grid */
@@ -61,14 +62,6 @@ export const ItemPosition = styled.span`
   font-weight: lighter;
 `
 
-export const PlayerPosition = styled.span`
-  /* Box Model */
-  padding: 5px 0;
-
-  /* Typography */
-  font-weight: lighter;
-`
-
 export const StyledSelectable = styled.div`
   /* Flexbox/Grid */
   display: flex;
@@ -80,4 +73,43 @@ export const StyledSelectable = styled.div`
 export const StyledMessageBoxVoteResult = styled.div`
   /* Flexbox/Grid */
   display: flex;
+  flex-direction: column;
+`
+
+export const SelectedPlayer = styled.td``
+
+export const PlayerPosition = styled.span`
+  /* Box Model */
+  padding: 5px 0;
+
+  /* Typography */
+  font-weight: lighter;
+`
+
+export const Voters = styled.td``
+
+
+
+export const ResultTable = styled.div`
+  /* Box Model */
+  border: 2px solid white;
+`
+
+export const ResultRow = styled.div`
+  /* Flexbox/Grid */
+  display: flex;
+`
+
+export const ResultCell = styled.div<ResultTableCellProps>`
+  /* Box Model */
+  border: 0.0625rem solid white;
+  overflow: hidden;
+  white-space: nowrap;
+  flex: ${({ isFixedWidth, isMaxWidth }) => (isFixedWidth ? '0 0 80px' : isMaxWidth ? '0 0 240px' : '1')};
+  height: 30px;
+
+  /* Flexbox/Grid */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `

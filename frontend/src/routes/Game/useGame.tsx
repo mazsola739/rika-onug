@@ -56,7 +56,7 @@ export const useGame = () => {
 
     // TODO fix this voting system
     if (lastJsonMessage?.type === VAMPIRES_VOTE && lastJsonMessage?.success) {
-      propStore.setVampireVotes(lastJsonMessage.vampire_votes as VoteType)
+      propStore.setVampireVotes(lastJsonMessage.vampire_votes)
     }
     if (lastJsonMessage?.type === ALIENS_VOTE && lastJsonMessage?.success) {
       propStore.setAlienVotes(lastJsonMessage.alien_votes)

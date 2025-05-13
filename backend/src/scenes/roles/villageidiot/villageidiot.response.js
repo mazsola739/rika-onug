@@ -18,7 +18,7 @@ export const villageidiotResponse = (gamestate, token, selected_answer, title) =
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_moved', selected_answer === 'left' ? 'direction_left' : 'direction_right'],
-    uniqueInformation: { direction: selected_answer },
+    uniqueInformation: { direction: selected_answer, selected_answer },
     scene_end: true
   })
 

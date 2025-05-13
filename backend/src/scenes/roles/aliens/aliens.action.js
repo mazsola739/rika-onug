@@ -42,7 +42,7 @@ export const aliensAction = (gamestate, token, title) => {
   let showCards = []
   let vote = false
   const obligatory = ['aliens_left', 'aliens_right', 'aliens_show', 'aliens_newalien', 'aliens_alienhelper'].includes(randomAlienInstruction)
-  let scene_end = !obligatory
+  let scene_end = true
 
   switch (randomAlienInstruction) {
     case 'aliens_view': // 'Each alien may secretly view a card from: '
@@ -50,13 +50,13 @@ export const aliensAction = (gamestate, token, title) => {
       vote = randomAlienInstruction !== 'aliens_view'
       if (messagePositions.left === 0) {
         privateMessage.push('action_no_selectable_player')
-        scene_end = true
       } else {
         selectable_cards = messagePositions
         privateMessage.push(messageInstruction, ...possibleIdentifier)
         scene_end = false
       }
       break
+      //TODO save to the player history the position where moved?
     case 'aliens_left': // 'Give your card to the alien on your left.'
     case 'aliens_right': // 'Give your card to the alien on your right.'
       if (gamestate.players[token].shield) {
@@ -72,20 +72,20 @@ export const aliensAction = (gamestate, token, title) => {
       showCards = sawCards(gamestate, aliensWithoutShield, token)
       if (gamestate.players[token].shield) {
         privateMessage.push('action_shielded')
-        scene_end = true
       }
       privateMessage.push('action_saw_card', ...aliensWithoutShieldIdentifiers)
       break
-    case 'aliens_timer': // 'You have shortened the game timer by one half.'
-      gamestate.vote_timer /= 2
+    case 'aliens_timer': { // 'You have shortened the game timer by one half.'
+      const voter_time = gamestate.vote_timer === 300000 ? 150000 : gamestate.vote_timer //TODO need better solution later when timer not just 5 min
+      gamestate.vote_timer = voter_time
       privateMessage.push('action_timer')
       break
+    }
     case 'aliens_newalien': // 'Tap one of the fists to turn that player into an alien from: '
     case 'aliens_alienhelper': // "Tap one of the fists to turn that player into alien team, but isn't an alien from: "
       vote = randomAlienInstruction !== 'aliens_view'
       if (messagePositions.left === 0) {
         privateMessage.push('action_no_selectable_player')
-        scene_end = true
       } else if (messagePositions.left === 1) {
         gamestate.players[token].player_history[title].selectable_cards = selectable_cards
         aliensResponse(gamestate, token, selectable_cards, title)

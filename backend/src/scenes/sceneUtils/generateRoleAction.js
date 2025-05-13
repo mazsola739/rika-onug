@@ -87,8 +87,8 @@ export const generateRoleAction = (
   mark_of_traitor,
   mark_of_vampire,
   masons,
-  new_alien,
-  new_alien_helper,
+  new_alien, BE
+  new_alien_helper, BE
   new_artifact_card,
   new_shield_card,
   new_vampire,
@@ -104,7 +104,10 @@ export const generateRoleAction = (
   selectable_card_limit,
   selectable_marks,
   selectable_mark_limit,
+  selected_answer,
+  selected_card_positions, //TODO save it in validator? cut the right size after the limit check?
   selected_center_card,
+  selected_mark_positions, //TODO save it in validator? cut the right size after the limit check?
   show_cards,
   show_marks,
   swapped_cards,

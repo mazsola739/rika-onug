@@ -725,7 +725,7 @@
     "view_mark": false,
     "shield": false,
     "artifact": false,
-    "group_action": false
+    "group_action": true
   },
   {
     "scene_title": "PSYCHIC",

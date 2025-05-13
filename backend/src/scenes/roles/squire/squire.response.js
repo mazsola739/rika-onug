@@ -19,12 +19,12 @@ export const squireResponse = (gamestate, token, selected_answer, title) => {
     action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_saw_card', ...messageIdentifiers, 'POINT'],
       showCards,
-      uniqueInformation: { werewolves, answer: [selected_answer[0]] }
+      uniqueInformation: { werewolves, selected_answer }
     })
   } else if (selected_answer === 'no') {
     action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_nothing'],
-      uniqueInformation: { werewolves, answer: [selected_answer[0]] }
+      uniqueInformation: { werewolves, selected_answer }
     })
   }
 

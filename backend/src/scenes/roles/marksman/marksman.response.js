@@ -20,6 +20,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_one_any'],
         selectableCards: { selectable_cards, selectable_card_limit },
+        uniqueInformation: { selected_answer },
         obligatory: true
       })
 
@@ -30,6 +31,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_one_any'],
         selectableMarks: { selectable_marks, selectable_mark_limit },
+        uniqueInformation: { selected_answer },
         obligatory: true
       })
 
@@ -59,6 +61,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])],
         showCards,
+        uniqueInformation: { selected_card_positions },
         scene_end: true
       })
     } else {
@@ -70,6 +73,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_must_one_any'],
         showCards: showCards,
+        uniqueInformation: { selected_card_positions },
         selectableMarks: { selectable_marks, selectable_mark_limit },
         obligatory: true
       })
@@ -83,7 +87,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       return gamestate
     }
 
-    const showMarks = sawMarks(gamestate, [selected_card_positions[0]], token)
+    const showMarks = sawMarks(gamestate, [selected_mark_positions[0]], token)
 
     let action = {}
 
@@ -105,6 +109,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
         private_message: ['action_saw_mark', ...formatPlayerIdentifier([selected_mark_positions[0]]), 'action_must_one_any'],
         showMarks,
         selectableCards: { selectable_cards, selectable_card_limit },
+        uniqueInformation: { selected_mark_positions },
         obligatory: true
       })
     }

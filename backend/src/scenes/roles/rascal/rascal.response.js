@@ -20,7 +20,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
 
     const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_moved', selected_answer === 'left' ? 'direction_left' : 'direction_right'],
-      uniqueInformation: { direction: selected_answer },
+      uniqueInformation: { direction: selected_answer, selected_answer },
       scene_end: true
     })
 
@@ -48,7 +48,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
 
         action = generateRoleAction(gamestate, token, title, {
           private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
-          uniqueInformation: { swapped_cards: [position1, position2] },
+          uniqueInformation: { swapped_cards: [position1, position2], selected_card_positions },
           scene_end: true
         })
 
@@ -62,7 +62,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
           const selectable_cards = getPlayerNumbersByGivenConditions(gamestate, 'allPlayersWithoutShield', token)
           const selectable_card_limit = { player: 1, center: 0 }
 
-          const uniqueInformation = { selected_card: selected_card_positions[0], witch_answer: true }
+          const uniqueInformation = { selected_card: selected_card_positions[0], witch_answer: true, selected_card_positions }
 
           action = generateRoleAction(gamestate, token, title, {
             private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_must_one_any'],
@@ -84,7 +84,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
           action = generateRoleAction(gamestate, token, title, {
             private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
             obligatory: gamestate.players[token].player_history[title].random === 'witch',
-            uniqueInformation: { swapped_cards: [gamestate.players[token].player_history[title].selected_card, selected_card_positions[0]] },
+            uniqueInformation: { swapped_cards: [gamestate.players[token].player_history[title].selected_card, selected_card_positions[0]], selected_card_positions },
             scene_end: true
           })
         }
@@ -106,7 +106,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
         action = generateRoleAction(gamestate, token, title, {
           private_message: ['action_swapped_cards', ...messageIdentifiers, gamestate.players[token].player_history[title].random === 'robber' ? 'action_own_card' : ''],
           showCards: gamestate.players[token].player_history[title].random === 'robber' ? showCards : undefined,
-          uniqueInformation: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
+          uniqueInformation: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], selected_card_positions },
           obligatory: gamestate.players[token].player_history[title].random === 'robber'
         })
 

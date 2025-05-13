@@ -1,6 +1,6 @@
 import { logInfo, logTrace } from '../log'
 import { repo, repositoryType } from '../repository'
-import { aliens, alphawolf, annoyinglad, apprenticeassassin, apprenticeseer, apprenticetanner, assassin, auraseer, beholder, blob, bodysnatcher, copycat, cow, cupid, curator, detector, diseased, doppelganger, empath, exposer, flipper, gremlin, doppelgangerinstantaction, mortician, pickpocket, priest, psychic, rascal, revealer, thecount, drpeeker, drunk, epicbattle, everyonemark, evilometer, familyman, groobzerb, insomniac, instigator, intern, joke, leader, leaderzerbgroob, lovers, madscientist, marksman, masons, minion, mirrorman, mysticwolf, nostradamus, nostradamusReaction, oracleAnswer, oracleQuestion, paranormalinvestigator, rapscallion, renfield, ripple, robber, roleretriever, seer, selfawarenessgirl, sentinel, squire, supervillains, switcheroo, temptress, thing, troublemaker, vampires, villageidiot, voodoolou, werewolves, witch } from './roles'
+import { aliens, alphawolf, annoyinglad, apprenticeassassin, apprenticeseer, apprenticetanner, assassin, auraseer, beholder, blob, bodysnatcher, copycat, cow, cupid, curator, detector, diseased, doppelganger, empath, exposer, flipper, gremlin, doppelgangerinstantaction, mortician, pickpocket, priest, psychic, rascal, revealer, thecount, drpeeker, drunk, epicbattle, everyonemark, evilometer, familyman, groobzerb, insomniac, instigator, intern, joke, leader, leaderzerbgroob, lovers, madscientist, marksman, masons, minion, mirrorman, mysticwolf, nostradamus, nostradamusreaction, oracleAnswer, oracleQuestion, paranormalinvestigator, rapscallion, renfield, ripple, robber, roleretriever, seer, selfawarenessgirl, sentinel, squire, supervillains, switcheroo, temptress, thing, troublemaker, vampires, villageidiot, voodoolou, werewolves, witch } from './roles'
 import { hasAssassin, hasDoppelganger, hasApprenticeAssassin, hasMarks, hasSeer, hasApprenticeSeer, hasEasterEgg, hasEpicBattle, hasGoodGuys, hasBadGuys, hasMadScientist, hasDreamWolf } from './conditions'
 
 export const sceneHandler = async (gamestate, scene_title, room_id) => {
@@ -80,7 +80,7 @@ export const sceneHandler = async (gamestate, scene_title, room_id) => {
     MORTICIAN: () => mortician(newGamestate, scene_title, 'mortician'),
     MYSTIC_WOLF: () => mysticwolf(newGamestate, scene_title),
     NOSTRADAMUS: () => nostradamus(newGamestate, scene_title),
-    NOSTRADAMUS_REACTION: () => nostradamusReaction(newGamestate, scene_title),
+    NOSTRADAMUS_REACTION: () => nostradamusreaction(newGamestate, scene_title),
     ORACLE_ANSWER: () => oracleAnswer(newGamestate, scene_title),
     ORACLE_QUESTION: () => oracleQuestion(newGamestate, scene_title, selected_cards),
     PARANORMAL_INVESTIGATOR: () => paranormalinvestigator(newGamestate, scene_title),

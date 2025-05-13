@@ -6,7 +6,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
     return gamestate
   }
 
-   const { instruction: randomAlienInstruction } = gamestate.roles.aliens
+  const { instruction: randomAlienInstruction } = gamestate.roles.aliens
 
   let showCards = []
   let new_alien = []
@@ -36,7 +36,7 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
   const action = generateRoleAction(gamestate, token, title, {
     private_message,
     showCards,
-    uniqueInformation: { new_alien, new_alien_helper },
+    uniqueInformation: { new_alien, new_alien_helper , selected_card_positions},
     scene_end: true
   })
 

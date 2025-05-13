@@ -33,6 +33,7 @@ export const oracleanswerResponse = (gamestate, token, selected_card_positions, 
 
     action = generateRoleAction(gamestate, token, title, {
       private_message: message,
+      uniqueInformation: { selected_card_positions },
       showCards: selectedCards
     })
   }

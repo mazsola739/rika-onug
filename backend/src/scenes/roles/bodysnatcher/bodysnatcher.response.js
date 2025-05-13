@@ -22,7 +22,7 @@ export const bodysnatcherResponse = (gamestate, token, selected_card_positions, 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_swapped_cards', ...messageIdentifiers, 'action_own_card'],
     showCards,
-    uniqueInformation: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]] },
+    uniqueInformation: { swapped_cards: [currentPlayerNumber, selected_card_positions[0]], selected_card_positions },
     scene_end: true
   })
 

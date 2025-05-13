@@ -1,11 +1,11 @@
 import { isActivePlayer } from '../../activePlayer'
 import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
-import { getAliensNarration } from './aliens.narration'
+import { aliensNarration } from './aliens.narration'
 import { aliensAction } from './aliens.action'
 
 export const aliens = (gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
-  const narration = getAliensNarration(gamestate, selected_cards)
+  const narration = aliensNarration(gamestate, selected_cards)
 
   tokens.forEach(token => {
     let action = {}
@@ -25,4 +25,3 @@ export const aliens = (gamestate, title, selected_cards) => {
 
   return gamestate
 }
-   

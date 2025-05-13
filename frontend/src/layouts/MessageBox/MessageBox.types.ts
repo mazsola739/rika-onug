@@ -8,3 +8,9 @@ export interface MessageBoxProps {
 export interface MessagePlayersProps {
   players?: Record<string, string>[]
 }
+
+export interface ResultTableCellProps {
+  isFixedWidth?: boolean
+  isMaxWidth?: boolean
+  isFixedHeight?: boolean
+}

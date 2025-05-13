@@ -13,6 +13,12 @@ const filters = {
   allPlayers: () => true,
   allPlayersWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number) && player.shield !== true,
 
+  //even or odd players
+  even: player => parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
+  odd: player => parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
+  evenWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
+  oddWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
+
   //werewolves
   nonWerewolfWithoutShield: (player, shieldedCards) => !WEREWOLVES.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
   werewolfAndDreamwolf: player => WEREWOLVES.includes(player.card.player_role_id),
@@ -31,8 +37,10 @@ const filters = {
   nonAlienEven: player => !ALIEN_IDS.includes(player.card.player_role_id) && parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
   nonAlienOdd: player => !ALIEN_IDS.includes(player.card.player_role_id) && parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
   nonAlienWithoutShield: (player, shieldedCards) => !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number),
-  nonAlienWithoutShieldEven: (player, shieldedCards) => !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
-  nonAlienWithoutShieldOdd: (player, shieldedCards) => !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
+  nonAlienWithoutShieldEven: (player, shieldedCards) =>
+    !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
+  nonAlienWithoutShieldOdd: (player, shieldedCards) =>
+    !ALIEN_IDS.includes(player.card.player_role_id) && !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
   zerb: player => player.card.player_role_id === 54,
   groob: player => player.card.player_role_id === 47,
 
@@ -72,11 +80,8 @@ const filters = {
   //mark or card action done
   cardOrMarkActionTrue: player => player.card_or_mark_action === true,
 
-  //even or odd players
-  even: player => parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
-  odd: player => parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0,
-  evenWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,
-  oddWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number) && parseInt(player.player_number.replace('player_', ''), 10) % 2 !== 0
+  //empath
+  nonEmpath: player => player.card.player_role_id !== 77,
 }
 
 export const getPlayerNumbersByGivenConditions = (gamestate, filter, token = null) => {

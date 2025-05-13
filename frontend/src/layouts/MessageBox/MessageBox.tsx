@@ -17,13 +17,13 @@ export const MessageBox: React.ComponentType = observer(() => {
       <Message>
         <MessageText>{privateMessage}</MessageText>
         {isPlayerIdentification && <MessageBoxLook />}
+        {isVoteResult && <MessageBoxVoteResult />}
         {isSelectableCards && <MessageBoxSelectableCards />}
         {!scene_end && isSelectableCards && <SelectableCardsButtons />}
         {isSelectableMarks && <MessageBoxSelectableMarks />}
         {!scene_end && isSelectableMarks && <SelectableMarksButtons />}
         {isAnswerOptions && <MessageBoxAnswer />}
         {!scene_end && isAnswerOptions && <AnswerButtons />}
-        {isVoteResult && <MessageBoxVoteResult />}
       </Message>
       {scene_end && <SceneEndButtons />}
     </StyledMessageBox>

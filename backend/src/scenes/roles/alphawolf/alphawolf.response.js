@@ -14,7 +14,7 @@ export const alphawolfResponse = (gamestate, token, selected_card_positions, tit
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
-    uniqueInformation: { swapped_cards: [selected_card_positions[0], 'center_wolf'], new_werwolf: [selected_card_positions[0]] },
+    uniqueInformation: { swapped_cards: [selected_card_positions[0], 'center_wolf'], new_werwolf: [selected_card_positions[0]], selected_card_positions },
     scene_end: true
   })
 

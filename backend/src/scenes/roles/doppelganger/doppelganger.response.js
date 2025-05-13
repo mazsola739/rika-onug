@@ -34,6 +34,7 @@ export const doppelgangerResponse = (gamestate, token, selected_card_positions, 
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message,
+    uniqueInformation: { selected_card_positions },
     showCards,
     scene_end: true
   })

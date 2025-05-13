@@ -1,8 +1,8 @@
-import { alienAllKeys, alienAnyKeys, randomAlienInstructions } from ".."
-import { hasCow } from "../../conditions"
-import { getRandomItemFromArray, pickRandomUpToThreePlayers } from "../../sceneUtils"
+import { alienAllKeys, alienAnyKeys, randomAlienInstructions } from '..'
+import { hasCow } from '../../conditions'
+import { getRandomItemFromArray, pickRandomUpToThreePlayers } from '../../sceneUtils'
 
-export const getAliensNarration = (gamestate, selected_cards) => {
+export const aliensNarration = (gamestate, selected_cards) => {
   const narration = ['aliens_kickoff']
 
   if (hasCow(selected_cards)) {

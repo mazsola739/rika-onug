@@ -8,7 +8,7 @@ export const groobzerbAction = (gamestate, token, title) => {
     if (zerb.length >= 1) {
       gamestate.players[token].card.player_team = 'groob'
       groob.forEach(groob => (gamestate.positions.card_positions[groob].team = 'groob'))
-
+      
       const messageIdentifiers = formatPlayerIdentifier(zerb)
 
       return generateRoleAction(gamestate, token, title, {
@@ -18,7 +18,8 @@ export const groobzerbAction = (gamestate, token, title) => {
       })
     } else {
       return generateRoleAction(gamestate, token, title, {
-        private_message: ['action_no_zerb']
+        private_message: ['action_no_zerb'],
+        scene_end: true
       })
     }
   } else if (gamestate.players[token].card.player_role_id === 54) {

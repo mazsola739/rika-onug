@@ -13,6 +13,7 @@ export const exposerResponse = (gamestate, token, selected_card_positions, title
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_flipped_card', ...formatPlayerIdentifier(selected_card_positions.slice(0, limit))],
     showCards,
+    uniqueInformation: { selected_card_positions },
     scene_end: true
   })
 

@@ -9,7 +9,7 @@ export const diseasedResponse = (gamestate, token, selected_mark_positions, titl
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_mark_of_disease', ...formatPlayerIdentifier([selected_mark_positions[0]])],
-    uniqueInformation: { mark_of_disease: [selected_mark_positions[0]] },
+    uniqueInformation: { mark_of_disease: [selected_mark_positions[0]], selected_mark_positions },
     scene_end: true
   })
 

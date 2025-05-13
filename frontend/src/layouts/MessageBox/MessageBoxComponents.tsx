@@ -2,8 +2,8 @@ import { CardImage, TokenImage, Button } from 'components'
 import { observer } from 'mobx-react-lite'
 import { selectionStore, propStore, messageStore } from 'store'
 import { Title } from 'typography'
-import { formatPositionSimply } from 'utils'
-import { StyledMessageBoxCards, MessageBoxItem, ItemPosition, StyledMessageBoxAnswer, StyledSelectable, StyledMessageBoxVoteResult, PlayerPosition } from './MessageBox.styles'
+import { formatPosition } from 'utils'
+import { StyledMessageBoxCards, MessageBoxItem, ItemPosition, StyledMessageBoxAnswer, StyledSelectable, StyledMessageBoxVoteResult, PlayerPosition , ResultTable, ResultCell, ResultRow} from './MessageBox.styles'
 import { MessageBoxProps, MessagePlayersProps } from './MessageBox.types'
 
 const MessageBoxCards: React.ComponentType<MessageBoxProps> = observer(({ cards }) => {
@@ -103,20 +103,29 @@ export const MessageBoxSelectableMarks: React.ComponentType = observer(() => {
 export const MessageBoxVoteResult: React.ComponentType = observer(() => {
   const votes = propStore.vampireVotes && Object.keys(propStore.vampireVotes).length > 0
     ? propStore.vampireVotes
-    : propStore.alienVotes && Object.keys(propStore.alienVotes).length > 0 
-    ? propStore.alienVotes 
-    : {}
+    : propStore.alienVotes && Object.keys(propStore.alienVotes).length > 0
+      ? propStore.alienVotes
+      : {}
 
   return (
     <StyledMessageBoxVoteResult>
-      {Object.entries(votes).map(([key, values]) => (
-        <div key={key}>
-          <PlayerPosition>{formatPositionSimply(key)}</PlayerPosition>
-          {values.map(value => (
-            <TokenImage key={value} image={value} size={30} />
+      <Title title={'VOTE RESULT'} />
+      <ResultTable>
+          <ResultRow>
+            <ResultCell isFixedWidth>Selected</ResultCell>
+            <ResultCell isMaxWidth>Voters</ResultCell>
+          </ResultRow>
+          {Object.entries(votes).map(([key, values]) => (
+            <ResultRow key={key}>
+              <ResultCell isFixedWidth><PlayerPosition>{formatPosition(key)}</PlayerPosition></ResultCell>
+              <ResultCell isMaxWidth>
+                {values.map(value => (
+                  <TokenImage key={value} image={value} size={25} />
+                ))}
+              </ResultCell>
+            </ResultRow>
           ))}
-        </div>
-      ))}
+      </ResultTable>
     </StyledMessageBoxVoteResult>
   )
 })

@@ -15,7 +15,7 @@ export const instigatorResponse = (gamestate, token, selected_mark_positions, ti
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_mark_of_traitor', ...formatPlayerIdentifier([selected_mark_positions[0]])],
-    uniqueInformation: { mark_of_traitor: [selected_mark_positions[0]] },
+    uniqueInformation: { mark_of_traitor: [selected_mark_positions[0]], selected_mark_positions },
     scene_end: true
   })
 

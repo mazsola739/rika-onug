@@ -18,7 +18,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
     const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_must_one_any'],
       selectableCards: { selectable_cards, selectable_card_limit },
-      uniqueInformation: { selected_center_card: selected_card_positions[0] },
+      uniqueInformation: { selected_center_card: selected_card_positions[0], selected_card_positions },
       showCards,
       obligatory: true
     })
@@ -45,7 +45,7 @@ export const witchResponse = (gamestate, token, selected_card_positions, title) 
 
     const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
-      uniqueInformation: { swapped_cards: [gamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0]] },
+      uniqueInformation: { swapped_cards: [gamestate.players[token].player_history[title].selected_center_card, selected_card_positions[0]], selected_card_positions },
       scene_end: true
     })
 

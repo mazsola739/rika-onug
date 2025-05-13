@@ -1,6 +1,7 @@
+import { ALIENS_VOTE } from '../../../constants'
 import { repo, repositoryType } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
-import {getPlayerNumbersByGivenConditions,getPlayerTokensByPlayerNumber,generateRoleAction,formatPlayerIdentifier,getNarrationByTitle,createAndSendSceneMessage,sawCards,updateCardRoleAndTeam } from '../../sceneUtils'
+import { getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, sawCards, updateCardRoleAndTeam } from '../../sceneUtils'
 
 export const aliensVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
@@ -9,7 +10,7 @@ export const aliensVotehydrate = async message => {
     const gamestate = await repo[repositoryType].readGamestate(room_id)
 
     const aliens = getPlayerNumbersByGivenConditions(gamestate, 'alien')
-    const aliensTokens = getPlayerTokensByPlayerNumber(gamestate.players, aliens)
+    const aliensTokens = getPlayerTokensByPlayerNumber(gamestate.players, aliens) //TODO similar function as getPlayerNumbersByGivenConditions
     const alienCount = aliens.length
     const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
@@ -74,7 +75,7 @@ export const aliensVotehydrate = async message => {
           scene_end: true
         }
 
-        const action = generateRoleAction(gamestate, alienToken, {
+        const action = generateRoleAction(gamestate, alienToken, title, {
           private_message: ['action_voted_together', message, ...formatPlayerIdentifier([unanimousPlayerNumber])],
           showCards,
           uniqueInformation: { new_alien, new_alien_helper },
@@ -88,7 +89,7 @@ export const aliensVotehydrate = async message => {
     } else {
       aliensTokens.forEach(alienToken => {
         const stillVoteMessage = {
-          type: title,
+          type: ALIENS_VOTE,
           success: true,
           alien_votes
         }

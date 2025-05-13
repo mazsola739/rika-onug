@@ -17,7 +17,7 @@ export const cupidResponse = (gamestate, token, selected_mark_positions, title) 
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_mark_of_love', ...messageIdentifiers, 'POINT'],
-    uniqueInformation: { mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]] },
+    uniqueInformation: { mark_of_love: [selected_mark_positions[0], selected_mark_positions[1]], selected_mark_positions },
     scene_end: true
   })
 

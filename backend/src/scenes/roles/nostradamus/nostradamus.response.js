@@ -1,51 +1,47 @@
 import { GOOD_GUY } from '../../../constants'
-import { getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage } from '../../sceneUtils'
+import { getCardIdsByPositions, generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, createAndSendSceneMessage, sawCards, updatePlayerKnownCard } from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
+//TODO refact
 export const nostradamusResponse = (gamestate, token, selected_card_positions, title) => {
   if (!validateCardSelection(selected_card_positions, gamestate.players[token].player_history, title)) {
     return gamestate
   }
-
+  let limit
   const selectedCards = getCardIdsByPositions(gamestate.positions.card_positions, [selected_card_positions[0], selected_card_positions[1], selected_card_positions[2]])
   const playerOneCardId = selectedCards[0][selected_card_positions[0]]
   const playerTwoCardId = selectedCards[1][selected_card_positions[1]]
   const playerThreeCardId = selectedCards[2][selected_card_positions[2]]
 
-  let showCards = []
-  //TODO const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
-  //    updatePlayerRoleAndTeam(gamestate, token, 'TANNER', 'tanner')
-
   if (GOOD_GUY.includes(playerOneCardId)) {
     if (!GOOD_GUY.includes(playerTwoCardId)) {
-      showCards = [selectedCards[0], selectedCards[1]]
-      gamestate.players[token].card.player_role = gamestate.positions.card_positions[selected_card_positions[1]].card.role
-      gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[1]].card.team
+      limit = 2
+      const { role, team } = gamestate.positions.card_positions[selected_card_positions[1]].card
+      const { player_card_id, player_role_id } = gamestate.players[token].card
+      updatePlayerKnownCard(gamestate, token, player_card_id, role, player_role_id, team)
     } else if (GOOD_GUY.includes(playerTwoCardId)) {
+      limit = 3
       if (!GOOD_GUY.includes(playerThreeCardId)) {
-        showCards = selectedCards
-        gamestate.players[token].card.player_role = gamestate.positions.card_positions[selected_card_positions[2]].card.role
-        gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[2]].card.team
+        const { role, team } = gamestate.positions.card_positions[selected_card_positions[2]].card
+        const { player_card_id, player_role_id } = gamestate.players[token].card
+        updatePlayerKnownCard(gamestate, token, player_card_id, role, player_role_id, team)
       } else {
-        showCards = selectedCards
-        gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[2]].card.team
-        if (
-          gamestate.players[token].card.player_original_id === playerOneCardId ||
-          gamestate.players[token].card.player_original_id === playerTwoCardId ||
-          gamestate.players[token].card.player_original_id === playerThreeCardId
-        ) {
-          gamestate.players[token].card.player_card_id = 87
-        }
+        const { team } = gamestate.positions.card_positions[selected_card_positions[2]].card
+        const { player_card_id, player_role, player_role_id } = gamestate.players[token].card
+        updatePlayerKnownCard(gamestate, token, player_card_id, player_role, player_role_id, team)
       }
     }
   } else if (!GOOD_GUY.includes(playerOneCardId)) {
-    showCards = [selectedCards[0]]
-    gamestate.players[token].card.player_role = gamestate.positions.card_positions[selected_card_positions[0]].card.role
-    gamestate.players[token].card.player_team = gamestate.positions.card_positions[selected_card_positions[0]].card.team
+    limit = 1
+    const { role, team } = gamestate.positions.card_positions[selected_card_positions[0]].card
+    const { player_card_id, player_role_id } = gamestate.players[token].card
+    updatePlayerKnownCard(gamestate, token, player_card_id, role, player_role_id, team)
   }
 
-  gamestate.players[token].card_or_mark_action = true
+  const showCards = sawCards(gamestate, selected_card_positions.slice(0, limit), token)
+
   gamestate.roles.nostradamus.team = gamestate.players[token].card.player_team
+
   //TODO private message
   const action = generateRoleAction(gamestate, token, title, {
     private_message: [
@@ -54,6 +50,7 @@ export const nostradamusResponse = (gamestate, token, selected_card_positions, t
       showCards.length >= 2 ? formatPlayerIdentifier(selected_card_positions)[1] : '',
       showCards.length === 3 ? formatPlayerIdentifier(selected_card_positions)[2] : ''
     ],
+    uniqueInformation: { selected_card_positions },
     showCards
   })
 

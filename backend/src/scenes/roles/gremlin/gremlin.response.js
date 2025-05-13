@@ -21,6 +21,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_two_any'],
         selectableCards: { selectable_cards, selectable_card_limit },
+        uniqueInformation: { selected_answer },
         obligatory: true
       })
 
@@ -31,6 +32,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       const action = generateRoleAction(gamestate, token, title, {
         private_message: ['action_must_two_any'],
         selectableMarks: { selectable_marks, selectable_mark_limit },
+        uniqueInformation: { selected_answer },
         obligatory: true
       })
 
@@ -51,7 +53,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_swapped_cards', ...messageIdentifiers, 'POINT'],
-      uniqueInformation: { swapped_cards: [position1, position2] },
+      uniqueInformation: { swapped_cards: [position1, position2], selected_card_positions },
       scene_end: true
     })
 
@@ -69,7 +71,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     const action = generateRoleAction(gamestate, token, title, {
       private_message: ['action_swapped_marks', ...messageIdentifiers, 'POINT'],
-      uniqueInformation: { swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]] },
+      uniqueInformation: { swapped_marks: [selected_mark_positions[0], selected_mark_positions[1]], selected_mark_positions },
       scene_end: true
     })
 

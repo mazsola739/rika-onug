@@ -32,6 +32,13 @@ export const formatPositionSimply = (position: string) => {
     .join(' ')
 }
 
+export const formatPosition = (position: string) => {
+  return position
+    .split('_')
+    .map((word) =>  word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ')
+}
+
 export const getCardById = (cardId: number): CardJson | null => {
   if (cardId === 87) {
     return cards.find(card => card.id === 87) || null

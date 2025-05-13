@@ -20,6 +20,7 @@ export const copycatResponse = (gamestate, token, selected_card_positions, title
 
   const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_you_are_that_role', `${player_role}`],
+    uniqueInformation: { selected_card_positions },
     showCards,
     scene_end: true
   })
