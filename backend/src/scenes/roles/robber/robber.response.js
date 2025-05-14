@@ -2,9 +2,11 @@ import { getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getN
 import { validateCardSelection } from '../../validators'
 
 export const robberResponse = (gamestate, token, selected_card_positions, title) => {
-  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+  if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
     return gamestate
   }
+
+  console.log('here robberResponse')
 
   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 

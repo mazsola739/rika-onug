@@ -3,9 +3,11 @@ import { sawCards } from '../../sceneUtils/sawCards'
 import { validateCardSelection } from '../../validators'
 
 export const werewolvesResponse = (gamestate, token, selected_card_positions, title) => {
-  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+  if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
     return gamestate
   }
+
+  console.log('here werewolvesResponse')
 
   const showCards = sawCards(gamestate, [selected_card_positions[0]], token)
   const private_message = ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])]

@@ -12,7 +12,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
   const selectable_card_limit = { player: 1, center: 0 }
 
   if (selected_answer && selected_answer.length > 0) {
-    if (!validateAnswerSelection(selected_answer, gamestate, token, title)) {
+    if (!validateAnswerSelection(gamestate, token, selected_answer, title)) {
       return gamestate
     }
 
@@ -38,7 +38,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
       return gamestate
     }
   } else if (selected_card_positions && selected_card_positions.length > 0) {
-    if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+    if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
       return gamestate
     }
 
@@ -79,7 +79,7 @@ export const marksmanResponse = (gamestate, token, selected_card_positions, sele
 
     return gamestate
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
-    if (!validateMarkSelection(selected_mark_positions, gamestate, token, title)) {
+    if (!validateMarkSelection(gamestate, token, selected_mark_positions, title)) {
       return gamestate
     }
 

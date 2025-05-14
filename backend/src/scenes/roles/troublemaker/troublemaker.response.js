@@ -2,9 +2,11 @@ import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, create
 import { validateCardSelection } from '../../validators'
 
 export const troublemakerResponse = (gamestate, token, selected_card_positions, title) => {
-  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+  if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
     return gamestate
   }
+
+  console.log('here troublemakerResponse')
 
   const [position1, position2] = selected_card_positions.slice(0, 2)
 

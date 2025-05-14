@@ -1,17 +1,15 @@
 import { logTrace } from '../../log'
 
-export const validateMarkSelection = (selected_mark_positions, gamestate, token, title) => {
+export const validateMarkSelection = (gamestate, token, selected_mark_positions, title) => {
   logTrace(`validateMarkSelection called when actual scene is: ${title}`)
 
   const player_history = gamestate.players[token]?.player_history[title]
-  const playerHistorySelectableMarks = player_history.selectable_marks || []
-  const selectableMarkLimit = player_history.selectable_mark_limit || {}
 
-  if (selected_mark_positions.length === 0 || !selected_mark_positions.every(position => playerHistorySelectableMarks.includes(position))) {
+  if (selected_mark_positions.length === 0 || !selected_mark_positions.every(position => player_history.selectable_marks.includes(position))) {
     return false
   }
 
-  if (selected_mark_positions.length !== selectableMarkLimit.mark) {
+  if (selected_mark_positions.length !== player_history.selectable_mark_limit.mark) {
     return false
   }
 

@@ -2,7 +2,7 @@ import { moveCardsButYourOwn, generateRoleAction, getNarrationByTitle, createAnd
 import { validateAnswerSelection } from '../../validators'
 
 export const villageidiotResponse = (gamestate, token, selected_answer, title) => {
-  if (!validateAnswerSelection(selected_answer, gamestate, token, title)) {
+  if (!validateAnswerSelection(gamestate, token, selected_answer, title)) {
     return gamestate
   }
 

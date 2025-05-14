@@ -2,7 +2,7 @@ import { getPlayerTokensByPlayerNumber, generateRoleAction, formatPlayerIdentifi
 import { validateCardSelection } from '../../validators'
 
 export const sentinelResponse = (gamestate, token, selected_card_positions, title) => {
-  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+  if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
     return gamestate
   }
 

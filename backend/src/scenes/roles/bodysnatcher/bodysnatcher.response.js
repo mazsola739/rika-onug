@@ -1,8 +1,18 @@
-import { getCardIdsByPositions, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, createAndSendSceneMessage, getPlayerNumbersByGivenConditions, swapCards, updateCardRoleAndTeam, updatePlayerKnownCard } from '../../sceneUtils'
+import {
+  getCardIdsByPositions,
+  formatPlayerIdentifier,
+  generateRoleAction,
+  getNarrationByTitle,
+  createAndSendSceneMessage,
+  getPlayerNumbersByGivenConditions,
+  swapCards,
+  updateCardRoleAndTeam,
+  updatePlayerKnownCard
+} from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const bodysnatcherResponse = (gamestate, token, selected_card_positions, title) => {
-  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+  if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
     return gamestate
   }
 

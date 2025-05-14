@@ -2,7 +2,7 @@ import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const vampiresResponse = async (gamestate, token, selected_mark_positions, title) => {
-  if (!validateMarkSelection(selected_mark_positions, gamestate, token, title)) {
+  if (!validateMarkSelection(gamestate, token, selected_mark_positions, title)) {
     return gamestate
   }
 

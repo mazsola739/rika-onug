@@ -2,7 +2,7 @@ import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, create
 import { validateMarkSelection } from '../../validators'
 
 export const diseasedResponse = (gamestate, token, selected_mark_positions, title) => {
-  if (!validateMarkSelection(selected_mark_positions, gamestate, token, title)) {
+  if (!validateMarkSelection(gamestate, token, selected_mark_positions, title)) {
     return gamestate
   }
   updateMark(gamestate, token, [selected_mark_positions[0]], ['disease'])

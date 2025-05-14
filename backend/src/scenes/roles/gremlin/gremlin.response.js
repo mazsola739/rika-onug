@@ -5,7 +5,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
   const narration = getNarrationByTitle(title, gamestate.scenes.narration)
 
   if (selected_answer && selected_answer.length > 0) {
-    if (!validateAnswerSelection(selected_answer, gamestate, token, title)) {
+    if (!validateAnswerSelection(gamestate, token, selected_answer, title)) {
       return gamestate
     }
 
@@ -39,7 +39,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
       return gamestate
     }
   } else if (selected_card_positions && selected_card_positions.length > 0) {
-    if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+    if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
       return gamestate
     }
 
@@ -59,7 +59,7 @@ export const gremlinResponse = (gamestate, token, selected_card_positions, selec
 
     return gamestate
   } else if (selected_mark_positions && selected_mark_positions.length > 0) {
-    if (!validateMarkSelection(selected_mark_positions, gamestate, token, title)) {
+    if (!validateMarkSelection(gamestate, token, selected_mark_positions, title)) {
       return gamestate
     }
 

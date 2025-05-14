@@ -2,7 +2,7 @@ import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, create
 import { validateCardSelection } from '../../validators'
 
 export const temptressResponse = (gamestate, token, selected_card_positions, title) => {
-  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+  if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
     return gamestate
   }
   swapCards(gamestate, selected_card_positions[0], 'center_villain', token)

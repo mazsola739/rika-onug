@@ -1,6 +1,6 @@
 import { logTrace } from '../../log'
 
-export const validateAnswerSelection = (selected_answer, gamestate, token, title) => {
+export const validateAnswerSelection = (gamestate, token, selected_answer, title) => {
   logTrace(`validateAnswerSelection called when actual scene is: ${title}`)
 
   const player_history = gamestate.players[token]?.player_history[title]

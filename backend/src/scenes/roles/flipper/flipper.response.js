@@ -3,12 +3,12 @@ import { generateRoleAction, formatPlayerIdentifier, getNarrationByTitle, create
 import { validateCardSelection } from '../../validators'
 
 export const flipperResponse = (gamestate, token, selected_card_positions, title) => {
-  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+  if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
     return gamestate
   }
 
   const showCards = sawCards(gamestate, [selected_card_positions[0]], token)
-  
+
   const isTown = showCards.every(card => GOOD_GUY.includes(Object.values(card)[0]))
 
   if (isTown) {

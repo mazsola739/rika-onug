@@ -3,7 +3,7 @@ import { validateCardSelection } from '../../validators'
 
 //TODO neighbors
 export const morticianResponse = (gamestate, token, selected_card_positions, title) => {
-  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+  if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
     return gamestate
   }
   const limit = gamestate.players[token].player_history[title].selectable_card_limit.player

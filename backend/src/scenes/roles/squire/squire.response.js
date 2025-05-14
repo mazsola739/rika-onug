@@ -2,7 +2,7 @@ import { getPlayerNumbersByGivenConditions, formatPlayerIdentifier, generateRole
 import { validateAnswerSelection } from '../../validators'
 
 export const squireResponse = (gamestate, token, selected_answer, title) => {
-  if (!validateAnswerSelection(selected_answer, gamestate, token, title)) {
+  if (!validateAnswerSelection(gamestate, token, selected_answer, title)) {
     return gamestate
   }
 

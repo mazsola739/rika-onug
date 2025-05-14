@@ -7,11 +7,11 @@ const filters = {
 
   //other players
   otherPlayers: (player, shieldedCards, token, playerToken) => playerToken !== token,
-  otherPlayersWithoutShield: (player, shieldedCards, token) => player.token !== token && player.shield !== true && !shieldedCards.includes(player.player_number),
+  otherPlayersWithoutShield: (player, shieldedCards, token, playerToken) => playerToken !== token  && !shieldedCards.includes(player.player_number),
 
   //all players
   allPlayers: () => true,
-  allPlayersWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number) && player.shield !== true,
+  allPlayersWithoutShield: (player, shieldedCards) => !shieldedCards.includes(player.player_number),
 
   //even or odd players
   even: player => parseInt(player.player_number.replace('player_', ''), 10) % 2 === 0,

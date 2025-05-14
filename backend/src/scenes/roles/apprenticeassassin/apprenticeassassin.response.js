@@ -2,7 +2,7 @@ import { getPlayerNumbersByGivenConditions, generateRoleAction, formatPlayerIden
 import { validateMarkSelection } from '../../validators'
 
 export const apprenticeassassinResponse = (gamestate, token, selected_mark_positions, title) => {
-  if (!validateMarkSelection(selected_mark_positions, gamestate, token, title)) {
+  if (!validateMarkSelection(gamestate, token, selected_mark_positions, title)) {
     return gamestate
   }
 

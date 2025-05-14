@@ -11,7 +11,6 @@ export const cowAction = (gamestate, token, title) => {
 
   return generateRoleAction(gamestate, token, title, {
     private_message: [neighborIsAlien ? 'action_got_tapped_by_alien' : 'action_no_tap'],
-    uniqueInformation: { alien_neighbor: neighborIsAlien },
     scene_end: true
   })
 }

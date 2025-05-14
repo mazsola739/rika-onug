@@ -1,9 +1,18 @@
 import { SPECIAL_VILLAGER_IDS } from '../../../constants'
-import { getNarrationByTitle, getPlayerNumbersByGivenConditions, generateRoleAction, formatPlayerIdentifier, createAndSendSceneMessage, swapCards, sawCards, updateCardRoleAndTeam } from '../../sceneUtils'
+import {
+  getNarrationByTitle,
+  getPlayerNumbersByGivenConditions,
+  generateRoleAction,
+  formatPlayerIdentifier,
+  createAndSendSceneMessage,
+  swapCards,
+  sawCards,
+  updateCardRoleAndTeam
+} from '../../sceneUtils'
 import { validateCardSelection } from '../../validators'
 
 export const witchResponse = (gamestate, token, selected_card_positions, title) => {
-  if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+  if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
     return gamestate
   }
 

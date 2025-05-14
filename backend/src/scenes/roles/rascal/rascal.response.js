@@ -13,7 +13,7 @@ import { validateAnswerSelection, validateCardSelection } from '../../validators
 //TODO fix obligatory and scene end
 export const rascalResponse = (gamestate, token, selected_card_positions, selected_answer, title) => {
   if (selected_answer && selected_answer.length > 0) {
-    if (!validateAnswerSelection(selected_answer, gamestate, token, title)) {
+    if (!validateAnswerSelection(gamestate, token, selected_answer, title)) {
       return gamestate
     }
 
@@ -38,7 +38,7 @@ export const rascalResponse = (gamestate, token, selected_card_positions, select
 
     return gamestate
   } else if (selected_card_positions && selected_card_positions.length > 0) {
-    if (validateCardSelection(selected_card_positions, gamestate, token, title)) {
+    if (!validateCardSelection(gamestate, token, selected_card_positions, title)) {
       return gamestate
     }
 

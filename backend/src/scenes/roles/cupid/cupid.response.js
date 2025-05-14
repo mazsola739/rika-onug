@@ -2,7 +2,7 @@ import { formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, create
 import { validateMarkSelection } from '../../validators'
 
 export const cupidResponse = (gamestate, token, selected_mark_positions, title) => {
-  if (!validateMarkSelection(selected_mark_positions, gamestate, token, title)) {
+  if (!validateMarkSelection(gamestate, token, selected_mark_positions, title)) {
     return gamestate
   }
 
