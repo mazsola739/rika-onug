@@ -95,8 +95,7 @@ export const rascalAction = (gamestate, token, title, prefix) => {
         private_message: ['action_shielded']
       })
     } else {
-      selectable_cards =
-        rascalKey === 'identifier_center' ? CENTER_CARD_POSITIONS : getPlayerNumbersByGivenConditions(gamestate, 'otherPlayersWithoutShield', token)
+      selectable_cards = rascalKey === 'identifier_center' ? CENTER_CARD_POSITIONS : getPlayerNumbersByGivenConditions(gamestate, 'otherPlayersWithoutShield', token)
       privateMessage = [selectable_cards.length === 0 ? 'action_no_selectable_player' : randomRascalInstruction === 'rascal_drunk' ? 'action_must_one_any_other' : 'action_may_one_any_other']
     }
   } else {
