@@ -8,7 +8,6 @@ export const openeyes = (gamestate, title) => {
 
   tokens.forEach(token => {
     let action = {}
-
     const card = gamestate.players[token].card
 
     if (isActivePlayer(card).OPENEYES) {

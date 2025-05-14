@@ -6,8 +6,6 @@ export const seerResponse = (gamestate, token, selected_card_positions, title) =
     return gamestate
   }
 
-  console.log('here seerResponse')
-
   let showCards = []
 
   const playerCards = selected_card_positions.some(pos => pos.includes('player'))

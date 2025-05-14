@@ -6,8 +6,6 @@ export const robberResponse = (gamestate, token, selected_card_positions, title)
     return gamestate
   }
 
-  console.log('here robberResponse')
-
   const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
   swapCards(gamestate, currentPlayerNumber, selected_card_positions[0], token)

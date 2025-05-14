@@ -6,8 +6,6 @@ export const troublemakerResponse = (gamestate, token, selected_card_positions, 
     return gamestate
   }
 
-  console.log('here troublemakerResponse')
-
   const [position1, position2] = selected_card_positions.slice(0, 2)
 
   swapCards(gamestate, position1, position2, token)

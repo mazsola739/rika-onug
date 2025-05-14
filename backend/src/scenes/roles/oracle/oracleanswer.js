@@ -6,6 +6,7 @@ import { oracleanswerNarration } from "./oracleanswer.narration"
 export const oracleAnswer = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = oracleanswerNarration(gamestate)
+  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -13,7 +14,6 @@ export const oracleAnswer = (gamestate, title) => {
 
     if (isActivePlayer(card).ORACLE_ANSWER) {
       gamestate.players[token].action_finished = false
-
       action = oracleanswerAction(gamestate, token, title)
     }
 
