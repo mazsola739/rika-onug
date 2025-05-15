@@ -1,10 +1,11 @@
 import WebSocket from 'ws'
-import { ALIENS_VOTE, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, /* HYDRATE_LOBBY, */ JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, PRESELECT, READY, RELOAD, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES_VOTE, VOTE } from '../constants'
+import { ALIENS_VOTE, ARRIVE_COUNCIL, ARRIVE_GAME, ARRIVE_ROOM, ARRIVE_TABLE, ARRIVE_VERDICT, DEAL, DOPPELGANGER_EMPATH_VOTE, EMPATH_VOTE, /* HYDRATE_LOBBY, */ JOIN_ROOM, LEAVE_GAME, LEAVE_ROOM, NEWBIE, PRESELECT, READY, RELOAD, RESET, SCENE, SELECT_ROOM, START_GAME, START_VOTE, STOP_GAME, UPDATE_GUESS, UPDATE_ROOM, VAMPIRES_VOTE, VOTE } from '../constants'
 import { logError, logErrorWithStack, logTrace } from '../log'
 import { dealCards, hydrateCouncil, hydrateGame, hydrateGuess, /* hydrateLobby, */ hydrateReady, hydrateRoom, hydrateTable, joinRoom, leaveGame, leaveRoom, newbie, preselect, reload, reset, result, scene, selectRoom, startGame, startVote, stopGame, updateRoom, verdict } from './handlers'
 import { decodeJsonKeys } from '../utils'
 import { aliensVotehydrate } from '../scenes/roles/aliens/aliens.voteHydrate'
 import { vampiresVotehydrate } from '../scenes/roles/vampires/vampires.voteHydrate'
+import { empathVotehydrate } from '../scenes/roles'
 
 export const websocketServer = port => {
   try {
@@ -54,6 +55,8 @@ export const websocketServer = port => {
           [STOP_GAME]: () => stopGame(message),
           [SCENE]: () => scene(ws, message),
           [ALIENS_VOTE]: () => aliensVotehydrate(message),
+          [EMPATH_VOTE]: () => empathVotehydrate(message),
+          [DOPPELGANGER_EMPATH_VOTE]: () => empathVotehydrate(message),
           [VAMPIRES_VOTE]: () => vampiresVotehydrate(message),
           [ARRIVE_COUNCIL]: () => hydrateCouncil(ws, message),
           [UPDATE_GUESS]: () => hydrateGuess(ws, message),

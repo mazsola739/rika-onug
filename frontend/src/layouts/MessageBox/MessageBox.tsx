@@ -5,7 +5,7 @@ import { StyledMessageBox, Message, MessageText } from './MessageBox.styles'
 import { MessageBoxLook, MessageBoxSelectableCards, MessageBoxSelectableMarks, MessageBoxAnswer, MessageBoxVoteResult } from './MessageBoxComponents'
 import { SelectableCardsButtons, SelectableMarksButtons, AnswerButtons, SceneEndButtons } from './MessageBoxButtons'
 
-//TODO show own card own mark ect... in box?
+//TODO show own card own mark ect... in box? no buttons here?
 
 export const MessageBox: React.ComponentType = observer(() => {
   const { narrationImage, narration, privateMessage, isSelectableCards, isSelectableMarks, isPlayerIdentification, isAnswerOptions, isVoteResult } = messageStore

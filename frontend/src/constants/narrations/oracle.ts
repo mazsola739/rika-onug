@@ -19,8 +19,7 @@ export const oracle_centerexchange_yes = 'Okay ORACLE, go ahead and exchange you
 export const oracle_centerexchange_yes2 = "What's so bad about being an oracle? Keep your card."
 export const oracle_evenodd_even = 'The Oracle has an even number.'
 export const oracle_evenodd_odd = 'The Oracle has an odd number.'
-export const oracle_guessnumber_failure =
-  "Wrong! You're clearly a terrible oracle. EVERYONE ELSE, your winning conditions have changed. You win if the Oracle dies. ORACLE, you only win if you don't die."
+export const oracle_guessnumber_failure = "Wrong! You're clearly a terrible oracle. EVERYONE ELSE, your winning conditions have changed. You win if the Oracle dies. ORACLE, you only win if you don't die."
 export const oracle_guessnumber_success = 'You really are an oracle! Because that was indeed the number I was thinking of. For the rest of the night, you may watch the events.'
 export const oracle_ripple_no = 'Seriously? Why not? Okay, whatever.'
 export const oracle_ripple_yes = 'Okay, there will be a ripple at the end of the night.'

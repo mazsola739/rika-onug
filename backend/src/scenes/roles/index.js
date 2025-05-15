@@ -121,6 +121,7 @@ export * from './empath/empath.constants'
 export * from './empath/empath'
 export * from './empath/empath.narration'
 export * from './empath/empath.response'
+export * from './empath/empath.voteHydrate'
 
 export * from './epicbattle/epicbattle.action'
 export * from './epicbattle/epicbattle.constants'

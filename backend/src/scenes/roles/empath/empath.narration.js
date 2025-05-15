@@ -9,8 +9,6 @@ export const empathNarration = (gamestate, prefix) => {
   const randomEmpathInstruction = getRandomItemFromArray(randomEmpathInstructions)
   const narration = [...empathKey, randomEmpathInstruction]
 
-  gamestate.roles[prefix].instruction = randomEmpathInstruction
-
   let activePlayerNumbers = []
   if (randomKey === 'activePlayers') {
     activePlayerNumbers = [...randomPlayers.filter(player => player !== 'conjunction_and').map(player => player.replace('identifier_player', 'player_'))]
@@ -20,5 +18,9 @@ export const empathNarration = (gamestate, prefix) => {
   } else if (randomKey === 'identifier_everyone') {
     activePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
   }
-  return { narration, activePlayerNumbers }
+
+  gamestate.roles[prefix].instruction = randomEmpathInstruction
+  gamestate.roles[prefix].active_player_numbers = activePlayerNumbers
+
+  return  narration 
 }

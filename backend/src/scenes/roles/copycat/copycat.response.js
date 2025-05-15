@@ -7,7 +7,7 @@ export const copycatResponse = (gamestate, token, selected_card_positions, title
   }
 
   const { id, role, team } = gamestate.positions.card_positions[selected_card_positions[0]].card
-  const { player_card_id, player_role_id, player_role } = gamestate.players[token].card
+  const { player_card_id } = gamestate.players[token].card
 
   if (id === 1 || id === 30 || id === 64) {
     updatePlayerKnownCard(gamestate, token, id, 'VILLAGER', id, 'villager')
@@ -16,11 +16,10 @@ export const copycatResponse = (gamestate, token, selected_card_positions, title
   }
   const showCards = sawCards(gamestate, [selected_card_positions[0]], token)
 
-  gamestate.players[token].new_role_id = player_role_id
-
   const action = generateRoleAction(gamestate, token, title, {
-    private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_you_are_that_role', `${player_role}`],
+    private_message: ['action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]]), 'action_you_are_that_role', `${gamestate.players[token]?.card.player_role.toLowerCase()}}`],
     showCards,
+    uniqueInformation: { new_role_id: gamestate.players[token].card.player_role_id },
     scene_end: true
   })
 

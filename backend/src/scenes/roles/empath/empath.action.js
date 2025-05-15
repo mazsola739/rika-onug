@@ -1,23 +1,29 @@
+import { isActivePlayer } from '../../activePlayer'
 import { generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
-//TODO OPEN EYES CLOSE EYES
-/*   let activePlayerNumbers = []
-  if (randomKey === 'activePlayers') {
-    activePlayerNumbers = [...randomPlayers.filter(player => player !== 'conjunction_and').map(player => player.replace('identifier_player', 'player_'))]
-  } else if (randomKey === 'identifier_oddplayers' || randomKey === 'identifier_evenplayers') {
-    const evenOrOdd = randomKey.includes('even') ? 'even' : randomKey.includes('odd') ? 'odd' : ''
-    activePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate, evenOrOdd)
-  } else if (randomKey === 'identifier_everyone') {
-    activePlayerNumbers = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
-  } */
+//TODO closed eyes!!!
+export const empathAction = (gamestate, token, title, prefix) => {
+  const activePlayerNumbers = gamestate.roles[prefix].active_player_numbers
 
-export const empathAction = (gamestate, token, title) => {
-  const selectable_cards = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
-  const selectable_card_limit = { player: 1, center: 0 }
+  let selectable_cards = []
+  let selectable_card_limit = {}
+  const private_message = []
+  let obligatory = true
+  let vote = false
 
+  if (activePlayerNumbers.includes(gamestate.players[token].player_number)) {
+    selectable_cards = getPlayerNumbersByGivenConditions(gamestate, 'allPlayers')
+    selectable_card_limit = { player: 1, center: 0 }
+    private_message.push('action_must_one_any')
+    vote = true
+  }
+  if (!activePlayerNumbers.includes(gamestate.players[token].player_number) || (prefix === 'empath' && isActivePlayer(gamestate.players[token].card).EMPATH) || (prefix === 'doppelganger_empath' && isActivePlayer(gamestate.players[token].card).DOPPELGANGER_EMPATH)) {
+    private_message.push('action_empath')
+  }
   return generateRoleAction(gamestate, token, title, {
-    private_message: ['action_must_one_any'],
-    selectableMarks: { selectable_cards, selectable_card_limit },
-    obligatory: true
+    private_message,
+    selectableCards: { selectable_cards, selectable_card_limit },
+    uniqueInformation: { vote },
+    obligatory
   })
 }

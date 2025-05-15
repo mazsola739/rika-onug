@@ -81,6 +81,8 @@ const filters = {
   cardOrMarkActionTrue: player => player.card_or_mark_action === true,
 
   //empath
+  empath: player => player.card.player_role_id === 77 && player.card.player_original_id !== 1,
+  doppelgangerEmpath: player => player.card.player_role_id === 77 && player.card.player_original_id === 1,
   nonEmpath: player => player.card.player_role_id !== 77,
 }
 

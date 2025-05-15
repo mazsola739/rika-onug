@@ -18,6 +18,7 @@ export const leaveGame = async (ws, message) => {
       stage: STAGES.ROOM
     }
     //TODO reset other stuffs? different way to reset?
+    //TODO compare with stopGame
 
     delete newGamestate.positions.card_positions
     delete newGamestate.positions.mark_positions

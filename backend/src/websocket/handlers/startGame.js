@@ -29,6 +29,8 @@ export const startGame = async (ws, message) => {
     newGamestate.scenes.chapter = [{ scene_title: 'START_GAME', scene_number: 0 }]
     newGamestate.scenes.narration = []
 
+    newGamestate.players[token].player_history['START_GAME'] = { show_cards: [{ [newGamestate.players[token].player_number]: newGamestate.players[token].card.player_original_id }] }
+
     if (!areAllPlayersReady(newGamestate.players)) {
       logError(`Not all players are ready. Current readiness: ${JSON.stringify(newGamestate)}`)
 

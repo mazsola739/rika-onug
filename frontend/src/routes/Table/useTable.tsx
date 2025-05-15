@@ -1,7 +1,7 @@
 import { ARRIVE_TABLE, HYDRATE_READY, HYDRATE_TABLE, REDIRECT } from 'constants'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { deckStore, playersStore, riseAndRestStore, wsStore } from 'store'
+import { playersStore, riseAndRestStore, wsStore } from 'store'
 import { splitCardsToTable } from 'utils'
 
 export const useTable = () => {

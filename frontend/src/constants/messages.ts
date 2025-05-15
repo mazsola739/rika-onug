@@ -94,6 +94,9 @@ export const action_own_card = 'Look for your own card'
 export const action_own_mark = 'Look for your own mark'
 export const action_selected_card = 'Look for selected card'
 
+//emapth
+export const action_empath = 'Look for result'
+
 //TODO better idea?
 export const action_seer_end = 'two center'
 

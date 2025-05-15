@@ -5,6 +5,7 @@ import { getPublicPlayersInformation, sendMessage } from '../../utils'
 import { getKeys, getKnownPlayer, updatePlayer } from '../../utils/council.util'
 import { validateRoom } from '../../validators'
 
+//TODO personal history
 export const hydrateCouncil = async (ws, message) => {
   const { room_id, token } = message
   logTrace(`hydrate council in ${room_id}`)
