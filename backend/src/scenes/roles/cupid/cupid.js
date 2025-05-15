@@ -5,7 +5,6 @@ import { cupidAction } from './cupid.action'
 export const cupid = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['cupid_kickoff']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const cupid = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

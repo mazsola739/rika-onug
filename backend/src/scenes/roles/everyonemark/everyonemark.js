@@ -5,7 +5,6 @@ import { everyonemarkAction } from './everyonemark.action'
 export const everyonemark = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['everyone_mark']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const everyonemark = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

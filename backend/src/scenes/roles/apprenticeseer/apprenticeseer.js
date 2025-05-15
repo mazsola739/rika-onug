@@ -6,8 +6,6 @@ export const apprenticeseer = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['apprenticeseer_kickoff']
 
-  gamestate.scenes.narration.push({ [title]: narration })
-
   tokens.forEach(token => {
     let action = {}
     const card = gamestate.players[token].card
@@ -19,6 +17,8 @@ export const apprenticeseer = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

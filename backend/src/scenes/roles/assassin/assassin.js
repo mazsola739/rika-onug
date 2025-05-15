@@ -5,7 +5,6 @@ import { assassinAction } from './assassin.action'
 export const assassin = (gamestate, title, hasApprenticeAssassin, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [`${prefix}_kickoff`, 'assassin_kickoff2', hasApprenticeAssassin && 'assassin_appassassin_assassin']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const assassin = (gamestate, title, hasApprenticeAssassin, prefix) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

@@ -18,15 +18,15 @@ export const epicbattle = (gamestate, title, hasEasterEgg, hasEpicBattle, totalP
     }
   }
 
-  gamestate.scenes.narration.push({ [title]: narration })
-
   tokens.forEach(token => {
     let action = {}
     gamestate.players[token].action_finished = false
     action = epicbattleAction(gamestate, token, title)
-    
+
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

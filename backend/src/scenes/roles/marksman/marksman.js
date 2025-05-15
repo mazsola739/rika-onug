@@ -5,7 +5,6 @@ import { marksmanAction } from './marksman.action'
 export const marksman = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_marksman_kickoff' : 'marksman_kickoff', 'marksman_kickoff2']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const marksman = (gamestate, title, hasDoppelganger) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

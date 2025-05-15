@@ -6,7 +6,6 @@ import { doppelgangerinstantactionNarration } from './doppelgangerinstantaction.
 export const doppelgangerinstantaction = (gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = doppelgangerinstantactionNarration(selected_cards)
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -19,6 +18,8 @@ export const doppelgangerinstantaction = (gamestate, title, selected_cards) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

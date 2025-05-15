@@ -6,7 +6,6 @@ import { oraclequestionNarration } from './oraclequestion.narration'
 export const oracleQuestion = (gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = oraclequestionNarration(gamestate, selected_cards)
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -19,6 +18,8 @@ export const oracleQuestion = (gamestate, title, selected_cards) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

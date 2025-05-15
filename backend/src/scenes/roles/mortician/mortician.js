@@ -6,7 +6,6 @@ import { morticianNarration } from './mortician.narration'
 export const mortician = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = morticianNarration(gamestate, prefix)
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -19,6 +18,8 @@ export const mortician = (gamestate, title, prefix) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

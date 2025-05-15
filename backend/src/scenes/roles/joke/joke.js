@@ -5,7 +5,6 @@ import { random_joke } from './joke.constants'
 export const joke = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [getRandomItemFromArray(random_joke)]
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -14,6 +13,8 @@ export const joke = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

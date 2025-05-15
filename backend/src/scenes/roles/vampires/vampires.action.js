@@ -1,55 +1,57 @@
-import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
+import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions, updateMark } from '../../sceneUtils'
 
 export const vampiresAction = (gamestate, token, title) => {
-  const vampires = getPlayerNumbersByGivenConditions(gamestate, 'vampires')
+  const vampires = getPlayerNumbersByGivenConditions(gamestate, 'vampire')
   const selectable_marks = getPlayerNumbersByGivenConditions(gamestate, 'nonVampire')
   const selectable_mark_limit = { mark: 1 }
-
-  const isSingleNonVampire = selectable_marks.length === 1
   const isSingleVampire = vampires.length === 1
 
   const messageIdentifiers = formatPlayerIdentifier(vampires)
-  const privateMessage = isSingleVampire ? ['action_no_vampires'] : ['action_vampires', ...messageIdentifiers]
+  let private_message = isSingleVampire ? ['action_no_vampires'] : ['action_vampires', ...messageIdentifiers]
 
-  //TODO fix singleselection
-  if (isSingleNonVampire) {
-    const vampirePosition = gamestate.positions.mark_positions.vampire
-    const selectedPosition = gamestate.positions.card_positions[selectable_marks[0]].mark
+  if (selectable_marks.length === 0) {
+    private_message.push('action_no_selectable_player')
+    return generateRoleAction(gamestate, token, title, {
+      private_message,
+      selectableMarks: { selectable_marks, selectable_mark_limit },
+      uniqueInformation: { vote: false, vampires },
+      scene_end: true
+    })
+  }
 
-    const isSwappedAlready = vampirePosition === selectedPosition
+  if (selectable_marks.length === 1) {
+    const isSwappedAlready = gamestate.positions.mark_positions.vampire === gamestate.positions.card_positions[selectable_marks[0]].mark
 
     if (!isSwappedAlready) {
-      gamestate.positions.mark_positions.vampire = selectedPosition
-      gamestate.positions.card_positions[selectable_marks[0]].mark = vampirePosition
+      updateMark(gamestate, token, selectable_marks, ['vampire'])
+      gamestate.roles.vampires.new_vampire.push(selectable_marks)
+      private_message.push('action_mark_of_vampire', ...formatPlayerIdentifier(selectable_marks))
     }
 
-    gamestate.players[token].card_or_mark_action = true
-
-    const messageIdentifiers = formatPlayerIdentifier([selectable_marks[0]])
-    privateMessage.push('action_mark_of_vampire', ...messageIdentifiers)
-
     return generateRoleAction(gamestate, token, title, {
-      private_message: privateMessage,
-      uniqueInformation: { vampires, mark_of_vampire: [selectable_marks[0]] },
+      private_message,
+      uniqueInformation: { vote: false, vampires },
       scene_end: true
     })
   }
 
   if (isSingleVampire) {
+    private_message.push('action_must_one_any_non_vampire')
     return generateRoleAction(gamestate, token, title, {
-      private_message: ['action_must_one_any_non_vampire'],
+      private_message,
       selectableMarks: { selectable_marks, selectable_mark_limit },
       uniqueInformation: { vote: false, vampires },
-      obligatory: true
+      obligatory: true,
+      scene_end: false
     })
   }
 
-  privateMessage.push('FYI_TBD', 'action_must_one_any_non_vampire')
-
+  private_message.push('action_must_one_any_non_vampire')
   return generateRoleAction(gamestate, token, title, {
-    private_message: privateMessage,
+    private_message,
     selectableMarks: { selectable_marks, selectable_mark_limit },
     uniqueInformation: { vote: true, vampires },
-    obligatory: true
+    obligatory: true,
+    scene_end: false
   })
 }

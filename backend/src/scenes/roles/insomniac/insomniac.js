@@ -5,7 +5,6 @@ import { insomniacAction } from './insomniac.action'
 export const insomniac = (gamestate, title, hasDoppelganger) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_insomniac_kickoff' : 'insomniac_kickoff', 'insomniac_kickoff2']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const insomniac = (gamestate, title, hasDoppelganger) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

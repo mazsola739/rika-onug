@@ -6,7 +6,6 @@ import { copycatAction } from './copycat.action'
 export const copycat = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['copycat_kickoff']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -19,6 +18,8 @@ export const copycat = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

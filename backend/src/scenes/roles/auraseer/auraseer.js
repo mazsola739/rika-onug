@@ -5,7 +5,6 @@ import { auraseerAction } from './auraseer.action'
 export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDoppelganger ? 'doppelganger_auraseer_kickoff' : 'auraseer_kickoff', hasMarks ? 'auraseer_marks_and_cards' : 'auraseer_cards']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const auraseer = (gamestate, title, hasDoppelganger, hasMarks) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

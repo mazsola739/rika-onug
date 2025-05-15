@@ -6,7 +6,6 @@ export const nostradamusreaction = (gamestate, title) => {
   const team = gamestate.roles.nostradamus.team
   const nostradamusTeam = !team ? 'nostradamus_team_villager' : `nostradamus_team_${team}`
   const narration = ['nostradamus_teamstart', nostradamusTeam]
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -15,6 +14,8 @@ export const nostradamusreaction = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

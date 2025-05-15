@@ -5,7 +5,6 @@ import { vampiresAction } from './vampires.action'
 export const vampires = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['vampires_kickoff', 'vampires_vote']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const vampires = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

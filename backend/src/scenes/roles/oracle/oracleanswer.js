@@ -1,12 +1,11 @@
-import { isActivePlayer } from "../../activePlayer"
-import { getAllPlayerTokens, createAndSendSceneMessage } from "../../sceneUtils"
-import { oracleanswerAction } from "./oracleanswer.action"
-import { oracleanswerNarration } from "./oracleanswer.narration"
+import { isActivePlayer } from '../../activePlayer'
+import { getAllPlayerTokens, createAndSendSceneMessage } from '../../sceneUtils'
+import { oracleanswerAction } from './oracleanswer.action'
+import { oracleanswerNarration } from './oracleanswer.narration'
 
 export const oracleAnswer = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = oracleanswerNarration(gamestate)
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -19,6 +18,8 @@ export const oracleAnswer = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

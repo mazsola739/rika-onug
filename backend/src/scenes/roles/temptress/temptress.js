@@ -5,7 +5,6 @@ import { temptressAction } from './temptress.action'
 export const temptress = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['temptress_kickoff']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const temptress = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

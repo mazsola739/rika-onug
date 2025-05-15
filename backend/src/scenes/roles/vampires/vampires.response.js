@@ -1,27 +1,25 @@
-import { formatPlayerIdentifier, generateRoleAction } from '../../sceneUtils'
+import { createAndSendSceneMessage, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, updateMark } from '../../sceneUtils'
 import { validateMarkSelection } from '../../validators'
 
 export const vampiresResponse = async (gamestate, token, selected_mark_positions, title) => {
   if (!validateMarkSelection(gamestate, token, selected_mark_positions, title)) {
     return gamestate
   }
+  const isSwappedAlready = gamestate.positions.mark_positions.vampire === gamestate.positions.card_positions[selected_mark_positions[0]].mark
 
-  const vampirePosition = gamestate.positions.mark_positions.vampire
-  const selectedPosition = gamestate.positions.card_positions[selected_mark_positions[0]].mark
-
-  const isSwappedAlready = vampirePosition === selectedPosition
-
-  //TODO updateMark use here?
   if (!isSwappedAlready) {
-    gamestate.positions.mark_positions.vampire = selectedPosition
-    gamestate.positions.card_positions[selected_mark_positions[0]].mark = vampirePosition
+    updateMark(gamestate, token, [selected_mark_positions[0]], ['vampire'])
     gamestate.roles.vampires.new_vampire.push(selected_mark_positions[0])
   }
 
-  gamestate.players[token].card_or_mark_action = true
-
-  return generateRoleAction(gamestate, token, title, {
+  const action = generateRoleAction(gamestate, token, title, {
     private_message: ['action_mark_of_vampire', ...formatPlayerIdentifier([selected_mark_positions[0]])],
     scene_end: true
   })
+
+  const narration = getNarrationByTitle(title, gamestate.scenes.narration)
+
+  createAndSendSceneMessage(gamestate, token, title, action, narration)
+
+  return gamestate
 }

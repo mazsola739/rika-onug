@@ -5,7 +5,6 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 export const drpeeker = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['drpeeker_kickoff']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const drpeeker = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

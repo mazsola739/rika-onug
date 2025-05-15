@@ -7,7 +7,6 @@ import { rascalNarration } from './rascal.narration'
 export const rascal = (gamestate, title, prefix) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = rascalNarration(gamestate, prefix)
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -25,6 +24,8 @@ export const rascal = (gamestate, title, prefix) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

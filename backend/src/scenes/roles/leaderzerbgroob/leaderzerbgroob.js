@@ -5,7 +5,6 @@ import { leaderZerbgroobAction } from './leaderzerbgroob.action'
 export const leaderzerbgroob = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['leader_zerbgroob']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const leaderzerbgroob = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

@@ -7,7 +7,6 @@ import { supervillainsAction } from './supervillains.action'
 export const supervillains = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['supervillains_kickoff']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -20,6 +19,8 @@ export const supervillains = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

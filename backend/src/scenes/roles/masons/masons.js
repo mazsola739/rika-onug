@@ -5,7 +5,6 @@ import { masonsAction } from './masons.action'
 export const masons = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['masons_kickoff']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const masons = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

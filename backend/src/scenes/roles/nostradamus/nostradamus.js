@@ -5,7 +5,6 @@ import { nostradamusAction } from './nostradamus.action'
 export const nostradamus = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['nostradamus_kickoff']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const nostradamus = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

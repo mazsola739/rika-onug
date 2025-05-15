@@ -1,3 +1,5 @@
+//TODO not finished yet: ripple, oracle, aliens, vampires, empath, supervillains
+
 /* TODO only 1 selectable?  - with obligatory: true, if false, we dont need to set this
     also in this case if we call role Response function: TODO need to fix playerhistory for validator
 

@@ -5,7 +5,6 @@ import { robberAction } from './robber.action'
 export const robber = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = ['robber_kickoff']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const robber = (gamestate, title) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

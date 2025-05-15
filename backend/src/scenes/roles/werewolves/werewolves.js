@@ -5,7 +5,6 @@ import { werewolvesAction } from './werewolves.action'
 export const werewolves = (gamestate, title, hasDreamWolf) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = [hasDreamWolf ? 'werewolves_dreamwolf_kickoff' : 'werewolves_kickoff']
-  gamestate.scenes.narration.push({ [title]: narration })
 
   tokens.forEach(token => {
     let action = {}
@@ -18,6 +17,8 @@ export const werewolves = (gamestate, title, hasDreamWolf) => {
 
     createAndSendSceneMessage(gamestate, token, title, action, narration)
   })
+
+  gamestate.scenes.narration.push({ [title]: narration })
 
   return gamestate
 }

@@ -18,7 +18,7 @@ export const action_open_you_eyes = 'You can open your eyes for the rest of the 
 export const action_watch_or_skip = 'You can watch or skip the scene'
 export const action_no_active_player = 'No active player in the scene'
 
-export const action_oracle_question = 'MessageBoxAnswer the question'
+export const action_oracle_question = 'Answer the question'
 export const action_oracle_answer = 'Your answer:'
 export const action_stay_oracle = 'Stay oracle'
 
