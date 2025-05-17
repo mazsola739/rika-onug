@@ -1,13 +1,13 @@
 import { formatPlayerIdentifier, generateRoleAction, getPlayerNumbersByGivenConditions } from '../../sceneUtils'
 
 export const auraseerAction = (gamestate, token, title) => {
-  const playersWithCardOrMarkActionTrue = getPlayerNumbersByGivenConditions(gamestate, 'cardOrMarkActionTrue')
+  const auraseer = getPlayerNumbersByGivenConditions(gamestate, 'cardOrMarkActionTrue')
 
-  const messageIdentifiers = formatPlayerIdentifier(playersWithCardOrMarkActionTrue)
+  const messageIdentifiers = formatPlayerIdentifier(auraseer)
 
   return generateRoleAction(gamestate, token, title, {
     private_message: ['action_card_or_mark_action', ...messageIdentifiers, 'POINT'],
-    uniqueInformation: { auraseer: playersWithCardOrMarkActionTrue },
+    uniqueInformation: { auraseer },
     scene_end: true
   })
 }

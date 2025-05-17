@@ -4,7 +4,7 @@ export const apprenticetannerAction = (gamestate, token, title) => {
   let tanner = getPlayerNumbersByGivenConditions(gamestate, 'tanner')
 
   const messageIdentifiers = formatPlayerIdentifier(tanner)
-  let privateMessage = ['action_tanner', ...messageIdentifiers, 'POINT']
+  let private_message = ['action_tanner', ...messageIdentifiers, 'POINT']
 
   if (tanner.length > 0) {
     gamestate.players[token].card.player_team = 'apprenticetanner'
@@ -14,11 +14,11 @@ export const apprenticetannerAction = (gamestate, token, title) => {
     const { player_card_id, player_role_id } = gamestate.players[token].card
     updatePlayerKnownCard(gamestate, token, player_card_id, 'TANNER', player_role_id, 'tanner')
 
-    privateMessage = ['action_tanner_now']
+    private_message = ['action_tanner_now']
   }
 
   return generateRoleAction(gamestate, token, title, {
-    private_message: privateMessage,
+    private_message,
     uniqueInformation: { tanner },
     scene_end: true
   })

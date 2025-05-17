@@ -1,4 +1,6 @@
-//TODO not finished yet: ripple, oracle, aliens, vampires, empath, supervillains
+//TODO not finished yet: 
+/* aliens, alphawolf, , apprenticeassassin, apprenticeseer, , assassin, , beholder, blob, bodysnatcher, copycat, , cupid, curator, , diseased, doppelgangerinstantaction, , drunk, empath, epicbattle, everyonemark, , exposer, familyman, flipper, gremlin, groobzerb, insomniac, instigator, intern, joke, leader, leaderzerbgroob, lovers, madscientist, marksman, masons, minion, , mortician, mysticwolf, nostradamus, nostradamusreaction, openeyes, oracle, oracleanswer, oraclequestion, paranormalinvestigator, pickpocket, priest, psychic, , rascal, renfield, revealer, ripple, robber, , seer, , sentinel, squire, supervillains, , temptress, thecount, thing, troublemaker, vampires, villageidiot, , werewolves, witch */
+
 
 /* TODO only 1 selectable?  - with obligatory: true, if false, we dont need to set this
     also in this case if we call role Response function: TODO need to fix playerhistory for validator
@@ -74,7 +76,7 @@ export * from './beholder/beholder.response'
 export * from './blob/blob.action'
 export * from './blob/blob.constants'
 export * from './blob/blob'
-export * from './blob/blob.narrration'
+export * from './blob/blob.narration'
 
 export * from './bodysnatcher/bodysnatcher.action'
 export * from './bodysnatcher/bodysnatcher.constants'

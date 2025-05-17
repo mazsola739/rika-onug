@@ -20,9 +20,7 @@ export const vampiresAction = (gamestate, token, title) => {
   }
 
   if (selectable_marks.length === 1) {
-    const isSwappedAlready = gamestate.positions.mark_positions.vampire === gamestate.positions.card_positions[selectable_marks[0]].mark
-
-    if (!isSwappedAlready) {
+    if (!gamestate.positions.mark_positions.vampire === gamestate.positions.card_positions[selectable_marks[0]].mark) {
       updateMark(gamestate, token, selectable_marks, ['vampire'])
       gamestate.roles.vampires.new_vampire.push(selectable_marks)
       private_message.push('action_mark_of_vampire', ...formatPlayerIdentifier(selectable_marks))

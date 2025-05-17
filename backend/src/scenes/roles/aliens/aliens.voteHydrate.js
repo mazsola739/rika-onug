@@ -51,19 +51,16 @@ export const aliensVotehydrate = async message => {
         case 'aliens_allview':
           showCards = sawCards(gamestate, [unanimousPlayerNumber], token)
           message = 'action_saw_card'
-
           break
         case 'aliens_newalien':
           updateCardRoleAndTeam(gamestate, unanimousPlayerNumber, 'ALIEN', 'alien')
           new_alien = [unanimousPlayerNumber]
           message = 'action_turned_newalien'
-
           break
         case 'aliens_alienhelper':
           updateCardRoleAndTeam(gamestate, unanimousPlayerNumber, gamestate.positions.card_positions[unanimousPlayerNumber].card.role, 'alien')
           new_alien_helper = [unanimousPlayerNumber]
           message = 'action_turned_alienhelper'
-
           break
       }
 

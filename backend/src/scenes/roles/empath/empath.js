@@ -12,11 +12,7 @@ export const empath = (gamestate, title, prefix) => {
     const card = gamestate.players[token].card
     const activePlayerNumbers = gamestate.roles[prefix].active_player_numbers
 
-    if (
-      (prefix === 'empath' && isActivePlayer(card).EMPATH) ||
-      (prefix === 'doppelganger_empath' && isActivePlayer(card).DOPPELGANGER_EMPATH) ||
-      activePlayerNumbers.includes(gamestate.players[token].player_number)
-    ) {
+    if ((prefix === 'empath' && isActivePlayer(card).EMPATH) || (prefix === 'doppelganger_empath' && isActivePlayer(card).DOPPELGANGER_EMPATH) || activePlayerNumbers.includes(gamestate.players[token].player_number)) {
       gamestate.players[token].action_finished = false
       action = empathAction(gamestate, token, title, prefix)
     }

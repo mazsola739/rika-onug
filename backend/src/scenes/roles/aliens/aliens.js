@@ -3,6 +3,7 @@ import { createAndSendSceneMessage, getAllPlayerTokens } from '../../sceneUtils'
 import { aliensNarration } from './aliens.narration'
 import { aliensAction } from './aliens.action'
 
+//TODO send message to the new alien / new alien helper - also show to them the other aliens?
 export const aliens = (gamestate, title, selected_cards) => {
   const tokens = getAllPlayerTokens(gamestate.players)
   const narration = aliensNarration(gamestate, selected_cards)

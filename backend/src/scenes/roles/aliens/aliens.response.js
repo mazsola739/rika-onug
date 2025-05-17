@@ -6,16 +6,16 @@ export const aliensResponse = (gamestate, token, selected_card_positions, title)
     return gamestate
   }
 
-  const { instruction: randomAlienInstruction } = gamestate.roles.aliens
+  const { instruction } = gamestate.roles.aliens
 
   let showCards = []
   let private_message = []
 
-  switch (randomAlienInstruction) {
+  switch (instruction) {
     case 'aliens_view':
     case 'aliens_allview':
       showCards = sawCards(gamestate, [selected_card_positions[0]], token)
-      private_message = [...(randomAlienInstruction === 'aliens_allview' ? ['action_voted_together'] : []), 'action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])]
+      private_message = [...(instruction === 'aliens_allview' ? ['action_voted_together'] : []), 'action_saw_card', ...formatPlayerIdentifier([selected_card_positions[0]])]
       break
 
     case 'aliens_newalien':

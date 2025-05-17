@@ -1,6 +1,6 @@
 import { repo, repositoryType } from '../../../repository'
 import { sendMessageToPlayer } from '../../../utils'
-import { createAndSendSceneMessage, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber } from '../../sceneUtils'
+import { createAndSendSceneMessage, formatPlayerIdentifier, generateRoleAction, getNarrationByTitle, getPlayerNumbersByGivenConditions, getPlayerTokensByPlayerNumber, updateMark } from '../../sceneUtils'
 
 export const vampiresVotehydrate = async message => {
   const { room_id, token, selected_vote, title } = message
@@ -8,9 +8,8 @@ export const vampiresVotehydrate = async message => {
   try {
     const gamestate = await repo[repositoryType].readGamestate(room_id)
 
-    const vampires = getPlayerNumbersByGivenConditions(gamestate, 'vampires')
+    const vampires = getPlayerNumbersByGivenConditions(gamestate, 'vampire')
     const vampiresTokens = getPlayerTokensByPlayerNumber(gamestate.players, vampires)
-    const vampireCount = vampires.length
     const currentPlayerNumber = getPlayerNumbersByGivenConditions(gamestate, 'currentPlayer', token)[0]
 
     const vampire_votes = { ...gamestate.roles.vampires.vampire_votes }
@@ -35,30 +34,17 @@ export const vampiresVotehydrate = async message => {
     gamestate.players[token].vampire_vote = selected_vote
     gamestate.roles.vampires.vampire_votes = vampire_votes
 
-    const unanimousVote = Object.entries(vampire_votes).find(([, voters]) => voters.length === vampireCount)
+    const unanimousVote = Object.entries(vampire_votes).find(([, voters]) => voters.length ===  vampires.length)
 
     if (unanimousVote) {
       const unanimousPlayerNumber = unanimousVote[0]
 
-      const vampirePosition = gamestate.positions.mark_positions.vampire
-      const selectedPosition = gamestate.positions.card_positions[unanimousPlayerNumber].mark
-
-      const isSwappedAlready = vampirePosition === selectedPosition
-
-      if (!isSwappedAlready) {
-        gamestate.positions.mark_positions.vampire = selectedPosition
-        gamestate.positions.card_positions[unanimousPlayerNumber].mark = vampirePosition
+      if (!gamestate.positions.mark_positions.vampire === gamestate.positions.card_positions[unanimousPlayerNumber].mark) {
+        updateMark(gamestate, token, [unanimousPlayerNumber], ['vampire'])
+        gamestate.roles.vampires.new_vampire.push(unanimousPlayerNumber)
       }
 
-      gamestate.players[token].card_or_mark_action = true
-
       vampiresTokens.forEach(vampireToken => {
-        gamestate.players[vampireToken].player_history[title] = {
-          ...gamestate.players[vampireToken].player_history[title],
-          mark_of_vampire: [unanimousPlayerNumber],
-          scene_end: true
-        }
-
         const action = generateRoleAction(gamestate, vampireToken, {
           private_message: ['action_voted_together', 'action_mark_of_vampire', ...formatPlayerIdentifier([unanimousPlayerNumber])],
           scene_end: true

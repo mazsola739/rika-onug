@@ -1,7 +1,7 @@
 import { isActivePlayer } from '../../activePlayer'
 import { getAllPlayerTokens, createAndSendSceneMessage } from '../../sceneUtils'
 import { blobAction } from './blob.action'
-import { blobNarration } from './blob.narrration'
+import { blobNarration } from './blob.narration'
 
 export const blob = (gamestate, title) => {
   const tokens = getAllPlayerTokens(gamestate.players)
