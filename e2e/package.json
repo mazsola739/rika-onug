@@ -7,6 +7,6 @@
     "start:card-select-tests": "node ./src/card-select-tests.js"
   },
   "dependencies": {
-    "selenium-webdriver": "^4.16.0"
+    "selenium-webdriver": "^4.38.0"
   }
 }
