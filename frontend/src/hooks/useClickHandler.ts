@@ -37,6 +37,18 @@ export const useClickHandler = () => {
   }
 
   //ROOM
+  const handleFilter = useCallback(
+    (expansion: string) => {
+      sendJsonMessage?.({
+        type: UPDATE_ROOM,
+        expansion,
+        room_id,
+        token
+      })
+    },
+    [sendJsonMessage, room_id, token]
+  )
+
   const handleLeaveRoom = useCallback(() => {
     sendJsonMessage?.({
       type: LEAVE_ROOM,
@@ -199,22 +211,23 @@ export const useClickHandler = () => {
   )
 
   return {
+    handleAccuse,
+    handleAnswerInteraction,
+    handleCardInteraction,
+    handleFilter,
+    handleFinish,
     handleJoinRoom,
-    handleLeaveRoom,
     handleJoinTable,
     handleLeaveGame,
-    handleResetGame,
-    handleStartGame,
-    handleReady,
-    handleStopGame,
-    handleFinish,
-    handleSkip,
-    handleCardInteraction,
+    handleLeaveRoom,
     handleMarkInteraction,
-    handleAnswerInteraction,
+    handleReady,
+    handleResetGame,
     handleSelectAndDeselect,
-    handleVoteNow,
+    handleSkip,
+    handleStartGame,
+    handleStopGame,
     handleVote,
-    handleAccuse
+    handleVoteNow
   }
 }

@@ -1,4 +1,4 @@
-import { ExpansionType, ExpansionsType, StyleType, TeamNameType, TeamNames as TeamNamesTypes, TeamType, TeamsType, WakeType, roomNameType } from 'types'
+import { ClassicExpansionsType, ComicExpansionsType, ExpansionType, StyleType, TeamNameType, TeamNames as TeamNamesTypes, TeamType, TeamsType, WakeType, roomNameType } from 'types'
 
 export const STAGES = {
   LOBBY: 'LOBBY',
@@ -13,13 +13,23 @@ export const TEAMS: TeamsType = {
   village: 0,
   hero: 1,
   own: 2,
-  werewolf: 3,
-  vampire: 4,
-  alien: 5,
-  villain: 6
+  special: 3,
+  werewolf: 4,
+  vampire: 5,
+  alien: 6,
+  villain: 7
 }
 
-export const EXPANSIONS: ExpansionsType = {
+export const CLASSIC_EXPANSIONS: ClassicExpansionsType = {
+  werewolf: 'Werewolf',
+  daybreak: 'Daybreak',
+  vampire: 'Vampire',
+  alien: 'Alien',
+  supervillains: 'Super Villains',
+  bonusroles: 'Bonus Roles'
+}
+
+export const COMIC_EXPANSIONS: ComicExpansionsType = {
   werewolf: 'Werewolf',
   daybreak: 'Daybreak',
   vampire: 'Vampire',
@@ -67,6 +77,7 @@ export const TEAM: TeamType = {
   village: 'village',
   hero: 'hero',
   own: 'own',
+  special: 'special',
   werewolf: 'werewolf',
   vampire: 'vampire',
   alien: 'alien',
@@ -83,12 +94,12 @@ export const TEAMNAME: TeamNameType = {
   village: 'The Townfolk',
   hero: 'The Bravehearts',
   own: 'The Inner Circle',
+  special: 'The Inner Circle',
   werewolf: 'The Pack',
   vampire: 'The Coven',
   alien: 'The Cosmic Collective',
   villain: "The Rogue's Gallery"
 }
-
 
 //TODO room name constants?
 export const roomNames: roomNameType[] = [

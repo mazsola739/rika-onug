@@ -1,7 +1,7 @@
 {
   "stage": "LOBBY",
   "selected_cards": [],
-  "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Super Villains", "Bonus Roles"],
+  "selected_expansions": ["Werewolf", "Daybreak", "Vampire", "Alien", "Bonus Roles"],
   "nicknames": [],
   "game_started": true,
   "game_stopped": false,
@@ -13,7 +13,7 @@
   "vote_result": [],
   "winner_teams": [],
   "loser_teams": [],
-  "positions":{
+  "positions": {
     "card_positions": { "center_left": {}, "center_middle": {}, "center_right": {}, "center_wolf": {}, "center_villain": {} },
     "mark_positions": {},
     "doppelganger_mark_positions": {},
@@ -42,7 +42,7 @@
     "familyman": { "instruction": "" },
     "mortician": { "instruction": "", "key": "" },
     "nostradamus": { "team": "" },
-    "oracle": { "question": "", "answer":"", "aftermath": "","number": 0, "openeyes": false, "target": false },
+    "oracle": { "question": "", "answer": "", "aftermath": "", "number": 0, "openeyes": false, "target": false },
     "psychic": { "instruction": "", "key": "" },
     "rascal": { "instruction": "", "key": "" },
     "vampires": { "vampire_votes": {}, "new_vampire": [] }

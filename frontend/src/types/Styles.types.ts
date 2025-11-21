@@ -24,12 +24,13 @@ export const expansionColorVariants: Record<ExpansionTypes, string> = {
   default: 'rgba(0, 0, 0, 0.3)'
 }
 
-export type AnchorTypes = 'Village' | 'Hero' | 'Own' | 'Werewolf' | 'Vampire' | 'Alien' | 'Villain'
+export type AnchorTypes = 'Village' | 'Hero' | 'Own' | 'Special'| 'Werewolf' | 'Vampire' | 'Alien' | 'Villain'
 export const anchorColorVariants: Record<AnchorTypes, string> = {
   //TODO do i need color?
   Village: 'RoyalBlue',
   Hero: 'RoyalBlue',
   Own: 'SaddleBrown',
+  Special: 'MediumSpringGreen',
   Werewolf: 'DarkRed',
   Vampire: 'DarkSlateBlue',
   Alien: 'DarkGreen',
@@ -37,8 +38,9 @@ export const anchorColorVariants: Record<AnchorTypes, string> = {
 }
 export const imageVariants: Record<AnchorTypes, string> = {
   Village: '/assets/playingcards/troublemaker_2.webp',
-  Hero: '/assets/playingcards/innocent_bystander.webp', //TODO change image
+  Hero: '/assets/playingcards/flipper.webp',
   Own: '/assets/playingcards/tanner_2.webp',
+  Special: '/assets/playingcards/mad_scientist.webp',
   Werewolf: '/assets/playingcards/werewolf_2.webp',
   Vampire: '/assets/playingcards/the_count.webp',
   Alien: '/assets/playingcards/alien_female.webp',

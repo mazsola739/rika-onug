@@ -1,4 +1,4 @@
-import { EXPANSIONS, HYDRATE_ROOM, LEAVE_ROOM } from '../../constants'
+import { CLASSIC_EXPANSIONS, HYDRATE_ROOM, LEAVE_ROOM } from '../../constants'
 import { roomsJson } from '../../data'
 import { logTrace } from '../../log'
 import { repo, repositoryType } from '../../repository'
@@ -7,8 +7,6 @@ import { broadcast, removeUserFromRoom, sendMessage } from '../../utils/connecti
 import { validateRoom } from '../../validators'
 
 export const leaveRoom = async (ws, message) => {
-
-
   const { room_id, token } = message
 
   logTrace(`leave-room requested in ${room_id}`)
@@ -33,7 +31,7 @@ export const leaveRoom = async (ws, message) => {
 
     if (defaultRoom) {
       newGamestate.selected_cards = []
-      newGamestate.selected_expansions = EXPANSIONS
+      newGamestate.selected_expansions = CLASSIC_EXPANSIONS
       newGamestate.players = {}
       newGamestate.total_players = 0
     }

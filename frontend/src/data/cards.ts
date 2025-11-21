@@ -607,7 +607,7 @@ export const cards: CardJson[] = [
     expansion: EXPANSION.supervillains,
     style: STYLE.comic,
     display_name: ROLES.role_innocentbystander,
-    team: TEAM.own,
+    team: TEAM.special,
     wake_up_time: WAKE.day,
     card_name: 'innocent_bystander',
     rules: rules_role.rules_innocentbystander
@@ -617,7 +617,7 @@ export const cards: CardJson[] = [
     expansion: EXPANSION.supervillains,
     style: STYLE.comic,
     display_name: ROLES.role_intern,
-    team: TEAM.own,
+    team: TEAM.special,
     wake_up_time: WAKE.night,
     card_name: 'intern',
     rules: rules_role.rules_intern
@@ -627,7 +627,7 @@ export const cards: CardJson[] = [
     expansion: EXPANSION.supervillains,
     style: STYLE.comic,
     display_name: ROLES.role_madscientist,
-    team: TEAM.own,
+    team: TEAM.special,
     wake_up_time: WAKE.day,
     card_name: 'mad_scientist',
     rules: rules_role.rules_madscientist
@@ -777,7 +777,7 @@ export const cards: CardJson[] = [
     expansion: EXPANSION.bonusroles,
     style: STYLE.comic,
     display_name: ROLES.role_familyman,
-    team: TEAM.own,
+    team: TEAM.special,
     wake_up_time: WAKE.night,
     card_name: 'family_man',
     rules: rules_role.rules_familyman
@@ -787,7 +787,7 @@ export const cards: CardJson[] = [
     expansion: EXPANSION.bonusroles,
     style: STYLE.comic,
     display_name: ROLES.role_innocentbystander,
-    team: TEAM.own,
+    team: TEAM.special,
     wake_up_time: WAKE.day,
     card_name: 'innocent_bystander',
     rules: rules_role.rules_innocentbystander

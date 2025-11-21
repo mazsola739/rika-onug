@@ -1,6 +1,8 @@
 export const ROOM_NAMES = ['archives', 'armory', 'bottomless_pit', 'dungeon', 'dynamite_room', 'great_hall', 'guest_bedroom', 'kitchen', 'laboratory', 'observatory', 'panic_room', 'parlor', 'secret_passage', 'sitting_room', 'staff_quarters', 'study', 'venus_grotto', 'workshop']
 
 export const EXPANSIONS = ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles']
+export const CLASSIC_EXPANSIONS = ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Bonus Roles']
+export const COMIC_EXPANSIONS = ['Super Villains', 'Bonus Roles']
 
 export const STAGES = {
   LOBBY: 'LOBBY',

@@ -1,4 +1,4 @@
-import { EXPANSIONS, HYDRATE_ROOM } from '../../constants'
+import { CLASSIC_EXPANSIONS, HYDRATE_ROOM } from '../../constants'
 import { logError, logTrace } from '../../log'
 import { repo, repositoryType } from '../../repository'
 import { getPlayerNames } from '../../utils'
@@ -16,7 +16,7 @@ export const reset = async message => {
     const newGamestate = {
       ...gamestate,
       selected_cards: [],
-      selected_expansions: EXPANSIONS
+      selected_expansions: CLASSIC_EXPANSIONS
     }
 
     await repo[repositoryType].upsertRoomState(newGamestate)

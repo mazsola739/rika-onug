@@ -25,3 +25,6 @@ export const SwitcherButton: React.ComponentType<SwitcherButtonProps> = observer
 
   return <MenuButton bgImg={bgImg} isSelected={isSelected} onClick={handleClick} />
 })
+
+
+//<Button onClick={handleSwitcher} variant={isReady ? 'blue' : 'green'} buttonText={isReady ? button_label_im_ready : button_label_ready} />
