@@ -1,10 +1,11 @@
-import { EXPANSION, ROLES, rules_role, TEAM, WAKE } from 'constants'
+import { EXPANSION, ROLES, rules_role, STYLE, TEAM, WAKE } from 'constants'
 import { CardJson } from 'types'
 
 export const cards: CardJson[] = [
   {
     id: 1,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_doppelganger,
     team: TEAM.village,
     wake_up_time: WAKE.twilight,
@@ -14,6 +15,7 @@ export const cards: CardJson[] = [
   {
     id: 2,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_drunk,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -23,6 +25,7 @@ export const cards: CardJson[] = [
   {
     id: 3,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_hunter,
     team: TEAM.village,
     wake_up_time: WAKE.day,
@@ -32,6 +35,7 @@ export const cards: CardJson[] = [
   {
     id: 4,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_insomniac,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -41,6 +45,7 @@ export const cards: CardJson[] = [
   {
     id: 5,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_mason,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -50,6 +55,7 @@ export const cards: CardJson[] = [
   {
     id: 6,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_mason,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -59,6 +65,7 @@ export const cards: CardJson[] = [
   {
     id: 7,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_minion,
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
@@ -68,6 +75,7 @@ export const cards: CardJson[] = [
   {
     id: 8,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_robber,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -77,6 +85,7 @@ export const cards: CardJson[] = [
   {
     id: 9,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_seer,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -86,6 +95,7 @@ export const cards: CardJson[] = [
   {
     id: 10,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_tanner,
     team: TEAM.own,
     wake_up_time: WAKE.day,
@@ -95,6 +105,7 @@ export const cards: CardJson[] = [
   {
     id: 11,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_troublemaker,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -104,6 +115,7 @@ export const cards: CardJson[] = [
   {
     id: 12,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_villager,
     team: TEAM.village,
     wake_up_time: WAKE.day,
@@ -113,6 +125,7 @@ export const cards: CardJson[] = [
   {
     id: 13,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_villager,
     team: TEAM.village,
     wake_up_time: WAKE.day,
@@ -122,6 +135,7 @@ export const cards: CardJson[] = [
   {
     id: 14,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_villager,
     team: TEAM.village,
     wake_up_time: WAKE.day,
@@ -131,6 +145,7 @@ export const cards: CardJson[] = [
   {
     id: 15,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_werewolf,
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
@@ -140,6 +155,7 @@ export const cards: CardJson[] = [
   {
     id: 16,
     expansion: EXPANSION.werewolf,
+    style: STYLE.classic,
     display_name: ROLES.role_werewolf,
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
@@ -149,6 +165,7 @@ export const cards: CardJson[] = [
   {
     id: 17,
     expansion: EXPANSION.daybreak,
+    style: STYLE.classic,
     display_name: ROLES.role_alphawolf,
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
@@ -158,6 +175,7 @@ export const cards: CardJson[] = [
   {
     id: 18,
     expansion: EXPANSION.daybreak,
+    style: STYLE.classic,
     display_name: ROLES.role_apprenticeseer,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -167,6 +185,7 @@ export const cards: CardJson[] = [
   {
     id: 19,
     expansion: EXPANSION.daybreak,
+    style: STYLE.classic,
     display_name: ROLES.role_bodyguard,
     team: TEAM.village,
     wake_up_time: WAKE.day,
@@ -176,6 +195,7 @@ export const cards: CardJson[] = [
   {
     id: 20,
     expansion: EXPANSION.daybreak,
+    style: STYLE.classic,
     display_name: ROLES.role_curator,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -185,6 +205,7 @@ export const cards: CardJson[] = [
   {
     id: 21,
     expansion: EXPANSION.daybreak,
+    style: STYLE.classic,
     display_name: ROLES.role_dreamwolf,
     team: TEAM.werewolf,
     wake_up_time: WAKE.day,
@@ -194,6 +215,7 @@ export const cards: CardJson[] = [
   {
     id: 22,
     expansion: EXPANSION.daybreak,
+    style: STYLE.classic,
     display_name: ROLES.role_mysticwolf,
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
@@ -203,6 +225,7 @@ export const cards: CardJson[] = [
   {
     id: 23,
     expansion: EXPANSION.daybreak,
+    style: STYLE.classic,
     display_name: ROLES.role_paranormalinvestigator,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -212,6 +235,7 @@ export const cards: CardJson[] = [
   {
     id: 24,
     expansion: EXPANSION.daybreak,
+    style: STYLE.classic,
     display_name: ROLES.role_revealer,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -221,6 +245,7 @@ export const cards: CardJson[] = [
   {
     id: 25,
     expansion: EXPANSION.daybreak,
+    style: STYLE.classic,
     display_name: ROLES.role_sentinel,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -230,6 +255,7 @@ export const cards: CardJson[] = [
   {
     id: 26,
     expansion: EXPANSION.daybreak,
+    style: STYLE.classic,
     display_name: ROLES.role_villageidiot,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -239,6 +265,7 @@ export const cards: CardJson[] = [
   {
     id: 27,
     expansion: EXPANSION.daybreak,
+    style: STYLE.classic,
     display_name: ROLES.role_witch,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -248,6 +275,7 @@ export const cards: CardJson[] = [
   {
     id: 28,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_apprenticeassassin,
     team: TEAM.own,
     wake_up_time: WAKE.dusk,
@@ -257,6 +285,7 @@ export const cards: CardJson[] = [
   {
     id: 29,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_assassin,
     team: TEAM.own,
     wake_up_time: WAKE.dusk,
@@ -266,6 +295,7 @@ export const cards: CardJson[] = [
   {
     id: 30,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_copycat,
     team: TEAM.village,
     wake_up_time: WAKE.twilight,
@@ -275,6 +305,7 @@ export const cards: CardJson[] = [
   {
     id: 31,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_cupid,
     team: TEAM.village,
     wake_up_time: WAKE.dusk,
@@ -284,6 +315,7 @@ export const cards: CardJson[] = [
   {
     id: 32,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_diseased,
     team: TEAM.village,
     wake_up_time: WAKE.dusk,
@@ -293,6 +325,7 @@ export const cards: CardJson[] = [
   {
     id: 33,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_gremlin,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -302,6 +335,7 @@ export const cards: CardJson[] = [
   {
     id: 34,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_instigator,
     team: TEAM.village,
     wake_up_time: WAKE.dusk,
@@ -311,6 +345,7 @@ export const cards: CardJson[] = [
   {
     id: 35,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_marksman,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -320,6 +355,7 @@ export const cards: CardJson[] = [
   {
     id: 36,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_pickpocket,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -329,6 +365,7 @@ export const cards: CardJson[] = [
   {
     id: 37,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_priest,
     team: TEAM.village,
     wake_up_time: WAKE.dusk,
@@ -338,6 +375,7 @@ export const cards: CardJson[] = [
   {
     id: 38,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_renfield,
     team: TEAM.vampire,
     wake_up_time: WAKE.dusk,
@@ -347,6 +385,7 @@ export const cards: CardJson[] = [
   {
     id: 39,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_thecount,
     team: TEAM.vampire,
     wake_up_time: WAKE.dusk,
@@ -356,6 +395,7 @@ export const cards: CardJson[] = [
   {
     id: 40,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_themaster,
     team: TEAM.vampire,
     wake_up_time: WAKE.dusk,
@@ -365,6 +405,7 @@ export const cards: CardJson[] = [
   {
     id: 41,
     expansion: EXPANSION.vampire,
+    style: STYLE.classic,
     display_name: ROLES.role_vampire,
     team: TEAM.vampire,
     wake_up_time: WAKE.dusk,
@@ -374,6 +415,7 @@ export const cards: CardJson[] = [
   {
     id: 42,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_alien,
     team: TEAM.alien,
     wake_up_time: WAKE.night,
@@ -383,6 +425,7 @@ export const cards: CardJson[] = [
   {
     id: 43,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_alien,
     team: TEAM.alien,
     wake_up_time: WAKE.night,
@@ -392,6 +435,7 @@ export const cards: CardJson[] = [
   {
     id: 44,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_blob,
     team: TEAM.own,
     wake_up_time: WAKE.night,
@@ -401,6 +445,7 @@ export const cards: CardJson[] = [
   {
     id: 45,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_cow,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -410,6 +455,7 @@ export const cards: CardJson[] = [
   {
     id: 46,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_exposer,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -419,6 +465,7 @@ export const cards: CardJson[] = [
   {
     id: 47,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_groob,
     team: TEAM.alien,
     wake_up_time: WAKE.night,
@@ -428,6 +475,7 @@ export const cards: CardJson[] = [
   {
     id: 48,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_leader,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -437,6 +485,7 @@ export const cards: CardJson[] = [
   {
     id: 49,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_mortician,
     team: TEAM.own,
     wake_up_time: WAKE.night,
@@ -446,6 +495,7 @@ export const cards: CardJson[] = [
   {
     id: 50,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_oracle,
     team: TEAM.village,
     wake_up_time: WAKE.twilight,
@@ -455,6 +505,7 @@ export const cards: CardJson[] = [
   {
     id: 51,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_psychic,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -464,6 +515,7 @@ export const cards: CardJson[] = [
   {
     id: 52,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_rascal,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -473,6 +525,7 @@ export const cards: CardJson[] = [
   {
     id: 53,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_synthetic,
     team: TEAM.own,
     wake_up_time: WAKE.night,
@@ -482,6 +535,7 @@ export const cards: CardJson[] = [
   {
     id: 54,
     expansion: EXPANSION.alien,
+    style: STYLE.classic,
     display_name: ROLES.role_zerb,
     team: TEAM.alien,
     wake_up_time: WAKE.night,
@@ -491,6 +545,7 @@ export const cards: CardJson[] = [
   {
     id: 55,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_annoyinglad,
     team: TEAM.hero,
     wake_up_time: WAKE.night,
@@ -500,6 +555,7 @@ export const cards: CardJson[] = [
   {
     id: 56,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_detector,
     team: TEAM.hero,
     wake_up_time: WAKE.night,
@@ -509,6 +565,7 @@ export const cards: CardJson[] = [
   {
     id: 57,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_drpeeker,
     team: TEAM.villain,
     wake_up_time: WAKE.night,
@@ -518,6 +575,7 @@ export const cards: CardJson[] = [
   {
     id: 58,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_evilometer,
     team: TEAM.hero,
     wake_up_time: WAKE.night,
@@ -527,6 +585,7 @@ export const cards: CardJson[] = [
   {
     id: 59,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_flipper,
     team: TEAM.hero,
     wake_up_time: WAKE.night,
@@ -536,6 +595,7 @@ export const cards: CardJson[] = [
   {
     id: 60,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_henchman,
     team: TEAM.villain,
     wake_up_time: WAKE.night,
@@ -545,6 +605,7 @@ export const cards: CardJson[] = [
   {
     id: 61,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_innocentbystander,
     team: TEAM.own,
     wake_up_time: WAKE.day,
@@ -554,6 +615,7 @@ export const cards: CardJson[] = [
   {
     id: 62,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_intern,
     team: TEAM.own,
     wake_up_time: WAKE.night,
@@ -563,6 +625,7 @@ export const cards: CardJson[] = [
   {
     id: 63,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_madscientist,
     team: TEAM.own,
     wake_up_time: WAKE.day,
@@ -572,6 +635,7 @@ export const cards: CardJson[] = [
   {
     id: 64,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_mirrorman,
     team: TEAM.hero,
     wake_up_time: WAKE.twilight,
@@ -581,6 +645,7 @@ export const cards: CardJson[] = [
   {
     id: 65,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_rapscallion,
     team: TEAM.villain,
     wake_up_time: WAKE.night,
@@ -590,6 +655,7 @@ export const cards: CardJson[] = [
   {
     id: 66,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_roleretriever,
     team: TEAM.hero,
     wake_up_time: WAKE.night,
@@ -599,6 +665,7 @@ export const cards: CardJson[] = [
   {
     id: 67,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_selfawarenessgirl,
     team: TEAM.hero,
     wake_up_time: WAKE.night,
@@ -608,6 +675,7 @@ export const cards: CardJson[] = [
   {
     id: 68,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_switcheroo,
     team: TEAM.hero,
     wake_up_time: WAKE.night,
@@ -617,6 +685,7 @@ export const cards: CardJson[] = [
   {
     id: 69,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_temptress,
     team: TEAM.villain,
     wake_up_time: WAKE.night,
@@ -626,6 +695,7 @@ export const cards: CardJson[] = [
   {
     id: 70,
     expansion: EXPANSION.supervillains,
+    style: STYLE.comic,
     display_name: ROLES.role_voodoolou,
     team: TEAM.hero,
     wake_up_time: WAKE.night,
@@ -635,6 +705,7 @@ export const cards: CardJson[] = [
   {
     id: 71,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.classic,
     display_name: ROLES.role_apprenticetanner,
     team: TEAM.own,
     wake_up_time: WAKE.night,
@@ -644,6 +715,7 @@ export const cards: CardJson[] = [
   {
     id: 72,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.classic,
     display_name: ROLES.role_auraseer,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -653,6 +725,7 @@ export const cards: CardJson[] = [
   {
     id: 73,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.classic,
     display_name: ROLES.role_beholder,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -662,6 +735,7 @@ export const cards: CardJson[] = [
   {
     id: 74,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.classic,
     display_name: ROLES.role_bodysnatcher,
     team: TEAM.alien,
     wake_up_time: WAKE.night,
@@ -671,6 +745,7 @@ export const cards: CardJson[] = [
   {
     id: 75,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.classic,
     display_name: ROLES.role_cursed,
     team: TEAM.village,
     wake_up_time: WAKE.day,
@@ -680,6 +755,7 @@ export const cards: CardJson[] = [
   {
     id: 76,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.comic,
     display_name: ROLES.role_defenderer,
     team: TEAM.hero,
     wake_up_time: WAKE.day,
@@ -689,6 +765,7 @@ export const cards: CardJson[] = [
   {
     id: 77,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.classic,
     display_name: ROLES.role_empath,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -698,6 +775,7 @@ export const cards: CardJson[] = [
   {
     id: 78,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.comic,
     display_name: ROLES.role_familyman,
     team: TEAM.own,
     wake_up_time: WAKE.night,
@@ -707,6 +785,7 @@ export const cards: CardJson[] = [
   {
     id: 79,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.comic,
     display_name: ROLES.role_innocentbystander,
     team: TEAM.own,
     wake_up_time: WAKE.day,
@@ -716,6 +795,7 @@ export const cards: CardJson[] = [
   {
     id: 80,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.classic,
     display_name: ROLES.role_nostradamus,
     team: TEAM.own,
     wake_up_time: WAKE.night,
@@ -725,6 +805,7 @@ export const cards: CardJson[] = [
   {
     id: 81,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.classic,
     display_name: ROLES.role_prince,
     team: TEAM.village,
     wake_up_time: WAKE.day,
@@ -734,6 +815,7 @@ export const cards: CardJson[] = [
   {
     id: 82,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.comic,
     display_name: ROLES.role_ricochetrhino,
     team: TEAM.hero,
     wake_up_time: WAKE.day,
@@ -743,6 +825,7 @@ export const cards: CardJson[] = [
   {
     id: 83,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.classic,
     display_name: ROLES.role_squire,
     team: TEAM.werewolf,
     wake_up_time: WAKE.night,
@@ -752,6 +835,7 @@ export const cards: CardJson[] = [
   {
     id: 84,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.comic,
     display_name: ROLES.role_thesponge,
     team: TEAM.hero,
     wake_up_time: WAKE.day,
@@ -761,6 +845,7 @@ export const cards: CardJson[] = [
   {
     id: 85,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.classic,
     display_name: ROLES.role_thing,
     team: TEAM.village,
     wake_up_time: WAKE.night,
@@ -770,6 +855,7 @@ export const cards: CardJson[] = [
   {
     id: 86,
     expansion: EXPANSION.bonusroles,
+    style: STYLE.comic,
     display_name: ROLES.role_windywendy,
     team: TEAM.hero,
     wake_up_time: WAKE.day,
@@ -779,6 +865,7 @@ export const cards: CardJson[] = [
   {
     id: 87,
     expansion: '',
+    style: STYLE.classic,
     display_name: 'Unknown',
     team: 'unknown',
     wake_up_time: WAKE.day,

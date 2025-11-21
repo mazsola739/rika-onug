@@ -1,4 +1,4 @@
-import { AnchorTypes, anchorColorVariants, imageVariants } from "types"
+import { AnchorTypes, anchorColorVariants, imageVariants } from 'types'
 
 export const lightenDarkenColor = (color: string, amount: number) => {
   const hex = color.replace('#', '')

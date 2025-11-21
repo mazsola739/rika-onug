@@ -1,10 +1,10 @@
 import styled from '@emotion/styled'
-import { buttonColorvariants, ColorVariant } from 'types'
+import { buttonColorVariants, ColorVariant } from 'types'
 import { lightenDarkenColor } from 'utils'
 import { StyledButtonProps } from './Button.types'
 
 export const StyledButton = styled.button<StyledButtonProps>`
-  background-color: ${({ variant }) => buttonColorvariants[variant as ColorVariant] || buttonColorvariants.default};
+  background-color: ${({ variant }) => buttonColorVariants[variant as ColorVariant] || buttonColorVariants.default};
   border-radius: 5px;
   cursor: pointer;
   padding: 2px 0 0 0;
@@ -20,6 +20,6 @@ export const StyledButton = styled.button<StyledButtonProps>`
 
   &:hover:not(:disabled) {
     transition: 0.75s;
-    background-color: ${({ variant }) => lightenDarkenColor(buttonColorvariants[variant as ColorVariant] || buttonColorvariants.default, -50)};
+    background-color: ${({ variant }) => lightenDarkenColor(buttonColorVariants[variant as ColorVariant] || buttonColorVariants.default, -50)};
   }
 `

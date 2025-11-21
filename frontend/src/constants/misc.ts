@@ -1,4 +1,4 @@
-import { ExpansionType, ExpansionsType, TeamNameType, TeamNames as TeamNamesTypes, TeamType, TeamsType, WakeType } from 'types'
+import { ExpansionType, ExpansionsType, StyleType, TeamNameType, TeamNames as TeamNamesTypes, TeamType, TeamsType, WakeType, roomNameType } from 'types'
 
 export const STAGES = {
   LOBBY: 'LOBBY',
@@ -73,6 +73,11 @@ export const TEAM: TeamType = {
   villain: 'villain'
 }
 
+export const STYLE: StyleType = {
+  classic: 'classic',
+  comic: 'comic'
+}
+
 //TODO teamnames
 export const TEAMNAME: TeamNameType = {
   village: 'The Townfolk',
@@ -84,7 +89,9 @@ export const TEAMNAME: TeamNameType = {
   villain: "The Rogue's Gallery"
 }
 
-export const roomNames = [
+
+//TODO room name constants?
+export const roomNames: roomNameType[] = [
   { room_id: '', room_name: '' },
   { room_id: 'archives', room_name: 'Archives' },
   { room_id: 'armory', room_name: 'Armory' },

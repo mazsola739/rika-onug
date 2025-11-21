@@ -300,7 +300,6 @@ nostradamus_team_assassin
 nostradamus_team_blob
 nostradamus_team_doppelganger
 nostradamus_team_family
-nostradamus_team_hero
 nostradamus_team_mad
 nostradamus_team_mortician
 nostradamus_team_synthetic
@@ -412,3 +411,857 @@ voodoolou_kickoff
 werewolves_dreamwolf_kickoff
 werewolves_kickoff
 witch_kickoff
+
+
+//Strings//
+switch_game_text=Switch Game
+privacy_text=Imprint/Privacy
+change_timer_text=GAME TIMER
+activate_timer_text=BEGIN
+activate_timer_nocards_notimer_text=Background
+activate_timer_nocards_text=TIMER 
+narration_label=NARRATION / LANGUAGE
+narration_label_simple=NARRATION
+background_label=BACKGROUND
+roletimer_label=ROLE TIMER
+other_label=OTHER OPTIONS
+other_label_short=OTHER
+vol_abbrev_label=Vol
+minute_abbrev_label=Mins
+seconds_abbrev_label=Secs
+edit_button_label=EDIT
+back_button_label=BACK
+stop_button_label=STOP
+help_button_label=HELP
+main_button_label=MAIN
+pause_button_label=PAUSE
+pause_button_alt_label=RESUME
+privacy_text=Privacy Policy
+votenow_button_label=Vote Now!
+start_game_text=Play 
+start_game_postfix_text= 
+yes_button_label=YES
+no_button_label=NO
+even_button_label=EVEN
+odd_button_label=ODD
+1_button_label=1
+2_button_label=2
+3_button_label=3
+4_button_label=4
+5_button_label=5
+6_button_label=6
+7_button_label=7
+8_button_label=8
+9_button_label=9
+10_button_label=10
+11_button_label=11
+12_button_label=12
+conjunction_and_text=and
+conjunction_or_text=or
+visitstore_label=Visit Store!
+learnmore_text=Learn more about One Night...
+timerscreen_label_1_text=TIME
+timerscreen_label_2_text=REMAINING BEFORE VOTE
+timertext_prefix=(PAUSE for 
+timertext_postfix= seconds)
+edition=Choose your edition:
+
+easteregg_really_text=Really? You selected ALL the roles? I have better things to do, and you probably do too. Well, whatever, here you go.
+easteregg_really_expert_text=Really?
+easteregg_weirdos_text=WOW. You know you didn't pick any bad guys, right?
+
+background_none_text=None
+background_wolves_text=Wolves
+background_crickets_text=Crickets
+background_cards_text=Cards
+background_upbeat_text=Upbeat
+background_disco_text=Disco
+background_rock_text=Rock
+background_pop_text=Pop
+background_dramatic_text=Dramatic
+background_horror_text=Horror
+background_fantasy_text=Fantasy
+background_spaghetti_text=Spaghetti
+background_tense_text=Tense
+background_southernrock_text=Southern Rock
+background_alien_text=Alien
+background_50sromp_text=50s Romp
+background_hp_magic_text=Magic
+
+1minwar_text=1 MINUTE WARNING
+30secwar_text=30 SECOND WARNING
+1minwar_text_short=1 Min
+30secwar_text_short=30 Sec
+2x_comp_roles_text=2X COMPLEX ROLES
+2x_comp_roles_text_short=2x Complex Roles
+lonewolf_text=LONE WOLF
+labels_text=LABELS
+moveyourcard_text=MOVE YOUR CARD
+expertmode_text=EXPERT MODE
+verbosedoppelganger_text=VERBOSE DOPPELGANGER
+randomization_text=RANDOMIZATION
+lonewolf_text_short=Lone
+labels_text_short=Labels
+moveyourcard_text_short=Move
+expertmode_text_short=Expert
+verbosedoppelganger_text_short=Verbose
+epic_intro_text=Prepare for an epic battle!
+randomization_label=RANDOMIZATION
+ripple_label=Ripple %
+oracle_label=Oracle % 
+alien_label=Alien%
+bodysnatcher_label=B Snatcher %
+psychic_label=Psychic %
+rascal_label=Rascal %
+exposer_label=Exposer %
+empath_label=Empath %
+mortician_label=Mortician %
+reset_warning_label=WARNING - are you sure you want to reset all Randomization percentages? This cannot be undone.
+
+
+role_doppelganger=DOPPELGANGER
+role_werewolf=WEREWOLF
+role_minion=MINION
+role_mason=MASON
+role_seer=SEER
+role_robber=ROBBER
+role_troublemaker=TROUBLEMAKER
+role_drunk=DRUNK
+role_insomniac=INSOMNIAC
+role_villager=VILLAGER
+role_hunter=HUNTER
+role_tanner=TANNER
+role_sentinel=SENTINEL
+role_alphawolf=ALPHA WOLF
+role_mysticwolf=MYSTIC WOLF
+role_apprenticeseer=APPRENTICE SEER
+role_paranormalinvestigator=P.I.
+role_witch=WITCH
+role_villageidiot=VILLAGE IDIOT
+role_revealer=REVEALER
+role_curator=CURATOR
+role_dreamwolf=DREAM WOLF
+role_bodyguard=BODYGUARD
+role_copycat=COPYCAT
+role_vampire=VAMPIRE
+role_themaster=THE MASTER
+role_thecount=THE COUNT
+role_renfield=RENFIELD
+role_diseased=DISEASED
+role_cupid=CUPID
+role_instigator=INSTIGATOR
+role_priest=PRIEST
+role_assassin=ASSASSIN
+role_apprenticeassassin=APPRENTICE ASSASSIN
+role_marksman=MARKSMAN
+role_pickpocket=PICKPOCKET
+role_gremlin=GREMLIN
+role_dusk=ERROR IGNORE ME
+role_villains=ERROR IGNORE ME
+role_mirrorman=MIRROR MAN
+role_temptress=TEMPTRESS
+role_drpeeker=DR. PEEKER
+role_rapscallion=RAPSCALLION
+role_henchman=HENCHMAN #7
+role_evilometer=EVILOMETER
+role_madscientist=MAD SCIENTIST
+role_intern=INTERN
+role_annoyinglad=ANNOYING LAD
+role_detector=DETECTOR
+role_roleretriever=ROLE RETRIEVER
+role_voodoolou=VOODOO LOU
+role_switcheroo=SWITCHEROO
+role_selfawarenessgirl=SELF-AWARENESS GIRL
+role_flipper=FLIPPER
+role_innocentbystander=INNOCENT BYSTANDER
+role_oracle=ORACLE
+role_alien=ALIEN
+role_synthetic=SYNTHETIC
+role_cow=COW
+role_zerb=ZERB
+role_groob=GROOB
+role_groobzerb=GROOB AND ZERB
+role_psychic=PSYCHIC
+role_leader=LEADER
+role_rascal=RASCAL
+role_exposer=EXPOSER
+role_mortician=MORTICIAN
+role_blob=BLOB
+role_ripple=RIPPLE
+role_bodysnatcher=BODYSNATCHER
+role_apprenticetanner=APPRENTICE TANNER
+role_thing=THING
+role_nostradamus=NOSTRADAMUS
+role_auraseer=AURA SEER
+role_squire=SQUIRE
+role_familyman=FAMILY MAN
+role_beholder=BEHOLDER
+role_empath=EMPATH
+role_prince=PRINCE
+role_cursed=CURSED
+role_thesponge=THE SPONGE
+role_ricochetrhino=RICOCHET RHINO
+role_defenderer=DEFENDERER
+role_windywendy=WINDY WENDY
+role_innocentbystander=INNOCENT BYSTANDER
+role_joke=JOKE
+role_void=VOID
+
+random_settings_ripple=RIPPLE...
+random_settings_oracle=ORACLE...
+random_settings_alien=ALIEN...
+random_settings_bodysnatcher=BODY SNATCHER...
+random_settings_psychic=PSYCHIC...
+random_settings_rascal=RASCAL...
+random_settings_exposer=EXPOSER...
+random_settings_empath=EMPATH...
+random_settings_mortician=MORTICIAN...
+random_settings_reset=RESET
+
+random_joke_1_text=3... 2... 1... Vote! Just kidding.
+random_joke_2_text=Be afraid, be very afraid.
+random_joke_3_text=Grizzly ghouls from every tomb are closing in to seal your tomb.
+random_joke_4_text=He did the mash, it caught on in a flash.
+random_joke_5_text=Hold on a minute - you, with your eyes open! That's CHEATING.
+random_joke_6_text=Fun fact, hot dogs are 30% villager.
+random_joke_7_text=I know who the werewolves are.
+random_joke_8_text=I love this game - and I love all of you for playing it!
+random_joke_9_text=I saw a werewolf with a chinese menu in his hand.
+random_joke_10_text=In one night, no one can hear you scream.
+random_joke_11_text=Instead of pointing at the player you wish to kill, point at a player you don't like.
+random_joke_12_text=Just when you thought it was safe to play another game of one night.
+random_joke_13_text=Longest night evaaaarrr.
+random_joke_14_text=One more night, 'cause I can't wait forever.
+random_joke_15_text=One Night fever, One Night fever! We know how to do it.
+random_joke_16_text=One Night Ultimate Werewolf, and the world's your oyster.
+random_joke_17_text=Revved up like a deuce, another runner in One Night.
+random_joke_18_text=The Resistance is futile! You will be assimilated into One Night!.
+random_joke_19_text=They're heeeeeeeeeeeeerrrrreeeee.
+random_joke_20_text=Villagers are part of a nutritious breakfast.
+
+random_ripple_1minute=1 Minute
+random_ripple_repeat=Repeat
+random_ripple_repeat1p=Repeat 1P
+random_ripple_insomniac=Insomniac
+random_ripple_nospeak=May Not Speak
+random_ripple_faceaway=Face Away
+random_ripple_troublemaker=Troublemaker
+random_ripple_steal=Steal
+random_ripple_witch=Witch
+random_ripple_view1=View 1
+random_ripple_view2=View 2
+random_ripple_reveal=Reveal
+random_ripple_dualview=Dual View
+random_ripple_twovote=Two Hand Vote
+random_ripple_shuffle=Dual Shuffle
+random_ripple_drunk=Drunk
+random_ripple_none=None
+random_ripple_voteapp=Vote For App
+random_ripple_repeatrole=Repeat Role
+random_ripple_iamalien=I Am Alien
+
+random_orac_alien=Alien Team
+random_orac_werewolf=Werewolf Team
+random_orac_vampire=Vampire Team
+random_orac_alienexchange=Alien Exchange
+random_orac_exchange=Exchange
+random_orac_center=Center
+random_orac_ripple=Ripple
+random_orac_evenodd=Even Odd
+random_orac_playernum=Player Number
+random_orac_number=Number
+
+
+random_snatch_steal=Steal
+random_snatch_center=Center
+random_snatch_pretend=Pretend
+
+random_ali_view=View
+random_ali_allview=All View
+random_ali_stare=Stare
+random_ali_timer=Timer
+random_ali_left=Left
+random_ali_right=Right
+random_ali_show=Show
+random_ali_newalien=New Alien
+random_ali_alienhelper=Alien Helper
+
+random_psych_view1=View 1
+random_psych_view2=View 2
+
+random_rasc_witch=Witch
+random_rasc_idiot=Idiot
+random_rasc_drunk=Drunk
+random_rasc_troublemaker=Troublemaker
+random_rasc_robber=Robber
+
+random_exp_1card=1 Card
+random_exp_2card=2 Cards
+random_exp_3card=3 Cards
+
+random_emp_think=Think
+random_emp_goodlooking=Good Looking
+random_emp_suspicious=Suspicious
+random_emp_smells=Smells
+random_emp_sharp=Sharp
+random_emp_awesome=Awesome
+random_emp_everyoneelse=Everyone Else
+random_emp_smartest=Smartest
+random_emp_friendliest=Friendliest
+random_emp_funniest=Funniest
+random_emp_winner=Winner
+random_emp_like=Like
+random_emp_dontthink=Don't Think
+random_emp_nicest=Nicest
+
+random_mort_pretend=Pretend
+random_mort_1card=1 Card
+random_mort_2cards=2 Cards
+
+
+identifier_everyone_text=Everyone
+identifier_oddplayers_text=Odd Players
+identifier_evenplayers_text=Even Players
+identifier_higher_text=Any player with a number higher than yours
+identifier_lower_text=Any player with a number lower than yours
+identifier_any2_text=Any two players
+identifier_any2even_text=Any two even players
+identifier_any2odd_text=Any two odd players
+identifier_any2higher_text=any two players with a number higher than yours
+identifier_any2lower_text=any two players with a number lower than yours
+identifier_2leftneighbors_text=the two players immediately to your left
+identifier_2rightneighbors_text=the two players immediately to your right
+identifier_any_text=Any player
+identifier_anyeven_text=Any even player
+identifier_anyodd_text=Any odd player
+identifier_oneneighbor_text=One of your neighbors
+identifier_center_text=the center
+identifier_leftneighbor_text=the neighbor on your left
+identifier_rightneighbor_text=the neighbor on your right
+identifier_bothneighbors_text=both of your neighbors
+identifier_yourself_text=yourself
+
+identifier_player1_text=Player 1
+identifier_player2_text=Player 2
+identifier_player3_text=Player 3
+identifier_player4_text=Player 4
+identifier_player5_text=Player 5
+identifier_player6_text=Player 6
+identifier_player7_text=Player 7
+identifier_player8_text=Player 8
+identifier_player9_text=Player 9
+identifier_player10_text=Player 10
+identifier_player11_text=Player 11
+identifier_player12_text=Player 12
+
+everyone_close_text=EVERYONE, close your eyes.
+everyone_move_card_text=EVERYONE, keep your eyes closed and reach out, and move your card around slightly. 
+everyone_move_mark_text=EVERYONE, keep your eyes closed, and reach out and move your card and Mark around slightly.
+everyone_wake_text=EVERYONE, wake up!
+everyone_vote_text=Time is up. Everyone, 3, 2, 1... VOTE!
+everyone_wake_dusk_text=EVERYONE, wake up and secretly view your Mark.
+
+doppelganger_wake_text=DOPPELGANGER, wake up and look at another player's card. You are now that role. If your new role has a night action, do it now.
+doppelganger_wake_short_text=DOPPELGANGER, wake up and look at another player's card. You are now that role. 
+doppelganger_verbose_intro_text=If you viewed the
+doppelganger_verbose_or_text=or
+doppelganger_verbose_outro_text=card, do your action now.
+doppelganger_wake_expert_text=DOPPELGANGER, wake up.
+doppelganger_minion_text=If you are now a Minion, keep your eyes open - otherwise, close them. WEREWOLVES, stick out your thumb, so the doppelganger minion can see who you are.
+doppelganger_minion_expert_text=If you are now a Minion, keep your eyes open - otherwise, close them.
+doppelganger_revealer_wake_text=DOPPELGANGER, if you viewed the Revealer card, wake up. You may turn any other player's card face up. If the card you reveal is not on the Villager team, turn it back over face down.
+doppelganger_revealer_wake_expert_text=DOPPELGANGER, if you viewed the Revealer card, wake up.
+doppelganger_curator_wake_text=DOPPELGANGER, if you viewed the Curator card, wake up. You may place an artifact token face down on any player's card that does not already have one.
+doppelganger_curator_wake_expert_text=DOPPELGANGER, if you viewed the Curator card, wake up.
+doppelganger_thecount_wake_text=DOPPELGANGER, if you viewed the Count card, wake up and place the Mark of Fear in front of any non-vampire player.
+doppelganger_thecount_wake_expert_text=DOPPELGANGER, if you viewed the Count card, wake up.
+doppelganger_renfield_wake_text=DOPPELGANGER, if you viewed the Renfield card, wake up and look around for the vampires, then place the Mark of the Bat in front of you.
+doppelganger_renfield_wake_expert_text=DOPPELGANGER, if you viewed the Renfield card, wake up.
+doppelganger_marksman_wake_text=DOPPELGANGER, if you viewed the Marksman card, wake up. You may view the Mark of one player and the card of another player.
+doppelganger_marksman_wake_expert_text=DOPPELGANGER, if you viewed the Marksman card, wake up.
+doppelganger_priest_wake_text=DOPPELGANGER, if you viewed the priest card, wake up and give yourself a Mark of Clarity. You may also give any other player a Mark of Clarity.
+doppelganger_priest_wake_expert_text=DOPPELGANGER, if you viewed the priest card, wake up.
+doppelganger_assassin_wake_text=DOPPELGANGER, if you viewed the Assassin card, wake up and place the Mark of the Assassin in front of any player.
+doppelganger_assassin_wake_expert_text=DOPPELGANGER, if you viewed the Assassin card, wake up.
+doppelganger_apprenticeassassin_assassin_wake_text=DOPPELGANGER, if you viewed the apprentice assassin card, wake up and look for the Assasin. If there is no Assassin, you may place the mark of the assassin in front of any player.
+doppelganger_apprenticeassassin_assassin_wake_expert_text=DOPPELGANGER, if you viewed the apprentice assassin card, wake up.
+doppelganger_apprenticeassassin_wake_text=DOPPELGANGER, if you viewed the apprentice assassin card, wake up. You may place the Mark of the Assassin in front of any player.
+doppelganger_apprenticeassassin_wake_expert_text=DOPPELGANGER, if you viewed the apprentice assassin card, wake up.
+doppelganger_pickpocket_wake_text=DOPPELGANGER, if you viewed the Pickpocket card, wake up. You may exchange your Mark with another player's Mark, and then view your new Mark.
+doppelganger_pickpocket_wake_expert_text=Doppelgager, if you viewed the Pickpocket card, wake up.
+doppelganger_gremlin_wake_text=DOPPELGANGER, if you viewed the Gremlin card, wake up. You may switch Marks or cards between any two players.
+doppelganger_gremlin_wake_expert_text=DOPPELGANGER, if you viewed the Gremlin card, wake up.
+doppelganger_cow_wake_text=DOPPELGANGER, if you viewed the cow card, stick out your fist. If at least one alien is directly next to the Doppelganger-Cow, one alien must "tip" the Doppelganger-Cow, by tapping the Doppelganger-Cow's fist.
+doppelganger_leader_wake_text=DOPPELGANGER, if you viewed the Leader card, wake up. ALIENS, stick out a thumb-like appendage.
+doppelganger_leader_zerbgroob_text=ZERB and GROOB, if you saw each other, stick out a thumb-like appendage. DOPPELGANGER, if you see Zerb and Groob, you will only win if both of them remain alive.
+doppelganger_psychic_wake_text=DOPPELGANGER, if you viewed the psychic card, wake up.
+doppelganger_rascal_wake_text=DOPPELGANGER, if you viewed the Rascal card, wake up.
+doppelganger_exposer_wake_text=DOPPELGANGER, if you viewed the Exposer card, wake up.
+doppelganger_mortician_wake_text=DOPPELGANGER, if you viewed the Mortician card, wake up.
+doppelganger_bodysnatcher_wake_text=DOPPELGANGER, if you viewed the Bodysnatcher card, wake up and 
+doppelganger_apprenticetanner_wake_text=DOPPELGANGER, if you viewed the Apprentice Tanner card, wake up.
+doppelganger_apprenticetanner_wake_expert_text=DOPPELGANGER, if you viewed the Apprentice Tanner card, wake up.
+doppelganger_auraseer_wake_text=DOPPELGANGER, if you viewed the Aura Seer card, wake up. Anyone who has already moved any card, or looked at any card, stick out your thumb.
+doppelganger_auraseer_wake_expert_text=DOPPELGANGER, if you viewed the Aura Seer card, wake up. 
+doppelganger_auraseer_marks_wake_text=DOPPELGANGER, if you viewed the Aura Seer card, wake up. Anyone who has already moved any card or Mark, or looked at any card or Mark, stick out your thumb.
+doppelganger_auraseer_marks_wake_expert_text=DOPPELGANGER, if you viewed the Aura Seer card, wake up.
+doppelganger_squire_wake_text=DOPPELGANGER, if you viewed the Squire card, wake up. WEREWOLVES, stick out your thumb so the Squire can see who you are. DOPPELGANGER, you may view the werewolves' cards.
+doppelganger_squire_wake_expert_text=DOPPELGANGER, if you viewed the Squire card, wake up.
+doppelganger_beholder_seer_wake_text=DOPPELGANGER, if you viewed the Beholder card, wake up. SEER, stick out your thumb. DOPPELGANGER, you may view the Seer's card.
+doppelganger_beholder_seer_wake_expert_text=DOPPELGANGER, if you viewed the Beholder card, wake up.
+doppelganger_beholder_apprenticeseer_wake_text=DOPPELGANGER, if you viewed the Beholder card, wake up. APPRENTICE SEER, stick out your thumb. DOPPELGANGER, you may view the Apprentice Seer's card.
+doppelganger_beholder_apprenticeseer_wake_expert_text=DOPPELGANGER, if you viewed the Beholder card, wake up.
+doppelganger_beholder_seer_apprenticeseer_wake_text=DOPPELGANGER, if you viewed the Beholder card, wake up, wake up. SEER and APPRENTICE SEER, stick out your thumb. DOPPELGANGER, you may view the Seer's and Apprentice Seer's cards. 
+doppelganger_beholder_seer_apprenticeseer_wake_expert_text=DOPPELGANGER, if you viewed the Beholder card, wake up.
+doppelganger_insomniac_wake_text=DOPPELGANGER, if you viewed the Insomniac card, wake up and look at your card.
+doppelganger_insomniac_wake_expert_text=DOPPELGANGER, if you viewed the Insomniac card, wake up.
+doppelganger_close_text=DOPPELGANGER, close your eyes.
+doppelganger_fistaway_text=DOPPELGANGER, put your fist away.
+
+werewolves_wake_text=WEREWOLVES, wake up and look for other werewolves.
+werewolves_wake_expert_text=WEREWOLVES, wake up.
+dreamwolf_wake_text=WEREWOLVES, except for the Dreamwolf, wake up and look for other werewolves. Dreamwolf, stick out your thumb.
+dreamwolf_wake_expert_text=WEREWOLVES, except for the Dreamwolf, wake up.
+dreamwolf_close_text=Dreamwolf, put your thumb away.
+werewolves_lonewolf_text=If there is only one werewolf, you may look at a card from the center.
+werewolves_thumb_away_text=WEREWOLVES, put your thumb away.
+werewolves_close_text=WEREWOLVES, close your eyes.
+
+minion_wake_text=MINION, wake up. WEREWOLVES, stick out your thumb, so the minion can see who you are.
+minion_wake_expert_text=MINION, wake up.
+minion_close_text=MINION, close your eyes.
+
+mason_wake_text=MASONS, wake up and look for the other Mason.
+mason_wake_expert_text=MASONS, wake up.
+mason_close_text=MASONS, close your eyes.
+
+seer_wake_text=SEER, wake up. You may look at another player's card, or two of the center cards.
+seer_wake_expert_text=SEER, wake up.
+seer_close_text=SEER, close your eyes.
+
+robber_wake_text=ROBBER, wake up. You may exchange your card with another player's card, and then view your new card.
+robber_wake_expert_text=ROBBER, wake up.
+robber_close_text=ROBBER, close your eyes.
+
+troublemaker_wake_text=TROUBLEMAKER, wake up. You may exchange cards between two other players.
+troublemaker_wake_expert_text=TROUBLEMAKER, wake up.
+troublemaker_close_text=TROUBLEMAKER, close your eyes.
+
+drunk_wake_text=DRUNK, wake up, and exchange your card with a card from the center.
+drunk_wake_expert_text=DRUNK, wake up.
+drunk_close_text=DRUNK, close your eyes.
+
+insomniac_wake_text=INSOMNIAC, wake up and look at your card.
+insomniac_wake_expert_text=INSOMNIAC, wake up.
+insomniac_close_text=INSOMNIAC, close your eyes.
+
+sentinel_wake_text=SENTINEL, wake up. You may place a shield token on any player's card except your own.
+sentinel_wake_expert_text=SENTINEL, wake up.
+sentinel_close_text=SENTINEL, close your eyes.
+
+alphawolf_wake_text=ALPHA WOLF, wake up, and exchange the center werewolf card with any other player's card.
+alphawolf_wake_expert_text=ALPHA WOLF, wake up.
+alphawolf_close_text=ALPHA WOLF, close your eyes.
+
+mysticwolf_wake_text=MYSTIC WOLF, wake up. You may look at another player's card.
+mysticwolf_wake_expert_text=MYSTIC WOLF, wake up.
+mysticwolf_close_text=MYSTIC WOLF, close your eyes.
+
+apprenticeseer_wake_text=APPRENTICE SEER, wake up. You may look at one of the center cards.
+apprenticeseer_wake_expert_text=APPRENTICE SEER, wake up.
+apprenticeseer_close_text=APPRENTICE SEER, close your eyes.
+
+paranormalinvestigator_wake_text=PARANORMAL INVESTIGATOR, wake up. You may look at up to two cards of other players. If you see a role that isn't on the villager team, you are now the role you viewed - but you will not wake up if that role is called.
+paranormalinvestigator_duskwake_text=PARANORMAL INVESTIGATOR, wake up. You may look at up to two cards of other players. If you see a Werewolf, Vampire, or a Tanner, you can no longer look at any cards, and you become a Werewolf, Vampire, or a Tanner.
+paranormalinvestigator_wake_expert_text=PARANORMAL INVESTIGATOR, wake up.
+paranormalinvestigator_close_text=PARANORMAL INVESTIGATOR, close your eyes.
+
+witch_wake_text=WITCH wake up. You may look at one of the center cards. If you do, you must exchange that card with any player's card.
+witch_wake_expert_text=WITCH wake up.
+witch_close_text=WITCH close your eyes.
+
+villageidiot_wake_text=VILLAGE IDIOT, wake up. You may move everyone's card except your own to the left, or to the right.
+villageidiot_wake_expert_text=VILLAGE IDIOT, wake up.
+villageidiot_close_text=VILLAGE IDIOT, close your eyes.
+
+revealer_wake_text=REVEALER, wake up. You may turn any other player's card face up. If the card you reveal is not on the villager's team, turn it back over face down.
+revealer_wake_expert_text=REVEALER, wake up.
+revealer_close_text=REVEALER, close your eyes.
+
+curator_wake_text=CURATOR, wake up. You may place an artifact token face down on any player's card.
+curator_wake_expert_text=CURATOR, wake up.
+curator_close_text=CURATOR, close your eyes.
+
+copycat_wake_text=COPYCAT, wake up and look at one of the center cards. You are now that role. If that role is called, wake up and do that night action.
+copycat_wake_expert_text=COPYCAT, wake up.
+copycat_close_text=COPYCAT, close your eyes.
+
+vampire_wake_text=VAMPIRES, wake up, and look for other vampires. Give any non-vampire player a Mark of the Vampire. 
+vampire_wake_expert_text=VAMPIRES, wake up.
+vampire_close_text=VAMPIRES, close your eyes.
+vampire_renfield_close_text=VAMPIRES, point at the player who has the Mark of the Vampire and close your eyes.
+vampire_renfield_close_expert_text=VAMPIRES, close your eyes.
+
+thecount_wake_text=COUNT, wake up, and place the Mark of Fear in front of any non-vampire player.
+thecount_wake_expert_text=COUNT, wake up.
+thecount_close_text=COUNT, close your eyes.
+
+renfield_wake_text=RENFIELD, wake up and look around for the vampires, then place the Mark of the Bat in front of you.
+renfield_wake_expert_text=RENFIELD, wake up.
+renfield_vampires_close_text=VAMPIRES, put your hands away.
+renfield_close_text=RENFIELD, close your eyes.
+
+diseased_wake_text=DISEASED, wake up and place a Mark of Disease in front of the player to your left or right.
+diseased_wake_expert_text=DISEASED, wake up.
+diseased_close_text=DISEASED, close your eyes.
+
+cupid_wake_text=CUPID, wake up and give any two players the Mark of Love.
+cupid_wake_expert_text=CUPID, wake up.
+cupid_close_text=CUPID, close your eyes.
+
+instigator_wake_text=INSTIGATOR, wake up. You may give any player a Mark of the Traitor.
+instigator_wake_expert_text=INSTIGATOR, wake up.
+instigator_close_text=INSTIGATOR, close your eyes.
+
+marksman_wake_text=MARKSMAN, wake up. You may view the Mark of one player and the card of another player.
+marksman_wake_expert_text=MARKSMAN, wake up.
+marksman_close_text=MARKSMAN, close your eyes.
+
+priest_wake_text=PRIEST, wake up and give yourself a Mark of Clarity. You may also give any other player a mark of Clarity.
+priest_wake_expert_text=PRIEST, wake up.
+priest_close_text=PRIEST, close your eyes.
+
+assassin_wake_text=ASSASSIN, wake up and place the Mark of the Assassin in front of any player.
+assassin_wake_expert_text=ASSASSIN, wake up.
+assassin_close_text=ASSASSIN, close your eyes.
+assassin_and_apprenticeassassin_close_text=ASSASSIN and APPRENTICE ASSASSIN, close your eyes.
+
+apprenticeassassin_assassin_wake_text=APPRENTICE ASSASSIN, wake up and look for the Assasin. If there is no Assassin, you may place the Mark of the Assassin in front of any player.
+apprenticeassassin_assassin_wake_expert_text=APPRENTICE ASSASSIN, wake up.
+apprenticeassassin_wake_text=APPRENTICE ASSASSIN, wake up. You may place the Mark of the Assassin in front of any player.
+apprenticeassassin_wake_expert_text=APPRENTICE ASSASSIN, wake up.
+apprenticeassassin_close_text=APPRENTICE ASSASSIN, close your eyes.
+
+pickpocket_wake_text=PICKPOCKET, wake up. You may exchange your Mark with another player's Mark, and then view your new Mark.
+pickpocket_wake_expert_text=PICKPOCKET, wake up.
+pickpocket_close_text=PICKPOCKET, close your eyes.
+
+gremlin_wake_text=GREMLIN, wake up. You may switch Marks or cards between any two players.
+gremlin_wake_expert_text=GREMLIN, wake up. 
+gremlin_close_text=GREMLIN, close your eyes.
+
+mirrorman_wake_text=MIRROR MAN, wake up and look at one of the center cards. You are now that role. If that role is called, wake up and do that night action.
+mirrorman_close_text=MIRROR MAN, close your eyes.
+
+temptress_wake_text=TEMPTRESS, to make a hero turn to the dark side and become a Villain, exchange the New Villain card with a card that does not belong to a Super Villain.
+drpeeker_wake_text=DR. PEEKER, you may secretly peek at another player's card using your high-tech specs.
+rapscallion_wake_text=RAPSCALLION, you may secretly look at one of the center cards, while plotting how to deceive those good-for-nothing heroes.
+
+evilometer_wake_text=EVILOMETER, stick out your fist in order to detect any nearby evil doers. If at least one Super Villain is directly next to the evilometer, a Super Villain must taunt the Evilometer by tapping her fist with bravado.
+evilometer_close_text=EVILOMETER, put your fist away.
+
+madscientist_wake_text=MAD SCIENTIST,
+madscientist_close_text=you'll only win if you get caught.
+madscientist_intro_1_text=Your experiment to meld a Three Musketeers bar with frozen yogurt has gone horribly wrong.
+madscientist_intro_2_text=You zigged when you should have zagged.
+madscientist_intro_3_text=You put your lab coat on backwards this morning.
+madscientist_intro_4_text=Just to make a point, you ran an entire marathon while holding a pair of scissors.
+madscientist_intro_5_text=That radioactive isotope you were using as a good luck charm really WAS radioactive.
+madscientist_intro_6_text=Your genetic modification to dogwood trees to allow their bark to actually bark has made them sentient.
+madscientist_intro_7_text=Your collection of body hair somehow escaped the lab under its own power.
+madscientist_intro_8_text=After inoculating yourself with banana peel extract, you went skinny dipping in the local sewers.
+madscientist_intro_9_text=You listened to Taylor Swift backwards.
+madscientist_intro_10_text=You lied to your friends repeatedly without remorse while playing a game of One Night.
+madscientist_intro_11_text=You put on your shoes before your socks because you didn't want to be just like everyone else.
+madscientist_intro_12_text=You judged a book by its cover. In your defense, the cover had a daffodil on it, and you despise daffodils.
+madscientist_intro_13_text=A 'you' from next week's experiment in time travel devoured your goldfish.
+madscientist_intro_14_text=Your high powered magnet ray wiped your hard drive.
+madscientist_therefore_1_text=As a result,
+madscientist_therefore_2_text=And now,
+madscientist_therefore_3_text=Not just coincidentally,
+madscientist_therefore_4_text=And just like that,
+madscientist_therefore_5_text=Because your actions have consequences,
+madscientist_result_1_text=the world will end in seventeen minutes.
+madscientist_result_2_text=you've morphed into a giant mustached weevil.
+madscientist_result_3_text=the invention of mozzarella cheese has been removed from the timeline.
+madscientist_result_4_text=the zombie apocalypse everyone has been eagerly awaiting will probably never happen.
+madscientist_result_5_text=you now only speak Mandarin.
+madscientist_result_6_text=Joffrey survived his poisoning in Game of Thrones.
+madscientist_result_7_text=kittens are no longer cute and cuddly.
+madscientist_result_8_text=humans all over the world have lost the ability to use their thumbs.
+madscientist_result_9_text=it's been years since anything has stepped up to become the new black.
+madscientist_result_10_text=what happens in Canada is now somewhat relevant to the rest of the world.
+madscientist_result_11_text=that little plastic thing, on the end of everyone's shoelaces, has come undone.
+madscientist_transition_1 = Racked with guilt, now
+madscientist_transition_2 = As you cry into your soup, you realize that
+madscientist_transition_3 = Utterly confused by this turn of events,
+madscientist_transition_4 = Seeking some sort of redemption, you figure that
+madscientist_transition_5 = After considering your options, you decide that
+madscientist_transition_6 = Realizing that there is no hope for you anymore,
+madscientist_transition_8 = Because you feel responsible for this horrid turn of events,
+madscientist_transition_9 = Since this is clearly your fault,
+madscientist_transition_10 = You are resigned to the fact that
+madscientist_transition_11 = Distraught, you mutter to yourself that
+madscientist_transition_12 = After careful consideration you decide it's best if
+madscientist_transition_14 = A telegraph from yourself in the future says
+madscientist_transition_15 = The Queen has decreed that
+madscientist_transition_16 = And now, the alphabet magnets on your refrigerator spell out that
+madscientist_transition_17 = A text from a number you don't recognize says
+madscientist_transition_18 = Reading the instructions for this very game, you find an odd note that says
+madscientist_transition_19 = It's at that very point you realize
+madscientist_transition_20 = Writing in your diary, you notice the last entry just says
+madscientist_transition_22 = A note slipped under your door says
+madscientist_transition_24 = Bart Simpsons' classroom chalkboard has dozens of lines which all say
+
+intern_wake_1_text=INTERN, wake up. MAD SCIENTIST, stick out your thumb so the Intern can see who you are so she can help you in your quest to get caught.
+intern_wake_2_text=INTERN, if you don't see a thumb, panic! Now you'll only win if you get caught.
+intern_wake_alone_text=INTERN, you are in charge of the lab, but you have no idea what you're doing. You'll only win if you get caught.
+intern_close_text=INTERN, close your eyes.
+
+annoyinglad_wake_text=ANNOYING LAD, wake up and annoy one of your neighbors by tapping their nearest shoulder several times. 
+annoyinglad_close_text=ANNOYING LAD, stop being so annoying and close your eyes.
+
+detector_close_text=DETECTOR, close your eyes. And turn off your High Voltage Detection Field before someone gets electrocuted.
+detector_wake_text=DETECTOR, wake up and engage your High Voltage Detection Field. You may look at one other player's card or two of the center cards.
+
+roleretriever_close_text=ROLE RETRIEVER, close your eyes and dream about chasing bunnies through a poppy field.
+roleretriever_wake_1_text=ROLE RETRIEVER, wake up. That's a good boy! You may steal a card from any other player, replacing it with your original card.
+roleretriever_wake_2_text=Then view your new card. You are now that role. Do not wake up again or wag your tail if your new card is called.
+
+voodoolou_close_text=VOODOO LOU, close your eyes.
+voodoolou_wake_1_text=VOODOO LOU, wake up. You may do that voodoo that you do by looking at one of the center cards.
+voodoolou_wake_2_text=If you do that voodoo that you do, magically transform any player by exchanging that center card with any player's card.
+
+switcheroo_close_text=SWITCHEROO, close your eyes.
+switcheroo_wake_text=SWITCHEROO, wake up. You may get all Freaky Friday and switch cards between two other players, but do not look at those cards.
+
+selfawarenessgirl_close_text=SELF-AWARENESS GIRL, contemplate your role in life and close your eyes.
+selfawarenessgirl_wake_text=SELF-AWARENESS GIRL, wake up and look at your own card to see if you've changed in any way.
+
+flipper_close_text=FLIPPER, close your eyes.
+flipper_wake_text=FLIPPER, wake up. You may flip any other card face up. If the card you reveal is not a hero, flip it back over face down.
+
+supervillain_close_text=SUPER VILLAIN, close your eyes and whatever you do, don't get caught!
+supervillain_wake_text=SUPER VILLAIN, wake up!
+supervillains_close_text=SUPER VILLAINS, close your eyes, and try not to get caught!
+supervillains_wake_text=SUPER VILLAINS, wake up, look for other SUPER VILLAINS, form your nefarious plans, and activate your super powers!
+
+alien_wake_text=ALIENS, wake up and look around for other aliens.
+alien_view_text=Each alien may secretly view a card from
+alien_allview_text=All aliens together may view a card from
+alien_stare_text=Just stare at each other
+alien_thumbaway_text=ALIENS, put your thumb away.
+alien_left_text=Give your card to the alien on your left.
+alien_right_text=Give your card to the alien on your right.
+alien_show_text=Show your alien card to the other aliens.
+alien_newalien_text=put a fist out. ALIENS, tap one of the fists to turn that player into an alien.
+alien_alienhelper_text=put a fist out. ALIENS, tap one of the fists. The player who was tapped is now on the alien team, but isn't an alien.
+alien_close_text=ALIENS, close your eyes.
+alien_timer_text=You have shortened the game timer by one half.
+
+cow_fistout_text=COW, stick out your fist. If at least one alien is directly next to the Cow, one alien must "tip" the Cow, by tapping the cow's fist.
+cow_fistaway_text=COW, put your fist away.
+
+groobzerb_wake_text=GROOB AND ZERB, wake up and look at each other.
+groobzerb_close_text=GROOB AND ZERB, close your eyes.
+
+leader_wake_text=LEADER, wake up. ALIENS, stick out a thumb-like appendage.
+leader_alienthumbaway_text=ALIENS, put your thumb-like appendage away.
+leader_zerbgroob_text=ZERB and GROOB, if you saw each other, stick out a thumb-like appendage. LEADER, if you see Zerb and Groob, you will only win if both of them remain alive.
+leader_groobzerb_thumbaway_text=GROOB AND ZERB, put your thumb-like appendage away.
+leader_close_text=LEADER, close your eyes.
+
+psychic_wake_text=PSYCHIC, wake up.
+psychic_view1_text=you may view one card from
+psychic_view2_text=you may view two cards from
+psychic_close_text=PSYCHIC, close your eyes.
+
+rascal_wake_text=RASCAL, wake up.
+rascal_idiot_text=You may move everyone's card but your own to the right, or move everyone's card but your own to the left.
+rascal_witch_text=You may view a card from 
+rascal_drunk_text=You must exchange your card with a card from
+rascal_troublemaker_text=You may exchange cards between
+rascal_robber_text=You may steal a card from
+rascal_witchend_text=if you do, you must give that card to any player.
+rascal_drunkend_text=but you may not view your new card.
+rascal_robberend_text=giving your card to that player. View your new card - you are now that role, but you will not wake up if that role is called later in the night.
+rascal_close_text=RASCAL, close your eyes.
+
+exposer_wake_text=EXPOSER, wake up
+exposer_flip1_text=and flip one of the center cards over.
+exposer_flip2_text=and flip two of the center cards over.
+exposer_flip3_text=and flip three of the center cards over.
+exposer_close_text=EXPOSER, close your eyes.
+
+mortician_wake_text=MORTICIAN, wake up.
+mortician_1card_text=You may look at a card from
+mortician_2cards_text=You may look at both cards from
+mortician_pretend_text=Pretend to look at someone's card
+mortician_close_text=MORTICIAN, close your eyes.
+
+blob_1pleft_text=BLOB, the player to your left
+blob_1pright_text=BLOB, the player to your right
+blob_eachside_text=BLOB, one player on each side of you
+blob_2pleft_text=BLOB, the two players to your left
+blob_2pright_text=BLOB, the two players to your right
+blob_3pleft_text=BLOB, the three players to your left
+blob_3pright_text=BLOB, the three players to your right
+blob_4pleft_text=BLOB, the four players to your left
+blob_4pright_text=BLOB, the four players to your right
+blob_2eachside_text=BLOB, two players on each side of you
+blob_is_end_text=is now part of the Blob. Keep them and yourself alive in order to win.
+blob_are_end_text=are now part of the Blob. Keep them and yourself alive in order to win. 
+
+lovers_wake_text=If you are in Love, wake up and look for your love interest.
+lovers_wake_expert_text=If you are in Love, wake up.
+lovers_close_text=LOVERS, close your eyes.
+
+oracle_wake_text=ORACLE, wake up and answer the following question:
+oracle_close_text=ORACLE, close your eyes.
+oracle_alienteam_text=Would you like to join the Alien team?
+oracle_werewolfteam_text=Would you like to join the Werewolf team?
+oracle_vampireteam_text=Would you like to join the Vampire team?
+oracle_alienexchange_text=Would you like to force the aliens to exchange cards?
+oracle_centerexchange_text=Would you like to exchange your card with one from the center?
+oracle_viewcenter_text=Would you like to view all three center cards?
+oracle_ripple_text=Would you like to guarantee a Ripple?
+oracle_evenodd_text=Do you have an even or odd player number?
+oracle_viewplayer_text=What player number would you like to view?
+oracle_guessnumber_text=What number am I thinking of?
+oracle_alienteam_yes_text=Congratulations, your card is now an alien card.
+oracle_alienteam_yes2_text=Do you want the Aliens to win? Clearly you do. Now, you only win if the Aliens win - but at least you aren't an Alien.
+oracle_werewolfteam_yes_text=Congratulations, your card is now a werewolf card.
+oracle_vampireteam_yes_text=Congratulations, your card is now a vampire card.
+oracle_teamswitch_no_text=Good for you, stay on the villager team.
+oracle_teamswitch_yes_text=I bet you would, but for now, you are still the Oracle and are on the villager team.
+oracle_alienexchange_yes_text=When the aliens wake up, they will have to exchange cards.
+oracle_alienexchange_no_text=Okay, the aliens have to keep their cards.
+oracle_centerexchange_yes_text=Okay ORACLE, go ahead and exchange your card with one from the center.
+oracle_centerexchange_yes2_text=What's so bad about being an oracle? Keep your card.
+oracle_ripple_yes_text=Okay, there will be a ripple at the end of the night.
+oracle_ripple_no_text=Seriously? Why not? Okay, whatever.
+oracle_evenodd_odd_text=The Oracle has an odd number.
+oracle_evenodd_even_text=The Oracle has an even number.
+oracle_viewplayer_result_text=Excellent choice, go ahead and view the card of
+oracle_viewplayer_result2_text=No no, you can't view THAT card. Instead, view the card of
+oracle_guessnumber_success_text=You really are an oracle! Because that was indeed the number I was thinking of. For the rest of the night, you may keep your eyes open.
+oracle_guessnumber_failure_text=Wrong! You're clearly a terrible oracle. EVERYONE ELSE, your winning conditions have changed. You win if the Oracle dies. ORACLE, you only win if you don't die.
+oracle_view1_text=Three is way too many, you may look at one of them.
+oracle_view2_text=Three is one too many, you may look at two of them.
+oracle_view3_text=That's crazy! But go ahead, and look at all three of them.
+
+ripple_intro_text=There has been a ripple in the space time continuum!
+ripple_1minute_text=You will only have one minute before you have to vote.
+ripple_app_text=When it is time to vote, you may vote for the app instead of a player. If the app receives the most votes, no-one is killed.
+ripple_doublevote_text=When it is time to vote, use two hands to point, with each hand counting as one vote.
+ripple_drunk_text=You must exchange your card with a card from
+ripple_drunk_end_text=but you may not look at either card.
+ripple_dualseer_text=together, you may view one card from 
+ripple_dualshuffle1_text=show your cards to each other, then give both to 
+ripple_dualshuffle2_text=shuffle both cards face down. Give one to
+ripple_dualshuffle3_text=and place the other in front of yourself
+ripple_iamalien_text=from now until the vote, you may only say this phrase: "I am an alien."
+ripple_insomniac_text=you may secretly view your own card.
+ripple_nospeak_text=you may not speak until after the vote.
+ripple_repeat_text=You've entered a time loop and must repeat the entire night.
+ripple_repeat_2_text=some roles may not wake up during the time loop.
+ripple_revealer_text=you may turn over one card from 
+ripple_revealer_end_text=if that card is on the Villager team, leave it face up. Otherwise, turn it back over, face down.
+ripple_robber_text=you may steal a card from
+ripple_robber_end_text=if you do, look at your new card. Do not wake up if that role is called.
+ripple_view1_text=you may view one card from
+ripple_view2_text=you may view two cards from
+ripple_rolerepeat_text=you get to repeat your night action. Whatever you did when you woke up before, do it again, right now.
+ripple_faceaway_text=you must face away from the table until after the vote.
+ripple_troublemaker_text=you may exchange cards between
+ripple_troublemaker_end_text=Do not look at either card.
+ripple_witch_text=you may view one center card. If you do, you must give it to
+ripple_openeyes_text=keep your eyes open from this point forward.
+
+bodysnatcher_wake_text=BODYSNATCHER, wake up and 
+bodysnatcher_steal_text=steal a non-alien's card from 
+bodysnatcher_center_text=steal a card from the center.
+bodysnatcher_pretend_text=pretend to steal a card but don't.
+bodysnatcher_close_text=BODYSNATCHER, close your eyes.
+bodysnatcher_end_text=Your new card is now on the Alien team.
+
+apprenticetanner_wake_text=APPRENTICE TANNER, wake up. Tanner, stick out your thumb so the Apprentice Tanner can see who you are.
+apprenticetanner_wake_expert_text=APPRENTICE TANNER, wake up!
+tanner_thumbaway_text=Tanner, put your thumb away.
+apprenticetanner_close_text=APPRENTICE TANNER, close your eyes.
+
+thing_wake_text=THING, wake up and bump the nearest shoulder of the player on your right or your left.
+thing_wake_expert_text=THING, wake up.
+thing_close_text=THING, close your eyes.
+
+nostradamus_wake_text=NOSTRADAMUS, wake up and look at up to three cards. If you see any role that isn't on the villager team, stop. The last card you look at is the team you are on. Tap that card in the app.
+nostradamus_close_text=NOSTRADAMUS, close your eyes.
+nostradamus_teamstart_text=Nostradamus is on the 
+nostradamus_team_alien_text=Alien team.
+nostradamus_team_werewolf_text=Werewolf team;
+nostradamus_team_vampire_text=Vampire team.
+nostradamus_team_assassin_text=Assassin team.
+nostradamus_team_tanner_text=Tanner team.
+nostradamus_team_synthetic_text=Synthetic team.
+nostradamus_team_blob_text=Blob team.
+nostradamus_team_mortician_text=Mortician team.
+nostradamus_team_apprenticeassassin_text=Apprentice Assassin team.
+nostradamus_team_villager_text=Villager team.
+nostradamus_team_doppelganger_text=Doppelganger team.
+
+auraseer_wake_text=AURA SEER, wake up. Anyone who has already moved any card, or looked at any card, stick out your thumb.
+auraseer_wake_expert_text=AURA SEER, wake up. 
+auraseer_marks_wake_text=AURA SEER, wake up. Anyone who has already moved any card or Mark, or looked at any card or Mark, stick out your thumb.
+auraseer_marks_wake_expert_text=AURA SEER, wake up.
+auraseer_thumbsaway_text=EVERYONE, put your thumbs away.
+auraseer_close_text=AURA SEER, close your eyes.
+
+squire_wake_text=SQUIRE, wake up. WEREWOLVES, stick out your thumb so the Squire can see who you are. SQUIRE, you may view the werewolves' cards.
+squire_wake_expert_text=SQUIRE, wake up.
+squire_close_text=SQUIRE, close your eyes.
+squire_thumbaway_text=WEREWOLVES, put your thumb away.
+
+familyman_1pleft_text=FAMILY MAN, wake up and look at the player to your left.
+familyman_1pright_text=FAMILY MAN, wake up and look at the player to your right.
+familyman_eachside_text=FAMILY MAN, wake up and look at one player on each side of you.
+familyman_2pleft_text=FAMILY MAN, wake up and look at the two players to your left.
+familyman_2pright_text=FAMILY MAN, wake up and look at the two players to your right.
+familyman_3pleft_text=FAMILY MAN, wake up and look at the three players to your left.
+familyman_3pright_text=FAMILY MAN, wake up and look at the three players to your right.
+familyman_4pleft_text=FAMILY MAN, wake up and look at the four players to your left.
+familyman_4pright_text=FAMILY MAN, wake up and look at the four players to your right.
+familyman_2eachside_text=FAMILY MAN, wake up and look at two players on each side of you.
+familyman_is_end_text=He is now part of your family. Keep him and yourself alive in order to win. FAMILY MAN, close your eyes.
+familyman_are_end_text=They are now part of your family. Keep them and yourself alive in order to win. FAMILY MAN, close your eyes.
+
+beholder_seer_wake_text=BEHOLDER, wake up. SEER, stick out your thumb. BEHOLDER, you may view the Seer's card.
+beholder_seer_wake_expert_text=BEHOLDER, wake up.
+beholder_apprenticeseer_wake_text=BEHOLDER, wake up. APPRENTICE SEER, stick out your thumb. BEHOLDER, you may view the Apprentice Seer's card.
+beholder_apprenticeseer_wake_expert_text=BEHOLDER, wake up.
+beholder_seer_apprenticeseer_wake_text=BEHOLDER, wake up. SEER and APPRENTICE SEER, stick out your thumb. BEHOLDER, you may view the Seer's and Apprentice Seer's cards. 
+beholder_seer_apprenticeseer_wake_expert_text=BEHOLDER, wake up.
+beholder_seer_thumbaway_text=SEER, put your thumb away.
+beholder_apprenticeseer_thumbaway_text=APPRENTICE SEER, put your thumb away.
+beholder_seer_apprenticeseer_thumbaway_text=SEER and APPRENTICE SEER, put your thumb away.
+beholder_close_text=BEHOLDER, close your eyes.
+
+empath_wake_text=EMPATH, wake up.
+empath_close_text=Everyone, put your hands away. EMPATH, close your eyes.
+empath_action1_text=keep your eyes closed and point in the direction of the player you think is the Empath.
+empath_action2_text=keep your eyes closed and point in the direction of the player you think is really good looking.
+empath_action3_text=keep your eyes closed and point in the direction of the player you think is the most suspicious.
+empath_action4_text=keep your eyes closed and point in the direction of a player who smells really good.
+empath_action5_text=keep your eyes closed and point in the direction of a player you think is a sharp dresser.
+empath_action6_text=keep your eyes closed and point in the direction of the player who is awesome.
+empath_action7_text=keep your eyes closed and point in the direction of the player you think everyone else is pointing at.
+empath_action8_text=keep your eyes closed and point in the direction of the smartest player.
+empath_action9_text=keep your eyes closed and point in the direction of the friendliest player.
+empath_action10_text=keep your eyes closed and point in the direction of the funniest player.
+empath_action11_text=keep your eyes closed and point in the direction of a player who will win this game.
+empath_action12_text=keep your eyes closed and point in the direction a player you really, really like.
+empath_action13_text=keep your eyes closed and point in the direction of a player who you don't think anyone else will point at.
+empath_action14_text=keep your eyes closed and point in the direction of the nicest player.
+
+doppelganger_empath_wake_text=DOPPELGANGER, if you viewed the Empath card, wake up.
+doppelganger_empath_close_text=Everyone, put your hands away. DOPPELGANGER, close your eyes.
+

@@ -1,6 +1,7 @@
 export type CardJson = {
   id: number
   expansion: string
+  style: string
   display_name: string
   team: string
   wake_up_time: string

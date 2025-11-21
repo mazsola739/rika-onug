@@ -1,7 +1,7 @@
 import { HAS_MARK_IDS, VAMPIRE_IDS, ASSASSIN_IDS } from 'constants'
 import { cards, marks, artifacts } from 'data'
 import { makeAutoObservable } from 'mobx'
-import { CardJson, TokenJson, Expansion } from 'types'
+import { CardJson, TokenJson, Expansion, Style } from 'types'
 import { getCardById, determineTotalPlayers, checkCardPresence, areAnyCardSelectedById } from 'utils'
 
 //TODO fix unable to select more then '12' players cards
@@ -12,14 +12,35 @@ class DeckStore {
 
   selectedCards: CardJson[] = []
   selectedMarks: TokenJson[] = []
-  selectedExpansions: Expansion[] = ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles']
+  selectedExpansions: Expansion[] = []
+  //TODO   selectedExpansions: Expansion[] = ['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Super Villains', 'Bonus Roles'] valami most nem jó, nem kéne a gomboknak teljesen eltünnie
+  selectedStyle: Style = 'classic'
 
   constructor() {
     makeAutoObservable(this)
+    this.selectedExpansions = this.getExpansionsForStyle(this.selectedStyle)
+    this.setDeck()
+  }
+
+  getExpansionsForStyle(style: Style): Expansion[] {
+    const expansions = new Set<Expansion>()
+    if (style === 'classic') {
+      ;['Werewolf', 'Daybreak', 'Vampire', 'Alien', 'Bonus Roles'].forEach(expansion => expansions.add(expansion as Expansion))
+    }
+    if (style === 'comic') {
+      ;['Super Villains', 'Bonus Roles'].forEach(expansion => expansions.add(expansion as Expansion))
+    }
+    return Array.from(expansions)
+  }
+
+  setSelectedStyles(style: Style): void {
+    this.selectedStyle = style
+    this.selectedExpansions = this.getExpansionsForStyle(style)
+    this.setDeck()
   }
 
   setDeck(): void {
-    this.deck = cards.filter(card => this.selectedExpansions.includes(card.expansion as Expansion))
+    this.deck = cards.filter(card => this.selectedStyle.includes(card.style as Style)).filter(card => this.selectedExpansions.includes(card.expansion as Expansion))
   }
 
   setSelectedCard(cardIds: number[]): void {
@@ -31,6 +52,10 @@ class DeckStore {
   setSelectedExpansions(expansions: Expansion[]): void {
     this.selectedExpansions = expansions
     this.setDeck()
+  }
+
+  get selectedExpansionsList(): Expansion[] {
+    return this.selectedExpansions
   }
 
   get totalCharacters(): number {
@@ -46,7 +71,6 @@ class DeckStore {
   get hasTemptress() {
     return checkCardPresence(this.selectedCards, 69)
   }
-
   get hasCurator() {
     return checkCardPresence(this.selectedCards, 20)
   }
@@ -56,7 +80,6 @@ class DeckStore {
   get hasMarks() {
     return areAnyCardSelectedById(this.selectedCards, HAS_MARK_IDS)
   }
-  
   get hasVampire() {
     return areAnyCardSelectedById(this.selectedCards, VAMPIRE_IDS)
   }
@@ -119,7 +142,8 @@ class DeckStore {
   clearSelections(): void {
     this.selectedCards = []
     this.selectedMarks = []
-    this.selectedExpansions = []
+    this.selectedStyle = 'classic'
+    this.selectedExpansions = this.getExpansionsForStyle(this.selectedStyle)
   }
 }
 

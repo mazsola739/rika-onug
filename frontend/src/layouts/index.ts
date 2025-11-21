@@ -9,4 +9,5 @@ export * from './Nav/Nav'
 export * from './RoleCardList/RoleCardList'
 export * from './RoleTokenList/RoleTokenList'
 export * from './Seats/Seats'
+export * from './Switcher/Switcher'
 

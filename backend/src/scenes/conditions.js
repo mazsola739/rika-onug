@@ -4,8 +4,7 @@ export const hasEpicBattle = selected_cards => {
   const battles = {
     vampire: VAMPIRE_IDS.some(id => selected_cards.includes(id)),
     alien: ALIEN_IDS.some(id => selected_cards.includes(id)),
-    werewolf: WEREWOLVES.some(id => selected_cards.includes(id)),
-    villain: SUPER_VILLAIN_IDS.some(id => selected_cards.includes(id))
+    werewolf: WEREWOLVES.some(id => selected_cards.includes(id))
   }
   const trueCount = Object.values(battles).filter(val => val).length
   return trueCount >= 2

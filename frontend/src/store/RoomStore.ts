@@ -24,11 +24,12 @@ class RoomStore {
     return cards.slice().sort((a, b) => a.display_name.localeCompare(b.display_name))
   }
 
+  //TODO EZ MÁR NEM KELL
   getTeamName(cards: CardJson[], team: string): string {
-    const hasHero = cards.some(card => card.team === TEAM.hero)
-    const hasVillager = cards.some(card => card.team === TEAM.village)
+    /*     const hasHero = cards.some(card => card.team === TEAM.hero)
+    const hasVillager = cards.some(card => card.team === TEAM.village) */
 
-    return hasHero && hasVillager ? 'Village & Hero' : hasHero ? 'Hero' : hasVillager ? 'Village' : team
+    return team
   }
 
   /*   

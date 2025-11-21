@@ -1,5 +1,7 @@
 export type Expansion = 'Werewolf' | 'Daybreak' | 'Vampire' | 'Alien' | 'Super Villains' | 'Bonus Roles'
 
+export type Style = 'classic' | 'comic'
+
 export type ExpansionType = {
   werewolf: 'Werewolf'
   daybreak: 'Daybreak'
@@ -29,6 +31,11 @@ export type TeamType = {
   villain: 'villain'
 }
 
+export type StyleType = {
+  classic: 'classic'
+  comic: 'comic'
+}
+
 export type TeamNameType = {
   village: 'The Townfolk'
   hero: 'The Bravehearts'
@@ -38,6 +45,8 @@ export type TeamNameType = {
   alien: 'The Cosmic Collective'
   villain: "The Rogue's Gallery"
 }
+
+export type roomNameType = { room_id: '', room_name: '' }
 
 export type TeamNames = {
   alien: string

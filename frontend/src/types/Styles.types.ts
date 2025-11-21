@@ -1,5 +1,5 @@
-export type ColorVariant = keyof typeof buttonColorvariants
-export const buttonColorvariants = {
+export type ColorVariant = keyof typeof buttonColorVariants
+export const buttonColorVariants = {
   default: '#ffea00',
   red: '#f44336',
   magenta: '#ff00ff',
@@ -10,6 +10,8 @@ export const buttonColorvariants = {
   orange: '#ff9800',
   yellow: '#FFFF00'
 }
+
+//TODO BETTER TYPES!!!!!!!!!!!!!!!!!!
 
 export type ExpansionTypes = 'Werewolf' | 'Bonus Roles' | 'Daybreak' | 'Vampire' | 'Alien' | 'Super Villains' | 'default'
 export const expansionColorVariants: Record<ExpansionTypes, string> = {
@@ -22,21 +24,20 @@ export const expansionColorVariants: Record<ExpansionTypes, string> = {
   default: 'rgba(0, 0, 0, 0.3)'
 }
 
-export type AnchorTypes = 'Village & Hero' | 'Village' | 'Hero' | 'Own' | 'Werewolf' | 'Vampire' | 'Alien' | 'Villain'
-export const anchorColorVariants: Record<AnchorTypes, string> = { //TODO do i need color?
-  'Village & Hero': 'royalblue',
-  Village: 'royalblue',
-  Hero: 'royalblue',
-  Own: 'saddlebrown',
+export type AnchorTypes = 'Village' | 'Hero' | 'Own' | 'Werewolf' | 'Vampire' | 'Alien' | 'Villain'
+export const anchorColorVariants: Record<AnchorTypes, string> = {
+  //TODO do i need color?
+  Village: 'RoyalBlue',
+  Hero: 'RoyalBlue',
+  Own: 'SaddleBrown',
   Werewolf: 'DarkRed',
   Vampire: 'DarkSlateBlue',
   Alien: 'DarkGreen',
   Villain: 'MediumVioletRed'
 }
 export const imageVariants: Record<AnchorTypes, string> = {
-  'Village & Hero': '/assets/playingcards/troublemaker_2.webp',
   Village: '/assets/playingcards/troublemaker_2.webp',
-  Hero: '/assets/playingcards/innocent_bystander.webp',
+  Hero: '/assets/playingcards/innocent_bystander.webp', //TODO change image
   Own: '/assets/playingcards/tanner_2.webp',
   Werewolf: '/assets/playingcards/werewolf_2.webp',
   Vampire: '/assets/playingcards/the_count.webp',
